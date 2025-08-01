@@ -110,7 +110,7 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native-community/cli": "13.6.9",
+    "@react-native-community/cli": "^13.6.4",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
@@ -200,7 +200,8 @@
         "react",
         "react-test-renderer",
         "svg",
-        "test-app"
+        "test-app",
+        "community/cli"
       ]
     }
   },
