@@ -3454,7 +3454,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-native-font-metrics@workspace:packages/experimental/NativeFontMetrics":
+"@fluentui-react-native/experimental-native-font-metrics@workspace:*, @fluentui-react-native/experimental-native-font-metrics@workspace:packages/experimental/NativeFontMetrics":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-native-font-metrics@workspace:packages/experimental/NativeFontMetrics"
   dependencies:
@@ -4713,6 +4713,7 @@ __metadata:
     "@fluentui-react-native/experimental-expander": "workspace:*"
     "@fluentui-react-native/experimental-menu-button": "workspace:*"
     "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
+    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
     "@fluentui-react-native/experimental-shadow": "workspace:*"
     "@fluentui-react-native/experimental-shimmer": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
@@ -4722,6 +4723,7 @@ __metadata:
     "@fluentui-react-native/input": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/menu": "workspace:*"
+    "@fluentui-react-native/menu-button": "workspace:*"
     "@fluentui-react-native/notification": "workspace:*"
     "@fluentui-react-native/overflow": "workspace:*"
     "@fluentui-react-native/radio-group": "workspace:*"
@@ -4745,6 +4747,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^6.2.0"
     "@fortawesome/react-native-fontawesome": "npm:^0.3.0"
     "@office-iss/react-native-win32": "npm:^0.74.0"
+    "@react-native-community/cli": "npm:13.6.9"
     "@react-native-community/slider": "npm:^4.5.7"
     "@react-native-menu/menu": "npm:^0.7.3"
     "@react-native-picker/picker": "npm:^2.7.0"
