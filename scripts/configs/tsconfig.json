@@ -21,7 +21,8 @@
     "skipDefaultLibCheck": true,
     "sourceMap": true,
     "jsx": "react",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["jest", "node"]
   },
   "baseUrl": ".",
   "paths": {
