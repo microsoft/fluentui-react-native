@@ -1,20 +1,15 @@
-ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(__dir__, '../node_modules')
+# (pnpm-mode) ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(__dir__, '../node_modules')
 
-require_relative '../node_modules/react-native-test-app/macos/test_app'
+# require_relative '../node_modules/react-native-test-app/macos/test_app'
+require_relative '../../../node_modules/react-native-test-app/macos/test_app'
 
 workspace 'FluentTester.xcworkspace'
 
-react_native_path = "#{__dir__}/../node_modules/react-native"
+# (pnpm-mode) react_native_path = "#{__dir__}/../node_modules/react-native"
+react_native_path = "#{__dir__}/../../../node_modules/react-native"
 
 use_test_app! do |target|
   target.app do
     platform :osx, '12'
-
-    # There is a bug where autolinking isn't working, do specify these manually.
-    pod 'FRNAvatar', :path => '../node_modules/@fluentui-react-native/experimental-avatar/FRNAvatar.podspec'
-    pod 'FRNCheckbox', :path => '../node_modules/@fluentui-react-native/experimental-checkbox/FRNCheckbox.podspec'
-    pod 'FRNMenuButton', :path => '../node_modules/@fluentui-react-native/menu-button/FRNMenuButton.podspec'
-    pod 'FRNRadioButton', :path => '../node_modules/@fluentui-react-native/radio-group/FRNRadioButton.podspec'
-    pod 'RCTFocusZone', :path => '../node_modules/@fluentui-react-native/focus-zone/RCTFocusZone.podspec'
   end
 end

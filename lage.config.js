@@ -26,6 +26,7 @@ module.exports = {
       inputs: ['*', 'src/**/*'],
       outputs: [],
     },
+    ['pr-check']: ['build', 'test', 'lint', 'depcheck', 'check-publishing', 'align-deps', 'lint-lockfile', 'prettier'],
     ['prettier-fix']: [],
     test: {
       dependsOn: ['build'],

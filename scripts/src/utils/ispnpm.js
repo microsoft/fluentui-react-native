@@ -8,9 +8,9 @@ let isPnpmModeCached = undefined;
 function checkPnpmMode() {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const yarnConfigPath = path.resolve(__dirname, "../../../.yarnrc.yml");
-  const yarnConfig = fs.readFileSync(yarnConfigPath, { encoding: "utf-8" });
-  return yarnConfig.includes("nodeLinker: pnpm");
+  const yarnConfigPath = path.resolve(__dirname, '../../../.yarnrc.yml');
+  const yarnConfig = fs.readFileSync(yarnConfigPath, { encoding: 'utf-8' });
+  return yarnConfig.includes('nodeLinker: pnpm');
 }
 
 export function isPnpmMode() {

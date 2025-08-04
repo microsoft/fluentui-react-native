@@ -1,2 +1,2 @@
 // @ts-check
-export { isPnpmMode } from "./utils/ispnpm.js";
+export { isPnpmMode } from './utils/ispnpm.js';
