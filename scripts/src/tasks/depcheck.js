@@ -67,7 +67,7 @@ export class DepcheckCommand extends Command {
   reporter = getReporter();
 
   projectRoot = getProjectRoot();
-  ignored = new Set(injectedDevDeps(this.projectRoot));
+  ignored = new Set(['@fluentui-react-native/framework-base', ...injectedDevDeps(this.projectRoot)]);
 
   /** @type {Issue[]} */
   issues = [];
@@ -90,6 +90,7 @@ export class DepcheckCommand extends Command {
     const options = mergeOneLevel(
       {
         ignorePatterns: ['/lib/*', '/lib-commonjs/*'],
+        // ignore framework-base as depcheck doesn't understand @jsxImportSource
         specials: [depcheck.special.eslint, depcheck.special.jest, depcheck.special.ttypescript],
       },
       depcheckOptions,
