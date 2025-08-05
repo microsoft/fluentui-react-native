@@ -1,10 +1,9 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 
 import { ActivityIndicator as CoreActivityIndicator } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, withSlots } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
 
 import { coreStylingSettings } from './ActivityIndicator.styling';
 import type { CoreActivityIndicatorType, ActivityIndicatorProps } from './ActivityIndicator.types';

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { Path, Svg } from 'react-native-svg';
 import * as renderer from 'react-test-renderer';
 

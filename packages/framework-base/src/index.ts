@@ -37,4 +37,4 @@ export type {
 } from './component-patterns/render.types';
 export { withSlots } from './component-patterns/withSlots';
 export { stagedComponent, twoStageComponent } from './component-patterns/stagedComponent';
-export { jsx, jsxs } from './jsx-runtime';
+export { jsx, jsxs, Fragment } from './jsx-runtime';

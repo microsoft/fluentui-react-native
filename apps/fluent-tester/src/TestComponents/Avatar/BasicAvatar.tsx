@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import type { FunctionComponent } from 'react';
 import { View, Text, Platform } from 'react-native';
 

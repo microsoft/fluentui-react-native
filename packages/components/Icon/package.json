@@ -32,6 +32,7 @@
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/text": "workspace:*"
   },
   "devDependencies": {

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { FontIcon } from './FontIcon/FontIcon';
 import type { IconProps } from './Icon.types';
 import { SvgIcon } from './SvgIcon/SvgIcon';

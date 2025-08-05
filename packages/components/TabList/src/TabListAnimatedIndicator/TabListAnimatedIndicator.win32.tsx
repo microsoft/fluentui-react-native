@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-
-import React from 'react';
 import { View } from 'react-native';
 import type { Animated, ViewProps, ViewStyle } from 'react-native';
 

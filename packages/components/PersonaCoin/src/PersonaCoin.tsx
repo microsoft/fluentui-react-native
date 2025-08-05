@@ -1,11 +1,9 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import { Image, View, Text } from 'react-native';
 
 import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens } from '@fluentui-react-native/tokens';
 import type { ISlots, IRenderData } from '@uifabricshared/foundation-composable';
-import { withSlots } from '@uifabricshared/foundation-composable';
 import { compose } from '@uifabricshared/foundation-compose';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';

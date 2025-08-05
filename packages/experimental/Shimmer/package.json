@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/theming-utils": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
     "@fluentui-react-native/use-styling": "workspace:*",

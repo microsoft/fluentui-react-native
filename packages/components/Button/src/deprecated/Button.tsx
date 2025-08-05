@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
 import { View } from 'react-native';
 
@@ -9,7 +8,6 @@ import { useAsPressable, useKeyProps, useViewCommandFocus, useOnPressWithFocus }
 import { Text } from '@fluentui-react-native/text';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import type { ISlots } from '@uifabricshared/foundation-composable';
-import { withSlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';

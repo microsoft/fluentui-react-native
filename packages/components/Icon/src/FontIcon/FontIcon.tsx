@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Text } from 'react-native';
 
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';

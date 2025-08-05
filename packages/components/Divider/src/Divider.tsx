@@ -1,11 +1,10 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 /** @jsxFrag */
 import React from 'react';
 import { View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
-import { withSlots, compressible, useSlot, useFluentTheme, patchTokens } from '@fluentui-react-native/framework';
+import { compressible, useSlot, useFluentTheme, patchTokens } from '@fluentui-react-native/framework';
 import type { UseTokens } from '@fluentui-react-native/framework';
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
