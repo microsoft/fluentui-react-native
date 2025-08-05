@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-<!-- This log was last generated on Tue, 15 Jul 2025 23:27:22 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 05 Aug 2025 18:50:42 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.43.6
+
+Tue, 05 Aug 2025 18:50:42 GMT
+
+### Patches
+
+- move repo to pnpm, create babel and jest config packages, fix dependencies (jasonmo@microsoft.com)
 
 ## 1.43.0
 

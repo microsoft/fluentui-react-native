@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/adapters",
-  "version": "0.13.4",
+  "version": "0.13.5",
   "description": "Adapters for working with react-native types",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

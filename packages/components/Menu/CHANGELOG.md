@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-<!-- This log was last generated on Tue, 22 Jul 2025 22:15:16 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 05 Aug 2025 18:50:40 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.14.34
+
+Tue, 05 Aug 2025 18:50:40 GMT
+
+### Patches
+
+- move repo to pnpm, create babel and jest config packages, fix dependencies (jasonmo@microsoft.com)
 
 ## 1.14.30
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-styling",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:39 GMT",
+      "version": "0.13.12",
+      "tag": "@fluentui-react-native/use-styling_v0.13.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/use-styling",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Jul 2025 00:22:13 GMT",
       "version": "0.13.9",
       "tag": "@fluentui-react-native/use-styling_v0.13.9",

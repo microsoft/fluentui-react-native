@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dropdown",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:42 GMT",
+      "version": "0.10.23",
+      "tag": "@fluentui-react-native/dropdown_v0.10.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:27:21 GMT",
       "version": "0.10.17",
       "tag": "@fluentui-react-native/dropdown_v0.10.17",

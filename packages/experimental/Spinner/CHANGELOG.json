@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/spinner",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:41 GMT",
+      "version": "0.9.19",
+      "tag": "@fluentui-react-native/spinner_v0.9.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/spinner",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:27:03 GMT",
       "version": "0.9.13",
       "tag": "@fluentui-react-native/spinner_v0.9.13",
