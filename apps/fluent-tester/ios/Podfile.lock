@@ -3,15 +3,15 @@ PODS:
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.74.7)
   - fmt (9.1.0)
-  - FRNAppearanceAdditions (0.7.2):
+  - FRNAppearanceAdditions (0.7.11):
     - React
-  - FRNAvatar (0.21.4):
+  - FRNAvatar (0.21.13):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNDatePicker (0.11.0):
+  - FRNDatePicker (0.11.4):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNFontMetrics (0.6.0):
+  - FRNFontMetrics (0.6.4):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.13.1):
@@ -1080,7 +1080,7 @@ PODS:
     - React-debug
   - react-native-menu (0.7.3):
     - React
-  - react-native-slider (4.5.3):
+  - react-native-slider (4.5.7):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2024.01.01.00)
@@ -1351,10 +1351,10 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - fmt (from `../../../node_modules/react-native/third-party-podspecs/fmt.podspec`)
-  - FRNAppearanceAdditions (from `../../../packages/experimental/AppearanceAdditions/FRNAppearanceAdditions.podspec`)
-  - "FRNAvatar (from `../../../node_modules/@fluentui-react-native/experimental-avatar`)"
-  - "FRNDatePicker (from `../../../node_modules/@fluentui-react-native/experimental-native-date-picker`)"
-  - FRNFontMetrics (from `../../../packages/experimental/NativeFontMetrics/FRNFontMetrics.podspec`)
+  - "FRNAppearanceAdditions (from `../node_modules/@fluentui-react-native/experimental-appearance-additions`)"
+  - "FRNAvatar (from `../node_modules/@fluentui-react-native/experimental-avatar`)"
+  - "FRNDatePicker (from `../node_modules/@fluentui-react-native/experimental-native-date-picker`)"
+  - "FRNFontMetrics (from `../node_modules/@fluentui-react-native/experimental-native-font-metrics`)"
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../../../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
@@ -1428,13 +1428,13 @@ EXTERNAL SOURCES:
   fmt:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/fmt.podspec"
   FRNAppearanceAdditions:
-    :path: "../../../packages/experimental/AppearanceAdditions/FRNAppearanceAdditions.podspec"
+    :path: "../node_modules/@fluentui-react-native/experimental-appearance-additions"
   FRNAvatar:
-    :path: "../../../node_modules/@fluentui-react-native/experimental-avatar"
+    :path: "../node_modules/@fluentui-react-native/experimental-avatar"
   FRNDatePicker:
-    :path: "../../../node_modules/@fluentui-react-native/experimental-native-date-picker"
+    :path: "../node_modules/@fluentui-react-native/experimental-native-date-picker"
   FRNFontMetrics:
-    :path: "../../../packages/experimental/NativeFontMetrics/FRNFontMetrics.podspec"
+    :path: "../node_modules/@fluentui-react-native/experimental-native-font-metrics"
   glog:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -1551,10 +1551,10 @@ SPEC CHECKSUMS:
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
   FBLazyVector: 04dc972982abebd96d823752c3a426bbe6ac397f
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
-  FRNAppearanceAdditions: 203a3fb8929b3fe0e1d9256a5a4d88c7116fdcb9
-  FRNAvatar: ec4d219c71bfd3d74306a1fcf94f71393b63359f
-  FRNDatePicker: 6ddae28f04880d89fc609dc791943943dabba718
-  FRNFontMetrics: 2cb281cc763879e4c5e5d3b3ed662181689e8939
+  FRNAppearanceAdditions: 9d37ce1ce2df3559d0616234557b024774e59a92
+  FRNAvatar: 3616c78fb72770b8d972619cb9d8b9a841e6d07f
+  FRNDatePicker: b1dc2056dcb52614e1a1fd4054115a33130d334e
+  FRNFontMetrics: 4d90cf418139e1b8ad202cd190b76f36bd027eef
   glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: 5dc73daec3476616d19e8a53f0156176f7b55461
@@ -1582,7 +1582,7 @@ SPEC CHECKSUMS:
   React-logger: 58cd5ca2c3ab03a06b33e6d46a210d2b17ca116d
   React-Mapbuffer: f245095650540b8ddd09ac907a79605f68b1f4d4
   react-native-menu: 166490a809e627736b2dd887a564e8e6f093d128
-  react-native-slider: fb9f245bfade8fe24998f88133e06c5110853868
+  react-native-slider: ef3da51d021999dc76a1efefae60176ac4910c36
   React-nativeconfig: 3b359be06d9ee8d64c1eacbca4f1040f331573fd
   React-NativeModulesApple: c6259e85e61f211854e632ed3eb21f25e15651f4
   React-perflogger: e9ebfc705cb9f60ef5d471637350ccab7abd0444
@@ -1613,6 +1613,6 @@ SPEC CHECKSUMS:
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: 9db4b2da1ed5d8e0c94158f9ac379c8b1b529f59
 
-PODFILE CHECKSUM: fae4d25651430550ed89e2c0320a71f5f1d40f44
+PODFILE CHECKSUM: da2b0060460364a6479fbaf8e70713ef63c09b0b
 
 COCOAPODS: 1.16.2

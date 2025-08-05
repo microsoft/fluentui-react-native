@@ -40,7 +40,9 @@
     "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@react-native/metro-config": "^0.74.0",

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./lib",
     "target": "es2022",
-    "types": ["node", "jest"],
+    "lib": ["ES2022"],
     "module": "node16",
     "moduleResolution": "node16",
     "declaration": true,
@@ -21,7 +21,8 @@
     "skipDefaultLibCheck": true,
     "sourceMap": true,
     "jsx": "react",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["jest", "node"]
   },
   "baseUrl": ".",
   "paths": {

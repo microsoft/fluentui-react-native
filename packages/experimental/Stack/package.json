@@ -37,16 +37,21 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
+    "@types/jest": "^29.0.0",
     "@types/react": "~18.2.0",
+    "@types/react-test-renderer": "^18.2.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "react-native-macos": "^0.74.0",
     "react-native-windows": "^0.74.0",
+    "react-test-renderer": "18.2.0",
     "tslib": "^2.3.1"
   },
   "peerDependencies": {
@@ -79,7 +84,8 @@
         "core-ios",
         "core-macos",
         "core-windows",
-        "react"
+        "react",
+        "react-test-renderer"
       ]
     }
   },

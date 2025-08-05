@@ -40,7 +40,7 @@ const _styleKey = 'style';
 const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ...children: React.ReactNode[]): JSX.Element => {
   const { gap, horizontal, wrap } = renderData.state!;
 
-  if (gap && gap > 0 && children && global.__jsiExecutorDescription !== 'ChakraRuntime') {
+  if (gap && gap > 0 && children && globalThis.__jsiExecutorDescription !== 'ChakraRuntime') {
     const extraStyle: ViewStyle = horizontal ? { marginLeft: gap } : { marginTop: gap };
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - TODO, fix typing error
@@ -91,5 +91,4 @@ export const Stack = compose<IStackType>({
   },
 });
 
-// eslint-disable-next-line no-restricted-exports
 export default Stack;

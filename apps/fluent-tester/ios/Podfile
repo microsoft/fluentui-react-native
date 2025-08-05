@@ -1,15 +1,15 @@
+# (pnpm-mode) ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(__dir__, '../node_modules')
+
+# (pnpm-mode) require_relative '../node_modules/react-native-test-app/test_app'
 require_relative '../../../node_modules/react-native-test-app/test_app'
 
 workspace 'FluentTester.xcworkspace'
 
+# (pnpm-mode) react_native_path = "#{__dir__}/../node_modules/react-native"
 react_native_path = "#{__dir__}/../../../node_modules/react-native"
 
 use_test_app! do |target|
   target.app do
     platform :ios, '15.0'
-
-    # There is a bug where autolinking isn't working, so specify these manually.
-    pod 'FRNAppearanceAdditions', :path => '../../../packages/experimental/AppearanceAdditions/FRNAppearanceAdditions.podspec'
-    pod 'FRNFontMetrics', :path => '../../../packages/experimental/NativeFontMetrics/FRNFontMetrics.podspec'
   end
 end

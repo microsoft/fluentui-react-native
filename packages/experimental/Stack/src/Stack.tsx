@@ -57,7 +57,7 @@ export const Stack = compose<StackType>({
     const { gap, horizontal, wrap, ...rest } = props;
     const Slots = useSlots(props);
     return (final: StackProps, ...children: React.ReactNode[]) => {
-      if (gap && gap > 0 && children && global.__jsiExecutorDescription !== 'ChakraRuntime') {
+      if (gap && gap > 0 && children && globalThis.__jsiExecutorDescription !== 'ChakraRuntime') {
         const mixinProps = getMixinProps(horizontal, gap);
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment

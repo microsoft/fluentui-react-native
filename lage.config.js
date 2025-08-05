@@ -6,7 +6,7 @@ module.exports = {
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*', 'lib-commonjs/**/*'],
     },
-    buildci: ['build', 'test', 'lint', 'depcheck'],
+    buildci: ['build', 'test', 'lint', 'depcheck', 'check-publishing'],
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: ['dist/**/*'],
@@ -26,6 +26,7 @@ module.exports = {
       inputs: ['*', 'src/**/*'],
       outputs: [],
     },
+    ['pr-check']: ['build', 'test', 'lint', 'depcheck', 'check-publishing', 'align-deps', 'lint-lockfile', 'prettier'],
     ['prettier-fix']: [],
     test: {
       dependsOn: ['build'],

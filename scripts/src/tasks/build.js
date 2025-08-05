@@ -1,14 +1,17 @@
 // @ts-check
 
 import { Command } from 'clipanion';
-import { findNativeComponents, codegenNativeComponents } from '../utils/codegenNativeComponents.js';
 import path from 'node:path';
 import fs from 'node:fs';
 import { runScript } from '../utils/runScript.js';
 import { readTypeScriptConfig } from '@rnx-kit/tools-typescript';
 import { getPackageInfoFromPath } from '@rnx-kit/tools-packages';
-import { JsxEmit, ModuleKind } from 'typescript';
+import { ModuleKind } from 'typescript';
 import { cleanFolder } from './clean.js';
+
+/**
+ * @typedef {{ module: string, outDir: string }} BuildTarget
+ */
 
 export class BuildCommand extends Command {
   /** @override */
@@ -61,46 +64,31 @@ function getModuleString(moduleKind) {
 /**
  * Get the build targets for the project.
  * @param {string} cwd - The current working directory to search in.
- * @returns {import('../utils/codegenNativeComponents.js').BuildTarget[]} - The build targets found.
+ * @returns {BuildTarget[]} - The build targets found.
  */
 function getBuildTargets(cwd = process.cwd()) {
-  /** @type {import('../utils/codegenNativeComponents.js').BuildTarget[]} */
+  /** @type {BuildTarget[]} */
   const targets = [];
   const pkgInfo = getPackageInfoFromPath(cwd);
 
   // do nothing if no tsconfig.json exists
   if (fs.existsSync(path.join(cwd, 'tsconfig.json'))) {
     const manifest = pkgInfo.manifest;
-    const nativeComponents = findNativeComponents(cwd);
     const tsconfig = readTypeScriptConfig(pkgInfo);
     const options = tsconfig.options || {};
     const moduleBase = getModuleString(options.module);
-    const jsxRuntime = options.jsx === JsxEmit.ReactJSX || options.jsx === JsxEmit.ReactJSXDev;
-
-    /**
-     * @param {string} srcTarget
-     * @param {string} module
-     */
-    function addTarget(srcTarget, module) {
-      targets.push({
-        module,
-        outDir: path.dirname(srcTarget),
-        nativeComponents,
-        jsxRuntime,
-      });
-    }
 
     // now look for a cjs target
     const cjsPath = manifest.main;
     if (cjsPath && typeof cjsPath === 'string') {
       const module = moduleBase && moduleBase !== 'esnext' ? moduleBase : 'node16';
-      addTarget(cjsPath, module);
+      targets.push({ module, outDir: path.dirname(cjsPath) });
     }
 
     // look for an esm target
     const esmPath = manifest.module;
     if (esmPath && typeof esmPath === 'string') {
-      addTarget(esmPath, 'esnext');
+      targets.push({ module: 'esnext', outDir: path.dirname(esmPath) });
     }
   }
 
@@ -109,18 +97,14 @@ function getBuildTargets(cwd = process.cwd()) {
 
 /**
  * Execute the build for a given target
- * @param {import('../utils/codegenNativeComponents.js').BuildTarget} target - The build target to execute.
+ * @param {BuildTarget} target - The build target to execute.
  * @param {string} cwd - The current working directory.
  * @returns {Promise<number>} - The exit code of the build process.
  */
 async function buildTarget(target, cwd) {
-  const { module, outDir, nativeComponents } = target;
+  const { module, outDir } = target;
   const extraArgs = ['--outDir', outDir, '--module', module];
   const result = await runScript('tsc', ...extraArgs);
-
-  if (result === 0 && nativeComponents && nativeComponents.length > 0) {
-    codegenNativeComponents(target, cwd);
-  }
 
   if (result !== 0) {
     console.error(`Build failed for target: ${cwd}:${outDir}`);

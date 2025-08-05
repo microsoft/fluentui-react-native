@@ -14,7 +14,7 @@ export class PrettierCommand extends Command {
     examples: [['Format the current package', '$0 prettier']],
   });
 
-  fix = Option.Boolean('fix', false, {
+  fix = Option.Boolean('--fix', false, {
     description: 'Automatically fix issues where possible',
   });
 
