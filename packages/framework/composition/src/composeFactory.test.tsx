@@ -1,9 +1,7 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ViewProps, TextProps, ColorValue } from 'react-native';
 import { View, Text } from 'react-native';
 
-import { withSlots } from '@fluentui-react-native/framework-base';
 import type { ThemeHelper } from '@fluentui-react-native/use-styling';
 import * as renderer from 'react-test-renderer';
 

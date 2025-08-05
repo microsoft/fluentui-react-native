@@ -3211,9 +3211,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/eslint-config-rules@workspace:*, @fluentui-react-native/eslint-config-rules@workspace:packages/framework/eslint-config-rules":
+"@fluentui-react-native/eslint-config-rules@workspace:*, @fluentui-react-native/eslint-config-rules@workspace:packages/configs/eslint-config-rules":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/eslint-config-rules@workspace:packages/framework/eslint-config-rules"
+  resolution: "@fluentui-react-native/eslint-config-rules@workspace:packages/configs/eslint-config-rules"
   dependencies:
     "@fluentui-react-native/scripts": "workspace:*"
     "@microsoft/eslint-plugin-sdl": "npm:^1.1.0"

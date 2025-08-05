@@ -1,9 +1,7 @@
 /**
- * @jsxRuntime classic
- * @jsx withSlots
+ * @jsxImportSource ..
  */
 import * as React from 'react';
-import { withSlots } from './withSlots';
 
 import type { StagedComponent, TwoStageRender, StagedRender, ComposableFunction } from './render.types';
 
