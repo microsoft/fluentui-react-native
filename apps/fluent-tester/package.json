@@ -105,6 +105,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/experimental-native-font-metrics": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",

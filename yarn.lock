@@ -4696,6 +4696,7 @@ __metadata:
   resolution: "@fluentui-react-native/tester-win32@workspace:apps/win32"
   dependencies:
     "@babel/core": "npm:^7.20.0"
+    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tester": "workspace:*"
@@ -4734,6 +4735,7 @@ __metadata:
     "@fluentui-react-native/android-theme": "workspace:*"
     "@fluentui-react-native/apple-theme": "workspace:*"
     "@fluentui-react-native/avatar": "workspace:*"
+    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/badge": "workspace:*"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
