@@ -1,5 +1,5 @@
 /**
- * @jsxImportSource ..
+ * @jsxImportSource .
  */
 import * as React from 'react';
 
