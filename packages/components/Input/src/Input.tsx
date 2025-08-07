@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import { Pressable, ScrollView, TextInput, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';

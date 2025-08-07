@@ -35,6 +35,7 @@
   "dependencies": {
     "@fluentui-react-native/button": "workspace:*",
     "@fluentui-react-native/contextual-menu": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/icon": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
     "@uifabricshared/foundation-composable": "workspace:*",

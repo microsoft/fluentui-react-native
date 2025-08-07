@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { Text } from '@fluentui-react-native/text';
 import * as renderer from 'react-test-renderer';
 
