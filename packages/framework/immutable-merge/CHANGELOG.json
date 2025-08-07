@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/immutable-merge",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:40 GMT",
+      "version": "1.2.11",
+      "tag": "@fluentui-react-native/immutable-merge_v1.2.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/immutable-merge",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Jul 2025 06:35:19 GMT",
       "version": "1.2.10",
       "tag": "@fluentui-react-native/immutable-merge_v1.2.10",

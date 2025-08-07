@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:39 GMT",
+      "version": "0.12.10",
+      "tag": "@uifabricshared/theme-registry_v0.12.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jul 2025 20:06:45 GMT",
       "version": "0.12.5",
       "tag": "@uifabricshared/theme-registry_v0.12.5",

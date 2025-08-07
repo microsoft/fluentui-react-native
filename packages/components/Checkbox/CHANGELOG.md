@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-<!-- This log was last generated on Tue, 15 Jul 2025 23:27:25 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 05 Aug 2025 18:50:42 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.23.18
+
+Tue, 05 Aug 2025 18:50:42 GMT
+
+### Patches
+
+- move repo to pnpm, create babel and jest config packages, fix dependencies (jasonmo@microsoft.com)
 
 ## 0.23.12
 

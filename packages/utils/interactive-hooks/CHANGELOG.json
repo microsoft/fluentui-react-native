@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:40 GMT",
+      "version": "0.27.14",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.27.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jul 2025 20:06:46 GMT",
       "version": "0.27.9",
       "tag": "@fluentui-react-native/interactive-hooks_v0.27.9",

@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:40 GMT",
+      "version": "0.20.15",
+      "tag": "@uifabricshared/theming-react-native_v0.20.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:26:45 GMT",
       "version": "0.20.9",
       "tag": "@uifabricshared/theming-react-native_v0.20.9",

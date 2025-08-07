@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/themed-stylesheet",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:38 GMT",
+      "version": "1.7.11",
+      "tag": "@fluentui-react-native/themed-stylesheet_v1.7.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/themed-stylesheet",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jul 2025 20:06:46 GMT",
       "version": "1.7.6",
       "tag": "@fluentui-react-native/themed-stylesheet_v1.7.6",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:42 GMT",
+      "version": "0.23.18",
+      "tag": "@fluentui-react-native/checkbox_v0.23.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:27:25 GMT",
       "version": "0.23.12",
       "tag": "@fluentui-react-native/checkbox_v0.23.12",

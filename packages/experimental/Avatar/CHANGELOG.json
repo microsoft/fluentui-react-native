@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:42 GMT",
+      "version": "0.21.14",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.21.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:27:20 GMT",
       "version": "0.21.8",
       "tag": "@fluentui-react-native/experimental-avatar_v0.21.8",

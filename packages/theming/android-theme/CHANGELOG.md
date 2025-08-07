@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/android-theme
 
-<!-- This log was last generated on Wed, 16 Jul 2025 20:06:45 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 05 Aug 2025 18:50:43 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.25.12
+
+Tue, 05 Aug 2025 18:50:43 GMT
+
+### Patches
+
+- move repo to pnpm, create babel and jest config packages, fix dependencies (jasonmo@microsoft.com)
 
 ## 0.25.7
 

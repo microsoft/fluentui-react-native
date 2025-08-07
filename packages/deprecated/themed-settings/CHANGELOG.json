@@ -2,6 +2,21 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:39 GMT",
+      "version": "0.12.11",
+      "tag": "@uifabricshared/themed-settings_v0.12.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/themed-settings",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Jul 2025 21:36:34 GMT",
       "version": "0.12.9",
       "tag": "@uifabricshared/themed-settings_v0.12.9",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:40 GMT",
+      "version": "1.14.34",
+      "tag": "@fluentui-react-native/menu_v1.14.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 22 Jul 2025 22:15:16 GMT",
       "version": "1.14.30",
       "tag": "@fluentui-react-native/menu_v1.14.30",

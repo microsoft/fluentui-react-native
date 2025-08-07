@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/overflow",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:40 GMT",
+      "version": "0.3.34",
+      "tag": "@fluentui-react-native/overflow_v0.3.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/overflow",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:27:07 GMT",
       "version": "0.3.26",
       "tag": "@fluentui-react-native/overflow_v0.3.26",

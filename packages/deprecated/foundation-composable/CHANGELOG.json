@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Tue, 05 Aug 2025 18:50:39 GMT",
+      "version": "0.13.11",
+      "tag": "@uifabricshared/foundation-composable_v0.13.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "1ed213f1b48036479e39ace7f25f9a31f46042bf",
+            "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 22 Jul 2025 19:06:24 GMT",
       "version": "0.13.7",
       "tag": "@uifabricshared/foundation-composable_v0.13.7",

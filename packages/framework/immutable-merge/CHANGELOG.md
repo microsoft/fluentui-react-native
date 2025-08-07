@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/immutable-merge
 
-<!-- This log was last generated on Fri, 25 Jul 2025 21:36:33 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 05 Aug 2025 18:50:40 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.2.11
+
+Tue, 05 Aug 2025 18:50:40 GMT
+
+### Patches
+
+- move repo to pnpm, create babel and jest config packages, fix dependencies (jasonmo@microsoft.com)
 
 ## 1.2.9
 

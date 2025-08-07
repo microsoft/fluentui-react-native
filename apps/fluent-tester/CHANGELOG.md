@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Tue, 29 Jul 2025 06:35:19 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 05 Aug 2025 18:50:41 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.38
+
+Tue, 05 Aug 2025 18:50:41 GMT
+
+### Patches
+
+- move repo to pnpm, create babel and jest config packages, fix dependencies (jasonmo@microsoft.com)
 
 ## 0.170.37
 
