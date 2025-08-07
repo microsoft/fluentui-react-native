@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "switch repo to use the jsx-runtime",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
