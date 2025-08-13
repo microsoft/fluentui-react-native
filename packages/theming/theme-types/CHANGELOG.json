@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Wed, 13 Aug 2025 22:23:25 GMT",
+      "version": "0.40.0",
+      "tag": "@fluentui-react-native/theme-types_v0.40.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "patboyd@exchange.microsoft.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "59d829856e89d50776d083554058708168f22cf4",
+            "comment": "Add BkgAccentTint and TextAccentTint palette types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 05 Aug 2025 18:50:38 GMT",
       "version": "0.39.6",
       "tag": "@fluentui-react-native/theme-types_v0.39.6",

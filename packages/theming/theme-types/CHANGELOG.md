@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-types
 
-<!-- This log was last generated on Tue, 05 Aug 2025 18:50:38 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 13 Aug 2025 22:23:25 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.40.0
+
+Wed, 13 Aug 2025 22:23:25 GMT
+
+### Minor changes
+
+- Add BkgAccentTint and TextAccentTint palette types (patboyd@exchange.microsoft.com)
 
 ## 0.39.6
 

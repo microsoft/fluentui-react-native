@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-expander",
-  "version": "0.8.13",
+  "version": "0.8.14",
   "description": "A cross-platform Native Expander component using the Fluent Design System. Currently only implemented on windows",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",

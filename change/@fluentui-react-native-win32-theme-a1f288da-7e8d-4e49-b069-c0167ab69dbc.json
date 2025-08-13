@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add BkgAccentTint and TextAccentTint palette types",
-  "packageName": "@fluentui-react-native/win32-theme",
-  "email": "patboyd@exchange.microsoft.com",
-  "dependentChangeType": "patch"
-}
