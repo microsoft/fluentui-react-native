@@ -1,15 +1,9 @@
-/**
- * Copyright (c) Microsoft Corporation.
- * Licensed under the MIT License.
- * @format
- */
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { CheckboxTokens, CheckboxProps, CheckboxState } from '@fluentui-react-native/checkbox';
 import { checkboxName } from '@fluentui-react-native/checkbox';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots, buildProps } from '@fluentui-react-native/framework';
+import { compose, mergeProps, buildProps } from '@fluentui-react-native/framework';
 
 import NativeCheckboxView from './MacOSCheckboxNativeComponent';
 

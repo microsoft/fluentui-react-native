@@ -1,11 +1,10 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, withSlots } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
 
 import { stylingSettings } from './MenuList.styling';
 import type { MenuListProps, MenuListState, MenuListType } from './MenuList.types';

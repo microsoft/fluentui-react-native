@@ -1,9 +1,8 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import { View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 
 import { stylingSettings } from './Separator.styling';
 import type { SeparatorProps, SeparatorType } from './Separator.types';
