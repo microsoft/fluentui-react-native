@@ -166,11 +166,27 @@ export interface OfficePalette {
 
   /**
    * Accents
+   *
+   * Used to emphasize or create boundaries around/within UI.
    */
+
+  // Used for general borders
   AccentDark: ColorValue;
+
+  // Used for separator lines
   AccentLight: ColorValue;
+
+  // Used for accent rectangles and bolder borders
   AccentEmphasis: ColorValue;
+
+  // Used for borders that outline the entire UI region
   AccentOutline: ColorValue;
+
+  // A subtle tint used to accent a region on top of Bkg
+  BkgAccentTint: ColorValue;
+
+  // A foreground color used for contrasting text on top of BkgAccentTint
+  TextAccentTint: ColorValue;
 
   /**
    * Headers
