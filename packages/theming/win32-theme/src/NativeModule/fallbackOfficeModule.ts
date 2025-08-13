@@ -131,6 +131,8 @@ const whiteColorsPalette: OfficePalette = {
   AccentLight: '#E6E6E6',
   AccentEmphasis: '#D83B01',
   AccentOutline: '#000000',
+  BkgAccentTint: '#D2E0F4',
+  TextAccentTint: '#242424',
   TextEmphasis2: '#D83B01',
   BkgCtlSubtleSelected: '#F3F3F3',
   TextCtlSubtleSelected: '#262626',
