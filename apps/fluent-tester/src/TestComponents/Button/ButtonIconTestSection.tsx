@@ -8,7 +8,7 @@ import { testImage, svgProps, iconProps } from '../Common/iconExamples';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 
 const styles = StyleSheet.create({
-  chevron: { paddingStart: 4 },
+  balloon: { paddingStart: 4 },
 });
 
 export const ButtonIconTest: React.FunctionComponent = () => {
@@ -20,9 +20,9 @@ export const ButtonIconTest: React.FunctionComponent = () => {
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
-  const chevronXml = `
-          <svg width="12" height="16" viewBox="0 0 11 6" color="#000">
-            <path fill='currentColor' d='M0.646447 0.646447C0.841709 0.451184 1.15829 0.451184 1.35355 0.646447L5.5 4.79289L9.64645 0.646447C9.84171 0.451185 10.1583 0.451185 10.3536 0.646447C10.5488 0.841709 10.5488 1.15829 10.3536 1.35355L5.85355 5.85355C5.65829 6.04882 5.34171 6.04882 5.14645 5.85355L0.646447 1.35355C0.451184 1.15829 0.451184 0.841709 0.646447 0.646447Z' />
+  const balloonXml = `
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.00498 3.4296C5.04386 3.15621 5.29701 2.9661 5.5704 3.00498C6.30797 3.10988 6.89039 3.69171 6.9962 4.42897C7.03543 4.70232 6.84564 4.9557 6.5723 4.99493C6.29896 5.03416 6.04557 4.84437 6.00634 4.57103C5.96366 4.27364 5.7271 4.03733 5.4296 3.99502C5.15621 3.95614 4.9661 3.70299 5.00498 3.4296ZM2 4.36364C2 2.48429 3.58918 1 5.5 1C7.41082 1 9 2.48429 9 4.36364C9 5.59911 8.53933 6.7387 7.8958 7.57241C7.38607 8.23279 6.71092 8.76136 6 8.93727V9.39999C6 9.62091 6.17909 9.79999 6.4 9.79999H7.60001C8.37321 9.79999 9.00001 10.4268 9.00001 11.2V11.5C9.00001 11.7761 8.77615 12 8.50001 12C8.22386 12 8.00001 11.7761 8.00001 11.5V11.2C8.00001 10.9791 7.82092 10.8 7.60001 10.8H6.4C5.6268 10.8 5 10.1732 5 9.39999V8.93735C4.28929 8.7617 3.61415 8.23398 3.10428 7.57379C2.4606 6.74035 2 5.60069 2 4.36364ZM5.5 2C4.09711 2 3 3.0799 3 4.36364C3 5.35685 3.37273 6.28538 3.89572 6.96255C4.43393 7.65943 5.05441 8 5.5 8C5.94529 8 6.56577 7.65894 7.1042 6.96139C7.62734 6.28363 8 5.35505 8 4.36364C8 3.0799 6.90289 2 5.5 2Z" fill="#212121"/>
           </svg>`;
 
   return (
@@ -61,9 +61,9 @@ export const ButtonIconTest: React.FunctionComponent = () => {
       </Button>
       {svgIconsEnabled && (
         <Button style={commonTestStyles.vmargin} icon={iconProps}>
-          Icon Button and Chevron
-          <View style={styles.chevron}>
-            <SvgXml xml={chevronXml} />
+          Icon Button and Balloon
+          <View style={styles.balloon}>
+            <SvgXml xml={balloonXml} />
           </View>
         </Button>
       )}
