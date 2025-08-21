@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Swap chevron to balloon to avoid icon confusion",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "rofang@microsoft.com",
-  "dependentChangeType": "patch"
-}

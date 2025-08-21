@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 21 Aug 2025 23:55:10 GMT",
+      "version": "0.170.40",
+      "tag": "@fluentui-react-native/tester_v0.170.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "5124492f486614a0f63c6cd92754a6c2c5ddaf3c",
+            "comment": "Swap chevron to balloon to avoid icon confusion"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 05 Aug 2025 18:50:41 GMT",
       "version": "0.170.38",
       "tag": "@fluentui-react-native/tester_v0.170.38",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Tue, 05 Aug 2025 18:50:41 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 21 Aug 2025 23:55:10 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.40
+
+Thu, 21 Aug 2025 23:55:10 GMT
+
+### Patches
+
+- Swap chevron to balloon to avoid icon confusion (rofang@microsoft.com)
 
 ## 0.170.38
 
