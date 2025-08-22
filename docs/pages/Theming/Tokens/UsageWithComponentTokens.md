@@ -7,8 +7,7 @@ This page covers how to access color tokens to fill out a component's tokens.
 Most components in FURN build a component's styling out of the tokens and theme that are fed into the component. The `compose` framework takes in an object with a `tokens` property, which you can use to define how a component's tokens are filled out. The `tokens` property can be assigned to a function which takes a `Theme` object as an argument and returns an object that is the component's `Token` type. Inside the function, you can access the alias function from the theme as you would if you had the theme inside a component's render function.
 
 ```tsx
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import { Theme, TokenSettings, buildProps, compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { fontStyles } from '@fluentui-react-native/tokens';
 import { Text } from '@fluentui-react-native/experimental-text';

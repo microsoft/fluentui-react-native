@@ -18,9 +18,9 @@
       "types": "./lib/index.d.ts"
     },
     "./jsx-runtime": {
-      "import": "./lib/jsx-runtime.js",
-      "require": "./lib-commonjs/jsx-runtime.js",
-      "types": "./lib/jsx-runtime.d.ts"
+      "import": "./lib/component-patterns/jsx-runtime.js",
+      "require": "./lib-commonjs/component-patterns/jsx-runtime.js",
+      "types": "./lib/component-patterns/jsx-runtime.d.ts"
     }
   },
   "scripts": {

@@ -1,3 +1,1 @@
-module.exports = {
-  presets: ['module:@react-native/babel-preset'],
-};
+module.exports = require('@fluentui-react-native/babel-config');

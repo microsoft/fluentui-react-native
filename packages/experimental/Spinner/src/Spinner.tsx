@@ -1,9 +1,8 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import { Animated, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 import { Svg } from 'react-native-svg';
 
 import type { SpinnerProps, SpinnerType } from './Spinner.types';
