@@ -133,12 +133,13 @@ export const tests: TestDescription[] = [
     testPageButton: Constants.HOMEPAGE_DIVIDER_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
-  {
-    name: 'Dropdown',
-    component: DropdownTest,
-    testPageButton: HOMEPAGE_DROPDOWN_BUTTON,
-    platforms: ['macos', 'win32'],
-  },
+  // Temporarily disabling until Dropdown is fully implemented
+  // {
+  //   name: 'Dropdown',
+  //   component: DropdownTest,
+  //   testPageButton: HOMEPAGE_DROPDOWN_BUTTON,
+  //   platforms: ['macos', 'win32'],
+  // },
   {
     name: 'Drawer',
     component: DrawerTest,
