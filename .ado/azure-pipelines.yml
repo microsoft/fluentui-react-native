@@ -54,12 +54,6 @@ jobs:
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
     steps:
-      - script: |
-          echo "Checking for leftover Git lock files..."
-          find /Users/runner/work/1/s/.git/refs/remotes/origin -name "*.lock" -print
-        displayName: 'Debug: List Git lock files'
-        continueOnError: true
-
       - checkout: self
         persistCredentials: true
 
