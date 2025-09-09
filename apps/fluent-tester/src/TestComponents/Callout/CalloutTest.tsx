@@ -427,35 +427,37 @@ const CustomCallout: React.FunctionComponent = () => {
 
   const a11yOnShowAnnouncement = 'Be informed that a customized callout has been opened.';
   const calloutMessage = 'This is an example message.';
-
   const closeButtonRef = React.useRef(null);
 
-  const toggleShowCustomizedCallout = React.useCallback(() => {
-    setShowCustomizedCallout(!showCustomizedCallout);
+  const openCallout = React.useCallback((focusCloseButton: boolean) => {
+    setShowCustomizedCallout(true);
     setIsCustomizedCalloutVisible(false);
-    setShouldFocusCloseButton(false);
-  }, [showCustomizedCallout, setIsCustomizedCalloutVisible, setShouldFocusCloseButton, setShowCustomizedCallout]);
+    setShouldFocusCloseButton(focusCloseButton);
+  }, []);
+
+  const toggleShowCustomizedCallout = React.useCallback(() => {
+    openCallout(false);
+  }, [openCallout]);
 
   const toggleShowCustomizedCalloutOnKeyDown = React.useCallback(
     (e) => {
       if (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ') {
-        setShowCustomizedCallout(true);
-        setShouldFocusCloseButton(true);
+        openCallout(true);
       }
     },
-    [setShouldFocusCloseButton, setShowCustomizedCallout],
+    [openCallout],
   );
 
   React.useEffect(() => {
     if (isCustomizedCalloutVisible && shouldFocusCloseButton) {
-      closeButtonRef.current?.focus?.(); // Focus the close button when the callout is shown via keyboard or accessibility tap
+      closeButtonRef.current?.focus?.();
     }
   }, [isCustomizedCalloutVisible, shouldFocusCloseButton]);
 
   const onShowCustomizedCallout = React.useCallback(() => {
     setIsCustomizedCalloutVisible(true);
     AccessibilityInfo.announceForAccessibility(a11yOnShowAnnouncement + ' ' + calloutMessage);
-  }, [setIsCustomizedCalloutVisible]);
+  }, []);
 
   const onDismissCustomizedCallout = React.useCallback(() => {
     setIsCustomizedCalloutVisible(false);
@@ -464,7 +466,7 @@ const CustomCallout: React.FunctionComponent = () => {
     // zombie Callout control.
     setShowCustomizedCallout(false);
     setShouldFocusCloseButton(false);
-  }, [setIsCustomizedCalloutVisible, setShowCustomizedCallout]);
+  }, []);
 
   const myRect: KeyboardMetrics = { screenX: 10, screenY: 10, width: 100, height: 100 };
 
@@ -474,10 +476,7 @@ const CustomCallout: React.FunctionComponent = () => {
         <Button
           onClick={toggleShowCustomizedCallout}
           onKeyDown={toggleShowCustomizedCalloutOnKeyDown}
-          onAccessibilityTap={() => {
-            setShowCustomizedCallout(true);
-            setShouldFocusCloseButton(true);
-          }}
+          onAccessibilityTap={() => openCallout(true)}
         >
           {'Press for Callout'}
         </Button>
