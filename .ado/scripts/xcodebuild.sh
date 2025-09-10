@@ -17,7 +17,7 @@ if [[ $sdk == iphoneos || $sdk == iphonesimulator ]]; then
     shift || true
     destination="-destination \"platform=iOS Simulator,id=${BASH_REMATCH[1]}\""
   else
-    destination='-destination "generic/platform=iOS Simulator"'
+    destination="-destination \"platform=iOS Simulator,name=iPhone 14,OS=18.2\""
   fi
 elif [[ $sdk == macosx ]]; then
   destination=''
