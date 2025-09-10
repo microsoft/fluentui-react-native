@@ -137,6 +137,10 @@ jobs:
         workingDirectory: apps/fluent-tester/ios
         displayName: 'pod install'
 
+      - bash: |
+          xcrun simctl list
+        displayName: Verify Simulator Availability
+
       - task: CmdLine@2
         displayName: Build iOS
         inputs:
