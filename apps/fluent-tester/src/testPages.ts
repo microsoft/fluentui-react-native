@@ -14,7 +14,7 @@ import { ContextualMenuTest } from './TestComponents/ContextualMenu';
 import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
 import { DividerTest } from './TestComponents/Divider';
 import { DrawerTest } from './TestComponents/Drawer';
-import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
+// import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
 // import { ExpanderTest, Constants.HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { FocusTrapTest } from './TestComponents/FocusTrapZone';
 import { FocusZoneTest } from './TestComponents/FocusZone';
@@ -133,12 +133,13 @@ export const tests: TestDescription[] = [
     testPageButton: Constants.HOMEPAGE_DIVIDER_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
-  {
-    name: 'Dropdown',
-    component: DropdownTest,
-    testPageButton: HOMEPAGE_DROPDOWN_BUTTON,
-    platforms: ['macos', 'win32'],
-  },
+  // Temporarily disabling until Dropdown is fully implemented
+  // {
+  //   name: 'Dropdown',
+  //   component: DropdownTest,
+  //   testPageButton: HOMEPAGE_DROPDOWN_BUTTON,
+  //   platforms: ['macos', 'win32'],
+  // },
   {
     name: 'Drawer',
     component: DrawerTest,
