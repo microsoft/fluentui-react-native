@@ -20,6 +20,11 @@ steps:
         fi
 
   - bash: |
+      ls /Applications/
+    displayName: Check Applications
+    failOnStderr: true
+
+  - bash: |
       sudo xcode-select --switch $(xcode_version)
     displayName: Use $(xcode_friendly_name)
     failOnStderr: true
