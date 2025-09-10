@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Thu, 21 Aug 2025 23:55:10 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 10 Sep 2025 22:35:57 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.41
+
+Wed, 10 Sep 2025 22:35:57 GMT
+
+### Patches
+
+- Temporarily remove Dropdown test page (krsiler@microsoft.com)
 
 ## 0.170.40
 

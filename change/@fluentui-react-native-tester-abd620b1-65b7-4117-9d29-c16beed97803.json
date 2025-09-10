@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Temporarily remove Dropdown test page",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

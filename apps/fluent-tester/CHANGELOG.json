@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 10 Sep 2025 22:35:57 GMT",
+      "version": "0.170.41",
+      "tag": "@fluentui-react-native/tester_v0.170.41",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7a35f530d885ebe28065a799efb377a9452bb9d0",
+            "comment": "Temporarily remove Dropdown test page"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 21 Aug 2025 23:55:10 GMT",
       "version": "0.170.40",
       "tag": "@fluentui-react-native/tester_v0.170.40",
