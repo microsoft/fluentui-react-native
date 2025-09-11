@@ -1,17 +1,9 @@
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 
-import {
-  Text as FURNText,
-  ContextualMenu,
-  ContextualMenuItem,
-  MenuButton,
-  Submenu,
-  SubmenuItem,
-  Separator,
-  Checkbox,
-} from '@fluentui/react-native';
+import { Text as FURNText, ContextualMenu, ContextualMenuItem, Submenu, SubmenuItem, Separator, Checkbox } from '@fluentui/react-native';
 import { CONTEXTUALMENU_TESTPAGE } from '@fluentui-react-native/e2e-testing';
+import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
 
 import { E2EContextualMenuTest } from './E2EContextualMenuTest';
 import { svgProps, fontProps, testImage } from '../Common/iconExamples';
@@ -288,7 +280,7 @@ const IconContextualMenu: React.FunctionComponent = () => {
           </Text>
           <MenuButton
             componentRef={stdBtnRef}
-            startIcon={{ svgSource: svgProps, height: 12, width: 12 }}
+            icon={{ svgSource: svgProps, height: 12, width: 12 }}
             onClick={toggleShowContextualMenu}
             accessibilityLabel="Wheelchair icon button"
             tooltip="Toggles the wheelchair icon button's contextual menu"
