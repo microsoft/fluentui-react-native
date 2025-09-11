@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Wed, 10 Sep 2025 22:35:57 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 11 Sep 2025 23:57:37 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.42
+
+Thu, 11 Sep 2025 23:57:37 GMT
+
+### Patches
+
+- Fix some accessibility issues in the fluent tester contextual menu section (rofang@microsoft.com)
 
 ## 0.170.41
 

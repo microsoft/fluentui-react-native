@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix some accessibility issues in the fluent tester contextual menu section",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "rofang@microsoft.com",
-  "dependentChangeType": "patch"
-}
