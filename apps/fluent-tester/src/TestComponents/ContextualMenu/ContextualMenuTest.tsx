@@ -1,17 +1,9 @@
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 
-import {
-  Text as FURNText,
-  ButtonV1 as Button,
-  ContextualMenu,
-  ContextualMenuItem,
-  Submenu,
-  SubmenuItem,
-  Separator,
-  Checkbox,
-} from '@fluentui/react-native';
+import { Text as FURNText, ContextualMenu, ContextualMenuItem, Submenu, SubmenuItem, Separator, Checkbox } from '@fluentui/react-native';
 import { CONTEXTUALMENU_TESTPAGE } from '@fluentui-react-native/e2e-testing';
+import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
 
 import { E2EContextualMenuTest } from './E2EContextualMenuTest';
 import { svgProps, fontProps, testImage } from '../Common/iconExamples';
@@ -89,9 +81,7 @@ const ContextualMenuMainTest: React.FunctionComponent = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef}>
-            Press for ContextualMenu
-          </Button>
+          <MenuButton content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
         </View>
       </View>
 
@@ -193,9 +183,7 @@ const NestedContextualMenu: React.FunctionComponent = () => {
             <Text>Submenu Visibility: </Text>
             {isSubmenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
           </Text>
-          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef}>
-            Press for ContextualMenu
-          </Button>
+          <MenuButton content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
         </View>
       </View>
 
@@ -290,13 +278,12 @@ const IconContextualMenu: React.FunctionComponent = () => {
             <Text>Menu Visibility: </Text>
             {isContextualMenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
           </Text>
-          <Button
+          <MenuButton
             componentRef={stdBtnRef}
-            style={{ borderWidth: 0 }}
-            icon={{ svgSource: svgProps, width: 12, height: 12 }}
+            icon={{ svgSource: svgProps, height: 12, width: 12 }}
             onClick={toggleShowContextualMenu}
             accessibilityLabel="Wheelchair icon button"
-            tooltip="Toggle menu"
+            tooltip="Toggles the wheelchair icon button's contextual menu"
           />
         </View>
       </View>
@@ -421,9 +408,7 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
           <Text>
             <Text>Menu and Submenu max height set to 200</Text>
           </Text>
-          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef}>
-            Press for ContextualMenu
-          </Button>
+          <MenuButton content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
         </View>
       </View>
 
