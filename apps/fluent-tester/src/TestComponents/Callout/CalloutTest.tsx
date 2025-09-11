@@ -439,14 +439,14 @@ const CustomCallout: React.FunctionComponent = () => {
     setShouldFocusCloseButton(focusCloseButton);
   }, []);
 
-  const toggleShowCustomizedCallout = React.useCallback(() => {
-    openCallout(false);
+  const onClick = React.useCallback(() => {
+    openCallout(false /*focusCloseButton*/);
   }, [openCallout]);
 
-  const toggleShowCustomizedCalloutOnKeyDown = React.useCallback(
+  const onKeyDown = React.useCallback(
     (e) => {
       if (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ') {
-        openCallout(true);
+        openCallout(true /*focusCloseButton*/);
       }
     },
     [openCallout],
@@ -477,11 +477,7 @@ const CustomCallout: React.FunctionComponent = () => {
   return (
     <View>
       <View style={{ flexDirection: 'column', paddingVertical: 5 }}>
-        <Button
-          onClick={toggleShowCustomizedCallout}
-          onKeyDown={toggleShowCustomizedCalloutOnKeyDown}
-          onAccessibilityTap={() => openCallout(true)}
-        >
+        <Button onClick={onClick} onKeyDown={onKeyDown} onAccessibilityTap={() => openCallout(true)}>
           {'Press for Callout'}
         </Button>
         <Text selectable={true}>
