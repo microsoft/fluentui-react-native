@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
 import type { TextProps } from 'react-native';
 import { Text, View } from 'react-native';
@@ -10,7 +9,6 @@ import * as renderer from 'react-test-renderer';
 import type { NativeReactType } from '@fluentui-react-native/framework-base';
 import { stagedComponent } from '@fluentui-react-native/framework-base';
 import { useSlot } from './useSlot';
-import { withSlots } from '@fluentui-react-native/framework-base';
 
 type PluggableTextProps = React.PropsWithChildren<TextProps> & { inner?: NativeReactType | React.FunctionComponent<TextProps> };
 

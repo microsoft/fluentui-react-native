@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "convert repo to modern jsx-runtime",
+  "packageName": "@uifabricshared/foundation-composable",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}

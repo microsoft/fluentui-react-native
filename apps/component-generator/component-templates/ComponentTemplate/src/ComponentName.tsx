@@ -1,11 +1,12 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework */
 import * as React from 'react';
 import { View } from 'react-native';
-import { componentName, ComponentNameType, ComponentNameProps } from './ComponentName.types';
+import type { ComponentNameType, ComponentNameProps } from './ComponentName.types';
+import { componentName } from './ComponentName.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './ComponentName.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 import { useComponentName } from './useComponentName';
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the component-name.

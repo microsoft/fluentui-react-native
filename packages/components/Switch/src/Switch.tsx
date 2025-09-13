@@ -1,10 +1,9 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import type { StyleProp, TextStyle } from 'react-native';
 import { View, AccessibilityInfo, Pressable, Animated, Platform } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, memoize, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, memoize, mergeProps } from '@fluentui-react-native/framework';
 import { Text } from '@fluentui-react-native/text';
 
 import { stylingSettings } from './Switch.styling';

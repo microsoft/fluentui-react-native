@@ -1,4 +1,3 @@
-/** @jsxRuntime classic */
 import * as React from 'react';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
