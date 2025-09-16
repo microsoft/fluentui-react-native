@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix custom callout example",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

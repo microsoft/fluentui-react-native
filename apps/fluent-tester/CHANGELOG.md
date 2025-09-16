@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Thu, 11 Sep 2025 23:57:37 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 16 Sep 2025 18:24:03 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.43
+
+Tue, 16 Sep 2025 18:24:03 GMT
+
+### Patches
+
+- Fix custom callout example (krsiler@microsoft.com)
 
 ## 0.170.42
 

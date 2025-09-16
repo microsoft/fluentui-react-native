@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 16 Sep 2025 18:24:03 GMT",
+      "version": "0.170.43",
+      "tag": "@fluentui-react-native/tester_v0.170.43",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "8eabe41db4031c129c699511c72975b0fc9bca6e",
+            "comment": "Fix custom callout example"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Sep 2025 23:57:37 GMT",
       "version": "0.170.42",
       "tag": "@fluentui-react-native/tester_v0.170.42",
