@@ -24,7 +24,7 @@ export type {
   ButtonType,
 } from './Button.types';
 export { buttonName as buttonNameV1 } from './Button.types';
-export { Button as ButtonV1 } from './Button';
+export { Button as ButtonV1, buttonLookup, getFocusBorderStyle } from './Button';
 export { useButton } from './useButton';
 export { CompoundButton, compoundButtonName } from './CompoundButton';
 export type { CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens, CompoundButtonType } from './CompoundButton';

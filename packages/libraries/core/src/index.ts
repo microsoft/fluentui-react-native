@@ -13,6 +13,8 @@ export {
   toggleButtonName,
   useButton,
   useToggleButton,
+  buttonLookup,
+  getFocusBorderStyle,
 } from '@fluentui-react-native/button';
 export type {
   ButtonAppearance,
