@@ -117,7 +117,6 @@ export interface OfficePalette {
   BkgCtlSubtleHover: ColorValue;
   BkgCtlSubtlePressed: ColorValue;
   BkgCtlSubtleDisabled: ColorValue;
-  BkgCtlSubtleSelectionHighlight: ColorValue;
 
   // text
   TextCtlSubtle: ColorValue;
