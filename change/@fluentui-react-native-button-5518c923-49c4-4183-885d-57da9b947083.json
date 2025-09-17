@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Export stuff that Button should export",
-  "packageName": "@fluentui-react-native/button",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

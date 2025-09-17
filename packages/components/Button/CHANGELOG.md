@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-<!-- This log was last generated on Tue, 05 Aug 2025 18:50:44 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 17 Sep 2025 22:14:27 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.39.16
+
+Wed, 17 Sep 2025 22:14:27 GMT
+
+### Patches
+
+- Export stuff that Button should export (email not defined)
 
 ## 0.39.14
 

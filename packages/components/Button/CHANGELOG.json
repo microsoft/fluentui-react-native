@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 17 Sep 2025 22:14:27 GMT",
+      "version": "0.39.16",
+      "tag": "@fluentui-react-native/button_v0.39.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/button",
+            "commit": "5da8f8a16a3ea3624389da2ea2dd698f72048c89",
+            "comment": "Export stuff that Button should export"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 05 Aug 2025 18:50:44 GMT",
       "version": "0.39.14",
       "tag": "@fluentui-react-native/button_v0.39.14",
