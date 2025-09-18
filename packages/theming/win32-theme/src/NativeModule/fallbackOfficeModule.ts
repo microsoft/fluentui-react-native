@@ -67,7 +67,6 @@ const whiteColorsPalette: OfficePalette = {
   BkgCtlSubtleHover: '#FFFFFF',
   BkgCtlSubtlePressed: '#FFFFFF',
   BkgCtlSubtleDisabled: '#F3F3F3',
-  BkgCtlSubtleSelectionHighlight: '#7DA3C6',
   TextCtlSubtle: '#262626',
   TextCtlSubtlePlaceholder: '#666666',
   TextCtlSubtleHover: '#262626',
