@@ -22,348 +22,746 @@ export type ThemeColorDefinition = Palette & {
   [customColor: string]: ColorValue;
 };
 
+/**
+ * @deprecated These tokens are not part of the Fluent design system.
+ */
 export interface FabricWebPalette {
-  // ROLE: Themed text
-  // linkHovered
+  /**
+   * ROLE: Themed text
+   * linkHovered
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   themeDarker: ColorValue;
 
-  // ROLE: Themed background
-  // primaryButtonBackgroundPressed
+  /**
+   * ROLE: Themed background
+   * primaryButtonBackgroundPressed
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   themeDark: ColorValue;
 
-  // ROLE: Themed background
-  // primaryButtonBackgroundHovered
+  /**
+   * ROLE: Themed background
+   * primaryButtonBackgroundHovered
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   themeDarkAlt: ColorValue;
 
-  // ROLE: Themed background, border, text
-  // inputFocusBorderAlt, primaryButtonBackground, menuIcon, link
+  /**
+   * ROLE: Themed background, border, text
+   * inputFocusBorderAlt, primaryButtonBackground, menuIcon, link
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   themePrimary: ColorValue;
 
-  // unused
+  /**
+   * unused
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   themeSecondary: ColorValue;
 
-  // unused
+  /**
+   * unused
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   themeTertiary: ColorValue;
 
-  // unused
+  /**
+   * unused
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   themeLight: ColorValue;
 
-  // unused
+  /**
+   * unused
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   themeLighter: ColorValue;
 
-  // unused
+  /**
+   * unused
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   themeLighterAlt: ColorValue;
 
-  // ROLE: Text, should not be called black
-  // bodyTextChecked
+  /**
+   * ROLE: Text, should not be called black
+   * bodyTextChecked
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   black: ColorValue;
 
-  // unused
+  /**
+   * unused
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   blackTranslucent40: ColorValue;
 
-  // ROLE: text
-  // buttonTextHovered, buttonTextChecked, buttonTextPressed, menuItemTextHovered
+  /**
+   * ROLE: text
+   * buttonTextHovered, buttonTextChecked, buttonTextPressed, menuItemTextHovered
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralDark: ColorValue;
 
-  // ROLE: text, border
-  // bodyText, inputText, buttonText, menuItemText, actionLink
+  /**
+   * ROLE: text, border
+   * bodyText, inputText, buttonText, menuItemText, actionLink
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralPrimary: ColorValue;
 
-  // unused
+  /**
+   * unused
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralPrimaryAlt: ColorValue;
 
-  // ROLE: text, border
-  // bodySubtext, focusBorder, inputPlaceholderText
+  /**
+   * ROLE: text, border
+   * bodySubtext, focusBorder, inputPlaceholderText
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralSecondary: ColorValue;
 
-  // ROLE: border
-  // buttonBorder
+  /**
+   * ROLE: border
+   * buttonBorder
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralSecondaryAlt: ColorValue;
 
-  // ROLE: text, border
-  // disabledText, disabledBodyText, inputBorder, buttonTextDisabled
+  /**
+   * ROLE: text, border
+   * disabledText, disabledBodyText, inputBorder, buttonTextDisabled
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralTertiary: ColorValue;
 
-  // ROLE: text, background, border
-  // buttonBackgroundChecked, menuDivider
+  /**
+   * ROLE: text, background, border
+   * buttonBackgroundChecked, menuDivider
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralTertiaryAlt: ColorValue;
 
-  // ROLE: text
-  // primaryButtonTextDisabled
+  /**
+   * ROLE: text
+   * primaryButtonTextDisabled
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralQuaternary: ColorValue;
 
-  // ROLE: background
+  /**
+   * ROLE: background
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralQuaternaryAlt: ColorValue;
 
-  // ROLE: background, border
-  // bodyFrameDivider, bodyDivider, variantBorder, buttonBackgroundHovered
-  // buttonBackgroundPressed, menuItemBackgroundPressed, listHeaderBackgroundPressed
+  /**
+   * ROLE: background, border
+   * bodyFrameDivider, bodyDivider, variantBorder, buttonBackgroundHovered
+   * buttonBackgroundPressed, menuItemBackgroundPressed, listHeaderBackgroundPressed
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralLight: ColorValue;
 
-  // ROLE: background, border (though really to blend with bgs)
-  // disabledBackground, buttonBackground, buttonBackgroundDisabled, buttonBorderDisabled, primaryButtonBackgroundDisabled
-  // menuItemBackgroundHovered, listHeaderBackgroundHovered
+  /**
+   * ROLE: background, border (though really to blend with bgs)
+   * disabledBackground, buttonBackground, buttonBackgroundDisabled, buttonBorderDisabled, primaryButtonBackgroundDisabled
+   *  menuItemBackgroundHovered, listHeaderBackgroundHovered
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralLighter: ColorValue;
 
-  // ROLE: background
-  // bodyStandoutBackground
+  /**
+   * ROLE: background
+   * bodyStandoutBackground
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   neutralLighterAlt: ColorValue;
 
-  // ROLE: background
-  // accentButtonBackground
+  /**
+   * ROLE: background
+   * accentButtonBackground
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   accent: ColorValue;
 
-  // ROLE: background, theme/accent text
-  // bodyBackground, bodyFrameBackground, inputBackground, primaryButtonText, primaryButtonTextHovered
-  // primaryButtonTextPressed, menuBackground
+  /**
+   * ROLE: background, theme/accent text
+   * bodyBackground, bodyFrameBackground, inputBackground, primaryButtonText, primaryButtonTextHovered
+   * primaryButtonTextPressed, menuBackground
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   white: ColorValue;
 
-  // red color
+  /**
+   * red color
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   red: ColorValue;
 
-  // ROLE: text
-  // errorText (if !inverted)
+  /**
+   * ROLE: Text
+   *  errorText (if !inverted)
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   redDark: ColorValue;
 }
 
 /**
  * semantic color definitions for text colors.  These match ISemanticTextColors in fabric.
+ * @deprecated These tokens are not part of the Fluent design system.
  */
 export interface PaletteTextColors {
-  /** The default color for text. */
+  /** The default color for text.
+   *  @deprecated These tokens are not part of the Fluent design system.
+   */
   bodyText: ColorValue;
-  /** Checked text color, e.g. selected menu item text. */
+  /** Checked text color, e.g. selected menu item text.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   bodyTextChecked: ColorValue;
-  /** De-emphasized text; e.g. metadata, captions, placeholder text. */
+  /** De-emphasized text; e.g. metadata, captions, placeholder text.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   subText: ColorValue;
-  /** Neutral colored links and links for action buttons. */
+  /** Neutral colored links and links for action buttons.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   actionLink: ColorValue;
 
-  /** The color of a link. */
+  /** The color of a link.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   link: ColorValue;
-  /** The color of a hovered link. Also used when the link is active. */
+  /** The color of a hovered link. Also used when the link is active.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   linkHovered: ColorValue;
-  /** The color of a pressed link. */
+  /** The color of a pressed link.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   linkPressed: ColorValue;
-  /** The default color for disabled text on top of disabledBackground; e.g. text in a disabled text field, disabled button text. */
+  /** The default color for disabled text on top of disabledBackground; e.g. text in a disabled text field, disabled button text.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   disabledText: ColorValue;
-  /** The default color for disabled text on the default background (bodyBackground). */
+  /** The default color for disabled text on the default background (bodyBackground).
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   disabledBodyText: ColorValue;
 
   //// Invariants - slots that rarely change color theme-to-theme because the color has meaning
 
-  /** The default color of error text, used on bodyBackground. */
+  /** The default color of error text, used on bodyBackground.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   errorText: ColorValue;
-  /** The color of input text. */
+  /** The color of input text.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   inputText: ColorValue;
-  /** The color of placeholder text. */
+  /** The color of placeholder text.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   inputPlaceholderText: ColorValue;
 
   //// Buttons
 
-  /** Color of text in a standard button */
+  /** Color of text in a standard button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonText: ColorValue;
-  /** Color of text in a hovered standard button */
+  /** Color of text in a hovered standard button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonTextHovered: ColorValue;
-  /** Color of text in a checked standard button */
+  /** Color of text in a checked standard button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonTextChecked: ColorValue;
-  /** Color of text in a pressed standard button; i.e. currently being clicked by mouse */
+  /** Color of text in a pressed standard button; i.e. currently being clicked by mouse
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonTextPressed: ColorValue;
-  /** Color of text in a disabled standard button */
+  /** Color of text in a disabled standard button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonTextDisabled: ColorValue;
 
-  /** Color of text in a primary button */
+  /** Color of text in a primary button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   primaryButtonText: ColorValue;
-  /** Color of text in a hovered primary button */
+  /** Color of text in a hovered primary button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   primaryButtonTextHovered: ColorValue;
-  /** Color of text in a pressed primary button; i.e. currently being clicked by mouse */
+  /** Color of text in a pressed primary button; i.e. currently being clicked by mouse
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   primaryButtonTextPressed: ColorValue;
-  /** Color of text in a disabled primary button */
+  /** Color of text in a disabled primary button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   primaryButtonTextDisabled: ColorValue;
 }
 
 /**
  * Background and divider colors, separated by semantic role.  These names and roles match
  * those in ISemanticColors in fabric
+ * @deprecated These tokens are not part of the Fluent design system.
  */
 export interface PaletteBackgroundColors {
   //// Base slots
 
-  /** The default color for backgrounds. */
+  /** The default color for backgrounds.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   background: ColorValue;
-  /** A standout background a shade darker then background (or lighter in dark themes) */
+  /** A standout background a shade darker then background (or lighter in dark themes)
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   bodyStandoutBackground: ColorValue;
-  /** The color for chrome adjacent to an area with bodyBackground.  Should either be distinct, or match bodyBackground */
+  /** The color for chrome adjacent to an area with bodyBackground.  Should either be distinct, or match bodyBackground
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   bodyFrameBackground: ColorValue;
-  /** Border between bodyBackground and bodyFrameBackground, distinct if they match, matching bodyFrameBackground if not */
+  /** Border between bodyBackground and bodyFrameBackground, distinct if they match, matching bodyFrameBackground if not
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   bodyFrameDivider: ColorValue;
-  /** Divider lines; e.g. lines that separate sections in a menu, an <HR> element. */
+  /** Divider lines; e.g. lines that separate sections in a menu, an <HR> element.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   bodyDivider: ColorValue;
-  /** The default color for backgrounds of disabled controls; e.g. disabled text field. */
+  /** The default color for backgrounds of disabled controls; e.g. disabled text field.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   disabledBackground: ColorValue;
-  /** The color of the outline around focused controls that don't already have a border; e.g. menu items */
+  /** The color of the outline around focused controls that don't already have a border; e.g. menu items
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   focusBorder: ColorValue;
-  /** The color of the border that provides contrast between an element, such as a card, and an emphasized background. */
+  /** The color of the border that provides contrast between an element, such as a card, and an emphasized background.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   variantBorder: ColorValue;
 
   //// Input controls slots (text fields, checkboxes, radios...)
 
-  /** The border of a large input control in its resting, state; e.g. the box of dropdown. */
+  /** The border of a large input control in its resting, state; e.g. the box of dropdown.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   inputBorder: ColorValue;
-  /** The background color of an input, e.g. textbox background. */
+  /** The background color of an input, e.g. textbox background.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   inputBackground: ColorValue;
-  /** The alternate focus border color for elements that already have a border; e.g. text field borders on focus. */
+  /** The alternate focus border color for elements that already have a border; e.g. text field borders on focus.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   inputFocusBorderAlt: ColorValue;
 
   //// Buttons
 
-  /** Background of a standard button */
+  /** Background of a standard button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonBackground: ColorValue;
-  /** Background of a checked standard button; e.g. bold/italicize/underline text button in toolbar */
+  /** Background of a checked standard button; e.g. bold/italicize/underline text button in toolbar
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonBackgroundChecked: ColorValue;
-  /** Background of a hovered standard button */
+  /** Background of a hovered standard button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonBackgroundHovered: ColorValue;
-  /** Background of a disabled standard button */
+  /** Background of a disabled standard button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonBackgroundDisabled: ColorValue;
-  /** Background of a pressed standard button; i.e. currently being clicked by mouse */
+  /** Background of a pressed standard button; i.e. currently being clicked by mouse
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonBackgroundPressed: ColorValue;
-  /** Border of a standard button */
+  /** Border of a standard button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonBorder: ColorValue;
-  /** Border of a standard button in focused state */
+  /** Border of a standard button in focused state
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonBorderFocused: ColorValue;
-  /** Border of a disabled standard button */
+  /** Border of a disabled standard button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   buttonBorderDisabled: ColorValue;
-  /** Background of a primary button */
+  /** Background of a primary button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   primaryButtonBackground: ColorValue;
-  /** Background of a hovered primary button */
+  /** Background of a hovered primary button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   primaryButtonBackgroundHovered: ColorValue;
-  /** Background of a pressed primary button; i.e. currently being clicked by mouse */
+  /** Background of a pressed primary button; i.e. currently being clicked by mouse
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   primaryButtonBackgroundPressed: ColorValue;
-  /** Background of a disabled primary button */
+  /** Background of a disabled primary button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   primaryButtonBackgroundDisabled: ColorValue;
-  /** Border of a primary button */
+  /** Border of a primary button
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   primaryButtonBorder: ColorValue;
-  /** Border of a primary button in focused state*/
+  /** Border of a primary button in focused state
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   primaryButtonBorderFocused: ColorValue;
-  /** Background of an accent button (kicker) */
+  /** Background of an accent button (kicker)
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   accentButtonBackground: ColorValue;
 
   //// Menus, popups, etc
 
-  /** The background of a menu. */
+  /** The background of a menu.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   menuBackground: ColorValue;
-  /** The divider between menu items. */
+  /** The divider between menu items.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   menuDivider: ColorValue;
-  /** The default colors of icons in menus. */
+  /** The default colors of icons in menus.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   menuIcon: ColorValue;
-  /** The background of a hovered menu item. */
+  /** The background of a hovered menu item.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   menuItemBackgroundHovered: ColorValue;
-  /** The background of a pressed menu item. */
+  /** The background of a pressed menu item.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   menuItemBackgroundPressed: ColorValue;
-  /** The text color of a menu item. */
+  /** The text color of a menu item.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   menuItemText: ColorValue;
-  /** The text color of a hovered menu item. */
+  /** The text color of a hovered menu item.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   menuItemTextHovered: ColorValue;
 
   //// Lists
 
-  /** The background color for a hovered list header. */
+  /** The background color for a hovered list header.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   listHeaderBackgroundHovered: ColorValue;
-  /** The background color for a pressed list header. */
+  /** The background color for a pressed list header.
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   listHeaderBackgroundPressed: ColorValue;
 }
 
+/**
+ * @deprecated These tokens are not part of the Fluent design system.
+ */
 export interface ControlColorTokens {
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultBorder: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultIcon: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultHoveredBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultHoveredBorder: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultHoveredContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultHoveredIcon: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultFocusedBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultFocusedBorder: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultFocusedContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultFocusedIcon: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultPressedBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultPressedBorder: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultPressedContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultPressedIcon: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultDisabledBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultDisabledBorder: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultDisabledContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultDisabledIcon: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostBorder: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostIcon: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostHoveredBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostHoveredBorder: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostHoveredContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostHoveredIcon: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostFocusedBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostFocusedBorder: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostFocusedContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostFocusedIcon: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostPressedBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostPressedBorder: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostPressedContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostPressedIcon: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostDisabledBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostDisabledBorder: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostDisabledContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostDisabledIcon: ColorValue;
 
-  /* Deprecated */
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   brandedBackground: ColorValue;
 
-  /* Deprecated */
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   brandedDisabledBorder: ColorValue;
 
-  /* Deprecated */
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   brandedSecondaryContent: ColorValue;
-  /* Deprecated */
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   brandedFocusedSecondaryContent: ColorValue;
-  /* Deprecated */
+
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   brandedHoveredSecondaryContent: ColorValue;
-  /* Deprecated */
+
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   brandedPressedSecondaryContent: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultCheckedBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultCheckedContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultCheckedHoveredBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultCheckedHoveredContent: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostCheckedBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostCheckedContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostCheckedHoveredBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostCheckedHoveredContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostCheckedHoveredBorder: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostSecondaryContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostFocusedSecondaryContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostHoveredSecondaryContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   ghostPressedSecondaryContent: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultHoveredSecondaryContent: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   defaultPressedSecondaryContent: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   checkboxBackground: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   checkboxBackgroundDisabled: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   checkmarkColor: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   checkboxBorderColor: ColorValue;
 
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   personaActivityRing: ColorValue;
+  /**
+   * @deprecated These tokens are not part of the Fluent design system.
+   */
   personaActivityGlow: ColorValue;
 }
 
@@ -968,11 +1366,13 @@ export interface AliasColorTokens {
  * A collection of named palette colors.
  *
  * Palette names describe the role of a color within the application.
+ * @deprecated These are not used in the Fluent design system
  */
 export type Palette = PaletteTextColors & PaletteBackgroundColors & Partial<ControlColorTokens> & Partial<AliasColorTokens>;
 
 /**
  * A partially specified color palette.
+ * @deprecated These are not used in the Fluent design system
  */
 export type PartialPalette = Partial<Palette>;
 
