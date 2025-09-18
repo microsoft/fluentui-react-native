@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Remove usage of TextCtlSubtleSelectionHighlight",
+  "packageName": "@fluentui-react-native/win32-theme",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}

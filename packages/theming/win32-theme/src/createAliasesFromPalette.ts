@@ -23,7 +23,6 @@ export function createAliasesFromPalette(palette: OfficePalette, isHighContrast:
     compoundBrandForeground1Hover: palette.TextEmphasisHover,
     compoundBrandForeground1Pressed: palette.TextEmphasisPressed,
 
-    neutralForegroundInverted: palette.TextCtlSubtleSelectionHighlight,
     neutralForegroundOnBrand: palette.TextCtlEmphasis,
     neutralForegroundOnBrandHover: palette.TextCtlEmphasisHover,
     neutralForegroundOnBrandPressed: palette.TextCtlEmphasisPressed,

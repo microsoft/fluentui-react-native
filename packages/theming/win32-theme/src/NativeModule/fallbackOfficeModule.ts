@@ -72,7 +72,6 @@ const whiteColorsPalette: OfficePalette = {
   TextCtlSubtleHover: '#262626',
   TextCtlSubtlePressed: '#262626',
   TextCtlSubtleDisabled: '#B1B1B1',
-  TextCtlSubtleSelectionHighlight: '#262626',
   StrokeCtlSubtle: '#C6C6C6',
   StrokeCtlSubtleHover: '#969696',
   StrokeCtlSubtlePressed: '#969696',
