@@ -124,7 +124,6 @@ export interface OfficePalette {
   TextCtlSubtleHover: ColorValue;
   TextCtlSubtlePressed: ColorValue;
   TextCtlSubtleDisabled: ColorValue;
-  TextCtlSubtleSelectionHighlight: ColorValue;
 
   // stroke colors (typically borders, outlines or underlines)
   StrokeCtlSubtle: ColorValue;
