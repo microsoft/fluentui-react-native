@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Remove usage of TextCtlSubtleSelectionHighlight",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

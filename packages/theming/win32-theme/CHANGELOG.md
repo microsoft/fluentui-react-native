@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-<!-- This log was last generated on Thu, 18 Sep 2025 20:23:08 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 18 Sep 2025 22:26:15 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.37.0
+
+Thu, 18 Sep 2025 22:26:15 GMT
+
+### Minor changes
+
+- Remove usage of TextCtlSubtleSelectionHighlight (email not defined)
 
 ## 0.36.0
 

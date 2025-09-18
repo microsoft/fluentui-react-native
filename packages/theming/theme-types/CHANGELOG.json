@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Thu, 18 Sep 2025 22:26:15 GMT",
+      "version": "0.42.0",
+      "tag": "@fluentui-react-native/theme-types_v0.42.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "a8fd76517a483bcdf71d9961de6d9b522a7e33f8",
+            "comment": "Remove usage of TextCtlSubtleSelectionHighlight"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 18 Sep 2025 20:23:08 GMT",
       "version": "0.41.0",
       "tag": "@fluentui-react-native/theme-types_v0.41.0",
