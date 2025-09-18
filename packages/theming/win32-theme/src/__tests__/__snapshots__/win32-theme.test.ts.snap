@@ -2626,7 +2626,7 @@ exports[`createOfficeTheme test 1`] = `
     "neutralForeground3Selected": "#424242",
     "neutralForeground4": "#666666",
     "neutralForegroundDisabled": "#B1B1B1",
-    "neutralForegroundInverted": "#262626",
+    "neutralForegroundInverted": "#ffffff",
     "neutralForegroundInvertedLink": "#FFFFFF",
     "neutralForegroundInvertedLinkHover": "#D2D2D2",
     "neutralForegroundInvertedLinkPressed": "#B1B1B1",
