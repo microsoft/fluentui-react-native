@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/dropdown",
-  "version": "0.10.25",
+  "version": "0.10.26",
   "description": "A cross-platform Dropdown component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

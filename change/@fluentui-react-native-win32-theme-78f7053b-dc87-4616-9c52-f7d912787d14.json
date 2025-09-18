@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Remove BkgCtlSubtleSelectionHighlight from palette",
-  "packageName": "@fluentui-react-native/win32-theme",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

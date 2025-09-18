@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Thu, 18 Sep 2025 20:23:08 GMT",
+      "version": "0.41.0",
+      "tag": "@fluentui-react-native/theme-types_v0.41.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "94131e8d64fcd3eeaae758c38e500d25f685112b",
+            "comment": "Remove BkgCtlSubtleSelectionHighlight from palette"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 13 Aug 2025 22:23:25 GMT",
       "version": "0.40.0",
       "tag": "@fluentui-react-native/theme-types_v0.40.0",

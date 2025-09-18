@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.38.63",
+  "version": "0.38.64",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "react-native": "src/index.ts",
