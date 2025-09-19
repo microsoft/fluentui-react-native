@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Fri, 19 Sep 2025 18:10:22 GMT",
+      "version": "0.42.1",
+      "tag": "@fluentui-react-native/theme-types_v0.42.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "ae36943b2d70bccb6c1ce262ed39931b46856181",
+            "comment": "Mark non-token colors deprecated"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 18 Sep 2025 22:26:15 GMT",
       "version": "0.42.0",
       "tag": "@fluentui-react-native/theme-types_v0.42.0",

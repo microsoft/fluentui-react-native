@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/switch",
-  "version": "0.13.20",
+  "version": "0.13.21",
   "description": "A cross-platform Switch component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

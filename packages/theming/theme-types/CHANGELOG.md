@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-types
 
-<!-- This log was last generated on Thu, 18 Sep 2025 22:26:15 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 19 Sep 2025 18:10:22 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.42.1
+
+Fri, 19 Sep 2025 18:10:22 GMT
+
+### Patches
+
+- Mark non-token colors deprecated (email not defined)
 
 ## 0.42.0
 
