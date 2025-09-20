@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
 import { Pressable } from 'react-native';
 

@@ -1,16 +1,8 @@
-/**
- * Copyright (c) Microsoft Corporation.
- * Licensed under the MIT License.
- * @format
- */
-
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import { processColor, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps } from '@fluentui-react-native/framework';
-import { withSlots } from '@fluentui-react-native/framework';
 import { assertNever } from 'assert-never';
 import type { SvgProps } from 'react-native-svg';
 import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg } from 'react-native-svg';

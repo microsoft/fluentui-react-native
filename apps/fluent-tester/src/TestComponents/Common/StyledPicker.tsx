@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Platform } from 'react-native';
 import type { ColorValue } from 'react-native';
 
