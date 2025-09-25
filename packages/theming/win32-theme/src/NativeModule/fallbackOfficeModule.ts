@@ -68,7 +68,6 @@ const whiteColorsPalette: OfficePalette = {
   BkgCtlSubtlePressed: '#FFFFFF',
   BkgCtlSubtleDisabled: '#F3F3F3',
   TextCtlSubtle: '#262626',
-  TextCtlSubtlePlaceholder: '#666666',
   TextCtlSubtleHover: '#262626',
   TextCtlSubtlePressed: '#262626',
   TextCtlSubtleDisabled: '#B1B1B1',
@@ -140,6 +139,7 @@ const whiteColorsPalette: OfficePalette = {
   BkgCtlSubtleSelectedDisabled: '#F3F3F3',
   BkgHeader: '#E6E6E6',
   TextHeader: '#262626',
+  TextTextBoxPlaceholder: '#666666',
 };
 
 export function fallbackGetPalette(pal?: string): OfficePalette {

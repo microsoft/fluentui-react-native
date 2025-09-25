@@ -120,7 +120,6 @@ export interface OfficePalette {
 
   // text
   TextCtlSubtle: ColorValue;
-  TextCtlSubtlePlaceholder: ColorValue;
   TextCtlSubtleHover: ColorValue;
   TextCtlSubtlePressed: ColorValue;
   TextCtlSubtleDisabled: ColorValue;
@@ -254,4 +253,5 @@ export interface OfficePalette {
   BkgCtlSubtleFocus: ColorValue;
   BkgCtlSubtleHoverDisabled: ColorValue;
   BkgCtlSubtleSelectedDisabled: ColorValue;
+  TextTextBoxPlaceholder: ColorValue;
 }
