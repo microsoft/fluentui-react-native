@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Remove another palette entry",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
