@@ -76,7 +76,6 @@
     "on-headers": "^1.1.0",
     "react-native-macos": "patch:react-native-macos@npm%3A0.74.30#~/.yarn/patches/react-native-macos-npm-0.74.30-e4edf98920.patch",
     "semver": "^7.5.2",
-    "tar-fs": "^3.0.9",
     "ws": "^8.17.1",
     "yaml": "^2.2.2"
   },

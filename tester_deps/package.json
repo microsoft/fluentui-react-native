@@ -31,7 +31,6 @@
     "form-data": "^4.0.4",
     "on-headers": "^1.1.0",
     "semver": "^7.5.2",
-    "tar-fs": "^3.0.9",
     "ws": "^8.17.1",
     "xml2js": "^0.5.0",
     "yaml": "^2.2.2"
@@ -40,7 +39,6 @@
     "axios": "Patching security issue",
     "form-data": "Patching security issue",
     "on-headers": "Patching security issue",
-    "tar-fs": "Patching security issue",
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/parse-glob/glob-base/glob-parent": "There is a security risk associated with this package version (it's a very outdated packaged, 2.0.0). Therefore, we are forcing an upgrade to the patched version.",
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/braces": " There is a security risk associated with this package version (it's a very outdated packaged, 1.8.2). Therefore, we are forcing an upgrade to the patched version.",
     "ws": "Patching security issue"
