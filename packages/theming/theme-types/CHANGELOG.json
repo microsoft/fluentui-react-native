@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Fri, 26 Sep 2025 21:33:03 GMT",
+      "version": "0.43.0",
+      "tag": "@fluentui-react-native/theme-types_v0.43.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "b5062e776b43b417090e5af8daeb2e9815b5ed5d",
+            "comment": "Remove another palette entry"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 19 Sep 2025 18:10:22 GMT",
       "version": "0.42.1",
       "tag": "@fluentui-react-native/theme-types_v0.42.1",

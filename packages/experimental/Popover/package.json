@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/popover",
-  "version": "0.4.16",
+  "version": "0.4.17",
   "description": "A cross-platform Popover component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

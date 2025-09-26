@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/button",
-  "version": "0.39.19",
+  "version": "0.39.20",
   "description": "A cross-platform Button component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

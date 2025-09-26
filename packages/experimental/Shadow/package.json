@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-shadow",
-  "version": "0.6.18",
+  "version": "0.6.19",
   "description": "A cross-platform Shadow component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
