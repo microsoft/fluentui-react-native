@@ -13,7 +13,7 @@ import type { ButtonProps, ButtonInfo } from './Button.types';
 // like the button firing after you tab to it white Enter is pressed
 // and then releasing Enter, or the Menu reopening since it closes
 // onKeyDown while the Button operates onKeyUp.
-const shouldOnlyFireIfPressed = Platform.OS === ('win32' as any);
+const shouldOnlyFireIfPressed = Platform.OS === ('win32' as any) || Platform.OS === ('windows' as any);
 let isProcessingKeyboardInvocation = false;
 
 export const useButton = (props: ButtonProps): ButtonInfo => {
