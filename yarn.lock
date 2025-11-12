@@ -2518,7 +2518,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -2526,7 +2526,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -2583,7 +2583,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -2591,7 +2591,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -2638,7 +2638,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -2646,7 +2646,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -2728,7 +2728,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -2736,7 +2736,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -2773,7 +2773,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -2781,7 +2781,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -2867,7 +2867,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-svg-transformer: "npm:^1.0.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
@@ -2876,7 +2876,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -3008,7 +3008,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     workspace-tools: "npm:^0.26.3"
   languageName: unknown
@@ -3072,7 +3072,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -3080,7 +3080,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -3152,14 +3152,14 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -3239,14 +3239,14 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -3344,14 +3344,14 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -3416,7 +3416,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -3424,7 +3424,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -3533,7 +3533,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -3541,7 +3541,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -3706,6 +3706,7 @@ __metadata:
     "@fluentui-react-native/use-tokens": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
+    "@rnx-kit/cli": "npm:^0.18.14"
     "@types/react": "npm:^18.2.0"
     "@types/react-test-renderer": "npm:^18.2.0"
     react: "npm:18.2.0"
@@ -3750,7 +3751,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -3758,7 +3759,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -3808,7 +3809,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -3816,7 +3817,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -3968,7 +3969,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -3976,7 +3977,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -4019,7 +4020,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -4027,7 +4028,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -4090,7 +4091,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -4098,7 +4099,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -4131,7 +4132,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -4139,7 +4140,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -4328,7 +4329,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -4336,7 +4337,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -4463,14 +4464,14 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -4612,7 +4613,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -4620,7 +4621,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -4666,7 +4667,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
-    "@rnx-kit/cli": "npm:^0.18.9"
+    "@rnx-kit/cli": "npm:^0.18.14"
     "@rnx-kit/metro-config": "npm:^2.1.0"
     "@rnx-kit/metro-resolver-symlinks": "npm:^0.2.5"
     "@types/react": "npm:^18.2.0"
@@ -4674,7 +4675,7 @@ __metadata:
     metro-config: "npm:^0.80.3"
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-svg-transformer: "npm:^1.0.0"
     react-test-renderer: "npm:18.2.0"
     rimraf: "npm:^5.0.1"
@@ -4756,7 +4757,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
-    "@rnx-kit/cli": "npm:^0.18.9"
+    "@rnx-kit/cli": "npm:^0.18.14"
     "@rnx-kit/metro-config": "npm:^2.1.0"
     "@rnx-kit/metro-resolver-symlinks": "npm:^0.2.5"
     "@types/jasmine": "npm:5.1.4"
@@ -4772,7 +4773,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-svg-transformer: "npm:^1.0.0"
     react-native-test-app: "npm:^3.9.2"
     react-native-windows: "npm:^0.74.0"
@@ -5000,7 +5001,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
   peerDependencies:
@@ -5008,7 +5009,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -5213,18 +5214,19 @@ __metadata:
     "@fluentui-react-native/text": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
+    "@rnx-kit/cli": "npm:^0.18.14"
     "@types/react": "npm:~18.2.0"
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:^15.4.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
-    react-native-svg: ^15.0.0 || ^15.4.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -6860,12 +6862,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/align-deps@npm:^3.0.0, @rnx-kit/align-deps@npm:^3.0.6":
-  version: 3.0.8
-  resolution: "@rnx-kit/align-deps@npm:3.0.8"
+"@rnx-kit/align-deps@npm:^3.0.0, @rnx-kit/align-deps@npm:^3.1.0":
+  version: 3.3.2
+  resolution: "@rnx-kit/align-deps@npm:3.3.2"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 10c0/88cd853eb96b4a9121af6870a1a166b93bd34c72581b7b539fba59858305965cf70253e5408097f80a48d6f1f4ff2cab07af3953566d9aa0d1ac873ccf5eded4
+  checksum: 10c0/e68bffaaadb59f74dd8172dea629caa11cbd6998044bd60e6ed0c25e8047d29b548ac94b31c9cead5f38c269e1e1cf674c11619f9517eae5ffc7c30fbe6ea5ce
   languageName: node
   linkType: hard
 
@@ -6883,22 +6885,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/cli@npm:^0.18.9":
-  version: 0.18.9
-  resolution: "@rnx-kit/cli@npm:0.18.9"
+"@rnx-kit/cli@npm:^0.18.14":
+  version: 0.18.14
+  resolution: "@rnx-kit/cli@npm:0.18.14"
   dependencies:
-    "@rnx-kit/align-deps": "npm:^3.0.6"
+    "@rnx-kit/align-deps": "npm:^3.1.0"
     "@rnx-kit/config": "npm:^0.7.0"
     "@rnx-kit/console": "npm:^2.0.0"
     "@rnx-kit/metro-plugin-cyclic-dependencies-detector": "npm:^2.0.0"
     "@rnx-kit/metro-plugin-duplicates-checker": "npm:^3.0.0"
     "@rnx-kit/metro-plugin-typescript": "npm:^0.5.0"
     "@rnx-kit/metro-serializer": "npm:^2.0.0"
-    "@rnx-kit/metro-serializer-esbuild": "npm:^0.2.1"
+    "@rnx-kit/metro-serializer-esbuild": "npm:^0.2.6"
     "@rnx-kit/metro-service": "npm:^4.0.2"
     "@rnx-kit/third-party-notices": "npm:^2.0.0"
-    "@rnx-kit/tools-android": "npm:^0.2.0"
+    "@rnx-kit/tools-android": "npm:^0.2.1"
     "@rnx-kit/tools-apple": "npm:^0.2.1"
+    "@rnx-kit/tools-filesystem": "npm:^0.1.0"
     "@rnx-kit/tools-language": "npm:^3.0.0"
     "@rnx-kit/tools-node": "npm:^3.0.0"
     "@rnx-kit/tools-react-native": "npm:^2.0.3"
@@ -6915,7 +6918,7 @@ __metadata:
       optional: true
   bin:
     rnx-cli: bin/rnx-cli.cjs
-  checksum: 10c0/8014a7bba73dbacfa00c5b320699625ead4e7d637b9c817344e4a4a98b35767f6a55a34992098c8c64cf12d2c5164c8ceb5842fd52d7e76a7731b9fb9c0163eb
+  checksum: 10c0/1ab81f8d397ab40cdb1a97e60290ffd5772bc32df96e76648164d73ced9de5b25088c6abc9bb172679a0993ad873826788e8c1315ca2388e72d97743707c507a
   languageName: node
   linkType: hard
 
@@ -7056,17 +7059,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/metro-serializer-esbuild@npm:^0.2.1":
-  version: 0.2.2
-  resolution: "@rnx-kit/metro-serializer-esbuild@npm:0.2.2"
+"@rnx-kit/metro-serializer-esbuild@npm:^0.2.6":
+  version: 0.2.6
+  resolution: "@rnx-kit/metro-serializer-esbuild@npm:0.2.6"
   dependencies:
     "@rnx-kit/console": "npm:^2.0.0"
     "@rnx-kit/tools-node": "npm:^3.0.2"
-    "@rnx-kit/tools-react-native": "npm:^2.0.0"
+    "@rnx-kit/tools-react-native": "npm:^2.3.0"
     esbuild: "npm:^0.25.0"
     esbuild-plugin-lodash: "npm:^1.2.0"
     fast-glob: "npm:^3.2.7"
-  checksum: 10c0/6a0ec2e2450d02b2809adcce85106833f679df88282c000d96d4a431a571424a825e7f8e4769abcd537eef920c9e44e145dcc31383d17c7daf6775020711b079
+  checksum: 10c0/be4644d01912e86d2647cd781c3d612144a1054d11434951c8d8eee2cbaba1168435709924756773cf08811103514dfe5aeec804ad4385238ef2d990510f628e
   languageName: node
   linkType: hard
 
@@ -7135,12 +7138,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/tools-android@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "@rnx-kit/tools-android@npm:0.2.0"
+"@rnx-kit/tools-android@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "@rnx-kit/tools-android@npm:0.2.1"
   dependencies:
     "@rnx-kit/tools-shell": "npm:^0.2.0"
-  checksum: 10c0/112844ba10b8efdd6ba05d5a626aca1a0f319112a1ec54cdedf9d2c1c51ac424fe728575a6f457a2dbb5a1174b5e47d32a1afbd7feb08f05814ff1dc12c40f60
+  checksum: 10c0/63ec0ffb0325b3dd541b80052ad17401084132daa7812613057e445c0431741447046ea6356d237530167ce6383d51dfe56b82b5672aa83ce3523c027a941fcf
   languageName: node
   linkType: hard
 
@@ -7151,6 +7154,13 @@ __metadata:
     "@rnx-kit/tools-shell": "npm:^0.2.0"
     fast-xml-parser: "npm:^4.0.0"
   checksum: 10c0/dc587048484d3087a481840f96b467f70e6202b7c83217ed8b16b1454def2bd56e862111912eaa0679aafea8a7ff87fbe3e419d6ee75ac4cced7ef8f54699def
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-filesystem@npm:^0.1.0":
+  version: 0.1.2
+  resolution: "@rnx-kit/tools-filesystem@npm:0.1.2"
+  checksum: 10c0/36c740b611fd7d6f22f0e379e76274f52c1d57c5e6b56dc4caa4d91f9aacb001633ecb0860503a980c621e16fb18326905d3f21a5acda8614b70e35f33c53fb1
   languageName: node
   linkType: hard
 
@@ -7178,12 +7188,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/tools-react-native@npm:^2.0.0, @rnx-kit/tools-react-native@npm:^2.0.3, @rnx-kit/tools-react-native@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@rnx-kit/tools-react-native@npm:2.2.0"
+"@rnx-kit/tools-react-native@npm:^2.0.0, @rnx-kit/tools-react-native@npm:^2.0.3, @rnx-kit/tools-react-native@npm:^2.2.0, @rnx-kit/tools-react-native@npm:^2.3.0":
+  version: 2.3.1
+  resolution: "@rnx-kit/tools-react-native@npm:2.3.1"
   dependencies:
     "@rnx-kit/tools-node": "npm:^3.0.0"
-  checksum: 10c0/631eecefda6b2b53eccdd18656f24a5426625522b80e956504d2b37acbcdc1e98eddc692aec0833536e6fd1b285c4a5d75e27f23a16fdcb099fabae46013740d
+  checksum: 10c0/60f463e6929657731f07caf7e2a7136957d083636c1bc6baf81e78b5faac6fd2047d2c78744ed58b83c9b480a918ebcd70b65b6c741a5e4f7dbfecbdacd59ba3
   languageName: node
   linkType: hard
 
@@ -18767,9 +18777,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:^15.4.0":
-  version: 15.12.0
-  resolution: "react-native-svg@npm:15.12.0"
+"react-native-svg@npm:>=15.4.0 <15.13.0, react-native-svg@npm:^15.4.0":
+  version: 15.12.1
+  resolution: "react-native-svg@npm:15.12.1"
   dependencies:
     css-select: "npm:^5.1.0"
     css-tree: "npm:^1.1.3"
@@ -18777,7 +18787,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/80ad7ed06fc095767a8f786416fa0f4258a644ffc80a27a9425ad753abe0feab523f3e8817758411f7bead38449ab8c2f1272a9f124d185ffcf69afaf57eba31
+  checksum: 10c0/ed94b57007125c715283fc760438ac8eac0677ced3201f6e272a7cd4459f3fecb672a8eed2c32664e5b8e6e0367585353b0f83f99b231f603d75094bb052c01f
   languageName: node
   linkType: hard
 

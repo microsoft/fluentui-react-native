@@ -1,3 +1,4 @@
+const path = require('node:path');
 module.exports = {
-  reactNativePath: '../../node_modules/@office-iss/react-native-win32'
+  reactNativePath: path.dirname(require.resolve('@office-iss/react-native-win32/package.json')),
 };
