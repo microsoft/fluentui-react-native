@@ -58,7 +58,7 @@
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "react-native-macos": "^0.74.0",
-    "react-native-svg": "^15.4.0",
+    "react-native-svg": ">=15.4.0 <15.13.0",
     "react-native-windows": "^0.74.0",
     "react-test-renderer": "18.2.0"
   },
@@ -67,7 +67,7 @@
     "react": "18.2.0",
     "react-native": "^0.73.0 || ^0.74.0",
     "react-native-macos": "^0.73.0 || ^0.74.0",
-    "react-native-svg": "^15.0.0 || ^15.4.0",
+    "react-native-svg": ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0",
     "react-native-windows": "^0.73.0 || ^0.74.0"
   },
   "author": "",

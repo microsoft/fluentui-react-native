@@ -18,9 +18,9 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native rnx-start",
-    "bundle": "react-native rnx-bundle --dev false",
-    "bundle-dev": "react-native rnx-bundle",
+    "start": "rnx-cli start",
+    "bundle": "rnx-cli bundle --dev false",
+    "bundle-dev": "rnx-cli bundle",
     "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
     "run-win32-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh",
     "run-win32-devmain-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh --useDevMain",
@@ -37,7 +37,7 @@
     "@fluentui-react-native/tester": "workspace:*",
     "react": "18.2.0",
     "react-native": "^0.74.0",
-    "react-native-svg": "^15.4.0"
+    "react-native-svg": ">=15.4.0 <15.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -48,7 +48,7 @@
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
-    "@rnx-kit/cli": "^0.18.9",
+    "@rnx-kit/cli": "^0.18.14",
     "@rnx-kit/metro-config": "^2.1.0",
     "@rnx-kit/metro-resolver-symlinks": "^0.2.5",
     "@types/react": "^18.2.0",
