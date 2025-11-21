@@ -154,8 +154,7 @@ jobs:
     displayName: Windows PR
     pool:
       name: rnw-pool-4
-      demands:
-        - ImageOverride -equals rnw-img-vs2022-node18
+      demands: ImageOverride -equals rnw-img-vs2022-node22
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
