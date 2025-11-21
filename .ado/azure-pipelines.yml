@@ -175,7 +175,8 @@ jobs:
   - job: Win32PR
     displayName: Win32 PR
     pool:
-      vmImage: 'windows-2019'
+      name: rnw-pool-4
+      demands: ImageOverride -equals rnw-img-vs2022-node22
     timeoutInMinutes: 60
     cancelTimeoutInMinutes: 5
 
