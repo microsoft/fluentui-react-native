@@ -43,5 +43,5 @@
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/braces": " There is a security risk associated with this package version (it's a very outdated packaged, 1.8.2). Therefore, we are forcing an upgrade to the patched version.",
     "ws": "Patching security issue"
   },
-  "packageManager": "yarn@4.1.1"
+  "packageManager": "yarn@4.11.0"
 }

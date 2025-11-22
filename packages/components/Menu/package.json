@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/menu",
-  "version": "1.14.40",
+  "version": "1.14.41",
   "description": "A cross-platform Menu component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
