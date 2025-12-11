@@ -27,7 +27,8 @@
     "webdriverio": "^9.12.6"
   },
   "resolutions": {
-    "axios": "^1.8.2",
+    "@appium/support/glob": "^10.5.0",
+    "axios": "^1.12.0",
     "form-data": "^4.0.4",
     "on-headers": "^1.1.0",
     "semver": "^7.5.2",
@@ -36,6 +37,7 @@
     "yaml": "^2.2.2"
   },
   "resolutions.justifications": {
+    "@appium/support/glob": "Patching security issue",
     "axios": "Patching security issue",
     "form-data": "Patching security issue",
     "on-headers": "Patching security issue",
