@@ -1,10 +1,9 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import React from 'react';
 import { Platform, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { stylingSettings } from './Link.styling';

@@ -1,15 +1,8 @@
-/**
- * Copyright (c) Microsoft Corporation.
- * Licensed under the MIT License.
- * @format
- */
-
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots, buildProps } from '@fluentui-react-native/framework';
+import { compose, mergeProps, buildProps } from '@fluentui-react-native/framework';
 
 import type { ExpanderType, ExpanderProps, ExpanderViewProps } from './Expander.types';
 import { expanderName } from './Expander.types';
