@@ -124,9 +124,16 @@ export const getInitials = (name: string): string => {
   }
 
   const lastWordIdx = wordsLength - 1;
-  const firstLetter = words[0].charAt(0).toUpperCase();
-  const lastLetter = wordsLength > 1 ? words[lastWordIdx].charAt(0).toUpperCase() : '';
-  const initials = `${firstLetter}${ARABIC_ASIAN_REGEXP.test(name) ? '' : lastLetter}`;
+  let firstLetter = Array.from(words[0])[0] ?? '';
+  firstLetter = firstLetter.toUpperCase();
+
+  let lastLetter = '';
+  if (wordsLength > 1  && !ARABIC_ASIAN_REGEXP.test(name)) {
+    lastLetter = Array.from(words[lastWordIdx])[0] ?? '';
+    lastLetter = lastLetter.toUpperCase();
+  }
+
+  const initials = `${firstLetter}${lastLetter}`;
   return initials;
 };
 
