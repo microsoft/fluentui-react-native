@@ -1,5 +1,6 @@
 import type { ImageProps, ImageSourcePropType } from 'react-native';
 import { Platform } from 'react-native';
+import Graphemer from 'graphemer';
 
 import { createIconProps } from '@fluentui-react-native/icon';
 
@@ -124,17 +125,32 @@ export const getInitials = (name: string): string => {
   }
 
   const lastWordIdx = wordsLength - 1;
-  let firstLetter = Array.from(words[0])[0] ?? '';
+  let firstLetter = getFirstGrapheme(words[0]);
   firstLetter = firstLetter.toUpperCase();
 
   let lastLetter = '';
   if (wordsLength > 1  && !ARABIC_ASIAN_REGEXP.test(name)) {
-    lastLetter = Array.from(words[lastWordIdx])[0] ?? '';
+    lastLetter = getFirstGrapheme(words[lastWordIdx]);
     lastLetter = lastLetter.toUpperCase();
   }
 
   const initials = `${firstLetter}${lastLetter}`;
   return initials;
+};
+
+/**
+ * Get the first grapheme cluster from a string
+ *
+ * @param str input string
+ * @returns first grapheme cluster (handles composite emojis, skin tone modifiers, ZWJ sequences, etc.)
+ */
+const getFirstGrapheme = (str: string): string => {
+  if (!str) {
+    return '';
+  }
+  const graphemer = new Graphemer();
+  const segments = graphemer.splitGraphemes(str);
+  return segments[0] ?? '';
 };
 
 /**

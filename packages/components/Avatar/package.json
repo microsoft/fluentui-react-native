@@ -40,7 +40,8 @@
     "@fluentui-react-native/theme-tokens": "workspace:*",
     "@fluentui-react-native/theming-utils": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
-    "@fluentui-react-native/use-styling": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*",
+    "graphemer": "^1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
