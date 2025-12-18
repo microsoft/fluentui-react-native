@@ -1,13 +1,13 @@
 import type { ImageProps, ImageSourcePropType } from 'react-native';
 import { Platform } from 'react-native';
-import Graphemer from 'graphemer';
-
 import { createIconProps } from '@fluentui-react-native/icon';
 
 import type { AvatarProps, AvatarInfo, AvatarState, AvatarSize, AvatarColor } from './Avatar.types';
 import { AvatarColors } from './Avatar.types';
 import { getHashCodeWeb } from './getHashCode';
 import { titles, multiWordTitles } from './titles';
+
+const splitGraphemes = require('unicode-segmenter/grapheme').splitGraphemes as (str: string) => string[];
 
 /**
  * Re-usable hook for FURN Avatar.
@@ -125,13 +125,11 @@ export const getInitials = (name: string): string => {
   }
 
   const lastWordIdx = wordsLength - 1;
-  let firstLetter = getFirstGrapheme(words[0]);
-  firstLetter = firstLetter.toUpperCase();
+  let firstLetter = getFirstGrapheme(words[0]).toUpperCase();
 
   let lastLetter = '';
   if (wordsLength > 1  && !ARABIC_ASIAN_REGEXP.test(name)) {
-    lastLetter = getFirstGrapheme(words[lastWordIdx]);
-    lastLetter = lastLetter.toUpperCase();
+    lastLetter = getFirstGrapheme(words[lastWordIdx]).toUpperCase();
   }
 
   const initials = `${firstLetter}${lastLetter}`;
@@ -148,9 +146,8 @@ const getFirstGrapheme = (str: string): string => {
   if (!str) {
     return '';
   }
-  const graphemer = new Graphemer();
-  const segments = graphemer.splitGraphemes(str);
-  return segments[0] ?? '';
+
+  return [...splitGraphemes(str)][0] ?? '';
 };
 
 /**
