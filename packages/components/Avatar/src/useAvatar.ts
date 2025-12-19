@@ -125,7 +125,7 @@ export const getInitials = (name: string): string => {
   }
 
   const lastWordIdx = wordsLength - 1;
-  let firstLetter = getFirstGrapheme(words[0]).toUpperCase();
+  const firstLetter = getFirstGrapheme(words[0]).toUpperCase();
 
   let lastLetter = '';
   if (wordsLength > 1 && !ARABIC_ASIAN_REGEXP.test(name)) {
