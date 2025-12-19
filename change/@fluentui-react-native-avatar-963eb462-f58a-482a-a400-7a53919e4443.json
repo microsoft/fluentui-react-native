@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Handle characters requiring surrogate pairs in Avatar getInitials",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}

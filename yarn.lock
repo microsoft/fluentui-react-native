@@ -2521,6 +2521,7 @@ __metadata:
     react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
+    unicode-segmenter: "npm:^0.14.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0
@@ -21407,6 +21408,13 @@ __metadata:
   version: 2.1.0
   resolution: "unicode-property-aliases-ecmascript@npm:2.1.0"
   checksum: 10c0/50ded3f8c963c7785e48c510a3b7c6bc4e08a579551489aa0349680a35b1ceceec122e33b2b6c1b579d0be2250f34bb163ac35f5f8695fe10bbc67fb757f0af8
+  languageName: node
+  linkType: hard
+
+"unicode-segmenter@npm:^0.14.4":
+  version: 0.14.4
+  resolution: "unicode-segmenter@npm:0.14.4"
+  checksum: 10c0/ec062a90518fd8cdba14ad2516b2a5d8240931f5e7668bb8dc8881d7b6962ba9739df0219b4a237118f17b2fbdaf7704df8803538517c51315c73d380dc75128
   languageName: node
   linkType: hard
 

@@ -1,12 +1,13 @@
 import type { ImageProps, ImageSourcePropType } from 'react-native';
 import { Platform } from 'react-native';
-
 import { createIconProps } from '@fluentui-react-native/icon';
 
 import type { AvatarProps, AvatarInfo, AvatarState, AvatarSize, AvatarColor } from './Avatar.types';
 import { AvatarColors } from './Avatar.types';
 import { getHashCodeWeb } from './getHashCode';
 import { titles, multiWordTitles } from './titles';
+
+const splitGraphemes = require('unicode-segmenter/grapheme').splitGraphemes as (str: string) => string[];
 
 /**
  * Re-usable hook for FURN Avatar.
@@ -124,10 +125,29 @@ export const getInitials = (name: string): string => {
   }
 
   const lastWordIdx = wordsLength - 1;
-  const firstLetter = words[0].charAt(0).toUpperCase();
-  const lastLetter = wordsLength > 1 ? words[lastWordIdx].charAt(0).toUpperCase() : '';
-  const initials = `${firstLetter}${ARABIC_ASIAN_REGEXP.test(name) ? '' : lastLetter}`;
+  const firstLetter = getFirstGrapheme(words[0]).toUpperCase();
+
+  let lastLetter = '';
+  if (wordsLength > 1 && !ARABIC_ASIAN_REGEXP.test(name)) {
+    lastLetter = getFirstGrapheme(words[lastWordIdx]).toUpperCase();
+  }
+
+  const initials = `${firstLetter}${lastLetter}`;
   return initials;
+};
+
+/**
+ * Get the first grapheme cluster from a string
+ *
+ * @param str input string
+ * @returns first grapheme cluster (handles composite emojis, skin tone modifiers, ZWJ sequences, etc.)
+ */
+const getFirstGrapheme = (str: string): string => {
+  if (!str) {
+    return '';
+  }
+
+  return [...splitGraphemes(str)][0] ?? '';
 };
 
 /**
