@@ -34,6 +34,7 @@
     "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/icon": "workspace:*",
     "@fluentui-react-native/interactive-hooks": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",

@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Microsoft Corporation.
- * Licensed under the MIT License.
- * @format
- */
-
-/** @jsxRuntime classic */
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 
