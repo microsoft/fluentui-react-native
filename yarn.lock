@@ -2017,7 +2017,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.22.0, @babel/runtime@npm:^7.25.0, @babel/runtime@npm:^7.8.0":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.22.0, @babel/runtime@npm:^7.25.0, @babel/runtime@npm:^7.8.0":
   version: 7.28.2
   resolution: "@babel/runtime@npm:7.28.2"
   checksum: 10c0/c20afe253629d53a405a610b12a62ac74d341a2c1e0fb202bbef0c118f6b5c84f94bf16039f58fd0483dd256901259930a43976845bdeb180cab1f882c21b6e0
@@ -2100,13 +2100,6 @@ __metadata:
   dependencies:
     tslib: "npm:^2.4.0"
   checksum: 10c0/7005ff8b67724c9e61b6cd79a3decbdb2ce25d24abd4d3d187472f200ee6e573329c30264335125fb136bd813aa9cf9f4f7c9391d04b07dd1e63ce0a3427be57
-  languageName: node
-  linkType: hard
-
-"@emotion/hash@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "@emotion/hash@npm:0.8.0"
-  checksum: 10c0/706303d35d416217cd7eb0d36dbda4627bb8bdf4a32ea387e8dd99be11b8e0a998e10af21216e8a5fade518ad955ff06aa8890f20e694ce3a038ae7fc1000556
   languageName: node
   linkType: hard
 
@@ -4745,6 +4738,7 @@ __metadata:
     "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@fluentui-react-native/win32-theme": "workspace:*"
     "@fluentui/react-native": "workspace:*"
+    "@fluentui/react-native-icons": "npm:^2.0.316"
     "@fortawesome/fontawesome-svg-core": "npm:^6.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^6.2.0"
     "@fortawesome/react-native-fontawesome": "npm:^0.3.0"
@@ -4765,7 +4759,6 @@ __metadata:
     "@types/node": "npm:^22.0.0"
     "@types/react": "npm:~18.2.0"
     "@types/react-test-renderer": "npm:^18.2.0"
-    "@warren-ms/react-native-icons": "npm:^0.0.13"
     "@wdio/cli": "npm:^8.40.0"
     "@wdio/globals": "npm:^8.40.0"
     "@wdio/jasmine-framework": "npm:^8.40.0"
@@ -5189,6 +5182,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui/react-native-icons@npm:^2.0.316":
+  version: 2.0.316
+  resolution: "@fluentui/react-native-icons@npm:2.0.316"
+  dependencies:
+    "@types/react-native": "npm:^0.68.0"
+    tslib: "npm:^2.1.0"
+  peerDependencies:
+    react: ">=16.8.0 <19.0.0"
+    react-native-svg: ">=12.5.0"
+  checksum: 10c0/5a9bc85b41dd6551ddbd6f4a505ac6f1892748554f2db2b5ca40cbddfa511d04b1c1124ea841c74b4d82ce1ae9e44e4a4e5920d06fa3e1b4cd8f032c3100d233
+  languageName: node
+  linkType: hard
+
 "@fluentui/react-native@npm:*, @fluentui/react-native@workspace:*, @fluentui/react-native@workspace:packages/libraries/core":
   version: 0.0.0-use.local
   resolution: "@fluentui/react-native@workspace:packages/libraries/core"
@@ -5275,31 +5281,6 @@ __metadata:
     react-native: ">= 0.67"
     react-native-svg: ">= 11.x"
   checksum: 10c0/d256d90781c3813cb4b5ab409ff96dedc818eda1fb02f3645ea4a015fd59b98dc85e5f707e4d44b85020863ac40c4d4f6401e7a7b519618d67be716313e4d80d
-  languageName: node
-  linkType: hard
-
-"@griffel/core@npm:^1.9.1":
-  version: 1.9.1
-  resolution: "@griffel/core@npm:1.9.1"
-  dependencies:
-    "@emotion/hash": "npm:^0.8.0"
-    csstype: "npm:^3.0.10"
-    rtl-css-js: "npm:^1.16.0"
-    stylis: "npm:^4.0.13"
-    tslib: "npm:^2.1.0"
-  checksum: 10c0/e36d6b40dc88da2676d39e7356d4f76f8b3e4e09d3d4b1a6e20ad47e10365bbe3ce6f50b0eab8c4384f3be9a9f4a9de9714498e58fe22237881ffa1ad92765b5
-  languageName: node
-  linkType: hard
-
-"@griffel/react@npm:^1.0.0":
-  version: 1.5.3
-  resolution: "@griffel/react@npm:1.5.3"
-  dependencies:
-    "@griffel/core": "npm:^1.9.1"
-    tslib: "npm:^2.1.0"
-  peerDependencies:
-    react: ">=16.8.0 <19.0.0"
-  checksum: 10c0/531ff99a5e82b1cf81149b975c547acf4fde9df3900a5ad9a48fbd67821e98d31b8c55329cec311a3c5cab9e3ee51480123a03ade03bf4ba635f39a35eb71271
   languageName: node
   linkType: hard
 
@@ -8687,20 +8668,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@warren-ms/react-native-icons@npm:^0.0.13":
-  version: 0.0.13
-  resolution: "@warren-ms/react-native-icons@npm:0.0.13"
-  dependencies:
-    "@griffel/react": "npm:^1.0.0"
-    "@types/react-native": "npm:^0.68.0"
-    react-native-svg: "npm:^12.5.0"
-    tslib: "npm:^2.1.0"
-  peerDependencies:
-    react: ">=16.8.0 <19.0.0"
-  checksum: 10c0/91d74acd6014eb41cf3b77904452f1f813f53d7addb676526d63cfcafc2a528cc59d96f16eb8032ba6254645d6f154af217e6b8160ca836d48f74888abcf4278
-  languageName: node
-  linkType: hard
-
 "@wdio/appium-service@npm:^9.12.6":
   version: 9.15.0
   resolution: "@wdio/appium-service@npm:9.15.0"
@@ -11501,7 +11468,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.0.10, csstype@npm:^3.0.2":
+"csstype@npm:^3.0.2":
   version: 3.1.1
   resolution: "csstype@npm:3.1.1"
   checksum: 10c0/7c8b8c5923049d84132581c13bae6e1faf999746fe3998ba5f3819a8e1cdc7512ace87b7d0a4a69f0f4b8ba11daf835d4f1390af23e09fc4f0baad52c084753a
@@ -18771,7 +18738,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:>=15.4.0 <15.13.0, react-native-svg@npm:^15.4.0":
+"react-native-svg@npm:>=15.4.0 <15.13.0":
   version: 15.12.1
   resolution: "react-native-svg@npm:15.12.1"
   dependencies:
@@ -19526,15 +19493,6 @@ __metadata:
   bin:
     rimraf: ./bin.js
   checksum: 10c0/f1e646f8c567795f2916aef7aadf685b543da6b9a53e482bb04b07472c7eef2b476045ba1e29f401c301c66b630b22b815ab31fdd60c5e1ae6566ff523debf45
-  languageName: node
-  linkType: hard
-
-"rtl-css-js@npm:^1.16.0":
-  version: 1.16.1
-  resolution: "rtl-css-js@npm:1.16.1"
-  dependencies:
-    "@babel/runtime": "npm:^7.1.2"
-  checksum: 10c0/4b81ef50e50c97455d61c9bb576e2892651c79bac5d0c52b4123ebb9d6a2c5144590a79c9db0a3212a81b4eb83bf317e03637220f20b387a37b96cbac324d3d2
   languageName: node
   linkType: hard
 
@@ -20610,13 +20568,6 @@ __metadata:
   version: 1.1.2
   resolution: "strnum@npm:1.1.2"
   checksum: 10c0/a0fce2498fa3c64ce64a40dada41beb91cabe3caefa910e467dc0518ef2ebd7e4d10f8c2202a6104f1410254cae245066c0e94e2521fb4061a5cb41831952392
-  languageName: node
-  linkType: hard
-
-"stylis@npm:^4.0.13":
-  version: 4.1.3
-  resolution: "stylis@npm:4.1.3"
-  checksum: 10c0/3e4670f26f79bcfba628dcc2756d9d415edfcbf4ec51e40f3b628fd15286222257317cad57390752964eba85cca6163a7621ce90038d68dd630a674479e52334
   languageName: node
   linkType: hard
 
