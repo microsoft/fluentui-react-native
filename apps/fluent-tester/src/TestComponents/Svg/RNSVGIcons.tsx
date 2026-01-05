@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
 
-import { RNSVGIcons_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import { faMountainCity } from '@fortawesome/free-solid-svg-icons/faMountainCity';
-import { faMugHot } from '@fortawesome/free-solid-svg-icons/faMugHot';
-import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
-import { faSquareCheck } from '@fortawesome/free-solid-svg-icons/faSquareCheck';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   AccessTime20Filled,
   AccessTime20Regular,
@@ -508,12 +503,20 @@ import {
   ArrowCircleUp48Regular,
   ArrowCircleUpLeft20Filled,
   ArrowCircleUpLeft20Regular,
-} from '@warren-ms/react-native-icons';
+} from '@fluentui/react-native-icons';
+import { RNSVGIcons_TESTPAGE } from '@fluentui-react-native/e2e-testing';
+import { faMountainCity } from '@fortawesome/free-solid-svg-icons/faMountainCity';
+import { faMugHot } from '@fortawesome/free-solid-svg-icons/faMugHot';
+import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
+import { faSquareCheck } from '@fortawesome/free-solid-svg-icons/faSquareCheck';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-function withAccessibility<P extends React.SVGAttributes<SVGElement>>(Component: React.ComponentType<React.SVGAttributes<SVGElement>>) {
+function withAccessibility<P extends SvgProps>(
+  Component: React.ComponentType<SvgProps & { accessibilityLabel?: string }>,
+): React.FC<P & { accessibilityLabel?: string }> {
   const WithAccessibility: React.FC<P & { accessibilityLabel?: string }> = (props) => {
     const { accessibilityLabel, ...restProps } = props;
     return (
