@@ -1,0 +1,97 @@
+diff --git a/lib/index.js b/lib/index.js
+index cff5a1256df83e746d874c5ca722d5b3b8c8ac3c..178a004a0b4231a6be964b8c33d153a2525ac168 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -20,18 +20,26 @@ expectLib.extend = (m) => {
+ };
+ expectLib.extend(filteredMatchers);
+ const expectWithSoft = expectLib;
+-Object.defineProperty(expectWithSoft, 'soft', {
+-    value: (actual) => createSoftExpect(actual)
+-});
+-Object.defineProperty(expectWithSoft, 'getSoftFailures', {
+-    value: (testId) => SoftAssertService.getInstance().getFailures(testId)
+-});
+-Object.defineProperty(expectWithSoft, 'assertSoftFailures', {
+-    value: (testId) => SoftAssertService.getInstance().assertNoFailures(testId)
+-});
+-Object.defineProperty(expectWithSoft, 'clearSoftFailures', {
+-    value: (testId) => SoftAssertService.getInstance().clearFailures(testId)
+-});
++if (!Object.prototype.hasOwnProperty.call(expectWithSoft, 'soft')) {
++    Object.defineProperty(expectWithSoft, 'soft', {
++        value: (actual) => createSoftExpect(actual)
++    });
++}
++if (!Object.prototype.hasOwnProperty.call(expectWithSoft, 'getSoftFailures')) {
++    Object.defineProperty(expectWithSoft, 'getSoftFailures', {
++        value: (testId) => SoftAssertService.getInstance().getFailures(testId)
++    });
++}
++if (!Object.prototype.hasOwnProperty.call(expectWithSoft, 'assertSoftFailures')) {
++    Object.defineProperty(expectWithSoft, 'assertSoftFailures', {
++        value: (testId) => SoftAssertService.getInstance().assertNoFailures(testId)
++    });
++}
++if (!Object.prototype.hasOwnProperty.call(expectWithSoft, 'clearSoftFailures')) {
++    Object.defineProperty(expectWithSoft, 'clearSoftFailures', {
++        value: (testId) => SoftAssertService.getInstance().clearFailures(testId)
++    });
++}
+ export const expect = expectWithSoft;
+ export const getConfig = () => DEFAULT_OPTIONS;
+ export const setDefaultOptions = (options = {}) => {
+diff --git a/lib/index.js.bak b/lib/index.js.bak
+new file mode 100644
+index 0000000000000000000000000000000000000000..cff5a1256df83e746d874c5ca722d5b3b8c8ac3c
+--- /dev/null
++++ b/lib/index.js.bak
+@@ -0,0 +1,48 @@
++import { expect as expectLib } from 'expect';
++import * as wdioMatchers from './matchers.js';
++import { DEFAULT_OPTIONS } from './constants.js';
++import createSoftExpect from './softExpect.js';
++import { SoftAssertService } from './softAssert.js';
++export const matchers = new Map();
++const filteredMatchers = {};
++const extend = expectLib.extend;
++Object.keys(wdioMatchers).forEach(matcher => {
++    if (typeof wdioMatchers[matcher] === 'function') {
++        filteredMatchers[matcher] = wdioMatchers[matcher];
++    }
++});
++expectLib.extend = (m) => {
++    if (!m || typeof m !== 'object') {
++        return;
++    }
++    Object.entries(m).forEach(([name, matcher]) => matchers.set(name, matcher));
++    return extend(m);
++};
++expectLib.extend(filteredMatchers);
++const expectWithSoft = expectLib;
++Object.defineProperty(expectWithSoft, 'soft', {
++    value: (actual) => createSoftExpect(actual)
++});
++Object.defineProperty(expectWithSoft, 'getSoftFailures', {
++    value: (testId) => SoftAssertService.getInstance().getFailures(testId)
++});
++Object.defineProperty(expectWithSoft, 'assertSoftFailures', {
++    value: (testId) => SoftAssertService.getInstance().assertNoFailures(testId)
++});
++Object.defineProperty(expectWithSoft, 'clearSoftFailures', {
++    value: (testId) => SoftAssertService.getInstance().clearFailures(testId)
++});
++export const expect = expectWithSoft;
++export const getConfig = () => DEFAULT_OPTIONS;
++export const setDefaultOptions = (options = {}) => {
++    Object.entries(options).forEach(([key, value]) => {
++        if (key in DEFAULT_OPTIONS) {
++            DEFAULT_OPTIONS[key] = value;
++        }
++    });
++};
++export const setOptions = setDefaultOptions;
++export { SnapshotService } from './snapshot.js';
++export { SoftAssertService } from './softAssert.js';
++export { SoftAssertionService } from './softAssertService.js';
++export * as utils from './utils.js';

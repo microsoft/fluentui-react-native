@@ -121,15 +121,18 @@
     "@rnx-kit/metro-resolver-symlinks": "^0.2.5",
     "@types/jasmine": "5.1.4",
     "@types/react-test-renderer": "^18.2.0",
-    "@wdio/cli": "^8.40.0",
-    "@wdio/globals": "^8.40.0",
-    "@wdio/jasmine-framework": "^8.40.0",
+    "@wdio/cli": "catalog:",
+    "@wdio/globals": "catalog:",
+    "@wdio/jasmine-framework": "catalog:",
+    "@wdio/logger": "catalog:",
+    "@wdio/runner": "catalog:",
+    "expect-webdriverio": "catalog:",
     "flow-bin": "^0.113.0",
     "metro-config": "^0.80.3",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
-    "webdriverio": "^8.40.0"
+    "webdriverio": "catalog:"
   },
   "jest": {
     "preset": "react-native"
