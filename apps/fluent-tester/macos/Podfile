@@ -1,12 +1,12 @@
-# (pnpm-mode) ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(__dir__, '../node_modules')
+ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(__dir__, '../node_modules')
 
-# require_relative '../node_modules/react-native-test-app/macos/test_app'
-require_relative '../../../node_modules/react-native-test-app/macos/test_app'
+require_relative '../node_modules/react-native-test-app/macos/test_app'
+# (node-modules mode) require_relative '../../../node_modules/react-native-test-app/macos/test_app'
 
 workspace 'FluentTester.xcworkspace'
 
-# (pnpm-mode) react_native_path = "#{__dir__}/../node_modules/react-native"
-react_native_path = "#{__dir__}/../../../node_modules/react-native"
+react_native_path = "#{__dir__}/../node_modules/react-native"
+# (node-modules mode)react_native_path = "#{__dir__}/../../../node_modules/react-native"
 
 use_test_app! do |target|
   target.app do

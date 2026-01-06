@@ -63,7 +63,7 @@ export default function ({ cwd, manifest }) {
 
   return {
     dependencies: {
-      ...conditionallyAdd(['typescript'], manifest, () => fs.existsSync(path.join(cwd, 'tsconfig.json'))),
+      ...conditionallyAdd(['typescript', '@types/node', '@types/jest'], manifest, () => fs.existsSync(path.join(cwd, 'tsconfig.json'))),
       ...conditionallyAdd(['eslint'], manifest, enableLinting),
       ...conditionallyAdd(['prettier'], manifest, () => addPrettier(manifest)),
       ...conditionallyAdd(['jest', '@types/jest'], manifest, () => addJest(cwd, manifest)),

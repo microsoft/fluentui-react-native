@@ -4368,9 +4368,6 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     typescript: "npm:^4.9.4"
-  peerDependencies:
-    react: 18.2.0
-    react-native: ^0.73.0 || ^0.74.0
   languageName: unknown
   linkType: soft
 
