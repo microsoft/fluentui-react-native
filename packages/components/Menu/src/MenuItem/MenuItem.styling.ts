@@ -8,7 +8,7 @@ import type { MenuItemProps, MenuItemTokens, MenuItemSlotProps } from './MenuIte
 import { menuItemName } from './MenuItem.types';
 import { defaultMenuItemTokens } from './MenuItemTokens';
 
-export const menuItemStates: (keyof MenuItemTokens)[] = ['hovered', 'focused', 'pressed', 'disabled'];
+export const menuItemStates: (keyof MenuItemTokens)[] = ['hovered', 'focused', 'highlighted', 'pressed', 'disabled'];
 
 export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps, MenuItemTokens> = {
   tokens: [defaultMenuItemTokens, menuItemName],

@@ -17,6 +17,10 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         borderWidth: 0,
         padding: globalTokens.size60,
       },
+      highlighted: {
+        borderWidth: globalTokens.stroke.width20,
+        padding: globalTokens.size60 - globalTokens.stroke.width20,
+      },
       hasContent: {
         minWidth: 96,
         paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
@@ -29,6 +33,9 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         focused: {
           paddingHorizontal: globalTokens.size120,
         },
+        highlighted: {
+          paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
+        },
       },
     },
     small: {
@@ -38,6 +45,10 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       focused: {
         borderWidth: 0,
         padding: globalTokens.size40,
+      },
+      highlighted: {
+        borderWidth: globalTokens.stroke.width20,
+        padding: globalTokens.size40 - globalTokens.stroke.width20,
       },
       hasContent: {
         minWidth: 64,
@@ -52,6 +63,9 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         focused: {
           paddingHorizontal: globalTokens.size80,
         },
+        highlighted: {
+          paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
+        },
       },
     },
     large: {
@@ -61,6 +75,10 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       focused: {
         borderWidth: 0,
         padding: globalTokens.size80,
+      },
+      highlighted: {
+        borderWidth: globalTokens.stroke.width20,
+        padding: globalTokens.size80 - globalTokens.stroke.width20,
       },
       hasContent: {
         minWidth: 96,
@@ -73,6 +91,9 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         },
         focused: {
           paddingHorizontal: globalTokens.size160,
+        },
+        highlighted: {
+          paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
         },
       },
     },

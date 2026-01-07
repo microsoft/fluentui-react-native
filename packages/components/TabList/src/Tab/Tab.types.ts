@@ -92,6 +92,7 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
   subtle?: TabTokens;
   hovered?: TabTokens;
   focused?: TabTokens;
+  highlighted?: TabTokens;
   pressed?: TabTokens;
   disabled?: TabTokens;
   selected?: TabTokens;
@@ -108,6 +109,11 @@ export interface TabProps extends Omit<PressablePropsExtended, 'onPress'> {
    * Whether or not the tab is selectable
    */
   disabled?: boolean;
+
+  /**
+   * Whether the tab should render a highlight ring.
+   */
+  highlighted?: boolean;
 
   /**
    * Source URL or name of the icon to show on the Button.
