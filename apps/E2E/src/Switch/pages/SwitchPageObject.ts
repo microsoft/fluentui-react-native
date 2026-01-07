@@ -48,7 +48,7 @@ class SwitchPageObject extends BasePage {
     return HOMEPAGE_SWITCH_BUTTON;
   }
 
-  get _callbackText() {
+  get _callbackText(): ChainablePromiseElement {
     return By(SWITCH_ON_PRESS);
   }
 }

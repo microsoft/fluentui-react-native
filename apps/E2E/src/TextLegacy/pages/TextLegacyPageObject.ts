@@ -8,11 +8,11 @@ class TextLegacyPageObject extends BasePage {
     return TEXT_TESTPAGE;
   }
 
-  get _deprecatedFirstComponent() {
+  get _deprecatedFirstComponent(): ChainablePromiseElement {
     return By(DEPRECATED_TEXT_FIRST_COMPONENT);
   }
 
-  get _deprecatedSecondComponent() {
+  get _deprecatedSecondComponent(): ChainablePromiseElement {
     return By(DEPRECATED_TEXT_SECOND_COMPONENT);
   }
 

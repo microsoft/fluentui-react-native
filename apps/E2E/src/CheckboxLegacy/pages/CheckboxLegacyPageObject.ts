@@ -66,7 +66,7 @@ class CheckboxLegacyPageObject extends BasePage {
     return HOMEPAGE_CHECKBOX_BUTTON;
   }
 
-  get _callbackText() {
+  get _callbackText(): ChainablePromiseElement {
     return By(CHECKBOX_ON_PRESS);
   }
 }

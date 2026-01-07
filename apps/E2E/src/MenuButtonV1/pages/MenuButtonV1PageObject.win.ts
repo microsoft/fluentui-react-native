@@ -14,11 +14,11 @@ class MenuButtonV1PageObject extends BasePage {
     return MENUBUTTONV1_TESTPAGE;
   }
 
-  get _firstMenuButton() {
+  get _firstMenuButton(): ChainablePromiseElement {
     return By(MENUBUTTONV1_TEST_COMPONENT);
   }
 
-  get _secondMenuButton() {
+  get _secondMenuButton(): ChainablePromiseElement {
     return By(MENUBUTTONV1_NO_A11Y_LABEL_COMPONENT);
   }
 

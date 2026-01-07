@@ -23,11 +23,11 @@ class DrawerPageObject extends BasePage {
     return HOMEPAGE_Drawer_BUTTON;
   }
 
-  get _accessoryButton() {
+  get _accessoryButton(): ChainablePromiseElement {
     return By(Drawer_TEST_COMPONENT_DISMISS_BUTTON);
   }
 
-  get _callbackText() {
+  get _callbackText(): ChainablePromiseElement {
     return By(Drawer_TEXT);
   }
 }

@@ -43,11 +43,11 @@ class InputPageObject extends BasePage {
     return HOMEPAGE_INPUT_BUTTON;
   }
 
-  get _accessoryButton() {
+  get _accessoryButton(): ChainablePromiseElement {
     return By(INPUT_TEST_COMPONENT_DISMISS_BUTTON);
   }
 
-  get _callbackText() {
+  get _callbackText(): ChainablePromiseElement {
     return By(INPUT_TEXT);
   }
 }

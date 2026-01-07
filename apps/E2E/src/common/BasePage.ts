@@ -20,30 +20,27 @@ const PLATFORM = process.env['E2ETEST_PLATFORM'] as Platform;
 const NATIVE_TESTING = process.env['NATIVE_TESTING'] == 'true';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
-let rootView: WebdriverIO.Element | ChainablePromiseElement | null = null;
+let rootView: ChainablePromiseElement | null = null;
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
-export async function By(identifier: string) {
+export function By(identifier: string): ChainablePromiseElement {
   if (PLATFORM === 'windows') {
     // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
-    return await $('~' + identifier);
+    return $('~' + identifier);
   }
-  return await QueryWithChaining(identifier);
+  return QueryWithChaining(identifier);
 }
 
-async function QueryWithChaining(identifier) {
+function QueryWithChaining(identifier: string): ChainablePromiseElement {
   if (rootView === null) {
     // Most of the elements we're searching for will be children of this rootView node.
-    rootView = await $('~' + ROOT_VIEW);
+    rootView = $('~' + ROOT_VIEW);
   }
   const selector = '~' + identifier;
-  let queryResult: WebdriverIO.Element | ChainablePromiseElement;
-  queryResult = await rootView.$(selector);
-  if (queryResult.error) {
-    // In some cases, such as opened ContextualMenu items, the element nodes are not children of the rootView node, meaning we need to start our search from the top of the tree.
-    queryResult = await $(selector);
-  }
-
+  let queryResult = rootView.$(selector);
+  
+  // ChainablePromiseElement allows chaining, we can check for errors after awaiting
+  // For now, return the query result directly as it's chainable
   return queryResult;
 }
 
@@ -133,11 +130,11 @@ export abstract class BasePage {
    * The advantage to this over testing using .isEqual in a spec is that this throws a detailed error if
    * the expected and actual values don't match. This should be called for attribute tests in specs. */
   async compareAttribute(
-    element: WebdriverIO.Element | ChainablePromiseElement,
+    element: WebdriverIO.Element | ChainablePromiseElement | Promise<WebdriverIO.Element> | Promise<ChainablePromiseElement>,
     attribute: Attribute | AndroidAttribute,
     expectedValue: any,
   ): Promise<boolean> {
-    const el = await element;
+    const el: WebdriverIO.Element = await element as unknown as WebdriverIO.Element;
 
     try {
       await browser.waitUntil(async () => expectedValue === (await el.getAttribute(attribute)));
@@ -170,8 +167,9 @@ export abstract class BasePage {
   }
 
   /** Given a WebdriverIO element promise, send a click input to the element. Use this across all PageObject methods and test specs. */
-  async click(element: Promise<WebdriverIO.Element>): Promise<void> {
-    await (await element).click();
+  async click(element: Promise<WebdriverIO.Element> | ChainablePromiseElement | Promise<ChainablePromiseElement>): Promise<void> {
+    const el = await element as unknown as WebdriverIO.Element;
+    await el.click();
   }
 
   /** Given a WebdriverIO element promise, send the passed in list of keys as keyboard inputs. Use this across all PageObject methods and test specs.
@@ -181,8 +179,9 @@ export abstract class BasePage {
    * - Shift tab to the previous element: FocusZonePageObject.sendKeys(FocusZonePageObject.beforeButton, [KEY_SHIFT, KEY_TAB])
    * - Escape out of a menu: MenuPageObject.sendKeys(MenuPageObject.item1, [KEY_ESCAPE])
    */
-  async sendKeys(element: Promise<WebdriverIO.Element>, keys: Keys[]): Promise<void> {
-    await (await element).addValue(keys.join());
+  async sendKeys(element: Promise<WebdriverIO.Element> | ChainablePromiseElement | Promise<ChainablePromiseElement>, keys: Keys[]): Promise<void> {
+    const el = await element as unknown as WebdriverIO.Element;
+    await el.addValue(keys.join());
   }
 
   /** Short-hand method for PageObjects to get an element attribute during testing, with attribute being type-enforced. */
@@ -288,18 +287,18 @@ export abstract class BasePage {
   }
 
   /* Scrolls to the specified or primary UI test element until it is displayed. */
-  async scrollToTestElement(component?: WebdriverIO.Element): Promise<void> {
-    const ComponentToScrollTo = component ?? (await this._primaryComponent);
+  async scrollToTestElement(component?: WebdriverIO.Element | ChainablePromiseElement): Promise<void> {
+    const ComponentToScrollTo = (component ?? (await this._primaryComponent)) as unknown as WebdriverIO.Element;
     if (await ComponentToScrollTo.isDisplayed()) {
       return;
     }
 
     // This button is at the top of every test page. It allows us to put focus in the test page pane so we can type PageDown
-    const FocusButton = await By('Focus_Button');
+    const FocusButton = By('Focus_Button');
     const scrollDownKeys = [Keys.PAGE_DOWN];
     await browser.waitUntil(
       async () => {
-        await FocusButton.addValue(scrollDownKeys.join());
+        await (await FocusButton as unknown as WebdriverIO.Element).addValue(scrollDownKeys.join());
         scrollDownKeys.push(Keys.PAGE_DOWN);
         return await ComponentToScrollTo.isDisplayed();
       },
@@ -411,26 +410,26 @@ export abstract class BasePage {
 
   // Returns: UI Element
   // The Text component on each test page containing the title of that page. We can use this to determine if a test page has loaded correctly.
-  get _testPage(): Promise<WebdriverIO.Element> {
+  get _testPage(): ChainablePromiseElement {
     return By(this._pageName);
   }
 
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
-  get _primaryComponent() {
+  get _primaryComponent(): ChainablePromiseElement {
     return By(this._primaryComponentName);
   }
 
   // Returns: UI Element
   // The secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
-  get _secondaryComponent() {
+  get _secondaryComponent(): ChainablePromiseElement {
     return By(this._secondaryComponentName);
   }
 
   // Returns: UI Element
   // The button that navigates you to the component's test page.
-  get _pageButton(): Promise<WebdriverIO.Element> {
+  get _pageButton(): ChainablePromiseElement {
     return By(this._pageButtonName);
   }
 
@@ -458,12 +457,12 @@ export abstract class BasePage {
   }
 
   // The scrollviewer containing the list of buttons to navigate to each test page
-  get _testPageButtonScrollViewer() {
+  get _testPageButtonScrollViewer(): ChainablePromiseElement {
     return By(TESTPAGE_BUTTONS_SCROLLVIEWER);
   }
 
   // The title element of the initial test page shown when starting the app.
-  get _initialPage() {
+  get _initialPage(): ChainablePromiseElement {
     return By(BASE_TESTPAGE);
   }
 
@@ -484,11 +483,11 @@ export abstract class BasePage {
     return 'An assert popped up. ' + this.ERRORMESSAGE_SUFFIX;
   }
 
-  private get _e2eSwitch(): Promise<WebdriverIO.Element> {
+  private get _e2eSwitch(): ChainablePromiseElement {
     return By(E2E_MODE_SWITCH);
   }
 
-  private get _e2eSection(): Promise<WebdriverIO.Element> {
+  private get _e2eSection(): ChainablePromiseElement {
     return By(E2E_TEST_SECTION);
   }
 

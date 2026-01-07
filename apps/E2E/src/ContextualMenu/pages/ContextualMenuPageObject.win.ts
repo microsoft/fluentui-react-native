@@ -39,7 +39,7 @@ class ContextualMenuPageObject extends BasePage {
     return CONTEXTUALMENU_TESTPAGE;
   }
 
-  get _contextualMenu() {
+  get _contextualMenu(): ChainablePromiseElement {
     return By(CONTEXTUALMENU_TEST_COMPONENT);
   }
 
@@ -47,7 +47,7 @@ class ContextualMenuPageObject extends BasePage {
     return HOMEPAGE_CONTEXTUALMENU_BUTTON;
   }
 
-  get _contextualMenuItem() {
+  get _contextualMenuItem(): ChainablePromiseElement {
     return By(CONTEXTUALMENUITEM_TEST_COMPONENT);
   }
 }

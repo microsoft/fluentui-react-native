@@ -53,16 +53,16 @@ class FocusZonePageObject extends BasePage {
         return;
       }
       case 'Set2DNavigation':
-        switchElement = await this._twoDimSwitch;
+        switchElement = await this._twoDimSwitch as unknown as WebdriverIO.Element;
         break;
       case 'SetCircularNavigation':
-        switchElement = await this._circleNavSwitch;
+        switchElement = await this._circleNavSwitch as unknown as WebdriverIO.Element;
         break;
       case 'UseDefaultTabbableElement':
-        switchElement = await this._defaultTabbableElementSwitch;
+        switchElement = await this._defaultTabbableElementSwitch as unknown as WebdriverIO.Element;
         break;
       case 'Disable':
-        switchElement = await this._disabledSwitch;
+        switchElement = await this._disabledSwitch as unknown as WebdriverIO.Element;
         break;
       default:
     }
@@ -79,11 +79,11 @@ class FocusZonePageObject extends BasePage {
     });
   }
 
-  async gridButton(button: GridButton) {
+  async gridButton(button: GridButton): Promise<ChainablePromiseElement> {
     return await By(FOCUSZONE_GRID_BUTTON(button));
   }
 
-  private async _getGridFocusZoneMenuOption(direction: FocusZoneDirection) {
+  private async _getGridFocusZoneMenuOption(direction: FocusZoneDirection): Promise<ChainablePromiseElement> {
     return await By(FOCUSZONE_DIRECTION_ID(direction));
   }
 
@@ -102,31 +102,31 @@ class FocusZonePageObject extends BasePage {
     return HOMEPAGE_FOCUSZONE_BUTTON;
   }
 
-  get _directionPicker() {
+  get _directionPicker(): ChainablePromiseElement {
     return By(FOCUSZONE_DIRECTION_PICKER);
   }
 
-  get _twoDimSwitch() {
+  get _twoDimSwitch(): ChainablePromiseElement {
     return By(FOCUSZONE_TWO_DIM_SWITCH);
   }
 
-  get _disabledSwitch() {
+  get _disabledSwitch(): ChainablePromiseElement {
     return By(FOCUSZONE_DISABLED_SWITCH);
   }
 
-  get _circleNavSwitch() {
+  get _circleNavSwitch(): ChainablePromiseElement {
     return By(FOCUSZONE_CIRCLE_NAV_SWITCH);
   }
 
-  get _defaultTabbableElementSwitch() {
+  get _defaultTabbableElementSwitch(): ChainablePromiseElement {
     return By(FOCUSZONE_DEFAULT_TABBABLE_SWITCH);
   }
 
-  get _beforeButton() {
+  get _beforeButton(): ChainablePromiseElement {
     return By(FOCUSZONE_GRID_BEFORE);
   }
 
-  get _afterButton() {
+  get _afterButton(): ChainablePromiseElement {
     return By(FOCUSZONE_GRID_AFTER);
   }
 }

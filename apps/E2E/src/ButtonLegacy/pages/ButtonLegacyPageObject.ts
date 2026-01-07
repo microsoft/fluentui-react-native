@@ -42,7 +42,7 @@ class ButtonLegacyPageObject extends BasePage {
     return BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED;
   }
 
-  get _callbackText() {
+  get _callbackText(): ChainablePromiseElement {
     return By(BUTTON_ON_PRESS_DEPRECATED);
   }
 

@@ -47,7 +47,7 @@ class CalloutPageObject extends BasePage {
     return HOMEPAGE_CALLOUT_BUTTON;
   }
 
-  get _buttonToOpenCallout() {
+  get _buttonToOpenCallout(): ChainablePromiseElement {
     return By(BUTTON_TO_OPEN_CALLOUT);
   }
 }
