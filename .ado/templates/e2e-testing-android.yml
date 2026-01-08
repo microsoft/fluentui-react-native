@@ -39,6 +39,7 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
+      yarn e2eprep:android
       yarn e2etest:android
     workingDirectory: apps/E2E
     displayName: 'run E2E Android tests [test]'

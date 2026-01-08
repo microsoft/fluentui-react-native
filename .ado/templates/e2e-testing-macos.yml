@@ -12,6 +12,7 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
+      yarn e2eprep:macos
       yarn e2etest:macos
     workingDirectory: apps/E2E
     displayName: 'run E2E macos tests [test]'

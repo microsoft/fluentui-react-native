@@ -116,3 +116,6 @@ apps/*/.vscode/.react/
 
 # Ccache
 .ccache
+
+# Appium
+**/.appium

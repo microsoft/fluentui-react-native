@@ -16,11 +16,16 @@
   "scripts": {
     "build": "fluentui-scripts build",
     "lint": "fluentui-scripts eslint",
-    "e2etest:android": "wdio run wdio.conf.android.js",
-    "e2etest:ios": "wdio run wdio.conf.ios.js",
-    "e2etest:macos": "wdio run wdio.conf.macos.js",
-    "e2etest:win32": "wdio run wdio.conf.win32.js",
-    "e2etest:windows": "rimraf errorShots reports && wdio run wdio.conf.windows.js"
+    "e2eprep:android": "APPIUM_HOME=.appium yarn exec appium driver install uiautomator2",
+    "e2eprep:ios": "APPIUM_HOME=.appium yarn exec appium driver install xcuitest",
+    "e2eprep:macos": "APPIUM_HOME=.appium yarn exec appium driver install mac2",
+    "e2eprep:win32": "APPIUM_HOME=.appium yarn exec appium driver install windows",
+    "e2eprep:windows": "APPIUM_HOME=.appium yarn exec appium driver install windows",
+    "e2etest:android": "cross-env APPIUM_HOME=.appium wdio run wdio.conf.android.js",
+    "e2etest:ios": "cross-env APPIUM_HOME=.appium wdio run wdio.conf.ios.js",
+    "e2etest:macos": "cross-env APPIUM_HOME=.appium wdio run wdio.conf.macos.js",
+    "e2etest:win32": "cross-env APPIUM_HOME=.appium wdio run wdio.conf.win32.js",
+    "e2etest:windows": "cross-env APPIUM_HOME=.appium rimraf errorShots reports && wdio run wdio.conf.windows.js"
   },
   "repository": {
     "type": "git",
@@ -64,6 +69,7 @@
     "appium-uiautomator2-driver": "catalog:",
     "appium-windows-driver": "catalog:",
     "appium-xcuitest-driver": "catalog:",
+    "cross-env": "^7.0.3",
     "expect-webdriverio": "catalog:",
     "metro-config": "^0.80.3",
     "rimraf": "^5.0.1",

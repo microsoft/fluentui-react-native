@@ -36,6 +36,7 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
+      yarn e2eprep:windows
       yarn e2etest:windows
     workingDirectory: apps\E2E
     displayName: 'run E2E UWP tests [test]'
