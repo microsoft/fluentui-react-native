@@ -37,8 +37,8 @@ function QueryWithChaining(identifier: string): ChainablePromiseElement {
     rootView = $('~' + ROOT_VIEW);
   }
   const selector = '~' + identifier;
-  let queryResult = rootView.$(selector);
-  
+  const queryResult = rootView.$(selector);
+
   // ChainablePromiseElement allows chaining, we can check for errors after awaiting
   // For now, return the query result directly as it's chainable
   return queryResult;
@@ -134,7 +134,7 @@ export abstract class BasePage {
     attribute: Attribute | AndroidAttribute,
     expectedValue: any,
   ): Promise<boolean> {
-    const el: WebdriverIO.Element = await element as unknown as WebdriverIO.Element;
+    const el: WebdriverIO.Element = (await element) as unknown as WebdriverIO.Element;
 
     try {
       await browser.waitUntil(async () => expectedValue === (await el.getAttribute(attribute)));
@@ -168,7 +168,7 @@ export abstract class BasePage {
 
   /** Given a WebdriverIO element promise, send a click input to the element. Use this across all PageObject methods and test specs. */
   async click(element: Promise<WebdriverIO.Element> | ChainablePromiseElement | Promise<ChainablePromiseElement>): Promise<void> {
-    const el = await element as unknown as WebdriverIO.Element;
+    const el = (await element) as unknown as WebdriverIO.Element;
     await el.click();
   }
 
@@ -179,8 +179,11 @@ export abstract class BasePage {
    * - Shift tab to the previous element: FocusZonePageObject.sendKeys(FocusZonePageObject.beforeButton, [KEY_SHIFT, KEY_TAB])
    * - Escape out of a menu: MenuPageObject.sendKeys(MenuPageObject.item1, [KEY_ESCAPE])
    */
-  async sendKeys(element: Promise<WebdriverIO.Element> | ChainablePromiseElement | Promise<ChainablePromiseElement>, keys: Keys[]): Promise<void> {
-    const el = await element as unknown as WebdriverIO.Element;
+  async sendKeys(
+    element: Promise<WebdriverIO.Element> | ChainablePromiseElement | Promise<ChainablePromiseElement>,
+    keys: Keys[],
+  ): Promise<void> {
+    const el = (await element) as unknown as WebdriverIO.Element;
     await el.addValue(keys.join());
   }
 
@@ -298,7 +301,7 @@ export abstract class BasePage {
     const scrollDownKeys = [Keys.PAGE_DOWN];
     await browser.waitUntil(
       async () => {
-        await (await FocusButton as unknown as WebdriverIO.Element).addValue(scrollDownKeys.join());
+        await ((await FocusButton) as unknown as WebdriverIO.Element).addValue(scrollDownKeys.join());
         scrollDownKeys.push(Keys.PAGE_DOWN);
         return await ComponentToScrollTo.isDisplayed();
       },
