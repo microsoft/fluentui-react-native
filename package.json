@@ -79,35 +79,7 @@
     "node": ">=22.12"
   },
   "rnx-kit": {
-    "kitType": "library",
-    "alignDeps": {
-      "presets": [
-        "microsoft/react-native"
-      ],
-      "lint": {
-        "lockfile": {
-          "noDuplicates": {
-            "packages": [
-              "#react-native",
-              "@babel/core"
-            ]
-          }
-        }
-      },
-      "requirements": {
-        "development": [
-          "react-native@0.74"
-        ],
-        "production": [
-          "react-native@0.73 || 0.74"
-        ]
-      },
-      "capabilities": [
-        "babel-preset-react-native",
-        "core",
-        "metro-react-native-babel-transformer"
-      ]
-    }
+    "kitType": "library"
   },
   "packageManager": "yarn@4.11.0"
 }
