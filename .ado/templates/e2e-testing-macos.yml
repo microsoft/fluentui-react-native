@@ -13,6 +13,11 @@ steps:
 
   - script: |
       yarn e2eprep:macos
+    workingDirectory: apps/E2E
+    displayName: 'prepare E2E macos tests'
+    condition: succeeded()
+
+  - script: |
       yarn e2etest:macos
     workingDirectory: apps/E2E
     displayName: 'run E2E macos tests [test]'

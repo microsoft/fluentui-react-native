@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "workspace:*",
+    "@office-iss/react-native-win32": "^0.74.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "react-native-svg": ">=15.4.0 <15.13.0"
@@ -43,7 +44,6 @@
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@office-iss/react-native-win32": "^0.74.0",
     "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",

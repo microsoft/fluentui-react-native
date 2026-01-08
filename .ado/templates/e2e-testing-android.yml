@@ -40,6 +40,11 @@ steps:
 
   - script: |
       yarn e2eprep:android
+    workingDirectory: apps/E2E
+    displayName: 'prepare E2E Android tests'
+    condition: succeeded()
+
+  - script: |
       yarn e2etest:android
     workingDirectory: apps/E2E
     displayName: 'run E2E Android tests [test]'

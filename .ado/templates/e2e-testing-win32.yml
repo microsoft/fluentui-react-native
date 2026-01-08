@@ -27,6 +27,11 @@ steps:
 
   - script: |
       yarn e2eprep:win32
+    workingDirectory: apps/E2E
+    displayName: 'prepare E2E Win32 tests'
+    condition: succeeded()
+
+  - script: |
       yarn e2etest:win32
     workingDirectory: apps/E2E
     displayName: 'run E2E Win32 tests [test]'

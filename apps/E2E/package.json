@@ -37,6 +37,8 @@
     "dist/*"
   ],
   "dependencies": {
+    "@office-iss/react-native-win32": "^0.74.0",
+    "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030",
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "react-native-macos": "^0.74.0",
