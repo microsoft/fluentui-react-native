@@ -113,6 +113,7 @@
     "@react-native-community/cli": "^13.6.4",
     "@react-native-community/cli-platform-android": "^13.6.4",
     "@react-native-community/cli-platform-ios": "^13.6.4",
+    "@react-native-windows/cli": "^0.74.0",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
@@ -130,7 +131,7 @@
     "flow-bin": "^0.113.0",
     "metro-config": "^0.80.3",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^4.4.9",
+    "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
     "webdriverio": "catalog:"
   },
