@@ -2,7 +2,9 @@
   "extends": "@fluentui-react-native/scripts/configs/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "lib-commonjs",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "outDir": "lib",
     "paths": {
       "*": ["*", "*.win32", "./*"],
       "src/*": ["./src/*", "src"]

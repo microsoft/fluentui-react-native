@@ -3,18 +3,18 @@
   "version": "1.43.11",
   "description": "Package containing E2E testing specs",
   "license": "MIT",
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
   "typings": "lib/index.d.ts",
   "exports": {
     ".": {
-      "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.js"
     }
   },
   "scripts": {
-    "build": "fluentui-scripts build",
+    "build": "fluentui-scripts hybrid-build",
     "lint": "fluentui-scripts eslint",
     "e2eprep:android": "cross-env APPIUM_HOME=.appium yarn exec appium driver install uiautomator2",
     "e2eprep:ios": "cross-env APPIUM_HOME=.appium yarn exec appium driver install xcuitest",

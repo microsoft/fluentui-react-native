@@ -5,20 +5,13 @@
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
-  "main": "lib-commonjs/index.js",
+  "main": "lib/index.js",
   "module": "lib/index.js",
   "react-native": "src/index.ts",
   "typings": "lib/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
-    }
-  },
   "scripts": {
     "android": "rnx-cli run --platform android",
-    "build": "fluentui-scripts build",
+    "build": "fluentui-scripts hybrid-build",
     "bundle": "rnx-cli bundle --dev false",
     "bundle:android": "rnx-cli bundle --dev false --platform android",
     "bundle:ios": "rnx-cli bundle --dev false --platform ios",
@@ -133,6 +126,7 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
+    "typescript": "^5.8.0",
     "webdriverio": "catalog:"
   },
   "jest": {
