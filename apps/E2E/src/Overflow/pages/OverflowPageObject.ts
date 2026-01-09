@@ -30,7 +30,7 @@ class OverflowPageObject extends BasePage {
     await this.waitForCondition(async () => (await updatedLabel.getText()) === UPDATED_VALUE_TRUE);
   }
 
-  getOverflowItem(selector: OverflowItem): ChainablePromiseElement {
+  async getOverflowItem(selector: OverflowItem): Promise<WebdriverIO.Element> {
     switch (selector) {
       case 'First':
         return By(FIRST_OVERFLOW_ITEM);
@@ -42,8 +42,8 @@ class OverflowPageObject extends BasePage {
   }
 
   async itemIsVisible(selector: OverflowItem, errorMsg?: string) {
-    const item = this.getOverflowItem(selector);
-    return this.waitForCondition(async () => await (await item).isDisplayed(), errorMsg);
+    const item = await this.getOverflowItem(selector);
+    return this.waitForCondition(async () => await item.isDisplayed(), errorMsg);
   }
 
   async menuIsDisplayed(errorMsg?: string) {
@@ -78,15 +78,15 @@ class OverflowPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _overflowMenu(): ChainablePromiseElement {
+  get _overflowMenu() {
     return By(OVERFLOW_MENU);
   }
 
-  get _readyLabel(): ChainablePromiseElement {
+  get _readyLabel() {
     return By(READY_LABEL);
   }
 
-  get _updatedLabel(): ChainablePromiseElement {
+  get _updatedLabel() {
     return By(UPDATED_LABEL);
   }
 

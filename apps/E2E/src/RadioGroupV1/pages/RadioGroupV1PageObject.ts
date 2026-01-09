@@ -50,7 +50,7 @@ class RadioGroupV1Page extends BasePage {
   }
 
   /* Returns the correct WebDriverIO element from the Radio Selector */
-  getRadio(radioSelector: Radio): ChainablePromiseElement {
+  getRadio(radioSelector: Radio): Promise<WebdriverIO.Element> {
     switch (radioSelector) {
       case 'First':
         return By(FIRST_RADIO);

@@ -23,11 +23,11 @@ class MenuButtonLegacyPageObject extends BasePage {
     return MENU_BUTTON_TESTPAGE;
   }
 
-  get _firstMenuButton(): ChainablePromiseElement {
+  get _firstMenuButton() {
     return By(MENU_BUTTON_TEST_COMPONENT);
   }
 
-  get _secondMenuButton(): ChainablePromiseElement {
+  get _secondMenuButton() {
     return By(MENU_BUTTON_NO_A11Y_LABEL_COMPONENT);
   }
 
@@ -35,7 +35,7 @@ class MenuButtonLegacyPageObject extends BasePage {
     return HOMEPAGE_MENUBUTTON_BUTTON;
   }
 
-  get _menuItem(): ChainablePromiseElement {
+  get _menuItem() {
     return By(MENU_ITEM_1_COMPONENT);
   }
 }

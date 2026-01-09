@@ -39,7 +39,7 @@ class RadioGroupLegacyPage extends BasePage {
   }
 
   /* Returns the correct WebDriverIO element from the RadioButton Selector */
-  getRadioButton(selector: RadioButton): ChainablePromiseElement {
+  getRadioButton(selector: RadioButton): Promise<WebdriverIO.Element> {
     switch (selector) {
       case 'First':
         return By(FIRST_RADIO_BUTTON);
@@ -59,11 +59,11 @@ class RadioGroupLegacyPage extends BasePage {
     return RADIOGROUP_TESTPAGE;
   }
 
-  get _firstRadioGroup(): ChainablePromiseElement {
+  get _firstRadioGroup() {
     return By(RADIOGROUP_TEST_COMPONENT);
   }
 
-  get _secondRadioGroup(): ChainablePromiseElement {
+  get _secondRadioGroup() {
     return By(RADIOGROUP_NO_A11Y_LABEL_COMPONENT);
   }
 

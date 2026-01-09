@@ -13,10 +13,9 @@ class CalloutPageObject extends BasePage {
   async openCalloutAndWaitForLoad(): Promise<void> {
     if (!(await this.isCalloutOpen())) {
       const calloutButton = await this._buttonToOpenCallout;
-      await browser.waitUntil(async () => await calloutButton.isEnabled(),
-      {
+      await browser.waitUntil(async () => await calloutButton.isEnabled(), {
         timeout: 15000,
-        timeoutMsg: 'Button to open the Callout is not enabled.'
+        timeoutMsg: 'Button to open the Callout is not enabled.',
       });
 
       await calloutButton.click();
@@ -47,7 +46,7 @@ class CalloutPageObject extends BasePage {
     return HOMEPAGE_CALLOUT_BUTTON;
   }
 
-  get _buttonToOpenCallout(): ChainablePromiseElement {
+  get _buttonToOpenCallout() {
     return By(BUTTON_TO_OPEN_CALLOUT);
   }
 }

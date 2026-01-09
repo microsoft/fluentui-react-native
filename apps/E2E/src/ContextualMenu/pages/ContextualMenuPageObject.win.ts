@@ -13,7 +13,11 @@ class ContextualMenuPageObject extends BasePage {
   /******************************************************************/
   /* Waits for the MenuItems to be displayed and returns true / false whether that occurs. */
   async waitForContextualMenuItemsToDisplay(timeout?: number): Promise<boolean | void> {
-    return await this.waitForCondition(async () => await this.contextualMenuItemDisplayed(), 'The Contextual Menu Items did not display.', timeout);
+    return await this.waitForCondition(
+      async () => await this.contextualMenuItemDisplayed(),
+      'The Contextual Menu Items did not display.',
+      timeout,
+    );
   }
 
   /* Whether the contextual menu item is displayed or not. It should be displayed after clicking on the MenuButton */
@@ -39,7 +43,7 @@ class ContextualMenuPageObject extends BasePage {
     return CONTEXTUALMENU_TESTPAGE;
   }
 
-  get _contextualMenu(): ChainablePromiseElement {
+  get _contextualMenu() {
     return By(CONTEXTUALMENU_TEST_COMPONENT);
   }
 
@@ -47,7 +51,7 @@ class ContextualMenuPageObject extends BasePage {
     return HOMEPAGE_CONTEXTUALMENU_BUTTON;
   }
 
-  get _contextualMenuItem(): ChainablePromiseElement {
+  get _contextualMenuItem() {
     return By(CONTEXTUALMENUITEM_TEST_COMPONENT);
   }
 }

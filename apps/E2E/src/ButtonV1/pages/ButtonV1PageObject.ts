@@ -45,7 +45,7 @@ class ButtonV1PageObject extends BasePage {
     return HOMEPAGE_BUTTON_BUTTON;
   }
 
-  get _callbackText(): ChainablePromiseElement {
+  get _callbackText() {
     return By(BUTTON_ON_PRESS);
   }
 }

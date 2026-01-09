@@ -86,16 +86,16 @@ class MenuPageObject extends BasePage {
     return (await (await this._callbackLabel).getText()) === `onClick fired ${timesFired} times`;
   }
 
-  getMenuItem(item: MenuItem): ChainablePromiseElement {
+  async getMenuItem(item: MenuItem): Promise<WebdriverIO.Element> {
     switch (item) {
       case 'First':
-        return By(MENUITEM_TEST_COMPONENT);
+        return await By(MENUITEM_TEST_COMPONENT);
       case 'Second':
-        return By(MENUITEM_DISABLED_COMPONENT);
+        return await By(MENUITEM_DISABLED_COMPONENT);
       case 'Third':
-        return By(MENUITEM_NO_A11Y_LABEL_COMPONENT);
+        return await By(MENUITEM_NO_A11Y_LABEL_COMPONENT);
       case 'Fourth':
-        return By(MENUITEM_FOURTH_COMPONENT);
+        return await By(MENUITEM_FOURTH_COMPONENT);
     }
   }
 
@@ -113,7 +113,7 @@ class MenuPageObject extends BasePage {
     return MENU_TESTPAGE;
   }
 
-  get _menuTrigger(): ChainablePromiseElement {
+  get _menuTrigger() {
     return By(MENUTRIGGER_TEST_COMPONENT);
   }
 
@@ -121,11 +121,11 @@ class MenuPageObject extends BasePage {
     return HOMEPAGE_MENU_BUTTON;
   }
 
-  get _callbackResetButton(): ChainablePromiseElement {
+  get _callbackResetButton() {
     return By(MENU_CALLBACK_RESET_BUTTON);
   }
 
-  get _callbackLabel(): ChainablePromiseElement {
+  get _callbackLabel() {
     return By(MENUITEM_CALLBACK_LABEL);
   }
 }

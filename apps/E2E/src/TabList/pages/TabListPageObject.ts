@@ -40,7 +40,7 @@ class TabListPageObject extends BasePage {
     await this.waitForCondition(async () => (await callbackText.getText()) === tabKeyPressed, errorMsg, timeout);
   }
 
-  getTab(selector: Tab): ChainablePromiseElement {
+  getTab(selector: Tab): Promise<WebdriverIO.Element> {
     switch (selector) {
       case 'First':
         return By(FIRST_TAB);

@@ -68,7 +68,7 @@ class CheckboxV1PageObject extends BasePage {
     return CHECKBOXV1_NO_A11Y_LABEL_COMPONENT;
   }
 
-  get _callbackText(): ChainablePromiseElement {
+  get _callbackText() {
     return By(CHECKBOXV1_ON_PRESS);
   }
 

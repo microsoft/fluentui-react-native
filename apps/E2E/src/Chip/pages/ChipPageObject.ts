@@ -25,7 +25,7 @@ class ChipPageObject extends BasePage {
     return CHIP_TEST_COMPONENT;
   }
 
-  get _callbackText(): ChainablePromiseElement {
+  get _callbackText() {
     return By(CHIP_TEXT);
   }
 }

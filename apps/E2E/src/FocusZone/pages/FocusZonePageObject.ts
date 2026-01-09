@@ -37,7 +37,7 @@ class FocusZonePageObject extends BasePage {
         const DirectionDropdown = await this._directionPicker;
 
         // If the dropdown is already at the default value, break
-        if((await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1) {
+        if ((await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1) {
           return;
         }
 
@@ -45,24 +45,23 @@ class FocusZonePageObject extends BasePage {
         await browser.waitUntil(async () => await (await this._getGridFocusZoneMenuOption(arg)).isDisplayed());
         await (await this._getGridFocusZoneMenuOption(arg)).click();
 
-        await browser.waitUntil(async () => (await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1,
-        {
+        await browser.waitUntil(async () => (await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1, {
           timeout: 15000,
-          timeoutMsg: 'Could not reset the directional dropdown back to it\'s original value'
+          timeoutMsg: "Could not reset the directional dropdown back to it's original value",
         });
         return;
       }
       case 'Set2DNavigation':
-        switchElement = await this._twoDimSwitch as unknown as WebdriverIO.Element;
+        switchElement = await this._twoDimSwitch;
         break;
       case 'SetCircularNavigation':
-        switchElement = await this._circleNavSwitch as unknown as WebdriverIO.Element;
+        switchElement = await this._circleNavSwitch;
         break;
       case 'UseDefaultTabbableElement':
-        switchElement = await this._defaultTabbableElementSwitch as unknown as WebdriverIO.Element;
+        switchElement = await this._defaultTabbableElementSwitch;
         break;
       case 'Disable':
-        switchElement = await this._disabledSwitch as unknown as WebdriverIO.Element;
+        switchElement = await this._disabledSwitch;
         break;
       default:
     }
@@ -72,19 +71,18 @@ class FocusZonePageObject extends BasePage {
     }
 
     // Wait until the switch correctly changes states
-    await browser.waitUntil(async () => await switchElement.isSelected() == arg,
-    {
+    await browser.waitUntil(async () => (await switchElement.isSelected()) == arg, {
       timeout: 15000,
-      timeoutMsg: `Attempted to switch the ${option} to ${arg}, but it remained at ${await switchElement.isSelected()}`
+      timeoutMsg: `Attempted to switch the ${option} to ${arg}, but it remained at ${await switchElement.isSelected()}`,
     });
   }
 
-  async gridButton(button: GridButton): Promise<ChainablePromiseElement> {
-    return await By(FOCUSZONE_GRID_BUTTON(button));
+  async gridButton(button: GridButton) {
+    return By(FOCUSZONE_GRID_BUTTON(button));
   }
 
-  private async _getGridFocusZoneMenuOption(direction: FocusZoneDirection): Promise<ChainablePromiseElement> {
-    return await By(FOCUSZONE_DIRECTION_ID(direction));
+  private async _getGridFocusZoneMenuOption(direction: FocusZoneDirection) {
+    return By(FOCUSZONE_DIRECTION_ID(direction));
   }
 
   /*****************************************/
@@ -102,31 +100,31 @@ class FocusZonePageObject extends BasePage {
     return HOMEPAGE_FOCUSZONE_BUTTON;
   }
 
-  get _directionPicker(): ChainablePromiseElement {
+  get _directionPicker() {
     return By(FOCUSZONE_DIRECTION_PICKER);
   }
 
-  get _twoDimSwitch(): ChainablePromiseElement {
+  get _twoDimSwitch() {
     return By(FOCUSZONE_TWO_DIM_SWITCH);
   }
 
-  get _disabledSwitch(): ChainablePromiseElement {
+  get _disabledSwitch() {
     return By(FOCUSZONE_DISABLED_SWITCH);
   }
 
-  get _circleNavSwitch(): ChainablePromiseElement {
+  get _circleNavSwitch() {
     return By(FOCUSZONE_CIRCLE_NAV_SWITCH);
   }
 
-  get _defaultTabbableElementSwitch(): ChainablePromiseElement {
+  get _defaultTabbableElementSwitch() {
     return By(FOCUSZONE_DEFAULT_TABBABLE_SWITCH);
   }
 
-  get _beforeButton(): ChainablePromiseElement {
+  get _beforeButton() {
     return By(FOCUSZONE_GRID_BEFORE);
   }
 
-  get _afterButton(): ChainablePromiseElement {
+  get _afterButton() {
     return By(FOCUSZONE_GRID_AFTER);
   }
 }
