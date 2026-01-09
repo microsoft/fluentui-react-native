@@ -76,6 +76,7 @@
     "metro-config": "^0.80.3",
     "rimraf": "^5.0.1",
     "ts-node": "^10.7.0",
+    "typescript": "^5.8.0",
     "webdriverio": "catalog:"
   },
   "installConfig": {

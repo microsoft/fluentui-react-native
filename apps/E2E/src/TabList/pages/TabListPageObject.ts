@@ -22,7 +22,7 @@ class TabListPageObject extends BasePage {
 
   // Waits for given tab's selection state to be true. Throws an error if the selection state is still false at the end of the timeout.
   async waitForTabSelected(selector: Tab, errorMsg: string, timeout?: number): Promise<void> {
-    await this.waitForCondition(async () => await (await this.getTab(selector)).isSelected(), errorMsg, timeout);
+    await this.waitForCondition(async () => await this.getTab(selector).isSelected(), errorMsg, timeout);
   }
 
   // Waits for given tab to be focused. Throws an error if the tab is not focused at the end of the timeout.
@@ -40,7 +40,7 @@ class TabListPageObject extends BasePage {
     await this.waitForCondition(async () => (await callbackText.getText()) === tabKeyPressed, errorMsg, timeout);
   }
 
-  getTab(selector: Tab): Promise<WebdriverIO.Element> {
+  getTab(selector: Tab) {
     switch (selector) {
       case 'First':
         return By(FIRST_TAB);

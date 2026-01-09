@@ -30,7 +30,7 @@ class OverflowPageObject extends BasePage {
     await this.waitForCondition(async () => (await updatedLabel.getText()) === UPDATED_VALUE_TRUE);
   }
 
-  async getOverflowItem(selector: OverflowItem): Promise<WebdriverIO.Element> {
+  getOverflowItem(selector: OverflowItem) {
     switch (selector) {
       case 'First':
         return By(FIRST_OVERFLOW_ITEM);
@@ -63,13 +63,13 @@ class OverflowPageObject extends BasePage {
         selector = RADIO_375;
         break;
     }
-    const radio = await By(selector);
+    const radio = By(selector);
     await radio.click();
     await this.waitForOverflowToBeUpdated();
   }
 
   async menuHasNHidden(n: number) {
-    const menu = await this._overflowMenu;
+    const menu = this._overflowMenu;
     const text = await menu.getText();
     console.log('TEXT:', text);
     return text.includes(n.toString());

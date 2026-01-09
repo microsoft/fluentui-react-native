@@ -31,10 +31,10 @@ class FocusZonePageObject extends BasePage {
   async configureGridFocusZone(option: 'SetDirection', direction: FocusZoneDirection);
   async configureGridFocusZone(option: GridFocusZoneOption, value: boolean);
   async configureGridFocusZone(option: GridFocusZoneOption, arg: any): Promise<void> {
-    let switchElement: WebdriverIO.Element;
+    let switchElement: ChainablePromiseElement;
     switch (option) {
       case 'SetDirection': {
-        const DirectionDropdown = await this._directionPicker;
+        const DirectionDropdown = this._directionPicker;
 
         // If the dropdown is already at the default value, break
         if ((await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1) {
@@ -42,8 +42,8 @@ class FocusZonePageObject extends BasePage {
         }
 
         await DirectionDropdown.click();
-        await browser.waitUntil(async () => await (await this._getGridFocusZoneMenuOption(arg)).isDisplayed());
-        await (await this._getGridFocusZoneMenuOption(arg)).click();
+        await browser.waitUntil(async () => await this._getGridFocusZoneMenuOption(arg).isDisplayed());
+        await this._getGridFocusZoneMenuOption(arg).click();
 
         await browser.waitUntil(async () => (await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1, {
           timeout: 15000,
@@ -52,16 +52,16 @@ class FocusZonePageObject extends BasePage {
         return;
       }
       case 'Set2DNavigation':
-        switchElement = await this._twoDimSwitch;
+        switchElement = this._twoDimSwitch;
         break;
       case 'SetCircularNavigation':
-        switchElement = await this._circleNavSwitch;
+        switchElement = this._circleNavSwitch;
         break;
       case 'UseDefaultTabbableElement':
-        switchElement = await this._defaultTabbableElementSwitch;
+        switchElement = this._defaultTabbableElementSwitch;
         break;
       case 'Disable':
-        switchElement = await this._disabledSwitch;
+        switchElement = this._disabledSwitch;
         break;
       default:
     }
@@ -77,11 +77,11 @@ class FocusZonePageObject extends BasePage {
     });
   }
 
-  async gridButton(button: GridButton) {
+  gridButton(button: GridButton) {
     return By(FOCUSZONE_GRID_BUTTON(button));
   }
 
-  private async _getGridFocusZoneMenuOption(direction: FocusZoneDirection) {
+  private _getGridFocusZoneMenuOption(direction: FocusZoneDirection) {
     return By(FOCUSZONE_DIRECTION_ID(direction));
   }
 

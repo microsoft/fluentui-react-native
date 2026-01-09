@@ -39,7 +39,7 @@ class RadioGroupLegacyPage extends BasePage {
   }
 
   /* Returns the correct WebDriverIO element from the RadioButton Selector */
-  getRadioButton(selector: RadioButton): Promise<WebdriverIO.Element> {
+  getRadioButton(selector: RadioButton) {
     switch (selector) {
       case 'First':
         return By(FIRST_RADIO_BUTTON);

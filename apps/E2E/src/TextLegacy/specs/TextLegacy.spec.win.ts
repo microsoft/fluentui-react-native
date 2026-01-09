@@ -22,7 +22,7 @@ describe('Text Legacy Testing Initialization', () => {
 
 describe('Text Legacy Accessibility Testing', () => {
   beforeEach(async () => {
-    await TextLegacyPageObject.scrollToTestElement(await TextLegacyPageObject._deprecatedFirstComponent);
+    await TextLegacyPageObject.scrollToTestElement(TextLegacyPageObject._deprecatedFirstComponent);
   });
 
   it('Validate "accessibilityRole" defaults to "ControlType.Text".', async () => {
