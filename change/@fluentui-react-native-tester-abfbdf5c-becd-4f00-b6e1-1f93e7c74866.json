@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "get e2e tests running",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}

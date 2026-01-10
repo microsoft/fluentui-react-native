@@ -8,6 +8,20 @@
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git"
   },
+  "resolutions": {
+    "@appium/support/glob": "^10.5.0",
+    "@types/react": "^18.2.0",
+    "@warren-ms/react-native-icons/react-native-svg": "^15.4.0",
+    "axios": "^1.12.0",
+    "form-data": "^4.0.4",
+    "on-headers": "^1.1.0",
+    "react-native-macos": "patch:react-native-macos@npm%3A0.74.30#~/.yarn/patches/react-native-macos-npm-0.74.30-e4edf98920.patch",
+    "semver": "^7.5.2",
+    "tar-fs": "^3.1.1",
+    "ws": "^8.17.1",
+    "yaml": "^2.2.2",
+    "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
+  },
   "scripts": {
     "build": "lage build",
     "buildci": "lage buildci",
@@ -56,10 +70,6 @@
     "react-native": "^0.74.0",
     "typescript": "^4.9.4"
   },
-  "peerDependencies": {
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0"
-  },
   "workspaces": [
     "apps/*",
     "packages/**",
@@ -68,49 +78,8 @@
   "engines": {
     "node": ">=22.12"
   },
-  "resolutions": {
-    "@appium/support/glob": "^10.5.0",
-    "@types/react": "^18.2.0",
-    "@warren-ms/react-native-icons/react-native-svg": "^15.4.0",
-    "axios": "^1.12.0",
-    "form-data": "^4.0.4",
-    "on-headers": "^1.1.0",
-    "react-native-macos": "patch:react-native-macos@npm%3A0.74.30#~/.yarn/patches/react-native-macos-npm-0.74.30-e4edf98920.patch",
-    "semver": "^7.5.2",
-    "tar-fs": "^3.1.1",
-    "ws": "^8.17.1",
-    "yaml": "^2.2.2"
-  },
   "rnx-kit": {
-    "kitType": "library",
-    "alignDeps": {
-      "presets": [
-        "microsoft/react-native"
-      ],
-      "lint": {
-        "lockfile": {
-          "noDuplicates": {
-            "packages": [
-              "#react-native",
-              "@babel/core"
-            ]
-          }
-        }
-      },
-      "requirements": {
-        "development": [
-          "react-native@0.74"
-        ],
-        "production": [
-          "react-native@0.73 || 0.74"
-        ]
-      },
-      "capabilities": [
-        "babel-preset-react-native",
-        "core",
-        "metro-react-native-babel-transformer"
-      ]
-    }
+    "kitType": "library"
   },
   "packageManager": "yarn@4.11.0"
 }

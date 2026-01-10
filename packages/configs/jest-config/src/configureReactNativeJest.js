@@ -25,7 +25,7 @@ export function configureReactNativeJest(platform, customConfig) {
     // In pnpm mode, we need to ensure that the transformIgnorePatterns
     // are set correctly to avoid issues with hoisted packages.
     config.transformIgnorePatterns = [
-      '/node_modules/(?!((jest-)?react-native(-macos)?|@react-native(-community)?|@office-iss-react-native-win32|@?react-native-windows))',
+      '/node_modules/.store/(?!((jest-)?react-native(-macos)?|@react-native(-community)?|@office-iss-react-native-win32|@?react-native-windows))',
     ];
   }
   return config;

@@ -1,12 +1,19 @@
-# (pnpm-mode) ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(__dir__, '../node_modules')
+# Switching between node-modules mode and pnpm mode requires changing how relative paths are handled.
 
-# (pnpm-mode) require_relative '../node_modules/react-native-test-app/test_app'
-require_relative '../../../node_modules/react-native-test-app/test_app'
+# (pnpm mode) allow modules to resolve correctly in upstream podfiles
+ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(__dir__, '../node_modules')
+
+# (pnpm mode)
+require_relative '../node_modules/react-native-test-app/test_app'
+# (node-modules mode)
+# require_relative '../../../node_modules/react-native-test-app/test_app'
 
 workspace 'FluentTester.xcworkspace'
 
-# (pnpm-mode) react_native_path = "#{__dir__}/../node_modules/react-native"
-react_native_path = "#{__dir__}/../../../node_modules/react-native"
+# (pnpm mode)
+react_native_path = "#{__dir__}/../node_modules/react-native"
+# (node-modules mode)
+# react_native_path = "#{__dir__}/../../../node_modules/react-native"
 
 use_test_app! do |target|
   target.app do

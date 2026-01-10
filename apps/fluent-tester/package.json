@@ -5,20 +5,13 @@
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
-  "main": "lib-commonjs/index.js",
+  "main": "lib/index.js",
   "module": "lib/index.js",
   "react-native": "src/index.ts",
   "typings": "lib/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
-    }
-  },
   "scripts": {
     "android": "rnx-cli run --platform android",
-    "build": "fluentui-scripts build",
+    "build": "fluentui-scripts hybrid-build",
     "bundle": "rnx-cli bundle --dev false",
     "bundle:android": "rnx-cli bundle --dev false --platform android",
     "bundle:ios": "rnx-cli bundle --dev false --platform ios",
@@ -113,6 +106,7 @@
     "@react-native-community/cli": "^13.6.4",
     "@react-native-community/cli-platform-android": "^13.6.4",
     "@react-native-community/cli-platform-ios": "^13.6.4",
+    "@react-native-windows/cli": "^0.74.0",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
@@ -121,15 +115,19 @@
     "@rnx-kit/metro-resolver-symlinks": "^0.2.5",
     "@types/jasmine": "5.1.4",
     "@types/react-test-renderer": "^18.2.0",
-    "@wdio/cli": "^8.40.0",
-    "@wdio/globals": "^8.40.0",
-    "@wdio/jasmine-framework": "^8.40.0",
+    "@wdio/cli": "catalog:",
+    "@wdio/globals": "catalog:",
+    "@wdio/jasmine-framework": "catalog:",
+    "@wdio/logger": "catalog:",
+    "@wdio/runner": "catalog:",
+    "expect-webdriverio": "catalog:",
     "flow-bin": "^0.113.0",
     "metro-config": "^0.80.3",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
-    "webdriverio": "^8.40.0"
+    "typescript": "^5.8.0",
+    "webdriverio": "catalog:"
   },
   "jest": {
     "preset": "react-native"

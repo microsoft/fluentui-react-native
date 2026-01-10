@@ -30,7 +30,7 @@ class CheckboxLegacyPageObject extends BasePage {
 
   /* Toggles the checkbox to the checked if newState == true or unchecked if newState == false. */
   async toggleCheckbox(newState: boolean) {
-    if (await this.isCheckboxChecked() !== newState) {
+    if ((await this.isCheckboxChecked()) !== newState) {
       await this.click(this._primaryComponent);
       await this.waitForCheckboxToggle(
         newState,

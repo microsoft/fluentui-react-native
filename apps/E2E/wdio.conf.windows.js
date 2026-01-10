@@ -57,6 +57,7 @@ exports.config = {
     [
       'appium',
       {
+        command: 'appium',
         logPath: './reports/',
       },
     ],

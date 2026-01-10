@@ -13,22 +13,26 @@ class ContextualMenuPageObject extends BasePage {
   /******************************************************************/
   /* Waits for the MenuItems to be displayed and returns true / false whether that occurs. */
   async waitForContextualMenuItemsToDisplay(timeout?: number): Promise<boolean | void> {
-    return await this.waitForCondition(async () => await this.contextualMenuItemDisplayed(), 'The Contextual Menu Items did not display.', timeout);
+    return this._contextualMenuItem.waitForDisplayed({
+      timeoutMsg: 'The Contextual Menu Items did not display.',
+      timeout,
+    });
   }
 
   /* Whether the contextual menu item is displayed or not. It should be displayed after clicking on the MenuButton */
   async contextualMenuItemDisplayed(): Promise<boolean> {
-    return await (await this._contextualMenuItem).isDisplayed();
+    return this._contextualMenuItem.isDisplayed();
   }
 
   /* Closes the ContextualMenu by sending an ESCAPE key input to the menu button */
   async closeContextualMenu(): Promise<void> {
-    if (await this.contextualMenuItemDisplayed()) {
+    if (await this._contextualMenuItem.isDisplayed()) {
       await this.sendKeys(this._contextualMenuItem, [Keys.ESCAPE]);
-      await this.waitForCondition(
-        async () => !(await this.contextualMenuItemDisplayed()),
-        "Pressed 'ESC' on the ContextualMenu item, but the ContextualMenu items are still displayed - the ContextMenu appears to still be open.",
-      );
+      await this._contextualMenuItem.waitForDisplayed({
+        reverse: true,
+        timeoutMsg:
+          "Pressed 'ESC' on the ContextualMenu item, but the ContextualMenu items are still displayed - the ContextMenu appears to still be open.",
+      });
     }
   }
 
