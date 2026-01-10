@@ -24,7 +24,7 @@ let rootView: ChainablePromiseElement | null = null;
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export function By(identifier: string): ChainablePromiseElement {
-  if (PLATFORM === 'windows') {
+  if (PLATFORM === 'windows' || PLATFORM === 'win32') {
     // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
     return $('~' + identifier);
   }

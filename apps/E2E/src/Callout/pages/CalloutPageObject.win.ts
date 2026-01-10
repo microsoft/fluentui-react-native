@@ -6,23 +6,21 @@ class CalloutPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async isCalloutOpen(): Promise<boolean> {
-    return await (await this._primaryComponent).isDisplayed();
+    return this._primaryComponent.isDisplayed();
   }
 
   // This both opens and waits for it to go in view
   async openCalloutAndWaitForLoad(): Promise<void> {
     if (!(await this.isCalloutOpen())) {
-      const calloutButton = await this._buttonToOpenCallout;
-      await browser.waitUntil(async () => await calloutButton.isEnabled(), {
+      await browser.waitUntil(async () => await this._buttonToOpenCallout.isEnabled(), {
         timeout: 15000,
         timeoutMsg: 'Button to open the Callout is not enabled.',
       });
 
-      await calloutButton.click();
-      await this.waitForCondition(
-        async () => await this.isCalloutOpen(),
-        'Clicked the button to open the Callout, but the Callout did not open correctly.',
-      );
+      await this._buttonToOpenCallout.click();
+      await this._primaryComponent.waitForDisplayed({
+        timeoutMsg: 'Clicked the button to open the Callout, but the Callout did not open correctly',
+      });
     }
   }
 

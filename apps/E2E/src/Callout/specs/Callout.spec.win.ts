@@ -23,7 +23,7 @@ describe('Callout Testing Initialization', () => {
 
 describe('Callout Accessibility Testing', () => {
   beforeAll(async () => {
-    await CalloutPageObject.scrollToTestElement(await CalloutPageObject._buttonToOpenCallout);
+    await CalloutPageObject.scrollToTestElement(CalloutPageObject._buttonToOpenCallout);
     await CalloutPageObject.openCalloutAndWaitForLoad();
   });
 

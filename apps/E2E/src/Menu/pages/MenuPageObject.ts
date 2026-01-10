@@ -41,32 +41,23 @@ class MenuPageObject extends BasePage {
 
   /* Waits for menuitems to be visible. This is a separate method from openMenu() because we test multiple ways of opening the menu (mouse + keyboard). */
   async waitForMenuToOpen(errorMsg?: string): Promise<boolean | void> {
-    return await this.waitForCondition(
-      async () => await this.menuIsExpanded(),
-      errorMsg ?? 'The Menu did not open: It looks like the MenuItems failed to display.',
-      this.waitForUiEvent,
-      500,
-    );
+    return this.getMenuItem('First').waitForDisplayed({
+      timeoutMsg: errorMsg ?? 'The Menu did not open: It looks like the MenuItems failed to display.',
+    });
   }
 
   /* Same as above -> Just waits for menuitems to not be visible. */
   async waitForMenuToClose(errorMsg?: string): Promise<boolean | void> {
-    return await this.waitForCondition(
-      async () => !(await this.menuIsExpanded()),
-      errorMsg ?? 'The Menu did not close: It looks like the MenuItems are still displayed.',
-      this.waitForUiEvent,
-      500,
-    );
+    return this.getMenuItem('First').waitForDisplayed({
+      reverse: true,
+      timeoutMsg: errorMsg ?? 'The Menu did not close: It looks like the MenuItems are still displayed.',
+    });
   }
 
   /* If the first item is displayed, then it's safe to say that the rest of the menu is expanded. */
   async menuIsExpanded(): Promise<boolean> {
-    const menuItem = await this.getMenuItem('First');
-    if (menuItem.error) {
-      // Not displayed because the item can't be found by appium
-      return false;
-    }
-    return await menuItem.isDisplayed();
+    const menuItem = this.getMenuItem('First');
+    return menuItem.isDisplayed();
   }
 
   /* Waits for the onClick callback of menu item 1 to fire. */
@@ -83,7 +74,7 @@ class MenuPageObject extends BasePage {
    * allows us to test whether the onClick() callback fires for click and keypress inputs across individual test cases without having to close the menu and reset the
    * label per case (as you see in the button + checkbox tests). This decreases test time and improves performance for this spec. */
   async itemOnClickHasFired(timesFired: number): Promise<boolean> {
-    return (await (await this._callbackLabel).getText()) === `onClick fired ${timesFired} times`;
+    return (await this._callbackLabel.getText()) === `onClick fired ${timesFired} times`;
   }
 
   getMenuItem(item: MenuItem) {

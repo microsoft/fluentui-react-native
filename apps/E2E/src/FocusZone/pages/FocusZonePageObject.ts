@@ -42,7 +42,7 @@ class FocusZonePageObject extends BasePage {
         }
 
         await DirectionDropdown.click();
-        await browser.waitUntil(async () => await this._getGridFocusZoneMenuOption(arg).isDisplayed());
+        await this._getGridFocusZoneMenuOption(arg).waitForDisplayed();
         await this._getGridFocusZoneMenuOption(arg).click();
 
         await browser.waitUntil(async () => (await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1, {
