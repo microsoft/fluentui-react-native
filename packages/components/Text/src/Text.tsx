@@ -117,15 +117,15 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     };
   }
 
-  const isWinPlatform = Platform.OS === ('win32' as any) || Platform.OS === 'windows';
+  const isWin32Platform = Platform.OS === ('win32' as any);
   const filteredProps = {
-    onKeyUp: isWinPlatform ? onKeyUp : undefined,
-    keyUpEvents: isWinPlatform ? keyUpEvents : undefined,
+    onKeyUp: isWin32Platform ? onKeyUp : undefined,
+    keyUpEvents: isWin32Platform ? keyUpEvents : undefined,
     validKeysUp: undefined,
-    onKeyDown: isWinPlatform ? onKeyDown : undefined,
-    keyDownEvents: isWinPlatform ? keyDownEvents : undefined,
+    onKeyDown: isWin32Platform ? onKeyDown : undefined,
+    keyDownEvents: isWin32Platform ? keyDownEvents : undefined,
     validKeysDown: undefined,
-    onAccessibilityTap: isWinPlatform ? onAccTap : undefined,
+    onAccessibilityTap: isWin32Platform ? onAccTap : undefined,
   };
 
   // return a continuation function that allows this text to be compressed
