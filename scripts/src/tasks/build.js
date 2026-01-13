@@ -104,6 +104,15 @@ function getBuildTargets(cwd = process.cwd()) {
 async function buildTarget(target, cwd) {
   const { module, outDir } = target;
   const extraArgs = ['--outDir', outDir, '--module', module];
+
+  // TypeScript 5.8+ requires moduleResolution to match module when using Node16
+  // Set moduleResolution to match the module setting
+  if (module === 'node16') {
+    extraArgs.push('--moduleResolution', 'node16');
+  } else if (module === 'esnext') {
+    extraArgs.push('--moduleResolution', 'bundler');
+  }
+
   const result = await runScript('tsc', ...extraArgs);
 
   if (result !== 0) {

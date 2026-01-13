@@ -12,7 +12,7 @@ import {
 import type { LinkProps, LinkInfo } from './Link.types';
 
 /*These callbacks are not implemented on iOS/macOS, and cause Redboxes if passed in. Limit to only windows/win32 for now*/
-const isWinPlatform = Platform.OS === (('win32' as any) || 'windows');
+const isWinPlatform = Platform.OS === ('win32' as any) || Platform.OS === 'windows';
 const filteredProps = isWinPlatform
   ? {}
   : {

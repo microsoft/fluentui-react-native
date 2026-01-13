@@ -11,8 +11,7 @@
     "noEmitOnError": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
-    "strict": true,
-    "suppressImplicitAnyIndexErrors": true
+    "strict": true
   },
   "include": ["src"]
 }

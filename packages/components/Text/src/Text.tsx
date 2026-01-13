@@ -117,7 +117,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     };
   }
 
-  const isWinPlatform = Platform.OS === (('win32' as any) || 'windows');
+  const isWinPlatform = Platform.OS === ('win32' as any) || Platform.OS === 'windows';
   const filteredProps = {
     onKeyUp: isWinPlatform ? onKeyUp : undefined,
     keyUpEvents: isWinPlatform ? keyUpEvents : undefined,
