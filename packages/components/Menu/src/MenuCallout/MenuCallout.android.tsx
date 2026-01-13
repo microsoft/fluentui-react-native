@@ -41,8 +41,8 @@ export const MenuCallout = stagedComponent((props: MenuCalloutProps) => {
                 },
               ]}
             >
-              {context.menuHeight + tokens.minPadding >= tokens.maxHeight ||
-              context.menuHeight + tokens.minPadding >= mergedProps.maxHeight ? (
+              {context.menuHeight + tokens.minPadding >= (tokens.maxHeight as number) ||
+              context.menuHeight + tokens.minPadding >= (mergedProps.maxHeight as number) ? (
                 <AnimatedScrollView style={[context.animationStarted && context.menuSize]}>{children}</AnimatedScrollView>
               ) : (
                 <Animated.View style={[context.animationStarted && context.menuSize]}>{children}</Animated.View>

@@ -50,9 +50,13 @@ export type LegacyDirectComponent<TProps> = React.FunctionComponent<TProps> & {
 };
 
 /**
- * Legacy type name used for consistency with old rendering patterns.
+ * Slot function type used in the composition framework. Slot functions return React elements (not arbitrary ReactNode values)
+ * since they always either call staged render functions or React.createElement.
  */
-export type SlotFn<TProps> = LegacyDirectComponent<TProps>;
+export type SlotFn<TProps> = {
+  (props: TProps, ...children: React.ReactNode[]): React.ReactElement | null;
+  _canCompose?: boolean;
+};
 
 /**
  * MULTI-STAGE RENDERING

@@ -1,6 +1,6 @@
 import type { MergeOptions } from '@fluentui-react-native/framework-base';
 import { immutableMergeCore } from '@fluentui-react-native/framework-base';
-import type { ComposableFunction } from '@fluentui-react-native/framework-base';
+import type { ComposableFunction, FinalRender } from '@fluentui-react-native/framework-base';
 import { stagedComponent } from '@fluentui-react-native/framework-base';
 import type { UseSlotOptions, Slots } from '@fluentui-react-native/use-slots';
 import { buildUseSlots } from '@fluentui-react-native/use-slots';
@@ -25,7 +25,7 @@ export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics 
     /**
      * staged render function that takes props and a useSlots hook as an input
      */
-    useRender: (props: TProps, useSlots: UseStyledSlots<TProps, TSlotProps>) => React.FunctionComponent<TProps>;
+    useRender: (props: TProps, useSlots: UseStyledSlots<TProps, TSlotProps>) => FinalRender<TProps>;
 
     /**
      * optional statics to attach to the component

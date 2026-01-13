@@ -126,7 +126,6 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
-    "typescript": "^5.8.0",
     "webdriverio": "catalog:"
   },
   "jest": {
