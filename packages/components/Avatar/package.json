@@ -7,8 +7,7 @@
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
-  "react-native": "src/index.ts",
-  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/index.js",
@@ -18,14 +17,17 @@
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
-    "lint": "fluentui-scripts eslint",
     "depcheck": "fluentui-scripts depcheck",
-    "test": "fluentui-scripts jest",
-    "update-snapshots": "fluentui-scripts jest -u",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
+    "prettier-fix": "fluentui-scripts prettier --fix true",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
   },
   "repository": {
     "type": "git",

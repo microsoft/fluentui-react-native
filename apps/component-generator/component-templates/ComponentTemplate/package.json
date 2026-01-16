@@ -4,7 +4,7 @@
   "description": "add component-description",
   "main": "src/index.ts",
   "module": "src/index.ts",
-  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "private": true,
   "scripts": {
     "build": "fluentui-scripts build",
@@ -12,6 +12,7 @@
     "depcheck": "fluentui-scripts depcheck",
     "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "prettier": "fluentui-scripts prettier",

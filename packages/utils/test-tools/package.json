@@ -4,8 +4,7 @@
   "description": "Tools and mocks for testing components using jest",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "react-native": "src/index.ts",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/index.js",
@@ -15,13 +14,16 @@
   "private": true,
   "scripts": {
     "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
-    "update-snapshots": "fluentui-scripts jest -u",
+    "lint-package": "fluentui-scripts lint-package",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
+    "prettier-fix": "fluentui-scripts prettier --fix true",
+    "update-snapshots": "fluentui-scripts jest -u"
   },
   "repository": {
     "type": "git",

@@ -4,7 +4,6 @@
   "description": "A cross-platform Overflow component for React Native.",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
-  "react-native": "src/index.ts",
   "exports": {
     ".": {
       "import": "./lib/index.js",
@@ -12,17 +11,20 @@
       "types": "./lib/index.d.ts"
     }
   },
-  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
-    "test": "fluentui-scripts jest",
-    "update-snapshots": "fluentui-scripts jest -u",
+    "lint-package": "fluentui-scripts lint-package",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
+    "prettier-fix": "fluentui-scripts prettier --fix true",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
   },
   "repository": {
     "type": "git",

@@ -13,7 +13,7 @@
     "./eslint.config.js": "./eslint.config.js"
   },
   "scripts": {
-    "build": "fluentui-scripts build"
+    "build": "fluentui-scripts build --target check"
   },
   "license": "MIT",
   "dependencies": {

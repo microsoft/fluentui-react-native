@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
-/** @jsxFrag */
+/** @jsxFrag React.Fragment */
 import React from 'react';
 import { View } from 'react-native';
 import type { ViewProps } from 'react-native';

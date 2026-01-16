@@ -9,7 +9,6 @@
   },
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
-  "react-native": "src/index.ts",
   "exports": {
     ".": {
       "import": "./lib/index.js",
@@ -17,19 +16,22 @@
       "types": "./lib/index.d.ts"
     }
   },
-  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",
-    "update-snapshots": "fluentui-scripts jest -u",
-    "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
+    "update-snapshots": "fluentui-scripts jest -u"
   },
   "keywords": [],
   "author": "",

@@ -38,6 +38,7 @@ module.exports = [
       'no-prototype-builtins': 'off',
       'no-undef': 'off',
       'react/display-name': 'off',
+      'react/react-in-jsx-scope': 'off', // unnecessary with new JSX transform
       'react-hooks/exhaustive-deps': 'off', // This should be fixed in the future but is a big change
       'no-restricted-exports': [
         'error',

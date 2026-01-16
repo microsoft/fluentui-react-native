@@ -1976,6 +1976,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@epic-web/invariant@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@epic-web/invariant@npm:1.0.0"
+  checksum: 10c0/72dbeb026e4e4eb3bc9c65739b91408ca77ab7d603a2494fa2eff3790ec22892c4caba751cffdf30f5ccf0e7ba79c1e9c96cf0a357404b9432bf1365baac23ca
+  languageName: node
+  linkType: hard
+
 "@esbuild/aix-ppc64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/aix-ppc64@npm:0.25.5"
@@ -3252,7 +3259,7 @@ __metadata:
     appium-uiautomator2-driver: "catalog:"
     appium-windows-driver: "catalog:"
     appium-xcuitest-driver: "catalog:"
-    cross-env: "npm:^7.0.3"
+    cross-env: "catalog:"
     expect-webdriverio: "catalog:"
     metro-config: "npm:^0.80.3"
     react: "npm:18.2.0"
@@ -3737,6 +3744,7 @@ __metadata:
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^22.0.0"
     "@types/react": "npm:^18.2.0"
+    "@typescript/native-preview": "npm:7.0.0-dev.20260113.1"
     react: "npm:18.2.0"
   languageName: unknown
   linkType: soft
@@ -4420,6 +4428,7 @@ __metadata:
     "@rnx-kit/lint-lockfile": "npm:^0.1.0"
     babel-jest: "npm:^29.7.0"
     beachball: "npm:^2.20.0"
+    cross-env: "catalog:"
     eslint: "npm:^9.0.0"
     eslint-plugin-import: "npm:^2.27.5"
     lage: "npm:^2.0.0"
@@ -4444,6 +4453,7 @@ __metadata:
     "@rnx-kit/tsconfig": "npm:^2.1.1"
     "@types/micromatch": "npm:^4.0.9"
     "@types/node": "npm:^22.0.0"
+    "@typescript/native-preview": "npm:7.0.0-dev.20260113.1"
     chalk: "npm:^4.0.0"
     clipanion: "npm:^4.0.0-rc.4"
     depcheck: "npm:^1.0.0"
@@ -8317,6 +8327,87 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript/native-preview-darwin-arm64@npm:7.0.0-dev.20260113.1":
+  version: 7.0.0-dev.20260113.1
+  resolution: "@typescript/native-preview-darwin-arm64@npm:7.0.0-dev.20260113.1"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@typescript/native-preview-darwin-x64@npm:7.0.0-dev.20260113.1":
+  version: 7.0.0-dev.20260113.1
+  resolution: "@typescript/native-preview-darwin-x64@npm:7.0.0-dev.20260113.1"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@typescript/native-preview-linux-arm64@npm:7.0.0-dev.20260113.1":
+  version: 7.0.0-dev.20260113.1
+  resolution: "@typescript/native-preview-linux-arm64@npm:7.0.0-dev.20260113.1"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@typescript/native-preview-linux-arm@npm:7.0.0-dev.20260113.1":
+  version: 7.0.0-dev.20260113.1
+  resolution: "@typescript/native-preview-linux-arm@npm:7.0.0-dev.20260113.1"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@typescript/native-preview-linux-x64@npm:7.0.0-dev.20260113.1":
+  version: 7.0.0-dev.20260113.1
+  resolution: "@typescript/native-preview-linux-x64@npm:7.0.0-dev.20260113.1"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@typescript/native-preview-win32-arm64@npm:7.0.0-dev.20260113.1":
+  version: 7.0.0-dev.20260113.1
+  resolution: "@typescript/native-preview-win32-arm64@npm:7.0.0-dev.20260113.1"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@typescript/native-preview-win32-x64@npm:7.0.0-dev.20260113.1":
+  version: 7.0.0-dev.20260113.1
+  resolution: "@typescript/native-preview-win32-x64@npm:7.0.0-dev.20260113.1"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@typescript/native-preview@npm:7.0.0-dev.20260113.1":
+  version: 7.0.0-dev.20260113.1
+  resolution: "@typescript/native-preview@npm:7.0.0-dev.20260113.1"
+  dependencies:
+    "@typescript/native-preview-darwin-arm64": "npm:7.0.0-dev.20260113.1"
+    "@typescript/native-preview-darwin-x64": "npm:7.0.0-dev.20260113.1"
+    "@typescript/native-preview-linux-arm": "npm:7.0.0-dev.20260113.1"
+    "@typescript/native-preview-linux-arm64": "npm:7.0.0-dev.20260113.1"
+    "@typescript/native-preview-linux-x64": "npm:7.0.0-dev.20260113.1"
+    "@typescript/native-preview-win32-arm64": "npm:7.0.0-dev.20260113.1"
+    "@typescript/native-preview-win32-x64": "npm:7.0.0-dev.20260113.1"
+  dependenciesMeta:
+    "@typescript/native-preview-darwin-arm64":
+      optional: true
+    "@typescript/native-preview-darwin-x64":
+      optional: true
+    "@typescript/native-preview-linux-arm":
+      optional: true
+    "@typescript/native-preview-linux-arm64":
+      optional: true
+    "@typescript/native-preview-linux-x64":
+      optional: true
+    "@typescript/native-preview-win32-arm64":
+      optional: true
+    "@typescript/native-preview-win32-x64":
+      optional: true
+  bin:
+    tsgo: bin/tsgo.js
+  checksum: 10c0/96e224aabdf4775e3d6cd375de6fc5cb407ee4876498e8f4902246a5551162cb9a554743f765fc1b7ca75d8401ee51b1929cee60c5a36a5b6f04e9d1c75d6af9
+  languageName: node
+  linkType: hard
+
 "@uifabricshared/foundation-composable@npm:*, @uifabricshared/foundation-composable@workspace:*, @uifabricshared/foundation-composable@workspace:packages/deprecated/foundation-composable":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-composable@workspace:packages/deprecated/foundation-composable"
@@ -11223,15 +11314,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-env@npm:^7.0.3":
-  version: 7.0.3
-  resolution: "cross-env@npm:7.0.3"
+"cross-env@npm:^10.1.0":
+  version: 10.1.0
+  resolution: "cross-env@npm:10.1.0"
   dependencies:
-    cross-spawn: "npm:^7.0.1"
+    "@epic-web/invariant": "npm:^1.0.0"
+    cross-spawn: "npm:^7.0.6"
   bin:
-    cross-env: src/bin/cross-env.js
-    cross-env-shell: src/bin/cross-env-shell.js
-  checksum: 10c0/f3765c25746c69fcca369655c442c6c886e54ccf3ab8c16847d5ad0e91e2f337d36eedc6599c1227904bf2a228d721e690324446876115bc8e7b32a866735ecf
+    cross-env: dist/bin/cross-env.js
+    cross-env-shell: dist/bin/cross-env-shell.js
+  checksum: 10c0/834a862db456ba1fedf6c6da43436b123ae38f514fa286d6f0937c14fa83f13469f77f70f2812db041ae2d84f82bac627040b8686030aca27fbdf113dfa38b63
   languageName: node
   linkType: hard
 
@@ -11248,7 +11340,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.1, cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.6":
+"cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.6":
   version: 7.0.6
   resolution: "cross-spawn@npm:7.0.6"
   dependencies:

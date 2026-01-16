@@ -1,4 +1,4 @@
-import { createReporter } from '@rnx-kit/reporter';
+import { createReporter, type Reporter } from '@rnx-kit/reporter';
 
 const reporter = createReporter({
   name: 'fluentui-scripts reporter',
@@ -7,8 +7,7 @@ const reporter = createReporter({
 
 /**
  * Get the reporter instance for logging.
- * @returns {import('@rnx-kit/reporter').Reporter} The reporter instance.
  */
-export function getReporter() {
+export function getReporter(): Reporter {
   return reporter;
 }

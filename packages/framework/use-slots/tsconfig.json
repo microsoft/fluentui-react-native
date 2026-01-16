@@ -1,5 +1,5 @@
 {
-  "extends": "@fluentui-react-native/scripts/configs/tsconfig.json",
+  "extends": "@fluentui-react-native/framework-base/tsconfig.component.json",
   "compilerOptions": {
     "outDir": "lib"
   },

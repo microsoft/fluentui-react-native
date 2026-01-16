@@ -5,13 +5,14 @@
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
-  "main": "lib/index.js",
+  "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
-  "react-native": "src/index.ts",
-  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "android": "rnx-cli run --platform android",
-    "build": "fluentui-scripts hybrid-build",
+    "build": "fluentui-scripts build",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "bundle": "rnx-cli bundle --dev false",
     "bundle:android": "rnx-cli bundle --dev false --platform android",
     "bundle:ios": "rnx-cli bundle --dev false --platform ios",
@@ -22,6 +23,7 @@
     "ios": "rnx-cli run --platform ios",
     "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
     "macos": "rnx-cli run --platform macos",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true",
@@ -131,6 +133,7 @@
   "jest": {
     "preset": "react-native"
   },
+  "furn": {},
   "rnx-kit": {
     "kitType": "app",
     "bundle": [
@@ -203,11 +206,6 @@
         "community/cli"
       ]
     }
-  },
-  "depcheck": {
-    "ignoreMatches": [
-      "@fluentui-react-native/experimental-expander"
-    ]
   },
   "peerDependenciesMeta": {
     "@office-iss/react-native-win32": {

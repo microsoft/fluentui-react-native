@@ -20,8 +20,8 @@ type ConvertToValue<TValue> = (current: unknown) => TValue;
  * is passed the previous value and returns the new value.
  * @see https://reactjs.org/docs/uncontrolled-components.html
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function useControllableValue<TValue, TElement>(
+
+export function useControllableValue<TValue>(
   controlledValue: TValue | undefined,
   defaultUncontrolledValue: TValue | undefined,
 ): Readonly<[TValue | undefined, (update: React.SetStateAction<TValue | undefined>) => void]>;

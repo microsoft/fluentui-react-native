@@ -6,6 +6,21 @@ module.exports = {
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*', 'lib-commonjs/**/*'],
     },
+    'build-cjs': {
+      dependsOn: ['^build-cjs'],
+      inputs: ['*', 'src/**/*', 'assets/**/*'],
+      outputs: ['lib-commonjs/**/*'],
+    },
+    'build-esm': {
+      dependsOn: ['^build-esm'],
+      inputs: ['*', 'src/**/*', 'assets/**/*'],
+      outputs: ['lib/**/*'],
+    },
+    'build-dual': {
+      dependsOn: ['build-cjs', 'build-esm'],
+      inputs: ['*', 'src/**/*', 'assets/**/*'],
+      outputs: ['lib/**/*', 'lib-commonjs/**/*'],
+    },
     buildci: ['build', 'test', 'lint', 'depcheck', 'check-publishing'],
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
@@ -22,11 +37,15 @@ module.exports = {
       inputs: ['*', 'src/**/*'],
       outputs: [],
     },
+    'lint-package': {
+      inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
+      outputs: [],
+    },
     prettier: {
       inputs: ['*', 'src/**/*'],
       outputs: [],
     },
-    ['pr-check']: ['build', 'test', 'lint', 'depcheck', 'check-publishing', 'align-deps', 'lint-lockfile', 'prettier'],
+    ['pr-check']: ['build', 'test', 'lint', 'depcheck', 'check-publishing', 'align-deps', 'lint-package', 'lint-lockfile', 'prettier'],
     ['prettier-fix']: [],
     test: {
       dependsOn: ['build'],

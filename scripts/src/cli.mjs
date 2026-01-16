@@ -2,15 +2,15 @@
 // @ts-check
 
 import { Builtins, Cli } from 'clipanion';
-import { BuildCommand } from './tasks/build.js';
+import { BuildCommand } from './tasks/build.ts';
 import { CleanCommand } from './tasks/clean.js';
-import { HybridBuildCommand } from './tasks/hybrid-build.ts';
 import { PrettierCommand } from './tasks/prettier.js';
 import { LintCommand } from './tasks/eslint.js';
+import { LintPackageCommand } from './tasks/lintPackage.ts';
 import { JestCommand } from './tasks/jest.js';
 import { CheckChangesCommand } from './tasks/checkForModifiedFilesTask.js';
 import { CheckPublishingCommand } from './tasks/checkPublishingTask.js';
-import { DepcheckCommand } from './tasks/depcheck.js';
+import { DepcheckCommand } from './tasks/depcheck.ts';
 
 const cli = new Cli({
   binaryLabel: 'fluentui-scripts CLI',
@@ -20,9 +20,9 @@ const cli = new Cli({
 
 cli.register(BuildCommand);
 cli.register(CleanCommand);
-cli.register(HybridBuildCommand);
 cli.register(PrettierCommand);
 cli.register(LintCommand);
+cli.register(LintPackageCommand);
 cli.register(JestCommand);
 cli.register(CheckChangesCommand);
 cli.register(CheckPublishingCommand);

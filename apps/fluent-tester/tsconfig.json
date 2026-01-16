@@ -1,13 +1,8 @@
 {
   "extends": "@fluentui-react-native/scripts/configs/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "outDir": "lib",
     "allowSyntheticDefaultImports": true,
-    "paths": {
-      "*": ["*", "*.win32", "./*"],
-      "src/*": ["./src/*", "src"]
-    },
     "types": ["@types/jasmine", "@wdio/globals/types", "@wdio/jasmine-framework", "node"]
   },
   "include": ["src"]

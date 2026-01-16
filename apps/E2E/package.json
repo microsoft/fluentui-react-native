@@ -3,19 +3,20 @@
   "version": "1.43.11",
   "description": "Package containing E2E testing specs",
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "lib/index.mjs",
-  "typings": "lib/index.d.ts",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
-      "import": "./lib/index.mjs",
-      "require": "./lib/index.js"
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js"
     }
   },
   "scripts": {
-    "build": "fluentui-scripts hybrid-build",
-    "lint": "fluentui-scripts eslint",
+    "build": "fluentui-scripts build",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "e2eprep:android": "cross-env APPIUM_HOME=.appium yarn exec appium driver install uiautomator2",
     "e2eprep:ios": "cross-env APPIUM_HOME=.appium yarn exec appium driver install xcuitest",
     "e2eprep:macos": "cross-env APPIUM_HOME=.appium yarn exec appium driver install mac2",
@@ -25,7 +26,9 @@
     "e2etest:ios": "cross-env APPIUM_HOME=.appium wdio run wdio.conf.ios.js",
     "e2etest:macos": "cross-env APPIUM_HOME=.appium wdio run wdio.conf.macos.js",
     "e2etest:win32": "cross-env APPIUM_HOME=.appium wdio run wdio.conf.win32.js",
-    "e2etest:windows": "rimraf errorShots reports && cross-env APPIUM_HOME=.appium wdio run wdio.conf.windows.js"
+    "e2etest:windows": "rimraf errorShots reports && cross-env APPIUM_HOME=.appium wdio run wdio.conf.windows.js",
+    "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package"
   },
   "repository": {
     "type": "git",
@@ -71,7 +74,7 @@
     "appium-uiautomator2-driver": "catalog:",
     "appium-windows-driver": "catalog:",
     "appium-xcuitest-driver": "catalog:",
-    "cross-env": "^7.0.3",
+    "cross-env": "catalog:",
     "expect-webdriverio": "catalog:",
     "metro-config": "^0.80.3",
     "rimraf": "^5.0.1",
