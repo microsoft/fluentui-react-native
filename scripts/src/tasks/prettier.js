@@ -2,6 +2,7 @@
 
 import { Command, Option } from 'clipanion';
 import { runScript } from '../utils/runScript.js';
+import { isFixMode } from '../utils/env.ts';
 
 export class PrettierCommand extends Command {
   /** @override */
@@ -19,7 +20,7 @@ export class PrettierCommand extends Command {
   });
 
   async execute() {
-    const fixOrCheck = this.fix ? '--write' : '--check';
+    const fixOrCheck = isFixMode(this.fix) ? '--write' : '--check';
     return await runScript(
       'prettier',
       fixOrCheck,

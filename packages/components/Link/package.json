@@ -2,34 +2,34 @@
   "name": "@fluentui-react-native/link",
   "version": "0.23.23",
   "description": "A cross-platform Link component using the Fluent Design System",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/components/Link"
+  },
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib-commonjs/index.js"
     }
   },
-  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
     "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/components/Link"
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
@@ -41,6 +41,24 @@
     "@uifabricshared/foundation-composable": "workspace:*",
     "@uifabricshared/foundation-compose": "workspace:*",
     "@uifabricshared/foundation-settings": "workspace:*"
+  },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.74.0",
+    "react": "18.2.0",
+    "react-native": "^0.73.0 || ^0.74.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0"
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -59,15 +77,6 @@
     "react-native-windows": "^0.74.0",
     "react-test-renderer": "18.2.0"
   },
-  "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0",
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0",
-    "react-native-macos": "^0.73.0 || ^0.74.0",
-    "react-native-windows": "^0.73.0 || ^0.74.0"
-  },
-  "author": "",
-  "license": "MIT",
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
@@ -92,17 +101,6 @@
         "react",
         "react-test-renderer"
       ]
-    }
-  },
-  "peerDependenciesMeta": {
-    "@office-iss/react-native-win32": {
-      "optional": true
-    },
-    "react-native-macos": {
-      "optional": true
-    },
-    "react-native-windows": {
-      "optional": true
     }
   }
 }

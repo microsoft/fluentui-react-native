@@ -1,11 +1,8 @@
 import { Command, Option } from 'clipanion';
+import type { PackageManifest, ResolvedBuildConfig } from '../utils/projectRoot.ts';
 import { getProjectRoot, type ProjectRoot } from '../utils/projectRoot.ts';
-import { getTypescriptBuildInfo } from './build.ts';
-
-const buildScript = 'fluentui-scripts build';
-const buildCjsScript = 'tsgo --outDir lib-commonjs';
-const buildEsmScript = 'tsgo --outDir lib --module esnext --moduleResolution bundler';
-const buildCheckScript = 'tsgo --noEmit';
+import { getResolvedConfig } from '../utils/buildConfig.ts';
+import { isFixMode } from '../utils/env.ts';
 
 export class LintPackageCommand extends Command {
   static override paths = [['lint-package']];
@@ -26,13 +23,16 @@ export class LintPackageCommand extends Command {
   private isScripts = false;
 
   async execute() {
-    this.fix = this.fix || Boolean(process.env.FURN_FIX_MODE);
+    this.fix = isFixMode(this.fix);
     const cwd = process.cwd();
     const projRoot = getProjectRoot(cwd);
+    const buildConfig = getResolvedConfig(projRoot, true);
     this.isScripts = projRoot.manifest.name === '@fluentui-react-native/scripts';
 
     this.checkManifest(projRoot);
-    this.checkBuildConfig(projRoot);
+    this.checkScripts(projRoot);
+    this.checkEntryPoints(projRoot, buildConfig);
+    this.checkBuildConfig(projRoot, buildConfig);
     if (this.fix && this.changed) {
       projRoot.writeManifest();
       console.log('Updated package.json for ', projRoot.manifest.name);
@@ -43,9 +43,6 @@ export class LintPackageCommand extends Command {
   private checkManifest(projRoot: ProjectRoot) {
     const manifest = projRoot.manifest;
     this.warnIf(!manifest.description, 'Package is missing a description field');
-    this.warnIf(manifest['react-native'] !== undefined, 'Currently we should not use the react-native field', () => {
-      projRoot.clearManifestEntry('react-native');
-    });
     this.warnIf(manifest.depcheck !== undefined, 'depcheck should be under the furn field', () => {
       const buildConfig = projRoot.buildConfig;
       projRoot.setManifestEntry('furn', buildConfig);
@@ -59,23 +56,146 @@ export class LintPackageCommand extends Command {
     });
   }
 
-  private checkBuildConfig(projRoot: ProjectRoot) {
-    const tsconfig = getTypescriptBuildInfo(projRoot);
-    if (!tsconfig || this.isScripts) {
+  private checkScripts(projRoot: ProjectRoot) {
+    const scripts = projRoot.manifest.scripts || {};
+    this.warnIf(scripts['just'] !== undefined, 'just script is deprecated, can invoke by calling yarn fluentui-scripts instead', () => {
+      projRoot.updateRecordEntry('scripts', 'just', undefined);
+    });
+    this.warnIf(scripts['prettier-fix'] !== undefined, 'prettier-fix script is deprecated, use prettier --fix instead', () => {
+      projRoot.updateRecordEntry('scripts', 'prettier-fix', undefined);
+    });
+  }
+
+  private validateEntryPoint<T, K extends keyof T>(collection: T, key: K, expectedOutDir: string, otherOutDir: string) {
+    const entryPoint = typeof collection[key] === 'string' ? (collection[key] as string) : undefined;
+    if (entryPoint) {
+      const normalizedEntry = removeDotPrefix(entryPoint) + '/';
+      const expected = `${expectedOutDir}/`;
+      const notExpected = `${otherOutDir}/`;
+      this.errorIf(
+        normalizedEntry.startsWith(notExpected),
+        `Entry point ${String(key)} (${entryPoint}) should not be in output ${expectedOutDir}`,
+        () => {
+          collection[key] = entryPoint.replace(notExpected, expected) as T[K];
+        },
+      );
+    }
+  }
+
+  private validateExportsGroup(manifest: PackageManifest, groupName: string, isDefault: boolean, buildConfig: ResolvedBuildConfig) {
+    const exports = manifest.exports;
+    if (!exports) {
       return;
     }
-    const cjsScript = tsconfig.options.noEmit ? buildCheckScript : buildCjsScript;
-    const esmScript = tsconfig.options.noEmit ? buildCheckScript : buildEsmScript;
+
+    const groupEntry = exports[groupName];
+    const group = typeof groupEntry === 'object' && !Array.isArray(groupEntry) ? groupEntry : undefined;
+    if (group || isDefault) {
+      const updated = { ...group };
+      const keys = Object.keys(updated);
+      const errors: string[] = [];
+      if (!group) {
+        errors.push(`Missing required exports group ${groupName}`);
+      }
+      if (updated.types && keys[0] !== 'types') {
+        errors.push(`'types' entry should be first in exports for ${groupName}`);
+      }
+      if (isDefault) {
+        const manifestTypes = manifest.types ? toDotPrefix(manifest.types) : undefined;
+        const manifestModule = manifest.module ? toDotPrefix(manifest.module) : undefined;
+        const manifestMain = manifest.main ? toDotPrefix(manifest.main) : undefined;
+        if (manifestTypes && updated.types !== manifestTypes) {
+          errors.push(`'types' entry in exports does not match manifest.types`);
+          updated.types = manifestTypes;
+        }
+        if (manifestModule && updated.import !== manifestModule) {
+          errors.push(`'import' entry in exports does not match manifest.module`);
+          updated.import = manifestModule;
+        }
+        if (manifestMain && updated.require !== manifestMain) {
+          errors.push(`'require' entry in exports does not match manifest.main`);
+          updated.require = manifestMain;
+        }
+      }
+      const esmDir = buildConfig.typescript.esmDir;
+      const cjsDir = buildConfig.typescript.cjsDir;
+      this.validateEntryPoint(updated, 'import', esmDir, cjsDir);
+      this.validateEntryPoint(updated, 'require', cjsDir, esmDir);
+      if (updated.import && updated.require && keys.indexOf('import') > keys.indexOf('require')) {
+        errors.push(`'import' entry should come before 'require' in exports for ${groupName}`);
+      }
+      if (updated.default && keys[keys.length - 1] !== 'default') {
+        errors.push(`'default' entry should be last in exports for ${groupName}`);
+      }
+      this.errorIf(errors.length > 0, errors.join('\n'), () => {
+        const { types, import: imp, require: req, default: def, ...rest } = updated;
+        // restructure the group to have types, <custom>, import, require, default in order
+        exports[groupName] = {
+          ...(types && { types }),
+          ...rest,
+          ...(imp && { import: imp }),
+          ...(req && { require: req }),
+          ...(def && { default: def }),
+        };
+      });
+    }
+  }
+
+  private checkEntryPoints(projRoot: ProjectRoot, buildConfig: ResolvedBuildConfig) {
+    const manifest = projRoot.manifest;
+    const { main, module, private: isPrivate } = manifest;
+    const { cjsDir, esmDir } = buildConfig.typescript;
+    this.validateEntryPoint(manifest, 'main', cjsDir, esmDir);
+    this.validateEntryPoint(manifest, 'module', esmDir, cjsDir);
+    if (!isPrivate) {
+      this.errorIf(Boolean(!manifest.exports && (main || module)), 'Missing exports field for public package', () => {
+        const newExports = { '.': {} };
+        projRoot.setManifestEntry('exports', newExports);
+      });
+    }
+    const exports = manifest.exports;
+    if (exports) {
+      const defaultExport = exports['.'];
+      // this is really only ok for packages that only have a single build output and no types like a config package
+      const validStringExport = typeof defaultExport === 'string' && !(main && module && main !== module && manifest.types === undefined);
+      if (typeof defaultExport !== 'string' || !validStringExport) {
+        this.validateExportsGroup(manifest, '.', true, buildConfig);
+      }
+      for (const key of Object.keys(exports)) {
+        if (key !== '.') {
+          this.validateExportsGroup(manifest, key, false, buildConfig);
+        }
+      }
+    }
+  }
+
+  private checkBuildConfig(projRoot: ProjectRoot, buildConfig: ResolvedBuildConfig) {
+    const { cjsScript, esmScript } = buildConfig.typescript;
+    const hasBuilds = Boolean(cjsScript || esmScript);
     const scripts = projRoot.manifest.scripts || {};
-    this.errorIf(scripts.build !== buildScript, 'Missing build script', () => {
-      projRoot.updateRecordEntry('scripts', 'build', buildScript);
+
+    const buildScriptText = this.getFluentScriptsText('build');
+    this.errorIf(hasBuilds && scripts.build !== buildScriptText, 'Missing or incorrect build script', () => {
+      projRoot.updateRecordEntry('scripts', 'build', buildScriptText);
     });
-    this.errorIf(scripts['build-cjs'] !== cjsScript, 'Missing build-cjs script', () => {
-      projRoot.updateRecordEntry('scripts', 'build-cjs', cjsScript);
-    });
-    this.errorIf(scripts['build-esm'] !== esmScript, 'Missing build-esm script', () => {
-      projRoot.updateRecordEntry('scripts', 'build-esm', esmScript);
-    });
+    if (cjsScript) {
+      this.errorIf(scripts['build-cjs'] !== cjsScript, 'Missing or incorrect build-cjs script', () => {
+        projRoot.updateRecordEntry('scripts', 'build-cjs', cjsScript);
+      });
+    } else {
+      this.errorIf(scripts['build-cjs'] !== undefined, 'Extraneous build-cjs script', () => {
+        projRoot.updateRecordEntry('scripts', 'build-cjs', undefined);
+      });
+    }
+    if (esmScript) {
+      this.errorIf(scripts['build-esm'] !== esmScript, 'Missing or incorrect build-esm script', () => {
+        projRoot.updateRecordEntry('scripts', 'build-esm', esmScript);
+      });
+    } else {
+      this.errorIf(scripts['build-esm'] !== undefined, 'Extraneous build-esm script', () => {
+        projRoot.updateRecordEntry('scripts', 'build-esm', undefined);
+      });
+    }
   }
 
   private warnIf(check: boolean, message: string, fixFn?: () => void) {
@@ -90,7 +210,7 @@ export class LintPackageCommand extends Command {
     }
   }
 
-  errorIf(check: boolean, message: string, fixFn?: () => void) {
+  private errorIf(check: boolean, message: string, fixFn?: () => void) {
     if (check) {
       if (this.fix && fixFn) {
         fixFn();
@@ -102,4 +222,16 @@ export class LintPackageCommand extends Command {
       }
     }
   }
+
+  private getFluentScriptsText(command: string) {
+    return this.isScripts ? `node ./src/cli.mjs ${command}` : `fluentui-scripts ${command}`;
+  }
+}
+
+function toDotPrefix(path: string) {
+  return path.startsWith('./') ? path : `./${path}`;
+}
+
+function removeDotPrefix(path: string) {
+  return path.startsWith('./') ? path.slice(2) : path;
 }

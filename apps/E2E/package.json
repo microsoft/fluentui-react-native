@@ -3,6 +3,11 @@
   "version": "1.43.11",
   "description": "Package containing E2E testing specs",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "apps/E2E"
+  },
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -13,6 +18,10 @@
       "require": "./lib-commonjs/index.js"
     }
   },
+  "files": [
+    "src/**/*",
+    "dist/*"
+  ],
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
@@ -30,15 +39,6 @@
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "apps/E2E"
-  },
-  "files": [
-    "src/**/*",
-    "dist/*"
-  ],
   "dependencies": {
     "@office-iss/react-native-win32": "^0.74.0",
     "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030",

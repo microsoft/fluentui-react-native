@@ -8,6 +8,7 @@ import getInjectedDeps from '../../dynamic.extensions.mjs';
 import { getReporter } from '../utils/getReporter.ts';
 import { getToolVersion } from '../preinstall/tool-versions.js';
 import micromatch from 'micromatch';
+import { isFixMode } from '../utils/env.ts';
 
 type IssueType = 'unused' | 'missing';
 type DependencyType = 'dependency' | 'devDependency';
@@ -75,6 +76,7 @@ export class DepcheckCommand extends Command {
   addedDeps: { dependencies?: Record<string, string>; devDependencies?: Record<string, string> } = {};
 
   async execute() {
+    this.fixErrors = isFixMode(this.fixErrors);
     const depcheckOptions = this.projectRoot.buildConfig.depcheck ?? {};
     const options = mergeOneLevel(
       {

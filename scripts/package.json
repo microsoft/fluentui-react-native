@@ -2,23 +2,26 @@
   "name": "@fluentui-react-native/scripts",
   "version": "0.1.1",
   "private": true,
-  "main": "./src/index.js",
-  "type": "module",
-  "bin": {
-    "fluentui-scripts": "./src/cli.mjs"
-  },
-  "scripts": {
-    "build": "node ./src/cli.mjs build --target check",
-    "bundlesize": "bundlesize --debug",
-    "depcheck": "node ./src/cli.mjs depcheck",
-    "lint": "node ./src/cli.mjs lint",
-    "prettier": "node ./src/cli.mjs prettier",
-    "prettier-fix": "node ./src/cli.mjs prettier --fix true"
-  },
+  "description": "Scripts and build tools for fluentui-react-native repository",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "scripts"
+  },
+  "type": "module",
+  "main": "./src/index.js",
+  "bin": {
+    "fluentui-scripts": "./src/cli.mjs"
+  },
+  "scripts": {
+    "build": "node ./src/cli.mjs build",
+    "build-cjs": "tsgo",
+    "build-esm": "tsgo",
+    "bundlesize": "bundlesize --debug",
+    "depcheck": "node ./src/cli.mjs depcheck",
+    "lint": "node ./src/cli.mjs lint",
+    "lint-package": "node ./src/cli.mjs lint-package",
+    "prettier": "node ./src/cli.mjs prettier"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
@@ -38,11 +41,15 @@
     "eslint": "^9.0.0",
     "find-up": "^5.0.0",
     "jest": "^29.2.1",
+    "knip": "catalog:",
     "micromatch": "^4.0.8",
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "typescript": "^5.8.0",
     "workspace-tools": "^0.26.3"
+  },
+  "rnx-kit": {
+    "kitType": "library"
   },
   "bundlesize": [
     {
@@ -55,8 +62,5 @@
     "disallowedChangeTypes": [
       "major"
     ]
-  },
-  "rnx-kit": {
-    "kitType": "library"
   }
 }

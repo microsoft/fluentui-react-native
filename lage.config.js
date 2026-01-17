@@ -1,11 +1,6 @@
 module.exports = {
   npmClient: 'yarn',
   pipeline: {
-    build: {
-      dependsOn: ['^build'],
-      inputs: ['*', 'src/**/*', 'assets/**/*'],
-      outputs: ['lib/**/*', 'lib-commonjs/**/*'],
-    },
     'build-cjs': {
       dependsOn: ['^build-cjs'],
       inputs: ['*', 'src/**/*', 'assets/**/*'],
@@ -21,7 +16,7 @@ module.exports = {
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*', 'lib-commonjs/**/*'],
     },
-    buildci: ['build', 'test', 'lint', 'depcheck', 'check-publishing'],
+    buildci: ['build-dual', 'test', 'lint', 'depcheck', 'check-publishing'],
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: ['dist/**/*'],
@@ -45,10 +40,10 @@ module.exports = {
       inputs: ['*', 'src/**/*'],
       outputs: [],
     },
-    ['pr-check']: ['build', 'test', 'lint', 'depcheck', 'check-publishing', 'align-deps', 'lint-package', 'lint-lockfile', 'prettier'],
+    ['pr-check']: ['build-dual', 'test', 'lint', 'depcheck', 'check-publishing', 'align-deps', 'lint-package', 'lint-lockfile', 'prettier'],
     ['prettier-fix']: [],
     test: {
-      dependsOn: ['build'],
+      dependsOn: ['build-dual'],
       inputs: [],
       outputs: [],
     },

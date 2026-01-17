@@ -12,19 +12,25 @@ export type ExportSet = {
 
 export type ExportEntry = string | ExportSet;
 
-export type Exports = {
-  '.': ExportEntry;
-  [key: string]: ExportEntry;
-};
+export type Exports = Record<string, ExportEntry>;
 
 export type PackageType = 'library' | 'component' | 'app' | 'tooling';
 
 export type ResolvedBuildConfig = {
   packageType: PackageType;
   typescript: {
+    /** whether to use tsc or tsgo to build this package */
     engine: 'tsc' | 'tsgo';
+    /** cjs outDir - defaults to lib-commonjs */
     cjsDir: string;
+    /** esm outDir - defaults to lib */
     esmDir: string;
+    /** extra arguments to pass to the TypeScript compiler */
+    extraArgs?: string;
+    /** script to run for cjs build */
+    cjsScript: string;
+    /** script to run for esm build */
+    esmScript: string;
   };
   depcheck: {
     ignoreMatches?: string[];
@@ -35,55 +41,137 @@ export type ResolvedBuildConfig = {
 export type RepoBuildConfig = Partial<Omit<ResolvedBuildConfig, 'typescript'> & { typescript: Partial<ResolvedBuildConfig['typescript']> }>;
 
 export type PackageManifest = {
+  // Most canonical identity and metadata fields
   name: string;
   version: string;
+  private?: boolean;
   description?: string;
+  keywords?: string[];
   license?: string;
   author?: string;
-  private?: boolean;
+  contributors?: string[];
+  homepage?: string;
+
+  // Repository and issue tracking
+  repository?: string | Record<string, unknown>;
+  bugs?: Record<string, unknown> | string;
+
+  // Package type and entry points
+  type?: string;
   main?: string;
   module?: string;
-  'react-native'?: string;
   types?: string;
-  typings?: string;
-  type?: string;
+  typings?: string; // deprecated, use types instead
   exports?: Exports;
+
+  // files, side effects, and bin
+  files?: string[];
+  sideEffects?: boolean;
   bin?: string | Record<string, string>;
+
+  // scripts
   scripts?: Record<string, string>;
+
+  // dependencies
   dependencies?: Record<string, string>;
-  devDependencies?: Record<string, string>;
+  optionalDependencies?: Record<string, string>;
   peerDependencies?: Record<string, string>;
+  peerDependenciesMeta?: Record<string, { optional: boolean }>;
+  devDependencies?: Record<string, string>;
+
+  // package manager, tools and environment
+  packageManager?: string;
+  engines?: Record<string, string>;
+  os?: string[];
+  cpu?: string[];
+
+  // monorepo management
+  workspaces?: string[] | { packages: string[] };
+  resolutions?: Record<string, string>;
+
+  // tool configurations
   depcheck?: RepoBuildConfig['depcheck'];
   furn?: RepoBuildConfig;
   'rnx-kit'?: Record<string, unknown>;
+  eslintConfig?: Record<string, unknown>;
+  jest?: Record<string, unknown>;
+  prettier?: Record<string, unknown>;
+  babel?: Record<string, unknown>;
+  lage?: Record<string, unknown>;
+
+  // publishing and distribution
+  publishConfig?: Record<string, unknown>;
 };
 
 const defaultKeyOrder = [
   'name',
   'version',
+  'private',
   'description',
+  'keywords',
   'license',
   'author',
-  'private',
+  'contributors',
+  'homepage',
+  'repository',
+  'bugs',
+  'type',
   'main',
   'module',
-  'react-native',
   'types',
   'typings',
-  'type',
   'exports',
+  'files',
+  'sideEffects',
   'bin',
   'scripts',
   'dependencies',
-  'devDependencies',
+  'optionalDependencies',
   'peerDependencies',
+  'peerDependenciesMeta',
+  'devDependencies',
+  'packageManager',
+  'engines',
+  'os',
+  'cpu',
+  'workspaces',
+  'resolutions',
   'depcheck',
   'furn',
   'rnx-kit',
+  'eslintConfig',
+  'jest',
+  'prettier',
+  'babel',
+  'lage',
+  'bundlesize',
+  'beachball',
+  'publishConfig',
 ];
 
-export type PackageRecordKeys = Extract<keyof PackageManifest, 'dependencies' | 'devDependencies' | 'peerDependencies' | 'scripts'>;
-const recordKeys: PackageRecordKeys[] = ['dependencies', 'devDependencies', 'peerDependencies', 'scripts'];
+export type PackageRecordKeys = Extract<
+  keyof PackageManifest,
+  | 'dependencies'
+  | 'devDependencies'
+  | 'peerDependencies'
+  | 'peerDependenciesMeta'
+  | 'scripts'
+  | 'optionalDependencies'
+  | 'resolutions'
+  | 'exports'
+>;
+
+const recordKeys: PackageRecordKeys[] = [
+  'dependencies',
+  'devDependencies',
+  'peerDependencies',
+  'peerDependenciesMeta',
+  'scripts',
+  'optionalDependencies',
+  'resolutions',
+  'exports',
+] as const;
+type RecordValueType<T> = T extends Record<string, infer TValue> ? TValue : never;
 
 const scriptPath = normalizePath(path.join(path.dirname(fileURLToPath(import.meta.url)), '../..'));
 const rootPath = path.dirname(scriptPath);
@@ -140,7 +228,7 @@ export class ProjectRoot {
       throw new Error(`No package.json found at ${pkgJsonPath}`);
     }
     this._manifest = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8')) ?? {};
-    this._manifestKeys = Object.keys(this._manifest);
+    this._manifestKeys = this.initKeys(this._manifest);
     this.root = rootPath;
   }
 
@@ -189,7 +277,7 @@ export class ProjectRoot {
     }
   }
 
-  updateRecordEntry(recordKey: PackageRecordKeys, valueKey: string, value: string | undefined) {
+  updateRecordEntry<K extends PackageRecordKeys>(recordKey: K, valueKey: string, value: RecordValueType<PackageManifest[K]> | undefined) {
     if (value !== undefined) {
       const record = this.manifest[recordKey] ?? this.setManifestEntry(recordKey, {});
       record[valueKey] = value;
@@ -230,6 +318,27 @@ export class ProjectRoot {
     return undefined;
   }
 
+  private initKeys(manifest: PackageManifest) {
+    const keys: string[] = [];
+    for (const key of defaultKeyOrder) {
+      if (key in manifest) {
+        keys.push(key);
+      }
+    }
+    let prevIndex = -1;
+    for (const key of Object.keys(manifest)) {
+      const currentIndex = keys.indexOf(key);
+      if (!keys.includes(key)) {
+        // insert key in the first position after prevIndex
+        prevIndex++;
+        keys.splice(prevIndex, 0, key);
+      } else {
+        prevIndex = currentIndex;
+      }
+    }
+    return keys;
+  }
+
   get buildConfig(): RepoBuildConfig {
     const config = { ...this._manifest.furn } as RepoBuildConfig;
     if (this._manifest.depcheck) {
@@ -238,22 +347,7 @@ export class ProjectRoot {
         ...config.depcheck,
       };
     }
-    return {
-      ...this._manifest.furn,
-    };
-  }
-
-  get resolvedBuildConfig(): ResolvedBuildConfig {
-    const buildConfig = this.buildConfig;
-    return {
-      packageType: buildConfig.packageType ?? 'library',
-      typescript: {
-        engine: buildConfig.typescript?.engine ?? 'tsgo',
-        cjsDir: buildConfig.typescript?.cjsDir ?? 'lib-commonjs',
-        esmDir: buildConfig.typescript?.esmDir ?? 'lib',
-      },
-      depcheck: buildConfig.depcheck ?? {},
-    };
+    return config;
   }
 
   private prepManifestForWrite() {
@@ -267,7 +361,7 @@ export class ProjectRoot {
     this._manifest = reordered as PackageManifest;
   }
 
-  prepRecordEntryForWrite(key: PackageRecordKeys) {
+  prepRecordEntryForWrite<K extends PackageRecordKeys>(key: K) {
     const existingRecord = this.manifest[key];
     if (existingRecord) {
       const keys = Object.keys(existingRecord);
@@ -276,7 +370,8 @@ export class ProjectRoot {
         return;
       }
       const orderedKeys = Object.keys(existingRecord).sort((a, b) => a.localeCompare(b));
-      this.setManifestEntry(key, Object.fromEntries(orderedKeys.map((key) => [key, existingRecord[key]])));
+      const newObj = Object.fromEntries(orderedKeys.map((key) => [key, existingRecord[key]])) as Required<PackageManifest>[K];
+      this.setManifestEntry<K>(key, newObj);
     }
   }
 }

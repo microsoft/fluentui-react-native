@@ -5,14 +5,19 @@
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/codemods"
+  },
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib-commonjs/index.js"
     }
   },
   "bin": {
@@ -24,17 +29,10 @@
     "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true",
     "test": "fluentui-scripts jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/codemods"
   },
   "dependencies": {
     "jscodeshift": "^17.0.0",
@@ -50,6 +48,5 @@
     "@fluentui-react-native/test-tools": "workspace:*",
     "@types/jscodeshift": "^0.11.11",
     "@types/node": "^22.0.0"
-  },
-  "furn": {}
+  }
 }

@@ -2,14 +2,21 @@
   "name": "@fluentui-react-native/divider",
   "version": "0.7.23",
   "description": "A cross-platform Divider component using the Fluent Design System",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/components/Divider"
+  },
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib-commonjs/index.js"
     }
   },
   "scripts": {
@@ -18,18 +25,11 @@
     "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/components/Divider"
   },
   "dependencies": {
     "@fluentui-react-native/framework": "workspace:*",
@@ -37,6 +37,25 @@
     "@fluentui-react-native/text": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.74.0",
+    "react": "18.2.0",
+    "react-native": "^0.73.0 || ^0.74.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0",
+    "react-native-svg": ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0"
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -57,16 +76,6 @@
     "react-native-windows": "^0.74.0",
     "react-test-renderer": "18.2.0"
   },
-  "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0",
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0",
-    "react-native-macos": "^0.73.0 || ^0.74.0",
-    "react-native-svg": ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0",
-    "react-native-windows": "^0.73.0 || ^0.74.0"
-  },
-  "author": "",
-  "license": "MIT",
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
@@ -92,17 +101,6 @@
         "svg",
         "react-test-renderer"
       ]
-    }
-  },
-  "peerDependenciesMeta": {
-    "@office-iss/react-native-win32": {
-      "optional": true
-    },
-    "react-native-macos": {
-      "optional": true
-    },
-    "react-native-windows": {
-      "optional": true
     }
   }
 }

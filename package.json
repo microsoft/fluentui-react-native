@@ -23,7 +23,7 @@
     "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
   },
   "scripts": {
-    "build": "lage build",
+    "build": "lage build-dual",
     "buildci": "lage buildci",
     "bump-versions": "beachball bump",
     "clean-all": "node ./scripts/src/preinstall/clean-all.js",
@@ -36,15 +36,16 @@
     "check-publishing": "node ./scripts/src/cli.mjs check-publishing",
     "align-deps": "rnx-align-deps --no-unmanaged --requirements react-native@0.74",
     "depcheck": "lage depcheck",
-    "depcheck-fix": "yarn workspaces foreach -all -no-private run depcheck --fix-errors",
+    "depcheck-fix": "cross-env FURN_FIX_MODE=true lage depcheck",
     "depcheck-fix-check": "yarn workspaces foreach -all -no-private run depcheck --fix-errors --dry-run",
     "lint": "lage lint",
+    "lint-fix": "cross-env FURN_FIX_MODE=true lage lint",
     "lint-packages": "lage lint-package",
     "lint-packages-fix": "cross-env FURN_FIX_MODE=true lage lint-package",
     "pr-check": "lage pr-check",
     "preinstall": "node ./scripts/src/preinstall/use-yarn-please.js",
     "prettier": "lage prettier",
-    "prettier-fix": "lage prettier-fix",
+    "prettier-fix": "cross-env FURN_FIX_MODE=true lage prettier",
     "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"  --verbose",
     "test": "lage test",
     "test-links": "markdown-link-check"

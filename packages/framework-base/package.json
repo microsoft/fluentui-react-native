@@ -2,41 +2,39 @@
   "name": "@fluentui-react-native/framework-base",
   "version": "0.2.1",
   "description": "Base types and utilities fluentui-react-native frameworks",
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework-base"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib-commonjs/index.js"
     },
     "./jsx-runtime": {
+      "types": "./lib/jsx-runtime.d.ts",
       "import": "./lib/jsx-runtime.js",
-      "require": "./lib-commonjs/jsx-runtime.js",
-      "types": "./lib/jsx-runtime.d.ts"
+      "require": "./lib-commonjs/jsx-runtime.js"
     },
     "./tsconfig.component.json": "./tsconfig.component.json"
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "build-cjs": "fluentui-scripts build --target cjs",
-    "build-esm": "fluentui-scripts build --target esm",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",

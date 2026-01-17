@@ -5,9 +5,21 @@
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "apps/fluent-tester"
+  },
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js"
+    }
+  },
   "scripts": {
     "android": "rnx-cli run --platform android",
     "build": "fluentui-scripts build",
@@ -21,19 +33,12 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "ios": "rnx-cli run --platform ios",
-    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
     "macos": "rnx-cli run --platform macos",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true",
     "start": "rnx-cli start",
     "windows": "react-native run-windows --arch x64 --sln windows/FluentTester.sln"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "apps/fluent-tester"
   },
   "dependencies": {
     "@fluentui-react-native/android-theme": "workspace:*",
@@ -97,6 +102,11 @@
     "react-native-svg": ">=15.4.0 <15.13.0",
     "react-native-windows": "^0.74.0"
   },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/runtime": "^7.20.0",
@@ -129,9 +139,6 @@
     "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
     "webdriverio": "catalog:"
-  },
-  "jest": {
-    "preset": "react-native"
   },
   "furn": {},
   "rnx-kit": {
@@ -207,9 +214,7 @@
       ]
     }
   },
-  "peerDependenciesMeta": {
-    "@office-iss/react-native-win32": {
-      "optional": true
-    }
+  "jest": {
+    "preset": "react-native"
   }
 }
