@@ -23,8 +23,7 @@
       "types": "./lib/jsx-runtime.d.ts",
       "import": "./lib/jsx-runtime.js",
       "require": "./lib-commonjs/jsx-runtime.js"
-    },
-    "./tsconfig.component.json": "./tsconfig.component.json"
+    }
   },
   "scripts": {
     "build": "fluentui-scripts build",

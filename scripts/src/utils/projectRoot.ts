@@ -90,7 +90,6 @@ export type PackageManifest = {
   resolutions?: Record<string, string>;
 
   // tool configurations
-  depcheck?: RepoBuildConfig['depcheck'];
   furn?: RepoBuildConfig;
   'rnx-kit'?: Record<string, unknown>;
   eslintConfig?: Record<string, unknown>;
@@ -340,14 +339,7 @@ export class ProjectRoot {
   }
 
   get buildConfig(): RepoBuildConfig {
-    const config = { ...this._manifest.furn } as RepoBuildConfig;
-    if (this._manifest.depcheck) {
-      config.depcheck = {
-        ...this._manifest.depcheck,
-        ...config.depcheck,
-      };
-    }
-    return config;
+    return { ...this.manifest.furn };
   }
 
   private prepManifestForWrite() {

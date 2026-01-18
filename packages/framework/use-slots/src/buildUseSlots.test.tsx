@@ -1,3 +1,4 @@
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ViewProps, TextProps } from 'react-native';
 import { View, Text } from 'react-native';
 

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Alert } from 'react-native';
 
 import * as renderer from 'react-test-renderer';

@@ -140,7 +140,13 @@
     "react-test-renderer": "18.2.0",
     "webdriverio": "catalog:"
   },
-  "furn": {},
+  "furn": {
+    "depcheck": {
+      "ignoreMatches": [
+        "@fluentui-react-native/experimental-expander"
+      ]
+    }
+  },
   "rnx-kit": {
     "kitType": "app",
     "bundle": [

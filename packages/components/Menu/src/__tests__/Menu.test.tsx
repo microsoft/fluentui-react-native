@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import * as renderer from 'react-test-renderer';
 

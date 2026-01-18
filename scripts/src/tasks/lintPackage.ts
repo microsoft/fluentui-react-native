@@ -43,11 +43,6 @@ export class LintPackageCommand extends Command {
   private checkManifest(projRoot: ProjectRoot) {
     const manifest = projRoot.manifest;
     this.warnIf(!manifest.description, 'Package is missing a description field');
-    this.warnIf(manifest.depcheck !== undefined, 'depcheck should be under the furn field', () => {
-      const buildConfig = projRoot.buildConfig;
-      projRoot.setManifestEntry('furn', buildConfig);
-      projRoot.clearManifestEntry('depcheck');
-    });
     this.errorIf(manifest.typings !== undefined, 'typings field is deprecated; use types instead', () => {
       if (manifest.types === undefined && manifest.typings !== undefined) {
         projRoot.setManifestEntry('types', manifest.typings);

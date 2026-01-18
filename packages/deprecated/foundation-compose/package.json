@@ -74,7 +74,15 @@
     "react-native-macos": "^0.74.0",
     "react-native-windows": "^0.74.0"
   },
-  "furn": {},
+  "furn": {
+    "depcheck": {
+      "ignoreMatches": [
+        "@fluentui-react-native/default-theme",
+        "@fluentui-react-native/memo-cache",
+        "@fluentui-react-native/theme-types"
+      ]
+    }
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {

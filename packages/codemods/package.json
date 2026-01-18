@@ -48,5 +48,15 @@
     "@fluentui-react-native/test-tools": "workspace:*",
     "@types/jscodeshift": "^0.11.11",
     "@types/node": "^22.0.0"
+  },
+  "furn": {
+    "depcheck": {
+      "ignoreMatches": [
+        ".bin"
+      ],
+      "ignorePatterns": [
+        "src/transforms/__testfixtures__/*"
+      ]
+    }
   }
 }
