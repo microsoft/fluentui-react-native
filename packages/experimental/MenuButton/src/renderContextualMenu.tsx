@@ -1,5 +1,4 @@
 /** @jsxRuntime classic */
-/* @jsxFrag React.Fragment */
 import * as React from 'react';
 
 import type { ContextualMenuProps } from '@fluentui-react-native/contextual-menu';

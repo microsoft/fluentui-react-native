@@ -1,10 +1,9 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import { useRef, useEffect, useCallback } from 'react';
 import { Animated, Easing, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
+import { compose, mergeProps, buildUseStyling } from '@fluentui-react-native/framework';
 import { Svg, Path } from 'react-native-svg';
 import type { SvgProps } from 'react-native-svg';
 

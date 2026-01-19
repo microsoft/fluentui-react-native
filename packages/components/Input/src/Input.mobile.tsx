@@ -1,10 +1,9 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import { Fragment } from 'react';
 import { Pressable, ScrollView, TextInput, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 import { createIconProps } from '@fluentui-react-native/icon';
 import { Icon } from '@fluentui-react-native/icon';
 import type { FocusState } from '@fluentui-react-native/interactive-hooks';

@@ -1,10 +1,9 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import React from 'react';
 import { I18nManager, Platform, Text as RNText } from 'react-native';
 
 import type { UseTokens, FontWeightValue } from '@fluentui-react-native/framework';
-import { fontStyles, withSlots, useFluentTheme, mergeStyles, compressible, patchTokens } from '@fluentui-react-native/framework';
+import { fontStyles, useFluentTheme, mergeStyles, compressible, patchTokens } from '@fluentui-react-native/framework';
 import { useKeyProps } from '@fluentui-react-native/interactive-hooks';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
