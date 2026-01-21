@@ -51,6 +51,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030",
     "@react-native/babel-preset": "^0.74.0",
@@ -97,12 +98,11 @@
       }
     ],
     "alignDeps": {
-      "presets": [
-        "microsoft/react-native"
-      ],
-      "requirements": [
-        "react-native@0.74"
-      ],
+      "requirements": {
+        "production": [
+          "react-native@0.74"
+        ]
+      },
       "capabilities": [
         "babel-preset-react-native",
         "core",
@@ -110,9 +110,11 @@
         "metro-react-native-babel-transformer",
         "react",
         "react-test-renderer",
-        "svg"
+        "svg",
+        "tools-core"
       ]
-    }
+    },
+    "extends": "@fluentui-react-native/kit-config"
   },
   "jest": {
     "preset": "react-native"

@@ -1,7 +1,9 @@
 {
   "extends": "@fluentui-react-native/scripts/configs/tsconfig.json",
   "compilerOptions": {
-    "outDir": "lib"
+    "outDir": "lib",
+    "allowJs": true,
+    "checkJs": true
   },
   "include": ["src"]
 }

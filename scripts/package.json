@@ -25,12 +25,15 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
-    "@rnx-kit/eslint-plugin": "^0.8.6",
-    "@rnx-kit/jest-preset": "^0.2.1",
-    "@rnx-kit/reporter": "^0.1.0",
-    "@rnx-kit/tools-packages": "^0.1.1",
-    "@rnx-kit/tools-typescript": "^0.1.1",
-    "@rnx-kit/tsconfig": "^2.1.1",
+    "@fluentui-react-native/kit-config": "workspace:*",
+    "@rnx-kit/align-deps": "catalog:",
+    "@rnx-kit/config": "catalog:",
+    "@rnx-kit/eslint-plugin": "catalog:",
+    "@rnx-kit/jest-preset": "catalog:",
+    "@rnx-kit/reporter": "catalog:",
+    "@rnx-kit/tools-packages": "catalog:",
+    "@rnx-kit/tools-typescript": "catalog:",
+    "@rnx-kit/tsconfig": "catalog:",
     "@types/micromatch": "^4.0.9",
     "@types/node": "^22.0.0",
     "@typescript/native-preview": "7.0.0-dev.20260113.1",
@@ -48,8 +51,8 @@
     "typescript": "^5.8.0",
     "workspace-tools": "^0.26.3"
   },
-  "rnx-kit": {
-    "kitType": "library"
+  "furn": {
+    "packageType": "tooling"
   },
   "bundlesize": [
     {

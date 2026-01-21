@@ -2,6 +2,7 @@ import Module from 'node:module';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
+import type { KitConfig } from '@rnx-kit/config';
 
 export type ExportSet = {
   default?: string;
@@ -91,7 +92,7 @@ export type PackageManifest = {
 
   // tool configurations
   furn?: RepoBuildConfig;
-  'rnx-kit'?: Record<string, unknown>;
+  'rnx-kit'?: KitConfig;
   eslintConfig?: Record<string, unknown>;
   jest?: Record<string, unknown>;
   prettier?: Record<string, unknown>;
@@ -216,6 +217,7 @@ export function getRepoProjectRoot() {
 export class ProjectRoot {
   root: string;
 
+  private _manifestText: string;
   private _manifest: PackageManifest;
   private _manifestKeys: string[];
 
@@ -226,7 +228,8 @@ export class ProjectRoot {
     if (!fs.existsSync(pkgJsonPath)) {
       throw new Error(`No package.json found at ${pkgJsonPath}`);
     }
-    this._manifest = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8')) ?? {};
+    this._manifestText = fs.readFileSync(pkgJsonPath, 'utf-8');
+    this._manifest = JSON.parse(this._manifestText) ?? {};
     this._manifestKeys = this.initKeys(this._manifest);
     this.root = rootPath;
   }
@@ -238,6 +241,21 @@ export class ProjectRoot {
   /** @returns {NodeRequire} - built on demand and cached require function */
   get require() {
     return (this.cachedRequire ??= Module.createRequire(this.root));
+  }
+
+  /**
+   * Reload the manifest from disk. Returns true if the manifest changed since the last reload.
+   */
+  reloadManifest(): boolean {
+    const pkgJsonPath = path.join(this.root, 'package.json');
+    const newText = fs.readFileSync(pkgJsonPath, 'utf-8');
+    const changed = newText !== this._manifestText;
+    if (changed) {
+      this._manifestText = newText;
+      this._manifest = JSON.parse(this._manifestText) ?? {};
+      this._manifestKeys = this.initKeys(this._manifest);
+    }
+    return changed;
   }
 
   /**

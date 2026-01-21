@@ -16,17 +16,13 @@ module.exports = {
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*', 'lib-commonjs/**/*'],
     },
-    buildci: ['build-dual', 'test', 'lint', 'depcheck', 'check-publishing'],
+    buildci: ['build-dual', 'test', 'lint', 'lint-package', 'check-publishing'],
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: ['dist/**/*'],
     },
     clean: {
       cache: false,
-    },
-    depcheck: {
-      inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
-      outputs: [],
     },
     lint: {
       inputs: ['*', 'src/**/*'],
@@ -40,7 +36,7 @@ module.exports = {
       inputs: ['*', 'src/**/*'],
       outputs: [],
     },
-    ['pr-check']: ['build-dual', 'test', 'lint', 'depcheck', 'check-publishing', 'align-deps', 'lint-package', 'lint-lockfile', 'prettier'],
+    ['pr-check']: ['build-dual', 'test', 'lint', 'check-publishing', 'align-deps', 'lint-package', 'lint-lockfile', 'prettier'],
     ['prettier-fix']: [],
     test: {
       dependsOn: ['build-dual'],

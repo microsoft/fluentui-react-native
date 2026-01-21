@@ -40,19 +40,34 @@
     "lint-package": "fluentui-scripts lint-package"
   },
   "dependencies": {
-    "@office-iss/react-native-win32": "^0.74.0",
-    "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030",
+    "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030"
+  },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0",
     "react": "18.2.0",
-    "react-native": "^0.74.0",
-    "react-native-macos": "^0.74.0",
-    "react-native-windows": "^0.74.0"
+    "react-native": "^0.73.0 || ^0.74.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0"
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@office-iss/react-native-win32": "^0.74.0",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
@@ -77,6 +92,10 @@
     "cross-env": "catalog:",
     "expect-webdriverio": "catalog:",
     "metro-config": "^0.80.3",
+    "react": "18.2.0",
+    "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
+    "react-native-windows": "^0.74.0",
     "rimraf": "^5.0.1",
     "ts-node": "^10.7.0",
     "webdriverio": "catalog:"
@@ -85,23 +104,20 @@
     "hoistingLimits": "dependencies"
   },
   "rnx-kit": {
-    "kitType": "app",
+    "kitType": "library",
     "alignDeps": {
-      "presets": [
-        "microsoft/react-native"
-      ],
-      "requirements": [
-        "react-native@0.74"
-      ],
       "capabilities": [
         "babel-preset-react-native",
         "core",
         "core-macos",
         "core-windows",
+        "core-win32",
         "metro-config",
         "metro-react-native-babel-transformer",
-        "react"
+        "react",
+        "tools-core"
       ]
-    }
+    },
+    "extends": "@fluentui-react-native/kit-config"
   }
 }

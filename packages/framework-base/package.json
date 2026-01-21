@@ -39,17 +39,30 @@
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },
-  "dependencies": {
-    "@types/react": "^18.2.0",
+  "peerDependencies": {
     "react": "18.2.0"
   },
   "devDependencies": {
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
     "@types/node": "^22.0.0",
-    "@typescript/native-preview": "7.0.0-dev.20260113.1"
+    "@types/react": "^18.2.0",
+    "react": "18.2.0"
+  },
+  "rnx-kit": {
+    "extends": "@fluentui-react-native/kit-config",
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "react",
+        "tools-core",
+        "tools-eslint",
+        "tools-jest"
+      ]
+    }
   }
 }

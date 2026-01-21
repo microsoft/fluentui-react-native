@@ -1,0 +1,39 @@
+{
+  "name": "@fluentui-react-native/kit-config",
+  "private": true,
+  "version": "0.1.1",
+  "description": "Rnx-kit configuration for Fluent UI React Native packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/configs/kit-config"
+  },
+  "main": "./rnx-kit.config.cjs",
+  "exports": {
+    ".": "./rnx-kit.config.cjs",
+    "./furn-preset.cjs": "./furn-preset.cjs",
+    "./rnx-kit.config.cjs": "./rnx-kit.config.cjs"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsgo",
+    "build-cjs": "tsgo",
+    "build-esm": "tsgo"
+  },
+  "dependencies": {
+    "@rnx-kit/align-deps": "^3.4.0",
+    "@rnx-kit/config": "^0.7.4"
+  },
+  "devDependencies": {
+    "@rnx-kit/tsconfig": "^2.1.1"
+  },
+  "furn": {
+    "packageType": "tooling"
+  },
+  "beachball": {
+    "shouldPublish": false,
+    "disallowedChangeTypes": [
+      "major"
+    ]
+  }
+}

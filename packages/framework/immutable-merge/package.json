@@ -28,18 +28,37 @@
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
-    "prettier": "fluentui-scripts prettier",
-    "start": "fluentui-scripts dev",
-    "start-test": "fluentui-scripts jest-watch"
+    "prettier": "fluentui-scripts prettier"
   },
   "dependencies": {
     "@fluentui-react-native/framework-base": "workspace:*"
   },
+  "peerDependencies": {
+    "react": "18.2.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.0.0",
+    "react": "18.2.0"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/kit-config",
+    "alignDeps": {
+      "capabilities": [
+        "react",
+        "tools-core",
+        "tools-eslint"
+      ]
+    }
   }
 }

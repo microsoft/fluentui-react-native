@@ -110,9 +110,11 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/experimental-native-font-metrics": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/menu-button": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^13.6.4",
@@ -196,15 +198,14 @@
       }
     ],
     "alignDeps": {
-      "presets": [
-        "microsoft/react-native",
-        "@fluentui-react-native/scripts/configs/align-deps-preset.cjs"
-      ],
-      "requirements": [
-        "react-native@0.74"
-      ],
+      "requirements": {
+        "production": [
+          "react-native@0.74"
+        ]
+      },
       "capabilities": [
         "babel-preset-react-native",
+        "community/cli",
         "core-android",
         "core-ios",
         "core-macos",
@@ -216,9 +217,10 @@
         "react-test-renderer",
         "svg",
         "test-app",
-        "community/cli"
+        "tools-core"
       ]
-    }
+    },
+    "extends": "@fluentui-react-native/kit-config"
   },
   "jest": {
     "preset": "react-native"

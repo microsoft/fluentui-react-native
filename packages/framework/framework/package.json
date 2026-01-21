@@ -66,6 +66,7 @@
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
@@ -81,17 +82,6 @@
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
-      "presets": [
-        "microsoft/react-native"
-      ],
-      "requirements": {
-        "development": [
-          "react-native@0.74"
-        ],
-        "production": [
-          "react-native@0.73 || 0.74"
-        ]
-      },
       "capabilities": [
         "babel-preset-react-native",
         "core",
@@ -100,8 +90,10 @@
         "core-macos",
         "core-windows",
         "react",
-        "react-test-renderer"
+        "react-test-renderer",
+        "tools-core"
       ]
-    }
+    },
+    "extends": "@fluentui-react-native/kit-config"
   }
 }

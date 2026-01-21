@@ -4,7 +4,7 @@ import { spawn } from 'node:child_process';
 import { getProjectRoot } from './projectRoot.ts';
 import os from 'node:os';
 
-const yarnVerb = os.platform() === 'win32' ? 'yarn.cmd' : 'yarn';
+export const yarnVerb = os.platform() === 'win32' ? 'yarn.cmd' : 'yarn';
 
 /** @type {Record<string, string>} */
 const cmdToModule = {

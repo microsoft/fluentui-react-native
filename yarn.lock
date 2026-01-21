@@ -2462,6 +2462,7 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -2497,6 +2498,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -2538,6 +2540,7 @@ __metadata:
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -2580,6 +2583,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
@@ -2644,6 +2648,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
@@ -2695,6 +2700,7 @@ __metadata:
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/pressable": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/styling-utils": "workspace:*"
@@ -2745,6 +2751,7 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
@@ -2787,6 +2794,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/pressable": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/styling-utils": "workspace:*"
@@ -2840,6 +2848,7 @@ __metadata:
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
@@ -2882,6 +2891,7 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@types/jscodeshift": "npm:^0.11.11"
@@ -2902,6 +2912,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-slots": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
@@ -2932,6 +2943,7 @@ __metadata:
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/pressable": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
@@ -2978,6 +2990,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -3141,6 +3154,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
@@ -3185,6 +3199,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
@@ -3226,6 +3241,7 @@ __metadata:
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
@@ -3263,6 +3279,7 @@ __metadata:
     "@babel/runtime": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
     "@office-iss/rex-win32": "npm:0.73.11-devmain.16.0.17615.15030"
@@ -3297,6 +3314,19 @@ __metadata:
     rimraf: "npm:^5.0.1"
     ts-node: "npm:^10.7.0"
     webdriverio: "catalog:"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+    react-native-macos: ^0.73.0 || ^0.74.0
+    react-native-windows: ^0.73.0 || ^0.74.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-windows:
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -3304,6 +3334,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/eslint-config-rules@workspace:packages/framework/eslint-config-rules"
   dependencies:
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@microsoft/eslint-plugin-sdl": "npm:^1.1.0"
     "@rnx-kit/eslint-plugin": "npm:^0.8.6"
@@ -3321,6 +3352,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -3356,6 +3388,7 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -3391,6 +3424,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -3428,6 +3462,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -3464,6 +3499,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -3500,6 +3536,7 @@ __metadata:
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
@@ -3537,6 +3574,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -3555,6 +3593,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -3577,6 +3616,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/pressable": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
@@ -3616,6 +3656,7 @@ __metadata:
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
@@ -3659,6 +3700,7 @@ __metadata:
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
@@ -3699,6 +3741,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -3738,6 +3781,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -3775,12 +3819,14 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^22.0.0"
     "@types/react": "npm:^18.2.0"
-    "@typescript/native-preview": "npm:7.0.0-dev.20260113.1"
     react: "npm:18.2.0"
+  peerDependencies:
+    react: 18.2.0
   languageName: unknown
   linkType: soft
 
@@ -3794,6 +3840,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
@@ -3837,6 +3884,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
@@ -3875,9 +3923,16 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^22.0.0"
+    react: "npm:18.2.0"
+  peerDependencies:
+    react: 18.2.0
+  peerDependenciesMeta:
+    react:
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -3893,6 +3948,7 @@ __metadata:
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/styling-utils": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
@@ -3937,6 +3993,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
@@ -3985,6 +4042,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/kit-config@workspace:*, @fluentui-react-native/kit-config@workspace:packages/configs/kit-config":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/kit-config@workspace:packages/configs/kit-config"
+  dependencies:
+    "@rnx-kit/align-deps": "npm:^3.4.0"
+    "@rnx-kit/config": "npm:^0.7.4"
+    "@rnx-kit/tsconfig": "npm:^2.1.1"
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/link@npm:*, @fluentui-react-native/link@workspace:*, @fluentui-react-native/link@workspace:packages/components/Link":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/link@workspace:packages/components/Link"
@@ -3997,6 +4064,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
@@ -4037,10 +4105,17 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^22.0.0"
+    react: "npm:18.2.0"
     tslib: "npm:^2.3.1"
+  peerDependencies:
+    react: 18.2.0
+  peerDependenciesMeta:
+    react:
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -4056,6 +4131,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
@@ -4105,6 +4181,7 @@ __metadata:
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
@@ -4149,15 +4226,16 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
     react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
   peerDependencies:
     react: 18.2.0
-    react-native: ^0.73.0 || ^0.74.0
+  peerDependenciesMeta:
+    react:
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -4177,6 +4255,7 @@ __metadata:
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/pressable": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
@@ -4223,6 +4302,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/menu": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
@@ -4264,6 +4344,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
@@ -4305,6 +4386,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/persona-coin": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
@@ -4345,6 +4427,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -4378,6 +4461,7 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -4417,6 +4501,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/pressable": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
@@ -4468,8 +4553,8 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
-    "@rnx-kit/align-deps": "npm:^3.0.0"
-    "@rnx-kit/lint-lockfile": "npm:^0.1.0"
+    "@rnx-kit/align-deps": "catalog:"
+    "@rnx-kit/lint-lockfile": "catalog:"
     babel-jest: "npm:^29.7.0"
     beachball: "npm:^2.20.0"
     cross-env: "catalog:"
@@ -4489,12 +4574,15 @@ __metadata:
   resolution: "@fluentui-react-native/scripts@workspace:scripts"
   dependencies:
     "@eslint/js": "npm:^9.0.0"
-    "@rnx-kit/eslint-plugin": "npm:^0.8.6"
-    "@rnx-kit/jest-preset": "npm:^0.2.1"
-    "@rnx-kit/reporter": "npm:^0.1.0"
-    "@rnx-kit/tools-packages": "npm:^0.1.1"
-    "@rnx-kit/tools-typescript": "npm:^0.1.1"
-    "@rnx-kit/tsconfig": "npm:^2.1.1"
+    "@fluentui-react-native/kit-config": "workspace:*"
+    "@rnx-kit/align-deps": "catalog:"
+    "@rnx-kit/config": "catalog:"
+    "@rnx-kit/eslint-plugin": "catalog:"
+    "@rnx-kit/jest-preset": "catalog:"
+    "@rnx-kit/reporter": "catalog:"
+    "@rnx-kit/tools-packages": "catalog:"
+    "@rnx-kit/tools-typescript": "catalog:"
+    "@rnx-kit/tsconfig": "catalog:"
     "@types/micromatch": "npm:^4.0.9"
     "@types/node": "npm:^22.0.0"
     "@typescript/native-preview": "npm:7.0.0-dev.20260113.1"
@@ -4526,6 +4614,7 @@ __metadata:
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
@@ -4564,6 +4653,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -4604,6 +4694,7 @@ __metadata:
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
@@ -4643,6 +4734,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -4666,6 +4758,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
@@ -4712,6 +4805,7 @@ __metadata:
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
@@ -4753,6 +4847,7 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@types/jest": "npm:^29.0.0"
@@ -4773,6 +4868,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tester": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
@@ -4809,6 +4905,7 @@ __metadata:
     "@fluentui-react-native/android-theme": "workspace:*"
     "@fluentui-react-native/apple-theme": "workspace:*"
     "@fluentui-react-native/avatar": "workspace:*"
+    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/badge": "workspace:*"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
@@ -4835,6 +4932,7 @@ __metadata:
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/input": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/menu": "workspace:*"
     "@fluentui-react-native/menu-button": "workspace:*"
     "@fluentui-react-native/notification": "workspace:*"
@@ -4913,6 +5011,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -4954,6 +5053,7 @@ __metadata:
     "@fluentui-react-native/design-tokens-win32": "npm:^0.53.0"
     "@fluentui-react-native/design-tokens-windows": "npm:^0.53.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -4974,6 +5074,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -4995,6 +5096,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
@@ -5017,6 +5119,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -5038,6 +5141,7 @@ __metadata:
     "@fluentui-react-native/design-tokens-windows": "npm:^0.53.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
@@ -5072,6 +5176,7 @@ __metadata:
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -5108,6 +5213,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
@@ -5146,6 +5252,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
@@ -5169,6 +5276,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-slot": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -5193,6 +5301,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-tokens": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -5218,6 +5327,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -5241,7 +5351,9 @@ __metadata:
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
     "@types/react": "npm:~18.2.0"
@@ -5250,7 +5362,7 @@ __metadata:
     react-native-macos: "npm:^0.74.0"
     react-native-windows: "npm:^0.74.0"
   peerDependencies:
-    "@office-iss/react-native-win32": ^0.74.0
+    "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
@@ -5276,6 +5388,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -5332,6 +5445,7 @@ __metadata:
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/link": "workspace:*"
     "@fluentui-react-native/menu-button": "workspace:*"
     "@fluentui-react-native/persona": "workspace:*"
@@ -7338,12 +7452,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/align-deps@npm:^3.0.0, @rnx-kit/align-deps@npm:^3.1.0":
+"@rnx-kit/align-deps@npm:^3.1.0":
   version: 3.3.2
   resolution: "@rnx-kit/align-deps@npm:3.3.2"
   bin:
     rnx-align-deps: lib/index.js
   checksum: 10c0/e68bffaaadb59f74dd8172dea629caa11cbd6998044bd60e6ed0c25e8047d29b548ac94b31c9cead5f38c269e1e1cf674c11619f9517eae5ffc7c30fbe6ea5ce
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/align-deps@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "@rnx-kit/align-deps@npm:3.4.0"
+  bin:
+    rnx-align-deps: lib/index.js
+  checksum: 10c0/db917363b7e8b4b24c55f5b10184f1e425820651c7650a8a2a16affc29de281dd804464dae17631594f217df11d98e1f548d0967073ffcf6a28b521aecc92cba
   languageName: node
   linkType: hard
 
@@ -7433,6 +7556,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/eslint-plugin@npm:^0.9.5":
+  version: 0.9.5
+  resolution: "@rnx-kit/eslint-plugin@npm:0.9.5"
+  dependencies:
+    "@react-native/eslint-plugin": "npm:^0.76.0"
+    enhanced-resolve: "npm:^5.8.3"
+    eslint-plugin-react: "npm:^7.35.2"
+    eslint-plugin-react-hooks: "npm:^5.2.0"
+    typescript-eslint: "npm:^8.0.0"
+  peerDependencies:
+    eslint: ">=8.57.0"
+  checksum: 10c0/6b81c331a9ec8690a0f421af72171b1bc1c38f9a7586a0dee86db5bdc752c9adbc19745c4d2fa370b014a4cd15f60a14132e1601a28b1407c65e2ea16c694a76
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/jest-preset@npm:^0.2.1":
   version: 0.2.1
   resolution: "@rnx-kit/jest-preset@npm:0.2.1"
@@ -7451,16 +7589,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/lint-lockfile@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@rnx-kit/lint-lockfile@npm:0.1.0"
+"@rnx-kit/jest-preset@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@rnx-kit/jest-preset@npm:0.3.1"
+  dependencies:
+    "@babel/core": "npm:^7.0.0"
+    "@babel/preset-env": "npm:^7.0.0"
+    "@babel/preset-typescript": "npm:^7.0.0"
+    "@rnx-kit/tools-react-native": "npm:^2.3.2"
+    find-up: "npm:^5.0.0"
+  peerDependencies:
+    react-native: ^0.0.0-0 || >=0.73
+  peerDependenciesMeta:
+    react-native:
+      optional: true
+  checksum: 10c0/db49a32389617e5f2f5f2b8a95768e913cd97de643febab21d4bbd37b0ed3fa862adcccc798b0fdc33662b087ea9f92859ff0a3c65de18e8fe62bc0128c7a33e
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/lint-lockfile@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@rnx-kit/lint-lockfile@npm:0.1.2"
   dependencies:
     "@rnx-kit/config": "npm:^0.7.4"
     "@rnx-kit/tools-workspaces": "npm:^0.2.3"
-    js-yaml: "npm:^4.1.0"
+    js-yaml: "npm:^4.1.1"
   bin:
     lint-lockfile: lib/cli.js
-  checksum: 10c0/534491cdf8c058a63862fd5e38209eee5a5ed8fe725a5e6d085076ed1b8a1b4f8ed08578b9174044c53f1ddebb197624d0b767c744b7565f36b6d3cfb13b0668
+  checksum: 10c0/778d5f320601ad6d3d4ec40730f4babc6d77c30dd0efa7dc0b5c1dec44306b431c6d16a58f2cb4b9376c33e7575caaf723aaf62758b440abd7949dcc5383b121
   languageName: node
   linkType: hard
 
@@ -7654,6 +7810,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/tools-node@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@rnx-kit/tools-node@npm:3.0.3"
+  checksum: 10c0/5fa2123cb156fc6d268c95b2fa094b3ccf5f264ff5dcfd08f024454f45972093144e5745d4bcbe84e8f731faf01b7bfb6d3bca3e7c97ec89da3fc2e3e1121959
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/tools-packages@npm:^0.1.0, @rnx-kit/tools-packages@npm:^0.1.1":
   version: 0.1.1
   resolution: "@rnx-kit/tools-packages@npm:0.1.1"
@@ -7670,6 +7833,15 @@ __metadata:
   dependencies:
     "@rnx-kit/tools-node": "npm:^3.0.0"
   checksum: 10c0/60f463e6929657731f07caf7e2a7136957d083636c1bc6baf81e78b5faac6fd2047d2c78744ed58b83c9b480a918ebcd70b65b6c741a5e4f7dbfecbdacd59ba3
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-react-native@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "@rnx-kit/tools-react-native@npm:2.3.2"
+  dependencies:
+    "@rnx-kit/tools-node": "npm:^3.0.3"
+  checksum: 10c0/eb12603e0a036d953689e2fb1db4995830cb74eb28847bf1f7d0600ab771b7c5b12388c0b93277690ae8d9bce03a13c56bbff099e867a957659bb1b14d888c2b
   languageName: node
   linkType: hard
 
@@ -8628,6 +8800,7 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
@@ -8649,6 +8822,7 @@ __metadata:
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
@@ -8688,6 +8862,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -8709,8 +8884,10 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
+    "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
@@ -8722,7 +8899,7 @@ __metadata:
     react-native-macos: "npm:^0.74.0"
     react-native-windows: "npm:^0.74.0"
   peerDependencies:
-    "@office-iss/react-native-win32": ^0.74.0
+    "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-macos: ^0.73.0 || ^0.74.0
@@ -8746,6 +8923,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -8767,6 +8945,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -8789,6 +8968,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
@@ -8812,6 +8992,7 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/win32-theme": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -12812,7 +12993,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^5.0.0":
+"eslint-plugin-react-hooks@npm:^5.0.0, eslint-plugin-react-hooks@npm:^5.2.0":
   version: 5.2.0
   resolution: "eslint-plugin-react-hooks@npm:5.2.0"
   peerDependencies:

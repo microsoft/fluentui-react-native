@@ -42,6 +42,7 @@
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
     "@types/react": "^18.2.0",
@@ -51,6 +52,12 @@
     "react-test-renderer": "18.2.0"
   },
   "rnx-kit": {
-    "kitType": "library"
+    "kitType": "library",
+    "extends": "@fluentui-react-native/kit-config",
+    "alignDeps": {
+      "capabilities": [
+        "tools-core"
+      ]
+    }
   }
 }

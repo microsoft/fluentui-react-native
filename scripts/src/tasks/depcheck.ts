@@ -59,24 +59,43 @@ export class DepcheckCommand extends Command {
     description: 'Perform a dry run of fixes without making any changes',
   });
 
-  /** @type {import('@rnx-kit/reporter').Reporter} */
-  reporter = getReporter();
+  async execute() {
+    const runner = new DepCheckRunner({
+      verbose: this.verbose,
+      fixErrors: isFixMode(this.fixErrors),
+      fixWarnings: this.fixWarnings,
+      dryRun: this.dryRun,
+    });
+    return runner.execute();
+  }
+}
 
-  projectRoot = getProjectRoot();
-  ignored = new Set(injectedDevDeps(this.projectRoot));
+/**
+ * Runner for depcheck task, can be called from the command or from another command
+ */
+export class DepCheckRunner {
+  private verbose: boolean;
+  private fixErrors: boolean;
+  private fixWarnings: boolean;
+  private dryRun: boolean;
+  private changes = false;
+  private issues: Issue[] = [];
+  private errors = 0;
+  private projectRoot = getProjectRoot();
+  private ignored: Set<string> = new Set<string>(injectedDevDeps(this.projectRoot));
+  private removedDevDeps: string[] = [];
+  private removedDeps: string[] = [];
+  private addedDeps: { dependencies?: Record<string, string>; devDependencies?: Record<string, string> } = {};
+  private reporter = getReporter();
 
-  issues: Issue[] = [];
-
-  errors = 0;
-
-  removedDevDeps: string[] = [];
-
-  removedDeps: string[] = [];
-
-  addedDeps: { dependencies?: Record<string, string>; devDependencies?: Record<string, string> } = {};
+  constructor(options: { verbose?: boolean; fixErrors?: boolean; fixWarnings?: boolean; dryRun?: boolean } = {}) {
+    this.verbose = options.verbose ?? false;
+    this.fixErrors = options.fixErrors ?? false;
+    this.fixWarnings = options.fixWarnings ?? false;
+    this.dryRun = options.dryRun ?? false;
+  }
 
   async execute() {
-    this.fixErrors = isFixMode(this.fixErrors);
     const depcheckOptions = this.projectRoot.buildConfig.depcheck ?? {};
     const options = mergeOneLevel(
       {
@@ -113,7 +132,11 @@ export class DepcheckCommand extends Command {
     });
   }
 
-  handleIssues() {
+  madeChanges(): boolean {
+    return this.changes;
+  }
+
+  private handleIssues() {
     for (const issue of this.issues) {
       if (issue.issue === 'unused') {
         this.handleUnused(issue);
@@ -125,8 +148,8 @@ export class DepcheckCommand extends Command {
     this.handleFixes();
   }
 
-  handleFixes() {
-    const hasFixes = this.removedDeps.length > 0 || this.removedDevDeps.length > 0 || Object.keys(this.addedDeps).length > 0;
+  private handleFixes() {
+    this.changes = this.removedDeps.length > 0 || this.removedDevDeps.length > 0 || Object.keys(this.addedDeps).length > 0;
     const prefix = this.dryRun ? '[dry-run]' : ' -';
     if (this.removedDevDeps.length > 0) {
       if (!this.dryRun) {
@@ -163,12 +186,9 @@ export class DepcheckCommand extends Command {
         console.warn(prefix, `Added devDependency: ${this.reporter.formatPackage(dep)}@${version}`);
       }
     }
-    if (hasFixes && !this.dryRun) {
-      this.projectRoot.writeManifest();
-    }
   }
 
-  handleUnused(issue: Issue) {
+  private handleUnused(issue: Issue) {
     const color = this.reporter.color;
     const { dependency, depType = 'dependency' } = issue;
     const prettyDependency = this.reporter.formatPackage(dependency);
@@ -194,7 +214,7 @@ export class DepcheckCommand extends Command {
     }
   }
 
-  handleMissing(issue: Issue) {
+  private handleMissing(issue: Issue) {
     const color = this.reporter.color;
     const { dependency, files } = issue;
     const prettyDependency = this.reporter.formatPackage(dependency);
