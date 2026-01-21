@@ -5,6 +5,7 @@ import { getResolvedConfig } from '../utils/buildConfig.ts';
 import { isFixMode } from '../utils/env.ts';
 import { runAlignDeps } from './runAlignDeps.ts';
 import { DepCheckRunner } from './depcheck.ts';
+import { getCatalog } from '../utils/getCatalog.ts';
 
 export class LintPackageCommand extends Command {
   static override paths = [['lint-package']];
@@ -53,12 +54,14 @@ export class LintPackageCommand extends Command {
     // now do the custom linting
     const buildConfig = getResolvedConfig(this.projRoot, true);
 
+    const catalogCheck = this.checkCatalogs();
     this.checkManifest();
     this.checkScripts();
     this.checkEntryPoints(buildConfig);
     this.checkBuildConfig(buildConfig);
     this.checkDependencies();
     this.checkRnxKitConfig();
+    await catalogCheck;
 
     // report the results for the custom linting
     this.handleResult(this.issues > 0 ? 1 : 0, 'custom package rules');
@@ -181,6 +184,23 @@ export class LintPackageCommand extends Command {
     this.errorIf(rnxKitIssues.length > 0, rnxKitIssues.join('\n'), () => {
       projRoot.setManifestEntry('rnx-kit', rnxKitConfig);
     });
+  }
+
+  private async checkCatalogs() {
+    const catalog = await getCatalog();
+    this.checkCatalogUsage('dependencies', catalog);
+    this.checkCatalogUsage('devDependencies', catalog);
+  }
+
+  private checkCatalogUsage(key: 'dependencies' | 'devDependencies', catalog: Record<string, string>) {
+    const depSet = this.projRoot.manifest[key] || {};
+    for (const depName of Object.keys(depSet)) {
+      if (catalog[depName] !== undefined) {
+        this.errorIf(depSet[depName] !== 'catalog:', `- ${key}: ${depName} should use "catalog:" version specifier`, () => {
+          this.projRoot.updateRecordEntry(key, depName, 'catalog:');
+        });
+      }
+    }
   }
 
   private checkScripts() {

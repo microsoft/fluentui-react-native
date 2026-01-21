@@ -73,7 +73,7 @@
     "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/metro-config": "^2.0.0",
     "@types/jasmine": "catalog:",
-    "@types/node": "^22.2.0",
+    "@types/node": "catalog:",
     "@types/react": "^18.2.0",
     "@wdio/appium-service": "catalog:",
     "@wdio/cli": "catalog:",
@@ -96,7 +96,7 @@
     "react-native": "^0.74.0",
     "react-native-macos": "^0.74.0",
     "react-native-windows": "^0.74.0",
-    "rimraf": "^5.0.1",
+    "rimraf": "catalog:",
     "ts-node": "^10.7.0",
     "webdriverio": "catalog:"
   },

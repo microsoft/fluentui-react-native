@@ -35,7 +35,7 @@
     "@rnx-kit/tools-typescript": "catalog:",
     "@rnx-kit/tsconfig": "catalog:",
     "@types/micromatch": "^4.0.9",
-    "@types/node": "^22.0.0",
+    "@types/node": "catalog:",
     "@typescript/native-preview": "7.0.0-dev.20260113.1",
     "chalk": "^4.0.0",
     "clipanion": "^4.0.0-rc.4",

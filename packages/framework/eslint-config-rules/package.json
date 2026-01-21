@@ -21,13 +21,13 @@
   },
   "dependencies": {
     "@microsoft/eslint-plugin-sdl": "^1.1.0",
-    "@rnx-kit/eslint-plugin": "^0.8.6"
+    "@rnx-kit/eslint-plugin": "catalog:"
   },
   "devDependencies": {
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/eslint": "^9.0.0",
-    "@types/node": "^22.0.0",
+    "@types/node": "catalog:",
     "eslint": "^9.0.0"
   },
   "furn": {

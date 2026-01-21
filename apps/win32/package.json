@@ -65,7 +65,7 @@
     "metro-config": "^0.80.3",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "18.2.0",
-    "rimraf": "^5.0.1"
+    "rimraf": "catalog:"
   },
   "rnx-kit": {
     "kitType": "app",

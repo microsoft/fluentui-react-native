@@ -47,7 +47,7 @@
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
-    "@types/node": "^22.0.0",
+    "@types/node": "catalog:",
     "react": "18.2.0",
     "tslib": "^2.3.1"
   },
