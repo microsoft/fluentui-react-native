@@ -36,6 +36,7 @@ export async function runScript(command, ...args) {
     spawn(verb, spawnArgs, {
       cwd: process.cwd(),
       stdio: 'inherit',
+      shell: verb.endsWith('.cmd') || verb.endsWith('.bat') ? true : undefined,
     }).on('close', (code) => {
       resolve(code ?? -1);
     });
