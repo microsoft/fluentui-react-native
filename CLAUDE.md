@@ -84,6 +84,9 @@ Individual packages use `fluentui-scripts` (in `/scripts/`) which provides:
   - ESM builds use `--module esnext --moduleResolution bundler`
   - CJS builds use `--module node16 --moduleResolution node16`
 - `yarn lint` - ESLint
+- `yarn lint-package` - Lint package configuration (includes align-deps and depcheck)
+  - Use `--fix` flag to automatically fix issues
+  - Validates dependencies, scripts, entry points, and build configuration
 - `yarn test` - Jest tests (where applicable)
 - `yarn depcheck` - Check for unused dependencies
 - `yarn prettier` - Check code formatting
@@ -91,18 +94,20 @@ Individual packages use `fluentui-scripts` (in `/scripts/`) which provides:
 
 ## TypeScript Configuration
 
-The repository uses **TypeScript 5.8+** with strict module resolution requirements.
+The repository uses **TypeScript 5.8+** with **@typescript/native-preview** for improved performance and React Native compatibility. The native preview is automatically added to packages with a `tsconfig.json` via dynamic package extensions.
 
 ### Key TypeScript Settings
 - Base configuration in `/scripts/configs/tsconfig.json`
 - Module system: `node16` with matching `moduleResolution: node16`
 - Target: `es2022`
 - Strict mode enabled (with some exceptions for legacy code compatibility)
+- **TypeScript Native Preview**: Packages automatically receive `@typescript/native-preview` as a development dependency
 
 ### TypeScript 5.8+ Compatibility Notes
 - The `suppressImplicitAnyIndexErrors` option has been removed (deprecated in TS 5.8+)
 - Module resolution must match module format when using Node16 resolution
 - Stricter type checking for platform values (e.g., `Platform.OS` doesn't include 'win32' in React Native types, but react-native-windows does support it at runtime)
+- TypeScript native preview provides better performance for large React Native codebases
 
 ### Framework Type System
 The composition framework uses precise types for better type safety:
@@ -128,7 +133,7 @@ The composition framework uses precise types for better type safety:
 **Component Structure**: Each component typically has:
 - `package.json` - Package definition with workspace dependencies
 - `src/index.ts` - Main export file
-- `src/<Component>.tsx` - Component implementation (requires `/** @jsxRuntime classic */` and `/** @jsx withSlots */` comments)
+- `src/<Component>.tsx` - Component implementation (requires `/** @jsxImportSource @fluentui-react-native/framework-base */` pragma)
 - `src/<Component>.types.ts` - TypeScript type definitions
 - `src/<Component>.styling.ts` - Styling and token definitions
 - `src/<Component>.<platform>.ts` - Platform-specific implementations
@@ -137,6 +142,13 @@ The composition framework uses precise types for better type safety:
 - `tsconfig.json`, `babel.config.js`, `jest.config.js`, `eslint.config.js`
 
 **Using Composition Framework**: Use `@fluentui-react-native/composition` for new components. For simpler components without slots/tokens, use the `stagedComponent` pattern from `@fluentui-react-native/use-slot`.
+
+**JSX Runtime**: All components use the modern automatic JSX runtime:
+- Add `/** @jsxImportSource @fluentui-react-native/framework-base */` at the top of `.tsx` files
+- The custom jsx-runtime intercepts JSX calls to optimize slot rendering
+- No need to import `withSlots` - it's handled automatically by the runtime
+- Components using React Fragments (`<>...</>`) work automatically (Fragment is re-exported from the jsx-runtime)
+- Packages using the jsx-runtime need `@fluentui-react-native/framework-base` in `devDependencies`
 
 **TypeScript Patterns**:
 - Slot functions automatically return `React.ReactElement`, so you can access `.props` directly without type assertions
@@ -222,8 +234,11 @@ Components require `ThemeProvider` from `@fluentui-react-native/theme` to work p
 ## Important Notes
 
 - This is an **alpha-stage** library under active development
-- **Requires TypeScript 5.8+** for proper type checking and module resolution
+- **Requires TypeScript 5.8+** with `@typescript/native-preview` for proper type checking and module resolution
 - **Uses Yarn 4 in pnpm mode** for dependency management (configured in `.yarnrc.yml`)
+- **Uses modern automatic JSX runtime** - all components should use `@jsxImportSource @fluentui-react-native/framework-base`
+- **Dynamic package extensions**: Common dev dependencies (TypeScript, Jest, ESLint, Prettier) are automatically added via `scripts/dynamic.extensions.mjs`
+- **Integrated linting**: `yarn lint-package` now includes align-deps and depcheck validation
 - Follow existing component patterns for consistency
 - Test components using FluentUI Tester app before submitting PRs
 - Platform differences should be documented in component `SPEC.md` files
