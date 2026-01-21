@@ -2,15 +2,12 @@
   "name": "@fluentui-react-native/e2e-testing",
   "version": "1.43.11",
   "description": "Package containing E2E testing specs",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/E2E"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "license": "MIT",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -18,6 +15,9 @@
       "require": "./lib-commonjs/index.js"
     }
   },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "src/**/*",
     "dist/*"
@@ -41,24 +41,6 @@
   },
   "dependencies": {
     "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030"
-  },
-  "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0",
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0",
-    "react-native-macos": "^0.73.0 || ^0.74.0",
-    "react-native-windows": "^0.73.0 || ^0.74.0"
-  },
-  "peerDependenciesMeta": {
-    "@office-iss/react-native-win32": {
-      "optional": true
-    },
-    "react-native-macos": {
-      "optional": true
-    },
-    "react-native-windows": {
-      "optional": true
-    }
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
@@ -102,6 +84,24 @@
   },
   "installConfig": {
     "hoistingLimits": "dependencies"
+  },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0",
+    "react": "18.2.0",
+    "react-native": "^0.73.0 || ^0.74.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0"
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
   },
   "rnx-kit": {
     "kitType": "library",

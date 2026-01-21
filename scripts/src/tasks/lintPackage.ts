@@ -70,7 +70,7 @@ export class LintPackageCommand extends Command {
     await Promise.all(runningOps);
 
     // write changes if in fix mode
-    if (this.fix && this.changed) {
+    if (this.fix) {
       this.projRoot.writeManifest();
       console.log('Updated package.json for ', this.projRoot.manifest.name);
     }

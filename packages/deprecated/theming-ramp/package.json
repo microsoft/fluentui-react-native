@@ -3,16 +3,13 @@
   "version": "0.20.17",
   "description": "Theming Library",
   "keywords": [],
-  "license": "MIT",
-  "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/deprecated/theming-ramp"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "author": "",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -20,6 +17,9 @@
       "require": "./lib-commonjs/index.js"
     }
   },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
@@ -39,10 +39,6 @@
     "@fluentui-react-native/theme-types": "workspace:*",
     "@uifabricshared/foundation-settings": "workspace:*"
   },
-  "peerDependencies": {
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0"
-  },
   "devDependencies": {
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
@@ -55,6 +51,10 @@
     "@types/react": "^18.2.0",
     "react": "18.2.0",
     "react-native": "^0.74.0"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-native": "^0.73.0 || ^0.74.0"
   },
   "rnx-kit": {
     "kitType": "library",

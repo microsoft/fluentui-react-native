@@ -3,16 +3,13 @@
   "version": "0.10.12",
   "description": "Hook function to return styled slots",
   "keywords": [],
-  "license": "MIT",
-  "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework/use-slots"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "author": "",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -20,6 +17,9 @@
       "require": "./lib-commonjs/index.js"
     }
   },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
@@ -38,10 +38,6 @@
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/use-slot": "workspace:*"
   },
-  "peerDependencies": {
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/babel-config": "workspace:*",
@@ -56,6 +52,10 @@
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "react-test-renderer": "18.2.0"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-native": "^0.73.0 || ^0.74.0"
   },
   "rnx-kit": {
     "kitType": "library",
