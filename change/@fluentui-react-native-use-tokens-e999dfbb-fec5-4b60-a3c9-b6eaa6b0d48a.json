@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "switch everything to modern jsx-runtime",
+  "packageName": "@fluentui-react-native/use-tokens",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
