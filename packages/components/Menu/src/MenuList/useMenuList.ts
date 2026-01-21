@@ -209,6 +209,5 @@ export const useMenuItemTracking = (ref: React.RefObject<View>, disabled: boolea
   React.useEffect(() => {
     trackMenuItem(item);
     return () => untrackMenuItem(item);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };

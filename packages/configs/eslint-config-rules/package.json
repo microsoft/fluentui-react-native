@@ -26,9 +26,9 @@
   "devDependencies": {
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@types/eslint": "^9.0.0",
+    "@types/eslint": "^9.6.1",
     "@types/node": "catalog:",
-    "eslint": "^9.0.0"
+    "eslint": "^9.39.2"
   },
   "furn": {
     "packageType": "tooling"

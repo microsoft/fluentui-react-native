@@ -76,7 +76,7 @@ export const MenuButton = compose<MenuButtonType>({
       style,
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
-      iconOnly: content ? false : true,
+      iconOnly: !content,
       accessibilityState: { expanded: showContextualMenu },
       accessibilityActions: defaultAccessibilityActions,
       onAccessibilityAction,

@@ -35,7 +35,7 @@ export const useMenuItemRadio = (props: MenuItemRadioProps): MenuItemRadioInfo =
     return () => {
       listContext.removeRadioItem(name);
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return useMenuCheckboxInteraction(props, toggleChecked);
 };

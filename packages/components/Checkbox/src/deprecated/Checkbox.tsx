@@ -69,7 +69,7 @@ export const Checkbox = compose<ICheckboxType>({
       ...pressable.state,
       disabled: !!userProps.disabled,
       checked: isChecked,
-      boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
+      boxAtEnd: !(boxSide == undefined || boxSide == 'start'),
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.

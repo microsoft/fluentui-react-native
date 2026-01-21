@@ -41,7 +41,6 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
       updateItem({ id: overflowID, size: size, priority: priority });
     }
     // The item's size updates whenever the onLayout callback runs. This is purely for updating the item info when its priority changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [priority]);
 
   React.useEffect(() => {
@@ -49,7 +48,6 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
     return () => disconnect(overflowID);
     // Runs when mounting / unmounting / whenever an onOverflowItemChange callback is added. Register / disconnect shouldn't be called at any
     // other point.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onOveflowItemChange]);
 
   React.useLayoutEffect(() => {
@@ -63,7 +61,6 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
       }
     }
     // This effect should only run when the size of the item or container changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size, containerSize]);
 
   const onLayout = React.useCallback(

@@ -52,7 +52,7 @@ export const MenuButton = compose<MenuButtonType>({
       iconPosition: startIcon != undefined ? 'before' : 'after',
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
-      iconOnly: content == undefined ? true : false,
+      iconOnly: content == undefined,
       ...rest,
     };
 
