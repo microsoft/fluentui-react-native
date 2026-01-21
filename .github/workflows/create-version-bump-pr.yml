@@ -1,0 +1,50 @@
+name: Create Version Bump PR with Beachball
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'change/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  version-bump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup the toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@4.4.5
+        with:
+          platform: node
+          project-root: .
+          cache-key-prefix: version-bump
+          node-version: '22.12'
+          cache-npm-dependencies: yarn
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Create version bump PR
+        id: beachball
+        uses: ./.github/actions/beachball-release
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore(release): bump package versions [skip ci]'
+          pr-title: 'chore(release): bump package versions'
+
+      - name: Output PR info
+        if: steps.beachball.outputs.published == 'true'
+        run: |
+          echo "✅ Version bump PR created!"
+          echo "PR Number: ${{ steps.beachball.outputs.pr-number }}"
+          echo "PR URL: ${{ steps.beachball.outputs.pr-url }}"
