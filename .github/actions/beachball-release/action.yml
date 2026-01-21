@@ -24,18 +24,18 @@ inputs:
     default: '📦 Bump package versions'
 
 outputs:
-  has-changeset:
+  has-changes:
     description: 'Whether change files were found'
     value: ${{ steps.check-changes.outputs.has_changes }}
   published:
     description: 'Whether version bump PR was created'
-    value: ${{ steps.create-pr.outputs.pr_created || steps.no-pr.outputs.pr_created || 'false' }}
+    value: ${{ steps.create-pr.outputs.pr_created || 'no' }}
   pr-number:
     description: 'The PR number if created'
-    value: ${{ steps.create-pr.outputs.pr_number || steps.no-pr.outputs.pr_number }}
+    value: ${{ steps.create-pr.outputs.pr_number }}
   pr-url:
     description: 'The PR URL if created'
-    value: ${{ steps.create-pr.outputs.pr_url || steps.no-pr.outputs.pr_url }}
+    value: ${{ steps.create-pr.outputs.pr_url }}
 
 runs:
   using: composite
@@ -52,15 +52,15 @@ runs:
       run: |
         # Use beachball's built-in check command
         if npx beachball check --verbose; then
-          echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "has_changes=yes" >> $GITHUB_OUTPUT
           echo "✅ Change files detected"
         else
-          echo "has_changes=false" >> $GITHUB_OUTPUT
+          echo "has_changes=no" >> $GITHUB_OUTPUT
           echo "ℹ️ No change files found"
         fi
 
     - name: Create version bump branch
-      if: steps.check-changes.outputs.has_changes == 'true'
+      if: steps.check-changes.outputs.has_changes == 'yes'
       id: create-branch
       shell: bash
       run: |
@@ -70,27 +70,14 @@ runs:
         echo "📝 Created branch: $BRANCH_NAME"
 
     - name: Run beachball bump
-      if: steps.check-changes.outputs.has_changes == 'true'
+      if: steps.check-changes.outputs.has_changes == 'yes'
       shell: bash
       run: |
         echo "🔄 Running beachball bump..."
         npx beachball bump --verbose
 
-    - name: Check for version changes
-      if: steps.check-changes.outputs.has_changes == 'true'
-      id: check-version-changes
-      shell: bash
-      run: |
-        if [ -n "$(git status --porcelain)" ]; then
-          echo "has_version_changes=true" >> $GITHUB_OUTPUT
-          echo "✅ Version changes detected"
-        else
-          echo "has_version_changes=false" >> $GITHUB_OUTPUT
-          echo "⚠️ No version changes after bump"
-        fi
-
     - name: Commit version bumps
-      if: steps.check-changes.outputs.has_changes == 'true' && steps.check-version-changes.outputs.has_version_changes == 'true'
+      if: steps.check-changes.outputs.has_changes == 'yes'
       shell: bash
       run: |
         git add .
@@ -98,14 +85,14 @@ runs:
         echo "✅ Committed version changes"
 
     - name: Push branch
-      if: steps.check-changes.outputs.has_changes == 'true' && steps.check-version-changes.outputs.has_version_changes == 'true'
+      if: steps.check-changes.outputs.has_changes == 'yes'
       shell: bash
       run: |
         git push origin "${{ steps.create-branch.outputs.branch_name }}"
         echo "✅ Pushed branch to origin"
 
     - name: Create Pull Request
-      if: steps.check-changes.outputs.has_changes == 'true' && steps.check-version-changes.outputs.has_version_changes == 'true'
+      if: steps.check-changes.outputs.has_changes == 'yes'
       id: create-pr
       shell: bash
       env:
@@ -141,22 +128,8 @@ runs:
 
         PR_NUMBER=$(echo "$PR_URL" | grep -oE '[0-9]+$')
 
-        echo "pr_created=true" >> $GITHUB_OUTPUT
+        echo "pr_created=yes" >> $GITHUB_OUTPUT
         echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
         echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
 
         echo "✅ Created PR: $PR_URL"
-
-    - name: Set no-PR outputs
-      if: steps.check-changes.outputs.has_changes != 'true' || steps.check-version-changes.outputs.has_version_changes != 'true'
-      id: no-pr
-      shell: bash
-      run: |
-        echo "pr_created=false" >> $GITHUB_OUTPUT
-        echo "pr_number=" >> $GITHUB_OUTPUT
-        echo "pr_url=" >> $GITHUB_OUTPUT
-        if [ "${{ steps.check-changes.outputs.has_changes }}" != "true" ]; then
-          echo "ℹ️ No action taken - no change files found"
-        else
-          echo "ℹ️ No action taken - no version changes after bump"
-        fi

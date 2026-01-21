@@ -61,7 +61,7 @@ jobs:
     pr-title: '🚀 Release: Version Bump'
 
 - name: Comment on PR
-  if: steps.beachball.outputs.published == 'true'
+  if: steps.beachball.outputs.published == 'yes'
   run: |
     echo "Created PR #${{ steps.beachball.outputs.pr-number }}"
     echo "URL: ${{ steps.beachball.outputs.pr-url }}"
@@ -78,12 +78,12 @@ jobs:
 
 ## Outputs
 
-| Output          | Description                                            |
-| --------------- | ------------------------------------------------------ |
-| `has-changeset` | Whether change files were found (`true`/`false`)       |
-| `published`     | Whether a version bump PR was created (`true`/`false`) |
-| `pr-number`     | The PR number if created                               |
-| `pr-url`        | The PR URL if created                                  |
+| Output        | Description                                          |
+| ------------- | ---------------------------------------------------- |
+| `has-changes` | Whether change files were found (`yes`/`no`)         |
+| `published`   | Whether a version bump PR was created (`yes`/`no`)   |
+| `pr-number`   | The PR number if created                             |
+| `pr-url`      | The PR URL if created                                |
 
 ## How It Works
 
@@ -183,7 +183,7 @@ Ensure workflow permissions are correctly set:
 
 Check the action outputs:
 
-- `has-changeset` should be `true`
+- `has-changes` should be `yes`
 - Look for change files in the `change/` directory
 - Run `npx beachball check` locally to verify
 

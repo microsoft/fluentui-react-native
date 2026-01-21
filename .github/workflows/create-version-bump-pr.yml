@@ -43,7 +43,7 @@ jobs:
           pr-title: 'chore(release): bump package versions'
 
       - name: Output PR info
-        if: steps.beachball.outputs.published == 'true'
+        if: steps.beachball.outputs.published == 'yes'
         run: |
           echo "✅ Version bump PR created!"
           echo "PR Number: ${{ steps.beachball.outputs.pr-number }}"
