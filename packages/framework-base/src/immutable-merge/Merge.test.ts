@@ -305,7 +305,11 @@ describe('Immutable merge unit tests', () => {
   const arrayMerger = (...targets: any[]) => {
     const arrays = targets.filter((t) => Array.isArray(t));
     let result = [];
-    arrays.forEach((v) => (result = result.concat(...v)));
+    for (const v of arrays) {
+      if (v.length > 0) {
+        result = result.concat(...v);
+      }
+    }
     return result;
   };
 

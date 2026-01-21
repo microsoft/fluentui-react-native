@@ -23,7 +23,6 @@
     "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
   },
   "scripts": {
-    "align-deps": "rnx-align-deps --no-unmanaged",
     "build": "lage build-dual",
     "buildci": "lage buildci",
     "bump-versions": "beachball bump",

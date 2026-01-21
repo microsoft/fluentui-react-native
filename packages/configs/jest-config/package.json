@@ -20,7 +20,7 @@
     "lint": "fluentui-scripts eslint"
   },
   "dependencies": {
-    "@rnx-kit/jest-preset": "^0.2.1"
+    "@rnx-kit/jest-preset": "catalog:"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",

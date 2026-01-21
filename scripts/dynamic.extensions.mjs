@@ -69,7 +69,6 @@ export default function ({ cwd, manifest }) {
       ...conditionallyAdd(['eslint'], manifest, enableLinting),
       ...conditionallyAdd(['prettier'], manifest, () => addPrettier(manifest)),
       ...conditionallyAdd(['jest', '@types/jest'], manifest, () => addJest(cwd, manifest)),
-      ...conditionallyAdd(['@rnx-kit/align-deps'], manifest, true),
     },
   };
 }
