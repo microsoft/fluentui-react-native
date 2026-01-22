@@ -5,17 +5,12 @@ trigger:
   branches:
     include:
       - main
-      - releases/*
 
 pr: none
 
 parameters:
   - name: skipNpmPublish
     displayName: Skip Npm Publish
-    type: boolean
-    default: false
-  - name: skipGitPush
-    displayName: Skip Git Push
     type: boolean
     default: false
   - name: skipNugetPublish
