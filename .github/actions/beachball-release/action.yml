@@ -120,9 +120,9 @@ runs:
         ### What to do next:
         1. Review the version changes
         2. Merge this PR when ready
-        3. The merge will trigger tag creation and NPM publishing
+        3. Azure Pipelines will automatically publish to NPM
 
-        **Note:** Once merged, tags will be created automatically and packages will be published to NPM.
+        **Note:** Once merged, Azure Pipelines will detect the version changes and publish to NPM.
         EOF
         )
 
