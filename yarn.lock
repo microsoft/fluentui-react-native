@@ -4934,43 +4934,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester-win32@npm:*, @fluentui-react-native/tester-win32@workspace:apps/win32":
+"@fluentui-react-native/tester-core@workspace:*, @fluentui-react-native/tester-core@workspace:apps/tester-core":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/tester-win32@workspace:apps/win32"
-  dependencies:
-    "@babel/core": "npm:^7.20.0"
-    "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/kit-config": "workspace:*"
-    "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/tester": "workspace:*"
-    "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@office-iss/rex-win32": "npm:0.73.11-devmain.16.0.17615.15030"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-babel-transformer": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@rnx-kit/cli": "npm:^0.18.14"
-    "@rnx-kit/metro-config": "npm:^2.1.0"
-    "@rnx-kit/metro-resolver-symlinks": "npm:^0.2.5"
-    "@types/react": "npm:^18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    metro-config: "npm:^0.80.3"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-svg-transformer: "npm:^1.0.0"
-    react-test-renderer: "npm:18.2.0"
-    rimraf: "catalog:"
-  peerDependencies:
-    "@office-iss/react-native-win32": ^0.74.0
-  peerDependenciesMeta:
-    "@office-iss/react-native-win32":
-      optional: true
-  languageName: unknown
-  linkType: soft
-
-"@fluentui-react-native/tester@npm:*, @fluentui-react-native/tester@workspace:*, @fluentui-react-native/tester@workspace:apps/fluent-tester":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
+  resolution: "@fluentui-react-native/tester-core@workspace:apps/tester-core"
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
@@ -5037,6 +5003,109 @@ __metadata:
     "@react-native-community/slider": "npm:^4.5.7"
     "@react-native-menu/menu": "npm:^0.7.3"
     "@react-native-picker/picker": "npm:^2.7.0"
+    "@react-native-windows/cli": "npm:^0.74.0"
+    "@react-native/babel-preset": "npm:^0.74.0"
+    "@react-native/metro-babel-transformer": "npm:^0.74.0"
+    "@react-native/metro-config": "npm:^0.74.0"
+    "@rnx-kit/cli": "npm:^0.18.14"
+    "@rnx-kit/metro-config": "npm:^2.1.0"
+    "@rnx-kit/metro-resolver-symlinks": "npm:^0.2.5"
+    "@types/jasmine": "catalog:"
+    "@types/node": "catalog:"
+    "@types/react": "npm:~18.2.0"
+    "@types/react-test-renderer": "npm:^18.2.0"
+    "@wdio/cli": "catalog:"
+    "@wdio/globals": "catalog:"
+    "@wdio/jasmine-framework": "catalog:"
+    "@wdio/logger": "catalog:"
+    "@wdio/runner": "catalog:"
+    expect-webdriverio: "catalog:"
+    flow-bin: "npm:^0.113.0"
+    metro-config: "npm:^0.80.3"
+    react: "npm:18.2.0"
+    react-native: "npm:^0.74.0"
+    react-native-macos: "npm:^0.74.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
+    react-native-svg-transformer: "npm:^1.0.0"
+    react-native-test-app: "npm:^3.9.2"
+    react-native-windows: "npm:^0.74.0"
+    react-test-renderer: "npm:18.2.0"
+    webdriverio: "catalog:"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+    react-native-macos: ^0.73.0 || ^0.74.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
+    react-native-windows: ^0.73.0 || ^0.74.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+  languageName: unknown
+  linkType: soft
+
+"@fluentui-react-native/tester-win32@npm:*, @fluentui-react-native/tester-win32@workspace:apps/win32":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/tester-win32@workspace:apps/win32"
+  dependencies:
+    "@babel/core": "npm:^7.20.0"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/tester-core": "workspace:*"
+    "@office-iss/react-native-win32": "npm:^0.74.0"
+    "@office-iss/rex-win32": "npm:0.73.11-devmain.16.0.17615.15030"
+    "@react-native/babel-preset": "npm:^0.74.0"
+    "@react-native/metro-babel-transformer": "npm:^0.74.0"
+    "@react-native/metro-config": "npm:^0.74.0"
+    "@rnx-kit/cli": "npm:^0.18.14"
+    "@rnx-kit/metro-config": "npm:^2.1.0"
+    "@rnx-kit/metro-resolver-symlinks": "npm:^0.2.5"
+    "@types/react": "npm:^18.2.0"
+    "@types/react-test-renderer": "npm:^18.2.0"
+    metro-config: "npm:^0.80.3"
+    react: "npm:18.2.0"
+    react-native: "npm:^0.74.0"
+    react-native-svg: "npm:>=15.4.0 <15.13.0"
+    react-native-svg-transformer: "npm:^1.0.0"
+    react-test-renderer: "npm:18.2.0"
+    rimraf: "catalog:"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.74.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+  languageName: unknown
+  linkType: soft
+
+"@fluentui-react-native/tester@npm:*, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
+  dependencies:
+    "@babel/core": "npm:^7.20.0"
+    "@babel/runtime": "npm:^7.20.0"
+    "@fluentui-react-native/babel-config": "workspace:*"
+    "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
+    "@fluentui-react-native/experimental-avatar": "workspace:*"
+    "@fluentui-react-native/experimental-checkbox": "workspace:*"
+    "@fluentui-react-native/experimental-expander": "workspace:*"
+    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
+    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
+    "@fluentui-react-native/experimental-shimmer": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/menu-button": "workspace:*"
+    "@fluentui-react-native/radio-group": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/tester-core": "workspace:*"
+    "@fluentui-react-native/tooltip": "workspace:*"
+    "@fluentui-react-native/vibrancy-view": "workspace:*"
+    "@office-iss/react-native-win32": "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^13.6.4"
+    "@react-native-community/cli-platform-android": "npm:^13.6.4"
+    "@react-native-community/cli-platform-ios": "npm:^13.6.4"
     "@react-native-windows/cli": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
