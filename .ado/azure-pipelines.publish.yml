@@ -79,6 +79,11 @@ extends:
                 condition: ${{ parameters.skipNpmPublish }}
 
               - script: |
+                  node scripts/check-packages-need-publishing.ts
+                displayName: 'Validate packages need publishing'
+                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), ne('${{ parameters.skipNpmPublish }}', true))
+
+              - script: |
                   # Use --no-bump and --no-push because versions have already been committed by Github Actions earlier
                   npx beachball publish --no-bump --no-push $(SkipNpmPublishArgs) --access public --token $(npmAuth) -y --verbose
                 displayName: 'Publish NPM Packages (for main branch)'

@@ -236,6 +236,21 @@ This repo manages semantic versioning and publishing using [Beachball](https://g
 1. `yarn change` will take you through a command line wizard to generate change files
 2. Make sure to push the newly generated change file
 
+#### Publishing Workflow
+
+The repository uses an automated publishing workflow:
+
+1. **Change Files**: Contributors create change files using `yarn change` in their PRs
+2. **Version Bump PR**: When change files are merged to `main`, GitHub Actions automatically creates/updates a version bump PR
+   - This PR is updated automatically as more changes are merged
+   - The PR shows all packages that will be published and their new versions
+3. **Review and Merge**: Maintainers review the version bump PR and merge when ready
+4. **Automatic Publishing**: After the version bump PR is merged, Azure Pipelines automatically publishes packages to NPM
+
+**Branch Support**: Only the `main` branch is configured for automatic publishing. Release branches are not supported in this workflow.
+
+**For Maintainers**: The version bump PR is created by GitHub Actions using a fixed branch name (`beachball/version-bump/main`). This PR will be automatically updated as new change files are merged to main. Do not manually close or recreate this PR unless necessary.
+
 #### Testing changes
 
 Before you create a pull request, test your changes with the FluentUI Tester on the platforms that are affected by your change. For more information on the FluentUI Tester, please follow instructions in the [FluentUI Tester readme](./apps/fluent-tester/README.md).

@@ -1,0 +1,69 @@
+name: Validate Change Files
+
+on:
+  pull_request:
+    paths:
+      - 'change/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup the toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@4.4.5
+        with:
+          platform: node
+          project-root: .
+          cache-key-prefix: validate-changefiles
+          node-version: '24'
+          cache-npm-dependencies: yarn
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Check change files are valid
+        run: npx beachball check --verbose
+
+      - name: Preview packages that would be published
+        run: |
+          echo "## 📦 Packages that would be published after this PR merges" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Run the check script in dry-run mode and capture output
+          # Node 24 has native TypeScript support
+          if node scripts/check-packages-need-publishing.ts --dry-run; then
+            echo "✅ Package validation successful" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Package validation failed" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Run beachball bump (dry-run)
+        run: |
+          echo "🔄 Running beachball bump to preview version changes..."
+          npx beachball bump --verbose
+
+      - name: Preview NPM publish (dry-run)
+        run: |
+          echo "## 🚀 NPM Publish Preview" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Running \`beachball publish\` in dry-run mode (--no-publish)..." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+          # Run beachball publish with --no-publish flag (dry-run)
+          # This does everything except actually publish to NPM
+          npx beachball publish --no-bump --no-push --no-publish --access public -y --verbose 2>&1 | tee /tmp/publish-preview.log
+
+          # Add relevant output to summary
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Dry-run completed successfully" >> $GITHUB_STEP_SUMMARY

@@ -37,7 +37,7 @@ jobs:
           platform: node
           project-root: .
           cache-key-prefix: version-bump
-          node-version: '22.12'
+          node-version: '24'
           cache-npm-dependencies: yarn
 
       - name: Install dependencies
