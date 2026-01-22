@@ -5140,7 +5140,6 @@ __metadata:
     "@fluentui-react-native/tester-core": "workspace:*"
     "@fluentui-react-native/tooltip": "workspace:*"
     "@fluentui-react-native/vibrancy-view": "workspace:*"
-    "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native-community/cli": "npm:^13.6.4"
     "@react-native-community/cli-platform-android": "npm:^13.6.4"
     "@react-native-community/cli-platform-ios": "npm:^13.6.4"
