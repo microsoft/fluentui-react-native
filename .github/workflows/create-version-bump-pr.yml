@@ -6,7 +6,16 @@ on:
       - main
     paths:
       - 'change/**'
+  pull_request:
+    paths:
+      - '.github/workflows/create-version-bump-pr.yml'
+      - '.github/actions/beachball-release/**'
   workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Run in dry-run mode (skip push and PR creation)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -45,6 +54,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'chore(release): bump package versions [skip ci]'
           pr-title: 'chore(release): bump package versions'
+          dry-run: ${{ (github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.dry-run)) && 'yes' || 'no' }}
 
       - name: Output PR info
         if: steps.beachball.outputs.published == 'yes'
@@ -52,3 +62,9 @@ jobs:
           echo "✅ Version bump PR created!"
           echo "PR Number: ${{ steps.beachball.outputs.pr-number }}"
           echo "PR URL: ${{ steps.beachball.outputs.pr-url }}"
+
+      - name: Dry-run info
+        if: (github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.dry-run))
+        run: |
+          echo "🔍 Workflow ran in dry-run mode"
+          echo "✅ Validation successful - no PRs were created"

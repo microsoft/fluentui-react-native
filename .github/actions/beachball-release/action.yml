@@ -18,6 +18,10 @@ inputs:
     description: 'Title for the version bump PR'
     required: false
     default: '📦 Bump package versions'
+  dry-run:
+    description: 'Run in dry-run mode (skip push and PR creation)'
+    required: false
+    default: 'no'
 
 outputs:
   has-changes:
@@ -119,7 +123,7 @@ runs:
         echo "✅ Committed version changes"
 
     - name: Push branch
-      if: steps.check-changes.outputs.has_changes == 'yes'
+      if: steps.check-changes.outputs.has_changes == 'yes' && inputs.dry-run == 'no'
       shell: bash
       run: |
         # Force push since we might be updating an existing branch
@@ -127,7 +131,7 @@ runs:
         echo "✅ Pushed branch to origin"
 
     - name: Create or Update Pull Request
-      if: steps.check-changes.outputs.has_changes == 'yes'
+      if: steps.check-changes.outputs.has_changes == 'yes' && inputs.dry-run == 'no'
       id: create-pr
       shell: bash
       env:
@@ -181,3 +185,13 @@ runs:
 
           echo "✅ Created PR #$PR_NUMBER: $PR_URL"
         fi
+
+    - name: Dry-run summary
+      if: steps.check-changes.outputs.has_changes == 'yes' && inputs.dry-run == 'yes'
+      shell: bash
+      run: |
+        echo "🔍 Dry-run mode: Skipping push and PR creation"
+        echo "✅ Version bump validation successful"
+        echo ""
+        echo "Changes that would be committed:"
+        git diff --stat HEAD
