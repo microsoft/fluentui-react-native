@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import type { ViewProps, ColorValue, StyleProp, ViewStyle } from 'react-native';
+import type { ViewProps, ColorValue } from 'react-native';
 import { Platform } from 'react-native';
 
-import { memoize, mergeStyles } from '@fluentui-react-native/framework';
+import { memoize, mergeProps, mergeStyles } from '@fluentui-react-native/framework';
 import type { Theme } from '@fluentui-react-native/framework';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';
@@ -174,23 +174,26 @@ export const colorsFromAppearance = (
  * At the second render stage, if the minHeight token isn't set, we calculate and memoize a default value based on whether the
  * Divider is vertical and has content.
  */
-export const getRootStyle = memoize(getRootStyleWorker);
-function getRootStyleWorker(rootStyle: StyleProp<ViewStyle>, isVertical: boolean, hasContent: boolean): StyleProp<ViewStyle> {
+export const getRootSlotProps = memoize(rootSlotPropsWorker);
+function rootSlotPropsWorker(dividerProps: DividerProps, rootProps: ViewProps, hasContent: boolean): ViewProps {
+  const { vertical, ...props } = dividerProps;
   let minHeight = 0;
-  if (isVertical) {
+  if (vertical) {
     minHeight = hasContent ? 84 : globalTokens.size200;
   }
-  return mergeStyles(rootStyle, { minHeight });
+  return mergeProps(props, rootProps, {
+    style: mergeStyles(rootProps.style, props.style, { minHeight }),
+  });
 }
 
 /**
  * At the second render stage, if there is not content passed, we override the existing beforeLine style to make the line take up
  * the entirity of root.
  */
-export const getBeforeLineStyle = memoize(getBeforeLineStyleWorker);
-function getBeforeLineStyleWorker(beforeLineStyle: StyleProp<ViewStyle>, hasContent: boolean): StyleProp<ViewStyle> {
+export const getBeforeLineSlotProps = memoize(beforeLineSlotPropsWorker);
+function beforeLineSlotPropsWorker(beforeLineProps: ViewProps, hasContent: boolean) {
   if (!hasContent) {
-    return mergeStyles(beforeLineStyle, { flex: 1 });
+    return mergeProps(beforeLineProps, { style: mergeStyles(beforeLineProps.style, { flex: 1 }) });
   }
-  return beforeLineStyle;
+  return beforeLineProps;
 }

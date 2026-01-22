@@ -11,7 +11,7 @@ export type DividerInsetSize = (typeof DividerInsetSizes)[number];
 export type DividerAlignment = 'start' | 'center' | 'end';
 export type DividerAppearance = 'default' | 'subtle' | 'brand' | 'strong';
 
-export type DividerProps = React.PropsWithChildren<{
+export interface DividerProps extends ViewProps {
   /**
    * If a text or icon is passed, this dictates where content appears in the divider: at the start, centered, or towards the end.
    * @default 'center'
@@ -41,7 +41,7 @@ export type DividerProps = React.PropsWithChildren<{
    * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   vertical?: boolean;
-}>;
+}
 
 export interface DividerTokens extends LayoutTokens, Omit<FontTokens, 'fontDynamicTypeRamp' | 'fontMaximumSize'> {
   /**
