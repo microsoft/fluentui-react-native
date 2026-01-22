@@ -6,10 +6,6 @@ on:
       - main
     paths:
       - 'change/**'
-  pull_request:
-    paths:
-      - '.github/workflows/create-version-bump-pr.yml'
-      - '.github/actions/beachball-release/**'
   workflow_dispatch:
     inputs:
       dry-run:
