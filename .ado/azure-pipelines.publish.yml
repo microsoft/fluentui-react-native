@@ -71,13 +71,7 @@ extends:
               - template: .ado/templates/setup-repo.yml@self
 
               - script: |
-                  git config user.name "UI-Fabric-RN-Bot"
-                  git config user.email "uifrnbot@microsoft.com"
-                  git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/fluentui-react-native.git
-                displayName: Git Authentication
-
-              - script: |
-                  yarn
+                  yarn install --immutable
                 displayName: 'yarn install'
 
               - script: |
@@ -90,19 +84,10 @@ extends:
                 condition: ${{ parameters.skipNpmPublish }}
 
               - script: |
-                  echo ##vso[task.setvariable variable=SkipGitPushPublishArgs]--no-push
-                displayName: Enable No-Publish (git)
-                condition: ${{ parameters.skipGitPush }}
-
-              - script: |
-                  yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -b origin/main -y
+                  # Use --no-bump and --no-push because versions have already been committed by Github Actions earlier
+                  npx beachball publish --no-bump --no-push $(SkipNpmPublishArgs) --access public --token $(npmAuth) -y --verbose
                 displayName: 'Publish NPM Packages (for main branch)'
                 condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-
-              - script: |
-                  yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -y -t v${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }} -b origin/${{ replace(variables['Build.SourceBranch'],'refs/heads/','') }} --prerelease-prefix ${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }}
-                displayName: 'Publish NPM Packages (for other release branches)'
-                condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
 
           - template: .ado/templates/win32-nuget-publish.yml@self
             parameters:
