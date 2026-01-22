@@ -5032,6 +5032,20 @@ __metadata:
     react-test-renderer: "npm:18.2.0"
     webdriverio: "catalog:"
   peerDependencies:
+    "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
+    "@fluentui-react-native/experimental-avatar": "workspace:*"
+    "@fluentui-react-native/experimental-checkbox": "workspace:*"
+    "@fluentui-react-native/experimental-expander": "workspace:*"
+    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
+    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
+    "@fluentui-react-native/experimental-shimmer": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/menu-button": "workspace:*"
+    "@fluentui-react-native/radio-group": "workspace:*"
+    "@fluentui-react-native/tester-core": "workspace:*"
+    "@fluentui-react-native/tooltip": "workspace:*"
+    "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
@@ -5039,6 +5053,30 @@ __metadata:
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0"
     react-native-windows: ^0.73.0 || ^0.74.0
   peerDependenciesMeta:
+    "@fluentui-react-native/callout":
+      optional: true
+    "@fluentui-react-native/experimental-appearance-additions":
+      optional: true
+    "@fluentui-react-native/experimental-avatar":
+      optional: true
+    "@fluentui-react-native/experimental-checkbox":
+      optional: true
+    "@fluentui-react-native/experimental-expander":
+      optional: true
+    "@fluentui-react-native/experimental-native-date-picker":
+      optional: true
+    "@fluentui-react-native/experimental-native-font-metrics":
+      optional: true
+    "@fluentui-react-native/experimental-shimmer":
+      optional: true
+    "@fluentui-react-native/menu-button":
+      optional: true
+    "@fluentui-react-native/radio-group":
+      optional: true
+    "@fluentui-react-native/tooltip":
+      optional: true
+    "@fluentui-react-native/vibrancy-view":
+      optional: true
     "@office-iss/react-native-win32":
       optional: true
   languageName: unknown
