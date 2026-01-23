@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "split out tester implementation into a separate package",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
