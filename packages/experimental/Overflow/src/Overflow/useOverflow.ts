@@ -71,7 +71,6 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
       overflowManager.removeItem(id);
     },
     // overflowManager is not needed as a dependency, due to being attached to a ref
-
     [overflowItemUpdateCallbacks],
   );
 
