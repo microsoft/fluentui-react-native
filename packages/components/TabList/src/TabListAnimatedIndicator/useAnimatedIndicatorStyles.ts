@@ -16,7 +16,6 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
   const indicatorScale = React.useRef(new Animated.Value(1)).current;
 
   // Save the initial selected layout, this shouldn't update after the first render.
-
   const startingKey = React.useMemo(() => selectedKey, []);
 
   React.useEffect(() => {

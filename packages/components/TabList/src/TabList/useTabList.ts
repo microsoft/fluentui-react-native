@@ -160,7 +160,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
         setFocusedTabRef(ref);
       }
     }
-    // Disable exhaustive-deps warning because this hook should only run once 'isSelectedTabDisabled' dependency changes.
   }, [isSelectedTabDisabled]);
 
   // win32 only prop used to implemement CTRL + TAB shortcut native to windows tab components
