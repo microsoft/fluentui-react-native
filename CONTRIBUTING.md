@@ -238,18 +238,19 @@ This repo manages semantic versioning and publishing using [Beachball](https://g
 
 #### Publishing Workflow
 
-The repository uses an automated publishing workflow:
+The repository uses an automated publishing workflow powered by a single Azure Pipeline (`.ado/azure-pipelines.publish.yml`):
 
 1. **Change Files**: Contributors create change files using `yarn change` in their PRs
-2. **Version Bump PR**: When change files are merged to `main`, GitHub Actions automatically creates/updates a version bump PR
+2. **Version Bump PR**: When change files are merged to `main`, Azure Pipelines automatically creates/updates a version bump PR
    - This PR is updated automatically as more changes are merged
    - The PR shows all packages that will be published and their new versions
 3. **Review and Merge**: Maintainers review the version bump PR and merge when ready
-4. **Automatic Publishing**: After the version bump PR is merged, Azure Pipelines automatically publishes packages to NPM
+4. **Automatic Publishing**: After the version bump PR is merged, Azure Pipelines automatically detects the version changes and publishes packages to NPM
+   - The pipeline intelligently skips publishing if all package versions already exist on NPM
 
 **Branch Support**: Only the `main` branch is configured for automatic publishing. Release branches are not supported in this workflow.
 
-**For Maintainers**: The version bump PR is created by GitHub Actions using a fixed branch name (`beachball/version-bump/main`). This PR will be automatically updated as new change files are merged to main. Do not manually close or recreate this PR unless necessary.
+**For Maintainers**: The version bump PR is created by Azure Pipelines using a fixed branch name (`beachball/version-bump/main`). This PR will be automatically updated as new change files are merged to main. Do not manually close or recreate this PR unless necessary.
 
 #### Testing changes
 
