@@ -59,6 +59,9 @@
     "@fluentui-react-native/tooltip": "workspace:*",
     "@fluentui-react-native/vibrancy-view": "workspace:*",
     "@office-iss/react-native-win32": "^0.74.0",
+    "@react-native-community/slider": "^4.5.7",
+    "@react-native-menu/menu": "^0.7.3",
+    "@react-native-picker/picker": "^2.7.0",
     "@types/node": "catalog:",
     "@types/react": "~18.2.0",
     "react": "18.2.0",
@@ -108,7 +111,11 @@
     }
   },
   "furn": {
-    "packageType": "app"
+    "depcheck": {
+      "ignoreMatches": [
+        "@fluentui-react-native/experimental-expander"
+      ]
+    }
   },
   "rnx-kit": {
     "kitType": "app",
