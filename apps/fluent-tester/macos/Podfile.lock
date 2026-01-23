@@ -1249,8 +1249,6 @@ PODS:
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNCPicker (2.11.0):
-    - React-Core
   - RNSVG (15.12.1):
     - React-Core
   - SocketRocket (0.7.0)
@@ -1320,7 +1318,6 @@ DEPENDENCIES:
   - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-5a9c0463e2/node_modules/@rnx-kit/react-native-host`)"
   - ReactTestApp-DevSupport (from `../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
-  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - RNSVG (from `../node_modules/react-native-svg`)
   - SocketRocket (from `../node_modules/react-native-macos/third-party-podspecs/SocketRocket.podspec`)
   - Yoga (from `../node_modules/react-native-macos/ReactCommon/yoga`)
@@ -1452,8 +1449,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-test-app"
   ReactTestApp-Resources:
     :path: ".."
-  RNCPicker:
-    :path: "../node_modules/@react-native-picker/picker"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   SocketRocket:
@@ -1524,7 +1519,6 @@ SPEC CHECKSUMS:
   ReactNativeHost: 91d43cc8ebaf158a27f8ae406a7e8b43ec823faa
   ReactTestApp-DevSupport: 52ac76197e5accf579592aa3b9aa07fd0766f211
   ReactTestApp-Resources: 3c8739a3e3ed26f67f8ab68f13102fb9591301c8
-  RNCPicker: 124b4fb5859ba1a3fd53a91e16d1e7a0fc016e59
   RNSVG: d39a9be65c439dfb061955f7615f1f71a51ecede
   SocketRocket: f6c6249082c011e6de2de60ed641ef8bbe0cfac9
   Yoga: bd03cda842f416ba4c2d4b79fcd0fd27e917b91e
