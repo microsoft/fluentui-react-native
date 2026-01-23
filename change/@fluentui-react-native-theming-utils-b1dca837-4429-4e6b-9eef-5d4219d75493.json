@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "switch everything to modern jsx-runtime",
+  "packageName": "@fluentui-react-native/theming-utils",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}

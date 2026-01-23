@@ -29,7 +29,6 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
   const onDismiss = React.useCallback(() => {
     props.onDismiss?.();
     setOpen(undefined, false /* isOpen */), [setOpen];
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.onDismiss, setOpen]);
   const dismissBehaviors = isControlled ? controlledDismissBehaviors : undefined;
   const directionalHint = props.directionalHint ?? getDirectionalHint(isSubmenu, I18nManager.isRTL);

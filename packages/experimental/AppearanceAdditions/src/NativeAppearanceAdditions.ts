@@ -1,9 +1,8 @@
 import type { AccessibilityContrastOption, SizeClass, UserInterfaceLevel } from './NativeAppearanceAdditions.types';
 
 export const NativeAppearanceAdditions = {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   addListener: (_: string) => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   removeListeners: (_: number) => {},
   initializeTraitCollection: (_: number) => {
     console.warn('NativeAppearanceAdditions is only available on iOS');

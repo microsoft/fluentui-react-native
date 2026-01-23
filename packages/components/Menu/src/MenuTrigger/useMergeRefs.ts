@@ -34,7 +34,7 @@ export function useMergedRefs<T>(...refs: (React.Ref<T> | undefined)[]): RefObje
         }
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- already exhaustive
+
     [...refs],
   ) as unknown as RefObjectFunction<T>;
 

@@ -2,35 +2,36 @@
   "name": "@fluentui/react-native",
   "version": "0.42.31",
   "description": "A react-native component library that implements the Fluent Design System.",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:microsoft/fluentui-react-native.git",
     "directory": "packages/libraries/core"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "react-native": "src/index.ts",
+  "license": "MIT",
+  "sideEffects": false,
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib-commonjs/index.js"
     }
   },
-  "typings": "lib/index.d.ts",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
-    "start:tester": "rnx-cli start",
-    "start-test": "fluentui-scripts jest-watch",
-    "test": "fluentui-scripts jest",
-    "update-snapshots": "fluentui-scripts jest -u",
+    "lint-package": "fluentui-scripts lint-package",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
+    "start-test": "fluentui-scripts jest-watch",
+    "start:tester": "rnx-cli start",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
     "@fluentui-react-native/button": "workspace:*",
@@ -49,6 +50,22 @@
     "@fluentui-react-native/separator": "workspace:*",
     "@fluentui-react-native/tablist": "workspace:*",
     "@fluentui-react-native/text": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/jest-config": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
+    "@rnx-kit/cli": "^0.18.14",
+    "@types/react": "~18.2.0",
+    "react": "18.2.0",
+    "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
+    "react-native-svg": ">=15.4.0 <15.13.0",
+    "react-native-windows": "^0.74.0"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.74.0",
@@ -69,32 +86,9 @@
       "optional": true
     }
   },
-  "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
-    "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
-    "@rnx-kit/cli": "^0.18.14",
-    "@types/react": "~18.2.0",
-    "react": "18.2.0",
-    "react-native": "^0.74.0",
-    "react-native-macos": "^0.74.0",
-    "react-native-svg": ">=15.4.0 <15.13.0",
-    "react-native-windows": "^0.74.0"
-  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
-      "requirements": {
-        "development": [
-          "react-native@0.74"
-        ],
-        "production": [
-          "react-native@0.73 || 0.74"
-        ]
-      },
       "capabilities": [
         "babel-preset-react-native",
         "core",
@@ -103,9 +97,10 @@
         "core-macos",
         "core-windows",
         "react",
-        "svg"
+        "svg",
+        "tools-core"
       ]
-    }
-  },
-  "sideEffects": false
+    },
+    "extends": "@fluentui-react-native/kit-config"
+  }
 }

@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
 import { View } from 'react-native';
 
@@ -16,7 +15,6 @@ import { Text } from '@fluentui-react-native/text';
 import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 import type { ISlots } from '@uifabricshared/foundation-composable';
-import { withSlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -71,7 +69,7 @@ export const Checkbox = compose<ICheckboxType>({
       ...pressable.state,
       disabled: !!userProps.disabled,
       checked: isChecked,
-      boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
+      boxAtEnd: !(boxSide == undefined || boxSide == 'start'),
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.

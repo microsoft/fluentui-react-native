@@ -36,7 +36,6 @@ export function useTabAnimation(
       updateAnimatedIndicatorStyles({ backgroundColor: tokens.indicatorColor, borderRadius: tokens.indicatorRadius });
     }
     // Disabling warning because effect does not need to fire on `updateAnimatedIndicatorStyles` being changed
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabKey, selectedKey, tokens.indicatorColor, tokens.indicatorRadius]);
 
   /**

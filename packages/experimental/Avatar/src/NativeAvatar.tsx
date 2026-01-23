@@ -3,13 +3,12 @@
  * Licensed under the MIT License.
  * @format
  */
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ImageURISource, ViewProps, ColorValue } from 'react-native';
 import { NativeModules, TurboModuleRegistry } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, buildProps, mergeProps } from '@fluentui-react-native/framework';
 
 const avatarName = 'NativeAvatar';
 

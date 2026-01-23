@@ -158,7 +158,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   };
 
   // Adjust position of menu - TODO: fix this warning removal, potentially adds extra re-renders
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const transforms = [];
 
   useMemo(() => {

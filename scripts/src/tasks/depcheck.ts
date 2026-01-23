@@ -2,25 +2,27 @@
 
 import { Command, Option } from 'clipanion';
 import depcheck from 'depcheck';
-import { getProjectRoot } from '../utils/projectRoot.js';
+import type { ProjectRoot } from '../utils/projectRoot.ts';
+import { getProjectRoot } from '../utils/projectRoot.ts';
 import getInjectedDeps from '../../dynamic.extensions.mjs';
-import { getReporter } from '../utils/getReporter.js';
+import { getReporter } from '../utils/getReporter.ts';
 import { getToolVersion } from '../preinstall/tool-versions.js';
 import micromatch from 'micromatch';
+import { isFixMode } from '../utils/env.ts';
 
-/**
- * @typedef {'unused' | 'missing'} IssueType
- * @typedef {'dependency' | 'devDependency'} DependencyType
- * @typedef {{issue: IssueType, depType?: DependencyType, dependency: string, files?: string[]}} Issue
- */
+type IssueType = 'unused' | 'missing';
+type DependencyType = 'dependency' | 'devDependency';
+type Issue = {
+  issue: IssueType;
+  depType?: DependencyType;
+  dependency: string;
+  files?: string[];
+};
 
 /**
  * Merges two objects at one level.
- * @param {Record<string, unknown>} a
- * @param {Record<string, unknown>} b
- * @returns {Record<string, unknown>}
  */
-function mergeOneLevel(a, b = {}) {
+function mergeOneLevel(a: Record<string, unknown>, b: Record<string, unknown> = {}): Record<string, unknown> {
   const result = { ...a, ...b };
   Object.keys(a).forEach((key) => {
     if (Array.isArray(b[key]) && Array.isArray(a[key])) {
@@ -30,18 +32,12 @@ function mergeOneLevel(a, b = {}) {
   return result;
 }
 
-/*
-function scriptsDevDeps() {
-  return Object.keys(getScriptProjectRoot().manifest.devDependencies || {});
-}
-*/
-
 export class DepcheckCommand extends Command {
   /** @override */
-  static paths = [['depcheck']];
+  static override paths = [['depcheck']];
 
   /** @override */
-  static usage = Command.Usage({
+  static override usage = Command.Usage({
     description: 'Check for unused dependencies in the project using depcheck',
     details: 'This command analyzes the project to find unused dependencies and missing dependencies.',
     examples: [['Check dependencies in the current package', '$0 depcheck']],
@@ -63,30 +59,44 @@ export class DepcheckCommand extends Command {
     description: 'Perform a dry run of fixes without making any changes',
   });
 
-  /** @type {import('@rnx-kit/reporter').Reporter} */
-  reporter = getReporter();
+  async execute() {
+    const runner = new DepCheckRunner({
+      verbose: this.verbose,
+      fixErrors: isFixMode(this.fixErrors),
+      fixWarnings: this.fixWarnings,
+      dryRun: this.dryRun,
+    });
+    return runner.execute();
+  }
+}
 
-  projectRoot = getProjectRoot();
-  ignored = new Set(injectedDevDeps(this.projectRoot));
+/**
+ * Runner for depcheck task, can be called from the command or from another command
+ */
+export class DepCheckRunner {
+  private verbose: boolean;
+  private fixErrors: boolean;
+  private fixWarnings: boolean;
+  private dryRun: boolean;
+  private changes = false;
+  private issues: Issue[] = [];
+  private errors = 0;
+  private projectRoot = getProjectRoot();
+  private ignored: Set<string> = new Set<string>(injectedDevDeps(this.projectRoot));
+  private removedDevDeps: string[] = [];
+  private removedDeps: string[] = [];
+  private addedDeps: { dependencies?: Record<string, string>; devDependencies?: Record<string, string> } = {};
+  private reporter = getReporter();
 
-  /** @type {Issue[]} */
-  issues = [];
-
-  /** @type {number} */
-  errors = 0;
-
-  /** @type {string[]} */
-  removedDevDeps = [];
-
-  /** @type {string[]} */
-  removedDeps = [];
-
-  /** @type {{dependencies?: Record<string, string>, devDependencies?: Record<string, string>}} */
-  addedDeps = {};
+  constructor(options: { verbose?: boolean; fixErrors?: boolean; fixWarnings?: boolean; dryRun?: boolean } = {}) {
+    this.verbose = options.verbose ?? false;
+    this.fixErrors = options.fixErrors ?? false;
+    this.fixWarnings = options.fixWarnings ?? false;
+    this.dryRun = options.dryRun ?? false;
+  }
 
   async execute() {
-    const config = this.projectRoot.manifest;
-    const depcheckOptions = typeof config.depcheck === 'object' && !Array.isArray(config.depcheck) ? config.depcheck : {};
+    const depcheckOptions = this.projectRoot.buildConfig.depcheck ?? {};
     const options = mergeOneLevel(
       {
         ignorePatterns: ['/lib/*', '/lib-commonjs/*'],
@@ -95,7 +105,7 @@ export class DepcheckCommand extends Command {
       depcheckOptions,
     );
 
-    return new Promise((resolve, reject) => {
+    return new Promise<number>((resolve, reject) => {
       depcheck(process.cwd(), options, (result) => {
         try {
           // build up the set of found issues
@@ -115,13 +125,18 @@ export class DepcheckCommand extends Command {
 
           resolve(0);
         } catch (error) {
-          reject(error);
+          console.error('Error during depcheck processing:', error);
+          resolve(1);
         }
       });
     });
   }
 
-  handleIssues() {
+  madeChanges(): boolean {
+    return this.changes;
+  }
+
+  private handleIssues() {
     for (const issue of this.issues) {
       if (issue.issue === 'unused') {
         this.handleUnused(issue);
@@ -133,12 +148,14 @@ export class DepcheckCommand extends Command {
     this.handleFixes();
   }
 
-  handleFixes() {
-    let hasFixes = this.removedDeps.length > 0 || this.removedDevDeps.length > 0 || Object.keys(this.addedDeps).length > 0;
+  private handleFixes() {
+    this.changes = this.removedDeps.length > 0 || this.removedDevDeps.length > 0 || Object.keys(this.addedDeps).length > 0;
     const prefix = this.dryRun ? '[dry-run]' : ' -';
     if (this.removedDevDeps.length > 0) {
       if (!this.dryRun) {
-        this.projectRoot.removeDependencies(this.removedDevDeps, 'devDependencies');
+        for (const dep of this.removedDevDeps) {
+          this.projectRoot.updateRecordEntry('devDependencies', dep, undefined);
+        }
       }
       console.warn(
         prefix,
@@ -147,14 +164,16 @@ export class DepcheckCommand extends Command {
     }
     if (this.removedDeps.length > 0) {
       if (!this.dryRun) {
-        this.projectRoot.removeDependencies(this.removedDeps, 'dependencies');
+        for (const dep of this.removedDeps) {
+          this.projectRoot.updateRecordEntry('dependencies', dep, undefined);
+        }
       }
       console.error(prefix, `Removed unused dependencies: ${this.removedDeps.map((dep) => this.reporter.formatPackage(dep)).join(', ')}`);
     }
     if (this.addedDeps.dependencies) {
       for (const [dep, version] of Object.entries(this.addedDeps.dependencies)) {
         if (!this.dryRun) {
-          this.projectRoot.addDependencies({ [dep]: version }, 'dependencies');
+          this.projectRoot.updateRecordEntry('dependencies', dep, version);
         }
         console.warn(prefix, `Added dependency: ${this.reporter.formatPackage(dep)}@${version}`);
       }
@@ -162,20 +181,14 @@ export class DepcheckCommand extends Command {
     if (this.addedDeps.devDependencies) {
       for (const [dep, version] of Object.entries(this.addedDeps.devDependencies)) {
         if (!this.dryRun) {
-          this.projectRoot.addDependencies({ [dep]: version }, 'devDependencies');
+          this.projectRoot.updateRecordEntry('devDependencies', dep, version);
         }
         console.warn(prefix, `Added devDependency: ${this.reporter.formatPackage(dep)}@${version}`);
       }
     }
-    if (hasFixes && !this.dryRun) {
-      this.projectRoot.writeManifest();
-    }
   }
 
-  /**
-   * @param {Issue} issue
-   */
-  handleUnused(issue) {
+  private handleUnused(issue: Issue) {
     const color = this.reporter.color;
     const { dependency, depType = 'dependency' } = issue;
     const prettyDependency = this.reporter.formatPackage(dependency);
@@ -201,11 +214,7 @@ export class DepcheckCommand extends Command {
     }
   }
 
-  /**
-   * Handle a missing dependency issue.
-   * @param {Issue} issue
-   */
-  handleMissing(issue) {
+  private handleMissing(issue: Issue) {
     const color = this.reporter.color;
     const { dependency, files } = issue;
     const prettyDependency = this.reporter.formatPackage(dependency);
@@ -247,21 +256,13 @@ export class DepcheckCommand extends Command {
   }
 }
 
-/**
- * @param {import('../utils/projectRoot.js').ProjectRoot} projectRoot
- * @returns {string[]}
- */
-function injectedDevDeps(projectRoot) {
+function injectedDevDeps(projectRoot: ProjectRoot): string[] {
   const options = { cwd: projectRoot.root, manifest: projectRoot.manifest };
   const injectedDeps = getInjectedDeps(options);
   return Object.keys(injectedDeps);
 }
 
-/**
- * @param {string} fileName
- * @returns {boolean}
- */
-function isTestFile(fileName) {
+function isTestFile(fileName: string): boolean {
   return micromatch.isMatch(fileName, [
     '**/*.test.*',
     '**/*.spec.*',

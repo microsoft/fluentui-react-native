@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 

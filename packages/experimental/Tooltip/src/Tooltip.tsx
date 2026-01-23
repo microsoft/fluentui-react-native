@@ -4,7 +4,6 @@
  * @format
  */
 
-/** @jsxRuntime classic */
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 

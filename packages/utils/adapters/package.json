@@ -2,38 +2,41 @@
   "name": "@fluentui-react-native/adapters",
   "version": "0.13.5",
   "description": "Adapters for working with react-native types",
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "react-native": "src/index.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
-    }
-  },
-  "typings": "lib/index.d.ts",
-  "scripts": {
-    "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
-    "clean": "fluentui-scripts clean",
-    "depcheck": "fluentui-scripts depcheck",
-    "lint": "fluentui-scripts eslint",
-    "test": "fluentui-scripts jest",
-    "update-snapshots": "fluentui-scripts jest -u",
-    "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/utils/adapters"
+  },
+  "license": "MIT",
+  "author": "",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js"
+    }
+  },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
+    "prettier": "fluentui-scripts prettier",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.74.0",
     "@react-native/babel-preset": "^0.74.0",
@@ -52,34 +55,6 @@
     "react-native-macos": "^0.73.0 || ^0.74.0",
     "react-native-windows": "^0.73.0 || ^0.74.0"
   },
-  "author": "",
-  "license": "MIT",
-  "rnx-kit": {
-    "kitType": "library",
-    "alignDeps": {
-      "presets": [
-        "@fluentui-react-native/scripts/configs/align-deps-preset.cjs",
-        "microsoft/react-native"
-      ],
-      "requirements": {
-        "development": [
-          "react-native@0.74"
-        ],
-        "production": [
-          "react-native@0.73 || 0.74"
-        ]
-      },
-      "capabilities": [
-        "babel-preset-react-native",
-        "core",
-        "core-android",
-        "core-ios",
-        "core-macos",
-        "core-windows",
-        "core-win32"
-      ]
-    }
-  },
   "peerDependenciesMeta": {
     "@office-iss/react-native-win32": {
       "optional": true
@@ -90,5 +65,21 @@
     "react-native-windows": {
       "optional": true
     }
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "babel-preset-react-native",
+        "core",
+        "core-android",
+        "core-ios",
+        "core-macos",
+        "core-win32",
+        "core-windows",
+        "tools-core"
+      ]
+    },
+    "extends": "@fluentui-react-native/kit-config"
   }
 }

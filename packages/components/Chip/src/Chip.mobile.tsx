@@ -1,11 +1,10 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
 import { Children } from 'react';
 import { Pressable, I18nManager } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 import { Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 

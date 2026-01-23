@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "switch everything to modern jsx-runtime",
+  "packageName": "@uifabricshared/theme-registry",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}

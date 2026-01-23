@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import { View } from 'react-native';
 
 import { compose } from '@fluentui-react-native/framework';

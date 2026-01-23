@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "switch everything to modern jsx-runtime",
+  "packageName": "@uifabricshared/foundation-compose",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}

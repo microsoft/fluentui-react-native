@@ -2,11 +2,11 @@
   "name": "@fluentui-react-native/babel-config",
   "private": true,
   "version": "0.1.1",
-  "description": "Babel configuration for UI Fabric React Native",
+  "description": "Babel configuration for Fluent UI React Native packages",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
-    "directory": "packages/framework/babel-config"
+    "directory": "packages/configs/babel-config"
   },
   "main": "./babel.config.js",
   "exports": {
@@ -26,6 +26,9 @@
     "@babel/runtime": "^7.22.0",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0"
+  },
+  "furn": {
+    "packageType": "tooling"
   },
   "beachball": {
     "shouldPublish": false,

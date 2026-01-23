@@ -1,11 +1,10 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import { Fragment } from 'react';
 import { Image, View, Text, Platform } from 'react-native';
 
 import { PresenceBadge } from '@fluentui-react-native/badge';
 import type { UseSlots, Slots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 import { Icon } from '@fluentui-react-native/icon';
 import { Svg, Path } from 'react-native-svg';
 

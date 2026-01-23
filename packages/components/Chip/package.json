@@ -2,30 +2,30 @@
   "name": "@fluentui-react-native/chip",
   "version": "0.4.23",
   "description": "A cross-platform Chip component using the Fluent Design System. A chip is a compact representations of entities (most commonly, people) that can be typed in, deleted or dragged easily.",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
-  "homepage": "https://github.com/microsoft/fluentui-react-native",
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "react-native": "src/index.ts",
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib-commonjs/index.js"
     }
   },
-  "typings": "lib/index.d.ts",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
-    "lint": "fluentui-scripts eslint",
     "depcheck": "fluentui-scripts depcheck",
-    "test": "fluentui-scripts jest",
-    "update-snapshots": "fluentui-scripts jest -u",
+    "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
@@ -41,7 +41,9 @@
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@office-iss/react-native-win32": "^0.74.0",
@@ -63,33 +65,6 @@
     "react-native-svg": ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0",
     "react-native-windows": "^0.73.0 || ^0.74.0"
   },
-  "rnx-kit": {
-    "kitType": "library",
-    "alignDeps": {
-      "presets": [
-        "microsoft/react-native"
-      ],
-      "requirements": {
-        "development": [
-          "react-native@0.74"
-        ],
-        "production": [
-          "react-native@0.73 || 0.74"
-        ]
-      },
-      "capabilities": [
-        "babel-preset-react-native",
-        "core",
-        "core-android",
-        "core-ios",
-        "core-macos",
-        "core-windows",
-        "react",
-        "svg",
-        "react-test-renderer"
-      ]
-    }
-  },
   "peerDependenciesMeta": {
     "@office-iss/react-native-win32": {
       "optional": true
@@ -100,5 +75,23 @@
     "react-native-windows": {
       "optional": true
     }
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "babel-preset-react-native",
+        "core",
+        "core-android",
+        "core-ios",
+        "core-macos",
+        "core-windows",
+        "react",
+        "react-test-renderer",
+        "svg",
+        "tools-core"
+      ]
+    },
+    "extends": "@fluentui-react-native/kit-config"
   }
 }

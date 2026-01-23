@@ -2,38 +2,34 @@
   "name": "@fluentui-react-native/merge-props",
   "version": "0.9.11",
   "description": "Utility for merging props with styles and caching style combinations",
+  "keywords": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework/merge-props"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "react-native": "src/index.ts",
+  "license": "MIT",
+  "author": "",
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib-commonjs/index.js"
     }
   },
-  "typings": "lib/index.d.ts",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "test": "fluentui-scripts jest",
     "lint": "fluentui-scripts eslint",
-    "start": "fluentui-scripts dev",
-    "start-test": "fluentui-scripts jest-watch",
-    "update-snapshots": "fluentui-scripts jest -u",
-    "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
+    "lint-package": "fluentui-scripts lint-package",
+    "prettier": "fluentui-scripts prettier"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/framework-base": "workspace:*"
   },
@@ -41,37 +37,29 @@
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
     "@types/jest": "^29.0.0",
-    "react": "18.2.0",
-    "react-native": "^0.74.0"
+    "react": "18.2.0"
   },
   "peerDependencies": {
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0"
+    "react": "18.2.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
-      "presets": [
-        "microsoft/react-native"
-      ],
-      "requirements": {
-        "development": [
-          "react-native@0.74"
-        ],
-        "production": [
-          "react-native@0.73 || 0.74"
-        ]
-      },
       "capabilities": [
-        "babel-preset-react-native",
-        "core",
-        "core-android",
-        "core-ios"
+        "react",
+        "tools-core",
+        "tools-eslint"
       ]
-    }
+    },
+    "extends": "@fluentui-react-native/kit-config"
   }
 }

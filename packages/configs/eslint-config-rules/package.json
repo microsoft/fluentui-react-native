@@ -7,24 +7,31 @@
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework/eslint-config-rules"
   },
-  "main": "./eslint.config.js",
+  "license": "MIT",
   "exports": {
     ".": "./eslint.config.js",
     "./eslint.config.js": "./eslint.config.js"
   },
+  "main": "./eslint.config.js",
   "scripts": {
-    "build": "fluentui-scripts build"
+    "build": "fluentui-scripts build",
+    "build-cjs": "tsgo",
+    "build-esm": "tsgo",
+    "lint-package": "fluentui-scripts lint-package"
   },
-  "license": "MIT",
   "dependencies": {
     "@microsoft/eslint-plugin-sdl": "^1.1.0",
-    "@rnx-kit/eslint-plugin": "^0.8.6"
+    "@rnx-kit/eslint-plugin": "catalog:"
   },
   "devDependencies": {
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@types/eslint": "^9.0.0",
-    "@types/node": "^22.0.0",
-    "eslint": "^9.0.0"
+    "@types/eslint": "^9.6.1",
+    "@types/node": "catalog:",
+    "eslint": "^9.39.2"
+  },
+  "furn": {
+    "packageType": "tooling"
   },
   "beachball": {
     "shouldPublish": false,

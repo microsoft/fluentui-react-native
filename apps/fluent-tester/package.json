@@ -2,16 +2,29 @@
   "name": "@fluentui-react-native/tester",
   "version": "0.170.50",
   "description": "A test app to test FluentUI React Native Components during development",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "apps/fluent-tester"
+  },
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
-  "homepage": "https://github.com/microsoft/fluentui-react-native",
-  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js"
+    }
+  },
+  "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
-  "react-native": "src/index.ts",
-  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "android": "rnx-cli run --platform android",
-    "build": "fluentui-scripts hybrid-build",
+    "build": "fluentui-scripts build",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "bundle": "rnx-cli bundle --dev false",
     "bundle:android": "rnx-cli bundle --dev false --platform android",
     "bundle:ios": "rnx-cli bundle --dev false --platform ios",
@@ -20,18 +33,15 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "ios": "rnx-cli run --platform ios",
-    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
     "macos": "rnx-cli run --platform macos",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true",
     "start": "rnx-cli start",
     "windows": "react-native run-windows --arch x64 --sln windows/FluentTester.sln"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "apps/fluent-tester"
+  "jest": {
+    "preset": "react-native"
   },
   "dependencies": {
     "@fluentui-react-native/android-theme": "workspace:*",
@@ -87,7 +97,7 @@
     "@react-native-community/slider": "^4.5.7",
     "@react-native-menu/menu": "^0.7.3",
     "@react-native-picker/picker": "^2.7.0",
-    "@types/node": "^22.0.0",
+    "@types/node": "catalog:",
     "@types/react": "~18.2.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",
@@ -98,9 +108,11 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/experimental-native-font-metrics": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/menu-button": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^13.6.4",
@@ -113,7 +125,7 @@
     "@rnx-kit/cli": "^0.18.14",
     "@rnx-kit/metro-config": "^2.1.0",
     "@rnx-kit/metro-resolver-symlinks": "^0.2.5",
-    "@types/jasmine": "5.1.4",
+    "@types/jasmine": "catalog:",
     "@types/react-test-renderer": "^18.2.0",
     "@wdio/cli": "catalog:",
     "@wdio/globals": "catalog:",
@@ -128,8 +140,17 @@
     "react-test-renderer": "18.2.0",
     "webdriverio": "catalog:"
   },
-  "jest": {
-    "preset": "react-native"
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    }
+  },
+  "furn": {
+    "depcheck": {
+      "ignoreMatches": [
+        "@fluentui-react-native/experimental-expander"
+      ]
+    }
   },
   "rnx-kit": {
     "kitType": "app",
@@ -180,15 +201,14 @@
       }
     ],
     "alignDeps": {
-      "presets": [
-        "microsoft/react-native",
-        "@fluentui-react-native/scripts/configs/align-deps-preset.cjs"
-      ],
-      "requirements": [
-        "react-native@0.74"
-      ],
+      "requirements": {
+        "production": [
+          "react-native@0.74"
+        ]
+      },
       "capabilities": [
         "babel-preset-react-native",
+        "community/cli",
         "core-android",
         "core-ios",
         "core-macos",
@@ -200,18 +220,9 @@
         "react-test-renderer",
         "svg",
         "test-app",
-        "community/cli"
+        "tools-core"
       ]
-    }
-  },
-  "depcheck": {
-    "ignoreMatches": [
-      "@fluentui-react-native/experimental-expander"
-    ]
-  },
-  "peerDependenciesMeta": {
-    "@office-iss/react-native-win32": {
-      "optional": true
-    }
+    },
+    "extends": "@fluentui-react-native/kit-config"
   }
 }

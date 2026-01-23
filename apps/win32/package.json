@@ -1,37 +1,40 @@
 {
   "name": "@fluentui-react-native/tester-win32",
   "version": "0.38.69",
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "react-native": "src/index.ts",
-  "typings": "lib/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
-    }
-  },
-  "scripts": {
-    "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
-    "clean": "fluentui-scripts clean",
-    "depcheck": "fluentui-scripts depcheck",
-    "lint": "fluentui-scripts eslint",
-    "start": "rnx-cli start",
-    "bundle": "rnx-cli bundle --dev false",
-    "bundle-dev": "rnx-cli bundle",
-    "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
-    "run-win32-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh",
-    "run-win32-devmain-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh --useDevMain",
-    "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useDevMain ",
-    "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/win32"
+  },
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js"
+    }
+  },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "bundle": "rnx-cli bundle --dev false",
+    "bundle-dev": "rnx-cli bundle",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
+    "prettier": "fluentui-scripts prettier",
+    "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
+    "run-win32-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh",
+    "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useDevMain ",
+    "run-win32-devmain-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh --useDevMain",
+    "start": "rnx-cli start"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "workspace:*",
@@ -43,6 +46,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030",
     "@react-native/babel-preset": "^0.74.0",
@@ -56,10 +60,15 @@
     "metro-config": "^0.80.3",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "18.2.0",
-    "rimraf": "^5.0.1"
+    "rimraf": "catalog:"
   },
-  "jest": {
-    "preset": "react-native"
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.74.0"
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    }
   },
   "rnx-kit": {
     "kitType": "app",
@@ -92,12 +101,11 @@
       }
     ],
     "alignDeps": {
-      "presets": [
-        "microsoft/react-native"
-      ],
-      "requirements": [
-        "react-native@0.74"
-      ],
+      "requirements": {
+        "production": [
+          "react-native@0.74"
+        ]
+      },
       "capabilities": [
         "babel-preset-react-native",
         "core",
@@ -105,16 +113,10 @@
         "metro-react-native-babel-transformer",
         "react",
         "react-test-renderer",
-        "svg"
+        "svg",
+        "tools-core"
       ]
-    }
-  },
-  "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0"
-  },
-  "peerDependenciesMeta": {
-    "@office-iss/react-native-win32": {
-      "optional": true
-    }
+    },
+    "extends": "@fluentui-react-native/kit-config"
   }
 }

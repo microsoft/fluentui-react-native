@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Image, Platform, View } from 'react-native';
 import type { ImageStyle, TextStyle } from 'react-native';
 

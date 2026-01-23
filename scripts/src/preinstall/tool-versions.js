@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 /**
  * Get the package.json manifest for a given folder.
  * @param {string} folder
- * @returns {import('../utils/projectRoot.js').PackageManifest}
+ * @returns {import('../utils/projectRoot.ts').PackageManifest}
  */
 function getPackageManifest(folder) {
   const manifestPath = path.join(folder, 'package.json');

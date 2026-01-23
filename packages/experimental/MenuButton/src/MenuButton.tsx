@@ -1,11 +1,10 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import React, { useRef, useState, useCallback, useMemo } from 'react';
 import { Platform } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, withSlots } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
 import { SvgXml } from 'react-native-svg';
 
 import { stylingSettings } from './MenuButton.styling';
@@ -77,7 +76,7 @@ export const MenuButton = compose<MenuButtonType>({
       style,
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
-      iconOnly: content ? false : true,
+      iconOnly: !content,
       accessibilityState: { expanded: showContextualMenu },
       accessibilityActions: defaultAccessibilityActions,
       onAccessibilityAction,

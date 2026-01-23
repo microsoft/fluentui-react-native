@@ -71,7 +71,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
       overflowManager.removeItem(id);
     },
     // overflowManager is not needed as a dependency, due to being attached to a ref
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     [overflowItemUpdateCallbacks],
   );
 
@@ -162,7 +162,6 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
       overflowManager.update(containerSize);
     }
     // We only want to run this layout effect whenever the container's size updates.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerSize]);
 
   // On initial mount, wait for layout to run for all items / components before showing.

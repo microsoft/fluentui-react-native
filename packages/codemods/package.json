@@ -2,37 +2,37 @@
   "name": "@fluentui-react-native/codemods",
   "version": "0.5.24",
   "description": "Transform files to make refactoring FURN code easier",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/codemods"
+  },
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
-  "homepage": "https://github.com/microsoft/fluentui-react-native",
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "react-native": "src/index.ts",
-  "typings": "lib/index.d.ts",
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib-commonjs/index.js"
     }
   },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "bin": {
     "transform": "./transform.js"
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "test": "fluentui-scripts jest",
+    "lint-package": "fluentui-scripts lint-package",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/codemods"
+    "test": "fluentui-scripts jest"
   },
   "dependencies": {
     "jscodeshift": "^17.0.0",
@@ -44,17 +44,29 @@
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@types/jscodeshift": "^0.11.11",
-    "@types/node": "^22.0.0"
+    "@types/node": "catalog:"
   },
-  "depcheck": {
-    "ignoreMatches": [
-      ".bin"
-    ],
-    "ignorePatterns": [
-      "src/transforms/__testfixtures__/*"
-    ]
+  "furn": {
+    "depcheck": {
+      "ignoreMatches": [
+        ".bin"
+      ],
+      "ignorePatterns": [
+        "src/transforms/__testfixtures__/*"
+      ]
+    }
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/kit-config",
+    "alignDeps": {
+      "capabilities": [
+        "tools-core"
+      ]
+    }
   }
 }

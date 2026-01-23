@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Text, View } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';

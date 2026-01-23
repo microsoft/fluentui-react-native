@@ -2,20 +2,30 @@
   "name": "@fluentui-react-native/e2e-testing",
   "version": "1.43.11",
   "description": "Package containing E2E testing specs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "apps/E2E"
+  },
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "lib/index.mjs",
-  "typings": "lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
-      "import": "./lib/index.mjs",
-      "require": "./lib/index.js"
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js"
     }
   },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "src/**/*",
+    "dist/*"
+  ],
   "scripts": {
-    "build": "fluentui-scripts hybrid-build",
-    "lint": "fluentui-scripts eslint",
+    "build": "fluentui-scripts build",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "e2eprep:android": "cross-env APPIUM_HOME=.appium yarn exec appium driver install uiautomator2",
     "e2eprep:ios": "cross-env APPIUM_HOME=.appium yarn exec appium driver install xcuitest",
     "e2eprep:macos": "cross-env APPIUM_HOME=.appium yarn exec appium driver install mac2",
@@ -25,37 +35,27 @@
     "e2etest:ios": "cross-env APPIUM_HOME=.appium wdio run wdio.conf.ios.js",
     "e2etest:macos": "cross-env APPIUM_HOME=.appium wdio run wdio.conf.macos.js",
     "e2etest:win32": "cross-env APPIUM_HOME=.appium wdio run wdio.conf.win32.js",
-    "e2etest:windows": "rimraf errorShots reports && cross-env APPIUM_HOME=.appium wdio run wdio.conf.windows.js"
+    "e2etest:windows": "rimraf errorShots reports && cross-env APPIUM_HOME=.appium wdio run wdio.conf.windows.js",
+    "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "apps/E2E"
-  },
-  "files": [
-    "src/**/*",
-    "dist/*"
-  ],
   "dependencies": {
-    "@office-iss/react-native-win32": "^0.74.0",
-    "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030",
-    "react": "18.2.0",
-    "react-native": "^0.74.0",
-    "react-native-macos": "^0.74.0",
-    "react-native-windows": "^0.74.0"
+    "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@office-iss/react-native-win32": "^0.74.0",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/metro-config": "^2.0.0",
     "@types/jasmine": "catalog:",
-    "@types/node": "^22.2.0",
+    "@types/node": "catalog:",
     "@types/react": "^18.2.0",
     "@wdio/appium-service": "catalog:",
     "@wdio/cli": "catalog:",
@@ -71,34 +71,53 @@
     "appium-uiautomator2-driver": "catalog:",
     "appium-windows-driver": "catalog:",
     "appium-xcuitest-driver": "catalog:",
-    "cross-env": "^7.0.3",
+    "cross-env": "catalog:",
     "expect-webdriverio": "catalog:",
     "metro-config": "^0.80.3",
-    "rimraf": "^5.0.1",
+    "react": "18.2.0",
+    "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
+    "react-native-windows": "^0.74.0",
+    "rimraf": "catalog:",
     "ts-node": "^10.7.0",
     "webdriverio": "catalog:"
   },
   "installConfig": {
     "hoistingLimits": "dependencies"
   },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0",
+    "react": "18.2.0",
+    "react-native": "^0.73.0 || ^0.74.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0"
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
+  },
   "rnx-kit": {
-    "kitType": "app",
+    "kitType": "library",
     "alignDeps": {
-      "presets": [
-        "microsoft/react-native"
-      ],
-      "requirements": [
-        "react-native@0.74"
-      ],
       "capabilities": [
         "babel-preset-react-native",
         "core",
         "core-macos",
         "core-windows",
+        "core-win32",
         "metro-config",
         "metro-react-native-babel-transformer",
-        "react"
+        "react",
+        "tools-core"
       ]
-    }
+    },
+    "extends": "@fluentui-react-native/kit-config"
   }
 }

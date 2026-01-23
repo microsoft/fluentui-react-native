@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 export interface ISlotProps<TProps extends object = object> {
   root: TProps;
 }

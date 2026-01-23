@@ -161,7 +161,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       }
     }
     // Disable exhaustive-deps warning because this hook should only run once 'isSelectedTabDisabled' dependency changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSelectedTabDisabled]);
 
   // win32 only prop used to implemement CTRL + TAB shortcut native to windows tab components

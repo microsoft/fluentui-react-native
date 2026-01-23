@@ -2,6 +2,7 @@
 
 import { Command, Option } from 'clipanion';
 import { runScript } from '../utils/runScript.js';
+import { isFixMode } from '../utils/env.ts';
 
 export class LintCommand extends Command {
   /** @override */
@@ -17,7 +18,10 @@ export class LintCommand extends Command {
   args = Option.Proxy();
 
   async execute() {
-    const args = this.args.length > 0 ? this.args : [];
+    const args = [...this.args];
+    if (isFixMode()) {
+      args.push('--fix');
+    }
     return await runScript('eslint', 'src/', ...args);
   }
 }

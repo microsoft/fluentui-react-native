@@ -1,7 +1,6 @@
 {
   "extends": "@fluentui-react-native/scripts/configs/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "jsx": "react",
     "outDir": "lib",
     "declaration": true,

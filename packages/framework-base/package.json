@@ -2,53 +2,67 @@
   "name": "@fluentui-react-native/framework-base",
   "version": "0.2.1",
   "description": "Base types and utilities fluentui-react-native frameworks",
+  "keywords": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework-base"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "react-native": "src/index.ts",
+  "license": "MIT",
+  "author": "",
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib-commonjs/index.js"
     },
     "./jsx-runtime": {
+      "types": "./lib/jsx-runtime.d.ts",
       "import": "./lib/jsx-runtime.js",
-      "require": "./lib-commonjs/jsx-runtime.js",
-      "types": "./lib/jsx-runtime.d.ts"
+      "require": "./lib-commonjs/jsx-runtime.js"
     }
   },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "test": "fluentui-scripts jest",
     "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
+    "prettier": "fluentui-scripts prettier",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
-    "update-snapshots": "fluentui-scripts jest -u",
-    "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "@types/react": "^18.2.0",
-    "react": "18.2.0"
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
   },
   "devDependencies": {
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "catalog:",
+    "@types/react": "^18.2.0",
+    "react": "18.2.0"
+  },
+  "peerDependencies": {
+    "react": "18.2.0"
+  },
+  "rnx-kit": {
+    "extends": "@fluentui-react-native/kit-config",
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "react",
+        "tools-core",
+        "tools-eslint",
+        "tools-jest"
+      ]
+    }
   }
 }
