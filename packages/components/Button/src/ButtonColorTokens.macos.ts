@@ -39,6 +39,12 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
       borderColor: t.colors.neutralStroke2,
       icon: t.colors.neutralForeground2,
     },
+    highlighted: {
+      backgroundColor: t.colors.neutralBackground2,
+      color: t.colors.neutralForeground2,
+      borderColor: t.colors.neutralStroke2,
+      icon: t.colors.neutralForeground2,
+    },
     primary: {
       backgroundColor: t.colors.brandBackground,
       color: t.colors.neutralForegroundOnBrand,
@@ -66,6 +72,12 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         iconColor: t.colors.neutralForegroundOnBrandPressed,
       },
       focused: {
+        backgroundColor: t.colors.brandBackground,
+        color: t.colors.neutralForegroundOnBrand,
+        borderColor: t.colors.brandBackground,
+        iconColor: t.colors.neutralForegroundOnBrand,
+      },
+      highlighted: {
         backgroundColor: t.colors.brandBackground,
         color: t.colors.neutralForegroundOnBrand,
         borderColor: t.colors.brandBackground,
@@ -101,6 +113,12 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         iconColor: t.colors.brandForeground1Pressed,
       },
       focused: {
+        backgroundColor: t.colors.subtleBackground,
+        color: t.colors.brandForeground1,
+        borderColor: t.colors.transparentStroke,
+        iconColor: t.colors.brandForeground1,
+      },
+      highlighted: {
         backgroundColor: t.colors.subtleBackground,
         color: t.colors.brandForeground1,
         borderColor: t.colors.transparentStroke,

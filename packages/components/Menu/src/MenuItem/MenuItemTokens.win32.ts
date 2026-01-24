@@ -1,5 +1,6 @@
 import type { FontWeightValue, Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { MenuItemTokens } from './MenuItem.types';
@@ -40,5 +41,15 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
     color: t.colors.neutralForeground1Hover,
     iconColor: t.colors.neutralForeground1Hover,
     submenuIndicatorColor: t.colors.neutralForeground1Hover,
+  },
+  highlighted: {
+    backgroundColor: t.colors.neutralBackground1Hover,
+    color: t.colors.neutralForeground1Hover,
+    iconColor: t.colors.neutralForeground1Hover,
+    submenuIndicatorColor: t.colors.neutralForeground1Hover,
+    borderColor: isHighContrast(t) ? t.colors.compoundBrandStroke1 : t.colors.neutralForeground1,
+    borderWidth: globalTokens.stroke.width20,
+    padding: globalTokens.size40 - globalTokens.stroke.width20,
+    paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
   },
 });

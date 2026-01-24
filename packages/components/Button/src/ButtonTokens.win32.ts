@@ -19,8 +19,16 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
         borderWidth: 0,
         padding: globalTokens.size80,
       },
+      highlighted: {
+        borderWidth: globalTokens.stroke.width20,
+        padding: globalTokens.size80 - globalTokens.stroke.width20,
+      },
       primary: !isHighContrast(theme) && {
         focused: {
+          borderWidth: globalTokens.stroke.width20,
+          padding: globalTokens.size80 - globalTokens.stroke.width20,
+        },
+        highlighted: {
           borderWidth: globalTokens.stroke.width20,
           padding: globalTokens.size80 - globalTokens.stroke.width20,
         },
@@ -28,6 +36,10 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
           focused: {
             borderWidth: globalTokens.stroke.width10,
             padding: globalTokens.size80 - globalTokens.stroke.width10,
+          },
+          highlighted: {
+            borderWidth: globalTokens.stroke.width20,
+            padding: globalTokens.size80 - globalTokens.stroke.width20,
           },
         },
       },
@@ -45,8 +57,16 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
           padding: globalTokens.size60,
           paddingHorizontal: globalTokens.size120,
         },
+        highlighted: {
+          padding: globalTokens.size60 - globalTokens.stroke.width20,
+          paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
+        },
         primary: !isHighContrast(theme) && {
           focused: {
+            padding: globalTokens.size60 - globalTokens.stroke.width20,
+            paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
+          },
+          highlighted: {
             padding: globalTokens.size60 - globalTokens.stroke.width20,
             paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
           },
@@ -54,6 +74,10 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
             focused: {
               padding: globalTokens.size60 - globalTokens.stroke.width10,
               paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
+            },
+            highlighted: {
+              padding: globalTokens.size60 - globalTokens.stroke.width20,
+              paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
             },
           },
         },
@@ -66,8 +90,16 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
         borderWidth: 0,
         padding: globalTokens.size40,
       },
+      highlighted: {
+        borderWidth: globalTokens.stroke.width20,
+        padding: globalTokens.size40 - globalTokens.stroke.width20,
+      },
       primary: !isHighContrast(theme) && {
         focused: {
+          borderWidth: globalTokens.stroke.width20,
+          padding: globalTokens.size40 - globalTokens.stroke.width20,
+        },
+        highlighted: {
           borderWidth: globalTokens.stroke.width20,
           padding: globalTokens.size40 - globalTokens.stroke.width20,
         },
@@ -75,6 +107,10 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
           focused: {
             borderWidth: globalTokens.stroke.width10,
             padding: globalTokens.size40 - globalTokens.stroke.width10,
+          },
+          highlighted: {
+            borderWidth: globalTokens.stroke.width20,
+            padding: globalTokens.size40 - globalTokens.stroke.width20,
           },
         },
       },
@@ -91,13 +127,22 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
         focused: {
           paddingHorizontal: globalTokens.size80,
         },
+        highlighted: {
+          paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
+        },
         primary: !isHighContrast(theme) && {
           focused: {
+            paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
+          },
+          highlighted: {
             paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
           },
           square: {
             focused: {
               paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width10,
+            },
+            highlighted: {
+              paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
             },
           },
         },
@@ -110,8 +155,16 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
         borderWidth: 0,
         padding: globalTokens.size100,
       },
+      highlighted: {
+        borderWidth: globalTokens.stroke.width20,
+        padding: globalTokens.size100 - globalTokens.stroke.width20,
+      },
       primary: !isHighContrast(theme) && {
         focused: {
+          borderWidth: globalTokens.stroke.width20,
+          padding: globalTokens.size100 - globalTokens.stroke.width20,
+        },
+        highlighted: {
           borderWidth: globalTokens.stroke.width20,
           padding: globalTokens.size100 - globalTokens.stroke.width20,
         },
@@ -119,6 +172,10 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
           focused: {
             borderWidth: globalTokens.stroke.width10,
             padding: globalTokens.size100 - globalTokens.stroke.width10,
+          },
+          highlighted: {
+            borderWidth: globalTokens.stroke.width20,
+            padding: globalTokens.size100 - globalTokens.stroke.width20,
           },
         },
       },
@@ -137,8 +194,16 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
           padding: globalTokens.size80,
           paddingHorizontal: globalTokens.size160,
         },
+        highlighted: {
+          padding: globalTokens.size80 - globalTokens.stroke.width20,
+          paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
+        },
         primary: !isHighContrast(theme) && {
           focused: {
+            padding: globalTokens.size80 - globalTokens.stroke.width20,
+            paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
+          },
+          highlighted: {
             padding: globalTokens.size80 - globalTokens.stroke.width20,
             paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
           },
@@ -146,6 +211,10 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
             focused: {
               padding: globalTokens.size80 - globalTokens.stroke.width10,
               paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
+            },
+            highlighted: {
+              padding: globalTokens.size80 - globalTokens.stroke.width20,
+              paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
             },
           },
         },

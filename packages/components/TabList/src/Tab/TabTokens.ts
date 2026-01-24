@@ -15,6 +15,7 @@ export const tabStates: (keyof TabTokens)[] = [
   'disabled',
   'selected',
   'focused',
+  'highlighted',
   'pressed',
   'transparent',
   'subtle',
