@@ -44,28 +44,17 @@
     "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
     "@types/react": "~18.2.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",
-    "react-native-macos": "^0.74.0",
     "react-native-windows": "^0.74.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0",
     "react": "18.2.0",
     "react-native": "^0.73.0 || ^0.74.0",
-    "react-native-macos": "^0.73.0 || ^0.74.0",
     "react-native-windows": "^0.73.0 || ^0.74.0"
   },
   "peerDependenciesMeta": {
-    "@office-iss/react-native-win32": {
-      "optional": true
-    },
-    "react-native-macos": {
-      "optional": true
-    },
     "react-native-windows": {
       "optional": true
     }
@@ -74,11 +63,7 @@
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "babel-preset-react-native",
         "core",
-        "core-android",
-        "core-ios",
-        "core-macos",
         "core-windows",
         "react",
         "tools-core"

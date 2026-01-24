@@ -42,8 +42,6 @@
     "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
     "@types/jest": "^29.0.0",
     "react": "18.2.0",
     "react-native": "^0.74.0"
@@ -56,10 +54,8 @@
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "babel-preset-react-native",
         "core",
-        "core-android",
-        "core-ios",
+        "react",
         "tools-core"
       ]
     },

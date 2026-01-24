@@ -62,9 +62,6 @@
     "react-test-renderer": "18.2.0",
     "rimraf": "catalog:"
   },
-  "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0"
-  },
   "peerDependenciesMeta": {
     "@office-iss/react-native-win32": {
       "optional": true
@@ -109,6 +106,7 @@
       "capabilities": [
         "babel-preset-react-native",
         "core",
+        "core-win32",
         "metro-config",
         "metro-react-native-babel-transformer",
         "react",

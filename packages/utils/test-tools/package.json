@@ -56,6 +56,9 @@
     "extends": "@fluentui-react-native/kit-config",
     "alignDeps": {
       "capabilities": [
+        "core",
+        "react",
+        "react-test-renderer",
         "tools-core"
       ]
     }

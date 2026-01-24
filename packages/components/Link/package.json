@@ -51,8 +51,6 @@
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
-    "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
     "@types/react": "~18.2.0",
     "@types/react-test-renderer": "^18.2.0",
     "react": "18.2.0",
@@ -83,10 +81,7 @@
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "babel-preset-react-native",
         "core",
-        "core-android",
-        "core-ios",
         "core-macos",
         "core-windows",
         "react",
