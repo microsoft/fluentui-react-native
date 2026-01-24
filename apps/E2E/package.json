@@ -49,10 +49,10 @@
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@office-iss/react-native-win32": "^0.74.0",
+    "@office-iss/react-native-win32": "^0.81.0",
     "@types/jasmine": "catalog:",
     "@types/node": "catalog:",
-    "@types/react": "^18.2.0",
+    "@types/react": "^19.1.0",
     "@wdio/appium-service": "catalog:",
     "@wdio/cli": "catalog:",
     "@wdio/globals": "catalog:",
@@ -70,10 +70,10 @@
     "cross-env": "catalog:",
     "expect-webdriverio": "catalog:",
     "metro-config": "^0.80.3",
-    "react": "18.2.0",
-    "react-native": "^0.74.0",
-    "react-native-macos": "^0.74.0",
-    "react-native-windows": "^0.74.0",
+    "react": "19.1.0",
+    "react-native": "^0.81.0",
+    "react-native-macos": "^0.81.0",
+    "react-native-windows": "^0.81.0",
     "rimraf": "catalog:",
     "ts-node": "^10.7.0",
     "webdriverio": "catalog:"
@@ -82,11 +82,11 @@
     "hoistingLimits": "dependencies"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0",
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0",
-    "react-native-macos": "^0.73.0 || ^0.74.0",
-    "react-native-windows": "^0.73.0 || ^0.74.0"
+    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react": "18.2.0 || 19.0.0 || 19.1.0",
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
   },
   "peerDependenciesMeta": {
     "@office-iss/react-native-win32": {

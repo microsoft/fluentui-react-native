@@ -60,8 +60,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   onMagicTap: false,
   onMouseEnter: true,
   onMouseLeave: true,
-  onMoveShouldSetResponder: true,
-  onMoveShouldSetResponderCapture: true,
   onPointerCancel: true,
   onPointerCancelCapture: true,
   onPointerDown: true,
@@ -74,16 +72,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   onPointerMoveCapture: true,
   onPointerUp: true,
   onPointerUpCapture: true,
-  onResponderEnd: true,
-  onResponderGrant: true,
-  onResponderMove: true,
-  onResponderReject: true,
-  onResponderRelease: true,
-  onResponderStart: true,
-  onResponderTerminate: true,
-  onResponderTerminationRequest: true,
-  onStartShouldSetResponder: true,
-  onStartShouldSetResponderCapture: true,
   onTouchCancel: true,
   onTouchEnd: true,
   onTouchEndCapture: true,
@@ -99,7 +87,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   testID: true,
   tooltip: true,
   tvParallaxMagnification: false,
-  tvParallaxProperties: false,
   tvParallaxShiftDistanceX: false,
   tvParallaxShiftDistanceY: false,
   tvParallaxTiltAngle: false,
@@ -125,6 +112,9 @@ const _viewMask: IFilterMask<IViewProps> = {
   'aria-valuemin': true,
   'aria-valuenow': true,
   'aria-valuetext': true,
+  accessibilityShowsLargeContentViewer: true,
+  accessibilityLargeContentTitle: true,
+  collapsableChildren: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
@@ -188,6 +178,8 @@ const _textMask: IFilterMask<ITextProps> = {
   onPressOut: true,
   onTextLayout: true,
   role: true,
+  pointerEvents: true,
+  pressRetentionOffset: true,
   selectable: true,
   selectionColor: true,
   style: true,
@@ -218,6 +210,8 @@ const _textMask: IFilterMask<ITextProps> = {
   'aria-valuemin': true,
   'aria-valuenow': true,
   'aria-valuetext': true,
+  accessibilityShowsLargeContentViewer: true,
+  accessibilityLargeContentTitle: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
@@ -305,6 +299,8 @@ const _imageMask: IFilterMask<IImageProps> = {
   'aria-valuemin': true,
   'aria-valuenow': true,
   'aria-valuetext': true,
+  accessibilityShowsLargeContentViewer: true,
+  accessibilityLargeContentTitle: true,
 };
 
 export function filterViewProps(propName: string): boolean {

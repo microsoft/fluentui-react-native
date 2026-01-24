@@ -37,13 +37,15 @@ const useStyledStagedText = (
   const { style, ...rest } = props;
 
   // create merged props to pass in to the inner slot
-  const mergedProps = { ...rest, style: mergeStyles(baseStyle, style), ...(inner && { inner }) };
+  const mergedProps = { ...rest, style: mergeStyles(baseStyle, style) as TextProps['style'], ...(inner && { inner }) };
 
   // create a slot based on the pluggable text
   const InnerText = useSlot(PluggableText, mergedProps);
 
   // return a closure to complete the staged pattern
-  return (extra: PluggableTextProps, children: React.ReactNode) => <InnerText {...extra}>{children}</InnerText>;
+  return (extra: Partial<PluggableTextProps>, children: React.ReactNode) => {
+    return InnerText({ style: undefined, ...extra } as any, children);
+  };
 };
 
 const HeaderText = stagedComponent((props: PluggableTextProps) => {
@@ -66,9 +68,9 @@ const CaptionText = stagedComponent((props: PluggableTextProps) => {
 const HeaderCaptionText1 = (props: React.PropsWithChildren<TextProps>) => {
   const { children, ...rest } = props;
   const baseStyle = React.useMemo<TextProps['style']>(() => ({ fontSize: 24, fontWeight: 'bold' }), []);
-  const mergedProps = { ...rest, style: mergeStyles(baseStyle, props.style) };
+  const mergedProps = { ...rest, style: mergeStyles(baseStyle, props.style) as TextProps['style'] };
   const InnerText = useSlot(CaptionText, mergedProps);
-  return <InnerText>{children}</InnerText>;
+  return InnerText({ style: undefined } as any, children);
 };
 
 // Control authored by plugging the root

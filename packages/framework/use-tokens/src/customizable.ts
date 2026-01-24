@@ -6,7 +6,10 @@ import type { TokenSettings, UseTokens } from './buildUseTokens';
  * A component implementation, with a use tokens hook passed in. Implementing it this way allows the useTokens hook to be
  * modified by the customization handler
  */
-export type InjectableComponent<TProps, TTokens, TTheme> = (props: TProps, useTokens: UseTokens<TTokens, TTheme>) => JSX.Element | null;
+export type InjectableComponent<TProps, TTokens, TTheme> = (
+  props: TProps,
+  useTokens: UseTokens<TTokens, TTheme>,
+) => React.JSX.Element | null;
 
 /**
  * A component with an attached customize function, used to create alternatively styled versions of the component

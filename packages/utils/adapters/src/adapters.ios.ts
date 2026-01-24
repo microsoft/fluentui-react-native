@@ -22,6 +22,8 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,
+  collapsable: true,
+  collapsableChildren: true,
   hasTVPreferredFocus: true,
   hitSlop: true,
   id: true,
@@ -70,7 +72,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   style: true,
   testID: true,
   tvParallaxMagnification: true,
-  tvParallaxProperties: true,
   tvParallaxShiftDistanceX: true,
   tvParallaxShiftDistanceY: true,
   tvParallaxTiltAngle: true,
@@ -88,6 +89,10 @@ const _viewMask: IFilterMask<IViewProps> = {
   'aria-valuemin': true,
   'aria-valuenow': true,
   'aria-valuetext': true,
+  screenReaderFocusable: true,
+  accessibilityShowsLargeContentViewer: true,
+  accessibilityLargeContentTitle: true,
+  accessibilityRespondsToUserInteraction: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
@@ -128,6 +133,8 @@ const _textMask: IFilterMask<ITextProps> = {
   onPressOut: true,
   onTextLayout: true,
   role: true,
+  pointerEvents: true,
+  pressRetentionOffset: true,
   style: true,
   suppressHighlighting: true,
   testID: true,
@@ -145,6 +152,10 @@ const _textMask: IFilterMask<ITextProps> = {
   'aria-valuemin': true,
   'aria-valuenow': true,
   'aria-valuetext': true,
+  screenReaderFocusable: true,
+  accessibilityShowsLargeContentViewer: true,
+  accessibilityLargeContentTitle: true,
+  accessibilityRespondsToUserInteraction: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
@@ -213,6 +224,10 @@ const _imageMask: IFilterMask<IImageProps> = {
   'aria-valuemin': true,
   'aria-valuenow': true,
   'aria-valuetext': true,
+  screenReaderFocusable: true,
+  accessibilityShowsLargeContentViewer: true,
+  accessibilityLargeContentTitle: true,
+  accessibilityRespondsToUserInteraction: true,
 };
 
 export function filterViewProps(propName: string): boolean {

@@ -10,7 +10,6 @@
   },
   "resolutions": {
     "@appium/support/glob": "^10.5.0",
-    "@types/react": "^18.2.0",
     "@warren-ms/react-native-icons/react-native-svg": "^15.4.0",
     "axios": "^1.12.0",
     "form-data": "^4.0.4",
@@ -53,9 +52,6 @@
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.8.0",
     "@babel/runtime": "^7.20.0",
-    "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-babel-transformer": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/lint-lockfile": "catalog:",
     "babel-jest": "^29.7.0",
@@ -66,8 +62,6 @@
     "lage": "^2.0.0",
     "markdown-link-check": "^3.8.7",
     "prettier": "^2.4.1",
-    "react": "18.2.0",
-    "react-native": "^0.74.0",
     "typescript": "^5.8.0"
   },
   "workspaces": [

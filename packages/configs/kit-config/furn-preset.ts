@@ -16,9 +16,26 @@ function toDevCapability(cap: Capability): Capability {
 
 function formFurnPreset(rnPreset: VersionPreset): VersionPreset {
   const presetCore = rnPreset['core'] as Package;
+  const presetReact = rnPreset['react'] as Package;
+  const presetReactTestRenderer = rnPreset['react-test-renderer'] as Package;
   const newPreset: Mutable<VersionPreset> = {
     ...rnPreset,
     core: { ...presetCore, capabilities: ['react'] },
+    react: { ...presetReact, capabilities: ['react-types'] },
+    'react-test-renderer': {
+      ...presetReactTestRenderer,
+      capabilities: ['react', 'react-test-renderer-types'],
+    },
+    'react-types': {
+      name: '@types/react',
+      version: `^${presetReact.version}`,
+      devOnly: true,
+    },
+    'react-test-renderer-types': {
+      name: '@types/react-test-renderer',
+      version: `^${presetReactTestRenderer.version}`,
+      devOnly: true,
+    },
     'core-win32': {
       name: '@office-iss/react-native-win32',
       version: presetCore.version,
@@ -59,6 +76,8 @@ function formFurnPreset(rnPreset: VersionPreset): VersionPreset {
 }
 
 module.exports = {
-  0.73: formFurnPreset(rnPresets['0.73']),
-  0.74: formFurnPreset(rnPresets['0.74']),
+  '0.73': formFurnPreset(rnPresets['0.73']),
+  '0.74': formFurnPreset(rnPresets['0.74']),
+  '0.78': formFurnPreset(rnPresets['0.78']),
+  '0.81': formFurnPreset(rnPresets['0.81']),
 };

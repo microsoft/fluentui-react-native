@@ -160,6 +160,15 @@ export type IAdapterWindowsViewProps = ViewProps & {
     | 'timer'
     | 'list'
     | 'toolbar';
+
+  // Added for newer React Native version compatibility
+  screenReaderFocusable?: boolean;
+  accessibilityRespondsToUserInteraction?: boolean;
+  accessibilityAnnotation?: AccessibilityAnnotationInfo;
+  accessibilityItemType?: string;
+  accessibilityAccessKey?: string;
+  accessibilityDescription?: string;
+  'aria-description'?: string | undefined;
 };
 
 /**
@@ -186,6 +195,16 @@ export type IAdapterWindowsTextProps = TextProps & {
   'aria-posinset'?: number | undefined;
   'aria-setsize'?: number | undefined;
   'aria-level'?: number | undefined;
+  tooltip?: string;
+
+  // Added for newer React Native version compatibility
+  screenReaderFocusable?: boolean;
+  accessibilityRespondsToUserInteraction?: boolean;
+  accessibilityAnnotation?: AccessibilityAnnotationInfo;
+  accessibilityItemType?: string;
+  accessibilityAccessKey?: string;
+  accessibilityDescription?: string;
+  'aria-description'?: string | undefined;
 };
 
 export type IAdapterWindowsImageProps = ImageProps & {
@@ -195,4 +214,13 @@ export type IAdapterWindowsImageProps = ImageProps & {
   'aria-posinset'?: number | undefined;
   'aria-setsize'?: number | undefined;
   'aria-level'?: number | undefined;
+
+  // Added for newer React Native version compatibility
+  screenReaderFocusable?: boolean;
+  accessibilityRespondsToUserInteraction?: boolean;
+  accessibilityAnnotation?: AccessibilityAnnotationInfo;
+  accessibilityItemType?: string;
+  accessibilityAccessKey?: string;
+  accessibilityDescription?: string;
+  'aria-description'?: string | undefined;
 };

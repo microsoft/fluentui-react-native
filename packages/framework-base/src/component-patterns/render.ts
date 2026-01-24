@@ -28,7 +28,8 @@ export function renderForJsxRuntime<TProps>(
   if (legacyDirect) {
     const { children, ...rest } = props;
     const newProps = { ...rest, key };
-    return legacyDirect(newProps, ...React.Children.toArray(children)) as RenderResult;
+    const childArray = React.Children.toArray(children);
+    return legacyDirect.apply(null, [newProps, ...childArray]) as RenderResult;
   }
   const directComponent = asDirectComponent<TProps>(type);
   if (directComponent) {
@@ -41,7 +42,7 @@ export function renderForJsxRuntime<TProps>(
 export function renderForClassicRuntime<TProps>(type: RenderType, props: TProps, ...children: React.ReactNode[]): RenderResult {
   const legacyDirect = asLegacyDirectComponent(type);
   if (legacyDirect) {
-    return legacyDirect(props, ...children) as RenderResult;
+    return legacyDirect.apply(null, [props, ...children]) as RenderResult;
   }
   const directComponent = asDirectComponent(type);
   if (directComponent) {

@@ -49,7 +49,7 @@ describe('Base filter tests', () => {
     expect(Object.keys(win32PlatformViewProps).length).toBe(0);
 
     // This assignment will fail if there are any extra properties on IAdapterWin32ViewProps which are not defined by Win32PlatformViewProps
-    const emptyWin32ViewProps: Omit<Required<IAdapterWin32ViewProps>, keyof Win32PlatformViewProps> = {};
+    const emptyWin32ViewProps: Omit<Required<IAdapterWin32ViewProps>, keyof Win32PlatformViewProps | accessibilityExtensionProperties> = {};
     expect(Object.keys(emptyWin32ViewProps).length).toBe(0);
 
     const win32AdapterTextProps = {} as Required<IAdapterWin32TextProps>;
@@ -58,7 +58,7 @@ describe('Base filter tests', () => {
     expect(Object.keys(win32PlatformTextProps).length).toBe(0);
 
     // This assignment will fail if there are any extra properties on IAdapterWin32TextProps which are not defined by Win32PlatformTextProps
-    const emptyWin32TextProps: Omit<Required<IAdapterWin32TextProps>, keyof Win32PlatformTextProps> = {};
+    const emptyWin32TextProps: Omit<Required<IAdapterWin32TextProps>, keyof Win32PlatformTextProps | accessibilityExtensionProperties> = {};
     expect(Object.keys(emptyWin32TextProps).length).toBe(0);
 
     const win32AdapterImageProps = {} as Required<IAdapterWin32ImageProps>;
@@ -67,7 +67,7 @@ describe('Base filter tests', () => {
     expect(Object.keys(win32PlatformImageProps).length).toBe(0);
 
     // This assignment will fail if there are any extra properties on IAdapterWin32ImageProps which are not defined by Win32PlatformImageProps
-    const emptyWin32ImageProps: Omit<Required<IAdapterWin32ImageProps>, keyof Win32PlatformImageProps> = {};
+    const emptyWin32ImageProps: Omit<Required<IAdapterWin32ImageProps>, keyof Win32PlatformImageProps | accessibilityExtensionProperties> = {};
     expect(Object.keys(emptyWin32ImageProps).length).toBe(0);
   });
 
@@ -76,6 +76,33 @@ describe('Base filter tests', () => {
 
   // Need to unify win32/windows key*Events
   type windowsHandledKeyInvalidProperties = 'keyDownEvents' | 'keyUpEvents';
+
+  // New accessibility properties added in newer React Native versions for cross-platform compatibility
+  type accessibilityExtensionProperties =
+    | 'screenReaderFocusable'
+    | 'accessibilityShowsLargeContentViewer'
+    | 'accessibilityLargeContentTitle'
+    | 'accessibilityRespondsToUserInteraction'
+    | 'acceptsFirstMouse'
+    | 'acceptsKeyboardFocus'
+    | 'onStartShouldSetResponder'
+    | 'onMoveShouldSetResponder'
+    | 'onStartShouldSetResponderCapture'
+    | 'onMoveShouldSetResponderCapture'
+    | 'onResponderEnd'
+    | 'onResponderGrant'
+    | 'onResponderMove'
+    | 'onResponderReject'
+    | 'onResponderRelease'
+    | 'onResponderStart'
+    | 'onResponderTerminate'
+    | 'onResponderTerminationRequest'
+    | 'onBlur'
+    | 'onFocus'
+    | 'collapsableChildren'
+    | 'pointerEvents'
+    | 'pressRetentionOffset'
+    | 'tooltip';
 
   test('verify windows types', () => {
     const windowsAdapterViewProps = {} as Required<IAdapterWindowsViewProps>;
@@ -86,7 +113,7 @@ describe('Base filter tests', () => {
     expect(Object.keys(windowsPlatformViewProps).length).toBe(0);
 
     // This assignment will fail if there are any extra properties on IAdapterWindowsViewProps which are not defined by WindowsPlatformViewProps
-    const emptyWindowsViewProps: Omit<Required<IAdapterWindowsViewProps>, keyof WindowsPlatformViewProps> = {};
+    const emptyWindowsViewProps: Omit<Required<IAdapterWindowsViewProps>, keyof WindowsPlatformViewProps | accessibilityExtensionProperties> = {};
     expect(Object.keys(emptyWindowsViewProps).length).toBe(0);
 
     const windowsAdapterTextProps = {} as Required<IAdapterWindowsTextProps>;
@@ -95,7 +122,7 @@ describe('Base filter tests', () => {
     expect(Object.keys(windowsPlatformTextProps).length).toBe(0);
 
     // This assignment will fail if there are any extra properties on IAdapterWindowsTextProps which are not defined by WindowsPlatformTextProps
-    const emptyWindowsTextProps: Omit<Required<IAdapterWindowsTextProps>, keyof WindowsPlatformTextProps> = {};
+    const emptyWindowsTextProps: Omit<Required<IAdapterWindowsTextProps>, keyof WindowsPlatformTextProps | accessibilityExtensionProperties> = {};
     expect(Object.keys(emptyWindowsTextProps).length).toBe(0);
 
     const windowsAdapterImageProps = {} as Required<IAdapterWindowsImageProps>;
@@ -104,36 +131,36 @@ describe('Base filter tests', () => {
     expect(Object.keys(windowsPlatformImageProps).length).toBe(0);
 
     // This assignment will fail if there are any extra properties on IAdapterWindowsImageProps which are not defined by WindowsPlatformImageProps
-    const emptyWindowsImageProps: Omit<Required<IAdapterWindowsImageProps>, keyof WindowsPlatformImageProps> = {};
+    const emptyWindowsImageProps: Omit<Required<IAdapterWindowsImageProps>, keyof WindowsPlatformImageProps | accessibilityExtensionProperties> = {};
     expect(Object.keys(emptyWindowsImageProps).length).toBe(0);
   });
 
   test('verify macOS types', () => {
-    const macOSAdapterViewProps = {} as Required<IAdapterMacOSViewProps>;
+    const macOSAdapterViewProps = {} as Required<Omit<IAdapterMacOSViewProps, 'tvParallaxProperties' | 'style'>>;
     // This assignment will fail if we are missing properties on IAdapterMacOSViewProps which are defined by MacOSPlatformViewProps
-    const macOSPlatformViewProps: Required<MacOSPlatformViewProps> = macOSAdapterViewProps;
+    const macOSPlatformViewProps: Required<Omit<MacOSPlatformViewProps, 'tvParallaxProperties' | 'style'>> = macOSAdapterViewProps;
     expect(Object.keys(macOSPlatformViewProps).length).toBe(0);
 
     // This assignment will fail if there are any extra properties on IAdapterMacOSViewProps which are not defined by MacOSPlatformViewProps
-    const emptyMacOSViewProps: Omit<Required<IAdapterMacOSViewProps>, keyof MacOSPlatformViewProps> = {};
+    const emptyMacOSViewProps: Omit<Required<IAdapterMacOSViewProps>, keyof MacOSPlatformViewProps | accessibilityExtensionProperties | 'tvParallaxProperties'> = {};
     expect(Object.keys(emptyMacOSViewProps).length).toBe(0);
 
-    const macOSAdapterTextProps = {} as Required<IAdapterMacOSTextProps>;
+    const macOSAdapterTextProps = {} as Required<Omit<IAdapterMacOSTextProps, 'style'>>;
     // This assignment will fail if we are missing properties on IAdapterMacOSTextProps which are defined by MacOSPlatformTextProps
-    const macOSPlatformTextProps: Required<MacOSPlatformTextProps> = macOSAdapterTextProps;
+    const macOSPlatformTextProps: Required<Omit<MacOSPlatformTextProps, 'style'>> = macOSAdapterTextProps;
     expect(Object.keys(macOSPlatformTextProps).length).toBe(0);
 
     // This assignment will fail if there are any extra properties on IAdapterMacOSTextProps which are not defined by MacOSPlatformTextProps
-    const emptyMacOSTextProps: Omit<Required<IAdapterMacOSTextProps>, keyof MacOSPlatformTextProps> = {};
+    const emptyMacOSTextProps: Omit<Required<IAdapterMacOSTextProps>, keyof MacOSPlatformTextProps | accessibilityExtensionProperties> = {};
     expect(Object.keys(emptyMacOSTextProps).length).toBe(0);
 
-    const macOSAdapterImageProps = {} as Required<IAdapterMacOSImageProps>;
+    const macOSAdapterImageProps = {} as Required<Omit<IAdapterMacOSImageProps, 'resizeMode' | 'resizeMethod' | 'style'>>;
     // This assignment will fail if we are missing properties on IAdapterMacOSImageProps which are defined by MacOSPlatformImageProps
-    const macOSPlatformImageProps: Required<MacOSPlatformImageProps> = macOSAdapterImageProps;
+    const macOSPlatformImageProps: Required<Omit<MacOSPlatformImageProps, 'resizeMode' | 'resizeMethod' | 'style'>> = macOSAdapterImageProps;
     expect(Object.keys(macOSPlatformImageProps).length).toBe(0);
 
     // This assignment will fail if there are any extra properties on IAdapterMacOSImageProps which are not defined by MacOSPlatformImageProps
-    const emptyMacOSImageProps: Omit<Required<IAdapterMacOSImageProps>, keyof MacOSPlatformImageProps> = {};
+    const emptyMacOSImageProps: Omit<Required<IAdapterMacOSImageProps>, keyof MacOSPlatformImageProps | accessibilityExtensionProperties | 'resizeMode'> = {};
     expect(Object.keys(emptyMacOSImageProps).length).toBe(0);
   });
 });

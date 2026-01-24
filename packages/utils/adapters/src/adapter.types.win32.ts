@@ -1,4 +1,4 @@
-import type { TextProps, ViewProps, ImageProps, NativeSyntheticEvent, HostComponent } from 'react-native';
+import type { TextProps, ViewProps, ImageProps, NativeSyntheticEvent } from 'react-native';
 
 export interface INativeKeyboardEvent {
   altKey: boolean;
@@ -87,8 +87,9 @@ export interface NativeMouseEvent extends NativeUIEvent {
   readonly buttons: number;
   /**
    * The secondary target for the event, if there is one.
+   * Type is compatible with both old (Component & NativeMethods) and new (NativeMethods) React Native versions.
    */
-  readonly relatedTarget: null | number | React.ElementRef<HostComponent<unknown>>;
+  readonly relatedTarget: null | number | any;
   // offset is proposed: https://drafts.csswg.org/cssom-view/#extensions-to-the-mouseevent-interface
   /**
    * The X coordinate of the mouse pointer between that event and the padding edge of the target node
@@ -197,6 +198,12 @@ export type IAdapterWin32ViewProps = ViewProps & {
   accessibilityControls?: string | undefined;
   accessibilityDescribedBy?: string | undefined;
 
+  // Added in newer React Native versions for iOS/macOS compatibility
+  screenReaderFocusable?: boolean;
+  accessibilityShowsLargeContentViewer?: boolean;
+  accessibilityLargeContentTitle?: string;
+  accessibilityRespondsToUserInteraction?: boolean;
+
   accessibilityRole?:
     | 'none'
     | 'alertdialog' // Win32
@@ -292,6 +299,12 @@ export type IAdapterWin32TextProps = TextProps & {
   focusable?: boolean;
   textStyle?: TextWin32TextStyle;
   tooltip?: string;
+
+  // Added in newer React Native versions for iOS/macOS compatibility
+  screenReaderFocusable?: boolean;
+  accessibilityShowsLargeContentViewer?: boolean;
+  accessibilityLargeContentTitle?: string;
+  accessibilityRespondsToUserInteraction?: boolean;
 };
 
 export type IAdapterWin32ImageProps = ImageProps & {
@@ -312,4 +325,10 @@ export type IAdapterWin32ImageProps = ImageProps & {
   'aria-level'?: number | undefined;
   'aria-controls'?: string | undefined;
   'aria-describedby'?: string | undefined;
+
+  // Added in newer React Native versions for iOS/macOS compatibility
+  screenReaderFocusable?: boolean;
+  accessibilityShowsLargeContentViewer?: boolean;
+  accessibilityLargeContentTitle?: string;
+  accessibilityRespondsToUserInteraction?: boolean;
 };
