@@ -1,8 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-const execSync = require('child_process').execSync;
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
+import type { BeachballConfig } from 'beachball';
 
-module.exports = {
+const config: BeachballConfig = {
   disallowedChangeTypes: ['major'],
   hooks: {
     prepublish: (packagePath) => {
@@ -36,8 +37,13 @@ module.exports = {
   },
 };
 
-function getPackagesToInclude() {
+/**
+ * Get list of packages to include in the changelog
+ */
+function getPackagesToInclude(): string[] {
   const content = fs.readFileSync(path.resolve('packages/libraries/core/src/index.ts'), 'utf8');
   const matches = Array.from(content.matchAll(new RegExp("'(@.*)'", 'g')), (m) => m[1]);
   return matches;
 }
+
+export default config;
