@@ -89,8 +89,7 @@
     "@react-native-community/slider": "^4.5.7",
     "@react-native-menu/menu": "^0.7.3",
     "@react-native-picker/picker": "^2.7.0",
-    "@types/node": "catalog:",
-    "@types/react": "~18.2.0"
+    "@types/node": "catalog:"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -111,6 +110,7 @@
     "@rnx-kit/metro-config": "^2.1.0",
     "@rnx-kit/metro-resolver-symlinks": "^0.2.5",
     "@types/jasmine": "catalog:",
+    "@types/react": "^18.2.0",
     "@types/react-test-renderer": "^18.2.0",
     "@wdio/cli": "catalog:",
     "@wdio/globals": "catalog:",
