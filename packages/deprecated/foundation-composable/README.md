@@ -39,7 +39,7 @@ export function composable<
       Slots: ISlots<TSlotProps>,
       renderData: IRenderData<TSlotProps, TState>,
       ...children: React.ReactNode[]
-    ) => JSX.Element | null,
+    ) => React.JSX.Element | null,
     slots: {
       [K in keyof TSlotProps]: {
         slotType?: React.ElementType<> | string,
@@ -131,7 +131,7 @@ render?: (
   Slots: ISlots<TSlotProps>,
   renderData: IRenderData<TSlotProps, TState>,
   ...children: React.ReactNode[]
-) => JSX.Element | null,
+) => React.JSX.Element | null,
 ```
 
 The three parameters are:
@@ -168,9 +168,9 @@ Render is optional in the case where there is only one sub-component, in this ca
 
 ## How it all works
 
-The overall flow of a component can be seen in the following diagram. At its core, a functional react component takes in a set of props, and outputs a JSX.Element tree.
+The overall flow of a component can be seen in the following diagram. At its core, a functional react component takes in a set of props, and outputs a React.JSX.Element tree.
 
-Using composable, the normal flow is broken into two primary parts: `usePrepareProps` and `render`. The optional `useStyling` function allows for style injection, while the `slots` define the actual JSX.Elements that will be output.
+Using composable, the normal flow is broken into two primary parts: `usePrepareProps` and `render`. The optional `useStyling` function allows for style injection, while the `slots` define the actual React.JSX.Elements that will be output.
 
 ![Composable Component Diagram](./docs/Composable.png)
 

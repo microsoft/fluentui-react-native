@@ -24,7 +24,7 @@ export function atomicRender<TProps extends object, TState = object>(
   Slots: ISlots<ISlotProps<TProps>>,
   _renderData: IRenderData<ISlotProps<TProps>, TState>,
   ...children: React.ReactNode[]
-): JSX.Element | null {
+): React.JSX.Element | null {
   return renderSlot(Slots.root, undefined, ...children);
 }
 

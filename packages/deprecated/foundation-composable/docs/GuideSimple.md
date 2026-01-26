@@ -77,7 +77,7 @@ type ITextSlotProps = ISlotProps<TextProps>;
 
 export function usePrepareProps(
   userProps: TextProps,
-  useStyling: IUseStyling<ITextSlotProps>
+  useStyling: IUseStyling<ITextSlotProps>,
 ): IRenderData<ITextSlotProps, IUpperTextState> {
   const { content, ...props } = userProps;
   const children = changeTextToUppercaseWithLocale(content);
@@ -102,7 +102,7 @@ export function render(
   Slots: ISlots<ITextSlotProps>,
   renderData: IRenderData<ITextSlotProps>,
   ...children: React.ReactNode[]
-): JSX.Element | null {
+): React.JSX.Element | null {
   return renderSlot(Slots.root, null, ...children);
 }
 ```
@@ -124,8 +124,8 @@ export const UpperText = composable<TextProps>({
     return { slotProps, state: { upperText } };
   },
   slots: {
-    root: { slotType: Text }
-  }
+    root: { slotType: Text },
+  },
 });
 ```
 
@@ -141,7 +141,7 @@ export const StyledUpperText = composable<TextProps>({
   useStyling: (props: TextProps) => {
     return { root: { style: myStyle } };
     // could also be something like return { root: { classNames='.myClass' } };
-  }
+  },
 });
 ```
 
