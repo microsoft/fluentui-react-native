@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "change JSX.Element to React.JSX.Element (pre-81 change)",
+  "packageName": "@fluentui-react-native/persona",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
