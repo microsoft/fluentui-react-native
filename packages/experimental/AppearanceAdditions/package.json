@@ -37,7 +37,7 @@
     "use-subscription": "^1.11.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
@@ -74,7 +74,6 @@
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "babel-preset-react-native",
         "core",
         "core-ios",
         "core-macos",

@@ -42,7 +42,7 @@
     "@fluentui-react-native/theming-utils": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
@@ -85,7 +85,8 @@
         "core-macos",
         "core-windows",
         "react",
-        "tools-core"
+        "tools-core",
+        "tools-jest"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

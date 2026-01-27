@@ -42,7 +42,7 @@
     "@uifabricshared/foundation-tokens": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
@@ -79,7 +79,6 @@
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "babel-preset-react-native",
         "core",
         "core-android",
         "core-ios",

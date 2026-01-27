@@ -43,8 +43,8 @@
     "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.0",
-    "@babel/runtime": "^7.8.0",
+    "@babel/core": "catalog:",
+    "@babel/runtime": "catalog:",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
@@ -107,11 +107,10 @@
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "babel-preset-react-native",
         "core",
         "core-macos",
-        "core-windows",
         "core-win32",
+        "core-windows",
         "metro-config",
         "metro-react-native-babel-transformer",
         "react",

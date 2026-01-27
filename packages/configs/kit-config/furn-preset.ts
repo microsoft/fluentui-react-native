@@ -44,9 +44,10 @@ function toDevCapability(cap: Capability): Capability {
  * 6. Add 'react-test-renderer-types' package for test renderer types
  * 7. Add tools packages for eslint, jest, and core scripts
  * @param rnPreset base preset from rnx-kit to modify
+ * @param _version version number of RN, so 74, 78, etc.
  * @returns the modified FURN preset for this particular version
  */
-function formFurnPreset(rnPreset: VersionPreset): VersionPreset {
+function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPreset {
   const presetCore = rnPreset['core'] as Package;
   const presetReact = rnPreset['react'] as Package;
   const presetReactTestRenderer = rnPreset['react-test-renderer'] as Package;
@@ -75,6 +76,12 @@ function formFurnPreset(rnPreset: VersionPreset): VersionPreset {
       version: presetCore.version,
       capabilities: ['core'],
     },
+    'tools-babel': {
+      name: '@fluentui-react-native/babel-config',
+      version: `workspace:*`,
+      devOnly: true,
+      capabilities: ['babel-preset-react-native', 'babel-core'],
+    },
     'tools-core': {
       name: '@fluentui-react-native/scripts',
       version: 'workspace:*',
@@ -90,30 +97,38 @@ function formFurnPreset(rnPreset: VersionPreset): VersionPreset {
       name: '@fluentui-react-native/jest-config',
       version: 'workspace:*',
       devOnly: true,
-      capabilities: ['tools-core'],
+      capabilities: ['tools-core', 'tools-babel'],
+    },
+    'babel-core': {
+      name: '@babel/core',
+      version: 'catalog:',
+      devOnly: true,
     },
   };
 
-  // now add the dev capabilities
+  // now add the dev capabilities and link to catalogs
   for (const cap of Object.keys(newPreset)) {
-    const devCap = toDevCapability(cap);
     const pkgEntry = newPreset[cap] as Package;
-    if (cap !== devCap && pkgEntry && !pkgEntry.devOnly) {
-      const entryCapabilities = pkgEntry.capabilities;
-      const capabilities = entryCapabilities?.map((c) => toDevCapability(c));
-      newPreset[devCap] = {
-        ...pkgEntry,
-        devOnly: true,
-        capabilities,
-      };
+    if (pkgEntry) {
+      // add dev-only capability if this is a core capability
+      const devCap = toDevCapability(cap);
+      if (cap !== devCap && !pkgEntry.devOnly) {
+        const entryCapabilities = pkgEntry.capabilities;
+        const capabilities = entryCapabilities?.map((c) => toDevCapability(c));
+        newPreset[devCap] = {
+          ...pkgEntry,
+          devOnly: true,
+          capabilities,
+        };
+      }
     }
   }
   return newPreset;
 }
 
 module.exports = {
-  '0.73': formFurnPreset(rnPresets['0.73']),
-  '0.74': formFurnPreset(rnPresets['0.74']),
-  '0.78': formFurnPreset(rnPresets['0.78']),
-  '0.81': formFurnPreset(rnPresets['0.81']),
+  '0.73': formFurnPreset(rnPresets['0.73'], 73),
+  '0.74': formFurnPreset(rnPresets['0.74'], 74),
+  '0.78': formFurnPreset(rnPresets['0.78'], 78),
+  '0.81': formFurnPreset(rnPresets['0.81'], 81),
 };

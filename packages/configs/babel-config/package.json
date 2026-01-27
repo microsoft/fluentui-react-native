@@ -1,12 +1,12 @@
 {
-  "name": "@fluentui-react-native/babel-config-81",
+  "name": "@fluentui-react-native/babel-config",
   "private": true,
   "version": "0.1.1",
-  "description": "Babel configuration for Fluent UI React Native packages, built for React Native 0.81",
+  "description": "Babel configuration for Fluent UI React Native packages built for React Native 0.74",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
-    "directory": "packages/configs/babel-config-81"
+    "directory": "packages/configs/babel-config"
   },
   "main": "./babel.config.js",
   "exports": {
@@ -23,9 +23,13 @@
     "@babel/preset-env": "catalog:",
     "@babel/preset-react": "catalog:",
     "@babel/preset-typescript": "catalog:",
-    "@babel/runtime": "catalog:",
-    "@react-native/babel-preset": "catalog:0.81",
-    "@react-native/metro-babel-transformer": "catalog:0.81"
+    "@babel/runtime": "catalog:"
+  },
+  "devDependencies": {
+    "@react-native/babel-preset": "catalog:0.74"
+  },
+  "peerDependencies": {
+    "@react-native/babel-preset": "^0.73 || ^0.74 || ^0.78 || ^0.81"
   },
   "furn": {
     "packageType": "tooling"

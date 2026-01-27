@@ -6,6 +6,8 @@ import { isFixMode } from '../utils/env.ts';
 import { runAlignDeps } from './runAlignDeps.ts';
 import { DepCheckRunner } from './depcheck.ts';
 import { getCatalog } from '../utils/getCatalog.ts';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export class LintPackageCommand extends Command {
   static override paths = [['lint-package']];
@@ -28,12 +30,20 @@ export class LintPackageCommand extends Command {
   private changed = false;
   private issues = 0;
   private isScripts = false;
+  private isLibrary = false;
   private projRoot: ProjectRoot = getProjectRoot(process.cwd());
   private result = 0;
+  private removedDevDeps: string[] = [];
+  private addedDevDeps: Record<string, string> = {};
+  private ensuredCapabilities: string[] = [];
+  private removedCapabilities: string[] = [];
+  private getCatalog = getCatalog();
 
   async execute() {
     this.fix = isFixMode(this.fix);
-    this.isScripts = this.projRoot.manifest.name === '@fluentui-react-native/scripts';
+    const manifest = this.projRoot.manifest;
+    this.isScripts = manifest.name === '@fluentui-react-native/scripts';
+    this.isLibrary = !(manifest['rnx-kit']?.kitType === 'app') && manifest.furn?.packageType !== 'tooling';
 
     const runningOps: Promise<void>[] = [];
 
@@ -54,14 +64,15 @@ export class LintPackageCommand extends Command {
     // now do the custom linting
     const buildConfig = getResolvedConfig(this.projRoot, true);
 
-    const catalogCheck = this.checkCatalogs();
     this.checkManifest();
+    this.checkUsage();
     this.checkScripts();
     this.checkEntryPoints(buildConfig);
     this.checkBuildConfig(buildConfig);
     this.checkDependencies();
+    this.checkDevDeps();
     this.checkRnxKitConfig();
-    await catalogCheck;
+    await this.checkCatalogs();
 
     // report the results for the custom linting
     this.handleResult(this.issues > 0 ? 1 : 0, 'custom package rules');
@@ -120,6 +131,21 @@ export class LintPackageCommand extends Command {
     });
   }
 
+  private checkUsage() {
+    const rootDir = this.projRoot.root;
+    if (this.isLibrary) {
+      this.ensuredCapabilities.push('tools-core');
+      const hasJestConfig = fs.existsSync(path.join(rootDir, 'jest.config.js')) || fs.existsSync(path.join(rootDir, 'jest.config.ts'));
+      if (hasJestConfig) {
+        this.ensuredCapabilities.push('tools-jest');
+        this.addedDevDeps['@fluentui-react-native/jest-config'] = 'workspace:*';
+      } else {
+        this.removedCapabilities.push('tools-jest', 'babel-preset-react-native', 'tools-babel');
+        this.removedDevDeps.push('@fluentui-react-native/jest-config', '@types/jest', 'jest', 'ts-jest');
+      }
+    }
+  }
+
   private checkDependencies() {
     const manifest = this.projRoot.manifest;
     if (manifest['rnx-kit']?.kitType === 'app') {
@@ -134,16 +160,29 @@ export class LintPackageCommand extends Command {
       dependencies['@office-iss/react-native-win32'] !== undefined,
       '@office-iss/react-native-win32 should be a peerDependency, not a dependency',
     );
-    const devDependencies = manifest.devDependencies || {};
     if (manifest.furn?.packageType !== 'tooling') {
-      this.errorIf(
-        devDependencies['@fluentui-react-native/kit-config'] === undefined,
-        'Missing devDependency on @fluentui-react-native/kit-config',
-        () => {
-          this.projRoot.updateRecordEntry('devDependencies', '@fluentui-react-native/kit-config', 'workspace:*');
-        },
-      );
+      this.addedDevDeps['@fluentui-react-native/kit-config'] = 'workspace:*';
     }
+  }
+
+  private checkDevDeps() {
+    const issues: string[] = [];
+    const devDependencies = this.projRoot.manifest.devDependencies || {};
+    for (const depName of this.removedDevDeps) {
+      if (devDependencies[depName] !== undefined) {
+        issues.push(`- devDependency ${depName} should be removed`);
+        this.projRoot.updateRecordEntry('devDependencies', depName, undefined);
+      }
+    }
+    for (const [depName, depVersion] of Object.entries(this.addedDevDeps)) {
+      if (devDependencies[depName] === undefined) {
+        issues.push(`- devDependency ${depName} should be added`);
+        this.projRoot.updateRecordEntry('devDependencies', depName, depVersion);
+      }
+    }
+    this.errorIf(issues.length > 0, issues.join('\n'), () => {
+      // changes already applied above
+    });
   }
 
   private checkRnxKitConfig() {
@@ -175,19 +214,28 @@ export class LintPackageCommand extends Command {
       delete alignDeps.presets;
     }
     const capabilities: string[] = alignDeps.capabilities || [];
-    if (!capabilities.includes('tools-core')) {
-      rnxKitIssues.push('- rnx-kit.alignDeps.capabilities is missing "tools-core"');
-      capabilities.push('tools-core');
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      alignDeps.capabilities = capabilities.sort() as any[];
+    for (const removedCap of this.removedCapabilities) {
+      const index = capabilities.indexOf(removedCap);
+      if (index >= 0) {
+        rnxKitIssues.push(`- rnx-kit.alignDeps.capabilities should not include "${removedCap}"`);
+        capabilities.splice(index, 1);
+      }
     }
+    for (const ensuredCap of this.ensuredCapabilities) {
+      if (!capabilities.includes(ensuredCap)) {
+        rnxKitIssues.push(`- rnx-kit.alignDeps.capabilities is missing "${ensuredCap}"`);
+        capabilities.push(ensuredCap);
+      }
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    alignDeps.capabilities = capabilities.sort() as any[];
     this.errorIf(rnxKitIssues.length > 0, rnxKitIssues.join('\n'), () => {
       projRoot.setManifestEntry('rnx-kit', rnxKitConfig);
     });
   }
 
   private async checkCatalogs() {
-    const catalog = await getCatalog();
+    const catalog = await this.getCatalog;
     this.checkCatalogUsage('dependencies', catalog);
     this.checkCatalogUsage('devDependencies', catalog);
   }
