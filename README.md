@@ -37,7 +37,7 @@ If you have an existing React Native project, it's easy to begin using FluentUI 
 import { Checkbox } from '@fluentui/react-native';
 ```
 
-4. After importing the @fluentui/react-native package, you can use components such as `Text` and `Checkbox` in your JSX.
+4. After importing the @fluentui/react-native package, you can use components such as `Text` and `Checkbox` in your React.JSX.
 
 ```jsx
 // In App.js in a new project

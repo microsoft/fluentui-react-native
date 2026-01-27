@@ -64,7 +64,7 @@ import * as React from 'react';
 import { ThemeContext, ITheme } from '@uifabricshared/theming-react-native';
 
 export class OtherComponent extends React.Component {
-  public render(): JSX.Element {
+  public render(): React.JSX.Element {
     return (
       <ThemeContext.Consumer>
         {(theme: ITheme) => {

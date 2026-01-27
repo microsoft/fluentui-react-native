@@ -133,7 +133,7 @@ export const MenuButton = compose<MenuButtonType>({
   },
 });
 
-const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): JSX.Element => {
+const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): React.JSX.Element => {
   const [showSubmenuState, setShowSubmenu] = React.useState(false);
   const toggleShowSubmenu = React.useCallback(() => {
     setShowSubmenu(!showSubmenuState);

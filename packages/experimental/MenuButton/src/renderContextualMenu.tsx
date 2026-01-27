@@ -5,7 +5,7 @@ import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluen
 
 import type { MenuButtonItemProps } from './MenuButton.types';
 
-export const renderContextualMenu = (contextualMenu: ContextualMenuProps, menuItems: MenuButtonItemProps[]): JSX.Element => {
+export const renderContextualMenu = (contextualMenu: ContextualMenuProps, menuItems: MenuButtonItemProps[]): React.JSX.Element => {
   return (
     <ContextualMenu {...contextualMenu}>
       {menuItems?.map((menuItem) => {
@@ -15,7 +15,7 @@ export const renderContextualMenu = (contextualMenu: ContextualMenuProps, menuIt
   );
 };
 
-const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): JSX.Element => {
+const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): React.JSX.Element => {
   const [showSubmenuState, setShowSubmenu] = React.useState(false);
   const toggleShowSubmenu = React.useCallback(() => {
     setShowSubmenu(!showSubmenuState);
