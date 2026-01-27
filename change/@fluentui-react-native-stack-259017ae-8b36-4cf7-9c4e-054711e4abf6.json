@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "adjust align deps configs for tools and allow babel-config to inherit RN version",
+  "packageName": "@fluentui-react-native/stack",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
