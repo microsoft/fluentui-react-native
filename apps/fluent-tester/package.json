@@ -84,7 +84,7 @@
     "@rnx-kit/metro-config": "^2.1.0",
     "@rnx-kit/metro-resolver-symlinks": "^0.2.5",
     "@types/jasmine": "catalog:",
-    "@types/react": "^18.2.0",
+    "@types/react": "~18.2.0",
     "@types/react-test-renderer": "^18.2.0",
     "@wdio/cli": "catalog:",
     "@wdio/globals": "catalog:",
