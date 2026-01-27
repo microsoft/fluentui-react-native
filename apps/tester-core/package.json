@@ -103,6 +103,7 @@
     "@react-native-community/cli-platform-android": "^13.6.4",
     "@react-native-community/cli-platform-ios": "^13.6.4",
     "@react-native-windows/cli": "^0.74.0",
+    "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/cli": "^0.18.14",
