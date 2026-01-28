@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import React from 'react';
-import { I18nManager, Platform, Text as RNText } from 'react-native';
+import { I18nManager, Platform, Text as RNText, type TextStyle } from 'react-native';
 
 import type { UseTokens, FontWeightValue } from '@fluentui-react-native/framework';
 import { fontStyles, useFluentTheme, mergeStyles, compressible, patchTokens } from '@fluentui-react-native/framework';
@@ -137,7 +137,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       ...maxFontSizeScaleAdjustment,
       onPress,
       numberOfLines: numberOfLines ?? (truncate || !wrap ? 1 : 0),
-      style: mergeStyles(tokenStyle, props.style, extra?.style),
+      style: mergeStyles<TextStyle>(tokenStyle, props.style, extra?.style),
     };
 
     // RN TextStyle doesn't recognize these properties.

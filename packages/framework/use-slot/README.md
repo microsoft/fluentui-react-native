@@ -66,7 +66,7 @@ const StyledText = (props: React.PropsWithChildren<TextWithOverrideProps>) => {
   const { children, override, ...rest } = props;
 
   // create a merged set of props. The mergeStyle utility here will avoid creating unnecessary permutations of styles
-  const mergedProps = { ...rest, style: mergeStyles(baseStyle, rest.style) };
+  const mergedProps = { ...rest, style: mergeStyles<TextStyle>(baseStyle, rest.style) };
 
   // create a slot that can be used to render, props passed in here will be remembered in render. If override is set the slot will be changed, otherwise Text will be used
   const InnerText = useSlot(override || Text, mergedProps);

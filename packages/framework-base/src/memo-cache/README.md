@@ -134,7 +134,7 @@ export const MyComponent = (props: IMyComponentProps) => {
   }, [theme]);
 
   // merge the styles if a style is passed in via props, caching the union to ensure consistent object identity
-  newProps.style = newProps.style ? themeLocalCache(() => mergeStyles(style, newProps.style), [newProps.style])[0] : style;
+  newProps.style = newProps.style ? themeLocalCache(() => mergeStyles<MyStyleType>(style, newProps.style), [newProps.style])[0] : style;
 
   return <InnerControl {...newProps} />;
 };

@@ -9,8 +9,8 @@ import type { StyleProp } from './mergeStyles.types';
  *
  * @param style - StyleProp<TStyle> to flatten, this can be a TStyle or an array
  */
-export function flattenStyle(style: StyleProp<object>): object {
-  return Array.isArray(style) ? immutableMerge(...style.map((v) => flattenStyle(v))) : style || {};
+export function flattenStyle<T extends object>(style: StyleProp<T>): T {
+  return Array.isArray(style) ? immutableMerge<T>(...style.map((v) => flattenStyle(v))) : ((style || {}) as T);
 }
 
 /**
@@ -18,23 +18,26 @@ export function flattenStyle(style: StyleProp<object>): object {
  *
  * @param styles - array of styles to merge together.  The styles will be flattened as part of the process
  */
-export function mergeAndFlattenStyles(...styles: StyleProp<object>[]): object | undefined {
+export function mergeAndFlattenStyles<T extends object>(...styles: StyleProp<object>[]): T | undefined {
   // baseline merge and flatten the objects
   return immutableMerge(
     ...styles.map((styleProp: StyleProp<object>) => {
       return flattenStyle(styleProp);
     }),
-  );
+  ) as T;
 }
 
 const _styleCache = getMemoCache();
 
-export function mergeStyles(...styles: StyleProp<object>[]): object | undefined {
+/**
+ * Function overloads to allow merging of styles of different types
+ */
+export function mergeStyles<T extends object = object>(...styles: StyleProp<object>[]): T | undefined {
   // filter the style set to just objects (which might be arrays or plain style objects)
   const inputs = styles.filter((s) => typeof s === 'object') as object[];
 
   // now memo the results if there is more than one element or if the one element is an array
   return inputs.length > 1 || (inputs.length === 1 && Array.isArray(inputs[0]))
-    ? _styleCache(() => mergeAndFlattenStyles(undefined, ...inputs), inputs)[0]
-    : inputs[0] || {};
+    ? _styleCache(() => mergeAndFlattenStyles<T>(undefined, ...inputs), inputs)[0]
+    : ((inputs[0] || {}) as T);
 }

@@ -56,7 +56,7 @@ const StyledText: React.FunctionComponent<TextProps> = (props) => {
   const [tokenStyle] = cache(() => ({ ...tokens }), []);
 
   // now merge any styles coming from the props in on top as they should override
-  const mergedStyles = mergeStyles(tokenStyle, style);
+  const mergedStyles = mergeStyles<TextStyle>(tokenStyle, style);
 
   // now just render the text element
   return (
