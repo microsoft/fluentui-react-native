@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@babel/runtime": "catalog:",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
@@ -52,6 +53,7 @@
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:",
     "@rnx-kit/cli": "^0.18.14",
     "@rnx-kit/metro-config": "^2.1.0",
     "@rnx-kit/metro-resolver-symlinks": "^0.2.5",

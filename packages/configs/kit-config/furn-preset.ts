@@ -82,6 +82,12 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
       devOnly: true,
       capabilities: ['babel-preset-react-native', 'babel-core'],
     },
+    'tools-react-configs': {
+      name: '@fluentui-react-native/react-configs',
+      version: `workspace:*`,
+      devOnly: true,
+      capabilities: ['babel-core'],
+    },
     'tools-core': {
       name: '@fluentui-react-native/scripts',
       version: 'workspace:*',
@@ -98,6 +104,12 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
       version: 'workspace:*',
       devOnly: true,
       capabilities: ['tools-core', 'tools-babel'],
+    },
+    'tools-jest-react': {
+      name: '@fluentui-react-native/react-configs',
+      version: 'workspace:*',
+      devOnly: true,
+      capabilities: ['tools-core', 'babel-core'],
     },
     'babel-core': {
       name: '@babel/core',

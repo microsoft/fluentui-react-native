@@ -1202,7 +1202,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-typescript@npm:^7.28.6":
+"@babel/plugin-syntax-typescript@npm:^7.28.6, @babel/plugin-syntax-typescript@npm:^7.3.3":
   version: 7.28.6
   resolution: "@babel/plugin-syntax-typescript@npm:7.28.6"
   dependencies:
@@ -2582,6 +2582,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/traverse@npm:^7.16.0, @babel/traverse@npm:^7.28.5, @babel/traverse@npm:^7.28.6":
+  version: 7.28.6
+  resolution: "@babel/traverse@npm:7.28.6"
+  dependencies:
+    "@babel/code-frame": "npm:^7.28.6"
+    "@babel/generator": "npm:^7.28.6"
+    "@babel/helper-globals": "npm:^7.28.0"
+    "@babel/parser": "npm:^7.28.6"
+    "@babel/template": "npm:^7.28.6"
+    "@babel/types": "npm:^7.28.6"
+    debug: "npm:^4.3.1"
+  checksum: 10c0/ed5deb9c3f03e2d1ad2d44b9c92c84cce24593245c3f7871ce27ee1b36d98034e6cd895fa98a94eb44ebabe1d22f51b10b09432939d1c51a0fcaab98f17a97bc
+  languageName: node
+  linkType: hard
+
 "@babel/traverse@npm:^7.20.0, @babel/traverse@npm:^7.23.2, @babel/traverse@npm:^7.27.1, @babel/traverse@npm:^7.27.3, @babel/traverse@npm:^7.28.0":
   version: 7.28.0
   resolution: "@babel/traverse@npm:7.28.0"
@@ -2594,21 +2609,6 @@ __metadata:
     "@babel/types": "npm:^7.28.0"
     debug: "npm:^4.3.1"
   checksum: 10c0/32794402457827ac558173bcebdcc0e3a18fa339b7c41ca35621f9f645f044534d91bb923ff385f5f960f2e495f56ce18d6c7b0d064d2f0ccb55b285fa6bc7b9
-  languageName: node
-  linkType: hard
-
-"@babel/traverse@npm:^7.28.5, @babel/traverse@npm:^7.28.6":
-  version: 7.28.6
-  resolution: "@babel/traverse@npm:7.28.6"
-  dependencies:
-    "@babel/code-frame": "npm:^7.28.6"
-    "@babel/generator": "npm:^7.28.6"
-    "@babel/helper-globals": "npm:^7.28.0"
-    "@babel/parser": "npm:^7.28.6"
-    "@babel/template": "npm:^7.28.6"
-    "@babel/types": "npm:^7.28.6"
-    debug: "npm:^4.3.1"
-  checksum: 10c0/ed5deb9c3f03e2d1ad2d44b9c92c84cce24593245c3f7871ce27ee1b36d98034e6cd895fa98a94eb44ebabe1d22f51b10b09432939d1c51a0fcaab98f17a97bc
   languageName: node
   linkType: hard
 
@@ -3047,14 +3047,11 @@ __metadata:
   resolution: "@fluentui-react-native/adapters@workspace:packages/utils/adapters"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:~18.2.0"
     react: "npm:18.2.0"
@@ -3219,8 +3216,11 @@ __metadata:
     "@babel/preset-typescript": "catalog:"
     "@babel/runtime": "catalog:"
     "@react-native/babel-preset": "catalog:0.74"
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:"
   peerDependencies:
-    "@react-native/babel-preset": ^0.73 || ^0.74 || ^0.78 || ^0.81
+    "@babel/core": "*"
+    "@react-native/babel-preset": "*"
+    "@rnx-kit/babel-preset-metro-react-native": "*"
   languageName: unknown
   linkType: soft
 
@@ -3479,13 +3479,11 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@babel/preset-env": "catalog:"
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
     "@types/jscodeshift": "npm:^0.11.11"
     "@types/node": "catalog:"
     jscodeshift: "npm:^17.0.0"
@@ -3540,6 +3538,7 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.74.0"
+    "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
     "@types/react": "npm:~18.2.0"
     "@types/react-test-renderer": "npm:^18.2.0"
@@ -4400,12 +4399,10 @@ __metadata:
   resolution: "@fluentui-react-native/framework-base@workspace:packages/framework-base"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "catalog:"
     "@types/react": "npm:~18.2.0"
@@ -4506,7 +4503,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge"
   dependencies:
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
@@ -4690,7 +4686,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache"
   dependencies:
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
@@ -4810,8 +4805,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/merge-props@workspace:packages/framework/merge-props"
   dependencies:
-    "@babel/core": "catalog:"
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
@@ -5122,6 +5115,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/react-configs@workspace:*, @fluentui-react-native/react-configs@workspace:packages/configs/react-configs":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/react-configs@workspace:packages/configs/react-configs"
+  dependencies:
+    "@babel/core": "catalog:"
+    "@babel/plugin-transform-react-jsx": "catalog:"
+    "@babel/plugin-transform-react-jsx-source": "catalog:"
+    "@babel/plugin-transform-typescript": "catalog:"
+    "@babel/preset-env": "catalog:"
+    "@babel/preset-react": "catalog:"
+    "@babel/preset-typescript": "catalog:"
+    "@babel/runtime": "catalog:"
+    babel-jest: "npm:^29.0.0"
+  peerDependencies:
+    "@babel/core": "*"
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/root@workspace:.":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/root@workspace:."
@@ -5142,8 +5153,6 @@ __metadata:
     lage: "npm:^2.0.0"
     markdown-link-check: "npm:^3.8.7"
     prettier: "npm:^2.4.1"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
     typescript: "npm:^5.8.0"
   languageName: unknown
   linkType: soft
@@ -5595,6 +5604,7 @@ __metadata:
   resolution: "@fluentui-react-native/tester-win32@workspace:apps/win32"
   dependencies:
     "@babel/core": "catalog:"
+    "@babel/runtime": "catalog:"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -5604,6 +5614,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:"
     "@rnx-kit/cli": "npm:^0.18.14"
     "@rnx-kit/metro-config": "npm:^2.1.0"
     "@rnx-kit/metro-resolver-symlinks": "npm:^0.2.5"
@@ -5678,6 +5689,7 @@ __metadata:
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
     react-native-svg: "npm:>=15.4.0 <15.13.0"
+    react-native-svg-transformer: "npm:^1.0.0"
     react-native-test-app: "npm:^3.9.2"
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
@@ -8139,6 +8151,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/babel-preset-metro-react-native@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@rnx-kit/babel-preset-metro-react-native@npm:3.0.1"
+  dependencies:
+    "@rnx-kit/console": "npm:^2.0.0"
+    babel-plugin-const-enum: "npm:^1.0.0"
+  peerDependencies:
+    "@babel/core": ^7.20.0
+    "@babel/plugin-transform-typescript": ^7.20.0
+    "@babel/runtime": ^7.20.0
+    "@react-native/babel-preset": "*"
+  peerDependenciesMeta:
+    "@babel/plugin-transform-typescript":
+      optional: true
+  checksum: 10c0/85771c4fec9750d3431fcaaffb68a4b95c2f775dea47503819f42c508e08859779e8f0bf013dcf58411b8160465b06c02f0bfb68aa512d4f5976ddeb34066a2e
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/chromium-edge-launcher@npm:^1.0.0":
   version: 1.0.0
   resolution: "@rnx-kit/chromium-edge-launcher@npm:1.0.0"
@@ -9392,7 +9422,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-composable@workspace:packages/deprecated/foundation-composable"
   dependencies:
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
@@ -9411,7 +9440,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-compose@workspace:packages/deprecated/foundation-compose"
   dependencies:
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
@@ -9450,21 +9478,17 @@ __metadata:
   resolution: "@uifabricshared/foundation-settings@workspace:packages/deprecated/foundation-settings"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:~18.2.0"
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
   peerDependencies:
     react: 18.2.0
-    react-native: ^0.73.0 || ^0.74.0
   languageName: unknown
   linkType: soft
 
@@ -9473,11 +9497,10 @@ __metadata:
   resolution: "@uifabricshared/foundation-tokens@workspace:packages/deprecated/foundation-tokens"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
@@ -9512,11 +9535,10 @@ __metadata:
   resolution: "@uifabricshared/theme-registry@workspace:packages/deprecated/theme-registry"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -9526,7 +9548,6 @@ __metadata:
     react-native: "npm:^0.74.0"
   peerDependencies:
     react: 18.2.0
-    react-native: ^0.73.0 || ^0.74.0
   languageName: unknown
   linkType: soft
 
@@ -9535,14 +9556,12 @@ __metadata:
   resolution: "@uifabricshared/themed-settings@workspace:packages/deprecated/themed-settings"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "catalog:"
     "@types/react": "npm:~18.2.0"
@@ -9551,7 +9570,6 @@ __metadata:
     react-native: "npm:^0.74.0"
   peerDependencies:
     react: 18.2.0
-    react-native: ^0.73.0 || ^0.74.0
   languageName: unknown
   linkType: soft
 
@@ -9560,15 +9578,13 @@ __metadata:
   resolution: "@uifabricshared/theming-ramp@workspace:packages/deprecated/theming-ramp"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:~18.2.0"
     "@uifabricshared/foundation-settings": "workspace:*"
@@ -9576,7 +9592,6 @@ __metadata:
     react-native: "npm:^0.74.0"
   peerDependencies:
     react: 18.2.0
-    react-native: ^0.73.0 || ^0.74.0
   languageName: unknown
   linkType: soft
 
@@ -11073,6 +11088,19 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.8.0
   checksum: 10c0/2eda9c1391e51936ca573dd1aedfee07b14c59b33dbe16ef347873ddd777bcf6e2fc739681e9e9661ab54ef84a3109a03725be2ac32cd2124c07ea4401cbe8c1
+  languageName: node
+  linkType: hard
+
+"babel-plugin-const-enum@npm:^1.0.0":
+  version: 1.2.0
+  resolution: "babel-plugin-const-enum@npm:1.2.0"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.0.0"
+    "@babel/plugin-syntax-typescript": "npm:^7.3.3"
+    "@babel/traverse": "npm:^7.16.0"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/53fef408995add80e615773ff3609169c327bd671990c5ff3b59d275595aad0caa269ac7fdf1b1f691fa13f0d7c03c7fa3d3552cfbf4573912f0eef0bd52f751
   languageName: node
   linkType: hard
 
@@ -19798,7 +19826,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg-transformer@npm:^1.0.0":
+"react-native-svg-transformer@npm:1.5.0":
   version: 1.5.0
   resolution: "react-native-svg-transformer@npm:1.5.0"
   dependencies:

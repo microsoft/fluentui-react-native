@@ -48,7 +48,7 @@ let config = makeMetroConfig({
   },
   transformer: {
     // This transformer selects between the regular transformer and svg transformer depending on the file type
-    babelTransformerPath: require.resolve('./svgTransformer.js'),
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
   },
 });
 

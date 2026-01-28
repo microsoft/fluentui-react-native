@@ -1,37 +1,36 @@
 {
-  "name": "@fluentui-react-native/babel-config",
+  "name": "@fluentui-react-native/react-configs",
   "private": true,
   "version": "0.1.1",
-  "description": "Babel configuration for Fluent UI React Native packages built for React Native 0.74",
+  "description": "Babel and Jest configurations for pure React testing",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
-    "directory": "packages/configs/babel-config"
+    "directory": "packages/configs/react-configs"
   },
-  "main": "./babel.config.js",
+  "main": "./babel.react.config.js",
   "exports": {
-    ".": "./babel.config.js",
-    "./babel.config.js": "./babel.config.js"
+    ".": "./babel.react.config.js",
+    "./babel.react.config.js": "./babel.react.config.js",
+    "./jest.config.js": "./jest.config.js"
   },
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "catalog:",
     "@babel/plugin-transform-react-jsx": "catalog:",
     "@babel/plugin-transform-react-jsx-source": "catalog:",
     "@babel/plugin-transform-typescript": "catalog:",
     "@babel/preset-env": "catalog:",
     "@babel/preset-react": "catalog:",
-    "@babel/preset-typescript": "catalog:"
+    "@babel/preset-typescript": "catalog:",
+    "@babel/runtime": "catalog:",
+    "babel-jest": "^29.0.0"
   },
   "devDependencies": {
-    "@babel/core": "catalog:",
-    "@babel/runtime": "catalog:",
-    "@react-native/babel-preset": "catalog:0.74",
-    "@rnx-kit/babel-preset-metro-react-native": "catalog:"
+    "@babel/core": "catalog:"
   },
   "peerDependencies": {
-    "@babel/core": "*",
-    "@react-native/babel-preset": "*",
-    "@rnx-kit/babel-preset-metro-react-native": "*"
+    "@babel/core": "*"
   },
   "furn": {
     "packageType": "tooling"

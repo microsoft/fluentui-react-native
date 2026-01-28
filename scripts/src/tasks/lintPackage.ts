@@ -136,12 +136,16 @@ export class LintPackageCommand extends Command {
     if (this.isLibrary) {
       this.ensuredCapabilities.push('tools-core');
       const hasJestConfig = fs.existsSync(path.join(rootDir, 'jest.config.js')) || fs.existsSync(path.join(rootDir, 'jest.config.ts'));
-      if (hasJestConfig) {
-        this.ensuredCapabilities.push('tools-jest');
-        this.addedDevDeps['@fluentui-react-native/jest-config'] = 'workspace:*';
-      } else {
-        this.removedCapabilities.push('tools-jest', 'babel-preset-react-native', 'tools-babel');
-        this.removedDevDeps.push('@fluentui-react-native/jest-config', '@types/jest', 'jest', 'ts-jest');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const hasReactJest = this.projRoot.manifest['rnx-kit']?.alignDeps?.capabilities?.includes('tools-jest-react' as any);
+      if (!hasReactJest) {
+        if (hasJestConfig) {
+          this.ensuredCapabilities.push('tools-jest');
+          this.addedDevDeps['@fluentui-react-native/jest-config'] = 'workspace:*';
+        } else {
+          this.removedCapabilities.push('tools-jest', 'babel-preset-react-native', 'tools-babel');
+          this.removedDevDeps.push('@fluentui-react-native/jest-config', '@types/jest', 'jest', 'ts-jest');
+        }
       }
     }
   }
