@@ -45,7 +45,8 @@
     "@fluentui-react-native/use-tokens": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "catalog:",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
@@ -53,7 +54,7 @@
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/cli": "^0.18.14",
-    "@types/react": "^18.2.0",
+    "@types/react": "~18.2.0",
     "@types/react-test-renderer": "^18.2.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",
@@ -91,7 +92,8 @@
         "core-windows",
         "react",
         "react-test-renderer",
-        "tools-core"
+        "tools-core",
+        "tools-jest"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

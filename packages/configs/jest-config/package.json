@@ -1,33 +1,44 @@
 {
   "name": "@fluentui-react-native/jest-config",
-  "private": true,
   "version": "0.1.1",
+  "private": true,
   "description": "Jest configuration for UI Fabric React Native",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework/jest-config"
   },
-  "main": "./src/index.js",
-  "exports": {
-    ".": "./src/index.js"
-  },
-  "type": "module",
   "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./src/index.js",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./src/index.js",
+  "module": "./src/index.js",
   "scripts": {
     "build": "fluentui-scripts build",
+    "build-cjs": "tsgo",
+    "build-esm": "tsgo",
     "depcheck": "fluentui-scripts depcheck",
-    "lint": "fluentui-scripts eslint"
+    "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package"
   },
   "dependencies": {
     "@rnx-kit/jest-preset": "catalog:"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
+    "@babel/core": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@types/node": "^22.0.0",
+    "@react-native/babel-preset": "^0.74.0",
+    "@types/node": "catalog:",
     "babel-jest": "^29.0.0",
     "jest": "^29.2.1",
     "jest-transform-stub": "^2.0.0",
@@ -35,6 +46,16 @@
   },
   "furn": {
     "packageType": "tooling"
+  },
+  "rnx-kit": {
+    "extends": "@fluentui-react-native/kit-config",
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "tools-babel",
+        "tools-core"
+      ]
+    }
   },
   "beachball": {
     "shouldPublish": false,

@@ -28,6 +28,7 @@
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "react": "18.2.0",
@@ -36,6 +37,17 @@
   "peerDependencies": {
     "react": "18.2.0",
     "react-native": "^0.71.0"
+  },
+  "rnx-kit": {
+    "extends": "@fluentui-react-native/kit-config",
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "core-dev-only",
+        "tools-core",
+        "tools-babel"
+      ]
+    }
   },
   "author": "",
   "license": "MIT"
