@@ -85,7 +85,7 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
     if (!dontHideBeforeReady && !layoutDone) {
       stylesToMerge.push({ opacity: 0 });
     }
-    return mergeStyles(...stylesToMerge);
+    return mergeStyles<ViewStyle>(...stylesToMerge);
   }, [controlledSize, dontHideBeforeReady, layoutDone, props.style]);
 
   // Visibility being set extends past the general itemVisibility controlled by the Overflow state.

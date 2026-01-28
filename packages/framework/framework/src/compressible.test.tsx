@@ -52,7 +52,7 @@ const VariantText = compressible<VariantTextProps, VariantTextTokens>(
     // now apply the alternate layer tokens as appropriate
     [tokens, cache] = applyTokenLayers(tokens, ['normal', 'header', 'caption'], cache, (layer) => layer === variant);
     // merge styles together with what is passed in
-    const mergedStyle = mergeStyles({ color: tokens.color, fontSize: tokens.fontSize, fontWeight: tokens.fontWeight }, style);
+    const mergedStyle = mergeStyles<TextStyle>({ color: tokens.color, fontSize: tokens.fontSize, fontWeight: tokens.fontWeight }, style);
     // now get the slot
     const InnerText = useSlot<TextProps>(Text, { ...rest, style: mergedStyle });
 

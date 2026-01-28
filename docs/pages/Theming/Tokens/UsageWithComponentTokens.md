@@ -66,7 +66,7 @@ export const Component = (props: TProps) => {
   const theme = useFluentTheme();
   const [tokens, cache] = useTokens(theme);
   const [tokenStyle] = cache(() => ({ ...tokens }), []);
-  const mergedStyles = mergeStyles(tokenStyle, style);
+  const mergedStyles = mergeStyles<TextStyle>(tokenStyle, style);
 
   return (
     <Text {...rest} style={mergedStyles}>
