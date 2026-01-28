@@ -3052,6 +3052,7 @@ __metadata:
     "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
+    "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:~18.2.0"
     react: "npm:18.2.0"
