@@ -20,7 +20,7 @@ const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownPro
   const onButtonClick = React.useCallback(() => {
     setOpen(!isOpen);
   }, [isOpen, setOpen]);
-  const defaultRef = React.useRef();
+  const defaultRef = React.useRef<View>(null);
 
   const buttonProps: ButtonProps = React.useMemo(
     () => ({

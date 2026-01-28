@@ -115,14 +115,14 @@ const FocusZoneTabNavigationComponent: React.FunctionComponent = () => {
 };
 
 const TinyBox = () => {
-  const ref = React.useRef<View>();
+  const ref = React.useRef<View>(null);
   const onPress = useOnPressWithFocus(ref, null);
 
   return <Pressable focusable style={focusZoneTestStyles.smallBoxStyle} ref={ref} onPress={onPress} />;
 };
 
 const WideBox = () => {
-  const ref = React.useRef<View>();
+  const ref = React.useRef<View>(null);
   const onPress = useOnPressWithFocus(ref, null);
 
   return <Pressable focusable style={focusZoneTestStyles.wideBoxStyle} ref={ref} onPress={onPress} />;

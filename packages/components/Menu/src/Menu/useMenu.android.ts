@@ -30,7 +30,7 @@ export const useMenu = (props: MenuProps): MenuState => {
    * State , Ref and Context Values for Menu Container and Anchor
    */
 
-  const triggerRef = React.useRef();
+  const triggerRef = React.useRef<View>(null);
   const context = useMenuContext();
   const isSubmenu = context.triggerRef !== null;
   const isOpenControlled = typeof props.open !== 'undefined';

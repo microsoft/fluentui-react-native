@@ -17,8 +17,8 @@ export function useConst<T>(initialValue: T | FunctionToValue<T>): T {
   // Use useRef to store the value because it's the least expensive built-in hook that works here
   // (we could also use `const [value] = React.useState(initialValue)` but that's more expensive
   // internally due to reducer handling which we don't need)
-  const ref = React.useRef<{ value: T }>();
-  if (ref.current === undefined) {
+  const ref = React.useRef<{ value: T }>(null);
+  if (ref.current == null) {
     // Box the value in an object so we can tell if it's initialized even if the initializer
     // returns/is undefined
     ref.current = {
