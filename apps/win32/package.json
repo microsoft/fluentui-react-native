@@ -1,6 +1,7 @@
 {
   "name": "@fluentui-react-native/tester-win32",
   "version": "0.38.69",
+  "description": "Fluent UI React Native Win32 Tester App",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
@@ -41,8 +42,7 @@
     "@office-iss/react-native-win32": "^0.74.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",
-    "react-native-svg": ">=15.4.0 <15.13.0",
-    "react-native-windows": "^0.74.0"
+    "react-native-svg": ">=15.4.0 <15.13.0"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
@@ -69,11 +69,6 @@
     "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
     "rimraf": "catalog:"
-  },
-  "peerDependenciesMeta": {
-    "@office-iss/react-native-win32": {
-      "optional": true
-    }
   },
   "rnx-kit": {
     "kitType": "app",
@@ -115,7 +110,6 @@
         "babel-preset-react-native",
         "community/cli",
         "core-win32",
-        "core-windows",
         "metro-config",
         "metro-react-native-babel-transformer",
         "react",

@@ -66,8 +66,7 @@
         "react",
         "react-test-renderer",
         "tools-core",
-        "tools-jest",
-        "tools-jest-rn"
+        "tools-jest"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"
