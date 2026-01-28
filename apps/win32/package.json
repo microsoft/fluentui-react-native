@@ -70,6 +70,13 @@
     "react-test-renderer": "18.2.0",
     "rimraf": "catalog:"
   },
+  "furn": {
+    "depcheck": {
+      "ignoreMatches": [
+        "@office-iss/react-native-win32"
+      ]
+    }
+  },
   "rnx-kit": {
     "kitType": "app",
     "bundle": [
