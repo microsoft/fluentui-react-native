@@ -41,15 +41,20 @@
     "@office-iss/react-native-win32": "^0.74.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",
-    "react-native-svg": ">=15.4.0 <15.13.0"
+    "react-native-svg": ">=15.4.0 <15.13.0",
+    "react-native-windows": "^0.74.0"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030",
+    "@react-native-community/cli": "^13.6.4",
+    "@react-native-community/cli-platform-android": "^13.6.4",
+    "@react-native-community/cli-platform-ios": "^13.6.4",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
@@ -61,11 +66,9 @@
     "@types/react-test-renderer": "^18.2.0",
     "metro-config": "^0.80.3",
     "react-native-svg-transformer": "^1.0.0",
+    "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
     "rimraf": "catalog:"
-  },
-  "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0"
   },
   "peerDependenciesMeta": {
     "@office-iss/react-native-win32": {
@@ -110,12 +113,15 @@
       },
       "capabilities": [
         "babel-preset-react-native",
-        "core",
+        "community/cli",
+        "core-win32",
+        "core-windows",
         "metro-config",
         "metro-react-native-babel-transformer",
         "react",
         "react-test-renderer",
         "svg",
+        "test-app",
         "tools-core"
       ]
     },
