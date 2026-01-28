@@ -18,7 +18,7 @@ export const MenuTrigger: React.FunctionComponent<MenuTriggerProps> = (props: Me
   // child component which may affect accessibility, we need to modify the
   // state in the inner render so we can access the child component and its props.
   const revised = React.cloneElement(props.children, {
-    ...(props.children.props.tooltip && { alwaysShowToolTip: true }),
+    ...((props.children as any).props.tooltip && { alwaysShowToolTip: true }),
     ...menuTrigger.props,
   });
 

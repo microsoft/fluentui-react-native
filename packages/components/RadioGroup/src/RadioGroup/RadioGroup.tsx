@@ -55,9 +55,10 @@ export const RadioGroup = compose<RadioGroupType>({
 
       const { label, required, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(radioGroup.props, final);
 
+      const labelTextProps: any = { key: 'label' };
       const labelComponent = (
         <Slots.label>
-          <Slots.labelText key="label">{label}</Slots.labelText>
+          <Slots.labelText {...labelTextProps}>{label}</Slots.labelText>
           {!!required && <Slots.required>{'*'}</Slots.required>}
         </Slots.label>
       );

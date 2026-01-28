@@ -83,15 +83,13 @@ export const Button = compose<ButtonType>({
         <React.Fragment>
           {loading && <ActivityIndicator />}
           {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} accessible={false} />}
-          {React.Children.map(children, (child) =>
-            typeof child === 'string' ? (
-              <Slots.content accessible={false} key="content">
-                {child}
-              </Slots.content>
-            ) : (
-              child
-            ),
-          )}
+          {React.Children.map(children, (child) => {
+            if (typeof child === 'string') {
+              const contentProps: any = { accessible: false, key: 'content' };
+              return <Slots.content {...contentProps}>{child}</Slots.content>;
+            }
+            return child;
+          })}
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} accessible={false} />}
         </React.Fragment>
       );

@@ -21,7 +21,7 @@ export const Shimmer = compose<ShimmerType>({
   },
   useRender: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     const Slots = useSlots(props);
-    props = mergeProps(props, Slots.root({}).props);
+    props = mergeProps(props, Slots.root({}).props) as ShimmerProps;
     const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
     const memoizedShimmerData = useMemo(
@@ -83,19 +83,24 @@ export const Shimmer = compose<ShimmerType>({
         for (let i = 0; i < elements.length; i++) {
           const element = elements[i];
           if (element.type == 'rect') {
-            rows.push(
-              <Rect
-                key={i}
-                width={element.width}
-                height={element.height}
-                x={element.x}
-                y={element.y}
-                rx={element.borderRadiusX}
-                ry={element.borderRadiusY}
-              />,
-            );
+            const rectProps: any = {
+              key: i,
+              width: element.width,
+              height: element.height,
+              x: element.x,
+              y: element.y,
+              rx: element.borderRadiusX,
+              ry: element.borderRadiusY,
+            };
+            rows.push(<Rect {...rectProps} />);
           } else if (element.type == 'circle') {
-            rows.push(<Circle key={i} r={element.radius} cx={element.cx} cy={element.cy} />);
+            const circleProps: any = {
+              key: i,
+              r: element.radius,
+              cx: element.cx,
+              cy: element.cy,
+            };
+            rows.push(<Circle {...circleProps} />);
           } else {
             assertNever(element);
           }

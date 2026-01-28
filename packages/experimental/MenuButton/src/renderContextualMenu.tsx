@@ -5,17 +5,21 @@ import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluen
 
 import type { MenuButtonItemProps } from './MenuButton.types';
 
-export const renderContextualMenu = (contextualMenu: ContextualMenuProps, menuItems: MenuButtonItemProps[]): JSX.Element => {
+export const renderContextualMenu = (contextualMenu: ContextualMenuProps, menuItems: MenuButtonItemProps[]): React.JSX.Element => {
   return (
     <ContextualMenu {...contextualMenu}>
       {menuItems?.map((menuItem) => {
-        return menuItem.hasSubmenu ? <SubMenuItem {...menuItem} /> : <ContextualMenuItem key={menuItem.itemKey} {...menuItem} />;
+        if (menuItem.hasSubmenu) {
+          return <SubMenuItem {...menuItem} />;
+        }
+        const menuItemProps: any = { key: menuItem.itemKey, ...menuItem };
+        return <ContextualMenuItem {...menuItemProps} />;
       })}
     </ContextualMenu>
   );
 };
 
-const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): JSX.Element => {
+const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): React.JSX.Element => {
   const [showSubmenuState, setShowSubmenu] = React.useState(false);
   const toggleShowSubmenu = React.useCallback(() => {
     setShowSubmenu(!showSubmenuState);
@@ -32,9 +36,10 @@ const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuBu
       <SubmenuItem componentRef={componentRef} onHoverIn={onHoverIn} {...restItems} />
       {showSubmenu && (
         <Submenu target={componentRef} onDismiss={onDismiss} setShowMenu={setShowMenu} {...restSubmenuProps}>
-          {submenuItems?.map((submenuItem) => (
-            <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
-          ))}
+          {submenuItems?.map((submenuItem) => {
+            const submenuItemProps: any = { key: submenuItem.itemKey, ...submenuItem };
+            return <ContextualMenuItem {...submenuItemProps} />;
+          })}
         </Submenu>
       )}
     </>

@@ -8,6 +8,6 @@ import { FluentTesterApp } from '@fluentui-react-native/tester-core';
 //so we have to ensure that no yellowboxes are shown on boot that could affect test selection
 LogBox.ignoreLogs([/.*deprecated.*/, /.*Platform is not supported.*/]);
 
-AppRegistry.registerComponent('FluentTester', () => FluentTesterApp);
+AppRegistry.registerComponent('FluentTester', () => FluentTesterApp as any);
 
 export default FluentTesterApp;

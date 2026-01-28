@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { isMouseEvent } from '@fluentui-react-native/interactive-hooks';
@@ -14,7 +14,7 @@ import { useMenuContext } from '../context/menuContext';
 const delayOpen = 150;
 
 export const useMenu = (props: MenuProps): MenuState => {
-  const triggerRef = React.useRef();
+  const triggerRef = React.useRef<View>(null);
   const context = useMenuContext();
   const isSubmenu = context.triggerRef !== null;
   const isOpenControlled = typeof props.open !== 'undefined';

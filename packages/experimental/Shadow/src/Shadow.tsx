@@ -25,7 +25,7 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
       }
     }
 
-    const { style: childStyle, ...restOfChildProps } = child.props;
+    const { style: childStyle, ...restOfChildProps } = child.props as { style?: ViewStyle; [key: string]: any };
 
     const shadowViewStyleProps = getStylePropsForShadowViews(childStyle, props.shadowToken);
     const innerShadowViewProps = mergeProps(restOfChildProps, shadowViewStyleProps.inner);

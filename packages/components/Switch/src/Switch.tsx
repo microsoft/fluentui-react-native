@@ -56,11 +56,11 @@ export const Switch = compose<SwitchType>({
     const switchInfo = useSwitch(
       userProps,
       isMobile && {
-        toggleOnBgColor: switchOnSlot.track({}).props.style.backgroundColor,
-        toggleOffBgColor: switchOffSlot.track({}).props.style.backgroundColor,
-        trackWidth: switchOnSlot.track({}).props.style.width,
-        thumbWidth: switchOnSlot.thumb({}).props.style.width,
-        thumbMargin: switchOnSlot.thumb({}).props.style.margin,
+        toggleOnBgColor: (switchOnSlot.track({}).props as any).style.backgroundColor,
+        toggleOffBgColor: (switchOffSlot.track({}).props as any).style.backgroundColor,
+        trackWidth: (switchOnSlot.track({}).props as any).style.width,
+        thumbWidth: (switchOnSlot.thumb({}).props as any).style.width,
+        thumbMargin: (switchOnSlot.thumb({}).props as any).style.margin,
       },
     );
 

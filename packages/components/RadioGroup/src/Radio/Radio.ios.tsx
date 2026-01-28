@@ -74,9 +74,10 @@ export const Radio = compose<RadioType>({
             disabled={disabled}
             focusable={false}
           >
-            <Slots.checkmark key="checkmark" viewBox="0 0 12 12">
-              {checkmarkPath}
-            </Slots.checkmark>
+            {(() => {
+              const checkmarkProps: any = { key: 'checkmark', viewBox: '0 0 12 12' };
+              return <Slots.checkmark {...checkmarkProps}>{checkmarkPath}</Slots.checkmark>;
+            })()}
           </Slots.button>
           {labelComponent}
         </Slots.root>

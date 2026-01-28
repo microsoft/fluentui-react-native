@@ -1,5 +1,6 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
+import type { IBorderTokens } from '@fluentui-react-native/tokens';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 
 import { linkName } from './Link.types';
@@ -29,7 +30,7 @@ export const stylingSettings: UseStylingOptions<LinkProps, LinkSlotProps, LinkTo
           fontStyle: tokens.fontStyle,
           textAlign: tokens.textAlign,
           ...fontStyles.from(tokens, theme),
-          ...borderStyles.from(tokens, theme),
+          ...borderStyles.from(tokens as IBorderTokens, theme),
         },
         variant: tokens.variant,
       }),

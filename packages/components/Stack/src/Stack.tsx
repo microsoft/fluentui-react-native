@@ -35,7 +35,7 @@ function _mixinStyle(style: StyleProp<ObjectBase> | undefined, mixin: ObjectBase
 
 const _styleKey = 'style';
 
-const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ...children: React.ReactNode[]): JSX.Element => {
+const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ...children: React.ReactNode[]): React.JSX.Element => {
   const { gap, horizontal, wrap } = renderData.state!;
 
   if (gap && gap > 0 && children && globalThis.__jsiExecutorDescription !== 'ChakraRuntime') {

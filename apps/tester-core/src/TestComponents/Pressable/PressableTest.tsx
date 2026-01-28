@@ -80,7 +80,7 @@ const FocusComponent: React.FunctionComponent<ViewProps> = () => {
 
 /* Pressable that only has pressState */
 const PressComponent: React.FunctionComponent<ViewProps> = (props: ViewProps) => {
-  const [pressProps, pressState] = usePressState(props);
+  const [pressProps, pressState] = usePressState(props as any);
 
   const onTouchEnd = React.useCallback(
     (e: GestureResponderEvent) => {

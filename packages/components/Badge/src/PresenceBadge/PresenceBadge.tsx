@@ -44,8 +44,8 @@ export const PresenceBadge = compose<PresenceBadgeType>({
           <Slots.svg
             viewBox={`
             0 0
-            ${hasDifferentIconsBySize ? Slots.svg({}).props.style.width : 16}
-            ${hasDifferentIconsBySize ? Slots.svg({}).props.style.height : 16}`}
+            ${hasDifferentIconsBySize ? (Slots.svg({}).props as any).style.width : 16}
+            ${hasDifferentIconsBySize ? (Slots.svg({}).props as any).style.height : 16}`}
             fill="none"
           >
             <Path fill="currentColor" d={path} />

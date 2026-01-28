@@ -67,20 +67,20 @@ export const CompoundButton = compose<CompoundButtonType>({
           {loading && <ActivityIndicator />}
           {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} accessible={false} />}
           <Slots.contentContainer>
-            {React.Children.map(children, (child) =>
-              typeof child === 'string' ? (
-                <Slots.content accessible={false} key="content">
-                  {child}
-                </Slots.content>
-              ) : (
-                child
-              ),
-            )}
-            {secondaryContent && (
-              <Slots.secondaryContent accessible={false} key="secondaryContent">
-                {secondaryContent}
-              </Slots.secondaryContent>
-            )}
+            {React.Children.map(children, (child) => {
+              if (typeof child === 'string') {
+                const contentProps: any = { accessible: false, key: 'content' };
+                return <Slots.content {...contentProps}>{child}</Slots.content>;
+              }
+              return child;
+            })}
+            {(() => {
+              if (secondaryContent) {
+                const secondaryContentProps: any = { accessible: false, key: 'secondaryContent' };
+                return <Slots.secondaryContent {...secondaryContentProps}>{secondaryContent}</Slots.secondaryContent>;
+              }
+              return null;
+            })()}
           </Slots.contentContainer>
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} accessible={false} />}
           {button.state.focused &&

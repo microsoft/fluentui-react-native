@@ -55,15 +55,13 @@ export const Chip = compose<ChipType>({
       return (
         <Slots.root accessible {...mergedProps}>
           {iconProps && showIcon && (closeIconVisibile ? iconWithPressable : iconCore)}
-          {Children.map(children, (child, i) =>
-            typeof child === 'string' ? (
-              <Slots.text accessible={false} key={`text-${i}`}>
-                {child}
-              </Slots.text>
-            ) : (
-              child
-            ),
-          )}
+          {Children.map(children, (child, i) => {
+            if (typeof child === 'string') {
+              const textProps: any = { accessible: false, key: `text-${i}` };
+              return <Slots.text {...textProps}>{child}</Slots.text>;
+            }
+            return child;
+          })}
         </Slots.root>
       );
     };

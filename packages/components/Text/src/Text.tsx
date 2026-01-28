@@ -146,7 +146,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     delete (mergedProps.style as TextTokens).maximumFontSize;
 
     return (
-      <RNText ref={componentRef} ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
+      <RNText ref={componentRef as any} ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...(mergedProps as any)}>
         {children}
       </RNText>
     );

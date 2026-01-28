@@ -49,7 +49,7 @@ function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling
   };
 }
 
-const render = (Slots: ISlots<IPersonaSlotProps>, renderData: IPersonaRenderData): JSX.Element | null => {
+const render = (Slots: ISlots<IPersonaSlotProps>, renderData: IPersonaRenderData): React.JSX.Element | null => {
   if (!renderData.state) {
     return null;
   }

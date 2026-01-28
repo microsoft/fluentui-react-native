@@ -35,7 +35,7 @@ export const OverflowItem = stagedComponent<OverflowItemProps>((userProps: Overf
     }
 
     // Assume that the child can accept ViewProps.
-    const viewStyles = mergeStyles(child.props.style, mergedProps.style);
+    const viewStyles = mergeStyles((child as any).props.style, mergedProps.style);
     const viewProps = getOverflowItemProps(mergedProps, viewStyles);
 
     const clone = React.cloneElement(child, viewProps);

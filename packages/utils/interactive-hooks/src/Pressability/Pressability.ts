@@ -17,7 +17,7 @@ import invariant from 'invariant';
 
 import type { BlurEvent, FocusEvent, MouseEvent, PressEvent } from './CoreEventTypes';
 import { isHoverEnabled } from './HoverState';
-import type { HostComponent, Rect } from './InternalTypes';
+import type { Rect } from './InternalTypes';
 import { normalizeRect } from './InternalTypes';
 import type { PressabilityConfig, PressabilityEventHandlers } from './Pressability.types';
 
@@ -251,7 +251,7 @@ export class Pressability {
   private _longPressDelayTimeout: any /* TimeoutID */ = null;
   private _pressDelayTimeout: any /* TimeoutID */ = null;
   private _pressOutDelayTimeout: any /* TimeoutID */ = null;
-  private _responderID: number | React.ElementRef<HostComponent<any>> = null;
+  private _responderID: number | React.ElementRef<any> = null;
   private _responderRegion: Rect = null;
   private _touchActivatePosition: Readonly<{
     pageX: number;

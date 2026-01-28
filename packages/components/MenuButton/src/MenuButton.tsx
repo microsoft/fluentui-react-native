@@ -118,13 +118,15 @@ export const MenuButton = compose<MenuButtonType>({
         {context.showContextualMenu && (
           <Slots.contextualMenu>
             {menuItems.map((menuItem) => {
-              return menuItem.hasSubmenu && menuItem.submenuItems ? (
-                <Slots.contextualMenuItems>
-                  <SubMenuItem {...menuItem} />
-                </Slots.contextualMenuItems>
-              ) : (
-                <ContextualMenuItem key={menuItem.itemKey} {...menuItem} />
-              );
+              if (menuItem.hasSubmenu && menuItem.submenuItems) {
+                return (
+                  <Slots.contextualMenuItems>
+                    <SubMenuItem {...menuItem} />
+                  </Slots.contextualMenuItems>
+                );
+              }
+              const menuItemProps: any = { key: menuItem.itemKey, ...menuItem };
+              return <ContextualMenuItem {...menuItemProps} />;
             })}
           </Slots.contextualMenu>
         )}
@@ -133,7 +135,7 @@ export const MenuButton = compose<MenuButtonType>({
   },
 });
 
-const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): JSX.Element => {
+const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): React.JSX.Element => {
   const [showSubmenuState, setShowSubmenu] = React.useState(false);
   const toggleShowSubmenu = React.useCallback(() => {
     setShowSubmenu(!showSubmenuState);
@@ -150,9 +152,10 @@ const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuBu
       <SubmenuItem componentRef={componentRef} onHoverIn={onHoverIn} {...restItems} />
       {showSubmenu && (
         <Submenu target={componentRef} onDismiss={onDismiss} setShowMenu={setShowMenu} {...restSubmenuProps}>
-          {submenuItems?.map((submenuItem) => (
-            <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
-          ))}
+          {submenuItems?.map((submenuItem) => {
+            const submenuItemProps: any = { key: submenuItem.itemKey, ...submenuItem };
+            return <ContextualMenuItem {...submenuItemProps} />;
+          })}
         </Submenu>
       )}
     </React.Fragment>

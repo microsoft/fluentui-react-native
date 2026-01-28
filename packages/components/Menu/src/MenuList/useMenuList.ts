@@ -164,7 +164,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
   });
 
   // focus management
-  const focusZoneRef = React.useRef<View>();
+  const focusZoneRef = React.useRef<View>(null);
   const setFocusZoneFocus = () => {
     focusZoneRef?.current?.focus();
   };

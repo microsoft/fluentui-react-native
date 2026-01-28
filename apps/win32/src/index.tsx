@@ -4,6 +4,6 @@ import { AppRegistry } from 'react-native';
 
 import { FluentTesterApp } from '@fluentui-react-native/tester-core';
 
-AppRegistry.registerComponent('FluentTester', () => FluentTesterApp);
+AppRegistry.registerComponent('FluentTester', () => FluentTesterApp as any);
 
 export default FluentTesterApp;

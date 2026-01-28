@@ -92,15 +92,13 @@ export const Tab = compressible<TabProps, TabTokens>((props: TabProps, useTokens
           {icon && <IconSlot {...icon} />}
           {hasChildren && (
             <ContentContainerSlot>
-              {React.Children.map(children, (child, i) =>
-                typeof child === 'string' ? (
-                  <ContentSlot accessible={false} key={i}>
-                    {child}
-                  </ContentSlot>
-                ) : (
-                  child
-                ),
-              )}
+              {React.Children.map(children, (child, i) => {
+                if (typeof child === 'string') {
+                  const contentProps: any = { accessible: false, key: i };
+                  return <ContentSlot {...contentProps}>{child}</ContentSlot>;
+                }
+                return child;
+              })}
             </ContentContainerSlot>
           )}
         </StackSlot>

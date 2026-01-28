@@ -89,7 +89,7 @@ const VibrancyViewWithViewProps: React.FunctionComponent = () => {
         <Text>{descriptionString}</Text>
         <View style={styles.row}>
           <View {...viewProps} />
-          <VibrancyView {...viewProps} />
+          <VibrancyView {...(viewProps as any)} />
         </View>
       </View>
     </Stack>

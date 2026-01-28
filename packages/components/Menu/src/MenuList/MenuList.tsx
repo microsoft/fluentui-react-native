@@ -49,9 +49,9 @@ export const MenuList = compose<MenuListType>({
           return React.cloneElement(
             child as React.ReactElement<unknown, string | React.JSXElementConstructor<any>>,
             {
-              accessibilityPositionInSet: child.props.accessibilityPositionInSet ?? itemPosition, // win32
-              accessibilitySetSize: child.props.accessibilitySetSize ?? itemCount, //win32
-              ...(child.props.tooltip && { alwaysShowToolTip: true }),
+              accessibilityPositionInSet: (child as any).props.accessibilityPositionInSet ?? itemPosition, // win32
+              accessibilitySetSize: (child as any).props.accessibilitySetSize ?? itemCount, //win32
+              ...((child as any).props.tooltip && { alwaysShowToolTip: true }),
             } as any,
           );
         }

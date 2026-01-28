@@ -79,15 +79,13 @@ export const FAB = compose<FABType>({
         <React.Fragment>
           {icon && <Slots.icon {...iconProps} accessible={false} />}
           {showContent &&
-            React.Children.map(children, (child) =>
-              typeof child === 'string' ? (
-                <Slots.content accessible={false} key="content">
-                  {child}
-                </Slots.content>
-              ) : (
-                child
-              ),
-            )}
+            React.Children.map(children, (child) => {
+              if (typeof child === 'string') {
+                const contentProps: any = { accessible: false, key: 'content' };
+                return <Slots.content {...contentProps}>{child}</Slots.content>;
+              }
+              return child;
+            })}
         </React.Fragment>
       );
       const buttonContentWithRoot = (

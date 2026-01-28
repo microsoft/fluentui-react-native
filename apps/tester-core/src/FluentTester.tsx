@@ -111,10 +111,13 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
 
+  const backHandlerSubscription = React.useRef<any>(null);
+
   const onBackPress = React.useCallback(() => {
     setOnTestListView(true);
-    if (Platform.OS === 'android') {
-      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    if (Platform.OS === 'android' && backHandlerSubscription.current) {
+      backHandlerSubscription.current.remove();
+      backHandlerSubscription.current = null;
     }
     return true;
   }, []);
@@ -122,7 +125,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
 
   // This is used to initially bring focus to the app on win32
-  const focusOnMountRef = React.useRef<View>();
+  const focusOnMountRef = React.useRef<View>(null);
 
   React.useEffect(() => {
     if (Platform.OS === ('win32' as any)) {
@@ -187,7 +190,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                     setOnTestListView(false);
                     setSelectedTestIndex(index);
                     if (Platform.OS === 'android') {
-                      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+                      backHandlerSubscription.current = BackHandler.addEventListener('hardwareBackPress', onBackPress);
                     }
                   }}
                   style={mobileStyles.testListItem}

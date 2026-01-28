@@ -3232,6 +3232,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/babel-config-81@workspace:packages/configs/babel-config-81":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/babel-config-81@workspace:packages/configs/babel-config-81"
+  dependencies:
+    "@babel/core": "npm:^7.22.5"
+    "@babel/plugin-transform-react-jsx": "npm:^7.22.0"
+    "@babel/plugin-transform-react-jsx-source": "npm:^7.22.0"
+    "@babel/plugin-transform-typescript": "npm:^7.22.0"
+    "@babel/preset-env": "npm:^7.22.0"
+    "@babel/preset-react": "npm:^7.22.0"
+    "@babel/preset-typescript": "npm:^7.22.0"
+    "@babel/runtime": "npm:^7.22.0"
+    "@react-native/babel-preset": "npm:^0.74.0"
+    "@react-native/metro-babel-transformer": "npm:^0.74.0"
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/babel-config@workspace:*, @fluentui-react-native/babel-config@workspace:packages/configs/babel-config":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/babel-config@workspace:packages/configs/babel-config"
@@ -3244,8 +3261,11 @@ __metadata:
     "@babel/preset-react": "npm:^7.22.0"
     "@babel/preset-typescript": "npm:^7.22.0"
     "@babel/runtime": "npm:^7.22.0"
+    "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
+    "@rnx-kit/align-deps": "catalog:"
   languageName: unknown
   linkType: soft
 
@@ -6069,6 +6089,7 @@ __metadata:
     "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@react-native/babel-preset": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:^19.1.0"
     "@types/react-test-renderer": "npm:^19.1.0"
@@ -8564,7 +8585,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/babel-preset@npm:0.81.5":
+"@react-native/babel-preset@npm:0.81.5, @react-native/babel-preset@npm:^0.81.0":
   version: 0.81.5
   resolution: "@react-native/babel-preset@npm:0.81.5"
   dependencies:

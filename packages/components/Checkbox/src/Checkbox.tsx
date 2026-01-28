@@ -40,9 +40,10 @@ export const Checkbox = compose<CheckboxType>({
     return (final: CheckboxProps) => {
       const { label, required, ...mergedProps } = mergeProps(Checkbox.props, final);
       const { onPress, disabled } = mergedProps;
+      const labelProps: any = { key: 'label' };
       const labelComponent = (
         <React.Fragment>
-          <Slots.label key="label">{label}</Slots.label>
+          <Slots.label {...labelProps}>{label}</Slots.label>
           {!!required && <Slots.required>{typeof required === 'string' ? required : '*'}</Slots.required>}
         </React.Fragment>
       );
@@ -55,11 +56,12 @@ export const Checkbox = compose<CheckboxType>({
         />
       );
 
+      const checkmarkProps: any = { key: 'checkmark', viewBox: '0 0 12 12' };
       return (
         <Slots.root {...mergedProps} {...(Platform.OS == 'android' && { accessible: !disabled, focusable: !disabled })}>
           {Checkbox.state.labelIsBefore && labelComponent}
           <Slots.checkbox accessible={false} onPress={onPress} disabled={disabled} focusable={false}>
-            <Slots.checkmark key="checkmark" viewBox="0 0 12 12">
+            <Slots.checkmark {...checkmarkProps}>
               {checkmarkPath}
             </Slots.checkmark>
           </Slots.checkbox>

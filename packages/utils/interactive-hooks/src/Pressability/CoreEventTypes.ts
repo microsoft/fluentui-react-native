@@ -16,12 +16,10 @@
 
 import type * as React from 'react';
 
-import type { HostComponent } from './InternalTypes';
-
 export type SyntheticEvent<T> = Readonly<{
   bubbles?: boolean;
   cancelable?: boolean;
-  currentTarget: number | React.ElementRef<HostComponent<any>>;
+  currentTarget: number | React.ElementRef<any>;
   defaultPrevented?: boolean;
   dispatchConfig?: Readonly<{
     registrationName: string;
@@ -34,7 +32,7 @@ export type SyntheticEvent<T> = Readonly<{
   isTrusted?: boolean;
   nativeEvent: T;
   persist: () => void;
-  target?: number | React.ElementRef<HostComponent<any>>;
+  target?: number | React.ElementRef<any>;
   timeStamp: number;
   type?: string;
 }>;
