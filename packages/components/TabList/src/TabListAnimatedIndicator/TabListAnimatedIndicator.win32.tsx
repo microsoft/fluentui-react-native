@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import type { Animated, ViewProps, ViewStyle } from 'react-native';
 
-import { stagedComponent, memoize } from '@fluentui-react-native/framework';
+import { phasedComponent, memoize } from '@fluentui-react-native/framework-base';
 
 import type { AnimatedIndicatorProps } from './TabListAnimatedIndicator.types';
 import { tablistAnimatedIndicatorName } from './TabListAnimatedIndicator.types';
@@ -16,7 +16,7 @@ function indicatorPropsWorker(animationClass: string, style: Animated.AnimatedPr
  * This component renders as the indicator for the selected tab. Its styles are manually calculated using
  * changing layout stored in the tablist context, so it doesn't need to use the compose or compressible franework.
  */
-export const TabListAnimatedIndicator = stagedComponent<AnimatedIndicatorProps>((props) => {
+export const TabListAnimatedIndicator = phasedComponent<AnimatedIndicatorProps>((props) => {
   const styles = useAnimatedIndicatorStyles(props);
   return () => {
     const indicatorProps = getIndicatorProps('Ribbon_TabUnderline', styles);

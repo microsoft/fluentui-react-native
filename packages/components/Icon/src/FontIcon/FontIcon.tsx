@@ -1,12 +1,12 @@
 import { Text } from 'react-native';
 
-import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
+import { mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
 
 import type { FontIconProps } from './FontIcon.types';
 import { fontIconName } from './FontIcon.types';
 import { useFontIcon } from './useFontIcon';
 
-export const FontIcon = stagedComponent((props: FontIconProps) => {
+export const FontIcon = phasedComponent((props: FontIconProps) => {
   const fontIconProps = useFontIcon(props);
   return (final: FontIconProps) => {
     const newProps = mergeProps<FontIconProps>(fontIconProps, final);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import { mergeProps, stagedComponent, memoize, mergeStyles } from '@fluentui-react-native/framework';
+import { mergeProps, phasedComponent, memoize, mergeStyles } from '@fluentui-react-native/framework-base';
 
 import type { OverflowItemProps } from './OverflowItem.types';
 import { overflowItemName } from './OverflowItem.types';
@@ -12,14 +12,15 @@ function overflowItemPropWorker(props: ViewProps, style: StyleProp<ViewStyle>): 
   return { ...props, style };
 }
 
-export const OverflowItem = stagedComponent<OverflowItemProps>((userProps: OverflowItemProps) => {
+export const OverflowItem = phasedComponent<OverflowItemProps>((userProps: OverflowItemProps) => {
   const { props, state } = useOverflowItem(userProps);
-  return (finalProps: OverflowItemProps, children: React.ReactNode) => {
+  return (finalProps: OverflowItemProps) => {
+    const { children, ...rest } = finalProps;
     if (state.layoutDone && !state.visible) {
       return null;
     }
 
-    const mergedProps = mergeProps(props, finalProps);
+    const mergedProps = mergeProps(props, rest);
     const childrenArray = React.Children.toArray(children);
     const child = childrenArray[0];
 

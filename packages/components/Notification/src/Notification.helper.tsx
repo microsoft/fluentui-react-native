@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { ButtonProps, ButtonTokens } from '@fluentui-react-native/button';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
+import { mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/icon';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
@@ -59,31 +59,36 @@ export function createNotificationButtonProps(userProps: NotificationProps) {
  *    (e.g. setting color in Notification.styling.ts will not apply to the action button text)
  * This helper component is used to customize tokens via props.
  */
-export const NotificationButton = stagedComponent((props: NotificationButtonProps) => {
-  const CustomizedButton = Button.customize({
-    subtle: {
-      backgroundColor: 'transparent',
-      color: props.color,
-      iconColor: props.color,
-      disabled: {
-        color: props.disabledColor,
-      },
-      pressed: {
-        color: props.pressedColor,
-      },
-    },
-    medium: {
-      hasContent: {
-        minWidth: 0,
-        padding: globalTokens.sizeNone,
-        paddingHorizontal: globalTokens.sizeNone,
-        variant: 'body2Strong',
-      },
-    },
-  });
+export const NotificationButton = phasedComponent((props: NotificationButtonProps) => {
+  const CustomizedButton = React.useMemo(
+    () =>
+      Button.customize({
+        subtle: {
+          backgroundColor: 'transparent',
+          color: props.color,
+          iconColor: props.color,
+          disabled: {
+            color: props.disabledColor,
+          },
+          pressed: {
+            color: props.pressedColor,
+          },
+        },
+        medium: {
+          hasContent: {
+            minWidth: 0,
+            padding: globalTokens.sizeNone,
+            paddingHorizontal: globalTokens.sizeNone,
+            variant: 'body2Strong',
+          },
+        },
+      }),
+    [props.color, props.disabledColor, props.pressedColor],
+  );
 
-  return (final: NotificationButtonProps, children: React.ReactNode) => {
-    const mergedProps = mergeProps(props, final);
+  return (final: NotificationButtonProps) => {
+    const { children, ...rest } = final;
+    const mergedProps = mergeProps(props, rest);
     return <CustomizedButton {...mergedProps}>{children}</CustomizedButton>;
   };
-}, true);
+});

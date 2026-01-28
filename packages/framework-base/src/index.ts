@@ -25,16 +25,17 @@ export type {
   DirectComponent,
   DirectComponentFunction,
   LegacyDirectComponent,
-  StagedComponent,
-  StagedRender,
-  TwoStageRender,
+  PhasedComponent,
+  PhasedRender,
   RenderType,
   RenderResult,
+  StagedRender,
   ComposableFunction,
   FinalRender,
   SlotFn,
   NativeReactType,
 } from './component-patterns/render.types';
+export { phasedComponent } from './component-patterns/phasedComponent';
 export { withSlots } from './component-patterns/withSlots';
-export { stagedComponent, twoStageComponent } from './component-patterns/stagedComponent';
+export { stagedComponent } from './component-patterns/stagedComponent';
 export { jsx, jsxs } from './jsx-runtime';

@@ -79,15 +79,14 @@ export type SlotFn<TProps> = {
  *
  * The `children` prop will be automatically inferred and typed correctly by the prop type. Hooks are still expected
  */
-export type TwoStageRender<TProps> = (props: TProps) => React.ComponentType<React.PropsWithChildren<TProps>>;
+export type PhasedRender<TProps> = (props: TProps) => React.ComponentType<React.PropsWithChildren<TProps>>;
 
 /**
  * Component type for a component that can be rendered in two stages, with the attached render function.
  */
-export type StagedComponent<TProps> = React.FunctionComponent<TProps> & {
-  _twoStageRender?: TwoStageRender<TProps>;
+export type PhasedComponent<TProps> = React.FunctionComponent<TProps> & {
+  _phasedRender?: PhasedRender<TProps>;
 };
-
 /**
  * The final rendering of the props in a staged render. This is the function component signature that matches that of
  * React.createElement, children (if present) will be part of the variable args at the end.
@@ -113,6 +112,6 @@ export type ComposableFunction<TProps> = React.FunctionComponent<TProps> & { _st
 export type AnyCustomType<TProps> =
   | React.FunctionComponent<TProps>
   | DirectComponent<TProps>
-  | StagedComponent<TProps>
+  | PhasedComponent<TProps>
   | ComposableFunction<TProps>
   | LegacyDirectComponent<TProps>;

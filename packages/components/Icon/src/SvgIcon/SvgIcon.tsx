@@ -1,13 +1,13 @@
 import { Platform, View } from 'react-native';
 
-import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
+import { mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
 import { SvgUri } from 'react-native-svg';
 
 import type { SvgIconProps } from './SvgIcon.types';
 import { svgIconName } from './SvgIcon.types';
 import { useSvgIcon } from './useSvgIcon';
 
-export const SvgIcon = stagedComponent((props: SvgIconProps) => {
+export const SvgIcon = phasedComponent((props: SvgIconProps) => {
   const svgProps = useSvgIcon(props);
   return (final: SvgIconProps) => {
     const { style, height, width, src, uri, viewBox, color, ...rest } = mergeProps<SvgIconProps>(svgProps, final);

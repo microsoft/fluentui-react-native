@@ -2,7 +2,7 @@ import { Image, Platform, View } from 'react-native';
 import type { ImageStyle, TextStyle } from 'react-native';
 
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
-import { stagedComponent, mergeProps, getMemoCache, getTypedMemoCache } from '@fluentui-react-native/framework';
+import { phasedComponent, mergeProps, getMemoCache, getTypedMemoCache } from '@fluentui-react-native/framework-base';
 import { Text } from '@fluentui-react-native/text';
 import type { SvgProps } from 'react-native-svg';
 import { SvgUri } from 'react-native-svg';
@@ -92,7 +92,7 @@ function renderSvg(iconProps: IconProps) {
   }
 }
 
-export const Icon = stagedComponent((props: IconProps) => {
+export const Icon = phasedComponent((props: IconProps) => {
   const theme = useFluentTheme();
 
   return (rest: IconProps) => {
