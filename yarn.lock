@@ -4043,7 +4043,6 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/checkbox": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
