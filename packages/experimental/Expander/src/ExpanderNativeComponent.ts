@@ -44,6 +44,6 @@ export interface NativeProps extends ViewProps {
   onExpanding?: DirectEventHandler<null>;
 }
 
-export default codegenNativeComponent<NativeProps>(
-  'ExpanderView'
-) as HostComponent<NativeProps>;
+export const ExpanderComponent: HostComponent<NativeProps> = codegenNativeComponent<NativeProps>('ExpanderView');
+
+export default ExpanderComponent;

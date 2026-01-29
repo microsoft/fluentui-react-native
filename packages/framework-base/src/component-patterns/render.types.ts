@@ -29,12 +29,20 @@ export type NativeReactType = RenderType;
 /**
  * type of the render function, not a FunctionComponent to help prevent hook usage
  */
-export type DirectComponentFunction<TProps> = (props: TProps) => RenderResult;
+export type FunctionComponentCore<TProps> = (props: TProps) => RenderResult;
+
+/**
+ * A function component that returns an element type. This allows for the empty call props usage for native
+ * components, as well as handles the returns of React components.
+ */
+export type FunctionComponent<TProps> = FunctionComponentCore<TProps> & {
+  displayName?: string;
+};
 
 /**
  * The full component definition that has the attached properties to allow the jsx handlers to render it directly.
  */
-export type DirectComponent<TProps> = DirectComponentFunction<TProps> & {
+export type DirectComponent<TProps> = FunctionComponentCore<TProps> & {
   displayName?: string;
   _callDirect?: boolean;
 };
@@ -84,7 +92,7 @@ export type PhasedRender<TProps> = (props: TProps) => React.ComponentType<React.
 /**
  * Component type for a component that can be rendered in two stages, with the attached render function.
  */
-export type PhasedComponent<TProps> = React.FunctionComponent<TProps> & {
+export type PhasedComponent<TProps> = FunctionComponent<TProps> & {
   _phasedRender?: PhasedRender<TProps>;
 };
 /**
@@ -103,7 +111,7 @@ export type StagedRender<TProps> = (props: TProps, ...args: any[]) => FinalRende
  * Signature for a component that uses the staged render pattern.
  * @deprecated Use TwoStageRender instead
  */
-export type ComposableFunction<TProps> = React.FunctionComponent<TProps> & { _staged?: StagedRender<TProps> };
+export type ComposableFunction<TProps> = FunctionComponent<TProps> & { _staged?: StagedRender<TProps> };
 
 /**
  * A type aggregating all the custom types that can be used in the render process.

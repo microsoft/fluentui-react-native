@@ -36,9 +36,9 @@ export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics 
 export type ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = ComposableFunction<TProps> & {
   __options: ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>;
   customize: (...tokens: TokenSettings<TTokens, TTheme>[]) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
-  compose: (
-    options: Partial<ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>>,
-  ) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
+  compose<TOverrideSlotProps = TSlotProps>(
+    options: Partial<ComposeFactoryOptions<TProps, TOverrideSlotProps, TTokens, TTheme, TStatics>>,
+  ): ComposeFactoryComponent<TProps, TOverrideSlotProps, TTokens, TTheme, TStatics>;
 } & TStatics;
 
 /**
@@ -79,9 +79,17 @@ export function composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics ext
       themeHelper,
     );
 
-  component.compose = (customOptions: Partial<LocalOptions>) =>
-    composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics>(
-      immutableMergeCore(mergeOptions, options, customOptions) as LocalOptions,
+  component.compose = <TOverrideSlotProps = TSlotProps>(
+    customOptions: Partial<ComposeFactoryOptions<TProps, TOverrideSlotProps, TTokens, TTheme, TStatics>>,
+  ) =>
+    composeFactory<TProps, TOverrideSlotProps, TTokens, TTheme, TStatics>(
+      immutableMergeCore(mergeOptions, options, customOptions as object) as unknown as ComposeFactoryOptions<
+        TProps,
+        TOverrideSlotProps,
+        TTokens,
+        TTheme,
+        TStatics
+      >,
       themeHelper,
     );
 

@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import type { PressableProps, ViewStyle, ViewProps } from 'react-native';
+import type { ViewStyle, ViewProps } from 'react-native';
 import { useWindowDimensions, View } from 'react-native';
 
 import type { SizeClassIOS } from '@fluentui-react-native/experimental-appearance-additions';
@@ -9,7 +9,7 @@ import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, memoize } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { Pressable } from '@fluentui-react-native/pressable';
+import { type IPressableProps, Pressable } from '@fluentui-react-native/pressable';
 import { Body2, Body2Strong } from '@fluentui-react-native/text';
 
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
@@ -54,7 +54,7 @@ export const Notification = compose<NotificationType>({
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
-      const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
+      const mergedProps = mergeProps<IPressableProps>(rest, rootStyle);
       const iconProps = createIconProps(icon);
       const notificationButtonProps = createNotificationButtonProps(userProps);
 

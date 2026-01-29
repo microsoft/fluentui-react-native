@@ -3,13 +3,13 @@ import * as React from 'react';
 import type { TextProps } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { mergeStyles } from '@fluentui-react-native/framework-base';
+import { type FunctionComponent, mergeStyles } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
 
 import { phasedComponent } from '@fluentui-react-native/framework-base';
 import { useSlot } from './useSlot';
 
-type PluggableTextProps = React.PropsWithChildren<TextProps> & { inner?: React.FunctionComponent<TextProps> };
+type PluggableTextProps = TextProps & { inner?: FunctionComponent<TextProps> };
 
 /**
  * Text component that demonstrates pluggability, in this case via passing an alternative component type into a prop called inner.
@@ -32,11 +32,8 @@ const PluggableText = phasedComponent((props: PluggableTextProps) => {
 PluggableText.displayName = 'PluggableText';
 
 const useStyledStagedText = (props: PluggableTextProps, baseStyle: TextProps['style'], inner?: React.FunctionComponent<TextProps>) => {
-  // split out any passed in style
-  const { style, ...rest } = props;
-
   // create merged props to pass in to the inner slot
-  const mergedProps = { ...rest, style: mergeStyles(baseStyle, style), ...(inner && { inner }) };
+  const mergedProps = { ...props, style: mergeStyles(baseStyle, props.style), ...(inner && { inner }) } as PluggableTextProps;
 
   // create a slot based on the pluggable text
   const InnerText = useSlot(PluggableText, mergedProps);
@@ -65,7 +62,7 @@ const CaptionText = phasedComponent((props: PluggableTextProps) => {
 });
 
 // Control authored as simple containment
-const HeaderCaptionText1 = (props: React.PropsWithChildren<TextProps>) => {
+const HeaderCaptionText1 = (props: TextProps) => {
   const { children, ...rest } = props;
   const baseStyle = React.useMemo<TextProps['style']>(() => ({ fontSize: 24, fontWeight: 'bold' }), []);
   const mergedProps = { ...rest, style: mergeStyles(baseStyle, props.style) };

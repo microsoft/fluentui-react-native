@@ -1,6 +1,6 @@
 import React from 'react';
 import { jsx, jsxs } from '../jsx-runtime';
-import type { ComposableFunction, PhasedComponent, PhasedRender } from './render.types';
+import type { ComposableFunction, PhasedComponent, PhasedRender, FunctionComponent } from './render.types';
 
 export function getPhasedRender<TProps>(component: React.ComponentType<TProps>): PhasedRender<TProps> | undefined {
   // only a function component can have a phased render
@@ -25,7 +25,7 @@ export function getPhasedRender<TProps>(component: React.ComponentType<TProps>):
  * so it can be split if used in that manner.
  * @param getInnerPhase - phased render function to wrap into a staged component
  */
-export function phasedComponent<TProps>(getInnerPhase: PhasedRender<TProps>): PhasedComponent<TProps> {
+export function phasedComponent<TProps>(getInnerPhase: PhasedRender<TProps>): FunctionComponent<TProps> {
   return Object.assign(
     (props: React.PropsWithChildren<TProps>) => {
       // pull out children from props

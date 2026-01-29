@@ -23,6 +23,7 @@ export { mergeProps } from './merge-props/mergeProps';
 export { renderForJsxRuntime, renderSlot, asDirectComponent } from './component-patterns/render';
 export type {
   DirectComponent,
+  FunctionComponent,
   LegacyDirectComponent,
   PhasedComponent,
   PhasedRender,

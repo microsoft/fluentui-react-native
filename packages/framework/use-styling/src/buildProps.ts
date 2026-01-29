@@ -97,10 +97,10 @@ export function refinePropsFunctions<TSlotProps, TTokens, TTheme>(
   mask: TokensThatAreAlsoProps<TTokens>,
 ): BuildSlotProps<TSlotProps, TTokens, TTheme> {
   const result = {};
-  Object.keys(styles).forEach((key) => {
+  for (const key of Object.keys(styles)) {
     const refine =
       typeof styles[key] === 'function' && (styles[key] as RefinableBuildPropsBase<TSlotProps[keyof TSlotProps], TTokens, TTheme>).refine;
     result[key] = refine ? refine(mask) : styles[key];
-  });
+  }
   return result;
 }

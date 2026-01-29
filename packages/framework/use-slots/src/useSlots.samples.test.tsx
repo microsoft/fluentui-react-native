@@ -1,17 +1,11 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import type { CSSProperties } from 'react';
-
 import { mergeProps } from '@fluentui-react-native/framework-base';
-import { stagedComponent } from '@fluentui-react-native/framework-base';
+import { phasedComponent } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
+import { View, Text } from 'react-native';
+import type { ViewProps, TextProps, ViewStyle, TextStyle } from 'react-native';
 
 import { buildUseSlots } from './buildUseSlots';
-
-// types for web
-type TextProps = { style?: CSSProperties };
-type ViewProps = { style?: CSSProperties };
-type ViewStyle = CSSProperties;
-type TextStyle = CSSProperties;
 
 /**
  * This file contains samples and description to help explain what the useSlots hook does and why it is useful
@@ -46,7 +40,7 @@ describe('useSlots sample code test suite', () => {
      * Now render the text, merging the baseProps with the style updates with the rest param. Note that this leverages the fact
      * that mergeProps will reliably produce style objects with the same reference, given the same inputs.
      */
-    return <span {...mergeProps(boldBaseProps, rest)}>{children}</span>;
+    return <Text {...mergeProps(boldBaseProps, rest)}>{children}</Text>;
   };
   BoldTextStandard.displayName = 'BoldTextStandard';
 
@@ -54,19 +48,21 @@ describe('useSlots sample code test suite', () => {
    * To write the same component using the staged pattern is only slightly more complex. The pattern involves splitting the component rendering into
    * two parts and executing any hooks in the first part.
    *
-   * The stagedComponent function takes an input function of this form and wraps it in a function component that react knows how to render
+   * The phasedComponent function takes an input function of this form and wraps it in a function component that react knows how to render
    */
-  const BoldTextStaged = stagedComponent((props: React.PropsWithChildren<TextProps>) => {
+  const BoldTextStaged = phasedComponent((props: React.PropsWithChildren<TextProps>) => {
     /**
      * This section would be where hook/styling code would go, props here would include everything coming in from the base react tree with the
      * exception of children, which will be passed in stage 2.
      */
-    return (extra: TextProps, children: React.ReactNode) => {
+    return (extra: React.PropsWithChildren<TextProps>) => {
       /**
        * extra are additional props that may be filled in by a higher order component. They should not include styling and are only props the
        * enclosing component are passing to the JSX elements
        */
-      return <span {...mergeProps(boldBaseProps, props, extra)}>{children}</span>;
+
+      const { children, ...rest } = extra;
+      return <Text {...mergeProps(boldBaseProps, props, rest)}>{children}</Text>;
     };
   });
   BoldTextStaged.displayName = 'BoldTextStaged';
@@ -79,10 +75,10 @@ describe('useSlots sample code test suite', () => {
      */
     const wrapper = renderer
       .create(
-        <div>
+        <View>
           <BoldTextStaged style={styleToMerge}>Staged component at one level</BoldTextStaged>
           <BoldTextStandard style={styleToMerge}>Standard component of a single level</BoldTextStandard>
-        </div>,
+        </View>,
       )
       .toJSON();
     expect(wrapper).toMatchSnapshot();
@@ -120,7 +116,7 @@ describe('useSlots sample code test suite', () => {
   /**
    * Now author the staged component using the slot hook
    */
-  const HeaderStaged = stagedComponent((props: React.PropsWithChildren<TextProps>) => {
+  const HeaderStaged = phasedComponent((props: React.PropsWithChildren<TextProps>) => {
     /**
      * Call the slots hook (or any hook) outside of the inner closure. The useSlots hook will return an object with each slot as a renderable
      * function. The hooks for sub-components will be called as part of this call. Props passed in at this point will be the props that appear
@@ -131,7 +127,8 @@ describe('useSlots sample code test suite', () => {
     const BoldText = useHeaderSlots(props).text;
 
     /** Now the inner closure, pretty much the same as before */
-    return (extra: TextProps, children: React.ReactNode) => {
+    return (extra: TextProps) => {
+      const { children, ...rest } = extra;
       /**
        * Instead of rendering the <BoldTextStageed> component directly we render using the slot. If this is a staged component it will call the
        * inner closure directly, without going through createElement. Entries passed into the JSX, including children, are what appear in the
@@ -140,7 +137,7 @@ describe('useSlots sample code test suite', () => {
        * NOTE: this requires using the withSlots helper via the jsx directive. This knows how to pick apart the entries and just call the second
        * part of the function
        */
-      return <BoldText {...mergeProps(headerBaseProps, props, extra)}>{children}</BoldText>;
+      return <BoldText {...mergeProps(headerBaseProps, props, rest)}>{children}</BoldText>;
     };
   });
   HeaderStaged.displayName = 'HeaderStaged';
@@ -198,10 +195,10 @@ describe('useSlots sample code test suite', () => {
     const headerColorProps = getColorProps(headerColor);
     const captionColorProps = getColorProps(captionColor);
     return (
-      <div {...mergeProps(containerProps, rest)}>
+      <View {...mergeProps(containerProps, rest)}>
         <HeaderStandard {...headerColorProps}>{children}</HeaderStandard>
         {captionText && <BoldTextStandard {...captionColorProps}>{captionText}</BoldTextStandard>}
-      </div>
+      </View>
     );
   };
   CaptionedHeaderStandard.displayName = `CaptionedHeaderStandard';`;
@@ -212,7 +209,7 @@ describe('useSlots sample code test suite', () => {
   const useCaptionedHeaderSlots = buildUseSlots({
     /** Slots are just like above, this component will have three sub-components */
     slots: {
-      container: 'div',
+      container: View,
       header: HeaderStaged,
       caption: BoldTextStaged,
     },
@@ -230,12 +227,12 @@ describe('useSlots sample code test suite', () => {
   /**
    * now use the hook to implement it as a staged component
    */
-  const CaptionedHeaderStaged = stagedComponent<React.PropsWithChildren<HeaderWithCaptionProps>>((props) => {
+  const CaptionedHeaderStaged = phasedComponent<React.PropsWithChildren<HeaderWithCaptionProps>>((props) => {
     // At the point where this is called the slots are initialized with the initial prop values from useStyling above
     const Slots = useCaptionedHeaderSlots(props);
-    return (extra: HeaderWithCaptionProps, children: React.ReactNode) => {
+    return (extra: HeaderWithCaptionProps) => {
       // merge the props together, picking out the caption text and clearing any custom values we don't want forwarded to the view
-      const { captionText, ...rest } = mergeProps(props, extra, clearCustomProps);
+      const { children, captionText, ...rest } = mergeProps(props, extra, clearCustomProps);
 
       // now render using the slots. Any values passed in via JSX will be merged with values from the slot hook above
       return (
