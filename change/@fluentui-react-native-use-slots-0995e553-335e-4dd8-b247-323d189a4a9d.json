@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "tighten up typing for framework, fixing the resulting errors",
+  "packageName": "@fluentui-react-native/use-slots",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
