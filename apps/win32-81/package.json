@@ -1,0 +1,131 @@
+{
+  "name": "@fluentui-react-native/tester-win32-81",
+  "version": "0.38.69",
+  "description": "Fluent UI React Native Win32 Tester App for RN 0.81",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "apps/win32"
+  },
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js"
+    }
+  },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "bundle": "rnx-cli bundle --dev false",
+    "bundle-dev": "rnx-cli bundle",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
+    "prettier": "fluentui-scripts prettier",
+    "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
+    "run-win32-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh",
+    "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useDevMain ",
+    "run-win32-devmain-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh --useDevMain",
+    "start": "rnx-cli start"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "dependencies": {
+    "@fluentui-react-native/tester-core": "workspace:*",
+    "@office-iss/react-native-win32": "^0.81.0",
+    "react": "19.1.0",
+    "react-native": "^0.81.0",
+    "react-native-svg": "^15.12.1"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@babel/runtime": "catalog:",
+    "@fluentui-react-native/babel-config": "workspace:*",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@office-iss/rex-win32": "0.81.0-preview.0",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-android": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
+    "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-babel-transformer": "^0.81.0",
+    "@react-native/metro-config": "^0.81.0",
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:",
+    "@rnx-kit/cli": "catalog:",
+    "@rnx-kit/metro-config": "catalog:",
+    "@rnx-kit/metro-resolver-symlinks": "catalog:",
+    "@types/react": "~19.1.0",
+    "@types/react-test-renderer": "^19.1.0",
+    "metro-config": "^0.83.1",
+    "react-native-svg-transformer": "^1.0.0",
+    "react-native-test-app": "^4.4.11",
+    "react-test-renderer": "19.1.0",
+    "rimraf": "catalog:"
+  },
+  "furn": {
+    "depcheck": {
+      "ignoreMatches": [
+        "@office-iss/react-native-win32"
+      ]
+    }
+  },
+  "rnx-kit": {
+    "kitType": "app",
+    "bundle": [
+      {
+        "entryFile": "index.js",
+        "bundleOutput": "dist/index.win32.bundle",
+        "sourcemapOutput": "dist/index.win32.bundle.map",
+        "assetsDest": "dist",
+        "targets": [
+          "win32"
+        ],
+        "plugins": [
+          [
+            "@rnx-kit/metro-plugin-cyclic-dependencies-detector",
+            {
+              "throwOnError": true
+            }
+          ],
+          [
+            "@rnx-kit/metro-plugin-duplicates-checker",
+            {
+              "throwOnError": false,
+              "ignoredModules": [
+                "react-is"
+              ]
+            }
+          ]
+        ]
+      }
+    ],
+    "alignDeps": {
+      "requirements": {
+        "production": [
+          "react-native@0.81"
+        ]
+      },
+      "capabilities": [
+        "babel-preset-react-native",
+        "community/cli",
+        "core-win32",
+        "core/metro-config",
+        "metro-react-native-babel-transformer",
+        "react",
+        "react-test-renderer",
+        "svg",
+        "test-app",
+        "tools-core"
+      ]
+    },
+    "extends": "@fluentui-react-native/kit-config"
+  }
+}

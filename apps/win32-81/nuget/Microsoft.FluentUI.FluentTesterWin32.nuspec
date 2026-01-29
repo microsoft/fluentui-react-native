@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.FluentUI.FluentTesterWin32.81</id>
+    <version>1.0.0</version>
+    <title>FluentUI-React-Native Win32 RN 0.81 Bundle</title>
+    <authors>Microsoft Office CXE</authors>
+    <projectUrl>https://github.com/microsoft/fluentui-react-native.git</projectUrl>
+    <description>This package contains the React Native JS bundle of FluentUI-React-Native's Win32 Test App.</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <repository type="git"
+      url="https://github.com/microsoft/fluentui-react-native.git"
+      commit="$CommitId$" />
+  </metadata>
+  <files>
+    <file src="..\dist\index.win32.bundle" target="win32" />
+    <file src="..\dist\assets\**" target="win32\assets" />
+  </files>
+</package>
