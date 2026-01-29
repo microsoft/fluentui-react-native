@@ -17,7 +17,7 @@ export function useViewCommandFocus(
   /**
    * Set up the forwarding ref to enable adding the focus method.
    */
-  const focusRef = React.useRef<any>();
+  const focusRef = React.useRef<any>(null);
 
   const _setNativeRef = setAndForwardRef({
     getForwardedRef: () => forwardedRef,

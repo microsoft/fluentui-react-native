@@ -29,7 +29,7 @@ export const FocusZoneTabNavigations: FocusZoneTabNavigation[] = ['None', 'Navig
 
 // Buttons by default focus on click on Win32, but they don't on the Mac, so place focus explicitly for convenience
 function useFocusOnClickForMac(): Partial<ButtonProps> {
-  const componentRef = React.useRef<IFocusable>();
+  const componentRef = React.useRef<IFocusable>(null);
   const onClick = React.useCallback(() => componentRef.current?.focus(), [componentRef]);
   return Platform.OS === 'macos' ? { componentRef, onClick } : {};
 }
