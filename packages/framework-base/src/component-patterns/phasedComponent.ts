@@ -1,6 +1,24 @@
-import type React from 'react';
+import React from 'react';
 import { jsx, jsxs } from '../jsx-runtime';
-import type { PhasedComponent, PhasedRender } from './render.types';
+import type { ComposableFunction, PhasedComponent, PhasedRender } from './render.types';
+
+export function getPhasedRender<TProps>(component: React.ComponentType<TProps>): PhasedRender<TProps> | undefined {
+  // only a function component can have a phased render
+  if (typeof component !== 'function') {
+    // if this has a phased render function, return it
+    if ((component as PhasedComponent<TProps>)._phasedRender) {
+      return (component as PhasedComponent<TProps>)._phasedRender;
+    } else if ((component as ComposableFunction<TProps>)._staged) {
+      // for backward compatibility check for staged render and return a wrapper that maps the signature
+      const staged = (component as ComposableFunction<TProps>)._staged;
+      return (props: TProps) => {
+        const { children, ...rest } = props as React.PropsWithChildren<TProps>;
+        return staged(rest as TProps, ...React.Children.toArray(children));
+      };
+    }
+  }
+  return undefined;
+}
 
 /**
  * Take a phased render function and make a real component out of it, attaching the phased render function

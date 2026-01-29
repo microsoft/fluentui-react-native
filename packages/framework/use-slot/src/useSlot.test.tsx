@@ -6,16 +6,15 @@ import { Text, View } from 'react-native';
 import { mergeStyles } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
 
-import type { NativeReactType } from '@fluentui-react-native/framework-base';
-import { stagedComponent } from '@fluentui-react-native/framework-base';
+import { phasedComponent } from '@fluentui-react-native/framework-base';
 import { useSlot } from './useSlot';
 
-type PluggableTextProps = React.PropsWithChildren<TextProps> & { inner?: NativeReactType | React.FunctionComponent<TextProps> };
+type PluggableTextProps = React.PropsWithChildren<TextProps> & { inner?: React.FunctionComponent<TextProps> };
 
 /**
  * Text component that demonstrates pluggability, in this case via passing an alternative component type into a prop called inner.
  */
-const PluggableText = stagedComponent((props: PluggableTextProps) => {
+const PluggableText = phasedComponent((props: PluggableTextProps) => {
   // start by splitting inner and children from the incoming props
   const { inner, ...rest } = props;
 
@@ -24,15 +23,15 @@ const PluggableText = stagedComponent((props: PluggableTextProps) => {
   const Inner = useSlot(inner || Text, rest);
 
   // return a closure for finishing off render
-  return (extra: TextProps, children: React.ReactNode) => <Inner {...extra}>{children}</Inner>;
+  return (extra: TextProps) => {
+    // split children from extra props
+    const { children, ...rest } = extra;
+    return <Inner {...rest}>{children}</Inner>;
+  };
 });
 PluggableText.displayName = 'PluggableText';
 
-const useStyledStagedText = (
-  props: PluggableTextProps,
-  baseStyle: TextProps['style'],
-  inner?: NativeReactType | React.FunctionComponent<TextProps>,
-) => {
+const useStyledStagedText = (props: PluggableTextProps, baseStyle: TextProps['style'], inner?: React.FunctionComponent<TextProps>) => {
   // split out any passed in style
   const { style, ...rest } = props;
 
@@ -43,10 +42,13 @@ const useStyledStagedText = (
   const InnerText = useSlot(PluggableText, mergedProps);
 
   // return a closure to complete the staged pattern
-  return (extra: PluggableTextProps, children: React.ReactNode) => <InnerText {...extra}>{children}</InnerText>;
+  return (extra: PluggableTextProps) => {
+    const { children, ...rest } = extra;
+    return <InnerText {...rest}>{children}</InnerText>;
+  };
 };
 
-const HeaderText = stagedComponent((props: PluggableTextProps) => {
+const HeaderText = phasedComponent((props: PluggableTextProps) => {
   // could be done outside but showing the pattern of using useMemo to avoid creating a new object on every execution
   const baseStyle = React.useMemo<TextProps['style']>(() => ({ fontSize: 24, fontWeight: 'bold' }), []);
 
@@ -54,7 +56,7 @@ const HeaderText = stagedComponent((props: PluggableTextProps) => {
   return useStyledStagedText(props, baseStyle);
 });
 
-const CaptionText = stagedComponent((props: PluggableTextProps) => {
+const CaptionText = phasedComponent((props: PluggableTextProps) => {
   // memo to not recreate style every time
   const baseStyle = React.useMemo<TextProps['style']>(() => ({ fontFamily: 'Arial', fontWeight: '200' }), []);
 

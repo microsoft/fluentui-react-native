@@ -50,7 +50,8 @@ const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownPro
     [defaultRef],
   );
 
-  const RootSlot = useSlot<PressablePropsExtended>(View, props);
+  type PressableView = React.FunctionComponent<PressablePropsExtended>;
+  const RootSlot = useSlot<PressablePropsExtended>(View as unknown as PressableView, props);
   const ButtonSlot = useSlot<ButtonProps>(Button, buttonProps);
   const ExpandIconSlot = useSlot<SvgProps>(Svg, expandIconProps);
   const ListboxSlot = useSlot<ListboxProps>(Listbox, listboxProps);

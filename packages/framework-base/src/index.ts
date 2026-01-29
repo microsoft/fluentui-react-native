@@ -20,10 +20,9 @@ export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
 
 // component pattern exports
-export { renderForClassicRuntime, renderForJsxRuntime, renderSlot } from './component-patterns/render';
+export { renderForJsxRuntime, renderSlot, asDirectComponent } from './component-patterns/render';
 export type {
   DirectComponent,
-  DirectComponentFunction,
   LegacyDirectComponent,
   PhasedComponent,
   PhasedRender,
@@ -35,7 +34,12 @@ export type {
   SlotFn,
   NativeReactType,
 } from './component-patterns/render.types';
-export { phasedComponent } from './component-patterns/phasedComponent';
+export { directComponent } from './component-patterns/directComponent';
+export { getPhasedRender, phasedComponent } from './component-patterns/phasedComponent';
 export { withSlots } from './component-patterns/withSlots';
 export { stagedComponent } from './component-patterns/stagedComponent';
 export { jsx, jsxs } from './jsx-runtime';
+
+// general utilities
+export { filterProps } from './utilities/filterProps';
+export type { PropsFilter } from './utilities/filterProps';
