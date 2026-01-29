@@ -40,28 +40,27 @@
     "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/babel-config": "workspace:*",
+    "@babel/core": "catalog:",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
-    "@react-native/metro-config": "^0.74.0",
     "@types/jest": "^29.0.0",
-    "@types/react": "^18.2.0",
+    "@types/react": "~18.2.0",
     "react": "18.2.0",
     "react-native": "^0.74.0"
   },
   "peerDependencies": {
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0"
+    "react": "18.2.0"
   },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "core",
-        "tools-core"
+        "core-dev-only",
+        "tools-core",
+        "tools-jest-react"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

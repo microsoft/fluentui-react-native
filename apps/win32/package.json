@@ -1,6 +1,7 @@
 {
   "name": "@fluentui-react-native/tester-win32",
   "version": "0.38.69",
+  "description": "Fluent UI React Native Win32 Tester App",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
@@ -44,30 +45,36 @@
     "react-native-svg": ">=15.4.0 <15.13.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "catalog:",
+    "@babel/runtime": "catalog:",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030",
+    "@react-native-community/cli": "^13.6.4",
+    "@react-native-community/cli-platform-android": "^13.6.4",
+    "@react-native-community/cli-platform-ios": "^13.6.4",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:",
     "@rnx-kit/cli": "^0.18.14",
     "@rnx-kit/metro-config": "^2.1.0",
     "@rnx-kit/metro-resolver-symlinks": "^0.2.5",
-    "@types/react": "^18.2.0",
+    "@types/react": "~18.2.0",
     "@types/react-test-renderer": "^18.2.0",
     "metro-config": "^0.80.3",
     "react-native-svg-transformer": "^1.0.0",
+    "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
     "rimraf": "catalog:"
   },
-  "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0"
-  },
-  "peerDependenciesMeta": {
-    "@office-iss/react-native-win32": {
-      "optional": true
+  "furn": {
+    "depcheck": {
+      "ignoreMatches": [
+        "@office-iss/react-native-win32"
+      ]
     }
   },
   "rnx-kit": {
@@ -108,12 +115,14 @@
       },
       "capabilities": [
         "babel-preset-react-native",
-        "core",
+        "community/cli",
+        "core-win32",
         "metro-config",
         "metro-react-native-babel-transformer",
         "react",
         "react-test-renderer",
         "svg",
+        "test-app",
         "tools-core"
       ]
     },

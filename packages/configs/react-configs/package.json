@@ -1,0 +1,44 @@
+{
+  "name": "@fluentui-react-native/react-configs",
+  "private": true,
+  "version": "0.1.1",
+  "description": "Babel and Jest configurations for pure React testing",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/configs/react-configs"
+  },
+  "main": "./babel.react.config.js",
+  "exports": {
+    ".": "./babel.react.config.js",
+    "./babel.react.config.js": "./babel.react.config.js",
+    "./jest.config.js": "./jest.config.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "catalog:",
+    "@babel/plugin-transform-react-jsx": "catalog:",
+    "@babel/plugin-transform-react-jsx-source": "catalog:",
+    "@babel/plugin-transform-typescript": "catalog:",
+    "@babel/preset-env": "catalog:",
+    "@babel/preset-react": "catalog:",
+    "@babel/preset-typescript": "catalog:",
+    "@babel/runtime": "catalog:",
+    "babel-jest": "^29.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:"
+  },
+  "peerDependencies": {
+    "@babel/core": "*"
+  },
+  "furn": {
+    "packageType": "tooling"
+  },
+  "beachball": {
+    "shouldPublish": false,
+    "disallowedChangeTypes": [
+      "major"
+    ]
+  }
+}

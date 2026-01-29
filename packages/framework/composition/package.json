@@ -40,34 +40,30 @@
     "@fluentui-react-native/use-styling": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
-    "@types/react": "18.2.0",
+    "@types/react": "~18.2.0",
     "@types/react-test-renderer": "^18.2.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "react-test-renderer": "18.2.0"
   },
   "peerDependencies": {
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0"
+    "react": "18.2.0"
   },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "babel-preset-react-native",
-        "core",
-        "core-android",
-        "core-ios",
+        "core-dev-only",
         "react-test-renderer",
-        "tools-core"
+        "tools-core",
+        "tools-jest"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

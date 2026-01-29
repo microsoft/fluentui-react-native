@@ -36,7 +36,7 @@
     "@fluentui-react-native/tokens": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/design-tokens-win32": "^0.53.0",
     "@fluentui-react-native/design-tokens-windows": "^0.53.0",
@@ -81,7 +81,8 @@
         "core-macos",
         "core-windows",
         "react",
-        "tools-core"
+        "tools-core",
+        "tools-jest"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"
