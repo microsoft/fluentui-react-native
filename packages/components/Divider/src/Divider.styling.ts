@@ -180,7 +180,7 @@ function getRootStyleWorker(rootStyle: StyleProp<ViewStyle>, isVertical: boolean
   if (isVertical) {
     minHeight = hasContent ? 84 : globalTokens.size200;
   }
-  return mergeStyles(rootStyle, { minHeight });
+  return mergeStyles<ViewStyle>(rootStyle, { minHeight });
 }
 
 /**
@@ -190,7 +190,7 @@ function getRootStyleWorker(rootStyle: StyleProp<ViewStyle>, isVertical: boolean
 export const getBeforeLineStyle = memoize(getBeforeLineStyleWorker);
 function getBeforeLineStyleWorker(beforeLineStyle: StyleProp<ViewStyle>, hasContent: boolean): StyleProp<ViewStyle> {
   if (!hasContent) {
-    return mergeStyles(beforeLineStyle, { flex: 1 });
+    return mergeStyles<ViewStyle>(beforeLineStyle, { flex: 1 });
   }
   return beforeLineStyle;
 }

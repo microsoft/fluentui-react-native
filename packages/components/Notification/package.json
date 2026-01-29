@@ -47,7 +47,7 @@
     "@fluentui-react-native/use-styling": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
@@ -99,7 +99,8 @@
         "react",
         "react-test-renderer",
         "svg",
-        "tools-core"
+        "tools-core",
+        "tools-jest"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

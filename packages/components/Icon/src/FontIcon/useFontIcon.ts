@@ -13,7 +13,7 @@ export const useFontIcon = (props: FontIconProps): FontIconProps => {
     [color, fontSize, fontFamily],
   )[0];
 
-  const mergedStyle = mergeStyles(style, styleOrig);
+  const mergedStyle = mergeStyles<TextStyle>(style, styleOrig);
 
   return {
     accessible: accessible ?? true,

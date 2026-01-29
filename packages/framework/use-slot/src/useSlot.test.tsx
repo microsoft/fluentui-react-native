@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import type { TextProps } from 'react-native';
+import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 
 import { type FunctionComponent, mergeStyles } from '@fluentui-react-native/framework-base';
@@ -33,7 +33,7 @@ PluggableText.displayName = 'PluggableText';
 
 const useStyledStagedText = (props: PluggableTextProps, baseStyle: TextProps['style'], inner?: React.FunctionComponent<TextProps>) => {
   // create merged props to pass in to the inner slot
-  const mergedProps = { ...props, style: mergeStyles(baseStyle, props.style), ...(inner && { inner }) } as PluggableTextProps;
+  const mergedProps = { ...rest, style: mergeStyles<PluggableTextProps>(baseStyle, style), ...(inner && { inner }) };
 
   // create a slot based on the pluggable text
   const InnerText = useSlot(PluggableText, mergedProps);
@@ -65,7 +65,7 @@ const CaptionText = phasedComponent((props: PluggableTextProps) => {
 const HeaderCaptionText1 = (props: TextProps) => {
   const { children, ...rest } = props;
   const baseStyle = React.useMemo<TextProps['style']>(() => ({ fontSize: 24, fontWeight: 'bold' }), []);
-  const mergedProps = { ...rest, style: mergeStyles(baseStyle, props.style) };
+  const mergedProps = { ...rest, style: mergeStyles<TextStyle>(baseStyle, props.style) };
   const InnerText = useSlot(CaptionText, mergedProps);
   return <InnerText>{children}</InnerText>;
 };

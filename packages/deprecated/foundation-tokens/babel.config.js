@@ -1,1 +1,1 @@
-module.exports = require('@fluentui-react-native/babel-config/babel.react.config.js');
+module.exports = require('@fluentui-react-native/react-configs/babel.react.config.js');

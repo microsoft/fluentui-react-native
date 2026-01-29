@@ -123,7 +123,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   const updateStyles = React.useCallback(
     (update: AnimatedIndicatorStyles) => {
-      setUserDefinedAnimatedIndicatorStyles((prev) => mergeStyles(prev, update));
+      setUserDefinedAnimatedIndicatorStyles((prev) => mergeStyles<AnimatedIndicatorStyles>(prev, update));
     },
     [setUserDefinedAnimatedIndicatorStyles],
   );

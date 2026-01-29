@@ -39,12 +39,11 @@
     "yargs": "^17.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.0",
-    "@babel/preset-env": "^7.8.0",
-    "@fluentui-react-native/babel-config": "workspace:*",
+    "@babel/core": "catalog:",
+    "@babel/preset-env": "catalog:",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@types/jscodeshift": "^0.11.11",
@@ -65,7 +64,8 @@
     "extends": "@fluentui-react-native/kit-config",
     "alignDeps": {
       "capabilities": [
-        "tools-core"
+        "tools-core",
+        "tools-jest-react"
       ]
     }
   }

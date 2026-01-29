@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, type ViewStyle } from 'react-native';
 
 import { Text } from '@fluentui/react-native';
 import { Shadow, getShadowTokenStyleSet } from '@fluentui-react-native/experimental-shadow';
@@ -42,7 +42,7 @@ const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: Shado
 
   return (
     <Shadow shadowToken={props.shadowToken}>
-      <View style={mergeStyles(themedStyles.shadowTestBox, backgroundColor)}>
+      <View style={mergeStyles<ViewStyle>(themedStyles.shadowTestBox, backgroundColor)}>
         <Text variant="bodySemibold" color={textColor}>
           {props.shadowDepthText}
         </Text>
@@ -54,7 +54,7 @@ const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: Shado
 
 export const ShadowDepthTestSection: React.FunctionComponent = () => {
   const theme = useFluentTheme();
-  const backgroundViewStyle = shadowTestPageStyles(theme).backgroundColor;
+  const backgroundViewStyle = mergeStyles<ViewStyle>(shadowTestPageStyles(theme).backgroundColor);
 
   return (
     <View style={backgroundViewStyle}>

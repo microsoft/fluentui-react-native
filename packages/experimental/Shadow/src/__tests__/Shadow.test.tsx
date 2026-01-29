@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, type ViewStyle } from 'react-native';
 
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { Pressable } from '@fluentui-react-native/pressable';
@@ -46,7 +46,7 @@ const TestShadowOnChildViewWithProps: React.FunctionComponent<ShadowOnChildViewW
   const theme = useFluentTheme();
   return (
     <Shadow shadowToken={theme.shadows['shadow16']}>
-      <View style={mergeStyles(props.childViewStyleProps, backgroundColor)}>
+      <View style={mergeStyles<ViewStyle>(props.childViewStyleProps, backgroundColor)}>
         <Text>{JSON.stringify(props.childViewStyleProps)}</Text>
       </View>
     </Shadow>
