@@ -32,8 +32,11 @@ const PluggableText = phasedComponent((props: PluggableTextProps) => {
 PluggableText.displayName = 'PluggableText';
 
 const useStyledStagedText = (props: PluggableTextProps, baseStyle: TextProps['style'], inner?: React.FunctionComponent<TextProps>) => {
+  // extract style from props
+  const { style, ...rest } = props;
+
   // create merged props to pass in to the inner slot
-  const mergedProps = { ...rest, style: mergeStyles<PluggableTextProps>(baseStyle, style), ...(inner && { inner }) };
+  const mergedProps = { ...rest, style: mergeStyles(baseStyle, style), ...(inner && { inner }) } as PluggableTextProps;
 
   // create a slot based on the pluggable text
   const InnerText = useSlot(PluggableText, mergedProps);
