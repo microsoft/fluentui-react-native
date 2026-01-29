@@ -14,6 +14,11 @@ export type RenderType = Parameters<typeof ReactJSX.jsx>[0] | string;
 export type NativeReactType = RenderType;
 
 /**
+ * Get the props from a react component type
+ */
+export type PropsOf<TComponent> = TComponent extends React.JSXElementConstructor<infer P> ? P : never;
+
+/**
  * DIRECT RENDERING
  *
  * This is a pattern where a function can by called directly to render a component, bypassing creating additional layers of the

@@ -42,8 +42,8 @@ export const Switch = compose<SwitchType>({
   slots: {
     root: Pressable,
     label: Text,
-    track: Animated.View as unknown as typeof View, // Conversion from View to Animated.View for Animated API to work
-    thumb: Animated.View as unknown as typeof View, // Conversion from View to Animated.View for Animated API to work
+    track: Animated.View,
+    thumb: Animated.View,
     toggleContainer: View,
     onOffTextContainer: View,
     onOffText: Text,

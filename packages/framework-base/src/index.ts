@@ -27,6 +27,7 @@ export type {
   LegacyDirectComponent,
   PhasedComponent,
   PhasedRender,
+  PropsOf,
   RenderType,
   RenderResult,
   StagedRender,
