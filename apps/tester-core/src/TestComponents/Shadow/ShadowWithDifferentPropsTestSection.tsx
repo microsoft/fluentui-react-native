@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, type ViewStyle } from 'react-native';
 
 import { Text } from '@fluentui/react-native';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
@@ -66,23 +66,23 @@ export const ShadowWithDifferentPropsTestSection: React.FunctionComponent = () =
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
-          <View style={mergeStyles(themedStyles.defaultShadowTestBoxPropsWithoutSpacing, themedStyles.paddingTestProps)}>
+          <View style={mergeStyles<ViewStyle>(themedStyles.defaultShadowTestBoxPropsWithoutSpacing, themedStyles.paddingTestProps)}>
             <Text variant="bodySemibold">padding only</Text>
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
-          <View style={mergeStyles(themedStyles.defaultShadowTestBoxPropsWithoutSpacing, themedStyles.marginTestProps)}>
+          <View style={mergeStyles<ViewStyle>(themedStyles.defaultShadowTestBoxPropsWithoutSpacing, themedStyles.marginTestProps)}>
             <Text variant="bodySemibold">margins only</Text>
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
-          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, themedStyles.borderRadiusTestProps)}>
+          <View style={mergeStyles<ViewStyle>(themedStyles.defaultShadowTestBoxProps, themedStyles.borderRadiusTestProps)}>
             <Text variant="bodySemibold">borderRadius: 8</Text>
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
           <View
-            style={mergeStyles(
+            style={mergeStyles<ViewStyle>(
               themedStyles.defaultShadowTestBoxProps,
               themedStyles.borderRadiusTestProps,
               themedStyles.borderWidthTestProps,
@@ -92,22 +92,22 @@ export const ShadowWithDifferentPropsTestSection: React.FunctionComponent = () =
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
-          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, themedStyles.offsetTestProps)}>
+          <View style={mergeStyles<ViewStyle>(themedStyles.defaultShadowTestBoxProps, themedStyles.offsetTestProps)}>
             <Text variant="bodySemibold">start: 10</Text>
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
-          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, themedStyles.alignItemsTestProps)}>
+          <View style={mergeStyles<ViewStyle>(themedStyles.defaultShadowTestBoxProps, themedStyles.alignItemsTestProps)}>
             <Text variant="bodySemibold">alignItems: flex-start</Text>
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
-          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, themedStyles.flexDirectionTestProps)}>
+          <View style={mergeStyles<ViewStyle>(themedStyles.defaultShadowTestBoxProps, themedStyles.flexDirectionTestProps)}>
             <Text variant="bodySemibold">flexDirection: row</Text>
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
-          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, themedStyles.flexWrapTestProps)}>
+          <View style={mergeStyles<ViewStyle>(themedStyles.defaultShadowTestBoxProps, themedStyles.flexWrapTestProps)}>
             <Text variant="bodySemibold">flexWrap: wrap</Text>
           </View>
         </Shadow>

@@ -1,5 +1,5 @@
 import { Image, Platform, View } from 'react-native';
-import type { ImageStyle, TextStyle } from 'react-native';
+import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache, getTypedMemoCache } from '@fluentui-react-native/framework';
@@ -13,7 +13,7 @@ const rasterImageStyleCache = getTypedMemoCache<ImageStyle>();
 
 function renderRasterImage(iconProps: IconProps) {
   const { width, height, color } = iconProps;
-  const style = mergeStyles(
+  const style = mergeStyles<ImageStyle>(
     iconProps.style,
     rasterImageStyleCache({ width: width, height: height, tintColor: color }, [width, height, color])[0],
   );
@@ -68,7 +68,7 @@ function renderFontIcon(iconProps: IconProps) {
 function renderSvg(iconProps: IconProps) {
   const svgIconProps: SvgIconProps = iconProps.svgSource;
   const { accessible, accessibilityLabel, width, height, color } = iconProps;
-  const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width, height }, [width, height])[0]);
+  const style = mergeStyles<ViewStyle>(iconProps.style, rasterImageStyleCache({ width, height }, [width, height])[0]);
 
   const svgProps: SvgProps = { width, height, color };
   if (svgIconProps.viewBox) {
