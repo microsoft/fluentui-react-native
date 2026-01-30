@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { ViewStyle } from 'react-native';
+import type { ViewStyle, ViewProps } from 'react-native';
 
 import type { DirectionalHint } from '@fluentui-react-native/callout';
 
@@ -51,4 +51,8 @@ export interface TooltipSlotProps {
 export interface TooltipType {
   props: TooltipProps;
   slotProps: TooltipSlotProps;
+}
+
+export interface NativeProps extends ViewProps {
+  content?: string;
 }

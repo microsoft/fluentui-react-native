@@ -1,5 +1,5 @@
 import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
+import { requireNativeComponent } from 'react-native';
 
 import type { NativeProps, CalloutComponentType, CalloutNativeCommands } from './CalloutNativeComponent.types';
 
@@ -7,4 +7,5 @@ export const Commands: CalloutNativeCommands = codegenNativeCommands<CalloutNati
   supportedCommands: ['blurWindow', 'focusWindow'],
 });
 
-export default codegenNativeComponent<NativeProps>('RCTCallout') as CalloutComponentType;
+// no fabric for Win32, just use requireNativeComponent
+export default requireNativeComponent<NativeProps>('RCTCallout') as CalloutComponentType;

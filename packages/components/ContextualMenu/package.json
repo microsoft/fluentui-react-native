@@ -97,7 +97,7 @@
         "core-ios",
         "core-macos",
         "core-windows",
-        "metro-config",
+        "core/metro-config",
         "react",
         "react-test-renderer",
         "svg",

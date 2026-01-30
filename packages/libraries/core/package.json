@@ -59,7 +59,7 @@
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
-    "@rnx-kit/cli": "^0.18.14",
+    "@rnx-kit/cli": "catalog:",
     "@types/react": "~18.2.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",

@@ -172,13 +172,13 @@ const StandardCallout: React.FunctionComponent = () => {
   }, []);
 
   const onShiftFocusToCallout = React.useCallback(() => {
-    calloutRef?.current.focusWindow();
+    calloutRef?.current.focusWindow(null);
   }, [calloutRef]);
   const onShiftFocusToCalloutButton = React.useCallback(() => {
     calloutButtonRef?.current?.focus?.();
   }, [calloutButtonRef]);
   const onShiftFocusToPage = React.useCallback(() => {
-    calloutRef?.current.blurWindow();
+    calloutRef?.current.blurWindow(null);
   }, [calloutRef]);
   const onRestoreFocusStandardCallout = React.useCallback(
     (restoreFocusEvent: RestoreFocusEvent) => {

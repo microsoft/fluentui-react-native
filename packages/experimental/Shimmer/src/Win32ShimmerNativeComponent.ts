@@ -4,14 +4,14 @@
  * @format
  */
 
-import type { HostComponent, ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 import type { Double } from 'react-native/Libraries/Types/CodegenTypes';
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
+import { requireNativeComponent } from 'react-native';
 
 export interface NativeProps extends ViewProps {
   delay?: Double;
   duration?: Double;
 }
 
-export default codegenNativeComponent<NativeProps>('RCTNativeAnimatedShimmer') as HostComponent<NativeProps>;
+export default requireNativeComponent<NativeProps>('RCTNativeAnimatedShimmer');
