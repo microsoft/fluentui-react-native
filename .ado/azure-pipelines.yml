@@ -29,12 +29,68 @@ jobs:
         displayName: 'check prettier'
 
       - script: |
+          yarn lint-lockfile
+        displayName: 'run lint-lockfile'
+
+      - script: |
           yarn buildci
         displayName: 'yarn buildci [test]'
 
       - script: |
           yarn check-for-changed-files
         displayName: 'verify API and Ensure Changed Files'
+
+  # Dedicated job to preview version bumps and package publishing
+  - job: NPMPublishDryRun
+    displayName: NPM Publish Dry Run
+    pool:
+      vmImage: 'ubuntu-latest'
+    timeoutInMinutes: 30
+    cancelTimeoutInMinutes: 5
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      - template: templates/setup-repo.yml
+
+      - script: |
+          set -eox pipefail
+          echo "=========================================="
+          echo "Running beachball bump (dry-run)..."
+          echo "=========================================="
+          npx beachball bump --verbose
+
+          echo ""
+          echo "=========================================="
+          echo "Packages that would be bumped:"
+          echo "=========================================="
+
+          # Show which package.json files were modified
+          git diff --name-only | grep "package.json" | grep -v "^package.json$" | while read pkg; do
+            if [ -f "$pkg" ]; then
+              NAME=$(grep '"name"' "$pkg" | head -1 | sed 's/.*"name": "\(.*\)".*/\1/')
+              VERSION=$(grep '"version"' "$pkg" | head -1 | sed 's/.*"version": "\(.*\)".*/\1/')
+              PRIVATE=$(grep '"private"' "$pkg" | head -1 || echo "")
+
+              if [ -z "$PRIVATE" ]; then
+                echo "  📦 $NAME@$VERSION"
+              fi
+            fi
+          done
+
+          # Reset the changes so they don't affect other steps
+          git reset --hard HEAD
+        displayName: 'Preview version bumps (dry-run)'
+
+      - script: |
+          set -eox pipefail
+          echo ""
+          echo "=========================================="
+          echo "Checking which packages need publishing..."
+          echo "=========================================="
+          node scripts/check-packages-need-publishing.ts --dry-run
+        displayName: 'Check packages to publish (dry-run)'
 
   - job: AndroidPR
     displayName: Android PR
@@ -146,8 +202,7 @@ jobs:
     displayName: Windows PR
     pool:
       name: rnw-pool-4
-      demands:
-        - ImageOverride -equals rnw-img-vs2022-node18
+      demands: ImageOverride -equals rnw-img-vs2022-node22
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -168,7 +223,8 @@ jobs:
   - job: Win32PR
     displayName: Win32 PR
     pool:
-      vmImage: 'windows-2019'
+      name: rnw-pool-4
+      demands: ImageOverride -equals rnw-img-vs2022-node22
     timeoutInMinutes: 60
     cancelTimeoutInMinutes: 5
 
