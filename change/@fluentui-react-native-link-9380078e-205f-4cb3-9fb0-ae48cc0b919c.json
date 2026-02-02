@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "fix dead links in markdown files",
+  "packageName": "@fluentui-react-native/link",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "none"
+}
