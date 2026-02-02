@@ -122,6 +122,11 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
   for (const cap of Object.keys(newPreset)) {
     const pkgEntry = newPreset[cap] as Package;
     if (pkgEntry) {
+      // patch metro/metro-core/etc packages to not allow progressing beyond 83.1 because
+      // of serializer incompatibility
+      if (cap.startsWith('metro') && pkgEntry.version.startsWith('^83.1')) {
+        pkgEntry.version = pkgEntry.version.replace('^83.1', '83.1');
+      }
       // add dev-only capability if this is a core capability
       const devCap = toDevCapability(cap);
       if (cap !== devCap && !pkgEntry.devOnly) {

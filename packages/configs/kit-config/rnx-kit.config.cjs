@@ -5,7 +5,7 @@ const config = {
     presets: ['@fluentui-react-native/kit-config/furn-preset.ts'],
     requirements: {
       development: ['react-native@0.74'],
-      production: ['react-native@0.73 || 0.74'],
+      production: ['react-native@0.73 || 0.74 || 0.78 || 0.81'],
     },
   },
 };

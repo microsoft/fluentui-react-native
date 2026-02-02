@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "add win32 test app for 0.81",
+  "packageName": "@fluentui-react-native/tester-win32-81",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}

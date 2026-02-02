@@ -4,10 +4,10 @@
  * @format
  */
 
-import type { HostComponent, ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 import type { WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
+import { requireNativeComponent } from 'react-native';
 
 import type { UnsafeMixed } from './codegenTypes';
 // Should be:
@@ -23,4 +23,4 @@ export interface NativeProps extends ViewProps {
   isTabNavigation?: boolean;
 }
 
-export default codegenNativeComponent<NativeProps>('RCTFocusZone') as HostComponent<NativeProps>;
+export default requireNativeComponent<NativeProps>('RCTFocusZone');

@@ -44,7 +44,9 @@ let config = makeMetroConfig({
   resolver: {
     blockList,
     extraNodeModules,
-    resolveRequest: MetroSymlinksResolver(),
+    resolveRequest: MetroSymlinksResolver({
+      resolver: 'oxc-resolver',
+    }),
   },
   transformer: {
     // This transformer selects between the regular transformer and svg transformer depending on the file type
