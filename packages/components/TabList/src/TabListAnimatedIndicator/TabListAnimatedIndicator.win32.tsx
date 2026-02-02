@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import type { Animated, ViewProps, ViewStyle } from 'react-native';
 
-import { phasedComponent, memoize } from '@fluentui-react-native/framework-base';
+import { phasedComponent, memoize, directComponent } from '@fluentui-react-native/framework-base';
 
 import type { AnimatedIndicatorProps } from './TabListAnimatedIndicator.types';
 import { tablistAnimatedIndicatorName } from './TabListAnimatedIndicator.types';
@@ -18,10 +18,10 @@ function indicatorPropsWorker(animationClass: string, style: Animated.AnimatedPr
  */
 export const TabListAnimatedIndicator = phasedComponent<AnimatedIndicatorProps>((props) => {
   const styles = useAnimatedIndicatorStyles(props);
-  return () => {
+  return directComponent<AnimatedIndicatorProps>(() => {
     const indicatorProps = getIndicatorProps('Ribbon_TabUnderline', styles);
     return <View {...indicatorProps} />;
-  };
+  });
 });
 TabListAnimatedIndicator.displayName = tablistAnimatedIndicatorName;
 

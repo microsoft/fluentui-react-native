@@ -1,6 +1,6 @@
 import React from 'react';
-import { jsx, jsxs } from '../jsx-runtime';
 import type { ComposableFunction, PhasedComponent, PhasedRender, FunctionComponent } from './render.types';
+import { renderForJsxRuntime } from './render';
 
 export function getPhasedRender<TProps>(component: React.ComponentType<TProps>): PhasedRender<TProps> | undefined {
   // only a function component can have a phased render
@@ -31,12 +31,7 @@ export function phasedComponent<TProps>(getInnerPhase: PhasedRender<TProps>): Fu
       // pull out children from props
       const { children, ...outerProps } = props;
       const Inner = getInnerPhase(outerProps as TProps);
-
-      if (Array.isArray(children) && children.length > 1) {
-        return jsxs(Inner, { children });
-      } else {
-        return jsx(Inner, { children });
-      }
+      return renderForJsxRuntime(Inner, { children });
     },
     { _phasedRender: getInnerPhase },
   );

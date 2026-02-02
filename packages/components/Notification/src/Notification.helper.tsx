@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { ButtonProps, ButtonTokens } from '@fluentui-react-native/button';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
+import { mergeProps, phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/icon';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
@@ -86,9 +86,9 @@ export const NotificationButton = phasedComponent((props: NotificationButtonProp
     [props.color, props.disabledColor, props.pressedColor],
   );
 
-  return (final: NotificationButtonProps) => {
+  return directComponent<NotificationButtonProps>((final: NotificationButtonProps) => {
     const { children, ...rest } = final;
     const mergedProps = mergeProps(props, rest);
     return <CustomizedButton {...mergedProps}>{children}</CustomizedButton>;
-  };
+  });
 });

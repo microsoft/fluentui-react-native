@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import { mergeProps, phasedComponent, memoize, mergeStyles } from '@fluentui-react-native/framework-base';
+import { mergeProps, directComponent, phasedComponent, memoize, mergeStyles } from '@fluentui-react-native/framework-base';
 
 import type { OverflowItemProps } from './OverflowItem.types';
 import { overflowItemName } from './OverflowItem.types';
@@ -14,7 +14,7 @@ function overflowItemPropWorker(props: ViewProps, style: StyleProp<ViewStyle>): 
 
 export const OverflowItem = phasedComponent<OverflowItemProps>((userProps: OverflowItemProps) => {
   const { props, state } = useOverflowItem(userProps);
-  return (finalProps: OverflowItemProps) => {
+  return directComponent<OverflowItemProps>((finalProps: OverflowItemProps) => {
     const { children, ...rest } = finalProps;
     if (state.layoutDone && !state.visible) {
       return null;
@@ -41,7 +41,7 @@ export const OverflowItem = phasedComponent<OverflowItemProps>((userProps: Overf
 
     const clone = React.cloneElement(child, viewProps);
     return clone;
-  };
+  });
 });
 OverflowItem.displayName = overflowItemName;
 

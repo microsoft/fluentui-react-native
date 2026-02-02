@@ -38,14 +38,13 @@ export function renderForJsxRuntime<TProps>(
 
   // auto-detect whether to use jsx or jsxs based on number of children, 0 or 1 = jsx, more than 1 = jsxs
   if (!jsxFn) {
-    const children = props.children;
-    if (Array.isArray(children) && children.length > 1) {
+    if (React.Children.count(props.children) > 1) {
       jsxFn = ReactJSX.jsxs;
     } else {
       jsxFn = ReactJSX.jsx;
     }
   }
-  // now call the appropriate jsx function to
+  // now call the appropriate jsx function to render the component
   return jsxFn(type, props, key);
 }
 

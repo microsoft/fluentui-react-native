@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 
-import { mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
+import { mergeProps, phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 
 import type { OverflowProps } from './Overflow.types';
 import { overflowName } from './Overflow.types';
@@ -9,7 +9,7 @@ import { OverflowContext } from '../OverflowContext';
 
 export const Overflow = phasedComponent<OverflowProps>((initial: OverflowProps) => {
   const { props, state } = useOverflow(initial);
-  return (final: OverflowProps) => {
+  return directComponent<OverflowProps>((final: OverflowProps) => {
     const { children, ...rest } = final;
     const mergedProps = mergeProps(props, rest);
     return (
@@ -17,7 +17,7 @@ export const Overflow = phasedComponent<OverflowProps>((initial: OverflowProps) 
         <View {...mergedProps}>{children}</View>
       </OverflowContext.Provider>
     );
-  };
+  });
 });
 Overflow.displayName = overflowName;
 

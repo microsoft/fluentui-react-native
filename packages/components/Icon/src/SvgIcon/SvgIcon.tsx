@@ -1,6 +1,6 @@
 import { Platform, View } from 'react-native';
 
-import { mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
+import { mergeProps, phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 import { SvgUri } from 'react-native-svg';
 
 import type { SvgIconProps } from './SvgIcon.types';
@@ -9,7 +9,7 @@ import { useSvgIcon } from './useSvgIcon';
 
 export const SvgIcon = phasedComponent((props: SvgIconProps) => {
   const svgProps = useSvgIcon(props);
-  return (final: SvgIconProps) => {
+  return directComponent<SvgIconProps>((final: SvgIconProps) => {
     const { style, height, width, src, uri, viewBox, color, ...rest } = mergeProps<SvgIconProps>(svgProps, final);
     const svgIconsSupported = Platform.OS !== 'windows';
 
@@ -22,7 +22,7 @@ export const SvgIcon = phasedComponent((props: SvgIconProps) => {
         )}
       </View>
     ) : null;
-  };
+  });
 });
 
 SvgIcon.displayName = svgIconName;

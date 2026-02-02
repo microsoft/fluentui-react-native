@@ -11,15 +11,12 @@ exports[`Overflow component tests Overflow default 1`] = `
   }
   onLayout={[Function]}
   style={
-    [
-      undefined,
-      {
-        "display": "flex",
-        "flexDirection": "row",
-        "opacity": 0,
-        "padding": undefined,
-      },
-    ]
+    {
+      "display": "flex",
+      "flexDirection": "row",
+      "opacity": 0,
+      "padding": undefined,
+    }
   }
 >
   <View

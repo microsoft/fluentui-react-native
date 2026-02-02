@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { phasedComponent } from '@fluentui-react-native/framework-base';
+import { phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 
 import type { MenuProps } from './Menu.types';
 import { menuName } from './Menu.types';
@@ -12,7 +12,7 @@ export const Menu = phasedComponent((props: MenuProps) => {
   const state = useMenu(props);
   const contextValue = useMenuContextValue(state);
 
-  return (rest: MenuProps) => {
+  return directComponent<MenuProps>((rest: MenuProps) => {
     const childrenArray = React.Children.toArray(rest.children) as React.ReactElement[];
 
     if (__DEV__) {
@@ -21,7 +21,7 @@ export const Menu = phasedComponent((props: MenuProps) => {
       }
     }
     return renderFinalMenu(childrenArray, contextValue, state);
-  };
+  });
 });
 
 Menu.displayName = menuName;

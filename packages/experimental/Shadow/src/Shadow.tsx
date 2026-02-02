@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
-import { memoize, mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
+import { memoize, mergeProps, phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 import type { ShadowToken } from '@fluentui-react-native/theme-types';
 
 import type { ShadowProps } from './Shadow.types';
@@ -10,7 +10,7 @@ import { shadowName } from './Shadow.types';
 import { getShadowTokenStyleSet } from './shadowStyle';
 
 export const Shadow = phasedComponent((props: ShadowProps) => {
-  return (final: ShadowProps) => {
+  return directComponent<ShadowProps>((final: ShadowProps) => {
     const { children, ...rest } = final;
     if (!props.shadowToken) {
       return <>{children}</>;
@@ -25,7 +25,7 @@ export const Shadow = phasedComponent((props: ShadowProps) => {
     const childWithInnerShadow = React.cloneElement(children, innerShadowViewProps);
 
     return <View {...outerShadowViewProps}>{childWithInnerShadow}</View>;
-  };
+  });
 });
 
 const getStylePropsForShadowViews = memoize(getStylePropsForShadowViewsWorker);

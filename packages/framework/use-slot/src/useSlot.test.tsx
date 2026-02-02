@@ -6,7 +6,7 @@ import { Text, View } from 'react-native';
 import { type FunctionComponent, mergeStyles } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
 
-import { phasedComponent } from '@fluentui-react-native/framework-base';
+import { phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 import { useSlot } from './useSlot';
 
 type PluggableTextProps = TextProps & { inner?: FunctionComponent<TextProps> };
@@ -23,11 +23,11 @@ const PluggableText = phasedComponent((props: PluggableTextProps) => {
   const Inner = useSlot(inner || Text, rest);
 
   // return a closure for finishing off render
-  return (extra: TextProps) => {
+  return directComponent<TextProps>((extra: TextProps) => {
     // split children from extra props
     const { children, ...rest } = extra;
     return <Inner {...rest}>{children}</Inner>;
-  };
+  });
 });
 PluggableText.displayName = 'PluggableText';
 
@@ -42,10 +42,10 @@ const useStyledStagedText = (props: PluggableTextProps, baseStyle: TextProps['st
   const InnerText = useSlot(PluggableText, mergedProps);
 
   // return a closure to complete the staged pattern
-  return (extra: PluggableTextProps) => {
+  return directComponent<PluggableTextProps>((extra: PluggableTextProps) => {
     const { children, ...rest } = extra;
     return <InnerText {...rest}>{children}</InnerText>;
-  };
+  });
 };
 
 const HeaderText = phasedComponent((props: PluggableTextProps) => {

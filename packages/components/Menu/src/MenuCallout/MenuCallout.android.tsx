@@ -1,6 +1,6 @@
 import { Animated, Modal, TouchableWithoutFeedback, View, StyleSheet, ScrollView } from 'react-native';
 
-import { mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
+import { mergeProps, phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 
 import type { MenuCalloutProps } from './MenuCallout.types';
 import { menuCalloutName } from './MenuCallout.types';
@@ -11,7 +11,7 @@ const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 export const MenuCallout = phasedComponent((props: MenuCalloutProps) => {
   const context = useMenuContext();
 
-  return (innerProps: MenuCalloutProps) => {
+  return directComponent<MenuCalloutProps>((innerProps: MenuCalloutProps) => {
     const { children, ...rest } = mergeProps<MenuCalloutProps>(props, innerProps);
     const mergedProps = mergeProps(props, rest);
     const tokens = props.tokens;
@@ -51,7 +51,7 @@ export const MenuCallout = phasedComponent((props: MenuCalloutProps) => {
         </TouchableWithoutFeedback>
       </Modal>
     );
-  };
+  });
 });
 
 MenuCallout.displayName = menuCalloutName;
