@@ -1,6 +1,7 @@
 import React from 'react';
 import type { ComposableFunction, PhasedComponent, PhasedRender, FunctionComponent } from './render.types';
 import { renderForJsxRuntime } from './render';
+import type { LegacyDirectComponent } from './render.types';
 
 export function getPhasedRender<TProps>(component: React.ComponentType<TProps>): PhasedRender<TProps> | undefined {
   // only a function component can have a phased render
@@ -13,7 +14,14 @@ export function getPhasedRender<TProps>(component: React.ComponentType<TProps>):
       const staged = (component as ComposableFunction<TProps>)._staged;
       return (props: TProps) => {
         const { children, ...rest } = props as React.PropsWithChildren<TProps>;
-        return staged(rest as TProps, ...React.Children.toArray(children));
+        const inner = staged(rest as TProps, ...React.Children.toArray(children));
+        // staged render functions were not consistently marking contents as composable, though they were treated
+        // as such in useHook. To maintain compatibility we mark the returned function as composable here. This was
+        // dangerous, but this shim is necessary for backward compatibility. The newer pattern is explicit about this.
+        if (typeof inner === 'function' && !(inner as LegacyDirectComponent<TProps>)._canCompose) {
+          return Object.assign(inner, { _canCompose: true });
+        }
+        return inner;
       };
     }
   }
