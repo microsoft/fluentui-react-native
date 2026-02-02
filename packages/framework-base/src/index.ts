@@ -19,11 +19,14 @@ export type { StyleProp } from './merge-props/mergeStyles.types';
 export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
 
-// component pattern exports
+// component pattern exports - rendering utilities
 export { renderForJsxRuntime, renderSlot, asDirectComponent } from './component-patterns/render';
+
+// component pattern exports - core types
 export type {
   DirectComponent,
   FunctionComponent,
+  FunctionComponentCore,
   LegacyDirectComponent,
   PhasedComponent,
   PhasedRender,
@@ -36,10 +39,16 @@ export type {
   SlotFn,
   NativeReactType,
 } from './component-patterns/render.types';
+
+// component pattern exports - component builders
 export { directComponent } from './component-patterns/directComponent';
 export { getPhasedRender, phasedComponent } from './component-patterns/phasedComponent';
-export { withSlots } from './component-patterns/withSlots';
 export { stagedComponent } from './component-patterns/stagedComponent';
+
+// component pattern exports - legacy JSX handlers
+export { withSlots } from './component-patterns/withSlots';
+
+// jsx runtime exports
 export { jsx, jsxs } from './jsx-runtime';
 
 // general utilities

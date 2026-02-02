@@ -3,9 +3,17 @@ import type { ComposableFunction, PhasedComponent, PhasedRender, FunctionCompone
 import { renderForJsxRuntime } from './render';
 import type { LegacyDirectComponent } from './render.types';
 
+/**
+ * Extract the phased render function from a component, if it has one.
+ * Handles both the newer PhasedComponent pattern (_phasedRender) and the legacy
+ * ComposableFunction pattern (_staged) for backward compatibility.
+ *
+ * @param component - The component to extract the phased render from
+ * @returns The phased render function if present, undefined otherwise
+ */
 export function getPhasedRender<TProps>(component: React.ComponentType<TProps>): PhasedRender<TProps> | undefined {
   // only a function component can have a phased render
-  if (typeof component !== 'function') {
+  if (typeof component === 'function') {
     // if this has a phased render function, return it
     if ((component as PhasedComponent<TProps>)._phasedRender) {
       return (component as PhasedComponent<TProps>)._phasedRender;

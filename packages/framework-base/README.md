@@ -16,4 +16,21 @@ The shared patterns for rendering components, as well as the JSX handlers have b
 
 ## Type Helpers
 
-- TODO: There are a number of issues with the way types are handled in the larger fluentui-react-native project, helpers and core types will be added here to help solve inference issues, avoid hard typecasts, and help the project eventually move to typescript 5.x.
+This package provides several TypeScript utility types:
+
+- `PropsOf<TComponent>` - Extract props from a React component type
+- `FunctionComponent<TProps>` - A function component type without the children handling complications of React.FC
+- `DirectComponent<TProps>` - A function component marked for direct rendering
+- `PhasedComponent<TProps>` - A component with two-phase rendering support
+- `SlotFn<TProps>` - Slot function type used in the composition framework
+- `FinalRender<TProps>` - The final rendering signature for phased components
+
+## JSX Runtime
+
+This package exports a custom JSX runtime at `@fluentui-react-native/framework-base/jsx-runtime`. Use it in your component files with:
+
+```tsx
+/** @jsxImportSource @fluentui-react-native/framework-base */
+```
+
+The custom runtime enables automatic element flattening for direct and phased components.

@@ -72,49 +72,53 @@ export type SlotFn<TProps> = {
 };
 
 /**
- * MULTI-STAGE RENDERING
+ * PHASED RENDERING (formerly called "staged" or "two-stage" rendering)
  *
- * The above direct rendering pattern is useful for simple components, but it does not allow for hooks or complex logic. The staged render pattern allows
- * for a component to be rendered in two stages, allowing for hooks to be used in the first stage and then the second stage to be a simple render function that can
+ * The above direct rendering pattern is useful for simple components, but it does not allow for hooks or complex logic. The phased render pattern allows
+ * for a component to be rendered in two phases, allowing for hooks to be used in the first phase and then the second phase to be a simple render function that can
  * be called directly.
  *
- * In code that respects the pattern the first stage will be called with props (though children will not be present) and will return a function that will be called
- * with additional props, this time with children present. This allows for the first stage to handle all the logic and hooks, while the second stage can be a simple render function
+ * In code that respects the pattern, the first phase will be called with props (though children will not be present) and will return a function that will be called
+ * with additional props, this time with children present. This allows for the first phase to handle all the logic and hooks, while the second phase can be a simple render function
  * that can leverage direct rendering if supported.
  *
- * The component itself will be a FunctionComponent, but it will have an attached property that is the staged render function. This allows the component to be used in two
+ * The component itself will be a FunctionComponent, but it will have an attached property that is the phased render function. This allows the component to be used in two
  * parts via the useSlot hook, or to be used directly in JSX/TSX as a normal component.
  */
 
 /**
- * This is an updated version of the staged render that handles children and types more consistently. Generally children
- * will be passed as part of the props for component rendering, it is inconsistent to have them as a variable argument.
+ * Phased render function signature. This is the recommended pattern for components that need hooks.
  *
- * The `children` prop will be automatically inferred and typed correctly by the prop type. Hooks are still expected
+ * Phase 1 receives props (without children) and can use hooks to compute derived state.
+ * Phase 2 returns a component that will be called with props including children.
+ *
+ * Children will be passed as part of the props for component rendering. The `children` prop will be
+ * automatically inferred and typed correctly by the prop type.
  */
 export type PhasedRender<TProps> = (props: TProps) => React.ComponentType<React.PropsWithChildren<TProps>>;
 
 /**
- * Component type for a component that can be rendered in two stages, with the attached render function.
+ * Component type for a component that can be rendered in two phases, with the attached phased render function.
+ * Use phasedComponent() to create these.
  */
 export type PhasedComponent<TProps> = FunctionComponent<TProps> & {
   _phasedRender?: PhasedRender<TProps>;
 };
 /**
- * The final rendering of the props in a staged render. This is the function component signature that matches that of
+ * The final rendering of the props in a phased render. This is the function component signature that matches that of
  * React.createElement, children (if present) will be part of the variable args at the end.
  */
 export type FinalRender<TProps> = (props: TProps, ...children: React.ReactNode[]) => React.JSX.Element | null;
 
 /**
- * Signature for a staged render function.
- * @deprecated Use TwoStageRender instead
+ * Legacy staged render function signature.
+ * @deprecated Use PhasedRender instead. This older pattern splits children from props which is inconsistent with React conventions.
  */
 export type StagedRender<TProps> = (props: TProps, ...args: any[]) => FinalRender<TProps>;
 
 /**
- * Signature for a component that uses the staged render pattern.
- * @deprecated Use TwoStageRender instead
+ * Legacy component type that uses the staged render pattern.
+ * @deprecated Use PhasedComponent instead. Create with phasedComponent() rather than stagedComponent().
  */
 export type ComposableFunction<TProps> = FunctionComponent<TProps> & { _staged?: StagedRender<TProps> };
 
