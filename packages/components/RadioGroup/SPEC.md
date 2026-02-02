@@ -23,7 +23,7 @@ const radiogroup = (
 );
 ```
 
-More examples on the [Test pages for RadioGroup](../../../apps/fluent-tester/src/TestComponents/RadioGroupV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for RadioGroup](../../../apps/tester-core/src/TestComponents/RadioGroupV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

@@ -16,7 +16,7 @@ Basic example:
 <Switch defaultChecked={false} label={'Switch Test'}>
 ```
 
-More examples on the [Test pages for the Switch](../../../apps/fluent-tester/src/TestComponents/Switch). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Switch](../../../apps/tester-core/src/TestComponents/Switch). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

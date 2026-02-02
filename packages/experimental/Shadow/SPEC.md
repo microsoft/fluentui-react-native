@@ -33,7 +33,7 @@ Examples adding some Shadows to a Button:
 </Shadow>
 ```
 
-For more examples of using Shadow, please see the [ShadowTest test page](https://github.com/microsoft/fluentui-react-native/tree/main/apps/fluent-tester/src/TestComponents/Shadow) in the [Fluent Tester app](https://github.com/microsoft/fluentui-react-native/blob/main/apps/fluent-tester/README.md).
+For more examples of using Shadow, please see the [ShadowTest test page](https://github.com/microsoft/fluentui-react-native/tree/main/apps/tester-core/src/TestComponents/Shadow) in the [Fluent Tester app](https://github.com/microsoft/fluentui-react-native/blob/main/apps/fluent-tester/README.md).
 
 For an example of adding a Shadow as a slot to a Fluent component, please see the [FAB component](https://github.com/microsoft/fluentui-react-native/tree/main/packages/components/Button/src/FAB) - this component exists on both iOS and Android, but currently only the iOS version uses the Shadow component. The [Notification component](https://github.com/microsoft/fluentui-react-native/tree/main/packages/components/Notification) is another example that uses the Shadow component.
 

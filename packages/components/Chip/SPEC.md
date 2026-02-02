@@ -18,7 +18,7 @@ Basic examples:
   <Chip icon={{ svgSource: { src: TestSvg, viewBox: '0 0 500 500' } }} disabled />
 ```
 
-More examples on the [Test pages for the Chip](../../../apps/fluent-tester/src/TestComponents/Chip). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Chip](../../../apps/tester-core/src/TestComponents/Chip). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

@@ -24,7 +24,7 @@ Basic examples:
   <PresenceBadge outOfOffice={true} status="away" />
 ```
 
-More examples on the [Test pages for the Badge](../../../apps/fluent-tester/src/TestComponents/Badge). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Badge](../../../apps/tester-core/src/TestComponents/Badge). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

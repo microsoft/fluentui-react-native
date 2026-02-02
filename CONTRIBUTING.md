@@ -6,7 +6,7 @@ This guide assumes you:
 
 - Have read through the [React Native Docs](https://reactnative.dev/docs/getting-started). In particular:
   - Understand classes vs function components (we use the latter) and [hooks](https://reactjs.org/docs/hooks-intro.html). Here's a good [video](https://www.youtube.com/watch?v=dpw9EHDh2bM) that explains function components and hooks for traditional OOP developers.
-  - Understand [Native Modules](https://reactnative.dev/docs/0.74/native-modules-intro).
+  - Understand [Native Modules](https://reactnative.dev/docs/turbo-native-modules-introduction).
 - Have a local fork of FluentUI React Native and have run the test app.
 
 ## Understanding the Repository Structure
@@ -44,7 +44,7 @@ Tokens help us achieve simpler customization for complex higher order components
 
 This section covers creating and adding a new component package to FluentUI React Native's monorepo. If you are instead working on an existing component and adding a native module, skip to the next two sections.
 
-Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](./packages/framework/use-slot/src/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
+Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](./packages/framework-base/src/component-patterns/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
 
 1. Create a new directory in of these two locations, depending on your component:
 
@@ -82,7 +82,7 @@ Reach out to Samuel Freiberg with any questions related to E2E testing.
 
 ## Adding native code to your new component
 
-Through the power of [Native Modules](https://reactnative.dev/docs/0.74/native-modules-intro), we are able to create components that are comprised of native platform code, rather than JS. This is particularly useful if you want platform specific behavior, or if you want a component that feels much more aligned to it's specific platform. The downside is you must implement the Native module for every platform you wish to support. It's worth investigating whether you truly need a native module, or if a more cross platform JS implementation is the better approach.
+Through the power of [Native Modules](https://reactnative.dev/docs/turbo-native-modules-introduction), we are able to create components that are comprised of native platform code, rather than JS. This is particularly useful if you want platform specific behavior, or if you want a component that feels much more aligned to it's specific platform. The downside is you must implement the Native module for every platform you wish to support. It's worth investigating whether you truly need a native module, or if a more cross platform JS implementation is the better approach.
 
 There are a few caveats to know of adding a native module to a FluentUI React Native component:
 

@@ -24,7 +24,7 @@ Basic example:
 <Text>Hello World</Text>
 ```
 
-More examples on the [Test pages for Text](../../../apps/fluent-tester/src/TestComponents/TextV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for Text](../../../apps/tester-core/src/TestComponents/TextV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

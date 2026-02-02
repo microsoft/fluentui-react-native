@@ -16,7 +16,7 @@ const tooltip = (
 );
 ```
 
-More examples on the [Test pages for Tooltip](../../../apps/fluent-tester/src/TestComponents/Tooltip). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for Tooltip](../../../apps/tester-core/src/TestComponents/Tooltip). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

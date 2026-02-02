@@ -24,7 +24,7 @@ Basic examples:
 />
 ```
 
-More examples on the [Test pages for the Input](../../../apps/fluent-tester/src/TestComponents/Input). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Input](../../../apps/tester-core/src/TestComponents/Input). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

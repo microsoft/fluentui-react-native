@@ -25,7 +25,7 @@ const flipFABcontent = React.useCallback(() => setShowFABText(!showFABText), [sh
 <FAB showContent={showFABText} onClick={flipFABcontent}>Text</FAB>
 ```
 
-More examples on the [Test pages for the Button](../../../../../apps/fluent-tester/src/TestComponents/Button). Instructions on running the tester app can be found [here](../../../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Button](../../../../../apps/tester-core/src/TestComponents/Button). Instructions on running the tester app can be found [here](../../../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 
