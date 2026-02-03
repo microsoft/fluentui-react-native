@@ -2,39 +2,30 @@ import * as React from 'react';
 import type { ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
-import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
-import { memoize } from '@fluentui-react-native/framework';
+import { memoize, mergeProps, phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 import type { ShadowToken } from '@fluentui-react-native/theme-types';
 
 import type { ShadowProps } from './Shadow.types';
 import { shadowName } from './Shadow.types';
 import { getShadowTokenStyleSet } from './shadowStyle';
 
-export const Shadow = stagedComponent((props: ShadowProps) => {
-  return (final: ShadowProps, children: React.ReactNode) => {
+export const Shadow = phasedComponent((props: ShadowProps) => {
+  return directComponent<ShadowProps>((final: ShadowProps) => {
+    const { children, ...rest } = final;
     if (!props.shadowToken) {
       return <>{children}</>;
     }
 
-    const childrenArray = React.Children.toArray(children) as React.ReactElement[];
-    const child = childrenArray[0];
-
-    if (__DEV__) {
-      if (childrenArray.length !== 1) {
-        console.warn('Shadow must only have one child');
-      }
-    }
-
-    const { style: childStyle, ...restOfChildProps } = child.props;
+    const { style: childStyle, ...restOfChildProps } = children.props;
 
     const shadowViewStyleProps = getStylePropsForShadowViews(childStyle, props.shadowToken);
     const innerShadowViewProps = mergeProps(restOfChildProps, shadowViewStyleProps.inner);
-    const outerShadowViewProps = mergeProps(final, shadowViewStyleProps.outer);
+    const outerShadowViewProps = mergeProps(rest, shadowViewStyleProps.outer);
 
-    const childWithInnerShadow = React.cloneElement(child, innerShadowViewProps);
+    const childWithInnerShadow = React.cloneElement(children, innerShadowViewProps);
 
     return <View {...outerShadowViewProps}>{childWithInnerShadow}</View>;
-  };
+  });
 });
 
 const getStylePropsForShadowViews = memoize(getStylePropsForShadowViewsWorker);

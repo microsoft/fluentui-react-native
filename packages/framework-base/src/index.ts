@@ -19,22 +19,38 @@ export type { StyleProp } from './merge-props/mergeStyles.types';
 export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
 
-// component pattern exports
-export { renderForClassicRuntime, renderForJsxRuntime, renderSlot } from './component-patterns/render';
+// component pattern exports - rendering utilities
+export { renderForJsxRuntime, renderSlot, asDirectComponent } from './component-patterns/render';
+
+// component pattern exports - core types
 export type {
   DirectComponent,
-  DirectComponentFunction,
+  FunctionComponent,
+  FunctionComponentCore,
   LegacyDirectComponent,
-  StagedComponent,
-  StagedRender,
-  TwoStageRender,
+  PhasedComponent,
+  PhasedRender,
+  PropsOf,
   RenderType,
   RenderResult,
+  StagedRender,
   ComposableFunction,
   FinalRender,
   SlotFn,
   NativeReactType,
 } from './component-patterns/render.types';
+
+// component pattern exports - component builders
+export { directComponent } from './component-patterns/directComponent';
+export { getPhasedRender, phasedComponent } from './component-patterns/phasedComponent';
+export { stagedComponent } from './component-patterns/stagedComponent';
+
+// component pattern exports - legacy JSX handlers
 export { withSlots } from './component-patterns/withSlots';
-export { stagedComponent, twoStageComponent } from './component-patterns/stagedComponent';
+
+// jsx runtime exports
 export { jsx, jsxs } from './jsx-runtime';
+
+// general utilities
+export { filterProps } from './utilities/filterProps';
+export type { PropsFilter } from './utilities/filterProps';

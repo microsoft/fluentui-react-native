@@ -42,7 +42,7 @@ const svgSrcProps: SvgIconProps = {
     <FontIcon {...fontBuiltInProps} />
 ```
 
-More examples on the [Test pages for the Icon](../../../apps/fluent-tester/src/TestComponents/Icon). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Icon](../../../apps/tester-core/src/TestComponents/Icon). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

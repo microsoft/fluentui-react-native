@@ -1,10 +1,11 @@
 import type * as React from 'react';
-import type { ViewStyle, ColorValue, PressableProps } from 'react-native';
+import type { Animated, ViewStyle, ColorValue, PressableProps } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
 import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type { PropsOf } from '@fluentui-react-native/framework-base';
 
 export const switchName = 'Switch';
 
@@ -197,8 +198,8 @@ export interface SwitchInfo {
 export interface SwitchSlotProps {
   root: React.PropsWithRef<PressableProps>;
   label: TextProps;
-  track: IViewProps;
-  thumb: IViewProps;
+  track: PropsOf<typeof Animated.View>;
+  thumb: PropsOf<typeof Animated.View>;
   toggleContainer: IViewProps;
   onOffTextContainer: IViewProps;
   onOffText: TextProps;

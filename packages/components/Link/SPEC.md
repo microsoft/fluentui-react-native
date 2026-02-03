@@ -25,7 +25,7 @@ Basic example:
 <Link url="https://www.bing.com/">Click to Navigate.</Link>
 ```
 
-More examples on the [Test pages for Link](../../../apps/fluent-tester/src/TestComponents/LinkV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for Link](../../../apps/tester-core/src/TestComponents/LinkV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

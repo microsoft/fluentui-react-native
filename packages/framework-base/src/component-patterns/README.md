@@ -2,38 +2,75 @@
 
 These are the base component patterns shared across the deprecated or v0 framework (found under packages/deprecated), and the newer framework (found under packages/framework). This also includes the custom JSX handlers required to render them properly.
 
-There are two main patterns exposed here: direct rendering and staged rendering.
+There are two main patterns exposed here: direct rendering and phased rendering.
 
 ## Direct Rendering
 
-The direct rendering pattern allows a component to be called directly, rather than creating a new entry in the DOM.
+The direct rendering pattern allows a component to be called directly, rather than creating a new entry in the render tree.
 
-As an example, if you want to create a wrapper around a component called `MyText` that has `italicize` as one of its props, that always wants to set that value to true. You could define:
+As an example, if you want to create a wrapper around a component called `MyText` that has `italicize` as one of its props, that always wants to set that value to true, you could define:
 
 ```ts
 const MyNewText: React.FunctionComponent<MyTextProps> = (props) => {
-  return <MyText {...props, italicize: true} />;
-}
+  return <MyText {...props} italicize={true} />;
+};
 ```
 
-When this is rendered, there is an entry for `MyNewText` which contains a `MyText` (another entry), which might contains `Text` (for react-native usage). The direct rendering pattern is one where a component can denote that it is safe to be called directly as a function, instead operating as a prop transform that gets applied to the underlying component.
+When this is rendered, there is an entry for `MyNewText` which contains a `MyText` (another entry), which might contain `Text` (for react-native usage). The direct rendering pattern is one where a component can denote that it is safe to be called directly as a function, instead operating as a prop transform that gets applied to the underlying component.
 
-- For the above to be safe, `MyNewText` should NOT use hooks. In the case of any conditional rendering logic this will break the rule of hooks.
+- For the above to be safe, `MyNewText` should NOT use hooks. In the case of any conditional rendering logic this will break the rules of hooks.
 
 There are two types of implementations in this folder:
 
-- `DirectComponent` - a functional component that marks itself as direct with a `_callDirect: true` attached property. This will then be called as a normal function component, with children included as part of props.
-- `LegacyDirectComponent` - the pattern currently used in this library that should be moved away from. In this case `_canCompose: true` is set as an attached property, and the function component will be called with children split from props.
+- `DirectComponent` - a functional component that marks itself as direct with a `_callDirect: true` attached property. This will then be called as a normal function component, with children included as part of props. Use the `directComponent()` helper to create these.
+- `LegacyDirectComponent` - the pattern currently used in legacy code that should be moved away from. In this case `_canCompose: true` is set as an attached property, and the function component will be called with children split from props.
 
-The internal logic of the JSX rendering helpers will handle both patterns. In the case of the newer `DirectComponent` pattern, the component will still work, even without any jsx hooks, whereas the `LegacyDirectComponent` pattern will have a somewhat undefined behavior with regards to children.
+The internal logic of the JSX rendering helpers (`renderForJsxRuntime` and `renderForClassicRuntime`) will handle both patterns. In the case of the newer `DirectComponent` pattern, the component will still work, even without any jsx hooks, whereas the `LegacyDirectComponent` pattern will have somewhat undefined behavior with regards to children.
 
-## Staged Rendering
+### Example: Using directComponent
 
-The issue with the direct component pattern above, is that hooks are integral to writing functional components. The staged rendering pattern is designed to help with this. In this case a component is implemented in two stages, the prep stage where hooks are called, and the rendering stage where the tree is emitted.
+```ts
+import { directComponent } from '@fluentui-react-native/framework-base';
 
-As above there is a newer and older version of the pattern.
+const MyNewText = directComponent<MyTextProps>((props) => {
+  return <MyText {...props} italicize={true} />;
+});
+```
 
-- `StagedComponent` - the newer version of the pattern, where the returned component function expects children as part of props.
-- `StagedRender` - the older version, where children are split out and JSX hooks are required to render correctly.
+## Phased Rendering
 
-Note that while the newer patterns work without any JSX hooks, the hooks will enable the element flattening.
+The issue with the direct component pattern above is that hooks are integral to writing functional components. The phased rendering pattern is designed to help with this. In this case a component is implemented in two phases: the prep phase where hooks are called, and the rendering phase where the tree is emitted.
+
+As above there is a newer and older version of the pattern:
+
+- `PhasedComponent` - the newer version of the pattern, where the returned component function expects children as part of props. Create these using `phasedComponent()`. The attached property is `_phasedRender`.
+- `ComposableFunction` (deprecated) - the older "staged" version, where children are split out and JSX hooks are required to render correctly. Create these using the deprecated `stagedComponent()`. The attached property is `_staged`.
+
+Note that while the newer patterns work without any JSX hooks, the hooks will enable element flattening.
+
+### Example: Using phasedComponent
+
+```ts
+import { phasedComponent } from '@fluentui-react-native/framework-base';
+
+const MyComponent = phasedComponent<MyComponentProps>((props) => {
+  // Phase 1: Hooks and logic
+  const theme = useTheme();
+  const styles = useStyles(theme, props);
+
+  // Phase 2: Return a component that renders
+  return (innerProps) => {
+    return <View style={styles}>{innerProps.children}</View>;
+  };
+});
+```
+
+## JSX Runtime
+
+This package provides a custom JSX runtime (`@fluentui-react-native/framework-base/jsx-runtime`) that automatically handles both direct and phased rendering patterns. When you use the `@jsxImportSource @fluentui-react-native/framework-base` pragma, the custom runtime will:
+
+1. Detect components marked with `_callDirect` or `_canCompose` and call them directly
+2. Handle the different children patterns (props vs. rest args)
+3. Fall back to standard React rendering for normal components
+
+This enables element flattening without requiring explicit calls to helper functions.

@@ -1,4 +1,4 @@
-import type { PressableProps } from 'react-native';
+import type { IPressableProps } from '@fluentui-react-native/pressable';
 
 import type { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
 import type { ButtonProps } from '@fluentui-react-native/button';
@@ -59,7 +59,7 @@ export type NotificationProps = React.PropsWithChildren<{
 }>;
 
 export interface NotificationSlotProps {
-  root: PressableProps;
+  root: IPressableProps;
   icon?: IconProps;
   contentContainer: IViewProps;
   title?: ITextProps;

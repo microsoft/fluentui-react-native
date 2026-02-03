@@ -1,5 +1,5 @@
-import type { ComposableFunction, SlotFn, NativeReactType } from '@fluentui-react-native/framework-base';
-import { useSlot } from '@fluentui-react-native/use-slot';
+import { useSlot, type ComponentType } from '@fluentui-react-native/use-slot';
+import type { FunctionComponent, PropsFilter } from '@fluentui-react-native/framework-base';
 
 // type AsObject<T> = T extends object ? T : never
 
@@ -8,11 +8,11 @@ import { useSlot } from '@fluentui-react-native/use-slot';
  */
 type UseStyling<TSlotProps> = (...props: unknown[]) => TSlotProps;
 
-export type Slots<TSlotProps> = { [K in keyof TSlotProps]: SlotFn<TSlotProps[K]> };
+export type Slots<TSlotProps> = { [K in keyof TSlotProps]: FunctionComponent<TSlotProps[K]> };
 
 export type UseSlotOptions<TSlotProps> = {
-  slots: { [K in keyof TSlotProps]: NativeReactType | ComposableFunction<TSlotProps[K]> };
-  filters?: { [K in keyof TSlotProps]?: (propName: string) => boolean };
+  slots: { [K in keyof TSlotProps]: ComponentType<TSlotProps[K]> };
+  filters?: { [K in keyof TSlotProps]?: PropsFilter };
   useStyling?: TSlotProps | GetSlotProps<TSlotProps>;
 };
 
@@ -31,6 +31,9 @@ export function buildUseSlots<TSlotProps>(options: UseSlotOptions<TSlotProps>): 
     const builtSlots: Slots<TSlotProps> = {} as Slots<TSlotProps>;
 
     // for each slot go through and either cache the slot props or call part one render if it is staged
+
+    // note: changing this to a for..in loop causes rule of hooks violations
+    // eslint-disable-next-line @rnx-kit/no-foreach-with-captured-variables
     Object.keys(slots).forEach((slotName) => {
       builtSlots[slotName] = useSlot(slots[slotName], slotProps[slotName], filters[slotName]);
     });

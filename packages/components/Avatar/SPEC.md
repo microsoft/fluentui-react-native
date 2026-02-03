@@ -20,7 +20,7 @@ Basic examples:
   <Avatar shape="square" avatarColor="purple" name="Richard Feynman" />
 ```
 
-More examples on the [Test pages for the Avatar](../../../apps/fluent-tester/src/TestComponents/Avatar). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Avatar](../../../apps/tester-core/src/TestComponents/Avatar). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Variants
 

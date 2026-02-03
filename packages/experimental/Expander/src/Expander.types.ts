@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import type { ColorValue } from 'react-native';
+import type { NativeProps } from './ExpanderNativeComponent';
 
 export const expanderName = 'Expander';
 
@@ -157,6 +158,6 @@ export interface ExpanderType {
   props: ExpanderProps;
   tokens: ExpanderTokens;
   slotProps: {
-    root: ExpanderViewProps;
+    root: NativeProps;
   };
 }

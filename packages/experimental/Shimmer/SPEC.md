@@ -57,7 +57,7 @@ function shimmerRects(): Array<ShimmerRectElement | ShimmerCircleElement> {
 <Shimmer elements={shimmerRects()} style={{ width: 300, height: 100 }} />;
 ```
 
-More examples on the [Test pages for the Shimmer](../../../apps/fluent-tester/src/TestComponents/Shimmer). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Shimmer](../../../apps/tester-core/src/TestComponents/Shimmer). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

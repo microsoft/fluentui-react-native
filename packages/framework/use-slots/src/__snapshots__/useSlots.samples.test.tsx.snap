@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`useSlots sample code test suite renders sample 1 - the two types of basic bold text components 1`] = `
-<div>
-  <span
+<View>
+  <Text
     style={
       {
         "color": "black",
@@ -11,8 +11,8 @@ exports[`useSlots sample code test suite renders sample 1 - the two types of bas
     }
   >
     Staged component at one level
-  </span>
-  <span
+  </Text>
+  <Text
     style={
       {
         "color": "black",
@@ -21,13 +21,13 @@ exports[`useSlots sample code test suite renders sample 1 - the two types of bas
     }
   >
     Standard component of a single level
-  </span>
-</div>
+  </Text>
+</View>
 `;
 
 exports[`useSlots sample code test suite renders sample 2 = the two types of two level header components 1`] = `
 <div>
-  <span
+  <Text
     style={
       {
         "color": "black",
@@ -37,8 +37,8 @@ exports[`useSlots sample code test suite renders sample 2 = the two types of two
     }
   >
     Staged component with two levels
-  </span>
-  <span
+  </Text>
+  <Text
     style={
       {
         "color": "black",
@@ -48,7 +48,7 @@ exports[`useSlots sample code test suite renders sample 2 = the two types of two
     }
   >
     Standard component with two levels
-  </span>
+  </Text>
 </div>
 `;
 
@@ -57,7 +57,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   <span>
     --- SIMPLE USAGE COMPARISON ---
   </span>
-  <div
+  <View
     style={
       {
         "backgroundColor": "gray",
@@ -68,7 +68,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     }
   >
-    <span
+    <Text
       style={
         {
           "fontSize": 20,
@@ -77,9 +77,9 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     >
       Standard HOC
-    </span>
-  </div>
-  <div
+    </Text>
+  </View>
+  <View
     style={
       {
         "backgroundColor": "gray",
@@ -90,7 +90,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     }
   >
-    <span
+    <Text
       style={
         {
           "fontSize": 20,
@@ -99,12 +99,12 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     >
       Staged HOC
-    </span>
-  </div>
+    </Text>
+  </View>
   <span>
     --- COMPARISON WITH CAPTIONS ---
   </span>
-  <div
+  <View
     style={
       {
         "backgroundColor": "gray",
@@ -115,7 +115,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     }
   >
-    <span
+    <Text
       style={
         {
           "fontSize": 20,
@@ -124,8 +124,8 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     >
       Standard HOC with Caption
-    </span>
-    <span
+    </Text>
+    <Text
       style={
         {
           "fontWeight": 900,
@@ -133,9 +133,9 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     >
       Caption text
-    </span>
-  </div>
-  <div
+    </Text>
+  </View>
+  <View
     style={
       {
         "backgroundColor": "gray",
@@ -146,7 +146,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     }
   >
-    <span
+    <Text
       style={
         {
           "fontSize": 20,
@@ -155,8 +155,8 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     >
       Staged HOC with Caption
-    </span>
-    <span
+    </Text>
+    <Text
       style={
         {
           "fontWeight": 900,
@@ -164,12 +164,12 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     >
       Caption text
-    </span>
-  </div>
+    </Text>
+  </View>
   <span>
     --- COMPARISON WITH CAPTIONS AND CUSTOMIZATIONS ---
   </span>
-  <div
+  <View
     style={
       {
         "backgroundColor": "gray",
@@ -180,7 +180,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     }
   >
-    <span
+    <Text
       style={
         {
           "color": "red",
@@ -190,8 +190,8 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     >
       Standard HOC with caption and customizations
-    </span>
-    <span
+    </Text>
+    <Text
       style={
         {
           "color": "yellow",
@@ -200,9 +200,9 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     >
       Caption text
-    </span>
-  </div>
-  <div
+    </Text>
+  </View>
+  <View
     style={
       {
         "backgroundColor": "gray",
@@ -213,7 +213,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     }
   >
-    <span
+    <Text
       style={
         {
           "color": "red",
@@ -223,8 +223,8 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     >
       Staged HOC with caption and customizations
-    </span>
-    <span
+    </Text>
+    <Text
       style={
         {
           "color": "yellow",
@@ -233,7 +233,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       }
     >
       Caption text
-    </span>
-  </div>
+    </Text>
+  </View>
 </div>
 `;

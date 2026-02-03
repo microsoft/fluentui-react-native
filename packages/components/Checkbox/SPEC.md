@@ -26,7 +26,7 @@ Basic examples:
 <Checkbox label="Controlled Checkbox" onChange={onChangeFunction} checked={checked} />
 ```
 
-More examples on the [Test pages for the Checkbox](../../../apps/fluent-tester/src/TestComponents/CheckboxV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Checkbox](../../../apps/tester-core/src/TestComponents/CheckboxV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

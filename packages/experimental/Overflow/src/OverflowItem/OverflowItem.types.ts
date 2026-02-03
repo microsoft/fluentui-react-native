@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { ViewProps } from 'react-native';
 
 import type { OverflowItemChangeHandler } from '../Overflow/Overflow.types';
@@ -11,6 +12,8 @@ export interface OverflowItemProps extends ViewProps {
   priority?: number;
   /** Callback that runs whenever this item's visibility changes or whenever its dimensions should be manually set */
   onOverflowItemChange?: OverflowItemChangeHandler;
+  /** Mark this as having exactly one child */
+  children: React.ReactElement;
 }
 
 export interface OverflowItemState {

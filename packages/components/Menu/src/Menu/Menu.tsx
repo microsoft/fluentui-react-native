@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { stagedComponent } from '@fluentui-react-native/framework';
+import { phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 
 import type { MenuProps } from './Menu.types';
 import { menuName } from './Menu.types';
@@ -8,12 +8,12 @@ import { renderFinalMenu } from './renderMenu';
 import { useMenu } from './useMenu';
 import { useMenuContextValue } from './useMenuContextValue';
 
-export const Menu = stagedComponent((props: MenuProps) => {
+export const Menu = phasedComponent((props: MenuProps) => {
   const state = useMenu(props);
   const contextValue = useMenuContextValue(state);
 
-  return (_rest: MenuProps, children: React.ReactNode) => {
-    const childrenArray = React.Children.toArray(children) as React.ReactElement[];
+  return directComponent<MenuProps>((rest: MenuProps) => {
+    const childrenArray = React.Children.toArray(rest.children) as React.ReactElement[];
 
     if (__DEV__) {
       if (childrenArray.length !== 2) {
@@ -21,7 +21,7 @@ export const Menu = stagedComponent((props: MenuProps) => {
       }
     }
     return renderFinalMenu(childrenArray, contextValue, state);
-  };
+  });
 });
 
 Menu.displayName = menuName;

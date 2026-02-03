@@ -12,7 +12,7 @@ import { compose, mergeProps, buildProps } from '@fluentui-react-native/framewor
 
 import type { ExpanderType, ExpanderProps, ExpanderViewProps } from './Expander.types';
 import { expanderName } from './Expander.types';
-import ExpanderComponent from './ExpanderNativeComponent';
+import { ExpanderComponent } from './ExpanderNativeComponent';
 
 function delay(ms: number) {
   return new Promise<void>((resolve) => setTimeout(resolve, ms));

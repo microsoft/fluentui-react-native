@@ -22,7 +22,7 @@ const tablist = (
 );
 ```
 
-More examples on the [Test pages for TabList](../../../apps/fluent-tester/src/TestComponents/TabList). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for TabList](../../../apps/tester-core/src/TestComponents/TabList). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 

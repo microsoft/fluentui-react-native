@@ -7,13 +7,13 @@
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 
-import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
+import { mergeProps, phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 
 import type { TooltipProps } from './Tooltip.types';
 import { tooltipName } from './Tooltip.types';
 import NativeTooltipView from './TooltipNativeComponent';
 
-export const Tooltip = stagedComponent((props: TooltipProps) => {
+export const Tooltip = phasedComponent((props: TooltipProps) => {
   const { target } = props;
 
   const [nativeTarget, setNativeTarget] = React.useState<number | string | null>(null);
@@ -31,13 +31,14 @@ export const Tooltip = stagedComponent((props: TooltipProps) => {
     }
   }, [target]);
 
-  const TooltipComponent = (rest: TooltipProps, children: React.ReactNode) => {
+  const TooltipComponent = directComponent<TooltipProps>((innerProps: TooltipProps) => {
+    const { children, ...rest } = innerProps;
     return (
       <NativeTooltipView {...(nativeTarget && { target: nativeTarget })} {...mergeProps(props, rest)}>
         {children}
       </NativeTooltipView>
     );
-  };
+  });
 
   return TooltipComponent;
 });
