@@ -4,9 +4,7 @@
  * @format
  */
 
-import type { HostComponent, ViewProps } from 'react-native';
-
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
+import { requireNativeComponent, type HostComponent, type ViewProps } from 'react-native';
 
 export interface NativeProps extends ViewProps {
   /**
@@ -38,4 +36,4 @@ export interface NativeProps extends ViewProps {
   forceFocusInsideTrap?: boolean;
 }
 
-export default codegenNativeComponent<NativeProps>('RCTFocusTrapZone') as HostComponent<NativeProps>;
+export default requireNativeComponent<NativeProps>('RCTFocusTrapZone') as HostComponent<NativeProps>;

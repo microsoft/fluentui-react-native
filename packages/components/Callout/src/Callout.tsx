@@ -5,8 +5,7 @@
  */
 
 import * as React from 'react';
-import { findNodeHandle, Platform } from 'react-native';
-import type { HostComponent } from 'react-native';
+import { findNodeHandle } from 'react-native';
 
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -16,16 +15,9 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { settings } from './Callout.settings';
 import type { ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
 import { calloutName } from './Callout.types';
-import type { NativeProps as CalloutNativeProps } from './CalloutNativeComponent';
-import CalloutNativeComponent from './CalloutNativeComponent';
-import type { NativeProps as FRNCalloutNativeProps } from './MacOSCalloutNativeComponent';
-import FRNCalloutNativeComponent from './MacOSCalloutNativeComponent';
-import { Commands } from './MacOSCalloutNativeComponent';
 
-const NativeCalloutView = Platform.select<HostComponent<FRNCalloutNativeProps> | HostComponent<CalloutNativeProps>>({
-  macos: FRNCalloutNativeComponent,
-  default: CalloutNativeComponent, // win32
-});
+import NativeCalloutView from './CalloutNativeComponent';
+import { Commands } from './CalloutNativeComponent';
 
 export const Callout = compose<ICalloutType>({
   displayName: calloutName,
