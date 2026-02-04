@@ -1,3 +1,5 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { Divider } from '../Divider';
@@ -5,54 +7,84 @@ import type { DividerProps } from '../Divider.types';
 
 describe('Divider component tests', () => {
   it('Divider default', () => {
-    const tree = renderer.create(<Divider />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Divider />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Vertical Divider', () => {
-    const tree = renderer.create(<Divider vertical />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Divider vertical />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Subtle Divider', () => {
-    const tree = renderer.create(<Divider appearance="subtle" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Divider appearance="subtle" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Branded Divider', () => {
-    const tree = renderer.create(<Divider appearance="brand" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Divider appearance="brand" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Strong Divider', () => {
-    const tree = renderer.create(<Divider appearance="strong" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Divider appearance="strong" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Horizontal Divider with Inset', () => {
-    const tree = renderer.create(<Divider insetSize={16} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Divider insetSize={16} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Vertical Divider with Inset', () => {
-    const tree = renderer.create(<Divider vertical insetSize={16} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Divider vertical insetSize={16} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Custom Divider', () => {
     const CustomDivider = Divider.customize({ thickness: 3, lineColor: 'red', contentColor: 'blue' });
-    const tree = renderer.create(<CustomDivider />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<CustomDivider />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Divider with text', () => {
-    const tree = renderer.create(<Divider>Lorem Ipsum</Divider>).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Divider>Lorem Ipsum</Divider>);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Divider with icon', () => {
-    const tree = renderer.create(<Divider icon={{ fontSource: { fontFamily: 'Arial', codepoint: 0x2663, fontSize: 32 } }} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Divider icon={{ fontSource: { fontFamily: 'Arial', codepoint: 0x2663, fontSize: 32 } }} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Divider with all props + tokens set', () => {
@@ -89,7 +121,10 @@ describe('Divider component tests', () => {
       insetSize: 16,
       vertical: true,
     };
-    const tree = renderer.create(<CustomDivider {...props}>Hello</CustomDivider>).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<CustomDivider {...props}>Hello</CustomDivider>);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

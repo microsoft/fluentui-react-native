@@ -61,7 +61,7 @@ exports[`Switch Default 1`] = `
         ],
       },
       "trackBackgroundStyle": {
-        "backgroundColor": "rgba(15, 108, 189, 1)",
+        "backgroundColor": "rgba(240, 240, 240, 1)",
       },
     }
   }
@@ -93,7 +93,7 @@ exports[`Switch Default 1`] = `
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(15, 108, 189, 1)",
+          "backgroundColor": "rgba(240, 240, 240, 1)",
           "borderRadius": 100,
           "flexDirection": "row",
           "height": 32,

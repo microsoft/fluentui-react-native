@@ -1,3 +1,5 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { FAB } from './FAB';
@@ -17,14 +19,20 @@ beforeAll(() => {
 });
 
 it('Default FAB (iOS)', () => {
-  const tree = renderer.create(<FAB icon={iconProps}>Default FAB (iOS)</FAB>).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<FAB icon={iconProps}>Default FAB (iOS)</FAB>);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });
 
 it('Custom FAB with no shadow(iOS)', () => {
   const CustomFABNoShadow = FAB.customize({ shadowToken: undefined });
-  const tree = renderer.create(<CustomFABNoShadow icon={iconProps}>Custom FAB with no shadow(iOS)</CustomFABNoShadow>).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<CustomFABNoShadow icon={iconProps}>Custom FAB with no shadow(iOS)</CustomFABNoShadow>);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });
 
 afterAll(() => {

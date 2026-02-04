@@ -1,14 +1,22 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { Separator } from '..';
 
 it('Separator default', () => {
-  const tree = renderer.create(<Separator />).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<Separator />);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });
 
 it('Separator all props & tokens', () => {
   const CustomSeparator = Separator.customize({ separatorWidth: 15, color: 'red' });
-  const tree = renderer.create(<CustomSeparator vertical />).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<CustomSeparator vertical />);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });

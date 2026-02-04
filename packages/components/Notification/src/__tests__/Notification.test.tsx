@@ -1,5 +1,5 @@
 import * as renderer from 'react-test-renderer';
-
+import { act } from 'react';
 import { Notification } from '../Notification';
 
 describe('Notification component tests', () => {
@@ -10,8 +10,9 @@ describe('Notification component tests', () => {
   });
 
   it('Notification default', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Notification
           variant={'primary'}
           action="Undo"
@@ -24,8 +25,9 @@ describe('Notification component tests', () => {
         >
           Mail Archived
         </Notification>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

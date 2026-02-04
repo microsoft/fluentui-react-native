@@ -1,27 +1,34 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import Tab from '../Tab';
 
 describe('Tab component tests', () => {
   it('Tab default props', () => {
-    const tree = renderer.create(<Tab tabKey="1">Tab 1</Tab>).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Tab tabKey="1">Tab 1</Tab>);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Tab disabled', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Tab tabKey="1" disabled>
           Tab 1
         </Tab>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Tab render icon only', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Tab
           icon={{
             fontSource: {
@@ -31,14 +38,15 @@ describe('Tab component tests', () => {
           }}
           tabKey="1"
         />,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Tab render icon + text', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Tab
           icon={{
             fontSource: {
@@ -50,9 +58,9 @@ describe('Tab component tests', () => {
         >
           Tab 1
         </Tab>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Customized Tab', () => {
@@ -63,7 +71,10 @@ describe('Tab component tests', () => {
       indicatorThickness: 4,
       color: 'red',
     });
-    const tree = renderer.create(<CustomTab tabKey="1">Tab 1</CustomTab>);
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<CustomTab tabKey="1">Tab 1</CustomTab>);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

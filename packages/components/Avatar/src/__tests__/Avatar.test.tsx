@@ -1,3 +1,5 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { Avatar } from '..';
@@ -134,27 +136,42 @@ describe('resolveColorfulToSpecificColor method', () => {
 
 describe('Avatar component tests', () => {
   it('Avatar default', () => {
-    const tree = renderer.create(<Avatar />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Avatar />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Avatar circular', () => {
-    const tree = renderer.create(<Avatar shape="circular" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Avatar shape="circular" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Avatar square', () => {
-    const tree = renderer.create(<Avatar shape="square" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Avatar shape="square" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Avatar badge', () => {
-    const tree = renderer.create(<Avatar badge={{ status: 'available', outOfOffice: false }} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Avatar badge={{ status: 'available', outOfOffice: false }} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Avatar ring', () => {
-    const tree = renderer.create(<Avatar active="active" activeAppearance="ring" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Avatar active="active" activeAppearance="ring" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

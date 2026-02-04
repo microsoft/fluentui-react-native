@@ -1,3 +1,5 @@
+import { act } from 'react';
+
 import { Path, Svg } from 'react-native-svg';
 import * as renderer from 'react-test-renderer';
 
@@ -24,22 +26,34 @@ const AccessTime20RegularIcon = () => {
 
 describe('Icon component tests', () => {
   it('renders Font Icon', () => {
-    const tree = renderer.create(<FontIcon {...fontProps} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<FontIcon {...fontProps} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('renders Font Icon using Icon component', () => {
-    const tree = renderer.create(<IconV1 fontSource={fontProps} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<IconV1 fontSource={fontProps} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('renders SVG Icon', () => {
-    const tree = renderer.create(<SvgIcon src={AccessTime20RegularIcon} width={100} height={100} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<SvgIcon src={AccessTime20RegularIcon} width={100} height={100} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('renders SVG Icon using Icon component', () => {
-    const tree = renderer.create(<IconV1 svgSource={{ src: AccessTime20RegularIcon, width: 20, height: 20 }} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<IconV1 svgSource={{ src: AccessTime20RegularIcon, width: 20, height: 20 }} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

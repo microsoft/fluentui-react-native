@@ -1,6 +1,7 @@
 import { ButtonV1 } from '@fluentui-react-native/button';
 import { Menu, MenuPopover, MenuTrigger, MenuItem } from '@fluentui-react-native/menu';
 import * as renderer from 'react-test-renderer';
+import { act } from 'react';
 
 import { Overflow, OverflowItem, useOverflowMenu } from '../';
 
@@ -28,8 +29,9 @@ const OverflowMenu = () => {
 
 describe('Overflow component tests', () => {
   it('Overflow default', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Overflow itemIDs={items}>
           {items.map((item) => (
             <OverflowItem key={item} overflowID={item}>
@@ -38,8 +40,9 @@ describe('Overflow component tests', () => {
           ))}
           <OverflowMenu />
         </Overflow>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

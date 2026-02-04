@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { act } from 'react';
 
 import { validateHookValueNotChanged } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
@@ -18,12 +19,17 @@ describe('useConst', () => {
       return <React.Fragment>{value}</React.Fragment>;
     };
 
-    const wrapper = renderer.create(<TestComponent />);
-    const firstValue = wrapper.toJSON();
+    let wrapper: renderer.ReactTestRenderer;
+    act(() => {
+      wrapper = renderer.create(<TestComponent />);
+    });
+    const firstValue = wrapper!.toJSON();
     // Re-render the component
-    wrapper.update(<TestComponent />);
+    act(() => {
+      wrapper.update(<TestComponent />);
+    });
     // Text should be the same
-    expect(wrapper.toJSON()).toBe(firstValue);
+    expect(wrapper!.toJSON()).toBe(firstValue);
     // Function shouldn't have been called again
     expect(initializer).toHaveBeenCalledTimes(1);
   });
@@ -36,9 +42,14 @@ describe('useConst', () => {
       return <React.Fragment>{value}</React.Fragment>;
     };
 
-    const wrapper = renderer.create(<TestComponent />);
+    let wrapper: renderer.ReactTestRenderer;
+    act(() => {
+      wrapper = renderer.create(<TestComponent />);
+    });
     // Re-render the component
-    wrapper.update(<TestComponent />);
+    act(() => {
+      wrapper.update(<TestComponent />);
+    });
     // Function shouldn't have been called again
     expect(initializer).toHaveBeenCalledTimes(1);
   });

@@ -19,6 +19,10 @@ export function configureReactNativeJest(platform, customConfig) {
   const config = jestPreset(ensurePlatform(platform, 'ios'), {
     roots: ['<rootDir>/src'],
     verbose: false,
+    // React 19 requires this global to be set for act() to work properly
+    globals: {
+      IS_REACT_ACT_ENVIRONMENT: true,
+    },
     ...customConfig,
   });
   if (isPnpmMode()) {

@@ -24,7 +24,7 @@ exports[`composeFactory test suite Base component render 1`] = `
 </View>
 `;
 
-exports[`composeFactory test suite Base component render 2`] = `
+exports[`composeFactory test suite Customized component render 1`] = `
 <View
   style={
     {

@@ -1,3 +1,5 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { Switch } from '../Switch';
@@ -6,11 +8,17 @@ import { Switch } from '../Switch';
 jest.useFakeTimers();
 
 it('Switch Default', () => {
-  const tree = renderer.create(<Switch label="Default Switch" />).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<Switch label="Default Switch" />);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });
 
 it('Switch Disabled', () => {
-  const tree = renderer.create(<Switch label="Default Switch Disabled" disabled />).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<Switch label="Default Switch Disabled" disabled />);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });

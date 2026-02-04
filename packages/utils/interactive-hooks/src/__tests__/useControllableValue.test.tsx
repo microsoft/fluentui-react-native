@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { act } from 'react';
 
 import { validateHookValueNotChanged } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
@@ -13,16 +14,26 @@ describe('useControllableValue', () => {
       return <React.Fragment />;
     };
 
-    const wrapper1 = renderer.create(<TestComponent value={true} />);
+    let wrapper1: renderer.ReactTestRenderer;
+    act(() => {
+      wrapper1 = renderer.create(<TestComponent value={true} />);
+    });
     expect(resultValue!).toBe(true);
 
-    wrapper1.update(<TestComponent value={false} />);
+    act(() => {
+      wrapper1.update(<TestComponent value={false} />);
+    });
     expect(resultValue!).toBe(false);
 
-    const wrapper2 = renderer.create(<TestComponent value={false} defaultValue={true} />);
+    let wrapper2: renderer.ReactTestRenderer;
+    act(() => {
+      wrapper2 = renderer.create(<TestComponent value={false} defaultValue={true} />);
+    });
     expect(resultValue!).toBe(false);
 
-    wrapper2.update(<TestComponent value={true} defaultValue={true} />);
+    act(() => {
+      wrapper2.update(<TestComponent value={true} defaultValue={true} />);
+    });
     expect(resultValue!).toBe(true);
   });
 
@@ -33,7 +44,9 @@ describe('useControllableValue', () => {
       return <React.Fragment />;
     };
 
-    renderer.create(<TestComponent defaultValue={true} />);
+    act(() => {
+      renderer.create(<TestComponent defaultValue={true} />);
+    });
     expect(resultValue!).toBe(true);
   });
 
@@ -44,10 +57,15 @@ describe('useControllableValue', () => {
       return <React.Fragment />;
     };
 
-    const wrapper = renderer.create(<TestComponent defaultValue={true} />);
+    let wrapper: renderer.ReactTestRenderer;
+    act(() => {
+      wrapper = renderer.create(<TestComponent defaultValue={true} />);
+    });
     expect(resultValue!).toBe(true);
 
-    wrapper.update(<TestComponent defaultValue={false} />);
+    act(() => {
+      wrapper.update(<TestComponent defaultValue={false} />);
+    });
     expect(resultValue!).toBe(true);
   });
 

@@ -236,8 +236,6 @@ exports[`Shadow component tests Pressable that has a shadow vs. pressable withou
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -263,8 +261,6 @@ exports[`Shadow component tests Pressable that has a shadow vs. pressable withou
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}

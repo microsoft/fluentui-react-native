@@ -1,3 +1,5 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { Input } from '../Input';
@@ -11,32 +13,50 @@ const iconProps = { fontSource: { ...fontBuiltInProps }, color: '#fff' };
 
 describe('Input component tests', () => {
   it('Input default', () => {
-    const tree = renderer.create(<Input accessoryIcon={iconProps} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Input accessoryIcon={iconProps} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Input with placeholder', () => {
-    const tree = renderer.create(<Input placeholder="Test" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Input placeholder="Test" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Input without accessoryIcon', () => {
-    const tree = renderer.create(<Input placeholder="Test" accessoryIcon={null} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Input placeholder="Test" accessoryIcon={null} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Input with all optional text', () => {
-    const tree = renderer.create(<Input placeholder="Test" accessoryText="Accessory" label="Label" assistiveText="Assistive" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Input placeholder="Test" accessoryText="Accessory" label="Label" assistiveText="Assistive" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Input with icon', () => {
-    const tree = renderer.create(<Input placeholder="Test" defaultIcon={iconProps} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Input placeholder="Test" defaultIcon={iconProps} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Input in error state', () => {
-    const tree = renderer.create(<Input error="Error" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Input error="Error" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });
