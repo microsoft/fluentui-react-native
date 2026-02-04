@@ -27,6 +27,7 @@ exports[`Link all props 1`] = `
   url="https://www.bing.com"
 >
   <Text
+    color="link"
     style={
       {
         "borderColor": "transparent",
@@ -75,6 +76,7 @@ exports[`Link with child 1`] = `
   url="https://www.bing.com"
 >
   <Text
+    color="link"
     style={
       {
         "borderColor": "transparent",

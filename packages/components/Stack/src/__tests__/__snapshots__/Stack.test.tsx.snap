@@ -2,6 +2,8 @@
 
 exports[`Stack with tokens 1`] = `
 <View
+  maxWidth={400}
+  padding={16}
   style={
     {
       "display": "flex",
