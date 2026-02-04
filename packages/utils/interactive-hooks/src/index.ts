@@ -47,14 +47,12 @@ export type {
 export type {
   BlurEvent,
   FocusEvent,
-  Layout,
   LayoutEvent,
   MouseEvent,
   PressEvent,
   ResponderSyntheticEvent,
   ScrollEvent,
   SyntheticEvent,
-  TextLayout,
   TextLayoutEvent,
 } from './Pressability/CoreEventTypes';
 export type { KeyPressEvent, KeyCallback, KeyPressProps } from './useKeyProps.types';

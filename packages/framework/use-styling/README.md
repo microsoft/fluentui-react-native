@@ -105,7 +105,7 @@ A token is simply a setting that informs the styling of the component. These can
 interface Tokens {
   backgroundColor?: ColorValue;
   borderWidth?: number;
-  borderRadius?: number;
+  borderRadius?: AnimatableNumericValue | string;
 }
 
 /** Build the styling hook */

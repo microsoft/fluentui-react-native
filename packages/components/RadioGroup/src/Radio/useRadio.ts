@@ -26,7 +26,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     accessibilityHint,
     accessibilityState,
     componentRef = defaultComponentRef,
-    accessibilityPositionInSet,
+    accessibilityPosInSet,
     accessibilitySetSize,
     enableFocusRing,
     ...rest
@@ -101,7 +101,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       accessibilityHint: accessibilityHint ?? subtext,
       accessibilityState: getAccessibilityState(state.disabled, state.selected, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
-      accessibilityPositionInSet: accessibilityPositionInSet ?? radioGroupContext.values.findIndex((x) => x == value) + 1,
+      accessibilityPosInSet: accessibilityPosInSet ?? radioGroupContext.values.findIndex((x) => x == value) + 1,
       accessibilitySetSize: accessibilitySetSize ?? radioGroupContext.values.length,
       focusable: !state.disabled,
       disabled: isDisabled,

@@ -48,7 +48,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={1}
+        accessibilityPosInSet={1}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -183,7 +183,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={2}
+        accessibilityPosInSet={2}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -318,7 +318,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={3}
+        accessibilityPosInSet={3}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -497,7 +497,7 @@ exports[`TabList component tests TabList default props 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={0}
         accessibilityRole="tab"
         accessibilitySetSize={0}
         accessibilityState={
@@ -632,7 +632,7 @@ exports[`TabList component tests TabList default props 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={0}
         accessibilityRole="tab"
         accessibilitySetSize={0}
         accessibilityState={
@@ -767,7 +767,7 @@ exports[`TabList component tests TabList default props 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={0}
         accessibilityRole="tab"
         accessibilitySetSize={0}
         accessibilityState={
@@ -946,7 +946,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={0}
         accessibilityRole="tab"
         accessibilitySetSize={0}
         accessibilityState={
@@ -1081,7 +1081,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={0}
         accessibilityRole="tab"
         accessibilitySetSize={0}
         accessibilityState={
@@ -1216,7 +1216,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={0}
         accessibilityRole="tab"
         accessibilitySetSize={0}
         accessibilityState={
@@ -1395,7 +1395,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={1}
+        accessibilityPosInSet={1}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -1529,7 +1529,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={2}
+        accessibilityPosInSet={2}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -1663,7 +1663,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={3}
+        accessibilityPosInSet={3}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -1842,7 +1842,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={1}
+        accessibilityPosInSet={1}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -1977,7 +1977,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={2}
+        accessibilityPosInSet={2}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -2112,7 +2112,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={3}
+        accessibilityPosInSet={3}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -2291,7 +2291,7 @@ exports[`TabList component tests TabList size 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={0}
         accessibilityRole="tab"
         accessibilitySetSize={0}
         accessibilityState={
@@ -2426,7 +2426,7 @@ exports[`TabList component tests TabList size 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={0}
         accessibilityRole="tab"
         accessibilitySetSize={0}
         accessibilityState={
@@ -2561,7 +2561,7 @@ exports[`TabList component tests TabList size 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={0}
         accessibilityRole="tab"
         accessibilitySetSize={0}
         accessibilityState={

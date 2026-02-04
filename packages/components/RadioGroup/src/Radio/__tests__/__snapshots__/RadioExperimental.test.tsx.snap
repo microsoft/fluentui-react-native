@@ -10,7 +10,7 @@ exports[`Radio component tests Radio default 1`] = `
     ]
   }
   accessibilityLabel="Default Radio"
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="radio"
   accessibilitySetSize={0}
   accessibilityState={
@@ -174,7 +174,7 @@ exports[`Radio component tests Radio disabled 1`] = `
     ]
   }
   accessibilityLabel="Disabled Radio"
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="radio"
   accessibilitySetSize={0}
   accessibilityState={

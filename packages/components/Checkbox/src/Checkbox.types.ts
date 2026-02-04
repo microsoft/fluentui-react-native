@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { ColorValue, ViewStyle } from 'react-native';
+import type { ColorValue, ViewStyle, AnimatableNumericValue } from 'react-native';
 
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
 import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
@@ -30,7 +30,7 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   /**
    * Border radius of the box containing the checkmark.
    */
-  checkboxBorderRadius?: number;
+  checkboxBorderRadius?: AnimatableNumericValue | string;
 
   /**
    * Width of the border around the box containing the checkmark.

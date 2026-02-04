@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 import type { View, AccessibilityState, LayoutRectangle } from 'react-native';
+import type { NativeKeyEvent } from '@fluentui-react-native/adapters';
 
 import { memoize, mergeStyles } from '@fluentui-react-native/framework';
 import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
-import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 import type { TabListInfo, TabListProps } from './TabList.types';
 import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
@@ -164,7 +164,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   // win32 only prop used to implemement CTRL + TAB shortcut native to windows tab components
   const onRootKeyDown = React.useCallback(
-    (e: IKeyboardEvent) => {
+    (e: NativeKeyEvent) => {
       if ((Platform.OS as string) === 'win32' && e.nativeEvent.key === 'Tab' && e.nativeEvent.ctrlKey) {
         incrementSelectedTab(e.nativeEvent.shiftKey);
         setInvoked(true); // on win32, set focus on the new tab without triggering narration twice

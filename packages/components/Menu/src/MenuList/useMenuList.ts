@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import type { View } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import type { NativeKeyEvent } from '@fluentui-react-native/adapters';
 
 import type { MenuListProps, MenuListState, TrackedMenuItem } from './MenuList.types';
 import { useMenuContext } from '../context/menuContext';
@@ -137,7 +138,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     [trackedMenuItems],
   );
 
-  const onListKeyDown = (e: InteractionEvent) => {
+  const onListKeyDown = (e: NativeKeyEvent) => {
     const key = e.nativeEvent.key;
     if (handledKeys.includes(key)) {
       // For iOS and macOS, 'Home' and 'End' must set focus on the first and last enabled item.

@@ -37,7 +37,7 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/babel-preset": "^0.81.0",
     "@types/node": "catalog:",
     "babel-jest": "^29.0.0",
     "jest": "^29.2.1",

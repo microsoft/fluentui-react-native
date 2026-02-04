@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { ViewStyle, ColorValue } from 'react-native';
+import type { ViewStyle, ColorValue, AnimatableNumericValue } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
@@ -49,7 +49,7 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
   /**
    * Border radius of the indicator.
    */
-  indicatorRadius?: number;
+  indicatorRadius?: AnimatableNumericValue | string;
 
   /**
    * Thickness of the indicator line.

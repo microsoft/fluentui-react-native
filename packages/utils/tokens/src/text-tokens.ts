@@ -1,6 +1,6 @@
 import type { TextProps, TextStyle } from 'react-native';
 
-import type { ITextProps } from '@fluentui-react-native/adapters';
+import type { ITextProps, ITextStyle } from '@fluentui-react-native/adapters';
 import type { Theme, Typography } from '@fluentui-react-native/theme-types';
 
 import { styleFunction } from './token.function';
@@ -28,7 +28,7 @@ export interface FontDecorationTokens {
 
 export type FontTokens = FontStyleTokens & FontVariantTokens & FontDecorationTokens;
 
-export const fontStyles: TokenBuilder<FontTokens> = {
+export const fontStyles: TokenBuilder<FontTokens, ITextStyle> = {
   from: (
     {
       fontDynamicTypeRamp,

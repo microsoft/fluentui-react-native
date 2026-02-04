@@ -13,7 +13,7 @@ export type MenuPopoverTokens =
        * The props for the corner radius for the Modal MenuPopover
        * @platform android macos
        */
-      borderRadius?: AnimatableNumericValue;
+      borderRadius?: AnimatableNumericValue | string;
 
       /**
        * Shadown elevation for the Modal MenuPopover
