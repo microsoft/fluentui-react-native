@@ -43,7 +43,6 @@ const style = { width: 300, height: 100 };
 jest.useFakeTimers();
 
 describe('Shimmer component tests', () => {
-
   it('Shimmer default', async () => {
     let component: renderer.ReactTestRenderer;
     act(() => {

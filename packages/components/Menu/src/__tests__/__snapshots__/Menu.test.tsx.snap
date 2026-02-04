@@ -320,7 +320,7 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
 </View>
 `;
 
-exports[`Menu component tests Menu defaultOpen 2`] = `
+exports[`Menu component tests Menu defaultOpen with disabled 1`] = `
 <View
   accessibilityActions={
     [
