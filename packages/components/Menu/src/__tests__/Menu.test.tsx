@@ -74,7 +74,7 @@ describe('Menu component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('Menu defaultOpen', () => {
+  it('Menu defaultOpen with disabled', () => {
     let component: renderer.ReactTestRenderer;
     act(() => {
       component = renderer.create(
