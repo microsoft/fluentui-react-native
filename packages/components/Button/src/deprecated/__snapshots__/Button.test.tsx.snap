@@ -51,6 +51,7 @@ exports[`Button default 1`] = `
       }
     >
       <Text
+        color="buttonText"
         style={
           {
             "color": "#323130",
