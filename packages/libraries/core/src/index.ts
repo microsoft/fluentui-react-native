@@ -284,7 +284,6 @@ export type {
   IWithPressableOptions,
   KeyPressEvent,
   KeyCallback,
-  Layout,
   LayoutEvent,
   MeasureInWindowOnSuccessCallback,
   MeasureLayoutOnSuccessCallback,
@@ -308,7 +307,6 @@ export type {
   ResponderSyntheticEvent,
   ScrollEvent,
   SyntheticEvent,
-  TextLayout,
   TextLayoutEvent,
   onKeySelectCallback,
 } from '@fluentui-react-native/interactive-hooks';

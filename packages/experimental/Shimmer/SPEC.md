@@ -109,7 +109,7 @@ export interface ShimmerCircleElement {
    * Radius of the circle element.
    * @defaultValue 12
    */
-  radius?: number;
+  radius?: AnimatableNumericValue | string;
 
   /**
    * Note: cx and cy should be optional properties [or removed], with relative positioning being the default [or only] positioning mechanism.

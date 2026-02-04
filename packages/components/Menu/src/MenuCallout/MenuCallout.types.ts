@@ -12,7 +12,7 @@ export type MenuCalloutTokens =
        * The token for the corner radius for the Modal MenuPopover
        * @platform android macos
        */
-      borderRadius?: AnimatableNumericValue;
+      borderRadius?: AnimatableNumericValue | string;
 
       /**
        * Shadown elevation token for the Modal MenuPopover

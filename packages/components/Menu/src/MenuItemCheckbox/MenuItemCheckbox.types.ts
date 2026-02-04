@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { ColorValue, ImageProps } from 'react-native';
+import type { ColorValue, ImageProps, AnimatableNumericValue } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
@@ -54,7 +54,7 @@ export interface MenuItemCheckboxTokens
    * Border radius of the box containing the checkmark.
    * @platform android
    */
-  checkboxBorderRadius?: number;
+  checkboxBorderRadius?: AnimatableNumericValue | string;
 
   /**
    * Width of the border around the box containing the checkmark.

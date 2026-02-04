@@ -31,12 +31,12 @@ export const DefaultRadioGroup: React.FunctionComponent = () => {
             label="Option A"
             value="A"
             accessibilityLabel="Test Accessibility Label"
-            accessibilityPositionInSet={1}
+            accessibilityPosInSet={1}
             accessibilitySetSize={4}
           />
-          <Radio label="Option B" value="B" accessibilityPositionInSet={2} accessibilitySetSize={4} />
-          <Radio label="Option C" value="C" accessibilityPositionInSet={3} accessibilitySetSize={4} />
-          <Radio label="Option D" value="D" accessibilityPositionInSet={4} accessibilitySetSize={4} />
+          <Radio label="Option B" value="B" accessibilityPosInSet={2} accessibilitySetSize={4} />
+          <Radio label="Option C" value="C" accessibilityPosInSet={3} accessibilitySetSize={4} />
+          <Radio label="Option D" value="D" accessibilityPosInSet={4} accessibilitySetSize={4} />
         </View>
       </RadioGroup>
     </View>

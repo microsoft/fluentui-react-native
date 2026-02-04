@@ -1,14 +1,11 @@
-import type { NativeSyntheticEvent } from 'react-native';
-
-export type KeyPressEvent = NativeSyntheticEvent<any>;
-
-export type KeyCallback = (e: KeyPressEvent) => void;
+import type { KeyEventHandler } from '@fluentui-react-native/adapters';
+export type { KeyEventHandler as KeyCallback, NativeKeyEvent as KeyPressEvent } from '@fluentui-react-native/adapters';
 
 export type KeyPressProps = {
-  onKeyDown?: KeyCallback;
+  onKeyDown?: KeyEventHandler;
   validKeysDown?: string[]; // macOS
   keyDownEvents?: any[]; // windows
-  onKeyUp?: KeyCallback;
+  onKeyUp?: KeyEventHandler;
   validKeysUp?: string[]; // macOS
   keyUpEvents?: any[]; // windows
 };

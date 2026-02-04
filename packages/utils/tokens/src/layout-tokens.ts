@@ -33,7 +33,7 @@ export const layoutTokens: OperationSet<LayoutTokens, Theme> = [
   { source: 'paddingEnd' },
 ];
 
-export const layoutStyles = tokenBuilder<LayoutTokens>(
+export const layoutStyles = tokenBuilder<LayoutTokens, ViewStyle>(
   'width',
   'height',
   'minWidth',

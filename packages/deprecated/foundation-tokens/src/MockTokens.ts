@@ -1,4 +1,4 @@
-import type { ColorValue } from 'react-native';
+import type { AnimatableNumericValue, ColorValue } from 'react-native';
 
 import type { IMockTheme } from './MockTheme';
 import type { IStyleFactoryOperation, ILookupThemePart } from './Token.types';
@@ -24,7 +24,7 @@ export interface IMockCaptionTextTokens {
 
 export interface IMockBorderTokens {
   borderWidth?: number;
-  borderRadius?: number;
+  borderRadius?: AnimatableNumericValue | string;
   borderColor?: ColorValue;
 }
 

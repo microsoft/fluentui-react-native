@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
+import type { ViewProps, ViewStyle } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { Separator, Pressable } from '@fluentui/react-native';
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 
 const Track = Separator.customize({ separatorWidth: 4 });
 
-function onThumbRenderStyle(state: IPressableState, thumbLocation: number): StyleProp<ViewStyle> {
+function onThumbRenderStyle(state: IPressableState, thumbLocation: number): ViewStyle {
   return {
     ...styles.thumb,
     borderColor: state.pressed ? 'black' : state.hovered ? 'red' : '#7A7574',

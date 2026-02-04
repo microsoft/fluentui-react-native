@@ -111,10 +111,16 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
 
+  const removeBackHandler = React.useMemo(() => {
+    return {
+      remove: undefined,
+    } as { remove?: () => void };
+  }, []);
+
   const onBackPress = React.useCallback(() => {
     setOnTestListView(true);
-    if (Platform.OS === 'android') {
-      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    if (Platform.OS === 'android' && removeBackHandler.remove) {
+      removeBackHandler.remove();
     }
     return true;
   }, []);
@@ -187,7 +193,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                     setOnTestListView(false);
                     setSelectedTestIndex(index);
                     if (Platform.OS === 'android') {
-                      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+                      // add the listener and remember the remove function so it can be cleaned up later
+                      removeBackHandler.remove = BackHandler.addEventListener('hardwareBackPress', onBackPress).remove;
                     }
                   }}
                   style={mobileStyles.testListItem}

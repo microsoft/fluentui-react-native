@@ -13,7 +13,7 @@ const rasterImageStyleCache = getTypedMemoCache<ImageStyle>();
 
 function renderRasterImage(iconProps: IconProps) {
   const { width, height, color } = iconProps;
-  const style = mergeStyles<ImageStyle>(
+  const style = mergeStyles(
     iconProps.style,
     rasterImageStyleCache({ width: width, height: height, tintColor: color }, [width, height, color])[0],
   );

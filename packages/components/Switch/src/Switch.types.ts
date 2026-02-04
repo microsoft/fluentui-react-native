@@ -1,7 +1,6 @@
 import type * as React from 'react';
-import type { Animated, ViewStyle, ColorValue, PressableProps } from 'react-native';
+import type { Animated, ViewStyle, ColorValue, PressableProps, ViewProps, AnimatableNumericValue } from 'react-native';
 
-import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
 import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
@@ -58,7 +57,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   /**
    * Thumb radius
    */
-  thumbRadius?: number;
+  thumbRadius?: AnimatableNumericValue | string;
 
   /**
    * Thumb margin
@@ -78,7 +77,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   /**
    * Border Radius of border when Switch is focused on
    */
-  focusBorderRadius?: number;
+  focusBorderRadius?: AnimatableNumericValue | string;
 
   /**
    * Sets the position of the thumb
@@ -200,8 +199,8 @@ export interface SwitchSlotProps {
   label: TextProps;
   track: PropsOf<typeof Animated.View>;
   thumb: PropsOf<typeof Animated.View>;
-  toggleContainer: IViewProps;
-  onOffTextContainer: IViewProps;
+  toggleContainer: ViewProps;
+  onOffTextContainer: ViewProps;
   onOffText: TextProps;
 }
 

@@ -10,7 +10,7 @@ exports[`Tab component tests Customized Tab 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="tab"
   accessibilitySetSize={0}
   accessibilityState={
@@ -148,7 +148,7 @@ exports[`Tab component tests Tab default props 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="tab"
   accessibilitySetSize={0}
   accessibilityState={
@@ -286,7 +286,7 @@ exports[`Tab component tests Tab disabled 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="tab"
   accessibilitySetSize={0}
   accessibilityState={
@@ -424,7 +424,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="tab"
   accessibilitySetSize={0}
   accessibilityState={
@@ -574,7 +574,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
     ]
   }
   accessibilityLabel=""
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="tab"
   accessibilitySetSize={0}
   accessibilityState={

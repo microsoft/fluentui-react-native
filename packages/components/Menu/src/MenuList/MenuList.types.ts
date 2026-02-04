@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { ScrollViewProps, View } from 'react-native';
+import type { ScrollViewProps, View, AnimatableNumericValue } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
@@ -23,7 +23,7 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
    * Border radius of the menu list
    * @platform android macos
    */
-  borderRadius?: number;
+  borderRadius?: AnimatableNumericValue | string;
 }
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {

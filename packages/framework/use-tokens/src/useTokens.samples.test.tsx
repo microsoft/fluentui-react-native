@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { TextProps, TextStyle } from 'react-native';
+import type { TextProps } from 'react-native';
 import { Text, View } from 'react-native';
 
 import { immutableMerge } from '@fluentui-react-native/framework-base';
@@ -96,7 +96,7 @@ describe('useTokens samples', () => {
     const [tokens, cache] = useTokensSample1(theme);
 
     // build up the text style, or the full props as appropriate
-    const styleFromTokens = cache(
+    const [styleFromTokens] = cache(
       /**
        * first build the style object
        * - this executes once for every unique set of keys.
@@ -115,7 +115,7 @@ describe('useTokens samples', () => {
 
     // merge the props from the tokens with anything passed in via style. This is internally cached via object identity
     // so the merged style object won't change identity unless one of the two inputs changes identity.
-    const mergedStyle = mergeStyles<TextStyle>(styleFromTokens, style);
+    const mergedStyle = mergeStyles(styleFromTokens, style);
 
     // now just render the element, forwarding the props, setting the merged style, then passing the children as appropriate
     return (
@@ -176,7 +176,7 @@ describe('useTokens samples', () => {
 
     // now just render, this time merging styles inline to make it a bit shorter
     return (
-      <Text {...rest} style={mergeStyles<TextStyle>(styleFromTokens, style)}>
+      <Text {...rest} style={mergeStyles(styleFromTokens, style)}>
         {children}
       </Text>
     );

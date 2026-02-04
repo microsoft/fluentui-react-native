@@ -1,7 +1,6 @@
 import type * as React from 'react';
-import type { ViewStyle, ColorValue } from 'react-native';
+import type { ViewStyle, ColorValue, ViewProps, AnimatableNumericValue } from 'react-native';
 
-import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
@@ -64,7 +63,7 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
    */
   borderInnerColor?: ColorValue;
   borderInnerWidth?: number;
-  borderInnerRadius?: number;
+  borderInnerRadius?: AnimatableNumericValue | string;
   borderInnerStyle?: ViewStyle['borderStyle'];
 }
 
@@ -181,8 +180,8 @@ export interface ButtonInfo {
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
-  rippleContainer?: IViewProps; // Android only
-  focusInnerBorder?: IViewProps; // Win32 only
+  rippleContainer?: ViewProps; // Android only
+  focusInnerBorder?: ViewProps; // Win32 only
   icon: IconProps;
   content: TextProps;
 }
