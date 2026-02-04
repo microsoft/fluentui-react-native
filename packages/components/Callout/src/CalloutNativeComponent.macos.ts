@@ -7,5 +7,6 @@ export const Commands: CalloutNativeCommands = codegenNativeCommands<CalloutNati
   supportedCommands: ['blurWindow', 'focusWindow'],
 });
 
-// no fabric for Win32, just use requireNativeComponent
-export default requireNativeComponent<NativeProps>('RCTCallout') as CalloutComponentType;
+// no fabric for macOS, just use requireNativeComponent
+// macOS uses FRNCallout (registered by FRNCalloutManager), not RCTCallout
+export default requireNativeComponent<NativeProps>('FRNCallout') as CalloutComponentType;
