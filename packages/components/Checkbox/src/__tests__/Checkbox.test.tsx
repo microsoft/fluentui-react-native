@@ -1,3 +1,4 @@
+import { act } from 'react';
 import { Text, View } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
@@ -12,18 +13,25 @@ function onChange(_e: InteractionEvent, isChecked: boolean) {
 
 describe('Checkbox component tests', () => {
   it('Checkbox default', () => {
-    const tree = renderer.create(<Checkbox label="Default Checkbox" onChange={onChange} defaultChecked={false} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Checkbox label="Default Checkbox" onChange={onChange} defaultChecked={false} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Checkbox no label', () => {
-    const tree = renderer.create(<Checkbox onChange={onChange} defaultChecked={false} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Checkbox onChange={onChange} defaultChecked={false} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Checkbox all props', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Checkbox
           label="All Props Checkbox"
           onChange={onChange}
@@ -34,9 +42,9 @@ describe('Checkbox component tests', () => {
           size="large"
           required
         />,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Checkbox all tokens', () => {
@@ -60,8 +68,11 @@ describe('Checkbox component tests', () => {
       borderRadius: 4,
       borderWidth: 2,
     });
-    const tree = renderer.create(<BoldCheckbox label="All Tokens Checkbox" onChange={onChange} defaultChecked={false} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<BoldCheckbox label="All Tokens Checkbox" onChange={onChange} defaultChecked={false} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Checkbox composed', () => {
@@ -74,7 +85,10 @@ describe('Checkbox component tests', () => {
         required: Text,
       },
     });
-    const tree = renderer.create(<ComposedCheckbox label="Composed Button with RNText" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<ComposedCheckbox label="Composed Button with RNText" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

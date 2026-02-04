@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { act } from 'react';
 import type { TextProps, ColorValue } from 'react-native';
 import { Text, View } from 'react-native';
 
@@ -129,8 +130,11 @@ describe('useStyling samples', () => {
 
   /** first render the component with no updates */
   it('Sample1Text rendering with no overrides', () => {
-    const tree = renderer.create(<Sample1Text>Sample1a</Sample1Text>).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Sample1Text>Sample1a</Sample1Text>);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   /** now re-theme the component via the components in the theme */
@@ -143,8 +147,11 @@ describe('useStyling samples', () => {
         },
       },
     });
-    const tree = renderer.create(<Sample1Text>Sample1b</Sample1Text>).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Sample1Text>Sample1b</Sample1Text>);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   /**
@@ -210,15 +217,16 @@ describe('useStyling samples', () => {
   /** rendering the Sample2 component with the base theme */
   it('Sample2Text rendering with defaults and a color override', () => {
     themeHelper.setActive();
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <View>
           <Sample2Text>Sample2 with defaults</Sample2Text>
           <Sample2Text color="green">Sample2 with color override via prop</Sample2Text>
         </View>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   /** now re-theme the component via the components in the theme */
@@ -235,14 +243,15 @@ describe('useStyling samples', () => {
         },
       },
     });
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <View>
           <Sample2Text>Sample2 with theme overrides set</Sample2Text>
           <Sample2Text color="purple">Sample2 with theme and color prop override</Sample2Text>
         </View>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

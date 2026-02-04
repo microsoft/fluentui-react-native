@@ -1,3 +1,5 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { Chip } from '../';
@@ -9,13 +11,19 @@ describe('Chip component tests', () => {
     fontSize: 16,
   };
   it('Empty Chip', () => {
-    const tree = renderer.create(<Chip />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Chip />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Chip all props', () => {
-    const tree = renderer.create(<Chip icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }}>Chip</Chip>).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Chip icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }}>Chip</Chip>);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Chip tokens', () => {
@@ -24,7 +32,10 @@ describe('Chip component tests', () => {
       borderColor: '#f09',
       borderWidth: 4,
     });
-    const tree = renderer.create(<ChipStyled>Chip Tokens</ChipStyled>).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<ChipStyled>Chip Tokens</ChipStyled>);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

@@ -1,3 +1,5 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import Tab from '../../Tab/Tab';
@@ -8,80 +10,86 @@ jest.useFakeTimers();
 
 describe('TabList component tests', () => {
   it('TabList default props', async () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <TabList>
           <Tab tabKey="1">Tab 1</Tab>
           <Tab tabKey="2">Tab 2</Tab>
           <Tab tabKey="3">Tab 3</Tab>
         </TabList>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('TabList selected key', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <TabList selectedKey="1">
           <Tab tabKey="1">Tab 1</Tab>
           <Tab tabKey="2">Tab 2</Tab>
           <Tab tabKey="3">Tab 3</Tab>
         </TabList>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('TabList disabled list', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <TabList disabled>
           <Tab tabKey="1">Tab 1</Tab>
           <Tab tabKey="2">Tab 2</Tab>
           <Tab tabKey="3">Tab 3</Tab>
         </TabList>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('TabList appearance', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <TabList appearance="subtle">
           <Tab tabKey="1">Tab 1</Tab>
           <Tab tabKey="2">Tab 2</Tab>
           <Tab tabKey="3">Tab 3</Tab>
         </TabList>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('TabList size', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <TabList size="large">
           <Tab tabKey="1">Tab 1</Tab>
           <Tab tabKey="2">Tab 2</Tab>
           <Tab tabKey="3">Tab 3</Tab>
         </TabList>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('TabList orientation', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <TabList vertical>
           <Tab tabKey="1">Tab 1</Tab>
           <Tab tabKey="2">Tab 2</Tab>
           <Tab tabKey="3">Tab 3</Tab>
         </TabList>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

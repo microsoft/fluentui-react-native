@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { act } from 'react';
 import { mergeProps } from '@fluentui-react-native/framework-base';
 import { phasedComponent } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
@@ -73,15 +74,16 @@ describe('useSlots sample code test suite', () => {
     /**
      * First render the staged component. This invokes the wrapper that was built by the stagedComponent function
      */
-    const wrapper = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <View>
           <BoldTextStaged style={styleToMerge}>Staged component at one level</BoldTextStaged>
           <BoldTextStandard style={styleToMerge}>Standard component of a single level</BoldTextStandard>
         </View>,
-      )
-      .toJSON();
-    expect(wrapper).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   /**
@@ -152,15 +154,16 @@ describe('useSlots sample code test suite', () => {
     /**
      * First render the staged component. This invokes the wrapper that was built by the stagedComponent function
      */
-    const wrapper = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <div>
           <HeaderStaged style={styleToMerge}>Staged component with two levels</HeaderStaged>
           <HeaderStandard style={styleToMerge}>Standard component with two levels</HeaderStandard>
         </div>,
-      )
-      .toJSON();
-    expect(wrapper).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   /**
@@ -252,8 +255,9 @@ describe('useSlots sample code test suite', () => {
      * Render the two sets of components. Note in the snapshots how the render tree layers for the standard approach are starting
      * to add up.
      */
-    const wrapper = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <div>
           <span>--- SIMPLE USAGE COMPARISON ---</span>
           <CaptionedHeaderStandard style={styleToMerge}>Standard HOC</CaptionedHeaderStandard>
@@ -273,8 +277,8 @@ describe('useSlots sample code test suite', () => {
             Staged HOC with caption and customizations
           </CaptionedHeaderStaged>
         </div>,
-      )
-      .toJSON();
-    expect(wrapper).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

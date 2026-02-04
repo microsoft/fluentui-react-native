@@ -1,8 +1,13 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { ContextualMenu } from '..';
 
 it('ContextualMenu default props', () => {
-  const tree = renderer.create(<ContextualMenu />).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<ContextualMenu />);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });

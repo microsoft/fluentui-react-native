@@ -44,8 +44,13 @@ export function renderForJsxRuntime<TProps>(
       jsxFn = ReactJSX.jsx;
     }
   }
+  // Extract key from props to avoid React 19 warning about spreading key prop
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { key: propsKey, ...propsWithoutKey } = props as any;
+  // Use explicitly passed key, or fall back to key from props
+  const finalKey = key ?? propsKey;
   // now call the appropriate jsx function to render the component
-  return jsxFn(type, props, key);
+  return jsxFn(type, propsWithoutKey, finalKey);
 }
 
 export function renderForClassicRuntime<TProps>(type: RenderType, props: TProps, ...children: React.ReactNode[]): RenderResult {

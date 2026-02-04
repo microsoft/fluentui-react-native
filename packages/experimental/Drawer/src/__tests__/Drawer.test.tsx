@@ -1,3 +1,4 @@
+import { act } from 'react';
 import { Text } from 'react-native';
 
 import * as renderer from 'react-test-renderer';
@@ -10,13 +11,14 @@ jest.useFakeTimers();
 // Disable Drawer test, as it's still failing despite the line above
 describe('Drawer component tests', () => {
   it('Drawer default', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         // <Drawer open={false} drawerPosition="left">
         <Text>Hello</Text>,
         // </Drawer>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

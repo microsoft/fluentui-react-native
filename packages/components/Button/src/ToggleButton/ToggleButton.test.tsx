@@ -1,8 +1,13 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { ToggleButton } from './ToggleButton';
 
 it('ToggleButton default', () => {
-  const tree = renderer.create(<ToggleButton>Default Button</ToggleButton>).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<ToggleButton>Default Button</ToggleButton>);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });

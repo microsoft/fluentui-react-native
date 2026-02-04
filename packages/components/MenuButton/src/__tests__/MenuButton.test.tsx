@@ -1,3 +1,5 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import type { MenuButtonItemProps } from '..';
@@ -43,6 +45,9 @@ it('ContextualMenu default', () => {
       text: 'Menu Item',
     },
   ];
-  const tree = renderer.create(<MenuButton menuItems={menuItems}>Press for Nested MenuButton</MenuButton>).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<MenuButton menuItems={menuItems}>Press for Nested MenuButton</MenuButton>);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });

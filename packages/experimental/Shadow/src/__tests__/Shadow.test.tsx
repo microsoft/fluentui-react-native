@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { act } from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
@@ -62,83 +63,131 @@ describe('Shadow component tests', () => {
   });
 
   it('Shadow (depth=2)', () => {
-    const tree = renderer.create(<TestShadow displayText="Shadow (depth=2)" depth="shadow2" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Shadow (depth=2)" depth="shadow2" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Shadow (depth=4)', () => {
-    const tree = renderer.create(<TestShadow displayText="Shadow (depth=4)" depth="shadow4" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Shadow (depth=4)" depth="shadow4" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Shadow (depth=8)', () => {
-    const tree = renderer.create(<TestShadow displayText="Shadow (depth=8)" depth="shadow8" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Shadow (depth=8)" depth="shadow8" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Shadow (depth=16)', () => {
-    const tree = renderer.create(<TestShadow displayText="Shadow (depth=16)" depth="shadow16" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Shadow (depth=16)" depth="shadow16" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Shadow (depth=28)', () => {
-    const tree = renderer.create(<TestShadow displayText="Shadow (depth=28)" depth="shadow28" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Shadow (depth=28)" depth="shadow28" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Shadow (depth=64)', () => {
-    const tree = renderer.create(<TestShadow displayText="Shadow (depth=64)" depth="shadow64" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Shadow (depth=64)" depth="shadow64" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Brand shadow (depth=2)', () => {
-    const tree = renderer.create(<TestShadow displayText="Brand shadow (depth=2)" depth="shadow2brand" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Brand shadow (depth=2)" depth="shadow2brand" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Brand shadow (depth=4)', () => {
-    const tree = renderer.create(<TestShadow displayText="Brand shadow (depth=4)" depth="shadow4brand" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Brand shadow (depth=4)" depth="shadow4brand" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Brand shadow (depth=8)', () => {
-    const tree = renderer.create(<TestShadow displayText="Brand shadow (depth=8)" depth="shadow8brand" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Brand shadow (depth=8)" depth="shadow8brand" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Brand shadow (depth=16)', () => {
-    const tree = renderer.create(<TestShadow displayText="Brand shadow (depth=16)" depth="shadow16brand" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Brand shadow (depth=16)" depth="shadow16brand" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Brand shadow (depth=28)', () => {
-    const tree = renderer.create(<TestShadow displayText="Brand shadow (depth=28)" depth="shadow28brand" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Brand shadow (depth=28)" depth="shadow28brand" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Brand shadow (depth=64)', () => {
-    const tree = renderer.create(<TestShadow displayText="Brand shadow (depth=64)" depth="shadow64brand" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadow displayText="Brand shadow (depth=64)" depth="shadow64brand" />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Pressable that has a shadow vs. pressable without shadow', () => {
-    const tree = renderer.create(<TestPressableWithAndWithoutShadow />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestPressableWithAndWithoutShadow />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Shadow on a child with margin and padding', () => {
-    const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ margin: 2, padding: 2 }} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ margin: 2, padding: 2 }} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Shadow on a child with border radius', () => {
-    const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ borderRadius: 2 }} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ borderRadius: 2 }} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Shadow on a child with border width', () => {
-    const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ borderWidth: 2 }} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ borderWidth: 2 }} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   afterAll(() => {
