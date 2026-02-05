@@ -25,8 +25,7 @@ class SwitchPageObject extends BasePage {
   }
 
   async waitForOnChangeCallbackToFire(errorMsg: string): Promise<boolean | void> {
-    const callbackText = await this._callbackText;
-    return await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
+    return this._callbackText.waitForDisplayed({ timeoutMsg: errorMsg });
   }
 
   /*****************************************/

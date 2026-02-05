@@ -42,12 +42,12 @@ class OverflowPageObject extends BasePage {
   }
 
   async itemIsVisible(selector: OverflowItem, errorMsg?: string) {
-    const item = await this.getOverflowItem(selector);
-    return this.waitForCondition(async () => await item.isDisplayed(), errorMsg);
+    const item = this.getOverflowItem(selector);
+    return item.waitForDisplayed({ timeoutMsg: errorMsg });
   }
 
   async menuIsDisplayed(errorMsg?: string) {
-    return this.waitForCondition(async () => (await this._overflowMenu).isDisplayed(), errorMsg);
+    return this._overflowMenu.waitForDisplayed({ timeoutMsg: errorMsg });
   }
 
   async setOverflowWidth(width: OverflowWidth) {

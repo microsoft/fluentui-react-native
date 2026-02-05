@@ -12,18 +12,16 @@ class ButtonLegacyPageObject extends BasePage {
   /******************************************************************/
 
   async didOnClickCallbackFire(errorMsg: string): Promise<boolean | void> {
-    const callbackText = await this._callbackText;
-    return await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
+    return this._callbackText.waitForDisplayed({ timeoutMsg: errorMsg });
   }
 
   async resetTest(): Promise<void> {
-    const callbackText = await this._callbackText;
-    if (await callbackText.isDisplayed()) {
-      await (await this._primaryComponent).click();
-      await this.waitForCondition(
-        async () => !(await callbackText.isDisplayed()),
-        'Could not reset test: Clicked button to toggle onClick callback text, but the text failed to hide.',
-      );
+    if (await this._callbackText.isDisplayed()) {
+      await this._primaryComponent.click();
+      await this._callbackText.waitForDisplayed({
+        reverse: true,
+        timeoutMsg: 'Could not reset test: Clicked button to toggle onClick callback text, but the text failed to hide.',
+      });
     }
   }
 

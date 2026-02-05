@@ -82,10 +82,10 @@ export abstract class BasePage {
       await this.mobileScrollToComponentButton();
     }
 
-    await (await this._pageButton).click();
+    await this._pageButton.click();
 
     // Wait for page to load
-    return await this.waitForCondition(async () => await this.isPageLoaded(), this.ERRORMESSAGE_PAGELOAD, this.waitForUiEvent, 1500);
+    return await this.waitForPageToLoad();
   }
 
   /*
@@ -94,11 +94,9 @@ export abstract class BasePage {
    * own section on the test page (by default, it's hidden so partners don't see it). This method opens up that testing section.
    */
   async enableE2ETesterMode(): Promise<boolean | void> {
-    const e2eSwitch = await this._e2eSwitch;
-    await browser.waitUntil(async () => (await e2eSwitch.isDisplayed()) && (await e2eSwitch.isEnabled()), {
-      timeout: 15000,
-      timeoutMsg: 'The E2E Switch should be enabled and visible before we interact with it',
-    });
+    const e2eSwitch = this._e2eSwitch;
+    await this._e2eSection.waitForDisplayed({ timeoutMsg: 'E2E Test Sections should be visible to enable it' });
+    await this._e2eSwitch.waitForEnabled({ timeoutMsg: 'The E2E Switch should be enabled before we interact with it' });
 
     switch (this.platform) {
       // Usually, we use .isSelected() to see if a control (our switch) is checked true or false, but the process is
@@ -106,23 +104,23 @@ export abstract class BasePage {
       case 'android':
         if ((await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'false') {
           await e2eSwitch.click();
-          await this.waitForCondition(
-            async () => (await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'true',
-            'Clicked the E2E Mode Switch, but it failed to toggle.',
-          );
+          await e2eSwitch.waitUntil(async () => (await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'true', {
+            timeoutMsg: 'Clicked the E2E Mode Switch, but it failed to toggle.',
+          });
         }
         break;
       default:
         if (!(await e2eSwitch.isSelected())) {
           await e2eSwitch.click();
-          await this.waitForCondition(async () => e2eSwitch.isSelected(), 'Clicked the E2E Mode Switch, but it failed to toggle.');
+          await e2eSwitch.waitUntil(async () => await e2eSwitch.isSelected(), {
+            timeoutMsg: 'Clicked the E2E Mode Switch, but it failed to toggle.',
+          });
         }
     }
 
-    return await this.waitForCondition(
-      async () => await this._e2eSection.isDisplayed(),
-      'Pressed E2E Mode Switch, but E2E Test Sections failed to display before the timeout.',
-    );
+    return await this._e2eSection.waitForDisplayed({
+      timeoutMsg: 'Pressed E2E Mode Switch, but E2E Test Sections failed to display before the timeout.',
+    });
   }
 
   /**
@@ -153,11 +151,16 @@ export abstract class BasePage {
     return true;
   }
 
+  /** Wait for the page to load */
+  async waitForPageToLoad(): Promise<boolean | void> {
+    return this._testPage.waitForDisplayed({ timeoutMsg: this.ERRORMESSAGE_PAGELOAD });
+  }
+
   /* Returns true if the test page has loaded. To determine if it's loaded, each test page has a specific UI element we attempt to locate.
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return (await (await this._testPage).isDisplayed()) || (await this._primaryComponent.isDisplayed());
+    return (await this._testPage.isDisplayed()) || (await this._primaryComponent.isDisplayed());
   }
 
   /** Given a WebdriverIO element promise, send a click input to the element. Use this across all PageObject methods and test specs. */
@@ -271,7 +274,7 @@ export abstract class BasePage {
 
   /** Waits for the tester app to load by checking if the startup page loads. If the app doesn't load before the timeout, it causes the test to fail. */
   async waitForInitialPageToDisplay(): Promise<boolean | void> {
-    return await this.waitForCondition(async () => await this._initialPage.isDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
+    return this._initialPage.waitForDisplayed({ timeout: BOOT_APP_TIMEOUT, timeoutMsg: this.ERRORMESSAGE_APPLOAD });
   }
 
   /* Scrolls to the specified or primary UI test element until it is displayed. */

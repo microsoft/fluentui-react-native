@@ -50,7 +50,7 @@ exports.config = {
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 2, // Maximum count of request retries to the Selenium server.
-  specFileRetries: 2, // The number of times to retry the entire spec file when it fails as a whole.
+  specFileRetries: 1, // The number of times to retry the entire spec file when it fails as a whole.
 
   port: 4723, // default appium port
   services: [

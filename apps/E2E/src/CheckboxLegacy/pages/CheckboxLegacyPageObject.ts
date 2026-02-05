@@ -13,7 +13,7 @@ class CheckboxLegacyPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async isCheckboxChecked(): Promise<boolean> {
-    const checkbox = await this._primaryComponent;
+    const checkbox = this._primaryComponent;
     if (this.platform === 'windows') {
       // for native windows, .isSelected() always returns false. this is a workaround
       return (await checkbox.getAttribute(Attribute.ToggleState)) === AttributeValue.on;
@@ -43,8 +43,7 @@ class CheckboxLegacyPageObject extends BasePage {
    * the onChange() callback gets fired, we show / hide the a Text label as the callback gets fired. This way, we know that
    * the onChange() callback has fired by checking that the label element is currently displayed. */
   async didOnChangeCallbackFire(errorMsg: string): Promise<boolean | void> {
-    const callbackText = await this._callbackText;
-    return await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
+    return this._callbackText.waitForDisplayed({ timeoutMsg: errorMsg });
   }
 
   /*****************************************/

@@ -36,7 +36,7 @@ class TabListPageObject extends BasePage {
 
   // Waits for the TabList's `onTabSelect` callback to fire (changing a text component value). Throws an error if the callback doesn't fire by the end of the timeout.
   async waitForCallbackToFire(tabKeyPressed: string, errorMsg: string, timeout?: number): Promise<void> {
-    const callbackText = await By(TABLIST_CALLBACK_TEXT);
+    const callbackText = By(TABLIST_CALLBACK_TEXT);
     await this.waitForCondition(async () => (await callbackText.getText()) === tabKeyPressed, errorMsg, timeout);
   }
 
