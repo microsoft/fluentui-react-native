@@ -95,8 +95,8 @@ export abstract class BasePage {
    */
   async enableE2ETesterMode(): Promise<boolean | void> {
     const e2eSwitch = this._e2eSwitch;
-    await this._e2eSection.waitForDisplayed({ timeoutMsg: 'E2E Test Sections should be visible to enable it' });
-    await this._e2eSwitch.waitForEnabled({ timeoutMsg: 'The E2E Switch should be enabled before we interact with it' });
+    await e2eSwitch.waitForDisplayed({ timeoutMsg: 'E2E Test Switch should be visible to enable it' });
+    await e2eSwitch.waitForEnabled({ timeoutMsg: 'The E2E Switch should be enabled before we interact with it' });
 
     switch (this.platform) {
       // Usually, we use .isSelected() to see if a control (our switch) is checked true or false, but the process is
@@ -153,19 +153,35 @@ export abstract class BasePage {
 
   /** Wait for the page to load */
   async waitForPageToLoad(): Promise<boolean | void> {
-    return this._testPage.waitForDisplayed({ timeoutMsg: this.ERRORMESSAGE_PAGELOAD });
+    return browser.waitUntil(async () => await this.isPageLoaded(), {
+      timeout: this.waitForUiEvent,
+      timeoutMsg: this.ERRORMESSAGE_PAGELOAD,
+    });
+  }
+
+  hasPrimaryComponent() {
+    return this._primaryComponentName !== DUMMY_CHAR;
+  }
+
+  async isPrimaryComponentDisplayed() {
+    return this.hasPrimaryComponent() ? this._primaryComponent.isDisplayed() : false;
+  }
+
+  async isTestPageDisplayed() {
+    return this._pageName !== DUMMY_CHAR ? this._testPage.isDisplayed() : false;
   }
 
   /* Returns true if the test page has loaded. To determine if it's loaded, each test page has a specific UI element we attempt to locate.
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return (await this._testPage.isDisplayed()) || (await this._primaryComponent.isDisplayed());
+    const [isPageDisplayed, isComponentDisplayed] = await Promise.all([this.isTestPageDisplayed(), this.isPrimaryComponentDisplayed()]);
+    return isPageDisplayed || isComponentDisplayed;
   }
 
   /** Given a WebdriverIO element promise, send a click input to the element. Use this across all PageObject methods and test specs. */
-  async click(element: ChainablePromiseElement): Promise<void> {
-    await element.click();
+  async click(element: ChainablePromiseElement) {
+    return element.click();
   }
 
   /** Given a WebdriverIO element promise, send the passed in list of keys as keyboard inputs. Use this across all PageObject methods and test specs.
@@ -175,13 +191,13 @@ export abstract class BasePage {
    * - Shift tab to the previous element: FocusZonePageObject.sendKeys(FocusZonePageObject.beforeButton, [KEY_SHIFT, KEY_TAB])
    * - Escape out of a menu: MenuPageObject.sendKeys(MenuPageObject.item1, [KEY_ESCAPE])
    */
-  async sendKeys(element: ChainablePromiseElement, keys: Keys[]): Promise<void> {
-    await element.addValue(keys.join());
+  async sendKeys(element: ChainablePromiseElement, keys: Keys[]) {
+    return element.addValue(keys.join());
   }
 
   /** Short-hand method for PageObjects to get an element attribute during testing, with attribute being type-enforced. */
   async getElementAttribute(element: ChainablePromiseElement, attribute: Attribute) {
-    return await element.getAttribute(attribute);
+    return element.getAttribute(attribute);
   }
 
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
@@ -435,7 +451,6 @@ export abstract class BasePage {
   // Returns: String
   // Returns the identifier of the primary UI element used for testing on the given test page.
   get _primaryComponentName(): string {
-    console.warn('Please verify whether or not your page object should implement _primaryComponentName.');
     return DUMMY_CHAR;
   }
 
@@ -443,7 +458,6 @@ export abstract class BasePage {
   // Returns the identifier of the secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponentName(): string {
-    console.warn('Please verify whether or not your page object should implement _secondaryComponentName.');
     return DUMMY_CHAR;
   }
 
