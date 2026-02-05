@@ -16,12 +16,9 @@ export function testProps(id) {
       accessible: true,
       accessibilityLabel: id,
     },
-    macos: {
+    default: {
       accessible: true,
       accessibilityLabel: id,
-      testID: id,
-    },
-    default: {
       testID: id,
     },
   });
