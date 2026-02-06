@@ -1,21 +1,18 @@
-# Build pipeline for publishing
+# Build and publish pipeline
+# This pipeline runs on every commit to main and intelligently detects
+# when packages need to be published to NPM
 
 trigger:
   batch: true
   branches:
     include:
       - main
-      - releases/*
 
 pr: none
 
 parameters:
   - name: skipNpmPublish
     displayName: Skip Npm Publish
-    type: boolean
-    default: false
-  - name: skipGitPush
-    displayName: Skip Git Push
     type: boolean
     default: false
   - name: skipNugetPublish
@@ -28,6 +25,8 @@ variables:
   - group: InfoSec-SecurityResults
   - name: tags
     value: production,externalfacing
+  - name: BRANCH_NAME
+    value: 'beachball/version-bump/main'
   - template: variables/vars.yml
 
 resources:
@@ -54,7 +53,255 @@ extends:
         environmentsEs6: true
         environmentsNode: true
     stages:
+      # Stage 1: Create version bump PR if change files exist
+      - stage: VersionBump
+        displayName: 'Create Version Bump PR'
+        lockBehavior: sequential
+        jobs:
+          - job: CreatePR
+            displayName: 'Create or Update Version Bump PR'
+            pool:
+              name: Azure-Pipelines-1ESPT-ExDShared
+              image: ubuntu-latest
+              os: linux
+            steps:
+              - checkout: self
+                fetchDepth: 0
+                persistCredentials: true
+
+              - template: .ado/templates/setup-repo.yml@self
+
+              - script: |
+                  set -eox pipefail
+                  yarn install --immutable
+                displayName: 'Install dependencies'
+
+              # Check if there are change files
+              - script: |
+                  set -eox pipefail
+                  if npx beachball check --verbose; then
+                    echo "##vso[task.setvariable variable=HasChangeFiles;isOutput=true]yes"
+                    echo "✅ Change files detected"
+                  else
+                    echo "##vso[task.setvariable variable=HasChangeFiles;isOutput=true]no"
+                    echo "ℹ️ No change files found"
+                  fi
+                name: CheckChanges
+                displayName: 'Check for change files'
+
+              # Configure Git
+              - script: |
+                  set -eox pipefail
+                  git config user.name "React Native Bot"
+                  git config user.email "53619745+rnbot@users.noreply.github.com"
+                displayName: 'Configure Git'
+                condition: eq(variables['CheckChanges.HasChangeFiles'], 'yes')
+
+              # Check for existing PR
+              - task: AzureCLI@2
+                displayName: 'Check for existing PR'
+                condition: eq(variables['CheckChanges.HasChangeFiles'], 'yes')
+                inputs:
+                  azureSubscription: 'FluentUI React Native'
+                  scriptType: 'bash'
+                  scriptLocation: 'inlineScript'
+                  inlineScript: |
+                    set -eox pipefail
+                    # Get GitHub token from Key Vault
+                    GITHUB_TOKEN=$(az keyvault secret show --vault-name fluentui-rn-keyvault --name github-token --query value -o tsv)
+                    export GH_TOKEN=$GITHUB_TOKEN
+
+                    # Check if PR already exists
+                    EXISTING_PR=$(gh pr list --head "$(BRANCH_NAME)" --state open --json number --jq '.[0].number' || echo "")
+
+                    if [ -n "$EXISTING_PR" ]; then
+                      echo "##vso[task.setvariable variable=ExistingPR;isOutput=true]$EXISTING_PR"
+                      echo "📝 Found existing PR #$EXISTING_PR, will update it"
+                    else
+                      echo "##vso[task.setvariable variable=ExistingPR;isOutput=true]"
+                      echo "📝 No existing PR found, will create new one"
+                    fi
+                name: CheckPR
+
+              # Create or update branch
+              - script: |
+                  set -eox pipefail
+                  # Check if branch exists remotely
+                  if git ls-remote --heads origin "$(BRANCH_NAME)" | grep -q "$(BRANCH_NAME)"; then
+                    echo "🔄 Branch exists, updating it"
+                    git fetch origin "$(BRANCH_NAME)"
+                    git switch "$(BRANCH_NAME)"
+                    git reset --hard origin/main
+                  else
+                    echo "📝 Creating new branch: $(BRANCH_NAME)"
+                    git switch -c "$(BRANCH_NAME)"
+                  fi
+                displayName: 'Create or update version bump branch'
+                condition: eq(variables['CheckChanges.HasChangeFiles'], 'yes')
+
+              # Run beachball bump
+              - script: |
+                  set -eox pipefail
+                  echo "🔄 Running beachball bump..."
+                  npx beachball bump --verbose
+                displayName: 'Run beachball bump'
+                condition: eq(variables['CheckChanges.HasChangeFiles'], 'yes')
+
+              # Generate PR body with size management
+              - script: |
+                  set -eox pipefail
+                  echo "📝 Generating PR body with size checking..."
+                  node scripts/generate-pr-body.ts > pr-body.txt 2> pr-body-log.txt
+
+                  # Show log (sent to stderr by script)
+                  cat pr-body-log.txt
+
+                  # Verify file was created
+                  if [ ! -f pr-body.txt ]; then
+                    echo "❌ Failed to generate PR body"
+                    exit 1
+                  fi
+
+                  echo "✅ PR body generated successfully"
+                displayName: 'Generate PR body with size management'
+                condition: eq(variables['CheckChanges.HasChangeFiles'], 'yes')
+
+              # Commit changes
+              - script: |
+                  set -eox pipefail
+                  git add .
+
+                  # Check if there are any changes to commit
+                  if git diff --staged --quiet; then
+                    echo "⚠️ No changes after beachball bump, skipping commit"
+                    echo "##vso[task.setvariable variable=HasCommit;isOutput=true]no"
+                    exit 0
+                  fi
+
+                  git commit -m "chore(release): bump package versions [skip ci]"
+                  echo "##vso[task.setvariable variable=HasCommit;isOutput=true]yes"
+                  echo "✅ Committed version changes"
+                name: CommitChanges
+                displayName: 'Commit version bumps'
+                condition: eq(variables['CheckChanges.HasChangeFiles'], 'yes')
+
+              # Check branch status before push (prevents PR corruption)
+              - script: |
+                  set -eox pipefail
+                  EXISTING_PR="$(CheckPR.ExistingPR)"
+
+                  if [ -n "$EXISTING_PR" ]; then
+                    echo "📥 Fetching existing PR branch to preserve history"
+                    git fetch origin "$(BRANCH_NAME)" || echo "⚠️ Branch doesn't exist remotely yet"
+
+                    # Check if remote branch exists
+                    if git rev-parse origin/"$(BRANCH_NAME)" >/dev/null 2>&1; then
+                      # Check if we can fast-forward
+                      MERGE_BASE=$(git merge-base HEAD origin/"$(BRANCH_NAME)" 2>/dev/null || echo "")
+                      REMOTE_HEAD=$(git rev-parse origin/"$(BRANCH_NAME)" 2>/dev/null || echo "")
+
+                      if [ "$MERGE_BASE" = "$REMOTE_HEAD" ]; then
+                        echo "✅ Can fast-forward push"
+                        echo "##vso[task.setvariable variable=NeedForcePush;isOutput=true]no"
+                      else
+                        echo "⚠️ Remote branch diverged, will force push"
+                        echo "##vso[task.setvariable variable=NeedForcePush;isOutput=true]yes"
+                      fi
+                    else
+                      echo "📝 Remote branch doesn't exist, will create it"
+                      echo "##vso[task.setvariable variable=NeedForcePush;isOutput=true]no"
+                    fi
+                  else
+                    echo "📝 New branch, no fetch needed"
+                    echo "##vso[task.setvariable variable=NeedForcePush;isOutput=true]no"
+                  fi
+                name: CheckBranch
+                displayName: 'Check branch status before push'
+                condition: and(succeeded(), eq(variables['CheckChanges.HasChangeFiles'], 'yes'), eq(variables['CommitChanges.HasCommit'], 'yes'))
+
+              # Push branch
+              - task: AzureCLI@2
+                displayName: 'Push version bump branch'
+                condition: and(succeeded(), eq(variables['CheckChanges.HasChangeFiles'], 'yes'), eq(variables['CommitChanges.HasCommit'], 'yes'))
+                inputs:
+                  azureSubscription: 'FluentUI React Native'
+                  scriptType: 'bash'
+                  scriptLocation: 'inlineScript'
+                  inlineScript: |
+                    set -eox pipefail
+                    # Get GitHub token from Key Vault
+                    GITHUB_TOKEN=$(az keyvault secret show --vault-name fluentui-rn-keyvault --name github-token --query value -o tsv)
+
+                    # Configure git to use token for authentication
+                    git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/microsoft/fluentui-react-native.git"
+
+                    # Use force-with-lease only if needed
+                    if [ "$(CheckBranch.NeedForcePush)" = "yes" ]; then
+                      git push --force-with-lease origin "$(BRANCH_NAME)"
+                      echo "✅ Force pushed branch (remote diverged)"
+                    else
+                      git push origin "$(BRANCH_NAME)"
+                      echo "✅ Pushed branch (fast-forward)"
+                    fi
+
+              # Create or update PR
+              - task: AzureCLI@2
+                displayName: 'Create or Update Pull Request'
+                condition: and(succeeded(), eq(variables['CheckChanges.HasChangeFiles'], 'yes'), eq(variables['CommitChanges.HasCommit'], 'yes'))
+                inputs:
+                  azureSubscription: 'FluentUI React Native'
+                  scriptType: 'bash'
+                  scriptLocation: 'inlineScript'
+                  inlineScript: |
+                    set -eox pipefail
+                    # Get GitHub token from Key Vault
+                    GITHUB_TOKEN=$(az keyvault secret show --vault-name fluentui-rn-keyvault --name github-token --query value -o tsv)
+                    export GH_TOKEN=$GITHUB_TOKEN
+
+                    # Verify PR body file exists
+                    if [ ! -f pr-body.txt ]; then
+                      echo "❌ PR body file not found"
+                      exit 1
+                    fi
+
+                    EXISTING_PR="$(CheckPR.ExistingPR)"
+
+                    if [ -n "$EXISTING_PR" ]; then
+                      # Update existing PR
+                      gh pr edit "$EXISTING_PR" \
+                        --title "chore(release): bump package versions" \
+                        --body-file pr-body.txt
+
+                      PR_URL=$(gh pr view "$EXISTING_PR" --json url --jq '.url')
+
+                      echo "##vso[task.setvariable variable=PRNumber;isOutput=true]$EXISTING_PR"
+                      echo "##vso[task.setvariable variable=PRUrl;isOutput=true]$PR_URL"
+
+                      echo "✅ Updated PR #$EXISTING_PR: $PR_URL"
+                    else
+                      # Create new PR
+                      PR_URL=$(gh pr create \
+                        --title "chore(release): bump package versions" \
+                        --body-file pr-body.txt \
+                        --base main \
+                        --head "$(BRANCH_NAME)" \
+                        --label "automated" \
+                        --label "version-bump")
+
+                      PR_NUMBER=$(echo "$PR_URL" | grep -oE '[0-9]+$')
+
+                      echo "##vso[task.setvariable variable=PRNumber;isOutput=true]$PR_NUMBER"
+                      echo "##vso[task.setvariable variable=PRUrl;isOutput=true]$PR_URL"
+
+                      echo "✅ Created PR #$PR_NUMBER: $PR_URL"
+                    fi
+                name: CreatePRStep
+
+      # Stage 2: Build and publish packages
       - stage: main
+        displayName: 'Build and Publish'
+        dependsOn: VersionBump
+        condition: always()
         jobs:
           - job: NPMPublish
             displayName: NPM Publish
@@ -71,38 +318,114 @@ extends:
               - template: .ado/templates/setup-repo.yml@self
 
               - script: |
-                  git config user.name "UI-Fabric-RN-Bot"
-                  git config user.email "uifrnbot@microsoft.com"
-                  git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/fluentui-react-native.git
-                displayName: Git Authentication
-
-              - script: |
-                  yarn
+                  set -eox pipefail
+                  yarn install --immutable
                 displayName: 'yarn install'
 
               - script: |
+                  set -eox pipefail
                   yarn buildci
                 displayName: 'yarn buildci [test]'
 
+              # Verify NPM authentication before publishing
               - script: |
+                  set -eox pipefail
+                  echo "🔐 Verifying NPM authentication..."
+
+                  # Test authentication by checking access to a public package
+                  # Automation tokens should be able to view package info
+                  if npm view react version --registry https://registry.npmjs.org/ >/dev/null 2>&1; then
+                    echo "✅ NPM registry is accessible"
+                  else
+                    echo "❌ Cannot access NPM registry"
+                    exit 1
+                  fi
+
+                  # Try to authenticate (works with both user tokens and automation tokens)
+                  # This will fail if token is invalid
+                  if npm whoami --registry https://registry.npmjs.org/ 2>&1 | grep -qv "ENEEDAUTH\|401\|403"; then
+                    echo "✅ NPM authentication successful"
+                  else
+                    echo "⚠️  npm whoami failed (expected with automation token)"
+                    echo "ℹ️  Automation tokens don't support whoami, but that's OK"
+                    echo "ℹ️  Will verify authentication during actual publish"
+                  fi
+                displayName: 'Verify NPM authentication'
+                condition: and(succeeded(), ne('${{ parameters.skipNpmPublish }}', true))
+                continueOnError: true
+
+              - script: |
+                  set -eox pipefail
                   echo ##vso[task.setvariable variable=SkipNpmPublishArgs]--no-publish
                 displayName: Enable No-Publish (npm)
                 condition: ${{ parameters.skipNpmPublish }}
 
               - script: |
-                  echo ##vso[task.setvariable variable=SkipGitPushPublishArgs]--no-push
-                displayName: Enable No-Publish (git)
-                condition: ${{ parameters.skipGitPush }}
+                  set -eox pipefail
+                  if node scripts/check-packages-need-publishing.ts; then
+                    echo "##vso[task.setvariable variable=PackagesNeedPublishing]true"
+                    echo "✅ Packages need publishing"
+                  else
+                    echo "##vso[task.setvariable variable=PackagesNeedPublishing]false"
+                    echo "ℹ️ No packages need publishing (all versions already exist on NPM)"
+                  fi
+                displayName: 'Check if packages need publishing'
+                condition: and(succeeded(), ne('${{ parameters.skipNpmPublish }}', true))
 
               - script: |
-                  yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -b origin/main -y
-                displayName: 'Publish NPM Packages (for main branch)'
-                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+                  set -eox pipefail
 
-              - script: |
-                  yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -y -t v${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }} -b origin/${{ replace(variables['Build.SourceBranch'],'refs/heads/','') }} --prerelease-prefix ${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }}
-                displayName: 'Publish NPM Packages (for other release branches)'
-                condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
+                  # Run publish and capture output for failure detection
+                  echo "📦 Publishing packages to NPM..."
+
+                  if ! npx beachball publish --no-bump --no-push $(SkipNpmPublishArgs) \
+                       --access public --token $(npmAuth) -y --verbose 2>&1 | tee publish-output.txt; then
+
+                    echo ""
+                    echo "❌ Beachball publish command failed"
+                    echo ""
+
+                    # Check for partial success (some packages published, others failed)
+                    if grep -q -i "successfully published\|published successfully" publish-output.txt; then
+                      echo "::warning::⚠️ PARTIAL SUCCESS - Some packages published, others failed"
+                      echo ""
+                      echo "✅ Successfully published:"
+                      grep -i "successfully published\|published successfully" publish-output.txt || echo "  (none found in output)"
+                      echo ""
+                      echo "❌ Failed to publish:"
+                      grep -i "failed to publish\|error publishing\|npm ERR!" publish-output.txt | head -20 || echo "  (check full logs for details)"
+                      echo ""
+                      echo "❌ Not all packages were published. Manual intervention required."
+                      echo "Please review the logs above and manually publish any failed packages."
+                    else
+                      echo "❌ No packages were published successfully"
+                    fi
+
+                    exit 1
+                  fi
+
+                  echo ""
+                  echo "✅ All packages published successfully"
+                displayName: 'Publish NPM Packages with failure detection'
+                condition: and(succeeded(), eq(variables['PackagesNeedPublishing'], 'true'))
+
+              # Create GitHub releases for published packages
+              - task: AzureCLI@2
+                displayName: 'Create GitHub Releases'
+                condition: and(succeeded(), eq(variables['PackagesNeedPublishing'], 'true'), ne('${{ parameters.skipNpmPublish }}', true))
+                inputs:
+                  azureSubscription: 'FluentUI React Native'
+                  scriptType: 'bash'
+                  scriptLocation: 'inlineScript'
+                  inlineScript: |
+                    set -eox pipefail
+
+                    # Get GitHub token from Key Vault
+                    GITHUB_TOKEN=$(az keyvault secret show --vault-name fluentui-rn-keyvault --name github-token --query value -o tsv)
+                    export GH_TOKEN=$GITHUB_TOKEN
+
+                    # Create releases for published packages
+                    node scripts/create-github-releases.ts
 
           - template: .ado/templates/win32-nuget-publish.yml@self
             parameters:
