@@ -48,7 +48,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={1}
+        accessibilityPosInSet={1}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -58,6 +58,7 @@ exports[`TabList component tests TabList appearance 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -71,17 +72,8 @@ exports[`TabList component tests TabList appearance 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -183,7 +175,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={2}
+        accessibilityPosInSet={2}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -193,6 +185,7 @@ exports[`TabList component tests TabList appearance 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -206,17 +199,8 @@ exports[`TabList component tests TabList appearance 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -318,7 +302,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={3}
+        accessibilityPosInSet={3}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -328,6 +312,7 @@ exports[`TabList component tests TabList appearance 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -341,17 +326,8 @@ exports[`TabList component tests TabList appearance 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -497,9 +473,9 @@ exports[`TabList component tests TabList default props 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={1}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -507,6 +483,7 @@ exports[`TabList component tests TabList default props 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -520,17 +497,8 @@ exports[`TabList component tests TabList default props 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -632,9 +600,9 @@ exports[`TabList component tests TabList default props 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={2}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -642,6 +610,7 @@ exports[`TabList component tests TabList default props 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -655,17 +624,8 @@ exports[`TabList component tests TabList default props 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -767,9 +727,9 @@ exports[`TabList component tests TabList default props 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={3}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -777,6 +737,7 @@ exports[`TabList component tests TabList default props 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -790,17 +751,8 @@ exports[`TabList component tests TabList default props 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -946,9 +898,9 @@ exports[`TabList component tests TabList disabled list 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={1}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -956,6 +908,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "disabled": true,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -969,17 +922,8 @@ exports[`TabList component tests TabList disabled list 1`] = `
           }
         }
         accessible={true}
+        disabled={true}
         focusable={false}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1081,9 +1025,9 @@ exports[`TabList component tests TabList disabled list 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={2}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -1091,6 +1035,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "disabled": true,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -1104,17 +1049,8 @@ exports[`TabList component tests TabList disabled list 1`] = `
           }
         }
         accessible={true}
+        disabled={true}
         focusable={false}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1216,9 +1152,9 @@ exports[`TabList component tests TabList disabled list 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={3}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -1226,6 +1162,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "disabled": true,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -1239,17 +1176,8 @@ exports[`TabList component tests TabList disabled list 1`] = `
           }
         }
         accessible={true}
+        disabled={true}
         focusable={false}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1395,7 +1323,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={1}
+        accessibilityPosInSet={1}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -1405,6 +1333,7 @@ exports[`TabList component tests TabList orientation 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -1418,17 +1347,8 @@ exports[`TabList component tests TabList orientation 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1529,7 +1449,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={2}
+        accessibilityPosInSet={2}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -1539,6 +1459,7 @@ exports[`TabList component tests TabList orientation 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -1552,17 +1473,8 @@ exports[`TabList component tests TabList orientation 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1663,7 +1575,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={3}
+        accessibilityPosInSet={3}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -1673,6 +1585,7 @@ exports[`TabList component tests TabList orientation 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -1686,17 +1599,8 @@ exports[`TabList component tests TabList orientation 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1842,7 +1746,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={1}
+        accessibilityPosInSet={1}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -1852,6 +1756,7 @@ exports[`TabList component tests TabList selected key 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": true,
           }
@@ -1865,17 +1770,8 @@ exports[`TabList component tests TabList selected key 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1977,7 +1873,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={2}
+        accessibilityPosInSet={2}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -1987,6 +1883,7 @@ exports[`TabList component tests TabList selected key 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -2000,17 +1897,8 @@ exports[`TabList component tests TabList selected key 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -2112,7 +2000,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={3}
+        accessibilityPosInSet={3}
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
@@ -2122,6 +2010,7 @@ exports[`TabList component tests TabList selected key 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -2135,17 +2024,8 @@ exports[`TabList component tests TabList selected key 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -2291,9 +2171,9 @@ exports[`TabList component tests TabList size 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={1}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -2301,6 +2181,7 @@ exports[`TabList component tests TabList size 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -2314,17 +2195,8 @@ exports[`TabList component tests TabList size 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -2426,9 +2298,9 @@ exports[`TabList component tests TabList size 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={2}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -2436,6 +2308,7 @@ exports[`TabList component tests TabList size 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -2449,17 +2322,8 @@ exports[`TabList component tests TabList size 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -2561,9 +2425,9 @@ exports[`TabList component tests TabList size 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={0}
+        accessibilityPosInSet={3}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -2571,6 +2435,7 @@ exports[`TabList component tests TabList size 1`] = `
             "disabled": false,
             "expanded": undefined,
             "multiselectable": undefined,
+            "readOnly": undefined,
             "required": undefined,
             "selected": false,
           }
@@ -2584,17 +2449,8 @@ exports[`TabList component tests TabList size 1`] = `
           }
         }
         accessible={true}
+        disabled={false}
         focusable={true}
-        keyUpEvents={
-          [
-            {
-              "key": " ",
-            },
-            {
-              "key": "Enter",
-            },
-          ]
-        }
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}

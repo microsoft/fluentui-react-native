@@ -1,4 +1,5 @@
 import type {
+  AnimatableNumericValue,
   Animated,
   ColorValue,
   DimensionValue,
@@ -46,7 +47,7 @@ export interface DrawerTokens {
   /**
    * The corner radius of the handle.
    * */
-  handleCornerRadius?: number;
+  handleCornerRadius?: AnimatableNumericValue | string;
 
   /**
    * The top margin of the handle.
@@ -86,7 +87,7 @@ export interface DrawerTokens {
    * The corner radius of the Drawer
    * @default 0
    * */
-  drawerCornerRadius?: number;
+  drawerCornerRadius?: AnimatableNumericValue | string;
 
   /**
    * The elevation of the Drawer
@@ -132,7 +133,7 @@ export interface DrawerTokens {
    * @platform iOS
    * */
 
-  shadowRadius?: number;
+  shadowRadius?: AnimatableNumericValue | string;
 
   /**
    * Positions/Behaviours of the Drawer, This is used to apply different tokens for different positions.

@@ -31,7 +31,7 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
     accessibilityActions: childAccessibilityActions,
     accessibilityState: childAccessibilityState,
     onAccessibilityAction: childOnAccessibilityAction,
-    accessibilityPositionInSet: childAccessibilityPositionInSet, // win32
+    accessibilityPosInSet: childaccessibilityPosInSet, // win32
     accessibilitySetSize: childAccessibilitySetSize, // win32
     onClick: childOnClick,
     onHoverIn: childOnHoverIn,
@@ -125,7 +125,7 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
       accessibilityState,
       accessibilityActions,
       onAccessibilityAction,
-      accessibilityPositionInSet: childAccessibilityPositionInSet ?? context.accessibilityPositionInSet, // win32
+      accessibilityPosInSet: childaccessibilityPosInSet ?? context.accessibilityPosInSet, // win32
       accessibilitySetSize: childAccessibilitySetSize ?? context.accessibilitySetSize, // win32
     },
     hasSubmenu: context.isSubmenu,

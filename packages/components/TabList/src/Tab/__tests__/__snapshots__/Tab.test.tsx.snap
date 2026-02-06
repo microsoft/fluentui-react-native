@@ -10,7 +10,7 @@ exports[`Tab component tests Customized Tab 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="tab"
   accessibilitySetSize={0}
   accessibilityState={
@@ -20,6 +20,7 @@ exports[`Tab component tests Customized Tab 1`] = `
       "disabled": false,
       "expanded": undefined,
       "multiselectable": undefined,
+      "readOnly": undefined,
       "required": undefined,
       "selected": false,
     }
@@ -33,17 +34,8 @@ exports[`Tab component tests Customized Tab 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   focusable={true}
-  keyUpEvents={
-    [
-      {
-        "key": " ",
-      },
-      {
-        "key": "Enter",
-      },
-    ]
-  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
@@ -148,7 +140,7 @@ exports[`Tab component tests Tab default props 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="tab"
   accessibilitySetSize={0}
   accessibilityState={
@@ -158,6 +150,7 @@ exports[`Tab component tests Tab default props 1`] = `
       "disabled": false,
       "expanded": undefined,
       "multiselectable": undefined,
+      "readOnly": undefined,
       "required": undefined,
       "selected": false,
     }
@@ -171,17 +164,8 @@ exports[`Tab component tests Tab default props 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   focusable={true}
-  keyUpEvents={
-    [
-      {
-        "key": " ",
-      },
-      {
-        "key": "Enter",
-      },
-    ]
-  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
@@ -286,7 +270,7 @@ exports[`Tab component tests Tab disabled 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="tab"
   accessibilitySetSize={0}
   accessibilityState={
@@ -296,6 +280,7 @@ exports[`Tab component tests Tab disabled 1`] = `
       "disabled": true,
       "expanded": undefined,
       "multiselectable": undefined,
+      "readOnly": undefined,
       "required": undefined,
       "selected": false,
     }
@@ -309,17 +294,8 @@ exports[`Tab component tests Tab disabled 1`] = `
     }
   }
   accessible={true}
+  disabled={true}
   focusable={false}
-  keyUpEvents={
-    [
-      {
-        "key": " ",
-      },
-      {
-        "key": "Enter",
-      },
-    ]
-  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
@@ -424,7 +400,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="tab"
   accessibilitySetSize={0}
   accessibilityState={
@@ -434,6 +410,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
       "disabled": false,
       "expanded": undefined,
       "multiselectable": undefined,
+      "readOnly": undefined,
       "required": undefined,
       "selected": false,
     }
@@ -447,17 +424,8 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   focusable={true}
-  keyUpEvents={
-    [
-      {
-        "key": " ",
-      },
-      {
-        "key": "Enter",
-      },
-    ]
-  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
@@ -574,7 +542,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
     ]
   }
   accessibilityLabel=""
-  accessibilityPositionInSet={0}
+  accessibilityPosInSet={0}
   accessibilityRole="tab"
   accessibilitySetSize={0}
   accessibilityState={
@@ -584,6 +552,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
       "disabled": false,
       "expanded": undefined,
       "multiselectable": undefined,
+      "readOnly": undefined,
       "required": undefined,
       "selected": false,
     }
@@ -597,17 +566,8 @@ exports[`Tab component tests Tab render icon only 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   focusable={true}
-  keyUpEvents={
-    [
-      {
-        "key": " ",
-      },
-      {
-        "key": "Enter",
-      },
-    ]
-  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}

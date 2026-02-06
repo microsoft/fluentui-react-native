@@ -1,5 +1,6 @@
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import * as renderer from 'react-test-renderer';
+import { act } from 'react';
 
 import { Menu } from '../Menu/Menu';
 import { MenuDivider } from '../MenuDivider/MenuDivider';
@@ -14,8 +15,9 @@ import MenuTrigger from '../MenuTrigger/MenuTrigger';
 
 describe('Menu component tests', () => {
   it('Menu default', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Menu>
           <MenuTrigger>
             <Button>Default</Button>
@@ -26,14 +28,16 @@ describe('Menu component tests', () => {
             </MenuList>
           </MenuPopover>
         </Menu>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Menu open', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Menu open>
           <MenuTrigger>
             <Button>Open</Button>
@@ -44,14 +48,36 @@ describe('Menu component tests', () => {
             </MenuList>
           </MenuPopover>
         </Menu>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Menu defaultOpen', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
+        <Menu defaultOpen>
+          <MenuTrigger>
+            <Button>Open</Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItem>Option 1</MenuItem>
+            </MenuList>
+          </MenuPopover>
+        </Menu>,
+      );
+    });
+    const tree = component!.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Menu defaultOpen with disabled', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Menu defaultOpen>
           <MenuTrigger>
             <Button>Open</Button>
@@ -63,14 +89,16 @@ describe('Menu component tests', () => {
             </MenuList>
           </MenuPopover>
         </Menu>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Menu open checkbox and divider', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Menu open>
           <MenuTrigger>
             <Button>Open</Button>
@@ -85,14 +113,16 @@ describe('Menu component tests', () => {
             </MenuList>
           </MenuPopover>
         </Menu>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Menu open radio', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Menu open>
           <MenuTrigger>
             <Button>Open</Button>
@@ -104,14 +134,16 @@ describe('Menu component tests', () => {
             </MenuList>
           </MenuPopover>
         </Menu>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Menu open checkbox defaultChecked', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Menu open defaultChecked={['Option 1']}>
           <MenuTrigger>
             <Button>Open</Button>
@@ -124,14 +156,16 @@ describe('Menu component tests', () => {
             </MenuList>
           </MenuPopover>
         </Menu>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Menu open checkbox checked', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Menu open checked={['Option 1']}>
           <MenuTrigger>
             <Button>Open</Button>
@@ -144,14 +178,16 @@ describe('Menu component tests', () => {
             </MenuList>
           </MenuPopover>
         </Menu>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Menu submenu', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Menu open>
           <MenuTrigger>
             <Button>Default</Button>
@@ -172,16 +208,18 @@ describe('Menu component tests', () => {
             </MenuList>
           </MenuPopover>
         </Menu>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   // Note the capital T the "Tip" (in the snapshot)
   // It is intentional as it matches the same prop in NetUI
   it('Menu alwaysShowToolTip', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <Menu>
           <MenuTrigger>
             <Button tooltip="A Tooltip">Button</Button>
@@ -199,15 +237,17 @@ describe('Menu component tests', () => {
             </MenuList>
           </MenuPopover>
         </Menu>,
-      )
-      .toJSON();
+      );
+    });
+    const tree = component!.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
 
 it('Menu open menu group and menu header', () => {
-  const tree = renderer
-    .create(
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(
       <Menu open>
         <MenuTrigger>
           <Button>Open</Button>
@@ -226,7 +266,8 @@ it('Menu open menu group and menu header', () => {
           </MenuList>
         </MenuPopover>
       </Menu>,
-    )
-    .toJSON();
+    );
+  });
+  const tree = component!.toJSON();
   expect(tree).toMatchSnapshot();
 });

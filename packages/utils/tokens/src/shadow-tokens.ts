@@ -1,4 +1,4 @@
-import type { ColorValue } from 'react-native';
+import type { AnimatableNumericValue, ColorValue, ViewStyle } from 'react-native';
 
 import type { Theme } from '@fluentui-react-native/theme-types';
 
@@ -12,7 +12,7 @@ export interface IShadowTokens {
     height: number;
   };
   shadowOpacity?: number;
-  shadowRadius?: number;
+  shadowRadius?: AnimatableNumericValue | string;
   elevation?: number;
 }
 
@@ -24,4 +24,10 @@ export const shadowTokens: OperationSet<IShadowTokens, Theme> = [
   { source: 'elevation' },
 ];
 
-export const shadowStyles = tokenBuilder<IShadowTokens>('shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius');
+export const shadowStyles = tokenBuilder<IShadowTokens, ViewStyle>(
+  'shadowColor',
+  'shadowOffset',
+  'shadowOpacity',
+  'shadowRadius',
+  'elevation',
+);

@@ -5,8 +5,8 @@ import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import type { IPressableProps } from '@fluentui-react-native/pressable';
 import type { ITextProps } from '@fluentui-react-native/text';
 import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
+import type { IViewProps } from '@fluentui-react-native/adapters';
 
 export const radioButtonName = 'RadioButton';
 
@@ -36,7 +36,7 @@ export interface IRadioButtonProps extends IPressableProps {
    * Defines the current radio button's position in the radio group for accessibility purposes. It's recommended to set this value
    * if radio buttons are not direct children of radio group. This value is auto-generated if radio buttons are direct children of
    * radio group.
-   * @deprecated Use accessibilityPositionInSet instead.
+   * @deprecated Use accessibilityPosInSet instead.
    */
   ariaPosInSet?: number;
 
@@ -59,7 +59,7 @@ export interface IRadioButtonTokens extends FontTokens, IForegroundColorTokens, 
 }
 
 export interface IRadioButtonSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: React.PropsWithRef<IViewProps>;
   button: ViewProps;
   innerCircle: ViewProps;
   content: ITextProps;

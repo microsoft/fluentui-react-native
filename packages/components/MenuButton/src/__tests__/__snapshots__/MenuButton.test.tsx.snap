@@ -11,6 +11,7 @@ exports[`ContextualMenu default 1`] = `
       "disabled": false,
       "expanded": undefined,
       "multiselectable": undefined,
+      "readOnly": undefined,
       "required": undefined,
       "selected": undefined,
     }
@@ -24,18 +25,9 @@ exports[`ContextualMenu default 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
-  keyUpEvents={
-    [
-      {
-        "key": " ",
-      },
-      {
-        "key": "Enter",
-      },
-    ]
-  }
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
@@ -63,7 +55,7 @@ exports[`ContextualMenu default 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "overflow": "hidden",
-      "padding": 3,
+      "padding": 5,
       "width": undefined,
     }
   }

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import type { NativeKeyEvent, HandledKeyEvent } from '@fluentui-react-native/adapters';
 
 import { ButtonV1 as Button, Text } from '@fluentui/react-native';
 import {
@@ -15,26 +16,17 @@ import {
   BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL,
 } from '@fluentui-react-native/e2e-testing';
 import { Stack } from '@fluentui-react-native/stack';
-import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
-function keyEvent(key: string) {
+function keyEvent(key: string): HandledKeyEvent {
   return {
     key,
-    capsLockKey: false,
     shiftKey: false,
     ctrlKey: false,
     altKey: false,
     metaKey: false,
-    numericPadKey: false,
-    helpKey: false,
-    functionKey: false,
-    ArrowLeft: false,
-    ArrowRight: false,
-    ArrowUp: false,
-    ArrowDown: false,
   };
 }
 
@@ -49,14 +41,14 @@ export const E2EButtonTest: React.FunctionComponent = () => {
 
   const keyPressProps = {
     keyDownEvents: [keyEvent('a')],
-    onKeyDown: (args: IKeyboardEvent) => {
+    onKeyDown: (args: NativeKeyEvent) => {
       if (args.nativeEvent.key === 'a') {
         setKeyDetected('a (down)');
         args.stopPropagation();
       }
     },
     keyUpEvents: [keyEvent('b')],
-    onKeyUp: (args: IKeyboardEvent) => {
+    onKeyUp: (args: NativeKeyEvent) => {
       if (args.nativeEvent.key === 'b') {
         setKeyDetected('b (up)');
         args.stopPropagation();

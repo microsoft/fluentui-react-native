@@ -49,7 +49,7 @@ export const MenuList = compose<MenuListType>({
           return React.cloneElement(
             child as React.ReactElement<unknown, string | React.JSXElementConstructor<any>>,
             {
-              accessibilityPositionInSet: child.props.accessibilityPositionInSet ?? itemPosition, // win32
+              accessibilityPosInSet: child.props.accessibilityPosInSet ?? itemPosition, // win32
               accessibilitySetSize: child.props.accessibilitySetSize ?? itemCount, //win32
               ...(child.props.tooltip && { alwaysShowToolTip: true }),
             } as any,

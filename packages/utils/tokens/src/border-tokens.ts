@@ -9,7 +9,7 @@ import { tokenBuilder } from './tokenBuilder';
 export interface IBorderTokens {
   borderColor?: ColorValue;
   borderWidth?: number;
-  borderRadius?: AnimatableNumericValue;
+  borderRadius?: AnimatableNumericValue | string;
   borderStyle?: ViewStyle['borderStyle'];
 }
 
@@ -20,4 +20,4 @@ export const borderTokens: OperationSet<IBorderTokens, Theme> = [
   { source: 'borderStyle' },
 ];
 
-export const borderStyles = tokenBuilder<IBorderTokens>('borderColor', 'borderRadius', 'borderStyle', 'borderWidth');
+export const borderStyles = tokenBuilder<IBorderTokens, ViewStyle>('borderColor', 'borderRadius', 'borderStyle', 'borderWidth');

@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { act } from 'react';
 import type { ViewProps, TextProps } from 'react-native';
 import { View, Text } from 'react-native';
 
@@ -37,7 +38,10 @@ const CompBase = stagedComponent((props: ViewProps) => {
 
 describe('buildUseSlots test suite', () => {
   it('Simple component render', () => {
-    const tree = renderer.create(<CompBase style={{ width: 30, height: 20, borderColor: 'green', borderWidth: 1 }} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<CompBase style={{ width: 30, height: 20, borderColor: 'green', borderWidth: 1 }} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

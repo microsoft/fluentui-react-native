@@ -53,7 +53,7 @@ A general token interface directly represents styles that apply to most or all c
     export interface IBorderTokens {
       borderColor?: string;
       borderWidth?: number;
-      borderRadius?: number;
+      borderRadius?: AnimatableNumericValue | string;
       // ...other related border properties
     }
 

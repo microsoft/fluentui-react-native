@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { ColorValue, ImageProps, ViewStyle } from 'react-native';
+import type { ColorValue, ImageProps, ViewStyle, AnimatableNumericValue } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
@@ -62,7 +62,7 @@ export interface MenuItemRadioTokens
    * Border radius of the box containing the radio.
    * @platform android
    */
-  radioBorderRadius?: number;
+  radioBorderRadius?: AnimatableNumericValue | string;
 
   /**
    * Height and width of the box containing the radio.

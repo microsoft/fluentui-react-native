@@ -44,12 +44,12 @@
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/babel-preset": "^0.81.0",
     "@types/jest": "^29.0.0",
     "@types/node": "catalog:",
-    "@types/react": "~18.2.0",
-    "react": "18.2.0",
-    "react-native": "^0.74.0"
+    "@types/react": "~19.1.0",
+    "react": "19.1.0",
+    "react-native": "^0.81.0"
   },
   "peerDependencies": {
     "react": "18.2.0 || 19.0.0 || 19.1.0"

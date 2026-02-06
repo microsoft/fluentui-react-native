@@ -1,3 +1,4 @@
+import { act } from 'react';
 import { Button } from 'react-native';
 
 import * as renderer from 'react-test-renderer';
@@ -10,116 +11,128 @@ const onPress = () => {
 
 describe('FocusZone No Props', () => {
   it('No children', () => {
-    const tree = renderer.create(<FocusZone />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<FocusZone />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('One child', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <FocusZone>
           <Button title="button" onPress={onPress} />
         </FocusZone>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Two children', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <FocusZone>
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
         </FocusZone>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Three children', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <FocusZone>
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
         </FocusZone>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });
 
 describe('FocusZone With Props', () => {
   it('defaultTabbableElement Prop', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <FocusZone defaultTabbableElement={null}>
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
         </FocusZone>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('focusZoneDirection Prop', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <FocusZone focusZoneDirection="bidirectional">
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
         </FocusZone>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('disabled Prop', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <FocusZone disabled={true}>
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
         </FocusZone>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('isCircularNavigation Prop', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <FocusZone isCircularNavigation={true}>
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
         </FocusZone>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('use2DNavigation Prop', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <FocusZone use2DNavigation={true}>
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
         </FocusZone>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('All Props', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <FocusZone
           disabled={false}
           use2DNavigation={true}
@@ -131,8 +144,8 @@ describe('FocusZone With Props', () => {
           <Button title="button" onPress={onPress} />
           <Button title="button" onPress={onPress} />
         </FocusZone>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

@@ -164,7 +164,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   /**
    * Thumb radius
    */
-  thumbRadius?: number;
+  thumbRadius?: AnimatableNumericValue | string;
 
   /**
    * Thumb margin
@@ -184,7 +184,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   /**
    * Border Radius of border when Switch is focused on
    */
-  focusBorderRadius?: number;
+  focusBorderRadius?: AnimatableNumericValue | string;
 
   /**
    * Sets the position of the thumb

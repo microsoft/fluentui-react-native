@@ -1,3 +1,4 @@
+import { act } from 'react';
 import { Pressable } from 'react-native';
 
 import * as renderer from 'react-test-renderer';
@@ -20,8 +21,11 @@ it('Pressable with useKeyProps', () => {
     return <PressableWithDesktopProps {...keyboardProps} />;
   };
 
-  const tree = renderer.create(<TestComponent />).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<TestComponent />);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });
 
 it('useKeyProps called twice', () => {
@@ -32,6 +36,9 @@ it('useKeyProps called twice', () => {
     return <PressableWithDesktopProps {...keyboardProps2} />;
   };
 
-  const tree = renderer.create(<TestComponent />).toJSON();
-  expect(tree).toMatchSnapshot();
+  let component: renderer.ReactTestRenderer;
+  act(() => {
+    component = renderer.create(<TestComponent />);
+  });
+  expect(component!.toJSON()).toMatchSnapshot();
 });

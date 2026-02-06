@@ -342,7 +342,7 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
   /**
    * Border radius of the indicator.
    */
-  indicatorRadius?: number;
+  indicatorRadius?: AnimatableNumericValue | string;
 
   /**
    * Thickness of the indicator line.

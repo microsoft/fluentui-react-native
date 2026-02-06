@@ -1,3 +1,5 @@
+import { act } from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { Shimmer } from './Shimmer';
@@ -37,22 +39,25 @@ function shimmerRects(): Array<ShimmerRectElement | ShimmerCircleElement> {
 
 const style = { width: 300, height: 100 };
 
-describe('Shimmer component tests', () => {
-  beforeAll(() => {
-    // mocks out setTimeout and other timer functions with mock functions, test will fail without this as we're using Animated API
-    jest.useFakeTimers();
-    jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
-  });
+// mocks out setTimeout and other timer functions with mock functions, test will fail without this as we're using Animated API
+jest.useFakeTimers();
 
+describe('Shimmer component tests', () => {
   it('Shimmer default', async () => {
-    const tree = renderer.create(<Shimmer elements={shimmerRects()} />).toJSON();
-    expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Shimmer elements={shimmerRects()} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
+    await act(async () => null);
   });
 
   it('Shimmer with style prop', async () => {
-    const tree = renderer.create(<Shimmer elements={shimmerRects()} style={style} />).toJSON();
-    expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Shimmer elements={shimmerRects()} style={style} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
+    await act(async () => null);
   });
 });

@@ -21,7 +21,7 @@ export const useTab = (props: TabProps): TabInfo => {
   const defaultComponentRef = React.useRef<IFocusable>(null);
   const {
     accessibilityActions,
-    accessibilityPositionInSet,
+    accessibilityPosInSet,
     accessibilitySetSize,
     accessibilityState,
     accessible,
@@ -97,7 +97,7 @@ export const useTab = (props: TabProps): TabInfo => {
       accessible: accessible ?? true,
       accessibilityRole: 'tab',
       accessibilityActions: accessibilityActionsProp,
-      accessibilityPositionInSet: accessibilityPositionInSet ?? tabKeys.findIndex((key) => key === tabKey) + 1,
+      accessibilityPosInSet: accessibilityPosInSet ?? tabKeys.findIndex((key) => key === tabKey) + 1,
       accessibilityState: getAccessibilityState(isDisabled, selectedKey === tabKey, accessibilityState),
       accessibilitySetSize: accessibilitySetSize ?? tabKeys.length,
       disabled: isDisabled,

@@ -5,6 +5,7 @@ import { Text, View } from 'react-native';
 
 import { type FunctionComponent, mergeStyles } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
+import { act } from 'react';
 
 import { phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 import { useSlot } from './useSlot';
@@ -82,34 +83,44 @@ const styleWithColor: TextProps['style'] = { color: 'blue' };
 describe('useSlot tests', () => {
   /** first render the component with no updates */
   it('Two base text elements rendering, with and without styles', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <View>
           <PluggableText>No Style</PluggableText>
           <PluggableText style={styleWithColor}>With Style</PluggableText>
         </View>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Header and caption text render as expected', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <View>
           <HeaderText>Header text</HeaderText>
           <CaptionText>Caption text</CaptionText>
         </View>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Multi-level text elements are equivalent', () => {
-    const tree1 = renderer.create(<HeaderCaptionText1>HeaderCaptionText</HeaderCaptionText1>).toJSON();
+    let component1: renderer.ReactTestRenderer;
+    let component2: renderer.ReactTestRenderer;
+    act(() => {
+      component1 = renderer.create(<HeaderCaptionText1>HeaderCaptionText</HeaderCaptionText1>);
+    });
+    const tree1 = component1!.toJSON();
     expect(tree1).toMatchSnapshot();
-    const tree2 = renderer.create(<HeaderCaptionText2>HeaderCaptionText</HeaderCaptionText2>).toJSON();
+    act(() => {
+      component2 = renderer.create(<HeaderCaptionText2>HeaderCaptionText</HeaderCaptionText2>);
+    });
+    const tree2 = component2!.toJSON();
     expect(tree2).toMatchSnapshot();
-    expect(tree1['HeaderCaptionText1']).toEqual(tree2['HeaderCaptionText2']);
+    expect(tree1!['HeaderCaptionText1']).toEqual(tree2!['HeaderCaptionText2']);
   });
 });

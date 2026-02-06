@@ -17,6 +17,14 @@
 import type * as React from 'react';
 
 import type { HostComponent } from './InternalTypes';
+export type {
+  BlurEvent,
+  FocusEvent,
+  MouseEvent,
+  LayoutChangeEvent as LayoutEvent,
+  TextLayoutEvent,
+  ScrollResponderEvent as ScrollEvent,
+} from 'react-native';
 
 export type SyntheticEvent<T> = Readonly<{
   bubbles?: boolean;
@@ -62,34 +70,6 @@ export type ResponderSyntheticEvent<T> = SyntheticEvent<T> &
     }>;
   }>;
 
-export type Layout = Readonly<{
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}>;
-
-export type TextLayout = Layout &
-  Readonly<{
-    ascender: number;
-    capHeight: number;
-    descender: number;
-    text: string;
-    xHeight: number;
-  }>;
-
-export type LayoutEvent = SyntheticEvent<
-  Readonly<{
-    layout: Layout;
-  }>
->;
-
-export type TextLayoutEvent = SyntheticEvent<
-  Readonly<{
-    lines: Array<TextLayout>;
-  }>
->;
-
 export type PressEvent = ResponderSyntheticEvent<
   Readonly<{
     changedTouches: ReadonlyArray<PressEvent['nativeEvent']>;
@@ -102,61 +82,6 @@ export type PressEvent = ResponderSyntheticEvent<
     target?: number;
     timestamp: number;
     touches: ReadonlyArray<PressEvent['nativeEvent']>;
-  }>
->;
-
-export type ScrollEvent = SyntheticEvent<
-  Readonly<{
-    contentInset: Readonly<{
-      bottom: number;
-      left: number;
-      right: number;
-      top: number;
-    }>;
-    contentOffset: Readonly<{
-      y: number;
-      x: number;
-    }>;
-    contentSize: Readonly<{
-      height: number;
-      width: number;
-    }>;
-    layoutMeasurement: Readonly<{
-      height: number;
-      width: number;
-    }>;
-    targetContentOffset?: Readonly<{
-      y: number;
-      x: number;
-    }>;
-    velocity?: Readonly<{
-      y: number;
-      x: number;
-    }>;
-    zoomScale?: number;
-    responderIgnoreScroll?: boolean;
-  }>
->;
-
-export type BlurEvent = SyntheticEvent<
-  Readonly<{
-    target: number;
-  }>
->;
-
-export type FocusEvent = SyntheticEvent<
-  Readonly<{
-    target: number;
-  }>
->;
-
-export type MouseEvent = SyntheticEvent<
-  Readonly<{
-    clientX: number;
-    clientY: number;
-    pageX: number;
-    pageY: number;
-    timestamp: number;
   }>
 >;
 

@@ -43,12 +43,12 @@ const BasicRadioGroup: React.FunctionComponent = () => {
             content="Option A"
             buttonKey="A"
             accessibilityLabel="Test Accessibility Label"
-            accessibilityPositionInSet={1}
+            accessibilityPosInSet={1}
             accessibilitySetSize={4}
           />
-          <RadioButton content="Option B" buttonKey="B" accessibilityPositionInSet={2} accessibilitySetSize={4} />
-          <RadioButton content="Option C" buttonKey="C" accessibilityPositionInSet={3} accessibilitySetSize={4} />
-          <RadioButton content="Option D" buttonKey="D" accessibilityPositionInSet={4} accessibilitySetSize={4} />
+          <RadioButton content="Option B" buttonKey="B" accessibilityPosInSet={2} accessibilitySetSize={4} />
+          <RadioButton content="Option C" buttonKey="C" accessibilityPosInSet={3} accessibilitySetSize={4} />
+          <RadioButton content="Option D" buttonKey="D" accessibilityPosInSet={4} accessibilitySetSize={4} />
         </View>
       </RadioGroup>
     </View>

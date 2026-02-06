@@ -1,5 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
+import { act } from 'react';
 import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 
@@ -103,26 +104,28 @@ const Label = compressible<LabelProps, LabelTokens>((props: LabelProps, useToken
 
 describe('compressible tests', () => {
   it('Two labels, one with caption and one without', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <View>
           <Label headerText="Header1" />
           <Label headerText="Header2" captionText="Caption2" />
         </View>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   it('Two labels, one plugging in SuperHeader instead', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <View>
           <Label headerText="Super Header" headerSlot={SuperHeader} captionText="Normal caption" />
           <Label headerText="Normal Header" captionText="Another normal caption" />
         </View>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

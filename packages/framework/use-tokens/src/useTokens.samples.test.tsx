@@ -1,5 +1,6 @@
 import * as React from 'react';
-import type { TextProps, TextStyle } from 'react-native';
+import { act } from 'react';
+import type { TextProps } from 'react-native';
 import { Text, View } from 'react-native';
 
 import { immutableMerge } from '@fluentui-react-native/framework-base';
@@ -96,7 +97,7 @@ describe('useTokens samples', () => {
     const [tokens, cache] = useTokensSample1(theme);
 
     // build up the text style, or the full props as appropriate
-    const styleFromTokens = cache(
+    const [styleFromTokens] = cache(
       /**
        * first build the style object
        * - this executes once for every unique set of keys.
@@ -115,7 +116,7 @@ describe('useTokens samples', () => {
 
     // merge the props from the tokens with anything passed in via style. This is internally cached via object identity
     // so the merged style object won't change identity unless one of the two inputs changes identity.
-    const mergedStyle = mergeStyles<TextStyle>(styleFromTokens, style);
+    const mergedStyle = mergeStyles(styleFromTokens, style);
 
     // now just render the element, forwarding the props, setting the merged style, then passing the children as appropriate
     return (
@@ -131,8 +132,11 @@ describe('useTokens samples', () => {
 
   /** first render the component with no updates */
   it('Sample1Text rendering with no overrides', () => {
-    const tree = renderer.create(<SampleText1>Sample1a</SampleText1>).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<SampleText1>Sample1a</SampleText1>);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   /** now re-theme the component via the components in the theme */
@@ -145,8 +149,11 @@ describe('useTokens samples', () => {
         },
       },
     });
-    const tree = renderer.create(<SampleText1>Sample1b</SampleText1>).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<SampleText1>Sample1b</SampleText1>);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   /**
@@ -176,7 +183,7 @@ describe('useTokens samples', () => {
 
     // now just render, this time merging styles inline to make it a bit shorter
     return (
-      <Text {...rest} style={mergeStyles<TextStyle>(styleFromTokens, style)}>
+      <Text {...rest} style={mergeStyles(styleFromTokens, style)}>
         {children}
       </Text>
     );
@@ -184,15 +191,16 @@ describe('useTokens samples', () => {
 
   /** rendering the Sample2 component with the base theme */
   it('Sample2Text rendering with defaults and a color override', () => {
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <View>
           <SampleText2>Sample2 with defaults</SampleText2>
           <SampleText2 color="green">Sample2 with color override via prop</SampleText2>
         </View>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
   /** now re-theme the component via the components in the theme */
@@ -205,14 +213,15 @@ describe('useTokens samples', () => {
         },
       },
     });
-    const tree = renderer
-      .create(
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
         <View>
           <SampleText2>Sample2 with theme overrides set</SampleText2>
           <SampleText2 color="purple">Sample2 with theme and color prop override</SampleText2>
         </View>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+      );
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { act } from 'react';
 
 import * as renderer from 'react-test-renderer';
 
@@ -18,13 +19,18 @@ export function validateHookValueNotChanged<TValues extends NonNullable<any>[]>(
       return <React.Fragment />;
     };
 
-    const wrapper = renderer.create(<TestComponent />);
+    let wrapper: renderer.ReactTestRenderer;
+    act(() => {
+      wrapper = renderer.create(<TestComponent />);
+    });
     expect(callCount).toBe(1);
     const firstValues = latestValues;
     expect(firstValues).toBeDefined();
     latestValues = undefined;
 
-    wrapper.update(<TestComponent />);
+    act(() => {
+      wrapper.update(<TestComponent />);
+    });
     expect(callCount).toBe(2);
     expect(latestValues).toBeDefined();
     expect(latestValues.length).toEqual(firstValues!.length);

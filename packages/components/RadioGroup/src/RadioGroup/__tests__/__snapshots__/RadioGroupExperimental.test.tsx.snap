@@ -65,7 +65,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
         ]
       }
       accessibilityLabel="Radio1"
-      accessibilityPositionInSet={1}
+      accessibilityPosInSet={1}
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
@@ -226,7 +226,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
         ]
       }
       accessibilityLabel="Radio2"
-      accessibilityPositionInSet={2}
+      accessibilityPosInSet={2}
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
@@ -447,7 +447,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         ]
       }
       accessibilityLabel="RadioButton1"
-      accessibilityPositionInSet={0}
+      accessibilityPosInSet={0}
       accessibilityRole="radio"
       accessibilitySetSize={0}
       accessibilityState={
@@ -608,7 +608,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         ]
       }
       accessibilityLabel="RadioButton2"
-      accessibilityPositionInSet={0}
+      accessibilityPosInSet={0}
       accessibilityRole="radio"
       accessibilitySetSize={0}
       accessibilityState={
@@ -829,7 +829,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         ]
       }
       accessibilityLabel="Radio1"
-      accessibilityPositionInSet={1}
+      accessibilityPosInSet={1}
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
@@ -990,7 +990,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         ]
       }
       accessibilityLabel="Radio2"
-      accessibilityPositionInSet={2}
+      accessibilityPosInSet={2}
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
@@ -1212,7 +1212,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
         ]
       }
       accessibilityLabel="Radio1"
-      accessibilityPositionInSet={1}
+      accessibilityPosInSet={1}
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
@@ -1373,7 +1373,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
         ]
       }
       accessibilityLabel="Radio2"
-      accessibilityPositionInSet={2}
+      accessibilityPosInSet={2}
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
@@ -1595,7 +1595,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         ]
       }
       accessibilityLabel="Radio1"
-      accessibilityPositionInSet={1}
+      accessibilityPosInSet={1}
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
@@ -1756,7 +1756,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         ]
       }
       accessibilityLabel="Radio2"
-      accessibilityPositionInSet={2}
+      accessibilityPosInSet={2}
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
@@ -1993,7 +1993,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
         ]
       }
       accessibilityLabel="Radio1"
-      accessibilityPositionInSet={1}
+      accessibilityPosInSet={1}
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
@@ -2154,7 +2154,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
         ]
       }
       accessibilityLabel="Radio2"
-      accessibilityPositionInSet={2}
+      accessibilityPosInSet={2}
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={

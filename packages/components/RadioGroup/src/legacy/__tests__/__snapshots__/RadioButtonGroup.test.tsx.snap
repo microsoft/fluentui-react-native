@@ -39,7 +39,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
         ]
       }
       accessibilityLabel="RadioButton1"
-      accessibilityPositionInSet={0}
+      accessibilityPosInSet={0}
       accessibilityRole="radio"
       accessibilitySetSize={0}
       accessibilityState={
@@ -134,7 +134,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
         ]
       }
       accessibilityLabel="RadioButton2"
-      accessibilityPositionInSet={0}
+      accessibilityPosInSet={0}
       accessibilityRole="radio"
       accessibilitySetSize={0}
       accessibilityState={
@@ -263,7 +263,7 @@ exports[`RadioButton component tests RadioButton not direct child of radio group
           ]
         }
         accessibilityLabel="RadioButton1"
-        accessibilityPositionInSet={1}
+        accessibilityPosInSet={1}
         accessibilityRole="radio"
         accessibilitySetSize={2}
         accessibilityState={
@@ -358,7 +358,7 @@ exports[`RadioButton component tests RadioButton not direct child of radio group
           ]
         }
         accessibilityLabel="RadioButton2"
-        accessibilityPositionInSet={2}
+        accessibilityPosInSet={2}
         accessibilityRole="radio"
         accessibilitySetSize={2}
         accessibilityState={

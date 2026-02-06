@@ -1,7 +1,6 @@
 import type * as React from 'react';
 import type { PressableProps, ViewProps, ColorValue } from 'react-native';
 
-import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { IPressableProps } from '@fluentui-react-native/pressable';
@@ -142,7 +141,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
  * Please see MIGRATION.md for details on how to move to the new Button.
  */
 export interface IButtonSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<ViewProps>;
   ripple?: PressableProps; // This slot exists to enable ripple-effect in android. It does not affect other platforms.
   stack: ViewProps;
   borderWrapper: ViewProps;

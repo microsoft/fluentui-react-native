@@ -2415,14 +2415,16 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    "@office-iss/react-native-win32": "npm:^0.81.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -2454,13 +2456,16 @@ __metadata:
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -2496,14 +2501,17 @@ __metadata:
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     assert-never: "npm:^1.2.1"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -2540,16 +2548,19 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
     unicode-segmenter: "npm:^0.14.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
@@ -2612,16 +2623,19 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -2666,19 +2680,22 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -2709,18 +2726,21 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -2760,19 +2780,22 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -2811,16 +2834,19 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -2871,12 +2897,12 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-slots": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   languageName: unknown
@@ -2902,22 +2928,25 @@ __metadata:
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     metro-config: "npm:^0.80.3"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -2951,14 +2980,17 @@ __metadata:
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     assert-never: "npm:^1.2.1"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3116,16 +3148,19 @@ __metadata:
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3158,15 +3193,18 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3201,14 +3239,17 @@ __metadata:
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3236,13 +3277,13 @@ __metadata:
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@office-iss/react-native-win32": "npm:^0.74.0"
+    "@office-iss/react-native-win32": "npm:^0.81.0"
     "@office-iss/rex-win32": "npm:0.73.11-devmain.16.0.17615.15030"
-    "@react-native/metro-babel-transformer": "npm:^0.74.0"
+    "@react-native/metro-babel-transformer": "npm:^0.81.0"
     "@rnx-kit/metro-config": "catalog:"
     "@types/jasmine": "catalog:"
     "@types/node": "catalog:"
-    "@types/react": "npm:~18.2.0"
+    "@types/react": "npm:~19.1.0"
     "@wdio/appium-service": "catalog:"
     "@wdio/cli": "catalog:"
     "@wdio/globals": "catalog:"
@@ -3260,10 +3301,10 @@ __metadata:
     cross-env: "catalog:"
     expect-webdriverio: "catalog:"
     metro-config: "npm:^0.80.3"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
     rimraf: "catalog:"
     ts-node: "npm:^10.7.0"
     webdriverio: "catalog:"
@@ -3307,15 +3348,18 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     assert-never: "npm:^1.2.1"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3343,13 +3387,16 @@ __metadata:
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     "@types/use-subscription": "npm:^1.0.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
     use-subscription: "npm:^1.11.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
@@ -3378,14 +3425,17 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3415,14 +3465,17 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3451,12 +3504,15 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3489,16 +3545,19 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3525,10 +3584,13 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3544,11 +3606,14 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     "@types/use-subscription": "npm:^1.0.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
     use-subscription: "npm:^1.11.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3571,15 +3636,18 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3611,17 +3679,20 @@ __metadata:
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     assert-never: "npm:^1.2.1"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3653,14 +3724,17 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
     tslib: "npm:^2.3.1"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
@@ -3691,17 +3765,20 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3731,18 +3808,21 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-babel-transformer": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-babel-transformer": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3770,8 +3850,8 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "catalog:"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   languageName: unknown
@@ -3796,16 +3876,19 @@ __metadata:
     "@fluentui-react-native/use-slots": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@fluentui-react-native/use-tokens": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@rnx-kit/cli": "catalog:"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3838,16 +3921,19 @@ __metadata:
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3874,8 +3960,8 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/node": "catalog:"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   peerDependenciesMeta:
@@ -3904,16 +3990,19 @@ __metadata:
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3945,18 +4034,21 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@types/invariant": "npm:^2.2.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     invariant: "npm:^2.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -3982,7 +4074,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/jest-preset": "catalog:"
     "@types/node": "catalog:"
     babel-jest: "npm:^29.0.0"
@@ -4020,18 +4112,21 @@ __metadata:
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4057,8 +4152,8 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/node": "catalog:"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
     tslib: "npm:^2.3.1"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4084,19 +4179,22 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4139,17 +4237,20 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@types/node": "catalog:"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4175,8 +4276,8 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   peerDependenciesMeta:
@@ -4211,16 +4312,19 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4254,15 +4358,15 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4295,16 +4399,19 @@ __metadata:
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4335,16 +4442,19 @@ __metadata:
     "@fluentui-react-native/persona-coin": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4373,12 +4483,15 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4406,14 +4519,17 @@ __metadata:
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4452,19 +4568,22 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4573,15 +4692,18 @@ __metadata:
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4612,14 +4734,17 @@ __metadata:
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4652,19 +4777,22 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4690,10 +4818,13 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4705,7 +4836,6 @@ __metadata:
   resolution: "@fluentui-react-native/switch@workspace:packages/components/Switch"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4720,15 +4850,18 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4767,16 +4900,19 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -4805,16 +4941,16 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:^18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
-    react: 18.2.0
-    react-native: ^0.73.0 || ^0.74.0
+    react: 18.2.0 || 19.0.0 || 19.1.0
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   languageName: unknown
   linkType: soft
 
@@ -4824,6 +4960,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@babel/runtime": "catalog:"
+    "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/android-theme": "workspace:*"
     "@fluentui-react-native/apple-theme": "workspace:*"
     "@fluentui-react-native/avatar": "workspace:*"
@@ -4880,24 +5017,24 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": "npm:^6.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^6.2.0"
     "@fortawesome/react-native-fontawesome": "npm:^0.3.0"
-    "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native-community/cli": "npm:^13.6.4"
-    "@react-native-community/cli-platform-android": "npm:^13.6.4"
-    "@react-native-community/cli-platform-ios": "npm:^13.6.4"
+    "@office-iss/react-native-win32": "npm:^0.81.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native-community/slider": "npm:^4.5.7"
     "@react-native-menu/menu": "npm:^0.7.3"
     "@react-native-picker/picker": "npm:^2.7.0"
     "@react-native-windows/cli": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@rnx-kit/cli": "catalog:"
     "@rnx-kit/metro-config": "catalog:"
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
     "@types/jasmine": "catalog:"
     "@types/node": "catalog:"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@wdio/cli": "catalog:"
     "@wdio/globals": "catalog:"
     "@wdio/jasmine-framework": "catalog:"
@@ -4906,14 +5043,14 @@ __metadata:
     expect-webdriverio: "catalog:"
     flow-bin: "npm:^0.113.0"
     metro-config: "npm:^0.80.3"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
     react-native-test-app: "npm:^3.9.2"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
     webdriverio: "catalog:"
   peerDependencies:
     "@fluentui-react-native/callout": "workspace:*"
@@ -5130,16 +5267,19 @@ __metadata:
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-compose": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -5170,11 +5310,14 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     assert-never: "npm:^1.2.1"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5190,10 +5333,13 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5213,11 +5359,14 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5235,11 +5384,14 @@ __metadata:
     "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5260,13 +5412,16 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -5294,12 +5449,15 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -5331,15 +5489,15 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -5368,14 +5526,17 @@ __metadata:
     "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   languageName: unknown
@@ -5393,13 +5554,16 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-slot": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   languageName: unknown
@@ -5417,14 +5581,17 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-tokens": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   languageName: unknown
@@ -5441,14 +5608,17 @@ __metadata:
     "@fluentui-react-native/jest-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~18.2.0"
-    "@types/react-test-renderer": "npm:^18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-test-renderer: "npm:18.2.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   languageName: unknown
@@ -5464,13 +5634,16 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    "@office-iss/react-native-win32": "npm:^0.81.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -5505,13 +5678,16 @@ __metadata:
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -5566,15 +5742,18 @@ __metadata:
     "@fluentui-react-native/separator": "workspace:*"
     "@fluentui-react-native/tablist": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@rnx-kit/cli": "catalog:"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-svg: "npm:>=15.4.0 <15.13.0"
-    react-native-windows: "npm:^0.74.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -6589,10 +6768,68 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@microsoft/1ds-core-js@npm:4.3.11, @microsoft/1ds-core-js@npm:^4.3.0":
+  version: 4.3.11
+  resolution: "@microsoft/1ds-core-js@npm:4.3.11"
+  dependencies:
+    "@microsoft/applicationinsights-core-js": "npm:3.3.11"
+    "@microsoft/applicationinsights-shims": "npm:3.0.1"
+    "@microsoft/dynamicproto-js": "npm:^2.0.3"
+    "@nevware21/ts-async": "npm:>= 0.5.4 < 2.x"
+    "@nevware21/ts-utils": "npm:>= 0.11.8 < 2.x"
+  checksum: 10c0/a6ece343ab6813c8190bef199e9396c0548a6180e6e54884b871376ceac395cb9bbfbe8d03b132bd4e010cf900699803bf4d500a4a8e188363d6cec4396cf98e
+  languageName: node
+  linkType: hard
+
+"@microsoft/1ds-post-js@npm:^4.3.0":
+  version: 4.3.11
+  resolution: "@microsoft/1ds-post-js@npm:4.3.11"
+  dependencies:
+    "@microsoft/1ds-core-js": "npm:4.3.11"
+    "@microsoft/applicationinsights-shims": "npm:3.0.1"
+    "@microsoft/dynamicproto-js": "npm:^2.0.3"
+    "@nevware21/ts-async": "npm:>= 0.5.4 < 2.x"
+    "@nevware21/ts-utils": "npm:>= 0.11.8 < 2.x"
+  checksum: 10c0/557d6240c27b9413ccd78ce9fa70863147c05fa4ffe8ac4fc316debe560804c41c3a6aed59eb042fdc4864558caaffaf29ed5dc79f543c3d4909b18a8d161aeb
+  languageName: node
+  linkType: hard
+
+"@microsoft/applicationinsights-core-js@npm:3.3.11":
+  version: 3.3.11
+  resolution: "@microsoft/applicationinsights-core-js@npm:3.3.11"
+  dependencies:
+    "@microsoft/applicationinsights-shims": "npm:3.0.1"
+    "@microsoft/dynamicproto-js": "npm:^2.0.3"
+    "@nevware21/ts-async": "npm:>= 0.5.4 < 2.x"
+    "@nevware21/ts-utils": "npm:>= 0.11.8 < 2.x"
+  peerDependencies:
+    tslib: ">= 1.0.0"
+  checksum: 10c0/d7d878c5e55f9b0b1880a6e02f504f1117fc7e7a4153f7b2377c8fa4acf54c27bf041fc6c7ec3b77445cf44fd4aaa93ffa4c5febc96569f60708c2a5b9cafc02
+  languageName: node
+  linkType: hard
+
+"@microsoft/applicationinsights-shims@npm:3.0.1":
+  version: 3.0.1
+  resolution: "@microsoft/applicationinsights-shims@npm:3.0.1"
+  dependencies:
+    "@nevware21/ts-utils": "npm:>= 0.9.4 < 2.x"
+  checksum: 10c0/3fa11dbbe6c4844fb28aecaef0aa352ace22558e161d27a7ff227060fb07e724fc1a7da449ae01327ff05d416abfff6987019c332f8b956c83a9f38f6b191e60
+  languageName: node
+  linkType: hard
+
 "@microsoft/applicationinsights-web-snippet@npm:^1.0.1":
   version: 1.0.1
   resolution: "@microsoft/applicationinsights-web-snippet@npm:1.0.1"
   checksum: 10c0/1b4d68638108ffa3232979b462eef4045acecfba87e4969b8bef806e8b8f0a7a6949f596c4fd4be9fd50213823fee056f9e3a40883ab6d49b763ae59bd8218cb
+  languageName: node
+  linkType: hard
+
+"@microsoft/dynamicproto-js@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@microsoft/dynamicproto-js@npm:2.0.3"
+  dependencies:
+    "@nevware21/ts-utils": "npm:>= 0.10.4 < 2.x"
+  checksum: 10c0/3f17ddd5bebd478337038fb307af2570f5c8e0e49652706a3f34ad5bc0ba880114044965d23f8946cc062bb2d7d7a467c482f1323c6e4465f60907f71d018538
   languageName: node
   linkType: hard
 
@@ -6617,6 +6854,22 @@ __metadata:
     "@emnapi/runtime": "npm:^1.7.1"
     "@tybys/wasm-util": "npm:^0.10.1"
   checksum: 10c0/04d57b67e80736e41fe44674a011878db0a8ad893f4d44abb9d3608debb7c174224cba2796ed5b0c1d367368159f3ca6be45f1c59222f70e32ddc880f803d447
+  languageName: node
+  linkType: hard
+
+"@nevware21/ts-async@npm:>= 0.5.4 < 2.x":
+  version: 0.5.5
+  resolution: "@nevware21/ts-async@npm:0.5.5"
+  dependencies:
+    "@nevware21/ts-utils": "npm:>= 0.12.2 < 2.x"
+  checksum: 10c0/4460fa273cc855f9ee8e31a3092b0f94f52e228151494b66f7d318947aa4ecd36a60e485ab61dd47210418823839fa118b1781c31dfd72cdb863207940121e13
+  languageName: node
+  linkType: hard
+
+"@nevware21/ts-utils@npm:>= 0.10.4 < 2.x, @nevware21/ts-utils@npm:>= 0.11.8 < 2.x, @nevware21/ts-utils@npm:>= 0.12.2 < 2.x, @nevware21/ts-utils@npm:>= 0.9.4 < 2.x":
+  version: 0.12.5
+  resolution: "@nevware21/ts-utils@npm:0.12.5"
+  checksum: 10c0/788e691b78725d35ea65b3411ebcedca882c21ceefe632abbffff0954c4a3611cf8e6f704c41d1fbcfa4b4512969fae1be143282fd5e6f1aaa1893659bbb4be9
   languageName: node
   linkType: hard
 
@@ -7680,6 +7933,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-windows/cli@npm:0.81.1":
+  version: 0.81.1
+  resolution: "@react-native-windows/cli@npm:0.81.1"
+  dependencies:
+    "@react-native-windows/codegen": "npm:0.81.1"
+    "@react-native-windows/fs": "npm:0.81.0"
+    "@react-native-windows/package-utils": "npm:0.81.0"
+    "@react-native-windows/telemetry": "npm:0.81.0"
+    "@xmldom/xmldom": "npm:^0.7.7"
+    chalk: "npm:^4.1.0"
+    cli-spinners: "npm:^2.2.0"
+    envinfo: "npm:^7.5.0"
+    execa: "npm:^5.0.0"
+    find-up: "npm:^4.1.0"
+    glob: "npm:^7.1.1"
+    lodash: "npm:^4.17.15"
+    mustache: "npm:^4.0.1"
+    ora: "npm:^3.4.0"
+    prompts: "npm:^2.4.1"
+    semver: "npm:^7.3.2"
+    shelljs: "npm:^0.8.4"
+    username: "npm:^5.1.0"
+    xml-formatter: "npm:^2.4.0"
+    xml-parser: "npm:^1.2.1"
+    xpath: "npm:^0.0.27"
+  peerDependencies:
+    react-native: ^0.81.0-0
+  checksum: 10c0/ec1becd47f85ef81aff178b2e4edd89378ea9b991b1285ef53f3af7b4a7f114eb9b3ed779ce5ff691b2783bb60c2421aa47c4c6063007e3f070dfcbdaa84f0bb
+  languageName: node
+  linkType: hard
+
 "@react-native-windows/cli@npm:^0.74.0":
   version: 0.74.12
   resolution: "@react-native-windows/cli@npm:0.74.12"
@@ -7729,6 +8013,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-windows/codegen@npm:0.81.1":
+  version: 0.81.1
+  resolution: "@react-native-windows/codegen@npm:0.81.1"
+  dependencies:
+    "@react-native-windows/fs": "npm:0.81.0"
+    chalk: "npm:^4.1.0"
+    globby: "npm:^11.1.0"
+    mustache: "npm:^4.0.1"
+    source-map-support: "npm:^0.5.19"
+    yargs: "npm:^16.2.0"
+  peerDependencies:
+    react-native: ^0.81.0-0
+  bin:
+    react-native-windows-codegen: bin.js
+  checksum: 10c0/71d25ada8e2eb2e7e1ac26a041f0ad0e0179fe8e8d649113c68c6f809f122657759f19afd88fe2f51adafbb163a90e19fa45481e996ce407f294b5fce1316773
+  languageName: node
+  linkType: hard
+
 "@react-native-windows/find-repo-root@npm:0.74.1":
   version: 0.74.1
   resolution: "@react-native-windows/find-repo-root@npm:0.74.1"
@@ -7736,6 +8038,16 @@ __metadata:
     "@react-native-windows/fs": "npm:0.74.1"
     find-up: "npm:^4.1.0"
   checksum: 10c0/4a6633e40ede3b68ace04fa09927b3c204ca7ae15ef1038bbc54dfce49b8e506fa8c52354a468241d32d92fd19463abafc895d68d1fd4d89d1b534ff006e989d
+  languageName: node
+  linkType: hard
+
+"@react-native-windows/find-repo-root@npm:0.81.0":
+  version: 0.81.0
+  resolution: "@react-native-windows/find-repo-root@npm:0.81.0"
+  dependencies:
+    "@react-native-windows/fs": "npm:0.81.0"
+    find-up: "npm:^4.1.0"
+  checksum: 10c0/6521cb8d200cca63f7166296e8f18313c8e9d7a8ea34929c0bb5d0ca79f1dc4f96db61d115ca732e1d766702c21d13234f66d2ee94c080a4705af3c5dad6e764
   languageName: node
   linkType: hard
 
@@ -7748,6 +8060,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-windows/fs@npm:0.81.0":
+  version: 0.81.0
+  resolution: "@react-native-windows/fs@npm:0.81.0"
+  dependencies:
+    graceful-fs: "npm:^4.2.8"
+  checksum: 10c0/3bb8d17bc494906f8fd06ed595d4a4ac79a798807d19c69f0c253a90ea6b3f4a6982eb8e1bff41be324700ae20f118be52f4f420c47025c42a1eb919aa9016d6
+  languageName: node
+  linkType: hard
+
 "@react-native-windows/package-utils@npm:0.74.1":
   version: 0.74.1
   resolution: "@react-native-windows/package-utils@npm:0.74.1"
@@ -7757,6 +8078,18 @@ __metadata:
     get-monorepo-packages: "npm:^1.2.0"
     lodash: "npm:^4.17.15"
   checksum: 10c0/419219428af3664b2b927a7b75202fe94683febf90c36da990cae958c86e22c6a4692e0c6fa5f9d8105fded12f8082eece8f8873f17c3337ad1faf56fe226dd5
+  languageName: node
+  linkType: hard
+
+"@react-native-windows/package-utils@npm:0.81.0":
+  version: 0.81.0
+  resolution: "@react-native-windows/package-utils@npm:0.81.0"
+  dependencies:
+    "@react-native-windows/find-repo-root": "npm:0.81.0"
+    "@react-native-windows/fs": "npm:0.81.0"
+    get-monorepo-packages: "npm:^1.2.0"
+    lodash: "npm:^4.17.15"
+  checksum: 10c0/7527f54d275db1591d0d85bea9b1a75ae97c606591981917e0e8329cbef6fc8eda9bff3f2f1f61c99c0e1172013fafb708fb7483888ecade274b29147dd458d5
   languageName: node
   linkType: hard
 
@@ -7774,6 +8107,23 @@ __metadata:
     os-locale: "npm:^5.0.0"
     xpath: "npm:^0.0.27"
   checksum: 10c0/e37268a1bc4b41134cf35fb0fb31b9cbb625fe5e3f36504a981c6eee403a267acd468641dfd129144b3adc883a12fae5f435ad8b2371df911bfe223d6842c24c
+  languageName: node
+  linkType: hard
+
+"@react-native-windows/telemetry@npm:0.81.0":
+  version: 0.81.0
+  resolution: "@react-native-windows/telemetry@npm:0.81.0"
+  dependencies:
+    "@microsoft/1ds-core-js": "npm:^4.3.0"
+    "@microsoft/1ds-post-js": "npm:^4.3.0"
+    "@react-native-windows/fs": "npm:0.81.0"
+    "@xmldom/xmldom": "npm:^0.7.7"
+    ci-info: "npm:^3.2.0"
+    envinfo: "npm:^7.8.1"
+    lodash: "npm:^4.17.21"
+    os-locale: "npm:^5.0.0"
+    xpath: "npm:^0.0.27"
+  checksum: 10c0/1b33a1e5ac3617a6dfe0a8ea25aae0835cc632a0bd14c7e7a75c98e105172d1ca0cb972861de36dfffd86791c1e56c3022f5e7c59c3c51421c2387cf274d4c16
   languageName: node
   linkType: hard
 
@@ -8141,6 +8491,20 @@ __metadata:
     metro-config: "npm:^0.83.1"
     metro-runtime: "npm:^0.83.1"
   checksum: 10c0/5df438776ae7d75556178c3eda0d8632059345adfcee4f8f7e90b3159d9bcad67fc2ce78e8805a4720e9b463e75625bc2c0c6f07d9b0cdb2f7b93d870c217a45
+  languageName: node
+  linkType: hard
+
+"@react-native/new-app-screen@npm:0.81.5":
+  version: 0.81.5
+  resolution: "@react-native/new-app-screen@npm:0.81.5"
+  peerDependencies:
+    "@types/react": ^19.1.0
+    react: "*"
+    react-native: "*"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10c0/b851159b97d03e618d6b84fa91302f8482e1bd83de7a147febf4d9cf84ee0414da1afa351850e28492411e817f473e9cfc156c5a550bea0614ebdf4f627b2b0a
   languageName: node
   linkType: hard
 
@@ -9474,10 +9838,10 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@types/react": "npm:~18.2.0"
+    "@types/react": "npm:~19.1.0"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -9494,17 +9858,17 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
-    "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@office-iss/react-native-win32": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
     "@uifabricshared/themed-settings": "workspace:*"
     "@uifabricshared/theming-ramp": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -9532,9 +9896,9 @@ __metadata:
     "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   languageName: unknown
@@ -9551,17 +9915,20 @@ __metadata:
     "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
-    "@office-iss/react-native-win32": "npm:^0.74.0"
-    "@react-native/babel-preset": "npm:^0.74.0"
-    "@react-native/metro-config": "npm:^0.74.0"
+    "@office-iss/react-native-win32": "npm:^0.81.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "catalog:"
-    "@types/react": "npm:~18.2.0"
+    "@types/react": "npm:~19.1.0"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -9591,9 +9958,9 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~18.2.0"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    "@types/react": "npm:~19.1.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   languageName: unknown
@@ -9609,13 +9976,13 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/babel-preset": "npm:^0.74.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "catalog:"
-    "@types/react": "npm:~18.2.0"
+    "@types/react": "npm:~19.1.0"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   languageName: unknown
@@ -9634,10 +10001,10 @@ __metadata:
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~18.2.0"
+    "@types/react": "npm:~19.1.0"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
   peerDependencies:
     react: 18.2.0 || 19.0.0 || 19.1.0
   languageName: unknown
@@ -9654,14 +10021,17 @@ __metadata:
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/win32-theme": "workspace:*"
-    "@react-native/metro-config": "npm:^0.74.0"
-    "@types/react": "npm:~18.2.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.0"
     "@uifabricshared/theme-registry": "workspace:*"
     "@uifabricshared/theming-ramp": "workspace:*"
-    react: "npm:18.2.0"
-    react-native: "npm:^0.74.0"
-    react-native-macos: "npm:^0.74.0"
-    react-native-windows: "npm:^0.74.0"
+    react: "npm:19.1.0"
+    react-native: "npm:^0.81.0"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
     react: 18.2.0 || 19.0.0 || 19.1.0
@@ -20642,6 +21012,63 @@ __metadata:
     react: 18.2.0
     react-native: ^0.74.0
   checksum: 10c0/b76564ba5335c604f46e3991d6bb5381c406f0e3a514d7ba0d7e6b7a820a0a60e46b3ac5cd6f68f179757de57e20ea59636af5d5b5f06a65f46ffb44d49727f1
+  languageName: node
+  linkType: hard
+
+"react-native-windows@npm:^0.81.0":
+  version: 0.81.3
+  resolution: "react-native-windows@npm:0.81.3"
+  dependencies:
+    "@babel/runtime": "npm:^7.0.0"
+    "@jest/create-cache-key-function": "npm:^29.7.0"
+    "@react-native-community/cli": "npm:17.0.0"
+    "@react-native-community/cli-platform-android": "npm:17.0.0"
+    "@react-native-community/cli-platform-ios": "npm:17.0.0"
+    "@react-native-windows/cli": "npm:0.81.1"
+    "@react-native/assets": "npm:1.0.0"
+    "@react-native/assets-registry": "npm:0.81.5"
+    "@react-native/codegen": "npm:0.81.5"
+    "@react-native/community-cli-plugin": "npm:0.81.5"
+    "@react-native/gradle-plugin": "npm:0.81.5"
+    "@react-native/js-polyfills": "npm:0.81.5"
+    "@react-native/new-app-screen": "npm:0.81.5"
+    "@react-native/normalize-colors": "npm:0.81.5"
+    "@react-native/virtualized-lists": "npm:0.81.5"
+    abort-controller: "npm:^3.0.0"
+    anser: "npm:^1.4.9"
+    ansi-regex: "npm:^5.0.0"
+    babel-jest: "npm:^29.7.0"
+    babel-plugin-syntax-hermes-parser: "npm:0.28.1"
+    base64-js: "npm:^1.5.1"
+    chalk: "npm:^4.0.0"
+    commander: "npm:^12.0.0"
+    event-target-shim: "npm:^5.0.1"
+    flow-enums-runtime: "npm:^0.0.6"
+    glob: "npm:^7.1.1"
+    invariant: "npm:^2.2.4"
+    jest-environment-node: "npm:^29.7.0"
+    memoize-one: "npm:^5.0.0"
+    metro-runtime: "npm:^0.83.1"
+    metro-source-map: "npm:^0.82.2"
+    mkdirp: "npm:^0.5.1"
+    nullthrows: "npm:^1.1.1"
+    pretty-format: "npm:^29.7.0"
+    promise: "npm:^8.3.0"
+    react-devtools-core: "npm:^6.1.1"
+    react-refresh: "npm:^0.14.0"
+    regenerator-runtime: "npm:^0.13.2"
+    scheduler: "npm:0.26.0"
+    semver: "npm:^7.1.3"
+    source-map-support: "npm:^0.5.19"
+    stacktrace-parser: "npm:^0.1.10"
+    whatwg-fetch: "npm:^3.0.0"
+    ws: "npm:^6.2.3"
+    yargs: "npm:^17.6.2"
+  peerDependencies:
+    "@types/react": ^19.1.0
+    react: ^19.1.0
+    react-native: 0.81.5
+  checksum: 10c0/5408bb6ac8708c32e2d80a5d29ea78c874532d83e7c18908b396393782cfb7269f542e3d6dcd69c369eca720200362ce8b6218788e1cc470aca7fc7fcfe07b65
   languageName: node
   linkType: hard
 

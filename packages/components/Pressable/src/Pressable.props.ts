@@ -1,22 +1,22 @@
 import type * as React from 'react';
-import type { ViewStyle, StyleProp } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
-import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IViewProps, IViewStyle } from '@fluentui-react-native/adapters';
 import type { IWithPressableOptions, IPressableState } from '@fluentui-react-native/interactive-hooks';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type ObjectBase = {};
 
-export type IPressableProps<TBase extends ObjectBase = IViewProps> = IWithPressableOptions<TBase> & {
-  children?: IRenderChild<IPressableState>;
+export type IPressableProps = IWithPressableOptions<IViewProps> & {
+  children?: React.ReactNode;
 
   // Typescript will not allow an extension of the IView* interface
   // that allows style to take on a function value. This is not a problem
   // with children, presumably because function components are valid as children.
   // As such, a renderStyle prop that takes a function value is provided
-  // instead, in conjunction with the base style prop (StyleProp<ViewStyle>).
+  // instead, in conjunction with the base style prop (ViewStyle).
   // The style prop will only be used if a renderStyle is not provided.
-  renderStyle?: IRenderStyle<IPressableState, ViewStyle>;
+  renderStyle?: IRenderStyle<IPressableState, IViewStyle>;
 };
 
 /**
@@ -38,13 +38,13 @@ export type IRenderChild<T> = IChildAsFunction<T> | React.ReactNode;
 /**
  * An IRenderStyle describes style as a function that takes the current
  * state of the parent component. It is up to the parent to invoke the function
- * and make proper use of the more typical StyleProp<S> object that is returned
+ * and make proper use of the more typical ViewStyle object that is returned
  * This is convenient for when styles need to be calculated depending on interaction states.
  */
-export type IRenderStyle<T, S> = (state: T) => StyleProp<S>;
+export type IRenderStyle<T, S extends ViewStyle> = (state: T) => S;
 
 export type IPressableType<TBase extends ObjectBase = IViewProps> = {
-  props: IPressableProps<TBase>;
+  props: IPressableProps;
   slotProps: {
     root: TBase;
   };

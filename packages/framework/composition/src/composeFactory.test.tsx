@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { act } from 'react';
 import type { ViewProps, TextProps, ColorValue } from 'react-native';
 import { View, Text } from 'react-native';
 
@@ -86,12 +87,18 @@ const mixinStyle = {
 
 describe('composeFactory test suite', () => {
   it('Base component render', () => {
-    const tree = renderer.create(<Base style={mixinStyle} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Base style={mixinStyle} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 
-  it('Base component render', () => {
-    const tree = renderer.create(<Customized style={mixinStyle} />).toJSON();
-    expect(tree).toMatchSnapshot();
+  it('Customized component render', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<Customized style={mixinStyle} />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });
