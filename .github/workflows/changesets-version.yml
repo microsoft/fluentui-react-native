@@ -1,0 +1,81 @@
+name: Changesets Version Bump
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write # for Git tags and commits
+
+jobs:
+  version:
+    name: Create Version Bump PR
+    runs-on: ubuntu-latest
+    if: ${{ github.repository == 'microsoft/fluentui-react-native' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: blob:none
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'yarn'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: |
+          yarn config set nodeLinker node-modules
+          yarn install --immutable
+
+      - name: Build packages
+        run: yarn buildci
+
+      - name: Generate token for version PR
+        uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+          permissions: |
+            contents: write
+            pull-requests: write
+
+      - name: Create Version Bump PR
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: yarn changeset:version
+          commit: 'chore(release): version packages'
+          title: 'chore(release): version packages'
+          createGithubReleases: false  # We handle in Azure Pipelines
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      - name: Post-version hook for dependency-profiles
+        if: steps.changesets.outputs.hasChangesets == 'true'
+        run: |
+          if [ -d "packages/libraries/dependency-profiles" ]; then
+            echo "📦 Updating dependency-profiles"
+            cd packages/libraries/dependency-profiles
+            yarn update-profile
+            cd ../../..
+
+            yarn install --mode update-lockfile
+
+            if [[ -n $(git status --porcelain) ]]; then
+              git config user.name "github-actions[bot]"
+              git config user.email "github-actions[bot]@users.noreply.github.com"
+              git add .
+              git commit -m "chore: update dependency-profiles and lockfile"
+              git push
+              echo "✅ Committed dependency-profiles updates"
+            fi
+          fi

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": ["@changesets/cli/commit", { "skipCI": false }],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "origin/main",
+  "ignore": [
+    "@fluentui-react-native/tester",
+    "@fluentui-react-native/fluent-tester",
+    "@fluentui-react-native/test-*"
+  ]
+}

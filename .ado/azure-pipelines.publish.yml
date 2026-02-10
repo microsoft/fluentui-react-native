@@ -85,19 +85,12 @@ extends:
                 displayName: 'yarn buildci [test]'
 
               - script: |
-                  echo ##vso[task.setvariable variable=SkipNpmPublishArgs]--no-publish
-                displayName: Enable No-Publish (npm)
-                condition: ${{ parameters.skipNpmPublish }}
-
-              - script: |
-                  echo ##vso[task.setvariable variable=SkipGitPushPublishArgs]--no-push
-                displayName: Enable No-Publish (git)
-                condition: ${{ parameters.skipGitPush }}
-
-              - script: |
-                  yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -b origin/main -y
-                displayName: 'Publish NPM Packages (for main branch)'
-                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+                  export NPM_TOKEN=$(npmAuth)
+                  yarn changeset:publish --access public
+                displayName: 'Publish NPM Packages with Changesets'
+                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
+                env:
+                  NPM_TOKEN: $(npmAuth)
 
               - script: |
                   yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -y -t v${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }} -b origin/${{ replace(variables['Build.SourceBranch'],'refs/heads/','') }} --prerelease-prefix ${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }}
