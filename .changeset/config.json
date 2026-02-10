@@ -6,8 +6,12 @@
   "access": "public",
   "baseBranch": "origin/main",
   "ignore": [
+    "@fluentui-react-native/dependency-profiles",
+    "@fluentui-react-native/e2e-testing",
     "@fluentui-react-native/tester",
-    "@fluentui-react-native/fluent-tester",
+    "@fluentui-react-native/tester-core",
+    "@fluentui-react-native/tester-win32",
+    "@fluentui-react-native/tester-win32-81",
     "@fluentui-react-native/test-*"
   ]
 }
