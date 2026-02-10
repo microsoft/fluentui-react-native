@@ -38,6 +38,7 @@
     "changeset:status": "changeset status",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-changes",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
+    "checkchange:changeset": "changeset status --since=origin/main",
     "check-publishing": "node ./scripts/src/cli.mjs check-publishing",
     "lint": "lage lint",
     "lint-fix": "cross-env FURN_FIX_MODE=true lage lint",

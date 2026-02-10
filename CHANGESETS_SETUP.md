@@ -101,7 +101,27 @@ The Azure Pipelines publish workflow has been updated to use `changeset publish`
 
 **No changes needed** - Azure Pipelines will automatically use the new publish command.
 
-## Phase 3: Developer Workflow Changes
+## Phase 3: PR Validation (Configured ✅)
+
+Two layers of changeset validation are now active:
+
+### 1. Changeset Bot (GitHub App) ✅
+- **Status**: Installed
+- **What it does**: Automatically comments on PRs without changesets
+- Shows: "⚠️ No Changeset" or "✅ Changeset detected"
+- Updates in real-time as changesets are added
+
+### 2. GitHub Actions PR Validation ✅
+- **Workflow**: `.github/workflows/pr-validation.yml`
+- **What it does**: Enforces changesets in CI/CD
+- Fails the PR check if no changeset is present
+- Automatically skips for version bump PRs (`changeset-release/main`)
+
+**Both work together**:
+- Bot provides immediate visual feedback
+- GitHub Actions enforces the requirement
+
+## Phase 4: Developer Workflow Changes
 
 ### Creating Changesets (New Way)
 
