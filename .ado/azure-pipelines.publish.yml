@@ -85,7 +85,6 @@ extends:
                 displayName: 'yarn buildci [test]'
 
               - script: |
-                  export NPM_TOKEN=$(npmAuth)
                   yarn changeset:publish
                 displayName: 'Publish NPM Packages with Changesets'
                 condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
