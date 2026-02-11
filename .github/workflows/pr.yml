@@ -19,8 +19,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup the toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@4.4.5
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
         with:
           node-version: 22
 
@@ -50,8 +50,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup the toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@4.4.5
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
         with:
           platform: android
           node-version: 22
@@ -80,8 +80,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup the toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@4.4.5
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
         with:
           platform: macos
           node-version: 22
@@ -137,8 +137,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup the toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@4.4.5
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
         with:
           platform: ios
           node-version: 22
@@ -187,8 +187,8 @@ jobs:
         with:
           fetch-depth: 5
 
-      - name: Setup the toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@4.4.5
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
         with:
           platform: windows
           node-version: 22
@@ -243,8 +243,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup the toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@4.4.5
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
         with:
           platform: windows
           node-version: 22
@@ -291,8 +291,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup the toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@4.4.5
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
         with:
           node-version: 22
 
