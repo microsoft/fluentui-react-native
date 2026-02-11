@@ -233,29 +233,18 @@ node .github/scripts/update-dependency-profiles-postbump.mts
 
 ## Migration from Beachball
 
-### Can I use both?
+This repository has completed migration from Beachball to Changesets. All Beachball infrastructure has been removed:
 
-**Yes** - during transition period:
-- `yarn change` - still works (beachball)
-- `yarn changeset` - new way (changesets)
+- ✅ All beachball change files converted to a migration changeset
+- ✅ `beachball` package removed from dependencies
+- ✅ `beachball.config.js` deleted
+- ✅ Beachball scripts removed from `package.json`
+- ✅ Azure Pipelines updated to use `changeset publish`
 
-Eventually, remove beachball commands once fully migrated.
-
-### What about existing change files?
-
-**Beachball change files** in `change/` directory are ignored by changesets.
-
-Options:
-1. Process remaining beachball changes before migration
-2. Manually convert to changesets format
-3. Keep beachball for processing old changes
-
-### Branch name changed
+### Version bump PR branch
 
 **Old**: `beachball/version-bump/main`
 **New**: `changeset-release/main`
-
-Update any CI/CD rules that reference the old branch name.
 
 ## References
 

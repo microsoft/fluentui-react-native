@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "fix dead links in markdown files",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none"
-}

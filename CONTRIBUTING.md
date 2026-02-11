@@ -229,12 +229,12 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ### Prerequisites
 
-#### Beachball
+#### Changesets
 
-This repo manages semantic versioning and publishing using [Beachball](https://github.com/microsoft/beachball). When contributing, make sure to run the following before making a pull request:
+This repo manages semantic versioning and publishing using [Changesets](https://github.com/changesets/changesets). When contributing, make sure to run the following before making a pull request:
 
-1. `yarn change` will take you through a command line wizard to generate change files
-2. Make sure to push the newly generated change file
+1. `yarn changeset` will take you through a command line wizard to generate changeset files
+2. Make sure to push the newly generated changeset file (`.changeset/*.md`)
 
 #### Testing changes
 

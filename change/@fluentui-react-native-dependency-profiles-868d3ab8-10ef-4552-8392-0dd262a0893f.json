@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "fix: add `semver` to dependency-profiles developer deps",
-  "packageName": "@fluentui-react-native/dependency-profiles",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

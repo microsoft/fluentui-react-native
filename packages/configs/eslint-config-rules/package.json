@@ -32,11 +32,5 @@
   },
   "furn": {
     "packageType": "tooling"
-  },
-  "beachball": {
-    "shouldPublish": false,
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }

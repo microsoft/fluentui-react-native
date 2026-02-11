@@ -91,11 +91,6 @@ extends:
                 env:
                   NPM_TOKEN: $(npmAuth)
 
-              - script: |
-                  yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -y -t v${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }} -b origin/${{ replace(variables['Build.SourceBranch'],'refs/heads/','') }} --prerelease-prefix ${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }}
-                displayName: 'Publish NPM Packages (for other release branches)'
-                condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
-
           - template: .ado/templates/win32-nuget-publish.yml@self
             parameters:
               skipNugetPublish: ${{ parameters.skipNugetPublish }}

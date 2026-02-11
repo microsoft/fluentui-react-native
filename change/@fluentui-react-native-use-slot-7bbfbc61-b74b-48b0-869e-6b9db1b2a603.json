@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add template params to mergeStyles for stronger result typing",
-  "packageName": "@fluentui-react-native/use-slot",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

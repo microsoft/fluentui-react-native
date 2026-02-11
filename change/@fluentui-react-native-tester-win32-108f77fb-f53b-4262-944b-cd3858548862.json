@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "split out tester implementation into a separate package",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Lock down `react-native-svg` version to avoid breaking changes",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "4123478+tido64@users.noreply.github.com",
-  "dependentChangeType": "none"
-}

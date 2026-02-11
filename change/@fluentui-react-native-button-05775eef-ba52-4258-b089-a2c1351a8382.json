@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update shouldOnlyFireIfPressed for Windows platforms",
-  "packageName": "@fluentui-react-native/button",
-  "email": "jeremy.vercillo@gmail.com",
-  "dependentChangeType": "patch"
-}
