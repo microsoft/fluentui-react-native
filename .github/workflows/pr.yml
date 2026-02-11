@@ -283,6 +283,33 @@ jobs:
             apps/E2E/reports
             apps/E2E/errorShots
 
+  check-changesets:
+    name: Check for Changesets
+    runs-on: ubuntu-latest
+    # Skip this check for the version bump PR created by changesets
+    if: ${{ github.head_ref != 'changeset-release/main' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'yarn'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Validate changesets
+        run: node .github/scripts/validate-changesets.mts
+
   test-links:
     name: Test repo links
     runs-on: ubuntu-latest
@@ -313,6 +340,7 @@ jobs:
       - ios
       - windows
       - win32
+      - check-changesets
       - test-links
     steps:
       - name: All required jobs passed
