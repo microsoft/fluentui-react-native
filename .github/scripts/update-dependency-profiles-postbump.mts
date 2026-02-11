@@ -1,76 +1,41 @@
-#!/usr/bin/env node
+#!/usr/bin/env zx
+import 'zx/globals';
+
 /**
  * Post-version hook for dependency-profiles package
  *
  * This script runs after changesets version bump to update dependency-profiles
  * with the latest package versions and commit the changes.
- *
- * Usage: node scripts/update-dependency-profiles-postbump.mts
  */
-
-import { execSync } from 'child_process';
-import { existsSync } from 'fs';
-import { resolve } from 'path';
 
 const DEPENDENCY_PROFILES_DIR = 'packages/dependency-profiles';
 
-function execCommand(command: string, cwd?: string): void {
-  console.log(`> ${command}`);
-  execSync(command, {
-    stdio: 'inherit',
-    cwd: cwd ? resolve(cwd) : undefined
-  });
-}
+echo('🔍 Checking for dependency-profiles package...');
 
-function hasGitChanges(): boolean {
-  try {
-    const output = execSync('git status --porcelain', { encoding: 'utf8' });
-    return output.trim().length > 0;
-  } catch (error) {
-    console.error('Failed to check git status:', error);
-    return false;
-  }
-}
+if (!fs.existsSync(DEPENDENCY_PROFILES_DIR)) {
+  echo('⚠️  dependency-profiles directory not found, skipping');
+} else {
+  echo('📦 Updating dependency-profiles');
+  cd(DEPENDENCY_PROFILES_DIR);
+  await $`yarn update-profile`;
 
-function main(): void {
-  console.log('🔍 Checking for dependency-profiles package...');
-
-  if (!existsSync(DEPENDENCY_PROFILES_DIR)) {
-    console.log('⚠️  dependency-profiles directory not found, skipping');
-    return;
-  }
-
-  console.log('📦 Updating dependency-profiles');
-
-  // Run update-profile script
-  execCommand('yarn update-profile', DEPENDENCY_PROFILES_DIR);
-
-  // Update lockfile at root
-  console.log('🔄 Updating yarn.lock');
-  execCommand('yarn install --mode update-lockfile');
+  echo('🔄 Updating yarn.lock');
+  cd('../..');
+  await $`yarn install --mode update-lockfile`;
 
   // Check if there are changes to commit
-  if (!hasGitChanges()) {
-    console.log('✅ No changes to commit');
-    return;
+  const status = await $`git status --porcelain`;
+  if (!status.stdout.trim()) {
+    echo('✅ No changes to commit');
+  } else {
+    echo('💾 Committing dependency-profiles updates');
+
+    await $`git config user.name "github-actions[bot]"`;
+    await $`git config user.email "github-actions[bot]@users.noreply.github.com"`;
+    await $`git add .`;
+    await $`git commit -m "chore: update dependency-profiles and lockfile"`;
+    await $`git push`;
+
+    echo('✅ Committed dependency-profiles updates');
   }
-
-  console.log('💾 Committing dependency-profiles updates');
-
-  // Configure git
-  execCommand('git config user.name "github-actions[bot]"');
-  execCommand('git config user.email "github-actions[bot]@users.noreply.github.com"');
-
-  // Stage all changes
-  execCommand('git add .');
-
-  // Commit
-  execCommand('git commit -m "chore: update dependency-profiles and lockfile"');
-
-  // Push
-  execCommand('git push');
-
-  console.log('✅ Committed dependency-profiles updates');
 }
-
-main();

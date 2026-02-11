@@ -32,10 +32,10 @@
     "clean": "lage clean",
     "changeset": "changeset",
     "changeset:version": "changeset version && yarn install --mode update-lockfile",
-    "changeset:version:postbump": "node .github/scripts/update-dependency-profiles-postbump.mts",
+    "changeset:version:postbump": "zx .github/scripts/update-dependency-profiles-postbump.mts",
     "changeset:publish": "changeset publish",
     "changeset:status": "changeset status",
-    "changeset:validate": "node .github/scripts/validate-changesets.mts",
+    "changeset:validate": "zx .github/scripts/validate-changesets.mts",
     "checkchange:changeset": "changeset status --since=origin/main",
     "check-publishing": "node ./scripts/src/cli.mjs check-publishing",
     "lint": "lage lint",
@@ -67,7 +67,8 @@
     "lage": "^2.0.0",
     "markdown-link-check": "^3.8.7",
     "prettier": "^2.4.1",
-    "typescript": "^5.8.0"
+    "typescript": "^5.8.0",
+    "zx": "^8.2.4"
   },
   "workspaces": [
     "apps/*",

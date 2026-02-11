@@ -4903,6 +4903,7 @@ __metadata:
     markdown-link-check: "npm:^3.8.7"
     prettier: "npm:^2.4.1"
     typescript: "npm:^5.8.0"
+    zx: "npm:^8.2.4"
   languageName: unknown
   linkType: soft
 
@@ -25015,5 +25016,14 @@ __metadata:
   version: 4.3.5
   resolution: "zod@npm:4.3.5"
   checksum: 10c0/5a2db7e59177a3d7e202543f5136cb87b97b047b77c8a3d824098d3fa8b80d3aa40a0a5f296965c3b82dfdccdd05dbbfacce91347f16a39c675680fd7b1ab109
+  languageName: node
+  linkType: hard
+
+"zx@npm:^8.2.4":
+  version: 8.8.5
+  resolution: "zx@npm:8.8.5"
+  bin:
+    zx: build/cli.js
+  checksum: 10c0/1273e4f72cfe35a59041aef5a56fd87318bc4e11947d101810b67e5c486ab30574042938728e8a15e085de985e762b8585fcdaab4cf87fd113153b63a5846611
   languageName: node
   linkType: hard

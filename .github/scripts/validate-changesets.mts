@@ -1,4 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env zx
+import 'zx/globals';
+
 /**
  * Validate changesets in CI
  *
@@ -6,19 +8,24 @@
  * 1. Changesets are present (PRs require changesets)
  * 2. No major version bumps (breaking changes disallowed)
  * 3. Changeset status passes (validates format, config, dependencies)
- *
- * Usage: node .github/scripts/validate-changesets.mts
  */
 
-import { execSync } from 'child_process';
-import { readFileSync, readdirSync } from 'fs';
-import { join } from 'path';
-
 const CHANGESETS_DIR = '.changeset';
-const RED = '\x1b[31m';
-const GREEN = '\x1b[32m';
-const YELLOW = '\x1b[33m';
-const RESET = '\x1b[0m';
+
+// ANSI color codes
+const colors = {
+  red: (msg: string) => `\x1b[31m${msg}\x1b[0m`,
+  green: (msg: string) => `\x1b[32m${msg}\x1b[0m`,
+  yellow: (msg: string) => `\x1b[33m${msg}\x1b[0m`,
+};
+
+// Logging helpers
+const log = {
+  error: (msg: string) => echo(colors.red(msg)),
+  success: (msg: string) => echo(colors.green(msg)),
+  warn: (msg: string) => echo(colors.yellow(msg)),
+  info: (msg: string) => echo(msg),
+};
 
 interface ChangesetFrontmatter {
   [packageName: string]: 'major' | 'minor' | 'patch';
@@ -26,73 +33,65 @@ interface ChangesetFrontmatter {
 
 function parseChangesetForMajorCheck(filePath: string): ChangesetFrontmatter | null {
   try {
-    const content = readFileSync(filePath, 'utf-8');
-
-    // Extract frontmatter between --- markers
+    const content = fs.readFileSync(filePath, 'utf-8');
     const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-    if (!frontmatterMatch) {
-      return null;
-    }
+    if (!frontmatterMatch) return null;
 
     const frontmatter = frontmatterMatch[1];
-    const result: ChangesetFrontmatter = {};
+    const result = {};
 
-    // Parse YAML-like frontmatter
-    // Format: "@scope/package": minor
     const lines = frontmatter.split('\n').filter(line => line.trim());
     for (const line of lines) {
       const match = line.match(/^["']?([^"':]+)["']?\s*:\s*(major|minor|patch)/);
       if (match) {
         const [, packageName, bumpType] = match;
-        result[packageName.trim()] = bumpType as 'major' | 'minor' | 'patch';
+        result[packageName.trim()] = bumpType;
       }
     }
 
     return Object.keys(result).length > 0 ? result : null;
-  } catch (error) {
-    // Parsing errors will be caught by changeset status
+  } catch {
     return null;
   }
 }
 
-function checkChangesetPresence(): boolean {
-  console.log('\n🔍 Checking for changeset presence...\n');
+async function checkChangesetPresence() {
+  log.info('\n🔍 Checking for changeset presence...\n');
 
   try {
-    const statusOutput = execSync('yarn changeset status --since=origin/main 2>&1', {
-      encoding: 'utf-8'
-    });
+    const { stdout } = await $`yarn changeset status --since=origin/main 2>&1`;
 
-    if (statusOutput.includes('No changesets present')) {
-      console.log(`${RED}❌ No changesets found${RESET}\n`);
-      console.log(`${YELLOW}This PR requires a changeset to document the changes.${RESET}`);
-      console.log(`${YELLOW}To create a changeset, run: yarn changeset${RESET}\n`);
+    if (stdout.includes('No changesets present')) {
+      log.error('❌ No changesets found\n');
+      log.warn('This PR requires a changeset to document the changes.');
+      log.warn('To create a changeset, run: yarn changeset\n');
       return false;
     }
 
-    console.log(`${GREEN}✅ Changesets found${RESET}`);
+    log.success('✅ Changesets found');
     return true;
   } catch (error: any) {
-    console.log(`${RED}❌ Failed to check changeset status${RESET}\n`);
-    console.log(error.message);
+    log.error('❌ Failed to check changeset status\n');
+    log.info(error.message);
     return false;
   }
 }
 
-function checkForMajorBumps(): boolean {
-  console.log('\n🔍 Checking for major version bumps...\n');
+async function checkForMajorBumps() {
+  log.info('\n🔍 Checking for major version bumps...\n');
 
-  const changesetFiles = readdirSync(CHANGESETS_DIR)
+  const files = fs.readdirSync(CHANGESETS_DIR);
+  const changesetFiles = files
     .filter(file => file.endsWith('.md') && file !== 'README.md')
-    .map(file => join(CHANGESETS_DIR, file));
+    .map(file => path.join(CHANGESETS_DIR, file));
 
   if (changesetFiles.length === 0) {
-    console.log(`${YELLOW}No changesets found (skipping major check)${RESET}`);
+    log.warn('No changesets found (skipping major check)');
     return true;
   }
 
   let hasMajor = false;
-  const majorBumps: Array<{ file: string; packages: string[] }> = [];
+  const majorBumps = [];
 
   for (const file of changesetFiles) {
     const frontmatter = parseChangesetForMajorCheck(file);
@@ -109,80 +108,69 @@ function checkForMajorBumps(): boolean {
   }
 
   if (hasMajor) {
-    console.log(`${RED}❌ Major version bumps detected!${RESET}\n`);
+    log.error('❌ Major version bumps detected!\n');
     for (const { file, packages } of majorBumps) {
-      console.log(`${RED}  ${file}:${RESET}`);
+      log.error(`  ${file}:`);
       for (const pkg of packages) {
-        console.log(`${RED}    - ${pkg}: major${RESET}`);
+        log.error(`    - ${pkg}: major`);
       }
     }
-    console.log(`\n${RED}Major version bumps are not allowed.${RESET}`);
-    console.log(`${YELLOW}If you need to make a breaking change, please discuss with the team first.${RESET}\n`);
+    log.error('\nMajor version bumps are not allowed.');
+    log.warn('If you need to make a breaking change, please discuss with the team first.\n');
     return false;
   }
 
-  console.log(`${GREEN}✅ No major version bumps found${RESET}`);
+  log.success('✅ No major version bumps found');
   return true;
 }
 
-function validateChangesetStatus(): boolean {
-  console.log('\n🔍 Validating changesets with changeset status...\n');
+async function validateChangesetStatus() {
+  log.info('\n🔍 Validating changesets with changeset status...\n');
 
   try {
-    // This validates:
-    // - Changeset file format
-    // - Package references
-    // - Dependency graph
-    // - Config validity
-    const statusOutput = execSync('yarn changeset status --since=origin/main 2>&1', {
-      encoding: 'utf-8'
-    });
+    const { stdout } = await $`yarn changeset status --since=origin/main 2>&1`;
 
-    // Check for errors (but "No changesets present" is not an error here)
-    if (statusOutput.toLowerCase().includes('error') && !statusOutput.includes('No changesets present')) {
-      console.log(`${RED}❌ Changeset validation failed!${RESET}\n`);
-      console.log(statusOutput);
+    if (stdout.toLowerCase().includes('error') && !stdout.includes('No changesets present')) {
+      log.error('❌ Changeset validation failed!\n');
+      log.info(stdout);
       return false;
     }
 
-    console.log(`${GREEN}✅ Changeset validation passed${RESET}`);
+    log.success('✅ Changeset validation passed');
     return true;
   } catch (error: any) {
-    console.log(`${RED}❌ Changeset validation failed!${RESET}\n`);
-    console.log(`${RED}Error:${RESET}`, error.message);
-    if (error.stdout) console.log(error.stdout);
-    if (error.stderr) console.log(error.stderr);
+    log.error('❌ Changeset validation failed!\n');
+    log.error(`Error: ${error.message}`);
+    if (error.stdout) log.info(error.stdout);
+    if (error.stderr) log.info(error.stderr);
     return false;
   }
 }
 
-function main(): void {
-  console.log(`\n${'='.repeat(60)}`);
-  console.log('Changesets Validation');
-  console.log(`${'='.repeat(60)}`);
+// Main execution
+log.info(`\n${'='.repeat(60)}`);
+log.info('Changesets Validation');
+log.info(`${'='.repeat(60)}`);
 
-  const results = {
-    presence: checkChangesetPresence(),
-    majorBumps: checkForMajorBumps(),
-    validation: validateChangesetStatus()
-  };
+const results = {
+  presence: await checkChangesetPresence(),
+  majorBumps: await checkForMajorBumps(),
+  validation: await validateChangesetStatus()
+};
 
-  console.log(`\n${'='.repeat(60)}`);
-  console.log('Validation Results:');
-  console.log(`${'='.repeat(60)}\n`);
+log.info(`\n${'='.repeat(60)}`);
+log.info('Validation Results:');
+log.info(`${'='.repeat(60)}\n`);
 
-  console.log(`Changeset presence:      ${results.presence ? GREEN + '✅ PASS' : RED + '❌ FAIL'}${RESET}`);
-  console.log(`Major version check:     ${results.majorBumps ? GREEN + '✅ PASS' : RED + '❌ FAIL'}${RESET}`);
-  console.log(`Changeset validation:    ${results.validation ? GREEN + '✅ PASS' : RED + '❌ FAIL'}${RESET}\n`);
+log.info(`Changeset presence:      ${results.presence ? '✅ PASS' : '❌ FAIL'}`);
+log.info(`Major version check:     ${results.majorBumps ? '✅ PASS' : '❌ FAIL'}`);
+log.info(`Changeset validation:    ${results.validation ? '✅ PASS' : '❌ FAIL'}\n`);
 
-  const allPassed = results.presence && results.majorBumps && results.validation;
+const allPassed = results.presence && results.majorBumps && results.validation;
 
-  if (!allPassed) {
-    console.log(`${RED}Validation failed!${RESET}\n`);
-    process.exit(1);
-  }
-
-  console.log(`${GREEN}All validations passed! ✅${RESET}\n`);
+if (!allPassed) {
+  log.error('Validation failed!\n');
+  throw new Error('Validation failed');
 }
 
-main();
+log.success('All validations passed! ✅\n');

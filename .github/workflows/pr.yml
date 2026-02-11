@@ -308,7 +308,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Validate changesets
-        run: node .github/scripts/validate-changesets.mts
+        run: zx .github/scripts/validate-changesets.mts
 
   test-links:
     name: Test repo links
