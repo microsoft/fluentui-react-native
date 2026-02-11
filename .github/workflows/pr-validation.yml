@@ -30,22 +30,5 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Check for changesets
-        run: |
-          echo "🔍 Checking for changesets..."
-
-          # Check if changesets exist
-          if yarn changeset status --since=origin/main 2>&1 | grep -q "No changesets present"; then
-            echo "❌ No changesets found"
-            echo ""
-            echo "This PR requires a changeset to document the changes."
-            echo ""
-            echo "To create a changeset, run:"
-            echo "  yarn changeset"
-            echo ""
-            echo "The changeset bot has also left a comment on this PR with instructions."
-            exit 1
-          else
-            echo "✅ Changesets found"
-            yarn changeset status --verbose
-          fi
+      - name: Validate changesets
+        run: node .github/scripts/validate-changesets.mts

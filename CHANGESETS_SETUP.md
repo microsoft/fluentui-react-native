@@ -57,7 +57,7 @@ The Azure Pipelines publish workflow has been updated to use `changeset publish`
 
 ## Phase 3: PR Validation (Configured ✅)
 
-Two layers of changeset validation are now active:
+Three layers of changeset validation are now active:
 
 ### 1. Changeset Bot (GitHub App) ✅
 - **Status**: Installed
@@ -68,12 +68,22 @@ Two layers of changeset validation are now active:
 ### 2. GitHub Actions PR Validation ✅
 - **Workflow**: `.github/workflows/pr-validation.yml`
 - **What it does**: Enforces changesets in CI/CD
-- Fails the PR check if no changeset is present
+- Checks:
+  - ✅ Changeset files exist
+  - ✅ No major version bumps (breaking changes disallowed)
+  - ✅ Changeset version dry-run passes (ensures no errors)
 - Automatically skips for version bump PRs (`changeset-release/main`)
 
-**Both work together**:
+**Script**: [`.github/scripts/validate-changesets.mts`](.github/scripts/validate-changesets.mts)
+
+**Run locally**:
+```bash
+yarn changeset:validate
+```
+
+**All layers work together**:
 - Bot provides immediate visual feedback
-- GitHub Actions enforces the requirement
+- GitHub Actions enforces requirements and validates quality
 
 ## Phase 4: Developer Workflow Changes
 
@@ -133,11 +143,11 @@ After version bumps, the `dependency-profiles` package needs to be updated with 
 - Runs `yarn install --mode update-lockfile` to update yarn.lock
 - Commits and pushes changes (in CI only)
 
-**Script location:** [`scripts/update-dependency-profiles-postbump.mts`](scripts/update-dependency-profiles-postbump.mts)
+**Script location:** [`.github/scripts/update-dependency-profiles-postbump.mts`](.github/scripts/update-dependency-profiles-postbump.mts)
 
 To manually run the script locally (for debugging):
 ```bash
-node scripts/update-dependency-profiles-postbump.mts
+node .github/scripts/update-dependency-profiles-postbump.mts
 ```
 
 ## Phase 4: Testing the Workflow

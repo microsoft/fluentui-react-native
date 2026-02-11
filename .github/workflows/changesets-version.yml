@@ -57,4 +57,4 @@ jobs:
 
       - name: Post-version hook for dependency-profiles
         if: steps.changesets.outputs.hasChangesets == 'true'
-        run: node scripts/update-dependency-profiles-postbump.mts
+        run: node .github/scripts/update-dependency-profiles-postbump.mts
