@@ -215,7 +215,7 @@ jobs:
         working-directory: apps/fluent-tester
 
       - name: Build UWP app
-        run: yarn windows --arch x64 --logging --no-packager --no-launch --msbuildprops WindowsTargetPlatformVersion=10.0.22621.0
+        run: yarn windows --arch x64 --logging --no-packager --no-launch --msbuildprops WindowsTargetPlatformVersion=10.0.26100.0
         working-directory: apps/fluent-tester
 
       - name: Prepare E2E Windows tests
