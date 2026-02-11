@@ -36,7 +36,6 @@
     "changeset:publish": "changeset publish",
     "changeset:status": "changeset status",
     "changeset:validate": "node .github/scripts/validate-changesets.mts",
-    "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-changes",
     "checkchange:changeset": "changeset status --since=origin/main",
     "check-publishing": "node ./scripts/src/cli.mjs check-publishing",
     "lint": "lage lint",

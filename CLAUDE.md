@@ -66,8 +66,7 @@ yarn prettier-fix     # Format code with Prettier
 yarn depcheck         # Check for unused dependencies across packages
 yarn depcheck-fix     # Fix depcheck issues automatically
 yarn align-deps       # Align React Native dependencies using @rnx-kit/align-deps
-yarn change           # Generate Beachball change files (required before PR merge)
-yarn checkchange      # Verify change files exist for modified packages
+yarn changeset        # Generate changeset files (required before PR merge)
 ```
 
 ### Lage Configuration
