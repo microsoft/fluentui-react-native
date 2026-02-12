@@ -47,8 +47,6 @@ jobs:
         uses: changesets/action@v1
         with:
           version: yarn changeset:version
-          commit: 'chore(release): version packages'
-          title: 'chore(release): version packages'
           createGithubReleases: false
         env:
           # Switch token once we setup react-native-sdk[bot] with this repo
