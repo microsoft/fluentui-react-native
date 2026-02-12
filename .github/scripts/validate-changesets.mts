@@ -10,8 +10,6 @@ import 'zx/globals';
  * 3. Changeset status passes (validates format, config, dependencies)
  */
 
-const CHANGESETS_DIR = '.changeset';
-
 // ANSI color codes
 const colors = {
   red: (msg: string) => `\x1b[31m${msg}\x1b[0m`,
@@ -27,32 +25,15 @@ const log = {
   info: (msg: string) => echo(msg),
 };
 
-interface ChangesetFrontmatter {
-  [packageName: string]: 'major' | 'minor' | 'patch';
-}
-
-function parseChangesetForMajorCheck(filePath: string): ChangesetFrontmatter | null {
-  try {
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-    if (!frontmatterMatch) return null;
-
-    const frontmatter = frontmatterMatch[1];
-    const result = {};
-
-    const lines = frontmatter.split('\n').filter(line => line.trim());
-    for (const line of lines) {
-      const match = line.match(/^["']?([^"':]+)["']?\s*:\s*(major|minor|patch)/);
-      if (match) {
-        const [, packageName, bumpType] = match;
-        result[packageName.trim()] = bumpType;
-      }
-    }
-
-    return Object.keys(result).length > 0 ? result : null;
-  } catch {
-    return null;
-  }
+interface ChangesetStatusOutput {
+  releases: Array<{
+    name: string;
+    type: 'major' | 'minor' | 'patch' | 'none';
+    oldVersion: string;
+    newVersion: string;
+    changesets: string[];
+  }>;
+  changesets: string[];
 }
 
 async function checkChangesetPresence() {
@@ -80,48 +61,38 @@ async function checkChangesetPresence() {
 async function checkForMajorBumps() {
   log.info('\n🔍 Checking for major version bumps...\n');
 
-  const files = fs.readdirSync(CHANGESETS_DIR);
-  const changesetFiles = files
-    .filter(file => file.endsWith('.md') && file !== 'README.md')
-    .map(file => path.join(CHANGESETS_DIR, file));
+  try {
+    await $`yarn changeset status --output bumps.json`;
 
-  if (changesetFiles.length === 0) {
-    log.warn('No changesets found (skipping major check)');
-    return true;
-  }
+    const bumpsData: ChangesetStatusOutput = JSON.parse(fs.readFileSync('bumps.json', 'utf-8'));
+    fs.unlinkSync('bumps.json');
 
-  let hasMajor = false;
-  const majorBumps = [];
+    const majorBumps = bumpsData.releases.filter(release => release.type === 'major');
 
-  for (const file of changesetFiles) {
-    const frontmatter = parseChangesetForMajorCheck(file);
-    if (!frontmatter) continue;
-
-    const majorPackages = Object.entries(frontmatter)
-      .filter(([, bumpType]) => bumpType === 'major')
-      .map(([pkg]) => pkg);
-
-    if (majorPackages.length > 0) {
-      hasMajor = true;
-      majorBumps.push({ file, packages: majorPackages });
-    }
-  }
-
-  if (hasMajor) {
-    log.error('❌ Major version bumps detected!\n');
-    for (const { file, packages } of majorBumps) {
-      log.error(`  ${file}:`);
-      for (const pkg of packages) {
-        log.error(`    - ${pkg}: major`);
+    if (majorBumps.length > 0) {
+      log.error('❌ Major version bumps detected!\n');
+      for (const release of majorBumps) {
+        log.error(`  ${release.name}: major`);
+        if (release.changesets.length > 0) {
+          log.error(`    (from changesets: ${release.changesets.join(', ')})`);
+        }
       }
+      log.error('\nMajor version bumps are not allowed.');
+      log.warn('If you need to make a breaking change, please discuss with the team first.\n');
+      return false;
     }
-    log.error('\nMajor version bumps are not allowed.');
-    log.warn('If you need to make a breaking change, please discuss with the team first.\n');
+
+    log.success('✅ No major version bumps found');
+    return true;
+  } catch (error: any) {
+    // Clean up temp file if it exists
+    if (fs.existsSync('bumps.json')) {
+      fs.unlinkSync('bumps.json');
+    }
+    log.error('❌ Failed to check for major bumps\n');
+    log.error(`Error: ${error.message}`);
     return false;
   }
-
-  log.success('✅ No major version bumps found');
-  return true;
 }
 
 async function validateChangesetStatus() {
