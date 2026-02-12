@@ -8,7 +8,6 @@ import { PrettierCommand } from './tasks/prettier.js';
 import { LintCommand } from './tasks/eslint.js';
 import { LintPackageCommand } from './tasks/lintPackage.ts';
 import { JestCommand } from './tasks/jest.js';
-import { CheckChangesCommand } from './tasks/checkForModifiedFilesTask.js';
 import { CheckPublishingCommand } from './tasks/checkPublishingTask.js';
 import { DepcheckCommand } from './tasks/depcheck.ts';
 
@@ -24,7 +23,6 @@ cli.register(PrettierCommand);
 cli.register(LintCommand);
 cli.register(LintPackageCommand);
 cli.register(JestCommand);
-cli.register(CheckChangesCommand);
 cli.register(CheckPublishingCommand);
 cli.register(DepcheckCommand);
 

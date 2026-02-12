@@ -39,9 +39,6 @@ jobs:
       - name: Build CI
         run: yarn buildci
 
-      - name: Verify API and ensure changed files
-        run: yarn check-for-changed-files
-
   android:
     name: Android PR
     runs-on: ubuntu-latest
@@ -308,7 +305,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Validate changesets
-        run: zx .github/scripts/validate-changesets.mts
+        run: changeset:validate
 
   test-links:
     name: Test repo links

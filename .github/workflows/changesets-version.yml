@@ -57,4 +57,4 @@ jobs:
 
       - name: Post-version hook for dependency-profiles
         if: steps.changesets.outputs.hasChangesets == 'true'
-        run: zx .github/scripts/update-dependency-profiles-postbump.mts
+        run: yarn changeset:version:postbump
