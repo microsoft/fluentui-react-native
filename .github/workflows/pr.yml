@@ -303,7 +303,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Validate changesets
-        run: changeset:validate
+        run: yarn changeset:validate
 
   test-links:
     name: Test repo links

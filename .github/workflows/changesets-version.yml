@@ -54,7 +54,3 @@ jobs:
           # Switch token once we setup react-native-sdk[bot] with this repo
           # GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Post-version hook for dependency-profiles
-        if: steps.changesets.outputs.hasChangesets == 'true'
-        run: yarn changeset:version:postbump
