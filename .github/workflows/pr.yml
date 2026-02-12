@@ -1,0 +1,319 @@
+name: PR
+on: pull_request
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  js:
+    name: JS PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Check change files
+        run: yarn checkchange
+
+      - name: Check prettier
+        run: yarn prettier
+
+      - name: Run lint-lockfile
+        run: yarn lint-lockfile
+
+      - name: Build CI
+        run: yarn buildci
+
+      - name: Verify API and ensure changed files
+        run: yarn check-for-changed-files
+
+  android:
+    name: Android PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        with:
+          platform: android
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Bundle Android
+        run: yarn bundle:android
+        working-directory: apps/fluent-tester
+
+      # Android E2E tests are currently disabled
+      # - name: Build Android APK
+      #   ...
+      # - name: Run E2E Android tests
+      #   ...
+
+  macos:
+    name: macOS PR
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        with:
+          platform: macos
+          node-version: 22
+          xcode-developer-dir: /Applications/Xcode_16.4.app
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Bundle macOS
+        run: |
+          set -eox pipefail
+          yarn bundle:macos
+        working-directory: apps/fluent-tester
+
+      - name: Pod install
+        run: |
+          set -eox pipefail
+          pod install --verbose
+        working-directory: apps/fluent-tester/macos
+
+      - name: Build macOS app
+        run: |
+          set -eox pipefail
+          ./.ado/scripts/xcodebuild.sh apps/fluent-tester/macos/FluentTester.xcworkspace macosx ReactTestApp build
+        env:
+          CCACHE_DISABLE: 1
+
+      - name: Prepare E2E macOS tests
+        run: yarn e2eprep:macos
+        working-directory: apps/E2E
+
+      - name: Run E2E macOS tests
+        run: yarn e2etest:macos
+        working-directory: apps/E2E
+
+      - name: Upload E2E macOS artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: E2E_macos_Dump
+          path: |
+            apps/E2E/reports
+            apps/E2E/errorShots
+
+  ios:
+    name: iOS PR
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        with:
+          platform: ios
+          node-version: 22
+          xcode-developer-dir: /Applications/Xcode_16.4.app
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Bundle iOS
+        run: |
+          set -eox pipefail
+          yarn bundle:ios
+        working-directory: apps/fluent-tester
+
+      - name: Pod install
+        run: |
+          set -eox pipefail
+          pod install --verbose
+        working-directory: apps/fluent-tester/ios
+
+      - name: Build iOS app
+        run: |
+          set -eox pipefail
+          ./.ado/scripts/xcodebuild.sh apps/fluent-tester/ios/FluentTester.xcworkspace iphonesimulator ReactTestApp build
+        env:
+          CCACHE_DISABLE: 1
+
+      # iOS E2E tests are currently disabled
+      # - name: Prepare E2E iOS tests
+      #   run: yarn e2eprep:ios
+      #   working-directory: apps/E2E
+      # - name: Run E2E iOS tests
+      #   run: yarn e2etest:ios
+      #   working-directory: apps/E2E
+
+  windows:
+    name: Windows PR
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 5
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        with:
+          platform: windows
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Bundle Windows
+        run: yarn bundle:windows
+        working-directory: apps/fluent-tester
+
+      - name: Install WinAppDriver 1.1
+        run: |
+          Invoke-WebRequest https://github.com/microsoft/WinAppDriver/releases/download/v1.1/WindowsApplicationDriver.msi -OutFile $env:RUNNER_TEMP\WinAppDriver.msi
+          Start-Process msiexec -ArgumentList "/quiet","/x","{087BBF93-D9E3-4D27-BDBE-9C702E0066FC}" -Verb runAs -Wait
+          Start-Process msiexec -ArgumentList "/quiet","/i","$env:RUNNER_TEMP\WinAppDriver.msi" -Verb runAs -Wait
+        shell: powershell
+
+      - name: Generate UWP app
+        run: yarn install-windows-test-app --use-nuget
+        working-directory: apps/fluent-tester
+
+      - name: Build UWP app
+        run: yarn windows --arch x64 --logging --no-packager --no-launch --msbuildprops WindowsTargetPlatformVersion=10.0.26100.0
+        working-directory: apps/fluent-tester
+
+      - name: Prepare E2E Windows tests
+        run: yarn e2eprep:windows
+        working-directory: apps/E2E
+
+      - name: Run E2E UWP tests
+        run: yarn e2etest:windows
+        working-directory: apps/E2E
+
+      - name: Upload E2E Windows artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: E2E_UWP_Dump
+          path: |
+            apps/E2E/reports
+            apps/E2E/errorShots
+
+  win32:
+    name: Win32 PR
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        with:
+          platform: windows
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Bundle Win32
+        run: yarn bundle
+        working-directory: apps/win32
+
+      - name: Install WinAppDriver 1.1
+        run: |
+          Invoke-WebRequest https://github.com/microsoft/WinAppDriver/releases/download/v1.1/WindowsApplicationDriver.msi -OutFile $env:RUNNER_TEMP\WinAppDriver.msi
+          Start-Process msiexec -ArgumentList "/quiet","/x","{087BBF93-D9E3-4D27-BDBE-9C702E0066FC}" -Verb runAs -Wait
+          Start-Process msiexec -ArgumentList "/quiet","/i","$env:RUNNER_TEMP\WinAppDriver.msi" -Verb runAs -Wait
+        shell: powershell
+
+      - name: Prepare E2E Win32 tests
+        run: yarn e2eprep:win32
+        working-directory: apps/E2E
+
+      - name: Run E2E Win32 tests
+        run: yarn e2etest:win32
+        working-directory: apps/E2E
+
+      - name: Upload E2E Win32 artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: E2E_win32_Dump
+          path: |
+            apps/E2E/reports
+            apps/E2E/errorShots
+
+  test-links:
+    name: Test repo links
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Test markdown links
+        run: |
+          find . -name \*.md -not -name CHANGELOG.md -not -path '*/node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c $(pwd)/.ado/markdown-link-check-config.json
+
+  pr:
+    name: PR
+    runs-on: ubuntu-latest
+    needs:
+      - js
+      - android
+      - macos
+      - ios
+      - windows
+      - win32
+      - test-links
+    steps:
+      - name: All required jobs passed
+        run: echo "All required jobs completed."
