@@ -1,5 +1,47 @@
 # Change Log - @fluentui-react-native/menu
 
+## 1.14.43
+
+### Patch Changes
+
+- d7adbdd: # Migration from Beachball to Changesets
+
+  This changeset represents the migration from Beachball to Changesets for version management and consolidates all changes from 440+ beachball change files that were in the `change/` directory.
+
+  All 75 affected packages receive a patch version bump to acknowledge the accumulated changes from the beachball era.
+
+  ## What Changed
+
+  Going forward, all version management uses Changesets via `yarn changeset`. The following beachball infrastructure has been removed:
+
+  - ❌ 440+ beachball change files from `change/` directory
+  - ❌ `beachball` package dependency
+  - ❌ Beachball scripts from `package.json`
+  - ❌ `beachball.config.js` configuration file
+  - ❌ Beachball publish steps from Azure Pipelines
+
+  ## New Workflow
+
+  ✅ **Create changes**: Run `yarn changeset` to document changes
+  ✅ **Version bump PRs**: Automatically created by GitHub Actions
+  ✅ **Publishing**: Handled by Azure Pipelines using `changeset publish`
+  ✅ **Validation**: CI validates changesets and blocks major version bumps
+
+  For details, see `CHANGESETS_SETUP.md` and `CONTRIBUTING.md`.
+
+- Updated dependencies [d7adbdd]
+  - @fluentui-react-native/adapters@0.13.6
+  - @fluentui-react-native/callout@0.27.18
+  - @fluentui-react-native/focus-zone@0.21.16
+  - @fluentui-react-native/framework@0.14.18
+  - @fluentui-react-native/icon@0.21.24
+  - @fluentui-react-native/interactive-hooks@0.27.20
+  - @fluentui-react-native/text@0.24.22
+  - @fluentui-react-native/theme-tokens@0.27.12
+  - @fluentui-react-native/theming-utils@0.26.12
+  - @fluentui-react-native/tokens@0.23.12
+  - @fluentui-react-native/use-styling@0.13.13
+
 <!-- This log was last generated on Tue, 05 Aug 2025 18:50:40 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -2420,7 +2462,7 @@ Thu, 14 Jul 2022 20:03:37 GMT
 
 ### Patches
 
-- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+- Revert "Add support for onAccessibilityTap on Text" (amchiu@microsoft.com)
 - Bump @fluentui-react-native/experimental-text to v0.10.1
 - Bump @fluentui-react-native/button to v0.24.1
 

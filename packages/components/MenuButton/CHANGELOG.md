@@ -1,5 +1,43 @@
 # Change Log - @fluentui-react-native/menu-button
 
+## 0.13.38
+
+### Patch Changes
+
+- d7adbdd: # Migration from Beachball to Changesets
+
+  This changeset represents the migration from Beachball to Changesets for version management and consolidates all changes from 440+ beachball change files that were in the `change/` directory.
+
+  All 75 affected packages receive a patch version bump to acknowledge the accumulated changes from the beachball era.
+
+  ## What Changed
+
+  Going forward, all version management uses Changesets via `yarn changeset`. The following beachball infrastructure has been removed:
+
+  - ❌ 440+ beachball change files from `change/` directory
+  - ❌ `beachball` package dependency
+  - ❌ Beachball scripts from `package.json`
+  - ❌ `beachball.config.js` configuration file
+  - ❌ Beachball publish steps from Azure Pipelines
+
+  ## New Workflow
+
+  ✅ **Create changes**: Run `yarn changeset` to document changes
+  ✅ **Version bump PRs**: Automatically created by GitHub Actions
+  ✅ **Publishing**: Handled by Azure Pipelines using `changeset publish`
+  ✅ **Validation**: CI validates changesets and blocks major version bumps
+
+  For details, see `CHANGESETS_SETUP.md` and `CONTRIBUTING.md`.
+
+- Updated dependencies [d7adbdd]
+  - @fluentui-react-native/button@0.39.23
+  - @fluentui-react-native/contextual-menu@0.24.32
+  - @fluentui-react-native/icon@0.21.24
+  - @fluentui-react-native/tokens@0.23.12
+  - @uifabricshared/foundation-composable@0.13.12
+  - @uifabricshared/foundation-compose@1.15.18
+  - @uifabricshared/foundation-settings@0.15.12
+
 <!-- This log was last generated on Tue, 05 Aug 2025 18:50:40 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -2716,7 +2754,7 @@ Thu, 16 Dec 2021 19:10:26 GMT
 
 ### Patches
 
-- Rename Jest snapshots to be platform agnostic  (sanajmi@microsoft.com)
+- Rename Jest snapshots to be platform agnostic (sanajmi@microsoft.com)
 - Bump @fluentui-react-native/button to v0.21.1
 - Bump @fluentui-react-native/contextual-menu to v0.13.0
 - Bump @fluentui-react-native/icon to v0.10.0

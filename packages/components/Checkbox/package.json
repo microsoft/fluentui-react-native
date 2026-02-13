@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/checkbox",
-  "version": "0.23.23",
+  "version": "0.23.24",
   "description": "A cross-platform Checkbox component using the Fluent Design System",
   "repository": {
     "type": "git",

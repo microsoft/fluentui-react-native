@@ -1,5 +1,37 @@
 # Change Log - @fluentui-react-native/immutable-merge
 
+## 1.2.12
+
+### Patch Changes
+
+- d7adbdd: # Migration from Beachball to Changesets
+
+  This changeset represents the migration from Beachball to Changesets for version management and consolidates all changes from 440+ beachball change files that were in the `change/` directory.
+
+  All 75 affected packages receive a patch version bump to acknowledge the accumulated changes from the beachball era.
+
+  ## What Changed
+
+  Going forward, all version management uses Changesets via `yarn changeset`. The following beachball infrastructure has been removed:
+
+  - ❌ 440+ beachball change files from `change/` directory
+  - ❌ `beachball` package dependency
+  - ❌ Beachball scripts from `package.json`
+  - ❌ `beachball.config.js` configuration file
+  - ❌ Beachball publish steps from Azure Pipelines
+
+  ## New Workflow
+
+  ✅ **Create changes**: Run `yarn changeset` to document changes
+  ✅ **Version bump PRs**: Automatically created by GitHub Actions
+  ✅ **Publishing**: Handled by Azure Pipelines using `changeset publish`
+  ✅ **Validation**: CI validates changesets and blocks major version bumps
+
+  For details, see `CHANGESETS_SETUP.md` and `CONTRIBUTING.md`.
+
+- Updated dependencies [d7adbdd]
+  - @fluentui-react-native/framework-base@0.2.2
+
 <!-- This log was last generated on Tue, 05 Aug 2025 18:50:40 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -216,90 +248,119 @@ Thu, 16 Apr 2020 23:57:38 GMT
 - publish with correct main/module references (jasonmo@microsoft.com)
 
 ## 0.4.0
+
 Thu, 09 Apr 2020 21:14:58 GMT
 
 ### Minor changes
 
 - rework merge with improved API (jasonmo@microsoft.com)
+
 ## 0.3.5
+
 Thu, 09 Apr 2020 18:39:15 GMT
 
 ### Patches
 
 - merge conflicts (ppatboyd@outlook.com)
+
 ## 0.3.3
+
 Fri, 03 Apr 2020 20:40:51 GMT
 
 ### Patches
 
 - switch the bin name from just-script to fluent-scripts to disambiguate names (jasonmo@microsoft.com)
+
 ## 0.3.2
+
 Tue, 31 Mar 2020 18:01:09 GMT
 
 ### Patches
 
 - Merge branch 'sammy/checkboxV1' of https://github.com/samuelfreiberg/fluentui-react-native into sammy/checkboxV1 (safreibe@microsoft.com)
+
 ## 0.3.1
+
 Mon, 30 Mar 2020 16:27:00 GMT
 
 ### Patches
 
 - Update main attribute to specify TypeScript index file. (kinhln@microsoft.com)
+
 ## 0.3.0
+
 Sat, 07 Mar 2020 00:42:50 GMT
 
 ### Minor changes
 
 - more config fixes (jasonmo@microsoft.com)
+
 ## 0.2.3
+
 Thu, 20 Feb 2020 01:36:35 GMT
 
 ### Patches
 
 - restructure directories in project (jasonmo@microsoft.com)
+
 ## 0.2.2
+
 Fri, 07 Feb 2020 00:29:25 GMT
 
 ### Patches
 
 - clean up just tasks and remove unnecessary webpack configs (jasonmo@microsoft.com)
+
 ## 0.2.1
+
 Thu, 06 Feb 2020 01:00:13 GMT
 
 ### Patches
 
 - clean up just tasks and remove unnecessary webpack configs (jasonmo@microsoft.com)
+
 ## 0.2.0
+
 Wed, 20 Nov 2019 19:37:06 GMT
 
 ### Minor changes
 
 - 📦 fix package entrypoints to distinguish CJS/ES6 (adrum@microsoft.com)
+
 ## 0.1.6
+
 Tue, 15 Oct 2019 02:11:41 GMT
 
 ### Patches
 
 - api-extractor setup (taamireh@microsoft.com)
+
 ## 0.1.5
+
 Thu, 19 Sep 2019 18:26:03 GMT
 
 ### Patches
 
 - change description (taamireh@microsoft.com)
+
 ## 0.1.4
+
 Thu, 19 Sep 2019 00:21:30 GMT
 
 ### Patches
 
 - change scope names (taamireh@microsoft.com)
+
 ## 0.1.3
+
 Sat, 14 Sep 2019 01:56:36 GMT
 
 ### Patches
 
 - Begin turning on some linting rules (taamireh@microsoft.com)
+
 ## 0.1.2
+
 Thu, 12 Sep 2019 20:46:12 GMT
 
 ### Patches

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/overflow",
-  "version": "0.3.42",
+  "version": "0.3.43",
   "description": "A cross-platform Overflow component for React Native.",
   "repository": {
     "type": "git",

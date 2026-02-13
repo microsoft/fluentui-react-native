@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-avatar",
-  "version": "0.21.19",
+  "version": "0.21.20",
   "description": "A cross-platform Avatar component using the Fluent Design System. Currently only implemented on iOS",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "repository": {

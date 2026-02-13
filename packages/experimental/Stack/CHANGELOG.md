@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/experimental-stack
 
+## 0.1.1
+
+### Patch Changes
+
+- Updated dependencies [d7adbdd]
+  - @fluentui-react-native/adapters@0.13.6
+  - @fluentui-react-native/framework@0.14.18
+  - @fluentui-react-native/tokens@0.23.12
+
 This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
