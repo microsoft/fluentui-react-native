@@ -128,11 +128,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
 
   // This is used to initially bring focus to the app on win32
-  const focusOnMountRef = React.useRef<View>();
+  const focusOnMountRef = React.useRef<View>(null);
 
   React.useEffect(() => {
     if (Platform.OS === ('win32' as any)) {
-      focusOnMountRef.current.focus();
+      focusOnMountRef.current?.focus();
     }
   }, []);
 

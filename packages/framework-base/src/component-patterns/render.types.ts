@@ -52,13 +52,15 @@ export type DirectComponent<TProps> = FunctionComponentCore<TProps> & {
   _callDirect?: boolean;
 };
 
+type LegacyComponentFunction<TProps> = (props: TProps, ...children: React.ReactNode[]) => RenderResult;
+
 /**
  * Legacy slot function type, this allows the rendering handlers to bypass the normal JSX rendering and call the function
  * directly. This expects the function to have children as the last argument of the call which isn't consistent with standard
  * react usage, where children are passed as a prop. If writing new components use the DirectComponent type instead.
  * @deprecated use DirectComponent instead
  */
-export type LegacyDirectComponent<TProps> = React.FunctionComponent<TProps> & {
+export type LegacyDirectComponent<TProps> = LegacyComponentFunction<TProps> & {
   _canCompose?: boolean;
 };
 

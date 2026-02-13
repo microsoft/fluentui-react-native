@@ -48,7 +48,8 @@
     "@types/jest": "^29.0.0",
     "@types/node": "catalog:",
     "@types/react": "~19.1.0",
-    "react": "19.1.0"
+    "react": "19.1.0",
+    "react-native": "^0.81.0"
   },
   "peerDependencies": {
     "react": "18.2.0 || 19.0.0 || 19.1.0"
@@ -58,6 +59,7 @@
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
+        "core-dev-only",
         "react",
         "tools-core",
         "tools-eslint",

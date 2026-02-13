@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-import type { PressableFocusProps, PressableHoverProps, PressablePressProps } from './Pressability/Pressability.types';
+import { usePressability } from './usePressability';
 import type {
   IPressableHooks,
   IWithPressableOptions,
@@ -9,7 +9,7 @@ import type {
   IFocusState,
   IWithPressableEvents,
 } from './useAsPressable.types';
-import { usePressability } from './usePressability';
+import type { PressableFocusProps, PressableHoverProps, PressablePressProps } from './usePressableState.types';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type ObjectBase = {};
@@ -129,9 +129,6 @@ export function useHoverState<T extends ObjectBase>(props: IWithPressableOptions
 }
 
 /**
- * useAsPressable wraps the usePressability hook that will be available in RN 0.63 and beyond.  Once this library is on a recent enough
- * version of react-native this implementation can switch to using the official version.
- *
  * The useAsPressable hook adds a simple state change function for listening to hover, press, and focus events on the base pressability implementation
  * @param props - input props for the component, mixed in with pressable and pressability options
  */

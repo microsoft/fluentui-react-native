@@ -9,18 +9,6 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git"
   },
   "resolutions": {
-    "@appium/support/glob": "^10.5.0",
-    "@types/react": "^18.2.0",
-    "@warren-ms/react-native-icons/react-native-svg": "^15.4.0",
-    "axios": "^1.12.0",
-    "form-data": "^4.0.4",
-    "on-headers": "^1.1.0",
-    "react-native-macos": "patch:react-native-macos@npm%3A0.74.30#~/.yarn/patches/react-native-macos-npm-0.74.30-e4edf98920.patch",
-    "react-native-svg-transformer": "1.5.0",
-    "semver": "^7",
-    "tar-fs": "^3.1.1",
-    "ws": "^8.17.1",
-    "yaml": "^2.2.2",
     "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
   },
   "scripts": {

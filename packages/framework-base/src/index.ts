@@ -19,6 +19,9 @@ export type { StyleProp } from './merge-props/mergeStyles.types';
 export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
 
+// component pattern exports - extracting from elements
+export { extractChildren, extractProps, extractStyle } from './component-patterns/extract';
+
 // component pattern exports - rendering utilities
 export { renderForJsxRuntime, renderSlot, asDirectComponent } from './component-patterns/render';
 

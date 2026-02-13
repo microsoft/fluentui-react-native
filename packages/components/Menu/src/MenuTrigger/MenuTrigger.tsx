@@ -4,6 +4,8 @@ import type { MenuTriggerProps } from './MenuTrigger.types';
 import { menuTriggerName } from './MenuTrigger.types';
 import { useMenuTrigger } from './useMenuTrigger';
 import { MenuTriggerProvider } from '../context/menuTriggerContext';
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import { extractProps } from '@fluentui-react-native/framework-base';
 
 export const MenuTrigger: React.FunctionComponent<MenuTriggerProps> = (props: MenuTriggerProps) => {
   if (__DEV__) {
@@ -12,13 +14,14 @@ export const MenuTrigger: React.FunctionComponent<MenuTriggerProps> = (props: Me
     }
   }
 
-  const menuTrigger = useMenuTrigger(props.children.props);
+  const childrenProps = extractProps<IViewProps>(props.children);
+  const menuTrigger = useMenuTrigger(childrenProps);
 
   // In order to properly support accessibility without erasing props set on the
   // child component which may affect accessibility, we need to modify the
   // state in the inner render so we can access the child component and its props.
   const revised = React.cloneElement(props.children, {
-    ...(props.children.props.tooltip && { alwaysShowToolTip: true }),
+    ...(childrenProps?.tooltip && { alwaysShowToolTip: true }),
     ...menuTrigger.props,
   });
 
