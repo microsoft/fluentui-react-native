@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "switch repo to typescript 5.x",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

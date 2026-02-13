@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix ado scripts and attempt to fix win32 launching",
-  "packageName": "@fluentui/react-native",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

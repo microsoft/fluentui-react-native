@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "adjust align deps configs for tools and allow babel-config to inherit RN version",
-  "packageName": "@fluentui-react-native/pressable",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

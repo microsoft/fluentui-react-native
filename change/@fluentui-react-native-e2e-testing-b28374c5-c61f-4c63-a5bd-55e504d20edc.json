@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix type errors after upgrading to new appium version",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

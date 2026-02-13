@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "switch everything to modern jsx-runtime",
-  "packageName": "@fluentui-react-native/divider",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

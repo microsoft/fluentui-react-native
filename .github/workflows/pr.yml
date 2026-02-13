@@ -27,9 +27,6 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Check change files
-        run: yarn checkchange
-
       - name: Check prettier
         run: yarn prettier
 
@@ -38,9 +35,6 @@ jobs:
 
       - name: Build CI
         run: yarn buildci
-
-      - name: Verify API and ensure changed files
-        run: yarn check-for-changed-files
 
   android:
     name: Android PR
@@ -283,6 +277,34 @@ jobs:
             apps/E2E/reports
             apps/E2E/errorShots
 
+  check-changesets:
+    name: Check for Changesets
+    runs-on: ubuntu-latest
+    # Skip this check for the version bump PR created by changesets
+    if: ${{ github.head_ref != 'changeset-release/main' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          filter: blob:none
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'yarn'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Validate changesets
+        run: yarn changeset:validate
+
   test-links:
     name: Test repo links
     runs-on: ubuntu-latest
@@ -313,6 +335,7 @@ jobs:
       - ios
       - windows
       - win32
+      - check-changesets
       - test-links
     steps:
       - name: All required jobs passed

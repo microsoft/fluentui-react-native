@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "tighten up typing for framework, fixing the resulting errors",
-  "packageName": "@fluentui-react-native/use-styling",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

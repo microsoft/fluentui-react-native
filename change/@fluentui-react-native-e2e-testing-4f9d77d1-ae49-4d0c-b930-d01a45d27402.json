@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "switch everything to modern jsx-runtime",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

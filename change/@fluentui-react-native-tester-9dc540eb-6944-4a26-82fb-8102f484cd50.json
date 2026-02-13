@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix bundling rn-win32 0.81 against furn",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

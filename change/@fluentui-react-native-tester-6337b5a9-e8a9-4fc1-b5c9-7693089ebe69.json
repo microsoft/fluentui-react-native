@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "upgrade to RN 81, React 19, and fix builds",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

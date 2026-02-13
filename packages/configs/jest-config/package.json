@@ -56,11 +56,5 @@
         "tools-core"
       ]
     }
-  },
-  "beachball": {
-    "shouldPublish": false,
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }

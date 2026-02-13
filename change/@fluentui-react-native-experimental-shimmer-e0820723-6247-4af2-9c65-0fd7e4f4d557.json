@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add peer declarations for 0.78 and 0.81",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

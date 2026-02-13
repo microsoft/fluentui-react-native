@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use public fluentui-react-native icons package rather than a private one",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "dannyvv@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -66,8 +66,7 @@ yarn prettier-fix     # Format code with Prettier
 yarn depcheck         # Check for unused dependencies across packages
 yarn depcheck-fix     # Fix depcheck issues automatically
 yarn align-deps       # Align React Native dependencies using @rnx-kit/align-deps
-yarn change           # Generate Beachball change files (required before PR merge)
-yarn checkchange      # Verify change files exist for modified packages
+yarn changeset        # Generate changeset files (required before PR merge)
 ```
 
 ### Lage Configuration
@@ -224,12 +223,13 @@ Components require `ThemeProvider` from `@fluentui-react-native/theme` to work p
 
 ## Version Management
 
-**Beachball**: Used for change logs and versioning.
-- Run `yarn change` to create change files when modifying packages
-- Change files are required before merging PRs (`yarn checkchange` validates)
-- Beachball config in `beachball.config.js`
-- Major versions are disallowed (`disallowedChangeTypes: ['major']`)
-- On publish, `onPublish` field in `package.json` gets merged into package
+**Changesets**: Used for change logs and versioning.
+- Run `yarn changeset` to create changeset files when modifying packages
+- Changesets are required before merging PRs (validated in CI)
+- Changesets config in `.changeset/config.json`
+- Major versions are disallowed (validated in CI via `.github/scripts/validate-changesets.mts`)
+- Version bump PRs are created automatically by GitHub Actions
+- Publishing happens in Azure Pipelines using `changeset publish`
 
 ## Important Notes
 

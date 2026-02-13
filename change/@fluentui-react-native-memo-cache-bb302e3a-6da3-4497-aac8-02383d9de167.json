@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "integrate depcheck and align deps with package linting and make things consistent",
-  "packageName": "@fluentui-react-native/memo-cache",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

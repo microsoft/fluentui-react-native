@@ -14,10 +14,6 @@ parameters:
     displayName: Skip Npm Publish
     type: boolean
     default: false
-  - name: skipGitPush
-    displayName: Skip Git Push
-    type: boolean
-    default: false
   - name: skipNugetPublish
     displayName: Skip Nuget Publish
     type: boolean
@@ -71,12 +67,6 @@ extends:
               - template: .ado/templates/setup-repo.yml@self
 
               - script: |
-                  git config user.name "UI-Fabric-RN-Bot"
-                  git config user.email "uifrnbot@microsoft.com"
-                  git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/fluentui-react-native.git
-                displayName: Git Authentication
-
-              - script: |
                   yarn
                 displayName: 'yarn install'
 
@@ -85,24 +75,24 @@ extends:
                 displayName: 'yarn buildci [test]'
 
               - script: |
-                  echo ##vso[task.setvariable variable=SkipNpmPublishArgs]--no-publish
-                displayName: Enable No-Publish (npm)
-                condition: ${{ parameters.skipNpmPublish }}
+                  yarn config set npmPublishRegistry "https://registry.npmjs.org"
+                  yarn config set npmAuthToken $(npmAuth)
+                displayName: 'Configure yarn for npm publishing'
+                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
 
               - script: |
-                  echo ##vso[task.setvariable variable=SkipGitPushPublishArgs]--no-push
-                displayName: Enable No-Publish (git)
-                condition: ${{ parameters.skipGitPush }}
+                  # https://github.com/changesets/changesets/issues/432
+                  # We can't use `changeset publish` because it doesn't support workspaces, so we have to publish each package individually
+                  yarn workspaces foreach --all --topological --no-private \
+                    exec zx $(Build.SourcesDirectory)/.github/scripts/publish-package-if-needed.mts
+                displayName: 'Publish NPM Packages'
+                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
 
               - script: |
-                  yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -b origin/main -y
-                displayName: 'Publish NPM Packages (for main branch)'
-                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-
-              - script: |
-                  yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -y -t v${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }} -b origin/${{ replace(variables['Build.SourceBranch'],'refs/heads/','') }} --prerelease-prefix ${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }}
-                displayName: 'Publish NPM Packages (for other release branches)'
-                condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
+                  yarn config unset npmAuthToken
+                  yarn config unset npmPublishRegistry
+                displayName: 'Cleanup yarn npm config'
+                condition: always()
 
           - template: .ado/templates/win32-nuget-publish.yml@self
             parameters:
