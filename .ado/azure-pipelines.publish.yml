@@ -14,10 +14,6 @@ parameters:
     displayName: Skip Npm Publish
     type: boolean
     default: false
-  - name: skipGitPush
-    displayName: Skip Git Push
-    type: boolean
-    default: false
   - name: skipNugetPublish
     displayName: Skip Nuget Publish
     type: boolean
@@ -71,12 +67,6 @@ extends:
               - template: .ado/templates/setup-repo.yml@self
 
               - script: |
-                  git config user.name "UI-Fabric-RN-Bot"
-                  git config user.email "uifrnbot@microsoft.com"
-                  git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/fluentui-react-native.git
-                displayName: Git Authentication
-
-              - script: |
                   yarn
                 displayName: 'yarn install'
 
@@ -85,11 +75,24 @@ extends:
                 displayName: 'yarn buildci [test]'
 
               - script: |
-                  yarn changeset:publish
-                displayName: 'Publish NPM Packages with Changesets'
+                  yarn config set npmPublishRegistry "https://registry.npmjs.org"
+                  yarn config set npmAuthToken $(npmAuth)
+                displayName: 'Configure yarn for npm publishing'
                 condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
-                env:
-                  NPM_TOKEN: $(npmAuth)
+
+              - script: |
+                  # https://github.com/changesets/changesets/issues/432
+                  # We can't use `changeset publish` because it doesn't support workspaces, so we have to publish each package individually
+                  yarn workspaces foreach --all --topological --no-private \
+                    exec zx $(Build.SourcesDirectory)/.github/scripts/publish-package-if-needed.mts
+                displayName: 'Publish NPM Packages'
+                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
+
+              - script: |
+                  yarn config unset npmAuthToken
+                  yarn config unset npmPublishRegistry
+                displayName: 'Cleanup yarn npm config'
+                condition: always()
 
           - template: .ado/templates/win32-nuget-publish.yml@self
             parameters:
