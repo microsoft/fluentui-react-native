@@ -53,6 +53,7 @@ export { withSlots } from './component-patterns/withSlots';
 
 // jsx runtime exports
 export { jsx, jsxs } from './jsx-runtime';
+export type { FurnJSX } from './jsx-namespace';
 
 // general utilities
 export { filterProps } from './utilities/filterProps';

@@ -2682,12 +2682,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -2723,12 +2726,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -2769,12 +2775,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -2819,6 +2828,7 @@ __metadata:
     unicode-segmenter: "npm:^0.14.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -2826,6 +2836,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -2893,6 +2905,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -2900,6 +2913,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -2953,6 +2968,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -2960,6 +2976,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -2998,12 +3016,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3053,6 +3074,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3060,6 +3082,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3104,6 +3128,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3111,6 +3136,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3159,7 +3186,11 @@ __metadata:
     react-native: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -3204,6 +3235,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3211,6 +3243,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3248,12 +3282,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3418,6 +3455,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3425,6 +3463,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3462,12 +3502,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3507,6 +3550,7 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3514,6 +3558,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3565,12 +3611,15 @@ __metadata:
     webdriverio: "catalog:"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3617,6 +3666,7 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3624,6 +3674,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3655,12 +3707,15 @@ __metadata:
     use-subscription: "npm:^1.11.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3693,12 +3748,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3733,6 +3791,7 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3740,6 +3799,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3770,12 +3831,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3815,6 +3879,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3822,6 +3887,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3847,8 +3914,12 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -3871,8 +3942,12 @@ __metadata:
     react-native: "npm:^0.81.0"
     use-subscription: "npm:^1.11.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -3905,12 +3980,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3950,6 +4028,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3957,6 +4036,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -3993,12 +4074,15 @@ __metadata:
     tslib: "npm:^2.3.1"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4036,12 +4120,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4080,12 +4167,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4109,7 +4199,11 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -4147,12 +4241,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4192,6 +4289,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4199,6 +4297,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4219,8 +4319,11 @@ __metadata:
     "@types/react": "npm:~19.1.0"
     react: "npm:19.1.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
   peerDependenciesMeta:
+    "@types/react":
+      optional: true
     react:
       optional: true
   languageName: unknown
@@ -4261,6 +4364,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4268,6 +4372,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4299,7 +4405,6 @@ __metadata:
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:~19.1.0"
     "@types/react-test-renderer": "npm:^19.1.0"
-    invariant: "npm:^2.2.0"
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
     react-native-macos: "npm:^0.81.0"
@@ -4307,12 +4412,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4385,12 +4493,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4412,8 +4523,11 @@ __metadata:
     react: "npm:19.1.0"
     tslib: "npm:^2.3.1"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
   peerDependenciesMeta:
+    "@types/react":
+      optional: true
     react:
       optional: true
   languageName: unknown
@@ -4453,6 +4567,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4460,6 +4575,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4509,6 +4626,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4516,6 +4634,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4535,8 +4655,11 @@ __metadata:
     "@types/react": "npm:~19.1.0"
     react: "npm:19.1.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
   peerDependenciesMeta:
+    "@types/react":
+      optional: true
     react:
       optional: true
   languageName: unknown
@@ -4583,6 +4706,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4590,6 +4714,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4625,6 +4751,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4632,6 +4759,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4670,12 +4799,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4713,12 +4845,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4750,12 +4885,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4788,12 +4926,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4842,6 +4983,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4849,6 +4991,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -4964,12 +5108,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -5005,6 +5152,7 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5012,6 +5160,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -5053,12 +5203,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -5084,8 +5237,12 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -5122,12 +5279,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -5173,6 +5333,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5180,6 +5341,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -5326,6 +5489,7 @@ __metadata:
     "@fluentui-react-native/tooltip": "workspace:*"
     "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5357,6 +5521,8 @@ __metadata:
     "@fluentui-react-native/vibrancy-view":
       optional: true
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
   languageName: unknown
   linkType: soft
@@ -5502,9 +5668,6 @@ __metadata:
     react-native-windows: "npm:^0.74.0"
     react-test-renderer: "npm:18.2.0"
     webdriverio: "catalog:"
-  peerDependenciesMeta:
-    "@office-iss/react-native-win32":
-      optional: true
   languageName: unknown
   linkType: soft
 
@@ -5540,12 +5703,15 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -5577,8 +5743,12 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -5599,8 +5769,12 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -5626,8 +5800,12 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -5651,8 +5829,12 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -5682,12 +5864,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -5718,12 +5903,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -5758,6 +5946,7 @@ __metadata:
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5765,6 +5954,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -5796,7 +5987,11 @@ __metadata:
     react-native: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -5823,7 +6018,11 @@ __metadata:
     react-native: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -5851,7 +6050,11 @@ __metadata:
     react-native: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -5878,7 +6081,11 @@ __metadata:
     react-native: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -5904,12 +6111,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -5948,12 +6158,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -6014,6 +6227,7 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -6021,6 +6235,8 @@ __metadata:
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -10197,8 +10413,12 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -10225,12 +10445,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -10254,7 +10477,11 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -10285,12 +10512,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -10316,7 +10546,11 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -10338,7 +10572,11 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -10360,7 +10598,11 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.0"
   peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -10372,6 +10614,7 @@ __metadata:
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/win32-theme": "workspace:*"
@@ -10388,12 +10631,15 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
     react: 18.2.0 || 19.0.0 || 19.1.0
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
       optional: true
     react-native-macos:
       optional: true
@@ -16419,7 +16665,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"invariant@npm:^2.2.0, invariant@npm:^2.2.4":
+"invariant@npm:^2.2.4":
   version: 2.2.4
   resolution: "invariant@npm:2.2.4"
   dependencies:

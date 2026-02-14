@@ -71,6 +71,7 @@ export class LintPackageCommand extends Command {
     this.checkBuildConfig(buildConfig);
     this.checkDependencies();
     this.checkDevDeps();
+    this.checkPeerDeps();
     this.checkRnxKitConfig();
     await this.checkCatalogs();
 
@@ -184,6 +185,34 @@ export class LintPackageCommand extends Command {
         this.projRoot.updateRecordEntry('devDependencies', depName, depVersion);
       }
     }
+    this.errorIf(issues.length > 0, issues.join('\n'), () => {
+      // changes already applied above
+    });
+  }
+
+  private checkPeerDeps() {
+    const issues: string[] = [];
+    const manifest = this.projRoot.manifest;
+    const peerDeps = new Set<string>(Object.keys(manifest.peerDependencies || {}));
+    if (peerDeps.has('@types/react')) {
+      if (!manifest.peerDependenciesMeta) {
+        this.projRoot.setManifestEntry('peerDependenciesMeta', {});
+        issues.push('- peerDependenciesMeta field should be added for optional peer dependencies');
+      }
+      const peerDepsMeta = manifest.peerDependenciesMeta || {};
+      if (!peerDepsMeta['@types/react'] || !peerDepsMeta['@types/react'].optional) {
+        this.projRoot.updateRecordEntry('peerDependenciesMeta', '@types/react', { optional: true });
+        issues.push('- @types/react should be marked as an optional peer dependency');
+      }
+    }
+    const peerDepsMeta = manifest.peerDependenciesMeta || {};
+    for (const depName of Object.keys(peerDepsMeta)) {
+      if (!peerDeps.has(depName)) {
+        issues.push(`- peerDependenciesMeta entry for ${depName} should be removed since it's not a declared peer dependency`);
+        this.projRoot.updateRecordEntry('peerDependenciesMeta', depName, undefined);
+      }
+    }
+
     this.errorIf(issues.length > 0, issues.join('\n'), () => {
       // changes already applied above
     });

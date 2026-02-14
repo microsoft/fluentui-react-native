@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { ISlotProps } from '@uifabricshared/foundation-settings';
+import type { FurnJSX } from '@fluentui-react-native/framework-base';
 
 export type AsObject<T> = T extends object ? T : object;
 export type RequireObject<T> = T extends object ? T : never;
@@ -92,7 +93,7 @@ export interface IComposable<TProps, TSlotProps, TState> {
     Slots: ISlots<TSlotProps>,
     renderData: IRenderData<TSlotProps, TState>,
     ...children: React.ReactNode[]
-  ) => React.JSX.Element | null;
+  ) => FurnJSX.Element | null;
 
   /**
    * The slot definitions for this component.  If this only has one sub-component this will only have a root entry.  Using

@@ -103,7 +103,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
 const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
 const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
 
-export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
+export const FluentTester = (props: FluentTesterProps) => {
   const { enableSinglePaneView } = props;
 
   const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
@@ -144,7 +144,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const isTestListVisible = !enableSinglePaneView || (enableSinglePaneView && onTestListView);
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
 
-  const TestList: React.FunctionComponent = React.memo(() => {
+  const TestList = React.memo(() => {
     return (
       <View style={fluentTesterStyles.testList}>
         <ScrollView
@@ -176,7 +176,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   });
 
-  const MobileTestList: React.FunctionComponent = React.memo(() => {
+  const MobileTestList = React.memo(() => {
     return (
       <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
         <ScrollView
@@ -212,7 +212,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   });
 
-  const TestComponentView: React.FunctionComponent = () => {
+  const TestComponentView = () => {
     return (
       <ScrollView
         keyboardShouldPersistTaps="handled" // Prevents keyboard from dismissing when tapping on a text input
