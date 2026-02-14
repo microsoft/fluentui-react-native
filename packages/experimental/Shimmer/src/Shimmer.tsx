@@ -21,7 +21,7 @@ export const Shimmer = compose<ShimmerType>({
   },
   useRender: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     const Slots = useSlots(props);
-    props = mergeProps(props, Slots.root({}).props);
+    props = mergeProps(props, Slots.root({}).props as ShimmerProps);
     const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
     const memoizedShimmerData = useMemo(

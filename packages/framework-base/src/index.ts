@@ -19,6 +19,9 @@ export type { StyleProp } from './merge-props/mergeStyles.types';
 export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
 
+// component pattern exports - extracting from elements
+export { extractChildren, extractProps, extractStyle } from './component-patterns/extract';
+
 // component pattern exports - rendering utilities
 export { renderForJsxRuntime, renderSlot, asDirectComponent } from './component-patterns/render';
 
@@ -50,6 +53,7 @@ export { withSlots } from './component-patterns/withSlots';
 
 // jsx runtime exports
 export { jsx, jsxs } from './jsx-runtime';
+export type { FurnJSX } from './jsx-namespace';
 
 // general utilities
 export { filterProps } from './utilities/filterProps';

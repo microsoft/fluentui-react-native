@@ -24,37 +24,7 @@ export { useAsToggleWithEvent } from './useAsToggleWithEvent';
 export type { ValueChangeCallback } from './useControllableValue';
 export { useControllableValue } from './useControllableValue';
 export type { OnChangeWithEventCallback, OnToggleWithEventCallback } from './useAsToggleWithEvent';
-export type {
-  PressabilityConfig,
-  PressabilityEventHandlers,
-  PressableFocusProps,
-  PressableHoverEventProps,
-  PressableHoverProps,
-  PressablePressProps,
-} from './Pressability/Pressability.types';
-export { normalizeRect } from './Pressability/InternalTypes';
-export type {
-  AbstractComponent,
-  ComponentMethods,
-  HostComponent,
-  MeasureInWindowOnSuccessCallback,
-  MeasureLayoutOnSuccessCallback,
-  MeasureOnSuccessCallback,
-  NativeMethods,
-  Rect,
-  RectOrSize,
-} from './Pressability/InternalTypes';
-export type {
-  BlurEvent,
-  FocusEvent,
-  LayoutEvent,
-  MouseEvent,
-  PressEvent,
-  ResponderSyntheticEvent,
-  ScrollEvent,
-  SyntheticEvent,
-  TextLayoutEvent,
-} from './Pressability/CoreEventTypes';
+export type { PressableFocusProps, PressableHoverProps, PressablePressProps } from './usePressableState.types';
 export type { KeyPressEvent, KeyCallback, KeyPressProps } from './useKeyProps.types';
 export { preferKeyDownForKeyEvents, useKeyCallback, useKeyDownProps, useKeyProps, useKeyUpProps } from './useKeyProps';
 export { useOnPressWithFocus } from './useOnPressWithFocus';

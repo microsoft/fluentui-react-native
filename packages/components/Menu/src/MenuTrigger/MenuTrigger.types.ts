@@ -1,6 +1,7 @@
 import type * as React from 'react';
 
-import type { InteractionEvent, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { MouseEvent } from 'react-native';
+import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
 export const menuTriggerName = 'MenuTrigger';
 
@@ -24,7 +25,7 @@ export interface MenuTriggerChildProps extends Omit<PressablePropsExtended, 'onP
   /**
    * A callback to call on button click event
    */
-  onClick?: (e: InteractionEvent) => void;
+  onClick?: (e: MouseEvent) => void;
 }
 
 export interface MenuTriggerState {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import { mergeProps, directComponent, phasedComponent, memoize, mergeStyles } from '@fluentui-react-native/framework-base';
+import { mergeProps, directComponent, phasedComponent, memoize, mergeStyles, extractStyle } from '@fluentui-react-native/framework-base';
 
 import type { OverflowItemProps } from './OverflowItem.types';
 import { overflowItemName } from './OverflowItem.types';
@@ -36,7 +36,7 @@ export const OverflowItem = phasedComponent<OverflowItemProps>((userProps: Overf
     }
 
     // Assume that the child can accept ViewProps.
-    const viewStyles = mergeStyles<ViewStyle>(child.props.style, mergedProps.style);
+    const viewStyles = mergeStyles<ViewStyle>(extractStyle(child), mergedProps.style);
     const viewProps = getOverflowItemProps(mergedProps, viewStyles);
 
     const clone = React.cloneElement(child, viewProps);

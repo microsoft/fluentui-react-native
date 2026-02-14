@@ -64,7 +64,6 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
     'react-types': {
       name: '@types/react',
       version: `~${presetReact.version}`,
-      devOnly: true,
     },
     'react-test-renderer-types': {
       name: '@types/react-test-renderer',

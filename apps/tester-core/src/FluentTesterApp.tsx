@@ -5,7 +5,6 @@
  */
 'use strict';
 
-import * as React from 'react';
 import { Platform } from 'react-native';
 
 import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
@@ -15,7 +14,7 @@ import type { FluentTesterProps } from './FluentTester';
 import { FluentTester } from './FluentTester';
 import { testerTheme } from './theme/index';
 
-export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (props) => {
+export const FluentTesterApp = (props: FluentTesterProps) => {
   const sizeClass = useHorizontalSizeClass();
   const isMobile = Platform.OS === 'android' || (Platform.OS === 'ios' && Platform.isPad === false);
 

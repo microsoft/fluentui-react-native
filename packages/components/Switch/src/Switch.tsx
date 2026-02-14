@@ -4,6 +4,7 @@ import { View, AccessibilityInfo, Pressable, Animated, Platform } from 'react-na
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, memoize, mergeProps } from '@fluentui-react-native/framework';
+import { extractStyle } from '@fluentui-react-native/framework-base';
 import { Text } from '@fluentui-react-native/text';
 
 import { stylingSettings } from './Switch.styling';
@@ -52,15 +53,17 @@ export const Switch = compose<SwitchType>({
     const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true, disabled: userProps.disabled }, {}));
     const switchOffSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: false, disabled: userProps.disabled }, {}));
 
-    // For Mobile platform we are passing extra data to useSwitch for Animated API
+    /**
+     * The following is hacky and completely breaks typings, but keeping it in to not break legacy behaviors.
+     */
     const switchInfo = useSwitch(
       userProps,
       isMobile && {
-        toggleOnBgColor: switchOnSlot.track({}).props.style.backgroundColor,
-        toggleOffBgColor: switchOffSlot.track({}).props.style.backgroundColor,
-        trackWidth: switchOnSlot.track({}).props.style.width,
-        thumbWidth: switchOnSlot.thumb({}).props.style.width,
-        thumbMargin: switchOnSlot.thumb({}).props.style.margin,
+        toggleOnBgColor: extractStyle(switchOnSlot.track({})).backgroundColor as string,
+        toggleOffBgColor: extractStyle(switchOffSlot.track({})).backgroundColor as string,
+        trackWidth: extractStyle(switchOnSlot.track({})).width as number,
+        thumbWidth: extractStyle(switchOnSlot.thumb({})).width as number,
+        thumbMargin: extractStyle(switchOnSlot.thumb({})).margin as number,
       },
     );
 

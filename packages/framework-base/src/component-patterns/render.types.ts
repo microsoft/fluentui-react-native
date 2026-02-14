@@ -1,11 +1,14 @@
 import type React from 'react';
-import type ReactJSX from 'react/jsx-runtime';
+//import type ReactJSX from 'react/jsx-runtime';
+import type { FurnJSX } from '../jsx-namespace';
 
 /**
  * Base types for rendering components in a react application, extracted from react types
  */
-export type RenderResult = ReturnType<typeof ReactJSX.jsx>;
-export type RenderType = Parameters<typeof ReactJSX.jsx>[0] | string;
+export type RenderResult = FurnJSX.Element;
+//export type RenderResult = ReturnType<typeof ReactJSX.jsx>;
+export type RenderType = FurnJSX.ElementType;
+//export type RenderType = Parameters<typeof ReactJSX.jsx>[0] | string;
 
 /**
  * The standard element type inputs for react and react-native. This might be View or Button, or it might be 'div' in web. Effectively
@@ -52,13 +55,15 @@ export type DirectComponent<TProps> = FunctionComponentCore<TProps> & {
   _callDirect?: boolean;
 };
 
+type LegacyComponentFunction<TProps> = (props: TProps, ...children: React.ReactNode[]) => RenderResult;
+
 /**
  * Legacy slot function type, this allows the rendering handlers to bypass the normal JSX rendering and call the function
  * directly. This expects the function to have children as the last argument of the call which isn't consistent with standard
  * react usage, where children are passed as a prop. If writing new components use the DirectComponent type instead.
  * @deprecated use DirectComponent instead
  */
-export type LegacyDirectComponent<TProps> = React.FunctionComponent<TProps> & {
+export type LegacyDirectComponent<TProps> = LegacyComponentFunction<TProps> & {
   _canCompose?: boolean;
 };
 
@@ -108,7 +113,7 @@ export type PhasedComponent<TProps> = FunctionComponent<TProps> & {
  * The final rendering of the props in a phased render. This is the function component signature that matches that of
  * React.createElement, children (if present) will be part of the variable args at the end.
  */
-export type FinalRender<TProps> = (props: TProps, ...children: React.ReactNode[]) => React.JSX.Element | null;
+export type FinalRender<TProps> = (props: TProps, ...children: React.ReactNode[]) => FurnJSX.Element | null;
 
 /**
  * Legacy staged render function signature.

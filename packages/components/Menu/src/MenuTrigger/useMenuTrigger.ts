@@ -1,8 +1,6 @@
 import React from 'react';
-import type { AccessibilityActionEvent, AccessibilityActionName } from 'react-native';
+import type { AccessibilityActionEvent, AccessibilityActionName, MouseEvent } from 'react-native';
 import { Platform } from 'react-native';
-
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
 import { useMergedRefs } from './useMergeRefs';
@@ -76,7 +74,7 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
   );
 
   const onHoverIn = React.useCallback(
-    (e: InteractionEvent) => {
+    (e: MouseEvent) => {
       if (openOnHover) {
         clearTimeout(popoverHoverOutTimer);
         clearTimeout(triggerHoverOutTimer);
@@ -92,7 +90,7 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
   );
 
   const onHoverOut = React.useCallback(
-    (e: InteractionEvent) => {
+    (e: MouseEvent) => {
       if (openOnHover) {
         e.persist();
         const timer = setTimeout(() => {
@@ -107,7 +105,7 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
   );
 
   const onClick = React.useCallback(
-    (e: InteractionEvent) => {
+    (e: MouseEvent) => {
       setOpen(e, !open);
       childOnClick && childOnClick(e);
     },

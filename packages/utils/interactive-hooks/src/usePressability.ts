@@ -1,40 +1,92 @@
+import type { PressableProps, GestureResponderEvent, BlurEvent, MouseEvent } from 'react-native';
+
+import usePressabilityBase from 'react-native/Libraries/Pressability/usePressability';
+
+export type Rect = {
+  bottom?: number | null;
+  left?: number | null;
+  right?: number | null;
+  top?: number | null;
+};
+export type RectOrSize = Rect | number;
+
+type ConfigFromPressableProps = Pick<
+  PressableProps,
+  | 'cancelable'
+  | 'disabled'
+  | 'hitSlop'
+  | 'android_disableSound'
+  | 'delayHoverIn'
+  | 'delayHoverOut'
+  | 'delayLongPress'
+  | 'onBlur'
+  | 'onFocus'
+  | 'onHoverIn'
+  | 'onHoverOut'
+  | 'onLongPress'
+  | 'onPress'
+  | 'onPressIn'
+  | 'onPressOut'
+  | 'pressRetentionOffset'
+  | 'testOnly_pressed'
+  | 'android_ripple'
+>;
+
+export type PressabilityConfig = ConfigFromPressableProps & {
+  /**
+   * Amount to extend the `HitRect` by to create `PressRect`.
+   */
+  pressRectOffset?: RectOrSize;
+
+  /**
+   * Duration to wait after press down before calling `onPressIn`.
+   */
+  delayPressIn?: number;
+
+  /**
+   * Duration to wait after letting up before calling `onPressOut`.
+   */
+  delayPressOut?: number;
+
+  /**
+   * Minimum duration to wait between calling `onPressIn` and `onPressOut`.
+   */
+  minPressDuration?: number;
+
+  /**
+   * Called when the press location moves. (This should rarely be used.)
+   */
+  onPressMove?: ((event: GestureResponderEvent) => void) | null;
+
+  /**
+   * Whether to prevent any other native components from becoming responder
+   * while this pressable is responder.
+   */
+  blockNativeResponder?: boolean;
+};
+
+export type EventHandlers = {
+  onBlur: (event: BlurEvent) => void;
+  onClick: (event: GestureResponderEvent) => void;
+  onFocus: (event: FocusEvent) => void;
+  onMouseEnter?: (event: MouseEvent) => void;
+  onMouseLeave?: (event: MouseEvent) => void;
+  onPointerEnter?: (event: PointerEvent) => void;
+  onPointerLeave?: (event: PointerEvent) => void;
+  onResponderGrant: (event: GestureResponderEvent) => void | boolean;
+  onResponderMove: (event: GestureResponderEvent) => void;
+  onResponderRelease: (event: GestureResponderEvent) => void;
+  onResponderTerminate: (event: GestureResponderEvent) => void;
+  onResponderTerminationRequest: () => boolean;
+  onStartShouldSetResponder: () => boolean;
+};
+
 /**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @flow strict-local
- * @format
+ * Create a typed wrapper around the internal usePressability hook since the types are still in flow
+ * for that file.
+ * @param config pressability configuration options, replicated from internal usePressability hook.
+ * @returns event handlers for the pressable component or null if config is null.
  */
-
-'use strict';
-
-import { useEffect, useRef } from 'react';
-
-import { Pressability } from './Pressability/Pressability';
-import type { PressabilityConfig, PressabilityEventHandlers } from './Pressability/Pressability.types';
-
-export function usePressability(config: PressabilityConfig): PressabilityEventHandlers {
-  const pressabilityRef = useRef<Pressability>(null);
-  if (pressabilityRef.current == null) {
-    pressabilityRef.current = new Pressability(config);
-  }
-  const pressability = pressabilityRef.current;
-
-  // On the initial mount, this is a no-op. On updates, `pressability` will be
-  // re-configured to use the new configuration.
-  useEffect(() => {
-    pressability.configure(config);
-  }, [config, pressability]);
-
-  // On unmount, reset pending state and timers inside `pressability`. This is
-  // a separate effect because we do not want to reset when `config` changes.
-  useEffect(() => {
-    return () => {
-      pressability.reset();
-    };
-  }, [pressability]);
-
-  return pressability.getEventHandlers();
+export function usePressability(config: PressabilityConfig | null): EventHandlers | null {
+  return usePressabilityBase(config);
 }
