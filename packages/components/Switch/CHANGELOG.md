@@ -1,5 +1,42 @@
 # Change Log - @fluentui-react-native/switch
 
+## 0.13.23
+
+### Patch Changes
+
+- d7adbdd: # Migration from Beachball to Changesets
+
+  This changeset represents the migration from Beachball to Changesets for version management and consolidates all changes from 440+ beachball change files that were in the `change/` directory.
+
+  All 75 affected packages receive a patch version bump to acknowledge the accumulated changes from the beachball era.
+
+  ## What Changed
+
+  Going forward, all version management uses Changesets via `yarn changeset`. The following beachball infrastructure has been removed:
+
+  - ❌ 440+ beachball change files from `change/` directory
+  - ❌ `beachball` package dependency
+  - ❌ Beachball scripts from `package.json`
+  - ❌ `beachball.config.js` configuration file
+  - ❌ Beachball publish steps from Azure Pipelines
+
+  ## New Workflow
+
+  ✅ **Create changes**: Run `yarn changeset` to document changes
+  ✅ **Version bump PRs**: Automatically created by GitHub Actions
+  ✅ **Publishing**: Handled by Azure Pipelines using `changeset publish`
+  ✅ **Validation**: CI validates changesets and blocks major version bumps
+
+  For details, see `CHANGESETS_SETUP.md` and `CONTRIBUTING.md`.
+
+- Updated dependencies [d7adbdd]
+  - @fluentui-react-native/framework@0.14.18
+  - @fluentui-react-native/interactive-hooks@0.27.20
+  - @fluentui-react-native/text@0.24.22
+  - @fluentui-react-native/theming-utils@0.26.12
+  - @fluentui-react-native/tokens@0.23.12
+  - @fluentui-react-native/use-styling@0.13.13
+
 <!-- This log was last generated on Tue, 05 Aug 2025 18:50:41 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -1186,7 +1223,7 @@ Wed, 17 Aug 2022 18:45:52 GMT
 
 ### Minor changes
 
--  Label position set to 'after' will prevent onText and offText from rendering (nkhalil942@gmail.com)
+- Label position set to 'after' will prevent onText and offText from rendering (nkhalil942@gmail.com)
 
 ## 0.5.0
 

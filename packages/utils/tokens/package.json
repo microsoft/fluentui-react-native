@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tokens",
-  "version": "0.23.11",
+  "version": "0.23.12",
   "description": "Token interface parts and helpers",
   "repository": {
     "type": "git",

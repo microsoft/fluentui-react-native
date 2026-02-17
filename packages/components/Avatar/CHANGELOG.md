@@ -1,5 +1,44 @@
 # Change Log - @fluentui-react-native/avatar
 
+## 1.12.24
+
+### Patch Changes
+
+- d7adbdd: # Migration from Beachball to Changesets
+
+  This changeset represents the migration from Beachball to Changesets for version management and consolidates all changes from 440+ beachball change files that were in the `change/` directory.
+
+  All 75 affected packages receive a patch version bump to acknowledge the accumulated changes from the beachball era.
+
+  ## What Changed
+
+  Going forward, all version management uses Changesets via `yarn changeset`. The following beachball infrastructure has been removed:
+
+  - ❌ 440+ beachball change files from `change/` directory
+  - ❌ `beachball` package dependency
+  - ❌ Beachball scripts from `package.json`
+  - ❌ `beachball.config.js` configuration file
+  - ❌ Beachball publish steps from Azure Pipelines
+
+  ## New Workflow
+
+  ✅ **Create changes**: Run `yarn changeset` to document changes
+  ✅ **Version bump PRs**: Automatically created by GitHub Actions
+  ✅ **Publishing**: Handled by Azure Pipelines using `changeset publish`
+  ✅ **Validation**: CI validates changesets and blocks major version bumps
+
+  For details, see `CHANGESETS_SETUP.md` and `CONTRIBUTING.md`.
+
+- Updated dependencies [d7adbdd]
+  - @fluentui-react-native/adapters@0.13.6
+  - @fluentui-react-native/badge@0.11.18
+  - @fluentui-react-native/framework@0.14.18
+  - @fluentui-react-native/icon@0.21.24
+  - @fluentui-react-native/theme-tokens@0.27.12
+  - @fluentui-react-native/theming-utils@0.26.12
+  - @fluentui-react-native/tokens@0.23.12
+  - @fluentui-react-native/use-styling@0.13.13
+
 <!-- This log was last generated on Tue, 05 Aug 2025 18:50:44 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -1356,7 +1395,7 @@ Thu, 08 Sep 2022 15:59:45 GMT
 
 ### Patches
 
-- [Avatar] Fixed bug with  multi-word titles (vkozlova@microsoft.com)
+- [Avatar] Fixed bug with multi-word titles (vkozlova@microsoft.com)
 
 ## 1.2.6
 

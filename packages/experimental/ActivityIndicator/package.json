@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-activity-indicator",
-  "version": "0.10.18",
+  "version": "0.10.19",
   "description": "A cross-platform Fluent Activity Indicator component",
   "repository": {
     "type": "git",

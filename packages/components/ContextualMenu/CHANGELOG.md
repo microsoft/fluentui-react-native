@@ -1,5 +1,46 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
+## 0.24.32
+
+### Patch Changes
+
+- d7adbdd: # Migration from Beachball to Changesets
+
+  This changeset represents the migration from Beachball to Changesets for version management and consolidates all changes from 440+ beachball change files that were in the `change/` directory.
+
+  All 75 affected packages receive a patch version bump to acknowledge the accumulated changes from the beachball era.
+
+  ## What Changed
+
+  Going forward, all version management uses Changesets via `yarn changeset`. The following beachball infrastructure has been removed:
+
+  - ❌ 440+ beachball change files from `change/` directory
+  - ❌ `beachball` package dependency
+  - ❌ Beachball scripts from `package.json`
+  - ❌ `beachball.config.js` configuration file
+  - ❌ Beachball publish steps from Azure Pipelines
+
+  ## New Workflow
+
+  ✅ **Create changes**: Run `yarn changeset` to document changes
+  ✅ **Version bump PRs**: Automatically created by GitHub Actions
+  ✅ **Publishing**: Handled by Azure Pipelines using `changeset publish`
+  ✅ **Validation**: CI validates changesets and blocks major version bumps
+
+  For details, see `CHANGESETS_SETUP.md` and `CONTRIBUTING.md`.
+
+- Updated dependencies [d7adbdd]
+  - @fluentui-react-native/adapters@0.13.6
+  - @fluentui-react-native/callout@0.27.18
+  - @fluentui-react-native/focus-zone@0.21.16
+  - @fluentui-react-native/icon@0.21.24
+  - @fluentui-react-native/interactive-hooks@0.27.20
+  - @fluentui-react-native/text@0.24.22
+  - @fluentui-react-native/tokens@0.23.12
+  - @uifabricshared/foundation-composable@0.13.12
+  - @uifabricshared/foundation-compose@1.15.18
+  - @uifabricshared/foundation-settings@0.15.12
+
 <!-- This log was last generated on Tue, 05 Aug 2025 18:50:42 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -2609,7 +2650,7 @@ Thu, 16 Dec 2021 19:10:29 GMT
 
 - Refactor useKeyCallback (sanajmi@microsoft.com)
 - remove focus style overrides for macOS contextual menu items (sanajmi@microsoft.com)
-- Rename Jest snapshots to be platform agnostic  (sanajmi@microsoft.com)
+- Rename Jest snapshots to be platform agnostic (sanajmi@microsoft.com)
 - Add up/down arrow key support to macOS ContextualMenu (sanajmi@microsoft.com)
 - rename slots to be more RTL friendly (sanajmi@microsoft.com)
 

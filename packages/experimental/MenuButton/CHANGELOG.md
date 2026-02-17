@@ -1,5 +1,40 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
+## 0.10.38
+
+### Patch Changes
+
+- d7adbdd: # Migration from Beachball to Changesets
+
+  This changeset represents the migration from Beachball to Changesets for version management and consolidates all changes from 440+ beachball change files that were in the `change/` directory.
+
+  All 75 affected packages receive a patch version bump to acknowledge the accumulated changes from the beachball era.
+
+  ## What Changed
+
+  Going forward, all version management uses Changesets via `yarn changeset`. The following beachball infrastructure has been removed:
+
+  - ❌ 440+ beachball change files from `change/` directory
+  - ❌ `beachball` package dependency
+  - ❌ Beachball scripts from `package.json`
+  - ❌ `beachball.config.js` configuration file
+  - ❌ Beachball publish steps from Azure Pipelines
+
+  ## New Workflow
+
+  ✅ **Create changes**: Run `yarn changeset` to document changes
+  ✅ **Version bump PRs**: Automatically created by GitHub Actions
+  ✅ **Publishing**: Handled by Azure Pipelines using `changeset publish`
+  ✅ **Validation**: CI validates changesets and blocks major version bumps
+
+  For details, see `CHANGESETS_SETUP.md` and `CONTRIBUTING.md`.
+
+- Updated dependencies [d7adbdd]
+  - @fluentui-react-native/button@0.39.23
+  - @fluentui-react-native/contextual-menu@0.24.32
+  - @fluentui-react-native/framework@0.14.18
+  - @fluentui-react-native/tokens@0.23.12
+
 <!-- This log was last generated on Tue, 05 Aug 2025 18:50:43 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -1731,7 +1766,7 @@ Thu, 14 Jul 2022 20:03:37 GMT
 
 ### Patches
 
-- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+- Revert "Add support for onAccessibilityTap on Text" (amchiu@microsoft.com)
 - Bump @fluentui-react-native/experimental-button to v0.16.1
 
 ## 0.4.0
@@ -2523,7 +2558,7 @@ Thu, 16 Dec 2021 19:10:27 GMT
 
 ### Patches
 
-- Rename Jest snapshots to be platform agnostic  (sanajmi@microsoft.com)
+- Rename Jest snapshots to be platform agnostic (sanajmi@microsoft.com)
 - Fix tests (ruaraki@microsoft.com)
 - Updated MB snapshots (v.kozlova13@gmail.com)
 - Renames (ruaraki@microsoft.com)
