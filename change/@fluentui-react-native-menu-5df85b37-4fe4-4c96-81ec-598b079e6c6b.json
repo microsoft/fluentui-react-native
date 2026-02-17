@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add highlight prop / highlight ring to Button, Tab, and MenuItem",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

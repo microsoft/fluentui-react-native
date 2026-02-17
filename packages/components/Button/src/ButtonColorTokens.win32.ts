@@ -40,6 +40,12 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
       borderColor: t.colors.transparentStroke,
       iconColor: t.colors.neutralForeground1Hover,
     },
+    highlighted: {
+      backgroundColor: t.colors.neutralBackground1Hover,
+      color: t.colors.neutralForeground1Hover,
+      borderColor: t.colors.neutralForeground1,
+      iconColor: t.colors.neutralForeground1Hover,
+    },
     primary: {
       backgroundColor: t.colors.brandBackground,
       color: t.colors.neutralForegroundOnBrand,
@@ -68,6 +74,12 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         color: t.colors.neutralForegroundOnBrandHover,
         borderColor: t.colors.strokeFocus2,
         borderInnerColor: t.colors.strokeFocus1,
+        iconColor: t.colors.neutralForegroundOnBrandHover,
+      },
+      highlighted: {
+        backgroundColor: t.colors.brandBackgroundHover,
+        color: t.colors.neutralForegroundOnBrandHover,
+        borderColor: t.colors.neutralForeground1, // Trying to render a 2 tone border sometime causes a crash for unknown reasons, use a single color for now
         iconColor: t.colors.neutralForegroundOnBrandHover,
       },
     },
@@ -100,6 +112,12 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         borderColor: t.colors.transparentStroke,
         iconColor: t.colors.neutralForeground1Hover,
       },
+      highlighted: {
+        backgroundColor: t.colors.subtleBackgroundHover,
+        color: t.colors.neutralForeground1Hover,
+        borderColor: t.colors.neutralForeground1,
+        iconColor: t.colors.neutralForeground1Hover,
+      },
     },
   } as ButtonTokens;
 };
@@ -126,6 +144,11 @@ const highContrastColors = {
     iconColor: PlatformColor('HighlightText'),
   },
   focused: {
+    backgroundColor: PlatformColor('Highlight'),
+    color: PlatformColor('HighlightText'),
+    iconColor: PlatformColor('HighlightText'),
+  },
+  highlighted: {
     backgroundColor: PlatformColor('Highlight'),
     color: PlatformColor('HighlightText'),
     iconColor: PlatformColor('HighlightText'),

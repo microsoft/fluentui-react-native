@@ -73,6 +73,7 @@ export interface ButtonTokens extends ButtonCoreTokens {
    */
   hovered?: ButtonTokens;
   focused?: ButtonTokens;
+  highlighted?: ButtonTokens;
   pressed?: ButtonTokens;
   disabled?: ButtonTokens;
   hasContent?: ButtonTokens;
@@ -163,9 +164,15 @@ export interface ButtonProps extends ButtonCoreProps {
    * @default false
    */
   loading?: boolean;
+
+  /**
+   * Whether the button should render a highlighted ring.
+   */
+  highlighted?: boolean;
 }
 
 interface ButtonState extends PressableState {
+  highlighted?: boolean;
   measuredHeight?: number;
   measuredWidth?: number;
 

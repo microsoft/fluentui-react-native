@@ -86,4 +86,7 @@ export const defaultTabColorTokens: TokenSettings<TabTokens, Theme> = (t: Theme)
     focused: {
       borderColor: t.colors.neutralForeground1,
     },
+    highlighted: {
+      borderColor: t.colors.neutralForeground1,
+    },
   } as TabTokens);

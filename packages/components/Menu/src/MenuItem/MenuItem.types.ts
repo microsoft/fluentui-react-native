@@ -59,6 +59,7 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
   focused?: MenuItemTokens;
   hovered?: MenuItemTokens;
   pressed?: MenuItemTokens;
+  highlighted?: MenuItemTokens;
 }
 
 export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
@@ -81,6 +82,11 @@ export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
    * Do not dismiss the menu when a menu item is clicked
    */
   persistOnClick?: boolean;
+
+  /**
+   * Whether the menu item should render a highlight ring
+   */
+  highlighted?: boolean;
 }
 
 export interface MenuItemState extends PressableState {
