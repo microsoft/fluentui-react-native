@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-stack
 
+## 0.1.1
+
+### Patch Changes
+
+- d1d8c26: We were pinning @types/react and react-native-macos via resolutions. This fixes that which uncovered a bunch of type inconsistencies that needed to be addressed.
+- Updated dependencies [d7adbdd]
+- Updated dependencies [d1d8c26]
+  - @fluentui-react-native/adapters@0.14.0
+  - @fluentui-react-native/framework@0.15.0
+  - @fluentui-react-native/tokens@0.24.0
+
 This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->

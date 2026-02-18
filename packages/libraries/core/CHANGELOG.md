@@ -1,5 +1,57 @@
 # Change Log - @fluentui/react-native
 
+## 0.43.0
+
+### Minor Changes
+
+- d7adbdd: # Migration from Beachball to Changesets
+
+  This changeset represents the migration from Beachball to Changesets for version management and consolidates all changes from 440+ beachball change files that were in the `change/` directory.
+
+  All 75 affected packages receive a minor version bump to acknowledge the accumulated changes from the beachball era.
+
+  ## What Changed
+
+  Going forward, all version management uses Changesets via `yarn changeset`. The following beachball infrastructure has been removed:
+
+  - ❌ 440+ beachball change files from `change/` directory
+  - ❌ `beachball` package dependency
+  - ❌ Beachball scripts from `package.json`
+  - ❌ `beachball.config.js` configuration file
+  - ❌ Beachball publish steps from Azure Pipelines
+
+  ## New Workflow
+
+  ✅ **Create changes**: Run `yarn changeset` to document changes
+  ✅ **Version bump PRs**: Automatically created by GitHub Actions
+  ✅ **Publishing**: Handled by Azure Pipelines using `changeset publish`
+  ✅ **Validation**: CI validates changesets and blocks major version bumps
+
+  For details, see `CHANGESETS_SETUP.md` and `CONTRIBUTING.md`.
+
+### Patch Changes
+
+- d1d8c26: We were pinning @types/react and react-native-macos via resolutions. This fixes that which uncovered a bunch of type inconsistencies that needed to be addressed.
+- Updated dependencies [d7adbdd]
+- Updated dependencies [d1d8c26]
+- Updated dependencies [d1d8c26]
+  - @fluentui-react-native/button@0.40.0
+  - @fluentui-react-native/callout@0.28.0
+  - @fluentui-react-native/checkbox@0.24.0
+  - @fluentui-react-native/contextual-menu@0.25.0
+  - @fluentui-react-native/focus-trap-zone@0.13.0
+  - @fluentui-react-native/focus-zone@0.22.0
+  - @fluentui-react-native/interactive-hooks@0.28.0
+  - @fluentui-react-native/link@0.24.0
+  - @fluentui-react-native/menu-button@0.14.0
+  - @fluentui-react-native/persona@0.17.0
+  - @fluentui-react-native/persona-coin@0.16.0
+  - @fluentui-react-native/pressable@0.13.0
+  - @fluentui-react-native/radio-group@0.22.0
+  - @fluentui-react-native/separator@0.19.0
+  - @fluentui-react-native/tablist@0.8.0
+  - @fluentui-react-native/text@0.25.0
+
 This log was last generated on Tue, 07 May 2024 11:30:30 GMT and should not be manually modified.
 
 <!-- Start content -->
@@ -5334,42 +5386,55 @@ Thu, 16 Apr 2020 23:57:38 GMT
 - publish with correct main/module references (jasonmo@microsoft.com)
 
 ## 0.14.5
+
 Thu, 09 Apr 2020 18:39:15 GMT
 
 ### Patches
 
 - merge conflicts (ppatboyd@outlook.com)
+
 ## 0.14.3
+
 Fri, 03 Apr 2020 20:40:51 GMT
 
 ### Patches
 
 - switch the bin name from just-script to fluent-scripts to disambiguate names (jasonmo@microsoft.com)
+
 ## 0.14.2
+
 Tue, 31 Mar 2020 18:01:09 GMT
 
 ### Patches
 
 - Updating Checkbox version (safreibe@microsoft.com)
+
 ## 0.14.1
+
 Mon, 30 Mar 2020 16:27:00 GMT
 
 ### Patches
 
 - Update main attribute to specify TypeScript index file. (kinhln@microsoft.com)
+
 ## 0.14.0
+
 Fri, 27 Mar 2020 04:10:56 GMT
 
 ### Minor changes
 
 - Add FluentUI callout to the package (ppatboyd@outlook.com)
+
 ## 0.13.3
+
 Wed, 18 Mar 2020 00:37:12 GMT
 
 ### Patches
 
 - 📦 Delete unnecessary stack package dependency (email not defined)
+
 ## 0.13.0
+
 Mon, 16 Mar 2020 23:03:24 GMT
 
 ### Minor changes

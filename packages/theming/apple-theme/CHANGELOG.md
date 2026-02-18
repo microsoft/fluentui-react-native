@@ -1,5 +1,47 @@
 # Change Log - @fluentui-react-native/apple-theme
 
+## 0.29.0
+
+### Minor Changes
+
+- d7adbdd: # Migration from Beachball to Changesets
+
+  This changeset represents the migration from Beachball to Changesets for version management and consolidates all changes from 440+ beachball change files that were in the `change/` directory.
+
+  All 75 affected packages receive a minor version bump to acknowledge the accumulated changes from the beachball era.
+
+  ## What Changed
+
+  Going forward, all version management uses Changesets via `yarn changeset`. The following beachball infrastructure has been removed:
+
+  - ❌ 440+ beachball change files from `change/` directory
+  - ❌ `beachball` package dependency
+  - ❌ Beachball scripts from `package.json`
+  - ❌ `beachball.config.js` configuration file
+  - ❌ Beachball publish steps from Azure Pipelines
+
+  ## New Workflow
+
+  ✅ **Create changes**: Run `yarn changeset` to document changes
+  ✅ **Version bump PRs**: Automatically created by GitHub Actions
+  ✅ **Publishing**: Handled by Azure Pipelines using `changeset publish`
+  ✅ **Validation**: CI validates changesets and blocks major version bumps
+
+  For details, see `CHANGESETS_SETUP.md` and `CONTRIBUTING.md`.
+
+### Patch Changes
+
+- d1d8c26: We were pinning @types/react and react-native-macos via resolutions. This fixes that which uncovered a bunch of type inconsistencies that needed to be addressed.
+- Updated dependencies [d7adbdd]
+- Updated dependencies [d1d8c26]
+  - @fluentui-react-native/default-theme@0.27.0
+  - @fluentui-react-native/experimental-appearance-additions@0.8.0
+  - @fluentui-react-native/framework-base@0.3.0
+  - @fluentui-react-native/theme@0.12.0
+  - @fluentui-react-native/theme-tokens@0.28.0
+  - @fluentui-react-native/theme-types@0.44.0
+  - @fluentui-react-native/theming-utils@0.27.0
+
 <!-- This log was last generated on Tue, 05 Aug 2025 18:50:43 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -100,7 +142,7 @@ Thu, 04 Jan 2024 21:06:26 GMT
 
 ### Minor changes
 
--  Remove unused colors (ruaraki@microsoft.com)
+- Remove unused colors (ruaraki@microsoft.com)
 - Bump @fluentui-react-native/default-theme to v0.25.0
 - Bump @fluentui-react-native/experimental-appearance-additions to v0.6.6
 - Bump @fluentui-react-native/theme to v0.10.5

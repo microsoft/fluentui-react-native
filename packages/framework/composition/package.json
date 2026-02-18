@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/composition",
-  "version": "0.11.12",
+  "version": "0.12.0",
   "description": "Composition factories for building HOCs",
   "keywords": [],
   "repository": {
