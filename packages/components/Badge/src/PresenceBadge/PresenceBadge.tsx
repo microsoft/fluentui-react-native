@@ -2,7 +2,8 @@
 import { View, Platform } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { extractStyle, mergeProps } from '@fluentui-react-native/framework-base';
 import { Svg, Path } from 'react-native-svg';
 
 import { stylingSettings } from './PresenceBadge.styling';
@@ -44,8 +45,8 @@ export const PresenceBadge = compose<PresenceBadgeType>({
           <Slots.svg
             viewBox={`
             0 0
-            ${hasDifferentIconsBySize ? Slots.svg({}).props.style.width : 16}
-            ${hasDifferentIconsBySize ? Slots.svg({}).props.style.height : 16}`}
+            ${hasDifferentIconsBySize ? extractStyle(Slots.svg({})).width : 16}
+            ${hasDifferentIconsBySize ? extractStyle(Slots.svg({})).height : 16}`}
             fill="none"
           >
             <Path fill="currentColor" d={path} />

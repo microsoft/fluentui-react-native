@@ -16,7 +16,7 @@ export const Shadow = phasedComponent((props: ShadowProps) => {
       return <>{children}</>;
     }
 
-    const { style: childStyle, ...restOfChildProps } = children.props;
+    const { style: childStyle, ...restOfChildProps } = children.props as { style?: ViewStyle };
 
     const shadowViewStyleProps = getStylePropsForShadowViews(childStyle, props.shadowToken);
     const innerShadowViewProps = mergeProps(restOfChildProps, shadowViewStyleProps.inner);

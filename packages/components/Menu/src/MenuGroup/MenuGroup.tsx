@@ -1,9 +1,11 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import React from 'react';
 import { Platform, View } from 'react-native';
+import type { IViewProps } from '@fluentui-react-native/adapters';
 
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { extractChildren, extractProps } from '@fluentui-react-native/framework-base';
 import type { UseSlots } from '@fluentui-react-native/framework';
 
 import type { MenuGroupProps, MenuGroupType } from './MenuGroup.types';
@@ -39,8 +41,8 @@ export const MenuGroup = compose<MenuGroupType>({
           return React.cloneElement(
             child as React.ReactElement<unknown, string | React.JSXElementConstructor<any>>,
             {
-              accessibilityPosInSet: child.props.accessibilityPosInSet ?? itemPosition, // win32
-              accessibilitySetSize: child.props.accessibilitySetSize ?? itemCount, //win32
+              accessibilityPosInSet: extractProps<IViewProps>(child)?.accessibilityPosInSet ?? itemPosition, // win32
+              accessibilitySetSize: extractProps<IViewProps>(child)?.accessibilitySetSize ?? itemCount, //win32
             } as any,
           );
         }
@@ -57,8 +59,9 @@ export const MenuGroup = compose<MenuGroupType>({
       // we use a string with a space as the default accessibilityLabel for MenuGroup.
       // If an empty string was used, the group context would not be read.
       let menuGroupA11yLabel = ' ';
-      if (menuGroupHeader && typeof (menuGroupHeader as React.ReactElement).props.children === 'string') {
-        menuGroupA11yLabel = (menuGroupHeader as React.ReactElement).props.children;
+      const menuGroupHeaderChild = extractChildren(menuGroupHeader as React.ReactElement);
+      if (menuGroupHeader && typeof menuGroupHeaderChild === 'string') {
+        menuGroupA11yLabel = menuGroupHeaderChild;
       }
 
       return (

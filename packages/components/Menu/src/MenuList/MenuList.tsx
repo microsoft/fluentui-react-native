@@ -2,9 +2,11 @@
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose } from '@fluentui-react-native/framework';
+import { extractProps } from '@fluentui-react-native/framework-base';
 
 import { stylingSettings } from './MenuList.styling';
 import type { MenuListProps, MenuListState, MenuListType } from './MenuList.types';
@@ -46,12 +48,13 @@ export const MenuList = compose<MenuListType>({
             itemPosition++;
           }
 
+          const childProps = extractProps<IViewProps>(child);
           return React.cloneElement(
             child as React.ReactElement<unknown, string | React.JSXElementConstructor<any>>,
             {
-              accessibilityPosInSet: child.props.accessibilityPosInSet ?? itemPosition, // win32
-              accessibilitySetSize: child.props.accessibilitySetSize ?? itemCount, //win32
-              ...(child.props.tooltip && { alwaysShowToolTip: true }),
+              accessibilityPosInSet: childProps?.accessibilityPosInSet ?? itemPosition, // win32
+              accessibilitySetSize: childProps?.accessibilitySetSize ?? itemCount, //win32
+              ...(childProps?.tooltip && { alwaysShowToolTip: true }),
             } as any,
           );
         }

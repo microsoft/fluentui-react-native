@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
-import type { View, AccessibilityState, LayoutRectangle } from 'react-native';
+import type { View, AccessibilityState, LayoutRectangle, LayoutChangeEvent } from 'react-native';
 import type { NativeKeyEvent } from '@fluentui-react-native/adapters';
 
 import { memoize, mergeStyles } from '@fluentui-react-native/framework';
-import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabListInfo, TabListProps } from './TabList.types';
@@ -130,7 +129,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   // TabList layout callback used to style the animated indicator.
   const onTabListLayout = React.useCallback(
-    (e: LayoutEvent) => {
+    (e: LayoutChangeEvent) => {
       if (e.nativeEvent.layout) {
         setTabListLayout(e.nativeEvent.layout);
       }

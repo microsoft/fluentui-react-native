@@ -1,4 +1,4 @@
-import type { PressabilityConfig, PressabilityEventHandlers } from './Pressability/Pressability.types';
+import type { PressabilityConfig, EventHandlers } from './usePressability';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type ObjectBase = {};
@@ -23,7 +23,7 @@ export type IPressableOptions = PressabilityConfig & {
 
 export type IWithPressableOptions<T extends ObjectBase> = T & IPressableOptions;
 
-export type IWithPressableEvents<T extends ObjectBase> = T & PressabilityEventHandlers;
+export type IWithPressableEvents<T extends ObjectBase> = T & EventHandlers;
 
 export type IPressableHooks<T extends ObjectBase> = {
   props: IWithPressableEvents<T>;

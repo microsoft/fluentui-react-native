@@ -5,6 +5,7 @@ import { ThemeContext } from '@uifabricshared/theming-ramp';
 
 import { removeThemeRegistryListener, getTheme, addThemeRegistryListener } from './Global';
 import type { ITheme } from './Theme.types';
+import type { FurnJSX } from '@fluentui-react-native/framework-base';
 
 /**
  * props for the ThemeLayer
@@ -22,7 +23,7 @@ export interface IThemeLayerProps {
    * children function that allows passing of the theme to children.  This is a standard pattern for
    * consumers.
    */
-  children: (theme: ITheme) => React.JSX.Element | null;
+  children: (theme: ITheme) => FurnJSX.Element | null;
 }
 
 /**
@@ -74,7 +75,7 @@ export class ThemeLayer extends React.Component<IThemeLayerProps> {
     }
   }
 
-  public render(): React.JSX.Element {
+  public render(): FurnJSX.Element {
     let themeName = this.props.themeName;
     return (
       <ThemeContext.Consumer>

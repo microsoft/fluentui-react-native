@@ -57,7 +57,13 @@
     "react-test-renderer": "19.1.0"
   },
   "peerDependencies": {
+    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.0",
     "react": "18.2.0 || 19.0.0 || 19.1.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
   },
   "rnx-kit": {
     "kitType": "library",

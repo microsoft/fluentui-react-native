@@ -34,14 +34,14 @@ function getMacViewMask74() {
     onPreferredScrollerStyleDidChange: true,
     tooltip: true,
     mouseDownCanMoveWindow: true,
+    tvParallaxProperties: true,
   };
 }
 
 function getMacViewMask81(): IFilterMask<ViewProps> {
   return {
     ...getMacViewMask74(),
-    mouseDownCanMoveWindow: true,
-    tvParallaxProperties: true,
+    onDoubleClick: true,
   };
 }
 
@@ -53,8 +53,7 @@ export function getViewMask(): IFilterMask<ViewProps> {
   return getMacViewMask81();
 }
 
-export function getTextMask(): IFilterMask<TextProps> {
-  // no props added in 0.81 for Text, so just return the base mask
+function getMacTextMask74() {
   return {
     ...getTextMaskBase(),
     disabled: true,
@@ -64,6 +63,13 @@ export function getTextMask(): IFilterMask<TextProps> {
     textBreakStrategy: true,
     enableFocusRing: true, // injected in 0.74 for missing types
     tooltip: true, // injected in 0.74 for missing types
+  };
+}
+
+export function getTextMask(): IFilterMask<TextProps> {
+  // no props added in 0.81 for Text, so just return the base mask
+  return {
+    ...getMacTextMask74(),
   };
 }
 
