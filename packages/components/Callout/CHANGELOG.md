@@ -1,5 +1,45 @@
 # Change Log - @fluentui-react-native/callout
 
+## 0.28.0
+
+### Minor Changes
+
+- d7adbdd: # Migration from Beachball to Changesets
+
+  This changeset represents the migration from Beachball to Changesets for version management and consolidates all changes from 440+ beachball change files that were in the `change/` directory.
+
+  All 75 affected packages receive a minor version bump to acknowledge the accumulated changes from the beachball era.
+
+  ## What Changed
+
+  Going forward, all version management uses Changesets via `yarn changeset`. The following beachball infrastructure has been removed:
+
+  - ❌ 440+ beachball change files from `change/` directory
+  - ❌ `beachball` package dependency
+  - ❌ Beachball scripts from `package.json`
+  - ❌ `beachball.config.js` configuration file
+  - ❌ Beachball publish steps from Azure Pipelines
+
+  ## New Workflow
+
+  ✅ **Create changes**: Run `yarn changeset` to document changes
+  ✅ **Version bump PRs**: Automatically created by GitHub Actions
+  ✅ **Publishing**: Handled by Azure Pipelines using `changeset publish`
+  ✅ **Validation**: CI validates changesets and blocks major version bumps
+
+  For details, see `CHANGESETS_SETUP.md` and `CONTRIBUTING.md`.
+
+### Patch Changes
+
+- d1d8c26: We were pinning @types/react and react-native-macos via resolutions. This fixes that which uncovered a bunch of type inconsistencies that needed to be addressed.
+- Updated dependencies [d7adbdd]
+- Updated dependencies [d1d8c26]
+  - @fluentui-react-native/adapters@0.14.0
+  - @fluentui-react-native/tokens@0.24.0
+  - @uifabricshared/foundation-composable@0.14.0
+  - @uifabricshared/foundation-compose@1.16.0
+  - @uifabricshared/foundation-settings@0.16.0
+
 <!-- This log was last generated on Tue, 05 Aug 2025 18:50:44 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -1604,7 +1644,7 @@ Thu, 16 Dec 2021 19:10:30 GMT
 
 - Add up/down arrow key support to macOS ContextualMenu (sanajmi@microsoft.com)
 - remove focus style overrides for macOS contextual menu items (sanajmi@microsoft.com)
-- Rename Jest snapshots to be platform agnostic  (sanajmi@microsoft.com)
+- Rename Jest snapshots to be platform agnostic (sanajmi@microsoft.com)
 - Bump @fluentui-react-native/adapters to v0.8.1
 - Bump @fluentui-react-native/interactive-hooks to v0.11.1
 - Bump @fluentui-react-native/tokens to v0.11.1
@@ -2187,7 +2227,7 @@ Fri, 24 Apr 2020 17:13:37 GMT
 
 ### Patches
 
-- Dont import * from react-native (acoates@microsoft.com)
+- Dont import \* from react-native (acoates@microsoft.com)
 
 ## 0.4.1
 
@@ -2214,24 +2254,31 @@ Thu, 16 Apr 2020 23:57:38 GMT
 - publish with correct main/module references (jasonmo@microsoft.com)
 
 ## 0.3.0
+
 Thu, 09 Apr 2020 18:39:15 GMT
 
 ### Minor changes
 
 - Add ondismiss and onshow callbacks (ppatboyd@outlook.com)
+
 ## 0.2.3
+
 Fri, 03 Apr 2020 20:40:51 GMT
 
 ### Patches
 
 - add some configuration versatility (jasonmo@microsoft.com)
+
 ## 0.2.1
+
 Mon, 30 Mar 2020 16:27:00 GMT
 
 ### Patches
 
 - Update main attribute to specify TypeScript index file. (kinhln@microsoft.com)
+
 ## 0.2.0
+
 Fri, 27 Mar 2020 04:10:56 GMT
 
 ### Minor changes

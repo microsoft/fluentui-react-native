@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/callout",
-  "version": "0.27.17",
+  "version": "0.28.0",
   "description": "A cross-platform Callout component using the Fluent Design System",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "repository": {
