@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/kit-config",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Rnx-kit configuration for Fluent UI React Native packages",
   "repository": {
     "type": "git",

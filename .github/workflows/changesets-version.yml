@@ -11,11 +11,6 @@ jobs:
     name: Create Version Bump PR
     runs-on: ubuntu-latest
 
-    # Remove this once we setup react-native-sdk[bot] with this repo
-    permissions:
-      contents: write # for GH releases and Git tags (Changesets)
-      pull-requests: write # version PRs (Changesets)
-
     if: ${{ github.repository == 'microsoft/fluentui-react-native' }}
     steps:
       - name: Checkout
@@ -31,16 +26,15 @@ jobs:
       - name: Build packages
         run: yarn buildci
 
-      # Bring this back once we setup react-native-sdk[bot] with this repo
-      # - name: Generate token for version PR
-      #   uses: actions/create-github-app-token@v2
-      #   id: app-token
-      #   with:
-      #     app-id: ${{ vars.APP_ID }}
-      #     private-key: ${{ secrets.PRIVATE_KEY }}
-      #     permissions: |
-      #       contents: write
-      #       pull-requests: write
+      - name: Generate token for version PR
+        uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permissions: |
+            contents: write
+            pull-requests: write
 
       - name: Create Version Bump PR
         id: changesets
@@ -49,6 +43,4 @@ jobs:
           version: yarn changeset:version
           createGithubReleases: false
         env:
-          # Switch token once we setup react-native-sdk[bot] with this repo
-          # GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
