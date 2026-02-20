@@ -40,9 +40,9 @@
   "dependencies": {
     "@fluentui-react-native/tester-core": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
-    "@types/react": "~19.1.0",
-    "react": "19.1.0",
-    "react-native": "^0.81.0",
+    "@types/react": "~19.1.4",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
     "react-native-svg": "^15.12.1"
   },
   "devDependencies": {
@@ -73,7 +73,7 @@
     "metro-runtime": "^0.83.1",
     "oxc-resolver": "catalog:",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^4.4.11",
+    "react-native-test-app": "catalog:",
     "react-test-renderer": "19.1.0",
     "rimraf": "catalog:"
   },
@@ -132,7 +132,6 @@
         "react",
         "react-test-renderer",
         "svg",
-        "test-app",
         "tools-core"
       ]
     },

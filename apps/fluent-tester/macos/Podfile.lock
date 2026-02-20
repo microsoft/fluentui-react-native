@@ -3,10 +3,10 @@ PODS:
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.74.37)
   - fmt (9.1.0)
-  - FRNAvatar (0.21.19):
+  - FRNAvatar (0.22.0):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNCallout (0.27.17):
+  - FRNCallout (0.28.0):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2024.01.01.00)
@@ -28,13 +28,13 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - FRNCheckbox (0.17.24):
+  - FRNCheckbox (0.18.0):
     - React
-  - FRNMenuButton (0.13.37):
+  - FRNMenuButton (0.14.0):
     - React
-  - FRNRadioButton (0.21.31):
+  - FRNRadioButton (0.22.0):
     - React
-  - FRNVibrancyView (0.3.5):
+  - FRNVibrancyView (0.4.0):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.13.1):
@@ -123,7 +123,7 @@ PODS:
     - fmt (= 9.1.0)
     - glog
   - RCTDeprecation (0.74.37)
-  - RCTFocusZone (0.21.15):
+  - RCTFocusZone (0.22.0):
     - React
   - RCTRequired (0.74.37)
   - RCTTypeSafety (0.74.37):
@@ -1245,7 +1245,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - ReactTestApp-DevSupport (3.10.22):
+  - ReactTestApp-DevSupport (5.0.14):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -1315,7 +1315,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native-macos/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native-macos/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native-macos/ReactCommon`)
-  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-5a9c0463e2/node_modules/@rnx-kit/react-native-host`)"
+  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-d9bcab9135/node_modules/@rnx-kit/react-native-host`)"
   - ReactTestApp-DevSupport (from `../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -1444,7 +1444,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native-macos/ReactCommon"
   ReactNativeHost:
-    :path: "../../../node_modules/.store/react-native-test-app-virtual-5a9c0463e2/node_modules/@rnx-kit/react-native-host"
+    :path: "../../../node_modules/.store/react-native-test-app-virtual-d9bcab9135/node_modules/@rnx-kit/react-native-host"
   ReactTestApp-DevSupport:
     :path: "../node_modules/react-native-test-app"
   ReactTestApp-Resources:
@@ -1461,17 +1461,17 @@ SPEC CHECKSUMS:
   DoubleConversion: 5b92c4507c560bb62e7aa1acdf2785ea3ff08b3b
   FBLazyVector: 5f17e32a39da9146ff32e90cff4e9ebd8b5c3b54
   fmt: 03574da4b7ba40de39da59677ca66610ce8c4a02
-  FRNAvatar: 52551ea22dbc7be5ecd21abf2baa8b2e3035fc34
-  FRNCallout: cc743e926cdb77dfbfb6af71dd955badb32fcd1a
-  FRNCheckbox: d19d484a1cfdeba6d3f4aacd6084c2ca4c48f92e
-  FRNMenuButton: c8aef02c683585a9e5a5f5cf34f70e9cf63c0b79
-  FRNRadioButton: a40075f901604d571e1ef57c6d062327430aefe2
-  FRNVibrancyView: be46aaf2b9fe6ec914ea9c55a3ff7fa7e0e7537d
+  FRNAvatar: 7e08e6efc56e08a710b17be4767ce9424b910053
+  FRNCallout: e280df9cb47fc04c09aebcecda54e1f38c22096f
+  FRNCheckbox: c760c64db87a14cc4399021b4b61223c2b54035b
+  FRNMenuButton: 543d1b189a21b9090849de2afab58287c0aa1950
+  FRNRadioButton: 171aa45930b28a67adc059dca798b8336c252c83
+  FRNVibrancyView: d49f06752b4eda77d406e85c8b298ed73401cdb1
   glog: ba31c1afa7dcf1915a109861bccdb4421be6175b
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: f47da9a444aae485a0528b3bccf0336156009d60
   RCTDeprecation: 88f29fc8fbe38e5bff2e65223eac24450ade59ab
-  RCTFocusZone: 07730c51b3fc190dba495b849c9b4d9b1919268c
+  RCTFocusZone: 15782f1ad487b40c1e4283d40ddb386550ef998d
   RCTRequired: 2736889bc024f33cd9157e06e092ee59848e7f45
   RCTTypeSafety: c6f4b53a571b819ef18b3d8c5fa7f57d588102c6
   React: 9ddfaba3bb7d30eb3c23b043443543b3b9db8b04
@@ -1517,12 +1517,12 @@ SPEC CHECKSUMS:
   React-utils: c1a7c0646cbd13a6578fdbbbfb8caca3f3d5cafe
   ReactCommon: cf91cce7c7039e8a2275be58b63d5cb594c903e2
   ReactNativeHost: 4296c5d13fdcafb9cb53f2f3b6ab5e427ab9a6dd
-  ReactTestApp-DevSupport: 52ac76197e5accf579592aa3b9aa07fd0766f211
-  ReactTestApp-Resources: 3c8739a3e3ed26f67f8ab68f13102fb9591301c8
+  ReactTestApp-DevSupport: 2faa3e49921ea7c74dff983e7b9e55b3ad02b184
+  ReactTestApp-Resources: 7625eab22d0a702577b048d60b5fb3f2e2f5b2a7
   RNSVG: d39a9be65c439dfb061955f7615f1f71a51ecede
   SocketRocket: f6c6249082c011e6de2de60ed641ef8bbe0cfac9
   Yoga: 739f555df208b5fcd997a3b63e74791e27a12f34
 
-PODFILE CHECKSUM: 0452977cf4cb4258cb5f51d6eee0f88e459b9529
+PODFILE CHECKSUM: 63f9d51eaad6340187c52d3bd391f130cd9e0f04
 
 COCOAPODS: 1.16.2

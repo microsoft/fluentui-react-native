@@ -3,15 +3,15 @@ PODS:
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.74.7)
   - fmt (9.1.0)
-  - FRNAppearanceAdditions (0.7.17):
+  - FRNAppearanceAdditions (0.8.0):
     - React
-  - FRNAvatar (0.21.19):
+  - FRNAvatar (0.22.0):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNDatePicker (0.11.5):
+  - FRNDatePicker (0.12.0):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNFontMetrics (0.6.5):
+  - FRNFontMetrics (0.7.0):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.13.1):
@@ -1312,7 +1312,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - ReactTestApp-DevSupport (3.10.22):
+  - ReactTestApp-DevSupport (5.0.14):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -1379,7 +1379,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-5a9c0463e2/node_modules/@rnx-kit/react-native-host`)"
+  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-d9bcab9135/node_modules/@rnx-kit/react-native-host`)"
   - ReactTestApp-DevSupport (from `../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -1502,7 +1502,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeHost:
-    :path: "../../../node_modules/.store/react-native-test-app-virtual-5a9c0463e2/node_modules/@rnx-kit/react-native-host"
+    :path: "../../../node_modules/.store/react-native-test-app-virtual-d9bcab9135/node_modules/@rnx-kit/react-native-host"
   ReactTestApp-DevSupport:
     :path: "../node_modules/react-native-test-app"
   ReactTestApp-Resources:
@@ -1517,10 +1517,10 @@ SPEC CHECKSUMS:
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
   FBLazyVector: 04dc972982abebd96d823752c3a426bbe6ac397f
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
-  FRNAppearanceAdditions: 55a8d815324b176b087b08143656871e9d496e07
-  FRNAvatar: 52551ea22dbc7be5ecd21abf2baa8b2e3035fc34
-  FRNDatePicker: 0537abe4066d41b3859ac5b03b0ee772ee2b554d
-  FRNFontMetrics: acecc6932292cf888fc351258e80f07718d8607f
+  FRNAppearanceAdditions: d6d2faf9f91b7294290d7394f647a64d69ee9cf9
+  FRNAvatar: 7e08e6efc56e08a710b17be4767ce9424b910053
+  FRNDatePicker: cb8e2fc0b3c2d0a4c99ace422331a52ac9cd6881
+  FRNFontMetrics: 21f6cb2fc93f569a7f19c41b455afbf5e779e8eb
   glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: 5dc73daec3476616d19e8a53f0156176f7b55461
@@ -1570,8 +1570,8 @@ SPEC CHECKSUMS:
   React-utils: 269c55ca0a0a9d985fc8ab90898f7c1124784d73
   ReactCommon: 345cad6a151c60c5d80bcc2005457fac2e079b82
   ReactNativeHost: 4296c5d13fdcafb9cb53f2f3b6ab5e427ab9a6dd
-  ReactTestApp-DevSupport: 52ac76197e5accf579592aa3b9aa07fd0766f211
-  ReactTestApp-Resources: 41fbfc3cae89be49adf9cfa9d3a9954456c65ab1
+  ReactTestApp-DevSupport: 2faa3e49921ea7c74dff983e7b9e55b3ad02b184
+  ReactTestApp-Resources: de7bab7391b329e4e22614a22a7d350b5f08939c
   RNSVG: d39a9be65c439dfb061955f7615f1f71a51ecede
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: 9db4b2da1ed5d8e0c94158f9ac379c8b1b529f59

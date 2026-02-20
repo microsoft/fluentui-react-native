@@ -99,7 +99,7 @@
     "oxc-resolver": "catalog:",
     "path-dirname": "^1.0.2",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^3.9.2",
+    "react-native-test-app": "catalog:",
     "react-test-renderer": "18.2.0",
     "webdriverio": "catalog:"
   },
@@ -176,7 +176,6 @@
         "react",
         "react-test-renderer",
         "svg",
-        "test-app",
         "tools-core"
       ]
     },

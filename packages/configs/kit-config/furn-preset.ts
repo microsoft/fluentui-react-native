@@ -1,14 +1,31 @@
 const { presets } = require('@rnx-kit/align-deps');
-import type { Preset, Package } from '@rnx-kit/align-deps';
+import type { Package as BasePackage, MetaPackage } from '@rnx-kit/align-deps';
 
-/**
- * Types to make working with align-deps presets easier
- */
+type BaseCapability = NonNullable<BasePackage['capabilities']>[number];
 
-/** Defined type for a specific version */
-type VersionPreset = Preset[string];
-/** Capability is not exported from @rnx-kit/align-deps */
-type Capability = NonNullable<Package['capabilities']>[number];
+/** Capability extended with our custom types */
+type Capability =
+  | BaseCapability
+  | 'react-types'
+  | 'core-win32'
+  | 'react-test-renderer-types'
+  | 'core-dev-only'
+  | 'core-windows-dev-only'
+  | 'tools-core'
+  | 'tools-eslint'
+  | 'tools-jest'
+  | 'tools-babel'
+  | 'babel-core'
+  | 'tools-react-configs'
+  | 'tools-jest-react';
+
+type Package = Omit<BasePackage, 'capabilities'> & {
+  capabilities?: Capability[];
+};
+
+type VersionPreset = Readonly<Record<Capability, MetaPackage | Package>>;
+type Preset = Record<string, VersionPreset>;
+
 /** Helper to remove readonly */
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 
@@ -51,6 +68,7 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
   const presetCore = rnPreset['core'] as Package;
   const presetReact = rnPreset['react'] as Package;
   const presetReactTestRenderer = rnPreset['react-test-renderer'] as Package;
+  const presetWindows = rnPreset['core-windows'] as Package;
 
   // create the new version of the preset
   const newPreset: Mutable<VersionPreset> = {
@@ -72,7 +90,7 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
     },
     'core-win32': {
       name: '@office-iss/react-native-win32',
-      version: presetCore.version,
+      version: presetWindows.version,
       capabilities: ['core'],
     },
     'tools-babel': {
@@ -119,15 +137,10 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
 
   // now add the dev capabilities and link to catalogs
   for (const cap of Object.keys(newPreset)) {
-    const pkgEntry = newPreset[cap] as Package;
+    const pkgEntry = newPreset[cap as Capability] as Package;
     if (pkgEntry) {
-      // patch metro/metro-core/etc packages to not allow progressing beyond 83.1 because
-      // of serializer incompatibility
-      if (cap.startsWith('metro') && pkgEntry.version.startsWith('^83.1')) {
-        pkgEntry.version = pkgEntry.version.replace('^83.1', '83.1');
-      }
       // add dev-only capability if this is a core capability
-      const devCap = toDevCapability(cap);
+      const devCap = toDevCapability(cap as Capability);
       if (cap !== devCap && !pkgEntry.devOnly) {
         const entryCapabilities = pkgEntry.capabilities;
         const capabilities = entryCapabilities?.map((c) => toDevCapability(c));

@@ -68,7 +68,7 @@
     "metro-config": "^0.80.3",
     "oxc-resolver": "catalog:",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^3.9.2",
+    "react-native-test-app": "catalog:",
     "react-test-renderer": "18.2.0",
     "rimraf": "catalog:"
   },
@@ -124,7 +124,6 @@
         "react",
         "react-test-renderer",
         "svg",
-        "test-app",
         "tools-core"
       ]
     },
