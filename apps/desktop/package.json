@@ -1,0 +1,148 @@
+{
+  "name": "desktop-tester",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A test app to test FluentUI React Native Components during development",
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "build-cjs": "tsgo --outDir lib-commonjs",
+    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "bundle": "rnx-cli bundle --dev false",
+    "bundle:macos": "rnx-cli bundle --dev false --platform macos",
+    "bundle:windows": "rnx-cli bundle --dev false --platform windows",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "ios": "rnx-cli run --platform ios",
+    "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
+    "macos": "rnx-cli run --platform macos",
+    "prettier": "fluentui-scripts prettier",
+    "start": "rnx-cli start",
+    "windows": "react-native run-windows --arch x64 --sln windows/DesktopTester.sln"
+  },
+  "dependencies": {
+    "@types/react": "~19.1.4",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-native-macos": "^0.81.0",
+    "react-native-svg": "^15.12.1",
+    "react-native-windows": "^0.81.0"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@babel/runtime": "catalog:",
+    "@fluentui-react-native/babel-config": "workspace:*",
+    "@fluentui-react-native/callout": "workspace:*",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*",
+    "@fluentui-react-native/experimental-avatar": "workspace:*",
+    "@fluentui-react-native/experimental-checkbox": "workspace:*",
+    "@fluentui-react-native/experimental-expander": "workspace:*",
+    "@fluentui-react-native/experimental-native-date-picker": "workspace:*",
+    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*",
+    "@fluentui-react-native/experimental-shimmer": "workspace:*",
+    "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/menu-button": "workspace:*",
+    "@fluentui-react-native/radio-group": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/tester-core": "workspace:*",
+    "@fluentui-react-native/tooltip": "workspace:*",
+    "@fluentui-react-native/vibrancy-view": "workspace:*",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-android": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
+    "@react-native-windows/cli": "^0.81.0",
+    "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-babel-transformer": "^0.81.0",
+    "@react-native/metro-config": "^0.81.0",
+    "@rnx-kit/cli": "catalog:",
+    "@rnx-kit/metro-config": "catalog:",
+    "@rnx-kit/metro-resolver-symlinks": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react-test-renderer": "^19.1.0",
+    "flow-bin": "^0.113.0",
+    "metro": "0.83.1",
+    "metro-config": "0.83.1",
+    "metro-core": "0.83.1",
+    "metro-runtime": "0.83.1",
+    "oxc-resolver": "catalog:",
+    "path-dirname": "^1.0.2",
+    "react-native-svg-transformer": "^1.0.0",
+    "react-native-test-app": "catalog:",
+    "react-test-renderer": "19.1.0"
+  },
+  "furn": {
+    "depcheck": {
+      "ignoreMatches": [
+        "@types/node",
+        "react-native-svg"
+      ]
+    }
+  },
+  "rnx-kit": {
+    "kitType": "app",
+    "bundle": [
+      {
+        "id": "main",
+        "entryFile": "index.js",
+        "assetsDest": "dist",
+        "targets": [
+          "android",
+          "ios",
+          "macos",
+          "windows"
+        ],
+        "plugins": [
+          [
+            "@rnx-kit/metro-plugin-cyclic-dependencies-detector",
+            {
+              "throwOnError": true
+            }
+          ],
+          [
+            "@rnx-kit/metro-plugin-duplicates-checker",
+            {
+              "throwOnError": false
+            }
+          ]
+        ],
+        "platforms": {
+          "macos": {
+            "bundleOutput": "dist/index.macos.jsbundle",
+            "sourcemapOutput": "dist/index.macos.jsbundle.map"
+          },
+          "windows": {
+            "bundleOutput": "dist/index.windows.bundle",
+            "sourcemapOutput": "dist/index.windows.bundle.map"
+          }
+        }
+      }
+    ],
+    "alignDeps": {
+      "requirements": {
+        "production": [
+          "react-native@0.81"
+        ]
+      },
+      "capabilities": [
+        "babel-preset-react-native",
+        "community/cli",
+        "core-android",
+        "core-ios",
+        "core-macos",
+        "core-windows",
+        "core/metro-config",
+        "metro-react-native-babel-transformer",
+        "react",
+        "react-test-renderer",
+        "svg",
+        "tools-core"
+      ]
+    },
+    "extends": "@fluentui-react-native/kit-config"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

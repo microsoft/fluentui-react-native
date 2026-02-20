@@ -1,0 +1,22 @@
+{
+  "name": "DesktopTester",
+  "displayName": "Desktop Tester",
+  "singleApp": "desktop-tester",
+  "components": [{ "appKey": "DesktopTester", "displayName": "Desktop Tester", "slug": "desktop-tester" }],
+  "macos": {
+    "icons": {
+      "primaryIcon": {
+        "filename": "assets/fluent_app_icon_macos.png",
+        "prerendered": true
+      },
+      "alternateIcon": {
+        "filename": "assets/fluent_app_icon_macos.png",
+        "prerendered": true
+      }
+    }
+  },
+  "resources": {
+    "macos": ["dist/assets", "dist/index.macos.jsbundle"],
+    "windows": ["dist/assets", "dist/index.windows.bundle"]
+  }
+}

@@ -1,0 +1,17 @@
+# (pnpm mode) allow modules to resolve correctly in upstream podfiles, comment out for node-modules mode
+ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(__dir__, '../node_modules')
+require_relative '../node_modules/react-native-test-app/macos/test_app'
+
+# ws_dir = Pathname.new(__dir__)
+# ws_dir = ws_dir.parent until
+#   File.exist?("#{ws_dir}/node_modules/react-native-test-app/macos/test_app.rb") ||
+#   ws_dir.expand_path.to_s == '/'
+# require "#{ws_dir}/node_modules/react-native-test-app/macos/test_app.rb"
+
+workspace 'DesktopTester.xcworkspace'
+
+# (pnpm mode)
+react_native_path = "#{__dir__}/../node_modules/react-native"
+
+use_test_app! :hermes_enabled => true, :fabric_enabled => false
+
