@@ -85,7 +85,7 @@
     "bundle": [
       {
         "id": "main",
-        "entryFile": "index.js",
+        "entryFile": "src/index.tsx",
         "assetsDest": "dist",
         "targets": [
           "android",

@@ -13,12 +13,12 @@
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
-      "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js"
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
     }
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
