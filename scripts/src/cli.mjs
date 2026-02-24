@@ -4,7 +4,7 @@
 import { Builtins, Cli } from 'clipanion';
 import { BuildCommand } from './tasks/build.ts';
 import { CleanCommand } from './tasks/clean.js';
-import { PrettierCommand } from './tasks/prettier.js';
+import { FormatCommand } from './tasks/format.js';
 import { LintCommand } from './tasks/eslint.js';
 import { LintPackageCommand } from './tasks/lintPackage.ts';
 import { JestCommand } from './tasks/jest.js';
@@ -19,7 +19,7 @@ const cli = new Cli({
 
 cli.register(BuildCommand);
 cli.register(CleanCommand);
-cli.register(PrettierCommand);
+cli.register(FormatCommand);
 cli.register(LintCommand);
 cli.register(LintPackageCommand);
 cli.register(JestCommand);

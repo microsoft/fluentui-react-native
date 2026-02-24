@@ -28,7 +28,7 @@
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
-    "prettier": "fluentui-scripts prettier",
+    "format": "fluentui-scripts format",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },

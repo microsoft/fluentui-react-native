@@ -62,7 +62,7 @@ yarn clean      # Clean build artifacts
 
 ### Development Commands
 ```bash
-yarn prettier-fix     # Format code with Prettier
+yarn format           # Format code with oxfmt
 yarn depcheck         # Check for unused dependencies across packages
 yarn depcheck-fix     # Fix depcheck issues automatically
 yarn align-deps       # Align React Native dependencies using @rnx-kit/align-deps
@@ -88,8 +88,8 @@ Individual packages use `fluentui-scripts` (in `/scripts/`) which provides:
   - Validates dependencies, scripts, entry points, and build configuration
 - `yarn test` - Jest tests (where applicable)
 - `yarn depcheck` - Check for unused dependencies
-- `yarn prettier` - Check code formatting
-- `yarn prettier-fix` - Fix code formatting
+- `yarn format` - Check code formatting
+- `yarn format:fix` - Fix code formatting
 
 ## TypeScript Configuration
 

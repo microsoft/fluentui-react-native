@@ -15,7 +15,7 @@
     "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
-    "prettier": "fluentui-scripts prettier",
+    "format": "fluentui-scripts format",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "repository": {

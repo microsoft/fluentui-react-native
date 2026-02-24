@@ -21,7 +21,7 @@
     "depcheck": "node ./src/cli.mjs depcheck",
     "lint": "node ./src/cli.mjs lint",
     "lint-package": "node ./src/cli.mjs lint-package",
-    "prettier": "node ./src/cli.mjs prettier"
+    "format": "node ./src/cli.mjs format"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
@@ -58,11 +58,5 @@
       "path": "../apps/test-bundles/dist/office-ui-fabric-react-Button.min.js",
       "maxSize": "50.1 kB"
     }
-  ],
-  "beachball": {
-    "shouldPublish": false,
-    "disallowedChangeTypes": [
-      "major"
-    ]
-  }
+  ]
 }

@@ -33,7 +33,7 @@
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
-    "prettier": "fluentui-scripts prettier",
+    "format": "fluentui-scripts format",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",

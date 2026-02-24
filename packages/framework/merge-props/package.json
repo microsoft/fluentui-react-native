@@ -28,7 +28,7 @@
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
-    "prettier": "fluentui-scripts prettier"
+    "format": "fluentui-scripts format"
   },
   "dependencies": {
     "@fluentui-react-native/framework-base": "workspace:*"

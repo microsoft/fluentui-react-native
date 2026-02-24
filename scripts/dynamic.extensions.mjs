@@ -37,10 +37,10 @@ function conditionallyAdd(depsToAdd, manifest, condition) {
 
 /**
  * @param {import('./src/utils/projectRoot.ts').PackageManifest} manifest - The package manifest.
- * @returns {boolean} true if prettier is already in the manifest or if a prettier script is defined
+ * @returns {boolean} true if oxfmt should be added based on the manifest's prettier scripts
  */
-function addPrettier(manifest) {
-  return Boolean(manifest && manifest.scripts && (manifest.scripts.prettier || manifest.scripts['prettier-fix']));
+function addOxfmt(manifest) {
+  return Boolean(manifest && manifest.scripts && (manifest.scripts.format || manifest.scripts['format:fix']));
 }
 
 /**
@@ -67,7 +67,7 @@ export default function ({ cwd, manifest }) {
         fs.existsSync(path.join(cwd, 'tsconfig.json')),
       ),
       ...conditionallyAdd(['eslint'], manifest, enableLinting),
-      ...conditionallyAdd(['prettier'], manifest, () => addPrettier(manifest)),
+      ...conditionallyAdd(['oxfmt'], manifest, () => addOxfmt(manifest)),
       ...conditionallyAdd(['jest', '@types/jest'], manifest, () => addJest(cwd, manifest)),
     },
   };
