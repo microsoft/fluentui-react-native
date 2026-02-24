@@ -84,7 +84,7 @@ extends:
               - script: |
                   # https://github.com/changesets/changesets/issues/432
                   # We can't use `changeset publish` because it doesn't support workspaces, so we have to publish each package individually
-                  yarn workspaces foreach --all --topological --no-private npm publish --tolerate-republish
+                  yarn workspaces foreach -vv --all --topological --no-private npm publish --tolerate-republish
                 displayName: 'Publish NPM Packages'
                 condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
 
