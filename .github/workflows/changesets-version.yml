@@ -32,9 +32,8 @@ jobs:
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-          permissions: |
-            contents: write
-            pull-requests: write
+          permission-contents: write # for GH releases and Git tags (Changesets)
+          permission-pull-requests: write # version PRs (Changesets)
 
       - name: Create Version Bump PR
         id: changesets

@@ -84,7 +84,7 @@ extends:
                   # https://github.com/changesets/changesets/issues/432
                   # We can't use `changeset publish` because it doesn't support workspaces, so we have to publish each package individually
                   yarn workspaces foreach --all --topological --no-private \
-                    exec zx $(Build.SourcesDirectory)/.github/scripts/publish-package-if-needed.mts
+                    exec node $(Build.SourcesDirectory)/.github/scripts/publish-package-if-needed.mts
                 displayName: 'Publish NPM Packages'
                 condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
 
