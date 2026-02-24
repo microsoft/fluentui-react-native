@@ -326,8 +326,7 @@ jobs:
 
       - name: Simulate publish
         run: |
-          yarn workspaces foreach --all --topological --no-private \
-            exec node $(pwd)/.github/scripts/publish-package-if-needed.mts --dry-run
+          yarn workspaces foreach --all --topological --no-private npm publish --tolerate-republish --dry-run
 
   test-links:
     name: Test repo links

@@ -75,6 +75,7 @@ extends:
                 displayName: 'yarn buildci [test]'
 
               - script: |
+                  yarn config set npmPublishAccess public
                   yarn config set npmPublishRegistry "https://registry.npmjs.org"
                   yarn config set npmAuthToken $(npmAuth)
                 displayName: 'Configure yarn for npm publishing'
@@ -83,12 +84,12 @@ extends:
               - script: |
                   # https://github.com/changesets/changesets/issues/432
                   # We can't use `changeset publish` because it doesn't support workspaces, so we have to publish each package individually
-                  yarn workspaces foreach --all --topological --no-private \
-                    exec node $(Build.SourcesDirectory)/.github/scripts/publish-package-if-needed.mts
+                  yarn workspaces foreach --all --topological --no-private npm publish --tolerate-republish
                 displayName: 'Publish NPM Packages'
                 condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
 
               - script: |
+                  yarn config unset npmPublishAccess
                   yarn config unset npmAuthToken
                   yarn config unset npmPublishRegistry
                 displayName: 'Cleanup yarn npm config'
