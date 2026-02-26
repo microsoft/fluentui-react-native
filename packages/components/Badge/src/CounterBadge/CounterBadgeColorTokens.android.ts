@@ -17,4 +17,4 @@ export const defaultCounterBadgeColorTokens: TokenSettings<CounterBadgeTokens> =
       color: t.colors.neutralForegroundLightStatic,
       borderColor: t.colors.strokeFocus1,
     },
-  } as CounterBadgeTokens);
+  }) as CounterBadgeTokens;

@@ -72,4 +72,4 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
       left: globalTokens.sizeNone,
       right: undefined,
     },
-  } as BadgeTokens);
+  }) as BadgeTokens;

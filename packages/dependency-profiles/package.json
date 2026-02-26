@@ -3,15 +3,15 @@
   "version": "0.8.69",
   "description": "@rnx-kit/align-deps profiles covering packages published from FluentUI-React-Native",
   "license": "MIT",
-  "files": [
-    "src/*"
-  ],
-  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/dependency-profiles"
   },
+  "files": [
+    "src/*"
+  ],
+  "main": "src/index.js",
   "scripts": {
     "build": "fluentui-scripts build",
     "update-profile": "node update-profile.mjs"

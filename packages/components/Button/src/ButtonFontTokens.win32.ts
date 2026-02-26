@@ -27,4 +27,4 @@ export const defaultButtonFontTokens: TokenSettings<ButtonTokens, Theme> = (t: T
         fontWeight: globalTokens.font.weight.semibold,
       },
     },
-  } as ButtonTokens);
+  }) as ButtonTokens;

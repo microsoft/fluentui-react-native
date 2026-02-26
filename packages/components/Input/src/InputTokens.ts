@@ -83,4 +83,4 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
       accessoryTextColor: t.colors.neutralForeground2,
       cursorColor: t.colors.neutralForeground3,
     },
-  } as InputTokens);
+  }) as InputTokens;

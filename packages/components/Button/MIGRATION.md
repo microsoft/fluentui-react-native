@@ -5,15 +5,15 @@
 In the short term, the new `Button` control is named `ButtonV1` while it clashes with the existing older control. Once we deprecate the old control, it will be renamed to `Button`. It may be useful to rename the control to `Button` using the import syntax to simplify the rename:
 
 ```ts
-import { ButtonV1 as Button } from '@fluentui-react-native/button'
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 ```
 
 ### Component renames
 
 Primary and Stealth buttons now map to `Button`:
 
-| v0 `Button`                             | v1 `Button`                                          |
-| --------------------------------------- | ---------------------------------------------------- |
+| v0 `Button`                                | v1 `Button`                                          |
+| ------------------------------------------ | ---------------------------------------------------- |
 | `<Button content="Hello, world" />`        | `<Button>Hello, world</Button>`                      |
 | `<PrimaryButton content="Hello, world" />` | `<Button appearance='primary'>Hello, world</Button>` |
 | `<StealthButton content="Hello, world" />` | `<Button appearance='subtle'>Hello, world</Button>`  |
@@ -77,7 +77,7 @@ const Custom = StealthButton.customize({
     borderWidth: 0,
     color: 'white',
     backgroundColor: 'red',
-  }
+  },
 });
 ```
 
@@ -89,14 +89,13 @@ const Custom = Button.customize({
     borderWidth: 0,
     color: 'white',
     backgroundColor: 'red',
-  }
+  },
 });
 ```
 
 ### Migrating composed Buttons
 
 Please see [this page](../../../docs/pages/Guides/UpdatingCustomize.md) for guidance on how to move from the old `customize` API to the new one.
-
 
 ## Porting from FluentUI v9 Button
 

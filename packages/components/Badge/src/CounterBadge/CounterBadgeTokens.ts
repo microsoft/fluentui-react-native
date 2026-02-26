@@ -13,4 +13,4 @@ export const counterBadgeTokens: TokenSettings<CounterBadgeTokens> = () =>
       borderWidth: 0,
       borderRadius: globalTokens.corner.radiusCircular,
     },
-  } as CounterBadgeTokens);
+  }) as CounterBadgeTokens;

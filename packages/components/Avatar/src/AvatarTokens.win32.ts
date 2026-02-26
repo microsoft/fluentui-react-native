@@ -167,7 +167,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     burgundy: getColorProps('burgundy', t),
     hotPink: getColorProps('hotPink', t),
     orchid: getColorProps('orchid', t),
-  } as AvatarTokens);
+  }) as AvatarTokens;
 
 /**
  * A function which returns object of props depending on color and theme.

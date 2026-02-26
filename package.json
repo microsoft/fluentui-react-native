@@ -1,16 +1,18 @@
 {
-  "private": true,
   "name": "@fluentui-react-native/root",
   "version": "0.0.0-dev",
+  "private": true,
   "license": "MIT",
   "author": "Jason Morse <jasonmo@microsoft.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git"
   },
-  "resolutions": {
-    "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
-  },
+  "workspaces": [
+    "apps/*",
+    "packages/**",
+    "scripts"
+  ],
   "scripts": {
     "build": "lage build-dual",
     "buildci": "lage buildci",
@@ -54,16 +56,14 @@
     "typescript": "^5.8.0",
     "zx": "^8.2.4"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/**",
-    "scripts"
-  ],
+  "resolutions": {
+    "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
+  },
   "engines": {
     "node": ">=22.12"
   },
+  "packageManager": "yarn@4.11.0",
   "rnx-kit": {
     "kitType": "library"
-  },
-  "packageManager": "yarn@4.11.0"
+  }
 }

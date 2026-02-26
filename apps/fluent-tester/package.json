@@ -3,13 +3,16 @@
   "version": "0.170.50",
   "description": "A test app to test FluentUI React Native Components during development",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/fluent-tester"
   },
-  "license": "MIT",
-  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -17,9 +20,6 @@
       "require": "./lib-commonjs/index.js"
     }
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
   "scripts": {
     "android": "rnx-cli run --platform android",
     "build": "fluentui-scripts build",
@@ -39,9 +39,6 @@
     "format": "fluentui-scripts format",
     "start": "rnx-cli start",
     "windows": "react-native run-windows --arch x64 --sln windows/FluentTester.sln"
-  },
-  "jest": {
-    "preset": "react-native"
   },
   "dependencies": {
     "@types/node": "catalog:",
@@ -102,6 +99,9 @@
     "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
     "webdriverio": "catalog:"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "furn": {
     "depcheck": {

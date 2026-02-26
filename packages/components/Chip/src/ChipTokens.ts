@@ -42,4 +42,4 @@ export const defaultChipTokens: TokenSettings<ChipTokens, Theme> = () =>
       left: globalTokens.sizeNone,
       right: undefined,
     },
-  } as ChipTokens);
+  }) as ChipTokens;

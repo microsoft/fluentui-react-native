@@ -9,17 +9,19 @@ The old customize API takes in an argument of type `Partial<IComposeOptions<ITPr
 Here is an example:
 
 ```jsx
-  const CustomText = Text.customize({ tokens: { fontSize: 'header', color: 'hotpink' }});
-  const ComposedButton = Button.compose({
-    slots: {
-      content: CustomText,
-    },
-    settings: [{
+const CustomText = Text.customize({ tokens: { fontSize: 'header', color: 'hotpink' } });
+const ComposedButton = Button.compose({
+  slots: {
+    content: CustomText,
+  },
+  settings: [
+    {
       content: {
         style: { marginTop: -1, marginBottom: 1, marginStart: 0, marginEnd: -2 },
       },
-    }],
-  });
+    },
+  ],
+});
 ```
 
 ## New compose
@@ -29,21 +31,20 @@ The new customize API takes in an argument of type `Partial<ComposeFactoryOption
 Here is an example of a more common use case:
 
 ```jsx
-  const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
-  const ComposedButton = Button.compose({
-    slots: {
-      root: View,
-      icon: Icon,
-      content: CustomText,
+const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
+const ComposedButton = Button.compose({
+  slots: {
+    root: View,
+    icon: Icon,
+    content: CustomText,
+  },
+  slotProps: {
+    content: {
+      // Only overrides the style prop of the content slot - other props and slots are left alone
+      style: { marginTop: -1, marginBottom: 1, marginStart: 0, marginEnd: -2 },
     },
-    slotProps: {
-      content: {
-        // Only overrides the style prop of the content slot - other props and slots are left alone
-        style: { marginTop: -1, marginBottom: 1, marginStart: 0, marginEnd: -2 },
-      },
-    },
-  });
-
+  },
+});
 ```
 
 ## Moving from old to new

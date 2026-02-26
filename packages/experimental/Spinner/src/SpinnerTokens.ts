@@ -47,4 +47,4 @@ export const defaultSpinnerTokens: TokenSettings<SpinnerTokens, Theme> = (t: The
       height: diameterSizeMap['x-large'],
     },
     trackColor: t.colors.brandStroke2,
-  } as SpinnerTokens);
+  }) as SpinnerTokens;

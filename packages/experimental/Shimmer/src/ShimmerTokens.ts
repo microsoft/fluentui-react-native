@@ -15,4 +15,4 @@ export const defaultShimmerTokens: TokenSettings<ShimmerTokens, Theme> = (theme:
     shimmerColorOpacity: 1,
     shimmerWaveColor: getCurrentAppearance(theme.host.appearance, 'light') === 'light' ? 'white' : 'black',
     shimmerWaveColorOpacity: 1,
-  } as ShimmerTokens);
+  }) as ShimmerTokens;

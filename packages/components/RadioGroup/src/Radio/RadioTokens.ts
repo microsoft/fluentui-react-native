@@ -95,4 +95,4 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
         radioFill: t.colors.neutralForegroundDisabled,
       },
     },
-  } as RadioTokens);
+  }) as RadioTokens;

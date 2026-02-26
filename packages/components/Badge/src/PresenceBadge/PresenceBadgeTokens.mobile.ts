@@ -77,4 +77,4 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
         iconColor: t.colors.neutralForeground3,
       },
     },
-  } as PresenceBadgeTokens);
+  }) as PresenceBadgeTokens;

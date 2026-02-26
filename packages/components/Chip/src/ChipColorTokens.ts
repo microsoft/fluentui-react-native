@@ -79,4 +79,4 @@ export const defaultChipColorTokens: TokenSettings<ChipTokens> = (t: Theme) =>
         },
       },
     },
-  } as ChipTokens);
+  }) as ChipTokens;

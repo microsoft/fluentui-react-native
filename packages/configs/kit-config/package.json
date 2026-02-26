@@ -1,8 +1,9 @@
 {
   "name": "@fluentui-react-native/kit-config",
-  "private": true,
   "version": "0.1.2",
+  "private": true,
   "description": "Rnx-kit configuration for Fluent UI React Native packages",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
@@ -14,7 +15,6 @@
     "./furn-preset.ts": "./furn-preset.ts",
     "./rnx-kit.config.cjs": "./rnx-kit.config.cjs"
   },
-  "license": "MIT",
   "scripts": {
     "build": "tsgo",
     "build-cjs": "tsgo",
