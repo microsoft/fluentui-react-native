@@ -5074,6 +5074,7 @@ __metadata:
     react-native: "npm:^0.74.0"
     typescript: "npm:^5.8.0"
     workspace-tools: "npm:^0.26.3"
+    zx: "npm:^8.2.4"
   bin:
     fluentui-scripts: ./src/cli.mjs
   languageName: unknown
