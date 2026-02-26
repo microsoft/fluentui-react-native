@@ -14,12 +14,14 @@
     ".": {
       "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js"
+      "require": "./lib-commonjs/index.js",
+      "default": "./src/index.ts"
     },
     "./jsx-runtime": {
       "types": "./lib/jsx-runtime.d.ts",
       "import": "./lib/jsx-runtime.js",
-      "require": "./lib-commonjs/jsx-runtime.js"
+      "require": "./lib-commonjs/jsx-runtime.js",
+      "default": "./src/jsx-runtime.ts"
     }
   },
   "main": "lib-commonjs/index.js",

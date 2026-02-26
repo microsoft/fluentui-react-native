@@ -14,7 +14,8 @@
     ".": {
       "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js"
+      "require": "./lib-commonjs/index.js",
+      "default": "./src/index.ts"
     }
   },
   "main": "lib-commonjs/index.js",
