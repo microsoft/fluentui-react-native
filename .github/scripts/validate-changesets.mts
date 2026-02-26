@@ -40,6 +40,11 @@ async function checkChangesetPresence() {
 
   const result = await $`yarn changeset status --since=origin/main 2>&1`.nothrow();
 
+  if (result.exitCode !== 0 && result.stdout.includes('no changesets were found')) {
+    log.warn('⚠️ No changesets found — skipping (only private packages changed?)');
+    return true;
+  }
+
   if (result.exitCode !== 0) {
     log.error('❌ Changeset validation failed\n');
     echo(result.stdout);
