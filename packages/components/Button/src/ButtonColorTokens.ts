@@ -85,4 +85,4 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         icon: t.colors.ghostFocusedIcon,
       },
     },
-  } as ButtonTokens);
+  }) as ButtonTokens;

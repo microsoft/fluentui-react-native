@@ -71,7 +71,7 @@ async function checkForMajorBumps() {
   const bumpsData: ChangesetStatusOutput = JSON.parse(fs.readFileSync('bumps.json', 'utf-8'));
   fs.unlinkSync('bumps.json');
 
-  const majorBumps = bumpsData.releases.filter(release => release.type === 'major');
+  const majorBumps = bumpsData.releases.filter((release) => release.type === 'major');
 
   if (majorBumps.length > 0) {
     log.error('❌ Major version bumps detected!\n');

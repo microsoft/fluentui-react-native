@@ -289,8 +289,11 @@ export class LintPackageCommand extends Command {
     this.warnIf(scripts['just'] !== undefined, 'just script is deprecated, can invoke by calling yarn fluentui-scripts instead', () => {
       this.projRoot.updateRecordEntry('scripts', 'just', undefined);
     });
-    this.warnIf(scripts['prettier-fix'] !== undefined, 'prettier-fix script is deprecated, use prettier --fix instead', () => {
+    this.warnIf(scripts['prettier-fix'] !== undefined, 'prettier-fix script is deprecated, rename to format:fix', () => {
       this.projRoot.updateRecordEntry('scripts', 'prettier-fix', undefined);
+    });
+    this.warnIf(scripts['prettier'] !== undefined, 'prettier script is deprecated, rename to format', () => {
+      this.projRoot.updateRecordEntry('scripts', 'prettier', undefined);
     });
   }
 

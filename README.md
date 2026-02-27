@@ -120,14 +120,9 @@ After a successful yarn build, you can explore FluentUI Tester, our demo applica
 
 Note: If your repo is located on either your Desktop or Documents folder, you may encounter the error: "Watchman error... Operation not permitted". Clone it in a different directory to avoid Watchman permission issues.
 
-### Prettier
+### Formatting
 
-This repo is set up to run [Prettier](https://prettier.io/). To run Prettier in fix mode on the repo, run `yarn prettier-fix` at the root of the Repo.
-
-If you are using [Visual Studio Code as your editor, you can configure it to run Prettier on save. Prettier is a recommended extension for the repo. You can configure it to run by:
-
-1. Installing the Prettier extension for VSCode
-2. Going to Settings > Text Editor > Formatting > Check Format On Save
+This repo is set up to run [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html). To run oxfmt in fix mode on the repo, run `yarn format:fix` at the root of the Repo.
 
 ## Contributing
 

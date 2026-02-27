@@ -2,12 +2,19 @@
   "name": "@fluentui-react-native/e2e-testing",
   "version": "1.43.11",
   "description": "Package containing E2E testing specs",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/E2E"
   },
-  "license": "MIT",
+  "files": [
+    "src/**/*",
+    "dist/*"
+  ],
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -16,13 +23,6 @@
       "default": "./src/index.ts"
     }
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "files": [
-    "src/**/*",
-    "dist/*"
-  ],
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
@@ -81,9 +81,6 @@
     "ts-node": "^10.7.0",
     "webdriverio": "catalog:"
   },
-  "installConfig": {
-    "hoistingLimits": "dependencies"
-  },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.0",
@@ -105,6 +102,9 @@
     "react-native-windows": {
       "optional": true
     }
+  },
+  "installConfig": {
+    "hoistingLimits": "dependencies"
   },
   "rnx-kit": {
     "kitType": "library",

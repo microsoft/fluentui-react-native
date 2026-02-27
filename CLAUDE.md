@@ -9,6 +9,7 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
 ## Repository Architecture
 
 ### High-Level Structure
+
 ```
 /apps/           - Demo and test applications
   /fluent-tester/ - Main test app for component development
@@ -51,6 +52,7 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
 The project uses **Yarn 4** (Berry) in **pnpm mode** with **Lage** as the task runner for orchestrating builds across the monorepo. The pnpm mode provides better disk space efficiency and stricter dependency management.
 
 ### Primary Commands
+
 ```bash
 yarn build      # TypeScript build for all packages (outputs to lib/ and lib-commonjs/)
 yarn test       # Build, lint, and run tests across all packages
@@ -61,8 +63,9 @@ yarn clean      # Clean build artifacts
 ```
 
 ### Development Commands
+
 ```bash
-yarn prettier-fix     # Format code with Prettier
+yarn format           # Format code with oxfmt
 yarn depcheck         # Check for unused dependencies across packages
 yarn depcheck-fix     # Fix depcheck issues automatically
 yarn align-deps       # Align React Native dependencies using @rnx-kit/align-deps
@@ -70,14 +73,18 @@ yarn changeset        # Generate changeset files (required before PR merge)
 ```
 
 ### Lage Configuration
+
 The build pipeline is defined in `lage.config.js`:
+
 - Tasks have dependency ordering (e.g., `test` depends on `build`)
 - Lage uses caching to avoid redundant steps
 - Add `--no-cache` to bypass caching
 - Add `--verbose` for detailed output
 
 ### Package-Level Commands
+
 Individual packages use `fluentui-scripts` (in `/scripts/`) which provides:
+
 - `yarn build` - TypeScript compilation to `lib/` (ESM) and `lib-commonjs/` (CJS)
   - The build script automatically sets `--moduleResolution` to match `--module` for TypeScript 5.8+ compatibility
   - ESM builds use `--module esnext --moduleResolution bundler`
@@ -88,14 +95,15 @@ Individual packages use `fluentui-scripts` (in `/scripts/`) which provides:
   - Validates dependencies, scripts, entry points, and build configuration
 - `yarn test` - Jest tests (where applicable)
 - `yarn depcheck` - Check for unused dependencies
-- `yarn prettier` - Check code formatting
-- `yarn prettier-fix` - Fix code formatting
+- `yarn format` - Check code formatting
+- `yarn format:fix` - Fix code formatting
 
 ## TypeScript Configuration
 
 The repository uses **TypeScript 5.8+** with **@typescript/native-preview** for improved performance and React Native compatibility. The native preview is automatically added to packages with a `tsconfig.json` via dynamic package extensions.
 
 ### Key TypeScript Settings
+
 - Base configuration in `/scripts/configs/tsconfig.json`
 - Module system: `node16` with matching `moduleResolution: node16`
 - Target: `es2022`
@@ -103,13 +111,16 @@ The repository uses **TypeScript 5.8+** with **@typescript/native-preview** for 
 - **TypeScript Native Preview**: Packages automatically receive `@typescript/native-preview` as a development dependency
 
 ### TypeScript 5.8+ Compatibility Notes
+
 - The `suppressImplicitAnyIndexErrors` option has been removed (deprecated in TS 5.8+)
 - Module resolution must match module format when using Node16 resolution
 - Stricter type checking for platform values (e.g., `Platform.OS` doesn't include 'win32' in React Native types, but react-native-windows does support it at runtime)
 - TypeScript native preview provides better performance for large React Native codebases
 
 ### Framework Type System
+
 The composition framework uses precise types for better type safety:
+
 - **`SlotFn<TProps>`**: Slot functions return `React.ReactElement | null` (not `ReactNode`)
   - This reflects the actual behavior: slots always return elements via staged render or `React.createElement`
   - Provides better type inference when accessing slot props (e.g., `Slots.root({}).props`)
@@ -120,6 +131,7 @@ The composition framework uses precise types for better type safety:
 ## Development Workflow
 
 ### Setting Up Development Environment
+
 1. Clone repository
 2. Run `yarn` to install dependencies
 3. Run `yarn build` to build all packages
@@ -130,6 +142,7 @@ The composition framework uses precise types for better type safety:
 **Component Location**: Components are in `/packages/components/` (stable) or `/packages/experimental/` (under development).
 
 **Component Structure**: Each component typically has:
+
 - `package.json` - Package definition with workspace dependencies
 - `src/index.ts` - Main export file
 - `src/<Component>.tsx` - Component implementation (requires `/** @jsxImportSource @fluentui-react-native/framework-base */` pragma)
@@ -143,6 +156,7 @@ The composition framework uses precise types for better type safety:
 **Using Composition Framework**: Use `@fluentui-react-native/composition` for new components. For simpler components without slots/tokens, use the `stagedComponent` pattern from `@fluentui-react-native/use-slot`.
 
 **JSX Runtime**: All components use the modern automatic JSX runtime:
+
 - Add `/** @jsxImportSource @fluentui-react-native/framework-base */` at the top of `.tsx` files
 - The custom jsx-runtime intercepts JSX calls to optimize slot rendering
 - No need to import `withSlots` - it's handled automatically by the runtime
@@ -150,11 +164,13 @@ The composition framework uses precise types for better type safety:
 - Packages using the jsx-runtime need `@fluentui-react-native/framework-base` in `devDependencies`
 
 **TypeScript Patterns**:
+
 - Slot functions automatically return `React.ReactElement`, so you can access `.props` directly without type assertions
 - When checking for win32 platform: `Platform.OS === ('win32' as any)` - TypeScript doesn't recognize 'win32' but react-native-windows supports it
 - Final render functions should return `FinalRender<TProps>` with children as rest parameters: `(props: TProps, ...children: React.ReactNode[])`
 
 **Native Modules**: Components with native code (iOS/Android/Windows):
+
 - Typically have one root slot wrapping the native component
 - Use `codegenNativeComponent` for new architecture compatibility
 - May use `constantsToExport` for default values from native side
@@ -176,6 +192,7 @@ The composition framework uses precise types for better type safety:
 ### Theming
 
 Platform-specific themes are in `/packages/theming/`:
+
 - `android-theme/` - Android theming
 - `apple-theme/` - iOS and macOS theming
 - `win32-theme/` - Win32 theming
@@ -190,6 +207,7 @@ Components require `ThemeProvider` from `@fluentui-react-native/theme` to work p
 **Manual Testing**: Use FluentUI Tester app (`/apps/fluent-tester/`) for interactive component testing. Test pages are in `/apps/fluent-tester/src/TestComponents/`.
 
 **E2E Testing**: Required for all new components. Uses Appium + WebDriverIO.
+
 - E2E tests live in `/apps/E2E/src/<ComponentName>/`
 - Each component needs:
   - Page Object (`<Component>PageObject.<platform>.ts`) - Interface to interact with test page
@@ -205,25 +223,30 @@ Components require `ThemeProvider` from `@fluentui-react-native/theme` to work p
 ### Platform-Specific Development
 
 **iOS/macOS**:
+
 - May wrap native controls from FluentUI Apple
 - Requires `.podspec` files for native modules
 - Run `pod install` after adding dependencies
 
 **Android**:
+
 - Platform-specific styling and tokens
 - Uses `accessibilityLabel` for E2E selectors (other platforms use `testID`)
 
 **Win32**:
+
 - Separate test app at `/apps/win32/`
 - Uses WinAppDriver for E2E testing
 
 **Windows (UWP)**:
+
 - Separate test app configuration
 - Legacy support
 
 ## Version Management
 
 **Changesets**: Used for change logs and versioning.
+
 - Run `yarn changeset` to create changeset files when modifying packages
 - Changesets are required before merging PRs (validated in CI)
 - Changesets config in `.changeset/config.json`

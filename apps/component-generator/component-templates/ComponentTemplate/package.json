@@ -1,11 +1,18 @@
 {
   "name": "@fluentui-react-native/component-name",
   "version": "0.1.0",
+  "private": true,
   "description": "add component-description",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/components/ComponentTemplate"
+  },
   "main": "src/index.ts",
   "module": "src/index.ts",
   "types": "lib/index.d.ts",
-  "private": true,
   "scripts": {
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",
@@ -15,13 +22,8 @@
     "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
-    "prettier": "fluentui-scripts prettier",
+    "format": "fluentui-scripts format",
     "prettier-fix": "fluentui-scripts prettier --fix true"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/components/ComponentTemplate"
   },
   "dependencies": {},
   "devDependencies": {
@@ -29,8 +31,8 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/test-tools": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/test-tools": "workspace:*",
     "react": "18.2.0",
     "react-native": "^0.71.0"
   },
@@ -48,7 +50,5 @@
         "tools-babel"
       ]
     }
-  },
-  "author": "",
-  "license": "MIT"
+  }
 }

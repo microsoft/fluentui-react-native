@@ -6,16 +6,16 @@
  * @typedef {{ cwd: string; manifest: Manifest["raw"]; }} Workspace;
  */
 
-const DYNAMIC_PACKAGE_EXTENSIONS_KEY = "dynamicPackageExtensions";
+const DYNAMIC_PACKAGE_EXTENSIONS_KEY = 'dynamicPackageExtensions';
 
 // This module *must* be CommonJS because `actions/setup-node` (and probably
 // other GitHub actions) does not support ESM. Yarn itself does.
-exports.name = "@rnx-kit/yarn-plugin-dynamic-extensions";
+exports.name = '@rnx-kit/yarn-plugin-dynamic-extensions';
 
 /** @type {(require: NodeJS.Require) => Plugin<Hooks>} */
 exports.factory = (require) => {
-  const { Project, SettingsType, structUtils } = require("@yarnpkg/core");
-  const { npath } = require("@yarnpkg/fslib");
+  const { Project, SettingsType, structUtils } = require('@yarnpkg/core');
+  const { npath } = require('@yarnpkg/fslib');
 
   /**
    * @param {Configuration} configuration
@@ -24,12 +24,12 @@ exports.factory = (require) => {
    */
   async function loadUserExtensions(configuration, projectRoot) {
     const packageExtensions = configuration.get(DYNAMIC_PACKAGE_EXTENSIONS_KEY);
-    if (typeof packageExtensions !== "string") {
+    if (typeof packageExtensions !== 'string') {
       return;
     }
 
-    const path = require("node:path");
-    const { pathToFileURL } = require("node:url");
+    const path = require('node:path');
+    const { pathToFileURL } = require('node:url');
 
     // Make sure we resolve user extensions relative to the source config
     const source = configuration.sources.get(DYNAMIC_PACKAGE_EXTENSIONS_KEY);
@@ -45,26 +45,20 @@ exports.factory = (require) => {
   /** @type {Plugin<Hooks>["configuration"] & Record<string, unknown>} */
   const configuration = {};
   configuration[DYNAMIC_PACKAGE_EXTENSIONS_KEY] = {
-    description: "Path to module providing package extensions",
+    description: 'Path to module providing package extensions',
     type: SettingsType.STRING,
   };
 
   return {
     configuration,
     hooks: {
-      registerPackageExtensions: async (
-        configuration,
-        registerPackageExtension
-      ) => {
+      registerPackageExtensions: async (configuration, registerPackageExtension) => {
         const { projectCwd } = configuration;
         if (!projectCwd) {
           return;
         }
 
-        const getUserExtensions = await loadUserExtensions(
-          configuration,
-          projectCwd
-        );
+        const getUserExtensions = await loadUserExtensions(configuration, projectCwd);
         if (!getUserExtensions) {
           return;
         }

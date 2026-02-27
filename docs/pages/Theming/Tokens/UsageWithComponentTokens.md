@@ -16,7 +16,7 @@ import { Text } from '@fluentui-react-native/experimental-text';
 export const tokens: TokenSettings<TTokens, Theme> = (t: Theme) =>
   ({
     color: t.colors.neutralStrokeAccessible,
-  } as TTokens);
+  }) as TTokens;
 
 export const Foo = compose<FooType>({
   displayName: fooName,

@@ -85,4 +85,4 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     square: {
       borderRadius: globalTokens.corner.radiusNone,
     },
-  } as ButtonTokens);
+  }) as ButtonTokens;

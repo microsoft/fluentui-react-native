@@ -59,7 +59,7 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
       iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color.grey38,
     },
     outOfOffice: getBadgeColor('berry', t),
-  } as PresenceBadgeTokens);
+  }) as PresenceBadgeTokens;
 
 function getBadgeColor(color: string, t: Theme) {
   return {

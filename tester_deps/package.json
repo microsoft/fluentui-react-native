@@ -1,16 +1,16 @@
 {
   "name": "furn-tester-deps",
   "version": "1.0.0",
+  "private": true,
   "description": "This package contains all dependencies needed to run FURNs automated testing framework. This includes WebDriverIO + Appium dependencies.",
   "license": "MIT",
-  "private": true,
-  "scripts": {
-    "build": "fluentui-scripts build"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "tester_deps"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build"
   },
   "devDependencies": {
     "@types/jasmine": "5.1.4",
@@ -36,6 +36,7 @@
     "xml2js": "^0.5.0",
     "yaml": "^2.2.2"
   },
+  "packageManager": "yarn@4.11.0",
   "resolutions.justifications": {
     "@appium/support/glob": "Patching security issue",
     "axios": "Patching security issue",
@@ -44,6 +45,5 @@
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/parse-glob/glob-base/glob-parent": "There is a security risk associated with this package version (it's a very outdated packaged, 2.0.0). Therefore, we are forcing an upgrade to the patched version.",
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/braces": " There is a security risk associated with this package version (it's a very outdated packaged, 1.8.2). Therefore, we are forcing an upgrade to the patched version.",
     "ws": "Patching security issue"
-  },
-  "packageManager": "yarn@4.11.0"
+  }
 }

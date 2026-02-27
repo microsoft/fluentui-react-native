@@ -7,4 +7,4 @@ import type { SeparatorTokens } from './Separator.types';
 export const defaultSeparatorTokens: TokenSettings<SeparatorTokens, Theme> = () =>
   ({
     separatorWidth: globalTokens.stroke.width10,
-  } as SeparatorTokens);
+  }) as SeparatorTokens;
