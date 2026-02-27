@@ -311,6 +311,10 @@ export class LintPackageCommand extends Command {
   }
 
   private validateExportsGroup(manifest: PackageManifest, groupName: string, isDefault: boolean, buildConfig: ResolvedBuildConfig) {
+    const noExportsRequired = Boolean(manifest.private || buildConfig.typescript.checkScript);
+    this.errorIf(!manifest.exports && !noExportsRequired, 'Missing exports field for package with no build script', () => {
+      this.projRoot.setManifestEntry('exports', {});
+    });
     const exports = manifest.exports;
     if (!exports) {
       return;
@@ -355,6 +359,14 @@ export class LintPackageCommand extends Command {
       if (updated.default && keys[keys.length - 1] !== 'default') {
         errors.push(`'default' entry should be last in exports for ${groupName}`);
       }
+      if (updated.import) {
+        const importInSrc = updated.import.startsWith('./src');
+        const defaultExport = importInSrc ? updated.import : updated.import.replace(esmDir, 'src').replace(/\.js$/, '.ts');
+        if (!updated.default || updated.default !== defaultExport) {
+          errors.push(`'default' entry in exports does not match the expected default export`);
+          updated.default = defaultExport;
+        }
+      }
       this.errorIf(errors.length > 0, errors.join('\n'), () => {
         const { types, import: imp, require: req, default: def, ...rest } = updated;
         // restructure the group to have types, <custom>, import, require, default in order
@@ -398,11 +410,12 @@ export class LintPackageCommand extends Command {
   }
 
   private checkBuildConfig(buildConfig: ResolvedBuildConfig) {
-    const { cjsScript, esmScript } = buildConfig.typescript;
-    const hasBuilds = Boolean(cjsScript || esmScript);
+    const { cjsScript, esmScript, checkScript } = buildConfig.typescript;
+    const hasJsBuilds = Boolean(cjsScript || esmScript);
+    const hasBuilds = hasJsBuilds || Boolean(checkScript);
     const scripts = this.projRoot.manifest.scripts || {};
 
-    const buildScriptText = this.getFluentScriptsText('build');
+    const buildScriptText = hasJsBuilds ? this.getFluentScriptsText('build') : checkScript;
     this.errorIf(hasBuilds && scripts.build !== buildScriptText, 'Missing or incorrect build script', () => {
       this.projRoot.updateRecordEntry('scripts', 'build', buildScriptText);
     });
@@ -415,13 +428,14 @@ export class LintPackageCommand extends Command {
         this.projRoot.updateRecordEntry('scripts', 'build-cjs', undefined);
       });
     }
-    if (esmScript) {
-      this.errorIf(scripts['build-esm'] !== esmScript, 'Missing or incorrect build-esm script', () => {
-        this.projRoot.updateRecordEntry('scripts', 'build-esm', esmScript);
+    const coreScript = esmScript || checkScript;
+    if (esmScript || checkScript) {
+      this.errorIf(scripts['build-core'] !== coreScript, 'Missing or incorrect build-core script', () => {
+        this.projRoot.updateRecordEntry('scripts', 'build-core', coreScript);
       });
     } else {
-      this.errorIf(scripts['build-esm'] !== undefined, 'Extraneous build-esm script', () => {
-        this.projRoot.updateRecordEntry('scripts', 'build-esm', undefined);
+      this.errorIf(scripts['build-core'] !== undefined, 'Extraneous build-core script', () => {
+        this.projRoot.updateRecordEntry('scripts', 'build-core', undefined);
       });
     }
   }

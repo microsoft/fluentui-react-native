@@ -2,21 +2,24 @@ module.exports = {
   npmClient: 'yarn',
   pipeline: {
     'build-cjs': {
-      dependsOn: ['^build-cjs'],
+      // cjs builds need to wait for the esm builds to produce the type definitions
+      dependsOn: ['^build-core', '^build-cjs'],
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib-commonjs/**/*'],
     },
-    'build-esm': {
-      dependsOn: ['^build-esm'],
+    'build-core': {
+      // the core build does esm builds (which produce type definitions used by both cjs and esm builds)
+      // this also handles noEmit packages which should be run in sequence with other packages
+      dependsOn: ['^build-core'],
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*'],
     },
-    'build-dual': {
-      dependsOn: ['build-cjs', 'build-esm'],
+    'build-all': {
+      dependsOn: ['build-core', 'build-cjs'],
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*', 'lib-commonjs/**/*'],
     },
-    buildci: ['build-dual', 'test', 'lint', 'lint-package', 'check-publishing'],
+    buildci: ['build-all', 'test', 'lint', 'lint-package', 'check-publishing'],
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: ['dist/**/*'],
@@ -36,10 +39,10 @@ module.exports = {
       inputs: ['*', 'src/**/*'],
       outputs: [],
     },
-    ['pr-check']: ['build-dual', 'test', 'lint', 'check-publishing', 'align-deps', 'lint-package', 'lint-lockfile', 'prettier'],
+    ['pr-check']: ['build-all', 'test', 'lint', 'check-publishing', 'align-deps', 'lint-package', 'lint-lockfile', 'prettier'],
     ['prettier-fix']: [],
     test: {
-      dependsOn: ['build-dual'],
+      dependsOn: ['build-all'],
       inputs: [],
       outputs: [],
     },

@@ -12,7 +12,8 @@
     ".": {
       "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js"
+      "require": "./lib-commonjs/index.js",
+      "default": "./src/index.ts"
     }
   },
   "main": "lib-commonjs/index.js",
@@ -25,7 +26,7 @@
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
-    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "e2eprep:android": "cross-env APPIUM_HOME=.appium yarn exec appium driver install uiautomator2",
     "e2eprep:ios": "cross-env APPIUM_HOME=.appium yarn exec appium driver install xcuitest",
     "e2eprep:macos": "cross-env APPIUM_HOME=.appium yarn exec appium driver install mac2",

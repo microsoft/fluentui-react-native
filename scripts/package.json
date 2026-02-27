@@ -14,9 +14,8 @@
     "fluentui-scripts": "./src/cli.mjs"
   },
   "scripts": {
-    "build": "node ./src/cli.mjs build",
-    "build-cjs": "tsgo",
-    "build-esm": "tsgo",
+    "build": "tsgo",
+    "build-core": "tsgo",
     "bundlesize": "bundlesize --debug",
     "depcheck": "node ./src/cli.mjs depcheck",
     "lint": "node ./src/cli.mjs lint",

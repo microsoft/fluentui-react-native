@@ -12,7 +12,7 @@
     "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
   },
   "scripts": {
-    "build": "lage build-dual",
+    "build": "lage build-all",
     "buildci": "lage buildci",
     "clean-all": "node ./scripts/src/preinstall/clean-all.js",
     "docs": "yarn workspace fluent-rn-website start",

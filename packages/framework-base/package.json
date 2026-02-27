@@ -14,12 +14,14 @@
     ".": {
       "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js"
+      "require": "./lib-commonjs/index.js",
+      "default": "./src/index.ts"
     },
     "./jsx-runtime": {
       "types": "./lib/jsx-runtime.d.ts",
       "import": "./lib/jsx-runtime.js",
-      "require": "./lib-commonjs/jsx-runtime.js"
+      "require": "./lib-commonjs/jsx-runtime.js",
+      "default": "./src/jsx-runtime.ts"
     }
   },
   "main": "lib-commonjs/index.js",
@@ -28,7 +30,7 @@
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
-    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
