@@ -50,7 +50,7 @@
     "cross-env": "catalog:",
     "eslint": "^9.39.2",
     "eslint-plugin-import": "^2.32.0",
-    "lage": "^2.0.0",
+    "lage": "^2.14.19",
     "markdown-link-check": "^3.8.7",
     "oxfmt": "^0.35.0",
     "typescript": "^5.8.0",
