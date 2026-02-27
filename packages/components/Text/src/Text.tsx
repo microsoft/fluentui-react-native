@@ -50,13 +50,13 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     ? align === 'start'
       ? 'right'
       : align === 'end'
-      ? 'left'
-      : align
+        ? 'left'
+        : align
     : align === 'start'
-    ? 'left'
-    : align === 'end'
-    ? 'right'
-    : align;
+      ? 'left'
+      : align === 'end'
+        ? 'right'
+        : align;
 
   const textOnPress = React.useCallback(
     (e) => {

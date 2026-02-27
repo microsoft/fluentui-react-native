@@ -7,9 +7,7 @@ Building cross platform JS experiences within Office and other SDX Host apps usi
 1. [Choosing a Component Builder Framework](#choosing-a-component-builder-framework)
    - [Compose vs Composable](#compose-vs-composable)
 2. [Building a Component](#building-a-component)
-
    - [Using the Compose Framework](#using-the-compose-framework)
-
      - [Types](#types)
      - [Settings](#settings)
      - [Putting it all together](#putting-it-all-together)
@@ -225,7 +223,6 @@ Every component should have one (or more) snapshot tests to ensure that the data
   ```
 
 - Create a test that renders your component. Consider adding a snapshot(s) that exercise:
-
   - Default rendering behavior
   - Any interesting variants (e.g. horizonal vs. vertical separators, primary buttons)
   - All props

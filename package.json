@@ -1,16 +1,18 @@
 {
-  "private": true,
   "name": "@fluentui-react-native/root",
   "version": "0.0.0-dev",
+  "private": true,
   "license": "MIT",
   "author": "Jason Morse <jasonmo@microsoft.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git"
   },
-  "resolutions": {
-    "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
-  },
+  "workspaces": [
+    "apps/*",
+    "packages/**",
+    "scripts"
+  ],
   "scripts": {
     "build": "lage build-dual",
     "buildci": "lage buildci",
@@ -28,8 +30,8 @@
     "lint-package-fix": "cross-env FURN_FIX_MODE=true lage lint-package",
     "pr-check": "lage pr-check",
     "preinstall": "node ./scripts/src/preinstall/use-yarn-please.js",
-    "prettier": "lage prettier",
-    "prettier-fix": "cross-env FURN_FIX_MODE=true lage prettier",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "test": "lage test",
     "test-links": "markdown-link-check"
   },
@@ -50,20 +52,18 @@
     "eslint-plugin-import": "^2.32.0",
     "lage": "^2.0.0",
     "markdown-link-check": "^3.8.7",
-    "prettier": "^2.4.1",
+    "oxfmt": "^0.35.0",
     "typescript": "^5.8.0",
     "zx": "^8.2.4"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/**",
-    "scripts"
-  ],
+  "resolutions": {
+    "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
+  },
   "engines": {
     "node": ">=22.12"
   },
+  "packageManager": "yarn@4.11.0",
   "rnx-kit": {
     "kitType": "library"
-  },
-  "packageManager": "yarn@4.11.0"
+  }
 }

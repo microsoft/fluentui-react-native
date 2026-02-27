@@ -15,4 +15,4 @@ export const badgeFontTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) =>
     extraLarge: {
       fontSize: globalTokens.font.size200,
     },
-  } as BadgeTokens);
+  }) as BadgeTokens;

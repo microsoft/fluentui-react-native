@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('lage').ConfigOptions} */
+const config = {
   npmClient: 'yarn',
   pipeline: {
     'build-cjs': {
@@ -16,7 +17,7 @@ module.exports = {
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*', 'lib-commonjs/**/*'],
     },
-    buildci: ['build-dual', 'test', 'lint', 'lint-package', 'check-publishing'],
+    buildci: ['build-dual', 'test', 'lint', 'lint-package'],
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: ['dist/**/*'],
@@ -32,12 +33,11 @@ module.exports = {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: [],
     },
-    prettier: {
+    format: {
       inputs: ['*', 'src/**/*'],
       outputs: [],
     },
-    ['pr-check']: ['build-dual', 'test', 'lint', 'check-publishing', 'align-deps', 'lint-package', 'lint-lockfile', 'prettier'],
-    ['prettier-fix']: [],
+    'pr-check': ['buildci', 'lint-package', 'lint-lockfile', 'format:check'],
     test: {
       dependsOn: ['build-dual'],
       inputs: [],
@@ -45,3 +45,5 @@ module.exports = {
     },
   },
 };
+
+module.exports = config;

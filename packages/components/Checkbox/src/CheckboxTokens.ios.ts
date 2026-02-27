@@ -42,4 +42,4 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
         checkboxBackgroundColor: t.colors.brandBackgroundDisabled,
       },
     },
-  } as CheckboxTokens);
+  }) as CheckboxTokens;

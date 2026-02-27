@@ -12,4 +12,4 @@ export const badgeFontTokens: TokenSettings<BadgeTokens, Theme> = () =>
     extraLarge: {
       variant: 'secondaryStandard',
     },
-  } as BadgeTokens);
+  }) as BadgeTokens;

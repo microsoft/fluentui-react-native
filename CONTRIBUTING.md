@@ -47,7 +47,6 @@ This section covers creating and adding a new component package to FluentUI Reac
 Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](./packages/framework-base/src/component-patterns/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
 
 1. Create a new directory in of these two locations, depending on your component:
-
    - `fluentui-react-native/packages/components/<new-component>`
    - `fluentui-react-native/packages/experimental/<new-component>`
 
@@ -62,7 +61,6 @@ Reach out to Samuel Freiberg with any questions related to E2E testing.
 ### Adding the JS source code to your component
 
 1. Create a `src/` subdirectory in your component directory with a minimum of two files (listed below). You may optionally choose to subdivide your code however you wish; there are plenty of examples in the other components of FluentUI React Native.
-
    1. `index.ts`
       - This is the file listed as `main` inside your package.json and simply exports other files.
    1. `<new-component>.tsx` - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens. - Note that we need the comment `/** @jsxRuntime classic */
@@ -187,7 +185,6 @@ To add a native module that wraps a FluentUI Android control:
 2. Inside the new directory you just created, add the following files. In all of the newly created files, add your package name at the top of the file: package com.microsoft.fnandroid.(new-component)
 
    a. **(new-component)ViewManager.kt**: This Kotlin file imports FluentUI Android, and creates a subclass of RCTViewManager to instantiate and return your FluentUI Android control.
-
    - Implement the createViewInstance method
 
    - Expose view property setters using @ReactProp (or @ReactPropGroup) It's important to note that in order for properties and methods to be available to React Native, they must add the @ReactMethod decorator to it's declaration.
@@ -195,7 +192,6 @@ To add a native module that wraps a FluentUI Android control:
    b. **(new-component)Module.kt**: This file will contain your native module class. Your module class will extend the ReactContextBaseJavaModule
 
    c. **(new-component)Package.kt**
-
    - Add the ViewManager in createViewManagers of the applications package
    - Add the Module in createNativeModules of the applications package
 
@@ -204,13 +200,11 @@ To add a native module that wraps a FluentUI Android control:
 4. Autolink Native Module
 
    a. Gradle Build Init plugin
-
    - Run gradle init inside android directory
    - Select type of project to generate: Basic
    - Select build script DSL: Groovy
 
    b. Include dependencies for android build environment
-
    - Edit the generated build.gradle file
    - Add dependencies for kotlin, maven, react-native, etc
    - Add dependency for FluentUIAndroid

@@ -5,7 +5,7 @@ import { URL, fileURLToPath } from 'node:url';
 import semverCoerce from 'semver/functions/coerce.js';
 import { getAllPackageJsonFiles } from 'workspace-tools';
 
-const OUTPUT_FILE = fileURLToPath(new URL("src/index.js", import.meta.url));
+const OUTPUT_FILE = fileURLToPath(new URL('src/index.js', import.meta.url));
 
 const CAPABILITY_MAP = {
   // empty for now
@@ -54,8 +54,8 @@ const { major, minor } = semverCoerce(devDependencies['react-native']) ?? {};
 // the current react-native version in index.js to a new file under src named
 // "furn-profile-X.Y.js" and add that profile here. For example:
 const profiles = { [`${major}.${minor}`]: packages };
-for (const filename of fs.readdirSync("./src").sort().reverse()) {
-  if (!filename.startsWith("furn-profile-")) {
+for (const filename of fs.readdirSync('./src').sort().reverse()) {
+  if (!filename.startsWith('furn-profile-')) {
     continue;
   }
 

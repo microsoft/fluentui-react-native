@@ -81,11 +81,11 @@ It is allowed to have a null or undefined theme, if that happens the stylesheet 
 const getThemedStyles = themedStyleSheet((t: ITheme) => {
   return {
     style1: {
-      backgroundColor: (t && t.palette.buttonBackground) || 'gray'
+      backgroundColor: (t && t.palette.buttonBackground) || 'gray',
     },
     style2: {
-      backgroundColor: (t && t.palette.windowBackground) || 'white'
-    }
+      backgroundColor: (t && t.palette.windowBackground) || 'white',
+    },
   };
 });
 ```

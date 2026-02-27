@@ -418,8 +418,10 @@ export interface MenuItemCheckboxProps extends MenuItemProps {
 #### MenuItemCheckbox Tokens
 
 ```ts
-export interface MenuItemCheckboxTokens
-  extends Omit<MenuItemTokens, 'submenuIndicatorPadding' | 'submenuIndicatorSize' | 'disabled' | 'focused' | 'hovered' | 'pressed'> {
+export interface MenuItemCheckboxTokens extends Omit<
+  MenuItemTokens,
+  'submenuIndicatorPadding' | 'submenuIndicatorSize' | 'disabled' | 'focused' | 'hovered' | 'pressed'
+> {
   /**
    * Color of the checkmark icon
    */
@@ -530,8 +532,10 @@ export interface MenuItemRadioProps extends MenuItemProps {
 #### MenuItemRadio Tokens
 
 ```ts
-export interface MenuItemRadioTokens
-  extends Omit<MenuItemTokens, 'submenuIndicatorPadding' | 'submenuIndicatorSize' | 'disabled' | 'focused' | 'hovered' | 'pressed'> {
+export interface MenuItemRadioTokens extends Omit<
+  MenuItemTokens,
+  'submenuIndicatorPadding' | 'submenuIndicatorSize' | 'disabled' | 'focused' | 'hovered' | 'pressed'
+> {
   /**
    * Color of the checkmark icon
    */

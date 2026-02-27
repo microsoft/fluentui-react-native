@@ -12,4 +12,4 @@ export const chipFontTokens: TokenSettings<ChipTokens, Theme> = () =>
     extraLarge: {
       variant: 'secondaryStandard',
     },
-  } as ChipTokens);
+  }) as ChipTokens;

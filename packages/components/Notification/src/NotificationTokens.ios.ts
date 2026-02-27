@@ -88,4 +88,4 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       color: t.colors.warningForeground1,
       pressedColor: notificationColors.warningPressed,
     },
-  } as NotificationTokens);
+  }) as NotificationTokens;

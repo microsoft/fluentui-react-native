@@ -8,11 +8,11 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "scripts"
   },
-  "type": "module",
-  "main": "./src/index.js",
   "bin": {
     "fluentui-scripts": "./src/cli.mjs"
   },
+  "type": "module",
+  "main": "./src/index.js",
   "scripts": {
     "build": "node ./src/cli.mjs build",
     "build-cjs": "tsgo",
@@ -21,7 +21,7 @@
     "depcheck": "node ./src/cli.mjs depcheck",
     "lint": "node ./src/cli.mjs lint",
     "lint-package": "node ./src/cli.mjs lint-package",
-    "prettier": "node ./src/cli.mjs prettier"
+    "format": "node ./src/cli.mjs format"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
@@ -50,19 +50,13 @@
     "typescript": "^5.8.0",
     "workspace-tools": "^0.26.3"
   },
-  "furn": {
-    "packageType": "tooling"
-  },
   "bundlesize": [
     {
       "path": "../apps/test-bundles/dist/office-ui-fabric-react-Button.min.js",
       "maxSize": "50.1 kB"
     }
   ],
-  "beachball": {
-    "shouldPublish": false,
-    "disallowedChangeTypes": [
-      "major"
-    ]
+  "furn": {
+    "packageType": "tooling"
   }
 }

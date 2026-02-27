@@ -27,7 +27,7 @@ export const Shimmer = compose<ShimmerType>({
     const memoizedShimmerData = useMemo(
       () => ({
         angle: props.angle ? props.angle : tokens['angle'],
-        backgroundColor: props?.style?.['backgroundColor'] ? props?.style['backgroundColor'] : tokens['backgroundColor'] ?? 'transparent',
+        backgroundColor: props?.style?.['backgroundColor'] ? props?.style['backgroundColor'] : (tokens['backgroundColor'] ?? 'transparent'),
         containerBorderRadius: props?.style?.['borderRadius'] ? props?.style['borderRadius'] : 0,
         containerWidth: props?.style?.['width'] ? props?.style['width'] : '100%',
         containerHeight: props?.style?.['height'] ? props?.style['height'] : '100%',

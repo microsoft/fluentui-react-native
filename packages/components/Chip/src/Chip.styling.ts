@@ -70,10 +70,10 @@ export function getChipPosition(tokens: ChipTokens) {
           left: tokens.left,
         }
       : tokens.right !== undefined
-      ? {
-          right: tokens.right,
-        }
-      : {};
+        ? {
+            right: tokens.right,
+          }
+        : {};
 
   return {
     ...verticalPosition,

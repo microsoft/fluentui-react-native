@@ -284,13 +284,11 @@ When an E2E test run fails within our CI, crucial information is output to Azure
 2. Click on the "# published" section. ![E2E_Debugging_Step_2](../../assets/E2E/E2E_Debugging_Step_2.png)
 
 3. Here, you have crucial information to help you debug the problem.
-
    - The bottom files (green) are screenshots of the failing tests. The first one from the top (in this case, Svg-Test-Page), is the test failing the whole run. This is the one you're focus should be on.
 
    - The middle file (pink) is the Appium output file. This contains more in-depth information on each test, including possible failures with WebDriverIO or the driver being used.
 
    - The top folder (blue) is the Allure reporter output. In order to generate the report, you must:
-
      1. Download the folder and unzip it
 
      2. Navigate to it's location within your cmd, and type:
