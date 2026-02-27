@@ -76,4 +76,4 @@ export const defaultFABTokens: TokenSettings<FABTokens, Theme> = (t: Theme) =>
         spacingIconContentBefore: globalTokens.size80,
       },
     },
-  } as FABTokens);
+  }) as FABTokens;

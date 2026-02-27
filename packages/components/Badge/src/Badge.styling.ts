@@ -87,20 +87,20 @@ export function getBadgePosition(tokens: BadgeCoreTokens) {
           top: tokens.top,
         }
       : tokens.bottom !== undefined
-      ? {
-          bottom: tokens.bottom,
-        }
-      : {};
+        ? {
+            bottom: tokens.bottom,
+          }
+        : {};
   const horizontalPosition =
     tokens.left !== undefined
       ? {
           left: tokens.left,
         }
       : tokens.right !== undefined
-      ? {
-          right: tokens.right,
-        }
-      : {};
+        ? {
+            right: tokens.right,
+          }
+        : {};
 
   return {
     ...verticalPosition,

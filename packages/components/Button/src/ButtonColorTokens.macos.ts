@@ -107,4 +107,4 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         iconColor: t.colors.brandForeground1,
       },
     },
-  } as ButtonTokens);
+  }) as ButtonTokens;

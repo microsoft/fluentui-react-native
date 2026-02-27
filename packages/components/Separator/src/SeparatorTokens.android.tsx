@@ -9,4 +9,4 @@ export const defaultSeparatorTokens: TokenSettings<SeparatorTokens, Theme> = (t:
     color: t.colors.neutralStroke2,
     separatorWidth: globalTokens.stroke.width10,
     insetSpacing: 0,
-  } as SeparatorTokens);
+  }) as SeparatorTokens;

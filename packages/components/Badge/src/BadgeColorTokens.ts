@@ -294,4 +294,4 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
     },
-  } as BadgeTokens);
+  }) as BadgeTokens;

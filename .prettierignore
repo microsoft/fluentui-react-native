@@ -1,2 +1,0 @@
-#Ignore transforms test output files
-**/__testfixtures__/*.output.tsx

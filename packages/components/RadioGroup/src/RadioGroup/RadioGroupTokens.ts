@@ -17,4 +17,4 @@ export const defaultRadioGroupTokens: TokenSettings<RadioGroupTokens, Theme> = (
     isHorizontal: {
       flexDirection: 'row',
     },
-  } as RadioGroupTokens);
+  }) as RadioGroupTokens;

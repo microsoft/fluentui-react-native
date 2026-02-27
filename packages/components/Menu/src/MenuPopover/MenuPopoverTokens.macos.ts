@@ -12,8 +12,8 @@ export const useMenuPopoverTokens = buildUseTokens<MenuPopoverTokens>(
     borderColor: isHighContrast()
       ? t.colors.neutralStroke1
       : getCurrentAppearance(t.host.appearance, 'light') === 'dark'
-      ? t.colors.neutralStroke3
-      : t.colors.transparentStroke,
+        ? t.colors.neutralStroke3
+        : t.colors.transparentStroke,
   }),
   menuPopoverName,
 );

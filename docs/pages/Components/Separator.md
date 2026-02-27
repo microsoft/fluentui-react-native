@@ -1,6 +1,7 @@
 # Separator
 
 ## Horizontal Example
+
 ```
 import { ISeparator, Separator, Stack, Text } from '@fluentui/react-native';
 
@@ -23,6 +24,7 @@ import { ISeparator, Separator, Stack, Text } from '@fluentui/react-native';
 ```
 
 ## Vertical Example
+
 ```
 import { ISeparator, Separator, Stack } from '@fluentui/react-native';
 

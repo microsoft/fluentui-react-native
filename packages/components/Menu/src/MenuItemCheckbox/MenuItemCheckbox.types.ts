@@ -11,8 +11,10 @@ import type { MenuItemProps, MenuItemTokens } from '../MenuItem/MenuItem.types';
 
 export const menuItemCheckboxName = 'MenuItemCheckbox';
 
-export interface MenuItemCheckboxTokens
-  extends Omit<MenuItemTokens, 'submenuIndicatorPadding' | 'submenuIndicatorSize' | 'disabled' | 'focused' | 'hovered' | 'pressed'> {
+export interface MenuItemCheckboxTokens extends Omit<
+  MenuItemTokens,
+  'submenuIndicatorPadding' | 'submenuIndicatorSize' | 'disabled' | 'focused' | 'hovered' | 'pressed'
+> {
   /**
    * Color of the checkmark icon
    */

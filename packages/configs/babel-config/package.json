@@ -1,8 +1,9 @@
 {
   "name": "@fluentui-react-native/babel-config",
-  "private": true,
   "version": "0.1.1",
+  "private": true,
   "description": "Babel configuration for Fluent UI React Native packages built for React Native 0.74",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
@@ -13,7 +14,6 @@
     ".": "./babel.config.js",
     "./babel.config.js": "./babel.config.js"
   },
-  "license": "MIT",
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "catalog:",
     "@babel/plugin-transform-react-jsx-source": "catalog:",

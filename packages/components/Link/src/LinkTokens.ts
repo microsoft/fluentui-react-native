@@ -61,4 +61,4 @@ export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
         borderColor: t.colors.strokeFocus2,
       },
     },
-  } as LinkTokens);
+  }) as LinkTokens;

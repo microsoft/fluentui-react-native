@@ -18,4 +18,4 @@ export const defaultButtonFontTokens: TokenSettings<ButtonTokens, Theme> = (_t: 
     large: {
       variant: 'subheaderSemibold',
     },
-  } as ButtonTokens);
+  }) as ButtonTokens;

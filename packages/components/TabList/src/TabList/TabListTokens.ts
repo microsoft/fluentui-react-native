@@ -9,4 +9,4 @@ export const defaultTabListTokens: TokenSettings<TabListTokens, Theme> = () =>
     vertical: {
       direction: 'column',
     },
-  } as TabListTokens);
+  }) as TabListTokens;

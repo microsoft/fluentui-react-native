@@ -20,4 +20,4 @@ export const defaultButtonFontTokens: TokenSettings<ButtonTokens, Theme> = (t: T
       fontFamily: t.typography.variants.body1Strong.face,
       fontWeight: t.typography.variants.body1Strong.weight,
     },
-  } as ButtonTokens);
+  }) as ButtonTokens;

@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 140,
+  "singleQuote": true,
+  "ignorePatterns": [
+    ".yarnrc.yml",
+    ".changesets/*.md",
+    "**/__fixtures__/**",
+    "**/__testfixtures__/**",
+    "**/lib-commonjs/**",
+    "**/dist/**",
+    "**/CHANGELOG.*",
+    "**/CODE_OF_CONDUCT.md",
+    "**/SECURITY.md"
+  ]
+}

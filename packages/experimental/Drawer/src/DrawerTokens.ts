@@ -37,4 +37,4 @@ export const defaultDrawerTokens: TokenSettings<DrawerTokens, Theme> = (t: Theme
       drawerCornerRadius: globalTokens.corner.radius120,
       height: '50%',
     },
-  } as DrawerTokens);
+  }) as DrawerTokens;

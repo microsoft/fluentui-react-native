@@ -163,4 +163,4 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
       borderRadius: globalTokens.corner.radiusNone,
       borderInnerRadius: globalTokens.corner.radiusNone,
     },
-  } as ButtonTokens);
+  }) as ButtonTokens;

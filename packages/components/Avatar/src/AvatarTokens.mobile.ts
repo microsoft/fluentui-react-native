@@ -160,7 +160,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     mink: getColorProps('mink', t),
     platinum: getColorProps('platinum', t),
     anchor: getColorProps('anchor', t),
-  } as AvatarTokens);
+  }) as AvatarTokens;
 
 /**
  * A function which returns object of props depending on color and theme.

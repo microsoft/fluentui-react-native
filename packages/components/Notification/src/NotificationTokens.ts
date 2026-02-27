@@ -70,4 +70,4 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       color: '#4C4400', // PaletteYellowForeground1
       pressedColor: '#4C440033', // opacity: 0.2
     },
-  } as NotificationTokens);
+  }) as NotificationTokens;

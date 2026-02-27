@@ -90,4 +90,4 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       borderRadius: globalTokens.corner.radiusCircular,
       checkboxBorderRadius: globalTokens.corner.radiusCircular,
     },
-  } as CheckboxTokens);
+  }) as CheckboxTokens;

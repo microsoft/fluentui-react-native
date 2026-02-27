@@ -22,4 +22,4 @@ export const defaultComponentNameTokens: TokenSettings<ComponentNameTokens, Them
       borderRadius: 6,
       padding: 30,
     },
-  } as ComponentNameTokens);
+  }) as ComponentNameTokens;

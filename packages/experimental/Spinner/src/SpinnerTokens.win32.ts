@@ -79,4 +79,4 @@ export const defaultSpinnerTokens: TokenSettings<SpinnerTokens, Theme> = (t: The
       tailColor: t.colors.neutralStroke2,
       trackColor: t.colors.neutralBackgroundInverted,
     },
-  } as SpinnerTokens);
+  }) as SpinnerTokens;

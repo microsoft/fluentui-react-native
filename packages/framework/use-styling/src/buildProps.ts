@@ -57,8 +57,8 @@ function refineKeys<TTokens>(keys: (keyof TTokens)[], mask?: TokensThatAreAlsoPr
   return typeof mask === 'object' && Array.isArray(mask)
     ? keys.filter((key) => mask.findIndex((val) => val === key) !== -1)
     : mask
-    ? keys
-    : [];
+      ? keys
+      : [];
 }
 
 /**

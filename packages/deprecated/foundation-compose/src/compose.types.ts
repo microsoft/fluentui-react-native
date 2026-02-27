@@ -97,8 +97,8 @@ export interface IComposeOptions<
   TTokens extends object = object,
   TState extends object = object,
   TStatics extends object = object,
-> extends IComposableDefinition<TProps, TSlotProps, TState>,
-    IStylingSettings<TSlotProps, TTokens> {
+>
+  extends IComposableDefinition<TProps, TSlotProps, TState>, IStylingSettings<TSlotProps, TTokens> {
   /**
    * Add an additional option to use styling to allow for injecting override lookup functions
    */
