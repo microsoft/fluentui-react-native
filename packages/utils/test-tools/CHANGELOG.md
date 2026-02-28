@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/test-tools
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/theme-types@0.44.1
+
 This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->

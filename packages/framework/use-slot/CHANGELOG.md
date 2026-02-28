@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/use-slot
 
+## 0.7.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/framework-base@0.3.1
+
 ## 0.7.0
 
 ### Minor Changes

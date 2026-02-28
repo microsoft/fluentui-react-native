@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/babel-config",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "Babel configuration for Fluent UI React Native packages built for React Native 0.74",
   "license": "MIT",

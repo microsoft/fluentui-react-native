@@ -1,5 +1,30 @@
 # Change Log - @fluentui/react-native
 
+## 0.43.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/contextual-menu@0.25.1
+  - @fluentui-react-native/focus-trap-zone@0.13.1
+  - @fluentui-react-native/interactive-hooks@0.28.1
+  - @fluentui-react-native/persona-coin@0.16.1
+  - @fluentui-react-native/menu-button@0.14.1
+  - @fluentui-react-native/radio-group@0.22.1
+  - @fluentui-react-native/focus-zone@0.22.1
+  - @fluentui-react-native/pressable@0.13.1
+  - @fluentui-react-native/separator@0.19.1
+  - @fluentui-react-native/checkbox@0.24.1
+  - @fluentui-react-native/callout@0.28.1
+  - @fluentui-react-native/persona@0.17.1
+  - @fluentui-react-native/tablist@0.8.1
+  - @fluentui-react-native/button@0.40.1
+  - @fluentui-react-native/link@0.24.1
+  - @fluentui-react-native/text@0.25.1
+
 ## 0.43.0
 
 ### Minor Changes
