@@ -44,7 +44,7 @@ const data: ChangesetStatusOutput = fs.readJsonSync(STATUS_FILE);
 fs.removeSync(tmpDir);
 
 // Fail: major version bumps
-const majorBumps = data.releases.filter(release => release.type === 'major');
+const majorBumps = data.releases.filter((release) => release.type === 'major');
 if (majorBumps.length > 0) {
   log.error('❌ Major version bumps detected!\n');
   for (const release of majorBumps) {
@@ -62,6 +62,6 @@ if (majorBumps.length > 0) {
 if (data.releases.length === 0) {
   log.info('ℹ️ No public packages changed — no changeset required');
 } else {
-  log.success(`✅ Changesets found (${data.releases.map(r => r.name).join(', ')})`);
+  log.success(`✅ Changesets found (${data.releases.map((r) => r.name).join(', ')})`);
 }
 log.success('\nAll validations passed! ✅\n');
