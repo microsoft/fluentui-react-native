@@ -14,7 +14,6 @@
 '@fluentui-react-native/contextual-menu': patch
 '@uifabricshared/theme-registry': patch
 '@fluentui-react-native/vibrancy-view': patch
-'@fluentui-react-native/immutable-merge': patch
 '@fluentui-react-native/focus-trap-zone': patch
 '@fluentui-react-native/notification': patch
 '@uifabricshared/theming-ramp': patch
@@ -28,7 +27,6 @@
 '@fluentui-react-native/experimental-expander': patch
 '@fluentui-react-native/overflow': patch
 '@fluentui-react-native/composition': patch
-'@fluentui-react-native/merge-props': patch
 '@fluentui-react-native/use-styling': patch
 '@fluentui-react-native/android-theme': patch
 '@fluentui-react-native/default-theme': patch
@@ -40,7 +38,6 @@
 '@fluentui-react-native/experimental-shimmer': patch
 '@fluentui-react-native/spinner': patch
 '@fluentui-react-native/tooltip': patch
-'@fluentui-react-native/memo-cache': patch
 '@fluentui-react-native/use-tokens': patch
 '@fluentui-react-native/theme-tokens': patch
 '@fluentui-react-native/checkbox': patch

@@ -3330,13 +3330,10 @@ __metadata:
     "@fluentui-react-native/focus-zone": "npm:*"
     "@fluentui-react-native/framework": "npm:*"
     "@fluentui-react-native/icon": "npm:*"
-    "@fluentui-react-native/immutable-merge": "npm:*"
     "@fluentui-react-native/interactive-hooks": "npm:*"
     "@fluentui-react-native/link": "npm:*"
-    "@fluentui-react-native/memo-cache": "npm:*"
     "@fluentui-react-native/menu": "npm:*"
     "@fluentui-react-native/menu-button": "npm:*"
-    "@fluentui-react-native/merge-props": "npm:*"
     "@fluentui-react-native/notification": "npm:*"
     "@fluentui-react-native/overflow": "npm:*"
     "@fluentui-react-native/persona": "npm:*"
@@ -4307,28 +4304,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/immutable-merge@npm:*, @fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge"
-  dependencies:
-    "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/kit-config": "workspace:*"
-    "@fluentui-react-native/scripts": "workspace:*"
-    "@types/node": "catalog:"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-  peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    react:
-      optional: true
-  languageName: unknown
-  linkType: soft
-
 "@fluentui-react-native/input@workspace:*, @fluentui-react-native/input@workspace:packages/components/Input":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/input@workspace:packages/components/Input"
@@ -4510,29 +4485,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/memo-cache@npm:*, @fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache"
-  dependencies:
-    "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/kit-config": "workspace:*"
-    "@fluentui-react-native/scripts": "workspace:*"
-    "@types/node": "catalog:"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    tslib: "npm:^2.3.1"
-  peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    react:
-      optional: true
-  languageName: unknown
-  linkType: soft
-
 "@fluentui-react-native/menu-button@npm:*, @fluentui-react-native/menu-button@workspace:*, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu-button@workspace:packages/components/MenuButton"
@@ -4640,27 +4592,6 @@ __metadata:
     react-native-macos:
       optional: true
     react-native-windows:
-      optional: true
-  languageName: unknown
-  linkType: soft
-
-"@fluentui-react-native/merge-props@npm:*, @fluentui-react-native/merge-props@workspace:packages/framework/merge-props":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/merge-props@workspace:packages/framework/merge-props"
-  dependencies:
-    "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/kit-config": "workspace:*"
-    "@fluentui-react-native/scripts": "workspace:*"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-  peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    react:
       optional: true
   languageName: unknown
   linkType: soft
