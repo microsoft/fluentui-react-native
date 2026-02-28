@@ -128,7 +128,7 @@ type DirectionalHint =
   | 'rightTopEdge'
   | 'rightCenter'
   | 'rightBottomEdge'
-  | 'bottonLeftEdge'
+  | 'bottomLeftEdge'
   | 'bottomAutoEdge'
   | 'bottomCenter'
   | 'bottomRightEdge';
