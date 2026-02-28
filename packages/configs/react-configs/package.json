@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/react-configs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "Babel and Jest configurations for pure React testing",
   "license": "MIT",

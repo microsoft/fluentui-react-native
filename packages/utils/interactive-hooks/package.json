@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/interactive-hooks",
-  "version": "0.28.0",
+  "version": "0.28.1",
   "description": "Hooks for adding focus, hover, and press semantics to view based components",
   "license": "MIT",
   "author": "",

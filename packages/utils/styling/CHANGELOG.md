@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/styling-utils
 
+## 0.8.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+
 ## 0.8.0
 
 ### Minor Changes
