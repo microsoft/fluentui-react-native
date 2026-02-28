@@ -14,7 +14,7 @@
     "scripts"
   ],
   "scripts": {
-    "build": "lage build-dual",
+    "build": "lage build-all",
     "buildci": "lage buildci",
     "clean-all": "node ./scripts/src/preinstall/clean-all.js",
     "docs": "yarn workspace fluent-rn-website start",

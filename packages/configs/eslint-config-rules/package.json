@@ -14,9 +14,8 @@
     "./eslint.config.js": "./eslint.config.js"
   },
   "scripts": {
-    "build": "fluentui-scripts build",
-    "build-cjs": "tsgo",
-    "build-esm": "tsgo",
+    "build": "tsgo",
+    "build-core": "tsgo",
     "lint-package": "fluentui-scripts lint-package"
   },
   "dependencies": {

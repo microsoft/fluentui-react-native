@@ -3,21 +3,24 @@ const config = {
   npmClient: 'yarn',
   pipeline: {
     'build-cjs': {
-      dependsOn: ['^build-cjs'],
+      // cjs builds need to wait for the esm builds to produce the type definitions
+      dependsOn: ['^build-core', '^build-cjs'],
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib-commonjs/**/*'],
     },
-    'build-esm': {
-      dependsOn: ['^build-esm'],
+    'build-core': {
+      // the core build does esm builds (which produce type definitions used by both cjs and esm builds)
+      // this also handles noEmit packages which should be run in sequence with other packages
+      dependsOn: ['^build-core'],
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*'],
     },
-    'build-dual': {
-      dependsOn: ['build-cjs', 'build-esm'],
+    'build-all': {
+      dependsOn: ['build-core', 'build-cjs'],
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*', 'lib-commonjs/**/*'],
     },
-    buildci: ['build-dual', 'test', 'lint', 'lint-package'],
+    buildci: ['build-all', 'test', 'lint', 'lint-package'],
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: ['dist/**/*'],
@@ -39,7 +42,7 @@ const config = {
     },
     'pr-check': ['buildci', 'lint-package', 'lint-lockfile', 'format:check'],
     test: {
-      dependsOn: ['build-dual'],
+      dependsOn: ['build-all'],
       inputs: [],
       outputs: [],
     },

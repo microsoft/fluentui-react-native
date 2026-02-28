@@ -29,17 +29,19 @@ function getTypescriptBuildConfig(
   const scripts = projRoot.manifest.scripts || {};
   let cjsScript = scripts['build-cjs'] ?? buildTsConfig.cjsScript ?? '';
   let esmScript = scripts['build-esm'] ?? buildTsConfig.esmScript ?? '';
+  let checkScript = scripts['build-check'] ?? buildTsConfig.checkScript ?? '';
   if (analyze) {
     // helper to build up the correct build command
     function getScript(options: ts.CompilerOptions, outDir: string, isDefaultType: boolean, moduleType: 'commonjs' | 'esnext'): string {
       const parts: string[] = [engine];
-      if (!options.noEmit) {
-        if (outDir !== options.outDir) {
-          parts.push('--outDir', outDir);
-        }
-        if (!isDefaultType) {
-          parts.push('--module', moduleType, '--moduleResolution', 'bundler');
-        }
+      if (options.noEmit) {
+        return '';
+      }
+      if (outDir !== options.outDir) {
+        parts.push('--outDir', outDir);
+      }
+      if (!isDefaultType) {
+        parts.push('--module', moduleType, '--moduleResolution', 'bundler');
       }
       if (extraArgs) {
         parts.push(extraArgs);
@@ -51,6 +53,7 @@ function getTypescriptBuildConfig(
       // no tsconfig.json means no TypeScript build
       cjsScript = '';
       esmScript = '';
+      checkScript = '';
     } else {
       const pkgInfo = getPackageInfoFromPath(projRoot.root);
       const tsConfig = readTypeScriptConfig(pkgInfo);
@@ -58,7 +61,8 @@ function getTypescriptBuildConfig(
       const isModule = pkgInfo.manifest.type === 'module';
       cjsScript = getScript(options, cjsDir, !isModule, 'commonjs');
       esmScript = getScript(options, esmDir, isModule, 'esnext');
+      checkScript = options.noEmit ? engine : '';
     }
   }
-  return { engine, cjsDir, esmDir, cjsScript, esmScript, extraArgs };
+  return { engine, cjsDir, esmDir, cjsScript, esmScript, checkScript, extraArgs };
 }

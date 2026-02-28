@@ -21,9 +21,8 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "fluentui-scripts build",
-    "build-cjs": "tsgo",
-    "build-esm": "tsgo",
+    "build": "tsgo",
+    "build-core": "tsgo",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package"
