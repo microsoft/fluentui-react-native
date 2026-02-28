@@ -46,6 +46,23 @@ const config = {
       inputs: [],
       outputs: [],
     },
+    publish: {
+      dependsOn: ['^publish'],
+      type: 'worker',
+      options: {
+        worker: 'scripts/src/worker/publish.js',
+      },
+      cache: false,
+    },
+    'publish-dry-run': {
+      dependsOn: ['^publish-dry-run'],
+      type: 'worker',
+      options: {
+        worker: 'scripts/src/worker/publish.js',
+        dryRun: true,
+      },
+      cache: false,
+    },
   },
 };
 

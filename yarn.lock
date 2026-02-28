@@ -4968,7 +4968,7 @@ __metadata:
     cross-env: "catalog:"
     eslint: "npm:^9.39.2"
     eslint-plugin-import: "npm:^2.32.0"
-    lage: "npm:^2.0.0"
+    lage: "npm:^2.14.19"
     markdown-link-check: "npm:^3.8.7"
     oxfmt: "npm:^0.35.0"
     typescript: "npm:^5.8.0"
@@ -5005,6 +5005,7 @@ __metadata:
     react-native: "npm:^0.74.0"
     typescript: "npm:^5.8.0"
     workspace-tools: "npm:^0.26.3"
+    zx: "npm:^8.2.4"
   bin:
     fluentui-scripts: ./src/cli.mjs
   languageName: unknown
@@ -18269,9 +18270,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lage@npm:^2.0.0":
-  version: 2.14.18
-  resolution: "lage@npm:2.14.18"
+"lage@npm:^2.14.19":
+  version: 2.14.19
+  resolution: "lage@npm:2.14.19"
   dependencies:
     fsevents: "npm:~2.3.2"
     glob-hasher: "npm:^1.4.2"
@@ -18281,7 +18282,7 @@ __metadata:
   bin:
     lage: dist/lage.js
     lage-server: dist/lage-server.js
-  checksum: 10c0/c7977e86883bc0c45bacb8c776f025bcc5940b6ccc0651de91d54970214015647a624faeba46e1dd4372980b559d201b916b8a04a4701b04c520d7f8905d56f9
+  checksum: 10c0/95d5361baf712febd13155fdabde8de8629dccf62ceffad6e120693b7de3b43ccddbddaec1ebb11b272d9be6a725318cfec20176250d622cf7d281123998f61c
   languageName: node
   linkType: hard
 

@@ -325,8 +325,7 @@ jobs:
         run: yarn build
 
       - name: Simulate publish
-        run: |
-          yarn workspaces foreach -vv --all --topological --no-private npm publish --tolerate-republish --dry-run
+        run: yarn lage publish-dry-run --verbose --grouped
 
   test-links:
     name: Test repo links

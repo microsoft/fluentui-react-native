@@ -47,7 +47,8 @@
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "typescript": "^5.8.0",
-    "workspace-tools": "^0.26.3"
+    "workspace-tools": "^0.26.3",
+    "zx": "^8.2.4"
   },
   "bundlesize": [
     {
