@@ -9,5 +9,5 @@ export type {
   ICalloutType,
   RestoreFocusEvent,
 } from './Callout.types';
-export type { CalloutNativeCommands } from './CalloutNativeComponent.types';
+export type { CalloutNativeCommands } from './CalloutNativeComponent';
 export { Callout } from './Callout';
