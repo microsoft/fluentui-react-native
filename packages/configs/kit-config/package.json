@@ -17,8 +17,7 @@
   },
   "scripts": {
     "build": "tsgo",
-    "build-cjs": "tsgo",
-    "build-esm": "tsgo"
+    "build-core": "tsgo"
   },
   "dependencies": {
     "@rnx-kit/align-deps": "^3.4.0",

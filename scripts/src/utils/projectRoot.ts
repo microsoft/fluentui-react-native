@@ -32,6 +32,8 @@ export type ResolvedBuildConfig = {
     cjsScript: string;
     /** script to run for esm build */
     esmScript: string;
+    /** check script */
+    checkScript: string;
   };
   depcheck: {
     ignoreMatches?: string[];

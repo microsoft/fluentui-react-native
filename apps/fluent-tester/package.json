@@ -17,14 +17,15 @@
     ".": {
       "types": "./lib/index.d.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js"
+      "require": "./lib-commonjs/index.js",
+      "default": "./src/index.ts"
     }
   },
   "scripts": {
     "android": "rnx-cli run --platform android",
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
-    "build-esm": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "bundle": "rnx-cli bundle --dev false",
     "bundle:android": "rnx-cli bundle --dev false --platform android",
     "bundle:ios": "rnx-cli bundle --dev false --platform ios",
