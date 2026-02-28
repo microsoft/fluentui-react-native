@@ -43,7 +43,7 @@ const config = {
       inputs: [],
       outputs: [],
     },
-    'publish': {
+    publish: {
       dependsOn: ['^publish'],
       type: 'worker',
       options: {
