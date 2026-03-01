@@ -26,9 +26,6 @@ jobs:
         run: |
           yarn install --immutable
 
-      - name: Build packages
-        run: yarn buildci
-
       - name: Generate token for version PR
         uses: actions/create-github-app-token@v2
         id: app-token
