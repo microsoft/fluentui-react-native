@@ -8,11 +8,11 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "scripts"
   },
-  "type": "module",
-  "main": "./src/index.js",
   "bin": {
     "fluentui-scripts": "./src/cli.mjs"
   },
+  "type": "module",
+  "main": "./src/index.js",
   "scripts": {
     "build": "tsgo",
     "build-core": "tsgo",

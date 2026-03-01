@@ -40,7 +40,10 @@ const { major, minor } = semverCoerce(devDependencies?.['react-native']) ?? {};
 // the current react-native version in index.js to a new file under src named
 // "furn-profile-X.Y.js" and add that profile here. For example:
 const profiles: Record<string, Record<string, PackageEntry>> = { [`${major}.${minor}`]: packages };
-for (const filename of readdirSync('./src').filter((f: string) => f.startsWith('furn-profile-')).sort().reverse()) {
+for (const filename of readdirSync('./src')
+  .filter((f: string) => f.startsWith('furn-profile-'))
+  .sort()
+  .reverse()) {
   Object.assign(profiles, (await import(`./src/${filename}`)).default);
 }
 
