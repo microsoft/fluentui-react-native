@@ -9,6 +9,7 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git"
   },
   "workspaces": [
+    ".",
     "apps/*",
     "packages/**",
     "scripts"
@@ -28,10 +29,10 @@
     "lint-fix": "cross-env FURN_FIX_MODE=true lage lint",
     "lint-package": "lage lint-package",
     "lint-package-fix": "cross-env FURN_FIX_MODE=true lage lint-package",
-    "pr-check": "lage pr-check",
-    "preinstall": "node ./scripts/src/preinstall/use-yarn-please.js",
+"preinstall": "node ./scripts/src/preinstall/use-yarn-please.js",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
+    "lint-lockfile": "lint-lockfile",
     "test": "lage test",
     "test-links": "markdown-link-check"
   },
