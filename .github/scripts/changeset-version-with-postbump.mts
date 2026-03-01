@@ -1,5 +1,5 @@
-#!/usr/bin/env zx
-import 'zx/globals';
+#!/usr/bin/env node
+import { $, cd, echo, fs } from 'zx';
 
 /**
  * Changeset version bump with post-bump hook
