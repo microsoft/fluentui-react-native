@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/scripts",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "private": true,
   "description": "Scripts and build tools for fluentui-react-native repository",
   "repository": {
@@ -8,19 +8,19 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "scripts"
   },
+  "type": "module",
+  "main": "./src/index.js",
   "bin": {
     "fluentui-scripts": "./src/cli.mjs"
   },
-  "type": "module",
-  "main": "./src/index.js",
   "scripts": {
     "build": "tsgo",
     "build-core": "tsgo",
     "bundlesize": "bundlesize --debug",
     "depcheck": "node ./src/cli.mjs depcheck",
+    "format": "node ./src/cli.mjs format",
     "lint": "node ./src/cli.mjs lint",
-    "lint-package": "node ./src/cli.mjs lint-package",
-    "format": "node ./src/cli.mjs format"
+    "lint-package": "node ./src/cli.mjs lint-package"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

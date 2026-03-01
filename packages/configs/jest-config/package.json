@@ -1,17 +1,15 @@
 {
   "name": "@fluentui-react-native/jest-config",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "private": true,
   "description": "Jest configuration for UI Fabric React Native",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework/jest-config"
   },
+  "license": "MIT",
   "type": "module",
-  "main": "./src/index.js",
-  "module": "./src/index.js",
   "exports": {
     ".": {
       "import": "./src/index.js",
@@ -20,6 +18,8 @@
     },
     "./package.json": "./package.json"
   },
+  "main": "./src/index.js",
+  "module": "./src/index.js",
   "scripts": {
     "build": "tsgo",
     "build-core": "tsgo",

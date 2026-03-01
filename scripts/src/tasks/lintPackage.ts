@@ -64,6 +64,7 @@ export class LintPackageCommand extends Command {
     // now do the custom linting
     const buildConfig = getResolvedConfig(this.projRoot, true);
 
+    this.checkPrivateVersion();
     this.checkManifest();
     this.checkUsage();
     this.checkScripts();
@@ -118,6 +119,15 @@ export class LintPackageCommand extends Command {
         this.changed = this.projRoot.reloadManifest();
       }
       this.handleResult(result, 'align-deps');
+    }
+  }
+
+  private checkPrivateVersion() {
+    const manifest = this.projRoot.manifest;
+    if (manifest.private) {
+      this.errorIf(manifest.version !== '0.1.0', 'Private packages must have version 0.1.0', () => {
+        this.projRoot.setManifestEntry('version', '0.1.0');
+      });
     }
   }
 
