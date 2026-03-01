@@ -28,7 +28,7 @@ jobs:
         run: yarn
 
       - name: Build CI
-        run: yarn buildci
+        run: yarn lage buildci
 
   android:
     name: Android PR
