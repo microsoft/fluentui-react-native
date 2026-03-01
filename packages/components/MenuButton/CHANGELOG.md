@@ -1,5 +1,21 @@
 # Change Log - @fluentui-react-native/menu-button
 
+## 0.14.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @uifabricshared/foundation-composable@0.14.1
+  - @uifabricshared/foundation-settings@0.16.1
+  - @uifabricshared/foundation-compose@1.16.1
+  - @fluentui-react-native/contextual-menu@0.25.1
+  - @fluentui-react-native/button@0.40.1
+  - @fluentui-react-native/icon@0.22.1
+  - @fluentui-react-native/tokens@0.24.1
+
 ## 0.14.0
 
 ### Minor Changes

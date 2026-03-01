@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/menu-button",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "description": "A cross-platform MenuButton component using the Fluent Design System",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",

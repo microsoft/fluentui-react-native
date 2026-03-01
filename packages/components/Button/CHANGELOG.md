@@ -1,5 +1,31 @@
 # Change Log - @fluentui-react-native/button
 
+## 0.40.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @uifabricshared/foundation-composable@0.14.1
+  - @uifabricshared/foundation-settings@0.16.1
+  - @fluentui-react-native/experimental-activity-indicator@0.11.1
+  - @uifabricshared/foundation-compose@1.16.1
+  - @fluentui-react-native/interactive-hooks@0.28.1
+  - @fluentui-react-native/use-styling@0.14.1
+  - @fluentui-react-native/theming-utils@0.27.1
+  - @fluentui-react-native/pressable@0.13.1
+  - @fluentui-react-native/theme-tokens@0.28.1
+  - @fluentui-react-native/experimental-shadow@0.7.1
+  - @fluentui-react-native/framework@0.15.1
+  - @fluentui-react-native/theme-types@0.44.1
+  - @fluentui-react-native/icon@0.22.1
+  - @fluentui-react-native/text@0.25.1
+  - @fluentui-react-native/adapters@0.14.1
+  - @fluentui-react-native/styling-utils@0.8.1
+  - @fluentui-react-native/tokens@0.24.1
+
 ## 0.40.0
 
 ### Minor Changes

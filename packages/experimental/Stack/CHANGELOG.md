@@ -4,6 +4,16 @@
 
 ### Patch Changes
 
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/framework@0.15.1
+  - @fluentui-react-native/adapters@0.14.1
+  - @fluentui-react-native/tokens@0.24.1
+
+## 0.1.1
+
+### Patch Changes
+
 - d1d8c26: We were pinning @types/react and react-native-macos via resolutions. This fixes that which uncovered a bunch of type inconsistencies that needed to be addressed.
 - Updated dependencies [d7adbdd]
 - Updated dependencies [d1d8c26]
