@@ -194,6 +194,12 @@
     },
     "@types/react": {
       "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
     }
   },
   "jest": {
