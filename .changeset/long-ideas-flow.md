@@ -41,7 +41,6 @@
 '@fluentui-react-native/use-tokens': patch
 '@fluentui-react-native/theme-tokens': patch
 '@fluentui-react-native/checkbox': patch
-'@fluentui-react-native/jest-config': patch
 '@fluentui-react-native/experimental-avatar': patch
 '@fluentui-react-native/drawer': patch
 '@fluentui-react-native/experimental-shadow': patch
@@ -54,8 +53,6 @@
 '@fluentui-react-native/divider': patch
 '@fluentui-react-native/persona': patch
 '@fluentui-react-native/tablist': patch
-'@fluentui-react-native/kit-config': patch
-'@fluentui-react-native/experimental-stack': patch
 '@fluentui-react-native/use-slot': patch
 '@fluentui-react-native/avatar': patch
 '@fluentui-react-native/button': patch
@@ -75,7 +72,6 @@
 '@fluentui-react-native/styling-utils': patch
 '@fluentui-react-native/tokens': patch
 '@fluentui-react-native/codemods': patch
-'@fluentui-react-native/scripts': patch
 ---
 
 Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering

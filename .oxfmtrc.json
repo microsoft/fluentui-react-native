@@ -11,6 +11,7 @@
     "**/dist/**",
     "**/CHANGELOG.*",
     "**/CODE_OF_CONDUCT.md",
-    "**/SECURITY.md"
+    "**/SECURITY.md",
+    "packages/dependency-profiles/src/index.js"
   ]
 }

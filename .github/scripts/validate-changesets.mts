@@ -10,8 +10,7 @@ import { $, echo, fs } from 'zx';
  * Private/ignored packages (per .changeset/config.json) are excluded automatically.
  */
 
-const tmpDir = fs.mkdtempSync('/tmp/changeset-status-');
-const STATUS_FILE = `${tmpDir}/status.json`;
+const STATUS_FILE = 'changeset-status.json';
 
 const log = {
   error: (msg: string) => echo(styleText('red', msg)),
@@ -41,7 +40,7 @@ fs.writeJsonSync(STATUS_FILE, { releases: [], changesets: [] });
 await $`yarn changeset status --since=origin/main --output ${STATUS_FILE}`.nothrow();
 
 const data: ChangesetStatusOutput = fs.readJsonSync(STATUS_FILE);
-fs.removeSync(tmpDir);
+fs.removeSync(STATUS_FILE);
 
 // Fail: major version bumps
 const majorBumps = data.releases.filter((release) => release.type === 'major');

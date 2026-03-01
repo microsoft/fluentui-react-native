@@ -14,7 +14,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "fluentui-scripts build",
-    "update-profile": "node update-profile.mjs"
+    "update-profile": "node update-profile.mts"
   },
   "devDependencies": {
     "@fluentui-react-native/adapters": "*",
