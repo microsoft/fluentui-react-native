@@ -138,5 +138,30 @@
       ]
     },
     "extends": "@fluentui-react-native/kit-config"
+  },
+  "peerDependencies": {
+    "@fluentui-react-native/callout": "workspace:*",
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*",
+    "@fluentui-react-native/experimental-avatar": "workspace:*",
+    "@fluentui-react-native/experimental-checkbox": "workspace:*",
+    "@fluentui-react-native/experimental-expander": "workspace:*",
+    "@fluentui-react-native/experimental-native-date-picker": "workspace:*",
+    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*",
+    "@fluentui-react-native/experimental-shimmer": "workspace:*",
+    "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/menu-button": "workspace:*",
+    "@fluentui-react-native/radio-group": "workspace:*",
+    "@fluentui-react-native/tooltip": "workspace:*",
+    "@fluentui-react-native/vibrancy-view": "workspace:*",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
+  },
+  "peerDependenciesMeta": {
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
   }
 }
