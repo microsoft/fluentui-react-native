@@ -2,6 +2,7 @@
 const config = {
   npmClient: 'yarn',
   pipeline: {
+    // ── Per-package tasks ──────────────────────────────────────────────────
     'build-cjs': {
       // cjs builds need to wait for the esm builds to produce the type definitions
       dependsOn: ['^build-core', '^build-cjs'],
@@ -20,7 +21,6 @@ const config = {
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*', 'lib-commonjs/**/*'],
     },
-    buildci: ['build-all', 'test', 'lint', 'lint-package'],
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: ['dist/**/*'],
@@ -36,16 +36,30 @@ const config = {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: [],
     },
-    format: {
-      inputs: ['*', 'src/**/*'],
-      outputs: [],
-    },
-    'pr-check': ['buildci', 'lint-package', 'lint-lockfile', 'format:check'],
     test: {
       dependsOn: ['build-all'],
       inputs: [],
       outputs: [],
     },
+
+    // ── Root-only tasks (scripts exist only in the root package.json) ──────
+    // These run once for the whole repo. Sub-packages do not have these scripts,
+    // so lage naturally scopes them to the root workspace.
+    'check-publishing': {
+      cache: false,
+    },
+    'format:check': {
+      cache: false,
+    },
+    'lint-lockfile': {
+      cache: false,
+    },
+
+    // ── Pipeline aliases ───────────────────────────────────────────────────
+    'repo-checks': ['lint-lockfile', 'format:check', 'check-publishing'],
+    buildci: ['build-all', 'test', 'lint', 'lint-package', 'repo-checks'],
+
+    // ── Worker tasks ───────────────────────────────────────────────────────
     publish: {
       dependsOn: ['^publish'],
       type: 'worker',
@@ -54,7 +68,7 @@ const config = {
       },
       cache: false,
     },
-    'publish-dry-run': {
+    'publish:dry-run': {
       dependsOn: ['^publish-dry-run'],
       type: 'worker',
       options: {
@@ -66,4 +80,4 @@ const config = {
   },
 };
 
-module.exports = config;
+export default config;

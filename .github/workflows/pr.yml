@@ -27,14 +27,8 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Check formatting
-        run: yarn format:check
-
-      - name: Run lint-lockfile
-        run: yarn lint-lockfile
-
       - name: Build CI
-        run: yarn buildci
+        run: yarn lage buildci
 
   android:
     name: Android PR
@@ -325,7 +319,7 @@ jobs:
         run: yarn build
 
       - name: Simulate publish
-        run: yarn lage publish-dry-run --verbose --grouped
+        run: yarn lage publish:dry-run --verbose --grouped
 
   test-links:
     name: Test repo links
