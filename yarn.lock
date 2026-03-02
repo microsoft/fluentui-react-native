@@ -5429,10 +5429,23 @@ __metadata:
     "@babel/core": "catalog:"
     "@babel/runtime": "catalog:"
     "@fluentui-react-native/babel-config": "workspace:*"
+    "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
+    "@fluentui-react-native/experimental-avatar": "workspace:*"
+    "@fluentui-react-native/experimental-checkbox": "workspace:*"
+    "@fluentui-react-native/experimental-expander": "workspace:*"
+    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
+    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
+    "@fluentui-react-native/experimental-shimmer": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/menu-button": "workspace:*"
+    "@fluentui-react-native/radio-group": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tester-core": "workspace:*"
+    "@fluentui-react-native/tooltip": "workspace:*"
+    "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
     "@office-iss/rex-win32": "npm:0.81.0-preview.0"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -5460,27 +5473,10 @@ __metadata:
     react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
     react-native-test-app: "npm:^4.4.11"
+    react-native-windows: "npm:^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
     react-test-renderer: "npm:19.1.0"
     rimraf: "catalog:"
-  peerDependencies:
-    "@fluentui-react-native/callout": "workspace:*"
-    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
-    "@fluentui-react-native/experimental-avatar": "workspace:*"
-    "@fluentui-react-native/experimental-checkbox": "workspace:*"
-    "@fluentui-react-native/experimental-expander": "workspace:*"
-    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
-    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
-    "@fluentui-react-native/experimental-shimmer": "workspace:*"
-    "@fluentui-react-native/focus-zone": "workspace:*"
-    "@fluentui-react-native/menu-button": "workspace:*"
-    "@fluentui-react-native/radio-group": "workspace:*"
-    "@fluentui-react-native/tooltip": "workspace:*"
-    "@fluentui-react-native/vibrancy-view": "workspace:*"
-    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
-    react-native-macos:
-      optional: true
     react-native-windows:
       optional: true
   languageName: unknown
@@ -5493,10 +5489,23 @@ __metadata:
     "@babel/core": "catalog:"
     "@babel/runtime": "catalog:"
     "@fluentui-react-native/babel-config": "workspace:*"
+    "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
+    "@fluentui-react-native/experimental-avatar": "workspace:*"
+    "@fluentui-react-native/experimental-checkbox": "workspace:*"
+    "@fluentui-react-native/experimental-expander": "workspace:*"
+    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
+    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
+    "@fluentui-react-native/experimental-shimmer": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/menu-button": "workspace:*"
+    "@fluentui-react-native/radio-group": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tester-core": "workspace:*"
+    "@fluentui-react-native/tooltip": "workspace:*"
+    "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
     "@office-iss/rex-win32": "npm:0.73.11-devmain.16.0.17615.15030"
     "@react-native-community/cli": "npm:^13.6.4"
@@ -5519,27 +5528,10 @@ __metadata:
     react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-svg-transformer: "npm:^1.0.0"
     react-native-test-app: "npm:^3.9.2"
+    react-native-windows: "npm:^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
     react-test-renderer: "npm:18.2.0"
     rimraf: "catalog:"
-  peerDependencies:
-    "@fluentui-react-native/callout": "workspace:*"
-    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
-    "@fluentui-react-native/experimental-avatar": "workspace:*"
-    "@fluentui-react-native/experimental-checkbox": "workspace:*"
-    "@fluentui-react-native/experimental-expander": "workspace:*"
-    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
-    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
-    "@fluentui-react-native/experimental-shimmer": "workspace:*"
-    "@fluentui-react-native/focus-zone": "workspace:*"
-    "@fluentui-react-native/menu-button": "workspace:*"
-    "@fluentui-react-native/radio-group": "workspace:*"
-    "@fluentui-react-native/tooltip": "workspace:*"
-    "@fluentui-react-native/vibrancy-view": "workspace:*"
-    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
-    react-native-macos:
-      optional: true
     react-native-windows:
       optional: true
   languageName: unknown
@@ -8551,6 +8543,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-windows/cli@npm:0.81.2":
+  version: 0.81.2
+  resolution: "@react-native-windows/cli@npm:0.81.2"
+  dependencies:
+    "@react-native-windows/codegen": "npm:0.81.2"
+    "@react-native-windows/fs": "npm:0.81.0"
+    "@react-native-windows/package-utils": "npm:0.81.0"
+    "@react-native-windows/telemetry": "npm:0.81.0"
+    "@xmldom/xmldom": "npm:^0.7.7"
+    chalk: "npm:^4.1.0"
+    cli-spinners: "npm:^2.2.0"
+    envinfo: "npm:^7.5.0"
+    execa: "npm:^5.0.0"
+    find-up: "npm:^4.1.0"
+    glob: "npm:^7.1.1"
+    lodash: "npm:^4.17.15"
+    mustache: "npm:^4.0.1"
+    ora: "npm:^3.4.0"
+    prompts: "npm:^2.4.1"
+    semver: "npm:^7.3.2"
+    shelljs: "npm:^0.8.4"
+    username: "npm:^5.1.0"
+    xml-formatter: "npm:^2.4.0"
+    xml-parser: "npm:^1.2.1"
+    xpath: "npm:^0.0.27"
+  peerDependencies:
+    react-native: ^0.81.0-0
+  checksum: 10c0/de9a42e47447ae3a8234df121eefc6a3b4dd53c42e9c69ab868ce3a7625969eccb0fa7d1ddb73949a3671e83169e6ba64153c05c3dcb608605c703fa21cc70b7
+  languageName: node
+  linkType: hard
+
 "@react-native-windows/cli@npm:^0.74.0":
   version: 0.74.12
   resolution: "@react-native-windows/cli@npm:0.74.12"
@@ -8615,6 +8638,24 @@ __metadata:
   bin:
     react-native-windows-codegen: bin.js
   checksum: 10c0/71d25ada8e2eb2e7e1ac26a041f0ad0e0179fe8e8d649113c68c6f809f122657759f19afd88fe2f51adafbb163a90e19fa45481e996ce407f294b5fce1316773
+  languageName: node
+  linkType: hard
+
+"@react-native-windows/codegen@npm:0.81.2":
+  version: 0.81.2
+  resolution: "@react-native-windows/codegen@npm:0.81.2"
+  dependencies:
+    "@react-native-windows/fs": "npm:0.81.0"
+    chalk: "npm:^4.1.0"
+    globby: "npm:^11.1.0"
+    mustache: "npm:^4.0.1"
+    source-map-support: "npm:^0.5.19"
+    yargs: "npm:^16.2.0"
+  peerDependencies:
+    react-native: ^0.81.0-0
+  bin:
+    react-native-windows-codegen: bin.js
+  checksum: 10c0/080e2673493473bad1c9201a83e92e9a9799ac5e5b59b5b7cb6ad705592caad27b9b230dd292621b21284f18df41ff92e3bc4b1ba28e6a106c470368f58f5d6c
   languageName: node
   linkType: hard
 
@@ -21847,6 +21888,63 @@ __metadata:
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/app.mjs
   checksum: 10c0/d83f1cec79d4f5629e4370b0a378846d4a995070a025328b28883873a26b5a44fe883f7e64cb482d0dd49364e3d8884a3568f81293e56fd16a0b65efee4c3591
+  languageName: node
+  linkType: hard
+
+"react-native-windows@npm:^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0":
+  version: 0.81.4
+  resolution: "react-native-windows@npm:0.81.4"
+  dependencies:
+    "@babel/runtime": "npm:^7.0.0"
+    "@jest/create-cache-key-function": "npm:^29.7.0"
+    "@react-native-community/cli": "npm:17.0.0"
+    "@react-native-community/cli-platform-android": "npm:17.0.0"
+    "@react-native-community/cli-platform-ios": "npm:17.0.0"
+    "@react-native-windows/cli": "npm:0.81.2"
+    "@react-native/assets": "npm:1.0.0"
+    "@react-native/assets-registry": "npm:0.81.5"
+    "@react-native/codegen": "npm:0.81.5"
+    "@react-native/community-cli-plugin": "npm:0.81.5"
+    "@react-native/gradle-plugin": "npm:0.81.5"
+    "@react-native/js-polyfills": "npm:0.81.5"
+    "@react-native/new-app-screen": "npm:0.81.5"
+    "@react-native/normalize-colors": "npm:0.81.5"
+    "@react-native/virtualized-lists": "npm:0.81.5"
+    abort-controller: "npm:^3.0.0"
+    anser: "npm:^1.4.9"
+    ansi-regex: "npm:^5.0.0"
+    babel-jest: "npm:^29.7.0"
+    babel-plugin-syntax-hermes-parser: "npm:0.28.1"
+    base64-js: "npm:^1.5.1"
+    chalk: "npm:^4.0.0"
+    commander: "npm:^12.0.0"
+    event-target-shim: "npm:^5.0.1"
+    flow-enums-runtime: "npm:^0.0.6"
+    glob: "npm:^7.1.1"
+    invariant: "npm:^2.2.4"
+    jest-environment-node: "npm:^29.7.0"
+    memoize-one: "npm:^5.0.0"
+    metro-runtime: "npm:^0.83.1"
+    metro-source-map: "npm:^0.82.2"
+    mkdirp: "npm:^0.5.1"
+    nullthrows: "npm:^1.1.1"
+    pretty-format: "npm:^29.7.0"
+    promise: "npm:^8.3.0"
+    react-devtools-core: "npm:^6.1.1"
+    react-refresh: "npm:^0.14.0"
+    regenerator-runtime: "npm:^0.13.2"
+    scheduler: "npm:0.26.0"
+    semver: "npm:^7.1.3"
+    source-map-support: "npm:^0.5.19"
+    stacktrace-parser: "npm:^0.1.10"
+    whatwg-fetch: "npm:^3.0.0"
+    ws: "npm:^6.2.3"
+    yargs: "npm:^17.6.2"
+  peerDependencies:
+    "@types/react": ^19.1.0
+    react: ^19.1.0
+    react-native: 0.81.5
+  checksum: 10c0/9417eb333410dd289dac1e665fd80edc4a6316616a845db1c1083fdab51041d4789b4daf95a28f2d488593e6a1a6fb6f50044b759d773634bf1141ffaf12884d
   languageName: node
   linkType: hard
 
