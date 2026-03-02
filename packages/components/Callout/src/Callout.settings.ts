@@ -10,7 +10,7 @@ export const settings: IComposeSettings<ICalloutType> = [
       beakWidth: 20,
       borderColor: 'bodyFrameBackground',
       borderWidth: 1,
-      directionalHint: 'bottomLeftEdge',
+      directionalHint: 'bottonLeftEdge',
       gapSpace: 0,
       minPadding: 0,
     },

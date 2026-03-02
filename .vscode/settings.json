@@ -13,9 +13,7 @@
   "prettier.trailingComma": "all",
 
   "eslint.enable": true,
-  "eslint.workingDirectories": [
-    { "pattern": "./packages/framework/eslint-config-rules" }
-  ], // use the common eslint config file
+  "eslint.workingDirectories": [{ "pattern": "./packages/framework/eslint-config-rules" }], // use the common eslint config file
 
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
