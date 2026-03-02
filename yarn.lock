@@ -3325,7 +3325,6 @@ __metadata:
     "@fluentui-react-native/experimental-native-date-picker": "npm:*"
     "@fluentui-react-native/experimental-shadow": "npm:*"
     "@fluentui-react-native/experimental-shimmer": "npm:*"
-    "@fluentui-react-native/experimental-stack": "npm:*"
     "@fluentui-react-native/focus-trap-zone": "npm:*"
     "@fluentui-react-native/focus-zone": "npm:*"
     "@fluentui-react-native/framework": "npm:*"
@@ -4030,51 +4029,6 @@ __metadata:
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
-    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-  peerDependenciesMeta:
-    "@office-iss/react-native-win32":
-      optional: true
-    "@types/react":
-      optional: true
-    react-native-macos:
-      optional: true
-    react-native-windows:
-      optional: true
-  languageName: unknown
-  linkType: soft
-
-"@fluentui-react-native/experimental-stack@npm:*, @fluentui-react-native/experimental-stack@workspace:packages/experimental/Stack":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/experimental-stack@workspace:packages/experimental/Stack"
-  dependencies:
-    "@babel/core": "catalog:"
-    "@fluentui-react-native/adapters": "workspace:*"
-    "@fluentui-react-native/babel-config": "workspace:*"
-    "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/framework": "workspace:*"
-    "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/kit-config": "workspace:*"
-    "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/tokens": "workspace:*"
-    "@react-native-community/cli": "npm:^20.0.0"
-    "@react-native-community/cli-platform-android": "npm:^20.0.0"
-    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
-    "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
-    react-native-macos: "npm:^0.81.0"
-    react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
-    tslib: "npm:^2.3.1"
-  peerDependencies:
-    "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -24250,7 +24204,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.2.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.6.2":
+"tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.2.0, tslib@npm:^2.4.0, tslib@npm:^2.6.2":
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 10c0/469e1d5bf1af585742128827000711efa61010b699cb040ab1800bcd3ccdd37f63ec30642c9e07c4439c1db6e46345582614275daca3e0f4abae29b0083f04a6
