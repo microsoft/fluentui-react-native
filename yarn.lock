@@ -7485,40 +7485,40 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oozcitak/dom@npm:1.15.10":
-  version: 1.15.10
-  resolution: "@oozcitak/dom@npm:1.15.10"
+"@oozcitak/dom@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@oozcitak/dom@npm:2.0.2"
   dependencies:
-    "@oozcitak/infra": "npm:1.0.8"
-    "@oozcitak/url": "npm:1.0.4"
-    "@oozcitak/util": "npm:8.3.8"
-  checksum: 10c0/128162dd35fd21976e7589a4b50e980d8fb72e1f90e5675a3baca70b23cfdd87c0df57bff1ec708e7927671247a7233f240a27a4546bb904e069be1b4d4d7a05
+    "@oozcitak/infra": "npm:^2.0.2"
+    "@oozcitak/url": "npm:^3.0.0"
+    "@oozcitak/util": "npm:^10.0.0"
+  checksum: 10c0/053dfec09c6b5a38e2deb601f97313e01184a2c6452c13767a9629aa6686749f6f9d230806c51ab213dd454465b9e0f403cb7c45e210b447d5fe059a780278cf
   languageName: node
   linkType: hard
 
-"@oozcitak/infra@npm:1.0.8":
-  version: 1.0.8
-  resolution: "@oozcitak/infra@npm:1.0.8"
+"@oozcitak/infra@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@oozcitak/infra@npm:2.0.2"
   dependencies:
-    "@oozcitak/util": "npm:8.3.8"
-  checksum: 10c0/5fa44f02abbad453f5b26b38e2934978c177ef3a1baf8bf53919991135268f55bc89e23f8f3edebf0973c6a7d72d98fededb666c04a8b22ee4ca3048d0d42d25
+    "@oozcitak/util": "npm:^10.0.0"
+  checksum: 10c0/26392f3cc6c0787b9256e1eaa39a4dc374dc54f437ea1e8d3314fb41f7bc2c011c3c3eac7bc58b1773968df0c2991ca41761aa12778a0ca4059f0a79002b6205
   languageName: node
   linkType: hard
 
-"@oozcitak/url@npm:1.0.4":
-  version: 1.0.4
-  resolution: "@oozcitak/url@npm:1.0.4"
+"@oozcitak/url@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@oozcitak/url@npm:3.0.0"
   dependencies:
-    "@oozcitak/infra": "npm:1.0.8"
-    "@oozcitak/util": "npm:8.3.8"
-  checksum: 10c0/49824e30219b1e3bd0133c7302e79ead18dbfff91bc1ebb2f05b3c2cd670ed07b36af0f933faba2bc3221f65ef068fb7fca7d6c3cb8053fbca45f8cdf5670147
+    "@oozcitak/infra": "npm:^2.0.2"
+    "@oozcitak/util": "npm:^10.0.0"
+  checksum: 10c0/0a43eb9db072078f0826ea5eeefd5c398e4e47aa6f99a09b87724eed3bf018894de3e6617631547df194ec0ceb965cd5feb9bf666eb094952fed1280770b4f7a
   languageName: node
   linkType: hard
 
-"@oozcitak/util@npm:8.3.8":
-  version: 8.3.8
-  resolution: "@oozcitak/util@npm:8.3.8"
-  checksum: 10c0/1c492abcba79f5dd9bd7709331a614114706e6936a899cac6ac90b63bbe8e98da288e664c13c6acb2a38e3c5ffd47b93f824075ba81384d6192cc364bf126775
+"@oozcitak/util@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "@oozcitak/util@npm:10.0.0"
+  checksum: 10c0/4f143f50779790166e747c722383551af819776e7f946c9bd25b9875a128c517c91f058fb4ea11b235388eea83bf7b84a5590f882c74171e95b04487bc2b948d
   languageName: node
   linkType: hard
 
@@ -12773,7 +12773,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.0.1, chalk@npm:^5.1.2, chalk@npm:^5.3.0, chalk@npm:^5.4.1":
+"chalk@npm:^5.0.1, chalk@npm:^5.1.2, chalk@npm:^5.3.0, chalk@npm:^5.4.1, chalk@npm:^5.6.2":
   version: 5.6.2
   resolution: "chalk@npm:5.6.2"
   checksum: 10c0/99a4b0f0e7991796b1e7e3f52dceb9137cae2a9dfc8fc0784a550dc4c558e15ab32ed70b14b21b52beb2679b4892b41a0aa44249bcb996f01e125d58477c6976
@@ -13164,17 +13164,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^13.1.0":
-  version: 13.1.0
-  resolution: "commander@npm:13.1.0"
-  checksum: 10c0/7b8c5544bba704fbe84b7cab2e043df8586d5c114a4c5b607f83ae5060708940ed0b5bd5838cf8ce27539cde265c1cbd59ce3c8c6b017ed3eec8943e3a415164
-  languageName: node
-  linkType: hard
-
 "commander@npm:^14.0.0, commander@npm:^14.0.1":
   version: 14.0.2
   resolution: "commander@npm:14.0.2"
   checksum: 10c0/245abd1349dbad5414cb6517b7b5c584895c02c4f7836ff5395f301192b8566f9796c82d7bd6c92d07eba8775fe4df86602fca5d86d8d10bcc2aded1e21c2aeb
+  languageName: node
+  linkType: hard
+
+"commander@npm:^14.0.2":
+  version: 14.0.3
+  resolution: "commander@npm:14.0.3"
+  checksum: 10c0/755652564bbf56ff2ff083313912b326450d3f8d8c85f4b71416539c9a05c3c67dbd206821ca72635bf6b160e2afdefcb458e86b317827d5cb333b69ce7f1a24
   languageName: node
   linkType: hard
 
@@ -16982,12 +16982,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-relative-url@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "is-relative-url@npm:4.0.0"
+"is-relative-url@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "is-relative-url@npm:4.1.0"
   dependencies:
     is-absolute-url: "npm:^4.0.1"
-  checksum: 10c0/73dffa89682088dbb3c5c46e19ac5d9c86963f9f456b6531fc6d0e92abc75a285cd3098ad180671a1ff3a9980fd5a4f66aa0e84a832db36439b1a7bc69397de9
+  checksum: 10c0/1563fd420eca6de56c73656538834037d6e279e7cac31a5404ec618bce9f587f1646986447aed3f8198feb923d858cf48bca70fd1cb24bc8ab603463c033e0bb
   languageName: node
   linkType: hard
 
@@ -17861,7 +17861,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^3.13.1, js-yaml@npm:^3.14.1, js-yaml@npm:^3.14.2, js-yaml@npm:^3.6.1":
+"js-yaml@npm:^3.13.1, js-yaml@npm:^3.14.1, js-yaml@npm:^3.6.1":
   version: 3.14.2
   resolution: "js-yaml@npm:3.14.2"
   dependencies:
@@ -18307,16 +18307,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"link-check@npm:^5.4.0":
-  version: 5.4.0
-  resolution: "link-check@npm:5.4.0"
+"link-check@npm:^5.5.1":
+  version: 5.5.1
+  resolution: "link-check@npm:5.5.1"
   dependencies:
-    is-relative-url: "npm:^4.0.0"
+    is-relative-url: "npm:^4.1.0"
     ms: "npm:^2.1.3"
     needle: "npm:^3.3.1"
-    node-email-verifier: "npm:^2.0.0"
-    proxy-agent: "npm:^6.4.0"
-  checksum: 10c0/8d63b7ee144a9b5b051455458a57ae3ce6f804ec77c4a7969a8b59cad5c15189222ff0d71833e45e3ca347e34699069e00ffe9b7b0a926c9879473e648965811
+    node-email-verifier: "npm:^3.4.1"
+    proxy-agent: "npm:^6.5.0"
+  checksum: 10c0/2806fbca0dadcba197c52b23a0c48562b9c59c2c1df0461295237d27a10840fa821a00ccb271c62e91da99585e10d2416eaa6cf218d5726cead5bca8ef4d8fa6
   languageName: node
   linkType: hard
 
@@ -18680,40 +18680,40 @@ __metadata:
   linkType: hard
 
 "markdown-link-check@npm:^3.8.7":
-  version: 3.13.7
-  resolution: "markdown-link-check@npm:3.13.7"
+  version: 3.14.2
+  resolution: "markdown-link-check@npm:3.14.2"
   dependencies:
     async: "npm:^3.2.6"
-    chalk: "npm:^5.3.0"
-    commander: "npm:^13.1.0"
-    link-check: "npm:^5.4.0"
-    markdown-link-extractor: "npm:^4.0.2"
+    chalk: "npm:^5.6.2"
+    commander: "npm:^14.0.2"
+    link-check: "npm:^5.5.1"
+    markdown-link-extractor: "npm:^4.0.3"
     needle: "npm:^3.3.1"
     progress: "npm:^2.0.3"
-    proxy-agent: "npm:^6.4.0"
-    xmlbuilder2: "npm:^3.1.1"
+    proxy-agent: "npm:^6.5.0"
+    xmlbuilder2: "npm:^4.0.0"
   bin:
     markdown-link-check: markdown-link-check
-  checksum: 10c0/31ccd54eb3f471a0a3815685c175db587e20c05cc8e09244c5118b8fadf7f79e7f579c82e33bb74939e1c431b828da8d4eae255ed7c78faa5bcf46e4f4e6d7f6
+  checksum: 10c0/4caf274a89bee5dbcd07c73c2ff40600bb9e193747c4425c474d4fab54e539c5f2a23853a7aa6faa50d467d20906e1087bb3395e87409f45acc8df04aa07d6b2
   languageName: node
   linkType: hard
 
-"markdown-link-extractor@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "markdown-link-extractor@npm:4.0.2"
+"markdown-link-extractor@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "markdown-link-extractor@npm:4.0.3"
   dependencies:
     html-link-extractor: "npm:^1.0.5"
-    marked: "npm:^12.0.1"
-  checksum: 10c0/e9433dc3e1bdf26165b3daf644998fc84933efb6f74289b3f7637c4e36411a269f67992769032817c8821248ebf34ed97091fb91340b88fa1ffc50ad63163e16
+    marked: "npm:^17.0.0"
+  checksum: 10c0/4aa891f2b0b88f2b431c0ffe66d7c2fda22e36b0ff2d6947551e3b1fe6d6b8e65174941a5bc1c25bd2944119b3dd4693d3b22f0e1666a2f18e09df9762b6cafa
   languageName: node
   linkType: hard
 
-"marked@npm:^12.0.1":
-  version: 12.0.2
-  resolution: "marked@npm:12.0.2"
+"marked@npm:^17.0.0":
+  version: 17.0.3
+  resolution: "marked@npm:17.0.3"
   bin:
     marked: bin/marked.js
-  checksum: 10c0/45ae2e1e3f06b30a5b5f64efc6cde9830c81d1d024fd7668772a3217f1bc0f326e66a6b8970482d9783edf1f581fecac7023a7fa160f2c14dbcc16e064b4eafb
+  checksum: 10c0/3970f96ce3b1a7fd5bba82a6c7e4dffec9f7e0f238633e57139e8aa8fe637bccb1c1b61f2b3ed21b1afdbd4e076326f29e449d147203a0bdb9394e21e9a6a722
   languageName: node
   linkType: hard
 
@@ -20026,13 +20026,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-email-verifier@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "node-email-verifier@npm:2.0.0"
+"node-email-verifier@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "node-email-verifier@npm:3.4.1"
   dependencies:
     ms: "npm:^2.1.3"
-    validator: "npm:^13.11.0"
-  checksum: 10c0/ceae48817986e07be69cbbff4fd597f4c4048aeaebccf15d8f484b63be7acc4aa3f7e8d39ecbb5c8431f0ebf35d8bfa2296936ff97ab78cbb8d5c2b15d8f3fdf
+    validator: "npm:^13.15.15"
+  checksum: 10c0/12fc945320c71d657bb574816675a7033a0371338417adf8e971d84ee8633fa295040e870717528a7480c6b59c2b06c8337cb43224b25a7d6aa93bbe2bcd667d
   languageName: node
   linkType: hard
 
@@ -21369,7 +21369,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proxy-agent@npm:^6.4.0, proxy-agent@npm:^6.5.0":
+"proxy-agent@npm:^6.5.0":
   version: 6.5.0
   resolution: "proxy-agent@npm:6.5.0"
   dependencies:
@@ -24704,10 +24704,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"validator@npm:^13.11.0":
-  version: 13.15.23
-  resolution: "validator@npm:13.15.23"
-  checksum: 10c0/22a05ec6a98d48d2b6fb34d43ce854af61d15842362d142e64cfca0325d4d0c2d1051d9f9d3a0f741e58ea888f73a35baf7a2a810f5aed0f89183bd5040f0177
+"validator@npm:^13.15.15":
+  version: 13.15.26
+  resolution: "validator@npm:13.15.26"
+  checksum: 10c0/d66041685c531423f6b514d0481228503b96682fe30ed7925ad77ff3cd08c3983dc94f45e18457e44f62f89027b94a3342009d65421800ce65f6e0d2c6eaf7fc
   languageName: node
   linkType: hard
 
@@ -25196,15 +25196,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xmlbuilder2@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "xmlbuilder2@npm:3.1.1"
+"xmlbuilder2@npm:^4.0.0":
+  version: 4.0.3
+  resolution: "xmlbuilder2@npm:4.0.3"
   dependencies:
-    "@oozcitak/dom": "npm:1.15.10"
-    "@oozcitak/infra": "npm:1.0.8"
-    "@oozcitak/util": "npm:8.3.8"
-    js-yaml: "npm:3.14.1"
-  checksum: 10c0/a3e7dd5cbc052f6b53773a4a9d5efb26b0647aa8868bc1a597478d534e78184263b5b3e495e82613f21d0bf016a24145bb793f6e197e8911139dddba9cd831cc
+    "@oozcitak/dom": "npm:^2.0.2"
+    "@oozcitak/infra": "npm:^2.0.2"
+    "@oozcitak/util": "npm:^10.0.0"
+    js-yaml: "npm:^4.1.1"
+  checksum: 10c0/ba257ca8a29b35d916fda190659b95d861137922fc792f760223f4a3bad07b5f18c992fb3a669d3dd6de6607eff64440cda86de083fc4648e4ec6b8f6be636a0
   languageName: node
   linkType: hard
 
