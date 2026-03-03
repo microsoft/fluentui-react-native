@@ -1,5 +1,22 @@
 # Change Log - @fluentui-react-native/avatar
 
+## 1.13.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/use-styling@0.14.1
+  - @fluentui-react-native/theming-utils@0.27.1
+  - @fluentui-react-native/theme-tokens@0.28.1
+  - @fluentui-react-native/framework@0.15.1
+  - @fluentui-react-native/badge@0.12.1
+  - @fluentui-react-native/icon@0.22.1
+  - @fluentui-react-native/adapters@0.14.1
+  - @fluentui-react-native/tokens@0.24.1
+
 ## 1.13.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # Change Log - @uifabricshared/theme-registry
 
+## 0.13.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+
 ## 0.13.0
 
 ### Minor Changes
