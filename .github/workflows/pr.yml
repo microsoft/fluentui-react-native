@@ -100,9 +100,7 @@ jobs:
         working-directory: apps/fluent-tester/macos
 
       - name: Build macOS app
-        run: |
-          set -eox pipefail
-          ./.ado/scripts/xcodebuild.sh apps/fluent-tester/macos/FluentTester.xcworkspace macosx ReactTestApp build
+        run: ./.github/scripts/xcodebuild.mts apps/fluent-tester/macos/FluentTester.xcworkspace macosx ReactTestApp build
         env:
           CCACHE_DISABLE: 1
 
@@ -157,9 +155,7 @@ jobs:
         working-directory: apps/fluent-tester/ios
 
       - name: Build iOS app
-        run: |
-          set -eox pipefail
-          ./.ado/scripts/xcodebuild.sh apps/fluent-tester/ios/FluentTester.xcworkspace iphonesimulator ReactTestApp build
+        run: ./.github/scripts/xcodebuild.mts apps/fluent-tester/ios/FluentTester.xcworkspace iphonesimulator ReactTestApp build
         env:
           CCACHE_DISABLE: 1
 
@@ -345,7 +341,7 @@ jobs:
 
       - name: Test markdown links
         run: |
-          find . -name \*.md -not -name CHANGELOG.md -not -path '*/node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c $(pwd)/.ado/markdown-link-check-config.json
+          find . -name \*.md -not -name CHANGELOG.md -not -path '*/node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c $(pwd)/.github/markdown-link-check-config.json
 
   pr:
     name: PR
