@@ -5531,9 +5531,6 @@ __metadata:
     react-native-windows: "npm:^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
     react-test-renderer: "npm:18.2.0"
     rimraf: "catalog:"
-  peerDependenciesMeta:
-    react-native-windows:
-      optional: true
   languageName: unknown
   linkType: soft
 
