@@ -89,11 +89,6 @@
     "react-test-renderer": "19.1.0",
     "rimraf": "catalog:"
   },
-  "peerDependenciesMeta": {
-    "react-native-windows": {
-      "optional": true
-    }
-  },
   "jest": {
     "preset": "react-native"
   },
