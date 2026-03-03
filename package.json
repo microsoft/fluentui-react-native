@@ -57,7 +57,9 @@
     "zx": "^8.2.4"
   },
   "resolutions": {
-    "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
+    "axios": "^1.13.5",
+    "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch",
+    "unicorn-magic": "^0.4.0"
   },
   "engines": {
     "node": ">=22.12"
