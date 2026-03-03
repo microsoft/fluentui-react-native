@@ -26,5 +26,8 @@
     "typescript": "^5.8.0",
     "webdriverio": "catalog:"
   },
-  "packageManager": "yarn@4.11.0"
+  "resolutions": {
+    "axios": "^1.13.5"
+  },
+  "packageManager": "yarn@4.12.0"
 }
