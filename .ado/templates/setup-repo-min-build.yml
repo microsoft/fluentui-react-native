@@ -1,6 +1,0 @@
-steps:
-  - template: setup-repo.yml
-
-  - script: |
-      yarn build
-    displayName: 'yarn build'

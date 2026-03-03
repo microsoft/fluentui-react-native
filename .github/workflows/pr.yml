@@ -345,7 +345,7 @@ jobs:
 
       - name: Test markdown links
         run: |
-          find . -name \*.md -not -name CHANGELOG.md -not -path '*/node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c $(pwd)/.ado/markdown-link-check-config.json
+          find . -name \*.md -not -name CHANGELOG.md -not -path '*/node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c $(pwd)/.github/markdown-link-check-config.json
 
   pr:
     name: PR

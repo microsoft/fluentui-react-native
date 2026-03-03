@@ -14,17 +14,12 @@ parameters:
     displayName: Skip Npm Publish
     type: boolean
     default: false
-  - name: skipNugetPublish
-    displayName: Skip Nuget Publish
-    type: boolean
-    default: false
 
 variables:
   - group: 'FluentUI React Native Secrets'
   - group: InfoSec-SecurityResults
   - name: tags
     value: production,externalfacing
-  - template: variables/vars.yml
 
 resources:
   repositories:
@@ -64,11 +59,14 @@ extends:
                   targetPath: $(System.DefaultWorkingDirectory)
                   artifactName: dist
             steps:
-              - template: .ado/templates/setup-repo.yml@self
+              - task: UseNode@1
+                inputs:
+                  version: '22.x'
+                displayName: 'Use Node.js 22.x'
 
               - script: |
                   yarn
-                displayName: 'yarn install'
+                displayName: 'yarn install --immutable'
 
               - script: |
                   yarn buildci
@@ -94,11 +92,3 @@ extends:
                   yarn config unset npmPublishRegistry
                 displayName: 'Cleanup yarn npm config'
                 condition: always()
-
-          - template: .ado/templates/win32-nuget-publish.yml@self
-            parameters:
-              skipNugetPublish: ${{ parameters.skipNugetPublish }}
-
-          - template: .ado/templates/e2e-dependency-nuget-publish.yml@self
-            parameters:
-              skipNugetPublish: ${{ parameters.skipNugetPublish }}
