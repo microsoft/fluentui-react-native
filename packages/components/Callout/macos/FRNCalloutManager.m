@@ -28,7 +28,8 @@ RCT_ENUM_CONVERTER(NSRectEdge, (@{
 	@"rightTopEdge": @(NSRectEdgeMaxX),
 	@"rightCenter": @(NSRectEdgeMaxX),
 	@"rightBottomEdge": @(NSRectEdgeMaxX),
-	@"bottonLeftEdge": @(NSRectEdgeMinY),
+	@"bottomLeftEdge": @(NSRectEdgeMinY),
+  @"bottonLeftEdge": @(NSRectEdgeMinY), // Add both the correct and incorrect spellings during the transition period
 	@"bottomAutoEdge": @(NSRectEdgeMinY),
 	@"bottomCenter": @(NSRectEdgeMinY),
 	@"bottomRightEdge": @(NSRectEdgeMinY),

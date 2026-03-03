@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/icon
 
+## 0.22.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/framework@0.15.1
+  - @fluentui-react-native/text@0.25.1
+  - @fluentui-react-native/framework-base@0.3.1
+  - @fluentui-react-native/adapters@0.14.1
+
 ## 0.22.0
 
 ### Minor Changes

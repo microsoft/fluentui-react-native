@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/popover
 
+## 0.5.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/framework@0.15.1
+  - @fluentui-react-native/adapters@0.14.1
+
 ## 0.5.0
 
 ### Minor Changes

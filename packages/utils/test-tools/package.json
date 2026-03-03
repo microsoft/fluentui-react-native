@@ -32,9 +32,6 @@
     "lint-package": "fluentui-scripts lint-package",
     "update-snapshots": "fluentui-scripts jest -u"
   },
-  "dependencies": {
-    "@fluentui-react-native/theme-types": "workspace:*"
-  },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
@@ -42,6 +39,7 @@
     "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/theme-types": "workspace:*",
     "@react-native/babel-preset": "^0.81.0",
     "@types/jest": "^29.0.0",
     "@types/react": "~19.1.0",

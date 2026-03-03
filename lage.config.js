@@ -50,7 +50,7 @@ const config = {
       dependsOn: ['^publish'],
       type: 'worker',
       options: {
-        worker: 'scripts/src/worker/publish.js',
+        worker: 'scripts/src/worker/publish.mts',
       },
       cache: false,
     },
@@ -58,7 +58,7 @@ const config = {
       dependsOn: ['^publish-dry-run'],
       type: 'worker',
       options: {
-        worker: 'scripts/src/worker/publish.js',
+        worker: 'scripts/src/worker/publish.mts',
         dryRun: true,
       },
       cache: false,

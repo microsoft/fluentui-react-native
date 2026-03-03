@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/focus-trap-zone",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "A cross-platform FocusTrapZone component using the Fluent Design System",
   "license": "MIT",
   "author": "",
