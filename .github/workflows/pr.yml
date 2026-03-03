@@ -299,7 +299,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Validate changesets
-        run: yarn changeset:validate
+        run: yarn change:check
 
   publish-dry-run:
     name: NPM Publish Dry Run
