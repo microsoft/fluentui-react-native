@@ -74,11 +74,15 @@ if (!(await $`command -v xcbeautify`.nothrow()).stdout) {
 }
 
 const xcodebuildArgs = [
-  '-workspace', workspace,
-  '-scheme', scheme,
-  '-sdk', sdk,
+  '-workspace',
+  workspace,
+  '-scheme',
+  scheme,
+  '-sdk',
+  sdk,
   ...destination,
-  '-derivedDataPath', derivedDataPath,
+  '-derivedDataPath',
+  derivedDataPath,
   'CODE_SIGNING_ALLOWED=NO',
   'COMPILER_INDEX_STORE_ENABLE=NO',
   action,
