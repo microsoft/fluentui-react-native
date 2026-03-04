@@ -1,0 +1,63 @@
+name: Auto-accept CLA for bot PRs
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  cla-accept:
+    name: Accept CLA
+    runs-on: ubuntu-latest
+    if: |
+      github.repository == 'microsoft/fluentui-react-native' &&
+      github.event.issue.pull_request != null &&
+      contains(github.event.comment.user.login, 'microsoft-github-policy-service')
+
+    steps:
+      - name: Generate token
+        uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-pull-requests: read
+          permission-issues: write
+
+      - name: Accept CLA if bot-authored PR
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          script: |
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            if (!pr.data.user.login.endsWith('[bot]')) {
+              console.log(`PR author ${pr.data.user.login} is not a bot — skipping`);
+              return;
+            }
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const alreadyAgreed = comments.some(c =>
+              c.body.includes('@microsoft-github-policy-service agree')
+            );
+
+            if (alreadyAgreed) {
+              console.log('CLA already accepted — skipping');
+              return;
+            }
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '@microsoft-github-policy-service agree company="Microsoft"',
+            });
+            console.log('CLA accepted');
