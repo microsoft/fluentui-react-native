@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Generate token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
         id: app-token
         with:
           app-id: ${{ vars.APP_ID }}
@@ -24,7 +24,7 @@ jobs:
           permission-issues: write
 
       - name: Accept CLA if bot-authored PR
-        uses: actions/github-script@v7
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         with:
           github-token: ${{ steps.app-token.outputs.token }}
           script: |
@@ -34,8 +34,8 @@ jobs:
               pull_number: context.issue.number,
             });
 
-            if (!pr.data.user.login.endsWith('[bot]')) {
-              console.log(`PR author ${pr.data.user.login} is not a bot — skipping`);
+            if (pr.data.user.login !== 'microsoft-react-native-sdk[bot]') {
+              console.log(`PR author ${pr.data.user.login} is not the release bot — skipping`);
               return;
             }
 
