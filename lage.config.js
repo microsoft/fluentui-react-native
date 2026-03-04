@@ -60,6 +60,7 @@ const config = {
       type: 'worker',
       options: {
         worker: 'scripts/src/worker/publish.mts',
+        outputDir: '_packed',
       },
       cache: false,
     },
@@ -68,6 +69,7 @@ const config = {
       type: 'worker',
       options: {
         worker: 'scripts/src/worker/publish.mts',
+        outputDir: '_packed',
         dryRun: true,
       },
       cache: false,

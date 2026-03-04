@@ -118,7 +118,8 @@ extends:
                   yarn config set npmPublishAccess public
                   yarn config set npmPublishRegistry "https://registry.npmjs.org"
                   yarn config set npmAuthToken $(npmAuth)
-                displayName: 'Configure yarn for npm publishing'
+                  npm config set //registry.npmjs.org/:_authToken $(npmAuth)
+                displayName: 'Configure npm publishing auth'
 
               - script: |
                   # https://github.com/changesets/changesets/issues/432
@@ -130,7 +131,8 @@ extends:
                   yarn config unset npmPublishAccess
                   yarn config unset npmAuthToken
                   yarn config unset npmPublishRegistry
-                displayName: 'Cleanup yarn npm config'
+                  npm config delete //registry.npmjs.org/:_authToken
+                displayName: 'Cleanup npm publishing auth'
                 condition: always()
 
               - script: |
