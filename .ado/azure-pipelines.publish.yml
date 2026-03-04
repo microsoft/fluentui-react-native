@@ -45,10 +45,11 @@ extends:
         environmentsEs6: true
         environmentsNode: true
     stages:
-      - stage: main
+      - stage: Build
+        displayName: Build & Pack
         jobs:
-          - job: NPMPublish
-            displayName: NPM Publish
+          - job: BuildAndPack
+            displayName: Build, Test & Pack
             pool:
               name: Azure-Pipelines-1ESPT-ExDShared
               image: ubuntu-latest
@@ -56,8 +57,8 @@ extends:
             templateContext:
               outputs:
                 - output: pipelineArtifact
-                  targetPath: $(System.DefaultWorkingDirectory)
-                  artifactName: dist
+                  targetPath: $(System.DefaultWorkingDirectory)/_packed
+                  artifactName: packed-tarballs
             steps:
               - task: UseNode@1
                 inputs:
@@ -70,25 +71,69 @@ extends:
 
               - script: |
                   yarn buildci
-                displayName: 'yarn buildci [test]'
+                displayName: 'yarn buildci [build + test + lint]'
+
+              - script: |
+                  yarn lage pack --verbose --grouped
+                displayName: 'Pack all public packages'
+
+              - script: |
+                  echo "Packed tarballs:"
+                  ls -la $(System.DefaultWorkingDirectory)/_packed/
+                displayName: 'List packed tarballs'
+
+      - stage: Publish
+        displayName: Publish to NPM
+        dependsOn: Build
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
+        jobs:
+          - job: PublishPackages
+            displayName: Publish NPM Packages
+            pool:
+              name: Azure-Pipelines-1ESPT-ExDShared
+              image: ubuntu-latest
+              os: linux
+            steps:
+              - task: UseNode@1
+                inputs:
+                  version: '22.x'
+                displayName: 'Use Node.js 22.x'
+
+              - task: DownloadPipelineArtifact@2
+                inputs:
+                  artifactName: packed-tarballs
+                  targetPath: $(System.DefaultWorkingDirectory)/_packed
+                displayName: 'Download packed tarballs'
+
+              - script: |
+                  echo "Downloaded tarballs:"
+                  ls -la $(System.DefaultWorkingDirectory)/_packed/
+                displayName: 'List downloaded tarballs'
+
+              - script: |
+                  yarn --immutable
+                displayName: 'yarn install --immutable'
 
               - script: |
                   yarn config set npmPublishAccess public
                   yarn config set npmPublishRegistry "https://registry.npmjs.org"
                   yarn config set npmAuthToken $(npmAuth)
                 displayName: 'Configure yarn for npm publishing'
-                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
 
               - script: |
                   # https://github.com/changesets/changesets/issues/432
                   # We can't use `changeset publish` because it doesn't support workspaces, so we have to publish each package individually
                   yarn lage publish --verbose --grouped --reporter azureDevops
                 displayName: 'Publish NPM Packages'
-                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
 
               - script: |
                   yarn config unset npmPublishAccess
                   yarn config unset npmAuthToken
                   yarn config unset npmPublishRegistry
                 displayName: 'Cleanup yarn npm config'
+                condition: always()
+
+              - script: |
+                  git clean -dfx
+                displayName: 'Clean up working directory'
                 condition: always()

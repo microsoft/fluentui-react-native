@@ -46,6 +46,15 @@ const config = {
       inputs: [],
       outputs: [],
     },
+    pack: {
+      dependsOn: ['build-all', '^pack'],
+      type: 'worker',
+      options: {
+        worker: 'scripts/src/worker/pack.mts',
+        outputDir: '_packed',
+      },
+      cache: false,
+    },
     publish: {
       dependsOn: ['^publish'],
       type: 'worker',

@@ -79,6 +79,9 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
+# Pack staging directory
+_packed/
+
 # Yarn Integrity file
 .yarn-integrity
 
