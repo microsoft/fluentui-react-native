@@ -320,6 +320,9 @@ jobs:
       - name: Build packages
         run: yarn build
 
+      - name: Pack packages
+        run: yarn lage pack --verbose --grouped
+
       - name: Simulate publish
         run: yarn lage publish-dry-run --verbose --grouped
 
