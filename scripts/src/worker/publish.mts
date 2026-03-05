@@ -38,17 +38,15 @@ export const run: WorkerRunnerFunction = async ({ target }) => {
 
   const dryRun = target.options?.dryRun ?? false;
   const outputDir = target.options?.outputDir as string | undefined;
-
-  // If an outputDir is configured, look for a pre-packed tarball
   const tarball = outputDir ? await findTarball(pkg, outputDir) : undefined;
 
-  if (tarball) {
-    // yarn npm publish doesn't support tarballs, so use npm directly
-    const args = ['publish', tarball, '--access', 'public', ...(dryRun ? ['--dry-run'] : [])];
-    await $({ cwd: target.cwd, verbose: true })`npm ${args}`;
-  } else {
-    // No tarball found — publish from source (local dev / dry-run)
-    const args = ['--tolerate-republish', ...(dryRun ? ['--dry-run'] : [])];
-    await $({ cwd: target.cwd, verbose: true })`yarn npm publish ${args}`;
+  if (!tarball) {
+    // No tarball means pack skipped this package (already published) — nothing to do
+    console.log(`Skipping ${pkg.name}@${pkg.version} — no tarball found`);
+    return;
   }
+
+  // yarn npm publish doesn't support tarballs, so use npm directly
+  const args = ['publish', tarball, '--access', 'public', ...(dryRun ? ['--dry-run'] : [])];
+  await $({ cwd: target.cwd, verbose: true })`npm ${args}`;
 };

@@ -23,6 +23,13 @@ export const run: WorkerRunnerFunction = async ({ target }) => {
     throw new Error('pack worker requires options.outputDir to be set in lage.config.js');
   }
 
+  // Skip if this version is already published
+  const result = await $`npm view ${pkg.name}@${pkg.version} version`.nothrow().quiet();
+  if (result.exitCode === 0) {
+    console.log(`Skipping ${pkg.name}@${pkg.version} — already published`);
+    return;
+  }
+
   // Resolve relative to cwd (lage runs from repo root, so this resolves correctly)
   const stagingDir = resolve(outputDir);
   await fs.mkdirp(stagingDir);
