@@ -10,7 +10,7 @@ import { $, echo, fs } from 'zx';
  * Without --check: runs `changeset add` interactively with the correct upstream remote
  * auto-detected from package.json's repository URL, temporarily patched into config.json.
  *
- * With --check (CI mode): validates that all changed packages have changesets and that
+ * With --check (CI mode): validates that all changed public packages have changesets and that
  * no major version bumps are introduced.
  */
 
@@ -44,19 +44,62 @@ async function getBaseBranch(): Promise<string> {
   return `${remote}/main`;
 }
 
-/** Run `changeset add` interactively, temporarily patching config.json with the correct baseBranch. */
-async function runAdd(baseBranch: string): Promise<void> {
-  const configPath = '.changeset/config.json';
-  const config = fs.readJsonSync(configPath);
-  const originalBaseBranch: string = config.baseBranch;
-  config.baseBranch = baseBranch;
-  fs.writeJsonSync(configPath, config, { spaces: 2 });
+/** Run `changeset status` and return the output and exit code. */
+async function getChangesetStatus(baseBranch: string): Promise<{ data: ChangesetStatusOutput; exitCode: number }> {
+  const STATUS_FILE = 'changeset-status.json';
 
-  try {
-    await $({ stdio: 'inherit' })`yarn changeset`;
-  } finally {
-    config.baseBranch = originalBaseBranch;
-    fs.writeJsonSync(configPath, config, { spaces: 2 });
+  fs.writeJsonSync(STATUS_FILE, { releases: [], changesets: [] });
+  const result = await $`yarn changeset status --since=${baseBranch} --output ${STATUS_FILE}`.nothrow();
+  const data: ChangesetStatusOutput = fs.readJsonSync(STATUS_FILE);
+  fs.removeSync(STATUS_FILE);
+
+  return { data, exitCode: result.exitCode ?? 1 };
+}
+
+/** Returns names of all private workspace packages. */
+async function getPrivatePackages(): Promise<Set<string>> {
+  const output = (await $`yarn workspaces list --json`.quiet()).stdout;
+  const workspaces = output
+    .trim()
+    .split('\n')
+    .filter(Boolean)
+    .map((line) => JSON.parse(line))
+    .filter((e): e is { location: string; name: string } => typeof e.location === 'string' && typeof e.name === 'string');
+
+  const names = workspaces
+    .filter(({ location }) => {
+      try {
+        return fs.readJsonSync(`${location}/package.json`).private === true;
+      } catch {
+        return false;
+      }
+    })
+    .map(({ name }) => name);
+
+  return new Set(names);
+}
+
+/** Fail if any .changeset/*.md file bumps a private package. */
+function checkNoPrivatePackageBumps(privatePackages: Set<string>): void {
+  const files = fs.readdirSync('.changeset').filter((f: string) => f.endsWith('.md'));
+  for (const file of files) {
+    const content = fs.readFileSync(`.changeset/${file}`, 'utf-8');
+    const frontmatter = content.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
+    const bumped = frontmatter
+      .split('\n')
+      .map((line: string) =>
+        line
+          .split(':')[0]
+          .trim()
+          .replace(/^['"]|['"]$/g, ''),
+      )
+      .filter(Boolean);
+    const privateBumps = bumped.filter((name: string) => privatePackages.has(name));
+    if (privateBumps.length > 0) {
+      log.error(`❌ Changeset ${file} bumps private packages: ${privateBumps.join(', ')}`);
+      log.warn('Remove the private package entries from the changeset.\n');
+      process.exit(1);
+    }
   }
 }
 
@@ -76,25 +119,31 @@ function checkMajorBumps(releases: ChangesetStatusOutput['releases']): void {
   process.exit(1);
 }
 
-/** Validate that all changed packages have changesets and no major bumps are introduced. */
+/** Run `changeset add` interactively, temporarily patching config.json with the correct baseBranch. */
+async function runAdd(baseBranch: string): Promise<void> {
+  const configPath = '.changeset/config.json';
+  const config = fs.readJsonSync(configPath);
+  const originalBaseBranch: string = config.baseBranch;
+  config.baseBranch = baseBranch;
+  fs.writeJsonSync(configPath, config, { spaces: 2 });
+
+  try {
+    await $({ stdio: 'inherit' })`yarn changeset`;
+  } finally {
+    config.baseBranch = originalBaseBranch;
+    fs.writeJsonSync(configPath, config, { spaces: 2 });
+  }
+}
+
+/** Validate that all changed public packages have changesets and no major bumps are introduced. */
 async function runCheck(baseBranch: string): Promise<void> {
-  const STATUS_FILE = 'changeset-status.json';
+  log.info(`Validating changesets against ${baseBranch}...\n`);
 
-  log.info(`\n${'='.repeat(60)}`);
-  log.info('Changesets Validation');
-  log.info(`${'='.repeat(60)}\n`);
-  log.info(`Comparing against ${baseBranch}\n`);
+  checkNoPrivatePackageBumps(await getPrivatePackages());
 
-  // Pre-write empty state so changeset status always has a file to overwrite
-  fs.writeJsonSync(STATUS_FILE, { releases: [], changesets: [] });
+  const { data, exitCode } = await getChangesetStatus(baseBranch);
 
-  const statusResult = await $`yarn changeset status --since=${baseBranch} --output ${STATUS_FILE}`.nothrow();
-
-  const data: ChangesetStatusOutput = fs.readJsonSync(STATUS_FILE);
-  fs.removeSync(STATUS_FILE);
-
-  // Fail: packages changed but no changeset written
-  if (statusResult.exitCode !== 0) {
+  if (exitCode !== 0) {
     log.error('❌ Some packages have been changed but no changesets were found.');
     log.warn('Run `yarn change` to create a changeset, or `yarn changeset --empty` if no release is needed.\n');
     process.exit(1);
@@ -102,13 +151,8 @@ async function runCheck(baseBranch: string): Promise<void> {
 
   checkMajorBumps(data.releases);
 
-  // Pass
-  if (data.releases.length === 0) {
-    log.info('ℹ️ No public packages changed — no changeset required');
-  } else {
-    log.success(`✅ Changesets found (${data.releases.map((r) => r.name).join(', ')})`);
-  }
-  log.success('\nAll validations passed! ✅\n');
+  const packages = data.releases.map((r) => r.name).join(', ');
+  log.success(packages ? `✅ All validations passed (${packages})` : '✅ All validations passed');
 }
 
 const { values: args } = parseArgs({ options: { check: { type: 'boolean', default: false } } });
