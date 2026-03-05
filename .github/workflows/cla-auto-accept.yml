@@ -45,6 +45,7 @@ jobs:
             });
 
             const alreadyAgreed = comments.some(c =>
+              c.user.login === 'microsoft-react-native-sdk[bot]' &&
               c.body.includes('@microsoft-github-policy-service agree')
             );
 
