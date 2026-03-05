@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
+## 0.8.70
+
+### Patch Changes
+
+- d3d3c59: Bump dependency-profiles
+
 <!-- This log was last generated on Tue, 15 Jul 2025 23:27:24 GMT and should not be manually modified. -->
 
 <!-- Start content -->
