@@ -87,7 +87,12 @@ function checkNoPrivatePackageBumps(privatePackages: Set<string>): void {
     const frontmatter = content.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
     const bumped = frontmatter
       .split('\n')
-      .map((line: string) => line.split(':')[0].trim().replace(/^['"]|['"]$/g, ''))
+      .map((line: string) =>
+        line
+          .split(':')[0]
+          .trim()
+          .replace(/^['"]|['"]$/g, ''),
+      )
       .filter(Boolean);
     const privateBumps = bumped.filter((name: string) => privatePackages.has(name));
     if (privateBumps.length > 0) {
