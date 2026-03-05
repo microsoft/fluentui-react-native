@@ -27,6 +27,13 @@ export const run: WorkerRunnerFunction = async ({ target }) => {
   const stagingDir = resolve(outputDir);
   await fs.mkdirp(stagingDir);
 
+  // Skip if this version is already published
+  const result = await $`npm view ${pkg.name}@${pkg.version} version`.nothrow().quiet();
+  if (result.exitCode === 0) {
+    console.log(`Skipping ${pkg.name}@${pkg.version} — already published`);
+    return;
+  }
+
   // Build a safe filename: @fluentui-react-native/button@1.0.0 -> fluentui-react-native-button-1.0.0.tgz
   const safeName = (pkg.name as string).replace(/@/g, '').replace(/\//g, '-');
   const tgzFilename = `${safeName}-${pkg.version}.tgz`;
