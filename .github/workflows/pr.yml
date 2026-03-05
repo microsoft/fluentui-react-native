@@ -326,7 +326,7 @@ jobs:
       - name: List packed tarballs
         run: |
           echo "Packed tarballs:"
-          ls -la $(System.DefaultWorkingDirectory)/_packed/
+          ls -la ${{ github.workspace }}/_packed/
 
       - name: Upload packed tarballs
         uses: actions/upload-artifact@v4
