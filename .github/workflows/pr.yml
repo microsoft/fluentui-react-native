@@ -324,7 +324,7 @@ jobs:
         run: yarn lage pack --verbose --grouped
 
       - name: List packed tarballs
-        run: ls -la _packed/ || true
+        run: ls -la _packed/
 
       - name: Upload packed tarballs
         uses: actions/upload-artifact@v4
