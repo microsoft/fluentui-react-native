@@ -119,22 +119,6 @@ function checkMajorBumps(releases: ChangesetStatusOutput['releases']): void {
   process.exit(1);
 }
 
-/** Run `changeset add` interactively, temporarily patching config.json with the correct baseBranch. */
-async function runAdd(baseBranch: string): Promise<void> {
-  const configPath = '.changeset/config.json';
-  const config = fs.readJsonSync(configPath);
-  const originalBaseBranch: string = config.baseBranch;
-  config.baseBranch = baseBranch;
-  fs.writeJsonSync(configPath, config, { spaces: 2 });
-
-  try {
-    await $({ stdio: 'inherit' })`yarn changeset`;
-  } finally {
-    config.baseBranch = originalBaseBranch;
-    fs.writeJsonSync(configPath, config, { spaces: 2 });
-  }
-}
-
 /** Validate that all changed public packages have changesets and no major bumps are introduced. */
 async function runCheck(baseBranch: string): Promise<void> {
   log.info(`Validating changesets against ${baseBranch}...\n`);
@@ -153,6 +137,11 @@ async function runCheck(baseBranch: string): Promise<void> {
 
   const packages = data.releases.map((r) => r.name).join(', ');
   log.success(packages ? `✅ All validations passed (${packages})` : '✅ All validations passed');
+}
+
+/** Run `changeset add` interactively against the correct upstream base branch. */
+async function runAdd(baseBranch: string): Promise<void> {
+  await $({ stdio: 'inherit' })`yarn changeset --since ${baseBranch}`;
 }
 
 const { values: args } = parseArgs({ options: { check: { type: 'boolean', default: false } } });
