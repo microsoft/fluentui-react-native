@@ -66,11 +66,11 @@ extends:
                 displayName: 'Use Node.js 22.x'
 
               - script: |
-                  yarn
+                  yarn install --immutable
                 displayName: 'yarn install --immutable'
 
               - script: |
-                  yarn buildci
+                  yarn lage buildci
                 displayName: 'yarn buildci [build + test + lint]'
 
               - script: |
@@ -116,7 +116,7 @@ extends:
                 displayName: 'List downloaded tarballs'
 
               - script: |
-                  yarn --immutable
+                  yarn install --immutable
                 displayName: 'yarn install --immutable'
 
               - script: |
