@@ -278,6 +278,9 @@
     "@fluentui/react-native": {
       "optional": true
     },
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
     "@uifabricshared/foundation-composable": {
       "optional": true
     },
@@ -300,9 +303,6 @@
       "optional": true
     },
     "@uifabricshared/theming-react-native": {
-      "optional": true
-    },
-    "@office-iss/react-native-win32": {
       "optional": true
     },
     "react-native-macos": {
