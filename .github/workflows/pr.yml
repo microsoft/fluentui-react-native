@@ -100,9 +100,7 @@ jobs:
         working-directory: apps/fluent-tester/macos
 
       - name: Build macOS app
-        run: |
-          set -eox pipefail
-          ./.ado/scripts/xcodebuild.sh apps/fluent-tester/macos/FluentTester.xcworkspace macosx ReactTestApp build
+        run: ./.github/scripts/xcodebuild.mts apps/fluent-tester/macos/FluentTester.xcworkspace macosx ReactTestApp build
         env:
           CCACHE_DISABLE: 1
 
@@ -157,9 +155,7 @@ jobs:
         working-directory: apps/fluent-tester/ios
 
       - name: Build iOS app
-        run: |
-          set -eox pipefail
-          ./.ado/scripts/xcodebuild.sh apps/fluent-tester/ios/FluentTester.xcworkspace iphonesimulator ReactTestApp build
+        run: ./.github/scripts/xcodebuild.mts apps/fluent-tester/ios/FluentTester.xcworkspace iphonesimulator ReactTestApp build
         env:
           CCACHE_DISABLE: 1
 
@@ -303,12 +299,14 @@ jobs:
         run: yarn install --immutable
 
       - name: Validate changesets
-        run: yarn changeset:validate
+        run: yarn change:check
 
-  publish-dry-run:
-    name: NPM Publish Dry Run
+  publish-dry-run-pack:
+    name: NPM Publish Dry Run — Pack
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    outputs:
+      has-tarballs: ${{ steps.check.outputs.has-tarballs }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -323,6 +321,50 @@ jobs:
 
       - name: Build packages
         run: yarn build
+
+      - name: Pack packages
+        run: yarn lage pack --verbose --grouped
+
+      - name: List packed tarballs
+        id: check
+        run: |
+          ls -la _packed/
+          if ls _packed/*.tgz > /dev/null 2>&1; then
+            echo "has-tarballs=true" >> $GITHUB_OUTPUT
+          else
+            echo "has-tarballs=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload packed tarballs
+        if: steps.check.outputs.has-tarballs == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: packed-tarballs-dry-run
+          path: _packed/
+
+  publish-dry-run:
+    name: NPM Publish Dry Run — Publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    needs: publish-dry-run-pack
+    if: needs.publish-dry-run-pack.outputs.has-tarballs == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Download packed tarballs
+        uses: actions/download-artifact@v4
+        with:
+          name: packed-tarballs-dry-run
+          path: _packed/
 
       - name: Simulate publish
         run: yarn lage publish-dry-run --verbose --grouped
@@ -345,7 +387,7 @@ jobs:
 
       - name: Test markdown links
         run: |
-          find . -name \*.md -not -name CHANGELOG.md -not -path '*/node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c $(pwd)/.ado/markdown-link-check-config.json
+          find . -name \*.md -not -name CHANGELOG.md -not -path '*/node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c $(pwd)/.github/markdown-link-check-config.json
 
   pr:
     name: PR
@@ -358,6 +400,7 @@ jobs:
       - windows
       - win32
       - check-changesets
+      - publish-dry-run-pack
       - publish-dry-run
       - test-links
     steps:

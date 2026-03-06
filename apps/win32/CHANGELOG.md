@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/tester-win32
 
+## 0.38.70
+
+### Patch Changes
+
+- @fluentui-react-native/tester-core@0.1.2
+
 <!-- This log was last generated on Tue, 05 Aug 2025 18:50:41 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -6113,7 +6119,7 @@ Mon, 28 Sep 2020 20:32:21 GMT
 
 ### Minor changes
 
-- 🚚Move files around, rename things.  Makes FluentTester more canonical (aliciakds88@gmail.com)
+- 🚚Move files around, rename things. Makes FluentTester more canonical (aliciakds88@gmail.com)
 
 ## 0.4.0
 

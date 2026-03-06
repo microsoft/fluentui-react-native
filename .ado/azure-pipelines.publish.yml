@@ -14,17 +14,12 @@ parameters:
     displayName: Skip Npm Publish
     type: boolean
     default: false
-  - name: skipNugetPublish
-    displayName: Skip Nuget Publish
-    type: boolean
-    default: false
 
 variables:
   - group: 'FluentUI React Native Secrets'
   - group: InfoSec-SecurityResults
   - name: tags
     value: production,externalfacing
-  - template: variables/vars.yml
 
 resources:
   repositories:
@@ -50,10 +45,11 @@ extends:
         environmentsEs6: true
         environmentsNode: true
     stages:
-      - stage: main
+      - stage: Build
+        displayName: Build & Pack
         jobs:
-          - job: NPMPublish
-            displayName: NPM Publish
+          - job: BuildAndPack
+            displayName: Build, Test & Pack
             pool:
               name: Azure-Pipelines-1ESPT-ExDShared
               image: ubuntu-latest
@@ -61,44 +57,90 @@ extends:
             templateContext:
               outputs:
                 - output: pipelineArtifact
-                  targetPath: $(System.DefaultWorkingDirectory)
-                  artifactName: dist
+                  targetPath: $(System.DefaultWorkingDirectory)/_packed
+                  artifactName: packed-tarballs
             steps:
-              - template: .ado/templates/setup-repo.yml@self
+              - task: UseNode@1
+                inputs:
+                  version: '22.x'
+                displayName: 'Use Node.js 22.x'
 
               - script: |
                   yarn
-                displayName: 'yarn install'
+                displayName: 'yarn install --immutable'
 
               - script: |
                   yarn buildci
-                displayName: 'yarn buildci [test]'
+                displayName: 'yarn buildci [build + test + lint]'
+
+              - script: |
+                  yarn lage pack --verbose --grouped
+                displayName: 'Pack all public packages'
+
+              - script: |
+                  ls -la $(System.DefaultWorkingDirectory)/_packed/
+                  if ls $(System.DefaultWorkingDirectory)/_packed/*.tgz > /dev/null 2>&1; then
+                    echo "##vso[task.setvariable variable=hasTarballs;isOutput=true]true"
+                  else
+                    echo "##vso[task.setvariable variable=hasTarballs;isOutput=true]false"
+                  fi
+                name: check
+                displayName: 'List packed tarballs'
+
+      - stage: Publish
+        displayName: Publish to NPM
+        dependsOn: Build
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}), eq(stageDependencies.Build.BuildAndPack.outputs['check.hasTarballs'], 'true'))
+        jobs:
+          - job: PublishPackages
+            displayName: Publish NPM Packages
+            pool:
+              name: Azure-Pipelines-1ESPT-ExDShared
+              image: ubuntu-latest
+              os: linux
+            steps:
+              - task: UseNode@1
+                inputs:
+                  version: '22.x'
+                displayName: 'Use Node.js 22.x'
+
+              - task: DownloadPipelineArtifact@2
+                inputs:
+                  artifactName: packed-tarballs
+                  targetPath: $(System.DefaultWorkingDirectory)/_packed
+                displayName: 'Download packed tarballs'
+
+              - script: |
+                  echo "Downloaded tarballs:"
+                  ls -la $(System.DefaultWorkingDirectory)/_packed/
+                displayName: 'List downloaded tarballs'
+
+              - script: |
+                  yarn --immutable
+                displayName: 'yarn install --immutable'
 
               - script: |
                   yarn config set npmPublishAccess public
                   yarn config set npmPublishRegistry "https://registry.npmjs.org"
                   yarn config set npmAuthToken $(npmAuth)
-                displayName: 'Configure yarn for npm publishing'
-                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
+                  npm config set //registry.npmjs.org/:_authToken $(npmAuth)
+                displayName: 'Configure npm publishing auth'
 
               - script: |
                   # https://github.com/changesets/changesets/issues/432
                   # We can't use `changeset publish` because it doesn't support workspaces, so we have to publish each package individually
                   yarn lage publish --verbose --grouped --reporter azureDevops
                 displayName: 'Publish NPM Packages'
-                condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}))
 
               - script: |
                   yarn config unset npmPublishAccess
                   yarn config unset npmAuthToken
                   yarn config unset npmPublishRegistry
-                displayName: 'Cleanup yarn npm config'
+                  npm config delete //registry.npmjs.org/:_authToken
+                displayName: 'Cleanup npm publishing auth'
                 condition: always()
 
-          - template: .ado/templates/win32-nuget-publish.yml@self
-            parameters:
-              skipNugetPublish: ${{ parameters.skipNugetPublish }}
-
-          - template: .ado/templates/e2e-dependency-nuget-publish.yml@self
-            parameters:
-              skipNugetPublish: ${{ parameters.skipNugetPublish }}
+              - script: |
+                  git clean -dfx
+                displayName: 'Clean up working directory'
+                condition: always()

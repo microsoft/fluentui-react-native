@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Core implementation of the fluent tester app",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",

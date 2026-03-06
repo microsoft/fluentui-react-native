@@ -2,7 +2,7 @@ import type { FontSize, FontSizes, FontWeightValue, Typography, Variants } from 
 
 /**
  * The Typography is designed to match the styles defined in the Apple HIG:
- * https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/typography/
+ * https://developer.apple.com/design/human-interface-guidelines/typography
  * These mappings and variants are subject to change as we moved to a unified cross platform Fluent typography ramp
  * Github #598 also tracks pulling these values from a Native Module rather than hardcoding the numbers in JS.
  */
