@@ -3352,8 +3352,6 @@ __metadata:
     "@fluentui-react-native/styling-utils": "*"
     "@fluentui-react-native/switch": "*"
     "@fluentui-react-native/tablist": "*"
-    "@fluentui-react-native/tester": "*"
-    "@fluentui-react-native/tester-win32": "*"
     "@fluentui-react-native/text": "*"
     "@fluentui-react-native/theme": "*"
     "@fluentui-react-native/theme-tokens": "*"
@@ -3464,10 +3462,6 @@ __metadata:
     "@fluentui-react-native/switch":
       optional: true
     "@fluentui-react-native/tablist":
-      optional: true
-    "@fluentui-react-native/tester":
-      optional: true
-    "@fluentui-react-native/tester-win32":
       optional: true
     "@fluentui-react-native/text":
       optional: true
