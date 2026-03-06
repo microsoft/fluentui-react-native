@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@fluentui-react-native/config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/react-configs": "workspace:*",
