@@ -39,9 +39,9 @@
   "dependencies": {
     "@fluentui-react-native/tester-core": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
-    "@types/react": "~19.1.0",
-    "react": "19.1.0",
-    "react-native": "^0.81.0",
+    "@types/react": "~19.1.4",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
     "react-native-svg": "^15.12.1"
   },
   "devDependencies": {
@@ -62,8 +62,8 @@
     "@rnx-kit/cli": "catalog:",
     "@rnx-kit/metro-config": "catalog:",
     "@rnx-kit/metro-resolver-symlinks": "catalog:",
-    "@rnx-kit/metro-serializer": "^2.0.3",
-    "@rnx-kit/metro-serializer-esbuild": "^0.3.0",
+    "@rnx-kit/metro-serializer": "catalog:",
+    "@rnx-kit/metro-serializer-esbuild": "catalog:",
     "@rnx-kit/tools-react-native": "^2.3.2",
     "@types/react-test-renderer": "^19.1.0",
     "metro": "^0.83.1",

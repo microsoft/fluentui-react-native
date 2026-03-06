@@ -2,7 +2,7 @@ import Module from 'node:module';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
-import type { KitConfig } from '@rnx-kit/config';
+import type { KitConfig } from '@rnx-kit/types-kit-config';
 
 export type ExportSet = {
   default?: string;
