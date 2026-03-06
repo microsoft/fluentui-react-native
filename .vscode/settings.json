@@ -46,6 +46,9 @@
 
   "json.format.enable": false,
 
+  // TypeScript (Native Preview) > Use Tsgo
+  "typescript.experimental.useTsgo": true,
+
   "typescript.preferences.quoteStyle": "single",
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
