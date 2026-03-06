@@ -3188,6 +3188,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/config@workspace:packages/config":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/config@workspace:packages/config"
+  dependencies:
+    "@rnx-kit/tsconfig": "catalog:"
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/contextual-menu@workspace:*, @fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu"
