@@ -66,8 +66,8 @@ extends:
                 displayName: 'Use Node.js 22.x'
 
               - script: |
-                  yarn install --immutable
-                displayName: 'yarn install --immutable'
+                  yarn
+                displayName: 'yarn install'
 
               - script: |
                   yarn lage buildci
@@ -116,8 +116,8 @@ extends:
                 displayName: 'List downloaded tarballs'
 
               - script: |
-                  yarn install --immutable
-                displayName: 'yarn install --immutable'
+                  yarn
+                displayName: 'yarn install'
 
               - script: |
                   yarn config set npmPublishAccess public
