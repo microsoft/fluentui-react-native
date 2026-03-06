@@ -60,19 +60,30 @@ const config = {
     buildci: ['build-all', 'test', 'lint', 'lint-package', 'repo-checks'],
 
     // ── Worker tasks ───────────────────────────────────────────────────────
+    pack: {
+      dependsOn: ['build-all', '^pack'],
+      type: 'worker',
+      options: {
+        worker: 'scripts/src/worker/pack.mts',
+        outputDir: '_packed',
+      },
+      cache: false,
+    },
     publish: {
       dependsOn: ['^publish'],
       type: 'worker',
       options: {
         worker: 'scripts/src/worker/publish.mts',
+        outputDir: '_packed',
       },
       cache: false,
     },
     'publish:dry-run': {
-      dependsOn: ['^publish-dry-run'],
+      dependsOn: ['^publish:dry-run'],
       type: 'worker',
       options: {
         worker: 'scripts/src/worker/publish.mts',
+        outputDir: '_packed',
         dryRun: true,
       },
       cache: false,
