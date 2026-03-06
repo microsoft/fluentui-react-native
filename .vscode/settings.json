@@ -7,6 +7,10 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
+  // Use the OXC formatter as the default formatter which matches what yarn format will do
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+
+  // Prettier settings for those that are still using the prettier extension
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
   "prettier.printWidth": 140,
@@ -46,7 +50,7 @@
 
   "json.format.enable": false,
 
-  // TypeScript (Native Preview) > Use Tsgo
+  // enable the native preview for typescript, used to build internally as well
   "typescript.experimental.useTsgo": true,
 
   "typescript.preferences.quoteStyle": "single",
@@ -60,21 +64,6 @@
     "**/lib-amd": true,
     "**/lib-commonjs": true,
     "**/dist": true
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[handlebars]": {
     "editor.formatOnSave": false

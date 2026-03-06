@@ -1,21 +1,51 @@
+// use require because this is directly invoked via rnx-kit.config.cjs and needs to be CommonJS
 const { presets } = require('@rnx-kit/align-deps');
-import type { Preset, Package } from '@rnx-kit/align-deps';
+// type imports are stripped so can use ESM style imports
+import type { Package as RNXPackage, MetaPackage } from '@rnx-kit/align-deps';
 
 /**
  * Types to make working with align-deps presets easier
  */
 
+/** Create our custom capability type */
+type RNXCapability = NonNullable<RNXPackage['capabilities']>[number];
+type Capability =
+  | RNXCapability
+  | 'core-win32'
+  | 'core-win32-dev-only'
+  | 'core-dev-only'
+  | 'core-windows-dev-only'
+  | 'core-android-dev-only'
+  | 'core-ios-dev-only'
+  | 'core-macos-dev-only'
+  | 'react-types'
+  | 'react-test-renderer-types'
+  | 'babel-preset-react-native'
+  | 'babel-core'
+  | 'tools-babel'
+  | 'tools-eslint'
+  | 'tools-jest'
+  | 'tools-jest-react'
+  | 'tools-core'
+  | 'tools-react-configs';
+
+/** Remove the hard Capability type from Package as we are adding custom capabilities */
+type Package = Omit<RNXPackage, 'capabilities'> & {
+  capabilities?: Capability[];
+};
+
 /** Defined type for a specific version */
-type VersionPreset = Preset[string];
-/** Capability is not exported from @rnx-kit/align-deps */
-type Capability = NonNullable<Package['capabilities']>[number];
+type VersionPreset = Readonly<Record<Capability, MetaPackage | Package>>;
+/** Presets as a whole */
+type Preset = Record<string, VersionPreset>;
+/** Create our custom capability type */
 /** Helper to remove readonly */
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 
 /**
  * Grab the presets from rnx-kit and modify them for Furn's use
  */
-const rnPresets: Preset = presets['microsoft/react-native'];
+const rnPresets = presets['microsoft/react-native'] as Preset;
 
 /**
  * In FURN, there are places where we want to use react-native for testing purposes, but the libraries
@@ -50,6 +80,7 @@ function toDevCapability(cap: Capability): Capability {
 function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPreset {
   const presetCore = rnPreset['core'] as Package;
   const presetReact = rnPreset['react'] as Package;
+  const presetWindows = rnPreset['core-windows'] as Package;
   const presetReactTestRenderer = rnPreset['react-test-renderer'] as Package;
 
   // create the new version of the preset
@@ -72,7 +103,7 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
     },
     'core-win32': {
       name: '@office-iss/react-native-win32',
-      version: presetCore.version,
+      version: presetWindows.version,
       capabilities: ['core'],
     },
     'tools-babel': {
@@ -118,7 +149,8 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
   };
 
   // now add the dev capabilities and link to catalogs
-  for (const cap of Object.keys(newPreset)) {
+  for (const capString of Object.keys(newPreset)) {
+    const cap = capString as Capability;
     const pkgEntry = newPreset[cap] as Package;
     if (pkgEntry) {
       // patch metro/metro-core/etc packages to not allow progressing beyond 83.1 because

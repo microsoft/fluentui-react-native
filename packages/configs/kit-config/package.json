@@ -20,11 +20,12 @@
     "build-core": "tsgo"
   },
   "dependencies": {
-    "@rnx-kit/align-deps": "^3.4.0",
-    "@rnx-kit/config": "^0.7.4"
+    "@rnx-kit/align-deps": "catalog:",
+    "@rnx-kit/config": "catalog:",
+    "@rnx-kit/types-kit-config": "catalog:"
   },
   "devDependencies": {
-    "@rnx-kit/tsconfig": "^2.1.1"
+    "@rnx-kit/tsconfig": "catalog:"
   },
   "furn": {
     "packageType": "tooling"
