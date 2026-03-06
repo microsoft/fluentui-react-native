@@ -19,9 +19,6 @@ exports[`Tab component tests Customized Tab 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": undefined,
-      "multiselectable": undefined,
-      "readOnly": undefined,
-      "required": undefined,
       "selected": false,
     }
   }
@@ -34,17 +31,13 @@ exports[`Tab component tests Customized Tab 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   focusable={true}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
   onLayout={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -55,8 +48,7 @@ exports[`Tab component tests Customized Tab 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#00000000",
+      "backgroundColor": undefined,
       "borderRadius": 4,
       "borderWidth": 2,
       "display": "flex",
@@ -96,8 +88,8 @@ exports[`Tab component tests Customized Tab 1`] = `
         style={
           {
             "color": "red",
-            "fontFamily": "Segoe UI",
-            "fontSize": 12,
+            "fontFamily": "System",
+            "fontSize": 13,
             "fontWeight": "400",
             "margin": 0,
           }
@@ -110,7 +102,7 @@ exports[`Tab component tests Customized Tab 1`] = `
   <View
     style={
       {
-        "backgroundColor": "#00000000",
+        "backgroundColor": undefined,
         "height": 4,
         "paddingHorizontal": 8,
         "width": "100%",
@@ -120,7 +112,7 @@ exports[`Tab component tests Customized Tab 1`] = `
     <View
       style={
         {
-          "backgroundColor": "#00000000",
+          "backgroundColor": undefined,
           "borderRadius": 99,
           "flex": 1,
         }
@@ -149,9 +141,6 @@ exports[`Tab component tests Tab default props 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": undefined,
-      "multiselectable": undefined,
-      "readOnly": undefined,
-      "required": undefined,
       "selected": false,
     }
   }
@@ -164,17 +153,13 @@ exports[`Tab component tests Tab default props 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   focusable={true}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
   onLayout={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -185,8 +170,7 @@ exports[`Tab component tests Tab default props 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#00000000",
+      "backgroundColor": undefined,
       "borderRadius": 4,
       "borderWidth": 2,
       "display": "flex",
@@ -225,9 +209,9 @@ exports[`Tab component tests Tab default props 1`] = `
         numberOfLines={1}
         style={
           {
-            "color": "#424242",
-            "fontFamily": "Segoe UI",
-            "fontSize": 12,
+            "color": "#616161",
+            "fontFamily": "System",
+            "fontSize": 13,
             "fontWeight": "400",
             "margin": 0,
           }
@@ -240,7 +224,7 @@ exports[`Tab component tests Tab default props 1`] = `
   <View
     style={
       {
-        "backgroundColor": "#00000000",
+        "backgroundColor": undefined,
         "height": 2,
         "paddingHorizontal": 8,
         "width": "100%",
@@ -250,7 +234,7 @@ exports[`Tab component tests Tab default props 1`] = `
     <View
       style={
         {
-          "backgroundColor": "#00000000",
+          "backgroundColor": undefined,
           "borderRadius": 99,
           "flex": 1,
         }
@@ -279,9 +263,6 @@ exports[`Tab component tests Tab disabled 1`] = `
       "checked": undefined,
       "disabled": true,
       "expanded": undefined,
-      "multiselectable": undefined,
-      "readOnly": undefined,
-      "required": undefined,
       "selected": false,
     }
   }
@@ -294,17 +275,13 @@ exports[`Tab component tests Tab disabled 1`] = `
     }
   }
   accessible={true}
-  disabled={true}
+  collapsable={false}
   focusable={false}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
   onLayout={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -315,8 +292,7 @@ exports[`Tab component tests Tab disabled 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#00000000",
+      "backgroundColor": undefined,
       "borderRadius": 4,
       "borderWidth": 2,
       "display": "flex",
@@ -355,9 +331,8 @@ exports[`Tab component tests Tab disabled 1`] = `
         numberOfLines={1}
         style={
           {
-            "color": "#bdbdbd",
-            "fontFamily": "Segoe UI",
-            "fontSize": 12,
+            "fontFamily": "System",
+            "fontSize": 13,
             "fontWeight": "400",
             "margin": 0,
           }
@@ -370,7 +345,7 @@ exports[`Tab component tests Tab disabled 1`] = `
   <View
     style={
       {
-        "backgroundColor": "#00000000",
+        "backgroundColor": undefined,
         "height": 2,
         "paddingHorizontal": 8,
         "width": "100%",
@@ -380,7 +355,7 @@ exports[`Tab component tests Tab disabled 1`] = `
     <View
       style={
         {
-          "backgroundColor": "#00000000",
+          "backgroundColor": undefined,
           "borderRadius": 99,
           "flex": 1,
         }
@@ -409,9 +384,6 @@ exports[`Tab component tests Tab render icon + text 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": undefined,
-      "multiselectable": undefined,
-      "readOnly": undefined,
-      "required": undefined,
       "selected": false,
     }
   }
@@ -424,17 +396,13 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   focusable={true}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
   onLayout={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -445,8 +413,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#00000000",
+      "backgroundColor": undefined,
       "borderRadius": 4,
       "borderWidth": 2,
       "display": "flex",
@@ -475,7 +442,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
       accessible={true}
       style={
         {
-          "color": "#424242",
+          "color": "#616161",
           "fontFamily": "Arial",
           "fontSize": 20,
         }
@@ -497,9 +464,9 @@ exports[`Tab component tests Tab render icon + text 1`] = `
         numberOfLines={1}
         style={
           {
-            "color": "#424242",
-            "fontFamily": "Segoe UI",
-            "fontSize": 12,
+            "color": "#616161",
+            "fontFamily": "System",
+            "fontSize": 13,
             "fontWeight": "400",
             "margin": 0,
           }
@@ -512,7 +479,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
   <View
     style={
       {
-        "backgroundColor": "#00000000",
+        "backgroundColor": undefined,
         "height": 2,
         "paddingHorizontal": 8,
         "width": "100%",
@@ -522,7 +489,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     <View
       style={
         {
-          "backgroundColor": "#00000000",
+          "backgroundColor": undefined,
           "borderRadius": 99,
           "flex": 1,
         }
@@ -551,9 +518,6 @@ exports[`Tab component tests Tab render icon only 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": undefined,
-      "multiselectable": undefined,
-      "readOnly": undefined,
-      "required": undefined,
       "selected": false,
     }
   }
@@ -566,17 +530,13 @@ exports[`Tab component tests Tab render icon only 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   focusable={true}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
   onLayout={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -587,8 +547,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#00000000",
+      "backgroundColor": undefined,
       "borderRadius": 4,
       "borderWidth": 2,
       "display": "flex",
@@ -617,7 +576,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
       accessible={true}
       style={
         {
-          "color": "#424242",
+          "color": "#616161",
           "fontFamily": "Arial",
           "fontSize": 20,
         }
@@ -629,7 +588,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
   <View
     style={
       {
-        "backgroundColor": "#00000000",
+        "backgroundColor": undefined,
         "height": 2,
         "paddingHorizontal": 8,
         "width": "100%",
@@ -639,7 +598,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
     <View
       style={
         {
-          "backgroundColor": "#00000000",
+          "backgroundColor": undefined,
           "borderRadius": 99,
           "flex": 1,
         }

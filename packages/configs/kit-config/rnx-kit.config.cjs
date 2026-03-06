@@ -1,4 +1,4 @@
-/** @type {import('@rnx-kit/config').KitConfig} */
+/** @type {import('@rnx-kit/types-kit-config').KitConfig} */
 const config = {
   kitType: 'library',
   alignDeps: {
