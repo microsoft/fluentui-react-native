@@ -192,7 +192,7 @@ function immutableMergeWorker(
  *
  * @param objs - variable input array of typed objects to merge
  */
-export const immutableMerge: ObjectMerger = (...objs: unknown[]) => immutableMergeWorker(false, false, ...objs);
+export const immutableMerge: ObjectMerger = (...objs: unknown[]) => immutableMergeWorker(true, false, ...objs);
 
 /**
  * Version of immutable merge that can be configured to behave in a variety of manners.  See the documentation for details.
