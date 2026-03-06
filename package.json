@@ -9,13 +9,13 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git"
   },
   "workspaces": [
+    ".",
     "apps/*",
     "packages/**",
     "scripts"
   ],
   "scripts": {
     "build": "lage build-all",
-    "buildci": "lage buildci",
     "clean-all": "node ./scripts/src/preinstall/clean-all.js",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle": "lage bundle",
@@ -24,15 +24,12 @@
     "changeset:version": "node .github/scripts/changeset-version-with-postbump.mts",
     "change:check": "node .github/scripts/change.mts --check",
     "check-publishing": "node ./scripts/src/cli.mjs check-publishing",
-    "lint": "lage lint",
     "lint-fix": "cross-env FURN_FIX_MODE=true lage lint",
-    "lint-package": "lage lint-package",
     "lint-package-fix": "cross-env FURN_FIX_MODE=true lage lint-package",
-    "pr-check": "lage pr-check",
     "preinstall": "node ./scripts/src/preinstall/use-yarn-please.js",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
-    "test": "lage test",
+    "lint-lockfile": "lint-lockfile",
     "test-links": "markdown-link-check"
   },
   "devDependencies": {
@@ -64,7 +61,7 @@
   "engines": {
     "node": ">=22.12"
   },
-  "packageManager": "yarn@4.12.0",
+  "packageManager": "yarn@4.13.0",
   "rnx-kit": {
     "kitType": "library"
   }

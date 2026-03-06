@@ -29,6 +29,9 @@ export function checkDependencies() {
     }
 
     for (const pkgName in infos) {
+      // App packages don't have npm consumers, so peerDependency propagation doesn't apply
+      if (infos[pkgName].pkgJson['rnx-kit']?.kitType === 'app') continue;
+
       const deps = { ...infos[pkgName].dependencies, ...infos[pkgName].peerDependencies };
 
       /** @type {{ name: string, version: string }[]} */
