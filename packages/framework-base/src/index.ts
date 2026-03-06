@@ -4,7 +4,6 @@ export type {
   BuiltinRecursionHandlers,
   CustomRecursionHandler,
   MergeOptions,
-  ObjectBase,
   RecursionHandler,
   RecursionOption,
 } from './immutable-merge/Merge.ts';
@@ -15,7 +14,6 @@ export { getMemoCache, getTypedMemoCache } from './memo-cache/getMemoCache.ts';
 export { memoize } from './memo-cache/memoize.ts';
 
 // merge-props exports
-export type { StyleProp } from './merge-props/mergeStyles.types.ts';
 export { mergeStyles } from './merge-props/mergeStyles.ts';
 export { mergeProps } from './merge-props/mergeProps.ts';
 
@@ -58,3 +56,8 @@ export type { FurnJSX } from './jsx-namespace.ts';
 // general utilities
 export { filterProps } from './utilities/filterProps.ts';
 export type { PropsFilter } from './utilities/filterProps.ts';
+
+// core type utilities exports
+export type { StyleProp, ObjectBase, ObjectFallback } from './utilities/baseTypes.ts';
+export type { ObjectMerger, ObjectMergerWithOptions, StyleMerger } from './utilities/mergeTypes.ts';
+export type { ExpandedTypeof, TypeofResult } from './utilities/typeUtils.ts';

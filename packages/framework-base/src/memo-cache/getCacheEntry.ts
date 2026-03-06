@@ -35,7 +35,13 @@ function jumpToCacheEntry(entry: CacheEntry, val: any): CacheEntry {
   if (typeof val === 'object' || typeof val === 'function') {
     // objects and functions will be treated as key values in a WeakMap
     const byObj = (entry.obj ??= new WeakMap<MemoObjectKey, CacheEntry>());
-    return byObj.get(val) || byObj.set(val, {}).get(val);
+
+    let newEntry = byObj.get(val);
+    if (!newEntry) {
+      newEntry = {};
+      byObj.set(val, newEntry);
+    }
+    return newEntry;
   }
   // otherwise convert everything to a string and store it in the str object (using it as a map)
   const key = val + '';
@@ -49,7 +55,7 @@ function jumpToCacheEntry(entry: CacheEntry, val: any): CacheEntry {
  * @param entry - entry to use as the base of the cache walk
  * @param args - array of arguments to use to progress deeper into the cache
  */
-export function getCacheEntry(entry: CacheEntry, args: unknown[]): CacheEntry {
+export function getCacheEntry(entry: CacheEntry, args?: unknown[]): CacheEntry {
   // in the case where the args array exists and is > 0 length:
   // - walk the cache from entry, like a linked list, jumping to the next entry by key, building it up as you go
   // - otherwise if there are no args just use the noargs branch
