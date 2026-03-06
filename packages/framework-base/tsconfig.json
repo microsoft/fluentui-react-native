@@ -1,8 +1,7 @@
 {
   "extends": "@fluentui-react-native/config/tsconfig.strict.json",
   "compilerOptions": {
-    "outDir": "lib",
-    "types": ["node", "jest"]
+    "outDir": "lib"
   },
   "include": ["src"]
 }

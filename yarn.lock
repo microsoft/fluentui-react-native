@@ -3188,7 +3188,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/config@workspace:packages/config":
+"@fluentui-react-native/config@workspace:*, @fluentui-react-native/config@workspace:packages/config":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/config@workspace:packages/config"
   dependencies:
@@ -4288,6 +4288,7 @@ __metadata:
   resolution: "@fluentui-react-native/framework-base@workspace:packages/framework-base"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/react-configs": "workspace:*"
