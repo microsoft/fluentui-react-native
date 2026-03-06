@@ -73,7 +73,7 @@
     "oxc-resolver": "catalog:",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^4.4.11",
-    "react-test-renderer": "19.1.0",
+    "react-test-renderer": "19.1.4",
     "rimraf": "catalog:"
   },
   "jest": {

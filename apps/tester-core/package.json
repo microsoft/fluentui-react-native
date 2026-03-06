@@ -127,7 +127,7 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^3.9.2",
     "react-native-windows": "^0.81.0",
-    "react-test-renderer": "19.1.0",
+    "react-test-renderer": "19.1.4",
     "webdriverio": "catalog:"
   },
   "peerDependencies": {

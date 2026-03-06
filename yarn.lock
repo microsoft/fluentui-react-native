@@ -2669,16 +2669,16 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -2713,16 +2713,16 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -2761,17 +2761,17 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     assert-never: "npm:^1.2.1"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -2811,20 +2811,20 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
     unicode-segmenter: "npm:^0.14.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -2852,7 +2852,7 @@ __metadata:
     "@babel/preset-react": "catalog:"
     "@babel/preset-typescript": "catalog:"
     "@babel/runtime": "catalog:"
-    "@react-native/babel-preset": "catalog:0.74"
+    "@react-native/babel-preset": "catalog:0.81"
     "@rnx-kit/babel-preset-metro-react-native": "catalog:"
   peerDependencies:
     "@babel/core": "*"
@@ -2889,19 +2889,19 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -2949,22 +2949,22 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -2998,21 +2998,21 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -3055,22 +3055,22 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3112,19 +3112,19 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3174,14 +3174,14 @@ __metadata:
     "@fluentui-react-native/use-slots": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/babel-preset": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -3214,24 +3214,24 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     metro-config: "npm:^0.80.3"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3268,17 +3268,17 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     assert-never: "npm:^1.2.1"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -3581,19 +3581,19 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3629,18 +3629,18 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -3678,17 +3678,17 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3720,7 +3720,7 @@ __metadata:
     "@rnx-kit/metro-config": "catalog:"
     "@types/jasmine": "catalog:"
     "@types/node": "catalog:"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@wdio/appium-service": "catalog:"
     "@wdio/cli": "catalog:"
     "@wdio/globals": "catalog:"
@@ -3738,8 +3738,8 @@ __metadata:
     cross-env: "catalog:"
     expect-webdriverio: "catalog:"
     metro-config: "npm:^0.80.3"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
     rimraf: "catalog:"
@@ -3747,9 +3747,9 @@ __metadata:
     webdriverio: "catalog:"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -3793,18 +3793,18 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     assert-never: "npm:^1.2.1"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3834,18 +3834,18 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/use-subscription": "npm:^1.0.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
     use-subscription: "npm:^1.11.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -3875,18 +3875,18 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -3919,17 +3919,17 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -3960,16 +3960,16 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4005,19 +4005,19 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4046,13 +4046,13 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -4072,15 +4072,15 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/use-subscription": "npm:^1.0.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     use-subscription: "npm:^1.11.0"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -4107,18 +4107,18 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4153,20 +4153,20 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     assert-never: "npm:^1.2.1"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4200,20 +4200,20 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4247,20 +4247,20 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-babel-transformer": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4286,12 +4286,12 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "catalog:"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -4323,18 +4323,18 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
     "@rnx-kit/cli": "catalog:"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4370,19 +4370,19 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4423,19 +4423,19 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4472,18 +4472,18 @@ __metadata:
     "@react-native/metro-config": "npm:^0.81.0"
     "@types/invariant": "npm:^2.2.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4551,21 +4551,21 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4601,22 +4601,22 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4663,19 +4663,19 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
     "@types/node": "catalog:"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4722,19 +4722,19 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4767,19 +4767,19 @@ __metadata:
     "@fluentui-react-native/test-tools": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -4814,20 +4814,20 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4860,20 +4860,20 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4904,16 +4904,16 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4943,18 +4943,18 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -4996,22 +4996,22 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5128,18 +5128,18 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -5173,17 +5173,17 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5219,22 +5219,22 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -5262,13 +5262,13 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -5299,18 +5299,18 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -5352,19 +5352,19 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5393,15 +5393,15 @@ __metadata:
     "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -5487,7 +5487,7 @@ __metadata:
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
     "@types/jasmine": "catalog:"
     "@types/node": "catalog:"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@wdio/cli": "catalog:"
     "@wdio/globals": "catalog:"
@@ -5497,14 +5497,14 @@ __metadata:
     expect-webdriverio: "catalog:"
     flow-bin: "npm:^0.113.0"
     metro-config: "npm:^0.80.3"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
     react-native-test-app: "npm:^3.9.2"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
     webdriverio: "catalog:"
   peerDependencies:
     "@fluentui-react-native/callout": "workspace:*"
@@ -5522,9 +5522,9 @@ __metadata:
     "@fluentui-react-native/tooltip": "workspace:*"
     "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -5587,22 +5587,22 @@ __metadata:
     "@rnx-kit/cli": "catalog:"
     "@rnx-kit/metro-config": "catalog:"
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
-    "@rnx-kit/metro-serializer": "npm:^2.0.3"
-    "@rnx-kit/metro-serializer-esbuild": "npm:^0.3.0"
+    "@rnx-kit/metro-serializer": "catalog:"
+    "@rnx-kit/metro-serializer-esbuild": "catalog:"
     "@rnx-kit/tools-react-native": "npm:^2.3.2"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     metro: "npm:^0.83.1"
     metro-config: "npm:0.83.1"
     metro-core: "npm:^0.83.1"
     metro-runtime: "npm:^0.83.1"
     oxc-resolver: "catalog:"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
     react-native-test-app: "npm:^4.4.11"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
     rimraf: "catalog:"
   languageName: unknown
   linkType: soft
@@ -5730,19 +5730,19 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     "@uifabricshared/foundation-compose": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -5775,14 +5775,14 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     assert-never: "npm:^1.2.1"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -5802,13 +5802,13 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -5833,13 +5833,13 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -5862,13 +5862,13 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -5894,16 +5894,16 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -5933,16 +5933,16 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -5973,19 +5973,19 @@ __metadata:
     "@fluentui-react-native/test-tools": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native/babel-preset": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -6018,14 +6018,14 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -6049,14 +6049,14 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -6081,14 +6081,14 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -6112,14 +6112,14 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
-    react-test-renderer: "npm:19.1.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -6141,16 +6141,16 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -6188,16 +6188,16 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -6256,17 +6256,17 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.81.0"
     "@rnx-kit/cli": "catalog:"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
@@ -8843,6 +8843,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/assets-registry@npm:0.81.6":
+  version: 0.81.6
+  resolution: "@react-native/assets-registry@npm:0.81.6"
+  checksum: 10c0/b02921d95263d73bb584a41cf41bfc0e67b4e3b4a6237218eb9134f769a26abb12fbd16e87b44ecd199eb831665d94da29d52a70adb4c893ff32c5f63681361b
+  languageName: node
+  linkType: hard
+
 "@react-native/assets@npm:1.0.0":
   version: 1.0.0
   resolution: "@react-native/assets@npm:1.0.0"
@@ -9012,6 +9019,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/codegen@npm:0.81.6":
+  version: 0.81.6
+  resolution: "@react-native/codegen@npm:0.81.6"
+  dependencies:
+    "@babel/core": "npm:^7.25.2"
+    "@babel/parser": "npm:^7.25.3"
+    glob: "npm:^7.1.1"
+    hermes-parser: "npm:0.29.1"
+    invariant: "npm:^2.2.4"
+    nullthrows: "npm:^1.1.1"
+    yargs: "npm:^17.6.2"
+  peerDependencies:
+    "@babel/core": "*"
+  checksum: 10c0/1a6117949057f65476a95191137f0ff7799c11d6219e06e3b3c633174e62f3aa0bf06afc093be5a9fcab2ec1b3a4456446ef467b88714f686982f8834f79041b
+  languageName: node
+  linkType: hard
+
 "@react-native/community-cli-plugin@npm:0.74.89":
   version: 0.74.89
   resolution: "@react-native/community-cli-plugin@npm:0.74.89"
@@ -9055,6 +9079,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/community-cli-plugin@npm:0.81.6":
+  version: 0.81.6
+  resolution: "@react-native/community-cli-plugin@npm:0.81.6"
+  dependencies:
+    "@react-native/dev-middleware": "npm:0.81.6"
+    debug: "npm:^4.4.0"
+    invariant: "npm:^2.2.4"
+    metro: "npm:^0.83.1"
+    metro-config: "npm:^0.83.1"
+    metro-core: "npm:^0.83.1"
+    semver: "npm:^7.1.3"
+  peerDependencies:
+    "@react-native-community/cli": "*"
+    "@react-native/metro-config": "*"
+  peerDependenciesMeta:
+    "@react-native-community/cli":
+      optional: true
+    "@react-native/metro-config":
+      optional: true
+  checksum: 10c0/aa2c210421e6f963e3bfcfde37bd6ec0cfa7ec961d84c8e167754283fa288bfbce74cbeb90aabb70e041d4a593f65e10b4a8c668a78f6dcd61d5fde352a07604
+  languageName: node
+  linkType: hard
+
 "@react-native/debugger-frontend@npm:0.74.89":
   version: 0.74.89
   resolution: "@react-native/debugger-frontend@npm:0.74.89"
@@ -9066,6 +9113,13 @@ __metadata:
   version: 0.81.5
   resolution: "@react-native/debugger-frontend@npm:0.81.5"
   checksum: 10c0/6c8769526373314956ec53584b49d3ac94aace4232ba77cfdd96edaf346be8a648e2d877c719e7edaa4c1dcd6a09376012f35b25ca6498679b115815cc6940c3
+  languageName: node
+  linkType: hard
+
+"@react-native/debugger-frontend@npm:0.81.6":
+  version: 0.81.6
+  resolution: "@react-native/debugger-frontend@npm:0.81.6"
+  checksum: 10c0/d0987d33e8ab8847bf9392eeb4bec6559970c82581ca5c0839ac234c3c88e2c0d87a8ae746c8597a4316faf27533c9165b9a18a305359e5968564ca5aaab385e
   languageName: node
   linkType: hard
 
@@ -9109,6 +9163,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/dev-middleware@npm:0.81.6":
+  version: 0.81.6
+  resolution: "@react-native/dev-middleware@npm:0.81.6"
+  dependencies:
+    "@isaacs/ttlcache": "npm:^1.4.1"
+    "@react-native/debugger-frontend": "npm:0.81.6"
+    chrome-launcher: "npm:^0.15.2"
+    chromium-edge-launcher: "npm:^0.2.0"
+    connect: "npm:^3.6.5"
+    debug: "npm:^4.4.0"
+    invariant: "npm:^2.2.4"
+    nullthrows: "npm:^1.1.1"
+    open: "npm:^7.0.3"
+    serve-static: "npm:^1.16.2"
+    ws: "npm:^6.2.3"
+  checksum: 10c0/cc60df7eab7ca0af735499c3e3c7fb199bd75f7a9cef10fd2bc4a5f7aeb7147844e15320fe287704821e8fe4d20f8af5cfa722888aa1332459581edb9b84393c
+  languageName: node
+  linkType: hard
+
 "@react-native/eslint-plugin@npm:^0.84.0":
   version: 0.84.1
   resolution: "@react-native/eslint-plugin@npm:0.84.1"
@@ -9130,6 +9203,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/gradle-plugin@npm:0.81.6":
+  version: 0.81.6
+  resolution: "@react-native/gradle-plugin@npm:0.81.6"
+  checksum: 10c0/a653380073af624bac408eb696fcf67f8500a7a4bf6cefa4a157a8db3d1bfad51d5f3abf942635e96e2aa4a20e56143a6f1a3f52ff027448775041ce80604ced
+  languageName: node
+  linkType: hard
+
 "@react-native/js-polyfills@npm:0.74.89":
   version: 0.74.89
   resolution: "@react-native/js-polyfills@npm:0.74.89"
@@ -9141,6 +9221,13 @@ __metadata:
   version: 0.81.5
   resolution: "@react-native/js-polyfills@npm:0.81.5"
   checksum: 10c0/337d0f263a94f9f38a39efba5081481fe7ff0b6499f77708d97aa3d18cad527adec7f94a21f9af62ec4d78448a39f545223b52cca8c07c10a52b0468b456dd46
+  languageName: node
+  linkType: hard
+
+"@react-native/js-polyfills@npm:0.81.6":
+  version: 0.81.6
+  resolution: "@react-native/js-polyfills@npm:0.81.6"
+  checksum: 10c0/85fe2892b590eeb1cad627fe003bd8b617197fa82e820bbdf5dc15a008290d73d54f616e3d191e1dd4d52a06c0e70b175f22d127f06f74c9189e4159370e528b
   languageName: node
   linkType: hard
 
@@ -9224,6 +9311,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/normalize-colors@npm:0.81.6":
+  version: 0.81.6
+  resolution: "@react-native/normalize-colors@npm:0.81.6"
+  checksum: 10c0/e1f35b9b44b76d16bfe299b44c37fd8699e435a76b22eaebb8450905b05b4a47a720fe14502a7014c19a024900fd9d1d193c7bb2a7e8011c72fa222cfed9028c
+  languageName: node
+  linkType: hard
+
 "@react-native/virtualized-lists@npm:0.74.89":
   version: 0.74.89
   resolution: "@react-native/virtualized-lists@npm:0.74.89"
@@ -9255,6 +9349,23 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10c0/2f38e73d850e4c7f8bf9e6598ebdf97c524d6ddfa720044798e827aaa613ff6dc47dbdb8e440ce370f92f7ff932f0ac3204328287e79d7e3b8ac8db5651d0b4d
+  languageName: node
+  linkType: hard
+
+"@react-native/virtualized-lists@npm:0.81.6":
+  version: 0.81.6
+  resolution: "@react-native/virtualized-lists@npm:0.81.6"
+  dependencies:
+    invariant: "npm:^2.2.4"
+    nullthrows: "npm:^1.1.1"
+  peerDependencies:
+    "@types/react": ^19.1.4
+    react: "*"
+    react-native: "*"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10c0/345e8b4b444364daa6d439821040180b11c4001c3b28e384a30f46dcc98cd64d98a7184b47282786e98513685457d78bb98f1a5b94284e46281b694956ca3319
   languageName: node
   linkType: hard
 
@@ -9486,7 +9597,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/metro-serializer-esbuild@npm:^0.3.0, @rnx-kit/metro-serializer-esbuild@npm:^0.3.1":
+"@rnx-kit/metro-serializer-esbuild@npm:^0.3.1":
   version: 0.3.1
   resolution: "@rnx-kit/metro-serializer-esbuild@npm:0.3.1"
   dependencies:
@@ -10363,7 +10474,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:~19.1.0":
+"@types/react@npm:~19.1.4":
   version: 19.1.17
   resolution: "@types/react@npm:19.1.17"
   dependencies:
@@ -10688,14 +10799,14 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -10713,21 +10824,21 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
     "@uifabricshared/themed-settings": "workspace:*"
     "@uifabricshared/theming-ramp": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -10753,12 +10864,12 @@ __metadata:
     "@fluentui-react-native/react-configs": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -10784,17 +10895,17 @@ __metadata:
     "@react-native/metro-config": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "catalog:"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -10822,12 +10933,12 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~19.1.0"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -10847,13 +10958,13 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "catalog:"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -10873,13 +10984,13 @@ __metadata:
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@uifabricshared/foundation-settings": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
   peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
@@ -10903,18 +11014,18 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@types/react": "npm:~19.1.0"
+    "@types/react": "npm:~19.1.4"
     "@uifabricshared/theme-registry": "workspace:*"
     "@uifabricshared/theming-ramp": "workspace:*"
-    react: "npm:19.1.0"
-    react-native: "npm:^0.81.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.0
-    react: 18.2.0 || 19.0.0 || 19.1.0
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
@@ -21790,7 +21901,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^19.1.0":
+"react-is@npm:^19.1.4":
   version: 19.2.4
   resolution: "react-is@npm:19.2.4"
   checksum: 10c0/477a7cfc900f24194606e315fa353856a3a13487ea8eca841678817cad4daef64339ea0d1e84e58459fc75dbe0d9ba00bb0cc626db3d07e0cf31edc64cb4fa37
@@ -22186,18 +22297,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native@npm:^0.81.0":
-  version: 0.81.5
-  resolution: "react-native@npm:0.81.5"
+"react-native@npm:^0.81.6":
+  version: 0.81.6
+  resolution: "react-native@npm:0.81.6"
   dependencies:
     "@jest/create-cache-key-function": "npm:^29.7.0"
-    "@react-native/assets-registry": "npm:0.81.5"
-    "@react-native/codegen": "npm:0.81.5"
-    "@react-native/community-cli-plugin": "npm:0.81.5"
-    "@react-native/gradle-plugin": "npm:0.81.5"
-    "@react-native/js-polyfills": "npm:0.81.5"
-    "@react-native/normalize-colors": "npm:0.81.5"
-    "@react-native/virtualized-lists": "npm:0.81.5"
+    "@react-native/assets-registry": "npm:0.81.6"
+    "@react-native/codegen": "npm:0.81.6"
+    "@react-native/community-cli-plugin": "npm:0.81.6"
+    "@react-native/gradle-plugin": "npm:0.81.6"
+    "@react-native/js-polyfills": "npm:0.81.6"
+    "@react-native/normalize-colors": "npm:0.81.6"
+    "@react-native/virtualized-lists": "npm:0.81.6"
     abort-controller: "npm:^3.0.0"
     anser: "npm:^1.4.9"
     ansi-regex: "npm:^5.0.0"
@@ -22225,14 +22336,14 @@ __metadata:
     ws: "npm:^6.2.3"
     yargs: "npm:^17.6.2"
   peerDependencies:
-    "@types/react": ^19.1.0
-    react: ^19.1.0
+    "@types/react": ^19.1.4
+    react: ^19.1.4
   peerDependenciesMeta:
     "@types/react":
       optional: true
   bin:
     react-native: cli.js
-  checksum: 10c0/59b861b461e47a476dfe546b305f1b68b5248bedf2174f32c8aa02b0d1da8dc44fe8d0d60b426532353ff2b61d06d40a32a01dcc53043a3425e29b346065d159
+  checksum: 10c0/ff42d33412091c0e22d2366c9aea726e33637d2e34c6a5b2703687923078aeb615b3cd38da637ffd2105d681cecb9e2da0b371a77452931347dcc8171b9d7d72
   languageName: node
   linkType: hard
 
@@ -22268,15 +22379,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-test-renderer@npm:19.1.0":
-  version: 19.1.0
-  resolution: "react-test-renderer@npm:19.1.0"
+"react-test-renderer@npm:19.1.4":
+  version: 19.1.4
+  resolution: "react-test-renderer@npm:19.1.4"
   dependencies:
-    react-is: "npm:^19.1.0"
+    react-is: "npm:^19.1.4"
     scheduler: "npm:^0.26.0"
   peerDependencies:
-    react: ^19.1.0
-  checksum: 10c0/34ed4a37ba8b0beb96c048de6ff28574f018a18dd1042c24f8f46142d48eb5b27f82ff7c2823d082932fd3983c5a3529ab8cc8f15191d4306df0082f9f84678f
+    react: ^19.1.4
+  checksum: 10c0/3b2be2f631e0a022df5f59fe15240a99a4e8dfeba73c5239f588e4bc78135ff8eb4273273e6255b43f24b5b14f93a8cda801ba90c6c6b946d7f9fc0960280cac
   languageName: node
   linkType: hard
 
@@ -22289,10 +22400,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.1.0":
-  version: 19.1.0
-  resolution: "react@npm:19.1.0"
-  checksum: 10c0/530fb9a62237d54137a13d2cfb67a7db6a2156faed43eecc423f4713d9b20c6f2728b026b45e28fcd72e8eadb9e9ed4b089e99f5e295d2f0ad3134251bdd3698
+"react@npm:19.1.4":
+  version: 19.1.4
+  resolution: "react@npm:19.1.4"
+  checksum: 10c0/159257dbaf168facecc0a34825114e2b00624d315b7dca8468afcc790eadf5a49f90c0234be7492c7207239292e789e443ca419a83121898b82b0824454900f2
   languageName: node
   linkType: hard
 
