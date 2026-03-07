@@ -1,0 +1,21 @@
+{
+  "name": "@fluentui-react-native/config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared configuration files for Fluent UI React Native packages",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/configs/config"
+  },
+  "exports": {
+    "./tsconfig.strict.json": "./tsconfig.strict.json"
+  },
+  "dependencies": {
+    "@rnx-kit/tsconfig": "catalog:"
+  },
+  "furn": {
+    "packageType": "tooling"
+  }
+}

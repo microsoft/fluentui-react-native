@@ -100,7 +100,7 @@ export type SlotFn<TProps> = {
  * Children will be passed as part of the props for component rendering. The `children` prop will be
  * automatically inferred and typed correctly by the prop type.
  */
-export type PhasedRender<TProps> = (props: TProps) => React.ComponentType<React.PropsWithChildren<TProps>>;
+export type PhasedRender<TProps> = (props: TProps) => React.ComponentType<TProps>;
 
 /**
  * Component type for a component that can be rendered in two phases, with the attached phased render function.

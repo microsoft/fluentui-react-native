@@ -5,7 +5,7 @@ exports[`Chip component tests Chip all props 1`] = `
   accessibilityState={
     {
       "busy": undefined,
-      "checked": undefined,
+      "checked": false,
       "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
@@ -99,7 +99,7 @@ exports[`Chip component tests Chip tokens 1`] = `
   accessibilityState={
     {
       "busy": undefined,
-      "checked": undefined,
+      "checked": false,
       "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
@@ -169,7 +169,7 @@ exports[`Chip component tests Empty Chip 1`] = `
   accessibilityState={
     {
       "busy": undefined,
-      "checked": undefined,
+      "checked": false,
       "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,

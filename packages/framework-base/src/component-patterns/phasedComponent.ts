@@ -17,20 +17,22 @@ export function getPhasedRender<TProps>(component: React.ComponentType<TProps>):
     // if this has a phased render function, return it
     if ((component as PhasedComponent<TProps>)._phasedRender) {
       return (component as PhasedComponent<TProps>)._phasedRender;
-    } else if ((component as ComposableFunction<TProps>)._staged) {
+    } else {
       // for backward compatibility check for staged render and return a wrapper that maps the signature
       const staged = (component as ComposableFunction<TProps>)._staged;
-      return (props: TProps) => {
-        const { children, ...rest } = props as React.PropsWithChildren<TProps>;
-        const inner = staged(rest as TProps, ...React.Children.toArray(children));
-        // staged render functions were not consistently marking contents as composable, though they were treated
-        // as such in useHook. To maintain compatibility we mark the returned function as composable here. This was
-        // dangerous, but this shim is necessary for backward compatibility. The newer pattern is explicit about this.
-        if (typeof inner === 'function' && !(inner as LegacyDirectComponent<TProps>)._canCompose) {
-          return Object.assign(inner, { _canCompose: true });
-        }
-        return inner;
-      };
+      if (staged) {
+        return (props: TProps) => {
+          const { children, ...rest } = props as React.PropsWithChildren<TProps>;
+          const inner = staged(rest as TProps, ...React.Children.toArray(children));
+          // staged render functions were not consistently marking contents as composable, though they were treated
+          // as such in useHook. To maintain compatibility we mark the returned function as composable here. This was
+          // dangerous, but this shim is necessary for backward compatibility. The newer pattern is explicit about this.
+          if (typeof inner === 'function' && !(inner as LegacyDirectComponent<TProps>)._canCompose) {
+            return Object.assign(inner, { _canCompose: true });
+          }
+          return inner;
+        };
+      }
     }
   }
   return undefined;
@@ -43,9 +45,9 @@ export function getPhasedRender<TProps>(component: React.ComponentType<TProps>):
  */
 export function phasedComponent<TProps>(getInnerPhase: PhasedRender<TProps>): FunctionComponent<TProps> {
   return Object.assign(
-    (props: React.PropsWithChildren<TProps>) => {
+    (props: TProps) => {
       // pull out children from props
-      const { children, ...outerProps } = props;
+      const { children, ...outerProps } = props as React.PropsWithChildren<TProps>;
       const Inner = getInnerPhase(outerProps as TProps);
       return renderForJsxRuntime(Inner, { children });
     },
