@@ -121,6 +121,7 @@ describe('useSlot tests', () => {
     });
     const tree2 = component2!.toJSON();
     expect(tree2).toMatchSnapshot();
+    // @ts-expect-error - we know the structure of the tree here and want to compare the text nodes directly, this is not a general pattern
     expect(tree1!['HeaderCaptionText1']).toEqual(tree2!['HeaderCaptionText2']);
   });
 });
