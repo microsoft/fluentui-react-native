@@ -64,8 +64,8 @@ function normalizeOptions(options: RecursionOption | MergeOptions): [MergeOption
   return typeof options === 'boolean'
     ? [{ object: options }, options]
     : typeof options === 'number'
-    ? [{ object: options >= 0 ? options : true }, options !== 0]
-    : [options, true];
+      ? [{ object: options >= 0 ? options : true }, options !== 0]
+      : [options, true];
 }
 
 /** resolve custom handlers if they are applicable */

@@ -2660,6 +2660,7 @@ __metadata:
   resolution: "@fluentui-react-native/adapters@workspace:packages/utils/adapters"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/react-configs": "workspace:*"
@@ -4467,6 +4468,7 @@ __metadata:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/babel-config": "workspace:*"
+    "@fluentui-react-native/config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
@@ -6016,6 +6018,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/babel-config": "workspace:*"
+    "@fluentui-react-native/config": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/jest-config": "workspace:*"
