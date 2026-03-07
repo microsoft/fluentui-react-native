@@ -1,5 +1,20 @@
 # Change Log - @uifabricshared/foundation-compose
 
+## 1.16.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @uifabricshared/foundation-composable@0.14.2
+  - @uifabricshared/foundation-settings@0.16.2
+  - @uifabricshared/foundation-tokens@0.16.2
+  - @uifabricshared/themed-settings@0.13.2
+  - @uifabricshared/theming-ramp@0.21.2
+  - @fluentui-react-native/default-theme@0.27.2
+  - @fluentui-react-native/theme-types@0.44.2
+  - @fluentui-react-native/framework-base@0.3.2
+
 ## 1.16.1
 
 ### Patch Changes
