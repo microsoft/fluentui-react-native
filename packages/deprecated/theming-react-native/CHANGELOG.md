@@ -1,5 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
+## 0.21.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @uifabricshared/theme-registry@0.13.2
+  - @uifabricshared/theming-ramp@0.21.2
+  - @fluentui-react-native/default-theme@0.27.2
+  - @fluentui-react-native/win32-theme@0.39.2
+
 ## 0.21.1
 
 ### Patch Changes

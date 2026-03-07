@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
+## 0.7.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/pressable@0.13.2
+  - @fluentui-react-native/framework@0.15.2
+  - @fluentui-react-native/theme-types@0.44.2
+  - @fluentui-react-native/framework-base@0.3.2
+
 ## 0.7.1
 
 ### Patch Changes
