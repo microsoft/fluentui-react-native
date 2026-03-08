@@ -8,8 +8,8 @@ export type ValueFactory<T> = () => T;
  * - Typed: the cache will enforce the type of both the factory and returned value
  * - Untyped: the cache will infer the type on each call from the factory return value
  */
-export type GetTypedMemoValue<T> = (factory: T | ValueFactory<T>, keys: unknown[]) => [T, GetTypedMemoValue<T>];
-export type GetMemoValue = <T>(factory: T | ValueFactory<T>, keys: unknown[]) => [T, GetMemoValue];
+export type GetTypedMemoValue<T> = (factory: T | ValueFactory<T>, keys?: unknown[]) => [T, GetTypedMemoValue<T>];
+export type GetMemoValue = <T>(factory: T | ValueFactory<T>, keys?: unknown[]) => [T, GetMemoValue];
 
 /** base node used to remember references when a globalKey is set */
 const _baseEntry: CacheEntry = {};
@@ -21,13 +21,13 @@ const _baseEntry: CacheEntry = {};
  * @param factory - generally a function who's results will be cached, and returned via the set of keys
  * @param keys - an ordered array of values of any type, used as keys to look up the entry
  */
-function getMemoValueWorker<T>(entry: CacheEntry, factory: T | ValueFactory<T>, keys: unknown[]): [T, GetMemoValue] {
+function getMemoValueWorker<T>(entry: CacheEntry, factory: T | ValueFactory<T>, keys?: unknown[]): [T, GetMemoValue] {
   const foundEntry = getCacheEntry(entry, keys);
   // check the key being set, not the value to disambiguate an undefined factory result/value from never having run the factory
   if (!Object.prototype.hasOwnProperty.call(foundEntry, 'value')) {
     foundEntry.value = typeof factory === 'function' ? (factory as ValueFactory<T>)() : factory;
   }
-  return [foundEntry.value as T, <U>(fact: U | ValueFactory<U>, args: unknown[]) => getMemoValueWorker<U>(foundEntry, fact, args)];
+  return [foundEntry.value as T, <U>(fact: U | ValueFactory<U>, args?: unknown[]) => getMemoValueWorker<U>(foundEntry, fact, args)];
 }
 
 /**

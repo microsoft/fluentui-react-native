@@ -1,6 +1,7 @@
 import React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
 import type { RenderType, RenderResult, DirectComponent, LegacyDirectComponent } from './render.types';
+import { extractChildren, splitPropsAndChildren } from '../utilities/typeUtils';
 
 export type CustomRender = () => RenderResult;
 
@@ -20,13 +21,13 @@ function asLegacyDirectComponent<TProps>(type: RenderType): LegacyDirectComponen
 
 export function renderForJsxRuntime<TProps>(
   type: React.ElementType,
-  props: React.PropsWithChildren<TProps>,
+  props: TProps,
   key?: React.Key,
-  jsxFn: typeof ReactJSX.jsx = undefined,
+  jsxFn?: typeof ReactJSX.jsx,
 ): RenderResult {
   const legacyDirect = asLegacyDirectComponent(type);
   if (legacyDirect) {
-    const { children, ...rest } = props;
+    const [rest, children] = splitPropsAndChildren(props);
     const newProps = { ...rest, key };
     return legacyDirect(newProps, ...React.Children.toArray(children)) as RenderResult;
   }
@@ -38,14 +39,14 @@ export function renderForJsxRuntime<TProps>(
 
   // auto-detect whether to use jsx or jsxs based on number of children, 0 or 1 = jsx, more than 1 = jsxs
   if (!jsxFn) {
-    if (React.Children.count(props.children) > 1) {
+    if (React.Children.count(extractChildren(props)) > 1) {
       jsxFn = ReactJSX.jsxs;
     } else {
       jsxFn = ReactJSX.jsx;
     }
   }
   // Extract key from props to avoid React 19 warning about spreading key prop
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const { key: propsKey, ...propsWithoutKey } = props as any;
   // Use explicitly passed key, or fall back to key from props
   const finalKey = key ?? propsKey;

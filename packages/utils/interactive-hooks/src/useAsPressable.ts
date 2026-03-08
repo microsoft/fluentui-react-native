@@ -8,11 +8,12 @@ import type {
   IHoverState,
   IFocusState,
   IWithPressableEvents,
+  IWithPartialPressableEvents,
 } from './useAsPressable.types';
+import type { BlurEvent, FocusEvent, MouseEvent, GestureResponderEvent } from 'react-native';
 import type { PressableFocusProps, PressableHoverProps, PressablePressProps } from './usePressableState.types';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-type ObjectBase = {};
+type ObjectBase = object;
 
 /**
  * hover specific state and callback helper
@@ -21,7 +22,7 @@ function useHoverHelper(props: PressableHoverProps): [PressableHoverProps, IHove
   const [hoverState, setHoverState] = React.useState({ hovered: false });
 
   const onHoverIn = React.useCallback(
-    (e) => {
+    (e: MouseEvent) => {
       setHoverState({ hovered: true });
       if (props.onHoverIn) {
         props.onHoverIn(e);
@@ -31,7 +32,7 @@ function useHoverHelper(props: PressableHoverProps): [PressableHoverProps, IHove
   );
 
   const onHoverOut = React.useCallback(
-    (e) => {
+    (e: MouseEvent) => {
       setHoverState({ hovered: false });
       if (props.onHoverOut) {
         props.onHoverOut(e);
@@ -48,7 +49,7 @@ function useHoverHelper(props: PressableHoverProps): [PressableHoverProps, IHove
 function useFocusHelper(props: PressableFocusProps): [PressableFocusProps, IFocusState] {
   const [focusState, setFocusState] = React.useState({ focused: false });
   const onFocus = React.useCallback(
-    (e) => {
+    (e: FocusEvent) => {
       setFocusState({ focused: true });
       if (props.onFocus) {
         props.onFocus(e);
@@ -58,7 +59,7 @@ function useFocusHelper(props: PressableFocusProps): [PressableFocusProps, IFocu
   );
 
   const onBlur = React.useCallback(
-    (e) => {
+    (e: BlurEvent) => {
       setFocusState({ focused: false });
       if (props.onBlur) {
         props.onBlur(e);
@@ -76,7 +77,7 @@ function usePressHelper(props: PressablePressProps): [PressablePressProps, IPres
   const [pressState, setPressState] = React.useState({ pressed: false });
 
   const onPressIn = React.useCallback(
-    (e) => {
+    (e: GestureResponderEvent) => {
       setPressState({ pressed: true });
       if (props.onPressIn) {
         props.onPressIn(e);
@@ -86,7 +87,7 @@ function usePressHelper(props: PressablePressProps): [PressablePressProps, IPres
   );
 
   const onPressOut = React.useCallback(
-    (e) => {
+    (e: GestureResponderEvent) => {
       setPressState({ pressed: false });
       if (props.onPressOut) {
         props.onPressOut(e);
@@ -103,7 +104,7 @@ function usePressHelper(props: PressablePressProps): [PressablePressProps, IPres
  * as each of these calls will create a new instance of the Pressability class.
  * @param props - input props for the component
  */
-export function useFocusState<T extends ObjectBase>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IFocusState] {
+export function useFocusState<T extends ObjectBase>(props: IWithPressableOptions<T>): [IWithPartialPressableEvents<T>, IFocusState] {
   const [focusProps, focusState] = useFocusHelper(props);
   return [{ ...props, ...usePressability({ ...props, ...focusProps }) }, focusState];
 }
@@ -113,7 +114,7 @@ export function useFocusState<T extends ObjectBase>(props: IWithPressableOptions
  * as each of these calls will create a new instance of the Pressability class.
  * @param props - input props for the component
  */
-export function usePressState<T extends ObjectBase>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IPressState] {
+export function usePressState<T extends ObjectBase>(props: IWithPressableOptions<T>): [IWithPartialPressableEvents<T>, IPressState] {
   const [pressProps, pressState] = usePressHelper(props);
   return [{ ...props, ...usePressability({ ...props, ...pressProps }) }, pressState];
 }
@@ -123,7 +124,7 @@ export function usePressState<T extends ObjectBase>(props: IWithPressableOptions
  * as each of these calls will create a new instance of the Pressability class.
  * @param props - input props for the component
  */
-export function useHoverState<T extends ObjectBase>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IHoverState] {
+export function useHoverState<T extends ObjectBase>(props: IWithPressableOptions<T>): [IWithPartialPressableEvents<T>, IHoverState] {
   const [hoverProps, hoverState] = useHoverHelper(props);
   return [{ ...props, ...usePressability({ ...props, ...hoverProps }) }, hoverState];
 }
@@ -139,7 +140,7 @@ export function useAsPressable<T extends ObjectBase>(props: IWithPressableOption
   const pressabilityProps = usePressability({ ...props, ...hoverProps, ...focusProps, ...pressProps });
 
   return {
-    props: { ...props, ...pressabilityProps },
+    props: { ...props, ...pressabilityProps } as IWithPressableEvents<T>,
     state: { ...hoverState, ...focusState, ...pressState },
   };
 }

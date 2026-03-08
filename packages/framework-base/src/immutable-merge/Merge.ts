@@ -1,3 +1,6 @@
+import { getEntityType, isObject } from '../utilities/typeUtils';
+import type { ObjectMerger, ObjectMergerWithOptions } from '../utilities/mergeTypes';
+
 /**
  * The basic options for recursion at a given level.  Two types for two behaviors:
  *
@@ -29,19 +32,6 @@ export type BuiltinRecursionHandlers = 'appendArray';
 export type RecursionHandler = BuiltinRecursionHandlers | CustomRecursionHandler;
 
 /**
- * Base object type for merges, avoids using object since that is too broad. In particular things like null and arrays
- * are not valid object types for the purposes of this library.
- */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type ObjectBase = {};
-
-/**
- *
- */
-export type TypeofResult = 'undefined' | 'object' | 'boolean' | 'number' | 'string' | 'symbol' | 'bigint' | 'function';
-export type ExpandedTypeof = TypeofResult | 'array' | 'null';
-
-/**
  * configuration object for the merge, key names are matched with a few exceptions:
  * - object: matches non-array object types
  * - array: matches array types
@@ -50,6 +40,12 @@ export type ExpandedTypeof = TypeofResult | 'array' | 'null';
 export interface MergeOptions {
   [objectTypeOrKeyName: string]: RecursionOption | RecursionHandler | MergeOptions;
 }
+
+/**
+ * Union type for the options parameter of the merge core function, this allows for either a simple recursion option
+ * that applies to all keys and types, or a full configuration object for more control.
+ */
+export type MergeCoreOptions = RecursionOption | MergeOptions;
 
 /**
  * built in handlers for the module
@@ -70,25 +66,6 @@ function normalizeOptions(options: RecursionOption | MergeOptions): [MergeOption
     : typeof options === 'number'
       ? [{ object: options >= 0 ? options : true }, options !== 0]
       : [options, true];
-}
-
-/**
- * Provide a more sensible type result that expands upon the built in typeof operator
- * In particular this will differentiate arrays and nulls from standard objects
- * @param val - value to check type
- */
-function getEntityType(val: unknown): ExpandedTypeof {
-  switch (typeof val) {
-    case 'object':
-      if (val === null) {
-        return 'null';
-      } else if (Array.isArray(val)) {
-        return 'array';
-      }
-      return 'object';
-    default:
-      return typeof val as TypeofResult;
-  }
 }
 
 /** resolve custom handlers if they are applicable */
@@ -142,21 +119,12 @@ function getHandlerForPropertyOfType(
 }
 
 /**
- * Assign properties of source objects to a new target object. This is just a type wrapper around Object.assign
- * @param objs - array of objects to merge
- * @returns the result of object assign on the objects, typed to T
- */
-function assignToNewObject<T extends ObjectBase>(...objs: T[]): T {
-  return Object.assign({}, ...objs);
-}
-
-/**
  * Filter a set of unknown values to only include those that extend ObjectBase
  * @param values - array of values to filter
  * @returns the filtered set of values
  */
-export function filterToObjects<T extends ObjectBase = ObjectBase>(values: unknown[]): T[] {
-  return values.filter((v) => v && getEntityType(v) === 'object' && Object.getOwnPropertyNames(v).length > 0) as T[];
+export function filterToObjects<T = Record<string, unknown>>(values: unknown[]): T[] {
+  return values.filter((v) => v && isObject(v) && Object.getOwnPropertyNames(v).length > 0) as T[];
 }
 
 /**
@@ -172,15 +140,19 @@ export function filterToObjects<T extends ObjectBase = ObjectBase>(values: unkno
  * is true the routine will progress through all branches of the hierarchy.  Useful if using a processor function that needs to be run.
  * @param objs - an array of objects to merge together
  */
-function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOption | MergeOptions, singleMode: boolean, ...objs: T[]): T {
-  const setToMerge = filterToObjects<T>(objs);
+function immutableMergeWorker(
+  mergeOptions: RecursionOption | MergeOptions,
+  singleMode: boolean,
+  ...objs: unknown[]
+): Record<string, unknown> | undefined {
+  const setToMerge = filterToObjects(objs);
   const [options, mightRecurse] = normalizeOptions(mergeOptions);
   const processSingle = singleMode && setToMerge.length === 1;
 
   // there is work to do if there is more than one object to merge or if we are processing single objects
   if (setToMerge.length > 1 || (processSingle && setToMerge.length === 1)) {
     // now assign everything to get the normal property precedence (and merge all the keys)
-    let result = processSingle ? undefined : assignToNewObject(...setToMerge);
+    let result = processSingle ? undefined : Object.assign({}, ...setToMerge);
     const processSet = result || setToMerge[0];
 
     for (const key in processSet) {
@@ -193,11 +165,9 @@ function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOptio
           if (handler !== undefined) {
             const values = setToMerge.map((set) => set[key]).filter((v) => v !== undefined);
             const updatedVal =
-              typeof handler === 'function'
-                ? handler(...values)
-                : immutableMergeWorker<ObjectBase>(handler, singleMode, ...filterToObjects(values));
+              typeof handler === 'function' ? handler(...values) : immutableMergeWorker(handler, singleMode, ...filterToObjects(values));
             if (updatedVal !== originalVal) {
-              result = result || assignToNewObject(...setToMerge);
+              result = result || Object.assign({}, ...setToMerge);
               result[key] = updatedVal;
             }
           }
@@ -222,9 +192,7 @@ function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOptio
  *
  * @param objs - variable input array of typed objects to merge
  */
-export function immutableMerge<T extends ObjectBase>(...objs: (T | undefined)[]): T | undefined {
-  return immutableMergeWorker(true, false, ...objs);
-}
+export const immutableMerge: ObjectMerger = (...objs: unknown[]) => immutableMergeWorker(true, false, ...objs);
 
 /**
  * Version of immutable merge that can be configured to behave in a variety of manners.  See the documentation for details.
@@ -232,12 +200,8 @@ export function immutableMerge<T extends ObjectBase>(...objs: (T | undefined)[])
  * @param options - configuration options for the merge, this dictates what keys will be handled in what way
  * @param objs - set of objects to merge together
  */
-export function immutableMergeCore<T extends ObjectBase>(
-  options: RecursionOption | MergeOptions,
-  ...objs: (T | undefined)[]
-): T | undefined {
-  return immutableMergeWorker(options, false, ...objs);
-}
+export const immutableMergeCore: ObjectMergerWithOptions<MergeCoreOptions> = (options: MergeCoreOptions, ...objs: unknown[]) =>
+  immutableMergeWorker(options, false, ...objs);
 
 /**
  * Process one or more immutable objects ensuring that handlers are called on every entry that applies.  If a single object
@@ -250,6 +214,5 @@ export function immutableMergeCore<T extends ObjectBase>(
  * @param processors - set of processor functions for handling keys
  * @param objs - one or more objects to process.  If multiple objects are passed they will be merged
  */
-export function processImmutable<T extends ObjectBase>(options: MergeOptions, ...objs: (T | undefined)[]): T | undefined {
-  return immutableMergeWorker(options, true, ...objs);
-}
+export const processImmutable: ObjectMergerWithOptions<MergeOptions> = (options: MergeOptions, ...objs: unknown[]) =>
+  immutableMergeWorker(options, true, ...objs);
