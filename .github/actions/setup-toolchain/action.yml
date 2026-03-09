@@ -34,7 +34,7 @@ runs:
 
     - name: Install Yarn Switch (Windows)
       if: runner.os == 'Windows'
-      shell: pwsh
+      shell: bash
       run: |
         curl -s https://repo.yarnpkg.com/install | bash
-        echo "$HOME/.yarn/switch/bin" >> $env:GITHUB_PATH
+        echo "$HOME/.yarn/switch/bin" >> $GITHUB_PATH

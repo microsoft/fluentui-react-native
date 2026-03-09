@@ -286,7 +286,7 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn
 
       - name: Validate changesets
         run: yarn change:check
