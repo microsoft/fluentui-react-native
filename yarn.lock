@@ -6213,15 +6213,15 @@ __metadata:
   linkType: soft
 
 "@fluentui/react-native-icons@npm:^2.0.316":
-  version: 2.0.316
-  resolution: "@fluentui/react-native-icons@npm:2.0.316"
+  version: 2.0.320
+  resolution: "@fluentui/react-native-icons@npm:2.0.320"
   dependencies:
     "@types/react-native": "npm:^0.68.0"
     tslib: "npm:^2.1.0"
   peerDependencies:
     react: ">=16.8.0 <19.0.0"
     react-native-svg: ">=12.5.0"
-  checksum: 10c0/5a9bc85b41dd6551ddbd6f4a505ac6f1892748554f2db2b5ca40cbddfa511d04b1c1124ea841c74b4d82ce1ae9e44e4a4e5920d06fa3e1b4cd8f032c3100d233
+  checksum: 10c0/4f0b679f4b0de5eae9a1b630bbc4a1067fd0a210180c12c721c6d224675024b82ed3c434981b3a5220019eb479e781f2deeafb7dea6739664aacfbe873e3adac
   languageName: node
   linkType: hard
 
