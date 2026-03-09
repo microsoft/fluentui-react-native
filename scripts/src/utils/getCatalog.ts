@@ -3,8 +3,13 @@ import { scriptsDir } from './ispnpm.ts';
 
 export async function getCatalog(): Promise<Record<string, string>> {
   const command = 'yarn config get catalog --json';
-  const output = await execWithOutput(command);
-  return JSON.parse(output) as Record<string, string>;
+  try {
+    const output = await execWithOutput(command);
+    return JSON.parse(output) as Record<string, string>;
+  } catch {
+    // Yarn v6 does not support the catalog: protocol; return empty object
+    return {};
+  }
 }
 
 function execWithOutput(command: string): Promise<string> {
