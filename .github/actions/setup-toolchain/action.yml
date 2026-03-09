@@ -1,0 +1,40 @@
+name: Set up toolchain
+description: Sets up Node.js, platform-specific tools, and Yarn Switch
+
+inputs:
+  platform:
+    description: Target platform (android, ios, macos, windows)
+    required: false
+    default: ''
+  node-version:
+    description: Node.js version to use
+    required: false
+    default: '22'
+  xcode-developer-dir:
+    description: Path to Xcode developer directory (macOS only)
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Set up toolchain
+      uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+      with:
+        platform: ${{ inputs.platform }}
+        node-version: ${{ inputs.node-version }}
+        xcode-developer-dir: ${{ inputs.xcode-developer-dir }}
+
+    - name: Install Yarn Switch
+      if: runner.os != 'Windows'
+      shell: bash
+      run: |
+        curl -s https://repo.yarnpkg.com/install | bash
+        echo "$HOME/.yarn/switch/bin" >> $GITHUB_PATH
+
+    - name: Install Yarn Switch (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      run: |
+        curl -s https://repo.yarnpkg.com/install | bash
+        echo "$HOME/.yarn/switch/bin" >> $env:GITHUB_PATH

@@ -66,6 +66,11 @@ extends:
                 displayName: 'Use Node.js 22.x'
 
               - script: |
+                  curl -s https://repo.yarnpkg.com/install | bash
+                  echo "##vso[task.prependpath]$(HOME)/.yarn/switch/bin"
+                displayName: 'Install Yarn Switch'
+
+              - script: |
                   yarn
                 displayName: 'yarn install'
 
@@ -103,6 +108,11 @@ extends:
                 inputs:
                   version: '22.x'
                 displayName: 'Use Node.js 22.x'
+
+              - script: |
+                  curl -s https://repo.yarnpkg.com/install | bash
+                  echo "##vso[task.prependpath]$(HOME)/.yarn/switch/bin"
+                displayName: 'Install Yarn Switch'
 
               - task: DownloadPipelineArtifact@2
                 inputs:
