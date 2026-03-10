@@ -28,7 +28,7 @@ jobs:
         run: yarn
 
       - name: Build CI
-        run: yarn lage buildci
+        run: yarn buildci
 
   android:
     name: Android PR
@@ -313,7 +313,7 @@ jobs:
         run: yarn build
 
       - name: Pack packages
-        run: yarn lage pack --verbose --grouped
+        run: yarn tasks run pack
 
       - name: List packed tarballs
         id: check
@@ -357,7 +357,7 @@ jobs:
           path: _packed/
 
       - name: Simulate publish
-        run: yarn lage publish:dry-run --verbose --grouped
+        run: yarn tasks run publish-dry-run
 
   test-links:
     name: Test repo links

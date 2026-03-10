@@ -3,92 +3,92 @@
     "version": 9
   },
   "workspaces": {
-    "@fluentui-react-native/adapters": "ef4d004a0296c37bb1ab3f2bf7b6bcc916c579c8bcf9919c7a7c4d19329aa445848aa1b42073858448365c1e7cf2899d5e876c5d830cdec237eedb1aeb728bc8",
-    "@fluentui-react-native/android-theme": "243846b0639d6547f2a83504eed8d2142e4cb4dc9412d4a3082c736f2d6ee7baf4230c9486ec07680088e91471fe165013f4857369b726ad8463e2b7b3aed21b",
-    "@fluentui-react-native/apple-theme": "ad411d5a3200da3e38cd0a722b8d6afd074102798239c2d5a2748e1e00f198546cd5048306217be5f748e010995bde5ef83cf7e745e39d8e8d67fe71a542f85d",
-    "@fluentui-react-native/avatar": "19eff48257ad82b1d80463ee3c91955b49efb18eaa28e5f83664724a6f58da5c4bb1937b8e86a455293f3364602317abcb51b6e0a4153f8ee9b2eb239ae7ce7d",
-    "@fluentui-react-native/babel-config": "a2d82d3731b8860b21eafcbcbf05acce27b907919a4e07b0dd8713d19710254dc3901bd168f75e41c74cee45f9f0187b7a096700f9c56bdfb3cab54eb8a70ea5",
-    "@fluentui-react-native/badge": "bc342dec1f40452d47e95c7022f87356f10c28417ffc2d949471460da28aa0731bc6faf32128252140ac26371dbba3207ed706330c9f31c18e18ca96d8c8d4f5",
-    "@fluentui-react-native/button": "1c6d9299c0016d638dcd9da98ad413d29b537d228e92b1f49824099c2dd34da187b9a20f79adddd8831013a63045d5cd002f4329f355243ece59c94cb2fc26da",
-    "@fluentui-react-native/callout": "23809c3c4ef72ef99fcabda1461022ea8c11e09baaa1eb401ee27abdbb853f2ec57b7dd8e431ff0322d25da42ed748890b02b325975991cf35c936719abd0ed6",
-    "@fluentui-react-native/checkbox": "3790873d90f6b186ab76531ed568b00828bf7c5c422eba60777009a1736588a9c8b15525abbc1fdd4120a75789676d6290c37463be017f65c9714359698cf8ae",
-    "@fluentui-react-native/chip": "e33149505add9331962d550e657d565b55da55c6e72673cc750c0f1f66a489db5a96b43ac3f7adf4ed9760c73bb20e23fd2ec361564d58bb140594293029b568",
-    "@fluentui-react-native/codemods": "dca33966d37cad3773dcd5e8819debba61fd439093a1b373ca6b053554dc865109e631c6241b1869024b3fe5b9506dcf086c124b76e0250024fba9db7539aa27",
-    "@fluentui-react-native/composition": "8b2266bde2db2cefa7db600eae970beb26b233ef329da16e5954e580be78afa4b67be24ddc6d2cd4154b485a784c716a42c6a9a082a11c0803c7dce64426b418",
-    "@fluentui-react-native/contextual-menu": "28987f20648559865afd06b04e3f4e3fa9e70714848100970f56d7a1ccf3ed93724477a495522b67578c46c05ca11a1be6ea3aa56504f8f6693a1c1cc95e5108",
-    "@fluentui-react-native/default-theme": "74c206077d0ae61945bf21a232f9293e71320f7c1b043cd2549e3b40db5e843dc326c9abb2a8e0cee9de364270326442fc7306bfe75463cb59b523fac5b5c9f3",
-    "@fluentui-react-native/dependency-profiles": "00918073e5404c1e476f788e8918580797107de7d6b59b2ef00fc2f18216f0efc6705f547aa0430edca73e2d3d8fa7a24947e9d0999b9f67d1d8dec7fd86ded3",
-    "@fluentui-react-native/divider": "2c0507c782636f8318823a893bb73c92cd23e14fd1ca1a38c02954e0a6de3e55ea0609cba2ab3845da366608d21e3240ffb2932ec8b293a85555a0e6bedd4fa7",
-    "@fluentui-react-native/drawer": "fb516fc36e98a46325235215ab6878710113cddc1b56e789a1e2ffa74bbc7a0b0ea6b13747ab7d6131f1c414ff3ac56ec5f52433e30450f1b50c16b6d656b11e",
-    "@fluentui-react-native/dropdown": "36dc5d19673a5942f05b5a028a974df069734348884aa3219028dbeeae7e2122923a77257b8f678f2abe3c540f2ca43503456f5dc660d161297e3afbc0178870",
-    "@fluentui-react-native/e2e-testing": "d28d7ba9c39b91bac3c90fae5e72d1b60e93717d32187141087278afb38f438327e4d2a6911adf1273e100ec44643b932e813930e1eb2ca55ff8e0240d6dd5c1",
-    "@fluentui-react-native/eslint-config-rules": "dcbf2cd8ea5b9782427309672ac5e8dde57be132cc8551b3b26de3d33d8b2cdb1c2d6e42984cc23842e11421774ae03fb8d62bbbf5205fe3033fe48b4e917ee8",
-    "@fluentui-react-native/experimental-activity-indicator": "ffa634741ef41d9fb48d8de43d97f8f547a1b8ccdb9ea0ecf326b2485d13811501fd79662d32706abf9f75c2a2bc03bc8f14b29759c4736d114c58990859a185",
-    "@fluentui-react-native/experimental-appearance-additions": "35e10fa81c5d6434818bd683abf08f125df6a269438145d3d01b934e0c0671d67b853739300752daf4a3e780cc4ffeccba5ab499cedc7fe1ce27888b53e2d31d",
-    "@fluentui-react-native/experimental-avatar": "67628abfe219d38e92ca602fda4cd5f461ffa2ae19c8c4bdc90d7906b102cca5755ff9c10932cf81c3cb8e467c55b38568ba3027709a1c81d80466b597884483",
-    "@fluentui-react-native/experimental-checkbox": "733dca2a4cbd15420c5ed711200bb1ca63336dc66b9de7f8860a1b578ce3ed3cece4a59927afb9ca3967c393899df4fcfa8399c5effbfd383fec4d43259d2ba0",
-    "@fluentui-react-native/experimental-expander": "413834cfe232340deef5c347955de903f321266c1f8b0e9a93d6a1f181e1de8d0bb0f11fbe28a2521a9f7f25a97aaf73da6a5ff1220a445f6fbbe86fd8430873",
-    "@fluentui-react-native/experimental-menu-button": "85bdc9157ad8cbaf50e5ad385668151e29cc0674d91e59ee9a89b99da3957ab65a281d4d4f2c0ae1f7e9e92f66c435953c7b4246fe937183126f8ade8dcfe8b5",
-    "@fluentui-react-native/experimental-native-date-picker": "3b2837840bb1a82ae27128867f1bd9231f5710fc3623927d9a49546bfb6698010349aaf3b443ae4e31a9e5257ec0291538548fbf7ed47354c4385896ff7c59e4",
-    "@fluentui-react-native/experimental-native-font-metrics": "bb774bdb25899a8692fb7c71ba89b0ecb9a8e1229f6d9be09f34251b7499a0d2f53d837824d2d4bc69d29c417eaf0dc4805c9a37d922090648d6b7765b4fccab",
-    "@fluentui-react-native/experimental-shadow": "2d3b8673ccc1ecad1d40f8c269423aad3422fc2e8785702072a90bd442b26f7ce25a76872362816c703c133c396ac893169b5470d28831cf18dd8881b699769c",
-    "@fluentui-react-native/experimental-shimmer": "b6c2620b7b6b5ad1dd7e80c172e1ea44b10f454ab3ba88ebcbf6cd41a5dce14bf4816a924d1034cebad5beb593e69981fb516717370d80b505d258d44f16da73",
-    "@fluentui-react-native/focus-trap-zone": "f0183723960181c33c5f8cefdadc055b329c910d593e60983f76aeb4b72599a57ae0d1f26dcdbdd5952883e86da9acabca7ffa5bf721ee05ee69ec562ad9cd59",
-    "@fluentui-react-native/focus-zone": "5fbeed9e6274c088b9b9a9952b89032ebfcfa5905e9d65a393493abc0efa92a1c3f4e344311fcd987fb878a314e1154a1b47de3540d9e6096d2e0d98aee4f6f1",
-    "@fluentui-react-native/framework": "4fcc66092768fa23b7e8bc4b58f4d33b7d53f7f06490552a52c8a5cc35b5a944d09a227255722c03085ae70c0c74f7ccff0cbd5e6cb732ca1a25eb626f630d5a",
-    "@fluentui-react-native/framework-base": "9fb60bf404e9159a51f0a372e5ff296a78f345c249034bd15855413dd1a89302ca4ff47d5d48b460ad8a0c6498e08292d5d3ce6dd28291d18fe0d5913ed4e1d0",
-    "@fluentui-react-native/icon": "304167911353e33f1bd7fbd6579aa6806ed89c7adac2187eba71b76efb0116189f5326e5d162e0db309a69bb60e3392c9e5e056f767a56e406eb8a966c783ecf",
-    "@fluentui-react-native/input": "d9c976722e6edb1129d7822979e0df86a8e3a2a9ffdf3e0cea6027c3f42affd913dbfdf33f444330d879037f0d1b750c791e9c9b6ef3712b922cb97740c61ad4",
-    "@fluentui-react-native/interactive-hooks": "0f98b3965e0c47802062f85328fd446a1a4d4800b1c5d3ae87e3edbcb8af90d7176f9bbe375d050c5a82dc688d7cd22fa2b7d725f71f652ba2c912f3c4da796f",
-    "@fluentui-react-native/jest-config": "21f581efd76f61cb365fe67d1cb39d38739c2a612e381567d3c9af3d33e70510bf606f8403929029c88fe07137ba8f6590408f205b8228ad2048dae6bb19650a",
-    "@fluentui-react-native/kit-config": "287110b384aa1fb6f1162828279788cdc4a46507f61633767fabb7251d07b89dc735fc49f70975e71feacc38f3be1aadc24343fde5db0cfd2035fdc2ea5292e0",
-    "@fluentui-react-native/link": "8b8e7a8312916af46321e19b81459ef2074af8608133fdf0d1b474fdaafdbaaf23ab096b6c191c558a07e740e5a042a2b8346192b700965bddeedf018d517ae3",
-    "@fluentui-react-native/menu": "12831400744f06618aec5e145bae80b99b6dde0555cb479555e6c5f98822e6597ec87f4ca64d94ea1d360647655550df44dfe90611e11cddc4f87504f0964c12",
-    "@fluentui-react-native/menu-button": "3951d404daa29998c38a9ea6bfdb54c3508eb5173f82b13e26e23eb31115d4ba0df47852a9912267410fdbd15f6eb315878f760e1370b1885b21d4afe3e73b0e",
-    "@fluentui-react-native/notification": "5c6bcd4355f3ff77782de7061f279eb9d4b250e0183b3b7a3bd1c892dfe77656a00bcb4ff077d33dab0d7877d48b19bad99750ac3090f532002f4eebb174e472",
-    "@fluentui-react-native/overflow": "7d291fc97b923a59f6ab2b1e75d28937deb41e405c8529be3c814973b10bd9b86549374c12e2c710b075e6f6df56777016807edc5f8499431171bf789dfd94fc",
-    "@fluentui-react-native/persona": "271bf34fe6baa8ba1505ea8916cad2976bed97cbee162ca7511bb07dab0f2075c7151abd8ef5f21713703272b20d3197c2ca21873660fdd1f0191d28f7d0c151",
-    "@fluentui-react-native/persona-coin": "61dc661fdd51ca7ffa25709f1230434f75ee43e983e14f0c13ae249e7d2be5ca4ea5538d6f1a9bf4fc19e04aecea990a0df9b6ca69aecf732b10b68ec181879b",
-    "@fluentui-react-native/popover": "cbec72ba1713376faab629d3a799e324ca3d74398aa61ff3e2dc90df98d4801beeb39431978ea4b0ee3b7b37233592b580713af5cf80de4a19236de76f2decf8",
-    "@fluentui-react-native/pressable": "39e2fbe45ce18ebbd7ea0748cd478f5bd90fad31453b8b757b7dddc765d90504ac2568d0ef482cee1fcdc2d7da77fb1578312d95875615cec18e25dc2711a8c4",
-    "@fluentui-react-native/radio-group": "58d0b83d5f09acdc9be9233324c7b3741fdb63e9a01f77e50af1fb1d6041a8f2c29eb882a47eff7a5a0efa58b09eeb646a4044a224769b671893effded3f1acc",
-    "@fluentui-react-native/react-configs": "1d36da31d4799e56df2dfafecd736427d17de619850f1000fe43c50b693ee61466a2a8a12ff96a6f655c63dd92f82a75783f238be003f71b6fd1da8a7b01c5d7",
-    "@fluentui-react-native/root": "958539d08397fc445fd4a2d3a1cbcf7f7f7f71ad1e2eee64eb75ab104c5427ce79be426afb4c974e12a5830b92d2487e07225227fd42c4509a4c104476ead8ff",
-    "@fluentui-react-native/scripts": "63a2d6e5451f0618e842337df8847a879f992d8d32453cbf8c46f80b62f50a0fecd4018f63e89aab5f1f3d4ccae3a85966cdcf9eaaabf34a990b01713adee9be",
-    "@fluentui-react-native/separator": "eeb09ccc4e847e0f2a29c34ac01bd4a5d7c81cc942bef6d5ba8a6e6678a1d2aba0af3c9b09673a1420c1afe61ecb532ecc6afc256dc11b4d07fd58c8943607bc",
-    "@fluentui-react-native/spinner": "25f2252069dafa7e0db34f4d9f149d76d6417242839afa60c836b546ac95f891b028a106982dcaaa467503d71b228da73a85c8741ec8f621a491d1ba42bfee2b",
-    "@fluentui-react-native/stack": "f08427d0d1b4d2ac1ca4c90c73d079b3ae721a1416e58d19166dc8d28e56c28377d636b69441c19e4b8963a55018cbdcd60a21f76b5b445d6da9f7f14682b216",
-    "@fluentui-react-native/styling-utils": "359c17d8d2629073401feae653a437245d7dbdc3f65f52af1eb5e04795610207c9d70db3ec601545a76427995236857838d1a4101c9d33aaef452619f0a084d5",
-    "@fluentui-react-native/switch": "4c32880d21bc106e582f65c3cd09d20c6bc824806a531fdf37ca9f9b52ce6472940a21ce752c46ac7e77cd5003a514ba0e329c9679772b46f7607e5be019306e",
-    "@fluentui-react-native/tablist": "0fa626c85654443fd198a52f002987ed08059d695b52ab0cb459cd89e410c519af8c8b09eafb4f78450f7b7872be80c6ccd46ed50e26a8e26bdf7037fbd646e5",
-    "@fluentui-react-native/test-tools": "19ff9b88f5fbb17eabf7822162e80cd78c7c1f73ad1bef259bfce127a15a6f8660fc54f7e4d698f4d6037c6c4d6ee13bfe4fee884371f9b629839f111063c29d",
-    "@fluentui-react-native/tester": "e653ed693ab4be902c2d8357bfb98d013116e76121ebbf3329900d7035b167c64fd37b4f6d6ffbf355a01ab2427cda780d7e84dbdb73b3a9b18b657844e72419",
-    "@fluentui-react-native/tester-core": "14981ba15fc860bbef21f6ae991166300d8a82e43b3c55555892269245713c963eafc42207850e4e0b81023354b1be8a4d495e98814d928be38b5572c74f8b68",
-    "@fluentui-react-native/tester-win32": "b89002fdf9aea69b12d5b8a540411fa3f673870bfe2f77bb89bc6145360b360333bd0d39f3a66b5db1865ed0d237a8d9944d5f83b806f9c5839a248333ef7386",
-    "@fluentui-react-native/tester-win32-81": "255992b11a9df366b41df63e04e57cdb0445129ce8451b53936da4e1351ee60478c73fef38b3a2735fae1606031a93e2ff3a31cfc19a03a5aa1a9252b2d5c501",
-    "@fluentui-react-native/text": "4098202865713e07810857ffc75e1345f13d43badf2d17f71787a3c696303c6ee729e46264b512dabe62ac1da43d4a525294b5447b7f6add968970a7205acbac",
-    "@fluentui-react-native/theme": "ca140749faf35fafcf207d65f8ae41e0cd87d6a72ee554e7c644f43b1116c8ad6f71b91f0a7214374772c99ba619d9b3a62a1adb976a998a95a7bc71c0b5b08d",
-    "@fluentui-react-native/theme-tokens": "658bdd68529c4ce35667084694386fb6fc79900e5a89b4e4fea2235de9b8096c426c88e8716645aad35d95342bfe6ee6463c9806464155a65cac5116fb3db8ae",
-    "@fluentui-react-native/theme-types": "e1cc7098607cf3828c8a4e1fd487929042f37f2345aacc31ec63ee4738798963401f9c3ffa8780118683f3161c338248b9221835d9dee11ae4c0f6005e376a85",
-    "@fluentui-react-native/themed-stylesheet": "f37ec6aa4c2635cf8991b7f3128bc7eb111da512a084edb6955a9a03b7c53f90a2c1e4f95ef10657b420cc15ac7f4dcfae72e838a7ab0571b4d8ff69531aa293",
-    "@fluentui-react-native/theming-utils": "52e25441cd44d09a7adc2a3f2b6840fda2f1825fc32bcc55ed7879a473309ebe27530b6915bbf9e132ae2fc93d72611c66dafc5a4df336f6b3767321d282d05c",
-    "@fluentui-react-native/tokens": "b22e6f908eb5f67caf92236089c117161bbc27c90a953b400fdbb31ab50fb0703bda25f5d18b2860bfaa0b4b9c9496f090b4958aa0ae7adf2cffda1f11ab1003",
-    "@fluentui-react-native/tooltip": "138fc8db5b21e144ed66159a66b46bf205a429f21011520a32c210079e0e93786b2336c06cfd32ed372e40b0f9b114fdbb8160c317f750d2d47f4cfc66c9c6a8",
-    "@fluentui-react-native/use-slot": "a554810bbde618fc508a04428865033c70b3c766cda4e579c2a5d47f9c45701fab488d601595a9dce1dbfa983b132ed47e05d8180831b918398ad86d4794acdf",
-    "@fluentui-react-native/use-slots": "9c8761b76a1258c33bf0fa682c817c4d529317aeecc0c01ed0505af202b546c67f19bdac17cd931e6692a0751b6606384f350edcd1a2a74777ec5fa8dbe867df",
-    "@fluentui-react-native/use-styling": "580412530a1608923593bfb3e3c33731821dfa12a1dbe7e4180b45943fef0ad4bccce3d3de65f9ac4ab5b6c3d8d554632b7eea473947b3e6a7bb9967c35563f0",
-    "@fluentui-react-native/use-tokens": "46ec0322780e158b7c51fda32d42ba527e1d856e2b920d4f635b003de433ea0b0cbcef9f51cdc956cb783b5b4310ce77ed46a8fd3711e161587586d828d5213b",
-    "@fluentui-react-native/vibrancy-view": "5f777b7c74a479a8ed584798bcb1228b94905a96e0ebb58be6f4c8d1a24e9d5a85057b52d675cbfb1b3b37cafdf61f743b637af2856fcb3d84671c186194b18f",
-    "@fluentui-react-native/win32-theme": "7f80e391b1e27048ca0ab7cb1643da52feb316dec6089fb19b9458d5ee8678e23c3cdb852bc77f0608dd9062cae7d38e9b09be5e4cb5447c695bca0b4d0ecd51",
-    "@fluentui/react-native": "74eb90bc6685154ca16b8245ccb4e63023f8a52db5e1f47f904fa3faf679e39e5d617ddbe2f76d685eed24860e9dc9d1fa358a2c378627e055d3bd4abcbc304d",
-    "@uifabricshared/foundation-composable": "a580a78b9e92f94c9ca9ad394ff3728d078e3ce1b6adda662e1491038ac5c249db68c7a987a7d082b283b69d409d5d3581f2d47c6faeb29930622db112e6ff9f",
-    "@uifabricshared/foundation-compose": "85fb1dec55fabcaf71883ccc99d18b131340a77b6cdb799fe0254679e0d277a703ea39824be13c76865f433fa6c41a1430a3cfd7043865e75cf09a7dad5d481a",
-    "@uifabricshared/foundation-settings": "79e21abdcedcaffda1a08cdc0690a613d3cf57ef377cfc816a38c1b0bc887cd5fddf054d219fa46eb8addf9856ab6ff9189aa9b733cd91a782114c994ca25047",
-    "@uifabricshared/foundation-tokens": "dd18d7c0bef3b0ec1a06ee31d65fc0eee5b76305ab2fcdff6b0118e3f7f26711a78f1c2732de0e2f3bac7efbd8a43e18b3f079a91242add1d09c048b1837ff49",
-    "@uifabricshared/theme-registry": "31c24bf69372e416b70ea06358deedc7a2c8ca22432a8121fd12d759d828d96968bd0cf9b9fc37e88918888ac84448aa6928c1ee7170f6a5bcff5eb08bf20473",
-    "@uifabricshared/themed-settings": "58cf357b462da9c0e7e0084d1d8f6375108d5713c076acaa90a04e724c899f5f30c350222b89962ece7ca56e08b39a06258725b0650c6a0b5e9b0155e561b55d",
-    "@uifabricshared/theming-ramp": "bdf48bc3ceba85aa5152ef891cc663fa37872d052ccc4026ab5aae65968f95932136d6f0ad6bd798ac95cc184d342738915c54ca80ec71b4b3498ea194f13868",
-    "@uifabricshared/theming-react-native": "fc43f8c1299cafef6ed6bc469eb7e4040f8285780b2249c30493877c303b389d7b2d521a0f2b65a9775ca8a289fc6318e0d738d28174281a7d16e6ad0e0cdc64"
+    "@fluentui-react-native/adapters": "47012448b287ede0960cd1b64458dc2d15d69199bff3af117622e41609c5beb9b017188bff4fac5dfa9f4cf3424b8ebe39c06ab8707f9edac20ee4d55656583e",
+    "@fluentui-react-native/android-theme": "a24979be3d311b864e7a84c7d7ed1bd71820be260489ee37e38eaeda7afb16817e7d6000f84030ae56cbb34b06e50c18f1cf43395946eb5c93fc33678a7820c5",
+    "@fluentui-react-native/apple-theme": "eaea526751b2a51e63adc49086c909e97fe2f8fb08fe3994746976d2598158ca3115ca49eddcad335c1bc7158c802b52785d8c40fa3b7b7ce148a84f9a0eee26",
+    "@fluentui-react-native/avatar": "41b30283a7227b6839b5b61d5ca605120967f26277a8f9a0fffb0ec7d64ca22f6e892547715dacafbdfff92bcaaadcd0a95ddbaf439f24beca3d6687958810ae",
+    "@fluentui-react-native/babel-config": "6db99f98d6528f4cb979faadc1f47c6ad409ded3a9c1098afe8b4512087fbf204524bc51507e575e6c8b8f53c8c4c4a9fc94b8e61f4be45f013de7d0030d4254",
+    "@fluentui-react-native/badge": "642a0553d3b7eb01151e191e6a620c9906417947f4d35e8fe45278617b6a03c66ecdd2c52a3689c2bf32b4a427605e056acd19e208699a3db41fe650fb7c414f",
+    "@fluentui-react-native/button": "679b3bde670d3c2976d616f2a9dc3ae40428f1dae0a02fa73fc7e50e6203e60f7b15fabeb8076c1b4070fbb53655a7d839d32d296a84068fb66b04b84fef944e",
+    "@fluentui-react-native/callout": "a6739ddec5bec96a9eac0aa9f26f27deb158cb66d7abf781e6f074802e9488ee2cc4b992fe0a0d8ffecf3fc2664e2cb6f580571d2606beeb542514e0a2769cbb",
+    "@fluentui-react-native/checkbox": "ae8ae4b69f56ad4b6b8bf11dacd0aea07708d6ec6a932aeca5db82fbb9ba31f3e325af75e7ae43ec68518aaf214acb7a8b611fa2686d6ad42f91147d160c3713",
+    "@fluentui-react-native/chip": "a3eca70d70b9924dbba6f5ba8e2dc76e5eeb0ac30bcfe25dce9f9977dce47add60be560234f23b161415c575ebe7ac2cc4053a4a644f82be3b8ada468e9edaba",
+    "@fluentui-react-native/codemods": "5752584dfce43367dae867370a2eb7a3ba3c4106128410b16bf8196a0792839e0e5d60e9d0c205c5638eeb2f3baba10260d4c939b59ced2b57f2078080b0ecf4",
+    "@fluentui-react-native/composition": "2ddf2174f61c70339a9042c3f7ee357372ece2c9c82a4e721030e739bd07892a2b65a9aefc3c32b2b74c4e3ad18226c87183215672e633253e07b92fc55c526a",
+    "@fluentui-react-native/contextual-menu": "6d7fe178cefb7680a51c7305b78bd6659b88b27a5954d7103b68fcac86a5b6c52645a884bc8e67eb0079db3376fa87ab0e7950894d5b660e7b6244093dd15159",
+    "@fluentui-react-native/default-theme": "f3ff3fe4cbbc13b5e6ee5a74a8dda6b637a89fac1e3d5b78f4356094033ddd6ad0ade1d1b1c060f94131548fd76e4f9775fdf3384cdf74e4b8bdc4c3cf3d97a5",
+    "@fluentui-react-native/dependency-profiles": "2e831c5ae0e17f850cb1d33cdbed8423392dc6e632c08ca31bf8047a9dd3f2a902dcbbd22215daa08f67c7da4675b1bdd75bed8db6730a08589d134613ccd4c1",
+    "@fluentui-react-native/divider": "836c65965f6d10c9493ad43f30d74af0211031e6597cb5499d208b67d449b3feaf2f6de26997d5505911288508d059f42e1f862ed6a86523e5aeaeaad579c221",
+    "@fluentui-react-native/drawer": "996ff3ef7130422163b6c98bfacf5236b1fe33cf6816d349729a463dfa022b8a341ad6c0cdb690b15d91c86892dac66eb959f23a6e5a7ba2660080614ec2a029",
+    "@fluentui-react-native/dropdown": "519f6e38becbfc4c4180ae17b0e6e808e02046e445d1e3d231279f3c1909143c5601a8a842feb2e79bdab986458769e8c22e2d432adbe25366c59cba4783903e",
+    "@fluentui-react-native/e2e-testing": "75603eae26de0ef6e64111321fc7dedbfdde38c72b858d4e3671381c1bde57006bab45517b3bd144a4dd59af9fce9f582fd3f18c905f1414e7f1aa7d584999bb",
+    "@fluentui-react-native/eslint-config-rules": "c4c0946b18a738a8eea3d9007e044dc72d77fabc40ed8de038a5a5498a0f4dfe345823d0744e4451d4fa3c79b4138fa90f2d0e1bf27f5cdeec8d886096e588eb",
+    "@fluentui-react-native/experimental-activity-indicator": "bdeef32966d510f639c5a09d5bfb1a12a1c49c8fc656842c32415454fd1acfb0ec9dccd22371c7cc8628d923cf2744fab949ee95bb34f98697335ab6a6a7ae4a",
+    "@fluentui-react-native/experimental-appearance-additions": "128fa0668a3720ef43597281a9d89b2aa07e2c34ba86e19ddee5509e95cf94d866607b9ea54948e47a9990f80677ab34c8fe86e9b849b15034050a74b0f228bc",
+    "@fluentui-react-native/experimental-avatar": "e5ad8546b4c7410926d14ee2d28378edd218ed453ec5bf3b87ca96955f64705c01a32340b54762c438bd731371d963b97d3d1be6ec962161d2c4ad12538b9c7d",
+    "@fluentui-react-native/experimental-checkbox": "3576e69b5ac6485a1d412ababe077ffae090206aca28ebaafd43d1d08c09087b37a178afcc2b2b658ff3c2502e5faa7085f040081ee12557e8308e322cd7d092",
+    "@fluentui-react-native/experimental-expander": "915cf786fd45aee28152fdac06bbd95223a958853d54395db6824e9f70d93ccea028d2c116ecafa8e4a392ae7ec3cd9823ef3a7fc626ed714c522b4c53d8a41c",
+    "@fluentui-react-native/experimental-menu-button": "65f46ceb38a0024a93062123c7e3f47305fc05150c4a62344f604f0a5afd64aebe7077726007bca3268eff365342403cae01840ccd7cf9e8b237fe92c4b3cd93",
+    "@fluentui-react-native/experimental-native-date-picker": "8cfaaafc04d82960ddcbf00cacb4dd7160244b1604d2e1ac7017c5585b2aaf8a8268a91868408408806102ac11dc6ad20910f228329e3c67d98feaf650c6b5eb",
+    "@fluentui-react-native/experimental-native-font-metrics": "f72a6c5a9631d1a93fddea2cda500d913bdcb7378f068503b3873aee7c519dfba9c8ceae77d59b447bf6e25f2c4271e4c27c19e1c2613f43b11131a65b8b2502",
+    "@fluentui-react-native/experimental-shadow": "663cf05ee34d4f9f0dbc7a431af742fb3b87e71e2f447f575c19d7d646c3c21a01847bf91ea42c03b56c7c1b8e2885316ab0a77bd920a57d10ea4ca745f09506",
+    "@fluentui-react-native/experimental-shimmer": "1bf2e5db8cd1704b1cc5b8d7baa241c02c3b7b6a235945a7b4656e1e925d17d0a640676146dc66ccb9fa5294082742ff1a0a9274cf3f658bfc3679cf54c3abfa",
+    "@fluentui-react-native/focus-trap-zone": "661b81e7c222ef914f83f8f9aa556811e62db87321fb3dea43ca698df711895b14d7c60efd8aca12f9cc4fd13f880bacf60fa2f5bcd0d3b20146c70809c304ea",
+    "@fluentui-react-native/focus-zone": "41b30c54b2b9f017914067e713a912050c3ecdae8a6a85fc4d0e793512240019b98ab04fa4d8eb61d049cbce89e56714834520a780d1facafaaa86aab337f075",
+    "@fluentui-react-native/framework": "593e035deef23e488ee9839091ccf34306a13b7a7b5d3b0a4bc042d86ef2258b7386dd25ddc2599cbf92dec458c154d8da686834eaf29bc413146168e1c601ed",
+    "@fluentui-react-native/framework-base": "3dd896b0905674e721381e4959a536530a8c2363ae02a1644c3c26639f5e8ccf3b77a9b5cf29982cfad1a607b64ec3e12a31b33e2118b56fd2a73681dfffa288",
+    "@fluentui-react-native/icon": "cb7f10e5a118ba04c7d1853cca31900e8de42dfc0e150fa6055fb0ce15c2f8b95923a60897ff8e029536698336da8ff5b0cbbb7a777507450f3b8d4f06942c0a",
+    "@fluentui-react-native/input": "9241cf3f2f4adde876d71b56993d296fa752d0ad4cdfe256b5634a038c567315f0505f8c49267f0e9c8a84a7cd8a5048e9f830fb9d4565c555fae93ad11f6534",
+    "@fluentui-react-native/interactive-hooks": "f3937def356f1d79fc0704816e7bd4ab9885200d5e67c82cc5477ae11c24b1bd9b369ffc674561bb0f9f3f2610c4048b1202f8bc46447b6ddddc9150d85c83b2",
+    "@fluentui-react-native/jest-config": "6254c134d3f428cf9f7ca697225c913e8bf229ae6ad31eb6f67d5d2c8a62930e4a407684e6a59c5dc53a4603fee7401499523104aaf077f8ce1692594ccbb2b9",
+    "@fluentui-react-native/kit-config": "f89c050a3976dbca7b2b022bf65dfdcd6dcf2bc2a483b6fede702b5164be2baaa95016e729eaac4eb67e1397ffc4a8acb5ed5c4099c1b25601578dfdce904d12",
+    "@fluentui-react-native/link": "8cc2bd0fc9c3baff42f26d81b72b9572aa9acbc2e420c53c8e4a2629935046062d9171cfc4aa5db69e8ed48b1ef306cb13c8ad758ecf1aade1c06f57218b7532",
+    "@fluentui-react-native/menu": "383b2a463605716fd78e1ba1a67c25224ce1c73d450c3a9aa3441956de91c5599fc4dc7c0690d6a52d88675974a97ed585ab91be93a4bd9c41d4c097811d7d14",
+    "@fluentui-react-native/menu-button": "96ecb2dff47b0516f2c330dbd50223fefd2ded27094c90d497100439af79a023b31e6de6f04a51094b12784ca0151f229fc342fc5125e916bb3586db7c3be037",
+    "@fluentui-react-native/notification": "5814cb29a216b6bb1bb6c44f1038e859418a38591071912d222ca1baefc17525291bf7ebce88e6a2fb66459baa47835517229b5b6cc66d5db73c308599cfb5e8",
+    "@fluentui-react-native/overflow": "150b04a8f54ad05d7a19769cb19b25bb4c7e54927990a5a2c7584a6766447b1021f1fc0cec5c251e8d5f168d69263906562fb1e1e73fa9850b200b6e78a629e0",
+    "@fluentui-react-native/persona": "e233e24825b7dba42b9f56b0c67cd243efd710996cda64afa1200f9082cc68d123de87c37c0518f92cb2130516b4b27eb88a0ab56ce59a42a73ed2515a943dbd",
+    "@fluentui-react-native/persona-coin": "079ad2f9ccbb13144eebea5d3b57c3370ffd66f8f027856fd527f7fa1dc6106bc4e5505ae66fbf04f6c7a6f09298fa01d398829adb6f1e7069fc17fb804698ca",
+    "@fluentui-react-native/popover": "c35f1ce12f7e07c12b4770b29a759371b8aca83dea197c4c98c141a7d9c82d6948e80df6675bf1f9830dcd670263a77e394da71d6001861ee518cd46c98623aa",
+    "@fluentui-react-native/pressable": "a9ca91ec07dfc466519015b5ed1c58c7f075c25e9b51852b4448a55779ec0772a80de064550ce211ede1f53036ede596a2c74f62ec7185ec172408d5eeddcfe1",
+    "@fluentui-react-native/radio-group": "ceaacf8a56cc6ac2ed0af010df55f110d7d7709f90673ac25c5fac637a7c5e70618a8ecfff0a719df7f85b84ff8d01971b8bb7045f00cbcf09f85841ac60a601",
+    "@fluentui-react-native/react-configs": "01db20170e0ec563b135eccbf98feef2b071473d5ccb11777a5353c86a5a284affefdbaff2f1d863cc9707c9c5774c7847aa83d77ecec6e11b78ec08664d7952",
+    "@fluentui-react-native/root": "2767db8f8cc57779f5987a1f611b0d4c468b6d457204f463fe147fdb9c4691df30d9246279265178ec23a18b94c7969fa8484e0bdf780c042759dab45332ab0e",
+    "@fluentui-react-native/scripts": "bb1692411372e1a68a921d7c6295ef268b1783e8ef469e720ba7b6f0a5138566930ab869d75713ebbc11755dc19ff6bd1ad1bac258833ae88608fc496bb7e95f",
+    "@fluentui-react-native/separator": "e3edefc143f149b2e9b7c2a6c82d79d7d91d0161ae7d455ddd70718af8b1e41d95d267e6f5228220a802dd48b1053c729e024735047fdff531eaf79974877f20",
+    "@fluentui-react-native/spinner": "188b8114661020a46061ec3682f2f82e4dbd96b209ab64947827db8452c5621dd388f398dc1dc5abe5407b06f9a4aad766fb14c4704113e485819651827de294",
+    "@fluentui-react-native/stack": "6f5763772dccab133d8c253ab252ee231c1b3decb869c862adb077b11ae911ef7650dc994c90c3d276c1bb634fb6b09fb55bfab5be879a738a0eb21f0c080455",
+    "@fluentui-react-native/styling-utils": "1439e7041b277a8386b1b2c103a300824f3ebf1356758a8f0c561ed2f584f6663e87702273c6f94f54441b368a28dc33d24af9a654ed2a879bf9fddefae56606",
+    "@fluentui-react-native/switch": "395c9ddf0e09964a39b11533ef084a9d74aeaa0cf55b99a6416bc6b293dfe89ffb4f2b388274a9278cadac9bd1ea71dcc8a6652814963219837ee7fcd70b8fd9",
+    "@fluentui-react-native/tablist": "345227c63dc36793603cce340ec39b1d9eaefbc3bf730c95fd92048eee202349f1ae70c5638ef65034ca1ba975918dc9d9581d4ef17308702703cccc154cc81e",
+    "@fluentui-react-native/test-tools": "4f20d544b11479b899db3327c6dbb939ae7dbef6a37eb9d09c4379c8efbcd08c4974aec7d10adf22f50406d11dc39aa3a0fb309648e9c30915b88702de68573f",
+    "@fluentui-react-native/tester": "071b44ce891bcfe9398f5b7e7aa32c65a4a743dc9ad7b1d2708f845ff2cc73bb146aeecc4d5139ab09af520cb5aa7317c5c4c5f3586a0a6969909f4fed199420",
+    "@fluentui-react-native/tester-core": "bec20f6b9916ae012190771eba08a885774a520add065a52b8d8f51f2b59423890af1387f2be2b101064cc052855d5e5b68621e429298c5838db7ac68c91f81e",
+    "@fluentui-react-native/tester-win32": "be157498db7ef69d18b515c88a015df011bc80aa8b196bc05431cadfdd25cfd01955f703d3154d2ebc44729241a3cc11f21812098191b3766b6f41244592bea5",
+    "@fluentui-react-native/tester-win32-81": "17fc28e4402112377aed570420c20019f9bc855b8e5c7457fc4568cad028e4738c30f71880d8118ea5d0360b7a1ad457fd524c0dd06d6294ed150a2d380b4c69",
+    "@fluentui-react-native/text": "95ccd0dc00c19a8f803d812180d0aa49dc3690a718c6a03e716fa50eed28dab62cc0e6520b4096cfb99ef14bacfdffe7ca01e766c2b72ddc4e3a72fe0f6bc152",
+    "@fluentui-react-native/theme": "17a60126602859991e5986dd67b7c3c6605891bdfef834820aeac85272900bb0c712ca6401dfe31d99a245e77c269447e18cb364646b3897fb85de0bb19279b9",
+    "@fluentui-react-native/theme-tokens": "7ceefa9fd158152bd4013cd8da47f34eed55d9a5d54f952dcfa5cd392c34c02583c21f3ac90d9bba4853a68b2c51d089774cb409558fdfcd7c11d0640fd9ef08",
+    "@fluentui-react-native/theme-types": "ec31dc082ba15b98afa1e981257b6771469bab9e7228ad4ab7d40371fcf439b0cac61fd9bc36682f4f4b9910c6ed275b599e9de6b9c25975040df0bf6e2b779b",
+    "@fluentui-react-native/themed-stylesheet": "81feed7a51747de4895d35ec1ff652b7e3adc395c037a854795c38f1d3dea23c4d5dbffbf6266e0b298dea6a907a99e06af5936929cf15f5ece8987c44e5ed9a",
+    "@fluentui-react-native/theming-utils": "81460b15f0645e4de826147f6422a8a65ea6a6f7e0a72669228be06262e5263552ce1d3d60c3d4f245b50843e1f44bdf98d003ef1463d2aef9cb9d2a76e992b3",
+    "@fluentui-react-native/tokens": "a9256d078f47ce45472a08c185fd4c77ea5e6650ec78f29db4432a2cba0f579b06c7cdfb628fd4d826a5d3c46c3be3cc024c3d6ae58fc4e307a1da9d4d868617",
+    "@fluentui-react-native/tooltip": "d2e3d7f915d68619e8749ec062eba840d4530283dfd1be7d12a123c9da7d55a299500c09c230a4e495f09b663b496b7a57a38d3a4cdc2a6540ffb948bf0033b5",
+    "@fluentui-react-native/use-slot": "4968d9c1890b5e8f66b64d7699786551531555d4a6a52e202b224f529736daf9e25fc1ed5a5221d4d42565749c2b3e1e0cc777748971e69b7c9ec318c422b7da",
+    "@fluentui-react-native/use-slots": "23e6a9319c813f8ea5bc09998999fb4656eeac910e4b29366754fe9764ef40347f440a2c376be6f4797e82e3f277d835492727c30b56028871089039c2eee642",
+    "@fluentui-react-native/use-styling": "fb325f342e3832b1676ba68d229f9bbc7a0e74b8e6f720b15f00dc74b78f38d7116a43758087ea8bb1eb9e68adc2e1712163b555e39570e845fbe9245553ac5a",
+    "@fluentui-react-native/use-tokens": "01f2144c2b53520393ef3744f1f6bdd802c89061c254a6e98317773fe6afb628b198366d3bfa7a1e6090a70c7ed7b1953e7a8314ecc64886c89804adb68461a4",
+    "@fluentui-react-native/vibrancy-view": "d07e35acf5703826d369843a911f2d11cbe59790e783aea7ef8e9d6038a265f0565c81d8d79d764665de68b4f32eec2f6d472080673f4cf5b1f3744d04774f34",
+    "@fluentui-react-native/win32-theme": "26cb83e764186d2e474c87070d0c1137fc1b2c40327587192faf8463708c3c4449b30f6f4982d8343e20fe241ed83d0b3998d244ee3af730f37c45d2b2f42f1b",
+    "@fluentui/react-native": "5c2babe2da17703a46c741cf002c4590535bc8befa1203d1a9f77f0f23d808b240f9539125fe8c637dd5dfd05471fcfeba1eb0585ca0fc49dfe0ec6a242de89a",
+    "@uifabricshared/foundation-composable": "2e5aefadbfe0a38dc1528e8d5f218f8b77fb514cd5f5b5bf1a8daea0fa67f77466320fef6b67c4cd18f09cd33c90e9dd724e8134cd6a4bc11329623c8d356ad0",
+    "@uifabricshared/foundation-compose": "acfdaa68dbbf565287337705fc793728005c753cec20cde36d24d069bf093268b085c437b4c602bb817780455eccba2c617a77bf387eb41eb74e84561ed68cf1",
+    "@uifabricshared/foundation-settings": "3c072c9950f1ee5cd73015afb887e373ad7f82be479100db42f27568e9d0295b1f7b7b6e1c3e9a8862144bf37be49d91f128b04a5ad87ba99a5a414bb1ec2913",
+    "@uifabricshared/foundation-tokens": "64b4aafd740c4c50448ac823374e76a17fb5ae472f94e81e314d8034d4fa6c935184cdcd3bb78b03d0f19e9f991ccad2c9c25d88f60710ac0a60680d55a8bbab",
+    "@uifabricshared/theme-registry": "4bc3ffa0db3ca68dee3a6121291041b48bf0a38edac6c8e51eed669991c8b2efe4399fa5139a9a28ab77410242bb5b20b347b8bf94d89440dc631990a59487e6",
+    "@uifabricshared/themed-settings": "4e627e76b1562dd8e146bb58ea1218e783dff6f09f07cb5a074f2beb308e9263bf9aa4056a14e16637ffb2087afe4a6bcf88b01fd116453d64d4c18f083b54d7",
+    "@uifabricshared/theming-ramp": "72cbfb7ec83cc0640939a9712f4fe4c75b7e8f949bf704113c305cc3db208c6d65946b9dd17c653032313c578e1a46d5023a7b97605f22d78433c198f15c7131",
+    "@uifabricshared/theming-react-native": "8140b84b5920ec6ecb04791ad4856d0b2718bcce65ce43e0ea498c86d773889407895769c70d02b76361fc106b73e1e39f27382c38f7db3252a4c9f9ce6f25d1"
   },
   "entries": {
     "@appium/base-driver@npm:^10.0.0-rc.1, @appium/base-driver@npm:^10.0.0-rc.2, @appium/base-driver@npm:^10.2.2": {
@@ -13688,7 +13688,7 @@
         "version": "1.0.0"
       }
     },
-    "fsevents@npm:^2.3.2, fsevents@npm:~2.3.2, fsevents@npm:~2.3.3": {
+    "fsevents@npm:^2.3.2, fsevents@npm:~2.3.3": {
       "checksum": null,
       "resolution": {
         "resolution": "fsevents@npm:2.3.3",
@@ -13975,105 +13975,6 @@
           "minimatch": "^3.1.1",
           "once": "^1.3.0",
           "path-is-absolute": "^1.0.0"
-        }
-      }
-    },
-    "glob-hasher@npm:^1.4.2": {
-      "checksum": "5bd061a911b1fa1c6084b50e40fe811b78a1fd113c3e68ebdcbf260e1e199fc3cc7204b58568b8431efd9a632b2f47aba4051b8be22ad0faf4a5b775a418e057",
-      "resolution": {
-        "resolution": "glob-hasher@npm:1.4.2",
-        "version": "1.4.2",
-        "dependencies": {
-          "glob-hasher-darwin-arm64": "1.4.2",
-          "glob-hasher-darwin-x64": "1.4.2",
-          "glob-hasher-linux-x64-gnu": "1.4.2",
-          "glob-hasher-win32-arm64-msvc": "1.4.2",
-          "glob-hasher-win32-x64-msvc": "1.4.2"
-        },
-        "optionalDependencies": [
-          "glob-hasher-darwin-arm64",
-          "glob-hasher-darwin-x64",
-          "glob-hasher-linux-x64-gnu",
-          "glob-hasher-win32-arm64-msvc",
-          "glob-hasher-win32-x64-msvc"
-        ]
-      }
-    },
-    "glob-hasher-darwin-arm64@npm:1.4.2": {
-      "checksum": null,
-      "resolution": {
-        "resolution": "glob-hasher-darwin-arm64@npm:1.4.2",
-        "version": "1.4.2",
-        "requirements": {
-          "cpu": [
-            "arm64"
-          ],
-          "os": [
-            "darwin"
-          ]
-        }
-      }
-    },
-    "glob-hasher-darwin-x64@npm:1.4.2": {
-      "checksum": null,
-      "resolution": {
-        "resolution": "glob-hasher-darwin-x64@npm:1.4.2",
-        "version": "1.4.2",
-        "requirements": {
-          "cpu": [
-            "x64"
-          ],
-          "os": [
-            "darwin"
-          ]
-        }
-      }
-    },
-    "glob-hasher-linux-x64-gnu@npm:1.4.2": {
-      "checksum": null,
-      "resolution": {
-        "resolution": "glob-hasher-linux-x64-gnu@npm:1.4.2",
-        "version": "1.4.2",
-        "requirements": {
-          "cpu": [
-            "x64"
-          ],
-          "os": [
-            "linux"
-          ],
-          "libc": [
-            "glibc"
-          ]
-        }
-      }
-    },
-    "glob-hasher-win32-arm64-msvc@npm:1.4.2": {
-      "checksum": null,
-      "resolution": {
-        "resolution": "glob-hasher-win32-arm64-msvc@npm:1.4.2",
-        "version": "1.4.2",
-        "requirements": {
-          "cpu": [
-            "arm64"
-          ],
-          "os": [
-            "win32"
-          ]
-        }
-      }
-    },
-    "glob-hasher-win32-x64-msvc@npm:1.4.2": {
-      "checksum": null,
-      "resolution": {
-        "resolution": "glob-hasher-win32-x64-msvc@npm:1.4.2",
-        "version": "1.4.2",
-        "requirements": {
-          "cpu": [
-            "x64"
-          ],
-          "os": [
-            "win32"
-          ]
         }
       }
     },
@@ -16337,20 +16238,6 @@
       "resolution": {
         "resolution": "kuler@npm:2.0.0",
         "version": "2.0.0"
-      }
-    },
-    "lage@npm:^2.14.19": {
-      "checksum": "3edf538681934fd5f250082f8874b3adad44fb66db751e5fdd4b9bb06931f742b5825e0d57a0710ff89f2a3b8aa6e82340d7ba1ea96658700e7821cceed6dc00",
-      "resolution": {
-        "resolution": "lage@npm:2.14.19",
-        "version": "2.14.19",
-        "dependencies": {
-          "fsevents": "~2.3.2",
-          "glob-hasher": "^1.4.2"
-        },
-        "optionalDependencies": [
-          "fsevents"
-        ]
       }
     },
     "launch-editor@npm:^2.9.1": {
