@@ -66,15 +66,20 @@ extends:
                 displayName: 'Use Node.js 22.x'
 
               - script: |
+                  curl -s https://repo.yarnpkg.com/install | bash
+                  echo "##vso[task.prependpath]$(HOME)/.yarn/switch/bin"
+                displayName: 'Install Yarn Switch'
+
+              - script: |
                   yarn
                 displayName: 'yarn install'
 
               - script: |
-                  yarn lage buildci
+                  yarn buildci
                 displayName: 'yarn buildci [build + test + lint]'
 
               - script: |
-                  yarn lage pack --verbose --grouped
+                  yarn tasks run pack
                 displayName: 'Pack all public packages'
 
               - script: |
@@ -104,6 +109,11 @@ extends:
                   version: '22.x'
                 displayName: 'Use Node.js 22.x'
 
+              - script: |
+                  curl -s https://repo.yarnpkg.com/install | bash
+                  echo "##vso[task.prependpath]$(HOME)/.yarn/switch/bin"
+                displayName: 'Install Yarn Switch'
+
               - task: DownloadPipelineArtifact@2
                 inputs:
                   artifactName: packed-tarballs
@@ -129,7 +139,7 @@ extends:
               - script: |
                   # https://github.com/changesets/changesets/issues/432
                   # We can't use `changeset publish` because it doesn't support workspaces, so we have to publish each package individually
-                  yarn lage publish --verbose --grouped --reporter azureDevops
+                  yarn tasks run publish
                 displayName: 'Publish NPM Packages'
 
               - script: |

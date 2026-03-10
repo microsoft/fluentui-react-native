@@ -23,8 +23,8 @@
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "build-cjs": "tsgo --outDir lib-commonjs",
-    "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "build-cjs": "tsgo --rootDir src --outDir lib-commonjs",
+    "build-core": "tsgo --rootDir src --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",

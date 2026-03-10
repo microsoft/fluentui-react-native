@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: ./.github/actions/setup-toolchain
         with:
           node-version: 22
 
@@ -28,7 +28,7 @@ jobs:
         run: yarn
 
       - name: Build CI
-        run: yarn lage buildci
+        run: yarn buildci
 
   android:
     name: Android PR
@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: ./.github/actions/setup-toolchain
         with:
           platform: android
           node-version: 22
@@ -69,7 +69,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: ./.github/actions/setup-toolchain
         with:
           platform: macos
           node-version: 22
@@ -124,7 +124,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: ./.github/actions/setup-toolchain
         with:
           platform: ios
           node-version: 22
@@ -172,7 +172,7 @@ jobs:
           fetch-depth: 5
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: ./.github/actions/setup-toolchain
         with:
           platform: windows
           node-version: 22
@@ -228,7 +228,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: ./.github/actions/setup-toolchain
         with:
           platform: windows
           node-version: 22
@@ -280,17 +280,13 @@ jobs:
           filter: blob:none
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - name: Set up toolchain
+        uses: ./.github/actions/setup-toolchain
         with:
           node-version: '22'
-          cache: 'yarn'
-
-      - name: Enable Corepack
-        run: corepack enable
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn
 
       - name: Validate changesets
         run: yarn change:check
@@ -306,7 +302,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: ./.github/actions/setup-toolchain
         with:
           node-version: 22
 
@@ -317,7 +313,7 @@ jobs:
         run: yarn build
 
       - name: Pack packages
-        run: yarn lage pack --verbose --grouped
+        run: yarn tasks run pack
 
       - name: List packed tarballs
         id: check
@@ -347,7 +343,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: ./.github/actions/setup-toolchain
         with:
           node-version: 22
 
@@ -361,7 +357,7 @@ jobs:
           path: _packed/
 
       - name: Simulate publish
-        run: yarn lage publish:dry-run --verbose --grouped
+        run: yarn tasks run publish-dry-run
 
   test-links:
     name: Test repo links
@@ -372,7 +368,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: ./.github/actions/setup-toolchain
         with:
           node-version: 22
 
