@@ -2,9 +2,7 @@
 
 import { Command, Option } from 'clipanion';
 import depcheck from 'depcheck';
-import type { ProjectRoot } from '../utils/projectRoot.ts';
 import { getProjectRoot } from '../utils/projectRoot.ts';
-import getInjectedDeps from '../../dynamic.extensions.mjs';
 import { getReporter } from '../utils/getReporter.ts';
 import { getToolVersion } from '../preinstall/tool-versions.js';
 import micromatch from 'micromatch';
@@ -82,7 +80,7 @@ export class DepCheckRunner {
   private issues: Issue[] = [];
   private errors = 0;
   private projectRoot = getProjectRoot();
-  private ignored: Set<string> = new Set<string>(injectedDevDeps(this.projectRoot));
+  private ignored: Set<string> = new Set<string>(injectedDevDeps());
   private removedDevDeps: string[] = [];
   private removedDeps: string[] = [];
   private addedDeps: { dependencies?: Record<string, string>; devDependencies?: Record<string, string> } = {};
@@ -256,10 +254,23 @@ export class DepCheckRunner {
   }
 }
 
-function injectedDevDeps(projectRoot: ProjectRoot): string[] {
-  const options = { cwd: projectRoot.root, manifest: projectRoot.manifest };
-  const injectedDeps = getInjectedDeps(options);
-  return Object.keys(injectedDeps);
+// Dev dependencies injected by workspace profiles (defined in .yarnrc.yml).
+// These are not declared in individual package.json files, so depcheck would
+// incorrectly flag them as unused — we tell depcheck to ignore them instead.
+const PROFILE_DEPS = new Set([
+  // default profile
+  'typescript',
+  '@types/node',
+  '@typescript/native-preview',
+  'eslint',
+  'oxfmt',
+  // jest profile
+  'jest',
+  '@types/jest',
+]);
+
+function injectedDevDeps(): string[] {
+  return [...PROFILE_DEPS];
 }
 
 function isTestFile(fileName: string): boolean {
