@@ -37,6 +37,7 @@ function getTypescriptBuildConfig(
       if (options.noEmit) {
         return '';
       }
+      parts.push('--rootDir', 'src');
       if (outDir !== options.outDir) {
         parts.push('--outDir', outDir);
       }

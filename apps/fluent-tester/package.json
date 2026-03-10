@@ -24,8 +24,8 @@
   "scripts": {
     "android": "rnx-cli run --platform android",
     "build": "fluentui-scripts build",
-    "build-cjs": "tsgo --outDir lib-commonjs",
-    "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "build-cjs": "tsgo --rootDir src --outDir lib-commonjs",
+    "build-core": "tsgo --rootDir src --outDir lib --module esnext --moduleResolution bundler",
     "bundle": "rnx-cli bundle --dev false",
     "bundle:android": "rnx-cli bundle --dev false --platform android",
     "bundle:ios": "rnx-cli bundle --dev false --platform ios",
@@ -33,11 +33,11 @@
     "bundle:windows": "rnx-cli bundle --dev false --platform windows",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
+    "format": "fluentui-scripts format",
     "ios": "rnx-cli run --platform ios",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
     "macos": "rnx-cli run --platform macos",
-    "format": "fluentui-scripts format",
     "start": "rnx-cli start",
     "windows": "react-native run-windows --arch x64 --sln windows/FluentTester.sln"
   },

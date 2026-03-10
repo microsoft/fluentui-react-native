@@ -5,6 +5,8 @@
     "moduleResolution": "Node16",
     "outDir": "lib",
     "skipLibCheck": true,
+    "declaration": false,
+    "declarationMap": false,
     "types": ["@types/jasmine", "@wdio/globals/types", "@wdio/jasmine-framework", "node"]
   },
   "include": ["src"]

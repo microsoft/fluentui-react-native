@@ -1,0 +1,56 @@
+# Build tasks — topological across workspaces so dependency packages build first.
+# Workspaces that don't have the script are automatically skipped.
+build-core:
+  yarn workspaces foreach --all --topological --parallel --jobs unlimited run build-core
+
+# CJS builds wait for all build-core (ESM + .d.ts) to complete first.
+build-cjs: build-core
+  yarn workspaces foreach --all --topological --parallel --jobs unlimited run build-cjs
+
+# Aggregate: build-all is done once both phases are complete.
+build-all: build-cjs
+  true
+
+# Quality — no cross-package ordering needed, run in parallel.
+lint:
+  yarn workspaces foreach --all --parallel --jobs unlimited run lint
+
+lint-package:
+  yarn workspaces foreach --all --parallel --jobs unlimited run lint-package
+
+test: build-all
+  yarn workspaces foreach --all --parallel --jobs unlimited run test
+
+# Bundle and clean — parallel, no ordering.
+bundle:
+  yarn workspaces foreach --all --parallel --jobs unlimited run bundle
+
+clean:
+  yarn workspaces foreach --all --parallel --jobs unlimited run clean
+
+# Root-only tasks — delegate to npm scripts so yarn sets up node_modules/.bin PATH.
+check-publishing:
+  yarn run check-publishing
+
+format-check:
+  yarn run format:check
+
+lint-lockfile:
+  yarn run lint-lockfile
+
+# Pipeline aggregates.
+repo-checks: lint-lockfile& format-check& check-publishing&
+
+# buildci: build first (sequential), then quality checks in parallel.
+buildci: build-all test& lint& lint-package& repo-checks&
+
+# Pack — build first, then collect tarballs for all public packages.
+pack: build-all
+  node --experimental-strip-types scripts/src/worker/pack-all.mts
+
+# Publish from pre-packed tarballs.
+publish:
+  node --experimental-strip-types scripts/src/worker/publish-all.mts
+
+publish-dry-run:
+  node --experimental-strip-types scripts/src/worker/publish-all.mts --dry-run
