@@ -4888,7 +4888,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/popover@workspace:packages/experimental/Popover":
+"@fluentui-react-native/popover@workspace:*, @fluentui-react-native/popover@workspace:packages/experimental/Popover":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/popover@workspace:packages/experimental/Popover"
   dependencies:
@@ -10991,7 +10991,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uifabricshared/theming-react-native@workspace:packages/deprecated/theming-react-native":
+"@uifabricshared/theming-react-native@workspace:*, @uifabricshared/theming-react-native@workspace:packages/deprecated/theming-react-native":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/theming-react-native@workspace:packages/deprecated/theming-react-native"
   dependencies:
@@ -15876,6 +15876,117 @@ __metadata:
   checksum: 10c0/63dedf1d7c16bd28b58ff1b827d6f58470a76e9d97de8516ee031ce0df2a52348b6f653032baebe14bbaea7f5ede6892dbe56d296590eab803ed33ede3f2785e
   languageName: node
   linkType: hard
+
+"fluentui-react-native@workspace:packages/libraries/fluentui-react-native":
+  version: 0.0.0-use.local
+  resolution: "fluentui-react-native@workspace:packages/libraries/fluentui-react-native"
+  dependencies:
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/android-theme": "workspace:*"
+    "@fluentui-react-native/apple-theme": "workspace:*"
+    "@fluentui-react-native/avatar": "workspace:*"
+    "@fluentui-react-native/babel-config": "workspace:*"
+    "@fluentui-react-native/badge": "workspace:*"
+    "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/checkbox": "workspace:*"
+    "@fluentui-react-native/chip": "workspace:*"
+    "@fluentui-react-native/composition": "workspace:*"
+    "@fluentui-react-native/contextual-menu": "workspace:*"
+    "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/divider": "workspace:*"
+    "@fluentui-react-native/drawer": "workspace:*"
+    "@fluentui-react-native/dropdown": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/experimental-activity-indicator": "workspace:*"
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
+    "@fluentui-react-native/experimental-avatar": "workspace:*"
+    "@fluentui-react-native/experimental-checkbox": "workspace:*"
+    "@fluentui-react-native/experimental-expander": "workspace:*"
+    "@fluentui-react-native/experimental-menu-button": "workspace:*"
+    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
+    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
+    "@fluentui-react-native/experimental-shadow": "workspace:*"
+    "@fluentui-react-native/experimental-shimmer": "workspace:*"
+    "@fluentui-react-native/focus-trap-zone": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/input": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/link": "workspace:*"
+    "@fluentui-react-native/menu": "workspace:*"
+    "@fluentui-react-native/menu-button": "workspace:*"
+    "@fluentui-react-native/notification": "workspace:*"
+    "@fluentui-react-native/overflow": "workspace:*"
+    "@fluentui-react-native/persona": "workspace:*"
+    "@fluentui-react-native/persona-coin": "workspace:*"
+    "@fluentui-react-native/popover": "workspace:*"
+    "@fluentui-react-native/pressable": "workspace:*"
+    "@fluentui-react-native/radio-group": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/separator": "workspace:*"
+    "@fluentui-react-native/spinner": "workspace:*"
+    "@fluentui-react-native/stack": "workspace:*"
+    "@fluentui-react-native/styling-utils": "workspace:*"
+    "@fluentui-react-native/switch": "workspace:*"
+    "@fluentui-react-native/tablist": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/themed-stylesheet": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/tooltip": "workspace:*"
+    "@fluentui-react-native/use-slot": "workspace:*"
+    "@fluentui-react-native/use-slots": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
+    "@fluentui-react-native/use-tokens": "workspace:*"
+    "@fluentui-react-native/vibrancy-view": "workspace:*"
+    "@fluentui-react-native/win32-theme": "workspace:*"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@types/react": "npm:~19.1.4"
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
+    "@uifabricshared/foundation-tokens": "workspace:*"
+    "@uifabricshared/theme-registry": "workspace:*"
+    "@uifabricshared/themed-settings": "workspace:*"
+    "@uifabricshared/theming-ramp": "workspace:*"
+    "@uifabricshared/theming-react-native": "workspace:*"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
+    react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
+    react-native-windows: "npm:^0.81.0"
+    workspace-tools: "npm:^0.26.3"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.74.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
+    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-svg:
+      optional: true
+    react-native-windows:
+      optional: true
+  languageName: unknown
+  linkType: soft
 
 "fn.name@npm:1.x.x":
   version: 1.1.0

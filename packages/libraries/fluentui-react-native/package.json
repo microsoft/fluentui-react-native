@@ -1,0 +1,482 @@
+{
+  "name": "fluentui-react-native",
+  "version": "1.0.0",
+  "description": "Unified mono-package for FluentUI React Native. Import any component via subpath: fluentui-react-native/button, fluentui-react-native/theme, etc.",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/libraries/fluentui-react-native"
+  },
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./components": {
+      "types": "./lib/components.d.ts",
+      "import": "./lib/components.js",
+      "default": "./src/components.ts"
+    },
+    "./core": {
+      "types": "./lib/core.d.ts",
+      "import": "./lib/core.js",
+      "default": "./src/core.ts"
+    },
+    "./deprecated": {
+      "types": "./lib/deprecated.d.ts",
+      "import": "./lib/deprecated.js",
+      "default": "./src/deprecated.ts"
+    },
+    "./experimental": {
+      "types": "./lib/experimental.d.ts",
+      "import": "./lib/experimental.js",
+      "default": "./src/experimental.ts"
+    },
+    "./theming": {
+      "types": "./lib/theming.d.ts",
+      "import": "./lib/theming.js",
+      "default": "./src/theming.ts"
+    },
+    "./utils": {
+      "types": "./lib/utils.d.ts",
+      "import": "./lib/utils.js",
+      "default": "./src/utils.ts"
+    },
+    "./adapters": {
+      "types": "./lib/adapters.d.ts",
+      "import": "./lib/adapters.js"
+    },
+    "./android-theme": {
+      "types": "./lib/android-theme.d.ts",
+      "import": "./lib/android-theme.js"
+    },
+    "./apple-theme": {
+      "types": "./lib/apple-theme.d.ts",
+      "import": "./lib/apple-theme.js"
+    },
+    "./avatar": {
+      "types": "./lib/avatar.d.ts",
+      "import": "./lib/avatar.js"
+    },
+    "./badge": {
+      "types": "./lib/badge.d.ts",
+      "import": "./lib/badge.js"
+    },
+    "./button": {
+      "types": "./lib/button.d.ts",
+      "import": "./lib/button.js"
+    },
+    "./callout": {
+      "types": "./lib/callout.d.ts",
+      "import": "./lib/callout.js"
+    },
+    "./checkbox": {
+      "types": "./lib/checkbox.d.ts",
+      "import": "./lib/checkbox.js"
+    },
+    "./chip": {
+      "types": "./lib/chip.d.ts",
+      "import": "./lib/chip.js"
+    },
+    "./composition": {
+      "types": "./lib/composition.d.ts",
+      "import": "./lib/composition.js"
+    },
+    "./contextual-menu": {
+      "types": "./lib/contextual-menu.d.ts",
+      "import": "./lib/contextual-menu.js"
+    },
+    "./default-theme": {
+      "types": "./lib/default-theme.d.ts",
+      "import": "./lib/default-theme.js"
+    },
+    "./divider": {
+      "types": "./lib/divider.d.ts",
+      "import": "./lib/divider.js"
+    },
+    "./drawer": {
+      "types": "./lib/drawer.d.ts",
+      "import": "./lib/drawer.js"
+    },
+    "./dropdown": {
+      "types": "./lib/dropdown.d.ts",
+      "import": "./lib/dropdown.js"
+    },
+    "./experimental-activity-indicator": {
+      "types": "./lib/experimental-activity-indicator.d.ts",
+      "import": "./lib/experimental-activity-indicator.js"
+    },
+    "./experimental-appearance-additions": {
+      "types": "./lib/experimental-appearance-additions.d.ts",
+      "import": "./lib/experimental-appearance-additions.js"
+    },
+    "./experimental-avatar": {
+      "types": "./lib/experimental-avatar.d.ts",
+      "import": "./lib/experimental-avatar.js"
+    },
+    "./experimental-checkbox": {
+      "types": "./lib/experimental-checkbox.d.ts",
+      "import": "./lib/experimental-checkbox.js"
+    },
+    "./experimental-expander": {
+      "types": "./lib/experimental-expander.d.ts",
+      "import": "./lib/experimental-expander.js"
+    },
+    "./experimental-menu-button": {
+      "types": "./lib/experimental-menu-button.d.ts",
+      "import": "./lib/experimental-menu-button.js"
+    },
+    "./experimental-native-date-picker": {
+      "types": "./lib/experimental-native-date-picker.d.ts",
+      "import": "./lib/experimental-native-date-picker.js"
+    },
+    "./experimental-native-font-metrics": {
+      "types": "./lib/experimental-native-font-metrics.d.ts",
+      "import": "./lib/experimental-native-font-metrics.js"
+    },
+    "./experimental-shadow": {
+      "types": "./lib/experimental-shadow.d.ts",
+      "import": "./lib/experimental-shadow.js"
+    },
+    "./experimental-shimmer": {
+      "types": "./lib/experimental-shimmer.d.ts",
+      "import": "./lib/experimental-shimmer.js"
+    },
+    "./focus-trap-zone": {
+      "types": "./lib/focus-trap-zone.d.ts",
+      "import": "./lib/focus-trap-zone.js"
+    },
+    "./focus-zone": {
+      "types": "./lib/focus-zone.d.ts",
+      "import": "./lib/focus-zone.js"
+    },
+    "./foundation-composable": {
+      "types": "./lib/foundation-composable.d.ts",
+      "import": "./lib/foundation-composable.js"
+    },
+    "./foundation-compose": {
+      "types": "./lib/foundation-compose.d.ts",
+      "import": "./lib/foundation-compose.js"
+    },
+    "./foundation-settings": {
+      "types": "./lib/foundation-settings.d.ts",
+      "import": "./lib/foundation-settings.js"
+    },
+    "./foundation-tokens": {
+      "types": "./lib/foundation-tokens.d.ts",
+      "import": "./lib/foundation-tokens.js"
+    },
+    "./framework": {
+      "types": "./lib/framework.d.ts",
+      "import": "./lib/framework.js"
+    },
+    "./framework-base": {
+      "types": "./lib/framework-base.d.ts",
+      "import": "./lib/framework-base.js"
+    },
+    "./icon": {
+      "types": "./lib/icon.d.ts",
+      "import": "./lib/icon.js"
+    },
+    "./input": {
+      "types": "./lib/input.d.ts",
+      "import": "./lib/input.js"
+    },
+    "./interactive-hooks": {
+      "types": "./lib/interactive-hooks.d.ts",
+      "import": "./lib/interactive-hooks.js"
+    },
+    "./link": {
+      "types": "./lib/link.d.ts",
+      "import": "./lib/link.js"
+    },
+    "./menu": {
+      "types": "./lib/menu.d.ts",
+      "import": "./lib/menu.js"
+    },
+    "./menu-button": {
+      "types": "./lib/menu-button.d.ts",
+      "import": "./lib/menu-button.js"
+    },
+    "./notification": {
+      "types": "./lib/notification.d.ts",
+      "import": "./lib/notification.js"
+    },
+    "./overflow": {
+      "types": "./lib/overflow.d.ts",
+      "import": "./lib/overflow.js"
+    },
+    "./persona": {
+      "types": "./lib/persona.d.ts",
+      "import": "./lib/persona.js"
+    },
+    "./persona-coin": {
+      "types": "./lib/persona-coin.d.ts",
+      "import": "./lib/persona-coin.js"
+    },
+    "./popover": {
+      "types": "./lib/popover.d.ts",
+      "import": "./lib/popover.js"
+    },
+    "./pressable": {
+      "types": "./lib/pressable.d.ts",
+      "import": "./lib/pressable.js"
+    },
+    "./radio-group": {
+      "types": "./lib/radio-group.d.ts",
+      "import": "./lib/radio-group.js"
+    },
+    "./separator": {
+      "types": "./lib/separator.d.ts",
+      "import": "./lib/separator.js"
+    },
+    "./spinner": {
+      "types": "./lib/spinner.d.ts",
+      "import": "./lib/spinner.js"
+    },
+    "./stack": {
+      "types": "./lib/stack.d.ts",
+      "import": "./lib/stack.js"
+    },
+    "./styling-utils": {
+      "types": "./lib/styling-utils.d.ts",
+      "import": "./lib/styling-utils.js"
+    },
+    "./switch": {
+      "types": "./lib/switch.d.ts",
+      "import": "./lib/switch.js"
+    },
+    "./tablist": {
+      "types": "./lib/tablist.d.ts",
+      "import": "./lib/tablist.js"
+    },
+    "./text": {
+      "types": "./lib/text.d.ts",
+      "import": "./lib/text.js"
+    },
+    "./theme": {
+      "types": "./lib/theme.d.ts",
+      "import": "./lib/theme.js"
+    },
+    "./theme-registry": {
+      "types": "./lib/theme-registry.d.ts",
+      "import": "./lib/theme-registry.js"
+    },
+    "./theme-tokens": {
+      "types": "./lib/theme-tokens.d.ts",
+      "import": "./lib/theme-tokens.js"
+    },
+    "./theme-types": {
+      "types": "./lib/theme-types.d.ts",
+      "import": "./lib/theme-types.js"
+    },
+    "./themed-settings": {
+      "types": "./lib/themed-settings.d.ts",
+      "import": "./lib/themed-settings.js"
+    },
+    "./themed-stylesheet": {
+      "types": "./lib/themed-stylesheet.d.ts",
+      "import": "./lib/themed-stylesheet.js"
+    },
+    "./theming-ramp": {
+      "types": "./lib/theming-ramp.d.ts",
+      "import": "./lib/theming-ramp.js"
+    },
+    "./theming-react-native": {
+      "types": "./lib/theming-react-native.d.ts",
+      "import": "./lib/theming-react-native.js"
+    },
+    "./theming-utils": {
+      "types": "./lib/theming-utils.d.ts",
+      "import": "./lib/theming-utils.js"
+    },
+    "./tokens": {
+      "types": "./lib/tokens.d.ts",
+      "import": "./lib/tokens.js"
+    },
+    "./tooltip": {
+      "types": "./lib/tooltip.d.ts",
+      "import": "./lib/tooltip.js"
+    },
+    "./use-slot": {
+      "types": "./lib/use-slot.d.ts",
+      "import": "./lib/use-slot.js"
+    },
+    "./use-slots": {
+      "types": "./lib/use-slots.d.ts",
+      "import": "./lib/use-slots.js"
+    },
+    "./use-styling": {
+      "types": "./lib/use-styling.d.ts",
+      "import": "./lib/use-styling.js"
+    },
+    "./use-tokens": {
+      "types": "./lib/use-tokens.d.ts",
+      "import": "./lib/use-tokens.js"
+    },
+    "./vibrancy-view": {
+      "types": "./lib/vibrancy-view.d.ts",
+      "import": "./lib/vibrancy-view.js"
+    },
+    "./win32-theme": {
+      "types": "./lib/win32-theme.d.ts",
+      "import": "./lib/win32-theme.js"
+    }
+  },
+  "scripts": {
+    "build": "node update-exports.mts",
+    "check-exports": "node update-exports.mts --check",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts eslint",
+    "lint-package": "fluentui-scripts lint-package",
+    "update-exports": "node update-exports.mts"
+  },
+  "dependencies": {
+    "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/android-theme": "workspace:*",
+    "@fluentui-react-native/apple-theme": "workspace:*",
+    "@fluentui-react-native/avatar": "workspace:*",
+    "@fluentui-react-native/badge": "workspace:*",
+    "@fluentui-react-native/button": "workspace:*",
+    "@fluentui-react-native/callout": "workspace:*",
+    "@fluentui-react-native/checkbox": "workspace:*",
+    "@fluentui-react-native/chip": "workspace:*",
+    "@fluentui-react-native/composition": "workspace:*",
+    "@fluentui-react-native/contextual-menu": "workspace:*",
+    "@fluentui-react-native/default-theme": "workspace:*",
+    "@fluentui-react-native/divider": "workspace:*",
+    "@fluentui-react-native/drawer": "workspace:*",
+    "@fluentui-react-native/dropdown": "workspace:*",
+    "@fluentui-react-native/experimental-activity-indicator": "workspace:*",
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*",
+    "@fluentui-react-native/experimental-avatar": "workspace:*",
+    "@fluentui-react-native/experimental-checkbox": "workspace:*",
+    "@fluentui-react-native/experimental-expander": "workspace:*",
+    "@fluentui-react-native/experimental-menu-button": "workspace:*",
+    "@fluentui-react-native/experimental-native-date-picker": "workspace:*",
+    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*",
+    "@fluentui-react-native/experimental-shadow": "workspace:*",
+    "@fluentui-react-native/experimental-shimmer": "workspace:*",
+    "@fluentui-react-native/focus-trap-zone": "workspace:*",
+    "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
+    "@fluentui-react-native/icon": "workspace:*",
+    "@fluentui-react-native/input": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*",
+    "@fluentui-react-native/link": "workspace:*",
+    "@fluentui-react-native/menu": "workspace:*",
+    "@fluentui-react-native/menu-button": "workspace:*",
+    "@fluentui-react-native/notification": "workspace:*",
+    "@fluentui-react-native/overflow": "workspace:*",
+    "@fluentui-react-native/persona": "workspace:*",
+    "@fluentui-react-native/persona-coin": "workspace:*",
+    "@fluentui-react-native/popover": "workspace:*",
+    "@fluentui-react-native/pressable": "workspace:*",
+    "@fluentui-react-native/radio-group": "workspace:*",
+    "@fluentui-react-native/separator": "workspace:*",
+    "@fluentui-react-native/spinner": "workspace:*",
+    "@fluentui-react-native/stack": "workspace:*",
+    "@fluentui-react-native/styling-utils": "workspace:*",
+    "@fluentui-react-native/switch": "workspace:*",
+    "@fluentui-react-native/tablist": "workspace:*",
+    "@fluentui-react-native/text": "workspace:*",
+    "@fluentui-react-native/theme": "workspace:*",
+    "@fluentui-react-native/theme-tokens": "workspace:*",
+    "@fluentui-react-native/theme-types": "workspace:*",
+    "@fluentui-react-native/themed-stylesheet": "workspace:*",
+    "@fluentui-react-native/theming-utils": "workspace:*",
+    "@fluentui-react-native/tokens": "workspace:*",
+    "@fluentui-react-native/tooltip": "workspace:*",
+    "@fluentui-react-native/use-slot": "workspace:*",
+    "@fluentui-react-native/use-slots": "workspace:*",
+    "@fluentui-react-native/use-styling": "workspace:*",
+    "@fluentui-react-native/use-tokens": "workspace:*",
+    "@fluentui-react-native/vibrancy-view": "workspace:*",
+    "@fluentui-react-native/win32-theme": "workspace:*",
+    "@uifabricshared/foundation-composable": "workspace:*",
+    "@uifabricshared/foundation-compose": "workspace:*",
+    "@uifabricshared/foundation-settings": "workspace:*",
+    "@uifabricshared/foundation-tokens": "workspace:*",
+    "@uifabricshared/theme-registry": "workspace:*",
+    "@uifabricshared/themed-settings": "workspace:*",
+    "@uifabricshared/theming-ramp": "workspace:*",
+    "@uifabricshared/theming-react-native": "workspace:*"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/babel-config": "workspace:*",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-android": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
+    "@react-native/metro-config": "^0.81.0",
+    "@types/react": "~19.1.4",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-native-macos": "^0.81.0",
+    "react-native-svg": "^15.12.1",
+    "react-native-windows": "^0.81.0",
+    "workspace-tools": "^0.26.3"
+  },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.74.0",
+    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
+    "react": "18.2.0 || 19.0.0 || 19.1.4",
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-svg": ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "@types/react": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-svg": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
+  },
+  "furn": {
+    "depcheck": {
+      "ignoreMatches": [
+        "@fluentui-react-native/*",
+        "@uifabricshared/*",
+        "@fluentui-react-native/kit-config",
+        "@react-native-community/cli",
+        "@react-native-community/cli-platform-android",
+        "@react-native-community/cli-platform-ios",
+        "@react-native/metro-config",
+        "workspace-tools"
+      ]
+    }
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "core-macos",
+        "core-windows",
+        "react",
+        "svg",
+        "tools-core"
+      ]
+    },
+    "extends": "@fluentui-react-native/kit-config"
+  }
+}

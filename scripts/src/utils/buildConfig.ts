@@ -62,6 +62,11 @@ function getTypescriptBuildConfig(
       cjsScript = getScript(options, cjsDir, !isModule, 'commonjs');
       esmScript = getScript(options, esmDir, isModule, 'esnext');
       checkScript = options.noEmit ? engine : '';
+
+      // ESM-only packages (type: module with no CJS entry point) should not generate a CJS build
+      if (isModule && !projRoot.manifest.main) {
+        cjsScript = '';
+      }
     }
   }
   return { engine, cjsDir, esmDir, cjsScript, esmScript, checkScript, extraArgs };
