@@ -2,11 +2,12 @@ import * as React from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
-import { ButtonV1 as Button, Text } from '@fluentui/react-native';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
+import { Text } from 'fluentui-react-native/text';
 import { VIBRANCYVIEW_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import { Stack } from '@fluentui-react-native/stack';
-import type { Material, BlendingMode, State } from '@fluentui-react-native/vibrancy-view';
-import { VibrancyView } from '@fluentui-react-native/vibrancy-view';
+import { Stack } from 'fluentui-react-native/stack';
+import type { Material, BlendingMode, State } from 'fluentui-react-native/vibrancy-view';
+import { VibrancyView } from 'fluentui-react-native/vibrancy-view';
 
 import { MenuPicker } from '../Common/MenuPicker';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 
-import type { IconProps } from '@fluentui-react-native/icon';
-import { Input } from '@fluentui-react-native/input';
+import type { IconProps } from 'fluentui-react-native/icon';
+import { Input } from 'fluentui-react-native/input';
 
 import DismissSvg from '../../../assets/dismissIcon.svg';
 import FilledSvg from '../../../assets/filledIcon.svg';

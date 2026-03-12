@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { useFluentTheme } from '@fluentui-react-native/framework';
-import { Text } from '@fluentui-react-native/text';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
+import { useFluentTheme } from 'fluentui-react-native/framework';
+import { Text } from 'fluentui-react-native/text';
 import { MenuView } from '@react-native-menu/menu';
 import type { MenuAction } from '@react-native-menu/menu';
 import { SvgXml } from 'react-native-svg';

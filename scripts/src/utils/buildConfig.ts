@@ -62,6 +62,12 @@ function getTypescriptBuildConfig(
       cjsScript = getScript(options, cjsDir, !isModule, 'commonjs');
       esmScript = getScript(options, esmDir, isModule, 'esnext');
       checkScript = options.noEmit ? engine : '';
+
+      // ESM-only packages (type: module with no CJS entry point) should not generate a CJS build.
+      // Also skip CJS for packages with no main field at all (e.g. private apps that are bundled by Metro).
+      if (!projRoot.manifest.main) {
+        cjsScript = '';
+      }
     }
   }
   return { engine, cjsDir, esmDir, cjsScript, esmScript, checkScript, extraArgs };

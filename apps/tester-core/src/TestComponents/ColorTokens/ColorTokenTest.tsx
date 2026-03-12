@@ -2,16 +2,17 @@ import * as React from 'react';
 import type { ViewStyle, ColorValue } from 'react-native';
 import { View, StyleSheet, Platform } from 'react-native';
 
-import { Text, ToggleButton } from '@fluentui/react-native';
-import { createAliasTokens } from '@fluentui-react-native/default-theme';
+import { ToggleButton } from 'fluentui-react-native/button';
+import { Text } from 'fluentui-react-native/text';
+import { createAliasTokens } from 'fluentui-react-native/default-theme';
 import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import type { SvgIconProps } from '@fluentui-react-native/icon';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import type { Theme } from '@fluentui-react-native/theme-types';
-import { useTheme } from '@fluentui-react-native/theme-types';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
-import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
+import type { SvgIconProps } from 'fluentui-react-native/icon';
+import { globalTokens } from 'fluentui-react-native/theme-tokens';
+import type { Theme } from 'fluentui-react-native/theme-types';
+import { useTheme } from 'fluentui-react-native/theme-types';
+import { themedStyleSheet } from 'fluentui-react-native/themed-stylesheet';
+import { getCurrentAppearance } from 'fluentui-react-native/theming-utils';
+import { createOfficeAliasTokens } from 'fluentui-react-native/win32-theme';
 import type { SvgProps } from 'react-native-svg';
 import Svg, { G, Path } from 'react-native-svg';
 

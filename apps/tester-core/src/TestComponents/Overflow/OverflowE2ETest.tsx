@@ -2,8 +2,8 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { Divider } from '@fluentui-react-native/divider';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
+import { Divider } from 'fluentui-react-native/divider';
 import {
   FIRST_OVERFLOW_ITEM,
   FIRST_OVERFLOW_ITEM_ID,
@@ -22,9 +22,9 @@ import {
   RADIO_275,
   RADIO_375,
 } from '@fluentui-react-native/e2e-testing';
-import { Overflow, OverflowItem, useOverflowMenu } from '@fluentui-react-native/overflow';
-import { RadioGroupV1 as RadioGroup, Radio } from '@fluentui-react-native/radio-group';
-import { TextV1 as Text } from '@fluentui-react-native/text';
+import { Overflow, OverflowItem, useOverflowMenu } from 'fluentui-react-native/overflow';
+import { RadioGroupV1 as RadioGroup, Radio } from 'fluentui-react-native/radio-group';
+import { TextV1 as Text } from 'fluentui-react-native/text';
 
 const styles = StyleSheet.create({
   menu: {

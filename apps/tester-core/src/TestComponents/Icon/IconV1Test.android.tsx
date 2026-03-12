@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { Text, View } from 'react-native';
 
-import type { FontIconPropsV1, SvgIconPropsV1 } from '@fluentui-react-native/icon';
-import { FontIcon, SvgIcon, IconV1 } from '@fluentui-react-native/icon';
+import type { FontIconPropsV1, SvgIconPropsV1 } from 'fluentui-react-native/icon';
+import { FontIcon, SvgIcon, IconV1 } from 'fluentui-react-native/icon';
 
 import TestSvg from '../../../assets/test.svg';
 

@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
 
-import { FAB, Text } from '@fluentui/react-native';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { Shadow } from '@fluentui-react-native/experimental-shadow';
-import { useFluentTheme } from '@fluentui-react-native/framework';
+import { FAB } from 'fluentui-react-native/button';
+import { Text } from 'fluentui-react-native/text';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
+import { Shadow } from 'fluentui-react-native/experimental-shadow';
+import { useFluentTheme } from 'fluentui-react-native/framework';
 
 import { shadowTestPageStyles } from './ShadowTestPageStyles';
 import { iconProps } from '../Common/iconExamples';

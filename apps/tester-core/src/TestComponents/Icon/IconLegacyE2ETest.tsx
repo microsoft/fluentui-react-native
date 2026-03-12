@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { Text } from '@fluentui/react-native';
+import { Text } from 'fluentui-react-native/text';
 import { ICON_ACCESSIBILITY_LABEL } from '@fluentui-react-native/e2e-testing';
-import { Icon } from '@fluentui-react-native/icon';
-import type { RasterImageIconProps } from '@fluentui-react-native/icon';
+import { Icon } from 'fluentui-react-native/icon';
+import type { RasterImageIconProps } from 'fluentui-react-native/icon';
 
 import { testImage } from '../Common/iconExamples';
 

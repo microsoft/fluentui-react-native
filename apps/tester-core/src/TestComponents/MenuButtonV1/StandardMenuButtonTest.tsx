@@ -6,10 +6,10 @@
 import * as React from 'react';
 import { Text, View, Switch, Platform } from 'react-native';
 
-import type { ContextualMenuProps } from '@fluentui/react-native';
-import { Separator } from '@fluentui/react-native';
-import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
-import type { IconSourcesType } from '@fluentui-react-native/icon';
+import type { ContextualMenuProps } from 'fluentui-react-native/contextual-menu';
+import { Separator } from 'fluentui-react-native/separator';
+import { MenuButton } from 'fluentui-react-native/experimental-menu-button';
+import type { IconSourcesType } from 'fluentui-react-native/icon';
 
 import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonV1TestStyles';
 import { menuItems, iconProps } from './testData';

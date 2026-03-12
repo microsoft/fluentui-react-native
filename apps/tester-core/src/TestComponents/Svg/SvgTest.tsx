@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
-import { ButtonV1 as Button, ToggleButton } from '@fluentui/react-native';
-import { Separator } from '@fluentui/react-native';
+import { ButtonV1 as Button, ToggleButton } from 'fluentui-react-native/button';
+import { Separator } from 'fluentui-react-native/separator';
 import { SVG_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import { TextV1 } from '@fluentui-react-native/text';
+import { TextV1 } from 'fluentui-react-native/text';
 import {
   Circle,
   Defs,

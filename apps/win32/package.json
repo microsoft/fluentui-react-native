@@ -8,8 +8,6 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/win32"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
@@ -21,7 +19,6 @@
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "build-cjs": "tsgo --outDir lib-commonjs",
     "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "bundle": "rnx-cli bundle --dev false",
     "bundle-dev": "rnx-cli bundle",

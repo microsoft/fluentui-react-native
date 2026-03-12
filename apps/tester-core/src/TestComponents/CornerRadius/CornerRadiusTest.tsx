@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { Text } from '@fluentui/react-native';
+import { Text } from 'fluentui-react-native/text';
 import { HOMEPAGE_CORNERRADIUS_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import { useFluentTheme } from '@fluentui-react-native/framework';
-import { Stack } from '@fluentui-react-native/stack';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { useFluentTheme } from 'fluentui-react-native/framework';
+import { Stack } from 'fluentui-react-native/stack';
+import { globalTokens } from 'fluentui-react-native/theme-tokens';
+import { getCurrentAppearance } from 'fluentui-react-native/theming-utils';
 
 import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';

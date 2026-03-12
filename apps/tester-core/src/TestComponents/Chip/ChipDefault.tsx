@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { StyleSheet, View, ToastAndroid } from 'react-native';
 
-import { Chip } from '@fluentui-react-native/chip';
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { Switch } from '@fluentui-react-native/switch';
-import { Text } from '@fluentui-react-native/text';
+import { Chip } from 'fluentui-react-native/chip';
+import type { InteractionEvent } from 'fluentui-react-native/interactive-hooks';
+import { Switch } from 'fluentui-react-native/switch';
+import { Text } from 'fluentui-react-native/text';
 
 import { svgProps } from '../Common/iconExamples';
 

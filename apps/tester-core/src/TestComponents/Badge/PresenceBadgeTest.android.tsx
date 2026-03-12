@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-import { ToggleButton } from '@fluentui/react-native';
-import { PresenceBadge } from '@fluentui-react-native/badge';
+import { ToggleButton } from 'fluentui-react-native/button';
+import { PresenceBadge } from 'fluentui-react-native/badge';
 
 export const PresenceBadgeTest: React.FunctionComponent = () => {
   const [outOfOffice, setOutOfOffice] = useState(false);

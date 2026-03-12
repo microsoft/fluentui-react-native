@@ -2,10 +2,10 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Platform } from 'react-native';
 
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
 import { SWITCH_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { Switch } from '@fluentui-react-native/switch';
+import type { InteractionEvent } from 'fluentui-react-native/interactive-hooks';
+import { Switch } from 'fluentui-react-native/switch';
 
 import { CustomizedSwitch } from './CustomizedSwitch';
 import { E2ESwitchTest } from './E2ESwitchTest';

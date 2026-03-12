@@ -1,9 +1,9 @@
 import React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
-import { ButtonV1 as Button } from '@fluentui/react-native';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
 import { MENU_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import type { MenuProps } from '@fluentui-react-native/menu';
+import type { MenuProps } from 'fluentui-react-native/menu';
 import {
   Menu,
   MenuItem,
@@ -15,10 +15,10 @@ import {
   MenuDivider,
   MenuGroup,
   MenuGroupHeader,
-} from '@fluentui-react-native/menu';
-import { Stack } from '@fluentui-react-native/stack';
-import { Switch } from '@fluentui-react-native/switch';
-import { TextV1 as Text } from '@fluentui-react-native/text';
+} from 'fluentui-react-native/menu';
+import { Stack } from 'fluentui-react-native/stack';
+import { Switch } from 'fluentui-react-native/switch';
+import { TextV1 as Text } from 'fluentui-react-native/text';
 
 import { E2EMenuTest } from './E2EMenuTest';
 import { MenuComponentOutsideMenuList } from './MenuComponentOutsideMenuList';
