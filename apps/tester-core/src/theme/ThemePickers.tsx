@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import type { ThemeOptions } from '@fluentui-react-native/theme-types';
+import { TextV1 as Text } from 'fluentui-react-native/text';
+import type { ThemeOptions } from 'fluentui-react-native/theme-types';
 
 import { themeChoices } from './applyTheme';
 import type { ThemeNames } from './applyTheme';

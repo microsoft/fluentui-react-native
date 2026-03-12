@@ -2,10 +2,13 @@ import * as React from 'react';
 import type { KeyboardMetrics } from 'react-native';
 import { AccessibilityInfo, Platform, ScrollView, Switch, Text, View } from 'react-native';
 
-import { ButtonV1 as Button, Separator, Pressable } from '@fluentui/react-native';
-import type { IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
-import type { CalloutNativeCommands, ICalloutProps } from '@fluentui-react-native/callout';
-import { Callout } from '@fluentui-react-native/callout';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
+import { Pressable } from 'fluentui-react-native/pressable';
+import { Separator } from 'fluentui-react-native/separator';
+import type { RestoreFocusEvent, DismissBehaviors } from 'fluentui-react-native/callout';
+import type { IFocusable } from 'fluentui-react-native/interactive-hooks';
+import type { CalloutNativeCommands, ICalloutProps } from 'fluentui-react-native/callout';
+import { Callout } from 'fluentui-react-native/callout';
 import { CALLOUT_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
@@ -350,9 +353,7 @@ const StandardCallout: React.FunctionComponent = () => {
           </Pressable>
         </View>
       </View>
-
       <Separator />
-
       <View style={{ paddingVertical: 5 }}>
         <Button componentRef={decoyBtn1Ref} onClick={onShiftFocusToCallout}>
           {'Custom reFocus w/ focus in Callout'}
@@ -361,7 +362,6 @@ const StandardCallout: React.FunctionComponent = () => {
           {'Custom reFocus w/o focus in Callout'}
         </Button>
       </View>
-
       {showStandardCallout && (
         <Callout
           componentRef={calloutRef}
@@ -404,14 +404,14 @@ const StandardCallout: React.FunctionComponent = () => {
               </View>
             ) : (
               //else
-              <View style={{ padding: 20, backgroundColor: calloutHovered ? 'lightgreen' : 'pink' }}>
+              (<View style={{ padding: 20, backgroundColor: calloutHovered ? 'lightgreen' : 'pink' }}>
                 <Button onClick={toggleCalloutRef}>{'click to change anchor'}</Button>
                 <Button onClick={onShiftFocusToCalloutButton}>{'focus last button'}</Button>
                 <Button onClick={switchTargetRefOrRect}>{'click to switch between anchor and rect'}</Button>
                 <Button componentRef={calloutButtonRef} onClick={onShiftFocusToPage}>
                   {'Click to invoke blur()'}
                 </Button>
-              </View>
+              </View>)
             )}
           </Pressable>
         </Callout>

@@ -1,5 +1,5 @@
-import type { PartialTheme, ThemeOptions } from '@fluentui-react-native/framework';
-import { createOfficeTheme, getThemingModule } from '@fluentui-react-native/win32-theme';
+import type { PartialTheme, ThemeOptions } from 'fluentui-react-native/framework';
+import { createOfficeTheme, getThemingModule } from 'fluentui-react-native/win32-theme';
 
 export type ThemeNames = 'Default' | 'Office' | 'Apple';
 

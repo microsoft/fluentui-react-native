@@ -5413,59 +5413,11 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@babel/runtime": "catalog:"
-    "@fluentui-react-native/adapters": "workspace:*"
-    "@fluentui-react-native/android-theme": "workspace:*"
-    "@fluentui-react-native/apple-theme": "workspace:*"
-    "@fluentui-react-native/avatar": "workspace:*"
     "@fluentui-react-native/babel-config": "workspace:*"
-    "@fluentui-react-native/badge": "workspace:*"
-    "@fluentui-react-native/button": "workspace:*"
-    "@fluentui-react-native/callout": "workspace:*"
-    "@fluentui-react-native/chip": "workspace:*"
-    "@fluentui-react-native/default-theme": "workspace:*"
-    "@fluentui-react-native/divider": "workspace:*"
-    "@fluentui-react-native/drawer": "workspace:*"
-    "@fluentui-react-native/dropdown": "workspace:*"
     "@fluentui-react-native/e2e-testing": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/experimental-activity-indicator": "workspace:*"
-    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
-    "@fluentui-react-native/experimental-avatar": "workspace:*"
-    "@fluentui-react-native/experimental-checkbox": "workspace:*"
-    "@fluentui-react-native/experimental-expander": "workspace:*"
-    "@fluentui-react-native/experimental-menu-button": "workspace:*"
-    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
-    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
-    "@fluentui-react-native/experimental-shadow": "workspace:*"
-    "@fluentui-react-native/experimental-shimmer": "workspace:*"
-    "@fluentui-react-native/focus-zone": "workspace:*"
-    "@fluentui-react-native/framework": "workspace:*"
-    "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/icon": "workspace:*"
-    "@fluentui-react-native/input": "workspace:*"
-    "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
-    "@fluentui-react-native/menu": "workspace:*"
-    "@fluentui-react-native/menu-button": "workspace:*"
-    "@fluentui-react-native/notification": "workspace:*"
-    "@fluentui-react-native/overflow": "workspace:*"
-    "@fluentui-react-native/radio-group": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/separator": "workspace:*"
-    "@fluentui-react-native/spinner": "workspace:*"
-    "@fluentui-react-native/stack": "workspace:*"
-    "@fluentui-react-native/switch": "workspace:*"
-    "@fluentui-react-native/tablist": "workspace:*"
-    "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
-    "@fluentui-react-native/themed-stylesheet": "workspace:*"
-    "@fluentui-react-native/theming-utils": "workspace:*"
-    "@fluentui-react-native/tooltip": "workspace:*"
-    "@fluentui-react-native/vibrancy-view": "workspace:*"
-    "@fluentui-react-native/win32-theme": "workspace:*"
-    "@fluentui/react-native": "workspace:*"
     "@fluentui/react-native-icons": "npm:^2.0.316"
     "@fortawesome/fontawesome-svg-core": "npm:^6.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^6.2.0"
@@ -5495,6 +5447,7 @@ __metadata:
     "@wdio/runner": "catalog:"
     expect-webdriverio: "catalog:"
     flow-bin: "npm:^0.113.0"
+    fluentui-react-native: "workspace:*"
     metro-config: "npm:^0.80.3"
     react: "npm:19.1.4"
     react-native: "npm:^0.81.6"
@@ -5506,20 +5459,7 @@ __metadata:
     react-test-renderer: "npm:19.1.4"
     webdriverio: "catalog:"
   peerDependencies:
-    "@fluentui-react-native/callout": "workspace:*"
-    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
-    "@fluentui-react-native/experimental-avatar": "workspace:*"
-    "@fluentui-react-native/experimental-checkbox": "workspace:*"
-    "@fluentui-react-native/experimental-expander": "workspace:*"
-    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
-    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
-    "@fluentui-react-native/experimental-shimmer": "workspace:*"
-    "@fluentui-react-native/focus-zone": "workspace:*"
-    "@fluentui-react-native/menu-button": "workspace:*"
-    "@fluentui-react-native/radio-group": "workspace:*"
     "@fluentui-react-native/tester-core": "workspace:*"
-    "@fluentui-react-native/tooltip": "workspace:*"
-    "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
@@ -5528,30 +5468,6 @@ __metadata:
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
-    "@fluentui-react-native/callout":
-      optional: true
-    "@fluentui-react-native/experimental-appearance-additions":
-      optional: true
-    "@fluentui-react-native/experimental-avatar":
-      optional: true
-    "@fluentui-react-native/experimental-checkbox":
-      optional: true
-    "@fluentui-react-native/experimental-expander":
-      optional: true
-    "@fluentui-react-native/experimental-native-date-picker":
-      optional: true
-    "@fluentui-react-native/experimental-native-font-metrics":
-      optional: true
-    "@fluentui-react-native/experimental-shimmer":
-      optional: true
-    "@fluentui-react-native/menu-button":
-      optional: true
-    "@fluentui-react-native/radio-group":
-      optional: true
-    "@fluentui-react-native/tooltip":
-      optional: true
-    "@fluentui-react-native/vibrancy-view":
-      optional: true
     "@office-iss/react-native-win32":
       optional: true
     "@types/react":
@@ -5651,23 +5567,10 @@ __metadata:
     "@babel/core": "catalog:"
     "@babel/runtime": "catalog:"
     "@fluentui-react-native/babel-config": "workspace:*"
-    "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
-    "@fluentui-react-native/experimental-avatar": "workspace:*"
-    "@fluentui-react-native/experimental-checkbox": "workspace:*"
-    "@fluentui-react-native/experimental-expander": "workspace:*"
-    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
-    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*"
-    "@fluentui-react-native/experimental-shimmer": "workspace:*"
-    "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
-    "@fluentui-react-native/menu-button": "workspace:*"
-    "@fluentui-react-native/radio-group": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tester-core": "workspace:*"
-    "@fluentui-react-native/tooltip": "workspace:*"
-    "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@react-native-community/cli": "npm:^13.6.4"
     "@react-native-community/cli-platform-android": "npm:^13.6.4"
     "@react-native-community/cli-platform-ios": "npm:^13.6.4"
@@ -5692,6 +5595,7 @@ __metadata:
     "@wdio/runner": "catalog:"
     expect-webdriverio: "catalog:"
     flow-bin: "npm:^0.113.0"
+    fluentui-react-native: "workspace:*"
     metro-config: "npm:^0.80.3"
     oxc-resolver: "catalog:"
     path-dirname: "npm:^1.0.2"
@@ -6224,7 +6128,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react-native@workspace:*, @fluentui/react-native@workspace:packages/libraries/core":
+"@fluentui/react-native@workspace:packages/libraries/core":
   version: 0.0.0-use.local
   resolution: "@fluentui/react-native@workspace:packages/libraries/core"
   dependencies:
@@ -15876,7 +15780,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fluentui-react-native@workspace:packages/libraries/fluentui-react-native":
+"fluentui-react-native@workspace:*, fluentui-react-native@workspace:packages/libraries/fluentui-react-native":
   version: 0.0.0-use.local
   resolution: "fluentui-react-native@workspace:packages/libraries/fluentui-react-native"
   dependencies:

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 
-import { Stack } from '@fluentui-react-native/stack';
-import { TextV1 as Text } from '@fluentui-react-native/text';
+import { Stack } from 'fluentui-react-native/stack';
+import { TextV1 as Text } from 'fluentui-react-native/text';
 
 import { stackStyle } from '../Common/styles';
 

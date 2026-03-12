@@ -1,10 +1,13 @@
 import React from 'react';
 import { Platform, View } from 'react-native';
 
-import type { FocusZoneDirection, FocusZoneTabNavigation, IFocusable } from '@fluentui/react-native';
-import { FocusZone, MenuButton, Text } from '@fluentui/react-native';
-import type { ButtonProps } from '@fluentui-react-native/button';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import type { FocusZoneDirection, FocusZoneTabNavigation } from 'fluentui-react-native/focus-zone';
+import type { IFocusable } from 'fluentui-react-native/interactive-hooks';
+import { FocusZone } from 'fluentui-react-native/focus-zone';
+import { MenuButton } from 'fluentui-react-native/menu-button';
+import { Text } from 'fluentui-react-native/text';
+import type { ButtonProps } from 'fluentui-react-native/button';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
 import {
   FOCUSZONE_CIRCLE_NAV_SWITCH,
   FOCUSZONE_DEFAULT_TABBABLE_SWITCH,
@@ -18,7 +21,7 @@ import {
   FOCUSZONE_TWO_DIM_SWITCH,
 } from '@fluentui-react-native/e2e-testing';
 import type { GridButtonIndex } from '@fluentui-react-native/e2e-testing';
-import { Switch } from '@fluentui-react-native/switch';
+import { Switch } from 'fluentui-react-native/switch';
 
 import { focusZoneTestStyles, GridButton } from './styles';
 import { commonTestStyles } from '../Common/styles';

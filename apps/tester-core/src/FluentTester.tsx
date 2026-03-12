@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager } from 'react-native';
 
-import { Separator, TextV1 as Text } from '@fluentui/react-native';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { Separator } from 'fluentui-react-native/separator';
+import { TextV1 as Text } from 'fluentui-react-native/text';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
 import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER, TESTPAGE_CONTENT_SCROLLVIEWER } from '@fluentui-react-native/e2e-testing';
 import { ROOT_VIEW } from '@fluentui-react-native/e2e-testing';
-import type { Theme } from '@fluentui-react-native/framework';
-import { useTheme } from '@fluentui-react-native/theme-types';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import type { Theme } from 'fluentui-react-native/framework';
+import { useTheme } from 'fluentui-react-native/theme-types';
+import { themedStyleSheet } from 'fluentui-react-native/themed-stylesheet';
 
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { testProps } from './TestComponents/Common/TestProps';

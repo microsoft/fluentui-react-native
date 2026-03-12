@@ -2,13 +2,13 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { Divider } from '@fluentui-react-native/divider';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
+import { Divider } from 'fluentui-react-native/divider';
 import { OVERFLOW_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import { Menu, MenuTrigger, MenuList, MenuPopover, MenuItem } from '@fluentui-react-native/menu';
-import { Overflow, OverflowItem, useOverflowMenu } from '@fluentui-react-native/overflow';
-import { TabList, Tab } from '@fluentui-react-native/tablist';
-import { TextV1 as Text } from '@fluentui-react-native/text';
+import { Menu, MenuTrigger, MenuList, MenuPopover, MenuItem } from 'fluentui-react-native/menu';
+import { Overflow, OverflowItem, useOverflowMenu } from 'fluentui-react-native/overflow';
+import { TabList, Tab } from 'fluentui-react-native/tablist';
+import { TextV1 as Text } from 'fluentui-react-native/text';
 
 import { E2EOverflowTest } from './OverflowE2ETest';
 import MoreHorizontalIcon from '../../../assets/MoreHorizontalFilled.svg';

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { View, type ViewStyle } from 'react-native';
 
-import { Text } from '@fluentui/react-native';
-import { Shadow, getShadowTokenStyleSet } from '@fluentui-react-native/experimental-shadow';
-import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
-import type { ShadowToken, Theme } from '@fluentui-react-native/theme-types';
-import { useTheme } from '@fluentui-react-native/theme-types';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { Text } from 'fluentui-react-native/text';
+import { Shadow, getShadowTokenStyleSet } from 'fluentui-react-native/experimental-shadow';
+import { mergeStyles, useFluentTheme } from 'fluentui-react-native/framework';
+import type { ShadowToken, Theme } from 'fluentui-react-native/theme-types';
+import { useTheme } from 'fluentui-react-native/theme-types';
+import { themedStyleSheet } from 'fluentui-react-native/themed-stylesheet';
 
 import { shadowTestPageStyles } from './ShadowTestPageStyles';
 
@@ -77,10 +77,7 @@ export const ShadowDepthTestSection: React.FunctionComponent = () => {
 function getShadowDescription(shadowToken: ShadowToken): string {
   const shadowStyle = getShadowTokenStyleSet(shadowToken);
 
-  return (
-    '\nAmbient: ' +
-    JSON.stringify(shadowStyle.ambient, undefined, ' ').split('\n').join('').replace(/['"]+/g, '') +
-    '\n\nKey: ' +
-    JSON.stringify(shadowStyle.key, undefined, ' ').split('\n').join('').replace(/['"]+/g, '')
-  );
+  return ('\nAmbient: ' +
+  JSON.stringify(shadowStyle.ambient, undefined, ' ').split('\n').join('').replace(/['"]+/g, '') +
+  '\n\nKey: ' + JSON.stringify(shadowStyle.key, undefined, ' ').split('\n').join('').replace(/['"]+/g, ''));
 }

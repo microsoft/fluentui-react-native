@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import type { IconAlignment } from '@fluentui/react-native';
+import type { IconAlignment } from 'fluentui-react-native/persona-coin';
 
 import { MenuPicker } from './MenuPicker';
 import { undefinedText } from '../PersonaCoin/styles';
