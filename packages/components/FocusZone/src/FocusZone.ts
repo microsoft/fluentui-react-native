@@ -7,18 +7,26 @@
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import type { IUseStyling } from '@uifabricshared/foundation-composable';
-import { composable } from '@uifabricshared/foundation-composable';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
 
-import type { FocusZoneProps, FocusZoneSlotProps, FocusZoneType } from './FocusZone.types';
+import type { FocusZoneProps, FocusZoneState, FocusZoneTokens } from './FocusZone.types';
+import { focusZoneName } from './FocusZone.types';
 import RCTFocusZone from './FocusZoneNativeComponent';
+import type { NativeProps } from './FocusZoneNativeComponent';
 
-const filterOutComponentRef = (propName) => propName !== 'componentRef';
+interface FocusZoneTypeInternal {
+  props: FocusZoneProps;
+  tokens: FocusZoneTokens;
+  slotProps: { root: React.PropsWithRef<NativeProps> };
+  state: FocusZoneState;
+}
 
-export const FocusZone = composable<FocusZoneType>({
-  usePrepareProps: (userProps: FocusZoneProps, useStyling: IUseStyling<FocusZoneType>) => {
+export const FocusZone = compose<FocusZoneTypeInternal>({
+  displayName: focusZoneName,
+  slots: { root: RCTFocusZone },
+  useRender: (userProps: FocusZoneProps, useSlots: UseSlots<FocusZoneTypeInternal>) => {
     const { componentRef, defaultTabbableElement, isCircularNavigation, ...rest } = userProps;
 
     const ftzRef = useViewCommandFocus(componentRef);
@@ -34,18 +42,18 @@ export const FocusZone = composable<FocusZoneType>({
       }
     }, [defaultTabbableElement]);
 
-    return {
-      slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(userProps), {
-        root: {
-          navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds', // let rest override
-          ...rest,
-          defaultTabbableElement: targetFirstFocus,
-          ref: ftzRef,
-        },
-      }),
+    const rootProps = {
+      navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds',
+      ...rest,
+    } as NativeProps;
+
+    const Root = useSlots(userProps).root;
+    return (restProps: FocusZoneProps) => {
+      return React.createElement(Root, {
+        ...mergeProps(rootProps, restProps as NativeProps),
+        defaultTabbableElement: targetFirstFocus,
+        ref: ftzRef,
+      });
     };
-  },
-  slots: {
-    root: { slotType: RCTFocusZone, filter: filterOutComponentRef },
   },
 });

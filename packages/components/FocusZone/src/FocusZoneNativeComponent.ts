@@ -19,6 +19,7 @@ export interface NativeProps extends ViewProps {
   tabKeyNavigation?: WithDefault<'None' | 'NavigateWrap' | 'NavigateStopAtEnds' | 'Normal', 'None'>;
   disabled?: boolean;
   isTabNavigation?: boolean;
+  navigationOrderInRenderOrder?: boolean;
 }
 
 export default codegenNativeComponent<NativeProps>('RCTFocusZone');

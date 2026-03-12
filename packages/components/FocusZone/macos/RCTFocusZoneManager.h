@@ -1,6 +1,2 @@
-#pragma once
-
-#import <React/RCTViewManager.h>
-
-@interface RCTFocusZoneManager : RCTViewManager
-@end
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
