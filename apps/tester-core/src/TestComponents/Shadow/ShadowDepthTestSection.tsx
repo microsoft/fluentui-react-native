@@ -77,7 +77,10 @@ export const ShadowDepthTestSection: React.FunctionComponent = () => {
 function getShadowDescription(shadowToken: ShadowToken): string {
   const shadowStyle = getShadowTokenStyleSet(shadowToken);
 
-  return ('\nAmbient: ' +
-  JSON.stringify(shadowStyle.ambient, undefined, ' ').split('\n').join('').replace(/['"]+/g, '') +
-  '\n\nKey: ' + JSON.stringify(shadowStyle.key, undefined, ' ').split('\n').join('').replace(/['"]+/g, ''));
+  return (
+    '\nAmbient: ' +
+    JSON.stringify(shadowStyle.ambient, undefined, ' ').split('\n').join('').replace(/['"]+/g, '') +
+    '\n\nKey: ' +
+    JSON.stringify(shadowStyle.key, undefined, ' ').split('\n').join('').replace(/['"]+/g, '')
+  );
 }

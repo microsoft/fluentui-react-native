@@ -5595,7 +5595,6 @@ __metadata:
     "@wdio/runner": "catalog:"
     expect-webdriverio: "catalog:"
     flow-bin: "npm:^0.113.0"
-    fluentui-react-native: "workspace:*"
     metro-config: "npm:^0.80.3"
     oxc-resolver: "catalog:"
     path-dirname: "npm:^1.0.2"

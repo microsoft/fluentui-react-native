@@ -169,7 +169,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
       <Separator />
       {e2eSections && showE2E && (
         // We can check if the E2E section renders by checking if the "E2E Tests" header has rendered for each spec
-        (<>
+        <>
           <Text variant="headerSemibold" {...testProps(E2E_TEST_SECTION)}>
             E2E Tests
           </Text>
@@ -180,7 +180,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
             const { component: E2EComponent } = section;
             return <E2EComponent key={i} />;
           })}
-        </>)
+        </>
       )}
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>

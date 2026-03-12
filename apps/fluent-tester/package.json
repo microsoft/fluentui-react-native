@@ -10,8 +10,6 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/fluent-tester"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
@@ -24,7 +22,6 @@
   "scripts": {
     "android": "rnx-cli run --platform android",
     "build": "fluentui-scripts build",
-    "build-cjs": "tsgo --outDir lib-commonjs",
     "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "bundle": "rnx-cli bundle --dev false",
     "bundle:android": "rnx-cli bundle --dev false --platform android",
@@ -44,7 +41,6 @@
   "dependencies": {
     "@types/node": "catalog:",
     "@types/react": "~18.2.0",
-    "fluentui-react-native": "workspace:*",
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "react-native-macos": "^0.74.0",
@@ -94,9 +90,7 @@
   },
   "furn": {
     "depcheck": {
-      "ignoreMatches": [
-        "@fluentui-react-native/experimental-expander"
-      ]
+      "ignoreMatches": []
     }
   },
   "rnx-kit": {

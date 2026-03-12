@@ -118,7 +118,8 @@ function generateSrcFiles(entries: SubpathEntry[], barrels: Map<string, SubpathE
   // Category barrels — @ts-nocheck because aggregating overlapping packages causes TS2308
   for (const [barrelName, barrelEntries] of [...barrels].sort(([a], [b]) => a.localeCompare(b))) {
     const lines = barrelEntries.map((e) => `export * from '${e.packageName}';`);
-    const header = '// @ts-nocheck — Category barrels re-export overlapping packages that share symbols, causing TS2308 duplicate export errors.\n';
+    const header =
+      '// @ts-nocheck — Category barrels re-export overlapping packages that share symbols, causing TS2308 duplicate export errors.\n';
     files.set(`${barrelName}.ts`, header + lines.join('\n') + '\n');
   }
 

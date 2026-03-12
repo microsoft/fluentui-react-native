@@ -39,11 +39,7 @@ interface MigrateResult {
  * @param dryRun - If true, prints changes without writing
  * @returns Summary of changes
  */
-export function migratePackageJson(
-  packageJsonPath: string,
-  version = 'workspace:*',
-  dryRun = false,
-): MigrateResult {
+export function migratePackageJson(packageJsonPath: string, version = 'workspace:*', dryRun = false): MigrateResult {
   if (!existsSync(packageJsonPath)) {
     throw new Error(`package.json not found: ${packageJsonPath}`);
   }

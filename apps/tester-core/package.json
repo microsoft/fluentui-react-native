@@ -1,7 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-core",
   "version": "0.1.0",
-  "type": "module",
   "private": true,
   "description": "Core implementation of the fluent tester app",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
@@ -12,6 +11,7 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/fluent-tester-core"
   },
+  "type": "module",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "build-core": "tsgo --outDir lib",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
@@ -109,9 +109,7 @@
   },
   "furn": {
     "depcheck": {
-      "ignoreMatches": [
-        "@fluentui-react-native/experimental-expander"
-      ]
+      "ignoreMatches": []
     }
   },
   "rnx-kit": {

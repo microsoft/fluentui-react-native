@@ -2,6 +2,8 @@
   "extends": "@fluentui-react-native/scripts/configs/tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "types": ["@types/jasmine", "@wdio/globals/types", "@wdio/jasmine-framework", "node"]
   },
