@@ -1,11 +1,12 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 #import "RCTFocusZone.h"
-#import "RCTFocusZoneManager.h"
 #import <React/RCTConvert.h>
 #import <React/RCTUIManager.h>
+#import <React/RCTViewManager.h>
 
-@implementation RCTFocusZoneManager
-
-RCT_EXPORT_MODULE()
+@interface RCT_EXTERN_MODULE(FocusZoneViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(disabled, BOOL)
 
@@ -48,11 +49,6 @@ RCT_CUSTOM_VIEW_PROPERTY(defaultTabbableElement, NSNumber, RCTFocusZone)
 	RCTUIManager *manager = [[self bridge] uiManager];
 	NSView *defaultResponder = [manager viewForReactTag:tag];
 	[view setDefaultResponder:defaultResponder];
-}
-
-- (RCTView *)view
-{
-  return [RCTFocusZone new];
 }
 
 @end

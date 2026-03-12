@@ -34,9 +34,8 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
-    "@fluentui-react-native/interactive-hooks": "workspace:*",
-    "@uifabricshared/foundation-composable": "workspace:*",
-    "@uifabricshared/foundation-settings": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
