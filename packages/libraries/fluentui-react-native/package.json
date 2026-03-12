@@ -3,329 +3,248 @@
   "version": "1.0.0",
   "description": "Unified mono-package for FluentUI React Native. Import any component via subpath: fluentui-react-native/button, fluentui-react-native/theme, etc.",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/libraries/fluentui-react-native"
   },
-  "license": "MIT",
-  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
-  "sideEffects": false,
   "type": "module",
+  "sideEffects": false,
   "exports": {
     "./components": {
-      "types": "./lib/components.d.ts",
-      "import": "./lib/components.js",
       "default": "./src/components.ts"
     },
     "./core": {
-      "types": "./lib/core.d.ts",
-      "import": "./lib/core.js",
       "default": "./src/core.ts"
     },
     "./deprecated": {
-      "types": "./lib/deprecated.d.ts",
-      "import": "./lib/deprecated.js",
       "default": "./src/deprecated.ts"
     },
     "./experimental": {
-      "types": "./lib/experimental.d.ts",
-      "import": "./lib/experimental.js",
       "default": "./src/experimental.ts"
     },
     "./theming": {
-      "types": "./lib/theming.d.ts",
-      "import": "./lib/theming.js",
       "default": "./src/theming.ts"
     },
     "./utils": {
-      "types": "./lib/utils.d.ts",
-      "import": "./lib/utils.js",
       "default": "./src/utils.ts"
     },
     "./adapters": {
-      "types": "./lib/adapters.d.ts",
-      "import": "./lib/adapters.js"
+      "default": "./src/adapters.ts"
     },
     "./android-theme": {
-      "types": "./lib/android-theme.d.ts",
-      "import": "./lib/android-theme.js"
+      "default": "./src/android-theme.ts"
     },
     "./apple-theme": {
-      "types": "./lib/apple-theme.d.ts",
-      "import": "./lib/apple-theme.js"
+      "default": "./src/apple-theme.ts"
     },
     "./avatar": {
-      "types": "./lib/avatar.d.ts",
-      "import": "./lib/avatar.js"
+      "default": "./src/avatar.ts"
     },
     "./badge": {
-      "types": "./lib/badge.d.ts",
-      "import": "./lib/badge.js"
+      "default": "./src/badge.ts"
     },
     "./button": {
-      "types": "./lib/button.d.ts",
-      "import": "./lib/button.js"
+      "default": "./src/button.ts"
     },
     "./callout": {
-      "types": "./lib/callout.d.ts",
-      "import": "./lib/callout.js"
+      "default": "./src/callout.ts"
     },
     "./checkbox": {
-      "types": "./lib/checkbox.d.ts",
-      "import": "./lib/checkbox.js"
+      "default": "./src/checkbox.ts"
     },
     "./chip": {
-      "types": "./lib/chip.d.ts",
-      "import": "./lib/chip.js"
+      "default": "./src/chip.ts"
     },
     "./composition": {
-      "types": "./lib/composition.d.ts",
-      "import": "./lib/composition.js"
+      "default": "./src/composition.ts"
     },
     "./contextual-menu": {
-      "types": "./lib/contextual-menu.d.ts",
-      "import": "./lib/contextual-menu.js"
+      "default": "./src/contextual-menu.ts"
     },
     "./default-theme": {
-      "types": "./lib/default-theme.d.ts",
-      "import": "./lib/default-theme.js"
+      "default": "./src/default-theme.ts"
     },
     "./divider": {
-      "types": "./lib/divider.d.ts",
-      "import": "./lib/divider.js"
+      "default": "./src/divider.ts"
     },
     "./drawer": {
-      "types": "./lib/drawer.d.ts",
-      "import": "./lib/drawer.js"
+      "default": "./src/drawer.ts"
     },
     "./dropdown": {
-      "types": "./lib/dropdown.d.ts",
-      "import": "./lib/dropdown.js"
+      "default": "./src/dropdown.ts"
     },
     "./experimental-activity-indicator": {
-      "types": "./lib/experimental-activity-indicator.d.ts",
-      "import": "./lib/experimental-activity-indicator.js"
+      "default": "./src/experimental-activity-indicator.ts"
     },
     "./experimental-appearance-additions": {
-      "types": "./lib/experimental-appearance-additions.d.ts",
-      "import": "./lib/experimental-appearance-additions.js"
+      "default": "./src/experimental-appearance-additions.ts"
     },
     "./experimental-avatar": {
-      "types": "./lib/experimental-avatar.d.ts",
-      "import": "./lib/experimental-avatar.js"
+      "default": "./src/experimental-avatar.ts"
     },
     "./experimental-checkbox": {
-      "types": "./lib/experimental-checkbox.d.ts",
-      "import": "./lib/experimental-checkbox.js"
+      "default": "./src/experimental-checkbox.ts"
     },
     "./experimental-expander": {
-      "types": "./lib/experimental-expander.d.ts",
-      "import": "./lib/experimental-expander.js"
+      "default": "./src/experimental-expander.ts"
     },
     "./experimental-menu-button": {
-      "types": "./lib/experimental-menu-button.d.ts",
-      "import": "./lib/experimental-menu-button.js"
+      "default": "./src/experimental-menu-button.ts"
     },
     "./experimental-native-date-picker": {
-      "types": "./lib/experimental-native-date-picker.d.ts",
-      "import": "./lib/experimental-native-date-picker.js"
+      "default": "./src/experimental-native-date-picker.ts"
     },
     "./experimental-native-font-metrics": {
-      "types": "./lib/experimental-native-font-metrics.d.ts",
-      "import": "./lib/experimental-native-font-metrics.js"
+      "default": "./src/experimental-native-font-metrics.ts"
     },
     "./experimental-shadow": {
-      "types": "./lib/experimental-shadow.d.ts",
-      "import": "./lib/experimental-shadow.js"
+      "default": "./src/experimental-shadow.ts"
     },
     "./experimental-shimmer": {
-      "types": "./lib/experimental-shimmer.d.ts",
-      "import": "./lib/experimental-shimmer.js"
+      "default": "./src/experimental-shimmer.ts"
     },
     "./focus-trap-zone": {
-      "types": "./lib/focus-trap-zone.d.ts",
-      "import": "./lib/focus-trap-zone.js"
+      "default": "./src/focus-trap-zone.ts"
     },
     "./focus-zone": {
-      "types": "./lib/focus-zone.d.ts",
-      "import": "./lib/focus-zone.js"
+      "default": "./src/focus-zone.ts"
     },
     "./foundation-composable": {
-      "types": "./lib/foundation-composable.d.ts",
-      "import": "./lib/foundation-composable.js"
+      "default": "./src/foundation-composable.ts"
     },
     "./foundation-compose": {
-      "types": "./lib/foundation-compose.d.ts",
-      "import": "./lib/foundation-compose.js"
+      "default": "./src/foundation-compose.ts"
     },
     "./foundation-settings": {
-      "types": "./lib/foundation-settings.d.ts",
-      "import": "./lib/foundation-settings.js"
+      "default": "./src/foundation-settings.ts"
     },
     "./foundation-tokens": {
-      "types": "./lib/foundation-tokens.d.ts",
-      "import": "./lib/foundation-tokens.js"
+      "default": "./src/foundation-tokens.ts"
     },
     "./framework": {
-      "types": "./lib/framework.d.ts",
-      "import": "./lib/framework.js"
+      "default": "./src/framework.ts"
     },
     "./framework-base": {
-      "types": "./lib/framework-base.d.ts",
-      "import": "./lib/framework-base.js"
+      "default": "./src/framework-base.ts"
     },
     "./icon": {
-      "types": "./lib/icon.d.ts",
-      "import": "./lib/icon.js"
+      "default": "./src/icon.ts"
     },
     "./input": {
-      "types": "./lib/input.d.ts",
-      "import": "./lib/input.js"
+      "default": "./src/input.ts"
     },
     "./interactive-hooks": {
-      "types": "./lib/interactive-hooks.d.ts",
-      "import": "./lib/interactive-hooks.js"
+      "default": "./src/interactive-hooks.ts"
     },
     "./link": {
-      "types": "./lib/link.d.ts",
-      "import": "./lib/link.js"
+      "default": "./src/link.ts"
     },
     "./menu": {
-      "types": "./lib/menu.d.ts",
-      "import": "./lib/menu.js"
+      "default": "./src/menu.ts"
     },
     "./menu-button": {
-      "types": "./lib/menu-button.d.ts",
-      "import": "./lib/menu-button.js"
+      "default": "./src/menu-button.ts"
     },
     "./notification": {
-      "types": "./lib/notification.d.ts",
-      "import": "./lib/notification.js"
+      "default": "./src/notification.ts"
     },
     "./overflow": {
-      "types": "./lib/overflow.d.ts",
-      "import": "./lib/overflow.js"
+      "default": "./src/overflow.ts"
     },
     "./persona": {
-      "types": "./lib/persona.d.ts",
-      "import": "./lib/persona.js"
+      "default": "./src/persona.ts"
     },
     "./persona-coin": {
-      "types": "./lib/persona-coin.d.ts",
-      "import": "./lib/persona-coin.js"
+      "default": "./src/persona-coin.ts"
     },
     "./popover": {
-      "types": "./lib/popover.d.ts",
-      "import": "./lib/popover.js"
+      "default": "./src/popover.ts"
     },
     "./pressable": {
-      "types": "./lib/pressable.d.ts",
-      "import": "./lib/pressable.js"
+      "default": "./src/pressable.ts"
     },
     "./radio-group": {
-      "types": "./lib/radio-group.d.ts",
-      "import": "./lib/radio-group.js"
+      "default": "./src/radio-group.ts"
     },
     "./separator": {
-      "types": "./lib/separator.d.ts",
-      "import": "./lib/separator.js"
+      "default": "./src/separator.ts"
     },
     "./spinner": {
-      "types": "./lib/spinner.d.ts",
-      "import": "./lib/spinner.js"
+      "default": "./src/spinner.ts"
     },
     "./stack": {
-      "types": "./lib/stack.d.ts",
-      "import": "./lib/stack.js"
+      "default": "./src/stack.ts"
     },
     "./styling-utils": {
-      "types": "./lib/styling-utils.d.ts",
-      "import": "./lib/styling-utils.js"
+      "default": "./src/styling-utils.ts"
     },
     "./switch": {
-      "types": "./lib/switch.d.ts",
-      "import": "./lib/switch.js"
+      "default": "./src/switch.ts"
     },
     "./tablist": {
-      "types": "./lib/tablist.d.ts",
-      "import": "./lib/tablist.js"
+      "default": "./src/tablist.ts"
     },
     "./text": {
-      "types": "./lib/text.d.ts",
-      "import": "./lib/text.js"
+      "default": "./src/text.ts"
     },
     "./theme": {
-      "types": "./lib/theme.d.ts",
-      "import": "./lib/theme.js"
+      "default": "./src/theme.ts"
     },
     "./theme-registry": {
-      "types": "./lib/theme-registry.d.ts",
-      "import": "./lib/theme-registry.js"
+      "default": "./src/theme-registry.ts"
     },
     "./theme-tokens": {
-      "types": "./lib/theme-tokens.d.ts",
-      "import": "./lib/theme-tokens.js"
+      "default": "./src/theme-tokens.ts"
     },
     "./theme-types": {
-      "types": "./lib/theme-types.d.ts",
-      "import": "./lib/theme-types.js"
+      "default": "./src/theme-types.ts"
     },
     "./themed-settings": {
-      "types": "./lib/themed-settings.d.ts",
-      "import": "./lib/themed-settings.js"
+      "default": "./src/themed-settings.ts"
     },
     "./themed-stylesheet": {
-      "types": "./lib/themed-stylesheet.d.ts",
-      "import": "./lib/themed-stylesheet.js"
+      "default": "./src/themed-stylesheet.ts"
     },
     "./theming-ramp": {
-      "types": "./lib/theming-ramp.d.ts",
-      "import": "./lib/theming-ramp.js"
+      "default": "./src/theming-ramp.ts"
     },
     "./theming-react-native": {
-      "types": "./lib/theming-react-native.d.ts",
-      "import": "./lib/theming-react-native.js"
+      "default": "./src/theming-react-native.ts"
     },
     "./theming-utils": {
-      "types": "./lib/theming-utils.d.ts",
-      "import": "./lib/theming-utils.js"
+      "default": "./src/theming-utils.ts"
     },
     "./tokens": {
-      "types": "./lib/tokens.d.ts",
-      "import": "./lib/tokens.js"
+      "default": "./src/tokens.ts"
     },
     "./tooltip": {
-      "types": "./lib/tooltip.d.ts",
-      "import": "./lib/tooltip.js"
+      "default": "./src/tooltip.ts"
     },
     "./use-slot": {
-      "types": "./lib/use-slot.d.ts",
-      "import": "./lib/use-slot.js"
+      "default": "./src/use-slot.ts"
     },
     "./use-slots": {
-      "types": "./lib/use-slots.d.ts",
-      "import": "./lib/use-slots.js"
+      "default": "./src/use-slots.ts"
     },
     "./use-styling": {
-      "types": "./lib/use-styling.d.ts",
-      "import": "./lib/use-styling.js"
+      "default": "./src/use-styling.ts"
     },
     "./use-tokens": {
-      "types": "./lib/use-tokens.d.ts",
-      "import": "./lib/use-tokens.js"
+      "default": "./src/use-tokens.ts"
     },
     "./vibrancy-view": {
-      "types": "./lib/vibrancy-view.d.ts",
-      "import": "./lib/vibrancy-view.js"
+      "default": "./src/vibrancy-view.ts"
     },
     "./win32-theme": {
-      "types": "./lib/win32-theme.d.ts",
-      "import": "./lib/win32-theme.js"
+      "default": "./src/win32-theme.ts"
     }
   },
   "scripts": {
-    "build": "node update-exports.mts",
+    "build": "tsgo",
+    "build-core": "tsgo",
     "check-exports": "node update-exports.mts --check",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",

@@ -1,20 +1,17 @@
 /**
  * Auto-generates subpath exports for the fluentui-react-native mono-package.
  *
- * Source layout (checked into git):
+ * All generated files live in src/ (checked into git):
  *   src/components.ts   — category barrel re-exporting all stable component packages
  *   src/experimental.ts — category barrel re-exporting all experimental packages
  *   src/core.ts         — category barrel re-exporting framework packages
  *   src/theming.ts      — category barrel re-exporting theme packages
  *   src/utils.ts        — category barrel re-exporting utility packages
  *   src/deprecated.ts   — category barrel re-exporting legacy @uifabricshared packages
- *
- * Build output (generated into lib/, gitignored):
- *   lib/<category>.js + .d.ts  — compiled from src/ barrels
- *   lib/<subpath>.js + .d.ts   — individual re-export for each package
+ *   src/<subpath>.ts    — individual re-export for each package (e.g. src/button.ts)
  *
  * Usage:
- *   node update-exports.mts          # Generate/update src/, lib/, and package.json
+ *   node update-exports.mts          # Generate/update src/ and package.json
  *   node update-exports.mts --check  # Verify src/ and package.json are up-to-date (CI mode)
  */
 
@@ -26,7 +23,6 @@ import { getAllPackageJsonFiles } from 'workspace-tools';
 const SCRIPT_DIR = import.meta.dirname;
 const REPO_ROOT = join(SCRIPT_DIR, '..', '..', '..');
 const SRC_DIR = join(SCRIPT_DIR, 'src');
-const LIB_DIR = join(SCRIPT_DIR, 'lib');
 const PKG_JSON_PATH = join(SCRIPT_DIR, 'package.json');
 
 /** Category definitions — maps a directory prefix to a category barrel name. */
@@ -85,9 +81,7 @@ function discoverPackages(): SubpathEntry[] {
     const subpath = deriveSubpath(manifest.name);
 
     if (seenSubpaths.has(subpath)) {
-      throw new Error(
-        `Subpath collision: "${subpath}" is mapped by both "${seenSubpaths.get(subpath)}" and "${manifest.name}"`,
-      );
+      throw new Error(`Subpath collision: "${subpath}" is mapped by both "${seenSubpaths.get(subpath)}" and "${manifest.name}"`);
     }
     seenSubpaths.set(subpath, manifest.name);
 
@@ -97,9 +91,7 @@ function discoverPackages(): SubpathEntry[] {
   const barrelNames = new Set(CATEGORIES.map((c) => c.barrel));
   for (const entry of entries) {
     if (barrelNames.has(entry.subpath)) {
-      throw new Error(
-        `Subpath "${entry.subpath}" (from ${entry.packageName}) collides with category barrel name "${entry.subpath}"`,
-      );
+      throw new Error(`Subpath "${entry.subpath}" (from ${entry.packageName}) collides with category barrel name "${entry.subpath}"`);
     }
   }
 
@@ -119,64 +111,50 @@ function groupByCategory(entries: SubpathEntry[]): Map<string, SubpathEntry[]> {
 
 // ── Expected state builders ────────────────────────────────────────────────────
 
-/** Build the expected src/ files (category barrels only — checked into git). */
-function generateSrcFiles(barrels: Map<string, SubpathEntry[]>): Map<string, string> {
+/** Build all expected src/ files (category barrels + individual subpath re-exports). */
+function generateSrcFiles(entries: SubpathEntry[], barrels: Map<string, SubpathEntry[]>): Map<string, string> {
   const files = new Map<string, string>();
+
+  // Category barrels — @ts-nocheck because aggregating overlapping packages causes TS2308
   for (const [barrelName, barrelEntries] of [...barrels].sort(([a], [b]) => a.localeCompare(b))) {
     const lines = barrelEntries.map((e) => `export * from '${e.packageName}';`);
-    files.set(`${barrelName}.ts`, lines.join('\n') + '\n');
+    const header = '// @ts-nocheck — Category barrels re-export overlapping packages that share symbols, causing TS2308 duplicate export errors.\n';
+    files.set(`${barrelName}.ts`, header + lines.join('\n') + '\n');
   }
-  return files;
-}
-
-/** Build the expected lib/ files (category barrels + individual subpaths). */
-function generateLibFiles(entries: SubpathEntry[], barrels: Map<string, SubpathEntry[]>): Map<string, string> {
-  const files = new Map<string, string>();
 
   // Individual subpath files
   for (const { subpath, packageName } of entries) {
-    const reexport = `export * from '${packageName}';\n`;
-    files.set(`${subpath}.js`, reexport);
-    files.set(`${subpath}.d.ts`, reexport);
-  }
-
-  // Category barrel files
-  for (const [barrelName, barrelEntries] of barrels) {
-    const reexport = barrelEntries.map((e) => `export * from '${e.packageName}';`).join('\n') + '\n';
-    files.set(`${barrelName}.js`, reexport);
-    files.set(`${barrelName}.d.ts`, reexport);
+    files.set(`${subpath}.ts`, `export * from '${packageName}';\n`);
   }
 
   return files;
 }
 
-/** Build the package.json "exports" map. */
+/** Build the package.json "exports" map — all subpaths point to src/. */
 function generateExports(entries: SubpathEntry[], barrels: Map<string, SubpathEntry[]>): Record<string, Record<string, string>> {
   const exports: Record<string, Record<string, string>> = {};
 
-  // Category barrels (have source files in src/)
+  // Category barrels
   for (const barrel of [...barrels.keys()].sort()) {
     exports[`./${barrel}`] = {
-      types: `./lib/${barrel}.d.ts`,
-      import: `./lib/${barrel}.js`,
       default: `./src/${barrel}.ts`,
     };
   }
 
-  // Individual subpaths (lib-only, no src/ file)
+  // Individual subpaths
   for (const { subpath } of entries) {
     exports[`./${subpath}`] = {
-      types: `./lib/${subpath}.d.ts`,
-      import: `./lib/${subpath}.js`,
+      default: `./src/${subpath}.ts`,
     };
   }
   return exports;
 }
 
-/** Build the package.json "dependencies" map. */
+/** Build the package.json "dependencies" map (sorted by package name for oxfmt compatibility). */
 function generateDependencies(entries: SubpathEntry[]): Record<string, string> {
   const deps: Record<string, string> = {};
-  for (const { packageName } of entries) {
+  const sorted = [...entries].sort((a, b) => a.packageName.localeCompare(b.packageName));
+  for (const { packageName } of sorted) {
     deps[packageName] = 'workspace:*';
   }
   return deps;
@@ -191,8 +169,7 @@ const entries = discoverPackages();
 const barrels = groupByCategory(entries);
 console.log(`Found ${entries.length} packages in ${barrels.size} categories`);
 
-const expectedSrcFiles = generateSrcFiles(barrels);
-const expectedLibFiles = generateLibFiles(entries, barrels);
+const expectedSrcFiles = generateSrcFiles(entries, barrels);
 const expectedExports = generateExports(entries, barrels);
 const expectedDeps = generateDependencies(entries);
 
@@ -249,19 +226,12 @@ if (isCheck) {
 
 // ── Write mode ─────────────────────────────────────────────────────────────────
 
-if (diffs.length === 0 && !isCheck) {
-  // Even if src/ + package.json are in sync, always regenerate lib/ (this is the build)
-}
-
-// Ensure directories exist
+// Ensure src/ exists
 if (!existsSync(SRC_DIR)) {
   mkdirSync(SRC_DIR, { recursive: true });
 }
-if (!existsSync(LIB_DIR)) {
-  mkdirSync(LIB_DIR, { recursive: true });
-}
 
-// Write src/ files (category barrels)
+// Write src/ files (category barrels + individual subpaths)
 for (const [relPath, content] of expectedSrcFiles) {
   writeFileSync(join(SRC_DIR, relPath), content);
 }
@@ -276,28 +246,14 @@ for (const entry of readdirSync(SRC_DIR, { withFileTypes: true })) {
   }
 }
 
-// Write lib/ files (category barrels + individual subpaths)
-for (const [relPath, content] of expectedLibFiles) {
-  writeFileSync(join(LIB_DIR, relPath), content);
-}
-
-// Clean stale lib/ files
-for (const entry of readdirSync(LIB_DIR, { withFileTypes: true })) {
-  if (entry.isDirectory()) {
-    rmSync(join(LIB_DIR, entry.name), { recursive: true });
-  } else if (entry.isFile() && !expectedLibFiles.has(entry.name)) {
-    rmSync(join(LIB_DIR, entry.name));
-    console.log(`  Removed stale: lib/${entry.name}`);
-  }
-}
-
 // Update package.json
 pkgJson.exports = expectedExports;
 pkgJson.dependencies = expectedDeps;
 writeFileSync(PKG_JSON_PATH, JSON.stringify(pkgJson, null, 2) + '\n');
 
 // Print summary
-console.log(`\n✅ Generated ${barrels.size} src/ barrels + ${expectedLibFiles.size / 2} lib/ subpaths\n`);
+const numSubpaths = entries.length + barrels.size;
+console.log(`\n✅ Generated ${numSubpaths} src/ files (${barrels.size} barrels + ${entries.length} individual)\n`);
 for (const [barrelName, barrelEntries] of [...barrels].sort(([a], [b]) => a.localeCompare(b))) {
   console.log(`  ./${barrelName} (${barrelEntries.length} packages)`);
 }

@@ -1,3 +1,4 @@
+// @ts-nocheck — Category barrels re-export overlapping packages that share symbols, causing TS2308 duplicate export errors.
 export * from '@uifabricshared/foundation-composable';
 export * from '@uifabricshared/foundation-compose';
 export * from '@uifabricshared/foundation-settings';

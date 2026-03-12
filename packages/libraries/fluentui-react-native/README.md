@@ -57,116 +57,116 @@ The individual `@fluentui-react-native/*` packages continue to be published and 
 
 ### Category barrels
 
-| Barrel | Contains | Packages |
-|--------|----------|----------|
-| `./components` | Stable UI components | 25 |
-| `./experimental` | Components under active development | 17 |
-| `./core` | Framework, composition, slots, tokens | 9 |
-| `./theming` | Platform themes and token definitions | 7 |
-| `./utils` | Shared utilities | 4 |
-| `./deprecated` | Legacy `@uifabricshared/*` packages | 8 |
+| Barrel           | Contains                              | Packages |
+| ---------------- | ------------------------------------- | -------- |
+| `./components`   | Stable UI components                  | 25       |
+| `./experimental` | Components under active development   | 17       |
+| `./core`         | Framework, composition, slots, tokens | 9        |
+| `./theming`      | Platform themes and token definitions | 7        |
+| `./utils`        | Shared utilities                      | 4        |
+| `./deprecated`   | Legacy `@uifabricshared/*` packages   | 8        |
 
 ### Individual subpaths
 
 #### Components (25)
 
-| Subpath | Package |
-|---------|---------|
-| `./avatar` | `@fluentui-react-native/avatar` |
-| `./badge` | `@fluentui-react-native/badge` |
-| `./button` | `@fluentui-react-native/button` |
-| `./callout` | `@fluentui-react-native/callout` |
-| `./checkbox` | `@fluentui-react-native/checkbox` |
-| `./chip` | `@fluentui-react-native/chip` |
+| Subpath             | Package                                  |
+| ------------------- | ---------------------------------------- |
+| `./avatar`          | `@fluentui-react-native/avatar`          |
+| `./badge`           | `@fluentui-react-native/badge`           |
+| `./button`          | `@fluentui-react-native/button`          |
+| `./callout`         | `@fluentui-react-native/callout`         |
+| `./checkbox`        | `@fluentui-react-native/checkbox`        |
+| `./chip`            | `@fluentui-react-native/chip`            |
 | `./contextual-menu` | `@fluentui-react-native/contextual-menu` |
-| `./divider` | `@fluentui-react-native/divider` |
+| `./divider`         | `@fluentui-react-native/divider`         |
 | `./focus-trap-zone` | `@fluentui-react-native/focus-trap-zone` |
-| `./focus-zone` | `@fluentui-react-native/focus-zone` |
-| `./icon` | `@fluentui-react-native/icon` |
-| `./input` | `@fluentui-react-native/input` |
-| `./link` | `@fluentui-react-native/link` |
-| `./menu` | `@fluentui-react-native/menu` |
-| `./menu-button` | `@fluentui-react-native/menu-button` |
-| `./notification` | `@fluentui-react-native/notification` |
-| `./persona` | `@fluentui-react-native/persona` |
-| `./persona-coin` | `@fluentui-react-native/persona-coin` |
-| `./pressable` | `@fluentui-react-native/pressable` |
-| `./radio-group` | `@fluentui-react-native/radio-group` |
-| `./separator` | `@fluentui-react-native/separator` |
-| `./stack` | `@fluentui-react-native/stack` |
-| `./switch` | `@fluentui-react-native/switch` |
-| `./tablist` | `@fluentui-react-native/tablist` |
-| `./text` | `@fluentui-react-native/text` |
+| `./focus-zone`      | `@fluentui-react-native/focus-zone`      |
+| `./icon`            | `@fluentui-react-native/icon`            |
+| `./input`           | `@fluentui-react-native/input`           |
+| `./link`            | `@fluentui-react-native/link`            |
+| `./menu`            | `@fluentui-react-native/menu`            |
+| `./menu-button`     | `@fluentui-react-native/menu-button`     |
+| `./notification`    | `@fluentui-react-native/notification`    |
+| `./persona`         | `@fluentui-react-native/persona`         |
+| `./persona-coin`    | `@fluentui-react-native/persona-coin`    |
+| `./pressable`       | `@fluentui-react-native/pressable`       |
+| `./radio-group`     | `@fluentui-react-native/radio-group`     |
+| `./separator`       | `@fluentui-react-native/separator`       |
+| `./stack`           | `@fluentui-react-native/stack`           |
+| `./switch`          | `@fluentui-react-native/switch`          |
+| `./tablist`         | `@fluentui-react-native/tablist`         |
+| `./text`            | `@fluentui-react-native/text`            |
 
 #### Experimental (17)
 
-| Subpath | Package |
-|---------|---------|
-| `./drawer` | `@fluentui-react-native/drawer` |
-| `./dropdown` | `@fluentui-react-native/dropdown` |
-| `./experimental-activity-indicator` | `@fluentui-react-native/experimental-activity-indicator` |
+| Subpath                               | Package                                                    |
+| ------------------------------------- | ---------------------------------------------------------- |
+| `./drawer`                            | `@fluentui-react-native/drawer`                            |
+| `./dropdown`                          | `@fluentui-react-native/dropdown`                          |
+| `./experimental-activity-indicator`   | `@fluentui-react-native/experimental-activity-indicator`   |
 | `./experimental-appearance-additions` | `@fluentui-react-native/experimental-appearance-additions` |
-| `./experimental-avatar` | `@fluentui-react-native/experimental-avatar` |
-| `./experimental-checkbox` | `@fluentui-react-native/experimental-checkbox` |
-| `./experimental-expander` | `@fluentui-react-native/experimental-expander` |
-| `./experimental-menu-button` | `@fluentui-react-native/experimental-menu-button` |
-| `./experimental-native-date-picker` | `@fluentui-react-native/experimental-native-date-picker` |
-| `./experimental-native-font-metrics` | `@fluentui-react-native/experimental-native-font-metrics` |
-| `./experimental-shadow` | `@fluentui-react-native/experimental-shadow` |
-| `./experimental-shimmer` | `@fluentui-react-native/experimental-shimmer` |
-| `./overflow` | `@fluentui-react-native/overflow` |
-| `./popover` | `@fluentui-react-native/popover` |
-| `./spinner` | `@fluentui-react-native/spinner` |
-| `./tooltip` | `@fluentui-react-native/tooltip` |
-| `./vibrancy-view` | `@fluentui-react-native/vibrancy-view` |
+| `./experimental-avatar`               | `@fluentui-react-native/experimental-avatar`               |
+| `./experimental-checkbox`             | `@fluentui-react-native/experimental-checkbox`             |
+| `./experimental-expander`             | `@fluentui-react-native/experimental-expander`             |
+| `./experimental-menu-button`          | `@fluentui-react-native/experimental-menu-button`          |
+| `./experimental-native-date-picker`   | `@fluentui-react-native/experimental-native-date-picker`   |
+| `./experimental-native-font-metrics`  | `@fluentui-react-native/experimental-native-font-metrics`  |
+| `./experimental-shadow`               | `@fluentui-react-native/experimental-shadow`               |
+| `./experimental-shimmer`              | `@fluentui-react-native/experimental-shimmer`              |
+| `./overflow`                          | `@fluentui-react-native/overflow`                          |
+| `./popover`                           | `@fluentui-react-native/popover`                           |
+| `./spinner`                           | `@fluentui-react-native/spinner`                           |
+| `./tooltip`                           | `@fluentui-react-native/tooltip`                           |
+| `./vibrancy-view`                     | `@fluentui-react-native/vibrancy-view`                     |
 
 #### Core / Framework (9)
 
-| Subpath | Package |
-|---------|---------|
-| `./composition` | `@fluentui-react-native/composition` |
-| `./framework` | `@fluentui-react-native/framework` |
-| `./framework-base` | `@fluentui-react-native/framework-base` |
-| `./theme` | `@fluentui-react-native/theme` |
+| Subpath               | Package                                    |
+| --------------------- | ------------------------------------------ |
+| `./composition`       | `@fluentui-react-native/composition`       |
+| `./framework`         | `@fluentui-react-native/framework`         |
+| `./framework-base`    | `@fluentui-react-native/framework-base`    |
+| `./theme`             | `@fluentui-react-native/theme`             |
 | `./themed-stylesheet` | `@fluentui-react-native/themed-stylesheet` |
-| `./use-slot` | `@fluentui-react-native/use-slot` |
-| `./use-slots` | `@fluentui-react-native/use-slots` |
-| `./use-styling` | `@fluentui-react-native/use-styling` |
-| `./use-tokens` | `@fluentui-react-native/use-tokens` |
+| `./use-slot`          | `@fluentui-react-native/use-slot`          |
+| `./use-slots`         | `@fluentui-react-native/use-slots`         |
+| `./use-styling`       | `@fluentui-react-native/use-styling`       |
+| `./use-tokens`        | `@fluentui-react-native/use-tokens`        |
 
 #### Theming (7)
 
-| Subpath | Package |
-|---------|---------|
+| Subpath           | Package                                |
+| ----------------- | -------------------------------------- |
 | `./android-theme` | `@fluentui-react-native/android-theme` |
-| `./apple-theme` | `@fluentui-react-native/apple-theme` |
+| `./apple-theme`   | `@fluentui-react-native/apple-theme`   |
 | `./default-theme` | `@fluentui-react-native/default-theme` |
-| `./theme-tokens` | `@fluentui-react-native/theme-tokens` |
-| `./theme-types` | `@fluentui-react-native/theme-types` |
+| `./theme-tokens`  | `@fluentui-react-native/theme-tokens`  |
+| `./theme-types`   | `@fluentui-react-native/theme-types`   |
 | `./theming-utils` | `@fluentui-react-native/theming-utils` |
-| `./win32-theme` | `@fluentui-react-native/win32-theme` |
+| `./win32-theme`   | `@fluentui-react-native/win32-theme`   |
 
 #### Utilities (4)
 
-| Subpath | Package |
-|---------|---------|
-| `./adapters` | `@fluentui-react-native/adapters` |
+| Subpath               | Package                                    |
+| --------------------- | ------------------------------------------ |
+| `./adapters`          | `@fluentui-react-native/adapters`          |
 | `./interactive-hooks` | `@fluentui-react-native/interactive-hooks` |
-| `./styling-utils` | `@fluentui-react-native/styling-utils` |
-| `./tokens` | `@fluentui-react-native/tokens` |
+| `./styling-utils`     | `@fluentui-react-native/styling-utils`     |
+| `./tokens`            | `@fluentui-react-native/tokens`            |
 
 #### Deprecated (8)
 
-| Subpath | Package |
-|---------|---------|
+| Subpath                   | Package                                 |
+| ------------------------- | --------------------------------------- |
 | `./foundation-composable` | `@uifabricshared/foundation-composable` |
-| `./foundation-compose` | `@uifabricshared/foundation-compose` |
-| `./foundation-settings` | `@uifabricshared/foundation-settings` |
-| `./foundation-tokens` | `@uifabricshared/foundation-tokens` |
-| `./theme-registry` | `@uifabricshared/theme-registry` |
-| `./themed-settings` | `@uifabricshared/themed-settings` |
-| `./theming-ramp` | `@uifabricshared/theming-ramp` |
-| `./theming-react-native` | `@uifabricshared/theming-react-native` |
+| `./foundation-compose`    | `@uifabricshared/foundation-compose`    |
+| `./foundation-settings`   | `@uifabricshared/foundation-settings`   |
+| `./foundation-tokens`     | `@uifabricshared/foundation-tokens`     |
+| `./theme-registry`        | `@uifabricshared/theme-registry`        |
+| `./themed-settings`       | `@uifabricshared/themed-settings`       |
+| `./theming-ramp`          | `@uifabricshared/theming-ramp`          |
+| `./theming-react-native`  | `@uifabricshared/theming-react-native`  |
 
 ## Design
 
@@ -185,6 +185,7 @@ When adding a new package to the monorepo:
 3. Commit the generated `src/` files and updated `package.json`
 
 The script automatically:
+
 - Discovers all publishable (non-private) packages under `packages/`
 - Creates individual re-export files (`src/<subpath>/index.ts`)
 - Creates category barrel files (`src/<category>/index.ts`)
