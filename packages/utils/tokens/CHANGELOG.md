@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/tokens
 
+## 0.24.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/theme-types@0.44.2
+  - @fluentui-react-native/adapters@0.14.2
+
 ## 0.24.1
 
 ### Patch Changes

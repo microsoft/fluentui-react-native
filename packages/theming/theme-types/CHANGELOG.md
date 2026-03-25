@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/theme-types
 
+## 0.44.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+
 ## 0.44.1
 
 ### Patch Changes

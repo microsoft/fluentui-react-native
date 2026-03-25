@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/pressable
 
+## 0.13.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @uifabricshared/foundation-composable@0.14.2
+  - @uifabricshared/foundation-settings@0.16.2
+  - @fluentui-react-native/interactive-hooks@0.28.2
+  - @fluentui-react-native/adapters@0.14.2
+
 ## 0.13.1
 
 ### Patch Changes

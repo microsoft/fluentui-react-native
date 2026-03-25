@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
+## 0.22.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/framework@0.15.2
+
 ## 0.22.1
 
 ### Patch Changes
