@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/divider
 
+## 0.8.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/theme-tokens@0.28.2
+  - @fluentui-react-native/framework@0.15.2
+  - @fluentui-react-native/icon@0.22.2
+  - @fluentui-react-native/text@0.25.2
+  - @fluentui-react-native/tokens@0.24.2
+
 ## 0.8.1
 
 ### Patch Changes
