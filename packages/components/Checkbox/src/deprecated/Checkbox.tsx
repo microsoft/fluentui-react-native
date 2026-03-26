@@ -84,7 +84,7 @@ export const Checkbox = compose<ICheckboxType>({
             break;
         }
       },
-      [toggleChecked, userProps, state, pressable.props],
+      [toggleChecked],
     );
 
     const slotProps = mergeSettings<ICheckboxSlotProps>(styleProps, {

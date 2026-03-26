@@ -35,8 +35,7 @@ export function useTabAnimation(
     if (tabKey === selectedKey && updateAnimatedIndicatorStyles) {
       updateAnimatedIndicatorStyles({ backgroundColor: tokens.indicatorColor, borderRadius: tokens.indicatorRadius });
     }
-    // Disabling warning because effect does not need to fire on `updateAnimatedIndicatorStyles` being changed
-  }, [tabKey, selectedKey, tokens.indicatorColor, tokens.indicatorRadius]);
+  }, [tabKey, selectedKey, tokens.indicatorColor, tokens.indicatorRadius, updateAnimatedIndicatorStyles]);
 
   /**
    * This checks to see if we have relevant info to calculate the layout position and dimensions of the indicator. If this check fails, we don't

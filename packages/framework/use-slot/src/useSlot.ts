@@ -57,6 +57,6 @@ export function useSlot<TProps>(
         // now render the component with the final props
         return renderForJsxRuntime(innerComponent, innerProps);
       }),
-    [component, filter, slotData],
+    [filter, slotData],
   );
 }

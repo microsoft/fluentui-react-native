@@ -40,14 +40,12 @@ export const Shimmer = compose<ShimmerType>({
       }),
       [
         props.angle,
-        props.backgroundColor,
         props.delay,
         props.duration,
         props.shimmerColor,
-        props.shimmerColorOpacity,
         props.shimmerWaveColor,
-        props.shimmerWaveColorOpacity,
         props.style,
+        tokens,
       ],
     );
 
@@ -69,11 +67,11 @@ export const Shimmer = compose<ShimmerType>({
           useNativeDriver: true,
         }),
       ).start();
-    }, [memoizedShimmerData.delay, memoizedShimmerData.duration]);
+    }, [endValue, memoizedShimmerData.delay, memoizedShimmerData.duration, x1]);
 
     useEffect(() => {
       shimmerAnimation();
-    });
+    }, [shimmerAnimation]);
 
     return (rest: ShimmerProps) => {
       const { elements, ...mergedProps } = mergeProps(props, rest);

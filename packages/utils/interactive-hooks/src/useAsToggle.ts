@@ -20,7 +20,7 @@ export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCal
   const onChange = React.useCallback(() => {
     userCallback && userCallback(!isChecked);
     setChecked(!isChecked);
-  }, [isChecked, setChecked]);
+  }, [isChecked, setChecked, userCallback]);
 
   return [checked ?? isChecked, onChange];
 }

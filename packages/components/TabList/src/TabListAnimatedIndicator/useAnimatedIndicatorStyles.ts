@@ -16,7 +16,7 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
   const indicatorScale = React.useRef(new Animated.Value(1)).current;
 
   // Save the initial selected layout, this shouldn't update after the first render.
-  const startingKey = React.useMemo(() => selectedKey, []);
+  const startingKey = React.useRef(selectedKey).current;
 
   React.useEffect(() => {
     const startingIndicatorLayout = tabLayout[startingKey];
@@ -51,11 +51,7 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
         }),
       ]).start();
     }
-    // This hook should only run when (1) the selected key / vertical prop changes and (2) whenever the tabLayout map changes because that implies an
-    // extent change among the tabs: specifically whenever the selected tab is bolded and previously selected tab is unbolded. Without checking for #2,
-    // the animation for scaling and translating the indicator uses outdated layout info, resulting in a unaligned, small indicator. All other dependencies
-    // are irrelevant.
-  }, [selectedKey, tabLayout, vertical]);
+  }, [indicatorScale, indicatorTranslate, selectedKey, startingKey, tabLayout, vertical]);
 
   // Calculate styles using both layout information and user defined styles
   const styles = React.useMemo<AnimatedIndicatorStyles>(() => {

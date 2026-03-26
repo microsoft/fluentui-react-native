@@ -14,7 +14,7 @@ const CustomButton = Button.customize({ backgroundColor: 'pink' });
 const CustomIconButton = Button.customize({ iconColor: 'yellow' });
 const ComposedButton = Button.compose({
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore Not all slots have to be overridden for compose to work
+  // @ts-expect-error Not all slots have to be overridden for compose to work
   slots: {
     content: CustomText,
   },

@@ -9,7 +9,7 @@ export const renderContextualMenu = (contextualMenu: ContextualMenuProps, menuIt
   return (
     <ContextualMenu {...contextualMenu}>
       {menuItems?.map((menuItem) => {
-        return menuItem.hasSubmenu ? <SubMenuItem {...menuItem} /> : <ContextualMenuItem key={menuItem.itemKey} {...menuItem} />;
+        return menuItem.hasSubmenu ? <SubMenuItem key={menuItem.itemKey} {...menuItem} /> : <ContextualMenuItem key={menuItem.itemKey} {...menuItem} />;
       })}
     </ContextualMenu>
   );

@@ -68,7 +68,7 @@ export const useTab = (props: TabProps): TabInfo => {
       componentRef && setFocusedTabRef(componentRef);
     }
     return () => removeTabKey(tabKey);
-  }, []);
+  }, [addTabKey, componentRef, removeTabKey, selectedKey, setFocusedTabRef, tabKey]);
 
   // Used when creating accessibility properties in mergeSettings below.
   const onAccessibilityActionProp = React.useCallback(
