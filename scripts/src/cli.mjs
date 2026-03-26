@@ -5,7 +5,7 @@ import { Builtins, Cli } from 'clipanion';
 import { BuildCommand } from './tasks/build.ts';
 import { CleanCommand } from './tasks/clean.js';
 import { FormatCommand } from './tasks/format.js';
-import { LintCommand } from './tasks/eslint.js';
+import { LintCommand } from './tasks/lint.js';
 import { LintPackageCommand } from './tasks/lintPackage.ts';
 import { JestCommand } from './tasks/jest.js';
 import { CheckPublishingCommand } from './tasks/checkPublishingTask.js';
