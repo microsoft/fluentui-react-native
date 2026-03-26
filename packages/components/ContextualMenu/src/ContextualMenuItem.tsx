@@ -89,8 +89,6 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     const onMouseLeaveModified = React.useCallback(
       (e) => {
         onBlur(e);
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error IViewWin32 doesn't have the event as an argument, while macOS does
         onMouseLeave && onMouseLeave(e);
       },
       [onBlur, onMouseLeave],

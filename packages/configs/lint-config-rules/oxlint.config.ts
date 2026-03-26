@@ -1,1 +1,1 @@
-export { default } from './private.ts';
+export { default } from './private.js';

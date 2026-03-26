@@ -87,14 +87,10 @@ export const SubmenuItem = compose<SubmenuItemType>({
      * In the future, we can avoid needing to override onMouseEnter by handling submenu rendering internally rather than depending on the
      * client to conditionally render it with onHoverIn.
      */
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error onMouseLeave not in PressableProps but is supported on desktop
     const { onBlur, onMouseEnter, onMouseLeave, ...restPressableProps } = pressable.props;
     const onMouseEnterModified = React.useCallback(
       (e) => {
         componentRef.current.focus();
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error IViewWin32 doesn't have the event as an argument, while macOS does
         onMouseEnter && onMouseEnter(e);
       },
       [componentRef, onMouseEnter],
@@ -102,8 +98,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
     const onMouseLeaveModified = React.useCallback(
       (e) => {
         onBlur(e);
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error IViewWin32 doesn't have the event as an argument, while macOS does
         onMouseLeave && onMouseLeave(e);
       },
       [onBlur, onMouseLeave],
