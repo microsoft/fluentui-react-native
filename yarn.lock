@@ -24825,9 +24825,9 @@ __metadata:
   linkType: hard
 
 "unicode-segmenter@npm:^0.14.4":
-  version: 0.14.4
-  resolution: "unicode-segmenter@npm:0.14.4"
-  checksum: 10c0/ec062a90518fd8cdba14ad2516b2a5d8240931f5e7668bb8dc8881d7b6962ba9739df0219b4a237118f17b2fbdaf7704df8803538517c51315c73d380dc75128
+  version: 0.14.5
+  resolution: "unicode-segmenter@npm:0.14.5"
+  checksum: 10c0/a6bbae348378752cb5b6664a47918c9fd3900f1cc2a0fcf6f50a2e31f189a3f4dd80b48ea129d74d1979d8d8d446b592848900ef2d34578654bba543c185303a
   languageName: node
   linkType: hard
 
