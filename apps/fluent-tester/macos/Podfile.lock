@@ -123,6 +123,28 @@ PODS:
     - fmt (= 9.1.0)
     - glog
   - RCTDeprecation (0.74.37)
+  - RCTFocusZone (0.22.1):
+    - DoubleConversion
+    - glog
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React
+    - React-Codegen
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RCTRequired (0.74.37)
   - RCTTypeSafety (0.74.37):
     - FBLazyVector (= 0.74.37)
@@ -1237,7 +1259,6 @@ PODS:
     - React-ImageManager
     - React-jsi
     - React-NativeModulesApple
-    - React-RCTAppDelegate
     - React-RCTFabric
     - React-rendererdebug
     - React-utils
@@ -1249,48 +1270,7 @@ PODS:
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
   - RNSVG (15.12.1):
-    - DoubleConversion
-    - glog
-    - RCT-Folly (= 2024.01.01.00)
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Codegen
     - React-Core
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-rendererdebug
-    - React-utils
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - RNSVG/common (= 15.12.1)
-    - Yoga
-  - RNSVG/common (15.12.1):
-    - DoubleConversion
-    - glog
-    - RCT-Folly (= 2024.01.01.00)
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Codegen
-    - React-Core
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-rendererdebug
-    - React-utils
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - Yoga
   - SocketRocket (0.7.0)
   - Yoga (0.0.0)
 
@@ -1309,6 +1289,7 @@ DEPENDENCIES:
   - RCT-Folly (from `../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTDeprecation (from `../node_modules/react-native-macos/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
+  - "RCTFocusZone (from `../node_modules/@fluentui-react-native/focus-zone`)"
   - RCTRequired (from `../node_modules/react-native-macos/Libraries/Required`)
   - RCTTypeSafety (from `../node_modules/react-native-macos/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native-macos/`)
@@ -1325,7 +1306,6 @@ DEPENDENCIES:
   - React-graphics (from `../node_modules/react-native-macos/ReactCommon/react/renderer/graphics`)
   - React-ImageManager (from `../node_modules/react-native-macos/ReactCommon/react/renderer/imagemanager/platform/ios`)
   - React-jsc (from `../node_modules/react-native-macos/ReactCommon/jsc`)
-  - React-jsc/Fabric (from `../node_modules/react-native-macos/ReactCommon/jsc`)
   - React-jserrorhandler (from `../node_modules/react-native-macos/ReactCommon/jserrorhandler`)
   - React-jsi (from `../node_modules/react-native-macos/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native-macos/ReactCommon/jsiexecutor`)
@@ -1393,6 +1373,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec"
   RCTDeprecation:
     :path: "../node_modules/react-native-macos/ReactApple/Libraries/RCTFoundation/RCTDeprecation"
+  RCTFocusZone:
+    :path: "../node_modules/@fluentui-react-native/focus-zone"
   RCTRequired:
     :path: "../node_modules/react-native-macos/Libraries/Required"
   RCTTypeSafety:
@@ -1500,7 +1482,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 5f17e32a39da9146ff32e90cff4e9ebd8b5c3b54
   fmt: 03574da4b7ba40de39da59677ca66610ce8c4a02
   FRNAvatar: 919ae3fc7d01eee287295360e543d1d2a0432673
-  FRNCallout: c7ed1c5ecb31a1b4448aa733366a155c8de4fa0d
+  FRNCallout: 54c1ba139dbe454ec473a7fcfb9041acdfeddf33
   FRNCheckbox: 3e478c3229e3a41523a563f9d8e4db5c3bd821cc
   FRNMenuButton: 1cdaadd041da62cefba6d095b2a09caac99f38c7
   FRNRadioButton: e0dabd91fb4bd361aa7c0b69b2bd293097bfb8b9
@@ -1509,6 +1491,7 @@ SPEC CHECKSUMS:
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: f47da9a444aae485a0528b3bccf0336156009d60
   RCTDeprecation: 88f29fc8fbe38e5bff2e65223eac24450ade59ab
+  RCTFocusZone: 65eced20dcd7550929acd6750c7cae9783b4b68c
   RCTRequired: 2736889bc024f33cd9157e06e092ee59848e7f45
   RCTTypeSafety: c6f4b53a571b819ef18b3d8c5fa7f57d588102c6
   React: 9ddfaba3bb7d30eb3c23b043443543b3b9db8b04
@@ -1536,9 +1519,9 @@ SPEC CHECKSUMS:
   React-perflogger: cef2a86147e47618221ca9ad91c198f675235fc1
   React-RCTActionSheet: 13f69488b22244acbdab4e8548b8a4e61f1aabbe
   React-RCTAnimation: 96868c0a419ebf7b8e886b3bf8efd394baed6490
-  React-RCTAppDelegate: a01ee08e25c21519053fba7a25c644035ae38ff5
+  React-RCTAppDelegate: b8238819e2630a61141604dbe773a16575262a04
   React-RCTBlob: 514e3899c53a76e3a12b66559172f6a6f8ccb0bf
-  React-RCTFabric: f07387b7d811074d6158e442cdd742bb8746f3b7
+  React-RCTFabric: 6f3ce25f14016ba7f75afc197dfc102e6dc4473d
   React-RCTImage: 782aae7a46ccbad58f552cc92fb9379bf5a4a9f6
   React-RCTLinking: 8468aad3a18280b15c8577e99c09779652935be3
   React-RCTNetwork: 71c5168cfba4ee643890a7ee65db39c8184efd62
@@ -1553,10 +1536,10 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 259cc660010f02d35aa4675e448c194667cdafd2
   React-utils: c1a7c0646cbd13a6578fdbbbfb8caca3f3d5cafe
   ReactCommon: cf91cce7c7039e8a2275be58b63d5cb594c903e2
-  ReactNativeHost: 14d32b5744845626e6130e4d3783d3f9cd35d916
+  ReactNativeHost: 4296c5d13fdcafb9cb53f2f3b6ab5e427ab9a6dd
   ReactTestApp-DevSupport: 52ac76197e5accf579592aa3b9aa07fd0766f211
   ReactTestApp-Resources: 3c8739a3e3ed26f67f8ab68f13102fb9591301c8
-  RNSVG: ff30780ea0baf37801950b68a570c7102208b0e9
+  RNSVG: d39a9be65c439dfb061955f7615f1f71a51ecede
   SocketRocket: f6c6249082c011e6de2de60ed641ef8bbe0cfac9
   Yoga: 739f555df208b5fcd997a3b63e74791e27a12f34
 

@@ -85,7 +85,7 @@
   "codegenConfig": {
     "name": "RCTFocusZoneSpec",
     "type": "components",
-    "jsSrcsDir": "lib"
+    "jsSrcsDir": "src"
   },
   "rnx-kit": {
     "kitType": "library",

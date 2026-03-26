@@ -56,3 +56,98 @@ RCT_CUSTOM_VIEW_PROPERTY(defaultTabbableElement, NSNumber, RCTFocusZone)
 }
 
 @end
+
+#ifdef RCT_NEW_ARCH_ENABLED
+
+#include <react/renderer/components/RCTFocusZoneSpec/ComponentDescriptors.h>
+#include <react/renderer/components/RCTFocusZoneSpec/Props.h>
+#include <react/renderer/components/RCTFocusZoneSpec/RCTComponentViewHelpers.h>
+
+#import <React/RCTFabricComponentsPlugins.h>
+
+using namespace facebook::react;
+
+@interface FocusZoneComponentView : RCTViewComponentView
+@end
+
+@implementation FocusZoneComponentView {
+  RCTFocusZone *_focusZoneView;
+}
+
++ (ComponentDescriptorProvider)componentDescriptorProvider
+{
+  return concreteComponentDescriptorProvider<RCTFocusZoneComponentDescriptor>();
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+  if (self = [super initWithFrame:frame]) {
+    _focusZoneView = [RCTFocusZone new];
+    self.contentView = _focusZoneView;
+  }
+  return self;
+}
+
+- (void)updateProps:(const Props::Shared &)props oldProps:(const Props::Shared &)oldProps
+{
+  const auto &newProps = static_cast<const RCTFocusZoneProps &>(*props);
+
+  _focusZoneView.disabled = newProps.disabled;
+  _focusZoneView.navigationOrderInRenderOrder = newProps.navigationOrderInRenderOrder;
+
+  switch (newProps.navigateAtEnd) {
+    case RCTFocusZoneNavigateAtEnd::NavigateWrap:
+      _focusZoneView.navigateAtEnd = @"NavigateWrap";
+      break;
+    case RCTFocusZoneNavigateAtEnd::NavigateContinue:
+      _focusZoneView.navigateAtEnd = @"NavigateContinue";
+      break;
+    case RCTFocusZoneNavigateAtEnd::NavigateStopAtEnds:
+      _focusZoneView.navigateAtEnd = @"NavigateStopAtEnds";
+      break;
+  }
+
+  switch (newProps.focusZoneDirection) {
+    case RCTFocusZoneFocusZoneDirection::Bidirectional:
+      _focusZoneView.focusZoneDirection = FocusZoneDirectionBidirectional;
+      break;
+    case RCTFocusZoneFocusZoneDirection::Vertical:
+      _focusZoneView.focusZoneDirection = FocusZoneDirectionVertical;
+      break;
+    case RCTFocusZoneFocusZoneDirection::Horizontal:
+      _focusZoneView.focusZoneDirection = FocusZoneDirectionHorizontal;
+      break;
+    case RCTFocusZoneFocusZoneDirection::None:
+      _focusZoneView.focusZoneDirection = FocusZoneDirectionNone;
+      break;
+  }
+
+  switch (newProps.tabKeyNavigation) {
+    case RCTFocusZoneTabKeyNavigation::None:
+      _focusZoneView.tabKeyNavigation = @"None";
+      break;
+    case RCTFocusZoneTabKeyNavigation::NavigateWrap:
+      _focusZoneView.tabKeyNavigation = @"NavigateWrap";
+      break;
+    case RCTFocusZoneTabKeyNavigation::NavigateStopAtEnds:
+      _focusZoneView.tabKeyNavigation = @"NavigateStopAtEnds";
+      break;
+    case RCTFocusZoneTabKeyNavigation::Normal:
+      _focusZoneView.tabKeyNavigation = @"Normal";
+      break;
+  }
+
+  // defaultTabbableElement is not handled here: resolving a view by React tag
+  // requires the legacy UIManager and is not supported in the Fabric renderer.
+
+  [super updateProps:props oldProps:oldProps];
+}
+
+@end
+
+Class<RCTComponentViewProtocol> RCTFocusZoneCls(void)
+{
+  return FocusZoneComponentView.class;
+}
+
+#endif // RCT_NEW_ARCH_ENABLED
