@@ -6,7 +6,7 @@
 
 import type { HostComponent, ViewProps } from 'react-native';
 
-import type { BubblingEventHandler, Int32, UnsafeMixed, WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
+import type { BubblingEventHandler, Int32, Double, UnsafeMixed, WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 
 /*
@@ -62,7 +62,7 @@ export interface ImageURISource {
    * to a URL load request, no attempt is made to load the data from the originating source,
    * and the load is considered to have failed.
    */
-  cache?: WithDefault<'default' | 'reload' | 'force-cache' | 'only-if-cached', 'default'> | undefined;
+  cache?: WithDefault<'default' | 'reload' | 'force-cache' | 'only-if-cached', 'default'>;
   /**
    * `body` is the HTTP body to send with the request. This must be a valid
    * UTF-8 string, and will be sent exactly as specified, with no
@@ -73,13 +73,13 @@ export interface ImageURISource {
    * `width` and `height` can be specified if known at build time, in which case
    * these will be used to set the default `<Image/>` component dimensions.
    */
-  width?: number | undefined;
-  height?: number | undefined;
+  width?: Double | undefined;
+  height?: Double | undefined;
   /**
    * `scale` is used to indicate the scale factor of the image. Defaults to 1.0 if
    * unspecified, meaning that one image pixel equates to one display point / DIP.
    */
-  scale?: number | undefined;
+  scale?: Double | undefined;
 }
 
 export interface NativeProps extends ViewProps {

@@ -1,7 +1,6 @@
 const path = require('node:path');
 const { makeMetroConfig, exclusionList } = require('@rnx-kit/metro-config');
 const MetroSymlinksResolver = require('@rnx-kit/metro-resolver-symlinks');
-const { MetroSerializer, esbuildTransformerConfig } = require('@rnx-kit/metro-serializer-esbuild');
 
 // ensure regex paths are merged, normalized, use forward slashes and end with a /
 function pathForRegex(...parts) {
@@ -31,9 +30,7 @@ const config = makeMetroConfig({
     disableHierarchicalLookup: true,
     enableSymlinks: true,
   },
-  serializer: MetroSerializer(),
   transformer: {
-    ...esbuildTransformerConfig,
     // This transformer selects between the regular transformer and svg transformer depending on the file type
     babelTransformerPath: require.resolve('react-native-svg-transformer'),
   },

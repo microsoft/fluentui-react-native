@@ -30,6 +30,11 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@babel/plugin-transform-react-jsx": "catalog:",
+    "@babel/plugin-transform-react-jsx-source": "catalog:",
+    "@babel/preset-env": "catalog:",
+    "@babel/preset-react": "catalog:",
+    "@babel/preset-typescript": "catalog:",
     "@babel/runtime": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/callout": "workspace:*",
