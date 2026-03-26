@@ -82,6 +82,11 @@
       "optional": true
     }
   },
+  "codegenConfig": {
+    "name": "RCTFocusZoneSpec",
+    "type": "components",
+    "jsSrcsDir": "src"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
