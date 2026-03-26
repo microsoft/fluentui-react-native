@@ -45,11 +45,11 @@
     "@rnx-kit/lint-lockfile": "catalog:",
     "babel-jest": "^29.7.0",
     "cross-env": "catalog:",
-    "eslint": "^9.39.2",
-    "eslint-plugin-import": "^2.32.0",
     "lage": "catalog:",
     "markdown-link-check": "^3.8.7",
     "oxfmt": "^0.35.0",
+    "oxlint": "^1.57.0",
+    "oxlint-tsgolint": "^0.17.4",
     "typescript": "^5.8.0",
     "zx": "^8.2.4"
   },
