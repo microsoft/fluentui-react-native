@@ -56,9 +56,10 @@ The project uses **Yarn 4** (Berry) in **pnpm mode** with **Lage** as the task r
 ```bash
 yarn build      # TypeScript build for all packages (outputs to lib/ and lib-commonjs/)
 yarn test       # Build, lint, and run tests across all packages
-yarn lint       # ESLint across all packages
-yarn bundle     # Bundle all packages
-yarn buildci    # Full CI pipeline: build + test + lint + bundle + depcheck + check-publishing
+yarn lint       # Lint across all packages
+yarn lage bundle # Bundle all packages
+yarn bundle:repo # Convenience wrapper for the repo bundle graph
+yarn lage buildci # Configured CI graph alias from lage.config.mjs
 yarn clean      # Clean build artifacts
 ```
 

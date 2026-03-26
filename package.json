@@ -18,7 +18,7 @@
     "build": "lage build-all",
     "clean-all": "node ./scripts/src/preinstall/clean-all.js",
     "docs": "yarn workspace fluent-rn-website start",
-    "bundle": "lage bundle",
+    "bundle:repo": "lage bundle",
     "clean": "lage clean",
     "change": "node .github/scripts/change.mts",
     "changeset:version": "node .github/scripts/changeset-version-with-postbump.mts",
