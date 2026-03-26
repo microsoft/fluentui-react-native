@@ -73,8 +73,6 @@
     "@fluentui-react-native/styling-utils": "*",
     "@fluentui-react-native/switch": "*",
     "@fluentui-react-native/tablist": "*",
-    "@fluentui-react-native/tester": "*",
-    "@fluentui-react-native/tester-win32": "*",
     "@fluentui-react-native/text": "*",
     "@fluentui-react-native/theme": "*",
     "@fluentui-react-native/theme-tokens": "*",
@@ -89,6 +87,8 @@
     "@fluentui-react-native/use-tokens": "*",
     "@fluentui-react-native/win32-theme": "*",
     "@fluentui/react-native": "*",
+    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.0",
     "@uifabricshared/foundation-composable": "*",
     "@uifabricshared/foundation-compose": "*",
     "@uifabricshared/foundation-settings": "*",
@@ -96,7 +96,12 @@
     "@uifabricshared/theme-registry": "*",
     "@uifabricshared/themed-settings": "*",
     "@uifabricshared/theming-ramp": "*",
-    "@uifabricshared/theming-react-native": "*"
+    "@uifabricshared/theming-react-native": "*",
+    "react": "18.2.0 || 19.0.0 || 19.1.0",
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-svg": ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
   },
   "peerDependenciesMeta": {
     "@fluentui-react-native/adapters": {
@@ -231,12 +236,6 @@
     "@fluentui-react-native/tablist": {
       "optional": true
     },
-    "@fluentui-react-native/tester": {
-      "optional": true
-    },
-    "@fluentui-react-native/tester-win32": {
-      "optional": true
-    },
     "@fluentui-react-native/text": {
       "optional": true
     },
@@ -279,6 +278,9 @@
     "@fluentui/react-native": {
       "optional": true
     },
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
     "@uifabricshared/foundation-composable": {
       "optional": true
     },
@@ -301,6 +303,12 @@
       "optional": true
     },
     "@uifabricshared/theming-react-native": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
       "optional": true
     }
   }

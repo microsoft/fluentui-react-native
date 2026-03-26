@@ -1,6 +1,7 @@
 {
   "name": "@fluentui-react-native/tester-core",
-  "version": "0.1.2",
+  "version": "0.1.0",
+  "private": true,
   "description": "Core implementation of the fluent tester app",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",
@@ -126,7 +127,7 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^3.9.2",
     "react-native-windows": "^0.81.0",
-    "react-test-renderer": "19.1.0",
+    "react-test-renderer": "19.1.4",
     "webdriverio": "catalog:"
   },
   "peerDependencies": {
@@ -193,6 +194,12 @@
       "optional": true
     },
     "@types/react": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
       "optional": true
     }
   },

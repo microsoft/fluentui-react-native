@@ -67,10 +67,10 @@ extends:
 
               - script: |
                   yarn
-                displayName: 'yarn install --immutable'
+                displayName: 'yarn install'
 
               - script: |
-                  yarn buildci
+                  yarn lage buildci
                 displayName: 'yarn buildci [build + test + lint]'
 
               - script: |
@@ -116,8 +116,8 @@ extends:
                 displayName: 'List downloaded tarballs'
 
               - script: |
-                  yarn --immutable
-                displayName: 'yarn install --immutable'
+                  yarn
+                displayName: 'yarn install'
 
               - script: |
                   yarn config set npmPublishAccess public

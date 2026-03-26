@@ -90,6 +90,7 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
     react: { ...presetReact, capabilities: ['react-types'] },
     'react-test-renderer': {
       ...presetReactTestRenderer,
+      version: presetReact.version,
       capabilities: ['react', 'react-test-renderer-types'],
     },
     'react-types': {

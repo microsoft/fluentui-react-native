@@ -58,7 +58,7 @@
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",
     "react-native-windows": "^0.81.0",
-    "react-test-renderer": "19.1.0"
+    "react-test-renderer": "19.1.4"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.74.0",

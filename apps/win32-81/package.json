@@ -1,6 +1,7 @@
 {
   "name": "@fluentui-react-native/tester-win32-81",
-  "version": "0.38.70",
+  "version": "0.1.0",
+  "private": true,
   "description": "Fluent UI React Native Win32 Tester App for RN 0.81",
   "repository": {
     "type": "git",
@@ -26,9 +27,9 @@
     "bundle-dev": "rnx-cli bundle",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
+    "format": "fluentui-scripts format",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
-    "format": "fluentui-scripts format",
     "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
     "run-win32-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh",
     "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useDevMain ",
@@ -72,7 +73,7 @@
     "oxc-resolver": "catalog:",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^4.4.11",
-    "react-test-renderer": "19.1.0",
+    "react-test-renderer": "19.1.4",
     "rimraf": "catalog:"
   },
   "jest": {
