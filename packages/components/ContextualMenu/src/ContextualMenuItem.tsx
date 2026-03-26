@@ -90,7 +90,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       (e) => {
         onBlur(e);
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore IViewWin32 doesn't have the event as an argument, while macOS does
+        // @ts-expect-error IViewWin32 doesn't have the event as an argument, while macOS does
         onMouseLeave && onMouseLeave(e);
       },
       [onBlur, onMouseLeave],

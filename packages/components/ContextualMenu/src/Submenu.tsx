@@ -20,7 +20,17 @@ import { submenuName } from './Submenu.types';
 export const Submenu = compose<SubmenuType>({
   displayName: submenuName,
   usePrepareProps: (userProps: SubmenuProps, useStyling: IUseComposeStyling<SubmenuType>) => {
-    const { setShowMenu, maxWidth, maxHeight, shouldFocusOnMount = true, shouldFocusOnContainer = true, ...rest } = userProps;
+    const {
+      setShowMenu,
+      maxWidth,
+      maxHeight,
+      onDismiss,
+      onItemClick,
+      onShow,
+      shouldFocusOnMount = true,
+      shouldFocusOnContainer = true,
+      ...rest
+    } = userProps;
 
     /**
      * On macOS, focus isn't placed by default on the first focusable element. We get around this by focusing on the inner FocusZone
@@ -41,25 +51,25 @@ export const Submenu = compose<SubmenuType>({
     const context = React.useContext(CMContext);
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
-    const data = useSelectedKey(null, userProps.onItemClick);
+    const data = useSelectedKey(null, onItemClick);
 
-    const onShow = React.useCallback(() => {
-      userProps?.onShow && userProps.onShow();
+    const onShowCallback = React.useCallback(() => {
+      onShow && onShow();
       context.isSubmenuOpen = true;
-    }, [context]);
+    }, [context, onShow]);
 
-    const onDismiss = React.useCallback(() => {
-      userProps?.onDismiss();
+    const onDismissCallback = React.useCallback(() => {
+      onDismiss && onDismiss();
       setShowMenu(false);
       context.isSubmenuOpen = false;
-    }, [context, setShowMenu]);
+    }, [context, onDismiss, setShowMenu]);
 
     const dismissCallback = React.useCallback(() => {
-      onDismiss();
+      onDismissCallback();
       context?.onDismissMenu();
-    }, [onDismiss, context]);
+    }, [context, onDismissCallback]);
 
-    context.dismissSubmenu = onDismiss;
+    context.dismissSubmenu = onDismissCallback;
 
     const [containerFocus, setContainerFocus] = React.useState(true);
     const toggleContainerFocus = React.useCallback(() => {
@@ -80,10 +90,10 @@ export const Submenu = compose<SubmenuType>({
       (e: any) => {
         const arrowKey = I18nManager.isRTL ? 'ArrowRight' : 'ArrowLeft';
         if (e.nativeEvent.key === arrowKey) {
-          onDismiss();
+          onDismissCallback();
         }
       },
-      [onDismiss],
+      [onDismissCallback],
     );
 
     // Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
@@ -92,8 +102,8 @@ export const Submenu = compose<SubmenuType>({
     const slotProps = mergeSettings<SubmenuSlotProps>(styleProps, {
       root: {
         ...rest,
-        onShow: onShow,
-        onDismiss: onDismiss,
+        onShow: onShowCallback,
+        onDismiss: onDismissCallback,
         setInitialFocus: shouldFocusOnMount,
       },
       container: {

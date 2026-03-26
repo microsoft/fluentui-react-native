@@ -70,8 +70,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
       delete overflowItemUpdateCallbacks[id];
       overflowManager.removeItem(id);
     },
-    // overflowManager is not needed as a dependency, due to being attached to a ref
-    [overflowItemUpdateCallbacks],
+    [overflowItemUpdateCallbacks, overflowManager],
   );
 
   const userSetLayoutState = React.useCallback((data: SetLayoutStateParam) => {
@@ -161,7 +160,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
       overflowManager.update(containerSize);
     }
     // We only want to run this layout effect whenever the container's size updates.
-  }, [containerSize]);
+  }, [containerSize, layoutState.container, onOverflowUpdate, onUpdateItemDimension, onUpdateItemVisibility, overflowManager, padding]);
 
   // On initial mount, wait for layout to run for all items / components before showing.
   // For future items that may be added / removed, this will remain true to reduce flicker.

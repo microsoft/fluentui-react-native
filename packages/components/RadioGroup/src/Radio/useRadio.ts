@@ -14,13 +14,14 @@ export const useRadio = (props: RadioProps): RadioInfo => {
 
   // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
   const radioGroupContext = useRadioGroupContext();
+  const { disabled: groupDisabled, layout, onChange, updateSelectedButtonRef, value: selectedValue, values } = radioGroupContext;
 
   const {
     label,
     subtext,
     value,
     disabled,
-    labelPosition = radioGroupContext.layout === 'horizontal-stacked' ? 'below' : 'after',
+    labelPosition = layout === 'horizontal-stacked' ? 'below' : 'after',
     accessibilityActions,
     accessibilityLabel,
     accessibilityHint,
@@ -32,26 +33,26 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     ...rest
   } = props;
 
-  const isDisabled = radioGroupContext.disabled || disabled;
+  const isDisabled = groupDisabled || disabled;
 
   const buttonRef = useViewCommandFocus(componentRef);
 
   /* We don't want to call the user's onChange multiple times on the same selection. */
   const changeSelection = React.useCallback(() => {
-    if (value !== radioGroupContext.value) {
-      radioGroupContext.onChange && radioGroupContext.onChange(value);
-      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+    if (value !== selectedValue) {
+      onChange && onChange(value);
+      updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
     }
-  }, [radioGroupContext, value, componentRef]);
+  }, [componentRef, onChange, selectedValue, updateSelectedButtonRef, value]);
 
   /* We use the componentRef of the currently selected button to maintain the default tabbable
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
   React.useEffect(() => {
-    if (value === radioGroupContext.value && !isDisabled) {
-      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+    if (value === selectedValue && !isDisabled) {
+      updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
     }
-  }, []);
+  }, [componentRef, isDisabled, selectedValue, updateSelectedButtonRef, value]);
 
   // Ensure focus is placed on button after click
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
@@ -82,7 +83,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
 
   const state = {
     ...pressable.state,
-    selected: radioGroupContext.value === props.value && !isDisabled,
+    selected: selectedValue === props.value && !isDisabled,
     disabled: isDisabled || false,
     labelPositionBelow: labelPosition === 'below',
   };
@@ -101,8 +102,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       accessibilityHint: accessibilityHint ?? subtext,
       accessibilityState: getAccessibilityState(state.disabled, state.selected, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
-      accessibilityPosInSet: accessibilityPosInSet ?? radioGroupContext.values.findIndex((x) => x == value) + 1,
-      accessibilitySetSize: accessibilitySetSize ?? radioGroupContext.values.length,
+      accessibilityPosInSet: accessibilityPosInSet ?? values.findIndex((x) => x == value) + 1,
+      accessibilitySetSize: accessibilitySetSize ?? values.length,
       focusable: !state.disabled,
       disabled: isDisabled,
       enableFocusRing: enableFocusRing ?? true,

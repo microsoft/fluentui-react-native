@@ -23,6 +23,21 @@ export const useRadio = (props: RadioProps): RadioInfo => {
 
   // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
   const radioGroupContext = useRadioGroupContext();
+  const {
+    addRadioEnabledValue,
+    addRadioValue,
+    disabled: groupDisabled,
+    enabledValues,
+    invoked,
+    layout,
+    onChange,
+    removeRadioEnabledValue,
+    removeRadioValue,
+    updateInvoked,
+    updateSelectedButtonRef,
+    value: selectedValue,
+    values,
+  } = radioGroupContext;
 
   const {
     label,
@@ -39,82 +54,82 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     ...rest
   } = props;
 
-  const labelPosition = radioGroupContext.layout === 'horizontal-stacked' ? 'below' : 'after';
+  const labelPosition = layout === 'horizontal-stacked' ? 'below' : 'after';
 
-  const isDisabled = radioGroupContext.disabled || disabled;
+  const isDisabled = groupDisabled || disabled;
 
   const buttonRef = useViewCommandFocus(componentRef);
 
   /* We don't want to call the user's onChange multiple times on the same selection. */
   const changeSelection = React.useCallback(() => {
-    if (value !== radioGroupContext.value) {
-      radioGroupContext.onChange && radioGroupContext.onChange(value);
-      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+    if (value !== selectedValue) {
+      onChange && onChange(value);
+      updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
     }
-  }, [radioGroupContext, value, componentRef]);
+  }, [componentRef, onChange, selectedValue, updateSelectedButtonRef, value]);
 
   /* We use the componentRef of the currently selected button to maintain the default tabbable
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
   React.useEffect(() => {
-    if (value === radioGroupContext.value && !isDisabled) {
-      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+    if (value === selectedValue && !isDisabled) {
+      updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
     }
-  }, []);
+  }, [componentRef, isDisabled, selectedValue, updateSelectedButtonRef, value]);
 
   // Explicitly only run on mount and unmount
   React.useEffect(() => {
-    radioGroupContext.addRadioValue(value);
+    addRadioValue(value);
 
     return () => {
-      radioGroupContext.removeRadioValue(value);
+      removeRadioValue(value);
     };
-  }, []);
+  }, [addRadioValue, removeRadioValue, value]);
 
   React.useEffect(() => {
     if (isDisabled) {
-      radioGroupContext.removeRadioEnabledValue(value);
+      removeRadioEnabledValue(value);
     } else {
-      radioGroupContext.addRadioEnabledValue(value);
+      addRadioEnabledValue(value);
     }
-  }, [isDisabled]);
+  }, [addRadioEnabledValue, isDisabled, removeRadioEnabledValue, value]);
 
   const isRTL = I18nManager.isRTL;
 
   const onInvoke = React.useCallback(
     (e: KeyPressEvent) => {
       if (e.nativeEvent.key in DirectionalArrowKeys) {
-        const length = radioGroupContext.enabledValues.length;
+        const length = enabledValues.length;
         const previous =
           e.nativeEvent.key === DirectionalArrowKeys.ArrowUp ||
           (isRTL ? e.nativeEvent.key === DirectionalArrowKeys.ArrowRight : e.nativeEvent.key === DirectionalArrowKeys.ArrowLeft);
         const next =
           e.nativeEvent.key === DirectionalArrowKeys.ArrowDown ||
           (isRTL ? e.nativeEvent.key === DirectionalArrowKeys.ArrowLeft : e.nativeEvent.key === DirectionalArrowKeys.ArrowRight);
-        const currRadioIndex = radioGroupContext.enabledValues.indexOf(radioGroupContext.value);
+        const currRadioIndex = enabledValues.indexOf(selectedValue);
         let newCurrRadioIndex;
         if (next) {
           newCurrRadioIndex = (currRadioIndex + 1) % length;
-          radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.enabledValues[newCurrRadioIndex]);
-          radioGroupContext.updateInvoked && radioGroupContext.updateInvoked(true);
+          onChange && onChange(enabledValues[newCurrRadioIndex]);
+          updateInvoked && updateInvoked(true);
         } else if (previous) {
           newCurrRadioIndex = (currRadioIndex - 1 + length) % length;
-          radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.enabledValues[newCurrRadioIndex]);
-          radioGroupContext.updateInvoked && radioGroupContext.updateInvoked(true);
+          onChange && onChange(enabledValues[newCurrRadioIndex]);
+          updateInvoked && updateInvoked(true);
         }
       }
     },
-    [radioGroupContext],
+    [enabledValues, isRTL, onChange, selectedValue, updateInvoked],
   );
 
   // Sets the updated selected button ref and focus if this Radio is selected via arrow key.
   React.useEffect(() => {
-    if (radioGroupContext.invoked && value === radioGroupContext.value && !isDisabled) {
-      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+    if (invoked && value === selectedValue && !isDisabled) {
+      updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
       componentRef?.current?.focus();
-      radioGroupContext.updateInvoked && radioGroupContext.updateInvoked(false);
+      updateInvoked && updateInvoked(false);
     }
-  }, [radioGroupContext.invoked]);
+  }, [componentRef, invoked, isDisabled, selectedValue, updateInvoked, updateSelectedButtonRef, value]);
 
   const keys = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'];
 
@@ -150,7 +165,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
 
   const state = {
     ...pressable.state,
-    selected: radioGroupContext.value === props.value && !isDisabled,
+    selected: selectedValue === props.value && !isDisabled,
     disabled: isDisabled || false,
   };
 
@@ -168,8 +183,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       accessibilityHint: accessibilityHint ?? subtext,
       accessibilityState: getAccessibilityState(state.disabled, state.selected, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
-      accessibilityPosInSet: accessibilityPosInSet ?? radioGroupContext.values.findIndex((x) => x == value) + 1,
-      accessibilitySetSize: accessibilitySetSize ?? radioGroupContext.values.length,
+      accessibilityPosInSet: accessibilityPosInSet ?? values.findIndex((x) => x == value) + 1,
+      accessibilitySetSize: accessibilitySetSize ?? values.length,
       focusable: !state.disabled,
       disabled: isDisabled,
       onAccessibilityAction: onAccessibilityAction,
