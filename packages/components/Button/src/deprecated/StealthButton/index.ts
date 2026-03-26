@@ -1,1 +1,1 @@
-export * from './StealthButton';
+export { StealthButton } from './StealthButton';

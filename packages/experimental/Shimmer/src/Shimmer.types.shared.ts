@@ -161,7 +161,7 @@ export interface ShimmerProps extends ViewProps, ShimmerTokens {
   /**
    * Shimmer shapes that define the masking effect of the Shimmer control.
    */
-  elements: Array<ShimmerElementTypes>;
+  elements: ShimmerElementTypes[];
 }
 
 export interface ShimmerType {

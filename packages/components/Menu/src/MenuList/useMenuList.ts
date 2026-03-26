@@ -210,5 +210,5 @@ export const useMenuItemTracking = (ref: React.RefObject<View>, disabled: boolea
   React.useEffect(() => {
     trackMenuItem(item);
     return () => untrackMenuItem(item);
-  }, []);
+  }, [item, trackMenuItem, untrackMenuItem]);
 };

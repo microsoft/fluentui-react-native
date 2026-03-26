@@ -11,7 +11,7 @@ import { useOverflowContext } from '../OverflowContext';
  * Hook for getting the item's onLayout callback and whether the item should be showing.
  */
 export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
-  const { overflowID, priority, onOverflowItemChange: onOveflowItemChange } = props;
+  const { overflowID, priority, onLayout: onLayoutProp, onOverflowItemChange: onOveflowItemChange } = props;
   const {
     containerSize,
     dontHideBeforeReady,
@@ -41,14 +41,14 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
       updateItem({ id: overflowID, size: size, priority: priority });
     }
     // The item's size updates whenever the onLayout callback runs. This is purely for updating the item info when its priority changes.
-  }, [priority]);
+  }, [overflowID, priority, size, updateItem]);
 
   React.useEffect(() => {
     register(overflowID, handleOverflowItemChange);
     return () => disconnect(overflowID);
     // Runs when mounting / unmounting / whenever an onOverflowItemChange callback is added. Register / disconnect shouldn't be called at any
     // other point.
-  }, [onOveflowItemChange]);
+  }, [disconnect, handleOverflowItemChange, onOveflowItemChange, overflowID, register]);
 
   React.useLayoutEffect(() => {
     // When rendered in a ScrollView on win32, the layout event initially returns a width = 0 before getting the correct layout values.
@@ -61,15 +61,15 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
       }
     }
     // This effect should only run when the size of the item or container changes.
-  }, [size, containerSize]);
+  }, [containerSize, initialOverflowLayoutDone, overflowID, priority, setLayoutState, size, updateItem]);
 
   const onLayout = React.useCallback(
     (e: LayoutChangeEvent) => {
       const itemSize = { width: e.nativeEvent.layout.width, height: e.nativeEvent.layout.height };
       setSize(itemSize);
-      props.onLayout && props.onLayout(e);
+      onLayoutProp && onLayoutProp(e);
     },
-    [props],
+    [onLayoutProp],
   ); // Get item dimensions
 
   const layoutDone = initialOverflowLayoutDone && !!size;

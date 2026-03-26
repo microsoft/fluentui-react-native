@@ -30,7 +30,7 @@
     "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "format": "fluentui-scripts format",
     "test": "fluentui-scripts jest"
@@ -42,8 +42,8 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/preset-env": "catalog:",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/lint-config-rules": "workspace:*",
     "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",

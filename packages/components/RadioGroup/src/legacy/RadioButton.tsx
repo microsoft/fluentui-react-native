@@ -38,25 +38,26 @@ export const RadioButton = compose<IRadioButtonType>({
 
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
+    const { selectedKey, onChange, updateSelectedButtonRef, buttonKeys } = info;
 
     const buttonRef = useViewCommandFocus(componentRef);
 
     /* We don't want to call the user's onChange multiple times on the same selection. */
-    const changeSelection = () => {
-      if (buttonKey != info.selectedKey) {
-        info.onChange && info.onChange(buttonKey);
-        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+    const changeSelection = React.useCallback(() => {
+      if (buttonKey != selectedKey) {
+        onChange && onChange(buttonKey);
+        updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
       }
-    };
+    }, [buttonKey, componentRef, onChange, selectedKey, updateSelectedButtonRef]);
 
     /* We use the componentRef of the currently selected button to maintain the default tabbable
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
     React.useEffect(() => {
-      if (buttonKey == info.selectedKey) {
-        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+      if (buttonKey == selectedKey) {
+        updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
       }
-    }, []);
+    }, [buttonKey, componentRef, selectedKey, updateSelectedButtonRef]);
 
     // Ensure focus is placed on button after click
     const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
@@ -77,12 +78,12 @@ export const RadioButton = compose<IRadioButtonType>({
             break;
         }
       },
-      [info, buttonKey],
+      [changeSelection],
     );
 
     const state = {
       ...pressable.state,
-      selected: info.selectedKey === userProps.buttonKey,
+      selected: selectedKey === userProps.buttonKey,
       disabled: disabled || false,
     };
 
@@ -98,8 +99,8 @@ export const RadioButton = compose<IRadioButtonType>({
         accessibilityLabel: accessibilityLabel ?? ariaLabel ?? content,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityActions: [{ name: 'Select', label: radioButtonSelectActionLabel }],
-        accessibilityPosInSet: accessibilityPosInSet ?? ariaPosInSet ?? info.buttonKeys.findIndex((x) => x == buttonKey) + 1,
-        accessibilitySetSize: accessibilitySetSize ?? ariaSetSize ?? info.buttonKeys.length,
+        accessibilityPosInSet: accessibilityPosInSet ?? ariaPosInSet ?? buttonKeys.findIndex((x) => x == buttonKey) + 1,
+        accessibilitySetSize: accessibilitySetSize ?? ariaSetSize ?? buttonKeys.length,
         focusable: !state.disabled,
         onAccessibilityAction: onAccessibilityAction,
       },

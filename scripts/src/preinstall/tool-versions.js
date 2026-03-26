@@ -25,6 +25,7 @@ const devToolVersions = {
   '@react-native-community/cli-platform-android': '^13.6.4',
   '@react-native-community/cli-platform-ios': '^13.6.4',
   '@rnx-kit/eslint-plugin': '^0.8.6',
+  '@rnx-kit/oxlint-config': '^1.0.3',
   '@rnx-kit/jest-preset': '^0.2.1',
   '@rnx-kit/tools-packages': '^0.1.1',
   '@rnx-kit/tools-typescript': '^0.1.1',
@@ -47,6 +48,8 @@ const devToolVersions = {
   jsdom: '^25.0.0',
   'metro-config': '^0.80.3',
   'metro-react-native-babel-transformer': '^0.76.5',
+  oxlint: '^1.57.0',
+  'oxlint-tsgolint': '^0.17.4',
   'react-test-renderer': '18.2.0',
   rimraf: '^5.0.1',
   // Fill versions from scripts first

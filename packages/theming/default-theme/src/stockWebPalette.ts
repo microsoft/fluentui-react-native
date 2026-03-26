@@ -26,28 +26,28 @@ export function getStockWebPalette(): ThemeColorDefinition {
       red: globalTokens.color.red.primary,
       redDark: globalTokens.color.burgundy.primary,
 
-      // @ts-ignore
+      // @ts-expect-error
       accent: globalTokens.color.brand80,
       blackTranslucent40: 'rgba(0,0,0,.4)',
 
       // Colors to be deprecated
-      // @ts-ignore
+      // @ts-expect-error
       themeDarker: globalTokens.color.brand40,
-      // @ts-ignore
+      // @ts-expect-error
       themeDark: globalTokens.color.brand60,
-      // @ts-ignore
+      // @ts-expect-error
       themeDarkAlt: globalTokens.color.brand70,
-      // @ts-ignore
+      // @ts-expect-error
       themePrimary: globalTokens.color.brand80,
-      // @ts-ignore
+      // @ts-expect-error
       themeSecondary: globalTokens.color.brand90,
-      // @ts-ignore
+      // @ts-expect-error
       themeTertiary: globalTokens.color.brand120,
-      // @ts-ignore
+      // @ts-expect-error
       themeLight: globalTokens.color.brand140,
-      // @ts-ignore
+      // @ts-expect-error
       themeLighter: globalTokens.color.brand150,
-      // @ts-ignore
+      // @ts-expect-error
       themeLighterAlt: globalTokens.color.brand160,
     }),
     ...createColorAliasTokens('light'),
@@ -74,29 +74,29 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
         neutralLighterAlt: '#201f1e',
         white: '#1b1a19',
         red: globalTokens.color.red.primary,
-        // @ts-ignore
+        // @ts-expect-error
         accent: globalTokens.color.brand40,
         redDark: '#f1707b',
         blackTranslucent40: 'rgba(0,0,0,.4)',
 
         // Colors to be deprecated
-        // @ts-ignore
+        // @ts-expect-error
         themeDarker: globalTokens.color.brand110,
-        // @ts-ignore
+        // @ts-expect-error
         themeDark: globalTokens.color.brand100,
-        // @ts-ignore
+        // @ts-expect-error
         themeDarkAlt: globalTokens.color.brand100,
-        // @ts-ignore
+        // @ts-expect-error
         themePrimary: globalTokens.color.brand90,
-        // @ts-ignore
+        // @ts-expect-error
         themeSecondary: globalTokens.color.brand90,
-        // @ts-ignore
+        // @ts-expect-error
         themeTertiary: globalTokens.color.brand60,
-        // @ts-ignore
+        // @ts-expect-error
         themeLight: globalTokens.color.brand50,
-        // @ts-ignore
+        // @ts-expect-error
         themeLighter: globalTokens.color.brand40,
-        // @ts-ignore
+        // @ts-expect-error
         themeLighterAlt: globalTokens.color.brand30,
       },
       true,

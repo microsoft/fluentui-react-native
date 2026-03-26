@@ -271,5 +271,6 @@ function isTestFile(fileName: string): boolean {
     '**/babel.config.*',
     '**/jest.config.*',
     '**/eslint.config.*',
+    '**/oxlint.config.*',
   ]);
 }

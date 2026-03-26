@@ -1,1 +1,1 @@
-export * from './stylingUtils.mobile';
+export { getFallbackIconPath, getIconStyles, getRingConfig, getRingSpacing } from './stylingUtils.mobile';

@@ -34,7 +34,7 @@ export function useMergedRefs<T>(...refs: (React.Ref<T> | undefined)[]): RefObje
         }
       }
     },
-    [...refs],
+    [refs],
   ) as unknown as RefObjectFunction<T>;
 
   return mergedCallback;
