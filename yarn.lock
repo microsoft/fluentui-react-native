@@ -9734,13 +9734,13 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/tools-react-native@npm:^2.1.0, @rnx-kit/tools-react-native@npm:^2.3.0, @rnx-kit/tools-react-native@npm:^2.3.1, @rnx-kit/tools-react-native@npm:^2.3.2, @rnx-kit/tools-react-native@npm:^2.3.3, @rnx-kit/tools-react-native@npm:^2.3.4":
-  version: 2.3.4
-  resolution: "@rnx-kit/tools-react-native@npm:2.3.4"
+  version: 2.3.5
+  resolution: "@rnx-kit/tools-react-native@npm:2.3.5"
   dependencies:
     "@rnx-kit/tools-filesystem": "npm:^0.2.0"
     "@rnx-kit/tools-node": "npm:^3.0.4"
     "@rnx-kit/types-bundle-config": "npm:^1.0.0"
-  checksum: 10c0/14e1a9862a85d5ae4666ff3bc5184a266b743a305d223f2c79bd57aae7be59a0708d8c83d21fb6f018c296eb68fe010dbb829ca49517a7d50b4aef17bcfc8ce4
+  checksum: 10c0/e38efcdb9c596ebd6e2c9f45154bad775e1b9cd795aca285d344d190adb2c51c6ec4474b0c67199fe96b252e90f994506f98aa5a06228d8f4a5c2d83cde6a405
   languageName: node
   linkType: hard
 
