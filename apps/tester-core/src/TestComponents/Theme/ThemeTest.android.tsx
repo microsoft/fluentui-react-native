@@ -3,11 +3,11 @@ import type { ColorValue, ViewStyle } from 'react-native';
 import { Text as TextRN, View } from 'react-native';
 import { StyleSheet } from 'react-native';
 
-import { Text } from '@fluentui/react-native';
+import { Text } from 'fluentui-react-native/text';
 import { THEME_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import { useFluentTheme } from '@fluentui-react-native/framework';
-import type { Theme } from '@fluentui-react-native/theme-types';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { useFluentTheme } from 'fluentui-react-native/framework';
+import type { Theme } from 'fluentui-react-native/theme-types';
+import { themedStyleSheet } from 'fluentui-react-native/themed-stylesheet';
 
 import { commonTestStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';

@@ -1,3 +1,3 @@
-import { transform, yargsParse } from './transform';
+import { transform, parseCliArgs } from './transform';
 
-transform(yargsParse(process.argv));
+transform(parseCliArgs(process.argv));

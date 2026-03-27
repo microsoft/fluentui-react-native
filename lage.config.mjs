@@ -36,6 +36,10 @@ const config = {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: [],
     },
+    'check-exports': {
+      inputs: ['*', 'src/**/*'],
+      outputs: [],
+    },
     test: {
       dependsOn: ['build-all'],
       inputs: [],
@@ -57,7 +61,7 @@ const config = {
 
     // ── Pipeline aliases ───────────────────────────────────────────────────
     'repo-checks': ['lint-lockfile', 'format:check', 'check-publishing'],
-    buildci: ['build-all', 'test', 'lint', 'lint-package', 'repo-checks'],
+    buildci: ['build-all', 'test', 'lint', 'lint-package', 'check-exports', 'repo-checks'],
 
     // ── Worker tasks ───────────────────────────────────────────────────────
     pack: {

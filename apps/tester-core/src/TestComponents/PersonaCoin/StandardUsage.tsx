@@ -2,9 +2,9 @@ import * as React from 'react';
 import type { ColorValue } from 'react-native';
 import { Switch, View, Text } from 'react-native';
 
-import type { PersonaSize, PersonaCoinFluentColor, PersonaPresence } from '@fluentui/react-native';
-import { PersonaCoin } from '@fluentui/react-native';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import type { PersonaSize, PersonaCoinFluentColor, PersonaPresence } from 'fluentui-react-native/persona-coin';
+import { PersonaCoin } from 'fluentui-react-native/persona-coin';
+import { useTheme } from 'fluentui-react-native/theme-types';
 
 import { satyaPhotoUrl, undefinedText } from './styles';
 import { StyledPicker } from '../Common/StyledPicker';

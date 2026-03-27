@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 
-import { MenuButton } from '@fluentui/react-native';
+import { MenuButton } from 'fluentui-react-native/menu-button';
 
 import { viewWrapperStyle, columnStyle, rowStyle } from './MenuButtonLegacyTestStyles';
 import { menuItems } from './testData';

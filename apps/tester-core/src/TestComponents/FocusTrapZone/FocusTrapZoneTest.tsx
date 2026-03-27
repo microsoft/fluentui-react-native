@@ -2,14 +2,15 @@ import * as React from 'react';
 import type { TouchableHighlightProps } from 'react-native';
 import { TouchableHighlight, View } from 'react-native';
 
-import { FocusTrapZone, Text } from '@fluentui/react-native';
+import { FocusTrapZone } from 'fluentui-react-native/focus-trap-zone';
+import { Text } from 'fluentui-react-native/text';
 import { FOCUSTRAPZONE_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import type { Theme } from '@fluentui-react-native/framework';
-import type { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
-import { useFocusState } from '@fluentui-react-native/interactive-hooks';
-import { Stack } from '@fluentui-react-native/stack';
-import { useTheme } from '@fluentui-react-native/theme-types';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import type { Theme } from 'fluentui-react-native/framework';
+import type { KeyPressEvent } from 'fluentui-react-native/interactive-hooks';
+import { useFocusState } from 'fluentui-react-native/interactive-hooks';
+import { Stack } from 'fluentui-react-native/stack';
+import { useTheme } from 'fluentui-react-native/theme-types';
+import { themedStyleSheet } from 'fluentui-react-native/themed-stylesheet';
 
 import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Platform, PlatformColor, View } from 'react-native';
 
-import { Text } from '@fluentui/react-native';
+import { Text } from 'fluentui-react-native/text';
 import { ICON_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import type { RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
-import { Icon } from '@fluentui-react-native/icon';
+import type { RasterImageIconProps, SvgIconProps, FontIconProps } from 'fluentui-react-native/icon';
+import { Icon } from 'fluentui-react-native/icon';
 
 import { E2ETestingIcon } from './IconLegacyE2ETest';
 import { IconV1E2ETest } from './IconV1E2ETest';

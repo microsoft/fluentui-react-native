@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, Platform, Image } from 'react-native';
 
-import { ToggleButton } from '@fluentui/react-native';
+import { ToggleButton } from 'fluentui-react-native/button';
 import type {
   BadgeAppearance,
   BadgeColor,
@@ -10,10 +10,10 @@ import type {
   BadgeIconPosition,
   BadgeProps,
   BadgeTokens,
-} from '@fluentui-react-native/badge';
-import { Badge, BadgeAppearances, BadgeColors, BadgeShapes, BadgeSizes } from '@fluentui-react-native/badge';
-import { useFluentTheme } from '@fluentui-react-native/framework';
-import { Text } from '@fluentui-react-native/text';
+} from 'fluentui-react-native/badge';
+import { Badge, BadgeAppearances, BadgeColors, BadgeShapes, BadgeSizes } from 'fluentui-react-native/badge';
+import { useFluentTheme } from 'fluentui-react-native/framework';
+import { Text } from 'fluentui-react-native/text';
 
 import { svgProps, iconProps } from '../Common/iconExamples';
 import { StyledPicker } from '../Common/StyledPicker';

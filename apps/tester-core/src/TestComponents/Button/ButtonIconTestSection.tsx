@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
 
-import { ButtonV1 as Button } from '@fluentui/react-native';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
 import { SvgXml } from 'react-native-svg';
 
 import { testImage, svgProps, iconProps } from '../Common/iconExamples';
