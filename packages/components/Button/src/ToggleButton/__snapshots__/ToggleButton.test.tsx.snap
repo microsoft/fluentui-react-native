@@ -14,7 +14,7 @@ exports[`ToggleButton default 1`] = `
   accessibilityState={
     {
       "busy": undefined,
-      "checked": undefined,
+      "checked": false,
       "disabled": false,
       "expanded": undefined,
       "selected": undefined,
