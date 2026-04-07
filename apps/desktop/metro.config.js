@@ -31,7 +31,6 @@ const config = makeMetroConfig({
     enableSymlinks: true,
   },
   transformer: {
-    // This transformer selects between the regular transformer and svg transformer depending on the file type
     babelTransformerPath: require.resolve('react-native-svg-transformer'),
   },
 });

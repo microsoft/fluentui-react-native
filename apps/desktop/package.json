@@ -66,7 +66,6 @@
     "@rnx-kit/metro-config": "catalog:",
     "@rnx-kit/metro-resolver-symlinks": "catalog:",
     "@rnx-kit/metro-serializer-esbuild": "^0.3.1",
-    "@swc/core": "^1.15.13",
     "@types/node": "catalog:",
     "@types/react-test-renderer": "^19.1.0",
     "esbuild": "^0.27.0",
@@ -150,8 +149,5 @@
       ]
     },
     "extends": "@fluentui-react-native/kit-config"
-  },
-  "engines": {
-    "node": ">=20"
   }
 }
