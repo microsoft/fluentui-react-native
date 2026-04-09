@@ -22,11 +22,6 @@ function bumpPatch(version: string): string {
 echo('📦 Running changeset version...');
 await $`yarn changeset version`;
 
-// Undo the commit that changeset version made, but keep the changes
-// This allows the changesets action to create a single commit with all changes
-echo('🔙 Undoing changeset commit (keeping changes)...');
-await $`git reset --soft HEAD~1`;
-
 // Changesets doesn't bump or update the dependency-profiles package, so we need to do that manually
 echo('\n🔄 Updating dependency-profiles...');
 if (fs.existsSync(DEPENDENCY_PROFILES_DIR)) {
