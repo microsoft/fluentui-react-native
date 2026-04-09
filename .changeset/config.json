@@ -3,12 +3,7 @@
   "access": "public",
   "baseBranch": "origin/main",
   "changelog": "@changesets/cli/changelog",
-  "commit": [
-    "@changesets/cli/commit",
-    {
-      "skipCI": false
-    }
-  ],
+  "commit": false,
   "ignore": [],
   "linked": [],
   "privatePackages": {
