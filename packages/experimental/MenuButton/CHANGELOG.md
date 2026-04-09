@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
+## 0.11.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/contextual-menu@0.25.2
+  - @fluentui-react-native/framework@0.15.2
+  - @fluentui-react-native/button@0.40.2
+  - @fluentui-react-native/tokens@0.24.2
+
 ## 0.11.1
 
 ### Patch Changes
