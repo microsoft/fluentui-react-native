@@ -1,5 +1,19 @@
 # Change Log - @fluentui-react-native/dropdown
 
+## 0.11.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/interactive-hooks@0.28.2
+  - @fluentui-react-native/theme-tokens@0.28.2
+  - @fluentui-react-native/framework@0.15.2
+  - @fluentui-react-native/callout@0.28.2
+  - @fluentui-react-native/button@0.40.2
+  - @fluentui-react-native/text@0.25.2
+  - @fluentui-react-native/adapters@0.14.2
+
 ## 0.11.1
 
 ### Patch Changes

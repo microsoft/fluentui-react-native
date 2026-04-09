@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/avatar
 
+## 1.13.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/use-styling@0.14.2
+  - @fluentui-react-native/theming-utils@0.27.2
+  - @fluentui-react-native/theme-tokens@0.28.2
+  - @fluentui-react-native/framework@0.15.2
+  - @fluentui-react-native/badge@0.12.2
+  - @fluentui-react-native/icon@0.22.2
+  - @fluentui-react-native/adapters@0.14.2
+  - @fluentui-react-native/tokens@0.24.2
+
 ## 1.13.1
 
 ### Patch Changes

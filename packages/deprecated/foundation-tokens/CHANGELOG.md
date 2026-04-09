@@ -1,5 +1,15 @@
 # Change Log - @uifabricshared/foundation-tokens
 
+## 0.16.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @uifabricshared/foundation-settings@0.16.2
+  - @fluentui-react-native/framework-base@0.3.2
+  - @fluentui-react-native/tokens@0.24.2
+
 ## 0.16.1
 
 ### Patch Changes
