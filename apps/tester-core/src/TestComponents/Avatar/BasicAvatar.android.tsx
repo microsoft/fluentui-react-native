@@ -2,11 +2,11 @@ import type { FunctionComponent } from 'react';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Avatar } from '@fluentui-react-native/avatar';
-import type { PresenceBadgeStatus } from '@fluentui-react-native/badge';
-import { PresenceBadgeStatuses } from '@fluentui-react-native/badge';
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { Switch } from '@fluentui-react-native/switch';
+import { Avatar } from 'fluentui-react-native/avatar';
+import type { PresenceBadgeStatus } from 'fluentui-react-native/badge';
+import { PresenceBadgeStatuses } from 'fluentui-react-native/badge';
+import type { InteractionEvent } from 'fluentui-react-native/interactive-hooks';
+import { Switch } from 'fluentui-react-native/switch';
 
 import { StyledPicker } from '../Common/StyledPicker';
 import { mobileStyles } from '../Common/styles';

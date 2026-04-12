@@ -1,9 +1,9 @@
 import React from 'react';
 import { Platform } from 'react-native';
 
-import { ButtonV1 as Button } from '@fluentui/react-native';
-import { Menu, MenuItem, MenuItemCheckbox, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
-import { Stack } from '@fluentui-react-native/stack';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
+import { Menu, MenuItem, MenuItemCheckbox, MenuTrigger, MenuPopover, MenuList } from 'fluentui-react-native/menu';
+import { Stack } from 'fluentui-react-native/stack';
 
 import { testImage, svgProps } from '../Common/iconExamples';
 import { stackStyle } from '../Common/styles';

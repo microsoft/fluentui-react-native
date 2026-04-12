@@ -36,8 +36,7 @@
     "test": "fluentui-scripts jest"
   },
   "dependencies": {
-    "jscodeshift": "^17.0.0",
-    "yargs": "^17.0.0"
+    "jscodeshift": "^17.0.0"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

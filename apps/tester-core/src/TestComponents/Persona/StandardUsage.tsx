@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { View, Text, Switch } from 'react-native';
 
-import type { PersonaSize } from '@fluentui/react-native';
-import { Persona } from '@fluentui/react-native';
+import type { PersonaSize } from 'fluentui-react-native/persona-coin';
+import { Persona } from 'fluentui-react-native/persona';
 
 import { satyaImageUrl } from './styles';
 import { MenuPicker } from '../Common/MenuPicker';

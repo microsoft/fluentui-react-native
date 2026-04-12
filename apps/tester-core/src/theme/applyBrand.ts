@@ -1,5 +1,5 @@
-import type { PartialTheme, Theme } from '@fluentui-react-native/theme-types';
-import { getCurrentBrandAliasTokens } from '@fluentui-react-native/win32-theme';
+import type { PartialTheme, Theme } from 'fluentui-react-native/theme-types';
+import { getCurrentBrandAliasTokens } from 'fluentui-react-native/win32-theme';
 
 export type OfficeBrand = 'Default' | 'Office' | 'Word' | 'Excel' | 'Powerpoint' | 'Outlook';
 type BrandRampKey =

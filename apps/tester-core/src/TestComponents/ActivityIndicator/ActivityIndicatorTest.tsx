@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { View, Switch } from 'react-native';
 
-import { Text } from '@fluentui/react-native';
+import { Text } from 'fluentui-react-native/text';
 import { ACTIVITY_INDICATOR_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import { Stack } from '@fluentui-react-native/stack';
+import { ActivityIndicator } from 'fluentui-react-native/experimental-activity-indicator';
+import { Stack } from 'fluentui-react-native/stack';
 
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';

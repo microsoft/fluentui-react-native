@@ -375,9 +375,12 @@ export class LintPackageCommand extends Command {
       if (updated.import) {
         const importInSrc = updated.import.startsWith('./src');
         const defaultExport = importInSrc ? updated.import : updated.import.replace(esmDir, 'src').replace(/\.js$/, '.ts');
-        if (!updated.default || updated.default !== defaultExport) {
-          errors.push(`'default' entry in exports does not match the expected default export`);
-          updated.default = defaultExport;
+        const defaultExportPath = path.resolve(this.projRoot.root, defaultExport);
+        if (fs.existsSync(defaultExportPath)) {
+          if (!updated.default || updated.default !== defaultExport) {
+            errors.push(`'default' entry in exports does not match the expected default export`);
+            updated.default = defaultExport;
+          }
         }
       }
       this.errorIf(errors.length > 0, errors.join('\n'), () => {
@@ -409,10 +412,14 @@ export class LintPackageCommand extends Command {
     const exports = manifest.exports;
     if (exports) {
       const defaultExport = exports['.'];
-      // this is really only ok for packages that only have a single build output and no types like a config package
-      const validStringExport = typeof defaultExport === 'string' && !(main && module && main !== module && manifest.types === undefined);
-      if (typeof defaultExport !== 'string' || !validStringExport) {
-        this.validateExportsGroup(manifest, '.', true, buildConfig);
+      // Only validate the "." export group if it exists, or if main/module fields imply one should exist.
+      // Subpath-only packages (no main, no module, no ".") intentionally omit a barrel export.
+      if (defaultExport !== undefined || main || module) {
+        // this is really only ok for packages that only have a single build output and no types like a config package
+        const validStringExport = typeof defaultExport === 'string' && !(main && module && main !== module && manifest.types === undefined);
+        if (typeof defaultExport !== 'string' || !validStringExport) {
+          this.validateExportsGroup(manifest, '.', true, buildConfig);
+        }
       }
       for (const key of Object.keys(exports)) {
         if (key !== '.') {

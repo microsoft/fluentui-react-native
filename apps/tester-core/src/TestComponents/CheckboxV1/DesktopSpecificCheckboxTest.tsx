@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
+import { Checkbox } from 'fluentui-react-native/experimental-checkbox';
 
 export const DesktopSpecificCheckbox: React.FunctionComponent = () => {
   return (

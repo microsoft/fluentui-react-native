@@ -14,8 +14,8 @@ import {
   FIRST_RADIO_ACCESSIBILITY_LABEL,
   SECOND_RADIO_LABEL,
 } from '@fluentui-react-native/e2e-testing';
-import { RadioGroupV1 as RadioGroup, Radio } from '@fluentui-react-native/radio-group';
-import { Stack } from '@fluentui-react-native/stack';
+import { RadioGroupV1 as RadioGroup, Radio } from 'fluentui-react-native/radio-group';
+import { Stack } from 'fluentui-react-native/stack';
 
 import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';

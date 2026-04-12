@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import { CounterBadge } from '@fluentui-react-native/badge';
+import { CounterBadge } from 'fluentui-react-native/badge';
 
 export const CounterBadgeTest: React.FunctionComponent = () => {
   return (

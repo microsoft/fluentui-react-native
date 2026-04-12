@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { ButtonV1 } from '@fluentui-react-native/button';
-import { Tooltip } from '@fluentui-react-native/tooltip';
+import { ButtonV1 } from 'fluentui-react-native/button';
+import { Tooltip } from 'fluentui-react-native/tooltip';
 
 export const TooltipDefault: React.FunctionComponent = () => {
   const defaultContent = 'Tooltip shows relative to mouse cursor.';

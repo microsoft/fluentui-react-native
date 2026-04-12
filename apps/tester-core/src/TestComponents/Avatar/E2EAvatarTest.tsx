@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { Avatar } from '@fluentui-react-native/avatar';
+import { Avatar } from 'fluentui-react-native/avatar';
 import {
   AVATAR_ACCESSIBILITY_HINT,
   AVATAR_ACCESSIBILITY_LABEL,

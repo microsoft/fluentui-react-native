@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { Text } from '@fluentui/react-native';
+import { Text } from 'fluentui-react-native/text';
 import {
   ICON_ACCESSIBILITY_LABEL,
   ICON_TEST_COMPONENT,
   ICON_FONT_TEST_COMPONENT,
   ICON_SVG_TEST_COMPONENT,
 } from '@fluentui-react-native/e2e-testing';
-import type { FontIconPropsV1, SvgIconPropsV1 } from '@fluentui-react-native/icon';
-import { FontIcon, SvgIcon, IconV1 } from '@fluentui-react-native/icon';
+import type { FontIconPropsV1, SvgIconPropsV1 } from 'fluentui-react-native/icon';
+import { FontIcon, SvgIcon, IconV1 } from 'fluentui-react-native/icon';
 
 import TestSvg from '../../../assets/test.svg';
 

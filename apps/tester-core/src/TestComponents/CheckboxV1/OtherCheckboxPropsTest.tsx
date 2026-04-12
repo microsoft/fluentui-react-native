@@ -2,9 +2,9 @@ import React from 'react';
 import { Platform, Pressable, View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
-import { TextV1 } from '@fluentui-react-native/text';
+import { ButtonV1 as Button } from 'fluentui-react-native/button';
+import { Checkbox } from 'fluentui-react-native/experimental-checkbox';
+import { TextV1 } from 'fluentui-react-native/text';
 
 import { mobileStyles } from '../Common/styles';
 
