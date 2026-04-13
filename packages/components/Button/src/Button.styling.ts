@@ -33,6 +33,8 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'disabled',
 ];
 
+const applyOverflowHiddenToRoot = Platform.OS === 'ios' || Platform.OS === 'macos';
+
 export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
@@ -58,7 +60,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {
           display: 'flex',
-          overflow: 'hidden',
+          overflow: applyOverflowHiddenToRoot ? 'hidden' : undefined,
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
