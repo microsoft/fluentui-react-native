@@ -1,8 +1,8 @@
 {
-  "name": "desktop-tester",
+  "name": "@fluentui-react-native/tester-81",
   "version": "0.1.0",
   "private": true,
-  "description": "A test app to test FluentUI React Native Components during development",
+  "description": "A test app to test FluentUI React Native 0.81 Components during development",
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
