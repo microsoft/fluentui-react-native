@@ -83,7 +83,6 @@ exports[`Overflow component tests Overflow default 1`] = `
         "minHeight": 24,
         "minWidth": 64,
         "opacity": 0,
-        "overflow": "hidden",
         "padding": 3,
         "paddingHorizontal": 7,
       }
@@ -175,7 +174,6 @@ exports[`Overflow component tests Overflow default 1`] = `
         "minHeight": 24,
         "minWidth": 64,
         "opacity": 0,
-        "overflow": "hidden",
         "padding": 3,
         "paddingHorizontal": 7,
       }
@@ -267,7 +265,6 @@ exports[`Overflow component tests Overflow default 1`] = `
         "minHeight": 24,
         "minWidth": 64,
         "opacity": 0,
-        "overflow": "hidden",
         "padding": 3,
         "paddingHorizontal": 7,
       }
@@ -369,7 +366,7 @@ exports[`Overflow component tests Overflow default 1`] = `
         "justifyContent": "center",
         "minHeight": 24,
         "minWidth": 64,
-        "overflow": "hidden",
+        "overflow": undefined,
         "padding": 3,
         "paddingHorizontal": 7,
         "width": undefined,
