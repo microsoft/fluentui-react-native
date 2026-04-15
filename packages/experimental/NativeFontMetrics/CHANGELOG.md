@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
+## 0.7.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+
 ## 0.7.1
 
 ### Patch Changes
