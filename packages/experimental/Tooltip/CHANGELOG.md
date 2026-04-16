@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/tooltip
 
+## 0.5.3
+
+### Patch Changes
+
+- 196cbea: Update snapshot
+
 ## 0.5.2
 
 ### Patch Changes

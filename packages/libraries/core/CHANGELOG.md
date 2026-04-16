@@ -1,5 +1,13 @@
 # Change Log - @fluentui/react-native
 
+## 0.43.3
+
+### Patch Changes
+
+- Updated dependencies [196cbea]
+  - @fluentui-react-native/button@0.40.3
+  - @fluentui-react-native/menu-button@0.14.3
+
 ## 0.43.2
 
 ### Patch Changes

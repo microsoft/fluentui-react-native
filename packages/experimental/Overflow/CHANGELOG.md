@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/overflow
 
+## 0.4.3
+
+### Patch Changes
+
+- db5fc0a: Update snapshots
+
 ## 0.4.2
 
 ### Patch Changes

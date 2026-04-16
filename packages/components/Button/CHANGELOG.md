@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/button
 
+## 0.40.3
+
+### Patch Changes
+
+- 196cbea: Remove overflow hidden from FURN button for windows
+
 ## 0.40.2
 
 ### Patch Changes

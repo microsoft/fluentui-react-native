@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/menu
 
+## 1.15.3
+
+### Patch Changes
+
+- db5fc0a: Update snapshots
+
 ## 1.15.2
 
 ### Patch Changes
