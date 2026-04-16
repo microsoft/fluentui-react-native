@@ -10,9 +10,6 @@ exports[`ContextualMenu default 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": undefined,
-      "multiselectable": undefined,
-      "readOnly": undefined,
-      "required": undefined,
       "selected": undefined,
     }
   }
@@ -25,18 +22,14 @@ exports[`ContextualMenu default 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
   onLayout={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -47,15 +40,16 @@ exports[`ContextualMenu default 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#ffffff",
-      "borderColor": "#d1d1d1",
-      "borderRadius": 4,
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f6cbd",
+      "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 40,
       "overflow": "hidden",
-      "padding": 5,
+      "paddingHorizontal": 12,
       "width": undefined,
     }
   }

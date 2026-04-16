@@ -57,9 +57,6 @@ exports[`TabList component tests TabList appearance 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -72,17 +69,13 @@ exports[`TabList component tests TabList appearance 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -93,8 +86,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -133,9 +125,9 @@ exports[`TabList component tests TabList appearance 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -148,7 +140,7 @@ exports[`TabList component tests TabList appearance 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -158,7 +150,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -184,9 +176,6 @@ exports[`TabList component tests TabList appearance 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -199,17 +188,13 @@ exports[`TabList component tests TabList appearance 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -220,8 +205,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -260,9 +244,9 @@ exports[`TabList component tests TabList appearance 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -275,7 +259,7 @@ exports[`TabList component tests TabList appearance 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -285,7 +269,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -311,9 +295,6 @@ exports[`TabList component tests TabList appearance 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -326,17 +307,13 @@ exports[`TabList component tests TabList appearance 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -347,8 +324,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -387,9 +363,9 @@ exports[`TabList component tests TabList appearance 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -402,7 +378,7 @@ exports[`TabList component tests TabList appearance 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -412,7 +388,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -482,9 +458,6 @@ exports[`TabList component tests TabList default props 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -497,17 +470,13 @@ exports[`TabList component tests TabList default props 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -518,8 +487,7 @@ exports[`TabList component tests TabList default props 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -558,9 +526,9 @@ exports[`TabList component tests TabList default props 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -573,7 +541,7 @@ exports[`TabList component tests TabList default props 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -583,7 +551,7 @@ exports[`TabList component tests TabList default props 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -609,9 +577,6 @@ exports[`TabList component tests TabList default props 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -624,17 +589,13 @@ exports[`TabList component tests TabList default props 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -645,8 +606,7 @@ exports[`TabList component tests TabList default props 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -685,9 +645,9 @@ exports[`TabList component tests TabList default props 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -700,7 +660,7 @@ exports[`TabList component tests TabList default props 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -710,7 +670,7 @@ exports[`TabList component tests TabList default props 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -736,9 +696,6 @@ exports[`TabList component tests TabList default props 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -751,17 +708,13 @@ exports[`TabList component tests TabList default props 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -772,8 +725,7 @@ exports[`TabList component tests TabList default props 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -812,9 +764,9 @@ exports[`TabList component tests TabList default props 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -827,7 +779,7 @@ exports[`TabList component tests TabList default props 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -837,7 +789,7 @@ exports[`TabList component tests TabList default props 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -907,9 +859,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "checked": undefined,
             "disabled": true,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -922,17 +871,13 @@ exports[`TabList component tests TabList disabled list 1`] = `
           }
         }
         accessible={true}
-        disabled={true}
+        collapsable={false}
         focusable={false}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -943,8 +888,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -983,9 +927,8 @@ exports[`TabList component tests TabList disabled list 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#bdbdbd",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -998,7 +941,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -1008,7 +951,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -1034,9 +977,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "checked": undefined,
             "disabled": true,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -1049,17 +989,13 @@ exports[`TabList component tests TabList disabled list 1`] = `
           }
         }
         accessible={true}
-        disabled={true}
+        collapsable={false}
         focusable={false}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1070,8 +1006,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -1110,9 +1045,8 @@ exports[`TabList component tests TabList disabled list 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#bdbdbd",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -1125,7 +1059,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -1135,7 +1069,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -1161,9 +1095,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "checked": undefined,
             "disabled": true,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -1176,17 +1107,13 @@ exports[`TabList component tests TabList disabled list 1`] = `
           }
         }
         accessible={true}
-        disabled={true}
+        collapsable={false}
         focusable={false}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1197,8 +1124,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -1237,9 +1163,8 @@ exports[`TabList component tests TabList disabled list 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#bdbdbd",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -1252,7 +1177,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -1262,7 +1187,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -1332,9 +1257,6 @@ exports[`TabList component tests TabList orientation 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -1347,17 +1269,13 @@ exports[`TabList component tests TabList orientation 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1368,8 +1286,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -1407,9 +1324,9 @@ exports[`TabList component tests TabList orientation 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -1422,7 +1339,7 @@ exports[`TabList component tests TabList orientation 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": "100%",
               "paddingVertical": 12,
               "width": 2,
@@ -1432,7 +1349,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -1458,9 +1375,6 @@ exports[`TabList component tests TabList orientation 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -1473,17 +1387,13 @@ exports[`TabList component tests TabList orientation 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1494,8 +1404,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -1533,9 +1442,9 @@ exports[`TabList component tests TabList orientation 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -1548,7 +1457,7 @@ exports[`TabList component tests TabList orientation 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": "100%",
               "paddingVertical": 12,
               "width": 2,
@@ -1558,7 +1467,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -1584,9 +1493,6 @@ exports[`TabList component tests TabList orientation 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -1599,17 +1505,13 @@ exports[`TabList component tests TabList orientation 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1620,8 +1522,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -1659,9 +1560,9 @@ exports[`TabList component tests TabList orientation 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -1674,7 +1575,7 @@ exports[`TabList component tests TabList orientation 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": "100%",
               "paddingVertical": 12,
               "width": 2,
@@ -1684,7 +1585,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -1755,9 +1656,6 @@ exports[`TabList component tests TabList selected key 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": true,
           }
         }
@@ -1770,17 +1668,13 @@ exports[`TabList component tests TabList selected key 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1791,8 +1685,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -1832,8 +1725,8 @@ exports[`TabList component tests TabList selected key 1`] = `
               style={
                 {
                   "color": "#242424",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "600",
                   "margin": 0,
                 }
@@ -1846,7 +1739,7 @@ exports[`TabList component tests TabList selected key 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -1856,7 +1749,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#185abd",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -1882,9 +1775,6 @@ exports[`TabList component tests TabList selected key 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -1897,17 +1787,13 @@ exports[`TabList component tests TabList selected key 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1918,8 +1804,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -1958,9 +1843,9 @@ exports[`TabList component tests TabList selected key 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -1973,7 +1858,7 @@ exports[`TabList component tests TabList selected key 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -1983,7 +1868,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -2009,9 +1894,6 @@ exports[`TabList component tests TabList selected key 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -2024,17 +1906,13 @@ exports[`TabList component tests TabList selected key 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -2045,8 +1923,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -2085,9 +1962,9 @@ exports[`TabList component tests TabList selected key 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 12,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 13,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -2100,7 +1977,7 @@ exports[`TabList component tests TabList selected key 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -2110,7 +1987,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -2180,9 +2057,6 @@ exports[`TabList component tests TabList size 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -2195,17 +2069,13 @@ exports[`TabList component tests TabList size 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -2216,8 +2086,7 @@ exports[`TabList component tests TabList size 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -2256,9 +2125,9 @@ exports[`TabList component tests TabList size 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 14,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 15,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -2271,7 +2140,7 @@ exports[`TabList component tests TabList size 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -2281,7 +2150,7 @@ exports[`TabList component tests TabList size 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -2307,9 +2176,6 @@ exports[`TabList component tests TabList size 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -2322,17 +2188,13 @@ exports[`TabList component tests TabList size 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -2343,8 +2205,7 @@ exports[`TabList component tests TabList size 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -2383,9 +2244,9 @@ exports[`TabList component tests TabList size 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 14,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 15,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -2398,7 +2259,7 @@ exports[`TabList component tests TabList size 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -2408,7 +2269,7 @@ exports[`TabList component tests TabList size 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }
@@ -2434,9 +2295,6 @@ exports[`TabList component tests TabList size 1`] = `
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
-            "multiselectable": undefined,
-            "readOnly": undefined,
-            "required": undefined,
             "selected": false,
           }
         }
@@ -2449,17 +2307,13 @@ exports[`TabList component tests TabList size 1`] = `
           }
         }
         accessible={true}
-        disabled={false}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
         onLayout={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -2470,8 +2324,7 @@ exports[`TabList component tests TabList size 1`] = `
           {
             "alignItems": "center",
             "alignSelf": "flex-start",
-            "backgroundColor": "#00000000",
-            "borderColor": "#00000000",
+            "backgroundColor": undefined,
             "borderRadius": 4,
             "borderWidth": 2,
             "display": "flex",
@@ -2510,9 +2363,9 @@ exports[`TabList component tests TabList size 1`] = `
               numberOfLines={1}
               style={
                 {
-                  "color": "#424242",
-                  "fontFamily": "Segoe UI",
-                  "fontSize": 14,
+                  "color": "#616161",
+                  "fontFamily": "System",
+                  "fontSize": 15,
                   "fontWeight": "400",
                   "margin": 0,
                 }
@@ -2525,7 +2378,7 @@ exports[`TabList component tests TabList size 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": undefined,
               "height": 2,
               "paddingHorizontal": 12,
               "width": "100%",
@@ -2535,7 +2388,7 @@ exports[`TabList component tests TabList size 1`] = `
           <View
             style={
               {
-                "backgroundColor": "#00000000",
+                "backgroundColor": undefined,
                 "borderRadius": 99,
                 "flex": 1,
               }

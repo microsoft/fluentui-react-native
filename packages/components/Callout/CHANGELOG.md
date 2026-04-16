@@ -1,5 +1,32 @@
 # Change Log - @fluentui-react-native/callout
 
+## 0.28.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @uifabricshared/foundation-composable@0.14.2
+  - @uifabricshared/foundation-settings@0.16.2
+  - @uifabricshared/foundation-compose@1.16.2
+  - @fluentui-react-native/adapters@0.14.2
+  - @fluentui-react-native/tokens@0.24.2
+
+## 0.28.1
+
+### Patch Changes
+
+- f72b43a: Fix codegen definitions for native components in repo
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @uifabricshared/foundation-composable@0.14.1
+  - @uifabricshared/foundation-settings@0.16.1
+  - @uifabricshared/foundation-compose@1.16.1
+  - @fluentui-react-native/adapters@0.14.1
+  - @fluentui-react-native/tokens@0.24.1
+
 ## 0.28.0
 
 ### Minor Changes

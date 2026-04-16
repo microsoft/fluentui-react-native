@@ -1,5 +1,29 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
+## 0.14.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/use-styling@0.14.2
+  - @fluentui-react-native/theming-utils@0.27.2
+  - @fluentui-react-native/framework@0.15.2
+  - @fluentui-react-native/tokens@0.24.2
+
+## 0.14.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/use-styling@0.14.1
+  - @fluentui-react-native/theming-utils@0.27.1
+  - @fluentui-react-native/framework@0.15.1
+  - @fluentui-react-native/tokens@0.24.1
+
 ## 0.14.0
 
 ### Minor Changes

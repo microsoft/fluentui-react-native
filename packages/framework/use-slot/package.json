@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/use-slot",
-  "version": "0.7.0",
+  "version": "0.7.2",
   "description": "Hook function to use a component as a pluggable slot",
   "keywords": [],
   "license": "MIT",
@@ -27,9 +27,9 @@
     "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
+    "format": "fluentui-scripts format",
     "lint": "fluentui-scripts eslint",
     "lint-package": "fluentui-scripts lint-package",
-    "format": "fluentui-scripts format",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",
@@ -51,15 +51,15 @@
     "@react-native/babel-preset": "^0.81.0",
     "@react-native/metro-config": "^0.81.0",
     "@types/jest": "^29.0.0",
-    "@types/react": "~19.1.0",
+    "@types/react": "~19.1.4",
     "@types/react-test-renderer": "^19.1.0",
-    "react": "19.1.0",
-    "react-native": "^0.81.0",
-    "react-test-renderer": "19.1.0"
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-test-renderer": "19.1.4"
   },
   "peerDependencies": {
-    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.0",
-    "react": "18.2.0 || 19.0.0 || 19.1.0"
+    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
+    "react": "18.2.0 || 19.0.0 || 19.1.4"
   },
   "peerDependenciesMeta": {
     "@types/react": {

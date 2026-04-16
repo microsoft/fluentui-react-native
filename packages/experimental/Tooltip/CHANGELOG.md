@@ -1,5 +1,27 @@
 # Change Log - @fluentui-react-native/tooltip
 
+## 0.5.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/callout@0.28.2
+  - @fluentui-react-native/framework-base@0.3.2
+
+## 0.5.1
+
+### Patch Changes
+
+- f72b43a: Fix codegen definitions for native components in repo
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [f72b43a]
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/callout@0.28.1
+  - @fluentui-react-native/framework-base@0.3.1
+
 ## 0.5.0
 
 ### Minor Changes

@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
+## 0.7.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+
+## 0.7.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+
 ## 0.7.0
 
 ### Minor Changes

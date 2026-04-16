@@ -25,7 +25,7 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
-    "@react-native/babel-preset": "catalog:0.74",
+    "@react-native/babel-preset": "catalog:0.81",
     "@rnx-kit/babel-preset-metro-react-native": "catalog:"
   },
   "peerDependencies": {

@@ -1,5 +1,29 @@
 # Change Log - @uifabricshared/theming-react-native
 
+## 0.21.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @uifabricshared/theme-registry@0.13.2
+  - @uifabricshared/theming-ramp@0.21.2
+  - @fluentui-react-native/default-theme@0.27.2
+  - @fluentui-react-native/win32-theme@0.39.2
+
+## 0.21.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @uifabricshared/theme-registry@0.13.1
+  - @uifabricshared/theming-ramp@0.21.1
+  - @fluentui-react-native/default-theme@0.27.1
+  - @fluentui-react-native/win32-theme@0.39.1
+
 ## 0.21.0
 
 ### Minor Changes

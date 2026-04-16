@@ -1,5 +1,36 @@
 # Change Log - @fluentui-react-native/dropdown
 
+## 0.11.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/interactive-hooks@0.28.2
+  - @fluentui-react-native/theme-tokens@0.28.2
+  - @fluentui-react-native/framework@0.15.2
+  - @fluentui-react-native/callout@0.28.2
+  - @fluentui-react-native/button@0.40.2
+  - @fluentui-react-native/text@0.25.2
+  - @fluentui-react-native/adapters@0.14.2
+
+## 0.11.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [f72b43a]
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/callout@0.28.1
+  - @fluentui-react-native/button@0.40.1
+  - @fluentui-react-native/interactive-hooks@0.28.1
+  - @fluentui-react-native/theme-tokens@0.28.1
+  - @fluentui-react-native/framework@0.15.1
+  - @fluentui-react-native/text@0.25.1
+  - @fluentui-react-native/adapters@0.14.1
+
 ## 0.11.0
 
 ### Minor Changes

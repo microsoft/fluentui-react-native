@@ -1,5 +1,37 @@
 # Change Log - @fluentui-react-native/input
 
+## 0.8.2
+
+### Patch Changes
+
+- 8a7b549: Update to the latest rnx-kit versions, fix some typing issues, and correct the vscode settings
+- Updated dependencies [8a7b549]
+  - @fluentui-react-native/interactive-hooks@0.28.2
+  - @fluentui-react-native/use-styling@0.14.2
+  - @fluentui-react-native/theme-tokens@0.28.2
+  - @fluentui-react-native/framework@0.15.2
+  - @fluentui-react-native/icon@0.22.2
+  - @fluentui-react-native/text@0.25.2
+  - @fluentui-react-native/styling-utils@0.8.2
+  - @fluentui-react-native/tokens@0.24.2
+
+## 0.8.1
+
+### Patch Changes
+
+- 0d6e9c1: chore: migrate to `oxfmt`
+- ac6e7af: Ensure packages have a default export that references the typescript entrypoint and clean up build dependency ordering
+- Updated dependencies [0d6e9c1]
+- Updated dependencies [ac6e7af]
+  - @fluentui-react-native/interactive-hooks@0.28.1
+  - @fluentui-react-native/use-styling@0.14.1
+  - @fluentui-react-native/theme-tokens@0.28.1
+  - @fluentui-react-native/framework@0.15.1
+  - @fluentui-react-native/icon@0.22.1
+  - @fluentui-react-native/text@0.25.1
+  - @fluentui-react-native/styling-utils@0.8.1
+  - @fluentui-react-native/tokens@0.24.1
+
 ## 0.8.0
 
 ### Minor Changes

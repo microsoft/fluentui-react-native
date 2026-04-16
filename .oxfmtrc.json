@@ -4,7 +4,7 @@
   "singleQuote": true,
   "ignorePatterns": [
     ".yarnrc.yml",
-    ".changesets/*.md",
+    ".changeset/*.md",
     "**/__fixtures__/**",
     "**/__testfixtures__/**",
     "**/lib-commonjs/**",

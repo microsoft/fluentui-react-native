@@ -9,30 +9,27 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git"
   },
   "workspaces": [
+    ".",
     "apps/*",
     "packages/**",
     "scripts"
   ],
   "scripts": {
     "build": "lage build-all",
-    "buildci": "lage buildci",
     "clean-all": "node ./scripts/src/preinstall/clean-all.js",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle": "lage bundle",
     "clean": "lage clean",
-    "change": "changeset",
+    "change": "node .github/scripts/change.mts",
     "changeset:version": "node .github/scripts/changeset-version-with-postbump.mts",
-    "changeset:validate": "node .github/scripts/validate-changesets.mts",
+    "change:check": "node .github/scripts/change.mts --check",
     "check-publishing": "node ./scripts/src/cli.mjs check-publishing",
-    "lint": "lage lint",
     "lint-fix": "cross-env FURN_FIX_MODE=true lage lint",
-    "lint-package": "lage lint-package",
     "lint-package-fix": "cross-env FURN_FIX_MODE=true lage lint-package",
-    "pr-check": "lage pr-check",
     "preinstall": "node ./scripts/src/preinstall/use-yarn-please.js",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
-    "test": "lage test",
+    "lint-lockfile": "lint-lockfile",
     "test-links": "markdown-link-check"
   },
   "devDependencies": {
@@ -43,7 +40,7 @@
     "@babel/preset-typescript": "catalog:",
     "@babel/runtime": "catalog:",
     "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.28.0",
+    "@changesets/cli": "^2.30.0",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/lint-lockfile": "catalog:",
     "babel-jest": "^29.7.0",
@@ -57,12 +54,14 @@
     "zx": "^8.2.4"
   },
   "resolutions": {
-    "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch"
+    "axios": "^1.13.5",
+    "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch",
+    "unicorn-magic": "^0.4.0"
   },
   "engines": {
     "node": ">=22.12"
   },
-  "packageManager": "yarn@4.12.0",
+  "packageManager": "yarn@4.13.0",
   "rnx-kit": {
     "kitType": "library"
   }

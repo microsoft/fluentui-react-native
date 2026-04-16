@@ -14,20 +14,34 @@ import { $, cd, echo, fs } from 'zx';
 
 const DEPENDENCY_PROFILES_DIR = 'packages/dependency-profiles';
 
+function bumpPatch(version: string): string {
+  const [major, minor, patch] = version.split('.').map(Number);
+  return `${major}.${minor}.${patch + 1}`;
+}
+
 echo('📦 Running changeset version...');
 await $`yarn changeset version`;
 
-// Undo the commit that changeset version made, but keep the changes
-// This allows the changesets action to create a single commit with all changes
-echo('🔙 Undoing changeset commit (keeping changes)...');
-await $`git reset --soft HEAD~1`;
-
+// Changesets doesn't bump or update the dependency-profiles package, so we need to do that manually
 echo('\n🔄 Updating dependency-profiles...');
 if (fs.existsSync(DEPENDENCY_PROFILES_DIR)) {
+  const profileIndexPath = `${DEPENDENCY_PROFILES_DIR}/src/index.js`;
+  const profileBefore = fs.readFileSync(profileIndexPath, 'utf-8');
+
   cd(DEPENDENCY_PROFILES_DIR);
   await $`yarn update-profile`;
   cd('../..');
-  echo('✅ dependency-profiles updated');
+
+  const profileAfter = fs.readFileSync(profileIndexPath, 'utf-8');
+  if (profileAfter !== profileBefore) {
+    const pkgPath = `${DEPENDENCY_PROFILES_DIR}/package.json`;
+    const pkg = fs.readJsonSync(pkgPath);
+    pkg.version = bumpPatch(pkg.version);
+    fs.writeJsonSync(pkgPath, pkg, { spaces: 2 });
+    echo(`✅ dependency-profiles updated and bumped to ${pkg.version}`);
+  } else {
+    echo('✅ dependency-profiles updated (no version change needed)');
+  }
 } else {
   echo('⚠️  dependency-profiles not found, skipping');
 }

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/dependency-profiles",
-  "version": "0.8.69",
+  "version": "0.8.71",
   "description": "@rnx-kit/align-deps profiles covering packages published from FluentUI-React-Native",
   "license": "MIT",
   "repository": {
@@ -17,6 +17,18 @@
     "update-profile": "node update-profile.mts"
   },
   "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@office-iss/react-native-win32": "^0.74.0",
+    "@types/react": "~18.2.0",
+    "react": "18.2.0",
+    "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
+    "react-native-svg": ">=15.4.0 <15.13.0",
+    "react-native-windows": "^0.74.0",
+    "semver": "^7.7.3",
+    "workspace-tools": "^0.26.3"
+  },
+  "peerDependencies": {
     "@fluentui-react-native/adapters": "*",
     "@fluentui-react-native/android-theme": "*",
     "@fluentui-react-native/apple-theme": "*",
@@ -39,6 +51,7 @@
     "@fluentui-react-native/experimental-native-date-picker": "*",
     "@fluentui-react-native/experimental-shadow": "*",
     "@fluentui-react-native/experimental-shimmer": "*",
+    "@fluentui-react-native/experimental-stack": "*",
     "@fluentui-react-native/focus-trap-zone": "*",
     "@fluentui-react-native/focus-zone": "*",
     "@fluentui-react-native/framework": "*",
@@ -54,15 +67,12 @@
     "@fluentui-react-native/popover": "*",
     "@fluentui-react-native/pressable": "*",
     "@fluentui-react-native/radio-group": "*",
-    "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/separator": "*",
     "@fluentui-react-native/spinner": "*",
     "@fluentui-react-native/stack": "*",
     "@fluentui-react-native/styling-utils": "*",
     "@fluentui-react-native/switch": "*",
     "@fluentui-react-native/tablist": "*",
-    "@fluentui-react-native/tester": "*",
-    "@fluentui-react-native/tester-win32": "*",
     "@fluentui-react-native/text": "*",
     "@fluentui-react-native/theme": "*",
     "@fluentui-react-native/theme-tokens": "*",
@@ -77,8 +87,8 @@
     "@fluentui-react-native/use-tokens": "*",
     "@fluentui-react-native/win32-theme": "*",
     "@fluentui/react-native": "*",
-    "@office-iss/react-native-win32": "^0.74.0",
-    "@types/react": "~18.2.0",
+    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.0",
     "@uifabricshared/foundation-composable": "*",
     "@uifabricshared/foundation-compose": "*",
     "@uifabricshared/foundation-settings": "*",
@@ -87,12 +97,219 @@
     "@uifabricshared/themed-settings": "*",
     "@uifabricshared/theming-ramp": "*",
     "@uifabricshared/theming-react-native": "*",
-    "react": "18.2.0",
-    "react-native": "^0.74.0",
-    "react-native-macos": "^0.74.0",
-    "react-native-svg": ">=15.4.0 <15.13.0",
-    "react-native-windows": "^0.74.0",
-    "semver": "^7.7.3",
-    "workspace-tools": "^0.26.3"
+    "react": "18.2.0 || 19.0.0 || 19.1.0",
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-svg": ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
+  },
+  "peerDependenciesMeta": {
+    "@fluentui-react-native/adapters": {
+      "optional": true
+    },
+    "@fluentui-react-native/android-theme": {
+      "optional": true
+    },
+    "@fluentui-react-native/apple-theme": {
+      "optional": true
+    },
+    "@fluentui-react-native/avatar": {
+      "optional": true
+    },
+    "@fluentui-react-native/badge": {
+      "optional": true
+    },
+    "@fluentui-react-native/button": {
+      "optional": true
+    },
+    "@fluentui-react-native/callout": {
+      "optional": true
+    },
+    "@fluentui-react-native/checkbox": {
+      "optional": true
+    },
+    "@fluentui-react-native/chip": {
+      "optional": true
+    },
+    "@fluentui-react-native/composition": {
+      "optional": true
+    },
+    "@fluentui-react-native/contextual-menu": {
+      "optional": true
+    },
+    "@fluentui-react-native/default-theme": {
+      "optional": true
+    },
+    "@fluentui-react-native/divider": {
+      "optional": true
+    },
+    "@fluentui-react-native/dropdown": {
+      "optional": true
+    },
+    "@fluentui-react-native/experimental-activity-indicator": {
+      "optional": true
+    },
+    "@fluentui-react-native/experimental-avatar": {
+      "optional": true
+    },
+    "@fluentui-react-native/experimental-checkbox": {
+      "optional": true
+    },
+    "@fluentui-react-native/experimental-expander": {
+      "optional": true
+    },
+    "@fluentui-react-native/experimental-menu-button": {
+      "optional": true
+    },
+    "@fluentui-react-native/experimental-native-date-picker": {
+      "optional": true
+    },
+    "@fluentui-react-native/experimental-shadow": {
+      "optional": true
+    },
+    "@fluentui-react-native/experimental-shimmer": {
+      "optional": true
+    },
+    "@fluentui-react-native/experimental-stack": {
+      "optional": true
+    },
+    "@fluentui-react-native/focus-trap-zone": {
+      "optional": true
+    },
+    "@fluentui-react-native/focus-zone": {
+      "optional": true
+    },
+    "@fluentui-react-native/framework": {
+      "optional": true
+    },
+    "@fluentui-react-native/icon": {
+      "optional": true
+    },
+    "@fluentui-react-native/interactive-hooks": {
+      "optional": true
+    },
+    "@fluentui-react-native/link": {
+      "optional": true
+    },
+    "@fluentui-react-native/menu": {
+      "optional": true
+    },
+    "@fluentui-react-native/menu-button": {
+      "optional": true
+    },
+    "@fluentui-react-native/notification": {
+      "optional": true
+    },
+    "@fluentui-react-native/overflow": {
+      "optional": true
+    },
+    "@fluentui-react-native/persona": {
+      "optional": true
+    },
+    "@fluentui-react-native/persona-coin": {
+      "optional": true
+    },
+    "@fluentui-react-native/popover": {
+      "optional": true
+    },
+    "@fluentui-react-native/pressable": {
+      "optional": true
+    },
+    "@fluentui-react-native/radio-group": {
+      "optional": true
+    },
+    "@fluentui-react-native/separator": {
+      "optional": true
+    },
+    "@fluentui-react-native/spinner": {
+      "optional": true
+    },
+    "@fluentui-react-native/stack": {
+      "optional": true
+    },
+    "@fluentui-react-native/styling-utils": {
+      "optional": true
+    },
+    "@fluentui-react-native/switch": {
+      "optional": true
+    },
+    "@fluentui-react-native/tablist": {
+      "optional": true
+    },
+    "@fluentui-react-native/text": {
+      "optional": true
+    },
+    "@fluentui-react-native/theme": {
+      "optional": true
+    },
+    "@fluentui-react-native/theme-tokens": {
+      "optional": true
+    },
+    "@fluentui-react-native/theme-types": {
+      "optional": true
+    },
+    "@fluentui-react-native/themed-stylesheet": {
+      "optional": true
+    },
+    "@fluentui-react-native/theming-utils": {
+      "optional": true
+    },
+    "@fluentui-react-native/tokens": {
+      "optional": true
+    },
+    "@fluentui-react-native/tooltip": {
+      "optional": true
+    },
+    "@fluentui-react-native/use-slot": {
+      "optional": true
+    },
+    "@fluentui-react-native/use-slots": {
+      "optional": true
+    },
+    "@fluentui-react-native/use-styling": {
+      "optional": true
+    },
+    "@fluentui-react-native/use-tokens": {
+      "optional": true
+    },
+    "@fluentui-react-native/win32-theme": {
+      "optional": true
+    },
+    "@fluentui/react-native": {
+      "optional": true
+    },
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "@uifabricshared/foundation-composable": {
+      "optional": true
+    },
+    "@uifabricshared/foundation-compose": {
+      "optional": true
+    },
+    "@uifabricshared/foundation-settings": {
+      "optional": true
+    },
+    "@uifabricshared/foundation-tokens": {
+      "optional": true
+    },
+    "@uifabricshared/theme-registry": {
+      "optional": true
+    },
+    "@uifabricshared/themed-settings": {
+      "optional": true
+    },
+    "@uifabricshared/theming-ramp": {
+      "optional": true
+    },
+    "@uifabricshared/theming-react-native": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
   }
 }

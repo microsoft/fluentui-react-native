@@ -4,6 +4,9 @@
   "recommendations": [
     // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    // Use the OXC formatter as the default formatter
+    "oxc.oxc-vscode",
+    // Use the native typescript preview to run the editor typescript server
+    "typescriptteam.native-preview"
   ]
 }
