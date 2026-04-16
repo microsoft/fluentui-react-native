@@ -24,7 +24,7 @@
     "@rnx-kit/config": "^0.7.4"
   },
   "devDependencies": {
-    "@rnx-kit/tsconfig": "^2.1.1"
+    "@rnx-kit/tsconfig": "catalog:"
   },
   "furn": {
     "packageType": "tooling"

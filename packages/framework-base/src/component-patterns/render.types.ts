@@ -1,6 +1,6 @@
 import type React from 'react';
 //import type ReactJSX from 'react/jsx-runtime';
-import type { FurnJSX } from '../jsx-namespace';
+import type { FurnJSX } from '../jsx-namespace.ts';
 
 /**
  * Base types for rendering components in a react application, extracted from react types

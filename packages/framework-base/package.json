@@ -10,6 +10,7 @@
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework-base"
   },
+  "type": "module",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@fluentui-react-native/config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/react-configs": "workspace:*",

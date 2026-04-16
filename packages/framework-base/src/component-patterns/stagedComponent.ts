@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { StagedRender, ComposableFunction } from './render.types';
+import type { StagedRender, ComposableFunction } from './render.types.ts';
 
 function asArray<T>(val: T | T[]): T[] {
   return Array.isArray(val) ? val : [val];

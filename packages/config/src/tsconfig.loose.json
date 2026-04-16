@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.strict.json",
+  "compilerOptions": {
+    "strictBindCallApply": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "rewriteRelativeImportExtensions": true
+  }
+}

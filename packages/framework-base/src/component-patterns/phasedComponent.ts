@@ -1,7 +1,7 @@
 import React from 'react';
-import type { ComposableFunction, PhasedComponent, PhasedRender, FunctionComponent } from './render.types';
-import { renderForJsxRuntime } from './render';
-import type { LegacyDirectComponent } from './render.types';
+import type { ComposableFunction, PhasedComponent, PhasedRender, FunctionComponent } from './render.types.ts';
+import { renderForJsxRuntime } from './render.ts';
+import type { LegacyDirectComponent } from './render.types.ts';
 
 /**
  * Extract the phased render function from a component, if it has one.

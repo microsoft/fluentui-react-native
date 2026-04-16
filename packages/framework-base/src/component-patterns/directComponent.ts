@@ -1,4 +1,4 @@
-import type { FunctionComponent } from './render.types';
+import type { FunctionComponent } from './render.types.ts';
 
 /**
  * @param component functional component, usually a closure, to make into a direct component

@@ -1,7 +1,7 @@
-import type { MergeOptions } from '../immutable-merge/Merge';
-import { immutableMergeCore, filterToObjects } from '../immutable-merge/Merge';
+import type { MergeOptions } from '../immutable-merge/Merge.ts';
+import { immutableMergeCore, filterToObjects } from '../immutable-merge/Merge.ts';
 
-import { mergeStyles } from './mergeStyles';
+import { mergeStyles } from './mergeStyles.ts';
 
 /**
  * Props will not deeply merge with the exception of a style property.  Also className needs to be handled specially.

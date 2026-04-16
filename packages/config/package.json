@@ -1,0 +1,37 @@
+{
+  "name": "@fluentui-react-native/config",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Combined configurations for Fluent UI React Native packages",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/config"
+  },
+  "exports": {
+    "./babel": "./src/babel.config.cjs",
+    "./tsconfig.json": "./src/tsconfig.loose.json",
+    "./tsconfig.strict.json": "./src/tsconfig.strict.json"
+  },
+  "dependencies": {
+    "@babel/core": "catalog:",
+    "@babel/plugin-transform-typescript": "catalog:",
+    "@babel/runtime": "catalog:",
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:",
+    "@rnx-kit/tsconfig": "catalog:"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@babel/runtime": "catalog:",
+    "@react-native/babel-preset": "catalog:0.81",
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:",
+    "@typescript/native-preview": "catalog:"
+  },
+  "peerDependencies": {
+    "@react-native/babel-preset": "*"
+  },
+  "furn": {
+    "packageType": "tooling"
+  }
+}

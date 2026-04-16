@@ -1,6 +1,6 @@
 import React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
-import type { RenderType, RenderResult, DirectComponent, LegacyDirectComponent } from './render.types';
+import type { RenderType, RenderResult, DirectComponent, LegacyDirectComponent } from './render.types.ts';
 
 export type CustomRender = () => RenderResult;
 
@@ -45,7 +45,7 @@ export function renderForJsxRuntime<TProps>(
     }
   }
   // Extract key from props to avoid React 19 warning about spreading key prop
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const { key: propsKey, ...propsWithoutKey } = props as any;
   // Use explicitly passed key, or fall back to key from props
   const finalKey = key ?? propsKey;

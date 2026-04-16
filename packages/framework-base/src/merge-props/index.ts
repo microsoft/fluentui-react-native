@@ -1,3 +1,3 @@
-export type { StyleProp } from './mergeStyles.types';
-export { mergeStyles } from './mergeStyles';
-export { mergeProps } from './mergeProps';
+export type { StyleProp } from './mergeStyles.types.ts';
+export { mergeStyles } from './mergeStyles.ts';
+export { mergeProps } from './mergeProps.ts';

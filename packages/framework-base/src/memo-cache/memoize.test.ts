@@ -1,4 +1,4 @@
-import { memoize } from './memoize';
+import { memoize } from './memoize.ts';
 
 let _globalCalls = 0;
 
