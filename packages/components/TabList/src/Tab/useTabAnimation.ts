@@ -35,7 +35,8 @@ export function useTabAnimation(
     if (tabKey === selectedKey && updateAnimatedIndicatorStyles) {
       updateAnimatedIndicatorStyles({ backgroundColor: tokens.indicatorColor, borderRadius: tokens.indicatorRadius });
     }
-  }, [tabKey, selectedKey, tokens.indicatorColor, tokens.indicatorRadius, updateAnimatedIndicatorStyles]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- effect does not need to fire on updateAnimatedIndicatorStyles changing
+  }, [tabKey, selectedKey, tokens.indicatorColor, tokens.indicatorRadius]);
 
   /**
    * This checks to see if we have relevant info to calculate the layout position and dimensions of the indicator. If this check fails, we don't

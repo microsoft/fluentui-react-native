@@ -77,7 +77,8 @@ export const RadioButton = compose<IRadioButtonType>({
       if (buttonKey == selectedKey) {
         updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
       }
-    }, [buttonKey, componentRef, selectedKey, updateSelectedButtonRef]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+    }, []);
 
     // Explicitly only run on mount and unmount
     React.useEffect(() => {
@@ -91,7 +92,8 @@ export const RadioButton = compose<IRadioButtonType>({
         removeRadioButtonKey(buttonKey);
         removeRadioButtonEnabledKey(buttonKey);
       };
-    }, [addRadioButtonEnabledKey, addRadioButtonKey, buttonKey, disabled, removeRadioButtonEnabledKey, removeRadioButtonKey]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+    }, []);
 
     const isRTL = I18nManager.isRTL;
 
@@ -124,7 +126,8 @@ export const RadioButton = compose<IRadioButtonType>({
         componentRef?.current?.focus();
         updateInvoked && updateInvoked(false);
       }
-    }, [buttonKey, componentRef, disabled, invoked, selectedKey, updateInvoked, updateSelectedButtonRef]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-run when invoked changes
+    }, [invoked]);
 
     const keys = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'];
 

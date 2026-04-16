@@ -52,7 +52,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     if (value === selectedValue && !isDisabled) {
       updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
     }
-  }, [componentRef, isDisabled, selectedValue, updateSelectedButtonRef, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+  }, []);
 
   // Ensure focus is placed on button after click
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);

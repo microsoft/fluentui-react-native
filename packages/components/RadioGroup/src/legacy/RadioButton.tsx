@@ -57,7 +57,8 @@ export const RadioButton = compose<IRadioButtonType>({
       if (buttonKey == selectedKey) {
         updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
       }
-    }, [buttonKey, componentRef, selectedKey, updateSelectedButtonRef]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+    }, []);
 
     // Ensure focus is placed on button after click
     const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);

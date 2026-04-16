@@ -70,7 +70,8 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
       delete overflowItemUpdateCallbacks[id];
       overflowManager.removeItem(id);
     },
-    [overflowItemUpdateCallbacks, overflowManager],
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- overflowManager is on a ref, not needed as a dependency
+    [overflowItemUpdateCallbacks],
   );
 
   const userSetLayoutState = React.useCallback((data: SetLayoutStateParam) => {
@@ -160,7 +161,8 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
       overflowManager.update(containerSize);
     }
     // We only want to run this layout effect whenever the container's size updates.
-  }, [containerSize, layoutState.container, onOverflowUpdate, onUpdateItemDimension, onUpdateItemVisibility, overflowManager, padding]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally only re-run when containerSize changes
+  }, [containerSize]);
 
   // On initial mount, wait for layout to run for all items / components before showing.
   // For future items that may be added / removed, this will remain true to reduce flicker.

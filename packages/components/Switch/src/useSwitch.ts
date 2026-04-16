@@ -56,7 +56,8 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
 
       setIsInit(false);
     }
-  }, [animation, checkedState, isInit, thumbTranslateValue, trackBackgroundAnimation]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- animation objects are refs, only re-run on checked state change
+  }, [checked, checkedState]);
 
   const switchAnimationStyles = React.useMemo(() => {
     // transform over toggled on position to toggled off position and vice versa
@@ -89,7 +90,8 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
         }),
       },
     };
-  }, [animation, animationConfig.toggleOffBgColor, animationConfig.toggleOnBgColor, checkedState, trackBackgroundAnimation]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- animation objects are stable refs
+  }, [checkedState]);
 
   const focusRef = disabled ? null : componentRef;
 

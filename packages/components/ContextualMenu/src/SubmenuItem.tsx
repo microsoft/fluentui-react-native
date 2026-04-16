@@ -43,26 +43,22 @@ export const SubmenuItem = compose<SubmenuItemType>({
 
     const cmRef = useViewCommandFocus(componentRef);
 
-    const onItemHoverIn = React.useCallback(
-      (e) => {
-        componentRef.current.focus();
-        onHoverIn && onHoverIn(e);
-      },
-      [componentRef, onHoverIn],
-    );
+    const onItemHoverIn = React.useCallback((e) => {
+      componentRef.current.focus();
+      onHoverIn && onHoverIn(e);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+    }, []);
 
     const onHoverInDelay = Platform.select({
       macos: 100,
       default: 500, // win32
     });
 
-    const onItemHoverOut = React.useCallback(
-      (e) => {
-        context?.dismissSubmenu && context.dismissSubmenu();
-        onHoverOut && onHoverOut(e);
-      },
-      [context, onHoverOut],
-    );
+    const onItemHoverOut = React.useCallback((e) => {
+      context?.dismissSubmenu && context.dismissSubmenu();
+      onHoverOut && onHoverOut(e);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+    }, []);
 
     const onItemPress = React.useCallback(() => {
       if (!disabled) {

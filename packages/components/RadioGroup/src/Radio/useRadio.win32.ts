@@ -75,7 +75,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     if (value === selectedValue && !isDisabled) {
       updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
     }
-  }, [componentRef, isDisabled, selectedValue, updateSelectedButtonRef, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+  }, []);
 
   // Explicitly only run on mount and unmount
   React.useEffect(() => {
@@ -84,7 +85,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     return () => {
       removeRadioValue(value);
     };
-  }, [addRadioValue, removeRadioValue, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+  }, []);
 
   React.useEffect(() => {
     if (isDisabled) {
@@ -92,7 +94,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     } else {
       addRadioEnabledValue(value);
     }
-  }, [addRadioEnabledValue, isDisabled, removeRadioEnabledValue, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-run when isDisabled changes
+  }, [isDisabled]);
 
   const isRTL = I18nManager.isRTL;
 
@@ -129,7 +132,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       componentRef?.current?.focus();
       updateInvoked && updateInvoked(false);
     }
-  }, [componentRef, invoked, isDisabled, selectedValue, updateInvoked, updateSelectedButtonRef, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-run when invoked changes
+  }, [invoked]);
 
   const keys = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'];
 

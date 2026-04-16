@@ -9,7 +9,6 @@
     "directory": "packages/configs/lint-config-rules"
   },
   "type": "module",
-  "main": "./private.ts",
   "exports": {
     ".": {
       "default": "./private.ts"

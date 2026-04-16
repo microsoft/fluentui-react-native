@@ -35,7 +35,8 @@ export const useMenuItemRadio = (props: MenuItemRadioProps): MenuItemRadioInfo =
     return () => {
       removeRadioItem(name);
     };
-  }, [addRadioItem, name, removeRadioItem]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+  }, []);
 
   return useMenuCheckboxInteraction(props, toggleChecked);
 };

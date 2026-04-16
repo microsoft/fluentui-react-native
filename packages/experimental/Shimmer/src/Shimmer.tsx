@@ -38,15 +38,7 @@ export const Shimmer = compose<ShimmerType>({
         shimmerWaveColor: props.shimmerWaveColor ? props.shimmerWaveColor : tokens['shimmerWaveColor'],
         shimmerWaveColorOpacity: tokens['shimmerWaveColorOpacity'],
       }),
-      [
-        props.angle,
-        props.delay,
-        props.duration,
-        props.shimmerColor,
-        props.shimmerWaveColor,
-        props.style,
-        tokens,
-      ],
+      [props.angle, props.delay, props.duration, props.shimmerColor, props.shimmerWaveColor, props.style, tokens],
     );
 
     /* The shimmer animation is implemented using a LinearGradient which travels from left to right.

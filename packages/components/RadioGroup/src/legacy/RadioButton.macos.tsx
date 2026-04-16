@@ -40,7 +40,8 @@ export const RadioButton = compose<IRadioButtonType>({
       if (buttonKey === selectedKey) {
         updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
       }
-    }, [buttonKey, componentRef, selectedKey, updateSelectedButtonRef]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+    }, []);
 
     const styleProps = useStyling(userProps);
     const isSelected = selectedKey === buttonKey;

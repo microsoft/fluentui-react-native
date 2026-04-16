@@ -160,7 +160,8 @@ export const useTabList = (props: TabListProps): TabListInfo => {
         setFocusedTabRef(ref);
       }
     }
-  }, [disabledStateMap, isSelectedTabDisabled, selectedTabKey, tabKeys, tabRefMap]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-run when disabled state of selected tab changes
+  }, [isSelectedTabDisabled]);
 
   // win32 only prop used to implemement CTRL + TAB shortcut native to windows tab components
   const onRootKeyDown = React.useCallback(

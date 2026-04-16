@@ -125,7 +125,7 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
       devOnly: true,
     },
     'tools-eslint': {
-      name: '@fluentui-react-native/eslint-config-rules',
+      name: '@fluentui-react-native/lint-config-rules',
       version: 'workspace:*',
       devOnly: true,
       capabilities: ['tools-core'],

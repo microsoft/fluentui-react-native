@@ -24,7 +24,13 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
     triggerHoverOutTimer,
   } = context;
 
-  const { directionalHint: directionalHintProp, doNotTakePointerCapture: doNotTakePointerCaptureProp, onDismiss: onDismissProp, onKeyDown: onKeyDownProp, onKeyUp: onKeyUpProp } = props;
+  const {
+    directionalHint: directionalHintProp,
+    doNotTakePointerCapture: doNotTakePointerCaptureProp,
+    onDismiss: onDismissProp,
+    onKeyDown: onKeyDownProp,
+    onKeyUp: onKeyUpProp,
+  } = props;
 
   const onDismiss = React.useCallback(() => {
     onDismissProp?.();

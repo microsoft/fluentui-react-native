@@ -87,15 +87,18 @@ export const useTab = (props: TabProps): TabInfo => {
       componentRef && setFocusedTabRef(componentRef);
     }
     return () => removeTabKey(tabKey);
-  }, [addTabKey, componentRef, removeTabKey, selectedKey, setFocusedTabRef, tabKey]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
+  }, []);
 
   React.useEffect(() => {
     updateTabRef(tabKey, componentRef);
-  }, [componentRef, tabKey, updateTabRef]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- hook shouldn't run when updateTabRef changes
+  }, [tabKey, componentRef]);
 
   React.useEffect(() => {
     updateDisabledTabs(tabKey, disabled);
-  }, [disabled, tabKey, updateDisabledTabs]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- hook shouldn't run when updateDisabledTabs changes
+  }, [tabKey, disabled]);
 
   /**
    * Continuing from `handlePressAndDeferFocus`, once we have updated the selection state, we can safely set focus to the correct tab so
@@ -107,7 +110,8 @@ export const useTab = (props: TabProps): TabInfo => {
       componentRef?.current?.focus();
       setInvoked(false);
     }
-  }, [componentRef, invoked, isDisabled, selectedKey, setFocusedTabRef, setInvoked, tabKey]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- hook should only run when invoked/setInvoked are updated
+  }, [invoked, setInvoked]);
 
   // Used when creating accessibility properties in mergeSettings below.
   const onAccessibilityActionProp = React.useCallback(
