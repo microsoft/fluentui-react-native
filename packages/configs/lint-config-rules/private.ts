@@ -1,3 +1,4 @@
+/// <reference path="./types.d.ts" />
 import { defineConfig } from 'oxlint';
 import sdlRequired from '@rnx-kit/oxlint-config/sdl-required';
 import strict from '@rnx-kit/oxlint-config/strict';
