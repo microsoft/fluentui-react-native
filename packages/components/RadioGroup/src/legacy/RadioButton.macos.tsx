@@ -22,27 +22,29 @@ export const RadioButton = compose<IRadioButtonType>({
     const defaultComponentRef = React.useRef(null);
     const { content, buttonKey, disabled, componentRef = defaultComponentRef } = userProps;
     const info = React.useContext(RadioGroupContext);
+    const { onChange, selectedKey, updateSelectedButtonRef } = info;
 
     // Reroute the native component's onPress event to RadioGroup's onChange
-    const onPressRerouted = () => {
+    const onPressRerouted = React.useCallback(() => {
       // Prevent calls to RadioGroup's onChange on the currently selected button
-      if (buttonKey != info.selectedKey) {
-        info.onChange && info.onChange(buttonKey);
-        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+      if (buttonKey != selectedKey) {
+        onChange && onChange(buttonKey);
+        updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
       }
-    };
+    }, [buttonKey, componentRef, onChange, selectedKey, updateSelectedButtonRef]);
 
     /* We use the componentRef of the currently selected button to maintain the default tabbable
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
     React.useEffect(() => {
-      if (buttonKey === info.selectedKey) {
-        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+      if (buttonKey === selectedKey) {
+        updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
     }, []);
 
     const styleProps = useStyling(userProps);
-    const isSelected = info.selectedKey === buttonKey;
+    const isSelected = selectedKey === buttonKey;
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
       root: {
         ref: componentRef,

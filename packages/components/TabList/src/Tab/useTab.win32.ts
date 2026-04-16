@@ -87,16 +87,17 @@ export const useTab = (props: TabProps): TabInfo => {
       componentRef && setFocusedTabRef(componentRef);
     }
     return () => removeTabKey(tabKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
   }, []);
 
   React.useEffect(() => {
     updateTabRef(tabKey, componentRef);
-    // Disable exhaustive-deps warning because the hook shouldn't run whenever the excluded dependency, updateTabRef, changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- hook shouldn't run when updateTabRef changes
   }, [tabKey, componentRef]);
 
   React.useEffect(() => {
     updateDisabledTabs(tabKey, disabled);
-    // Disable exhaustive-deps warning because the hook shouldn't run whenever the excluded dependency, updateDisabledTabs, change.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- hook shouldn't run when updateDisabledTabs changes
   }, [tabKey, disabled]);
 
   /**
@@ -109,7 +110,7 @@ export const useTab = (props: TabProps): TabInfo => {
       componentRef?.current?.focus();
       setInvoked(false);
     }
-    // Disable exhaustive-deps warning because hook should only run whenever 'invoked' and its setter are updated.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- hook should only run when invoked/setInvoked are updated
   }, [invoked, setInvoked]);
 
   // Used when creating accessibility properties in mergeSettings below.

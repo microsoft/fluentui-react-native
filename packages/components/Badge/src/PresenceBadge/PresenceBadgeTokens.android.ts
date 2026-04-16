@@ -1,1 +1,1 @@
-export * from './PresenceBadgeTokens.mobile';
+export { defaultPresenceBadgeTokens } from './PresenceBadgeTokens.mobile';

@@ -67,10 +67,10 @@ function resolveToSlotProps<TSlotProps, TTokens, TTheme>(
   cache: GetTypedMemoValue<TTokens>,
 ): TSlotProps {
   const slotProps = {};
-  Object.keys(styles).forEach((key) => {
+  for (const key of Object.keys(styles)) {
     const style = styles[key];
     slotProps[key] = typeof style === 'function' ? style(tokens, theme, cache(null, [key])[1]) : style;
-  });
+  }
   return slotProps as TSlotProps;
 }
 

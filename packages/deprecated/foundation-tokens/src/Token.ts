@@ -51,10 +51,10 @@ export function processTokens<TSlotProps extends ISlotProps, TTokens extends obj
   const tokenPropInfo = _getTokenPropInfo(props, rootSlotProps, tokenKeys);
   const resolvedSlotProps = { tokens: tokenPropInfo.tokens || {} };
 
-  Object.getOwnPropertyNames(handlers).forEach((slotName) => {
+  for (const slotName of Object.getOwnPropertyNames(handlers)) {
     const handler = handlers[slotName];
     resolvedSlotProps[slotName] = handler(slotProps[slotName] || {}, tokenPropInfo as any, theme, slotName, cache);
-  });
+  }
 
   // return the cache entry
   return resolvedSlotProps as unknown as ISlotProps;

@@ -19,8 +19,6 @@ export function createAppleTheme(): ThemeReference {
   // Fetch initial system settings for high contrast mode
   highContrastHandler();
   // Invalidate theme and set prop when high contrast setting changes
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   AccessibilityInfo.addEventListener('highContrastChanged', () => {
     highContrastHandler();
   });
@@ -32,8 +30,6 @@ export function createAppleTheme(): ThemeReference {
 }
 
 function highContrastHandler() {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   AccessibilityInfo.isHighContrastEnabled().then((isEnabled) => {
     setIsHighContrast(isEnabled);
     appleThemeReference.invalidate();

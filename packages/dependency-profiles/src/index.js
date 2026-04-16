@@ -106,8 +106,8 @@ module.exports = {
       "name": "@fluentui-react-native/text",
       "version": "0.25.2"
     },
-    "@fluentui-react-native/eslint-config-rules": {
-      "name": "@fluentui-react-native/eslint-config-rules",
+    "@fluentui-react-native/lint-config-rules": {
+      "name": "@fluentui-react-native/lint-config-rules",
       "version": "0.1.2"
     },
     "@uifabricshared/foundation-composable": {
@@ -512,8 +512,8 @@ module.exports = {
       "name": "@fluentui-react-native/composition",
       "version": "0.11.2"
     },
-    "@fluentui-react-native/eslint-config-rules": {
-      "name": "@fluentui-react-native/eslint-config-rules",
+    "@fluentui-react-native/lint-config-rules": {
+      "name": "@fluentui-react-native/lint-config-rules",
       "version": "0.1.1"
     },
     "@fluentui-react-native/framework": {
@@ -822,8 +822,8 @@ module.exports = {
       "name": "@fluentui-react-native/composition",
       "version": "0.10.2"
     },
-    "@fluentui-react-native/eslint-config-rules": {
-      "name": "@fluentui-react-native/eslint-config-rules",
+    "@fluentui-react-native/lint-config-rules": {
+      "name": "@fluentui-react-native/lint-config-rules",
       "version": "0.1.1"
     },
     "@fluentui-react-native/framework": {
@@ -1144,8 +1144,8 @@ module.exports = {
       "name": "@fluentui-react-native/composition",
       "version": "0.9.2"
     },
-    "@fluentui-react-native/eslint-config-rules": {
-      "name": "@fluentui-react-native/eslint-config-rules",
+    "@fluentui-react-native/lint-config-rules": {
+      "name": "@fluentui-react-native/lint-config-rules",
       "version": "0.1.1"
     },
     "@fluentui-react-native/framework": {
