@@ -2,6 +2,7 @@
 
 exports[`Button component tests Button circular 1`] = `
 <View
+  accessibilityLabel="Circular Button"
   accessibilityRole="button"
   accessibilityState={
     {
