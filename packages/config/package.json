@@ -9,27 +9,62 @@
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/config"
   },
+  "type": "module",
+  "main": "./src/index.ts",
   "exports": {
-    "./babel": "./src/babel.config.cjs",
-    "./tsconfig.json": "./src/tsconfig.loose.json",
-    "./tsconfig.strict.json": "./src/tsconfig.strict.json"
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./align-deps-preset": "./src/kit-config/furn-preset.ts",
+    "./babel": "./src/jest/babel.config.cjs",
+    "./eslint": "./eslint.config.cjs",
+    "./eslint.config.cjs": "./eslint.config.cjs",
+    "./jest": "./src/jest/jest.config.cjs",
+    "./kit-config": "./src/kit-config/rnx-kit.config.cjs",
+    "./package.json": "./package.json",
+    "./tsconfig.json": "./tsconfigs/tsconfig.loose.json",
+    "./tsconfig.strict.json": "./tsconfigs/tsconfig.strict.json"
+  },
+  "scripts": {
+    "build": "tsgo",
+    "build-core": "tsgo"
   },
   "dependencies": {
-    "@babel/core": "catalog:",
+    "@babel/plugin-transform-react-jsx": "catalog:",
+    "@babel/plugin-transform-react-jsx-source": "catalog:",
     "@babel/plugin-transform-typescript": "catalog:",
+    "@babel/preset-env": "catalog:",
+    "@babel/preset-react": "catalog:",
+    "@babel/preset-typescript": "catalog:",
     "@babel/runtime": "catalog:",
+    "@microsoft/eslint-plugin-sdl": "^1.1.0",
+    "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/babel-preset-metro-react-native": "catalog:",
-    "@rnx-kit/tsconfig": "catalog:"
+    "@rnx-kit/config": "catalog:",
+    "@rnx-kit/eslint-plugin": "catalog:",
+    "@rnx-kit/jest-preset": "catalog:",
+    "@rnx-kit/tsconfig": "catalog:",
+    "@rnx-kit/types-kit-config": "catalog:",
+    "babel-jest": "^29.0.0"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
     "@react-native/babel-preset": "catalog:0.81",
     "@rnx-kit/babel-preset-metro-react-native": "catalog:",
-    "@typescript/native-preview": "catalog:"
+    "@rnx-kit/types-node": "catalog:",
+    "@types/jest": "catalog:",
+    "@typescript/native-preview": "catalog:",
+    "jest": "^29.2.1"
   },
   "peerDependencies": {
+    "@babel/core": "*",
     "@react-native/babel-preset": "*"
+  },
+  "peerDependenciesMeta": {
+    "@react-native/babel-preset": {
+      "optional": true
+    }
   },
   "furn": {
     "packageType": "tooling"

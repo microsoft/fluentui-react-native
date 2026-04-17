@@ -1,6 +1,7 @@
 {
-  "extends": "./src/tsconfig.strict.json",
+  "extends": "./tsconfigs/tsconfig.strict.json",
   "compilerOptions": {
+    "rootDir": "src",
     "noEmit": true
   },
   "include": ["src"]
