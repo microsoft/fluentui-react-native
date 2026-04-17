@@ -53,9 +53,12 @@
     "@react-native/babel-preset": "catalog:0.81",
     "@rnx-kit/babel-preset-metro-react-native": "catalog:",
     "@rnx-kit/types-node": "catalog:",
+    "@types/eslint": "catalog:",
     "@types/jest": "catalog:",
+    "@types/node": "catalog:",
     "@typescript/native-preview": "catalog:",
-    "jest": "^29.2.1"
+    "eslint": "catalog:",
+    "jest": "catalog:"
   },
   "peerDependencies": {
     "@babel/core": "*",

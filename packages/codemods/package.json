@@ -42,8 +42,8 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/preset-env": "catalog:",
+    "@fluentui-react-native/config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
@@ -62,7 +62,7 @@
   },
   "rnx-kit": {
     "kitType": "library",
-    "extends": "@fluentui-react-native/kit-config",
+    "extends": "@fluentui-react-native/config/kit-config",
     "alignDeps": {
       "capabilities": [
         "tools-core",

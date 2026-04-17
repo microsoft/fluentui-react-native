@@ -1,1 +1,1 @@
-module.exports = require('./lib-commonjs/jsx-runtime.js');
+export { default } from './lib/jsx-runtime.js';

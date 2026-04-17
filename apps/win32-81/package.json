@@ -48,8 +48,8 @@
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
+    "@fluentui-react-native/config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/rex-win32": "0.81.0-preview.0",
     "@react-native-community/cli": "^20.0.0",
@@ -138,6 +138,6 @@
         "tools-core"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/config/kit-config"
   }
 }

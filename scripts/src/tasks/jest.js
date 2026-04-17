@@ -1,8 +1,8 @@
 // @ts-check
 import { Command, Option } from 'clipanion';
 import { runScript } from '../utils/runScript.js';
-import fs from 'node:fs';
-import path from 'node:path';
+import { getProjectRoot } from '../utils/projectRoot.ts';
+import { isJestEnabled } from '../preinstall/package-config.ts';
 
 export class JestCommand extends Command {
   /** @override */
@@ -18,10 +18,12 @@ export class JestCommand extends Command {
   args = Option.Proxy();
 
   async execute() {
-    if (!fs.existsSync(path.join(process.cwd(), './jest.config.js'))) {
+    const projectRoot = getProjectRoot(process.cwd());
+    if (!isJestEnabled(projectRoot.root, projectRoot.manifest)) {
       console.warn('No jest configuration found, skipping jest.');
       return;
     }
+
     const args = ['--passWithNoTests'];
     if (process.env.TF_BUILD) {
       args.push('--runInBand');

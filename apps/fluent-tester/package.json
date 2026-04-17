@@ -55,6 +55,7 @@
     "@babel/runtime": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/callout": "workspace:*",
+    "@fluentui-react-native/config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*",
     "@fluentui-react-native/experimental-avatar": "workspace:*",
@@ -64,7 +65,6 @@
     "@fluentui-react-native/experimental-native-font-metrics": "workspace:*",
     "@fluentui-react-native/experimental-shimmer": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/menu-button": "workspace:*",
     "@fluentui-react-native/radio-group": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
@@ -181,6 +181,6 @@
         "tools-core"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/config/kit-config"
   }
 }

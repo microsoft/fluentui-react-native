@@ -12,6 +12,23 @@ import type ts from 'typescript';
  */
 export function getResolvedConfig(projRoot: ProjectRoot, analyze?: boolean): ResolvedBuildConfig {
   const buildConfig = projRoot.buildConfig;
+  const packageType = buildConfig.packageType ?? 'library';
+  const depcheck = buildConfig.depcheck ?? {};
+  if (projRoot.manifest.type === 'module') {
+    return {
+      packageType,
+      depcheck,
+      typescript: {
+        engine: buildConfig.typescript?.engine ?? 'tsgo',
+        esmDir: 'lib',
+        cjsDir: '',
+        extraArgs: buildConfig.typescript?.extraArgs,
+        cjsScript: '',
+        esmScript: 'tsgo',
+        checkScript: '',
+      },
+    };
+  }
   return {
     packageType: buildConfig.packageType ?? 'library',
     typescript: getTypescriptBuildConfig(projRoot, buildConfig, analyze),

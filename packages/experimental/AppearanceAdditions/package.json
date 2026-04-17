@@ -40,9 +40,9 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
+    "@fluentui-react-native/config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
@@ -89,6 +89,6 @@
         "tools-core"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/config/kit-config"
   }
 }

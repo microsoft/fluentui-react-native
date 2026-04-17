@@ -5,8 +5,8 @@ export type JestPlatform = (typeof JEST_PLATFORMS)[number];
 
 export type FurnManifestConfig = {
   jestPlatform?: JestPlatform;
-  packageType: 'tooling' | 'library' | 'app';
-  depcheck: {
+  packageType?: 'tooling' | 'library' | 'app';
+  depcheck?: {
     ignoreMatches?: string[];
     ignorePatterns?: string[];
   };

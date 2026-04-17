@@ -1,5 +1,5 @@
 // use require because this is directly invoked via rnx-kit.config.cjs and needs to be CommonJS
-import { presets } from '@rnx-kit/align-deps';
+const { presets } = require('@rnx-kit/align-deps');
 // type imports are stripped so can use ESM style imports
 import type { Package as RNXPackage, MetaPackage } from '@rnx-kit/align-deps';
 
@@ -140,7 +140,7 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
   return newPreset;
 }
 
-export default {
+module.exports = {
   '0.73': formFurnPreset(rnPresets['0.73'], 73),
   '0.74': formFurnPreset(rnPresets['0.74'], 74),
   '0.78': formFurnPreset(rnPresets['0.78'], 78),

@@ -46,8 +46,8 @@
     "@uifabricshared/theming-ramp": "workspace:*"
   },
   "devDependencies": {
+    "@fluentui-react-native/config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
     "@types/react": "~19.1.4",
@@ -98,6 +98,6 @@
         "tools-core"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/config/kit-config"
   }
 }

@@ -2,7 +2,8 @@ import Module from 'node:module';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
-import type { KitConfig } from '@rnx-kit/types-kit-config';
+import type { PackageManifest } from '@fluentui-react-native/config';
+export type { PackageManifest } from '@fluentui-react-native/config';
 
 export type ExportSet = {
   default?: string;
@@ -18,6 +19,7 @@ export type Exports = Record<string, ExportEntry>;
 export type PackageType = 'library' | 'component' | 'app' | 'tooling';
 
 export type ResolvedBuildConfig = {
+  jestPlatform?: 'react' | 'ios' | 'android' | 'windows' | 'macos' | 'win32';
   packageType: PackageType;
   typescript: {
     /** whether to use tsc or tsgo to build this package */
@@ -42,68 +44,6 @@ export type ResolvedBuildConfig = {
 };
 
 export type RepoBuildConfig = Partial<Omit<ResolvedBuildConfig, 'typescript'> & { typescript: Partial<ResolvedBuildConfig['typescript']> }>;
-
-export type PackageManifest = {
-  // Most canonical identity and metadata fields
-  name: string;
-  version: string;
-  private?: boolean;
-  description?: string;
-  keywords?: string[];
-  license?: string;
-  author?: string;
-  contributors?: string[];
-  homepage?: string;
-
-  // Repository and issue tracking
-  repository?: string | Record<string, unknown>;
-  bugs?: Record<string, unknown> | string;
-
-  // Package type and entry points
-  type?: string;
-  main?: string;
-  module?: string;
-  types?: string;
-  typings?: string; // deprecated, use types instead
-  exports?: Exports;
-
-  // files, side effects, and bin
-  files?: string[];
-  sideEffects?: boolean;
-  bin?: string | Record<string, string>;
-
-  // scripts
-  scripts?: Record<string, string>;
-
-  // dependencies
-  dependencies?: Record<string, string>;
-  optionalDependencies?: Record<string, string>;
-  peerDependencies?: Record<string, string>;
-  peerDependenciesMeta?: Record<string, { optional: boolean }>;
-  devDependencies?: Record<string, string>;
-
-  // package manager, tools and environment
-  packageManager?: string;
-  engines?: Record<string, string>;
-  os?: string[];
-  cpu?: string[];
-
-  // monorepo management
-  workspaces?: string[] | { packages: string[] };
-  resolutions?: Record<string, string>;
-
-  // tool configurations
-  furn?: RepoBuildConfig;
-  'rnx-kit'?: KitConfig;
-  eslintConfig?: Record<string, unknown>;
-  jest?: Record<string, unknown>;
-  prettier?: Record<string, unknown>;
-  babel?: Record<string, unknown>;
-  lage?: Record<string, unknown>;
-
-  // publishing and distribution
-  publishConfig?: Record<string, unknown>;
-};
 
 const defaultKeyOrder: string[] = [
   '$schema',
@@ -221,8 +161,8 @@ const defaultKeyOrder: string[] = [
   'pnpm',
 ];
 
-export type PackageRecordKeys = Extract<
-  keyof PackageManifest,
+export type PackageRecordKeys = keyof Pick<
+  PackageManifest,
   | 'dependencies'
   | 'devDependencies'
   | 'peerDependencies'
@@ -282,6 +222,8 @@ export function getRepoProjectRoot() {
   return getProjectRoot(rootPath);
 }
 
+type KeyOrString<T> = T | (string & {});
+
 /**
  * Utilities for looking up information about a given package. This helps loading things like package.json multiple times
  * in a single process and centralizes some functionality.
@@ -291,7 +233,7 @@ export class ProjectRoot {
 
   private _manifestText: string;
   private _manifest: PackageManifest;
-  private _manifestKeys: string[];
+  private _manifestKeys: KeyOrString<keyof PackageManifest>[];
 
   cachedRequire: ReturnType<typeof Module.createRequire> | undefined = undefined;
 

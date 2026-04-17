@@ -6,8 +6,9 @@ import { isFixMode } from '../utils/env.ts';
 import { runAlignDeps } from './runAlignDeps.ts';
 import { DepCheckRunner } from './depcheck.ts';
 import { getCatalog } from '../utils/getCatalog.ts';
-import fs from 'node:fs';
-import path from 'node:path';
+import { getWorkspaceDevDeps, runRules, type RuleContext, type ReportMetadata } from '@fluentui-react-native/config';
+
+const changedManifest = { changedManifest: true };
 
 export class LintPackageCommand extends Command {
   static override paths = [['lint-package']];
@@ -39,8 +40,30 @@ export class LintPackageCommand extends Command {
   private removedCapabilities: string[] = [];
   private getCatalog = getCatalog();
 
+  private report = (level: 'error' | 'warn' | 'info', message: string, metadata?: ReportMetadata) => {
+    if (level === 'error') {
+      this.issues++;
+      console.error(`- Error: ${message}`);
+    } else if (level === 'warn') {
+      console.warn(`- Warning: ${message}`);
+    } else {
+      console.info(`- Fixed: ${message}`);
+    }
+    if (metadata?.changedManifest) {
+      this.changed = true;
+    }
+  };
+
+  private ruleContext: RuleContext = {
+    root: this.projRoot.root,
+    manifest: this.projRoot.manifest,
+    fix: this.fix,
+    report: this.report,
+  };
+
   async execute() {
     this.fix = isFixMode(this.fix);
+    (this.ruleContext.fix as boolean) = this.fix;
     const manifest = this.projRoot.manifest;
     this.isScripts = manifest.name === '@fluentui-react-native/scripts';
     this.isLibrary = !(manifest['rnx-kit']?.kitType === 'app') && manifest.furn?.packageType !== 'tooling';
@@ -60,6 +83,7 @@ export class LintPackageCommand extends Command {
     } else {
       runningOps.push(this.startDependencyCheck());
     }
+    runningOps.push(runRules(this.ruleContext));
 
     // now do the custom linting
     const buildConfig = getResolvedConfig(this.projRoot, true);
@@ -135,30 +159,24 @@ export class LintPackageCommand extends Command {
     const manifest = this.projRoot.manifest;
     this.warnIf(!manifest.description, 'Package is missing a description field');
     this.errorIf(manifest.typings !== undefined, 'typings field is deprecated; use types instead', () => {
-      if (manifest.types === undefined && manifest.typings !== undefined) {
-        this.projRoot.setManifestEntry('types', manifest.typings);
-      }
       this.projRoot.clearManifestEntry('typings');
     });
   }
 
   private checkUsage() {
     const rootDir = this.projRoot.root;
-    if (this.isLibrary) {
-      this.ensuredCapabilities.push('tools-core');
-      const hasJestConfig = fs.existsSync(path.join(rootDir, 'jest.config.js')) || fs.existsSync(path.join(rootDir, 'jest.config.ts'));
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const hasReactJest = this.projRoot.manifest['rnx-kit']?.alignDeps?.capabilities?.includes('tools-jest-react' as any);
-      if (!hasReactJest) {
-        if (hasJestConfig) {
-          this.ensuredCapabilities.push('tools-jest');
-          this.addedDevDeps['@fluentui-react-native/jest-config'] = 'workspace:*';
-        } else {
-          this.removedCapabilities.push('tools-jest', 'babel-preset-react-native', 'tools-babel');
-          this.removedDevDeps.push('@fluentui-react-native/jest-config', '@types/jest', 'jest', 'ts-jest');
-        }
+    const [addedDevDeps, removedDevDeps] = getWorkspaceDevDeps(rootDir, this.projRoot.manifest);
+    for (const dep of addedDevDeps) {
+      if (!this.projRoot.manifest.devDependencies?.[dep]) {
+        this.addedDevDeps[dep] = 'workspace:*';
       }
     }
+    for (const dep of removedDevDeps) {
+      if (this.projRoot.manifest.devDependencies?.[dep] && ~this.removedDevDeps.includes(dep)) {
+        this.removedDevDeps.push(dep);
+      }
+    }
+    this.removedCapabilities.push('tools-core', 'tools-jest', 'tools-babel', 'tools-jest-react', 'tools-eslint');
   }
 
   private checkDependencies() {
@@ -175,9 +193,6 @@ export class LintPackageCommand extends Command {
       dependencies['@office-iss/react-native-win32'] !== undefined,
       '@office-iss/react-native-win32 should be a peerDependency, not a dependency',
     );
-    if (manifest.furn?.packageType !== 'tooling') {
-      this.addedDevDeps['@fluentui-react-native/kit-config'] = 'workspace:*';
-    }
   }
 
   private checkDevDeps() {
@@ -245,7 +260,7 @@ export class LintPackageCommand extends Command {
     }
     if (rnxKitConfig.extends === undefined) {
       rnxKitIssues.push('- Missing rnx-kit.extends field');
-      rnxKitConfig.extends = '@fluentui-react-native/kit-config';
+      rnxKitConfig.extends = '@fluentui-react-native/config/kit-config';
     }
     if (!rnxKitConfig.alignDeps) {
       rnxKitIssues.push('- Missing rnx-kit.alignDeps field');
@@ -307,19 +322,26 @@ export class LintPackageCommand extends Command {
     });
   }
 
-  private validateEntryPoint<T, K extends keyof T>(collection: T, key: K, expectedOutDir: string, otherOutDir: string) {
+  private validateEntryPoint<T, K extends keyof T>(collection: T, key: K, expectedOutDir: string) {
     const entryPoint = typeof collection[key] === 'string' ? (collection[key] as string) : undefined;
     if (entryPoint) {
-      const normalizedEntry = removeDotPrefix(entryPoint) + '/';
-      const expected = `${expectedOutDir}/`;
-      const notExpected = `${otherOutDir}/`;
-      this.errorIf(
-        normalizedEntry.startsWith(notExpected),
-        `Entry point ${String(key)} (${entryPoint}) should not be in output ${expectedOutDir}`,
-        () => {
-          collection[key] = entryPoint.replace(notExpected, expected) as T[K];
-        },
-      );
+      if (!expectedOutDir) {
+        this.errorIf(true, `Unexpected entry point ${String(key)} in package with no expected output directory`, () => {
+          collection[key] = undefined as T[K];
+        });
+      } else {
+        const normalizedEntry = removeDotPrefix(entryPoint) + '/';
+        // capture via regex the first path segment of the entry point
+        const match = normalizedEntry.match(/^([^\/]+)\//);
+        const capturedOutDir = match ? match[1] : '';
+        this.errorIf(
+          Boolean(capturedOutDir && capturedOutDir !== expectedOutDir),
+          `Entry point ${String(key)} (${entryPoint}) should be in output ${expectedOutDir} instead of ${capturedOutDir}`,
+          () => {
+            collection[key] = entryPoint.replace(capturedOutDir, expectedOutDir) as T[K];
+          },
+        );
+      }
     }
   }
 
@@ -364,8 +386,9 @@ export class LintPackageCommand extends Command {
       }
       const esmDir = buildConfig.typescript.esmDir;
       const cjsDir = buildConfig.typescript.cjsDir;
-      this.validateEntryPoint(updated, 'import', esmDir, cjsDir);
-      this.validateEntryPoint(updated, 'require', cjsDir, esmDir);
+      this.validateEntryPoint(updated, 'import', esmDir);
+      this.validateEntryPoint(updated, 'require', cjsDir || esmDir);
+
       if (updated.import && updated.require && keys.indexOf('import') > keys.indexOf('require')) {
         errors.push(`'import' entry should come before 'require' in exports for ${groupName}`);
       }
@@ -398,8 +421,8 @@ export class LintPackageCommand extends Command {
     const manifest = this.projRoot.manifest;
     const { main, module, private: isPrivate } = manifest;
     const { cjsDir, esmDir } = buildConfig.typescript;
-    this.validateEntryPoint(manifest, 'main', cjsDir, esmDir);
-    this.validateEntryPoint(manifest, 'module', esmDir, cjsDir);
+    this.validateEntryPoint(manifest, 'main', cjsDir || esmDir);
+    this.validateEntryPoint(manifest, 'module', esmDir);
     if (!isPrivate) {
       this.errorIf(Boolean(!manifest.exports && (main || module)), 'Missing exports field for public package', () => {
         const newExports = { '.': {} };
@@ -457,10 +480,9 @@ export class LintPackageCommand extends Command {
     if (check) {
       if (this.fix && fixFn) {
         fixFn();
-        this.changed = true;
-        console.log(`- Fixed: ${message}`);
+        this.report('info', message, changedManifest);
       } else {
-        console.warn(`- Warning: ${message}`);
+        this.report('warn', message);
       }
     }
   }
@@ -469,11 +491,9 @@ export class LintPackageCommand extends Command {
     if (check) {
       if (this.fix && fixFn) {
         fixFn();
-        this.changed = true;
-        console.log(`- Fixed: ${message}`);
+        this.report('info', message, changedManifest);
       } else {
-        console.error(`- Error: ${message}`);
-        this.issues++;
+        this.report('error', message);
       }
     }
   }

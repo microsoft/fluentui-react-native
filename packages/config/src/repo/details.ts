@@ -27,7 +27,7 @@ function hasConfig(root: string, configName: string): boolean {
 export const workspaceConfigPackages = [
   '@fluentui-react-native/babel-config',
   '@fluentui-react-native/config',
-  '@fluentui-react-native/eslint-config',
+  '@fluentui-react-native/eslint-config-rules',
   '@fluentui-react-native/kit-config',
   '@fluentui-react-native/jest-config',
   '@fluentui-react-native/react-config',
