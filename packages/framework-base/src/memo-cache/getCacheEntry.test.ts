@@ -40,34 +40,34 @@ describe('Memo cache unit tests', () => {
   test('string gets keyed correctly', () => {
     const base: TestEntry = {};
     const key = 'foo';
-    expect(getCacheEntry(base, [key])).toBe(base.str[key]);
+    expect(getCacheEntry(base, [key])).toBe(base.str![key]);
   });
 
   test('number gets keyed correctly', () => {
     const base: TestEntry = {};
     const val = 235;
     const key = val + '';
-    expect(getCacheEntry(base, [val])).toBe(base.str[key]);
+    expect(getCacheEntry(base, [val])).toBe(base.str![key]);
   });
 
   test('bool gets keyed correctly', () => {
     const base: TestEntry = {};
     const val = true;
     const key = val + '';
-    expect(getCacheEntry(base, [val])).toBe(base.str[key]);
+    expect(getCacheEntry(base, [val])).toBe(base.str![key]);
   });
 
   test('false bool gets keyed correctly', () => {
     const base: TestEntry = {};
     const val = false;
     const key = val + '';
-    expect(getCacheEntry(base, [val])).toBe(base.str[key]);
+    expect(getCacheEntry(base, [val])).toBe(base.str![key]);
   });
 
   test('object gets keyed correctly', () => {
     const base: TestEntry = {};
     const key = {};
-    expect(getCacheEntry(base, [key])).toBe(base.obj.get(key));
+    expect(getCacheEntry(base, [key])).toBe(base.obj!.get(key));
   });
 
   test('function gets keyed correctly', () => {
@@ -75,7 +75,7 @@ describe('Memo cache unit tests', () => {
     const key = () => {
       return 'hello world';
     };
-    expect(getCacheEntry(base, [key])).toBe(base.obj.get(key));
+    expect(getCacheEntry(base, [key])).toBe(base.obj!.get(key));
   });
 
   test('basic string retrieval', () => {

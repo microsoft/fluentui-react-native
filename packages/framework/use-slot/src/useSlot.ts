@@ -48,7 +48,7 @@ export function useSlot<TProps>(
         const { propsToMerge, innerComponent } = slotData;
         if (propsToMerge) {
           // merge in props from phase one if they haven't been captured in the phased render
-          innerProps = mergeProps<TProps>(propsToMerge, innerProps);
+          innerProps = mergeProps(propsToMerge, innerProps);
         }
         if (filter) {
           // filter the final props if a filter is specified

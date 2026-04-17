@@ -58,8 +58,8 @@ describe('getMemoCache unit tests', () => {
   test('memo calls function only once for empty inputs', () => {
     const memoValue = getMemoCache();
     const fn = getObjFactory();
-    const [o1] = memoValue(fn, undefined);
-    const [o2] = memoValue(fn, undefined);
+    const [o1] = memoValue(fn, []);
+    const [o2] = memoValue(fn, []);
     expect(o2).toBe(o1);
   });
 
