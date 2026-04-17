@@ -1,4 +1,9 @@
 {
   "extends": "@fluentui-react-native/config/tsconfig.json",
-  "include": ["src"]
+  "include": [
+    "src"
+  ],
+  "compilerOptions": {
+    "rootDir": "src"
+  }
 }

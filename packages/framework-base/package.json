@@ -44,7 +44,6 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/config": "workspace:*",
-    "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "catalog:",
     "@types/node": "catalog:",

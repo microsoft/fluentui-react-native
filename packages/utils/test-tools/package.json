@@ -34,14 +34,11 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/theme-types": "workspace:*",
     "@react-native/babel-preset": "^0.81.0",
-    "@types/jest": "^29.0.0",
+    "@types/jest": "catalog:",
     "@types/react": "~19.1.4",
     "@types/react-test-renderer": "^19.1.0",
     "react": "19.1.4",
@@ -58,6 +55,12 @@
       "optional": true
     }
   },
+  "jest": {
+    "preset": "<rootDir>/../../config"
+  },
+  "furn": {
+    "jestPlatform": "android"
+  },
   "rnx-kit": {
     "kitType": "library",
     "extends": "@fluentui-react-native/config/kit-config",
@@ -65,9 +68,7 @@
       "capabilities": [
         "core",
         "react",
-        "react-test-renderer",
-        "tools-core",
-        "tools-jest"
+        "react-test-renderer"
       ]
     }
   }

@@ -2,16 +2,13 @@
   "name": "@fluentui-react-native/spinner",
   "version": "0.10.2",
   "description": "A cross-platform Fluent spinner component",
-  "license": "MIT",
-  "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/experimental/Spinner"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "author": "",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -20,6 +17,9 @@
       "default": "./src/index.ts"
     }
   },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
@@ -40,9 +40,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
@@ -90,8 +88,7 @@
         "core-macos",
         "core-windows",
         "react",
-        "svg",
-        "tools-core"
+        "svg"
       ]
     },
     "extends": "@fluentui-react-native/config/kit-config"

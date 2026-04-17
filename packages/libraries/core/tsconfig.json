@@ -10,7 +10,10 @@
     "noEmitOnError": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
-    "strict": true
+    "strict": true,
+    "rootDir": "src"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

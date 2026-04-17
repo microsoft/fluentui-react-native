@@ -3,19 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "description": "Package containing E2E testing specs",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/E2E"
   },
-  "files": [
-    "src/**/*",
-    "dist/*"
-  ],
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "license": "MIT",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -24,6 +17,13 @@
       "default": "./src/index.ts"
     }
   },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "src/**/*",
+    "dist/*"
+  ],
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
@@ -48,7 +48,6 @@
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
     "@fluentui-react-native/config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
@@ -117,8 +116,7 @@
         "core-win32",
         "core-windows",
         "metro-react-native-babel-transformer",
-        "react",
-        "tools-core"
+        "react"
       ]
     },
     "extends": "@fluentui-react-native/config/kit-config"

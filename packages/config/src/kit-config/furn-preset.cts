@@ -21,13 +21,7 @@ type Capability =
   | 'react-types'
   | 'react-test-renderer-types'
   | 'babel-preset-react-native'
-  | 'babel-core'
-  | 'tools-babel'
-  | 'tools-eslint'
-  | 'tools-jest'
-  | 'tools-jest-react'
-  | 'tools-core'
-  | 'tools-react-configs';
+  | 'babel-core';
 
 /** Remove the hard Capability type from Package as we are adding custom capabilities */
 type Package = Omit<RNXPackage, 'capabilities'> & {

@@ -8,13 +8,13 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "scripts"
   },
+  "type": "module",
+  "main": "./lib/index.js",
   "bin": {
     "fluentui-scripts": "./src/cli.mjs"
   },
-  "type": "module",
-  "main": "./src/index.js",
   "scripts": {
-    "build": "tsgo",
+    "build": "node ./src/cli.mjs build",
     "build-core": "tsgo",
     "bundlesize": "bundlesize --debug",
     "depcheck": "node ./src/cli.mjs depcheck",
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@eslint/js": "^9.0.0",
     "@fluentui-react-native/config": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/config": "catalog:",
     "@rnx-kit/eslint-plugin": "catalog:",
@@ -40,7 +41,7 @@
     "chalk": "^4.0.0",
     "clipanion": "^4.0.0-rc.4",
     "depcheck": "^1.0.0",
-    "eslint": "^9.0.0",
+    "eslint": "catalog:",
     "find-up": "^5.0.0",
     "jest": "catalog:",
     "knip": "catalog:",

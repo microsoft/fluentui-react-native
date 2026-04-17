@@ -4,7 +4,10 @@
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "strictNullChecks": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "rootDir": "src"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
