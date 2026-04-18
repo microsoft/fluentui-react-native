@@ -31,7 +31,6 @@ export class LintPackageCommand extends Command {
   private changed = false;
   private issues = 0;
   private isScripts = false;
-  private isLibrary = false;
   private projRoot: ProjectRoot = getProjectRoot(process.cwd());
   private result = 0;
   private removedDevDeps: string[] = [];
@@ -66,7 +65,6 @@ export class LintPackageCommand extends Command {
     (this.ruleContext.fix as boolean) = this.fix;
     const manifest = this.projRoot.manifest;
     this.isScripts = manifest.name === '@fluentui-react-native/scripts';
-    this.isLibrary = !(manifest['rnx-kit']?.kitType === 'app') && manifest.furn?.packageType !== 'tooling';
 
     const runningOps: Promise<void>[] = [];
 
@@ -285,7 +283,7 @@ export class LintPackageCommand extends Command {
         capabilities.push(ensuredCap);
       }
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     alignDeps.capabilities = capabilities.sort() as any[];
     this.errorIf(rnxKitIssues.length > 0, rnxKitIssues.join('\n'), () => {
       projRoot.setManifestEntry('rnx-kit', rnxKitConfig);
@@ -332,7 +330,7 @@ export class LintPackageCommand extends Command {
       } else {
         const normalizedEntry = removeDotPrefix(entryPoint) + '/';
         // capture via regex the first path segment of the entry point
-        const match = normalizedEntry.match(/^([^\/]+)\//);
+        const match = normalizedEntry.match(/^([^/]+)\//);
         const capturedOutDir = match ? match[1] : '';
         this.errorIf(
           Boolean(capturedOutDir && capturedOutDir !== expectedOutDir),

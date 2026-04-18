@@ -18,12 +18,12 @@ import type { IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadio
 import { radioButtonName } from './RadioButton.types';
 import { RadioGroupContext } from './RadioGroup';
 
-enum DirectionalArrowKeys {
-  ArrowUp = 'ArrowUp',
-  ArrowDown = 'ArrowDown',
-  ArrowRight = 'ArrowRight',
-  ArrowLeft = 'ArrowLeft',
-}
+const DirectionalArrowKeys = {
+  ArrowUp: 'ArrowUp',
+  ArrowDown: 'ArrowDown',
+  ArrowRight: 'ArrowRight',
+  ArrowLeft: 'ArrowLeft',
+} as const;
 
 export const RadioButton = compose<IRadioButtonType>({
   displayName: radioButtonName,

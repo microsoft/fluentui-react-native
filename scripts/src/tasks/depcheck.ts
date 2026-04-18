@@ -24,11 +24,11 @@ type Issue = {
  */
 function mergeOneLevel(a: Record<string, unknown>, b: Record<string, unknown> = {}): Record<string, unknown> {
   const result = { ...a, ...b };
-  Object.keys(a).forEach((key) => {
+  for (const key of Object.keys(a)) {
     if (Array.isArray(b[key]) && Array.isArray(a[key])) {
       result[key] = [...a[key], ...b[key]];
     }
-  });
+  }
   return result;
 }
 

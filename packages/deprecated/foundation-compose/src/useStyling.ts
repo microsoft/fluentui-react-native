@@ -27,7 +27,7 @@ function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends obj
   Object.keys(slots).forEach((slotName) => {
     const slot = slots[slotName];
     const slotType = (typeof slot !== 'object' ? slot : slot.slotType) as INativeSlotType;
-    const options = <IComposeOptions<AsObject<TProps>, TSlotProps>>getOptionsFromObj(slotType);
+    const options = getOptionsFromObj(slotType) as IComposeOptions<AsObject<TProps>, TSlotProps>;
     slotTokens[slotName] = (options && options.resolvedTokens && options.resolvedTokens.tokenKeys) || undefined;
   });
   return (target: string, key: string) => {

@@ -67,8 +67,8 @@ export interface MenuState extends MenuProps {
   testID?: string;
 }
 
-export enum AndroidMenuStates {
-  Hidden,
-  Animating,
-  Shown,
-}
+export const AndroidMenuStates = {
+  Hidden: 1,
+  Animating: 2,
+  Shown: 3,
+} as const;

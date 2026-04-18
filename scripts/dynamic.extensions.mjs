@@ -3,7 +3,7 @@ import { getInjectedDependencies } from '../packages/config/src/repo/details.ts'
 
 /**
  * Get the dynamic dependencies for the given package given the package root directory and its manifest.
- * @param {{cwd: string, manifest: import('../packages/config/src/repo/manifest.ts').Manifest}} param0
+ * @param {{cwd: string, manifest: import('../packages/config/src/repo/manifest.ts').PackageManifest}} param0
  * @returns { { dependencies: Record<string, string> } }
  */
 export default function ({ cwd, manifest }) {

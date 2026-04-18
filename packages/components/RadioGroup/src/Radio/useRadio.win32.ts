@@ -11,12 +11,12 @@ import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
 
 const defaultAccessibilityActions = [{ name: 'Select' }];
 
-enum DirectionalArrowKeys {
-  ArrowUp = 'ArrowUp',
-  ArrowDown = 'ArrowDown',
-  ArrowRight = 'ArrowRight',
-  ArrowLeft = 'ArrowLeft',
-}
+const DirectionalArrowKeys = {
+  ArrowUp: 'ArrowUp',
+  ArrowDown: 'ArrowDown',
+  ArrowRight: 'ArrowRight',
+  ArrowLeft: 'ArrowLeft',
+} as const;
 
 export const useRadio = (props: RadioProps): RadioInfo => {
   const defaultComponentRef = React.useRef(null);

@@ -111,7 +111,7 @@ function processor(parent: IFakeTheme): Partial<IFakeTheme> {
         root: {
           textColor: 'light' + (parent.settings.base.root as IFakeStyle).textColor,
           fontFamily: (parent.settings.base.root as IFakeStyle).fontFamily + ' Light',
-          fontSize: <number>(parent.settings.base.root as IFakeStyle).fontSize - 2,
+          fontSize: (parent.settings.base.root.fontSize as number) - 2,
         },
       },
     },

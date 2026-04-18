@@ -35,7 +35,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const isSubmenu = context.triggerRef !== null;
   const isOpenControlled = typeof props.open !== 'undefined';
   const _container = useRef<View>(null);
-  const [menuState, setMenuState] = React.useState<AndroidMenuStates>(AndroidMenuStates.Hidden);
+  const [menuState, setMenuState] = React.useState<number>(AndroidMenuStates.Hidden);
 
   /**
    * Call for useMenuCheckedState for identifying if any MenuItemCheckbox is checked or not

@@ -1,4 +1,6 @@
+// @ts-expect-error - No types, which is fine since this is only used by eslint, which doesn't use types
 const rnx = require('@rnx-kit/eslint-plugin');
+// @ts-expect-error - No types, which is fine since this is only used by eslint, which doesn't use types
 const sdl = require('@microsoft/eslint-plugin-sdl');
 
 module.exports = [
