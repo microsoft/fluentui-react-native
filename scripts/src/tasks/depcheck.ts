@@ -259,7 +259,7 @@ export class DepCheckRunner {
 function injectedDevDeps(projectRoot: ProjectRoot): string[] {
   const options = { cwd: projectRoot.root, manifest: projectRoot.manifest };
   const injectedDeps = getInjectedDeps(options);
-  return Object.keys(injectedDeps);
+  return Object.keys(injectedDeps.dependencies ?? {});
 }
 
 function isTestFile(fileName: string): boolean {
@@ -271,5 +271,6 @@ function isTestFile(fileName: string): boolean {
     '**/babel.config.*',
     '**/jest.config.*',
     '**/eslint.config.*',
+    '**/oxlint.config.*',
   ]);
 }
