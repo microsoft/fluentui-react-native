@@ -49,7 +49,7 @@ function configureReactNativeJest(platform) {
     '^.+\\.(ts|tsx|js|jsx)$': [
       'babel-jest',
       {
-        configFile: require.resolve('../babel.config.cjs'),
+        configFile: require.resolve('./babel.config.cjs'),
       },
     ],
   };

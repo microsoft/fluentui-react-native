@@ -52,7 +52,8 @@ export const repoTasks: Record<RepoTask, TaskDetails> = {
   },
   test: {
     name: 'test',
-    isEnabled: (root, manifest) => Boolean(manifest.scripts?.test && (manifest?.jest || hasConfig(root, 'jest.config.js'))),
+    isEnabled: (root, manifest) =>
+      Boolean(manifest.scripts?.test && (manifest?.jest || hasConfig(root, 'jest.config.js') || hasConfig(root, 'jest.config.cjs'))),
     devDependencies: {
       '@fluentui-react-native/config': 'workspace:*',
       '@fluentui-react-native/scripts': 'workspace:*',

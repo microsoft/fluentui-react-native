@@ -49,6 +49,7 @@
     "@types/node": "catalog:"
   },
   "furn": {
+    "jestPlatform": "react",
     "depcheck": {
       "ignoreMatches": [
         ".bin"

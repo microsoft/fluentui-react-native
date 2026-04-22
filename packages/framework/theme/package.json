@@ -3,13 +3,16 @@
   "version": "0.12.2",
   "description": "Experimental version of fluentui-react-native theme framework",
   "keywords": [],
+  "license": "MIT",
+  "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework/theme"
   },
-  "license": "MIT",
-  "author": "",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -18,9 +21,6 @@
       "default": "./src/index.ts"
     }
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
@@ -62,6 +62,9 @@
     "@types/react": {
       "optional": true
     }
+  },
+  "furn": {
+    "jestPlatform": "android"
   },
   "rnx-kit": {
     "kitType": "library",

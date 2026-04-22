@@ -55,9 +55,6 @@
       "optional": true
     }
   },
-  "jest": {
-    "preset": "<rootDir>/../../config"
-  },
   "furn": {
     "jestPlatform": "android"
   },

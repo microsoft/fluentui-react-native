@@ -3,13 +3,16 @@
   "version": "1.13.2",
   "description": "A cross-platform Avatar component using the Fluent Design System",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/components/Avatar"
   },
-  "license": "MIT",
-  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -18,9 +21,6 @@
       "default": "./src/index.ts"
     }
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "build-cjs": "tsgo --outDir lib-commonjs",
@@ -86,6 +86,9 @@
     "react-native-windows": {
       "optional": true
     }
+  },
+  "furn": {
+    "jestPlatform": "win32"
   },
   "rnx-kit": {
     "kitType": "library",
