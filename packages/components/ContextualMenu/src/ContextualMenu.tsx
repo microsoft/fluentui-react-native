@@ -36,7 +36,7 @@ export const CMContext = React.createContext<ContextualMenuContext>({
 export const ContextualMenu = compose<ContextualMenuType>({
   displayName: contextualMenuName,
   usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
-    const { setShowMenu, maxHeight, maxWidth, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
+    const { setShowMenu, maxHeight, maxWidth, onDismiss, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
 
     /**
      * On macOS, focus isn't placed by default on the first focusable element. We get around this by focusing on the inner FocusZone
@@ -57,9 +57,9 @@ export const ContextualMenu = compose<ContextualMenuType>({
     const data = useSelectedKey(null, userProps.onItemClick);
 
     const dismissCallback = React.useCallback(() => {
-      userProps.onDismiss();
+      onDismiss();
       setShowMenu?.(false);
-    }, [setShowMenu, userProps.onDismiss]);
+    }, [onDismiss, setShowMenu]);
 
     const [containerFocus, setContainerFocus] = React.useState(true);
     const toggleContainerFocus = React.useCallback(() => {

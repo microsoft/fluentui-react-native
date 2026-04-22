@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import type { ColorValue } from 'react-native';
 import { Animated, Easing, View } from 'react-native';
 
@@ -39,7 +39,7 @@ export const Spinner = compose<SpinnerType>({
     const status = props.status !== undefined ? props.status : 'active';
     const hidesWhenStopped = props.hidesWhenStopped != undefined ? props.hidesWhenStopped : true;
     const hideOpacity = status === 'inactive' && hidesWhenStopped == true ? 0 : 1;
-    const rotationAngle = new Animated.Value(0);
+    const rotationAngle = useRef(new Animated.Value(0)).current;
 
     const startRotation = useCallback(() => {
       Animated.loop(
@@ -50,28 +50,19 @@ export const Spinner = compose<SpinnerType>({
           useNativeDriver: true,
         }),
       ).start();
-    }, [rotationAngle, status]);
+    }, [rotationAngle]);
 
-    const stopRotation = () => {
+    const stopRotation = useCallback(() => {
       rotationAngle.stopAnimation();
-    };
+    }, [rotationAngle]);
 
     useEffect(() => {
-      Animated.loop(
-        Animated.timing(rotationAngle, {
-          toValue: 360,
-          duration: 750,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-      ).start();
-
       if (status === 'active') {
         startRotation();
       } else {
         stopRotation();
       }
-    }, [status, hidesWhenStopped, rotationAngle]);
+    }, [startRotation, status, stopRotation]);
 
     const interpolateSpin = rotationAngle.interpolate({
       inputRange: [0, 359],
