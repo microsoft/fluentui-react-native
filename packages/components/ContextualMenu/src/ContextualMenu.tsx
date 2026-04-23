@@ -80,6 +80,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
       root: {
         accessibilityRole: 'menu',
         setInitialFocus: shouldFocusOnMount,
+        onDismiss,
         ...rest,
       },
       container: {
