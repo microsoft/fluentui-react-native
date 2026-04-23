@@ -57,6 +57,7 @@ export function useSlot<TProps>(
         // now render the component with the final props
         return renderForJsxRuntime(innerComponent, innerProps);
       }),
-    [filter, slotData],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [component, filter, slotData],
   );
 }
