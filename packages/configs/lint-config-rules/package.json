@@ -1,0 +1,39 @@
+{
+  "name": "@fluentui-react-native/lint-config-rules",
+  "version": "0.1.2",
+  "description": "Oxlint config for Fluent UI React Native",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/configs/lint-config-rules"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./private.ts"
+    },
+    "./private": {
+      "default": "./private.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsgo",
+    "build-core": "tsgo",
+    "lint-package": "fluentui-scripts lint-package"
+  },
+  "dependencies": {
+    "@rnx-kit/oxlint-config": "^1.0.3",
+    "oxlint": "^1.57.0"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "^5.8.0"
+  },
+  "furn": {
+    "packageType": "tooling"
+  }
+}

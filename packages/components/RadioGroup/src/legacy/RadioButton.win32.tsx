@@ -46,38 +46,53 @@ export const RadioButton = compose<IRadioButtonType>({
 
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
+    const {
+      addRadioButtonEnabledKey,
+      addRadioButtonKey,
+      buttonKeys,
+      enabledButtonKeys,
+      invoked,
+      onChange,
+      removeRadioButtonEnabledKey,
+      removeRadioButtonKey,
+      selectedKey,
+      updateInvoked,
+      updateSelectedButtonRef,
+    } = info;
 
     const buttonRef = useViewCommandFocus(componentRef);
 
     /* We don't want to call the user's onChange multiple times on the same selection. */
-    const changeSelection = () => {
-      if (buttonKey != info.selectedKey) {
-        info.onChange && info.onChange(buttonKey);
-        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+    const changeSelection = React.useCallback(() => {
+      if (buttonKey != selectedKey) {
+        onChange && onChange(buttonKey);
+        updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
       }
-    };
+    }, [buttonKey, componentRef, onChange, selectedKey, updateSelectedButtonRef]);
 
     /* We use the componentRef of the currently selected button to maintain the default tabbable
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
     React.useEffect(() => {
-      if (buttonKey == info.selectedKey) {
-        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+      if (buttonKey == selectedKey) {
+        updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
     }, []);
 
     // Explicitly only run on mount and unmount
     React.useEffect(() => {
-      info.addRadioButtonKey(buttonKey);
+      addRadioButtonKey(buttonKey);
 
       if (!disabled) {
-        info.addRadioButtonEnabledKey(buttonKey);
+        addRadioButtonEnabledKey(buttonKey);
       }
 
       return () => {
-        info.removeRadioButtonKey(buttonKey);
-        info.removeRadioButtonEnabledKey(buttonKey);
+        removeRadioButtonKey(buttonKey);
+        removeRadioButtonEnabledKey(buttonKey);
       };
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
     }, []);
 
     const isRTL = I18nManager.isRTL;
@@ -85,11 +100,11 @@ export const RadioButton = compose<IRadioButtonType>({
     const onInvoke = React.useCallback(
       (e: KeyPressEvent) => {
         if (e.nativeEvent.key in DirectionalArrowKeys) {
-          const length = info.enabledButtonKeys.length;
+          const length = enabledButtonKeys.length;
           const next =
             e.nativeEvent.key === DirectionalArrowKeys.ArrowDown ||
             (isRTL ? e.nativeEvent.key === DirectionalArrowKeys.ArrowLeft : e.nativeEvent.key === DirectionalArrowKeys.ArrowRight);
-          const currRadioButtonIndex = info.enabledButtonKeys.indexOf(info.selectedKey);
+          const currRadioButtonIndex = enabledButtonKeys.indexOf(selectedKey);
           let newCurrRadioButtonIndex;
           if (next) {
             newCurrRadioButtonIndex = (currRadioButtonIndex + 1) % length;
@@ -97,21 +112,22 @@ export const RadioButton = compose<IRadioButtonType>({
             // previous
             newCurrRadioButtonIndex = (currRadioButtonIndex - 1 + length) % length;
           }
-          info.onChange && info.onChange(info.enabledButtonKeys[newCurrRadioButtonIndex]);
-          info.updateInvoked && info.updateInvoked(true);
+          onChange && onChange(enabledButtonKeys[newCurrRadioButtonIndex]);
+          updateInvoked && updateInvoked(true);
         }
       },
-      [info],
+      [enabledButtonKeys, isRTL, onChange, selectedKey, updateInvoked],
     );
 
     // Sets the updated selected button ref and focus if this Radio is selected via arrow key.
     React.useEffect(() => {
-      if (info.invoked && buttonKey === info.selectedKey && !disabled) {
-        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+      if (invoked && buttonKey === selectedKey && !disabled) {
+        updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
         componentRef?.current?.focus();
-        info.updateInvoked && info.updateInvoked(false);
+        updateInvoked && updateInvoked(false);
       }
-    }, [info.invoked]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-run when invoked changes
+    }, [invoked]);
 
     const keys = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'];
 
@@ -119,13 +135,13 @@ export const RadioButton = compose<IRadioButtonType>({
     const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
 
     // Ensure focus is placed on button after click
-    const changeSelectionWithFocus = () => {
-      if (buttonKey != info.selectedKey) {
-        info.onChange && info.onChange(buttonKey);
-        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
-        info.updateInvoked && info.updateInvoked(true);
+    const changeSelectionWithFocus = React.useCallback(() => {
+      if (buttonKey != selectedKey) {
+        onChange && onChange(buttonKey);
+        updateSelectedButtonRef && componentRef && updateSelectedButtonRef(componentRef);
+        updateInvoked && updateInvoked(true);
       }
-    };
+    }, [buttonKey, componentRef, onChange, selectedKey, updateInvoked, updateSelectedButtonRef]);
 
     /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
     const pressable = useAsPressable({
@@ -143,12 +159,12 @@ export const RadioButton = compose<IRadioButtonType>({
             break;
         }
       },
-      [info, buttonKey],
+      [changeSelection],
     );
 
     const state = {
       ...pressable.state,
-      selected: info.selectedKey === userProps.buttonKey && !disabled,
+      selected: selectedKey === userProps.buttonKey && !disabled,
       disabled: disabled || false,
     };
 
@@ -164,8 +180,8 @@ export const RadioButton = compose<IRadioButtonType>({
         accessibilityLabel: accessibilityLabel ?? ariaLabel ?? content,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityActions: [{ name: 'Select', label: radioButtonSelectActionLabel }],
-        accessibilityPosInSet: accessibilityPosInSet ?? ariaPosInSet ?? info.buttonKeys.findIndex((x) => x == buttonKey) + 1,
-        accessibilitySetSize: accessibilitySetSize ?? ariaSetSize ?? info.buttonKeys.length,
+        accessibilityPosInSet: accessibilityPosInSet ?? ariaPosInSet ?? buttonKeys.findIndex((x) => x == buttonKey) + 1,
+        accessibilitySetSize: accessibilitySetSize ?? ariaSetSize ?? buttonKeys.length,
         focusable: !state.disabled,
         onAccessibilityAction: onAccessibilityAction,
         ...onKeyDownProps,
