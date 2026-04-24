@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
+## 0.11.3
+
+### Patch Changes
+
+- db5fc0a: Update snapshots
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [196cbea]
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/button@0.40.3
+  - @fluentui-react-native/contextual-menu@0.25.3
+  - @fluentui-react-native/framework@0.15.3
+  - @fluentui-react-native/tokens@0.24.3
+
 ## 0.11.2
 
 ### Patch Changes

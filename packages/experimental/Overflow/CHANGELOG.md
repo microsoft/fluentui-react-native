@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/overflow
 
+## 0.4.3
+
+### Patch Changes
+
+- db5fc0a: Update snapshots
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/framework@0.15.3
+  - @fluentui-react-native/framework-base@0.3.3
+
 ## 0.4.2
 
 ### Patch Changes

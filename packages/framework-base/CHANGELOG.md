@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.3.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+
 ## 0.3.2
 
 ### Patch Changes

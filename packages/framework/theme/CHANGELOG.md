@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/theme
 
+## 0.12.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/theme-types@0.44.3
+  - @fluentui-react-native/framework-base@0.3.3
+
 ## 0.12.2
 
 ### Patch Changes

@@ -1,5 +1,22 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
+## 0.25.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @uifabricshared/foundation-composable@0.14.3
+  - @uifabricshared/foundation-settings@0.16.3
+  - @uifabricshared/foundation-compose@1.16.3
+  - @fluentui-react-native/interactive-hooks@0.28.3
+  - @fluentui-react-native/focus-zone@0.22.3
+  - @fluentui-react-native/callout@0.28.3
+  - @fluentui-react-native/icon@0.22.3
+  - @fluentui-react-native/text@0.25.3
+  - @fluentui-react-native/adapters@0.14.3
+  - @fluentui-react-native/tokens@0.24.3
+
 ## 0.25.2
 
 ### Patch Changes

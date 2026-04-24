@@ -1,5 +1,13 @@
 # Change Log - @uifabricshared/foundation-settings
 
+## 0.16.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/framework-base@0.3.3
+
 ## 0.16.2
 
 ### Patch Changes

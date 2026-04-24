@@ -1,5 +1,19 @@
 # Change Log - @fluentui-react-native/stack
 
+## 0.11.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @uifabricshared/foundation-composable@0.14.3
+  - @uifabricshared/foundation-settings@0.16.3
+  - @uifabricshared/foundation-compose@1.16.3
+  - @uifabricshared/foundation-tokens@0.16.3
+  - @fluentui-react-native/framework@0.15.3
+  - @fluentui-react-native/adapters@0.14.3
+  - @fluentui-react-native/tokens@0.24.3
+
 ## 0.11.2
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/vibrancy-view
 
+## 0.4.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/adapters@0.14.3
+
 ## 0.4.2
 
 ### Patch Changes

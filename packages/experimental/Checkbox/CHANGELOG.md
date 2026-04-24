@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
+## 0.18.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/checkbox@0.24.3
+  - @fluentui-react-native/framework@0.15.3
+
 ## 0.18.2
 
 ### Patch Changes
