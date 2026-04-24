@@ -90,7 +90,7 @@ extends:
       - stage: Publish
         displayName: Publish to NPM
         dependsOn: Build
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(${{ parameters.skipNpmPublish }}), eq(stageDependencies.Build.BuildAndPack.outputs['check.hasTarballs'], 'true'))
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), ne('${{ parameters.skipNpmPublish }}', 'true'), eq(stageDependencies.Build.BuildAndPack.outputs['check.hasTarballs'], 'true'))
         jobs:
           - job: PublishPackages
             displayName: Publish NPM Packages
