@@ -1,5 +1,19 @@
 # Change Log - @fluentui-react-native/switch
 
+## 0.14.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/interactive-hooks@0.28.3
+  - @fluentui-react-native/use-styling@0.14.3
+  - @fluentui-react-native/theming-utils@0.27.3
+  - @fluentui-react-native/framework@0.15.3
+  - @fluentui-react-native/text@0.25.3
+  - @fluentui-react-native/framework-base@0.3.3
+  - @fluentui-react-native/tokens@0.24.3
+
 ## 0.14.2
 
 ### Patch Changes

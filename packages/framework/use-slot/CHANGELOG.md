@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/use-slot
 
+## 0.7.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/framework-base@0.3.3
+
 ## 0.7.2
 
 ### Patch Changes

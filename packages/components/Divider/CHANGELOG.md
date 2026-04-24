@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/divider
 
+## 0.8.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/theme-tokens@0.28.3
+  - @fluentui-react-native/framework@0.15.3
+  - @fluentui-react-native/icon@0.22.3
+  - @fluentui-react-native/text@0.25.3
+  - @fluentui-react-native/tokens@0.24.3
+
 ## 0.8.2
 
 ### Patch Changes

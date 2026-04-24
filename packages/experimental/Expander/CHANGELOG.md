@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
+## 0.9.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/framework@0.15.3
+
 ## 0.9.2
 
 ### Patch Changes

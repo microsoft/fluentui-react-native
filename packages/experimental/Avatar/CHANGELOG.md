@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
+## 0.22.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/framework@0.15.3
+
 ## 0.22.2
 
 ### Patch Changes

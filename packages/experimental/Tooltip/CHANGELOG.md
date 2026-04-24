@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/tooltip
 
+## 0.5.3
+
+### Patch Changes
+
+- 196cbea: Update snapshot
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/callout@0.28.3
+  - @fluentui-react-native/framework-base@0.3.3
+
 ## 0.5.2
 
 ### Patch Changes

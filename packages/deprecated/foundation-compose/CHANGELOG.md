@@ -1,5 +1,20 @@
 # Change Log - @uifabricshared/foundation-compose
 
+## 1.16.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @uifabricshared/foundation-composable@0.14.3
+  - @uifabricshared/foundation-settings@0.16.3
+  - @uifabricshared/foundation-tokens@0.16.3
+  - @uifabricshared/themed-settings@0.13.3
+  - @uifabricshared/theming-ramp@0.21.3
+  - @fluentui-react-native/default-theme@0.27.3
+  - @fluentui-react-native/theme-types@0.44.3
+  - @fluentui-react-native/framework-base@0.3.3
+
 ## 1.16.2
 
 ### Patch Changes

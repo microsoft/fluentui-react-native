@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/adapters
 
+## 0.14.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+
 ## 0.14.2
 
 ### Patch Changes

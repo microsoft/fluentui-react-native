@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/styling-utils
 
+## 0.8.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+
 ## 0.8.2
 
 ### Patch Changes

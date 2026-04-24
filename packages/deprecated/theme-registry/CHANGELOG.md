@@ -1,5 +1,11 @@
 # Change Log - @uifabricshared/theme-registry
 
+## 0.13.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+
 ## 0.13.2
 
 ### Patch Changes

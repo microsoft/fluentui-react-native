@@ -1,5 +1,11 @@
 # Change Log - @uifabric/eslint-config-rules
 
+## 0.1.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+
 ## 0.1.2
 
 ### Patch Changes
