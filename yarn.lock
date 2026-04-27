@@ -9817,13 +9817,13 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/tools-react-native@npm:^2.1.0, @rnx-kit/tools-react-native@npm:^2.3.0, @rnx-kit/tools-react-native@npm:^2.3.1, @rnx-kit/tools-react-native@npm:^2.3.2, @rnx-kit/tools-react-native@npm:^2.3.3, @rnx-kit/tools-react-native@npm:^2.3.4":
-  version: 2.3.4
-  resolution: "@rnx-kit/tools-react-native@npm:2.3.4"
+  version: 2.3.7
+  resolution: "@rnx-kit/tools-react-native@npm:2.3.7"
   dependencies:
     "@rnx-kit/tools-filesystem": "npm:^0.2.0"
     "@rnx-kit/tools-node": "npm:^3.0.4"
     "@rnx-kit/types-bundle-config": "npm:^1.0.0"
-  checksum: 10c0/14e1a9862a85d5ae4666ff3bc5184a266b743a305d223f2c79bd57aae7be59a0708d8c83d21fb6f018c296eb68fe010dbb829ca49517a7d50b4aef17bcfc8ce4
+  checksum: 10c0/4ae1830efabcb10fd24a7970e4200d5fabb52a517f53e76e6c0e9657a1a2fcf90b986c0a4cdb7b39861db615298812c05c6207b62b02901bfaf6682198f1720f
   languageName: node
   linkType: hard
 
