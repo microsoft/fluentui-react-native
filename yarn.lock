@@ -8782,13 +8782,13 @@ __metadata:
   linkType: hard
 
 "@react-native-windows/cli@npm:^0.74.0":
-  version: 0.74.12
-  resolution: "@react-native-windows/cli@npm:0.74.12"
+  version: 0.74.14
+  resolution: "@react-native-windows/cli@npm:0.74.14"
   dependencies:
-    "@react-native-windows/codegen": "npm:0.74.8"
+    "@react-native-windows/codegen": "npm:0.74.9"
     "@react-native-windows/fs": "npm:0.74.1"
     "@react-native-windows/package-utils": "npm:0.74.1"
-    "@react-native-windows/telemetry": "npm:0.74.2"
+    "@react-native-windows/telemetry": "npm:0.74.3"
     "@xmldom/xmldom": "npm:^0.7.7"
     chalk: "npm:^4.1.0"
     cli-spinners: "npm:^2.2.0"
@@ -8808,7 +8808,7 @@ __metadata:
     xpath: "npm:^0.0.27"
   peerDependencies:
     react-native: "*"
-  checksum: 10c0/0006a48a94cd736f36c992721a78183a1aa08a11a379ba0af5e7600bd9463ff1c5e40292d771b166038e24e1a791254d95747a76b7938649e31accc18eecc7cf
+  checksum: 10c0/333a92a7751b6bd86ec0531be8143e9a7898e8ce7141706d01efeb2bab7f8d99f53220d0de095564a2f87a34bed8408dedebee395f1e4c60af43a37a209d6de5
   languageName: node
   linkType: hard
 
@@ -8827,6 +8827,24 @@ __metadata:
   bin:
     react-native-windows-codegen: bin.js
   checksum: 10c0/ac8cde2138cc9de168b78907b856af6dc514c0f65d72dec50f3757f759f601bd0d0882d8f8f6cbfb3f5a4f56b1a653d30f163f248ce624e221165e1c2cc36c98
+  languageName: node
+  linkType: hard
+
+"@react-native-windows/codegen@npm:0.74.9":
+  version: 0.74.9
+  resolution: "@react-native-windows/codegen@npm:0.74.9"
+  dependencies:
+    "@react-native-windows/fs": "npm:0.74.1"
+    chalk: "npm:^4.1.0"
+    globby: "npm:^11.1.0"
+    mustache: "npm:^4.0.1"
+    source-map-support: "npm:^0.5.19"
+    yargs: "npm:^16.2.0"
+  peerDependencies:
+    react-native: "*"
+  bin:
+    react-native-windows-codegen: bin.js
+  checksum: 10c0/72936ab059fee44fa5925012ff79800674dc9c0a83b2a3304a572991117a2fa1d50876d10e184588d5b471a1c50d9de42c76803ae9c40b434ce8533427e61776
   languageName: node
   linkType: hard
 
@@ -8924,6 +8942,23 @@ __metadata:
     os-locale: "npm:^5.0.0"
     xpath: "npm:^0.0.27"
   checksum: 10c0/e37268a1bc4b41134cf35fb0fb31b9cbb625fe5e3f36504a981c6eee403a267acd468641dfd129144b3adc883a12fae5f435ad8b2371df911bfe223d6842c24c
+  languageName: node
+  linkType: hard
+
+"@react-native-windows/telemetry@npm:0.74.3":
+  version: 0.74.3
+  resolution: "@react-native-windows/telemetry@npm:0.74.3"
+  dependencies:
+    "@azure/core-auth": "npm:1.5.0"
+    "@react-native-windows/fs": "npm:0.74.1"
+    "@xmldom/xmldom": "npm:^0.7.7"
+    applicationinsights: "npm:2.9.1"
+    ci-info: "npm:^3.2.0"
+    envinfo: "npm:^7.8.1"
+    lodash: "npm:^4.17.21"
+    os-locale: "npm:^5.0.0"
+    xpath: "npm:^0.0.27"
+  checksum: 10c0/312a7b25168e416a50b93a3b6dccc41b444d6e948df5262ab5a5911ed70593739521481bb363a518796048da05e4474f5be5afbdfea2dffa20b098f34d39383f
   languageName: node
   linkType: hard
 
