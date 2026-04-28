@@ -3379,6 +3379,7 @@ __metadata:
     cross-env: "catalog:"
     expect-webdriverio: "catalog:"
     metro-config: "npm:^0.80.3"
+    mri: "npm:^1.2.0"
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     react-native-macos: "npm:^0.74.0"
@@ -3399,6 +3400,8 @@ __metadata:
       optional: true
     react-native-windows:
       optional: true
+  bin:
+    furn-e2e: ./bin/e2e-test.cjs
   languageName: unknown
   linkType: soft
 
@@ -5124,6 +5127,7 @@ __metadata:
     "@babel/runtime": "npm:^7.20.0"
     "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/e2e-testing": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
     "@fluentui-react-native/experimental-avatar": "workspace:*"
@@ -17729,6 +17733,13 @@ __metadata:
     on-finished: "npm:~2.3.0"
     on-headers: "npm:~1.1.0"
   checksum: 10c0/2ecd68504d29151b516a6233839e4f27ae0312acc4dbcb1fe84ff9b5db0eb9b25f31258a931dcf689184b4858839572095fcc62eef3cbd7339287d59f1424346
+  languageName: node
+  linkType: hard
+
+"mri@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "mri@npm:1.2.0"
+  checksum: 10c0/a3d32379c2554cf7351db6237ddc18dc9e54e4214953f3da105b97dc3babe0deb3ffe99cf409b38ea47cc29f9430561ba6b53b24ab8f9ce97a4b50409e4a50e7
   languageName: node
   linkType: hard
 

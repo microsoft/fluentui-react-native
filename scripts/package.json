@@ -48,6 +48,7 @@
     "micromatch": "^4.0.8",
     "react": "18.2.0",
     "react-native": "^0.74.0",
+    "semver": "catalog:",
     "typescript": "^5.8.0",
     "workspace-tools": "^0.26.3"
   },

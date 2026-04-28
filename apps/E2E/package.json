@@ -18,6 +18,9 @@
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
+  "bin": {
+    "furn-e2e": "./bin/e2e-test.cjs"
+  },
   "files": [
     "src/**/*",
     "dist/*"
@@ -40,7 +43,8 @@
     "lint-package": "fluentui-scripts lint-package"
   },
   "dependencies": {
-    "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030"
+    "@office-iss/rex-win32": "0.73.11-devmain.16.0.17615.15030",
+    "mri": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
