@@ -1,7 +1,7 @@
 {
   "extends": "@fluentui-react-native/scripts/tsconfig-strict",
   "compilerOptions": {
-    "noEmit": true,
+    "noEmit": true
   },
   "include": ["src"]
 }
