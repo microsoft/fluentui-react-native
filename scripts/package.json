@@ -13,6 +13,14 @@
   },
   "type": "module",
   "main": "./src/index.js",
+  "exports": {
+    ".": {
+      "default": "./src/index.js"
+    },
+    "./tsconfig": "./configs/tsconfig/tsconfig.json",
+    "./tsconfig-strict": "./configs/tsconfig/tsconfig.strict.json",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "build": "tsgo",
     "build-core": "tsgo",
