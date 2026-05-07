@@ -4996,12 +4996,20 @@ __metadata:
   resolution: "@fluentui-react-native/scripts@workspace:scripts"
   dependencies:
     "@babel/core": "catalog:"
+    "@babel/plugin-transform-react-jsx": "catalog:"
+    "@babel/plugin-transform-react-jsx-source": "catalog:"
+    "@babel/plugin-transform-typescript": "catalog:"
+    "@babel/preset-env": "catalog:"
+    "@babel/preset-react": "catalog:"
+    "@babel/preset-typescript": "catalog:"
     "@babel/runtime": "catalog:"
-    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@microsoft/eslint-plugin-sdl": "npm:^1.1.0"
     "@rnx-kit/align-deps": "catalog:"
     "@rnx-kit/babel-preset-metro-react-native": "catalog:"
     "@rnx-kit/config": "catalog:"
+    "@rnx-kit/eslint-plugin": "catalog:"
     "@rnx-kit/jest-preset": "catalog:"
     "@rnx-kit/lint-json": "npm:^0.1.0"
     "@rnx-kit/oxlint-config": "npm:^1.0.3"
@@ -5013,11 +5021,13 @@ __metadata:
     "@types/micromatch": "npm:^4.0.9"
     "@types/node": "catalog:"
     "@typescript/native-preview": "npm:7.0.0-dev.20260113.1"
+    babel-jest: "npm:^29.0.0"
     chalk: "npm:^4.0.0"
     clipanion: "npm:^4.0.0-rc.4"
     depcheck: "npm:^1.0.0"
     find-up: "npm:^5.0.0"
     jest: "npm:^29.2.1"
+    jest-transform-stub: "npm:^2.0.0"
     knip: "catalog:"
     lage: "catalog:"
     micromatch: "npm:^4.0.8"
@@ -7233,7 +7243,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/eslint-plugin-sdl@npm:^1.0.0":
+"@microsoft/eslint-plugin-sdl@npm:^1.0.0, @microsoft/eslint-plugin-sdl@npm:^1.1.0":
   version: 1.1.0
   resolution: "@microsoft/eslint-plugin-sdl@npm:1.1.0"
   dependencies:

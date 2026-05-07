@@ -9,6 +9,9 @@ import { getCatalog } from '../utils/getCatalog.ts';
 import { createJSONValidator } from '@rnx-kit/lint-json';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export class LintPackageCommand extends Command {
   static override paths = [['lint-package']];
@@ -116,6 +119,14 @@ export class LintPackageCommand extends Command {
           });
         }
       }
+    }
+    if (hasJestConfig) {
+      this.errorIf(true, 'should have jest.config.cjs instead of jest.config.js', () => {
+        // delete jest.config.js and copy ../../templates/jest.config.cjs to jest.config.cjs
+        const newConfigPath = path.join(this.projRoot.root, 'jest.config.cjs');
+        fs.copyFileSync(path.join(__dirname, '../../templates/jest.config.cjs'), newConfigPath);
+        fs.unlinkSync(jestConfigPath);
+      });
     }
   }
 
