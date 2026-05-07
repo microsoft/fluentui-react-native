@@ -9,9 +9,6 @@ import { getCatalog } from '../utils/getCatalog.ts';
 import { createJSONValidator } from '@rnx-kit/lint-json';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export class LintPackageCommand extends Command {
   static override paths = [['lint-package']];
@@ -37,10 +34,14 @@ export class LintPackageCommand extends Command {
   private isLibrary = false;
   private projRoot: ProjectRoot = getProjectRoot(process.cwd());
   private result = 0;
-  private removedDevDeps: string[] = [];
+  private removedDevDeps: string[] = [
+    '@fluentui-react-native/babel-config',
+    '@fluentui-react-native/jest-config',
+    '@fluentui-react-native/react-configs',
+  ];
   private addedDevDeps: Record<string, string> = {};
   private ensuredCapabilities: string[] = [];
-  private removedCapabilities: string[] = [];
+  private removedCapabilities: string[] = ['tools-core', 'tools-jest', 'tools-jest-react', 'tools-babel', 'tools-react-configs'];
   private getCatalog = getCatalog();
 
   async execute() {
@@ -70,7 +71,6 @@ export class LintPackageCommand extends Command {
 
     this.checkPrivateVersion();
     this.checkManifest();
-    this.checkUsage();
     this.checkScripts();
     this.checkEntryPoints(buildConfig);
     this.checkBuildConfig(buildConfig);
@@ -79,7 +79,6 @@ export class LintPackageCommand extends Command {
     this.checkPeerDeps();
     this.checkRnxKitConfig();
     this.checkTsConfig();
-    this.checkJestPlatform();
     await this.checkCatalogs();
 
     // report the results for the custom linting
@@ -95,39 +94,6 @@ export class LintPackageCommand extends Command {
     }
 
     return this.result;
-  }
-
-  private checkJestPlatform() {
-    const jestConfigPath = path.join(this.projRoot.root, 'jest.config.js');
-    const hasJestConfig = fs.existsSync(jestConfigPath);
-    if (hasJestConfig && !this.projRoot.manifest.furn?.jestPlatform) {
-      const configSrc = fs.readFileSync(jestConfigPath, 'utf-8');
-      if (configSrc.includes('@fluentui-react-native/react-configs/jest.config.js')) {
-        this.errorIf(true, 'Missing furn.jestPlatform setting', () => {
-          this.projRoot.updateRecordEntry('furn' as any, 'jestPlatform', 'react');
-        });
-      } else {
-        // with configs of the format:
-        // const { configureReactNativeJest } = require('@fluentui-react-native/jest-config');
-        // module.exports = configureReactNativeJest('android');
-        // parse out the platform string and set that into furn.jestPlatform
-        const match = configSrc.match(/configureReactNativeJest\(['"](\w+)['"]\)/);
-        if (match) {
-          const platform = match[1];
-          this.errorIf(true, `Missing furn.jestPlatform setting: ${platform}`, () => {
-            this.projRoot.updateRecordEntry('furn' as any, 'jestPlatform', platform);
-          });
-        }
-      }
-    }
-    if (hasJestConfig) {
-      this.errorIf(true, 'should have jest.config.cjs instead of jest.config.js', () => {
-        // delete jest.config.js and copy ../../templates/jest.config.cjs to jest.config.cjs
-        const newConfigPath = path.join(this.projRoot.root, 'jest.config.cjs');
-        fs.copyFileSync(path.join(__dirname, '../../templates/jest.config.cjs'), newConfigPath);
-        fs.unlinkSync(jestConfigPath);
-      });
-    }
   }
 
   private handleResult(code: number, source: string) {
@@ -179,25 +145,6 @@ export class LintPackageCommand extends Command {
       }
       this.projRoot.clearManifestEntry('typings');
     });
-  }
-
-  private checkUsage() {
-    const rootDir = this.projRoot.root;
-    if (this.isLibrary) {
-      this.ensuredCapabilities.push('tools-core');
-      const hasJestConfig = fs.existsSync(path.join(rootDir, 'jest.config.js')) || fs.existsSync(path.join(rootDir, 'jest.config.ts'));
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const hasReactJest = this.projRoot.manifest['rnx-kit']?.alignDeps?.capabilities?.includes('tools-jest-react' as any);
-      if (!hasReactJest) {
-        if (hasJestConfig) {
-          this.ensuredCapabilities.push('tools-jest');
-          this.addedDevDeps['@fluentui-react-native/jest-config'] = 'workspace:*';
-        } else {
-          this.removedCapabilities.push('tools-jest', 'babel-preset-react-native', 'tools-babel');
-          this.removedDevDeps.push('@fluentui-react-native/jest-config', '@types/jest', 'jest', 'ts-jest');
-        }
-      }
-    }
   }
 
   private checkDependencies() {

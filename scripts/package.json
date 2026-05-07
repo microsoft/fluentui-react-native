@@ -18,6 +18,7 @@
       "require": "./src/index.js",
       "default": "./src/index.js"
     },
+    "./babel-config": "./configs/jest/babel.config.cjs",
     "./jest-config": "./configs/jest/jest.config.cjs",
     "./lint-config": "./configs/oxlint/oxlint.config.ts",
     "./package.json": "./package.json",
@@ -97,6 +98,19 @@
     }
   ],
   "furn": {
-    "packageType": "tooling"
+    "packageType": "tooling",
+    "depcheck": {
+      "ignoreMatches": [
+        "@babel/plugin-transform-react-jsx",
+        "@babel/plugin-transform-react-jsx-source",
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@babel/preset-typescript",
+        "@microsoft/eslint-plugin-sdl",
+        "@rnx-kit/align-deps",
+        "@rnx-kit/config",
+        "@rnx-kit/eslint-plugin"
+      ]
+    }
   }
 }
