@@ -21,7 +21,7 @@ class ChipPageObject extends BasePage {
     return CHIP_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return CHIP_TEST_COMPONENT;
   }
 

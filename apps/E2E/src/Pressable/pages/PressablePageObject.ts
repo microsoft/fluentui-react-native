@@ -9,7 +9,7 @@ class PressablePageObject extends BasePage {
     return PRESSABLE_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return PRESSABLE_TEST_COMPONENT;
   }
 

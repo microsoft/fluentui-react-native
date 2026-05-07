@@ -68,14 +68,14 @@ export class ThemeLayer extends React.Component<IThemeLayerProps> {
   };
 
   /** standard cleanup handler to ensure we unregister */
-  public componentWillUnmount(): void {
+  public override componentWillUnmount(): void {
     if (this._registeredTheme !== undefined) {
       removeThemeRegistryListener(this);
       this._registeredTheme = undefined;
     }
   }
 
-  public render(): FurnJSX.Element {
+  public override render(): FurnJSX.Element {
     let themeName = this.props.themeName;
     return (
       <ThemeContext.Consumer>

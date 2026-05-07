@@ -35,11 +35,11 @@ class SwitchPageObject extends BasePage {
     return SWITCH_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return SWITCH_TEST_COMPONENT;
   }
 
-  get _secondaryComponentName() {
+  override get _secondaryComponentName() {
     return SWITCH_NO_A11Y_LABEL_COMPONENT;
   }
 

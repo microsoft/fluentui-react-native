@@ -15,7 +15,7 @@ class DrawerPageObject extends BasePage {
     return Drawer_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return Drawer_TEST_COMPONENT;
   }
 

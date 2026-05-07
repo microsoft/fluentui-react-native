@@ -17,11 +17,11 @@ class LinkV1PageObject extends BasePage {
     return LINKV1_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return LINKV1_TEST_COMPONENT;
   }
 
-  get _secondaryComponentName() {
+  override get _secondaryComponentName() {
     return LINKV1_NO_A11Y_LABEL_COMPONENT;
   }
 
