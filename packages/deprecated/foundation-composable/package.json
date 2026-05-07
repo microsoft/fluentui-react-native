@@ -60,8 +60,7 @@
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "core",
-        "tools-core"
+        "core"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

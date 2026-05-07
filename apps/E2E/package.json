@@ -115,8 +115,7 @@
         "core-win32",
         "core-windows",
         "metro-react-native-babel-transformer",
-        "react",
-        "tools-core"
+        "react"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

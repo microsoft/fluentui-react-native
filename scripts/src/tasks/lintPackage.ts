@@ -31,24 +31,18 @@ export class LintPackageCommand extends Command {
   private changed = false;
   private issues = 0;
   private isScripts = false;
-  private isLibrary = false;
   private projRoot: ProjectRoot = getProjectRoot(process.cwd());
   private result = 0;
-  private removedDevDeps: string[] = [
-    '@fluentui-react-native/babel-config',
-    '@fluentui-react-native/jest-config',
-    '@fluentui-react-native/react-configs',
-  ];
+  private removedDevDeps: string[] = [];
   private addedDevDeps: Record<string, string> = {};
   private ensuredCapabilities: string[] = [];
-  private removedCapabilities: string[] = ['tools-core', 'tools-jest', 'tools-jest-react', 'tools-babel', 'tools-react-configs'];
+  private removedCapabilities: string[] = [];
   private getCatalog = getCatalog();
 
   async execute() {
     this.fix = isFixMode(this.fix);
     const manifest = this.projRoot.manifest;
     this.isScripts = manifest.name === '@fluentui-react-native/scripts';
-    this.isLibrary = !(manifest['rnx-kit']?.kitType === 'app') && manifest.furn?.packageType !== 'tooling';
 
     const runningOps: Promise<void>[] = [];
 

@@ -94,7 +94,6 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
@@ -223,8 +222,7 @@
         "core-windows",
         "react",
         "react-test-renderer",
-        "svg",
-        "tools-core"
+        "svg"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"
