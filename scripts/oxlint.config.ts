@@ -1,4 +1,4 @@
-import config from '../packages/configs/lint-config-rules/private.ts';
+import config from './configs/oxlint/oxlint.config.ts';
 import { defineConfig } from 'oxlint';
 
 export default defineConfig({

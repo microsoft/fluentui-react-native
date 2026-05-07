@@ -49,7 +49,6 @@
     "@babel/runtime": "catalog:",
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/lint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
     "@react-native/metro-babel-transformer": "^0.81.0",

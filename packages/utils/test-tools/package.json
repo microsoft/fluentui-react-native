@@ -37,7 +37,6 @@
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/lint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/theme-types": "workspace:*",
     "@react-native/babel-preset": "^0.81.0",

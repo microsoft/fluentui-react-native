@@ -18,6 +18,7 @@
       "require": "./src/index.js",
       "default": "./src/index.js"
     },
+    "./lint-config": "./configs/oxlint/oxlint.config.ts",
     "./package.json": "./package.json",
     "./tsconfig": "./configs/tsconfig/tsconfig.json",
     "./tsconfig-strict": "./configs/tsconfig/tsconfig.strict.json"
@@ -30,6 +31,10 @@
     "format": "node ./src/cli.mjs format",
     "lint": "node ./src/cli.mjs lint",
     "lint-package": "node ./src/cli.mjs lint-package"
+  },
+  "dependencies": {
+    "@rnx-kit/oxlint-config": "^1.0.3",
+    "oxlint": "^1.57.0"
   },
   "devDependencies": {
     "@fluentui-react-native/kit-config": "workspace:*",

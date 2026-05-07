@@ -34,7 +34,7 @@ export class LintPackageCommand extends Command {
   private isLibrary = false;
   private projRoot: ProjectRoot = getProjectRoot(process.cwd());
   private result = 0;
-  private removedDevDeps: string[] = [];
+  private removedDevDeps: string[] = ['@fluentui-react-native/lint-config-rules'];
   private addedDevDeps: Record<string, string> = {};
   private ensuredCapabilities: string[] = [];
   private removedCapabilities: string[] = [];

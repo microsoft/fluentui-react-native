@@ -34,7 +34,6 @@
     "@babel/core": "catalog:",
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/lint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.81.0",
     "@types/node": "catalog:",

@@ -47,6 +47,6 @@ export class LintCommand extends Command {
       return localConfig;
     }
 
-    return fileURLToPath(new URL('../../../packages/configs/lint-config-rules/private.ts', import.meta.url));
+    return fileURLToPath(new URL('../../configs/oxlint/oxlint.config.ts', import.meta.url));
   }
 }
