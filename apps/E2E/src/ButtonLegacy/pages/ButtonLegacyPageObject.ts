@@ -32,11 +32,11 @@ class ButtonLegacyPageObject extends BasePage {
     return BUTTON_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return BUTTON_TEST_COMPONENT_DEPRECATED;
   }
 
-  get _secondaryComponentName() {
+  override get _secondaryComponentName() {
     return BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED;
   }
 

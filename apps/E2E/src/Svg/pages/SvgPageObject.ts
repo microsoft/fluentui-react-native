@@ -9,7 +9,7 @@ class SvgPageObject extends BasePage {
     return SVG_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return SVG_TEST_COMPONENT;
   }
 

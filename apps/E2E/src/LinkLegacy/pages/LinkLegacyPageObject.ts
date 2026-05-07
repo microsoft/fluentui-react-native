@@ -9,11 +9,11 @@ class LinkLegacyPageObject extends BasePage {
     return LINK_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return LINK_TEST_COMPONENT;
   }
 
-  get _secondaryComponentName() {
+  override get _secondaryComponentName() {
     return LINK_NO_A11Y_LABEL_COMPONENT;
   }
 

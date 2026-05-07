@@ -9,11 +9,11 @@ class IconV1PageObject extends BasePage {
     return ICON_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return ICON_TEST_COMPONENT;
   }
 
-  get _secondaryComponentName() {
+  override get _secondaryComponentName() {
     return ICON_FONT_TEST_COMPONENT;
   }
 

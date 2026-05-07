@@ -53,11 +53,11 @@ class CheckboxLegacyPageObject extends BasePage {
     return CHECKBOX_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return CHECKBOX_TEST_COMPONENT;
   }
 
-  get _secondaryComponentName() {
+  override get _secondaryComponentName() {
     return CHECKBOX_NO_A11Y_LABEL_COMPONENT;
   }
 

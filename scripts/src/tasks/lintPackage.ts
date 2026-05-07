@@ -6,6 +6,7 @@ import { isFixMode } from '../utils/env.ts';
 import { runAlignDeps } from './runAlignDeps.ts';
 import { DepCheckRunner } from './depcheck.ts';
 import { getCatalog } from '../utils/getCatalog.ts';
+import { createJSONValidator } from '@rnx-kit/lint-json';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -74,6 +75,7 @@ export class LintPackageCommand extends Command {
     this.checkDevDeps();
     this.checkPeerDeps();
     this.checkRnxKitConfig();
+    this.checkTsConfig();
     await this.checkCatalogs();
 
     // report the results for the custom linting
@@ -453,6 +455,26 @@ export class LintPackageCommand extends Command {
     }
   }
 
+  private checkTsConfig() {
+    const tsconfigPath = path.join(this.projRoot.root, 'tsconfig.json');
+    if (fs.existsSync(tsconfigPath)) {
+      const validator = createJSONValidator(tsconfigPath, undefined, { fix: this.fix, reportError: this.error });
+      const compilerOptions = validator.raw.compilerOptions;
+      if (typeof compilerOptions === 'object' && compilerOptions !== null && !Array.isArray(compilerOptions)) {
+        if (!compilerOptions.noEmit) {
+          validator.enforce('compilerOptions.rootDir', 'src');
+          validator.enforce('compilerOptions.outDir', 'lib');
+        }
+      }
+      validator.finish();
+    }
+  }
+
+  private error = (message: string) => {
+    console.error(`- Error: ${message}`);
+    this.issues++;
+  };
+
   private warnIf(check: boolean, message: string, fixFn?: () => void) {
     if (check) {
       if (this.fix && fixFn) {
@@ -472,8 +494,7 @@ export class LintPackageCommand extends Command {
         this.changed = true;
         console.log(`- Fixed: ${message}`);
       } else {
-        console.error(`- Error: ${message}`);
-        this.issues++;
+        this.error(message);
       }
     }
   }

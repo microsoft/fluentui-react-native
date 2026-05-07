@@ -1,7 +1,9 @@
 {
-  "extends": "@fluentui-react-native/scripts/configs/tsconfig.json",
+  "extends": "@fluentui-react-native/scripts/tsconfig",
   "compilerOptions": {
-    "outDir": "lib"
+    "outDir": "lib",
+    "rootDir": "src"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/__tests__/Avatar.test.jsx"]
 }

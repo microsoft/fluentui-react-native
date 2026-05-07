@@ -1,4 +1,7 @@
 {
-  "extends": "@fluentui-react-native/scripts/configs/tsconfig.json",
-  "include": ["src"]
+  "extends": "@fluentui-react-native/scripts/tsconfig",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["index.js"]
 }

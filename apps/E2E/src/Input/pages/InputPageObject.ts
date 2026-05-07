@@ -32,7 +32,7 @@ class InputPageObject extends BasePage {
     return INPUT_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return INPUT_TEST_COMPONENT;
   }
 

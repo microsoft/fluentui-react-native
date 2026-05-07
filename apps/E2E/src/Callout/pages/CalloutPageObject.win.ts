@@ -33,7 +33,7 @@ class CalloutPageObject extends BasePage {
     return CALLOUT_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return CALLOUT_TEST_COMPONENT;
   }
 

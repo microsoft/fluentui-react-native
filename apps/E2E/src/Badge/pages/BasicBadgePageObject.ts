@@ -13,11 +13,11 @@ class BasicBadgePageObject extends BasePage {
     return BADGE_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return BADGE_TEST_COMPONENT;
   }
 
-  get _secondaryComponentName() {
+  override get _secondaryComponentName() {
     return BADGE_SECONDARY_TEST_COMPONENT;
   }
 }

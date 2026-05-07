@@ -92,7 +92,7 @@ class FocusZonePageObject extends BasePage {
     return FOCUSZONE_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return FOCUSZONE_TEST_COMPONENT;
   }
 

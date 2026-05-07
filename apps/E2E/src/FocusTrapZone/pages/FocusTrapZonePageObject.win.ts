@@ -9,7 +9,7 @@ class FocusTrapZonePageObject extends BasePage {
     return FOCUSTRAPZONE_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return FOCUSTRAPZONE_TEST_COMPONENT;
   }
 

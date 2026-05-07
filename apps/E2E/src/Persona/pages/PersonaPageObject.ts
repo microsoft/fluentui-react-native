@@ -9,7 +9,7 @@ class PersonaPageObject extends BasePage {
     return PERSONA_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return PERSONA_TEST_COMPONENT;
   }
 

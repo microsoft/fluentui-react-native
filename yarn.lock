@@ -5057,6 +5057,7 @@ __metadata:
     "@rnx-kit/align-deps": "catalog:"
     "@rnx-kit/config": "catalog:"
     "@rnx-kit/jest-preset": "catalog:"
+    "@rnx-kit/lint-json": "npm:^0.1.0"
     "@rnx-kit/oxlint-config": "npm:^1.0.3"
     "@rnx-kit/reporter": "catalog:"
     "@rnx-kit/tools-packages": "catalog:"
@@ -9659,6 +9660,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/lint-json@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@rnx-kit/lint-json@npm:0.1.0"
+  dependencies:
+    "@rnx-kit/tools-filesystem": "npm:^0.2.0"
+    "@rnx-kit/tools-formatting": "npm:^0.1.0"
+  checksum: 10c0/d650dfd38388d838bbf383f8727438b546147cfa742b99374a3380af8c3f3d0e1773109e936e92889695e34c389f01166ffa699ec1320b320b36c2a8ceda7301
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/lint-lockfile@npm:^0.1.3":
   version: 0.1.3
   resolution: "@rnx-kit/lint-lockfile@npm:0.1.3"
@@ -9873,6 +9884,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/tools-formatting@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@rnx-kit/tools-formatting@npm:0.1.0"
+  checksum: 10c0/50bb60a782bc6492d7d3815450e509be3692d07692e03752e4f09688778b773808b5290c841043821b25af081ca6033e346e6486bae7717ce381440b53ae04fb
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/tools-language@npm:^3.0.1":
   version: 3.0.1
   resolution: "@rnx-kit/tools-language@npm:3.0.1"
@@ -9948,10 +9966,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/tsconfig@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@rnx-kit/tsconfig@npm:3.0.0"
-  checksum: 10c0/87725a8b4bff64e998f1babfde4982aab3ec22538d0bde67f4980c019199741a91e796ba047d8cfafb538af3c6c07c1ae07239c9b3d73fe7ba30ab36cfbfe984
+"@rnx-kit/tsconfig@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@rnx-kit/tsconfig@npm:3.0.3"
+  checksum: 10c0/6914e21af5975f5c9793d5a9651d735e73b47595f68c0982e3d7350a07a677be9e221b6e5a4d1e1c607986131e44579af9d5a1c151ba78ba615d945c5eecf621
   languageName: node
   linkType: hard
 

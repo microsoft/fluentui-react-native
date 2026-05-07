@@ -12,11 +12,11 @@ class AvatarPageObject extends BasePage {
     return AVATAR_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return AVATAR_TEST_COMPONENT;
   }
 
-  get _secondaryComponentName() {
+  override get _secondaryComponentName() {
     return AVATAR_SECONDARY_TEST_COMPONENT;
   }
 }

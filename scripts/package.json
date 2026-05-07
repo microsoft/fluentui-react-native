@@ -13,6 +13,15 @@
   },
   "type": "module",
   "main": "./src/index.js",
+  "exports": {
+    ".": {
+      "require": "./src/index.js",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json",
+    "./tsconfig": "./configs/tsconfig/tsconfig.json",
+    "./tsconfig-strict": "./configs/tsconfig/tsconfig.strict.json"
+  },
   "scripts": {
     "build": "tsgo",
     "build-core": "tsgo",
@@ -27,6 +36,7 @@
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/config": "catalog:",
     "@rnx-kit/jest-preset": "catalog:",
+    "@rnx-kit/lint-json": "^0.1.0",
     "@rnx-kit/oxlint-config": "^1.0.3",
     "@rnx-kit/reporter": "catalog:",
     "@rnx-kit/tools-packages": "catalog:",

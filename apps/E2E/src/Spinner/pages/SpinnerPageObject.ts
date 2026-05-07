@@ -9,7 +9,7 @@ class SpinnerPageObject extends BasePage {
     return SPINNER_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return SPINNER_TEST_COMPONENT;
   }
 
