@@ -23,7 +23,6 @@ type Capability =
   | 'babel-preset-react-native'
   | 'babel-core'
   | 'tools-babel'
-  | 'tools-eslint'
   | 'tools-jest'
   | 'tools-jest-react'
   | 'tools-core'
@@ -123,12 +122,6 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
       name: '@fluentui-react-native/scripts',
       version: 'workspace:*',
       devOnly: true,
-    },
-    'tools-eslint': {
-      name: '@fluentui-react-native/lint-config-rules',
-      version: 'workspace:*',
-      devOnly: true,
-      capabilities: ['tools-core'],
     },
     'tools-jest': {
       name: '@fluentui-react-native/jest-config',

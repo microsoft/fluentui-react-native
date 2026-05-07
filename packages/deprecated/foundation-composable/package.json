@@ -41,7 +41,6 @@
   },
   "devDependencies": {
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/lint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/react": "~19.1.4",
     "react": "19.1.4",

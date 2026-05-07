@@ -44,7 +44,6 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/lint-config-rules": "workspace:*",
     "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
@@ -70,7 +69,6 @@
         "core-dev-only",
         "react",
         "tools-core",
-        "tools-eslint",
         "tools-jest-react"
       ]
     }
