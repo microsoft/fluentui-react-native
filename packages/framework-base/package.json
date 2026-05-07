@@ -69,7 +69,6 @@
         "core-dev-only",
         "react",
         "tools-core",
-        "tools-eslint",
         "tools-jest-react"
       ]
     }
