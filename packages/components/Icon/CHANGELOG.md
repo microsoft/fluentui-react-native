@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
+## 0.22.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/framework@0.15.4
+  - @fluentui-react-native/text@0.25.4
+  - @fluentui-react-native/framework-base@0.3.4
+  - @fluentui-react-native/adapters@0.14.4
+
 ## 0.22.3
 
 ### Patch Changes

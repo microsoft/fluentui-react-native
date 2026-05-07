@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/codemods
 
+## 0.6.3
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+
 ## 0.6.2
 
 ### Patch Changes

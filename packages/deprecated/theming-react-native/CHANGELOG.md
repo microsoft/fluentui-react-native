@@ -1,5 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
+## 0.21.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @uifabricshared/theme-registry@0.13.4
+  - @uifabricshared/theming-ramp@0.21.4
+  - @fluentui-react-native/default-theme@0.27.4
+  - @fluentui-react-native/win32-theme@0.39.4
+
 ## 0.21.3
 
 ### Patch Changes

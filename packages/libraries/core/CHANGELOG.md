@@ -1,5 +1,28 @@
 # Change Log - @fluentui/react-native
 
+## 0.43.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/contextual-menu@0.25.4
+  - @fluentui-react-native/focus-trap-zone@0.13.4
+  - @fluentui-react-native/interactive-hooks@0.28.4
+  - @fluentui-react-native/persona-coin@0.16.4
+  - @fluentui-react-native/menu-button@0.14.4
+  - @fluentui-react-native/radio-group@0.22.4
+  - @fluentui-react-native/focus-zone@0.22.4
+  - @fluentui-react-native/pressable@0.13.4
+  - @fluentui-react-native/separator@0.19.4
+  - @fluentui-react-native/checkbox@0.24.4
+  - @fluentui-react-native/callout@0.28.4
+  - @fluentui-react-native/persona@0.17.4
+  - @fluentui-react-native/tablist@0.8.4
+  - @fluentui-react-native/button@0.40.4
+  - @fluentui-react-native/link@0.24.4
+  - @fluentui-react-native/text@0.25.4
+
 ## 0.43.3
 
 ### Patch Changes

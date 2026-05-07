@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/experimental-appearance-additions
 
+## 0.8.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/framework@0.15.4
+
 ## 0.8.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/lint-config-rules",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Oxlint config for Fluent UI React Native",
   "license": "MIT",
   "repository": {

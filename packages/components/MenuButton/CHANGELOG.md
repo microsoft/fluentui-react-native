@@ -1,5 +1,19 @@
 # Change Log - @fluentui-react-native/menu-button
 
+## 0.14.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @uifabricshared/foundation-composable@0.14.4
+  - @uifabricshared/foundation-settings@0.16.4
+  - @uifabricshared/foundation-compose@1.16.4
+  - @fluentui-react-native/contextual-menu@0.25.4
+  - @fluentui-react-native/button@0.40.4
+  - @fluentui-react-native/icon@0.22.4
+  - @fluentui-react-native/tokens@0.24.4
+
 ## 0.14.3
 
 ### Patch Changes

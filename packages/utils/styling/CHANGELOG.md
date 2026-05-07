@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/styling-utils
 
+## 0.8.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+
 ## 0.8.3
 
 ### Patch Changes

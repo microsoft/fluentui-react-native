@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/use-styling
 
+## 0.14.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/use-tokens@0.7.4
+  - @fluentui-react-native/framework-base@0.3.4
+
 ## 0.14.3
 
 ### Patch Changes

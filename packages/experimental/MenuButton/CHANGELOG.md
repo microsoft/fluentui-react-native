@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
+## 0.11.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/contextual-menu@0.25.4
+  - @fluentui-react-native/framework@0.15.4
+  - @fluentui-react-native/button@0.40.4
+  - @fluentui-react-native/tokens@0.24.4
+
 ## 0.11.3
 
 ### Patch Changes

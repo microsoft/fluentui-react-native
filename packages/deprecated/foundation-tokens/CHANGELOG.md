@@ -1,5 +1,15 @@
 # Change Log - @uifabricshared/foundation-tokens
 
+## 0.16.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @uifabricshared/foundation-settings@0.16.4
+  - @fluentui-react-native/framework-base@0.3.4
+  - @fluentui-react-native/tokens@0.24.4
+
 ## 0.16.3
 
 ### Patch Changes

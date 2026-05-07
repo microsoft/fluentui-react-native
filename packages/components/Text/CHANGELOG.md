@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/text
 
+## 0.25.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @uifabricshared/foundation-compose@1.16.4
+  - @fluentui-react-native/interactive-hooks@0.28.4
+  - @fluentui-react-native/theme-tokens@0.28.4
+  - @fluentui-react-native/framework@0.15.4
+  - @fluentui-react-native/adapters@0.14.4
+  - @fluentui-react-native/tokens@0.24.4
+
 ## 0.25.3
 
 ### Patch Changes

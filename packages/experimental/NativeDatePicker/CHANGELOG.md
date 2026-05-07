@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
+## 0.12.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+
 ## 0.12.3
 
 ### Patch Changes

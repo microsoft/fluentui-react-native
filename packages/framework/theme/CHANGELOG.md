@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/theme
 
+## 0.12.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/theme-types@0.44.4
+  - @fluentui-react-native/framework-base@0.3.4
+
 ## 0.12.3
 
 ### Patch Changes

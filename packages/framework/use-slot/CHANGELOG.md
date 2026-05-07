@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/use-slot
 
+## 0.7.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/framework-base@0.3.4
+
 ## 0.7.3
 
 ### Patch Changes

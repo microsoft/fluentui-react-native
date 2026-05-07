@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
+## 0.18.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/checkbox@0.24.4
+  - @fluentui-react-native/framework@0.15.4
+
 ## 0.18.3
 
 ### Patch Changes

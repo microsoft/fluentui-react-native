@@ -1,5 +1,20 @@
 # Change Log - @uifabricshared/foundation-compose
 
+## 1.16.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @uifabricshared/foundation-composable@0.14.4
+  - @uifabricshared/foundation-settings@0.16.4
+  - @uifabricshared/foundation-tokens@0.16.4
+  - @uifabricshared/themed-settings@0.13.4
+  - @uifabricshared/theming-ramp@0.21.4
+  - @fluentui-react-native/default-theme@0.27.4
+  - @fluentui-react-native/theme-types@0.44.4
+  - @fluentui-react-native/framework-base@0.3.4
+
 ## 1.16.3
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
+## 0.7.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/pressable@0.13.4
+  - @fluentui-react-native/framework@0.15.4
+  - @fluentui-react-native/theme-types@0.44.4
+  - @fluentui-react-native/framework-base@0.3.4
+
 ## 0.7.3
 
 ### Patch Changes

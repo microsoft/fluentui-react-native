@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/input
 
+## 0.8.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/interactive-hooks@0.28.4
+  - @fluentui-react-native/use-styling@0.14.4
+  - @fluentui-react-native/theme-tokens@0.28.4
+  - @fluentui-react-native/framework@0.15.4
+  - @fluentui-react-native/icon@0.22.4
+  - @fluentui-react-native/text@0.25.4
+  - @fluentui-react-native/styling-utils@0.8.4
+  - @fluentui-react-native/tokens@0.24.4
+
 ## 0.8.3
 
 ### Patch Changes

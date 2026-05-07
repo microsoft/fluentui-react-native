@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
+## 0.7.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+
 ## 0.7.3
 
 ### Patch Changes

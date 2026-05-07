@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/experimental-activity-indicator
 
+## 0.11.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/framework@0.15.4
+
 ## 0.11.3
 
 ### Patch Changes

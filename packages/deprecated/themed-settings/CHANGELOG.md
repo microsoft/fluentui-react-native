@@ -1,5 +1,14 @@
 # Change Log - @uifabricshared/themed-settings
 
+## 0.13.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @uifabricshared/foundation-settings@0.16.4
+  - @fluentui-react-native/framework-base@0.3.4
+
 ## 0.13.3
 
 ### Patch Changes

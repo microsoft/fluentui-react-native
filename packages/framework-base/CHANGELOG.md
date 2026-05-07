@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.3.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+
 ## 0.3.3
 
 ### Patch Changes

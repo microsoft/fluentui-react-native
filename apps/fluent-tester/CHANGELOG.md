@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/tester
 
+## 0.170.52
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+
 ## 0.170.51
 
 ### Patch Changes

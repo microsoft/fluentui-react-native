@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/avatar
 
+## 1.13.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/use-styling@0.14.4
+  - @fluentui-react-native/theming-utils@0.27.4
+  - @fluentui-react-native/theme-tokens@0.28.4
+  - @fluentui-react-native/framework@0.15.4
+  - @fluentui-react-native/badge@0.12.4
+  - @fluentui-react-native/icon@0.22.4
+  - @fluentui-react-native/adapters@0.14.4
+  - @fluentui-react-native/tokens@0.24.4
+
 ## 1.13.3
 
 ### Patch Changes

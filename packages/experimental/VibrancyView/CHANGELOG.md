@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/vibrancy-view
 
+## 0.4.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/adapters@0.14.4
+
 ## 0.4.3
 
 ### Patch Changes

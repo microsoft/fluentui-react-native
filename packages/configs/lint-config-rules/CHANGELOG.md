@@ -1,5 +1,11 @@
 # Change Log - @uifabric/eslint-config-rules
 
+## 0.1.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+
 ## 0.1.3
 
 ### Patch Changes

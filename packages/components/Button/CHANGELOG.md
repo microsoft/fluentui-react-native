@@ -1,5 +1,29 @@
 # Change Log - @fluentui-react-native/button
 
+## 0.40.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @uifabricshared/foundation-composable@0.14.4
+  - @uifabricshared/foundation-settings@0.16.4
+  - @fluentui-react-native/experimental-activity-indicator@0.11.4
+  - @uifabricshared/foundation-compose@1.16.4
+  - @fluentui-react-native/interactive-hooks@0.28.4
+  - @fluentui-react-native/use-styling@0.14.4
+  - @fluentui-react-native/theming-utils@0.27.4
+  - @fluentui-react-native/pressable@0.13.4
+  - @fluentui-react-native/theme-tokens@0.28.4
+  - @fluentui-react-native/experimental-shadow@0.7.4
+  - @fluentui-react-native/framework@0.15.4
+  - @fluentui-react-native/theme-types@0.44.4
+  - @fluentui-react-native/icon@0.22.4
+  - @fluentui-react-native/text@0.25.4
+  - @fluentui-react-native/adapters@0.14.4
+  - @fluentui-react-native/styling-utils@0.8.4
+  - @fluentui-react-native/tokens@0.24.4
+
 ## 0.40.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/adapters
 
+## 0.14.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+
 ## 0.14.3
 
 ### Patch Changes

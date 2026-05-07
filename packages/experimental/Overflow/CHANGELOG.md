@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/overflow
 
+## 0.4.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [1598157]
+  - @fluentui-react-native/framework@0.15.4
+  - @fluentui-react-native/framework-base@0.3.4
+
 ## 0.4.3
 
 ### Patch Changes

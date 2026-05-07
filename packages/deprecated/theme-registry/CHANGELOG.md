@@ -1,5 +1,11 @@
 # Change Log - @uifabricshared/theme-registry
 
+## 0.13.4
+
+### Patch Changes
+
+- 1598157: Switch tsconfig settings to more modern settings
+
 ## 0.13.3
 
 ### Patch Changes
