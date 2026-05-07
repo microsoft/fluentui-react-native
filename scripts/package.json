@@ -33,10 +33,15 @@
     "lint-package": "node ./src/cli.mjs lint-package"
   },
   "dependencies": {
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:",
+    "@rnx-kit/jest-preset": "catalog:",
     "@rnx-kit/oxlint-config": "^1.0.3",
     "oxlint": "^1.57.0"
   },
   "devDependencies": {
+    "@babel/core": "catalog:",
+    "@babel/runtime": "catalog:",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/config": "catalog:",

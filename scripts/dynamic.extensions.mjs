@@ -2,7 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { getToolVersion } from './src/preinstall/tool-versions.js';
+import { getToolVersion, hasJestConfig } from './src/preinstall/tool-versions.js';
 
 /**
  * @typedef {() => boolean} ConditionalCheck
@@ -50,7 +50,7 @@ function addOxfmt(manifest) {
  * @returns {boolean} - True if Jest should be added, false otherwise.
  */
 function addJest(cwd, manifest) {
-  return Boolean(manifest.scripts?.test && fs.existsSync(path.join(cwd, 'jest.config.js')));
+  return Boolean(manifest.scripts?.test && hasJestConfig(cwd));
 }
 
 /**

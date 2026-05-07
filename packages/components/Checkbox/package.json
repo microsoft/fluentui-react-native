@@ -94,6 +94,9 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "win32"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {

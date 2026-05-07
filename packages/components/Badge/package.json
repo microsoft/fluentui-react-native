@@ -88,6 +88,9 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "ios"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {

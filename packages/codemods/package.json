@@ -3,19 +3,13 @@
   "version": "0.6.2",
   "description": "Transform files to make refactoring FURN code easier",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
-  "license": "MIT",
-  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/codemods"
   },
-  "bin": {
-    "transform": "./transform.js"
-  },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -23,6 +17,12 @@
       "require": "./lib-commonjs/index.js",
       "default": "./src/index.ts"
     }
+  },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "bin": {
+    "transform": "./transform.js"
   },
   "scripts": {
     "build": "fluentui-scripts build",
@@ -57,7 +57,8 @@
       "ignorePatterns": [
         "src/transforms/__testfixtures__/*"
       ]
-    }
+    },
+    "jestPlatform": "react"
   },
   "rnx-kit": {
     "kitType": "library",

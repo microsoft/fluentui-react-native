@@ -76,6 +76,7 @@ export class LintPackageCommand extends Command {
     this.checkPeerDeps();
     this.checkRnxKitConfig();
     this.checkTsConfig();
+    this.checkJestPlatform();
     await this.checkCatalogs();
 
     // report the results for the custom linting
@@ -91,6 +92,31 @@ export class LintPackageCommand extends Command {
     }
 
     return this.result;
+  }
+
+  private checkJestPlatform() {
+    const jestConfigPath = path.join(this.projRoot.root, 'jest.config.js');
+    const hasJestConfig = fs.existsSync(jestConfigPath);
+    if (hasJestConfig && !this.projRoot.manifest.furn?.jestPlatform) {
+      const configSrc = fs.readFileSync(jestConfigPath, 'utf-8');
+      if (configSrc.includes('@fluentui-react-native/react-configs/jest.config.js')) {
+        this.errorIf(true, 'Missing furn.jestPlatform setting', () => {
+          this.projRoot.updateRecordEntry('furn' as any, 'jestPlatform', 'react');
+        });
+      } else {
+        // with configs of the format:
+        // const { configureReactNativeJest } = require('@fluentui-react-native/jest-config');
+        // module.exports = configureReactNativeJest('android');
+        // parse out the platform string and set that into furn.jestPlatform
+        const match = configSrc.match(/configureReactNativeJest\(['"](\w+)['"]\)/);
+        if (match) {
+          const platform = match[1];
+          this.errorIf(true, `Missing furn.jestPlatform setting: ${platform}`, () => {
+            this.projRoot.updateRecordEntry('furn' as any, 'jestPlatform', platform);
+          });
+        }
+      }
+    }
   }
 
   private handleResult(code: number, source: string) {

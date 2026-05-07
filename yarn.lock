@@ -4995,8 +4995,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/scripts@workspace:scripts"
   dependencies:
+    "@babel/core": "catalog:"
+    "@babel/runtime": "catalog:"
+    "@fluentui-react-native/babel-config": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@rnx-kit/align-deps": "catalog:"
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:"
     "@rnx-kit/config": "catalog:"
     "@rnx-kit/jest-preset": "catalog:"
     "@rnx-kit/lint-json": "npm:^0.1.0"
