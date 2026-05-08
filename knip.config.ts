@@ -1,9 +1,9 @@
 import type { KnipConfig } from 'knip';
 import { repoContext } from './scripts/src/repoContext.ts';
+import { PackageContext } from './scripts/src/pkgContext.ts';
 import path from 'node:path';
 
 const ignoredPaths = ['apps', 'scripts', 'packages/configs', 'packages/dependency-profiles'];
-const ignoredPackages = ['@babel/core', '@react-native/babel-preset'];
 
 const config = async (): Promise<KnipConfig> => {
   const repoCtx = repoContext();
@@ -19,14 +19,21 @@ const config = async (): Promise<KnipConfig> => {
         // skip the root dir
         return [relativePath, {}];
       }
+      const ctx = PackageContext.init(dir);
+      const extraEntries = ctx.manifest.furn?.knip?.extraEntries;
+      const knip = ctx.manifest.furn?.knip || {};
+      const baseEntry = knip.entry ?? ['src/**/*.{ts,tsx}'];
+      const entry = extraEntries ? [...baseEntry, ...extraEntries] : baseEntry;
+      const baseProject = knip.project ?? ['src/**/*'];
+      const project = knip.extraProject ? [...baseProject, ...knip.extraProject] : baseProject;
 
-      const ignoreDependencies = ignoredPackages;
+      const ignoreDependencies: string[] = [];
 
       return [
         relativePath,
         {
-          entry: 'src/index.{ts,mjs,cjs,js,tsx,jsx}',
-          project: 'src/**/*',
+          entry,
+          project,
           ignoreDependencies,
         },
       ];

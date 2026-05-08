@@ -92,7 +92,12 @@
     }
   },
   "furn": {
-    "jestPlatform": "win32"
+    "jestPlatform": "win32",
+    "knip": {
+      "extraEntries": [
+        "src/**/*.ts"
+      ]
+    }
   },
   "rnx-kit": {
     "kitType": "library",

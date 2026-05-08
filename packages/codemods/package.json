@@ -56,7 +56,12 @@
         "src/transforms/__testfixtures__/*"
       ]
     },
-    "jestPlatform": "react"
+    "jestPlatform": "react",
+    "knip": {
+      "extraEntries": [
+        "src/**/*.test.ts"
+      ]
+    }
   },
   "rnx-kit": {
     "kitType": "library",

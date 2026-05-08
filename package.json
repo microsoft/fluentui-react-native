@@ -30,6 +30,7 @@
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "lint-lockfile": "lint-lockfile",
+    "lint-repo": "node ./scripts/src/tasks/lintRepo.ts",
     "test-links": "markdown-link-check"
   },
   "devDependencies": {
