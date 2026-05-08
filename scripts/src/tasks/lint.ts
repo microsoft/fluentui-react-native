@@ -1,5 +1,3 @@
-// @ts-check
-
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -7,11 +5,9 @@ import { Command, Option } from 'clipanion';
 import { isFixMode } from '../utils/env.ts';
 
 export class LintCommand extends Command {
-  /** @override */
-  static paths = [['lint']];
+  static override paths = [['lint']];
 
-  /** @override */
-  static usage = Command.Usage({
+  static override usage = Command.Usage({
     description: 'Lints the current package',
     details: 'This command lints the current package using oxlint.',
     examples: [['Lint the current package', '$0 lint']],

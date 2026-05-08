@@ -1,15 +1,11 @@
-// @ts-check
-
 import { Command, Option } from 'clipanion';
-import { runScript } from '../utils/runScript.js';
+import { runScript } from '../utils/runScript.ts';
 import { isFixMode } from '../utils/env.ts';
 
 export class FormatCommand extends Command {
-  /** @override */
-  static paths = [['format']];
+  static override paths = [['format']];
 
-  /** @override */
-  static usage = Command.Usage({
+  static override usage = Command.Usage({
     description: 'Formats the current package',
     details: 'This command formats the current package using oxfmt.',
     examples: [['Format the current package', '$0 format']],

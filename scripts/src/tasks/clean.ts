@@ -1,15 +1,11 @@
-// @ts-check
-
 import { Command } from 'clipanion';
 import fs from 'node:fs';
 import path from 'node:path';
 
 export class CleanCommand extends Command {
-  /** @override */
-  static paths = [['clean']];
+  static override paths = [['clean']];
 
-  /** @override */
-  static usage = Command.Usage({
+  static override usage = Command.Usage({
     description: 'Cleans the current package',
     details: 'This command removes all build artifacts from the current package.',
     examples: [['Clean the current package', '$0 clean']],
@@ -22,9 +18,8 @@ export class CleanCommand extends Command {
 
 /**
  * Cleans the specified folder by removing certain directories and files.
- * @param {string} [cwd=process.cwd()] - The target directory to clean.
  */
-export function cleanFolder(cwd = process.cwd()) {
+export function cleanFolder(cwd: string = process.cwd()): number {
   const options = { force: true, maxRetries: 3, recursive: true };
   [
     'lib',

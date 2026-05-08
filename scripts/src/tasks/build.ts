@@ -1,7 +1,5 @@
-// @ts-check
-
 import { Command } from 'clipanion';
-import { runYarn } from '../utils/runScript.js';
+import { runYarn } from '../utils/runScript.ts';
 import { getProjectRoot } from '../utils/projectRoot.ts';
 import { getResolvedConfig } from '../utils/buildConfig.ts';
 

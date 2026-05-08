@@ -1,16 +1,10 @@
-// @ts-check
-
-const child_process = require('child_process');
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
+import child_process from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
 // This script MUST NOT have any deps aside from Node built-ins, because it deletes all node_modules!
 
-/**
- * @param {string} question - The question to prompt the user with
- * @returns {Promise<string>}
- * */
-function prompt(question) {
+function prompt(question: string): Promise<string> {
   return new Promise((resolve) => {
     process.stdin.resume();
     process.stdout.write(question);
@@ -22,10 +16,7 @@ function prompt(question) {
   });
 }
 
-/**
- * @param {string} itemPath - The path to the item to check
- */
-function deleteIfSymlink(itemPath) {
+function deleteIfSymlink(itemPath: string): void {
   itemPath = path.resolve(itemPath);
   try {
     // Compare realpath since fs.statSync(itemPath).isSymbolicLink() doesn't work on Windows
@@ -40,10 +31,8 @@ function deleteIfSymlink(itemPath) {
 
 /**
  * Deletes symlinks in the specified node_modules directory.
- * @param {string} nodeModulesPath - The path to the node_modules directory
- * @returns {void}
  */
-function deleteNodeModulesSymlinks(nodeModulesPath) {
+function deleteNodeModulesSymlinks(nodeModulesPath: string): void {
   if (!fs.existsSync(nodeModulesPath)) {
     return;
   }
@@ -62,10 +51,8 @@ function deleteNodeModulesSymlinks(nodeModulesPath) {
 
 /**
  * Deletes symlinks in the specified parent folder.
- * @param {string} parentFolder - The path to the parent folder
- * @returns {void}
  */
-function deleteSymlinks(parentFolder) {
+function deleteSymlinks(parentFolder: string): void {
   const parentPath = path.join(process.cwd(), parentFolder);
   if (!fs.existsSync(parentPath)) {
     return;

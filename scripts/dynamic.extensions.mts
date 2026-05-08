@@ -1,23 +1,19 @@
-// @ts-check
-
 import fs from 'node:fs';
 import path from 'node:path';
-import { getToolVersion, hasJestConfig } from './src/preinstall/tool-versions.js';
+import { getToolVersion, hasJestConfig } from './src/preinstall/tool-versions.ts';
+import type { PackageManifest } from './src/utils/projectRoot.ts';
 
-/**
- * @typedef {() => boolean} ConditionalCheck
- */
+type ConditionalCheck = () => boolean;
 
 /**
  * Conditionally add a dependency to the given dependencies object if it is not already present
- * @param {string[]} depsToAdd
- * @param {import('./src/utils/projectRoot.ts').PackageManifest} manifest
- * @param {ConditionalCheck | boolean | undefined} condition
- * @returns {Record<string, string>}
  */
-function conditionallyAdd(depsToAdd, manifest, condition) {
-  /** @type {Record<string, string>} */
-  const newDeps = {};
+function conditionallyAdd(
+  depsToAdd: string[],
+  manifest: PackageManifest,
+  condition: ConditionalCheck | boolean | undefined,
+): Record<string, string> {
+  const newDeps: Record<string, string> = {};
   if (!condition || (typeof condition === 'function' ? condition() : condition)) {
     for (const dep of depsToAdd) {
       if (!manifest.dependencies?.[dep] && !manifest.devDependencies?.[dep]) {
@@ -36,29 +32,23 @@ function conditionallyAdd(depsToAdd, manifest, condition) {
 }
 
 /**
- * @param {import('./src/utils/projectRoot.ts').PackageManifest} manifest - The package manifest.
- * @returns {boolean} true if oxfmt should be added based on the manifest's prettier scripts
+ * Returns true if oxfmt should be added based on the manifest's prettier scripts.
  */
-function addOxfmt(manifest) {
+function addOxfmt(manifest: PackageManifest): boolean {
   return Boolean(manifest && manifest.scripts && (manifest.scripts.format || manifest.scripts['format:fix']));
 }
 
 /**
  * Check if Jest is already in the manifest or if a Jest script is defined.
- * @param {string} cwd - The current working directory.
- * @param {import('./src/utils/projectRoot.ts').PackageManifest} manifest - The package manifest.
- * @returns {boolean} - True if Jest should be added, false otherwise.
  */
-function addJest(cwd, manifest) {
+function addJest(cwd: string, manifest: PackageManifest): boolean {
   return Boolean(manifest.scripts?.test && hasJestConfig(cwd));
 }
 
 /**
  * Get the dynamic dependencies for the given package given the package root directory and its manifest.
- * @param {{cwd: string, manifest: import('./src/utils/projectRoot.ts').PackageManifest}} param0
- * @returns { { dependencies: Record<string, string> } }
  */
-export default function ({ cwd, manifest }) {
+export default function ({ cwd, manifest }: { cwd: string; manifest: PackageManifest }): { dependencies: Record<string, string> } {
   const enableLinting = Boolean(manifest.scripts && manifest.scripts.lint);
 
   return {

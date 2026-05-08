@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * Quick and dirty script to ensure we have got our nested peerDependencies correct
  *
@@ -11,7 +9,17 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 import { findGitRoot, getPackageInfos } from 'workspace-tools';
 
-export function checkDependencies() {
+type PackageJson = {
+  'rnx-kit'?: { kitType?: string };
+  peerDependencies?: Record<string, string>;
+  peerDependenciesMeta?: Record<string, { optional: boolean }>;
+};
+
+type PackageInfoWithJson = ReturnType<typeof getPackageInfos>[string] & {
+  pkgJson: PackageJson;
+};
+
+export function checkDependencies(): void {
   let requireRescan = true;
   let everWrote = false;
 
@@ -21,7 +29,7 @@ export function checkDependencies() {
   while (requireRescan) {
     requireRescan = false;
 
-    const infos = getPackageInfos(findGitRoot(process.cwd()));
+    const infos = getPackageInfos(findGitRoot(process.cwd())) as Record<string, PackageInfoWithJson>;
 
     // getPackageInfos unfortunately doesn't provide peerDependenciesMeta, so we need to parse the whole package.json
     for (const pkgName in infos) {
@@ -34,10 +42,8 @@ export function checkDependencies() {
 
       const deps = { ...infos[pkgName].dependencies, ...infos[pkgName].peerDependencies };
 
-      /** @type {{ name: string, version: string }[]} */
-      const missingPeerDeps = [];
-      /** @type {string[]} */
-      const missingPeerDepsMeta = [];
+      const missingPeerDeps: { name: string; version: string }[] = [];
+      const missingPeerDepsMeta: string[] = [];
 
       for (const dep in deps) {
         if (infos[dep]) {
@@ -69,7 +75,7 @@ export function checkDependencies() {
           infos[pkgName].pkgJson.peerDependencies = {};
         }
         for (const missingDep of missingPeerDeps) {
-          infos[pkgName].pkgJson.peerDependencies[missingDep.name] = missingDep.version;
+          infos[pkgName].pkgJson.peerDependencies![missingDep.name] = missingDep.version;
         }
         requireWriteFile = true;
       }
@@ -80,7 +86,7 @@ export function checkDependencies() {
         }
 
         for (const missingMeta of missingPeerDepsMeta) {
-          infos[pkgName].pkgJson.peerDependenciesMeta[missingMeta] = {
+          infos[pkgName].pkgJson.peerDependenciesMeta![missingMeta] = {
             optional: true,
           };
         }
