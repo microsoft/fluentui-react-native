@@ -44,7 +44,6 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
     "@types/node": "catalog:",
@@ -61,15 +60,16 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "react"
+  },
   "rnx-kit": {
     "extends": "@fluentui-react-native/kit-config",
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
         "core-dev-only",
-        "react",
-        "tools-core",
-        "tools-jest-react"
+        "react"
       ]
     }
   }

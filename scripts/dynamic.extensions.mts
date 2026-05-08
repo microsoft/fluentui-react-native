@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { getToolVersion } from './src/preinstall/tool-versions.ts';
+import { getToolVersion, hasJestConfig } from './src/preinstall/tool-versions.ts';
 import type { PackageManifest } from './src/utils/projectRoot.ts';
 
 type ConditionalCheck = () => boolean;
@@ -42,7 +42,7 @@ function addOxfmt(manifest: PackageManifest): boolean {
  * Check if Jest is already in the manifest or if a Jest script is defined.
  */
 function addJest(cwd: string, manifest: PackageManifest): boolean {
-  return Boolean(manifest.scripts?.test && fs.existsSync(path.join(cwd, 'jest.config.js')));
+  return Boolean(manifest.scripts?.test && hasJestConfig(cwd));
 }
 
 /**

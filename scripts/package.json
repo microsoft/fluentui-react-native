@@ -14,7 +14,12 @@
   "type": "module",
   "main": "./src/index.ts",
   "exports": {
-    ".": "./src/index.ts",
+    ".": {
+      "require": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./babel-config": "./configs/jest/babel.config.cjs",
+    "./jest-config": "./configs/jest/jest.config.cjs",
     "./lint-config": "./configs/oxlint/oxlint.config.ts",
     "./package.json": "./package.json",
     "./tsconfig": "./configs/tsconfig/tsconfig.json",
@@ -30,12 +35,33 @@
     "lint-package": "node ./src/cli.ts lint-package"
   },
   "dependencies": {
+    "@babel/core": "catalog:",
+    "@babel/plugin-transform-react-jsx": "catalog:",
+    "@babel/plugin-transform-react-jsx-source": "catalog:",
+    "@babel/plugin-transform-typescript": "catalog:",
+    "@babel/preset-env": "catalog:",
+    "@babel/preset-react": "catalog:",
+    "@babel/preset-typescript": "catalog:",
+    "@babel/runtime": "catalog:",
+    "@microsoft/eslint-plugin-sdl": "^1.1.0",
+    "@rnx-kit/align-deps": "catalog:",
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:",
+    "@rnx-kit/config": "catalog:",
+    "@rnx-kit/eslint-plugin": "catalog:",
+    "@rnx-kit/jest-preset": "catalog:",
     "@rnx-kit/oxlint-config": "^1.0.3",
+    "@rnx-kit/tsconfig": "catalog:",
+    "@rnx-kit/types-kit-config": "catalog:",
+    "babel-jest": "^29.0.0",
     "oxlint": "^1.57.0"
   },
   "devDependencies": {
+    "@babel/core": "catalog:",
+    "@babel/runtime": "catalog:",
     "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@rnx-kit/align-deps": "catalog:",
+    "@rnx-kit/babel-preset-metro-react-native": "catalog:",
     "@rnx-kit/config": "catalog:",
     "@rnx-kit/jest-preset": "catalog:",
     "@rnx-kit/lint-json": "^0.1.0",
@@ -53,6 +79,7 @@
     "depcheck": "^1.0.0",
     "find-up": "^5.0.0",
     "jest": "^29.2.1",
+    "jest-transform-stub": "^2.0.0",
     "knip": "catalog:",
     "lage": "catalog:",
     "micromatch": "^4.0.8",
@@ -71,6 +98,19 @@
     }
   ],
   "furn": {
-    "packageType": "tooling"
+    "packageType": "tooling",
+    "depcheck": {
+      "ignoreMatches": [
+        "@babel/plugin-transform-react-jsx",
+        "@babel/plugin-transform-react-jsx-source",
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@babel/preset-typescript",
+        "@microsoft/eslint-plugin-sdl",
+        "@rnx-kit/align-deps",
+        "@rnx-kit/config",
+        "@rnx-kit/eslint-plugin"
+      ]
+    }
   }
 }

@@ -40,8 +40,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.74.0",
@@ -80,6 +78,9 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "win32"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
@@ -91,9 +92,7 @@
         "core-macos",
         "core-windows",
         "react",
-        "react-test-renderer",
-        "tools-core",
-        "tools-jest"
+        "react-test-renderer"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

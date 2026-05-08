@@ -16,9 +16,11 @@ export type ExportEntry = string | ExportSet;
 export type Exports = Record<string, ExportEntry>;
 
 export type PackageType = 'library' | 'component' | 'app' | 'tooling';
+export type PlatformTarget = 'react' | 'win32' | 'macos' | 'ios' | 'android' | 'windows';
 
 export type ResolvedBuildConfig = {
   packageType: PackageType;
+  jestPlatform?: PlatformTarget;
   typescript: {
     /** whether to use tsc or tsgo to build this package */
     engine: 'tsc' | 'tsgo';
