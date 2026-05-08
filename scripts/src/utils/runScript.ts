@@ -1,33 +1,23 @@
-// @ts-check
-
 import { spawn } from 'node:child_process';
 import { getProjectRoot } from './projectRoot.ts';
 import os from 'node:os';
 
 export const yarnVerb = os.platform() === 'win32' ? 'yarn.cmd' : 'yarn';
 
-/** @type {Record<string, string>} */
-const cmdToModule = {
+const cmdToModule: Record<string, string> = {
   tsc: 'typescript',
 };
 
 /**
  * Get the path to a bin entrypoint for a js package.
- * @param {string} command
- * @returns {string | undefined}
  */
-function getBinPath(command) {
+function getBinPath(command: string): string | undefined {
   const wdRoot = getProjectRoot(process.cwd());
   const cmdModule = cmdToModule[command] ?? command;
   return wdRoot.openModule(cmdModule).getBinPath(command);
 }
 
-/**
- * @param {string} command
- * @param {...string} args
- * @returns {Promise<number>}
- */
-export async function runScript(command, ...args) {
+export async function runScript(command: string, ...args: string[]): Promise<number> {
   const binPath = getBinPath(command);
   const verb = binPath ? process.execPath : yarnVerb;
   const spawnArgs = binPath ? [binPath, ...args] : ['exec', command, ...args];
@@ -43,12 +33,7 @@ export async function runScript(command, ...args) {
   });
 }
 
-/**
- * @param {string} command
- * @param {...string} args
- * @returns {Promise<number>}
- */
-export async function runYarn(command, ...args) {
+export async function runYarn(command: string, ...args: string[]): Promise<number> {
   const verb = yarnVerb;
   const spawnArgs = [command, ...args];
   return new Promise((resolve) => {

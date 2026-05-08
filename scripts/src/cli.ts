@@ -1,14 +1,13 @@
 #!/usr/bin/env node
-// @ts-check
 
 import { Builtins, Cli } from 'clipanion';
 import { BuildCommand } from './tasks/build.ts';
-import { CleanCommand } from './tasks/clean.js';
-import { FormatCommand } from './tasks/format.js';
-import { LintCommand } from './tasks/lint.js';
+import { CleanCommand } from './tasks/clean.ts';
+import { FormatCommand } from './tasks/format.ts';
+import { LintCommand } from './tasks/lint.ts';
 import { LintPackageCommand } from './tasks/lintPackage.ts';
-import { JestCommand } from './tasks/jest.js';
-import { CheckPublishingCommand } from './tasks/checkPublishingTask.js';
+import { JestCommand } from './tasks/jest.ts';
+import { CheckPublishingCommand } from './tasks/checkPublishingTask.ts';
 import { DepcheckCommand } from './tasks/depcheck.ts';
 
 const cli = new Cli({

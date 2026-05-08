@@ -4,11 +4,9 @@ import path from 'node:path';
 
 /**
  * Find all node_modules directories up to the project root
- * @returns {string[]} - An array of paths to node_modules directories found in the project root.
  */
-export function nodeModulesToRoot() {
-  /** @type {string[]} */
-  const results = [];
+export function nodeModulesToRoot(): string[] {
+  const results: string[] = [];
   findUp.sync((directory) => {
     const nodeModulesPath = path.join(directory, 'node_modules');
     if (fs.existsSync(nodeModulesPath)) {

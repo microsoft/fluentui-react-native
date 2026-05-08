@@ -518,7 +518,7 @@ export class LintPackageCommand extends Command {
   }
 
   private getFluentScriptsText(command: string) {
-    return this.isScripts ? `node ./src/cli.mjs ${command}` : `fluentui-scripts ${command}`;
+    return this.isScripts ? `node ./src/cli.ts ${command}` : `fluentui-scripts ${command}`;
   }
 }
 
