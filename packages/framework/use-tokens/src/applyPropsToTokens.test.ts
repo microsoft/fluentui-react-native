@@ -1,6 +1,6 @@
 import { getTypedMemoCache } from '@fluentui-react-native/framework-base';
 
-import { applyPropsToTokens } from './applyPropsToTokens';
+import { applyPropsToTokens } from './applyPropsToTokens.ts';
 
 interface Tokens {
   uno?: string;

@@ -2,8 +2,8 @@ import type { Theme } from '@fluentui-react-native/theme-types';
 import type { UseTokens as UseTokensCore } from '@fluentui-react-native/use-tokens';
 import { buildUseTokens as buildUseTokensCore } from '@fluentui-react-native/use-tokens';
 
-import { themeHelper } from './themeHelper';
-import type { TokenSettings } from './useStyling';
+import { themeHelper } from './themeHelper.ts';
+import type { TokenSettings } from './useStyling.ts';
 
 export { applyTokenLayers, applyPropsToTokens, customizable, patchTokens } from '@fluentui-react-native/use-tokens';
 

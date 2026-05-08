@@ -10,9 +10,9 @@ import { useSlot } from '@fluentui-react-native/use-slot';
 import { applyTokenLayers } from '@fluentui-react-native/use-tokens';
 import * as renderer from 'react-test-renderer';
 
-import { compressible } from './compressible';
-import { buildUseTokens } from './useTokens';
-import type { UseTokens } from './useTokens';
+import { compressible } from './compressible.ts';
+import { buildUseTokens } from './useTokens.ts';
+import type { UseTokens } from './useTokens.ts';
 
 type Variant = 'normal' | 'header' | 'caption';
 interface VariantTextTokens {
