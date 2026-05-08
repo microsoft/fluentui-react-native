@@ -1,28 +1,21 @@
-// @ts-check
-
 import { Command } from 'clipanion';
 import { getPackageInfos, findGitRoot } from 'workspace-tools';
 
-import { checkDependencies } from '../utils/checkDependencies.js';
+import { checkDependencies } from '../utils/checkDependencies.ts';
 
-/**
- * @typedef {'dependencies' | 'devDependencies' | 'peerDependencies'} DependencyType
- * @typedef {{ dependencyTypes?: DependencyType[] }} CheckPublishingOptions
- */
+type DependencyType = 'dependencies' | 'devDependencies' | 'peerDependencies';
 
 export class CheckPublishingCommand extends Command {
-  /** @override */
-  static paths = [['check-publishing']];
+  static override paths = [['check-publishing']];
 
-  /** @override */
-  static usage = Command.Usage({
+  static override usage = Command.Usage({
     description: 'Check the matrix of packages for publishing errors',
     details: 'This command checks for published packages that have a dependency on a private package.',
     examples: [['Check for publishing errors', '$0 check-publishing']],
   });
 
   async execute() {
-    const dependencyTypes = ['dependencies'];
+    const dependencyTypes: DependencyType[] = ['dependencies'];
     const packageInfos = getPackageInfos(findGitRoot(process.cwd()));
     console.info('Starting scan for publishing errors');
     try {

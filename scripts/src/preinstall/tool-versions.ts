@@ -2,12 +2,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import type { PackageManifest } from '../utils/projectRoot.ts';
+
 /**
  * Get the package.json manifest for a given folder.
- * @param {string} folder
- * @returns {import('../utils/projectRoot.ts').PackageManifest}
  */
-function getPackageManifest(folder) {
+function getPackageManifest(folder: string): PackageManifest {
   const manifestPath = path.join(folder, 'package.json');
   return JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
 }
@@ -17,8 +17,7 @@ const scriptFolder = path.join(path.dirname(fileURLToPath(import.meta.url)), '..
 const scriptManifest = getPackageManifest(scriptFolder);
 const rootManifest = getPackageManifest(path.dirname(scriptFolder));
 
-/** @type {Record<string, string>} */
-const devToolVersions = {
+const devToolVersions: Record<string, string> = {
   '@eslint/js': '^9.0.0',
   '@microsoft/eslint-plugin-sdl': '^1.1.0',
   '@react-native-community/cli': '^13.6.4',
@@ -58,18 +57,12 @@ const devToolVersions = {
   ...rootManifest.devDependencies,
 };
 
-/** @type {Record<string, string>} */
-const workspaceToolVersions = {
+const workspaceToolVersions: Record<string, string> = {
   '@fluentui-react-native/babel-config': 'workspace:*',
   '@fluentui-react-native/jest-config': 'workspace:*',
   '@fluentui-react-native/scripts': 'workspace:*',
 };
 
-/**
- *
- * @param {string} packageName
- * @returns {string | null}
- */
-export function getToolVersion(packageName) {
+export function getToolVersion(packageName: string): string | null {
   return devToolVersions[packageName] ?? workspaceToolVersions[packageName] ?? null;
 }

@@ -9,15 +9,12 @@
     "directory": "scripts"
   },
   "bin": {
-    "fluentui-scripts": "./src/cli.mjs"
+    "fluentui-scripts": "./src/cli.ts"
   },
   "type": "module",
-  "main": "./src/index.js",
+  "main": "./src/index.ts",
   "exports": {
-    ".": {
-      "require": "./src/index.js",
-      "default": "./src/index.js"
-    },
+    ".": "./src/index.ts",
     "./lint-config": "./configs/oxlint/oxlint.config.ts",
     "./package.json": "./package.json",
     "./tsconfig": "./configs/tsconfig/tsconfig.json",
@@ -27,10 +24,10 @@
     "build": "tsgo",
     "build-core": "tsgo",
     "bundlesize": "bundlesize --debug",
-    "depcheck": "node ./src/cli.mjs depcheck",
-    "format": "node ./src/cli.mjs format",
-    "lint": "node ./src/cli.mjs lint",
-    "lint-package": "node ./src/cli.mjs lint-package"
+    "depcheck": "node ./src/cli.ts depcheck",
+    "format": "node ./src/cli.ts format",
+    "lint": "node ./src/cli.ts lint",
+    "lint-package": "node ./src/cli.ts lint-package"
   },
   "dependencies": {
     "@rnx-kit/oxlint-config": "^1.0.3",

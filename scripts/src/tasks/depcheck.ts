@@ -1,12 +1,10 @@
-// @ts-check
-
 import { Command, Option } from 'clipanion';
 import depcheck from 'depcheck';
 import type { ProjectRoot } from '../utils/projectRoot.ts';
 import { getProjectRoot } from '../utils/projectRoot.ts';
-import getInjectedDeps from '../../dynamic.extensions.mjs';
+import getInjectedDeps from '../../dynamic.extensions.mts';
 import { getReporter } from '../utils/getReporter.ts';
-import { getToolVersion } from '../preinstall/tool-versions.js';
+import { getToolVersion } from '../preinstall/tool-versions.ts';
 import micromatch from 'micromatch';
 import { isFixMode } from '../utils/env.ts';
 

@@ -1,15 +1,12 @@
-// @ts-check
 import { Command, Option } from 'clipanion';
-import { runScript } from '../utils/runScript.js';
+import { runScript } from '../utils/runScript.ts';
 import fs from 'node:fs';
 import path from 'node:path';
 
 export class JestCommand extends Command {
-  /** @override */
-  static paths = [['jest']];
+  static override paths = [['jest']];
 
-  /** @override */
-  static usage = Command.Usage({
+  static override usage = Command.Usage({
     description: 'Tests the current package using jest',
     details: 'This command tests the current package.',
     examples: [['Test the current package', '$0 jest']],
