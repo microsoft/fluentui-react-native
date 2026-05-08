@@ -41,9 +41,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
@@ -85,6 +83,9 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "win32"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
@@ -97,9 +98,7 @@
         "core-windows",
         "react",
         "react-test-renderer",
-        "svg",
-        "tools-core",
-        "tools-jest"
+        "svg"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

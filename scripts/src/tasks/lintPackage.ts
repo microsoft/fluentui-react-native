@@ -31,7 +31,6 @@ export class LintPackageCommand extends Command {
   private changed = false;
   private issues = 0;
   private isScripts = false;
-  private isLibrary = false;
   private projRoot: ProjectRoot = getProjectRoot(process.cwd());
   private result = 0;
   private removedDevDeps: string[] = [];
@@ -44,7 +43,6 @@ export class LintPackageCommand extends Command {
     this.fix = isFixMode(this.fix);
     const manifest = this.projRoot.manifest;
     this.isScripts = manifest.name === '@fluentui-react-native/scripts';
-    this.isLibrary = !(manifest['rnx-kit']?.kitType === 'app') && manifest.furn?.packageType !== 'tooling';
 
     const runningOps: Promise<void>[] = [];
 
@@ -67,7 +65,6 @@ export class LintPackageCommand extends Command {
 
     this.checkPrivateVersion();
     this.checkManifest();
-    this.checkUsage();
     this.checkScripts();
     this.checkEntryPoints(buildConfig);
     this.checkBuildConfig(buildConfig);
@@ -142,25 +139,6 @@ export class LintPackageCommand extends Command {
       }
       this.projRoot.clearManifestEntry('typings');
     });
-  }
-
-  private checkUsage() {
-    const rootDir = this.projRoot.root;
-    if (this.isLibrary) {
-      this.ensuredCapabilities.push('tools-core');
-      const hasJestConfig = fs.existsSync(path.join(rootDir, 'jest.config.js')) || fs.existsSync(path.join(rootDir, 'jest.config.ts'));
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const hasReactJest = this.projRoot.manifest['rnx-kit']?.alignDeps?.capabilities?.includes('tools-jest-react' as any);
-      if (!hasReactJest) {
-        if (hasJestConfig) {
-          this.ensuredCapabilities.push('tools-jest');
-          this.addedDevDeps['@fluentui-react-native/jest-config'] = 'workspace:*';
-        } else {
-          this.removedCapabilities.push('tools-jest', 'babel-preset-react-native', 'tools-babel');
-          this.removedDevDeps.push('@fluentui-react-native/jest-config', '@types/jest', 'jest', 'ts-jest');
-        }
-      }
-    }
   }
 
   private checkDependencies() {

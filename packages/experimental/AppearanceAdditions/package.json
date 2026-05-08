@@ -39,7 +39,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
@@ -84,8 +83,7 @@
         "core-ios",
         "core-macos",
         "core-windows",
-        "react",
-        "tools-core"
+        "react"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

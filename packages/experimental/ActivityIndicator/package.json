@@ -86,8 +86,7 @@
         "core-macos",
         "core-windows",
         "react",
-        "svg",
-        "tools-core"
+        "svg"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

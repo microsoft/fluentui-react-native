@@ -43,7 +43,6 @@
     "@babel/core": "catalog:",
     "@babel/preset-env": "catalog:",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@types/jscodeshift": "^0.11.11",
@@ -57,16 +56,14 @@
       "ignorePatterns": [
         "src/transforms/__testfixtures__/*"
       ]
-    }
+    },
+    "jestPlatform": "react"
   },
   "rnx-kit": {
     "kitType": "library",
     "extends": "@fluentui-react-native/kit-config",
     "alignDeps": {
-      "capabilities": [
-        "tools-core",
-        "tools-jest-react"
-      ]
+      "capabilities": []
     }
   }
 }

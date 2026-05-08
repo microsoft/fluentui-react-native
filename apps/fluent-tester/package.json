@@ -53,7 +53,6 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*",
     "@fluentui-react-native/experimental-avatar": "workspace:*",
@@ -176,8 +175,7 @@
         "react",
         "react-test-renderer",
         "svg",
-        "test-app",
-        "tools-core"
+        "test-app"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

@@ -38,7 +38,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
@@ -86,8 +85,7 @@
         "core-macos",
         "core-windows",
         "react",
-        "react-test-renderer",
-        "tools-core"
+        "react-test-renderer"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

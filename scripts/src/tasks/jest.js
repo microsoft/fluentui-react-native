@@ -1,8 +1,7 @@
 // @ts-check
 import { Command, Option } from 'clipanion';
 import { runScript } from '../utils/runScript.js';
-import fs from 'node:fs';
-import path from 'node:path';
+import { hasJestConfig } from '../preinstall/tool-versions.js';
 
 export class JestCommand extends Command {
   /** @override */
@@ -18,7 +17,7 @@ export class JestCommand extends Command {
   args = Option.Proxy();
 
   async execute() {
-    if (!fs.existsSync(path.join(process.cwd(), './jest.config.js'))) {
+    if (!hasJestConfig(process.cwd())) {
       console.warn('No jest configuration found, skipping jest.');
       return;
     }

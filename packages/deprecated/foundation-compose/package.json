@@ -93,8 +93,7 @@
         "core",
         "core-macos",
         "core-win32",
-        "core-windows",
-        "tools-core"
+        "core-windows"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

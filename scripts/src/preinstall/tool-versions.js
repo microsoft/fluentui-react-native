@@ -60,8 +60,6 @@ const devToolVersions = {
 
 /** @type {Record<string, string>} */
 const workspaceToolVersions = {
-  '@fluentui-react-native/babel-config': 'workspace:*',
-  '@fluentui-react-native/jest-config': 'workspace:*',
   '@fluentui-react-native/scripts': 'workspace:*',
 };
 
@@ -72,4 +70,19 @@ const workspaceToolVersions = {
  */
 export function getToolVersion(packageName) {
   return devToolVersions[packageName] ?? workspaceToolVersions[packageName] ?? null;
+}
+
+const CONFIG_EXTENSIONS = ['.js', '.cjs', '.mjs', '.ts', '.cts', '.mts'];
+
+/**
+ * @param {string} cwd - The current working directory.
+ * @returns {boolean} - True if a Jest config file exists in the cwd, false otherwise.
+ */
+export function hasJestConfig(cwd) {
+  for (const ext of CONFIG_EXTENSIONS) {
+    if (fs.existsSync(path.join(cwd, `jest.config${ext}`))) {
+      return true;
+    }
+  }
+  return false;
 }
