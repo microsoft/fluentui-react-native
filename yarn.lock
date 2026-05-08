@@ -2232,9 +2232,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/aix-ppc64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/aix-ppc64@npm:0.27.2"
+"@esbuild/aix-ppc64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/aix-ppc64@npm:0.28.0"
   conditions: os=aix & cpu=ppc64
   languageName: node
   linkType: hard
@@ -2246,9 +2246,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/android-arm64@npm:0.27.2"
+"@esbuild/android-arm64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/android-arm64@npm:0.28.0"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -2260,9 +2260,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/android-arm@npm:0.27.2"
+"@esbuild/android-arm@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/android-arm@npm:0.28.0"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
@@ -2274,9 +2274,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/android-x64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/android-x64@npm:0.27.2"
+"@esbuild/android-x64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/android-x64@npm:0.28.0"
   conditions: os=android & cpu=x64
   languageName: node
   linkType: hard
@@ -2288,9 +2288,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-arm64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/darwin-arm64@npm:0.27.2"
+"@esbuild/darwin-arm64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/darwin-arm64@npm:0.28.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
@@ -2302,9 +2302,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-x64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/darwin-x64@npm:0.27.2"
+"@esbuild/darwin-x64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/darwin-x64@npm:0.28.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -2316,9 +2316,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-arm64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/freebsd-arm64@npm:0.27.2"
+"@esbuild/freebsd-arm64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/freebsd-arm64@npm:0.28.0"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
@@ -2330,9 +2330,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-x64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/freebsd-x64@npm:0.27.2"
+"@esbuild/freebsd-x64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/freebsd-x64@npm:0.28.0"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
@@ -2344,9 +2344,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/linux-arm64@npm:0.27.2"
+"@esbuild/linux-arm64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/linux-arm64@npm:0.28.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
@@ -2358,9 +2358,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/linux-arm@npm:0.27.2"
+"@esbuild/linux-arm@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/linux-arm@npm:0.28.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -2372,9 +2372,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ia32@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/linux-ia32@npm:0.27.2"
+"@esbuild/linux-ia32@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/linux-ia32@npm:0.28.0"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
@@ -2386,9 +2386,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-loong64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/linux-loong64@npm:0.27.2"
+"@esbuild/linux-loong64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/linux-loong64@npm:0.28.0"
   conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
@@ -2400,9 +2400,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-mips64el@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/linux-mips64el@npm:0.27.2"
+"@esbuild/linux-mips64el@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/linux-mips64el@npm:0.28.0"
   conditions: os=linux & cpu=mips64el
   languageName: node
   linkType: hard
@@ -2414,9 +2414,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ppc64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/linux-ppc64@npm:0.27.2"
+"@esbuild/linux-ppc64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/linux-ppc64@npm:0.28.0"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
@@ -2428,9 +2428,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-riscv64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/linux-riscv64@npm:0.27.2"
+"@esbuild/linux-riscv64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/linux-riscv64@npm:0.28.0"
   conditions: os=linux & cpu=riscv64
   languageName: node
   linkType: hard
@@ -2442,9 +2442,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-s390x@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/linux-s390x@npm:0.27.2"
+"@esbuild/linux-s390x@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/linux-s390x@npm:0.28.0"
   conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
@@ -2456,9 +2456,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-x64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/linux-x64@npm:0.27.2"
+"@esbuild/linux-x64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/linux-x64@npm:0.28.0"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
@@ -2470,9 +2470,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/netbsd-arm64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/netbsd-arm64@npm:0.27.2"
+"@esbuild/netbsd-arm64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/netbsd-arm64@npm:0.28.0"
   conditions: os=netbsd & cpu=arm64
   languageName: node
   linkType: hard
@@ -2484,9 +2484,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/netbsd-x64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/netbsd-x64@npm:0.27.2"
+"@esbuild/netbsd-x64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/netbsd-x64@npm:0.28.0"
   conditions: os=netbsd & cpu=x64
   languageName: node
   linkType: hard
@@ -2498,9 +2498,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/openbsd-arm64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/openbsd-arm64@npm:0.27.2"
+"@esbuild/openbsd-arm64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/openbsd-arm64@npm:0.28.0"
   conditions: os=openbsd & cpu=arm64
   languageName: node
   linkType: hard
@@ -2512,16 +2512,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/openbsd-x64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/openbsd-x64@npm:0.27.2"
+"@esbuild/openbsd-x64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/openbsd-x64@npm:0.28.0"
   conditions: os=openbsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/openharmony-arm64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/openharmony-arm64@npm:0.27.2"
+"@esbuild/openharmony-arm64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/openharmony-arm64@npm:0.28.0"
   conditions: os=openharmony & cpu=arm64
   languageName: node
   linkType: hard
@@ -2533,9 +2533,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/sunos-x64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/sunos-x64@npm:0.27.2"
+"@esbuild/sunos-x64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/sunos-x64@npm:0.28.0"
   conditions: os=sunos & cpu=x64
   languageName: node
   linkType: hard
@@ -2547,9 +2547,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-arm64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/win32-arm64@npm:0.27.2"
+"@esbuild/win32-arm64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/win32-arm64@npm:0.28.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
@@ -2561,9 +2561,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-ia32@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/win32-ia32@npm:0.27.2"
+"@esbuild/win32-ia32@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/win32-ia32@npm:0.28.0"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
@@ -2575,9 +2575,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-x64@npm:0.27.2":
-  version: 0.27.2
-  resolution: "@esbuild/win32-x64@npm:0.27.2"
+"@esbuild/win32-x64@npm:0.28.0":
+  version: 0.28.0
+  resolution: "@esbuild/win32-x64@npm:0.28.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -4850,8 +4850,8 @@ __metadata:
     "@rnx-kit/config": "catalog:"
     "@rnx-kit/eslint-plugin": "catalog:"
     "@rnx-kit/jest-preset": "catalog:"
-    "@rnx-kit/lint-json": "npm:^0.1.0"
-    "@rnx-kit/oxlint-config": "npm:^1.0.3"
+    "@rnx-kit/lint-json": "catalog:"
+    "@rnx-kit/oxlint-config": "catalog:"
     "@rnx-kit/reporter": "catalog:"
     "@rnx-kit/tools-packages": "catalog:"
     "@rnx-kit/tools-typescript": "catalog:"
@@ -5340,7 +5340,7 @@ __metadata:
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
     "@rnx-kit/metro-serializer": "catalog:"
     "@rnx-kit/metro-serializer-esbuild": "catalog:"
-    "@rnx-kit/tools-react-native": "npm:^2.3.2"
+    "@rnx-kit/tools-react-native": "catalog:"
     "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     metro: "npm:^0.83.1"
@@ -9248,15 +9248,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/align-deps@npm:^3.4.2":
-  version: 3.4.2
-  resolution: "@rnx-kit/align-deps@npm:3.4.2"
+"@rnx-kit/align-deps@npm:^3.4.7, @rnx-kit/align-deps@npm:^3.4.8":
+  version: 3.4.8
+  resolution: "@rnx-kit/align-deps@npm:3.4.8"
   dependencies:
     "@rnx-kit/types-kit-config": "npm:^1.0.0"
     "@rnx-kit/types-node": "npm:^1.0.0"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 10c0/d9d1859c622a9100ebea8c5a0417fc307bd1a78b96a3c32af3017b66ec5f955ee766de3ab65099de7b259661adf0fb3b358a161ef74e4bb456ddbfcc6f34432c
+  checksum: 10c0/cbc8f6d28472a1a0b7342f156c81c94c91ced24ec47a815a34eb4f59d00cac12a2cd7dc64ea698af369a0091a60101498f2f1b9d6e626f000b87060ccd81ae4b
   languageName: node
   linkType: hard
 
@@ -9292,26 +9292,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/cli@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@rnx-kit/cli@npm:1.1.0"
+"@rnx-kit/cli@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "@rnx-kit/cli@npm:1.1.4"
   dependencies:
-    "@rnx-kit/align-deps": "npm:^3.4.2"
-    "@rnx-kit/config": "npm:^0.7.5"
+    "@rnx-kit/align-deps": "npm:^3.4.7"
+    "@rnx-kit/config": "npm:^0.8.0"
     "@rnx-kit/console": "npm:^2.0.0"
     "@rnx-kit/metro-plugin-cyclic-dependencies-detector": "npm:^2.0.3"
     "@rnx-kit/metro-plugin-duplicates-checker": "npm:^3.0.3"
     "@rnx-kit/metro-plugin-typescript": "npm:^0.5.4"
     "@rnx-kit/metro-serializer": "npm:^2.0.0"
     "@rnx-kit/metro-serializer-esbuild": "npm:^0.3.1"
-    "@rnx-kit/metro-service": "npm:^4.1.3"
-    "@rnx-kit/third-party-notices": "npm:^2.0.0"
+    "@rnx-kit/metro-service": "npm:^4.1.5"
+    "@rnx-kit/third-party-notices": "npm:^2.0.3"
     "@rnx-kit/tools-android": "npm:^0.2.2"
     "@rnx-kit/tools-apple": "npm:^0.2.2"
     "@rnx-kit/tools-filesystem": "npm:^0.2.0"
     "@rnx-kit/tools-language": "npm:^3.0.1"
     "@rnx-kit/tools-node": "npm:^3.0.4"
-    "@rnx-kit/tools-react-native": "npm:^2.3.4"
+    "@rnx-kit/tools-react-native": "npm:^2.3.7"
     "@rnx-kit/types-bundle-config": "npm:^1.0.0"
     "@rnx-kit/types-kit-config": "npm:^1.0.0"
     "@rnx-kit/types-node": "npm:^1.0.0"
@@ -9328,7 +9328,7 @@ __metadata:
       optional: true
   bin:
     rnx-cli: bin/rnx-cli.cjs
-  checksum: 10c0/37d3ed0bea94957aca8e6c2f28bdbd1a7c5baac240fda045dd14ad4c5712ebe4f717a70bc3b7cd6a1018c4d0258a3e06fc42fd6674d82201e38c9be30ee9d400
+  checksum: 10c0/df92ce34ce69b0259ef63034837af00b6c51eb3ddc60790e004d25563bda93957104821872c0d4cf405f02b74bc62fefd648128873dad178b24c31deaf430068
   languageName: node
   linkType: hard
 
@@ -9348,6 +9348,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/config@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@rnx-kit/config@npm:0.8.0"
+  dependencies:
+    "@rnx-kit/console": "npm:^2.0.0"
+    "@rnx-kit/tools-node": "npm:^3.0.4"
+    "@rnx-kit/tools-packages": "npm:^0.1.3"
+    "@rnx-kit/types-bundle-config": "npm:^1.0.0"
+    "@rnx-kit/types-kit-config": "npm:^1.0.0"
+    "@rnx-kit/types-node": "npm:^1.0.0"
+    lodash.merge: "npm:^4.6.2"
+    semver: "npm:^7.0.0"
+  checksum: 10c0/6df41bee08bc8eb2c84c0649299b7ee5edfdb53cb06801dc6672176b3eb8601acdcd99fd0ee8c829a27992d91b6942ca247eef4583289a39391862e1b012652f
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/console@npm:^2.0.0":
   version: 2.0.0
   resolution: "@rnx-kit/console@npm:2.0.0"
@@ -9355,9 +9371,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/eslint-plugin@npm:^0.9.8":
-  version: 0.9.8
-  resolution: "@rnx-kit/eslint-plugin@npm:0.9.8"
+"@rnx-kit/eslint-plugin@npm:^0.9.8, @rnx-kit/eslint-plugin@npm:^0.9.9":
+  version: 0.9.9
+  resolution: "@rnx-kit/eslint-plugin@npm:0.9.9"
   dependencies:
     "@react-native/eslint-plugin": "npm:^0.84.0"
     enhanced-resolve: "npm:^5.8.3"
@@ -9366,49 +9382,53 @@ __metadata:
     typescript-eslint: "npm:^8.0.0"
   peerDependencies:
     eslint: ">=8.57.0"
-  checksum: 10c0/5f9abf2b7bae30d289829ce1ba8ef7f34e64e28bb7f62fc4f0ebc1e887117616f6a6728e762430b76b64994078d0843ec728822794e7a1d8a29e22af2abb775c
+  checksum: 10c0/a51047594a9ecfed2b0e58484cb6707b0bfaff8e9a2ed6a1e1d116943852e3782b816a386507940a7b62ba1776809941a41c1ec8e29337ae3bf77e3683b1188d
   languageName: node
   linkType: hard
 
-"@rnx-kit/jest-preset@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "@rnx-kit/jest-preset@npm:0.3.1"
+"@rnx-kit/jest-preset@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@rnx-kit/jest-preset@npm:0.3.2"
   dependencies:
     "@babel/core": "npm:^7.0.0"
     "@babel/preset-env": "npm:^7.0.0"
     "@babel/preset-typescript": "npm:^7.0.0"
+    "@jest/create-cache-key-function": "npm:^29.7.0"
     "@rnx-kit/tools-react-native": "npm:^2.3.2"
     find-up: "npm:^5.0.0"
   peerDependencies:
+    "@react-native/jest-preset": ">=0.85"
     react-native: ^0.0.0-0 || >=0.73
   peerDependenciesMeta:
+    "@react-native/jest-preset":
+      optional: true
     react-native:
       optional: true
-  checksum: 10c0/db49a32389617e5f2f5f2b8a95768e913cd97de643febab21d4bbd37b0ed3fa862adcccc798b0fdc33662b087ea9f92859ff0a3c65de18e8fe62bc0128c7a33e
+  checksum: 10c0/67cdb8331f4145eadc8704b056ddf53415e41bec1edc2f8c6126aa4cafde9109cb1d6c394eabbf59a6775f2b8ee0565089acb4e52b79b95443b8c2121ae7ab03
   languageName: node
   linkType: hard
 
-"@rnx-kit/lint-json@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@rnx-kit/lint-json@npm:0.1.0"
+"@rnx-kit/lint-json@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@rnx-kit/lint-json@npm:0.2.0"
   dependencies:
     "@rnx-kit/tools-filesystem": "npm:^0.2.0"
     "@rnx-kit/tools-formatting": "npm:^0.1.0"
-  checksum: 10c0/d650dfd38388d838bbf383f8727438b546147cfa742b99374a3380af8c3f3d0e1773109e936e92889695e34c389f01166ffa699ec1320b320b36c2a8ceda7301
+  checksum: 10c0/2d0b542a69967da9d0b716fa6382262706dfd6441deaba37fb997a25c83aff7153dface11f2b709403fbfa5325bd5323b47d774097f2b062ddcbc25ac7b7df64
   languageName: node
   linkType: hard
 
-"@rnx-kit/lint-lockfile@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "@rnx-kit/lint-lockfile@npm:0.1.3"
+"@rnx-kit/lint-lockfile@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "@rnx-kit/lint-lockfile@npm:0.1.4"
   dependencies:
-    "@rnx-kit/config": "npm:^0.7.5"
+    "@rnx-kit/config": "npm:^0.8.0"
     "@rnx-kit/tools-workspaces": "npm:^0.2.3"
     "@rnx-kit/types-kit-config": "npm:^1.0.0"
     js-yaml: "npm:^4.1.1"
   bin:
     lint-lockfile: lib/cli.js
-  checksum: 10c0/823da6b029a5392d9d3265879d989b8d3e6f4896796e7eeb9328c1db915e54fafbcb7b06394163f3df49caf7243c4bf0094b9302ae4b3bbf19591d523529c0be
+  checksum: 10c0/f6441c46726a49488beebcb8f149ac9eae3334a8d9c90e13ac89f81ac30167c31370f589361d74cea7ee786ae01eeb8f5bb417b58f3dbafc36de512d4284aa0c
   languageName: node
   linkType: hard
 
@@ -9486,17 +9506,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/metro-serializer-esbuild@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "@rnx-kit/metro-serializer-esbuild@npm:0.3.1"
+"@rnx-kit/metro-serializer-esbuild@npm:^0.3.1, @rnx-kit/metro-serializer-esbuild@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@rnx-kit/metro-serializer-esbuild@npm:0.3.2"
   dependencies:
     "@rnx-kit/console": "npm:^2.0.0"
     "@rnx-kit/tools-node": "npm:^3.0.4"
     "@rnx-kit/tools-react-native": "npm:^2.3.3"
     "@rnx-kit/types-metro-serializer-esbuild": "npm:^1.0.0"
-    esbuild: "npm:^0.27.1"
+    esbuild: "npm:^0.28.0"
     esbuild-plugin-lodash: "npm:^1.2.0"
-  checksum: 10c0/df6f592d959361817b653f1dc07a211b3ec2316cab314d27646cc9e9828cd88bd3b63a360f11a74f445a5ca997d97b8b9fbd413f7732766e50307583922af5b5
+  checksum: 10c0/48016765ce89947f7e664cbf0c6582acba3aa135face197d009707b784a1da0292b82e4a24a6168c6f65a9ca5f89f4b3b2a0a7983f83aecdaa810683ab82ea6f
   languageName: node
   linkType: hard
 
@@ -9509,13 +9529,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/metro-service@npm:^4.1.3":
-  version: 4.1.4
-  resolution: "@rnx-kit/metro-service@npm:4.1.4"
+"@rnx-kit/metro-service@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "@rnx-kit/metro-service@npm:4.1.5"
   dependencies:
     "@rnx-kit/console": "npm:^2.0.0"
     "@rnx-kit/tools-node": "npm:^3.0.3"
-    "@rnx-kit/tools-react-native": "npm:^2.3.2"
+    "@rnx-kit/tools-react-native": "npm:^2.3.5"
     node-fetch: "npm:^2.6.7"
   peerDependencies:
     "@office-iss/react-native-win32": "*"
@@ -9528,7 +9548,7 @@ __metadata:
       optional: true
     metro-react-native-babel-transformer:
       optional: true
-  checksum: 10c0/61ba3d1552740b4ca4a4a7f4b5e1d68c45759229d280f604cb383a275f7ffe3b40a9ed04538205ae6b78679e3d4bfcf2a3e6e30ca463e65a9c65451ef73a5542
+  checksum: 10c0/bef6bced62544cc83c8ba8a382eb9f4e324d93dcdf3593d6fe0f076856dd503522d9bcc17272d5f93e2fe553f6eb20956f47e4ad9c0e4b86b7ed4d633ffd00c4
   languageName: node
   linkType: hard
 
@@ -9567,9 +9587,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/third-party-notices@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@rnx-kit/third-party-notices@npm:2.0.0"
+"@rnx-kit/third-party-notices@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@rnx-kit/third-party-notices@npm:2.0.3"
   dependencies:
     "@rnx-kit/console": "npm:^2.0.0"
     "@rnx-kit/tools-node": "npm:^3.0.0"
@@ -9577,7 +9597,7 @@ __metadata:
     yargs: "npm:^16.0.0"
   bin:
     build-tpn: lib/build-tpn.js
-  checksum: 10c0/24514ae22b31199ecf9324db850c42e1212e24822ea28ae3cef341b3d80e1bddf07a376fb8b7959693e511906b1048819aa5d27d6063854f9dea270a5c3393ec
+  checksum: 10c0/6482974e65d660452bfd26cb984d3d55f18a7c0ab7608dd55f557922705e28780f6b2185a3db6b211ee7d18b52d736a898e19c2f11fa7406f8587e5f7b77fc97
   languageName: node
   linkType: hard
 
@@ -9635,18 +9655,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/tools-packages@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@rnx-kit/tools-packages@npm:0.1.2"
+"@rnx-kit/tools-packages@npm:^0.1.2, @rnx-kit/tools-packages@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "@rnx-kit/tools-packages@npm:0.1.3"
   dependencies:
     "@rnx-kit/tools-node": "npm:^3.0.4"
     "@rnx-kit/tools-workspaces": "npm:^0.2.1"
     "@rnx-kit/types-node": "npm:^1.0.0"
-  checksum: 10c0/c223858bf84bc8aef1776f3990cfecf3325da6df3b138552f41a5bf45f27055144fe0dd2d5baddb7f915e70e57287da3b6a6b73bf78ed40ab9733668325206e2
+  checksum: 10c0/51007260318286540f9e4c86217080a2af2162e06c0fb4f77017480be8f22b5470e0336452e39a5551f48f9027e04afa2f353c8be6550a6d81fbabc23521ce58
   languageName: node
   linkType: hard
 
-"@rnx-kit/tools-react-native@npm:^2.1.0, @rnx-kit/tools-react-native@npm:^2.3.0, @rnx-kit/tools-react-native@npm:^2.3.1, @rnx-kit/tools-react-native@npm:^2.3.2, @rnx-kit/tools-react-native@npm:^2.3.3, @rnx-kit/tools-react-native@npm:^2.3.4":
+"@rnx-kit/tools-react-native@npm:^2.1.0, @rnx-kit/tools-react-native@npm:^2.3.0, @rnx-kit/tools-react-native@npm:^2.3.1, @rnx-kit/tools-react-native@npm:^2.3.2, @rnx-kit/tools-react-native@npm:^2.3.3, @rnx-kit/tools-react-native@npm:^2.3.5, @rnx-kit/tools-react-native@npm:^2.3.7":
   version: 2.3.7
   resolution: "@rnx-kit/tools-react-native@npm:2.3.7"
   dependencies:
@@ -14571,36 +14591,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.27.1":
-  version: 0.27.2
-  resolution: "esbuild@npm:0.27.2"
+"esbuild@npm:^0.28.0":
+  version: 0.28.0
+  resolution: "esbuild@npm:0.28.0"
   dependencies:
-    "@esbuild/aix-ppc64": "npm:0.27.2"
-    "@esbuild/android-arm": "npm:0.27.2"
-    "@esbuild/android-arm64": "npm:0.27.2"
-    "@esbuild/android-x64": "npm:0.27.2"
-    "@esbuild/darwin-arm64": "npm:0.27.2"
-    "@esbuild/darwin-x64": "npm:0.27.2"
-    "@esbuild/freebsd-arm64": "npm:0.27.2"
-    "@esbuild/freebsd-x64": "npm:0.27.2"
-    "@esbuild/linux-arm": "npm:0.27.2"
-    "@esbuild/linux-arm64": "npm:0.27.2"
-    "@esbuild/linux-ia32": "npm:0.27.2"
-    "@esbuild/linux-loong64": "npm:0.27.2"
-    "@esbuild/linux-mips64el": "npm:0.27.2"
-    "@esbuild/linux-ppc64": "npm:0.27.2"
-    "@esbuild/linux-riscv64": "npm:0.27.2"
-    "@esbuild/linux-s390x": "npm:0.27.2"
-    "@esbuild/linux-x64": "npm:0.27.2"
-    "@esbuild/netbsd-arm64": "npm:0.27.2"
-    "@esbuild/netbsd-x64": "npm:0.27.2"
-    "@esbuild/openbsd-arm64": "npm:0.27.2"
-    "@esbuild/openbsd-x64": "npm:0.27.2"
-    "@esbuild/openharmony-arm64": "npm:0.27.2"
-    "@esbuild/sunos-x64": "npm:0.27.2"
-    "@esbuild/win32-arm64": "npm:0.27.2"
-    "@esbuild/win32-ia32": "npm:0.27.2"
-    "@esbuild/win32-x64": "npm:0.27.2"
+    "@esbuild/aix-ppc64": "npm:0.28.0"
+    "@esbuild/android-arm": "npm:0.28.0"
+    "@esbuild/android-arm64": "npm:0.28.0"
+    "@esbuild/android-x64": "npm:0.28.0"
+    "@esbuild/darwin-arm64": "npm:0.28.0"
+    "@esbuild/darwin-x64": "npm:0.28.0"
+    "@esbuild/freebsd-arm64": "npm:0.28.0"
+    "@esbuild/freebsd-x64": "npm:0.28.0"
+    "@esbuild/linux-arm": "npm:0.28.0"
+    "@esbuild/linux-arm64": "npm:0.28.0"
+    "@esbuild/linux-ia32": "npm:0.28.0"
+    "@esbuild/linux-loong64": "npm:0.28.0"
+    "@esbuild/linux-mips64el": "npm:0.28.0"
+    "@esbuild/linux-ppc64": "npm:0.28.0"
+    "@esbuild/linux-riscv64": "npm:0.28.0"
+    "@esbuild/linux-s390x": "npm:0.28.0"
+    "@esbuild/linux-x64": "npm:0.28.0"
+    "@esbuild/netbsd-arm64": "npm:0.28.0"
+    "@esbuild/netbsd-x64": "npm:0.28.0"
+    "@esbuild/openbsd-arm64": "npm:0.28.0"
+    "@esbuild/openbsd-x64": "npm:0.28.0"
+    "@esbuild/openharmony-arm64": "npm:0.28.0"
+    "@esbuild/sunos-x64": "npm:0.28.0"
+    "@esbuild/win32-arm64": "npm:0.28.0"
+    "@esbuild/win32-ia32": "npm:0.28.0"
+    "@esbuild/win32-x64": "npm:0.28.0"
   dependenciesMeta:
     "@esbuild/aix-ppc64":
       optional: true
@@ -14656,7 +14676,7 @@ __metadata:
       optional: true
   bin:
     esbuild: bin/esbuild
-  checksum: 10c0/cf83f626f55500f521d5fe7f4bc5871bec240d3deb2a01fbd379edc43b3664d1167428738a5aad8794b35d1cca985c44c375b1cd38a2ca613c77ced2c83aafcd
+  checksum: 10c0/8acd95c238ec6c4a9d16163277faf228a8994b642d187b3fe667ffbb469008e6748cde144fdc3c175bf8e78ee49e15a0ed9b9f183fdb5fcea1772f87fb1372a4
   languageName: node
   linkType: hard
 

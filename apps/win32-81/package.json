@@ -59,7 +59,7 @@
     "@rnx-kit/metro-resolver-symlinks": "catalog:",
     "@rnx-kit/metro-serializer": "catalog:",
     "@rnx-kit/metro-serializer-esbuild": "catalog:",
-    "@rnx-kit/tools-react-native": "^2.3.2",
+    "@rnx-kit/tools-react-native": "catalog:",
     "@types/react-test-renderer": "^19.1.0",
     "metro": "^0.83.1",
     "metro-config": "0.83.1",
