@@ -1,4 +1,4 @@
-import { mergeProps } from '../merge-props/mergeProps';
+import { mergeProps } from '../merge-props/mergeProps.ts';
 
 export type PropsFilter = (propName: string) => boolean;
 

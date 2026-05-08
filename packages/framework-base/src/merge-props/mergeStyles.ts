@@ -1,7 +1,7 @@
-import { immutableMerge } from '../immutable-merge/Merge';
-import { getMemoCache } from '../memo-cache/getMemoCache';
+import { immutableMerge } from '../immutable-merge/Merge.ts';
+import { getMemoCache } from '../memo-cache/getMemoCache.ts';
 
-import type { StyleProp } from './mergeStyles.types';
+import type { StyleProp } from './mergeStyles.types.ts';
 
 /**
  * Take a react-native style, which may be a recursive array, and return as a flattened
