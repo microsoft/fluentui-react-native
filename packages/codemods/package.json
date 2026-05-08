@@ -42,7 +42,6 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/preset-env": "catalog:",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@types/jscodeshift": "^0.11.11",
@@ -61,7 +60,7 @@
   },
   "rnx-kit": {
     "kitType": "library",
-    "extends": "@fluentui-react-native/kit-config",
+    "extends": "@fluentui-react-native/scripts/kit-config",
     "alignDeps": {
       "capabilities": []
     }

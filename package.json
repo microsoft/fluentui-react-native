@@ -64,6 +64,7 @@
   },
   "packageManager": "yarn@4.13.0",
   "rnx-kit": {
+    "extends": "./scripts/configs/rnx-kit/rnx-kit.config.cts",
     "kitType": "library"
   }
 }

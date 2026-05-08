@@ -62,7 +62,6 @@
     "@fluentui-react-native/experimental-native-font-metrics": "workspace:*",
     "@fluentui-react-native/experimental-shimmer": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/menu-button": "workspace:*",
     "@fluentui-react-native/radio-group": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
@@ -178,6 +177,6 @@
         "test-app"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }

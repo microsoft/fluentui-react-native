@@ -311,5 +311,8 @@
     "react-native-windows": {
       "optional": true
     }
+  },
+  "rnx-kit": {
+    "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }

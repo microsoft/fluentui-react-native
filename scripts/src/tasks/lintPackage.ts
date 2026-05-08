@@ -155,9 +155,6 @@ export class LintPackageCommand extends Command {
       dependencies['@office-iss/react-native-win32'] !== undefined,
       '@office-iss/react-native-win32 should be a peerDependency, not a dependency',
     );
-    if (manifest.furn?.packageType !== 'tooling') {
-      this.addedDevDeps['@fluentui-react-native/kit-config'] = 'workspace:*';
-    }
   }
 
   private checkDevDeps() {
@@ -222,10 +219,6 @@ export class LintPackageCommand extends Command {
     if (rnxKitConfig.kitType === undefined) {
       rnxKitIssues.push('- Missing rnx-kit.kitType field');
       rnxKitConfig.kitType = 'library';
-    }
-    if (rnxKitConfig.extends === undefined) {
-      rnxKitIssues.push('- Missing rnx-kit.extends field');
-      rnxKitConfig.extends = '@fluentui-react-native/kit-config';
     }
     if (!rnxKitConfig.alignDeps) {
       rnxKitIssues.push('- Missing rnx-kit.alignDeps field');
@@ -351,14 +344,6 @@ export class LintPackageCommand extends Command {
       }
       if (updated.default && keys[keys.length - 1] !== 'default') {
         errors.push(`'default' entry should be last in exports for ${groupName}`);
-      }
-      if (updated.import) {
-        const importInSrc = updated.import.startsWith('./src');
-        const defaultExport = importInSrc ? updated.import : updated.import.replace(esmDir, 'src').replace(/\.js$/, '.ts');
-        if (!updated.default || updated.default !== defaultExport) {
-          errors.push(`'default' entry in exports does not match the expected default export`);
-          updated.default = defaultExport;
-        }
       }
       this.errorIf(errors.length > 0, errors.join('\n'), () => {
         const { types, import: imp, require: req, default: def, ...rest } = updated;

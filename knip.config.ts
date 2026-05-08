@@ -3,7 +3,7 @@ import { repoContext } from './scripts/src/repoContext.ts';
 import path from 'node:path';
 
 const ignoredPaths = ['apps', 'scripts', 'packages/configs', 'packages/dependency-profiles'];
-const ignoredPackages = ['@fluentui-react-native/kit-config', '@babel/core', '@react-native/babel-preset'];
+const ignoredPackages = ['@babel/core', '@react-native/babel-preset'];
 
 const config = async (): Promise<KnipConfig> => {
   const repoCtx = repoContext();
