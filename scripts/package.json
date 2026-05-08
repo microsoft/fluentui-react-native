@@ -68,6 +68,7 @@
     "@rnx-kit/reporter": "catalog:",
     "@rnx-kit/tools-packages": "catalog:",
     "@rnx-kit/tools-typescript": "catalog:",
+    "@rnx-kit/tools-workspaces": "catalog:",
     "@rnx-kit/tsconfig": "catalog:",
     "@rnx-kit/types-kit-config": "catalog:",
     "@types/micromatch": "^4.0.9",

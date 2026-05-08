@@ -45,6 +45,7 @@
     "@rnx-kit/lint-lockfile": "catalog:",
     "babel-jest": "^29.7.0",
     "cross-env": "catalog:",
+    "knip": "catalog:",
     "lage": "catalog:",
     "markdown-link-check": "^3.8.7",
     "oxfmt": "^0.35.0",

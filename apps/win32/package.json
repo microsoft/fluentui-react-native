@@ -14,7 +14,7 @@
     ".": {
       "import": "./index.js",
       "require": "./index.js",
-      "default": "./index.ts"
+      "default": "./src/index.tsx"
     }
   },
   "scripts": {
