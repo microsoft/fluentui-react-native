@@ -25,7 +25,6 @@
     "change:check": "node .github/scripts/change.mts --check",
     "check-publishing": "node ./scripts/src/cli.ts check-publishing",
     "lint-fix": "cross-env FURN_FIX_MODE=true lage lint",
-    "lint-package-fix": "cross-env FURN_FIX_MODE=true lage lint-package",
     "preinstall": "node ./scripts/src/preinstall/use-yarn-please.ts",
     "format": "oxfmt",
     "format:check": "oxfmt --check",

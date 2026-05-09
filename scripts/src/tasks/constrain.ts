@@ -6,6 +6,9 @@ const repoCtx = repoContext();
 
 export function constrain(workspace: Yarn.Constraints.Workspace): void {
   const ctx = PackageContext.initYarn(workspace);
+  if (workspace.cwd !== 'scripts') {
+    ctx.enforce('rnx-kit.extends', '@fluentui-react-native/scripts/kit-config');
+  }
   assertDeprecations(ctx);
   useCatalogs(ctx);
 }
