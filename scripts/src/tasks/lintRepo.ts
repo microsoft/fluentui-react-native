@@ -65,8 +65,6 @@ async function execute() {
  */
 async function execCommand(cmdName: string, command: string): Promise<boolean> {
   const startTime = performance.now();
-  const cmdText = `${styleText('cyan', cmdName)}: `;
-  console.log(`${cmdText}${styleText(['green', 'bold'], 'starting')}`);
   return new Promise((resolve) => {
     exec(command, (error, stdout, stderr) => {
       const success = error == null;
