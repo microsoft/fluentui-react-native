@@ -33,7 +33,7 @@ export class PackageContext extends PackageValidationContext<PackageManifest> {
    * Create a package validation context for a given package root
    * @param root the root directory of the package
    * @param options optional options for additional configuration
-   * @returns a new PackageValidationContext instance
+   * @returns a new PackageContext instance
    */
   static init(root: string, options?: PackageValidationOptions<PackageManifest>): PackageContext {
     root = path.resolve(root);
@@ -46,13 +46,11 @@ export class PackageContext extends PackageValidationContext<PackageManifest> {
   /**
    * Create a package validation context for a Yarn workspace
    * @param workspace the Yarn workspace to validate
-   * @returns a new PackageValidationContext instance
+   * @returns a new PackageContext instance
    */
-  static initYarn<TManifest extends PackageManifest = PackageManifest>(
-    workspace: Yarn.Constraints.Workspace,
-  ): PackageValidationContext<TManifest> {
+  static initYarn(workspace: Yarn.Constraints.Workspace): PackageContext {
     const validator = createYarnWorkspaceValidator(workspace);
-    return new PackageValidationContext(workspace.cwd, validator);
+    return new PackageContext(workspace.cwd, validator);
   }
 
   protected constructor(root: string, validator: JSONValidator) {

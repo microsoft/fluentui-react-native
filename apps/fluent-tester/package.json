@@ -36,7 +36,6 @@
     "format": "fluentui-scripts format",
     "ios": "rnx-cli run --platform ios",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "macos": "rnx-cli run --platform macos",
     "start": "rnx-cli start",
     "windows": "react-native run-windows --arch x64 --sln windows/FluentTester.sln"

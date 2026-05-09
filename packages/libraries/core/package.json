@@ -28,7 +28,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "start-test": "fluentui-scripts jest-watch",
     "start:tester": "rnx-cli start",
     "test": "fluentui-scripts jest",

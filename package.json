@@ -44,6 +44,7 @@
     "@changesets/cli": "^2.30.0",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/lint-lockfile": "catalog:",
+    "@yarnpkg/types": "^4.0.1",
     "babel-jest": "^29.7.0",
     "cross-env": "catalog:",
     "knip": "catalog:",

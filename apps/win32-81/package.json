@@ -26,7 +26,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
     "run-win32-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh",
     "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useDevMain ",

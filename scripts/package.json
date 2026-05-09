@@ -32,8 +32,7 @@
     "bundlesize": "bundlesize --debug",
     "depcheck": "node ./src/cli.ts depcheck",
     "format": "node ./src/cli.ts format",
-    "lint": "node ./src/cli.ts lint",
-    "lint-package": "node ./src/cli.ts lint-package"
+    "lint": "node ./src/cli.ts lint"
   },
   "dependencies": {
     "@babel/core": "catalog:",

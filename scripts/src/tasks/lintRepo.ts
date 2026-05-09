@@ -8,6 +8,10 @@ type CommandVariants = {
 };
 
 const lintCommands: Record<string, CommandVariants> = {
+  'yarn-constraints': {
+    check: 'yarn constraints',
+    fix: 'yarn constraints --fix',
+  },
   'align-deps': {
     check: 'yarn rnx-align-deps',
     fix: 'yarn rnx-align-deps --fix',
