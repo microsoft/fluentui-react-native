@@ -1,0 +1,78 @@
+{
+  "name": "@fluentui-react-native/analyzer",
+  "version": "0.0.1",
+  "description": "Package analysis tools for Fluent UI React Native, for use with AI agents",
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/ai/analyzer"
+  },
+  "type": "module",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsgo",
+    "build-core": "tsgo",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "lint-package": "fluentui-scripts lint-package",
+    "start": "fluentui-scripts dev",
+    "start-test": "fluentui-scripts jest-watch",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@fluentui-react-native/button": "workspace:*",
+    "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/theme": "workspace:*",
+    "@fluentui-react-native/theme-types": "workspace:*",
+    "@fluentui/react-native": "workspace:*",
+    "@react-native/babel-preset": "^0.81.0",
+    "@testing-library/react-native": "^13.3.3",
+    "@types/jest": "^29.0.0",
+    "@types/node": "catalog:",
+    "@types/react": "~19.1.4",
+    "@types/react-test-renderer": "~19.1.0",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-test-renderer": "19.1.4"
+  },
+  "peerDependencies": {
+    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
+    "react": "18.2.0 || 19.0.0 || 19.1.4"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  },
+  "furn": {
+    "jestPlatform": "ios"
+  },
+  "rnx-kit": {
+    "extends": "@fluentui-react-native/kit-config",
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "core-dev-only",
+        "react"
+      ]
+    }
+  }
+}
