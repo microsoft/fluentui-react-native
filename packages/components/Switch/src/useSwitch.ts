@@ -56,6 +56,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
 
       setIsInit(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- animation objects are refs, only re-run on checked state change
   }, [checked, checkedState]);
 
   const switchAnimationStyles = React.useMemo(() => {
@@ -89,6 +90,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
         }),
       },
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- animation objects are stable refs
   }, [checkedState]);
 
   const focusRef = disabled ? null : componentRef;

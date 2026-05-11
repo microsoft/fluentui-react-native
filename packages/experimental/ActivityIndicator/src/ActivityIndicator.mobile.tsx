@@ -61,7 +61,7 @@ export const ActivityIndicator = compose<FluentActivityIndicatorType>({
           }
         });
       }
-    }, [rotationAngle, animating]);
+    }, [rotationAngle]);
 
     const stopRotation = () => {
       if (rotationAnimation.current) {
@@ -86,7 +86,7 @@ export const ActivityIndicator = compose<FluentActivityIndicatorType>({
       } else {
         stopRotation();
       }
-    }, [animating, hidesWhenStopped, rotationAngle]);
+    }, [animating, rotationAngle, startRotation]);
 
     const interpolateSpin = rotationAngle.interpolate({
       inputRange: [0, 359],

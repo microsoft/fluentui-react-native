@@ -11,7 +11,7 @@ export const useMenuItemRadio = (props: MenuItemRadioProps): MenuItemRadioInfo =
   const { disabled = false, name, persistOnClick } = props;
   const context = useMenuContext();
   const listContext = useMenuListContext();
-  const selectRadio = listContext.selectRadio;
+  const { addRadioItem, removeRadioItem, selectRadio } = listContext;
   const setOpen = context.setOpen;
   let shouldPersist = context.persistOnItemClick;
   shouldPersist = persistOnClick ?? shouldPersist;
@@ -30,11 +30,12 @@ export const useMenuItemRadio = (props: MenuItemRadioProps): MenuItemRadioInfo =
 
   // Explicitly only run on mount and unmount
   React.useEffect(() => {
-    listContext.addRadioItem(name);
+    addRadioItem(name);
 
     return () => {
-      listContext.removeRadioItem(name);
+      removeRadioItem(name);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
   }, []);
 
   return useMenuCheckboxInteraction(props, toggleChecked);

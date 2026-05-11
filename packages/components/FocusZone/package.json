@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/focus-zone",
-  "version": "0.22.2",
+  "version": "0.22.3",
   "description": "A cross-platform FocusZone component using the Fluent Design System",
   "license": "MIT",
   "author": "",
@@ -27,7 +27,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
@@ -40,9 +40,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.74.0",
@@ -82,6 +79,9 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "win32"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
@@ -94,9 +94,7 @@
         "core-windows",
         "metro-react-native-babel-transformer",
         "react",
-        "react-test-renderer",
-        "tools-core",
-        "tools-jest"
+        "react-test-renderer"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

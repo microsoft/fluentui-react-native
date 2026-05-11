@@ -9,7 +9,7 @@ class ShimmerPageObject extends BasePage {
     return SHIMMER_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return SHIMMER_TEST_COMPONENT;
   }
 

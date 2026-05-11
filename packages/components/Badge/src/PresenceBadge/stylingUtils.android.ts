@@ -1,1 +1,1 @@
-export * from './stylingUtils.mobile';
+export { getIconPath } from './stylingUtils.mobile';

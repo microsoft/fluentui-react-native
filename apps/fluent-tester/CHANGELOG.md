@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/tester
 
+## 0.170.51
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+
 <!-- This log was last generated on Tue, 16 Sep 2025 18:24:03 GMT and should not be manually modified. -->
 
 <!-- Start content -->
@@ -7038,7 +7044,7 @@ Fri, 19 Aug 2022 15:32:12 GMT
 
 ### Patches
 
-- Menu Picker for desktop is now using a FURN text  element (nkhalil942@gmail.com)
+- Menu Picker for desktop is now using a FURN text element (nkhalil942@gmail.com)
 
 ## 0.86.2
 
@@ -11080,7 +11086,7 @@ Fri, 25 Jun 2021 06:21:11 GMT
 
 ### Minor changes
 
-- 📦 applying package updates ***NO_CI*** (tamasane@gmail.com)
+- 📦 applying package updates **_NO_CI_** (tamasane@gmail.com)
 
 ## 0.27.0
 

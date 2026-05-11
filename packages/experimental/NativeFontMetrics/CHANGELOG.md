@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
+## 0.7.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+
 ## 0.7.2
 
 ### Patch Changes

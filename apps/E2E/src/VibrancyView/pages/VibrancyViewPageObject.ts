@@ -9,7 +9,7 @@ class VibrancyViewTestPage extends BasePage {
     return VIBRANCYVIEW_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return VIBRANCYVIEW_TEST_COMPONENT;
   }
 

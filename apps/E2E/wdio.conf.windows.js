@@ -49,7 +49,6 @@ exports.config = {
   bail: 1, // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
-  connectionRetryCount: 2, // Maximum count of request retries to the Selenium server.
   specFileRetries: 1, // The number of times to retry the entire spec file when it fails as a whole.
 
   port: 4723, // default appium port
@@ -161,7 +160,7 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: (test, context, results) => {
+  afterTest: (test, _context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
     console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration / 600).toFixed(2)}s". \n`);
 

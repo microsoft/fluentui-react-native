@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/dropdown
 
+## 0.11.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [196cbea]
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/button@0.40.3
+  - @fluentui-react-native/interactive-hooks@0.28.3
+  - @fluentui-react-native/theme-tokens@0.28.3
+  - @fluentui-react-native/framework@0.15.3
+  - @fluentui-react-native/callout@0.28.3
+  - @fluentui-react-native/text@0.25.3
+  - @fluentui-react-native/adapters@0.14.3
+
 ## 0.11.2
 
 ### Patch Changes

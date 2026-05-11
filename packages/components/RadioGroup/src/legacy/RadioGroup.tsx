@@ -64,16 +64,14 @@ export const RadioGroup = compose<IRadioGroupType>({
 
     const onAddRadioButtonKey = React.useCallback(
       (buttonKey: string) => {
-        buttonKeys.push(buttonKey);
-        setButtonKeys(buttonKeys);
+        setButtonKeys((prevButtonKeys) => [...prevButtonKeys, buttonKey]);
       },
       [setButtonKeys],
     );
 
     const onRemoveRadioButtonKey = React.useCallback(
       (buttonKey: string) => {
-        buttonKeys.filter((item) => item !== buttonKey);
-        setButtonKeys(buttonKeys);
+        setButtonKeys((prevButtonKeys) => prevButtonKeys.filter((item) => item !== buttonKey));
       },
       [setButtonKeys],
     );
@@ -82,16 +80,14 @@ export const RadioGroup = compose<IRadioGroupType>({
 
     const onAddRadioButtonEnabledKey = React.useCallback(
       (buttonKey: string) => {
-        enabledButtonKeys.push(buttonKey);
-        setEnabledButtonKeys(enabledButtonKeys);
+        setEnabledButtonKeys((prevEnabledButtonKeys) => [...prevEnabledButtonKeys, buttonKey]);
       },
       [setEnabledButtonKeys],
     );
 
     const onRemoveRadioButtonEnabledKey = React.useCallback(
       (buttonKey: string) => {
-        enabledButtonKeys.filter((item) => item !== buttonKey);
-        setEnabledButtonKeys(enabledButtonKeys);
+        setEnabledButtonKeys((prevEnabledButtonKeys) => prevEnabledButtonKeys.filter((item) => item !== buttonKey));
       },
       [setEnabledButtonKeys],
     );

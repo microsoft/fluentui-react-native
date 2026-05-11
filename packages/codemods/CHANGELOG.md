@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/codemods
 
+## 0.6.2
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+
 ## 0.6.1
 
 ### Patch Changes

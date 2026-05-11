@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/stack",
-  "version": "0.11.2",
+  "version": "0.11.3",
   "description": "A cross-platform opinionated Fluent Text component",
   "license": "MIT",
   "author": "",
@@ -27,7 +27,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
@@ -43,10 +43,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
@@ -85,6 +82,9 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "android"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
@@ -96,9 +96,7 @@
         "core-macos",
         "core-windows",
         "react",
-        "react-test-renderer",
-        "tools-core",
-        "tools-jest"
+        "react-test-renderer"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

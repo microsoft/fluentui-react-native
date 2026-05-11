@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/adapters",
-  "version": "0.14.2",
+  "version": "0.14.3",
   "description": "Adapters for working with react-native types",
   "license": "MIT",
   "author": "",
@@ -27,16 +27,14 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
     "@react-native-community/cli": "^20.0.0",
@@ -80,8 +78,7 @@
         "core-ios",
         "core-macos",
         "core-win32",
-        "core-windows",
-        "tools-core"
+        "core-windows"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

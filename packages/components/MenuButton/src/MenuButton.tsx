@@ -119,7 +119,7 @@ export const MenuButton = compose<MenuButtonType>({
           <Slots.contextualMenu>
             {menuItems.map((menuItem) => {
               return menuItem.hasSubmenu && menuItem.submenuItems ? (
-                <Slots.contextualMenuItems>
+                <Slots.contextualMenuItems key={menuItem.itemKey}>
                   <SubMenuItem {...menuItem} />
                 </Slots.contextualMenuItems>
               ) : (

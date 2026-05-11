@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-native-font-metrics",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "A temporary partial wrapper for UIFontMetrics.",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
@@ -38,8 +38,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
@@ -67,8 +65,7 @@
       "capabilities": [
         "core",
         "core-ios",
-        "react",
-        "tools-core"
+        "react"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

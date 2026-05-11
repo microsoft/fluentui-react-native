@@ -1,6 +1,6 @@
 import { scriptsDir } from '../utils/ispnpm.ts';
 import { spawn } from 'node:child_process';
-import { yarnVerb } from '../utils/runScript.js';
+import { yarnVerb } from '../utils/runScript.ts';
 import path from 'node:path';
 
 export async function runAlignDeps(targetDir: string, fixMode: boolean): Promise<number> {

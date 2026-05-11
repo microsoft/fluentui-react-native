@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/codemods",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Transform files to make refactoring FURN code easier",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",
@@ -30,9 +30,9 @@
     "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "lint": "fluentui-scripts eslint",
-    "lint-package": "fluentui-scripts lint-package",
     "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest"
   },
   "dependencies": {
@@ -42,9 +42,7 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/preset-env": "catalog:",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@types/jscodeshift": "^0.11.11",
@@ -58,16 +56,14 @@
       "ignorePatterns": [
         "src/transforms/__testfixtures__/*"
       ]
-    }
+    },
+    "jestPlatform": "react"
   },
   "rnx-kit": {
     "kitType": "library",
     "extends": "@fluentui-react-native/kit-config",
     "alignDeps": {
-      "capabilities": [
-        "tools-core",
-        "tools-jest-react"
-      ]
+      "capabilities": []
     }
   }
 }

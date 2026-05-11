@@ -98,7 +98,7 @@ class OverflowPageObject extends BasePage {
     return OVERFLOW_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return OVERFLOW_TEST_COMPONENT;
   }
 }

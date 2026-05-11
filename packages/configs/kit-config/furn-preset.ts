@@ -20,14 +20,7 @@ type Capability =
   | 'core-macos-dev-only'
   | 'react-types'
   | 'react-test-renderer-types'
-  | 'babel-preset-react-native'
-  | 'babel-core'
-  | 'tools-babel'
-  | 'tools-eslint'
-  | 'tools-jest'
-  | 'tools-jest-react'
-  | 'tools-core'
-  | 'tools-react-configs';
+  | 'babel-preset-react-native';
 
 /** Remove the hard Capability type from Package as we are adding custom capabilities */
 type Package = Omit<RNXPackage, 'capabilities'> & {
@@ -106,46 +99,6 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
       name: '@office-iss/react-native-win32',
       version: presetWindows.version,
       capabilities: ['core'],
-    },
-    'tools-babel': {
-      name: '@fluentui-react-native/babel-config',
-      version: `workspace:*`,
-      devOnly: true,
-      capabilities: ['babel-preset-react-native', 'babel-core'],
-    },
-    'tools-react-configs': {
-      name: '@fluentui-react-native/react-configs',
-      version: `workspace:*`,
-      devOnly: true,
-      capabilities: ['babel-core'],
-    },
-    'tools-core': {
-      name: '@fluentui-react-native/scripts',
-      version: 'workspace:*',
-      devOnly: true,
-    },
-    'tools-eslint': {
-      name: '@fluentui-react-native/eslint-config-rules',
-      version: 'workspace:*',
-      devOnly: true,
-      capabilities: ['tools-core'],
-    },
-    'tools-jest': {
-      name: '@fluentui-react-native/jest-config',
-      version: 'workspace:*',
-      devOnly: true,
-      capabilities: ['tools-core', 'tools-babel'],
-    },
-    'tools-jest-react': {
-      name: '@fluentui-react-native/react-configs',
-      version: 'workspace:*',
-      devOnly: true,
-      capabilities: ['tools-core', 'babel-core'],
-    },
-    'babel-core': {
-      name: '@babel/core',
-      version: 'catalog:',
-      devOnly: true,
     },
   };
 

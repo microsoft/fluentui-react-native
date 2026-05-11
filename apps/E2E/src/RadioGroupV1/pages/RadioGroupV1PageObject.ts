@@ -72,11 +72,11 @@ class RadioGroupV1Page extends BasePage {
     return RADIOGROUPV1_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return RADIOGROUPV1_TEST_COMPONENT;
   }
 
-  get _secondaryComponentName() {
+  override get _secondaryComponentName() {
     return RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT;
   }
 

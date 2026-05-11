@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tokens",
-  "version": "0.24.2",
+  "version": "0.24.3",
   "description": "Token interface parts and helpers",
   "license": "MIT",
   "author": "",
@@ -27,7 +27,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
@@ -38,8 +38,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
@@ -82,8 +80,7 @@
         "core-android",
         "core-ios",
         "core-macos",
-        "core-windows",
-        "tools-core"
+        "core-windows"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

@@ -1,9 +1,9 @@
 import type { AccessibilityContrastOption, SizeClass, UserInterfaceLevel } from './NativeAppearanceAdditions.types';
 
 export const NativeAppearanceAdditions = {
-  addListener: (_: string) => {},
+  addListener: (_: string) => undefined,
 
-  removeListeners: (_: number) => {},
+  removeListeners: (_: number) => undefined,
   initializeTraitCollection: (_: number) => {
     console.warn('NativeAppearanceAdditions is only available on iOS');
   },

@@ -41,7 +41,7 @@ const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ..
   if (gap && gap > 0 && children && globalThis.__jsiExecutorDescription !== 'ChakraRuntime') {
     const extraStyle: ViewStyle = horizontal ? { marginLeft: gap } : { marginTop: gap };
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore - TODO, fix typing error
+    // @ts-expect-error - TODO, fix typing error
     children = React.Children.map(children, (child: React.ReactChild, index: number) => {
       if (React.isValidElement(child) && index > 0) {
         const childProps = child.props as ObjectBase;

@@ -1,5 +1,26 @@
 # Change Log - @fluentui-react-native/notification
 
+## 0.26.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [196cbea]
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/button@0.40.3
+  - @fluentui-react-native/experimental-appearance-additions@0.8.3
+  - @fluentui-react-native/interactive-hooks@0.28.3
+  - @fluentui-react-native/use-styling@0.14.3
+  - @fluentui-react-native/pressable@0.13.3
+  - @fluentui-react-native/theme-tokens@0.28.3
+  - @fluentui-react-native/experimental-shadow@0.7.3
+  - @fluentui-react-native/framework@0.15.3
+  - @fluentui-react-native/theme-types@0.44.3
+  - @fluentui-react-native/icon@0.22.3
+  - @fluentui-react-native/text@0.25.3
+  - @fluentui-react-native/adapters@0.14.3
+  - @fluentui-react-native/tokens@0.24.3
+
 ## 0.26.2
 
 ### Patch Changes

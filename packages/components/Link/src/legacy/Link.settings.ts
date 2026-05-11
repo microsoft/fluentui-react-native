@@ -19,7 +19,7 @@ export const settings: IComposeSettings<ILinkType> = [
       accessible: true,
       focusable: true,
       enableFocusRing: false,
-      ...{ cursor: 'pointer' },
+      cursor: 'pointer',
       accessibilityRole: 'link',
       style: {
         display: 'flex',

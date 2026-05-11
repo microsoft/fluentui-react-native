@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
+## 0.12.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+
 ## 0.12.2
 
 ### Patch Changes

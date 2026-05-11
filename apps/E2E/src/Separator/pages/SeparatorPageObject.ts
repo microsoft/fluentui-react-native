@@ -9,7 +9,7 @@ class SeparatorPageObject extends BasePage {
     return SEPARATOR_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return SEPARATOR_TEST_COMPONENT;
   }
 

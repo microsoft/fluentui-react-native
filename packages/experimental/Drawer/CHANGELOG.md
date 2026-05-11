@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/drawer
 
+## 0.5.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/interactive-hooks@0.28.3
+  - @fluentui-react-native/use-styling@0.14.3
+  - @fluentui-react-native/theme-tokens@0.28.3
+  - @fluentui-react-native/framework@0.15.3
+
 ## 0.5.2
 
 ### Patch Changes

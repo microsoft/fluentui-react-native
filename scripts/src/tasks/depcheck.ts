@@ -1,12 +1,10 @@
-// @ts-check
-
 import { Command, Option } from 'clipanion';
 import depcheck from 'depcheck';
 import type { ProjectRoot } from '../utils/projectRoot.ts';
 import { getProjectRoot } from '../utils/projectRoot.ts';
-import getInjectedDeps from '../../dynamic.extensions.mjs';
+import getInjectedDeps from '../../dynamic.extensions.mts';
 import { getReporter } from '../utils/getReporter.ts';
-import { getToolVersion } from '../preinstall/tool-versions.js';
+import { getToolVersion } from '../preinstall/tool-versions.ts';
 import micromatch from 'micromatch';
 import { isFixMode } from '../utils/env.ts';
 
@@ -259,7 +257,7 @@ export class DepCheckRunner {
 function injectedDevDeps(projectRoot: ProjectRoot): string[] {
   const options = { cwd: projectRoot.root, manifest: projectRoot.manifest };
   const injectedDeps = getInjectedDeps(options);
-  return Object.keys(injectedDeps);
+  return Object.keys(injectedDeps.dependencies ?? {});
 }
 
 function isTestFile(fileName: string): boolean {
@@ -271,5 +269,6 @@ function isTestFile(fileName: string): boolean {
     '**/babel.config.*',
     '**/jest.config.*',
     '**/eslint.config.*',
+    '**/oxlint.config.*',
   ]);
 }

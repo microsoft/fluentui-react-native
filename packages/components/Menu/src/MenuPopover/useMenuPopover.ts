@@ -24,17 +24,23 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
     triggerHoverOutTimer,
   } = context;
 
-  const { onKeyDown: onKeyDownProp, onKeyUp: onKeyUpProp } = props;
+  const {
+    directionalHint: directionalHintProp,
+    doNotTakePointerCapture: doNotTakePointerCaptureProp,
+    onDismiss: onDismissProp,
+    onKeyDown: onKeyDownProp,
+    onKeyUp: onKeyUpProp,
+  } = props;
 
   const onDismiss = React.useCallback(() => {
-    props.onDismiss?.();
-    (setOpen(undefined, false /* isOpen */), [setOpen]);
-  }, [props.onDismiss, setOpen]);
+    onDismissProp?.();
+    setOpen(undefined, false /* isOpen */);
+  }, [onDismissProp, setOpen]);
   const dismissBehaviors = isControlled ? controlledDismissBehaviors : undefined;
-  const directionalHint = props.directionalHint ?? getDirectionalHint(isSubmenu, I18nManager.isRTL);
+  const directionalHint = directionalHintProp ?? getDirectionalHint(isSubmenu, I18nManager.isRTL);
 
   const setInitialFocus = true;
-  const doNotTakePointerCapture = props.doNotTakePointerCapture ?? openOnHover;
+  const doNotTakePointerCapture = doNotTakePointerCaptureProp ?? openOnHover;
   const accessibilityRole = 'menu';
 
   const onMouseEnter = React.useCallback(() => {

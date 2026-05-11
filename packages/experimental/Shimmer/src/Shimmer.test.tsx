@@ -5,7 +5,7 @@ import * as renderer from 'react-test-renderer';
 import { Shimmer } from './Shimmer';
 import type { ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types';
 
-function shimmerRects(): Array<ShimmerRectElement | ShimmerCircleElement> {
+function shimmerRects(): (ShimmerRectElement | ShimmerCircleElement)[] {
   return [
     {
       type: 'rect',

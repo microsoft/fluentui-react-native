@@ -77,7 +77,7 @@ export const MenuButton = compose<MenuButtonType>({
     // Transform the menuItem props to match the native props of NSMenuItem
     function transformMenuItems(menuItems: MenuButtonItemProps[]): NativeMenuItem[] {
       const nativeMenuItems: NativeMenuItem[] = [];
-      menuItems.forEach((item) => {
+      for (const item of menuItems) {
         const imageSource = extractResolvedImageSourceFromIcon(item.icon);
 
         // Recursively parse submenus
@@ -93,7 +93,7 @@ export const MenuButton = compose<MenuButtonType>({
           submenu: submenu,
         };
         nativeMenuItems.push(transformedItem);
-      });
+      }
       return nativeMenuItems;
     }
 

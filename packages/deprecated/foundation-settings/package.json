@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-settings",
-  "version": "0.16.2",
+  "version": "0.16.3",
   "description": "Settings and style definitions and helpers",
   "keywords": [],
   "license": "MIT",
@@ -28,7 +28,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
@@ -40,9 +40,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
     "@types/react": "~19.1.4",
@@ -58,13 +56,14 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "react"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "core-dev-only",
-        "tools-core",
-        "tools-jest-react"
+        "core-dev-only"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

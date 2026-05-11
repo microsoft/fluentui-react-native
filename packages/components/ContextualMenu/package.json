@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/contextual-menu",
-  "version": "0.25.2",
+  "version": "0.25.3",
   "description": "A cross-platform ContextualMenu component using the Fluent Design System",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
@@ -47,10 +47,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/pressable": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
@@ -95,6 +92,9 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "win32"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
@@ -108,9 +108,7 @@
         "core/metro-config",
         "react",
         "react-test-renderer",
-        "svg",
-        "tools-core",
-        "tools-jest"
+        "svg"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

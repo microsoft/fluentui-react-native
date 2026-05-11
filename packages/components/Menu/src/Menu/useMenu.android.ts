@@ -159,14 +159,14 @@ export const useMenu = (props: MenuProps): MenuState => {
 
   // Adjust position of menu - TODO: fix this warning removal, potentially adds extra re-renders
 
-  const transforms = [];
+  const transforms = useMemo(() => {
+    const nextTransforms = [];
 
-  useMemo(() => {
     /**
      * If the Menu width and SCREEN_INDENT cross the screen width then the Menu will be adjusted to the oppostion left side of the screen
      */
     if ((isRTL && left + anchorWidth - menuWidth > SCREEN_INDENT) || (!isRTL && left + menuWidth > windowWidth - SCREEN_INDENT)) {
-      transforms.push({
+      nextTransforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
     } else if (left < SCREEN_INDENT) {
@@ -177,17 +177,19 @@ export const useMenu = (props: MenuProps): MenuState => {
     // Flip by Y axis if menu hits bottom screen border
     if (top + menuHeight + SCREEN_INDENT > windowHeight) {
       if (menuHeight > maxMenuHeight) {
-        transforms.push({
+        nextTransforms.push({
           translateY: Animated.multiply(menuSizeAnimation.y, -1),
         });
       } else {
-        transforms.push({
+        nextTransforms.push({
           translateY: Animated.multiply(menuSizeAnimation.y, -1),
         });
       }
     } else if (top < SCREEN_INDENT) {
       setTop(SCREEN_INDENT);
     }
+
+    return nextTransforms;
   }, [
     anchorWidth,
     isRTL,
@@ -198,7 +200,6 @@ export const useMenu = (props: MenuProps): MenuState => {
     menuSizeAnimation.y,
     menuWidth,
     top,
-    transforms,
     windowHeight,
     windowWidth,
   ]);
@@ -300,7 +301,7 @@ const useMenuOpenState = (
         parentSetOpen(e, isOpen, bubble);
       }
     },
-    [state, onOpenChange, parentSetOpen, show, hide],
+    [hide, isControlled, onOpenChange, parentSetOpen, show, state],
   );
   return [state, shouldFocusOnContainer, setOpen];
 };

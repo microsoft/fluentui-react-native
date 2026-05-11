@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-expander",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "A cross-platform Native Expander component using the Fluent Design System. Currently only implemented on windows",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-api": "fluentui-scripts update-api-extractor",
@@ -40,8 +40,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
@@ -86,8 +84,7 @@
         "core-ios",
         "core-macos",
         "core-windows",
-        "react",
-        "tools-core"
+        "react"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

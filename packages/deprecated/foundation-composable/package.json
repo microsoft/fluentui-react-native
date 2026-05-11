@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-composable",
-  "version": "0.14.2",
+  "version": "0.14.3",
   "description": "Composable component building blocks",
   "keywords": [],
   "license": "MIT",
@@ -28,7 +28,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
@@ -40,7 +40,6 @@
     "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/react": "~19.1.4",
@@ -61,8 +60,7 @@
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "core",
-        "tools-core"
+        "core"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

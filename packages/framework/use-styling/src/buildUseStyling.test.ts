@@ -129,8 +129,8 @@ describe('useStyling test suite', () => {
     const useStyling = buildUseStyling(baseOptions, themeHelper);
     const slotProps = useStyling({});
     const slotProps2 = useStyling({ p1: 2, p2: 'bar' });
-    Object.keys(slotProps).forEach((key) => {
+    for (const key of Object.keys(slotProps)) {
       expect(slotProps[key]).toBe(slotProps2[key]);
-    });
+    }
   });
 });

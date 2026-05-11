@@ -38,17 +38,7 @@ export const Shimmer = compose<ShimmerType>({
         shimmerWaveColor: props.shimmerWaveColor ? props.shimmerWaveColor : tokens['shimmerWaveColor'],
         shimmerWaveColorOpacity: tokens['shimmerWaveColorOpacity'],
       }),
-      [
-        props.angle,
-        props.backgroundColor,
-        props.delay,
-        props.duration,
-        props.shimmerColor,
-        props.shimmerColorOpacity,
-        props.shimmerWaveColor,
-        props.shimmerWaveColorOpacity,
-        props.style,
-      ],
+      [props.angle, props.delay, props.duration, props.shimmerColor, props.shimmerWaveColor, props.style, tokens],
     );
 
     /* The shimmer animation is implemented using a LinearGradient which travels from left to right.
@@ -69,11 +59,11 @@ export const Shimmer = compose<ShimmerType>({
           useNativeDriver: true,
         }),
       ).start();
-    }, [memoizedShimmerData.delay, memoizedShimmerData.duration]);
+    }, [endValue, memoizedShimmerData.delay, memoizedShimmerData.duration, x1]);
 
     useEffect(() => {
       shimmerAnimation();
-    });
+    }, [shimmerAnimation]);
 
     return (rest: ShimmerProps) => {
       const { elements, ...mergedProps } = mergeProps(props, rest);

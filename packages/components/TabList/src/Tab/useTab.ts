@@ -68,6 +68,7 @@ export const useTab = (props: TabProps): TabInfo => {
       componentRef && setFocusedTabRef(componentRef);
     }
     return () => removeTabKey(tabKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally run only on mount/unmount
   }, []);
 
   // Used when creating accessibility properties in mergeSettings below.

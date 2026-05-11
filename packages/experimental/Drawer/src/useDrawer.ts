@@ -8,7 +8,18 @@ import type { DrawerProps, DrawerInfo } from './Drawer.types';
 const { height, width } = Dimensions.get('window');
 
 export const useDrawer = (props: DrawerProps): DrawerInfo => {
-  const { onBlur, onFocus, accessibilityLabel, open, drawerPosition = 'left', showHandle = true, children, ...rest } = props;
+  const {
+    onBlur,
+    onClose: onCloseProp,
+    onFocus,
+    onScrimClick: onScrimClickProp,
+    accessibilityLabel,
+    open,
+    drawerPosition = 'left',
+    showHandle = true,
+    children,
+    ...rest
+  } = props;
   const animatedValue = useRef(new Animated.Value(0)).current;
   const [internalOpen, setInternalOpen] = useState(open);
   const [isFirstOpen, setIsFirstOpen] = useState(true);
@@ -36,20 +47,20 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
         });
       }
     }
-  }, [animatedValue, open]);
+  }, [animatedValue, isFirstOpen, open]);
 
   const onClose = useCallback(
     (e: InteractionEvent) => {
-      props?.onClose && props.onClose(e);
+      onCloseProp && onCloseProp(e);
     },
-    [props?.onClose],
+    [onCloseProp],
   );
 
   const onScrimClick = useCallback(
     (e: InteractionEvent) => {
-      props?.onScrimClick && props.onScrimClick(e);
+      onScrimClickProp && onScrimClickProp(e);
     },
-    [props?.onScrimClick],
+    [onScrimClickProp],
   );
 
   const animatedTranslateX = animatedValue.interpolate({

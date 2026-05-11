@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/experimental-activity-indicator
 
+## 0.11.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/framework@0.15.3
+
 ## 0.11.2
 
 ### Patch Changes

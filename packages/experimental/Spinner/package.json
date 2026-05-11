@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/spinner",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "A cross-platform Fluent spinner component",
   "license": "MIT",
   "author": "",
@@ -27,7 +27,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
@@ -40,8 +40,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
@@ -90,8 +88,7 @@
         "core-macos",
         "core-windows",
         "react",
-        "svg",
-        "tools-core"
+        "svg"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/experimental-appearance-additions
 
+## 0.8.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/framework@0.15.3
+
 ## 0.8.2
 
 ### Patch Changes

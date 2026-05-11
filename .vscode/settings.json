@@ -4,9 +4,6 @@
   "editor.trimAutoWhitespace": true,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
   // Use the OXC formatter as the default formatter which matches what yarn format will do
   "editor.defaultFormatter": "oxc.oxc-vscode",
 
@@ -15,9 +12,6 @@
   "prettier.tabWidth": 2,
   "prettier.printWidth": 140,
   "prettier.trailingComma": "all",
-
-  "eslint.enable": true,
-  "eslint.workingDirectories": [{ "pattern": "./packages/framework/eslint-config-rules" }], // use the common eslint config file
 
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {

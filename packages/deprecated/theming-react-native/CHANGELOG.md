@@ -1,5 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
+## 0.21.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @uifabricshared/theme-registry@0.13.3
+  - @uifabricshared/theming-ramp@0.21.3
+  - @fluentui-react-native/default-theme@0.27.3
+  - @fluentui-react-native/win32-theme@0.39.3
+
 ## 0.21.2
 
 ### Patch Changes

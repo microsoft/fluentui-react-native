@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.43.2",
+  "version": "0.43.3",
   "description": "A react-native component library that implements the Fluent Design System.",
   "license": "MIT",
   "repository": {
@@ -27,7 +27,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "start-test": "fluentui-scripts jest-watch",
     "start:tester": "rnx-cli start",
@@ -54,8 +54,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
@@ -104,8 +102,7 @@
         "core-macos",
         "core-windows",
         "react",
-        "svg",
-        "tools-core"
+        "svg"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

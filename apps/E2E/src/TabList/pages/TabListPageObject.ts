@@ -66,7 +66,7 @@ class TabListPageObject extends BasePage {
     return HOMEPAGE_TABLIST_BUTTON;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return TABLIST_TEST_COMPONENT;
   }
 }

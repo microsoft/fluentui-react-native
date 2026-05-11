@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/popover
 
+## 0.5.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/framework@0.15.3
+  - @fluentui-react-native/adapters@0.14.3
+
 ## 0.5.2
 
 ### Patch Changes

@@ -230,8 +230,8 @@ module.exports = {
       name: '@fluentui-react-native/composition',
       version: '0.9.2',
     },
-    '@fluentui-react-native/eslint-config-rules': {
-      name: '@fluentui-react-native/eslint-config-rules',
+    '@fluentui-react-native/lint-config-rules': {
+      name: '@fluentui-react-native/lint-config-rules',
       version: '0.1.1',
     },
     '@fluentui-react-native/framework': {

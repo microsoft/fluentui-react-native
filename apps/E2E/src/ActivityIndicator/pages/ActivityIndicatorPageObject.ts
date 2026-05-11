@@ -9,7 +9,7 @@ class ActivityIndicatorPageObject extends BasePage {
     return ACTIVITY_INDICATOR_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return ACTIVITY_INDICATOR_TEST_COMPONENT;
   }
 

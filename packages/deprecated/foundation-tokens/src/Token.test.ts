@@ -98,9 +98,9 @@ describe('Token settings unit tests', () => {
     const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2' }, b1, theme, cache, false);
     expect(resolved1).toEqual(resolved2);
-    Object.getOwnPropertyNames(resolved1).forEach((key) => {
+    for (const key of Object.getOwnPropertyNames(resolved1)) {
       expect(resolved1[key]).toBe(resolved2[key]);
-    });
+    }
   });
 
   test('setting props that match defaults keep same object', () => {
@@ -108,9 +108,9 @@ describe('Token settings unit tests', () => {
     const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'buttonText' }, b1, theme, cache, false);
     expect(resolved1).toEqual(resolved2);
-    Object.getOwnPropertyNames(resolved1).forEach((key) => {
+    for (const key of Object.getOwnPropertyNames(resolved1)) {
       expect(resolved1[key]).toBe(resolved2[key]);
-    });
+    }
   });
 
   test('prop token overrides produce partial new object', () => {
@@ -127,9 +127,9 @@ describe('Token settings unit tests', () => {
     const resolved1 = MockButton({ content: 'button1', borderRadius: 3, color: 'purple' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'purple', borderRadius: 3 }, b1, theme, cache, false);
     expect(resolved1).toEqual(resolved2);
-    Object.getOwnPropertyNames(resolved1).forEach((key) => {
+    for (const key of Object.getOwnPropertyNames(resolved1)) {
       expect(resolved1[key]).toBe(resolved2[key]);
-    });
+    }
   });
 
   test('prop token overrides, different keys same value produce different objects', () => {

@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
+## 0.22.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/framework@0.15.3
+  - @fluentui-react-native/text@0.25.3
+  - @fluentui-react-native/framework-base@0.3.3
+  - @fluentui-react-native/adapters@0.14.3
+
 ## 0.22.2
 
 ### Patch Changes

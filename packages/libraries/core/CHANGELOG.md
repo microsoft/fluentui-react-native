@@ -1,5 +1,29 @@
 # Change Log - @fluentui/react-native
 
+## 0.43.3
+
+### Patch Changes
+
+- 9cf4444: Migrate from ESLint to oxlint
+- Updated dependencies [196cbea]
+- Updated dependencies [9cf4444]
+  - @fluentui-react-native/button@0.40.3
+  - @fluentui-react-native/contextual-menu@0.25.3
+  - @fluentui-react-native/focus-trap-zone@0.13.3
+  - @fluentui-react-native/interactive-hooks@0.28.3
+  - @fluentui-react-native/persona-coin@0.16.3
+  - @fluentui-react-native/menu-button@0.14.3
+  - @fluentui-react-native/radio-group@0.22.3
+  - @fluentui-react-native/focus-zone@0.22.3
+  - @fluentui-react-native/pressable@0.13.3
+  - @fluentui-react-native/separator@0.19.3
+  - @fluentui-react-native/checkbox@0.24.3
+  - @fluentui-react-native/callout@0.28.3
+  - @fluentui-react-native/persona@0.17.3
+  - @fluentui-react-native/tablist@0.8.3
+  - @fluentui-react-native/link@0.24.3
+  - @fluentui-react-native/text@0.25.3
+
 ## 0.43.2
 
 ### Patch Changes

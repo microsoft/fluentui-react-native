@@ -1,1 +1,1 @@
-export * from './Checkbox.settings.android';
+export { checkboxSelectActionLabel, settings } from './Checkbox.settings.android';

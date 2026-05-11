@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/theme",
-  "version": "0.12.2",
+  "version": "0.12.3",
   "description": "Experimental version of fluentui-react-native theme framework",
   "keywords": [],
   "license": "MIT",
@@ -28,7 +28,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
@@ -41,9 +41,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
@@ -66,6 +63,9 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "android"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
@@ -74,9 +74,7 @@
         "core",
         "core-android",
         "core-ios",
-        "react",
-        "tools-core",
-        "tools-jest"
+        "react"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

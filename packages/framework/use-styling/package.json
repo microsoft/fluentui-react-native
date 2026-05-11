@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/use-styling",
-  "version": "0.14.2",
+  "version": "0.14.3",
   "description": "Opinionated use styling hook implementation",
   "keywords": [],
   "license": "MIT",
@@ -28,7 +28,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
@@ -41,9 +41,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/babel-config": "workspace:*",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
@@ -67,6 +64,9 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "android"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
@@ -75,9 +75,7 @@
         "core-dev-only",
         "core-ios-dev-only",
         "react",
-        "react-test-renderer",
-        "tools-core",
-        "tools-jest"
+        "react-test-renderer"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

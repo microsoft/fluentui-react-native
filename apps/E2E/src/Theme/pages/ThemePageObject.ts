@@ -9,7 +9,7 @@ class ThemePageObject extends BasePage {
     return THEME_TESTPAGE;
   }
 
-  get _primaryComponentName() {
+  override get _primaryComponentName() {
     return THEME_TEST_COMPONENT;
   }
 

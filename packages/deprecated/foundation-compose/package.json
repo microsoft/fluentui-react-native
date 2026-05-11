@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.16.2",
+  "version": "1.16.3",
   "description": "Compose infrastructure",
   "keywords": [],
   "license": "MIT",
@@ -28,7 +28,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
@@ -46,7 +46,6 @@
     "@uifabricshared/theming-ramp": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
@@ -94,8 +93,7 @@
         "core",
         "core-macos",
         "core-win32",
-        "core-windows",
-        "tools-core"
+        "core-windows"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

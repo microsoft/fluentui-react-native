@@ -1,2 +1,10 @@
-export * from './CounterBadge.types';
-export * from './CounterBadge';
+export { counterBadgeName } from './CounterBadge.types';
+export type {
+  CounterBadgeInfo,
+  CounterBadgeProps,
+  CounterBadgeSlotProps,
+  CounterBadgeState,
+  CounterBadgeTokens,
+  CounterBadgeType,
+} from './CounterBadge.types';
+export { CounterBadge } from './CounterBadge';

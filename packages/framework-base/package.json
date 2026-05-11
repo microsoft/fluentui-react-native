@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/framework-base",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Base types and utilities fluentui-react-native frameworks",
   "keywords": [],
   "license": "MIT",
@@ -34,7 +34,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
@@ -43,9 +43,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
     "@types/node": "catalog:",
@@ -62,16 +60,16 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "react"
+  },
   "rnx-kit": {
     "extends": "@fluentui-react-native/kit-config",
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
         "core-dev-only",
-        "react",
-        "tools-core",
-        "tools-eslint",
-        "tools-jest-react"
+        "react"
       ]
     }
   }

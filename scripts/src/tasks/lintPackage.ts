@@ -6,6 +6,7 @@ import { isFixMode } from '../utils/env.ts';
 import { runAlignDeps } from './runAlignDeps.ts';
 import { DepCheckRunner } from './depcheck.ts';
 import { getCatalog } from '../utils/getCatalog.ts';
+import { createJSONValidator } from '@rnx-kit/lint-json';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -30,7 +31,6 @@ export class LintPackageCommand extends Command {
   private changed = false;
   private issues = 0;
   private isScripts = false;
-  private isLibrary = false;
   private projRoot: ProjectRoot = getProjectRoot(process.cwd());
   private result = 0;
   private removedDevDeps: string[] = [];
@@ -43,7 +43,6 @@ export class LintPackageCommand extends Command {
     this.fix = isFixMode(this.fix);
     const manifest = this.projRoot.manifest;
     this.isScripts = manifest.name === '@fluentui-react-native/scripts';
-    this.isLibrary = !(manifest['rnx-kit']?.kitType === 'app') && manifest.furn?.packageType !== 'tooling';
 
     const runningOps: Promise<void>[] = [];
 
@@ -66,7 +65,6 @@ export class LintPackageCommand extends Command {
 
     this.checkPrivateVersion();
     this.checkManifest();
-    this.checkUsage();
     this.checkScripts();
     this.checkEntryPoints(buildConfig);
     this.checkBuildConfig(buildConfig);
@@ -74,6 +72,7 @@ export class LintPackageCommand extends Command {
     this.checkDevDeps();
     this.checkPeerDeps();
     this.checkRnxKitConfig();
+    this.checkTsConfig();
     await this.checkCatalogs();
 
     // report the results for the custom linting
@@ -140,25 +139,6 @@ export class LintPackageCommand extends Command {
       }
       this.projRoot.clearManifestEntry('typings');
     });
-  }
-
-  private checkUsage() {
-    const rootDir = this.projRoot.root;
-    if (this.isLibrary) {
-      this.ensuredCapabilities.push('tools-core');
-      const hasJestConfig = fs.existsSync(path.join(rootDir, 'jest.config.js')) || fs.existsSync(path.join(rootDir, 'jest.config.ts'));
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const hasReactJest = this.projRoot.manifest['rnx-kit']?.alignDeps?.capabilities?.includes('tools-jest-react' as any);
-      if (!hasReactJest) {
-        if (hasJestConfig) {
-          this.ensuredCapabilities.push('tools-jest');
-          this.addedDevDeps['@fluentui-react-native/jest-config'] = 'workspace:*';
-        } else {
-          this.removedCapabilities.push('tools-jest', 'babel-preset-react-native', 'tools-babel');
-          this.removedDevDeps.push('@fluentui-react-native/jest-config', '@types/jest', 'jest', 'ts-jest');
-        }
-      }
-    }
   }
 
   private checkDependencies() {
@@ -453,6 +433,26 @@ export class LintPackageCommand extends Command {
     }
   }
 
+  private checkTsConfig() {
+    const tsconfigPath = path.join(this.projRoot.root, 'tsconfig.json');
+    if (fs.existsSync(tsconfigPath)) {
+      const validator = createJSONValidator(tsconfigPath, undefined, { fix: this.fix, reportError: this.error });
+      const compilerOptions = validator.raw.compilerOptions;
+      if (typeof compilerOptions === 'object' && compilerOptions !== null && !Array.isArray(compilerOptions)) {
+        if (!compilerOptions.noEmit) {
+          validator.enforce('compilerOptions.rootDir', 'src');
+          validator.enforce('compilerOptions.outDir', 'lib');
+        }
+      }
+      validator.finish();
+    }
+  }
+
+  private error = (message: string) => {
+    console.error(`- Error: ${message}`);
+    this.issues++;
+  };
+
   private warnIf(check: boolean, message: string, fixFn?: () => void) {
     if (check) {
       if (this.fix && fixFn) {
@@ -472,14 +472,13 @@ export class LintPackageCommand extends Command {
         this.changed = true;
         console.log(`- Fixed: ${message}`);
       } else {
-        console.error(`- Error: ${message}`);
-        this.issues++;
+        this.error(message);
       }
     }
   }
 
   private getFluentScriptsText(command: string) {
-    return this.isScripts ? `node ./src/cli.mjs ${command}` : `fluentui-scripts ${command}`;
+    return this.isScripts ? `node ./src/cli.ts ${command}` : `fluentui-scripts ${command}`;
   }
 }
 

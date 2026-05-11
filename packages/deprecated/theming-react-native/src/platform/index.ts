@@ -1,1 +1,1 @@
-export * from './PlatformDefaults';
+export { createPlatformThemeRegistry } from './PlatformDefaults';

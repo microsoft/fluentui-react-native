@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/themed-settings",
-  "version": "0.13.2",
+  "version": "0.13.3",
   "description": "Package which drives custom cacheable settings for a component",
   "keywords": [],
   "license": "MIT",
@@ -28,7 +28,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts eslint",
+    "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
@@ -41,9 +41,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
-    "@fluentui-react-native/react-configs": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.81.0",
     "@types/jest": "^29.0.0",
@@ -61,14 +59,15 @@
       "optional": true
     }
   },
+  "furn": {
+    "jestPlatform": "react"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
         "babel-preset-react-native",
-        "core-dev-only",
-        "tools-core",
-        "tools-jest-react"
+        "core-dev-only"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"

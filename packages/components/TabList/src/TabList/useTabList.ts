@@ -145,9 +145,10 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     if (isSelectedTabDisabled) {
       // switch focus to the next available tab key
       let tabIndex = tabKeys.indexOf(selectedTabKey);
-      for (let i = 0; i < tabKeys.length; i++) {
-        tabIndex = (tabIndex + 1) % tabKeys.length;
-        if (!disabledStateMap[tabKeys[tabIndex]]) {
+      const orderedTabKeys = [...tabKeys.slice(tabIndex + 1), ...tabKeys.slice(0, tabIndex + 1)];
+      for (const candidateTabKey of orderedTabKeys) {
+        tabIndex = tabKeys.indexOf(candidateTabKey);
+        if (!disabledStateMap[candidateTabKey]) {
           break;
         }
       }
@@ -159,6 +160,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
         setFocusedTabRef(ref);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-run when disabled state of selected tab changes
   }, [isSelectedTabDisabled]);
 
   // win32 only prop used to implemement CTRL + TAB shortcut native to windows tab components

@@ -51,7 +51,7 @@ export const useChip = (props: ChipProps): ChipInfo => {
         closeIconOnPress(e);
       }
     },
-    [checkedValue, showCloseIcon, closeIconOnPress],
+    [closeIconOnPress, closeIconVisibile],
   );
 
   return {
