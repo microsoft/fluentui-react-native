@@ -4,10 +4,10 @@ PODS:
   - fast_float (8.0.0)
   - FBLazyVector (0.81.2)
   - fmt (11.0.2)
-  - FRNAvatar (0.22.1):
+  - FRNAvatar (0.22.3):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNCallout (0.28.1):
+  - FRNCallout (0.28.3):
     - boost
     - DoubleConversion
     - fast_float
@@ -36,13 +36,13 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - FRNCheckbox (0.18.1):
+  - FRNCheckbox (0.18.3):
     - React
-  - FRNMenuButton (0.14.1):
+  - FRNMenuButton (0.14.3):
     - React
-  - FRNRadioButton (0.22.1):
+  - FRNRadioButton (0.22.3):
     - React
-  - FRNVibrancyView (0.4.1):
+  - FRNVibrancyView (0.4.3):
     - React
   - glog (0.3.5)
   - hermes-engine (0.81.5):
@@ -137,7 +137,7 @@ PODS:
     - fmt (= 11.0.2)
     - glog
   - RCTDeprecation (0.81.2)
-  - RCTFocusZone (0.22.1):
+  - RCTFocusZone (0.22.3):
     - React
   - RCTRequired (0.81.2)
   - RCTTypeSafety (0.81.2):
@@ -2398,7 +2398,7 @@ PODS:
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNSVG (15.15.1):
+  - RNSVG (15.15.5):
     - React-Core
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
@@ -2482,7 +2482,7 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native-macos/ReactCommon`)
-  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-c3cc871312/node_modules/@rnx-kit/react-native-host`)"
+  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-546a517efa/node_modules/@rnx-kit/react-native-host`)"
   - ReactTestApp-DevSupport (from `../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -2651,7 +2651,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native-macos/ReactCommon"
   ReactNativeHost:
-    :path: "../../../node_modules/.store/react-native-test-app-virtual-c3cc871312/node_modules/@rnx-kit/react-native-host"
+    :path: "../../../node_modules/.store/react-native-test-app-virtual-546a517efa/node_modules/@rnx-kit/react-native-host"
   ReactTestApp-DevSupport:
     :path: "../node_modules/react-native-test-app"
   ReactTestApp-Resources:
@@ -2667,18 +2667,18 @@ SPEC CHECKSUMS:
   fast_float: 20817c22759af6ac8d4d67e6e059b8b499953656
   FBLazyVector: 0e3076dbb16169b0afc2d701a24a526423b5e76b
   fmt: 24e7591456deb60b4a77518f83d9a916ac84223f
-  FRNAvatar: 919ae3fc7d01eee287295360e543d1d2a0432673
-  FRNCallout: 7f778112c7395ddad481ed943aa8d655c5ec3c9a
-  FRNCheckbox: 3e478c3229e3a41523a563f9d8e4db5c3bd821cc
-  FRNMenuButton: 1cdaadd041da62cefba6d095b2a09caac99f38c7
-  FRNRadioButton: e0dabd91fb4bd361aa7c0b69b2bd293097bfb8b9
-  FRNVibrancyView: 00d49c101e73930d6c714d54747239a4b4077b7a
+  FRNAvatar: ffa0facb219806b0e5083d2388bc61e590f5df19
+  FRNCallout: bc2178e4478504e21c01a3c1c8617c91783eae8c
+  FRNCheckbox: 1cba85c9c8c75257970f8ffcc4a5e2602c22be7c
+  FRNMenuButton: 709f3218ce9a421c154ea0570acbeb3f535629d3
+  FRNRadioButton: a0e58ac8a7be290778a30add5bdf41dc245e3483
+  FRNVibrancyView: 96debdb9a1d2d9315c25748450a33fe2cb8b6321
   glog: 0b31c25149b9d350b2666c7d459229861a00ec07
   hermes-engine: 9f4dfe93326146a1c99eb535b1cb0b857a3cd172
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: c803cf33238782d5fd21a5e02d44f64068e0e130
   RCTDeprecation: b60b889eafa75f46c3d6be5332681efbb16ad0c7
-  RCTFocusZone: db02a721beefe1adc3cf7f20a74b21ad6af4da6c
+  RCTFocusZone: 1b8ab01688bbb8ef6357bd8789e5c6f38ddac4d9
   RCTRequired: 070d7f0ef937e7a93aab20761cef55419f16b5de
   RCTTypeSafety: dd2ad1eb0c0c01ba41222d115be141f9a348c636
   React: 304df3d34c8c0281fd1fd3a506e69f234095425d
@@ -2743,10 +2743,10 @@ SPEC CHECKSUMS:
   ReactNativeHost: ba9bdd449af5c793d28ff2610c1bec3015d014cc
   ReactTestApp-DevSupport: 0e7676c00b33b0545e72d89ea09f990d737db6d3
   ReactTestApp-Resources: 7625eab22d0a702577b048d60b5fb3f2e2f5b2a7
-  RNSVG: 866f818ba926c5d3f7863705abed51bb09d8ddd3
+  RNSVG: 7ee150379dc2a5ed4c9fdac92a5d6efab98e9cf7
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 6048a55441c73f8e3916a8eac6b83886708c77f9
 
-PODFILE CHECKSUM: aee9e5d90e7307d43ece2d934761984a96053ae5
+PODFILE CHECKSUM: 10732d08ff54fc2faa0d3502a4f77ba76066a3ca
 
 COCOAPODS: 1.16.2

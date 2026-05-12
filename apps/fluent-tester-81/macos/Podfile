@@ -13,5 +13,20 @@ workspace 'DesktopTester.xcworkspace'
 # (pnpm mode)
 react_native_path = "#{__dir__}/../node_modules/react-native"
 
-use_test_app! :hermes_enabled => true, :fabric_enabled => false
+# Apple Clang 21 (Xcode 26) rejects fmt's consteval format string checks as
+# non-constant expressions. fmt's base.h redefines FMT_USE_CONSTEVAL
+# unconditionally, so a -D override is ignored — patch the header instead.
+# (Re-applied each `pod install`, since the fmt pod is re-fetched from git.)
+fmt_consteval_workaround = ->(installer) do
+  base_h = File.join(installer.sandbox.root, 'fmt', 'include', 'fmt', 'base.h')
+  next unless File.exist?(base_h)
+  original = File.read(base_h)
+  patched = original.gsub('#  define FMT_USE_CONSTEVAL 1', '#  define FMT_USE_CONSTEVAL 0')
+  if patched != original
+    File.chmod(0644, base_h)
+    File.write(base_h, patched)
+  end
+end
+
+use_test_app! :hermes_enabled => true, :fabric_enabled => false, :post_install => fmt_consteval_workaround
 
