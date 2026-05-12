@@ -18,7 +18,7 @@
     "lint-package": "fluentui-scripts lint-package",
     "macos": "rnx-cli run --platform macos",
     "start": "rnx-cli start",
-    "windows": "react-native run-windows --arch x64 --sln windows/DesktopTester.sln"
+    "windows": "react-native run-windows --arch x64 --sln windows/FluentTester81.sln"
   },
   "dependencies": {
     "@types/react": "~19.1.4",

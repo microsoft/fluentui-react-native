@@ -8,7 +8,7 @@ require_relative '../node_modules/react-native-test-app/ios/test_app'
 #   ws_dir.expand_path.to_s == '/'
 # require "#{ws_dir}/node_modules/react-native-test-app/macos/test_app.rb"
 
-workspace 'DesktopTester.xcworkspace'
+workspace 'FluentTester81.xcworkspace'
 
 # (pnpm mode)
 react_native_path = "#{__dir__}/../node_modules/react-native"

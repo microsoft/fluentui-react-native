@@ -1,8 +1,8 @@
 {
-  "name": "DesktopTester",
-  "displayName": "Desktop Tester",
-  "singleApp": "desktop-tester",
-  "components": [{ "appKey": "DesktopTester", "displayName": "Desktop Tester", "slug": "desktop-tester" }],
+  "name": "FluentTester81",
+  "displayName": "Fluent Tester 0.81",
+  "singleApp": "fluent-tester-81",
+  "components": [{ "appKey": "FluentTester81", "displayName": "Fluent Tester 0.81", "slug": "fluent-tester-81" }],
   "macos": {
     "icons": {
       "primaryIcon": {
