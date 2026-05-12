@@ -87,4 +87,64 @@ describe('resolveStyleToTokens', () => {
     const entries = resolveStyleToTokens({ c: 3, a: 1, b: 2 }, reg);
     expect(entries.map((e) => e.property)).toEqual(['c', 'a', 'b']);
   });
+
+  it('reaches into an object value and attributes per-leaf', () => {
+    // `shadowOffset` is the candidate case: RN's actual resolved style
+    // carries `{ width, height }` and the width/height can be registered
+    // independently.
+    const reg = createTokenRegistry();
+    reg.register('shadows.shadow2.ambient.x', 42);
+    reg.register('shadows.shadow2.ambient.y', 43);
+
+    const entries = resolveStyleToTokens({ shadowOffset: { width: 42, height: 43 } }, reg);
+
+    expect(entries).toHaveLength(1);
+    expect(entries[0].property).toBe('shadowOffset');
+    expect(entries[0].tokenPath).toBeUndefined();
+    expect(entries[0].children).toEqual([
+      { property: 'width', value: 42, tokenPath: 'shadows.shadow2.ambient.x' },
+      { property: 'height', value: 43, tokenPath: 'shadows.shadow2.ambient.y' },
+    ]);
+  });
+
+  it('reaches into an array value using stringified indices', () => {
+    const reg = createTokenRegistry();
+    const translateXSentinel = { translateX: '__trX' };
+    reg.register('transform.trInternal', translateXSentinel);
+
+    const entries = resolveStyleToTokens({ transform: [translateXSentinel] }, reg);
+
+    expect(entries).toHaveLength(1);
+    expect(entries[0].property).toBe('transform');
+    expect(entries[0].children).toHaveLength(1);
+    expect(entries[0].children![0]).toMatchObject({ property: '0', tokenPath: 'transform.trInternal' });
+  });
+
+  it('keeps an object-level tokenPath when the whole value is registered', () => {
+    // Variant spread: the whole variant is registered, and so are its
+    // fields. The value-level path wins and children are still populated.
+    const reg = createTokenRegistry();
+    const variant = { size: 12, lineHeight: 14 };
+    reg.register('typography.variants.body', variant);
+    reg.register('typography.variants.body.size', 12);
+    reg.register('typography.variants.body.lineHeight', 14);
+
+    const entries = resolveStyleToTokens({ font: variant }, reg);
+
+    expect(entries).toHaveLength(1);
+    expect(entries[0].tokenPath).toBe('typography.variants.body');
+    expect(entries[0].children).toEqual([
+      { property: 'size', value: 12, tokenPath: 'typography.variants.body.size' },
+      { property: 'lineHeight', value: 14, tokenPath: 'typography.variants.body.lineHeight' },
+    ]);
+  });
+
+  it('does not attach children when no descendant matches', () => {
+    // Unregistered object values: we emit a plain entry with no
+    // `tokenPath` and no `children` so the snapshot isn't cluttered with
+    // empty attribution fields.
+    const reg = createTokenRegistry();
+    const entries = resolveStyleToTokens({ shadowOffset: { width: 1, height: 2 } }, reg);
+    expect(entries).toEqual([{ property: 'shadowOffset', value: { width: 1, height: 2 } }]);
+  });
 });

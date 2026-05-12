@@ -1,20 +1,29 @@
 import type { TokenRegistry } from './tokenRegistry.ts';
 
 /**
- * A single resolved style entry: the raw value that appears on a
- * slot's `style` object, paired with its `tokenPath` when the value
- * can be traced back to a theme token through the registry.
+ * A single resolved style entry. Attribution works both at the value
+ * level (the whole `value` matched a registered token) and per-leaf
+ * (the value is an object/array and individual fields/elements match
+ * tokens).
  *
- * `tokenPath` is `undefined` when the value did not originate in the
- * theme — e.g., a literal `padding: 4` written in component code.
+ *   - `tokenPath`: `style[property]` as a whole traces back to a token.
+ *     For example, variants are registered as objects; spreading the
+ *     whole variant across a style produces an entry whose `tokenPath`
+ *     references the variant.
+ *   - `children`: for object/array values, per-leaf attributions. Used
+ *     to reach into composite style values like `shadowOffset: { width,
+ *     height }` or `transform: [{ translateX }, ...]`. Omitted when
+ *     the value is a primitive or no descendant matches the registry.
+ *
+ * A plain entry (no `tokenPath` and no `children`) means the value and
+ * its descendants were not found in the registry — e.g., a literal
+ * `padding: 4` in component code.
  */
 export interface ResolvedStyleEntry {
-  /** Style property name, e.g. `'backgroundColor'`, `'paddingHorizontal'`. */
   property: string;
-  /** Raw value present in the style object. */
   value: unknown;
-  /** Registry hit, if any. Dotted path like `'colors.brandBackground'`. */
   tokenPath?: string;
+  children?: readonly ResolvedStyleEntry[];
 }
 
 /**
@@ -47,11 +56,79 @@ function flattenStyle(input: unknown): Record<string, unknown> {
 }
 
 /**
+ * Recursively attribute a single (property, value) pair.
+ *
+ * Priority:
+ *   1. If `value` itself is registered, return an entry with `tokenPath`.
+ *      (This covers variant-level attribution, which is registered at
+ *      both the object and leaf level in the test theme.)
+ *   2. If `value` is an array, recurse into each entry using the array
+ *      index as property. Keep only if any descendant matched.
+ *   3. If `value` is a plain object, recurse into each key. Keep only
+ *      if any descendant matched.
+ *   4. Otherwise (primitive, or no descendant matched), return a plain
+ *      entry with no `tokenPath` and no `children`.
+ */
+function attribute(
+  property: string,
+  value: unknown,
+  registry: TokenRegistry,
+): ResolvedStyleEntry {
+  const topLevel = registry.lookup(value);
+  const entry: ResolvedStyleEntry = { property, value };
+  if (topLevel !== undefined) {
+    entry.tokenPath = topLevel;
+  }
+
+  if (Array.isArray(value)) {
+    const children: ResolvedStyleEntry[] = [];
+    for (let i = 0; i < value.length; i++) {
+      const child = attribute(String(i), value[i], registry);
+      if (hasAttribution(child)) {
+        children.push(child);
+      }
+    }
+    if (children.length > 0) {
+      entry.children = children;
+    }
+    return entry;
+  }
+
+  if (value !== null && typeof value === 'object') {
+    const children: ResolvedStyleEntry[] = [];
+    for (const key of Object.keys(value as Record<string, unknown>)) {
+      const child = attribute(key, (value as Record<string, unknown>)[key], registry);
+      if (hasAttribution(child)) {
+        children.push(child);
+      }
+    }
+    if (children.length > 0) {
+      entry.children = children;
+    }
+    return entry;
+  }
+
+  return entry;
+}
+
+/**
+ * Returns true if an entry (or any of its descendants) carries a
+ * registry hit. Used to decide whether a child should be retained —
+ * descending into an object value is only interesting when it actually
+ * surfaces token attribution; otherwise the output pairs with the input.
+ */
+function hasAttribution(entry: ResolvedStyleEntry): boolean {
+  return entry.tokenPath !== undefined || entry.children !== undefined;
+}
+
+/**
  * Reverse-map a resolved style object into token-attributed entries.
  *
  * Skip rules:
  * - `null` / `undefined` values produce no entry — they're noise from
  *   conditional styling and don't carry information.
+ *
+ * Nested values: see the docs on `ResolvedStyleEntry.children`.
  *
  * Order is the insertion order of the (flattened) style object.
  */
@@ -66,12 +143,7 @@ export function resolveStyleToTokens(
     if (value === null || value === undefined) {
       continue;
     }
-    const tokenPath = registry.lookup(value);
-    const entry: ResolvedStyleEntry = { property, value };
-    if (tokenPath !== undefined) {
-      entry.tokenPath = tokenPath;
-    }
-    result.push(entry);
+    result.push(attribute(property, value, registry));
   }
   return result;
 }

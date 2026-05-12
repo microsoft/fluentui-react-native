@@ -9,6 +9,11 @@ import type { RenderNode, SlotPath } from '../types.ts';
  *
  * New fields should be added conservatively, since the structure ships
  * directly into checked-in snapshots.
+ *
+ * Path semantics: `children` is the filtered (kept) child list, so
+ * `children[i]` does not correspond to the i-th child in the source
+ * render tree. The source-tree position lives on each child's `.path`.
+ * Consumers should index off `node.path`, never `parent.children[i]`.
  */
 export interface A11yNode {
   /** Index path from the rendered root, as produced by `walkTree`. */
@@ -31,6 +36,8 @@ export interface A11yNode {
   text?: string;
   /** `testID` if set. */
   testID?: string;
+  /** `accessibilityLevel` if set — the aria-level equivalent. */
+  level?: number;
   /** Kept children, in the order they appear in the source tree. */
   children: A11yNode[];
 }
@@ -44,6 +51,7 @@ interface A11yInfo {
   actions?: { name: string; label?: string }[];
   text?: string;
   testID?: string;
+  level?: number;
 }
 
 /**
@@ -55,7 +63,7 @@ interface A11yInfo {
  *    dropped — RN hides such nodes from the a11y tree at runtime.
  * 2. Otherwise, the node's a11y-relevant props are extracted.
  * 3. A node is dropped (collapsed) when it has none of:
- *    role, label, hint, state, value, actions, text, testID — *and*
+ *    role, label, hint, state, value, actions, text, testID, level — *and*
  *    every child has also been dropped. Otherwise it is kept.
  *
  * Because dropping is bottom-up, a structural wrapper that has no a11y
@@ -98,6 +106,7 @@ function extract(node: RenderNode, path: SlotPath): A11yNode | null {
   if (info.actions !== undefined) a11yNode.actions = info.actions;
   if (info.text !== undefined) a11yNode.text = info.text;
   if (info.testID !== undefined) a11yNode.testID = info.testID;
+  if (info.level !== undefined) a11yNode.level = info.level;
   return a11yNode;
 }
 
@@ -131,6 +140,13 @@ function collectA11yInfo(node: RenderNode): A11yInfo {
   }
   if (typeof props.testID === 'string') {
     info.testID = props.testID;
+  }
+
+  // accessibilityLevel is RN's explicit prop name; we also accept
+  // `aria-level` since newer RN releases use the ARIA alias.
+  const levelRaw = props.accessibilityLevel ?? props['aria-level'];
+  if (typeof levelRaw === 'number') {
+    info.level = levelRaw;
   }
 
   const stateRaw = props.accessibilityState;
@@ -208,6 +224,7 @@ function hasA11yInfo(info: A11yInfo): boolean {
     info.value !== undefined ||
     info.actions !== undefined ||
     info.text !== undefined ||
-    info.testID !== undefined
+    info.testID !== undefined ||
+    info.level !== undefined
   );
 }

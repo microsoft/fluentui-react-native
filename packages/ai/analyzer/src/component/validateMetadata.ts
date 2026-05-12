@@ -356,6 +356,16 @@ function requireString(
     });
     return null;
   }
+  if (value === '') {
+    // Empty strings are almost always a programming mistake here — the
+    // analyzer can't import 'name' or look up an empty exportName.
+    issues.push({
+      severity: 'error',
+      rule: 'component/invalid-type',
+      message: `${label} must be a non-empty string`,
+    });
+    return null;
+  }
   return value;
 }
 

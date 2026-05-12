@@ -1,4 +1,13 @@
 import type { Theme } from '@fluentui-react-native/theme-types';
+import {
+  COLOR_TOKEN_NAMES,
+  SHADOW_TOKEN_NAMES,
+  SPACING_TOKEN_NAMES,
+  TYPOGRAPHY_FAMILY_NAMES,
+  TYPOGRAPHY_SIZE_NAMES,
+  TYPOGRAPHY_VARIANT_NAMES,
+  TYPOGRAPHY_WEIGHT_NAMES,
+} from '@fluentui-react-native/theme-types/metadata';
 
 import type { TokenRegistry } from './tokenRegistry.ts';
 import { createTokenRegistry } from './tokenRegistry.ts';
@@ -199,7 +208,17 @@ function createComponentsProxy(): Record<string, Record<string, unknown>> {
  * The returned bundle is the only correct pairing — callers MUST keep
  * `theme` and `registry` together when reverse-mapping styles.
  */
-export function createTestTheme(): TestThemeBundle {
+/**
+ * Options for {@link createTestTheme}. Currently just the `appearance`
+ * setting, which is wired straight through to `theme.host.appearance`.
+ * Components that branch on light/dark theming can be tested in both
+ * modes by toggling this option.
+ */
+export interface CreateTestThemeOptions {
+  appearance?: 'light' | 'dark';
+}
+
+export function createTestTheme(options: CreateTestThemeOptions = {}): TestThemeBundle {
   const registry = createTokenRegistry();
   const usedColors = new Set<string>();
   const numerics = makeNumericFactories();
@@ -217,24 +236,22 @@ export function createTestTheme(): TestThemeBundle {
     return c;
   }
 
+  // The token-name tuples imported from `@fluentui-react-native/theme-types/metadata`
+  // are the single source of truth for every group below. Adding a token to
+  // a type in `theme-types` flows into the test theme automatically once
+  // the metadata tuple is updated; parity tests in `theme-types` guard
+  // against tuple/type drift.
+
   // --- typography.families
-  const families: Theme['typography']['families'] = {
-    primary: strings.fontFamily('typography.families.primary'),
-    secondary: strings.fontFamily('typography.families.secondary'),
-    cursive: strings.fontFamily('typography.families.cursive'),
-    monospace: strings.fontFamily('typography.families.monospace'),
-    numeric: strings.fontFamily('typography.families.numeric'),
-    sansSerif: strings.fontFamily('typography.families.sansSerif'),
-    serif: strings.fontFamily('typography.families.serif'),
-  };
-  for (const k of Object.keys(families) as (keyof typeof families)[]) {
+  const families = {} as Theme['typography']['families'];
+  for (const k of TYPOGRAPHY_FAMILY_NAMES) {
+    families[k] = strings.fontFamily(`typography.families.${k}`);
     reg(`typography.families.${k}`, families[k]);
   }
 
   // --- typography.sizes
-  const sizesKeys = ['caption', 'secondary', 'body', 'subheader', 'header', 'hero', 'heroLarge'] as const;
   const sizes = {} as Theme['typography']['sizes'];
-  for (const k of sizesKeys) {
+  for (const k of TYPOGRAPHY_SIZE_NAMES) {
     const v = numerics.size();
     sizes[k] = v;
     reg(`typography.sizes.${k}`, v);
@@ -245,51 +262,20 @@ export function createTestTheme(): TestThemeBundle {
   // We mint unique synthetic strings (`'w1'`, `'w2'`, ...) for token
   // uniqueness, then cast — RN treats the value opaquely at render
   // time and never validates the string.
-  const weights = {
-    regular: numerics.weight(),
-    semiBold: numerics.weight(),
-  } as unknown as Theme['typography']['weights'];
-  for (const k of Object.keys(weights) as (keyof typeof weights)[]) {
-    reg(`typography.weights.${k}`, weights[k]);
+  // `FontWeights` is a strict-keys interface with no index signature, so
+  // we route the dynamic-key writes through `unknown` (same trick used for
+  // the variants assignment below).
+  const weights = {} as unknown as Theme['typography']['weights'];
+  const weightsWritable = weights as unknown as Record<string, unknown>;
+  for (const k of TYPOGRAPHY_WEIGHT_NAMES) {
+    const value = numerics.weight();
+    weightsWritable[k] = value;
+    reg(`typography.weights.${k}`, value);
   }
 
   // --- typography.variants
-  const v1Variants = [
-    'captionStandard',
-    'secondaryStandard',
-    'secondarySemibold',
-    'bodyStandard',
-    'bodySemibold',
-    'subheaderStandard',
-    'subheaderSemibold',
-    'headerStandard',
-    'headerSemibold',
-    'heroStandard',
-    'heroSemibold',
-    'heroLargeStandard',
-    'heroLargeSemibold',
-  ] as const;
-  const v2Variants = [
-    'caption1',
-    'caption1Strong',
-    'caption2',
-    'body1',
-    'body1Strong',
-    'body2',
-    'body2Strong',
-    'subtitle1',
-    'subtitle1Strong',
-    'subtitle2',
-    'subtitle2Strong',
-    'title1',
-    'title1Strong',
-    'title2',
-    'title3',
-    'largeTitle',
-    'display',
-  ] as const;
   const variants = {} as Theme['typography']['variants'];
-  for (const name of [...v1Variants, ...v2Variants]) {
+  for (const name of TYPOGRAPHY_VARIANT_NAMES) {
     const face = strings.fontFamily(`typography.variants.${name}.face`);
     const size = numerics.size();
     const weight = numerics.weight();
@@ -310,34 +296,15 @@ export function createTestTheme(): TestThemeBundle {
   }
 
   // --- spacing
-  const spacing = {
-    s2: strings.spacingPx(),
-    s1: strings.spacingPx(),
-    m: strings.spacingPx(),
-    l1: strings.spacingPx(),
-    l2: strings.spacingPx(),
-  } as Theme['spacing'];
-  for (const k of Object.keys(spacing) as (keyof typeof spacing)[]) {
+  const spacing = {} as Theme['spacing'];
+  for (const k of SPACING_TOKEN_NAMES) {
+    spacing[k] = strings.spacingPx();
     reg(`spacing.${k}`, spacing[k]);
   }
 
   // --- shadows
-  const shadowKeys = [
-    'shadow2',
-    'shadow4',
-    'shadow8',
-    'shadow16',
-    'shadow28',
-    'shadow64',
-    'shadow2brand',
-    'shadow4brand',
-    'shadow8brand',
-    'shadow16brand',
-    'shadow28brand',
-    'shadow64brand',
-  ] as const;
   const shadows = {} as Theme['shadows'];
-  for (const name of shadowKeys) {
+  for (const name of SHADOW_TOKEN_NAMES) {
     const ambient = {
       x: numerics.shadowNumeric(),
       y: numerics.shadowNumeric(),
@@ -360,236 +327,15 @@ export function createTestTheme(): TestThemeBundle {
   }
 
   // --- colors
-  // The Theme contract requires four base color keys; everything else is
-  // an open-ended index signature. We register a wide set of common color
-  // names so that real components (Button, Text, etc.) find sentinels at
-  // their expected token paths.
-  //
-  // Source of these names: `Color.types.ts` (Palette + AliasColorTokens +
-  // ControlColorTokens). We can't iterate a TypeScript interface at
-  // runtime, so the list is maintained here. If a component looks up a
-  // color we haven't registered, `theme.colors.X` returns `undefined` and
-  // the resolved style omits the property — fine for the reverse-map,
-  // since `undefined` has no token origin.
-  const colorNames = [
-    // Required
-    'background',
-    'bodyText',
-    'subText',
-    'disabledText',
-    // Common palette / fabric web
-    'black',
-    'white',
-    'red',
-    'redDark',
-    'themePrimary',
-    'themeDarker',
-    'themeDark',
-    'themeDarkAlt',
-    'themeSecondary',
-    'themeTertiary',
-    'themeLight',
-    'themeLighter',
-    'themeLighterAlt',
-    'accent',
-    'blackTranslucent40',
-    'neutralDark',
-    'neutralPrimary',
-    'neutralPrimaryAlt',
-    'neutralSecondary',
-    'neutralSecondaryAlt',
-    'neutralTertiary',
-    'neutralTertiaryAlt',
-    'neutralQuaternary',
-    'neutralQuaternaryAlt',
-    'neutralLight',
-    'neutralLighter',
-    'neutralLighterAlt',
-    // Semantic background / divider
-    'bodyStandoutBackground',
-    'bodyFrameBackground',
-    'bodyFrameDivider',
-    'bodyTextChecked',
-    'bodyDivider',
-    'disabledBackground',
-    'disabledBodyText',
-    'focusBorder',
-    'variantBorder',
-    'errorText',
-    'inputBorder',
-    'inputBackground',
-    'inputFocusBorderAlt',
-    'inputText',
-    'inputPlaceholderText',
-    // Buttons
-    'buttonBackground',
-    'buttonBackgroundChecked',
-    'buttonBackgroundHovered',
-    'buttonBackgroundPressed',
-    'buttonBackgroundDisabled',
-    'buttonBorder',
-    'buttonBorderFocused',
-    'buttonBorderDisabled',
-    'buttonText',
-    'buttonTextHovered',
-    'buttonTextChecked',
-    'buttonTextPressed',
-    'buttonTextDisabled',
-    'buttonIcon',
-    'primaryButtonBackground',
-    'primaryButtonBackgroundHovered',
-    'primaryButtonBackgroundPressed',
-    'primaryButtonBackgroundDisabled',
-    'primaryButtonBorder',
-    'primaryButtonBorderFocused',
-    'primaryButtonText',
-    'primaryButtonTextHovered',
-    'primaryButtonTextPressed',
-    'primaryButtonTextDisabled',
-    'accentButtonBackground',
-    // Menus
-    'menuBackground',
-    'menuDivider',
-    'menuIcon',
-    'menuItemBackgroundHovered',
-    'menuItemBackgroundPressed',
-    'menuItemText',
-    'menuItemTextHovered',
-    'listHeaderBackgroundHovered',
-    'listHeaderBackgroundPressed',
-    'actionLink',
-    'link',
-    'linkHovered',
-    'linkPressed',
-    // Alias / v2 — foreground
-    'neutralForeground1',
-    'neutralForeground1Hover',
-    'neutralForeground1Pressed',
-    'neutralForeground1Selected',
-    'neutralForeground2',
-    'neutralForeground3',
-    'neutralForeground4',
-    'neutralForegroundDisabled',
-    'neutralForegroundDisabled1',
-    'neutralForegroundDisabled2',
-    'neutralForegroundOnColor',
-    'neutralForegroundOnBrand',
-    'neutralForegroundInverted',
-    'brandForegroundLink',
-    'brandForegroundLinkHover',
-    'brandForegroundLinkPressed',
-    'brandForegroundLinkSelected',
-    'compoundBrandForeground1',
-    'brandForeground1',
-    'brandForeground1Pressed',
-    'brandForeground1Selected',
-    'brandForeground2',
-    'brandForegroundTint',
-    'brandForegroundDisabled1',
-    'brandForegroundDisabled2',
-    // Alias / v2 — background
-    'neutralBackground1',
-    'neutralBackground1Hover',
-    'neutralBackground1Pressed',
-    'neutralBackground1Selected',
-    'neutralBackground2',
-    'neutralBackground3',
-    'neutralBackground4',
-    'neutralBackground5',
-    'neutralBackground6',
-    'neutralBackgroundInverted',
-    'neutralBackgroundDisabled',
-    'brandBackground',
-    'brandBackgroundHover',
-    'brandBackgroundPressed',
-    'brandBackgroundDisabled',
-    'brandBackgroundSelected',
-    'brandBackground2',
-    'brandBackground3',
-    'brandBackgroundStatic',
-    'brandBackgroundTint',
-    'compoundBrandBackground1',
-    'compoundBrandBackground1Hover',
-    'compoundBrandBackground1Pressed',
-    // Alias / v2 — stroke
-    'neutralStrokeAccessible',
-    'neutralStroke1',
-    'neutralStroke2',
-    'neutralStroke3',
-    'neutralStrokeDisabled',
-    'brandStroke1',
-    'brandStroke1Pressed',
-    'brandStroke1Selected',
-    'brandStroke2',
-    'compoundBrandStroke1',
-    'strokeFocus1',
-    'strokeFocus2',
-    'transparentStroke',
-    // Control color tokens (deprecated but components still reach for them)
-    'defaultBackground',
-    'defaultBorder',
-    'defaultContent',
-    'defaultIcon',
-    'defaultHoveredBackground',
-    'defaultHoveredBorder',
-    'defaultHoveredContent',
-    'defaultHoveredIcon',
-    'defaultFocusedBackground',
-    'defaultFocusedBorder',
-    'defaultFocusedContent',
-    'defaultFocusedIcon',
-    'defaultPressedBackground',
-    'defaultPressedBorder',
-    'defaultPressedContent',
-    'defaultPressedIcon',
-    'defaultDisabledBackground',
-    'defaultDisabledBorder',
-    'defaultDisabledContent',
-    'defaultDisabledIcon',
-    'ghostBackground',
-    'ghostBorder',
-    'ghostContent',
-    'ghostIcon',
-    'ghostHoveredBackground',
-    'ghostHoveredBorder',
-    'ghostHoveredContent',
-    'ghostHoveredIcon',
-    'ghostFocusedBackground',
-    'ghostFocusedBorder',
-    'ghostFocusedContent',
-    'ghostFocusedIcon',
-    'ghostPressedBackground',
-    'ghostPressedBorder',
-    'ghostPressedContent',
-    'ghostPressedIcon',
-    'ghostDisabledBackground',
-    'ghostDisabledBorder',
-    'ghostDisabledContent',
-    'ghostDisabledIcon',
-    // Status colors
-    'dangerBackground1',
-    'dangerBackground2',
-    'dangerForeground1',
-    'dangerForeground2',
-    'dangerStroke1',
-    'successBackground1',
-    'successBackground2',
-    'successForeground1',
-    'successForeground2',
-    'successStroke1',
-    'warningBackground1',
-    'warningBackground2',
-    'warningForeground1',
-    'warningForeground2',
-    'warningStroke1',
-    'severeBackground1',
-    'severeBackground2',
-    'severeForeground1',
-    'severeForeground2',
-    'severeStroke1',
-  ];
+  // The Theme contract requires four base color keys (background, bodyText,
+  // subText, disabledText); everything else is an open-ended index
+  // signature. We iterate `COLOR_TOKEN_NAMES` to register a sentinel for
+  // every key declared across PaletteTextColors / PaletteBackgroundColors
+  // / ControlColorTokens / AliasColorTokens. The four required keys are
+  // included in that union, so the resulting `colors` object satisfies
+  // `ThemeColorDefinition` without us listing them separately.
   const colors = {} as Theme['colors'];
-  for (const name of colorNames) {
+  for (const name of COLOR_TOKEN_NAMES) {
     colors[name] = color(`colors.${name}`);
   }
 
@@ -600,7 +346,7 @@ export function createTestTheme(): TestThemeBundle {
     shadows,
     spacing,
     components: createComponentsProxy(),
-    host: { appearance: 'light' },
+    host: { appearance: options.appearance ?? 'light' },
   };
 
   return { theme, registry };

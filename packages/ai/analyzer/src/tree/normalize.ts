@@ -23,6 +23,10 @@ interface TestRendererJSON {
  *
  * To keep the rest of the analyzer simple, we collapse arrays under a
  * synthetic `Fragment` root, and `null` becomes `null` (callers handle).
+ *
+ * Lives in `tree/` rather than `component/` or `theme/` because both
+ * areas need it; `tree/` is the neutral place for shared, dependency-
+ * free walkers/normalizers.
  */
 export function normalizeRenderTree(value: unknown): RenderNode | null {
   if (value === null || value === undefined) {

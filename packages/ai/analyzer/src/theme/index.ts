@@ -12,7 +12,7 @@
 // and explicit exports keep the barrel honest as the area evolves.
 
 export { createTestTheme } from './createTestTheme.ts';
-export type { TestThemeBundle } from './createTestTheme.ts';
+export type { CreateTestThemeOptions, TestThemeBundle } from './createTestTheme.ts';
 
 export { createTokenRegistry } from './tokenRegistry.ts';
 export type { TokenRegistry, TokenRegistryEntry } from './tokenRegistry.ts';

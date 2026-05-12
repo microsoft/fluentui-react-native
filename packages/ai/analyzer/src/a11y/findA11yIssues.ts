@@ -65,15 +65,13 @@ const missingLabelRule: A11yRule = {
 };
 
 /**
- * `a11y/disabled-state-missing` — a pressable surface where
- * `accessibilityState.disabled` is not declared.
+ * `a11y/disabled-state-missing` — an interactive pressable surface
+ * where `accessibilityState.disabled` is not declared.
  *
- * The extractor strips event handlers and `pointerEvents` from the
- * tree (they are not a11y data), so this rule cannot detect "looks
- * inert at runtime" directly. Instead, for any kept `Pressable`-class
- * node, it warns when `disabled` is missing from the state object —
- * the recommendation in this codebase is to always wire the disabled
- * state explicitly so screen readers can announce changes.
+ * Narrowed to "interactive Pressable": we only fire when the node is a
+ * pressable type *and* carries one of the interactive roles. Pressables
+ * without roles already get `no-role-on-pressable` — double-firing would
+ * be noise.
  */
 const disabledStateMissingRule: A11yRule = {
   id: 'a11y/disabled-state-missing',
@@ -81,19 +79,18 @@ const disabledStateMissingRule: A11yRule = {
     if (!PRESSABLE_TYPES.has(node.type)) {
       return [];
     }
+    if (node.role === undefined || !INTERACTIVE_ROLES.has(node.role)) {
+      return [];
+    }
     const disabledKnown = node.state !== undefined && 'disabled' in node.state;
     if (disabledKnown) {
       return [];
     }
-    // Without the original render props we cannot detect inertness
-    // perfectly — but for a Pressable that was kept (i.e., carries
-    // other a11y info), the absence of any `disabled` state is itself
-    // worth flagging as a warning so the reviewer can verify.
     return [
       {
         severity: 'warning',
         rule: 'a11y/disabled-state-missing',
-        message: `Pressable node has no \`accessibilityState.disabled\` declared; declare it explicitly so screen readers can announce state changes.`,
+        message: `Interactive pressable (role: "${node.role}") has no \`accessibilityState.disabled\` declared; declare it explicitly so screen readers can announce state changes.`,
         path: node.path,
       },
     ];
@@ -107,17 +104,25 @@ const nestedInteractiveRule: A11yRule = {
     if (node.role === undefined || !INTERACTIVE_ROLES.has(node.role)) {
       return [];
     }
-    const interactiveAncestor = ancestors.find(
-      (ancestor) => ancestor.role !== undefined && INTERACTIVE_ROLES.has(ancestor.role),
-    );
-    if (interactiveAncestor === undefined) {
+    // Scan from the closest ancestor back to the root so the reported
+    // context is the immediate interactive parent — the one a user of
+    // the report would find most actionable.
+    let closestInteractive: A11yNode | undefined;
+    for (let i = ancestors.length - 1; i >= 0; i--) {
+      const ancestor = ancestors[i];
+      if (ancestor.role !== undefined && INTERACTIVE_ROLES.has(ancestor.role)) {
+        closestInteractive = ancestor;
+        break;
+      }
+    }
+    if (closestInteractive === undefined) {
       return [];
     }
     return [
       {
         severity: 'error',
         rule: 'a11y/nested-interactive',
-        message: `Interactive role "${node.role}" is nested inside another interactive role "${interactiveAncestor.role ?? '<unknown>'}".`,
+        message: `Interactive role "${node.role}" is nested inside closest interactive ancestor role "${closestInteractive.role ?? '<unknown>'}".`,
         path: node.path,
       },
     ];
@@ -208,6 +213,97 @@ const duplicateLabelRule: A11yRule = {
 };
 
 /**
+ * `a11y/header-missing-level` — a header role should declare an
+ * accessibilityLevel. RN exposes this as `accessibilityLevel` (translated
+ * to accessibility services as the aria-level equivalent). Without it,
+ * screen readers can't announce document hierarchy.
+ */
+const headerMissingLevelRule: A11yRule = {
+  id: 'a11y/header-missing-level',
+  check(node) {
+    if (node.role !== 'header') {
+      return [];
+    }
+    if (node.level !== undefined) {
+      return [];
+    }
+    return [
+      {
+        severity: 'warning',
+        rule: 'a11y/header-missing-level',
+        message: 'Node with role "header" has no `accessibilityLevel` declared; screen readers cannot announce document hierarchy without it.',
+        path: node.path,
+      },
+    ];
+  },
+};
+
+/** `a11y/image-missing-label` — image role without a label or text. */
+const imageMissingLabelRule: A11yRule = {
+  id: 'a11y/image-missing-label',
+  check(node) {
+    if (node.role !== 'image') {
+      return [];
+    }
+    const hasLabel = node.label !== undefined && node.label.trim() !== '';
+    const hasText = node.text !== undefined && node.text.trim() !== '';
+    if (hasLabel || hasText) {
+      return [];
+    }
+    return [
+      {
+        severity: 'error',
+        rule: 'a11y/image-missing-label',
+        message: 'Node with role "image" has no `accessibilityLabel` or text; screen readers cannot describe it.',
+        path: node.path,
+      },
+    ];
+  },
+};
+
+/** `a11y/adjustable-missing-value` — adjustable role without accessibilityValue. */
+const adjustableMissingValueRule: A11yRule = {
+  id: 'a11y/adjustable-missing-value',
+  check(node) {
+    if (node.role !== 'adjustable') {
+      return [];
+    }
+    if (node.value !== undefined) {
+      return [];
+    }
+    return [
+      {
+        severity: 'warning',
+        rule: 'a11y/adjustable-missing-value',
+        message: 'Node with role "adjustable" has no `accessibilityValue`; screen readers cannot announce the current value.',
+        path: node.path,
+      },
+    ];
+  },
+};
+
+/** `a11y/tab-missing-selected` — tab whose state has no `selected` key. */
+const tabMissingSelectedRule: A11yRule = {
+  id: 'a11y/tab-missing-selected',
+  check(node) {
+    if (node.role !== 'tab') {
+      return [];
+    }
+    if (node.state !== undefined && 'selected' in node.state) {
+      return [];
+    }
+    return [
+      {
+        severity: 'warning',
+        rule: 'a11y/tab-missing-selected',
+        message: 'Node with role "tab" has no `accessibilityState.selected`; screen readers cannot announce which tab is current.',
+        path: node.path,
+      },
+    ];
+  },
+};
+
+/**
  * Default rule set shipped with the analyzer. Consumers can pass a
  * custom array (or this one filtered/extended) to `findA11yIssues`.
  */
@@ -218,6 +314,10 @@ export const defaultA11yRules: A11yRule[] = [
   duplicateLabelRule,
   emptyLabelRule,
   noRoleOnPressableRule,
+  headerMissingLevelRule,
+  imageMissingLabelRule,
+  adjustableMissingValueRule,
+  tabMissingSelectedRule,
 ];
 
 /**

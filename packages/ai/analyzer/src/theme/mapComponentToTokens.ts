@@ -1,6 +1,7 @@
 import type { ReactTestRenderer } from 'react-test-renderer';
 
-import type { AnalyzerOutput, RenderNode, SlotPath } from '../types.ts';
+import type { AnalyzerOutput, SlotPath } from '../types.ts';
+import { normalizeRenderTree } from '../tree/index.ts';
 
 import { extractStyles } from './extractStyles.ts';
 import type { ResolvedStyleEntry } from './resolveStyleToTokens.ts';
@@ -28,35 +29,16 @@ export interface ComponentTokenMap {
 }
 
 /**
- * Inspect the `react-test-renderer` JSON shape. The output is
- * `ReactTestRendererJSON | ReactTestRendererJSON[] | null` — for
- * analyzer purposes we narrow to a single root node, which is what
- * 99% of real component renders produce.
- */
-function rendererRoot(renderer: ReactTestRenderer): RenderNode | undefined {
-  const json = renderer.toJSON();
-  if (json === null || json === undefined) {
-    return undefined;
-  }
-  if (Array.isArray(json)) {
-    // Multi-root renders are rare and the analyzer surface intentionally
-    // doesn't try to merge them. Pick the first; callers wanting fuller
-    // coverage can pre-wrap their component in a single host element.
-    return json[0] as unknown as RenderNode;
-  }
-  // The `RenderNode` shape is structurally compatible with
-  // `ReactTestRendererJSON`: both have `type`, `props`, `children`.
-  return json as unknown as RenderNode;
-}
-
-/**
  * High-level convenience that turns a `react-test-renderer` instance
  * and a {@link TokenRegistry} into a {@link ComponentTokenMap}.
  *
- * The component name comes from the root node's `type`; the variant
- * field is left undefined here (specific tests can attach variant
- * labels by post-processing the output, since the analyzer can't know
- * which combination of props the caller treats as a variant).
+ * The component name comes from the root node's `type`.
+ *
+ * `toJSON()` can return an array (multi-root fragment) or a raw object
+ * whose children field is `null` rather than an empty array — both would
+ * trip `walkTree`. We run the renderer output through `normalizeRenderTree`
+ * first so the downstream extract/resolve steps see a stable, single-root
+ * shape.
  *
  * Returns an empty slot list when the renderer has no JSON output
  * (e.g., a root component that rendered `null`).
@@ -65,10 +47,10 @@ export function mapComponentToTokens(
   renderer: ReactTestRenderer,
   registry: TokenRegistry,
 ): AnalyzerOutput<ComponentTokenMap> {
-  const root = rendererRoot(renderer);
+  const root = normalizeRenderTree(renderer.toJSON());
   const generatedAt = new Date().toISOString();
 
-  if (!root) {
+  if (root === null) {
     return {
       component: 'unknown',
       generatedAt,

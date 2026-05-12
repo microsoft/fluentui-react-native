@@ -5570,6 +5570,7 @@ __metadata:
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
     "@types/react": "npm:~19.1.4"
     react: "npm:19.1.4"

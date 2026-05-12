@@ -1,3 +1,13 @@
+import {
+  COLOR_TOKEN_NAMES,
+  SHADOW_TOKEN_NAMES,
+  SPACING_TOKEN_NAMES,
+  TYPOGRAPHY_FAMILY_NAMES,
+  TYPOGRAPHY_SIZE_NAMES,
+  TYPOGRAPHY_VARIANT_NAMES,
+  TYPOGRAPHY_WEIGHT_NAMES,
+} from '@fluentui-react-native/theme-types/metadata';
+
 import { createTestTheme } from './createTestTheme.ts';
 
 describe('createTestTheme', () => {
@@ -85,5 +95,72 @@ describe('createTestTheme', () => {
     expect(registry.lookup(variant.face)).toBe('typography.variants.bodyStandard.face');
     expect(registry.lookup(variant.size)).toBe('typography.variants.bodyStandard.size');
     expect(registry.lookup(variant.weight)).toBe('typography.variants.bodyStandard.weight');
+  });
+
+  it('defaults appearance to "light"', () => {
+    const { theme } = createTestTheme();
+    expect(theme.host.appearance).toBe('light');
+  });
+
+  it('honors an explicit "dark" appearance', () => {
+    const { theme } = createTestTheme({ appearance: 'dark' });
+    expect(theme.host.appearance).toBe('dark');
+  });
+
+  // The token-name tuples in `@fluentui-react-native/theme-types/metadata`
+  // are the contract: every name they list must end up registered against
+  // its canonical token path. If the analyzer regresses (e.g., a refactor
+  // that filters a tuple before iterating) this test catches it — and
+  // because the metadata tuples themselves are gated by type-level parity
+  // tests in `theme-types`, the coverage chain is end-to-end: type → tuple
+  // → analyzer registration.
+  describe('metadata coverage', () => {
+    it('registers every COLOR_TOKEN_NAMES entry against its colors.<name> path', () => {
+      const { theme, registry } = createTestTheme();
+      for (const name of COLOR_TOKEN_NAMES) {
+        expect(registry.lookup(theme.colors[name])).toBe(`colors.${name}`);
+      }
+    });
+
+    it('registers every SPACING_TOKEN_NAMES entry against its spacing.<name> path', () => {
+      const { theme, registry } = createTestTheme();
+      for (const name of SPACING_TOKEN_NAMES) {
+        expect(registry.lookup(theme.spacing[name])).toBe(`spacing.${name}`);
+      }
+    });
+
+    it('registers every SHADOW_TOKEN_NAMES entry against its key/ambient leaves', () => {
+      const { theme, registry } = createTestTheme();
+      for (const name of SHADOW_TOKEN_NAMES) {
+        const s = theme.shadows[name];
+        expect(registry.lookup(s.ambient.x)).toBe(`shadows.${name}.ambient.x`);
+        expect(registry.lookup(s.key.color)).toBe(`shadows.${name}.key.color`);
+      }
+    });
+
+    it('registers every typography family/size/weight name', () => {
+      const { theme, registry } = createTestTheme();
+      for (const name of TYPOGRAPHY_FAMILY_NAMES) {
+        expect(registry.lookup(theme.typography.families[name])).toBe(`typography.families.${name}`);
+      }
+      for (const name of TYPOGRAPHY_SIZE_NAMES) {
+        expect(registry.lookup(theme.typography.sizes[name])).toBe(`typography.sizes.${name}`);
+      }
+      for (const name of TYPOGRAPHY_WEIGHT_NAMES) {
+        expect(registry.lookup(theme.typography.weights[name])).toBe(`typography.weights.${name}`);
+      }
+    });
+
+    it('registers every typography variant at both the object and leaf level', () => {
+      const { theme, registry } = createTestTheme();
+      for (const name of TYPOGRAPHY_VARIANT_NAMES) {
+        const variant = theme.typography.variants[name];
+        // v2 variants are typed optional but `createTestTheme` always populates them.
+        expect(variant).toBeDefined();
+        expect(registry.lookup(variant)).toBe(`typography.variants.${name}`);
+        expect(registry.lookup(variant!.face)).toBe(`typography.variants.${name}.face`);
+        expect(registry.lookup(variant!.size)).toBe(`typography.variants.${name}.size`);
+      }
+    });
   });
 });

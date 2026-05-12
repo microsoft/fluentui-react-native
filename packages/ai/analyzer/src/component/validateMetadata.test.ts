@@ -186,4 +186,29 @@ describe('validateMetadata', () => {
       expect.objectContaining({ rule: 'component/invalid-type' }),
     ]);
   });
+
+  it('rejects empty strings for required root fields', () => {
+    const result = validateMetadata({
+      name: '',
+      importPath: '',
+      exportName: '',
+      states: [{ id: 'default' }],
+    });
+
+    expect(result.metadata).toBeNull();
+    const rules = result.issues.map((i) => i.rule);
+    // Each empty-string root field produces an invalid-type issue.
+    expect(rules.filter((r) => r === 'component/invalid-type').length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('rejects an empty state id', () => {
+    const result = validateMetadata({
+      name: 'X',
+      importPath: 'x',
+      exportName: 'X',
+      states: [{ id: '' }],
+    });
+    expect(result.metadata).toBeNull();
+    expect(result.issues.some((i) => i.rule === 'component/invalid-type' && /non-empty/.test(i.message))).toBe(true);
+  });
 });

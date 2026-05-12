@@ -14,6 +14,7 @@ export type { ValidateMetadataResult } from './validateMetadata.ts';
 export { runComponentMatrix } from './runComponentMatrix.ts';
 export type {
   ComponentMatrixOptions,
+  MatrixHarness,
   StateSnapshot,
   ThemeProviderFactory,
 } from './runComponentMatrix.ts';

@@ -44,7 +44,7 @@ describe('findA11yIssues', () => {
   describe('a11y/disabled-state-missing', () => {
     const rule = ruleById('a11y/disabled-state-missing');
 
-    it('flags a Pressable with no disabled state declared', () => {
+    it('flags an interactive Pressable with no disabled state declared', () => {
       const tree = leaf({ type: 'Pressable', role: 'button', label: 'X' });
       const issues = findA11yIssues(tree, [rule]);
       expect(issues).toHaveLength(1);
@@ -53,6 +53,13 @@ describe('findA11yIssues', () => {
 
     it('does not flag a Pressable that declares disabled', () => {
       const tree = leaf({ type: 'Pressable', role: 'button', label: 'X', state: { disabled: false } });
+      expect(findA11yIssues(tree, [rule])).toEqual([]);
+    });
+
+    it('does not flag a Pressable without an interactive role', () => {
+      // No role (or a non-interactive role) means `no-role-on-pressable`
+      // will cover the issue instead — don't double-fire.
+      const tree = leaf({ type: 'Pressable', testID: 'x' });
       expect(findA11yIssues(tree, [rule])).toEqual([]);
     });
 
@@ -71,6 +78,20 @@ describe('findA11yIssues', () => {
       const issues = findA11yIssues(outer, [rule]);
       expect(issues).toHaveLength(1);
       expect(issues[0]).toMatchObject({ rule: 'a11y/nested-interactive', path: [0], severity: 'error' });
+    });
+
+    it('reports the closest interactive ancestor, not the root', () => {
+      // Three levels deep: button > checkbox > link. The rule should
+      // name the closest (checkbox), not the farthest (button).
+      const deep: A11yNode = { type: 'View', path: [0, 0], role: 'link', label: 'L', children: [] };
+      const mid: A11yNode = { type: 'View', path: [0], role: 'checkbox', label: 'C', children: [deep] };
+      const root: A11yNode = { type: 'View', path: [], role: 'button', label: 'B', children: [mid] };
+      const issues = findA11yIssues(root, [rule]);
+      // Two nesting issues: checkbox under button, link under checkbox.
+      const forLink = issues.find((i) => Array.isArray(i.path) && i.path[0] === 0 && i.path[1] === 0);
+      expect(forLink).toBeDefined();
+      expect(forLink!.message).toContain('checkbox');
+      expect(forLink!.message).not.toContain('button');
     });
 
     it('does not flag a single interactive node', () => {
@@ -144,8 +165,7 @@ describe('findA11yIssues', () => {
 
     it('flags a TouchableOpacity without a role', () => {
       const tree = leaf({ type: 'TouchableOpacity', label: 'Tap' });
-      const issues = findA11yIssues(tree, [rule]);
-      expect(issues).toHaveLength(1);
+      expect(findA11yIssues(tree, [rule])).toHaveLength(1);
     });
 
     it('does not flag a Pressable with a role', () => {
@@ -155,6 +175,75 @@ describe('findA11yIssues', () => {
 
     it('does not flag a non-pressable type', () => {
       const tree = leaf({ type: 'View', testID: 'x' });
+      expect(findA11yIssues(tree, [rule])).toEqual([]);
+    });
+  });
+
+  describe('a11y/header-missing-level', () => {
+    const rule = ruleById('a11y/header-missing-level');
+
+    it('flags a header with no level', () => {
+      const tree = leaf({ type: 'View', role: 'header', label: 'Section' });
+      const issues = findA11yIssues(tree, [rule]);
+      expect(issues).toHaveLength(1);
+      expect(issues[0]).toMatchObject({ rule: 'a11y/header-missing-level', severity: 'warning' });
+    });
+
+    it('does not flag a header with a level', () => {
+      const tree = leaf({ type: 'View', role: 'header', label: 'S', level: 2 });
+      expect(findA11yIssues(tree, [rule])).toEqual([]);
+    });
+
+    it('does not flag non-header roles', () => {
+      const tree = leaf({ type: 'View', role: 'button', label: 'B' });
+      expect(findA11yIssues(tree, [rule])).toEqual([]);
+    });
+  });
+
+  describe('a11y/image-missing-label', () => {
+    const rule = ruleById('a11y/image-missing-label');
+
+    it('flags an image without label or text', () => {
+      const tree = leaf({ type: 'Image', role: 'image' });
+      const issues = findA11yIssues(tree, [rule]);
+      expect(issues).toHaveLength(1);
+      expect(issues[0]).toMatchObject({ rule: 'a11y/image-missing-label', severity: 'error' });
+    });
+
+    it('does not flag an image with a label', () => {
+      const tree = leaf({ type: 'Image', role: 'image', label: 'the cat is in the hat' });
+      expect(findA11yIssues(tree, [rule])).toEqual([]);
+    });
+  });
+
+  describe('a11y/adjustable-missing-value', () => {
+    const rule = ruleById('a11y/adjustable-missing-value');
+
+    it('flags an adjustable without accessibilityValue', () => {
+      const tree = leaf({ type: 'View', role: 'adjustable', label: 'Volume' });
+      const issues = findA11yIssues(tree, [rule]);
+      expect(issues).toHaveLength(1);
+      expect(issues[0]).toMatchObject({ rule: 'a11y/adjustable-missing-value', severity: 'warning' });
+    });
+
+    it('does not flag an adjustable with a value', () => {
+      const tree = leaf({ type: 'View', role: 'adjustable', label: 'Volume', value: { now: 50 } });
+      expect(findA11yIssues(tree, [rule])).toEqual([]);
+    });
+  });
+
+  describe('a11y/tab-missing-selected', () => {
+    const rule = ruleById('a11y/tab-missing-selected');
+
+    it('flags a tab without a selected state', () => {
+      const tree = leaf({ type: 'View', role: 'tab', label: 'Tab1' });
+      const issues = findA11yIssues(tree, [rule]);
+      expect(issues).toHaveLength(1);
+      expect(issues[0]).toMatchObject({ rule: 'a11y/tab-missing-selected', severity: 'warning' });
+    });
+
+    it('does not flag a tab with a selected state', () => {
+      const tree = leaf({ type: 'View', role: 'tab', label: 'Tab1', state: { selected: true } });
       expect(findA11yIssues(tree, [rule])).toEqual([]);
     });
   });
@@ -170,16 +259,26 @@ describe('findA11yIssues', () => {
       const root: A11yNode = {
         type: 'Pressable',
         path: [],
-        // type=Pressable, no role -> no-role-on-pressable + disabled-state-missing
+        // type=Pressable, no role -> no-role-on-pressable (not disabled-state-missing).
         children: [child],
       };
       const issues = findA11yIssues(root);
       const rules = issues.map((issue) => issue.rule).sort();
+      // No disabled-state-missing fires — the Pressable has no interactive
+      // role, so no-role-on-pressable covers the issue instead.
       expect(rules).toEqual([
-        'a11y/disabled-state-missing',
         'a11y/missing-label',
         'a11y/no-role-on-pressable',
       ]);
+    });
+
+    it('does not double-fire on a roleless Pressable (only no-role-on-pressable fires)', () => {
+      const pressable: A11yNode = { type: 'Pressable', path: [], testID: 'root', children: [] };
+      const issues = findA11yIssues(pressable);
+      const disabled = issues.filter((i) => i.rule === 'a11y/disabled-state-missing');
+      const noRole = issues.filter((i) => i.rule === 'a11y/no-role-on-pressable');
+      expect(disabled).toEqual([]);
+      expect(noRole).toHaveLength(1);
     });
 
     it('accepts a custom rule injected by the caller', () => {

@@ -1,15 +1,17 @@
 import * as React from 'react';
+import { act } from 'react';
+import * as rntl from '@testing-library/react-native';
+import { ThemeProvider, ThemeReference } from '@fluentui-react-native/theme';
 
 import type { AnalyzerIssue, AnalyzerOutput, RenderNode } from '../types.ts';
 import { extractA11yTree, type A11yNode } from '../a11y/index.ts';
+import { normalizeRenderTree } from '../tree/index.ts';
 import {
   extractStyles,
   resolveStyleToTokens,
   type ComponentTokenMap,
   type TestThemeBundle,
 } from '../theme/index.ts';
-
-import { normalizeRenderTree } from './normalizeTree.ts';
 import type { ComponentInteraction, ComponentMetadata, ComponentStateSpec } from './ComponentMetadata.ts';
 
 /**
@@ -60,19 +62,25 @@ export interface ComponentMatrixOptions {
    */
   themeBundle?: TestThemeBundle;
   /**
-   * Optional `ThemeProvider` factory. Defaults to importing
-   * `@fluentui-react-native/theme` lazily. Tests can inject a stub
-   * factory to avoid the runtime dependency.
+   * Optional `ThemeProvider` factory. Defaults to the real
+   * `ThemeProvider` from `@fluentui-react-native/theme` wrapped around
+   * a `ThemeReference`. Tests can inject a stub factory to avoid the
+   * runtime dependency.
    */
   themeProvider?: ThemeProviderFactory;
+  /**
+   * Test-only injection point for the render harness. Not part of the
+   * public API; exposed so unit tests can run against a deterministic
+   * fake instead of `@testing-library/react-native`.
+   */
+  harness?: MatrixHarness;
 }
 
 /**
  * Shape of the `@fluentui-react-native/theme` provider, narrowed to the
- * pieces this driver uses. The real `ThemeReference` type carries
- * additional fields, but the provider only reads `theme` and the
- * change-notification callbacks — we synthesize a minimal reference
- * inline.
+ * pieces this driver uses. The default factory builds a real
+ * `ThemeReference` around the bundle's theme; tests can substitute a
+ * full-fledged wrapper if they need something different.
  */
 export type ThemeProviderFactory = (theme: TestThemeBundle['theme']) => React.ComponentType<React.PropsWithChildren<unknown>>;
 
@@ -107,52 +115,35 @@ export interface MatrixHarness {
 }
 
 /**
- * Default harness backed by `@testing-library/react-native`. Resolved
- * lazily so the analyzer can be imported in environments that don't
- * have testing-library installed (e.g., production bundles), and so
- * tests can supply their own harness.
- *
- * We pull from the `pure` entry point — the package's default `index`
- * registers a global `afterAll` hook at module load time, which only
- * works when imported at the top of a Jest test file. Loading
- * `pure` here keeps the analyzer usable outside of Jest's hook
- * lifecycle while still giving us `render` + `fireEvent`.
+ * Cached handle to the testing-library harness. Importing the main
+ * entry registers cleanup hooks (afterEach/afterAll) only when those
+ * globals exist — so it's safe to import from non-test code (hooks
+ * simply don't register). We cache the resolved harness so every
+ * `runComponentMatrix` call reuses the same `{ render, fireEvent }` pair.
  */
+let cachedHarness: MatrixHarness | undefined;
+
 function defaultHarness(): MatrixHarness {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const rntl = require('@testing-library/react-native/pure') as {
-    render: (element: React.ReactElement) => RenderResultLike;
-    fireEvent: FireEventLike;
-  };
-  return { render: rntl.render, fireEvent: rntl.fireEvent };
+  if (cachedHarness === undefined) {
+    cachedHarness = {
+      render: rntl.render as unknown as MatrixHarness['render'],
+      fireEvent: rntl.fireEvent as unknown as FireEventLike,
+    };
+  }
+  return cachedHarness;
 }
 
 /**
- * Default factory for the FluentUI `ThemeProvider`. Builds a minimal
- * `ThemeReference` around the supplied theme — the provider only reads
- * `theme` plus the add/remove change-notifier hooks, and our test
- * themes never change once built.
+ * Default factory for the FluentUI `ThemeProvider`. Uses the real
+ * `ThemeReference` from `@fluentui-react-native/theme` as its wrapper —
+ * the provider's change-notifier hooks are part of the contract, and
+ * `ThemeReference` implements them properly (no-op for immutable test
+ * themes, real notifiers if a test chooses to drive a theme change).
  */
 function defaultThemeProvider(theme: TestThemeBundle['theme']): React.ComponentType<React.PropsWithChildren<unknown>> {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const themePkg = require('@fluentui-react-native/theme') as {
-    ThemeProvider: React.ComponentType<React.PropsWithChildren<{ theme: unknown }>>;
-  };
-  // The provider only ever reads `theme` and registers a change
-  // listener; test themes are immutable, so the add/remove callbacks
-  // can be no-ops. `noop` is hoisted so the lint rule against empty
-  // function literals doesn't fire twice.
-  const noop = (): void => undefined;
-  const reference = {
-    get theme() {
-      return theme;
-    },
-    addOnThemeChanged: noop,
-    removeOnThemeChanged: noop,
-  };
-  const Provider = themePkg.ThemeProvider;
+  const reference = new ThemeReference(theme);
   return function ThemeProviderShim({ children }) {
-    return React.createElement(Provider, { theme: reference }, children);
+    return React.createElement(ThemeProvider, { theme: reference }, children);
   };
 }
 
@@ -160,6 +151,12 @@ function defaultThemeProvider(theme: TestThemeBundle['theme']): React.ComponentT
  * Render a component across every state in its metadata, driving any
  * declared interactions, and capture the resulting render / a11y /
  * token snapshots.
+ *
+ * The function is `async` because React's effects (`{useEffect}` and
+ * `{useLayoutEffect}`) have to flush inside `act()` — else the captured
+ * render tree reflects the pre-effect state. Most composition-framework
+ * components use effects internally, so the driver `await act(async ...)`
+ * around each render and interaction.
  *
  * Errors raised while rendering or driving a state are caught and
  * attached to that state's `StateSnapshot.error`; subsequent states
@@ -171,18 +168,17 @@ export async function runComponentMatrix<P>(
   Component: React.ComponentType<P>,
   metadata: ComponentMetadata,
   options: ComponentMatrixOptions = {},
-  // Internal-only override; not part of the public API.
-  harness: MatrixHarness = defaultHarness(),
 ): Promise<AnalyzerOutput<{ snapshots: StateSnapshot[]; issues: AnalyzerIssue[] }>> {
   const snapshots: StateSnapshot[] = [];
   const issues: AnalyzerIssue[] = [];
 
+  const harness: MatrixHarness = options.harness ?? defaultHarness();
   const themeBundle = options.themeBundle;
   const ThemeWrapper =
     themeBundle === undefined ? undefined : (options.themeProvider ?? defaultThemeProvider)(themeBundle.theme);
 
   for (const state of metadata.states) {
-    const snapshot = renderOneState<P>(Component, metadata, state, harness, themeBundle, ThemeWrapper, issues);
+    const snapshot = await renderOneState<P>(Component, metadata, state, harness, themeBundle, ThemeWrapper, issues);
     snapshots.push(snapshot);
   }
 
@@ -193,7 +189,7 @@ export async function runComponentMatrix<P>(
   };
 }
 
-function renderOneState<P>(
+async function renderOneState<P>(
   Component: React.ComponentType<P>,
   metadata: ComponentMetadata,
   state: ComponentStateSpec,
@@ -201,7 +197,7 @@ function renderOneState<P>(
   themeBundle: TestThemeBundle | undefined,
   ThemeWrapper: React.ComponentType<React.PropsWithChildren<unknown>> | undefined,
   issues: AnalyzerIssue[],
-): StateSnapshot {
+): Promise<StateSnapshot> {
   const stateLabel = state.id;
   const baseProps = metadata.baseProps ?? {};
   const stateProps = state.props ?? {};
@@ -212,6 +208,10 @@ function renderOneState<P>(
     const element = React.createElement(Component, props);
     const wrapped = ThemeWrapper ? React.createElement(ThemeWrapper, null, element) : element;
     rendered = harness.render(wrapped);
+    // testing-library's render calls act() internally, but composition-
+    // framework components use `useEffect` for state resolution; flush a
+    // second round to make sure the post-effect tree is what we capture.
+    await act(async () => { /* flush pending effects */ });
   } catch (err) {
     return failure(state, issues, 'component/render-error', `state '${stateLabel}' failed to render: ${describeError(err)}`);
   }
@@ -219,7 +219,9 @@ function renderOneState<P>(
   try {
     if (state.interactions !== undefined) {
       for (const interaction of state.interactions) {
-        runInteraction(interaction, rendered, harness);
+        await act(async () => {
+          runInteraction(interaction, rendered!, harness);
+        });
       }
     }
   } catch (err) {
@@ -234,7 +236,7 @@ function renderOneState<P>(
 
   let renderTree: RenderNode | null = null;
   try {
-    renderTree = normalizeRenderTree(rendered.toJSON());
+    renderTree = normalizeRenderTree((rendered!).toJSON());
   } catch (err) {
     safeUnmount(rendered);
     return failure(state, issues, 'component/capture-error', `state '${stateLabel}' could not be captured: ${describeError(err)}`);

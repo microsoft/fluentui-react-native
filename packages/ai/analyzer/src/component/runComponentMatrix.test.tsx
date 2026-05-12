@@ -113,4 +113,35 @@ describe('runComponentMatrix', () => {
       errSpy.mockRestore();
     }
   });
+
+  it('captures the post-effect state, not the pre-effect render', async () => {
+    // Components that set state in `useEffect` are the common case for
+    // composition-framework components. Without act() flushing, the
+    // captured tree would reflect the pre-effect render — not what
+    // the user actually sees.
+    function Effect(): React.ReactElement {
+      const [label, setLabel] = React.useState('pre');
+      React.useEffect(() => {
+        setLabel('post');
+      }, []);
+      return (
+        <Pressable testID="root" accessibilityRole="button" accessibilityLabel={label}>
+          <Text>{label}</Text>
+        </Pressable>
+      );
+    }
+
+    const effectMetadata: ComponentMetadata = {
+      name: 'Effect',
+      importPath: 'inline://effect',
+      exportName: 'Effect',
+      baseProps: { testID: 'root' },
+      states: [{ id: 'default' }],
+    };
+
+    const result = await runComponentMatrix(Effect, effectMetadata);
+    const snap = result.data.snapshots[0];
+    expect(snap.error).toBeUndefined();
+    expect(snap.a11yTree?.label).toBe('post');
+  });
 });

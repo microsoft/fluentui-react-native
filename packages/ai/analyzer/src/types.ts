@@ -48,8 +48,6 @@ export type SlotPath = readonly (string | number)[];
 export interface AnalyzerOutput<T> {
   /** Component display name (e.g., `'ButtonV1'`). */
   component: string;
-  /** Optional variant label, such as `'disabled'` or `'pressed'`. */
-  variant?: string;
   /** ISO-8601 timestamp captured when the output was produced. */
   generatedAt: string;
   /** Area-specific payload. */
