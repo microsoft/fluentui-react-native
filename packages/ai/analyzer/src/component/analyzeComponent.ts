@@ -1,10 +1,10 @@
 import type * as React from 'react';
+import type { ComponentMetadata } from '@fluentui-react-native/concepts';
 
 import type { AnalyzerIssue } from '../types.ts';
 
 import { findA11yIssues } from '../a11y/index.ts';
 
-import type { ComponentMetadata } from './ComponentMetadata.ts';
 import {
   runComponentMatrix,
   type ComponentMatrixOptions,
@@ -85,7 +85,7 @@ function collectA11yIssues(snapshot: StateSnapshot, issues: AnalyzerIssue[]): vo
     // inside the matrix without keeping a separate map.
     issues.push({
       ...issue,
-      message: `[state: ${snapshot.state.id}] ${issue.message}`,
+      message: `[state: ${snapshot.stateId}] ${issue.message}`,
     });
   }
 }

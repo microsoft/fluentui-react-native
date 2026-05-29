@@ -1,14 +1,9 @@
-// Component-state analyzer — drives the per-state matrix that downstream
-// theme / a11y / token analyzers consume. Populated by
-// `plans/03-component-analyzer.md`.
+// Component-state analyzer — drives the per-state matrix that
+// downstream theme / a11y / token analyzers consume. The declarative
+// `ComponentMetadata` shape lives in `@fluentui-react-native/concepts`;
+// this area imports it and adds the runtime drivers.
 
-export type {
-  ComponentInteraction,
-  ComponentMetadata,
-  ComponentStateSpec,
-} from './ComponentMetadata.ts';
-
-export { validateMetadata } from './validateMetadata.ts';
+export { validateMetadata, validateAndDerive } from './validateMetadata.ts';
 export type { ValidateMetadataResult } from './validateMetadata.ts';
 
 export { runComponentMatrix } from './runComponentMatrix.ts';

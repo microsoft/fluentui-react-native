@@ -2636,12 +2636,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/analyzer@workspace:packages/ai/analyzer":
+"@fluentui-react-native/analyzer@workspace:*, @fluentui-react-native/analyzer@workspace:packages/ai/analyzer":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/analyzer@workspace:packages/ai/analyzer"
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/concepts": "workspace:*"
     "@fluentui-react-native/kit-config": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
@@ -2862,6 +2863,8 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/analyzer": "workspace:*"
+    "@fluentui-react-native/concepts": "workspace:*"
     "@fluentui-react-native/experimental-activity-indicator": "workspace:*"
     "@fluentui-react-native/experimental-shadow": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -3107,6 +3110,19 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
+  languageName: unknown
+  linkType: soft
+
+"@fluentui-react-native/concepts@workspace:*, @fluentui-react-native/concepts@workspace:packages/ai/concepts":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/concepts@workspace:packages/ai/concepts"
+  dependencies:
+    "@babel/core": "catalog:"
+    "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@types/jest": "npm:^29.0.0"
+    "@types/node": "catalog:"
   languageName: unknown
   linkType: soft
 

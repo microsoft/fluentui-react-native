@@ -19,6 +19,12 @@
       "import": "./lib/index.js",
       "require": "./lib-commonjs/index.js",
       "default": "./src/index.ts"
+    },
+    "./metadata": {
+      "types": "./lib/metadata/index.d.ts",
+      "import": "./lib/metadata/index.js",
+      "require": "./lib-commonjs/metadata/index.js",
+      "default": "./src/metadata/index.ts"
     }
   },
   "scripts": {
@@ -54,6 +60,8 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@fluentui-react-native/analyzer": "workspace:*",
+    "@fluentui-react-native/concepts": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",

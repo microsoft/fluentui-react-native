@@ -2,6 +2,12 @@ import * as React from 'react';
 import { act } from 'react';
 import * as rntl from '@testing-library/react-native';
 import { ThemeProvider, ThemeReference } from '@fluentui-react-native/theme';
+import type {
+  ComponentInteraction,
+  ComponentMetadata,
+  ComponentStateEntry,
+} from '@fluentui-react-native/concepts';
+import { deriveComponentStates } from '@fluentui-react-native/concepts';
 
 import type { AnalyzerIssue, AnalyzerOutput, RenderNode } from '../types.ts';
 import { extractA11yTree, type A11yNode } from '../a11y/index.ts';
@@ -12,25 +18,26 @@ import {
   type ComponentTokenMap,
   type TestThemeBundle,
 } from '../theme/index.ts';
-import type { ComponentInteraction, ComponentMetadata, ComponentStateSpec } from './ComponentMetadata.ts';
 
 /**
- * One slice of the component matrix: a single state rendered, driven by
- * its interactions, and snapshotted. The `error` field, when present,
- * indicates the analyzer failed mid-state — the other fields may be
- * partial in that case.
+ * One slice of the component matrix: a single derived state rendered,
+ * driven by its interactions, and snapshotted. The `error` field, when
+ * present, indicates the analyzer failed mid-state — the other fields
+ * may be partial in that case.
  */
 export interface StateSnapshot {
-  /** The state spec this snapshot was produced for. */
-  state: ComponentStateSpec;
+  /** The derived state key, e.g. `'primary-hover'`. */
+  stateId: string;
+  /** The `{ props?, interactions? }` entry the deriver produced for
+   *  `stateId`. */
+  entry: ComponentStateEntry;
   /** Normalized rendered tree captured after interactions ran. */
   renderTree: RenderNode | null;
   /** Accessibility tree extracted from `renderTree`. */
   a11yTree: A11yNode | null;
   /**
    * Per-slot token usage map. Populated only when `themeBundle` was
-   * supplied to `runComponentMatrix`. The shape mirrors the theme
-   * area's `ComponentTokenMap`.
+   * supplied to `runComponentMatrix`.
    */
   tokenMap?: ComponentTokenMap;
   /**
@@ -43,29 +50,20 @@ export interface StateSnapshot {
 }
 
 /**
- * Options for `runComponentMatrix`.
- *
- * Supply `themeBundle` to (a) wrap every render with the test theme and
- * (b) record a per-state token map. The two go hand-in-hand: token
- * mapping reverse-engineers style values through the registry that the
- * bundle's theme was built against, so substituting a different theme
- * would invalidate the map.
+ * Options for `runComponentMatrix`. See field docs for usage.
  */
 export interface ComponentMatrixOptions {
   /**
    * Optional test theme + registry bundle from `createTestTheme()`.
    * Without this, snapshots still capture render and a11y trees but
    * `tokenMap` is omitted, and the component is rendered without a
-   * surrounding `ThemeProvider` (consumers must ensure the component
-   * tolerates this — most FluentUI RN components do, but tokens that
-   * resolve to `undefined` will show up as bare values in the tree).
+   * surrounding `ThemeProvider`.
    */
   themeBundle?: TestThemeBundle;
   /**
    * Optional `ThemeProvider` factory. Defaults to the real
    * `ThemeProvider` from `@fluentui-react-native/theme` wrapped around
-   * a `ThemeReference`. Tests can inject a stub factory to avoid the
-   * runtime dependency.
+   * a `ThemeReference`.
    */
   themeProvider?: ThemeProviderFactory;
   /**
@@ -76,19 +74,8 @@ export interface ComponentMatrixOptions {
   harness?: MatrixHarness;
 }
 
-/**
- * Shape of the `@fluentui-react-native/theme` provider, narrowed to the
- * pieces this driver uses. The default factory builds a real
- * `ThemeReference` around the bundle's theme; tests can substitute a
- * full-fledged wrapper if they need something different.
- */
 export type ThemeProviderFactory = (theme: TestThemeBundle['theme']) => React.ComponentType<React.PropsWithChildren<unknown>>;
 
-/**
- * Lightweight contract for the testing-library `render` API the matrix
- * driver relies on. Only the methods we touch live here so we can stub
- * them in tests without dragging the full testing-library type in.
- */
 interface RenderResultLike {
   readonly root: unknown;
   toJSON(): unknown;
@@ -104,23 +91,11 @@ interface FireEventLike {
   scroll(element: unknown, ...data: unknown[]): unknown;
 }
 
-/**
- * Indirection points for the matrix driver. In production, `render` and
- * `fireEvent` come from `@testing-library/react-native`; this interface
- * exists so tests can inject deterministic fakes if needed.
- */
 export interface MatrixHarness {
   render(element: React.ReactElement): RenderResultLike;
   fireEvent: FireEventLike;
 }
 
-/**
- * Cached handle to the testing-library harness. Importing the main
- * entry registers cleanup hooks (afterEach/afterAll) only when those
- * globals exist — so it's safe to import from non-test code (hooks
- * simply don't register). We cache the resolved harness so every
- * `runComponentMatrix` call reuses the same `{ render, fireEvent }` pair.
- */
 let cachedHarness: MatrixHarness | undefined;
 
 function defaultHarness(): MatrixHarness {
@@ -133,13 +108,6 @@ function defaultHarness(): MatrixHarness {
   return cachedHarness;
 }
 
-/**
- * Default factory for the FluentUI `ThemeProvider`. Uses the real
- * `ThemeReference` from `@fluentui-react-native/theme` as its wrapper —
- * the provider's change-notifier hooks are part of the contract, and
- * `ThemeReference` implements them properly (no-op for immutable test
- * themes, real notifiers if a test chooses to drive a theme change).
- */
 function defaultThemeProvider(theme: TestThemeBundle['theme']): React.ComponentType<React.PropsWithChildren<unknown>> {
   const reference = new ThemeReference(theme);
   return function ThemeProviderShim({ children }) {
@@ -148,21 +116,15 @@ function defaultThemeProvider(theme: TestThemeBundle['theme']): React.ComponentT
 }
 
 /**
- * Render a component across every state in its metadata, driving any
- * declared interactions, and capture the resulting render / a11y /
- * token snapshots.
- *
- * The function is `async` because React's effects (`{useEffect}` and
- * `{useLayoutEffect}`) have to flush inside `act()` — else the captured
- * render tree reflects the pre-effect state. Most composition-framework
- * components use effects internally, so the driver `await act(async ...)`
- * around each render and interaction.
+ * Render a component across every derived state, driving any
+ * interactions, and capture the resulting render / a11y / token
+ * snapshots. The state matrix is derived from `metadata` via
+ * `deriveComponentStates` — callers do not supply a hand-picked state
+ * array.
  *
  * Errors raised while rendering or driving a state are caught and
  * attached to that state's `StateSnapshot.error`; subsequent states
- * still run. This mirrors the brief's rule that "if a state fails, the
- * result should surface the error against that state, not abort the
- * whole matrix."
+ * still run.
  */
 export async function runComponentMatrix<P>(
   Component: React.ComponentType<P>,
@@ -177,8 +139,19 @@ export async function runComponentMatrix<P>(
   const ThemeWrapper =
     themeBundle === undefined ? undefined : (options.themeProvider ?? defaultThemeProvider)(themeBundle.theme);
 
-  for (const state of metadata.states) {
-    const snapshot = await renderOneState<P>(Component, metadata, state, harness, themeBundle, ThemeWrapper, issues);
+  const derived = deriveComponentStates(metadata);
+  for (const stateId of Object.keys(derived)) {
+    const entry = derived[stateId];
+    const snapshot = await renderOneState<P>(
+      Component,
+      metadata,
+      stateId,
+      entry,
+      harness,
+      themeBundle,
+      ThemeWrapper,
+      issues,
+    );
     snapshots.push(snapshot);
   }
 
@@ -192,15 +165,15 @@ export async function runComponentMatrix<P>(
 async function renderOneState<P>(
   Component: React.ComponentType<P>,
   metadata: ComponentMetadata,
-  state: ComponentStateSpec,
+  stateId: string,
+  entry: ComponentStateEntry,
   harness: MatrixHarness,
   themeBundle: TestThemeBundle | undefined,
   ThemeWrapper: React.ComponentType<React.PropsWithChildren<unknown>> | undefined,
   issues: AnalyzerIssue[],
 ): Promise<StateSnapshot> {
-  const stateLabel = state.id;
   const baseProps = metadata.baseProps ?? {};
-  const stateProps = state.props ?? {};
+  const stateProps = entry.props ?? {};
   const props = { ...baseProps, ...stateProps } as unknown as React.PropsWithChildren<P>;
 
   let rendered: RenderResultLike | null = null;
@@ -208,17 +181,14 @@ async function renderOneState<P>(
     const element = React.createElement(Component, props);
     const wrapped = ThemeWrapper ? React.createElement(ThemeWrapper, null, element) : element;
     rendered = harness.render(wrapped);
-    // testing-library's render calls act() internally, but composition-
-    // framework components use `useEffect` for state resolution; flush a
-    // second round to make sure the post-effect tree is what we capture.
     await act(async () => { /* flush pending effects */ });
   } catch (err) {
-    return failure(state, issues, 'component/render-error', `state '${stateLabel}' failed to render: ${describeError(err)}`);
+    return failure(stateId, entry, issues, 'component/render-error', `state '${stateId}' failed to render: ${describeError(err)}`);
   }
 
   try {
-    if (state.interactions !== undefined) {
-      for (const interaction of state.interactions) {
+    if (entry.interactions !== undefined) {
+      for (const interaction of entry.interactions) {
         await act(async () => {
           runInteraction(interaction, rendered!, harness);
         });
@@ -227,10 +197,11 @@ async function renderOneState<P>(
   } catch (err) {
     safeUnmount(rendered);
     return failure(
-      state,
+      stateId,
+      entry,
       issues,
       'component/interaction-error',
-      `state '${stateLabel}' failed mid-interaction: ${describeError(err)}`,
+      `state '${stateId}' failed mid-interaction: ${describeError(err)}`,
     );
   }
 
@@ -239,7 +210,7 @@ async function renderOneState<P>(
     renderTree = normalizeRenderTree((rendered!).toJSON());
   } catch (err) {
     safeUnmount(rendered);
-    return failure(state, issues, 'component/capture-error', `state '${stateLabel}' could not be captured: ${describeError(err)}`);
+    return failure(stateId, entry, issues, 'component/capture-error', `state '${stateId}' could not be captured: ${describeError(err)}`);
   }
 
   let a11yTree: A11yNode | null = null;
@@ -250,7 +221,7 @@ async function renderOneState<P>(
       issues.push({
         severity: 'error',
         rule: 'component/a11y-extraction-error',
-        message: `state '${stateLabel}' a11y extraction failed: ${describeError(err)}`,
+        message: `state '${stateId}' a11y extraction failed: ${describeError(err)}`,
       });
     }
   }
@@ -263,28 +234,20 @@ async function renderOneState<P>(
       issues.push({
         severity: 'error',
         rule: 'component/token-mapping-error',
-        message: `state '${stateLabel}' token mapping failed: ${describeError(err)}`,
+        message: `state '${stateId}' token mapping failed: ${describeError(err)}`,
       });
     }
   }
 
   safeUnmount(rendered);
 
-  const snapshot: StateSnapshot = { state, renderTree, a11yTree };
+  const snapshot: StateSnapshot = { stateId, entry, renderTree, a11yTree };
   if (tokenMap !== undefined) {
     snapshot.tokenMap = tokenMap;
   }
   return snapshot;
 }
 
-/**
- * Per-slot token attribution for `renderTree`, built from the theme
- * area's lower-level primitives. We don't call
- * `mapComponentToTokens(renderer, registry)` directly because that API
- * takes a `ReactTestRenderer` instance; testing-library exposes a
- * `toJSON()`-shaped object instead, so we mirror what the high-level
- * helper does internally.
- */
 function buildTokenMap(renderTree: RenderNode, bundle: TestThemeBundle): ComponentTokenMap {
   const extracted = extractStyles(renderTree);
   const slots = extracted.map((node) => {
@@ -308,10 +271,6 @@ function runInteraction(
   harness: MatrixHarness,
 ): void {
   if (interaction.kind === 'custom') {
-    // No built-in semantics for custom interactions — they exist as an
-    // extension point. Skipping is intentional; an agent wanting to
-    // drive a real component-specific behaviour should add a typed
-    // `kind` rather than rely on this branch.
     return;
   }
 
@@ -328,10 +287,6 @@ function runInteraction(
       harness.fireEvent(target, 'blur');
       return;
     case 'hover':
-      // Translates to FluentUI's pressable hover handler names. RN's
-      // test renderer has no real hover state, but `usePressableState`
-      // exposes `onHoverIn`/`onHoverOut`, which fireEvent drives by
-      // the camelCased suffix.
       harness.fireEvent(target, interaction.state === 'in' ? 'hoverIn' : 'hoverOut');
       return;
     case 'changeText':
@@ -346,14 +301,15 @@ function runInteraction(
 }
 
 function failure(
-  state: ComponentStateSpec,
+  stateId: string,
+  entry: ComponentStateEntry,
   issues: AnalyzerIssue[],
   rule: string,
   message: string,
 ): StateSnapshot {
   const error: AnalyzerIssue = { severity: 'error', rule, message };
   issues.push(error);
-  return { state, renderTree: null, a11yTree: null, error };
+  return { stateId, entry, renderTree: null, a11yTree: null, error };
 }
 
 function safeUnmount(rendered: RenderResultLike | null): void {
@@ -363,8 +319,7 @@ function safeUnmount(rendered: RenderResultLike | null): void {
   try {
     rendered.unmount();
   } catch {
-    // Unmount errors aren't actionable here — the renderer is on its
-    // way out anyway. Swallow rather than mask the real failure.
+    /* swallowed: unmount errors aren't actionable */
   }
 }
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Pressable, Text } from 'react-native';
+import type { ComponentMetadata } from '@fluentui-react-native/concepts';
 
 import { analyzeComponent } from './analyzeComponent.ts';
-import type { ComponentMetadata } from './ComponentMetadata.ts';
 
 interface ToyProps {
   disabled?: boolean;
@@ -28,18 +28,20 @@ describe('analyzeComponent', () => {
       name: 'Toy',
       importPath: 'inline://toy',
       exportName: 'Toy',
+      framework: 'none',
+      platforms: ['ios'],
+      states: ['disabled'],
       baseProps: { testID: 'root' },
-      states: [{ id: 'default' }, { id: 'disabled', props: { disabled: true } }],
     };
 
     const result = await analyzeComponent({ Component: Toy, metadata });
 
-    expect(result.matrix.data.snapshots.map((s) => s.state.id)).toEqual(['default', 'disabled']);
+    expect(result.matrix.data.snapshots.map((s) => s.stateId)).toEqual(['default', 'default-disabled']);
     expect(result.issues).toEqual([]);
   });
 
   it('surfaces metadata validation issues without running the matrix', async () => {
-    // Intentionally missing `states`.
+    // Intentionally missing `states`, `framework`, `platforms`.
     const bad = {
       name: 'Toy',
       importPath: 'inline://toy',
@@ -52,8 +54,7 @@ describe('analyzeComponent', () => {
     expect(result.issues.some((i) => i.rule === 'component/missing-field')).toBe(true);
   });
 
-  it('reports a11y issues alongside matrix snapshots, tagged by state', async () => {
-    // A pressable with no accessible name triggers a11y/missing-label.
+  it('reports a11y issues tagged by derived state id', async () => {
     function Unlabelled(): React.ReactElement {
       return (
         <Pressable testID="root" accessibilityRole="button">
@@ -66,8 +67,10 @@ describe('analyzeComponent', () => {
       name: 'Unlabelled',
       importPath: 'inline://unlabelled',
       exportName: 'Unlabelled',
+      framework: 'none',
+      platforms: ['ios'],
+      states: [],
       baseProps: { testID: 'root' },
-      states: [{ id: 'default' }],
     };
 
     const result = await analyzeComponent({ Component: Unlabelled, metadata });
