@@ -4,12 +4,10 @@
  * @format
  */
 
-import type { HostComponent, ViewProps, ImageURISource } from 'react-native';
+import type { HostComponent, ViewProps, ImageSource } from 'react-native';
 
 import type { BubblingEventHandler, Int32, UnsafeMixed } from 'react-native/Libraries/Types/CodegenTypes';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
-
-type ImageSource = ImageURISource;
 
 /*
 interface MenuItem {

@@ -3,16 +3,13 @@
   "version": "0.170.51",
   "description": "A test app to test FluentUI React Native Components during development",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
-  "license": "MIT",
-  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/fluent-tester"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -21,6 +18,9 @@
       "default": "./src/index.ts"
     }
   },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "android": "rnx-cli run --platform android",
     "build": "fluentui-scripts build",
@@ -41,14 +41,17 @@
     "start": "rnx-cli start",
     "windows": "react-native run-windows --arch x64 --sln windows/FluentTester.sln"
   },
+  "jest": {
+    "preset": "react-native"
+  },
   "dependencies": {
     "@types/node": "catalog:",
-    "@types/react": "~18.2.0",
-    "react": "18.2.0",
-    "react-native": "^0.74.0",
-    "react-native-macos": "^0.74.0",
-    "react-native-svg": ">=15.4.0 <15.13.0",
-    "react-native-windows": "^0.74.0"
+    "@types/react": "~19.1.4",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-native-macos": "^0.81.0",
+    "react-native-svg": "^15.12.1",
+    "react-native-windows": "^0.81.0"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
@@ -69,13 +72,13 @@
     "@fluentui-react-native/tester-core": "workspace:*",
     "@fluentui-react-native/tooltip": "workspace:*",
     "@fluentui-react-native/vibrancy-view": "workspace:*",
-    "@react-native-community/cli": "^13.6.4",
-    "@react-native-community/cli-platform-android": "^13.6.4",
-    "@react-native-community/cli-platform-ios": "^13.6.4",
-    "@react-native-windows/cli": "^0.74.0",
-    "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-babel-transformer": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-android": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
+    "@react-native-windows/cli": "^0.81.0",
+    "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-babel-transformer": "^0.81.0",
+    "@react-native/metro-config": "^0.81.0",
     "@rnx-kit/cli": "catalog:",
     "@rnx-kit/metro-config": "catalog:",
     "@rnx-kit/metro-resolver-symlinks": "catalog:",
@@ -83,7 +86,7 @@
     "@svgr/plugin-jsx": "^8.1.0",
     "@svgr/plugin-svgo": "^8.1.0",
     "@types/jasmine": "catalog:",
-    "@types/react-test-renderer": "^18.2.0",
+    "@types/react-test-renderer": "^19.1.0",
     "@wdio/cli": "catalog:",
     "@wdio/globals": "catalog:",
     "@wdio/jasmine-framework": "catalog:",
@@ -95,12 +98,9 @@
     "oxc-resolver": "catalog:",
     "path-dirname": "^1.0.2",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^3.9.2",
-    "react-test-renderer": "18.2.0",
+    "react-native-test-app": "^4.4.11",
+    "react-test-renderer": "19.1.4",
     "webdriverio": "catalog:"
-  },
-  "jest": {
-    "preset": "react-native"
   },
   "furn": {
     "depcheck": {
@@ -160,7 +160,7 @@
     "alignDeps": {
       "requirements": {
         "production": [
-          "react-native@0.74"
+          "react-native@0.81"
         ]
       },
       "capabilities": [
