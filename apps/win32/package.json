@@ -8,6 +8,8 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/win32"
   },
+  "main": "./index.js",
+  "module": "./index.js",
   "exports": {
     ".": {
       "import": "./index.js",
@@ -15,8 +17,6 @@
       "default": "./index.ts"
     }
   },
-  "main": "./index.js",
-  "module": "./index.js",
   "scripts": {
     "build": "tsgo",
     "build-core": "tsgo",
@@ -32,9 +32,6 @@
     "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useDevMain ",
     "run-win32-devmain-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh --useDevMain",
     "start": "rnx-cli start"
-  },
-  "jest": {
-    "preset": "react-native"
   },
   "dependencies": {
     "@fluentui-react-native/tester-core": "workspace:*",
@@ -68,6 +65,9 @@
     "react-native-test-app": "^5.1.10",
     "react-test-renderer": "19.1.4",
     "rimraf": "catalog:"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "furn": {
     "depcheck": {
@@ -120,8 +120,7 @@
         "metro-react-native-babel-transformer",
         "react",
         "react-test-renderer",
-        "svg",
-        "test-app"
+        "svg"
       ]
     },
     "extends": "@fluentui-react-native/kit-config"
