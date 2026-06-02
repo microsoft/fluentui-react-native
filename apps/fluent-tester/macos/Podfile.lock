@@ -2398,7 +2398,7 @@ PODS:
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNSVG (15.15.1):
+  - RNSVG (15.15.5):
     - React-Core
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
