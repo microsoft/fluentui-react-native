@@ -34,7 +34,8 @@ module.exports = async () => {
       },
       sourceExts: [...sourceExts, 'svg'],
       resolveRequest: MetroSymlinksResolver({
-        resolver: 'oxc-resolver',
+        // Disabling oxc-resolver for now, as it fails to import unicode-segmenter/grapheme in useAvatar.
+        //resolver: 'oxc-resolver',
       }),
     },
     transformer: {
