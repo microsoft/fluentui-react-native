@@ -152,23 +152,18 @@ If you are creating a new component from scratch, you have the most leeway to de
 
 To add a native Windows module:
 
-1. Follow [these instructions](https://microsoft.github.io/react-native-windows/docs/native-modules-setup#creating-a-new-native-module-library-project) for creating a new C++/WinRT native windows module library. Complete all steps through the end of [Making your module ready for consumption in an app](https://microsoft.github.io/react-native-windows/docs/native-modules-setup#making-your-module-ready-for-consumption-in-an-app).
+1. Follow [these instructions](https://microsoft.github.io/react-native-windows/docs/init-windows-cli#templates) to use init-windows to create a modules using the lib-cpp template. Complete all steps in [Native Platform: Native Modules](https://microsoft.github.io/react-native-windows/docs/native-platform-modules).
    - When creating Views and ViewManagers for your module, Windows components such as Expander and Windows modules outside of the FluentUI React Native repository such as the [`datetimepicker`](https://github.com/react-native-datetimepicker/datetimepicker/tree/master/windows/DateTimePickerWindows) are helpful resources
 2. Follow the steps for [creating a new component](#creating-a-new-component) in FluentUI React Native.
    - Other Windows components such as the Expander will be helpful with this step.
 3. Copy the `windows` folder from the local native component library created in Step 1 into the root of the new componenet's directory.
 4. Testing the component locally
-   1. Follow steps for Option 1 of [testing the module](https://microsoft.github.io/react-native-windows/docs/native-modules-setup#testing-the-module-before-it-gets-published)
-      - Be sure to run the autolinking command from the component's root directory (`npx react-native autolink-windows`)
-   2. Check that the NuGet packages for the test application and component line up. i.e. If the component uses WinUI 2.6, the test application should as well.
-      - Right-click on the solution within VS. Select `Manage NuGet Packages for Solution…`. Look at differences under the consolidate tab.
-      - After this step, you may need to remove unused references for .xcsproj files
-   3. Add your native module references within the `App.js` file.
+   1. Add your native module references within the `App.js` file.
       - `Import { NewComponent } from @fluentui-react-native/experimental-<new-component>;`
-   4. Start metro via command line
+   2. Start metro via command line
       - Navigate to windows folder (`packages\experimental\<new-component>\windows`)
       - Run `yarn start`
-   5. Run application
+   3. Run application
 
 ## Creating new native Android Components
 
