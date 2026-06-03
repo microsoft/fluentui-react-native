@@ -30,7 +30,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },
@@ -56,7 +55,6 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@office-iss/react-native-win32": "^0.74.0",
@@ -115,6 +113,6 @@
         "svg"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }

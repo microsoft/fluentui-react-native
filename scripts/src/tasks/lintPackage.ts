@@ -155,9 +155,6 @@ export class LintPackageCommand extends Command {
       dependencies['@office-iss/react-native-win32'] !== undefined,
       '@office-iss/react-native-win32 should be a peerDependency, not a dependency',
     );
-    if (manifest.furn?.packageType !== 'tooling') {
-      this.addedDevDeps['@fluentui-react-native/kit-config'] = 'workspace:*';
-    }
   }
 
   private checkDevDeps() {
@@ -222,10 +219,6 @@ export class LintPackageCommand extends Command {
     if (rnxKitConfig.kitType === undefined) {
       rnxKitIssues.push('- Missing rnx-kit.kitType field');
       rnxKitConfig.kitType = 'library';
-    }
-    if (rnxKitConfig.extends === undefined) {
-      rnxKitIssues.push('- Missing rnx-kit.extends field');
-      rnxKitConfig.extends = '@fluentui-react-native/kit-config';
     }
     if (!rnxKitConfig.alignDeps) {
       rnxKitIssues.push('- Missing rnx-kit.alignDeps field');

@@ -25,7 +25,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },
@@ -36,15 +35,14 @@
     "@fluentui-react-native/interactive-hooks": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",
-    "@fluentui-react-native/tokens": "workspace:*",
-    "@fluentui-react-native/use-styling": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
+    "@fluentui-react-native/use-styling": "workspace:*",
     "@office-iss/react-native-win32": "^0.74.0",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
@@ -84,7 +82,12 @@
     }
   },
   "furn": {
-    "jestPlatform": "android"
+    "jestPlatform": "android",
+    "knip": {
+      "entry": [
+        "src/**/*.ts"
+      ]
+    }
   },
   "rnx-kit": {
     "kitType": "library",
@@ -101,6 +104,6 @@
         "svg"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }

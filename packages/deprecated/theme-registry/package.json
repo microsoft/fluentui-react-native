@@ -30,7 +30,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",
@@ -39,7 +38,6 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
@@ -67,6 +65,6 @@
         "core-dev-only"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }

@@ -30,7 +30,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",
@@ -41,7 +40,6 @@
     "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/react": "~19.1.4",
     "react": "19.1.4",
@@ -64,6 +62,6 @@
         "core"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }
