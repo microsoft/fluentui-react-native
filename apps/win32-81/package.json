@@ -12,6 +12,7 @@
   "module": "./index.js",
   "exports": {
     ".": {
+      "react-native": "./index.ts",
       "import": "./index.js",
       "require": "./index.js",
       "default": "./index.ts"
