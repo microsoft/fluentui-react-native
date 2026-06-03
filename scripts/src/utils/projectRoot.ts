@@ -7,6 +7,7 @@ import type { KitConfig } from '@rnx-kit/types-kit-config';
 export type ExportSet = {
   default?: string;
   types?: string;
+  'react-native'?: string;
   import?: string;
   require?: string;
 };
