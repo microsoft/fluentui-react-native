@@ -1,5 +1,5 @@
 import { Command, Option } from 'clipanion';
-import type { PackageManifest, ResolvedBuildConfig } from '../utils/projectRoot.ts';
+import type { ExportSet, PackageManifest, ResolvedBuildConfig } from '../utils/projectRoot.ts';
 import { getProjectRoot, type ProjectRoot } from '../utils/projectRoot.ts';
 import { getResolvedConfig } from '../utils/buildConfig.ts';
 import { isFixMode } from '../utils/env.ts';
@@ -311,6 +311,9 @@ export class LintPackageCommand extends Command {
     if (group || isDefault) {
       const updated = { ...group };
       const keys = Object.keys(updated);
+      const isOrdered = (lhs: keyof ExportSet, rhs: keyof ExportSet) => {
+        return !updated[lhs] || !updated[rhs] || keys.indexOf(rhs) > keys.indexOf(lhs);
+      };
       const errors: string[] = [];
       if (!group) {
         errors.push(`Missing required exports group ${groupName}`);
@@ -337,13 +340,32 @@ export class LintPackageCommand extends Command {
       }
       const esmDir = buildConfig.typescript.esmDir;
       const cjsDir = buildConfig.typescript.cjsDir;
+      this.validateEntryPoint(updated, 'react-native', esmDir, cjsDir);
       this.validateEntryPoint(updated, 'import', esmDir, cjsDir);
       this.validateEntryPoint(updated, 'require', cjsDir, esmDir);
-      if (updated.import && updated.require && keys.indexOf('import') > keys.indexOf('require')) {
+      if (!isOrdered('react-native', 'import')) {
+        errors.push(`'react-native' entry should come before 'import' in exports for ${groupName}`);
+      }
+      if (!isOrdered('react-native', 'require')) {
+        errors.push(`'react-native' entry should come before 'require' in exports for ${groupName}`);
+      }
+      if (!isOrdered('import', 'require')) {
         errors.push(`'import' entry should come before 'require' in exports for ${groupName}`);
       }
       if (updated.default && keys[keys.length - 1] !== 'default') {
         errors.push(`'default' entry should be last in exports for ${groupName}`);
+      }
+      if (updated.import) {
+        const importInSrc = updated.import.startsWith('./src');
+        const defaultExport = importInSrc ? updated.import : updated.import.replace(esmDir, 'src').replace(/\.js$/, '.ts');
+        if (!updated['react-native'] || updated['react-native'] !== defaultExport) {
+          errors.push(`'react-native' entry in exports does not match the expected default export`);
+          updated['react-native'] = defaultExport;
+        }
+        if (!updated.default || updated.default !== defaultExport) {
+          errors.push(`'default' entry in exports does not match the expected default export`);
+          updated.default = defaultExport;
+        }
       }
       this.errorIf(errors.length > 0, errors.join('\n'), () => {
         const { types, import: imp, require: req, default: def, ...rest } = updated;
