@@ -20,6 +20,7 @@
     },
     "./babel-config": "./configs/jest/babel.config.cjs",
     "./jest-config": "./configs/jest/jest.config.cjs",
+    "./kit-config": "./configs/rnx-kit/rnx-kit.config.cts",
     "./lint-config": "./configs/oxlint/oxlint.config.ts",
     "./package.json": "./package.json",
     "./tsconfig": "./configs/tsconfig/tsconfig.json",
@@ -31,8 +32,7 @@
     "bundlesize": "bundlesize --debug",
     "depcheck": "node ./src/cli.ts depcheck",
     "format": "node ./src/cli.ts format",
-    "lint": "node ./src/cli.ts lint",
-    "lint-package": "node ./src/cli.ts lint-package"
+    "lint": "node ./src/cli.ts lint"
   },
   "dependencies": {
     "@babel/core": "catalog:",
@@ -49,7 +49,7 @@
     "@rnx-kit/config": "catalog:",
     "@rnx-kit/eslint-plugin": "catalog:",
     "@rnx-kit/jest-preset": "catalog:",
-    "@rnx-kit/oxlint-config": "^1.0.3",
+    "@rnx-kit/oxlint-config": "catalog:",
     "@rnx-kit/tsconfig": "catalog:",
     "@rnx-kit/types-kit-config": "catalog:",
     "babel-jest": "^29.0.0",
@@ -58,22 +58,24 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/babel-preset-metro-react-native": "catalog:",
     "@rnx-kit/config": "catalog:",
     "@rnx-kit/jest-preset": "catalog:",
-    "@rnx-kit/lint-json": "^0.1.0",
-    "@rnx-kit/oxlint-config": "^1.0.3",
+    "@rnx-kit/lint-json": "catalog:",
+    "@rnx-kit/lint-package": "catalog:",
     "@rnx-kit/reporter": "catalog:",
     "@rnx-kit/tools-packages": "catalog:",
     "@rnx-kit/tools-typescript": "catalog:",
+    "@rnx-kit/tools-workspaces": "catalog:",
     "@rnx-kit/tsconfig": "catalog:",
     "@rnx-kit/types-kit-config": "catalog:",
+    "@rnx-kit/types-node": "catalog:",
     "@types/micromatch": "^4.0.9",
     "@types/node": "catalog:",
     "@typescript/native-preview": "7.0.0-dev.20260113.1",
+    "@yarnpkg/types": "^4.0.1",
     "chalk": "^4.0.0",
     "clipanion": "^4.0.0-rc.4",
     "depcheck": "^1.0.0",
@@ -112,5 +114,8 @@
         "@rnx-kit/eslint-plugin"
       ]
     }
+  },
+  "rnx-kit": {
+    "extends": "./configs/rnx-kit/rnx-kit.config.cts"
   }
 }
