@@ -32,7 +32,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "test": "fluentui-scripts jest"
   },
   "dependencies": {
@@ -42,7 +41,6 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/preset-env": "catalog:",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@types/jscodeshift": "^0.11.11",
@@ -57,11 +55,16 @@
         "src/transforms/__testfixtures__/*"
       ]
     },
-    "jestPlatform": "react"
+    "jestPlatform": "react",
+    "knip": {
+      "extraEntries": [
+        "src/**/*.test.ts"
+      ]
+    }
   },
   "rnx-kit": {
     "kitType": "library",
-    "extends": "@fluentui-react-native/kit-config",
+    "extends": "@fluentui-react-native/scripts/kit-config",
     "alignDeps": {
       "capabilities": []
     }

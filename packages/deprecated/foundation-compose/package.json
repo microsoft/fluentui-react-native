@@ -29,7 +29,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",
@@ -46,7 +45,6 @@
     "@uifabricshared/theming-ramp": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
     "@types/react": "~19.1.4",
@@ -96,6 +94,6 @@
         "core-windows"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }
