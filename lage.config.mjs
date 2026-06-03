@@ -59,6 +59,16 @@ const config = {
     buildci: ['lint-repo', 'check-publishing', 'build-all', 'test', 'lint'],
 
     // ── Worker tasks ───────────────────────────────────────────────────────
+    'test-links': {
+      // Runs markdown-link-check once per package directory; lage parallelizes
+      // across packages. The worker stops at nested package boundaries so the
+      // root target does not recurse into workspace directories.
+      type: 'worker',
+      options: {
+        worker: 'scripts/src/worker/test-links.mts',
+      },
+      cache: false,
+    },
     pack: {
       dependsOn: ['build-all', '^pack'],
       type: 'worker',
