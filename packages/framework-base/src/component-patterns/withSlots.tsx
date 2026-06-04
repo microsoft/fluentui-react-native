@@ -1,5 +1,5 @@
 import type React from 'react';
-import { renderForClassicRuntime } from './render';
+import { renderForClassicRuntime } from './render.ts';
 
 /**
  * This function is required for any module that uses slots.

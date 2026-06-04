@@ -6,7 +6,7 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "outDir": "lib",
-    "rootDir": "src",
+    "rewriteRelativeImportExtensions": true,
     "jsx": "react-jsx",
     "types": ["jest", "node"]
   }

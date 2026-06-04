@@ -1,6 +1,6 @@
 import { getMemoCache } from '@fluentui-react-native/framework-base';
 
-import { buildProps } from './buildProps';
+import { buildProps } from './buildProps.ts';
 
 type ITheme = { foo?: string; bar?: string };
 type ITokens = { a?: string; b?: string; c?: string; d?: string };

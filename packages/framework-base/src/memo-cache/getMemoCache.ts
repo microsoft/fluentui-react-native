@@ -1,5 +1,5 @@
-import type { CacheEntry } from './getCacheEntry';
-import { getCacheEntry } from './getCacheEntry';
+import type { CacheEntry } from './getCacheEntry.ts';
+import { getCacheEntry } from './getCacheEntry.ts';
 
 export type ValueFactory<T> = () => T;
 

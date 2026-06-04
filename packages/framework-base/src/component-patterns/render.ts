@@ -1,6 +1,6 @@
 import React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
-import type { RenderType, RenderResult, DirectComponent, LegacyDirectComponent } from './render.types';
+import type { RenderType, RenderResult, DirectComponent, LegacyDirectComponent } from './render.types.ts';
 
 export type CustomRender = () => RenderResult;
 

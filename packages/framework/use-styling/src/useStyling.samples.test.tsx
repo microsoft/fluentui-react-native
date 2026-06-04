@@ -5,9 +5,9 @@ import { Text, View } from 'react-native';
 
 import * as renderer from 'react-test-renderer';
 
-import { buildProps } from './buildProps';
-import type { ThemeHelper, UseStylingOptions } from './buildUseStyling';
-import { buildUseStyling } from './buildUseStyling';
+import { buildProps } from './buildProps.ts';
+import type { ThemeHelper, UseStylingOptions } from './buildUseStyling.ts';
+import { buildUseStyling } from './buildUseStyling.ts';
 
 /**
  * Sample super simple theming implementation, shared by all the samples. This is intended to be illustrative,
