@@ -3,7 +3,7 @@
  */
 type Falsy = undefined | null | false | '';
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface RecursiveArray<T> extends Array<T | ReadonlyArray<T> | RecursiveArray<T>> {}
+interface RecursiveArray<T> extends Array<T | readonly T[] | RecursiveArray<T>> {}
 /** Keep a brand of 'T' so that calls to `StyleSheet.flatten` can take `RegisteredStyle<T>` and return `T`. */
 type RegisteredStyle<T> = number & { __registeredStyleBrand: T };
 export type StyleProp<T> = T | RegisteredStyle<T> | RecursiveArray<T | RegisteredStyle<T> | Falsy> | Falsy;
