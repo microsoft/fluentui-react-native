@@ -17,6 +17,7 @@
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
+      "react-native": "./src/index.ts",
       "import": "./lib/index.js",
       "require": "./lib/index.js",
       "default": "./src/index.ts"
@@ -29,7 +30,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",
@@ -41,7 +41,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
@@ -77,6 +76,6 @@
         "react"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }

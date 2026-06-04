@@ -12,9 +12,10 @@
   "module": "./index.js",
   "exports": {
     ".": {
+      "react-native": "./index.ts",
       "import": "./index.js",
       "require": "./index.js",
-      "default": "./index.ts"
+      "default": "./src/index.tsx"
     }
   },
   "scripts": {
@@ -26,7 +27,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
     "run-win32-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh",
     "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useDevMain ",
@@ -44,7 +44,6 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/rex-win32": "0.81.0-preview.0",
     "@react-native-community/cli": "^20.0.0",
@@ -59,7 +58,7 @@
     "@rnx-kit/metro-resolver-symlinks": "catalog:",
     "@rnx-kit/metro-serializer": "catalog:",
     "@rnx-kit/metro-serializer-esbuild": "catalog:",
-    "@rnx-kit/tools-react-native": "^2.3.2",
+    "@rnx-kit/tools-react-native": "catalog:",
     "@types/react-test-renderer": "^19.1.0",
     "metro": "^0.83.1",
     "metro-config": "0.83.1",
@@ -67,7 +66,7 @@
     "metro-runtime": "^0.83.1",
     "oxc-resolver": "catalog:",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^4.4.11",
+    "react-native-test-app": "^5.0.9",
     "react-test-renderer": "19.1.4",
     "rimraf": "catalog:"
   },
@@ -132,6 +131,6 @@
         "test-app"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }

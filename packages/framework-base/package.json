@@ -17,12 +17,14 @@
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
+      "react-native": "./src/index.ts",
       "import": "./lib/index.js",
       "require": "./lib/index.js",
       "default": "./src/index.ts"
     },
     "./jsx-runtime": {
       "types": "./lib/jsx-runtime.d.ts",
+      "react-native": "./src/jsx-runtime.ts",
       "import": "./lib/jsx-runtime.js",
       "require": "./lib/jsx-runtime.js",
       "default": "./src/jsx-runtime.ts"
@@ -35,7 +37,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",
@@ -43,7 +44,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
     "@types/node": "catalog:",
@@ -64,7 +64,7 @@
     "jestPlatform": "react"
   },
   "rnx-kit": {
-    "extends": "@fluentui-react-native/kit-config",
+    "extends": "@fluentui-react-native/scripts/kit-config",
     "kitType": "library",
     "alignDeps": {
       "capabilities": [

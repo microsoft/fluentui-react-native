@@ -25,11 +25,11 @@
     "change:check": "node .github/scripts/change.mts --check",
     "check-publishing": "node ./scripts/src/cli.ts check-publishing",
     "lint-fix": "cross-env FURN_FIX_MODE=true lage lint",
-    "lint-package-fix": "cross-env FURN_FIX_MODE=true lage lint-package",
     "preinstall": "node ./scripts/src/preinstall/use-yarn-please.ts",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "lint-lockfile": "lint-lockfile",
+    "lint-repo": "node ./scripts/src/tasks/lintRepo.ts",
     "test-links": "markdown-link-check"
   },
   "devDependencies": {
@@ -43,8 +43,10 @@
     "@changesets/cli": "^2.30.0",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/lint-lockfile": "catalog:",
+    "@yarnpkg/types": "^4.0.1",
     "babel-jest": "^29.7.0",
     "cross-env": "catalog:",
+    "knip": "catalog:",
     "lage": "catalog:",
     "markdown-link-check": "^3.8.7",
     "oxfmt": "^0.35.0",
@@ -63,6 +65,7 @@
   },
   "packageManager": "yarn@4.13.0",
   "rnx-kit": {
+    "extends": "./scripts/configs/rnx-kit/rnx-kit.config.cts",
     "kitType": "library"
   }
 }

@@ -16,9 +16,10 @@
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
+      "react-native": "./src/index.ts",
       "import": "./lib/index.js",
       "require": "./lib-commonjs/index.js",
-      "default": "./src/index.ts"
+      "default": "./src/index.tsx"
     }
   },
   "scripts": {
@@ -36,7 +37,6 @@
     "format": "fluentui-scripts format",
     "ios": "rnx-cli run --platform ios",
     "lint": "fluentui-scripts lint",
-    "lint-package": "fluentui-scripts lint-package",
     "macos": "rnx-cli run --platform macos",
     "start": "rnx-cli start",
     "windows": "react-native run-windows --arch x64 --sln windows/FluentTester.sln"
@@ -62,7 +62,6 @@
     "@fluentui-react-native/experimental-native-font-metrics": "workspace:*",
     "@fluentui-react-native/experimental-shimmer": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/menu-button": "workspace:*",
     "@fluentui-react-native/radio-group": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
@@ -178,6 +177,6 @@
         "test-app"
       ]
     },
-    "extends": "@fluentui-react-native/kit-config"
+    "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }

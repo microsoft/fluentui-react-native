@@ -27,7 +27,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "react": "18.2.0",
@@ -41,7 +40,7 @@
     "jestPlatform": "ios"
   },
   "rnx-kit": {
-    "extends": "@fluentui-react-native/kit-config",
+    "extends": "@fluentui-react-native/scripts/kit-config",
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
