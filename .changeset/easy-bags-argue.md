@@ -8,6 +8,7 @@
 "@fluentui-react-native/use-slot": minor
 "@fluentui-react-native/theme": minor
 "@fluentui-react-native/framework-base": minor
+"@fluentui-react-native/dependency-profiles": minor
 ---
 
 Switch packages to type module
