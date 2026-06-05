@@ -63,7 +63,5 @@ export const FluentTesterApp = (props: FluentTesterProps) => {
 
 // LogBox gets in the way of clicking on the theme button
 if (Platform.OS === 'windows') {
-  LogBox.ignoreLogs([
-    'DatePicker not supported',
-  ]);
+  LogBox.ignoreLogs(['DatePicker not supported']);
 }
