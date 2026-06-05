@@ -215,7 +215,7 @@ jobs:
       - name: Run E2E RNW tests
         shell: pwsh
         run: |
-          .\launchE2EWindows.ps1
+          .\launchE2EWindows.ps1 -enableDumpFiles
         working-directory: apps/E2E
 
       - name: Upload E2E Windows artifacts
