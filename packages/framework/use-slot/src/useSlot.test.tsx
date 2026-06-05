@@ -8,7 +8,7 @@ import * as renderer from 'react-test-renderer';
 import { act } from 'react';
 
 import { phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
-import { useSlot } from './useSlot';
+import { useSlot } from './useSlot.ts';
 
 type PluggableTextProps = TextProps & { inner?: FunctionComponent<TextProps> };
 

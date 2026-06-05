@@ -1,4 +1,4 @@
-import { getMemoCache, getTypedMemoCache } from './getMemoCache';
+import { getMemoCache, getTypedMemoCache } from './getMemoCache.ts';
 
 interface TestObj {
   id: number;

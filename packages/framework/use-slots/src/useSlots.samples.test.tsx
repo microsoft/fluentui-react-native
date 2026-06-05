@@ -6,7 +6,7 @@ import * as renderer from 'react-test-renderer';
 import { View, Text } from 'react-native';
 import type { ViewProps, TextProps, ViewStyle, TextStyle } from 'react-native';
 
-import { buildUseSlots } from './buildUseSlots';
+import { buildUseSlots } from './buildUseSlots.ts';
 
 /**
  * This file contains samples and description to help explain what the useSlots hook does and why it is useful

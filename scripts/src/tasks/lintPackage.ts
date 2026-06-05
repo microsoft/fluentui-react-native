@@ -66,8 +66,12 @@ export class LintPackageCommand extends Command {
     this.checkPrivateVersion();
     this.checkManifest();
     this.checkScripts();
-    this.checkEntryPoints(buildConfig);
-    this.checkBuildConfig(buildConfig);
+    if (!buildConfig.typescript.checkScript && this.projRoot.manifest.type === 'module') {
+      this.checkModuleConfig();
+    } else {
+      this.checkEntryPoints(buildConfig);
+      this.checkBuildConfig(buildConfig);
+    }
     this.checkDependencies();
     this.checkDevDeps();
     this.checkPeerDeps();
@@ -94,6 +98,42 @@ export class LintPackageCommand extends Command {
     if (code !== 0) {
       console.error(`lint-package: ${source} failed with code`, code);
       this.result = code;
+    }
+  }
+
+  private checkModuleConfig() {
+    const manifest = this.projRoot.manifest;
+    const scripts = manifest.scripts || {};
+    this.errorIf(scripts.build !== 'tsgo', 'Directly call tsgo for build script instead of using build-core', () => {
+      this.projRoot.updateRecordEntry('scripts', 'build', 'tsgo');
+    });
+    this.errorIf(scripts['build-core'] !== 'tsgo', 'Directly call tsgo for module packages', () => {
+      this.projRoot.updateRecordEntry('scripts', 'build-core', 'tsgo');
+    });
+    this.errorIf(scripts['build-cjs'] !== undefined, 'Module packages should not have a build-cjs script', () => {
+      this.projRoot.updateRecordEntry('scripts', 'build-cjs', undefined);
+    });
+    if (manifest.main !== './lib/index.js' || manifest.module !== './lib/index.js') {
+      this.errorIf(true, 'Module packages should have main and module point to ./lib/index.js', () => {
+        this.projRoot.setManifestEntry('main', './lib/index.js');
+        this.projRoot.setManifestEntry('module', './lib/index.js');
+      });
+    }
+    const defaultExport = manifest.exports?.['.'];
+    if (defaultExport) {
+      if (typeof defaultExport === 'string' || defaultExport.import !== './lib/index.js' || defaultExport.require !== './lib/index.js') {
+        this.errorIf(true, 'Module packages should have default export point to ./lib/index.js', () => {
+          this.projRoot.setManifestEntry('exports', {
+            ...manifest.exports,
+            '.': {
+              types: './lib/index.d.ts',
+              import: './lib/index.js',
+              require: './lib/index.js',
+              default: './src/index.ts',
+            },
+          });
+        });
+      }
     }
   }
 

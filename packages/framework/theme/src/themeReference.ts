@@ -1,6 +1,6 @@
 import type { Theme, PartialTheme } from '@fluentui-react-native/theme-types';
 
-import { mergeTheme } from './mergeTheme';
+import { mergeTheme } from './mergeTheme.ts';
 
 /**
  * Argument type for listening for theme changes

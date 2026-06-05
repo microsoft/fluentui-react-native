@@ -1,5 +1,5 @@
-import type { MergeOptions } from './Merge';
-import { immutableMerge, immutableMergeCore, processImmutable } from './Merge';
+import type { MergeOptions } from './Merge.ts';
+import { immutableMerge, immutableMergeCore, processImmutable } from './Merge.ts';
 
 interface IFakeStyle {
   s1?: string;

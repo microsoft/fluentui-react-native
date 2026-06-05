@@ -396,10 +396,6 @@ module.exports = {
       "name": "@fluentui-react-native/text",
       "version": "0.25.3"
     },
-    "@fluentui-react-native/lint-config-rules": {
-      "name": "@fluentui-react-native/lint-config-rules",
-      "version": "0.1.3"
-    },
     "@uifabricshared/foundation-composable": {
       "name": "@uifabricshared/foundation-composable",
       "version": "0.14.3"
