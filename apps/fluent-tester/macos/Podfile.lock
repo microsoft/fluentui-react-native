@@ -2663,7 +2663,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: cea1d4f90a3a59537f3deb03ff5656489d7133dd
-  DoubleConversion: d31b1eb37f6d6f456530c4fd9124b857d6889cab
+  DoubleConversion: 5b92c4507c560bb62e7aa1acdf2785ea3ff08b3b
   fast_float: 20817c22759af6ac8d4d67e6e059b8b499953656
   FBLazyVector: 0e3076dbb16169b0afc2d701a24a526423b5e76b
   fmt: 24e7591456deb60b4a77518f83d9a916ac84223f
@@ -2673,7 +2673,7 @@ SPEC CHECKSUMS:
   FRNMenuButton: 709f3218ce9a421c154ea0570acbeb3f535629d3
   FRNRadioButton: a0e58ac8a7be290778a30add5bdf41dc245e3483
   FRNVibrancyView: 96debdb9a1d2d9315c25748450a33fe2cb8b6321
-  glog: 0b31c25149b9d350b2666c7d459229861a00ec07
+  glog: ba31c1afa7dcf1915a109861bccdb4421be6175b
   hermes-engine: 9f4dfe93326146a1c99eb535b1cb0b857a3cd172
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: c803cf33238782d5fd21a5e02d44f64068e0e130
@@ -2743,7 +2743,7 @@ SPEC CHECKSUMS:
   ReactNativeHost: 66a23d7106b451f1a1087f565a45c839abef1e73
   ReactTestApp-DevSupport: 2852f266ad4b393124413d4290c16aff35892cf4
   ReactTestApp-Resources: 7625eab22d0a702577b048d60b5fb3f2e2f5b2a7
-  RNSVG: 866f818ba926c5d3f7863705abed51bb09d8ddd3
+  RNSVG: 7ee150379dc2a5ed4c9fdac92a5d6efab98e9cf7
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 6048a55441c73f8e3916a8eac6b83886708c77f9
 
