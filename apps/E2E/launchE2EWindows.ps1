@@ -1,8 +1,8 @@
 
 #Find package name of the react test app
-# $pkgName = (Get-AppxPackage -Name "40411fc5-8e92-4d46-b68d-b62df44b1366").PackageFamilyName
+$pkgName = (Get-AppxPackage -Name "40411fc5-8e92-4d46-b68d-b62df44b1366").PackageFamilyName
 
-#Start-Process -FilePath "$Env:ComSpec" -ArgumentList "/C", "start", "shell:AppsFolder\$pkgName!App"
+Start-Process -FilePath "$Env:ComSpec" -ArgumentList "/C", "start", "shell:AppsFolder\$pkgName!App"
 
 for ($i = 1; $i -le 10; $i++) {
 
