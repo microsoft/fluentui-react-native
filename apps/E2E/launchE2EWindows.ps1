@@ -7,9 +7,9 @@ Start-Process -FilePath "$Env:ComSpec" -ArgumentList "/C", "start", "shell:AppsF
 
 
 if ($enableDumpFiles) {
-  sudo reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps" /f
-  sudo reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\ReactApp.exe" /v DumpType /t REG_DWORD /d 2 /f
-  sudo reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\ReactApp.exe" /v DumpFolder /t REG_EXPAND_SZ /d "$PSScriptRoot\errorShots" /f
+  reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps" /f
+  reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\ReactApp.exe" /v DumpType /t REG_DWORD /d 2 /f
+  reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\ReactApp.exe" /v DumpFolder /t REG_EXPAND_SZ /d "$PSScriptRoot\errorShots" /f
 
   # Give time for regkeys to be set
   Start-Sleep -Seconds 5
