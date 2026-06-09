@@ -32,7 +32,6 @@
   },
   "scripts": {
     "build": "tsgo",
-    "build-core": "tsgo",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",

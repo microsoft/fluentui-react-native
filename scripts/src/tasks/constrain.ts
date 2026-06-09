@@ -9,6 +9,11 @@ export function constrain(workspace: Yarn.Constraints.Workspace): void {
   if (workspace.cwd !== 'scripts') {
     ctx.enforce('rnx-kit.extends', '@fluentui-react-native/scripts/kit-config');
   }
+  if (ctx.manifest.scripts?.build) {
+    ctx.enforce('scripts.build', 'tsgo');
+  }
+  ctx.enforce('scripts.build-cjs', undefined);
+  ctx.enforce('scripts.build-core', undefined);
   assertDeprecations(ctx);
   useCatalogs(ctx);
 }

@@ -3,8 +3,8 @@
   "compilerOptions": {
     "target": "esnext",
     "lib": ["esnext"],
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "outDir": "lib",
     "rewriteRelativeImportExtensions": true,
     "jsx": "react-jsx",

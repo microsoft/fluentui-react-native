@@ -1,8 +1,6 @@
 {
   "extends": "@fluentui-react-native/scripts/tsconfig",
   "compilerOptions": {
-    "module": "Node16",
-    "moduleResolution": "Node16",
     "outDir": "lib",
     "types": ["@types/jasmine", "@wdio/globals/types", "@wdio/jasmine-framework", "node"],
     "rootDir": "src"

@@ -15,7 +15,7 @@
     "scripts"
   ],
   "scripts": {
-    "build": "lage build-all",
+    "build": "lage build",
     "clean-all": "node ./scripts/src/preinstall/clean-all.ts",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle:repo": "lage bundle",

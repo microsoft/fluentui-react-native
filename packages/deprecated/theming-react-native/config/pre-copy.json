@@ -2,6 +2,6 @@
   "copyTo": {
     "lib": ["src/**/*.json"],
     "lib-amd": ["src/**/*.json"],
-    "lib-commonjs": ["src/**/*.json"]
+    "lib": ["src/**/*.json"]
   }
 }

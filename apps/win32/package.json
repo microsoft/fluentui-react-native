@@ -20,7 +20,6 @@
   },
   "scripts": {
     "build": "tsgo",
-    "build-core": "tsgo",
     "bundle": "rnx-cli bundle --dev false",
     "bundle-dev": "rnx-cli bundle",
     "clean": "fluentui-scripts clean",

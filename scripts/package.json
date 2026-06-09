@@ -28,7 +28,6 @@
   },
   "scripts": {
     "build": "tsgo",
-    "build-core": "tsgo",
     "bundlesize": "bundlesize --debug",
     "depcheck": "node ./src/cli.ts depcheck",
     "format": "node ./src/cli.ts format",
