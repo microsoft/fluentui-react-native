@@ -2,7 +2,38 @@
   "extends": "@fluentui-react-native/scripts/tsconfig",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../theming/default-theme/tsconfig.json"
+    },
+    {
+      "path": "../../framework-base/tsconfig.json"
+    },
+    {
+      "path": "../../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../../theming/theme-types/tsconfig.json"
+    },
+    {
+      "path": "../foundation-composable/tsconfig.json"
+    },
+    {
+      "path": "../foundation-settings/tsconfig.json"
+    },
+    {
+      "path": "../foundation-tokens/tsconfig.json"
+    },
+    {
+      "path": "../themed-settings/tsconfig.json"
+    },
+    {
+      "path": "../theming-ramp/tsconfig.json"
+    }
+  ]
 }

@@ -15,7 +15,7 @@
     "scripts"
   ],
   "scripts": {
-    "build": "lage build",
+    "build": "tsgo -b",
     "clean-all": "node ./scripts/src/preinstall/clean-all.ts",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle:repo": "lage bundle",
@@ -43,6 +43,7 @@
     "@changesets/cli": "^2.30.0",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/lint-lockfile": "catalog:",
+    "@typescript/native-preview": "7.0.0-dev.20260610.1",
     "@yarnpkg/types": "^4.0.1",
     "babel-jest": "^29.7.0",
     "cross-env": "catalog:",

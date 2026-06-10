@@ -26,7 +26,7 @@
     }
   },
   "scripts": {
-    "build": "tsgo",
+    "build": "tsgo -b",
     "e2eprep:android": "cross-env APPIUM_HOME=.appium yarn exec appium driver install uiautomator2",
     "e2eprep:ios": "cross-env APPIUM_HOME=.appium yarn exec appium driver install xcuitest",
     "e2eprep:macos": "cross-env APPIUM_HOME=.appium yarn exec appium driver install mac2",

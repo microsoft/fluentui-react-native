@@ -1,5 +1,7 @@
 import { getWorkspacesInfoSync } from '@rnx-kit/tools-workspaces';
 import { execSync } from 'node:child_process';
+import path from 'node:path';
+import fs from 'node:fs';
 
 /**
  * Get the cached repo context, which includes the root folder, workspace folders, and catalog.
@@ -20,6 +22,7 @@ export class RepoContext {
   private _root?: string;
   private _workspaceFolders?: string[];
   private _catalog?: Record<string, string>;
+  private _files: Record<string, boolean> = {};
 
   /**
    * Get the root folder for the repo. This is the folder that contains the lockfile
@@ -45,6 +48,24 @@ export class RepoContext {
       this._catalog = JSON.parse(output) as Record<string, string>;
     }
     return this._catalog;
+  }
+
+  hasFile(...parts: string[]): boolean {
+    let filePath = path.join(...parts);
+    if (!path.isAbsolute(filePath)) {
+      filePath = path.join(this.root, filePath);
+    }
+    return (this._files[filePath] ??= fs.existsSync(filePath));
+  }
+
+  pathTo(from: string, to: string): string {
+    if (!path.isAbsolute(from)) {
+      from = path.join(this.root, from);
+    }
+    if (!path.isAbsolute(to)) {
+      to = path.join(this.root, to);
+    }
+    return path.relative(from, to).replace(/\\/g, '/');
   }
 
   /**

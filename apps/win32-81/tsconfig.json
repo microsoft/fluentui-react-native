@@ -1,7 +1,14 @@
 {
-  "extends": "@fluentui-react-native/scripts/tsconfig",
-  "compilerOptions": {
-    "noEmit": true
-  },
-  "include": ["index.js"]
+  "files": [],
+  "references": [
+    {
+      "path": "../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../tester-core/tsconfig.json"
+    },
+    {
+      "path": "./targets/tsconfig.check.json"
+    }
+  ]
 }

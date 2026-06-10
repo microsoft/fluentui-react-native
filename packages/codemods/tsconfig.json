@@ -2,8 +2,18 @@
   "extends": "@fluentui-react-native/scripts/tsconfig",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
-  "exclude": ["src/transforms/__testfixtures__"]
+  "exclude": ["src/transforms/__testfixtures__"],
+  "references": [
+    {
+      "path": "../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../utils/test-tools/tsconfig.json"
+    }
+  ]
 }

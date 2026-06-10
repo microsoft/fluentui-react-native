@@ -4,7 +4,14 @@
     "outDir": "lib",
     "allowJs": true,
     "checkJs": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../scripts/tsconfig.json"
+    }
+  ]
 }

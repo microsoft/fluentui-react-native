@@ -27,7 +27,7 @@
     "./tsconfig-strict": "./configs/tsconfig/tsconfig.strict.json"
   },
   "scripts": {
-    "build": "tsgo",
+    "build": "tsgo -b",
     "bundlesize": "bundlesize --debug",
     "depcheck": "node ./src/cli.ts depcheck",
     "format": "node ./src/cli.ts format",
@@ -73,7 +73,7 @@
     "@rnx-kit/types-node": "catalog:",
     "@types/micromatch": "^4.0.9",
     "@types/node": "catalog:",
-    "@typescript/native-preview": "7.0.0-dev.20260113.1",
+    "@typescript/native-preview": "7.0.0-dev.20260610.1",
     "@yarnpkg/types": "^4.0.1",
     "chalk": "^4.0.0",
     "clipanion": "^4.0.0-rc.4",

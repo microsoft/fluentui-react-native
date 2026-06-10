@@ -3,7 +3,17 @@
   "compilerOptions": {
     "outDir": "lib",
     "types": ["@types/jasmine", "@wdio/globals/types", "@wdio/jasmine-framework", "node"],
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../packages/components/FocusZone/tsconfig.json"
+    },
+    {
+      "path": "../../scripts/tsconfig.json"
+    }
+  ]
 }

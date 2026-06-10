@@ -3,13 +3,6 @@ const config = {
   npmClient: 'yarn',
   pipeline: {
     // ── Per-package tasks ──────────────────────────────────────────────────
-    build: {
-      // the core build does esm builds (which produce type definitions used by both cjs and esm builds)
-      // this also handles noEmit packages which should be run in sequence with other packages
-      dependsOn: ['^build'],
-      inputs: ['*', 'src/**/*', 'assets/**/*'],
-      outputs: ['lib/**/*'],
-    },
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: ['dist/**/*'],
