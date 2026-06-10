@@ -36,7 +36,7 @@ export function constrain(workspace: Yarn.Constraints.Workspace): void {
       tsCtx.enforce('references', undefined);
     }
     targetTSConfigs.add(`${workspace.cwd}/tsconfig.json`);
-    if (tsCtx.raw.compilerOptions) {
+    if (!tsCtx.raw.files || tsCtx.raw.files.length > 0) {
       tsCtx.enforce('compilerOptions.composite', true);
       tsCtx.enforce('compilerOptions.tsBuildInfoFile', '.cache/tsconfig.tsbuildinfo');
     }
