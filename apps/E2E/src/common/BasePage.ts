@@ -78,11 +78,17 @@ export abstract class BasePage {
    */
   async navigateToPageAndLoadTests(): Promise<boolean | void> {
     // Desktop platforms automatically scroll to a page's navigation button - this extra step is purely for mobile platforms.
-    if (this.platform === 'android' || this.platform === 'ios') {
+    if (this.platform === 'android' || this.platform === 'ios' || this.platform === 'windows') {
       await this.mobileScrollToComponentButton();
     }
 
-    await this._pageButton.click();
+    if (this.platform === 'windows') {
+      const pageButton = await this._pageButton;
+      // sendKeys will move focus to the button, so we dont have to worry about the button being offscreen in the scrollable area.
+      await this.sendKeys(pageButton, [Keys.ENTER]);
+    } else {
+      await this._pageButton.click();
+    }
 
     // Wait for page to load
     return await this.waitForPageToLoad();

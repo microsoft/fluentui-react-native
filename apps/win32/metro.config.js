@@ -20,6 +20,11 @@ function ensureUniqueModule(moduleName, excludeList, nodeModules) {
 // build up the added excludes and extraNodeModules
 ['react-native-svg'].forEach((moduleName) => ensureUniqueModule(moduleName));
 
+// For some reason oxc-resolver does not find the unicode-segmenter module, so we need to explicitly add it
+extraNodeModules['unicode-segmenter'] = require('fs').realpathSync(
+  require('path').resolve('../../packages/components/Avatar/node_modules/unicode-segmenter'),
+);
+
 module.exports = async () => {
   const {
     resolver: { sourceExts, assetExts },

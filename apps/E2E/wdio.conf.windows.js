@@ -35,7 +35,7 @@ exports.config = {
       platformName: 'windows',
       'appium:automationName': 'windows',
       'appium:deviceName': 'WindowsPC',
-      'appium:app': '40411fc5-8e92-4d46-b68d-b62df44b1366_7c3z4tcdk8r62!App',
+      'appium:appTopLevelWindow': process.env['E2ETEST_APP_TOP_LEVEL_WINDOW'],
     },
   ],
 
