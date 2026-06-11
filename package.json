@@ -15,7 +15,7 @@
     "scripts"
   ],
   "scripts": {
-    "build": "tsgo -b --singleThreaded",
+    "build": "tsgo -b",
     "clean-all": "node ./scripts/src/preinstall/clean-all.ts",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle:repo": "lage bundle",

@@ -7,6 +7,7 @@
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
+  "exclude": ["src/__drift__"],
   "references": [
     {
       "path": "../../../scripts/tsconfig.json"

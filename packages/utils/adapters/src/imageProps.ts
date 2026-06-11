@@ -1,23 +1,17 @@
 import type { ImageProps, ImageStyle, StyleProp } from 'react-native';
-import type { ImageProps as ImagePropsWindows, ImageStyle as ImageStyleWindows } from 'react-native-windows';
-import type { ImageProps as ImagePropsMacOS, ImageStyle as ImageStyleMacOS } from 'react-native-macos';
-import type { ImageProps as ImagePropsWin32, ImageStyle as ImageStyleWin32 } from '@office-iss/react-native-win32';
+import type { ImageAdditions, CursorValue } from './platformProps';
 
 /**
- * Build up the styles type by combining the base ImageStyle with platform specific extensions,
- * omitting any overlapping keys to prevent conflicts.
+ * Build up the styles type by combining the base ImageStyle with the cross-platform extensions
+ * the React Native forks add (currently just `cursor`).
  */
-type ImageStyleWithMacOS = ImageStyle & Omit<ImageStyleMacOS, keyof ImageStyle>;
-type ImageStyleWithWindows = ImageStyleWithMacOS & Omit<ImageStyleWindows, keyof ImageStyleWithMacOS>;
-export type IImageStyle = ImageStyleWithWindows & Omit<ImageStyleWin32, keyof ImageStyleWithWindows>;
+export type IImageStyle = ImageStyle & { cursor?: CursorValue };
 
 /**
- * Build up the props type by combining the base ImageProps with platform specific extensions,
+ * Build up the props type by combining the base ImageProps with the platform-neutral fork additions,
  * omitting any overlapping keys to prevent conflicts and adding in the resolved style type
  */
-type ImagePropsWithMacOS = Omit<ImageProps, 'style'> & Omit<ImagePropsMacOS, keyof ImageProps>;
-type ImagePropsWithWindows = ImagePropsWithMacOS & Omit<ImagePropsWindows, keyof ImagePropsWithMacOS | 'style'>;
-export type IImageProps = ImagePropsWithWindows &
-  Omit<ImagePropsWin32, keyof ImagePropsWithWindows | 'style'> & {
+export type IImageProps = Omit<ImageProps, 'style'> &
+  Omit<ImageAdditions, keyof ImageProps | 'style'> & {
     style?: StyleProp<IImageStyle>;
   };

@@ -27,7 +27,8 @@
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "test": "fluentui-scripts jest",
+    "test": "fluentui-scripts jest && yarn verify-drift",
+    "verify-drift": "tsgo --noEmit -p src/__drift__/tsconfig.win32.json && tsgo --noEmit -p src/__drift__/tsconfig.windows.json && tsgo --noEmit -p src/__drift__/tsconfig.macos.json",
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "devDependencies": {

@@ -1,23 +1,17 @@
 import type { TextProps, TextStyle, StyleProp } from 'react-native';
-import type { TextProps as TextPropsWindows, TextStyle as TextStyleWindows } from 'react-native-windows';
-import type { TextProps as TextPropsMacOS, TextStyle as TextStyleMacOS } from 'react-native-macos';
-import type { TextProps as TextPropsWin32, TextStyle as TextStyleWin32 } from '@office-iss/react-native-win32';
+import type { TextAdditions, CursorValue } from './platformProps';
 
 /**
- * Build up the styles type by combining the base TextStyle with platform specific extensions,
- * omitting any overlapping keys to prevent conflicts.
+ * Build up the styles type by combining the base TextStyle with the cross-platform extensions
+ * the React Native forks add (currently just `cursor`).
  */
-type TextStyleWithMacOS = TextStyle & Omit<TextStyleMacOS, keyof TextStyle>;
-type TextStyleWithWindows = TextStyleWithMacOS & Omit<TextStyleWindows, keyof TextStyleWithMacOS>;
-export type ITextStyle = TextStyleWithWindows & Omit<TextStyleWin32, keyof TextStyleWithWindows>;
+export type ITextStyle = TextStyle & { cursor?: CursorValue };
 
 /**
- * Build up the props type by combining the base TextProps with platform specific extensions,
+ * Build up the props type by combining the base TextProps with the platform-neutral fork additions,
  * omitting any overlapping keys to prevent conflicts and adding in the resolved style type
  */
-type TextPropsWithMacOS = Omit<TextProps, 'style'> & Omit<TextPropsMacOS, keyof TextProps>;
-type TextPropsWithWindows = TextPropsWithMacOS & Omit<TextPropsWindows, keyof TextPropsWithMacOS | 'style'>;
-export type ITextProps = TextPropsWithWindows &
-  Omit<TextPropsWin32, keyof TextPropsWithWindows | 'style'> & {
+export type ITextProps = Omit<TextProps, 'style'> &
+  Omit<TextAdditions, keyof TextProps | 'style'> & {
     style?: StyleProp<ITextStyle>;
   };

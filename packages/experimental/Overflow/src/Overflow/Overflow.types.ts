@@ -1,6 +1,4 @@
-import type { View, ViewProps, ViewStyle } from 'react-native';
-
-import type { LayoutRectangle } from '@office-iss/react-native-win32';
+import type { View, ViewProps, ViewStyle, LayoutRectangle } from 'react-native';
 
 import type { OverflowItemEntry, OverflowUpdatePayload } from '../overflowManager.types';
 
