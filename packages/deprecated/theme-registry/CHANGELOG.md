@@ -1,5 +1,15 @@
 # Change Log - @uifabricshared/theme-registry
 
+## 0.13.4
+
+### Patch Changes
+
+- ce37a6d: Remove the final configuration package (moving it to scripts) and switch to running various package validation tasks from the root
+- ad85949: Configuration and dependency changes
+- 51ee2fe: Bump win32 to 0.81
+- f10715d: remove oxlint config package and move it into scripts
+- 1598157: Switch tsconfig settings to more modern settings
+
 ## 0.13.3
 
 ### Patch Changes

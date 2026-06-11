@@ -1,5 +1,28 @@
 # Change Log - @uifabricshared/foundation-compose
 
+## 1.16.4
+
+### Patch Changes
+
+- ce37a6d: Remove the final configuration package (moving it to scripts) and switch to running various package validation tasks from the root
+- ad85949: Configuration and dependency changes
+- f10715d: remove oxlint config package and move it into scripts
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [ce37a6d]
+- Updated dependencies [b5a686c]
+- Updated dependencies [ad85949]
+- Updated dependencies [51ee2fe]
+- Updated dependencies [f10715d]
+- Updated dependencies [1598157]
+  - @uifabricshared/foundation-composable@0.14.4
+  - @uifabricshared/foundation-settings@0.16.4
+  - @uifabricshared/foundation-tokens@0.16.4
+  - @uifabricshared/themed-settings@0.13.4
+  - @uifabricshared/theming-ramp@0.21.4
+  - @fluentui-react-native/default-theme@0.27.4
+  - @fluentui-react-native/theme-types@0.44.4
+  - @fluentui-react-native/framework-base@0.4.0
+
 ## 1.16.3
 
 ### Patch Changes

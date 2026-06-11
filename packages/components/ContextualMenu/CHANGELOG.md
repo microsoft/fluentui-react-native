@@ -1,5 +1,31 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
+## 0.25.4
+
+### Patch Changes
+
+- ce37a6d: Remove the final configuration package (moving it to scripts) and switch to running various package validation tasks from the root
+- ad85949: Configuration and dependency changes
+- 51ee2fe: Bump win32 to 0.81
+- f10715d: remove oxlint config package and move it into scripts
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [ce37a6d]
+- Updated dependencies [ad85949]
+- Updated dependencies [23aa900]
+- Updated dependencies [51ee2fe]
+- Updated dependencies [f10715d]
+- Updated dependencies [1598157]
+  - @uifabricshared/foundation-composable@0.14.4
+  - @uifabricshared/foundation-settings@0.16.4
+  - @uifabricshared/foundation-compose@1.16.4
+  - @fluentui-react-native/interactive-hooks@0.28.4
+  - @fluentui-react-native/focus-zone@0.22.4
+  - @fluentui-react-native/callout@0.28.4
+  - @fluentui-react-native/icon@0.22.4
+  - @fluentui-react-native/text@0.25.4
+  - @fluentui-react-native/adapters@0.14.4
+  - @fluentui-react-native/tokens@0.24.4
+
 ## 0.25.3
 
 ### Patch Changes
