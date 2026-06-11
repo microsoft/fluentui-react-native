@@ -14,9 +14,6 @@
       "path": "apps/win32/tsconfig.json"
     },
     {
-      "path": "apps/win32-81/tsconfig.json"
-    },
-    {
       "path": "packages/codemods/tsconfig.json"
     },
     {

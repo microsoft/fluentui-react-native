@@ -23,9 +23,6 @@
       "path": "../../packages/experimental/Checkbox/tsconfig.json"
     },
     {
-      "path": "../../packages/experimental/Expander/tsconfig.json"
-    },
-    {
       "path": "../../packages/experimental/NativeDatePicker/tsconfig.json"
     },
     {
