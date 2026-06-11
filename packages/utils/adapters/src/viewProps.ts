@@ -1,5 +1,12 @@
 import type RN from 'react-native';
-import type { ViewAdditions, CursorValue, AccessibilityAnnotationInfo, HandledKeyEvent, NativeKeyEvent, KeyEventHandler } from './platformProps';
+import type {
+  ViewAdditions,
+  CursorValue,
+  AccessibilityAnnotationInfo,
+  HandledKeyEvent,
+  NativeKeyEvent,
+  KeyEventHandler,
+} from './platformProps';
 
 export type { HandledKeyEvent, NativeKeyEvent, KeyEventHandler };
 
