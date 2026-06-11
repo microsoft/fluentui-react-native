@@ -17,13 +17,13 @@
   },
   "devDependencies": {
     "@fluentui-react-native/scripts": "workspace:*",
-    "@office-iss/react-native-win32": "^0.74.0",
+    "@office-iss/react-native-win32": "^0.81.8",
     "@types/react": "~18.2.0",
-    "react": "18.2.0",
-    "react-native": "^0.74.0",
-    "react-native-macos": "^0.74.0",
+    "react": "19.1.4",
+    "react-native": "^0.81.0",
+    "react-native-macos": "^0.81.0",
     "react-native-svg": ">=15.4.0 <15.13.0",
-    "react-native-windows": "^0.74.0",
+    "react-native-windows": "^0.81.0",
     "semver": "^7.7.3",
     "workspace-tools": "^0.26.3"
   },

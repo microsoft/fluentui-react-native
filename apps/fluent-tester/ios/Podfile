@@ -17,6 +17,6 @@ react_native_path = "#{__dir__}/../node_modules/react-native"
 
 use_test_app! do |target|
   target.app do
-    platform :ios, '15.0'
+    platform :ios, '16.0'
   end
 end
