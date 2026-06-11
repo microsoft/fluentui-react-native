@@ -11,7 +11,6 @@
 "@fluentui-react-native/themed-stylesheet": patch
 "@uifabricshared/themed-settings": patch
 "@fluentui-react-native/contextual-menu": patch
-"@fluentui-react-native/lint-config-rules": patch
 "@uifabricshared/theme-registry": patch
 "@fluentui-react-native/vibrancy-view": patch
 "@fluentui-react-native/focus-trap-zone": patch
