@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
+## 0.9.0
+
+### Minor Changes
+
+- b5a686c: Switch packages to type module
+
+### Patch Changes
+
+- ce37a6d: Remove the final configuration package (moving it to scripts) and switch to running various package validation tasks from the root
+- 51ee2fe: Bump win32 to 0.81
+
 ## 0.8.70
 
 ### Patch Changes

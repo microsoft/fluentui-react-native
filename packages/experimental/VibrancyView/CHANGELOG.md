@@ -1,5 +1,19 @@
 # Change Log - @fluentui-react-native/vibrancy-view
 
+## 0.4.4
+
+### Patch Changes
+
+- ce37a6d: Remove the final configuration package (moving it to scripts) and switch to running various package validation tasks from the root
+- ad85949: Configuration and dependency changes
+- f10715d: remove oxlint config package and move it into scripts
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [ce37a6d]
+- Updated dependencies [ad85949]
+- Updated dependencies [f10715d]
+- Updated dependencies [1598157]
+  - @fluentui-react-native/adapters@0.14.4
+
 ## 0.4.3
 
 ### Patch Changes
