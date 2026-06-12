@@ -15,7 +15,6 @@
   "main": "./src/index.ts",
   "exports": {
     ".": {
-      "require": "./src/index.ts",
       "default": "./src/index.ts"
     },
     "./babel-config": "./configs/jest/babel.config.cjs",

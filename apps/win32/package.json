@@ -14,7 +14,6 @@
     ".": {
       "react-native": "./index.ts",
       "import": "./index.js",
-      "require": "./index.js",
       "default": "./src/index.tsx"
     }
   },

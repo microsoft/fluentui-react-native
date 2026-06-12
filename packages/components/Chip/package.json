@@ -13,7 +13,6 @@
       "types": "./lib/index.d.ts",
       "react-native": "./src/index.ts",
       "import": "./lib/index.js",
-      "require": "./lib/index.js",
       "default": "./src/index.ts"
     }
   },
