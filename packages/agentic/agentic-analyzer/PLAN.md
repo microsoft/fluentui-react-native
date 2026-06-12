@@ -8,7 +8,7 @@ A test/analysis toolkit that lets us **safely refactor** v1 components by:
 
 1. building a **sentinel theme** whose every leaf value is unique,
 2. rendering components with **`@testing-library/react-native`** to capture accessibility trees, computed styles, and snapshots, and
-3. **reverse-mapping** resolved style values back to the exact theme/token slot they came from — so a refactor that changes *which* token feeds a style is caught even when the final pixel value is unchanged.
+3. **reverse-mapping** resolved style values back to the exact theme/token slot they came from — so a refactor that changes _which_ token feeds a style is caught even when the final pixel value is unchanged.
 
 Plus a strategy for **multiplexing jest per platform**.
 
@@ -29,9 +29,9 @@ Plus a strategy for **multiplexing jest per platform**.
 
 1. **Sentinel theme + reverse map** — `createSentinelTheme(base?)` clones a real `Theme`, replacing every leaf with a unique type-valid sentinel (colors → reserved unique hex; spacing → unique `'NNNpx'`; numeric sizes/shadows → reserved integers; strings → reserved-but-valid pool), emitting a `SentinelMap: value → "colors.buttonBackground" | "spacing.m" | …`. `createSentinelGlobalTokens()` + a jest mock factory for `@fluentui-react-native/theme-tokens` covers the static namespace. `resolveStyleToSemantic(style)` walks a computed RN style and substitutes sentinels with semantic names.
 2. **testing-library helpers** — `renderWithTheme(el, {theme?, platform?})`, `getAccessibilityTree(result)`, `getComputedStyles(result, query)`, `snapshotSemantic(result)` (snapshot with sentinel→semantic substitution; stable across pixel changes, sensitive to slot-source changes).
-3. **Pinning** — `pinComponent(Component, scenarios)` producing **dual** snapshots: a *value* snapshot (catches visual regressions) + a *semantic* snapshot (catches silent token-source swaps). Drives the v1 state matrix (hovered/pressed/disabled/checked via `.customize`/state layers).
+3. **Pinning** — `pinComponent(Component, scenarios)` producing **dual** snapshots: a _value_ snapshot (catches visual regressions) + a _semantic_ snapshot (catches silent token-source swaps). Drives the v1 state matrix (hovered/pressed/disabled/checked via `.customize`/state layers).
 4. **Per-platform jest multiplexing** — `makeJestConfig(platform)` that takes the platform from `FURN_JEST_PLATFORM` (falling back to `furn.jestPlatform`), and a `multiplex` runner that, for a `furn.jestPlatforms: [...]` array, spawns one jest process per platform with platform-suffixed snapshot dirs (preserving the one-platform-per-process model the preset requires — and respecting the AGENTS.md "no multiple RN forks in one program" rule).
-5. **OKLCH interaction algorithm (home + validator).** A JS port of the x3-design hover/pressed derivation — `--lightness-{hover,press}`/`--alpha-{hover,press}` deltas, the lightness curve `1 + clamp(0, (0.40 - L)/0.20, 1)`, and the `loud`/`heavy`/`onloud` inverse rule (per the `tokens-interaction` skill). This is the **single home** of the algorithm. Two consumers: (a) `agentic-analyzer` uses it to **validate** that `agentic-tokens`' shipped precomputed hover/pressed values match what the algorithm produces from the rest generics — a regression guard on both rest tokens and the formula; (b) `agentic-tokens`' build-time generator imports it (dev dependency only) to *produce* those precomputed values, so the runtime token output stays static and analyzer-free. Pin tests assert solid/inverse/transparent cases against the worked examples in the skill.
+5. **OKLCH interaction algorithm (home + validator).** A JS port of the x3-design hover/pressed derivation — `--lightness-{hover,press}`/`--alpha-{hover,press}` deltas, the lightness curve `1 + clamp(0, (0.40 - L)/0.20, 1)`, and the `loud`/`heavy`/`onloud` inverse rule (per the `tokens-interaction` skill). This is the **single home** of the algorithm. Two consumers: (a) `agentic-analyzer` uses it to **validate** that `agentic-tokens`' shipped precomputed hover/pressed values match what the algorithm produces from the rest generics — a regression guard on both rest tokens and the formula; (b) `agentic-tokens`' build-time generator imports it (dev dependency only) to _produce_ those precomputed values, so the runtime token output stays static and analyzer-free. Pin tests assert solid/inverse/transparent cases against the worked examples in the skill.
 
 ## Proposed structure
 
@@ -51,7 +51,7 @@ agentic-analyzer/
 
 ## Dependencies & intersections
 
-- **agentic-concepts:** concepts owns *what to pin* (component catalog + scenario matrix + assertion contract); analyzer owns the *machinery* those specs call.
+- **agentic-concepts:** concepts owns _what to pin_ (component catalog + scenario matrix + assertion contract); analyzer owns the _machinery_ those specs call.
 - **agentic-tokens:** analyzer's reverse map is the bridge proving a refactor from old refs → x3-design `--gnrc-*` generics preserves resolved values. `createTokens` is the sentinel injection point. Because hover/pressed are **derived** (OKLCH deltas, precomputed for RN), the analyzer must also assert each derived interaction value matches the algorithm — so pins catch both rest-token and delta-formula regressions.
 - **agentic-components:** provides the parity gate — new components must reproduce v1's pinned a11y tree / styles / snapshots.
 - Internal: reuse `Theme`/`useTheme` (theme-types), `ThemeProvider` (theme); may supersede `test-tools`' `mockTheme` as the sentinel base.
@@ -69,7 +69,7 @@ agentic-analyzer/
 
 1. **Scaffold + deps:** create package, add `@testing-library/react-native`, get a trivial `renderWithTheme` passing for one component (Button, ios) under the existing preset.
 2. **Sentinel theme + reverse map** over the theme namespace; prove `resolveStyleToSemantic` round-trips on a real component.
-2b. **OKLCH interaction module** (`interaction/`) — port the deltas + lightness curve + inverse rule; unit-test against the skill's worked examples. Land this early: `agentic-tokens`' Stage-2 build depends on it to precompute hover/pressed, and the analyzer uses it to validate them.
+   2b. **OKLCH interaction module** (`interaction/`) — port the deltas + lightness curve + inverse rule; unit-test against the skill's worked examples. Land this early: `agentic-tokens`' Stage-2 build depends on it to precompute hover/pressed, and the analyzer uses it to validate them.
 3. **globalTokens sentinel + jest mock;** extend reverse map to `globalTokens.*`.
 4. **Extraction + semantic snapshots** (`getAccessibilityTree`/`getComputedStyles`/`snapshotSemantic`).
 5. **Pinning API + state matrix;** hand off to `agentic-concepts` to author per-component specs.

@@ -21,7 +21,7 @@ A distributable bundle of agent **skills**, **instructions**, and an optional **
 - **microsoft/fluentui (web) pattern (verified):** a terse **router `AGENTS.md`** (critical rules → one golden template → anti-patterns → link tables → a Skills table → package layout) plus **verb-decomposed skills** canonical at `.agents/skills/<name>/SKILL.md`, **mirrored** at `.claude/skills/<name>/SKILL.md` as a one-line transclusion (`@../../../.agents/skills/<name>/SKILL.md`). `SKILL.md` = YAML frontmatter (`name`, `description`, `disable-model-invocation?`, `argument-hint`, `allowed-tools`) + imperative `## Steps` (numbered, fenced commands) + local `## Rules`/`## Anti-patterns`. Bulky knowledge offloaded to a `references/` subdir ("fat skill").
 - **Fluent Headless / Fluent Modern doc (received):** defines the strategy the authoring agent implements — ship behavior as stable unstyled primitives in **three forms** (`X` / `useX` / `renderX`), keep the styled (Modern/token) layer a swappable concern on top. The agent's output must follow this split.
 - **x3-design token skills (received):** the `SKILL.md` format to mirror — YAML frontmatter (`name`, `description`, `argument-hint`) + a `| Field | Value |` table (Type/Category/Related) + a "Files in this skill" table + reference `*.yaml`. The token plugin's three skills (`core` primitives/generics, `interaction` hover/pressed derivation, `textstyle` bundles) are the canonical vocabulary the `token-lookup` skill resolves against.
-- **This repo:** has a root `AGENTS.md` + `CLAUDE.md`; `apps/component-generator` is a **Gulp string-replacement scaffolder** emitting the **old compose/tokens** shape — i.e. it generates the *legacy anti-pattern*; the authoring skill must target the new flat three-forms `agentic-components` shape, not wrap the legacy generator. No `SKILL.md`/`.agents/` exist yet.
+- **This repo:** has a root `AGENTS.md` + `CLAUDE.md`; `apps/component-generator` is a **Gulp string-replacement scaffolder** emitting the **old compose/tokens** shape — i.e. it generates the _legacy anti-pattern_; the authoring skill must target the new flat three-forms `agentic-components` shape, not wrap the legacy generator. No `SKILL.md`/`.agents/` exist yet.
 
 ## Proposed structure (PROVISIONAL — pending sources)
 
@@ -49,7 +49,7 @@ Plus repo-root discovery stubs (one-line transclusions — no duplication, exact
 .claude/skills/<name>/SKILL.md  ->  @../../../packages/agentic/agentic-authoring/skills/<name>/SKILL.md
 ```
 
-**MCP server: optional, later.** Skills alone (markdown + the agent's native file/bash tools) cover most authoring. Add the MCP server once `agentic-tokens`/`agentic-analyzer` exist, where deterministic repo-aware ops beat free-form tool use (`resolve_token`, `scaffold_component`, `get_component_spec`, `run_pin_tests`). Skills should *prefer* MCP tools when present, falling back to Bash/Read.
+**MCP server: optional, later.** Skills alone (markdown + the agent's native file/bash tools) cover most authoring. Add the MCP server once `agentic-tokens`/`agentic-analyzer` exist, where deterministic repo-aware ops beat free-form tool use (`resolve_token`, `scaffold_component`, `get_component_spec`, `run_pin_tests`). Skills should _prefer_ MCP tools when present, falling back to Bash/Read.
 
 ## How the agent authors a component (`/new-component Badge`)
 
@@ -70,9 +70,9 @@ Plus repo-root discovery stubs (one-line transclusions — no duplication, exact
 
 ## Open questions
 
-- **Sequencing:** thin without the other four — build with stubs/contracts early, fill as they land (it's the *last* useful workstream).
+- **Sequencing:** thin without the other four — build with stubs/contracts early, fill as they land (it's the _last_ useful workstream).
 - **MCP vs skills duplication:** keep logic in one place (MCP server or shared lib); skills call it to avoid drift.
-- **"Distributable" target:** shipping `skills/` + `AGENTS.md` in npm is easy; discoverability in a *consumer* repo needs an install step — `npx … init` or `postinstall` to copy/transclude into the consumer's `.claude`/`.agents`.
+- **"Distributable" target:** shipping `skills/` + `AGENTS.md` in npm is easy; discoverability in a _consumer_ repo needs an install step — `npx … init` or `postinstall` to copy/transclude into the consumer's `.claude`/`.agents`.
 - **Multi-runtime:** Claude (`.claude/skills`) covered by transclusion; Copilot (`.github/instructions`) / Cursor (`.cursor/rules`) need generated adapters if in scope.
 
 ## Phased plan

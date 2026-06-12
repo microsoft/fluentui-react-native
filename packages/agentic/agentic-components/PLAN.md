@@ -9,7 +9,7 @@
 A flat component library that recreates the v1 components in the modern Fluent structure, applying the **Fluent Headless → Fluent Modern** strategy to React Native:
 
 - **Headless layer** — stable, public, **unstyled** primitives that own behavior, ARIA/accessibility, keyboard handling, and semantic structure. **No pixels, no design props.** Each component ships **three forms** (matching the docx): the primitive component `X`, the stable hook `useX`, and the render function `renderX`.
-- **Modern layer** — the headless primitive **plus tokens** (`agentic-tokens`), native-first and lightweight. Styling is a *swappable concern* layered on top of the same headless behavior.
+- **Modern layer** — the headless primitive **plus tokens** (`agentic-tokens`), native-first and lightweight. Styling is a _swappable concern_ layered on top of the same headless behavior.
 
 It deliberately avoids `compose`/`customize`/`buildProps`/`stylingSettings`. Components depend only on shared sibling dirs (`hooks/`, `tokens/`, `styles/`, `helpers/`) and `agentic-tokens` — **never on each other**.
 
@@ -53,13 +53,13 @@ agentic-components/
 
 ## Web/Headless → RN bridges
 
-| Fluent web | RN replacement (in shared dirs) |
-|---|---|
-| Griffel `makeStyles`/`mergeClasses` | RN style objects + `helpers/mergeStyles` (user style wins last) |
-| `--gnrc-*` CSS vars + OKLCH runtime interaction | `useTokens()` generic object + **precomputed** interaction from `agentic-tokens` (RN has no runtime OKLCH) |
-| `react-aria`/`react-tabster`, focusgroup roving tabindex | RN `accessibility*` props + `interactive-hooks` (+ `FocusZone`) behind `hooks/` |
-| native `popover`/`<dialog>`/anchor positioning | RN equivalents / existing furn Callout/Popover primitives (headless behavior only) |
-| `slot.always` + jsx-runtime | render RN primitives directly; optional `helpers/getNativeProps` for prop filtering |
+| Fluent web                                               | RN replacement (in shared dirs)                                                                            |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Griffel `makeStyles`/`mergeClasses`                      | RN style objects + `helpers/mergeStyles` (user style wins last)                                            |
+| `--gnrc-*` CSS vars + OKLCH runtime interaction          | `useTokens()` generic object + **precomputed** interaction from `agentic-tokens` (RN has no runtime OKLCH) |
+| `react-aria`/`react-tabster`, focusgroup roving tabindex | RN `accessibility*` props + `interactive-hooks` (+ `FocusZone`) behind `hooks/`                            |
+| native `popover`/`<dialog>`/anchor positioning           | RN equivalents / existing furn Callout/Popover primitives (headless behavior only)                         |
+| `slot.always` + jsx-runtime                              | render RN primitives directly; optional `helpers/getNativeProps` for prop filtering                        |
 
 ## First components (pattern-setters)
 
@@ -79,7 +79,7 @@ agentic-components/
 
 - **`Text` flat-rule:** Button should render RN `Text` styled by shared `textStyles` (pure-flat) rather than import a sibling `Text` component — requires perfect typography parity from the `textstyle-*` bundles.
 - **Headless vs Modern packaging:** one package exporting both unstyled (`useX`/`renderX`) and styled (`X`) forms, or split headless into its own entry/subpath later? (Recommend one package, two entry points: `.../headless` and the default Modern.)
-- **Derived interaction parity:** the styles hook must request the right hover/pressed for the *active* rest token in multi-state components; confirm the analyzer pins these.
+- **Derived interaction parity:** the styles hook must request the right hover/pressed for the _active_ rest token in multi-state components; confirm the analyzer pins these.
 - Platform forks: keep per-platform files (`useButtonStyles.win32.ts`, ripple, two-tone focus, Win32 keyboard quirks).
 - Animation parity (Switch `Animated.Value`) → `hooks/useSwitchAnimation`; confirm analyzer can pin animated styles.
 - Memoization: replace v1 `buildProps`/`getMemoCache` with `useMemo` keyed on theme + state flags in `useXStyles`.

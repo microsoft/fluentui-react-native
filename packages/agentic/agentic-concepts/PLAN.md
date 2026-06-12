@@ -6,7 +6,7 @@
 
 The shared **vocabulary** of furn: a small, framework-agnostic set of TypeScript concept types, a machine-readable component **catalog**, and agent-facing **skill docs** that teach a human or an agent how to read the existing v1 (composition-framework) components and author new ones with consistent states, appearance, interactions, accessibility, and token usage.
 
-This is the dependency-light **leaf** package the other agentic workstreams build on. It owns *concept definitions, the component inventory, and prose*. It does **not** own runtime styling, the new token object (→ `agentic-tokens`), or the test harness (→ `agentic-analyzer`).
+This is the dependency-light **leaf** package the other agentic workstreams build on. It owns _concept definitions, the component inventory, and prose_. It does **not** own runtime styling, the new token object (→ `agentic-tokens`), or the test harness (→ `agentic-analyzer`).
 
 ## Identity
 
@@ -18,7 +18,7 @@ This is the dependency-light **leaf** package the other agentic workstreams buil
 
 Every v1 component follows one regular shape (`compose<TType>({ ...stylingSettings, slots, useRender })`) reducible to a small concept set:
 
-- **States** = interaction (`hovered|pressed|focused`, from `usePressableState`) × semantic (`disabled|checked|toggled|selected|required|visited`). These become *nested token layers* selected by a `lookup` predicate and `applyTokenLayers`.
+- **States** = interaction (`hovered|pressed|focused`, from `usePressableState`) × semantic (`disabled|checked|toggled|selected|required|visited`). These become _nested token layers_ selected by a `lookup` predicate and `applyTokenLayers`.
 - **Appearance** = `appearance` × `size` × `shape` × `labelPosition` (per-family enums; defaults are platform-specific).
 - **Interactions** = press (`useOnPressWithFocus`), keyboard (`useKeyProps` → macOS `validKeys*` vs Win32/Windows `keyDownEvents`), toggle/selection (`useAsToggleWithEvent`, `useSelectedKey`), focus (`useViewCommandFocus`, `FocusZone`).
 - **Accessibility** = roles (`button`/`checkbox`/`switch`/`radio`/`tab`/`link`), `getAccessibilityState`, label-from-first-string-child, `accessibilityActions`, pos/setSize.
@@ -59,7 +59,7 @@ agentic-concepts/
 ## Dependencies & intersections
 
 - **No** dependency on framework/component/testing packages (stays a leaf).
-- **agentic-tokens:** `TokenReference` here = the *old→new mapping input*; tokens defines the future object, concepts catalogs current usage. Share the **state vocabulary**.
+- **agentic-tokens:** `TokenReference` here = the _old→new mapping input_; tokens defines the future object, concepts catalogs current usage. Share the **state vocabulary**.
 - **agentic-analyzer:** concepts = spec/data; analyzer = mechanism.
 - **agentic-components:** concepts is the authoring contract; new components satisfy the same `ConceptualComponent` + matrix.
 - **agentic-authoring:** ships `skills/` as the agent payload (same `SKILL.md` format).
@@ -69,7 +69,7 @@ agentic-concepts/
 - Type duplication vs coupling (re-stating component unions risks drift → add a catalog-vs-source drift check, likely in analyzer).
 - Encode per-platform concept deltas (Win32 two-tone focus, Android ripple) as explicit catalog data? (Recommend yes.)
 - Matrix-explosion cap / "conceptually significant" pruning rule.
-- Typography: map the legacy/v9 variants onto the x3-design `textstyle-*` bundles (`agentic-tokens` owns the taxonomy; concepts catalogs the mapping). Note interaction states are *derived* (rest token + delta), not enumerated — the catalog records rest tokens + which categories get `interaction.applies-to`.
+- Typography: map the legacy/v9 variants onto the x3-design `textstyle-*` bundles (`agentic-tokens` owns the taxonomy; concepts catalogs the mapping). Note interaction states are _derived_ (rest token + delta), not enumerated — the catalog records rest tokens + which categories get `interaction.applies-to`.
 
 ## Phased plan
 

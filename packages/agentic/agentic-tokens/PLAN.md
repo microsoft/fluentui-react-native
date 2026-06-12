@@ -58,7 +58,7 @@ The x3-design model does **not** ship `…Hover`/`…Pressed` slots. Hover/press
 
 **Web does this at runtime via OKLCH relative color. React Native cannot** (no relative-color/OKLCH at runtime) — so RN is a **"pre-compiled environment"** (the same bucket as iOS/Android/Figma in the skill). **Decision: `agentic-tokens` ships PRECOMPUTED hover/pressed values**, and the OKLCH derivation **algorithm lives in `agentic-analyzer`** (deltas + lightness curve + inverse rule) where it is used to **validate** that the precomputed values are correct. Therefore:
 
-- `agentic-tokens` exposes concrete precomputed interaction values (no runtime OKLCH). These are generated at build/theme-creation time; the generator reuses the analyzer's OKLCH implementation as a **build-time/dev dependency** so the *runtime* token output stays static with **zero analyzer dependency**, and there is a single source of the algorithm.
+- `agentic-tokens` exposes concrete precomputed interaction values (no runtime OKLCH). These are generated at build/theme-creation time; the generator reuses the analyzer's OKLCH implementation as a **build-time/dev dependency** so the _runtime_ token output stays static with **zero analyzer dependency**, and there is a single source of the algorithm.
 - `agentic-analyzer` re-derives the expected hover/pressed from the rest generics + `interaction-deltas` and asserts the shipped precomputed values match — a regression guard on both the rest tokens and the formula.
 - Components declare which categories get interaction via an **`interaction.applies-to: [background, foreground, stroke]`** block (carried in each component's token map, see `agentic-components`). For a multi-state component (Selected/Checked/Expanded), hover/pressed derive from the **active rest token** for that state-axis value.
 - API sketch: `tokens.color.backgroundNeutralSubtle` (rest) + `interactionState(token, 'hover'|'pressed')` returning the precomputed value; or a per-component resolved set keyed by `{state-axis × interaction-state}`.
@@ -75,24 +75,24 @@ The x3-design model does **not** ship `…Hover`/`…Pressed` slots. Hover/press
 
 ## OLD → NEW mapping (furn v1 → x3 generics)
 
-| OLD (furn) | NEW generic |
-|---|---|
-| `colors.neutralForeground1` / legacy `buttonText` / `bodyText` | `color-foreground-neutral-primary` |
-| `colors.neutralForeground2/3` | `color-foreground-neutral-secondary` / `-tertiary` |
-| `colors.neutralForegroundDisabled` | `color-foreground-neutral-disabled` |
-| `colors.neutralForegroundOnBrand` / `OnColor` | `color-foreground-{neutral|brand}-onloud` |
-| `colors.neutralBackground1` / legacy `buttonBackground` / `defaultBackground` | `color-background-neutral-subtle` |
-| `colors.brandBackground` (rest) | `color-background-brand-heavy` (Primary button rest) |
-| `colors.brandBackgroundPressed` | *(derived from `background-brand-heavy` via press delta — not a slot)* |
-| `colors.subtleBackground*` / `ghost*` | `color-background-neutral-transparent` (+ derived hover/press) |
-| `colors.neutralStroke1/2/3` / `buttonBorder` | `color-stroke-neutral-{soft|subtle|loud}` |
-| `colors.strokeFocus1` / `strokeFocus2` | `color-stroke-focus-inner` / `color-stroke-focus-outer` |
-| `colors.redForeground1` (Checkbox required) | `color-foreground-danger-primary` |
-| `variant: 'body1'` → `typography.variants.*` | `textstyle-functional-body-medium` (+ `-strong`) |
-| `globalTokens.font.weight.semibold` | `font-weight-semibold` |
-| `globalTokens.size80/120` (padding) | `spacing-component-base-{…}` |
-| `globalTokens.stroke.width10/20` | `stroke-width-thin` / `stroke-width-thick` |
-| `globalTokens.corner.radius*` | furn-local radius ramp **derived from current v1 component usage** (no x3 generic exists yet) |
+| OLD (furn)                                                                    | NEW generic                                                                                   |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | -------------- | ------ |
+| `colors.neutralForeground1` / legacy `buttonText` / `bodyText`                | `color-foreground-neutral-primary`                                                            |
+| `colors.neutralForeground2/3`                                                 | `color-foreground-neutral-secondary` / `-tertiary`                                            |
+| `colors.neutralForegroundDisabled`                                            | `color-foreground-neutral-disabled`                                                           |
+| `colors.neutralForegroundOnBrand` / `OnColor`                                 | `color-foreground-{neutral                                                                    | brand}-onloud` |
+| `colors.neutralBackground1` / legacy `buttonBackground` / `defaultBackground` | `color-background-neutral-subtle`                                                             |
+| `colors.brandBackground` (rest)                                               | `color-background-brand-heavy` (Primary button rest)                                          |
+| `colors.brandBackgroundPressed`                                               | _(derived from `background-brand-heavy` via press delta — not a slot)_                        |
+| `colors.subtleBackground*` / `ghost*`                                         | `color-background-neutral-transparent` (+ derived hover/press)                                |
+| `colors.neutralStroke1/2/3` / `buttonBorder`                                  | `color-stroke-neutral-{soft                                                                   | subtle         | loud}` |
+| `colors.strokeFocus1` / `strokeFocus2`                                        | `color-stroke-focus-inner` / `color-stroke-focus-outer`                                       |
+| `colors.redForeground1` (Checkbox required)                                   | `color-foreground-danger-primary`                                                             |
+| `variant: 'body1'` → `typography.variants.*`                                  | `textstyle-functional-body-medium` (+ `-strong`)                                              |
+| `globalTokens.font.weight.semibold`                                           | `font-weight-semibold`                                                                        |
+| `globalTokens.size80/120` (padding)                                           | `spacing-component-base-{…}`                                                                  |
+| `globalTokens.stroke.width10/20`                                              | `stroke-width-thin` / `stroke-width-thick`                                                    |
+| `globalTokens.corner.radius*`                                                 | furn-local radius ramp **derived from current v1 component usage** (no x3 generic exists yet) |
 
 (Full crosswalk finalized during Stage 2; the `loud`/`heavy`/`onloud` inverse-rule names must be tracked so derived interaction uses the correct sign.)
 
