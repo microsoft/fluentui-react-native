@@ -204,7 +204,7 @@ jobs:
         working-directory: apps/E2E
 
       - name: Start packager
-        run: cmd /c "start yarn start"
+        run: cmd /c "start /B cmd /c yarn start ^> packager.log 2^>^&1"
         working-directory: apps/fluent-tester
 
       # First build of RNW may fail with  Cannot open include file: 'CppWinRTIncludes.h' error
@@ -227,6 +227,7 @@ jobs:
           path: |
             apps/E2E/reports
             apps/E2E/errorShots
+            apps/fluent-tester/packager.log
 
   win32:
     name: Win32 PR
