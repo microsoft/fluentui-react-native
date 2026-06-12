@@ -9,6 +9,7 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/components/Persona"
   },
+  "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",

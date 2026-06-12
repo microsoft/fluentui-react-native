@@ -8,6 +8,7 @@
     "url": "git@github.com:microsoft/fluentui-react-native.git",
     "directory": "packages/libraries/core"
   },
+  "type": "module",
   "sideEffects": false,
   "main": "lib/index.js",
   "module": "lib/index.js",

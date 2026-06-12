@@ -169,10 +169,7 @@ export class DepCheckRunner {
           this.projectRoot.updateRecordEntry('devDependencies', dep, undefined);
         }
       }
-      console.warn(
-        prefix,
-        `Removed unused devDependencies: ${this.removedDevDeps.map((dep) => this.formatter.package(dep)).join(', ')}`,
-      );
+      console.warn(prefix, `Removed unused devDependencies: ${this.removedDevDeps.map((dep) => this.formatter.package(dep)).join(', ')}`);
     }
     if (this.removedDeps.length > 0) {
       if (!this.dryRun) {

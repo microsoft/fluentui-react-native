@@ -9,6 +9,7 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/components/Button"
   },
+  "type": "module",
   "sideEffects": false,
   "main": "lib/index.js",
   "module": "lib/index.js",

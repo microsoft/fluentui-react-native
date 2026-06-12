@@ -58,25 +58,25 @@ module.exports = {
       "name": "@fluentui-react-native/link",
       "version": "0.24.3"
     },
-    "@fluentui-react-native/menu-button": {
-      "name": "@fluentui-react-native/menu-button",
-      "version": "0.14.3"
-    },
     "@fluentui-react-native/menu": {
       "name": "@fluentui-react-native/menu",
       "version": "1.15.3"
+    },
+    "@fluentui-react-native/menu-button": {
+      "name": "@fluentui-react-native/menu-button",
+      "version": "0.14.3"
     },
     "@fluentui-react-native/notification": {
       "name": "@fluentui-react-native/notification",
       "version": "0.26.3"
     },
-    "@fluentui-react-native/persona-coin": {
-      "name": "@fluentui-react-native/persona-coin",
-      "version": "0.16.3"
-    },
     "@fluentui-react-native/persona": {
       "name": "@fluentui-react-native/persona",
       "version": "0.17.3"
+    },
+    "@fluentui-react-native/persona-coin": {
+      "name": "@fluentui-react-native/persona-coin",
+      "version": "0.16.3"
     },
     "@fluentui-react-native/pressable": {
       "name": "@fluentui-react-native/pressable",
@@ -395,6 +395,10 @@ module.exports = {
     "@fluentui-react-native/text": {
       "name": "@fluentui-react-native/text",
       "version": "0.25.3"
+    },
+    "@fluentui-react-native/lint-config-rules": {
+      "name": "@fluentui-react-native/lint-config-rules",
+      "version": "0.1.3"
     },
     "@uifabricshared/foundation-composable": {
       "name": "@uifabricshared/foundation-composable",

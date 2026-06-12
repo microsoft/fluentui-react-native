@@ -10,6 +10,7 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/theming/android-theme"
   },
+  "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",

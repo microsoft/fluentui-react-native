@@ -5,6 +5,7 @@
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
