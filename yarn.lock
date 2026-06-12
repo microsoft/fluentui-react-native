@@ -5073,7 +5073,7 @@ __metadata:
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
-    react-native-test-app: "npm:^5.1.10"
+    react-native-test-app: "npm:^5.2.3"
     react-native-windows: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.4"
     webdriverio: "catalog:"
@@ -5164,7 +5164,7 @@ __metadata:
     react-native: "npm:^0.81.6"
     react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
-    react-native-test-app: "npm:^5.1.10"
+    react-native-test-app: "npm:^5.2.3"
     react-test-renderer: "npm:19.1.4"
     rimraf: "catalog:"
   languageName: unknown
@@ -5222,7 +5222,7 @@ __metadata:
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
-    react-native-test-app: "npm:^5.1.10"
+    react-native-test-app: "npm:^5.2.3"
     react-native-windows: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.4"
     webdriverio: "catalog:"
@@ -8889,12 +8889,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/react-native-host@npm:^0.5.17":
-  version: 0.5.17
-  resolution: "@rnx-kit/react-native-host@npm:0.5.17"
+"@rnx-kit/react-native-host@npm:^0.5.19":
+  version: 0.5.19
+  resolution: "@rnx-kit/react-native-host@npm:0.5.19"
   peerDependencies:
     react-native: ">=0.66"
-  checksum: 10c0/e9ab5c489758274def1d910c1f6855aeb04b8b8c4e17d71ea195f252dc1416f7dc29e743797532f80ab65dd6f4c8c596fbccc29df820c093c658b104b8d52a1c
+  checksum: 10c0/6dbf12788c7ebff0813288343dcaa4b7c18b4a2fa048a6bdcb65019c92234beabbe8b9a52701dc7cd6845f9c621e93969fe58db3409093c7443053aa8646cc21
   languageName: node
   linkType: hard
 
@@ -14405,7 +14405,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-xml-parser@npm:^5.3.3, fast-xml-parser@npm:^5.7.0":
+"fast-xml-parser@npm:^5.3.3, fast-xml-parser@npm:^5.8.0":
   version: 5.8.0
   resolution: "fast-xml-parser@npm:5.8.0"
   dependencies:
@@ -20455,15 +20455,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-test-app@npm:^5.1.10":
-  version: 5.1.10
-  resolution: "react-native-test-app@npm:5.1.10"
+"react-native-test-app@npm:^5.2.3":
+  version: 5.2.3
+  resolution: "react-native-test-app@npm:5.2.3"
   dependencies:
     "@isaacs/cliui": "npm:^9.0.0"
-    "@rnx-kit/react-native-host": "npm:^0.5.17"
+    "@rnx-kit/react-native-host": "npm:^0.5.19"
     "@rnx-kit/tools-react-native": "npm:^2.1.0"
     ajv: "npm:^8.0.0"
-    fast-xml-parser: "npm:^5.7.0"
+    fast-xml-builder: "npm:^1.2.0"
+    fast-xml-parser: "npm:^5.8.0"
     prompts: "npm:^2.4.0"
     semver: "npm:^7.5.2"
   peerDependencies:
@@ -20472,7 +20473,7 @@ __metadata:
     react: 18.2 - 19.2
     react-native: 0.76 - 0.85 || >=0.85.0-0 <0.86.0
     react-native-macos: ^0.0.0-0 || 0.76 - 0.81
-    react-native-windows: ^0.0.0-0 || 0.76 - 0.82
+    react-native-windows: ^0.0.0-0 || 0.76 - 0.83
   peerDependenciesMeta:
     "@callstack/react-native-visionos":
       optional: true
@@ -20487,7 +20488,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/app.mjs
-  checksum: 10c0/ec9b21a1244e72c67b965e74624f68eb664ca3b37bbb1c0cd8ac835a1926484cc34c062acab3b0647652d9d9e0c06044ad66fcf056d8658c2a7c959e6908c9ef
+  checksum: 10c0/a87c47f93eba76bf2ea7a2f7bfdb2d1925b6bbeb00d67b9f365c5016e1a4ba063f5f1c1d7a86aab3f782b85921b1cbe802290010cca320ae66d762c24ee5683e
   languageName: node
   linkType: hard
 
