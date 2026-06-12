@@ -5038,7 +5038,7 @@ __metadata:
     "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@fluentui-react-native/win32-theme": "workspace:*"
     "@fluentui/react-native": "workspace:*"
-    "@fluentui/react-native-icons": "patch:@fluentui/react-native-icons@npm%3A2.0.322#~/.yarn/patches/@fluentui-react-native-icons-npm-2.0.322-c4bc045837.patch"
+    "@fluentui/react-native-icons": "npm:^2.0.322"
     "@fortawesome/fontawesome-svg-core": "npm:^6.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^6.2.0"
     "@fortawesome/react-native-fontawesome": "npm:^0.3.0"
@@ -5681,29 +5681,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui/react-native-icons@npm:2.0.322":
-  version: 2.0.322
-  resolution: "@fluentui/react-native-icons@npm:2.0.322"
+"@fluentui/react-native-icons@npm:^2.0.322":
+  version: 2.0.330
+  resolution: "@fluentui/react-native-icons@npm:2.0.330"
   dependencies:
     "@types/react-native": "npm:^0.68.0"
     tslib: "npm:^2.1.0"
   peerDependencies:
-    react: ">=16.8.0 <19.0.0"
+    react: ">=16.8.0 <20.0.0"
+    react-native: ">=0.68.0"
     react-native-svg: ">=12.5.0"
-  checksum: 10c0/07f58741c0ffc9146798377432cd33458797be52c148ab05353362eab1e82c807d3e804b826746d2caf55432f954ee313ee62aa80c3c520e7d60ded100db6426
-  languageName: node
-  linkType: hard
-
-"@fluentui/react-native-icons@patch:@fluentui/react-native-icons@npm%3A2.0.322#~/.yarn/patches/@fluentui-react-native-icons-npm-2.0.322-c4bc045837.patch":
-  version: 2.0.322
-  resolution: "@fluentui/react-native-icons@patch:@fluentui/react-native-icons@npm%3A2.0.322#~/.yarn/patches/@fluentui-react-native-icons-npm-2.0.322-c4bc045837.patch::version=2.0.322&hash=9af6a5"
-  dependencies:
-    "@types/react-native": "npm:^0.68.0"
-    tslib: "npm:^2.1.0"
-  peerDependencies:
-    react: ">=16.8.0 <19.0.0"
-    react-native-svg: ">=12.5.0"
-  checksum: 10c0/cd94112941565f5b41723b83957191b8aed4f1d0207babcf113d4dd98069539557d31cabab3d18b57403f789af70dbf774da26c48947a9fbec6e151f814d13fd
+  checksum: 10c0/8aab70d4b46657e0756793fb91b78c8816fe11a29715b90ede0bb586a9eb5ff9ab163180be846398b81c8d0be9d8440bdcd069b28f1d98faff08afd23b453eff
   languageName: node
   linkType: hard
 
