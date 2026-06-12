@@ -2365,7 +2365,7 @@ PODS:
     - React-perflogger (= 0.81.2)
     - React-utils (= 0.81.2)
     - SocketRocket
-  - ReactNativeHost (0.5.17):
+  - ReactNativeHost (0.5.19):
     - boost
     - DoubleConversion
     - fast_float
@@ -2394,7 +2394,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - ReactTestApp-DevSupport (5.1.10):
+  - ReactTestApp-DevSupport (5.2.3):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -2482,7 +2482,7 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native-macos/ReactCommon`)
-  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-d4246a9700/node_modules/@rnx-kit/react-native-host`)"
+  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-779a5f15d5/node_modules/@rnx-kit/react-native-host`)"
   - ReactTestApp-DevSupport (from `../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -2651,7 +2651,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native-macos/ReactCommon"
   ReactNativeHost:
-    :path: "../../../node_modules/.store/react-native-test-app-virtual-d4246a9700/node_modules/@rnx-kit/react-native-host"
+    :path: "../../../node_modules/.store/react-native-test-app-virtual-779a5f15d5/node_modules/@rnx-kit/react-native-host"
   ReactTestApp-DevSupport:
     :path: "../node_modules/react-native-test-app"
   ReactTestApp-Resources:
@@ -2740,8 +2740,8 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: c684b86721380f663bc9476d7fffce805ba93b22
   ReactCodegen: b7fa29462da7a990beff7865ead46b4eb01093a9
   ReactCommon: 9f8189efbc1aa52926df2791a2e47b3340353849
-  ReactNativeHost: 66a23d7106b451f1a1087f565a45c839abef1e73
-  ReactTestApp-DevSupport: 2852f266ad4b393124413d4290c16aff35892cf4
+  ReactNativeHost: 8680b5bbc3afdbfeccc206ed0f3230d7c3df691b
+  ReactTestApp-DevSupport: a966d21f704e95b197479b4f47cad1cf25808385
   ReactTestApp-Resources: 7625eab22d0a702577b048d60b5fb3f2e2f5b2a7
   RNSVG: 7ee150379dc2a5ed4c9fdac92a5d6efab98e9cf7
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748

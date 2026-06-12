@@ -43,6 +43,7 @@
     "@babel/preset-typescript": "catalog:",
     "@babel/runtime": "catalog:",
     "@microsoft/eslint-plugin-sdl": "^1.1.0",
+    "@react-native/babel-preset": "catalog:0.81",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/babel-preset-metro-react-native": "catalog:",
     "@rnx-kit/config": "catalog:",

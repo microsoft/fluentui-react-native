@@ -47,8 +47,13 @@ const blockList = exclusionList([
 
 let config = makeMetroConfig({
   resolver: {
+    unstable_enablePackageExports: true,
+    unstable_conditionNames: ['react-native'],
+    resolverMainFields: ['react-native', 'main'],
+
     blockList,
     extraNodeModules,
+
     resolveRequest: MetroSymlinksResolver({
       resolver: 'oxc-resolver',
     }),
