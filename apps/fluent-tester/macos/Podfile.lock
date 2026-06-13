@@ -2738,7 +2738,7 @@ SPEC CHECKSUMS:
   React-timing: d11280aae5f82fbb5cc1fa26a4fb370d1f657d6f
   React-utils: f534155c95889deb6d00469146eb3900bf0181aa
   ReactAppDependencyProvider: c684b86721380f663bc9476d7fffce805ba93b22
-  ReactCodegen: b7fa29462da7a990beff7865ead46b4eb01093a9
+  ReactCodegen: 9cb74b74196a04d189f74995f8f11d1228316fb4
   ReactCommon: 9f8189efbc1aa52926df2791a2e47b3340353849
   ReactNativeHost: 8680b5bbc3afdbfeccc206ed0f3230d7c3df691b
   ReactTestApp-DevSupport: a966d21f704e95b197479b4f47cad1cf25808385

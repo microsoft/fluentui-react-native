@@ -15,7 +15,6 @@ const blockList = exclusionList([
   // Exclude other test apps
   new RegExp(pathForRegex(__dirname, '../win32')),
   new RegExp(pathForRegex(__dirname, '../win32-81')),
-  new RegExp(pathForRegex(__dirname, '../fluent-tester')),
   // Exclude build output directory
   new RegExp(pathForRegex(__dirname, 'dist')),
 ]);
@@ -26,7 +25,9 @@ const config = makeMetroConfig({
     resolveRequest: MetroSymlinksResolver({
       resolver: 'oxc-resolver',
     }),
-    // unstable_conditionNames: ['import', 'require'],
+    unstable_enablePackageExports: true,
+    unstable_conditionNames: ['react-native', 'import', 'require'],
+
     disableHierarchicalLookup: true,
     enableSymlinks: true,
   },
