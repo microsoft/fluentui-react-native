@@ -1,5 +1,34 @@
 # Change Log - @fluentui-react-native/framework
 
+## 0.16.0
+
+### Minor Changes
+
+- b5a686c: Switch packages to type module
+
+### Patch Changes
+
+- ce37a6d: Remove the final configuration package (moving it to scripts) and switch to running various package validation tasks from the root
+- ad85949: Configuration and dependency changes
+- 51ee2fe: Bump win32 to 0.81
+- f10715d: remove oxlint config package and move it into scripts
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [ce37a6d]
+- Updated dependencies [b5a686c]
+- Updated dependencies [ad85949]
+- Updated dependencies [51ee2fe]
+- Updated dependencies [f10715d]
+- Updated dependencies [1598157]
+  - @fluentui-react-native/composition@0.13.0
+  - @fluentui-react-native/use-styling@0.15.0
+  - @fluentui-react-native/default-theme@0.27.4
+  - @fluentui-react-native/use-tokens@0.8.0
+  - @fluentui-react-native/use-slots@0.12.0
+  - @fluentui-react-native/theme-types@0.44.4
+  - @fluentui-react-native/use-slot@0.8.0
+  - @fluentui-react-native/framework-base@0.4.0
+  - @fluentui-react-native/tokens@0.24.4
+
 ## 0.15.3
 
 ### Patch Changes

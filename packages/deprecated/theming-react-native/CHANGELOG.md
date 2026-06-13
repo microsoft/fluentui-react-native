@@ -1,5 +1,24 @@
 # Change Log - @uifabricshared/theming-react-native
 
+## 0.21.4
+
+### Patch Changes
+
+- ce37a6d: Remove the final configuration package (moving it to scripts) and switch to running various package validation tasks from the root
+- ad85949: Configuration and dependency changes
+- 51ee2fe: Bump win32 to 0.81
+- f10715d: remove oxlint config package and move it into scripts
+- 1598157: Switch tsconfig settings to more modern settings
+- Updated dependencies [ce37a6d]
+- Updated dependencies [ad85949]
+- Updated dependencies [51ee2fe]
+- Updated dependencies [f10715d]
+- Updated dependencies [1598157]
+  - @uifabricshared/theme-registry@0.13.4
+  - @uifabricshared/theming-ramp@0.21.4
+  - @fluentui-react-native/default-theme@0.27.4
+  - @fluentui-react-native/win32-theme@0.39.4
+
 ## 0.21.3
 
 ### Patch Changes
