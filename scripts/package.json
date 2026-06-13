@@ -15,7 +15,6 @@
   "main": "./src/index.ts",
   "exports": {
     ".": {
-      "require": "./src/index.ts",
       "default": "./src/index.ts"
     },
     "./babel-config": "./configs/jest/babel.config.cjs",
@@ -27,8 +26,7 @@
     "./tsconfig-strict": "./configs/tsconfig/tsconfig.strict.json"
   },
   "scripts": {
-    "build": "tsgo",
-    "build-core": "tsgo",
+    "build": "tsgo -b",
     "bundlesize": "bundlesize --debug",
     "depcheck": "node ./src/cli.ts depcheck",
     "format": "node ./src/cli.ts format",
@@ -44,6 +42,7 @@
     "@babel/preset-typescript": "catalog:",
     "@babel/runtime": "catalog:",
     "@microsoft/eslint-plugin-sdl": "^1.1.0",
+    "@react-native/babel-preset": "catalog:0.81",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/babel-preset-metro-react-native": "catalog:",
     "@rnx-kit/config": "catalog:",
@@ -74,7 +73,7 @@
     "@rnx-kit/types-node": "catalog:",
     "@types/micromatch": "^4.0.9",
     "@types/node": "catalog:",
-    "@typescript/native-preview": "7.0.0-dev.20260113.1",
+    "@typescript/native-preview": "7.0.0-dev.20260610.1",
     "@yarnpkg/types": "^4.0.1",
     "chalk": "^4.0.0",
     "clipanion": "^4.0.0-rc.4",

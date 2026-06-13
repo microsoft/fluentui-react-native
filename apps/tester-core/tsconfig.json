@@ -4,7 +4,161 @@
     "outDir": "lib",
     "allowSyntheticDefaultImports": true,
     "types": ["@types/jasmine", "@wdio/globals/types", "@wdio/jasmine-framework", "node"],
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../packages/utils/adapters/tsconfig.json"
+    },
+    {
+      "path": "../../packages/theming/android-theme/tsconfig.json"
+    },
+    {
+      "path": "../../packages/theming/apple-theme/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Avatar/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Badge/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Button/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Callout/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Chip/tsconfig.json"
+    },
+    {
+      "path": "../../packages/theming/default-theme/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Divider/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Drawer/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Dropdown/tsconfig.json"
+    },
+    {
+      "path": "../E2E/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/ActivityIndicator/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/AppearanceAdditions/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Avatar/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Checkbox/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Expander/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/MenuButton/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/NativeDatePicker/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/NativeFontMetrics/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Shadow/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Shimmer/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/FocusZone/tsconfig.json"
+    },
+    {
+      "path": "../../packages/framework-base/tsconfig.json"
+    },
+    {
+      "path": "../../packages/framework/framework/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Icon/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Input/tsconfig.json"
+    },
+    {
+      "path": "../../packages/utils/interactive-hooks/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/MenuButton/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Menu/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Notification/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Overflow/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/RadioGroup/tsconfig.json"
+    },
+    {
+      "path": "../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Separator/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Spinner/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Stack/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Switch/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/TabList/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/Text/tsconfig.json"
+    },
+    {
+      "path": "../../packages/theming/theme-tokens/tsconfig.json"
+    },
+    {
+      "path": "../../packages/theming/theme-types/tsconfig.json"
+    },
+    {
+      "path": "../../packages/framework/theme/tsconfig.json"
+    },
+    {
+      "path": "../../packages/framework/themed-stylesheet/tsconfig.json"
+    },
+    {
+      "path": "../../packages/theming/theming-utils/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Tooltip/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/VibrancyView/tsconfig.json"
+    },
+    {
+      "path": "../../packages/theming/win32-theme/tsconfig.json"
+    },
+    {
+      "path": "../../packages/libraries/core/tsconfig.json"
+    }
+  ]
 }

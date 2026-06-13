@@ -3,24 +3,6 @@ const config = {
   npmClient: 'yarn',
   pipeline: {
     // ── Per-package tasks ──────────────────────────────────────────────────
-    'build-cjs': {
-      // cjs builds need to wait for the esm builds to produce the type definitions
-      dependsOn: ['^build-core', '^build-cjs'],
-      inputs: ['*', 'src/**/*', 'assets/**/*'],
-      outputs: ['lib-commonjs/**/*'],
-    },
-    'build-core': {
-      // the core build does esm builds (which produce type definitions used by both cjs and esm builds)
-      // this also handles noEmit packages which should be run in sequence with other packages
-      dependsOn: ['^build-core'],
-      inputs: ['*', 'src/**/*', 'assets/**/*'],
-      outputs: ['lib/**/*'],
-    },
-    'build-all': {
-      dependsOn: ['build-core', 'build-cjs'],
-      inputs: ['*', 'src/**/*', 'assets/**/*'],
-      outputs: ['lib/**/*', 'lib-commonjs/**/*'],
-    },
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: ['dist/**/*'],
@@ -33,7 +15,12 @@ const config = {
       outputs: [],
     },
     test: {
-      dependsOn: ['build-all'],
+      // The unified build is a single root target, not a per-package `build`.
+      // A bare 'build' would resolve to <thisPackage>#build,
+      // which doesn't exist, so lage silently drops the edge. Point at the
+      // specific root target with the packageName#task syntax so every
+      // package's tests wait for the whole-repo build to finish.
+      dependsOn: ['@fluentui-react-native/root#build'],
       inputs: [],
       outputs: [],
     },
@@ -41,6 +28,10 @@ const config = {
     // ── Root-only tasks (scripts exist only in the root package.json) ──────
     // These run once for the whole repo. Sub-packages do not have these scripts,
     // so lage naturally scopes them to the root workspace.
+    build: {
+      // tsgo project level build has its own caching
+      cache: false,
+    },
     'check-publishing': {
       cache: false,
     },
@@ -56,7 +47,7 @@ const config = {
 
     // ── Pipeline aliases ───────────────────────────────────────────────────
     'repo-checks': ['lint-repo', 'check-publishing'],
-    buildci: ['lint-repo', 'check-publishing', 'build-all', 'test', 'lint'],
+    buildci: ['lint-repo', 'check-publishing', 'build', 'test', 'lint'],
 
     // ── Worker tasks ───────────────────────────────────────────────────────
     'test-links': {
@@ -70,7 +61,7 @@ const config = {
       cache: false,
     },
     pack: {
-      dependsOn: ['build-all', '^pack'],
+      dependsOn: ['@fluentui-react-native/root#build', '^pack'],
       type: 'worker',
       options: {
         worker: 'scripts/src/worker/pack.mts',

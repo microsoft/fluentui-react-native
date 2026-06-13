@@ -3,7 +3,7 @@ import depcheck from 'depcheck';
 import type { ProjectRoot } from '../utils/projectRoot.ts';
 import { getProjectRoot } from '../utils/projectRoot.ts';
 import getInjectedDeps from '../../dynamic.extensions.mts';
-import { getReporter } from '../utils/getReporter.ts';
+import { getFormatter } from '@rnx-kit/reporter';
 import { getToolVersion } from '../preinstall/tool-versions.ts';
 import micromatch from 'micromatch';
 import { isFixMode } from '../utils/env.ts';
@@ -84,7 +84,21 @@ export class DepCheckRunner {
   private removedDevDeps: string[] = [];
   private removedDeps: string[] = [];
   private addedDeps: { dependencies?: Record<string, string>; devDependencies?: Record<string, string> } = {};
-  private reporter = getReporter();
+  private formatter = getFormatter();
+  // Map the prior @rnx-kit/reporter `color(text, semantic)` API onto the 0.2 formatter's
+  // per-semantic functions (warn/error prefixes have no semantic, so use ansi yellow/red).
+  private color = (text: string, name: 'highlight1' | 'highlight3' | 'warnPrefix' | 'errorPrefix'): string => {
+    switch (name) {
+      case 'highlight1':
+        return this.formatter.highlight1(text);
+      case 'highlight3':
+        return this.formatter.highlight3(text);
+      case 'warnPrefix':
+        return this.formatter.yellow(text);
+      case 'errorPrefix':
+        return this.formatter.red(text);
+    }
+  };
 
   constructor(options: { verbose?: boolean; fixErrors?: boolean; fixWarnings?: boolean; dryRun?: boolean } = {}) {
     this.verbose = options.verbose ?? false;
@@ -155,10 +169,7 @@ export class DepCheckRunner {
           this.projectRoot.updateRecordEntry('devDependencies', dep, undefined);
         }
       }
-      console.warn(
-        prefix,
-        `Removed unused devDependencies: ${this.removedDevDeps.map((dep) => this.reporter.formatPackage(dep)).join(', ')}`,
-      );
+      console.warn(prefix, `Removed unused devDependencies: ${this.removedDevDeps.map((dep) => this.formatter.package(dep)).join(', ')}`);
     }
     if (this.removedDeps.length > 0) {
       if (!this.dryRun) {
@@ -166,14 +177,14 @@ export class DepCheckRunner {
           this.projectRoot.updateRecordEntry('dependencies', dep, undefined);
         }
       }
-      console.error(prefix, `Removed unused dependencies: ${this.removedDeps.map((dep) => this.reporter.formatPackage(dep)).join(', ')}`);
+      console.error(prefix, `Removed unused dependencies: ${this.removedDeps.map((dep) => this.formatter.package(dep)).join(', ')}`);
     }
     if (this.addedDeps.dependencies) {
       for (const [dep, version] of Object.entries(this.addedDeps.dependencies)) {
         if (!this.dryRun) {
           this.projectRoot.updateRecordEntry('dependencies', dep, version);
         }
-        console.warn(prefix, `Added dependency: ${this.reporter.formatPackage(dep)}@${version}`);
+        console.warn(prefix, `Added dependency: ${this.formatter.package(dep)}@${version}`);
       }
     }
     if (this.addedDeps.devDependencies) {
@@ -181,15 +192,15 @@ export class DepCheckRunner {
         if (!this.dryRun) {
           this.projectRoot.updateRecordEntry('devDependencies', dep, version);
         }
-        console.warn(prefix, `Added devDependency: ${this.reporter.formatPackage(dep)}@${version}`);
+        console.warn(prefix, `Added devDependency: ${this.formatter.package(dep)}@${version}`);
       }
     }
   }
 
   private handleUnused(issue: Issue) {
-    const color = this.reporter.color;
+    const color = this.color;
     const { dependency, depType = 'dependency' } = issue;
-    const prettyDependency = this.reporter.formatPackage(dependency);
+    const prettyDependency = this.formatter.package(dependency);
     if (this.ignored.has(dependency)) {
       if (this.verbose) {
         console.log(`- [${color('ignored', 'highlight1')}]: unused ${depType}: ${prettyDependency}`);
@@ -213,9 +224,9 @@ export class DepCheckRunner {
   }
 
   private handleMissing(issue: Issue) {
-    const color = this.reporter.color;
+    const color = this.color;
     const { dependency, files } = issue;
-    const prettyDependency = this.reporter.formatPackage(dependency);
+    const prettyDependency = this.formatter.package(dependency);
     if (files && files.length > 0) {
       const fileNames = files.map((file) => ` - ${color(file, 'highlight3')}`).join('\n');
       const msgEnd = `missing dependency: ${prettyDependency} from files:\n${fileNames}`;

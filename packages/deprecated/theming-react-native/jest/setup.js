@@ -1,1 +1,1 @@
-jest.mock('../lib-commonjs/NativeModule/ThemingModule');
+jest.mock('../lib/NativeModule/ThemingModule');

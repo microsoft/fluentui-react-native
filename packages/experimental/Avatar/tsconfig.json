@@ -2,8 +2,21 @@
   "extends": "@fluentui-react-native/scripts/tsconfig",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
-  "exclude": ["src/__tests__/Avatar.test.jsx"]
+  "exclude": ["src/__tests__/Avatar.test.jsx"],
+  "references": [
+    {
+      "path": "../../framework-base/tsconfig.json"
+    },
+    {
+      "path": "../../framework/framework/tsconfig.json"
+    },
+    {
+      "path": "../../../scripts/tsconfig.json"
+    }
+  ]
 }

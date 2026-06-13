@@ -33,7 +33,7 @@ const devToolVersions: Record<string, string> = {
   '@types/es6-promise': '0.0.32',
   '@types/jest': '^29.0.0',
   '@types/node': '^22.0.0',
-  '@types/react-test-renderer': '16.9.0',
+  '@types/react-test-renderer': '^19.1.0',
   '@typescript-eslint/eslint-plugin': '^8.36.0',
   '@typescript-eslint/parser': '^8.36.0',
   '@uifabric/prettier-rules': '^7.0.3',
@@ -49,7 +49,7 @@ const devToolVersions: Record<string, string> = {
   'metro-react-native-babel-transformer': '^0.76.5',
   oxlint: '^1.57.0',
   'oxlint-tsgolint': '^0.17.4',
-  'react-test-renderer': '18.2.0',
+  'react-test-renderer': '^19.1.0',
   rimraf: '^5.0.1',
   // Fill versions from scripts first
   ...scriptManifest.devDependencies,

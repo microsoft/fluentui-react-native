@@ -11,7 +11,62 @@
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "strict": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../components/Button/tsconfig.json"
+    },
+    {
+      "path": "../../components/Callout/tsconfig.json"
+    },
+    {
+      "path": "../../components/Checkbox/tsconfig.json"
+    },
+    {
+      "path": "../../components/ContextualMenu/tsconfig.json"
+    },
+    {
+      "path": "../../components/FocusTrapZone/tsconfig.json"
+    },
+    {
+      "path": "../../components/FocusZone/tsconfig.json"
+    },
+    {
+      "path": "../../utils/interactive-hooks/tsconfig.json"
+    },
+    {
+      "path": "../../components/Link/tsconfig.json"
+    },
+    {
+      "path": "../../components/MenuButton/tsconfig.json"
+    },
+    {
+      "path": "../../components/PersonaCoin/tsconfig.json"
+    },
+    {
+      "path": "../../components/Persona/tsconfig.json"
+    },
+    {
+      "path": "../../components/Pressable/tsconfig.json"
+    },
+    {
+      "path": "../../components/RadioGroup/tsconfig.json"
+    },
+    {
+      "path": "../../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../../components/Separator/tsconfig.json"
+    },
+    {
+      "path": "../../components/TabList/tsconfig.json"
+    },
+    {
+      "path": "../../components/Text/tsconfig.json"
+    }
+  ]
 }

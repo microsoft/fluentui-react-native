@@ -14,13 +14,11 @@
     ".": {
       "react-native": "./index.ts",
       "import": "./index.js",
-      "require": "./index.js",
       "default": "./src/index.tsx"
     }
   },
   "scripts": {
-    "build": "tsgo",
-    "build-core": "tsgo",
+    "build": "tsgo -b",
     "bundle": "rnx-cli bundle --dev false",
     "bundle-dev": "rnx-cli bundle",
     "clean": "fluentui-scripts clean",
@@ -61,7 +59,7 @@
     "metro-config": "^0.83.3",
     "oxc-resolver": "catalog:",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^5.1.10",
+    "react-native-test-app": "^5.2.3",
     "react-test-renderer": "19.1.4",
     "rimraf": "catalog:"
   },

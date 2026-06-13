@@ -1,4 +1,4 @@
-import type { ImageProps, TextProps, ViewProps } from 'react-native-windows';
+import type { ImagePropsWindows as ImageProps, TextPropsWindows as TextProps, ViewPropsWindows as ViewProps } from './platformProps';
 import type { IFilterMask } from './filter.types';
 import { getViewMaskBase, getImageMaskBase, getTextMaskBase, getRnVersion } from './filters.base';
 

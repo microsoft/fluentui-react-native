@@ -6,7 +6,41 @@
     "strictNullChecks": true,
     "noImplicitAny": true,
     "rootDir": "src",
-    "outDir": "lib"
+    "outDir": "lib",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../composition/tsconfig.json"
+    },
+    {
+      "path": "../../theming/default-theme/tsconfig.json"
+    },
+    {
+      "path": "../../framework-base/tsconfig.json"
+    },
+    {
+      "path": "../../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../../theming/theme-types/tsconfig.json"
+    },
+    {
+      "path": "../../utils/tokens/tsconfig.json"
+    },
+    {
+      "path": "../use-slot/tsconfig.json"
+    },
+    {
+      "path": "../use-slots/tsconfig.json"
+    },
+    {
+      "path": "../use-styling/tsconfig.json"
+    },
+    {
+      "path": "../use-tokens/tsconfig.json"
+    }
+  ]
 }

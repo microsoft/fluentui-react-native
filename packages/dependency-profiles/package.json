@@ -13,7 +13,6 @@
   ],
   "main": "src/index.js",
   "scripts": {
-    "build": "fluentui-scripts build",
     "update-profile": "node update-profile.mts"
   },
   "devDependencies": {

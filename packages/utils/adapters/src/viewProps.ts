@@ -1,43 +1,43 @@
 import type RN from 'react-native';
-import type Windows from 'react-native-windows';
-import type MacOS from 'react-native-macos';
-import type Win32 from '@office-iss/react-native-win32';
-import type { EventPhase } from 'react-native-windows';
+import type {
+  ViewAdditions,
+  CursorValue,
+  AccessibilityAnnotationInfo,
+  HandledKeyEvent,
+  NativeKeyEvent,
+  KeyEventHandler,
+} from './platformProps';
+
+export type { HandledKeyEvent, NativeKeyEvent, KeyEventHandler };
 
 /**
- * Build up the styles type by combining the base ViewStyle with platform specific extensions,
- * omitting any overlapping keys to prevent conflicts.
+ * Build up the styles type by combining the base ViewStyle with the cross-platform extensions
+ * the React Native forks add (currently just `cursor`).
  */
-
-export type IViewStyle = RN.ViewStyle & Omit<Windows.ViewStyle & Win32.ViewStyle & MacOS.ViewStyle, keyof RN.ViewStyle>;
-
-/**
- * Set up a merged key event to use
- */
-
-export interface HandledKeyEvent extends MacOS.HandledKeyEvent {
-  code?: string;
-  eventPhase?: typeof EventPhase.None | typeof EventPhase.Capturing | typeof EventPhase.AtTarget | typeof EventPhase.Bubbling;
-}
-export type NativeKeyEvent = RN.NativeSyntheticEvent<HandledKeyEvent>;
-export type KeyEventHandler = (event: NativeKeyEvent) => void;
+export type IViewStyle = RN.ViewStyle & { cursor?: CursorValue };
 
 // list of props to do special handling for
 type ExcludedViewProps = 'style' | 'accessibilityRole' | 'accessibilityState' | 'keyDownEvents' | 'keyUpEvents' | 'onKeyDown' | 'onKeyUp';
-// merge the view props from each platform, defaulting to React Native base props in case of overlap
-type MergedViewProps = RN.ViewProps & Omit<Windows.ViewProps & MacOS.ViewProps & Win32.ViewProps, keyof RN.ViewProps>;
+
+// merge the base React Native view props with the platform-neutral fork additions, defaulting to
+// the base props in case of overlap
+type MergedViewProps = RN.ViewProps & Omit<ViewAdditions, keyof RN.ViewProps>;
 
 /**
  * The complete set of view props accepted by Fluent UI components with additional cross-platform props added
  */
 export interface IViewProps extends Omit<MergedViewProps, ExcludedViewProps> {
-  // annotation for Win32 is the same as windows with one additional optional property
-  accessibilityAnnotation?: Win32.ViewProps['accessibilityAnnotation'];
-  // accessible role should union the types, use adapters to fork settings
-  accessibilityRole?: RN.AccessibilityRole & Windows.AccessibilityRole & Win32.AccessibilityRole & MacOS.AccessibilityRole;
-  // merge structs for accessibilityState
-  accessibilityState?: RN.AccessibilityState & Windows.AccessibilityState & Win32.AccessibilityState & MacOS.AccessibilityState;
-  // keyboard events
+  // accessibility annotation is a Win32/Windows concept
+  accessibilityAnnotation?: AccessibilityAnnotationInfo;
+  // accessibility role is the common (base) set across platforms
+  accessibilityRole?: RN.AccessibilityRole;
+  // merge structs for accessibilityState with the desktop additions
+  accessibilityState?: RN.AccessibilityState & {
+    multiselectable?: boolean;
+    required?: boolean;
+    readOnly?: boolean;
+  };
+  // keyboard events (unified across platforms)
   onKeyDown?: KeyEventHandler;
   onKeyUp?: KeyEventHandler;
   keyDownEvents?: HandledKeyEvent[];

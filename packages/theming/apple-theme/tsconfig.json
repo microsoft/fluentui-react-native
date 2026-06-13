@@ -3,7 +3,35 @@
   "compilerOptions": {
     "outDir": "lib",
     "resolveJsonModule": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../default-theme/tsconfig.json"
+    },
+    {
+      "path": "../../experimental/AppearanceAdditions/tsconfig.json"
+    },
+    {
+      "path": "../../framework-base/tsconfig.json"
+    },
+    {
+      "path": "../../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../theme-tokens/tsconfig.json"
+    },
+    {
+      "path": "../theme-types/tsconfig.json"
+    },
+    {
+      "path": "../../framework/theme/tsconfig.json"
+    },
+    {
+      "path": "../theming-utils/tsconfig.json"
+    }
+  ]
 }
