@@ -9,35 +9,35 @@ describe('StackUtils', () => {
     } as unknown as Theme;
 
     it('returns a default value when given undefined', () => {
-      expect(parseGap(undefined, theme)).toEqual({ rowGap: { value: 0, unit: 'px' }, columnGap: { value: 0, unit: 'px' } });
+      expect(parseGap(undefined, theme)).toEqual({ rowGap: 0, columnGap: 0 });
     });
 
-    it('returns a value with px when given a number', () => {
-      expect(parseGap(10, theme)).toEqual({ rowGap: { value: 10, unit: 'px' }, columnGap: { value: 10, unit: 'px' } });
+    it('returns the numeric value when given a number', () => {
+      expect(parseGap(10, theme)).toEqual({ rowGap: 10, columnGap: 10 });
     });
 
     it('can parse a string with px', () => {
-      expect(parseGap('32px', theme)).toEqual({ rowGap: { value: 32, unit: 'px' }, columnGap: { value: 32, unit: 'px' } });
+      expect(parseGap('32px', theme)).toEqual({ rowGap: 32, columnGap: 32 });
     });
 
     it('can parse a string with a float', () => {
-      expect(parseGap('20.5px', theme)).toEqual({ rowGap: { value: 20.5, unit: 'px' }, columnGap: { value: 20.5, unit: 'px' } });
+      expect(parseGap('20.5px', theme)).toEqual({ rowGap: 20.5, columnGap: 20.5 });
     });
 
     it('parses the value from the theme when given a spacing key', () => {
-      expect(parseGap('m', theme)).toEqual({ rowGap: { value: 16, unit: 'em' }, columnGap: { value: 16, unit: 'em' } });
+      expect(parseGap('m', theme)).toEqual({ rowGap: 16, columnGap: 16 });
     });
 
     it('can parse a string with both horizontal and vertical gap', () => {
-      expect(parseGap('30px 10px', theme)).toEqual({ rowGap: { value: 30, unit: 'px' }, columnGap: { value: 10, unit: 'px' } });
+      expect(parseGap('30px 10px', theme)).toEqual({ rowGap: 30, columnGap: 10 });
     });
 
     it('defaults to px with a string with horizontal and vertical gap with no units', () => {
-      expect(parseGap('50 30', theme)).toEqual({ rowGap: { value: 50, unit: 'px' }, columnGap: { value: 30, unit: 'px' } });
+      expect(parseGap('50 30', theme)).toEqual({ rowGap: 50, columnGap: 30 });
     });
 
     it('can parse a string with horizontal and vertical gap with one of them getting value from the theme when given a spacing key', () => {
-      expect(parseGap('50px m', theme)).toEqual({ rowGap: { value: 50, unit: 'px' }, columnGap: { value: 16, unit: 'em' } });
+      expect(parseGap('50px m', theme)).toEqual({ rowGap: 50, columnGap: 16 });
     });
   });
 
@@ -57,12 +57,12 @@ describe('StackUtils', () => {
       expect(parsePadding(0, theme)).toEqual(0);
     });
 
-    it('returns its argument when given a CSS-style padding', () => {
-      expect(parsePadding('10px', theme)).toEqual('10px');
+    it('returns the numeric value when given a CSS-style padding', () => {
+      expect(parsePadding('10px', theme)).toEqual(10);
     });
 
-    it('converts themed spacing keys to CSS-style paddings', () => {
-      expect(parsePadding('s2', theme)).toEqual('5px');
+    it('converts themed spacing keys to their numeric padding value', () => {
+      expect(parsePadding('s2', theme)).toEqual(5);
     });
   });
 });

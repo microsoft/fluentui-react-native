@@ -4804,6 +4804,7 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
+    "@office-iss/react-native-win32": "npm:^0.81.8"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
