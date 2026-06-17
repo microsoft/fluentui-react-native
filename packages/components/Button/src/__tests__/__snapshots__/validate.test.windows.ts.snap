@@ -1,0 +1,253 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button pinning tests (windows) Button color tokens map to semantic theme slots 1`] = `
+{
+  "backgroundColor": "colors.buttonBackground",
+  "borderColor": "colors.buttonBorder",
+  "color": "colors.buttonText",
+  "disabled": {
+    "backgroundColor": "colors.defaultDisabledBackground",
+    "borderColor": "colors.defaultDisabledBorder",
+    "color": "colors.defaultDisabledContent",
+    "iconColor": "colors.defaultDisabledIcon",
+  },
+  "focused": {
+    "backgroundColor": "colors.defaultFocusedBackground",
+    "borderColor": "colors.defaultFocusedBorder",
+    "color": "colors.defaultFocusedContent",
+    "icon": "colors.defaultFocusedIcon",
+  },
+  "hovered": {
+    "backgroundColor": "colors.defaultHoveredBackground",
+    "borderColor": "colors.defaultHoveredBorder",
+    "color": "colors.defaultHoveredContent",
+    "iconColor": "colors.defaultHoveredIcon",
+  },
+  "iconColor": undefined,
+  "pressed": {
+    "backgroundColor": "colors.defaultPressedBackground",
+    "borderColor": "colors.defaultPressedBorder",
+    "color": "colors.defaultPressedContent",
+    "iconColor": "colors.defaultPressedIcon",
+  },
+  "primary": {
+    "backgroundColor": "colors.brandBackground",
+    "borderColor": "colors.brandStroke1",
+    "color": undefined,
+    "disabled": {
+      "backgroundColor": undefined,
+      "color": undefined,
+      "iconColor": undefined,
+    },
+    "focused": {
+      "backgroundColor": "colors.brandBackground",
+      "borderColor": "colors.strokeFocus2",
+      "color": undefined,
+      "iconColor": undefined,
+    },
+    "iconColor": undefined,
+    "pressed": {
+      "backgroundColor": "colors.brandBackgroundPressed",
+      "color": undefined,
+      "iconColor": undefined,
+    },
+  },
+  "subtle": {
+    "backgroundColor": "colors.ghostBackground",
+    "borderColor": "colors.ghostBorder",
+    "color": "colors.ghostContent",
+    "disabled": {
+      "backgroundColor": "colors.ghostDisabledBackground",
+      "borderColor": "colors.ghostDisabledBorder",
+      "color": "colors.ghostDisabledContent",
+      "iconColor": "colors.ghostDisabledIcon",
+    },
+    "focused": {
+      "backgroundColor": "colors.ghostFocusedBackground",
+      "borderColor": "colors.ghostFocusedBorder",
+      "color": "colors.ghostFocusedContent",
+      "icon": "colors.ghostFocusedIcon",
+    },
+    "hovered": {
+      "backgroundColor": "colors.ghostHoveredBackground",
+      "borderColor": "colors.ghostHoveredBorder",
+      "color": "colors.ghostHoveredContent",
+      "iconColor": "colors.ghostHoveredIcon",
+    },
+    "iconColor": "colors.ghostIcon",
+    "pressed": {
+      "backgroundColor": "colors.ghostPressedBackground",
+      "borderColor": "colors.ghostPressedBorder",
+      "color": "colors.ghostPressedContent",
+      "icon": "colors.ghostPressedIcon",
+    },
+  },
+}
+`;
+
+exports[`Button pinning tests (windows) Button tokens match snapshot 1`] = `
+{
+  "backgroundColor": "colors.buttonBackground",
+  "block": {
+    "width": "100%",
+  },
+  "borderColor": "colors.buttonBorder",
+  "circular": {
+    "borderRadius": 9999,
+  },
+  "color": "colors.buttonText",
+  "disabled": {
+    "backgroundColor": "colors.defaultDisabledBackground",
+    "borderColor": "colors.defaultDisabledBorder",
+    "color": "colors.defaultDisabledContent",
+    "iconColor": "colors.defaultDisabledIcon",
+  },
+  "focused": {
+    "backgroundColor": "colors.defaultFocusedBackground",
+    "borderColor": "colors.defaultFocusedBorder",
+    "color": "colors.defaultFocusedContent",
+    "icon": "colors.defaultFocusedIcon",
+  },
+  "hovered": {
+    "backgroundColor": "colors.defaultHoveredBackground",
+    "borderColor": "colors.defaultHoveredBorder",
+    "color": "colors.defaultHoveredContent",
+    "iconColor": "colors.defaultHoveredIcon",
+  },
+  "iconColor": undefined,
+  "large": {
+    "borderWidth": 1,
+    "focused": {
+      "borderWidth": 0,
+      "padding": 8,
+    },
+    "hasContent": {
+      "focused": {
+        "paddingHorizontal": 16,
+      },
+      "hasIconAfter": {
+        "spacingIconContentAfter": 6,
+      },
+      "hasIconBefore": {
+        "spacingIconContentBefore": 6,
+      },
+      "minWidth": 96,
+      "paddingHorizontal": 15,
+    },
+    "iconSize": 20,
+    "padding": 7,
+    "variant": "subheaderSemibold",
+  },
+  "medium": {
+    "borderWidth": 1,
+    "focused": {
+      "borderWidth": 0,
+      "padding": 6,
+    },
+    "hasContent": {
+      "focused": {
+        "paddingHorizontal": 12,
+      },
+      "hasIconAfter": {
+        "spacingIconContentAfter": 6,
+      },
+      "hasIconBefore": {
+        "spacingIconContentBefore": 6,
+      },
+      "minWidth": 96,
+      "paddingHorizontal": 11,
+      "variant": "bodySemibold",
+    },
+    "iconSize": 16,
+    "padding": 5,
+  },
+  "pressed": {
+    "backgroundColor": "colors.defaultPressedBackground",
+    "borderColor": "colors.defaultPressedBorder",
+    "color": "colors.defaultPressedContent",
+    "iconColor": "colors.defaultPressedIcon",
+  },
+  "primary": {
+    "backgroundColor": "colors.brandBackground",
+    "borderColor": "colors.brandStroke1",
+    "color": undefined,
+    "disabled": {
+      "backgroundColor": undefined,
+      "color": undefined,
+      "iconColor": undefined,
+    },
+    "focused": {
+      "backgroundColor": "colors.brandBackground",
+      "borderColor": "colors.strokeFocus2",
+      "color": undefined,
+      "iconColor": undefined,
+    },
+    "iconColor": undefined,
+    "pressed": {
+      "backgroundColor": "colors.brandBackgroundPressed",
+      "color": undefined,
+      "iconColor": undefined,
+    },
+  },
+  "rounded": {
+    "borderRadius": 4,
+  },
+  "small": {
+    "borderWidth": 1,
+    "focused": {
+      "borderWidth": 0,
+      "padding": 4,
+    },
+    "hasContent": {
+      "focused": {
+        "paddingHorizontal": 8,
+      },
+      "hasIconAfter": {
+        "spacingIconContentAfter": 4,
+      },
+      "hasIconBefore": {
+        "spacingIconContentBefore": 4,
+      },
+      "minHeight": 24,
+      "minWidth": 64,
+      "paddingHorizontal": 7,
+      "variant": "secondaryStandard",
+    },
+    "iconSize": 16,
+    "padding": 3,
+  },
+  "square": {
+    "borderRadius": 0,
+  },
+  "subtle": {
+    "backgroundColor": "colors.ghostBackground",
+    "borderColor": "colors.ghostBorder",
+    "color": "colors.ghostContent",
+    "disabled": {
+      "backgroundColor": "colors.ghostDisabledBackground",
+      "borderColor": "colors.ghostDisabledBorder",
+      "color": "colors.ghostDisabledContent",
+      "iconColor": "colors.ghostDisabledIcon",
+    },
+    "focused": {
+      "backgroundColor": "colors.ghostFocusedBackground",
+      "borderColor": "colors.ghostFocusedBorder",
+      "color": "colors.ghostFocusedContent",
+      "icon": "colors.ghostFocusedIcon",
+    },
+    "hovered": {
+      "backgroundColor": "colors.ghostHoveredBackground",
+      "borderColor": "colors.ghostHoveredBorder",
+      "color": "colors.ghostHoveredContent",
+      "iconColor": "colors.ghostHoveredIcon",
+    },
+    "iconColor": "colors.ghostIcon",
+    "pressed": {
+      "backgroundColor": "colors.ghostPressedBackground",
+      "borderColor": "colors.ghostPressedBorder",
+      "color": "colors.ghostPressedContent",
+      "icon": "colors.ghostPressedIcon",
+    },
+  },
+}
+`;

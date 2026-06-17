@@ -1,0 +1,75 @@
+{
+  "name": "@fluentui-react-native/agentic-analyzer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Test/analysis toolkit for safely refactoring v1 components: sentinel themes, reverse token mapping, and per-platform jest multiplexing",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic/agentic-analyzer"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "react-native": "./src/index.ts",
+      "import": "./lib/index.js",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsgo -b",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
+  },
+  "dependencies": {
+    "@fluentui-react-native/default-theme": "workspace:*",
+    "@fluentui-react-native/theme": "workspace:*",
+    "@fluentui-react-native/theme-types": "workspace:*",
+    "@testing-library/react-native": "^13.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native/babel-preset": "^0.81.0",
+    "@types/react": "~19.1.4",
+    "@types/react-test-renderer": "^19.1.0",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-test-renderer": "19.1.4"
+  },
+  "peerDependencies": {
+    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
+    "react": "18.2.0 || 19.0.0 || 19.1.4",
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
+    "react-test-renderer": "18.2.0 || 19.0.0 || 19.1.4"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  },
+  "furn": {
+    "jestPlatform": "ios"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/scripts/kit-config",
+    "alignDeps": {
+      "capabilities": [
+        "core",
+        "react",
+        "react-test-renderer"
+      ]
+    }
+  }
+}
