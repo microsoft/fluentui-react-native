@@ -5,13 +5,16 @@ import type { Yarn } from '@yarnpkg/types';
 import path from 'node:path';
 import fs from 'node:fs';
 import { styleText } from 'util';
+import type { NATIVE_PLATFORMS, REACT_PLATFORM } from './const.ts';
 
 export type PackageType = 'library' | 'component' | 'app' | 'tooling';
-export type PlatformTarget = 'react' | 'win32' | 'macos' | 'ios' | 'android' | 'windows';
+export type NativeTargets = (typeof NATIVE_PLATFORMS)[number];
+export type PlatformTarget = typeof REACT_PLATFORM | NativeTargets;
 
 export type FurnConfig = {
   packageType?: PackageType;
   jestPlatform?: PlatformTarget;
+  platforms?: NativeTargets[];
   depcheck?: {
     ignoreMatches?: string[];
     ignorePatterns?: string[];

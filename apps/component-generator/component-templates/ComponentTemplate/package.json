@@ -14,7 +14,7 @@
   "module": "src/index.ts",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "fluentui-scripts build",
+    "build": "tsgo -b",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "just": "fluentui-scripts",

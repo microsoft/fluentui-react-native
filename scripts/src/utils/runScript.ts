@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { spawn, type SpawnOptions } from 'node:child_process';
 import { getProjectRoot } from './projectRoot.ts';
 import os from 'node:os';
 
@@ -17,7 +17,7 @@ function getBinPath(command: string): string | undefined {
   return wdRoot.openModule(cmdModule).getBinPath(command);
 }
 
-export async function runScript(command: string, ...args: string[]): Promise<number> {
+export async function runScript(command: string, args: string[], options?: SpawnOptions): Promise<number> {
   const binPath = getBinPath(command);
   const verb = binPath ? process.execPath : yarnVerb;
   const spawnArgs = binPath ? [binPath, ...args] : ['exec', command, ...args];
@@ -27,6 +27,7 @@ export async function runScript(command: string, ...args: string[]): Promise<num
       cwd: process.cwd(),
       stdio: 'inherit',
       shell: verb.endsWith('.cmd') || verb.endsWith('.bat') ? true : undefined,
+      ...options,
     }).on('close', (code) => {
       resolve(code ?? -1);
     });
