@@ -140,6 +140,9 @@ import * as metadataModule from './index';
 
 describe('metadata', () => {
   for (const [exportName, value] of Object.entries(metadataModule)) {
+    if (!exportName.endsWith('Metadata')) {
+      continue;
+    }
     it(`${exportName} validates against the ComponentMetadata schema`, () => {
       const result = validateMetadata(value);
       const errors = result.issues.filter((issue) => issue.severity === 'error');
@@ -150,17 +153,103 @@ describe('metadata', () => {
 });
 ```
 
-This bakes shape validation into CI so future hand-edits can't drift.
+The `endsWith('Metadata')` filter skips other artifacts in the barrel (like `<ComponentName>Tokens` from step 7). This bakes shape validation into CI so future hand-edits can't drift.
 
-### 7. Validate
+### 7. Capture token metadata (`<ComponentName>.tokens.ts`)
 
-Run, from the repo root:
+Path: `<package-path>/src/metadata/<ComponentName>.tokens.ts`.
 
-```sh
-yarn workspace <package-name> jest src/metadata/metadata.test.ts
+Token metadata pairs with the state metadata: where the metadata says *which states this component supports*, the tokens artifact captures *where each design value comes from*. The two together let downstream tools answer "for state X, what tokens apply and what theme/global path drives each value."
+
+#### 7a. Read the default-token source files
+
+Find the `default<ComponentName>Tokens`, `default<ComponentName>ColorTokens`, `default<ComponentName>FontTokens` exports in `<package-path>/src/`. Each is a function `(t: Theme) => <ComponentName>Tokens` that returns a layered object. Read every file the component ships:
+
+- `<ComponentName>Tokens.ts` — cross-platform default (layout / size / shape).
+- `<ComponentName>ColorTokens.ts` — cross-platform default (colours).
+- `<ComponentName>FontTokens.ts` — cross-platform default (typography).
+- Platform overrides: `*.{ios,android,macos,win32,windows}.ts` — captured as **separate** artifacts with `platform: '<platform>'`, sparse (only deltas vs. the default).
+
+For this pass, focus on the cross-platform `.ts` files; platform variants are a follow-up unless the component has no cross-platform default.
+
+#### 7b. Classify every leaf as a `TokenSource`
+
+Each leaf value in the source falls into one of four kinds (defined in `packages/ai/concepts/src/metadata/TokenSource.ts`):
+
+| Source expression                           | Captured kind                                                        |
+| ------------------------------------------- | -------------------------------------------------------------------- |
+| `t.colors.brandBackground`                  | `{ kind: 'theme', path: 'colors.brandBackground' }`                  |
+| `t.typography.body1Strong`                  | `{ kind: 'theme', path: 'typography.body1Strong' }`                  |
+| `globalTokens.size60`                       | `{ kind: 'global', path: 'size60' }`                                 |
+| `globalTokens.stroke.width10`               | `{ kind: 'global', path: 'stroke.width10' }`                         |
+| Numeric / string literal: `16`, `'100%'`    | `{ kind: 'constant', value: 16 }`                                    |
+| Binary expression: `globalTokens.size60 - globalTokens.stroke.width10` | `{ kind: 'expression', op: '-', operands: [...] }`        |
+
+Drop the leading `t.` for theme paths and the leading `globalTokens.` for global paths — they're implied by the kind.
+
+Branches (sub-layers like `hovered`, `primary`, `medium`, `hasContent`, `primary.disabled`) become nested objects. The discrimination at runtime is: any object with a `kind` field in `TOKEN_SOURCE_KINDS` is a leaf; anything else is a sub-layer.
+
+Critically: **mirror the source layer names verbatim**, including idiosyncrasies. If `ButtonColorTokens.ts` writes `focused.icon` (not `iconColor`) at one site, capture it as `icon` — don't normalize, or the validation test will fail and mask the real source.
+
+#### 7c. Emit the artifact
+
+Template:
+
+```ts
+import type { ComponentTokens } from '@fluentui-react-native/concepts';
+
+/**
+ * Cross-platform default token tree for `<ComponentName>`.
+ *
+ * Merges <ComponentName>Tokens.ts + <ComponentName>ColorTokens.ts +
+ * <ComponentName>FontTokens.ts into one layered shape that mirrors
+ * the framework's runtime token-merge order.
+ *
+ * Platform overrides live in sibling `<ComponentName>.tokens.<platform>.ts`
+ * artifacts.
+ */
+export const <componentName>Tokens = {
+  component: '<ComponentName>',
+  platform: 'default',
+  layers: {
+    // base leaves
+    backgroundColor: { kind: 'theme', path: 'colors.buttonBackground' },
+    // ...
+    // state layers
+    hovered: { /* ... */ },
+    // appearance branches
+    primary: {
+      backgroundColor: { kind: 'theme', path: 'colors.brandBackground' },
+      hovered: { /* nested overrides */ },
+    },
+    // size / shape branches (with merged font tokens)
+    medium: { /* ... */ },
+    rounded: { borderRadius: { kind: 'global', path: 'corner.radius40' } },
+  },
+} as const satisfies ComponentTokens;
 ```
 
-Report the result back to the user verbatim. If the test reports warnings (typically `component/dangling-testid`), fix the metadata — usually by adding a `testID` to `baseProps` or to the state's `props` — and re-run. Do not call the task done while warnings or errors remain.
+Add `export { <componentName>Tokens } from './<ComponentName>.tokens';` to `src/metadata/index.ts`.
+
+#### 7d. Add a `tokens.test.ts` correctness check
+
+The validation pattern: walk the captured layered tree and the runtime token-function output in lockstep. At each leaf, resolve the captured `TokenSource` against a test theme and compare to the runtime value.
+
+Use `createTestTheme()` from `@fluentui-react-native/analyzer` for sentinel theme values, and `globalTokens` from `@fluentui-react-native/theme-tokens` for global lookups.
+
+**Scoping caveat**: if the component has per-platform overrides for the layout / font files (e.g. `<ComponentName>Tokens.ios.ts`), the test runs under the package's jest platform and pulls *that* variant — not the cross-platform default. Scope the comparison to keys owned by files that have no platform override (typically colour tokens). Document the layout / font follow-up in the test's doc comment, as `tokens.test.ts` does for Button.
+
+See `packages/components/Button/src/metadata/tokens.test.ts` for the working pattern.
+
+### 8. Validate
+
+Run both validation tests, from the repo root:
+
+```sh
+yarn workspace <package-name> jest src/metadata
+```
+
+This picks up both `metadata.test.ts` (shape validation) and `tokens.test.ts` (token correctness). Report the result back to the user verbatim. If `metadata.test.ts` reports warnings (typically `component/dangling-testid`), fix the metadata — usually by adding a `testID` to `baseProps`. If `tokens.test.ts` reports mismatches, the captured artifact has drifted from source — fix the captured leaves to match. Do not call the task done while warnings or mismatches remain.
 
 If type-checking would be more useful than running jest (e.g. the package's jest config is not yet wired for ESM TS), fall back to:
 
@@ -183,6 +272,7 @@ to confirm the `satisfies ComponentMetadata` constraint holds.
 ## What this skill does NOT do
 
 - Does not render the component or capture snapshots — `analyzeComponent` / `runComponentMatrix` do that.
-- Does not generate styles, tokens, or any other derived artifact.
+- Does not generate styles or any derived artifact beyond `ComponentMetadata` and `ComponentTokens`.
 - Does not modify component source, tests outside `src/metadata/`, the test app, or changelogs.
 - Does not add a changeset. If the user wants one, suggest they run `yarn changeset` after reviewing the diff.
+- Does not capture platform-override token files unless explicitly asked. Cross-platform default first; per-platform sparse overrides are a separate pass.
