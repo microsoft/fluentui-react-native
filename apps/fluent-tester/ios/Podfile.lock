@@ -4,15 +4,15 @@ PODS:
   - fast_float (8.0.0)
   - FBLazyVector (0.81.6)
   - fmt (11.0.2)
-  - FRNAppearanceAdditions (0.8.3):
+  - FRNAppearanceAdditions (0.8.4):
     - React
-  - FRNAvatar (0.22.3):
+  - FRNAvatar (0.22.4):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNDatePicker (0.12.3):
+  - FRNDatePicker (0.12.4):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNFontMetrics (0.7.3):
+  - FRNFontMetrics (0.7.4):
     - React
   - glog (0.3.5)
   - hermes-engine (0.81.6):
@@ -2424,7 +2424,7 @@ PODS:
     - React-perflogger (= 0.81.6)
     - React-utils (= 0.81.6)
     - SocketRocket
-  - ReactNativeHost (0.5.17):
+  - ReactNativeHost (0.5.19):
     - boost
     - DoubleConversion
     - fast_float
@@ -2453,7 +2453,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - ReactTestApp-DevSupport (5.1.10):
+  - ReactTestApp-DevSupport (5.3.3):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -2538,7 +2538,7 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-d4246a9700/node_modules/@rnx-kit/react-native-host`)"
+  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-6d85e861d1/node_modules/@rnx-kit/react-native-host`)"
   - ReactTestApp-DevSupport (from `../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -2701,7 +2701,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeHost:
-    :path: "../../../node_modules/.store/react-native-test-app-virtual-d4246a9700/node_modules/@rnx-kit/react-native-host"
+    :path: "../../../node_modules/.store/react-native-test-app-virtual-6d85e861d1/node_modules/@rnx-kit/react-native-host"
   ReactTestApp-DevSupport:
     :path: "../node_modules/react-native-test-app"
   ReactTestApp-Resources:
@@ -2713,15 +2713,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
-  DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
+  DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
   fast_float: b32c788ed9c6a8c584d114d0047beda9664e7cc6
   FBLazyVector: 812782f0506ba4c4a1b9f4b793e6de1bfdfc4c25
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
-  FRNAppearanceAdditions: 60f9fb4552fb3d92a63df00aa8f76fd6e8efb942
-  FRNAvatar: ffa0facb219806b0e5083d2388bc61e590f5df19
-  FRNDatePicker: 312243694338f941080b15f6fac4d0dac8f54137
-  FRNFontMetrics: 363f87c2aee015325a399388dda266ed8f1f65a0
-  glog: 5683914934d5b6e4240e497e0f4a3b42d1854183
+  FRNAppearanceAdditions: 58fe872ed668bac5b1f6b3f81b61c7f9fccd6788
+  FRNAvatar: 586585a440e2b23c9ac872fd1fa2ddb7819cd7bd
+  FRNDatePicker: 6cf33c0f00f68606e2e301689670a7f90a9e5f37
+  FRNFontMetrics: dba3c15a2feef87ee987d7c502cc3e2ba15adb5b
+  glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
   hermes-engine: 7219f6e751ad6ec7f3d7ec121830ee34dae40749
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: 846fda9475e61ec7bcbf8a3fe81edfcaeb090669
@@ -2787,13 +2787,13 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: 50d5506ddd091d4ed24b88b661ce9a0e17347357
   ReactCodegen: dae737e6acce32f4e6dda1c5c7ad0e7fd7235b71
   ReactCommon: 8fafefb37d562f9e4bbbc9081ca4501f178a97ec
-  ReactNativeHost: 66a23d7106b451f1a1087f565a45c839abef1e73
-  ReactTestApp-DevSupport: 2852f266ad4b393124413d4290c16aff35892cf4
+  ReactNativeHost: 8680b5bbc3afdbfeccc206ed0f3230d7c3df691b
+  ReactTestApp-DevSupport: 0527915bd439c17242bab26d2136cc837b5eebd2
   ReactTestApp-Resources: de7bab7391b329e4e22614a22a7d350b5f08939c
   RNSVG: 7ee150379dc2a5ed4c9fdac92a5d6efab98e9cf7
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 3196a843cc5f4bc433f1a41cf17cdf804a01a529
 
-PODFILE CHECKSUM: b3aedc74b779b6e577dfef780f9684a0bb0daaae
+PODFILE CHECKSUM: fec1d0c29d19b06181402b781cf7db0e3b52a2c8
 
 COCOAPODS: 1.16.2
