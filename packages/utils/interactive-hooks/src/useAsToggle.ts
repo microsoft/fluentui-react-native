@@ -14,8 +14,12 @@ export type OnChangeCallback = () => void;
  *         onChange() - Callback to toggle the component
  *         state.isChecked - Whether or not component is currently checked or selected
  */
-export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCallback?: OnToggleCallback): [boolean, OnChangeCallback] {
-  const [isChecked = false, setChecked] = React.useState(defaultChecked ?? checked);
+export function useAsToggle(
+  defaultChecked?: boolean,
+  checked?: boolean,
+  userCallback?: OnToggleCallback,
+): [boolean | undefined, OnChangeCallback] {
+  const [isChecked, setChecked] = React.useState(defaultChecked ?? checked);
 
   const onChange = React.useCallback(() => {
     userCallback && userCallback(!isChecked);

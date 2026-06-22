@@ -14,7 +14,7 @@ exports[`Switch Default 1`] = `
   accessibilityState={
     {
       "busy": undefined,
-      "checked": false,
+      "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
@@ -29,7 +29,6 @@ exports[`Switch Default 1`] = `
     }
   }
   accessible={true}
-  checked={false}
   collapsable={false}
   focusable={true}
   onAccessibilityAction={[Function]}
@@ -141,7 +140,7 @@ exports[`Switch Disabled 1`] = `
   accessibilityState={
     {
       "busy": undefined,
-      "checked": false,
+      "checked": undefined,
       "disabled": true,
       "expanded": undefined,
       "selected": undefined,
@@ -156,7 +155,6 @@ exports[`Switch Disabled 1`] = `
     }
   }
   accessible={false}
-  checked={false}
   collapsable={false}
   focusable={false}
   onAccessibilityAction={[Function]}
