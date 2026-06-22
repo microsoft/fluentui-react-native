@@ -11,7 +11,6 @@
 "@fluentui-react-native/themed-stylesheet": patch
 "@uifabricshared/themed-settings": patch
 "@fluentui-react-native/contextual-menu": patch
-"@fluentui-react-native/lint-config-rules": patch
 "@uifabricshared/theme-registry": patch
 "@fluentui-react-native/vibrancy-view": patch
 "@fluentui-react-native/focus-trap-zone": patch
@@ -41,6 +40,7 @@
 "@fluentui-react-native/use-tokens": patch
 "@fluentui-react-native/theme-tokens": patch
 "@fluentui-react-native/checkbox": patch
+"@fluentui-react-native/dependency-profiles": patch
 "@fluentui-react-native/experimental-avatar": patch
 "@fluentui-react-native/drawer": patch
 "@fluentui-react-native/experimental-shadow": patch
@@ -75,4 +75,4 @@
 "@fluentui-react-native/codemods": patch
 ---
 
-Switch tsconfig settings to more modern settings
+Update packages to esm, with new builds with project references

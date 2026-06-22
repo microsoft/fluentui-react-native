@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/theme",
-  "version": "0.12.3",
+  "version": "0.13.0",
   "description": "Experimental version of fluentui-react-native theme framework",
   "keywords": [],
   "license": "MIT",
@@ -19,13 +19,11 @@
       "types": "./lib/index.d.ts",
       "react-native": "./src/index.ts",
       "import": "./lib/index.js",
-      "require": "./lib/index.js",
       "default": "./src/index.ts"
     }
   },
   "scripts": {
-    "build": "tsgo",
-    "build-core": "tsgo",
+    "build": "tsgo -b",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",

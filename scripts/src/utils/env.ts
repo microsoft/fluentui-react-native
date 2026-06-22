@@ -1,8 +1,7 @@
 /**
  * Lage doesn't support cleanly passing parameters to sub scripts, so this allows our scripts that
- * support a "fix" mode to be toggled via an environment variable. This allows things like lint --fix or
- * lint-package --fix to be run from the root level without having to have duplicate scripts entries for
- * each package.
+ * support a "fix" mode to be toggled via an environment variable. This allows things like lint --fix
+ * to be run from the root level without having to have duplicate scripts entries for each package.
  */
 
 // env variable to use

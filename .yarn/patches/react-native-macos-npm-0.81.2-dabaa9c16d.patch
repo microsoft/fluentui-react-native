@@ -1,0 +1,22 @@
+diff --git a/Libraries/StyleSheet/PlatformColorValueTypes.macos.js b/Libraries/StyleSheet/PlatformColorValueTypes.macos.js
+index 29ae835410baf640dc869d2c1bcbd6d8ea508ded..df23765985f5fd1f634189f7f6ef28f58889716a 100644
+--- a/Libraries/StyleSheet/PlatformColorValueTypes.macos.js
++++ b/Libraries/StyleSheet/PlatformColorValueTypes.macos.js
+@@ -82,7 +82,7 @@ const _normalizeColorObject = (
+     // a macOS semantic color
+     return color;
+   } else if ('dynamic' in color && color.dynamic !== undefined) {
+-    const normalizeColor = require('./normalizeColor');
++    const normalizeColor = require('./normalizeColor').default;
+ 
+     // a dynamic, appearance aware color
+     const dynamic = color.dynamic;
+@@ -103,7 +103,7 @@ const _normalizeColorObject = (
+     'colorWithSystemEffect' in color &&
+     color.colorWithSystemEffect != null
+   ) {
+-    const normalizeColor = require('./normalizeColor');
++    const normalizeColor = require('./normalizeColor').default;
+     const colorWithSystemEffect = color.colorWithSystemEffect;
+     const colorObject: LocalNativeColorValue = {
+       colorWithSystemEffect: {

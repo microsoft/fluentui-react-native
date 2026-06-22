@@ -15,7 +15,7 @@
     "scripts"
   ],
   "scripts": {
-    "build": "lage build-all",
+    "build": "tsgo -b",
     "clean-all": "node ./scripts/src/preinstall/clean-all.ts",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle:repo": "lage bundle",
@@ -43,6 +43,7 @@
     "@changesets/cli": "^2.30.0",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/lint-lockfile": "catalog:",
+    "@typescript/native-preview": "7.0.0-dev.20260610.1",
     "@yarnpkg/types": "^4.0.1",
     "babel-jest": "^29.7.0",
     "cross-env": "catalog:",
@@ -56,8 +57,11 @@
     "zx": "^8.2.4"
   },
   "resolutions": {
+    "@fluentui/react-native-icons/@types/react-native": "ignore:",
+    "@types/react": "19.1.17",
     "axios": "^1.13.5",
     "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch",
+    "react-native-macos": "patch:react-native-macos@npm%3A0.81.2#~/.yarn/patches/react-native-macos-npm-0.81.2-dabaa9c16d.patch",
     "unicorn-magic": "^0.4.0"
   },
   "engines": {

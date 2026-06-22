@@ -3,7 +3,17 @@
   "compilerOptions": {
     "outDir": "lib",
     "resolveJsonModule": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../theme-types/tsconfig.json"
+    }
+  ]
 }

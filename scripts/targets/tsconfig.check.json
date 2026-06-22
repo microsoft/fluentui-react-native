@@ -1,0 +1,12 @@
+{
+  "extends": "@rnx-kit/tsconfig/tsconfig.node.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2022",
+    "composite": true,
+    "tsBuildInfoFile": "../.cache/tsconfig.tsbuildinfo"
+  },
+  "include": [".."],
+  "exclude": ["../lib"]
+}

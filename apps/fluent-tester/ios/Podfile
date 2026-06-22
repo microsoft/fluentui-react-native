@@ -15,8 +15,26 @@ react_native_path = "#{__dir__}/../node_modules/react-native"
 # (node-modules mode)
 # react_native_path = "#{__dir__}/../../../node_modules/react-native"
 
-use_test_app! do |target|
+# fmt 11.0.2 (pinned by React Native 0.81) fails to compile with Xcode 26 / Apple Clang 21, which is
+# stricter about `consteval` (fixed upstream in fmt 11.1). Force fmt's compile-time consteval
+# format-string checking off so the bundled fmt builds. This is ABI-safe and avoids a version bump
+# (multiple pods pin fmt = 11.0.2). Re-applied on every `pod install`.
+def patch_fmt_consteval(installer)
+  fmt_base = File.join(installer.sandbox.root.to_s, 'fmt', 'include', 'fmt', 'base.h')
+  return unless File.exist?(fmt_base)
+
+  contents = File.read(fmt_base)
+  patched = contents.gsub('#  define FMT_USE_CONSTEVAL 1', '#  define FMT_USE_CONSTEVAL 0')
+  return if patched == contents
+
+  # CocoaPods marks pod sources read-only; make the file writable before patching.
+  File.chmod(0o644, fmt_base)
+  File.write(fmt_base, patched)
+  Pod::UI.puts '[FluentTester] Patched fmt base.h to disable consteval (Xcode 26 / Clang 21 workaround)'
+end
+
+use_test_app!(:post_install => ->(installer) { patch_fmt_consteval(installer) }) do |target|
   target.app do
-    platform :ios, '15.0'
+    platform :ios, '16.0'
   end
 end

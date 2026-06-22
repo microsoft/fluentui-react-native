@@ -2,7 +2,16 @@
   "extends": "@fluentui-react-native/scripts/tsconfig-strict",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src"
+    "allowJs": true,
+    "checkJs": true,
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../scripts/tsconfig.json"
+    }
+  ]
 }

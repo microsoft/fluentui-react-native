@@ -5,7 +5,7 @@
  */
 'use strict';
 
-import { Platform } from 'react-native';
+import { Platform, LogBox } from 'react-native';
 
 import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
 import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
@@ -60,3 +60,8 @@ export const FluentTesterApp = (props: FluentTesterProps) => {
     </ThemeProvider>
   );
 };
+
+// LogBox gets in the way of clicking on the theme button
+if (Platform.OS === 'windows') {
+  LogBox.ignoreLogs(['DatePicker not supported']);
+}

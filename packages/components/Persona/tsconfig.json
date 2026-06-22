@@ -2,7 +2,41 @@
   "extends": "@fluentui-react-native/scripts/tsconfig",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../utils/adapters/tsconfig.json"
+    },
+    {
+      "path": "../../framework-base/tsconfig.json"
+    },
+    {
+      "path": "../../framework/framework/tsconfig.json"
+    },
+    {
+      "path": "../PersonaCoin/tsconfig.json"
+    },
+    {
+      "path": "../../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../../utils/tokens/tsconfig.json"
+    },
+    {
+      "path": "../../deprecated/foundation-composable/tsconfig.json"
+    },
+    {
+      "path": "../../deprecated/foundation-compose/tsconfig.json"
+    },
+    {
+      "path": "../../deprecated/foundation-settings/tsconfig.json"
+    },
+    {
+      "path": "../../deprecated/foundation-tokens/tsconfig.json"
+    }
+  ]
 }

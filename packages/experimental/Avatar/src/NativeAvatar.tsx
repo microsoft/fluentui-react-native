@@ -4,7 +4,7 @@
  * @format
  */
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import type { ImageURISource, ViewProps, ColorValue } from 'react-native';
+import type { ImageSource, ViewProps, ColorValue } from 'react-native';
 import { NativeModules, TurboModuleRegistry } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
@@ -44,7 +44,7 @@ export type NativeAvatarProps = NativeAvatarTokens & {
   /**
    * The image to be displayed
    */
-  imageSource?: ImageURISource;
+  imageSource?: ImageSource;
 
   /**
    * The primary text to create initials with (e.g. a name)
@@ -100,7 +100,7 @@ export type NativeAvatarProps = NativeAvatarTokens & {
    * An image to be shown as the backdrop of the ring, rather then a solid color.
    * Takes precendence over `ringColor`
    */
-  customBorderImageSource?: ImageURISource;
+  customBorderImageSource?: ImageSource;
 };
 
 const tokensThatAreAlsoProps: (keyof NativeAvatarTokens)[] = ['size', 'avatarStyle'];

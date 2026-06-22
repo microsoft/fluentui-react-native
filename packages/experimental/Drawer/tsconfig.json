@@ -2,7 +2,29 @@
   "extends": "@fluentui-react-native/scripts/tsconfig",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src", "svgs.d.ts"]
+  "include": ["src", "svgs.d.ts"],
+  "references": [
+    {
+      "path": "../../framework-base/tsconfig.json"
+    },
+    {
+      "path": "../../framework/framework/tsconfig.json"
+    },
+    {
+      "path": "../../utils/interactive-hooks/tsconfig.json"
+    },
+    {
+      "path": "../../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../../theming/theme-tokens/tsconfig.json"
+    },
+    {
+      "path": "../../framework/use-styling/tsconfig.json"
+    }
+  ]
 }

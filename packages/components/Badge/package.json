@@ -1,12 +1,13 @@
 {
   "name": "@fluentui-react-native/badge",
-  "version": "0.12.3",
+  "version": "0.12.4",
   "description": "A cross-platform Badge component using the Fluent Design System. A badge is an additional visual descriptor for UI elements.",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "type": "module",
   "sideEffects": false,
-  "main": "lib-commonjs/index.js",
+  "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -14,14 +15,11 @@
       "types": "./lib/index.d.ts",
       "react-native": "./src/index.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
       "default": "./src/index.ts"
     }
   },
   "scripts": {
-    "build": "fluentui-scripts build",
-    "build-cjs": "tsgo --outDir lib-commonjs",
-    "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "build": "tsgo -b",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
@@ -47,7 +45,7 @@
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
-    "@office-iss/react-native-win32": "^0.74.0",
+    "@office-iss/react-native-win32": "^0.81.8",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
     "@react-native-community/cli-platform-ios": "^20.0.0",
@@ -63,7 +61,7 @@
     "react-test-renderer": "19.1.4"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0",
+    "@office-iss/react-native-win32": "^0.74.0 || ^0.81.0",
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
     "react": "18.2.0 || 19.0.0 || 19.1.4",
     "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",

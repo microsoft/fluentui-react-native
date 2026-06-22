@@ -1,0 +1,10 @@
+{
+  "extends": "@fluentui-react-native/scripts/tsconfig",
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": false,
+    "rootDir": "../..",
+    "types": ["node"]
+  },
+  "include": ["macos.drift.ts"]
+}

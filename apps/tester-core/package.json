@@ -11,7 +11,7 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "apps/fluent-tester-core"
   },
-  "main": "lib-commonjs/index.js",
+  "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -19,14 +19,11 @@
       "types": "./lib/index.d.ts",
       "react-native": "./src/index.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
       "default": "./src/index.ts"
     }
   },
   "scripts": {
-    "build": "fluentui-scripts build",
-    "build-cjs": "tsgo --outDir lib-commonjs",
-    "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "build": "tsgo -b",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
@@ -82,7 +79,7 @@
     "@fluentui-react-native/vibrancy-view": "workspace:*",
     "@fluentui-react-native/win32-theme": "workspace:*",
     "@fluentui/react-native": "workspace:*",
-    "@fluentui/react-native-icons": "^2.0.316",
+    "@fluentui/react-native-icons": "^2.0.322",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
@@ -99,9 +96,9 @@
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
     "@react-native-community/cli-platform-ios": "^20.0.0",
-    "@react-native-windows/cli": "^0.74.0",
-    "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-babel-transformer": "^0.74.0",
+    "@react-native-windows/cli": "^0.81.0",
+    "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-babel-transformer": "^0.81.0",
     "@react-native/metro-config": "^0.81.0",
     "@rnx-kit/cli": "catalog:",
     "@rnx-kit/metro-config": "catalog:",
@@ -122,7 +119,7 @@
     "react-native-macos": "^0.81.0",
     "react-native-svg": "^15.12.1",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^3.9.2",
+    "react-native-test-app": "^5.2.3",
     "react-native-windows": "^0.81.0",
     "react-test-renderer": "19.1.4",
     "webdriverio": "catalog:"

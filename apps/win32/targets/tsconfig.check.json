@@ -1,0 +1,10 @@
+{
+  "extends": "@fluentui-react-native/scripts/tsconfig",
+  "compilerOptions": {
+    "rootDir": "..",
+    "noEmit": true,
+    "composite": true,
+    "tsBuildInfoFile": "../.cache/tsconfig.tsbuildinfo"
+  },
+  "include": ["../index.js", "../src"]
+}

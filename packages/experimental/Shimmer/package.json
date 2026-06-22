@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-shimmer",
-  "version": "0.14.3",
+  "version": "0.14.4",
   "description": "A cross-platform Fluent Shimmer component",
   "license": "MIT",
   "author": "",
@@ -9,7 +9,8 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/experimental/Shimmer"
   },
-  "main": "lib-commonjs/index.js",
+  "type": "module",
+  "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -17,14 +18,11 @@
       "types": "./lib/index.d.ts",
       "react-native": "./src/index.ts",
       "import": "./lib/index.js",
-      "require": "./lib-commonjs/index.js",
       "default": "./src/index.ts"
     }
   },
   "scripts": {
-    "build": "fluentui-scripts build",
-    "build-cjs": "tsgo --outDir lib-commonjs",
-    "build-core": "tsgo --outDir lib --module esnext --moduleResolution bundler",
+    "build": "tsgo -b",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
@@ -58,7 +56,7 @@
     "react-test-renderer": "19.1.4"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0",
+    "@office-iss/react-native-win32": "^0.74.0 || ^0.81.0",
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
     "react": "18.2.0 || 19.0.0 || 19.1.4",
     "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",

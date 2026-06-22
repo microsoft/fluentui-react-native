@@ -15,12 +15,12 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
         with:
           node-version: 22
 
@@ -36,10 +36,10 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
         with:
           platform: android
           node-version: 22
@@ -62,18 +62,17 @@ jobs:
 
   macos:
     name: macOS PR
-    runs-on: macos-latest
+    runs-on: macos-26
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
         with:
           platform: macos
           node-version: 22
-          xcode-developer-dir: /Applications/Xcode_16.4.app
 
       - name: Install dependencies
         run: yarn
@@ -98,6 +97,7 @@ jobs:
         env:
           CCACHE_DISABLE: 1
 
+      # Disable macOS E2E test to unblock 0.81 checkin
       - name: Prepare E2E macOS tests
         run: yarn e2eprep:macos
         working-directory: apps/E2E
@@ -108,7 +108,7 @@ jobs:
 
       - name: Upload E2E macOS artifacts
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: E2E_macos_Dump
           path: |
@@ -117,18 +117,17 @@ jobs:
 
   ios:
     name: iOS PR
-    runs-on: macos-latest
+    runs-on: macos-26
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
         with:
           platform: ios
           node-version: 22
-          xcode-developer-dir: /Applications/Xcode_16.4.app
 
       - name: Install dependencies
         run: yarn
@@ -167,12 +166,12 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 5
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
         with:
           platform: windows
           node-version: 22
@@ -194,30 +193,39 @@ jobs:
           Start-Process msiexec -ArgumentList "/quiet","/i","$env:RUNNER_TEMP\WinAppDriver.msi" -Verb runAs -Wait
         shell: powershell
 
-      - name: Generate UWP app
+      - name: Generate RNW app
         run: yarn install-windows-test-app --use-nuget
-        working-directory: apps/fluent-tester
-
-      - name: Build UWP app
-        run: yarn windows --arch x64 --logging --no-packager --no-launch --msbuildprops WindowsTargetPlatformVersion=10.0.26100.0
         working-directory: apps/fluent-tester
 
       - name: Prepare E2E Windows tests
         run: yarn e2eprep:windows
         working-directory: apps/E2E
 
-      - name: Run E2E UWP tests
-        run: yarn e2etest:windows
+      - name: Start packager
+        run: cmd /c "start /B cmd /c yarn start ^> packager.log 2^>^&1"
+        working-directory: apps/fluent-tester
+
+      # First build of RNW may fail with  Cannot open include file: 'CppWinRTIncludes.h' error
+      # So we run the build command twice
+      - name: Build RNW app
+        run: yarn windows --arch x64 --logging --no-packager --no-launch --msbuildprops WindowsTargetPlatformVersion=10.0.26100.0; yarn windows --arch x64 --logging --no-packager --no-launch --msbuildprops WindowsTargetPlatformVersion=10.0.26100.0 || yarn windows --arch x64 --logging --no-packager --no-launch --singleproc --msbuildprops WindowsTargetPlatformVersion=10.0.26100.0
+        working-directory: apps/fluent-tester
+
+      - name: Run E2E RNW tests
+        shell: pwsh
+        run: |
+          .\launchE2EWindows.ps1 -enableDumpFiles
         working-directory: apps/E2E
 
       - name: Upload E2E Windows artifacts
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: E2E_UWP_Dump
+          name: E2E_RNW_Dump
           path: |
             apps/E2E/reports
             apps/E2E/errorShots
+            apps/fluent-tester/packager.log
 
   win32:
     name: Win32 PR
@@ -225,10 +233,10 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
         with:
           platform: windows
           node-version: 22
@@ -260,7 +268,7 @@ jobs:
 
       - name: Upload E2E Win32 artifacts
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: E2E_win32_Dump
           path: |
@@ -303,10 +311,10 @@ jobs:
       has-tarballs: ${{ steps.check.outputs.has-tarballs }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
         with:
           node-version: 22
 
@@ -331,7 +339,7 @@ jobs:
 
       - name: Upload packed tarballs
         if: steps.check.outputs.has-tarballs == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: packed-tarballs-dry-run
           path: _packed/
@@ -344,10 +352,10 @@ jobs:
     if: needs.publish-dry-run-pack.outputs.has-tarballs == 'true'
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
         with:
           node-version: 22
 
@@ -355,7 +363,7 @@ jobs:
         run: yarn
 
       - name: Download packed tarballs
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: packed-tarballs-dry-run
           path: _packed/
@@ -369,10 +377,10 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.0.14
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
         with:
           node-version: 22
 

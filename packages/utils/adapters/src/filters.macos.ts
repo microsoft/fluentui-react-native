@@ -1,4 +1,4 @@
-import type { ImageProps, TextProps, ViewProps } from 'react-native-macos';
+import type { ImagePropsMacOS as ImageProps, TextPropsMacOS as TextProps, ViewPropsMacOS as ViewProps } from './platformProps';
 import type { IFilterMask } from './filter.types';
 import { getRnVersion, getImageMaskBase, getTextMaskBase, getViewMaskBase } from './filters.base';
 
