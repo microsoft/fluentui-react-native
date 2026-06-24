@@ -216,7 +216,7 @@ jobs:
         working-directory: apps/fluent-tester
 
       - name: Run E2E RNW tests
-        shell: pwsh
+        shell: powershell
         run: |
           .\launchE2EWindows.ps1 -enableDumpFiles
         working-directory: apps/E2E
