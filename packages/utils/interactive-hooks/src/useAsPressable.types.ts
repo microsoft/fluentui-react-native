@@ -1,7 +1,6 @@
 import type { PressabilityConfig, EventHandlers } from './usePressability';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-type ObjectBase = {};
+type ObjectBase = object;
 
 export type IPressState = {
   pressed?: boolean;
@@ -24,6 +23,8 @@ export type IPressableOptions = PressabilityConfig & {
 export type IWithPressableOptions<T extends ObjectBase> = T & IPressableOptions;
 
 export type IWithPressableEvents<T extends ObjectBase> = T & EventHandlers;
+
+export type IWithPartialPressableEvents<T extends ObjectBase> = T & Partial<EventHandlers>;
 
 export type IPressableHooks<T extends ObjectBase> = {
   props: IWithPressableEvents<T>;

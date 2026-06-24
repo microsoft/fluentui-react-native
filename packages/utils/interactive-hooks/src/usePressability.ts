@@ -1,5 +1,6 @@
 import type { PressableProps, GestureResponderEvent, BlurEvent, MouseEvent } from 'react-native';
 
+// @ts-expect-error - types are still in flow, we are explicitly creating a typed wrapper around this
 import usePressabilityBase from 'react-native/Libraries/Pressability/usePressability';
 
 export type Rect = {

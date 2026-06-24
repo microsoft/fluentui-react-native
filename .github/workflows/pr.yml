@@ -4,6 +4,10 @@ on: pull_request
 permissions:
   contents: read
 
+env:
+  VisualStudioVersion: '17.0'
+  WindowsTargetPlatformVersion: '10.0.26100.0'
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -162,7 +166,7 @@ jobs:
 
   windows:
     name: Windows PR
-    runs-on: windows-latest
+    runs-on: windows-2022
     timeout-minutes: 60
     steps:
       - name: Checkout
@@ -212,7 +216,7 @@ jobs:
         working-directory: apps/fluent-tester
 
       - name: Run E2E RNW tests
-        shell: pwsh
+        shell: powershell
         run: |
           .\launchE2EWindows.ps1 -enableDumpFiles
         working-directory: apps/E2E

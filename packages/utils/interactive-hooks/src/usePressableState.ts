@@ -11,6 +11,8 @@ import type {
   PressablePropsExtended,
 } from './usePressableState.types';
 
+import type { MouseEvent, FocusEvent, BlurEvent, GestureResponderEvent } from 'react-native';
+
 /**
  * hover specific state and callback helper
  */
@@ -19,7 +21,7 @@ export function useHoverHelper(props: PressableHoverProps): [PressableHoverProps
   const { onHoverIn, onHoverOut } = props;
 
   const _onHoverIn = React.useCallback(
-    (e) => {
+    (e: MouseEvent) => {
       setHoverState({ hovered: true });
       onHoverIn?.(e);
     },
@@ -27,7 +29,7 @@ export function useHoverHelper(props: PressableHoverProps): [PressableHoverProps
   );
 
   const _onHoverOut = React.useCallback(
-    (e) => {
+    (e: MouseEvent) => {
       setHoverState({ hovered: false });
       onHoverOut?.(e);
     },
@@ -43,7 +45,7 @@ export function useFocusHelper(props: PressableFocusProps): [PressableFocusProps
   const [focusState, setFocusState] = React.useState({ focused: false });
   const { onFocus, onBlur } = props;
   const _onFocus = React.useCallback(
-    (e) => {
+    (e: FocusEvent) => {
       setFocusState({ focused: true });
       onFocus?.(e);
     },
@@ -51,7 +53,7 @@ export function useFocusHelper(props: PressableFocusProps): [PressableFocusProps
   );
 
   const _onBlur = React.useCallback(
-    (e) => {
+    (e: BlurEvent) => {
       setFocusState({ focused: false });
       onBlur?.(e);
     },
@@ -68,7 +70,7 @@ export function usePressHelper(props: PressablePressProps): [PressablePressProps
   const { onPressIn, onPressOut } = props;
 
   const _onPressIn = React.useCallback(
-    (e) => {
+    (e: GestureResponderEvent) => {
       setPressState({ pressed: true });
       onPressIn?.(e);
     },
@@ -76,7 +78,7 @@ export function usePressHelper(props: PressablePressProps): [PressablePressProps
   );
 
   const _onPressOut = React.useCallback(
-    (e) => {
+    (e: GestureResponderEvent) => {
       setPressState({ pressed: false });
       onPressOut?.(e);
     },

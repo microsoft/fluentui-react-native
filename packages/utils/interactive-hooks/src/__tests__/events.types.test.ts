@@ -3,7 +3,7 @@ import type { AccessibilityActionEvent, GestureResponderEvent } from 'react-nati
 import { isAccessibilityActionEvent, isGestureResponderEvent, isKeyPressEvent } from '../events.types';
 import type { KeyPressEvent } from '../useKeyProps.types';
 
-const createMockEvent = (nativeEvent) => {
+const createMockEvent = (nativeEvent: Record<string, unknown>) => {
   return {
     nativeEvent: nativeEvent,
     currentTarget: null,
@@ -33,7 +33,7 @@ const createMockEvent = (nativeEvent) => {
   };
 };
 
-const mockGestureEvent: GestureResponderEvent = createMockEvent({
+const mockGestureEvent = createMockEvent({
   changedTouches: [],
   identifier: '',
   locationX: 0,
@@ -43,15 +43,15 @@ const mockGestureEvent: GestureResponderEvent = createMockEvent({
   target: '',
   timestamp: 0,
   touches: [],
-});
+}) as unknown as GestureResponderEvent;
 
-const mockKeyPressEvent: KeyPressEvent = createMockEvent({
+const mockKeyPressEvent = createMockEvent({
   key: 'enter',
-});
+}) as unknown as KeyPressEvent;
 
-const mockAccessibilityEvent: AccessibilityActionEvent = createMockEvent({
+const mockAccessibilityEvent = createMockEvent({
   actionName: 'longpress',
-});
+}) as unknown as AccessibilityActionEvent;
 
 describe('InteractionEvent type guard tests', () => {
   it('has correct output from isGestureResponderEvent when input is type GestureResponderEvent', () => {

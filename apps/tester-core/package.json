@@ -119,7 +119,7 @@
     "react-native-macos": "^0.81.0",
     "react-native-svg": "^15.12.1",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^5.2.3",
+    "react-native-test-app": "catalog:",
     "react-native-windows": "^0.81.0",
     "react-test-renderer": "19.1.4",
     "webdriverio": "catalog:"

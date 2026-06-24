@@ -5074,7 +5074,7 @@ __metadata:
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
-    react-native-test-app: "npm:^5.2.3"
+    react-native-test-app: "catalog:"
     react-native-windows: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.4"
     webdriverio: "catalog:"
@@ -5165,7 +5165,7 @@ __metadata:
     react-native: "npm:^0.81.6"
     react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
-    react-native-test-app: "npm:^5.2.3"
+    react-native-test-app: "catalog:"
     react-test-renderer: "npm:19.1.4"
     rimraf: "catalog:"
   languageName: unknown
@@ -5228,7 +5228,7 @@ __metadata:
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
     react-native-svg-transformer: "npm:^1.0.0"
-    react-native-test-app: "npm:^5.2.3"
+    react-native-test-app: "catalog:"
     react-native-windows: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.4"
     webdriverio: "catalog:"
@@ -20717,9 +20717,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-test-app@npm:^5.2.3":
-  version: 5.2.3
-  resolution: "react-native-test-app@npm:5.2.3"
+"react-native-test-app@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "react-native-test-app@npm:5.3.3"
   dependencies:
     "@isaacs/cliui": "npm:^9.0.0"
     "@rnx-kit/react-native-host": "npm:^0.5.19"
@@ -20733,7 +20733,7 @@ __metadata:
     "@callstack/react-native-visionos": 0.76 - 0.79
     "@expo/config-plugins": ">=5.0"
     react: 18.2 - 19.2
-    react-native: 0.76 - 0.85 || >=0.85.0-0 <0.86.0
+    react-native: 0.76 - 0.86 || >=0.86.0-0 <0.87.0
     react-native-macos: ^0.0.0-0 || 0.76 - 0.81
     react-native-windows: ^0.0.0-0 || 0.76 - 0.83
   peerDependenciesMeta:
@@ -20750,7 +20750,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/app.mjs
-  checksum: 10c0/a87c47f93eba76bf2ea7a2f7bfdb2d1925b6bbeb00d67b9f365c5016e1a4ba063f5f1c1d7a86aab3f782b85921b1cbe802290010cca320ae66d762c24ee5683e
+  checksum: 10c0/fb1a8aef116e92f599976b27987ebf303a29ce42a1482e1bc352cfd4f82200cf42b091010e0c4a21d6c85076e8269468d2c1044cbc9a56af77acd3a4d1a4fcb5
   languageName: node
   linkType: hard
 

@@ -1,5 +1,5 @@
 {
-  "extends": "@fluentui-react-native/scripts/tsconfig",
+  "extends": "@fluentui-react-native/scripts/tsconfig-strict",
   "compilerOptions": {
     "outDir": "lib",
     "allowJs": true,

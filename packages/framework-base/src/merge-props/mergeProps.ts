@@ -1,5 +1,6 @@
 import type { MergeOptions } from '../immutable-merge/Merge.ts';
 import { immutableMergeCore, filterToObjects } from '../immutable-merge/Merge.ts';
+import type { ObjectMerger } from '../utilities/mergeTypes.ts';
 
 import { mergeStyles } from './mergeStyles.ts';
 
@@ -15,6 +16,4 @@ const mergePropsOptions: MergeOptions = {
  * Merge props together, flattening and merging styles as appropriate
  * @param props - props to merge together
  */
-export function mergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
-  return immutableMergeCore(mergePropsOptions, ...filterToObjects<TProps>(props));
-}
+export const mergeProps: ObjectMerger = (...props: unknown[]) => immutableMergeCore(mergePropsOptions, ...filterToObjects(props));

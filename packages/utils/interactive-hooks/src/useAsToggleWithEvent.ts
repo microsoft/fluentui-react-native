@@ -21,7 +21,7 @@ export function useAsToggleWithEvent(
   defaultChecked?: boolean,
   checked?: boolean,
   userCallback?: OnToggleWithEventCallback,
-): [boolean, OnChangeWithEventCallback] {
+): [boolean | undefined, OnChangeWithEventCallback] {
   const [isChecked, setChecked] = useControllableValue(checked, defaultChecked);
 
   const onChange = React.useCallback(
