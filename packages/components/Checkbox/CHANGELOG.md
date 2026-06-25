@@ -1,5 +1,29 @@
 # Change Log - @fluentui-react-native/checkbox
 
+## 0.24.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- 2f7c365: Add missing dependency on framework-base
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [2f7c365]
+- Updated dependencies [6805bf5]
+  - @uifabricshared/foundation-composable@0.14.5
+  - @uifabricshared/foundation-settings@0.16.5
+  - @uifabricshared/foundation-compose@1.16.5
+  - @fluentui-react-native/interactive-hooks@0.28.5
+  - @fluentui-react-native/use-styling@0.15.1
+  - @fluentui-react-native/theming-utils@0.27.5
+  - @fluentui-react-native/pressable@0.13.5
+  - @fluentui-react-native/theme-tokens@0.28.5
+  - @fluentui-react-native/framework@0.16.1
+  - @fluentui-react-native/text@0.25.5
+  - @fluentui-react-native/framework-base@0.4.1
+  - @fluentui-react-native/adapters@0.14.5
+  - @fluentui-react-native/styling-utils@0.8.5
+  - @fluentui-react-native/tokens@0.24.5
+
 ## 0.24.4
 
 ### Patch Changes

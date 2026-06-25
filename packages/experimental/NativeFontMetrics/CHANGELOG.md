@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
+## 0.7.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+
 ## 0.7.4
 
 ### Patch Changes

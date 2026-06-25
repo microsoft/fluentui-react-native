@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
+## 0.11.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- 2f7c365: Add missing dependency on framework-base
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [2f7c365]
+- Updated dependencies [6805bf5]
+  - @fluentui-react-native/contextual-menu@0.25.5
+  - @fluentui-react-native/framework@0.16.1
+  - @fluentui-react-native/button@0.40.5
+  - @fluentui-react-native/framework-base@0.4.1
+  - @fluentui-react-native/tokens@0.24.5
+
 ## 0.11.4
 
 ### Patch Changes

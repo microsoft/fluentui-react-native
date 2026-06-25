@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/theme-types
 
+## 0.44.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+
 ## 0.44.4
 
 ### Patch Changes

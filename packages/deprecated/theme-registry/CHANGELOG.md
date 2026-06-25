@@ -1,5 +1,11 @@
 # Change Log - @uifabricshared/theme-registry
 
+## 0.13.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+
 ## 0.13.4
 
 ### Patch Changes

@@ -1,5 +1,30 @@
 # Change Log - @fluentui/react-native
 
+## 0.43.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [2f7c365]
+- Updated dependencies [6805bf5]
+  - @fluentui-react-native/contextual-menu@0.25.5
+  - @fluentui-react-native/focus-trap-zone@0.13.5
+  - @fluentui-react-native/interactive-hooks@0.28.5
+  - @fluentui-react-native/persona-coin@0.16.5
+  - @fluentui-react-native/menu-button@0.14.5
+  - @fluentui-react-native/radio-group@0.22.5
+  - @fluentui-react-native/focus-zone@0.22.5
+  - @fluentui-react-native/pressable@0.13.5
+  - @fluentui-react-native/separator@0.19.5
+  - @fluentui-react-native/checkbox@0.24.5
+  - @fluentui-react-native/callout@0.28.5
+  - @fluentui-react-native/persona@0.17.5
+  - @fluentui-react-native/tablist@0.8.5
+  - @fluentui-react-native/button@0.40.5
+  - @fluentui-react-native/link@0.24.5
+  - @fluentui-react-native/text@0.25.5
+
 ## 0.43.4
 
 ### Patch Changes

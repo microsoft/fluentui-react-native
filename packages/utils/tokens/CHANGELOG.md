@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/tokens
 
+## 0.24.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [6805bf5]
+  - @fluentui-react-native/theme-types@0.44.5
+  - @fluentui-react-native/adapters@0.14.5
+
 ## 0.24.4
 
 ### Patch Changes

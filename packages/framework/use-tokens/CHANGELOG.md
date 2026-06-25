@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/use-tokens
 
+## 0.8.1
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [6805bf5]
+  - @fluentui-react-native/framework-base@0.4.1
+
 ## 0.8.0
 
 ### Minor Changes

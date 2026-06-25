@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
+## 0.28.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- 6805bf5: Change base furn packages to stricter types
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [6805bf5]
+  - @fluentui-react-native/framework-base@0.4.1
+  - @fluentui-react-native/adapters@0.14.5
+
 ## 0.28.4
 
 ### Patch Changes

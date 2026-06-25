@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
+## 0.9.2
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+
 ## 0.9.0
 
 ### Minor Changes

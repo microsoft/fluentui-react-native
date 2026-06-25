@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/codemods
 
+## 0.6.4
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+
 ## 0.6.3
 
 ### Patch Changes

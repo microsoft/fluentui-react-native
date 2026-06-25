@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
+## 0.12.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+
 ## 0.12.4
 
 ### Patch Changes

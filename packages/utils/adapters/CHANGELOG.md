@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/adapters
 
+## 0.14.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- 6805bf5: Change base furn packages to stricter types
+
 ## 0.14.4
 
 ### Patch Changes
