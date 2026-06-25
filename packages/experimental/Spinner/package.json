@@ -32,13 +32,13 @@
   },
   "dependencies": {
     "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",
     "@fluentui-react-native/use-styling": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",

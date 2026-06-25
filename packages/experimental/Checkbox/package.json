@@ -32,11 +32,11 @@
   },
   "dependencies": {
     "@fluentui-react-native/checkbox": "workspace:*",
-    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.8",
     "@react-native-community/cli": "^20.0.0",

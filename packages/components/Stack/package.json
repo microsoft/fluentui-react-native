@@ -33,6 +33,7 @@
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
     "@uifabricshared/foundation-composable": "workspace:*",
     "@uifabricshared/foundation-compose": "workspace:*",
@@ -41,7 +42,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
