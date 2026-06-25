@@ -2,7 +2,9 @@
 // @ts-ignore
 import { parseArgs, styleText } from 'node:util';
 
-import { $, echo, fs } from 'zx';
+import { $, echo, fs, quote } from 'zx';
+
+$.quote = quote;
 
 /**
  * Wrapper around `changeset add` (default) and `changeset status` validation (--check).

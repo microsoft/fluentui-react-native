@@ -35,13 +35,13 @@
     "@fluentui-react-native/button": "workspace:*",
     "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/interactive-hooks": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
