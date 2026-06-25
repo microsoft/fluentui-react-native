@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
+## 0.9.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- 2f7c365: Add missing dependency on framework-base
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [6805bf5]
+  - @fluentui-react-native/framework@0.16.1
+  - @fluentui-react-native/framework-base@0.4.1
+
 ## 0.9.4
 
 ### Patch Changes

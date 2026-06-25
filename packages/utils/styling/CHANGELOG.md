@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/styling-utils
 
+## 0.8.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+
 ## 0.8.4
 
 ### Patch Changes

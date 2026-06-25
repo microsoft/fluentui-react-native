@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/callout
 
+## 0.28.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [6805bf5]
+  - @uifabricshared/foundation-composable@0.14.5
+  - @uifabricshared/foundation-settings@0.16.5
+  - @uifabricshared/foundation-compose@1.16.5
+  - @fluentui-react-native/adapters@0.14.5
+  - @fluentui-react-native/tokens@0.24.5
+
 ## 0.28.4
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/focus-zone
 
+## 0.22.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [6805bf5]
+  - @uifabricshared/foundation-composable@0.14.5
+  - @uifabricshared/foundation-settings@0.16.5
+  - @fluentui-react-native/interactive-hooks@0.28.5
+  - @fluentui-react-native/adapters@0.14.5
+
 ## 0.22.4
 
 ### Patch Changes

@@ -1,5 +1,26 @@
 # Change Log - @fluentui-react-native/menu
 
+## 1.15.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [2f7c365]
+- Updated dependencies [6805bf5]
+  - @fluentui-react-native/interactive-hooks@0.28.5
+  - @fluentui-react-native/use-styling@0.15.1
+  - @fluentui-react-native/theming-utils@0.27.5
+  - @fluentui-react-native/focus-zone@0.22.5
+  - @fluentui-react-native/theme-tokens@0.28.5
+  - @fluentui-react-native/framework@0.16.1
+  - @fluentui-react-native/callout@0.28.5
+  - @fluentui-react-native/icon@0.22.5
+  - @fluentui-react-native/text@0.25.5
+  - @fluentui-react-native/framework-base@0.4.1
+  - @fluentui-react-native/adapters@0.14.5
+  - @fluentui-react-native/tokens@0.24.5
+
 ## 1.15.4
 
 ### Patch Changes

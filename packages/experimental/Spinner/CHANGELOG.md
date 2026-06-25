@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/spinner
 
+## 0.10.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- 2f7c365: Add missing dependency on framework-base
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [2f7c365]
+- Updated dependencies [6805bf5]
+  - @fluentui-react-native/use-styling@0.15.1
+  - @fluentui-react-native/theme-tokens@0.28.5
+  - @fluentui-react-native/framework@0.16.1
+  - @fluentui-react-native/text@0.25.5
+  - @fluentui-react-native/framework-base@0.4.1
+
 ## 0.10.4
 
 ### Patch Changes

@@ -1,5 +1,22 @@
 # Change Log - @fluentui-react-native/framework
 
+## 0.16.1
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- Updated dependencies [6c2d6e6]
+- Updated dependencies [6805bf5]
+  - @fluentui-react-native/composition@0.13.1
+  - @fluentui-react-native/use-styling@0.15.1
+  - @fluentui-react-native/default-theme@0.27.5
+  - @fluentui-react-native/use-tokens@0.8.1
+  - @fluentui-react-native/use-slots@0.12.1
+  - @fluentui-react-native/theme-types@0.44.5
+  - @fluentui-react-native/use-slot@0.8.1
+  - @fluentui-react-native/framework-base@0.4.1
+  - @fluentui-react-native/tokens@0.24.5
+
 ## 0.16.0
 
 ### Minor Changes

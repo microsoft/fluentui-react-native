@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/experimental-appearance-additions
 
+## 0.8.5
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- Updated dependencies [6c2d6e6]
+  - @fluentui-react-native/framework@0.16.1
+
 ## 0.8.4
 
 ### Patch Changes

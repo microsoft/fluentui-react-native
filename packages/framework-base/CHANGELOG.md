@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.4.1
+
+### Patch Changes
+
+- 6c2d6e6: Update packages to esm, with new builds with project references
+- 6805bf5: Change base furn packages to stricter types
+
 ## 0.4.0
 
 ### Minor Changes
