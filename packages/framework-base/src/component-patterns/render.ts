@@ -1,19 +1,22 @@
 import React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
-import type { RenderType, RenderResult, DirectComponent, LegacyDirectComponent } from './render.types.ts';
+import type { DirectComponent } from '../types/render';
 import { extractChildren, splitPropsAndChildren } from '../utilities/typeUtils.ts';
+import { RENDER_CAN_CALL_DIRECT, RENDER_CAN_COMPOSE } from '../types/constants.ts';
+import { LegacyDirectComponent } from '../types/deprecated';
+import type { RenderType, RenderResult } from '../types/components';
 
 export type CustomRender = () => RenderResult;
 
 export function asDirectComponent<TProps>(type: RenderType): DirectComponent<TProps> | undefined {
-  if (typeof type === 'function' && (type as DirectComponent<TProps>)._callDirect) {
+  if (typeof type === 'function' && (type as DirectComponent<TProps>)[RENDER_CAN_CALL_DIRECT]) {
     return type as DirectComponent<TProps>;
   }
   return undefined;
 }
 
 function asLegacyDirectComponent<TProps>(type: RenderType): LegacyDirectComponent<TProps> | undefined {
-  if (typeof type === 'function' && (type as LegacyDirectComponent<TProps>)._canCompose) {
+  if (typeof type === 'function' && (type as LegacyDirectComponent<TProps>)[RENDER_CAN_COMPOSE]) {
     return type as LegacyDirectComponent<TProps>;
   }
   return undefined;

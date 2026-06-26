@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import type { StagedRender, ComposableFunction } from './render.types.ts';
+import type { StagedRender, ComposableFunction } from '../types/deprecated.ts';
+import { RENDER_STAGED } from '../types/constants.ts';
 
 function asArray<T>(val: T | T[]): T[] {
   return Array.isArray(val) ? val : [val];
@@ -19,6 +20,6 @@ export function stagedComponent<TProps>(staged: StagedRender<TProps>, memo?: boo
     return staged(rest as TProps)({} as React.PropsWithChildren<TProps>, asArray(children));
   };
   const stagedComponent = memo ? React.memo(component) : component;
-  Object.assign(stagedComponent, { _staged: staged });
+  Object.assign(stagedComponent, { [RENDER_STAGED]: staged });
   return stagedComponent as ComposableFunction<TProps>;
 }

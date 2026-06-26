@@ -1,7 +1,9 @@
 import React from 'react';
-import type { ComposableFunction, PhasedComponent, PhasedRender, FunctionComponent } from './render.types.ts';
+import type { PhasedComponent, PhasedRender } from '../types/render';
+import type { FunctionComponent } from '../types/components';
 import { renderForJsxRuntime } from './render.ts';
-import type { LegacyDirectComponent } from './render.types.ts';
+import type { LegacyDirectComponent, ComposableFunction } from '../types/deprecated';
+import { RENDER_PHASED, RENDER_CAN_COMPOSE, RENDER_STAGED } from '../types/constants.ts';
 
 /**
  * Extract the phased render function from a component, if it has one.
@@ -15,11 +17,11 @@ export function getPhasedRender<TProps>(component: React.ComponentType<TProps>):
   // only a function component can have a phased render
   if (typeof component === 'function') {
     // if this has a phased render function, return it
-    if ((component as PhasedComponent<TProps>)._phasedRender) {
-      return (component as PhasedComponent<TProps>)._phasedRender;
+    if ((component as PhasedComponent<TProps>)[RENDER_PHASED]) {
+      return (component as PhasedComponent<TProps>)[RENDER_PHASED];
     } else {
       // for backward compatibility check for staged render and return a wrapper that maps the signature
-      const staged = (component as ComposableFunction<TProps>)._staged;
+      const staged = (component as ComposableFunction<TProps>)[RENDER_STAGED];
       if (staged) {
         return (props: TProps) => {
           const { children, ...rest } = props as React.PropsWithChildren<TProps>;
@@ -27,8 +29,8 @@ export function getPhasedRender<TProps>(component: React.ComponentType<TProps>):
           // staged render functions were not consistently marking contents as composable, though they were treated
           // as such in useHook. To maintain compatibility we mark the returned function as composable here. This was
           // dangerous, but this shim is necessary for backward compatibility. The newer pattern is explicit about this.
-          if (typeof inner === 'function' && !(inner as LegacyDirectComponent<TProps>)._canCompose) {
-            return Object.assign(inner, { _canCompose: true });
+          if (typeof inner === 'function' && !(inner as LegacyDirectComponent<TProps>)[RENDER_CAN_COMPOSE]) {
+            return Object.assign(inner, { [RENDER_CAN_COMPOSE]: true });
           }
           return inner;
         };
@@ -51,6 +53,6 @@ export function phasedComponent<TProps>(getInnerPhase: PhasedRender<TProps>): Fu
       const Inner = getInnerPhase(outerProps as TProps);
       return renderForJsxRuntime(Inner, { children });
     },
-    { _phasedRender: getInnerPhase },
+    { [RENDER_PHASED]: getInnerPhase },
   );
 }
