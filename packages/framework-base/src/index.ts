@@ -25,21 +25,15 @@ export { renderForJsxRuntime, renderSlot, asDirectComponent } from './component-
 
 // component pattern exports - core types
 export type {
-  DirectComponent,
   FunctionComponent,
   FunctionComponentCore,
-  LegacyDirectComponent,
-  PhasedComponent,
-  PhasedRender,
   PropsOf,
   RenderType,
   RenderResult,
-  StagedRender,
-  ComposableFunction,
-  FinalRender,
-  SlotFn,
-  NativeReactType,
-} from './component-patterns/render.types.ts';
+  RenderType as NativeReactType,
+} from './types/components.ts';
+export type { DirectComponent, PhasedComponent, PhasedRender } from './types/render.ts';
+export type { LegacyDirectComponent, StagedRender, ComposableFunction, FinalRender, SlotFn } from './types/deprecated.ts';
 
 // component pattern exports - component builders
 export { directComponent } from './component-patterns/directComponent.ts';
@@ -58,6 +52,6 @@ export { filterProps } from './utilities/filterProps.ts';
 export type { PropsFilter } from './utilities/filterProps.ts';
 
 // core type utilities exports
-export type { StyleProp, ObjectBase, ObjectFallback } from './utilities/baseTypes.ts';
-export type { ObjectMerger, ObjectMergerWithOptions, StyleMerger } from './utilities/mergeTypes.ts';
+export type { StyleProp, ObjectBase, ObjectFallback } from './types/helpers.ts';
+export type { ObjectMerger, ObjectMergerWithOptions, StyleMerger } from './types/merge.ts';
 export type { ExpandedTypeof, TypeofResult } from './utilities/typeUtils.ts';

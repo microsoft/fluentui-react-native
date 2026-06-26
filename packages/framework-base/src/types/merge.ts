@@ -1,4 +1,4 @@
-import type { StyleProp, ObjectFallback } from './baseTypes.ts';
+import type { StyleProp, ObjectFallback } from './helpers.ts';
 
 /**
  * Overloaded function types for an object merger, similar to Object.assign but with better type inference and support for
