@@ -1,0 +1,60 @@
+{
+  "name": "@fluentui-react-native/agentic-components-storybook",
+  "version": "0.1.0",
+  "private": true,
+  "description": "On-device Storybook (react-native-macos) app for @fluentui-react-native/agentic-components",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic-components/storybook"
+  },
+  "scripts": {
+    "start": "rnx-cli start",
+    "macos": "rnx-cli run --platform macos",
+    "bundle:macos": "yarn storybook-generate && rnx-cli bundle --dev false --platform macos",
+    "storybook-generate": "sb-rn-get-stories --config-path .rnstorybook",
+    "lint": "fluentui-scripts lint",
+    "format": "fluentui-scripts format"
+  },
+  "dependencies": {
+    "@fluentui-react-native/agentic-components": "workspace:*",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-native-safe-area-context": "^4.14.0"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native-async-storage/async-storage": "^3.1.1",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
+    "@react-native-community/datetimepicker": "^9.1.0",
+    "@react-native-community/slider": "^5.0.0",
+    "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-config": "^0.81.0",
+    "@rnx-kit/cli": "catalog:",
+    "@rnx-kit/metro-config": "catalog:",
+    "@rnx-kit/metro-resolver-symlinks": "catalog:",
+    "@storybook/addon-ondevice-actions": "^10.4.7",
+    "@storybook/addon-ondevice-controls": "^10.4.7",
+    "@storybook/react-native": "^10.4.7",
+    "@storybook/react-native-ui-lite": "^10.4.7",
+    "@types/react": "~19.1.4",
+    "oxc-resolver": "catalog:",
+    "react-native-macos": "^0.81.0",
+    "react-native-test-app": "catalog:",
+    "storybook": "^10.4.0"
+  },
+  "rnx-kit": {
+    "kitType": "app",
+    "alignDeps": {
+      "capabilities": [
+        "core",
+        "core-macos"
+      ]
+    },
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}
