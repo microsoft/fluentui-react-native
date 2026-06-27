@@ -57,6 +57,11 @@ Requires Xcode + CocoaPods.
 > under the stricter `consteval` checks. `macos/Podfile` includes a `post_install` patch that
 > disables fmt's compile-time format-string checking (ABI-safe), re-applied on every `pod install`.
 
+> `react-native-safe-area-context` note: Storybook's UI imports it, but its native module is
+> iOS-only (UIKit) and uses a Yoga API that doesn't compile for react-native-macos 0.81. It is
+> therefore not installed; `metro.config.js` aliases the import to a JS-only stub in
+> `.storybook-mocks/`, so no native module is needed.
+
 ## Bundling (no native toolchain required)
 
 You can produce the JS bundle without Xcode. This also generates `storybook.requires` first:

@@ -12,6 +12,10 @@ const symlinkResolver = MetroSymlinksResolver({
   resolver: 'oxc-resolver',
 });
 
+// JS-only replacement for react-native-safe-area-context (its native module does not build for
+// react-native-macos 0.81 — see the stub file for details).
+const safeAreaStub = path.resolve(__dirname, '.storybook-mocks/react-native-safe-area-context.js');
+
 const config = makeMetroConfig({
   projectRoot: __dirname,
   watchFolders: [packageRoot, repoRoot],
@@ -25,6 +29,10 @@ const config = makeMetroConfig({
       // guard avoids also mocking `-ui-lite` and `-ui-common`.
       if (moduleName === '@storybook/react-native-ui' || moduleName.startsWith('@storybook/react-native-ui/')) {
         return { type: 'empty' };
+      }
+      // Redirect react-native-safe-area-context to a JS-only stub (no incompatible native module).
+      if (moduleName === 'react-native-safe-area-context') {
+        return { type: 'sourceFile', filePath: safeAreaStub };
       }
       return symlinkResolver(context, moduleName, platform);
     },
