@@ -1,0 +1,86 @@
+{
+  "name": "@fluentui-react-native/agentic-components-storybook",
+  "version": "0.1.0",
+  "private": true,
+  "description": "On-device Storybook (react-native-macos) app for @fluentui-react-native/agentic-components",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic-components/storybook"
+  },
+  "scripts": {
+    "start": "rnx-cli start",
+    "macos": "rnx-cli run --platform macos",
+    "bundle:macos": "yarn prebuild && rnx-cli bundle --dev false --platform macos",
+    "prebuild": "sb-rn-get-stories --config-path src",
+    "storybook-server": "node storybook-server.cjs",
+    "lint": "fluentui-scripts lint",
+    "format": "fluentui-scripts format"
+  },
+  "dependencies": {
+    "@fluentui-react-native/agentic-components": "workspace:*",
+    "react": "19.1.4",
+    "react-native": "^0.81.6"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
+    "@react-native-community/datetimepicker": "^9.1.0",
+    "@react-native-community/slider": "^5.0.0",
+    "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-config": "^0.81.0",
+    "@rnx-kit/cli": "catalog:",
+    "@rnx-kit/metro-config": "catalog:",
+    "@rnx-kit/metro-resolver-symlinks": "catalog:",
+    "@storybook/addon-ondevice-actions": "^10.4.7",
+    "@storybook/addon-ondevice-controls": "^10.4.7",
+    "@storybook/mcp": "^0.7.0",
+    "@storybook/react": "^10.4.6",
+    "@storybook/react-native": "^10.4.7",
+    "@storybook/react-native-ui-lite": "^10.4.7",
+    "@tmcp/adapter-valibot": "^0.1.6",
+    "@tmcp/transport-http": "^0.8.6",
+    "@types/react": "~19.1.4",
+    "oxc-resolver": "catalog:",
+    "react-native-macos": "^0.81.0",
+    "react-native-test-app": "catalog:",
+    "storybook": "^10.4.0",
+    "tmcp": "^1.19.4",
+    "valibot": "^1.4.1"
+  },
+  "rnx-kit": {
+    "kitType": "app",
+    "bundle": [
+      {
+        "id": "main",
+        "entryFile": "index.js",
+        "assetsDest": "dist",
+        "targets": [
+          "macos",
+          "windows"
+        ],
+        "platforms": {
+          "macos": {
+            "bundleOutput": "dist/index.macos.jsbundle",
+            "sourcemapOutput": "dist/index.macos.jsbundle.map"
+          },
+          "windows": {
+            "bundleOutput": "dist/index.windows.bundle",
+            "sourcemapOutput": "dist/index.windows.bundle.map"
+          }
+        }
+      }
+    ],
+    "alignDeps": {
+      "capabilities": [
+        "core",
+        "core-macos"
+      ]
+    },
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}
