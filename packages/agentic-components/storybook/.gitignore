@@ -11,6 +11,9 @@ macos/Pods/
 macos/build/
 macos/DerivedData/
 macos/Podfile.lock
+macos/.xcode.env
 macos/*.xcodeproj/
 macos/*.xcworkspace/
 dist/
+
+

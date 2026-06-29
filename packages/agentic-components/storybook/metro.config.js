@@ -14,7 +14,7 @@ const symlinkResolver = MetroSymlinksResolver({
 
 // JS-only replacement for react-native-safe-area-context (its native module does not build for
 // react-native-macos 0.81 — see the stub file for details).
-const safeAreaStub = path.resolve(__dirname, '.storybook-mocks/react-native-safe-area-context.js');
+const safeAreaStub = path.resolve(__dirname, './src/storybook-mocks/react-native-safe-area-context.js');
 
 const config = makeMetroConfig({
   projectRoot: __dirname,
