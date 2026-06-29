@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import type { PackageManifest } from '../utils/projectRoot.ts';
+import type { PackageManifest } from '../pkgContext.ts';
 
 /**
  * Get the package.json manifest for a given folder.

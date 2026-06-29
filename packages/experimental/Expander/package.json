@@ -25,7 +25,6 @@
   "scripts": {
     "build": "tsgo -b",
     "clean": "fluentui-scripts clean",
-    "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts lint",
     "test": "fluentui-scripts jest",
     "update-api": "fluentui-scripts update-api-extractor",

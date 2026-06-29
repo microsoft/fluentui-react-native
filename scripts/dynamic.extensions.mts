@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { getToolVersion, hasJestConfig } from './src/preinstall/tool-versions.ts';
-import type { PackageManifest } from './src/utils/projectRoot.ts';
+import type { PackageManifest } from './src/pkgContext.ts';
 
 type ConditionalCheck = () => boolean;
 
