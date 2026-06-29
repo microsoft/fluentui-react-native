@@ -27,7 +27,7 @@ const config = async (): Promise<KnipConfig> => {
       const baseProject = knip.project ?? ['src/**/*'];
       const project = knip.extraProject ? [...baseProject, ...knip.extraProject] : baseProject;
 
-      const ignoreDependencies: string[] = [];
+      const ignoreDependencies: string[] = knip.ignoreDependencies ?? [];
 
       return [
         relativePath,

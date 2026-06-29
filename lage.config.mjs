@@ -20,7 +20,7 @@ const config = {
       // which doesn't exist, so lage silently drops the edge. Point at the
       // specific root target with the packageName#task syntax so every
       // package's tests wait for the whole-repo build to finish.
-      dependsOn: ['@fluentui-react-native/root#build'],
+      dependsOn: ['@fluentui-react-native/root#root-build'],
       inputs: [],
       outputs: [],
     },
@@ -44,10 +44,25 @@ const config = {
     'lint-repo': {
       cache: false,
     },
+    prebuild: {
+      /**
+       * Prebuild is a pre-build step that can either modify the source code or generate additional files in the project.
+       */
+      dependsOn: ['^prebuild'],
+      inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
+      outputs: ['lib/**/*', 'src/**/*'],
+    },
+    'root-prebuild': {
+      cache: false,
+    },
+    'root-build': {
+      dependsOn: ['@fluentui-react-native/root#root-prebuild'],
+      cache: false,
+    },
 
     // ── Pipeline aliases ───────────────────────────────────────────────────
     'repo-checks': ['lint-repo', 'check-publishing'],
-    buildci: ['lint-repo', 'check-publishing', 'build', 'test', 'lint'],
+    buildci: ['lint-repo', 'check-publishing', '@fluentui-react-native/root#root-build', 'test', 'lint'],
 
     // ── Worker tasks ───────────────────────────────────────────────────────
     'test-links': {

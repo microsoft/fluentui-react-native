@@ -21,17 +21,22 @@
   },
   "dependencies": {
     "@fluentui-react-native/agentic-components": "workspace:*",
+    "@types/react": "~19.1.4",
     "react": "19.1.4",
-    "react-native": "^0.81.6"
+    "react-native": "^0.81.6",
+    "react-native-macos": "^0.81.0",
+    "react-native-windows": "^0.81.0"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-android": "^20.0.0",
     "@react-native-community/cli-platform-ios": "^20.0.0",
     "@react-native-community/datetimepicker": "^9.1.0",
     "@react-native-community/slider": "^5.0.0",
     "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-babel-transformer": "^0.81.0",
     "@react-native/metro-config": "^0.81.0",
     "@rnx-kit/cli": "catalog:",
     "@rnx-kit/metro-config": "catalog:",
@@ -44,13 +49,19 @@
     "@storybook/react-native-ui-lite": "^10.4.7",
     "@tmcp/adapter-valibot": "^0.1.6",
     "@tmcp/transport-http": "^0.8.6",
-    "@types/react": "~19.1.4",
+    "metro": "^0.83.1",
     "oxc-resolver": "catalog:",
-    "react-native-macos": "^0.81.0",
     "react-native-test-app": "catalog:",
     "storybook": "^10.4.0",
     "tmcp": "^1.19.4",
     "valibot": "^1.4.1"
+  },
+  "furn": {
+    "knip": {
+      "ignoreDependencies": [
+        "@fluentui-react-native/agentic-components"
+      ]
+    }
   },
   "rnx-kit": {
     "kitType": "app",
@@ -76,9 +87,20 @@
       }
     ],
     "alignDeps": {
+      "requirements": {
+        "production": [
+          "react-native@0.81"
+        ]
+      },
       "capabilities": [
+        "babel-preset-react-native",
+        "community/cli",
         "core",
-        "core-macos"
+        "core-macos",
+        "core-windows",
+        "core/metro-config",
+        "metro-react-native-babel-transformer",
+        "metro"
       ]
     },
     "extends": "@fluentui-react-native/scripts/kit-config"
