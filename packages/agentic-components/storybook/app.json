@@ -1,0 +1,13 @@
+{
+  "name": "AgenticStorybook",
+  "displayName": "Agentic Components Storybook",
+  "components": [
+    {
+      "appKey": "AgenticStorybook",
+      "displayName": "Agentic Components Storybook"
+    }
+  ],
+  "resources": {
+    "macos": ["dist/assets", "dist/index.macos.jsbundle"]
+  }
+}

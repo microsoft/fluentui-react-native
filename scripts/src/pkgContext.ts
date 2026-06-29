@@ -21,6 +21,7 @@ export type FurnConfig = {
     extraEntries?: string[];
     project?: string[];
     extraProject?: string[];
+    ignoreDependencies?: string[];
   };
 };
 
