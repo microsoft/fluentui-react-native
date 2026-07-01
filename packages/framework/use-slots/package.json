@@ -34,8 +34,7 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
-    "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/use-slot": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

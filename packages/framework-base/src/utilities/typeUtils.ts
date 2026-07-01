@@ -1,3 +1,5 @@
+import { PropsWithoutChildren } from '../types/props.types.ts';
+
 /**
  *
  */
@@ -39,15 +41,17 @@ export function isObject<T extends Record<string | symbol, unknown>>(value: unkn
  * @param props unknown props type object to split
  * @returns a tuple of the non-children props and the children
  */
-export function splitPropsAndChildren<TProps>(props: TProps): [Omit<TProps, 'children'>, React.ReactNode] {
+export function splitPropsAndChildren<TProps>(props: TProps): [PropsWithoutChildren<TProps>, React.ReactNode] {
+  if ((props as React.PropsWithChildren<TProps>).children == null) {
+    return [props as PropsWithoutChildren<TProps>, null];
+  }
   const { children, ...rest } = props as React.PropsWithChildren<TProps>;
-  return [rest as Omit<TProps, 'children'>, children];
+  return [rest as PropsWithoutChildren<TProps>, children];
 }
 
 /**
  * Helper to get the children from an unknown props type object.
  */
-export function extractChildren<TProps>(props: TProps): React.ReactNode {
-  const { children } = props as React.PropsWithChildren<TProps>;
-  return children;
+export function getPropsChildren<TProps>(props: TProps): React.ReactNode | undefined {
+  return (props as React.PropsWithChildren<TProps>).children;
 }

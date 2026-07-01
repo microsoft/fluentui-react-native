@@ -3,7 +3,7 @@ import type { PhasedComponent, StagedComponent, LegacyFunctionComponent } from '
 import { renderForJsxRuntime } from './render.ts';
 import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY } from '../const.ts';
 import { PropsWithoutChildren } from '../types/props.types.ts';
-import { legacyDirectComponent, isLegacyDirectComponent } from './direct.ts';
+import { splitPropsAndChildren } from '../utilities/typeUtils.ts';
 
 /**
  * PHASED RENDERING (formerly called "staged" or "two-stage" rendering)
@@ -19,31 +19,6 @@ import { legacyDirectComponent, isLegacyDirectComponent } from './direct.ts';
  * The component itself will be a FunctionComponent, but it will have an attached property that is the phased render function. This allows the component to be used in two
  * parts via the useSlot hook, or to be used directly in JSX/TSX as a normal component.
  */
-
-/**
- * Resolve the inner component from a phased or staged component.
- * This function handles both the newer PhasedComponent pattern and the legacy
- * StagedComponent pattern for backward compatibility.
- *
- * @param component - The component to resolve the inner component from
- * @param props - The props to pass to the inner component, should not include children
- * @returns The inner component if present, null otherwise
- * @internal
- */
-export function resolveInnerComponent<TProps>(
-  component: React.ComponentType<TProps>,
-  props: PropsWithoutChildren<TProps>,
-): React.ComponentType<TProps> | null {
-  if (isPhasedComponent<TProps>(component)) {
-    return component[SLOT_COMPONENT_KEY](props);
-  } else if (isStagedComponent<TProps>(component)) {
-    const result = component[SLOT_COMPONENT_KEY](props);
-    // staged render functions were not consistently marking the returned functions correctly, attach the extra
-    // properties here if not already present
-    return isLegacyDirectComponent(result) ? result : legacyDirectComponent(result);
-  }
-  return null;
-}
 
 /**
  * Take a phased render function and make a real component out of it, attaching the phased render function
@@ -80,14 +55,14 @@ export function isPhasedComponent<TProps>(component: unknown): component is Phas
  * @deprecated Use phasedComponent from phasedComponent.ts instead
  */
 export function stagedComponent<TProps>(
-  staged: (props: TProps) => LegacyFunctionComponent<TProps>,
+  staged: (props: PropsWithoutChildren<Partial<TProps>>) => LegacyFunctionComponent<TProps>,
   memo?: boolean,
 ): StagedComponent<TProps> {
   // component wrapper that will render in the case that this component is not
   // used as a slot
   const component = (props: TProps) => {
-    const { children, ...rest } = props as React.PropsWithChildren<TProps>;
-    const final = staged(rest as TProps);
+    const [rest, children] = splitPropsAndChildren(props);
+    const final = staged(rest);
     return Array.isArray(children) ? final({} as TProps, ...children) : final({} as TProps, children);
   };
 

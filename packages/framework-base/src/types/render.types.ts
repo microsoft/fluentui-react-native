@@ -91,7 +91,7 @@ export type LegacyDirectComponent<TProps> = LegacyFunctionComponent<TProps> & {
  * For this type of component, the returned inner component can be of any type.
  */
 export type PhasedComponent<TProps> = FunctionComponent<TProps> & {
-  [SLOT_COMPONENT_KEY]: (props: PropsWithoutChildren<TProps>) => React.ComponentType<TProps>;
+  [SLOT_COMPONENT_KEY]: (props: Partial<TProps>) => React.ComponentType<TProps>;
   [SLOT_RENDER_TYPE_KEY]: Extract<CustomRenderType, 'phased'>;
 };
 
@@ -100,7 +100,7 @@ export type PhasedComponent<TProps> = FunctionComponent<TProps> & {
  * @deprecated use the newer phasedComponent pattern for new code
  */
 export type StagedComponent<TProps> = FunctionComponent<TProps> & {
-  [SLOT_COMPONENT_KEY]: (props: PropsWithoutChildren<TProps>) => LegacyFunctionComponent<TProps>;
+  [SLOT_COMPONENT_KEY]: (props: PropsWithoutChildren<Partial<TProps>>) => LegacyFunctionComponent<TProps>;
   [SLOT_RENDER_TYPE_KEY]: Extract<CustomRenderType, 'phased-legacy'>;
 };
 
@@ -122,11 +122,53 @@ export type SlotComponent<TProps> = FunctionComponent<TProps> & {
   /**
    * Optional attached props for the slot, these will be merged with the props passed in during rendering.
    */
-  [SLOT_PROPS_KEY]?: TProps;
+  [SLOT_PROPS_KEY]: Partial<TProps>;
 
   /**
    * Optional props transformation function, this can be used to do things like filtering or making final
    * modifications to the props before they are passed to the inner component.
    */
   [SLOT_PROP_TRANSFORM_KEY]?: (props: TProps) => TProps;
+};
+
+export type PropsTransform<TPropsIn, TPropsOut = TPropsIn> = (props: TPropsIn) => TPropsOut;
+
+/**
+ * useSlot hook signature, here to make overloads easier to understand
+ * - overload 1 handles the case where all required props are provided, in this case the component accepts partial props
+ * - overload 2 handles the case where required props are missing, in this case they must be passed to the jsx
+ */
+export type UseSlot = {
+  /**
+   * First overload: fulfilled props
+   * - either no required props or all required props (except children) satisfied
+   * - result is a component that has partial props so there is no need to provide them again in jsx
+   */
+  <TProps>(component: React.ComponentType<TProps>, props: TProps, transform?: PropsTransform<TProps>): SlotComponent<Partial<TProps>>;
+  /**
+   * Second overload: non-children props not fulfilled
+   * - result is a component that requires all required props to be provided in the jsx
+   */
+  <TProps>(component: React.ComponentType<TProps>, props: Partial<TProps>, transform?: PropsTransform<TProps>): SlotComponent<TProps>;
+};
+
+/**
+ * useOptionalSlot signature, adds the ability for the component to be null or undefined
+ * - if so will return null for the slot
+ */
+export type UseOptionalSlot = {
+  /**
+   * Third overload: component type is undefined or null
+   * - result is a null return result
+   */
+  <TProps>(
+    component: React.ComponentType<TProps> | undefined | null,
+    props: TProps,
+    transform?: PropsTransform<TProps>,
+  ): SlotComponent<Partial<TProps>> | null;
+  <TProps>(
+    component: React.ComponentType<TProps> | undefined | null,
+    props: Partial<TProps>,
+    transform?: PropsTransform<TProps>,
+  ): SlotComponent<TProps> | null;
 };

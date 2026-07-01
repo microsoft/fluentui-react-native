@@ -28,9 +28,10 @@ export { mergeProps } from './merge-props/mergeProps.ts';
  * ----- COMPONENT PATTERNS -----
  */
 
-export { renderForJsxRuntime, renderSlot, createSlotComponent } from './component-patterns/render.ts';
+export { renderSlot, createSlotComponent } from './component-patterns/render.ts';
 export { directComponent, isDirectComponent, legacyDirectComponent, isLegacyDirectComponent } from './component-patterns/direct.ts';
 export { phasedComponent, isPhasedComponent, stagedComponent, isStagedComponent } from './component-patterns/phased.ts';
+export { useSlot, useOptionalSlot } from './component-patterns/useSlot.ts';
 
 // legacy JSX handler
 export { withSlots } from './component-patterns/withSlots.tsx';
@@ -44,8 +45,10 @@ export type { FurnJSX } from './jsx-namespace.ts';
 /**
  * ----- UTILITIES -----
  */
-export { filterProps } from './utilities/filterProps.ts';
+export { filterProps, propTransformFromFilter } from './utilities/filterProps.ts';
 export { extractChildren, extractProps, extractStyle } from './utilities/extract.ts';
+export { getPropsChildren, isObject, splitPropsAndChildren, getEntityType } from './utilities/typeUtils.ts';
+export type { ExpandedTypeof, TypeofResult } from './utilities/typeUtils.ts';
 
 /**
  * ------- TYPES --------
@@ -80,4 +83,3 @@ export type {
   ReplaceNullWithUndefined,
   IsSingleton,
 } from './types/utility.types.ts';
-export type { ExpandedTypeof, TypeofResult } from './utilities/typeUtils.ts';

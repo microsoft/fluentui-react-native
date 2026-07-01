@@ -16,9 +16,8 @@ export function filterProps<TProps>(props: TProps, filter?: PropsFilter): TProps
 /**
  * Caching wrapper that turns filters into transform functions. Realistically we only have three main filters in the library
  * that are rarely used. This will create wrappers on demand that will be cached and re-used.
- * @internal
  */
-export const transformFromFilter = (() => {
+export const propTransformFromFilter = (() => {
   // weak map for caching transform functions
   type TransformCache = WeakMap<PropsFilter, <T>(props: T) => T>;
   let cache: TransformCache;

@@ -32,15 +32,8 @@ export type {
   TokenBuilder,
 } from '@fluentui-react-native/tokens';
 
-export { useSlot } from '@fluentui-react-native/use-slot';
-export { renderSlot, stagedComponent, withSlots } from '@fluentui-react-native/framework-base';
-export type {
-  ComposableFunction,
-  FinalRender,
-  RenderType as NativeReactType,
-  SlotFn,
-  StagedRender,
-} from '@fluentui-react-native/framework-base';
+export { renderSlot, stagedComponent, withSlots, useSlot } from '@fluentui-react-native/framework-base';
+export type { RenderType as NativeReactType } from '@fluentui-react-native/framework-base';
 
 export { buildUseSlots } from '@fluentui-react-native/use-slots';
 export type { GetSlotProps, Slots, UseSlotOptions, UseSlotsBase } from '@fluentui-react-native/use-slots';

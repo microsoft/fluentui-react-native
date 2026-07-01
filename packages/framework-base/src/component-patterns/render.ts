@@ -1,10 +1,10 @@
 import React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
-import type { RenderType, RenderResult, SlotComponent } from '../types/render.types.ts';
-import { extractChildren } from '../utilities/typeUtils.ts';
+import type { RenderType, RenderResult, SlotComponent, PropsTransform } from '../types/render.types.ts';
 import { isDirectComponentType, renderDirectComponent } from './direct.ts';
-import { CreateSlotOptions, isSlotComponent, prepareSlotProps, setSlotStatics } from './slot.ts';
+import { isSlotComponent, prepareSlotProps, setSlotStatics } from './slot.ts';
 import { SLOT_COMPONENT_KEY } from '../const.ts';
+import { getPropsChildren } from '../utilities/typeUtils.ts';
 
 export type CustomRender = () => RenderResult;
 
@@ -39,7 +39,7 @@ export function renderForJsxRuntime<TProps>(
 
   // auto-detect whether to use jsx or jsxs based on number of children, 0 or 1 = jsx, more than 1 = jsxs
   if (!jsxFn) {
-    if (React.Children.count(extractChildren(props)) > 1) {
+    if (React.Children.count(getPropsChildren(props)) > 1) {
       jsxFn = ReactJSX.jsxs;
     } else {
       jsxFn = ReactJSX.jsx;
@@ -55,20 +55,20 @@ export function renderForJsxRuntime<TProps>(
  * the renderForJsxFunction directly.
  * @param component inner component type
  * @param props props targeting that component
- * @param options optional options that can set a filter or transform for the slot
+ * @param transform optional transform function for the slot
  * @return a slot component
  */
 export function createSlotComponent<TProps>(
   component: React.ComponentType<TProps>,
-  props: TProps,
-  options?: CreateSlotOptions<TProps>,
+  props: Partial<TProps>,
+  transform?: PropsTransform<TProps>,
 ): SlotComponent<TProps> {
   const slot: SlotComponent<TProps> = Object.assign(
     (props: TProps) => {
       props = prepareSlotProps(slot, props);
       return renderForJsxRuntime(component, props);
     },
-    setSlotStatics<TProps>({}, component, props, options),
+    setSlotStatics<TProps>({}, component, props, transform),
   );
   return slot;
 }

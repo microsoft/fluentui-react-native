@@ -1,4 +1,4 @@
-import { DistributiveOmit } from './utility.types';
+import { DistributiveOmit, PartialExcept } from './utility.types';
 
 /**
  * This is a copy of the react-native style prop type, copied here to avoid RN dependencies this early in the dependency tree.
@@ -41,10 +41,25 @@ export type PropsOf<TComponent> = TComponent extends React.JSXElementConstructor
 export type PropsWithoutRef<P> = 'ref' extends keyof P ? DistributiveOmit<P, 'ref'> : P;
 
 /**
+ * Returns just the children entry from a props type or {} if not present
+ */
+export type PropsChildren<P> = 'children' extends keyof P ? Pick<P, 'children'> : {};
+
+/**
  * Removes the 'children' prop from the given Props type, leaving unions intact (such as the discriminated union created by
  * IntrinsicSlotProps). This allows IntrinsicSlotProps to be used with React.forwardRef.
  */
 export type PropsWithoutChildren<P> = 'children' extends keyof P ? DistributiveOmit<P, 'children'> : P;
+
+/**
+ * A partial props type that omits children
+ */
+export type PartialWithoutChildren<P> = Partial<PropsWithoutChildren<P>>;
+
+/**
+ * A partial props type that still includes unadulterated children (if present)
+ */
+export type PartialWithRequiredChildren<P> = 'children' extends keyof P ? PartialExcept<P, 'children'> : Partial<P>;
 
 /**
  * A signature for a property filter function.

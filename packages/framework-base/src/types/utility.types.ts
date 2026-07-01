@@ -52,3 +52,8 @@ export type ReplaceNullWithUndefined<T> = T extends null ? Exclude<T, null> | un
  * ```
  */
 export type IsSingleton<T extends string> = { [K in T]: Exclude<T, K> extends never ? true : false }[T];
+
+/**
+ * Make all the fields of a given type partial except the ones specified in K
+ */
+export type PartialExcept<T, K extends keyof T> = DistributivePick<T, K> & Partial<DistributiveOmit<T, K>>;

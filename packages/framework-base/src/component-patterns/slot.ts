@@ -1,18 +1,7 @@
-import type { SlotComponent } from '../types/render.types.ts';
+import type { PropsTransform, SlotComponent } from '../types/render.types.ts';
 import { SLOT_COMPONENT_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const.ts';
-import { PropsFilter } from '../types/props.types.ts';
-import { transformFromFilter } from '../utilities/filterProps.ts';
 import { isPhasedComponent, isStagedComponent } from './phased.ts';
 import { mergeProps } from '../merge-props/mergeProps.ts';
-
-/**
- * Additional options for creating a slot
- */
-export type CreateSlotOptions<TProps> = {
-  filter?: PropsFilter;
-  transform?: (props: TProps) => TProps;
-  memo?: boolean;
-};
 
 /**
  * Convenience type, just referencing the statics of the component
@@ -32,12 +21,12 @@ export type SlotComponentStatics<TProps> = Pick<
 export function setSlotStatics<TProps>(
   statics: Partial<SlotComponentStatics<TProps>>,
   component: React.ComponentType<TProps>,
-  props: TProps,
-  options?: CreateSlotOptions<TProps>,
+  props: Partial<TProps>,
+  transform?: PropsTransform<TProps>,
 ): SlotComponentStatics<TProps> {
   statics[SLOT_COMPONENT_KEY] = component;
   statics[SLOT_PROPS_KEY] = props;
-  statics[SLOT_PROP_TRANSFORM_KEY] = options?.transform ?? transformFromFilter(options?.filter);
+  statics[SLOT_PROP_TRANSFORM_KEY] = transform;
   if (component.displayName) {
     statics.displayName = component.displayName;
   }

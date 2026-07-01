@@ -4,9 +4,8 @@ import { act } from 'react';
 import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { mergeStyles } from '@fluentui-react-native/framework-base';
+import { mergeStyles, useSlot } from '@fluentui-react-native/framework-base';
 import type { Theme } from '@fluentui-react-native/theme-types';
-import { useSlot } from '@fluentui-react-native/use-slot';
 import { applyTokenLayers } from '@fluentui-react-native/use-tokens';
 import * as renderer from 'react-test-renderer';
 

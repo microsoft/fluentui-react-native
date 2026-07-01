@@ -1,71 +1,15 @@
 import * as React from 'react';
 
-import { mergeProps, getPhasedRender, directComponent, renderForJsxRuntime, filterProps } from '@fluentui-react-native/framework-base';
-import type { PropsFilter, FunctionComponent, SlotComponent } from '@fluentui-react-native/framework-base';
-import type { CreateSlotOptions } from './slot.ts';
-import type { PropsWithoutChildren } from '../types/props.types.ts';
-
-export type ComponentType<TProps> = React.ComponentType<TProps>;
-
-type SlotData<TProps> = {
-  innerComponent: React.ComponentType<TProps>;
-  propsToMerge?: TProps;
-};
+import type { SlotComponent, UseSlot, UseOptionalSlot, PropsTransform, LegacyFunctionComponent } from '../types/render.types.ts';
+import { setSlotStatics } from './slot.ts';
+import { createSlotComponent } from './render.ts';
+import { isPhasedComponent, isStagedComponent } from './phased.ts';
+import { SLOT_COMPONENT_KEY } from '../const';
+import { isLegacyDirectComponent, legacyDirectComponent } from '../index.ts';
+import { splitPropsAndChildren } from '../utilities/typeUtils.ts';
 
 /**
- * useSlot hook function, allows authoring against pluggable slots as well as allowing components to be called as functions rather than
- * via createElement if they support it.
- *
- * @param component - any kind of component that can be rendered as part of the tree
- * @param hookProps - props, particularly the portion that includes styles, that should be passed to the component. These will be merged with what are specified in the JSX tree
- * @param filter - optional filter that will prune the props before forwarding to the component
- * @returns
- */
-export function useSlot<TProps>(
-  component: React.ComponentType<TProps>,
-  hookProps?: Partial<TProps>,
-  filter?: PropsFilter,
-): FunctionComponent<TProps> {
-  // create this once for this hook instance to hold slot data between phases
-  const slotData = React.useMemo(() => {
-    return {} as SlotData<TProps>;
-  }, []);
-
-  // see if this component is a phased render component
-  const phasedRender = getPhasedRender<TProps>(component);
-  if (phasedRender) {
-    // if it is, run the first phase now with the hook props
-    slotData.innerComponent = phasedRender(hookProps as TProps);
-    slotData.propsToMerge = undefined;
-  } else {
-    // otherwise pass the hook props directly to the component
-    slotData.innerComponent = component;
-    slotData.propsToMerge = hookProps as TProps;
-  }
-
-  // build the secondary processing function and the result holder, done via useMemo so the function identity stays the same. Rebuilding the closure every time would invalidate render
-  return React.useMemo<FunctionComponent<TProps>>(
-    () =>
-      directComponent<TProps>((innerProps: TProps) => {
-        const { propsToMerge, innerComponent } = slotData;
-        if (propsToMerge) {
-          // merge in props from phase one if they haven't been captured in the phased render
-          innerProps = mergeProps(propsToMerge, innerProps);
-        }
-        if (filter) {
-          // filter the final props if a filter is specified
-          innerProps = filterProps<TProps>(innerProps, filter);
-        }
-        // now render the component with the final props
-        return renderForJsxRuntime(innerComponent, innerProps);
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [component, filter, slotData],
-  );
-}
-
-/**
- * The core useSlot implementation, while the return result will always be a SlotComponent, the implementation will fork
+ * The core useSlot hook implementation, while the return result will always be a SlotComponent, the implementation will fork
  * based on whether the component implements special rendering patterns.
  *
  * - component: Standard component (View, Text, function, class, etc.)
@@ -83,11 +27,71 @@ export function useSlot<TProps>(
  *      inner hook component to get to the inner element. This effectively extends the direct component patterns to work with hooks as
  *      well. Allowing things like picking up context for theming without having to create unnecessary wrapper layers.
  *
+ * @param component - any kind of component that can be rendered as part of the tree
+ * @param hookProps - props, either full or partial that should be embedded in the component
+ * @param transform - an optional transform function for filtering props or doing other last minute transitions
  */
-export function useSlotComponent<TProps>(
+export const useSlot: UseSlot = <TProps>(
   component: React.ComponentType<TProps>,
-  hookProps?: Partial<PropsWithoutChildren<TProps>>,
-  options?: CreateSlotOptions<TProps>,
-): SlotComponent<TProps> {
-  // the
-}
+  hookProps: Partial<TProps> = {},
+  transform?: PropsTransform<TProps>,
+): SlotComponent<TProps> => {
+  // handle the component being a phased/staged render
+  if (isPhasedComponent<TProps>(component)) {
+    // phased components can pass through children given that it is carried along with the props
+    component = component[SLOT_COMPONENT_KEY](hookProps);
+    hookProps = {};
+  } else if (isStagedComponent<TProps>(component)) {
+    // staged components need children passed along to the next stage
+    const [props, children] = splitPropsAndChildren(hookProps);
+    if (children != null) {
+      // force cast, if it has children we know it is in the TProps type but that can't be inferred by typescript
+      hookProps = { children } as unknown as Partial<TProps>;
+    }
+    // call the first stage and get the inner component, which will be a LegacyFunctionComponent
+    const inner = component[SLOT_COMPONENT_KEY](props) as LegacyFunctionComponent<TProps>;
+    // attach the type signifier if necessary as legacy consumers aren't reliable about this
+    component = isLegacyDirectComponent(inner) ? inner : legacyDirectComponent(inner);
+  }
+  // now onto the slot creation itself, use a ref to get per-instance storage for the slot
+  const slotRef = React.useRef<SlotComponent<TProps> | null>(null);
+  if (slotRef.current == null) {
+    slotRef.current = createSlotComponent<TProps>(component, hookProps, transform);
+  } else {
+    // update the existing slot with new props and transform if necessary
+    setSlotStatics(slotRef.current, component, hookProps, transform);
+  }
+  return slotRef.current;
+};
+
+/**
+ * The optional slot pattern effectively handles having a null or undefined component type passed in
+ * and handles that changing at runtime.
+ *
+ * To not violate the rule of hooks this does not resolve staged/phased components, instead using their standard entry
+ * point for when they aren't resolved early.
+ *
+ * @param component - react component type which may or may not be specified
+ * @param hookProps - props to be passed to the component
+ * @param transform - an optional transform function for filtering props or doing other last minute transitions
+ * @returns The slot component if the component is defined, otherwise null
+ */
+export const useOptionalSlot: UseOptionalSlot = <TProps>(
+  component: React.ComponentType<TProps> | undefined | null,
+  hookProps: Partial<TProps> = {},
+  transform?: PropsTransform<TProps>,
+): SlotComponent<TProps> | null => {
+  // just create the hook itself
+  const slotRef = React.useRef<SlotComponent<TProps> | null>(null);
+  if (component != null) {
+    if (slotRef.current == null) {
+      slotRef.current = createSlotComponent<TProps>(component, hookProps, transform);
+    } else {
+      // update the existing slot with new props and transform if necessary
+      setSlotStatics(slotRef.current, component, hookProps, transform);
+    }
+  } else {
+    slotRef.current = null;
+  }
+  return slotRef.current;
+};
