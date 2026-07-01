@@ -1,6 +1,6 @@
 import type { MergeOptions } from '../immutable-merge/Merge.ts';
 import { immutableMergeCore, filterToObjects } from '../immutable-merge/Merge.ts';
-import type { ObjectMerger } from '../utilities/mergeTypes.ts';
+import type { ObjectMerger } from '../types/props.types.ts';
 
 import { mergeStyles } from './mergeStyles.ts';
 

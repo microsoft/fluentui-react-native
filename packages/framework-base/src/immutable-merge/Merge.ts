@@ -1,5 +1,5 @@
 import { getEntityType, isObject } from '../utilities/typeUtils.ts';
-import type { ObjectMerger, ObjectMergerWithOptions } from '../utilities/mergeTypes.ts';
+import type { ObjectMerger, ObjectMergerWithOptions } from '../types/props.types.ts';
 
 /**
  * The basic options for recursion at a given level.  Two types for two behaviors:

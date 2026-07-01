@@ -1,40 +1,40 @@
 import React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
-import type { RenderType, RenderResult, DirectComponent, LegacyDirectComponent } from './render.types.ts';
-import { extractChildren, splitPropsAndChildren } from '../utilities/typeUtils.ts';
+import type { RenderType, RenderResult, SlotComponent } from '../types/render.types.ts';
+import { extractChildren } from '../utilities/typeUtils.ts';
+import { isDirectComponentType, renderDirectComponent } from './direct.ts';
+import { CreateSlotOptions, isSlotComponent, prepareSlotProps, setSlotStatics } from './slot.ts';
+import { SLOT_COMPONENT_KEY } from '../const.ts';
 
 export type CustomRender = () => RenderResult;
 
-export function asDirectComponent<TProps>(type: RenderType): DirectComponent<TProps> | undefined {
-  if (typeof type === 'function' && (type as DirectComponent<TProps>)._callDirect) {
-    return type as DirectComponent<TProps>;
-  }
-  return undefined;
-}
-
-function asLegacyDirectComponent<TProps>(type: RenderType): LegacyDirectComponent<TProps> | undefined {
-  if (typeof type === 'function' && (type as LegacyDirectComponent<TProps>)._canCompose) {
-    return type as LegacyDirectComponent<TProps>;
-  }
-  return undefined;
-}
-
+/**
+ * Root jsx render function, used for both jsx and jsxs calls. This handles all of our custom rendering patterns
+ * and slot components.
+ * @param type the component type to render
+ * @param props the props for the component
+ * @param key optional key for the component, this is parallel to props and injected at the framework level
+ * @param jsxFn optional jsx function to use for rendering, set when called by _jsx, _jsxs but will auto-detect for non-framework callers
+ */
 export function renderForJsxRuntime<TProps>(
   type: React.ElementType,
   props: TProps,
   key?: React.Key,
   jsxFn?: typeof ReactJSX.jsx,
 ): RenderResult {
-  const legacyDirect = asLegacyDirectComponent(type);
-  if (legacyDirect) {
-    const [rest, children] = splitPropsAndChildren(props);
-    const newProps = { ...rest, key };
-    return legacyDirect(newProps, ...React.Children.toArray(children)) as RenderResult;
+  // If the type is a direct component type, render it directly
+  if (isDirectComponentType(type)) {
+    const jsxResult = renderDirectComponent(type, props);
+    // If a key is provided, clone the element with the key
+    return key ? React.cloneElement(jsxResult, { key }) : jsxResult;
   }
-  const directComponent = asDirectComponent<TProps>(type);
-  if (directComponent) {
-    const newProps = { ...props, key };
-    return directComponent(newProps);
+
+  // with a slot component use the internal type and props to render directly
+  if (isSlotComponent<TProps>(type)) {
+    const slotType = type[SLOT_COMPONENT_KEY];
+    const slotProps = prepareSlotProps(type, props);
+    // now re-enter with the inner type to handle direct/etc
+    return renderForJsxRuntime(slotType, slotProps, key, jsxFn);
   }
 
   // auto-detect whether to use jsx or jsxs based on number of children, 0 or 1 = jsx, more than 1 = jsxs
@@ -45,17 +45,39 @@ export function renderForJsxRuntime<TProps>(
       jsxFn = ReactJSX.jsx;
     }
   }
-  // Extract key from props to avoid React 19 warning about spreading key prop
 
-  const { key: propsKey, ...propsWithoutKey } = props as any;
-  // Use explicitly passed key, or fall back to key from props
-  const finalKey = key ?? propsKey;
   // now call the appropriate jsx function to render the component
-  return jsxFn(type, propsWithoutKey, finalKey);
+  return jsxFn(type, props, key);
 }
 
-export function renderForClassicRuntime<TProps>(type: RenderType, props: TProps, ...children: React.ReactNode[]): RenderResult {
-  // if it is a non-string type with _canCompose set just call the function directly, otherwise call createElement as normal
+/**
+ * Creates a slot component with the given base component, props, and options. Implemented here as it needs to call
+ * the renderForJsxFunction directly.
+ * @param component inner component type
+ * @param props props targeting that component
+ * @param options optional options that can set a filter or transform for the slot
+ * @return a slot component
+ */
+export function createSlotComponent<TProps>(
+  component: React.ComponentType<TProps>,
+  props: TProps,
+  options?: CreateSlotOptions<TProps>,
+): SlotComponent<TProps> {
+  const slot: SlotComponent<TProps> = Object.assign(
+    (props: TProps) => {
+      props = prepareSlotProps(slot, props);
+      return renderForJsxRuntime(component, props);
+    },
+    setSlotStatics<TProps>({}, component, props, options),
+  );
+  return slot;
+}
+
+/**
+ * Render signature matching the old createElement pattern from the pre-jsx runtime. Will call through to the new runtime.
+ */
+export function renderForClassicRuntime<TProps>(type: RenderType, props: TProps, children: React.ReactNode[]): RenderResult {
+  // route this through to the new runtime
   const propsWithChildren = { children, ...props };
   return renderForJsxRuntime(type as React.ElementType, propsWithChildren);
 }

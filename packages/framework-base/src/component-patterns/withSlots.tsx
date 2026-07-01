@@ -16,6 +16,5 @@ import { renderForClassicRuntime } from './render.ts';
 
 // Can't use typeof on React.createElement since it's overloaded. Approximate createElement's signature for now and widen as needed.
 export function withSlots(reactType: Parameters<typeof React.createElement>[0], props?: unknown, ...children: React.ReactNode[]) {
-  // if it is a non-string type with _canCompose set just call the function directly, otherwise call createElement as normal
-  return renderForClassicRuntime(reactType, props, ...children);
+  return renderForClassicRuntime(reactType, props, children);
 }

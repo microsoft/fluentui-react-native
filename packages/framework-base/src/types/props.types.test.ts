@@ -4,7 +4,7 @@
  * in other files, but will cause build breaks if the types no longer behave as expected.
  */
 
-import type { StyleProp, ObjectBase, ObjectFallback } from './baseTypes.ts';
+import type { StyleProp, ObjectBase, ObjectFallback } from './props.types.ts';
 import type { StyleProp as RNStyleProp } from 'react-native';
 
 /**

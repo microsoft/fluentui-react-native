@@ -30,7 +30,7 @@ export function getEntityType(val: unknown): ExpandedTypeof {
  * @param value some value of unknown type
  * @returns an assertion that the value is an object with string keys and unknown values (not an array or null)
  */
-export function isObject<T extends Record<string, unknown>>(value: unknown): value is T {
+export function isObject<T extends Record<string | symbol, unknown>>(value: unknown): value is T {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
