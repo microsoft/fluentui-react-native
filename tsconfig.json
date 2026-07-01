@@ -188,9 +188,6 @@
       "path": "packages/framework/themed-stylesheet/tsconfig.json"
     },
     {
-      "path": "packages/framework/use-slot/tsconfig.json"
-    },
-    {
       "path": "packages/framework/use-slots/tsconfig.json"
     },
     {

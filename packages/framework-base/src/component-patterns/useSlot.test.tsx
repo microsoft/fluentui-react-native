@@ -3,7 +3,8 @@ import * as React from 'react';
 import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { type FunctionComponent, mergeStyles } from '@fluentui-react-native/framework-base';
+import type { FunctionComponent } from '../types/render.types.ts';
+import { mergeStyles } from '../merge-props/mergeStyles.ts';
 import * as renderer from 'react-test-renderer';
 import { act } from 'react';
 
@@ -70,7 +71,7 @@ const HeaderCaptionText1 = (props: TextProps) => {
   const { children, ...rest } = props;
   const baseStyle = React.useMemo<TextProps['style']>(() => ({ fontSize: 24, fontWeight: 'bold' }), []);
   const mergedProps = { ...rest, style: mergeStyles<TextStyle>(baseStyle, props.style) };
-  const InnerText = useSlot(CaptionText, mergedProps);
+  const InnerText = useSlot<PluggableTextProps>(CaptionText, mergedProps);
   return <InnerText>{children}</InnerText>;
 };
 

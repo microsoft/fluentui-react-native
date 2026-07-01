@@ -1,4 +1,4 @@
-import { DistributiveOmit, PartialExcept } from './utility.types';
+import type { DistributiveOmit } from './utility.types';
 
 /**
  * This is a copy of the react-native style prop type, copied here to avoid RN dependencies this early in the dependency tree.
@@ -32,7 +32,7 @@ export type ObjectFallback = Record<string, unknown>;
 /**
  * Get the props from a react component type
  */
-export type PropsOf<TComponent> = TComponent extends React.JSXElementConstructor<infer P> ? P : never;
+export type PropsOf<TComponent, TFallback = never> = TComponent extends React.JSXElementConstructor<infer P> ? P : TFallback;
 
 /**
  * Removes the 'ref' prop from the given Props type, leaving unions intact (such as the discriminated union created by
@@ -54,12 +54,7 @@ export type PropsWithoutChildren<P> = 'children' extends keyof P ? DistributiveO
 /**
  * A partial props type that omits children
  */
-export type PartialWithoutChildren<P> = Partial<PropsWithoutChildren<P>>;
-
-/**
- * A partial props type that still includes unadulterated children (if present)
- */
-export type PartialWithRequiredChildren<P> = 'children' extends keyof P ? PartialExcept<P, 'children'> : Partial<P>;
+export type PartialWithoutChildren<P> = PropsWithoutChildren<Partial<P>>;
 
 /**
  * A signature for a property filter function.

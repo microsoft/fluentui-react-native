@@ -61,9 +61,11 @@ export function stagedComponent<TProps>(
   // component wrapper that will render in the case that this component is not
   // used as a slot
   const component = (props: TProps) => {
-    const [rest, children] = splitPropsAndChildren(props);
+    const [rest, childrenProp] = splitPropsAndChildren(props);
     const final = staged(rest);
-    return Array.isArray(children) ? final({} as TProps, ...children) : final({} as TProps, children);
+    return Array.isArray(childrenProp?.children)
+      ? final({} as TProps, ...childrenProp.children)
+      : final({} as TProps, childrenProp?.children);
   };
 
   // memoize the component if requested and attach the required information to make this a staged component

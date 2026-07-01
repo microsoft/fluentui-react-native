@@ -44,6 +44,17 @@ export type UnionToIntersection<U> = (U extends unknown ? (x: U) => U : never) e
 export type ReplaceNullWithUndefined<T> = T extends null ? Exclude<T, null> | undefined : T;
 
 /**
+ * Simplify a type by removing any unnecessary nesting and making it easier to read.
+ * This is useful for types that are the result of complex type operations, such as unions and intersections.
+ */
+export type Simplify<T> = { [K in keyof T]: T[K] } & {};
+
+/**
+ * Makes all properties of a type optional, but ensure the Partial<> designation is cleanly on the outside for consistency
+ */
+export type OuterPartial<T> = Simplify<Partial<Required<T>>>;
+
+/**
  * Evaluates to true if the given type contains exactly one string, or false if it is a union of strings.
  *
  * ```

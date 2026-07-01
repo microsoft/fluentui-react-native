@@ -43,10 +43,10 @@ export const useSlot: UseSlot = <TProps>(
     hookProps = {};
   } else if (isStagedComponent<TProps>(component)) {
     // staged components need children passed along to the next stage
-    const [props, children] = splitPropsAndChildren(hookProps);
-    if (children != null) {
+    const [props, childrenProp] = splitPropsAndChildren(hookProps);
+    if (childrenProp != null) {
       // force cast, if it has children we know it is in the TProps type but that can't be inferred by typescript
-      hookProps = { children } as unknown as Partial<TProps>;
+      hookProps = childrenProp as Partial<TProps>;
     }
     // call the first stage and get the inner component, which will be a LegacyFunctionComponent
     const inner = component[SLOT_COMPONENT_KEY](props) as LegacyFunctionComponent<TProps>;

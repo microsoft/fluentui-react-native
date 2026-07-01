@@ -2,7 +2,7 @@ import type React from 'react';
 //import type ReactJSX from 'react/jsx-runtime';
 import type { FurnJSX } from '../jsx-namespace.ts';
 import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const.ts';
-import type { PropsWithoutChildren } from './props.types.ts';
+import type { PropsOf, PartialWithoutChildren } from './props.types.ts';
 
 /**
  * Base types for rendering components in a react application, extracted from react types.
@@ -91,18 +91,22 @@ export type LegacyDirectComponent<TProps> = LegacyFunctionComponent<TProps> & {
  * For this type of component, the returned inner component can be of any type.
  */
 export type PhasedComponent<TProps> = FunctionComponent<TProps> & {
-  [SLOT_COMPONENT_KEY]: (props: Partial<TProps>) => React.ComponentType<TProps>;
+  [SLOT_COMPONENT_KEY]: PhasedRender<TProps>;
   [SLOT_RENDER_TYPE_KEY]: Extract<CustomRenderType, 'phased'>;
 };
+
+export type PhasedRender<TProps> = (props: Partial<TProps>) => React.ComponentType<TProps>;
 
 /**
  * Legacy pattern which returns a legacy direct component.
  * @deprecated use the newer phasedComponent pattern for new code
  */
 export type StagedComponent<TProps> = FunctionComponent<TProps> & {
-  [SLOT_COMPONENT_KEY]: (props: PropsWithoutChildren<Partial<TProps>>) => LegacyFunctionComponent<TProps>;
+  [SLOT_COMPONENT_KEY]: StagedRender<TProps>;
   [SLOT_RENDER_TYPE_KEY]: Extract<CustomRenderType, 'phased-legacy'>;
 };
+
+export type StagedRender<TProps> = (props: PartialWithoutChildren<TProps>) => LegacyFunctionComponent<TProps>;
 
 /**
  * SLOT COMPONENT
@@ -144,12 +148,20 @@ export type UseSlot = {
    * - either no required props or all required props (except children) satisfied
    * - result is a component that has partial props so there is no need to provide them again in jsx
    */
-  <TProps>(component: React.ComponentType<TProps>, props: TProps, transform?: PropsTransform<TProps>): SlotComponent<Partial<TProps>>;
+  <TProps>(
+    component: React.ComponentType<TProps>,
+    props: PropsOf<typeof component>,
+    transform?: PropsTransform<TProps>,
+  ): SlotComponent<Partial<PropsOf<typeof component>>>;
   /**
    * Second overload: non-children props not fulfilled
    * - result is a component that requires all required props to be provided in the jsx
    */
-  <TProps>(component: React.ComponentType<TProps>, props: Partial<TProps>, transform?: PropsTransform<TProps>): SlotComponent<TProps>;
+  <TProps>(
+    component: React.ComponentType<TProps>,
+    props: Partial<PropsOf<typeof component>>,
+    transform?: PropsTransform<TProps>,
+  ): SlotComponent<PropsOf<typeof component>>;
 };
 
 /**
@@ -163,12 +175,12 @@ export type UseOptionalSlot = {
    */
   <TProps>(
     component: React.ComponentType<TProps> | undefined | null,
-    props: TProps,
+    props: PropsOf<typeof component, TProps>,
     transform?: PropsTransform<TProps>,
-  ): SlotComponent<Partial<TProps>> | null;
+  ): SlotComponent<Partial<PropsOf<typeof component, TProps>>> | null;
   <TProps>(
     component: React.ComponentType<TProps> | undefined | null,
-    props: Partial<TProps>,
+    props: Partial<PropsOf<typeof component, TProps>>,
     transform?: PropsTransform<TProps>,
-  ): SlotComponent<TProps> | null;
+  ): SlotComponent<PropsOf<typeof component, TProps>> | null;
 };

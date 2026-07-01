@@ -84,11 +84,11 @@ export function renderDirectComponent<TProps>(
   if (isDirectComponent(component)) {
     return component(props);
   } else if (isLegacyDirectComponent(component)) {
-    const [rest, children] = splitPropsAndChildren(props);
-    if (children && Array.isArray(children)) {
-      return component(rest as TProps, ...children);
+    const [rest, childrenProps] = splitPropsAndChildren(props);
+    if (childrenProps?.children && Array.isArray(childrenProps.children)) {
+      return component(rest as TProps, ...childrenProps.children);
     } else {
-      return component(rest as TProps, children);
+      return component(rest as TProps, childrenProps?.children);
     }
   }
   throw new Error('Invalid direct component');

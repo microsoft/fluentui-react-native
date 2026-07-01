@@ -1,3 +1,5 @@
+import { PropsWithChildren } from 'react';
+import { DistributiveOmit, DistributivePick } from '../index.ts';
 import { PropsWithoutChildren } from '../types/props.types.ts';
 
 /**
@@ -36,22 +38,66 @@ export function isObject<T extends Record<string | symbol, unknown>>(value: unkn
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+export function getPropSubset<TProps>(props: TProps, keys: Extract<keyof TProps, string>[]): Partial<TProps> | undefined {
+  let result: Partial<TProps> | undefined = undefined;
+  if (isObject(props)) {
+    for (const key of keys) {
+      if (key in props) {
+        result ??= {};
+        result[key] = props[key];
+      }
+    }
+  }
+  return result;
+}
+
+export function getPropsWithoutSubset<TProps>(props: TProps, keys: Extract<keyof TProps, string>[]): Partial<TProps> | undefined {
+  const result = {} as TProps;
+  if (isObject(props)) {
+    for (const key in props) {
+      if (!keys.includes(key as Extract<keyof TProps, string>)) {
+        result[key as keyof TProps] = props[key] as TProps[keyof TProps];
+      }
+    }
+  }
+  return result;
+}
+
+export function splitProps<TProps>(props: TProps, keys: Extract<keyof TProps, string>[]): [TProps, Partial<TProps> | undefined] {
+  const split = getPropSubset(props, keys);
+  if (split) {
+    return [getPropsWithoutSubset(props, keys) as TProps, split];
+  }
+  return [props, undefined];
+}
+
+export function splitAndOmitProp<TProps, K extends keyof TProps>(
+  props: TProps,
+  key: K,
+): [DistributiveOmit<TProps, K>, DistributivePick<TProps, K> | undefined] {
+  type ResultType = ReturnType<typeof splitAndOmitProp<TProps, K>>;
+
+  const extractedKey = key as unknown as Extract<keyof TProps, string>;
+  const split = getPropSubset(props, [extractedKey]) as ResultType[1];
+  if (split) {
+    return [getPropsWithoutSubset(props, [extractedKey]) as ResultType[0], split];
+  }
+  return [props as ResultType[0], undefined];
+}
+
 /**
  * Helper to split props into children and non-children props.
  * @param props unknown props type object to split
  * @returns a tuple of the non-children props and the children
  */
-export function splitPropsAndChildren<TProps>(props: TProps): [PropsWithoutChildren<TProps>, React.ReactNode] {
-  if ((props as React.PropsWithChildren<TProps>).children == null) {
-    return [props as PropsWithoutChildren<TProps>, null];
-  }
-  const { children, ...rest } = props as React.PropsWithChildren<TProps>;
-  return [rest as PropsWithoutChildren<TProps>, children];
+export function splitPropsAndChildren<TProps>(props: TProps): [PropsWithoutChildren<TProps>, { children?: React.ReactNode } | undefined] {
+  const [nonChildrenProps, childrenProps] = splitAndOmitProp(props as PropsWithChildren<TProps>, 'children');
+  return [nonChildrenProps as PropsWithoutChildren<TProps>, childrenProps];
 }
 
 /**
  * Helper to get the children from an unknown props type object.
  */
 export function getPropsChildren<TProps>(props: TProps): React.ReactNode | undefined {
-  return (props as React.PropsWithChildren<TProps>).children;
+  return (props as PropsWithChildren<TProps>).children;
 }
