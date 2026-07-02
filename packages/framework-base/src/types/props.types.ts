@@ -44,6 +44,7 @@ export type PropsWithoutRef<P> = 'ref' extends keyof P ? DistributiveOmit<P, 're
 /**
  * Returns just the children entry from a props type or {} if not present
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- {} is intentional here as a no-op when intersected/spread
 export type PropsChildren<P> = 'children' extends keyof P ? Pick<P, 'children'> : {};
 
 /**

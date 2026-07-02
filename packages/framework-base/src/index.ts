@@ -37,6 +37,13 @@ export { useSlot, useOptionalSlot } from './component-patterns/useSlot';
 export { withSlots } from './component-patterns/withSlots';
 
 /**
+ * ----- HOOKS -----
+ */
+export { usePressableState } from './hooks/usePressableState';
+export type { UsePressableResult } from './hooks/usePressableState';
+export type { PressableState, PressableStateKeys } from './types/interactive.types';
+
+/**
  * ----- JSX RUNTIME -----
  */
 export { jsx, jsxs } from './jsx-runtime';

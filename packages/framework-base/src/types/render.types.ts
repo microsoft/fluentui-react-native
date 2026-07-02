@@ -1,5 +1,5 @@
 import type React from 'react';
-import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const';
+import type { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const';
 import type { PropsOf, PartialWithoutChildren } from './props.types';
 
 /**
