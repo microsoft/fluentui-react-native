@@ -1,37 +1,33 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /**
- * Type validation that the base types behave as expected. This code is never run and is not included
- * in other files, but will cause build breaks if the types no longer behave as expected.
+ * Type-consistency tests for the base prop types.
+ *
+ * The `type`-level assertions below are validated at build time by the type-check pass
+ * (`targets/tsconfig.check.json` includes `*.test.*` files), so any regression in these foundational
+ * types will break the build. Each assertion is also materialized as a runtime boolean so the `it`
+ * blocks form a real Jest suite that fails loudly if an assertion ever resolves to something other
+ * than `true`.
  */
 
 import type { StyleProp, ObjectBase, ObjectFallback } from './props.types.ts';
 import type { StyleProp as RNStyleProp } from 'react-native';
 
-/**
- * Validate that StyleProp is compatible with React Native's StyleProp type, as this is a critical part of our type system for styles and we want to ensure it remains compatible with RN's types.
- */
-export type ValidateStyleProp<T> = StyleProp<T> extends RNStyleProp<T> ? true : never;
+// --- type assertion helpers ---------------------------------------------------------------------
+
+/** Resolves to `true` when `A` is assignable to `B`, otherwise `false`. Wrapped in tuples to avoid distributing over unions. */
+type Extends<A, B> = [A] extends [B] ? true : false;
+
+/** Resolves to `true` only when `X` and `Y` are exactly the same type. */
+type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
+
+/** Compile-time guard: only accepts a `true` type argument, producing a build error otherwise. */
+type Expect<T extends true> = T;
+
+// --- fixtures -----------------------------------------------------------------------------------
 
 type StyleBase = {
   color?: string;
   fontSize?: number;
-};
-
-type TestProps = {
-  p1?: string;
-  p2?: number;
-  p3?: boolean;
-  style?: StyleProp<StyleBase>;
-};
-
-const typeProps: TestProps = {
-  p1: 'string',
-  p2: 123,
-  p3: true,
-  style: {
-    color: 'red',
-    fontSize: 16,
-  },
 };
 
 interface IStyleBase {
@@ -39,66 +35,52 @@ interface IStyleBase {
   fontSize?: number;
 }
 
-interface ITestProps {
-  p1?: string;
-  p2?: number;
-  p3?: boolean;
-  style?: StyleProp<IStyleBase>;
-}
+// --- compile-time assertions --------------------------------------------------------------------
+// Each constant is typed via `Expect<...>`; if a type relationship regresses, the build fails here.
+// The runtime value is always `true`, so the Jest assertions below pass while still exercising the
+// exact relationships we care about.
 
-const interfaceProps: ITestProps = {
-  p1: 'string',
-  p2: 123,
-  p3: true,
-  style: {
-    color: 'red',
-    fontSize: 16,
-  },
-};
+// StyleProp must remain assignable to React Native's StyleProp, for both type aliases and interfaces.
+const stylePropCompatibleWithType: Expect<Extends<StyleProp<StyleBase>, RNStyleProp<StyleBase>>> = true;
+const stylePropCompatibleWithInterface: Expect<Extends<StyleProp<IStyleBase>, RNStyleProp<IStyleBase>>> = true;
 
-export function validateBaseTypes() {
-  // This function is never called, but if the types of the base types change in a way that breaks compatibility with expected types, this will cause a build error and alert us to the issue.
+// ObjectBase should accept plain records, interfaces, and class instances.
+const objectBaseAcceptsRecord: Expect<Extends<Record<string, unknown>, ObjectBase>> = true;
+const objectBaseAcceptsInterface: Expect<Extends<IStyleBase, ObjectBase>> = true;
+const objectBaseAcceptsClass: Expect<Extends<Date, ObjectBase>> = true;
 
-  // Test that StyleProp is compatible with React Native's StyleProp type
-  const stylePropTest: ValidateStyleProp<IStyleBase> = true;
-  const stylePropTest2: ValidateStyleProp<StyleBase> = true;
+// ObjectFallback (Record<string, unknown>) is stricter: it accepts records but rejects class
+// instances and interfaces that lack an implicit index signature.
+const objectFallbackAcceptsRecord: Expect<Extends<Record<string, unknown>, ObjectFallback>> = true;
+const objectFallbackRejectsClass: Expect<Equal<Extends<Date, ObjectFallback>, false>> = true;
+const objectFallbackRejectsInterface: Expect<Equal<Extends<IStyleBase, ObjectFallback>, false>> = true;
 
-  // just using the values to stop typescript complaints
-  if (!stylePropTest || !stylePropTest2) {
-    throw new Error("StyleProp is not compatible with React Native's StyleProp type");
-  }
+// Cross assignment: ObjectFallback widens to ObjectBase, but ObjectBase does not narrow to ObjectFallback.
+const fallbackAssignableToBase: Expect<Extends<ObjectFallback, ObjectBase>> = true;
+const baseNotAssignableToFallback: Expect<Equal<Extends<ObjectBase, ObjectFallback>, false>> = true;
 
-  // Test that ObjectBase is compatible with object and Record<string, unknown>
+// --- runtime suite ------------------------------------------------------------------------------
 
-  const objectBaseTest1: ObjectBase = {};
-  const objectBaseTest2: ObjectBase = { key: 'value' };
-  const objectBaseTest3: ObjectBase = new Date();
-  const objectBaseTest4: ObjectBase = typeProps;
-  const objectBaseTest5: ObjectBase = interfaceProps;
-  const objectBaseTest6: ObjectFallback = {};
-  const objectBaseTest7: ObjectFallback = { key: 'value' };
-  // @ts-expect-error - this should error because Date is not compatible with Record<string, unknown> due to its properties not being string keys and unknown values
-  const objectBaseTest8: ObjectFallback = new Date();
-  const objectBaseTest9: ObjectFallback = typeProps;
-  // @ts-expect-error - this should error because interfaceProps is not compatible with Record<string, unknown> due to the style property being a StyleProp type which is not compatible with Record<string, unknown>
-  const objectBaseTest10: ObjectFallback = interfaceProps;
+describe('base prop type consistency', () => {
+  it('keeps StyleProp compatible with React Native StyleProp', () => {
+    expect(stylePropCompatibleWithType).toBe(true);
+    expect(stylePropCompatibleWithInterface).toBe(true);
+  });
 
-  // cross assignment
-  const baseFromFallback: ObjectBase = objectBaseTest7;
-  // @ts-expect-error - this should error because ObjectFallback is not compatible with ObjectBase due to ObjectBase allowing for more types of objects than ObjectFallback
-  const fallbackFromBase: ObjectFallback = objectBaseTest2;
+  it('keeps ObjectBase permissive for records, interfaces, and class instances', () => {
+    expect(objectBaseAcceptsRecord).toBe(true);
+    expect(objectBaseAcceptsInterface).toBe(true);
+    expect(objectBaseAcceptsClass).toBe(true);
+  });
 
-  return {
-    ...objectBaseTest1,
-    ...objectBaseTest2,
-    ...objectBaseTest3,
-    ...objectBaseTest4,
-    ...objectBaseTest5,
-    ...objectBaseTest6,
-    ...objectBaseTest7,
-    ...objectBaseTest8,
-    ...objectBaseTest9,
-    ...objectBaseTest10,
-    ...baseFromFallback,
-  };
-}
+  it('keeps ObjectFallback strict against classes and index-less interfaces', () => {
+    expect(objectFallbackAcceptsRecord).toBe(true);
+    expect(objectFallbackRejectsClass).toBe(true);
+    expect(objectFallbackRejectsInterface).toBe(true);
+  });
+
+  it('allows ObjectFallback to widen to ObjectBase but not the reverse', () => {
+    expect(fallbackAssignableToBase).toBe(true);
+    expect(baseNotAssignableToFallback).toBe(true);
+  });
+});

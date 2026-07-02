@@ -4364,6 +4364,11 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "catalog:"
     "@types/react": "npm:~19.1.4"

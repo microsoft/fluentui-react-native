@@ -42,6 +42,11 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-android": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
+    "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-config": "^0.81.0",
     "@types/jest": "^29.0.0",
     "@types/node": "catalog:",
     "@types/react": "~19.1.4",
@@ -60,14 +65,16 @@
     }
   },
   "furn": {
-    "jestPlatform": "react"
+    "jestPlatform": "ios"
   },
   "rnx-kit": {
     "extends": "@fluentui-react-native/scripts/kit-config",
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
+        "core-android-dev-only",
         "core-dev-only",
+        "core-ios-dev-only",
         "react",
         "react-test-renderer"
       ]
