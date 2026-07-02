@@ -15,7 +15,13 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import type { FocusZoneProps, FocusZoneSlotProps, FocusZoneType } from './FocusZone.types';
 import RCTFocusZone from './FocusZoneNativeComponent';
 
-const filterOutComponentRef = (propName) => propName !== 'componentRef';
+const filterOutComponentRef = <T,>(props: T): T => {
+  if (props && typeof props === 'object' && 'componentRef' in props) {
+    const { componentRef: _componentRef, ...rest } = props as Record<string, unknown>;
+    return rest as T;
+  }
+  return props;
+};
 
 export const FocusZone = composable<FocusZoneType>({
   usePrepareProps: (userProps: FocusZoneProps, useStyling: IUseStyling<FocusZoneType>) => {

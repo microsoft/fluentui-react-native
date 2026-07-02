@@ -28,7 +28,7 @@ export { mergeProps } from './merge-props/mergeProps';
  * ----- COMPONENT PATTERNS -----
  */
 
-export { renderSlot, createSlotComponent } from './component-patterns/render';
+export { renderSlot, createSlotComponent, renderJsx } from './component-patterns/render';
 export { directComponent, isDirectComponent, legacyDirectComponent, isLegacyDirectComponent } from './component-patterns/direct';
 export { phasedComponent, isPhasedComponent, stagedComponent, isStagedComponent } from './component-patterns/phased';
 export { useSlot, useOptionalSlot } from './component-patterns/useSlot';
@@ -82,6 +82,7 @@ export type {
   PhasedRender,
   StagedComponent,
   StagedRender,
+  PropsTransform,
   RenderType,
   RenderResult,
   SlotComponent,

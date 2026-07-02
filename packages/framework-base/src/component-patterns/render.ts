@@ -51,6 +51,16 @@ export function renderForJsxRuntime<TProps>(
 }
 
 /**
+ * Public signature to render a component as appropriate with our internal runtime.
+ * @param type the component type to render
+ * @param props the props for the component
+ * @return the rendered result, either a React element or a custom render result
+ */
+export function renderJsx<TProps>(type: React.ElementType, props: TProps): RenderResult {
+  return renderForJsxRuntime(type, props);
+}
+
+/**
  * Creates a slot component with the given base component, props, and options. Implemented here as it needs to call
  * the renderForJsxFunction directly.
  * @param component inner component type

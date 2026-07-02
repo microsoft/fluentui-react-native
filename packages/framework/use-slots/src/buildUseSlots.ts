@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSlot } from '@fluentui-react-native/framework-base';
-import type { FunctionComponent, PropsFilter } from '@fluentui-react-native/framework-base';
+import type { FunctionComponent, PropsTransform } from '@fluentui-react-native/framework-base';
 
 // type AsObject<T> = T extends object ? T : never
 
@@ -13,7 +13,7 @@ export type Slots<TSlotProps> = { [K in keyof TSlotProps]: FunctionComponent<TSl
 
 export type UseSlotOptions<TSlotProps> = {
   slots: { [K in keyof TSlotProps]: React.ComponentType<TSlotProps[K]> };
-  filters?: { [K in keyof TSlotProps]?: PropsFilter };
+  filters?: { [K in keyof TSlotProps]?: PropsTransform<TSlotProps[K]> };
   useStyling?: TSlotProps | GetSlotProps<TSlotProps>;
 };
 

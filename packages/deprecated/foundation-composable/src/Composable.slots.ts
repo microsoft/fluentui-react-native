@@ -1,9 +1,15 @@
 /* eslint-disable */
 
 import * as React from 'react';
-import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter, INativeSlotType } from './Composable.types';
+import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter } from './Composable.types';
 import { mergeSettings, ISlotProps } from '@uifabricshared/foundation-settings';
-import { mergeProps, legacyDirectComponent, type LegacyDirectComponent } from '@fluentui-react-native/framework-base';
+import {
+  mergeProps,
+  legacyDirectComponent,
+  directComponent,
+  type LegacyDirectComponent,
+  renderJsx,
+} from '@fluentui-react-native/framework-base';
 
 export type ISlotFn<TProps> = LegacyDirectComponent<TProps>;
 
@@ -19,13 +25,8 @@ function _mergeAndFilterProps<TProps>(propsBase: TProps, propsExtra: TProps, fil
   // do a basic merge, not mutating if nothing changed
   let props = mergeProps<TProps>(propsBase, propsExtra);
   if (filter && props) {
-    const removeMask = {};
-    Object.getOwnPropertyNames(props).forEach((key) => {
-      if (!filter(key)) {
-        removeMask[key] = undefined;
-      }
-    });
-    props = mergeProps<TProps>(props, removeMask as TProps);
+    // the filter is a prop transform: it takes the merged props and returns a filtered set of props
+    props = filter(props);
   }
   return props;
 }
@@ -58,9 +59,9 @@ function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
         });
       } else {
         // non-composable components should just render directly
-        Slots[slot] = legacyDirectComponent((extraProps: object, ...children: React.ReactNode[]) => {
+        Slots[slot] = directComponent((extraProps: object) => {
           const props = _mergeAndFilterProps(childRenderInfo.renderData.slotProps.root, extraProps, filter);
-          return React.createElement(slotType as INativeSlotType, props, ...children);
+          return renderJsx(slotType, props);
         });
       }
     });

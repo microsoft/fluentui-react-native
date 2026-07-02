@@ -2,7 +2,6 @@ import React from 'react';
 import type { PhasedComponent, StagedComponent, LegacyFunctionComponent } from '../types/render.types';
 import { renderForJsxRuntime } from './render';
 import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY } from '../const';
-import type { PropsWithoutChildren } from '../types/props.types';
 import { splitPropsAndChildren } from '../utilities/typeUtils';
 
 /**
@@ -55,14 +54,14 @@ export function isPhasedComponent<TProps>(component: unknown): component is Phas
  * @deprecated Use phasedComponent from phasedComponent.ts instead
  */
 export function stagedComponent<TProps>(
-  staged: (props: PropsWithoutChildren<Partial<TProps>>) => LegacyFunctionComponent<TProps>,
+  staged: (props: Partial<TProps>) => LegacyFunctionComponent<TProps>,
   memo?: boolean,
 ): StagedComponent<TProps> {
   // component wrapper that will render in the case that this component is not
   // used as a slot
   const component = (props: TProps) => {
     const [rest, childrenProp] = splitPropsAndChildren(props);
-    const final = staged(rest);
+    const final = staged(rest as TProps);
     return Array.isArray(childrenProp?.children)
       ? final({} as TProps, ...childrenProp.children)
       : final({} as TProps, childrenProp?.children);

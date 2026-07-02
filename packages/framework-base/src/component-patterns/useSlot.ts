@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { SlotComponent, UseSlot, UseOptionalSlot, PropsTransform, LegacyFunctionComponent } from '../types/render.types';
+import type { SlotComponent, UseSlot, UseOptionalSlot, PropsTransform } from '../types/render.types';
 import { setSlotStatics } from './slot';
 import { createSlotComponent } from './render';
 import { isPhasedComponent, isStagedComponent } from './phased';
@@ -49,7 +49,7 @@ export const useSlot: UseSlot = <TProps>(
       hookProps = childrenProp as Partial<TProps>;
     }
     // call the first stage and get the inner component, which will be a LegacyFunctionComponent
-    const inner = component[SLOT_COMPONENT_KEY](props) as LegacyFunctionComponent<TProps>;
+    const inner = component[SLOT_COMPONENT_KEY](props as Partial<TProps>);
     // attach the type signifier if necessary as legacy consumers aren't reliable about this
     component = isLegacyDirectComponent(inner) ? inner : legacyDirectComponent(inner);
   }

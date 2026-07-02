@@ -10,6 +10,17 @@ import { mergeStyles } from './mergeStyles';
 const mergePropsOptions: MergeOptions = {
   className: (...names: any[]) => names.filter((v) => v && typeof v === 'string').join(' '),
   style: mergeStyles,
+  // children follow last-wins semantics, but a null (or undefined) child must not clobber a real child value
+  // supplied elsewhere in the merge. Pick the last defined (non-null, non-undefined) value instead.
+  children: (...values: any[]) => {
+    let merged: unknown = undefined;
+    for (const value of values) {
+      if (value !== null && value !== undefined) {
+        merged = value;
+      }
+    }
+    return merged;
+  },
 };
 
 /**

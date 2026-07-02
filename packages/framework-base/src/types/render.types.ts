@@ -1,6 +1,6 @@
 import type React from 'react';
 import type { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const';
-import type { PropsOf, PartialWithoutChildren } from './props.types';
+import type { PropsOf } from './props.types';
 
 /**
  * Base types for rendering components in a react application, extracted from react types.
@@ -102,7 +102,7 @@ export type StagedComponent<TProps> = FunctionComponent<TProps> & {
   [SLOT_RENDER_TYPE_KEY]: Extract<CustomRenderType, 'phased-legacy'>;
 };
 
-export type StagedRender<TProps> = (props: PartialWithoutChildren<TProps>) => LegacyFunctionComponent<TProps>;
+export type StagedRender<TProps> = (props: Partial<TProps>) => LegacyFunctionComponent<TProps>;
 
 /**
  * SLOT COMPONENT
