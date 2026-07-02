@@ -1,18 +1,14 @@
 import type React from 'react';
-//import type ReactJSX from 'react/jsx-runtime';
-import type { FurnJSX } from '../jsx-namespace.ts';
 import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const.ts';
 import type { PropsOf, PartialWithoutChildren } from './props.types.ts';
 
 /**
  * Base types for rendering components in a react application, extracted from react types.
  *
- * Note that our FurnJSX types will resolve to the correct types based on React 18 or 19,
- * ensuring compatibility across different versions of React. Changes in the way JSX is defined between versions
- * will cause breaks without using this indirection.
+ * EXPERIMENT: use React's standard JSX namespace directly rather than a custom FurnJSX namespace.
  */
-export type RenderResult = FurnJSX.Element;
-export type RenderType = FurnJSX.ElementType;
+export type RenderResult = React.JSX.Element;
+export type RenderType = React.JSX.ElementType;
 
 /**
  * type of the render function, not a FunctionComponent to help prevent hook usage

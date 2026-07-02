@@ -1,7 +1,7 @@
 import type React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
 import { renderForJsxRuntime } from './component-patterns/render.ts';
-export type { FurnJSX as JSX } from './jsx-namespace.ts';
+export type { JSX } from 'react/jsx-runtime';
 
 export const jsx: typeof ReactJSX.jsx = (type, props, key?: React.Key) => {
   return renderForJsxRuntime(type, props, key, ReactJSX.jsx);

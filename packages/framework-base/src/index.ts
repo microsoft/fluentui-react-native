@@ -40,7 +40,7 @@ export { withSlots } from './component-patterns/withSlots.tsx';
  * ----- JSX RUNTIME -----
  */
 export { jsx, jsxs } from './jsx-runtime.ts';
-export type { FurnJSX } from './jsx-namespace.ts';
+export type { FurnJSX } from './types/react.types.ts';
 
 /**
  * ----- UTILITIES -----
