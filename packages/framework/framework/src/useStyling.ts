@@ -13,7 +13,7 @@ import type {
 } from '@fluentui-react-native/use-styling';
 import { buildUseStyling as buildUseStylingBase, buildProps as buildPropsBase } from '@fluentui-react-native/use-styling';
 
-import { themeHelper } from './themeHelper.ts';
+import { themeHelper } from './themeHelper';
 
 export type BuildProps<TProps, TTokens> = BuildPropsBase<TProps, TTokens, Theme>;
 

@@ -1,6 +1,6 @@
 import type React from 'react';
-import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const.ts';
-import type { PropsOf, PartialWithoutChildren } from './props.types.ts';
+import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const';
+import type { PropsOf, PartialWithoutChildren } from './props.types';
 
 /**
  * Base types for rendering components in a react application, extracted from react types.

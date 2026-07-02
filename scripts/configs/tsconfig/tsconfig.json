@@ -3,7 +3,6 @@
   "compilerOptions": {
     "strictBindCallApply": false,
     "strictNullChecks": false,
-    "noImplicitAny": false,
-    "rewriteRelativeImportExtensions": true
+    "noImplicitAny": false
   }
 }

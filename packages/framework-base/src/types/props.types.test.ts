@@ -9,7 +9,7 @@
  * than `true`.
  */
 
-import type { StyleProp, ObjectBase, ObjectFallback } from './props.types.ts';
+import type { StyleProp, ObjectBase, ObjectFallback } from './props.types';
 import type { StyleProp as RNStyleProp } from 'react-native';
 
 // --- type assertion helpers ---------------------------------------------------------------------

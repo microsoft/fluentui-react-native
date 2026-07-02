@@ -9,9 +9,9 @@ import type { Theme } from '@fluentui-react-native/theme-types';
 import { applyTokenLayers } from '@fluentui-react-native/use-tokens';
 import * as renderer from 'react-test-renderer';
 
-import { compressible } from './compressible.ts';
-import { buildUseTokens } from './useTokens.ts';
-import type { UseTokens } from './useTokens.ts';
+import { compressible } from './compressible';
+import { buildUseTokens } from './useTokens';
+import type { UseTokens } from './useTokens';
 
 type Variant = 'normal' | 'header' | 'caption';
 interface VariantTextTokens {

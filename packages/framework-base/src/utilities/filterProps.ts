@@ -1,6 +1,6 @@
-import { mergeProps } from '../merge-props/mergeProps.ts';
-import { isObject } from './typeUtils.ts';
-import type { PropsFilter } from '../types/props.types.ts';
+import { mergeProps } from '../merge-props/mergeProps';
+import { isObject } from './typeUtils';
+import type { PropsFilter } from '../types/props.types';
 
 export function filterProps<TProps>(props: TProps, filter?: PropsFilter): TProps {
   if (filter && isObject(props)) {

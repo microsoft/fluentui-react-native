@@ -1,10 +1,10 @@
 import React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
-import type { RenderType, RenderResult, SlotComponent, PropsTransform } from '../types/render.types.ts';
-import { isDirectComponentType, renderDirectComponent } from './direct.ts';
-import { isSlotComponent, prepareSlotProps, setSlotStatics } from './slot.ts';
-import { SLOT_COMPONENT_KEY } from '../const.ts';
-import { getPropsChildren } from '../utilities/typeUtils.ts';
+import type { RenderType, RenderResult, SlotComponent, PropsTransform } from '../types/render.types';
+import { isDirectComponentType, renderDirectComponent } from './direct';
+import { isSlotComponent, prepareSlotProps, setSlotStatics } from './slot';
+import { SLOT_COMPONENT_KEY } from '../const';
+import { getPropsChildren } from '../utilities/typeUtils';
 
 export type CustomRender = () => RenderResult;
 

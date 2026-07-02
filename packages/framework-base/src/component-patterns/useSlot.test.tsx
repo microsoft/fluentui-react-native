@@ -3,15 +3,15 @@ import * as React from 'react';
 import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 
-import type { FunctionComponent } from '../types/render.types.ts';
-import { mergeStyles } from '../merge-props/mergeStyles.ts';
+import type { FunctionComponent } from '../types/render.types';
+import { mergeStyles } from '../merge-props/mergeStyles';
 import * as renderer from 'react-test-renderer';
 import { act } from 'react';
 
-import { phasedComponent, stagedComponent } from './phased.ts';
-import { directComponent } from './direct.ts';
-import { useSlot } from './useSlot.ts';
-import type { FurnJSX } from '../types/react.types.ts';
+import { phasedComponent, stagedComponent } from './phased';
+import { directComponent } from './direct';
+import { useSlot } from './useSlot';
+import type { FurnJSX } from '../types/react.types';
 
 type PluggableTextProps = TextProps & { inner?: FunctionComponent<TextProps> };
 

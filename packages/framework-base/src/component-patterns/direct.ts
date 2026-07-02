@@ -1,7 +1,7 @@
 import React from 'react';
-import type { FunctionComponent, DirectComponent, LegacyDirectComponent, LegacyFunctionComponent } from '../types/render.types.ts';
-import { SLOT_RENDER_TYPE_KEY } from '../const.ts';
-import { splitPropsAndChildren } from '../utilities/typeUtils.ts';
+import type { FunctionComponent, DirectComponent, LegacyDirectComponent, LegacyFunctionComponent } from '../types/render.types';
+import { SLOT_RENDER_TYPE_KEY } from '../const';
+import { splitPropsAndChildren } from '../utilities/typeUtils';
 
 /**
  * Helpers related to direct rendering patterns. Direct rendering allows a component to mark itself as safe to call

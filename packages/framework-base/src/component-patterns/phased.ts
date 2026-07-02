@@ -1,9 +1,9 @@
 import React from 'react';
-import type { PhasedComponent, StagedComponent, LegacyFunctionComponent } from '../types/render.types.ts';
-import { renderForJsxRuntime } from './render.ts';
-import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY } from '../const.ts';
-import type { PropsWithoutChildren } from '../types/props.types.ts';
-import { splitPropsAndChildren } from '../utilities/typeUtils.ts';
+import type { PhasedComponent, StagedComponent, LegacyFunctionComponent } from '../types/render.types';
+import { renderForJsxRuntime } from './render';
+import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY } from '../const';
+import type { PropsWithoutChildren } from '../types/props.types';
+import { splitPropsAndChildren } from '../utilities/typeUtils';
 
 /**
  * PHASED RENDERING (formerly called "staged" or "two-stage" rendering)

@@ -1,4 +1,4 @@
-import { themedStyleSheet } from './themedStyleSheet.ts';
+import { themedStyleSheet } from './themedStyleSheet';
 
 interface IFakeTheme {
   color1?: string;

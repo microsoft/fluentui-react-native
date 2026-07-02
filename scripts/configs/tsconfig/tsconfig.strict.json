@@ -6,7 +6,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "outDir": "lib",
-    "rewriteRelativeImportExtensions": true,
+    "rewriteRelativeImportExtensions": false,
     "jsx": "react-jsx",
     "types": ["jest", "node"]
   }

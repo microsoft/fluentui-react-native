@@ -1,8 +1,8 @@
 import type React from 'react';
-import type { PropsTransform, SlotComponent } from '../types/render.types.ts';
-import { SLOT_COMPONENT_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const.ts';
-import { isPhasedComponent, isStagedComponent } from './phased.ts';
-import { mergeProps } from '../merge-props/mergeProps.ts';
+import type { PropsTransform, SlotComponent } from '../types/render.types';
+import { SLOT_COMPONENT_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const';
+import { isPhasedComponent, isStagedComponent } from './phased';
+import { mergeProps } from '../merge-props/mergeProps';
 
 /**
  * Convenience type, just referencing the statics of the component

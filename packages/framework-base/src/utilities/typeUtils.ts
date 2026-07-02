@@ -1,7 +1,7 @@
 import type React from 'react';
 import type { PropsWithChildren } from 'react';
-import type { DistributiveOmit, DistributivePick } from '../types/utility.types.ts';
-import type { PropsWithoutChildren } from '../types/props.types.ts';
+import type { DistributiveOmit, DistributivePick } from '../types/utility.types';
+import type { PropsWithoutChildren } from '../types/props.types';
 
 /**
  *

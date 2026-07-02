@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import type { SlotComponent, UseSlot, UseOptionalSlot, PropsTransform, LegacyFunctionComponent } from '../types/render.types.ts';
-import { setSlotStatics } from './slot.ts';
-import { createSlotComponent } from './render.ts';
-import { isPhasedComponent, isStagedComponent } from './phased.ts';
+import type { SlotComponent, UseSlot, UseOptionalSlot, PropsTransform, LegacyFunctionComponent } from '../types/render.types';
+import { setSlotStatics } from './slot';
+import { createSlotComponent } from './render';
+import { isPhasedComponent, isStagedComponent } from './phased';
 import { SLOT_COMPONENT_KEY } from '../const';
-import { isLegacyDirectComponent, legacyDirectComponent } from './direct.ts';
-import { splitPropsAndChildren } from '../utilities/typeUtils.ts';
+import { isLegacyDirectComponent, legacyDirectComponent } from './direct';
+import { splitPropsAndChildren } from '../utilities/typeUtils';
 
 /**
  * The core useSlot hook implementation, while the return result will always be a SlotComponent, the implementation will fork

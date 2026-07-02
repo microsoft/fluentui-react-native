@@ -1,6 +1,6 @@
 import type React from 'react';
 
-import type { TokenSettings, UseTokens } from './buildUseTokens.ts';
+import type { TokenSettings, UseTokens } from './buildUseTokens';
 import type { FurnJSX } from '@fluentui-react-native/framework-base';
 
 /**

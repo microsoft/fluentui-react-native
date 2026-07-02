@@ -3,7 +3,7 @@ import { composeFactory } from '@fluentui-react-native/composition';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import type { ObjectBase } from '@fluentui-react-native/framework-base';
 
-import { themeHelper } from './themeHelper.ts';
+import { themeHelper } from './themeHelper';
 
 /**
  * This is an object used purely for configuring the typings on composable.  It is not necessary to define
