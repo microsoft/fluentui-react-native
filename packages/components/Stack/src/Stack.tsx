@@ -9,6 +9,7 @@ import type { ISlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
+import type { FurnJSX } from '@fluentui-react-native/framework-base';
 
 import { settings } from './Stack.settings';
 import { buildStackRootStyles, buildStackInnerStyles } from './Stack.tokens';
@@ -35,7 +36,7 @@ function _mixinStyle(style: StyleProp<ObjectBase> | undefined, mixin: ObjectBase
 
 const _styleKey = 'style';
 
-const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ...children: React.ReactNode[]): React.JSX.Element => {
+const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ...children: React.ReactNode[]): FurnJSX.Element => {
   const { gap, horizontal, wrap } = renderData.state!;
 
   if (gap && gap > 0 && children && globalThis.__jsiExecutorDescription !== 'ChakraRuntime') {

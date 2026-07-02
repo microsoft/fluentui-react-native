@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { PropsTransform, SlotComponent } from '../types/render.types.ts';
 import { SLOT_COMPONENT_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const.ts';
 import { isPhasedComponent, isStagedComponent } from './phased.ts';

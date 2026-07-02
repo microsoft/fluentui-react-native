@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { ViewStyle, TextStyle, ImageStyle } from 'react-native';
 
 type StyleTypes = ViewStyle | TextStyle | ImageStyle;

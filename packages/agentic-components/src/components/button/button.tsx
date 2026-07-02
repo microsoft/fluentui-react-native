@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
+import type { FurnJSX } from '@fluentui-react-native/framework-base';
 
 /**
  * Props for the simple {@link Button} component.
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 /**
  * A simple cross-platform button built directly on react-native primitives.
  */
-export function Button(props: ButtonProps): React.JSX.Element {
+export function Button(props: ButtonProps): FurnJSX.Element {
   const { title, onPress, disabled, style } = props;
   return (
     <Pressable

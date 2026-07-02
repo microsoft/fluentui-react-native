@@ -5,7 +5,7 @@ import { setSlotStatics } from './slot.ts';
 import { createSlotComponent } from './render.ts';
 import { isPhasedComponent, isStagedComponent } from './phased.ts';
 import { SLOT_COMPONENT_KEY } from '../const';
-import { isLegacyDirectComponent, legacyDirectComponent } from '../index.ts';
+import { isLegacyDirectComponent, legacyDirectComponent } from './direct.ts';
 import { splitPropsAndChildren } from '../utilities/typeUtils.ts';
 
 /**

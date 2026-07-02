@@ -8,8 +8,10 @@ import { mergeStyles } from '../merge-props/mergeStyles.ts';
 import * as renderer from 'react-test-renderer';
 import { act } from 'react';
 
-import { phasedComponent, directComponent, stagedComponent } from '@fluentui-react-native/framework-base';
+import { phasedComponent, stagedComponent } from './phased.ts';
+import { directComponent } from './direct.ts';
 import { useSlot } from './useSlot.ts';
+import type { FurnJSX } from '../types/react.types.ts';
 
 type PluggableTextProps = TextProps & { inner?: FunctionComponent<TextProps> };
 
@@ -152,14 +154,12 @@ const FnAccept: React.FunctionComponent<AcceptProps> = (props) => <Text>{props.t
  */
 class ClassAccept extends React.Component<AcceptProps> {
   public static defaultProps: Partial<AcceptProps> = { title: '' };
-  public override render(): React.JSX.Element {
+  public override render(): FurnJSX.Element {
     return <Text>{this.props.title}</Text>;
   }
 }
 
-const PhasedAccept = phasedComponent((_props: AcceptProps) =>
-  directComponent<AcceptProps>((extra: AcceptProps) => <Text {...extra} />),
-);
+const PhasedAccept = phasedComponent((_props: AcceptProps) => directComponent<AcceptProps>((extra: AcceptProps) => <Text {...extra} />));
 
 const StagedAccept = stagedComponent<AcceptProps>((_props) => (rest, ...children) => <Text {...rest}>{children}</Text>);
 

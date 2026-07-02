@@ -26,7 +26,7 @@ export function renderForJsxRuntime<TProps>(
   if (isDirectComponentType(type)) {
     const jsxResult = renderDirectComponent(type, props);
     // If a key is provided, clone the element with the key
-    return key ? React.cloneElement(jsxResult, { key }) : jsxResult;
+    return key != null ? React.cloneElement(jsxResult, { key }) : jsxResult;
   }
 
   // with a slot component use the internal type and props to render directly

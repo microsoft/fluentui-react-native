@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { DistributiveOmit } from './utility.types';
 
 /**
