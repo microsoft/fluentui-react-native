@@ -42,16 +42,16 @@ export const useSlot: UseSlot = <TProps>(
     component = component[SLOT_COMPONENT_KEY](hookProps);
     hookProps = {};
   } else if (isStagedComponent<TProps>(component)) {
-    // staged components need children passed along to the next stage
+    // the first stage consumes the incoming props (captured via closure), so only children should be carried
+    // forward to the second stage. Resetting hookProps here prevents the already-consumed props from being
+    // re-applied to the inner component at render time (which would leak props like 'variant' onto the slot).
     const [props, childrenProp] = splitPropsAndChildren(hookProps);
-    if (childrenProp != null) {
-      // force cast, if it has children we know it is in the TProps type but that can't be inferred by typescript
-      hookProps = childrenProp as Partial<TProps>;
-    }
     // call the first stage and get the inner component, which will be a LegacyFunctionComponent
     const inner = component[SLOT_COMPONENT_KEY](props as Partial<TProps>);
     // attach the type signifier if necessary as legacy consumers aren't reliable about this
     component = isLegacyDirectComponent(inner) ? inner : legacyDirectComponent(inner);
+    // carry only children forward (force cast, if it has children we know it is in the TProps type)
+    hookProps = (childrenProp ?? {}) as Partial<TProps>;
   }
   // now onto the slot creation itself, use a ref to get per-instance storage for the slot
   const slotRef = React.useRef<SlotComponent<TProps> | null>(null);

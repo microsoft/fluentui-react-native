@@ -27,9 +27,7 @@ exports[`slot intrinsic attribute acceptance accepts the key attribute on slots 
     class
   </Text>
   <Text />
-  <Text
-    title="staged"
-  />
+  <Text />
 </View>
 `;
 
