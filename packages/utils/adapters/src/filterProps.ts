@@ -10,7 +10,7 @@ import { getViewMask, getTextMask, getImageMask } from './filters';
  */
 function createPropsMaskTransform(getMask: () => Record<string, boolean>) {
   let mask: Record<string, boolean> | undefined;
-  return <T,>(props: T): T => {
+  return <T>(props: T): T => {
     if (!props || typeof props !== 'object') {
       return props;
     }

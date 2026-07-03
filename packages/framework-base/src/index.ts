@@ -54,7 +54,7 @@ export type { FurnJSX } from './types/react.types';
  */
 export { filterProps, propTransformFromFilter } from './utilities/filterProps';
 export { extractChildren, extractProps, extractStyle } from './utilities/extract';
-export { getPropsChildren, isObject, splitPropsAndChildren, getEntityType } from './utilities/typeUtils';
+export { getPropsChildren, isObject, setPropsChildren, splitPropsAndChildren, getEntityType } from './utilities/typeUtils';
 export type { ExpandedTypeof, TypeofResult } from './utilities/typeUtils';
 
 /**

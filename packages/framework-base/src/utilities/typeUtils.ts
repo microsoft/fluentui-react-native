@@ -102,3 +102,25 @@ export function splitPropsAndChildren<TProps>(props: TProps): [PropsWithoutChild
 export function getPropsChildren<TProps>(props: TProps): React.ReactNode | undefined {
   return (props as PropsWithChildren<TProps>).children;
 }
+
+export function setPropsChildren<TProps>(props: TProps, children: React.ReactNode | undefined): TProps {
+  if (children !== undefined) {
+    const existing = getPropsChildren(props);
+    if (existing !== children) {
+      const newChildren = normalizeChildren(children);
+      if (existing !== newChildren && (newChildren != null || existing == null)) {
+        (props as PropsWithChildren<TProps>).children = newChildren;
+      }
+    }
+  }
+  return props;
+}
+
+function normalizeChildren(children: React.ReactNode): React.ReactNode {
+  if (Array.isArray(children)) {
+    if (children.length < 2) {
+      return children.length === 1 ? children[0] : undefined;
+    }
+  }
+  return children;
+}

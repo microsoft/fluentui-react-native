@@ -4,7 +4,7 @@ import type { CustomizableComponent } from '@fluentui-react-native/use-tokens';
 
 import type { TokenSettings } from './useStyling';
 import type { UseTokens } from './useTokens';
-import { LegacyFunctionComponent } from '@fluentui-react-native/framework-base';
+import type { LegacyFunctionComponent } from '@fluentui-react-native/framework-base';
 
 /**
  * Utility function which can create function components that can be tree compressed (using the stagedRender pattern),

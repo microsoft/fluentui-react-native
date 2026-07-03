@@ -4,7 +4,7 @@ import type { RenderType, RenderResult, SlotComponent, PropsTransform } from '..
 import { isDirectComponentType, renderDirectComponent } from './direct';
 import { isSlotComponent, prepareSlotProps, setSlotStatics } from './slot';
 import { SLOT_COMPONENT_KEY } from '../const';
-import { getPropsChildren } from '../utilities/typeUtils';
+import { getPropsChildren, setPropsChildren } from '../utilities/typeUtils';
 
 export type CustomRender = () => RenderResult;
 
@@ -88,7 +88,7 @@ export function createSlotComponent<TProps>(
  */
 export function renderForClassicRuntime<TProps>(type: RenderType, props: TProps, children: React.ReactNode[]): RenderResult {
   // route this through to the new runtime
-  const propsWithChildren = { children, ...props };
+  const propsWithChildren = setPropsChildren({ ...props }, children);
   return renderForJsxRuntime(type as React.ElementType, propsWithChildren);
 }
 
