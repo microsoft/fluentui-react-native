@@ -1,8 +1,9 @@
 import React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
 import type { RenderType, RenderResult, SlotComponent, PropsTransform } from '../types/render.types';
-import { isDirectComponentType, renderDirectComponent } from './direct';
-import { isSlotComponent, prepareSlotProps, setSlotStatics } from './slot';
+import { renderDirectComponent } from './direct';
+import { isDirectComponentType, isSlotComponent } from './identify';
+import { prepareSlotProps, setSlotStatics } from './slot';
 import { SLOT_COMPONENT_KEY } from '../const';
 import { getPropsChildren, setPropsChildren } from '../utilities/typeUtils';
 

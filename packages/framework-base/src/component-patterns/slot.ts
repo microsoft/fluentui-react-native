@@ -1,7 +1,6 @@
 import type React from 'react';
 import type { PropsTransform, SlotComponent } from '../types/render.types';
 import { SLOT_COMPONENT_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const';
-import { isPhasedComponent, isStagedComponent } from './phased';
 import { mergeProps } from '../merge-props/mergeProps';
 
 /**
@@ -44,19 +43,4 @@ export function prepareSlotProps<TProps>(slotInfo: SlotComponentStatics<TProps>,
   const transform = slotInfo[SLOT_PROP_TRANSFORM_KEY];
   const mergedProps = mergeProps<TProps>(baseProps, userProps) ?? ({} as TProps);
   return transform ? transform(mergedProps) : mergedProps;
-}
-
-/**
- * Check if a component is a slot component. Note that it explicitly rules out phased/staged as that uses the same
- * key for the component function but with a different signature.
- * @param component - The component to check.
- * @returns True if the component is a slot component, false otherwise.
- */
-export function isSlotComponent<TProps>(component: unknown): component is SlotComponent<TProps> {
-  return (
-    component != null &&
-    (component as SlotComponent<TProps>)[SLOT_COMPONENT_KEY] != null &&
-    !isPhasedComponent(component) &&
-    !isStagedComponent(component)
-  );
 }

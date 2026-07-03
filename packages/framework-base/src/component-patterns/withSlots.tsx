@@ -2,14 +2,17 @@ import type React from 'react';
 import { renderForClassicRuntime } from './render';
 
 /**
- * This function is required for any module that uses slots.
+ * Legacy JSX handler for the classic runtime. New code should NOT use this.
+ *
+ * Prefer the custom automatic JSX runtime instead by adding the jsxImportSource pragma pointing at
+ * "@fluentui-react-native/framework-base" as the first line of a file. That runtime resolves slots
+ * automatically without importing any helper. See the package README for the exact pragma to use.
  *
  * This function is a slot resolver that automatically evaluates slot functions to generate React elements.
  * A byproduct of this resolver is that it removes slots from the React hierarchy by bypassing React.createElement.
  *
- * To use this function on a per-file basis, use the jsx directive targeting withSlots.
- * This directive must be the FIRST LINE in the file to work correctly.
- * Usage of this pragma also requires withSlots import statement.
+ * To use this legacy helper on a per-file basis, add the classic-runtime jsx directive targeting withSlots
+ * as the first line of the file, and import withSlots. This is only retained for deprecated framework code.
  *
  * See React.createElement
  */

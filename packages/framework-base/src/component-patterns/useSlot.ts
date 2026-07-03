@@ -3,9 +3,9 @@ import * as React from 'react';
 import type { SlotComponent, UseSlot, UseOptionalSlot, PropsTransform } from '../types/render.types';
 import { setSlotStatics } from './slot';
 import { createSlotComponent } from './render';
-import { isPhasedComponent, isStagedComponent } from './phased';
+import { isPhasedComponent, isStagedComponent, isLegacyDirectComponent } from './identify';
 import { SLOT_COMPONENT_KEY } from '../const';
-import { isLegacyDirectComponent, legacyDirectComponent } from './direct';
+import { legacyDirectComponent } from './direct';
 import { splitPropsAndChildren } from '../utilities/typeUtils';
 
 /**

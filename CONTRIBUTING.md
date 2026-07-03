@@ -63,8 +63,7 @@ Reach out to Samuel Freiberg with any questions related to E2E testing.
 1. Create a `src/` subdirectory in your component directory with a minimum of two files (listed below). You may optionally choose to subdivide your code however you wish; there are plenty of examples in the other components of FluentUI React Native.
    1. `index.ts`
       - This is the file listed as `main` inside your package.json and simply exports other files.
-   1. `<new-component>.tsx` - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens. - Note that we need the comment `/** @jsxRuntime classic */
-/** @jsx withSlots */` at the top of this file. An explanation can be found in the comment at `packages/experimental/use-slots/src/withSlots.tsx`
+   1. `<new-component>.tsx` - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens. - Note that we need the comment `/** @jsxImportSource @fluentui-react-native/framework-base */` as the first line of this file. This opts the file into the custom JSX runtime that handles slot rendering; an explanation can be found in `packages/framework-base/src/component-patterns/README.md`. Packages using this pragma must include `@fluentui-react-native/framework-base` in their `devDependencies`.
    1. `<new-component>.<types | settings | platform | blah>.tsx` (Optional)
       - Optional extra files to subdivide your code however you see fit. You can also add platform specific files as you see fit.
 

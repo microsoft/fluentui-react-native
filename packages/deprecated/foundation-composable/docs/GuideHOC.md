@@ -113,8 +113,7 @@ Here we will use the same interfaces and helpers but implement `ButtonBase` and 
 We will use the optional TState to pass additional arguments between `usePrepareProps` and `render`. Note that the state can be anything, it is simply a payload to be passed from one function to the next.
 
 ```tsx
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/framework-base */
 
 export interface IButtonState {
   disabled?: boolean;

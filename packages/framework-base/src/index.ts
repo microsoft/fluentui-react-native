@@ -29,9 +29,17 @@ export { mergeProps } from './merge-props/mergeProps';
  */
 
 export { renderSlot, createSlotComponent, renderJsx } from './component-patterns/render';
-export { directComponent, isDirectComponent, legacyDirectComponent, isLegacyDirectComponent } from './component-patterns/direct';
-export { phasedComponent, isPhasedComponent, stagedComponent, isStagedComponent } from './component-patterns/phased';
+export { directComponent, legacyDirectComponent } from './component-patterns/direct';
+export { phasedComponent, stagedComponent } from './component-patterns/phased';
 export { useSlot, useOptionalSlot } from './component-patterns/useSlot';
+export {
+  isDirectComponentType,
+  isSlotComponent,
+  isDirectComponent,
+  isLegacyDirectComponent,
+  isStagedComponent,
+  isPhasedComponent,
+} from './component-patterns/identify';
 
 // legacy JSX handler
 export { withSlots } from './component-patterns/withSlots';

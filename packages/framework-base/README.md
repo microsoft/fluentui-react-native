@@ -16,15 +16,18 @@ This package provides several TypeScript utility types:
 - `FunctionComponent<TProps>` - A function component type without the children handling complications of React.FC
 - `DirectComponent<TProps>` - A function component marked for direct rendering
 - `PhasedComponent<TProps>` - A component with two-phase rendering support
-- `SlotFn<TProps>` - Slot function type used in the composition framework
-- `FinalRender<TProps>` - The final rendering signature for phased components
+- `PhasedRender<TProps>` - The render signature for phased components (phase one returns the phase two renderer)
+- `SlotComponent<TProps>` - Slot component type used in the composition framework
+- `PropsTransform<TPropsIn, TPropsOut>` - A transform that maps one set of props to another
 
 ## JSX Runtime
 
-This package exports a custom JSX runtime at `@fluentui-react-native/framework-base/jsx-runtime`. Use it in your component files with:
+This package exports a custom JSX runtime at `@fluentui-react-native/framework-base/jsx-runtime`. Use it in your component files by adding this pragma as the **first line** of the file:
 
 ```tsx
 /** @jsxImportSource @fluentui-react-native/framework-base */
 ```
 
-The custom runtime enables automatic element flattening for direct and phased components.
+The custom runtime enables automatic element flattening for direct and phased components. Any package using this pragma must include `@fluentui-react-native/framework-base` in its `devDependencies`.
+
+> **Note:** This is the current pattern and replaces the legacy `/** @jsx withSlots */` directive (which required importing `withSlots` explicitly). The exported `withSlots` helper remains available only for the classic runtime used by deprecated framework code.
