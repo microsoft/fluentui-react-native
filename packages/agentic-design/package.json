@@ -1,0 +1,78 @@
+{
+  "name": "@fluentui-react-native/design",
+  "version": "0.1.0",
+  "description": "Core design system concepts, utilities, and types for Fluent UI React Native.",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic-design"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "react-native": "./src/index.ts",
+      "import": "./lib/index.js",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsgo -b",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "prebuild": "node ./scripts/codegen.cts",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@fluentui-react-native/design-tokens-android": "catalog:",
+    "@fluentui-react-native/design-tokens-ios": "catalog:",
+    "@fluentui-react-native/design-tokens-macos": "catalog:",
+    "@fluentui-react-native/design-tokens-win32": "catalog:",
+    "@fluentui-react-native/design-tokens-windows": "catalog:",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@rnx-kit/tools-filesystem": "^0.2.0",
+    "@types/react": "~19.1.4",
+    "@types/react-test-renderer": "^19.1.0",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-native-macos": "^0.81.0",
+    "react-test-renderer": "19.1.4"
+  },
+  "peerDependencies": {
+    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
+    "react": "18.2.0 || 19.0.0 || 19.1.4",
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    }
+  },
+  "furn": {
+    "jestPlatform": "macos"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "core-dev-only",
+        "core-macos-dev-only",
+        "react-test-renderer"
+      ]
+    },
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}
