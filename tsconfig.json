@@ -20,6 +20,9 @@
       "path": "packages/agentic-components/storybook/tsconfig.json"
     },
     {
+      "path": "packages/agentic-design/tsconfig.json"
+    },
+    {
       "path": "packages/codemods/tsconfig.json"
     },
     {

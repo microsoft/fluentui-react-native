@@ -49,6 +49,7 @@
     "@rnx-kit/eslint-plugin": "catalog:",
     "@rnx-kit/jest-preset": "catalog:",
     "@rnx-kit/oxlint-config": "catalog:",
+    "@rnx-kit/tools-filesystem": "0.2.0",
     "@rnx-kit/tsconfig": "catalog:",
     "@rnx-kit/types-kit-config": "catalog:",
     "babel-jest": "^29.0.0",

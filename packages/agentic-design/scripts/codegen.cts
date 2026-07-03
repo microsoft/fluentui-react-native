@@ -197,7 +197,7 @@ function processJsonFiles(files: Record<string, string>, prefix?: string) {
 
 function main() {
   codegenConstantsFromJsonFiles({
-    targetEntry: path.join(__dirname, '../src/global/index.generated.ts'),
+    targetEntry: path.join(__dirname, '../src/tokens/global/index.generated.ts'),
     platformEntry: 'variants.generated',
     prefix: 'global',
     defaultPlatform: 'win32',
