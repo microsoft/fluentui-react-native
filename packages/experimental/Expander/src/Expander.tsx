@@ -8,7 +8,8 @@
 import * as React from 'react';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, buildProps } from '@fluentui-react-native/framework';
+import { compose, buildProps } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 
 import type { ExpanderType, ExpanderProps, ExpanderViewProps } from './Expander.types';
 import { expanderName } from './Expander.types';

@@ -3,7 +3,8 @@ import React from 'react';
 import { I18nManager, Image, Pressable, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, memoize, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { memoize, mergeProps } from '@fluentui-react-native/framework-base';
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { SvgXml } from 'react-native-svg';

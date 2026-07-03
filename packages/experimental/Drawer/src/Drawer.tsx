@@ -2,7 +2,8 @@
 import { Animated, Modal, TouchableWithoutFeedback, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 
 import { stylingSettings } from './Drawer.styling';
 import type { DrawerType, DrawerProps } from './Drawer.types';

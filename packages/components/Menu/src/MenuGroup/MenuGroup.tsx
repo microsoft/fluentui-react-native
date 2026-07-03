@@ -4,8 +4,8 @@ import { Platform, View } from 'react-native';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
-import { extractChildren, extractProps } from '@fluentui-react-native/framework-base';
+import { compose } from '@fluentui-react-native/framework';
+import { extractChildren, extractProps, mergeProps } from '@fluentui-react-native/framework-base';
 import type { UseSlots } from '@fluentui-react-native/framework';
 
 import type { MenuGroupProps, MenuGroupType } from './MenuGroup.types';

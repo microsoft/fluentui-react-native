@@ -9,7 +9,7 @@
   "include": ["src"],
   "references": [
     {
-      "path": "../../framework/framework/tsconfig.json"
+      "path": "../../framework-base/tsconfig.json"
     },
     {
       "path": "../../../scripts/tsconfig.json"

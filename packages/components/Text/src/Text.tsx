@@ -3,7 +3,8 @@ import React from 'react';
 import { I18nManager, Platform, Text as RNText } from 'react-native';
 
 import type { UseTokens, FontWeightValue } from '@fluentui-react-native/framework';
-import { fontStyles, useFluentTheme, mergeStyles, compressible, patchTokens } from '@fluentui-react-native/framework';
+import { fontStyles, useFluentTheme, compressible, patchTokens } from '@fluentui-react-native/framework';
+import { mergeStyles } from '@fluentui-react-native/framework-base';
 import { useKeyProps } from '@fluentui-react-native/interactive-hooks';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 

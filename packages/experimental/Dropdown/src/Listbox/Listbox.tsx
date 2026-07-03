@@ -6,7 +6,8 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { ICalloutProps } from '@fluentui-react-native/callout';
 import { Callout } from '@fluentui-react-native/callout';
 import type { UseTokens } from '@fluentui-react-native/framework';
-import { buildUseTokens, compressible, useSlot } from '@fluentui-react-native/framework';
+import { buildUseTokens, compressible } from '@fluentui-react-native/framework';
+import { useSlot } from '@fluentui-react-native/framework-base';
 
 import type { ListboxProps, ListboxTokens } from './Listbox.types';
 import { listboxName } from './Listbox.types';

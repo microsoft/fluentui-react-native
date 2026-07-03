@@ -8,7 +8,8 @@ import type { ImageSource, ViewProps, ColorValue } from 'react-native';
 import { NativeModules, TurboModuleRegistry } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, buildProps, mergeProps } from '@fluentui-react-native/framework';
+import { compose, buildProps } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 
 const avatarName = 'NativeAvatar';
 

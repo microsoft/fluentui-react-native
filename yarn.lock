@@ -3947,7 +3947,7 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-appearance-additions@workspace:packages/experimental/AppearanceAdditions"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -4781,7 +4781,6 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/button": "workspace:*"
-    "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/menu": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"

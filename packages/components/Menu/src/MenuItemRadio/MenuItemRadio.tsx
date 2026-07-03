@@ -4,7 +4,8 @@ import { Image, Platform, Pressable, View } from 'react-native';
 
 import type { Slots, UseSlots } from '@fluentui-react-native/framework';
 import type { LegacyFunctionComponent } from '@fluentui-react-native/framework-base';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { SvgXml } from 'react-native-svg';
