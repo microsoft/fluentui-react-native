@@ -1,7 +1,8 @@
-import React from 'react';
 import type { FunctionComponent, DirectComponent, LegacyDirectComponent, LegacyFunctionComponent } from '../types/render.types';
 import { SLOT_RENDER_TYPE_KEY } from '../const';
 import { splitPropsAndChildren } from '../utilities/typeUtils';
+import { isDirectComponent, isLegacyDirectComponent } from './identify';
+import { getChildrenAsArray } from '../utilities/children';
 
 /**
  * Helpers related to direct rendering patterns. Direct rendering allows a component to mark itself as safe to call
@@ -24,17 +25,6 @@ export function directComponent<TProps>(component: FunctionComponent<TProps>): D
 }
 
 /**
- * Checks if a component is a direct component.
- * @param component the component to check
- * @return true if the component is a direct component, false otherwise
- */
-export function isDirectComponent<TProps>(
-  component: FunctionComponent<TProps> | LegacyFunctionComponent<TProps> | React.ElementType,
-): component is DirectComponent<TProps> {
-  return (component as DirectComponent<TProps>)[SLOT_RENDER_TYPE_KEY] === 'callable';
-}
-
-/**
  * Creates a legacy direct component from a legacy function component.
  * @param component the legacy function component to convert
  * @return the same component with the legacy direct component flag set
@@ -43,30 +33,6 @@ export function isDirectComponent<TProps>(
 export function legacyDirectComponent<TProps>(component: LegacyFunctionComponent<TProps>): LegacyDirectComponent<TProps> {
   (component as LegacyDirectComponent<TProps>)[SLOT_RENDER_TYPE_KEY] = 'legacy';
   return component as LegacyDirectComponent<TProps>;
-}
-
-/**
- * Checks if a component is a legacy direct component
- * @param component the component to check
- * @return true if the component is a legacy direct component, false otherwise
- * @deprecated Prefer the directComponent or slot patterns if writing new code.
- */
-export function isLegacyDirectComponent<TProps>(
-  component: FunctionComponent<TProps> | LegacyFunctionComponent<TProps> | React.ElementType,
-): component is LegacyDirectComponent<TProps> {
-  return (component as LegacyDirectComponent<TProps>)[SLOT_RENDER_TYPE_KEY] === 'legacy';
-}
-
-/**
- * Checks if a component is a direct component or a legacy direct component.
- * @param component the component to check
- * @return true if the component is a direct component or a legacy direct component, false otherwise
- * @internal
- */
-export function isDirectComponentType<TProps>(
-  component: FunctionComponent<TProps> | LegacyFunctionComponent<TProps> | React.ElementType,
-): component is DirectComponent<TProps> | LegacyDirectComponent<TProps> {
-  return isDirectComponent(component) || isLegacyDirectComponent(component);
 }
 
 /**
@@ -85,11 +51,11 @@ export function renderDirectComponent<TProps>(
     return component(props);
   } else if (isLegacyDirectComponent(component)) {
     const [rest, childrenProps] = splitPropsAndChildren(props);
-    if (childrenProps?.children && Array.isArray(childrenProps.children)) {
-      return component(rest as TProps, ...childrenProps.children);
-    } else {
-      return component(rest as TProps, childrenProps?.children);
-    }
+    // Pass the normalized children as a single argument rather than spreading. Legacy direct components forward their
+    // `...children` rest parameter on to a render function that may accept children as a single parameter (e.g. the
+    // deprecated framework's atomicRender). Spreading a multi-element children array here would forward multiple
+    // arguments and silently drop every child after the first.
+    return component(rest as TProps, ...getChildrenAsArray(childrenProps?.children));
   }
   throw new Error('Invalid direct component');
 }

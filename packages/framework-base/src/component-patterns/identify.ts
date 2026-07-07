@@ -72,3 +72,14 @@ export function isSlotComponent<TProps>(component: unknown): component is SlotCo
     !isStagedComponent(component)
   );
 }
+
+/**
+ * Is this element already a custom render type (direct, legacy direct, phased, staged, or slot)
+ * @param component component to test
+ * @returns True if the component is a custom render type, false otherwise.
+ */
+export function isCustomRenderType<TProps>(component: React.ComponentType<TProps>) {
+  return (
+    (component as DirectComponent<TProps>)[SLOT_RENDER_TYPE_KEY] != null || (component as SlotComponent<TProps>)[SLOT_COMPONENT_KEY] != null
+  );
+}

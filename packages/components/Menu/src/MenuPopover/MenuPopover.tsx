@@ -11,6 +11,7 @@ import { useMenuPopoverTokens } from './MenuPopoverTokens';
 import { useMenuPopover } from './useMenuPopover';
 import { useMenuContext } from '../context';
 import { MenuCallout } from '../MenuCallout';
+import { directComponent } from '@fluentui-react-native/framework-base';
 
 export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   (props: MenuPopoverProps, useTokens: UseTokens<MenuPopoverTokens>) => {
@@ -35,7 +36,7 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
       backgroundColor,
     });
 
-    return (final: MenuPopoverProps, children: React.ReactNode) => {
+    return directComponent(({ children, ...final }: MenuPopoverProps) => {
       const mergedProps = mergeProps(tokens, state.props, final);
       const innerViewProps =
         //For windows platforms, styling needs to be set on container view instead of the callout itself for the scrollview to reflect correct width and height
@@ -53,7 +54,7 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
           {content}
         </MenuCallout>
       );
-    };
+    });
   },
   useMenuPopoverTokens,
 );

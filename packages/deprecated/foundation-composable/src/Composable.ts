@@ -23,7 +23,7 @@ import { ISlotProps, mergeSettings } from '@uifabricshared/foundation-settings';
 export function atomicRender<TProps extends object, TState = object>(
   Slots: ISlots<ISlotProps<TProps>>,
   _renderData: IRenderData<ISlotProps<TProps>, TState>,
-  children: React.ReactNode,
+  ...children: React.ReactNode[]
 ): FurnJSX.Element | null {
   const props = setPropsChildren({} as TProps, children);
   return renderJsx(Slots.root, props);

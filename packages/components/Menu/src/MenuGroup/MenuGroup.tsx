@@ -10,6 +10,7 @@ import type { UseSlots } from '@fluentui-react-native/framework';
 
 import type { MenuGroupProps, MenuGroupType } from './MenuGroup.types';
 import { menuGroupName } from './MenuGroup.types';
+import { directComponent } from '@fluentui-react-native/framework-base';
 
 // Intentionally not enabled on macOS to match system context menus
 const hasFocusZone = ['win32'].includes(Platform.OS as string);
@@ -22,7 +23,7 @@ export const MenuGroup = compose<MenuGroupType>({
   },
   useRender: (userProps: MenuGroupProps, useSlots: UseSlots<MenuGroupType>) => {
     const Slots = useSlots(userProps);
-    return (final: MenuGroupProps, children: React.ReactNode) => {
+    return directComponent(({ children, ...final }: MenuGroupProps) => {
       const { ...mergedProps } = mergeProps(userProps, final);
 
       let itemPosition = 0;
@@ -85,6 +86,6 @@ export const MenuGroup = compose<MenuGroupType>({
           </Slots.contentWrapper>
         </Slots.root>
       );
-    };
+    });
   },
 });

@@ -2,6 +2,7 @@ import type React from 'react';
 import type { PropsWithChildren } from 'react';
 import type { DistributiveOmit, DistributivePick } from '../types/utility.types';
 import type { PropsWithoutChildren } from '../types/props.types';
+import { normalizeChildren } from './children';
 
 /**
  *
@@ -114,13 +115,4 @@ export function setPropsChildren<TProps>(props: TProps, children: React.ReactNod
     }
   }
   return props;
-}
-
-function normalizeChildren(children: React.ReactNode): React.ReactNode {
-  if (Array.isArray(children)) {
-    if (children.length < 2) {
-      return children.length === 1 ? children[0] : undefined;
-    }
-  }
-  return children;
 }

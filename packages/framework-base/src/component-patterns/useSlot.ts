@@ -3,10 +3,9 @@ import * as React from 'react';
 import type { SlotComponent, UseSlot, UseOptionalSlot, PropsTransform } from '../types/render.types';
 import { setSlotStatics } from './slot';
 import { createSlotComponent } from './render';
-import { isPhasedComponent, isStagedComponent, isLegacyDirectComponent } from './identify';
+import { isPhasedComponent, isStagedComponent } from './identify';
 import { SLOT_COMPONENT_KEY } from '../const';
-import { legacyDirectComponent } from './direct';
-import { splitPropsAndChildren } from '../utilities/typeUtils';
+import { prepareStagedProps } from './phased';
 
 /**
  * The core useSlot hook implementation, while the return result will always be a SlotComponent, the implementation will fork
@@ -42,16 +41,7 @@ export const useSlot: UseSlot = <TProps>(
     component = component[SLOT_COMPONENT_KEY](hookProps);
     hookProps = {};
   } else if (isStagedComponent<TProps>(component)) {
-    // the first stage consumes the incoming props (captured via closure), so only children should be carried
-    // forward to the second stage. Resetting hookProps here prevents the already-consumed props from being
-    // re-applied to the inner component at render time (which would leak props like 'variant' onto the slot).
-    const [props, childrenProp] = splitPropsAndChildren(hookProps);
-    // call the first stage and get the inner component, which will be a LegacyFunctionComponent
-    const inner = component[SLOT_COMPONENT_KEY](props as Partial<TProps>);
-    // attach the type signifier if necessary as legacy consumers aren't reliable about this
-    component = isLegacyDirectComponent(inner) ? inner : legacyDirectComponent(inner);
-    // carry only children forward (force cast, if it has children we know it is in the TProps type)
-    hookProps = (childrenProp ?? {}) as Partial<TProps>;
+    [component, hookProps] = prepareStagedProps(component[SLOT_COMPONENT_KEY], hookProps as TProps);
   }
   // now onto the slot creation itself, use a ref to get per-instance storage for the slot
   const slotRef = React.useRef<SlotComponent<TProps> | null>(null);

@@ -1,6 +1,8 @@
 import React from 'react';
-import type { PhasedComponent, StagedComponent, LegacyFunctionComponent } from '../types/render.types';
+import type { PhasedComponent, StagedComponent, StagedRender } from '../types/render.types';
 import { renderForJsxRuntime } from './render';
+import { legacyDirectComponent } from './direct';
+import { isCustomRenderType } from './identify';
 import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY } from '../const';
 import { splitPropsAndChildren } from '../utilities/typeUtils';
 
@@ -40,10 +42,23 @@ export function phasedComponent<TProps>(getInnerPhase: (props: TProps) => React.
 }
 
 /**
- * Determine if the component is a phased component
+ * Prepare the props for a staged component, splitting out the children and running the first stage to get the inner render function.
+ * The inner render function may be a direct component (children carried via props) or an unmarked legacy function (children passed as trailing args).
+ * Route both through renderDirectComponent so children are handled consistently, with only the children carried forward to the inner render.
+ * @param staged - staged component to prepare props for
+ * @param props - props to be passed to the staged component
+ * @returns - a tuple containing the inner render function and the remaining props
  */
-export function isPhasedComponent<TProps>(component: unknown): component is PhasedComponent<TProps> {
-  return component != null && (component as PhasedComponent<TProps>)[SLOT_RENDER_TYPE_KEY] === 'phased';
+export function prepareStagedProps<TProps>(staged: StagedRender<TProps>, props: TProps): [React.ComponentType<TProps>, TProps] {
+  // for staged components, the first stage will not expect any children, so split them out to pass on to the second stage
+  const [rest, childrenProp] = splitPropsAndChildren(props);
+  // run the first stage, which consumes the incoming props (minus children), this then returns the inner render function,
+  // which may be a direct component (children carried via props) or an unmarked legacy function (children passed as trailing args)
+  const inner = staged(rest as Partial<TProps>);
+  // attach the type signifier if necessary as legacy consumers aren't reliable about this
+  const final = isCustomRenderType(inner) ? inner : legacyDirectComponent(inner);
+  // carry only children forward (force cast, if it has children we know it is in the TProps type)
+  return [final, (childrenProp ?? {}) as TProps];
 }
 
 /**
@@ -53,18 +68,12 @@ export function isPhasedComponent<TProps>(component: unknown): component is Phas
  * @param memo - optional flag to enable wrapping the created component in a React.memo HOC
  * @deprecated Use phasedComponent from phasedComponent.ts instead
  */
-export function stagedComponent<TProps>(
-  staged: (props: Partial<TProps>) => LegacyFunctionComponent<TProps>,
-  memo?: boolean,
-): StagedComponent<TProps> {
+export function stagedComponent<TProps>(staged: StagedRender<TProps>, memo?: boolean): StagedComponent<TProps> {
   // component wrapper that will render in the case that this component is not
   // used as a slot
   const component = (props: TProps) => {
-    const [rest, childrenProp] = splitPropsAndChildren(props);
-    const final = staged(rest as TProps);
-    return Array.isArray(childrenProp?.children)
-      ? final({} as TProps, ...childrenProp.children)
-      : final({} as TProps, childrenProp?.children);
+    const [final, childrenProp] = prepareStagedProps(staged, props);
+    return renderForJsxRuntime(final, childrenProp);
   };
 
   // memoize the component if requested and attach the required information to make this a staged component
@@ -73,11 +82,4 @@ export function stagedComponent<TProps>(
     [SLOT_COMPONENT_KEY]: staged,
     [SLOT_RENDER_TYPE_KEY]: 'phased-legacy',
   }) as StagedComponent<TProps>;
-}
-
-/**
- * Determine if the component is a staged component, the legacy phased pattern
- */
-export function isStagedComponent<TProps>(component: unknown): component is StagedComponent<TProps> {
-  return component != null && (component as StagedComponent<TProps>)[SLOT_RENDER_TYPE_KEY] === 'phased-legacy';
 }
