@@ -1,3 +1,6 @@
 # Set the default line ending behavior for text, in case people don't have core.autocrlf set.
-* text=auto
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
 *.pbxproj -text
