@@ -1,10 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
+const { PLATFORM_ENV_VAR } = require('../../src/const.mts');
 const projectManifestPath = path.resolve(process.cwd(), 'package.json');
 const foundProject = fs.existsSync(projectManifestPath);
 const projectManifest = foundProject ? require(projectManifestPath) : null;
-const platform = projectManifest?.furn?.jestPlatform ?? 'ios';
+const platform = process.env[PLATFORM_ENV_VAR] ?? projectManifest?.furn?.jestPlatform ?? 'ios';
 
 const rnPlatforms = ['ios', 'android', 'windows', 'macos', 'win32'];
 
