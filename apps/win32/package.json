@@ -22,7 +22,6 @@
     "bundle": "rnx-cli bundle --dev false",
     "bundle-dev": "rnx-cli bundle",
     "clean": "fluentui-scripts clean",
-    "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
