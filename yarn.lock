@@ -2596,6 +2596,7 @@ __metadata:
   resolution: "@fluentui-react-native/agentic-components@workspace:packages/agentic-components"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -3687,7 +3688,7 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-appearance-additions@workspace:packages/experimental/AppearanceAdditions"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -4105,11 +4106,18 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "catalog:"
     "@types/react": "npm:~19.1.4"
+    "@types/react-test-renderer": "npm:^19.1.0"
     react: "npm:19.1.4"
     react-native: "npm:^0.81.6"
+    react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
@@ -4130,7 +4138,6 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
-    "@fluentui-react-native/use-slot": "workspace:*"
     "@fluentui-react-native/use-slots": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@fluentui-react-native/use-tokens": "workspace:*"
@@ -4515,7 +4522,6 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/button": "workspace:*"
-    "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/menu": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -4947,6 +4953,7 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
+    "@office-iss/react-native-win32": "npm:^0.81.0"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
@@ -4964,7 +4971,7 @@ __metadata:
     react-native-windows: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.4"
   peerDependencies:
-    "@office-iss/react-native-win32": ^0.74.0 || ^0.81.0
+    "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
@@ -5642,33 +5649,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/use-slot@workspace:*, @fluentui-react-native/use-slot@workspace:packages/framework/use-slot":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/use-slot@workspace:packages/framework/use-slot"
-  dependencies:
-    "@babel/core": "catalog:"
-    "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native-community/cli": "npm:^20.0.0"
-    "@react-native-community/cli-platform-android": "npm:^20.0.0"
-    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
-    "@react-native/babel-preset": "npm:^0.81.0"
-    "@react-native/metro-config": "npm:^0.81.0"
-    "@types/jest": "npm:^29.0.0"
-    "@types/react": "npm:~19.1.4"
-    "@types/react-test-renderer": "npm:^19.1.0"
-    react: "npm:19.1.4"
-    react-native: "npm:^0.81.6"
-    react-test-renderer: "npm:19.1.4"
-  peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
-    react: 18.2.0 || 19.0.0 || 19.1.4
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-  languageName: unknown
-  linkType: soft
-
 "@fluentui-react-native/use-slots@workspace:*, @fluentui-react-native/use-slots@workspace:packages/framework/use-slots":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/use-slots@workspace:packages/framework/use-slots"
@@ -5676,7 +5656,6 @@ __metadata:
     "@babel/core": "catalog:"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/use-slot": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"

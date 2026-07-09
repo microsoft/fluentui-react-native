@@ -6,8 +6,8 @@ import { View, Text } from 'react-native';
 import type { ThemeHelper } from '@fluentui-react-native/use-styling';
 import * as renderer from 'react-test-renderer';
 
-import type { UseStyledSlots } from './composeFactory.ts';
-import { composeFactory } from './composeFactory.ts';
+import type { UseStyledSlots } from './composeFactory';
+import { composeFactory } from './composeFactory';
 
 type Theme = {
   values: {

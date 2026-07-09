@@ -4,15 +4,14 @@ import { act } from 'react';
 import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { mergeStyles } from '@fluentui-react-native/framework-base';
+import { mergeStyles, useSlot } from '@fluentui-react-native/framework-base';
 import type { Theme } from '@fluentui-react-native/theme-types';
-import { useSlot } from '@fluentui-react-native/use-slot';
 import { applyTokenLayers } from '@fluentui-react-native/use-tokens';
 import * as renderer from 'react-test-renderer';
 
-import { compressible } from './compressible.ts';
-import { buildUseTokens } from './useTokens.ts';
-import type { UseTokens } from './useTokens.ts';
+import { compressible } from './compressible';
+import { buildUseTokens } from './useTokens';
+import type { UseTokens } from './useTokens';
 
 type Variant = 'normal' | 'header' | 'caption';
 interface VariantTextTokens {

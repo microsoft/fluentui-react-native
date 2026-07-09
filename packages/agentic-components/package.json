@@ -25,11 +25,13 @@
   "scripts": {
     "build": "tsgo -b",
     "clean": "fluentui-scripts clean",
-    "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
+  },
+  "dependencies": {
+    "@fluentui-react-native/framework-base": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

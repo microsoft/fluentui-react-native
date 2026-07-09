@@ -4,7 +4,8 @@ import { Platform, Pressable, View } from 'react-native';
 
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 

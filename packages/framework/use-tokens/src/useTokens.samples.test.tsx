@@ -7,7 +7,7 @@ import { immutableMerge } from '@fluentui-react-native/framework-base';
 import { mergeStyles } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
 
-import { buildUseTokens } from './buildUseTokens.ts';
+import { buildUseTokens } from './buildUseTokens';
 
 /**
  * Sample super simple theming implementation, shared by all the samples. This is intended to be illustrative,

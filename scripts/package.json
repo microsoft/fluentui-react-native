@@ -28,7 +28,6 @@
   "scripts": {
     "build": "tsgo -b",
     "bundlesize": "bundlesize --debug",
-    "depcheck": "node ./src/cli.ts depcheck",
     "format": "node ./src/cli.ts format",
     "lint": "node ./src/cli.ts lint"
   },

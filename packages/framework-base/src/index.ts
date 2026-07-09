@@ -1,63 +1,99 @@
-// immutable-merge exports
-export { immutableMerge, immutableMergeCore, processImmutable, filterToObjects } from './immutable-merge/Merge.ts';
+/**
+ * ----- IMMUTABLE MERGE -----
+ */
+
+export { immutableMerge, immutableMergeCore, processImmutable, filterToObjects } from './immutable-merge/Merge';
 export type {
   BuiltinRecursionHandlers,
   CustomRecursionHandler,
   MergeOptions,
   RecursionHandler,
   RecursionOption,
-} from './immutable-merge/Merge.ts';
+} from './immutable-merge/Merge';
 
-// memo-cache exports
-export type { GetMemoValue, GetTypedMemoValue } from './memo-cache/getMemoCache.ts';
-export { getMemoCache, getTypedMemoCache } from './memo-cache/getMemoCache.ts';
-export { memoize } from './memo-cache/memoize.ts';
+/**
+ * ----- MEMO CACHE -----
+ */
+export type { GetMemoValue, GetTypedMemoValue } from './memo-cache/getMemoCache';
+export { getMemoCache, getTypedMemoCache } from './memo-cache/getMemoCache';
+export { memoize } from './memo-cache/memoize';
 
-// merge-props exports
-export { mergeStyles } from './merge-props/mergeStyles.ts';
-export { mergeProps } from './merge-props/mergeProps.ts';
+/**
+ * ----- MERGE PROPS / MERGE STYLES -----
+ */
+export { mergeStyles } from './merge-props/mergeStyles';
+export { mergeProps } from './merge-props/mergeProps';
 
-// component pattern exports - extracting from elements
-export { extractChildren, extractProps, extractStyle } from './component-patterns/extract.ts';
+/**
+ * ----- COMPONENT PATTERNS -----
+ */
 
-// component pattern exports - rendering utilities
-export { renderForJsxRuntime, renderSlot, asDirectComponent } from './component-patterns/render.ts';
+export { renderSlot, createSlotComponent, renderJsx } from './component-patterns/render';
+export { directComponent, legacyDirectComponent } from './component-patterns/direct';
+export { phasedComponent, stagedComponent } from './component-patterns/phased';
+export { useSlot, useOptionalSlot } from './component-patterns/useSlot';
+export {
+  isDirectComponentType,
+  isSlotComponent,
+  isDirectComponent,
+  isLegacyDirectComponent,
+  isStagedComponent,
+  isPhasedComponent,
+} from './component-patterns/identify';
 
-// component pattern exports - core types
+// legacy JSX handler
+export { withSlots } from './component-patterns/withSlots';
+
+/**
+ * ----- HOOKS -----
+ */
+export { usePressableState } from './hooks/usePressableState';
+export type { UsePressableResult } from './hooks/usePressableState';
+export type { PressableState, PressableStateKeys } from './types/interactive.types';
+
+/**
+ * ----- JSX RUNTIME -----
+ */
+export { jsx, jsxs } from './jsx-runtime';
+export type { FurnJSX } from './types/react.types';
+
+/**
+ * ----- UTILITIES -----
+ */
+export { filterProps, propTransformFromFilter } from './utilities/filterProps';
+export { extractChildren, extractProps, extractStyle } from './utilities/extract';
+export { getPropsChildren, isObject, setPropsChildren, splitPropsAndChildren, getEntityType } from './utilities/typeUtils';
+export { normalizeChildren, reconcileChildren, getChildrenAsArray, getSingleChild } from './utilities/children';
+export type { ExpandedTypeof, TypeofResult } from './utilities/typeUtils';
+
+/**
+ * ------- TYPES --------
+ */
+
+export type {
+  StyleProp,
+  ObjectBase,
+  ObjectFallback,
+  ObjectMerger,
+  ObjectMergerWithOptions,
+  StyleMerger,
+  PropsFilter,
+  PropsOf,
+  PropsWithoutChildren,
+  PropsWithoutRef,
+} from './types/props.types';
 export type {
   DirectComponent,
   FunctionComponent,
-  FunctionComponentCore,
   LegacyDirectComponent,
+  LegacyFunctionComponent,
   PhasedComponent,
   PhasedRender,
-  PropsOf,
+  StagedComponent,
+  StagedRender,
+  PropsTransform,
   RenderType,
   RenderResult,
-  StagedRender,
-  ComposableFunction,
-  FinalRender,
-  SlotFn,
-  NativeReactType,
-} from './component-patterns/render.types.ts';
-
-// component pattern exports - component builders
-export { directComponent } from './component-patterns/directComponent.ts';
-export { getPhasedRender, phasedComponent } from './component-patterns/phasedComponent.ts';
-export { stagedComponent } from './component-patterns/stagedComponent.ts';
-
-// component pattern exports - legacy JSX handlers
-export { withSlots } from './component-patterns/withSlots.tsx';
-
-// jsx runtime exports
-export { jsx, jsxs } from './jsx-runtime.ts';
-export type { FurnJSX } from './jsx-namespace.ts';
-
-// general utilities
-export { filterProps } from './utilities/filterProps.ts';
-export type { PropsFilter } from './utilities/filterProps.ts';
-
-// core type utilities exports
-export type { StyleProp, ObjectBase, ObjectFallback } from './utilities/baseTypes.ts';
-export type { ObjectMerger, ObjectMergerWithOptions, StyleMerger } from './utilities/mergeTypes.ts';
-export type { ExpandedTypeof, TypeofResult } from './utilities/typeUtils.ts';
+  SlotComponent,
+} from './types/render.types';
+export type { DistributiveOmit, DistributivePick, UnionToIntersection, ReplaceNullWithUndefined, IsSingleton } from './types/utility.types';

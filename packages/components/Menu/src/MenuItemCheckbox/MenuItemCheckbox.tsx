@@ -2,11 +2,13 @@
 import React from 'react';
 import { Image, Platform, Pressable, View } from 'react-native';
 
-import type { Slots, UseSlots, FinalRender } from '@fluentui-react-native/framework';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import type { Slots, UseSlots } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { SvgXml } from 'react-native-svg';
+import type { LegacyFunctionComponent } from '@fluentui-react-native/framework-base';
 
 import { stylingSettings } from './MenuItemCheckbox.styling';
 import type {
@@ -42,7 +44,7 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
 export const menuItemFinalRender = (
   menuItem: MenuItemCheckboxInfo,
   Slots: Slots<MenuItemCheckboxSlotProps>,
-): FinalRender<MenuItemCheckboxProps> => {
+): LegacyFunctionComponent<MenuItemCheckboxProps> => {
   return (final: MenuItemCheckboxProps, ...children: React.ReactNode[]) => {
     const { accessibilityLabel, icon, tooltip, ...mergedProps } = mergeProps(menuItem.props, final);
 

@@ -3,7 +3,8 @@ import { Fragment } from 'react';
 import { Pressable, ScrollView, TextInput, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 import { createIconProps } from '@fluentui-react-native/icon';
 import { Icon } from '@fluentui-react-native/icon';
 import type { FocusState } from '@fluentui-react-native/interactive-hooks';

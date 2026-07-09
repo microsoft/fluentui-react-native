@@ -4,7 +4,8 @@ import { View, Pressable } from 'react-native';
 import type { ViewProps } from 'react-native';
 
 import type { UseTokens } from '@fluentui-react-native/framework';
-import { compressible, useSlot, useFluentTheme, applyTokenLayers, mergeProps } from '@fluentui-react-native/framework';
+import { compressible, useFluentTheme, applyTokenLayers } from '@fluentui-react-native/framework';
+import { useSlot, mergeProps } from '@fluentui-react-native/framework-base';
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';

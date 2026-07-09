@@ -4,6 +4,7 @@ import type { PackageManifest as PackageManifestBase } from '@rnx-kit/types-node
 import type { Yarn } from '@yarnpkg/types';
 import path from 'node:path';
 import fs from 'node:fs';
+import Module from 'node:module';
 import { styleText } from 'util';
 
 export type PackageType = 'library' | 'component' | 'app' | 'tooling';
@@ -44,6 +45,7 @@ export class PackageContext extends PackageValidationContext<PackageManifest> {
     const validator = createJSONValidator(jsonPath, manifest as JSONObject, innerOptions);
     return new PackageContext(root, validator);
   }
+
   /**
    * Create a package validation context for a Yarn workspace
    * @param workspace the Yarn workspace to validate
@@ -59,15 +61,54 @@ export class PackageContext extends PackageValidationContext<PackageManifest> {
   }
 
   private _files?: string[];
+  private _cachedRequire: ReturnType<typeof Module.createRequire> | undefined = undefined;
 
   static BLOCKED_DIRS = new Set(['node_modules', 'dist', 'lib', 'lib-commonjs', 'lib-esm', 'build', '.git', '.vscode', '.idea']);
 
+  /**
+   * Get the cached require function for this package, allows using require within the context of this package and in esm scope
+   * @returns {NodeRequire} - built on demand and cached require function
+   */
+  get require() {
+    return (this._cachedRequire ??= Module.createRequire(this.root));
+  }
+
+  /**
+   * Get the list of all files in the package, excluding things like node_modules, lib, and dist
+   * @returns {string[]} - the list of all files in the package
+   */
   get files(): string[] {
     return (this._files ??= getFilesSync(this.root, PackageContext.BLOCKED_DIRS));
   }
 
+  /**
+   * Get the list of all files in the package, excluding things like node_modules, lib, and dist
+   * @returns {Promise<string[]>} - the list of all files in the package
+   */
   async getFiles(): Promise<string[]> {
     return (this._files ??= await getAllFiles(this.root, PackageContext.BLOCKED_DIRS));
+  }
+
+  /**
+   * Open a module relative to this project root
+   */
+  openModule(moduleName: string): PackageContext {
+    const pkgJsonPath = this.require.resolve(`${moduleName}/package.json`, { paths: [this.root] });
+    return PackageContext.init(path.dirname(pkgJsonPath));
+  }
+
+  /**
+   * Get the path to a bin entry for a js package.
+   */
+  getBinPath(command: string): string | undefined {
+    const bin = this.manifest.bin;
+    if (bin) {
+      const binRelative = typeof bin === 'string' ? bin : bin[command];
+      if (binRelative) {
+        return normalizePath(path.join(this.root, binRelative));
+      }
+    }
+    return undefined;
   }
 }
 
@@ -113,4 +154,11 @@ function getFilesSync(dir: string, excludedDirs?: Set<string>): string[] {
 
   walkDir(dir, excludedDirs);
   return results;
+}
+
+/**
+ * Normalize a file path by replacing backslashes with forward slashes.
+ */
+export function normalizePath(p: string): string {
+  return path.normalize(p).replaceAll('\\', '/');
 }

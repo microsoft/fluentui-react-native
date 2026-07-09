@@ -26,6 +26,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "react": "18.2.0",

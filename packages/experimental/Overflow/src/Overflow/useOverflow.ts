@@ -17,6 +17,7 @@ import type {
   OverflowManager,
   OverflowUpdatePayload,
 } from '../overflowManager.types';
+import { mergeStyles } from '@fluentui-react-native/framework-base';
 
 type PartialOverflowState = Pick<OverflowState, 'hasOverflow' | 'itemVisibility'>;
 
@@ -181,15 +182,13 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
   }, [initialLayoutDone, onReady]);
 
   const overflowStyles = React.useMemo<StyleProp<ViewStyle>>(
-    () => [
-      style,
-      {
+    () =>
+      mergeStyles(style, {
         display: 'flex',
         flexDirection: 'row',
         opacity: dontHideBeforeReady || initialLayoutDone ? 1 : 0,
         padding: padding,
-      },
-    ],
+      }),
     [dontHideBeforeReady, initialLayoutDone, padding, style],
   );
 
@@ -197,11 +196,11 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     state: {
       ...overflowState,
       containerSize,
-      dontHideBeforeReady: dontHideBeforeReady,
+      dontHideBeforeReady,
       initialOverflowLayoutDone: initialLayoutDone,
-      overflowMenuRef: overflowMenuRef,
-      register: register,
-      disconnect: disconnect,
+      overflowMenuRef,
+      register,
+      disconnect,
       setLayoutState: userSetLayoutState,
       updateOverflow: overflowManager.update,
       updateItem: handleItemUpdate,

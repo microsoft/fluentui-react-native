@@ -146,10 +146,11 @@ export type IWithComposable<T, TComposable> = T & {
 export type INativeSlotType = React.ElementType<any> | string;
 
 /**
- * Optional function to filter the properties that will be passed to the component.  If no props are to be
- * removed it should return the same object.  Otherwise it should return a new object with props filtered
+ * Optional transform to filter the properties that will be passed to the component. It receives the
+ * merged props and returns a filtered set of props. If no props are to be removed it should return the
+ * same object.
  */
-export type IPropFilter = (propName: string) => boolean;
+export type IPropFilter = <TProps>(props: TProps) => TProps;
 
 /**
  * In the case where a filter needs to be applied to props the slot can be set to an object which contains the slotType

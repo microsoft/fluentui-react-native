@@ -27,7 +27,7 @@ import { dirname, join, relative, resolve } from 'node:path';
 const CONFIG_PATH = '.github/markdown-link-check-config.json';
 
 // Directories that never contain checkable markdown and would only slow the walk.
-const SKIP_DIRS = new Set(['node_modules', 'lib', 'lib-commonjs', 'dist', '.git']);
+const SKIP_DIRS = new Set(['node_modules', 'lib', 'lib-commonjs', 'dist', '.git', 'Pods']);
 
 /**
  * Resolve the set of workspace directories from the root package.json's

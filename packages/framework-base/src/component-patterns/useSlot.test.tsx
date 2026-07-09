@@ -3,12 +3,15 @@ import * as React from 'react';
 import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { type FunctionComponent, mergeStyles } from '@fluentui-react-native/framework-base';
+import type { FunctionComponent } from '../types/render.types';
+import { mergeStyles } from '../merge-props/mergeStyles';
 import * as renderer from 'react-test-renderer';
 import { act } from 'react';
 
-import { phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
-import { useSlot } from './useSlot.ts';
+import { phasedComponent, stagedComponent } from './phased';
+import { directComponent } from './direct';
+import { useSlot } from './useSlot';
+import type { FurnJSX } from '../types/react.types';
 
 type PluggableTextProps = TextProps & { inner?: FunctionComponent<TextProps> };
 
@@ -70,7 +73,7 @@ const HeaderCaptionText1 = (props: TextProps) => {
   const { children, ...rest } = props;
   const baseStyle = React.useMemo<TextProps['style']>(() => ({ fontSize: 24, fontWeight: 'bold' }), []);
   const mergedProps = { ...rest, style: mergeStyles<TextStyle>(baseStyle, props.style) };
-  const InnerText = useSlot(CaptionText, mergedProps);
+  const InnerText = useSlot<PluggableTextProps>(CaptionText, mergedProps);
   return <InnerText>{children}</InnerText>;
 };
 
@@ -123,5 +126,101 @@ describe('useSlot tests', () => {
     expect(tree2).toMatchSnapshot();
     // @ts-expect-error - we know the structure of the tree here and want to compare the text nodes directly, this is not a general pattern
     expect(tree1!['HeaderCaptionText1']).toEqual(tree2!['HeaderCaptionText2']);
+  });
+});
+
+/**
+ * INTRINSIC ATTRIBUTE ACCEPTANCE
+ *
+ * A slot produced by useSlot must behave like a real component in the JSX tree, which means it has to
+ * accept React's intrinsic attributes (most importantly `key`) regardless of the kind of component the
+ * slot was created from. These tests are as much a compile-time contract as a runtime one: the file is
+ * type-checked by the check pass (targets/tsconfig.check.json includes *.test.* files), so if a slot type
+ * ever stopped accepting `key` the `<Slot key=... />` usages below would fail the build. The runtime
+ * renders confirm the slots still produce output when an intrinsic attribute is supplied.
+ */
+
+type AcceptProps = { title?: string; children?: React.ReactNode };
+
+// A representative sampling of the component kinds useSlot supports as an input type.
+const FnAccept: React.FunctionComponent<AcceptProps> = (props) => <Text>{props.title}</Text>;
+
+/**
+ * A class component shaped like the ones exported by react-native-svg (e.g. Rect/Circle): it extends
+ * React.Component, declares static defaultProps, and its render() is typed to return React.JSX.Element.
+ * Class components receive `key`/`ref` through JSX.IntrinsicClassAttributes rather than
+ * JSX.IntrinsicAttributes, so they are worth covering explicitly to prove a slot built from a class still
+ * accepts intrinsic attributes.
+ */
+class ClassAccept extends React.Component<AcceptProps> {
+  public static defaultProps: Partial<AcceptProps> = { title: '' };
+  public override render(): FurnJSX.Element {
+    return <Text>{this.props.title}</Text>;
+  }
+}
+
+const PhasedAccept = phasedComponent((_props: AcceptProps) => directComponent<AcceptProps>((extra: AcceptProps) => <Text {...extra} />));
+
+const StagedAccept = stagedComponent<AcceptProps>((_props) => (rest, ...children) => <Text {...rest}>{children}</Text>);
+
+/**
+ * Builds a slot for every supported component kind and renders each one with a `key` intrinsic attribute.
+ * The mere fact that this component type-checks is the core of the acceptance test; rendering it verifies
+ * the slots remain usable at runtime.
+ */
+const IntrinsicAttributeConsumer: React.FunctionComponent = () => {
+  const HostSlot = useSlot(View, {});
+  const TextSlot = useSlot(Text, { title: 'text' } as TextProps);
+  const FnSlot = useSlot(FnAccept, { title: 'fn' });
+  const ClassSlot = useSlot(ClassAccept, { title: 'class' });
+  const PhasedSlot = useSlot(PhasedAccept, { title: 'phased' });
+  const StagedSlot = useSlot(StagedAccept, { title: 'staged' });
+
+  return (
+    <View>
+      <HostSlot key="host" />
+      <TextSlot key="text" />
+      <FnSlot key="fn" />
+      <ClassSlot key="class" />
+      <PhasedSlot key="phased" />
+      <StagedSlot key="staged" />
+    </View>
+  );
+};
+
+/**
+ * Focused on class components specifically. A raw class component in a consumer package can lose `key`
+ * under a custom jsxImportSource because class attributes flow through JSX.IntrinsicClassAttributes;
+ * routing the class through useSlot normalizes it to a SlotComponent (a function type) which reliably
+ * accepts `key`. This mirrors how react-native-svg's class-based elements (Rect/Circle) should be
+ * consumed via slots.
+ */
+const ClassSlotConsumer: React.FunctionComponent = () => {
+  const ClassSlot = useSlot(ClassAccept, { title: 'class' });
+  return (
+    <View>
+      {['a', 'b', 'c'].map((k) => (
+        <ClassSlot key={k} />
+      ))}
+    </View>
+  );
+};
+
+describe('slot intrinsic attribute acceptance', () => {
+  it('accepts the key attribute on slots created from any supported component type', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<IntrinsicAttributeConsumer />);
+    });
+    // If any slot rejected `key`, the file would not have compiled; this confirms the tree still renders.
+    expect(component!.toJSON()).toMatchSnapshot();
+  });
+
+  it('accepts the key attribute on a slot created from a class component in a keyed list', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<ClassSlotConsumer />);
+    });
+    expect(component!.toJSON()).toMatchSnapshot();
   });
 });

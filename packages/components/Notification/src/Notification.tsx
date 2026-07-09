@@ -6,7 +6,8 @@ import type { SizeClassIOS } from '@fluentui-react-native/experimental-appearanc
 import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, memoize } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { mergeProps, memoize } from '@fluentui-react-native/framework-base';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { Pressable } from '@fluentui-react-native/pressable';

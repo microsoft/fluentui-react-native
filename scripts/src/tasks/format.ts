@@ -17,6 +17,6 @@ export class FormatCommand extends Command {
 
   async execute() {
     const args = isFixMode(!this.check) ? [] : ['--check'];
-    return await runScript('oxfmt', ...args);
+    return await runScript('oxfmt', args);
   }
 }

@@ -30,7 +30,6 @@
     "bundle:macos": "rnx-cli bundle --dev false --platform macos",
     "bundle:windows": "rnx-cli bundle --dev false --platform windows",
     "clean": "fluentui-scripts clean",
-    "depcheck": "fluentui-scripts depcheck",
     "format": "fluentui-scripts format",
     "ios": "rnx-cli run --platform ios",
     "lint": "fluentui-scripts lint",

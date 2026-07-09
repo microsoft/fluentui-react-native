@@ -2,7 +2,8 @@ import * as React from 'react';
 import { act } from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 
-import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
+import { useFluentTheme } from '@fluentui-react-native/framework';
+import { mergeStyles } from '@fluentui-react-native/framework-base';
 import { Pressable } from '@fluentui-react-native/pressable';
 import * as renderer from 'react-test-renderer';
 

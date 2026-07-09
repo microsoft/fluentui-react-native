@@ -1,42 +1,42 @@
 import { getViewMask, getTextMask, getImageMask } from './filters';
 
 /**
- * Filters props based on the provided mask. Each filter function is memoized to only compute the mask once,
- * as it doesn't change during the lifecycle of the app.
+ * Prop transform functions that filter a set of props down to only those valid for the target native
+ * component (View, Text, or Image). They take a props object and return a filtered props object,
+ * matching the PropsTransform shape used by the slot/composition frameworks. Each mask is computed once
+ * and memoized as it does not change during the lifecycle of the app.
+ *
+ * If no props need to be removed the original object is returned to preserve referential identity.
  */
+function createPropsMaskTransform(getMask: () => Record<string, boolean>) {
+  let mask: Record<string, boolean> | undefined;
+  return <T>(props: T): T => {
+    if (!props || typeof props !== 'object') {
+      return props;
+    }
+    mask ??= getMask();
+    let result: T | undefined;
+    for (const key of Object.keys(props)) {
+      if (!mask[key]) {
+        result ??= { ...props };
+        delete (result as Record<string, unknown>)[key];
+      }
+    }
+    return result ?? props;
+  };
+}
 
 /**
- * Filter view props
- * @param propName - The name of the prop to check against the view mask
+ * Filter a set of props down to only valid View props.
  */
-export const filterViewProps = (() => {
-  let viewMask: Record<string, boolean> | undefined;
-  return (propName: string): boolean => {
-    viewMask ??= getViewMask();
-    return Boolean(viewMask[propName]);
-  };
-})();
+export const filterViewProps = createPropsMaskTransform(getViewMask);
 
 /**
- * Filter text props
- * @param propName - The name of the prop to check against the text mask
+ * Filter a set of props down to only valid Text props.
  */
-export const filterTextProps = (() => {
-  let textMask: Record<string, boolean> | undefined;
-  return (propName: string): boolean => {
-    textMask ??= getTextMask();
-    return Boolean(textMask[propName]);
-  };
-})();
+export const filterTextProps = createPropsMaskTransform(getTextMask);
 
 /**
- * Filter image props
- * @param propName - The name of the prop to check against the image mask
+ * Filter a set of props down to only valid Image props.
  */
-export const filterImageProps = (() => {
-  let imageMask: Record<string, boolean> | undefined;
-  return (propName: string): boolean => {
-    imageMask ??= getImageMask();
-    return Boolean(imageMask[propName]);
-  };
-})();
+export const filterImageProps = createPropsMaskTransform(getImageMask);

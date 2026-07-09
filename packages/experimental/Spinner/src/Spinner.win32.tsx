@@ -9,7 +9,8 @@ import type { ColorValue } from 'react-native';
 import { View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { Path, Svg } from 'react-native-svg';
 import type { SvgProps } from 'react-native-svg';

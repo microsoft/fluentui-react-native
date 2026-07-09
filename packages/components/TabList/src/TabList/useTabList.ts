@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import type { View, AccessibilityState, LayoutRectangle, LayoutChangeEvent } from 'react-native';
 import type { NativeKeyEvent } from '@fluentui-react-native/adapters';
 
-import { memoize, mergeStyles } from '@fluentui-react-native/framework';
+import { memoize, mergeStyles } from '@fluentui-react-native/framework-base';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabListInfo, TabListProps } from './TabList.types';

@@ -44,7 +44,7 @@ Tokens help us achieve simpler customization for complex higher order components
 
 This section covers creating and adding a new component package to FluentUI React Native's monorepo. If you are instead working on an existing component and adding a native module, skip to the next two sections.
 
-Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](./packages/framework-base/src/component-patterns/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
+Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](./packages/framework-base/src/component-patterns/phased.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
 
 1. Create a new directory in of these two locations, depending on your component:
    - `fluentui-react-native/packages/components/<new-component>`
@@ -63,8 +63,7 @@ Reach out to Samuel Freiberg with any questions related to E2E testing.
 1. Create a `src/` subdirectory in your component directory with a minimum of two files (listed below). You may optionally choose to subdivide your code however you wish; there are plenty of examples in the other components of FluentUI React Native.
    1. `index.ts`
       - This is the file listed as `main` inside your package.json and simply exports other files.
-   1. `<new-component>.tsx` - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens. - Note that we need the comment `/** @jsxRuntime classic */
-/** @jsx withSlots */` at the top of this file. An explanation can be found in the comment at `packages/experimental/use-slots/src/withSlots.tsx`
+   1. `<new-component>.tsx` - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens. - Note that we need the comment `/** @jsxImportSource @fluentui-react-native/framework-base */` as the first line of this file. This opts the file into the custom JSX runtime that handles slot rendering; an explanation can be found in `packages/framework-base/src/component-patterns/README.md`. Packages using this pragma must include `@fluentui-react-native/framework-base` in their `devDependencies`.
    1. `<new-component>.<types | settings | platform | blah>.tsx` (Optional)
       - Optional extra files to subdivide your code however you see fit. You can also add platform specific files as you see fit.
 

@@ -1,17 +1,23 @@
 import type React from 'react';
 
 /**
- * This file defines a custom JSX namespace that re-exports React's JSX types, but also allows us to add our own custom behavior to the JSX runtime.
- * The main reason we need this is to support our "direct component" pattern, which allows certain components to bypass React's createElement and
- * return their own React elements directly from the JSX runtime.
+ * React 18/19 type-compatibility helpers.
  *
- * Exporting this custom namespace is required to make intrinsic attributes like key and ref work correctly with our custom JSX functions. The normal
- * fallback behavior if not defined is to not allow any attributes on intrinsic elements, which breaks a lot of React functionality.
+ * `@types/react` moved the JSX types between major versions:
+ * - React 18: they live in the global `JSX` namespace (no `React.JSX`).
+ * - React 19: they live in `React.JSX` (no global `JSX`).
  *
- * The custom behavior is implemented in the jsx and jsxs functions, which first check if the type being rendered is a direct component and if so, call it directly.
+ * The `ReactJSX*` aliases below resolve to whichever set exists in the consuming project, letting us
+ * reference the JSX intrinsic types without breaking under either React version. They are gathered into
+ * the `FurnJSX` namespace, which mirrors the shape of a JSX namespace so it can be used as a custom
+ * `jsxImportSource` namespace if needed.
  *
- * Thanks to the emotion library's jsx-namespace for providing a reference implementation of how to do this while handling both React 18 and React 19's
- * changes to the JSX types.
+ * NOTE: the framework's jsx-runtime currently re-exports React's own JSX namespace directly, so `FurnJSX`
+ * is not wired up as the active JSX namespace. It is kept here because the React 18/19 indirection is a
+ * generally useful building block.
+ *
+ * Thanks to the emotion library's jsx-namespace for providing a reference implementation of how to do this
+ * while handling both React 18 and React 19's changes to the JSX types.
  */
 
 type IsPreReact19 = 2 extends Parameters<React.FunctionComponent<any>>['length'] ? true : false;

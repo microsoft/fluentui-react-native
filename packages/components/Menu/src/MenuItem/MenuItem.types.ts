@@ -61,7 +61,7 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
   pressed?: MenuItemTokens;
 }
 
-export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
+export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress' | 'children'> {
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
@@ -81,6 +81,11 @@ export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
    * Do not dismiss the menu when a menu item is clicked
    */
   persistOnClick?: boolean;
+
+  /**
+   * Menu item is itself a view type but takes the children props from TextProps
+   */
+  children?: TextProps['children'];
 }
 
 export interface MenuItemState extends PressableState {

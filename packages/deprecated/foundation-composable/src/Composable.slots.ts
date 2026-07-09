@@ -1,13 +1,17 @@
 /* eslint-disable */
 
 import * as React from 'react';
-import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter, INativeSlotType } from './Composable.types';
+import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter } from './Composable.types';
 import { mergeSettings, ISlotProps } from '@uifabricshared/foundation-settings';
-import { mergeProps } from '@fluentui-react-native/framework-base';
+import {
+  mergeProps,
+  legacyDirectComponent,
+  directComponent,
+  type LegacyDirectComponent,
+  renderJsx,
+} from '@fluentui-react-native/framework-base';
 
-export type ISlotFn<TProps> = React.FunctionComponent<TProps> & {
-  _canCompose?: boolean;
-};
+export type ISlotFn<TProps> = LegacyDirectComponent<TProps>;
 
 interface ISlotRenderInfo<TProps, TSlotProps, TState> {
   composable: IComposable<TProps, TSlotProps, TState>;
@@ -21,24 +25,10 @@ function _mergeAndFilterProps<TProps>(propsBase: TProps, propsExtra: TProps, fil
   // do a basic merge, not mutating if nothing changed
   let props = mergeProps<TProps>(propsBase, propsExtra);
   if (filter && props) {
-    const removeMask = {};
-    Object.getOwnPropertyNames(props).forEach((key) => {
-      if (!filter(key)) {
-        removeMask[key] = undefined;
-      }
-    });
-    props = mergeProps<TProps>(props, removeMask as TProps);
+    // the filter is a prop transform: it takes the merged props and returns a filtered set of props
+    props = filter(props);
   }
   return props;
-}
-
-/**
- * Helper function to add the _canCompose settings to a given render function
- * @param fn - function to decorate with _canCompose
- */
-function _createSlotRenderFunction<TProps>(fn: React.FunctionComponent<TProps>): React.FunctionComponent<TProps> {
-  (fn as ISlotFn<TProps>)._canCompose = true;
-  return fn;
 }
 
 function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
@@ -59,7 +49,7 @@ function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
       const childRenderInfo = (childInfo[slot as string] = createSlotRenderInfo(composable, slots[slot]));
       if (composable) {
         // create the actual closure for rendering handing it a reference to the render info
-        Slots[slot] = _createSlotRenderFunction((extraProps: object, ...children: React.ReactNode[]) => {
+        Slots[slot] = legacyDirectComponent((extraProps: object, ...children: React.ReactNode[]) => {
           const { renderData, Slots } = childRenderInfo;
           if (filter || extraProps) {
             const toMerge = { root: _mergeAndFilterProps(renderData.slotProps.root, extraProps, filter) };
@@ -69,9 +59,9 @@ function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
         });
       } else {
         // non-composable components should just render directly
-        Slots[slot] = _createSlotRenderFunction((extraProps: object, ...children: React.ReactNode[]) => {
+        Slots[slot] = directComponent((extraProps: object) => {
           const props = _mergeAndFilterProps(childRenderInfo.renderData.slotProps.root, extraProps, filter);
-          return React.createElement(slotType as INativeSlotType, props, ...children);
+          return renderJsx(slotType, props);
         });
       }
     });

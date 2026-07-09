@@ -14,6 +14,7 @@ import { menuListName } from './MenuList.types';
 import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
 import { MenuListProvider } from '../context/menuListContext';
+import { directComponent } from '@fluentui-react-native/framework-base';
 
 const shouldHaveFocusZone = ['macos', 'win32'].includes(Platform.OS as string);
 const focusLandsOnContainer = Platform.OS === 'macos';
@@ -36,7 +37,7 @@ export const MenuList = compose<MenuListType>({
     const menuListContextValue = useMenuListContextValue(menuList);
     const Slots = useSlots(menuList.props, (layer) => menuListLookup(layer, menuList, userProps));
 
-    return (_final: MenuListProps, children: React.ReactNode) => {
+    return directComponent(({ children }: MenuListProps) => {
       const itemCount = React.Children.toArray(children).filter(
         (child) => React.isValidElement(child) && (child as any).type.displayName !== 'MenuDivider',
       ).length;
@@ -99,6 +100,6 @@ export const MenuList = compose<MenuListType>({
       );
 
       return <MenuListProvider value={menuListContextValue}>{content}</MenuListProvider>;
-    };
+    });
   },
 });

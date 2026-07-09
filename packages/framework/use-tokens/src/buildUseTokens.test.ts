@@ -1,4 +1,4 @@
-import { buildUseTokens } from './buildUseTokens.ts';
+import { buildUseTokens } from './buildUseTokens';
 
 interface Tokens {
   a?: string;

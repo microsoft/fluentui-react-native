@@ -4,7 +4,8 @@ import { Image, View, Text, Platform } from 'react-native';
 
 import { PresenceBadge } from '@fluentui-react-native/badge';
 import type { UseSlots, Slots } from '@fluentui-react-native/framework';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 import { Icon } from '@fluentui-react-native/icon';
 import { Svg, Path } from 'react-native-svg';
 
@@ -86,8 +87,6 @@ function renderAvatar(final: AvatarProps, avatarProps: AvatarProps, Slots: Slots
       {initials ? (
         <Slots.initials accessible={false}>{initials}</Slots.initials>
       ) : avatarProps.icon ? (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error - TODO, fix typing error
         <Slots.icon {...icon} accessible={false} />
       ) : (
         svgIconsEnabled && (

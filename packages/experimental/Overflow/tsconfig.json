@@ -15,9 +15,6 @@
       "path": "../../framework-base/tsconfig.json"
     },
     {
-      "path": "../../framework/framework/tsconfig.json"
-    },
-    {
       "path": "../../components/Menu/tsconfig.json"
     },
     {

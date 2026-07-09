@@ -1,4 +1,4 @@
-import { getMemoCache } from './getMemoCache.ts';
+import { getMemoCache } from './getMemoCache';
 
 /**
  * This wraps a function to memoize the results using the standard javascript memoization pattern

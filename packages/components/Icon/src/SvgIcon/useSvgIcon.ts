@@ -1,4 +1,4 @@
-import { getMemoCache, mergeStyles } from '@fluentui-react-native/framework';
+import { getMemoCache, mergeStyles } from '@fluentui-react-native/framework-base';
 
 import type { SvgIconProps } from './SvgIcon.types';
 import type { ImageStyle } from 'react-native';

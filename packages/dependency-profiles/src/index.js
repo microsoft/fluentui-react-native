@@ -226,10 +226,6 @@ module.exports = {
       "name": "@fluentui-react-native/themed-stylesheet",
       "version": "1.9.1"
     },
-    "@fluentui-react-native/use-slot": {
-      "name": "@fluentui-react-native/use-slot",
-      "version": "0.8.1"
-    },
     "@fluentui-react-native/use-slots": {
       "name": "@fluentui-react-native/use-slots",
       "version": "0.12.1"
