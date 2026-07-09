@@ -1,8 +1,8 @@
 import { getMemoCache } from '@fluentui-react-native/framework-base';
 
-import { buildProps } from './buildProps.ts';
-import type { ThemeHelper, UseStylingOptions } from './buildUseStyling.ts';
-import { buildUseStyling } from './buildUseStyling.ts';
+import { buildProps } from './buildProps';
+import type { ThemeHelper, UseStylingOptions } from './buildUseStyling';
+import { buildUseStyling } from './buildUseStyling';
 
 let lastInstance = 0;
 

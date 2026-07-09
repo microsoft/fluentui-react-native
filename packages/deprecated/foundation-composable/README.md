@@ -140,12 +140,10 @@ The three parameters are:
 - `renderData` - is the object returned by `usePrepareProps`, this generally contains `slotProps` and `state`.
 - `...children` - this is the children property from initial input props for the component. It can be handled as is standard for a react component.
 
-The `Slots` parameter allows plugging different react types into a complex component. These can be output by either using `renderSlot` or by using the `withSlots` jsx helper. Usage would be something like:
+The `Slots` parameter allows plugging different react types into a complex component. These can be output by either using `renderSlot` or by rendering the slot directly through the custom JSX runtime. Usage would be something like:
 
 ```tsx
-/** @jsxRuntime classic */
-/* @jsx withSlots */
-import { withSlots } from '@uifabricshared/foundation-composable';
+/** @jsxImportSource @fluentui-react-native/framework-base */
 
 render: (Slots: ISlots<IMySlotProps>, renderData, ...children) => {
   // do some work
@@ -176,7 +174,7 @@ Using composable, the normal flow is broken into two primary parts: `usePrepareP
 
 ### How Slots work
 
-The `Slots` parameter passed to `render` is an object containing functions which mimic the shape of `React.createElement`. When used with the @jsx helper `withSlots`, These functions:
+The `Slots` parameter passed to `render` is an object containing functions which mimic the shape of `React.createElement`. When rendered through the custom JSX runtime (via the `@jsxImportSource @fluentui-react-native/framework-base` pragma), these functions:
 
 1. Are created once. This is essential because creating a new closure on every render pass will cause the tree to remount. They are stored in a state hook but then never updated over the lifetime of the component.
 1. Include references to the `slotProps` returned as part of `usePrepareProps`. This allows for filters to act upon the props and avoids having to manually write `<Slot.root {...slotProps.root}>` every time. It also allows additional props to be mixed in directly to the JSX tree with the merge happening implicitly before render.

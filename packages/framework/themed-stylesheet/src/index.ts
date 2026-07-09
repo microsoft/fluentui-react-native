@@ -1,2 +1,2 @@
-export { themedStyleSheet } from './themedStyleSheet.ts';
-export type { NamedStyles } from './themedStyleSheet.ts';
+export { themedStyleSheet } from './themedStyleSheet';
+export type { NamedStyles } from './themedStyleSheet';

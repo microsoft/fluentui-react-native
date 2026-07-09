@@ -6,7 +6,7 @@ import { View, Text } from 'react-native';
 import { stagedComponent } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
 
-import { buildUseSlots } from './buildUseSlots.ts';
+import { buildUseSlots } from './buildUseSlots';
 
 type SlotProps1 = {
   outer: ViewProps;

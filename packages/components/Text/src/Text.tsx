@@ -3,13 +3,15 @@ import React from 'react';
 import { I18nManager, Platform, Text as RNText } from 'react-native';
 
 import type { UseTokens, FontWeightValue } from '@fluentui-react-native/framework';
-import { fontStyles, useFluentTheme, mergeStyles, compressible, patchTokens } from '@fluentui-react-native/framework';
+import { fontStyles, useFluentTheme, compressible, patchTokens } from '@fluentui-react-native/framework';
+import { mergeStyles } from '@fluentui-react-native/framework-base';
 import { useKeyProps } from '@fluentui-react-native/interactive-hooks';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 import type { TextProps, TextTokens } from './Text.types';
 import { textName } from './Text.types';
 import { useTextTokens } from './TextTokens';
+import { directComponent } from '@fluentui-react-native/framework-base';
 
 const emptyProps = {};
 export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
@@ -128,7 +130,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   };
 
   // return a continuation function that allows this text to be compressed
-  return (extra: TextProps, children: React.ReactNode) => {
+  return directComponent<TextProps>(({ children, ...extra }: TextProps) => {
     const mergedProps = {
       ...rest,
       ...keyProps,
@@ -150,7 +152,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
         {children}
       </RNText>
     );
-  };
+  });
 }, useTextTokens);
 Text.displayName = textName;
 

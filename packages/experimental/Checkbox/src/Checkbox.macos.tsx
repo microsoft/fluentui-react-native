@@ -7,7 +7,8 @@
 import type { CheckboxTokens, CheckboxProps, CheckboxState } from '@fluentui-react-native/checkbox';
 import { checkboxName } from '@fluentui-react-native/checkbox';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, buildProps } from '@fluentui-react-native/framework';
+import { compose, buildProps } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 
 import NativeCheckboxView from './MacOSCheckboxNativeComponent';
 import type { NativeProps } from './MacOSCheckboxNativeComponent';

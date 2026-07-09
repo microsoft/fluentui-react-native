@@ -30,6 +30,9 @@
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },
+  "dependencies": {
+    "@fluentui-react-native/framework-base": "workspace:*"
+  },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",

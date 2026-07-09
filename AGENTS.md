@@ -155,7 +155,7 @@ The composition framework uses precise types for better type safety:
 - `MIGRATION.md` - Migration guide (for V1 components)
 - `tsconfig.json`, `babel.config.js`, `jest.config.js`, `eslint.config.js`
 
-**Using Composition Framework**: Use `@fluentui-react-native/composition` for new components. For simpler components without slots/tokens, use the `stagedComponent` pattern from `@fluentui-react-native/use-slot`.
+**Using Composition Framework**: Use `@fluentui-react-native/composition` for new components. For simpler components without slots/tokens, use the `stagedComponent` pattern from `@fluentui-react-native/framework-base`.
 
 **JSX Runtime**: All components use the modern automatic JSX runtime:
 

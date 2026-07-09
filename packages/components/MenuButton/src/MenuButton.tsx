@@ -9,6 +9,7 @@ import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { SvgXml } from 'react-native-svg';
+import type { FurnJSX } from '@fluentui-react-native/framework-base';
 
 import { defaultIconColor, primaryIconColor } from './MenuButton.style';
 import type {
@@ -133,7 +134,7 @@ export const MenuButton = compose<MenuButtonType>({
   },
 });
 
-const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): React.JSX.Element => {
+const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): FurnJSX.Element => {
   const [showSubmenuState, setShowSubmenu] = React.useState(false);
   const toggleShowSubmenu = React.useCallback(() => {
     setShowSubmenu(!showSubmenuState);

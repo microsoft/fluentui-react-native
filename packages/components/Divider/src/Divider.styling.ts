@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import type { ViewProps, ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { Platform } from 'react-native';
 
-import { memoize, mergeStyles } from '@fluentui-react-native/framework';
+import { memoize, mergeStyles } from '@fluentui-react-native/framework-base';
 import type { Theme } from '@fluentui-react-native/framework';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';

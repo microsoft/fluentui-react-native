@@ -31,9 +31,6 @@
       "path": "../../utils/tokens/tsconfig.json"
     },
     {
-      "path": "../use-slot/tsconfig.json"
-    },
-    {
       "path": "../use-slots/tsconfig.json"
     },
     {

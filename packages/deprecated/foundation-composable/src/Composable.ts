@@ -17,7 +17,7 @@ import {
   ISlotWithFilter,
 } from './Composable.types';
 import { useCompoundPrepare } from './Composable.slots';
-import { renderSlot, type FurnJSX } from '@fluentui-react-native/framework-base';
+import { renderJsx, type FurnJSX, setPropsChildren } from '@fluentui-react-native/framework-base';
 import { ISlotProps, mergeSettings } from '@uifabricshared/foundation-settings';
 
 export function atomicRender<TProps extends object, TState = object>(
@@ -25,7 +25,8 @@ export function atomicRender<TProps extends object, TState = object>(
   _renderData: IRenderData<ISlotProps<TProps>, TState>,
   ...children: React.ReactNode[]
 ): FurnJSX.Element | null {
-  return renderSlot(Slots.root, undefined, ...children);
+  const props = setPropsChildren({} as TProps, children);
+  return renderJsx(Slots.root, props);
 }
 
 export function atomicUsePrepareProps<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(

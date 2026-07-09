@@ -1,2 +1,2 @@
-export { composeFactory } from './composeFactory.ts';
-export type { ComposeFactoryComponent, ComposeFactoryOptions, UseStyledSlots } from './composeFactory.ts';
+export { composeFactory } from './composeFactory';
+export type { ComposeFactoryComponent, ComposeFactoryOptions, UseStyledSlots } from './composeFactory';

@@ -6,7 +6,7 @@ import * as renderer from 'react-test-renderer';
 import { View, Text } from 'react-native';
 import type { ViewProps, TextProps, ViewStyle, TextStyle } from 'react-native';
 
-import { buildUseSlots } from './buildUseSlots.ts';
+import { buildUseSlots } from './buildUseSlots';
 
 /**
  * This file contains samples and description to help explain what the useSlots hook does and why it is useful
@@ -136,7 +136,8 @@ describe('useSlots sample code test suite', () => {
        * inner closure directly, without going through createElement. Entries passed into the JSX, including children, are what appear in the
        * props of the inner closure. (In this example `extra`)
        *
-       * NOTE: this requires using the withSlots helper via the jsx directive. This knows how to pick apart the entries and just call the second
+       * NOTE: this requires opting into the custom JSX runtime via the `@jsxImportSource @fluentui-react-native/framework-base`
+       * pragma at the top of the file. This knows how to pick apart the entries and just call the second
        * part of the function
        */
       return <BoldText {...mergeProps(headerBaseProps, props, rest)}>{children}</BoldText>;

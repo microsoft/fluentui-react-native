@@ -4,7 +4,8 @@ import { View } from 'react-native';
 
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 
 import { stylingSettings } from './TabList.styling';
 import type { TabListType, TabListProps } from './TabList.types';

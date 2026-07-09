@@ -1,6 +1,6 @@
 import type { MergeOptions } from '@fluentui-react-native/framework-base';
 import { immutableMergeCore } from '@fluentui-react-native/framework-base';
-import type { ComposableFunction, FinalRender } from '@fluentui-react-native/framework-base';
+import type { LegacyFunctionComponent, StagedComponent } from '@fluentui-react-native/framework-base';
 import { stagedComponent } from '@fluentui-react-native/framework-base';
 import type { UseSlotOptions, Slots } from '@fluentui-react-native/use-slots';
 import { buildUseSlots } from '@fluentui-react-native/use-slots';
@@ -25,7 +25,7 @@ export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics 
     /**
      * staged render function that takes props and a useSlots hook as an input
      */
-    useRender: (props: TProps, useSlots: UseStyledSlots<TProps, TSlotProps>) => FinalRender<TProps>;
+    useRender: (props: TProps, useSlots: UseStyledSlots<TProps, TSlotProps>) => LegacyFunctionComponent<TProps>;
 
     /**
      * optional statics to attach to the component
@@ -33,7 +33,7 @@ export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics 
     statics?: TStatics;
   };
 
-export type ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = ComposableFunction<TProps> & {
+export type ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = StagedComponent<TProps> & {
   __options: ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>;
   customize: (...tokens: TokenSettings<TTokens, TTheme>[]) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
   compose<TOverrideSlotProps = TSlotProps>(
@@ -68,7 +68,7 @@ export function composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics ext
   const useSlots = buildUseSlots(options) as UseStyledSlots<TProps, TSlotProps>;
 
   // build the staged component
-  const component = stagedComponent<TProps>((props) => options.useRender(props, useSlots)) as LocalComponent;
+  const component = stagedComponent<TProps>((props) => options.useRender(props as TProps, useSlots)) as LocalComponent;
 
   // attach additional props to the returned component
   component.displayName = options.displayName;

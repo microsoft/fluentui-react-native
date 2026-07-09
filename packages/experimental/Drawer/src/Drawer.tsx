@@ -2,7 +2,8 @@
 import { Animated, Modal, TouchableWithoutFeedback, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 
 import { stylingSettings } from './Drawer.styling';
 import type { DrawerType, DrawerProps } from './Drawer.types';
@@ -26,7 +27,7 @@ export const Drawer = compose<DrawerType>({
   useRender: (userProps: DrawerProps, useSlots: UseSlots<DrawerType>) => {
     const drawerProps = useDrawer(userProps).props;
     const Slots = useSlots(userProps, (layer) => drawerLookup(layer, drawerProps));
-    return (final: DrawerProps, children: React.ReactNode) => {
+    return (final: DrawerProps, ...children: React.ReactNode[]) => {
       const { open, onClose, onScrimClick, animationConfig, drawerPosition, showHandle, ...rest } = mergeProps(drawerProps, final);
       return (
         <Slots.modal

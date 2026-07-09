@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
 import { I18nManager, Platform } from 'react-native';
 
-import { memoize } from '@fluentui-react-native/framework';
+import { memoize } from '@fluentui-react-native/framework-base';
 import type { InteractionEvent, KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyDownProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 

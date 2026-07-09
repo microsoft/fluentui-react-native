@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { AccessibilityState } from 'react-native';
 
-import { memoize } from '@fluentui-react-native/framework';
+import { memoize } from '@fluentui-react-native/framework-base';
 import { usePressableState, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 import type { RadioProps, RadioInfo } from './Radio.types';

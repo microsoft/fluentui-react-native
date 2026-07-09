@@ -4,12 +4,13 @@ import type { ScaleXTransform, TranslateXTransform } from 'react-native';
 import { Animated, I18nManager } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, buildUseStyling } from '@fluentui-react-native/framework';
+import { compose, buildUseStyling } from '@fluentui-react-native/framework';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 import assertNever from 'assert-never';
 import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G } from 'react-native-svg';
 
 import { stylingSettings } from './Shimmer.styling';
-import type { ShimmerProps, ShimmerType } from './Shimmer.types';
+import type { ShimmerElementTypes, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { shimmerName } from './Shimmer.types';
 
 const useStyling = buildUseStyling(stylingSettings);
@@ -71,7 +72,7 @@ export const Shimmer = compose<ShimmerType>({
 
       if (elements) {
         for (let i = 0; i < elements.length; i++) {
-          const element = elements[i];
+          const element: ShimmerElementTypes = elements[i];
           if (element.type == 'rect') {
             rows.push(
               <Rect

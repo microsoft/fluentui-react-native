@@ -1,5 +1,5 @@
-import { flattenStyle, mergeAndFlattenStyles, mergeStyles } from './mergeStyles.ts';
-import type { StyleProp } from '../utilities/baseTypes.ts';
+import { flattenStyle, mergeAndFlattenStyles, mergeStyles } from './mergeStyles';
+import type { StyleProp } from '../types/props.types';
 
 type OpaqueColorValue = symbol & { __TYPE__: 'Color' };
 type ColorValue = string | OpaqueColorValue;

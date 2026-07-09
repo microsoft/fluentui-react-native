@@ -3,7 +3,8 @@ import React from 'react';
 import { I18nManager, Image, Pressable, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, memoize, mergeProps } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
+import { memoize, mergeProps } from '@fluentui-react-native/framework-base';
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { SvgXml } from 'react-native-svg';
@@ -12,6 +13,7 @@ import { stylingSettings } from './MenuItem.styling';
 import type { MenuItemProps, MenuItemType } from './MenuItem.types';
 import { menuItemName } from './MenuItem.types';
 import { useMenuItem } from './useMenuItem';
+import { directComponent, getSingleChild } from '@fluentui-react-native/framework-base';
 
 export const MenuItem = compose<MenuItemType>({
   displayName: menuItemName,
@@ -29,7 +31,7 @@ export const MenuItem = compose<MenuItemType>({
     const menuItem = useMenuItem(userProps);
     const Slots = useSlots(userProps, (layer): boolean => menuItem.state[layer] || userProps[layer]);
 
-    return (final: MenuItemProps, children: React.ReactNode) => {
+    return directComponent(({ children, ...final }: MenuItemProps) => {
       const { accessibilityLabel, icon, tooltip, ...mergedProps } = mergeProps(menuItem.props, final);
       const chevronXml = I18nManager.isRTL
         ? `
@@ -42,8 +44,9 @@ export const MenuItem = compose<MenuItemType>({
           </svg>`;
 
       // We only automatically support the one child string.
-      const label = getAccessibilityLabel(accessibilityLabel, children[0]);
-      const tooltipResult = getTooltip(tooltip, menuItem.state.hasTooltips, children[0]);
+      const child = getSingleChild(children);
+      const label = getAccessibilityLabel(accessibilityLabel, child);
+      const tooltipResult = getTooltip(tooltip, menuItem.state.hasTooltips, child);
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
@@ -54,15 +57,15 @@ export const MenuItem = compose<MenuItemType>({
               {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon accessible={false} {...icon} />}
             </Slots.iconPlaceholder>
           )}
-          {children && (
+          {child && (
             <Slots.content accessible={false} tooltip={tooltipResult} {...(tooltipResult && { alwaysShowToolTip: true })}>
-              {children}
+              {child}
             </Slots.content>
           )}
           {menuItem.state.hasSubmenu && <Slots.submenuIndicator accessible={false} xml={chevronXml} />}
         </Slots.root>
       );
-    };
+    });
   },
 });
 

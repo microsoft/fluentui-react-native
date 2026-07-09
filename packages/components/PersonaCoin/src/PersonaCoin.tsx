@@ -7,6 +7,7 @@ import type { ISlots, IRenderData } from '@uifabricshared/foundation-composable'
 import { compose } from '@uifabricshared/foundation-compose';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
+import type { FurnJSX } from '@fluentui-react-native/framework-base';
 
 import { getPresenceIconSource } from './PersonaCoin.helpers';
 import { settings } from './PersonaCoin.settings';
@@ -61,7 +62,7 @@ function usePrepareForProps(
   };
 }
 
-const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRenderData): React.JSX.Element | null => {
+const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRenderData): FurnJSX.Element | null => {
   if (!renderData.state) {
     return null;
   }

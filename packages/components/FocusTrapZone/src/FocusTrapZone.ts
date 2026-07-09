@@ -12,8 +12,12 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import type { IFocusTrapZoneProps, IFocusTrapZoneSlotProps, IFocusTrapZoneType } from './FocusTrapZone.types';
 import RCTFocusTrapZone from './FocusTrapZoneNativeComponent';
 
-export function filterOutComponentRef(propName: string): boolean {
-  return propName !== 'componentRef';
+export function filterOutComponentRef<T>(props: T): T {
+  if (props && typeof props === 'object' && 'componentRef' in props) {
+    const { componentRef: _componentRef, ...rest } = props as Record<string, unknown>;
+    return rest as T;
+  }
+  return props;
 }
 
 export const FocusTrapZone = composable<IFocusTrapZoneType>({

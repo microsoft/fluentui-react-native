@@ -1,5 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`slot intrinsic attribute acceptance accepts the key attribute on a slot created from a class component in a keyed list 1`] = `
+<View>
+  <Text>
+    class
+  </Text>
+  <Text>
+    class
+  </Text>
+  <Text>
+    class
+  </Text>
+</View>
+`;
+
+exports[`slot intrinsic attribute acceptance accepts the key attribute on slots created from any supported component type 1`] = `
+<View>
+  <View />
+  <Text
+    title="text"
+  />
+  <Text>
+    fn
+  </Text>
+  <Text>
+    class
+  </Text>
+  <Text />
+  <Text />
+</View>
+`;
+
 exports[`useSlot tests Header and caption text render as expected 1`] = `
 <View>
   <Text

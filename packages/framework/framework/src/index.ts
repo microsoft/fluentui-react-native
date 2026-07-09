@@ -32,9 +32,8 @@ export type {
   TokenBuilder,
 } from '@fluentui-react-native/tokens';
 
-export { useSlot } from '@fluentui-react-native/use-slot';
-export { renderSlot, stagedComponent, withSlots } from '@fluentui-react-native/framework-base';
-export type { ComposableFunction, FinalRender, NativeReactType, SlotFn, StagedRender } from '@fluentui-react-native/framework-base';
+export { renderSlot, stagedComponent, withSlots, useSlot } from '@fluentui-react-native/framework-base';
+export type { RenderType as NativeReactType } from '@fluentui-react-native/framework-base';
 
 export { buildUseSlots } from '@fluentui-react-native/use-slots';
 export type { GetSlotProps, Slots, UseSlotOptions, UseSlotsBase } from '@fluentui-react-native/use-slots';
@@ -81,7 +80,7 @@ export type {
   Variants,
 } from '@fluentui-react-native/theme-types';
 
-export { compose } from './compose.ts';
+export { compose } from './compose';
 export type {
   ComposableComponent,
   ComposeOptions,
@@ -91,11 +90,11 @@ export type {
   ExtractStatics,
   ExtractTokens,
   UseSlots,
-} from './compose.ts';
-export { compressible } from './compressible.ts';
-export { useFluentTheme } from './useFluentTheme.ts';
-export type { HasLayer, TokensThatAreAlsoProps, UseStyling } from './useStyling.ts';
-export { buildProps, buildUseStyling } from './useStyling.ts';
-export type { BuildProps, TokenSettings, TokensFromTheme, UseStylingOptions } from './useStyling.ts';
-export { applyPropsToTokens, applyTokenLayers, buildUseTokens, customizable, patchTokens } from './useTokens.ts';
-export type { UseTokens, CustomizableComponent } from './useTokens.ts';
+} from './compose';
+export { compressible } from './compressible';
+export { useFluentTheme } from './useFluentTheme';
+export type { HasLayer, TokensThatAreAlsoProps, UseStyling } from './useStyling';
+export { buildProps, buildUseStyling } from './useStyling';
+export type { BuildProps, TokenSettings, TokensFromTheme, UseStylingOptions } from './useStyling';
+export { applyPropsToTokens, applyTokenLayers, buildUseTokens, customizable, patchTokens } from './useTokens';
+export type { UseTokens, CustomizableComponent } from './useTokens';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { ViewStyle, LayoutChangeEvent } from 'react-native';
 
-import { mergeStyles } from '@fluentui-react-native/framework';
+import { mergeStyles } from '@fluentui-react-native/framework-base';
 
 import type { OverflowItemInfo, OverflowItemProps } from './OverflowItem.types';
 import type { LayoutSize, OverflowItemChangePayload } from '../Overflow/Overflow.types';
