@@ -1,5 +1,5 @@
 import type { TokenSettings } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { cornerRadiusCircular } from '@fluentui-react-native/design/tokens/global';
 
 import type { CounterBadgeTokens } from './CounterBadge.types';
 
@@ -11,6 +11,6 @@ export const counterBadgeTokens: TokenSettings<CounterBadgeTokens> = () =>
       minHeight: 6,
       paddingHorizontal: 0,
       borderWidth: 0,
-      borderRadius: globalTokens.corner.radiusCircular,
+      borderRadius: cornerRadiusCircular,
     },
   }) as CounterBadgeTokens;

@@ -1,5 +1,13 @@
 import type { TokenSettings, Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  colorBerryPrimary,
+  colorGrey38,
+  colorMarigoldPrimary,
+  colorWhite,
+  size20,
+  sizeNone,
+} from '@fluentui-react-native/design/tokens/global';
 import { isHighContrast } from '@fluentui-react-native/theming-utils';
 
 import type { PresenceBadgeTokens } from './PresenceBadge.types';
@@ -7,10 +15,10 @@ import type { PresenceBadgeTokens } from './PresenceBadge.types';
 export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t: Theme): PresenceBadgeTokens =>
   ({
     borderWidth: 1,
-    borderColor: isHighContrast(t) ? 'transparent' : globalTokens.color.white,
+    borderColor: isHighContrast(t) ? 'transparent' : colorWhite,
     bottom: -1,
     right: -1,
-    paddingHorizontal: globalTokens.sizeNone,
+    paddingHorizontal: sizeNone,
     backgroundColor: t.colors.neutralBackground1,
     position: 'relative',
     ...getBadgeColor('lightGreen', t),
@@ -34,21 +42,21 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
       width: 20,
       height: 20,
       borderWidth: 2,
-      bottom: -globalTokens.size20,
-      right: -globalTokens.size20,
+      bottom: -size20,
+      right: -size20,
     },
     extraLarge: {
       width: 28,
       height: 28,
       borderWidth: 2,
-      bottom: -globalTokens.size20,
-      right: -globalTokens.size20,
+      bottom: -size20,
+      right: -size20,
     },
     available: getBadgeColor('lightGreen', t),
     away: {
-      iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color['marigold'].primary,
+      iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : colorMarigoldPrimary,
       outOfOffice: {
-        iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color['berry'].primary,
+        iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : colorBerryPrimary,
       },
     },
     busy: getBadgeColor('red', t),
@@ -56,7 +64,7 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     unknown: getBadgeColor('red', t),
     doNotDisturb: getBadgeColor('red', t),
     offline: {
-      iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color.grey38,
+      iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : colorGrey38,
     },
     outOfOffice: getBadgeColor('berry', t),
   }) as PresenceBadgeTokens;

@@ -12,6 +12,9 @@
       "path": "../../utils/adapters/tsconfig.json"
     },
     {
+      "path": "../../agentic-design/tsconfig.json"
+    },
+    {
       "path": "../../experimental/Shadow/tsconfig.json"
     },
     {

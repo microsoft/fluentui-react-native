@@ -1,13 +1,13 @@
 import type { TokenSettings, Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { sizeNone, strokeWidth20 } from '@fluentui-react-native/design/tokens/global';
 
 import type { PresenceBadgeTokens } from './PresenceBadge.types';
 
 export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t: Theme): PresenceBadgeTokens =>
   ({
-    borderWidth: globalTokens.stroke.width20,
+    borderWidth: strokeWidth20,
     borderColor: t.colors.neutralBackground1,
-    paddingHorizontal: globalTokens.sizeNone,
+    paddingHorizontal: sizeNone,
     backgroundColor: t.colors.neutralBackground1,
     // position is overriden through Avatar Tokens for Android since same badge size requires different positioning for different Avatar sizes.
     position: 'relative',

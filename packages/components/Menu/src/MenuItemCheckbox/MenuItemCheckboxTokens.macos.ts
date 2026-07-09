@@ -1,5 +1,5 @@
 import type { FontWeightValue, Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { fontWeightRegular, size20, size40 } from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { MenuItemCheckboxTokens } from './MenuItemCheckbox.types';
@@ -7,14 +7,14 @@ import type { MenuItemCheckboxTokens } from './MenuItemCheckbox.types';
 export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens, Theme> = (t: Theme): MenuItemCheckboxTokens => ({
   backgroundColor: t.colors.transparentBackground,
   borderRadius: 5,
-  checkmarkPadding: globalTokens.size20,
+  checkmarkPadding: size20,
   checkmarkSize: 16,
   checkmarkVisibility: 0,
   color: t.colors.neutralForeground2,
   fontFamily: t.typography.families.primary,
   fontSize: 13, // aligning with NSMenu font size
-  fontWeight: globalTokens.font.weight.regular as FontWeightValue,
-  gap: globalTokens.size40,
+  fontWeight: fontWeightRegular as FontWeightValue,
+  gap: size40,
   iconColor: t.colors.neutralForeground2,
   iconSize: 16,
   paddingHorizontal: 5,

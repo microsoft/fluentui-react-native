@@ -18,6 +18,9 @@
       "path": "../Callout/tsconfig.json"
     },
     {
+      "path": "../../agentic-design/tsconfig.json"
+    },
+    {
       "path": "../FocusZone/tsconfig.json"
     },
     {

@@ -33,11 +33,11 @@
     "@fluentui-react-native/adapters": "workspace:*",
     "@fluentui-react-native/button": "workspace:*",
     "@fluentui-react-native/callout": "workspace:*",
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/interactive-hooks": "workspace:*",
-    "@fluentui-react-native/text": "workspace:*",
-    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

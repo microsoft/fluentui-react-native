@@ -1,5 +1,15 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  cornerRadius120,
+  cornerRadius20,
+  cornerRadius40,
+  cornerRadius80,
+  cornerRadiusCircular,
+  fontWeightMedium,
+  fontWeightRegular,
+  strokeWidth20,
+} from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { AvatarTokens } from '.';
@@ -15,98 +25,98 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     ringColor: t.colors.neutralStroke1,
     borderColor: 'white',
     circular: {
-      borderRadius: globalTokens.corner.radiusCircular,
+      borderRadius: cornerRadiusCircular,
     },
     size: 24,
     badgeSize: 'small',
-    badgeY: -1 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
-    badgeX: 1 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
+    badgeY: -1 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
+    badgeX: 1 - strokeWidth20, // sign negated to flip x-axis based on design assumption
     iconSize: 16,
     fontSize: globalTokens.font.size100,
-    fontWeight: globalTokens.font.weight.regular,
+    fontWeight: fontWeightRegular,
     square: {
-      borderRadius: globalTokens.corner.radius40,
+      borderRadius: cornerRadius40,
     },
     // Badge is not shown for size 16 on Android.
     size16: {
       size: 16,
       iconSize: 12,
       fontSize: globalTokens.font.size100,
-      fontWeight: globalTokens.font.weight.regular,
+      fontWeight: fontWeightRegular,
       square: {
-        borderRadius: globalTokens.corner.radius20,
+        borderRadius: cornerRadius20,
       },
     },
     size20: {
       size: 20,
       badgeSize: 'small',
-      badgeY: -3 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
-      badgeX: 0 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
+      badgeY: -3 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 0 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 16,
       fontSize: globalTokens.font.size100,
-      fontWeight: globalTokens.font.weight.regular,
+      fontWeight: fontWeightRegular,
       square: {
-        borderRadius: globalTokens.corner.radius40,
+        borderRadius: cornerRadius40,
       },
     },
     size24: {
       size: 24,
       badgeSize: 'small',
-      badgeY: -1 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
-      badgeX: 1 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
+      badgeY: -1 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 1 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 16,
       fontSize: globalTokens.font.size100,
-      fontWeight: globalTokens.font.weight.regular,
+      fontWeight: fontWeightRegular,
       square: {
-        borderRadius: globalTokens.corner.radius40,
+        borderRadius: cornerRadius40,
       },
     },
     size32: {
       size: 32,
       badgeSize: 'small',
-      badgeY: 0 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
-      badgeX: 0 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
+      badgeY: 0 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 0 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 20,
       fontSize: globalTokens.font.size200,
-      fontWeight: globalTokens.font.weight.regular,
+      fontWeight: fontWeightRegular,
       square: {
-        borderRadius: globalTokens.corner.radius40,
+        borderRadius: cornerRadius40,
       },
     },
     size40: {
       size: 40,
       badgeSize: 'medium',
-      badgeY: 0 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
-      badgeX: 0 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
+      badgeY: 0 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 0 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 24,
       fontSize: globalTokens.font.size300,
-      fontWeight: globalTokens.font.weight.regular,
+      fontWeight: fontWeightRegular,
       square: {
-        borderRadius: globalTokens.corner.radius80,
+        borderRadius: cornerRadius80,
       },
     },
     size56: {
       size: 56,
       badgeSize: 'medium',
-      badgeY: 2 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
-      badgeX: 2 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
+      badgeY: 2 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 2 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 32,
       fontSize: globalTokens.font.size500,
-      fontWeight: globalTokens.font.weight.medium,
+      fontWeight: fontWeightMedium,
       square: {
-        borderRadius: globalTokens.corner.radius80,
+        borderRadius: cornerRadius80,
       },
     },
     size72: {
       size: 72,
       badgeSize: 'large',
-      badgeY: 3 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
-      badgeX: 3 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
+      badgeY: 3 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 3 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 48,
       fontSize: globalTokens.font.size700,
-      fontWeight: globalTokens.font.weight.medium,
+      fontWeight: fontWeightMedium,
       square: {
-        borderRadius: globalTokens.corner.radius120,
+        borderRadius: cornerRadius120,
       },
     },
     neutral: {

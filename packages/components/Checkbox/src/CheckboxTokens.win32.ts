@@ -1,5 +1,15 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  cornerRadius20,
+  cornerRadius40,
+  cornerRadiusCircular,
+  fontWeightRegular,
+  size120,
+  size40,
+  size80,
+  strokeWidth10,
+} from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { CheckboxTokens } from './Checkbox.types';
@@ -7,46 +17,46 @@ import type { CheckboxTokens } from './Checkbox.types';
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
     requiredColor: t.colors.redForeground1,
-    requiredPadding: globalTokens.size80,
+    requiredPadding: size80,
     medium: {
-      borderRadius: globalTokens.corner.radius20,
-      checkboxBorderWidth: globalTokens.stroke.width10,
-      checkboxBorderRadius: globalTokens.corner.radius20,
+      borderRadius: cornerRadius20,
+      checkboxBorderWidth: strokeWidth10,
+      checkboxBorderRadius: cornerRadius20,
       checkboxSize: 16,
       checkmarkSize: 12,
       label: {
-        padding: globalTokens.size80,
-        paddingHorizontal: globalTokens.size120,
-        borderRadius: globalTokens.corner.radius40,
-        spacingLabelAfter: globalTokens.size80,
+        padding: size80,
+        paddingHorizontal: size120,
+        borderRadius: cornerRadius40,
+        spacingLabelAfter: size80,
         labelIsBefore: {
-          spacingLabelBefore: globalTokens.size80,
+          spacingLabelBefore: size80,
           spacingLabelAfter: 0,
         },
       },
-      padding: globalTokens.size40,
+      padding: size40,
       fontSize: globalTokens.font.size200,
-      fontWeight: globalTokens.font.weight.regular,
+      fontWeight: fontWeightRegular,
       fontFamily: t.typography.families.primary,
     },
     large: {
-      borderRadius: globalTokens.corner.radius20,
-      checkboxBorderWidth: globalTokens.stroke.width10,
-      checkboxBorderRadius: globalTokens.corner.radius20,
+      borderRadius: cornerRadius20,
+      checkboxBorderWidth: strokeWidth10,
+      checkboxBorderRadius: cornerRadius20,
       checkboxSize: 20,
       checkmarkSize: 16,
       label: {
-        padding: globalTokens.size80,
-        borderRadius: globalTokens.corner.radius40,
-        spacingLabelAfter: globalTokens.size120,
+        padding: size80,
+        borderRadius: cornerRadius40,
+        spacingLabelAfter: size120,
         labelIsBefore: {
-          spacingLabelBefore: globalTokens.size120,
+          spacingLabelBefore: size120,
           spacingLabelAfter: 0,
         },
       },
-      padding: globalTokens.size40,
+      padding: size40,
       fontSize: globalTokens.font.size300,
-      fontWeight: globalTokens.font.weight.regular,
+      fontWeight: fontWeightRegular,
       fontFamily: t.typography.families.primary,
     },
     checkboxBackgroundColor: t.colors.neutralBackground1,
@@ -92,7 +102,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       },
     },
     circular: {
-      borderRadius: globalTokens.corner.radiusCircular,
-      checkboxBorderRadius: globalTokens.corner.radiusCircular,
+      borderRadius: cornerRadiusCircular,
+      checkboxBorderRadius: cornerRadiusCircular,
     },
   }) as CheckboxTokens;

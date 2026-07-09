@@ -1,5 +1,6 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { fontWeightRegular, fontWeightSemibold } from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';
@@ -10,21 +11,21 @@ export const defaultButtonFontTokens: TokenSettings<ButtonTokens, Theme> = (t: T
       hasContent: {
         fontFamily: t.typography.families.secondary,
         fontSize: globalTokens.font.size300,
-        fontWeight: globalTokens.font.weight.semibold,
+        fontWeight: fontWeightSemibold,
       },
     },
     small: {
       hasContent: {
         fontFamily: t.typography.families.primary,
         fontSize: globalTokens.font.size200,
-        fontWeight: globalTokens.font.weight.regular,
+        fontWeight: fontWeightRegular,
       },
     },
     large: {
       hasContent: {
         fontFamily: t.typography.families.secondary,
         fontSize: globalTokens.font.size400,
-        fontWeight: globalTokens.font.weight.semibold,
+        fontWeight: fontWeightSemibold,
       },
     },
   }) as ButtonTokens;

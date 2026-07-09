@@ -1,4 +1,4 @@
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { strokeWidth20, strokeWidth30, strokeWidth40 } from '@fluentui-react-native/design/tokens/global';
 
 import type { RingConfig, AvatarTokens, AvatarColor } from './Avatar.types';
 
@@ -10,9 +10,9 @@ export function getRingConfig(tokens: AvatarTokens): RingConfig {
   const SMALL_SIZE = 48;
   const MEDIUM_SIZE = 71;
   const strokeSize = {
-    small: globalTokens.stroke.width20,
-    medium: globalTokens.stroke.width30,
-    large: globalTokens.stroke.width40,
+    small: strokeWidth20,
+    medium: strokeWidth30,
+    large: strokeWidth40,
   };
 
   if (ringThickness) {
