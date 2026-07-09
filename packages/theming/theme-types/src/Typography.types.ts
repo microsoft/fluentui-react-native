@@ -24,7 +24,15 @@ export type FontFamilyValue = string;
  * **NOTE:** `primary` and `secondary` are both meant to be assigned a 'normal' family.
  */
 export interface FontFamilies {
+  /**
+   * Used by: Avatar (defaultAvatarTokens), Badge (badgeFontTokens), Button (defaultButtonFontTokens,
+   *   defaultCompoundButtonFontTokens), Checkbox (defaultCheckboxTokens), Menu (defaultMenuGroupHeaderTokens,
+   *   defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens, defaultMenuItemTokens), tester-core (Test)
+   */
   primary: FontFamilyValue;
+  /**
+   * Used by: Button (defaultButtonFontTokens, defaultCompoundButtonFontTokens)
+   */
   secondary: FontFamilyValue;
   cursive: FontFamilyValue;
   monospace: FontFamilyValue;
@@ -125,36 +133,140 @@ export type VariantValue = {
  * A collection of named font variants.
  */
 export interface Variants {
+  /**
+   * Used by: Badge (badgeFontTokens), Chip (chipFontTokens), tester-core (BasicBadge, RedCaptionBold, StandardUsage,
+   *   TextLegacyE2ETest, TextV1E2ETest, Wingdings)
+   */
   captionStandard: VariantValue;
+  /**
+   * Used by: Badge (badgeFontTokens), Button (defaultButtonFontTokens, defaultCompoundButtonFontTokens), Chip
+   *   (chipFontTokens), Link (settings), tester-core (OrangeSecondaryBold, StandardUsage, TimesNewRoman), Text
+   *   (settings, useTextTokens)
+   */
   secondaryStandard: VariantValue;
+  /**
+   * Used by: tester-core (StandardUsage)
+   */
   secondarySemibold: VariantValue;
+  /**
+   * Used by: apple-theme (appleComponents), Button (defaultButtonFontTokens, defaultCompoundButtonFontTokens), Checkbox
+   *   (defaultCheckboxTokens, settings), tester-core (StandardUsage, YellowBodyBold)
+   */
   bodyStandard: VariantValue;
+  /**
+   * Used by: Button (defaultButtonFontTokens, defaultCompoundButtonFontTokens, settings), tester-core
+   *   (CornerRadiusTestComponent, MenuPicker, PickerLabel, ShadowTestBox, ShadowWithDifferentPropsTestSection,
+   *   StandardUsage, StrokeWidthTestComponent, Test)
+   */
   bodySemibold: VariantValue;
+  /**
+   * Used by: RadioGroup (defaultRadioTokens, settings), tester-core (Georgia, GlobalSharedColorTokensSwatchList,
+   *   GreenSubheaderBold, NativeDatePickerAndroidUsage, NativeDatePickeriOSUsage, StandardUsage, SubHeader)
+   */
   subheaderStandard: VariantValue;
+  /**
+   * Used by: Button (defaultButtonFontTokens, defaultCompoundButtonFontTokens), tester-core (E2ECalloutTest,
+   *   FocusZone2D, PickerLabel, StandardUsage, SubheaderText)
+   */
   subheaderSemibold: VariantValue;
+  /**
+   * Used by: tester-core (BlueHeaderBold, CourierNew, Header, NativeDatePickerAndroidUsage, NativeDatePickeriOSUsage,
+   *   StandardUsage, Test)
+   */
   headerStandard: VariantValue;
+  /**
+   * Used by: tester-core (DrawerDefault, StandardUsage, Test)
+   */
   headerSemibold: VariantValue;
+  /**
+   * Used by: tester-core (BrushScriptMT, Casual, Cursive, IndigoHeroBold, StandardUsage, overflowTestPageStyles)
+   */
   heroStandard: VariantValue;
+  /**
+   * Used by: tester-core (StandardUsage, StyledMenuButton, Test)
+   */
   heroSemibold: VariantValue;
+  /**
+   * Used by: tester-core (Arial, ArialBlack, Helvetica, Papyrus, PurpleHeroLargeBold, StandardUsage)
+   */
   heroLargeStandard: VariantValue;
+  /**
+   * Used by: tester-core (Header, StandardUsage)
+   */
   heroLargeSemibold: VariantValue;
   //v2 variants
+  /**
+   * Used by: Chip (defaultChipTokens), tester-core (V2Usage), Text (Caption1)
+   */
   caption1?: VariantValue;
+  /**
+   * Used by: Button (defaultButtonFontTokens), tester-core (V2Usage), Text (Caption1Strong)
+   */
   caption1Strong?: VariantValue;
+  /**
+   * Used by: Input (defaultInputTokens), tester-core (V2Usage), Text (Caption2)
+   */
   caption2?: VariantValue;
+  /**
+   * Used by: Avatar (defaultAvatarTokens), Checkbox (defaultCheckboxTokens), Dropdown (defaultOptionTokens), Input
+   *   (defaultInputTokens), Link (defaultLinkTokens), Menu (defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens,
+   *   defaultMenuItemTokens), RadioGroup (defaultRadioTokens), Switch (defaultSwitchTokens), TabList
+   *   (defaultTabTokens), tester-core (DrawerDefault, TabListViewTest, V2Usage), Text (Body1)
+   */
   body1?: VariantValue;
+  /**
+   * Used by: Button (defaultButtonFontTokens, defaultFABTokens), RadioGroup (defaultRadioGroupTokens), TabList
+   *   (defaultTabTokens), tester-core (Test, V2Usage, overflowTestPageStyles), Text (Body1Strong)
+   */
   body1Strong?: VariantValue;
+  /**
+   * Used by: Chip (defaultChipTokens), TabList (defaultTabTokens), tester-core (V2Usage), Text (Body2)
+   */
   body2?: VariantValue;
+  /**
+   * Used by: Button (defaultButtonFontTokens, defaultFABTokens), Notification (NotificationButton), tester-core
+   *   (V2Usage), Text (Body2Strong)
+   */
   body2Strong?: VariantValue;
+  /**
+   * Used by: Text (Subtitle1)
+   */
   subtitle1?: VariantValue;
+  /**
+   * Used by: Text (Subtitle1Strong)
+   */
   subtitle1Strong?: VariantValue;
+  /**
+   * Used by: TabList (defaultTabTokens), Text (Subtitle2)
+   */
   subtitle2?: VariantValue;
+  /**
+   * Used by: RadioGroup (defaultRadioGroupTokens), tester-core (TextVariantDivider), Text (Subtitle2Strong)
+   */
   subtitle2Strong?: VariantValue;
+  /**
+   * Used by: tester-core (V2Usage), Text (Title1)
+   */
   title1?: VariantValue;
+  /**
+   * Used by: Text (Title1Strong)
+   */
   title1Strong?: VariantValue;
+  /**
+   * Used by: tester-core (V2Usage), Text (Title2)
+   */
   title2?: VariantValue;
+  /**
+   * Used by: tester-core (V2Usage), Text (Title3)
+   */
   title3?: VariantValue;
+  /**
+   * Used by: tester-core (V2Usage), Text (LargeTitle)
+   */
   largeTitle?: VariantValue;
+  /**
+   * Used by: tester-core (V2Usage), Text (Display)
+   */
   display?: VariantValue;
 }
 

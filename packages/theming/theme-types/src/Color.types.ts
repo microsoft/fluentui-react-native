@@ -15,9 +15,20 @@
 import type { ColorValue } from 'react-native';
 
 export type ThemeColorDefinition = Palette & {
+  /**
+   * Used by: Checkbox (defaultCheckboxTokens), Notification (defaultNotificationTokens), PersonaCoin (_iconKeyProps),
+   *   Shimmer (defaultShimmerTokens), tester-core (shadowTestPageStyles)
+   */
   background: ColorValue;
+  /**
+   * Used by: tester-core (MenuPicker, ShadowTestBox, getThemedDropdownStyles, getThemedStyles, themePickerStyles), Text
+   *   (useTextTokens)
+   */
   bodyText: ColorValue;
   subText: ColorValue;
+  /**
+   * Used by: Menu (defaultMenuGroupHeaderTokens, defaultMenuItemRadioTokens, defaultMenuItemTokens)
+   */
   disabledText: ColorValue;
   [customColor: string]: ColorValue;
 };
@@ -217,6 +228,8 @@ export interface FabricWebPalette {
 export interface PaletteTextColors {
   /** The default color for text.
    *  @deprecated These tokens are not part of the Fluent design system.
+   * Used by: tester-core (MenuPicker, ShadowTestBox, getThemedDropdownStyles, getThemedStyles, themePickerStyles), Text
+   *   (useTextTokens)
    */
   bodyText: ColorValue;
   /** Checked text color, e.g. selected menu item text.
@@ -246,10 +259,12 @@ export interface PaletteTextColors {
   linkPressed: ColorValue;
   /** The default color for disabled text on top of disabledBackground; e.g. text in a disabled text field, disabled button text.
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Menu (defaultMenuGroupHeaderTokens, defaultMenuItemRadioTokens, defaultMenuItemTokens)
    */
   disabledText: ColorValue;
   /** The default color for disabled text on the default background (bodyBackground).
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Checkbox (defaultCheckboxTokens), tester-core (StyledTextInput, getThemedDropdownStyles)
    */
   disabledBodyText: ColorValue;
 
@@ -261,6 +276,7 @@ export interface PaletteTextColors {
   errorText: ColorValue;
   /** The color of input text.
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: tester-core (StandardUsage, StyledPicker, StyledSlider, StyledSwitch, StyledTextInput)
    */
   inputText: ColorValue;
   /** The color of placeholder text.
@@ -272,6 +288,7 @@ export interface PaletteTextColors {
 
   /** Color of text in a standard button
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens), Icon (Icon)
    */
   buttonText: ColorValue;
   /** Color of text in a hovered standard button
@@ -293,6 +310,7 @@ export interface PaletteTextColors {
 
   /** Color of text in a primary button
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: tester-core (ShadowTestBox)
    */
   primaryButtonText: ColorValue;
   /** Color of text in a hovered primary button
@@ -319,6 +337,8 @@ export interface PaletteBackgroundColors {
 
   /** The default color for backgrounds.
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Checkbox (defaultCheckboxTokens), Notification (defaultNotificationTokens), PersonaCoin (_iconKeyProps),
+   *   Shimmer (defaultShimmerTokens), tester-core (shadowTestPageStyles)
    */
   background: ColorValue;
   /** A standout background a shade darker then background (or lighter in dark themes)
@@ -331,6 +351,7 @@ export interface PaletteBackgroundColors {
   bodyFrameBackground: ColorValue;
   /** Border between bodyBackground and bodyFrameBackground, distinct if they match, matching bodyFrameBackground if not
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Shimmer (defaultShimmerTokens, shimmerName), tester-core (HeaderSeparator)
    */
   bodyFrameDivider: ColorValue;
   /** Divider lines; e.g. lines that separate sections in a menu, an <HR> element.
@@ -343,6 +364,7 @@ export interface PaletteBackgroundColors {
   disabledBackground: ColorValue;
   /** The color of the outline around focused controls that don't already have a border; e.g. menu items
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Checkbox (defaultCheckboxTokens)
    */
   focusBorder: ColorValue;
   /** The color of the border that provides contrast between an element, such as a card, and an emphasized background.
@@ -354,6 +376,7 @@ export interface PaletteBackgroundColors {
 
   /** The border of a large input control in its resting, state; e.g. the box of dropdown.
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: tester-core (getThemedStyles)
    */
   inputBorder: ColorValue;
   /** The background color of an input, e.g. textbox background.
@@ -369,10 +392,12 @@ export interface PaletteBackgroundColors {
 
   /** Background of a standard button
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   buttonBackground: ColorValue;
   /** Background of a checked standard button; e.g. bold/italicize/underline text button in toolbar
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: tester-core (Panel)
    */
   buttonBackgroundChecked: ColorValue;
   /** Background of a hovered standard button
@@ -389,6 +414,7 @@ export interface PaletteBackgroundColors {
   buttonBackgroundPressed: ColorValue;
   /** Border of a standard button
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   buttonBorder: ColorValue;
   /** Border of a standard button in focused state
@@ -397,6 +423,7 @@ export interface PaletteBackgroundColors {
   buttonBorderFocused: ColorValue;
   /** Border of a disabled standard button
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Checkbox (defaultCheckboxTokens)
    */
   buttonBorderDisabled: ColorValue;
   /** Background of a primary button
@@ -425,6 +452,7 @@ export interface PaletteBackgroundColors {
   primaryButtonBorderFocused: ColorValue;
   /** Background of an accent button (kicker)
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: PersonaCoin (_ringProps)
    */
   accentButtonBackground: ColorValue;
 
@@ -432,10 +460,12 @@ export interface PaletteBackgroundColors {
 
   /** The background of a menu.
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Checkbox (defaultCheckboxTokens), Menu (defaultMenuItemRadioTokens, defaultMenuItemTokens)
    */
   menuBackground: ColorValue;
   /** The divider between menu items.
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: tester-core (TestListSeparator, getThemedStyles)
    */
   menuDivider: ColorValue;
   /** The default colors of icons in menus.
@@ -444,18 +474,22 @@ export interface PaletteBackgroundColors {
   menuIcon: ColorValue;
   /** The background of a hovered menu item.
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Checkbox (defaultCheckboxTokens), Menu (defaultMenuItemRadioTokens, defaultMenuItemTokens)
    */
   menuItemBackgroundHovered: ColorValue;
   /** The background of a pressed menu item.
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Checkbox (defaultCheckboxTokens), Menu (defaultMenuItemRadioTokens, defaultMenuItemTokens)
    */
   menuItemBackgroundPressed: ColorValue;
   /** The text color of a menu item.
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Checkbox (defaultCheckboxTokens), RadioGroup (defaultRadioGroupTokens)
    */
   menuItemText: ColorValue;
   /** The text color of a hovered menu item.
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Checkbox (defaultCheckboxTokens), Menu (defaultMenuItemRadioTokens, defaultMenuItemTokens)
    */
   menuItemTextHovered: ColorValue;
 
@@ -489,164 +523,202 @@ export interface ControlColorTokens {
   defaultContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: tester-core (ThemePickers)
    */
   defaultIcon: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultHoveredBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultHoveredBorder: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultHoveredContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultHoveredIcon: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultFocusedBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultFocusedBorder: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultFocusedContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultFocusedIcon: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultPressedBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultPressedBorder: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultPressedContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultPressedIcon: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultDisabledBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultDisabledBorder: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultDisabledContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   defaultDisabledIcon: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens), component-generator (defaultComponentNameTokens)
    */
   ghostBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostBorder: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostIcon: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostHoveredBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostHoveredBorder: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostHoveredContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostHoveredIcon: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostFocusedBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostFocusedBorder: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostFocusedContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostFocusedIcon: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostPressedBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostPressedBorder: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostPressedContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostPressedIcon: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostDisabledBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostDisabledBorder: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostDisabledContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultButtonColorTokens)
    */
   ghostDisabledIcon: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: tester-core (getThemedStyles)
    */
   brandedBackground: ColorValue;
 
@@ -657,84 +729,103 @@ export interface ControlColorTokens {
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultCompoundButtonColorTokens)
    */
   brandedSecondaryContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultCompoundButtonColorTokens)
    */
   brandedFocusedSecondaryContent: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultCompoundButtonColorTokens)
    */
   brandedHoveredSecondaryContent: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultCompoundButtonColorTokens)
    */
   brandedPressedSecondaryContent: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultToggleButtonColorTokens)
    */
   defaultCheckedBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultToggleButtonColorTokens)
    */
   defaultCheckedContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultToggleButtonColorTokens)
    */
   defaultCheckedHoveredBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultToggleButtonColorTokens)
    */
   defaultCheckedHoveredContent: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultToggleButtonColorTokens)
    */
   ghostCheckedBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultToggleButtonColorTokens)
    */
   ghostCheckedContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultToggleButtonColorTokens)
    */
   ghostCheckedHoveredBackground: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultToggleButtonColorTokens)
    */
   ghostCheckedHoveredContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultToggleButtonColorTokens)
    */
   ghostCheckedHoveredBorder: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultCompoundButtonColorTokens)
    */
   ghostSecondaryContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultCompoundButtonColorTokens)
    */
   ghostFocusedSecondaryContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultCompoundButtonColorTokens)
    */
   ghostHoveredSecondaryContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultCompoundButtonColorTokens)
    */
   ghostPressedSecondaryContent: ColorValue;
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultCompoundButtonColorTokens)
    */
   defaultHoveredSecondaryContent: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: Button (defaultCompoundButtonColorTokens)
    */
   defaultPressedSecondaryContent: ColorValue;
 
@@ -757,10 +848,12 @@ export interface ControlColorTokens {
 
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: PersonaCoin (_ringProps)
    */
   personaActivityRing: ColorValue;
   /**
    * @deprecated These tokens are not part of the Fluent design system.
+   * Used by: PersonaCoin (_ringProps)
    */
   personaActivityGlow: ColorValue;
 }
@@ -768,40 +861,85 @@ export interface ControlColorTokens {
 export interface AliasColorTokens {
   /// Foreground colors
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Badge (defaultBadgeColorTokens), Button (defaultButtonColorTokens), Checkbox (defaultCheckboxTokens), Chip
+   *   (defaultChipColorTokens), Divider (colorsFromAppearance), Input (defaultInputTokens), Menu
+   *   (defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens, defaultMenuItemTokens), RadioGroup
+   *   (defaultRadioGroupTokens, defaultRadioTokens), Switch (defaultSwitchTokens), TabList (defaultTabColorTokens),
+   *   tester-core (Panel, getThemedStyles)
+   */
   neutralForeground1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), Menu (defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens,
+   *   defaultMenuItemTokens), TabList (defaultTabColorTokens), tester-core (getThemedStyles)
+   */
   neutralForeground1Hover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), Menu (defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens,
+   *   defaultMenuItemTokens), TabList (defaultTabColorTokens)
+   */
   neutralForeground1Pressed?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultToggleButtonColorTokens)
+   */
   neutralForeground1Selected?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Button (defaultButtonColorTokens, defaultCompoundButtonColorTokens,
+   *   defaultFABColorTokens), Checkbox (defaultCheckboxTokens), Chip (defaultChipColorTokens), Divider
+   *   (colorsFromAppearance), Dropdown (defaultOptionTokens), Input (defaultInputTokens), Link (defaultLinkTokens),
+   *   Menu (defaultMenuGroupHeaderTokens, defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens,
+   *   defaultMenuItemTokens), Notification (defaultNotificationTokens), RadioGroup (defaultRadioTokens), Switch
+   *   (defaultSwitchTokens), TabList (defaultTabColorTokens)
+   */
   neutralForeground2?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultCompoundButtonColorTokens), Dropdown (defaultOptionTokens), Link (defaultLinkTokens), Menu
+   *   (defaultMenuItemCheckboxTokens, defaultMenuItemTokens), TabList (defaultTabColorTokens)
+   */
   neutralForeground2Hover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultCompoundButtonColorTokens), Dropdown (defaultOptionTokens), Link (defaultLinkTokens), Menu
+   *   (defaultMenuItemCheckboxTokens, defaultMenuItemTokens), TabList (defaultTabColorTokens)
+   */
   neutralForeground2Pressed?: ColorValue;
 
   /** @platform macOS, win32, windows */
   neutralForeground2Selected?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens)
+   */
   neutralForeground2BrandHover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens)
+   */
   neutralForeground2BrandPressed?: ColorValue;
 
   /** @platform macOS, win32, windows */
   neutralForeground2BrandSelected?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Badge (defaultBadgeColorTokens, defaultPresenceBadgeTokens,
+   *   getGhostColorProps, getOutlineColorProps, getTintColorProps), Checkbox (defaultCheckboxTokens), Divider
+   *   (colorsFromAppearance), Input (defaultInputTokens), Menu (defaultMenuItemTokens), RadioGroup (defaultRadioTokens)
+   */
   neutralForeground3?: ColorValue;
 
   /** @platform macOS, win32, windows */
@@ -822,19 +960,40 @@ export interface AliasColorTokens {
   /** @platform macOS, win32, windows */
   neutralForeground3BrandSelected?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Checkbox (defaultCheckboxTokens)
+   */
   neutralForeground4?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens, defaultCompoundButtonColorTokens, defaultFABColorTokens), Checkbox
+   *   (defaultCheckboxTokens), Dropdown (defaultOptionTokens), Link (defaultLinkTokens), Menu
+   *   (defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens, defaultMenuItemTokens), RadioGroup
+   *   (defaultRadioGroupTokens, defaultRadioTokens), Switch (defaultSwitchTokens), TabList (defaultTabColorTokens)
+   */
   neutralForegroundDisabled?: ColorValue;
 
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Button (defaultButtonColorTokens), Checkbox (defaultCheckboxTokens), Chip (defaultChipColorTokens), Menu
+   *   (defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens, defaultMenuItemTokens), RadioGroup
+   *   (defaultRadioGroupTokens, defaultRadioTokens)
+   */
   neutralForegroundDisabled1?: ColorValue;
 
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Chip (defaultChipColorTokens), Notification (defaultNotificationTokens)
+   */
   neutralForegroundDisabled2?: ColorValue;
 
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Avatar (defaultAvatarTokens), Button (defaultButtonColorTokens, defaultFABColorTokens), Checkbox
+   *   (defaultCheckboxTokens), Chip (defaultChipColorTokens), Menu (defaultMenuItemCheckboxTokens)
+   */
   neutralForegroundOnColor?: ColorValue;
 
   // TODO #2440: Add to android
@@ -842,110 +1001,211 @@ export interface AliasColorTokens {
   neutralForegroundDarkStatic?: ColorValue;
 
   // TODO #2440: Add to android
-  /** @platform iOS */
+  /**
+   * @platform iOS
+   * Used by: Badge (defaultCounterBadgeColorTokens)
+   */
   neutralForegroundLightStatic?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Badge (defaultBadgeColorTokens, getFilledColorProps), Button
+   *   (defaultButtonColorTokens, defaultCompoundButtonColorTokens), Checkbox (defaultCheckboxTokens), Menu
+   *   (defaultMenuItemCheckboxTokens), RadioGroup (defaultRadioTokens), Switch (defaultSwitchTokens)
+   */
   neutralForegroundOnBrand?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens, defaultCompoundButtonColorTokens), Checkbox (defaultCheckboxTokens),
+   *   Switch (defaultSwitchTokens)
+   */
   neutralForegroundOnBrandHover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens, defaultCompoundButtonColorTokens), Checkbox (defaultCheckboxTokens),
+   *   Menu (defaultMenuItemCheckboxTokens), Switch (defaultSwitchTokens)
+   */
   neutralForegroundOnBrandPressed?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultToggleButtonColorTokens)
+   */
   neutralForegroundOnBrandSelected?: ColorValue;
 
   // TODO: remove definition from Android
-  /** @platform android, macOS, win32, windows */
+  /**
+   * @platform android, macOS, win32, windows
+   * Used by: Badge (getFilledColorProps), Switch (defaultSwitchTokens)
+   */
   neutralForegroundInverted?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Link (defaultLinkTokens), Switch (defaultSwitchTokens)
+   */
   neutralForegroundInvertedLink?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Link (defaultLinkTokens), Switch (defaultSwitchTokens)
+   */
   neutralForegroundInvertedLinkHover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Link (defaultLinkTokens), Switch (defaultSwitchTokens)
+   */
   neutralForegroundInvertedLinkPressed?: ColorValue;
 
   /** @platform macOS, win32, windows */
   neutralForegroundInvertedLinkSelected?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Link (defaultLinkTokens)
+   */
   brandForegroundLink?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Link (defaultLinkTokens)
+   */
   brandForegroundLinkHover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Link (defaultLinkTokens)
+   */
   brandForegroundLinkPressed?: ColorValue;
 
   /** @platform macOS, win32, windows */
   brandForegroundLinkSelected?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: TabList (defaultTabColorTokens)
+   */
   compoundBrandForeground1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: TabList (defaultTabColorTokens)
+   */
   compoundBrandForeground1Hover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: TabList (defaultTabColorTokens)
+   */
   compoundBrandForeground1Pressed?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Badge (defaultBadgeColorTokens), Button (defaultButtonColorTokens,
+   *   defaultFABColorTokens), Chip (defaultChipColorTokens), Divider (colorsFromAppearance), Input
+   *   (defaultInputTokens), Link (defaultLinkTokens), Menu (defaultMenuItemRadioTokens), Notification
+   *   (defaultNotificationTokens), RadioGroup (defaultRadioTokens)
+   */
   brandForeground1?: ColorValue;
 
-  /** @platform android, iOS, macOS */
+  /**
+   * @platform android, iOS, macOS
+   * Used by: Button (defaultButtonColorTokens, defaultFABColorTokens), Link (defaultLinkTokens)
+   */
   brandForeground1Pressed?: ColorValue;
 
   /** @platform android, iOS, macOS */
   brandForeground1Selected?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Badge (defaultBadgeColorTokens)
+   */
   brandForeground2?: ColorValue;
 
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Chip (defaultChipColorTokens), Notification (defaultNotificationTokens)
+   */
   brandForegroundTint?: ColorValue;
 
   // TODO: rename to brandForegroundDisabled1
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Button (defaultButtonColorTokens), Chip (defaultChipColorTokens), Link (defaultLinkTokens), Menu
+   *   (defaultMenuItemCheckboxTokens)
+   */
   brandForeground1Disabled?: ColorValue;
 
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Notification (defaultNotificationTokens)
+   */
   brandForegroundDisabled1?: ColorValue;
 
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Menu (defaultMenuItemRadioTokens), RadioGroup (defaultRadioTokens)
+   */
   brandForegroundDisabled2?: ColorValue;
 
   // Background colors
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Badge (defaultBadgeColorTokens, defaultPresenceBadgeTokens), Button
+   *   (defaultButtonColorTokens, defaultFABColorTokens), Checkbox (defaultCheckboxTokens), Chip
+   *   (defaultChipColorTokens), Dropdown (defaultOptionTokens), Input (defaultInputTokens), Menu
+   *   (defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens, defaultMenuItemTokens, defaultMenuListTokens),
+   *   Notification (defaultNotificationTokens), RadioGroup (defaultRadioTokens), tester-core (getThemedStyles)
+   */
   neutralBackground1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), Dropdown (defaultOptionTokens), Menu (defaultMenuItemCheckboxTokens,
+   *   defaultMenuItemRadioTokens, defaultMenuItemTokens), tester-core (getThemedStyles)
+   */
   neutralBackground1Hover?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens, defaultFABColorTokens), Checkbox (defaultCheckboxTokens), Dropdown
+   *   (defaultOptionTokens), Menu (defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens, defaultMenuItemTokens)
+   */
   neutralBackground1Pressed?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Button (defaultToggleButtonColorTokens)
+   */
   neutralBackground1Selected?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), Drawer (defaultDrawerTokens)
+   */
   neutralBackground2?: ColorValue;
 
   /** @platform macOS, win32, windows */
   neutralBackground2Hover?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens)
+   */
   neutralBackground2Pressed?: ColorValue;
 
   /** @platform android, iOS, macOS, win32, windows */
   neutralBackground2Selected?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Badge (defaultBadgeColorTokens)
+   */
   neutralBackground3?: ColorValue;
 
   /** @platform macOS, win32, windows */
@@ -957,7 +1217,10 @@ export interface AliasColorTokens {
   /** @platform android, iOS, macOS, win32, windows */
   neutralBackground3Selected?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Badge (defaultBadgeColorTokens), Notification (defaultNotificationTokens)
+   */
   neutralBackground4?: ColorValue;
 
   /** @platform macOS, win32, windows */
@@ -969,7 +1232,12 @@ export interface AliasColorTokens {
   /** @platform android, iOS, macOS, win32, windows */
   neutralBackground4Selected?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Badge (defaultBadgeColorTokens), Button (defaultButtonColorTokens,
+   *   defaultFABColorTokens), Chip (defaultChipColorTokens), Notification (defaultNotificationTokens), Switch
+   *   (defaultSwitchTokens)
+   */
   neutralBackground5?: ColorValue;
 
   /** @platform macOS, win32, windows */
@@ -978,10 +1246,16 @@ export interface AliasColorTokens {
   /** @platform android, iOS, macOS, win32, windows */
   neutralBackground5Pressed?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens)
+   */
   neutralBackground5Selected?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Chip (defaultChipColorTokens)
+   */
   neutralBackground6?: ColorValue;
 
   /** @platform iOS, android */
@@ -990,70 +1264,143 @@ export interface AliasColorTokens {
   /** @platform iOS, android */
   neutralBackgroundDarkStatic?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Badge (getFilledColorProps), Spinner (defaultSpinnerTokens)
+   */
   neutralBackgroundInverted?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens, defaultFABColorTokens), Checkbox (defaultCheckboxTokens), RadioGroup
+   *   (defaultRadioTokens), Switch (defaultSwitchTokens)
+   */
   neutralBackgroundDisabled?: ColorValue;
 
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Switch (defaultSwitchTokens)
+   */
   neutralBackgroundLightStatic?: ColorValue;
 
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Switch (defaultSwitchTokens)
+   */
   neutralBackgroundLightStaticDisabled?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), TabList (defaultTabColorTokens)
+   */
   subtleBackground?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), TabList (defaultTabColorTokens)
+   */
   subtleBackgroundHover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), TabList (defaultTabColorTokens)
+   */
   subtleBackgroundPressed?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultToggleButtonColorTokens)
+   */
   subtleBackgroundSelected?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Badge (defaultBadgeColorTokens, getTintColorProps), Menu (defaultMenuItemCheckboxTokens,
+   *   defaultMenuItemRadioTokens, defaultMenuItemTokens, defaultMenuListTokens), Shimmer (defaultShimmerTokens), Switch
+   *   (defaultSwitchTokens), TabList (defaultTabColorTokens, useTabSlotProps)
+   */
   transparentBackground?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: TabList (defaultTabColorTokens)
+   */
   transparentBackgroundHover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: TabList (defaultTabColorTokens)
+   */
   transparentBackgroundPressed?: ColorValue;
 
   /** @platform macOS, win32, windows */
   transparentBackgroundSelected?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Button (defaultButtonColorTokens, defaultFABColorTokens), Checkbox
+   *   (defaultCheckboxTokens), Chip (defaultChipColorTokens), component-generator (defaultComponentNameTokens), Menu
+   *   (defaultMenuItemCheckboxTokens, defaultMenuItemRadioTokens), RadioGroup (defaultRadioTokens), Switch
+   *   (defaultSwitchTokens), tester-core (getThemedStyles)
+   */
   brandBackground?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), Checkbox (defaultCheckboxTokens), RadioGroup (defaultRadioTokens),
+   *   Switch (defaultSwitchTokens)
+   */
   brandBackgroundHover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens, defaultFABColorTokens), Checkbox (defaultCheckboxTokens), Menu
+   *   (defaultMenuItemCheckboxTokens), RadioGroup (defaultRadioTokens)
+   */
   brandBackgroundPressed?: ColorValue;
 
-  /** @platform macOS */
+  /**
+   * @platform macOS
+   * Used by: Button (defaultButtonColorTokens), Checkbox (defaultCheckboxTokens), Menu (defaultMenuItemCheckboxTokens,
+   *   defaultMenuItemRadioTokens), RadioGroup (defaultRadioTokens), Switch (defaultSwitchTokens)
+   */
   brandBackgroundDisabled?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultToggleButtonColorTokens)
+   */
   brandBackgroundSelected?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Checkbox (defaultCheckboxTokens), Switch (defaultSwitchTokens)
+   */
   compoundBrandBackground1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Checkbox (defaultCheckboxTokens), RadioGroup (defaultRadioTokens), Switch (defaultSwitchTokens)
+   */
   compoundBrandBackground1Hover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Checkbox (defaultCheckboxTokens), RadioGroup (defaultRadioTokens), Switch (defaultSwitchTokens), TabList
+   *   (defaultTabColorTokens)
+   */
   compoundBrandBackground1Pressed?: ColorValue;
 
-  /** @platform macOS, win32, windows  */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Badge (defaultBadgeColorTokens)
+   */
   brandBackgroundStatic?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Badge (defaultBadgeColorTokens)
+   */
   brandBackground2?: ColorValue;
 
   /** @platform android, iOS */
@@ -1062,59 +1409,108 @@ export interface AliasColorTokens {
   /** @platform android, iOS */
   brandBackground2Selected?: ColorValue;
 
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Chip (defaultChipColorTokens)
+   */
   brandBackground3?: ColorValue;
 
-  /** @platform android, iOS */
+  /**
+   * @platform android, iOS
+   * Used by: Avatar (defaultAvatarTokens), Chip (defaultChipColorTokens), Notification (defaultNotificationTokens)
+   */
   brandBackgroundTint?: ColorValue;
 
   // TODO #2440: remove from Android and delete token defintion
-  /** @platform android */
+  /**
+   * @platform android
+   * Used by: Chip (defaultChipColorTokens)
+   */
   brandBackgroundInverted?: ColorValue;
 
   // TODO #2440: remove from Android and delete token defintion
   /** @platform android */
   brandBackgroundInvertedDisabled?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Shimmer (defaultShimmerTokens, shimmerName)
+   */
   neutralStencil1?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Shimmer (defaultShimmerTokens, shimmerName)
+   */
   neutralStencil2?: ColorValue;
 
   // Stroke
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Badge (defaultBadgeColorTokens), Checkbox (defaultCheckboxTokens), Menu (defaultMenuItemCheckboxTokens,
+   *   defaultMenuItemRadioTokens, useMenuPopoverTokens), RadioGroup (defaultRadioTokens), Switch (defaultSwitchTokens)
+   */
   neutralStrokeAccessible?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Checkbox (defaultCheckboxTokens), RadioGroup (defaultRadioTokens), Switch (defaultSwitchTokens)
+   */
   neutralStrokeAccessibleHover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Checkbox (defaultCheckboxTokens), RadioGroup (defaultRadioTokens), Switch (defaultSwitchTokens)
+   */
   neutralStrokeAccessiblePressed?: ColorValue;
 
   /** @platform macOS, win32, windows */
   neutralStrokeAccessibleSelected?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Button (defaultButtonColorTokens, defaultToggleButtonColorTokens), Divider
+   *   (colorsFromAppearance), Drawer (defaultDrawerTokens), Input (defaultInputTokens), Menu (defaultMenuDividerTokens,
+   *   useMenuPopoverTokens), TabList (defaultTabColorTokens), tester-core (getThemedStyles)
+   */
   neutralStroke1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), TabList (defaultTabColorTokens)
+   */
   neutralStroke1Hover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), TabList (defaultTabColorTokens)
+   */
   neutralStroke1Pressed?: ColorValue;
 
   /** @platform macOS, win32, windows */
   neutralStroke1Selected?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Badge (defaultBadgeColorTokens), Button (defaultButtonColorTokens), Divider (colorsFromAppearance,
+   *   useDividerTokens), Menu (defaultMenuDividerTokens), Notification (defaultNotificationTokens), Separator
+   *   (defaultSeparatorTokens), Spinner (defaultSpinnerTokens)
+   */
   neutralStroke2?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Divider (colorsFromAppearance), Menu (useMenuPopoverTokens)
+   */
   neutralStroke3?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens), Checkbox (defaultCheckboxTokens), Menu (defaultMenuItemCheckboxTokens,
+   *   defaultMenuItemRadioTokens), RadioGroup (defaultRadioTokens), Switch (defaultSwitchTokens), TabList
+   *   (defaultTabColorTokens)
+   */
   neutralStrokeDisabled?: ColorValue;
 
   /** @platform iOS, android */
@@ -1123,43 +1519,77 @@ export interface AliasColorTokens {
   /** @platform iOS, android */
   neutralStrokeFocus2?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Badge (defaultCounterBadgeColorTokens), Button (defaultButtonColorTokens, defaultFABColorTokens)
+   */
   strokeFocus1?: ColorValue;
 
-  /** @platform macOS, win32, windows*/
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Button (defaultButtonColorTokens, defaultFABColorTokens), Link (defaultLinkTokens), RadioGroup
+   *   (defaultRadioTokens), Switch (defaultSwitchTokens), tester-core (getThemedStyles)
+   */
   strokeFocus2?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Avatar (defaultAvatarTokens), Button (defaultButtonColorTokens), Divider (colorsFromAppearance), Input
+   *   (defaultInputTokens), Spinner (defaultSpinnerTokens)
+   */
   brandStroke1?: ColorValue;
 
-  /** @platform android, iOS, macOS */
+  /**
+   * @platform android, iOS, macOS
+   * Used by: Button (defaultButtonColorTokens)
+   */
   brandStroke1Pressed?: ColorValue;
 
   /** @platform android, iOS, macOS */
   brandStroke1Selected?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Badge (defaultBadgeColorTokens), Spinner (defaultSpinnerTokens)
+   */
   brandStroke2?: ColorValue;
 
   /** @platform android, iOS */
   brandStrokeTint?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: RadioGroup (defaultRadioTokens), TabList (defaultTabColorTokens)
+   */
   compoundBrandStroke1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Checkbox (defaultCheckboxTokens), RadioGroup (defaultRadioTokens), TabList (defaultTabColorTokens)
+   */
   compoundBrandStroke1Hover?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /**
+   * @platform macOS, win32, windows
+   * Used by: Checkbox (defaultCheckboxTokens), RadioGroup (defaultRadioTokens), TabList (defaultTabColorTokens)
+   */
   compoundBrandStroke1Pressed?: ColorValue;
 
-  /** @platform windows */
+  /**
+   * @platform windows
+   * Used by: Avatar (defaultAvatarTokens), Badge (defaultBadgeColorTokens, getFilledColorProps, getOutlineColorProps,
+   *   getTintColorProps), Button (defaultButtonColorTokens), Menu (useMenuPopoverTokens), RadioGroup
+   *   (defaultRadioTokens)
+   */
   transparentStroke?: ColorValue;
 
   /** @platform  */
   transparentStrokeInteractive?: ColorValue;
 
-  /** @platform  */
+  /**
+   * @platform
+   * Used by: Button (defaultButtonColorTokens)
+   */
   transparentStrokeDisabled?: ColorValue;
 
   /// Red
@@ -1173,13 +1603,19 @@ export interface AliasColorTokens {
   /** @deprecated */
   redBackground3?: ColorValue;
 
-  /** @deprecated */
+  /**
+   * @deprecated
+   * Used by: Checkbox (defaultCheckboxTokens)
+   */
   redForeground1?: ColorValue;
 
   /** @deprecated */
   redForeground2?: ColorValue;
 
-  /** @deprecated */
+  /**
+   * @deprecated
+   * Used by: RadioGroup (defaultRadioGroupTokens)
+   */
   redForeground3?: ColorValue;
 
   /** @deprecated */
@@ -1193,19 +1629,31 @@ export interface AliasColorTokens {
 
   /// Error, status, and presence tokens
 
-  /** @platform android, iOS, macOS, win32, windows  */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens), Notification (defaultNotificationTokens)
+   */
   dangerBackground1?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows  */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Badge (defaultCounterBadgeColorTokens), Chip (defaultChipColorTokens)
+   */
   dangerBackground2?: ColorValue;
 
   /** @platform macOS, win32, windows  */
   dangerBackground3?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows  */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens), Input (defaultInputTokens), Notification (defaultNotificationTokens)
+   */
   dangerForeground1?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows  */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Input (defaultInputTokens)
+   */
   dangerForeground2?: ColorValue;
 
   /** @platform macOS, win32, windows */
@@ -1223,19 +1671,31 @@ export interface AliasColorTokens {
   /** @platform macOS, win32, windows */
   dangerBorder2?: ColorValue;
 
-  /** @platform android, iOS  */
+  /**
+   * @platform android, iOS
+   * Used by: Input (defaultInputTokens)
+   */
   dangerStroke1?: ColorValue;
 
-  /** @platform iOS, macOS, android, win32, windows  */
+  /**
+   * @platform iOS, macOS, android, win32, windows
+   * Used by: Chip (defaultChipColorTokens)
+   */
   successBackground1?: ColorValue;
 
-  /** @platform iOS, android, macOS, win32, windows  */
+  /**
+   * @platform iOS, android, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens)
+   */
   successBackground2?: ColorValue;
 
   /** @platform macOS, win32, windows  */
   successBackground3?: ColorValue;
 
-  /** @platform iOS, android, macOS, win32, windows  */
+  /**
+   * @platform iOS, android, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens)
+   */
   successForeground1?: ColorValue;
 
   /** @platform iOS, android, macOS, win32, windows  */
@@ -1259,16 +1719,25 @@ export interface AliasColorTokens {
   /** @platform android, iOS  */
   successStroke1?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows  */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens), Notification (defaultNotificationTokens)
+   */
   warningBackground1?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows  */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens)
+   */
   warningBackground2?: ColorValue;
 
   /** @platform macOS, win32, windows */
   warningBackground3?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows  */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens), Notification (defaultNotificationTokens)
+   */
   warningForeground1?: ColorValue;
 
   /** @platform android, iOS, macOS, win32, windows  */
@@ -1292,16 +1761,25 @@ export interface AliasColorTokens {
   /** @platform android, iOS  */
   warningStroke1?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows  */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens)
+   */
   severeBackground1?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows  */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens)
+   */
   severeBackground2?: ColorValue;
 
   /** @platform macOS, win32, windows */
   severeBackground3?: ColorValue;
 
-  /** @platform android, iOS, macOS, win32, windows  */
+  /**
+   * @platform android, iOS, macOS, win32, windows
+   * Used by: Chip (defaultChipColorTokens)
+   */
   severeForeground1?: ColorValue;
 
   /** @platform android, iOS, macOS, win32, windows  */
@@ -1349,16 +1827,28 @@ export interface AliasColorTokens {
   /** @platform macOS, win32, windows */
   outofofficeBorder2?: ColorValue;
 
-  /** @platform iOS, android  */
+  /**
+   * @platform iOS, android
+   * Used by: Badge (defaultPresenceBadgeTokens)
+   */
   presenceAway?: ColorValue;
 
-  /** @platform iOS, android  */
+  /**
+   * @platform iOS, android
+   * Used by: Badge (defaultPresenceBadgeTokens)
+   */
   presenceDnd?: ColorValue;
 
-  /** @platform iOS, android  */
+  /**
+   * @platform iOS, android
+   * Used by: Badge (defaultPresenceBadgeTokens)
+   */
   presenceAvailable?: ColorValue;
 
-  /** @platform iOS, android  */
+  /**
+   * @platform iOS, android
+   * Used by: Badge (defaultPresenceBadgeTokens)
+   */
   presenceOof?: ColorValue;
 }
 
