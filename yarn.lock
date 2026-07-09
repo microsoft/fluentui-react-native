@@ -2668,8 +2668,8 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/default-theme": "workspace:*"
-    "@fluentui-react-native/design-tokens-ios": "npm:^0.53.0"
-    "@fluentui-react-native/design-tokens-macos": "npm:^0.53.0"
+    "@fluentui-react-native/design-tokens-ios": "catalog:"
+    "@fluentui-react-native/design-tokens-macos": "catalog:"
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3384,24 +3384,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/design-tokens-android@npm:^0.53.0":
-  version: 0.53.0
-  resolution: "@fluentui-react-native/design-tokens-android@npm:0.53.0"
-  checksum: 10c0/f4945cf94ad80768db7541e2146b72d653b2e8b1e5cb38c6aed1b37aa4becb1249b20c2bbd169159d893b421370c724af01fe346ff6eec31e37d457e8c766aa6
-  languageName: node
-  linkType: hard
-
 "@fluentui-react-native/design-tokens-android@npm:^0.56.0":
   version: 0.56.0
   resolution: "@fluentui-react-native/design-tokens-android@npm:0.56.0"
   checksum: 10c0/f12929f661af45d1d0afb633f2ef5ca9065175cd8a311f60020a09f3aa70d4c7a60419644dd8e02822f3c889f3c16b560e5aad0d0a8cd00060f7c4ea6b34f561
-  languageName: node
-  linkType: hard
-
-"@fluentui-react-native/design-tokens-ios@npm:^0.53.0":
-  version: 0.53.0
-  resolution: "@fluentui-react-native/design-tokens-ios@npm:0.53.0"
-  checksum: 10c0/94cd45931c94ef319619b9885671b4282e37a804e07694a05c3d6188b8e692822e458cb2d0a36a569efffdcfe024d4f47dfd3952b64005dc8b90131c40ac345d
   languageName: node
   linkType: hard
 
@@ -3412,13 +3398,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/design-tokens-macos@npm:^0.53.0":
-  version: 0.53.0
-  resolution: "@fluentui-react-native/design-tokens-macos@npm:0.53.0"
-  checksum: 10c0/0ceab5b38110b0b011fc589ef402fbda2e2fd49545f5f79a9943233a309f02763e664b06022b94bad19c1c2f2530c57c122f4d20a09e594332bfa83750e75fa9
-  languageName: node
-  linkType: hard
-
 "@fluentui-react-native/design-tokens-macos@npm:^0.56.0":
   version: 0.56.0
   resolution: "@fluentui-react-native/design-tokens-macos@npm:0.56.0"
@@ -3426,24 +3405,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/design-tokens-win32@npm:^0.53.0":
-  version: 0.53.0
-  resolution: "@fluentui-react-native/design-tokens-win32@npm:0.53.0"
-  checksum: 10c0/3f16e4d07ea846b99e08051fd3ce572e5b24f858eb989ee2e1c4449369033ce2612fada90d379d90958e3afd91eb7dca0bd60bd88009836e0aa6d985e64085eb
-  languageName: node
-  linkType: hard
-
 "@fluentui-react-native/design-tokens-win32@npm:^0.56.0":
   version: 0.56.0
   resolution: "@fluentui-react-native/design-tokens-win32@npm:0.56.0"
   checksum: 10c0/6c50767927af00a0314c4e6b584ac070f6472323da1c781f686972092f86a50b1dabaa31a3be8b060f0fc15a587c5d4106d696b581140d364665dc0f642ad02c
-  languageName: node
-  linkType: hard
-
-"@fluentui-react-native/design-tokens-windows@npm:^0.53.0":
-  version: 0.53.0
-  resolution: "@fluentui-react-native/design-tokens-windows@npm:0.53.0"
-  checksum: 10c0/314db2f38a435b4cc71d5d712ac9b40e5989c001bf57dde50097dd8be7e7f32151a1f8b6ed02e51af4df6c15970362070e4d94c804f5324423fae18bae53900e
   languageName: node
   linkType: hard
 
@@ -5470,10 +5435,10 @@ __metadata:
   resolution: "@fluentui-react-native/theme-tokens@workspace:packages/theming/theme-tokens"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/design-tokens-android": "npm:^0.53.0"
-    "@fluentui-react-native/design-tokens-ios": "npm:^0.53.0"
-    "@fluentui-react-native/design-tokens-win32": "npm:^0.53.0"
-    "@fluentui-react-native/design-tokens-windows": "npm:^0.53.0"
+    "@fluentui-react-native/design-tokens-android": "catalog:"
+    "@fluentui-react-native/design-tokens-ios": "catalog:"
+    "@fluentui-react-native/design-tokens-win32": "catalog:"
+    "@fluentui-react-native/design-tokens-windows": "catalog:"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -5574,8 +5539,8 @@ __metadata:
   resolution: "@fluentui-react-native/theming-utils@workspace:packages/theming/theming-utils"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/design-tokens-win32": "npm:^0.53.0"
-    "@fluentui-react-native/design-tokens-windows": "npm:^0.53.0"
+    "@fluentui-react-native/design-tokens-win32": "catalog:"
+    "@fluentui-react-native/design-tokens-windows": "catalog:"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
@@ -5807,7 +5772,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/default-theme": "workspace:*"
-    "@fluentui-react-native/design-tokens-win32": "npm:^0.53.0"
+    "@fluentui-react-native/design-tokens-win32": "catalog:"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
