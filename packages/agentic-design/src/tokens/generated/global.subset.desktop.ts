@@ -6,7 +6,6 @@ export const fontLineHeight100 = 14;
 export const fontLineHeight200 = 16;
 export const fontLineHeight300 = 20;
 export const fontLineHeight400 = 22;
-export const fontLineHeight500 = 28;
 export const fontLineHeight600 = 32;
 export const fontLineHeight700 = 36;
 export const fontLineHeight800 = 40;

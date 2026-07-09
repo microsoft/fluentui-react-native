@@ -13,6 +13,7 @@ export const colorBrandTint40 = '#eff6fc';
 export const fontFamilyDefault = 'Helvetica Neue';
 export const fontFamilyMonospace = 'Courier New';
 export const fontFamilyNumeric = 'Helvetica Neue';
+export const fontLineHeight500 = 28;
 
 /**
  * Re-exporting constants from ./global.subset.desktop
@@ -22,7 +23,6 @@ export {
   fontLineHeight200,
   fontLineHeight300,
   fontLineHeight400,
-  fontLineHeight500,
   fontLineHeight600,
   fontLineHeight700,
   fontLineHeight800,

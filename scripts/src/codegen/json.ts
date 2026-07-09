@@ -23,8 +23,6 @@ export function formValueKey(prefix: string | undefined, key: string): string {
  * @param obj the JSON object to flatten
  * @param prefix an optional prefix to prepend to each key
  * @param collection the collection to store the flattened constants
- * @param variant the variant name for the constants
- * @returns void
  */
 export function flattenJson(obj: Record<string, unknown>, prefix: string | undefined, collection: Constants) {
   if (Array.isArray(obj)) {
@@ -41,6 +39,14 @@ export function flattenJson(obj: Record<string, unknown>, prefix: string | undef
   }
 }
 
+/**
+ * Load a JSON object into a {@link CodegenTargetFile}, flattening nested objects into prefixed constant names.
+ * @param obj The JSON object to convert.
+ * @param prefix Optional prefix applied to every generated constant name.
+ * @param targetPath Path of the file the constants will be generated into.
+ * @param description Optional header comment for the file.
+ * @returns A target file populated with the flattened constants.
+ */
 export function jsonToCodegenTargetFile(
   obj: Record<string, unknown>,
   prefix: string | undefined,
@@ -48,41 +54,57 @@ export function jsonToCodegenTargetFile(
   description?: string,
 ): CodegenTargetFile {
   const target = initTargetFile(targetPath, description);
-  const constants: Constants = (target.constants ??= {});
-  flattenJson(obj, prefix, constants);
+  flattenJson(obj, prefix, target.constants);
   return target;
 }
 
+/** The platforms supported by the token codegen, in priority order. */
 const platforms = ['win32', 'windows', 'macos', 'android', 'ios'] as const;
 export type Platform = (typeof platforms)[number];
 
-export type LoadedJsonFiles = {
-  win32: Record<string, unknown>;
-  windows: Record<string, unknown>;
-  macos: Record<string, unknown>;
-  android?: Record<string, unknown>;
-  ios?: Record<string, unknown>;
+/**
+ * The platform treated as the default. Its generated file is the un-suffixed base file (`<genbase>.platform`) and its
+ * values are used as the shared defaults whenever platforms disagree on a constant's value.
+ */
+const defaultPlatform: Platform = 'win32';
+
+/** A set of values keyed by platform. The desktop platforms are always present; mobile platforms are optional. */
+type PlatformMap<T> = {
+  win32: T;
+  windows: T;
+  macos: T;
+  android?: T;
+  ios?: T;
 };
 
-type PlatformCodegenFiles = {
-  win32: CodegenTargetFile;
-  windows: CodegenTargetFile;
-  macos: CodegenTargetFile;
-  android?: CodegenTargetFile;
-  ios?: CodegenTargetFile;
-};
+/** The raw JSON token objects loaded for each platform. */
+export type LoadedJsonFiles = PlatformMap<Record<string, unknown>>;
 
+/** The in-memory {@link CodegenTargetFile} generated for each platform. */
+type PlatformCodegenFiles = PlatformMap<CodegenTargetFile>;
+
+/** Inputs describing a set of per-platform token JSON files to generate constant modules from. */
 export type PlatformJsonFiles = {
+  /** The raw JSON token objects, keyed by platform. win32 is treated as the default platform. */
   jsonFiles: LoadedJsonFiles;
-  defaultPlatform?: Platform;
+  /** Path of the common/root entry file that receives constants shared by all platforms. */
   entry: string;
+  /** Base path (without extension) used to derive the per-platform and per-subset generated file names. */
   genbase: string;
+  /** Optional prefix applied to every generated constant name. */
   prefix?: string;
+  /** Optional header comment for the common entry file. */
   description?: string;
 };
 
+/**
+ * Convert each platform's loaded JSON into a {@link CodegenTargetFile}. The default platform (win32) is written to the
+ * un-suffixed base path; every other platform gets a `.<platform>` suffix.
+ * @param inputs The per-platform JSON inputs.
+ * @returns The generated target file for each platform present in the inputs.
+ */
 function toTargetFiles(inputs: PlatformJsonFiles): PlatformCodegenFiles {
-  const { jsonFiles, defaultPlatform = 'win32', entry, genbase, prefix } = inputs;
+  const { jsonFiles, entry, genbase, prefix } = inputs;
   const extname = path.extname(entry);
   const result = {} as PlatformCodegenFiles;
   const platformBase = `${genbase}.platform`;
@@ -97,17 +119,28 @@ function toTargetFiles(inputs: PlatformJsonFiles): PlatformCodegenFiles {
   return result;
 }
 
+/**
+ * Generate the full set of token constant files from per-platform JSON.
+ *
+ * Constants common to all platforms are pulled into the common entry file, and constants shared by platform groups
+ * (desktop, mobile, Windows, Apple) are factored into subset files and re-exported, so each value is declared once.
+ * @param inputs The per-platform JSON inputs.
+ * @returns Every {@link CodegenTargetFile} produced, ready to be written with `outputCodegenFile`.
+ */
 export function processPlatformJsonFiles(inputs: PlatformJsonFiles): CodegenTargetFile[] {
   const platformFiles = toTargetFiles(inputs);
   const commonEntry = initTargetFile(inputs.entry, inputs.description);
-  // pull all common values to the root file, removing them from the platform specific files
+  // Pull all common values into the root entry file, removing them from the platform-specific files. win32 is the
+  // default platform, so its file acts as the primary and supplies the default values for the shared re-exports.
   const required = [platformFiles.windows, platformFiles.macos];
+  const desktop = [platformFiles.win32, platformFiles.windows, platformFiles.macos];
   const optional = [platformFiles.android, platformFiles.ios].filter((f): f is CodegenTargetFile => f != null);
   extractCommonFromPlatforms(commonEntry, platformFiles.win32, required, optional);
   const allFiles = [commonEntry, ...Object.values(platformFiles)];
   const subsetBase = `${inputs.genbase}.subset`;
   const ext = path.extname(inputs.entry);
-  extractConstsUpstream(`${subsetBase}.desktop${ext}`, `Generated subset of constants for desktop platforms.`, required, allFiles);
+  // Factor constants shared within each platform group into a subset file, re-exported from the group's members.
+  extractConstsUpstream(`${subsetBase}.desktop${ext}`, `Generated subset of constants for desktop platforms.`, desktop, allFiles);
   extractConstsUpstream(`${subsetBase}.mobile${ext}`, `Generated subset of constants for mobile platforms.`, optional, allFiles);
   extractConstsUpstream(
     `${subsetBase}.win${ext}`,

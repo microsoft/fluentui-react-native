@@ -1,6 +1,12 @@
 import type { CodegenTargetFile, FileOptions } from './types.ts';
 import path from 'node:path';
 
+/**
+ * Build a multi-line JSDoc-style block comment from the given lines.
+ * @param lines The individual comment lines (without leading `*`).
+ * @param indent Indentation to prefix every line with.
+ * @returns The formatted block comment, terminated with a newline.
+ */
 export function writeCommentBlock(lines: string[], indent: string = ''): string {
   let commentBlock = `${indent}/**\n`;
   for (const line of lines) {
@@ -10,6 +16,12 @@ export function writeCommentBlock(lines: string[], indent: string = ''): string 
   return commentBlock;
 }
 
+/**
+ * Build a single-line `//` comment.
+ * @param line The comment text.
+ * @param indent Indentation to prefix the line with.
+ * @returns The formatted comment, terminated with a newline.
+ */
 export function writeCommentLine(line: string, indent: string = ''): string {
   return `${indent}// ${line}\n`;
 }
@@ -17,10 +29,10 @@ export function writeCommentLine(line: string, indent: string = ''): string {
 /**
  * Write a comment block or line based on the content of the comment. If the comment contains newlines or if
  * alwaysBlock is true, a block comment will be written. Otherwise, a single line comment will be written.
- * @param comment
- * @param indent
- * @param alwaysBlock
- * @returns
+ * @param comment The comment text (may contain newlines to force a block comment).
+ * @param indent The indentation to prefix each line with.
+ * @param alwaysBlock When true, always emit a block comment even for single-line content.
+ * @returns The formatted comment as a string.
  */
 export function writeComment(comment: string, indent: string = '', alwaysBlock = true): string {
   if (comment.includes('\n') || alwaysBlock) {
@@ -29,8 +41,14 @@ export function writeComment(comment: string, indent: string = '', alwaysBlock =
   return writeCommentLine(comment, indent);
 }
 
+/**
+ * Create an empty {@link CodegenTargetFile} for the given path. The path is resolved to an absolute path and the
+ * constants and re-exports collections are initialized empty.
+ * @param filePath The path (absolute or relative) of the file to generate.
+ * @param description Optional header comment for the file.
+ * @returns A new, empty target file description.
+ */
 export function initTargetFile(filePath: string, description?: string): CodegenTargetFile {
-  // resolve the file path
   return {
     filePath: path.resolve(filePath),
     description,

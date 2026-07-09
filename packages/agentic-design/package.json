@@ -21,10 +21,10 @@
       "default": "./src/index.ts"
     },
     "./tokens/global": {
-      "types": "./lib/tokens/global.d.ts",
-      "react-native": "./src/tokens/global.ts",
-      "import": "./lib/tokens/global.js",
-      "default": "./src/tokens/global.ts"
+      "types": "./lib/tokens/global.generated.d.ts",
+      "react-native": "./src/tokens/global.generated.ts",
+      "import": "./lib/tokens/global.generated.js",
+      "default": "./src/tokens/global.generated.ts"
     },
     "./package.json": "./package.json"
   },
