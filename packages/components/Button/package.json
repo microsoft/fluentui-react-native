@@ -42,7 +42,6 @@
     "@fluentui-react-native/pressable": "workspace:*",
     "@fluentui-react-native/styling-utils": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
-    "@fluentui-react-native/theme-tokens": "workspace:*",
     "@fluentui-react-native/theme-types": "workspace:*",
     "@fluentui-react-native/theming-utils": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",

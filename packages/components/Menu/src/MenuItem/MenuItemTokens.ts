@@ -1,6 +1,5 @@
 import type { FontWeightValue, Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { cornerRadius40, fontWeightRegular, size40, size60, sizeNone } from '@fluentui-react-native/design/tokens/global';
+import { cornerRadius40, fontSize300, fontWeightRegular, size40, size60, sizeNone } from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { MenuItemTokens } from './MenuItem.types';
@@ -11,7 +10,7 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   checkmarkSize: 16,
   color: t.colors.neutralForeground2,
   fontFamily: t.typography.families.primary,
-  fontSize: globalTokens.font.size300,
+  fontSize: fontSize300,
   fontWeight: fontWeightRegular as FontWeightValue,
   gap: size40,
   iconColor: t.colors.neutralForeground2,

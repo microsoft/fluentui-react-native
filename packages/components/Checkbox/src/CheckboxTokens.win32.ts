@@ -1,9 +1,10 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import {
   cornerRadius20,
   cornerRadius40,
   cornerRadiusCircular,
+  fontSize200,
+  fontSize300,
   fontWeightRegular,
   size120,
   size40,
@@ -35,7 +36,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
         },
       },
       padding: size40,
-      fontSize: globalTokens.font.size200,
+      fontSize: fontSize200,
       fontWeight: fontWeightRegular,
       fontFamily: t.typography.families.primary,
     },
@@ -55,7 +56,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
         },
       },
       padding: size40,
-      fontSize: globalTokens.font.size300,
+      fontSize: fontSize300,
       fontWeight: fontWeightRegular,
       fontFamily: t.typography.families.primary,
     },

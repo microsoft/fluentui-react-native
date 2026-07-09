@@ -1,9 +1,10 @@
 import type { TokenSettings, Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import {
   colorBerryPrimary,
   colorGrey38,
+  colorLightGreenPrimary,
   colorMarigoldPrimary,
+  colorRedPrimary,
   colorWhite,
   size20,
   sizeNone,
@@ -20,7 +21,7 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     right: -1,
     paddingHorizontal: sizeNone,
     backgroundColor: t.colors.neutralBackground1,
-    ...getBadgeColor('lightGreen', t),
+    ...getBadgeColor(colorLightGreenPrimary, t),
     position: 'relative',
     tiny: {
       width: 6,
@@ -52,27 +53,23 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
       bottom: -size20,
       right: -size20,
     },
-    available: getBadgeColor('lightGreen', t),
-    away: {
-      iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : colorMarigoldPrimary,
-      outOfOffice: {
-        iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : colorBerryPrimary,
-      },
-    },
-    busy: getBadgeColor('red', t),
-    blocked: getBadgeColor('red', t),
-    unknown: getBadgeColor('red', t),
+    available: getBadgeColor(colorLightGreenPrimary, t),
+    away: getBadgeColor(colorMarigoldPrimary, t, colorBerryPrimary),
+    busy: getBadgeColor(colorRedPrimary, t),
+    blocked: getBadgeColor(colorRedPrimary, t),
+    unknown: getBadgeColor(colorRedPrimary, t),
     offline: {
       iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : colorGrey38,
     },
-    outOfOffice: getBadgeColor('berry', t),
+    outOfOffice: getBadgeColor(colorBerryPrimary, t),
   }) as PresenceBadgeTokens;
 
-function getBadgeColor(color: string, t: Theme) {
+function getBadgeColor(nonHcColor: string, t: Theme, oofColor?: string): PresenceBadgeTokens {
+  oofColor ??= nonHcColor;
   return {
-    iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color[color].primary,
+    iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : nonHcColor,
     outOfOffice: {
-      iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color[color].primary,
+      iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : oofColor,
     },
   };
 }

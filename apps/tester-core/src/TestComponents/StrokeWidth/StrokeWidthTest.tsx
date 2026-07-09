@@ -1,4 +1,16 @@
 import * as React from 'react';
+import {
+  colorGrey10,
+  colorGrey80,
+  strokeWidth05,
+  strokeWidth10,
+  strokeWidth15,
+  strokeWidth20,
+  strokeWidth30,
+  strokeWidth40,
+  strokeWidth60,
+  strokeWidthNone,
+} from '@fluentui-react-native/design/tokens/global';
 import { View } from 'react-native';
 
 import { Text } from '@fluentui/react-native';
@@ -6,7 +18,6 @@ import { STROKEWIDTH_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import type { Theme } from '@fluentui-react-native/framework';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { Stack } from '@fluentui-react-native/stack';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 
@@ -22,7 +33,7 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
     },
     exampleStrokeBackground: {
       height: 100,
-      backgroundColor: isLightMode ? globalTokens.color.grey80 : globalTokens.color.grey10,
+      backgroundColor: isLightMode ? colorGrey80 : colorGrey10,
       display: 'flex',
       marginTop: 8,
     },
@@ -42,7 +53,7 @@ const StrokeWidthTestComponent: React.FunctionComponent<StrokeWidthTestComponent
     () => ({
       height: 50,
       borderBottomWidth: props.strokeWidth,
-      borderColor: isLightMode ? globalTokens.color.grey10 : globalTokens.color.grey80,
+      borderColor: isLightMode ? colorGrey10 : colorGrey80,
     }),
     [props.strokeWidth, isLightMode],
   );
@@ -61,14 +72,14 @@ const StrokeWidthTestRamp: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle}>
-        <StrokeWidthTestComponent name="widthNone" strokeWidth={globalTokens.stroke.widthNone}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="width05" strokeWidth={globalTokens.stroke.width05}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="width10" strokeWidth={globalTokens.stroke.width10}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="width15" strokeWidth={globalTokens.stroke.width15}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="width20" strokeWidth={globalTokens.stroke.width20}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="width30" strokeWidth={globalTokens.stroke.width30}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="width40" strokeWidth={globalTokens.stroke.width40}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="width60" strokeWidth={globalTokens.stroke.width60}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="widthNone" strokeWidth={strokeWidthNone}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width05" strokeWidth={strokeWidth05}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width10" strokeWidth={strokeWidth10}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width15" strokeWidth={strokeWidth15}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width20" strokeWidth={strokeWidth20}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width30" strokeWidth={strokeWidth30}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width40" strokeWidth={strokeWidth40}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width60" strokeWidth={strokeWidth60}></StrokeWidthTestComponent>
       </Stack>
     </View>
   );

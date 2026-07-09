@@ -6,6 +6,11 @@ import {
   cornerRadius40,
   cornerRadius80,
   cornerRadiusCircular,
+  fontSize100,
+  fontSize200,
+  fontSize300,
+  fontSize500,
+  fontSize700,
   fontWeightMedium,
   fontWeightRegular,
   strokeWidth20,
@@ -32,7 +37,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     badgeY: -1 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
     badgeX: 1 - strokeWidth20, // sign negated to flip x-axis based on design assumption
     iconSize: 16,
-    fontSize: globalTokens.font.size100,
+    fontSize: fontSize100,
     fontWeight: fontWeightRegular,
     square: {
       borderRadius: cornerRadius40,
@@ -41,7 +46,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size16: {
       size: 16,
       iconSize: 12,
-      fontSize: globalTokens.font.size100,
+      fontSize: fontSize100,
       fontWeight: fontWeightRegular,
       square: {
         borderRadius: cornerRadius20,
@@ -53,7 +58,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       badgeY: -3 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
       badgeX: 0 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 16,
-      fontSize: globalTokens.font.size100,
+      fontSize: fontSize100,
       fontWeight: fontWeightRegular,
       square: {
         borderRadius: cornerRadius40,
@@ -65,7 +70,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       badgeY: -1 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
       badgeX: 1 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 16,
-      fontSize: globalTokens.font.size100,
+      fontSize: fontSize100,
       fontWeight: fontWeightRegular,
       square: {
         borderRadius: cornerRadius40,
@@ -77,7 +82,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       badgeY: 0 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
       badgeX: 0 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 20,
-      fontSize: globalTokens.font.size200,
+      fontSize: fontSize200,
       fontWeight: fontWeightRegular,
       square: {
         borderRadius: cornerRadius40,
@@ -89,7 +94,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       badgeY: 0 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
       badgeX: 0 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 24,
-      fontSize: globalTokens.font.size300,
+      fontSize: fontSize300,
       fontWeight: fontWeightRegular,
       square: {
         borderRadius: cornerRadius80,
@@ -101,7 +106,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       badgeY: 2 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
       badgeX: 2 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 32,
-      fontSize: globalTokens.font.size500,
+      fontSize: fontSize500,
       fontWeight: fontWeightMedium,
       square: {
         borderRadius: cornerRadius80,
@@ -113,7 +118,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       badgeY: 3 - strokeWidth20, // width20 subtracted to accomodate border width of presence badge
       badgeX: 3 - strokeWidth20, // sign negated to flip x-axis based on design assumption
       iconSize: 48,
-      fontSize: globalTokens.font.size700,
+      fontSize: fontSize700,
       fontWeight: fontWeightMedium,
       square: {
         borderRadius: cornerRadius120,

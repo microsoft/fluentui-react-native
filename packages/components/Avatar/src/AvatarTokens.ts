@@ -6,6 +6,12 @@ import {
   cornerRadius60,
   cornerRadius80,
   cornerRadiusCircular,
+  fontSize100,
+  fontSize200,
+  fontSize400,
+  fontSize500,
+  fontSize700,
+  fontSize900,
   fontWeightRegular,
   fontWeightSemibold,
 } from '@fluentui-react-native/design/tokens/global';
@@ -22,7 +28,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     avatarOpacity: 1,
     fontFamily: t.typography.families.primary,
     fontWeight: fontWeightSemibold,
-    fontSize: globalTokens.font.size200,
+    fontSize: fontSize200,
     size: 24,
     iconSize: 16,
     iconColor: t.colors.neutralForeground3,
@@ -42,7 +48,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       size: 20,
       badgeSize: 'tiny',
       iconSize: 16,
-      fontSize: globalTokens.font.size100,
+      fontSize: fontSize100,
       square: {
         borderRadius: cornerRadius20,
       },
@@ -51,7 +57,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       size: 24,
       badgeSize: 'tiny',
       iconSize: 16,
-      fontSize: globalTokens.font.size100,
+      fontSize: fontSize100,
       square: {
         borderRadius: cornerRadius20,
       },
@@ -61,13 +67,13 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       badgeSize: 'extraSmall',
       iconSize: 20,
       fontWeight: fontWeightSemibold,
-      fontSize: globalTokens.font.size100,
+      fontSize: fontSize100,
     },
     size32: {
       size: 32,
       badgeSize: 'extraSmall',
       iconSize: 20,
-      fontSize: globalTokens.font.size100,
+      fontSize: fontSize100,
     },
     size36: {
       size: 36,
@@ -88,7 +94,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       size: 56,
       badgeSize: 'medium',
       iconSize: 28,
-      fontSize: globalTokens.font.size400,
+      fontSize: fontSize400,
       square: {
         borderRadius: cornerRadius60,
       },
@@ -97,7 +103,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       size: 64,
       badgeSize: 'large',
       iconSize: 32,
-      fontSize: globalTokens.font.size500,
+      fontSize: fontSize500,
       square: {
         borderRadius: cornerRadius60,
       },
@@ -106,7 +112,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       size: 72,
       badgeSize: 'large',
       iconSize: 32,
-      fontSize: globalTokens.font.size500,
+      fontSize: fontSize500,
       square: {
         borderRadius: cornerRadius60,
       },
@@ -116,7 +122,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       badgeSize: 'extraLarge',
       iconSize: 48,
       fontWeight: fontWeightRegular,
-      fontSize: globalTokens.font.size700,
+      fontSize: fontSize700,
       square: {
         borderRadius: cornerRadius80,
       },
@@ -126,7 +132,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       badgeSize: 'extraLarge',
       iconSize: 48,
       fontWeight: fontWeightRegular,
-      fontSize: globalTokens.font.size900,
+      fontSize: fontSize900,
       square: {
         borderRadius: cornerRadius80,
       },

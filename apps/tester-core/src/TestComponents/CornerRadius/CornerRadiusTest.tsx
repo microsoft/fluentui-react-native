@@ -1,11 +1,21 @@
 import * as React from 'react';
+import {
+  colorGrey10,
+  colorGrey80,
+  cornerRadius120,
+  cornerRadius20,
+  cornerRadius40,
+  cornerRadius60,
+  cornerRadius80,
+  cornerRadiusCircular,
+  cornerRadiusNone,
+} from '@fluentui-react-native/design/tokens/global';
 import { View } from 'react-native';
 
 import { Text } from '@fluentui/react-native';
 import { HOMEPAGE_CORNERRADIUS_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { Stack } from '@fluentui-react-native/stack';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 
 import { stackStyle } from '../Common/styles';
@@ -25,7 +35,7 @@ const CornerRadiusTestComponent: React.FunctionComponent<CornerRadiusTestCompone
     () => ({
       height: 60,
       margin: 16,
-      backgroundColor: isLightMode ? globalTokens.color.grey80 : globalTokens.color.grey10,
+      backgroundColor: isLightMode ? colorGrey80 : colorGrey10,
       borderRadius: props.cornerRadius,
     }),
     [props.cornerRadius, isLightMode],
@@ -36,7 +46,7 @@ const CornerRadiusTestComponent: React.FunctionComponent<CornerRadiusTestCompone
       height: Math.min(props.cornerRadius * 2, 60),
       width: Math.min(props.cornerRadius * 2, 60),
       borderRadius: props.cornerRadius,
-      backgroundColor: isLightMode ? globalTokens.color.grey10 : globalTokens.color.grey80,
+      backgroundColor: isLightMode ? colorGrey10 : colorGrey80,
     }),
     [props.cornerRadius, isLightMode],
   );
@@ -55,13 +65,13 @@ const CornerRadiusTest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={500}>
-        <CornerRadiusTestComponent name="radiusNone" cornerRadius={globalTokens.corner.radiusNone} />
-        <CornerRadiusTestComponent name="radius20" cornerRadius={globalTokens.corner.radius20} />
-        <CornerRadiusTestComponent name="radius40" cornerRadius={globalTokens.corner.radius40} />
-        <CornerRadiusTestComponent name="radius60" cornerRadius={globalTokens.corner.radius60} />
-        <CornerRadiusTestComponent name="radius80" cornerRadius={globalTokens.corner.radius80} />
-        <CornerRadiusTestComponent name="radius120" cornerRadius={globalTokens.corner.radius120} />
-        <CornerRadiusTestComponent name="radiusCircular" cornerRadius={globalTokens.corner.radiusCircular} />
+        <CornerRadiusTestComponent name="radiusNone" cornerRadius={cornerRadiusNone} />
+        <CornerRadiusTestComponent name="radius20" cornerRadius={cornerRadius20} />
+        <CornerRadiusTestComponent name="radius40" cornerRadius={cornerRadius40} />
+        <CornerRadiusTestComponent name="radius60" cornerRadius={cornerRadius60} />
+        <CornerRadiusTestComponent name="radius80" cornerRadius={cornerRadius80} />
+        <CornerRadiusTestComponent name="radius120" cornerRadius={cornerRadius120} />
+        <CornerRadiusTestComponent name="radiusCircular" cornerRadius={cornerRadiusCircular} />
       </Stack>
     </View>
   );
