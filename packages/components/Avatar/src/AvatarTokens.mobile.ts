@@ -1,5 +1,4 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import {
   cornerRadius120,
   cornerRadius20,
@@ -18,6 +17,7 @@ import {
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { AvatarTokens } from '.';
+import { getNamedColorSet, type NamedColorSet } from './Avatar.colors';
 
 export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
   ({
@@ -183,23 +183,24 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
  * @param theme
  * @returns object of props - backgroundColor, color and ringColor
  */
-function getColorProps(color: string, theme: Theme) {
+function getColorProps(color: NamedColorSet, theme: Theme) {
   const themeAppearance = theme.host.appearance;
+  const colorSet = getNamedColorSet(color);
   switch (themeAppearance) {
     case 'light':
     default:
       return {
-        backgroundColor: globalTokens.color[color].tint40,
-        color: globalTokens.color[color].shade30,
-        iconColor: globalTokens.color[color].shade30,
-        ringColor: globalTokens.color[color].primary,
+        backgroundColor: colorSet.tint40,
+        color: colorSet.shade30,
+        iconColor: colorSet.shade30,
+        ringColor: colorSet.primary,
       };
     case 'dark':
       return {
-        backgroundColor: globalTokens.color[color].tint40,
-        color: globalTokens.color[color].shade30,
-        iconColor: globalTokens.color[color].shade30,
-        ringColor: globalTokens.color[color].tint20,
+        backgroundColor: colorSet.tint40,
+        color: colorSet.shade30,
+        iconColor: colorSet.shade30,
+        ringColor: colorSet.tint20,
       };
   }
 }
