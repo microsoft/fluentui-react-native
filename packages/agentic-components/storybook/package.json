@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/agentic-components": "workspace:*",
+    "@fluentui-react-native/callout": "workspace:*",
     "@types/react": "~19.1.4",
     "react": "19.1.4",
     "react-native": "^0.81.6",
@@ -59,7 +60,8 @@
   "furn": {
     "knip": {
       "ignoreDependencies": [
-        "@fluentui-react-native/agentic-components"
+        "@fluentui-react-native/agentic-components",
+        "@fluentui-react-native/callout"
       ]
     }
   },

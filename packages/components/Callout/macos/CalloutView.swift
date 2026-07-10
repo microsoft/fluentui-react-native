@@ -46,17 +46,11 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	public weak var bridge: RCTBridge?
 
-	private init() {
-		super.init(frame: .zero)
-	}
-
-	public required init?(coder: NSCoder) {
-		preconditionFailure()
-	}
-
-	convenience init(bridge: RCTBridge) {
-		self.init()
-		self.bridge = bridge
+	/// Designated initializer. Usable both from the legacy (Paper) `RCTViewManager` path (via
+	/// `init(bridge:)`) and from the new architecture (Fabric) component view, which constructs the
+	/// view without a bridge and drives it directly.
+	@objc public override init(frame frameRect: NSRect) {
+		super.init(frame: frameRect)
 
 		// Listens for mouse clicks in the main menu bar while callout is shown
 		NotificationCenter.default.addObserver(
@@ -66,6 +60,18 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			object: nil)
 	}
 
+	public required init?(coder: NSCoder) {
+		preconditionFailure()
+	}
+
+	/// Legacy (Paper) entry point. The bridge is used to resolve `target` react tags and to create the
+	/// `RCTTouchHandler` for the proxied content. Under Fabric neither is needed (see `contentProxyView`
+	/// and `setAnchorView(_:)`).
+	convenience init(bridge: RCTBridge) {
+		self.init(frame: .zero)
+		self.bridge = bridge
+	}
+
 	public override func viewDidMoveToWindow() {
 		super.viewDidMoveToWindow()
 		if (window != nil) {
@@ -73,6 +79,46 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		} else {
 			dismissCallout()
 		}
+	}
+
+	// MARK: Fabric (New Architecture) interface
+
+	/// The flipped visual-effect view that hosts the Callout's React content inside the floating
+	/// `CalloutWindow`. The Fabric component view mounts its children here and attaches an
+	/// `RCTSurfaceTouchHandler` so the proxied content remains interactive in the separate window.
+	@objc public var contentProxyView: NSView {
+		return proxyView
+	}
+
+	/// Sets the anchor view directly. Under Fabric the component view resolves the `target` react tag
+	/// to its mounted view via the surface presenter and forwards it here (the legacy `target` setter
+	/// relies on the bridge's uiManager, which does not exist under Fabric).
+	@objc public func setAnchorView(_ view: NSView?) {
+		anchorView = view
+		updateCalloutFrameToAnchor()
+	}
+
+	/// Mounts a Fabric child component view into the proxied content, preserving z-order by `index`.
+	@objc public func mountContentSubview(_ subview: NSView, at index: Int) {
+		if index >= proxyView.subviews.count {
+			proxyView.addSubview(subview)
+		} else {
+			proxyView.addSubview(subview, positioned: .below, relativeTo: proxyView.subviews[index])
+		}
+	}
+
+	/// Unmounts a previously mounted Fabric child component view from the proxied content.
+	@objc public func unmountContentSubview(_ subview: NSView) {
+		if subview.superview == proxyView {
+			subview.removeFromSuperview()
+		}
+	}
+
+	/// Sizes the proxied content to the Callout's laid-out size and repositions the floating window.
+	/// Called from the Fabric component view's `updateLayoutMetrics`.
+	@objc public func updateContentSize(_ size: NSSize) {
+		proxyView.frame = NSRect(origin: .zero, size: size)
+		updateCalloutFrameToAnchor()
 	}
 
 	public override func updateLayer() {
@@ -362,10 +408,9 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	private func onDismissCallout() {
 		if let onDismiss = onDismiss {
-			guard let reactTag = reactTag else {
-				preconditionFailure("React Tag missing")
-			}
-			let event: [AnyHashable: Any] = ["target": reactTag]
+			// Under Paper the Callout view is itself a React view with a `reactTag`; under Fabric it is a
+			// plain subview driven by the component view, so fall back to 0 when no tag is present.
+			let event: [AnyHashable: Any] = ["target": reactTag ?? NSNumber(value: 0)]
 			onDismiss(event)
 		}
 	}
@@ -392,11 +437,17 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		/**
 		 * We can't directly call touchHandler.attach(to:) because `visualEffectView` is not an RCTUIView.
 		 * We get around this limitation by just replicating what `attach` did internally: add a gestureRecognizer.
+		 *
+		 * Under Fabric there is no bridge and touch handling is provided by an `RCTSurfaceTouchHandler`
+		 * that the component view attaches to `contentProxyView`, so we only create the legacy
+		 * `RCTTouchHandler` when running on the bridge (Paper) path.
 		 */
-		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
-			preconditionFailure("Callout could not create RCTTouchHandler")
+		if let bridge = bridge {
+			guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
+				preconditionFailure("Callout could not create RCTTouchHandler")
+			}
+			visualEffectView.addGestureRecognizer(touchHandler)
 		}
-		visualEffectView.addGestureRecognizer(touchHandler)
 
 		return visualEffectView
 	}()

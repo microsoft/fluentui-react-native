@@ -18,6 +18,9 @@
       "path": "../tsconfig.json"
     },
     {
+      "path": "../../components/Callout/tsconfig.json"
+    },
+    {
       "path": "../../../scripts/tsconfig.json"
     }
   ]

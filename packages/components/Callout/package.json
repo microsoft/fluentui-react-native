@@ -79,7 +79,12 @@
   "codegenConfig": {
     "name": "FRNCalloutSpec",
     "type": "components",
-    "jsSrcsDir": "lib"
+    "jsSrcsDir": "src",
+    "ios": {
+      "componentProvider": {
+        "RCTCallout": "RCTCalloutComponentView"
+      }
+    }
   },
   "furn": {
     "jestPlatform": "win32"
