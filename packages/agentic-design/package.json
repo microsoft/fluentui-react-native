@@ -74,7 +74,7 @@
     }
   },
   "furn": {
-    "jestPlatform": "macos"
+    "jestPlatform": "win32"
   },
   "rnx-kit": {
     "kitType": "library",
