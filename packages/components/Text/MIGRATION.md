@@ -21,7 +21,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 
 ### Props changed
 
-- `variant` => Prop name remains identical, but will support a different collection of named font variants. Newly defined v1 variants can be found in [Typography.types](../../theming/theme-types/src/Typography.types.ts) under theme-types.
+- `variant` => Prop name remains identical, but will support a different collection of named font variants. Newly defined v1 variants can be found in [Typography.types](../../agentic-design/src/theming/Typography.types.ts) under theme-types.
 
 ### Props added
 
@@ -83,7 +83,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 
 ### Updating ThemeProvider
 
-If you are using the older theme provider `ThemeProvider` from `@uifabricshared/theming-react-native`, you will need to update the `ThemeProvider` to pull from `@fluentui-react-native/theme` to have the control work properly with themes. Please see [this page](../../../docs/pages/Guides/UpdateThemeProvider.md) for guidance.
+If you are using the older theme provider `ThemeProvider` from `@uifabricshared/theming-react-native`, you will need to update the `ThemeProvider` to pull from `@fluentui-react-native/design/theming` to have the control work properly with themes. Please see [this page](../../../docs/pages/Guides/UpdateThemeProvider.md) for guidance.
 
 ### Migrating customized Text
 

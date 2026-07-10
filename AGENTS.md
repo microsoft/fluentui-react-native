@@ -208,7 +208,7 @@ Platform-specific themes are in `/packages/theming/`:
 - `theme-tokens/` - Token definitions
 - `theme-types/` - TypeScript types for themes
 
-Components require `ThemeProvider` from `@fluentui-react-native/theme` to work properly.
+Components require `ThemeProvider` from `@fluentui-react-native/design/theming` to work properly.
 
 ### Testing
 
