@@ -5,12 +5,28 @@ export interface OfficePalette {
    * Background Colors
    *
    * Background color for any region of the user interface.
+   * Used by: win32-theme (createAliasesFromPalette)
    */
   Bkg: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgPressed: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgSelected: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgSelectionHighlight: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgSubtle: ColorValue;
 
   /**
@@ -20,34 +36,79 @@ export interface OfficePalette {
    * background. For example, list items and ribbon buttons.
    */
   // text
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   Text: ColorValue;
   TextRest: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextPressed: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextSelected: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextDisabled: ColorValue;
   TextSelectionHighlight: ColorValue;
 
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextSecondary: ColorValue;
   TextSecondaryRest: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextSecondaryHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextSecondaryPressed: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextSecondarySelected: ColorValue;
 
   // emphasized text, usually with an accent color
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextEmphasis: ColorValue;
   TextEmphasisRest: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextEmphasisHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextEmphasisPressed: ColorValue;
   TextEmphasisSelected: ColorValue;
 
   // stroke colors (typically borders, outlines or underlines)
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeSelectedHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeKeyboard: ColorValue;
 
   // stroke overlay colors (typically borders, outlines or underlines)
   StrokeOverRest: ColorValue;
   StrokeOverHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeOverPressed: ColorValue;
   StrokeOverSelectedRest: ColorValue;
   StrokeOverSelectedHover: ColorValue;
@@ -64,6 +125,9 @@ export interface OfficePalette {
   BkgCtlHover: ColorValue;
   BkgCtlPressed: ColorValue;
   BkgCtlSelected: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgCtlDisabled: ColorValue;
 
   // text
@@ -74,10 +138,16 @@ export interface OfficePalette {
   TextCtlDisabled: ColorValue;
 
   // stroke colors (typically borders, outlines or underlines)
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeCtl: ColorValue;
   StrokeCtlHover: ColorValue;
   StrokeCtlPressed: ColorValue;
   StrokeCtlSelected: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeCtlDisabled: ColorValue;
   StrokeCtlKeyboard: ColorValue;
 
@@ -88,14 +158,32 @@ export interface OfficePalette {
    * background. Most other controls should not use these colors.
    */
   // background
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgCtlEmphasis: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgCtlEmphasisHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgCtlEmphasisPressed: ColorValue;
   BkgCtlEmphasisDisabled: ColorValue;
 
   // text
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextCtlEmphasis: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextCtlEmphasisHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextCtlEmphasisPressed: ColorValue;
   TextCtlEmphasisDisabled: ColorValue;
 
@@ -132,8 +220,17 @@ export interface OfficePalette {
   StrokeCtlSubtleKeyboard: ColorValue;
 
   // standalone stroke colors
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeOnlyHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeOnlyPressed: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeOnlySelected: ColorValue;
 
   /**
@@ -174,6 +271,9 @@ export interface OfficePalette {
   AccentLight: ColorValue;
 
   // Used for accent rectangles and bolder borders
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   AccentEmphasis: ColorValue;
 
   // Used for borders that outline the entire UI region
@@ -189,6 +289,7 @@ export interface OfficePalette {
    * Headers
    *
    * Used for headings on sections of the user interface.
+   * Used by: win32-theme (createAliasesFromPalette)
    */
   BkgHeader: ColorValue;
   TextHeader: ColorValue;
@@ -207,13 +308,29 @@ export interface OfficePalette {
 
   /**
    * Background values for toggle switches
+   * Used by: win32-theme (createAliasesFromPalette)
    */
   BkgToggleSwitchOff: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgToggleSwitchOffHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgToggleSwitchOffPressed: ColorValue;
   BkgToggleSwitchOffDisabled: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgToggleSwitchOn: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgToggleSwitchOnHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   BkgToggleSwitchOnPressed: ColorValue;
   BkgToggleSwitchOnDisabled: ColorValue;
 
@@ -224,8 +341,17 @@ export interface OfficePalette {
   StrokeToggleSwitchOffHover: ColorValue;
   StrokeToggleSwitchOffPressed: ColorValue;
   StrokeToggleSwitchOffDisabled: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeToggleSwitchOn: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeToggleSwitchOnHover: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   StrokeToggleSwitchOnPressed: ColorValue;
   StrokeToggleSwitchOnDisabled: ColorValue;
 
@@ -237,6 +363,9 @@ export interface OfficePalette {
   SliderPrimaryPressed: ColorValue;
   SliderPrimaryDisabled: ColorValue;
   SliderSecondary: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   SliderBuffer: ColorValue;
   SliderKeyboard: ColorValue;
   SliderToolTipBorder: ColorValue;
@@ -253,5 +382,8 @@ export interface OfficePalette {
   BkgCtlSubtleFocus: ColorValue;
   BkgCtlSubtleHoverDisabled: ColorValue;
   BkgCtlSubtleSelectedDisabled: ColorValue;
+  /**
+   * Used by: win32-theme (createAliasesFromPalette)
+   */
   TextTextBoxPlaceholder: ColorValue;
 }

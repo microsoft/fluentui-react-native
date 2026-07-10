@@ -1,13 +1,13 @@
 {
-  "name": "@fluentui-react-native/theming-utils",
-  "version": "0.27.5",
-  "description": "Utils for dealing with theming",
+  "name": "@fluentui-react-native/design",
+  "version": "0.1.0",
+  "description": "Core design system concepts, utilities, and types for Fluent UI React Native.",
   "license": "MIT",
   "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/theming/theming-utils"
+    "directory": "packages/agentic-design"
   },
   "type": "module",
   "main": "lib/index.js",
@@ -19,72 +19,64 @@
       "react-native": "./src/index.ts",
       "import": "./lib/index.js",
       "default": "./src/index.ts"
-    }
+    },
+    "./tokens/global": {
+      "types": "./lib/tokens/global.generated.d.ts",
+      "react-native": "./src/tokens/global.generated.ts",
+      "import": "./lib/tokens/global.generated.js",
+      "default": "./src/tokens/global.generated.ts"
+    },
+    "./package.json": "./package.json"
   },
   "scripts": {
     "build": "tsgo -b",
     "clean": "fluentui-scripts clean",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
+    "prebuild": "node ./scripts/codegen.cts",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },
-  "dependencies": {
-    "@fluentui-react-native/theme-types": "workspace:*",
-    "@fluentui-react-native/tokens": "workspace:*"
-  },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@fluentui-react-native/design-tokens-android": "catalog:",
+    "@fluentui-react-native/design-tokens-ios": "catalog:",
+    "@fluentui-react-native/design-tokens-macos": "catalog:",
     "@fluentui-react-native/design-tokens-win32": "catalog:",
     "@fluentui-react-native/design-tokens-windows": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native-community/cli": "^20.0.0",
-    "@react-native-community/cli-platform-android": "^20.0.0",
-    "@react-native-community/cli-platform-ios": "^20.0.0",
-    "@react-native/babel-preset": "^0.81.0",
-    "@react-native/metro-config": "^0.81.0",
+    "@rnx-kit/tools-filesystem": "^0.2.0",
     "@types/react": "~19.1.4",
+    "@types/react-test-renderer": "^19.1.0",
     "react": "19.1.4",
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",
-    "react-native-windows": "^0.81.0"
+    "react-test-renderer": "19.1.4"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0 || ^0.81.0",
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
     "react": "18.2.0 || 19.0.0 || 19.1.4",
     "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
-    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
-    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
   },
   "peerDependenciesMeta": {
-    "@office-iss/react-native-win32": {
-      "optional": true
-    },
     "@types/react": {
       "optional": true
     },
     "react-native-macos": {
       "optional": true
-    },
-    "react-native-windows": {
-      "optional": true
     }
   },
   "furn": {
-    "jestPlatform": "windows"
+    "jestPlatform": "macos"
   },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "babel-preset-react-native",
-        "core",
-        "core-android",
-        "core-ios",
-        "core-macos",
-        "core-windows",
-        "react"
+        "core-dev-only",
+        "core-macos-dev-only",
+        "react-test-renderer"
       ]
     },
     "extends": "@fluentui-react-native/scripts/kit-config"

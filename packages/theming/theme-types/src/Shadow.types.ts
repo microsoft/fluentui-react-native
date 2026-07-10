@@ -24,17 +24,54 @@ export interface ShadowToken {
  * Shadows alias tokens as defined by FluentUI v2 design system
  */
 export interface BaseShadowAliasTokens {
+  /**
+   * Used by: Button (defaultFABTokens), tester-core (ShadowDepthTestSection)
+   */
   shadow2: ShadowToken;
+  /**
+   * Used by: tester-core (BasicBadge, ShadowDepthTestSection)
+   */
   shadow4: ShadowToken;
+  /**
+   * Used by: Button (defaultFABTokens), Switch (defaultSwitchTokens), tester-core (ShadowDepthTestSection)
+   */
   shadow8: ShadowToken;
+  /**
+   * Used by: Notification (defaultNotificationTokens), tester-core (BasicBadge, ShadowDepthTestSection,
+   *   ShadowWithDifferentPropsTestSection)
+   */
   shadow16: ShadowToken;
+  /**
+   * Used by: tester-core (ShadowDepthTestSection)
+   */
   shadow28: ShadowToken;
+  /**
+   * Used by: tester-core (ShadowDepthTestSection)
+   */
   shadow64: ShadowToken;
+  /**
+   * Used by: tester-core (ShadowDepthTestSection)
+   */
   shadow2brand: ShadowToken;
+  /**
+   * Used by: tester-core (ShadowDepthTestSection)
+   */
   shadow4brand: ShadowToken;
+  /**
+   * Used by: tester-core (ShadowDepthTestSection)
+   */
   shadow8brand: ShadowToken;
+  /**
+   * Used by: tester-core (ShadowDepthTestSection)
+   */
   shadow16brand: ShadowToken;
+  /**
+   * Used by: tester-core (ShadowDepthTestSection)
+   */
   shadow28brand: ShadowToken;
+  /**
+   * Used by: tester-core (ShadowDepthTestSection)
+   */
   shadow64brand: ShadowToken;
 }
 

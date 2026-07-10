@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/default-theme": "workspace:*",
-    "@fluentui-react-native/design-tokens-win32": "^0.53.0",
+    "@fluentui-react-native/design-tokens-win32": "catalog:",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/theme": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",
