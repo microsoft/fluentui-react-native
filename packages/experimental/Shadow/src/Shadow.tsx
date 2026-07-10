@@ -3,7 +3,7 @@ import type { ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
 import { memoize, mergeProps, phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
-import type { ShadowToken } from '@fluentui-react-native/theme-types';
+import type { ShadowToken } from '@fluentui-react-native/design/theming';
 
 import type { ShadowProps } from './Shadow.types';
 import { shadowName } from './Shadow.types';

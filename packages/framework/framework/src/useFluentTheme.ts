@@ -1,6 +1,6 @@
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
-import type { Theme } from '@fluentui-react-native/theme-types';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/design/theming';
+import { useTheme } from '@fluentui-react-native/design/theming';
 
 /**
  * Attempts to obtain a theme via the react context, failing that the default fluent theme will be returned. Used to ensure some theme

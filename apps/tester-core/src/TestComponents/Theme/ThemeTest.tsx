@@ -4,8 +4,8 @@ import { View, StyleSheet } from 'react-native';
 
 import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
 import { THEME_TESTPAGE } from '@fluentui-react-native/e2e-testing';
-import type { Theme } from '@fluentui-react-native/theme-types';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/design/theming';
+import { useTheme } from '@fluentui-react-native/design/theming';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 import { commonTestStyles } from '../Common/styles';

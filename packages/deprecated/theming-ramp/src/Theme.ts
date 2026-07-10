@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { Theme, PartialTheme } from '@fluentui-react-native/theme-types';
+import { Theme, PartialTheme } from '@fluentui-react-native/design/theming';
 import { mergeSettingsCollection } from '@uifabricshared/foundation-settings';
 import { MergeOptions, immutableMergeCore } from '@fluentui-react-native/framework-base';
 

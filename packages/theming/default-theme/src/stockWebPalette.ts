@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import type { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
+import type { ThemeColorDefinition } from '@fluentui-react-native/design/theming';
 
 import { createColorAliasTokens } from './createAliasTokens';
 import { paletteFromFabricColors } from './defaultColors';

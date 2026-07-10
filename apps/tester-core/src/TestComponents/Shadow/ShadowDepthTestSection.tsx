@@ -5,8 +5,8 @@ import { Text } from '@fluentui/react-native';
 import { Shadow, getShadowTokenStyleSet } from '@fluentui-react-native/experimental-shadow';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { mergeStyles } from '@fluentui-react-native/framework-base';
-import type { ShadowToken, Theme } from '@fluentui-react-native/theme-types';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import type { ShadowToken, Theme } from '@fluentui-react-native/design/theming';
+import { useTheme } from '@fluentui-react-native/design/theming';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 import { shadowTestPageStyles } from './ShadowTestPageStyles';

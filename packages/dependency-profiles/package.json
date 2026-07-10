@@ -80,7 +80,6 @@
     "@fluentui-react-native/theming-utils": "*",
     "@fluentui-react-native/tokens": "*",
     "@fluentui-react-native/tooltip": "*",
-    "@fluentui-react-native/use-slot": "*",
     "@fluentui-react-native/use-slots": "*",
     "@fluentui-react-native/use-styling": "*",
     "@fluentui-react-native/use-tokens": "*",
@@ -257,9 +256,6 @@
       "optional": true
     },
     "@fluentui-react-native/tooltip": {
-      "optional": true
-    },
-    "@fluentui-react-native/use-slot": {
       "optional": true
     },
     "@fluentui-react-native/use-slots": {

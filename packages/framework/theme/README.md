@@ -1,6 +1,6 @@
 # @fluentui-react-native/theme
 
-Code support for working with the themes defined in `@fluentui-react-native/theme-types`. This includes a `ThemeReference` class and a `ThemeProvider` implementation that works with the references.
+Code support for working with the themes defined in `@fluentui-react-native/design/theming`. This includes a `ThemeReference` class and a `ThemeProvider` implementation that works with the references.
 
 ## `ThemeReference`
 

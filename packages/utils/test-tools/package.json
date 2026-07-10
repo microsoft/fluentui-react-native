@@ -31,8 +31,8 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@fluentui-react-native/theme-types": "workspace:*",
     "@react-native/babel-preset": "^0.81.0",
     "@types/jest": "^29.0.0",
     "@types/react": "~19.1.4",

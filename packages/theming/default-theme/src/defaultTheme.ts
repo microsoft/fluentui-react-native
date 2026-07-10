@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import type { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/theme-types';
+import type { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/design/theming';
 
 import { createShadowAliasTokens } from './createAliasTokens';
 import { getStockWebHCPalette } from './defaultColors';

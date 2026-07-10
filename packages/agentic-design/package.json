@@ -26,6 +26,12 @@
       "import": "./lib/tokens/global.generated.js",
       "default": "./src/tokens/global.generated.ts"
     },
+    "./theming": {
+      "types": "./lib/theming/index.d.ts",
+      "react-native": "./src/theming/index.ts",
+      "import": "./lib/theming/index.js",
+      "default": "./src/theming/index.ts"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

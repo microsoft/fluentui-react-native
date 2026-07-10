@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, View, Text, TextInput, StyleSheet } from 'react-native';
 
 import { PersonaCoin } from '@fluentui/react-native';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/design/theming';
 import Slider from '@react-native-community/slider';
 import type { SliderProps } from '@react-native-community/slider';
 

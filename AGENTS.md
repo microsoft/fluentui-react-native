@@ -171,6 +171,10 @@ The composition framework uses precise types for better type safety:
 - When checking for win32 platform: `Platform.OS === ('win32' as any)` - TypeScript doesn't recognize 'win32' but react-native-windows supports it
 - Final render functions should return `FinalRender<TProps>` with children as rest parameters: `(props: TProps, ...children: React.ReactNode[])`
 
+**Module Exports**:
+
+- **Do not use barrel exports (`export * from '...'`)** - wildcard re-exports break tree-shaking because bundlers cannot statically determine which symbols are used, so unused code is retained in consumers' bundles. Always use explicit named re-exports instead, e.g. `export { Foo, Bar } from './module'` and `export type { Baz } from './module'`.
+
 **Native Modules**: Components with native code (iOS/Android/Windows):
 
 - Typically have one root slot wrapping the native component
@@ -271,3 +275,4 @@ Components require `ThemeProvider` from `@fluentui-react-native/theme` to work p
 - Use the newer composition framework (`@fluentui-react-native/composition`) for new components, not the deprecated foundation frameworks
 - When importing V1 components, consider aliasing: `import { ButtonV1 as Button }`
 - Slot functions return `React.ReactElement` - you can safely access `.props` without type assertions
+- Avoid barrel exports (`export * from '...'`); use explicit named re-exports to preserve tree-shaking
