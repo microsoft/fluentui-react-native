@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/design/theming';
+import { fontWeightRegular, fontWeightSemibold } from '@fluentui-react-native/design/tokens/global';
 
 import { createShadowAliasTokens } from './createAliasTokens';
 import { getStockWebHCPalette } from './defaultColors';
@@ -19,8 +20,8 @@ function _defaultTypography(): Typography {
       heroLarge: globalTokens.font.size900 as FontSize,
     } as FontSizes,
     weights: {
-      regular: globalTokens.font.weight.regular as FontWeightValue,
-      semiBold: globalTokens.font.weight.semibold as FontWeightValue,
+      regular: fontWeightRegular as FontWeightValue,
+      semiBold: fontWeightSemibold as FontWeightValue,
     },
     families: {
       primary: 'Segoe UI',

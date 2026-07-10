@@ -1,7 +1,7 @@
 import { Appearance } from 'react-native';
 
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { ThemeColorDefinition } from '@fluentui-react-native/design/theming';
+import { colorGrey26 } from '@fluentui-react-native/design/tokens/global';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 
 import type { ApplePalette } from './appleColors.types.ios';
@@ -222,7 +222,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
 
     checkboxBackground: fluentApple.communicationBlue,
     checkboxBackgroundDisabled: fluent2AliasColorTokens.neutralBackground1,
-    checkboxBorderColor: globalTokens.color.grey26,
+    checkboxBorderColor: colorGrey26,
     checkmarkColor: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     personaActivityGlow: 'transparent',
