@@ -31,10 +31,10 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/interactive-hooks": "workspace:*",
-    "@fluentui-react-native/theme-tokens": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
     "@uifabricshared/foundation-compose": "workspace:*"
   },

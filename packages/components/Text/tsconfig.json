@@ -12,6 +12,9 @@
       "path": "../../utils/adapters/tsconfig.json"
     },
     {
+      "path": "../../agentic-design/tsconfig.json"
+    },
+    {
       "path": "../../framework-base/tsconfig.json"
     },
     {
@@ -25,9 +28,6 @@
     },
     {
       "path": "../../utils/test-tools/tsconfig.json"
-    },
-    {
-      "path": "../../theming/theme-tokens/tsconfig.json"
     },
     {
       "path": "../../utils/tokens/tsconfig.json"
