@@ -6,7 +6,7 @@ import type { UseTokens, FontWeightValue } from '@fluentui-react-native/framewor
 import { fontStyles, useFluentTheme, compressible, patchTokens } from '@fluentui-react-native/framework';
 import { mergeStyles } from '@fluentui-react-native/framework-base';
 import { useKeyProps } from '@fluentui-react-native/interactive-hooks';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { fontSize, fontWeight } from '@fluentui-react-native/design';
 
 import type { TextProps, TextTokens } from './Text.types';
 import { textName } from './Text.types';
@@ -84,8 +84,8 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     variant,
     fontFamily: font == 'base' ? 'primary' : font,
     fontMaximumSize: tokens.maximumFontSize,
-    fontSize: globalTokens.font['size' + size],
-    fontWeight: globalTokens.font.weight[weight] as FontWeightValue,
+    fontSize: size !== undefined ? fontSize(size) : undefined,
+    fontWeight: weight !== undefined ? (fontWeight(weight) as FontWeightValue) : undefined,
     // leave it undefined for tokens to be set by user
     fontStyle: italic ? 'italic' : undefined,
     textAlign: textAlign,

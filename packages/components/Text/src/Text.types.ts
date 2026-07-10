@@ -1,6 +1,7 @@
 import type { ColorValue, Text, TextStyle } from 'react-native';
 
 import type { ITextProps } from '@fluentui-react-native/adapters';
+import type { FontSize, FontWeight } from '@fluentui-react-native/design';
 import type { FontTokens, FontVariantTokens, IForegroundColorTokens } from '@fluentui-react-native/framework';
 
 export const textName = 'Text';
@@ -27,8 +28,8 @@ export type TextTokens = Omit<FontTokens, 'fontFamily'> &
 
 export type TextAlign = 'start' | 'center' | 'end' | 'justify';
 export type TextFont = 'base' | 'monospace' | 'numeric';
-export type TextSize = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000;
-export type TextWeight = 'regular' | 'medium' | 'semibold' | 'bold';
+export type TextSize = FontSize;
+export type TextWeight = FontWeight;
 
 /**
  * Text props, based off of the standard react-native TextProps with some new extensions
