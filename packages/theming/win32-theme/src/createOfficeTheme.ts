@@ -1,5 +1,5 @@
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
-import { ThemeReference } from '@fluentui-react-native/theme';
+import { ThemeReference } from '@fluentui-react-native/design/theming';
 import type { OfficePalette, Theme, ThemeOptions } from '@fluentui-react-native/design/theming';
 
 import { createAliasesFromPalette } from './createAliasesFromPalette';

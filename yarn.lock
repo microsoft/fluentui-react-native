@@ -2630,7 +2630,6 @@ __metadata:
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -2674,7 +2673,6 @@ __metadata:
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -3118,7 +3116,6 @@ __metadata:
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -3219,7 +3216,6 @@ __metadata:
     "@fluentui-react-native/theming-utils": "*"
     "@fluentui-react-native/tokens": "*"
     "@fluentui-react-native/tooltip": "*"
-    "@fluentui-react-native/use-slot": "*"
     "@fluentui-react-native/use-slots": "*"
     "@fluentui-react-native/use-styling": "*"
     "@fluentui-react-native/use-tokens": "*"
@@ -3345,8 +3341,6 @@ __metadata:
       optional: true
     "@fluentui-react-native/tooltip":
       optional: true
-    "@fluentui-react-native/use-slot":
-      optional: true
     "@fluentui-react-native/use-slots":
       optional: true
     "@fluentui-react-native/use-styling":
@@ -3427,7 +3421,12 @@ __metadata:
     "@fluentui-react-native/design-tokens-macos": "catalog:"
     "@fluentui-react-native/design-tokens-win32": "catalog:"
     "@fluentui-react-native/design-tokens-windows": "catalog:"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/tools-filesystem": "npm:^0.2.0"
     "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
@@ -5450,8 +5449,11 @@ __metadata:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
+      optional: true
+    react-native-macos:
       optional: true
   languageName: unknown
   linkType: soft
@@ -5474,8 +5476,11 @@ __metadata:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
+      optional: true
+    react-native-macos:
       optional: true
   languageName: unknown
   linkType: soft
@@ -5486,9 +5491,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/design": "workspace:*"
-    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/test-tools": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
@@ -5501,8 +5504,11 @@ __metadata:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
+      optional: true
+    react-native-macos:
       optional: true
   languageName: unknown
   linkType: soft
@@ -5774,7 +5780,6 @@ __metadata:
     "@fluentui-react-native/design-tokens-win32": "catalog:"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -10716,8 +10721,11 @@ __metadata:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
+      optional: true
+    react-native-macos:
       optional: true
   languageName: unknown
   linkType: soft

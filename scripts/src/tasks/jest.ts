@@ -74,7 +74,9 @@ export function getJestTargetFiles(
     let platform: string | undefined = undefined;
     if (defaultPlatform !== 'react') {
       // If the default platform is not 'react', check for platform-specific suffixes to multiplex the tests.
-      platform = (metadata.platformSuffix ?? metadata.intermediateSuffix === 'win') ? DEFULT_WIN_PLATFORM : undefined;
+      // A concrete platform suffix (e.g. `.macos`, `.ios`) maps directly to that platform, while the
+      // intermediate `win` suffix maps to the default Windows platform.
+      platform = metadata.platformSuffix ?? (metadata.intermediateSuffix === 'win' ? DEFULT_WIN_PLATFORM : undefined);
     }
     // fall through to the default platform
     platform ??= defaultPlatform;

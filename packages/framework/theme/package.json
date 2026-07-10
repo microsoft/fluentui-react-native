@@ -33,13 +33,11 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
-    "@fluentui-react-native/design": "workspace:*",
-    "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@fluentui-react-native/test-tools": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
     "@react-native-community/cli-platform-ios": "^20.0.0",

@@ -28,9 +28,6 @@
       "path": "../theme-tokens/tsconfig.json"
     },
     {
-      "path": "../../framework/theme/tsconfig.json"
-    },
-    {
       "path": "../theming-utils/tsconfig.json"
     }
   ]

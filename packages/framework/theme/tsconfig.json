@@ -12,13 +12,7 @@
       "path": "../../agentic-design/tsconfig.json"
     },
     {
-      "path": "../../framework-base/tsconfig.json"
-    },
-    {
       "path": "../../../scripts/tsconfig.json"
-    },
-    {
-      "path": "../../utils/test-tools/tsconfig.json"
     }
   ]
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ThemeContext } from '@fluentui-react-native/design/theming';
+import { ThemeContext } from './context';
 
 import type { ThemeReference } from './themeReference';
 

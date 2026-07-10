@@ -13,7 +13,7 @@ We have a concept of `ThemeRecipes` which allow for layering of partial theme ob
 You can extend one of our default themes by creating a `ThemeReference` using the default theme as the base theme, and then add your customization as a `ThemeRecipe`:
 
 ```ts
-import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeReference, ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 import { Theme } from '@fluentui-react-native/framework';
 
@@ -104,7 +104,7 @@ This approach is useful if you need the customizations to be applied to all comp
 #### Win32
 
 ```ts
-import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeReference, ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createOfficeTheme } from '@fluentui-react-native/win32-theme';
 import { Theme } from '@fluentui-react-native/framework';
 
@@ -126,7 +126,7 @@ const theme = new ThemeReference(createOfficeTheme({ paletteName: 'palette' }),
 #### MacOS
 
 ```ts
-import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeReference, ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { Theme } from '@fluentui-react-native/framework';

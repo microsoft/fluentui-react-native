@@ -25,7 +25,7 @@ In practice this can be used to implement a theme, that has some values coming f
 
 ```ts
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
-import { ThemeReference } from '@fluentui-react-native/theme';
+import { ThemeReference } from '@fluentui-react-native/design/theming';
 
 // in this case wrapping the reference in a function makes it easy to encapsulate the invalidating
 export const createMyCustomTheme = () => {
