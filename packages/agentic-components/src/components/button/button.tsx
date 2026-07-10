@@ -1,23 +1,8 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
-import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
+/** @jsxImportSource @fluentui-react-native/framework-base */
+import { StyleSheet } from 'react-native';
 import type { FurnJSX } from '@fluentui-react-native/framework-base';
-
-/**
- * Props for the simple {@link Button} component.
- *
- * This is an intentionally minimal, plain react-native implementation used to scaffold the
- * agentic-components library, its tests, and storybook integration.
- */
-export type ButtonProps = {
-  /** Text label rendered inside the button. */
-  title: string;
-  /** Called when the button is pressed. */
-  onPress?: (event: GestureResponderEvent) => void;
-  /** When true, the button is non-interactive and rendered in a dimmed state. */
-  disabled?: boolean;
-  /** Optional style override applied to the pressable root. */
-  style?: StyleProp<ViewStyle>;
-};
+import type { ButtonProps } from './button.types';
+import { useButton_unstable } from './useButton';
 
 const styles = StyleSheet.create({
   root: {
@@ -48,17 +33,16 @@ const styles = StyleSheet.create({
  * A simple cross-platform button built directly on react-native primitives.
  */
 export function Button(props: ButtonProps): FurnJSX.Element {
-  const { title, onPress, disabled, style } = props;
+  const State = useButton_unstable(props);
+  const { pressed, shape } = State;
+  const disabled = Boolean(props.disabled);
+  const disabledStyle = disabled ? styles.disabled : undefined;
+  const pressedStyle = pressed ? styles.pressed : undefined;
+
   return (
-    <Pressable
-      accessibilityRole="button"
-      accessibilityState={{ disabled: !!disabled }}
-      disabled={disabled}
-      onPress={onPress}
-      style={({ pressed }) => [styles.root, pressed && styles.pressed, disabled && styles.disabled, style]}
-    >
-      <Text style={[styles.label, disabled && styles.labelDisabled]}>{title}</Text>
-    </Pressable>
+    <State.root accessibilityRole="button" accessibilityState={{ disabled }} style={[styles.root, shape, pressedStyle, disabledStyle]}>
+      <State.content style={[styles.label, disabled && styles.labelDisabled]} />
+    </State.root>
   );
 }
 Button.displayName = 'Button';

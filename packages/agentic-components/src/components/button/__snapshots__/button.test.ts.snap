@@ -50,35 +50,23 @@ exports[`Button component tests renders in a disabled state 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    [
-      {
-        "alignItems": "center",
-        "backgroundColor": "#0078d4",
-        "borderRadius": 4,
-        "justifyContent": "center",
-        "paddingHorizontal": 16,
-        "paddingVertical": 8,
-      },
-      false,
-      {
-        "backgroundColor": "#c8c8c8",
-      },
-      undefined,
-    ]
+    {
+      "alignItems": "center",
+      "backgroundColor": "#c8c8c8",
+      "borderRadius": 4,
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+      "paddingVertical": 8,
+    }
   }
 >
   <Text
     style={
-      [
-        {
-          "color": "#ffffff",
-          "fontSize": 14,
-          "fontWeight": "600",
-        },
-        {
-          "color": "#888888",
-        },
-      ]
+      {
+        "color": "#888888",
+        "fontSize": 14,
+        "fontWeight": "600",
+      }
     }
   >
     Disabled
@@ -136,31 +124,23 @@ exports[`Button component tests renders with a title 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    [
-      {
-        "alignItems": "center",
-        "backgroundColor": "#0078d4",
-        "borderRadius": 4,
-        "justifyContent": "center",
-        "paddingHorizontal": 16,
-        "paddingVertical": 8,
-      },
-      false,
-      undefined,
-      undefined,
-    ]
+    {
+      "alignItems": "center",
+      "backgroundColor": "#0078d4",
+      "borderRadius": 4,
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+      "paddingVertical": 8,
+    }
   }
 >
   <Text
     style={
-      [
-        {
-          "color": "#ffffff",
-          "fontSize": 14,
-          "fontWeight": "600",
-        },
-        undefined,
-      ]
+      {
+        "color": "#ffffff",
+        "fontSize": 14,
+        "fontWeight": "600",
+      }
     }
   >
     Click me
