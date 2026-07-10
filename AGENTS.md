@@ -84,6 +84,7 @@ The task pipeline is defined in `lage.config.mjs`:
 - Tasks declare dependency ordering (e.g. `test` dependsOn `build`)
 - `buildci` is the aggregate CI alias (lint-repo, check-publishing, build, test, lint)
 - Lage caches task outputs; add `--no-cache` to bypass caching and `--verbose` for detailed output
+- After a major rework (e.g. moving packages, large refactors, or renaming exports), run `yarn lage test --no-cache` from the root once to force every test to re-run without relying on stale cached results. This also resets the Lage cache, so subsequent plain `yarn lage test` runs will work incrementally again.
 
 ### Package-Level Commands
 
@@ -225,7 +226,7 @@ Components require `ThemeProvider` from `@fluentui-react-native/theme` to work p
   - Optional `e2eSections` prop for dedicated E2E test elements
 - Run E2E tests: `yarn e2etest:<platform>` from `/apps/E2E/`
 
-**Unit Tests**: Component-specific Jest tests where present, typically in `src/` directories. Run them with `yarn test` in a package or `yarn lage test` from the root.
+**Unit Tests**: Component-specific Jest tests where present, typically in `src/` directories. Run them with `yarn test` in a package or `yarn lage test` from the root. After a major rework, run `yarn lage test --no-cache` once at the root to ensure all tests re-run and pass without stale cache hits; this resets the Lage cache so a normal incremental `yarn lage test` works afterward.
 
 ### Platform-Specific Development
 
