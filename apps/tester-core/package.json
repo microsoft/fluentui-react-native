@@ -38,6 +38,7 @@
     "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/chip": "workspace:*",
     "@fluentui-react-native/default-theme": "workspace:*",
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/divider": "workspace:*",
     "@fluentui-react-native/drawer": "workspace:*",
     "@fluentui-react-native/dropdown": "workspace:*",

@@ -1,25 +1,25 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { size100, size120, size160, size200, size60, strokeWidth15 } from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { MenuItemRadioTokens } from './MenuItemRadio.types';
 
 export const defaultMenuItemRadioTokens: TokenSettings<MenuItemRadioTokens, Theme> = (t: Theme): MenuItemRadioTokens => ({
-  checkmarkSize: globalTokens.size120,
+  checkmarkSize: size120,
   color: t.colors.neutralForeground1,
   variant: 'body1',
-  gap: globalTokens.size160,
+  gap: size160,
   iconColor: t.colors.neutralForeground2,
-  iconSize: globalTokens.size200,
+  iconSize: size200,
   maxWidth: 300,
-  paddingVertical: globalTokens.size60,
-  paddingHorizontal: globalTokens.size160,
+  paddingVertical: size60,
+  paddingHorizontal: size160,
 
-  radioOuterCircleSize: globalTokens.size200,
-  radioInnerCircleSize: globalTokens.size100,
+  radioOuterCircleSize: size200,
+  radioInnerCircleSize: size100,
   radioBorderStyle: 'solid',
-  radioBorderWidth: globalTokens.stroke.width15,
-  rippleRadius: globalTokens.size160,
+  radioBorderWidth: strokeWidth15,
+  rippleRadius: size160,
 
   // Unselected, Rest
   radioBorder: t.colors.neutralStrokeAccessible,

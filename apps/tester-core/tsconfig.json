@@ -38,6 +38,9 @@
       "path": "../../packages/theming/default-theme/tsconfig.json"
     },
     {
+      "path": "../../packages/agentic-design/tsconfig.json"
+    },
+    {
       "path": "../../packages/components/Divider/tsconfig.json"
     },
     {

@@ -1,5 +1,15 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  cornerRadius20,
+  cornerRadius40,
+  cornerRadiusCircular,
+  cornerRadiusNone,
+  size20,
+  size40,
+  size60,
+  sizeNone,
+  strokeWidth10,
+} from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { BadgeTokens } from './Badge.types';
@@ -7,17 +17,17 @@ import type { BadgeTokens } from './Badge.types';
 export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
   ({
     iconSize: 12,
-    borderWidth: globalTokens.stroke.width10,
-    bottom: globalTokens.sizeNone,
-    right: globalTokens.sizeNone,
-    textMargin: globalTokens.size20,
+    borderWidth: strokeWidth10,
+    bottom: sizeNone,
+    right: sizeNone,
+    textMargin: size20,
     position: 'relative',
     shadowToken: undefined,
     tiny: {
       minWidth: 6,
       minHeight: 6,
       rounded: {
-        borderRadius: globalTokens.corner.radius20,
+        borderRadius: cornerRadius20,
       },
     },
     extraSmall: {
@@ -25,51 +35,51 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
       minHeight: 10,
       iconSize: 10,
       rounded: {
-        borderRadius: globalTokens.corner.radius20,
+        borderRadius: cornerRadius20,
       },
     },
     small: {
       minWidth: 16,
       minHeight: 16,
       iconSize: 12,
-      paddingHorizontal: globalTokens.size20,
-      textMargin: globalTokens.size20,
+      paddingHorizontal: size20,
+      textMargin: size20,
       rounded: {
-        borderRadius: globalTokens.corner.radius20,
+        borderRadius: cornerRadius20,
       },
     },
     medium: {
       minWidth: 20,
       minHeight: 20,
       iconSize: 12,
-      paddingHorizontal: globalTokens.size40,
-      textMargin: globalTokens.size20,
+      paddingHorizontal: size40,
+      textMargin: size20,
     },
     large: {
       minWidth: 24,
       minHeight: 24,
       iconSize: 16,
-      paddingHorizontal: globalTokens.size40,
-      textMargin: globalTokens.size20,
+      paddingHorizontal: size40,
+      textMargin: size20,
     },
     extraLarge: {
       minWidth: 32,
       minHeight: 32,
       iconSize: 20,
-      paddingHorizontal: globalTokens.size60,
-      textMargin: globalTokens.size20,
+      paddingHorizontal: size60,
+      textMargin: size20,
     },
     rounded: {
-      borderRadius: globalTokens.corner.radius40,
+      borderRadius: cornerRadius40,
     },
     circular: {
-      borderRadius: globalTokens.corner.radiusCircular,
+      borderRadius: cornerRadiusCircular,
     },
     square: {
-      borderRadius: globalTokens.corner.radiusNone,
+      borderRadius: cornerRadiusNone,
     },
     rtl: {
-      left: globalTokens.sizeNone,
+      left: sizeNone,
       right: undefined,
     },
   }) as BadgeTokens;

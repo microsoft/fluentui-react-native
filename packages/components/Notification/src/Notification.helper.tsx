@@ -5,7 +5,7 @@ import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { mergeProps, phasedComponent, directComponent } from '@fluentui-react-native/framework-base';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/icon';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { sizeNone } from '@fluentui-react-native/design/tokens/global';
 import Svg, { G, Path } from 'react-native-svg';
 import type { SvgProps } from 'react-native-svg';
 
@@ -77,8 +77,8 @@ export const NotificationButton = phasedComponent((props: NotificationButtonProp
         medium: {
           hasContent: {
             minWidth: 0,
-            padding: globalTokens.sizeNone,
-            paddingHorizontal: globalTokens.sizeNone,
+            padding: sizeNone,
+            paddingHorizontal: sizeNone,
             variant: 'body2Strong',
           },
         },

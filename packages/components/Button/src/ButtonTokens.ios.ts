@@ -1,5 +1,16 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  cornerRadius120,
+  cornerRadius80,
+  cornerRadiusCircular,
+  cornerRadiusNone,
+  size120,
+  size160,
+  size40,
+  size60,
+  size80,
+  strokeWidth10,
+} from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';
@@ -10,9 +21,9 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       width: '100%',
     },
     medium: {
-      paddingHorizontal: globalTokens.size120,
-      borderWidth: globalTokens.stroke.width10,
-      borderRadius: globalTokens.corner.radius80,
+      paddingHorizontal: size120,
+      borderWidth: strokeWidth10,
+      borderRadius: cornerRadius80,
       minHeight: 40,
       iconSize: 20,
       focused: {
@@ -21,17 +32,17 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       hasContent: {
         minWidth: 96,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.size80,
+          spacingIconContentAfter: size80,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.size80,
+          spacingIconContentBefore: size80,
         },
       },
     },
     small: {
-      paddingHorizontal: globalTokens.size60,
-      borderWidth: globalTokens.stroke.width10,
-      borderRadius: globalTokens.corner.radius80,
+      paddingHorizontal: size60,
+      borderWidth: strokeWidth10,
+      borderRadius: cornerRadius80,
       minHeight: 28,
       iconSize: 16,
       focused: {
@@ -41,18 +52,18 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         minWidth: 64,
         minHeight: 28,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.size40,
+          spacingIconContentAfter: size40,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.size40,
+          spacingIconContentBefore: size40,
         },
       },
     },
     large: {
-      paddingHorizontal: globalTokens.size160,
-      borderWidth: globalTokens.stroke.width10,
+      paddingHorizontal: size160,
+      borderWidth: strokeWidth10,
       iconSize: 20,
-      borderRadius: globalTokens.corner.radius120,
+      borderRadius: cornerRadius120,
       minHeight: 52,
       focused: {
         borderWidth: 0,
@@ -60,17 +71,17 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       hasContent: {
         minWidth: 96,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.size80,
+          spacingIconContentAfter: size80,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.size80,
+          spacingIconContentBefore: size80,
         },
       },
     },
     circular: {
-      borderRadius: globalTokens.corner.radiusCircular,
+      borderRadius: cornerRadiusCircular,
     },
     square: {
-      borderRadius: globalTokens.corner.radiusNone,
+      borderRadius: cornerRadiusNone,
     },
   }) as ButtonTokens;

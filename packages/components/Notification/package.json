@@ -32,6 +32,7 @@
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
     "@fluentui-react-native/button": "workspace:*",
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*",
     "@fluentui-react-native/experimental-shadow": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
@@ -40,7 +41,6 @@
     "@fluentui-react-native/interactive-hooks": "workspace:*",
     "@fluentui-react-native/pressable": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
-    "@fluentui-react-native/theme-tokens": "workspace:*",
     "@fluentui-react-native/theme-types": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
     "@fluentui-react-native/use-styling": "workspace:*"

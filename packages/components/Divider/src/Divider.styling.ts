@@ -6,7 +6,7 @@ import { memoize, mergeStyles } from '@fluentui-react-native/framework-base';
 import type { Theme } from '@fluentui-react-native/framework';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { size200 } from '@fluentui-react-native/design/tokens/global';
 import { fontStyles } from '@fluentui-react-native/tokens';
 
 import type { DividerTokens, DividerProps, DividerAppearance } from './Divider.types';
@@ -178,7 +178,7 @@ export const getRootStyle = memoize(getRootStyleWorker);
 function getRootStyleWorker(rootStyle: StyleProp<ViewStyle>, isVertical: boolean, hasContent: boolean): StyleProp<ViewStyle> {
   let minHeight = 0;
   if (isVertical) {
-    minHeight = hasContent ? 84 : globalTokens.size200;
+    minHeight = hasContent ? 84 : size200;
   }
   return mergeStyles<ViewStyle>(rootStyle, { minHeight });
 }

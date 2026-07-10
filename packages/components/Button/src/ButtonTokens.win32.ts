@@ -1,5 +1,17 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  cornerRadius40,
+  cornerRadiusCircular,
+  cornerRadiusNone,
+  size100,
+  size120,
+  size160,
+  size40,
+  size60,
+  size80,
+  strokeWidth10,
+  strokeWidth20,
+} from '@fluentui-react-native/design/tokens/global';
 import { isHighContrast } from '@fluentui-react-native/theming-utils';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
@@ -7,160 +19,160 @@ import type { ButtonTokens } from './Button.types';
 
 export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: Theme) =>
   ({
-    borderWidth: globalTokens.stroke.width10,
-    borderInnerWidth: globalTokens.stroke.width10,
+    borderWidth: strokeWidth10,
+    borderInnerWidth: strokeWidth10,
     block: {
       width: '100%',
     },
     medium: {
-      padding: globalTokens.size80 - globalTokens.stroke.width10,
+      padding: size80 - strokeWidth10,
       iconSize: 16,
       focused: {
         borderWidth: 0,
-        padding: globalTokens.size80,
+        padding: size80,
       },
       primary: !isHighContrast(theme) && {
         focused: {
-          borderWidth: globalTokens.stroke.width20,
-          padding: globalTokens.size80 - globalTokens.stroke.width20,
+          borderWidth: strokeWidth20,
+          padding: size80 - strokeWidth20,
         },
         square: {
           focused: {
-            borderWidth: globalTokens.stroke.width10,
-            padding: globalTokens.size80 - globalTokens.stroke.width10,
+            borderWidth: strokeWidth10,
+            padding: size80 - strokeWidth10,
           },
         },
       },
       hasContent: {
         minWidth: 96,
-        padding: globalTokens.size60 - globalTokens.stroke.width10,
-        paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
+        padding: size60 - strokeWidth10,
+        paddingHorizontal: size120 - strokeWidth10,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.size80,
+          spacingIconContentAfter: size80,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.size80,
+          spacingIconContentBefore: size80,
         },
         focused: {
-          padding: globalTokens.size60,
-          paddingHorizontal: globalTokens.size120,
+          padding: size60,
+          paddingHorizontal: size120,
         },
         primary: !isHighContrast(theme) && {
           focused: {
-            padding: globalTokens.size60 - globalTokens.stroke.width20,
-            paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
+            padding: size60 - strokeWidth20,
+            paddingHorizontal: size120 - strokeWidth20,
           },
           square: {
             focused: {
-              padding: globalTokens.size60 - globalTokens.stroke.width10,
-              paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
+              padding: size60 - strokeWidth10,
+              paddingHorizontal: size120 - strokeWidth10,
             },
           },
         },
       },
     },
     small: {
-      padding: globalTokens.size40 - globalTokens.stroke.width10,
+      padding: size40 - strokeWidth10,
       iconSize: 16,
       focused: {
         borderWidth: 0,
-        padding: globalTokens.size40,
+        padding: size40,
       },
       primary: !isHighContrast(theme) && {
         focused: {
-          borderWidth: globalTokens.stroke.width20,
-          padding: globalTokens.size40 - globalTokens.stroke.width20,
+          borderWidth: strokeWidth20,
+          padding: size40 - strokeWidth20,
         },
         square: {
           focused: {
-            borderWidth: globalTokens.stroke.width10,
-            padding: globalTokens.size40 - globalTokens.stroke.width10,
+            borderWidth: strokeWidth10,
+            padding: size40 - strokeWidth10,
           },
         },
       },
       hasContent: {
         minWidth: 64,
         minHeight: 24,
-        paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width10,
+        paddingHorizontal: size80 - strokeWidth10,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.size40,
+          spacingIconContentAfter: size40,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.size40,
+          spacingIconContentBefore: size40,
         },
         focused: {
-          paddingHorizontal: globalTokens.size80,
+          paddingHorizontal: size80,
         },
         primary: !isHighContrast(theme) && {
           focused: {
-            paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
+            paddingHorizontal: size80 - strokeWidth20,
           },
           square: {
             focused: {
-              paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width10,
+              paddingHorizontal: size80 - strokeWidth10,
             },
           },
         },
       },
     },
     large: {
-      padding: globalTokens.size100 - globalTokens.stroke.width10,
+      padding: size100 - strokeWidth10,
       iconSize: 20,
       focused: {
         borderWidth: 0,
-        padding: globalTokens.size100,
+        padding: size100,
       },
       primary: !isHighContrast(theme) && {
         focused: {
-          borderWidth: globalTokens.stroke.width20,
-          padding: globalTokens.size100 - globalTokens.stroke.width20,
+          borderWidth: strokeWidth20,
+          padding: size100 - strokeWidth20,
         },
         square: {
           focused: {
-            borderWidth: globalTokens.stroke.width10,
-            padding: globalTokens.size100 - globalTokens.stroke.width10,
+            borderWidth: strokeWidth10,
+            padding: size100 - strokeWidth10,
           },
         },
       },
       hasContent: {
         minWidth: 96,
         minHeight: 40,
-        padding: globalTokens.size80 - globalTokens.stroke.width10,
-        paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
+        padding: size80 - strokeWidth10,
+        paddingHorizontal: size160 - strokeWidth10,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.size60,
+          spacingIconContentAfter: size60,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.size60,
+          spacingIconContentBefore: size60,
         },
         focused: {
-          padding: globalTokens.size80,
-          paddingHorizontal: globalTokens.size160,
+          padding: size80,
+          paddingHorizontal: size160,
         },
         primary: !isHighContrast(theme) && {
           focused: {
-            padding: globalTokens.size80 - globalTokens.stroke.width20,
-            paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
+            padding: size80 - strokeWidth20,
+            paddingHorizontal: size160 - strokeWidth20,
           },
           square: {
             focused: {
-              padding: globalTokens.size80 - globalTokens.stroke.width10,
-              paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
+              padding: size80 - strokeWidth10,
+              paddingHorizontal: size160 - strokeWidth10,
             },
           },
         },
       },
     },
     rounded: {
-      borderRadius: globalTokens.corner.radius40,
-      borderInnerRadius: globalTokens.corner.radius40 - 1, // reduce the rounding so that the curvature matches
+      borderRadius: cornerRadius40,
+      borderInnerRadius: cornerRadius40 - 1, // reduce the rounding so that the curvature matches
     },
     circular: {
-      borderRadius: globalTokens.corner.radiusCircular,
-      borderInnerRadius: globalTokens.corner.radiusCircular - 1, // reduce the rounding so that the curvature matches
+      borderRadius: cornerRadiusCircular,
+      borderInnerRadius: cornerRadiusCircular - 1, // reduce the rounding so that the curvature matches
     },
     square: {
-      borderRadius: globalTokens.corner.radiusNone,
-      borderInnerRadius: globalTokens.corner.radiusNone,
+      borderRadius: cornerRadiusNone,
+      borderInnerRadius: cornerRadiusNone,
     },
   }) as ButtonTokens;

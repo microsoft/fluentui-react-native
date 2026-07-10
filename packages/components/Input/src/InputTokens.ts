@@ -1,5 +1,5 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { size120, size160, size40, size80, strokeWidth05 } from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { InputTokens } from './Input.types';
@@ -9,20 +9,20 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
     iconSize: 24,
     hasIcon: {
       //spacingIconContent + iconSize
-      spacingAssistiveTextStart: globalTokens.size160 + 24,
-      spacingLabelStart: globalTokens.size160 + 24,
+      spacingAssistiveTextStart: size160 + 24,
+      spacingLabelStart: size160 + 24,
     },
-    spacingIconContent: globalTokens.size160,
-    paddingHorizontal: globalTokens.size160,
-    spacingInputVertical: globalTokens.size120,
-    spacingAssistiveTextVertical: globalTokens.size40,
-    spacingLabelTop: globalTokens.size120,
-    spacingInputAccessory: globalTokens.size80,
-    spacingAccessoryIconStart: globalTokens.size80,
+    spacingIconContent: size160,
+    paddingHorizontal: size160,
+    spacingInputVertical: size120,
+    spacingAssistiveTextVertical: size40,
+    spacingLabelTop: size120,
+    spacingInputAccessory: size80,
+    spacingAccessoryIconStart: size80,
     spacingAssistiveTextStart: 0,
     spacingLabelStart: 0,
     accessoryIconSize: 24,
-    strokeWidth: globalTokens.stroke.width05,
+    strokeWidth: strokeWidth05,
 
     backgroundColor: t.colors.neutralBackground1,
     strokeColor: t.colors.neutralStroke1,

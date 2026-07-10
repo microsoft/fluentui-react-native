@@ -1,31 +1,40 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  colorDarkRedPrimary,
+  cornerRadiusCircular,
+  size120,
+  size160,
+  size20,
+  size200,
+  strokeWidth10,
+  strokeWidthNone,
+} from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { CheckboxTokens } from './Checkbox.types';
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
-    requiredColor: globalTokens.color.darkRed.primary,
-    requiredPadding: globalTokens.size20,
-    checkboxBorderWidth: globalTokens.stroke.width10,
-    checkboxBorderRadius: globalTokens.corner.radiusCircular,
-    checkboxSize: globalTokens.size200,
-    checkmarkSize: globalTokens.size120,
+    requiredColor: colorDarkRedPrimary,
+    requiredPadding: size20,
+    checkboxBorderWidth: strokeWidth10,
+    checkboxBorderRadius: cornerRadiusCircular,
+    checkboxSize: size200,
+    checkmarkSize: size120,
     label: {
       // Tokens taken from Android List Item
       color: t.colors.neutralForeground1,
-      padding: globalTokens.size20,
-      spacingLabelAfter: globalTokens.size160,
+      padding: size20,
+      spacingLabelAfter: size160,
       labelIsBefore: {
-        spacingLabelBefore: globalTokens.size120,
+        spacingLabelBefore: size120,
         spacingLabelAfter: 0,
       },
     },
     pressed: {
       checkboxBackgroundColor: t.colors.neutralBackground1Pressed,
     },
-    padding: globalTokens.size20,
+    padding: size20,
     variant: 'body1',
     checkboxBorderColor: t.colors.neutralStrokeAccessible,
     checkmarkOpacity: 0,
@@ -36,7 +45,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     checked: {
       checkboxBackgroundColor: t.colors.brandBackground,
       checkmarkOpacity: 1,
-      checkboxBorderWidth: globalTokens.stroke.widthNone,
+      checkboxBorderWidth: strokeWidthNone,
       checkmarkColor: t.colors.neutralForegroundOnColor,
       disabled: {
         checkboxBackgroundColor: t.colors.brandBackgroundDisabled,
