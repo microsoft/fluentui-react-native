@@ -564,7 +564,7 @@ exports[`createAndroidTheme test option { appearance: 'dark', defaultAppearance:
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
-        "weight": "700",
+        "weight": "400",
       },
       "title2": {
         "face": "Roboto",
@@ -1153,7 +1153,7 @@ exports[`createAndroidTheme test option { appearance: 'darkElevated', defaultApp
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
-        "weight": "700",
+        "weight": "400",
       },
       "title2": {
         "face": "Roboto",
@@ -1742,7 +1742,7 @@ exports[`createAndroidTheme test option { appearance: 'dynamic', defaultAppearan
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
-        "weight": "700",
+        "weight": "400",
       },
       "title2": {
         "face": "Roboto",
@@ -2331,7 +2331,7 @@ exports[`createAndroidTheme test option { appearance: 'highContrast', defaultApp
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
-        "weight": "700",
+        "weight": "400",
       },
       "title2": {
         "face": "Roboto",
@@ -2920,7 +2920,7 @@ exports[`createAndroidTheme test option { appearance: 'light', defaultAppearance
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
-        "weight": "700",
+        "weight": "400",
       },
       "title2": {
         "face": "Roboto",
@@ -3509,7 +3509,7 @@ exports[`getAndroidTheme dark appearance test 1`] = `
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
-        "weight": "700",
+        "weight": "400",
       },
       "title2": {
         "face": "Roboto",
@@ -4098,7 +4098,7 @@ exports[`getAndroidTheme light appearance test 1`] = `
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
-        "weight": "700",
+        "weight": "400",
       },
       "title2": {
         "face": "Roboto",
