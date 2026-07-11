@@ -1,16 +1,13 @@
+// This package is a compatibility shim. The theme type definitions now live in
+// the `@fluentui-react-native/design` package and are exposed via its `/theming`
+// submodule. These re-exports preserve the existing `@fluentui-react-native/theme-types`
+// entry point for backwards compatibility.
 export type {
   AliasColorTokens,
+  AppearanceOptions,
+  BaseShadowAliasTokens,
   Color,
   FabricWebPalette,
-  Palette,
-  PaletteBackgroundColors,
-  PaletteTextColors,
-  PartialPalette,
-  ThemeColorDefinition,
-} from './Color.types';
-export type { ShadowValue, ShadowToken, BaseShadowAliasTokens, ThemeShadowDefinition, PartialShadowDefinition } from './Shadow.types';
-export type { AppearanceOptions, PartialTheme, Spacing, Theme, ThemeOptions } from './Theme.types';
-export type {
   FontDynamicTypeRamp,
   FontFamilies,
   FontFamily,
@@ -21,12 +18,25 @@ export type {
   FontWeight,
   FontWeightValue,
   FontWeights,
+  OfficePalette,
+  Palette,
+  PaletteBackgroundColors,
+  PaletteTextColors,
+  PartialPalette,
+  PartialShadowDefinition,
+  PartialTheme,
   PartialTypography,
+  ShadowToken,
+  ShadowValue,
+  Spacing,
   TextStyling,
+  Theme,
+  ThemeColorDefinition,
+  ThemeOptions,
+  ThemeShadowDefinition,
   Typography,
   Variant,
   VariantValue,
   Variants,
-} from './Typography.types';
-export { ThemeContext, useTheme } from './context';
-export type { OfficePalette } from './palette.types';
+} from '@fluentui-react-native/design/theming';
+export { ThemeContext, useTheme } from '@fluentui-react-native/design/theming';

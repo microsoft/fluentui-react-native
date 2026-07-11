@@ -1,0 +1,1 @@
+export { mockTheme } from './mockTheme';

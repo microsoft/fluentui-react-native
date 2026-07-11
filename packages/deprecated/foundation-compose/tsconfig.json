@@ -12,13 +12,13 @@
       "path": "../../theming/default-theme/tsconfig.json"
     },
     {
+      "path": "../../agentic-design/tsconfig.json"
+    },
+    {
       "path": "../../framework-base/tsconfig.json"
     },
     {
       "path": "../../../scripts/tsconfig.json"
-    },
-    {
-      "path": "../../theming/theme-types/tsconfig.json"
     },
     {
       "path": "../foundation-composable/tsconfig.json"

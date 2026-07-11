@@ -22,7 +22,7 @@ registry.setTheme((parentTheme: Theme) => {
 the `ThemeReference` would have:
 
 ```ts
-import { ThemeReference } from '@fluentui-react-native/theme';
+import { ThemeReference } from '@fluentui-react-native/design/theming';
 import { Theme, PartialTheme } from '@fluentui-react-native/framework';
 
 const themeRef = new ThemeReference(
@@ -56,7 +56,7 @@ const App = () => {
 to
 
 ```ts
-import { ThemeProvider } from @fluentui-react-native/theme;
+import { ThemeProvider } from '@fluentui-react-native/design/theming';
 
 const App = () => {
   const themeRef = getThemeReference();

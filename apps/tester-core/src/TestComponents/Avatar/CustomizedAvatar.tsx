@@ -4,7 +4,7 @@ import { View, Text, TextInput, Platform, StyleSheet } from 'react-native';
 import { ToggleButton } from '@fluentui/react-native';
 import type { AvatarSize } from '@fluentui-react-native/avatar';
 import { Avatar } from '@fluentui-react-native/avatar';
-import type { FontWeight } from '@fluentui-react-native/theme-types';
+import type { FontWeight } from '@fluentui-react-native/design/theming';
 
 import { svgProps } from '../Common/iconExamples';
 import { commonTestStyles as commonStyles } from '../Common/styles';

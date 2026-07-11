@@ -4,7 +4,7 @@ import type { ViewStyle, ColorValue, ViewProps, AnimatableNumericValue } from 'r
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
-import type { ShadowToken } from '@fluentui-react-native/theme-types';
+import type { ShadowToken } from '@fluentui-react-native/design/theming';
 import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const buttonName = 'Button';

@@ -1,7 +1,7 @@
 import { Appearance } from 'react-native';
 
-import { ThemeReference } from '@fluentui-react-native/theme';
-import type { Theme } from '@fluentui-react-native/theme-types';
+import { ThemeReference } from '@fluentui-react-native/design/theming';
+import type { Theme } from '@fluentui-react-native/design/theming';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { AccessibilityInfo } from 'react-native-macos';
 

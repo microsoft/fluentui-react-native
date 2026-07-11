@@ -2,7 +2,7 @@ import type { ColorValue } from 'react-native';
 import { Platform } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework-base';
-import type { ShadowToken } from '@fluentui-react-native/theme-types';
+import type { ShadowToken } from '@fluentui-react-native/design/theming';
 
 /**
  * For iOS/macOS, the blur property from the token is not the same as the shadow radius value,

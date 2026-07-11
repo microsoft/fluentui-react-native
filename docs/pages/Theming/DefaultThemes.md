@@ -19,7 +19,7 @@ On win32, we allow for integration with Office theming via an `OfficeThemingModu
 You can create a theme using information from Office by calling `createOfficeTheme()`. By default, we use the `WhiteColors` palette. You can also ask for a specific palette's values by passing in a `paletteName` as part of the `ThemeOptions` passed into `createOfficeTheme()`:
 
 ```tsx
-import { ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createOfficeTheme } from '@fluentui-react-native/win32-theme';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { Text } from 'react-native';
@@ -55,7 +55,7 @@ Here's how the button component looks by default on every platform:
 ### Default (Web / Windows)
 
 ```tsx
-import { ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 
 <ThemeProvider theme={createDefaultTheme()}>
@@ -68,7 +68,7 @@ import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 ### Android
 
 ```tsx
-import { ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createAndroidTheme } from '@fluentui-react-native/android-theme';
 
 <ThemeProvider theme={createAndroidTheme()}>
@@ -81,7 +81,7 @@ import { createAndroidTheme } from '@fluentui-react-native/android-theme';
 ### iOS
 
 ```tsx
-import { ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 
 <ThemeProvider theme={createAppleTheme()}>
@@ -94,7 +94,7 @@ import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 ### MacOS
 
 ```tsx
-import { ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 
 <ThemeProvider theme={createAppleTheme()}>
@@ -107,7 +107,7 @@ import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 ### Win32 (Office)
 
 ```tsx
-import { ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createOfficeTheme } from '@fluentui-react-native/win32-theme';
 
 <ThemeProvider theme={createOfficeTheme()}>

@@ -48,9 +48,6 @@
       "path": "../Text/tsconfig.json"
     },
     {
-      "path": "../../theming/theme-types/tsconfig.json"
-    },
-    {
       "path": "../../theming/theming-utils/tsconfig.json"
     },
     {

@@ -10,6 +10,9 @@
   "exclude": ["**/*.stories.ts", "**/*.stories.tsx"],
   "references": [
     {
+      "path": "../framework-base/tsconfig.json"
+    },
+    {
       "path": "../../scripts/tsconfig.json"
     }
   ]

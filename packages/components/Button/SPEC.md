@@ -12,7 +12,7 @@ The `Button` component enables users to trigger an action or event, such as subm
 
 ## Requirements
 
-If using FURN's theming, the `Button` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](../../../docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
+If using FURN's theming, the `Button` requires use of the `ThemeProvider` from `@fluentui-react-native/design/theming` to work properly with themes. Please see [this page](../../../docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
 
 ## Sample Code
 

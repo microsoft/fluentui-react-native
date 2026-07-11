@@ -1,4 +1,4 @@
-import type { Theme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/design/theming';
 import type { UseTokens as UseTokensCore } from '@fluentui-react-native/use-tokens';
 import { buildUseTokens as buildUseTokensCore } from '@fluentui-react-native/use-tokens';
 

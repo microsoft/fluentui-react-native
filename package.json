@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "lage root-build",
+    "build:clean": "yarn root-build --clean && yarn build",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle:repo": "lage bundle",
     "clean": "tsgo -b --clean && lage clean",

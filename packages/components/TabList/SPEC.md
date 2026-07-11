@@ -6,7 +6,7 @@
 
 ## Requirements
 
-If using FURN's theming, the `TabList` and sub-component `Tab` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](../../../docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
+If using FURN's theming, the `TabList` and sub-component `Tab` requires use of the `ThemeProvider` from `@fluentui-react-native/design/theming` to work properly with themes. Please see [this page](../../../docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
 
 ## Sample Code
 

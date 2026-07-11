@@ -1,7 +1,7 @@
 import type { TextProps, TextStyle } from 'react-native';
 
 import type { ITextProps, ITextStyle } from '@fluentui-react-native/adapters';
-import type { Theme, Typography } from '@fluentui-react-native/theme-types';
+import type { Theme, Typography } from '@fluentui-react-native/design/theming';
 
 import { styleFunction } from './token.function';
 import type { TokenBuilder } from './tokenBuilder';

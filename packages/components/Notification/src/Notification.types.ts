@@ -5,7 +5,7 @@ import type { ButtonProps } from '@fluentui-react-native/button';
 import type { ShadowProps } from '@fluentui-react-native/experimental-shadow';
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import type { ShadowToken } from '@fluentui-react-native/theme-types';
+import type { ShadowToken } from '@fluentui-react-native/design/theming';
 import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 import type { NotificationButtonColorStates } from './Notification.helper';

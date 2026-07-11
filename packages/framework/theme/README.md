@@ -1,6 +1,6 @@
 # @fluentui-react-native/theme
 
-Code support for working with the themes defined in `@fluentui-react-native/theme-types`. This includes a `ThemeReference` class and a `ThemeProvider` implementation that works with the references.
+This package is a compatibility shim. The theme framework — the `ThemeReference` class and the `ThemeProvider` implementation — now lives in `@fluentui-react-native/design` and is exposed via its `@fluentui-react-native/design/theming` submodule. This package re-exports them so the existing `@fluentui-react-native/theme` entry point keeps working; new code should import from `@fluentui-react-native/design/theming`.
 
 ## `ThemeReference`
 
@@ -25,7 +25,7 @@ In practice this can be used to implement a theme, that has some values coming f
 
 ```ts
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
-import { ThemeReference } from '@fluentui-react-native/theme';
+import { ThemeReference } from '@fluentui-react-native/design/theming';
 
 // in this case wrapping the reference in a function makes it easy to encapsulate the invalidating
 export const createMyCustomTheme = () => {

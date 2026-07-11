@@ -9,6 +9,9 @@
   "include": ["src"],
   "references": [
     {
+      "path": "../../agentic-design/tsconfig.json"
+    },
+    {
       "path": "../../framework-base/tsconfig.json"
     },
     {
@@ -22,9 +25,6 @@
     },
     {
       "path": "../../utils/test-tools/tsconfig.json"
-    },
-    {
-      "path": "../../theming/theme-types/tsconfig.json"
     }
   ]
 }

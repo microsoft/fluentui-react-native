@@ -5,7 +5,7 @@ import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 
 import { mergeStyles, useSlot } from '@fluentui-react-native/framework-base';
-import type { Theme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/design/theming';
 import { applyTokenLayers } from '@fluentui-react-native/use-tokens';
 import * as renderer from 'react-test-renderer';
 

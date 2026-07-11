@@ -1,6 +1,6 @@
 import { memoize } from '@fluentui-react-native/framework-base';
 import { getAliasTokens } from '@fluentui-react-native/theme-tokens';
-import type { Variants } from '@fluentui-react-native/theme-types';
+import type { Variants } from '@fluentui-react-native/design/theming';
 import { mapFontPipelineToTheme } from '@fluentui-react-native/theming-utils';
 
 function createFontAliasTokensWorker(): Partial<Variants> {

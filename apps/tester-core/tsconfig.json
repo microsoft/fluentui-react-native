@@ -140,9 +140,6 @@
       "path": "../../packages/theming/theme-tokens/tsconfig.json"
     },
     {
-      "path": "../../packages/theming/theme-types/tsconfig.json"
-    },
-    {
       "path": "../../packages/framework/theme/tsconfig.json"
     },
     {
