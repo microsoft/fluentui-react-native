@@ -1,7 +1,7 @@
 component: Skeleton
 type: atomic
 
-variants: n/a  # No variant axes and no states. Single animating shape resized per instance.
+variants: n/a # No variant axes and no states. Single animating shape resized per instance.
 
 tokens:
   background:
@@ -24,11 +24,11 @@ tokens:
         the center and back to transparent — no dedicated stencil-highlight
         token is needed.
 
-  foreground: n/a  # No text, no icon — Skeleton has no foreground content.
+  foreground: n/a # No text, no icon — Skeleton has no foreground content.
 
   stroke:
     container: no-stroke
-    focus: n/a  # Non-interactive — no focus ring.
+    focus: n/a # Non-interactive — no focus ring.
 
   radius:
     bar:
@@ -42,7 +42,7 @@ tokens:
 
   typography: n/a
 
-  spacing: n/a  # Skeleton has no padding and no internal layout — it is a single rectangle.
+  spacing: n/a # Skeleton has no padding and no internal layout — it is a single rectangle.
 
   elevation: n/a
 

@@ -72,7 +72,7 @@ properties:
   component:
     Label string:
       type: TEXT
-      default: "Label"
+      default: 'Label'
       notes: Bound to the visible label node. Shown when Label=true.
     Label:
       type: BOOLEAN

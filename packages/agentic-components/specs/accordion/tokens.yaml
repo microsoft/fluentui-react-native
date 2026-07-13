@@ -64,7 +64,7 @@ properties:
   component:
     Title string:
       type: TEXT
-      default: "Section title"
+      default: 'Section title'
       notes: Bound to the title text node in the Header.
     Icon:
       type: BOOLEAN

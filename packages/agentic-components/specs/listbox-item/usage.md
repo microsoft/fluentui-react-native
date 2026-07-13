@@ -15,7 +15,7 @@ component: ListboxItem
 
 ListboxItem and MenuItem share anatomy, slots, and most tokens, but they belong to different ARIA patterns and represent different user intents.
 
-- **Intent.** ListboxItem represents a candidate *value* within a selection set (one of these is or becomes the answer). MenuItem represents a discrete *action* or command within a transient overlay.
+- **Intent.** ListboxItem represents a candidate _value_ within a selection set (one of these is or becomes the answer). MenuItem represents a discrete _action_ or command within a transient overlay.
 - **Selection semantics.** Selected on ListboxItem means "this is the chosen value" — persistent and announced as `aria-pressed`. Selected on MenuItem means "this option is active in this menu" (e.g. a single-select submenu of view modes) — announced as `aria-checked` via `menuitemradio` / `menuitemcheckbox`.
 - **Element + role.** ListboxItem is a `<button type="button">` with `aria-pressed`. MenuItem is an element with `role="menuitem"` (or `menuitemradio` / `menuitemcheckbox`). Both receive real DOM focus from their parent — the parent moves focus between them with arrow keys.
 - **Container.** Use ListboxItem inside a Dropdown's Popover (or another selection overlay built on Popover). Use MenuItem inside a Menu. Do not swap them — the ARIA roles, keyboard semantics, and announcement patterns are not interchangeable.

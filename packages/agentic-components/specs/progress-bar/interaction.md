@@ -22,6 +22,7 @@ ProgressBar's three Types each have distinct animation behavior:
 - **Static** — No animation under any circumstance. Width changes from a value update snap to the new width with no transition. Animating a Static change reframes it as Determinate progress, which it is not.
 
 > **Reduced motion (the OS reduce-motion setting):**
+>
 > - **Determinate** — Value transitions become instant (`transition: none` on Indicator width). The bar still updates to the correct value; only the animation between values is removed.
 > - **Indeterminate** — The continuous loop animation is removed entirely. The Indicator renders as a static neutral fill at a fixed position (or as a fully-filled Track with reduced opacity, depending on implementation). The ARIA semantics declared in `accessibility.md` carry the "work in flight" meaning instead of the visual loop.
 > - **Static** — Already has no animation. No change.

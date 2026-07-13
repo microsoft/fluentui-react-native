@@ -11,10 +11,10 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | composed |
-| Component | Menu |
+| Field     | Value    |
+| --------- | -------- |
+| Type      | composed |
+| Component | Menu     |
 
 This spec covers the Menu component — the composed container surface. For individual item tokens and variant definitions, see `flex-components:menu-item`. React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, open/close, submenu) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
 
@@ -42,9 +42,9 @@ Answer design questions directly — lead with rationale, then tokens. The most 
 4. **List Items** — interactive MenuItem instances (Style=List Item). The primary content of the menu.
 5. **Dividers** — optional visual separators between groups of items.
 
-| Slot | Required | Default | Accepts |
-|------|----------|---------|---------|
-| Content Slot | Yes | MenuItem instances | MenuItem (Section Header / List Item), Divider |
+| Slot         | Required | Default            | Accepts                                        |
+| ------------ | -------- | ------------------ | ---------------------------------------------- |
+| Content Slot | Yes      | MenuItem instances | MenuItem (Section Header / List Item), Divider |
 
 > **Figma symbol width:** The Menu symbol is fixed at 240px in Figma for legibility in the library — it is not a hard sizing rule. At runtime, Menu width is determined by content and stretches to fit the widest item.
 

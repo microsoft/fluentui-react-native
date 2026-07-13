@@ -148,11 +148,11 @@ properties:
   component:
     Item string:
       type: TEXT
-      default: "Listbox item"
+      default: 'Listbox item'
       notes: Bound to the visible label node; ghost node has no prop binding.
     Secondary string:
       type: TEXT
-      default: "Secondary"
+      default: 'Secondary'
       notes: Secondary content text. Hidden when Secondary content prop is false.
     Icon:
       type: BOOLEAN

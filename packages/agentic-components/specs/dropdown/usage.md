@@ -8,7 +8,7 @@ component: Dropdown
 
 - To let users pick one (Single) or many (Multiple) values from a known set of options within a form.
 - To compress a long list of options into a compact trigger, revealing the list on demand.
-- To filter or sort information in a UI — Dropdown is the standard control for "show me only / sort by ___" selections.
+- To filter or sort information in a UI — Dropdown is the standard control for "show me only / sort by \_\_\_" selections.
 - When the surrounding form uses Input components — Dropdown's Style and Size axes match Input so the form reads as a unified set of fields.
 - When you need JSX or styled options (icons, avatars, custom layout) — otherwise prefer native `<select>` (see vs Select below).
 
@@ -16,7 +16,7 @@ component: Dropdown
 
 - **Do not use for typeahead/filtering.** Dropdown's trigger is a non-editable `<button>`; it cannot accept text input. If users need to type to narrow the list, use a Combobox (not yet built — flag the gap rather than misusing Dropdown).
 - **Do not use for ≤ 10 always-visible options.** RadioGroup (Single) or CheckboxGroup (Multiple) are significantly more discoverable and more accessible when the option set is small.
-- **Do not use for actions.** Dropdown returns a *value*. If the affordance is "pick what should happen next", that's a Menu attached to a Button.
+- **Do not use for actions.** Dropdown returns a _value_. If the affordance is "pick what should happen next", that's a Menu attached to a Button.
 - **Do not use as a navigation control.** Picking a value should not navigate the user to a new page; that's a nav component pattern.
 
 ### vs Select
@@ -36,7 +36,7 @@ Combobox is the typeahead-filtering selection control. It is built on a real `<i
 
 ### vs Menu
 
-Menu invokes *actions* (`role="menu"`, `menuitem`). Dropdown selects *values* — its rows are `<button>` elements with `aria-pressed`. Same UI affordance ("popover with a list inside"), different intent. If the rows trigger actions ("Edit", "Delete", "Duplicate"), use Menu. If the rows are candidate values ("Active", "Inactive", "Archived"), use Dropdown.
+Menu invokes _actions_ (`role="menu"`, `menuitem`). Dropdown selects _values_ — its rows are `<button>` elements with `aria-pressed`. Same UI affordance ("popover with a list inside"), different intent. If the rows trigger actions ("Edit", "Delete", "Duplicate"), use Menu. If the rows are candidate values ("Active", "Inactive", "Archived"), use Dropdown.
 
 ### vs RadioGroup
 
@@ -71,7 +71,7 @@ Same axis as RadioGroup, for Multiple selections. CheckboxGroup keeps all option
 - **Popover width ≥ trigger width.** The Popover should be at least as wide as the trigger, optionally wider if option labels exceed the trigger width. Never narrower — the option list should never look "trimmed" relative to the trigger.
 - **Popover height is parent-bounded.** The row list scrolls internally beyond a product-level row cap (typically 8–10 rows visible). The Popover's max-height is constrained by the viewport.
 - **Error state placement.** Error state (red stroke) lives on the trigger, mirroring Input Error. Error messaging text lives in a Field wrapper or below the trigger — Dropdown does not own its own helper-text slot.
-- **Place Dropdown only on sufficiently-contrasting surfaces.** The trigger's stroke (Outline) or bottom edge (Underline) must meet 3:1 against the *immediately surrounding* page color, not just against the trigger's own background. Dropdowns placed on subtle panels over subtle pages frequently fail — verify in context. Underline-style Dropdowns additionally need 4.5:1 between placeholder/value text and the page background.
+- **Place Dropdown only on sufficiently-contrasting surfaces.** The trigger's stroke (Outline) or bottom edge (Underline) must meet 3:1 against the _immediately surrounding_ page color, not just against the trigger's own background. Dropdowns placed on subtle panels over subtle pages frequently fail — verify in context. Underline-style Dropdowns additionally need 4.5:1 between placeholder/value text and the page background.
 
 ---
 

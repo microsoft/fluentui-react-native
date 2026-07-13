@@ -11,9 +11,9 @@ variants:
       size group; see the stroke.width table below.
 
 tokens:
-  background: n/a  # Spinner is two strokes on a transparent canvas; no fill.
+  background: n/a # Spinner is two strokes on a transparent canvas; no fill.
 
-  foreground: n/a  # Spinner has no text and no icon — strokes carry all visual weight.
+  foreground: n/a # Spinner has no text and no icon — strokes carry all visual weight.
 
   stroke:
     width:
@@ -41,7 +41,7 @@ tokens:
         Loud neutral stroke provides clear contrast against the subtle track,
         so the rotating arc reads as the active signal even at the smallest
         diameter (16px).
-    focus: n/a  # Non-interactive — no focus ring.
+    focus: n/a # Non-interactive — no focus ring.
 
   radius:
     track: borderRadiusCircular
@@ -84,7 +84,7 @@ tokens:
       size group so the label tracks the spinner's optical weight. Spinner
       has no internal padding; consumers control all spacing around it.
 
-  elevation: n/a  # Spinner sits on its surrounding surface; it does not float.
+  elevation: n/a # Spinner sits on its surrounding surface; it does not float.
 
   motion:
     status: pending

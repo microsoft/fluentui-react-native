@@ -209,11 +209,11 @@ properties:
   component:
     Primary string:
       type: TEXT
-      default: "List item"
+      default: 'List item'
       notes: Bound to the visible primary label node; ghost Semibold node reserves layout width but has no prop binding.
     Secondary string:
       type: TEXT
-      default: "Secondary"
+      default: 'Secondary'
       notes: Secondary content text. Hidden when Secondary content prop is false.
     Secondary content:
       type: BOOLEAN

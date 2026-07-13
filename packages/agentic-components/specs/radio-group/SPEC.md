@@ -11,9 +11,9 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | molecular |
+| Field     | Value      |
+| --------- | ---------- |
+| Type      | molecular  |
 | Component | RadioGroup |
 
 This spec covers the RadioGroup component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, roving tabindex) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
@@ -41,9 +41,9 @@ The Legend is composed from `flex-components:label` (Weight=Strong, Size=Medium)
 3. **Options container** — auto-layout flex container holding the Radio children. Orientation (vertical column vs horizontal row) is determined by the RadioGroup Orientation variant. Owns the gap between adjacent Radio children.
 4. **Radio items** — Radio instances added as direct children of the Options container. The container is a single slot that accepts two to five Radios — authors add or remove Radio instances in the slot rather than toggling pre-scaffolded visibility booleans. Selection state across the group is coordinated by RadioGroup so that exactly one (or none, before any choice is made) is Selected at any time.
 
-| Slot | Required | Default |
-|------|----------|---------|
-| Legend | Yes | Visible ("Group label") |
+| Slot   | Required            | Default                            |
+| ------ | ------------------- | ---------------------------------- |
+| Legend | Yes                 | Visible ("Group label")            |
 | Radios | Yes (2–5 instances) | Five Radios with Status=Unselected |
 
 ---
@@ -54,19 +54,19 @@ Variant properties are ordered in the design tool: **Orientation → Required**.
 
 #### Orientation
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **Vertical** | Radios stack in a column, one per line | Default for most choice lists — easier to scan and compare options reading top-to-bottom |
-| **Horizontal** | Radios sit in a row, side by side | When option labels are very short (one or two words) and horizontal space is constrained, or when the choice reads naturally as a left-to-right axis (yes/no, low/medium/high) |
+| Value          | Description                            | When to Use                                                                                                                                                                    |
+| -------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Vertical**   | Radios stack in a column, one per line | Default for most choice lists — easier to scan and compare options reading top-to-bottom                                                                                       |
+| **Horizontal** | Radios sit in a row, side by side      | When option labels are very short (one or two words) and horizontal space is constrained, or when the choice reads naturally as a left-to-right axis (yes/no, low/medium/high) |
 
 **Why two orientations:** Orientation is a structural decision that affects reading flow, scan density, and the keyboard mental model (Down/Up vs Left/Right). Splitting it as a variant keeps the Radio child component itself orientation-agnostic — Radio's interaction layer already supports both axis pairs of arrow keys, so the variant is purely about layout.
 
 #### Required
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **false (Default)** | Legend renders without the trailing asterisk | Default — most groups are optional or required-state is communicated elsewhere on the form |
-| **true** | Legend renders with the trailing required-indicator asterisk | When the group must be answered to submit the form — must be paired with `aria-required="true"` on each child Radio (see `accessibility.md`) |
+| Value               | Description                                                  | When to Use                                                                                                                                  |
+| ------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **false (Default)** | Legend renders without the trailing asterisk                 | Default — most groups are optional or required-state is communicated elsewhere on the form                                                   |
+| **true**            | Legend renders with the trailing required-indicator asterisk | When the group must be answered to submit the form — must be paired with `aria-required="true"` on each child Radio (see `accessibility.md`) |
 
 **Why Required is at the group level:** A RadioGroup is the unit of answering — required state applies to "did the user choose any of these options," not to any individual Radio. Authors mark the whole group required by toggling this slot; the composed Label sub-component renders the asterisk on the Legend. Per-Radio Required has no meaning in a single-select group, which is why Radio pins `Required=Off` on its own composed Label.
 

@@ -62,7 +62,6 @@ tokens:
       stroke itself swaps to colorStrokeNeutralHeavy on focus —
       Outline as a full border, Underline as the bottom edge.
 
-
   radius:
     all-styles:
       Small: borderRadiusBase200
@@ -101,21 +100,21 @@ tokens:
     guidance: Stroke transitions ≤150ms ease-in-out. Focus may be instant. Reduced motion removes transitions entirely.
 sizes:
   Small:
-    resultant-height: 25px   # round(12 × 1.4) + 4×2 = 17 + 8
+    resultant-height: 25px # round(12 × 1.4) + 4×2 = 17 + 8
     icon: 16px
   Medium:
-    resultant-height: 32px   # round(14 × 1.4) + 6×2 = 20 + 12
+    resultant-height: 32px # round(14 × 1.4) + 6×2 = 20 + 12
     icon: 20px
   Large:
-    resultant-height: 38px   # round(16 × 1.4) + 8×2 = 22 + 16. Vertical padding matches Button Large for cross-component height alignment.
+    resultant-height: 38px # round(16 × 1.4) + 8×2 = 22 + 16. Vertical padding matches Button Large for cross-component height alignment.
     icon: 24px
   notes: Heights are resultant from padding + typography + stroke. Icon sizes (16/20/24px) are hardcoded — no token coverage.
 
 properties:
   component:
-    Icon Start:    { type: BOOLEAN, default: false }
-    Icon End 1:    { type: BOOLEAN, default: false, notes: shows Icon End container }
-    Icon End 2:    { type: BOOLEAN, default: false, notes: requires Icon End 1 }
+    Icon Start: { type: BOOLEAN, default: false }
+    Icon End 1: { type: BOOLEAN, default: false, notes: shows Icon End container }
+    Icon End 2: { type: BOOLEAN, default: false, notes: requires Icon End 1 }
     Icon Start 24px Regular: { type: INSTANCE_SWAP, default: Image icon (24px Regular), binding: Large size, leading icon }
     Icon Start 20px Regular: { type: INSTANCE_SWAP, default: Image icon (20px Regular), binding: Medium size, leading icon }
     Icon Start 16px Regular: { type: INSTANCE_SWAP, default: Image icon (16px Regular), binding: Small size, leading icon }

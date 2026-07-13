@@ -11,9 +11,9 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | atomic |
+| Field     | Value       |
+| --------- | ----------- |
+| Type      | atomic      |
 | Component | ProgressBar |
 
 This spec covers the ProgressBar component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (animation, reduced motion) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
@@ -36,12 +36,12 @@ Answer design questions directly — lead with rationale, then tokens. The most 
 6. **Track** — full-width rail beneath the Header. Owns the bar's pill radius.
 7. **Indicator** — fill positioned inside the Track. Width is value-driven for Determinate and Static (percentage of Track width); for Indeterminate it animates across the Track (see `interaction.md`). Color is set per the active Status — see "Why the Indicator uses cross-family token application" in Variants below.
 
-| Slot | Required | Default |
-|------|----------|---------|
-| Header | Yes | Visible |
-| Label | Yes | Visible inside the Header |
-| Value text | No | Visible inside the Header |
-| Validation icon | No | Hidden; enable for Error / Success when feedback is needed |
+| Slot            | Required | Default                                                    |
+| --------------- | -------- | ---------------------------------------------------------- |
+| Header          | Yes      | Visible                                                    |
+| Label           | Yes      | Visible inside the Header                                  |
+| Value text      | No       | Visible inside the Header                                  |
+| Validation icon | No       | Hidden; enable for Error / Success when feedback is needed |
 
 > **Indicator color and Status:** The Indicator fill is the only token that changes with Status. The Track stays neutral across all statuses so the bar's affordance is consistent and the color signal is carried by the moving/filled portion alone.
 
@@ -53,21 +53,21 @@ Variant properties are ordered in the design tool: **Type → Status**.
 
 #### Type
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **Determinate (Default)** | Animated indicator whose width reflects a known percentage. | Tasks where progress is calculable — uploads, downloads, multi-step flows. Preferred whenever a percentage exists. |
-| **Indeterminate** | Continuously-animated indicator with no fixed width. Communicates "work in flight, duration unknown." | Brief operations where progress cannot be calculated. Switch to Determinate as soon as a percentage becomes available. |
-| **Static** | Indicator width reflects a fixed value. No animation. | Snapshots of a continuous quantity — storage capacity, quota fill, score. The value is a state, not a moving target. |
+| Value                     | Description                                                                                           | When to Use                                                                                                            |
+| ------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Determinate (Default)** | Animated indicator whose width reflects a known percentage.                                           | Tasks where progress is calculable — uploads, downloads, multi-step flows. Preferred whenever a percentage exists.     |
+| **Indeterminate**         | Continuously-animated indicator with no fixed width. Communicates "work in flight, duration unknown." | Brief operations where progress cannot be calculated. Switch to Determinate as soon as a percentage becomes available. |
+| **Static**                | Indicator width reflects a fixed value. No animation.                                                 | Snapshots of a continuous quantity — storage capacity, quota fill, score. The value is a state, not a moving target.   |
 
 **Why three Type values instead of a boolean `indeterminate`:** Determinate and Static share width-driven rendering but differ in animation behavior — Determinate animates value transitions, Static does not. Collapsing both under a single "determinate" mode would force consumers to disable animation per-instance and obscures the snapshot-vs-progress distinction. Indeterminate has its own rendering path entirely (continuous loop, no value).
 
 #### Status
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **Neutral (Default)** | Indicator uses the brand palette. No Validation icon. | Default — task is in progress without success or failure semantics. |
-| **Error** | Indicator uses the danger palette. Validation icon (Error Circle Filled) appears in the Header. | Task has failed or cannot complete. Replace the Value text with an error message. |
-| **Success** | Indicator uses the success palette. Validation icon (Checkmark Circle Filled) appears in the Header. | Task has completed successfully and the bar is held briefly before dismissal. |
+| Value                 | Description                                                                                          | When to Use                                                                       |
+| --------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **Neutral (Default)** | Indicator uses the brand palette. No Validation icon.                                                | Default — task is in progress without success or failure semantics.               |
+| **Error**             | Indicator uses the danger palette. Validation icon (Error Circle Filled) appears in the Header.      | Task has failed or cannot complete. Replace the Value text with an error message. |
+| **Success**           | Indicator uses the success palette. Validation icon (Checkmark Circle Filled) appears in the Header. | Task has completed successfully and the bar is held briefly before dismissal.     |
 
 **Why three statuses, not four:** Warning is intentionally omitted. A progress bar is binary at the boundary — it either succeeds or it doesn't. "In trouble but not failed" is a Determinate progress state with neutral semantics; the surrounding context (a MessageBar, helper text) carries the caution signal. See [`flex-components:message-bar`](../message-bar/SKILL.md) for the Warning palette.
 

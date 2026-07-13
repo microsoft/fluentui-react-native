@@ -86,7 +86,6 @@ tokens:
       Focus ring wraps the entire interactive area (indicator + label),
       so it uses a larger radius than the indicator itself.
 
-
   typography:
     label:
       source: flex-components:label
@@ -166,11 +165,11 @@ properties:
   component:
     Label string:
       type: TEXT
-      default: "Label"
+      default: 'Label'
       notes: Binds through to the text node of the composed flex-components:label sub-component.
     Secondary text string:
       type: TEXT
-      default: "Description"
+      default: 'Description'
       notes: Bound to the secondary text node beneath the label. Only visible when Secondary text property is true.
     Secondary text:
       type: BOOLEAN

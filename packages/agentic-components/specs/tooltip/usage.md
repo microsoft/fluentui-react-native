@@ -30,9 +30,9 @@ component: Tooltip
 
 - **Always prefer Above positioning as the default.**
 
-| Value | When to Use |
-|-------|-------------|
-| **Above** | Default. Use when there is sufficient space above the trigger. |
+| Value     | When to Use                                                                           |
+| --------- | ------------------------------------------------------------------------------------- |
+| **Above** | Default. Use when there is sufficient space above the trigger.                        |
 | **Below** | When the trigger is near the top of the viewport or above-placement would be clipped. |
-| **Left** | When horizontal space is available and vertical placement is constrained. |
-| **Right** | When horizontal space is available and vertical placement is constrained. |
+| **Left**  | When horizontal space is available and vertical placement is constrained.             |
+| **Right** | When horizontal space is available and vertical placement is constrained.             |

@@ -18,7 +18,7 @@ component: Label
 - **Always pair Label with a form control.** A standalone Label with no associated control is meaningless — there is nothing to name. If you need uncoupled text, use body text or a heading.
 - **Mirror Disabled with the associated control.** When the associated control is disabled, set Label to Disabled too. A Rest Label next to a Disabled control reads as a labeling bug and creates a perception that the control could be activated.
 - **Required and Disabled compose.** A field can be Required + Disabled (the field is required when re-enabled, but currently unavailable). In that combination, the asterisk drops danger color and inherits disabled foreground — the asterisk is not a state indicator on its own.
-- **Required indicator is a marker, not a message.** The asterisk signals required state but does not explain it. If a form has any required fields, include a key elsewhere on the surface (e.g. "* indicates required field") or use natural-language indication in helper text — do not rely on the asterisk alone for users who may not recognize the convention.
+- **Required indicator is a marker, not a message.** The asterisk signals required state but does not explain it. If a form has any required fields, include a key elsewhere on the surface (e.g. "\* indicates required field") or use natural-language indication in helper text — do not rely on the asterisk alone for users who may not recognize the convention.
 - **Supplemental context belongs elsewhere.** Label names its associated control — it is not the place to attach optional explanatory affordances. Surface supplemental context through helper text, a description, or a separate InfoLabel composition when one is available.
 
 ---

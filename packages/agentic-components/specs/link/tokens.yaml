@@ -85,7 +85,7 @@ properties:
   component:
     Label string:
       type: TEXT
-      default: "Link"
+      default: 'Link'
       notes: Bound to the Label text node. Required.
     16px Regular:
       type: INSTANCE_SWAP

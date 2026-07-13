@@ -111,13 +111,13 @@ properties:
   component:
     Message string:
       type: TEXT
-      default: "Message providing information with actionable insights."
+      default: 'Message providing information with actionable insights.'
     Action 1 label:
       type: TEXT
-      default: "Action"
+      default: 'Action'
     Action 2 label:
       type: TEXT
-      default: "Action"
+      default: 'Action'
     notes: >
       No BOOLEAN show/hide props exist at the component set level.
       Dismiss button and action buttons are nested Button sub-components —

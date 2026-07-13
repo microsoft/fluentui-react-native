@@ -21,11 +21,11 @@ component: ProgressBar
 
 ### vs Spinner
 
-ProgressBar communicates *how much* progress has been made or that work has a measurable shape. Spinner communicates only *that* work is happening. Use Spinner for short waits where progress is not measurable and the surface area is constrained (inline within a button, on a card). Use Indeterminate ProgressBar when the wait spans the width of a section or page and a horizontal indicator reads more naturally than a rotating spinner.
+ProgressBar communicates _how much_ progress has been made or that work has a measurable shape. Spinner communicates only _that_ work is happening. Use Spinner for short waits where progress is not measurable and the surface area is constrained (inline within a button, on a card). Use Indeterminate ProgressBar when the wait spans the width of a section or page and a horizontal indicator reads more naturally than a rotating spinner.
 
 ### vs Skeleton
 
-ProgressBar represents the progress of a task. Skeleton represents the *shape* of content that is about to appear — text lines, image blocks, table rows. Use Skeleton when the content has a known layout that will be replaced in place. Use ProgressBar when there is no incoming content shape, only an ongoing operation.
+ProgressBar represents the progress of a task. Skeleton represents the _shape_ of content that is about to appear — text lines, image blocks, table rows. Use Skeleton when the content has a known layout that will be replaced in place. Use ProgressBar when there is no incoming content shape, only an ongoing operation.
 
 ### vs MessageBar
 

@@ -55,7 +55,6 @@ tokens:
       stroke itself swaps to colorStrokeNeutralHeavy in Focus state
       (focus semantics) as a full border.
 
-
   radius: borderRadiusBase300
 
   radius-by-size:
@@ -75,7 +74,6 @@ tokens:
       `none`). The color, size, and inset describe the Figma glyph only and are
       not implemented as code tokens. Shown by default in Figma to mirror the
       default Vertical resize behavior.
-
 
   typography:
     rest: textstyle-functional-body-medium
@@ -114,11 +112,11 @@ sizes:
     and border radius. Resulting min-heights accommodate approximately 2-3 lines
     per size. No icon sizes — Textarea has no icon slots.
   Small:
-    min-height: 56px   # round(12 × 1.4) + 4×2 = 17 + 8
+    min-height: 56px # round(12 × 1.4) + 4×2 = 17 + 8
   Medium:
-    min-height: 64px   # round(14 × 1.4) + 6×2 = 20 + 12
+    min-height: 64px # round(14 × 1.4) + 6×2 = 20 + 12
   Large:
-    min-height: 76px   # round(16 × 1.4) + 8×2 = 22 + 16
+    min-height: 76px # round(16 × 1.4) + 8×2 = 22 + 16
   notes-detail: Heights are resultant from padding + typography + stroke. Size variants match Input's Small/Medium/Large scale.
 
 properties:

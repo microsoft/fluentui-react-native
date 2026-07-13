@@ -178,13 +178,13 @@ tokens:
     guidance: State color transitions should be fast (typically ≤150ms) with standard ease-in-out. Reduced motion — remove transitions entirely.
 sizes:
   Small:
-    resultant-height: 25px   # Icon-and-text: round(12 × 1.4) + 4×2 = 17 + 8. Icon-only is 24px (4×2 padding + 16px icon).
+    resultant-height: 25px # Icon-and-text: round(12 × 1.4) + 4×2 = 17 + 8. Icon-only is 24px (4×2 padding + 16px icon).
     icon: 16px
   Medium:
-    resultant-height: 32px   # Icon-and-text: round(14 × 1.4) + 6×2 = 20 + 12. Icon-only is 32px (6×2 padding + 20px icon).
+    resultant-height: 32px # Icon-and-text: round(14 × 1.4) + 6×2 = 20 + 12. Icon-only is 32px (6×2 padding + 20px icon).
     icon: 20px
   Large:
-    resultant-height: 38px   # Icon-and-text: round(16 × 1.4) + 8×2 = 22 + 16. Icon-only is 40px (10×2 padding + 20px icon).
+    resultant-height: 38px # Icon-and-text: round(16 × 1.4) + 8×2 = 22 + 16. Icon-only is 40px (10×2 padding + 20px icon).
     icon: 20px
   notes: >
     Heights are resultant — derived from padding + typography + stroke. Listed values are for Icon-and-text;
@@ -196,7 +196,7 @@ properties:
   component:
     Label string:
       type: TEXT
-      default: "Button"
+      default: 'Button'
       notes: Bound to the visible label node only; ghost node has no prop binding.
     20px Regular:
       type: INSTANCE_SWAP

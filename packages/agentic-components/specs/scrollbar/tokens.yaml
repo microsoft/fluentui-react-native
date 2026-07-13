@@ -18,7 +18,7 @@ variants:
       interaction.md.
 
 tokens:
-  background: n/a  # Implicit track — no surface is drawn.
+  background: n/a # Implicit track — no surface is drawn.
 
   foreground:
     rest:

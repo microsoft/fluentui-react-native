@@ -12,7 +12,7 @@ component: Tag
 
 ### vs Button
 
-Button triggers a discrete action or toggles a persistent toolbar state. Tag represents a label or applied filter — clicking it dismisses (removes) the tag. Use Tag when the element *is* the content (a keyword, category, or filter); use Button when the element *performs* an action.
+Button triggers a discrete action or toggles a persistent toolbar state. Tag represents a label or applied filter — clicking it dismisses (removes) the tag. Use Tag when the element _is_ the content (a keyword, category, or filter); use Button when the element _performs_ an action.
 
 ---
 

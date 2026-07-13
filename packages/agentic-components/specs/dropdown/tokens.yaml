@@ -19,7 +19,8 @@ variants:
     default: Single
     notes: Drives trigger value display (single label vs multi-value summary), close-on-activate behavior, and per-row anatomy (Single → Checkmark slot; Multiple → embedded Checkbox in the trailing slot). Selection state on each row is carried by aria-pressed on the row's <button>.
     delegated-to: listbox-item
-    delegated-via: { runtime: "per-row anatomy — Single shows the Checkmark slot, Multiple shows the embedded Checkbox slot on each ListboxItem row" }
+    delegated-via:
+      { runtime: 'per-row anatomy — Single shows the Checkmark slot, Multiple shows the embedded Checkbox slot on each ListboxItem row' }
   State:
     values: [Rest, Hover, Pressed, Focused, Disabled, Error]
     notes: >
@@ -81,7 +82,6 @@ tokens:
         - container-padding: reduced or zeroed — the contained ListboxItem rows provide their own padding, and the Popover's surface only needs to frame them.
       The Popover here is a presentational floating container — it carries no ARIA role. DOM focus moves into the Popover (onto the focused item button), but the Popover itself is not a focus trap.
 
-
   items:
     delegate: flex-components:listbox-item
     notes: |
@@ -93,7 +93,6 @@ tokens:
         - Multiple → embedded Checkbox slot visible on every row (label-hidden, square style). The Checkbox is presentational — the row's aria-pressed is authoritative. Any number of rows may carry aria-pressed="true".
 
       The Multiple-mode Checkbox is a transitive dependency on flex-components:checkbox — documented under listbox-item's own dependencies, not redeclared here.
-
 
   motion:
     status: pending
@@ -144,11 +143,11 @@ properties:
   component:
     Value:
       type: TEXT
-      default: ""
+      default: ''
       notes: The selected value's label (Single mode), the multi-value summary string (Multiple mode), or empty to render the Placeholder.
     Placeholder:
       type: TEXT
-      default: "Select an option"
+      default: 'Select an option'
       notes: Shown when Value is empty. Renders in foreground.placeholder color.
     Leading slot:
       type: BOOLEAN

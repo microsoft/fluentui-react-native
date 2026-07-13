@@ -7,13 +7,13 @@ platform: react-native (Windows, macOS)
 
 ## Show / hide
 
-| Trigger | Behavior |
-|---------|----------|
-| Click on trigger element | Popover becomes visible (toggle behavior — click again to dismiss) |
-| Programmatic open | Popover becomes visible; used for onboarding or guided flows |
-| Click outside popover (light dismiss) | Popover hides |
-| `Escape` key | Popover hides; focus returns to trigger |
-| Explicit close action inside popover | Popover hides; focus returns to trigger |
+| Trigger                               | Behavior                                                           |
+| ------------------------------------- | ------------------------------------------------------------------ |
+| Click on trigger element              | Popover becomes visible (toggle behavior — click again to dismiss) |
+| Programmatic open                     | Popover becomes visible; used for onboarding or guided flows       |
+| Click outside popover (light dismiss) | Popover hides                                                      |
+| `Escape` key                          | Popover hides; focus returns to trigger                            |
+| Explicit close action inside popover  | Popover hides; focus returns to trigger                            |
 
 ## Focus management
 

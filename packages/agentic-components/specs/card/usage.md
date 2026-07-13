@@ -14,7 +14,7 @@ Do **not** use a Card merely to add a border or background to arbitrary content 
 
 ### vs Surface / Section
 
-A Card is a *unit* — a repeatable, self-contained grouping of one subject's content. A plain surface or section is *page structure* — it organizes the layout but does not represent a single addressable thing. If the content isn't a discrete, repeatable item, use a section, not a card.
+A Card is a _unit_ — a repeatable, self-contained grouping of one subject's content. A plain surface or section is _page structure_ — it organizes the layout but does not represent a single addressable thing. If the content isn't a discrete, repeatable item, use a section, not a card.
 
 ### vs Message Bar
 
@@ -42,7 +42,7 @@ Use a **Message Bar** for transient, page- or section-level status feedback. Use
 
 ### Cards in a carousel
 
-A carousel is a layout pattern for cards — a horizontally-scrolling row that pages through a set of peer cards. Reach for it when the collection is long *and* the off-screen items are genuinely optional; if every item matters, use a wrapping grid instead so nothing is hidden behind a paging action.
+A carousel is a layout pattern for cards — a horizontally-scrolling row that pages through a set of peer cards. Reach for it when the collection is long _and_ the off-screen items are genuinely optional; if every item matters, use a wrapping grid instead so nothing is hidden behind a paging action.
 
 - **Two framings.** Let the cards scroll edge-to-edge (full-bleed) when each card already carries its own surface — a wrapping frame would double the boundary. Wrap the row in a bounded surface only when the items are bare media tiles that need a container to group them.
 - **Uniform items.** Keep every card in the row on the same Size, Layout, and Direction so the set reads as one collection and paging lands cleanly.

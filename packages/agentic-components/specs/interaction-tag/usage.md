@@ -16,7 +16,7 @@ Tag is a single-action dismiss-only element — clicking anywhere removes it. Us
 
 ### vs Button
 
-Button triggers a discrete action or toggles a toolbar state. Interaction Tag represents content (a person, keyword, or filter) that can be inspected or removed. Use Interaction Tag when the element *is* content with associated actions; use Button when the element *performs* an action.
+Button triggers a discrete action or toggles a toolbar state. Interaction Tag represents content (a person, keyword, or filter) that can be inspected or removed. Use Interaction Tag when the element _is_ content with associated actions; use Button when the element _performs_ an action.
 
 ---
 

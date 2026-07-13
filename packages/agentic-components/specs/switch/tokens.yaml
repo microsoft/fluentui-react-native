@@ -99,7 +99,6 @@ tokens:
         Internal track gap (spacingComponentBase250) is declared in Figma but
         resolves to 0px effective spacing since thumb is positioned within the track.
 
-
   elevation: n/a
 
   motion:
@@ -115,7 +114,7 @@ sizes:
     track-height: 20px
     thumb-diameter: 14px
     thumb-inset: 2px
-    resultant-height: 36px   # track 20 + outer hit-area padding 8×2. Switch is a fixed-dimensional control, not a typography-driven resultant — the formula is geometry-from-tokens, not text-from-tokens.
+    resultant-height: 36px # track 20 + outer hit-area padding 8×2. Switch is a fixed-dimensional control, not a typography-driven resultant — the formula is geometry-from-tokens, not text-from-tokens.
     notes: >
       Single size. Track is 20px tall (including stroke). Hit area adds 8px padding
       on each side, giving a 36px interactive surface. No size variants exist.
@@ -147,7 +146,7 @@ properties:
   component:
     Label string:
       type: TEXT
-      default: "Label"
+      default: 'Label'
       notes: Bound to visible label nodes in VLabel and HLabel layouts.
     Label Before:
       type: BOOLEAN

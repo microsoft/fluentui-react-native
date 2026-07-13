@@ -69,7 +69,6 @@ tokens:
       No foreground shift on hover/pressed — the background overlay
       provides sufficient interaction feedback for both styles.
 
-
   stroke:
     container: no-stroke
     divider:
@@ -186,7 +185,7 @@ properties:
   component:
     Label string:
       type: TEXT
-      default: "Tag text"
+      default: 'Tag text'
     Primary focus:
       type: BOOLEAN
       default: false

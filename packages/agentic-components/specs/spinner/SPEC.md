@@ -11,9 +11,9 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | atomic |
+| Field     | Value   |
+| --------- | ------- |
+| Type      | atomic  |
 | Component | Spinner |
 
 This spec covers the Spinner component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (animation, reduced motion) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
@@ -41,16 +41,16 @@ Variant properties are ordered in the design tool: **Size**.
 
 #### Size
 
-| Value | Diameter | Stroke width | When to Use |
-|-------|----------|--------------|-------------|
-| **X-Tiny** | 16px | `--gnrc-stroke-width-thin` | Embedded inline next to body text — inside a message bar, list item, or input field. |
-| **Tiny** | 20px | `--gnrc-stroke-width-thin` | Inline with a Small Button or Small Input. |
-| **X-Small** | 24px | `--gnrc-stroke-width-thin` | Inline with a Medium Button or Medium Input. |
-| **Small** | 28px | `--gnrc-stroke-width-thick` | Inline with a Large Button or Large Input. Standalone in compact regions. |
-| **Medium** | 32px | `--gnrc-stroke-width-thick` | Default for standalone spinners that occupy their own region. |
-| **Large** | 36px | `--gnrc-stroke-width-thicker` | Empty-state regions, modal dialogs, or large empty containers. |
-| **X-Large** | 40px | `--gnrc-stroke-width-thicker` | Full-page spinner inside an overlay or hero section. |
-| **Huge** | 44px | `--gnrc-stroke-width-thicker` | Marketing or onboarding contexts where the spinner is the focal element. |
+| Value       | Diameter | Stroke width                  | When to Use                                                                          |
+| ----------- | -------- | ----------------------------- | ------------------------------------------------------------------------------------ |
+| **X-Tiny**  | 16px     | `--gnrc-stroke-width-thin`    | Embedded inline next to body text — inside a message bar, list item, or input field. |
+| **Tiny**    | 20px     | `--gnrc-stroke-width-thin`    | Inline with a Small Button or Small Input.                                           |
+| **X-Small** | 24px     | `--gnrc-stroke-width-thin`    | Inline with a Medium Button or Medium Input.                                         |
+| **Small**   | 28px     | `--gnrc-stroke-width-thick`   | Inline with a Large Button or Large Input. Standalone in compact regions.            |
+| **Medium**  | 32px     | `--gnrc-stroke-width-thick`   | Default for standalone spinners that occupy their own region.                        |
+| **Large**   | 36px     | `--gnrc-stroke-width-thicker` | Empty-state regions, modal dialogs, or large empty containers.                       |
+| **X-Large** | 40px     | `--gnrc-stroke-width-thicker` | Full-page spinner inside an overlay or hero section.                                 |
+| **Huge**    | 44px     | `--gnrc-stroke-width-thicker` | Marketing or onboarding contexts where the spinner is the focal element.             |
 
 **Why eight steps:** Spinner is the only loading signal for regions too small for Skeleton. Eight steps span from inline-with-text (16px) to focal-element (44px) so the indicator can scale with its host control rather than appearing under- or over-sized. Stroke width steps with the size group — `thin` up to 24px, `thick` at 28–32px, `thicker` at 36–44px — so the arc remains perceptible at every diameter without dominating small embeds.
 

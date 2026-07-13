@@ -12,7 +12,7 @@ component: Badge
 
 ### vs Tag
 
-Tag is a **dismissible, interactive** label for keywords, categories, or applied filters — clicking removes it. Badge is a **non-interactive** indicator that decorates another element and never receives focus. Use Tag when the element *is* the content the user manipulates; use Badge when the element annotates something else.
+Tag is a **dismissible, interactive** label for keywords, categories, or applied filters — clicking removes it. Badge is a **non-interactive** indicator that decorates another element and never receives focus. Use Tag when the element _is_ the content the user manipulates; use Badge when the element annotates something else.
 
 ### vs Button
 

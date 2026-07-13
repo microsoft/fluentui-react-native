@@ -24,13 +24,13 @@ The close button and any interactive children use the universal dual-outline foc
 
 ## Open / close
 
-| Trigger | Modal | Non-modal | Alert | Inline |
-|---------|-------|-----------|-------|--------|
-| Programmatic open | Slides in; focus trapped | Slides in; focus not trapped | Slides in; focus trapped | Slides in; focus not trapped |
-| Close button | Closes; focus returns to trigger | Closes; focus returns to trigger | Hidden — no close button | Closes; focus moves to main content |
-| Escape key | Closes; focus returns to trigger | Closes; focus returns to trigger | No effect — must use action buttons | Closes; focus moves to main content |
-| Scrim click/tap | Light-dismiss; focus returns to trigger | No scrim | No effect — cannot dismiss via scrim | No scrim |
-| Action button (Footer) | Closes; focus returns to trigger | Closes; focus returns to trigger | Closes; focus returns to trigger | Closes; focus moves to main content |
+| Trigger                | Modal                                   | Non-modal                        | Alert                                | Inline                              |
+| ---------------------- | --------------------------------------- | -------------------------------- | ------------------------------------ | ----------------------------------- |
+| Programmatic open      | Slides in; focus trapped                | Slides in; focus not trapped     | Slides in; focus trapped             | Slides in; focus not trapped        |
+| Close button           | Closes; focus returns to trigger        | Closes; focus returns to trigger | Hidden — no close button             | Closes; focus moves to main content |
+| Escape key             | Closes; focus returns to trigger        | Closes; focus returns to trigger | No effect — must use action buttons  | Closes; focus moves to main content |
+| Scrim click/tap        | Light-dismiss; focus returns to trigger | No scrim                         | No effect — cannot dismiss via scrim | No scrim                            |
+| Action button (Footer) | Closes; focus returns to trigger        | Closes; focus returns to trigger | Closes; focus returns to trigger     | Closes; focus moves to main content |
 
 ## Responsive reflow
 

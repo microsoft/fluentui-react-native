@@ -19,21 +19,21 @@ The Interaction Tag is composed of two interactive elements within a non-interac
 
 ### Required attributes
 
-| Attribute | Required when |
-|-----------|--------------|
-| `aria-label` on primary action | Icon only layout — must describe the entity and action intent (e.g., "View Angie's profile") |
-| `aria-label` on secondary action | Always — must describe the dismiss intent (e.g., "Remove Angie") |
-| `aria-disabled="true"` | Disabled state when the tag should remain in the tab order but be non-interactive |
+| Attribute                        | Required when                                                                                |
+| -------------------------------- | -------------------------------------------------------------------------------------------- |
+| `aria-label` on primary action   | Icon only layout — must describe the entity and action intent (e.g., "View Angie's profile") |
+| `aria-label` on secondary action | Always — must describe the dismiss intent (e.g., "Remove Angie")                             |
+| `aria-disabled="true"`           | Disabled state when the tag should remain in the tab order but be non-interactive            |
 
 ### WCAG
 
-| Criterion | Requirement |
-|-----------|-------------|
-| 1.4.3 — Contrast (Minimum) | All text and icon colors must meet 4.5:1 against their rest background for both styles — Secondary (`neutral-primary` on `neutral-subtle`) and Primary (`neutral-onloud` on `brand-heavy`). The divider must remain visible on each surface (`stroke-neutral-soft` on Secondary, `stroke-neutral-onloud` on Primary). Verify disabled tokens — intentionally below full contrast but should remain legible. |
-| 2.1.1 — Keyboard | Both the primary action and secondary dismiss action must be operable via Enter and Space. |
-| 2.4.7 — Focus Visible | Each interactive area must show a visible focus ring independently. The dual-outline focus ring (from `flex-system:styling`) satisfies this. |
-| 2.5.8 — Target Size (Minimum, AA) | Each interactive area must meet 24×24px minimum. The secondary action at Small size is the tightest — verify icon + padding meets the minimum. |
-| 4.1.2 — Name, Role, Value | Each button must expose its accessible name (label text or `aria-label`) and role (`button`). |
+| Criterion                         | Requirement                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.4.3 — Contrast (Minimum)        | All text and icon colors must meet 4.5:1 against their rest background for both styles — Secondary (`neutral-primary` on `neutral-subtle`) and Primary (`neutral-onloud` on `brand-heavy`). The divider must remain visible on each surface (`stroke-neutral-soft` on Secondary, `stroke-neutral-onloud` on Primary). Verify disabled tokens — intentionally below full contrast but should remain legible. |
+| 2.1.1 — Keyboard                  | Both the primary action and secondary dismiss action must be operable via Enter and Space.                                                                                                                                                                                                                                                                                                                  |
+| 2.4.7 — Focus Visible             | Each interactive area must show a visible focus ring independently. The dual-outline focus ring (from `flex-system:styling`) satisfies this.                                                                                                                                                                                                                                                                |
+| 2.5.8 — Target Size (Minimum, AA) | Each interactive area must meet 24×24px minimum. The secondary action at Small size is the tightest — verify icon + padding meets the minimum.                                                                                                                                                                                                                                                              |
+| 4.1.2 — Name, Role, Value         | Each button must expose its accessible name (label text or `aria-label`) and role (`button`).                                                                                                                                                                                                                                                                                                               |
 
 ### Screen reader
 

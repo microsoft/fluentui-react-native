@@ -11,9 +11,9 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | atomic |
+| Field     | Value     |
+| --------- | --------- |
+| Type      | atomic    |
 | Component | Accordion |
 
 This spec covers the Accordion component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
@@ -36,11 +36,11 @@ Answer design questions directly — lead with rationale, then tokens. The most 
 6. **Body** — content panel visible only when Expanded=True. Accepts any child component via the `Body content` slot.
 7. **Content placeholder** — default body content shown when no child is provided. Swap with your component.
 
-| Slot | Required | Default |
-|------|----------|---------|
-| Title | Yes | "Section title" |
-| Leading icon | No | Shown |
-| Body content | No | Content placeholder |
+| Slot         | Required | Default             |
+| ------------ | -------- | ------------------- |
+| Title        | Yes      | "Section title"     |
+| Leading icon | No       | Shown               |
+| Body content | No       | Content placeholder |
 
 ---
 
@@ -50,16 +50,16 @@ Variant properties are ordered in the design tool: **Layout → Size → State �
 
 #### Layout
 
-| Value | When to Use |
-|-------|-------------|
-| **Chevron start** | Default. Anchors the expand affordance to the leading edge; title fills remaining width. |
-| **Chevron end** | When the leading icon is the primary anchor; chevron is pushed to the far end of the header (opposite edge from the title). Title at natural width. |
+| Value             | When to Use                                                                                                                                         |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Chevron start** | Default. Anchors the expand affordance to the leading edge; title fills remaining width.                                                            |
+| **Chevron end**   | When the leading icon is the primary anchor; chevron is pushed to the far end of the header (opposite edge from the title). Title at natural width. |
 
 #### Expanded
 
-| Value | Visual |
-|-------|--------|
+| Value     | Visual                                           |
+| --------- | ------------------------------------------------ |
 | **False** | Body hidden; chevron points right (ChevronRight) |
-| **True** | Body visible; chevron points down (ChevronDown) |
+| **True**  | Body visible; chevron points down (ChevronDown)  |
 
 **Expanded is a variant axis, not a State.** It runs in parallel with State — a Rest+Expanded=True accordion is valid.

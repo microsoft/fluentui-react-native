@@ -11,10 +11,10 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | molecular |
-| Component | Tablist |
+| Field     | Value     |
+| --------- | --------- |
+| Type      | molecular |
+| Component | Tablist   |
 
 This spec covers the Tablist component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, activation strategies) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
 
@@ -39,10 +39,10 @@ Answer design questions directly — lead with rationale, then tokens. Tablist i
 2. **Tab** — Tab instances as direct children. One tab must always be Selected=True. The Layout of individual tabs (Icon + label or Icon only) is configured per instance, though all tabs within a single Tablist typically share the same layout.
 3. **End content** — optional trailing slot that flexes to fill remaining width and aligns its content to the trailing edge. Contains an icon-only Subtle Button for actions like overflow or add-tab.
 
-| Slot | Required | Default |
-|------|----------|---------|
-| Tab | Yes (at least two) | Tab with Selected=False |
-| End content | No | Hidden |
+| Slot        | Required           | Default                 |
+| ----------- | ------------------ | ----------------------- |
+| Tab         | Yes (at least two) | Tab with Selected=False |
+| End content | No                 | Hidden                  |
 
 ---
 

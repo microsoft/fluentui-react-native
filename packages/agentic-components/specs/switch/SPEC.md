@@ -11,9 +11,9 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | atomic |
+| Field     | Value  |
+| --------- | ------ |
+| Type      | atomic |
 | Component | Switch |
 
 This spec covers the Switch component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
@@ -34,13 +34,13 @@ Answer design questions directly — lead with rationale, then tokens. The track
 4. **Label After** — Optional text positioned after (right of) the switch in horizontal layouts.
 5. **Label Above** — Optional text positioned above the switch in vertical layout.
 
-| Slot | Required | Default |
-|------|----------|---------|
-| Track | Yes | — |
-| Thumb | Yes | — |
-| Label Before | No | Hidden |
-| Label After | No | Hidden |
-| Label Above | No | Hidden |
+| Slot         | Required | Default |
+| ------------ | -------- | ------- |
+| Track        | Yes      | —       |
+| Thumb        | Yes      | —       |
+| Label Before | No       | Hidden  |
+| Label After  | No       | Hidden  |
+| Label Above  | No       | Hidden  |
 
 ---
 
@@ -50,31 +50,31 @@ Variant properties are ordered in the design tool: **Layout → Checked → Stat
 
 #### Layout
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **Switch** | Standalone switch with no label | When surrounding context (heading, field label) provides enough identification |
-| **Horizontal** | Switch with inline label(s) before and/or after | Default for most form settings — label identifies the control |
-| **Vertical** | Switch with a label above | Compact layouts where horizontal space is constrained or a top-aligned label is preferred |
+| Value          | Description                                     | When to Use                                                                               |
+| -------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Switch**     | Standalone switch with no label                 | When surrounding context (heading, field label) provides enough identification            |
+| **Horizontal** | Switch with inline label(s) before and/or after | Default for most form settings — label identifies the control                             |
+| **Vertical**   | Switch with a label above                       | Compact layouts where horizontal space is constrained or a top-aligned label is preferred |
 
 **Why three layouts:** Label placement is a structural decision that affects hit target, reading flow, and layout density. Separating it as a variant avoids mixing label-position logic with visual state logic.
 
 #### Checked
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **False** | Unchecked — track is transparent, thumb rests at start | Default initial state |
-| **True** | Checked — track is filled (heavy), thumb moves to end | Active / enabled state |
+| Value     | Description                                            | When to Use            |
+| --------- | ------------------------------------------------------ | ---------------------- |
+| **False** | Unchecked — track is transparent, thumb rests at start | Default initial state  |
+| **True**  | Checked — track is filled (heavy), thumb moves to end  | Active / enabled state |
 
 **Why checked drives track color:** The transparent/filled track is the primary visual signifier of on vs off. The unchecked track is invisible at rest — the stroke alone defines the control boundary. On hover/pressed, the transparent background gains opacity (alpha shift), providing interaction feedback without suggesting a checked state.
 
 #### State
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **Rest** | Default idle appearance | No user interaction |
-| **Hover** | Background, thumb, and stroke shift via OKLCH | Pointer is over the switch |
-| **Pressed** | Stronger background, thumb, and stroke shift | Active pointer down |
-| **Focus** | Dual-outline focus ring on the switch (excluding label) | Keyboard focus |
-| **Disabled** | Reduced-contrast track and thumb; non-interactive | Setting is unavailable or locked |
+| Value        | Description                                             | When to Use                      |
+| ------------ | ------------------------------------------------------- | -------------------------------- |
+| **Rest**     | Default idle appearance                                 | No user interaction              |
+| **Hover**    | Background, thumb, and stroke shift via OKLCH           | Pointer is over the switch       |
+| **Pressed**  | Stronger background, thumb, and stroke shift            | Active pointer down              |
+| **Focus**    | Dual-outline focus ring on the switch (excluding label) | Keyboard focus                   |
+| **Disabled** | Reduced-contrast track and thumb; non-interactive       | Setting is unavailable or locked |
 
 **Interaction model:** All three categories (background, foreground, stroke) participate in hover/pressed. The unchecked transparent background uses alpha shift; the checked heavy background uses inverse lightness shift.

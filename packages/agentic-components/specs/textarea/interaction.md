@@ -25,11 +25,11 @@ Hover and Pressed are resolved state values, not base states of their own — th
 
 The Resize variant maps directly to the CSS `resize` property:
 
-| Resize value | CSS | Behavior |
-|---|---|---|
-| None | `resize: none` | Fixed dimensions; no drag handle |
-| Vertical | `resize: vertical` | Vertical drag handle; horizontal dimension locked |
-| Both | `resize: both` | Full drag handle; resizable in both axes |
+| Resize value | CSS                | Behavior                                          |
+| ------------ | ------------------ | ------------------------------------------------- |
+| None         | `resize: none`     | Fixed dimensions; no drag handle                  |
+| Vertical     | `resize: vertical` | Vertical drag handle; horizontal dimension locked |
+| Both         | `resize: both`     | Full drag handle; resizable in both axes          |
 
 The resize handle is platform-native. It appears at the bottom-right corner of the textarea on supported platforms. The handle should respect the border radius — it sits inside the stroked boundary.
 

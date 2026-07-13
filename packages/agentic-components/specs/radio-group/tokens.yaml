@@ -11,14 +11,14 @@ variants:
     notes: Passthrough to the composed Label's Required slot — toggles the trailing asterisk on the Legend.
 
 tokens:
-  background: n/a  # Transparent layout container — no fill. Child Radios own their backgrounds.
+  background: n/a # Transparent layout container — no fill. Child Radios own their backgrounds.
 
   foreground:
     legend:
       source: flex-components:label
     radios: Delegated to flex-components:radio.
 
-  stroke: n/a  # No container stroke. Focus ring is applied on child Radios, not the RadioGroup.
+  stroke: n/a # No container stroke. Focus ring is applied on child Radios, not the RadioGroup.
 
   radius: n/a
   radius-notes: >
@@ -49,7 +49,7 @@ tokens:
       applies-to: >
         Applied along the orientation axis — vertical gap when Orientation=Vertical,
         horizontal gap when Orientation=Horizontal.
-    container-padding: n/a  # RadioGroup container has no internal padding — children align flush.
+    container-padding: n/a # RadioGroup container has no internal padding — children align flush.
 
   elevation: n/a
 
@@ -78,7 +78,7 @@ properties:
   component:
     Legend string:
       type: TEXT
-      default: "Group label"
+      default: 'Group label'
       notes: Binds through to the text node of the composed flex-components:label sub-component used as the Legend.
     Required:
       type: BOOLEAN

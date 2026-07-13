@@ -24,22 +24,22 @@ tokens:
   background:
     container:
       Tint:
-        Brand:        colorBackgroundBrandSoft
-        Danger:       colorBackgroundDangerSoft
-        Success:      colorBackgroundSuccessSoft
-        Warning:      colorBackgroundWarningSoft
-        Informative:  colorBackgroundNeutralSoft
+        Brand: colorBackgroundBrandSoft
+        Danger: colorBackgroundDangerSoft
+        Success: colorBackgroundSuccessSoft
+        Warning: colorBackgroundWarningSoft
+        Informative: colorBackgroundNeutralSoft
       Outline:
-        all-colors:   colorBackgroundNeutralTransparent
+        all-colors: colorBackgroundNeutralTransparent
 
   foreground:
     container:
       all-styles:
-        Brand:        colorForegroundBrandPrimary
-        Danger:       colorForegroundDangerPrimary
-        Success:      colorForegroundSuccessPrimary
-        Warning:      colorForegroundWarningPrimary
-        Informative:  colorForegroundNeutralPrimary
+        Brand: colorForegroundBrandPrimary
+        Danger: colorForegroundDangerPrimary
+        Success: colorForegroundSuccessPrimary
+        Warning: colorForegroundWarningPrimary
+        Informative: colorForegroundNeutralPrimary
     notes: Same foreground tokens drive label text and icon paint in both Tint and Outline.
 
   stroke:
@@ -50,11 +50,11 @@ tokens:
       Outline:
         width: strokeWidthThin
         color:
-          Brand:        colorStrokeBrandLoud
-          Danger:       colorStrokeDangerLoud
-          Success:      colorStrokeSuccessLoud
-          Warning:      colorStrokeWarningLoud
-          Informative:  colorStrokeNeutralLoud
+          Brand: colorStrokeBrandLoud
+          Danger: colorStrokeDangerLoud
+          Success: colorStrokeSuccessLoud
+          Warning: colorStrokeWarningLoud
+          Informative: colorStrokeNeutralLoud
     focus: n/a
 
   radius:
@@ -62,12 +62,12 @@ tokens:
       Circular:
         all-sizes: borderRadiusCircular
       Rounded:
-        Small:  borderRadiusBase100
+        Small: borderRadiusBase100
         Medium: borderRadiusBase200
     notes: Rounded radius scales with Size so the corner reads as a softened rectangle at both heights.
 
   typography:
-    Small:  textstyle-functional-caption
+    Small: textstyle-functional-caption
     Medium: textstyle-functional-body-small
     font-family: fontFamilyFunctional
 
@@ -77,19 +77,19 @@ tokens:
         Icon and text:
           Small:
             inline: spacingComponentBase100
-            block:  0
+            block: 0
           Medium:
             inline: spacingComponentBase150
-            block:  0
+            block: 0
         Icon only:
           Small:
             inline: 0
-            block:  0
+            block: 0
           Medium:
             inline: 0
-            block:  0
+            block: 0
       gap:
-        Small:  spacingComponentBase50
+        Small: spacingComponentBase50
         Medium: spacingComponentBase50
 
   elevation: n/a
@@ -101,10 +101,10 @@ tokens:
 sizes:
   Small:
     height: 16
-    icon:   12
+    icon: 12
   Medium:
     height: 20
-    icon:   16
+    icon: 16
   notes: Heights and icon sizes are px literals — no --gnrc-* sizing tokens exist for these dimensions.
 
 properties:

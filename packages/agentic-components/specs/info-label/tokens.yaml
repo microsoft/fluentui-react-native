@@ -29,8 +29,8 @@ tokens:
 
   radius:
     root: n/a
-    trigger: borderRadiusCircular  # per flex-components:button → radius for Icon only
-    popover: borderRadiusBase400   # per flex-components:popover → radius
+    trigger: borderRadiusCircular # per flex-components:button → radius for Icon only
+    popover: borderRadiusBase400 # per flex-components:popover → radius
 
   typography:
     label: See flex-components:label → typography (Weight × Size matrix).
@@ -109,7 +109,7 @@ properties:
   component:
     Label string:
       type: TEXT
-      default: "Label"
+      default: 'Label'
       notes: Forwarded to the child Label's "Label string" property.
     Required:
       type: BOOLEAN

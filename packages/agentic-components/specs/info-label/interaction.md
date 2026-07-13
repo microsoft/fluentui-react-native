@@ -28,14 +28,14 @@ InfoLabel is a composition — keyboard handling is owned by its parts, not by t
 
 The Open variant axis in `tokens.yaml` is the design-time representation of the Popover's runtime visibility. The mapping between user actions and Open transitions is owned by the trigger Button and the Popover, in combination:
 
-| Trigger | Behavior |
-|---------|----------|
-| Click on trigger | Toggles Open — opens if closed, closes if already open. Trigger's `aria-expanded` updates accordingly. |
-| Enter / Space on trigger | Same as click. |
-| Click outside the Popover (light dismiss) | Closes the Popover; focus returns to the trigger. Owned by Popover. |
-| `Escape` key while Popover is open | Closes the Popover; focus returns to the trigger. Owned by Popover. |
-| Explicit close action inside the Popover (e.g. a "Close" button in the content) | Closes the Popover; focus returns to the trigger. |
-| Activating a different InfoLabel's trigger on the same surface | Closes the prior Popover before opening the new one — see Behavior in `usage.md`. |
+| Trigger                                                                         | Behavior                                                                                               |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Click on trigger                                                                | Toggles Open — opens if closed, closes if already open. Trigger's `aria-expanded` updates accordingly. |
+| Enter / Space on trigger                                                        | Same as click.                                                                                         |
+| Click outside the Popover (light dismiss)                                       | Closes the Popover; focus returns to the trigger. Owned by Popover.                                    |
+| `Escape` key while Popover is open                                              | Closes the Popover; focus returns to the trigger. Owned by Popover.                                    |
+| Explicit close action inside the Popover (e.g. a "Close" button in the content) | Closes the Popover; focus returns to the trigger.                                                      |
+| Activating a different InfoLabel's trigger on the same surface                  | Closes the prior Popover before opening the new one — see Behavior in `usage.md`.                      |
 
 ## Animation
 

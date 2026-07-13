@@ -217,7 +217,7 @@ properties:
   component:
     Title string:
       type: TEXT
-      default: "Drawer title"
+      default: 'Drawer title'
       notes: Bound to the Header title text node.
     Footer:
       type: BOOLEAN

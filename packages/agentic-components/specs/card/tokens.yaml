@@ -49,7 +49,6 @@ tokens:
       slot content and is delegated to flex-components:avatar and flex-components:button and the consumer's
       slotted text. No card-level foreground token is assigned.
 
-
   stroke:
     width: strokeWidthThin
     width-rationale: A single hairline boundary is enough to delimit the surface; the card relies on the stroke (not a shadow) for its resting boundary, so it must remain a crisp 1px edge.
@@ -67,15 +66,14 @@ tokens:
       geometry (the Stack padding, base-300 / 12px). This keeps the inner block concentric with the
       surface corner instead of using a fixed radius, so the nested radius steps with Size.
     surface:
-      Small: borderRadiusBase600        # 24px (verified from Figma)
-      Large: borderRadiusBase700         # 28px (verified from Large Structured node)
+      Small: borderRadiusBase600 # 24px (verified from Figma)
+      Large: borderRadiusBase700 # 28px (verified from Large Structured node)
     nested-content-block:
-      Small: borderRadiusBase300   # 12px = 24px surface (base-600) − 12px padding (base-300)
-      Large: borderRadiusBase400   # 16px = 28px surface (base-700) − 12px padding (base-300)
+      Small: borderRadiusBase300 # 12px = 24px surface (base-600) − 12px padding (base-300)
+      Large: borderRadiusBase400 # 16px = 28px surface (base-700) − 12px padding (base-300)
       rationale: >
         Concentric nested radius — inner = outer − padding (base-300, 12px). Layout=Nested only. With
         Padding=None the inset is 0, so the nested block matches the surface radius for its Size.
-
 
   typography:
     notes: >

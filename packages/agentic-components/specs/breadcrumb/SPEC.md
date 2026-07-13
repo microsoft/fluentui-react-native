@@ -11,9 +11,9 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | molecular |
+| Field     | Value      |
+| --------- | ---------- |
+| Type      | molecular  |
 | Component | Breadcrumb |
 
 This spec covers the Breadcrumb component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
@@ -44,14 +44,14 @@ Answer design questions directly — lead with rationale, then tokens. Breadcrum
 5. **OverflowButton** — an Icon-only Button (Subtle style) that appears in the Collapsed overflow variant to represent hidden middle items. Uses an ellipsis icon. Interactive and focusable. Shows a Tooltip on hover/focus indicating how many items are hidden; activating it opens the overflow Popover.
 6. **Overflow Popover** — a Popover anchored to the OverflowButton presenting hidden middle items as MenuItem List Items. Light-dismisses on item activation, Escape, click outside, or Tab out.
 
-| Slot | Required | Default |
-|------|----------|---------|
-| BreadcrumbItem (one or more) | Yes | — |
-| CurrentItem | Yes | — |
-| Separator (generated per gap) | Yes | Chevron right icon |
-| Leading icon (per BreadcrumbItem) | No | Hidden |
-| OverflowButton | No — Collapsed variant only | Ellipsis (•••) icon |
-| Overflow Popover | No — Collapsed variant only | MenuItem list of hidden items |
+| Slot                              | Required                    | Default                       |
+| --------------------------------- | --------------------------- | ----------------------------- |
+| BreadcrumbItem (one or more)      | Yes                         | —                             |
+| CurrentItem                       | Yes                         | —                             |
+| Separator (generated per gap)     | Yes                         | Chevron right icon            |
+| Leading icon (per BreadcrumbItem) | No                          | Hidden                        |
+| OverflowButton                    | No — Collapsed variant only | Ellipsis (•••) icon           |
+| Overflow Popover                  | No — Collapsed variant only | MenuItem list of hidden items |
 
 ---
 
@@ -61,29 +61,29 @@ Variant properties are ordered in the design tool: **Overflow → Icon → Size 
 
 #### Size
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **Small** | Compact trail matching Button Small proportions (25px row height) | Dense surfaces, toolbars, and page headers with limited vertical rhythm |
-| **Medium** | Default. Standard trail matching Button Medium proportions (32px row height) | General-purpose across all surfaces |
-| **Large** | Expanded trail matching Button Large proportions (38px row height) | High-touch surfaces and page headers with generous vertical rhythm |
+| Value      | Description                                                                  | When to Use                                                             |
+| ---------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| **Small**  | Compact trail matching Button Small proportions (25px row height)            | Dense surfaces, toolbars, and page headers with limited vertical rhythm |
+| **Medium** | Default. Standard trail matching Button Medium proportions (32px row height) | General-purpose across all surfaces                                     |
+| **Large**  | Expanded trail matching Button Large proportions (38px row height)           | High-touch surfaces and page headers with generous vertical rhythm      |
 
 **Why sizes delegate entirely to Button:** BreadcrumbItem IS a Button instance. Using the same Size axis values means padding, typography, and icon sizes are inherited rather than redeclared. The breadcrumb container only owns the gap between items — all per-item dimensions come from Button.
 
 #### Overflow
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **Visible** | All items in the trail are displayed in full | Default; use when the trail is short or horizontal space is sufficient |
+| Value         | Description                                               | When to Use                                                                                                       |
+| ------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Visible**   | All items in the trail are displayed in full              | Default; use when the trail is short or horizontal space is sufficient                                            |
 | **Collapsed** | Middle items are hidden and replaced by an OverflowButton | Use when the trail is too long to fit the available width; always keep the first and last (Current) items visible |
 
 **Why Overflow is a variant axis rather than a CSS-only state:** Collapsed and Visible require structural changes to the component — items are removed from the rendered tree and the OverflowButton is added. This cannot be toggled with CSS alone and must be represented as a distinct variant in the design tool.
 
 #### Icon
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **Without icon** | BreadcrumbItems show label only | Default; most navigation contexts do not require icons |
-| **With icon** | BreadcrumbItems include a leading icon slot | Use only when each linked page has a strongly recognizable icon (e.g. home, settings, document) |
+| Value            | Description                                 | When to Use                                                                                     |
+| ---------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **Without icon** | BreadcrumbItems show label only             | Default; most navigation contexts do not require icons                                          |
+| **With icon**    | BreadcrumbItems include a leading icon slot | Use only when each linked page has a strongly recognizable icon (e.g. home, settings, document) |
 
 **Why Icon is a trail-level axis and not per-item:** All items in a breadcrumb trail should be iconically consistent — mixing icon and no-icon items in the same row creates uneven horizontal rhythm. This variant governs icon slot visibility across the entire trail, not per individual item.
 
@@ -91,12 +91,12 @@ Variant properties are ordered in the design tool: **Overflow → Icon → Size 
 
 Applies per-BreadcrumbItem. CurrentItem only surfaces the **Current** value; all other state values are unavailable to it.
 
-| Value | Description |
-|-------|-------------|
-| **Rest** | Default non-active state |
-| **Hover** | Pointer over a BreadcrumbItem; background uses the delegated Button interaction value |
-| **Pressed** | BreadcrumbItem is being activated; background uses the delegated Button interaction value |
-| **Disabled** | BreadcrumbItem is present in the trail but cannot be activated |
-| **Current** | The final item in the trail — non-interactive, Semibold weight, no focus ring |
+| Value        | Description                                                                               |
+| ------------ | ----------------------------------------------------------------------------------------- |
+| **Rest**     | Default non-active state                                                                  |
+| **Hover**    | Pointer over a BreadcrumbItem; background uses the delegated Button interaction value     |
+| **Pressed**  | BreadcrumbItem is being activated; background uses the delegated Button interaction value |
+| **Disabled** | BreadcrumbItem is present in the trail but cannot be activated                            |
+| **Current**  | The final item in the trail — non-interactive, Semibold weight, no focus ring             |
 
 **Why Current is in the State axis rather than a separate component:** Current is a structural constraint (always exactly one, always last) with distinct visual treatment (Semibold, no interaction). Encoding it in the State axis rather than as a separate sub-component keeps the variant set unified and avoids maintaining an independent CurrentItem component set.

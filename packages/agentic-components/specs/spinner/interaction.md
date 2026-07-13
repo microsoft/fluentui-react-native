@@ -28,11 +28,9 @@ The 25% visible-arc rule from SKILL.md Anatomy is a constant — it must hold at
 - Combine with `vector-effect="non-scaling-stroke"` so the CSS stroke-width renders at the spec'd pixel value regardless of `viewBox` scaling.
 
 ```html
-<circle class="spinner__indicator"
-        cx="16" cy="16" r="14"
-        pathLength="100"
-        vector-effect="non-scaling-stroke" />
+<circle class="spinner__indicator" cx="16" cy="16" r="14" pathLength="100" vector-effect="non-scaling-stroke" />
 ```
+
 ```css
 .spinner__indicator {
   stroke-dasharray: 25 75;

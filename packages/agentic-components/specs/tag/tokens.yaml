@@ -51,7 +51,6 @@ tokens:
       No foreground shift on hover/pressed — the background overlay
       provides sufficient interaction feedback for both styles.
 
-
   stroke:
     container: no-stroke
     focus: See flex-system:styling — universal dual-outline focus ring.
@@ -69,7 +68,6 @@ tokens:
       size-dependent base radius (default); Circular uses the fully circular
       radius even with a visible label. Icon only is always circular
       regardless of Shape.
-
 
   typography:
     Small: textstyle-functional-body-small
@@ -129,7 +127,7 @@ properties:
   component:
     Label string:
       type: TEXT
-      default: "Tag text"
+      default: 'Tag text'
     Dismiss:
       type: BOOLEAN
       default: true

@@ -11,14 +11,14 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | molecular |
+| Field     | Value      |
+| --------- | ---------- |
+| Type      | molecular  |
 | Component | MenuButton |
 
 This spec covers the MenuButton component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
 
-Answer design questions directly — lead with rationale, then tokens. MenuButton is a Button trigger plus a Menu overlay — actions, not selection. The most common misuse is reaching for MenuButton when Dropdown is correct; the distinction is whether the trigger opens a list of *actions* (MenuButton) or commits a *value* (Dropdown). See `usage.md` § vs Dropdown for the full differentiation.
+Answer design questions directly — lead with rationale, then tokens. MenuButton is a Button trigger plus a Menu overlay — actions, not selection. The most common misuse is reaching for MenuButton when Dropdown is correct; the distinction is whether the trigger opens a list of _actions_ (MenuButton) or commits a _value_ (Dropdown). See `usage.md` § vs Dropdown for the full differentiation.
 
 ---
 
@@ -42,14 +42,14 @@ Answer design questions directly — lead with rationale, then tokens. MenuButto
 5. **Menu surface** — `flex-components:menu` instance, anchored to the trigger and mounted when Open=true (which is valid only on the Pressed row). Provides surface fill, stroke, radius, shadow, elevation, and item layout. **The Menu surface never renders MenuItem Style=Section Header rows** — MenuButton's contract is a flat list of actions, and subheaders add visual noise to that read; composers should compose only Style=List Item rows inside the Menu.
 6. **Menu items** — `flex-components:menu-item` instances composed inside the Menu's Content Slot at the call site. MenuButton does not expose item content as Figma properties.
 
-| Slot | Required | Default |
-|------|----------|---------|
-| Trigger | Yes | — |
-| Leading icon slot | When `Leading icon=true` | Hidden (default `false`) |
-| Label | When `Label=true` | "Label" (default `true`) |
-| Trailing chevron | Yes (always) | ChevronDown (not swappable) |
-| Menu surface | Yes (Pressed × Open=true only; no Section Header rows) | — |
-| Menu items | Yes (Pressed × Open=true only) | — |
+| Slot              | Required                                               | Default                     |
+| ----------------- | ------------------------------------------------------ | --------------------------- |
+| Trigger           | Yes                                                    | —                           |
+| Leading icon slot | When `Leading icon=true`                               | Hidden (default `false`)    |
+| Label             | When `Label=true`                                      | "Label" (default `true`)    |
+| Trailing chevron  | Yes (always)                                           | ChevronDown (not swappable) |
+| Menu surface      | Yes (Pressed × Open=true only; no Section Header rows) | —                           |
+| Menu items        | Yes (Pressed × Open=true only)                         | —                           |
 
 > **No Selected axis:** MenuButton triggers a Menu of actions, not a toggle. If a control needs both menu-opening and a toggled state, model the toggle separately (often as a sibling Button) rather than overloading the trigger.
 
@@ -69,38 +69,38 @@ Variant properties are ordered in the design tool: **Style → Size → State �
 
 **Why the chevron is never suppressed:** The chevron is the affordance that distinguishes a MenuButton from a plain icon Button. Even when the chosen icon strongly implies "more actions" (kebab, more, settings), dropping the chevron blurs the affordance — users have no consistent visual cue that activation opens something rather than firing a single action. The chevron is the contract of MenuButton; the label and leading icon are optional context. Because it is structural, MenuButton does not expose the chevron as a swappable property — it should always be ChevronDown.
 
-**Why the chevron is a primary affordance (not a hint):** MenuButton's chevron renders at the label's color tier — the same currentColor that the label uses — distinct from Dropdown's chevron, which is intentionally desaturated to defer to the value text. Dropdown's chevron is a hint that "more is below" the value; MenuButton's chevron *is* the affordance. Treating it as primary keeps the trigger reading as a single visual unit and prevents the chevron from feeling decorative.
+**Why the chevron is a primary affordance (not a hint):** MenuButton's chevron renders at the label's color tier — the same currentColor that the label uses — distinct from Dropdown's chevron, which is intentionally desaturated to defer to the value text. Dropdown's chevron is a hint that "more is below" the value; MenuButton's chevron _is_ the affordance. Treating it as primary keeps the trigger reading as a single visual unit and prevents the chevron from feeling decorative.
 
 #### Style
 
-| Value | When to Use |
-|-------|-------------|
-| **Primary** | A MenuButton that owns the single loudest action on a surface — rare; most MenuButtons are not the primary CTA. |
-| **Secondary** | Default for most MenuButtons — visually grounded without dominating. |
-| **Outline** | Containment with minimal fill weight — often alongside a Primary action. |
-| **Subtle** | Low-emphasis triggers that sit quietly within a surface, alongside other Subtle controls. |
+| Value         | When to Use                                                                                                     |
+| ------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Primary**   | A MenuButton that owns the single loudest action on a surface — rare; most MenuButtons are not the primary CTA. |
+| **Secondary** | Default for most MenuButtons — visually grounded without dominating.                                            |
+| **Outline**   | Containment with minimal fill weight — often alongside a Primary action.                                        |
+| **Subtle**    | Low-emphasis triggers that sit quietly within a surface, alongside other Subtle controls.                       |
 
 **Why forward all four styles from Button:** The MenuButton trigger is visually a Button — there is no design reason for it to use a different chrome system. Forwarding Button's Style axis keeps MenuButton interchangeable with Button in command bars, toolbars, and form footers.
 
 #### Size
 
-| Value | When to Use |
-|-------|-------------|
-| **Small** | Dense surfaces: toolbars, inline controls, data-table rows. Pairs with 16 px icons. |
-| **Medium** | Default. General-purpose across all surfaces. Pairs with 20 px icons. |
-| **Large** | High-touch surfaces, prominent CTAs, or contexts requiring larger tap targets. Pairs with 20 px icons. |
+| Value      | When to Use                                                                                            |
+| ---------- | ------------------------------------------------------------------------------------------------------ |
+| **Small**  | Dense surfaces: toolbars, inline controls, data-table rows. Pairs with 16 px icons.                    |
+| **Medium** | Default. General-purpose across all surfaces. Pairs with 20 px icons.                                  |
+| **Large**  | High-touch surfaces, prominent CTAs, or contexts requiring larger tap targets. Pairs with 20 px icons. |
 
 **Why forward all three sizes from Button:** Same rationale as Style — MenuButtons sit next to Buttons in command bars and toolbars and must match their density. Menu width and item row size are not affected by trigger size — the Menu renders at its own density regardless.
 
 #### State
 
-| Value | Applies | Visual |
-|-------|---------|--------|
-| **Rest** | Closed only | Default Button chrome per Style |
-| **Hover** | Closed only | Background and foreground use the inline hover values from `tokens.yaml` |
-| **Pressed** | Closed **and Open** | Activation moment — Menu mounts when Open=true here |
-| **Focused** | Closed only | Universal dual-outline focus ring per `flex-system:styling` |
-| **Disabled** | Closed only | Button disabled tokens; trigger not activatable |
+| Value        | Applies             | Visual                                                                   |
+| ------------ | ------------------- | ------------------------------------------------------------------------ |
+| **Rest**     | Closed only         | Default Button chrome per Style                                          |
+| **Hover**    | Closed only         | Background and foreground use the inline hover values from `tokens.yaml` |
+| **Pressed**  | Closed **and Open** | Activation moment — Menu mounts when Open=true here                      |
+| **Focused**  | Closed only         | Universal dual-outline focus ring per `flex-system:styling`              |
+| **Disabled** | Closed only         | Button disabled tokens; trigger not activatable                          |
 
 **Why State forwards from Button rather than from Input:** MenuButton's trigger is a Button (it fires an action — opening the Menu). It uses Button's full state model — background and foreground both participate in hover and pressed, and focus is the universal dual-outline ring. Dropdown's trigger borrows Input's chrome (stroke-only, stroke-swap focus) because Dropdown is a value picker dressed as a form field; MenuButton is an action trigger dressed as a button.
 
@@ -108,9 +108,9 @@ Variant properties are ordered in the design tool: **Style → Size → State �
 
 #### Open
 
-| Value | Description |
-|-------|-------------|
-| **false** | Trigger is shown; Menu is not mounted. Default. Valid in every State. |
-| **true** | Trigger remains visible; Menu is mounted and positioned relative to the trigger; DOM focus moves into the Menu (to the first MenuItem). Trigger chevron does not rotate or swap. **Valid only when State=Pressed** — see State § Why Open=true is coupled to State=Pressed. |
+| Value     | Description                                                                                                                                                                                                                                                                 |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **false** | Trigger is shown; Menu is not mounted. Default. Valid in every State.                                                                                                                                                                                                       |
+| **true**  | Trigger remains visible; Menu is mounted and positioned relative to the trigger; DOM focus moves into the Menu (to the first MenuItem). Trigger chevron does not rotate or swap. **Valid only when State=Pressed** — see State § Why Open=true is coupled to State=Pressed. |
 
 **Why Open is a variant axis rather than purely runtime:** Open=true is a documentable design state — designers need to specify the Menu surface tokens and the row that receives initial DOM focus. Modelling it as a Figma variant makes the Open state explicit (anchored to Pressed); runtime code still drives the actual open/close transition.

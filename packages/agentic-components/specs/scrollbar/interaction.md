@@ -25,13 +25,13 @@ If the parent scroll container is itself focusable (e.g., a `tabindex="0"` regio
 
 ## Show / hide
 
-| Trigger | Behavior |
-|---------|----------|
-| Scroll event on the container | Thumb fades in over the next paint frame. |
-| Pointer enters the container or thumb | Thumb fades in. |
-| Pointer leaves the container and scroll idle | Thumb fades out after the idle delay. |
-| Content length ≤ viewport length | Thumb is removed from the DOM (not just hidden). |
-| Container loses focus and scroll idle | Thumb fades out. |
+| Trigger                                      | Behavior                                         |
+| -------------------------------------------- | ------------------------------------------------ |
+| Scroll event on the container                | Thumb fades in over the next paint frame.        |
+| Pointer enters the container or thumb        | Thumb fades in.                                  |
+| Pointer leaves the container and scroll idle | Thumb fades out after the idle delay.            |
+| Content length ≤ viewport length             | Thumb is removed from the DOM (not just hidden). |
+| Container loses focus and scroll idle        | Thumb fades out.                                 |
 
 ## Animation
 

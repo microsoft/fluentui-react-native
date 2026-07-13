@@ -161,7 +161,7 @@ properties:
       notes: Toggles the outer brand stroke indicating active or collaborating status.
     Initials:
       type: TEXT
-      default: "AB"
+      default: 'AB'
       notes: Character string shown in the Initials content mode. 1 character at size 16; 1–2 characters at sizes 20, 24, 28, 32, 40, 56, and 120.
     48px Regular:
       type: INSTANCE_SWAP

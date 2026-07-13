@@ -128,7 +128,7 @@ properties:
   component:
     Label string:
       type: TEXT
-      default: "Label"
+      default: 'Label'
       notes: Bound to the Text node.
     Required:
       type: BOOLEAN

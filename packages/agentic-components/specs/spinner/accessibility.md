@@ -28,6 +28,7 @@ Build-time requirements that must be satisfied by the component implementation.
     </span>
   </div>
   ```
+
 - **Required attributes:**
   - `aria-label` — required on the spinner itself when no visible label sits adjacent. Describe what is loading ("Loading messages"), not the indicator ("Spinner").
   - `aria-labelledby` — preferred over `aria-label` when an adjacent visible label exists; point at that label's element so the visible text and the screen-reader announcement stay in sync.

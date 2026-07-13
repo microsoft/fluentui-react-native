@@ -49,19 +49,19 @@ The Popover is **not** a focus trap. Tab/Shift+Tab dismiss it cleanly into the s
 
 ## Open / close
 
-| Trigger | Behavior |
-|---|---|
-| Click on Trigger | Toggles Open. Closed → Open mounts the Popover and moves focus to the selected (or first) row. Open → Closed dismisses the Popover. |
-| Enter / Space on Trigger | Opens the Popover and moves focus into it. |
-| Arrow Down / Arrow Up on Trigger | Opens the Popover and moves focus into it. |
-| Click on a row (Single) | Commits value, closes the Popover, returns focus to the Trigger. |
-| Click on a row (Multiple) | Toggles the row's `aria-pressed` state. Popover stays open; focus stays on the row. |
-| Enter / Space on a focused row (Single) | Commits value, closes the Popover, returns focus to the Trigger. |
-| Enter / Space on a focused row (Multiple) | Toggles `aria-pressed`. Popover stays open. |
-| Escape | Closes the Popover, returns focus to the Trigger. Toggled selections in Multiple mode remain committed. |
-| Click outside | Closes the Popover (light dismiss via `flex-components:popover`), returns focus to the Trigger. |
-| Tab from inside an open Popover | Closes the Popover, moves focus forward to the next focusable element on the page. |
-| Shift + Tab from inside an open Popover | Closes the Popover, returns focus to the Trigger. |
+| Trigger                                   | Behavior                                                                                                                            |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Click on Trigger                          | Toggles Open. Closed → Open mounts the Popover and moves focus to the selected (or first) row. Open → Closed dismisses the Popover. |
+| Enter / Space on Trigger                  | Opens the Popover and moves focus into it.                                                                                          |
+| Arrow Down / Arrow Up on Trigger          | Opens the Popover and moves focus into it.                                                                                          |
+| Click on a row (Single)                   | Commits value, closes the Popover, returns focus to the Trigger.                                                                    |
+| Click on a row (Multiple)                 | Toggles the row's `aria-pressed` state. Popover stays open; focus stays on the row.                                                 |
+| Enter / Space on a focused row (Single)   | Commits value, closes the Popover, returns focus to the Trigger.                                                                    |
+| Enter / Space on a focused row (Multiple) | Toggles `aria-pressed`. Popover stays open.                                                                                         |
+| Escape                                    | Closes the Popover, returns focus to the Trigger. Toggled selections in Multiple mode remain committed.                             |
+| Click outside                             | Closes the Popover (light dismiss via `flex-components:popover`), returns focus to the Trigger.                                     |
+| Tab from inside an open Popover           | Closes the Popover, moves focus forward to the next focusable element on the page.                                                  |
+| Shift + Tab from inside an open Popover   | Closes the Popover, returns focus to the Trigger.                                                                                   |
 
 ## Positioning
 

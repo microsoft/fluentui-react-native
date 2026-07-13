@@ -114,11 +114,11 @@ properties:
   component:
     Item Label:
       type: TEXT
-      default: "Item"
+      default: 'Item'
       notes: Bound to each BreadcrumbItem's label node. Repeated per item slot position in the component.
     Current Label:
       type: TEXT
-      default: "Current page"
+      default: 'Current page'
       notes: Bound to the CurrentItem's label node.
     20px Regular:
       type: INSTANCE_SWAP

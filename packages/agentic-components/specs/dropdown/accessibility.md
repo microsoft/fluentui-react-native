@@ -15,7 +15,7 @@ Build-time requirements that must be satisfied by the component implementation.
   - **Item rows:** native `<button type="button">` per row. **No `role="option"`, no `aria-selected`.** Selection state is carried by `aria-pressed` on each row's button. Owned by `flex-components:listbox-item`.
 - **Required attributes:**
   - **On the Trigger (`<button>`):**
-    - `aria-haspopup="true"` — declares that activating the button opens a popup. (`"menu"` and `"listbox"` are *not* used here; the popup is neither.)
+    - `aria-haspopup="true"` — declares that activating the button opens a popup. (`"menu"` and `"listbox"` are _not_ used here; the popup is neither.)
     - `aria-expanded="true|false"` — maps to the Open axis.
     - `aria-controls` — references the Popover's `id`. Required when the Popover is mounted (Open=true); may be set permanently even when Closed if a stable id is available.
     - `aria-label` or `aria-labelledby` — the Trigger must have an accessible name. Inside a Field, `aria-labelledby` points at the Field label. Standalone Dropdowns must carry `aria-label`. One of the two is required.
@@ -30,7 +30,7 @@ Build-time requirements that must be satisfied by the component implementation.
     - `id` referenced by the Trigger's `aria-controls`.
 - **WCAG:**
   - **1.4.3 — Contrast (Minimum):** Trigger value and placeholder text must meet 4.5:1 against the trigger's background and the immediately surrounding page color. Error state stroke uses `--gnrc-color-stroke-danger-loud` which must meet 3:1 against the page background per 1.4.11.
-  - **1.4.11 — Non-text Contrast:** Trigger boundary stroke (Outline) or bottom edge (Underline) must meet 3:1 against the *immediately surrounding* page color at rest, focus, and error — not just against the trigger's own background. Dropdowns placed on low-contrast surfaces (subtle panel on subtle page) frequently fail this; verify in context, not in isolation.
+  - **1.4.11 — Non-text Contrast:** Trigger boundary stroke (Outline) or bottom edge (Underline) must meet 3:1 against the _immediately surrounding_ page color at rest, focus, and error — not just against the trigger's own background. Dropdowns placed on low-contrast surfaces (subtle panel on subtle page) frequently fail this; verify in context, not in isolation.
   - **2.1.1 — Keyboard:** Full keyboard support per `interaction.md` — Enter/Space/Arrow/Home/End/Escape/Tab.
   - **2.4.3 — Focus Order:** DOM focus moves trigger → rows (on Open) → trigger (on close via activation/Escape/click-outside/Shift+Tab) or trigger → rows → next focusable element (on Tab-to-dismiss). No focus is dropped to the document body.
   - **2.4.7 — Focus Visible:** Trigger Focus state uses Input's stroke swap (boundary becomes `--gnrc-color-stroke-neutral-heavy`). Focused row uses the universal dual-outline ring on `:focus-visible`.

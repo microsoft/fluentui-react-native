@@ -26,7 +26,7 @@ tokens:
 
   stroke:
     container: no-stroke
-    focus: n/a  # Non-interactive — no focus ring.
+    focus: n/a # Non-interactive — no focus ring.
 
   radius:
     track: borderRadiusCircular
@@ -86,11 +86,11 @@ properties:
   component:
     Label string:
       type: TEXT
-      default: "Label"
+      default: 'Label'
       notes: Bound to the Label text node.
     Value string:
       type: TEXT
-      default: "0%"
+      default: '0%'
       notes: >
         Bound to the Value text node. Free-form string — supports percentage
         ("42%"), fraction ("3 of 10"), or descriptive status ("Uploading…").

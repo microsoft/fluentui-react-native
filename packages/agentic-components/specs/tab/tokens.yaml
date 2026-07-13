@@ -74,7 +74,7 @@ tokens:
 
 sizes:
   Default:
-    resultant-height: 32px   # round(14 × 1.4) + 6×2 = 20 + 12
+    resultant-height: 32px # round(14 × 1.4) + 6×2 = 20 + 12
     icon: 20px
   notes: >
     Single size. Height is resultant — derived from padding + typography.
@@ -85,7 +85,7 @@ properties:
   component:
     Tab string:
       type: TEXT
-      default: "Tab"
+      default: 'Tab'
       notes: Bound to the visible label node only; ghost node has no prop binding.
     Icon:
       type: BOOLEAN

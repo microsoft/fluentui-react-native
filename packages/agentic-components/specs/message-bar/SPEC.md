@@ -11,9 +11,9 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | composed |
+| Field     | Value      |
+| --------- | ---------- |
+| Type      | composed   |
 | Component | MessageBar |
 
 This spec covers the MessageBar component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (dismissal, actions, overflow, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
@@ -41,12 +41,12 @@ Answer design questions directly — lead with rationale, then tokens. The most 
 5. **Actions container** — optional slot holding up to two Small Subtle Button instances. Shrinks to content.
 6. **Dismiss button** — optional icon-only Small Subtle Button with circular radius; holds a 16px Dismiss icon.
 
-| Slot | Required | Default |
-|------|----------|---------|
-| Status icon | Yes | Determined by Status variant |
-| Message text | Yes | "Message providing information with actionable insights." |
-| Actions | No | Hidden |
-| Dismiss button | No | Present |
+| Slot           | Required | Default                                                   |
+| -------------- | -------- | --------------------------------------------------------- |
+| Status icon    | Yes      | Determined by Status variant                              |
+| Message text   | Yes      | "Message providing information with actionable insights." |
+| Actions        | No       | Hidden                                                    |
+| Dismiss button | No       | Present                                                   |
 
 > **Status icon alignment:** The icon container aligns to text start, not center. This ensures the icon aligns to the first line when the message wraps across multiple lines.
 
@@ -58,12 +58,12 @@ The only variant axis is **Status**.
 
 #### Status
 
-| Value | Semantic |
-|-------|----------|
-| **Information** (Default) | Neutral informational context |
-| **Warning** | Non-critical issue requiring attention |
-| **Error** | Failure or blocking condition |
-| **Success** | Successful completion of an action |
+| Value                     | Semantic                               |
+| ------------------------- | -------------------------------------- |
+| **Information** (Default) | Neutral informational context          |
+| **Warning**               | Non-critical issue requiring attention |
+| **Error**                 | Failure or blocking condition          |
+| **Success**               | Successful completion of an action     |
 
 **Why Error uses the danger semantic palette, not "error":** The color system names the crimson semantic tier `danger` to cover both errors and destructive actions. MessageBar consumes `danger-subtle` to remain consistent with all other components that use the danger tier.
 

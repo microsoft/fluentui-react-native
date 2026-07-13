@@ -11,10 +11,10 @@ usage: usage.md
 
 ## Metadata
 
-| Field | Value |
-|-------|-------|
-| Type | molecular |
-| Component | Toolbar |
+| Field     | Value     |
+| --------- | --------- |
+| Type      | molecular |
+| Component | Toolbar   |
 
 This spec covers the Toolbar component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
 
@@ -39,10 +39,10 @@ Answer design questions directly — lead with rationale, then tokens. Toolbar i
 2. **Button** — icon-only Subtle Button instances. Each button is a discrete action or toggle within the toolbar. Interaction states (Rest, Hover, Pressed, Disabled, Selected) are owned entirely by the Button sub-component.
 3. **Divider** — vertical separator between logical groups of buttons. Uses `--gnrc-color-stroke-neutral-subtle` at `--gnrc-stroke-width-thin`. Stretches to full height of the toolbar container.
 
-| Slot | Required | Default |
-|------|----------|---------|
-| Button | Yes (at least one) | Icon-only Subtle Button |
-| Divider | No | Add between button groups to create logical separation |
+| Slot    | Required           | Default                                                |
+| ------- | ------------------ | ------------------------------------------------------ |
+| Button  | Yes (at least one) | Icon-only Subtle Button                                |
+| Divider | No                 | Add between button groups to create logical separation |
 
 ---
 
@@ -52,9 +52,9 @@ Variant properties are ordered in the design tool: **Size**.
 
 #### Size
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| **Large** | Uses Large Buttons with `--gnrc-spacing-component-base-150` between children | Default. Standard surfaces and formatting bars. |
-| **Small** | Uses Small Buttons with `--gnrc-spacing-component-base-50` between children | Dense surfaces: compact toolbars, inline editors, space-constrained contexts. |
+| Value     | Description                                                                  | When to Use                                                                   |
+| --------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **Large** | Uses Large Buttons with `--gnrc-spacing-component-base-150` between children | Default. Standard surfaces and formatting bars.                               |
+| **Small** | Uses Small Buttons with `--gnrc-spacing-component-base-50` between children  | Dense surfaces: compact toolbars, inline editors, space-constrained contexts. |
 
 **Why only two sizes:** Toolbar sizes map directly to Button sizes — Large toolbar uses Large buttons, Small toolbar uses Small buttons. Medium is omitted because the toolbar's primary use case is dense formatting controls where Large and Small cover the practical range. The gap token scales proportionally with size.

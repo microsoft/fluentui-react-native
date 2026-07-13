@@ -40,7 +40,7 @@ tokens:
 
   stroke:
     container: no-stroke
-    focus: n/a  # Non-interactive — no focus ring.
+    focus: n/a # Non-interactive — no focus ring.
 
   radius: n/a
 
@@ -95,7 +95,7 @@ properties:
       notes: Shows/hides the label text within the content slot.
     Text string:
       type: TEXT
-      default: "Text"
+      default: 'Text'
       notes: Bound to the label text node.
     20px Regular:
       type: INSTANCE_SWAP

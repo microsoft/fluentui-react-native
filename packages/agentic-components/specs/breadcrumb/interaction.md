@@ -8,12 +8,14 @@ platform: react-native (Windows, macOS)
 ## Keyboard navigation
 
 ### Breadcrumb trail
+
 - **Tab** — moves focus forward through each focusable item in the trail: BreadcrumbItems and the OverflowButton (if present). CurrentItem is not focusable and is skipped.
 - **Shift+Tab** — moves focus backward through focusable items in the same order.
 - **Enter / Space** — activates the focused BreadcrumbItem (triggers navigation) or opens the overflow Popover when the OverflowButton is focused.
 - No arrow key navigation on the trail itself — BreadcrumbItems are individually tabbable elements, not a composite widget with roving tabindex.
 
 ### Overflow Popover (when open)
+
 - **Arrow Down / Arrow Up** — moves focus between items in the overflow list. Focus wraps at the top and bottom.
 - **Enter / Space** — activates the focused overflow item (triggers navigation and closes the Popover).
 - **Escape** — closes the Popover and returns focus to the OverflowButton.
@@ -26,6 +28,7 @@ When the trail is too long for the available width, middle items are hidden and 
 **Opening:** OverflowButton sets `aria-expanded="true"`. The Popover renders below (or above, if constrained) the OverflowButton. Focus moves to the first item in the overflow list.
 
 **Dismissal:** The Popover closes on:
+
 - Activating an overflow item (triggers navigation)
 - Pressing **Escape**
 - Clicking or tapping outside the Popover (light-dismiss)

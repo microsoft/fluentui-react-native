@@ -7,9 +7,9 @@ variants:
     default: Large
 
 tokens:
-  background: n/a  # Transparent layout container — no fill. Child buttons own their backgrounds.
+  background: n/a # Transparent layout container — no fill. Child buttons own their backgrounds.
 
-  foreground: n/a  # Delegated to child Button sub-components.
+  foreground: n/a # Delegated to child Button sub-components.
 
   stroke:
     divider:
@@ -25,7 +25,7 @@ tokens:
     If a toolbar surface is introduced in the future, use borderRadiusBase300
     as the starting point, per the composite staircase rule with atomic-small child buttons.
 
-  typography: n/a  # No text content at the toolbar level. Delegated to child Button.
+  typography: n/a # No text content at the toolbar level. Delegated to child Button.
 
   spacing:
     gap:
@@ -33,7 +33,7 @@ tokens:
       Small: spacingComponentBase50
     gap-rationale: >
       Component category — spacing is between tightly coupled sibling elements within a single component.
-    padding: n/a  # Toolbar container has no internal padding — children align flush to the container edges.
+    padding: n/a # Toolbar container has no internal padding — children align flush to the container edges.
 
   elevation: n/a
 

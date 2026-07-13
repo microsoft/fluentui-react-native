@@ -44,5 +44,5 @@ properties:
   component:
     tooltipString:
       type: TEXT
-      default: "Capabilities"
+      default: 'Capabilities'
       notes: Bound to the label text node.

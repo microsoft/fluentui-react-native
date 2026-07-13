@@ -43,18 +43,18 @@ The Menu is **not** a focus trap. Tab and Shift+Tab dismiss it cleanly into the 
 
 ## Open / close
 
-| Trigger | Behavior |
-|---|---|
-| Click on Trigger | Toggles Open. Closed → Open mounts the Menu and moves focus to the first MenuItem. Open → Closed dismisses the Menu and returns focus to the Trigger. |
-| Enter / Space on Trigger | Opens the Menu and moves focus to the first MenuItem. |
-| Arrow Down on Trigger | Opens the Menu and moves focus to the first MenuItem. |
-| Arrow Up on Trigger | Opens the Menu and moves focus to the last MenuItem. |
-| Click on a MenuItem | Activates the action, closes the Menu, returns focus to the Trigger. |
-| Enter / Space on a focused MenuItem | Activates the action, closes the Menu, returns focus to the Trigger. |
-| Escape (Menu open) | Closes the Menu, returns focus to the Trigger. |
-| Click outside | Closes the Menu (light dismiss via `flex-components:popover`), returns focus to the Trigger. |
-| Tab from inside an open Menu | Closes the Menu, moves focus forward past the Trigger. |
-| Shift + Tab from inside an open Menu | Closes the Menu, returns focus to the Trigger. |
+| Trigger                              | Behavior                                                                                                                                              |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Click on Trigger                     | Toggles Open. Closed → Open mounts the Menu and moves focus to the first MenuItem. Open → Closed dismisses the Menu and returns focus to the Trigger. |
+| Enter / Space on Trigger             | Opens the Menu and moves focus to the first MenuItem.                                                                                                 |
+| Arrow Down on Trigger                | Opens the Menu and moves focus to the first MenuItem.                                                                                                 |
+| Arrow Up on Trigger                  | Opens the Menu and moves focus to the last MenuItem.                                                                                                  |
+| Click on a MenuItem                  | Activates the action, closes the Menu, returns focus to the Trigger.                                                                                  |
+| Enter / Space on a focused MenuItem  | Activates the action, closes the Menu, returns focus to the Trigger.                                                                                  |
+| Escape (Menu open)                   | Closes the Menu, returns focus to the Trigger.                                                                                                        |
+| Click outside                        | Closes the Menu (light dismiss via `flex-components:popover`), returns focus to the Trigger.                                                          |
+| Tab from inside an open Menu         | Closes the Menu, moves focus forward past the Trigger.                                                                                                |
+| Shift + Tab from inside an open Menu | Closes the Menu, returns focus to the Trigger.                                                                                                        |
 
 ## Positioning
 
