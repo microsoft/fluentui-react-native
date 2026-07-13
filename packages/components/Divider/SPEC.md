@@ -12,7 +12,17 @@ Content, text or an icon are also not supported on mobile platforms.
 
 ## Sample Code
 
+Add the Divider package to your project.
+
+```ts
+npm i @fluentui-react-native/divider
+```
+
 ### Basic Divider
+
+```ts
+import { Divider } from '@fluentui-react-native/divider';
+```
 
 ```tsx
 <>
