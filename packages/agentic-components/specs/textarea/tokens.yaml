@@ -1,0 +1,138 @@
+component: Textarea
+type: atomic
+
+variants:
+  Resize:
+    values: [None, Vertical, Both]
+    default: Vertical
+    figma: excluded
+    notes: >
+      Code-only property — controls the CSS resize property. No visual
+      difference between values in Figma; excluded from the component set to
+      avoid confusing designers. None disables user resizing; Vertical allows
+      vertical-only drag; Both allows resizing in both axes.
+  Size:
+    values: [Small, Medium, Large]
+    default: Medium
+  State:
+    values: [Rest, Hover, Pressed, Focus, Error, Disabled, Read only]
+    notes: >
+      Rest, Focus, Error, Disabled, and Read only are mutually exclusive base
+      states. Hover and Pressed are resolved interaction states that ride on top of the
+      active base — not states of their own. Pressed is transient; clicking a
+      textarea immediately triggers Focus.
+
+tokens:
+  background:
+    all-states:
+      all-styles: colorBackgroundNeutralTransparent
+
+  foreground:
+    rest:
+      placeholder: colorForegroundNeutralTertiary
+      value: colorForegroundNeutralPrimary
+    disabled:
+      all: colorForegroundNeutralDisabled
+    read-only:
+      value: colorForegroundNeutralPrimary
+      rationale: Primary foreground distinguishes a real value from Disabled's low-contrast state.
+
+  stroke:
+    width: strokeWidthThin
+    rest:
+      value: colorStrokeNeutralLoud
+      hover: hover.colorStrokeNeutralLoud
+      pressed: pressed.colorStrokeNeutralLoud
+    focus:
+      value: colorStrokeNeutralHeavy
+      hover: hover.colorStrokeNeutralHeavy
+      pressed: pressed.colorStrokeNeutralHeavy
+    error: colorStrokeDangerLoud
+    disabled: colorStrokeNeutralDisabled
+    read-only: colorStrokeNeutralDisabled
+    focus-ring: >
+      Textarea does not use the universal dual-outline focus ring. The boundary
+      stroke itself swaps to colorStrokeNeutralHeavy in Focus state
+      (focus semantics) as a full border.
+
+
+  radius: borderRadiusBase300
+
+  radius-by-size:
+    Small: borderRadiusBase200
+    Medium: borderRadiusBase300
+    Large: borderRadiusBase400
+
+  resize-handle:
+    implementation: native
+    color: colorStrokeNeutralSoft
+    size: 12px
+    inset: spacingComponentBase50
+    rationale: >
+      Figma-only decorative asset. Code does NOT render a custom handle — the
+      browser/OS-native resize handle (driven by the CSS `resize` property)
+      provides the real affordance and visibility (present when `resize` is not
+      `none`). The color, size, and inset describe the Figma glyph only and are
+      not implemented as code tokens. Shown by default in Figma to mirror the
+      default Vertical resize behavior.
+
+
+  typography:
+    rest: textstyle-functional-body-medium
+    font-family: fontFamilyFunctional
+
+  typography-by-size:
+    Small: textstyle-functional-body-small
+    Medium: textstyle-functional-body-medium
+    Large: textstyle-functional-body-large
+
+  spacing:
+    horizontal: spacingComponentBase250
+    vertical: spacingComponentBase150
+
+  spacing-by-size:
+    Small:
+      horizontal: spacingComponentBase150
+      vertical: spacingComponentBase100
+    Medium:
+      horizontal: spacingComponentBase250
+      vertical: spacingComponentBase150
+    Large:
+      horizontal: spacingComponentBase300
+      vertical: spacingComponentBase200
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: Stroke transitions ≤150ms ease-in-out. Focus may be instant. Reduced motion removes transitions entirely.
+sizes:
+  min-height: 64px
+  rationale: Accommodates approximately three lines of body-medium text plus vertical padding. Actual height grows with content or user resize.
+  notes: >
+    Size variants (Small/Medium/Large) affect min-height, padding, typography,
+    and border radius. Resulting min-heights accommodate approximately 2-3 lines
+    per size. No icon sizes — Textarea has no icon slots.
+  Small:
+    min-height: 56px   # round(12 × 1.4) + 4×2 = 17 + 8
+  Medium:
+    min-height: 64px   # round(14 × 1.4) + 6×2 = 20 + 12
+  Large:
+    min-height: 76px   # round(16 × 1.4) + 8×2 = 22 + 16
+  notes-detail: Heights are resultant from padding + typography + stroke. Size variants match Input's Small/Medium/Large scale.
+
+properties:
+  component:
+    Resize Handle:
+      type: BOOLEAN
+      default: true
+      notes: >
+        Figma-only design affordance — toggles the decorative resize-handle
+        glyph in the design tool. Shown by default to mirror the default
+        Vertical resize behavior. In code there is no handle element; the
+        browser/OS-native resize handle (CSS `resize`) provides the affordance,
+        visible whenever `resize` is not `none`.
+    Placeholder String:
+      type: TEXT
+      default: Placeholder
+      notes: Placeholder text shown in .Text when the textarea is empty. Rendered in tertiary foreground.

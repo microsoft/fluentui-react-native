@@ -1,0 +1,95 @@
+component: MenuButton
+type: molecular
+
+variants:
+  Style:
+    values: [Primary, Secondary, Outline, Subtle]
+    default: Secondary
+    notes: Forwarded from Button.
+  Size:
+    values: [Small, Medium, Large]
+    default: Medium
+    notes: Forwarded from Button.
+  State:
+    values: [Rest, Hover, Pressed, Disabled]
+    notes: |
+      Forwarded from Button. Hover and Pressed are resolved as nested token state values.
+      Open=true is valid only when State=Pressed — opening the Menu is the activation outcome, so it is documented on the row that owns the activation. Rest, Hover, and Disabled are Closed only.
+  Open:
+    values: [false, true]
+    default: false
+    notes: Valid only in combination with State=Pressed — see State notes.
+
+tokens:
+  trigger:
+    delegate: flex-components:button
+    notes: All trigger chrome tokens (background, foreground, hover/pressed, stroke, radius, padding, typography, font-family) come from flex-components:button. Selected axis is not forwarded.
+  trigger-chevron:
+    foreground:
+      inherit: tokens.trigger.foreground
+      notes: Chevron uses currentColor, so Button's foreground rest/hover/pressed values remain the source of truth.
+      disabled: colorForegroundNeutralDisabled
+    size:
+      Small: 16px
+      Medium: 20px
+      Large: 20px
+    visibility: Always visible — structurally required regardless of the Label or Leading icon BOOLEAN state.
+    open-behavior: static
+    open-behavior-notes: Chevron does not rotate or swap when Open=true (Pressed × Open=true).
+
+  menu:
+    delegate: flex-components:menu
+    positioning:
+      preferred-side: block-end
+      alignment: inline-start
+    notes: Composed as-is — no token overrides. Width and max-height defer to flex-components:menu and flex-components:popover.
+
+  motion:
+    status: pending
+    guidance: See interaction.md § Animation. Reduced motion — all transitions instant.
+
+sizes:
+  Small:
+    trigger-icon: 16px
+    inherits: flex-components:button Small
+  Medium:
+    trigger-icon: 20px
+    inherits: flex-components:button Medium
+  Large:
+    trigger-icon: 20px
+    inherits: flex-components:button Large
+  notes: |
+    Trigger heights inherit from flex-components:button § sizes — specifically Button's Icon and text values, applied to every Label/Leading icon combination. The trigger is always a rounded rectangle (borderRadiusBase200/300/400 per Size); the circular shape used by Button's Icon-only Layout is not modelled here. Toggling Leading icon=true with Label=false therefore yields a rounded-rectangle icon+chevron trigger, not a circular pill.
+    Menu width and max-height inherit from flex-components:menu and flex-components:popover.
+
+dependencies:
+  - skill: flex-components:button
+    usage: Trigger chrome. Forwards Style, Size, and State axes; Layout collapses into Label + Leading icon BOOLEAN slots on a single chrome set, and Selected is not consumed.
+  - skill: flex-components:menu
+    usage: Overlay surface mounted when Open=true. Anchored below the trigger.
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: "Label"
+      notes: Bound to the visible label node. Shown when Label=true.
+    Label:
+      type: BOOLEAN
+      default: true
+      notes: Toggles the label slot. Combine with Leading icon=false for a chevron-only trigger (degenerate — designers should keep at least one of Label or Leading icon on).
+    Leading icon:
+      type: BOOLEAN
+      default: false
+      notes: Toggles the leading icon slot. Set to true for icon+label or icon+chevron triggers.
+    Leading icon 20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Medium and Large size leading icon. Bound on every variant; takes effect when Leading icon=true.
+    Leading icon 16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      binding: Small size leading icon. Bound on every variant; takes effect when Leading icon=true.
+  notes: |
+    Trailing chevron is structurally required and is not exposed as a swappable property — the ChevronDown icon is the contract of MenuButton and should never be substituted.
+    Menu item content is composed at the call site, not exposed as Figma properties.

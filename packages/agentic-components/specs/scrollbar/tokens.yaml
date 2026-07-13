@@ -1,0 +1,68 @@
+component: Scrollbar
+type: atomic
+
+variants:
+  Orientation:
+    values: [Vertical, Horizontal]
+    default: Vertical
+    notes: >
+      Controls the axis the thumb runs along. Vertical anchors the thumb to the
+      trailing horizontal edge of the scroll container; Horizontal anchors it
+      to the bottom edge.
+  State:
+    values: [Rest]
+    default: Rest
+    notes: >
+      Scrollbar has no interaction states. Pointer and keyboard input drive
+      the native scroll machinery on the parent container — see
+      interaction.md.
+
+tokens:
+  background: n/a  # Implicit track — no surface is drawn.
+
+  foreground:
+    rest:
+      thumb:
+        token: colorForegroundNeutralTertiary
+        rationale: >
+          Tertiary foreground keeps the thumb readable while visually
+          subordinate to the content it overlays.
+
+  stroke: n/a
+
+  radius:
+    thumb:
+      token: borderRadiusCircular
+
+  typography: n/a
+
+  spacing:
+    thumb-inset:
+      vertical:
+        token: spacingComponentBase100
+      horizontal:
+        token: spacingComponentBase100
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      The thumb fades in when scrolling begins and fades out after a short
+      idle period, matching the overlay-scrollbar pattern. Reduced motion —
+      thumb visibility toggles instantly without an opacity transition.
+
+sizes:
+  thumb:
+    thickness: 2px
+    length: proportional
+  notes: >
+    Length is computed at runtime as viewport-length / content-length, clamped
+    to a minimum that keeps the thumb pointer-grabbable. Heights/widths are
+    resultant — the Scrollbar adapts to the container it overlays.
+
+properties:
+  component:
+    Orientation:
+      type: VARIANT
+      default: Vertical

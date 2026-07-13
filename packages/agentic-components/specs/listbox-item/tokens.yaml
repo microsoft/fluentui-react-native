@@ -1,0 +1,184 @@
+component: ListboxItem
+type: atomic
+
+variants:
+  Secondary content position:
+    values: [Right, Under]
+    default: Right
+    notes: Controls whether secondary content sits inline (Right) or stacked below (Under).
+  Style:
+    values: [List Item, Section Header]
+    default: List Item
+    notes: Section Header is non-interactive — no hover, pressed, focus, or selected. Rendered as a non-focusable heading inside the parent surface.
+  State:
+    values: [Rest, Hover, Pressed, Focused, Disabled, Loading]
+    notes: Hover, Pressed, and Focused apply to List Item only. The row's <button> receives real DOM focus from the parent Dropdown; Focused renders the universal dual-outline ring on :focus-visible. Loading applies to Section Header only.
+  Selected:
+    values: [false, true]
+    default: false
+    notes: Parallel axis — runs independently of State. Applies to List Item only. Maps to aria-pressed on the row's <button>.
+
+tokens:
+  background:
+    rest:
+      List Item:
+        value: colorBackgroundNeutralTransparent
+        hover: hover.colorBackgroundNeutralTransparent
+        pressed: pressed.colorBackgroundNeutralTransparent
+        rationale: No visual weight at rest; the parent Popover surface provides the background context.
+      Section Header:
+        token: colorBackgroundNeutralTransparent
+    selected:
+      value: colorBackgroundNeutralSoft
+      hover: hover.colorBackgroundNeutralSoft
+      pressed: pressed.colorBackgroundNeutralSoft
+      rationale: Soft fill distinguishes the selected option from rest without competing with the hover tint. Proportional emphasis — softer than Button's heavy selected fill because a row's selection is a value choice, not a persistent control state.
+    disabled:
+      unselected: colorBackgroundNeutralTransparent
+      selected: colorBackgroundNeutralSubtleDisabled
+
+  foreground:
+    rest:
+      primary:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+        applies-to: Label, icon, checkmark (icon only — not Checkbox component), chevron, avatar (List Item and Section Header).
+      secondary:
+        value: colorForegroundNeutralSecondary
+        hover: hover.colorForegroundNeutralSecondary
+        pressed: pressed.colorForegroundNeutralSecondary
+        applies-to: Secondary content text only.
+    selected:
+      primary:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+      secondary:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+        rationale: Selected promotes secondary content to primary foreground so the metadata reads as equally active as the bolded label. Weight stays Regular — only the primary label swaps to Semibold.
+    disabled: colorForegroundNeutralDisabled
+
+  stroke:
+    container: no-stroke
+    focus: See flex-system:styling — universal dual-outline focus ring. Rendered on :focus-visible because the row's <button> carries real DOM focus from the parent Dropdown.
+
+  radius: borderRadiusBase300
+
+  typography:
+    List Item:
+      rest:
+        primary: textstyle-functional-body-medium
+        secondary: textstyle-functional-body-small
+      selected:
+        primary: textstyle-functional-body-medium-strong
+        secondary: textstyle-functional-body-small
+    Section Header:
+      title: textstyle-functional-body-small-strong
+      notes: Section Header label is always Semibold — no weight swap pattern. Consistent weight provides persistent visual hierarchy as a group label.
+    font-family: fontFamilyFunctional
+
+  spacing:
+    padding:
+      horizontal: spacingComponentBase300
+      vertical: spacingComponentBase250
+      rationale: Tight vertical tier — dense selection surface consistent with menu, navigation, and dropdown row patterns. Matches MenuItem to keep dropdown/menu row rhythm visually unified.
+    layout:
+      structure: >
+        Root container holds two auto-layout children — Leading container (icon or avatar + label + secondary content)
+        and Trailing container (chevron + checkmark + multiselect checkbox). Both children are vertically centered
+        against the option height. The Trailing container is right-aligned to the row's trailing edge; the Leading
+        container fills remaining width.
+      alignment: center (both leading and trailing containers vertically center their children against the row)
+    Secondary content position:
+      Right:
+        layout: row
+        notes: Primary label fills remaining width; secondary content is trailing, right-aligned, no-wrap.
+      Under:
+        layout: column
+        inner-gap: spacingComponentBase100
+        icon-align: top
+        notes: Primary label and secondary content stack vertically within a shared column container. The icon aligns to the top of the primary label rather than vertically centering against the full option height.
+    gap: spacingComponentBase150
+
+  elevation: n/a
+
+  loading:
+    skeleton-background: colorBackgroundNeutralSubtle
+    shimmer-color: colorBackgroundNeutralSoft
+    skeleton-radius: borderRadiusBase200
+    icon-skeleton: 20px square
+    label-skeleton: 320px x 24px (max-width capped)
+
+  motion:
+    status: pending
+    guidance: State color transitions should be fast (typically <=150ms) with standard ease-in-out. Reduced motion — remove transitions entirely.
+sizes:
+  height: auto
+  height-notes: Option height is derived from vertical padding + content line-height + inner gap (Under only). No explicit height constraint.
+  slots:
+    icon: 20px
+    checkmark:
+      size: 16px
+      type: icon-only
+      foreground: colorForegroundNeutralPrimary (inherits from parent option row)
+      selected-visibility: visible when Selected=True, hidden when Selected=False
+      notes: >
+        The single-select checkmark is a plain SVG icon — it is NOT a flex-components:checkbox instance.
+        It has no background, no stroke, no border radius, and no interaction states of its own.
+        It inherits foreground color from the parent option row and toggles visibility based on
+        the Selected axis. Do not apply Checkbox component tokens to this slot.
+    chevron: 20px
+    avatar: 32px
+    multiselect-checkbox:
+      component: flex-components:checkbox
+      style: square
+      label: hidden
+      indicator: 16px
+      status-mapping: Selected=True → Checked, Selected=False → Unchecked.
+      notes: See SKILL.md § Anatomy item 10 for the row-level selected-styling override and icon-swap interaction. The Checkbox is presentational — the row's aria-pressed on the container <button> is the announced selection state.
+
+dependencies:
+  - skill: flex-components:checkbox
+    usage: Multiselect trailing checkbox — label-hidden, square style, standard Checkbox styling. Presentational only; the row's aria-pressed carries the announced selection state. ListboxItem row does not apply its own selected styling when Multiselect is active.
+
+properties:
+  component:
+    Item string:
+      type: TEXT
+      default: "Listbox item"
+      notes: Bound to the visible label node; ghost node has no prop binding.
+    Secondary string:
+      type: TEXT
+      default: "Secondary"
+      notes: Secondary content text. Hidden when Secondary content prop is false.
+    Icon:
+      type: BOOLEAN
+      default: true
+      notes: Shows/hides the 20px leading icon slot.
+    Avatar:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the 32px avatar slot. Mutually exclusive with Icon in practice.
+    Checkmark:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the single-select checkmark indicator. See SKILL.md § Anatomy item 9 for placement.
+    Chevron:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the trailing chevron indicator. Reserved for hierarchical/grouped option sets; uncommon in flat lists.
+    Secondary content:
+      type: BOOLEAN
+      default: true
+      notes: Shows/hides the secondary content text.
+    Multiselect:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the Multiselect checkbox slot. See SKILL.md § Anatomy item 10 for layout and mutex with Checkmark.
+    20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Icon slot. Regular at rest; Filled when Selected=True.

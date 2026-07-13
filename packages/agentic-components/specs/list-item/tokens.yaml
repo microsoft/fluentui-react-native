@@ -1,0 +1,250 @@
+component: ListItem
+type: molecular
+
+variants:
+  Size:
+    values: [Small, Medium, Large]
+    default: Medium
+    notes: Forwarded from flex-components:list. Drives padding, typography, leading icon size, leading avatar size, and selection indicator size.
+  Selection mode:
+    values: [None, Single, Multiple]
+    default: None
+    notes: >
+      Mirrored from flex-components:list. None → Selection slot hidden.
+      Single → Selection slot renders a label-hidden Radio (flex-components:radio).
+      Multiple → Selection slot renders a label-hidden, square Checkbox (flex-components:checkbox).
+      Indicators are presentational; row Selected state is authoritative.
+  Secondary content position:
+    values: [Right, Under]
+    default: Right
+    notes: Controls whether secondary content sits inline (Right) or stacked below the primary label (Under).
+  State:
+    values: [Rest, Hover, Pressed, Focused, Disabled]
+    notes: >
+      Hover, Pressed, and Focused apply to interactive rows only (parent List's navigationMode = items or composite).
+      The row's interactive element receives real DOM focus from the parent List; Focused renders the universal
+      dual-outline ring on :focus-visible. Hover and Pressed are resolved as nested token state values.
+  Selected:
+    values: [false, true]
+    default: false
+    notes: >
+      Parallel axis — runs independently of State. Indicates the row is one of the currently-chosen values.
+      See tokens.background.selected.rationale for Multiple-mode suppression details.
+
+tokens:
+  background:
+    rest:
+      value: colorBackgroundNeutralTransparent
+      hover: hover.colorBackgroundNeutralTransparent
+      pressed: pressed.colorBackgroundNeutralTransparent
+      rationale: No visual weight at rest; the parent List/surface provides the background context.
+    selected:
+      value: colorBackgroundNeutralSoft
+      hover: hover.colorBackgroundNeutralSoft
+      pressed: pressed.colorBackgroundNeutralSoft
+      rationale: >
+        Soft fill distinguishes the selected row from rest without competing with the hover tint.
+        Suppressed when parent Selection mode = Multiple — the visible Multiselect Checkbox already
+        communicates selection. Mirrors flex-components:listbox-item.
+    disabled: colorBackgroundNeutralTransparent
+
+  foreground:
+    rest:
+      primary:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+        applies-to: Primary label, leading icon, leading avatar (foreground tint when applicable), trailing action button icons.
+      secondary:
+        value: colorForegroundNeutralSecondary
+        hover: hover.colorForegroundNeutralSecondary
+        pressed: pressed.colorForegroundNeutralSecondary
+        applies-to: Secondary content text only.
+    selected:
+      primary:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+      secondary:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+        rationale: >
+          Selected promotes secondary content to primary foreground so the metadata reads as equally active as the
+          bolded label. Weight stays Regular — only the primary label swaps to Semibold.
+    disabled: colorForegroundNeutralDisabled
+
+  stroke:
+    container: no-stroke
+    focus: See flex-system:styling — universal dual-outline focus ring. Rendered on :focus-visible when the row's interactive element holds focus.
+
+  radius:
+    container: borderRadiusBase300
+    rationale: Matches flex-components:listbox-item — row-level radius rounds the hover and selected background fills consistently across selection-pattern surfaces.
+
+  typography:
+    Size:
+      Small:
+        rest:
+          primary: textstyle-functional-body-small
+          secondary: textstyle-functional-body-small
+        selected:
+          primary: textstyle-functional-body-small-strong
+          secondary: textstyle-functional-body-small
+      Medium:
+        rest:
+          primary: textstyle-functional-body-medium
+          secondary: textstyle-functional-body-small
+        selected:
+          primary: textstyle-functional-body-medium-strong
+          secondary: textstyle-functional-body-small
+      Large:
+        rest:
+          primary: textstyle-functional-body-large
+          secondary: textstyle-functional-body-medium
+        selected:
+          primary: textstyle-functional-body-large-strong
+          secondary: textstyle-functional-body-medium
+    font-family: fontFamilyFunctional
+
+  spacing:
+    padding:
+      Small:
+        horizontal: spacingComponentBase200
+        vertical: spacingComponentBase150
+      Medium:
+        horizontal: spacingComponentBase300
+        vertical: spacingComponentBase250
+        rationale: Matches flex-components:listbox-item for cross-surface rhythm consistency between Lists and Dropdowns/Menus.
+      Large:
+        horizontal: spacingComponentBase400
+        vertical: spacingComponentBase300
+    layout:
+      structure: >
+        Root container holds (in inline order): Selection slot → Leading container → Primary/Secondary content
+        column → Trailing container. All four regions are vertically centered against the row, except when
+        Secondary content position = Under, in which case the Leading icon top-aligns to the primary label
+        (matching the listbox-item pattern).
+      alignment: center (top-align Leading icon when Secondary content position = Under)
+    Secondary content position:
+      Right:
+        layout: row
+        notes: Primary label fills remaining width; secondary content is trailing within the content column, right-aligned, no-wrap.
+      Under:
+        layout: column
+        inner-gap: spacingComponentBase100
+        icon-align: top
+        notes: Primary label and secondary content stack vertically within a shared column container. The Leading icon aligns to the top of the primary label.
+    gap:
+      selection-to-leading:
+        Small: spacingComponentBase150
+        Medium: spacingComponentBase200
+        Large: spacingComponentBase200
+        rationale: Slightly larger gap than the leading-to-content gap so the selection affordance reads as structurally separate from the row's leading identity content.
+      leading-to-content:
+        Small: spacingComponentBase100
+        Medium: spacingComponentBase150
+        Large: spacingComponentBase200
+      content-to-trailing:
+        Small: spacingComponentBase150
+        Medium: spacingComponentBase200
+        Large: spacingComponentBase250
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      State color transitions should be fast (≤150ms) with standard ease-in-out, matching flex-components:listbox-item.
+      Selected font-weight and icon Regular→Filled swaps are instant (no transition). Reduced motion — remove all
+      transitions; state changes are instant.
+
+sizes:
+  Small:
+    leading-icon: 16px
+    leading-avatar: 20px
+    selection-indicator-size: matches flex-components:checkbox / flex-components:radio at Small
+    height: auto
+    height-notes: Row height resultant from padding + typography + (Under-position secondary content, when present). No explicit height constraint.
+  Medium:
+    leading-icon: 20px
+    leading-avatar: 32px
+    selection-indicator-size: matches flex-components:checkbox / flex-components:radio at Medium
+    height: auto
+  Large:
+    leading-icon: 24px
+    leading-avatar: 40px
+    selection-indicator-size: matches flex-components:checkbox / flex-components:radio at Large
+    height: auto
+  trailing-action-button:
+    component: flex-components:button
+    layout: Icon only
+    style: Subtle
+    size: matches the ListItem Size axis
+  notes: >
+    Avatar sizes (20 / 32 / 40 px) are picked from the canonical Avatar size set (16 / 20 / 28 / 32 / 40 / 56 / 120 px)
+    — confirm against flex-components:avatar. Leading icon sizes (16 / 20 / 24 px) match Input/Button/Dropdown size mapping.
+
+dependencies:
+  - skill: flex-components:checkbox
+    usage: >
+      Selection indicator inside the Selection slot when parent List's Selection mode = Multiple. Label hidden,
+      square style. Presentational — the row's Selected state is authoritative.
+    interaction: Toggled via Space on the focused row or via clicking the checkbox itself; both gestures route through the parent List's selection orchestration.
+  - skill: flex-components:radio
+    usage: >
+      Selection indicator inside the Selection slot when parent List's Selection mode = Single. Label hidden.
+      Presentational — the row's Selected state is authoritative.
+  - skill: flex-components:avatar
+    usage: >
+      Optional leading identity element inside the Leading container (mutually exclusive with the leading Icon).
+      Avatar size matches the ListItem Size axis.
+  - skill: flex-components:button
+    usage: >
+      Icon-only Subtle Button instances inside the Trailing container for Action items (overflow, edit, dismiss).
+      Each action is an independent focus stop; clicking does not toggle the row's selection or fire the row's onAction.
+    interaction: Owns its own hover, pressed, focus-visible ring, and activation.
+
+properties:
+  component:
+    Primary string:
+      type: TEXT
+      default: "List item"
+      notes: Bound to the visible primary label node; ghost Semibold node reserves layout width but has no prop binding.
+    Secondary string:
+      type: TEXT
+      default: "Secondary"
+      notes: Secondary content text. Hidden when Secondary content prop is false.
+    Secondary content:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the secondary content text.
+    Leading icon:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the leading icon slot. Mutually exclusive with Leading avatar in practice.
+    Leading avatar:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the leading avatar slot. Mutually exclusive with Leading icon in practice.
+    Action items:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the Trailing container. When true, exposes one or more icon-only Subtle Button instances.
+    Leading icon 24px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (24px Regular)
+      binding: Large size, leading icon slot. Regular at rest; swap to the matching Filled variant when Selected=True.
+    Leading icon 20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Medium size, leading icon slot.
+    Leading icon 16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      binding: Small size, leading icon slot.
+  notes: >
+    Variant properties (Size, Selection mode, Secondary content position, State, Selected) live in the variants block.
+    The Selection slot's child component (Checkbox or Radio) is driven by Selection mode and is not a separate
+    INSTANCE_SWAP property. Action items are composed at the call site by inserting Subtle Button instances into
+    the Trailing container — count and label of action buttons are not Figma properties.

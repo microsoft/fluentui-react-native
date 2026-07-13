@@ -1,0 +1,114 @@
+component: ProgressBar
+type: atomic
+
+variants:
+  Type:
+    values: [Determinate, Indeterminate, Static]
+    default: Determinate
+  Status:
+    values: [Neutral, Error, Success]
+    default: Neutral
+
+tokens:
+  background:
+    track: colorBackgroundNeutralSoft
+    indicator:
+      Neutral: colorForegroundBrandPrimary
+      Error: colorForegroundDangerPrimary
+      Success: colorForegroundSuccessPrimary
+
+  foreground:
+    label: colorForegroundNeutralPrimary
+    value-text: colorForegroundNeutralSecondary
+    validation-icon:
+      Error: colorForegroundDangerPrimary
+      Success: colorForegroundSuccessPrimary
+
+  stroke:
+    container: no-stroke
+    focus: n/a  # Non-interactive — no focus ring.
+
+  radius:
+    track: borderRadiusCircular
+    indicator: borderRadiusCircular
+    rationale: >
+      Pill ends on both Track and Indicator. Circular radius is independent of
+      bar thickness and matches Fluent's progress bar convention. The Indicator
+      inherits the same radius so its leading edge is rounded as it advances.
+
+  typography:
+    label: textstyle-functional-body-medium
+    value-text: textstyle-functional-body-small
+    font-family: fontFamilyFunctional
+
+  spacing:
+    header-to-bar:
+      token: spacingComponentBase100
+      rationale: Atomic-tier — component-base applies because the Header and bar are tightly coupled within a single component.
+    header-internal-gap:
+      token: spacingComponentBase100
+      rationale: Atomic-tier — component-base applies because the slot grouping sits within a single component.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      Determinate — value transitions animate via Indicator width over ~200ms
+      with an ease-out curve, so the bar feels responsive without overshooting.
+      Indeterminate — continuous loop animation across the Track (~2s linear
+      cycle). Static — no animation under any circumstance, including value
+      changes (consumer should snap to the new width). Reduced motion —
+      Determinate value transitions become instant (no animated width
+      interpolation); Indeterminate freezes the continuous loop and the
+      screen-reader role="progressbar" carries the "busy" semantic instead. See
+      `interaction.md` for the full reduced-motion behavior.
+
+sizes:
+  bar-thickness:
+    token: spacingComponentBase100
+    rationale: >
+      The bar's Track and Indicator are filled rails with a fixed height, not
+      strokes — so a sizing/spacing generic is the correct family rather than
+      stroke-width. `component-base-100` (4px) expresses an internal dimension
+      within a single atomic component, matching how this same token is already
+      used for the header-to-bar and header-internal gaps. It also resolves the
+      prior stroke-width binding, which was a semantic mismatch (no stroke is
+      drawn) and was capped at 3px with no room to grow.
+  validation-icon: 16px
+  notes: >
+    Single size for ProgressBar. Validation icon follows the 16px Fluent
+    Iconography convention (Filled style — see Component properties). Overall
+    component height is resultant — Header height (when visible) +
+    header-to-bar gap + bar-thickness.
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: "Label"
+      notes: Bound to the Label text node.
+    Value string:
+      type: TEXT
+      default: "0%"
+      notes: >
+        Bound to the Value text node. Free-form string — supports percentage
+        ("42%"), fraction ("3 of 10"), or descriptive status ("Uploading…").
+    Value text:
+      type: BOOLEAN
+      default: true
+      notes: Shows/hides the Value text node within the Header.
+    Validation icon:
+      type: BOOLEAN
+      default: false
+      notes: >
+        Shows/hides the Validation icon. Only meaningful when Status is Error
+        or Success — toggling on while Status is Neutral renders the default
+        Image icon and should be avoided.
+    16px Filled:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Filled)
+      notes: >
+        Validation icon slot. Expects a 16px Fluent Iconography instance in the
+        Filled theme. Recommended values — Error Circle Filled for Error,
+        Checkmark Circle Filled for Success.

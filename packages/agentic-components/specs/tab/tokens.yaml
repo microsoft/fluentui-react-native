@@ -1,0 +1,101 @@
+component: Tab
+type: atomic
+
+variants:
+  Layout:
+    values: [Icon and text, Icon only]
+  State:
+    values: [Rest, Hover, Pressed, Disabled]
+    notes: Hover and Pressed are resolved as nested token state values.
+  Selected:
+    values: [false, true]
+    default: false
+
+tokens:
+  background:
+    rest:
+      value: colorBackgroundNeutralTransparent
+      hover: hover.colorBackgroundNeutralTransparent
+      pressed: pressed.colorBackgroundNeutralTransparent
+      rationale: No visual weight at rest — transparent surface defers to the Tablist container and surrounding content.
+    selected:
+      value: colorBackgroundNeutralHeavy
+      hover: hover.colorBackgroundNeutralHeavy
+      pressed: pressed.colorBackgroundNeutralHeavy
+      rationale: Heavy fill provides strong visual distinction for the active tab, creating a clear pill shape on the selected item.
+    disabled:
+      unselected: colorBackgroundNeutralTransparent
+      selected: colorBackgroundNeutralHeavyDisabled
+
+  foreground:
+    rest:
+      value: colorForegroundNeutralPrimary
+      hover: hover.colorForegroundNeutralPrimary
+      pressed: pressed.colorForegroundNeutralPrimary
+      rationale: Standard primary foreground for readable unselected labels.
+    selected:
+      value: colorForegroundNeutralOnloud
+      hover: hover.colorForegroundNeutralOnloud
+      pressed: pressed.colorForegroundNeutralOnloud
+      rationale: Inverted foreground for readability on the heavy background fill.
+    disabled: colorForegroundNeutralDisabled
+
+  stroke:
+    container: no-stroke
+    focus: See flex-system:styling — universal dual-outline focus ring.
+
+  radius:
+    Icon and text: borderRadiusBase300
+    Icon only: borderRadiusCircular
+
+  typography:
+    rest: textstyle-functional-body-medium
+    selected: textstyle-functional-body-medium-strong
+    font-family: fontFamilyFunctional
+
+  spacing:
+    Icon and text:
+      horizontal: spacingComponentBase300
+      vertical: spacingComponentBase150
+      rationale: >
+        Half heuristic — horizontal padding is double the vertical padding.
+        Matches Button Medium spacing pattern, which shares the same 32px resultant height.
+    Icon only: spacingComponentBase150
+    gap: spacingComponentBase100
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      State color transitions should be fast (typically ≤150ms) with standard ease-in-out.
+      Selected swap (background + foreground + weight) should feel instant or near-instant.
+      Reduced motion — remove transitions entirely.
+
+sizes:
+  Default:
+    resultant-height: 32px   # round(14 × 1.4) + 6×2 = 20 + 12
+    icon: 20px
+  notes: >
+    Single size. Height is resultant — derived from padding + typography.
+    Prefer responsive sizing; do not hardcode height constraints.
+    Icon size has no token coverage and must be hardcoded.
+
+properties:
+  component:
+    Tab string:
+      type: TEXT
+      default: "Tab"
+      notes: Bound to the visible label node only; ghost node has no prop binding.
+    Icon:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the optional icon slot (Icon + label layout only).
+    20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Selected=False icon nodes
+    20px Filled:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Filled)
+      binding: Selected=True icon nodes

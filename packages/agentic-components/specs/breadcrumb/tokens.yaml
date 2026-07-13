@@ -1,0 +1,138 @@
+component: Breadcrumb
+type: molecular
+
+variants:
+  Overflow:
+    values: [Visible, Collapsed]
+    default: Visible
+  Icon:
+    values: [Without icon, With icon]
+    default: Without icon
+  Size:
+    values: [Small, Medium, Large]
+    default: Medium
+  State:
+    values: [Rest, Hover, Pressed, Disabled, Current]
+    notes: >
+      Applies per-BreadcrumbItem. Current applies to CurrentItem only (non-interactive; no hover,
+      pressed, or focus ring). Hover and Pressed are resolved as nested token state values.
+
+tokens:
+  background:
+    BreadcrumbItem: Delegates to Button (Subtle style) — see flex-components:button.
+    CurrentItem: n/a — no background container.
+    Separator: n/a — no background container; icon element only.
+
+  foreground:
+    BreadcrumbItem: Delegates to Button (Subtle style) — see flex-components:button.
+    CurrentItem:
+      rest:
+        token: colorForegroundNeutralPrimary
+    Separator:
+      rest:
+        token: colorForegroundNeutralTertiary
+        rationale: >
+          Non-interactive visual divider. Tertiary weight subordinates the separator to item labels
+          so it reads as structural chrome rather than content.
+
+  stroke:
+    BreadcrumbItem: Delegates to Button (Subtle style) — see flex-components:button.
+    CurrentItem: n/a — no border or outline.
+    Separator: n/a — no border or outline.
+    focus: See flex-system:styling — universal dual-outline focus ring. Applies to BreadcrumbItem and OverflowButton only.
+
+  radius:
+    BreadcrumbItem: Delegates to Button (Icon and text / Icon only) — see flex-components:button.
+    CurrentItem: n/a — no background container; radius not applicable.
+
+  typography:
+    BreadcrumbItem: Delegates to Button — see flex-components:button.
+    CurrentItem:
+      Small: textstyle-functional-body-small-strong
+      Medium: textstyle-functional-body-medium-strong
+      Large: textstyle-functional-body-large-strong
+      rationale: >
+        CurrentItem uses the Strong (-strong) variant of the matching size text style.
+        Semibold weight signals "you are here" without changing font size or color.
+        No Selected axis or font-weight swap pattern — CurrentItem is always Semibold.
+    font-family: fontFamilyFunctional
+
+  spacing:
+    container-gap:
+      Small: spacingComponentBase50
+      Medium: spacingComponentBase50
+      Large: spacingComponentBase100
+      rationale: >
+        Gap between each sibling in the container flex row — BreadcrumbItem, Separator, and
+        CurrentItem are all direct siblings. BreadcrumbItem (Button) owns its own internal
+        horizontal padding; container gap provides supplemental rhythm between items.
+        Component-tier spacing applies because all elements are part of the same Breadcrumb widget.
+    BreadcrumbItem: Delegates to Button (Icon and text layout, per-size padding and gap) — see flex-components:button.
+    CurrentItem:
+      icon-gap:
+        Small: spacingComponentBase50
+        Medium: spacingComponentBase100
+        Large: spacingComponentBase150
+        notes: >
+          Icon-to-label gap matches BreadcrumbItem (Button) icon gap for its size,
+          keeping icon and text rhythm visually consistent across the trail.
+      padding-notes: >
+        CurrentItem should match the vertical padding of BreadcrumbItem (Button) for its size
+        to maintain consistent row height across the trail.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      BreadcrumbItem hover/pressed color transitions delegate to Button motion behavior — fast
+      (≤150ms), standard ease-in-out when motion tokens are defined. Container and Separator
+      have no transitions. Overflow Popover open/close animation delegates to Popover —
+      see flex-components:popover. Reduced motion — remove all transitions per Button and
+      Popover guidance.
+
+sizes:
+  Small: Delegates to Button Small.
+  Medium: Delegates to Button Medium.
+  Large: Delegates to Button Large.
+  notes: >
+    All sizing delegates entirely to Button — padding, typography, and row height are
+    inherited from the Button instance rather than redeclared here.
+    CurrentItem height should be held equal to BreadcrumbItem height for vertical alignment;
+    confirm vertical padding in implementation.
+    Icon sizes match button icon sizes.
+    Separator icon matches the BreadcrumbItem icon size for its size.
+
+dependencies:
+  Button:
+    skill: flex-components:button
+    usage: >
+      BreadcrumbItem is a Button instance (Subtle style, Icon and text layout).
+      OverflowButton is a Button instance (Subtle style, Icon only layout).
+
+properties:
+  component:
+    Item Label:
+      type: TEXT
+      default: "Item"
+      notes: Bound to each BreadcrumbItem's label node. Repeated per item slot position in the component.
+    Current Label:
+      type: TEXT
+      default: "Current page"
+      notes: Bound to the CurrentItem's label node.
+    20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Leading icon slot for Medium and Large BreadcrumbItems (With icon variant)
+    16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      binding: Leading icon slot for Small BreadcrumbItems (With icon variant)
+    Current icon 20px:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Leading icon slot for Medium and Large CurrentItem
+    Current icon 16px:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      binding: Leading icon slot for Small CurrentItem

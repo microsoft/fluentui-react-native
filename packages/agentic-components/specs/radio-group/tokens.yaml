@@ -1,0 +1,86 @@
+component: RadioGroup
+type: molecular
+
+variants:
+  Orientation:
+    values: [Vertical, Horizontal]
+    default: Vertical
+  Required:
+    values: [false, true]
+    default: false
+    notes: Passthrough to the composed Label's Required slot — toggles the trailing asterisk on the Legend.
+
+tokens:
+  background: n/a  # Transparent layout container — no fill. Child Radios own their backgrounds.
+
+  foreground:
+    legend:
+      source: flex-components:label
+    radios: Delegated to flex-components:radio.
+
+  stroke: n/a  # No container stroke. Focus ring is applied on child Radios, not the RadioGroup.
+
+  radius: n/a
+  radius-notes: >
+    RadioGroup has no visible container surface. Child Radio indicator radius is owned
+    by the Radio component (`borderRadiusCircular`).
+
+  typography:
+    legend:
+      source: flex-components:label
+    radios: Delegated to flex-components:radio.
+
+  spacing:
+    legend-to-options:
+      token: spacingComponentBase300
+      rationale: >
+        Three times the inter-option gap — a clear hierarchy step that signals the
+        Legend is a heading for the group, not another option in the list. Larger
+        than `base-200` (which would read closer to inter-option spacing) and smaller
+        than a between-section layout gap (which would visually orphan the Legend
+        from its group).
+    options-gap:
+      token: spacingComponentBase100
+      rationale: >
+        Tightest atomic tier — matches the gap Tablist uses between its child Tabs.
+        Each Radio already includes transparent touch-target padding of
+        `spacingComponentBase200` on all sides, so the visible breathing room
+        between adjacent indicators is the sum of both Radios' padding plus this gap.
+      applies-to: >
+        Applied along the orientation axis — vertical gap when Orientation=Vertical,
+        horizontal gap when Orientation=Horizontal.
+    container-padding: n/a  # RadioGroup container has no internal padding — children align flush.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+
+sizes:
+  notes: >
+    Total group height (Vertical) = legend height + legend-to-options gap + (N × Radio height) + ((N-1) × options-gap).
+    See flex-components:radio sizes block for per-Radio height (32px) and indicator (16px).
+
+dependencies:
+  Radio:
+    skill: flex-components:radio
+    usage: Primary child component — two to five instances per group.
+  Label:
+    skill: flex-components:label
+    usage: >
+      Sub-component for the Legend slot. Composed with Weight=Strong ×
+      Size=Medium. The Required slot is exposed as a RadioGroup-level
+      Required boolean that passes through to Label's Required slot
+      (toggles the trailing asterisk on the Legend). RadioGroup does not
+      override Label's foreground or typography.
+
+properties:
+  component:
+    Legend string:
+      type: TEXT
+      default: "Group label"
+      notes: Binds through to the text node of the composed flex-components:label sub-component used as the Legend.
+    Required:
+      type: BOOLEAN
+      default: false
+      notes: Toggles the trailing asterisk on the Legend via the composed Label's Required slot.

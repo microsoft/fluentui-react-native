@@ -1,0 +1,80 @@
+component: Accordion
+type: atomic
+
+variants:
+  Layout:
+    values: [Chevron start, Chevron end]
+  Size:
+    values: [Small]
+    notes: Only size currently defined.
+  State:
+    values: [Rest, Hover, Pressed]
+    notes: Hover and Pressed are resolved as nested token state values. Disabled not present in current component set.
+  Expanded:
+    values: [false, true]
+    default: false
+    notes: Parallel axis — runs independently of State. Not a State value.
+
+tokens:
+  background:
+    header:
+      rest:
+        value: colorBackgroundNeutralTransparent
+        hover: hover.colorBackgroundNeutralTransparent
+        pressed: pressed.colorBackgroundNeutralTransparent
+    header-notes: Transparent at rest; gains visible fill through the inline hover/pressed state values.
+
+  foreground:
+    rest:
+      value: colorForegroundNeutralPrimary
+      hover: hover.colorForegroundNeutralPrimary
+      pressed: pressed.colorForegroundNeutralPrimary
+      applies-to: Title, chevron, and leading icon.
+
+  stroke:
+    container: no-stroke
+    focus: See flex-system:styling — universal dual-outline focus ring.
+
+  radius:
+    header: borderRadiusBase200
+
+  typography:
+    title: textstyle-functional-body-small-strong
+    notes: Title is always Semibold — no weight swap pattern. Consistent weight provides persistent visual hierarchy regardless of state.
+    font-family: fontFamilyFunctional
+
+  spacing:
+    header:
+      horizontal: spacingComponentBase200
+      vertical: spacingComponentBase100
+    header-gap: spacingComponentBase100
+    body: spacingComponentBase200
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: Chevron rotation and body height transition should use fast duration with ease-in-out. Reduced motion — instant, no animation.
+sizes:
+  Small:
+    chevron-icon: 16px
+    leading-icon: 16px
+
+properties:
+  component:
+    Title string:
+      type: TEXT
+      default: "Section title"
+      notes: Bound to the title text node in the Header.
+    Icon:
+      type: BOOLEAN
+      default: true
+      notes: Shows/hides the leading icon slot.
+    Icon (swap):
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      notes: Leading icon slot.
+    Body content:
+      type: INSTANCE_SWAP
+      default: Content placeholder
+      notes: The body slot; swap with any component.

@@ -1,0 +1,197 @@
+component: Interaction Tag
+type: molecular
+
+variants:
+  Layout:
+    values: [Icon and text, Icon only]
+  Leading content:
+    values: [None, Icon, Avatar]
+    notes: >
+      Leading media is a variant axis, not an instance-swap property. None is
+      valid only with Layout=Icon and text (label only); Icon only always
+      carries leading media, so it pairs with Icon or Avatar. Each media type
+      is baked into its own variant, so an icon and an Avatar can never appear
+      together. This replaces an earlier instance-swap slot, which reset the
+      icon size and dropped its OnLoud color override when swapping between the
+      heterogeneous icon and Avatar masters.
+  Style:
+    values: [Primary, Secondary]
+    default: Secondary
+    notes: >
+      Inherited from Tag. Secondary (default) is the subtle neutral surface;
+      Primary is the brand-heavy surface. Style drives the container
+      background, foreground, and divider color across both action areas.
+  Size:
+    values: [Small, Medium]
+    default: Medium
+  Shape:
+    values: [Rounded, Circular]
+    default: Rounded
+    notes: >
+      Sets the Icon and text container corner radius — Rounded uses the
+      size-dependent base radius (default); Circular uses the fully circular
+      radius even with a visible label. Icon only is always circular
+      regardless of Shape.
+  State:
+    values: [Rest, Hover, Pressed, Disabled]
+    notes: Hover and Pressed are resolved as nested token state values. Each interactive area (primary, secondary) hovers independently.
+
+dismiss-step-down:
+  applies: true
+
+tokens:
+  background:
+    container:
+      rest:
+        Secondary:
+          value: colorBackgroundNeutralSubtle
+          hover: hover.colorBackgroundNeutralSubtle
+          pressed: pressed.colorBackgroundNeutralSubtle
+          rationale: Subtle background fill is the lower-emphasis default surface, inherited from Tag.
+        Primary:
+          value: colorBackgroundBrandHeavy
+          hover: hover.colorBackgroundBrandHeavy
+          pressed: pressed.colorBackgroundBrandHeavy
+          rationale: Brand-heavy fill is the higher-emphasis surface, inherited from Tag.
+      disabled: colorBackgroundNeutralHeavyDisabled
+
+  foreground:
+    container:
+      rest:
+        Secondary:
+          token: colorForegroundNeutralPrimary
+          rationale: Neutral primary foreground reads clearly on the subtle background.
+        Primary:
+          token: colorForegroundNeutralOnloud
+          rationale: Inverted foreground for readability on the heavy brand background (inherited from Tag).
+      disabled: colorForegroundNeutralDisabled
+    notes: >
+      No foreground shift on hover/pressed — the background overlay
+      provides sufficient interaction feedback for both styles.
+
+
+  stroke:
+    container: no-stroke
+    divider:
+      color:
+        Secondary: colorStrokeNeutralSoft
+        Primary: colorStrokeNeutralOnloud
+      width: strokeWidthThin
+      rationale: >
+        Vertical stroke between primary action and secondary action;
+        visually separates the two interactive regions. The color tracks
+        Style so the divider stays visible on each surface — a soft neutral
+        stroke on the Secondary subtle fill, the on-loud stroke on the
+        Primary brand-heavy fill.
+    focus: See flex-system:styling — universal dual-outline focus ring.
+
+  radius:
+    container:
+      Icon and text:
+        Rounded:
+          Small: borderRadiusBase200
+          Medium: borderRadiusBase300
+        Circular: borderRadiusCircular
+      Icon only: borderRadiusCircular
+    notes: >
+      The Shape axis sets the Icon and text corner radius: Rounded uses the
+      size-dependent base radius (default); Circular uses the fully circular
+      radius even with a visible label. Icon only is always circular
+      regardless of Shape.
+    primary-action:
+      notes: Inherits container radius on the leading side; flat on the trailing (divider) side.
+    secondary-action:
+      notes: Inherits container radius on the trailing side; flat on the leading (divider) side.
+
+  typography:
+    rest:
+      Small: textstyle-functional-body-small
+      Medium: textstyle-functional-body-medium
+    font-family: fontFamilyFunctional
+
+  spacing:
+    container:
+      padding: none
+      gap: 0
+      rationale: >
+        The container owns no padding and no gap — all interactive padding lives
+        on the two action areas (see action-padding) so the hover/pressed fill
+        spans the full tap target, and the 1px divider sits flush between them.
+        The action padding alone supplies the breathing room on both sides of
+        the divider; a container gap would add unwanted space around it.
+        This differs from Tag, where padding sits on the container.
+    primary-action-inner-gap:
+      token: spacingComponentBase50
+      rationale: Gap between leading content and label within the primary action area.
+    action-padding:
+      Small:
+        inline: spacingComponentBase150
+        block: spacingComponentBase100
+      Medium:
+        inline: spacingComponentBase200
+        block: spacingComponentBase150
+      rationale: >
+        Symmetric padding applied to both the primary and secondary action
+        areas, giving equal breathing room on both sides of the divider
+        (between content and divider, and between divider and dismiss icon).
+        Applied on the action buttons rather than the container so the
+        hover/pressed fill spans the full tap target. This is the single source
+        of truth for the tag's interactive padding — the container itself owns
+        no padding.
+    label-wrapper-padding:
+      inline: spacingComponentBase50
+      rationale: Horizontal padding on the label wrapper frame, matching Tag.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      State color transitions should be fast (typically ≤150ms) with standard
+      ease-in-out. Reduced motion — remove transitions entirely.
+
+sizes:
+  Small:
+    dismiss-icon: 12px
+    leading-icon: 16px
+    avatar: 16px
+    secondary-action-min-width: 24px
+  Medium:
+    dismiss-icon: 16px
+    leading-icon: 20px
+    avatar: 20px
+    secondary-action-min-width: 24px
+  notes: >
+    Height is typography-driven (block padding + line height). The leading icon
+    and Avatar are sized to match the text line height (16px at Small, 20px at
+    Medium) so they never inflate the row — height stays identical with or
+    without leading content. The leading slot carries no extra padding (the
+    primary action's inner gap provides separation from the label). Icon and
+    Avatar sizes lack token coverage. Avatar at these small sizes uses the
+    16/20 size variants from flex-components:avatar. The dismiss glyph steps one
+    size below the leading icon (12px at Small, 16px at Medium) per the dismiss
+    step-down convention (see dismiss-step-down block and flex-system:styling
+    § Dismiss step-down); the secondary action keeps its 24px minimum tap target.
+
+dependencies:
+  Tag:
+    skill: flex-components:tag
+    usage: Inherits visual language, the Secondary/Primary style pair, corner-shape options, dismiss icon conventions, sizing scale, and spacing values.
+    tokens: Background, foreground, divider, radius, and spacing tokens are inherited from Tag.
+  Avatar:
+    skill: flex-components:avatar
+    usage: Optional leading content slot; sized to 16px (Small) or 20px (Medium) to fit within the tag container.
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: "Tag text"
+    Primary focus:
+      type: BOOLEAN
+      default: false
+      notes: Toggles the primary action area focus ring (keyboard focus only).
+    Secondary focus:
+      type: BOOLEAN
+      default: false
+      notes: Toggles the secondary (dismiss) action focus ring (keyboard focus only).
