@@ -1,14 +1,14 @@
 {
-  "name": "@fluentui-react-native/analyzer",
+  "name": "@fluentui-react-native/concepts",
   "version": "0.0.1",
-  "description": "Package analysis tools for Fluent UI React Native, for use with AI agents",
+  "description": "Core concepts, types, instructions, and metadata for building Fluent UI React Native components",
   "keywords": [],
   "license": "MIT",
   "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
-    "directory": "packages/ai/analyzer"
+    "directory": "packages/ai/concepts"
   },
   "type": "module",
   "main": "lib/index.js",
@@ -20,7 +20,8 @@
       "import": "./lib/index.js",
       "require": "./lib/index.js",
       "default": "./src/index.ts"
-    }
+    },
+    "./instructions/*": "./src/instructions/*"
   },
   "scripts": {
     "build": "tsgo",
@@ -30,49 +31,26 @@
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "lint-package": "fluentui-scripts lint-package",
-    "start": "fluentui-scripts dev",
-    "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/button": "workspace:*",
-    "@fluentui-react-native/concepts": "workspace:*",
     "@fluentui-react-native/kit-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@fluentui-react-native/theme": "workspace:*",
-    "@fluentui-react-native/theme-types": "workspace:*",
-    "@fluentui/react-native": "workspace:*",
     "@react-native/babel-preset": "^0.81.0",
-    "@testing-library/react-native": "^13.3.3",
     "@types/jest": "^29.0.0",
-    "@types/node": "catalog:",
-    "@types/react": "~19.1.4",
-    "@types/react-test-renderer": "~19.1.0",
-    "react": "19.1.4",
-    "react-native": "^0.81.6",
-    "react-test-renderer": "19.1.4"
-  },
-  "peerDependencies": {
-    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
-    "react": "18.2.0 || 19.0.0 || 19.1.4"
-  },
-  "peerDependenciesMeta": {
-    "@types/react": {
-      "optional": true
-    }
+    "@types/node": "catalog:"
   },
   "furn": {
-    "jestPlatform": "ios"
+    "jestPlatform": "react"
   },
   "rnx-kit": {
     "extends": "@fluentui-react-native/kit-config",
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "core-dev-only",
-        "react"
+        "core-dev-only"
       ]
     }
   }

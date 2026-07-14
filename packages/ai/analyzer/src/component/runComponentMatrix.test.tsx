@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
+import type { ComponentMetadata } from '@fluentui-react-native/concepts';
 
-import type { ComponentMetadata } from './ComponentMetadata.ts';
 import { runComponentMatrix } from './runComponentMatrix.ts';
 
 interface ToyProps {
@@ -9,12 +9,6 @@ interface ToyProps {
   onPress?: () => void;
 }
 
-/**
- * Tiny inline component used to exercise the matrix without depending
- * on a real FluentUI component. Covers a Pressable with a testID and a
- * disabled prop wired into `accessibilityState`, which is what the
- * matrix and the a11y analyzer key off of.
- */
 function Toy(props: ToyProps): React.ReactElement {
   return (
     <Pressable
@@ -37,38 +31,34 @@ describe('runComponentMatrix', () => {
     name: 'Toy',
     importPath: 'inline://toy',
     exportName: 'Toy',
+    framework: 'none',
+    platforms: ['ios'],
+    states: ['disabled', 'press'],
     baseProps: { testID: 'root' },
-    states: [
-      { id: 'default' },
-      { id: 'disabled', props: { disabled: true } },
-      {
-        id: 'pressed',
-        interactions: [{ kind: 'press', targetTestID: 'root' }],
-      },
-    ],
   };
 
-  it('produces one snapshot per state, in input order', async () => {
+  it('produces one snapshot per derived state', async () => {
     const result = await runComponentMatrix(Toy, metadata);
 
     expect(result.component).toBe('Toy');
-    expect(result.data.snapshots.map((s) => s.state.id)).toEqual(['default', 'disabled', 'pressed']);
+    // default + default-disabled + default-press
+    expect(result.data.snapshots.map((s) => s.stateId)).toEqual(['default', 'default-disabled', 'default-press']);
     expect(result.data.issues).toEqual([]);
   });
 
   it('records accessibility state in the captured a11y tree', async () => {
     const result = await runComponentMatrix(Toy, metadata);
 
-    const defaultSnapshot = result.data.snapshots[0];
-    expect(defaultSnapshot.a11yTree?.role).toBe('button');
-    expect(defaultSnapshot.a11yTree?.label).toBe('Hi');
-    expect(defaultSnapshot.a11yTree?.state).toEqual({ disabled: false });
+    const defaultSnap = result.data.snapshots.find((s) => s.stateId === 'default');
+    expect(defaultSnap?.a11yTree?.role).toBe('button');
+    expect(defaultSnap?.a11yTree?.label).toBe('Hi');
+    expect(defaultSnap?.a11yTree?.state).toEqual({ disabled: false });
 
-    const disabledSnapshot = result.data.snapshots[1];
-    expect(disabledSnapshot.a11yTree?.state).toEqual({ disabled: true });
+    const disabled = result.data.snapshots.find((s) => s.stateId === 'default-disabled');
+    expect(disabled?.a11yTree?.state).toEqual({ disabled: true });
   });
 
-  it('applies the press interaction and surfaces no errors on the pressed state', async () => {
+  it('applies the press interaction and invokes the handler', async () => {
     const handler = jest.fn();
     const metadataWithHandler: ComponentMetadata = {
       ...metadata,
@@ -77,12 +67,10 @@ describe('runComponentMatrix', () => {
 
     const result = await runComponentMatrix(Toy, metadataWithHandler);
 
-    const pressed = result.data.snapshots.find((s) => s.state.id === 'pressed');
-    expect(pressed).toBeDefined();
+    const pressed = result.data.snapshots.find((s) => s.stateId === 'default-press');
     expect(pressed?.error).toBeUndefined();
     expect(pressed?.renderTree).not.toBeNull();
-    // The press interaction should have invoked the handler once (and
-    // only once, since each state mounts and unmounts independently).
+    // The press interaction should fire exactly once per matrix mount.
     expect(handler).toHaveBeenCalledTimes(1);
   });
 
@@ -94,31 +82,28 @@ describe('runComponentMatrix', () => {
       name: 'Broken',
       importPath: 'inline://broken',
       exportName: 'Broken',
-      states: [{ id: 'default' }, { id: 'second' }],
+      framework: 'none',
+      platforms: ['ios'],
+      states: [],
+      appearances: ['primary'],
     };
 
-    // Suppress the error log react-test-renderer emits for the throw.
     const errSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     try {
       const result = await runComponentMatrix(Broken, broken);
 
-      expect(result.data.snapshots).toHaveLength(2);
-      expect(result.data.snapshots[0].error).toBeDefined();
-      expect(result.data.snapshots[1].error).toBeDefined();
-      expect(result.data.issues.length).toBeGreaterThanOrEqual(2);
-      for (const issue of result.data.issues) {
-        expect(issue.severity).toBe('error');
+      // Two branches (default + primary) and neither succeeded.
+      expect(result.data.snapshots.length).toBe(2);
+      for (const snap of result.data.snapshots) {
+        expect(snap.error).toBeDefined();
       }
+      expect(result.data.issues.length).toBeGreaterThanOrEqual(2);
     } finally {
       errSpy.mockRestore();
     }
   });
 
-  it('captures the post-effect state, not the pre-effect render', async () => {
-    // Components that set state in `useEffect` are the common case for
-    // composition-framework components. Without act() flushing, the
-    // captured tree would reflect the pre-effect render — not what
-    // the user actually sees.
+  it('captures the post-effect render, not the pre-effect tree', async () => {
     function Effect(): React.ReactElement {
       const [label, setLabel] = React.useState('pre');
       React.useEffect(() => {
@@ -135,8 +120,10 @@ describe('runComponentMatrix', () => {
       name: 'Effect',
       importPath: 'inline://effect',
       exportName: 'Effect',
+      framework: 'none',
+      platforms: ['ios'],
+      states: [],
       baseProps: { testID: 'root' },
-      states: [{ id: 'default' }],
     };
 
     const result = await runComponentMatrix(Effect, effectMetadata);

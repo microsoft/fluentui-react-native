@@ -23,19 +23,21 @@ export type { ComponentTokenMap } from './theme/index.ts';
 export { extractA11yTree, serializeA11yTree, defaultA11yRules, findA11yIssues } from './a11y/index.ts';
 export type { A11yNode, A11yRule } from './a11y/index.ts';
 
-// Component state analyzer (brief 03).
+// Component state analyzer (brief 03). The declarative
+// `ComponentMetadata`, `ComponentInteraction`, and derived state types
+// live in `@fluentui-react-native/concepts` — consumers should import
+// them from there. The analyzer re-exports the runtime drivers and
+// validation/derivation helpers built on top of those types.
 export {
   analyzeComponent,
   runComponentMatrix,
+  validateAndDerive,
   validateMetadata,
 } from './component/index.ts';
 export type {
   AnalyzeComponentInput,
   AnalyzeComponentResult,
-  ComponentInteraction,
   ComponentMatrixOptions,
-  ComponentMetadata,
-  ComponentStateSpec,
   MatrixHarness,
   StateSnapshot,
   ThemeProviderFactory,

@@ -1,21 +1,21 @@
-import type { ComponentMetadata } from './ComponentMetadata.ts';
+import type { ComponentMetadata } from '@fluentui-react-native/concepts';
+
 import { validateMetadata } from './validateMetadata.ts';
 
 describe('validateMetadata', () => {
-  it('accepts a fully populated, hand-written metadata document', () => {
+  it('accepts a fully populated metadata document', () => {
     const input: ComponentMetadata = {
       name: 'Button',
       importPath: '@fluentui-react-native/button',
-      exportName: 'Button',
+      exportName: 'ButtonV1',
+      framework: 'v1',
+      platforms: ['ios', 'android'],
+      states: ['disabled', 'hover', 'press', 'focused'],
+      stateCombos: [['press', 'focused']],
+      appearances: ['primary', 'subtle'],
+      sizes: ['small', 'medium'],
+      shapes: ['rounded'],
       baseProps: { children: 'Hi', testID: 'btn' },
-      states: [
-        { id: 'default', description: 'baseline' },
-        { id: 'disabled', props: { disabled: true } },
-        {
-          id: 'pressed',
-          interactions: [{ kind: 'press', targetTestID: 'btn' }],
-        },
-      ],
     };
 
     const result = validateMetadata(input);
@@ -23,9 +23,8 @@ describe('validateMetadata', () => {
     expect(result.issues).toEqual([]);
     expect(result.metadata).not.toBeNull();
     expect(result.metadata?.name).toBe('Button');
-    expect(result.metadata?.states.length).toBe(3);
-    // States are returned in input order.
-    expect(result.metadata?.states.map((s) => s.id)).toEqual(['default', 'disabled', 'pressed']);
+    expect(result.metadata?.framework).toBe('v1');
+    expect(result.metadata?.platforms).toEqual(['ios', 'android']);
   });
 
   it('rejects non-objects with an invalid-type issue', () => {
@@ -33,158 +32,127 @@ describe('validateMetadata', () => {
 
     expect(result.metadata).toBeNull();
     expect(result.issues).toEqual([
-      expect.objectContaining({
-        severity: 'error',
-        rule: 'component/invalid-type',
-      }),
+      expect.objectContaining({ severity: 'error', rule: 'component/invalid-type' }),
     ]);
   });
 
-  it('flags every missing required root field by rule', () => {
+  it('flags every missing required root field', () => {
     const result = validateMetadata({});
 
     expect(result.metadata).toBeNull();
-
-    const rules = new Set(result.issues.map((i) => i.rule));
-    expect(rules.has('component/missing-field')).toBe(true);
-
     const messages = result.issues.map((i) => i.message).join('\n');
     expect(messages).toContain('metadata.name');
     expect(messages).toContain('metadata.importPath');
     expect(messages).toContain('metadata.exportName');
+    expect(messages).toContain('metadata.framework');
+    expect(messages).toContain('metadata.platforms');
     expect(messages).toContain('metadata.states');
   });
 
-  it('rejects when states is empty', () => {
+  it('rejects an empty platforms array', () => {
     const result = validateMetadata({
       name: 'X',
       importPath: 'x',
       exportName: 'X',
+      framework: 'v1',
+      platforms: [],
       states: [],
     });
-
     expect(result.metadata).toBeNull();
-    expect(result.issues).toEqual([
-      expect.objectContaining({ rule: 'component/empty-states', severity: 'error' }),
-    ]);
+    expect(result.issues).toEqual(
+      expect.arrayContaining([expect.objectContaining({ rule: 'component/empty-platforms' })]),
+    );
   });
 
-  it('rejects duplicate state ids', () => {
+  it('rejects an unknown framework value', () => {
     const result = validateMetadata({
       name: 'X',
       importPath: 'x',
       exportName: 'X',
-      states: [{ id: 'default' }, { id: 'default' }],
+      framework: 'v9000',
+      platforms: ['ios'],
+      states: [],
     });
-
     expect(result.metadata).toBeNull();
-    expect(result.issues).toEqual([
-      expect.objectContaining({ rule: 'component/duplicate-state-id' }),
-    ]);
+    expect(result.issues).toEqual(
+      expect.arrayContaining([expect.objectContaining({ rule: 'component/invalid-enum' })]),
+    );
   });
 
-  it('rejects malformed interactions', () => {
+  it('rejects an unknown platform value', () => {
     const result = validateMetadata({
       name: 'X',
       importPath: 'x',
       exportName: 'X',
-      states: [
-        {
-          id: 'default',
-          interactions: [{ kind: 'press' }],
-        },
-      ],
+      framework: 'v1',
+      platforms: ['ios', 'unknown'],
+      states: [],
     });
-
     expect(result.metadata).toBeNull();
-    const messages = result.issues.map((i) => i.message).join('\n');
-    expect(messages).toContain('targetTestID');
+    expect(result.issues).toEqual(
+      expect.arrayContaining([expect.objectContaining({ rule: 'component/invalid-enum' })]),
+    );
   });
 
-  it('warns when an interaction targets a testID not declared in props', () => {
+  it('rejects an unknown state value', () => {
     const result = validateMetadata({
       name: 'X',
       importPath: 'x',
       exportName: 'X',
-      states: [
-        {
-          id: 'pressed',
-          interactions: [{ kind: 'press', targetTestID: 'mystery' }],
-        },
-      ],
+      framework: 'v1',
+      platforms: ['ios'],
+      states: ['teleported'],
+    });
+    expect(result.metadata).toBeNull();
+    expect(result.issues).toEqual(
+      expect.arrayContaining([expect.objectContaining({ rule: 'component/invalid-enum' })]),
+    );
+  });
+
+  it('rejects a state combo with fewer than two members', () => {
+    const result = validateMetadata({
+      name: 'X',
+      importPath: 'x',
+      exportName: 'X',
+      framework: 'v1',
+      platforms: ['ios'],
+      states: ['press'],
+      stateCombos: [['press']],
+    });
+    expect(result.metadata).toBeNull();
+    expect(result.issues).toEqual(
+      expect.arrayContaining([expect.objectContaining({ rule: 'component/invalid-type' })]),
+    );
+  });
+
+  it('warns when interaction-driven states are declared without a baseProps.testID', () => {
+    const result = validateMetadata({
+      name: 'X',
+      importPath: 'x',
+      exportName: 'X',
+      framework: 'v1',
+      platforms: ['ios'],
+      states: ['hover'],
     });
 
-    // Shape is fine — this is a warning, not an error.
     expect(result.metadata).not.toBeNull();
     expect(result.issues).toEqual([
-      expect.objectContaining({
-        severity: 'warning',
-        rule: 'component/dangling-testid',
-      }),
+      expect.objectContaining({ severity: 'warning', rule: 'component/dangling-testid' }),
     ]);
   });
 
-  it('does not warn when a state-local testID covers the interaction target', () => {
+  it('does not warn for prop-only states without a testID', () => {
     const result = validateMetadata({
       name: 'X',
       importPath: 'x',
       exportName: 'X',
-      states: [
-        {
-          id: 'pressed',
-          props: { testID: 'inner' },
-          interactions: [{ kind: 'press', targetTestID: 'inner' }],
-        },
-      ],
+      framework: 'v1',
+      platforms: ['ios'],
+      states: ['disabled', 'checked'],
     });
 
     expect(result.metadata).not.toBeNull();
     expect(result.issues).toEqual([]);
-  });
-
-  it('accepts every interaction kind', () => {
-    const result = validateMetadata({
-      name: 'X',
-      importPath: 'x',
-      exportName: 'X',
-      baseProps: { testID: 'root' },
-      states: [
-        {
-          id: 'all',
-          interactions: [
-            { kind: 'press', targetTestID: 'root' },
-            { kind: 'focus', targetTestID: 'root' },
-            { kind: 'blur', targetTestID: 'root' },
-            { kind: 'hover', targetTestID: 'root', state: 'in' },
-            { kind: 'changeText', targetTestID: 'root', text: 'hi' },
-            { kind: 'scroll', targetTestID: 'root', offset: { x: 0, y: 10 } },
-            { kind: 'custom', name: 'longPress', payload: null },
-          ],
-        },
-      ],
-    });
-
-    expect(result.issues).toEqual([]);
-    expect(result.metadata?.states[0].interactions?.length).toBe(7);
-  });
-
-  it('rejects unknown interaction kinds', () => {
-    const result = validateMetadata({
-      name: 'X',
-      importPath: 'x',
-      exportName: 'X',
-      states: [
-        {
-          id: 'odd',
-          interactions: [{ kind: 'teleport', targetTestID: 'x' }],
-        },
-      ],
-    });
-
-    expect(result.metadata).toBeNull();
-    expect(result.issues).toEqual([
-      expect.objectContaining({ rule: 'component/invalid-type' }),
-    ]);
   });
 
   it('rejects empty strings for required root fields', () => {
@@ -192,23 +160,13 @@ describe('validateMetadata', () => {
       name: '',
       importPath: '',
       exportName: '',
-      states: [{ id: 'default' }],
-    });
-
-    expect(result.metadata).toBeNull();
-    const rules = result.issues.map((i) => i.rule);
-    // Each empty-string root field produces an invalid-type issue.
-    expect(rules.filter((r) => r === 'component/invalid-type').length).toBeGreaterThanOrEqual(3);
-  });
-
-  it('rejects an empty state id', () => {
-    const result = validateMetadata({
-      name: 'X',
-      importPath: 'x',
-      exportName: 'X',
-      states: [{ id: '' }],
+      framework: 'v1',
+      platforms: ['ios'],
+      states: [],
     });
     expect(result.metadata).toBeNull();
-    expect(result.issues.some((i) => i.rule === 'component/invalid-type' && /non-empty/.test(i.message))).toBe(true);
+    expect(
+      result.issues.filter((i) => i.rule === 'component/invalid-type').length,
+    ).toBeGreaterThanOrEqual(3);
   });
 });
