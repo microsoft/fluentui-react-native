@@ -69,7 +69,7 @@ Variant properties are ordered in the design tool: **Type → Status**.
 | **Error**             | Indicator uses the danger palette. Validation icon (Error Circle Filled) appears in the Header.      | Task has failed or cannot complete. Replace the Value text with an error message. |
 | **Success**           | Indicator uses the success palette. Validation icon (Checkmark Circle Filled) appears in the Header. | Task has completed successfully and the bar is held briefly before dismissal.     |
 
-**Why three statuses, not four:** Warning is intentionally omitted. A progress bar is binary at the boundary — it either succeeds or it doesn't. "In trouble but not failed" is a Determinate progress state with neutral semantics; the surrounding context (a MessageBar, helper text) carries the caution signal. See [`flex-components:message-bar`](../message-bar/SKILL.md) for the Warning palette.
+**Why three statuses, not four:** Warning is intentionally omitted. A progress bar is binary at the boundary — it either succeeds or it doesn't. "In trouble but not failed" is a Determinate progress state with neutral semantics; the surrounding context (a MessageBar, helper text) carries the caution signal. See [`flex-components:message-bar`](../message-bar/SPEC.md) for the Warning palette.
 
 **Why Neutral uses brand and not neutral palette:** The brand-colored indicator is the long-standing Fluent default for an in-progress bar — it reads as "live, moving toward completion" without implying any outcome. A neutral-gray indicator would be ambiguous against the Track (also neutral) and would read as inactive.
 

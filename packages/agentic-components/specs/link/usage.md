@@ -37,5 +37,5 @@ A Link navigates; a Button acts. Use Link when the user is leaving their current
 
 - **Write link text that is meaningful in isolation.** Assistive technology presents links as a flat list, stripped from surrounding context. "Click here" and "Learn more" alone fail this; "View the 2026 fiscal report" succeeds. When the link text must remain short for layout reasons, supplement with an `aria-label` that describes the destination.
 - **Use sentence case.** Capitalize only the first word and proper nouns. Title case in link text reads as a heading.
-- **Avoid raw URLs in body text.** "Read the documentation" is preferable to "Read it at https://example.com/docs." If the URL itself is the content (a citation, a code reference), use the Content type set and the dotted underline to mark it visually.
+- **Avoid raw URLs in body text.** "Read the documentation" is preferable to "Read it at https://example.com." If the URL itself is the content (a citation, a code reference), use the Content type set and the dotted underline to mark it visually.
 - **Never include trailing punctuation inside the link.** A period at the end of a sentence belongs outside the link's hit target so it is not announced by screen readers as part of the link name.
