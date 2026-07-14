@@ -1,0 +1,29 @@
+{
+  "name": "Button",
+  "importPath": "@fluentui-react-native/button",
+  "exportName": "Button",
+  "baseProps": {
+    "children": "Analyze",
+    "testID": "button-root"
+  },
+  "states": [
+    {
+      "id": "default"
+    },
+    {
+      "id": "disabled",
+      "props": {
+        "disabled": true
+      }
+    },
+    {
+      "id": "pressed",
+      "interactions": [
+        {
+          "kind": "press",
+          "targetTestID": "button-root"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "slots": [
+    {
+      "path": [],
+      "type": "View",
+      "entries": [
+        {
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "property": "alignItems",
+          "value": "flex-start"
+        },
+        {
+          "property": "flexDirection",
+          "value": "row"
+        },
+        {
+          "property": "alignSelf",
+          "value": "flex-start"
+        },
+        {
+          "property": "backgroundColor",
+          "value": "#7e36be",
+          "tokenPath": "colors.buttonBackground"
+        },
+        {
+          "property": "borderColor",
+          "value": "#419dbc",
+          "tokenPath": "colors.buttonBorder"
+        },
+        {
+          "property": "borderWidth",
+          "value": 1
+        },
+        {
+          "property": "borderRadius",
+          "value": 4
+        }
+      ],
+      "testID": "button-root"
+    },
+    {
+      "path": [
+        0
+      ],
+      "type": "View",
+      "entries": []
+    },
+    {
+      "path": [
+        0,
+        0
+      ],
+      "type": "View",
+      "entries": [
+        {
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "property": "paddingStart",
+          "value": 6
+        },
+        {
+          "property": "paddingEnd",
+          "value": 6
+        },
+        {
+          "property": "alignItems",
+          "value": "center"
+        },
+        {
+          "property": "flexDirection",
+          "value": "row"
+        },
+        {
+          "property": "alignSelf",
+          "value": "flex-start"
+        },
+        {
+          "property": "minHeight",
+          "value": 24
+        },
+        {
+          "property": "minWidth",
+          "value": 32
+        },
+        {
+          "property": "justifyContent",
+          "value": "center"
+        }
+      ]
+    }
+  ]
+}

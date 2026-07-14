@@ -1,0 +1,59 @@
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            "Analyze"
+          ],
+          "props": {
+            "style": {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "minHeight": 24,
+              "minWidth": 32,
+              "paddingEnd": 6,
+              "paddingStart": 6
+            }
+          },
+          "type": "View"
+        }
+      ],
+      "props": {},
+      "type": "View"
+    }
+  ],
+  "props": {
+    "accessibilityRole": "button",
+    "accessibilityState": {
+      "disabled": false
+    },
+    "accessible": true,
+    "focusable": true,
+    "onBlur": null,
+    "onClick": null,
+    "onFocus": null,
+    "onPress": null,
+    "onResponderGrant": null,
+    "onResponderMove": null,
+    "onResponderRelease": null,
+    "onResponderTerminate": null,
+    "onResponderTerminationRequest": null,
+    "onStartShouldSetResponder": null,
+    "style": {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#7e36be",
+      "borderColor": "#419dbc",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row"
+    },
+    "testID": "button-root"
+  },
+  "type": "View"
+}

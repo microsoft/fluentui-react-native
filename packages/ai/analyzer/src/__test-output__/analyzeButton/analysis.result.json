@@ -1,0 +1,524 @@
+{
+  "matrix": {
+    "component": "Button",
+    "generatedAt": "2026-05-21T21:54:28.455Z",
+    "data": {
+      "snapshots": [
+        {
+          "state": {
+            "id": "default"
+          },
+          "renderTree": {
+            "type": "View",
+            "props": {
+              "accessible": true,
+              "focusable": true,
+              "accessibilityRole": "button",
+              "style": {
+                "display": "flex",
+                "alignItems": "flex-start",
+                "flexDirection": "row",
+                "alignSelf": "flex-start",
+                "backgroundColor": "#7e36be",
+                "borderColor": "#419dbc",
+                "borderWidth": 1,
+                "borderRadius": 4
+              },
+              "accessibilityState": {
+                "disabled": false
+              },
+              "testID": "button-root"
+            },
+            "children": [
+              {
+                "type": "View",
+                "props": {},
+                "children": [
+                  {
+                    "type": "View",
+                    "props": {
+                      "style": {
+                        "display": "flex",
+                        "paddingStart": 6,
+                        "paddingEnd": 6,
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "alignSelf": "flex-start",
+                        "minHeight": 24,
+                        "minWidth": 32,
+                        "justifyContent": "center"
+                      }
+                    },
+                    "children": [
+                      "Analyze"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "a11yTree": {
+            "path": [],
+            "type": "View",
+            "children": [],
+            "role": "button",
+            "state": {
+              "disabled": false
+            },
+            "testID": "button-root"
+          },
+          "tokenMap": {
+            "slots": [
+              {
+                "path": [],
+                "type": "View",
+                "entries": [
+                  {
+                    "property": "display",
+                    "value": "flex"
+                  },
+                  {
+                    "property": "alignItems",
+                    "value": "flex-start"
+                  },
+                  {
+                    "property": "flexDirection",
+                    "value": "row"
+                  },
+                  {
+                    "property": "alignSelf",
+                    "value": "flex-start"
+                  },
+                  {
+                    "property": "backgroundColor",
+                    "value": "#7e36be",
+                    "tokenPath": "colors.buttonBackground"
+                  },
+                  {
+                    "property": "borderColor",
+                    "value": "#419dbc",
+                    "tokenPath": "colors.buttonBorder"
+                  },
+                  {
+                    "property": "borderWidth",
+                    "value": 1
+                  },
+                  {
+                    "property": "borderRadius",
+                    "value": 4
+                  }
+                ],
+                "testID": "button-root"
+              },
+              {
+                "path": [
+                  0
+                ],
+                "type": "View",
+                "entries": []
+              },
+              {
+                "path": [
+                  0,
+                  0
+                ],
+                "type": "View",
+                "entries": [
+                  {
+                    "property": "display",
+                    "value": "flex"
+                  },
+                  {
+                    "property": "paddingStart",
+                    "value": 6
+                  },
+                  {
+                    "property": "paddingEnd",
+                    "value": 6
+                  },
+                  {
+                    "property": "alignItems",
+                    "value": "center"
+                  },
+                  {
+                    "property": "flexDirection",
+                    "value": "row"
+                  },
+                  {
+                    "property": "alignSelf",
+                    "value": "flex-start"
+                  },
+                  {
+                    "property": "minHeight",
+                    "value": 24
+                  },
+                  {
+                    "property": "minWidth",
+                    "value": 32
+                  },
+                  {
+                    "property": "justifyContent",
+                    "value": "center"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "state": {
+            "id": "disabled",
+            "props": {
+              "disabled": true
+            }
+          },
+          "renderTree": {
+            "type": "View",
+            "props": {
+              "accessible": true,
+              "focusable": true,
+              "accessibilityRole": "button",
+              "style": {
+                "display": "flex",
+                "alignItems": "flex-start",
+                "flexDirection": "row",
+                "alignSelf": "flex-start",
+                "backgroundColor": "#b3375a",
+                "borderColor": "#96c058",
+                "borderWidth": 1,
+                "borderRadius": 4
+              },
+              "disabled": true,
+              "accessibilityState": {
+                "disabled": true
+              },
+              "testID": "button-root"
+            },
+            "children": [
+              {
+                "type": "View",
+                "props": {},
+                "children": [
+                  {
+                    "type": "View",
+                    "props": {
+                      "style": {
+                        "display": "flex",
+                        "paddingStart": 6,
+                        "paddingEnd": 6,
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "alignSelf": "flex-start",
+                        "minHeight": 24,
+                        "minWidth": 32,
+                        "justifyContent": "center"
+                      }
+                    },
+                    "children": [
+                      "Analyze"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "a11yTree": {
+            "path": [],
+            "type": "View",
+            "children": [],
+            "role": "button",
+            "state": {
+              "disabled": true
+            },
+            "testID": "button-root"
+          },
+          "tokenMap": {
+            "slots": [
+              {
+                "path": [],
+                "type": "View",
+                "entries": [
+                  {
+                    "property": "display",
+                    "value": "flex"
+                  },
+                  {
+                    "property": "alignItems",
+                    "value": "flex-start"
+                  },
+                  {
+                    "property": "flexDirection",
+                    "value": "row"
+                  },
+                  {
+                    "property": "alignSelf",
+                    "value": "flex-start"
+                  },
+                  {
+                    "property": "backgroundColor",
+                    "value": "#b3375a",
+                    "tokenPath": "colors.buttonBackgroundDisabled"
+                  },
+                  {
+                    "property": "borderColor",
+                    "value": "#96c058",
+                    "tokenPath": "colors.buttonBorderDisabled"
+                  },
+                  {
+                    "property": "borderWidth",
+                    "value": 1
+                  },
+                  {
+                    "property": "borderRadius",
+                    "value": 4
+                  }
+                ],
+                "testID": "button-root"
+              },
+              {
+                "path": [
+                  0
+                ],
+                "type": "View",
+                "entries": []
+              },
+              {
+                "path": [
+                  0,
+                  0
+                ],
+                "type": "View",
+                "entries": [
+                  {
+                    "property": "display",
+                    "value": "flex"
+                  },
+                  {
+                    "property": "paddingStart",
+                    "value": 6
+                  },
+                  {
+                    "property": "paddingEnd",
+                    "value": 6
+                  },
+                  {
+                    "property": "alignItems",
+                    "value": "center"
+                  },
+                  {
+                    "property": "flexDirection",
+                    "value": "row"
+                  },
+                  {
+                    "property": "alignSelf",
+                    "value": "flex-start"
+                  },
+                  {
+                    "property": "minHeight",
+                    "value": 24
+                  },
+                  {
+                    "property": "minWidth",
+                    "value": 32
+                  },
+                  {
+                    "property": "justifyContent",
+                    "value": "center"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "state": {
+            "id": "pressed",
+            "interactions": [
+              {
+                "kind": "press",
+                "targetTestID": "button-root"
+              }
+            ]
+          },
+          "renderTree": {
+            "type": "View",
+            "props": {
+              "accessible": true,
+              "focusable": true,
+              "accessibilityRole": "button",
+              "style": {
+                "display": "flex",
+                "alignItems": "flex-start",
+                "flexDirection": "row",
+                "alignSelf": "flex-start",
+                "backgroundColor": "#7e36be",
+                "borderColor": "#419dbc",
+                "borderWidth": 1,
+                "borderRadius": 4
+              },
+              "accessibilityState": {
+                "disabled": false
+              },
+              "testID": "button-root"
+            },
+            "children": [
+              {
+                "type": "View",
+                "props": {},
+                "children": [
+                  {
+                    "type": "View",
+                    "props": {
+                      "style": {
+                        "display": "flex",
+                        "paddingStart": 6,
+                        "paddingEnd": 6,
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "alignSelf": "flex-start",
+                        "minHeight": 24,
+                        "minWidth": 32,
+                        "justifyContent": "center"
+                      }
+                    },
+                    "children": [
+                      "Analyze"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "a11yTree": {
+            "path": [],
+            "type": "View",
+            "children": [],
+            "role": "button",
+            "state": {
+              "disabled": false
+            },
+            "testID": "button-root"
+          },
+          "tokenMap": {
+            "slots": [
+              {
+                "path": [],
+                "type": "View",
+                "entries": [
+                  {
+                    "property": "display",
+                    "value": "flex"
+                  },
+                  {
+                    "property": "alignItems",
+                    "value": "flex-start"
+                  },
+                  {
+                    "property": "flexDirection",
+                    "value": "row"
+                  },
+                  {
+                    "property": "alignSelf",
+                    "value": "flex-start"
+                  },
+                  {
+                    "property": "backgroundColor",
+                    "value": "#7e36be",
+                    "tokenPath": "colors.buttonBackground"
+                  },
+                  {
+                    "property": "borderColor",
+                    "value": "#419dbc",
+                    "tokenPath": "colors.buttonBorder"
+                  },
+                  {
+                    "property": "borderWidth",
+                    "value": 1
+                  },
+                  {
+                    "property": "borderRadius",
+                    "value": 4
+                  }
+                ],
+                "testID": "button-root"
+              },
+              {
+                "path": [
+                  0
+                ],
+                "type": "View",
+                "entries": []
+              },
+              {
+                "path": [
+                  0,
+                  0
+                ],
+                "type": "View",
+                "entries": [
+                  {
+                    "property": "display",
+                    "value": "flex"
+                  },
+                  {
+                    "property": "paddingStart",
+                    "value": 6
+                  },
+                  {
+                    "property": "paddingEnd",
+                    "value": 6
+                  },
+                  {
+                    "property": "alignItems",
+                    "value": "center"
+                  },
+                  {
+                    "property": "flexDirection",
+                    "value": "row"
+                  },
+                  {
+                    "property": "alignSelf",
+                    "value": "flex-start"
+                  },
+                  {
+                    "property": "minHeight",
+                    "value": 24
+                  },
+                  {
+                    "property": "minWidth",
+                    "value": 32
+                  },
+                  {
+                    "property": "justifyContent",
+                    "value": "center"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "issues": []
+    }
+  },
+  "issues": [
+    {
+      "severity": "error",
+      "rule": "a11y/missing-label",
+      "message": "[state: default] Node with role \"button\" has no accessible name (label, hint, or text child).",
+      "path": []
+    },
+    {
+      "severity": "error",
+      "rule": "a11y/missing-label",
+      "message": "[state: disabled] Node with role \"button\" has no accessible name (label, hint, or text child).",
+      "path": []
+    },
+    {
+      "severity": "error",
+      "rule": "a11y/missing-label",
+      "message": "[state: pressed] Node with role \"button\" has no accessible name (label, hint, or text child).",
+      "path": []
+    }
+  ]
+}

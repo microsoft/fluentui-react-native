@@ -2636,7 +2636,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/analyzer@workspace:packages/ai/analyzer":
+"@fluentui-react-native/analyzer@workspace:*, @fluentui-react-native/analyzer@workspace:packages/ai/analyzer":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/analyzer@workspace:packages/ai/analyzer"
   dependencies:
@@ -4511,6 +4511,20 @@ __metadata:
       optional: true
     react-native-windows:
       optional: true
+  languageName: unknown
+  linkType: soft
+
+"@fluentui-react-native/metadata@workspace:packages/ai/metadata":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/metadata@workspace:packages/ai/metadata"
+  dependencies:
+    "@fluentui-react-native/analyzer": "workspace:*"
+    "@fluentui-react-native/kit-config": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@types/jest": "npm:^29.0.0"
+    "@types/node": "catalog:"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
   languageName: unknown
   linkType: soft
 

@@ -1,0 +1,10 @@
+{
+  "children": [],
+  "path": [],
+  "role": "button",
+  "state": {
+    "disabled": false
+  },
+  "testID": "button-root",
+  "type": "View"
+}

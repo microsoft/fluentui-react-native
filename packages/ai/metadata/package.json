@@ -1,0 +1,61 @@
+{
+  "name": "@fluentui-react-native/metadata",
+  "version": "0.0.1",
+  "description": "Versioned metadata contracts and orchestration surface for Fluent UI React Native",
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/ai/metadata"
+  },
+  "type": "module",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsgo",
+    "build-core": "tsgo",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "lint-package": "fluentui-scripts lint-package",
+    "start": "fluentui-scripts dev",
+    "start-test": "fluentui-scripts jest-watch",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
+  },
+  "dependencies": {
+    "@fluentui-react-native/analyzer": "workspace:*"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/kit-config": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@types/jest": "^29.0.0",
+    "@types/node": "catalog:",
+    "@types/react": "~19.1.4",
+    "react": "19.1.4"
+  },
+  "furn": {
+    "jestPlatform": "react"
+  },
+  "rnx-kit": {
+    "extends": "@fluentui-react-native/kit-config",
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "core-dev-only"
+      ]
+    }
+  }
+}
