@@ -7,12 +7,11 @@
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 
+import { phasedComponent, useSlot } from '@fluentui-react-native/framework-base';
 import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import type { IUseStyling } from '@uifabricshared/foundation-composable';
-import { composable } from '@uifabricshared/foundation-composable';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
 
-import type { FocusZoneProps, FocusZoneSlotProps, FocusZoneType } from './FocusZone.types';
+import type { FocusZoneProps, NativeProps } from './FocusZone.types';
+import { focusZoneName } from './FocusZone.types';
 import RCTFocusZone from './FocusZoneNativeComponent';
 
 const filterOutComponentRef = <T>(props: T): T => {
@@ -23,35 +22,31 @@ const filterOutComponentRef = <T>(props: T): T => {
   return props;
 };
 
-export const FocusZone = composable<FocusZoneType>({
-  usePrepareProps: (userProps: FocusZoneProps, useStyling: IUseStyling<FocusZoneType>) => {
-    const { componentRef, defaultTabbableElement, isCircularNavigation, ...rest } = userProps;
+export const FocusZone = phasedComponent((props: FocusZoneProps) => {
+  const { componentRef, defaultTabbableElement, isCircularNavigation, ...rest } = props;
 
-    const ftzRef = useViewCommandFocus(componentRef);
+  const ftzRef = useViewCommandFocus(componentRef);
 
-    const [targetFirstFocus, setTargetFirstFocus] = React.useState<number | string>(undefined);
-    React.useLayoutEffect(() => {
-      if (typeof defaultTabbableElement === 'string') {
-        setTargetFirstFocus(defaultTabbableElement);
-      } else if (defaultTabbableElement?.current) {
-        setTargetFirstFocus(findNodeHandle(defaultTabbableElement.current));
-      } else {
-        setTargetFirstFocus(undefined);
-      }
-    }, [defaultTabbableElement]);
+  const [targetFirstFocus, setTargetFirstFocus] = React.useState<number | string>(undefined);
+  React.useLayoutEffect(() => {
+    if (typeof defaultTabbableElement === 'string') {
+      setTargetFirstFocus(defaultTabbableElement);
+    } else if (defaultTabbableElement?.current) {
+      setTargetFirstFocus(findNodeHandle(defaultTabbableElement.current));
+    } else {
+      setTargetFirstFocus(undefined);
+    }
+  }, [defaultTabbableElement]);
 
-    return {
-      slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(userProps), {
-        root: {
-          navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds', // let rest override
-          ...rest,
-          defaultTabbableElement: targetFirstFocus,
-          ref: ftzRef,
-        },
-      }),
-    };
-  },
-  slots: {
-    root: { slotType: RCTFocusZone, filter: filterOutComponentRef },
-  },
+  const rootProps = {
+    navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds', // let rest override
+    ...rest,
+    defaultTabbableElement: targetFirstFocus,
+    ref: ftzRef,
+  } as NativeProps;
+
+  // The FocusZone has no styling of its own, so the final render is simply the native root slot.
+  return useSlot<NativeProps>(RCTFocusZone as unknown as React.ComponentType<NativeProps>, rootProps, filterOutComponentRef);
 });
+
+FocusZone.displayName = focusZoneName;

@@ -1,8 +1,6 @@
 import type * as React from 'react';
 
-import type { IViewProps } from '@fluentui-react-native/adapters';
-import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
-import type { IRenderData } from '@uifabricshared/foundation-composable';
+import type { ViewProps, View } from 'react-native';
 
 export const focusZoneName = 'FocusZone';
 
@@ -10,11 +8,11 @@ export const focusZoneName = 'FocusZone';
 type EmptyInterface = {};
 export type FocusZoneState = EmptyInterface;
 
-export type FocusZoneProps = IViewProps & {
+export type FocusZoneProps = ViewProps & {
   /**
-   * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
+   * A RefObject to access the View interface. Use this to access the public methods and properties of the component.
    */
-  componentRef?: React.RefObject<IFocusable>;
+  componentRef?: React.RefObject<View>;
 
   /**
    * Optionally defines the initial tabbable element inside the FocusZone
@@ -113,7 +111,10 @@ export interface FocusZoneSlotProps {
   root: NativeProps;
 }
 
-export type FocusZoneRenderData = IRenderData<FocusZoneSlotProps, FocusZoneState>;
+export interface FocusZoneRenderData {
+  slotProps?: FocusZoneSlotProps;
+  state?: FocusZoneState;
+}
 
 export interface FocusZoneType {
   props: FocusZoneProps;

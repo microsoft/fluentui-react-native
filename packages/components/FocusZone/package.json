@@ -30,10 +30,8 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "workspace:*",
-    "@fluentui-react-native/interactive-hooks": "workspace:*",
-    "@uifabricshared/foundation-composable": "workspace:*",
-    "@uifabricshared/foundation-settings": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
