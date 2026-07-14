@@ -23,6 +23,7 @@ export { memoize } from './memo-cache/memoize';
  */
 export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
+export { assignProps, assignStyles } from './merge-props/assignProps';
 
 /**
  * ----- COMPONENT PATTERNS -----
