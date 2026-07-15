@@ -1,0 +1,206 @@
+component: Checkbox
+type: molecular
+
+variants:
+  Style:
+    values: [Standard, Circular]
+    default: Standard
+    notes: Standard uses square indicator (xSmall radius); Circular uses fully rounded indicator (circular radius).
+  Status:
+    values: [Unchecked, Checked, Indeterminate]
+    default: Unchecked
+    notes: Tri-state — maps to aria-checked="false|true|mixed".
+  State:
+    values: [Rest, Hover, Pressed, Disabled, Focus]
+    notes: Hover and Pressed are resolved as nested token state values. Focus uses the universal dual-outline focus ring.
+
+tokens:
+  background:
+    rest:
+      Unchecked:
+        value: colorBackgroundNeutralTransparent
+        hover: hover.colorBackgroundNeutralTransparent
+        pressed: pressed.colorBackgroundNeutralTransparent
+        rationale: No visual fill at rest; containment communicated by stroke alone.
+      Checked:
+        value: colorBackgroundBrandHeavy
+        hover: hover.colorBackgroundBrandHeavy
+        pressed: pressed.colorBackgroundBrandHeavy
+        rationale: Maximum-emphasis brand fill signals active selection.
+      Indeterminate:
+        value: colorBackgroundBrandHeavy
+        hover: hover.colorBackgroundBrandHeavy
+        pressed: pressed.colorBackgroundBrandHeavy
+        rationale: Matches Checked — partial selection carries equal visual weight.
+    disabled:
+      Unchecked: colorBackgroundNeutralTransparent
+      Checked: colorBackgroundNeutralHeavyDisabled
+      Indeterminate: colorBackgroundNeutralHeavyDisabled
+
+  foreground:
+    indicator:
+      rest:
+        Checked:
+          value: colorForegroundBrandOnloud
+          hover: hover.colorForegroundBrandOnloud
+          pressed: pressed.colorForegroundBrandOnloud
+          rationale: Inverted brand foreground paired with the brand-heavy background — brand-onloud preserves the brand relationship the neutral-onloud variant breaks.
+        Indeterminate:
+          value: colorForegroundBrandOnloud
+          hover: hover.colorForegroundBrandOnloud
+          pressed: pressed.colorForegroundBrandOnloud
+          rationale: Matches Checked — same brand pairing for the dash indicator on heavy brand background.
+        Unchecked: n/a — no indicator icon visible.
+      disabled:
+        Checked: colorForegroundNeutralDisabled
+        Indeterminate: colorForegroundNeutralDisabled
+    label:
+      rest:
+        Unchecked:
+          value: colorForegroundNeutralSecondary
+          hover: hover.colorForegroundNeutralSecondary
+          pressed: pressed.colorForegroundNeutralSecondary
+          rationale: De-emphasized label for unselected options — draws attention to selected items in a group.
+        Checked:
+          value: colorForegroundNeutralPrimary
+          hover: hover.colorForegroundNeutralPrimary
+          pressed: pressed.colorForegroundNeutralPrimary
+          rationale: Full-emphasis label for selected options.
+        Indeterminate:
+          value: colorForegroundNeutralPrimary
+          hover: hover.colorForegroundNeutralPrimary
+          pressed: pressed.colorForegroundNeutralPrimary
+          rationale: Matches Checked — partial selection is visually active.
+      disabled:
+        Unchecked: colorForegroundNeutralDisabled
+        Checked: colorForegroundNeutralDisabled
+        Indeterminate: colorForegroundNeutralDisabled
+    secondary-text:
+      rationale: Stays at secondary regardless of Status — does not promote on Checked/Indeterminate.
+      rest:
+        Unchecked:
+          value: colorForegroundNeutralSecondary
+          hover: hover.colorForegroundNeutralSecondary
+          pressed: pressed.colorForegroundNeutralSecondary
+        Checked:
+          value: colorForegroundNeutralSecondary
+          hover: hover.colorForegroundNeutralSecondary
+          pressed: pressed.colorForegroundNeutralSecondary
+        Indeterminate:
+          value: colorForegroundNeutralSecondary
+          hover: hover.colorForegroundNeutralSecondary
+          pressed: pressed.colorForegroundNeutralSecondary
+      disabled:
+        Unchecked: colorForegroundNeutralDisabled
+        Checked: colorForegroundNeutralDisabled
+        Indeterminate: colorForegroundNeutralDisabled
+
+  stroke:
+    width: strokeWidthThin
+    width-rationale: Standard containment stroke for form controls; consistent with other atomic input components.
+    rest:
+      Unchecked:
+        value: colorStrokeNeutralHeavy
+        hover: hover.colorStrokeNeutralHeavy
+        pressed: pressed.colorStrokeNeutralHeavy
+      Checked: transparent
+      Indeterminate: transparent
+    focus: See flex-system:styling — universal dual-outline focus ring.
+    disabled:
+      Unchecked: colorStrokeNeutralDisabled
+      Checked: transparent
+      Indeterminate: transparent
+
+  radius:
+    indicator:
+      Standard: borderRadiusBase100
+      Circular: borderRadiusCircular
+    focus-ring: borderRadiusBase300
+    focus-ring-rationale: >
+      Focus ring wraps the entire interactive area (indicator + label),
+      so it uses a larger radius than the indicator itself.
+
+  typography:
+    label:
+      rest: textstyle-functional-body-medium
+      font-family: fontFamilyFunctional
+      notes: Single size — no per-size typography breakdown.
+    secondary-text:
+      token: textstyle-functional-body-small
+      font-family: fontFamilyFunctional
+      rationale: One step smaller than body-medium to create clear hierarchy between primary label and description.
+
+  spacing:
+    indicator:
+      margin: spacingComponentBase200
+      margin-rationale: >
+        Margin on the visible indicator provides visual breathing room
+        without introducing an extra DOM/Figma wrapper layer. The
+        Checkbox's hit target is the Root container (which includes the
+        label when present), and the indicator margin sits inside that
+        hit area. If a consumer scopes the hit target to the indicator
+        alone rather than the Root, the indicator margin must still
+        count toward the hit area so that indicator + margin meets
+        WCAG 2.5.5/2.5.8 (24×24 minimum) — with the current
+        `spacingComponentBase200` value (8px), standalone
+        indicator + margin = 16 + 2×8 = 32×32, comfortably above the
+        minimum. Figma re-introduces a wrapper layer at export time
+        when needed for auto-layout fidelity; the spec's canonical
+        model is margin on the indicator.
+    label-wrapper:
+      horizontal-end: spacingComponentBase200
+      vertical: spacingComponentBase150
+      rationale: >
+        End-side padding only — provides breathing room after the label.
+        No start-side padding — the gap token controls indicator-to-label spacing.
+        Vertical padding vertically centers the text baseline with the indicator center.
+    label-inner-gap: spacingComponentBase50
+    label-inner-gap-rationale: >
+      Tightest tier between primary label and secondary text — they read as
+      a single text cluster. Matches Label's internal gap (text ↔ required
+      indicator) for consistency. Only applies when secondary text is visible.
+    gap: spacingComponentBase100
+    gap-rationale: Tightest component-category step for tightly coupled elements — controls indicator-to-label spacing.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      State color transitions should be fast (≤150ms) with standard ease-in-out.
+      Status transitions (Unchecked → Checked) may include a brief checkmark reveal animation.
+      Reduced motion — instant, no animation.
+
+sizes:
+  Default:
+    indicator: 16px
+    indicator-icon: 12px
+  notes: >
+    Single size — no Size variant axis. Height is always auto — emergent from
+    indicator margin + indicator size when only the label is shown, and from
+    primary label line-height + inner-gap + secondary text line-height +
+    vertical padding when secondary text is visible. Indicator vertically aligns
+    to the primary label baseline, not the full text stack center.
+    Indicator and icon sizes have no token coverage and must be hardcoded.
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: 'Label'
+      notes: Bound to the label text node.
+    Secondary text string:
+      type: TEXT
+      default: 'Description'
+      notes: Bound to the secondary text node beneath the label. Only visible when Secondary text property is true.
+    Label:
+      type: BOOLEAN
+      default: true
+      notes: Toggles label text visibility. When false, provide aria-label for accessibility.
+    Secondary text:
+      type: BOOLEAN
+      default: false
+      notes: >
+        Toggles secondary text visibility. Hidden by default — the primary
+        use case remains single-label Checkbox. Requires Label to be true —
+        secondary text without a primary label is not valid.

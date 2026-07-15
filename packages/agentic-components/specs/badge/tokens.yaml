@@ -1,0 +1,135 @@
+component: Badge
+type: atomic
+
+variants:
+  Style:
+    values: [Outline, Tint]
+    default: Tint
+  Color:
+    values: [Brand, Danger, Success, Warning, Informative]
+    default: Brand
+  Size:
+    values: [Small, Medium]
+    default: Medium
+  Shape:
+    values: [Circular, Rounded]
+    default: Circular
+  Layout:
+    values: [Icon and text, Icon only]
+    default: Icon and text
+  State:
+    values: [Rest]
+
+tokens:
+  background:
+    container:
+      Tint:
+        Brand: colorBackgroundBrandSoft
+        Danger: colorBackgroundDangerSoft
+        Success: colorBackgroundSuccessSoft
+        Warning: colorBackgroundWarningSoft
+        Informative: colorBackgroundNeutralSoft
+      Outline:
+        all-colors: colorBackgroundNeutralTransparent
+
+  foreground:
+    container:
+      all-styles:
+        Brand: colorForegroundBrandPrimary
+        Danger: colorForegroundDangerPrimary
+        Success: colorForegroundSuccessPrimary
+        Warning: colorForegroundWarningPrimary
+        Informative: colorForegroundNeutralPrimary
+    notes: Same foreground tokens drive label text and icon paint in both Tint and Outline.
+
+  stroke:
+    container:
+      Tint:
+        width: 0
+        color: no-stroke
+      Outline:
+        width: strokeWidthThin
+        color:
+          Brand: colorStrokeBrandLoud
+          Danger: colorStrokeDangerLoud
+          Success: colorStrokeSuccessLoud
+          Warning: colorStrokeWarningLoud
+          Informative: colorStrokeNeutralLoud
+    focus: n/a
+
+  radius:
+    container:
+      Circular:
+        all-sizes: borderRadiusCircular
+      Rounded:
+        Small: borderRadiusBase100
+        Medium: borderRadiusBase200
+    notes: Rounded radius scales with Size so the corner reads as a softened rectangle at both heights.
+
+  typography:
+    Small: textstyle-functional-caption
+    Medium: textstyle-functional-body-small
+    font-family: fontFamilyFunctional
+
+  spacing:
+    container:
+      padding:
+        Icon and text:
+          Small:
+            inline: spacingComponentBase100
+            block: 0
+          Medium:
+            inline: spacingComponentBase150
+            block: 0
+        Icon only:
+          Small:
+            inline: 0
+            block: 0
+          Medium:
+            inline: 0
+            block: 0
+      gap:
+        Small: spacingComponentBase50
+        Medium: spacingComponentBase50
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: Badge has no state transitions. If a parent animates the badge in or out (e.g. a counter incrementing), the parent owns that motion. Reduced motion — no accommodation required on Badge.
+
+sizes:
+  Small:
+    height: 16
+    icon: 12
+  Medium:
+    height: 20
+    icon: 16
+  notes: Heights and icon sizes are px literals — no --gnrc-* sizing tokens exist for these dimensions.
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: Badge
+      notes: Bound to the Label slot. Only visible when Layout = Icon and text.
+    Leading icon:
+      type: BOOLEAN
+      default: true
+      notes: Shows or hides the Leading icon slot on Layout = Icon and text. Inert on Icon only, where the slot is structurally always visible.
+    Trailing icon:
+      type: BOOLEAN
+      default: false
+      notes: Shows or hides the Trailing icon slot on Layout = Icon and text. Inert on Icon only.
+    Leading 16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+    Leading 12px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (12px Regular)
+    Trailing 16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+    Trailing 12px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (12px Regular)

@@ -1,0 +1,120 @@
+component: List
+type: composed
+
+variants:
+  Size:
+    values: [Small, Medium, Large]
+    default: Medium
+    notes: Forwarded to child ListItem instances. List container does not consume Size itself — it propagates the density contract.
+  Selection mode:
+    values: [None, Single, Multiple]
+    default: None
+    notes: >
+      Drives the leading selection indicator on each child ListItem.
+      None → no indicator. Single → Radio (label hidden). Multiple → Checkbox (label hidden, square style).
+      Indicators are presentational; the row's selection state is authoritative.
+  State:
+    values: [Rest, Hover, Pressed, Focused, Disabled]
+    notes: >
+      State applies to child ListItem rows, not the List container itself. The container has no fill or stroke
+      and no interactive affordance. Container-level Disabled is a convenience that cascades disabled to every row.
+      Hover and Pressed on rows are owned by flex-components:list-item and resolved as nested token state values in that component.
+  Selected:
+    values: [false, true]
+    default: false
+    notes: >
+      Parallel axis to State — a Hover+Selected=True row is valid. Applies to child ListItem rows, not the List
+      container itself. Reflects whether a row is one of the currently-chosen values (Single or Multiple modes,
+      or "you are here" rows under None mode). Per-row Selected styling is owned by flex-components:list-item.
+
+tokens:
+  background:
+    container:
+      token: colorBackgroundNeutralTransparent
+      rationale: List sits on the parent surface and adds no visual weight of its own. The surrounding surface provides the background context.
+
+  foreground:
+    notes: List container has no direct foreground tokens. All text, icon, and indicator colors are owned by flex-components:list-item and its sub-components (Checkbox, Radio, Avatar).
+
+  stroke:
+    container: no-stroke
+    notes: Optional row separation uses flex-components:divider placed between rows — see dependencies. No stroke is drawn by the container itself.
+
+  radius:
+    container: n/a
+    notes: List container has no visible surface, so no radius applies. Individual ListItem rows own their own radius (inherited from flex-components:list-item) so hover and selected backgrounds round correctly.
+
+  typography:
+    notes: List container has no direct typography. ListItem children own their text styles via flex-components:list-item.
+
+  spacing:
+    container-padding: n/a
+    container-padding-rationale: >
+      List adds no padding around the row stack. The parent surface (Card, Pane, Dialog, plain page) is responsible
+      for any padding around the List as a whole.
+    item-gap: 0
+    item-gap-rationale: >
+      Rows stack flush with no gap between them. ListItem rows own their own vertical padding which provides the
+      visual rhythm. Use flex-components:divider between rows or groups when explicit separation is needed; do not
+      introduce gap to substitute for a divider.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      List itself does not animate. Row-level state transitions (hover, pressed, selected) are owned by
+      flex-components:list-item and should be fast (≤150ms ease-in-out). Reduced motion — instant, no animation.
+
+sizes:
+  Small:
+    child-list-item-size: Small
+  Medium:
+    child-list-item-size: Medium
+  Large:
+    child-list-item-size: Large
+  notes: >
+    List forwards Size to each child ListItem instance. The container itself has no dimensional constraint —
+    width fills the parent container, height is the sum of the child rows. Min/max dimensions are parent-driven.
+
+dependencies:
+  - skill: flex-components:list-item
+    usage: >
+      Primary child. Each row is a flex-components:list-item instance. Owns row anatomy (leading content,
+      primary/secondary content slots, trailing actions), interaction states, focus ring, and typography.
+      List forwards Size and Selection mode; ListItem renders the appropriate selection indicator and density.
+    interaction: Per-row hover, pressed, focused, selected visuals are owned by list-item.
+  - skill: flex-components:checkbox
+    usage: >
+      Leading selection indicator on each ListItem when Selection mode = Multiple. Label hidden, square style.
+      Presentational — the row's selection state is authoritative.
+  - skill: flex-components:radio
+    usage: >
+      Leading selection indicator on each ListItem when Selection mode = Single. Label hidden.
+      Presentational — the row's selection state is authoritative.
+  - skill: flex-components:divider
+    usage: >
+      Optional horizontal separator between rows or row groups. Inserted as a sibling between ListItem instances.
+      Uses Divider's own tokens — List does not override any Divider styling.
+  - skill: flex-components:avatar
+    usage: >
+      Optional leading identity element inside a ListItem's primary content slot (people, files, entities).
+      Owned by ListItem's anatomy; List does not configure it directly.
+
+properties:
+  component:
+    Selection mode:
+      type: VARIANT
+      default: None
+      notes: >
+        Drives the leading selection indicator on each child ListItem. None → no indicator.
+        Single → Radio (label hidden). Multiple → Checkbox (label hidden, square style).
+        Indicators are presentational; the row's selection state is authoritative at runtime.
+  notes: >
+    List exposes a `navigationMode` implementation prop (`undefined` / `items` / `composite`) that drives keyboard
+    navigation and ARIA roles at the web layer — see accessibility.md. It is intentionally NOT a Figma variant
+    because it has no visual effect; every web implementation must still set it correctly.
+
+    List has no other Figma properties. Item content is composed by inserting ListItem instances (and optional
+    Divider instances between them) into the container at the call site. Runtime selection state (which row is
+    selected) is configured at implementation time, not as a Figma property on the List.
