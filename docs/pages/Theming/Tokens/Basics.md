@@ -74,7 +74,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
 
 Notes about alias color tokens:
 
-- Different platforms can have different sets of alias tokens; however, the entire set of alias tokens are all defined in the same interface. See (Color.types.ts)[https://github.com/microsoft/fluentui-react-native/blob/main/packages/theming/theme-types/src/Color.types.ts#L453] for this interface and which platforms define which alias tokens.
+- Different platforms can have different sets of alias tokens; however, the entire set of alias tokens are all defined in the same interface. See [Color.types.ts](https://github.com/microsoft/fluentui-react-native/blob/main/packages/agentic-design/src/theming/Color.types.ts#L861) for this interface and which platforms define which alias tokens.
 - As a result, if an alias token is referenced that does not exist for that platform, there won't be any compile-time or run-time errors. Instead, the color shown will default to black.
 
 Special case: if accessing a specific color, you can find it in the `globalTokens.color` property.

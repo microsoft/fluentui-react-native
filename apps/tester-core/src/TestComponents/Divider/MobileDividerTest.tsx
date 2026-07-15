@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { strokeWidth30 } from '@fluentui-react-native/design/tokens/global';
 import { StyleSheet, View } from 'react-native';
 
 import { Divider } from '@fluentui-react-native/divider';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 import { commonTestStyles } from '../Common/styles';
 
@@ -20,7 +20,7 @@ const mobileDividerstyles = StyleSheet.create({
 });
 
 const RedDivider = Divider.customize({ lineColor: 'red' });
-const GreenThickDivider = Divider.customize({ lineColor: 'green', thickness: globalTokens.stroke.width30 });
+const GreenThickDivider = Divider.customize({ lineColor: 'green', thickness: strokeWidth30 });
 
 export const MobileDividers: React.FunctionComponent = () => (
   <Stack style={commonTestStyles.section}>

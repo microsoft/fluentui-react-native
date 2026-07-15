@@ -3,7 +3,7 @@
  * as to be dependent on the core theme type
  */
 export type { TokensThatAreAlsoProps, HasLayer, UseStyling } from '@fluentui-react-native/use-styling';
-import type { Theme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/design/theming';
 import type {
   TokensFromTheme as TokensFromThemeBase,
   TokenSettings as TokenSettingsBase,

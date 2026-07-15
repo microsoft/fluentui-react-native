@@ -18,6 +18,9 @@
       "path": "../Callout/tsconfig.json"
     },
     {
+      "path": "../../agentic-design/tsconfig.json"
+    },
+    {
       "path": "../FocusZone/tsconfig.json"
     },
     {
@@ -40,9 +43,6 @@
     },
     {
       "path": "../Text/tsconfig.json"
-    },
-    {
-      "path": "../../theming/theme-tokens/tsconfig.json"
     },
     {
       "path": "../../theming/theming-utils/tsconfig.json"

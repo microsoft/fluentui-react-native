@@ -52,7 +52,6 @@
 "@fluentui-react-native/divider": patch
 "@fluentui-react-native/persona": patch
 "@fluentui-react-native/tablist": patch
-"@fluentui-react-native/use-slot": patch
 "@fluentui-react-native/avatar": patch
 "@fluentui-react-native/button": patch
 "@fluentui-react-native/switch": patch

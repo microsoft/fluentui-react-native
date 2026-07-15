@@ -41,7 +41,7 @@ Alias tokens are stored on the Theme object, so overriding them uses the same me
 To give a specific example for alias tokens, if you want to override brandBackground1 to different colors (win32 example):
 
 ```ts
-import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeReference, ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createOfficeTheme } from '@fluentui-react-native/win32-theme';
 import { Theme } from '@fluentui-react-native/framework';
 import { updatedGlobalTokens } from './someFile';

@@ -34,13 +34,12 @@
   },
   "dependencies": {
     "@fluentui-react-native/default-theme": "workspace:*",
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/design-tokens-ios": "catalog:",
     "@fluentui-react-native/design-tokens-macos": "catalog:",
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/theme": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",
-    "@fluentui-react-native/theme-types": "workspace:*",
     "@fluentui-react-native/theming-utils": "workspace:*",
     "assert-never": "^1.2.1"
   },

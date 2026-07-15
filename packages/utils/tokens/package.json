@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
-    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

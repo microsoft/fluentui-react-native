@@ -1,4 +1,4 @@
-import type { OfficePalette, PartialTheme } from '@fluentui-react-native/theme-types';
+import type { OfficePalette, PartialTheme } from '@fluentui-react-native/design/theming';
 
 import type { OfficeThemingModule } from './NativeModule/officeThemingModule';
 import { paletteFromOfficeColors } from './paletteFromOfficeColors';

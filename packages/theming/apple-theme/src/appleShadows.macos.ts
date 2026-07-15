@@ -1,4 +1,4 @@
-import type { ThemeShadowDefinition, AppearanceOptions } from '@fluentui-react-native/theme-types';
+import type { ThemeShadowDefinition, AppearanceOptions } from '@fluentui-react-native/design/theming';
 
 import { getIsHighContrast } from './appleHighContrast.macos';
 import { createMacOSShadowAliasTokens } from './createMacOSAliasTokens';

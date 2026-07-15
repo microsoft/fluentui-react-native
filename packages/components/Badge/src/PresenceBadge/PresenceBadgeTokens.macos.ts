@@ -1,16 +1,25 @@
 import type { TokenSettings } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  colorBerryPrimary,
+  colorGrey38,
+  colorMarigoldPrimary,
+  colorWhite,
+  sizeNone,
+  colorLightGreenPrimary,
+  colorRedPrimary,
+} from '@fluentui-react-native/design/tokens/global';
+import { getBadgeColor } from './PresenceBadge.helpers';
 
 import type { PresenceBadgeTokens } from './PresenceBadge.types';
 
 export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (): PresenceBadgeTokens =>
   ({
     borderWidth: 1,
-    borderColor: globalTokens.color.white,
-    bottom: globalTokens.sizeNone,
-    right: globalTokens.sizeNone,
-    paddingHorizontal: globalTokens.sizeNone,
-    backgroundColor: globalTokens.color.white,
+    borderColor: colorWhite,
+    bottom: sizeNone,
+    right: sizeNone,
+    paddingHorizontal: sizeNone,
+    backgroundColor: colorWhite,
     tiny: {
       width: 6,
       height: 6,
@@ -37,27 +46,18 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = ()
       height: 28,
       borderWidth: 2,
     },
-    available: getBadgeColor('lightGreen'),
+    available: getBadgeColor(colorLightGreenPrimary),
     away: {
-      iconColor: globalTokens.color['marigold'].primary,
+      iconColor: colorMarigoldPrimary,
       outOfOffice: {
-        iconColor: globalTokens.color['berry'].primary,
+        iconColor: colorBerryPrimary,
       },
     },
-    busy: getBadgeColor('red'),
-    blocked: getBadgeColor('red'),
-    unknown: getBadgeColor('red'),
+    busy: getBadgeColor(colorRedPrimary),
+    blocked: getBadgeColor(colorRedPrimary),
+    unknown: getBadgeColor(colorRedPrimary),
     offline: {
-      iconColor: globalTokens.color.grey38,
+      iconColor: colorGrey38,
     },
-    outOfOffice: getBadgeColor('berry'),
+    outOfOffice: getBadgeColor(colorBerryPrimary),
   }) as PresenceBadgeTokens;
-
-function getBadgeColor(color: string) {
-  return {
-    iconColor: globalTokens.color[color].primary,
-    outOfOffice: {
-      iconColor: globalTokens.color[color].primary,
-    },
-  };
-}

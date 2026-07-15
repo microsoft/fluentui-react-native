@@ -1,7 +1,14 @@
 import { DynamicColorIOS } from 'react-native';
 
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  cornerRadius120,
+  cornerRadiusNone,
+  size120,
+  size160,
+  strokeWidth10,
+  strokeWidthNone,
+} from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { NotificationTokens } from './Notification.types';
@@ -35,14 +42,14 @@ const notificationColors = {
 export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme> = (t: Theme) =>
   ({
     borderColor: 'transparent',
-    borderRadius: globalTokens.corner.radius120,
-    borderWidth: globalTokens.stroke.width10,
+    borderRadius: cornerRadius120,
+    borderWidth: strokeWidth10,
     minHeight: 52,
-    padding: globalTokens.size160,
-    paddingVertical: globalTokens.size120,
+    padding: size160,
+    paddingVertical: size120,
     shadowToken: t.shadows.shadow16,
     isBar: {
-      borderRadius: globalTokens.corner.radiusNone,
+      borderRadius: cornerRadiusNone,
       shadowToken: undefined,
     },
     primary: {
@@ -59,7 +66,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     },
     primaryBar: {
       backgroundColor: t.colors.brandBackgroundTint,
-      borderWidth: globalTokens.stroke.widthNone,
+      borderWidth: strokeWidthNone,
       color: t.colors.brandForegroundTint,
       disabledColor: t.colors.brandForegroundDisabled1,
       pressedColor: notificationColors.primaryPressed,
@@ -73,7 +80,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     },
     neutralBar: {
       backgroundColor: t.colors.neutralBackground5,
-      borderWidth: globalTokens.stroke.widthNone,
+      borderWidth: strokeWidthNone,
       color: t.colors.neutralForeground2,
       disabledColor: t.colors.neutralForegroundDisabled2,
       pressedColor: notificationColors.neutralPressed,

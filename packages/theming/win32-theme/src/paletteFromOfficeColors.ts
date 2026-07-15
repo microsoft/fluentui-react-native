@@ -1,4 +1,4 @@
-import type { Palette, OfficePalette } from '@fluentui-react-native/theme-types';
+import type { Palette, OfficePalette } from '@fluentui-react-native/design/theming';
 
 export function paletteFromOfficeColors(p: OfficePalette): Palette {
   return {

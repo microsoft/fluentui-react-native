@@ -1,4 +1,4 @@
-import type { AppearanceOptions } from '@fluentui-react-native/theme-types';
+import type { AppearanceOptions } from '@fluentui-react-native/design/theming';
 
 import { getIsHighContrast, setIsHighContrast } from '../appleHighContrast.macos';
 import { createAppleTheme } from '../createAppleTheme';

@@ -1,34 +1,43 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  cornerRadius40,
+  size100,
+  size20,
+  size200,
+  size40,
+  size60,
+  sizeNone,
+  strokeWidth10,
+} from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { RadioTokens } from './Radio.types';
 
 export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) =>
   ({
-    rootHorizontalPadding: globalTokens.size40,
+    rootHorizontalPadding: size40,
     borderColor: t.colors.transparentStroke,
     borderStyle: 'solid',
-    borderWidth: globalTokens.stroke.width10,
-    borderRadius: globalTokens.corner.radius40,
-    radioBorderWidth: globalTokens.stroke.width10,
+    borderWidth: strokeWidth10,
+    borderRadius: cornerRadius40,
+    radioBorderWidth: strokeWidth10,
     radioVisibility: 0,
     variant: 'subheaderStandard',
     radioBorderStyle: 'solid',
     radioBorder: t.colors.neutralStrokeAccessible,
     color: t.colors.neutralForeground3,
-    radioOuterCircleSize: globalTokens.size200,
-    radioInnerCircleSize: globalTokens.size100,
-    labelMarginVertical: globalTokens.size40,
-    labelMarginRight: globalTokens.size20,
-    labelMarginLeft: globalTokens.sizeNone,
+    radioOuterCircleSize: size200,
+    radioInnerCircleSize: size100,
+    labelMarginVertical: size40,
+    labelMarginRight: size20,
+    labelMarginLeft: sizeNone,
     subtextVariant: 'caption1',
-    subtextMarginTop: globalTokens.sizeNone,
-    subtextMarginBottom: globalTokens.size40 + 1,
-    marginTop: globalTokens.size60,
-    marginRight: globalTokens.size60,
-    marginBottom: globalTokens.size60,
-    marginLeft: globalTokens.size40,
+    subtextMarginTop: sizeNone,
+    subtextMarginBottom: size40 + 1,
+    marginTop: size60,
+    marginRight: size60,
+    marginBottom: size60,
+    marginLeft: size40,
     flexDirection: 'row',
     alignItems: 'flex-start',
     labelAlignItems: 'flex-start',
@@ -37,8 +46,8 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       flexDirection: 'column',
       alignItems: 'center',
       labelAlignItems: 'center',
-      labelMarginLeft: globalTokens.size20,
-      marginLeft: globalTokens.size60,
+      labelMarginLeft: size20,
+      marginLeft: size60,
     },
 
     disabled: {

@@ -8,7 +8,7 @@
 import { Platform, LogBox } from 'react-native';
 
 import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
-import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeReference, ThemeProvider } from '@fluentui-react-native/design/theming';
 
 import type { FluentTesterProps } from './FluentTester';
 import { FluentTester } from './FluentTester';

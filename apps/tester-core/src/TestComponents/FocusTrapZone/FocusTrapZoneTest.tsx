@@ -8,7 +8,7 @@ import type { Theme } from '@fluentui-react-native/framework';
 import type { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
 import { useFocusState } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/design/theming';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 import { stackStyle } from '../Common/styles';

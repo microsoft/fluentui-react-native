@@ -1,7 +1,7 @@
 import type React from 'react';
 import type { ViewProps } from 'react-native';
 
-import type { ShadowToken } from '@fluentui-react-native/theme-types';
+import type { ShadowToken } from '@fluentui-react-native/design/theming';
 
 export const shadowName = 'Shadow';
 

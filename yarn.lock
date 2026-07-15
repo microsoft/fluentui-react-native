@@ -2628,11 +2628,10 @@ __metadata:
   resolution: "@fluentui-react-native/android-theme@workspace:packages/theming/android-theme"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -2669,14 +2668,13 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/design-tokens-ios": "catalog:"
     "@fluentui-react-native/design-tokens-macos": "catalog:"
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -2715,11 +2713,11 @@ __metadata:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/badge": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
@@ -2764,6 +2762,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/experimental-shadow": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
@@ -2771,8 +2770,6 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
@@ -2816,6 +2813,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/experimental-activity-indicator": "workspace:*"
     "@fluentui-react-native/experimental-shadow": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -2827,8 +2825,6 @@ __metadata:
     "@fluentui-react-native/styling-utils": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
@@ -2918,6 +2914,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
@@ -2926,7 +2923,6 @@ __metadata:
     "@fluentui-react-native/styling-utils": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
@@ -2973,6 +2969,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
@@ -2980,7 +2977,6 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -3118,11 +3114,10 @@ __metadata:
   resolution: "@fluentui-react-native/default-theme@workspace:packages/theming/default-theme"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -3222,7 +3217,6 @@ __metadata:
     "@fluentui-react-native/theming-utils": "*"
     "@fluentui-react-native/tokens": "*"
     "@fluentui-react-native/tooltip": "*"
-    "@fluentui-react-native/use-slot": "*"
     "@fluentui-react-native/use-slots": "*"
     "@fluentui-react-native/use-styling": "*"
     "@fluentui-react-native/use-tokens": "*"
@@ -3348,8 +3342,6 @@ __metadata:
       optional: true
     "@fluentui-react-native/tooltip":
       optional: true
-    "@fluentui-react-native/use-slot":
-      optional: true
     "@fluentui-react-native/use-slots":
       optional: true
     "@fluentui-react-native/use-styling":
@@ -3385,38 +3377,38 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/design-tokens-android@npm:^0.56.0":
-  version: 0.56.0
-  resolution: "@fluentui-react-native/design-tokens-android@npm:0.56.0"
-  checksum: 10c0/f12929f661af45d1d0afb633f2ef5ca9065175cd8a311f60020a09f3aa70d4c7a60419644dd8e02822f3c889f3c16b560e5aad0d0a8cd00060f7c4ea6b34f561
+"@fluentui-react-native/design-tokens-android@npm:^0.53.0":
+  version: 0.53.0
+  resolution: "@fluentui-react-native/design-tokens-android@npm:0.53.0"
+  checksum: 10c0/f4945cf94ad80768db7541e2146b72d653b2e8b1e5cb38c6aed1b37aa4becb1249b20c2bbd169159d893b421370c724af01fe346ff6eec31e37d457e8c766aa6
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/design-tokens-ios@npm:^0.56.0":
-  version: 0.56.0
-  resolution: "@fluentui-react-native/design-tokens-ios@npm:0.56.0"
-  checksum: 10c0/a6d93ae494ed2cd7cc5354548f87dbb72f36475725385fb3d08fb560c46de61f2545fa012fb8639c6409e84fb82846eb407e46e3adc7fcac9a67208182585e5a
+"@fluentui-react-native/design-tokens-ios@npm:^0.53.0":
+  version: 0.53.0
+  resolution: "@fluentui-react-native/design-tokens-ios@npm:0.53.0"
+  checksum: 10c0/94cd45931c94ef319619b9885671b4282e37a804e07694a05c3d6188b8e692822e458cb2d0a36a569efffdcfe024d4f47dfd3952b64005dc8b90131c40ac345d
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/design-tokens-macos@npm:^0.56.0":
-  version: 0.56.0
-  resolution: "@fluentui-react-native/design-tokens-macos@npm:0.56.0"
-  checksum: 10c0/b0e239ff7953e812751836b0f68d88cea3141dfc81b24c6f1e5a29cbf357f5ce8634e7558e34b476dfaa408bb674923a7fd82a743162124f002eccbda5a64839
+"@fluentui-react-native/design-tokens-macos@npm:^0.53.0":
+  version: 0.53.0
+  resolution: "@fluentui-react-native/design-tokens-macos@npm:0.53.0"
+  checksum: 10c0/0ceab5b38110b0b011fc589ef402fbda2e2fd49545f5f79a9943233a309f02763e664b06022b94bad19c1c2f2530c57c122f4d20a09e594332bfa83750e75fa9
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/design-tokens-win32@npm:^0.56.0":
-  version: 0.56.0
-  resolution: "@fluentui-react-native/design-tokens-win32@npm:0.56.0"
-  checksum: 10c0/6c50767927af00a0314c4e6b584ac070f6472323da1c781f686972092f86a50b1dabaa31a3be8b060f0fc15a587c5d4106d696b581140d364665dc0f642ad02c
+"@fluentui-react-native/design-tokens-win32@npm:^0.53.0":
+  version: 0.53.0
+  resolution: "@fluentui-react-native/design-tokens-win32@npm:0.53.0"
+  checksum: 10c0/3f16e4d07ea846b99e08051fd3ce572e5b24f858eb989ee2e1c4449369033ce2612fada90d379d90958e3afd91eb7dca0bd60bd88009836e0aa6d985e64085eb
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/design-tokens-windows@npm:^0.56.0":
-  version: 0.56.0
-  resolution: "@fluentui-react-native/design-tokens-windows@npm:0.56.0"
-  checksum: 10c0/e544bd1150e2de0c290e79f363cadb56cff00dad1c85640e2a813d676a3e10267845c086150c208a301ae2954412d765c99799822891323ff481ed0f2baf7e67
+"@fluentui-react-native/design-tokens-windows@npm:^0.53.0":
+  version: 0.53.0
+  resolution: "@fluentui-react-native/design-tokens-windows@npm:0.53.0"
+  checksum: 10c0/314db2f38a435b4cc71d5d712ac9b40e5989c001bf57dde50097dd8be7e7f32151a1f8b6ed02e51af4df6c15970362070e4d94c804f5324423fae18bae53900e
   languageName: node
   linkType: hard
 
@@ -3430,7 +3422,12 @@ __metadata:
     "@fluentui-react-native/design-tokens-macos": "catalog:"
     "@fluentui-react-native/design-tokens-win32": "catalog:"
     "@fluentui-react-native/design-tokens-windows": "catalog:"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/tools-filesystem": "npm:^0.2.0"
     "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
@@ -3456,13 +3453,13 @@ __metadata:
   resolution: "@fluentui-react-native/divider@workspace:packages/components/Divider"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -3503,11 +3500,11 @@ __metadata:
   resolution: "@fluentui-react-native/drawer@workspace:packages/experimental/Drawer"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -3548,13 +3545,13 @@ __metadata:
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
@@ -3934,12 +3931,12 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-shadow@workspace:packages/experimental/Shadow"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/pressable": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
@@ -4135,9 +4132,9 @@ __metadata:
     "@babel/core": "catalog:"
     "@fluentui-react-native/composition": "workspace:*"
     "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-slots": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
@@ -4224,6 +4221,7 @@ __metadata:
   resolution: "@fluentui-react-native/input@workspace:packages/components/Input"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
@@ -4232,7 +4230,6 @@ __metadata:
     "@fluentui-react-native/styling-utils": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -4415,6 +4412,7 @@ __metadata:
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
@@ -4423,7 +4421,6 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
@@ -4469,6 +4466,7 @@ __metadata:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
     "@fluentui-react-native/experimental-shadow": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4479,8 +4477,6 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -4563,10 +4559,10 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -4725,6 +4721,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
@@ -4733,7 +4730,6 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -4864,10 +4860,10 @@ __metadata:
   resolution: "@fluentui-react-native/separator@workspace:packages/components/Separator"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -4906,11 +4902,11 @@ __metadata:
   resolution: "@fluentui-react-native/spinner@workspace:packages/experimental/Spinner"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -5115,8 +5111,8 @@ __metadata:
   resolution: "@fluentui-react-native/test-tools@workspace:packages/utils/test-tools"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:~19.1.4"
@@ -5128,8 +5124,11 @@ __metadata:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
+      optional: true
+    react-native-macos:
       optional: true
   languageName: unknown
   linkType: soft
@@ -5149,6 +5148,7 @@ __metadata:
     "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/chip": "workspace:*"
     "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/divider": "workspace:*"
     "@fluentui-react-native/drawer": "workspace:*"
     "@fluentui-react-native/dropdown": "workspace:*"
@@ -5183,7 +5183,6 @@ __metadata:
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/themed-stylesheet": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tooltip": "workspace:*"
@@ -5392,12 +5391,12 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
-    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -5436,12 +5435,12 @@ __metadata:
   resolution: "@fluentui-react-native/theme-tokens@workspace:packages/theming/theme-tokens"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/design-tokens-android": "catalog:"
     "@fluentui-react-native/design-tokens-ios": "catalog:"
     "@fluentui-react-native/design-tokens-win32": "catalog:"
     "@fluentui-react-native/design-tokens-windows": "catalog:"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
@@ -5454,17 +5453,21 @@ __metadata:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
+      optional: true
+    react-native-macos:
       optional: true
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/theme-types@workspace:*, @fluentui-react-native/theme-types@workspace:packages/theming/theme-types":
+"@fluentui-react-native/theme-types@workspace:packages/theming/theme-types":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/theme-types@workspace:packages/theming/theme-types"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -5477,8 +5480,11 @@ __metadata:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
+      optional: true
+    react-native-macos:
       optional: true
   languageName: unknown
   linkType: soft
@@ -5488,10 +5494,8 @@ __metadata:
   resolution: "@fluentui-react-native/theme@workspace:packages/framework/theme"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/test-tools": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
@@ -5504,8 +5508,11 @@ __metadata:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
+      optional: true
+    react-native-macos:
       optional: true
   languageName: unknown
   linkType: soft
@@ -5540,10 +5547,10 @@ __metadata:
   resolution: "@fluentui-react-native/theming-utils@workspace:packages/theming/theming-utils"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/design-tokens-win32": "catalog:"
     "@fluentui-react-native/design-tokens-windows": "catalog:"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -5580,8 +5587,8 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
@@ -5773,12 +5780,11 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/design-tokens-win32": "catalog:"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -10562,9 +10568,9 @@ __metadata:
   resolution: "@uifabricshared/foundation-compose@workspace:packages/deprecated/foundation-compose"
   dependencies:
     "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
     "@types/react": "npm:~19.1.4"
     "@uifabricshared/foundation-composable": "workspace:*"
@@ -10706,10 +10712,10 @@ __metadata:
   resolution: "@uifabricshared/theming-ramp@workspace:packages/deprecated/theming-ramp"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
-    "@fluentui-react-native/theme-types": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:~19.1.4"
     "@uifabricshared/foundation-settings": "workspace:*"
@@ -10719,8 +10725,11 @@ __metadata:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
+      optional: true
+    react-native-macos:
       optional: true
   languageName: unknown
   linkType: soft

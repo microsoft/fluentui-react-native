@@ -33,10 +33,9 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/theme": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",
-    "@fluentui-react-native/theme-types": "workspace:*",
     "@fluentui-react-native/theming-utils": "workspace:*",
     "assert-never": "^1.2.1"
   },

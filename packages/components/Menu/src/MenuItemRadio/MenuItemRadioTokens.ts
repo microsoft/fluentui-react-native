@@ -1,27 +1,27 @@
 import type { FontWeightValue, Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { cornerRadiusNone, fontSize200, fontWeightRegular, size20, size40, size80 } from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { MenuItemRadioTokens } from './MenuItemRadio.types';
 
 export const defaultMenuItemRadioTokens: TokenSettings<MenuItemRadioTokens, Theme> = (t: Theme): MenuItemRadioTokens => ({
   backgroundColor: t.colors.neutralBackground1,
-  borderRadius: globalTokens.corner.radiusNone,
-  checkmarkPadding: globalTokens.size20,
+  borderRadius: cornerRadiusNone,
+  checkmarkPadding: size20,
   checkmarkSize: 16,
   checkmarkVisibility: 0,
   color: t.colors.neutralForeground1,
   fontFamily: t.typography.families.primary,
-  fontSize: globalTokens.font.size200,
-  fontWeight: globalTokens.font.weight.regular as FontWeightValue,
-  gap: globalTokens.size40,
+  fontSize: fontSize200,
+  fontWeight: fontWeightRegular as FontWeightValue,
+  gap: size40,
   iconColor: t.colors.neutralForeground1,
   iconSize: 16,
   minHeight: 24,
   minWidth: 160,
   maxWidth: 300,
-  padding: globalTokens.size40,
-  paddingHorizontal: globalTokens.size80,
+  padding: size40,
+  paddingHorizontal: size80,
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
     color: t.colors.neutralForeground1Pressed,

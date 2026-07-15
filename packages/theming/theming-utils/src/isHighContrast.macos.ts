@@ -1,4 +1,4 @@
-import type { Theme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/design/theming';
 
 let isHighContrastEnabled = false;
 

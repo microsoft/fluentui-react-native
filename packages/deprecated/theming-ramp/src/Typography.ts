@@ -6,7 +6,7 @@ import type {
   FontWeightValue,
   FontWeight,
   Typography,
-} from '@fluentui-react-native/theme-types';
+} from '@fluentui-react-native/design/theming';
 
 export function resolveFontFamily(typography: Typography, family: FontFamily): FontFamilyValue {
   if (typography.families.hasOwnProperty(family)) {

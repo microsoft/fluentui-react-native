@@ -1,4 +1,4 @@
-import type { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
+import type { ThemeColorDefinition } from '@fluentui-react-native/design/theming';
 
 import type { FluentUIAndroidPalette } from './colorsSemantic';
 import { createColorAliasTokens } from './createAliasTokens';

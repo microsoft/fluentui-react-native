@@ -1,0 +1,64 @@
+component: Popover
+type: atomic
+
+variants:
+  Type:
+    values: [Default]
+    default: Default
+    notes: >
+      Single type. Positioning and arrow direction are runtime/code concerns,
+      not modeled as Figma variant axes.
+
+tokens:
+  surface:
+    container:
+      token: colorSurfaceNeutralNearer
+      rationale: Highest elevation step in the ordinal surface scale, pairing with the low-elevation shadow to read as a distinct floating layer above the page.
+    arrow:
+      token: colorSurfaceNeutralNearer
+      rationale: Matches container fill so the arrow reads as a continuous extension of the floating surface.
+
+  stroke:
+    width: strokeWidthThin
+    color: colorStrokeNeutralSubtle
+    notes: >
+      The container stroke uses the neutral subtle stroke generic
+      (colorStrokeNeutralSubtle), giving the floating
+      surface a defined boundary that adapts with the theme's stroke ramp. The
+      arrow carries the same stroke on only its two outward-facing (beak) edges
+      per placement, so the stroke traces the beak silhouette while the arrow's
+      opaque fill covers the container stroke where they meet — no seam across
+      the container surface.
+
+  radius:
+    container: borderRadiusBase400
+    notes: Generous radius appropriate for a floating surface that contains composed content.
+
+  spacing:
+    container-padding: spacingComponentBase400
+    arrow-to-target-gap: spacingComponentBase100
+    notes: >
+      Container owns the inner padding around its content.
+      Arrow-to-target gap is the distance from the arrow tip to the nearest edge of the trigger element.
+
+  elevation:
+    level: 3
+    shadow: shadowLow
+    notes: >
+      A consistent shadow around the full popover shape (container + arrow) is
+      recommended where the platform allows. Shadow compositing is an
+      implementation concern, not strictly enforced by the spec.
+
+  motion:
+    status: pending
+    guidance: >
+      Entry: fast fade-in with subtle scale (<=150ms, ease-out).
+      Exit: near-instant fade-out.
+      Reduced motion — instant, no transition.
+
+properties:
+  component:
+    Swap content:
+      type: INSTANCE_SWAP
+      default: Content placeholder
+      notes: The container's content slot; swap with any component or layout.

@@ -1,19 +1,19 @@
 import type { Theme, TokenSettings } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { cornerRadius40, size40, size60 } from '@fluentui-react-native/design/tokens/global';
 
 import type { OptionTokens } from './Option.types';
 
 export const defaultOptionTokens: TokenSettings<OptionTokens> = (t: Theme): OptionTokens => ({
   backgroundColor: t.colors.neutralBackground1,
-  borderRadius: globalTokens.corner.radius40,
+  borderRadius: cornerRadius40,
   checkmarkColor: t.colors.neutralForeground2,
   checkmarkSize: 16,
   color: t.colors.neutralForeground2,
   minHeight: 32,
   minWidth: 160,
   maxWidth: 300,
-  paddingHorizontal: globalTokens.size60,
-  spacingContentIcon: globalTokens.size40,
+  paddingHorizontal: size60,
+  spacingContentIcon: size40,
   variant: 'body1',
   hovered: {
     backgroundColor: t.colors.neutralBackground1Hover,

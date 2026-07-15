@@ -1,0 +1,55 @@
+component: Tablist
+type: molecular
+
+variants:
+  notes: >
+    Tablist has no variant properties of its own.
+    Child Tab components carry Layout, State, and Selected variants.
+
+tokens:
+  background: n/a # Transparent layout container — no fill. Child Tabs own their backgrounds.
+
+  foreground: n/a # Delegated to child Tab sub-components.
+
+  stroke: n/a # No container stroke. Focus ring is applied on child Tabs, not the Tablist.
+
+  radius: n/a
+  radius-notes: >
+    Tablist has no visible container surface. Child Tab radius is owned by the Tab component.
+
+  typography: n/a # No text content at the Tablist level. Delegated to child Tab.
+
+  spacing:
+    gap: spacingComponentBase100
+    gap-rationale: >
+      Component category — spacing is between child Tab components within a molecular container.
+      Matches the pattern used by MessageBar for sub-component spacing.
+    padding: n/a # Tablist container has no internal padding — children align flush to the container edges.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: No Tablist-level motion. Child Tab transitions follow Tab motion tokens. Reduced motion — handled at child level.
+
+sizes:
+  notes: >
+    Tablist height is resultant — derived entirely from the child Tab size.
+    See flex-components:tab sizes block for resultant-height and icon values.
+
+dependencies:
+  Tab:
+    skill: flex-components:tab
+    usage: Primary child component. Layout (Icon + label, Icon only) and Selected state configured per instance.
+    interaction: All interactive states (Rest, Hover, Pressed, Disabled, Selected) owned by Tab.
+  Button:
+    skill: flex-components:button
+    usage: Icon only layout, Subtle style. Used in the optional end-content slot for overflow or add-tab actions.
+    interaction: All interactive states owned by Button.
+
+properties:
+  component:
+    End content:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the optional trailing end-content action slot.

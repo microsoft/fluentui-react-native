@@ -29,7 +29,7 @@ We have default themes for each platform. See [this page](./DefaultThemes.md) fo
 The theme is made available by the `ThemeProvider`. It takes in a `ThemeReference` as a value, which is the object created by the functions referenced in the pages above.
 
 ```tsx
-import { ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeProvider } from '@fluentui-react-native/design/theming';
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 
 // This will use the built-in theme from FURN.

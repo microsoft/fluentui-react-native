@@ -1,5 +1,6 @@
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import type { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
+import type { ThemeColorDefinition } from '@fluentui-react-native/design/theming';
+import { colorBlack, colorBurgundyPrimary, colorRedPrimary, colorWhite } from '@fluentui-react-native/design/tokens/global';
 
 import { createColorAliasTokens } from './createAliasTokens';
 import { paletteFromFabricColors } from './defaultColors';
@@ -7,7 +8,7 @@ import { paletteFromFabricColors } from './defaultColors';
 export function getStockWebPalette(): ThemeColorDefinition {
   return {
     ...paletteFromFabricColors({
-      black: globalTokens.color.black,
+      black: colorBlack,
       neutralDark: '#201f1e',
       neutralPrimary: '#323130',
       neutralPrimaryAlt: '#3b3a39',
@@ -20,10 +21,10 @@ export function getStockWebPalette(): ThemeColorDefinition {
       neutralLight: '#edebe9',
       neutralLighter: '#f3f2f1',
       neutralLighterAlt: '#faf9f8',
-      white: globalTokens.color.white,
+      white: colorWhite,
       // Shared Colors
-      red: globalTokens.color.red.primary,
-      redDark: globalTokens.color.burgundy.primary,
+      red: colorRedPrimary,
+      redDark: colorBurgundyPrimary,
 
       themeDarker: globalTokens.color.brand.shade40,
       themeDark: globalTokens.color.brand.shade20,
@@ -55,7 +56,7 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
         themeLight: globalTokens.color.brand.shade30,
         themeLighter: globalTokens.color.brand.shade50,
         themeLighterAlt: globalTokens.color.brand.shade60,
-        black: globalTokens.color.white,
+        black: colorWhite,
         neutralDark: '#faf9f8',
         neutralPrimary: '#f3f2f1',
         neutralPrimaryAlt: '#c8c6c4',
@@ -69,7 +70,7 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
         neutralLighter: '#252423',
         neutralLighterAlt: '#201f1e',
         white: '#1b1a19',
-        red: globalTokens.color.red.primary,
+        red: colorRedPrimary,
         accent: globalTokens.color.brand.primary,
         redDark: '#f1707b',
         blackTranslucent40: 'rgba(0,0,0,.4)',

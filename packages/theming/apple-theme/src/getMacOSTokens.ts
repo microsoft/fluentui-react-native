@@ -6,7 +6,7 @@ import macOSLightHCAliasTokens from '@fluentui-react-native/design-tokens-macos/
 import macOSLightHCShadowTokens from '@fluentui-react-native/design-tokens-macos/hclight/tokens-shadow.json';
 import macOSLightAliasTokens from '@fluentui-react-native/design-tokens-macos/light/tokens-aliases.json';
 import macOSLightShadowTokens from '@fluentui-react-native/design-tokens-macos/light/tokens-shadow.json';
-import type { AppearanceOptions } from '@fluentui-react-native/theme-types';
+import type { AppearanceOptions } from '@fluentui-react-native/design/theming';
 import { assertNever } from 'assert-never';
 
 export function getMacOSAliasTokens(mode: AppearanceOptions, isHighContrast: boolean) {

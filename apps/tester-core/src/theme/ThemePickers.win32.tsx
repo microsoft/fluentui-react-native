@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import type { ThemeOptions } from '@fluentui-react-native/theme-types';
+import type { ThemeOptions } from '@fluentui-react-native/design/theming';
 
 import type { OfficeBrand } from './applyBrand';
 import { brandOptions } from './applyBrand';

@@ -3,8 +3,8 @@ import { View, TextInput, Platform } from 'react-native';
 
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import type { Theme } from '@fluentui-react-native/theme-types';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/design/theming';
+import { useTheme } from '@fluentui-react-native/design/theming';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 import { commonTestStyles as commonStyles } from '../Common/styles';

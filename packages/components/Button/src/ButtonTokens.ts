@@ -1,5 +1,15 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import {
+  cornerRadius40,
+  cornerRadiusCircular,
+  cornerRadiusNone,
+  size120,
+  size160,
+  size40,
+  size60,
+  size80,
+  strokeWidth10,
+} from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';
@@ -10,79 +20,79 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       width: '100%',
     },
     medium: {
-      padding: globalTokens.size60 - globalTokens.stroke.width10,
-      borderWidth: globalTokens.stroke.width10,
+      padding: size60 - strokeWidth10,
+      borderWidth: strokeWidth10,
       iconSize: 16,
       focused: {
         borderWidth: 0,
-        padding: globalTokens.size60,
+        padding: size60,
       },
       hasContent: {
         minWidth: 96,
-        paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
+        paddingHorizontal: size120 - strokeWidth10,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.size60,
+          spacingIconContentAfter: size60,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.size60,
+          spacingIconContentBefore: size60,
         },
         focused: {
-          paddingHorizontal: globalTokens.size120,
+          paddingHorizontal: size120,
         },
       },
     },
     small: {
-      padding: globalTokens.size40 - globalTokens.stroke.width10,
-      borderWidth: globalTokens.stroke.width10,
+      padding: size40 - strokeWidth10,
+      borderWidth: strokeWidth10,
       iconSize: 16,
       focused: {
         borderWidth: 0,
-        padding: globalTokens.size40,
+        padding: size40,
       },
       hasContent: {
         minWidth: 64,
         minHeight: 24,
-        paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width10,
+        paddingHorizontal: size80 - strokeWidth10,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.size40,
+          spacingIconContentAfter: size40,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.size40,
+          spacingIconContentBefore: size40,
         },
         focused: {
-          paddingHorizontal: globalTokens.size80,
+          paddingHorizontal: size80,
         },
       },
     },
     large: {
-      padding: globalTokens.size80 - globalTokens.stroke.width10,
-      borderWidth: globalTokens.stroke.width10,
+      padding: size80 - strokeWidth10,
+      borderWidth: strokeWidth10,
       iconSize: 20,
       focused: {
         borderWidth: 0,
-        padding: globalTokens.size80,
+        padding: size80,
       },
       hasContent: {
         minWidth: 96,
-        paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
+        paddingHorizontal: size160 - strokeWidth10,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.size60,
+          spacingIconContentAfter: size60,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.size60,
+          spacingIconContentBefore: size60,
         },
         focused: {
-          paddingHorizontal: globalTokens.size160,
+          paddingHorizontal: size160,
         },
       },
     },
     rounded: {
-      borderRadius: globalTokens.corner.radius40,
+      borderRadius: cornerRadius40,
     },
     circular: {
-      borderRadius: globalTokens.corner.radiusCircular,
+      borderRadius: cornerRadiusCircular,
     },
     square: {
-      borderRadius: globalTokens.corner.radiusNone,
+      borderRadius: cornerRadiusNone,
     },
   }) as ButtonTokens;

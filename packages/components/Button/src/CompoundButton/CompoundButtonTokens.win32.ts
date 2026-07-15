@@ -1,5 +1,5 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { size120, size160, size200, size80, strokeWidth10, strokeWidth20 } from '@fluentui-react-native/design/tokens/global';
 import { isHighContrast } from '@fluentui-react-native/theming-utils';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
@@ -7,158 +7,158 @@ import type { CompoundButtonTokens } from './CompoundButton.types';
 
 export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Theme> = (theme: Theme): CompoundButtonTokens => ({
   medium: {
-    padding: globalTokens.size120 - globalTokens.stroke.width10,
+    padding: size120 - strokeWidth10,
     focused: {
-      padding: globalTokens.size120,
+      padding: size120,
     },
     primary: !isHighContrast(theme) && {
       focused: {
-        borderWidth: globalTokens.stroke.width20,
-        padding: globalTokens.size120 - globalTokens.stroke.width20,
+        borderWidth: strokeWidth20,
+        padding: size120 - strokeWidth20,
       },
       square: {
         focused: {
-          borderWidth: globalTokens.stroke.width10,
-          padding: globalTokens.size120 - globalTokens.stroke.width10,
+          borderWidth: strokeWidth10,
+          padding: size120 - strokeWidth10,
         },
       },
     },
     hasContent: {
-      paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
+      paddingHorizontal: size120 - strokeWidth10,
       minWidth: 96,
       focused: {
-        paddingHorizontal: globalTokens.size120,
+        paddingHorizontal: size120,
       },
       primary: !isHighContrast(theme) && {
         focused: {
-          paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
+          paddingHorizontal: size120 - strokeWidth20,
         },
         circular: {
           focused: {
-            paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
+            paddingHorizontal: size160 - strokeWidth20,
           },
         },
         square: {
           focused: {
-            paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
+            paddingHorizontal: size120 - strokeWidth10,
           },
         },
       },
       hasIconAfter: {
-        spacingIconContentAfter: globalTokens.size120,
+        spacingIconContentAfter: size120,
       },
       hasIconBefore: {
-        spacingIconContentBefore: globalTokens.size120,
+        spacingIconContentBefore: size120,
       },
       circular: {
-        paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
+        paddingHorizontal: size160 - strokeWidth10,
         focused: {
-          paddingHorizontal: globalTokens.size160,
+          paddingHorizontal: size160,
         },
       },
     },
   },
   small: {
-    padding: globalTokens.size80 - globalTokens.stroke.width10,
+    padding: size80 - strokeWidth10,
     focused: {
       borderWidth: 0,
-      padding: globalTokens.size80,
+      padding: size80,
     },
     primary: !isHighContrast(theme) && {
       focused: {
-        borderWidth: globalTokens.stroke.width20,
-        padding: globalTokens.size80 - globalTokens.stroke.width20,
+        borderWidth: strokeWidth20,
+        padding: size80 - strokeWidth20,
       },
       square: {
         focused: {
-          borderWidth: globalTokens.stroke.width10,
-          padding: globalTokens.size80 - globalTokens.stroke.width10,
+          borderWidth: strokeWidth10,
+          padding: size80 - strokeWidth10,
         },
       },
     },
     hasContent: {
-      paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width10,
+      paddingHorizontal: size80 - strokeWidth10,
       minWidth: 64,
       focused: {
-        paddingHorizontal: globalTokens.size80,
+        paddingHorizontal: size80,
       },
       primary: !isHighContrast(theme) && {
         focused: {
-          paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
+          paddingHorizontal: size80 - strokeWidth20,
         },
         circular: {
           focused: {
-            paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
+            paddingHorizontal: size120 - strokeWidth20,
           },
         },
         square: {
           focused: {
-            paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width10,
+            paddingHorizontal: size80 - strokeWidth10,
           },
         },
       },
       hasIconAfter: {
-        spacingIconContentAfter: globalTokens.size80,
+        spacingIconContentAfter: size80,
       },
       hasIconBefore: {
-        spacingIconContentBefore: globalTokens.size80,
+        spacingIconContentBefore: size80,
       },
       circular: {
-        paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
+        paddingHorizontal: size120 - strokeWidth10,
         focused: {
-          paddingHorizontal: globalTokens.size120,
+          paddingHorizontal: size120,
         },
       },
     },
   },
   large: {
-    padding: globalTokens.size160 - globalTokens.stroke.width10,
+    padding: size160 - strokeWidth10,
     focused: {
-      padding: globalTokens.size160,
+      padding: size160,
     },
     primary: !isHighContrast(theme) && {
       focused: {
-        borderWidth: globalTokens.stroke.width20,
-        padding: globalTokens.size160 - globalTokens.stroke.width20,
+        borderWidth: strokeWidth20,
+        padding: size160 - strokeWidth20,
       },
       square: {
         focused: {
-          borderWidth: globalTokens.stroke.width10,
-          padding: globalTokens.size160 - globalTokens.stroke.width10,
+          borderWidth: strokeWidth10,
+          padding: size160 - strokeWidth10,
         },
       },
     },
     hasContent: {
-      paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
+      paddingHorizontal: size160 - strokeWidth10,
       minWidth: 96,
       focused: {
-        paddingHorizontal: globalTokens.size160,
+        paddingHorizontal: size160,
       },
       primary: !isHighContrast(theme) && {
         focused: {
-          paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
+          paddingHorizontal: size160 - strokeWidth20,
         },
         circular: {
           focused: {
-            paddingHorizontal: globalTokens.size200 - globalTokens.stroke.width20,
+            paddingHorizontal: size200 - strokeWidth20,
           },
         },
         square: {
           focused: {
-            paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
+            paddingHorizontal: size160 - strokeWidth10,
           },
         },
       },
       hasIconAfter: {
-        spacingIconContentAfter: globalTokens.size160,
+        spacingIconContentAfter: size160,
       },
       hasIconBefore: {
-        spacingIconContentBefore: globalTokens.size160,
+        spacingIconContentBefore: size160,
       },
       circular: {
-        paddingHorizontal: globalTokens.size200 - globalTokens.stroke.width10,
+        paddingHorizontal: size200 - strokeWidth10,
         focused: {
-          paddingHorizontal: globalTokens.size200,
+          paddingHorizontal: size200,
         },
       },
     },

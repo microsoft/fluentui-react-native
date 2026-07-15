@@ -84,6 +84,7 @@ The task pipeline is defined in `lage.config.mjs`:
 - Tasks declare dependency ordering (e.g. `test` dependsOn `build`)
 - `buildci` is the aggregate CI alias (lint-repo, check-publishing, build, test, lint)
 - Lage caches task outputs; add `--no-cache` to bypass caching and `--verbose` for detailed output
+- After a major rework (e.g. moving packages, large refactors, or renaming exports), run `yarn lage test --no-cache` from the root once to force every test to re-run without relying on stale cached results. This also resets the Lage cache, so subsequent plain `yarn lage test` runs will work incrementally again.
 
 ### Package-Level Commands
 
@@ -171,6 +172,10 @@ The composition framework uses precise types for better type safety:
 - When checking for win32 platform: `Platform.OS === ('win32' as any)` - TypeScript doesn't recognize 'win32' but react-native-windows supports it
 - Final render functions should return `FinalRender<TProps>` with children as rest parameters: `(props: TProps, ...children: React.ReactNode[])`
 
+**Module Exports**:
+
+- **Do not use barrel exports (`export * from '...'`)** - wildcard re-exports break tree-shaking because bundlers cannot statically determine which symbols are used, so unused code is retained in consumers' bundles. Always use explicit named re-exports instead, e.g. `export { Foo, Bar } from './module'` and `export type { Baz } from './module'`.
+
 **Native Modules**: Components with native code (iOS/Android/Windows):
 
 - Typically have one root slot wrapping the native component
@@ -203,7 +208,7 @@ Platform-specific themes are in `/packages/theming/`:
 - `theme-tokens/` - Token definitions
 - `theme-types/` - TypeScript types for themes
 
-Components require `ThemeProvider` from `@fluentui-react-native/theme` to work properly.
+Components require `ThemeProvider` from `@fluentui-react-native/design/theming` to work properly.
 
 ### Testing
 
@@ -221,7 +226,7 @@ Components require `ThemeProvider` from `@fluentui-react-native/theme` to work p
   - Optional `e2eSections` prop for dedicated E2E test elements
 - Run E2E tests: `yarn e2etest:<platform>` from `/apps/E2E/`
 
-**Unit Tests**: Component-specific Jest tests where present, typically in `src/` directories. Run them with `yarn test` in a package or `yarn lage test` from the root.
+**Unit Tests**: Component-specific Jest tests where present, typically in `src/` directories. Run them with `yarn test` in a package or `yarn lage test` from the root. After a major rework, run `yarn lage test --no-cache` once at the root to ensure all tests re-run and pass without stale cache hits; this resets the Lage cache so a normal incremental `yarn lage test` works afterward.
 
 ### Platform-Specific Development
 
@@ -271,3 +276,4 @@ Components require `ThemeProvider` from `@fluentui-react-native/theme` to work p
 - Use the newer composition framework (`@fluentui-react-native/composition`) for new components, not the deprecated foundation frameworks
 - When importing V1 components, consider aliasing: `import { ButtonV1 as Button }`
 - Slot functions return `React.ReactElement` - you can safely access `.props` without type assertions
+- Avoid barrel exports (`export * from '...'`); use explicit named re-exports to preserve tree-shaking

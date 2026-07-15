@@ -1,6 +1,6 @@
 import type { NativeModule, ColorValue } from 'react-native';
 
-import type { OfficePalette, Typography } from '@fluentui-react-native/theme-types';
+import type { OfficePalette, Typography } from '@fluentui-react-native/design/theming';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type ObjectBase = {};

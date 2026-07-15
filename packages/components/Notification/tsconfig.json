@@ -15,6 +15,9 @@
       "path": "../Button/tsconfig.json"
     },
     {
+      "path": "../../agentic-design/tsconfig.json"
+    },
+    {
       "path": "../../experimental/AppearanceAdditions/tsconfig.json"
     },
     {
@@ -43,12 +46,6 @@
     },
     {
       "path": "../Text/tsconfig.json"
-    },
-    {
-      "path": "../../theming/theme-tokens/tsconfig.json"
-    },
-    {
-      "path": "../../theming/theme-types/tsconfig.json"
     },
     {
       "path": "../../utils/tokens/tsconfig.json"

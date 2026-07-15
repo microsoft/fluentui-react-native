@@ -1,4 +1,4 @@
-import type { ThemeShadowDefinition } from '@fluentui-react-native/theme-types';
+import type { ThemeShadowDefinition } from '@fluentui-react-native/design/theming';
 
 /**
  * Given design token pipeline output for shadow tokens, creates an object that can be used in Theme object.

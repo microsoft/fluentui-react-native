@@ -8,5 +8,5 @@ export type {
   Theme as ITheme,
   ThemeColorDefinition as IThemeColorDefinition,
   Typography as ITypography,
-} from '@fluentui-react-native/theme-types';
-export { ThemeContext, useTheme } from '@fluentui-react-native/theme-types';
+} from '@fluentui-react-native/design/theming';
+export { ThemeContext, useTheme } from '@fluentui-react-native/design/theming';

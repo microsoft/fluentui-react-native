@@ -33,11 +33,11 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/design-tokens-android": "catalog:",
     "@fluentui-react-native/design-tokens-ios": "catalog:",
     "@fluentui-react-native/design-tokens-win32": "catalog:",
     "@fluentui-react-native/design-tokens-windows": "catalog:",
-    "@fluentui-react-native/theme-types": "workspace:*",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
@@ -54,10 +54,14 @@
   "peerDependencies": {
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
     "react": "18.2.0 || 19.0.0 || 19.1.4",
-    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6"
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
   },
   "peerDependenciesMeta": {
     "@types/react": {
+      "optional": true
+    },
+    "react-native-macos": {
       "optional": true
     }
   },

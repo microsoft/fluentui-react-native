@@ -1,0 +1,216 @@
+component: Button
+type: atomic
+
+variants:
+  Layout:
+    values: [Icon and text, Icon only]
+  Style:
+    values: [Primary, Secondary, Outline, Subtle]
+    order: descending emphasis
+  Size:
+    values: [Small, Medium, Large]
+    default: Medium
+  State:
+    values: [Rest, Hover, Pressed, Disabled]
+    notes: Hover and Pressed are resolved as nested token state values.
+  Selected:
+    values: [false, true]
+    default: false
+
+tokens:
+  background:
+    rest:
+      Primary:
+        value: colorBackgroundBrandHeavy
+        hover: hover.colorBackgroundBrandHeavy
+        pressed: pressed.colorBackgroundBrandHeavy
+        rationale: Maximum-emphasis brand fill; highest contrast against surface.
+      Secondary:
+        value: colorBackgroundNeutralSubtle
+        hover: hover.colorBackgroundNeutralSubtle
+        pressed: pressed.colorBackgroundNeutralSubtle
+        rationale: Visible but non-dominant fill.
+      Outline:
+        value: colorBackgroundNeutralTransparent
+        hover: hover.colorBackgroundNeutralTransparent
+        pressed: pressed.colorBackgroundNeutralTransparent
+        rationale: Containment communicated by border alone.
+      Subtle:
+        value: colorBackgroundNeutralTransparent
+        hover: hover.colorBackgroundNeutralTransparent
+        pressed: pressed.colorBackgroundNeutralTransparent
+        rationale: No visual weight at rest; a fill would compete with content, so affordance is deferred to hover.
+    selected:
+      Primary:
+        value: colorBackgroundBrandHeavy
+        hover: hover.colorBackgroundBrandHeavy
+        pressed: pressed.colorBackgroundBrandHeavy
+      Secondary:
+        value: colorBackgroundNeutralHeavy
+        hover: hover.colorBackgroundNeutralHeavy
+        pressed: pressed.colorBackgroundNeutralHeavy
+        rationale: Selected increases fill weight from subtle to heavy for visual emphasis.
+      Outline:
+        value: colorBackgroundNeutralHeavy
+        hover: hover.colorBackgroundNeutralHeavy
+        pressed: pressed.colorBackgroundNeutralHeavy
+        rationale: Selected fills the previously transparent container with heavy weight, matching Secondary.
+      Subtle:
+        value: colorBackgroundNeutralSoft
+        hover: hover.colorBackgroundNeutralSoft
+        pressed: pressed.colorBackgroundNeutralSoft
+        rationale: Soft (not heavy) — Subtle is the low-weight style, so Selected increases emphasis proportionally rather than jumping to maximum weight.
+    disabled:
+      unselected:
+        Primary: colorBackgroundNeutralHeavyDisabled
+        Secondary: colorBackgroundNeutralSubtleDisabled
+        Outline: colorBackgroundNeutralTransparent
+        Subtle: colorBackgroundNeutralTransparent
+      selected:
+        Primary: colorBackgroundNeutralHeavyDisabled
+        Secondary: colorBackgroundNeutralHeavyDisabled
+        Outline: colorBackgroundNeutralHeavyDisabled
+        Subtle: colorBackgroundNeutralSubtleDisabled
+
+  foreground:
+    rest:
+      Primary:
+        value: colorForegroundBrandOnloud
+        hover: hover.colorForegroundBrandOnloud
+        pressed: pressed.colorForegroundBrandOnloud
+        rationale: Inverted brand foreground paired with the brand-heavy background — brand-onloud preserves the brand relationship the neutral-onloud variant breaks.
+      Secondary:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+      Outline:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+      Subtle:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+    selected:
+      Primary:
+        value: colorForegroundBrandOnloud
+        hover: hover.colorForegroundBrandOnloud
+        pressed: pressed.colorForegroundBrandOnloud
+      Secondary:
+        value: colorForegroundNeutralOnloud
+        hover: hover.colorForegroundNeutralOnloud
+        pressed: pressed.colorForegroundNeutralOnloud
+      Outline:
+        value: colorForegroundNeutralOnloud
+        hover: hover.colorForegroundNeutralOnloud
+        pressed: pressed.colorForegroundNeutralOnloud
+      Subtle:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+    disabled: colorForegroundNeutralDisabled
+
+  stroke:
+    width: strokeWidthThin
+    width-rationale: All styles carry the same stroke width to maintain identical outer dimensions. Non-Outline styles set the color to transparent.
+    rest:
+      Outline: colorStrokeNeutralSubtle
+      Primary: transparent
+      Secondary: transparent
+      Subtle: transparent
+    selected:
+      Outline:
+        color: colorStrokeNeutralHeavy
+        rationale: Heavy stroke matches the heavy background fill.
+      Primary: transparent
+      Secondary: transparent
+      Subtle: transparent
+    focus: See flex-system:styling — universal dual-outline focus ring.
+    disabled:
+      Outline: colorStrokeNeutralDisabled
+      Primary: transparent
+      Secondary: transparent
+      Subtle: transparent
+
+  radius:
+    Icon and text:
+      Small: borderRadiusBase200
+      Medium: borderRadiusBase300
+      Large: borderRadiusBase400
+    Icon only: borderRadiusCircular
+
+  typography:
+    rest:
+      Small: textstyle-functional-body-small
+      Medium: textstyle-functional-body-medium
+      Large: textstyle-functional-body-large
+    selected:
+      Small: textstyle-functional-body-small-strong
+      Medium: textstyle-functional-body-medium-strong
+      Large: textstyle-functional-body-large-strong
+    font-family: fontFamilyFunctional
+
+  spacing:
+    Icon and text:
+      Small:
+        horizontal: spacingComponentBase200
+        vertical: spacingComponentBase100
+      Medium:
+        horizontal: spacingComponentBase250
+        vertical: spacingComponentBase150
+        rationale: Tight tier — Medium is the dense interactive default; Small and Large use Regular.
+      Large:
+        horizontal: spacingComponentBase300
+        vertical: spacingComponentBase200
+    Icon only:
+      Small: spacingComponentBase100
+      Medium: spacingComponentBase150
+      Large: spacingComponentBase250
+    gap:
+      Small: spacingComponentBase50
+      Medium: spacingComponentBase100
+      Large: spacingComponentBase150
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: State color transitions should be fast (typically ≤150ms) with standard ease-in-out. Reduced motion — remove transitions entirely.
+sizes:
+  Small:
+    resultant-height: 25px # Icon-and-text: round(12 × 1.4) + 4×2 = 17 + 8. Icon-only is 24px (4×2 padding + 16px icon).
+    icon: 16px
+  Medium:
+    resultant-height: 32px # Icon-and-text: round(14 × 1.4) + 6×2 = 20 + 12. Icon-only is 32px (6×2 padding + 20px icon).
+    icon: 20px
+  Large:
+    resultant-height: 38px # Icon-and-text: round(16 × 1.4) + 8×2 = 22 + 16. Icon-only is 40px (10×2 padding + 20px icon).
+    icon: 20px
+  notes: >
+    Heights are resultant — derived from padding + typography + stroke. Listed values are for Icon-and-text;
+    Icon-only buttons are square by design and their dimensions are determined by icon size + padding (24 / 32 / 40).
+    Prefer responsive sizing; use min/max constraints when a fixed bound is needed.
+    Icon sizes have no token coverage and must be hardcoded.
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: 'Button'
+      notes: Bound to the visible label node only; ghost node has no prop binding.
+    20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Selected=False icon nodes
+    20px Filled:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Filled)
+      binding: Selected=True icon nodes
+    16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      binding: Small size, Selected=False
+    16px Filled:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Filled)
+      binding: Small size, Selected=True

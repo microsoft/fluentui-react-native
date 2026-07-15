@@ -1,4 +1,4 @@
-import type { Theme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/design/theming';
 import type { ThemeHelper } from '@fluentui-react-native/use-styling';
 
 import { useFluentTheme } from './useFluentTheme';
