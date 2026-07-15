@@ -32,11 +32,11 @@ The `shape` concept describes the corner treatment of a component through a smal
 
 #### Shapes
 
-| Shape      | Corner radius token     | Value  | Meaning                         |
-| ---------- | ----------------------- | ------ | ------------------------------- |
-| `circle`   | `cornerRadiusCircular`  | `9999` | Fully rounded (pill / circle)   |
-| `square`   | `cornerRadiusNone`      | `0`    | Sharp, un‑rounded corners       |
-| `rounded`  | `cornerRadius40`        | `4`    | Slightly rounded corners        |
+| Shape     | Corner radius token    | Value  | Meaning                       |
+| --------- | ---------------------- | ------ | ----------------------------- |
+| `circle`  | `cornerRadiusCircular` | `9999` | Fully rounded (pill / circle) |
+| `square`  | `cornerRadiusNone`     | `0`    | Sharp, un‑rounded corners     |
+| `rounded` | `cornerRadius40`       | `4`    | Slightly rounded corners      |
 
 The default shape is `rounded`.
 
