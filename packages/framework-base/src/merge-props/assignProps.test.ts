@@ -9,6 +9,7 @@ interface IFakeStyle {
 }
 
 type IFakeStyleProp = StyleProp<IFakeStyle>;
+type IFakeProps = { a?: number; b?: number; style?: IFakeStyleProp };
 
 describe('assignStyles', () => {
   test('returns undefined when there are no valid styles', () => {
@@ -94,7 +95,7 @@ describe('assignProps', () => {
   });
 
   test('ignores undefined and null entries in the rest arguments', () => {
-    const base = { a: 1 } as { a: number; b?: number };
+    const base: IFakeProps = { a: 1 };
     const result = assignProps(base, undefined as unknown as Partial<typeof base>, { b: 2 }, null as unknown as Partial<typeof base>);
     expect(result).toBe(base);
     expect(result).toEqual({ a: 1, b: 2 });
@@ -119,7 +120,7 @@ describe('assignProps', () => {
 
   test('applies a style supplied only in rest', () => {
     const restStyle = { color: 'green' };
-    const base = { a: 1 } as { a: number; style?: IFakeStyleProp };
+    const base: IFakeProps = { a: 1 };
     const result = assignProps(base, { style: restStyle as IFakeStyleProp });
     expect(result.style).toBe(restStyle);
     expect(result.a).toBe(1);
@@ -144,9 +145,9 @@ describe('assignProps', () => {
   });
 
   test('flattens array-valued styles when combining base and rest', () => {
-    const baseStyle: IFakeStyleProp = [{ color: 'red' }, { borderWidth: 1 }];
-    const restStyle: IFakeStyleProp = { backgroundColor: 'blue' };
-    const base = { style: baseStyle };
+    const baseStyle = [{ color: 'red' }, { borderWidth: 1 }];
+    const restStyle = { backgroundColor: 'blue' };
+    const base: IFakeProps = { style: baseStyle };
     const result = assignProps(base, { style: restStyle });
     expect(result.style).toEqual([{ color: 'red' }, { borderWidth: 1 }, { backgroundColor: 'blue' }]);
   });

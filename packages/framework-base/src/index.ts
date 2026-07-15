@@ -32,6 +32,7 @@ export { assignProps, assignStyles } from './merge-props/assignProps';
 export { renderSlot, createSlotComponent, renderJsx } from './component-patterns/render';
 export { directComponent, legacyDirectComponent } from './component-patterns/direct';
 export { phasedComponent, stagedComponent } from './component-patterns/phased';
+export { attachSlotProps } from './component-patterns/slot';
 export { useSlot, useOptionalSlot } from './component-patterns/useSlot';
 export {
   isDirectComponentType,
