@@ -14,7 +14,7 @@ export function constrain(workspace: Yarn.Constraints.Workspace): void {
     ctx.enforce('rnx-kit.extends', '@fluentui-react-native/scripts/kit-config');
   }
   if (ctx.manifest.scripts?.build) {
-    ctx.enforce('scripts.build', 'tsgo -b');
+    ctx.enforce('scripts.build', 'tsc -b');
   }
   ctx.enforce('scripts.build-cjs', undefined);
   ctx.enforce('scripts.build-core', undefined);

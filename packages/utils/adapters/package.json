@@ -22,12 +22,12 @@
     }
   },
   "scripts": {
-    "build": "tsgo -b",
+    "build": "tsc -b",
     "clean": "fluentui-scripts clean",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "test": "fluentui-scripts jest && yarn verify-drift",
-    "verify-drift": "tsgo --noEmit -p src/__drift__/tsconfig.win32.json && tsgo --noEmit -p src/__drift__/tsconfig.windows.json && tsgo --noEmit -p src/__drift__/tsconfig.macos.json",
+    "verify-drift": "tsc --noEmit -p src/__drift__/tsconfig.win32.json && tsc --noEmit -p src/__drift__/tsconfig.windows.json && tsc --noEmit -p src/__drift__/tsconfig.macos.json",
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "devDependencies": {
