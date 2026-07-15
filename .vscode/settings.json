@@ -44,12 +44,12 @@
 
   "json.format.enable": false,
 
-  // enable the native preview for typescript, used to build internally as well
-  "typescript.experimental.useTsgo": true,
-
   "typescript.preferences.quoteStyle": "single",
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+  // Points at the workspace's typescript package (7.0.2, native tsc). The
+  // TypeScript 7 (native-preview) extension detects that this tsdk has no
+  // tsserver.js and automatically runs it as a native LSP server.
   "typescript.tsdk": "./node_modules/typescript/lib",
 
   "search.exclude": {

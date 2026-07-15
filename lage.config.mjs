@@ -29,7 +29,7 @@ const config = {
     // These run once for the whole repo. Sub-packages do not have these scripts,
     // so lage naturally scopes them to the root workspace.
     build: {
-      // tsgo project level build has its own caching
+      // tsc project level build has its own caching
       cache: false,
     },
     'check-publishing': {
