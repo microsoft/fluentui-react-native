@@ -1,0 +1,70 @@
+component: Toolbar
+type: molecular
+
+variants:
+  Size:
+    values: [Small, Large]
+    default: Large
+
+tokens:
+  background: n/a # Transparent layout container — no fill. Child buttons own their backgrounds.
+
+  foreground: n/a # Delegated to child Button sub-components.
+
+  stroke:
+    divider:
+      color: colorStrokeNeutralSubtle
+      rationale: Subtle stroke weight — the divider should recede behind the button icons, not compete for attention.
+    width: strokeWidthThin
+    width-rationale: Thin is the standard weight for low-emphasis separators.
+    focus: See flex-system:styling — universal dual-outline focus ring (applied on child Buttons, not the toolbar container).
+
+  radius: n/a
+  radius-notes: >
+    Toolbar has no visible container surface. Child Button radius is owned by the Button component.
+    If a toolbar surface is introduced in the future, use borderRadiusBase300
+    as the starting point, per the composite staircase rule with atomic-small child buttons.
+
+  typography: n/a # No text content at the toolbar level. Delegated to child Button.
+
+  spacing:
+    gap:
+      Large: spacingComponentBase150
+      Small: spacingComponentBase50
+    gap-rationale: >
+      Component category — spacing is between tightly coupled sibling elements within a single component.
+    padding: n/a # Toolbar container has no internal padding — children align flush to the container edges.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: No toolbar-level motion. Child button transitions follow Button motion tokens. Reduced motion — handled at child level.
+
+sizes:
+  Large:
+    child-button-size: Large
+  Small:
+    child-button-size: Small
+  notes: >
+    Toolbar height and icon sizes are resultant — derived entirely from the child Button size.
+    See flex-components:button sizes block for resultant-height and icon values.
+
+dependencies:
+  Button:
+    skill: flex-components:button
+    usage: Icon only layout, Subtle style. Size matches toolbar Size variant (Large → Large, Small → Small).
+    interaction: All interactive states (Rest, Hover, Pressed, Disabled, Selected) owned by Button.
+  Divider:
+    skill: flex-components:divider
+    usage: Vertical separator between logical button groups. Stretches to full toolbar height.
+    tokens:
+      stroke-color: colorStrokeNeutralSubtle
+      stroke-width: strokeWidthThin
+
+properties:
+  component:
+    notes: >
+      Toolbar has no component-level text or icon properties.
+      Child Buttons expose their own icon INSTANCE_SWAP properties.
+      The toolbar surface exposes Size as its only variant property.

@@ -1,0 +1,103 @@
+component: Divider
+type: atomic
+
+variants:
+  Layout:
+    values: [Center (Default), Start, End]
+    default: Center (Default)
+    notes: >
+      Controls label position relative to the line segments.
+      Center uses two equal flex-grow lines. Start uses a
+      spacingComponentBase100 leading stub. End uses a
+      spacingComponentBase100 trailing stub.
+  Vertical:
+    values: [false, true]
+    default: false
+    notes: >
+      Controls orientation. False = horizontal (flex-row); True = vertical (flex-column).
+
+tokens:
+  background:
+    line:
+      token: colorStrokeNeutralSubtle
+      rationale: >
+        The divider line uses a stroke-namespaced token because the line's
+        semantic role is a stroke — it is a boundary mark, not a surface fill.
+        The CSS property used is background-color on a 1px rectangle rather
+        than a border, for sub-pixel rendering consistency. The token category
+        (background in this YAML) describes the implementation method; the
+        token name describes the design intent.
+
+  foreground:
+    label:
+      token: colorForegroundNeutralSecondary
+      rationale: >
+        Secondary foreground keeps the label legible but subordinate to
+        primary content on either side of the divider.
+    icon:
+      token: colorForegroundNeutralSecondary
+      rationale: Matches label color for visual consistency within the content slot.
+
+  stroke:
+    container: no-stroke
+    focus: n/a # Non-interactive — no focus ring.
+
+  radius: n/a
+
+  typography:
+    label: textstyle-functional-body-small
+    font-family: fontFamilyFunctional
+
+  spacing:
+    content:
+      horizontal-padding: spacingComponentBase300
+      vertical-padding: spacingComponentBase300
+      rationale: >
+        Regular tier at large size provides comfortable breathing room around
+        the label. In horizontal orientation, padding is on the X axis; in
+        vertical orientation, padding is on the Y axis.
+    gap:
+      icon-to-label: spacingComponentBase150
+      rationale: Atomic-tier medium gap between icon and label within the content slot.
+    stub:
+      length: spacingComponentBase100
+      rationale: >
+        Atomic-tier small gap anchors the content slot near the respective edge
+        in Start and End layouts. Same tier as the content slot's internal gap
+        (spacingComponentBase150), one step down the scale.
+
+  elevation: n/a
+
+  motion:
+    status: n/a
+    guidance: Non-interactive — no state transitions.
+
+sizes:
+  line-thickness: 1px
+  icon: 20px
+  notes: >
+    Line thickness is 1px, rendered as a filled rectangle (not a border).
+    Icon slot expects a 20px Fluent Iconography instance (Regular theme).
+
+properties:
+  component:
+    Content slot:
+      type: BOOLEAN
+      default: true
+      notes: Shows/hides the content container (icon + label). When false, renders a plain line.
+    Icon:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the icon within the content slot.
+    Text:
+      type: BOOLEAN
+      default: true
+      notes: Shows/hides the label text within the content slot.
+    Text string:
+      type: TEXT
+      default: 'Text'
+      notes: Bound to the label text node.
+    20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      notes: Icon slot; expects a 20px Fluent Iconography instance (Regular theme).

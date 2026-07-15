@@ -1,0 +1,185 @@
+component: MenuItem
+type: atomic
+
+variants:
+  Secondary content position:
+    values: [Right, Under]
+    default: Right
+    notes: Controls whether secondary content sits inline (Right) or stacked below (Under).
+  Style:
+    values: [List Item, Section Header]
+    default: List Item
+    notes: Section Header is non-interactive — no hover, no selected, no focus.
+  State:
+    values: [Rest, Hover, Pressed, Focused, Disabled, Loading]
+    notes: Hover and Pressed apply to List Item only. Focused shows the universal dual-outline focus ring. Loading applies to Section Header only.
+  Selected:
+    values: [false, true]
+    default: false
+    notes: Parallel axis — runs independently of State. Applies to List Item only.
+
+tokens:
+  background:
+    rest:
+      List Item:
+        value: colorBackgroundNeutralTransparent
+        hover: hover.colorBackgroundNeutralTransparent
+        pressed: pressed.colorBackgroundNeutralTransparent
+        rationale: No visual weight at rest; the Menu container surface provides the background context.
+      Section Header:
+        token: colorBackgroundNeutralTransparent
+    selected:
+      value: colorBackgroundNeutralSoft
+      hover: hover.colorBackgroundNeutralSoft
+      pressed: pressed.colorBackgroundNeutralSoft
+      rationale: Soft fill distinguishes the selected item from rest without competing with the hover tint. Proportional emphasis — softer than Button's heavy selected fill because menu items are transient, not persistent controls.
+    disabled:
+      unselected: colorBackgroundNeutralTransparent
+      selected: colorBackgroundNeutralSubtleDisabled
+
+  foreground:
+    rest:
+      primary:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+        applies-to: Label, icon, checkmark (icon only — not Checkbox component), chevron, avatar (List Item and Section Header).
+      secondary:
+        value: colorForegroundNeutralSecondary
+        hover: hover.colorForegroundNeutralSecondary
+        pressed: pressed.colorForegroundNeutralSecondary
+        applies-to: Secondary content text only.
+    selected:
+      primary:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+      secondary:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+        rationale: Selected promotes secondary content to primary foreground, matching the Semibold weight shift.
+    disabled: colorForegroundNeutralDisabled
+
+  stroke:
+    container: no-stroke
+    focus: See flex-system:styling — universal dual-outline focus ring.
+
+  radius: borderRadiusBase300
+
+  typography:
+    List Item:
+      rest:
+        primary: textstyle-functional-body-medium
+        secondary: textstyle-functional-body-small
+      selected:
+        primary: textstyle-functional-body-medium-strong
+        secondary: textstyle-functional-body-small-strong
+    Section Header:
+      title: textstyle-functional-body-small-strong
+      notes: Section Header label is always Semibold — no weight swap pattern. Consistent weight provides persistent visual hierarchy as a group label.
+    font-family: fontFamilyFunctional
+
+  spacing:
+    padding:
+      horizontal: spacingComponentBase300
+      vertical: spacingComponentBase250
+      rationale: Tight vertical tier — dense interactive surface consistent with navigation and menu patterns.
+    Secondary content position:
+      Right:
+        layout: row
+        notes: Primary label fills remaining width; secondary content is trailing, right-aligned, no-wrap.
+      Under:
+        layout: column
+        inner-gap: spacingComponentBase100
+        icon-align: top
+        notes: Primary label and secondary content stack vertically within a shared column container. The icon aligns to the top of the primary label rather than vertically centering against the full item height.
+    gap: spacingComponentBase150
+
+  elevation: n/a
+
+  loading:
+    skeleton-background: colorBackgroundNeutralSubtle
+    shimmer-color: colorBackgroundNeutralSoft
+    skeleton-radius: borderRadiusBase200
+    icon-skeleton: 20px square
+    label-skeleton: 320px x 24px (max-width capped)
+
+  motion:
+    status: pending
+    guidance: State color transitions should be fast (typically <=150ms) with standard ease-in-out. Reduced motion — remove transitions entirely.
+sizes:
+  height: auto
+  height-notes: Item height is derived from vertical padding + content line-height + inner gap (Under only). No explicit height constraint.
+  slots:
+    icon: 20px
+    checkmark:
+      size: 16px
+      type: icon-only
+      foreground: colorForegroundNeutralPrimary (inherits from parent menu item)
+      selected-visibility: visible when Selected=True, hidden when Selected=False
+      notes: >
+        The single-select checkmark is a plain SVG icon — it is NOT a flex-components:checkbox instance.
+        It has no background, no stroke, no border radius, and no interaction states of its own.
+        It inherits foreground color from the parent menu item row and toggles visibility based on
+        the Selected axis. Do not apply Checkbox component tokens to this slot.
+    chevron: 20px
+    avatar: 16px
+    multiselect-checkbox:
+      component: flex-components:checkbox
+      style: square
+      label: hidden
+      indicator: 16px
+      notes: >
+        Checkbox instance with label hidden. Status driven by MenuItem Selected axis — Selected=True → Checked, Selected=False → Unchecked.
+        Uses standard standalone Checkbox styling (brand-heavy fill, onLoud indicator when Checked).
+        The MenuItem row does NOT apply its own selected styling when Multiselect is active — no soft background,
+        no Semibold label weight. The checkbox independently owns the selection visual.
+        The icon swap (Regular→Filled on Selected=True) still applies universally regardless of selection pattern.
+
+dependencies:
+  - skill: flex-components:checkbox
+    usage: Multiselect trailing checkbox — label-hidden, square style, standard Checkbox styling. MenuItem row does not apply its own selected styling when Multiselect is active.
+
+split-item:
+  secondary-action-width: 44px
+  notes: MenuSplitItem secondary action zone is 44px wide with its own independent hover/focus. Shares all other tokens with List Item.
+
+properties:
+  component:
+    Item string:
+      type: TEXT
+      default: 'Menu item'
+      notes: Bound to the visible label node; ghost node has no prop binding.
+    Secondary string:
+      type: TEXT
+      default: 'Secondary'
+      notes: Secondary content text. Hidden when Secondary content prop is false.
+    Icon:
+      type: BOOLEAN
+      default: true
+      notes: Shows/hides the 20px leading icon slot.
+    Avatar:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the 16px avatar slot. Mutually exclusive with Icon in practice.
+    Checkmark:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the trailing (right-side) single-select checkmark indicator. Positioned after the chevron slot, aligned with the Multiselect checkbox zone.
+    Chevron:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the trailing submenu chevron.
+    Secondary content:
+      type: BOOLEAN
+      default: true
+      notes: Shows/hides the secondary content text.
+    Multiselect:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the trailing (right-side) Checkbox component instance (flex-components:checkbox, Standard style, label hidden). Positioned after the checkmark slot, at the far right. Checkmark and Multiselect are mutually exclusive — single-select uses the Checkmark slot; multi-select uses this Checkbox slot. Both occupy the same trailing zone.
+    20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Icon slot. Regular at rest; Filled when Selected=True.

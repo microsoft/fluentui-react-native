@@ -1,0 +1,126 @@
+component: Input
+type: atomic
+
+variants:
+  Style:
+    values: [Outline, Underline]
+    default: Outline
+  Size:
+    values: [Small, Medium, Large]
+    default: Medium
+  State:
+    values: [Rest, Hover, Pressed, Focus, Error, Disabled, Read only]
+    notes: >
+      Rest, Focus, Error, Disabled, and Read only are mutually exclusive base
+      states. Hover and Pressed are resolved interaction states that ride on top of the
+      active base — not states of their own. Pressed is transient; clicking an
+      input immediately triggers Focus.
+
+tokens:
+  background:
+    all-states:
+      all-styles: colorBackgroundNeutralTransparent
+
+  foreground:
+    rest:
+      placeholder: colorForegroundNeutralTertiary
+      value: colorForegroundNeutralPrimary
+    disabled:
+      all: colorForegroundNeutralDisabled
+    read-only:
+      value: colorForegroundNeutralPrimary
+      rationale: Primary foreground distinguishes a real value from Disabled's low-contrast state.
+
+  stroke:
+    width: strokeWidthThin
+    outline:
+      rest:
+        value: colorStrokeNeutralLoud
+        hover: hover.colorStrokeNeutralLoud
+        pressed: pressed.colorStrokeNeutralLoud
+      focus:
+        value: colorStrokeNeutralHeavy
+        hover: hover.colorStrokeNeutralHeavy
+        pressed: pressed.colorStrokeNeutralHeavy
+      error: colorStrokeDangerLoud
+      disabled: colorStrokeNeutralDisabled
+      read-only: colorStrokeNeutralDisabled
+    underline:
+      rest:
+        value: colorStrokeNeutralLoud
+        hover: hover.colorStrokeNeutralLoud
+        pressed: pressed.colorStrokeNeutralLoud
+      focus:
+        value: colorStrokeNeutralHeavy
+        hover: hover.colorStrokeNeutralHeavy
+        pressed: pressed.colorStrokeNeutralHeavy
+      error: colorStrokeDangerLoud
+      disabled: colorStrokeNeutralDisabled
+      read-only: colorStrokeNeutralDisabled
+    focus-ring: >
+      Input does not use the universal dual-outline focus ring. The boundary
+      stroke itself swaps to colorStrokeNeutralHeavy on focus —
+      Outline as a full border, Underline as the bottom edge.
+
+  radius:
+    all-styles:
+      Small: borderRadiusBase200
+      Medium: borderRadiusBase300
+      Large: borderRadiusBase400
+
+  typography:
+    rest:
+      Small: textstyle-functional-body-small
+      Medium: textstyle-functional-body-medium
+      Large: textstyle-functional-body-large
+    font-family: fontFamilyFunctional
+
+  spacing:
+    all-styles:
+      Small:
+        horizontal: spacingComponentBase150
+        vertical: spacingComponentBase100
+      Medium:
+        horizontal: spacingComponentBase250
+        vertical: spacingComponentBase150
+      Large:
+        horizontal: spacingComponentBase300
+        vertical: spacingComponentBase200
+    gap:
+      all-sizes: spacingComponentBase250
+    icon-end-padding:
+      Small: spacingComponentBase100
+      Medium: spacingComponentBase150
+      Large: spacingComponentBase150
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: Stroke transitions ≤150ms ease-in-out. Focus may be instant. Reduced motion removes transitions entirely.
+sizes:
+  Small:
+    resultant-height: 25px # round(12 × 1.4) + 4×2 = 17 + 8
+    icon: 16px
+  Medium:
+    resultant-height: 32px # round(14 × 1.4) + 6×2 = 20 + 12
+    icon: 20px
+  Large:
+    resultant-height: 38px # round(16 × 1.4) + 8×2 = 22 + 16. Vertical padding matches Button Large for cross-component height alignment.
+    icon: 24px
+  notes: Heights are resultant from padding + typography + stroke. Icon sizes (16/20/24px) are hardcoded — no token coverage.
+
+properties:
+  component:
+    Icon Start: { type: BOOLEAN, default: false }
+    Icon End 1: { type: BOOLEAN, default: false, notes: shows Icon End container }
+    Icon End 2: { type: BOOLEAN, default: false, notes: requires Icon End 1 }
+    Icon Start 24px Regular: { type: INSTANCE_SWAP, default: Image icon (24px Regular), binding: Large size, leading icon }
+    Icon Start 20px Regular: { type: INSTANCE_SWAP, default: Image icon (20px Regular), binding: Medium size, leading icon }
+    Icon Start 16px Regular: { type: INSTANCE_SWAP, default: Image icon (16px Regular), binding: Small size, leading icon }
+    Icon End 1 24px Regular: { type: INSTANCE_SWAP, default: Image icon (24px Regular), binding: Large size, first trailing icon }
+    Icon End 1 20px Regular: { type: INSTANCE_SWAP, default: Image icon (20px Regular), binding: Medium size, first trailing icon }
+    Icon End 1 16px Regular: { type: INSTANCE_SWAP, default: Image icon (16px Regular), binding: Small size, first trailing icon }
+    Icon End 2 24px Regular: { type: INSTANCE_SWAP, default: Image icon (24px Regular), binding: Large size, second trailing icon }
+    Icon End 2 20px Regular: { type: INSTANCE_SWAP, default: Image icon (20px Regular), binding: Medium size, second trailing icon }
+    Icon End 2 16px Regular: { type: INSTANCE_SWAP, default: Image icon (16px Regular), binding: Small size, second trailing icon }
