@@ -18,13 +18,7 @@
       "path": "../../utils/tokens/tsconfig.json"
     },
     {
-      "path": "../../deprecated/foundation-composable/tsconfig.json"
-    },
-    {
-      "path": "../../deprecated/foundation-compose/tsconfig.json"
-    },
-    {
-      "path": "../../deprecated/foundation-settings/tsconfig.json"
+      "path": "../../framework-base/tsconfig.json"
     }
   ]
 }

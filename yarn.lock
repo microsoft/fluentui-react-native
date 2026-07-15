@@ -3073,6 +3073,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -3083,9 +3084,6 @@ __metadata:
     "@react-native/metro-config": "npm:^0.81.0"
     "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    "@uifabricshared/foundation-composable": "workspace:*"
-    "@uifabricshared/foundation-compose": "workspace:*"
-    "@uifabricshared/foundation-settings": "workspace:*"
     react: "npm:19.1.4"
     react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"

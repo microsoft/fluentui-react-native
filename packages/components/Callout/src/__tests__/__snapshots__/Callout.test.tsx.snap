@@ -2,6 +2,7 @@
 
 exports[`Callout default props 1`] = `
 <RCTCallout
+  directionalHint="bottonLeftEdge"
   style={
     {
       "backgroundColor": "#faf9f8",
