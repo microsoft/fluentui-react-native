@@ -1,0 +1,48 @@
+component: Tooltip
+type: atomic
+
+variants:
+  notes: >
+    Tooltip has no Figma variant properties. The component is a single symbol.
+    Positioning (Above, Below, Left, Right) is a runtime/code concern —
+    documented in SKILL.md behavior section, not modeled as a Figma variant axis.
+
+tokens:
+  surface:
+    container:
+      token: colorSurfaceNeutralNearer
+      rationale: Highest elevation step in the ordinal surface scale, pairing with the low-elevation shadow to read as a distinct floating layer above the page. Matches Popover so floating overlays share a consistent surface story.
+
+  foreground:
+    label:
+      token: colorForegroundNeutralPrimary
+      rationale: Primary foreground on a near-white surface satisfies WCAG 1.4.3 contrast (4.5:1).
+
+  stroke:
+    container: no-stroke
+
+  radius:
+    container: borderRadiusBase200
+
+  typography:
+    label: textstyle-functional-body-small
+    font-family: fontFamilyFunctional
+
+  spacing:
+    horizontal: spacingComponentBase200
+    vertical: spacingComponentBase100
+
+  elevation:
+    level: 3
+    token: shadowLow
+
+  motion:
+    status: pending
+    guidance: Fade-in should be fast (≤150ms) with ease-out. Fade-out near-instant. Reduced motion — instant, no fade.
+
+properties:
+  component:
+    tooltipString:
+      type: TEXT
+      default: 'Capabilities'
+      notes: Bound to the label text node.

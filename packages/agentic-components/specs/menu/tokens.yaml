@@ -1,0 +1,61 @@
+component: Menu
+type: composed
+
+variants:
+  notes: Menu has no explicit variants.
+
+tokens:
+  container:
+    source: flex-components:popover
+    notes: >
+      The Menu symbol wraps a Popover instance and inherits its container tokens
+      (surface fill, stroke, radius, shadow, elevation). See popover/tokens.yaml
+      for the canonical values. Only the overrides below are owned by Menu.
+
+  overrides:
+    spacing:
+      padding:
+        horizontal: spacingComponentBase200
+        vertical: spacingComponentBase200
+        rationale: >
+          Intentional override of Popover's default container padding
+          (component-base-400). The tighter 8px inset hugs the MenuItem hover
+          backgrounds against the container edge, which reads better for dense
+          item lists than the generous padding Popover uses for free-form
+          content.
+
+  foreground:
+    notes: Menu container has no foreground tokens. All text and icon colors are owned by MenuItem children.
+
+  typography:
+    notes: Menu container has no direct typography. Section headers and items own their own text styles via flex-components:menu-item.
+
+  spacing:
+    item-gap: 0
+    item-gap-notes: Menu items are stacked with no gap between them. Visual separation between groups uses Section Headers or dividers, not gap.
+
+  focus:
+    notes: Menu container is not focusable. See flex-components:menu-item and flex-system:styling — universal dual-outline focus ring on items.
+
+  motion:
+    status: pending
+    guidance: Entrance and exit should use moderate duration (200-300ms) with ease-out for open and ease-in for close. Reduced motion — instant, no animation.
+
+dependencies:
+  - skill: flex-components:popover
+    usage: >
+      Structural parent — Menu's symbol wraps a Popover instance and fills its
+      Content Slot. All container tokens (surface, stroke, radius, shadow,
+      elevation) come from Popover; Menu overrides only container padding.
+      Menu positioning and submenu anchoring also follow Popover § Positioning.
+  - skill: flex-components:menu-item
+    usage: Children of the Content Slot. Owns all item-level tokens, interaction states, and typography.
+  - skill: flex-components:divider
+    usage: Optional visual separator between grouped items. Uses Divider's own tokens — Menu does not override any Divider styling.
+
+properties:
+  notes: >
+    Menu has no component properties. It is composed by inserting MenuItem
+    instances into the Popover's Content Slot. The Figma symbol is fixed at
+    240px wide for library legibility only — at runtime, Menu width is
+    determined by content and stretches to fit the widest item.

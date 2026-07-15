@@ -1,0 +1,244 @@
+component: Drawer
+type: molecular
+
+variants:
+  Type:
+    values: [Inline, Overlay]
+    default: Inline
+    notes: >
+      Inline pushes main content aside; Overlay floats above with a scrim.
+      Type determines layout participation, elevation, and scrim presence.
+  Modal type:
+    values: [Modal, Non-modal, Alert]
+    default: Modal
+    notes: >
+      Applies to Overlay type only. Modal dims the page and traps focus;
+      Non-modal does not dim and allows interaction with the rest of the page;
+      Alert is a modal that requires an explicit action to dismiss (no light-dismiss).
+  Position:
+    values: [Start, End, Bottom]
+    default: Start
+    notes: >
+      Determines which edge the drawer anchors to and slides in from.
+      Bottom drawers round only the top corners.
+  Size:
+    values: [Small, Medium, Large, Full, Custom]
+    default: Medium
+    notes: >
+      Controls the drawer width (Start/End) or height (Bottom).
+      Full fills the entire viewport dimension along the position axis.
+      Custom allows the developer to override the width (or height for Bottom)
+      via the inline style property for arbitrary sizing.
+  Open:
+    values: [false, true]
+    default: false
+    notes: >
+      Boolean visibility axis — parallel to any interactive state.
+      Not a State value.
+
+tokens:
+  surface:
+    container:
+      token: colorSurfaceNeutralNearer
+      rationale: >
+        Same surface token as Popover — highest ordinal surface step, reading as a
+        distinct layer whether inline or floating. Consistent with other secondary
+        content surfaces in the system.
+
+  background:
+    scrim:
+      token: colorOverlayNeutralTranslucent
+      rationale: >
+        Semi-transparent overlay that dims main content behind a Modal or Alert
+        Overlay drawer. Resolves to black at 50% in dark mode and white at 50%
+        in light mode, reinforcing the mode's surface direction.
+      applies-to: Overlay type, Modal and Alert modal types only. Non-modal has no scrim.
+
+  foreground:
+    title:
+      token: colorForegroundNeutralPrimary
+      rationale: Primary neutral foreground for the header title text.
+
+  stroke:
+    width: strokeWidthThin
+    width-rationale: >
+      Thin stroke on the edge opposite the position anchor — separates the drawer
+      from main content in Inline type. Overlay type relies on shadow instead.
+    inline-edge:
+      token: colorStrokeNeutralSubtle
+      rationale: Subtle neutral stroke visible on the Inline drawer's inward edge.
+    overlay: no-stroke
+    overlay-notes: >
+      Overlay Start/End type uses shadow for boundary; no visible stroke. Bottom
+      position is the exception — see bottom-top-edge.
+    bottom-top-edge:
+      token: colorStrokeNeutralSubtle
+      rationale: >
+        Bottom drawers add a subtle stroke on their top edge — the only edge adjacent
+        to underlying content. The elevation shadow casts downward (all shadow tokens
+        have positive-Y offsets), away from this edge, so it cannot reliably separate a
+        Bottom drawer from the content above it. The top stroke guarantees a visible
+        boundary regardless of shadow direction. Applies to both Inline and Overlay
+        Bottom drawers. See the directional-elevation GitHub issue for the longer-term
+        shadow fix.
+    focus: See flex-system:styling — universal dual-outline focus ring.
+
+  radius:
+    Start:
+      token: 0px
+      rationale: >
+        Flush against the viewport edge — no rounding on the anchored side.
+        Layout-level surfaces extending to the viewport edge use 0px directly.
+    End:
+      token: 0px
+      rationale: Same as Start — flush to the viewport edge.
+    Bottom:
+      top-corners: borderRadiusBase400
+      bottom-corners: 0px
+      rationale: >
+        Bottom drawers round only the top corners to signal the slide-up origin
+        while remaining flush at the bottom viewport edge.
+
+  typography:
+    title: textstyle-functional-body-medium-strong
+    notes: >
+      Header title uses body medium strong for clear hierarchy within the drawer
+      without competing with page-level headings.
+    font-family: fontFamilyFunctional
+
+  spacing:
+    header:
+      horizontal: spacingLayoutBase200
+      vertical: spacingLayoutBase100
+      rationale: >
+        Layout-tier spacing — the header is a section-level region within the drawer,
+        not an inline control. 16px horizontal, 8px vertical.
+      min-height: 48px
+      min-height-rationale: >
+        Fixed minimum header height — the Button Medium control used in the navigation
+        slot (32px) plus 8px vertical padding top and bottom (32 + 8×2 = 48). Holding a
+        minimum height keeps the header the same size whether or not the close (dismiss)
+        button is present, so a title-only header does not collapse shorter than one with
+        a navigation control.
+      align: center
+      align-rationale: >
+        Header content (title and navigation slot) is vertically centered within the
+        fixed-height header rather than top-aligned, so the title sits on the optical
+        center line of the navigation Button.
+    header-gap: spacingComponentBase200
+    body:
+      horizontal: spacingLayoutBase200
+      vertical: spacingLayoutBase100
+      rationale: >
+        Matches header padding for consistent alignment of content edges.
+    footer:
+      horizontal: spacingLayoutBase200
+      vertical: spacingLayoutBase100
+      min-height: 48px
+      min-height-rationale: >
+        Fixed minimum footer height — mirrors the header (Button Medium 32px + 8px
+        vertical padding top and bottom = 48). Keeps the footer a consistent height
+        regardless of which action buttons it contains.
+      align: center
+      align-rationale: >
+        Footer action buttons are vertically centered within the fixed-height footer.
+    footer-gap: spacingComponentBase200
+    footer-notes: >
+      Gap between action buttons in the footer.
+
+  elevation:
+    Inline:
+      level: n/a
+      notes: Inline drawers sit in the layout flow — no elevation.
+    Overlay:
+      level: 5
+      shadow: shadowHighest
+      notes: >
+        Highest elevation — the Overlay drawer is a page-level surface that floats
+        above all other content, similar to a modal. Uses the same shadow tier
+        as full-page modals.
+
+  motion:
+    status: pending
+    guidance: >
+      Entry: slide in from the Position edge (fast, ease-out, ~200ms).
+      Exit: slide out toward the Position edge (fast, ease-in, ~150ms).
+      Scrim: fade in/out coordinated with drawer slide.
+      Reduced motion — instant show/hide, no slide or fade animation.
+
+sizes:
+  Small:
+    width: 320px
+    notes: Start/End position width. Bottom position uses this as height.
+  Medium:
+    width: 592px
+    notes: Start/End position width. Bottom position uses this as height.
+  Large:
+    width: 940px
+    notes: Start/End position width. Bottom position uses this as height.
+  Full:
+    width: 100vw
+    notes: Fills the entire viewport dimension along the position axis.
+  Custom:
+    width: unset
+    notes: >
+      No predefined width. The developer sets the drawer dimension by overriding
+      the width style property (or height for Bottom position) directly. The
+      responsive reflow breakpoint still applies based on the resolved width at
+      runtime.
+  notes: >
+    Sizes define the drawer dimension along the position axis (width for
+    Start/End, height for Bottom). The perpendicular dimension always fills
+    the viewport — Bottom drawers span the full viewport width regardless
+    of size. Full size always spans the complete axis. Custom defers sizing
+    to the developer's inline style override.
+
+dependencies:
+  Button:
+    skill: flex-components:button
+    usage: >
+      Subtle Icon only Button used in Header navigation slot for close/back actions.
+      Primary/Secondary Buttons used in Footer for confirm/cancel actions.
+    tokens: Delegates all interaction tokens to Button — drawer does not override.
+  Divider:
+    skill: flex-components:divider
+    usage: >
+      Optional horizontal Divider between Header and Body, and between Body
+      and Footer, when visual separation is needed. Always used without
+      content (Content slot hidden) — no label or icon.
+    tokens: Delegates stroke token to Divider.
+    configuration:
+      Content slot: false
+      notes: >
+        Drawer dividers are purely visual separators — they never carry
+        labels or icons. Content slot is always hidden.
+
+properties:
+  component:
+    Title string:
+      type: TEXT
+      default: 'Drawer title'
+      notes: Bound to the Header title text node.
+    Footer:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the Footer region.
+    Close button:
+      type: BOOLEAN
+      default: true
+      notes: Shows/hides the close (dismiss) button in Header navigation.
+    Bottom:
+      type: VARIANT_BOOLEAN
+      default: false
+      notes: >
+        Boolean variant axis — when true, top-left and top-right corners are
+        rounded (BorderRadius/Base/400) to signal the slide-up origin. When false,
+        all corners are 0px (flush to viewport edge for Start/End position).
+
+figma:
+  variant-order: [Type, Size, Bottom]
+  total-variants: 16
+  grid: 4 rows (Type × Bottom) × 4 columns (Size)
+  notes: >
+    Modal type, Position (Start/End), and Open are behavioral/runtime axes —
+    not represented as Figma variants. See SKILL.md § Figma representation.

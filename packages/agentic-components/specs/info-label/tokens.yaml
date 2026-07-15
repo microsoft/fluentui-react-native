@@ -1,0 +1,129 @@
+component: InfoLabel
+type: composed
+
+variants:
+  Weight:
+    values: [Regular, Strong]
+    default: Regular
+  Size:
+    values: [Small, Medium, Large]
+    default: Medium
+  State:
+    values: [Rest, Disabled]
+  Required:
+    values: [false, true]
+    default: false
+
+tokens:
+  background:
+    root: n/a
+
+  foreground:
+    label: See flex-components:label → foreground.
+    trigger: See flex-components:button → foreground (Subtle).
+    popover-content: Consumer-authored; InfoLabel sets no foreground constraint.
+
+  stroke:
+    root: n/a
+    focus: See flex-system:styling — universal focus ring owned by the child Button trigger.
+
+  radius:
+    root: n/a
+    trigger: borderRadiusCircular # per flex-components:button → radius for Icon only
+    popover: borderRadiusBase400 # per flex-components:popover → radius
+
+  typography:
+    label: See flex-components:label → typography (Weight × Size matrix).
+    trigger: n/a — Icon only.
+    font-family: fontFamilyFunctional
+
+  spacing:
+    root-gap:
+      Small: spacingComponentBase50
+      Medium: spacingComponentBase50
+      Large: spacingComponentBase50
+      rationale: >
+        2px (base-50) — the minimum that reads as intentional separation. At this
+        distance the focus ring (outline-offset 2px + 2px outline) visually overlaps
+        trailing label characters during keyboard navigation; this is an accepted
+        tradeoff. The focus ring remains clearly associated with the trigger, satisfies
+        WCAG 2.4.11, and only appears during keyboard navigation. A wider gap (base-150,
+        6px) would clear the ring but makes the cluster read as two unrelated elements
+        at rest — the compact layout is the stronger design concern.
+    label-internal-gap: See flex-components:label → spacing.gap.
+    trigger-internal-padding: See flex-components:button → spacing (Icon only, per-size).
+    popover-internal-padding: See flex-components:popover → spacing.container-padding.
+    popover-to-trigger-gap: See flex-components:popover → spacing.arrow-to-target-gap.
+
+  elevation:
+    root: n/a
+    trigger: n/a
+    popover: See flex-components:popover → elevation (level 3).
+
+  motion:
+    status: pending
+    notes: See flex-components:button → motion and flex-components:popover → motion.
+
+sizes:
+  Small:
+    child-label-size: Small
+    child-button-size: Small
+    child-button-layout: Icon only
+    child-button-style: Subtle
+    trigger-icon: 16px
+  Medium:
+    child-label-size: Medium
+    child-button-size: Small
+    child-button-layout: Icon only
+    child-button-style: Subtle
+    trigger-icon: 16px
+    rationale: >
+      Uses Button Small (24×24) rather than Button Medium to keep row height
+      aligned with common Field heights. A Medium Button (32×32) would dominate
+      a Medium Label and create excessive vertical bleed in dense Fields.
+  Large:
+    child-label-size: Large
+    child-button-size: Medium
+    child-button-layout: Icon only
+    child-button-style: Subtle
+    trigger-icon: 20px
+  notes: Icon sizes have no token coverage and must be hardcoded.
+
+dependencies:
+  Label:
+    skill: flex-components:label
+    usage: Renders the visible label string and the Required asterisk slot. Forwards Weight, Size, State, and Required from InfoLabel to Label.
+    tokens: Inherits all Label tokens; InfoLabel adds no overrides.
+  Button:
+    skill: flex-components:button
+    usage: Renders the info trigger. Locked to Style=Subtle and Layout=Icon only. Per-size mapping in `sizes` block.
+    interaction: Trigger owns all keyboard activation (Enter / Space), focus, and the universal dual-outline focus ring. See flex-components:button → interaction.md.
+    tokens: Inherits all Button Subtle Icon only tokens; InfoLabel adds no overrides.
+  Popover:
+    skill: flex-components:popover
+    usage: Renders the supplemental info surface when Open=True. Anchored to the trigger Button; positioning, arrow direction, and viewport clamping follow Popover runtime rules.
+    interaction: Popover owns light-dismiss, Escape-to-close, focus trap, and focus return to the trigger. See flex-components:popover → interaction.md.
+    tokens: Inherits all Popover tokens; InfoLabel adds no overrides.
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: 'Label'
+      notes: Forwarded to the child Label's "Label string" property.
+    Required:
+      type: BOOLEAN
+      default: false
+      notes: Forwarded to the child Label's Required boolean — toggles the trailing asterisk indicator.
+    Open:
+      type: BOOLEAN
+      default: false
+      notes: Toggles Popover visibility. Drives aria-expanded on the trigger and the Popover mount state.
+    16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      binding: Trigger icon at all sizes — all three InfoLabel sizes use Button Small (16px icon).
+    Popover content:
+      type: INSTANCE_SWAP
+      default: Content placeholder (from flex-components:popover)
+      notes: Forwarded to the child Popover's "Swap content" instance-swap. Only rendered when Open=True.
