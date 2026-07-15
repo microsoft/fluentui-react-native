@@ -2596,6 +2596,7 @@ __metadata:
   resolution: "@fluentui-react-native/agentic-components@workspace:packages/agentic-components"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -3419,7 +3420,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/design@workspace:packages/agentic-design":
+"@fluentui-react-native/design@workspace:*, @fluentui-react-native/design@workspace:packages/agentic-design":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/design@workspace:packages/agentic-design"
   dependencies:
