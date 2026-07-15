@@ -49,13 +49,13 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
 
 ## Build System & Commands
 
-The repository builds as a **single unified TypeScript project-references graph** compiled by **tsgo** (`@typescript/native-preview`). The root `tsconfig.json` lists every package's `tsconfig.json` under `references`, and `yarn build` runs `tsgo -b` over that graph, building each package in dependency order. **Lage** orchestrates the non-build tasks (bundle, test, lint, clean), and **Yarn 4 (Berry)** in **pnpm mode** manages dependencies (configured in `.yarnrc.yml`).
+The repository builds as a **single unified TypeScript project-references graph** compiled by **tsc** (`typescript`). The root `tsconfig.json` lists every package's `tsconfig.json` under `references`, and `yarn build` runs `tsc -b` over that graph, building each package in dependency order. **Lage** orchestrates the non-build tasks (bundle, test, lint, clean), and **Yarn 4 (Berry)** in **pnpm mode** manages dependencies (configured in `.yarnrc.yml`).
 
 ### Primary Commands (from the repo root)
 
 ```bash
-yarn build         # Unified TypeScript build of all packages (tsgo -b); emits each package's lib/
-yarn build --clean # Remove build outputs (tsgo -b --clean); follow with `yarn build` for a full rebuild
+yarn build         # Unified TypeScript build of all packages (tsc -b); emits each package's lib/
+yarn build --clean # Remove build outputs (tsc -b --clean); follow with `yarn build` for a full rebuild
 yarn lage test     # Build + run tests across packages
 yarn lage lint     # Lint across packages
 yarn lint-fix      # Lint with autofix (cross-env FURN_FIX_MODE=true lage lint)
@@ -88,21 +88,21 @@ The task pipeline is defined in `lage.config.mjs`:
 
 ### Package-Level Commands
 
-Each package's own `build` script is `tsgo -b` (it builds that package together with its referenced dependencies). Other per-package tasks run through the `fluentui-scripts` CLI (in `/scripts/`):
+Each package's own `build` script is `tsc -b` (it builds that package together with its referenced dependencies). Other per-package tasks run through the `fluentui-scripts` CLI (in `/scripts/`):
 
-- `yarn build` - tsgo project-references build (emits to `lib/`)
+- `yarn build` - tsc project-references build (emits to `lib/`)
 - `yarn lint` - ESLint (`fluentui-scripts lint`)
 - `yarn test` - Jest tests where present (`fluentui-scripts jest`)
 - `yarn depcheck` - Unused-dependency check (`fluentui-scripts depcheck`)
 - `yarn format` / `yarn format:fix` - Check / fix formatting
 
-`fluentui-scripts` also retains a `build` command that can emit dual ESM (`lib/`) and CommonJS (`lib-commonjs/`) output driven by per-package build config, but packages on this branch build with `tsgo -b` directly.
+`fluentui-scripts` also retains a `build` command that can emit dual ESM (`lib/`) and CommonJS (`lib-commonjs/`) output driven by per-package build config, but packages on this branch build with `tsc -b` directly.
 
 ## TypeScript Configuration
 
-The repo uses **TypeScript 5.8+** via **tsgo** (`@typescript/native-preview`), which is automatically added as a dev dependency to every package that has a `tsconfig.json` through dynamic package extensions (`scripts/dynamic.extensions.mts`).
+The repo uses **TypeScript 7.0.2** via **tsc**, which is automatically added as a dev dependency to every package that has a `tsconfig.json` through dynamic package extensions (`scripts/dynamic.extensions.mts`).
 
-The whole repo compiles as one **composite project-references graph**: the root `tsconfig.json` lists every package under `references`, `tsgo -b` builds them in dependency order, and each package caches incremental state in `.cache/tsconfig.tsbuildinfo`.
+The whole repo compiles as one **composite project-references graph**: the root `tsconfig.json` lists every package under `references`, `tsc -b` builds them in dependency order, and each package caches incremental state in `.cache/tsconfig.tsbuildinfo`.
 
 ### Key TypeScript Settings
 
@@ -265,10 +265,10 @@ Components require `ThemeProvider` from `@fluentui-react-native/design/theming` 
 ## Important Notes
 
 - This is an **alpha-stage** library under active development
-- **Requires TypeScript 5.8+** with `@typescript/native-preview` (tsgo); the unified build runs `tsgo -b` over the root project-references graph
+- **Requires TypeScript 7.0.2** (`typescript`, compiled via `tsc`); the unified build runs `tsc -b` over the root project-references graph
 - **Uses Yarn 4 in pnpm mode** for dependency management (configured in `.yarnrc.yml`)
 - **Uses modern automatic JSX runtime** - all components should use `@jsxImportSource @fluentui-react-native/framework-base`
-- **Dynamic package extensions**: Common dev dependencies (TypeScript/tsgo, Jest, ESLint, Prettier) are automatically added via `scripts/dynamic.extensions.mts`
+- **Dynamic package extensions**: Common dev dependencies (TypeScript, Jest, ESLint, Prettier) are automatically added via `scripts/dynamic.extensions.mts`
 - New packages must be added to the root `tsconfig.json` `references` to join the unified build
 - Follow existing component patterns for consistency
 - Test components using FluentUI Tester app before submitting PRs
