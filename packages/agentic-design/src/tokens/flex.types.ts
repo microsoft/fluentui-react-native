@@ -445,4 +445,4 @@ export type UnsupportedFlexTokens = {
   letterSpacingContentSubtext: string;
   letterSpacingContentTable: string;
   letterSpacingContentCode: string;
-}
+};
