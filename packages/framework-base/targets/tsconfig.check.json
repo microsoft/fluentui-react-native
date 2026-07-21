@@ -8,5 +8,10 @@
     "composite": true,
     "tsBuildInfoFile": "../.cache/tsconfig.check.tsbuildinfo"
   },
-  "include": ["../src"]
+  "include": ["../src", "../jsx-runtime.js"],
+  "references": [
+    {
+      "path": "./tsconfig.build.json"
+    }
+  ]
 }
