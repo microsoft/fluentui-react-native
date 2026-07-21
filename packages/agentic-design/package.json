@@ -60,6 +60,7 @@
     "@fluentui-react-native/design-tokens-win32": "catalog:",
     "@fluentui-react-native/design-tokens-windows": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@office-iss/react-native-win32": "^0.81.0",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
     "@react-native-community/cli-platform-ios": "^20.0.0",
@@ -70,19 +71,24 @@
     "react": "19.1.4",
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",
+    "react-native-windows": "^0.81.0",
     "react-test-renderer": "19.1.4"
   },
   "peerDependencies": {
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
     "react": "18.2.0 || 19.0.0 || 19.1.4",
     "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
-    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
   },
   "peerDependenciesMeta": {
     "@types/react": {
       "optional": true
     },
     "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
       "optional": true
     }
   },
@@ -95,6 +101,8 @@
       "capabilities": [
         "core-dev-only",
         "core-macos-dev-only",
+        "core-windows-dev-only",
+        "core-win32-dev-only",
         "react-test-renderer"
       ]
     },
