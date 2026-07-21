@@ -71,6 +71,7 @@ yarn format:check  # Check formatting without writing
 ```bash
 yarn lint-repo        # Repo-wide structural lint (scripts/src/tasks/lintRepo.ts)
 yarn lint-lockfile    # Validate the Yarn lockfile
+yarn lage test-links # Validate links in repository Markdown files
 yarn check-publishing # Validate package publishing configuration
 yarn change           # Create a change file for the current branch
 yarn change:check     # Verify required change files exist
@@ -85,6 +86,7 @@ The task pipeline is defined in `lage.config.mjs`:
 - `buildci` is the aggregate CI alias (lint-repo, check-publishing, build, test, lint)
 - Lage caches task outputs; add `--no-cache` to bypass caching and `--verbose` for detailed output
 - After a major rework (e.g. moving packages, large refactors, or renaming exports), run `yarn lage test --no-cache` from the root once to force every test to re-run without relying on stale cached results. This also resets the Lage cache, so subsequent plain `yarn lage test` runs will work incrementally again.
+- Before checking in moved or renamed files, run `yarn lage test-links` and update any repository links that still reference the old paths.
 
 ### Package-Level Commands
 
