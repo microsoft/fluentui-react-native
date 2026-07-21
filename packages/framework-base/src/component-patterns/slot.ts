@@ -2,6 +2,7 @@ import type React from 'react';
 import type { PropsTransform, SlotComponent } from '../types/render.types';
 import { SLOT_COMPONENT_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const';
 import { mergeProps } from '../merge-props/mergeProps';
+import { assignProps } from '../merge-props/assignProps';
 
 /**
  * Convenience type, just referencing the statics of the component
@@ -43,4 +44,13 @@ export function prepareSlotProps<TProps>(slotInfo: SlotComponentStatics<TProps>,
   const transform = slotInfo[SLOT_PROP_TRANSFORM_KEY];
   const mergedProps = mergeProps<TProps>(baseProps, userProps) ?? ({} as TProps);
   return transform ? transform(mergedProps) : mergedProps;
+}
+
+/**
+ * Attach the given props to the slot component statics object, merging them with any existing props.
+ * @param slot The slot component statics object to attach props to.
+ * @param props The props to attach to the slot component.
+ */
+export function attachSlotProps<TProps>(slot: SlotComponentStatics<TProps>, props: TProps): void {
+  slot[SLOT_PROPS_KEY] = assignProps((slot[SLOT_PROPS_KEY] ?? {}) as TProps, props);
 }

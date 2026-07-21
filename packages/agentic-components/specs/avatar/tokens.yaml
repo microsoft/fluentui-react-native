@@ -1,0 +1,189 @@
+component: Avatar
+type: atomic
+
+variants:
+  Content:
+    values: [Image, Icon, Initials]
+    notes: Mutually exclusive — exactly one display mode is active per instance. Initials at 16 is constrained to a single character.
+  Size:
+    values: [16, 20, 24, 28, 32, 40, 56, 120]
+    default: 40
+    notes: Numeric sizes are pixel diameters of the circular container. 16 is the dense / inline scale; 40 is the default; 120 is the hero scale.
+  State:
+    values: [Rest]
+    notes: Avatar is non-interactive — no Hover, Pressed, or Disabled states.
+
+tokens:
+  background:
+    rest:
+      Image: n/a — background is covered by the image fill.
+      Icon:
+        token: colorBackgroundNeutralSoft
+        rationale: Light neutral background (high lightness step from neutral ramp) provides a visible container behind the icon. Paired with neutral-primary foreground for contrast.
+      Initials:
+        token: colorBackgroundNeutralSoft
+        rationale: Same container logic as Icon — provides visual distinction from the page background.
+  foreground:
+    rest:
+      Image: n/a
+      Icon:
+        token: colorForegroundNeutralPrimary
+        rationale: Near-black neutral; high contrast against soft neutral background. See accessibility.md for WCAG citations.
+      Initials:
+        token: colorForegroundNeutralPrimary
+        rationale: Consistent with Icon mode; primary foreground reads clearly on soft neutral background.
+  stroke:
+    container: no-stroke
+    rationale: >
+      Avatar has no container stroke in any content mode — the soft-neutral fill
+      (Icon/Initials) or photo (Image) provides edge definition against the surface.
+      Keeping the three modes consistent also prevents a container stroke from sitting
+      inside the activity ring's transparent gap when active.
+    focus: Avatar is non-interactive — no focus ring.
+
+  radius:
+    all: borderRadiusCircular
+    notes: Circular radius applies to all Content modes and all Sizes.
+
+  typography:
+    rest:
+      16: textstyle-functional-caption
+      20: textstyle-functional-caption
+      24: textstyle-functional-caption
+      28: textstyle-functional-body-small
+      32: textstyle-functional-body-medium
+      40: textstyle-functional-body-large
+      56: textstyle-functional-title-small
+      120: textstyle-functional-title-large
+    font-family: fontFamilyFunctional
+    initials-line-height-override:
+      all-sizes: 1
+      rationale: >
+        Most UI fonts (Segoe, Inter, the system stack) have a taller descender region than
+        ascender region. CSS centers an inline text node on its line-box, so this asymmetry
+        pushes the visible glyphs below the geometric center of the circle — especially
+        noticeable at small sizes (16, 20, 24) where the container has no slack. Setting
+        line-height to the unitless literal 1 (equal to font-size) collapses the line-box
+        onto the cap-height/baseline band, restoring optical center at every size. The value
+        is a direct override, not a token, because it must remain 1 regardless of theme.
+        The Figma source mirrors this with a Cap height → Baseline vertical trim on the
+        Initials text node at every size (issue #610).
+    vertical-trim: cap-height-to-baseline
+    notes: >
+      Typography applies to the Initials content mode only. Size 16 uses caption to fit a
+      single character inside the 16px container. No font-weight swap — Avatar has no Selected
+      axis. The initials-line-height-override above applies to all sizes — see its rationale
+      for the full explanation.
+
+  spacing:
+    all:
+      16: spacingComponentBase50
+      20: spacingComponentBase50
+      24: spacingComponentBase100
+      28: spacingComponentBase150
+      32: spacingComponentBase100
+      40: spacingComponentBase200
+      56: spacingComponentBase300
+      120: spacingLayoutBase400
+    notes: >
+      Padding is uniform on all four sides (symmetric circle). Content is centered within the container.
+      min-height matches each numeric size (e.g., 16px at size 16, 28px at size 28).
+
+  activity-ring:
+    stroke-color: colorStrokeBrandLoud
+    offset:
+      16: strokeWidthThin
+      20: strokeWidthThin
+      24: strokeWidthThin
+      28: strokeWidthThin
+      32: strokeWidthThin
+      40: strokeWidthThin
+      56: strokeWidthThin
+      120: strokeWidthThick
+    stroke-width:
+      16: strokeWidthThin
+      20: strokeWidthThick
+      24: strokeWidthThick
+      28: strokeWidthThick
+      32: strokeWidthThick
+      40: strokeWidthThick
+      56: strokeWidthThicker
+      120: strokeWidthThicker
+    notes: >
+      Activity ring is rendered as an outline with an offset (CSS outline + outline-offset). The offset
+      creates a true transparent gap between the container and the brand stroke, revealing whatever surface
+      the avatar sits on. Both offset and stroke-width scale with avatar size so the ring stays proportional
+      at every diameter. The ring does not affect layout dimensions.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: Avatar has no state transitions. If avatar appears within a list transition, motion is owned by the list container. Reduced motion — no accommodation needed on the avatar itself.
+
+sizes:
+  16:
+    min-size: 16px
+    icon: 12px
+  20:
+    min-size: 20px
+    icon: 16px
+  24:
+    min-size: 24px
+    icon: 16px
+  28:
+    min-size: 28px
+    icon: 16px
+  32:
+    min-size: 32px
+    icon: 20px
+  40:
+    min-size: 40px
+    icon: 24px
+  56:
+    min-size: 56px
+    icon: 32px
+  120:
+    min-size: 120px
+    icon: 48px
+  notes: >
+    Avatar is always a perfect circle. The numeric Size variant value is the container diameter in pixels.
+    Heights are resultant from padding + content, not fixed.
+    min-size ensures the container never collapses below its declared diameter.
+    Icon sizes have no token coverage and must be hardcoded.
+    Initials text size is driven by the typography token for each size.
+
+properties:
+  component:
+    Activity Ring:
+      type: BOOLEAN
+      default: false
+      notes: Toggles the outer brand stroke indicating active or collaborating status.
+    Initials:
+      type: TEXT
+      default: 'AB'
+      notes: Character string shown in the Initials content mode. 1 character at size 16; 1–2 characters at sizes 20, 24, 28, 32, 40, 56, and 120.
+    48px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (48px Regular)
+      binding: Size 120, Icon content mode
+    32px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (32px Regular)
+      binding: Size 56, Icon content mode
+    24px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (24px Regular)
+      binding: Size 40, Icon content mode
+    20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Size 32, Icon content mode
+    16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      binding: Size 20, Size 24, and Size 28, Icon content mode
+    12px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (12px Regular)
+      binding: Size 16, Icon content mode

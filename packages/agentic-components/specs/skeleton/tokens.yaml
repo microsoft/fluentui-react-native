@@ -1,0 +1,76 @@
+component: Skeleton
+type: atomic
+
+variants: n/a # No variant axes and no states. Single animating shape resized per instance.
+
+tokens:
+  background:
+    bar:
+      token: colorBackgroundNeutralSubtle
+      rationale: >
+        Subtle neutral is the lowest-emphasis background weight in the palette
+        — visible against the page surface but recessive enough to read as
+        "not yet content." The skeleton must be perceptible without competing
+        with the surrounding real content.
+    shimmer:
+      token: colorBackgroundNeutralSoft
+      rationale: >
+        The Wave animation overlays a lighter highlight band that sweeps
+        across the bar. Soft sits one step up the neutral background ramp
+        from the bar's Subtle base, so it reads as a perceptible lift in
+        light mode and as a corresponding lift in dark mode (soft is lighter
+        than subtle in both directions of the ramp). The CSS implementation
+        is a linear-gradient that fades from transparent to this token at
+        the center and back to transparent — no dedicated stencil-highlight
+        token is needed.
+
+  foreground: n/a # No text, no icon — Skeleton has no foreground content.
+
+  stroke:
+    container: no-stroke
+    focus: n/a # Non-interactive — no focus ring.
+
+  radius:
+    bar:
+      token: borderRadiusBase100
+      rationale: >
+        Atomic-tier small radius (4px) reads as a rounded bar without
+        committing to a specific content shape. Consumers should override on
+        the instance — borderRadiusCircular when standing in for a
+        circular avatar; borderRadiusBase200/300 when standing in
+        for a card or larger media tile.
+
+  typography: n/a
+
+  spacing: n/a # Skeleton has no padding and no internal layout — it is a single rectangle.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      Default Wave animation: a lighter highlight band travels across the bar
+      on an infinite loop, approximately 1500–2000ms per cycle with linear
+      easing so the motion reads as a steady, calm pulse rather than a beat.
+      The loop must be continuous and synchronized across simultaneous
+      skeletons within a single group — staggered animations read as noise.
+      Reduced motion — no animation; the bar renders as a static fill at the
+      base background color. No fallback pulse or fade is substituted.
+
+sizes:
+  bar:
+    width: responsive
+    height: responsive
+  notes: >
+    Skeleton has no fixed dimensions. The Bar takes the width and height set
+    by the consumer on each instance — typically the bounding box of the
+    content it replaces. Heights commonly match a line of text (the resultant
+    height of the corresponding textstyle) or the dimensions of the replaced
+    media. No resultant-height formula applies because there is no padding,
+    text, or stroke contributing to the bar's outer height.
+
+properties:
+  component: n/a
+  # Skeleton has no text slot, no icon slot, and no boolean toggles. The
+  # component is a single rectangle; all variation (size, shape, radius) is
+  # set by the consumer on each instance rather than via component properties.

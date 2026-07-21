@@ -1,0 +1,97 @@
+component: Link
+type: atomic
+
+variants:
+  Type set:
+    values: [Functional, Content]
+  Inline:
+    values: [true, false]
+    default: false
+    notes: Inline=true forces the underline at Rest; Inline=false defers it to Hover, Pressed, and Focus.
+  State:
+    values: [Rest, Hover, Pressed, Visited, Disabled]
+
+tokens:
+  foreground:
+    rest:
+      Functional:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+      Content:
+        value: colorForegroundNeutralPrimary
+        hover: hover.colorForegroundNeutralPrimary
+        pressed: pressed.colorForegroundNeutralPrimary
+    visited:
+      Functional: colorForegroundNeutralPrimary
+      Content: colorForegroundNeutralPrimary
+      rationale: Same as Rest — enumerated so :visited can be targeted semantically; no color shift.
+    disabled: colorForegroundNeutralDisabled
+
+  decoration:
+    notes: Bundles line, style, color, thickness, and offset. No single --gnrc-* var covers it. Style and thickness differentiate the two Type sets.
+    line: underline
+    color: currentColor
+    thickness:
+      Functional:
+        token: strokeWidthThin
+      Content:
+        token: strokeWidthThick
+    offset:
+      value: 15%
+      rationale: Percentage scales with font-size so inline links honor their parent's text style. Clears descenders without floating away from the baseline.
+    style:
+      Functional: solid
+      Content: dotted
+    visibility:
+      Inline=true:
+        rest:
+          value: visible
+          hover: visible
+          pressed: visible
+        visited: visible
+        disabled: visible
+      Inline=false:
+        rest:
+          value: hidden
+          hover: visible
+          pressed: visible
+        visited: hidden
+        disabled: hidden
+
+  radius:
+    focus-ring: borderRadiusBase100
+
+  typography:
+    default:
+      Functional: textstyle-functional-body-medium
+      Content: textstyle-content-paragraph-medium
+    inline-note: Inline links inherit the surrounding text style.
+    font-family:
+      Functional: fontFamilyFunctional
+      Content: fontFamilyContent
+
+  spacing:
+    gap: spacingComponentBase50
+
+  motion:
+    status: pending
+    guidance: Foreground transitions ≤150ms ease-in-out on Hover/Pressed. Underline visibility is instant — animating it creates a flicker on repaint. Reduced motion — transitions off.
+sizes:
+  notes: Icon matches the cap height of the surrounding text (16px against body-medium / paragraph-medium).
+  icon: 16px
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: 'Link'
+      notes: Bound to the Label text node. Required.
+    16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      binding: Trailing icon slot
+    Icon:
+      type: BOOLEAN
+      default: false
+      notes: Toggles visibility of the trailing icon slot.

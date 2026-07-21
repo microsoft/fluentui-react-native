@@ -1,0 +1,136 @@
+component: Label
+type: atomic
+
+variants:
+  Weight:
+    values: [Regular, Strong]
+    default: Regular
+    notes: >
+      Regular points to textstyle-functional-body-{size}; Strong points to
+      textstyle-functional-body-{size}-strong. Regular is the default — it
+      matches body weight and covers the inline-control labeling case (next to
+      a Checkbox, Switch, or Radio) where Label reads as accompanying text.
+      Strong is reserved for Field labels — the headlining element above an
+      Input or Select — where the label needs semibold emphasis to differentiate
+      from the value inside the control. Weight changes typography only — color,
+      gap, association behavior, and the Required slot are identical.
+  Size:
+    values: [Small, Medium, Large]
+    default: Medium
+  State:
+    values: [Rest, Disabled]
+    notes: >
+      Label is non-interactive — no Hover, Pressed, or Focus states. Disabled
+      mirrors the disabled affordance of the associated form control.
+  Required:
+    values: [false, true]
+    default: false
+    notes: Boolean slot — toggles the trailing asterisk indicator. Composes independently of State.
+
+tokens:
+  background:
+    notes: Label has no background — it is text-only with no fill. The associated surface (Field wrapper, page) provides any background context.
+
+  foreground:
+    text:
+      rest:
+        token: colorForegroundNeutralPrimary
+        rationale: Full-emphasis foreground — Label is a primary information element identifying the associated control.
+      disabled:
+        token: colorForegroundNeutralDisabled
+        rationale: Mirrors the disabled affordance of the associated control.
+    required-indicator:
+      rest:
+        token: colorForegroundDangerPrimary
+        rationale: >
+          Danger foreground signals that the associated control must be completed.
+          Aligns with the Error state stroke on Input (colorStrokeDangerLoud)
+          so required + invalid fields read as a coherent danger family.
+      disabled:
+        token: colorForegroundNeutralDisabled
+        rationale: >
+          The asterisk drops danger color when the field is disabled — required is
+          irrelevant if the user cannot interact with the field.
+
+  stroke:
+    notes: Label has no stroke — it is text-only with no boundary.
+    focus: n/a — Label is not a tab stop and never carries a focus ring.
+
+  radius: n/a — Label has no boundary.
+
+  typography:
+    rest:
+      Regular:
+        Small: textstyle-functional-body-small
+        Medium: textstyle-functional-body-medium
+        Large: textstyle-functional-body-large
+      Strong:
+        Small: textstyle-functional-body-small-strong
+        Medium: textstyle-functional-body-medium-strong
+        Large: textstyle-functional-body-large-strong
+    required-indicator:
+      Regular:
+        Small: textstyle-functional-body-small
+        Medium: textstyle-functional-body-medium
+        Large: textstyle-functional-body-large
+      Strong:
+        Small: textstyle-functional-body-small-strong
+        Medium: textstyle-functional-body-medium-strong
+        Large: textstyle-functional-body-large-strong
+      rationale: >
+        Asterisk inherits the label's text style — including weight — so it
+        baselines and weighs the same as the label string. It reads as part of
+        the label, not a separate token.
+    font-family: fontFamilyFunctional
+    weight-rationale: >
+      Regular (body weight) is the default. It covers the inline-control
+      labeling case where Label sits next to a self-contained control
+      (Checkbox, Switch, Radio) and reads as accompanying text at the same
+      visual rank as a sentence of prose. Strong (semibold) is the Field-label
+      weight — it differentiates the label from the value inside its associated
+      control (which uses regular weight) and matches the form-field labeling
+      convention in Fluent UI.
+
+  spacing:
+    padding: 0
+    padding-rationale: >
+      Label has no internal padding — gap to surrounding elements (Input, helper text,
+      validation message) is owned by the Field wrapper, not by Label itself.
+    gap:
+      Small: spacingComponentBase50
+      Medium: spacingComponentBase50
+      Large: spacingComponentBase50
+      rationale: >
+        Tightest atomic gap between Text and Required indicator at every size —
+        they read as a single unit. A uniform gap (rather than scaling with
+        Size) keeps the asterisk visually adjacent to the last word of the
+        label regardless of size, which preserves the "single cluster"
+        perception that distinguishes the indicator from a trailing slot.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      Foreground color transitions on Rest → Disabled should match the associated control's
+      transition (≤150ms ease-in-out). Reduced motion — instant, no animation.
+
+sizes:
+  Small:
+    expected-height: 16px
+  Medium:
+    expected-height: 20px
+  Large:
+    expected-height: 24px
+  notes: Heights are resultant from the line-height of the body text style.
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: 'Label'
+      notes: Bound to the Text node.
+    Required:
+      type: BOOLEAN
+      default: false
+      notes: Toggles the trailing asterisk indicator visibility.

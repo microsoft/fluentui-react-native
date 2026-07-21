@@ -1,0 +1,158 @@
+component: Switch
+type: atomic
+
+variants:
+  Layout:
+    values: [Switch, Horizontal, Vertical]
+    default: Horizontal
+    notes: Horizontal is the most common usage — most switches need a visible inline label.
+  Checked:
+    values: [false, true]
+    default: false
+  State:
+    values: [Rest, Hover, Pressed, Focus, Disabled]
+    notes: Hover and Pressed are resolved as nested token state values.
+
+tokens:
+  background:
+    notes: >
+      Unchecked uses transparent — invisible at rest, gains opacity on hover/pressed
+      (alpha shift). Checked uses heavy — solid fill, shifts lightness inversely.
+    rest:
+      checked:
+        value: colorBackgroundNeutralHeavy
+        hover: hover.colorBackgroundNeutralHeavy
+        pressed: pressed.colorBackgroundNeutralHeavy
+        rationale: Maximum-weight fill signals "on" — high contrast against surface.
+      unchecked:
+        value: colorBackgroundNeutralTransparent
+        hover: hover.colorBackgroundNeutralTransparent
+        pressed: pressed.colorBackgroundNeutralTransparent
+        rationale: Invisible at rest; the track stroke alone defines the control boundary when off.
+    disabled:
+      checked: colorBackgroundNeutralHeavyDisabled
+      unchecked: colorBackgroundNeutralTransparent
+
+  foreground:
+    notes: Foreground tokens apply to the thumb indicator.
+    rest:
+      checked:
+        value: colorForegroundNeutralOnloud
+        hover: hover.colorForegroundNeutralOnloud
+        pressed: pressed.colorForegroundNeutralOnloud
+        rationale: Inverted foreground for readability on the heavy track fill.
+      unchecked:
+        value: colorForegroundNeutralSecondary
+        hover: hover.colorForegroundNeutralSecondary
+        pressed: pressed.colorForegroundNeutralSecondary
+        rationale: Medium-weight foreground — visible on the soft track without competing with checked state contrast.
+    disabled: colorForegroundNeutralDisabled
+
+  stroke:
+    width: strokeWidthThin
+    width-rationale: Thin stroke defines the track boundary at rest; maintains consistent outer dimensions.
+    rest:
+      unchecked:
+        value: colorForegroundNeutralSecondary
+        hover: hover.colorForegroundNeutralSecondary
+        pressed: pressed.colorForegroundNeutralSecondary
+        rationale: Matches the thumb foreground color — track border and thumb read as a unified control at rest.
+      checked:
+        value: colorStrokeNeutralHeavy
+        hover: hover.colorStrokeNeutralHeavy
+        pressed: pressed.colorStrokeNeutralHeavy
+        rationale: Heavy stroke matches the heavy background fill, creating a seamless filled appearance.
+    focus: See flex-system:styling — universal dual-outline focus ring.
+    disabled:
+      unchecked: colorStrokeNeutralDisabled
+      checked: colorStrokeNeutralDisabled
+
+  radius:
+    track: borderRadiusCircular
+    thumb: borderRadiusCircular
+    notes: Both track and thumb are pill/circular — 9999px ensures full rounding at any dimension.
+
+  typography:
+    rest: textstyle-functional-body-medium
+    font-family: fontFamilyFunctional
+    notes: Single text style — Switch has no size variants. Labels use body-medium (14px / 400 weight).
+
+  spacing:
+    hit-area:
+      token: spacingComponentBase200
+      rationale: >
+        Transparent padding around the track to enlarge the pointer hit target.
+        The hit-area padding is invisible — the track's border, background fill,
+        and border-radius define the inner pill shape and must not stretch to
+        fill the padded box. In CSS this means the visible pill (stroke + fill)
+        is an inner element or pseudo-element inside the hit-area surface. The
+        focus ring wraps the outer hit-area box, not the inner pill.
+    label:
+      inner: spacingComponentBase100
+      outer: spacingComponentBase200
+      rationale: >
+        Inner (closest to switch) is 4px for tight coupling; outer is 8px for
+        breathing room at the component boundary. Confirmed from Figma source.
+    gap:
+      notes: >
+        Gap between track and label is handled by label padding, not a gap token.
+        Internal track gap (spacingComponentBase250) is declared in Figma but
+        resolves to 0px effective spacing since thumb is positioned within the track.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: >
+      Thumb position: slide transition ≤150ms ease-in-out.
+      Track fill: cross-fade between unchecked and checked colors on toggle.
+      Reduced motion — instant state change, no animation.
+
+sizes:
+  Default:
+    track-width: 40px
+    track-height: 20px
+    thumb-diameter: 14px
+    thumb-inset: 2px
+    resultant-height: 36px # track 20 + outer hit-area padding 8×2. Switch is a fixed-dimensional control, not a typography-driven resultant — the formula is geometry-from-tokens, not text-from-tokens.
+    notes: >
+      Single size. Track is 20px tall (including stroke). Hit area adds 8px padding
+      on each side, giving a 36px interactive surface. No size variants exist.
+    inset-rule: >
+      Thumb-inset is the breathing room between the thumb and the inner stroke
+      on every side at rest. It is derived from the vertical fit and applied
+      symmetrically on both axes — the same value sets the top/bottom centring
+      gap and the left/right anchor gap at each end position. This guarantees
+      the thumb looks identically positioned in unchecked rest (anchored at
+      start) and checked rest (anchored at end).
+
+      Formula (platform-agnostic; all measurements taken inside the stroke):
+
+        thumb-inset    = (track-height − 2 × stroke-width − thumb-diameter) ÷ 2
+        slide-distance = track-width − 2 × stroke-width − 2 × thumb-inset − thumb-diameter
+
+      Default size:
+        thumb-inset    = (20 − 2 − 14) ÷ 2 = 2px
+        slide-distance = 40 − 2 − 4 − 14   = 20px
+
+      Constraints when choosing dimensions:
+        - (track-height − 2 × stroke-width − thumb-diameter) must be even, so
+          thumb-inset is an integer. Non-integer insets render blurry on
+          bitmap platforms (iOS, Android, Figma).
+        - thumb-diameter < track-width − 2 × stroke-width − 2 × thumb-inset,
+          so the slide-distance is positive (the thumb actually moves).
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: 'Label'
+      notes: Bound to visible label nodes in VLabel and HLabel layouts.
+    Label Before:
+      type: BOOLEAN
+      default: true
+      notes: Toggles visibility of the label-before slot in Horizontal layout.
+    Label After:
+      type: BOOLEAN
+      default: true
+      notes: Toggles visibility of the label-after slot in Horizontal layout.

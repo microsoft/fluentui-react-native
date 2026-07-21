@@ -23,6 +23,7 @@ export { memoize } from './memo-cache/memoize';
  */
 export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
+export { assignProps, assignStyles } from './merge-props/assignProps';
 
 /**
  * ----- COMPONENT PATTERNS -----
@@ -31,6 +32,7 @@ export { mergeProps } from './merge-props/mergeProps';
 export { renderSlot, createSlotComponent, renderJsx } from './component-patterns/render';
 export { directComponent, legacyDirectComponent } from './component-patterns/direct';
 export { phasedComponent, stagedComponent } from './component-patterns/phased';
+export { attachSlotProps } from './component-patterns/slot';
 export { useSlot, useOptionalSlot } from './component-patterns/useSlot';
 export {
   isDirectComponentType,

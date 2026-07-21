@@ -1,0 +1,136 @@
+component: MessageBar
+type: composed
+
+variants:
+  Status:
+    values: [Information, Warning, Error, Success]
+    default: Information
+    notes: The only variant axis; drives background shader, border, and icon.
+
+dismiss-step-down:
+  applies: n/a
+  rationale: >
+    MessageBar is a spacious full-width banner; the dismiss control is a
+    standalone icon-only Subtle Button at the trailing edge, separated from the
+    status icon by the full message text. It does not share a confined row with
+    a content icon, so an equal-size dismiss glyph does not over-weight the
+    surface. The 16px dismiss glyph is the Button's own Small icon size, not a
+    step-down from the 20px status icon.
+
+tokens:
+  surface:
+    container:
+      token: colorSurfaceNeutralNearer
+      rationale: >
+        Opaque neutral surface layer that sits underneath the status background
+        shader on the same container. This preserves MessageBar's intended
+        subtle status fill when the bar is placed on variable page or section
+        surfaces.
+
+  background:
+    Information:
+      token: colorBackgroundNeutralSubtle
+      layer: Above surface.container.
+      rationale: Neutral low-emphasis shader; does not signal urgency.
+    Warning:
+      token: colorBackgroundWarningSubtle
+      layer: Above surface.container.
+      rationale: Warm amber-tinted shader; signals caution without alarm.
+    Error:
+      token: colorBackgroundDangerSubtle
+      layer: Above surface.container.
+      rationale: Light red-tinted shader; signals a blocking or failed state.
+    Success:
+      token: colorBackgroundSuccessSubtle
+      layer: Above surface.container.
+      rationale: Light green-tinted shader; confirms a positive outcome.
+    action-buttons: colorBackgroundNeutralTransparent
+    dismiss-button: colorBackgroundNeutralTransparent
+
+  foreground:
+    status-icon:
+      Information:
+        token: colorForegroundNeutralPrimary
+        rationale: Neutral icon color for informational context; blends with message text.
+      Warning:
+        token: colorForegroundWarningPrimary
+        rationale: Semantic warning foreground; reinforces the caution signal alongside the subtle background.
+      Error:
+        token: colorForegroundDangerPrimary
+        rationale: Semantic danger foreground; reinforces the error/blocking signal.
+      Success:
+        token: colorForegroundSuccessPrimary
+        rationale: Semantic success foreground; reinforces the positive outcome signal.
+    message-text:
+      token: colorForegroundNeutralPrimary
+      rationale: Standard body foreground; does not vary by status. Background and icon carry the semantic signal; text stays neutral for readability.
+    action-button-labels: colorForegroundNeutralPrimary
+    dismiss-button-icon: colorForegroundNeutralPrimary
+
+  stroke:
+    width: strokeWidthThin
+    Information: colorStrokeNeutralSubtle
+    Warning: colorStrokeWarningSubtle
+    Error: colorStrokeDangerSubtle
+    Success: colorStrokeSuccessSubtle
+
+  radius:
+    container: borderRadiusBase400
+    action-buttons: See flex-components:button — Small Subtle Button radius.
+    dismiss-button: See flex-components:button — Icon only circular radius.
+
+  typography:
+    message-text: textstyle-functional-body-medium
+    action-button-labels: See flex-components:button — Small Subtle Button typography.
+    font-family: fontFamilyFunctional
+
+  spacing:
+    container-padding: spacingComponentBase300
+    container-gap:
+      token: spacingComponentBase200
+      rationale: Component category — icon, text, actions, and dismiss are tightly coupled slots within a single component. Same category is used for the actions-container-gap (between embedded Button sub-components).
+    icon-and-text-top-padding:
+      token: spacingComponentBase50
+      applies-to: [status-icon-container, message-text]
+      rationale: Applied as top padding to both the status icon container and the message text so they vertically align with the embedded action and dismiss button content.
+    actions-container-gap: spacingComponentBase200
+    action-buttons: See flex-components:button — Small Subtle Button spacing.
+    dismiss-button: See flex-components:button — Small Icon only spacing.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: Entry and dismissal should be fast opacity fades (≤150ms, ease-in-out). Reduced motion — instant, no animation.
+
+sizes:
+  status-icon: 20px
+  dismiss-icon: 16px
+
+properties:
+  component:
+    Message string:
+      type: TEXT
+      default: 'Message providing information with actionable insights.'
+    Action 1 label:
+      type: TEXT
+      default: 'Action'
+    Action 2 label:
+      type: TEXT
+      default: 'Action'
+    notes: >
+      No BOOLEAN show/hide props exist at the component set level.
+      Dismiss button and action buttons are nested Button sub-components —
+      visibility control is an implementation concern.
+
+dependencies:
+  Button:
+    skill: flex-components:button
+    usage: Small Subtle Button for action buttons; Small Icon only Subtle Button for dismiss.
+
+status-icons:
+  Information: Info Regular (circle with "i")
+  Warning: Warning Regular (exclamation triangle)
+  Error: Diamond Dismiss Regular
+  Success: Checkmark Circle Regular
+  notes: All status icons use the Regular (monoline) style variant, not Filled. Monoline keeps the banner low-emphasis at page/section level; the subtle background and semantic foreground color carry the status signal.
