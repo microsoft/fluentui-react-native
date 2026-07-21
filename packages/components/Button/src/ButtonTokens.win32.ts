@@ -12,7 +12,7 @@ import {
   strokeWidth10,
   strokeWidth20,
 } from '@fluentui-react-native/design/tokens/global';
-import { isHighContrast } from '@fluentui-react-native/theming-utils';
+import { isHighContrast } from '@fluentui-react-native/design/theming';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';

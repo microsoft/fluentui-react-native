@@ -2,7 +2,7 @@ import { Appearance } from 'react-native';
 
 import { ThemeReference } from '@fluentui-react-native/design/theming';
 import type { Theme, ThemeOptions } from '@fluentui-react-native/design/theming';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { getCurrentAppearance } from '@fluentui-react-native/design/theming';
 import assertNever from 'assert-never';
 
 import { defaultFluentDarkTheme, defaultFluentHighConstrastTheme, defaultFluentTheme } from './defaultTheme';

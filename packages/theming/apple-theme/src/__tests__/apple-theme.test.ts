@@ -1,6 +1,6 @@
+import { isHighContrast, setIsHighContrast } from '@fluentui-react-native/design/theming';
 import type { AppearanceOptions } from '@fluentui-react-native/design/theming';
 
-import { getIsHighContrast, setIsHighContrast } from '../appleHighContrast.macos';
 import { createAppleTheme } from '../createAppleTheme';
 import { createMacOSColorAliasTokens, createMacOSShadowAliasTokens } from '../createMacOSAliasTokens';
 
@@ -39,9 +39,9 @@ it('createAppleTheme test', () => {
 
 it('IsHighContrast test', () => {
   setIsHighContrast(false);
-  expect(getIsHighContrast()).toBe(false);
+  expect(isHighContrast()).toBe(false);
   setIsHighContrast(true);
-  expect(getIsHighContrast()).toBe(true);
+  expect(isHighContrast()).toBe(true);
 });
 
 it.concurrent.each(macOSAliasTokensTable)(

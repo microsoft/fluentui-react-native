@@ -1,5 +1,5 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { getCurrentAppearance } from '@fluentui-react-native/design/theming';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import { shimmerDefaultAngle, shimmerDefaultDelay, shimmerDefaultDuration } from './consts';
