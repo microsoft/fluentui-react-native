@@ -1,0 +1,124 @@
+component: Spinner
+type: atomic
+
+variants:
+  Size:
+    values: [X-Tiny, Tiny, X-Small, Small, Medium, Large, X-Large, Huge]
+    default: Medium
+    notes: >
+      Sizes map 1:1 to the host control or context — e.g. X-Small alongside a
+      Medium Input, Small alongside a Large Button. Stroke width steps with
+      size group; see the stroke.width table below.
+
+tokens:
+  background: n/a # Spinner is two strokes on a transparent canvas; no fill.
+
+  foreground: n/a # Spinner has no text and no icon — strokes carry all visual weight.
+
+  stroke:
+    width:
+      X-Tiny: strokeWidthThin
+      Tiny: strokeWidthThin
+      X-Small: strokeWidthThin
+      Small: strokeWidthThick
+      Medium: strokeWidthThick
+      Large: strokeWidthThicker
+      X-Large: strokeWidthThicker
+      Huge: strokeWidthThicker
+    width-rationale: >
+      With eight supported sizes, stroke width steps across three groups so
+      the arc reads as consistent visual weight relative to its diameter —
+      avoiding clumsy donuts at small sizes and thin wire at large ones.
+    track:
+      token: colorStrokeNeutralSubtle
+      rationale: >
+        Subtle neutral stroke is the lowest-emphasis weight in the neutral
+        stroke ramp — present enough to define the spinner's diameter without
+        competing with the rotating arc.
+    indicator:
+      token: colorStrokeNeutralLoud
+      rationale: >
+        Loud neutral stroke provides clear contrast against the subtle track,
+        so the rotating arc reads as the active signal even at the smallest
+        diameter (16px).
+    focus: n/a # Non-interactive — no focus ring.
+
+  radius:
+    track: borderRadiusCircular
+    indicator: borderRadiusCircular
+    rationale: >
+      The circular radius is structural, not stylistic — the spinner's shape
+      is what reads as "loading." Any non-circular radius would break the
+      pattern recognition that lets users identify the indicator at a glance.
+
+  typography:
+    label:
+      X-Tiny: textstyle-functional-caption
+      Tiny: textstyle-functional-caption
+      X-Small: textstyle-functional-body-small
+      Small: textstyle-functional-body-small
+      Medium: textstyle-functional-body-medium
+      Large: textstyle-functional-body-medium
+      X-Large: textstyle-functional-body-large
+      Huge: textstyle-functional-body-large
+    font-family: fontFamilyFunctional
+    notes: >
+      Spinner itself has no built-in text slot — the label ("Loading…",
+      "Saving changes…") is composed adjacent to the spinner by the consumer.
+      Typography scales with the spinner's host context so the pair reads as
+      a single signal at every size.
+
+  spacing:
+    gap:
+      X-Tiny: spacingComponentBase100
+      Tiny: spacingComponentBase100
+      X-Small: spacingComponentBase100
+      Small: spacingComponentBase150
+      Medium: spacingComponentBase150
+      Large: spacingComponentBase200
+      X-Large: spacingComponentBase200
+      Huge: spacingComponentBase200
+    notes: >
+      Gap sits between the spinner and an adjacent label when paired inline
+      (spinner leads, label follows — see usage.md Layout). Steps with the
+      size group so the label tracks the spinner's optical weight. Spinner
+      has no internal padding; consumers control all spacing around it.
+
+  elevation: n/a # Spinner sits on its surrounding surface; it does not float.
+
+  motion:
+    status: pending
+    guidance: >
+      See interaction.md Animation. Reduced motion — static arc; no
+      fallback animation.
+
+sizes:
+  X-Tiny:
+    diameter: 16px
+  Tiny:
+    diameter: 20px
+  X-Small:
+    diameter: 24px
+  Small:
+    diameter: 28px
+  Medium:
+    diameter: 32px
+  Large:
+    diameter: 36px
+  X-Large:
+    diameter: 40px
+  Huge:
+    diameter: 44px
+  notes: >
+    Spinner sizes are fixed circular diameters (fixed-geometric, not
+    typography-driven). Width and height always equal the diameter.
+    Diameters have no token coverage in the current spacing scale — they
+    are intrinsic to the component and must be hardcoded at the
+    implementation layer.
+
+properties:
+  component: n/a
+  # Spinner has no TEXT slot, no INSTANCE_SWAP, and no BOOLEAN toggle. The
+  # only variation is the Size variant axis declared in the `variants` block
+  # above. Adjacent status text (e.g. "Loading messages…") is composed by
+  # the consumer outside the spinner, not as a built-in label slot.

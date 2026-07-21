@@ -1,5 +1,4 @@
 import { immutableMerge } from '../immutable-merge/Merge';
-import { getMemoCache } from '../memo-cache/getMemoCache';
 import type { StyleMerger, StyleProp } from '../types/props.types';
 
 /**
@@ -28,8 +27,6 @@ export const mergeAndFlattenStyles: StyleMerger = (...styles: StyleProp<unknown>
   );
 };
 
-const _styleCache = getMemoCache();
-
 /**
  * Function overloads to allow merging styles of different types.
  * This is useful when merging token-based styles with React Native StyleProp types.
@@ -40,6 +37,6 @@ export const mergeStyles: StyleMerger = (...styles: StyleProp<unknown>[]) => {
 
   // now memo the results if there is more than one element or if the one element is an array
   return inputs.length > 1 || (inputs.length === 1 && Array.isArray(inputs[0]))
-    ? _styleCache(() => mergeAndFlattenStyles(undefined, ...inputs), inputs)[0]
+    ? mergeAndFlattenStyles(undefined, ...inputs)
     : inputs[0] || {};
 };

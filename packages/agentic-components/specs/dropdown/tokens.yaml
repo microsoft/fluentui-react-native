@@ -1,0 +1,183 @@
+component: Dropdown
+type: composed
+
+variants:
+  Style:
+    values: [Outline, Underline]
+    default: Outline
+    notes: Forwarded from Input. Trigger renders as Input chrome (stroke per style) while behaving as a Button.
+    delegated-to: input
+    delegated-via: { axis: Style }
+  Size:
+    values: [Small, Medium, Large]
+    default: Medium
+    notes: Forwarded from Input. Drives trigger height, padding, typography, radius, and icon sizes.
+    delegated-to: input
+    delegated-via: { axis: Size }
+  Selection mode:
+    values: [Single, Multiple]
+    default: Single
+    notes: Drives trigger value display (single label vs multi-value summary), close-on-activate behavior, and per-row anatomy (Single → Checkmark slot; Multiple → embedded Checkbox in the trailing slot). Selection state on each row is carried by aria-pressed on the row's <button>.
+    delegated-to: listbox-item
+    delegated-via:
+      { runtime: 'per-row anatomy — Single shows the Checkmark slot, Multiple shows the embedded Checkbox slot on each ListboxItem row' }
+  State:
+    values: [Rest, Hover, Pressed, Focused, Disabled, Error]
+    notes: >
+      Mirrors Input minus Read only. Stroke is the only category that shifts on hover/pressed (matches Input).
+      Pressed applies to Closed only; Disabled cannot be Open. Read only is not modeled — render value as static text if non-interactive.
+    delegated-to: input
+    delegated-via: { axis: State }
+  Open:
+    values: [false, true]
+    default: false
+    notes: false = trigger only, ChevronDown trailing. true = Popover mounted with ListboxItem rows inside, DOM focus moved into the Popover, chevron rotated/swapped to ChevronUp.
+    delegated-to: self
+    delegated-via: { property: Expand, type: BOOLEAN }
+
+tokens:
+  trigger:
+    delegate: flex-components:input
+    notes: |
+      All trigger chrome tokens (background, stroke, radius, padding, typography, foreground, font-family) are
+      delegated to flex-components:input. Dropdown does not redefine them.
+
+      Specifically forwarded:
+        - background.all-states.all-styles = colorBackgroundNeutralTransparent
+        - stroke (Outline) rest/focus/hover/pressed = flex-components:input tokens.stroke.outline
+        - stroke (Underline) rest/focus/hover/pressed = flex-components:input tokens.stroke.underline
+        - stroke error = colorStrokeDangerLoud
+        - stroke disabled = colorStrokeNeutralDisabled
+        - foreground.value = colorForegroundNeutralPrimary
+        - foreground.placeholder = colorForegroundNeutralTertiary
+        - radius per Size: Small base-200, Medium base-300, Large base-400
+        - typography per Size: textstyle-functional-body-{small|medium|large}
+        - padding per Size: see flex-components:input
+
+      The trigger is rendered as a <button type="button">, not an <input>. It borrows Input's chrome only; it does not carry role="combobox".
+
+  trigger-chevron:
+    foreground:
+      rest: colorForegroundNeutralSecondary
+      focused: colorForegroundNeutralPrimary
+      error: colorForegroundNeutralPrimary
+      disabled: colorForegroundNeutralDisabled
+      rationale: Secondary at rest keeps the chevron from competing with the value text; promotes to primary on focus so the actionable affordance is visible.
+    rotation:
+      closed: 0deg
+      open: 180deg
+      rationale: Single chevron asset rotated 180° on Open, OR icon swap to ChevronUp — implementer's choice. Visual outcome is identical.
+    size:
+      Small: 16px
+      Medium: 20px
+      Large: 24px
+      rationale: Matches Input's Icon End size per Size axis.
+
+  popover:
+    delegate: flex-components:popover
+    notes: |
+      Popover surface, radius, shadow, container padding, and arrow are owned by flex-components:popover.
+      Dropdown overrides:
+        - arrow: hidden by default (chevron on the trigger already signals the relationship; an arrow is visual noise)
+        - container-padding: reduced or zeroed — the contained ListboxItem rows provide their own padding, and the Popover's surface only needs to frame them.
+      The Popover here is a presentational floating container — it carries no ARIA role. DOM focus moves into the Popover (onto the focused item button), but the Popover itself is not a focus trap.
+
+  items:
+    delegate: flex-components:listbox-item
+    notes: |
+      Item rows are flex-components:listbox-item instances rendered directly inside the Popover (no intermediate Listbox container).
+      Each row is a <button type="button"> with aria-pressed carrying selection state. DOM focus moves to the row buttons when the Popover opens; the focused row uses listbox-item's universal dual-outline focus ring on :focus-visible.
+
+      Selection mode mapping:
+        - Single  → Checkmark slot visible on the selected row. Exactly one row carries aria-pressed="true".
+        - Multiple → embedded Checkbox slot visible on every row (label-hidden, square style). The Checkbox is presentational — the row's aria-pressed is authoritative. Any number of rows may carry aria-pressed="true".
+
+      The Multiple-mode Checkbox is a transitive dependency on flex-components:checkbox — documented under listbox-item's own dependencies, not redeclared here.
+
+  motion:
+    status: pending
+    guidance: |
+      Open/close: Popover entrance fade+scale (~150ms ease-out); exit near-instant. Chevron rotation transition matches Popover entry timing.
+      Trigger state: stroke transitions ≤150ms ease-in-out (inherits Input motion).
+      Reduced motion — all transitions instant. Chevron snaps to the open/closed angle. Popover appears/disappears without animation.
+
+sizes:
+  Small:
+    expected-height: 24px
+    trigger-icon: 16px
+    inherits: flex-components:input Small
+  Medium:
+    expected-height: 32px
+    trigger-icon: 20px
+    inherits: flex-components:input Medium
+  Large:
+    expected-height: 40px
+    trigger-icon: 24px
+    inherits: flex-components:input Large
+  popover-width:
+    notes: >
+      Popover stretches to at least the trigger width by default. May exceed trigger width when option labels are longer.
+      Hard upper bound is parent-driven (viewport, page container) — see flex-components:popover § Positioning.
+  popover-max-height:
+    notes: >
+      Popover max-height is parent/viewport-driven; the row list scrolls internally when content overflows.
+      Typical product-level cap is 8-10 rows visible at once.
+
+dependencies:
+  - skill: flex-components:input
+    usage: Trigger chrome (stroke, radius, padding, typography, sizes). Trigger is semantically a Button, not an Input.
+    interaction: Trigger's stroke-only interaction model inherits from Input.
+    realization: embedded
+    provides-slots: [Trigger, Leading slot, Value display, Trailing chevron]
+  - skill: flex-components:popover
+    usage: Floating surface for the item rows. Provides background, radius, shadow, light-dismiss, positioning. See tokens.popover for overrides.
+    realization: embedded
+    provides-slots: [Popover surface]
+  - skill: flex-components:listbox-item
+    usage: Selectable rows rendered directly inside the Popover. Each row is a <button> with aria-pressed for selection state.
+    tokens: Embedded — rows own their own padding, typography, hover/pressed/focus visuals; the Popover provides the surface around them.
+    realization: runtime
+    provides-slots: [Item rows]
+
+properties:
+  component:
+    Value:
+      type: TEXT
+      default: ''
+      notes: The selected value's label (Single mode), the multi-value summary string (Multiple mode), or empty to render the Placeholder.
+    Placeholder:
+      type: TEXT
+      default: 'Select an option'
+      notes: Shown when Value is empty. Renders in foreground.placeholder color.
+    Leading slot:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the leading icon slot before the value text. Mirrors Input's Icon Start.
+    Leading slot 24px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (24px Regular)
+      binding: Large size, leading icon.
+    Leading slot 20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Medium size, leading icon.
+    Leading slot 16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      binding: Small size, leading icon.
+    Trailing chevron 24px Regular:
+      type: INSTANCE_SWAP
+      default: ChevronDown (24px Regular)
+      binding: Large size, trailing chevron. Swaps to ChevronUp on Open=true, or rotates 180°.
+    Trailing chevron 20px Regular:
+      type: INSTANCE_SWAP
+      default: ChevronDown (20px Regular)
+      binding: Medium size, trailing chevron.
+    Trailing chevron 16px Regular:
+      type: INSTANCE_SWAP
+      default: ChevronDown (16px Regular)
+      binding: Small size, trailing chevron.
+  notes: >
+    Dropdown does not expose item-row content as Figma properties — child ListboxItem instances are composed
+    inside the Popover at the call site. Runtime configuration (aria-haspopup, aria-expanded, aria-pressed per row,
+    focus-into-Popover on open, focus-return-to-trigger on close) is set at implementation time, not as Figma properties.
