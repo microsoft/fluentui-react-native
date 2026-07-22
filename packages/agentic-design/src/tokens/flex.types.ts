@@ -7,6 +7,11 @@ type BorderRadius = ViewStyle['borderRadius'];
 type StrokeWidth = ViewStyle['borderWidth'];
 
 /**
+ * The themable semantic token set: all `SemanticColors` plus the shadow tokens.
+ */
+export type FlexTokens = SemanticColors & SemanticShadows;
+
+/**
  * Flat map of every semantic color token to its rest value. Keys are the
  * camelCased `--gnrc-*` names, each prefixed with `color` so the color tokens
  * can be merged into a single flat token object alongside future non-color
@@ -281,14 +286,9 @@ export type SemanticColors = SemanticColorTokenValues & {
 };
 
 /**
- * The complete semantic token set: all `SemanticColors` plus the non-color
- * semantic tokens (shadows, font weights/families, letter spacing, font sizes,
- * line heights, border radii, spacing, and stroke widths). Keys are the
- * camelCased `--gnrc-*` names.
- *
- * Source of truth: `dev/web/flex-themes/css/semantic.css`.
+ * The semantic shadow token set
  */
-export type SemanticTokens = SemanticColors & {
+export type SemanticShadows = {
   // shadow
   shadowLowest: ShadowToken;
   shadowLower: ShadowToken;
@@ -296,123 +296,134 @@ export type SemanticTokens = SemanticColors & {
   shadowHigh: ShadowToken;
   shadowHigher: ShadowToken;
   shadowHighest: ShadowToken;
-
-  // font weight
-  fontWeightFunctionalRegular: FontWeight;
-  fontWeightFunctionalMedium: FontWeight;
-  fontWeightFunctionalSemibold: FontWeight;
-  fontWeightFunctionalBold: FontWeight;
-  fontWeightContentRegular: FontWeight;
-  fontWeightContentMedium: FontWeight;
-  fontWeightContentSemibold: FontWeight;
-  fontWeightContentBold: FontWeight;
-  fontWeightContentEditorialRegular: FontWeight;
-  fontWeightContentEditorialMedium: FontWeight;
-  fontWeightContentEditorialSemibold: FontWeight;
-  fontWeightContentEditorialBold: FontWeight;
-
-  // font family
-  fontFamilyFunctional: string;
-  fontFamilyContent: string;
-  fontFamilyContentEditorial: string;
-  fontFamilyContentCode: string;
-
-  // font size
-  fontSizeFunctionalDisplay: FontSize;
-  fontSizeFunctionalPagetitle: FontSize;
-  fontSizeFunctionalTitleLarge: FontSize;
-  fontSizeFunctionalTitleMedium: FontSize;
-  fontSizeFunctionalTitleSmall: FontSize;
-  fontSizeFunctionalSubtitle: FontSize;
-  fontSizeFunctionalBodyLarge: FontSize;
-  fontSizeFunctionalBodyMedium: FontSize;
-  fontSizeFunctionalBodySmall: FontSize;
-  fontSizeFunctionalCaption: FontSize;
-  fontSizeContentStatement: FontSize;
-  fontSizeContentExpressiveLarge: FontSize;
-  fontSizeContentExpressiveMedium: FontSize;
-  fontSizeContentExpressiveSmall: FontSize;
-  fontSizeContentH1: FontSize;
-  fontSizeContentH2: FontSize;
-  fontSizeContentH3: FontSize;
-  fontSizeContentH4: FontSize;
-  fontSizeContentH5: FontSize;
-  fontSizeContentSubheadline: FontSize;
-  fontSizeContentParagraphLarge: FontSize;
-  fontSizeContentParagraphMedium: FontSize;
-  fontSizeContentParagraphSmall: FontSize;
-  fontSizeContentSubtext: FontSize;
-  fontSizeContentTable: FontSize;
-  fontSizeContentCode: FontSize;
-
-  // line height
-  lineHeightFunctionalDisplay: number;
-  lineHeightFunctionalPagetitle: number;
-  lineHeightFunctionalTitleLarge: number;
-  lineHeightFunctionalTitleMedium: number;
-  lineHeightFunctionalTitleSmall: number;
-  lineHeightFunctionalSubtitle: number;
-  lineHeightFunctionalBodyLarge: number;
-  lineHeightFunctionalBodyMedium: number;
-  lineHeightFunctionalBodySmall: number;
-  lineHeightFunctionalCaption: number;
-  lineHeightContentStatement: number;
-  lineHeightContentExpressiveLarge: number;
-  lineHeightContentExpressiveMedium: number;
-  lineHeightContentExpressiveSmall: number;
-  lineHeightContentH1: number;
-  lineHeightContentH2: number;
-  lineHeightContentH3: number;
-  lineHeightContentH4: number;
-  lineHeightContentH5: number;
-  lineHeightContentSubheadline: number;
-  lineHeightContentParagraphLarge: number;
-  lineHeightContentParagraphMedium: number;
-  lineHeightContentParagraphSmall: number;
-  lineHeightContentSubtext: number;
-  lineHeightContentTable: number;
-  lineHeightContentCode: number;
-
-  // border radius
-  borderRadiusBase100: BorderRadius;
-  borderRadiusBase200: BorderRadius;
-  borderRadiusBase300: BorderRadius;
-  borderRadiusBase400: BorderRadius;
-  borderRadiusBase600: BorderRadius;
-  borderRadiusBase700: BorderRadius;
-  borderRadiusCircular: BorderRadius;
-
-  // spacing / component
-  spacingComponentBase50: DimensionValue;
-  spacingComponentBase100: DimensionValue;
-  spacingComponentBase150: DimensionValue;
-  spacingComponentBase200: DimensionValue;
-  spacingComponentBase250: DimensionValue;
-  spacingComponentBase300: DimensionValue;
-  spacingComponentBase400: DimensionValue;
-  spacingComponentBase500: DimensionValue;
-  spacingComponentBase600: DimensionValue;
-  spacingComponentBase700: DimensionValue;
-
-  // spacing / layout
-  spacingLayoutBase100: DimensionValue;
-  spacingLayoutBase200: DimensionValue;
-  spacingLayoutBase300: DimensionValue;
-  spacingLayoutBase400: DimensionValue;
-  spacingLayoutBase450: DimensionValue;
-  spacingLayoutBase500: DimensionValue;
-  spacingLayoutBase600: DimensionValue;
-  spacingLayoutBase700: DimensionValue;
-  spacingLayoutBase800: DimensionValue;
-  spacingLayoutBase1000: DimensionValue;
-  spacingLayoutBase1200: DimensionValue;
-
-  // stroke width
-  strokeWidthThin: StrokeWidth;
-  strokeWidthThick: StrokeWidth;
-  strokeWidthThicker: StrokeWidth;
-  strokeWidthThickest: StrokeWidth;
 };
+
+/**
+ * The complete semantic token set: all `SemanticColors` plus the non-color
+ * semantic tokens (shadows, font weights/families, letter spacing, font sizes,
+ * line heights, border radii, spacing, and stroke widths). Keys are the
+ * camelCased `--gnrc-*` names.
+ *
+ * Source of truth: `dev/web/flex-themes/css/semantic.css`.
+ */
+export type SemanticTokens = SemanticColors &
+  SemanticShadows & {
+    // font weight
+    fontWeightFunctionalRegular: FontWeight;
+    fontWeightFunctionalMedium: FontWeight;
+    fontWeightFunctionalSemibold: FontWeight;
+    fontWeightFunctionalBold: FontWeight;
+    fontWeightContentRegular: FontWeight;
+    fontWeightContentMedium: FontWeight;
+    fontWeightContentSemibold: FontWeight;
+    fontWeightContentBold: FontWeight;
+    fontWeightContentEditorialRegular: FontWeight;
+    fontWeightContentEditorialMedium: FontWeight;
+    fontWeightContentEditorialSemibold: FontWeight;
+    fontWeightContentEditorialBold: FontWeight;
+
+    // font family
+    fontFamilyFunctional: string;
+    fontFamilyContent: string;
+    fontFamilyContentEditorial: string;
+    fontFamilyContentCode: string;
+
+    // font size
+    fontSizeFunctionalDisplay: FontSize;
+    fontSizeFunctionalPagetitle: FontSize;
+    fontSizeFunctionalTitleLarge: FontSize;
+    fontSizeFunctionalTitleMedium: FontSize;
+    fontSizeFunctionalTitleSmall: FontSize;
+    fontSizeFunctionalSubtitle: FontSize;
+    fontSizeFunctionalBodyLarge: FontSize;
+    fontSizeFunctionalBodyMedium: FontSize;
+    fontSizeFunctionalBodySmall: FontSize;
+    fontSizeFunctionalCaption: FontSize;
+    fontSizeContentStatement: FontSize;
+    fontSizeContentExpressiveLarge: FontSize;
+    fontSizeContentExpressiveMedium: FontSize;
+    fontSizeContentExpressiveSmall: FontSize;
+    fontSizeContentH1: FontSize;
+    fontSizeContentH2: FontSize;
+    fontSizeContentH3: FontSize;
+    fontSizeContentH4: FontSize;
+    fontSizeContentH5: FontSize;
+    fontSizeContentSubheadline: FontSize;
+    fontSizeContentParagraphLarge: FontSize;
+    fontSizeContentParagraphMedium: FontSize;
+    fontSizeContentParagraphSmall: FontSize;
+    fontSizeContentSubtext: FontSize;
+    fontSizeContentTable: FontSize;
+    fontSizeContentCode: FontSize;
+
+    // line height
+    lineHeightFunctionalDisplay: number;
+    lineHeightFunctionalPagetitle: number;
+    lineHeightFunctionalTitleLarge: number;
+    lineHeightFunctionalTitleMedium: number;
+    lineHeightFunctionalTitleSmall: number;
+    lineHeightFunctionalSubtitle: number;
+    lineHeightFunctionalBodyLarge: number;
+    lineHeightFunctionalBodyMedium: number;
+    lineHeightFunctionalBodySmall: number;
+    lineHeightFunctionalCaption: number;
+    lineHeightContentStatement: number;
+    lineHeightContentExpressiveLarge: number;
+    lineHeightContentExpressiveMedium: number;
+    lineHeightContentExpressiveSmall: number;
+    lineHeightContentH1: number;
+    lineHeightContentH2: number;
+    lineHeightContentH3: number;
+    lineHeightContentH4: number;
+    lineHeightContentH5: number;
+    lineHeightContentSubheadline: number;
+    lineHeightContentParagraphLarge: number;
+    lineHeightContentParagraphMedium: number;
+    lineHeightContentParagraphSmall: number;
+    lineHeightContentSubtext: number;
+    lineHeightContentTable: number;
+    lineHeightContentCode: number;
+
+    // border radius
+    borderRadiusBase100: BorderRadius;
+    borderRadiusBase200: BorderRadius;
+    borderRadiusBase300: BorderRadius;
+    borderRadiusBase400: BorderRadius;
+    borderRadiusBase600: BorderRadius;
+    borderRadiusBase700: BorderRadius;
+    borderRadiusCircular: BorderRadius;
+
+    // spacing / component
+    spacingComponentBase50: DimensionValue;
+    spacingComponentBase100: DimensionValue;
+    spacingComponentBase150: DimensionValue;
+    spacingComponentBase200: DimensionValue;
+    spacingComponentBase250: DimensionValue;
+    spacingComponentBase300: DimensionValue;
+    spacingComponentBase400: DimensionValue;
+    spacingComponentBase500: DimensionValue;
+    spacingComponentBase600: DimensionValue;
+    spacingComponentBase700: DimensionValue;
+
+    // spacing / layout
+    spacingLayoutBase100: DimensionValue;
+    spacingLayoutBase200: DimensionValue;
+    spacingLayoutBase300: DimensionValue;
+    spacingLayoutBase400: DimensionValue;
+    spacingLayoutBase450: DimensionValue;
+    spacingLayoutBase500: DimensionValue;
+    spacingLayoutBase600: DimensionValue;
+    spacingLayoutBase700: DimensionValue;
+    spacingLayoutBase800: DimensionValue;
+    spacingLayoutBase1000: DimensionValue;
+    spacingLayoutBase1200: DimensionValue;
+
+    // stroke width
+    strokeWidthThin: StrokeWidth;
+    strokeWidthThick: StrokeWidth;
+    strokeWidthThicker: StrokeWidth;
+    strokeWidthThickest: StrokeWidth;
+  };
 
 /**
  * These are flex tokens from web that are not supported on native.
