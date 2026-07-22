@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
+## 0.7.6
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+
 ## 0.7.5
 
 ### Patch Changes

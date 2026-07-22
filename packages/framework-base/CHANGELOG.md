@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.5.0
+
+### Minor Changes
+
+- e2a4065: rework framework rendering to prepare for new component structure
+
+### Patch Changes
+
+- 1eef74e: Add a default implementation of flex tokens
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+- 9d2bb3e: Stop caching styles automatically in mergeProps
+
 ## 0.4.1
 
 ### Patch Changes

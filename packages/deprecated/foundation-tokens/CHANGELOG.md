@@ -1,5 +1,21 @@
 # Change Log - @uifabricshared/foundation-tokens
 
+## 0.16.6
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+- Updated dependencies [1eef74e]
+- Updated dependencies [801d8b1]
+- Updated dependencies [e2a4065]
+- Updated dependencies [5b5afea]
+- Updated dependencies [d2690c9]
+- Updated dependencies [9d2bb3e]
+  - @fluentui-react-native/framework-base@0.5.0
+  - @uifabricshared/foundation-settings@0.16.6
+  - @fluentui-react-native/tokens@0.24.6
+
 ## 0.16.5
 
 ### Patch Changes

@@ -1,5 +1,35 @@
 # Change Log - @fluentui/react-native
 
+## 0.43.6
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+- Updated dependencies [01ed385]
+- Updated dependencies [801d8b1]
+- Updated dependencies [e2a4065]
+- Updated dependencies [80bf14d]
+- Updated dependencies [5b5afea]
+- Updated dependencies [c1de024]
+- Updated dependencies [d2690c9]
+  - @fluentui-react-native/persona-coin@0.17.0
+  - @fluentui-react-native/radio-group@0.22.6
+  - @fluentui-react-native/separator@0.19.6
+  - @fluentui-react-native/checkbox@0.24.6
+  - @fluentui-react-native/button@0.40.6
+  - @fluentui-react-native/contextual-menu@0.25.6
+  - @fluentui-react-native/focus-trap-zone@0.14.0
+  - @fluentui-react-native/interactive-hooks@0.28.6
+  - @fluentui-react-native/menu-button@0.15.0
+  - @fluentui-react-native/focus-zone@0.23.0
+  - @fluentui-react-native/pressable@0.13.6
+  - @fluentui-react-native/callout@0.28.6
+  - @fluentui-react-native/persona@0.18.0
+  - @fluentui-react-native/tablist@0.8.6
+  - @fluentui-react-native/link@0.24.6
+  - @fluentui-react-native/text@0.25.6
+
 ## 0.43.5
 
 ### Patch Changes

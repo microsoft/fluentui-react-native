@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/vibrancy-view
 
+## 0.4.6
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+- Updated dependencies [801d8b1]
+- Updated dependencies [e2a4065]
+- Updated dependencies [5b5afea]
+  - @fluentui-react-native/adapters@0.15.0
+
 ## 0.4.5
 
 ### Patch Changes

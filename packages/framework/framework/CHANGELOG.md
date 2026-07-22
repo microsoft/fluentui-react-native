@@ -1,5 +1,36 @@
 # Change Log - @fluentui-react-native/framework
 
+## 0.17.0
+
+### Minor Changes
+
+- e2a4065: rework framework rendering to prepare for new component structure
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+- d2690c9: Move theme type definitions into the `@fluentui-react-native/design` package under the new `@fluentui-react-native/design/theming` submodule export. The `@fluentui-react-native/theme-types` package is now a thin compatibility shim that re-exports from `@fluentui-react-native/design/theming`, and all in-repo consumers now reference the new submodule.
+- Updated dependencies [e37b04b]
+- Updated dependencies [01ed385]
+- Updated dependencies [1eef74e]
+- Updated dependencies [801d8b1]
+- Updated dependencies [e2a4065]
+- Updated dependencies [80bf14d]
+- Updated dependencies [5b5afea]
+- Updated dependencies [c1de024]
+- Updated dependencies [d2690c9]
+- Updated dependencies [03ba7ef]
+- Updated dependencies [9d2bb3e]
+  - @fluentui-react-native/design@0.2.0
+  - @fluentui-react-native/framework-base@0.5.0
+  - @fluentui-react-native/composition@0.14.0
+  - @fluentui-react-native/use-styling@0.16.0
+  - @fluentui-react-native/default-theme@0.27.6
+  - @fluentui-react-native/use-tokens@0.9.0
+  - @fluentui-react-native/use-slots@0.13.0
+  - @fluentui-react-native/tokens@0.24.6
+
 ## 0.16.1
 
 ### Patch Changes
