@@ -1,7 +1,7 @@
 import { PlatformColor } from 'react-native';
 
 import type { Theme } from '@fluentui-react-native/framework';
-import { isHighContrast } from '@fluentui-react-native/theming-utils';
+import { isHighContrast } from '@fluentui-react-native/design/theming';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';

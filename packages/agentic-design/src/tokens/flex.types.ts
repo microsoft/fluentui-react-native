@@ -1,5 +1,5 @@
 import type { ColorValue, TextStyle, ViewStyle, DimensionValue } from 'react-native';
-import type { ShadowToken } from '../theming/Shadow.types';
+import type { ShadowToken } from '../theming/types/Shadow.types';
 
 type FontWeight = TextStyle['fontWeight'];
 type FontSize = TextStyle['fontSize'];

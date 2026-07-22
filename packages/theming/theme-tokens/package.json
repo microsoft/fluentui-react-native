@@ -55,13 +55,17 @@
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
     "react": "18.2.0 || 19.0.0 || 19.1.4",
     "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
-    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
   },
   "peerDependenciesMeta": {
     "@types/react": {
       "optional": true
     },
     "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
       "optional": true
     }
   },

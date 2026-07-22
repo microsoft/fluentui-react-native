@@ -19,7 +19,7 @@ import type { Theme } from '@fluentui-react-native/framework';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { Stack } from '@fluentui-react-native/stack';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { getCurrentAppearance } from '@fluentui-react-native/design/theming';
 
 import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';

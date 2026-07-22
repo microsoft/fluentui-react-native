@@ -30,9 +30,6 @@
       "path": "../../../scripts/tsconfig.json"
     },
     {
-      "path": "../../theming/theming-utils/tsconfig.json"
-    },
-    {
       "path": "../../utils/tokens/tsconfig.json"
     },
     {

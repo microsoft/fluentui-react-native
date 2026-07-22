@@ -49,8 +49,7 @@ const config = {
        * Prebuild is a pre-build step that can either modify the source code or generate additional files in the project.
        */
       dependsOn: ['^prebuild'],
-      inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
-      outputs: ['lib/**/*', 'src/**/*'],
+      cache: false,
     },
     'root-prebuild': {
       cache: false,

@@ -4,7 +4,7 @@ import type { LayoutChangeEvent } from 'react-native';
 
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { isHighContrast } from '@fluentui-react-native/theming-utils';
+import { isHighContrast } from '@fluentui-react-native/design/theming';
 
 import type { ButtonProps, ButtonInfo } from './Button.types';
 

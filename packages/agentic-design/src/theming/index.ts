@@ -7,9 +7,9 @@ export type {
   PaletteTextColors,
   PartialPalette,
   ThemeColorDefinition,
-} from './Color.types';
-export type { ShadowValue, ShadowToken, BaseShadowAliasTokens, ThemeShadowDefinition, PartialShadowDefinition } from './Shadow.types';
-export type { AppearanceOptions, PartialTheme, Spacing, Theme, ThemeOptions } from './Theme.types';
+} from './types/Color.types';
+export type { ShadowValue, ShadowToken, BaseShadowAliasTokens, ThemeShadowDefinition, PartialShadowDefinition } from './types/Shadow.types';
+export type { AppearanceOptions, PartialTheme, Spacing, Theme, ThemeOptions } from './types/Theme.types';
 export type {
   FontDynamicTypeRamp,
   FontFamilies,
@@ -27,10 +27,11 @@ export type {
   Variant,
   VariantValue,
   Variants,
-} from './Typography.types';
+} from './types/Typography.types';
 export { ThemeContext, useTheme } from './context';
-export type { OfficePalette } from './palette.types';
+export type { OfficePalette } from './types/palette.types';
 export { ThemeProvider } from './ThemeProvider';
 export type { ThemeProviderProps } from './ThemeProvider';
 export { ThemeReference } from './themeReference';
 export type { OnThemeChange, ThemeRecipe, ThemeTransform } from './themeReference';
+export { getCurrentAppearance, isHighContrast, setIsHighContrast } from './platformUtils';

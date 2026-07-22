@@ -2717,7 +2717,6 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -2769,7 +2768,6 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -2824,7 +2822,6 @@ __metadata:
     "@fluentui-react-native/styling-utils": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -2922,7 +2919,6 @@ __metadata:
     "@fluentui-react-native/styling-utils": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -3423,6 +3419,7 @@ __metadata:
     "@fluentui-react-native/design-tokens-windows": "catalog:"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@office-iss/react-native-win32": "npm:^0.81.0"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
@@ -3433,16 +3430,20 @@ __metadata:
     react: "npm:19.1.4"
     react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.4"
   peerDependencies:
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
     react-native-macos:
+      optional: true
+    react-native-windows:
       optional: true
   languageName: unknown
   linkType: soft
@@ -3972,10 +3973,10 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -4420,7 +4421,6 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -5011,13 +5011,13 @@ __metadata:
   resolution: "@fluentui-react-native/switch@workspace:packages/components/Switch"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -5058,6 +5058,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
@@ -5066,7 +5067,6 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
-    "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -5122,10 +5122,13 @@ __metadata:
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
     react-native-macos:
+      optional: true
+    react-native-windows:
       optional: true
   languageName: unknown
   linkType: soft
@@ -5181,7 +5184,6 @@ __metadata:
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/themed-stylesheet": "workspace:*"
-    "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tooltip": "workspace:*"
     "@fluentui-react-native/vibrancy-view": "workspace:*"
     "@fluentui-react-native/win32-theme": "workspace:*"
@@ -5451,10 +5453,13 @@ __metadata:
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
     react-native-macos:
+      optional: true
+    react-native-windows:
       optional: true
   languageName: unknown
   linkType: soft
@@ -5478,10 +5483,13 @@ __metadata:
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
     react-native-macos:
+      optional: true
+    react-native-windows:
       optional: true
   languageName: unknown
   linkType: soft
@@ -5506,10 +5514,13 @@ __metadata:
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
     react-native-macos:
+      optional: true
+    react-native-windows:
       optional: true
   languageName: unknown
   linkType: soft
@@ -10782,10 +10793,13 @@ __metadata:
     react: 18.2.0 || 19.0.0 || 19.1.4
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
     react-native-macos:
+      optional: true
+    react-native-windows:
       optional: true
   languageName: unknown
   linkType: soft

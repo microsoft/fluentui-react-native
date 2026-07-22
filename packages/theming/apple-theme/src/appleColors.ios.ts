@@ -2,7 +2,7 @@ import { Appearance } from 'react-native';
 
 import type { ThemeColorDefinition } from '@fluentui-react-native/design/theming';
 import { colorGrey26 } from '@fluentui-react-native/design/tokens/global';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { getCurrentAppearance } from '@fluentui-react-native/design/theming';
 
 import type { ApplePalette } from './appleColors.types.ios';
 import { createiOSColorAliasTokens } from './createiOSAliasTokens';
