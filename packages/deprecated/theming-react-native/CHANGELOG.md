@@ -1,5 +1,21 @@
 # Change Log - @uifabricshared/theming-react-native
 
+## 0.21.6
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+- Updated dependencies [01ed385]
+- Updated dependencies [801d8b1]
+- Updated dependencies [80bf14d]
+- Updated dependencies [5b5afea]
+- Updated dependencies [d2690c9]
+  - @fluentui-react-native/win32-theme@0.39.6
+  - @uifabricshared/theme-registry@0.13.6
+  - @uifabricshared/theming-ramp@0.21.6
+  - @fluentui-react-native/default-theme@0.27.6
+
 ## 0.21.5
 
 ### Patch Changes

@@ -1,5 +1,37 @@
 # Change Log - @fluentui-react-native/persona-coin
 
+## 0.17.0
+
+### Minor Changes
+
+- e2a4065: rework framework rendering to prepare for new component structure
+
+### Patch Changes
+
+- 01ed385: Switch packages that referenced globalTokens by object to use the new constant references instead
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+- Updated dependencies [e37b04b]
+- Updated dependencies [01ed385]
+- Updated dependencies [1eef74e]
+- Updated dependencies [801d8b1]
+- Updated dependencies [e2a4065]
+- Updated dependencies [80bf14d]
+- Updated dependencies [5b5afea]
+- Updated dependencies [c1de024]
+- Updated dependencies [d2690c9]
+- Updated dependencies [03ba7ef]
+- Updated dependencies [9d2bb3e]
+  - @fluentui-react-native/design@0.2.0
+  - @fluentui-react-native/framework-base@0.5.0
+  - @uifabricshared/foundation-composable@0.15.0
+  - @uifabricshared/foundation-settings@0.16.6
+  - @uifabricshared/foundation-compose@1.16.6
+  - @uifabricshared/foundation-tokens@0.16.6
+  - @fluentui-react-native/framework@0.17.0
+  - @fluentui-react-native/adapters@0.15.0
+  - @fluentui-react-native/tokens@0.24.6
+
 ## 0.16.5
 
 ### Patch Changes

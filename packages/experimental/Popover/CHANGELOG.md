@@ -1,5 +1,21 @@
 # Change Log - @fluentui-react-native/popover
 
+## 0.5.6
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+- Updated dependencies [1eef74e]
+- Updated dependencies [801d8b1]
+- Updated dependencies [e2a4065]
+- Updated dependencies [5b5afea]
+- Updated dependencies [d2690c9]
+- Updated dependencies [9d2bb3e]
+  - @fluentui-react-native/framework-base@0.5.0
+  - @fluentui-react-native/framework@0.17.0
+  - @fluentui-react-native/adapters@0.15.0
+
 ## 0.5.5
 
 ### Patch Changes

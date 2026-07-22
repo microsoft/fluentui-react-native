@@ -1,5 +1,23 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
+## 0.18.6
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+- Updated dependencies [01ed385]
+- Updated dependencies [1eef74e]
+- Updated dependencies [801d8b1]
+- Updated dependencies [e2a4065]
+- Updated dependencies [80bf14d]
+- Updated dependencies [5b5afea]
+- Updated dependencies [d2690c9]
+- Updated dependencies [9d2bb3e]
+  - @fluentui-react-native/checkbox@0.24.6
+  - @fluentui-react-native/framework-base@0.5.0
+  - @fluentui-react-native/framework@0.17.0
+
 ## 0.18.5
 
 ### Patch Changes

@@ -1,5 +1,31 @@
 # Change Log - @fluentui-react-native/text
 
+## 0.25.6
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+- c1de024: Add central font size/weight lookup by name to design package and consume in Text.tsx
+- Updated dependencies [e37b04b]
+- Updated dependencies [01ed385]
+- Updated dependencies [1eef74e]
+- Updated dependencies [801d8b1]
+- Updated dependencies [e2a4065]
+- Updated dependencies [80bf14d]
+- Updated dependencies [5b5afea]
+- Updated dependencies [c1de024]
+- Updated dependencies [d2690c9]
+- Updated dependencies [03ba7ef]
+- Updated dependencies [9d2bb3e]
+  - @fluentui-react-native/design@0.2.0
+  - @fluentui-react-native/framework-base@0.5.0
+  - @uifabricshared/foundation-compose@1.16.6
+  - @fluentui-react-native/interactive-hooks@0.28.6
+  - @fluentui-react-native/framework@0.17.0
+  - @fluentui-react-native/adapters@0.15.0
+  - @fluentui-react-native/tokens@0.24.6
+
 ## 0.25.5
 
 ### Patch Changes
