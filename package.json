@@ -61,10 +61,29 @@
   "resolutions": {
     "@fluentui/react-native-icons/@types/react-native": "ignore:",
     "@types/react": "19.1.17",
-    "axios": "^1.13.5",
+    "@xmldom/xmldom@npm:^0.7.7": "0.7.13",
+    "@xmldom/xmldom@npm:^0.8.8": "0.8.13",
+    "@xmldom/xmldom@npm:^0.9.5": "0.9.10",
+    "@xmldom/xmldom@npm:^0.x": "0.9.10",
+    "axios": "^1.18.1",
+    "esbuild@npm:~0.25.0": "0.25.12",
     "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch",
+    "form-data": "4.0.6",
+    "lodash": "4.18.1",
+    "path-to-regexp": "8.4.2",
+    "picomatch@npm:^2.0.4": "2.3.2",
+    "picomatch@npm:^2.2.1": "2.3.2",
+    "picomatch@npm:^2.2.3": "2.3.2",
+    "picomatch@npm:^2.3.1": "2.3.2",
     "react-native-macos": "patch:react-native-macos@npm%3A0.81.2#~/.yarn/patches/react-native-macos-npm-0.81.2-dabaa9c16d.patch",
-    "unicorn-magic": "^0.4.0"
+    "shell-quote": "1.9.0",
+    "tmp": "0.2.7",
+    "undici@npm:^6.21.3": "6.27.0",
+    "unicorn-magic": "^0.4.0",
+    "ws@npm:8.19.0": "8.21.0",
+    "ws@npm:^6.2.3": "6.2.4",
+    "ws@npm:^7": "7.5.11",
+    "ws@npm:^7.5.10": "7.5.11"
   },
   "engines": {
     "node": ">=22.12"
