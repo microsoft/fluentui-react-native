@@ -61,7 +61,8 @@
   "resolutions": {
     "@fluentui/react-native-icons/@types/react-native": "ignore:",
     "@types/react": "19.1.17",
-    "@xmldom/xmldom@npm:^0.7.7": "0.8.13",
+    "@react-native-windows/cli/@xmldom/xmldom": "0.8.13",
+    "@react-native-windows/telemetry/@xmldom/xmldom": "0.8.13",
     "@xmldom/xmldom@npm:^0.8.8": "0.8.13",
     "@xmldom/xmldom@npm:^0.9.5": "0.9.10",
     "@xmldom/xmldom@npm:^0.x": "0.9.10",
