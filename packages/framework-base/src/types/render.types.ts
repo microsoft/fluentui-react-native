@@ -173,10 +173,10 @@ export type UseOptionalSlot = {
     component: React.ComponentType<TProps> | undefined | null,
     props: PropsOf<typeof component, TProps>,
     transform?: PropsTransform<TProps>,
-  ): SlotComponent<Partial<PropsOf<typeof component, TProps>>> | null;
+  ): SlotComponent<Partial<PropsOf<typeof component, TProps>>> | undefined;
   <TProps>(
     component: React.ComponentType<TProps> | undefined | null,
     props: Partial<PropsOf<typeof component, TProps>>,
     transform?: PropsTransform<TProps>,
-  ): SlotComponent<PropsOf<typeof component, TProps>> | null;
+  ): SlotComponent<PropsOf<typeof component, TProps>> | undefined;
 };

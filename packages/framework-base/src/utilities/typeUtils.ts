@@ -40,6 +40,15 @@ export function isObject<T extends Record<string | symbol, unknown>>(value: unkn
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+/**
+ * Assertion function that this is an iterable type of some sort by looking for the iterator symbol
+ * @param value
+ * @returns
+ */
+export function isIterable<T>(value: unknown): value is Iterable<T> {
+  return typeof value === 'object' && value !== null && Symbol.iterator in value;
+}
+
 export function getPropSubset<TProps>(props: TProps, keys: Extract<keyof TProps, string>[]): Partial<TProps> | undefined {
   let result: Partial<TProps> | undefined = undefined;
   if (isObject(props)) {

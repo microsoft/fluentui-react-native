@@ -3,9 +3,12 @@ import * as React from 'react';
 import type { SlotComponent, UseSlot, UseOptionalSlot, PropsTransform } from '../types/render.types';
 import { setSlotStatics } from './slot';
 import { createSlotComponent } from './render';
-import { isPhasedComponent, isStagedComponent } from './identify';
+import { isPhasedComponent, isSlotShorthandValue, isStagedComponent } from './identify';
 import { SLOT_COMPONENT_KEY } from '../const';
 import { prepareStagedProps } from './phased';
+import { ExtractSlotProps, SlotShorthandValue, UnknownSlotProps } from '../types/component.types';
+import { mergeProps } from '../merge-props/mergeProps';
+import { isObject } from '../utilities/typeUtils';
 
 /**
  * The core useSlot hook implementation, while the return result will always be a SlotComponent, the implementation will fork
@@ -70,9 +73,9 @@ export const useOptionalSlot: UseOptionalSlot = <TProps>(
   component: React.ComponentType<TProps> | undefined | null,
   hookProps: Partial<TProps> = {},
   transform?: PropsTransform<TProps>,
-): SlotComponent<TProps> | null => {
+): SlotComponent<TProps> | undefined => {
   // just create the hook itself
-  const slotRef = React.useRef<SlotComponent<TProps> | null>(null);
+  const slotRef = React.useRef<SlotComponent<TProps> | undefined>(undefined);
   if (component != null) {
     if (slotRef.current == null) {
       slotRef.current = createSlotComponent<TProps>(component, hookProps, transform);
@@ -81,7 +84,70 @@ export const useOptionalSlot: UseOptionalSlot = <TProps>(
       setSlotStatics(slotRef.current, component, hookProps, transform);
     }
   } else {
-    slotRef.current = null;
+    slotRef.current = undefined;
   }
   return slotRef.current;
 };
+
+/**
+ * Create a slot from a slot prop, which can include prop overrides, a component type override, or a shorthand value
+ * which is routed to the children prop of the slot.
+ *
+ * @param prop the slot prop, which can be a component, shorthand value, or null/undefined
+ * @param baseComponent the base component to use if the prop does not specify one
+ * @param baseProps the base props to merge with the prop's props
+ * @returns a slot component with the resolved component and props
+ */
+export function useSlotProp<Props extends UnknownSlotProps>(
+  prop: Props | SlotShorthandValue | null | undefined,
+  baseComponent: React.ComponentType,
+  baseProps: Partial<ExtractSlotProps<Props>> = {},
+): SlotComponent<Partial<ExtractSlotProps<Props>>> {
+  return useSlot(...resolveSlotProps(prop, baseComponent, baseProps));
+}
+
+/**
+ * Create an optional slot from a slot prop, which can include prop overrides, a component type override, or a shorthand value
+ * which is routed to the children prop of the slot. If the component is null or undefined, and no component type is specified
+ * in the prop parameter the slot will be undefined.
+ * @param prop the value of the slot prop, which can be a component, shorthand value, or null/undefined
+ * @param baseComponent the base component to use if the prop does not specify one
+ * @param baseProps the base props to merge with the prop's props
+ * @returns a slot component with the resolved component and props, or undefined if no component is specified
+ */
+export function useOptionalSlotProp<Props extends UnknownSlotProps>(
+  prop: Props | SlotShorthandValue | null | undefined,
+  baseComponent: React.ComponentType | null | undefined,
+  baseProps: Partial<ExtractSlotProps<Props>> = {},
+): SlotComponent<Partial<ExtractSlotProps<Props>>> | undefined {
+  const [component, props] = resolveSlotProps(prop, baseComponent!, baseProps);
+  return useOptionalSlot(component, props);
+}
+
+/**
+ * Resolves the final component and props for a slot.
+ * @param prop The slot prop, which can be a component, shorthand value, or null/undefined.
+ * @param baseComponent The base component to use if the prop does not specify one.
+ * @param baseProps The base props to merge with the prop's props.
+ * @returns A tuple containing the resolved component and props.
+ */
+function resolveSlotProps<Props extends UnknownSlotProps>(
+  prop: Props | SlotShorthandValue | null | undefined,
+  baseComponent: React.ComponentType,
+  baseProps: Partial<ExtractSlotProps<Props>> = {},
+): [React.ComponentType, ExtractSlotProps<Props>] {
+  if (prop != null) {
+    if (isSlotShorthandValue(prop)) {
+      baseProps = { ...baseProps, children: prop };
+    } else if (isObject(prop)) {
+      const { as, ...userProps } = prop as { as?: React.ComponentType };
+      if (as != null) {
+        baseComponent = as;
+      }
+      if (userProps != null && Object.keys(userProps).length > 0) {
+        baseProps = mergeProps(baseProps, userProps);
+      }
+    }
+  }
+  return [baseComponent, baseProps as ExtractSlotProps<Props>];
+}

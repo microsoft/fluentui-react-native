@@ -33,7 +33,7 @@ export { renderSlot, createSlotComponent, renderJsx } from './component-patterns
 export { directComponent, legacyDirectComponent } from './component-patterns/direct';
 export { phasedComponent, stagedComponent } from './component-patterns/phased';
 export { attachSlotProps } from './component-patterns/slot';
-export { useSlot, useOptionalSlot } from './component-patterns/useSlot';
+export { useSlot, useOptionalSlot, useSlotProp, useOptionalSlotProp } from './component-patterns/useSlot';
 export {
   isDirectComponentType,
   isSlotComponent,
@@ -99,3 +99,4 @@ export type {
   SlotComponent,
 } from './types/render.types';
 export type { DistributiveOmit, DistributivePick, UnionToIntersection, ReplaceNullWithUndefined, IsSingleton } from './types/utility.types';
+export type { SlotPropsRecord, SlotShorthandValue, SlotProp, Slot, ComponentProps, ComponentState } from './types/component.types';
