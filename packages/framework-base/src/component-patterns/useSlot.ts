@@ -6,7 +6,7 @@ import { createSlotComponent } from './render';
 import { isPhasedComponent, isSlotShorthandValue, isStagedComponent } from './identify';
 import { SLOT_COMPONENT_KEY } from '../const';
 import { prepareStagedProps } from './phased';
-import { ExtractSlotProps, SlotShorthandValue, UnknownSlotProps } from '../types/component.types';
+import type { SlotShorthandValue } from '../types/component.types';
 import { mergeProps } from '../merge-props/mergeProps';
 import { isObject } from '../utilities/typeUtils';
 
@@ -98,11 +98,12 @@ export const useOptionalSlot: UseOptionalSlot = <TProps>(
  * @param baseProps the base props to merge with the prop's props
  * @returns a slot component with the resolved component and props
  */
-export function useSlotProp<Props extends UnknownSlotProps>(
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export function useSlotProp<Props extends {}>(
   prop: Props | SlotShorthandValue | null | undefined,
   baseComponent: React.ComponentType,
-  baseProps: Partial<ExtractSlotProps<Props>> = {},
-): SlotComponent<Partial<ExtractSlotProps<Props>>> {
+  baseProps: Partial<Props> = {},
+): SlotComponent<Partial<Props>> {
   return useSlot(...resolveSlotProps(prop, baseComponent, baseProps));
 }
 
@@ -115,11 +116,12 @@ export function useSlotProp<Props extends UnknownSlotProps>(
  * @param baseProps the base props to merge with the prop's props
  * @returns a slot component with the resolved component and props, or undefined if no component is specified
  */
-export function useOptionalSlotProp<Props extends UnknownSlotProps>(
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export function useOptionalSlotProp<Props extends {}>(
   prop: Props | SlotShorthandValue | null | undefined,
   baseComponent: React.ComponentType | null | undefined,
-  baseProps: Partial<ExtractSlotProps<Props>> = {},
-): SlotComponent<Partial<ExtractSlotProps<Props>>> | undefined {
+  baseProps: Partial<Props> = {},
+): SlotComponent<Partial<Props>> | undefined {
   const [component, props] = resolveSlotProps(prop, baseComponent!, baseProps);
   return useOptionalSlot(component, props);
 }
@@ -131,11 +133,11 @@ export function useOptionalSlotProp<Props extends UnknownSlotProps>(
  * @param baseProps The base props to merge with the prop's props.
  * @returns A tuple containing the resolved component and props.
  */
-function resolveSlotProps<Props extends UnknownSlotProps>(
+function resolveSlotProps<Props>(
   prop: Props | SlotShorthandValue | null | undefined,
   baseComponent: React.ComponentType,
-  baseProps: Partial<ExtractSlotProps<Props>> = {},
-): [React.ComponentType, ExtractSlotProps<Props>] {
+  baseProps: Partial<Props> = {},
+): [React.ComponentType, Props] {
   if (prop != null) {
     if (isSlotShorthandValue(prop)) {
       baseProps = { ...baseProps, children: prop };
@@ -149,5 +151,5 @@ function resolveSlotProps<Props extends UnknownSlotProps>(
       }
     }
   }
-  return [baseComponent, baseProps as ExtractSlotProps<Props>];
+  return [baseComponent, baseProps as Props];
 }

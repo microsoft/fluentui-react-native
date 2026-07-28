@@ -123,18 +123,6 @@ export type ComponentProps<
 > = NonRootSlotPropsToComponentProps<Slots> & RootProps;
 
 /**
- * Matches any slot props type.
- *
- * This should ONLY be used in type templates as in `extends UnknownSlotProps`;
- * it shouldn't be used as the type of a slot.
- * @internal
- */
-export type UnknownSlotProps = {
-  as?: React.ComponentType;
-  children?: React.ReactNode;
-};
-
-/**
  * Removes SlotShorthandValue and null from the slot type, then removing as to get the props type of the slot component.
  * This effectively maps from the slot prop type to the actual props interface of the slot component.
  */

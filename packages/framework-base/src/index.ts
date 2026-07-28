@@ -99,4 +99,12 @@ export type {
   SlotComponent,
 } from './types/render.types';
 export type { DistributiveOmit, DistributivePick, UnionToIntersection, ReplaceNullWithUndefined, IsSingleton } from './types/utility.types';
-export type { SlotPropsRecord, SlotShorthandValue, SlotProp, Slot, ComponentProps, ComponentState } from './types/component.types';
+export type {
+  SlotPropsRecord,
+  SlotShorthandValue,
+  SlotProp,
+  Slot,
+  OptionalSlot,
+  ComponentProps,
+  ComponentState,
+} from './types/component.types';

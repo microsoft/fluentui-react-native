@@ -1,6 +1,6 @@
 import React from 'react';
 import { isObject } from '../utilities/typeUtils';
-import { SlotShorthandValue } from '../types/component.types';
+import type { SlotShorthandValue } from '../types/component.types';
 import type {
   DirectComponent,
   FunctionComponent,
