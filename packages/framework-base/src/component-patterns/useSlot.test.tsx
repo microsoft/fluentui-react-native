@@ -9,9 +9,12 @@ import * as renderer from 'react-test-renderer';
 import { act } from 'react';
 
 import { phasedComponent, stagedComponent } from './phased';
-import { directComponent } from './direct';
-import { useSlot } from './useSlot';
+import { directComponent, legacyDirectComponent } from './direct';
+import { useOptionalSlotProp, useSlot } from './useSlot';
+import { createSlotComponent } from './render';
+import { isDirectComponent, isLegacyDirectComponent, isPhasedComponent, isSlotComponent, isStagedComponent } from './identify';
 import type { FurnJSX } from '../types/react.types';
+import type { SlotShorthandValue } from '../types/component.types';
 
 type PluggableTextProps = TextProps & { inner?: FunctionComponent<TextProps> };
 
@@ -129,6 +132,37 @@ describe('useSlot tests', () => {
   });
 });
 
+type OptionalSlotPropConsumerProps = {
+  slot?: TextProps | SlotShorthandValue | null;
+};
+
+const OptionalSlotPropConsumer: React.FunctionComponent<OptionalSlotPropConsumerProps> = ({ slot }) => {
+  const OptionalText = useOptionalSlotProp<TextProps>(slot, Text, { testID: 'optional-slot' });
+  return <View>{OptionalText ? <OptionalText /> : null}</View>;
+};
+
+describe('slot prop resolution', () => {
+  it('renders an optional slot only when its prop is provided', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<OptionalSlotPropConsumer />);
+    });
+    expect(component!.root.findAllByType(Text)).toHaveLength(0);
+
+    act(() => {
+      component!.update(<OptionalSlotPropConsumer slot="content" />);
+    });
+    const textSlots = component!.root.findAllByType(Text);
+    expect(textSlots).toHaveLength(1);
+    expect(textSlots[0].props).toMatchObject({ children: 'content', testID: 'optional-slot' });
+
+    act(() => {
+      component!.update(<OptionalSlotPropConsumer slot={null} />);
+    });
+    expect(component!.root.findAllByType(Text)).toHaveLength(0);
+  });
+});
+
 /**
  * INTRINSIC ATTRIBUTE ACCEPTANCE
  *
@@ -206,21 +240,68 @@ const ClassSlotConsumer: React.FunctionComponent = () => {
   );
 };
 
+const ClassicRuntimeClassSlotConsumer: React.FunctionComponent = () => {
+  const ClassSlot = useSlot(ClassAccept, { title: 'class' });
+  return React.createElement(ClassSlot, { key: 'classic' });
+};
+
 describe('slot intrinsic attribute acceptance', () => {
   it('accepts the key attribute on slots created from any supported component type', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
     let component: renderer.ReactTestRenderer;
-    act(() => {
-      component = renderer.create(<IntrinsicAttributeConsumer />);
-    });
-    // If any slot rejected `key`, the file would not have compiled; this confirms the tree still renders.
-    expect(component!.toJSON()).toMatchSnapshot();
+    try {
+      act(() => {
+        component = renderer.create(<IntrinsicAttributeConsumer />);
+      });
+      // If any slot rejected `key`, the file would not have compiled; this confirms the tree still renders.
+      expect(component!.toJSON()).toMatchSnapshot();
+      expect(consoleError).not.toHaveBeenCalled();
+    } finally {
+      consoleError.mockRestore();
+    }
   });
 
   it('accepts the key attribute on a slot created from a class component in a keyed list', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
     let component: renderer.ReactTestRenderer;
-    act(() => {
-      component = renderer.create(<ClassSlotConsumer />);
-    });
-    expect(component!.toJSON()).toMatchSnapshot();
+    try {
+      act(() => {
+        component = renderer.create(<ClassSlotConsumer />);
+      });
+      expect(component!.toJSON()).toMatchSnapshot();
+      expect(consoleError).not.toHaveBeenCalled();
+    } finally {
+      consoleError.mockRestore();
+    }
+  });
+
+  it('does not forward React key metadata when a slot uses the classic runtime', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    let component: renderer.ReactTestRenderer;
+    try {
+      act(() => {
+        component = renderer.create(<ClassicRuntimeClassSlotConsumer />);
+      });
+      expect(component!.root.findByType(Text).props.children).toBe('class');
+      expect(consoleError).not.toHaveBeenCalled();
+    } finally {
+      consoleError.mockRestore();
+    }
+  });
+});
+
+describe('custom render type identification', () => {
+  it('recognizes function-backed direct, phased, staged, and slot components', () => {
+    const direct = directComponent<AcceptProps>((props) => <Text {...props} />);
+    const legacyDirect = legacyDirectComponent<AcceptProps>((props, ...children) => <Text {...props}>{children}</Text>);
+    const slot = createSlotComponent(FnAccept, {});
+
+    expect(isDirectComponent(direct)).toBe(true);
+    expect(isLegacyDirectComponent(legacyDirect)).toBe(true);
+    expect(isPhasedComponent(PhasedAccept)).toBe(true);
+    expect(isStagedComponent(StagedAccept)).toBe(true);
+    expect(isSlotComponent(slot)).toBe(true);
+    expect(isSlotComponent(PhasedAccept)).toBe(false);
+    expect(isSlotComponent(StagedAccept)).toBe(false);
   });
 });

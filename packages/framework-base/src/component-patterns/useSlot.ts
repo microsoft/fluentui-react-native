@@ -119,11 +119,11 @@ export function useSlotProp<Props extends {}>(
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export function useOptionalSlotProp<Props extends {}>(
   prop: Props | SlotShorthandValue | null | undefined,
-  baseComponent: React.ComponentType | null | undefined,
+  baseComponent: React.ComponentType,
   baseProps: Partial<Props> = {},
 ): SlotComponent<Partial<Props>> | undefined {
-  const [component, props] = resolveSlotProps(prop, baseComponent!, baseProps);
-  return useOptionalSlot(component, props);
+  const [component, props] = resolveSlotProps(prop, baseComponent, baseProps);
+  return useOptionalSlot(prop == null ? undefined : component, props);
 }
 
 /**

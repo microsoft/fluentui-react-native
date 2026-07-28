@@ -103,8 +103,10 @@ export type {
   SlotPropsRecord,
   SlotShorthandValue,
   SlotProp,
+  OptionalSlotProp,
   Slot,
   OptionalSlot,
   ComponentProps,
   ComponentState,
+  ExtractSlotProps,
 } from './types/component.types';

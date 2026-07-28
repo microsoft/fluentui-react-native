@@ -1,5 +1,4 @@
 import React from 'react';
-import { isObject } from '../utilities/typeUtils';
 import type { SlotShorthandValue } from '../types/component.types';
 import type {
   DirectComponent,
@@ -14,7 +13,10 @@ import { isIterable } from '../utilities/typeUtils';
 import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY } from '../const';
 
 function getObjKeyValue(obj: unknown, key: string | symbol): unknown {
-  return isObject(obj) && key in obj ? obj[key] : undefined;
+  if ((typeof obj === 'object' && obj !== null) || typeof obj === 'function') {
+    return key in obj ? Reflect.get(obj, key) : undefined;
+  }
+  return undefined;
 }
 
 /**

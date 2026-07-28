@@ -9,6 +9,18 @@ import { getPropsChildren, setPropsChildren } from '../utilities/typeUtils';
 
 export type CustomRender = () => RenderResult;
 
+function hasOwnKey(props: unknown): props is { key?: React.Key } {
+  return props != null && typeof props === 'object' && Object.prototype.hasOwnProperty.call(props, 'key');
+}
+
+function extractKeyFromProps<TProps>(props: TProps, key?: React.Key): [TProps, React.Key | undefined] {
+  if (hasOwnKey(props)) {
+    const { key: propsKey, ...propsWithoutKey } = props as TProps & { key?: React.Key };
+    return [propsWithoutKey as TProps, propsKey === undefined ? key : propsKey];
+  }
+  return [props, key];
+}
+
 /**
  * Root jsx render function, used for both jsx and jsxs calls. This handles all of our custom rendering patterns
  * and slot components.
@@ -25,6 +37,7 @@ export function renderForJsxRuntime<TProps>(
 ): RenderResult {
   // If the type is a direct component type, render it directly
   if (isDirectComponentType(type)) {
+    [props, key] = extractKeyFromProps(props, key);
     const jsxResult = renderDirectComponent(type, props);
     // If a key is provided, clone the element with the key
     return key != null ? React.cloneElement(jsxResult, { key }) : jsxResult;
@@ -32,6 +45,7 @@ export function renderForJsxRuntime<TProps>(
 
   // with a slot component use the internal type and props to render directly
   if (isSlotComponent<TProps>(type)) {
+    [props, key] = extractKeyFromProps(props, key);
     const slotType = type[SLOT_COMPONENT_KEY];
     const slotProps = prepareSlotProps(type, props);
     // now re-enter with the inner type to handle direct/etc
@@ -48,7 +62,11 @@ export function renderForJsxRuntime<TProps>(
   }
 
   // now call the appropriate jsx function to render the component
-  return jsxFn(type, props, key);
+  // React 19 adds a non-configurable development getter for `key` to the props object. Clone keyed props
+  // so React cannot mutate cached slot props and so a getter received from the classic runtime is removed.
+  const shouldCloneProps = props != null && typeof props === 'object' && (key !== undefined || hasOwnKey(props));
+  const jsxProps = shouldCloneProps ? ({ ...props } as TProps) : props;
+  return jsxFn(type, jsxProps, key);
 }
 
 /**
