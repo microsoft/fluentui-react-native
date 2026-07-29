@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PropsTransform, SlotComponent } from '../types/render.types';
+import type { SlotComponent } from '../types/render.types';
 import { SLOT_COMPONENT_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const';
 import { mergeProps } from '../merge-props/mergeProps';
 import { assignProps } from '../merge-props/assignProps';
@@ -95,7 +95,7 @@ export function setSlotStatics<TProps>(
   statics: Partial<SlotComponentStatics<TProps>>,
   component: React.ComponentType<TProps>,
   props: Partial<TProps>,
-  transform?: PropsTransform<TProps>,
+  transform?: (props: TProps) => TProps,
 ): SlotComponentStatics<TProps> {
   statics[SLOT_COMPONENT_KEY] = component;
   statics[SLOT_PROPS_KEY] = props;

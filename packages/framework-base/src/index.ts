@@ -33,7 +33,7 @@ export { renderSlot, createSlotComponent, renderJsx } from './component-patterns
 export { directComponent, legacyDirectComponent } from './component-patterns/direct';
 export { phasedComponent, stagedComponent } from './component-patterns/phased';
 export { attachSlotProps } from './component-patterns/slot';
-export { useSlot, useOptionalSlot, useSlotProp, useOptionalSlotProp } from './component-patterns/useSlot';
+export { useSlot, useOptionalSlot } from './component-patterns/useSlot';
 export {
   isDirectComponentType,
   isSlotComponent,
@@ -108,5 +108,9 @@ export type {
   OptionalSlot,
   ComponentProps,
   ComponentState,
+  ComponentPropsTransform,
   ExtractSlotProps,
+  SlotOptions,
+  UseOptionalSlot,
+  UseSlot,
 } from './types/component.types';

@@ -25,8 +25,10 @@ adding or changing a component pattern.
   `OptionalSlot<typeof Text>`.
 - Prefer inferred calls such as `useSlot(View, props)` so native ref types are
   preserved.
-- Use `useSlotProp` for shorthand and `as` customization, and
-  `useOptionalSlotProp` when an absent public slot should not render.
+- Use `useSlot` for required slots and `useOptionalSlot` for optional slots. Both
+  accept raw props, shorthand children, and `as` customization.
+- For `useOptionalSlot`, treat `null` as explicitly hidden and use
+  `renderByDefault` to control whether `undefined` renders.
 - Ensure an `as` replacement accepts the declared props and forwards a compatible
   ref when the slot is referenced.
 - Render ref-bearing callable slots through the custom JSX runtime. React 18's

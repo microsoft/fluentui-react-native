@@ -34,9 +34,8 @@ JSX rather than the classic runtime when a slot needs a ref.
 | Maintaining existing legacy code                  | `legacyDirectComponent` or `stagedComponent`   |
 
 Slots are a composition mechanism rather than a replacement for the render patterns.
-Because `useSlot`, `useSlotProp`, and `useOptionalSlotProp` are hooks, create slots in
-the first phase of a `phasedComponent` or in a normal React component. A common
-component shape is:
+Because `useSlot` and `useOptionalSlot` are hooks, create slots in the first phase of
+a `phasedComponent` or in a normal React component. A common component shape is:
 
 1. Use `phasedComponent` for hooks, state, tokens, and slot creation.
 2. Return a `directComponent` that emits the final tree without calling hooks.
@@ -173,14 +172,37 @@ type ButtonState = ComponentState<ButtonSlots>;
 
 ### Slot hooks
 
-Use the hook matching the source of the slot:
+Both hooks accept the component type first, followed by either the previous raw
+props form or a slot prop containing props, shorthand children, or an `as` override:
 
-| Hook                                                  | Use                                                                           |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `useSlot(Component, props)`                           | The component type is already known                                           |
-| `useSlotProp(slotProp, Component, baseProps)`         | A public slot prop may contain props, shorthand children, or an `as` override |
-| `useOptionalSlotProp(slotProp, Component, baseProps)` | The public slot should not render when its prop is `null` or `undefined`      |
-| `useOptionalSlot(Component, props)`                   | A component type itself may be absent; absence returns `null`                 |
+| Hook                                             | Use                                                                                   |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| `useSlot(Component, slotProp, options?)`         | A required slot that always resolves to a slot component                              |
+| `useOptionalSlot(Component, slotProp, options?)` | An optional slot using v9-compatible `null`, `undefined`, and `renderByDefault` rules |
+
+Options can supply defaults and a final prop transform:
+
+```tsx
+const Content = useSlot(Text, content, {
+  defaultProps: { selectable: false },
+  transform: (props) => ({ ...props, accessibilityRole: 'text' }),
+});
+```
+
+`useSlot` accepts `undefined` and still creates the base slot. `useOptionalSlot`
+uses these absence rules:
+
+- `null` never renders.
+- `undefined` does not render unless `renderByDefault` is `true`.
+- A provided shorthand or props object renders.
+- A missing component type from the previous nullable-component API does not render.
+
+```tsx
+const Accessory = useOptionalSlot(View, accessory, {
+  defaultProps: accessoryDefaults,
+  renderByDefault: false,
+});
+```
 
 Prefer component inference:
 
@@ -192,16 +214,16 @@ This preserves native ref information. Explicit props-first calls such as
 `useSlot<ViewProps>(View, rootProps)` remain supported for compatibility but cannot
 derive the native instance type as precisely.
 
-`useSlotProp` tracks whether required props were resolved. If neither the slot prop
-nor `baseProps` provides a required value, that value remains required when the
-resolved slot is rendered.
+`useSlot` tracks whether required props were resolved. If neither the slot prop nor
+`options.defaultProps` provides a required value, that value remains required when
+the resolved slot is rendered.
 
 ### Slot component example
 
 ```tsx
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { Pressable, Text, View } from 'react-native';
-import { directComponent, phasedComponent, useOptionalSlotProp, useSlot, useSlotProp } from '@fluentui-react-native/framework-base';
+import { directComponent, phasedComponent, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import type { ComponentProps, ComponentState, OptionalSlot, Slot } from '@fluentui-react-native/framework-base';
 
 type ButtonSlots = {
@@ -217,8 +239,8 @@ export const Button = phasedComponent<ButtonProps>((props) => {
   const { content, accessory, ...rootProps } = props;
 
   const Root = useSlot(Pressable, rootProps);
-  const Content = useSlotProp(content, Text, {});
-  const Accessory = useOptionalSlotProp(accessory, View, {});
+  const Content = useSlot(Text, content);
+  const Accessory = useOptionalSlot(View, accessory);
 
   return directComponent<ButtonProps>(({ content: _content, accessory: _accessory, children, ...finalRootProps }) => (
     <Root {...finalRootProps}>

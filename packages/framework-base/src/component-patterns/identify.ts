@@ -92,7 +92,8 @@ export function isSlotComponent<Type extends AnyComponent>(component: unknown): 
  */
 export function isCustomRenderType(component: PotentialComponentTypes) {
   return (
-    (component as DirectComponent<PropsWithRefOf<AnyComponent>>)[SLOT_RENDER_TYPE_KEY] != null || (component as SlotComponent<PropsWithRefOf<AnyComponent>>)[SLOT_COMPONENT_KEY] != null
+    (component as DirectComponent<PropsWithRefOf<AnyComponent>>)[SLOT_RENDER_TYPE_KEY] != null ||
+    (component as SlotComponent<PropsWithRefOf<AnyComponent>>)[SLOT_COMPONENT_KEY] != null
   );
 }
 

@@ -5,7 +5,7 @@ import { createSlotComponent } from './render';
 import { isPhasedComponent, isSlotShorthandValue, isStagedComponent } from './identify';
 import { SLOT_COMPONENT_KEY } from '../const';
 import { prepareStagedProps } from './phased';
-import type { AnyComponent, SlotProp, SlotShorthandValue, UseSlot, UseOptionalSlot, PropsTransform, SlotOptions } from '../types/component.types';
+import type { AnyComponent, SlotProp, UseSlot, UseOptionalSlot, ComponentPropsTransform, SlotOptions } from '../types/component.types';
 import type { PropsWithRefOf } from '../types/props.types';
 import { mergeProps } from '../merge-props/mergeProps';
 import { isObject } from '../utilities/typeUtils';
@@ -29,14 +29,14 @@ import { isObject } from '../utilities/typeUtils';
  *      inner hook component to get to the inner element. This effectively extends the direct component patterns to work with hooks as
  *      well. Allowing things like picking up context for theming without having to create unnecessary wrapper layers.
  *
- * @param component - any kind of component that can be rendered as part of the tree
- * @param hookProps - props, either full or partial that should be embedded in the component
- * @param transform - an optional transform function for filtering props or doing other last minute transitions
+ * @param baseComponent - component to render when the slot prop does not provide an `as` override
+ * @param slotProp - raw props or a slot prop containing props, shorthand children, or an `as` override
+ * @param options - default props and an optional final prop transform
  */
 export const useSlot: UseSlot = <Type extends AnyComponent>(
   baseComponent: Type,
   slotProp: SlotProp<Type> | undefined,
-  options?: PropsTransform<Type> | SlotOptions<Type>,
+  options?: ComponentPropsTransform<Type> | SlotOptions<Type>,
 ): SlotComponent<PropsWithRefOf<Type>> => {
   // local type to make things easier to read and maintain
   type PropsType = PropsWithRefOf<Type>;
@@ -45,17 +45,17 @@ export const useSlot: UseSlot = <Type extends AnyComponent>(
   let [component, hookProps] = resolveSlotProps(slotProp, baseComponent, defaultProps);
 
   // handle the component being a phased/staged render
-  if (isPhasedComponent(component)) {
+  if (isPhasedComponent<Type>(component)) {
     // phased components can pass through children given that it is carried along with the props
     component = component[SLOT_COMPONENT_KEY](hookProps);
     hookProps = {} as PropsType;
   } else if (isStagedComponent<Type>(component)) {
-    [component, hookProps] = prepareStagedProps(component[SLOT_COMPONENT_KEY], hookProps);
+    [component, hookProps] = prepareStagedProps(component[SLOT_COMPONENT_KEY], hookProps as PropsType);
   }
   // now onto the slot creation itself, use a ref to get per-instance storage for the slot
   const slotRef = React.useRef<SlotComponent<PropsType> | null>(null);
   if (slotRef.current == null) {
-    slotRef.current = createSlotComponent<PropsType>(component, hookProps, transform);
+    slotRef.current = createSlotComponent(component as Type, hookProps, transform);
   } else {
     // update the existing slot with new props and transform if necessary
     setSlotStatics(slotRef.current, component, hookProps, transform);
@@ -70,87 +70,32 @@ export const useSlot: UseSlot = <Type extends AnyComponent>(
  * To not violate the rule of hooks this does not resolve staged/phased components, instead using their standard entry
  * point for when they aren't resolved early.
  *
- * @param component - react component type which may or may not be specified
- * @param hookProps - props to be passed to the component
- * @param transform - an optional transform function for filtering props or doing other last minute transitions
- * @returns The slot component if the component is defined, otherwise null
+ * @param baseComponent - component to render, or an absent component from the previous nullable-component API
+ * @param slotProp - raw props or a slot prop; null explicitly hides the slot
+ * @param options - default props, an optional final prop transform, and renderByDefault behavior
+ * @returns The resolved slot, or undefined when the optional slot should not render
  */
 export const useOptionalSlot: UseOptionalSlot = <Type extends AnyComponent>(
-  baseComponent: Type,
-  slotProp: SlotProp<PropsWithRefOf<Type>> | undefined | null,
-  options?: PropsTransform<Type> | SlotOptions<Type>,
+  baseComponent: Type | undefined | null,
+  slotProp: SlotProp<Type> | undefined | null,
+  options?: ComponentPropsTransform<Type> | SlotOptions<Type>,
 ): SlotComponent<PropsWithRefOf<Type>> | undefined => {
   type PropsType = PropsWithRefOf<Type>;
-  options = resolveOptions(options);
-  if (slotProp === null || (slotProp === undefined && !options.renderByDefault)) {
+  const slotRef = React.useRef<SlotComponent<PropsType> | undefined>(undefined);
+  const { defaultProps, transform, renderByDefault } = resolveOptions(options);
+  if (baseComponent == null || slotProp === null || (slotProp === undefined && !renderByDefault)) {
+    slotRef.current = undefined;
     return undefined;
   }
-  return useSlot<Type>(baseComponent, slotProp, options) as SlotComponent<PropsType>;
+
+  const [component, hookProps] = resolveSlotProps(slotProp, baseComponent, defaultProps);
+  if (slotRef.current === undefined) {
+    slotRef.current = createSlotComponent(component as Type, hookProps, transform);
+  } else {
+    setSlotStatics(slotRef.current, component, hookProps, transform);
+  }
+  return slotRef.current;
 };
-
-/**
- * Create a slot from a slot prop, which can include prop overrides, a component type override, or a shorthand value
- * which is routed to the children prop of the slot.
- *
- * @param prop the slot prop, which can be a component, shorthand value, or null/undefined
- * @param baseComponent the base component to use if the prop does not specify one
- * @param baseProps the base props to merge with the prop's props
- * @returns a slot component with the resolved component and props
- */
-export function useSlotProp<Type extends AnyComponent>(
-  prop: Exclude<SlotProp<Type>, SlotShorthandValue>,
-  baseComponent: Type,
-  baseProps?: Partial<PropsWithRefOf<Type>>,
-): SlotComponent<Partial<PropsWithRefOf<Type>>>;
-export function useSlotProp<Type extends AnyComponent>(
-  prop: SlotProp<Type> | undefined,
-  baseComponent: Type,
-  baseProps: PropsWithRefOf<Type>,
-): SlotComponent<Partial<PropsWithRefOf<Type>>>;
-export function useSlotProp<Type extends AnyComponent>(
-  prop: SlotProp<Type> | undefined,
-  baseComponent: Type,
-  baseProps?: Partial<PropsWithRefOf<Type>>,
-): SlotComponent<PropsWithRefOf<Type>>;
-export function useSlotProp<Type extends AnyComponent>(
-  prop: SlotProp<Type> | undefined,
-  baseComponent: Type,
-  baseProps: Partial<PropsWithRefOf<Type>> = {},
-): SlotComponent<PropsWithRefOf<Type>> {
-  return useSlot<Type>(baseComponent, prop, { defaultProps: baseProps }) as SlotComponent<PropsWithRefOf<Type>>;
-}
-
-/**
- * Create an optional slot from a slot prop, which can include prop overrides, a component type override, or a shorthand value
- * which is routed to the children prop of the slot. If the component is null or undefined, and no component type is specified
- * in the prop parameter the slot will be undefined.
- * @param prop the value of the slot prop, which can be a component, shorthand value, or null/undefined
- * @param baseComponent the base component to use if the prop does not specify one
- * @param baseProps the base props to merge with the prop's props
- * @returns a slot component with the resolved component and props, or undefined if no component is specified
- */
-export function useOptionalSlotProp<Type extends AnyComponent>(
-  prop: Exclude<SlotProp<Type>, SlotShorthandValue>,
-  baseComponent: Type,
-  baseProps?: Partial<PropsWithRefOf<Type>>,
-): SlotComponent<Partial<PropsWithRefOf<Type>>> | undefined;
-export function useOptionalSlotProp<Type extends AnyComponent>(
-  prop: SlotProp<Type> | null | undefined,
-  baseComponent: Type,
-  baseProps: PropsWithRefOf<Type>,
-): SlotComponent<Partial<PropsWithRefOf<Type>>> | undefined;
-export function useOptionalSlotProp<Type extends AnyComponent>(
-  prop: SlotProp<Type> | null | undefined,
-  baseComponent: Type,
-  baseProps?: Partial<PropsWithRefOf<Type>>,
-): SlotComponent<PropsWithRefOf<Type>> | undefined;
-export function useOptionalSlotProp<Type extends AnyComponent>(
-  prop: SlotProp<Type> | null | undefined,
-  baseComponent: Type,
-  baseProps: Partial<PropsWithRefOf<Type>> = {},
-): SlotComponent<PropsWithRefOf<Type>> | undefined {
-  return useOptionalSlot<Type>(baseComponent, prop, { defaultProps: baseProps }) as SlotComponent<PropsWithRefOf<Type>> | undefined;
-}
 
 /**
  * Resolves the final component and props for a slot.
@@ -163,7 +108,7 @@ function resolveSlotProps<Type extends AnyComponent>(
   prop: SlotProp<Type> | null | undefined,
   baseComponent: Type,
   baseProps: Partial<PropsWithRefOf<Type>> = {},
-): [React.ComponentType<PropsWithRefOf<Type>>, PropsWithRefOf<Type>] {
+): [React.ComponentType<PropsWithRefOf<Type>>, Partial<PropsWithRefOf<Type>>] {
   let component: React.ComponentType<PropsWithRefOf<Type>> = baseComponent;
   if (prop != null) {
     if (isSlotShorthandValue(prop)) {
@@ -178,7 +123,7 @@ function resolveSlotProps<Type extends AnyComponent>(
       }
     }
   }
-  return [component, baseProps as PropsWithRefOf<Type>];
+  return [component, baseProps];
 }
 
 /**
@@ -186,6 +131,6 @@ function resolveSlotProps<Type extends AnyComponent>(
  * @param options The options to resolve, which can be a function or an object.
  * @returns The resolved SlotOptions object.
  */
-function resolveOptions<Type extends AnyComponent>(options?: PropsTransform<Type> | SlotOptions<Type>): SlotOptions<Type> {
-  return typeof options === 'function' ? { transform: options } : options ?? {};
+function resolveOptions<Type extends AnyComponent>(options?: ComponentPropsTransform<Type> | SlotOptions<Type>): SlotOptions<Type> {
+  return typeof options === 'function' ? { transform: options } : (options ?? {});
 }

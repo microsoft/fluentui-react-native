@@ -21,6 +21,8 @@ This package provides several TypeScript utility types:
 - `PhasedRender<TProps>` - The render signature for phased components (phase one returns the phase two renderer)
 - `SlotComponent<TProps>` - Slot component type used in the composition framework
 - `PropsTransform<TPropsIn, TPropsOut>` - A transform that maps one set of props to another
+- `ComponentPropsTransform<TComponent>` - A transform for the resolved props of a component type
+- `SlotOptions<TComponent>` - Default props, transform, and optional-slot rendering behavior
 
 ## JSX Runtime
 

@@ -6,6 +6,8 @@ import { isDirectComponentType, isSlotComponent } from './identify';
 import { prepareSlotProps, setSlotStatics } from './slot';
 import { SLOT_COMPONENT_KEY } from '../const';
 import { getPropsChildren, setPropsChildren } from '../utilities/typeUtils';
+import type { AnyComponent, ComponentPropsTransform } from '../types/component.types';
+import type { PropsWithRefOf } from '../types/props.types';
 
 export type CustomRender = () => RenderResult;
 
@@ -87,6 +89,16 @@ export function renderJsx<TProps>(type: React.ElementType, props: TProps): Rende
  * @param transform optional transform function for the slot
  * @return a slot component
  */
+export function createSlotComponent<Type extends AnyComponent>(
+  component: Type,
+  props: Partial<PropsWithRefOf<Type>>,
+  transform?: ComponentPropsTransform<Type>,
+): SlotComponent<PropsWithRefOf<Type>>;
+export function createSlotComponent<TProps>(
+  component: React.ComponentType<TProps>,
+  props: Partial<TProps>,
+  transform?: PropsTransform<TProps>,
+): SlotComponent<TProps>;
 export function createSlotComponent<TProps>(
   component: React.ComponentType<TProps>,
   props: Partial<TProps>,
