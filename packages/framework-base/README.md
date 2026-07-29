@@ -6,7 +6,9 @@ The functionality in these packages is now exposed as part of this package.
 
 ## Component Patterns
 
-The shared patterns for rendering components, as well as the JSX handlers have been centralized in this package. More information can be found [here](./src/component-patterns/README.md).
+The shared rendering patterns and JSX handlers are centralized in this package. See the
+[component authoring guide](./src/component-patterns/README.md) for how to choose and
+combine `directComponent`, `phasedComponent`, and slots.
 
 ## Type Helpers
 

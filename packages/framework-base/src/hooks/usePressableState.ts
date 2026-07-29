@@ -2,7 +2,12 @@ import * as React from 'react';
 import type { PressableProps } from 'react-native';
 import type { PressableState } from '../types/interactive.types';
 
-const DEFAULT_STATE_KEYS: (keyof PressableState)[] = ['pressed', 'hovered', 'focused'];
+const DEFAULT_STATE_KEYS: readonly (keyof PressableState)[] = ['pressed', 'hovered', 'focused'];
+const INITIAL_STATE: PressableState = {
+  pressed: false,
+  hovered: false,
+  focused: false,
+};
 
 export type UsePressableResult = [props: PressableProps, state: PressableState];
 
@@ -15,19 +20,18 @@ export type UsePressableResult = [props: PressableProps, state: PressableState];
  *
  * @param props The PressableProps to augment with state tracking
  * @param stateKeys The keys of the PressableState to track. Defaults to all three keys.
- * @returns A tuple of the augmented props to spread onto a Pressable and the current interactive state for the tracked keys.
+ * @returns A tuple of the augmented props to spread onto a Pressable and the complete interactive state.
  */
-export function usePressableState<Keys extends keyof PressableState = 'pressed' | 'hovered' | 'focused'>(
+export function usePressableState(
   props: PressableProps,
-  stateKeys: Keys[] = DEFAULT_STATE_KEYS as Keys[],
-): [props: PressableProps, state: Pick<PressableState, Keys>] {
-  // create a state entry to track the pressable state for the requested keys.
-  const [state, setState] = React.useState<Pick<PressableState, Keys>>(() => initialStateFromKeys<Keys>(stateKeys));
+  stateKeys: readonly (keyof PressableState)[] = DEFAULT_STATE_KEYS,
+): UsePressableResult {
+  const [state, setState] = React.useState<PressableState>(() => ({ ...INITIAL_STATE }));
 
   // determine which states are being tracked so that we can wrap the appropriate handlers
-  const press = stateKeys.includes('pressed' as Keys);
-  const hover = stateKeys.includes('hovered' as Keys);
-  const focus = stateKeys.includes('focused' as Keys);
+  const press = stateKeys.includes('pressed');
+  const hover = stateKeys.includes('hovered');
+  const focus = stateKeys.includes('focused');
 
   // pull out the interactive props so that we can wrap them with our own handlers, and then forward to the original handlers if they exist
   const { onPressIn, onPressOut, onHoverIn, onHoverOut, onFocus, onBlur } = props;
@@ -72,17 +76,4 @@ export function usePressableState<Keys extends keyof PressableState = 'pressed' 
   }, [press, hover, focus, onPressIn, onPressOut, onHoverIn, onHoverOut, onFocus, onBlur]);
 
   return [{ ...props, ...overrides }, state];
-}
-
-/**
- * Creates an initial state object for the requested keys, with all values set to false. This is used to initialize the state for the usePressableState hook.
- * @param keys The keys of the PressableState to initialize.
- * @returns An initial state object with all values set to false.
- */
-function initialStateFromKeys<Keys extends keyof PressableState>(keys: Keys[]): Pick<PressableState, Keys> {
-  const initialState: Partial<PressableState> = {};
-  for (const key of keys) {
-    initialState[key] = false;
-  }
-  return initialState as Pick<PressableState, Keys>;
 }
