@@ -9,6 +9,9 @@ import { getPropsChildren, setPropsChildren } from '../utilities/typeUtils';
 import type { AnyComponent, ComponentPropsTransform } from '../types/component.types';
 import type { PropsWithRefOf } from '../types/props.types';
 
+/**
+ * @internal
+ */
 export type CustomRender = () => RenderResult;
 
 function hasOwnKey(props: unknown): props is { key?: React.Key } {
@@ -30,6 +33,7 @@ function extractKeyFromProps<TProps>(props: TProps, key?: React.Key): [TProps, R
  * @param props the props for the component
  * @param key optional key for the component, this is parallel to props and injected at the framework level
  * @param jsxFn optional jsx function to use for rendering, set when called by _jsx, _jsxs but will auto-detect for non-framework callers
+ * @internal
  */
 export function renderForJsxRuntime<TProps>(
   type: React.ElementType,
@@ -116,6 +120,8 @@ export function createSlotComponent<TProps>(
 
 /**
  * Render signature matching the old createElement pattern from the pre-jsx runtime. Will call through to the new runtime.
+ *
+ * @internal
  */
 export function renderForClassicRuntime<TProps>(type: RenderType, props: TProps, children: React.ReactNode[]): RenderResult {
   // route this through to the new runtime

@@ -48,6 +48,7 @@ export function phasedComponent<TProps>(getInnerPhase: (props: TProps) => React.
  * @param staged - staged component to prepare props for
  * @param props - props to be passed to the staged component
  * @returns - a tuple containing the inner render function and the remaining props
+ * @internal
  */
 export function prepareStagedProps<TProps>(staged: StagedRender<TProps>, props: TProps): [React.ComponentType<TProps>, TProps] {
   // for staged components, the first stage will not expect any children, so split them out to pass on to the second stage

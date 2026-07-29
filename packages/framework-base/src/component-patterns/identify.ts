@@ -10,7 +10,7 @@ import type {
 } from '../types/render.types';
 import { isIterable } from '../utilities/typeUtils';
 import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY } from '../const';
-import { PropsWithRefOf } from '../types/props.types';
+import type { PropsWithRefOf } from '../types/props.types';
 
 type PotentialComponentTypes = AnyComponent | React.ElementType | LegacyFunctionComponent<PropsWithRefOf<AnyComponent>>;
 
@@ -89,6 +89,7 @@ export function isSlotComponent<Type extends AnyComponent>(component: unknown): 
  * Is this element already a custom render type (direct, legacy direct, phased, staged, or slot)
  * @param component component to test
  * @returns True if the component is a custom render type, false otherwise.
+ * @internal
  */
 export function isCustomRenderType(component: PotentialComponentTypes) {
   return (
@@ -102,6 +103,7 @@ export function isCustomRenderType(component: PotentialComponentTypes) {
  * in react in standard usage.
  * @param value value to test
  * @returns True if the value is a slot shorthand value, false otherwise.
+ * @internal
  */
 export function isSlotShorthandValue(value: unknown): value is SlotShorthandValue {
   return (

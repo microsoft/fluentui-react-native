@@ -17,6 +17,11 @@ export type FunctionComponent<TProps> = {
   displayName?: string;
 };
 
+/**
+ * Identifiers used by the custom JSX runtime to select a component rendering strategy.
+ *
+ * @internal
+ */
 export type CustomRenderType =
   | 'callable' // A function that can be called directly to bypass a level of indirection
   | 'legacy' // A function that can be called directly, but with children as a rest parameter

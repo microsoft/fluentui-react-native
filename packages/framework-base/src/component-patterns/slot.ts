@@ -78,6 +78,8 @@ function mergeSlotRefs(
 
 /**
  * Convenience type, just referencing the statics of the component
+ *
+ * @internal
  */
 export type SlotComponentStatics<TProps> = Pick<
   SlotComponent<TProps>,
@@ -90,6 +92,7 @@ export type SlotComponentStatics<TProps> = Pick<
  * @param component - The component to set as the slot component.
  * @param props - The base props for the slot component.
  * @param options - Optional settings for creating the slot.
+ * @internal
  */
 export function setSlotStatics<TProps>(
   statics: Partial<SlotComponentStatics<TProps>>,
@@ -110,6 +113,8 @@ export function setSlotStatics<TProps>(
  * Given a set of userProps, prepare the final props for a slot component
  * - merging with base props
  * - running the transform if present
+ *
+ * @internal
  */
 export function prepareSlotProps<TProps>(slotInfo: SlotComponentStatics<TProps>, userProps?: TProps): TProps {
   const baseProps = slotInfo[SLOT_PROPS_KEY];
