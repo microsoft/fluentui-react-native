@@ -44,7 +44,7 @@ export function renderForJsxRuntime<TProps>(
   }
 
   // with a slot component use the internal type and props to render directly
-  if (isSlotComponent<TProps>(type)) {
+  if (isSlotComponent(type)) {
     [props, key] = extractKeyFromProps(props, key);
     const slotType = type[SLOT_COMPONENT_KEY];
     const slotProps = prepareSlotProps(type, props);

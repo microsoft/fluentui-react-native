@@ -3,14 +3,14 @@ import * as React from 'react';
 import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 
-import type { FunctionComponent, SlotComponent } from '../types/render.types';
+import type { FunctionComponent } from '../types/render.types';
 import { mergeStyles } from '../merge-props/mergeStyles';
 import * as renderer from 'react-test-renderer';
 import { act } from 'react';
 
 import { phasedComponent, stagedComponent } from './phased';
 import { directComponent, legacyDirectComponent } from './direct';
-import { useOptionalSlot, useOptionalSlotProp, useSlot, useSlotProp } from './useSlot';
+import { useOptionalSlotProp, useSlot, useSlotProp } from './useSlot';
 import { createSlotComponent } from './render';
 import { isDirectComponent, isLegacyDirectComponent, isPhasedComponent, isSlotComponent, isStagedComponent } from './identify';
 import type { FurnJSX } from '../types/react.types';
@@ -27,7 +27,7 @@ const PluggableText = phasedComponent((props: PluggableTextProps) => {
 
   // next call use slot with either inner or Text as the component type, and forwarding the props here. These props will be remembered
   // and don't need to be passed again in the JSX tree.
-  const Inner = useSlot(inner || Text, rest);
+  const Inner = useSlot(inner ?? Text, rest);
 
   // return a closure for finishing off render
   return directComponent<TextProps>((extra: TextProps) => {
@@ -159,20 +159,6 @@ const OptionalSlotPropConsumer: React.FunctionComponent<OptionalSlotPropConsumer
 };
 
 describe('slot prop resolution', () => {
-  it('preserves null as the absence sentinel for useOptionalSlot', () => {
-    let optionalSlot: SlotComponent<TextProps> | null | undefined;
-    const Consumer = () => {
-      optionalSlot = useOptionalSlot<TextProps>(undefined, {});
-      return null;
-    };
-
-    act(() => {
-      renderer.create(<Consumer />);
-    });
-
-    expect(optionalSlot).toBeNull();
-  });
-
   it('accepts a component with required props when base props provide them', () => {
     let component: renderer.ReactTestRenderer;
     act(() => {

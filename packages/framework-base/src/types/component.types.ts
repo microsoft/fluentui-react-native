@@ -2,8 +2,12 @@ import type React from 'react';
 import type { SlotComponent } from './render.types';
 import type { PropsOf, PropsWithRefOf } from './props.types';
 
+/**
+ * Internal acceptance type
+ * @internal
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AnyComponent = React.ComponentType<any>;
+export type AnyComponent = React.ComponentType<any>;
 
 /**
  * Component and slot building blocks for generated components that align with newer versions of the fluent react library.
@@ -153,4 +157,110 @@ type RequiredOrOptionalSlot<T extends AnyComponent | null> = [null] extends [T]
  */
 export type ComponentState<Slots extends SlotPropsRecord> = {
   [K in keyof Slots]: RequiredOrOptionalSlot<Slots[K]>;
+};
+
+/**
+ * A property transform function that can be used as part of a slot component. It will take the final merged props before
+ * they are rendered and allow for modifications to be made to them.
+ */
+export type PropsTransform<Type extends AnyComponent> = (props: PropsWithRefOf<Type>) => PropsWithRefOf<Type>;
+
+export type SlotOptions<Type extends AnyComponent> = {
+  /**
+   * Additional props that should be merged with props passed to the slot component. The user-provided props will take
+   * precedence over these default props.
+   */
+  defaultProps?: Partial<PropsWithRefOf<Type>>;
+
+  /**
+   * Optional props transformation function
+   */
+  transform?: PropsTransform<Type>;
+
+  /**
+   * Whether the slot should be rendered by default if undefined is passed in to the slot prop. This is only valid
+   * for optional slots, it will be ignored for required slots.
+   */
+  renderByDefault?: boolean;
+};
+
+export type UseSlot = {
+  /**
+   * Component-aware overloads preserve intrinsic attributes such as native component refs.
+   */
+  <Type extends AnyComponent>(
+    component: Type,
+    props: Exclude<SlotProp<Type>, SlotShorthandValue>,
+    options?: PropsTransform<Type> | SlotOptions<Type>,
+  ): SlotComponent<Partial<PropsWithRefOf<Type>>>;
+  <Type extends AnyComponent>(
+    component: Type,
+    props: SlotProp<Type> | undefined,
+    options?: PropsTransform<Type> | SlotOptions<Type>,
+  ): SlotComponent<Partial<PropsWithRefOf<Type>>>;
+  /**
+   * Props-first overloads preserve compatibility with explicit calls such as useSlot<ViewProps>(View, props).
+   *
+   * First overload: fulfilled props
+   * - either no required props or all required props (except children) satisfied
+   * - result is a component that has partial props so there is no need to provide them again in jsx
+   */
+  <TProps>(
+    component: React.ComponentType<TProps>,
+    props: PropsOf<typeof component>,
+    options?: PropsTransform<React.ComponentType<TProps>> | SlotOptions<React.ComponentType<TProps>>,
+  ): SlotComponent<Partial<PropsWithRefOf<typeof component>>>;
+  /**
+   * Second overload: non-children props not fulfilled
+   * - result is a component that requires all required props to be provided in the jsx
+   */
+  <TProps>(
+    component: React.ComponentType<TProps>,
+    props: Partial<PropsOf<typeof component>>,
+    options?: PropsTransform<React.ComponentType<TProps>> | SlotOptions<React.ComponentType<TProps>>,
+  ): SlotComponent<PropsWithRefOf<typeof component>>;
+};
+
+/**
+ * useOptionalSlot signature, will conditionally return a slot component or undefined.
+ * - if the value of props is null this will return undefined for the slot
+ * - if the value of props is undefined and renderByDefault is true, this will return a slot component with default props
+ * - if the value of props is undefined and renderByDefault is false, this will return undefined for the slot
+ * - if the value of props is a valid slot prop, this will return a slot component with the merged props
+ */
+export type UseOptionalSlot = {
+  /**
+   * Component-aware overloads preserve intrinsic attributes such as native component refs.
+   */
+  <Type extends AnyComponent>(
+    component: Type,
+    props: Exclude<SlotProp<Type>, SlotShorthandValue>,
+    options?: PropsTransform<Type> | SlotOptions<Type>,
+  ): SlotComponent<Partial<PropsWithRefOf<Type>>> | undefined;
+  <Type extends AnyComponent>(
+    component: Type,
+    props: SlotProp<Type> | undefined | null,
+    options?: PropsTransform<Type> | SlotOptions<Type>,
+  ): SlotComponent<Partial<PropsWithRefOf<Type>>> | undefined;
+  /**
+   * Props-first overloads preserve compatibility with explicit calls such as useOptionalSlot<ViewProps>(View, props).
+   *
+   * First overload: fulfilled props
+   * - either no required props or all required props (except children) satisfied
+   * - result is a component that has partial props so there is no need to provide them again in jsx
+   */
+  <TProps>(
+    component: React.ComponentType<TProps>,
+    props: PropsOf<typeof component> | undefined | null,
+    options?: PropsTransform<React.ComponentType<TProps>> | SlotOptions<React.ComponentType<TProps>>,
+  ): SlotComponent<Partial<PropsWithRefOf<typeof component>>> | undefined;
+  /**
+   * Second overload: non-children props not fulfilled
+   * - result is a component that requires all required props to be provided in the jsx
+   */
+  <TProps>(
+    component: React.ComponentType<TProps>,
+    props: Partial<PropsOf<typeof component>> | undefined | null,
+    options?: PropsTransform<React.ComponentType<TProps>> | SlotOptions<React.ComponentType<TProps>>,
+  ): SlotComponent<PropsWithRefOf<typeof component>> | undefined;
 };
