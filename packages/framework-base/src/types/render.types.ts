@@ -1,6 +1,6 @@
 import type React from 'react';
 import type { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const';
-import type { PropsOf } from './props.types';
+import type { PropsOf, PropsWithRefOf } from './props.types';
 
 /**
  * Base types for rendering components in a react application, extracted from react types.
@@ -140,6 +140,23 @@ export type PropsTransform<TPropsIn, TPropsOut = TPropsIn> = (props: TPropsIn) =
  */
 export type UseSlot = {
   /**
+   * Component-aware overloads preserve intrinsic attributes such as native component refs.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  <Type extends React.ComponentType<any>>(
+    component: Type,
+    props: PropsWithRefOf<Type>,
+    transform?: PropsTransform<PropsWithRefOf<Type>>,
+  ): SlotComponent<Partial<PropsWithRefOf<Type>>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  <Type extends React.ComponentType<any>>(
+    component: Type,
+    props: Partial<PropsWithRefOf<Type>>,
+    transform?: PropsTransform<PropsWithRefOf<Type>>,
+  ): SlotComponent<PropsWithRefOf<Type>>;
+  /**
+   * Props-first overloads preserve compatibility with explicit calls such as useSlot<ViewProps>(View, props).
+   *
    * First overload: fulfilled props
    * - either no required props or all required props (except children) satisfied
    * - result is a component that has partial props so there is no need to provide them again in jsx
@@ -166,17 +183,34 @@ export type UseSlot = {
  */
 export type UseOptionalSlot = {
   /**
-   * Third overload: component type is undefined or null
+   * Component-aware overloads preserve intrinsic attributes such as native component refs.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  <Type extends React.ComponentType<any>>(
+    component: Type | undefined | null,
+    props: PropsWithRefOf<Type>,
+    transform?: PropsTransform<PropsWithRefOf<Type>>,
+  ): SlotComponent<Partial<PropsWithRefOf<Type>>> | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  <Type extends React.ComponentType<any>>(
+    component: Type | undefined | null,
+    props: Partial<PropsWithRefOf<Type>>,
+    transform?: PropsTransform<PropsWithRefOf<Type>>,
+  ): SlotComponent<PropsWithRefOf<Type>> | null;
+  /**
+   * Props-first overloads preserve compatibility with explicit generic calls.
+   *
+   * Component type is undefined or null
    * - result is a null return result
    */
   <TProps>(
     component: React.ComponentType<TProps> | undefined | null,
     props: PropsOf<typeof component, TProps>,
     transform?: PropsTransform<TProps>,
-  ): SlotComponent<Partial<PropsOf<typeof component, TProps>>> | undefined;
+  ): SlotComponent<Partial<PropsOf<typeof component, TProps>>> | null;
   <TProps>(
     component: React.ComponentType<TProps> | undefined | null,
     props: Partial<PropsOf<typeof component, TProps>>,
     transform?: PropsTransform<TProps>,
-  ): SlotComponent<PropsOf<typeof component, TProps>> | undefined;
+  ): SlotComponent<PropsOf<typeof component, TProps>> | null;
 };

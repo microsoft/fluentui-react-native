@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type React from 'react';
+import type { HostComponent, Text, TextProps, View, ViewProps } from 'react-native';
 
 import type { ComponentProps, ComponentState, OptionalSlot, OptionalSlotProp, Slot, SlotComponent, SlotProp } from '../index';
 
@@ -23,6 +24,8 @@ type MissingRootProps = {
 
 type RootComponent = React.FunctionComponent<RootProps>;
 type ContentComponent = React.FunctionComponent<ContentProps>;
+type CompatibleTextComponent = React.FunctionComponent<TextProps>;
+type IncompatibleTextComponent = React.FunctionComponent<{ unsupportedRequiredProp: string }>;
 
 type TestSlots = {
   root: Slot<RootComponent>;
@@ -32,6 +35,23 @@ type TestSlots = {
 
 type TestComponentProps = ComponentProps<TestSlots>;
 type TestComponentState = ComponentState<TestSlots>;
+
+type NativeSlots = {
+  root: Slot<typeof View>;
+};
+
+type CodegenNativeProps = ViewProps & {
+  requiredNativeProp: string;
+};
+
+type CodegenSlots = {
+  root: Slot<HostComponent<CodegenNativeProps>>;
+};
+
+type NativeComponentProps = ComponentProps<NativeSlots>;
+type NativeComponentState = ComponentState<NativeSlots>;
+type CodegenComponentProps = ComponentProps<CodegenSlots>;
+type CodegenComponentState = ComponentState<CodegenSlots>;
 
 const componentPropsRequireRootProps: Expect<Equal<Extends<MissingRootProps, TestComponentProps>, false>> = true;
 const componentPropsAllowOmittedSlots: Expect<Extends<{ requiredRootProp: string }, TestComponentProps>> = true;
@@ -45,6 +65,14 @@ const optionalStateSlotHasConcretePropsOrUndefined: Expect<Equal<TestComponentSt
 const componentAcceptanceTypesRemainValidSlots: Expect<Equal<Slot<React.ComponentType<ContentProps>>, React.ComponentType<ContentProps>>> =
   true;
 const slotPropUsesComponentProps: Expect<Extends<ContentProps, SlotProp<ContentComponent>>> = true;
+const nativeSlotPropAllowsPropsCompatibleAs: Expect<Extends<{ as: CompatibleTextComponent }, SlotProp<typeof Text>>> = true;
+const nativeSlotPropRejectsIncompatibleAs: Expect<Equal<Extends<{ as: IncompatibleTextComponent }, SlotProp<typeof Text>>, false>> = true;
+const nativeSlotPropAllowsRef: Expect<Extends<{ ref: React.Ref<View> }, SlotProp<typeof View>>> = true;
+const nativeRootPropsExcludeRef: Expect<Equal<'ref' extends keyof NativeComponentProps ? true : false, false>> = true;
+const nativeRootStateIncludesRef: Expect<Extends<{ ref: React.Ref<View> }, Parameters<NativeComponentState['root']>[0]>> = true;
+const codegenRootPropsExcludeRef: Expect<Equal<'ref' extends keyof CodegenComponentProps ? true : false, false>> = true;
+const codegenRootStateIncludesRef: Expect<Equal<'ref' extends keyof Parameters<CodegenComponentState['root']>[0] ? true : false, true>> =
+  true;
 const optionalSlotPropAllowsNull: Expect<Extends<null, OptionalSlotProp<ContentComponent>>> = true;
 
 describe('component slot type consistency', () => {
@@ -58,6 +86,13 @@ describe('component slot type consistency', () => {
     expect(optionalStateSlotHasConcretePropsOrUndefined).toBe(true);
     expect(componentAcceptanceTypesRemainValidSlots).toBe(true);
     expect(slotPropUsesComponentProps).toBe(true);
+    expect(nativeSlotPropAllowsPropsCompatibleAs).toBe(true);
+    expect(nativeSlotPropRejectsIncompatibleAs).toBe(true);
+    expect(nativeSlotPropAllowsRef).toBe(true);
+    expect(nativeRootPropsExcludeRef).toBe(true);
+    expect(nativeRootStateIncludesRef).toBe(true);
+    expect(codegenRootPropsExcludeRef).toBe(true);
+    expect(codegenRootStateIncludesRef).toBe(true);
     expect(optionalSlotPropAllowsNull).toBe(true);
   });
 });

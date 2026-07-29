@@ -36,6 +36,13 @@ export type ObjectFallback = Record<string, unknown>;
 export type PropsOf<TComponent, TFallback = never> = TComponent extends React.JSXElementConstructor<infer P> ? P : TFallback;
 
 /**
+ * Get the props from a React component type, including its ref when the component supports one.
+ */
+export type PropsWithRefOf<TComponent, TFallback = never> = TComponent extends React.ElementType
+  ? React.ComponentPropsWithRef<TComponent>
+  : TFallback;
+
+/**
  * Removes the 'ref' prop from the given Props type, leaving unions intact (such as the discriminated union created by
  * IntrinsicSlotProps). This allows IntrinsicSlotProps to be used with React.forwardRef.
  */

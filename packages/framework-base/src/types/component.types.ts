@@ -1,6 +1,6 @@
 import type React from 'react';
 import type { SlotComponent } from './render.types';
-import type { PropsOf } from './props.types';
+import type { PropsOf, PropsWithRefOf } from './props.types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyComponent = React.ComponentType<any>;
@@ -84,13 +84,15 @@ export type SlotShorthandValue = React.ReactElement | string | number | Iterable
  */
 type WithSlotShorthandValue<Props> = Props | ('children' extends keyof Props ? Extract<SlotShorthandValue, Props['children']> : never);
 
-/** strip null and undefined from the {@link Slot} type then infer the props of the remaining type */
-type PropsOfSlot<T extends AnyComponent | null> = PropsOf<NonNullable<T>>;
+/** Infer props for a resolved slot component, including its native ref when supported. */
+type ResolvedPropsOfSlot<T extends AnyComponent | null> = PropsWithRefOf<NonNullable<T>>;
 
 /**
  * Declare a slot prop for a component from a component type. This is the type of the prop added to the outer component props.
  */
-export type SlotProp<Type extends AnyComponent> = WithSlotShorthandValue<PropsOf<Type>> | ({ as?: Type } & PropsOf<Type>);
+export type SlotProp<Type extends AnyComponent> =
+  | WithSlotShorthandValue<PropsWithRefOf<Type>>
+  | ({ as?: React.ComponentType<PropsOf<Type>> } & PropsWithRefOf<Type>);
 
 /**
  * Maps a declared slot component to its public prop type, preserving null for optional slots.
@@ -123,7 +125,7 @@ export type SlotPropsRecord = Record<string, AnyComponent | null>;
  */
 export type ComponentProps<
   Slots extends SlotPropsRecord,
-  RootProps = PropsOfSlot<Slots['root']>,
+  RootProps = PropsOf<NonNullable<Slots['root']>>,
 > = NonRootSlotPropsToComponentProps<Slots> & RootProps;
 
 /**
@@ -141,8 +143,8 @@ export type OptionalSlotProp<Type extends AnyComponent> = SlotProp<Type> | null;
  * @internal
  */
 type RequiredOrOptionalSlot<T extends AnyComponent | null> = [null] extends [T]
-  ? SlotComponent<PropsOfSlot<T>> | undefined
-  : SlotComponent<PropsOfSlot<T>>;
+  ? SlotComponent<ResolvedPropsOfSlot<T>> | undefined
+  : SlotComponent<ResolvedPropsOfSlot<T>>;
 
 /**
  * The state object for the component that contains slot information, derived from the slot record type. Slots that

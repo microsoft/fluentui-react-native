@@ -3,14 +3,14 @@ import * as React from 'react';
 import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 
-import type { FunctionComponent } from '../types/render.types';
+import type { FunctionComponent, SlotComponent } from '../types/render.types';
 import { mergeStyles } from '../merge-props/mergeStyles';
 import * as renderer from 'react-test-renderer';
 import { act } from 'react';
 
 import { phasedComponent, stagedComponent } from './phased';
 import { directComponent, legacyDirectComponent } from './direct';
-import { useOptionalSlotProp, useSlot } from './useSlot';
+import { useOptionalSlot, useOptionalSlotProp, useSlot, useSlotProp } from './useSlot';
 import { createSlotComponent } from './render';
 import { isDirectComponent, isLegacyDirectComponent, isPhasedComponent, isSlotComponent, isStagedComponent } from './identify';
 import type { FurnJSX } from '../types/react.types';
@@ -136,12 +136,53 @@ type OptionalSlotPropConsumerProps = {
   slot?: TextProps | SlotShorthandValue | null;
 };
 
+type RequiredSlotProps = {
+  required: string;
+};
+
+const RequiredSlotComponent: React.FunctionComponent<RequiredSlotProps> = ({ required }) => <Text>{required}</Text>;
+
+const RequiredSlotPropConsumer: React.FunctionComponent = () => {
+  const RequiredSlot = useSlotProp(undefined, RequiredSlotComponent, { required: 'resolved' });
+  return <RequiredSlot />;
+};
+
+const UnresolvedRequiredSlotPropConsumer: React.FunctionComponent = () => {
+  const RequiredSlot = useSlotProp(undefined, RequiredSlotComponent, {});
+  // @ts-expect-error The required prop was not resolved by the slot prop or base props.
+  return <RequiredSlot />;
+};
+
 const OptionalSlotPropConsumer: React.FunctionComponent<OptionalSlotPropConsumerProps> = ({ slot }) => {
-  const OptionalText = useOptionalSlotProp<TextProps>(slot, Text, { testID: 'optional-slot' });
+  const OptionalText = useOptionalSlotProp(slot, Text, { testID: 'optional-slot' });
   return <View>{OptionalText ? <OptionalText /> : null}</View>;
 };
 
 describe('slot prop resolution', () => {
+  it('preserves null as the absence sentinel for useOptionalSlot', () => {
+    let optionalSlot: SlotComponent<TextProps> | null | undefined;
+    const Consumer = () => {
+      optionalSlot = useOptionalSlot<TextProps>(undefined, {});
+      return null;
+    };
+
+    act(() => {
+      renderer.create(<Consumer />);
+    });
+
+    expect(optionalSlot).toBeNull();
+  });
+
+  it('accepts a component with required props when base props provide them', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<RequiredSlotPropConsumer />);
+    });
+
+    expect(component!.root.findByType(Text).props.children).toBe('resolved');
+    expect(UnresolvedRequiredSlotPropConsumer).toBeDefined();
+  });
+
   it('renders an optional slot only when its prop is provided', () => {
     let component: renderer.ReactTestRenderer;
     act(() => {
@@ -192,6 +233,29 @@ class ClassAccept extends React.Component<AcceptProps> {
     return <Text>{this.props.title}</Text>;
   }
 }
+
+class NativeRefAccept extends React.Component<AcceptProps> {
+  public override render(): FurnJSX.Element {
+    return <Text>{this.props.title}</Text>;
+  }
+}
+
+const ForwardedNativeRefAccept = React.forwardRef<NativeRefAccept, AcceptProps>((props, ref) => <NativeRefAccept ref={ref} {...props} />);
+
+type NativeRefConsumerProps = {
+  baseRef: React.Ref<NativeRefAccept>;
+  userRef: React.Ref<NativeRefAccept>;
+};
+
+const NativeRefConsumer: React.FunctionComponent<NativeRefConsumerProps> = ({ baseRef, userRef }) => {
+  const NativeSlot = useSlot(NativeRefAccept, { ref: baseRef, title: 'native' }, ({ title }) => ({ title }));
+  return <NativeSlot ref={userRef} />;
+};
+
+const NativeOverrideRefConsumer: React.FunctionComponent<{ userRef: React.Ref<NativeRefAccept> }> = ({ userRef }) => {
+  const NativeSlot = useSlotProp({ as: ForwardedNativeRefAccept }, NativeRefAccept, { title: 'native override' });
+  return <NativeSlot ref={userRef} />;
+};
 
 const PhasedAccept = phasedComponent((_props: AcceptProps) => directComponent<AcceptProps>((extra: AcceptProps) => <Text {...extra} />));
 
@@ -287,6 +351,48 @@ describe('slot intrinsic attribute acceptance', () => {
     } finally {
       consoleError.mockRestore();
     }
+  });
+
+  it('forwards and stably composes native slot refs', () => {
+    const baseRef = jest.fn();
+    const userRef = jest.fn();
+    let component: renderer.ReactTestRenderer;
+
+    act(() => {
+      component = renderer.create(<NativeRefConsumer baseRef={baseRef} userRef={userRef} />);
+    });
+
+    expect(baseRef).toHaveBeenCalledTimes(1);
+    expect(userRef).toHaveBeenCalledTimes(1);
+    expect(baseRef.mock.calls[0][0]).toBeInstanceOf(NativeRefAccept);
+    expect(userRef.mock.calls[0][0]).toBe(baseRef.mock.calls[0][0]);
+
+    act(() => {
+      component!.update(<NativeRefConsumer baseRef={baseRef} userRef={userRef} />);
+    });
+    expect(baseRef).toHaveBeenCalledTimes(1);
+    expect(userRef).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      component!.unmount();
+    });
+    expect(baseRef).toHaveBeenLastCalledWith(null);
+    expect(userRef).toHaveBeenLastCalledWith(null);
+  });
+
+  it('forwards native refs through a compatible as override', () => {
+    const userRef = React.createRef<NativeRefAccept>();
+    let component: renderer.ReactTestRenderer;
+
+    act(() => {
+      component = renderer.create(<NativeOverrideRefConsumer userRef={userRef} />);
+    });
+    expect(userRef.current).toBeInstanceOf(NativeRefAccept);
+
+    act(() => {
+      component!.unmount();
+    });
+    expect(userRef.current).toBeNull();
   });
 });
 

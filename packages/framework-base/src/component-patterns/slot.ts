@@ -1,8 +1,80 @@
-import type React from 'react';
+import React from 'react';
 import type { PropsTransform, SlotComponent } from '../types/render.types';
 import { SLOT_COMPONENT_KEY, SLOT_PROPS_KEY, SLOT_PROP_TRANSFORM_KEY } from '../const';
 import { mergeProps } from '../merge-props/mergeProps';
 import { assignProps } from '../merge-props/assignProps';
+
+type SlotRef = React.Ref<unknown>;
+type RefCleanup = void | (() => void);
+type MergedRefCache = WeakMap<object, WeakMap<object, React.RefCallback<unknown>>>;
+
+const mergedRefCaches = new WeakMap<object, MergedRefCache>();
+const supportsRefCleanup = Number.parseInt(React.version, 10) >= 19;
+
+function getPropsRef(props: unknown): SlotRef | undefined {
+  return props != null && typeof props === 'object' && 'ref' in props ? (props as { ref?: SlotRef }).ref : undefined;
+}
+
+function isUsableRef(ref: SlotRef | undefined): ref is Exclude<SlotRef, null> {
+  return typeof ref === 'function' || (typeof ref === 'object' && ref !== null);
+}
+
+function setRef(ref: Exclude<SlotRef, null>, value: unknown | null): RefCleanup {
+  if (typeof ref === 'function') {
+    const cleanup = ref(value);
+    return typeof cleanup === 'function' ? cleanup : undefined;
+  }
+  (ref as React.MutableRefObject<unknown | null>).current = value;
+}
+
+function createMergedRef(first: Exclude<SlotRef, null>, second: Exclude<SlotRef, null>): React.RefCallback<unknown> {
+  return (value) => {
+    if (value == null) {
+      setRef(first, null);
+      setRef(second, null);
+      return;
+    }
+
+    const firstCleanup = setRef(first, value);
+    const secondCleanup = setRef(second, value);
+    if (!supportsRefCleanup) {
+      return;
+    }
+    return () => {
+      typeof firstCleanup === 'function' ? firstCleanup() : setRef(first, null);
+      typeof secondCleanup === 'function' ? secondCleanup() : setRef(second, null);
+    };
+  };
+}
+
+function mergeSlotRefs(
+  slotInfo: object,
+  first: Exclude<SlotRef, null>,
+  second: Exclude<SlotRef, null>,
+): React.RefCallback<unknown> | Exclude<SlotRef, null> {
+  if (first === second) {
+    return first;
+  }
+
+  let firstRefs = mergedRefCaches.get(slotInfo);
+  if (firstRefs === undefined) {
+    firstRefs = new WeakMap();
+    mergedRefCaches.set(slotInfo, firstRefs);
+  }
+
+  let secondRefs = firstRefs.get(first);
+  if (secondRefs === undefined) {
+    secondRefs = new WeakMap();
+    firstRefs.set(first, secondRefs);
+  }
+
+  let mergedRef = secondRefs.get(second);
+  if (mergedRef === undefined) {
+    mergedRef = createMergedRef(first, second);
+    secondRefs.set(second, mergedRef);
+  }
+  return mergedRef;
+}
 
 /**
  * Convenience type, just referencing the statics of the component
@@ -42,8 +114,26 @@ export function setSlotStatics<TProps>(
 export function prepareSlotProps<TProps>(slotInfo: SlotComponentStatics<TProps>, userProps?: TProps): TProps {
   const baseProps = slotInfo[SLOT_PROPS_KEY];
   const transform = slotInfo[SLOT_PROP_TRANSFORM_KEY];
-  const mergedProps = mergeProps<TProps>(baseProps, userProps) ?? ({} as TProps);
-  return transform ? transform(mergedProps) : mergedProps;
+  const baseRef = getPropsRef(baseProps);
+  const userRef = getPropsRef(userProps);
+  let mergedProps = mergeProps<TProps>(baseProps, userProps) ?? ({} as TProps);
+  if (isUsableRef(baseRef) && isUsableRef(userRef)) {
+    mergedProps = { ...mergedProps, ref: mergeSlotRefs(slotInfo, baseRef, userRef) };
+  }
+  if (!transform) {
+    return mergedProps;
+  }
+
+  let transformedProps = transform(mergedProps);
+  const mergedRef = getPropsRef(mergedProps);
+  const transformedRef = getPropsRef(transformedProps);
+  if (isUsableRef(mergedRef) && transformedRef !== mergedRef) {
+    transformedProps = {
+      ...transformedProps,
+      ref: isUsableRef(transformedRef) ? mergeSlotRefs(slotInfo, mergedRef, transformedRef) : mergedRef,
+    };
+  }
+  return transformedProps;
 }
 
 /**

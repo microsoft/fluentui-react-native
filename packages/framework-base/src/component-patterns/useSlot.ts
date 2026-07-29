@@ -6,9 +6,13 @@ import { createSlotComponent } from './render';
 import { isPhasedComponent, isSlotShorthandValue, isStagedComponent } from './identify';
 import { SLOT_COMPONENT_KEY } from '../const';
 import { prepareStagedProps } from './phased';
-import type { SlotShorthandValue } from '../types/component.types';
+import type { SlotProp, SlotShorthandValue } from '../types/component.types';
+import type { PropsWithRefOf } from '../types/props.types';
 import { mergeProps } from '../merge-props/mergeProps';
 import { isObject } from '../utilities/typeUtils';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyComponent = React.ComponentType<any>;
 
 /**
  * The core useSlot hook implementation, while the return result will always be a SlotComponent, the implementation will fork
@@ -73,9 +77,9 @@ export const useOptionalSlot: UseOptionalSlot = <TProps>(
   component: React.ComponentType<TProps> | undefined | null,
   hookProps: Partial<TProps> = {},
   transform?: PropsTransform<TProps>,
-): SlotComponent<TProps> | undefined => {
+): SlotComponent<TProps> | null => {
   // just create the hook itself
-  const slotRef = React.useRef<SlotComponent<TProps> | undefined>(undefined);
+  const slotRef = React.useRef<SlotComponent<TProps> | null>(null);
   if (component != null) {
     if (slotRef.current == null) {
       slotRef.current = createSlotComponent<TProps>(component, hookProps, transform);
@@ -84,7 +88,7 @@ export const useOptionalSlot: UseOptionalSlot = <TProps>(
       setSlotStatics(slotRef.current, component, hookProps, transform);
     }
   } else {
-    slotRef.current = undefined;
+    slotRef.current = null;
   }
   return slotRef.current;
 };
@@ -98,13 +102,27 @@ export const useOptionalSlot: UseOptionalSlot = <TProps>(
  * @param baseProps the base props to merge with the prop's props
  * @returns a slot component with the resolved component and props
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export function useSlotProp<Props extends {}>(
-  prop: Props | SlotShorthandValue | null | undefined,
-  baseComponent: React.ComponentType,
-  baseProps: Partial<Props> = {},
-): SlotComponent<Partial<Props>> {
-  return useSlot(...resolveSlotProps(prop, baseComponent, baseProps));
+export function useSlotProp<Type extends AnyComponent>(
+  prop: Exclude<SlotProp<Type>, SlotShorthandValue>,
+  baseComponent: Type,
+  baseProps?: Partial<PropsWithRefOf<Type>>,
+): SlotComponent<Partial<PropsWithRefOf<Type>>>;
+export function useSlotProp<Type extends AnyComponent>(
+  prop: SlotProp<Type> | null | undefined,
+  baseComponent: Type,
+  baseProps: PropsWithRefOf<Type>,
+): SlotComponent<Partial<PropsWithRefOf<Type>>>;
+export function useSlotProp<Type extends AnyComponent>(
+  prop: SlotProp<Type> | null | undefined,
+  baseComponent: Type,
+  baseProps?: Partial<PropsWithRefOf<Type>>,
+): SlotComponent<PropsWithRefOf<Type>>;
+export function useSlotProp<Type extends AnyComponent>(
+  prop: SlotProp<Type> | null | undefined,
+  baseComponent: Type,
+  baseProps: Partial<PropsWithRefOf<Type>> = {},
+): SlotComponent<PropsWithRefOf<Type>> {
+  return useSlot<PropsWithRefOf<Type>>(...resolveSlotProps(prop, baseComponent, baseProps));
 }
 
 /**
@@ -116,14 +134,28 @@ export function useSlotProp<Props extends {}>(
  * @param baseProps the base props to merge with the prop's props
  * @returns a slot component with the resolved component and props, or undefined if no component is specified
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export function useOptionalSlotProp<Props extends {}>(
-  prop: Props | SlotShorthandValue | null | undefined,
-  baseComponent: React.ComponentType,
-  baseProps: Partial<Props> = {},
-): SlotComponent<Partial<Props>> | undefined {
+export function useOptionalSlotProp<Type extends AnyComponent>(
+  prop: Exclude<SlotProp<Type>, SlotShorthandValue>,
+  baseComponent: Type,
+  baseProps?: Partial<PropsWithRefOf<Type>>,
+): SlotComponent<Partial<PropsWithRefOf<Type>>> | undefined;
+export function useOptionalSlotProp<Type extends AnyComponent>(
+  prop: SlotProp<Type> | null | undefined,
+  baseComponent: Type,
+  baseProps: PropsWithRefOf<Type>,
+): SlotComponent<Partial<PropsWithRefOf<Type>>> | undefined;
+export function useOptionalSlotProp<Type extends AnyComponent>(
+  prop: SlotProp<Type> | null | undefined,
+  baseComponent: Type,
+  baseProps?: Partial<PropsWithRefOf<Type>>,
+): SlotComponent<PropsWithRefOf<Type>> | undefined;
+export function useOptionalSlotProp<Type extends AnyComponent>(
+  prop: SlotProp<Type> | null | undefined,
+  baseComponent: Type,
+  baseProps: Partial<PropsWithRefOf<Type>> = {},
+): SlotComponent<PropsWithRefOf<Type>> | undefined {
   const [component, props] = resolveSlotProps(prop, baseComponent, baseProps);
-  return useOptionalSlot(prop == null ? undefined : component, props);
+  return useOptionalSlot<PropsWithRefOf<Type>>(prop == null ? undefined : component, props) ?? undefined;
 }
 
 /**
@@ -133,23 +165,24 @@ export function useOptionalSlotProp<Props extends {}>(
  * @param baseProps The base props to merge with the prop's props.
  * @returns A tuple containing the resolved component and props.
  */
-function resolveSlotProps<Props>(
-  prop: Props | SlotShorthandValue | null | undefined,
-  baseComponent: React.ComponentType,
-  baseProps: Partial<Props> = {},
-): [React.ComponentType, Props] {
+function resolveSlotProps<Type extends AnyComponent>(
+  prop: SlotProp<Type> | null | undefined,
+  baseComponent: Type,
+  baseProps: Partial<PropsWithRefOf<Type>> = {},
+): [React.ComponentType<PropsWithRefOf<Type>>, Partial<PropsWithRefOf<Type>>] {
+  let component: React.ComponentType<PropsWithRefOf<Type>> = baseComponent;
   if (prop != null) {
     if (isSlotShorthandValue(prop)) {
       baseProps = { ...baseProps, children: prop };
     } else if (isObject(prop)) {
-      const { as, ...userProps } = prop as { as?: React.ComponentType };
+      const { as, ...userProps } = prop as { as?: React.ComponentType<PropsWithRefOf<Type>> };
       if (as != null) {
-        baseComponent = as;
+        component = as;
       }
       if (userProps != null && Object.keys(userProps).length > 0) {
         baseProps = mergeProps(baseProps, userProps);
       }
     }
   }
-  return [baseComponent, baseProps as Props];
+  return [component, baseProps];
 }
