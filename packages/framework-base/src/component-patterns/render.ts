@@ -109,9 +109,9 @@ export function createSlotComponent<TProps>(
   transform?: PropsTransform<TProps>,
 ): SlotComponent<TProps> {
   const slot: SlotComponent<TProps> = Object.assign(
-    (props: TProps) => {
-      props = prepareSlotProps(slot, props);
-      return renderForJsxRuntime(component, props);
+    (props: Partial<TProps>) => {
+      const mergedProps = prepareSlotProps(slot, props);
+      return renderForJsxRuntime(component, mergedProps);
     },
     setSlotStatics<TProps>({}, component, props, transform),
   );
