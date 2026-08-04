@@ -855,6 +855,9 @@ export const strokeWidthNone = 0;
  * Platform specific constants that are shared across all platforms.
  */
 export {
+  fontFamilyBase,
+  fontFamilyMonospace,
+  fontFamilyNumeric,
   fontLineHeight100,
   fontLineHeight200,
   fontLineHeight300,

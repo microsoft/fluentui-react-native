@@ -3,6 +3,8 @@
  */
 
 export const fontFamilyBase = 'Roboto';
+export const fontFamilyMonospace = 'Roboto';
+export const fontFamilyNumeric = 'Roboto';
 export const fontLineHeight200 = 16;
 export const fontLineHeight300 = 18;
 export const fontLineHeight400 = 24;

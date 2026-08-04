@@ -18,19 +18,19 @@ tokens:
     rest:
       Image: n/a — background is covered by the image fill.
       Icon:
-        token: colorBackgroundNeutralSoft
+        token: color.backgroundNeutralSoft
         rationale: Light neutral background (high lightness step from neutral ramp) provides a visible container behind the icon. Paired with neutral-primary foreground for contrast.
       Initials:
-        token: colorBackgroundNeutralSoft
+        token: color.backgroundNeutralSoft
         rationale: Same container logic as Icon — provides visual distinction from the page background.
   foreground:
     rest:
       Image: n/a
       Icon:
-        token: colorForegroundNeutralPrimary
+        token: color.foregroundNeutralPrimary
         rationale: Near-black neutral; high contrast against soft neutral background. See accessibility.md for WCAG citations.
       Initials:
-        token: colorForegroundNeutralPrimary
+        token: color.foregroundNeutralPrimary
         rationale: Consistent with Icon mode; primary foreground reads clearly on soft neutral background.
   stroke:
     container: no-stroke
@@ -42,7 +42,7 @@ tokens:
     focus: Avatar is non-interactive — no focus ring.
 
   radius:
-    all: borderRadiusCircular
+    all: borderRadius.circular
     notes: Circular radius applies to all Content modes and all Sizes.
 
   typography:
@@ -55,7 +55,7 @@ tokens:
       40: textstyle-functional-body-large
       56: textstyle-functional-title-small
       120: textstyle-functional-title-large
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
     initials-line-height-override:
       all-sizes: 1
       rationale: >
@@ -77,38 +77,38 @@ tokens:
 
   spacing:
     all:
-      16: spacingComponentBase50
-      20: spacingComponentBase50
-      24: spacingComponentBase100
-      28: spacingComponentBase150
-      32: spacingComponentBase100
-      40: spacingComponentBase200
-      56: spacingComponentBase300
-      120: spacingLayoutBase400
+      16: spacing.componentBase50
+      20: spacing.componentBase50
+      24: spacing.componentBase100
+      28: spacing.componentBase150
+      32: spacing.componentBase100
+      40: spacing.componentBase200
+      56: spacing.componentBase300
+      120: spacing.layoutBase400
     notes: >
       Padding is uniform on all four sides (symmetric circle). Content is centered within the container.
       min-height matches each numeric size (e.g., 16px at size 16, 28px at size 28).
 
   activity-ring:
-    stroke-color: colorStrokeBrandLoud
+    stroke-color: color.strokeBrandLoud
     offset:
-      16: strokeWidthThin
-      20: strokeWidthThin
-      24: strokeWidthThin
-      28: strokeWidthThin
-      32: strokeWidthThin
-      40: strokeWidthThin
-      56: strokeWidthThin
-      120: strokeWidthThick
+      16: strokeWidth.thin
+      20: strokeWidth.thin
+      24: strokeWidth.thin
+      28: strokeWidth.thin
+      32: strokeWidth.thin
+      40: strokeWidth.thin
+      56: strokeWidth.thin
+      120: strokeWidth.thick
     stroke-width:
-      16: strokeWidthThin
-      20: strokeWidthThick
-      24: strokeWidthThick
-      28: strokeWidthThick
-      32: strokeWidthThick
-      40: strokeWidthThick
-      56: strokeWidthThicker
-      120: strokeWidthThicker
+      16: strokeWidth.thin
+      20: strokeWidth.thick
+      24: strokeWidth.thick
+      28: strokeWidth.thick
+      32: strokeWidth.thick
+      40: strokeWidth.thick
+      56: strokeWidth.thicker
+      120: strokeWidth.thicker
     notes: >
       Activity ring is rendered as an outline with an offset (CSS outline + outline-offset). The offset
       creates a true transparent gap between the container and the brand stroke, revealing whatever surface

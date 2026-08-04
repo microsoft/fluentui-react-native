@@ -18,104 +18,104 @@ tokens:
   background:
     rest:
       Unchecked:
-        value: colorBackgroundNeutralTransparent
-        hover: hover.colorBackgroundNeutralTransparent
-        pressed: pressed.colorBackgroundNeutralTransparent
+        value: color.backgroundNeutralTransparent
+        hover: color.hover.backgroundNeutralTransparent
+        pressed: color.pressed.backgroundNeutralTransparent
         rationale: No visual fill at rest; containment communicated by stroke alone.
       Checked:
-        value: colorBackgroundBrandHeavy
-        hover: hover.colorBackgroundBrandHeavy
-        pressed: pressed.colorBackgroundBrandHeavy
+        value: color.backgroundBrandHeavy
+        hover: color.hover.backgroundBrandHeavy
+        pressed: color.pressed.backgroundBrandHeavy
         rationale: Maximum-emphasis brand fill signals active selection.
       Indeterminate:
-        value: colorBackgroundBrandHeavy
-        hover: hover.colorBackgroundBrandHeavy
-        pressed: pressed.colorBackgroundBrandHeavy
+        value: color.backgroundBrandHeavy
+        hover: color.hover.backgroundBrandHeavy
+        pressed: color.pressed.backgroundBrandHeavy
         rationale: Matches Checked — partial selection carries equal visual weight.
     disabled:
-      Unchecked: colorBackgroundNeutralTransparent
-      Checked: colorBackgroundNeutralHeavyDisabled
-      Indeterminate: colorBackgroundNeutralHeavyDisabled
+      Unchecked: color.backgroundNeutralTransparent
+      Checked: color.backgroundNeutralHeavyDisabled
+      Indeterminate: color.backgroundNeutralHeavyDisabled
 
   foreground:
     indicator:
       rest:
         Checked:
-          value: colorForegroundBrandOnloud
-          hover: hover.colorForegroundBrandOnloud
-          pressed: pressed.colorForegroundBrandOnloud
+          value: color.foregroundBrandOnloud
+          hover: color.hover.foregroundBrandOnloud
+          pressed: color.pressed.foregroundBrandOnloud
           rationale: Inverted brand foreground paired with the brand-heavy background — brand-onloud preserves the brand relationship the neutral-onloud variant breaks.
         Indeterminate:
-          value: colorForegroundBrandOnloud
-          hover: hover.colorForegroundBrandOnloud
-          pressed: pressed.colorForegroundBrandOnloud
+          value: color.foregroundBrandOnloud
+          hover: color.hover.foregroundBrandOnloud
+          pressed: color.pressed.foregroundBrandOnloud
           rationale: Matches Checked — same brand pairing for the dash indicator on heavy brand background.
         Unchecked: n/a — no indicator icon visible.
       disabled:
-        Checked: colorForegroundNeutralDisabled
-        Indeterminate: colorForegroundNeutralDisabled
+        Checked: color.foregroundNeutralDisabled
+        Indeterminate: color.foregroundNeutralDisabled
     label:
       rest:
         Unchecked:
-          value: colorForegroundNeutralSecondary
-          hover: hover.colorForegroundNeutralSecondary
-          pressed: pressed.colorForegroundNeutralSecondary
+          value: color.foregroundNeutralSecondary
+          hover: color.hover.foregroundNeutralSecondary
+          pressed: color.pressed.foregroundNeutralSecondary
           rationale: De-emphasized label for unselected options — draws attention to selected items in a group.
         Checked:
-          value: colorForegroundNeutralPrimary
-          hover: hover.colorForegroundNeutralPrimary
-          pressed: pressed.colorForegroundNeutralPrimary
+          value: color.foregroundNeutralPrimary
+          hover: color.hover.foregroundNeutralPrimary
+          pressed: color.pressed.foregroundNeutralPrimary
           rationale: Full-emphasis label for selected options.
         Indeterminate:
-          value: colorForegroundNeutralPrimary
-          hover: hover.colorForegroundNeutralPrimary
-          pressed: pressed.colorForegroundNeutralPrimary
+          value: color.foregroundNeutralPrimary
+          hover: color.hover.foregroundNeutralPrimary
+          pressed: color.pressed.foregroundNeutralPrimary
           rationale: Matches Checked — partial selection is visually active.
       disabled:
-        Unchecked: colorForegroundNeutralDisabled
-        Checked: colorForegroundNeutralDisabled
-        Indeterminate: colorForegroundNeutralDisabled
+        Unchecked: color.foregroundNeutralDisabled
+        Checked: color.foregroundNeutralDisabled
+        Indeterminate: color.foregroundNeutralDisabled
     secondary-text:
       rationale: Stays at secondary regardless of Status — does not promote on Checked/Indeterminate.
       rest:
         Unchecked:
-          value: colorForegroundNeutralSecondary
-          hover: hover.colorForegroundNeutralSecondary
-          pressed: pressed.colorForegroundNeutralSecondary
+          value: color.foregroundNeutralSecondary
+          hover: color.hover.foregroundNeutralSecondary
+          pressed: color.pressed.foregroundNeutralSecondary
         Checked:
-          value: colorForegroundNeutralSecondary
-          hover: hover.colorForegroundNeutralSecondary
-          pressed: pressed.colorForegroundNeutralSecondary
+          value: color.foregroundNeutralSecondary
+          hover: color.hover.foregroundNeutralSecondary
+          pressed: color.pressed.foregroundNeutralSecondary
         Indeterminate:
-          value: colorForegroundNeutralSecondary
-          hover: hover.colorForegroundNeutralSecondary
-          pressed: pressed.colorForegroundNeutralSecondary
+          value: color.foregroundNeutralSecondary
+          hover: color.hover.foregroundNeutralSecondary
+          pressed: color.pressed.foregroundNeutralSecondary
       disabled:
-        Unchecked: colorForegroundNeutralDisabled
-        Checked: colorForegroundNeutralDisabled
-        Indeterminate: colorForegroundNeutralDisabled
+        Unchecked: color.foregroundNeutralDisabled
+        Checked: color.foregroundNeutralDisabled
+        Indeterminate: color.foregroundNeutralDisabled
 
   stroke:
-    width: strokeWidthThin
+    width: strokeWidth.thin
     width-rationale: Standard containment stroke for form controls; consistent with other atomic input components.
     rest:
       Unchecked:
-        value: colorStrokeNeutralHeavy
-        hover: hover.colorStrokeNeutralHeavy
-        pressed: pressed.colorStrokeNeutralHeavy
+        value: color.strokeNeutralHeavy
+        hover: color.hover.strokeNeutralHeavy
+        pressed: color.pressed.strokeNeutralHeavy
       Checked: transparent
       Indeterminate: transparent
     focus: See flex-system:styling — universal dual-outline focus ring.
     disabled:
-      Unchecked: colorStrokeNeutralDisabled
+      Unchecked: color.strokeNeutralDisabled
       Checked: transparent
       Indeterminate: transparent
 
   radius:
     indicator:
-      Standard: borderRadiusBase100
-      Circular: borderRadiusCircular
-    focus-ring: borderRadiusBase300
+      Standard: borderRadius.base100
+      Circular: borderRadius.circular
+    focus-ring: borderRadius.base300
     focus-ring-rationale: >
       Focus ring wraps the entire interactive area (indicator + label),
       so it uses a larger radius than the indicator itself.
@@ -123,16 +123,16 @@ tokens:
   typography:
     label:
       rest: textstyle-functional-body-medium
-      font-family: fontFamilyFunctional
+      font-family: fontFamily.functional
       notes: Single size — no per-size typography breakdown.
     secondary-text:
       token: textstyle-functional-body-small
-      font-family: fontFamilyFunctional
+      font-family: fontFamily.functional
       rationale: One step smaller than body-medium to create clear hierarchy between primary label and description.
 
   spacing:
     indicator:
-      margin: spacingComponentBase200
+      margin: spacing.componentBase200
       margin-rationale: >
         Margin on the visible indicator provides visual breathing room
         without introducing an extra DOM/Figma wrapper layer. The
@@ -142,24 +142,24 @@ tokens:
         alone rather than the Root, the indicator margin must still
         count toward the hit area so that indicator + margin meets
         WCAG 2.5.5/2.5.8 (24×24 minimum) — with the current
-        `spacingComponentBase200` value (8px), standalone
+        `spacing.componentBase200` value (8px), standalone
         indicator + margin = 16 + 2×8 = 32×32, comfortably above the
         minimum. Figma re-introduces a wrapper layer at export time
         when needed for auto-layout fidelity; the spec's canonical
         model is margin on the indicator.
     label-wrapper:
-      horizontal-end: spacingComponentBase200
-      vertical: spacingComponentBase150
+      horizontal-end: spacing.componentBase200
+      vertical: spacing.componentBase150
       rationale: >
         End-side padding only — provides breathing room after the label.
         No start-side padding — the gap token controls indicator-to-label spacing.
         Vertical padding vertically centers the text baseline with the indicator center.
-    label-inner-gap: spacingComponentBase50
+    label-inner-gap: spacing.componentBase50
     label-inner-gap-rationale: >
       Tightest tier between primary label and secondary text — they read as
       a single text cluster. Matches Label's internal gap (text ↔ required
       indicator) for consistency. Only applies when secondary text is visible.
-    gap: spacingComponentBase100
+    gap: spacing.componentBase100
     gap-rationale: Tightest component-category step for tightly coupled elements — controls indicator-to-label spacing.
 
   elevation: n/a

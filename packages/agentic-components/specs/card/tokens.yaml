@@ -29,18 +29,18 @@ tokens:
   background:
     surface:
       rest:
-        value: colorSurfaceNeutralTranslucent
-        hover: hover.colorSurfaceNeutralTranslucent
-        pressed: pressed.colorSurfaceNeutralTranslucent
+        value: color.surfaceNeutralTranslucent
+        hover: color.hover.surfaceNeutralTranslucent
+        pressed: color.pressed.surfaceNeutralTranslucent
         rationale: Translucent structural surface for the card boundary — a partially opaque layer over whatever sits behind it, without introducing a separate semantic family. See flex-system:color § neutral translucent.
       selected:
-        value: colorBackgroundNeutralSoft
-        hover: hover.colorBackgroundNeutralSoft
-        pressed: pressed.colorBackgroundNeutralSoft
+        value: color.backgroundNeutralSoft
+        hover: color.hover.backgroundNeutralSoft
+        pressed: color.pressed.backgroundNeutralSoft
         rationale: Soft neutral fill marks the selected card in a set without competing with the hover tint — mirrors the selected treatment in flex-components:listbox-item (selection = soft neutral, not a heavy/brand fill). (Inferred — Selected not in the design set; see analysis.)
-      disabled: colorBackgroundNeutralDisabled
+      disabled: color.backgroundNeutralDisabled
     nested-content-block:
-      token: colorBackgroundNeutralTranslucent
+      token: color.backgroundNeutralTranslucent
       rationale: Translucent component fill for the Nested layout's inner content block — distinct from the surface token so the inner block reads as a separate object on the surface. Layout=Nested only.
 
   foreground:
@@ -50,14 +50,14 @@ tokens:
       slotted text. No card-level foreground token is assigned.
 
   stroke:
-    width: strokeWidthThin
+    width: strokeWidth.thin
     width-rationale: A single hairline boundary is enough to delimit the surface; the card relies on the stroke (not a shadow) for its resting boundary, so it must remain a crisp 1px edge.
     surface:
-      rest: colorStrokeNeutralSubtle
+      rest: color.strokeNeutralSubtle
       selected:
-        token: colorStrokeNeutralSoft
+        token: color.strokeNeutralSoft
         rationale: Selected steps the boundary up one step from -subtle to -soft so the chosen card reads as picked, staying in the neutral family consistent with the soft selected fill.
-      disabled: colorStrokeNeutralDisabled
+      disabled: color.strokeNeutralDisabled
     focus: See flex-system:styling — universal dual-outline focus ring. (Interactive cards only; ring inherits the surface border radius.)
 
   radius:
@@ -66,11 +66,11 @@ tokens:
       geometry (the Stack padding, base-300 / 12px). This keeps the inner block concentric with the
       surface corner instead of using a fixed radius, so the nested radius steps with Size.
     surface:
-      Small: borderRadiusBase600 # 24px (verified from Figma)
-      Large: borderRadiusBase700 # 28px (verified from Large Structured node)
+      Small: borderRadius.base600 # 24px (verified from Figma)
+      Large: borderRadius.base700 # 28px (verified from Large Structured node)
     nested-content-block:
-      Small: borderRadiusBase300 # 12px = 24px surface (base-600) − 12px padding (base-300)
-      Large: borderRadiusBase400 # 16px = 28px surface (base-700) − 12px padding (base-300)
+      Small: borderRadius.base300 # 12px = 24px surface (base-600) − 12px padding (base-300)
+      Large: borderRadius.base400 # 16px = 28px surface (base-700) − 12px padding (base-300)
       rationale: >
         Concentric nested radius — inner = outer − padding (base-300, 12px). Layout=Nested only. With
         Padding=None the inset is 0, so the nested block matches the surface radius for its Size.
@@ -81,18 +81,18 @@ tokens:
       (e.g. textstyle-functional-body-large for a title, textstyle-functional-body-small
       for supporting metadata, textstyle-functional-body-medium for button labels),
       delegated to the slot components.
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     stack:
       Default:
-        padding: spacingComponentBase300
+        padding: spacing.componentBase300
         rationale: Component category — Header, Content, and Footer are tightly coupled slots within one component. 12px insets the content from the boundary without a wide margin.
       None:
         padding: 0
         rationale: Padding=None — Content runs to the surface edge for full-bleed media; the Surface overflow-clip still masks to the corner radius.
     slot-gap:
-      token: spacingComponentBase300
+      token: spacing.componentBase300
       rationale: Gap between Header / Content / Footer slots in the Stack. Same component-base-300 as the padding so the rhythm inside the card is uniform. Applies even when Padding=None.
 
   motion:

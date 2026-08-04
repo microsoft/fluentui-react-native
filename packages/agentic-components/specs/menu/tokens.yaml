@@ -15,8 +15,8 @@ tokens:
   overrides:
     spacing:
       padding:
-        horizontal: spacingComponentBase200
-        vertical: spacingComponentBase200
+        horizontal: spacing.componentBase200
+        vertical: spacing.componentBase200
         rationale: >
           Intentional override of Popover's default container padding
           (component-base-400). The tighter 8px inset hugs the MenuItem hover

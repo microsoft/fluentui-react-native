@@ -34,52 +34,52 @@ variants:
 tokens:
   background:
     rest:
-      value: colorBackgroundNeutralTransparent
-      hover: hover.colorBackgroundNeutralTransparent
-      pressed: pressed.colorBackgroundNeutralTransparent
+      value: color.backgroundNeutralTransparent
+      hover: color.hover.backgroundNeutralTransparent
+      pressed: color.pressed.backgroundNeutralTransparent
       rationale: No visual weight at rest; the parent List/surface provides the background context.
     selected:
-      value: colorBackgroundNeutralSoft
-      hover: hover.colorBackgroundNeutralSoft
-      pressed: pressed.colorBackgroundNeutralSoft
+      value: color.backgroundNeutralSoft
+      hover: color.hover.backgroundNeutralSoft
+      pressed: color.pressed.backgroundNeutralSoft
       rationale: >
         Soft fill distinguishes the selected row from rest without competing with the hover tint.
         Suppressed when parent Selection mode = Multiple — the visible Multiselect Checkbox already
         communicates selection. Mirrors flex-components:listbox-item.
-    disabled: colorBackgroundNeutralTransparent
+    disabled: color.backgroundNeutralTransparent
 
   foreground:
     rest:
       primary:
-        value: colorForegroundNeutralPrimary
-        hover: hover.colorForegroundNeutralPrimary
-        pressed: pressed.colorForegroundNeutralPrimary
+        value: color.foregroundNeutralPrimary
+        hover: color.hover.foregroundNeutralPrimary
+        pressed: color.pressed.foregroundNeutralPrimary
         applies-to: Primary label, leading icon, leading avatar (foreground tint when applicable), trailing action button icons.
       secondary:
-        value: colorForegroundNeutralSecondary
-        hover: hover.colorForegroundNeutralSecondary
-        pressed: pressed.colorForegroundNeutralSecondary
+        value: color.foregroundNeutralSecondary
+        hover: color.hover.foregroundNeutralSecondary
+        pressed: color.pressed.foregroundNeutralSecondary
         applies-to: Secondary content text only.
     selected:
       primary:
-        value: colorForegroundNeutralPrimary
-        hover: hover.colorForegroundNeutralPrimary
-        pressed: pressed.colorForegroundNeutralPrimary
+        value: color.foregroundNeutralPrimary
+        hover: color.hover.foregroundNeutralPrimary
+        pressed: color.pressed.foregroundNeutralPrimary
       secondary:
-        value: colorForegroundNeutralPrimary
-        hover: hover.colorForegroundNeutralPrimary
-        pressed: pressed.colorForegroundNeutralPrimary
+        value: color.foregroundNeutralPrimary
+        hover: color.hover.foregroundNeutralPrimary
+        pressed: color.pressed.foregroundNeutralPrimary
         rationale: >
           Selected promotes secondary content to primary foreground so the metadata reads as equally active as the
           bolded label. Weight stays Regular — only the primary label swaps to Semibold.
-    disabled: colorForegroundNeutralDisabled
+    disabled: color.foregroundNeutralDisabled
 
   stroke:
     container: no-stroke
     focus: See flex-system:styling — universal dual-outline focus ring. Rendered on :focus-visible when the row's interactive element holds focus.
 
   radius:
-    container: borderRadiusBase300
+    container: borderRadius.base300
     rationale: Matches flex-components:listbox-item — row-level radius rounds the hover and selected background fills consistently across selection-pattern surfaces.
 
   typography:
@@ -105,20 +105,20 @@ tokens:
         selected:
           primary: textstyle-functional-body-large-strong
           secondary: textstyle-functional-body-medium
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     padding:
       Small:
-        horizontal: spacingComponentBase200
-        vertical: spacingComponentBase150
+        horizontal: spacing.componentBase200
+        vertical: spacing.componentBase150
       Medium:
-        horizontal: spacingComponentBase300
-        vertical: spacingComponentBase250
+        horizontal: spacing.componentBase300
+        vertical: spacing.componentBase250
         rationale: Matches flex-components:listbox-item for cross-surface rhythm consistency between Lists and Dropdowns/Menus.
       Large:
-        horizontal: spacingComponentBase400
-        vertical: spacingComponentBase300
+        horizontal: spacing.componentBase400
+        vertical: spacing.componentBase300
     layout:
       structure: >
         Root container holds (in inline order): Selection slot → Leading container → Primary/Secondary content
@@ -132,23 +132,23 @@ tokens:
         notes: Primary label fills remaining width; secondary content is trailing within the content column, right-aligned, no-wrap.
       Under:
         layout: column
-        inner-gap: spacingComponentBase100
+        inner-gap: spacing.componentBase100
         icon-align: top
         notes: Primary label and secondary content stack vertically within a shared column container. The Leading icon aligns to the top of the primary label.
     gap:
       selection-to-leading:
-        Small: spacingComponentBase150
-        Medium: spacingComponentBase200
-        Large: spacingComponentBase200
+        Small: spacing.componentBase150
+        Medium: spacing.componentBase200
+        Large: spacing.componentBase200
         rationale: Slightly larger gap than the leading-to-content gap so the selection affordance reads as structurally separate from the row's leading identity content.
       leading-to-content:
-        Small: spacingComponentBase100
-        Medium: spacingComponentBase150
-        Large: spacingComponentBase200
+        Small: spacing.componentBase100
+        Medium: spacing.componentBase150
+        Large: spacing.componentBase200
       content-to-trailing:
-        Small: spacingComponentBase150
-        Medium: spacingComponentBase200
-        Large: spacingComponentBase250
+        Small: spacing.componentBase150
+        Medium: spacing.componentBase200
+        Large: spacing.componentBase250
 
   elevation: n/a
 

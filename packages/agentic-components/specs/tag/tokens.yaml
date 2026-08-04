@@ -24,29 +24,29 @@ tokens:
     container:
       rest:
         Primary:
-          value: colorBackgroundBrandHeavy
-          hover: hover.colorBackgroundBrandHeavy
-          pressed: pressed.colorBackgroundBrandHeavy
+          value: color.backgroundBrandHeavy
+          hover: color.hover.backgroundBrandHeavy
+          pressed: color.pressed.backgroundBrandHeavy
           rationale: Brand-heavy fill is the default, highest-emphasis Tag surface.
         Secondary:
-          value: colorBackgroundNeutralSubtle
-          hover: hover.colorBackgroundNeutralSubtle
-          pressed: pressed.colorBackgroundNeutralSubtle
+          value: color.backgroundNeutralSubtle
+          hover: color.hover.backgroundNeutralSubtle
+          pressed: color.pressed.backgroundNeutralSubtle
           rationale: Subtle background fill is the lower-emphasis secondary surface.
       disabled:
-        Primary: colorBackgroundNeutralHeavyDisabled
-        Secondary: colorBackgroundNeutralSubtleDisabled
+        Primary: color.backgroundNeutralHeavyDisabled
+        Secondary: color.backgroundNeutralSubtleDisabled
 
   foreground:
     container:
       rest:
         Primary:
-          token: colorForegroundNeutralOnloud
+          token: color.foregroundNeutralOnloud
           rationale: Inverted foreground for readability on the heavy brand background.
         Secondary:
-          token: colorForegroundNeutralPrimary
+          token: color.foregroundNeutralPrimary
           rationale: Neutral primary foreground reads clearly on the subtle background.
-      disabled: colorForegroundNeutralDisabled
+      disabled: color.foregroundNeutralDisabled
     notes: >
       No foreground shift on hover/pressed — the background overlay
       provides sufficient interaction feedback for both styles.
@@ -57,12 +57,12 @@ tokens:
 
   radius:
     container:
-      Icon only: borderRadiusCircular
+      Icon only: borderRadius.circular
       Icon and text:
         Rounded:
-          Small: borderRadiusBase200
-          Medium: borderRadiusBase300
-        Circular: borderRadiusCircular
+          Small: borderRadius.base200
+          Medium: borderRadius.base300
+        Circular: borderRadius.circular
     notes: >
       The Shape axis sets the Icon and text corner radius: Rounded uses the
       size-dependent base radius (default); Circular uses the fully circular
@@ -72,36 +72,36 @@ tokens:
   typography:
     Small: textstyle-functional-body-small
     Medium: textstyle-functional-body-medium
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     container:
       padding:
         Icon and text:
           Small:
-            horizontal: spacingComponentBase200
-            vertical: spacingComponentBase100
+            horizontal: spacing.componentBase200
+            vertical: spacing.componentBase100
           Medium:
-            horizontal: spacingComponentBase250
-            vertical: spacingComponentBase150
+            horizontal: spacing.componentBase250
+            vertical: spacing.componentBase150
         Icon only:
           Small:
-            horizontal: spacingComponentBase100
-            vertical: spacingComponentBase100
+            horizontal: spacing.componentBase100
+            vertical: spacing.componentBase100
           Medium:
-            horizontal: spacingComponentBase150
-            vertical: spacingComponentBase150
+            horizontal: spacing.componentBase150
+            vertical: spacing.componentBase150
       gap:
-        Medium: spacingComponentBase50
+        Medium: spacing.componentBase50
         Small:
-          Icon and text: spacingComponentBase50
+          Icon and text: spacing.componentBase50
           Icon only: 0
       rationale: >
         Padding, gap, and corner radius are owned by the root container.
         The container is the single interactive element so its painted area
         is the full tag surface.
     label-inner-padding:
-      token: spacingComponentBase50
+      token: spacing.componentBase50
       rationale: Tight/Small provides minimal inner breathing room for the label text. Prevents text from touching adjacent icon edges.
 
   elevation: n/a

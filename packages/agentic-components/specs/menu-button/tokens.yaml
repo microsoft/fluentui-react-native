@@ -28,7 +28,7 @@ tokens:
     foreground:
       inherit: tokens.trigger.foreground
       notes: Chevron uses currentColor, so Button's foreground rest/hover/pressed values remain the source of truth.
-      disabled: colorForegroundNeutralDisabled
+      disabled: color.foregroundNeutralDisabled
     size:
       Small: 16px
       Medium: 20px
@@ -59,7 +59,7 @@ sizes:
     trigger-icon: 20px
     inherits: flex-components:button Large
   notes: |
-    Trigger heights inherit from flex-components:button § sizes — specifically Button's Icon and text values, applied to every Label/Leading icon combination. The trigger is always a rounded rectangle (borderRadiusBase200/300/400 per Size); the circular shape used by Button's Icon-only Layout is not modelled here. Toggling Leading icon=true with Label=false therefore yields a rounded-rectangle icon+chevron trigger, not a circular pill.
+    Trigger heights inherit from flex-components:button § sizes — specifically Button's Icon and text values, applied to every Label/Leading icon combination. The trigger is always a rounded rectangle (borderRadius.base200/300/400 per Size); the circular shape used by Button's Icon-only Layout is not modelled here. Toggling Leading icon=true with Label=false therefore yields a rounded-rectangle icon+chevron trigger, not a circular pill.
     Menu width and max-height inherit from flex-components:menu and flex-components:popover.
 
 dependencies:

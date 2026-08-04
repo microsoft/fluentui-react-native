@@ -10,31 +10,31 @@ variants:
 tokens:
   surface:
     container:
-      token: colorSurfaceNeutralNearer
+      token: color.surfaceNeutralNearer
       rationale: Highest elevation step in the ordinal surface scale, pairing with the low-elevation shadow to read as a distinct floating layer above the page. Matches Popover so floating overlays share a consistent surface story.
 
   foreground:
     label:
-      token: colorForegroundNeutralPrimary
+      token: color.foregroundNeutralPrimary
       rationale: Primary foreground on a near-white surface satisfies WCAG 1.4.3 contrast (4.5:1).
 
   stroke:
     container: no-stroke
 
   radius:
-    container: borderRadiusBase200
+    container: borderRadius.base200
 
   typography:
     label: textstyle-functional-body-small
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
-    horizontal: spacingComponentBase200
-    vertical: spacingComponentBase100
+    horizontal: spacing.componentBase200
+    vertical: spacing.componentBase100
 
   elevation:
     level: 3
-    token: shadowLow
+    token: shadow.low
 
   motion:
     status: pending

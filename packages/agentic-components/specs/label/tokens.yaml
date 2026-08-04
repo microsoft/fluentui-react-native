@@ -34,20 +34,20 @@ tokens:
   foreground:
     text:
       rest:
-        token: colorForegroundNeutralPrimary
+        token: color.foregroundNeutralPrimary
         rationale: Full-emphasis foreground — Label is a primary information element identifying the associated control.
       disabled:
-        token: colorForegroundNeutralDisabled
+        token: color.foregroundNeutralDisabled
         rationale: Mirrors the disabled affordance of the associated control.
     required-indicator:
       rest:
-        token: colorForegroundDangerPrimary
+        token: color.foregroundDangerPrimary
         rationale: >
           Danger foreground signals that the associated control must be completed.
-          Aligns with the Error state stroke on Input (colorStrokeDangerLoud)
+          Aligns with the Error state stroke on Input (color.strokeDangerLoud)
           so required + invalid fields read as a coherent danger family.
       disabled:
-        token: colorForegroundNeutralDisabled
+        token: color.foregroundNeutralDisabled
         rationale: >
           The asterisk drops danger color when the field is disabled — required is
           irrelevant if the user cannot interact with the field.
@@ -81,7 +81,7 @@ tokens:
         Asterisk inherits the label's text style — including weight — so it
         baselines and weighs the same as the label string. It reads as part of
         the label, not a separate token.
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
     weight-rationale: >
       Regular (body weight) is the default. It covers the inline-control
       labeling case where Label sits next to a self-contained control
@@ -97,9 +97,9 @@ tokens:
       Label has no internal padding — gap to surrounding elements (Input, helper text,
       validation message) is owned by the Field wrapper, not by Label itself.
     gap:
-      Small: spacingComponentBase50
-      Medium: spacingComponentBase50
-      Large: spacingComponentBase50
+      Small: spacing.componentBase50
+      Medium: spacing.componentBase50
+      Large: spacing.componentBase50
       rationale: >
         Tightest atomic gap between Text and Required indicator at every size —
         they read as a single unit. A uniform gap (rather than scaling with

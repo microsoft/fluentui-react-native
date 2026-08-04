@@ -17,26 +17,26 @@ tokens:
 
   stroke:
     width:
-      X-Tiny: strokeWidthThin
-      Tiny: strokeWidthThin
-      X-Small: strokeWidthThin
-      Small: strokeWidthThick
-      Medium: strokeWidthThick
-      Large: strokeWidthThicker
-      X-Large: strokeWidthThicker
-      Huge: strokeWidthThicker
+      X-Tiny: strokeWidth.thin
+      Tiny: strokeWidth.thin
+      X-Small: strokeWidth.thin
+      Small: strokeWidth.thick
+      Medium: strokeWidth.thick
+      Large: strokeWidth.thicker
+      X-Large: strokeWidth.thicker
+      Huge: strokeWidth.thicker
     width-rationale: >
       With eight supported sizes, stroke width steps across three groups so
       the arc reads as consistent visual weight relative to its diameter —
       avoiding clumsy donuts at small sizes and thin wire at large ones.
     track:
-      token: colorStrokeNeutralSubtle
+      token: color.strokeNeutralSubtle
       rationale: >
         Subtle neutral stroke is the lowest-emphasis weight in the neutral
         stroke ramp — present enough to define the spinner's diameter without
         competing with the rotating arc.
     indicator:
-      token: colorStrokeNeutralLoud
+      token: color.strokeNeutralLoud
       rationale: >
         Loud neutral stroke provides clear contrast against the subtle track,
         so the rotating arc reads as the active signal even at the smallest
@@ -44,8 +44,8 @@ tokens:
     focus: n/a # Non-interactive — no focus ring.
 
   radius:
-    track: borderRadiusCircular
-    indicator: borderRadiusCircular
+    track: borderRadius.circular
+    indicator: borderRadius.circular
     rationale: >
       The circular radius is structural, not stylistic — the spinner's shape
       is what reads as "loading." Any non-circular radius would break the
@@ -61,7 +61,7 @@ tokens:
       Large: textstyle-functional-body-medium
       X-Large: textstyle-functional-body-large
       Huge: textstyle-functional-body-large
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
     notes: >
       Spinner itself has no built-in text slot — the label ("Loading…",
       "Saving changes…") is composed adjacent to the spinner by the consumer.
@@ -70,14 +70,14 @@ tokens:
 
   spacing:
     gap:
-      X-Tiny: spacingComponentBase100
-      Tiny: spacingComponentBase100
-      X-Small: spacingComponentBase100
-      Small: spacingComponentBase150
-      Medium: spacingComponentBase150
-      Large: spacingComponentBase200
-      X-Large: spacingComponentBase200
-      Huge: spacingComponentBase200
+      X-Tiny: spacing.componentBase100
+      Tiny: spacing.componentBase100
+      X-Small: spacing.componentBase100
+      Small: spacing.componentBase150
+      Medium: spacing.componentBase150
+      Large: spacing.componentBase200
+      X-Large: spacing.componentBase200
+      Huge: spacing.componentBase200
     notes: >
       Gap sits between the spinner and an adjacent label when paired inline
       (spinner leads, label follows — see usage.md Layout). Steps with the

@@ -6,14 +6,14 @@ variants: n/a # No variant axes and no states. Single animating shape resized pe
 tokens:
   background:
     bar:
-      token: colorBackgroundNeutralSubtle
+      token: color.backgroundNeutralSubtle
       rationale: >
         Subtle neutral is the lowest-emphasis background weight in the palette
         — visible against the page surface but recessive enough to read as
         "not yet content." The skeleton must be perceptible without competing
         with the surrounding real content.
     shimmer:
-      token: colorBackgroundNeutralSoft
+      token: color.backgroundNeutralSoft
       rationale: >
         The Wave animation overlays a lighter highlight band that sweeps
         across the bar. Soft sits one step up the neutral background ramp
@@ -32,12 +32,12 @@ tokens:
 
   radius:
     bar:
-      token: borderRadiusBase100
+      token: borderRadius.base100
       rationale: >
         Atomic-tier small radius (4px) reads as a rounded bar without
         committing to a specific content shape. Consumers should override on
-        the instance — borderRadiusCircular when standing in for a
-        circular avatar; borderRadiusBase200/300 when standing in
+        the instance — borderRadius.circular when standing in for a
+        circular avatar; borderRadius.base200/300 when standing in
         for a card or larger media tile.
 
   typography: n/a

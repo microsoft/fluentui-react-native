@@ -15,18 +15,18 @@ tokens:
   foreground:
     rest:
       Functional:
-        value: colorForegroundNeutralPrimary
-        hover: hover.colorForegroundNeutralPrimary
-        pressed: pressed.colorForegroundNeutralPrimary
+        value: color.foregroundNeutralPrimary
+        hover: color.hover.foregroundNeutralPrimary
+        pressed: color.pressed.foregroundNeutralPrimary
       Content:
-        value: colorForegroundNeutralPrimary
-        hover: hover.colorForegroundNeutralPrimary
-        pressed: pressed.colorForegroundNeutralPrimary
+        value: color.foregroundNeutralPrimary
+        hover: color.hover.foregroundNeutralPrimary
+        pressed: color.pressed.foregroundNeutralPrimary
     visited:
-      Functional: colorForegroundNeutralPrimary
-      Content: colorForegroundNeutralPrimary
+      Functional: color.foregroundNeutralPrimary
+      Content: color.foregroundNeutralPrimary
       rationale: Same as Rest — enumerated so :visited can be targeted semantically; no color shift.
-    disabled: colorForegroundNeutralDisabled
+    disabled: color.foregroundNeutralDisabled
 
   decoration:
     notes: Bundles line, style, color, thickness, and offset. No single --gnrc-* var covers it. Style and thickness differentiate the two Type sets.
@@ -34,9 +34,9 @@ tokens:
     color: currentColor
     thickness:
       Functional:
-        token: strokeWidthThin
+        token: strokeWidth.thin
       Content:
-        token: strokeWidthThick
+        token: strokeWidth.thick
     offset:
       value: 15%
       rationale: Percentage scales with font-size so inline links honor their parent's text style. Clears descenders without floating away from the baseline.
@@ -60,7 +60,7 @@ tokens:
         disabled: hidden
 
   radius:
-    focus-ring: borderRadiusBase100
+    focus-ring: borderRadius.base100
 
   typography:
     default:
@@ -68,11 +68,11 @@ tokens:
       Content: textstyle-content-paragraph-medium
     inline-note: Inline links inherit the surrounding text style.
     font-family:
-      Functional: fontFamilyFunctional
-      Content: fontFamilyContent
+      Functional: fontFamily.functional
+      Content: fontFamily.content
 
   spacing:
-    gap: spacingComponentBase50
+    gap: spacing.componentBase50
 
   motion:
     status: pending

@@ -23,7 +23,7 @@ tokens:
   radius: n/a
   radius-notes: >
     RadioGroup has no visible container surface. Child Radio indicator radius is owned
-    by the Radio component (`borderRadiusCircular`).
+    by the Radio component (`borderRadius.circular`).
 
   typography:
     legend:
@@ -32,7 +32,7 @@ tokens:
 
   spacing:
     legend-to-options:
-      token: spacingComponentBase300
+      token: spacing.componentBase300
       rationale: >
         Three times the inter-option gap — a clear hierarchy step that signals the
         Legend is a heading for the group, not another option in the list. Larger
@@ -40,11 +40,11 @@ tokens:
         than a between-section layout gap (which would visually orphan the Legend
         from its group).
     options-gap:
-      token: spacingComponentBase100
+      token: spacing.componentBase100
       rationale: >
         Tightest atomic tier — matches the gap Tablist uses between its child Tabs.
         Each Radio already includes transparent touch-target padding of
-        `spacingComponentBase200` on all sides, so the visible breathing room
+        `spacing.componentBase200` on all sides, so the visible breathing room
         between adjacent indicators is the sum of both Radios' padding plus this gap.
       applies-to: >
         Applied along the orientation axis — vertical gap when Orientation=Vertical,

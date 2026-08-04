@@ -25,48 +25,48 @@ variants:
 tokens:
   background:
     all-states:
-      all-styles: colorBackgroundNeutralTransparent
+      all-styles: color.backgroundNeutralTransparent
 
   foreground:
     rest:
-      placeholder: colorForegroundNeutralTertiary
-      value: colorForegroundNeutralPrimary
+      placeholder: color.foregroundNeutralTertiary
+      value: color.foregroundNeutralPrimary
     disabled:
-      all: colorForegroundNeutralDisabled
+      all: color.foregroundNeutralDisabled
     read-only:
-      value: colorForegroundNeutralPrimary
+      value: color.foregroundNeutralPrimary
       rationale: Primary foreground distinguishes a real value from Disabled's low-contrast state.
 
   stroke:
-    width: strokeWidthThin
+    width: strokeWidth.thin
     rest:
-      value: colorStrokeNeutralLoud
-      hover: hover.colorStrokeNeutralLoud
-      pressed: pressed.colorStrokeNeutralLoud
+      value: color.strokeNeutralLoud
+      hover: color.hover.strokeNeutralLoud
+      pressed: color.pressed.strokeNeutralLoud
     focus:
-      value: colorStrokeNeutralHeavy
-      hover: hover.colorStrokeNeutralHeavy
-      pressed: pressed.colorStrokeNeutralHeavy
-    error: colorStrokeDangerLoud
-    disabled: colorStrokeNeutralDisabled
-    read-only: colorStrokeNeutralDisabled
+      value: color.strokeNeutralHeavy
+      hover: color.hover.strokeNeutralHeavy
+      pressed: color.pressed.strokeNeutralHeavy
+    error: color.strokeDangerLoud
+    disabled: color.strokeNeutralDisabled
+    read-only: color.strokeNeutralDisabled
     focus-ring: >
       Textarea does not use the universal dual-outline focus ring. The boundary
-      stroke itself swaps to colorStrokeNeutralHeavy in Focus state
+      stroke itself swaps to color.strokeNeutralHeavy in Focus state
       (focus semantics) as a full border.
 
-  radius: borderRadiusBase300
+  radius: borderRadius.base300
 
   radius-by-size:
-    Small: borderRadiusBase200
-    Medium: borderRadiusBase300
-    Large: borderRadiusBase400
+    Small: borderRadius.base200
+    Medium: borderRadius.base300
+    Large: borderRadius.base400
 
   resize-handle:
     implementation: native
-    color: colorStrokeNeutralSoft
+    color: color.strokeNeutralSoft
     size: 12px
-    inset: spacingComponentBase50
+    inset: spacing.componentBase50
     rationale: >
       Figma-only decorative asset. Code does NOT render a custom handle — the
       browser/OS-native resize handle (driven by the CSS `resize` property)
@@ -77,7 +77,7 @@ tokens:
 
   typography:
     rest: textstyle-functional-body-medium
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   typography-by-size:
     Small: textstyle-functional-body-small
@@ -85,19 +85,19 @@ tokens:
     Large: textstyle-functional-body-large
 
   spacing:
-    horizontal: spacingComponentBase250
-    vertical: spacingComponentBase150
+    horizontal: spacing.componentBase250
+    vertical: spacing.componentBase150
 
   spacing-by-size:
     Small:
-      horizontal: spacingComponentBase150
-      vertical: spacingComponentBase100
+      horizontal: spacing.componentBase150
+      vertical: spacing.componentBase100
     Medium:
-      horizontal: spacingComponentBase250
-      vertical: spacingComponentBase150
+      horizontal: spacing.componentBase250
+      vertical: spacing.componentBase150
     Large:
-      horizontal: spacingComponentBase300
-      vertical: spacingComponentBase200
+      horizontal: spacing.componentBase300
+      vertical: spacing.componentBase200
 
   elevation: n/a
 

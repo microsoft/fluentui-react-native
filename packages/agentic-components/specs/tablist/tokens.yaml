@@ -20,7 +20,7 @@ tokens:
   typography: n/a # No text content at the Tablist level. Delegated to child Tab.
 
   spacing:
-    gap: spacingComponentBase100
+    gap: spacing.componentBase100
     gap-rationale: >
       Component category — spacing is between child Tab components within a molecular container.
       Matches the pattern used by MessageBar for sub-component spacing.

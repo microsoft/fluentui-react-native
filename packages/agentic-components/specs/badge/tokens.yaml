@@ -24,22 +24,22 @@ tokens:
   background:
     container:
       Tint:
-        Brand: colorBackgroundBrandSoft
-        Danger: colorBackgroundDangerSoft
-        Success: colorBackgroundSuccessSoft
-        Warning: colorBackgroundWarningSoft
-        Informative: colorBackgroundNeutralSoft
+        Brand: color.backgroundBrandSoft
+        Danger: color.backgroundDangerSoft
+        Success: color.backgroundSuccessSoft
+        Warning: color.backgroundWarningSoft
+        Informative: color.backgroundNeutralSoft
       Outline:
-        all-colors: colorBackgroundNeutralTransparent
+        all-colors: color.backgroundNeutralTransparent
 
   foreground:
     container:
       all-styles:
-        Brand: colorForegroundBrandPrimary
-        Danger: colorForegroundDangerPrimary
-        Success: colorForegroundSuccessPrimary
-        Warning: colorForegroundWarningPrimary
-        Informative: colorForegroundNeutralPrimary
+        Brand: color.foregroundBrandPrimary
+        Danger: color.foregroundDangerPrimary
+        Success: color.foregroundSuccessPrimary
+        Warning: color.foregroundWarningPrimary
+        Informative: color.foregroundNeutralPrimary
     notes: Same foreground tokens drive label text and icon paint in both Tint and Outline.
 
   stroke:
@@ -48,38 +48,38 @@ tokens:
         width: 0
         color: no-stroke
       Outline:
-        width: strokeWidthThin
+        width: strokeWidth.thin
         color:
-          Brand: colorStrokeBrandLoud
-          Danger: colorStrokeDangerLoud
-          Success: colorStrokeSuccessLoud
-          Warning: colorStrokeWarningLoud
-          Informative: colorStrokeNeutralLoud
+          Brand: color.strokeBrandLoud
+          Danger: color.strokeDangerLoud
+          Success: color.strokeSuccessLoud
+          Warning: color.strokeWarningLoud
+          Informative: color.strokeNeutralLoud
     focus: n/a
 
   radius:
     container:
       Circular:
-        all-sizes: borderRadiusCircular
+        all-sizes: borderRadius.circular
       Rounded:
-        Small: borderRadiusBase100
-        Medium: borderRadiusBase200
+        Small: borderRadius.base100
+        Medium: borderRadius.base200
     notes: Rounded radius scales with Size so the corner reads as a softened rectangle at both heights.
 
   typography:
     Small: textstyle-functional-caption
     Medium: textstyle-functional-body-small
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     container:
       padding:
         Icon and text:
           Small:
-            inline: spacingComponentBase100
+            inline: spacing.componentBase100
             block: 0
           Medium:
-            inline: spacingComponentBase150
+            inline: spacing.componentBase150
             block: 0
         Icon only:
           Small:
@@ -89,8 +89,8 @@ tokens:
             inline: 0
             block: 0
       gap:
-        Small: spacingComponentBase50
-        Medium: spacingComponentBase50
+        Small: spacing.componentBase50
+        Medium: spacing.componentBase50
 
   elevation: n/a
 

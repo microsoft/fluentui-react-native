@@ -19,16 +19,16 @@ tokens:
   background:
     header:
       rest:
-        value: colorBackgroundNeutralTransparent
-        hover: hover.colorBackgroundNeutralTransparent
-        pressed: pressed.colorBackgroundNeutralTransparent
+        value: color.backgroundNeutralTransparent
+        hover: color.hover.backgroundNeutralTransparent
+        pressed: color.pressed.backgroundNeutralTransparent
     header-notes: Transparent at rest; gains visible fill through the inline hover/pressed state values.
 
   foreground:
     rest:
-      value: colorForegroundNeutralPrimary
-      hover: hover.colorForegroundNeutralPrimary
-      pressed: pressed.colorForegroundNeutralPrimary
+      value: color.foregroundNeutralPrimary
+      hover: color.hover.foregroundNeutralPrimary
+      pressed: color.pressed.foregroundNeutralPrimary
       applies-to: Title, chevron, and leading icon.
 
   stroke:
@@ -36,19 +36,19 @@ tokens:
     focus: See flex-system:styling — universal dual-outline focus ring.
 
   radius:
-    header: borderRadiusBase200
+    header: borderRadius.base200
 
   typography:
     title: textstyle-functional-body-small-strong
     notes: Title is always Semibold — no weight swap pattern. Consistent weight provides persistent visual hierarchy regardless of state.
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     header:
-      horizontal: spacingComponentBase200
-      vertical: spacingComponentBase100
-    header-gap: spacingComponentBase100
-    body: spacingComponentBase200
+      horizontal: spacing.componentBase200
+      vertical: spacing.componentBase100
+    header-gap: spacing.componentBase100
+    body: spacing.componentBase200
 
   elevation: n/a
 

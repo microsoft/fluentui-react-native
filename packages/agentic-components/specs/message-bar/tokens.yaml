@@ -20,7 +20,7 @@ dismiss-step-down:
 tokens:
   surface:
     container:
-      token: colorSurfaceNeutralNearer
+      token: color.surfaceNeutralNearer
       rationale: >
         Opaque neutral surface layer that sits underneath the status background
         shader on the same container. This preserves MessageBar's intended
@@ -29,71 +29,71 @@ tokens:
 
   background:
     Information:
-      token: colorBackgroundNeutralSubtle
+      token: color.backgroundNeutralSubtle
       layer: Above surface.container.
       rationale: Neutral low-emphasis shader; does not signal urgency.
     Warning:
-      token: colorBackgroundWarningSubtle
+      token: color.backgroundWarningSubtle
       layer: Above surface.container.
       rationale: Warm amber-tinted shader; signals caution without alarm.
     Error:
-      token: colorBackgroundDangerSubtle
+      token: color.backgroundDangerSubtle
       layer: Above surface.container.
       rationale: Light red-tinted shader; signals a blocking or failed state.
     Success:
-      token: colorBackgroundSuccessSubtle
+      token: color.backgroundSuccessSubtle
       layer: Above surface.container.
       rationale: Light green-tinted shader; confirms a positive outcome.
-    action-buttons: colorBackgroundNeutralTransparent
-    dismiss-button: colorBackgroundNeutralTransparent
+    action-buttons: color.backgroundNeutralTransparent
+    dismiss-button: color.backgroundNeutralTransparent
 
   foreground:
     status-icon:
       Information:
-        token: colorForegroundNeutralPrimary
+        token: color.foregroundNeutralPrimary
         rationale: Neutral icon color for informational context; blends with message text.
       Warning:
-        token: colorForegroundWarningPrimary
+        token: color.foregroundWarningPrimary
         rationale: Semantic warning foreground; reinforces the caution signal alongside the subtle background.
       Error:
-        token: colorForegroundDangerPrimary
+        token: color.foregroundDangerPrimary
         rationale: Semantic danger foreground; reinforces the error/blocking signal.
       Success:
-        token: colorForegroundSuccessPrimary
+        token: color.foregroundSuccessPrimary
         rationale: Semantic success foreground; reinforces the positive outcome signal.
     message-text:
-      token: colorForegroundNeutralPrimary
+      token: color.foregroundNeutralPrimary
       rationale: Standard body foreground; does not vary by status. Background and icon carry the semantic signal; text stays neutral for readability.
-    action-button-labels: colorForegroundNeutralPrimary
-    dismiss-button-icon: colorForegroundNeutralPrimary
+    action-button-labels: color.foregroundNeutralPrimary
+    dismiss-button-icon: color.foregroundNeutralPrimary
 
   stroke:
-    width: strokeWidthThin
-    Information: colorStrokeNeutralSubtle
-    Warning: colorStrokeWarningSubtle
-    Error: colorStrokeDangerSubtle
-    Success: colorStrokeSuccessSubtle
+    width: strokeWidth.thin
+    Information: color.strokeNeutralSubtle
+    Warning: color.strokeWarningSubtle
+    Error: color.strokeDangerSubtle
+    Success: color.strokeSuccessSubtle
 
   radius:
-    container: borderRadiusBase400
+    container: borderRadius.base400
     action-buttons: See flex-components:button — Small Subtle Button radius.
     dismiss-button: See flex-components:button — Icon only circular radius.
 
   typography:
     message-text: textstyle-functional-body-medium
     action-button-labels: See flex-components:button — Small Subtle Button typography.
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
-    container-padding: spacingComponentBase300
+    container-padding: spacing.componentBase300
     container-gap:
-      token: spacingComponentBase200
+      token: spacing.componentBase200
       rationale: Component category — icon, text, actions, and dismiss are tightly coupled slots within a single component. Same category is used for the actions-container-gap (between embedded Button sub-components).
     icon-and-text-top-padding:
-      token: spacingComponentBase50
+      token: spacing.componentBase50
       applies-to: [status-icon-container, message-text]
       rationale: Applied as top padding to both the status icon container and the message text so they vertically align with the embedded action and dismiss button content.
-    actions-container-gap: spacingComponentBase200
+    actions-container-gap: spacing.componentBase200
     action-buttons: See flex-components:button — Small Subtle Button spacing.
     dismiss-button: See flex-components:button — Small Icon only spacing.
 

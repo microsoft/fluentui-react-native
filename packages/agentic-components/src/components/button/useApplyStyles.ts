@@ -35,6 +35,7 @@ import type { ThemeState } from '@fluentui-react-native/design';
 import type { ButtonAppearance, ButtonShape, ButtonSize } from './button.types';
 
 type FlexTokens = ThemeState['tokens'];
+type ColorTokens = FlexTokens['color'];
 
 type ButtonColors = {
   backgroundColor: ColorValue;
@@ -87,18 +88,18 @@ const sizeStyles: Record<
   },
 };
 
-function getInteractionTokens(tokens: FlexTokens, pressed: boolean, hovered: boolean): FlexTokens {
+function getInteractionTokens(colors: ColorTokens, pressed: boolean, hovered: boolean): ColorTokens {
   if (pressed) {
-    return { ...tokens, ...tokens.pressed };
+    return { ...colors, ...colors.pressed };
   }
   if (hovered) {
-    return { ...tokens, ...tokens.hover };
+    return { ...colors, ...colors.hover };
   }
-  return tokens;
+  return colors;
 }
 
 function getButtonColors(
-  tokens: FlexTokens,
+  colors: ColorTokens,
   appearance: ButtonAppearance,
   disabled: boolean,
   selected: boolean,
@@ -106,35 +107,35 @@ function getButtonColors(
   hovered: boolean,
 ): ButtonColors {
   if (disabled) {
-    return getDisabledColors(tokens, appearance, selected);
+    return getDisabledColors(colors, appearance, selected);
   }
 
-  const interactionTokens = getInteractionTokens(tokens, pressed, hovered);
+  const interactionTokens = getInteractionTokens(colors, pressed, hovered);
   if (selected) {
     switch (appearance) {
       case 'primary':
         return {
-          backgroundColor: interactionTokens.colorBackgroundBrandHeavy,
-          borderColor: interactionTokens.colorStrokeNeutralTransparent,
-          foregroundColor: interactionTokens.colorForegroundBrandOnloud,
+          backgroundColor: interactionTokens.backgroundBrandHeavy,
+          borderColor: interactionTokens.strokeNeutralTransparent,
+          foregroundColor: interactionTokens.foregroundBrandOnloud,
         };
       case 'secondary':
         return {
-          backgroundColor: interactionTokens.colorBackgroundNeutralHeavy,
-          borderColor: interactionTokens.colorStrokeNeutralTransparent,
-          foregroundColor: interactionTokens.colorForegroundNeutralOnloud,
+          backgroundColor: interactionTokens.backgroundNeutralHeavy,
+          borderColor: interactionTokens.strokeNeutralTransparent,
+          foregroundColor: interactionTokens.foregroundNeutralOnloud,
         };
       case 'outline':
         return {
-          backgroundColor: interactionTokens.colorBackgroundNeutralHeavy,
-          borderColor: interactionTokens.colorStrokeNeutralHeavy,
-          foregroundColor: interactionTokens.colorForegroundNeutralOnloud,
+          backgroundColor: interactionTokens.backgroundNeutralHeavy,
+          borderColor: interactionTokens.strokeNeutralHeavy,
+          foregroundColor: interactionTokens.foregroundNeutralOnloud,
         };
       case 'subtle':
         return {
-          backgroundColor: interactionTokens.colorBackgroundNeutralSoft,
-          borderColor: interactionTokens.colorStrokeNeutralTransparent,
-          foregroundColor: interactionTokens.colorForegroundNeutralPrimary,
+          backgroundColor: interactionTokens.backgroundNeutralSoft,
+          borderColor: interactionTokens.strokeNeutralTransparent,
+          foregroundColor: interactionTokens.foregroundNeutralPrimary,
         };
     }
   }
@@ -142,50 +143,50 @@ function getButtonColors(
   switch (appearance) {
     case 'primary':
       return {
-        backgroundColor: interactionTokens.colorBackgroundBrandHeavy,
-        borderColor: interactionTokens.colorStrokeNeutralTransparent,
-        foregroundColor: interactionTokens.colorForegroundBrandOnloud,
+        backgroundColor: interactionTokens.backgroundBrandHeavy,
+        borderColor: interactionTokens.strokeNeutralTransparent,
+        foregroundColor: interactionTokens.foregroundBrandOnloud,
       };
     case 'secondary':
       return {
-        backgroundColor: interactionTokens.colorBackgroundNeutralSubtle,
-        borderColor: interactionTokens.colorStrokeNeutralTransparent,
-        foregroundColor: interactionTokens.colorForegroundNeutralPrimary,
+        backgroundColor: interactionTokens.backgroundNeutralSubtle,
+        borderColor: interactionTokens.strokeNeutralTransparent,
+        foregroundColor: interactionTokens.foregroundNeutralPrimary,
       };
     case 'outline':
       return {
-        backgroundColor: interactionTokens.colorBackgroundNeutralTransparent,
-        borderColor: interactionTokens.colorStrokeNeutralSubtle,
-        foregroundColor: interactionTokens.colorForegroundNeutralPrimary,
+        backgroundColor: interactionTokens.backgroundNeutralTransparent,
+        borderColor: interactionTokens.strokeNeutralSubtle,
+        foregroundColor: interactionTokens.foregroundNeutralPrimary,
       };
     case 'subtle':
       return {
-        backgroundColor: interactionTokens.colorBackgroundNeutralTransparent,
-        borderColor: interactionTokens.colorStrokeNeutralTransparent,
-        foregroundColor: interactionTokens.colorForegroundNeutralPrimary,
+        backgroundColor: interactionTokens.backgroundNeutralTransparent,
+        borderColor: interactionTokens.strokeNeutralTransparent,
+        foregroundColor: interactionTokens.foregroundNeutralPrimary,
       };
   }
 
   return assertNever(appearance);
 }
 
-function getDisabledColors(tokens: FlexTokens, appearance: ButtonAppearance, selected: boolean): ButtonColors {
-  const foregroundColor = tokens.colorForegroundNeutralDisabled;
-  const borderColor = appearance === 'outline' ? tokens.colorStrokeNeutralDisabled : tokens.colorStrokeNeutralTransparent;
+function getDisabledColors(colors: ColorTokens, appearance: ButtonAppearance, selected: boolean): ButtonColors {
+  const foregroundColor = colors.foregroundNeutralDisabled;
+  const borderColor = appearance === 'outline' ? colors.strokeNeutralDisabled : colors.strokeNeutralTransparent;
 
   if (appearance === 'primary') {
-    return { backgroundColor: tokens.colorBackgroundNeutralHeavyDisabled, borderColor, foregroundColor };
+    return { backgroundColor: colors.backgroundNeutralHeavyDisabled, borderColor, foregroundColor };
   }
   if (selected && (appearance === 'secondary' || appearance === 'outline')) {
-    return { backgroundColor: tokens.colorBackgroundNeutralHeavyDisabled, borderColor, foregroundColor };
+    return { backgroundColor: colors.backgroundNeutralHeavyDisabled, borderColor, foregroundColor };
   }
   if (selected && appearance === 'subtle') {
-    return { backgroundColor: tokens.colorBackgroundNeutralSubtleDisabled, borderColor, foregroundColor };
+    return { backgroundColor: colors.backgroundNeutralSubtleDisabled, borderColor, foregroundColor };
   }
   if (appearance === 'secondary') {
-    return { backgroundColor: tokens.colorBackgroundNeutralSubtleDisabled, borderColor, foregroundColor };
+    return { backgroundColor: colors.backgroundNeutralSubtleDisabled, borderColor, foregroundColor };
   }
-  return { backgroundColor: tokens.colorBackgroundNeutralTransparent, borderColor, foregroundColor };
+  return { backgroundColor: colors.backgroundNeutralTransparent, borderColor, foregroundColor };
 }
 
 function getBorderRadius(shape: ButtonShape, size: ButtonSize): number {
@@ -211,7 +212,7 @@ export function useApplyStyles_unstable(state: ButtonState) {
   const { appearance, disabled, focused, hovered, iconOnly, pressed, selected, shape, size, tokens, userStyle } = state;
   const styles = React.useMemo(() => {
     const sizing = sizeStyles[size];
-    const colors = getButtonColors(tokens, appearance, disabled, selected, pressed, hovered);
+    const colors = getButtonColors(tokens.color, appearance, disabled, selected, pressed, hovered);
     const root: ViewStyle = {
       alignItems: 'center',
       alignSelf: 'flex-start',
@@ -227,8 +228,8 @@ export function useApplyStyles_unstable(state: ButtonState) {
       minWidth: size240,
       ...(focused &&
         !disabled && {
-          borderColor: tokens.colorStrokeFocusInner,
-          outlineColor: tokens.colorStrokeFocusOuter,
+          borderColor: tokens.color.strokeFocusInner,
+          outlineColor: tokens.color.strokeFocusOuter,
           outlineOffset: strokeWidth10,
           outlineStyle: 'solid',
           outlineWidth: strokeWidth20,

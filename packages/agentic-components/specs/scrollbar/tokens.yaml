@@ -23,7 +23,7 @@ tokens:
   foreground:
     rest:
       thumb:
-        token: colorForegroundNeutralTertiary
+        token: color.foregroundNeutralTertiary
         rationale: >
           Tertiary foreground keeps the thumb readable while visually
           subordinate to the content it overlays.
@@ -32,16 +32,16 @@ tokens:
 
   radius:
     thumb:
-      token: borderRadiusCircular
+      token: borderRadius.circular
 
   typography: n/a
 
   spacing:
     thumb-inset:
       vertical:
-        token: spacingComponentBase100
+        token: spacing.componentBase100
       horizontal:
-        token: spacingComponentBase100
+        token: spacing.componentBase100
 
   elevation: n/a
 

@@ -14,54 +14,54 @@ variants:
 tokens:
   background:
     rest:
-      value: colorBackgroundNeutralTransparent
-      hover: hover.colorBackgroundNeutralTransparent
-      pressed: pressed.colorBackgroundNeutralTransparent
+      value: color.backgroundNeutralTransparent
+      hover: color.hover.backgroundNeutralTransparent
+      pressed: color.pressed.backgroundNeutralTransparent
       rationale: No visual weight at rest — transparent surface defers to the Tablist container and surrounding content.
     selected:
-      value: colorBackgroundNeutralHeavy
-      hover: hover.colorBackgroundNeutralHeavy
-      pressed: pressed.colorBackgroundNeutralHeavy
+      value: color.backgroundNeutralHeavy
+      hover: color.hover.backgroundNeutralHeavy
+      pressed: color.pressed.backgroundNeutralHeavy
       rationale: Heavy fill provides strong visual distinction for the active tab, creating a clear pill shape on the selected item.
     disabled:
-      unselected: colorBackgroundNeutralTransparent
-      selected: colorBackgroundNeutralHeavyDisabled
+      unselected: color.backgroundNeutralTransparent
+      selected: color.backgroundNeutralHeavyDisabled
 
   foreground:
     rest:
-      value: colorForegroundNeutralPrimary
-      hover: hover.colorForegroundNeutralPrimary
-      pressed: pressed.colorForegroundNeutralPrimary
+      value: color.foregroundNeutralPrimary
+      hover: color.hover.foregroundNeutralPrimary
+      pressed: color.pressed.foregroundNeutralPrimary
       rationale: Standard primary foreground for readable unselected labels.
     selected:
-      value: colorForegroundNeutralOnloud
-      hover: hover.colorForegroundNeutralOnloud
-      pressed: pressed.colorForegroundNeutralOnloud
+      value: color.foregroundNeutralOnloud
+      hover: color.hover.foregroundNeutralOnloud
+      pressed: color.pressed.foregroundNeutralOnloud
       rationale: Inverted foreground for readability on the heavy background fill.
-    disabled: colorForegroundNeutralDisabled
+    disabled: color.foregroundNeutralDisabled
 
   stroke:
     container: no-stroke
     focus: See flex-system:styling — universal dual-outline focus ring.
 
   radius:
-    Icon and text: borderRadiusBase300
-    Icon only: borderRadiusCircular
+    Icon and text: borderRadius.base300
+    Icon only: borderRadius.circular
 
   typography:
     rest: textstyle-functional-body-medium
     selected: textstyle-functional-body-medium-strong
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     Icon and text:
-      horizontal: spacingComponentBase300
-      vertical: spacingComponentBase150
+      horizontal: spacing.componentBase300
+      vertical: spacing.componentBase150
       rationale: >
         Half heuristic — horizontal padding is double the vertical padding.
         Matches Button Medium spacing pattern, which shares the same 32px resultant height.
-    Icon only: spacingComponentBase150
-    gap: spacingComponentBase100
+    Icon only: spacing.componentBase150
+    gap: spacing.componentBase100
 
   elevation: n/a
 

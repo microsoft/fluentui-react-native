@@ -40,7 +40,11 @@ Build components in `packages/agentic-components` as React Native adaptations of
 ## Token rules
 
 - Import non-color values directly from `@fluentui-react-native/design/tokens/global`.
-- Read semantic colors from `useThemeState().tokens` so flex interaction overrides and future themes flow through the component.
+- Read semantic colors from `useThemeState().tokens.color` so flex interaction overrides and future themes flow through
+  the component. Use `tokens.color.hover` and `tokens.color.pressed` for interaction overrides.
+- Access other Flex categories through their grouped objects, such as `tokens.shadow`, `tokens.fontWeight`,
+  `tokens.fontFamily`, `tokens.fontSize`, `tokens.lineHeight`, `tokens.borderRadius`, `tokens.spacing`, and
+  `tokens.strokeWidth`.
 - Prefer flex color tokens. Use `globalTokens` only when no flex semantic color exists.
 - Never replace available spacing, radius, stroke, typography, or size tokens with numeric literals.
 - Resolve interactive colors in this priority order: disabled, pressed, hovered, rest. Apply selected and appearance axes within that state.

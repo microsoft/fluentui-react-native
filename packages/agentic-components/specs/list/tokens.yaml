@@ -30,7 +30,7 @@ variants:
 tokens:
   background:
     container:
-      token: colorBackgroundNeutralTransparent
+      token: color.backgroundNeutralTransparent
       rationale: List sits on the parent surface and adds no visual weight of its own. The surrounding surface provides the background context.
 
   foreground:

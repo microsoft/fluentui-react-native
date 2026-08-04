@@ -27,10 +27,10 @@ tokens:
     BreadcrumbItem: Delegates to Button (Subtle style) — see flex-components:button.
     CurrentItem:
       rest:
-        token: colorForegroundNeutralPrimary
+        token: color.foregroundNeutralPrimary
     Separator:
       rest:
-        token: colorForegroundNeutralTertiary
+        token: color.foregroundNeutralTertiary
         rationale: >
           Non-interactive visual divider. Tertiary weight subordinates the separator to item labels
           so it reads as structural chrome rather than content.
@@ -55,13 +55,13 @@ tokens:
         CurrentItem uses the Strong (-strong) variant of the matching size text style.
         Semibold weight signals "you are here" without changing font size or color.
         No Selected axis or font-weight swap pattern — CurrentItem is always Semibold.
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     container-gap:
-      Small: spacingComponentBase50
-      Medium: spacingComponentBase50
-      Large: spacingComponentBase100
+      Small: spacing.componentBase50
+      Medium: spacing.componentBase50
+      Large: spacing.componentBase100
       rationale: >
         Gap between each sibling in the container flex row — BreadcrumbItem, Separator, and
         CurrentItem are all direct siblings. BreadcrumbItem (Button) owns its own internal
@@ -70,9 +70,9 @@ tokens:
     BreadcrumbItem: Delegates to Button (Icon and text layout, per-size padding and gap) — see flex-components:button.
     CurrentItem:
       icon-gap:
-        Small: spacingComponentBase50
-        Medium: spacingComponentBase100
-        Large: spacingComponentBase150
+        Small: spacing.componentBase50
+        Medium: spacing.componentBase100
+        Large: spacing.componentBase150
         notes: >
           Icon-to-label gap matches BreadcrumbItem (Button) icon gap for its size,
           keeping icon and text rhythm visually consistent across the trail.
