@@ -10,7 +10,7 @@ import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { Theme } from '@fluentui-react-native/design/theming';
 import { useTheme } from '@fluentui-react-native/design/theming';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { getCurrentAppearance } from '@fluentui-react-native/design/theming';
 import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
 import type { SvgProps } from 'react-native-svg';
 import Svg, { G, Path } from 'react-native-svg';

@@ -9,9 +9,12 @@ import * as renderer from 'react-test-renderer';
 import { act } from 'react';
 
 import { phasedComponent, stagedComponent } from './phased';
-import { directComponent } from './direct';
-import { useSlot } from './useSlot';
+import { directComponent, legacyDirectComponent } from './direct';
+import { useOptionalSlot, useSlot } from './useSlot';
+import { createSlotComponent } from './render';
+import { isDirectComponent, isLegacyDirectComponent, isPhasedComponent, isSlotComponent, isStagedComponent } from './identify';
 import type { FurnJSX } from '../types/react.types';
+import type { SlotProp } from '../types/component.types';
 
 type PluggableTextProps = TextProps & { inner?: FunctionComponent<TextProps> };
 
@@ -24,7 +27,7 @@ const PluggableText = phasedComponent((props: PluggableTextProps) => {
 
   // next call use slot with either inner or Text as the component type, and forwarding the props here. These props will be remembered
   // and don't need to be passed again in the JSX tree.
-  const Inner = useSlot(inner || Text, rest);
+  const Inner = useSlot(inner ?? Text, rest);
 
   // return a closure for finishing off render
   return directComponent<TextProps>((extra: TextProps) => {
@@ -129,6 +132,161 @@ describe('useSlot tests', () => {
   });
 });
 
+type OptionalSlotPropConsumerProps = {
+  slot?: SlotProp<typeof Text> | null;
+  renderByDefault?: boolean;
+};
+
+type RequiredSlotProps = {
+  required: string;
+};
+
+type RequiredChildrenProps = {
+  children: string;
+};
+
+const RequiredSlotComponent: React.FunctionComponent<RequiredSlotProps> = ({ required }) => <Text>{required}</Text>;
+const RequiredChildrenComponent: React.FunctionComponent<RequiredChildrenProps> = ({ children }) => <Text>{children}</Text>;
+
+const RequiredSlotPropConsumer: React.FunctionComponent = () => {
+  const RequiredSlot = useSlot(RequiredSlotComponent, undefined, { defaultProps: { required: 'resolved' } });
+  return <RequiredSlot />;
+};
+
+const FulfilledRequiredSlotPropConsumer: React.FunctionComponent = () => {
+  const RequiredSlot = useSlot(RequiredSlotComponent, { required: 'slot prop' });
+  return <RequiredSlot />;
+};
+
+const UnresolvedRequiredSlotPropConsumer: React.FunctionComponent = () => {
+  const RequiredSlot = useSlot(RequiredSlotComponent, undefined);
+  // @ts-expect-error The required prop was not resolved by the slot prop or base props.
+  return <RequiredSlot />;
+};
+
+const OptionalSlotPropConsumer: React.FunctionComponent<OptionalSlotPropConsumerProps> = ({ slot, renderByDefault }) => {
+  const OptionalText = useOptionalSlot(Text, slot, { defaultProps: { testID: 'optional-slot' }, renderByDefault });
+  return <View>{OptionalText ? <OptionalText /> : null}</View>;
+};
+
+const LegacyOptionalSlotConsumer: React.FunctionComponent<{ component?: React.ComponentType<TextProps> }> = ({ component }) => {
+  const OptionalText = useOptionalSlot<TextProps>(component, { testID: 'legacy-optional-slot' });
+  return <View>{OptionalText ? <OptionalText>legacy</OptionalText> : null}</View>;
+};
+
+const DefaultedRequiredOptionalSlotConsumer: React.FunctionComponent = () => {
+  const OptionalRequiredSlot = useOptionalSlot(RequiredSlotComponent, undefined, {
+    defaultProps: { required: 'optional default' },
+    renderByDefault: true,
+  });
+  return OptionalRequiredSlot ? <OptionalRequiredSlot /> : null;
+};
+
+const RequiredChildrenShorthandConsumer: React.FunctionComponent = () => {
+  const Content = useSlot(RequiredChildrenComponent, 'required shorthand');
+  return <Content />;
+};
+
+const OptionalRequiredChildrenShorthandConsumer: React.FunctionComponent = () => {
+  const Content = useOptionalSlot(RequiredChildrenComponent, 'optional shorthand');
+  return Content ? <Content /> : null;
+};
+
+describe('slot prop resolution', () => {
+  it('accepts a component with required props when base props provide them', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<RequiredSlotPropConsumer />);
+    });
+
+    expect(component!.root.findByType(Text).props.children).toBe('resolved');
+    expect(UnresolvedRequiredSlotPropConsumer).toBeDefined();
+  });
+
+  it('accepts required props supplied directly through the slot prop', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<FulfilledRequiredSlotPropConsumer />);
+    });
+    expect(component!.root.findByType(Text).props.children).toBe('slot prop');
+  });
+
+  it('treats shorthand children as fulfilled for required and optional slots', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(
+        <View>
+          <RequiredChildrenShorthandConsumer />
+          <OptionalRequiredChildrenShorthandConsumer />
+        </View>,
+      );
+    });
+    expect(component!.root.findAllByType(Text).map((text) => text.props.children)).toEqual(['required shorthand', 'optional shorthand']);
+  });
+
+  it('renders an optional slot only when its prop is provided', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<OptionalSlotPropConsumer />);
+    });
+    expect(component!.root.findAllByType(Text)).toHaveLength(0);
+
+    act(() => {
+      component!.update(<OptionalSlotPropConsumer slot="content" />);
+    });
+    const textSlots = component!.root.findAllByType(Text);
+    expect(textSlots).toHaveLength(1);
+    expect(textSlots[0].props).toMatchObject({ children: 'content', testID: 'optional-slot' });
+
+    act(() => {
+      component!.update(<OptionalSlotPropConsumer slot={null} />);
+    });
+    expect(component!.root.findAllByType(Text)).toHaveLength(0);
+  });
+
+  it('renders an undefined optional slot by default only when requested', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<OptionalSlotPropConsumer renderByDefault />);
+    });
+    expect(component!.root.findByType(Text).props.testID).toBe('optional-slot');
+
+    act(() => {
+      component!.update(<OptionalSlotPropConsumer slot={null} renderByDefault />);
+    });
+    expect(component!.root.findAllByType(Text)).toHaveLength(0);
+  });
+
+  it('uses default props to fulfill a required optional slot', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<DefaultedRequiredOptionalSlotConsumer />);
+    });
+    expect(component!.root.findByType(Text).props.children).toBe('optional default');
+  });
+
+  it('preserves nullable component support from the previous API', () => {
+    let component: renderer.ReactTestRenderer;
+    act(() => {
+      component = renderer.create(<LegacyOptionalSlotConsumer />);
+    });
+    expect(component!.root.findAllByType(Text)).toHaveLength(0);
+
+    act(() => {
+      component!.update(<LegacyOptionalSlotConsumer component={Text} />);
+    });
+    expect(component!.root.findByType(Text).props).toMatchObject({
+      children: 'legacy',
+      testID: 'legacy-optional-slot',
+    });
+
+    act(() => {
+      component!.update(<LegacyOptionalSlotConsumer />);
+    });
+    expect(component!.root.findAllByType(Text)).toHaveLength(0);
+  });
+});
+
 /**
  * INTRINSIC ATTRIBUTE ACCEPTANCE
  *
@@ -158,6 +316,29 @@ class ClassAccept extends React.Component<AcceptProps> {
     return <Text>{this.props.title}</Text>;
   }
 }
+
+class NativeRefAccept extends React.Component<AcceptProps> {
+  public override render(): FurnJSX.Element {
+    return <Text>{this.props.title}</Text>;
+  }
+}
+
+const ForwardedNativeRefAccept = React.forwardRef<NativeRefAccept, AcceptProps>((props, ref) => <NativeRefAccept ref={ref} {...props} />);
+
+type NativeRefConsumerProps = {
+  baseRef: React.Ref<NativeRefAccept>;
+  userRef: React.Ref<NativeRefAccept>;
+};
+
+const NativeRefConsumer: React.FunctionComponent<NativeRefConsumerProps> = ({ baseRef, userRef }) => {
+  const NativeSlot = useSlot(NativeRefAccept, { ref: baseRef, title: 'native' }, ({ title }) => ({ title }));
+  return <NativeSlot ref={userRef} />;
+};
+
+const NativeOverrideRefConsumer: React.FunctionComponent<{ userRef: React.Ref<NativeRefAccept> }> = ({ userRef }) => {
+  const NativeSlot = useSlot(NativeRefAccept, { as: ForwardedNativeRefAccept }, { defaultProps: { title: 'native override' } });
+  return <NativeSlot ref={userRef} />;
+};
 
 const PhasedAccept = phasedComponent((_props: AcceptProps) => directComponent<AcceptProps>((extra: AcceptProps) => <Text {...extra} />));
 
@@ -206,21 +387,115 @@ const ClassSlotConsumer: React.FunctionComponent = () => {
   );
 };
 
+const ClassicRuntimeClassSlotConsumer: React.FunctionComponent = () => {
+  const ClassSlot = useSlot(ClassAccept, { title: 'class' });
+  return React.createElement(ClassSlot, { key: 'classic' });
+};
+
 describe('slot intrinsic attribute acceptance', () => {
   it('accepts the key attribute on slots created from any supported component type', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
     let component: renderer.ReactTestRenderer;
-    act(() => {
-      component = renderer.create(<IntrinsicAttributeConsumer />);
-    });
-    // If any slot rejected `key`, the file would not have compiled; this confirms the tree still renders.
-    expect(component!.toJSON()).toMatchSnapshot();
+    try {
+      act(() => {
+        component = renderer.create(<IntrinsicAttributeConsumer />);
+      });
+      // If any slot rejected `key`, the file would not have compiled; this confirms the tree still renders.
+      expect(component!.toJSON()).toMatchSnapshot();
+      expect(consoleError).not.toHaveBeenCalled();
+    } finally {
+      consoleError.mockRestore();
+    }
   });
 
   it('accepts the key attribute on a slot created from a class component in a keyed list', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
     let component: renderer.ReactTestRenderer;
+    try {
+      act(() => {
+        component = renderer.create(<ClassSlotConsumer />);
+      });
+      expect(component!.toJSON()).toMatchSnapshot();
+      expect(consoleError).not.toHaveBeenCalled();
+    } finally {
+      consoleError.mockRestore();
+    }
+  });
+
+  it('does not forward React key metadata when a slot uses the classic runtime', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    let component: renderer.ReactTestRenderer;
+    try {
+      act(() => {
+        component = renderer.create(<ClassicRuntimeClassSlotConsumer />);
+      });
+      expect(component!.root.findByType(Text).props.children).toBe('class');
+      expect(consoleError).not.toHaveBeenCalled();
+    } finally {
+      consoleError.mockRestore();
+    }
+  });
+
+  it('forwards and stably composes native slot refs', () => {
+    const baseRef = jest.fn();
+    const userRef = jest.fn();
+    let component: renderer.ReactTestRenderer;
+
     act(() => {
-      component = renderer.create(<ClassSlotConsumer />);
+      component = renderer.create(<NativeRefConsumer baseRef={baseRef} userRef={userRef} />);
     });
-    expect(component!.toJSON()).toMatchSnapshot();
+
+    expect(baseRef).toHaveBeenCalledTimes(1);
+    expect(userRef).toHaveBeenCalledTimes(1);
+    expect(baseRef.mock.calls[0][0]).toBeInstanceOf(NativeRefAccept);
+    expect(userRef.mock.calls[0][0]).toBe(baseRef.mock.calls[0][0]);
+
+    act(() => {
+      component!.update(<NativeRefConsumer baseRef={baseRef} userRef={userRef} />);
+    });
+    expect(baseRef).toHaveBeenCalledTimes(1);
+    expect(userRef).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      component!.unmount();
+    });
+    expect(baseRef).toHaveBeenLastCalledWith(null);
+    expect(userRef).toHaveBeenLastCalledWith(null);
+  });
+
+  it('forwards native refs through a compatible as override', () => {
+    const userRef = React.createRef<NativeRefAccept>();
+    let component: renderer.ReactTestRenderer;
+
+    act(() => {
+      component = renderer.create(<NativeOverrideRefConsumer userRef={userRef} />);
+    });
+    expect(userRef.current).toBeInstanceOf(NativeRefAccept);
+
+    act(() => {
+      component!.unmount();
+    });
+    expect(userRef.current).toBeNull();
+  });
+});
+
+describe('custom render type identification', () => {
+  it('recognizes function-backed direct, phased, staged, and slot components', () => {
+    const direct = directComponent<AcceptProps>((props) => <Text {...props} />);
+    const legacyDirect = legacyDirectComponent<AcceptProps>((props, ...children) => <Text {...props}>{children}</Text>);
+    const slot = createSlotComponent(FnAccept, {});
+
+    expect(isDirectComponent(direct)).toBe(true);
+    expect(isLegacyDirectComponent(legacyDirect)).toBe(true);
+    expect(isPhasedComponent(PhasedAccept)).toBe(true);
+    expect(isStagedComponent(StagedAccept)).toBe(true);
+    expect(isSlotComponent(slot)).toBe(true);
+    expect(isSlotComponent(PhasedAccept)).toBe(false);
+    expect(isSlotComponent(StagedAccept)).toBe(false);
+  });
+
+  it('preserves explicit props generics for createSlotComponent', () => {
+    const slot = createSlotComponent<AcceptProps>(FnAccept, { title: 'explicit props' });
+    expect(isSlotComponent(slot)).toBe(true);
   });
 });

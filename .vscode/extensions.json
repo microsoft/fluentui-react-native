@@ -6,7 +6,7 @@
     "dbaeumer.vscode-eslint",
     // Use the OXC formatter as the default formatter
     "oxc.oxc-vscode",
-    // Use the native typescript preview to run the editor typescript server
+    // TypeScript 7 (native, tsc/tsgo-based) language server extension; auto-detected via typescript.tsdk
     "typescriptteam.native-preview"
   ]
 }

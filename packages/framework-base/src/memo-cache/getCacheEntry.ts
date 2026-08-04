@@ -1,7 +1,14 @@
-/** signature for the object/function key values, used for memoization */
+/**
+ * Signature for the object/function key values, used for memoization.
+ *
+ * @internal
+ */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export type MemoObjectKey = object | Function;
 
+/**
+ * @internal
+ */
 export type CacheEntry<T = unknown> = {
   /** stores the cached value if any */
   value?: T;
@@ -54,6 +61,7 @@ function jumpToCacheEntry(entry: CacheEntry, val: any): CacheEntry {
  *
  * @param entry - entry to use as the base of the cache walk
  * @param args - array of arguments to use to progress deeper into the cache
+ * @internal
  */
 export function getCacheEntry(entry: CacheEntry, args?: unknown[]): CacheEntry {
   // in the case where the args array exists and is > 0 length:

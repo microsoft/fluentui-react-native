@@ -2,7 +2,12 @@ import * as React from 'react';
 import type { PressableProps } from 'react-native';
 import type { PressableState } from '../types/interactive.types';
 
-const DEFAULT_STATE_KEYS: (keyof PressableState)[] = ['pressed', 'hovered', 'focused'];
+const DEFAULT_STATE_KEYS: readonly (keyof PressableState)[] = ['pressed', 'hovered', 'focused'];
+const INITIAL_STATE: PressableState = {
+  pressed: false,
+  hovered: false,
+  focused: false,
+};
 
 export type UsePressableResult = [props: PressableProps, state: PressableState];
 
@@ -15,11 +20,13 @@ export type UsePressableResult = [props: PressableProps, state: PressableState];
  *
  * @param props The PressableProps to augment with state tracking
  * @param stateKeys The keys of the PressableState to track. Defaults to all three keys.
- * @returns A tuple of the augmented props to spread onto a Pressable and the current interactive state for the tracked keys.
+ * @returns A tuple of the augmented props to spread onto a Pressable and the complete interactive state.
  */
-export function usePressableState(props: PressableProps, stateKeys: (keyof PressableState)[] = DEFAULT_STATE_KEYS): UsePressableResult {
-  // create a state entry to track the pressable state for the requested keys.
-  const [state, setState] = React.useState<PressableState>(() => initialStateFromKeys(stateKeys));
+export function usePressableState(
+  props: PressableProps,
+  stateKeys: readonly (keyof PressableState)[] = DEFAULT_STATE_KEYS,
+): UsePressableResult {
+  const [state, setState] = React.useState<PressableState>(() => ({ ...INITIAL_STATE }));
 
   // determine which states are being tracked so that we can wrap the appropriate handlers
   const press = stateKeys.includes('pressed');
@@ -69,17 +76,4 @@ export function usePressableState(props: PressableProps, stateKeys: (keyof Press
   }, [press, hover, focus, onPressIn, onPressOut, onHoverIn, onHoverOut, onFocus, onBlur]);
 
   return [{ ...props, ...overrides }, state];
-}
-
-/**
- * Creates an initial state object for the requested keys, with all values set to false. This is used to initialize the state for the usePressableState hook.
- * @param keys The keys of the PressableState to initialize.
- * @returns An initial state object with all values set to false.
- */
-function initialStateFromKeys(keys: (keyof PressableState)[]): PressableState {
-  const initialState: PressableState = {};
-  for (const key of keys) {
-    initialState[key] = false;
-  }
-  return initialState;
 }

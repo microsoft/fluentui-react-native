@@ -53,9 +53,7 @@ export default function ({ cwd, manifest }: { cwd: string; manifest: PackageMani
 
   return {
     dependencies: {
-      ...conditionallyAdd(['typescript', '@types/node', '@types/jest', '@typescript/native-preview'], manifest, () =>
-        fs.existsSync(path.join(cwd, 'tsconfig.json')),
-      ),
+      ...conditionallyAdd(['typescript', '@types/node', '@types/jest'], manifest, () => fs.existsSync(path.join(cwd, 'tsconfig.json'))),
       ...conditionallyAdd(['oxlint', 'oxlint-tsgolint'], manifest, enableLinting),
       ...conditionallyAdd(['oxfmt'], manifest, () => addOxfmt(manifest)),
       ...conditionallyAdd(['jest', '@types/jest'], manifest, () => addJest(cwd, manifest)),

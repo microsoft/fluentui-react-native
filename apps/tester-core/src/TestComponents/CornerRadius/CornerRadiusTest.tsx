@@ -16,7 +16,7 @@ import { Text } from '@fluentui/react-native';
 import { HOMEPAGE_CORNERRADIUS_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { Stack } from '@fluentui-react-native/stack';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { getCurrentAppearance } from '@fluentui-react-native/design/theming';
 
 import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';

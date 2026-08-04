@@ -29,7 +29,7 @@ const config = {
     // These run once for the whole repo. Sub-packages do not have these scripts,
     // so lage naturally scopes them to the root workspace.
     build: {
-      // tsgo project level build has its own caching
+      // tsc project level build has its own caching
       cache: false,
     },
     'check-publishing': {
@@ -49,8 +49,7 @@ const config = {
        * Prebuild is a pre-build step that can either modify the source code or generate additional files in the project.
        */
       dependsOn: ['^prebuild'],
-      inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
-      outputs: ['lib/**/*', 'src/**/*'],
+      cache: false,
     },
     'root-prebuild': {
       cache: false,

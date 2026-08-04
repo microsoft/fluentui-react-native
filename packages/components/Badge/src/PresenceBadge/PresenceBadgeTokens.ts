@@ -9,7 +9,7 @@ import {
   size20,
   sizeNone,
 } from '@fluentui-react-native/design/tokens/global';
-import { isHighContrast } from '@fluentui-react-native/theming-utils';
+import { isHighContrast } from '@fluentui-react-native/design/theming';
 
 import type { PresenceBadgeTokens } from './PresenceBadge.types';
 

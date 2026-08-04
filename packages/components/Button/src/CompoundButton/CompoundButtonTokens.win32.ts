@@ -1,6 +1,6 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import { size120, size160, size200, size80, strokeWidth10, strokeWidth20 } from '@fluentui-react-native/design/tokens/global';
-import { isHighContrast } from '@fluentui-react-native/theming-utils';
+import { isHighContrast } from '@fluentui-react-native/design/theming';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { CompoundButtonTokens } from './CompoundButton.types';

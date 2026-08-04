@@ -6,8 +6,25 @@ import { isDirectComponentType, isSlotComponent } from './identify';
 import { prepareSlotProps, setSlotStatics } from './slot';
 import { SLOT_COMPONENT_KEY } from '../const';
 import { getPropsChildren, setPropsChildren } from '../utilities/typeUtils';
+import type { AnyComponent, ComponentPropsTransform } from '../types/component.types';
+import type { PropsWithRefOf } from '../types/props.types';
 
+/**
+ * @internal
+ */
 export type CustomRender = () => RenderResult;
+
+function hasOwnKey(props: unknown): props is { key?: React.Key } {
+  return props != null && typeof props === 'object' && Object.prototype.hasOwnProperty.call(props, 'key');
+}
+
+function extractKeyFromProps<TProps>(props: TProps, key?: React.Key): [TProps, React.Key | undefined] {
+  if (hasOwnKey(props)) {
+    const { key: propsKey, ...propsWithoutKey } = props as TProps & { key?: React.Key };
+    return [propsWithoutKey as TProps, propsKey === undefined ? key : propsKey];
+  }
+  return [props, key];
+}
 
 /**
  * Root jsx render function, used for both jsx and jsxs calls. This handles all of our custom rendering patterns
@@ -16,6 +33,7 @@ export type CustomRender = () => RenderResult;
  * @param props the props for the component
  * @param key optional key for the component, this is parallel to props and injected at the framework level
  * @param jsxFn optional jsx function to use for rendering, set when called by _jsx, _jsxs but will auto-detect for non-framework callers
+ * @internal
  */
 export function renderForJsxRuntime<TProps>(
   type: React.ElementType,
@@ -25,13 +43,15 @@ export function renderForJsxRuntime<TProps>(
 ): RenderResult {
   // If the type is a direct component type, render it directly
   if (isDirectComponentType(type)) {
+    [props, key] = extractKeyFromProps(props, key);
     const jsxResult = renderDirectComponent(type, props);
     // If a key is provided, clone the element with the key
     return key != null ? React.cloneElement(jsxResult, { key }) : jsxResult;
   }
 
   // with a slot component use the internal type and props to render directly
-  if (isSlotComponent<TProps>(type)) {
+  if (isSlotComponent(type)) {
+    [props, key] = extractKeyFromProps(props, key);
     const slotType = type[SLOT_COMPONENT_KEY];
     const slotProps = prepareSlotProps(type, props);
     // now re-enter with the inner type to handle direct/etc
@@ -48,7 +68,11 @@ export function renderForJsxRuntime<TProps>(
   }
 
   // now call the appropriate jsx function to render the component
-  return jsxFn(type, props, key);
+  // React 19 adds a non-configurable development getter for `key` to the props object. Clone keyed props
+  // so React cannot mutate cached slot props and so a getter received from the classic runtime is removed.
+  const shouldCloneProps = props != null && typeof props === 'object' && (key !== undefined || hasOwnKey(props));
+  const jsxProps = shouldCloneProps ? ({ ...props } as TProps) : props;
+  return jsxFn(type, jsxProps, key);
 }
 
 /**
@@ -69,6 +93,16 @@ export function renderJsx<TProps>(type: React.ElementType, props: TProps): Rende
  * @param transform optional transform function for the slot
  * @return a slot component
  */
+export function createSlotComponent<Type extends AnyComponent>(
+  component: Type,
+  props: Partial<PropsWithRefOf<Type>>,
+  transform?: ComponentPropsTransform<Type>,
+): SlotComponent<PropsWithRefOf<Type>>;
+export function createSlotComponent<TProps>(
+  component: React.ComponentType<TProps>,
+  props: Partial<TProps>,
+  transform?: PropsTransform<TProps>,
+): SlotComponent<TProps>;
 export function createSlotComponent<TProps>(
   component: React.ComponentType<TProps>,
   props: Partial<TProps>,
@@ -86,6 +120,8 @@ export function createSlotComponent<TProps>(
 
 /**
  * Render signature matching the old createElement pattern from the pre-jsx runtime. Will call through to the new runtime.
+ *
+ * @internal
  */
 export function renderForClassicRuntime<TProps>(type: RenderType, props: TProps, children: React.ReactNode[]): RenderResult {
   // route this through to the new runtime

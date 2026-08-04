@@ -26,7 +26,7 @@
     }
   },
   "scripts": {
-    "build": "tsgo -b",
+    "build": "tsc -b",
     "clean": "fluentui-scripts clean",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",

@@ -23,7 +23,7 @@
   },
   "scripts": {
     "android": "rnx-cli run --platform android",
-    "build": "tsgo -b",
+    "build": "tsc -b",
     "bundle": "rnx-cli bundle --dev false",
     "bundle:android": "rnx-cli bundle --dev false --platform android",
     "bundle:ios": "rnx-cli bundle --dev false --platform ios",

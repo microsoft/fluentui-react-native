@@ -96,30 +96,33 @@ describe('Style flatten and merge tests', () => {
     expect(merged).toEqual(sMergedSelectors);
   });
 
-  test('memo recursive arrays', () => {
+  test('merge recursive arrays does not maintain object identity', () => {
     const flattened = mergeStyles(s1);
     const flattened2 = mergeStyles(s1);
     expect(flattened).toEqual(s1flatten);
-    expect(flattened2).toBe(flattened);
+    expect(flattened2).toEqual(flattened);
+    expect(flattened2).not.toBe(flattened);
   });
 
-  test('memo flat style', () => {
+  test('merge flat style returns the style directly', () => {
     const flattened = mergeStyles(s2);
     const flattened2 = mergeStyles(s2);
     expect(flattened).toBe(s2);
-    expect(flattened2).toBe(flattened);
+    expect(flattened2).toBe(s2);
   });
 
-  test('memo and flatten multiple', () => {
+  test('merge and flatten multiple does not maintain object identity', () => {
     const flattened = mergeStyles(s1, s2);
     const flattened2 = mergeStyles(s1, s2);
     expect(flattened).toEqual(sMerged);
-    expect(flattened2).toBe(flattened);
+    expect(flattened2).toEqual(flattened);
+    expect(flattened2).not.toBe(flattened);
   });
 
-  test('memo styles ignores undefined values', () => {
+  test('merge styles ignores undefined values', () => {
     const result1 = mergeStyles(s1, s2, undefined, s1flatten);
     const result2 = mergeStyles(s1, undefined, s2, s1flatten);
-    expect(result2).toBe(result1);
+    expect(result2).toEqual(result1);
+    expect(result2).not.toBe(result1);
   });
 });

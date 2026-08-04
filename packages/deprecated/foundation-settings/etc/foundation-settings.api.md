@@ -4,7 +4,6 @@
 
 ```ts
 // @public
-export function flattenStyle(style: IStyleProp<object>): object;
 
 // @public (undocumented)
 export function getActiveOverrides(target: IComponentSettings, lookup?: IOverrideLookup): string[];
@@ -60,7 +59,6 @@ export function mergeAndFinalizeSettings<TSettings extends IComponentSettings = 
 ): TSettings;
 
 // @public
-export function mergeAndFlattenStyles(finalizer: IFinalizeStyle | undefined, ...styles: IStyleProp<object>[]): object | undefined;
 
 // @public
 export function mergeProps<TProps extends object>(...props: (object | undefined)[]): TProps;

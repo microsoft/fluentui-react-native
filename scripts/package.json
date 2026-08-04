@@ -26,7 +26,7 @@
     "./tsconfig-strict": "./configs/tsconfig/tsconfig.strict.json"
   },
   "scripts": {
-    "build": "tsgo -b",
+    "build": "tsc -b",
     "bundlesize": "bundlesize --debug",
     "format": "node ./src/cli.ts format",
     "lint": "node ./src/cli.ts lint"
@@ -73,7 +73,6 @@
     "@rnx-kit/types-node": "catalog:",
     "@types/micromatch": "^4.0.9",
     "@types/node": "catalog:",
-    "@typescript/native-preview": "7.0.0-dev.20260610.1",
     "@yarnpkg/types": "^4.0.1",
     "chalk": "^4.0.0",
     "clipanion": "^4.0.0-rc.4",
@@ -88,7 +87,7 @@
     "oxlint-tsgolint": "^0.17.4",
     "react": "19.1.4",
     "react-native": "^0.81.0",
-    "typescript": "^5.8.0",
+    "typescript": "7.0.2",
     "workspace-tools": "^0.26.3",
     "zx": "^8.2.4"
   },

@@ -8,7 +8,7 @@ There are two ways to make a custom theme: you can tack onto an existing one usi
 
 ### Extending an existing `ThemeReference`
 
-We have a concept of `ThemeRecipes` which allow for layering of partial theme objects to create the ultimately desired theme. `ThemeRecipes` are functions which take a `Theme` and spit out a [`PartialTheme`](../../../packages/agentic-design/src/theming/Theme.types.ts), which is then deep merged into the base theme object.
+We have a concept of `ThemeRecipes` which allow for layering of partial theme objects to create the ultimately desired theme. `ThemeRecipes` are functions which take a `Theme` and spit out a [`PartialTheme`](../../../packages/agentic-design/src/theming/types/Theme.types.ts), which is then deep merged into the base theme object.
 
 You can extend one of our default themes by creating a `ThemeReference` using the default theme as the base theme, and then add your customization as a `ThemeRecipe`:
 
@@ -46,7 +46,7 @@ There's two ways to customize a FURN theme's properties:
 
 ### Changing theme tokens directly
 
-Theme tokens can be overridden directly. You can specify different values for theme entries and add to the set of colors. You can see what can be overridden by looking at the [Theme type definition](../../../packages/agentic-design/src/theming/Theme.types.ts).
+Theme tokens can be overridden directly. You can specify different values for theme entries and add to the set of colors. You can see what can be overridden by looking at the [Theme type definition](../../../packages/agentic-design/src/theming/types/Theme.types.ts).
 
 This approach is useful if you need the customizations to be applied to all components.
 
@@ -161,7 +161,7 @@ interface Theme {
 }
 ```
 
-<font size=1>(Taken from the [`Theme` type definition](../../../packages/agentic-design/src/theming/Theme.types.ts).)</font>
+<font size=1>(Taken from the [`Theme` type definition](../../../packages/agentic-design/src/theming/types/Theme.types.ts).)</font>
 
 NOTE: If you would prefer to customize one instance of a FURN component instead, use [the customize API](../../../packages/framework/composition/README.md).
 
