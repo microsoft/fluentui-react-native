@@ -1,17 +1,30 @@
+/** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ButtonState } from './button.types';
 
 /**
  * Render the Button component
- * @param State The state of the Button component containing slots and other state information.
+ * @param state The state of the Button component containing slots and other state information.
  * @returns The rendered Button component.
  */
-export function renderButton_unstable(State: ButtonState) {
-  const { iconOnly, iconPosition } = State;
+export function renderButton_unstable(state: ButtonState) {
+  const { content, contentContainer: ContentContainer, contentHidden: ContentHidden, iconPosition, isToggleButton } = state;
+  const ActiveIcon = state.selected ? (state.selectedIcon ?? state.icon) : state.icon;
+  const Content = content;
+  const contentElement =
+    Content && isToggleButton && ContentContainer && ContentHidden ? (
+      <ContentContainer>
+        <ContentHidden />
+        <Content />
+      </ContentContainer>
+    ) : (
+      Content && <Content />
+    );
+
   return (
-    <State.root>
-      {iconPosition !== 'after' && State.icon && <State.icon />}
-      {!iconOnly && State.content && <State.content />}
-      {iconPosition === 'after' && State.icon && <State.icon />}
-    </State.root>
+    <state.root>
+      {iconPosition === 'before' && ActiveIcon && <ActiveIcon />}
+      {contentElement}
+      {iconPosition === 'after' && ActiveIcon && <ActiveIcon />}
+    </state.root>
   );
 }

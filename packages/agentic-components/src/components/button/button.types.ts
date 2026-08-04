@@ -1,4 +1,4 @@
-import type { Text, Pressable, PressableProps } from 'react-native';
+import type { Pressable, PressableProps, StyleProp, Text, View, ViewStyle } from 'react-native';
 import type { Slot, OptionalSlot, ComponentProps, ComponentState, PressableState } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../icon/icon';
@@ -21,7 +21,22 @@ export type ButtonSlots = {
    * to be set in ButtonProps['icon'] for the slot to appear.
    */
   icon: OptionalSlot<typeof Icon>;
+
+  /**
+   * Optional filled icon displayed in place of `icon` while the button is selected.
+   */
+  selectedIcon: OptionalSlot<typeof Icon>;
 };
+
+type ButtonStateSlots = ButtonSlots & {
+  contentContainer: OptionalSlot<typeof View>;
+  contentHidden: OptionalSlot<typeof Text>;
+};
+
+export type ButtonAppearance = 'primary' | 'secondary' | 'outline' | 'subtle';
+export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonShape = 'rounded' | 'square' | 'circle';
+export type ButtonIconPosition = 'before' | 'after';
 
 export type ButtonStateProps = {
   /**
@@ -31,26 +46,32 @@ export type ButtonStateProps = {
   /**
    * The appearance style of the button.
    */
-  appearance?: 'primary' | 'secondary' | 'outline' | 'subtle';
+  appearance?: ButtonAppearance;
   /**
    * The size of the button.
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: ButtonSize;
   /**
    * The shape of the button.
    */
-  shape?: 'rounded' | 'square' | 'circle';
+  shape?: ButtonShape;
   /**
    * The position of the icon relative to the button content.
    */
-  iconPosition?: 'before' | 'after';
+  iconPosition?: ButtonIconPosition;
+  /**
+   * Whether the button is selected. Supplying this prop enables toggle-button accessibility semantics.
+   */
+  selected?: boolean;
 };
 
 /**
  * Props that are exposed from the underlying Pressable component at the top level. A button controls its
- * own children so the 'children' prop is omitted from the exposed Pressable props.
+ * own children and resolves styles from tokens, so those props are exposed separately.
  */
-export type ButtonExposedPressableProps = Omit<PressableProps, 'children'>;
+export type ButtonExposedPressableProps = Omit<PressableProps, 'children' | 'style'> & {
+  style?: StyleProp<ViewStyle>;
+};
 
 /**
  * Props for the Button component, including state props, slot props, and exposed Pressable props.
@@ -60,7 +81,7 @@ export type ButtonProps = ButtonStateProps & ComponentProps<ButtonSlots, ButtonE
 /**
  * The button state, returned from the useButton hook
  */
-export type ButtonState = ComponentState<ButtonSlots> &
+export type ButtonState = ComponentState<ButtonStateSlots> &
   Required<ButtonStateProps> &
   ThemeState &
   PressableState & {
@@ -68,5 +89,13 @@ export type ButtonState = ComponentState<ButtonSlots> &
      * Whether the button is displaying only an icon without text. This is set automatically when the button
      * has an icon and no content.
      */
-    iconOnly?: boolean;
+    iconOnly: boolean;
+    /**
+     * Whether selected-state semantics are enabled.
+     */
+    isToggleButton: boolean;
+    /**
+     * User styling applied after the component's token-derived root styles.
+     */
+    userStyle?: StyleProp<ViewStyle>;
   };

@@ -9,7 +9,7 @@ const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
   args: {
-    title: 'Button',
+    content: 'Button',
     disabled: false,
   },
 };
@@ -22,7 +22,29 @@ export const Default: Story = {};
 
 export const Disabled: Story = {
   args: {
-    title: 'Disabled',
+    content: 'Disabled',
     disabled: true,
+  },
+};
+
+export const Primary: Story = {
+  args: {
+    appearance: 'primary',
+    content: 'Primary',
+  },
+};
+
+export const Selected: Story = {
+  args: {
+    content: 'Selected',
+    selected: true,
+  },
+};
+
+export const IconOnly: Story = {
+  args: {
+    accessibilityLabel: 'Confirm',
+    content: null,
+    icon: { fontSource: { codepoint: 0x2713 } },
   },
 };

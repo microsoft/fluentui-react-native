@@ -190,7 +190,8 @@ sizes:
     Heights are resultant — derived from padding + typography + stroke. Listed values are for Icon-and-text;
     Icon-only buttons are square by design and their dimensions are determined by icon size + padding (24 / 32 / 40).
     Prefer responsive sizing; use min/max constraints when a fixed bound is needed.
-    Icon sizes have no token coverage and must be hardcoded.
+    Icon sizes have no component-specific semantic token coverage. Use the equivalent
+    global size tokens (size160 and size200) rather than numeric literals.
 
 properties:
   component:
