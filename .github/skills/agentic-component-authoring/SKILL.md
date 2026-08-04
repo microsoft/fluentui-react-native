@@ -8,10 +8,24 @@ license: MIT
 
 Build components in `packages/agentic-components` as React Native adaptations of the Fluent UI v9 component pattern.
 
+## Components and primitives
+
+- Higher-order components live in `src/components`. They own design-token styling, interaction state, layout, and
+  component-level accessibility behavior. Use `components/button` as the canonical implementation.
+- Primitive components live in `src/primitives`. They are unstyled, hook-free building blocks designed primarily for use
+  as slots by higher-order components.
+- Keep primitive props small and compatible with `SlotProp`. Let consumers supply size, color, accessibility, and source
+  values rather than reading themes or choosing appearance defaults inside the primitive.
+- Use `directComponent` for a primitive that only selects an inner component or transforms props so slot consumption does
+  not add a React boundary.
+- Give primitives compile-time slot coverage, runtime coverage for every supported inner type, and Storybook stories under
+  the `Primitives/` hierarchy.
+
 ## Workflow
 
 1. Read the repository `AGENTS.md`, the component's colocated `SPEC.md`, and every companion file it references.
-2. Inspect `components/button` as the canonical implementation before choosing file structure or slot patterns.
+2. Decide whether the work is a styled higher-order component or an unstyled primitive. Inspect `components/button` for
+   higher-order components and `primitives/icon` for primitives before choosing file structure or slot patterns.
 3. Preserve the component's spec axes, accessibility contract, interaction states, and platform guidance. Call out a genuine token gap rather than inventing an unrelated literal.
 4. Define public slots and props in `<component>.types.ts` with `Slot`, `OptionalSlot`, `ComponentProps`, and `ComponentState`.
    Add state-only slots in a separate internal slot type when rendering needs measuring, overlay, or structural elements that

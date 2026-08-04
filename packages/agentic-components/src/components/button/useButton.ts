@@ -3,7 +3,7 @@ import type { ButtonProps, ButtonState } from './button.types';
 import { usePressableState, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 import { Pressable, Text, View } from 'react-native';
-import { Icon } from '../icon/icon';
+import { Icon } from '../../primitives/icon/icon';
 
 /**
  * Hook to create the state for a Button component. This is responsible for:

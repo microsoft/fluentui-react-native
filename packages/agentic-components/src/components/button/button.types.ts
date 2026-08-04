@@ -1,7 +1,7 @@
 import type { Pressable, PressableProps, StyleProp, Text, View, ViewStyle } from 'react-native';
 import type { Slot, OptionalSlot, ComponentProps, ComponentState, PressableState } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
-import type { Icon } from '../icon/icon';
+import type { Icon } from '../../primitives/icon/icon';
 
 export type ButtonSlots = {
   /**
