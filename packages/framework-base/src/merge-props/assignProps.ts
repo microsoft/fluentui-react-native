@@ -78,6 +78,7 @@ function assignStylesWorker(collector: StyleProp<unknown>[], styles: StyleProp<u
  * Remove all keys with undefined values from the given object.
  * @param obj The object from which undefined keys should be removed.
  * @returns The same object with all undefined keys removed.
+ * @internal
  */
 export function trimUndefinedKeys<T>(obj: T): T {
   if (isObject(obj)) {

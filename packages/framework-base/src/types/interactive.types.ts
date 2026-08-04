@@ -5,9 +5,9 @@ import type { PressableProps } from 'react-native';
  * with pressable components to track their interactive state. It is a subset of the PressableProps
  */
 export type PressableState = {
-  pressed?: boolean;
-  hovered?: boolean;
-  focused?: boolean;
+  pressed: boolean;
+  hovered: boolean;
+  focused: boolean;
 };
 
 /**

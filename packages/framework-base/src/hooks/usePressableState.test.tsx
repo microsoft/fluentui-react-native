@@ -101,17 +101,15 @@ describe('usePressableState', () => {
 
   it('only tracks the requested state keys', () => {
     const result = renderPressableState({}, ['pressed']);
-    // state is seeded to false only for the requested keys
-    expect(result.state).toEqual({ pressed: false });
+    // State remains complete, while only the requested handlers are wired.
+    expect(result.state).toEqual({ pressed: false, hovered: false, focused: false });
     // only pressed handlers are wired; hover/focus handlers are not added
     expect(typeof result.props.onPressIn).toBe('function');
     expect(result.props.onHoverIn).toBeUndefined();
     expect(result.props.onFocus).toBeUndefined();
 
     act(() => result.props.onPressIn?.(evt));
-    expect(result.state).toEqual({ pressed: true });
-    expect('hovered' in result.state).toBe(false);
-    expect('focused' in result.state).toBe(false);
+    expect(result.state).toEqual({ pressed: true, hovered: false, focused: false });
   });
 
   it('passes untracked handlers through without wrapping (no state added)', () => {
@@ -121,7 +119,7 @@ describe('usePressableState', () => {
     expect(result.props.onHoverIn).toBe(onHoverIn);
     act(() => result.props.onHoverIn?.(evt));
     expect(onHoverIn).toHaveBeenCalledTimes(1);
-    expect('hovered' in result.state).toBe(false);
+    expect(result.state.hovered).toBe(false);
   });
 
   it('preserves non-event props on the augmented props', () => {

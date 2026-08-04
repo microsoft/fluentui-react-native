@@ -16,8 +16,8 @@ export function flattenStyle(style: StyleProp<unknown>): object {
  * Merge styles together into a single flat object and optionally finalize them, can also be used to finalize a single style
  *
  * @param styles - array of styles to merge together.  The styles will be flattened as part of the process
+ * @internal
  */
-
 export const mergeAndFlattenStyles: StyleMerger = (...styles: StyleProp<unknown>[]) => {
   // baseline merge and flatten the objects
   return immutableMerge(

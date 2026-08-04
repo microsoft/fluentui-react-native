@@ -6,6 +6,7 @@ export { immutableMerge, immutableMergeCore, processImmutable, filterToObjects }
 export type {
   BuiltinRecursionHandlers,
   CustomRecursionHandler,
+  MergeCoreOptions,
   MergeOptions,
   RecursionHandler,
   RecursionOption,
@@ -14,7 +15,7 @@ export type {
 /**
  * ----- MEMO CACHE -----
  */
-export type { GetMemoValue, GetTypedMemoValue } from './memo-cache/getMemoCache';
+export type { GetMemoValue, GetTypedMemoValue, ValueFactory } from './memo-cache/getMemoCache';
 export { getMemoCache, getTypedMemoCache } from './memo-cache/getMemoCache';
 export { memoize } from './memo-cache/memoize';
 
@@ -35,7 +36,6 @@ export { phasedComponent, stagedComponent } from './component-patterns/phased';
 export { attachSlotProps } from './component-patterns/slot';
 export { useSlot, useOptionalSlot } from './component-patterns/useSlot';
 export {
-  isDirectComponentType,
   isSlotComponent,
   isDirectComponent,
   isLegacyDirectComponent,
@@ -81,7 +81,10 @@ export type {
   StyleMerger,
   PropsFilter,
   PropsOf,
+  PropsWithRefOf,
+  PropsChildren,
   PropsWithoutChildren,
+  PartialWithoutChildren,
   PropsWithoutRef,
 } from './types/props.types';
 export type {
@@ -98,4 +101,26 @@ export type {
   RenderResult,
   SlotComponent,
 } from './types/render.types';
-export type { DistributiveOmit, DistributivePick, UnionToIntersection, ReplaceNullWithUndefined, IsSingleton } from './types/utility.types';
+export type {
+  DistributiveOmit,
+  DistributivePick,
+  UnionToIntersection,
+  IsSingleton,
+  Simplify,
+  OuterPartial,
+  PartialExcept,
+} from './types/utility.types';
+export type {
+  SlotShorthandValue,
+  SlotProp,
+  OptionalSlotProp,
+  Slot,
+  OptionalSlot,
+  ComponentProps,
+  ComponentState,
+  ComponentPropsTransform,
+  ExtractSlotProps,
+  SlotOptions,
+  UseOptionalSlot,
+  UseSlot,
+} from './types/component.types';

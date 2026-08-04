@@ -1,23 +1,35 @@
-import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY } from '../const';
+import React from 'react';
+import type { AnyComponent, SlotShorthandValue } from '../types/component.types';
 import type {
   DirectComponent,
-  FunctionComponent,
   LegacyDirectComponent,
   LegacyFunctionComponent,
   PhasedComponent,
   SlotComponent,
   StagedComponent,
 } from '../types/render.types';
+import { isIterable } from '../utilities/typeUtils';
+import { SLOT_COMPONENT_KEY, SLOT_RENDER_TYPE_KEY } from '../const';
+import type { PropsWithRefOf } from '../types/props.types';
+
+type PotentialComponentTypes = AnyComponent | React.ElementType | LegacyFunctionComponent<PropsWithRefOf<AnyComponent>>;
+
+function getObjKeyValue(obj: unknown, key: string | symbol): unknown {
+  if ((typeof obj === 'object' && obj !== null) || typeof obj === 'function') {
+    return key in obj ? Reflect.get(obj, key) : undefined;
+  }
+  return undefined;
+}
 
 /**
  * Checks if a component is a direct component.
  * @param component the component to check
  * @return true if the component is a direct component, false otherwise
  */
-export function isDirectComponent<TProps>(
-  component: FunctionComponent<TProps> | LegacyFunctionComponent<TProps> | React.ElementType,
-): component is DirectComponent<TProps> {
-  return (component as DirectComponent<TProps>)[SLOT_RENDER_TYPE_KEY] === 'callable';
+export function isDirectComponent<Type extends AnyComponent>(
+  component: PotentialComponentTypes,
+): component is DirectComponent<PropsWithRefOf<Type>> {
+  return getObjKeyValue(component, SLOT_RENDER_TYPE_KEY) === 'callable';
 }
 
 /**
@@ -26,10 +38,10 @@ export function isDirectComponent<TProps>(
  * @return true if the component is a legacy direct component, false otherwise
  * @deprecated Prefer the directComponent or slot patterns if writing new code.
  */
-export function isLegacyDirectComponent<TProps>(
-  component: FunctionComponent<TProps> | LegacyFunctionComponent<TProps> | React.ElementType,
-): component is LegacyDirectComponent<TProps> {
-  return (component as LegacyDirectComponent<TProps>)[SLOT_RENDER_TYPE_KEY] === 'legacy';
+export function isLegacyDirectComponent<Type extends AnyComponent>(
+  component: PotentialComponentTypes,
+): component is LegacyDirectComponent<PropsWithRefOf<Type>> {
+  return getObjKeyValue(component, SLOT_RENDER_TYPE_KEY) === 'legacy';
 }
 
 /**
@@ -38,24 +50,24 @@ export function isLegacyDirectComponent<TProps>(
  * @return true if the component is a direct component or a legacy direct component, false otherwise
  * @internal
  */
-export function isDirectComponentType<TProps>(
-  component: FunctionComponent<TProps> | LegacyFunctionComponent<TProps> | React.ElementType,
-): component is DirectComponent<TProps> | LegacyDirectComponent<TProps> {
+export function isDirectComponentType<Type extends AnyComponent>(
+  component: PotentialComponentTypes,
+): component is DirectComponent<PropsWithRefOf<Type>> | LegacyDirectComponent<PropsWithRefOf<Type>> {
   return isDirectComponent(component) || isLegacyDirectComponent(component);
 }
 
 /**
  * Determine if the component is a phased component
  */
-export function isPhasedComponent<TProps>(component: unknown): component is PhasedComponent<TProps> {
-  return component != null && (component as PhasedComponent<TProps>)[SLOT_RENDER_TYPE_KEY] === 'phased';
+export function isPhasedComponent<Type extends AnyComponent>(component: unknown): component is PhasedComponent<PropsWithRefOf<Type>> {
+  return getObjKeyValue(component, SLOT_RENDER_TYPE_KEY) === 'phased';
 }
 
 /**
  * Determine if the component is a staged component, the legacy phased pattern
  */
-export function isStagedComponent<TProps>(component: unknown): component is StagedComponent<TProps> {
-  return component != null && (component as StagedComponent<TProps>)[SLOT_RENDER_TYPE_KEY] === 'phased-legacy';
+export function isStagedComponent<Type extends AnyComponent>(component: unknown): component is StagedComponent<PropsWithRefOf<Type>> {
+  return getObjKeyValue(component, SLOT_RENDER_TYPE_KEY) === 'phased-legacy';
 }
 
 /**
@@ -64,10 +76,10 @@ export function isStagedComponent<TProps>(component: unknown): component is Stag
  * @param component - The component to check.
  * @returns True if the component is a slot component, false otherwise.
  */
-export function isSlotComponent<TProps>(component: unknown): component is SlotComponent<TProps> {
+export function isSlotComponent<Type extends AnyComponent>(component: unknown): component is SlotComponent<PropsWithRefOf<Type>> {
   return (
     component != null &&
-    (component as SlotComponent<TProps>)[SLOT_COMPONENT_KEY] != null &&
+    getObjKeyValue(component, SLOT_COMPONENT_KEY) != null &&
     !isPhasedComponent(component) &&
     !isStagedComponent(component)
   );
@@ -77,9 +89,28 @@ export function isSlotComponent<TProps>(component: unknown): component is SlotCo
  * Is this element already a custom render type (direct, legacy direct, phased, staged, or slot)
  * @param component component to test
  * @returns True if the component is a custom render type, false otherwise.
+ * @internal
  */
-export function isCustomRenderType<TProps>(component: React.ComponentType<TProps>) {
+export function isCustomRenderType(component: PotentialComponentTypes) {
   return (
-    (component as DirectComponent<TProps>)[SLOT_RENDER_TYPE_KEY] != null || (component as SlotComponent<TProps>)[SLOT_COMPONENT_KEY] != null
+    (component as DirectComponent<PropsWithRefOf<AnyComponent>>)[SLOT_RENDER_TYPE_KEY] != null ||
+    (component as SlotComponent<PropsWithRefOf<AnyComponent>>)[SLOT_COMPONENT_KEY] != null
+  );
+}
+
+/**
+ * Is this element an object shorthand value for a slot, which is effectively anything that can be used as children
+ * in react in standard usage.
+ * @param value value to test
+ * @returns True if the value is a slot shorthand value, false otherwise.
+ * @internal
+ */
+export function isSlotShorthandValue(value: unknown): value is SlotShorthandValue {
+  return (
+    React.isValidElement(value) ||
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    isIterable<React.ReactNode>(value) ||
+    getObjKeyValue(value, '$$typeof') === Symbol.for('react.portal') // React portal check
   );
 }
