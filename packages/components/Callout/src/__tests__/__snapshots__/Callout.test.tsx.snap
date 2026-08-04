@@ -1,13 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Callout default props 1`] = `
-<RCTCallout
-  style={
-    {
-      "backgroundColor": "#faf9f8",
-      "borderColor": "#ffffff",
-      "borderWidth": 1,
-    }
-  }
-/>
-`;
+exports[`Callout renders without default themed styling 1`] = `<RCTCallout />`;

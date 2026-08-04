@@ -21,7 +21,7 @@ export type MenuPopoverTokens = Omit<ICalloutTokens, 'anchorRect' | 'beakWidth' 
   elevation?: number;
 };
 
-export type MenuPopoverProps = ICalloutProps;
+export type MenuPopoverProps = ICalloutProps & Omit<IViewProps, keyof ICalloutProps>;
 
 export interface MenuPopoverState {
   props: ICalloutProps;

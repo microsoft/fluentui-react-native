@@ -1,9 +1,5 @@
 import type * as React from 'react';
-import type { KeyboardMetrics, ViewStyle } from 'react-native';
-
-import type { IViewProps } from '@fluentui-react-native/adapters';
-import type { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import type { IRenderData } from '@uifabricshared/foundation-composable';
+import type { AnimatableNumericValue, ColorValue, KeyboardMetrics, ViewProps } from 'react-native';
 
 import type { CalloutNativeCommands } from './CalloutNativeComponent';
 export const calloutName = 'Callout';
@@ -40,13 +36,12 @@ export interface RestoreFocusEvent {
   };
 }
 
-interface OmittedBorderTokens {
-  borderStyle?: ViewStyle['borderStyle'];
-}
+export interface ICalloutTokens {
+  backgroundColor?: ColorValue;
+  borderColor?: ColorValue;
+  borderRadius?: AnimatableNumericValue | string;
+  borderWidth?: number;
 
-type CalloutBorderTokens = Omit<IBorderTokens, keyof OmittedBorderTokens>;
-
-export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTokens {
   /**
    * AnchorRect arbitrary anchor rectangle; coordinate system is in DIPs, relative
    * to the React surface origin.
@@ -87,12 +82,12 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
   /**
    * Defines a maximum height for the Callout.
    */
-  maxHeight?: number | `${number}%`;
+  maxHeight?: number;
 
   /**
    * Defines a maximum width for the Callout.
    */
-  maxWidth?: number | `${number}%`;
+  maxWidth?: number;
 
   /**
    * Defines a minimum width for the Callout.
@@ -105,7 +100,7 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
   minPadding?: number;
 }
 
-export interface ICalloutProps extends IViewProps, ICalloutTokens {
+export interface ICalloutProps extends ViewProps, ICalloutTokens {
   /**
    * A string that should be announced when the callout is shown.
    * @platform win32
@@ -219,7 +214,10 @@ export type ICalloutSlotProps = {
   root: ICalloutProps;
 };
 
-export type ICalloutRenderData = IRenderData<ICalloutSlotProps>;
+export interface ICalloutRenderData {
+  slotProps?: ICalloutSlotProps;
+  state?: object;
+}
 
 export interface ICalloutType {
   props: ICalloutProps;

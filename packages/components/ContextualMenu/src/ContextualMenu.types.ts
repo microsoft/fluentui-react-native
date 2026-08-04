@@ -39,7 +39,7 @@ export interface ContextualMenuState {
 
 export type ContextualMenuTokens = ICalloutTokens;
 
-export interface ContextualMenuProps extends IViewProps, Omit<ICalloutProps, 'setInitialFocus'> {
+export interface ContextualMenuProps extends Omit<IViewProps, 'accessibilityState' | 'style'>, Omit<ICalloutProps, 'setInitialFocus'> {
   /**
    * Whether to set initial focus on the contextual menu container, as opposed to the first menu item.
    * @platform win32

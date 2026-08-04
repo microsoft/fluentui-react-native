@@ -1,3 +1,4 @@
+/** @jsxImportSource @fluentui-react-native/framework-base */
 /**
  * Copyright (c) Microsoft Corporation.
  * Licensed under the MIT License.
@@ -7,71 +8,49 @@
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 
-import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
-import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { compose } from '@uifabricshared/foundation-compose';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
+import { phasedComponent, useSlot } from '@fluentui-react-native/framework-base';
 
-import { settings } from './Callout.settings';
-import type { ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
+import type { ICalloutProps } from './Callout.types';
 import { calloutName } from './Callout.types';
 
 import NativeCalloutView from './CalloutNativeComponent';
 import { Commands } from './CalloutNativeComponent';
 
-export const Callout = compose<ICalloutType>({
-  displayName: calloutName,
-  usePrepareProps: (props: ICalloutProps, useStyling: IUseComposeStyling<ICalloutType>) => {
-    const { componentRef, target, ...rest } = props;
-    React.useImperativeHandle(
-      componentRef,
-      () => ({
-        blurWindow() {
-          if (componentRef.current != null) {
-            Commands.blurWindow(nativeComponentRef.current);
-          }
-        },
-        focusWindow() {
-          if (componentRef.current != null) {
-            Commands.focusWindow(nativeComponentRef.current);
-          }
-        },
-      }),
-      [componentRef],
-    );
-    const nativeComponentRef = React.useRef<React.ElementRef<typeof NativeCalloutView> | null>(null);
-    const [nativeTarget, setNativeTarget] = React.useState<number | string | null>(null);
+export const Callout = phasedComponent<ICalloutProps>((props) => {
+  const { componentRef, target, ...rest } = props;
+  const nativeComponentRef = React.useRef<React.ElementRef<typeof NativeCalloutView> | null>(null);
+  const [nativeTarget, setNativeTarget] = React.useState<number | string | null>(null);
 
-    React.useLayoutEffect(() => {
-      if (typeof target === 'string') {
-        // Pass string type `target` directly
-        setNativeTarget(target);
-      } else if (target?.current) {
-        // Pass the tagID for a valid ref `target`
-        setNativeTarget(findNodeHandle(target.current));
-      } else {
-        // Clear `target` so we may fall back on `anchorRect` if provided
-        setNativeTarget(null);
+  React.useImperativeHandle(componentRef, () => ({
+    blurWindow() {
+      if (nativeComponentRef.current) {
+        Commands.blurWindow(nativeComponentRef.current);
       }
-    }, [target]);
+    },
+    focusWindow() {
+      if (nativeComponentRef.current) {
+        Commands.focusWindow(nativeComponentRef.current);
+      }
+    },
+  }));
 
-    const slotProps = mergeSettings<ICalloutSlotProps>(useStyling(props), {
-      root: {
-        ref: nativeComponentRef,
-        ...(nativeTarget && { target: nativeTarget }),
-        ...rest,
-      },
-    });
+  React.useLayoutEffect(() => {
+    if (typeof target === 'string') {
+      setNativeTarget(target);
+    } else if (target?.current) {
+      setNativeTarget(findNodeHandle(target.current));
+    } else {
+      setNativeTarget(null);
+    }
+  }, [target]);
 
-    return { slotProps };
-  },
-  settings: settings,
-  slots: {
-    root: NativeCalloutView,
-  },
-  styles: {
-    root: [backgroundColorTokens, borderTokens],
-  },
+  return useSlot(NativeCalloutView, {
+    ref: nativeComponentRef,
+    ...(nativeTarget !== null && { target: nativeTarget }),
+    ...rest,
+  });
 });
+
+Callout.displayName = calloutName;
 
 export default Callout;
