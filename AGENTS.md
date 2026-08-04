@@ -41,7 +41,7 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
 
 **Slots**: The slot pattern is used to compose higher-order components. A slot represents an inner component (actual entry in the render tree). For example, a Button might have slots for `root`, `icon`, and `content`. This allows advanced customization scenarios. Components wrapping a single native component typically have one slot.
 
-**Tokens**: Design tokens handle styling and customization. Tokens are design-time values set via theme or component customization (e.g., "brandColor"). Tokens can also be props (specified via "TokensThatAreAlsoProps"). This system enables simpler customization and better memoization.
+**Tokens**: Design tokens handle styling and customization. Tokens are design-time values set via theme or component customization (e.g., "brandColor"). Tokens can also be props (specified via "TokensThatAreAlsoProps"). This system enables simpler customization and better memoization. For Flex token authoring, use `packages/agentic-design/src/tokens/mappings/flex-token-map.yaml` as the canonical mapping from generic CSS and Fluent token sources to grouped React Native Flex token paths.
 
 **Platform-Specific Files**: Components use platform-specific files with extensions like `.ios.ts`, `.android.ts`, `.win32.ts`, `.macos.ts` for platform-specific implementations.
 

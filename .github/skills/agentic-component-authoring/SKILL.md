@@ -39,6 +39,8 @@ Build components in `packages/agentic-components` as React Native adaptations of
 
 ## Token rules
 
+- Consult `packages/agentic-design/src/tokens/mappings/flex-token-map.yaml` for the canonical mapping from generic CSS and
+  Fluent authoring sources to grouped React Native Flex token paths.
 - Import non-color values directly from `@fluentui-react-native/design/tokens/global`.
 - Read semantic colors from `useThemeState().tokens.color` so flex interaction overrides and future themes flow through
   the component. Use `tokens.color.hover` and `tokens.color.pressed` for interaction overrides.
