@@ -11,6 +11,11 @@
     "directory": "packages/agentic-components/storybook"
   },
   "scripts": {
+    "agent-device": "agent-device",
+    "agent-device:attach": "agent-device open --platform macos --surface frontmost-app --metro-host 127.0.0.1 --metro-port 8081",
+    "agent-device:doctor": "agent-device doctor --platform macos",
+    "agent-device:mcp": "agent-device mcp",
+    "agent-device:open": "open macos/DerivedData/Build/Products/Debug/ReactTestApp.app && sleep 1 && yarn agent-device:attach",
     "start": "rnx-cli start",
     "macos": "rnx-cli run --platform macos",
     "bundle:macos": "yarn prebuild && rnx-cli bundle --dev false --platform macos",
@@ -49,6 +54,7 @@
     "@storybook/react-native-ui-lite": "^10.4.7",
     "@tmcp/adapter-valibot": "^0.1.6",
     "@tmcp/transport-http": "^0.8.6",
+    "agent-device": "0.20.5",
     "metro": "^0.83.1",
     "oxc-resolver": "catalog:",
     "react-native-test-app": "catalog:",
@@ -59,7 +65,8 @@
   "furn": {
     "knip": {
       "ignoreDependencies": [
-        "@fluentui-react-native/agentic-components"
+        "@fluentui-react-native/agentic-components",
+        "agent-device"
       ]
     }
   },

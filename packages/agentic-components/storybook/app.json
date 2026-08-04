@@ -1,6 +1,9 @@
 {
   "name": "AgenticStorybook",
   "displayName": "Agentic Components Storybook",
+  "macos": {
+    "bundleIdentifier": "com.microsoft.AgenticStorybook"
+  },
   "components": [
     {
       "appKey": "AgenticStorybook",

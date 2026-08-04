@@ -2585,6 +2585,7 @@ __metadata:
     "@tmcp/adapter-valibot": "npm:^0.1.6"
     "@tmcp/transport-http": "npm:^0.8.6"
     "@types/react": "npm:~19.1.4"
+    agent-device: "npm:0.20.5"
     metro: "npm:^0.83.1"
     oxc-resolver: "catalog:"
     react: "npm:19.1.4"
@@ -6892,6 +6893,20 @@ __metadata:
     react-native:
       optional: true
   checksum: 10c0/858aedf9b92f0fa674a3ca308bf07b8ce9551148d02109405df684b52a7cd6e1bbfcfff60fcfe0a3a7c1da0639d026bf3af87c1556d86b526d55a58c574cbc96
+  languageName: node
+  linkType: hard
+
+"@limrun/api@npm:^0.24.5":
+  version: 0.24.5
+  resolution: "@limrun/api@npm:0.24.5"
+  dependencies:
+    eventsource-client: "npm:^1.2.0"
+    https-proxy-agent: "npm:7.0.6"
+    ignore: "npm:^7.0.5"
+    proxy-from-env: "npm:^2.1.0"
+    undici: "npm:7.24.7"
+    ws: "npm:^8.18.3"
+  checksum: 10c0/2369e26f9c4aa25c800e011ae86dd450aee944723434832f1342af1e3bc7eb885c2d75f5e6ec48d2dad8f9121ef610b64c2394842008f714f3d9a244b615a6ef
   languageName: node
   linkType: hard
 
@@ -11425,6 +11440,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"agent-device@npm:0.20.5":
+  version: 0.20.5
+  resolution: "agent-device@npm:0.20.5"
+  dependencies:
+    "@limrun/api": "npm:^0.24.5"
+    pngjs: "npm:^7.0.0"
+    yaml: "npm:^2.9.0"
+  bin:
+    agent-device: bin/agent-device.mjs
+  checksum: 10c0/3e548fb1ee9b01fb8069ce47d3660dfcf1cec0d318461d505f059f815805d469793072ae4757e6e788902e91099847002c79c6d0dd47b3de6f9f42f13f686c0a
+  languageName: node
+  linkType: hard
+
 "ajv-formats@npm:3.0.1":
   version: 3.0.1
   resolution: "ajv-formats@npm:3.0.1"
@@ -15012,6 +15040,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eventsource-client@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "eventsource-client@npm:1.2.0"
+  dependencies:
+    eventsource-parser: "npm:^3.0.0"
+  checksum: 10c0/32235ff9b0cb7e3f0f0dc0316a97d543470ad6574acb89a4665ca900e325ff2ca9bb19581d6c3c49a3b91b6ce55024856cfd3b191be872a91f821c924096d5aa
+  languageName: node
+  linkType: hard
+
+"eventsource-parser@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "eventsource-parser@npm:3.1.0"
+  checksum: 10c0/5ab4c6c9a2a042be0b387b6d03810eb580bac4ce90e299ede56458125a97ffe3af8145b2740089fc898a96cfa5aae792ee79f2a06257fba2776b0e7bce037071
+  languageName: node
+  linkType: hard
+
 "execa@npm:^1.0.0":
   version: 1.0.0
   resolution: "execa@npm:1.0.0"
@@ -16359,6 +16403,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"https-proxy-agent@npm:7.0.6, https-proxy-agent@npm:^7.0.1, https-proxy-agent@npm:^7.0.5, https-proxy-agent@npm:^7.0.6":
+  version: 7.0.6
+  resolution: "https-proxy-agent@npm:7.0.6"
+  dependencies:
+    agent-base: "npm:^7.1.2"
+    debug: "npm:4"
+  checksum: 10c0/f729219bc735edb621fa30e6e84e60ee5d00802b8247aac0d7b79b0bd6d4b3294737a337b93b86a0bd9e68099d031858a39260c976dc14cdbba238ba1f8779ac
+  languageName: node
+  linkType: hard
+
 "https-proxy-agent@npm:^5.0.1":
   version: 5.0.1
   resolution: "https-proxy-agent@npm:5.0.1"
@@ -16366,16 +16420,6 @@ __metadata:
     agent-base: "npm:6"
     debug: "npm:4"
   checksum: 10c0/6dd639f03434003577c62b27cafdb864784ef19b2de430d8ae2a1d45e31c4fd60719e5637b44db1a88a046934307da7089e03d6089ec3ddacc1189d8de8897d1
-  languageName: node
-  linkType: hard
-
-"https-proxy-agent@npm:^7.0.1, https-proxy-agent@npm:^7.0.5, https-proxy-agent@npm:^7.0.6":
-  version: 7.0.6
-  resolution: "https-proxy-agent@npm:7.0.6"
-  dependencies:
-    agent-base: "npm:^7.1.2"
-    debug: "npm:4"
-  checksum: 10c0/f729219bc735edb621fa30e6e84e60ee5d00802b8247aac0d7b79b0bd6d4b3294737a337b93b86a0bd9e68099d031858a39260c976dc14cdbba238ba1f8779ac
   languageName: node
   linkType: hard
 
@@ -21335,6 +21379,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pngjs@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "pngjs@npm:7.0.0"
+  checksum: 10c0/0d4c7a0fd476a9c33df7d0a2a73e1d56537628a668841f6995c2bca070cf30819f9254a64363266bc14ef2fee47659dd3b4f2b18eec7ab65143015139f497b38
+  languageName: node
+  linkType: hard
+
 "polished@npm:^4.3.1":
   version: 4.3.1
   resolution: "polished@npm:4.3.1"
@@ -24484,6 +24535,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"undici@npm:7.24.7":
+  version: 7.24.7
+  resolution: "undici@npm:7.24.7"
+  checksum: 10c0/779c67e81677324763ea00ea547ba74757472ebe2625d046d592434ee19d9d148fe0eaef7006c0185096614249ac0f179e7f559b202b518af8d587e9548559b6
+  languageName: node
+  linkType: hard
+
 "undici@npm:^7.10.0":
   version: 7.28.0
   resolution: "undici@npm:7.28.0"
@@ -25222,6 +25280,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ws@npm:^8.18.3":
+  version: 8.21.2
+  resolution: "ws@npm:8.21.2"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 10c0/82d687bbfbccce04e91266ff9911b27c67ca622fd8fbacc6a64d467a43fbd7ecaa3ef6d820b315c060682f901463f57cac01a02b00c4379f49c747ec7da83169
+  languageName: node
+  linkType: hard
+
 "wsl-utils@npm:^0.1.0":
   version: 0.1.0
   resolution: "wsl-utils@npm:0.1.0"
@@ -25360,6 +25433,15 @@ __metadata:
   bin:
     yaml: bin.mjs
   checksum: 10c0/0a33a1fa28d4bc79f61a12ec7ef7a2bce0ce5f8e80c6eaecfb4a0c88c08767dd1ede372b6a3bcd70891213b8c9f3169b355c97e77026d3b3459e10d2cccaef1e
+  languageName: node
+  linkType: hard
+
+"yaml@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "yaml@npm:2.9.0"
+  bin:
+    yaml: bin.mjs
+  checksum: 10c0/f340718df45e97a9551b9bf9dac61c80050bc464513b710debfb5067c380c8472e3b67809cffacb4ab5ffb5e66ef9310816c88b05f371cec60abfedd8c88e0a2
   languageName: node
   linkType: hard
 

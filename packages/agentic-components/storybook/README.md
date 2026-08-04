@@ -14,8 +14,7 @@ chain, which does not bundle cleanly with this repo's Metro + Babel + pnpm-linke
 
 ```
 storybook/
-  .rnstorybook/        Storybook config (main.ts, preview.tsx, index.tsx)
-  StorybookApp.tsx     Root component -> renders the Storybook UI
+  src/                 Storybook config, root component, and generated story index
   index.js             AppRegistry entry
   app.json             react-native-test-app manifest
   metro.config.js      rnx-kit metro config wrapped with withStorybook (liteMode)
@@ -26,11 +25,11 @@ storybook/
 > `StorybookApp.tsx` is intentionally not named `App.tsx`: on a case-insensitive macOS
 > filesystem `App` collides with `app.json` during Metro resolution.
 
-The `.rnstorybook/storybook.requires.ts` file is **generated** (git-ignored) from the
+The `src/storybook.requires.ts` file is **generated** (git-ignored) from the
 `main.ts` stories glob by the `withStorybook` metro wrapper when Metro starts, or on demand via:
 
 ```sh
-yarn workspace @fluentui-react-native/agentic-components-storybook storybook-generate
+yarn workspace @fluentui-react-native/agentic-components-storybook prebuild
 ```
 
 ## Running on macOS
@@ -60,7 +59,41 @@ Requires Xcode + CocoaPods.
 > `react-native-safe-area-context` note: Storybook's UI imports it, but its native module is
 > iOS-only (UIKit) and uses a Yoga API that doesn't compile for react-native-macos 0.81. It is
 > therefore not installed; `metro.config.js` aliases the import to a JS-only stub in
-> `.storybook-mocks/`, so no native module is needed.
+> `src/storybook-mocks/`, so no native module is needed.
+
+## Agent-driven macOS verification
+
+The app includes a lockfile-pinned
+[`agent-device`](https://github.com/callstack/agent-device) CLI and uses the unique macOS bundle
+identifier `com.microsoft.AgenticStorybook`. Run commands from this directory so the checked-in
+`agent-device.json` selects macOS by default.
+
+After starting Metro and launching the app as described above:
+
+```sh
+# Read the installed, version-matched workflow before automating the app
+yarn agent-device --version
+yarn agent-device help workflow
+yarn agent-device help react-native
+
+# Attach to the frontmost Storybook app
+yarn agent-device:attach
+
+# Discover the accessible Storybook UI, interact, verify, and end the session
+yarn agent-device snapshot -i
+yarn agent-device press 'label="Disabled"' --settle
+yarn agent-device close
+```
+
+Use `yarn agent-device:open` to reopen the built debug app and attach to it. The open/attach scripts
+also bind the session to Metro at `127.0.0.1:8081`, allowing
+`yarn agent-device metro reload` to reuse that connection. First use can require macOS
+Accessibility, Screen Recording, or Input Monitoring approval for the agent-device helper. Run
+`yarn agent-device:doctor` during initial setup or when a command reports an unhealthy toolchain,
+helper, app, or Metro connection.
+
+For MCP-capable agents, `yarn agent-device:mcp` starts the official stdio server. Prefer the
+repository-pinned CLI or this MCP server over an unpinned global or `npx ...@latest` install.
 
 ## Bundling (no native toolchain required)
 
@@ -80,7 +113,7 @@ yarn storybook-server   # WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.
 ```
 
 Run it alongside `yarn start` + `yarn macos`. The on-device app connects to it automatically
-(`.rnstorybook/index.tsx` calls `getStorybookUI({ enableWebsockets: true, host, port })`).
+(`src/StorybookApp.tsx` calls `getStorybookUI({ enableWebsockets: true, host, port })`).
 
 - **WebSocket channel** (`ws://127.0.0.1:7007/`): agents connect and emit Storybook channel events
   to drive the app — e.g. `setCurrentStory` (`{ storyId }`) to switch story, and arg-update events
