@@ -174,9 +174,7 @@ In this case the `states` option should be provided as follows:
 
 ```ts
 const useStyling = buildUseStyling({
-  tokens: [
-    /* token settings */
-  ],
+  tokens: [/* token settings */],
   states: ['hovered', 'pressed'],
   ...otherSettings,
 });
@@ -279,9 +277,7 @@ const slotFn = (tokens: Tokens, theme: Theme, cache: GetMemoValue<Props>) =>
         },
       };
     },
-    [
-      /* no keys, just direct cache the function result*/
-    ],
+    [/* no keys, just direct cache the function result*/],
   )[0];
 ```
 

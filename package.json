@@ -52,9 +52,9 @@
     "knip": "catalog:",
     "lage": "catalog:",
     "markdown-link-check": "^3.8.7",
-    "oxfmt": "^0.35.0",
-    "oxlint": "^1.57.0",
-    "oxlint-tsgolint": "^0.17.4",
+    "oxfmt": "^0.61.0",
+    "oxlint": "1.76.0",
+    "oxlint-tsgolint": "^7.0.0",
     "typescript": "7.0.2",
     "zx": "^8.2.4"
   },

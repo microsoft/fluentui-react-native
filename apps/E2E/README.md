@@ -147,7 +147,7 @@ For each component/scenario you want to test, you will have a page object class 
 Page Object is a design pattern which has become popular in test automation for enhancing test maintenance and reducing code duplication. A [page object](https://webdriver.io/docs/pageobjects.html) is an object-oriented class that serves as an interface to a page of you testing app. The tests then use the methods of this Page Object whenever they need to interact with the UI of that page.
 The benefit is that if the UI changes for the test page, the tests themselves don’t need to change, only the code within the page object needs to change.
 
-Page Objects should be put in apps/E2E/src/_ *ComponentToBeTested* _/pages/.
+Page Objects should be put in apps/E2E/src/_ _ComponentToBeTested_ _/pages/.
 
 In most cases, you can copy/paste ButtonPageObject.ts and simply change all instances of Button to your new component.
 
