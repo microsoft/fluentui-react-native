@@ -75,7 +75,6 @@
     "picomatch@npm:^2.2.1": "2.3.2",
     "picomatch@npm:^2.2.3": "2.3.2",
     "picomatch@npm:^2.3.1": "2.3.2",
-    "react-native-macos": "patch:react-native-macos@npm%3A0.81.2#~/.yarn/patches/react-native-macos-npm-0.81.2-dabaa9c16d.patch",
     "shell-quote": "1.9.0",
     "tmp": "0.2.7",
     "undici@npm:^6.21.3": "6.27.0",
