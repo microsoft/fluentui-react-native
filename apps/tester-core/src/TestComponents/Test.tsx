@@ -164,21 +164,22 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         {props.spec && <Link url={props.spec} content="SPEC" />}
       </View>
       <Separator />
-      {e2eSections && showE2E && (
-        // We can check if the E2E section renders by checking if the "E2E Tests" header has rendered for each spec
-        <>
-          <Text variant="headerSemibold" {...testProps(E2E_TEST_SECTION)}>
-            E2E Tests
-          </Text>
-          {e2eSections.map((section, i) => {
-            if (section === null) {
-              return null;
-            }
-            const { component: E2EComponent } = section;
-            return <E2EComponent key={i} />;
-          })}
-        </>
-      )}
+      {e2eSections &&
+        showE2E && (
+          // We can check if the E2E section renders by checking if the "E2E Tests" header has rendered for each spec
+          <>
+            <Text variant="headerSemibold" {...testProps(E2E_TEST_SECTION)}>
+              E2E Tests
+            </Text>
+            {e2eSections.map((section, i) => {
+              if (section === null) {
+                return null;
+              }
+              const { component: E2EComponent } = section;
+              return <E2EComponent key={i} />;
+            })}
+          </>
+        )}
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
       </Stack>
