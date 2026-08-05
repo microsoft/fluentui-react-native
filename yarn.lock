@@ -8465,7 +8465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-windows/cli@npm:0.81.6, @react-native-windows/cli@npm:^0.81.0":
+"@react-native-windows/cli@npm:0.81.6":
   version: 0.81.6
   resolution: "@react-native-windows/cli@npm:0.81.6"
   dependencies:
@@ -8494,6 +8494,38 @@ __metadata:
   peerDependencies:
     react-native: ^0.81.0
   checksum: 10c0/fdf9fdf9ddc9dd15ed4ae34bd444eb928d6b929697297d9af7a3bceff1b53d31ac9f1e27c1df509c633cb811e14008be0e9c3fd395500d8d65c66c6502dfcf60
+  languageName: node
+  linkType: hard
+
+"@react-native-windows/cli@patch:@react-native-windows/cli@npm%3A0.81.6#~/.yarn/patches/@react-native-windows-cli-npm-0.81.6-9ffb7042e8.patch":
+  version: 0.81.6
+  resolution: "@react-native-windows/cli@patch:@react-native-windows/cli@npm%3A0.81.6#~/.yarn/patches/@react-native-windows-cli-npm-0.81.6-9ffb7042e8.patch::version=0.81.6&hash=c0543d"
+  dependencies:
+    "@react-native-windows/codegen": "npm:0.81.6"
+    "@react-native-windows/find-dotnet-tools": "npm:0.0.0-canary.2"
+    "@react-native-windows/fs": "npm:0.81.1"
+    "@react-native-windows/package-utils": "npm:0.81.1"
+    "@react-native-windows/telemetry": "npm:0.81.2"
+    "@xmldom/xmldom": "npm:^0.7.7"
+    chalk: "npm:^4.1.0"
+    cli-spinners: "npm:^2.2.0"
+    envinfo: "npm:^7.5.0"
+    execa: "npm:^5.0.0"
+    find-up: "npm:^4.1.0"
+    glob: "npm:^7.1.1"
+    lodash: "npm:^4.17.15"
+    mustache: "npm:^4.0.1"
+    ora: "npm:^3.4.0"
+    prompts: "npm:^2.4.1"
+    semver: "npm:^7.3.2"
+    shelljs: "npm:^0.8.4"
+    username: "npm:^5.1.0"
+    xml-formatter: "npm:^2.4.0"
+    xml-parser: "npm:^1.2.1"
+    xpath: "npm:^0.0.27"
+  peerDependencies:
+    react-native: ^0.81.0
+  checksum: 10c0/2bd6c027bc3165ab57373da5aebc5431e309cb24f134ca6b7748457aa713ae47f4a525439c5ec307945f8608cc3e772bde0e95bdd0ba213763bd0188e3e326ed
   languageName: node
   linkType: hard
 

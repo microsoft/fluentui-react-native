@@ -60,6 +60,7 @@
   },
   "resolutions": {
     "@fluentui/react-native-icons/@types/react-native": "ignore:",
+    "@react-native-windows/cli": "patch:@react-native-windows/cli@npm%3A0.81.6#~/.yarn/patches/@react-native-windows-cli-npm-0.81.6-9ffb7042e8.patch",
     "@types/react": "19.1.17",
     "@xmldom/xmldom@npm:^0.7.7": "0.7.13",
     "@xmldom/xmldom@npm:^0.8.8": "0.8.13",
