@@ -1,4 +1,4 @@
-# Agentic Components Storybook (react-native-macos)
+# Agentic Components Storybook
 
 On-device [Storybook](https://storybook.js.org/) app (Storybook for React Native v10) for
 `@fluentui-react-native/agentic-components`. It loads every `*.stories.(ts|tsx)` file from the
@@ -62,12 +62,34 @@ Requires Xcode + CocoaPods.
 > therefore not installed; `metro.config.js` aliases the import to a JS-only stub in
 > `.storybook-mocks/`, so no native module is needed.
 
+## Running on Windows
+
+The Windows app also uses `react-native-test-app`. Its generated Win32 project uses React Native
+Windows' New Architecture and Fabric renderer.
+
+```powershell
+# from this directory
+# 1. Generate the Fabric Windows solution
+yarn windows:generate
+
+# 2. Start Metro (also generates storybook.requires)
+yarn start
+
+# 3. In another terminal, build and launch the Windows app
+yarn windows
+```
+
+Requires Visual Studio 2022 with the React Native Windows build prerequisites. The generated
+solution, `ExperimentalFeatures.props`, and build outputs are git-ignored and can be regenerated
+with `yarn windows:generate`.
+
 ## Bundling (no native toolchain required)
 
 You can produce the JS bundle without Xcode. This also generates `storybook.requires` first:
 
 ```sh
-yarn bundle:macos   # -> writes index.macos.jsbundle
+yarn bundle:macos     # -> writes dist/index.macos.jsbundle
+yarn bundle:windows   # -> writes dist/index.windows.bundle
 ```
 
 ## Agent interaction (WebSocket channel + MCP)
@@ -79,7 +101,7 @@ The running app can be driven by external agents through a standalone Storybook 
 yarn storybook-server   # WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.1:7007/mcp
 ```
 
-Run it alongside `yarn start` + `yarn macos`. The on-device app connects to it automatically
+Run it alongside `yarn start` + `yarn macos` or `yarn windows`. The on-device app connects to it automatically
 (`.rnstorybook/index.tsx` calls `getStorybookUI({ enableWebsockets: true, host, port })`).
 
 - **WebSocket channel** (`ws://127.0.0.1:7007/`): agents connect and emit Storybook channel events

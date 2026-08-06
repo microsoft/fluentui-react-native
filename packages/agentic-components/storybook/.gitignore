@@ -5,7 +5,7 @@ src/storybook.requires.js
 # Metro bundle output
 *.jsbundle
 
-# Generated native project + build output (react-native-test-app regenerates these).
+# Generated native projects + build output (react-native-test-app regenerates these).
 # The hand-written macos/Podfile is kept under version control.
 macos/Pods/
 macos/build/
@@ -14,6 +14,21 @@ macos/Podfile.lock
 macos/.xcode.env
 macos/*.xcodeproj/
 macos/*.xcworkspace/
+windows/.vs/
+windows/ARM64/
+windows/AppPackages/
+windows/Debug/
+windows/Release/
+windows/build/
+windows/ReactApp.Package/
+windows/x64/
+windows/x86/
+windows/packages/
+windows/*.binlog
+windows/*.err
+windows/*.hprof
+windows/*.sln
+windows/*.wrn
+windows/ExperimentalFeatures.props
+windows/NuGet.Config
 dist/
-
-
