@@ -12,15 +12,7 @@ import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 import type { FocusZoneProps, NativeProps } from './FocusZone.types';
 import { focusZoneName } from './FocusZone.types';
-import RCTFocusZone from './FocusZoneNativeComponent';
-
-const filterOutComponentRef = <T>(props: T): T => {
-  if (props && typeof props === 'object' && 'componentRef' in props) {
-    const { componentRef: _componentRef, ...rest } = props as Record<string, unknown>;
-    return rest as T;
-  }
-  return props;
-};
+import NativeFocusZone from './FocusZoneNativeComponent';
 
 export const FocusZone = phasedComponent((props: FocusZoneProps) => {
   const { componentRef, defaultTabbableElement, isCircularNavigation, ...rest } = props;
@@ -46,7 +38,7 @@ export const FocusZone = phasedComponent((props: FocusZoneProps) => {
   } as NativeProps;
 
   // The FocusZone has no styling of its own, so the final render is simply the native root slot.
-  return useSlot<NativeProps>(RCTFocusZone as unknown as React.ComponentType<NativeProps>, rootProps, filterOutComponentRef);
+  return useSlot<NativeProps>(NativeFocusZone as React.ComponentType<NativeProps>, rootProps);
 });
 
 FocusZone.displayName = focusZoneName;

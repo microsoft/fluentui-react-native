@@ -2563,6 +2563,7 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native-community/datetimepicker": "npm:^9.1.0"
     "@react-native-community/slider": "npm:^5.0.0"
+    "@react-native-windows/cli": "npm:^0.81.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-babel-transformer": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"

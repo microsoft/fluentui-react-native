@@ -1,4 +1,4 @@
-# Agentic Components Storybook (react-native-macos)
+# Agentic Components Storybook (react-native-macos / react-native-windows)
 
 On-device [Storybook](https://storybook.js.org/) app (Storybook for React Native v10) for
 `@fluentui-react-native/agentic-components`. It loads every `*.stories.(ts|tsx)` file from the
@@ -62,12 +62,40 @@ Requires Xcode + CocoaPods.
 > therefore not installed; `metro.config.js` aliases the import to a JS-only stub in
 > `.storybook-mocks/`, so no native module is needed.
 
+## Running on Windows (Fabric / New Architecture)
+
+This app also runs on [`react-native-windows`](https://microsoft.github.io/react-native-windows/)
+in **Fabric** mode (New Architecture + WinUI 3), matching the macOS app (which is also Fabric).
+As with macOS, only the hand-written `windows/.gitignore` is checked in; `react-native-test-app`
+generates the Visual Studio solution (`windows/AgenticStorybook.sln`), `ExperimentalFeatures.props`
+and `NuGet.Config` (all git-ignored). Because `react-native-windows` is `0.81`, RNTA enables
+Fabric by default (`RnwNewArch` / `UseFabric` / `UseWinUI3` = `true`).
+
+Prerequisites: [React Native Windows dev dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
+(Visual Studio, Windows SDK, etc.).
+
+```sh
+# from this directory
+# 1. Generate the Visual Studio solution (Fabric via NuGet packages)
+yarn install-windows-test-app --use-nuget
+
+# 2. Start Metro (also generates storybook.requires)
+yarn start
+
+# 3. In another terminal, build & launch the Windows app
+yarn windows
+```
+
+> `react-native-safe-area-context` is stubbed for all platforms in `metro.config.js` (see the
+> macOS note above), so no native safe-area module is needed on Windows either.
+
 ## Bundling (no native toolchain required)
 
 You can produce the JS bundle without Xcode. This also generates `storybook.requires` first:
 
 ```sh
-yarn bundle:macos   # -> writes index.macos.jsbundle
+yarn bundle:macos     # -> writes index.macos.jsbundle
+yarn bundle:windows   # -> writes index.windows.bundle
 ```
 
 ## Agent interaction (WebSocket channel + MCP)

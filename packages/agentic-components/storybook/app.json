@@ -8,6 +8,7 @@
     }
   ],
   "resources": {
-    "macos": ["dist/assets", "dist/index.macos.jsbundle"]
+    "macos": ["dist/assets", "dist/index.macos.jsbundle"],
+    "windows": ["dist/assets", "dist/index.windows.bundle"]
   }
 }

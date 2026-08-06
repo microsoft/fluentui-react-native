@@ -5,6 +5,10 @@ const project = (() => {
       macos: {
         sourceDir: 'macos',
       },
+      windows: {
+        sourceDir: 'windows',
+        solutionFile: 'windows/AgenticStorybook.sln',
+      },
     });
   } catch (_) {
     return undefined;
