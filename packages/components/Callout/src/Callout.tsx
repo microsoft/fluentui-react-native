@@ -6,18 +6,20 @@
  */
 
 import * as React from 'react';
-import { findNodeHandle } from 'react-native';
+import { findNodeHandle, Platform } from 'react-native';
 
-import { phasedComponent, useSlot } from '@fluentui-react-native/framework-base';
+import { directComponent, mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
 
-import type { ICalloutProps } from './Callout.types';
+import type { DirectionalHint, ICalloutProps } from './Callout.types';
 import { calloutName } from './Callout.types';
 
 import NativeCalloutView from './CalloutNativeComponent';
 import { Commands } from './CalloutNativeComponent';
 
+const defaultDirectionalHint: DirectionalHint = Platform.OS === 'macos' ? 'topLeftEdge' : 'bottonLeftEdge';
+
 export const Callout = phasedComponent<ICalloutProps>((props) => {
-  const { componentRef, target, ...rest } = props;
+  const { componentRef, target } = props;
   const nativeComponentRef = React.useRef<React.ElementRef<typeof NativeCalloutView> | null>(null);
   const [nativeTarget, setNativeTarget] = React.useState<number | string | null>(null);
 
@@ -44,10 +46,25 @@ export const Callout = phasedComponent<ICalloutProps>((props) => {
     }
   }, [target]);
 
-  return useSlot(NativeCalloutView, {
-    ref: nativeComponentRef,
-    ...(nativeTarget !== null && { target: nativeTarget }),
-    ...rest,
+  return directComponent<ICalloutProps>((finalProps) => {
+    const {
+      children,
+      componentRef: _componentRef,
+      directionalHint = defaultDirectionalHint,
+      target: _target,
+      ...rest
+    } = mergeProps(props, finalProps);
+
+    return (
+      <NativeCalloutView
+        ref={nativeComponentRef}
+        {...(nativeTarget !== null && { target: nativeTarget })}
+        directionalHint={directionalHint}
+        {...rest}
+      >
+        {children}
+      </NativeCalloutView>
+    );
   });
 });
 

@@ -7,35 +7,6 @@ PODS:
   - FRNAvatar (0.22.5):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNCallout (0.28.5):
-    - boost
-    - DoubleConversion
-    - fast_float
-    - fmt
-    - glog
-    - hermes-engine
-    - RCT-Folly
-    - RCT-Folly/Fabric
-    - RCTRequired
-    - RCTTypeSafety
-    - React
-    - React-Core
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - SocketRocket
-    - Yoga
   - FRNCheckbox (0.18.5):
     - React
   - FRNMenuButton (0.14.5):
@@ -136,6 +107,35 @@ PODS:
     - fast_float (= 8.0.0)
     - fmt (= 11.0.2)
     - glog
+  - RCTCallout (0.28.5):
+    - boost
+    - DoubleConversion
+    - fast_float
+    - fmt
+    - glog
+    - hermes-engine
+    - RCT-Folly
+    - RCT-Folly/Fabric
+    - RCTRequired
+    - RCTTypeSafety
+    - React
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - SocketRocket
+    - Yoga
   - RCTDeprecation (0.81.2)
   - RCTFocusZone (0.22.5):
     - React
@@ -2410,7 +2410,6 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native-macos/Libraries/FBLazyVector`)
   - fmt (from `../node_modules/react-native-macos/third-party-podspecs/fmt.podspec`)
   - "FRNAvatar (from `../node_modules/@fluentui-react-native/experimental-avatar`)"
-  - "FRNCallout (from `../node_modules/@fluentui-react-native/callout`)"
   - "FRNCheckbox (from `../node_modules/@fluentui-react-native/experimental-checkbox`)"
   - "FRNMenuButton (from `../node_modules/@fluentui-react-native/menu-button`)"
   - "FRNRadioButton (from `../node_modules/@fluentui-react-native/radio-group`)"
@@ -2418,6 +2417,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native-macos/sdks/hermes-engine/hermes-engine.podspec`)
   - RCT-Folly (from `../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
+  - "RCTCallout (from `../node_modules/@fluentui-react-native/callout`)"
   - RCTDeprecation (from `../node_modules/react-native-macos/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
   - "RCTFocusZone (from `../node_modules/@fluentui-react-native/focus-zone`)"
   - RCTRequired (from `../node_modules/react-native-macos/Libraries/Required`)
@@ -2507,8 +2507,6 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native-macos/third-party-podspecs/fmt.podspec"
   FRNAvatar:
     :path: "../node_modules/@fluentui-react-native/experimental-avatar"
-  FRNCallout:
-    :path: "../node_modules/@fluentui-react-native/callout"
   FRNCheckbox:
     :path: "../node_modules/@fluentui-react-native/experimental-checkbox"
   FRNMenuButton:
@@ -2524,6 +2522,8 @@ EXTERNAL SOURCES:
     :tag: hermes-2025-07-07-RNv0.81.0-e0fc67142ec0763c6b6153ca2bf96df815539782
   RCT-Folly:
     :podspec: "../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec"
+  RCTCallout:
+    :path: "../node_modules/@fluentui-react-native/callout"
   RCTDeprecation:
     :path: "../node_modules/react-native-macos/ReactApple/Libraries/RCTFoundation/RCTDeprecation"
   RCTFocusZone:
@@ -2663,20 +2663,20 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: cea1d4f90a3a59537f3deb03ff5656489d7133dd
-  DoubleConversion: 5b92c4507c560bb62e7aa1acdf2785ea3ff08b3b
+  DoubleConversion: d31b1eb37f6d6f456530c4fd9124b857d6889cab
   fast_float: 20817c22759af6ac8d4d67e6e059b8b499953656
   FBLazyVector: 0e3076dbb16169b0afc2d701a24a526423b5e76b
   fmt: 24e7591456deb60b4a77518f83d9a916ac84223f
   FRNAvatar: c4baf9356785232c547bb76a9ccd290e94e0fda9
-  FRNCallout: ee98ce83b788ff3d3716463269560487b787f658
   FRNCheckbox: 2e74a528f6328ea79bf9eaa2a1d466dd8f30be4f
   FRNMenuButton: bb6913908137c530f1a3af2d8d7d5c6a5fae4e19
   FRNRadioButton: adf6b247f1143c9e79f63221405e9b94ef7bef6d
   FRNVibrancyView: ccff736e2c309eba2ed56f1b803a0e55b8a3067f
-  glog: ba31c1afa7dcf1915a109861bccdb4421be6175b
+  glog: 0b31c25149b9d350b2666c7d459229861a00ec07
   hermes-engine: 9f4dfe93326146a1c99eb535b1cb0b857a3cd172
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: c803cf33238782d5fd21a5e02d44f64068e0e130
+  RCTCallout: 30b585892da37682f2ea6914f99de6db45dae9fd
   RCTDeprecation: b60b889eafa75f46c3d6be5332681efbb16ad0c7
   RCTFocusZone: f4199120b2260bc5710359852686307a0f8d8b0e
   RCTRequired: 070d7f0ef937e7a93aab20761cef55419f16b5de
@@ -2749,4 +2749,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 9142426f666c393ccea255cd25936728beda6e75
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.17.0

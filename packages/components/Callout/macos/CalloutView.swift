@@ -4,7 +4,7 @@ import Foundation
 import React
 #endif // USE_REACT_AS_MODULE
 
-@objc(FRNCalloutView)
+@objc(RCTCalloutView)
 open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var target: NSNumber? {
@@ -48,6 +48,8 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	private init() {
 		super.init(frame: .zero)
+		backgroundColor = .clear
+		borderColor = .clear
 	}
 
 	public required init?(coder: NSCoder) {
@@ -77,7 +79,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	public override func updateLayer() {
 		if let layer = calloutWindow.contentView?.layer {
-			layer.borderColor =  borderColor.cgColor
+			layer.borderColor = borderColor?.cgColor
 			layer.borderWidth = borderWidth
 			layer.backgroundColor = backgroundColor.cgColor
 			layer.cornerRadius = borderRadius

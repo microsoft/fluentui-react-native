@@ -82,12 +82,12 @@ export interface ICalloutTokens {
   /**
    * Defines a maximum height for the Callout.
    */
-  maxHeight?: number;
+  maxHeight?: number | `${number}%`;
 
   /**
    * Defines a maximum width for the Callout.
    */
-  maxWidth?: number;
+  maxWidth?: number | `${number}%`;
 
   /**
    * Defines a minimum width for the Callout.

@@ -73,7 +73,7 @@
     }
   },
   "codegenConfig": {
-    "name": "FRNCalloutSpec",
+    "name": "RCTCalloutSpec",
     "type": "components",
     "jsSrcsDir": "lib"
   },

@@ -4,4 +4,4 @@
 "@fluentui-react-native/menu": patch
 ---
 
-Replace the legacy composed Callout with an unstyled phased component.
+Replace the legacy composed Callout with an unstyled phased component, consolidate platform defaults in JavaScript, and align the macOS native module name with RCTCallout.

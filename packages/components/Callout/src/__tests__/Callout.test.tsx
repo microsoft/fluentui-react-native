@@ -6,6 +6,7 @@ import * as renderer from 'react-test-renderer';
 
 import { Callout } from '..';
 import type { CalloutNativeCommands } from '..';
+import { Commands } from '../CalloutNativeComponent';
 
 describe('Callout', () => {
   it('renders without default themed styling', () => {
@@ -13,14 +14,19 @@ describe('Callout', () => {
     act(() => {
       component = renderer.create(<Callout />);
     });
-    expect(component!.toJSON()).toMatchSnapshot();
+    expect(component!.toJSON()).toMatchObject({
+      type: 'RCTCallout',
+      props: {
+        directionalHint: 'bottonLeftEdge',
+      },
+    });
   });
 
   it('passes explicit props, children, and string targets to the native component', () => {
     let component: renderer.ReactTestRenderer;
     act(() => {
       component = renderer.create(
-        <Callout accessibilityLabel="Example callout" style={{ backgroundColor: 'red' }} target="anchor">
+        <Callout accessibilityLabel="Example callout" directionalHint="rightTopEdge" style={{ backgroundColor: 'red' }} target="anchor">
           <Text>Content</Text>
         </Callout>,
       );
@@ -30,6 +36,7 @@ describe('Callout', () => {
       type: 'RCTCallout',
       props: {
         accessibilityLabel: 'Example callout',
+        directionalHint: 'rightTopEdge',
         style: { backgroundColor: 'red' },
         target: 'anchor',
       },
@@ -37,19 +44,25 @@ describe('Callout', () => {
     });
   });
 
-  it('exposes and clears its imperative ref', () => {
+  it('dispatches imperative commands to the native ref and clears its public ref', () => {
     const componentRef = React.createRef<CalloutNativeCommands>();
+    const blurWindow = jest.spyOn(Commands, 'blurWindow').mockImplementation(() => {});
+    const focusWindow = jest.spyOn(Commands, 'focusWindow').mockImplementation(() => {});
     let component: renderer.ReactTestRenderer;
     act(() => {
-      component = renderer.create(<Callout componentRef={componentRef} />, {
-        createNodeMock: () => ({}),
-      });
+      component = renderer.create(<Callout componentRef={componentRef} />);
     });
 
     expect(componentRef.current).toEqual({
       blurWindow: expect.any(Function),
       focusWindow: expect.any(Function),
     });
+
+    componentRef.current!.blurWindow();
+    componentRef.current!.focusWindow();
+    const nativeRef = expect.objectContaining({ _nativeTag: expect.any(Number) });
+    expect(blurWindow).toHaveBeenCalledWith(nativeRef);
+    expect(focusWindow).toHaveBeenCalledWith(nativeRef);
 
     act(() => component!.unmount());
     expect(componentRef.current).toBeNull();
