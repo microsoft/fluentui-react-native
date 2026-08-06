@@ -1,5 +1,12 @@
 # Change Log - @uifabricshared/theme-registry
 
+## 0.13.6
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+
 ## 0.13.5
 
 ### Patch Changes

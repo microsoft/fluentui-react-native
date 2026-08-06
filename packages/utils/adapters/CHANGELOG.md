@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/adapters
 
+## 0.15.0
+
+### Minor Changes
+
+- e2a4065: rework framework rendering to prepare for new component structure
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+
 ## 0.14.5
 
 ### Patch Changes
