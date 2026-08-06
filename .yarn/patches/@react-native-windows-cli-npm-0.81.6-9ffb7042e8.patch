@@ -1,0 +1,35 @@
+diff --git a/lib-commonjs/commands/healthCheck/healthChecks.js b/lib-commonjs/commands/healthCheck/healthChecks.js
+index 885c0a228d061792272e423f0958affeaf9c9299..4acfd4ccf081d50e9c6e08e9225d375500bd76dc 100644
+--- a/lib-commonjs/commands/healthCheck/healthChecks.js
++++ b/lib-commonjs/commands/healthCheck/healthChecks.js
+@@ -37,7 +37,6 @@ const pathHelpers = __importStar(require("../../utils/pathHelpers"));
+ const execa_1 = __importDefault(require("execa"));
+ const find_dotnet_tools_1 = require("@react-native-windows/find-dotnet-tools");
+ const healthCheckList_1 = require("./healthCheckList");
+-const powershell = (0, find_dotnet_tools_1.findPowerShell)();
+ function getHealthChecks() {
+     // #8471: There are known cases where the dependencies script will error out.
+     // Fail gracefully if that happens in the meantime.
+@@ -68,6 +67,7 @@ function getHealthChecksUnsafe() {
+     if (process.platform !== 'win32') {
+         return undefined;
+     }
++    const powershell = (0, find_dotnet_tools_1.findPowerShell)();
+     const rnwDepScriptPath = path_1.default.join(pathHelpers.resolveRnwRoot(process.cwd()), 'Scripts/rnw-dependencies.ps1');
+     return [
+         {
+diff --git a/lib-commonjs/utils/commandWithProgress.js b/lib-commonjs/utils/commandWithProgress.js
+index 0674bea984af02cd0f02ac7959fc017eb94a3619..ffb609527b165771b43e9320dca741cc5df54ae9 100644
+--- a/lib-commonjs/utils/commandWithProgress.js
++++ b/lib-commonjs/utils/commandWithProgress.js
+@@ -42,9 +42,9 @@ function newSpinner(text) {
+     return (0, ora_1.default)(options).start();
+ }
+ exports.newSpinner = newSpinner;
+-const powershell = (0, find_dotnet_tools_1.findPowerShell)();
+ async function runPowerShellScriptFunction(taskDescription, script, funcName, verbose, errorCategory, useAppxCompatibility = false) {
+     try {
++        const powershell = (0, find_dotnet_tools_1.findPowerShell)();
+         const printException = verbose ? '$_;' : '';
+         const importAppx = useAppxCompatibility
+             ? 'Import-Module Appx -WarningAction SilentlyContinue; '
