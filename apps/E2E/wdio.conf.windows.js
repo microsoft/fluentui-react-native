@@ -24,9 +24,7 @@ exports.config = {
       'src/Tokens/specs/*.win.ts',
     ],
   ],
-  exclude: [
-    /* 'path/to/excluded/files' */
-  ],
+  exclude: [/* 'path/to/excluded/files' */],
 
   maxInstances: 1,
   capabilities: [

@@ -7,8 +7,9 @@ FluentUI React Native is a javascript component library that provides developers
 FluentUI React Native is still in the alpha stages of development for both the components and the repo. We encourage anyone who is interested in getting an early glimpse of our plans to download and use our components, but please note that you may hit bumps along the way. Please leave us feedback or file issues if you run into bumps, and we will continue to improve the quality of the repo.
 
 Development status on each platform:
-| Windows | macOS | iOS | Android |
-|---------------------|---------------------|-------------|-------------|
+
+| Windows             | macOS               | iOS                 | Android             |
+| ------------------- | ------------------- | ------------------- | ------------------- |
 | Alpha (in progress) | Alpha (in progress) | Alpha (in progress) | Alpha (in progress) |
 
 ## Getting Started

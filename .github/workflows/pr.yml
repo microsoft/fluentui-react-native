@@ -5,7 +5,7 @@ permissions:
   contents: read
 
 env:
-  VisualStudioVersion: '17.0'
+  VisualStudioVersion: '18.0'
   WindowsTargetPlatformVersion: '10.0.26100.0'
 
 concurrency:
@@ -166,7 +166,7 @@ jobs:
 
   windows:
     name: Windows PR
-    runs-on: windows-2022
+    runs-on: windows-latest
     timeout-minutes: 60
     steps:
       - name: Checkout

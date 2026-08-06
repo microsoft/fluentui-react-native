@@ -26,6 +26,8 @@ packages/
 *.binlog
 *.hprof
 *.sln
+*.wrn
+*.err
 ExperimentalFeatures.props
 NuGet.Config
 dist/

@@ -11,13 +11,14 @@ const { getDefaultConfig } = require('metro-config');
 
 const excludeMixins = [];
 const extraNodeModules = {};
-function ensureUniqueModule(moduleName, excludeList, nodeModules) {
+function ensureUniqueModule(moduleName, _excludeList, _nodeModules) {
   const [nmEntry, excludePattern] = resolveUniqueModule(moduleName);
   excludeMixins.push(excludePattern);
   extraNodeModules[moduleName] = nmEntry;
 }
 
 // build up the added excludes and extraNodeModules
+// eslint-disable-next-line @rnx-kit/no-foreach-with-captured-variables
 ['react-native-svg'].forEach((moduleName) => ensureUniqueModule(moduleName));
 
 // For some reason oxc-resolver does not find the unicode-segmenter module, so we need to explicitly add it
