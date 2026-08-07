@@ -1,5 +1,6 @@
 export { calloutName } from './Callout.types';
 export type {
+  CalloutNativeCommands,
   DirectionalHint,
   DismissBehaviors,
   ICalloutProps,
@@ -9,5 +10,4 @@ export type {
   ICalloutType,
   RestoreFocusEvent,
 } from './Callout.types';
-export type { CalloutNativeCommands } from './CalloutNativeComponent';
 export { Callout } from './Callout';

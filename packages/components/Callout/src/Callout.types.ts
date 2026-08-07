@@ -1,7 +1,6 @@
 import type * as React from 'react';
 import type { AnimatableNumericValue, ColorValue, KeyboardMetrics, ViewProps } from 'react-native';
 
-import type { CalloutNativeCommands } from './CalloutNativeComponent';
 export const calloutName = 'Callout';
 
 /**
@@ -34,6 +33,11 @@ export interface RestoreFocusEvent {
      */
     containsFocus: boolean;
   };
+}
+
+export interface CalloutNativeCommands {
+  blurWindow(_legacyViewRef?: unknown): void;
+  focusWindow(_legacyViewRef?: unknown): void;
 }
 
 export interface ICalloutTokens {
