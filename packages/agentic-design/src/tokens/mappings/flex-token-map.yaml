@@ -179,13 +179,13 @@ tokens:
   color.backgroundNeutralSubtle:
     rest:
       generic: '--gnrc-color-background-neutral-subtle'
-      fluent: alias.subtleBackground.rest
+      fluent: alias.neutralBackground2.rest
     hover:
       generic: '--gnrc-color-background-neutral-subtle-hover'
-      fluent: alias.subtleBackground.hover
+      fluent: alias.neutralBackground2.hover
     pressed:
       generic: '--gnrc-color-background-neutral-subtle-pressed'
-      fluent: alias.subtleBackground.pressed
+      fluent: alias.neutralBackground2.pressed
   color.backgroundNeutralSubtleDisabled:
     rest:
       generic: '--gnrc-color-background-neutral-subtle-disabled'
