@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/tester
 
+## 0.170.54
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 1b45589: Update dependency and tool versions
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+
 ## 0.170.53
 
 ### Patch Changes

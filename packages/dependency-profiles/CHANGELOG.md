@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
+## 0.10.0
+
+### Minor Changes
+
+- e2a4065: rework framework rendering to prepare for new component structure
+
+### Patch Changes
+
+- c1de024: Add central font size/weight lookup by name to design package and consume in Text.tsx
+
 ## 0.9.2
 
 ### Patch Changes
