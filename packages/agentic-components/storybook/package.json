@@ -14,6 +14,7 @@
     "start": "rnx-cli start",
     "macos": "rnx-cli run --platform macos",
     "windows": "react-native run-windows --arch x64 --sln windows/AgenticStorybook.sln",
+    "windows:offline": "yarn bundle:windows && yarn windows:generate && yarn windows --release --no-packager --no-deploy --no-launch --msbuildprops UseBundle=false && pwsh -NoProfile -File scripts/run-windows-offline.ps1",
     "windows:generate": "install-windows-test-app --use-fabric",
     "bundle:macos": "yarn prebuild && rnx-cli bundle --dev false --platform macos",
     "bundle:windows": "yarn prebuild && rnx-cli bundle --dev false --platform windows",
@@ -77,6 +78,18 @@
         "targets": [
           "macos",
           "windows"
+        ],
+        "plugins": [
+          [
+            "@rnx-kit/metro-plugin-duplicates-checker",
+            {
+              "throwOnError": true,
+              "ignoredModules": [
+                "pretty-format",
+                "react-is"
+              ]
+            }
+          ]
         ],
         "platforms": {
           "macos": {

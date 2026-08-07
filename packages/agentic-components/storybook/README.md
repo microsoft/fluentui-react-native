@@ -83,6 +83,24 @@ Requires Visual Studio 2022 with the React Native Windows build prerequisites. T
 solution, `ExperimentalFeatures.props`, and build outputs are git-ignored and can be regenerated
 with `yarn windows:generate`.
 
+The Debug app always loads from Metro; `react-native-test-app` does not automatically fall back
+to an embedded bundle in Debug builds. To bundle, build, and launch a Release app that runs
+without Metro:
+
+```powershell
+yarn windows:offline
+```
+
+The Release package embeds `dist/index.windows.bundle`. Storybook's optional color-picker image
+is intentionally not packaged because the Yarn pnpm asset path exceeds Windows' deployment path
+limit; controls and stories otherwise run from the embedded bundle. The command replaces this
+app's current Debug registration with its Release layout; running `yarn windows` later deploys
+the Debug app again.
+
+Storybook's development bundle intentionally contains separate `pretty-format` and `react-is`
+versions used by its internal tooling. They are excluded from the duplicate-module enforcement;
+React, React Native, and application dependencies remain checked.
+
 ## Bundling (no native toolchain required)
 
 You can produce the JS bundle without Xcode. This also generates `storybook.requires` first:
