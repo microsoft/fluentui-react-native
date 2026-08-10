@@ -203,6 +203,9 @@
       "path": "packages/libraries/core/tsconfig.json"
     },
     {
+      "path": "packages/libraries/ComponentsV2/tsconfig.json"
+    },
+    {
       "path": "packages/theming/android-theme/tsconfig.json"
     },
     {
