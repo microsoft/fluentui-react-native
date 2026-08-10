@@ -17,5 +17,5 @@ export type {
   UnsupportedFlexTokens,
 } from './tokens/flex.types';
 export { useFlexTokens } from './tokens/useFlexTokens';
-export type { ThemeState } from './useThemeState';
-export { useThemeState } from './useThemeState';
+export type { ThemeState, ThemeStyleSheet } from './useThemeState';
+export { getThemeStyleSheet, useThemeState, themedStyleSheetFactory } from './useThemeState';

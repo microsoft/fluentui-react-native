@@ -24,6 +24,17 @@ function getRootStyle(component: ReactTestRenderer): ViewStyle {
 }
 
 describe('Button', () => {
+  it('reuses cached theme styles without recreating them for another button instance', () => {
+    const createStyleSheet = jest.spyOn(StyleSheet, 'create');
+
+    renderButton({ content: 'First' });
+    const createCount = createStyleSheet.mock.calls.length;
+    renderButton({ content: 'Second' });
+
+    expect(createStyleSheet).toHaveBeenCalledTimes(createCount);
+    createStyleSheet.mockRestore();
+  });
+
   it('renders content with default button accessibility and secondary styling', () => {
     const component = renderButton({ content: 'Save' });
     const root = getRoot(component);
@@ -34,7 +45,7 @@ describe('Button', () => {
     expect(component.root.findByType(Text).props.children).toBe('Save');
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: '#00000000',
+      backgroundColor: '#fafafa',
       minHeight: 24,
       minWidth: 24,
     });
@@ -56,7 +67,7 @@ describe('Button', () => {
     act(() => {
       root.props.onPressIn({});
     });
-    expect(getRootStyle(component).backgroundColor).toBe('#e0e0e0');
+    expect(getRootStyle(component).backgroundColor).toBe('#dbdbdb');
 
     act(() => {
       root.props.onPress({});
@@ -129,8 +140,8 @@ describe('Button', () => {
     expect(images).toHaveLength(1);
     expect(images[0].props.source).toEqual({ uri: 'filled.png' });
     expect(labels).toHaveLength(2);
-    expect(labels[0].props.style).toMatchObject({ fontWeight: '600', opacity: 0 });
-    expect(labels[1].props.style).toMatchObject({ fontWeight: '600', position: 'absolute' });
+    expect(StyleSheet.flatten(labels[0].props.style)).toMatchObject({ fontWeight: '600', opacity: 0 });
+    expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ fontWeight: '600', position: 'absolute' });
   });
 
   it('places the icon after content and applies user styles last', () => {
@@ -145,7 +156,6 @@ describe('Button', () => {
     const children = root.findAll(
       (instance) => typeof instance.type === 'string' && (instance.props.testID === 'content' || instance.props.testID === 'icon'),
     );
-
     expect(children.map((child) => child.props.testID)).toEqual(['content', 'icon']);
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
   });
@@ -168,7 +178,7 @@ describe('Button', () => {
 
   it.each([
     ['primary', '#185abd'],
-    ['secondary', '#00000000'],
+    ['secondary', '#fafafa'],
     ['outline', '#00000000'],
     ['subtle', '#00000000'],
   ] as const)('resolves the %s appearance', (appearance, backgroundColor) => {
@@ -177,13 +187,17 @@ describe('Button', () => {
   });
 
   it.each([
-    ['small', 12, 8],
-    ['medium', 14, 10],
-    ['large', 16, 12],
-  ] as const)('resolves the %s size', (size, fontSize, paddingHorizontal) => {
+    ['small', 12, 8, 8],
+    ['medium', 14, 10, 12],
+    ['large', 16, 12, 12],
+  ] as const)('resolves the %s size', (size, fontSize, paddingHorizontal, borderRadius) => {
     const component = renderButton({ content: size, size });
-    expect(component.root.findByType(Text).props.style).toMatchObject({ fontSize });
+    expect(StyleSheet.flatten(component.root.findByType(Text).props.style)).toMatchObject({
+      fontFamily: expect.any(String),
+      fontSize,
+    });
     expect(getRootStyle(component).paddingHorizontal).toBe(paddingHorizontal);
+    expect(getRootStyle(component).borderRadius).toBe(borderRadius);
   });
 
   it('preserves user accessibility state values', () => {

@@ -41,13 +41,18 @@ Build components in `packages/agentic-components` as React Native adaptations of
 
 - Consult `packages/agentic-design/src/tokens/mappings/flex-token-map.yaml` for the canonical mapping from generic CSS and
   Fluent authoring sources to grouped React Native Flex token paths.
-- Import non-color values directly from `@fluentui-react-native/design/tokens/global`.
 - Read semantic colors from `useThemeState().tokens.color` so flex interaction overrides and future themes flow through
   the component. Use `tokens.color.hover` and `tokens.color.pressed` for interaction overrides.
 - Access other Flex categories through their grouped objects, such as `tokens.shadow`, `tokens.fontWeight`,
   `tokens.fontFamily`, `tokens.fontSize`, `tokens.lineHeight`, `tokens.borderRadius`, `tokens.spacing`, and
   `tokens.strokeWidth`.
-- Prefer flex color tokens. Use `globalTokens` only when no flex semantic color exists.
+- Prefer Flex tokens for every mapped semantic value. Import named values from
+  `@fluentui-react-native/design/tokens/global` only when the Flex contract has no equivalent, such as component icon
+  dimensions, and record the genuine token gap in the component spec.
+- Cache theme-dependent `StyleSheet.create` results with `getThemeStyleSheet(themeState, componentStyleKey, factory)`,
+  using one module-scoped `Symbol` per component. Treat the resulting style sheet as immutable and reuse it across
+  component instances. A cached sheet may depend only on its `ThemeState` (`tokens` and `highContrast`); keep props,
+  interaction state, and user styles outside the cache so one instance cannot leak styles into another.
 - Never replace available spacing, radius, stroke, typography, or size tokens with numeric literals.
 - Resolve interactive colors in this priority order: disabled, pressed, hovered, rest. Apply selected and appearance axes within that state.
 - User styles should be applied after token-derived component styles.
@@ -56,7 +61,8 @@ Build components in `packages/agentic-components` as React Native adaptations of
 
 - `<component>.types.ts`: public slots, props, named variants, and resolved state.
 - `use<Component>.ts`: defaults, accessibility, interaction hooks, and slot construction.
-- `useApplyStyles.ts`: token selection and `attachSlotProps`; memoize derived style objects when useful.
+- `useApplyStyles.ts`: retrieve or lazily create the component's symbol-keyed `themeStyles` entry, select state-specific
+  styles, and call `attachSlotProps`. Apply instance-specific and user styles after cached theme styles.
 - `render<Component>.tsx`: slot ordering and conditional layout only; no hooks or token lookup.
 - `<component>.ts`: compose the state, style, and render stages.
 
