@@ -19,13 +19,12 @@ import type { ButtonState } from './button.types';
 export function useApplyStyles_unstable(state: ButtonState) {
   const { appearance, disabled, focused, hovered, iconOnly, pressed, selected, shape, size, userStyle } = state;
   const styles = getButtonThemeStyles(state);
-  const colors = getButtonColorStyles(styles, appearance, disabled, selected, pressed, hovered);
+  const colors = getButtonColorStyles(state, appearance, disabled, selected, pressed, hovered);
   const rootStyle: StyleProp<ViewStyle> = [
     styles.root,
     getButtonRootSizeStyle(styles, size, iconOnly),
     getButtonShapeStyle(styles, shape, size),
     colors.background,
-    colors.border,
     focused && !disabled && styles.focused,
     userStyle,
   ];

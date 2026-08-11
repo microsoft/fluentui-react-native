@@ -43,7 +43,7 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
 
 **Tokens**: Design tokens handle styling and customization. Tokens are design-time values set via theme or component customization (e.g., "brandColor"). Tokens can also be props (specified via "TokensThatAreAlsoProps"). This system enables simpler customization and better memoization. For Flex token authoring, use `packages/agentic-design/src/tokens/mappings/flex-token-map.yaml` as the canonical mapping from generic CSS and Fluent token sources to grouped React Native Flex token paths.
 
-**Theme-specific styles**: Cache `StyleSheet.create` results that depend only on `ThemeState` with `getThemeStyleSheet`, keyed by a module-scoped component `Symbol`. Treat them as immutable, and apply props, interaction state, and user styles separately so the cached sheet is safe to share between component instances.
+**Theme-specific styles**: Cache `StyleSheet.create` results that depend only on `ThemeState` with a module-scoped getter created by `themedStyleSheetFactory`. Treat them as immutable, and apply props, interaction state, and user styles separately so the cached sheet is safe to share between component instances.
 
 **Platform-Specific Files**: Components use platform-specific files with extensions like `.ios.ts`, `.android.ts`, `.win32.ts`, `.macos.ts` for platform-specific implementations.
 

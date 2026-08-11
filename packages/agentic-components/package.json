@@ -42,12 +42,12 @@
     "@react-native-community/cli-platform-ios": "^20.0.0",
     "@react-native/babel-preset": "^0.81.0",
     "@react-native/metro-config": "^0.81.0",
+    "@testing-library/react-native": "catalog:0.81",
     "@types/react": "~19.1.4",
-    "@types/react-test-renderer": "^19.1.0",
     "react": "19.1.4",
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",
-    "react-test-renderer": "19.1.4"
+    "test-renderer": "catalog:0.81"
   },
   "peerDependencies": {
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
@@ -75,8 +75,7 @@
     "alignDeps": {
       "capabilities": [
         "core",
-        "core-macos",
-        "react-test-renderer"
+        "core-macos"
       ]
     },
     "extends": "@fluentui-react-native/scripts/kit-config"

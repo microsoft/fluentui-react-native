@@ -18,4 +18,4 @@ export type {
 } from './tokens/flex.types';
 export { useFlexTokens } from './tokens/useFlexTokens';
 export type { ThemeState, ThemeStyleSheet } from './useThemeState';
-export { getThemeStyleSheet, useThemeState, themedStyleSheetFactory } from './useThemeState';
+export { themedStyleSheetFactory, useThemeState } from './useThemeState';

@@ -1,115 +1,174 @@
 import { StyleSheet } from 'react-native';
-import type { ColorValue, TextStyle, ViewStyle } from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native';
 
-import { getThemeStyleSheet } from '@fluentui-react-native/design';
+import { themedStyleSheetFactory } from '@fluentui-react-native/design';
 import type { ThemeState } from '@fluentui-react-native/design';
 import { cornerRadiusNone, size160, size200, size240, sizeNone } from '@fluentui-react-native/design/tokens/global';
 
+import { buildInteractiveStyles } from '../../utils/colorStyles';
+import type { BackgroundStyle, ColorSet, ForegroundStyle, InteractiveStyleSet } from '../../utils/colorStyles';
 import type { ButtonAppearance, ButtonShape, ButtonSize } from './button.types';
 
 type FlexTokens = ThemeState['tokens'];
-type InteractionState = 'rest' | 'hovered' | 'pressed';
-type BackgroundStyleName =
-  | 'brandHeavy'
-  | 'neutralHeavy'
-  | 'neutralSoft'
-  | 'neutralSubtle'
-  | 'neutralTransparent'
-  | 'neutralHeavyDisabled'
-  | 'neutralSubtleDisabled';
-type BorderStyleName = 'neutralTransparent' | 'neutralSubtle' | 'neutralHeavy' | 'neutralDisabled';
-type ForegroundStyleName = 'brandOnloud' | 'neutralPrimary' | 'neutralOnloud' | 'neutralDisabled';
+type InteractiveState = 'hovered' | 'pressed' | 'disabled';
+type ResolvedInteractionState = 'rest' | InteractiveState;
 
-type ButtonColorStyleNames = {
-  background: BackgroundStyleName;
-  border: BorderStyleName;
-  foreground: ForegroundStyleName;
+type ButtonColorSets = {
+  rest: ColorSet;
+  selected: ColorSet;
+  disabled: Partial<ColorSet>;
+  selectedDisabled: Partial<ColorSet>;
 };
 
-const buttonThemeStylesKey = Symbol('Button.themeStyles');
+const getPrimaryStyles = themedStyleSheetFactory('Button.primary', (themeState) => {
+  const base: ColorSet = {
+    background: 'backgroundBrandHeavy',
+    border: 'strokeNeutralTransparent',
+    foreground: 'foregroundBrandOnloud',
+  };
+  const disabled: Partial<ColorSet> = {
+    background: 'backgroundNeutralHeavyDisabled',
+    foreground: 'foregroundNeutralDisabled',
+  };
+  return buildInteractiveStyles(themeState, base, {
+    selected: base,
+    disabled: disabled,
+    selectedDisabled: disabled,
+  });
+});
 
-const unselectedColorStyles: Record<ButtonAppearance, ButtonColorStyleNames> = {
+const getSecondaryStyles = themedStyleSheetFactory('Button.secondary', (themeState) => {
+  const base: ColorSet = {
+    background: 'backgroundNeutralSubtle',
+    border: 'strokeNeutralTransparent',
+    foreground: 'foregroundNeutralPrimary',
+  };
+  const disabled: Partial<ColorSet> = {
+    background: 'backgroundNeutralSubtleDisabled',
+    foreground: 'foregroundNeutralDisabled',
+  };
+  return buildInteractiveStyles(themeState, base, {
+    selected: {
+      background: 'backgroundNeutralHeavy',
+      foreground: 'foregroundNeutralOnloud',
+    },
+    disabled: disabled,
+    selectedDisabled: disabled,
+  });
+});
+
+const buttonColorSets = {
   primary: {
-    background: 'brandHeavy',
-    border: 'neutralTransparent',
-    foreground: 'brandOnloud',
+    rest: {
+      background: 'backgroundBrandHeavy',
+      border: 'strokeNeutralTransparent',
+      foreground: 'foregroundBrandOnloud',
+    },
+    selected: {
+      background: 'backgroundBrandHeavy',
+      border: 'strokeNeutralTransparent',
+      foreground: 'foregroundBrandOnloud',
+    },
+    disabled: {
+      background: 'backgroundNeutralHeavyDisabled',
+      foreground: 'foregroundNeutralDisabled',
+    },
+    selectedDisabled: {
+      background: 'backgroundNeutralHeavyDisabled',
+      foreground: 'foregroundNeutralDisabled',
+    },
   },
   secondary: {
-    background: 'neutralSubtle',
-    border: 'neutralTransparent',
-    foreground: 'neutralPrimary',
+    rest: {
+      background: 'backgroundNeutralSubtle',
+      border: 'strokeNeutralTransparent',
+      foreground: 'foregroundNeutralPrimary',
+    },
+    selected: {
+      background: 'backgroundNeutralHeavy',
+      border: 'strokeNeutralTransparent',
+      foreground: 'foregroundNeutralOnloud',
+    },
+    disabled: {
+      background: 'backgroundNeutralSubtleDisabled',
+      foreground: 'foregroundNeutralDisabled',
+    },
+    selectedDisabled: {
+      background: 'backgroundNeutralHeavyDisabled',
+      foreground: 'foregroundNeutralDisabled',
+    },
   },
   outline: {
-    background: 'neutralTransparent',
-    border: 'neutralSubtle',
-    foreground: 'neutralPrimary',
+    rest: {
+      background: 'backgroundNeutralTransparent',
+      border: 'strokeNeutralSubtle',
+      foreground: 'foregroundNeutralPrimary',
+    },
+    selected: {
+      background: 'backgroundNeutralHeavy',
+      border: 'strokeNeutralHeavy',
+      foreground: 'foregroundNeutralOnloud',
+    },
+    disabled: {
+      border: 'strokeNeutralDisabled',
+      foreground: 'foregroundNeutralDisabled',
+    },
+    selectedDisabled: {
+      background: 'backgroundNeutralHeavyDisabled',
+      border: 'strokeNeutralDisabled',
+      foreground: 'foregroundNeutralDisabled',
+    },
   },
   subtle: {
-    background: 'neutralTransparent',
-    border: 'neutralTransparent',
-    foreground: 'neutralPrimary',
+    rest: {
+      background: 'backgroundNeutralTransparent',
+      border: 'strokeNeutralTransparent',
+      foreground: 'foregroundNeutralPrimary',
+    },
+    selected: {
+      background: 'backgroundNeutralSoft',
+      border: 'strokeNeutralTransparent',
+      foreground: 'foregroundNeutralPrimary',
+    },
+    disabled: {
+      foreground: 'foregroundNeutralDisabled',
+    },
+    selectedDisabled: {
+      background: 'backgroundNeutralSubtleDisabled',
+      foreground: 'foregroundNeutralDisabled',
+    },
   },
+} as const satisfies Record<ButtonAppearance, ButtonColorSets>;
+
+type ButtonInteractiveStyles = InteractiveStyleSet<InteractiveState>;
+type ButtonColorStyleGetter = (themeState: ThemeState) => ButtonInteractiveStyles;
+type ButtonAppearanceColorStyleGetters = {
+  rest: ButtonColorStyleGetter;
+  selected: ButtonColorStyleGetter;
 };
 
-const selectedColorStyles: Record<ButtonAppearance, ButtonColorStyleNames> = {
-  primary: unselectedColorStyles.primary,
-  secondary: {
-    background: 'neutralHeavy',
-    border: 'neutralTransparent',
-    foreground: 'neutralOnloud',
-  },
-  outline: {
-    background: 'neutralHeavy',
-    border: 'neutralHeavy',
-    foreground: 'neutralOnloud',
-  },
-  subtle: {
-    background: 'neutralSoft',
-    border: 'neutralTransparent',
-    foreground: 'neutralPrimary',
-  },
-};
+function createButtonColorStyleGetter(symbolName: string, base: ColorSet, disabled: Partial<ColorSet>): ButtonColorStyleGetter {
+  return themedStyleSheetFactory(symbolName, (themeState) =>
+    StyleSheet.create(
+      buildInteractiveStyles(themeState, base, {
+        disabled,
+      }),
+    ),
+  );
+}
 
-const disabledColorStyles: Record<ButtonAppearance, ButtonColorStyleNames> = {
-  primary: {
-    background: 'neutralHeavyDisabled',
-    border: 'neutralTransparent',
-    foreground: 'neutralDisabled',
-  },
-  secondary: {
-    background: 'neutralSubtleDisabled',
-    border: 'neutralTransparent',
-    foreground: 'neutralDisabled',
-  },
-  outline: {
-    background: 'neutralTransparent',
-    border: 'neutralDisabled',
-    foreground: 'neutralDisabled',
-  },
-  subtle: {
-    background: 'neutralTransparent',
-    border: 'neutralTransparent',
-    foreground: 'neutralDisabled',
-  },
-};
+function createButtonAppearanceColorStyleGetters(appearance: ButtonAppearance, colors: ButtonColorSets): ButtonAppearanceColorStyleGetters {
+  return {
+    rest: createButtonColorStyleGetter(`Button.${appearance}`, colors.rest, colors.disabled),
+    selected: createButtonColorStyleGetter(`Button.${appearance}.selected`, colors.selected, colors.selectedDisabled),
+  };
+}
 
-const selectedDisabledColorStyles: Record<ButtonAppearance, ButtonColorStyleNames> = {
-  primary: disabledColorStyles.primary,
-  secondary: {
-    background: 'neutralHeavyDisabled',
-    border: 'neutralTransparent',
-    foreground: 'neutralDisabled',
-  },
-  outline: {
-    background: 'neutralHeavyDisabled',
-    border: 'neutralDisabled',
-    foreground: 'neutralDisabled',
-  },
-  subtle: {
-    background: 'neutralSubtleDisabled',
-    border: 'neutralTransparent',
-    foreground: 'neutralDisabled',
-  },
+const buttonColorStyleGetters: Record<ButtonAppearance, ButtonAppearanceColorStyleGetters> = {
+  primary: createButtonAppearanceColorStyleGetters('primary', buttonColorSets.primary),
+  secondary: createButtonAppearanceColorStyleGetters('secondary', buttonColorSets.secondary),
+  outline: createButtonAppearanceColorStyleGetters('outline', buttonColorSets.outline),
+  subtle: createButtonAppearanceColorStyleGetters('subtle', buttonColorSets.subtle),
 };
 
 function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullable<ViewStyle['gap']> {
@@ -120,10 +179,6 @@ function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullab
 }
 
 function createButtonThemeStyles({ tokens }: ThemeState) {
-  const rest = tokens.color;
-  const hovered = { ...rest, ...rest.hover };
-  const pressed = { ...rest, ...rest.pressed };
-
   return StyleSheet.create({
     root: {
       alignItems: 'center',
@@ -205,47 +260,12 @@ function createButtonThemeStyles({ tokens }: ThemeState) {
       justifyContent: 'center',
       position: 'relative',
     },
-    backgroundBrandHeavy: { backgroundColor: rest.backgroundBrandHeavy },
-    backgroundBrandHeavyHovered: { backgroundColor: hovered.backgroundBrandHeavy },
-    backgroundBrandHeavyPressed: { backgroundColor: pressed.backgroundBrandHeavy },
-    backgroundNeutralHeavy: { backgroundColor: rest.backgroundNeutralHeavy },
-    backgroundNeutralHeavyHovered: { backgroundColor: hovered.backgroundNeutralHeavy },
-    backgroundNeutralHeavyPressed: { backgroundColor: pressed.backgroundNeutralHeavy },
-    backgroundNeutralSoft: { backgroundColor: rest.backgroundNeutralSoft },
-    backgroundNeutralSoftHovered: { backgroundColor: hovered.backgroundNeutralSoft },
-    backgroundNeutralSoftPressed: { backgroundColor: pressed.backgroundNeutralSoft },
-    backgroundNeutralSubtle: { backgroundColor: rest.backgroundNeutralSubtle },
-    backgroundNeutralSubtleHovered: { backgroundColor: hovered.backgroundNeutralSubtle },
-    backgroundNeutralSubtlePressed: { backgroundColor: pressed.backgroundNeutralSubtle },
-    backgroundNeutralTransparent: { backgroundColor: rest.backgroundNeutralTransparent },
-    backgroundNeutralTransparentHovered: { backgroundColor: hovered.backgroundNeutralTransparent },
-    backgroundNeutralTransparentPressed: { backgroundColor: pressed.backgroundNeutralTransparent },
-    backgroundNeutralHeavyDisabled: { backgroundColor: rest.backgroundNeutralHeavyDisabled },
-    backgroundNeutralSubtleDisabled: { backgroundColor: rest.backgroundNeutralSubtleDisabled },
-    borderNeutralTransparent: { borderColor: rest.strokeNeutralTransparent },
-    borderNeutralTransparentHovered: { borderColor: hovered.strokeNeutralTransparent },
-    borderNeutralTransparentPressed: { borderColor: pressed.strokeNeutralTransparent },
-    borderNeutralSubtle: { borderColor: rest.strokeNeutralSubtle },
-    borderNeutralSubtleHovered: { borderColor: hovered.strokeNeutralSubtle },
-    borderNeutralSubtlePressed: { borderColor: pressed.strokeNeutralSubtle },
-    borderNeutralHeavy: { borderColor: rest.strokeNeutralHeavy },
-    borderNeutralHeavyHovered: { borderColor: hovered.strokeNeutralHeavy },
-    borderNeutralHeavyPressed: { borderColor: pressed.strokeNeutralHeavy },
-    borderNeutralDisabled: { borderColor: rest.strokeNeutralDisabled },
-    foregroundBrandOnloud: { color: rest.foregroundBrandOnloud },
-    foregroundBrandOnloudHovered: { color: hovered.foregroundBrandOnloud },
-    foregroundBrandOnloudPressed: { color: pressed.foregroundBrandOnloud },
-    foregroundNeutralPrimary: { color: rest.foregroundNeutralPrimary },
-    foregroundNeutralPrimaryHovered: { color: hovered.foregroundNeutralPrimary },
-    foregroundNeutralPrimaryPressed: { color: pressed.foregroundNeutralPrimary },
-    foregroundNeutralOnloud: { color: rest.foregroundNeutralOnloud },
-    foregroundNeutralOnloudHovered: { color: hovered.foregroundNeutralOnloud },
-    foregroundNeutralOnloudPressed: { color: pressed.foregroundNeutralOnloud },
-    foregroundNeutralDisabled: { color: rest.foregroundNeutralDisabled },
   });
 }
 
 export type ButtonThemeStyles = ReturnType<typeof createButtonThemeStyles>;
+
+const getThemedButtonStyles = themedStyleSheetFactory('Button', createButtonThemeStyles);
 
 const rootSizeStyleKeys = {
   small: { withContent: 'rootWithContentSmall', iconOnly: 'rootIconOnlySmall' },
@@ -271,122 +291,31 @@ const iconSizes: Record<ButtonSize, number> = {
   large: size200,
 };
 
-const backgroundStyleKeys = {
-  brandHeavy: {
-    rest: 'backgroundBrandHeavy',
-    hovered: 'backgroundBrandHeavyHovered',
-    pressed: 'backgroundBrandHeavyPressed',
-  },
-  neutralHeavy: {
-    rest: 'backgroundNeutralHeavy',
-    hovered: 'backgroundNeutralHeavyHovered',
-    pressed: 'backgroundNeutralHeavyPressed',
-  },
-  neutralSoft: {
-    rest: 'backgroundNeutralSoft',
-    hovered: 'backgroundNeutralSoftHovered',
-    pressed: 'backgroundNeutralSoftPressed',
-  },
-  neutralSubtle: {
-    rest: 'backgroundNeutralSubtle',
-    hovered: 'backgroundNeutralSubtleHovered',
-    pressed: 'backgroundNeutralSubtlePressed',
-  },
-  neutralTransparent: {
-    rest: 'backgroundNeutralTransparent',
-    hovered: 'backgroundNeutralTransparentHovered',
-    pressed: 'backgroundNeutralTransparentPressed',
-  },
-  neutralHeavyDisabled: {
-    rest: 'backgroundNeutralHeavyDisabled',
-    hovered: 'backgroundNeutralHeavyDisabled',
-    pressed: 'backgroundNeutralHeavyDisabled',
-  },
-  neutralSubtleDisabled: {
-    rest: 'backgroundNeutralSubtleDisabled',
-    hovered: 'backgroundNeutralSubtleDisabled',
-    pressed: 'backgroundNeutralSubtleDisabled',
-  },
-} as const;
-
-const borderStyleKeys = {
-  neutralTransparent: {
-    rest: 'borderNeutralTransparent',
-    hovered: 'borderNeutralTransparentHovered',
-    pressed: 'borderNeutralTransparentPressed',
-  },
-  neutralSubtle: {
-    rest: 'borderNeutralSubtle',
-    hovered: 'borderNeutralSubtleHovered',
-    pressed: 'borderNeutralSubtlePressed',
-  },
-  neutralHeavy: {
-    rest: 'borderNeutralHeavy',
-    hovered: 'borderNeutralHeavyHovered',
-    pressed: 'borderNeutralHeavyPressed',
-  },
-  neutralDisabled: {
-    rest: 'borderNeutralDisabled',
-    hovered: 'borderNeutralDisabled',
-    pressed: 'borderNeutralDisabled',
-  },
-} as const;
-
-const foregroundStyleKeys = {
-  brandOnloud: {
-    rest: 'foregroundBrandOnloud',
-    hovered: 'foregroundBrandOnloudHovered',
-    pressed: 'foregroundBrandOnloudPressed',
-  },
-  neutralPrimary: {
-    rest: 'foregroundNeutralPrimary',
-    hovered: 'foregroundNeutralPrimaryHovered',
-    pressed: 'foregroundNeutralPrimaryPressed',
-  },
-  neutralOnloud: {
-    rest: 'foregroundNeutralOnloud',
-    hovered: 'foregroundNeutralOnloudHovered',
-    pressed: 'foregroundNeutralOnloudPressed',
-  },
-  neutralDisabled: {
-    rest: 'foregroundNeutralDisabled',
-    hovered: 'foregroundNeutralDisabled',
-    pressed: 'foregroundNeutralDisabled',
-  },
-} as const;
-
 export type ButtonColorStyles = {
-  background: ViewStyle;
-  border: ViewStyle;
-  foreground: TextStyle;
-  foregroundColor: ColorValue;
+  background: BackgroundStyle;
+  foreground: ForegroundStyle;
+  foregroundColor: ForegroundStyle['color'];
 };
 
 export function getButtonThemeStyles(themeState: ThemeState): ButtonThemeStyles {
-  return getThemeStyleSheet(themeState, buttonThemeStylesKey, createButtonThemeStyles);
+  return getThemedButtonStyles(themeState);
 }
 
 export function getButtonColorStyles(
-  styles: ButtonThemeStyles,
+  themeState: ThemeState,
   appearance: ButtonAppearance,
   disabled: boolean,
   selected: boolean,
   pressed: boolean,
   hovered: boolean,
 ): ButtonColorStyles {
-  const names = disabled
-    ? selected
-      ? selectedDisabledColorStyles[appearance]
-      : disabledColorStyles[appearance]
-    : selected
-      ? selectedColorStyles[appearance]
-      : unselectedColorStyles[appearance];
-  const interaction = disabled ? 'rest' : getInteractionState(pressed, hovered);
-  const foreground = getForegroundStyle(styles, names.foreground, interaction);
+  const styles = buttonColorStyleGetters[appearance][selected ? 'selected' : 'rest'](themeState);
+  const interaction = disabled ? 'disabled' : getInteractionState(pressed, hovered);
+  const background = getBackgroundStyle(styles, interaction);
+  const foreground = getForegroundStyle(styles, interaction);
 
   return {
-    background: getBackgroundStyle(styles, names.background, interaction),
-    border: getBorderStyle(styles, names.border, interaction),
+    background,
     foreground,
     foregroundColor: foreground.color,
   };
@@ -414,22 +343,14 @@ export function getButtonIconSize(size: ButtonSize): number {
   return iconSizes[size];
 }
 
-function getInteractionState(pressed: boolean, hovered: boolean): InteractionState {
+function getInteractionState(pressed: boolean, hovered: boolean): ResolvedInteractionState {
   return pressed ? 'pressed' : hovered ? 'hovered' : 'rest';
 }
 
-function getBackgroundStyle(styles: ButtonThemeStyles, name: BackgroundStyleName, interaction: InteractionState): ViewStyle {
-  return styles[backgroundStyleKeys[name][interaction]];
+function getBackgroundStyle(styles: ButtonInteractiveStyles, interaction: ResolvedInteractionState): BackgroundStyle {
+  return interaction === 'rest' ? styles.bg : styles[`bg.${interaction}`];
 }
 
-function getBorderStyle(styles: ButtonThemeStyles, name: BorderStyleName, interaction: InteractionState): ViewStyle {
-  return styles[borderStyleKeys[name][interaction]];
-}
-
-function getForegroundStyle(
-  styles: ButtonThemeStyles,
-  name: ForegroundStyleName,
-  interaction: InteractionState,
-): TextStyle & { color: ColorValue } {
-  return styles[foregroundStyleKeys[name][interaction]];
+function getForegroundStyle(styles: ButtonInteractiveStyles, interaction: ResolvedInteractionState): ForegroundStyle {
+  return interaction === 'rest' ? styles.fg : styles[`fg.${interaction}`];
 }
