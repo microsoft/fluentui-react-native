@@ -3,7 +3,7 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import {
-  getButtonColorStyles,
+  getAppearanceStyles,
   getButtonContentSizeStyle,
   getButtonIconSize,
   getButtonRootSizeStyle,
@@ -17,9 +17,9 @@ import type { ButtonState } from './button.types';
  * button slots.
  */
 export function useApplyStyles_unstable(state: ButtonState) {
-  const { appearance, disabled, focused, hovered, iconOnly, pressed, selected, shape, size, userStyle } = state;
+  const { disabled, focused, iconOnly, selected, shape, size, userStyle } = state;
   const styles = getButtonThemeStyles(state);
-  const colors = getButtonColorStyles(state, appearance, disabled, selected, pressed, hovered);
+  const colors = getAppearanceStyles(state);
   const rootStyle: StyleProp<ViewStyle> = [
     styles.root,
     getButtonRootSizeStyle(styles, size, iconOnly),
@@ -41,7 +41,7 @@ export function useApplyStyles_unstable(state: ButtonState) {
   if (state.icon) {
     attachSlotProps(state.icon, {
       accessible: false,
-      color: colors.foregroundColor,
+      color: colors.foreground.color,
       height: iconSize,
       width: iconSize,
     });
@@ -49,7 +49,7 @@ export function useApplyStyles_unstable(state: ButtonState) {
   if (state.selectedIcon) {
     attachSlotProps(state.selectedIcon, {
       accessible: false,
-      color: colors.foregroundColor,
+      color: colors.foreground.color,
       height: iconSize,
       width: iconSize,
     });

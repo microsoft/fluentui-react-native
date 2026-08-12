@@ -1,73 +1,128 @@
 import { useFlexTokens } from '@fluentui-react-native/design';
-import type { ThemeState } from '@fluentui-react-native/design';
+import type { FlexTokens, ThemeState } from '@fluentui-react-native/design';
 
-import { buildInteractiveStyles, getSemanticColorValues } from './colorStyles';
+import { colorStyleDef, getThemedColorStyleFactory } from './colorStyles';
+import type { ColorStyleDefinition, ViewColorStyle } from './colorStyles';
 
-describe('buildInteractiveStyles', () => {
-  let themeState: ThemeState;
-  let colors: ThemeState['tokens']['color'];
-  const base = {
-    background: 'backgroundBrandHeavy',
-    border: 'strokeNeutralTransparent',
-    foreground: 'foregroundBrandOnloud',
-  } as const;
+type RootState = 'selected';
+type BranchState = 'disabled' | 'pressed' | 'hovered';
 
-  beforeEach(() => {
-    themeState = {
-      tokens: useFlexTokens(),
-      highContrast: false,
-      themeStyles: {},
-    };
-    colors = themeState.tokens.color;
+const rootStates = ['selected'] as const;
+const branchStates = ['disabled', 'pressed', 'hovered'] as const;
+const definition: ColorStyleDefinition<ViewColorStyle, RootState, BranchState> = {
+  backgroundColor: 'backgroundNeutralSubtle',
+  borderColor: 'strokeNeutralTransparent',
+  selected: {
+    backgroundColor: 'backgroundNeutralHeavy',
+    hovered: {
+      borderColor: 'strokeNeutralHeavy',
+    },
+    disabled: {
+      backgroundColor: 'backgroundNeutralHeavyDisabled',
+      borderColor: 'strokeNeutralDisabled',
+    },
+  },
+  disabled: {
+    backgroundColor: 'backgroundNeutralSubtleDisabled',
+    borderColor: 'strokeNeutralDisabled',
+  },
+};
+
+function createThemeState(): ThemeState {
+  return {
+    tokens: useFlexTokens(),
+    highContrast: false,
+    themeStyles: {},
+  };
+}
+
+describe('colorStyles', () => {
+  it('resolves base and explicitly defined semantic colors', () => {
+    const tokens = useFlexTokens();
+    const styles = colorStyleDef(definition, rootStates, branchStates)(tokens);
+
+    expect(styles.backgroundColor).toBe(tokens.color.backgroundNeutralSubtle);
+    expect(styles.borderColor).toBe(tokens.color.strokeNeutralTransparent);
+    expect(styles.selected).toMatchObject({
+      backgroundColor: tokens.color.backgroundNeutralHeavy,
+    });
+    expect(styles.disabled).toEqual({
+      backgroundColor: tokens.color.backgroundNeutralSubtleDisabled,
+      borderColor: tokens.color.strokeNeutralDisabled,
+    });
   });
 
-  it('automatically creates hovered and pressed styles from Flex overrides', () => {
-    const styles = buildInteractiveStyles(themeState, base, {});
+  it('synthesizes hovered and pressed colors at the base and under root states', () => {
+    const tokens = useFlexTokens();
+    const styles = colorStyleDef(definition, rootStates, branchStates)(tokens);
 
-    expect(Object.keys(styles)).toEqual(['bg', 'fg', 'bg.hovered', 'fg.hovered', 'bg.pressed', 'fg.pressed']);
-    expect(styles.bg).toEqual({
-      backgroundColor: colors.backgroundBrandHeavy,
-      borderColor: colors.strokeNeutralTransparent,
+    expect(styles.hovered).toEqual({
+      backgroundColor: tokens.color.hover.backgroundNeutralSubtle,
+      borderColor: tokens.color.hover.strokeNeutralTransparent,
     });
-    expect(styles['bg.hovered']).toEqual({
-      backgroundColor: colors.hover.backgroundBrandHeavy,
-      borderColor: colors.hover.strokeNeutralTransparent,
+    expect(styles.pressed).toEqual({
+      backgroundColor: tokens.color.pressed.backgroundNeutralSubtle,
+      borderColor: tokens.color.pressed.strokeNeutralTransparent,
     });
-    expect(styles['fg.pressed']).toEqual({
-      color: colors.pressed.foregroundBrandOnloud,
+    expect(styles.selected?.hovered).toEqual({
+      backgroundColor: tokens.color.hover.backgroundNeutralHeavy,
+      borderColor: tokens.color.hover.strokeNeutralHeavy,
+    });
+    expect(styles.selected?.pressed).toEqual({
+      backgroundColor: tokens.color.pressed.backgroundNeutralHeavy,
+      borderColor: tokens.color.pressed.strokeNeutralTransparent,
     });
   });
 
-  it('merges partial state color sets with the base color keys', () => {
-    const styles = buildInteractiveStyles(themeState, base, {
-      disabled: {
-        background: 'backgroundNeutralHeavyDisabled',
-        foreground: 'foregroundNeutralDisabled',
+  it('falls back to rest colors when an interaction map does not override a semantic key', () => {
+    const tokens = useFlexTokens();
+    const styles = colorStyleDef<ViewColorStyle, 'hovered'>(
+      {
+        backgroundColor: 'backgroundNeutralSubtle',
+        hovered: {
+          backgroundColor: 'backgroundNeutralHeavyDisabled',
+        },
       },
-    });
+      ['hovered'],
+    )(tokens);
 
-    expect(styles['bg.disabled']).toEqual({
+    expect(styles.hovered?.backgroundColor).toBe(tokens.color.backgroundNeutralHeavyDisabled);
+  });
+
+  it('preserves valid falsy color values', () => {
+    const tokens = useFlexTokens();
+    const zeroColorTokens = {
+      ...tokens,
+      color: {
+        ...tokens.color,
+        backgroundBrandHeavy: '',
+      },
+    } satisfies FlexTokens;
+    const styles = colorStyleDef<ViewColorStyle, 'disabled'>(
+      {
+        backgroundColor: 'backgroundBrandHeavy',
+      },
+      ['disabled'],
+    )(zeroColorTokens);
+
+    expect(styles.backgroundColor).toBe('');
+  });
+
+  it('selects state styles and caches resolved definitions per ThemeState', () => {
+    const themeState = createThemeState();
+    const colors = themeState.tokens.color;
+    const getStyle = getThemedColorStyleFactory('test.colors', definition, rootStates, branchStates);
+
+    expect(getStyle(themeState, { selected: true, hovered: true })).toEqual({
+      backgroundColor: colors.hover.backgroundNeutralHeavy,
+      borderColor: colors.hover.strokeNeutralHeavy,
+    });
+    const cachedEntries = Reflect.ownKeys(themeState.themeStyles).length;
+
+    expect(getStyle(themeState, { selected: true, disabled: true })).toEqual({
       backgroundColor: colors.backgroundNeutralHeavyDisabled,
-      borderColor: colors.strokeNeutralTransparent,
+      borderColor: colors.strokeNeutralDisabled,
     });
-    expect(styles['fg.disabled']).toEqual({
-      color: colors.foregroundNeutralDisabled,
-    });
-  });
-
-  it('suppresses automatic hovered and pressed styles when requested', () => {
-    const styles = buildInteractiveStyles(themeState, base, {}, false);
-
-    expect(Object.keys(styles)).toEqual(['bg', 'fg']);
-  });
-
-  it('caches resolved hovered and pressed semantic colors on the ThemeState', () => {
-    const hovered = getSemanticColorValues(themeState, 'hovered');
-    const pressed = getSemanticColorValues(themeState, 'pressed');
-
-    expect(getSemanticColorValues(themeState, 'hovered')).toBe(hovered);
-    expect(getSemanticColorValues(themeState, 'pressed')).toBe(pressed);
-    expect(hovered.backgroundBrandHeavy).toBe(colors.hover.backgroundBrandHeavy);
-    expect(pressed.backgroundBrandHeavy).toBe(colors.pressed.backgroundBrandHeavy);
+    expect(Reflect.ownKeys(themeState.themeStyles)).toHaveLength(cachedEntries);
   });
 });

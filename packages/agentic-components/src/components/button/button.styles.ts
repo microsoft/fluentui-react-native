@@ -5,148 +5,135 @@ import { themedStyleSheetFactory } from '@fluentui-react-native/design';
 import type { ThemeState } from '@fluentui-react-native/design';
 import { cornerRadiusNone, size160, size200, size240, sizeNone } from '@fluentui-react-native/design/tokens/global';
 
-import { buildInteractiveStyles } from '../../utils/colorStyles';
-import type { BackgroundStyle, ColorSet, ForegroundStyle, InteractiveStyleSet } from '../../utils/colorStyles';
+import { getThemedColorStyleFactory } from '../../utils/colorStyles';
+import type { ColorStyleDefinition, TextColorStyle, ViewColorStyle } from '../../utils/colorStyles';
 import type { ButtonAppearance, ButtonShape, ButtonSize, ButtonState } from './button.types';
 
 type FlexTokens = ThemeState['tokens'];
-type InteractiveState = 'hovered' | 'pressed' | 'disabled';
-type ResolvedInteractionState = 'rest' | InteractiveState;
+type ButtonRootState = 'selected';
+type ButtonBranchState = 'disabled' | 'pressed' | 'hovered';
+type BackgroundColorDefinition = ColorStyleDefinition<ViewColorStyle, ButtonRootState, ButtonBranchState>;
+type ForegroundColorDefinition = ColorStyleDefinition<TextColorStyle, ButtonRootState, ButtonBranchState>;
 
-type ButtonColorSets = {
-  rest: ColorSet;
-  selected: ColorSet;
-  disabled: Partial<ColorSet>;
-  selectedDisabled: Partial<ColorSet>;
+const rootStates = ['selected'] as const;
+const branchStates = ['disabled', 'pressed', 'hovered'] as const;
+
+type AppearanceColorDefinitions = {
+  background: BackgroundColorDefinition;
+  foreground: ForegroundColorDefinition;
 };
 
-type ButtonAppearanceStyles = InteractiveStyleSet<InteractiveState | 'selected' | 'selected.disabled'>;
-
-const getPrimaryStyles = themedStyleSheetFactory('Button.primary', (themeState) => {
-  const base: ColorSet = {
-    background: 'backgroundBrandHeavy',
-    border: 'strokeNeutralTransparent',
-    foreground: 'foregroundBrandOnloud',
-  };
-  const disabled: Partial<ColorSet> = {
-    background: 'backgroundNeutralHeavyDisabled',
-    foreground: 'foregroundNeutralDisabled',
-  };
-  return buildInteractiveStyles(themeState, base, {
-    selected: base,
-    disabled: disabled,
-    'selected.disabled': disabled,
-  }) satisfies ButtonAppearanceStyles;
-});
-
-const getSecondaryStyles = themedStyleSheetFactory('Button.secondary', (themeState) => {
-  const base: ColorSet = {
-    background: 'backgroundNeutralSubtle',
-    border: 'strokeNeutralTransparent',
-    foreground: 'foregroundNeutralPrimary',
-  };
-  const disabled: Partial<ColorSet> = {
-    background: 'backgroundNeutralSubtleDisabled',
-    foreground: 'foregroundNeutralDisabled',
-  };
-  return buildInteractiveStyles(themeState, base, {
-    selected: {
-      background: 'backgroundNeutralHeavy',
-      foreground: 'foregroundNeutralOnloud',
+const appearanceColorDefinitions: Record<ButtonAppearance, AppearanceColorDefinitions> = {
+  primary: {
+    background: {
+      backgroundColor: 'backgroundBrandHeavy',
+      borderColor: 'strokeNeutralTransparent',
+      disabled: {
+        backgroundColor: 'backgroundNeutralHeavyDisabled',
+      },
     },
-    disabled: disabled,
-    'selected.disabled': disabled,
-  }) satisfies ButtonAppearanceStyles;
-});
-
-const getOutlineStyles = themedStyleSheetFactory('Button.outline', (themeState) => {
-  const base: ColorSet = {
-    background: 'backgroundNeutralTransparent',
-    border: 'strokeNeutralSubtle',
-    foreground: 'foregroundNeutralPrimary',
-  };
-  return buildInteractiveStyles(themeState, base, {
-    selected: {
-      background: 'backgroundNeutralHeavy',
-      border: 'strokeNeutralHeavy',
-      foreground: 'foregroundNeutralOnloud',
+    foreground: {
+      color: 'foregroundBrandOnloud',
+      disabled: {
+        color: 'foregroundNeutralDisabled',
+      },
     },
-    disabled: {
-      border: 'strokeNeutralDisabled',
-      foreground: 'foregroundNeutralDisabled',
+  },
+  secondary: {
+    background: {
+      backgroundColor: 'backgroundNeutralSubtle',
+      borderColor: 'strokeNeutralTransparent',
+      selected: {
+        backgroundColor: 'backgroundNeutralHeavy',
+        disabled: {
+          backgroundColor: 'backgroundNeutralHeavyDisabled',
+        },
+      },
+      disabled: {
+        backgroundColor: 'backgroundNeutralSubtleDisabled',
+      },
     },
-    'selected.disabled': {
-      background: 'backgroundNeutralHeavyDisabled',
-      border: 'strokeNeutralDisabled',
-      foreground: 'foregroundNeutralDisabled',
+    foreground: {
+      color: 'foregroundNeutralPrimary',
+      selected: {
+        color: 'foregroundNeutralOnloud',
+      },
+      disabled: {
+        color: 'foregroundNeutralDisabled',
+      },
     },
-  }) satisfies ButtonAppearanceStyles;
-});
-
-const getSubtleStyles = themedStyleSheetFactory('Button.subtle', (themeState) => {
-  const base: ColorSet = {
-    background: 'backgroundNeutralTransparent',
-    border: 'strokeNeutralTransparent',
-    foreground: 'foregroundNeutralPrimary',
-  };
-  return buildInteractiveStyles(themeState, base, {
-    selected: {
-      background: 'backgroundNeutralSoft',
-      border: 'strokeNeutralTransparent',
-      foreground: 'foregroundNeutralPrimary',
+  },
+  outline: {
+    background: {
+      backgroundColor: 'backgroundNeutralTransparent',
+      borderColor: 'strokeNeutralSubtle',
+      selected: {
+        backgroundColor: 'backgroundNeutralHeavy',
+        borderColor: 'strokeNeutralHeavy',
+        disabled: {
+          backgroundColor: 'backgroundNeutralHeavyDisabled',
+          borderColor: 'strokeNeutralDisabled',
+        },
+      },
+      disabled: {
+        borderColor: 'strokeNeutralDisabled',
+      },
     },
-    disabled: {
-      foreground: 'foregroundNeutralDisabled',
+    foreground: {
+      color: 'foregroundNeutralPrimary',
+      selected: {
+        color: 'foregroundNeutralOnloud',
+      },
+      disabled: {
+        color: 'foregroundNeutralDisabled',
+      },
     },
-    'selected.disabled': {
-      background: 'backgroundNeutralSubtleDisabled',
-      foreground: 'foregroundNeutralDisabled',
+  },
+  subtle: {
+    background: {
+      backgroundColor: 'backgroundNeutralTransparent',
+      borderColor: 'strokeNeutralTransparent',
+      selected: {
+        backgroundColor: 'backgroundNeutralSoft',
+        disabled: {
+          backgroundColor: 'backgroundNeutralSubtleDisabled',
+        },
+      },
     },
-  }) satisfies ButtonAppearanceStyles;
-});
-
-const appearanceGetters = {
-  primary: getPrimaryStyles,
-  secondary: getSecondaryStyles,
-  outline: getOutlineStyles,
-  subtle: getSubtleStyles,
+    foreground: {
+      color: 'foregroundNeutralPrimary',
+      disabled: {
+        color: 'foregroundNeutralDisabled',
+      },
+    },
+  },
 };
 
-export function getAppearanceStyles(state: ButtonState): { bg: BackgroundStyle; fg: ForegroundStyle } {
-  const { appearance, disabled, selected, hovered, pressed } = state;
-  const styleSet = appearanceGetters[appearance](state);
+type AppearanceStyleGetter = (state: ButtonState) => {
+  background: ViewColorStyle;
+  foreground: TextColorStyle;
+};
+
+function createAppearanceStyleGetter(appearance: ButtonAppearance, definitions: AppearanceColorDefinitions): AppearanceStyleGetter {
+  const getBackground = getThemedColorStyleFactory(`Button.${appearance}.background`, definitions.background, rootStates, branchStates);
+  const getForeground = getThemedColorStyleFactory(`Button.${appearance}.foreground`, definitions.foreground, rootStates, branchStates);
+
+  return (state) => ({
+    background: getBackground(state, state),
+    foreground: getForeground(state, state),
+  });
 }
 
-type ButtonInteractiveStyles = InteractiveStyleSet<InteractiveState>;
-type ButtonColorStyleGetter = (themeState: ThemeState) => ButtonInteractiveStyles;
-type ButtonAppearanceColorStyleGetters = {
-  rest: ButtonColorStyleGetter;
-  selected: ButtonColorStyleGetter;
+const appearanceStyleGetters: Record<ButtonAppearance, AppearanceStyleGetter> = {
+  primary: createAppearanceStyleGetter('primary', appearanceColorDefinitions.primary),
+  secondary: createAppearanceStyleGetter('secondary', appearanceColorDefinitions.secondary),
+  outline: createAppearanceStyleGetter('outline', appearanceColorDefinitions.outline),
+  subtle: createAppearanceStyleGetter('subtle', appearanceColorDefinitions.subtle),
 };
 
-function createButtonColorStyleGetter(symbolName: string, base: ColorSet, disabled: Partial<ColorSet>): ButtonColorStyleGetter {
-  return themedStyleSheetFactory(symbolName, (themeState) =>
-    StyleSheet.create(
-      buildInteractiveStyles(themeState, base, {
-        disabled,
-      }),
-    ),
-  );
+export function getAppearanceStyles(state: ButtonState): ReturnType<AppearanceStyleGetter> {
+  return appearanceStyleGetters[state.appearance](state);
 }
-
-function createButtonAppearanceColorStyleGetters(appearance: ButtonAppearance, colors: ButtonColorSets): ButtonAppearanceColorStyleGetters {
-  return {
-    rest: createButtonColorStyleGetter(`Button.${appearance}`, colors.rest, colors.disabled),
-    selected: createButtonColorStyleGetter(`Button.${appearance}.selected`, colors.selected, colors.selectedDisabled),
-  };
-}
-
-const buttonColorStyleGetters: Record<ButtonAppearance, ButtonAppearanceColorStyleGetters> = {
-  primary: createButtonAppearanceColorStyleGetters('primary', buttonColorSets.primary),
-  secondary: createButtonAppearanceColorStyleGetters('secondary', buttonColorSets.secondary),
-  outline: createButtonAppearanceColorStyleGetters('outline', buttonColorSets.outline),
-  subtle: createButtonAppearanceColorStyleGetters('subtle', buttonColorSets.subtle),
-};
 
 function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullable<ViewStyle['gap']> {
   if (typeof value === 'number' || typeof value === 'string') {
@@ -268,34 +255,8 @@ const iconSizes: Record<ButtonSize, number> = {
   large: size200,
 };
 
-export type ButtonColorStyles = {
-  background: BackgroundStyle;
-  foreground: ForegroundStyle;
-  foregroundColor: ForegroundStyle['color'];
-};
-
 export function getButtonThemeStyles(themeState: ThemeState): ButtonThemeStyles {
   return getThemedButtonStyles(themeState);
-}
-
-export function getButtonColorStyles(
-  themeState: ThemeState,
-  appearance: ButtonAppearance,
-  disabled: boolean,
-  selected: boolean,
-  pressed: boolean,
-  hovered: boolean,
-): ButtonColorStyles {
-  const styles = buttonColorStyleGetters[appearance][selected ? 'selected' : 'rest'](themeState);
-  const interaction = disabled ? 'disabled' : getInteractionState(pressed, hovered);
-  const background = getBackgroundStyle(styles, interaction);
-  const foreground = getForegroundStyle(styles, interaction);
-
-  return {
-    background,
-    foreground,
-    foregroundColor: foreground.color,
-  };
 }
 
 export function getButtonRootSizeStyle(styles: ButtonThemeStyles, size: ButtonSize, iconOnly: boolean): ViewStyle {
@@ -318,16 +279,4 @@ export function getButtonContentSizeStyle(styles: ButtonThemeStyles, size: Butto
 
 export function getButtonIconSize(size: ButtonSize): number {
   return iconSizes[size];
-}
-
-function getInteractionState(pressed: boolean, hovered: boolean): ResolvedInteractionState {
-  return pressed ? 'pressed' : hovered ? 'hovered' : 'rest';
-}
-
-function getBackgroundStyle(styles: ButtonInteractiveStyles, interaction: ResolvedInteractionState): BackgroundStyle {
-  return interaction === 'rest' ? styles.bg : styles[`bg.${interaction}`];
-}
-
-function getForegroundStyle(styles: ButtonInteractiveStyles, interaction: ResolvedInteractionState): ForegroundStyle {
-  return interaction === 'rest' ? styles.fg : styles[`fg.${interaction}`];
 }

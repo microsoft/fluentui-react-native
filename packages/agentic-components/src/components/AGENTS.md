@@ -22,7 +22,8 @@ Use `components/button` as the canonical implementation.
 - Consult `packages/agentic-design/src/tokens/mappings/flex-token-map.yaml` for the canonical mapping from generic CSS and
   Fluent authoring sources to grouped React Native Flex token paths.
 - Read semantic colors from `useThemeState().tokens.color` so Flex interaction overrides and future themes flow through
-  the component. Use `buildInteractiveStyles` for semantic interactive color sets.
+  the component. Use `getThemedColorStyleFactory` for semantic state branches and automatic hover/pressed token
+  resolution.
 - Access other Flex categories through their grouped objects, such as `tokens.shadow`, `tokens.fontWeight`,
   `tokens.fontFamily`, `tokens.fontSize`, `tokens.lineHeight`, `tokens.borderRadius`, `tokens.spacing`, and
   `tokens.strokeWidth`.
