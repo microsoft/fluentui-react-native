@@ -1,6 +1,15 @@
-import type { ColorValue } from 'react-native';
+import type { SemanticColors, ThemeState, FlexTokens } from '@fluentui-react-native/design';
+import type { ViewStyle, TextStyle } from 'react-native';
+import type { StyleDefinition, StyleDefFromTokens } from './branchedStyle';
+import { getThemedStateStyleFactory } from './branchedStyle';
 
-import type { SemanticColors, ThemeState } from '@fluentui-react-native/design';
+// the set of color values that can be set on a ViewStyle
+export type ViewColorStyle = Pick<ViewStyle, 'backgroundColor' | 'borderColor'>;
+// the set of color values that can be set on a TextStyle
+export type TextColorStyle = Pick<TextStyle, 'color'>;
+
+type ColorStyleKeys = keyof (ViewColorStyle & TextColorStyle);
+const colorStyleKeys: readonly ColorStyleKeys[] = ['backgroundColor', 'borderColor', 'color'] as const;
 
 /**
  * A semantic color key available in the Flex tokens.
@@ -8,138 +17,123 @@ import type { SemanticColors, ThemeState } from '@fluentui-react-native/design';
 export type ColorKey = keyof Omit<SemanticColors, 'hover' | 'pressed'>;
 type SemanticColorValues = Omit<SemanticColors, 'hover' | 'pressed'>;
 
+type MapStyleToDef<StyleType extends AnyColorStyle> = { [K in keyof StyleType]: ColorKey };
+
+type AnyColorStyle = ViewColorStyle | TextColorStyle;
+type ColorStyleWithStates<StyleType extends AnyColorStyle, States> = States extends string
+  ? MapStyleToDef<StyleType> & Partial<Record<States, StyleType>>
+  : MapStyleToDef<StyleType>;
+
 /**
- * Constant symbol keys to not re-resolve the hover and pressed color overrides on every pass.
+ * A ColorStyleDefinition is an equivalent of a StyleDefinition, but instead of using the actual color values, it uses the semantic color keys
+ * from the Flex tokens. This allows automatic overloading of hover and pressed states according to the values present in the flex tokens.
  */
-const HOVERED_COLORS = Symbol('hoveredColors');
-const PRESSED_COLORS = Symbol('pressedColors');
+export type ColorStyleDefinition<
+  StyleType extends AnyColorStyle,
+  RootState extends string,
+  BranchState = never,
+> = BranchState extends string
+  ? MapStyleToDef<StyleType> &
+      Partial<Record<RootState, ColorStyleWithStates<StyleType, BranchState>>> &
+      Partial<Record<BranchState, MapStyleToDef<StyleType>>>
+  : MapStyleToDef<StyleType> & Partial<Record<RootState, MapStyleToDef<StyleType>>>;
 
 /**
- * The semantic color keys for a component in one visual state.
- */
-export type ColorSet = {
-  background: ColorKey;
-  border: ColorKey;
-  foreground: ColorKey;
-};
-
-export type BackgroundStyle = {
-  backgroundColor: ColorValue;
-  borderColor: ColorValue;
-};
-
-export type ForegroundStyle = {
-  color: ColorValue;
-};
-
-type BackgroundStates<States extends string> = `bg.${States}`;
-type ForegroundStates<States extends string> = `fg.${States}`;
-
-export type BackgroundStyleSet<States extends string> = {
-  bg: BackgroundStyle;
-} & Record<BackgroundStates<States>, BackgroundStyle>;
-
-export type ForegroundStyleSet<States extends string> = {
-  fg: ForegroundStyle;
-} & Record<ForegroundStates<States>, ForegroundStyle>;
-
-export type InteractiveStyleSet<States extends string> = BackgroundStyleSet<States> & ForegroundStyleSet<States>;
-
-function getBackgroundStyle(themeColors: SemanticColorValues, colorSet: ColorSet): BackgroundStyle {
-  return {
-    backgroundColor: themeColors[colorSet.background],
-    borderColor: themeColors[colorSet.border],
-  };
-}
-
-function getForegroundStyle(themeColors: SemanticColorValues, colorSet: ColorSet): ForegroundStyle {
-  return {
-    color: themeColors[colorSet.foreground],
-  };
-}
-
-/**
- * Get the semantic color values from a theme state for resolving colors
- * @param themeState the theme state to get the semantic color values from
- * @param name the name of the state, this will have special handling for 'hovered' and 'pressed' states to resolve override colors
- * @returns the resolved set of SemanticColorValues for the given state name
- */
-export function getSemanticColorValues(themeState: ThemeState, name?: string): SemanticColorValues {
-  const colors = themeState.tokens.color;
-  const cache = themeState.themeStyles as Record<symbol, SemanticColorValues>;
-  if (name === 'hovered') {
-    return (cache[HOVERED_COLORS] ??= { ...colors, ...colors.hover });
-  }
-  if (name === 'pressed') {
-    return (cache[PRESSED_COLORS] ??= { ...colors, ...colors.pressed });
-  }
-  return colors;
-}
-
-/**
- * Add additional states to the states if not present. Used to ensure that 'hovered' and 'pressed' get added.
+ * Create a closure that will create a style definition structure from a color definition and a passed in set of theme tokens. If hovered
+ * or pressed are included in the set of states, extra handling will be done for any nodes that have hovered/pressed as valid child states.
+ * in these cases the color keys will be looked up based on any override values or parent values.
  *
- * @param stateKeys the existing state keys
- * @param additionalKeys the additional state keys to ensure are present
- * @returns the updated array of state keys
+ * @param colorDef The color definition to convert into a style definition.
+ * @param rootStates The root states to consider for the style definition.
+ * @param branchStates The branch states to consider for the style definition.
+ * @returns A closure that will create the style definition based on the provided theme tokens.
  */
-function ensureStateKeys(stateKeys: string[], additionalKeys: string[]): string[] {
-  for (const key of additionalKeys) {
-    if (!stateKeys.includes(key)) {
-      stateKeys.push(key);
+export function colorStyleDef<StyleType extends AnyColorStyle, RootState extends string, BranchState extends string>(
+  colorDef: ColorStyleDefinition<StyleType, RootState, BranchState>,
+  rootStates: readonly RootState[],
+  branchStates?: readonly BranchState[],
+): StyleDefFromTokens<StyleType, RootState, BranchState> {
+  // return the closure that will map the color definition to a style definition based on the provided theme tokens
+  return ({ color }: FlexTokens) =>
+    convertToStyleDef(undefined, undefined, color, colorDef as RawColorDef, rootStates, branchStates) as StyleDefinition<
+      StyleType,
+      RootState,
+      BranchState
+    >;
+}
+
+/** Helper types to make the workers more generic */
+type RawColorDef = { [K in ColorStyleKeys]?: ColorKey } & { [K in string]?: RawColorDef };
+type RawStyleDef = Record<string, unknown>;
+
+/**
+ * Worker function for converting a raw color definition into a style definition, resolving the semantic color values from the theme state.
+ * and doing special processing to add hover/pressed overrides for the color keys if they are present in the raw color definition.
+ * @param name the name of the current state being processed, this will be used to look up the hover/pressed overrides in the theme state if present
+ * @param parent the parent raw color definition, used for looking up inherited color keys
+ * @param colors the semantic color lookup table from the theme state
+ * @param rawColorDef the raw color definition to convert
+ * @param l1 the first level of keys to consider for nested color definitions
+ * @param l2 the second level of keys to consider for nested color definitions
+ * @returns the resulting style definition
+ */
+function convertToStyleDef(
+  name: string | undefined,
+  parent: RawColorDef | undefined,
+  colors: SemanticColors,
+  rawColorDef: RawColorDef,
+  l1?: readonly string[],
+  l2?: readonly string[],
+): RawStyleDef {
+  const result: RawStyleDef = {};
+  const newParent = { ...parent };
+  const allSubkeys = [...(l1 ?? []), ...(l2 ?? [])];
+  for (const key of colorStyleKeys) {
+    if (name === 'hovered' || name === 'pressed') {
+      const lookup = colors[name];
+      const colorKey = rawColorDef[key] ?? parent?.[key];
+      if (colorKey !== undefined) {
+        newParent[key] = colorKey;
+        const colorValue = lookup[colorKey] ?? colors[colorKey];
+        if (colorValue) {
+          result[key] = colorValue;
+        }
+      }
+    } else if (rawColorDef[key] !== undefined) {
+      const colorKey = rawColorDef[key];
+      if (colorKey && typeof colorKey === 'string' && colorKey in colors) {
+        result[key] = colors[colorKey];
+        newParent[key] = colorKey;
+      }
     }
   }
-  return stateKeys;
+  for (const key of allSubkeys) {
+    const isHoverOrPressed = name === 'hovered' || name === 'pressed';
+    const subObject = rawColorDef[key] ?? (isHoverOrPressed ? {} : undefined);
+    const subL1 = l1?.includes(key) ? l2 : undefined;
+    if (subObject) {
+      const subStyle = convertToStyleDef(key, newParent, colors, subObject, subL1);
+      if (Object.keys(subStyle).length > 0) {
+        result[key] = subStyle;
+      }
+    }
+  }
+  return result;
 }
 
 /**
- * Builds background and foreground styles for a base color set and each named
- * state.
- *
- * Every key in `states` produces `bg.<state>` and `fg.<state>`. By default,
- * `hovered` and `pressed` are added automatically and reuse the base color keys
- * against the corresponding cached Flex interaction overrides. A partial
- * entry replaces only the specified color keys. Pass `false` as the fourth
- * argument to suppress automatic hovered and pressed styles.
- *
- * @param themeState The current theme state, used to resolve semantic color values.
- * @param base The base color set for the component.
- * @param states A record of named states and their corresponding color sets.
- * @param addHoveredAndPressed Whether to automatically add `hovered` and `pressed` states if not present.
- * @returns An object containing background and foreground styles for the base and each state.
+ * C
+ * @param name The name of the themed style, used for the symbol
+ * @param factory A function that takes theme tokens and returns a style definition
+ * @param rootStates The list of root states
+ * @param branchStates The list of branch states
+ * @returns A function that takes the current theme state and a state source, and returns the corresponding style
  */
-export function buildInteractiveStyles<States extends string>(
-  themeState: ThemeState,
-  base: ColorSet,
-  states: Record<States, Partial<ColorSet> | undefined>,
-  addHoveredAndPressed?: true,
-): InteractiveStyleSet<States | 'hovered' | 'pressed'>;
-export function buildInteractiveStyles<States extends string>(
-  themeState: ThemeState,
-  base: ColorSet,
-  states: Record<States, Partial<ColorSet> | undefined>,
-  addHoveredAndPressed: false,
-): InteractiveStyleSet<States>;
-export function buildInteractiveStyles<States extends string>(
-  themeState: ThemeState,
-  base: ColorSet,
-  states: Record<States, Partial<ColorSet> | undefined>,
-  addHoveredAndPressed = true,
-): InteractiveStyleSet<States> {
-  const baseColors = getSemanticColorValues(themeState);
-  const bg = getBackgroundStyle(baseColors, base);
-  const fg = getForegroundStyle(baseColors, base);
-  const styles: Record<string, BackgroundStyle | ForegroundStyle> = {
-    bg,
-    fg,
-  };
-  const stateKeys = addHoveredAndPressed ? ensureStateKeys(Object.keys(states), ['hovered', 'pressed']) : Object.keys(states);
-  for (const state of stateKeys) {
-    const semanticTarget = getSemanticColorValues(themeState, state);
-    const colorSet = { ...base, ...states[state] };
-    styles[`bg.${state}`] = getBackgroundStyle(semanticTarget, colorSet);
-    styles[`fg.${state}`] = getForegroundStyle(semanticTarget, colorSet);
-  }
-
-  return styles as InteractiveStyleSet<States | 'hovered' | 'pressed'>;
+export function getThemedColorStyleFactory<StyleDef extends AnyColorStyle, RootState extends string, BranchState extends string>(
+  name: string,
+  colorDef: ColorStyleDefinition<StyleDef, RootState, BranchState>,
+  rootStates: readonly RootState[],
+  branchStates?: readonly BranchState[],
+) {
+  return getThemedStateStyleFactory(name, colorStyleDef(colorDef, rootStates, branchStates), rootStates, branchStates);
 }
