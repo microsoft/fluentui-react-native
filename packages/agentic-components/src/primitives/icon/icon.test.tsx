@@ -45,6 +45,9 @@ describe('Icon', () => {
       fontSize: 20,
       height: 24,
       lineHeight: 24,
+      padding: 0,
+      textAlign: 'center',
+      textAlignVertical: 'center',
       width: 20,
     });
   });

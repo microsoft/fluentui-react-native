@@ -180,6 +180,46 @@ describe('Button', () => {
   });
 
   it.each([
+    ['outline', 'backgroundNeutralTransparent', 'strokeNeutralLoud', 'backgroundNeutralTransparent', 'strokeNeutralLoud'],
+    ['subtle', 'backgroundNeutralTransparent', 'strokeNeutralTransparent', 'backgroundNeutralSubtle', 'strokeNeutralTransparent'],
+  ] as const)(
+    'resolves visible interaction feedback for the %s appearance',
+    async (appearance, restBackground, restBorder, interactionBackground, interactionBorder) => {
+      const colors = useFlexTokens().color;
+      const component = await renderButton({ appearance, content: appearance });
+      const root = getRoot(component);
+
+      expect(getRootStyle(component)).toMatchObject({
+        backgroundColor: colors[restBackground],
+        borderColor: colors[restBorder],
+      });
+
+      await fireEvent(root, 'hoverIn', {});
+      expect(getRootStyle(component)).toMatchObject({
+        backgroundColor: colors.hover[interactionBackground],
+        borderColor: colors.hover[interactionBorder],
+      });
+
+      await fireEvent(root, 'pressIn', {});
+      expect(getRootStyle(component)).toMatchObject({
+        backgroundColor: colors.pressed[interactionBackground],
+        borderColor: colors.pressed[interactionBorder],
+      });
+    },
+  );
+
+  it('allows constrained content to wrap', async () => {
+    const component = await renderButton({
+      content: { children: 'Long button content', testID: 'content' },
+      style: { width: 120 },
+    });
+    const content = component.getByTestId('content');
+
+    expect(content.props.numberOfLines).toBeUndefined();
+    expect(StyleSheet.flatten(content.props.style)).toMatchObject({ flexShrink: 1 });
+  });
+
+  it.each([
     [
       'primary',
       'backgroundBrandHeavy',

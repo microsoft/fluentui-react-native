@@ -34,6 +34,9 @@ export const Icon = directComponent<IconProps>(({ color, fontSource, height, ima
       fontSize,
       height,
       lineHeight: height ?? fontSize,
+      padding: 0,
+      textAlign: 'center',
+      textAlignVertical: 'center',
       width,
     };
 

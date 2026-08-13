@@ -38,4 +38,6 @@ Storybook configuration.
   `disabledFocusable`, DOM children, or CSS class hooks.
 
 Use `src/components/button/button.stories.tsx` as the canonical higher-order example. Validate story changes with the
-package format and lint scripts and a declared Storybook bundle command.
+package format and lint scripts and a declared Storybook bundle command. A successful bundle proves loading and
+compilation only; for visual or style changes, also inspect the running story on the target platform across hover,
+pressed, disabled, optional-slot, and constrained-content scenarios.

@@ -19,10 +19,12 @@ export const buttonStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   content: {
+    flexShrink: 1,
     textAlign: 'center',
   },
   contentContainer: {
     alignItems: 'center',
+    flexShrink: 1,
     justifyContent: 'center',
     position: 'relative',
   },
@@ -55,7 +57,7 @@ const backgroundColorDefinition: ColorStyleDefinition<ViewColorStyle, ColorState
   },
   outline: {
     backgroundColor: 'backgroundNeutralTransparent',
-    borderColor: 'strokeNeutralSubtle',
+    borderColor: 'strokeNeutralLoud',
     selected: {
       backgroundColor: 'backgroundNeutralHeavy',
       borderColor: 'strokeNeutralHeavy',
@@ -71,6 +73,12 @@ const backgroundColorDefinition: ColorStyleDefinition<ViewColorStyle, ColorState
   subtle: {
     backgroundColor: 'backgroundNeutralTransparent',
     borderColor: 'strokeNeutralTransparent',
+    hovered: {
+      backgroundColor: 'backgroundNeutralSubtle',
+    },
+    pressed: {
+      backgroundColor: 'backgroundNeutralSubtle',
+    },
     selected: {
       backgroundColor: 'backgroundNeutralSoft',
       disabled: {

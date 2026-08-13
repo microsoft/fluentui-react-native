@@ -7,6 +7,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "contentStyles": [
       {
         "color": "#bdbdbd",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -36,6 +37,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "contentStyles": [
       {
         "color": "#bdbdbd",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -65,6 +67,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "contentStyles": [
       {
         "color": "#bdbdbd",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -94,6 +97,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "contentStyles": [
       {
         "color": "#bdbdbd",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -128,6 +132,7 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -161,6 +166,7 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -194,6 +200,7 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -227,6 +234,7 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -265,6 +273,7 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -294,6 +303,7 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -323,6 +333,7 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -334,7 +345,7 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#00000000",
-      "borderColor": "#e0e0e0",
+      "borderColor": "#c7c7c7",
       "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
@@ -352,6 +363,7 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -362,7 +374,7 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
+      "backgroundColor": "#f0f0f0",
       "borderColor": "#00000000",
       "borderRadius": 12,
       "borderStyle": "solid",
@@ -386,6 +398,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -415,6 +428,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -444,6 +458,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -455,7 +470,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#00000000",
-      "borderColor": "#e0e0e0",
+      "borderColor": "#b3b3b3",
       "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
@@ -473,6 +488,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -483,7 +499,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
+      "backgroundColor": "#dbdbdb",
       "borderColor": "#00000000",
       "borderRadius": 12,
       "borderStyle": "solid",
@@ -507,6 +523,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "contentStyles": [
       {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -536,6 +553,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -565,6 +583,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -576,7 +595,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#00000000",
-      "borderColor": "#e0e0e0",
+      "borderColor": "#d1d1d1",
       "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
@@ -594,6 +613,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "400",
@@ -628,6 +648,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
     "contentStyles": [
       {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "600",
@@ -638,6 +659,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
       {
         "bottom": 0,
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "600",
@@ -671,6 +693,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
     "contentStyles": [
       {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "600",
@@ -681,6 +704,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
       {
         "bottom": 0,
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "600",
@@ -714,6 +738,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
     "contentStyles": [
       {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "600",
@@ -724,6 +749,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
       {
         "bottom": 0,
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "600",
@@ -757,6 +783,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
     "contentStyles": [
       {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "600",
@@ -767,6 +794,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
       {
         "bottom": 0,
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
         "fontWeight": "600",

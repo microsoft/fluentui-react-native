@@ -49,7 +49,6 @@ export function useApplyStyles_unstable(state: ButtonState) {
   }
   if (state.content) {
     attachSlotProps(state.content, {
-      numberOfLines: 1,
       style: state.isToggleButton ? [contentStyle, getButtonContentVisibilityStyle('visible')] : contentStyle,
     });
   }
@@ -58,7 +57,6 @@ export function useApplyStyles_unstable(state: ButtonState) {
       accessibilityElementsHidden: true,
       accessible: false,
       importantForAccessibility: 'no-hide-descendants',
-      numberOfLines: 1,
       style: [buttonStyles.content, getButtonContentStyle(state, true), colors.foreground, getButtonContentVisibilityStyle('hidden')],
     });
   }

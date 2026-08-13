@@ -37,8 +37,8 @@ tokens:
         rationale: Containment communicated by border alone.
       Subtle:
         value: color.backgroundNeutralTransparent
-        hover: color.hover.backgroundNeutralTransparent
-        pressed: color.pressed.backgroundNeutralTransparent
+        hover: color.hover.backgroundNeutralSubtle
+        pressed: color.pressed.backgroundNeutralSubtle
         rationale: No visual weight at rest; a fill would compete with content, so affordance is deferred to hover.
     selected:
       Primary:
@@ -114,10 +114,14 @@ tokens:
     width: strokeWidth.thin
     width-rationale: All styles carry the same stroke width to maintain identical outer dimensions. Non-Outline styles set the color to transparent.
     rest:
-      Outline: color.strokeNeutralSubtle
+      Outline: color.strokeNeutralLoud
       Primary: transparent
       Secondary: transparent
       Subtle: transparent
+    hover:
+      Outline: color.hover.strokeNeutralLoud
+    pressed:
+      Outline: color.pressed.strokeNeutralLoud
     selected:
       Outline:
         color: color.strokeNeutralHeavy
