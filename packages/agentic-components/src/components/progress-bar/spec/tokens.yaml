@@ -61,8 +61,8 @@ tokens:
       changes (consumer should snap to the new width). Reduced motion —
       Determinate value transitions become instant (no animated width
       interpolation); Indeterminate freezes the continuous loop and the
-      screen-reader role="progressbar" carries the "busy" semantic instead. See
-      `interaction.md` for the full reduced-motion behavior.
+      screen-reader role="progressbar" carries the "busy" semantic instead.
+      See `interaction.md` for the full reduced-motion behavior.
 
 sizes:
   bar-thickness:
@@ -110,5 +110,5 @@ properties:
       default: Image icon (16px Filled)
       notes: >
         Validation icon slot. Expects a 16px Fluent Iconography instance in the
-        Filled theme. Recommended values — Error Circle Filled for Error,
+        Filled style. Recommended values — Error Circle Filled for Error,
         Checkmark Circle Filled for Success.
