@@ -23,10 +23,8 @@ tokens:
       rationale: >
         The divider line uses a stroke-namespaced token because the line's
         semantic role is a stroke — it is a boundary mark, not a surface fill.
-        The CSS property used is background-color on a 1px rectangle rather
-        than a border, for sub-pixel rendering consistency. The token category
-        (background in this YAML) describes the implementation method; the
-        token name describes the design intent.
+        The CSS property used is background-color on a 1px rectangle rather than
+        a border, for sub-pixel rendering consistency.
 
   foreground:
     label:
@@ -40,7 +38,7 @@ tokens:
 
   stroke:
     container: no-stroke
-    focus: n/a # Non-interactive — no focus ring.
+    focus: n/a
 
   radius: n/a
 
@@ -81,19 +79,15 @@ sizes:
 
 properties:
   component:
-    Content slot:
+    Label slot:
       type: BOOLEAN
       default: true
-      notes: Shows/hides the content container (icon + label). When false, renders a plain line.
+      notes: Shows/hides the label text. When false, the divider can collapse to a plain line.
     Icon:
       type: BOOLEAN
       default: false
-      notes: Shows/hides the icon within the content slot.
-    Text:
-      type: BOOLEAN
-      default: true
-      notes: Shows/hides the label text within the content slot.
-    Text string:
+      notes: Shows/hides the icon within the content container.
+    Label text:
       type: TEXT
       default: 'Text'
       notes: Bound to the label text node.
