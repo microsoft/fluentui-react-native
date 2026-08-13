@@ -3,10 +3,10 @@ name: list-item
 platform: react-native (Windows, macOS)
 description: Molecular row inside a List — represents one of a collection of independent, like items. Owns its primary/secondary content, optional leading icon or Avatar, an optional leading selection indicator (Checkbox/Radio driven by the parent List's Selection mode), and an optional trailing action items slot.
 argument-hint: "[variant axis or behavior question, e.g. 'Selected font-weight swap' or 'trailing action items contract']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata
@@ -53,7 +53,7 @@ Answer design questions directly — lead with rationale, then tokens. ListItem 
 | Selection slot         | No (driven by parent List's Selection mode) | Hidden      |
 | Leading icon           | No                                          | Hidden      |
 | Leading avatar         | No                                          | Hidden      |
-| Primary content slot   | Yes                                         | "List item" |
+| Primary content slot   | Yes                                          | "List item" |
 | Secondary content slot | No                                          | Hidden      |
 | Action items           | No                                          | Hidden      |
 
@@ -80,7 +80,7 @@ Variant properties are ordered in the design tool: **Size → Selection mode →
 #### Selection mode
 
 | Value        | Description                                                                                                                          | When to Use                                                                |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
 | **None**     | Selection slot hidden. Row may still be activatable (navigation, drill-in) but carries no persistent selection state. Default.       | Default. Pure content rows or navigation rows.                             |
 | **Single**   | Selection slot renders a label-hidden Radio. At most one row in the parent List may be Selected=True at a time (enforced by parent). | Single-pick value rows that should remain visible (settings, preferences). |
 | **Multiple** | Selection slot renders a label-hidden, square Checkbox. Any number of rows may be Selected=True.                                     | Multi-pick rows (bulk actions, filters).                                   |
@@ -99,7 +99,7 @@ Variant properties are ordered in the design tool: **Size → Selection mode →
 #### State
 
 | Value        | Applies               | Visual                                                                    |
-| ------------ | --------------------- | ------------------------------------------------------------------------- |
+| ---------- | --------------------- | ------------------------------------------------------------------------- |
 | **Rest**     | All rows              | Default appearance.                                                       |
 | **Hover**    | Interactive rows only | Background and foreground use the inline hover values in `tokens.yaml`.   |
 | **Pressed**  | Interactive rows only | Background and foreground use the inline pressed values in `tokens.yaml`. |
