@@ -3,10 +3,10 @@ name: card
 platform: react-native (Windows, macOS)
 description: Molecular surface container that groups related content and actions into a single, bounded unit. Covers the translucent surface boundary, Size / Padding / Layout / Direction variant axes, the Header / Content / Footer slot model, and how an optional clickable mode is layered on.
 argument-hint: "[variant axis or slot question, e.g. 'Nested vs Structured layout' or 'Padding=None tokens']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata
