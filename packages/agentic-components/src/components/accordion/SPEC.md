@@ -3,10 +3,10 @@ name: accordion
 platform: react-native (Windows, macOS)
 description: Atomic collapsible panel with an interactive header and a free body content slot. Covers chevron layout (start/end), expand/collapse state, optional leading icon, focus ring behavior, and body content slot conventions.
 argument-hint: "[variant axis or behavior question, e.g. 'chevron end layout' or 'focus ring tokens']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata

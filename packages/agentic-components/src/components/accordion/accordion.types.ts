@@ -1,0 +1,87 @@
+import type { AccessibilityState, Pressable, StyleProp, Text, View, ViewProps, ViewStyle } from 'react-native';
+import type { ComponentProps, ComponentState, OptionalSlot, PressableState, Slot } from '@fluentui-react-native/framework-base';
+import type { ThemeState } from '@fluentui-react-native/design';
+import type { Icon } from '../../primitives/icon/icon';
+
+export type AccordionLayout = 'chevronStart' | 'chevronEnd';
+export type AccordionSize = 'small';
+
+export type AccordionSlots = {
+  /**
+   * The root container for the accordion item.
+   */
+  root: Slot<typeof View>;
+
+  /**
+   * The visible title for the accordion header.
+   */
+  title: OptionalSlot<typeof Text>;
+
+  /**
+   * The optional leading icon shown before the title.
+   */
+  leadingIcon: OptionalSlot<typeof Icon>;
+
+  /**
+   * Custom body content shown when the accordion is expanded.
+   */
+  bodyContent: OptionalSlot<typeof View>;
+};
+
+export type AccordionStateSlots = AccordionSlots & {
+  header: Slot<typeof Pressable>;
+  body: Slot<typeof View>;
+  chevronContainer: Slot<typeof View>;
+  chevron: Slot<typeof Icon>;
+};
+
+export type AccordionStateProps = {
+  /**
+   * Places the chevron before or after the title block.
+   */
+  layout?: AccordionLayout;
+  /**
+   * Whether the body panel is visible.
+   */
+  expanded?: boolean;
+  /**
+   * Forces the visual focus state when provided.
+   */
+  focused?: boolean;
+  /**
+   * Announces the accordion header when the visible title is not sufficient.
+   */
+  accessibilityLabel?: string;
+  /**
+   * Optional accessibility hint for the header button.
+   */
+  accessibilityHint?: string;
+  /**
+   * Preserves unrelated consumer accessibility state values while the component owns expanded state.
+   */
+  accessibilityState?: AccessibilityState;
+  /**
+   * Notifies consumers after the expanded state changes.
+   */
+  onExpandedChange?: (expanded: boolean) => void;
+  /**
+   * The only currently defined size.
+   */
+  size?: AccordionSize;
+};
+
+export type AccordionRootProps = Omit<
+  ViewProps,
+  'accessible' | 'accessibilityHint' | 'accessibilityLabel' | 'accessibilityRole' | 'accessibilityState' | 'children' | 'focusable'
+>;
+
+export type AccordionProps = AccordionStateProps & ComponentProps<AccordionSlots, AccordionRootProps>;
+
+export type AccordionState = ComponentState<AccordionStateSlots> &
+  Required<Pick<AccordionStateProps, 'layout' | 'size'>> &
+  ThemeState &
+  PressableState & {
+    expanded: boolean;
+    focused: boolean;
+    userStyle?: StyleProp<ViewStyle>;
+  };
