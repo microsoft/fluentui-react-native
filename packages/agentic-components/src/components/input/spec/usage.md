@@ -42,3 +42,4 @@ Input is the bare text entry control. Field is the container that wraps Input wi
 - **Placeholder text should describe the expected input format or provide an example** — e.g., "Search files...", "name@example.com". Keep it short; placeholder text is truncated when the input is narrow.
 - **Do not repeat the label in the placeholder.** If the Field label says "Email address", the placeholder should not also say "Email address" — use "name@example.com" instead.
 - **Use sentence case for placeholder text.** No trailing punctuation unless the placeholder is a complete sentence (which it generally should not be).
+

@@ -23,3 +23,4 @@ Hover and pressed are resolved state values, not base states of their own — th
 State transitions (Rest → Hover, Rest → Focus) are platform-driven color transitions on the stroke. Duration and easing reference motion tokens once defined; until then, keep transitions short (≤150ms) with standard ease-in-out so the focus shift does not lag perceptibly behind the caret appearance.
 
 > **Reduced motion:** When the OS reduce-motion setting is set, all transitions should be instant. No scale, translate, or opacity animation is used on Input.
+
