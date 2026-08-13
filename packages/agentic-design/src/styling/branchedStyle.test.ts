@@ -1,7 +1,7 @@
 import type { ViewStyle } from 'react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
-import type { ThemeState } from '@fluentui-react-native/design';
+import { useFlexTokens } from '../tokens/useFlexTokens';
+import type { ThemeState } from '../useThemeState';
 
 import {
   getActiveState,

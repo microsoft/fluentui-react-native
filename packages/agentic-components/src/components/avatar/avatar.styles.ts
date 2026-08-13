@@ -3,8 +3,8 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StateNames, StyleDefinition } from '../../utils/branchedStyle';
+import { getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type { StateNames, StyleDefinition } from '@fluentui-react-native/design/styling';
 import type { AvatarContentMode, AvatarSize, AvatarState } from './avatar.types';
 
 export const avatarStyles = StyleSheet.create({

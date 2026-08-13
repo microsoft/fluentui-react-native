@@ -3,10 +3,14 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StateNames, StyleDefinition } from '../../utils/branchedStyle';
-import { getThemedColorStyleFactory } from '../../utils/colorStyles';
-import type { ColorStyleDefinition, TextColorStyle, ViewColorStyle } from '../../utils/colorStyles';
+import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type {
+  ColorStyleDefinition,
+  StateNames,
+  StyleDefinition,
+  TextColorStyle,
+  ViewColorStyle,
+} from '@fluentui-react-native/design/styling';
 import type { BadgeSize, BadgeState } from './badge.types';
 
 export const badgeStyles = StyleSheet.create({
@@ -24,7 +28,10 @@ export const badgeStyles = StyleSheet.create({
   },
 });
 
-const colorStateLevels = [['tint', 'outline'], ['brand', 'danger', 'success', 'warning', 'informative']] as const;
+const colorStateLevels = [
+  ['tint', 'outline'],
+  ['brand', 'danger', 'success', 'warning', 'informative'],
+] as const;
 type ColorStateLevels = typeof colorStateLevels;
 type ColorState = StateNames<ColorStateLevels>;
 
@@ -245,12 +252,7 @@ const contentStateLevels = [['small', 'medium']] as const;
 
 const getThemedContentStyle = getThemedStateStyleFactory(
   'Badge.content',
-  ({
-    fontFamily,
-    fontSize,
-    fontWeight,
-    lineHeight,
-  }: FlexTokens): StyleDefinition<TextStyle, typeof contentStateLevels> => ({
+  ({ fontFamily, fontSize, fontWeight, lineHeight }: FlexTokens): StyleDefinition<TextStyle, typeof contentStateLevels> => ({
     fontFamily: fontFamily.functional,
     small: {
       fontSize: fontSize.functionalCaption,

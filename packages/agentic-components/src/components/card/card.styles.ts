@@ -3,10 +3,8 @@ import type { ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StateNames, StyleDefinition } from '../../utils/branchedStyle';
-import { getThemedColorStyleFactory } from '../../utils/colorStyles';
-import type { ColorStyleDefinition, ViewColorStyle } from '../../utils/colorStyles';
+import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type { ColorStyleDefinition, StateNames, StyleDefinition, ViewColorStyle } from '@fluentui-react-native/design/styling';
 import type { CardState } from './card.types';
 
 export const cardStyles = StyleSheet.create({
@@ -84,7 +82,11 @@ export function getCardSurfaceColors(state: CardState): ViewColorStyle {
   return getThemedSurfaceColors(state, getSurfaceColorStateSource(state));
 }
 
-const rootStyleStateLevels = [['small', 'large'], ['default', 'none'], ['vertical', 'horizontal']] as const;
+const rootStyleStateLevels = [
+  ['small', 'large'],
+  ['default', 'none'],
+  ['vertical', 'horizontal'],
+] as const;
 type RootStyleStateLevels = typeof rootStyleStateLevels;
 type RootStyleState = StateNames<RootStyleStateLevels>;
 
@@ -153,7 +155,10 @@ export function getCardRootStyle(state: CardState): ViewStyle {
   return getThemedRootStyle(state, getRootStyleStateSource(state));
 }
 
-const nestedBlockStyleStateLevels = [['small', 'large'], ['default', 'none']] as const;
+const nestedBlockStyleStateLevels = [
+  ['small', 'large'],
+  ['default', 'none'],
+] as const;
 type NestedBlockStyleStateLevels = typeof nestedBlockStyleStateLevels;
 type NestedBlockStyleState = StateNames<NestedBlockStyleStateLevels>;
 

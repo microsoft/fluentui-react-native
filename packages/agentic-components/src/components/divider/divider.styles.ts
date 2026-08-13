@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
-import { getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StyleDefinition } from '../../utils/branchedStyle';
+import { getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type { StyleDefinition } from '@fluentui-react-native/design/styling';
 import type { DividerState } from './divider.types';
 
 function getGapValue(value: FlexTokens['spacing']['componentBase150']): NonNullable<ViewStyle['gap']> {

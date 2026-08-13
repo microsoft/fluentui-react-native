@@ -3,12 +3,10 @@ import type { ViewStyle } from 'react-native';
 
 import { themedStyleSheetFactory } from '@fluentui-react-native/design';
 import type { FlexTokens } from '@fluentui-react-native/design';
+import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type { ColorStyleDefinition, StyleDefinition, TextColorStyle, ViewColorStyle } from '@fluentui-react-native/design/styling';
 import { size120, size160, size240 } from '@fluentui-react-native/design/tokens/global';
 
-import { getThemedColorStyleFactory } from '../../utils/colorStyles';
-import type { ColorStyleDefinition, TextColorStyle, ViewColorStyle } from '../../utils/colorStyles';
-import { getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StyleDefinition } from '../../utils/branchedStyle';
 import type { CheckboxState } from './checkbox.types';
 
 export const checkboxStyles = StyleSheet.create({
@@ -41,7 +39,10 @@ export const checkboxStyles = StyleSheet.create({
 const rootStateLevels = [['withLabel', 'iconOnly']] as const;
 const labelContainerStateLevels = [['withSecondaryText', 'withoutSecondaryText']] as const;
 const indicatorShapeStateLevels = [['standard', 'circular']] as const;
-const statusStateLevels = [['unchecked', 'checked', 'indeterminate'], ['disabled', 'pressed', 'hovered']] as const;
+const statusStateLevels = [
+  ['unchecked', 'checked', 'indeterminate'],
+  ['disabled', 'pressed', 'hovered'],
+] as const;
 const focusStateLevels = [['focused']] as const;
 
 function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullable<ViewStyle['gap']> {
@@ -68,7 +69,11 @@ export const checkboxTextStyles = themedStyleSheetFactory('Checkbox.text', ({ to
   }),
 );
 
-function createIndicatorShapeDefinition({ borderRadius, spacing, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof indicatorShapeStateLevels> {
+function createIndicatorShapeDefinition({
+  borderRadius,
+  spacing,
+  strokeWidth,
+}: FlexTokens): StyleDefinition<ViewStyle, typeof indicatorShapeStateLevels> {
   return {
     circular: {
       borderRadius: borderRadius.circular,
@@ -87,7 +92,11 @@ function createIndicatorShapeDefinition({ borderRadius, spacing, strokeWidth }: 
   };
 }
 
-const getIndicatorShapeStyle = getThemedStateStyleFactory('Checkbox.indicatorShape', createIndicatorShapeDefinition, indicatorShapeStateLevels);
+const getIndicatorShapeStyle = getThemedStateStyleFactory(
+  'Checkbox.indicatorShape',
+  createIndicatorShapeDefinition,
+  indicatorShapeStateLevels,
+);
 
 function createRootLayoutDefinition({ spacing }: FlexTokens): StyleDefinition<ViewStyle, typeof rootStateLevels> {
   return {

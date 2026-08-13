@@ -1,6 +1,7 @@
 import type { ColorValue, TextStyle, ViewStyle } from 'react-native';
 
-import type { FlexTokens, SemanticColors, ThemeState } from '@fluentui-react-native/design';
+import type { FlexTokens, SemanticColors } from '../tokens/flex.types';
+import type { ThemeState } from '../useThemeState';
 
 import { createStateLevelMap, getThemedStateStyleFactory } from './branchedStyle';
 import type { StateLevels, StateNames, StateSource, StyleDefinition, StyleDefFromTokens } from './branchedStyle';

@@ -2,12 +2,16 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
+import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type {
+  ColorStyleDefinition,
+  StateNames,
+  StyleDefinition,
+  TextColorStyle,
+  ViewColorStyle,
+} from '@fluentui-react-native/design/styling';
 import { size160, size400, sizeNone } from '@fluentui-react-native/design/tokens/global';
 
-import { getThemedColorStyleFactory } from '../../utils/colorStyles';
-import type { ColorStyleDefinition, TextColorStyle, ViewColorStyle } from '../../utils/colorStyles';
-import { getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StateNames, StyleDefinition } from '../../utils/branchedStyle';
 import type { MenuItemState } from './menu-item.types';
 
 export const menuItemStyles = StyleSheet.create({
@@ -342,9 +346,13 @@ export function getMenuItemCheckboxStyle(state: MenuItemState): ViewStyle {
 
 export function getMenuItemLeadingStyle(state: MenuItemState): ViewStyle {
   return {
-    alignSelf: state.secondaryContentText && state.secondaryContentText !== null && state.secondaryContentText !== '' && state.secondaryContentPosition === 'under'
-      ? 'flex-start'
-      : 'center',
+    alignSelf:
+      state.secondaryContentText &&
+      state.secondaryContentText !== null &&
+      state.secondaryContentText !== '' &&
+      state.secondaryContentPosition === 'under'
+        ? 'flex-start'
+        : 'center',
     justifyContent: 'center',
   };
 }

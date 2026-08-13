@@ -3,10 +3,9 @@ import type { ColorValue, TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 import type { ThemeState } from '@fluentui-react-native/design';
+import { getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type { StyleDefinition } from '@fluentui-react-native/design/styling';
 import { cornerRadiusNone, size160, size200, size240 } from '@fluentui-react-native/design/tokens/global';
-
-import { getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StyleDefinition } from '../../utils/branchedStyle';
 
 import type { InputSize, InputVariant, InputVisualState } from './input.types';
 
@@ -53,9 +52,19 @@ export const inputStyles = StyleSheet.create({
   },
 });
 
-const rootStateLevels = [['outline', 'underline'], ['small', 'medium', 'large']] as const;
-const contentStateLevels = [['outline', 'underline'], ['small', 'medium', 'large'], ['disabled', 'error', 'readOnly', 'focused', 'pressed', 'hovered', 'rest']] as const;
-const textStateLevels = [['small', 'medium', 'large'], ['disabled', 'error', 'readOnly', 'focused', 'pressed', 'hovered', 'rest']] as const;
+const rootStateLevels = [
+  ['outline', 'underline'],
+  ['small', 'medium', 'large'],
+] as const;
+const contentStateLevels = [
+  ['outline', 'underline'],
+  ['small', 'medium', 'large'],
+  ['disabled', 'error', 'readOnly', 'focused', 'pressed', 'hovered', 'rest'],
+] as const;
+const textStateLevels = [
+  ['small', 'medium', 'large'],
+  ['disabled', 'error', 'readOnly', 'focused', 'pressed', 'hovered', 'rest'],
+] as const;
 const visualStateLevels = [['disabled', 'error', 'readOnly', 'focused', 'pressed', 'hovered', 'rest']] as const;
 
 type RootStateLevels = typeof rootStateLevels;
@@ -316,28 +325,12 @@ function createUnderlineDefinition(tokens: FlexTokens): StyleDefinition<ViewStyl
 }
 
 const getThemedRootStyle = getThemedStateStyleFactory('Input.root', createRootStyleDefinition, rootStateLevels);
-const getThemedContentsLayoutStyle = getThemedStateStyleFactory(
-  'Input.contentsLayout',
-  createContentsLayoutDefinition,
-  contentStateLevels,
-);
-const getThemedContentsStrokeStyle = getThemedStateStyleFactory(
-  'Input.contentsStroke',
-  createContentsStrokeDefinition,
-  contentStateLevels,
-);
-const getThemedIconTextStackStyle = getThemedStateStyleFactory(
-  'Input.iconTextStack',
-  createIconTextStackDefinition,
-  textStateLevels,
-);
+const getThemedContentsLayoutStyle = getThemedStateStyleFactory('Input.contentsLayout', createContentsLayoutDefinition, contentStateLevels);
+const getThemedContentsStrokeStyle = getThemedStateStyleFactory('Input.contentsStroke', createContentsStrokeDefinition, contentStateLevels);
+const getThemedIconTextStackStyle = getThemedStateStyleFactory('Input.iconTextStack', createIconTextStackDefinition, textStateLevels);
 const getThemedIconEndStyle = getThemedStateStyleFactory('Input.iconEnd', createIconEndDefinition, textStateLevels);
 const getThemedTextInputStyle = getThemedStateStyleFactory('Input.textInput', createTextInputDefinition, textStateLevels);
-const getThemedUnderlineStyle = getThemedStateStyleFactory(
-  'Input.underline',
-  createUnderlineDefinition,
-  visualStateLevels,
-);
+const getThemedUnderlineStyle = getThemedStateStyleFactory('Input.underline', createUnderlineDefinition, visualStateLevels);
 
 export type InputResolvedStyles = {
   root: ViewStyle;

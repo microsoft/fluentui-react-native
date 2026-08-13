@@ -3,10 +3,14 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getStateStyleFactory, getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StateNames, StyleDefinition } from '../../utils/branchedStyle';
-import { getThemedColorStyleFactory } from '../../utils/colorStyles';
-import type { ColorStyleDefinition, TextColorStyle, ViewColorStyle } from '../../utils/colorStyles';
+import { getStateStyleFactory, getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type {
+  ColorStyleDefinition,
+  StateNames,
+  StyleDefinition,
+  TextColorStyle,
+  ViewColorStyle,
+} from '@fluentui-react-native/design/styling';
 
 import type { TabState } from './tab.types';
 

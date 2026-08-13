@@ -2,10 +2,15 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
+import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type {
+  ColorStyleDefinition,
+  StateNames,
+  StyleDefinition,
+  TextColorStyle,
+  ViewColorStyle,
+} from '@fluentui-react-native/design/styling';
 import { size160, size200, size240, size320, size400 } from '@fluentui-react-native/design/tokens/global';
-
-import { getThemedColorStyleFactory, type ColorStyleDefinition, type TextColorStyle, type ViewColorStyle } from '../../utils/colorStyles';
-import { getThemedStateStyleFactory, type StateNames, type StyleDefinition } from '../../utils/branchedStyle';
 
 import type { ListItemState } from './list-item.types';
 
@@ -68,7 +73,10 @@ export const listItemStyles = StyleSheet.create({
   },
 });
 
-const backgroundStateLevels = [['rest', 'selected'], ['disabled', 'pressed', 'hovered']] as const;
+const backgroundStateLevels = [
+  ['rest', 'selected'],
+  ['disabled', 'pressed', 'hovered'],
+] as const;
 type BackgroundStateLevels = typeof backgroundStateLevels;
 type BackgroundState = StateNames<BackgroundStateLevels>;
 
@@ -165,7 +173,10 @@ export function getListItemPrimaryForegroundStyle(state: ListItemState): TextCol
   return getThemedPrimaryForegroundStyle(state, getPrimaryForegroundStateSource(state));
 }
 
-const secondaryForegroundStateLevels = [['rest', 'selected'], ['disabled', 'pressed', 'hovered']] as const;
+const secondaryForegroundStateLevels = [
+  ['rest', 'selected'],
+  ['disabled', 'pressed', 'hovered'],
+] as const;
 type SecondaryForegroundStateLevels = typeof secondaryForegroundStateLevels;
 type SecondaryForegroundState = StateNames<SecondaryForegroundStateLevels>;
 

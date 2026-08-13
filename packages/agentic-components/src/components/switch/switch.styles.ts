@@ -2,12 +2,10 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
+import { getStateStyleFactory, getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type { ColorStyleDefinition, StateNames, StyleDefinition, ViewColorStyle } from '@fluentui-react-native/design/styling';
 import { size20, size40, size80, size200, size360, size400, size560 } from '@fluentui-react-native/design/tokens/global';
 
-import { getStateStyleFactory, getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StateNames, StyleDefinition } from '../../utils/branchedStyle';
-import { getThemedColorStyleFactory } from '../../utils/colorStyles';
-import type { ColorStyleDefinition, ViewColorStyle } from '../../utils/colorStyles';
 import type { SwitchState } from './switch.types';
 
 export const switchStyles = StyleSheet.create({
@@ -225,11 +223,17 @@ function getColorStateSource(state: Pick<SwitchState, 'disabled' | 'hovered' | '
   return source;
 }
 
-export function getSwitchTrackColorStyle(state: Pick<SwitchState, 'tokens' | 'disabled' | 'hovered' | 'pressed'>, checked: boolean): ViewColorStyle {
+export function getSwitchTrackColorStyle(
+  state: Pick<SwitchState, 'tokens' | 'disabled' | 'hovered' | 'pressed'>,
+  checked: boolean,
+): ViewColorStyle {
   return getTrackColors(state as SwitchState, getColorStateSource(state, checked));
 }
 
-export function getSwitchThumbColorStyle(state: Pick<SwitchState, 'tokens' | 'disabled' | 'hovered' | 'pressed'>, checked: boolean): ViewColorStyle {
+export function getSwitchThumbColorStyle(
+  state: Pick<SwitchState, 'tokens' | 'disabled' | 'hovered' | 'pressed'>,
+  checked: boolean,
+): ViewColorStyle {
   return getThumbColors(state as SwitchState, getColorStateSource(state, checked));
 }
 

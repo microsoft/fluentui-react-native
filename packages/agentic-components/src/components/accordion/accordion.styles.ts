@@ -4,10 +4,8 @@ import type { TextStyle, ViewStyle } from 'react-native';
 import type { FlexTokens } from '@fluentui-react-native/design';
 import { size160 } from '@fluentui-react-native/design/tokens/global';
 
-import { getStateStyleFactory, getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StyleDefinition } from '../../utils/branchedStyle';
-import { getThemedColorStyleFactory } from '../../utils/colorStyles';
-import type { ColorStyleDefinition, TextColorStyle, ViewColorStyle } from '../../utils/colorStyles';
+import { getStateStyleFactory, getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type { ColorStyleDefinition, StyleDefinition, TextColorStyle, ViewColorStyle } from '@fluentui-react-native/design/styling';
 import type { AccordionState } from './accordion.types';
 
 export const accordionStyles = StyleSheet.create({
@@ -68,7 +66,12 @@ function createHeaderLayoutStyleDefinition({ borderRadius, spacing }: FlexTokens
 
 const getHeaderLayoutStyle = getThemedStateStyleFactory('Accordion.headerLayout', createHeaderLayoutStyleDefinition, sizeStateLevels);
 
-function createTitleTypographyStyleDefinition({ fontFamily, fontSize, fontWeight, lineHeight }: FlexTokens): StyleDefinition<TextStyle, SizeStateLevels> {
+function createTitleTypographyStyleDefinition({
+  fontFamily,
+  fontSize,
+  fontWeight,
+  lineHeight,
+}: FlexTokens): StyleDefinition<TextStyle, SizeStateLevels> {
   return {
     small: {
       fontFamily: fontFamily.functional,
@@ -79,9 +82,18 @@ function createTitleTypographyStyleDefinition({ fontFamily, fontSize, fontWeight
   };
 }
 
-const getTitleTypographyStyle = getThemedStateStyleFactory('Accordion.titleTypography', createTitleTypographyStyleDefinition, sizeStateLevels);
+const getTitleTypographyStyle = getThemedStateStyleFactory(
+  'Accordion.titleTypography',
+  createTitleTypographyStyleDefinition,
+  sizeStateLevels,
+);
 
-function createBodyTypographyStyleDefinition({ fontFamily, fontSize, fontWeight, lineHeight }: FlexTokens): StyleDefinition<TextStyle, SizeStateLevels> {
+function createBodyTypographyStyleDefinition({
+  fontFamily,
+  fontSize,
+  fontWeight,
+  lineHeight,
+}: FlexTokens): StyleDefinition<TextStyle, SizeStateLevels> {
   return {
     small: {
       fontFamily: fontFamily.functional,
@@ -209,10 +221,7 @@ const bodyVisibilityStyleDefinition: StyleDefinition<ViewStyle, ExpansionStateLe
   },
 };
 
-const getChevronRotationStyle = getStateStyleFactory<ViewStyle, ExpansionStateLevels>(
-  chevronRotationStyleDefinition,
-  expansionStateLevels,
-);
+const getChevronRotationStyle = getStateStyleFactory<ViewStyle, ExpansionStateLevels>(chevronRotationStyleDefinition, expansionStateLevels);
 const getBodyVisibilityStyle = getStateStyleFactory<ViewStyle, ExpansionStateLevels>(bodyVisibilityStyleDefinition, expansionStateLevels);
 
 export function getAccordionHeaderLayoutStyle(state: AccordionState): ViewStyle {
@@ -227,7 +236,10 @@ export function getAccordionHeaderColorStyles(state: AccordionState): {
   background: ViewColorStyle;
   foreground: TextColorStyle;
 } {
-  const source = [state.pressed ? 'pressed' : undefined, state.hovered ? 'hovered' : undefined].filter(Boolean) as ('pressed' | 'hovered')[];
+  const source = [state.pressed ? 'pressed' : undefined, state.hovered ? 'hovered' : undefined].filter(Boolean) as (
+    | 'pressed'
+    | 'hovered'
+  )[];
   return {
     background: getHeaderBackgroundStyle(state, source),
     foreground: getHeaderForegroundStyle(state, source),

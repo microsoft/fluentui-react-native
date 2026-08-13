@@ -3,9 +3,8 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getThemedColorStyleFactory, type ColorStyleDefinition, type TextColorStyle, type ViewColorStyle } from '../../utils/colorStyles';
-import { getThemedStateStyleFactory } from '../../utils/branchedStyle';
-import type { StyleDefinition } from '../../utils/branchedStyle';
+import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import type { ColorStyleDefinition, StyleDefinition, TextColorStyle, ViewColorStyle } from '@fluentui-react-native/design/styling';
 import type { RadioState } from './radio.types';
 
 export const radioStyles = StyleSheet.create({
