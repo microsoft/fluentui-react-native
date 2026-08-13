@@ -3,10 +3,10 @@ name: radio
 platform: react-native (Windows, macOS)
 description: Molecular single-select control for choosing exactly one option from a group of mutually exclusive choices. Binary status (Unselected/Selected) with a circular indicator, a required label, and an optional secondary description text.
 argument-hint: "[variant axis or behavior question, e.g. 'when to use Radio vs Checkbox']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata
