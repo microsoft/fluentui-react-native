@@ -1,6 +1,6 @@
 ---
 component: Skeleton
-platform: react-native (Windows, macOS)
+platform: react-native (Windows & macOS)
 ---
 
 # Skeleton Interaction (React Native — Windows & macOS)

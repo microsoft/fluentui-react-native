@@ -1,12 +1,12 @@
 ---
 name: skeleton
 platform: react-native (Windows, macOS)
-description: Atomic non-interactive placeholder element that shows an animating bar in the shape of content while it loads. No variant axes and no states — sized and positioned per instance to match the incoming content.
-argument-hint: "[e.g. 'what color does the bar use', 'reduced motion behavior']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+description: Atomic non-interactive placeholder bar that shows an animating wave while content loads. It has no variants or states; size, shape, and radius are defined per instance to mirror the incoming content.
+argument-hint: "[e.g. 'reduced motion behavior', 'what color does the bar use']"
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata
