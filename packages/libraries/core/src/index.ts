@@ -52,14 +52,14 @@ export type {
 
 export { Callout, calloutName } from '@fluentui-react-native/callout';
 export type {
+  CalloutHandle,
   CalloutNativeCommands,
+  CalloutProps,
+  CalloutTokens,
   DirectionalHint,
   DismissBehaviors,
   ICalloutProps,
-  ICalloutRenderData,
-  ICalloutSlotProps,
   ICalloutTokens,
-  ICalloutType,
   RestoreFocusEvent,
 } from '@fluentui-react-native/callout';
 

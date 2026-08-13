@@ -12,19 +12,10 @@
       "path": "../../utils/adapters/tsconfig.json"
     },
     {
+      "path": "../../framework-base/tsconfig.json"
+    },
+    {
       "path": "../../../scripts/tsconfig.json"
-    },
-    {
-      "path": "../../utils/tokens/tsconfig.json"
-    },
-    {
-      "path": "../../deprecated/foundation-composable/tsconfig.json"
-    },
-    {
-      "path": "../../deprecated/foundation-compose/tsconfig.json"
-    },
-    {
-      "path": "../../deprecated/foundation-settings/tsconfig.json"
     }
   ]
 }
