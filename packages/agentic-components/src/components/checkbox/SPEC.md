@@ -3,10 +3,10 @@ name: checkbox
 platform: react-native (Windows, macOS)
 description: Molecular selection control with two indicator styles (Standard/Circular), three statuses (Unchecked/Checked/Indeterminate), optional label, optional secondary description text, and status-driven foreground emphasis.
 argument-hint: "[variant axis or behavior question, e.g. 'when to use Circular vs Standard style']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: spec/tokens.yaml
+accessibility: spec/accessibility.md
+interaction: spec/interaction.md
+usage: spec/usage.md
 ---
 
 ## Metadata
@@ -54,7 +54,7 @@ Variant properties are ordered in the design tool: **Style → Status → State*
 | Value        | Description                                | When to Use                                                 |
 | ------------ | ------------------------------------------ | ----------------------------------------------------------- |
 | **Standard** | Square indicator with xSmall border radius | Default for most form contexts                              |
-| **Circular** | Fully rounded indicator (circular)         | When visual language requires softer, rounded form controls |
+| **Circular** | Fully rounded indicator (circular radius)  | When visual language requires softer, rounded form controls |
 
 **Why two indicator shapes share the same component:** Both shapes use identical token assignments, spacing, touch targets, and interaction behavior — they differ only in border radius. A Style variant avoids duplicating the entire component for a single radius swap.
 
@@ -66,8 +66,6 @@ Variant properties are ordered in the design tool: **Style → Status → State*
 | **Checked**       | Checkmark indicator — option is selected   | When the user has actively selected the option                         |
 | **Indeterminate** | Partial indicator (dash) — mixed selection | Parent checkbox in a group where some but not all children are checked |
 
-**Why Status is a separate axis from a binary Selected toggle:** Checkbox supports three selection states (Unchecked, Checked, Indeterminate), not two. A boolean Selected axis cannot represent the Indeterminate state. The tri-state Status axis maps directly to the HTML `indeterminate` property.
-
 #### State
 
 | Value        | Description                  | When to Use                                               |
@@ -78,4 +76,3 @@ Variant properties are ordered in the design tool: **Style → Status → State*
 | **Disabled** | Non-interactive              | When the option is unavailable in the current context     |
 | **Focus**    | Keyboard focus ring visible  | When the component receives focus via keyboard navigation |
 
-**Why Hover and Pressed are inline values:** Interaction states are resolved from each active rest token in `tokens.yaml`. This keeps the component spec self-contained while preserving separate hover/pressed combinations across statuses.
