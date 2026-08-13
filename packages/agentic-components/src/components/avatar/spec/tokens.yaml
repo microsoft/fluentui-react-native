@@ -35,10 +35,9 @@ tokens:
   stroke:
     container: no-stroke
     rationale: >
-      Avatar has no container stroke in any content mode — the soft-neutral fill
-      (Icon/Initials) or photo (Image) provides edge definition against the surface.
-      Keeping the three modes consistent also prevents a container stroke from sitting
-      inside the activity ring's transparent gap when active.
+      Avatar has no container stroke in any content mode — the soft-neutral fill (Icon/Initials) or photo (Image)
+      provides edge definition against the surface. Keeping the three modes consistent also prevents a container
+      stroke from sitting inside the activity ring's transparent gap when active.
     focus: Avatar is non-interactive — no focus ring.
 
   radius:
@@ -59,21 +58,18 @@ tokens:
     initials-line-height-override:
       all-sizes: 1
       rationale: >
-        Most UI fonts (Segoe, Inter, the system stack) have a taller descender region than
-        ascender region. CSS centers an inline text node on its line-box, so this asymmetry
-        pushes the visible glyphs below the geometric center of the circle — especially
-        noticeable at small sizes (16, 20, 24) where the container has no slack. Setting
-        line-height to the unitless literal 1 (equal to font-size) collapses the line-box
-        onto the cap-height/baseline band, restoring optical center at every size. The value
-        is a direct override, not a token, because it must remain 1 regardless of theme.
-        The Figma source mirrors this with a Cap height → Baseline vertical trim on the
-        Initials text node at every size (issue #610).
+        Most UI fonts (Segoe, Inter, the system stack) have a taller descender region than ascender region.
+        CSS centers an inline text node on its line-box, so this asymmetry pushes the visible glyphs below the
+        geometric center of the circle — especially noticeable at small sizes (16, 20, 24) where the container
+        has no slack. Setting line-height to the unitless literal 1 (equal to font-size) collapses the line-box
+        onto the cap-height/baseline band, restoring optical center at every size. The value is a direct override,
+        not a token, because it must remain 1 regardless of theme. The Figma source mirrors this with a Cap height
+        → Baseline vertical trim on the Initials text node at every size (issue #610).
     vertical-trim: cap-height-to-baseline
     notes: >
-      Typography applies to the Initials content mode only. Size 16 uses caption to fit a
-      single character inside the 16px container. No font-weight swap — Avatar has no Selected
-      axis. The initials-line-height-override above applies to all sizes — see its rationale
-      for the full explanation.
+      Typography applies to the Initials content mode only. Size 16 uses caption to fit a single character inside
+      the 16px container. No font-weight swap — Avatar has no Selected axis. The initials-line-height-override
+      above applies to all sizes — see its rationale for the full explanation.
 
   spacing:
     all:
@@ -110,10 +106,10 @@ tokens:
       56: strokeWidth.thicker
       120: strokeWidth.thicker
     notes: >
-      Activity ring is rendered as an outline with an offset (CSS outline + outline-offset). The offset
-      creates a true transparent gap between the container and the brand stroke, revealing whatever surface
-      the avatar sits on. Both offset and stroke-width scale with avatar size so the ring stays proportional
-      at every diameter. The ring does not affect layout dimensions.
+      Activity ring is rendered as an outline with an offset (CSS outline + outline-offset). The offset creates a
+      true transparent gap between the container and the brand stroke, revealing whatever surface the avatar sits on.
+      Both offset and stroke-width scale with avatar size so the ring stays proportional at every diameter. The ring
+      does not affect layout dimensions.
 
   elevation: n/a
 

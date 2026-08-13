@@ -1,6 +1,6 @@
 ---
 component: Avatar
-platform: react-native (Windows, macOS)
+platform: react-native (Windows & macOS)
 ---
 
 # Avatar Interaction (React Native — Windows & macOS)

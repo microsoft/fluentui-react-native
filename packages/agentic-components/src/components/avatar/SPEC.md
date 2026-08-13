@@ -3,10 +3,10 @@ name: avatar
 platform: react-native (Windows, macOS)
 description: Atomic identity element representing a person, group, or entity. Covers three mutually exclusive display modes (Image, Icon, Initials), eight numeric sizes (16 / 20 / 24 / 28 / 32 / 40 / 56 / 120 px diameter), and non-interactive state handling.
 argument-hint: "[display mode or token question, e.g. 'icon avatar background token' or 'initials accessibility']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata
