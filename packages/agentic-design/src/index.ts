@@ -16,6 +16,7 @@ export type {
   SemanticTokens,
   UnsupportedFlexTokens,
 } from './tokens/flex.types';
+export { flexTokensFromTheme } from './tokens/flexTokensFromTheme';
 export { useFlexTokens } from './tokens/useFlexTokens';
 export type { ThemeState, ThemeStyleSheet } from './useThemeState';
 export { themedStyleSheetFactory, useThemeState } from './useThemeState';

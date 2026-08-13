@@ -24,6 +24,7 @@ sources:
     description: Dot path to the corresponding value in the Fluent UI React Native
       Theme type.
     definition: '../../theming/types/Theme.types.ts'
+    projection: './flex-from-theme.json'
 rules:
   colorStates:
     shape: Each color has a required rest mapping and optional hover and pressed mappings.
@@ -54,6 +55,16 @@ rules:
     - letterSpacing* are null — Fluent global has no letter-spacing/tracking token.
     - fontFamily.contentEditorial is null — Fluent global has no serif family token.
     - furn-theme is omitted when Theme has no corresponding value path.
+    - Keep flex-from-theme.json synchronized with furn-theme mappings. Add, update,
+      or remove its FlexTokens destination-to-Theme source path whenever a furn-theme
+      value changes; do not include tokens without a furn-theme mapping.
+    - flexTokensFromTheme.ts consumes flex-from-theme.json and merges the projected
+      Theme values over nonFluentFlexTokens.
+    - Keep nonFluentFlexTokens in ../defaultTokens.ts synchronized with unmapped
+      supported destinations. Include an unmapped hover or pressed fallback only
+      when its rest destination is also unmapped; otherwise keep the state value
+      only in defaultFlexTokens so a Theme-provided rest value does not inherit a
+      mismatched fallback interaction color.
     - Button uses borderRadius.base200 / base300 / base400 for small / medium / large.
       The FURN Theme exposes its shared small/medium Button radius, but its large
       size-specific radius remains sourced from Fluent global tokens.

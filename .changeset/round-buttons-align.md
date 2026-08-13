@@ -3,4 +3,4 @@
 "@fluentui-react-native/design": patch
 ---
 
-Align agentic Button corner radii with desktop V1 Button values
+Align agentic Button corner radii with desktop V1 values and add context-backed FURN Theme-to-Flex token conversion

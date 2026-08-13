@@ -19,6 +19,8 @@ value.
 - Record a genuine token gap in the component spec. Do not replace it with a nearby token or numeric literal.
 - For compatibility with an existing V1 component, derive cross-platform mappings from its Win32, macOS, or Windows
   implementation. Do not use iOS as the canonical value unless the change explicitly targets iOS.
+- `useThemeState` projects a FURN Theme from context into Flex tokens and stores one symbol-keyed `ThemeState` on that
+  Theme object. Consumers of the same Theme therefore share token and style-cache identity.
 
 ## Build styles in layers
 
