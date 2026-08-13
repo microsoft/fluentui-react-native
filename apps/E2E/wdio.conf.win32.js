@@ -7,7 +7,9 @@ const appArgs =
 const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
 const defaultWaitForTimeout = 20000;
-const defaultConnectionRetryTimeout = 60000;
+/* Session creation has to cover the cold start of WinAppDriver (spawned by the appium windows driver)
+   plus the launch of the app, which can take well over a minute on CI machines. */
+const defaultConnectionRetryTimeout = 180000;
 const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
@@ -24,6 +26,8 @@ exports.config = {
       'appium:app': appPath,
       'appium:appArguments': appArgs,
       'appium:appWorkingDir': appDir,
+      // Give the app enough time to launch and register its top level window on slow CI machines.
+      'appium:createSessionTimeout': 60000,
     },
   ],
 
