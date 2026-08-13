@@ -3,10 +3,10 @@ name: tab
 platform: react-native (Windows, macOS)
 description: Atomic interactive toggle element within a tablist that switches between content panels. Covers Layout (Icon + label, Icon only), Selected toggle axis, font-weight swap pattern, and icon fill swap (Regular → Filled).
 argument-hint: "[variant axis or behavior question, e.g. 'what tokens change when Selected=True?']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata

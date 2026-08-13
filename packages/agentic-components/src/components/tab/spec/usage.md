@@ -28,8 +28,7 @@ Tag labels, categorizes, or filters content and can be dismissed. Tab navigates 
 - **Always prevent layout reflow on toggle.** When Selected changes, the label weight changes from Regular to Semibold. Reserve layout space at Semibold width using the ghost node pattern. See Anatomy.
 - **Always use the Fluent Iconography Image icon as the default INSTANCE_SWAP value.** Never use placeholder frames, shapes, or custom vectors in icon slots.
 - **Never use Tab outside of a Tablist.** Tab is not a standalone control — it must be a child of a Tablist container to function correctly.
-
----
+- **Always connect each tab to its panel.** Pass the controlled panel id through the `controls` prop so accessibility can map it to the associated tabpanel.
 
 ## Content
 

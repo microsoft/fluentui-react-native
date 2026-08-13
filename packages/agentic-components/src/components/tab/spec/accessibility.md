@@ -20,8 +20,7 @@ platform: react-native (Windows, macOS)
   - **2.5.8 — Target Size (Minimum, AA):** Resultant height of `32px` with minimum width of `32px` exceeds the `24×24px` minimum.
 - **Screen reader:** Announces label (or `aria-label`), role (`tab`), selection state (`selected`), and position within set (e.g., "1 of 5").
 
----
-
 ## Usage
 
 - **Icon-only labels:** Always provide `aria-label` on Icon only tabs. The label must describe the content panel the tab controls, not the icon.
+- **Panel linkage:** Pass the controlled panel id through the component's `controls` prop so it can map to the native accessibility controls relationship.
