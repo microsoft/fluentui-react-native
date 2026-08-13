@@ -46,17 +46,11 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	public weak var bridge: RCTBridge?
 
-	private init() {
-		super.init(frame: .zero)
-	}
+	@objc public override init(frame frameRect: NSRect) {
+		super.init(frame: frameRect)
 
-	public required init?(coder: NSCoder) {
-		preconditionFailure()
-	}
-
-	convenience init(bridge: RCTBridge) {
-		self.init()
-		self.bridge = bridge
+		backgroundColor = .clear
+		borderColor = .clear
 
 		// Listens for mouse clicks in the main menu bar while callout is shown
 		NotificationCenter.default.addObserver(
@@ -64,6 +58,15 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			selector: #selector(menuDidBeginTracking),
 			name: NSMenu.didBeginTrackingNotification,
 			object: nil)
+	}
+
+	public required init?(coder: NSCoder) {
+		preconditionFailure()
+	}
+
+	convenience init(bridge: RCTBridge) {
+		self.init(frame: .zero)
+		self.bridge = bridge
 	}
 
 	public override func viewDidMoveToWindow() {
@@ -82,6 +85,36 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			layer.backgroundColor = backgroundColor.cgColor
 			layer.cornerRadius = borderRadius
 		}
+	}
+
+	// MARK: Fabric interface
+
+	@objc public var contentProxyView: NSView {
+		return proxyView
+	}
+
+	@objc public func setAnchorView(_ view: NSView?) {
+		anchorView = view
+		updateCalloutFrameToAnchor()
+	}
+
+	@objc public func mountContentSubview(_ subview: NSView, at index: Int) {
+		if index >= proxyView.subviews.count {
+			proxyView.addSubview(subview)
+		} else {
+			proxyView.addSubview(subview, positioned: .below, relativeTo: proxyView.subviews[index])
+		}
+	}
+
+	@objc public func unmountContentSubview(_ subview: NSView) {
+		if subview.superview == proxyView {
+			subview.removeFromSuperview()
+		}
+	}
+
+	@objc public func updateContentSize(_ size: NSSize) {
+		proxyView.frame = NSRect(origin: .zero, size: size)
+		updateCalloutFrameToAnchor()
 	}
 
 	// MARK: RCTComponent Overrides
@@ -362,10 +395,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	private func onDismissCallout() {
 		if let onDismiss = onDismiss {
-			guard let reactTag = reactTag else {
-				preconditionFailure("React Tag missing")
-			}
-			let event: [AnyHashable: Any] = ["target": reactTag]
+			let event: [AnyHashable: Any] = ["target": reactTag ?? NSNumber(value: 0)]
 			onDismiss(event)
 		}
 	}
@@ -393,10 +423,12 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		 * We can't directly call touchHandler.attach(to:) because `visualEffectView` is not an RCTUIView.
 		 * We get around this limitation by just replicating what `attach` did internally: add a gestureRecognizer.
 		 */
-		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
-			preconditionFailure("Callout could not create RCTTouchHandler")
+		if let bridge = bridge {
+			guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
+				preconditionFailure("Callout could not create RCTTouchHandler")
+			}
+			visualEffectView.addGestureRecognizer(touchHandler)
 		}
-		visualEffectView.addGestureRecognizer(touchHandler)
 
 		return visualEffectView
 	}()

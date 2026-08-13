@@ -15,6 +15,9 @@
   "exclude": ["node_modules", "dist", ".cache"],
   "references": [
     {
+      "path": "../../components/Callout/tsconfig.json"
+    },
+    {
       "path": "../tsconfig.json"
     },
     {

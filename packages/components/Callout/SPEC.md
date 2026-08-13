@@ -26,7 +26,7 @@ CocoaPods integration.
 ## Platform behavior
 
 - macOS presents children in a native popup window and supports window focus
-  commands.
+  commands through both Paper and Fabric component registrations.
 - Win32 supplies the platform `RCTCallout` implementation and supports native
   dismissal, pointer capture, beak, and focus-restoration behavior.
 - Unsupported native behavior remains platform-defined rather than being

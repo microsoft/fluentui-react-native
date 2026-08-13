@@ -2591,13 +2591,12 @@ __metadata:
   resolution: "@fluentui-react-native/agentic-components-storybook@workspace:packages/agentic-components/storybook"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/components": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
-    "@react-native-community/datetimepicker": "npm:^9.1.0"
-    "@react-native-community/slider": "npm:^5.0.0"
     "@react-native-windows/cli": "npm:^0.81.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-babel-transformer": "npm:^0.81.0"
@@ -8473,36 +8472,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/datetimepicker@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "@react-native-community/datetimepicker@npm:9.1.0"
-  dependencies:
-    invariant: "npm:^2.2.4"
-  peerDependencies:
-    expo: ">=52.0.0"
-    react: "*"
-    react-native: "*"
-    react-native-windows: "*"
-  peerDependenciesMeta:
-    expo:
-      optional: true
-    react-native-windows:
-      optional: true
-  checksum: 10c0/3f31baec58c1245204a9b4057809027019aa1abb4b8caea4cb4d44ab70f5a97dfe5114a8aa315299aa47ad31971059181c355aa056d9c3a14b7892582da9f4cb
-  languageName: node
-  linkType: hard
-
 "@react-native-community/slider@npm:^4.5.7":
   version: 4.5.7
   resolution: "@react-native-community/slider@npm:4.5.7"
   checksum: 10c0/9154c88972eb97ecb53190ff215148b41ec195619991e51061f543dc67c8b2463d1d195dd9c166755b8db1cc4d5a1ae8a152c3ecd5d3285cc4a14c35fddb3716
-  languageName: node
-  linkType: hard
-
-"@react-native-community/slider@npm:^5.0.0":
-  version: 5.2.0
-  resolution: "@react-native-community/slider@npm:5.2.0"
-  checksum: 10c0/58ec6a47b5aafefd98a61c79aeae05f1ab8371782eb497d9af665bf2f62a1c372da8fed6dead30e1d6c9e01bfb12bfdbafcde7890736f4f5d55502dabf2e01ad
   languageName: node
   linkType: hard
 
