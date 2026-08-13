@@ -37,7 +37,7 @@ RCT_ENUM_CONVERTER(NSRectEdge, (@{
 
 @end
 
-@interface RCT_EXTERN_MODULE(FRNCalloutManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(RCTCalloutManager, RCTViewManager)
 
 RCT_EXPORT_METHOD(focusWindow : (nonnull NSNumber *)viewTag)
 {
