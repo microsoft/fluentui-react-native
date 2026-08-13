@@ -5,7 +5,7 @@ import { attachSlotProps } from '@fluentui-react-native/framework-base';
 import { avatarStyles, getAvatarIconSize, getAvatarInitialsStyle, getAvatarRootStyle } from './avatar.styles';
 import type { AvatarState } from './avatar.types';
 
-export function useApplyStyles_unstable(state: AvatarState) {
+export function useAvatarStyles_unstable(state: AvatarState) {
   const foregroundColor = state.tokens.color.foregroundNeutralPrimary;
   const imageStyle: StyleProp<ImageStyle> = [
     avatarStyles.image,

@@ -2,13 +2,20 @@ import type { StyleProp, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
-import { cardStyles, getCardFocusStyle, getCardNestedBlockStyle, getCardOverlayStyle, getCardRootStyle, getCardSurfaceColors } from './card.styles';
+import {
+  cardStyles,
+  getCardFocusStyle,
+  getCardNestedBlockStyle,
+  getCardOverlayStyle,
+  getCardRootStyle,
+  getCardSurfaceColors,
+} from './card.styles';
 import type { CardState } from './card.types';
 
 /**
  * Applies stable theme styles and instance-specific style selections to the Card slots.
  */
-export function useApplyStyles_unstable(state: CardState) {
+export function useCardStyles_unstable(state: CardState) {
   const colors = getCardSurfaceColors(state);
   const rootStyle: StyleProp<ViewStyle> = [cardStyles.root, getCardRootStyle(state), colors, state.userStyle];
 

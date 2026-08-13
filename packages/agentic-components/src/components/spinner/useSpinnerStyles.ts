@@ -8,7 +8,7 @@ import type { SpinnerState } from './spinner.types';
 /**
  * Applies token-derived and instance-derived styles to Spinner slots.
  */
-export function useApplyStyles_unstable(state: SpinnerState) {
+export function useSpinnerStyles_unstable(state: SpinnerState) {
   const rootStyle: StyleProp<ViewStyle> = [spinnerStyles.root, getSpinnerRootStyle(state), state.userStyle];
   const svgStyle: StyleProp<ViewStyle> =
     state.reduceMotionEnabled === false

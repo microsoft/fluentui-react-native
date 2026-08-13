@@ -1,6 +1,6 @@
 import type { SpinnerProps } from './spinner.types';
 import { useSpinner_unstable } from './useSpinner';
-import { useApplyStyles_unstable } from './useApplyStyles';
+import { useSpinnerStyles_unstable } from './useSpinnerStyles';
 import { renderSpinner_unstable } from './renderSpinner';
 
 /**
@@ -8,7 +8,7 @@ import { renderSpinner_unstable } from './renderSpinner';
  */
 export const Spinner = (props: SpinnerProps) => {
   const state = useSpinner_unstable(props);
-  useApplyStyles_unstable(state);
+  useSpinnerStyles_unstable(state);
   return renderSpinner_unstable(state);
 };
 

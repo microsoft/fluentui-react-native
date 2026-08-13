@@ -16,13 +16,19 @@ import type { BadgeState } from './badge.types';
 /**
  * Applies Badge styles and resolved slot props.
  */
-export function useApplyStyles_unstable(state: BadgeState) {
+export function useBadgeStyles_unstable(state: BadgeState) {
   const { size, userStyle } = state;
   const colors = {
     background: getBadgeBackgroundStyle(state),
     foreground: getBadgeForegroundStyle(state),
   };
-  const rootStyle: StyleProp<ViewStyle> = [badgeStyles.root, getBadgeRootStyle(state), getBadgeAppearanceStyle(state), colors.background, userStyle];
+  const rootStyle: StyleProp<ViewStyle> = [
+    badgeStyles.root,
+    getBadgeRootStyle(state),
+    getBadgeAppearanceStyle(state),
+    colors.background,
+    userStyle,
+  ];
   const contentStyle: StyleProp<TextStyle> = [badgeStyles.content, getBadgeContentStyle(state), colors.foreground];
   const iconSize = getBadgeIconSize(size);
 

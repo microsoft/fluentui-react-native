@@ -14,9 +14,15 @@ import {
 } from './menu-item.styles';
 import type { MenuItemState } from './menu-item.types';
 
-export function useApplyStyles_unstable(state: MenuItemState) {
+export function useMenuItemStyles_unstable(state: MenuItemState) {
   const labelColor = getMenuItemLabelStyle(state).color;
-  const rootStyle: StyleProp<ViewStyle> = [menuItemStyles.root, getMenuItemRootLayoutStyle(state), getMenuItemRootStyle(state), getMenuItemFocusStyle(state), state.userStyle];
+  const rootStyle: StyleProp<ViewStyle> = [
+    menuItemStyles.root,
+    getMenuItemRootLayoutStyle(state),
+    getMenuItemRootStyle(state),
+    getMenuItemFocusStyle(state),
+    state.userStyle,
+  ];
 
   attachSlotProps(state.root, { style: rootStyle });
 

@@ -20,7 +20,7 @@ import type { AccordionState } from './accordion.types';
 /**
  * Applies cached token styles and slot-level props to the Accordion state.
  */
-export function useApplyStyles_unstable(state: AccordionState) {
+export function useAccordionStyles_unstable(state: AccordionState) {
   const headerColors = getAccordionHeaderColorStyles(state);
   const rootStyle: StyleProp<ViewStyle> = [accordionStyles.root, state.userStyle];
   const headerStyle: StyleProp<ViewStyle> = [
@@ -29,7 +29,12 @@ export function useApplyStyles_unstable(state: AccordionState) {
     headerColors.background,
     getAccordionHeaderFocusStyle(state),
   ];
-  const titleStyle: StyleProp<TextStyle> = [accordionStyles.title, getAccordionTitleLayoutStyle(state), getAccordionTitleTypographyStyle(state), headerColors.foreground];
+  const titleStyle: StyleProp<TextStyle> = [
+    accordionStyles.title,
+    getAccordionTitleLayoutStyle(state),
+    getAccordionTitleTypographyStyle(state),
+    headerColors.foreground,
+  ];
   const bodyStyle: StyleProp<ViewStyle> = [
     accordionStyles.body,
     getAccordionBodyLayoutStyle(state),
@@ -38,7 +43,11 @@ export function useApplyStyles_unstable(state: AccordionState) {
       : { height: 0, opacity: 0, overflow: 'hidden', paddingHorizontal: 0, paddingTop: 0 },
   ];
   const bodyContentStyle: StyleProp<ViewStyle> = [accordionStyles.bodyContent];
-  const bodyPlaceholderStyle: StyleProp<TextStyle> = [accordionStyles.bodyPlaceholder, getAccordionBodyTypographyStyle(state), getAccordionBodyForegroundStyle(state)];
+  const bodyPlaceholderStyle: StyleProp<TextStyle> = [
+    accordionStyles.bodyPlaceholder,
+    getAccordionBodyTypographyStyle(state),
+    getAccordionBodyForegroundStyle(state),
+  ];
   const chevronContainerStyle: StyleProp<ViewStyle> = [
     accordionStyles.chevronContainer,
     getAccordionChevronLayoutStyle(state),

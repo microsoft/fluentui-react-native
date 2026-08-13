@@ -1,6 +1,6 @@
 import type { BadgeProps } from './badge.types';
 import { renderBadge_unstable } from './renderBadge';
-import { useApplyStyles_unstable } from './useApplyStyles';
+import { useBadgeStyles_unstable } from './useBadgeStyles';
 import { useBadge_unstable } from './useBadge';
 
 /**
@@ -8,7 +8,7 @@ import { useBadge_unstable } from './useBadge';
  */
 export const Badge = (props: BadgeProps) => {
   const state = useBadge_unstable(props);
-  useApplyStyles_unstable(state);
+  useBadgeStyles_unstable(state);
   return renderBadge_unstable(state);
 };
 

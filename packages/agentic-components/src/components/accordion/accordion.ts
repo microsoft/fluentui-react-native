@@ -1,6 +1,6 @@
 import type { AccordionProps } from './accordion.types';
 import { renderAccordion_unstable } from './renderAccordion';
-import { useApplyStyles_unstable } from './useApplyStyles';
+import { useAccordionStyles_unstable } from './useAccordionStyles';
 import { useAccordion_unstable } from './useAccordion';
 
 /**
@@ -8,7 +8,7 @@ import { useAccordion_unstable } from './useAccordion';
  */
 export const Accordion = (props: AccordionProps) => {
   const state = useAccordion_unstable(props);
-  const styles = useApplyStyles_unstable(state);
+  const styles = useAccordionStyles_unstable(state);
   return renderAccordion_unstable(state, styles);
 };
 

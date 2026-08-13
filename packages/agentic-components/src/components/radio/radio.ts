@@ -1,6 +1,6 @@
 import type { RadioProps } from './radio.types';
 import { useRadio_unstable } from './useRadio';
-import { useApplyStyles_unstable } from './useApplyStyles';
+import { useRadioStyles_unstable } from './useRadioStyles';
 import { renderRadio_unstable } from './renderRadio';
 
 /**
@@ -8,7 +8,7 @@ import { renderRadio_unstable } from './renderRadio';
  */
 export const Radio = (props: RadioProps) => {
   const state = useRadio_unstable(props);
-  useApplyStyles_unstable(state);
+  useRadioStyles_unstable(state);
   return renderRadio_unstable(state);
 };
 

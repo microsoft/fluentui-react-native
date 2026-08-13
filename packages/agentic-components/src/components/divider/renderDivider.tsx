@@ -2,7 +2,7 @@
 import { View } from 'react-native';
 
 import type { DividerState } from './divider.types';
-import { getDividerAfterLineStyle, getDividerBeforeLineStyle } from './useApplyStyles';
+import { getDividerAfterLineStyle, getDividerBeforeLineStyle } from './useDividerStyles';
 
 /**
  * Renders the Divider component.

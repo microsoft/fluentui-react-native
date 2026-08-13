@@ -2,16 +2,15 @@ import { directComponent, phasedComponent } from '@fluentui-react-native/framewo
 
 import type { InputProps } from './input.types';
 import { renderInput_unstable } from './renderInput';
-import { useApplyStyles_unstable } from './useApplyStyles';
+import { useInputStyles_unstable } from './useInputStyles';
 import { useInput_unstable } from './useInput';
 
 export const Input = phasedComponent<InputProps>((props) => {
   const state = useInput_unstable(props);
-  useApplyStyles_unstable(state);
+  useInputStyles_unstable(state);
   return directComponent<InputProps>(() => renderInput_unstable(state));
 });
 
 Input.displayName = 'Input';
 
 export default Input;
-

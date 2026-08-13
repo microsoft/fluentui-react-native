@@ -8,7 +8,7 @@ import type { DividerState } from './divider.types';
 /**
  * Applies token-derived and instance-derived styles to Divider slots.
  */
-export function useApplyStyles_unstable(state: DividerState) {
+export function useDividerStyles_unstable(state: DividerState) {
   const rootStyle: StyleProp<ViewStyle> = [dividerStyles.root, getDividerRootStyle(state), state.userStyle];
   const contentStyle: StyleProp<ViewStyle> = [dividerStyles.content, getDividerContentStyle(state)];
   const labelStyle: StyleProp<TextStyle> = [dividerStyles.label, getDividerLabelStyle(state)];

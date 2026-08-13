@@ -18,7 +18,7 @@ import {
 } from './listbox-item.styles';
 import type { ListboxItemState } from './listbox-item.types';
 
-export function useApplyStyles_unstable(state: ListboxItemState) {
+export function useListboxItemStyles_unstable(state: ListboxItemState) {
   const rootStyle: StyleProp<ViewStyle> = [
     listboxItemStyles.root,
     getListboxItemRootStyle(state),

@@ -16,10 +16,21 @@ import type { TabState } from './tab.types';
 /**
  * Applies stable theme styles and instance-specific style selections to the Tab slots.
  */
-export function useApplyStyles_unstable(state: TabState) {
+export function useTabStyles_unstable(state: TabState) {
   const colors = getTabColorStyles(state);
-  const rootStyle: StyleProp<ViewStyle> = [tabStyles.root, getTabRootStyle(state), colors.background, getTabFocusStyle(state), state.userStyle];
-  const contentStyle: StyleProp<TextStyle> = [tabStyles.content, getTabContentStyle(state), colors.foreground, getTabContentVisibilityStyle('visible')];
+  const rootStyle: StyleProp<ViewStyle> = [
+    tabStyles.root,
+    getTabRootStyle(state),
+    colors.background,
+    getTabFocusStyle(state),
+    state.userStyle,
+  ];
+  const contentStyle: StyleProp<TextStyle> = [
+    tabStyles.content,
+    getTabContentStyle(state),
+    colors.foreground,
+    getTabContentVisibilityStyle('visible'),
+  ];
   const hiddenContentStyle: StyleProp<TextStyle> = [
     tabStyles.content,
     getTabContentStyle(state, true),

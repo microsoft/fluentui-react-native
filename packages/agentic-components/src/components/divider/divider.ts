@@ -1,6 +1,6 @@
 import type { DividerProps } from './divider.types';
 import { useDivider_unstable } from './useDivider';
-import { useApplyStyles_unstable } from './useApplyStyles';
+import { useDividerStyles_unstable } from './useDividerStyles';
 import { renderDivider_unstable } from './renderDivider';
 
 /**
@@ -8,7 +8,7 @@ import { renderDivider_unstable } from './renderDivider';
  */
 export const Divider = (props: DividerProps) => {
   const state = useDivider_unstable(props);
-  useApplyStyles_unstable(state);
+  useDividerStyles_unstable(state);
   return renderDivider_unstable(state);
 };
 

@@ -19,7 +19,7 @@ import type { SwitchState } from './switch.types';
 /**
  * Apply themed styles and state-dependent slot props to the Switch.
  */
-export function useApplyStyles_unstable(state: SwitchState) {
+export function useSwitchStyles_unstable(state: SwitchState) {
   const trackUncheckedColor = getSwitchTrackColorStyle(state, false);
   const trackCheckedColor = getSwitchTrackColorStyle(state, true);
   const thumbUncheckedColor = getSwitchThumbColorStyle(state, false);

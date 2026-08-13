@@ -7,7 +7,7 @@ import type { ProgressBarState } from './progress-bar.types';
 /**
  * Applies stable theme styles and state-specific layout to the progress bar slots.
  */
-export function useApplyStyles_unstable(state: ProgressBarState) {
+export function useProgressBarStyles_unstable(state: ProgressBarState) {
   const styles = state.styles;
   const trackStyle: StyleProp<ViewStyle> = [styles.track];
   const indicatorStyle: StyleProp<ViewStyle> = [
@@ -23,7 +23,7 @@ export function useApplyStyles_unstable(state: ProgressBarState) {
       : undefined,
     state.type !== 'indeterminate'
       ? {
-          ...( {
+          ...({
             transitionDuration: state.indicatorTransitionDuration,
             transitionTimingFunction: 'ease-out',
             transitionProperty: 'width',

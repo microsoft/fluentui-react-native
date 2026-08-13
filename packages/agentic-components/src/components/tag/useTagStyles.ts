@@ -1,10 +1,18 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
-import { tagStyles, getTagBackgroundStyle, getTagContentStyle, getTagFocusStyle, getTagForegroundStyle, getTagIconSize, getTagRootStyle } from './tag.styles';
+import {
+  tagStyles,
+  getTagBackgroundStyle,
+  getTagContentStyle,
+  getTagFocusStyle,
+  getTagForegroundStyle,
+  getTagIconSize,
+  getTagRootStyle,
+} from './tag.styles';
 import type { TagState } from './tag.types';
 
-export function useApplyStyles_unstable(state: TagState) {
+export function useTagStyles_unstable(state: TagState) {
   const { dismiss, size, userStyle } = state;
   const background = getTagBackgroundStyle(state);
   const foreground = getTagForegroundStyle(state);

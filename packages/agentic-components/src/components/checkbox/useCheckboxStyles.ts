@@ -17,7 +17,7 @@ import {
 } from './checkbox.styles';
 import type { CheckboxState } from './checkbox.types';
 
-export function useApplyStyles_unstable(state: CheckboxState) {
+export function useCheckboxStyles_unstable(state: CheckboxState) {
   const textThemeStyles = checkboxTextStyles(state);
   const indicatorColors = getCheckboxIndicatorColors(state);
   const labelColors = getCheckboxLabelColors(state);

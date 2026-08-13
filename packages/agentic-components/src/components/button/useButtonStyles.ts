@@ -17,7 +17,7 @@ import type { ButtonState } from './button.types';
  * Applies stable theme styles and instance-specific style selections to the
  * button slots.
  */
-export function useApplyStyles_unstable(state: ButtonState) {
+export function useButtonStyles_unstable(state: ButtonState) {
   const { size, userStyle } = state;
   const colors = getButtonColorStyles(state);
   const rootStyle: StyleProp<ViewStyle> = [

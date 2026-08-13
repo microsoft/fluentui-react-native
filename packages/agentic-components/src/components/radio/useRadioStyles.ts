@@ -20,7 +20,7 @@ import type { RadioState } from './radio.types';
 /**
  * Applies styles and slot props to the Radio component state.
  */
-export function useApplyStyles_unstable(state: RadioState) {
+export function useRadioStyles_unstable(state: RadioState) {
   const rootStyle: StyleProp<ViewStyle> = [radioStyles.root, getRadioRootLayout(state), getRadioFocus(state), state.userStyle];
   const indicatorStyle: StyleProp<ViewStyle> = [radioStyles.indicator, getRadioIndicatorLayout(state), getRadioIndicatorBorder(state)];
   const indicatorDotStyle: StyleProp<ViewStyle> = [

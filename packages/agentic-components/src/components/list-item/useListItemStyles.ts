@@ -17,10 +17,20 @@ import type { ListItemState } from './list-item.types';
 /**
  * Applies stable theme styles and instance-specific style selections to the ListItem slots.
  */
-export function useApplyStyles_unstable(state: ListItemState) {
-  const rootStyle: StyleProp<ViewStyle> = [listItemStyles.root, getListItemRootSizeStyle(state), getListItemBackgroundStyle(state), getListItemFocusStyle(state), state.userStyle];
+export function useListItemStyles_unstable(state: ListItemState) {
+  const rootStyle: StyleProp<ViewStyle> = [
+    listItemStyles.root,
+    getListItemRootSizeStyle(state),
+    getListItemBackgroundStyle(state),
+    getListItemFocusStyle(state),
+    state.userStyle,
+  ];
   const contentStyle: StyleProp<TextStyle> = [listItemStyles.contentVisible, getListItemContentStyle(state)];
-  const hiddenContentStyle: StyleProp<TextStyle> = [listItemStyles.contentVisible, listItemStyles.contentHidden, getListItemContentStyle(state, true)];
+  const hiddenContentStyle: StyleProp<TextStyle> = [
+    listItemStyles.contentVisible,
+    listItemStyles.contentHidden,
+    getListItemContentStyle(state, true),
+  ];
   const secondaryContentStyle: StyleProp<TextStyle> = [
     getListItemSecondaryContentStyle(state),
     getListItemSecondaryForegroundStyle(state),

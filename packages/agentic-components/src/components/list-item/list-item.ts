@@ -1,5 +1,5 @@
 import type { ListItemProps } from './list-item.types';
-import { useApplyStyles_unstable } from './useApplyStyles';
+import { useListItemStyles_unstable } from './useListItemStyles';
 import { renderListItem_unstable } from './renderListItem';
 import { useListItem_unstable } from './useListItem';
 
@@ -8,7 +8,7 @@ import { useListItem_unstable } from './useListItem';
  */
 export const ListItem = (props: ListItemProps) => {
   const state = useListItem_unstable(props);
-  useApplyStyles_unstable(state);
+  useListItemStyles_unstable(state);
   return renderListItem_unstable(state);
 };
 

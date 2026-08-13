@@ -1,6 +1,6 @@
 import type { TabProps } from './tab.types';
 import { useTab_unstable } from './useTab';
-import { useApplyStyles_unstable } from './useApplyStyles';
+import { useTabStyles_unstable } from './useTabStyles';
 import { renderTab_unstable } from './renderTab';
 
 /**
@@ -8,7 +8,7 @@ import { renderTab_unstable } from './renderTab';
  */
 export const Tab = (props: TabProps) => {
   const state = useTab_unstable(props);
-  useApplyStyles_unstable(state);
+  useTabStyles_unstable(state);
   return renderTab_unstable(state);
 };
 Tab.displayName = 'Tab';

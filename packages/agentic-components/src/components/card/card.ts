@@ -1,6 +1,6 @@
 import type { CardProps } from './card.types';
 import { useCard_unstable } from './useCard';
-import { useApplyStyles_unstable } from './useApplyStyles';
+import { useCardStyles_unstable } from './useCardStyles';
 import { renderCard_unstable } from './renderCard';
 
 /**
@@ -8,7 +8,7 @@ import { renderCard_unstable } from './renderCard';
  */
 export const Card = (props: CardProps) => {
   const state = useCard_unstable(props);
-  useApplyStyles_unstable(state);
+  useCardStyles_unstable(state);
   return renderCard_unstable(state);
 };
 

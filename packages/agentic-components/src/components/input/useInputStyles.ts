@@ -5,7 +5,7 @@ import { attachSlotProps } from '@fluentui-react-native/framework-base';
 import { inputStyles } from './input.styles';
 import type { InputState } from './input.types';
 
-export function useApplyStyles_unstable(state: InputState) {
+export function useInputStyles_unstable(state: InputState) {
   const rootStyle: StyleProp<ViewStyle> = [inputStyles.root, state.rootStyle, state.userStyle];
   const contentsStyle: StyleProp<ViewStyle> = [inputStyles.contents, state.contentsStyle];
   const iconTextStackStyle: StyleProp<ViewStyle> = [inputStyles.iconTextStack, state.iconTextStackStyle];
