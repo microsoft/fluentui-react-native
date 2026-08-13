@@ -81,16 +81,18 @@ tokens:
     hit-area:
       token: spacing.componentBase200
       rationale: >
-        Transparent padding around the track enlarges the pointer hit target.
+        Transparent padding around the track to enlarge the pointer hit target.
         The hit-area padding is invisible — the track's border, background fill,
         and border-radius define the inner pill shape and must not stretch to
-        fill the padded box.
+        fill the padded box. In CSS this means the visible pill (stroke + fill)
+        is an inner element or pseudo-element inside the hit-area surface. The
+        focus ring wraps the outer hit-area box, not the inner pill.
     label:
       inner: spacing.componentBase100
       outer: spacing.componentBase200
       rationale: >
         Inner (closest to switch) is 4px for tight coupling; outer is 8px for
-        breathing room at the component boundary.
+        breathing room at the component boundary. Confirmed from Figma source.
     gap:
       notes: >
         Gap between track and label is handled by label padding, not a gap token.
@@ -112,14 +114,17 @@ sizes:
     track-height: 20px
     thumb-diameter: 14px
     thumb-inset: 2px
-    resultant-height: 36px
+    resultant-height: 36px # track 20 + outer hit-area padding 8×2. Switch is a fixed-dimensional control, not a typography-driven resultant — the formula is geometry-from-tokens, not text-from-tokens.
     notes: >
       Single size. Track is 20px tall (including stroke). Hit area adds 8px padding
       on each side, giving a 36px interactive surface. No size variants exist.
     inset-rule: >
       Thumb-inset is the breathing room between the thumb and the inner stroke
       on every side at rest. It is derived from the vertical fit and applied
-      symmetrically on both axes.
+      symmetrically on both axes — the same value sets the top/bottom centring
+      gap and the left/right anchor gap at each end position. This guarantees
+      the thumb looks identically positioned in unchecked rest (anchored at
+      start) and checked rest (anchored at end).
 
       Formula (platform-agnostic; all measurements taken inside the stroke):
 
@@ -132,9 +137,10 @@ sizes:
 
       Constraints when choosing dimensions:
         - (track-height − 2 × stroke-width − thumb-diameter) must be even, so
-          thumb-inset is an integer.
+          thumb-inset is an integer. Non-integer insets render blurry on
+          bitmap platforms (iOS, Android, Figma).
         - thumb-diameter < track-width − 2 × stroke-width − 2 × thumb-inset,
-          so the slide-distance is positive.
+          so the slide-distance is positive (the thumb actually moves).
 
 properties:
   component:
