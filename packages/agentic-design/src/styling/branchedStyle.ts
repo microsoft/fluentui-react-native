@@ -1,6 +1,7 @@
 import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
-import type { FlexTokens, ThemeState } from '@fluentui-react-native/design';
+import type { FlexTokens } from '../tokens/flex.types';
+import type { ThemeState } from '../useThemeState';
 
 type AnyStyle = ViewStyle | ImageStyle | TextStyle;
 
