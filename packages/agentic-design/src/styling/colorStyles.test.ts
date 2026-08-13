@@ -1,5 +1,6 @@
-import { useFlexTokens } from '@fluentui-react-native/design';
-import type { FlexTokens, ThemeState } from '@fluentui-react-native/design';
+import type { FlexTokens } from '../tokens/flex.types';
+import { useFlexTokens } from '../tokens/useFlexTokens';
+import type { ThemeState } from '../useThemeState';
 
 import { colorStyleDef, getThemedColorStyleFactory } from './colorStyles';
 import type { ColorStyleDefinition, ViewColorStyle } from './colorStyles';

@@ -29,13 +29,13 @@ Use four layers:
 
 Never create a style factory inside a hook or render function.
 
-Reuse the package's existing factory utilities:
+Reuse the design package's `@fluentui-react-native/design/styling` submodule:
 
-- [`getStateStyleFactory`](../../../../packages/agentic-components/src/utils/branchedStyle.ts) lazily flattens and caches
+- [`getStateStyleFactory`](../../../../packages/agentic-design/src/styling/branchedStyle.ts) lazily flattens and caches
   one theme-independent state definition.
-- [`getThemedStateStyleFactory`](../../../../packages/agentic-components/src/utils/branchedStyle.ts) resolves and caches
+- [`getThemedStateStyleFactory`](../../../../packages/agentic-design/src/styling/branchedStyle.ts) resolves and caches
   one flattened definition per `ThemeState`.
-- [`getThemedColorStyleFactory`](../../../../packages/agentic-components/src/utils/colorStyles.ts) converts semantic
+- [`getThemedColorStyleFactory`](../../../../packages/agentic-design/src/styling/colorStyles.ts) converts semantic
   color keys and delegates its hierarchy and caching to `getThemedStateStyleFactory`.
 
 These are the canonical Button mechanisms and cache plain resolved style objects in `state.themeStyles`. Do not wrap them
