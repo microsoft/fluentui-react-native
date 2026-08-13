@@ -1,6 +1,6 @@
 ---
 component: Spinner
-platform: react-native (Windows, macOS)
+platform: react-native (Windows & macOS)
 ---
 
 # Spinner Accessibility (React Native — Windows & macOS)

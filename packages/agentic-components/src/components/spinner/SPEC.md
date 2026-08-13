@@ -3,17 +3,17 @@ name: spinner
 platform: react-native (Windows, macOS)
 description: Atomic non-interactive indeterminate progress indicator — a continuously rotating arc on a low-emphasis ring. Single variant axis (Size) across eight steps from inline-with-text (16px) to focal-element (44px).
 argument-hint: "[e.g. 'which size for inline text', 'reduced-motion behavior', 'vs Skeleton']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata
 
-| Field     | Value   |
-| --------- | ------- |
-| Type      | atomic  |
+| Field     | Value     |
+| --------- | --------- |
+| Type      | atomic    |
 | Component | Spinner |
 
 This spec covers the Spinner component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (animation, reduced motion) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
@@ -47,7 +47,7 @@ Variant properties are ordered in the design tool: **Size**.
 | **Tiny**    | 20px     | `--gnrc-stroke-width-thin`    | Inline with a Small Button or Small Input.                                           |
 | **X-Small** | 24px     | `--gnrc-stroke-width-thin`    | Inline with a Medium Button or Medium Input.                                         |
 | **Small**   | 28px     | `--gnrc-stroke-width-thick`   | Inline with a Large Button or Large Input. Standalone in compact regions.            |
-| **Medium**  | 32px     | `--gnrc-stroke-width-thick`   | Default for standalone spinners that occupy their own region.                        |
+| **Medium**  | 32px     | `--gnrc-stroke-width-thick`   | Default for standalone spinners that occupy their own region.                         |
 | **Large**   | 36px     | `--gnrc-stroke-width-thicker` | Empty-state regions, modal dialogs, or large empty containers.                       |
 | **X-Large** | 40px     | `--gnrc-stroke-width-thicker` | Full-page spinner inside an overlay or hero section.                                 |
 | **Huge**    | 44px     | `--gnrc-stroke-width-thicker` | Marketing or onboarding contexts where the spinner is the focal element.             |
