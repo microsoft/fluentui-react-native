@@ -81,6 +81,9 @@ Test at minimum:
 - user event forwarding and style overrides
 - icon-only accessibility and minimum target size where applicable
 
+Follow the package-level Storybook instructions in `../../AGENTS.md` and keep Button's stories as the canonical
+higher-order example.
+
 Use React Native Testing Library assertions against public accessibility semantics and resolved output. Prefer matchers
 such as `toBeDisabled()` and assertions on `accessibilityState` over host-component implementation props. If a platform
 adapter does not expose an inner primitive through the expected accessibility role, query a stable `testID` rather than

@@ -147,15 +147,6 @@ Run it alongside `yarn start` + `yarn macos` or `yarn windows`. The on-device ap
 
 ## Writing stories
 
-Add a `*.stories.ts(x)` file next to a component in `../src/components/<name>/`. See
-`../src/components/button/button.stories.ts` for the CSF format:
-
-```ts
-import type { Meta, StoryObj } from '@storybook/react-native';
-import { Button } from './button';
-
-const meta: Meta<typeof Button> = { title: 'Components/Button', component: Button };
-export default meta;
-
-export const Default: StoryObj<typeof Button> = {};
-```
+Follow the package-level story authoring instructions in `../AGENTS.md`. Add a `*.stories.tsx` file next to its component
+under `../src`; the `src/main.ts` glob discovers it automatically. See
+`../src/components/button/button.stories.tsx` for the canonical higher-order component example.
