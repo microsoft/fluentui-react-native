@@ -1,12 +1,12 @@
 ---
 name: listbox-item
-platform: react-native (Windows, macOS)
+platform: react-native (Windows & macOS)
 description: Atomic selectable option row used inside a Dropdown's Popover (or any selection overlay). Mirrors MenuItem anatomy — leading icon or avatar, primary label, Right/Under secondary content, optional checkmark, chevron, and multiselect checkbox slots — but renders as a focusable button with aria-pressed for selection state.
 argument-hint: "[variant axis or token question, e.g. 'Selected=True tokens' or 'aria-pressed vs aria-checked']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata
@@ -39,19 +39,17 @@ Answer design questions directly — lead with rationale, then tokens. ListboxIt
 9. **Checkmark** — optional 16px icon inside the Trailing container indicating single-select selection state. Positioned after the chevron slot — aligned with the Multiselect checkbox zone so all selection indicators occupy the same trailing region. Shown when `Checkmark` prop is true.
 10. **Multiselect checkbox** — optional `flex-components:checkbox` instance inside the Trailing container, after the checkmark slot. Shown when `Multiselect` prop is true. Checkmark and Multiselect are mutually exclusive and share the same trailing zone. Uses square style, label hidden. The Checkbox visual Status maps to the ListboxItem's Selected axis: Selected=True → Checked, Selected=False → Unchecked. The Checkbox uses its standard standalone styling (brand-heavy fill, onLoud indicator when Checked). The Multiselect Checkbox is **presentational** — the row's own `aria-pressed` (carried on the container `<button>`) is what assistive technology announces. **The ListboxItem row itself does not apply its own selected styling when Multiselect is active** — no soft background fill, no Semibold label weight. The checkbox independently communicates the selection state. The icon swap (Regular→Filled on Selected=True) still applies — it is driven by the Selected axis universally, regardless of selection pattern.
 
-| Slot              | Required              | Default        |
-| ----------------- | --------------------- | -------------- |
-| Label             | Yes (List Item style) | "Listbox item" |
-| Icon              | No                    | Shown          |
-| Avatar            | No                    | Hidden         |
-| Secondary content | No                    | Shown          |
-| Chevron           | No                    | Hidden         |
-| Checkmark         | No                    | Hidden         |
-| Multiselect       | No                    | Hidden         |
+| Slot              | Required                   | Default        |
+| ----------------- | -------------------------- | -------------- |
+| Label             | Yes (List Item style)      | "Listbox item" |
+| Icon              | No                         | Shown          |
+| Avatar            | No                         | Hidden         |
+| Secondary content | No                         | Shown          |
+| Chevron           | No                         | Hidden         |
+| Checkmark         | No                         | Hidden         |
+| Multiselect       | No                         | Hidden         |
 
 > **Font-weight swap (primary Label only):** A ghost Semibold node reserves layout width at opacity 0 above the primary Label; a visible Regular or Semibold node renders on top. Selected=False shows Regular, Selected=True shows Semibold. This prevents container width reflow on selection. Secondary content stays Regular weight across the Selected axis — no swap pattern applies there.
-
----
 
 ### Variants
 
@@ -88,7 +86,7 @@ Variant properties are ordered in the design tool: **Secondary content position 
 
 **Why Loading exists only on Section Header:** Loading represents the entire option list being fetched. The Section Header skeleton signals structure while options load. Individual List Items do not have a Loading state — they are either present or absent.
 
-**Why Focused is a State on the option:** ListboxItem rows receive real DOM focus from the parent Dropdown (arrow keys move focus between row buttons). The Focused state renders the universal dual-outline ring (see `flex-system:styling`) whenever the row's `<button>` matches `:focus-visible` — the same pattern used by every other focusable element in the system.
+**Why Focused is a State on the option:** ListboxItem rows receive real DOM focus from the parent Dropdown (arrow keys move focus between row buttons). The Focused state renders the universal dual-outline focus ring (see `flex-system:styling`) whenever the row's `<button>` matches `:focus-visible` — the same pattern used by every other focusable element in the system.
 
 #### Selected
 
@@ -98,8 +96,6 @@ Variant properties are ordered in the design tool: **Secondary content position 
 | **True**  | Soft background fill; Semibold weight label. Secondary content stays Regular but promotes to primary foreground. |
 
 **Selected is a variant axis, not a State.** It runs in parallel with State — a Hover+Selected=True option is valid. Selected indicates that this is the currently-chosen value (single-select) or one of the chosen values (multi-select), not momentary interaction. Maps to `aria-pressed` on the row's `<button>`.
-
----
 
 ### Used by
 

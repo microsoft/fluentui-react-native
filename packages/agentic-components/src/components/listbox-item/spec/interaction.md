@@ -1,6 +1,6 @@
 ---
 component: ListboxItem
-platform: react-native (Windows, macOS)
+platform: react-native (Windows & macOS)
 ---
 
 # ListboxItem Interaction (React Native — Windows & macOS)
