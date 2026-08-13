@@ -1,4 +1,4 @@
-import type { Animated, AccessibilityState, AccessibilityValue, StyleProp, View, ViewProps, ViewStyle } from 'react-native';
+import type { Animated, AccessibilityState, AccessibilityValue, ColorValue, StyleProp, View, ViewProps, ViewStyle } from 'react-native';
 
 import type { ComponentProps, ComponentState, OptionalSlot, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
@@ -41,7 +41,7 @@ export type ProgressBarState = ComponentState<ProgressBarStateSlots> &
     accessibilityState?: AccessibilityState;
     accessibilityValue?: AccessibilityValue;
     styles: ProgressBarThemeStyles;
-    indicatorColor: string;
+    indicatorColor: ColorValue;
     indicatorTranslateX: Animated.Value;
     indicatorTransitionDuration: string;
     indicatorWidth: number;
@@ -50,5 +50,5 @@ export type ProgressBarState = ComponentState<ProgressBarStateSlots> &
     rootStyle: StyleProp<ViewStyle>;
     showValidationIcon: boolean;
     trackLayoutWidth: number;
-    validationIconColor: string;
+    validationIconColor: ColorValue;
   };

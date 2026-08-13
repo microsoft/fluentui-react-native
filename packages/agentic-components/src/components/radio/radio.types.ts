@@ -34,6 +34,7 @@ export type RadioStateProps = {
 };
 
 export type RadioExposedPressableProps = Omit<PressableProps, 'children' | 'style'> & {
+  children?: never;
   style?: StyleProp<ViewStyle>;
 };
 

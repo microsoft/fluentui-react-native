@@ -27,6 +27,7 @@ export type CheckboxStateProps = {
 };
 
 export type CheckboxRootProps = Omit<PressableProps, 'children' | 'style'> & {
+  children?: never;
   style?: StyleProp<ViewStyle>;
 };
 

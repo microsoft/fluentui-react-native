@@ -115,14 +115,14 @@ describe('Switch', () => {
   it('positions labels according to layout', async () => {
     const horizontal = await renderSwitch({ afterLabel: false, label: 'Wi-Fi', labelBefore: true, layout: 'horizontal' });
     const horizontalContainer = horizontal.getByTestId('switch-layout-container');
-    const horizontalChildren = horizontalContainer.children as Array<{ props: { accessibilityRole?: string; children?: unknown } }>;
+    const horizontalChildren = horizontalContainer.children as { props: { accessibilityRole?: string; children?: unknown } }[];
 
     expect(horizontalChildren[0].props.children).toBe('Wi-Fi');
     expect(horizontalChildren[1].props.accessibilityRole).toBe('switch');
 
     const vertical = await renderSwitch({ label: 'Wi-Fi', layout: 'vertical' });
     const verticalContainer = vertical.getByTestId('switch-layout-container');
-    const verticalChildren = verticalContainer.children as Array<{ props: { accessibilityRole?: string; children?: unknown } }>;
+    const verticalChildren = verticalContainer.children as { props: { accessibilityRole?: string; children?: unknown } }[];
 
     expect(verticalChildren[0].props.children).toBe('Wi-Fi');
     expect(verticalChildren[1].props.accessibilityRole).toBe('switch');

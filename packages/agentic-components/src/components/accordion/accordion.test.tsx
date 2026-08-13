@@ -109,19 +109,11 @@ describe('Accordion', () => {
   it('places the chevron at the leading or trailing edge according to layout', async () => {
     const start = await renderAccordion({ layout: 'chevronStart' });
     const end = await renderAccordion({ layout: 'chevronEnd' });
-    const startChildren = getHeader(start).children as Array<{ props: { testID?: string } }>;
-    const endChildren = getHeader(end).children as Array<{ props: { testID?: string } }>;
+    const startChildren = getHeader(start).children as { props: { testID?: string } }[];
+    const endChildren = getHeader(end).children as { props: { testID?: string } }[];
 
-    expect(startChildren.map((child) => child.props.testID)).toEqual([
-      'accordion-chevron',
-      'accordion-leading-icon',
-      'accordion-title',
-    ]);
-    expect(endChildren.map((child) => child.props.testID)).toEqual([
-      'accordion-leading-icon',
-      'accordion-title',
-      'accordion-chevron',
-    ]);
+    expect(startChildren.map((child) => child.props.testID)).toEqual(['accordion-chevron', 'accordion-leading-icon', 'accordion-title']);
+    expect(endChildren.map((child) => child.props.testID)).toEqual(['accordion-leading-icon', 'accordion-title', 'accordion-chevron']);
   });
 
   it('renders custom title and body slots', async () => {

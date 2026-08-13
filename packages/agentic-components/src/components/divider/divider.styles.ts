@@ -6,12 +6,12 @@ import { getThemedStateStyleFactory } from '../../utils/branchedStyle';
 import type { StyleDefinition } from '../../utils/branchedStyle';
 import type { DividerState } from './divider.types';
 
-function getStyleDimensionValue(value: unknown): number | string {
+function getGapValue(value: FlexTokens['spacing']['componentBase150']): NonNullable<ViewStyle['gap']> {
   if (typeof value === 'number' || typeof value === 'string') {
     return value;
   }
 
-  throw new TypeError('Divider spacing tokens must resolve to a number or string.');
+  throw new TypeError('Divider gap tokens must resolve to a number or string.');
 }
 
 export const dividerStyles = StyleSheet.create({
@@ -49,8 +49,8 @@ export function getDividerRootStyle(state: DividerState): ViewStyle {
 }
 
 function createContentStyleDefinition({ spacing }: FlexTokens): StyleDefinition<ViewStyle, OrientationStateLevels> {
-  const padding = getStyleDimensionValue(spacing.componentBase300);
-  const gap = getStyleDimensionValue(spacing.componentBase150);
+  const padding = spacing.componentBase300;
+  const gap = getGapValue(spacing.componentBase150);
 
   return {
     horizontal: {
@@ -64,19 +64,21 @@ function createContentStyleDefinition({ spacing }: FlexTokens): StyleDefinition<
   };
 }
 
-const getThemedContentStyle = getThemedStateStyleFactory(
-  'Divider.content',
-  createContentStyleDefinition,
-  orientationStateLevels,
-);
+const getThemedContentStyle = getThemedStateStyleFactory('Divider.content', createContentStyleDefinition, orientationStateLevels);
 
 export function getDividerContentStyle(state: DividerState): ViewStyle {
   return getThemedContentStyle(state, [state.vertical ? 'vertical' : 'horizontal']);
 }
 
-function createLabelStyleDefinition({ color, fontFamily, fontSize, fontWeight, lineHeight }: FlexTokens): StyleDefinition<TextStyle, OrientationStateLevels> {
-  const bodySmallSize = getStyleDimensionValue(fontSize.functionalBodySmall);
-  const bodySmallLineHeight = getStyleDimensionValue(lineHeight.functionalBodySmall);
+function createLabelStyleDefinition({
+  color,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  lineHeight,
+}: FlexTokens): StyleDefinition<TextStyle, OrientationStateLevels> {
+  const bodySmallSize = fontSize.functionalBodySmall;
+  const bodySmallLineHeight = lineHeight.functionalBodySmall;
 
   return {
     horizontal: {
@@ -104,7 +106,7 @@ export function getDividerLabelStyle(state: DividerState): TextStyle {
 
 export function getDividerLineStyle(state: DividerState, position: 'before' | 'after'): ViewStyle {
   const isStub = (state.layout === 'start' && position === 'before') || (state.layout === 'end' && position === 'after');
-  const flexBasis = isStub ? getStyleDimensionValue(state.tokens.spacing.componentBase100) : 0;
+  const flexBasis = isStub ? state.tokens.spacing.componentBase100 : 0;
 
   return {
     backgroundColor: state.tokens.color.strokeNeutralSubtle,

@@ -25,7 +25,10 @@ export const tagStyles = StyleSheet.create({
   },
 });
 
-const backgroundStateLevels = [['primary', 'secondary'], ['disabled', 'pressed', 'hovered']] as const;
+const backgroundStateLevels = [
+  ['primary', 'secondary'],
+  ['disabled', 'pressed', 'hovered'],
+] as const;
 type BackgroundStateLevels = typeof backgroundStateLevels;
 type BackgroundState = StateNames<BackgroundStateLevels>;
 
@@ -103,9 +106,21 @@ export function getTagForegroundStyle(state: TagState): TextColorStyle {
   return getThemedForegroundStyle(state, getForegroundStateSource(state));
 }
 
-const rootStateLevels = [['small', 'medium'], ['iconAndText', 'iconOnly'], ['rounded', 'circular']] as const;
+const rootStateLevels = [
+  ['small', 'medium'],
+  ['iconAndText', 'iconOnly'],
+  ['rounded', 'circular'],
+] as const;
 type RootStateLevels = typeof rootStateLevels;
 type RootState = StateNames<RootStateLevels>;
+
+function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullable<ViewStyle['gap']> {
+  if (typeof value === 'number' || typeof value === 'string') {
+    return value;
+  }
+
+  throw new TypeError('Tag gap tokens must resolve to a number or string.');
+}
 
 function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): StyleDefinition<ViewStyle, RootStateLevels> {
   return {
@@ -122,7 +137,7 @@ function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): Style
         },
         rounded: {
           borderRadius: borderRadius.base200,
-          gap: spacing.componentBase50,
+          gap: getGapValue(spacing.componentBase50),
           paddingHorizontal: spacing.componentBase200,
           paddingVertical: spacing.componentBase100,
         },
@@ -140,13 +155,13 @@ function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): Style
       iconAndText: {
         circular: {
           borderRadius: borderRadius.circular,
-          gap: spacing.componentBase50,
+          gap: getGapValue(spacing.componentBase50),
           paddingHorizontal: spacing.componentBase250,
           paddingVertical: spacing.componentBase150,
         },
         rounded: {
           borderRadius: borderRadius.base300,
-          gap: spacing.componentBase50,
+          gap: getGapValue(spacing.componentBase50),
           paddingHorizontal: spacing.componentBase250,
           paddingVertical: spacing.componentBase150,
         },
@@ -154,7 +169,7 @@ function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): Style
       iconOnly: {
         circular: {
           borderRadius: borderRadius.circular,
-          gap: spacing.componentBase50,
+          gap: getGapValue(spacing.componentBase50),
           paddingHorizontal: spacing.componentBase150,
           paddingVertical: spacing.componentBase150,
         },
@@ -175,7 +190,13 @@ export function getTagRootStyle(state: TagState): ViewStyle {
 
 const contentStateLevels = [['small', 'medium'], ['disabled']] as const;
 
-function createContentStyleDefinition({ fontFamily, fontSize, fontWeight, lineHeight, spacing }: FlexTokens): StyleDefinition<TextStyle, typeof contentStateLevels> {
+function createContentStyleDefinition({
+  fontFamily,
+  fontSize,
+  fontWeight,
+  lineHeight,
+  spacing,
+}: FlexTokens): StyleDefinition<TextStyle, typeof contentStateLevels> {
   return {
     fontFamily: fontFamily.functional,
     small: {

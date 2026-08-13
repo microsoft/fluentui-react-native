@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AccessibilityInfo, Animated, Easing, View } from 'react-native';
-import type { AccessibilityState, AccessibilityValue } from 'react-native';
+import type { AccessibilityState, AccessibilityValue, ColorValue } from 'react-native';
 
 import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
@@ -24,7 +24,7 @@ function clampProgress(value: number | undefined): number {
   return Math.min(100, Math.max(0, number));
 }
 
-function getStatusColor(themeState: ReturnType<typeof useThemeState>, status: ProgressBarStatus): string {
+function getStatusColor(themeState: ReturnType<typeof useThemeState>, status: ProgressBarStatus): ColorValue {
   const { color } = themeState.tokens;
   switch (status) {
     case 'error':
@@ -136,7 +136,7 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
     if (type !== 'indeterminate' || isReduceMotionEnabled || trackLayoutWidth <= 0) {
       indeterminateAnimation.current?.stop();
       indicatorTranslateX.setValue(0);
-      return;
+      return undefined;
     }
 
     const indicatorWidth = Math.max(trackLayoutWidth * DEFAULT_INDETERMINATE_SEGMENT_RATIO, 16);
@@ -166,7 +166,7 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
     type === 'indeterminate'
       ? undefined
       : {
-          ...(accessibilityValue ?? {}),
+          ...accessibilityValue,
           max: 100,
           min: 0,
           now: resolvedDeterminateProgress,
@@ -174,7 +174,7 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
         };
 
   const accessibilityStateToUse: AccessibilityState | undefined = {
-    ...(accessibilityState ?? {}),
+    ...accessibilityState,
     ...(type === 'indeterminate' ? { busy: true } : {}),
   };
 
@@ -189,11 +189,7 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
   });
   const validationIcon = useOptionalSlot(
     Icon,
-    showValidationIcon
-      ? validationIconProp === null
-        ? null
-        : validationIconProp ?? getDefaultIcon(status)
-      : null,
+    showValidationIcon ? (validationIconProp === null ? null : (validationIconProp ?? getDefaultIcon(status))) : null,
     {
       defaultProps: {
         accessible: false,

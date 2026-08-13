@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native';
-import type { PressableProps, ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
@@ -37,10 +37,15 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
   const iconSlotProp = iconProp === null ? null : iconProp;
   const selectedIconSlotProp = selectedIconProp === null ? null : selectedIconProp;
   const icon = isListItem ? useOptionalSlot(Icon, iconSlotProp, { defaultProps: defaultRegularIcon, renderByDefault: true }) : undefined;
-  const selectedIcon = isListItem ? useOptionalSlot(Icon, selectedIconSlotProp, { defaultProps: defaultFilledIcon, renderByDefault: true }) : undefined;
+  const selectedIcon = isListItem
+    ? useOptionalSlot(Icon, selectedIconSlotProp, { defaultProps: defaultFilledIcon, renderByDefault: true })
+    : undefined;
   const avatar = isListItem ? useOptionalSlot(View, avatarProp) : undefined;
-  const secondaryContent =
-    isListItem ? useOptionalSlot(Text, secondaryContentProp === undefined ? { children: 'Secondary' } : secondaryContentProp, { renderByDefault: true }) : undefined;
+  const secondaryContent = isListItem
+    ? useOptionalSlot(Text, secondaryContentProp === undefined ? { children: 'Secondary' } : secondaryContentProp, {
+        renderByDefault: true,
+      })
+    : undefined;
 
   const rootAccessibilityState = isListItem
     ? {
@@ -67,17 +72,7 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     } as never;
   }
 
-  const {
-    onBlur,
-    onFocus,
-    onHoverIn,
-    onHoverOut,
-    onLongPress,
-    onPress,
-    onPressIn,
-    onPressOut,
-    ...headerRest
-  } = rootProps;
+  const { onBlur, onFocus, onHoverIn, onHoverOut, onLongPress, onPress, onPressIn, onPressOut, ...headerRest } = rootProps;
   const headerProps: ViewProps = headerRest as unknown as ViewProps;
 
   return {

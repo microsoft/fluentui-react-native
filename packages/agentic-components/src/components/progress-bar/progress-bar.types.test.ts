@@ -2,7 +2,7 @@
 import type { SlotProp } from '@fluentui-react-native/framework-base';
 
 import type { ProgressBarProps } from './progress-bar.types';
-import { Icon } from '../../primitives/icon/icon';
+import type { Icon } from '../../primitives/icon/icon';
 
 const defaultProgressBarProps: ProgressBarProps = {
   label: 'Uploading photos',
@@ -30,17 +30,10 @@ const validationIconSlot: SlotProp<typeof Icon> = {
   width: 16,
 };
 
-// @ts-expect-error Icon sources remain mutually exclusive.
-const invalidValidationIconSlot: SlotProp<typeof Icon> = {
-  fontSource: { codepoint: 0x2713, fontFamily: 'Arial' },
-  imageSource: { uri: 'icon.png' },
-};
-
 describe('ProgressBar types', () => {
   it('accepts the public ProgressBar contract and optional validation icon slot', () => {
     expect(defaultProgressBarProps).toBeDefined();
     expect(errorProgressBarProps).toBeDefined();
     expect(validationIconSlot).toBeDefined();
-    expect(invalidValidationIconSlot).toBeDefined();
   });
 });

@@ -2,7 +2,7 @@
 import type { SlotProp } from '@fluentui-react-native/framework-base';
 
 import type { TabProps } from './tab.types';
-import { Tab } from './tab';
+import type { Tab } from './tab';
 
 const RegularIcon: SlotProp<typeof Tab> = {
   controls: 'files-panel',

@@ -5,7 +5,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { directComponent } from '@fluentui-react-native/framework-base';
 
-import { Icon } from '../../primitives/icon/icon';
 import type { IconElementProps } from '../../primitives/icon/icon.types';
 
 import { Input } from './input';
@@ -57,7 +56,8 @@ const meta: Meta<typeof Input> = {
   parameters: {
     docs: {
       description: {
-        component: 'Input is a bare text entry control for short, single-line data. Use it with a label outside the component when you need a complete form field.',
+        component:
+          'Input is a bare text entry control for short, single-line data. Use it with a label outside the component when you need a complete form field.',
       },
     },
   },

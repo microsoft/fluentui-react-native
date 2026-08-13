@@ -2,10 +2,11 @@
 import * as React from 'react';
 import { directComponent } from '@fluentui-react-native/framework-base';
 import type { SlotProp } from '@fluentui-react-native/framework-base';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import type { Text } from 'react-native';
 
 import type { DividerProps } from './divider.types';
-import { Divider } from './divider';
+import type { Divider } from './divider';
 import type { Icon } from '../../primitives/icon/icon';
 import type { IconElementProps } from '../../primitives/icon/icon.types';
 

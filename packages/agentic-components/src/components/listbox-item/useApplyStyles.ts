@@ -4,7 +4,6 @@ import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import {
   getListboxItemAvatarSize,
-  getListboxItemCheckmarkSize,
   getListboxItemFocusStyle,
   getListboxItemGhostLabelStyle,
   getListboxItemHeaderStyle,
@@ -20,7 +19,12 @@ import {
 import type { ListboxItemState } from './listbox-item.types';
 
 export function useApplyStyles_unstable(state: ListboxItemState) {
-  const rootStyle: StyleProp<ViewStyle> = [listboxItemStyles.root, getListboxItemRootStyle(state), getListboxItemFocusStyle(state), state.userStyle];
+  const rootStyle: StyleProp<ViewStyle> = [
+    listboxItemStyles.root,
+    getListboxItemRootStyle(state),
+    getListboxItemFocusStyle(state),
+    state.userStyle,
+  ];
   state.rootProps.style = rootStyle;
 
   const headerStyle: StyleProp<ViewStyle> = [listboxItemStyles.root, getListboxItemHeaderStyle(state), state.userStyle];

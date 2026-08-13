@@ -5,8 +5,8 @@ import { directComponent } from '@fluentui-react-native/framework-base';
 import { View } from 'react-native';
 
 import type { IconElementProps } from '../../primitives/icon/icon.types';
-import { Icon } from '../../primitives/icon/icon';
-import { Tag } from './tag';
+import type { Icon } from '../../primitives/icon/icon';
+import type { Tag } from './tag';
 import type { TagProps } from './tag.types';
 
 const LeadingIcon: SlotProp<typeof Icon> = { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' } };

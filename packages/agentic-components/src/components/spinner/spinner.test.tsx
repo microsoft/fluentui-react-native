@@ -1,7 +1,6 @@
-// @ts-nocheck
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { AccessibilityInfo, Animated, Easing, StyleSheet, processColor } from 'react-native';
-import type { ViewStyle } from 'react-native';
+import type { ColorValue, ViewStyle } from 'react-native';
 
 import { render, waitFor } from '@testing-library/react-native';
 
@@ -24,19 +23,23 @@ function getRootStyle(component: Awaited<ReturnType<typeof renderSpinner>>): Vie
 }
 
 function getSvg(component: Awaited<ReturnType<typeof renderSpinner>>) {
-  return getRoot(component).children[0];
+  const svg = getRoot(component).children[0];
+  if (typeof svg === 'string') {
+    throw new TypeError('Spinner root must render an SVG element.');
+  }
+  return svg;
 }
 
-function getTrack(component: Awaited<ReturnType<typeof renderSpinner>>): any {
-  return component.getByTestId('spinner-track') as any;
+function getTrack(component: Awaited<ReturnType<typeof renderSpinner>>) {
+  return component.getByTestId('spinner-track');
 }
 
-function getIndicator(component: Awaited<ReturnType<typeof renderSpinner>>): any {
-  return component.getByTestId('spinner-indicator') as any;
+function getIndicator(component: Awaited<ReturnType<typeof renderSpinner>>) {
+  return component.getByTestId('spinner-indicator');
 }
 
-function normalizeColor(value: unknown) {
-  return { payload: processColor(value as never), type: 0 };
+function normalizeColor(value: ColorValue) {
+  return { payload: processColor(value), type: 0 };
 }
 
 describe('Spinner', () => {
@@ -54,8 +57,8 @@ describe('Spinner', () => {
     const component = await renderSpinner({ accessibilityLabel: 'Loading messages' });
     const root = getRoot(component);
     const svg = getSvg(component);
-    const track: any = getTrack(component);
-    const indicator: any = getIndicator(component);
+    const track = getTrack(component);
+    const indicator = getIndicator(component);
     const tokens = useFlexTokens();
 
     expect(root.props.accessibilityRole).toBe('progressbar');
@@ -65,11 +68,11 @@ describe('Spinner', () => {
     expect(getRootStyle(component)).toMatchObject({ height: 32, width: 32 });
     expect(svg.props.width).toBe(32);
     expect(svg.props.height).toBe(32);
-    expect((track as any).props.stroke).toEqual(normalizeColor(tokens.color.strokeNeutralSubtle));
-    expect((track as any).props.strokeWidth).toBe(tokens.strokeWidth.thick);
-    expect((indicator as any).props.stroke).toEqual(normalizeColor(tokens.color.strokeNeutralLoud));
-    expect((indicator as any).props.strokeDasharray).toEqual(['25', '75']);
-    expect((indicator as any).props.strokeWidth).toBe(tokens.strokeWidth.thick);
+    expect(track.props.stroke).toEqual(normalizeColor(tokens.color.strokeNeutralSubtle));
+    expect(track.props.strokeWidth).toBe(tokens.strokeWidth.thick);
+    expect(indicator.props.stroke).toEqual(normalizeColor(tokens.color.strokeNeutralLoud));
+    expect(indicator.props.strokeDasharray).toEqual(['25', '75']);
+    expect(indicator.props.strokeWidth).toBe(tokens.strokeWidth.thick);
   });
 
   it.each([
@@ -85,14 +88,14 @@ describe('Spinner', () => {
     jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(true);
     const component = await renderSpinner({ accessibilityLabel: size, size });
     const tokens = useFlexTokens();
-    const track: any = getTrack(component);
-    const indicator: any = getIndicator(component);
+    const track = getTrack(component);
+    const indicator = getIndicator(component);
 
     expect(getRootStyle(component)).toMatchObject({ height: diameter, width: diameter });
     expect(getSvg(component).props.width).toBe(diameter);
     expect(getSvg(component).props.height).toBe(diameter);
-    expect((track as any).props.strokeWidth).toBe(tokens.strokeWidth[strokeWidthToken]);
-    expect((indicator as any).props.strokeWidth).toBe(tokens.strokeWidth[strokeWidthToken]);
+    expect(track.props.strokeWidth).toBe(tokens.strokeWidth[strokeWidthToken]);
+    expect(indicator.props.strokeWidth).toBe(tokens.strokeWidth[strokeWidthToken]);
   });
 
   it('warns when no accessible name is supplied', async () => {
@@ -101,7 +104,9 @@ describe('Spinner', () => {
 
     await renderSpinner({});
 
-    expect(warn).toHaveBeenCalledWith('Spinner: accessibilityLabel or accessibilityLabelledBy is required when the spinner is exposed directly.');
+    expect(warn).toHaveBeenCalledWith(
+      'Spinner: accessibilityLabel or accessibilityLabelledBy is required when the spinner is exposed directly.',
+    );
     warn.mockRestore();
   });
 

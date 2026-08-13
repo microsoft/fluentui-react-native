@@ -1,6 +1,6 @@
 import type { Animated, StyleProp, ViewProps, ViewStyle } from 'react-native';
-import { View } from 'react-native';
-import { Svg } from 'react-native-svg';
+import type { View } from 'react-native';
+import type { Svg } from 'react-native-svg';
 
 import type { ComponentProps, ComponentState, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';

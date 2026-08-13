@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { SlotProp } from '@fluentui-react-native/framework-base';
-import { Text, View } from 'react-native';
+import type { Text, View } from 'react-native';
 
 import type { Icon } from '../../primitives/icon/icon';
 import type { ListItemProps, ListItemStateProps } from './list-item.types';
-import { ListItem } from './list-item';
+import type { ListItem } from './list-item';
 
 const PrimaryTextSlot: SlotProp<typeof Text> = 'List item';
 const SecondaryTextSlot: SlotProp<typeof Text> = { children: 'Secondary' };
@@ -33,8 +33,8 @@ const ListItemSlot: SlotProp<typeof ListItem> = {
   selectionMode: 'multiple',
 };
 
-// @ts-expect-error Invalid selection mode should be rejected.
 const BadSelectionMode: ListItemStateProps = {
+  // @ts-expect-error Invalid selection mode should be rejected.
   selectionMode: 'option',
 };
 

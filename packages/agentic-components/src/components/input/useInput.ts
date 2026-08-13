@@ -17,7 +17,7 @@ type InteractiveTextInputProps = TextInputProps & {
   onPressOut?: (...args: any[]) => void;
 };
 
-function mergeHandlers<TArgs extends unknown[]>(...handlers: Array<((...args: TArgs) => void) | undefined>) {
+function mergeHandlers<TArgs extends unknown[]>(...handlers: (((...args: TArgs) => void) | undefined)[]) {
   return (...args: TArgs) => {
     for (const handler of handlers) {
       handler?.(...args);
@@ -25,7 +25,9 @@ function mergeHandlers<TArgs extends unknown[]>(...handlers: Array<((...args: TA
   };
 }
 
-function getVisualState(props: Pick<InputState, 'disabled' | 'error' | 'readOnly'> & { focused: boolean; hovered: boolean; pressed: boolean }): InputVisualState {
+function getVisualState(
+  props: Pick<InputState, 'disabled' | 'error' | 'readOnly'> & { focused: boolean; hovered: boolean; pressed: boolean },
+): InputVisualState {
   if (props.disabled) {
     return 'disabled';
   }
@@ -161,7 +163,7 @@ export function useInput_unstable(props: InputProps): InputState {
         readOnly,
       } as InputAccessibilityState,
       accessible: slotProps.accessible ?? accessible ?? true,
-      editable: disabled || readOnly ? false : slotProps.editable ?? true,
+      editable: disabled || readOnly ? false : (slotProps.editable ?? true),
       focusable: slotProps.focusable ?? focusable ?? !disabled,
       onBlur: mergeHandlers(slotProps.onBlur, onBlur, handleBlur),
       onChangeText: mergeHandlers(slotProps.onChangeText, onChangeText, handleChangeText),

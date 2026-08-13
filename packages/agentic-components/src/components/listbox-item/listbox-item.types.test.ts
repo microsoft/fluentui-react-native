@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { SlotProp } from '@fluentui-react-native/framework-base';
-import { View } from 'react-native';
+import type { View } from 'react-native';
 
 import type { Icon } from '../../primitives/icon/icon';
 import type { IconElementProps } from '../../primitives/icon/icon.types';

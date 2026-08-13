@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { SlotProp } from '@fluentui-react-native/framework-base';
 
-import { Avatar } from './avatar';
+import type { Avatar } from './avatar';
 import type { AvatarProps } from './avatar.types';
 
 const ImageAvatarProps: AvatarProps = {

@@ -85,7 +85,7 @@ export const Overview: Story = {
 export const Layout: Story = {
   render: () => (
     <StoryGroup label="Chevron layout">
-      {layouts.map(({ label, value }) => (
+      {layouts.map(({ value }) => (
         <Accordion key={value} layout={value} />
       ))}
     </StoryGroup>
@@ -157,7 +157,8 @@ export const Accessibility: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Use an explicit accessibilityLabel when the visible title is not sufficient, and the focused prop to preview the focus ring.',
+        story:
+          'Use an explicit accessibilityLabel when the visible title is not sufficient, and the focused prop to preview the focus ring.',
       },
     },
   },

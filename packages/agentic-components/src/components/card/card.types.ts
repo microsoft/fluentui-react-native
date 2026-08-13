@@ -30,6 +30,7 @@ export type CardStateProps = {
 };
 
 export type CardExposedPressableProps = Omit<PressableProps, 'children' | 'style' | 'accessibilityRole'> & {
+  children?: never;
   style?: StyleProp<ViewStyle>;
 };
 

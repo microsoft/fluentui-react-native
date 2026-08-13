@@ -33,11 +33,13 @@ export function useSkeleton_unstable(props: SkeletonProps): SkeletonState {
   React.useEffect(() => {
     let mounted = true;
 
-    AccessibilityInfo.isReduceMotionEnabled().then((enabled) => {
-      if (mounted) {
-        setReduceMotion(enabled);
-      }
-    }).catch(() => undefined);
+    AccessibilityInfo.isReduceMotionEnabled()
+      .then((enabled) => {
+        if (mounted) {
+          setReduceMotion(enabled);
+        }
+      })
+      .catch(() => undefined);
 
     const subscription = AccessibilityInfo.addEventListener('reduceMotionChanged', setReduceMotion);
     return () => {
@@ -49,7 +51,7 @@ export function useSkeleton_unstable(props: SkeletonProps): SkeletonState {
   React.useEffect(() => {
     if (reduceMotion || layout.width <= 0 || layout.height <= 0) {
       progress.stopAnimation(() => progress.setValue(0));
-      return;
+      return undefined;
     }
 
     progress.setValue(0);
