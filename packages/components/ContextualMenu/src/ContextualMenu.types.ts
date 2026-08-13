@@ -39,28 +39,32 @@ export interface ContextualMenuState {
 
 export type ContextualMenuTokens = ICalloutTokens;
 
-export interface ContextualMenuProps extends IViewProps, Omit<ICalloutProps, 'setInitialFocus'> {
-  /**
-   * Whether to set initial focus on the contextual menu container, as opposed to the first menu item.
-   * @platform win32
-   */
-  shouldFocusOnContainer?: boolean;
+// ContextualMenu owns its desktop view extensions without widening the Callout primitive contract.
+type ContextualMenuCalloutProps = Omit<ICalloutProps, keyof IViewProps | 'setInitialFocus'>;
 
-  /**
-   * Whether to focus on the menu when mounted
-   */
-  shouldFocusOnMount?: boolean;
+export type ContextualMenuProps = IViewProps &
+  ContextualMenuCalloutProps & {
+    /**
+     * Whether to set initial focus on the contextual menu container, as opposed to the first menu item.
+     * @platform win32
+     */
+    shouldFocusOnContainer?: boolean;
 
-  /**
-   * Callback for when menu item is clicked
-   */
-  onItemClick?: (key: string) => void;
+    /**
+     * Whether to focus on the menu when mounted
+     */
+    shouldFocusOnMount?: boolean;
 
-  /**
-   * Callback to toggle showContextualMenu to false and close menu on item click
-   */
-  setShowMenu?: (showMenu: boolean) => void;
-}
+    /**
+     * Callback for when menu item is clicked
+     */
+    onItemClick?: (key: string) => void;
+
+    /**
+     * Callback to toggle showContextualMenu to false and close menu on item click
+     */
+    setShowMenu?: (showMenu: boolean) => void;
+  };
 
 export type ContextualMenuSlotProps = {
   root: ContextualMenuProps;

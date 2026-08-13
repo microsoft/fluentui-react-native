@@ -4,7 +4,7 @@ import Foundation
 import React
 #endif // USE_REACT_AS_MODULE
 
-@objc(FRNCalloutManager)
+@objc(RCTCalloutManager)
 class CalloutManager: RCTViewManager {
 	override func view()->NSView! {
 		return CalloutView(bridge: bridge)

@@ -4,7 +4,7 @@ import { AccessibilityInfo, Platform, ScrollView, Switch, Text, View } from 'rea
 
 import { ButtonV1 as Button, Separator, Pressable } from '@fluentui/react-native';
 import type { IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
-import type { CalloutNativeCommands, ICalloutProps } from '@fluentui-react-native/callout';
+import type { CalloutHandle, CalloutProps } from '@fluentui-react-native/callout';
 import { Callout } from '@fluentui-react-native/callout';
 import { CALLOUT_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 
@@ -63,7 +63,7 @@ const StandardCallout: React.FunctionComponent = () => {
     [calloutDismissBehaviors],
   );
 
-  const calloutRef = React.useRef<CalloutNativeCommands>(null);
+  const calloutRef = React.useRef<CalloutHandle>(null);
   const calloutButtonRef = React.useRef<IFocusable>(null);
   const redTargetRef = React.useRef<View>(null);
   const blueTargetRef = React.useRef<View>(null);
@@ -172,13 +172,13 @@ const StandardCallout: React.FunctionComponent = () => {
   }, []);
 
   const onShiftFocusToCallout = React.useCallback(() => {
-    calloutRef?.current.focusWindow(null);
+    calloutRef?.current.focusWindow();
   }, [calloutRef]);
   const onShiftFocusToCalloutButton = React.useCallback(() => {
     calloutButtonRef?.current?.focus?.();
   }, [calloutButtonRef]);
   const onShiftFocusToPage = React.useCallback(() => {
-    calloutRef?.current.blurWindow(null);
+    calloutRef?.current.blurWindow();
   }, [calloutRef]);
   const onRestoreFocusStandardCallout = React.useCallback(
     (restoreFocusEvent: RestoreFocusEvent) => {
@@ -237,7 +237,7 @@ const StandardCallout: React.FunctionComponent = () => {
     setScrollviewContents((arr) => [...arr, 1]);
   }, [setScrollviewContents]);
 
-  const calloutTargetOrAnchor: Partial<ICalloutProps> = {};
+  const calloutTargetOrAnchor: Partial<CalloutProps> = {};
   if (anchorRef) {
     calloutTargetOrAnchor.target = anchorRef;
   } else {
