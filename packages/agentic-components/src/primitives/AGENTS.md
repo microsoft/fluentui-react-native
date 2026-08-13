@@ -1,18 +1,21 @@
 # Primitive component authoring
 
-These instructions apply to `packages/agentic-components/src/primitives` and its descendants.
+These instructions apply to `packages/agentic-components/src/primitives` and its descendants. Use `primitives/icon` as
+the canonical implementation.
 
-- Primitives are unstyled building blocks for higher-order components. Do not read themes, apply design tokens, or choose
-  product-level appearance defaults in a primitive.
-- Design primitive props as a small acceptance contract for slots. Higher-order components must be able to provide sizing,
-  color, accessibility, and source props through `SlotProp`.
-- Prefer a hook-free `directComponent` when the primitive only selects an inner component or transforms props. This keeps
-  the primitive as a pure wrapper with no extra React boundary when consumed as a slot.
-- Forward accessibility and test props to the inner element. Do not silently replace values supplied by a consuming
-  component.
-- Keep source variants mutually exclusive when a primitive can wrap several inner component types.
-- Add compile-time `SlotProp` coverage, runtime coverage for each inner component type, and Storybook stories that follow
-  `../../AGENTS.md` and demonstrate the primitive without adding component-level styling.
-- Test with React Native Testing Library and assert the primitive's public props and resolved output. Some platform
-  adapters do not expose inner images through role queries consistently; use a stable `testID` in that case rather than
-  importing React Test Renderer or asserting renderer-specific tree structure.
+## Non-negotiable invariants
+
+- Primitives are unstyled building blocks. Do not read themes, apply design tokens, or choose product appearance
+  defaults.
+- Define the smallest acceptance contract needed for `SlotProp` consumption.
+- Prefer a hook-free `directComponent` when the primitive only selects an inner component or transforms props.
+- Forward accessibility and test props without replacing consumer values.
+- Keep alternative source or renderer props mutually exclusive.
+- Add compile-time `SlotProp` coverage and runtime coverage for every renderer branch.
+- Demonstrate the primitive in Storybook without adding component-level styling.
+
+## Focused references
+
+- [Types and slots](../../../../.github/skills/agentic-component-authoring/references/types-and-slots.md)
+- [Rendering and assembly](../../../../.github/skills/agentic-component-authoring/references/rendering.md)
+- [Tests and stories](../../../../.github/skills/agentic-component-authoring/references/tests-and-stories.md)
