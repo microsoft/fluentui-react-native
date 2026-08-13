@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/codemods
 
+## 0.6.5
+
+### Patch Changes
+
+- 801d8b1: Switch to the released typescript 7
+- 5b5afea: Remove depcheck script, allow jest to run tests with platform module suffixes
+
 ## 0.6.4
 
 ### Patch Changes
