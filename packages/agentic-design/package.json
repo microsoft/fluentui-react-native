@@ -38,6 +38,12 @@
       "import": "./lib/testing/index.js",
       "default": "./src/testing/index.ts"
     },
+    "./styling": {
+      "types": "./lib/styling/index.d.ts",
+      "react-native": "./src/styling/index.ts",
+      "import": "./lib/styling/index.js",
+      "default": "./src/styling/index.ts"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
