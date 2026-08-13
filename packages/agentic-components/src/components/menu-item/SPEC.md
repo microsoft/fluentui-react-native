@@ -3,18 +3,18 @@ name: menu-item
 platform: react-native (Windows, macOS)
 description: Atomic interactive option within a menu surface. Covers two styles (List Item and Section Header), secondary content positioning (Right/Under), Selected toggle axis, and optional slots for checkmark, icon, avatar, chevron, and multiselect checkbox.
 argument-hint: "[variant axis or token question, e.g. 'Selected=True tokens' or 'Section Header accessibility']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata
 
-| Field     | Value    |
-| --------- | -------- |
-| Type      | atomic   |
-| Component | MenuItem |
+| Field     | Value     |
+| --------- | --------- |
+| Type      | atomic    |
+| Component | MenuItem  |
 
 This spec covers the MenuItem component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
 
@@ -48,8 +48,6 @@ Answer design questions directly — lead with rationale, then tokens. The most 
 | Multiselect       | No                    | Hidden      |
 
 > **Font-weight swap:** A ghost Semibold node reserves layout width at opacity 0; a visible Regular or Semibold node renders on top. Selected=False shows Regular, Selected=True shows Semibold. This prevents container width reflow on selection.
-
----
 
 ### Variants
 
@@ -91,8 +89,6 @@ Variant properties are ordered: **Secondary content position → Style → State
 | --------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | **Right** | Secondary content sits to the right of the label on the same row | Default. Keyboard shortcuts, metadata, counts                                                  |
 | **Under** | Secondary content stacks below the label in a column             | When secondary content is longer (email addresses, descriptions) or when vertical space allows |
-
----
 
 ### Related: MenuSplitItem
 

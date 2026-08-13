@@ -1,0 +1,153 @@
+import { Pressable, View } from 'react-native';
+
+import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useThemeState } from '@fluentui-react-native/design';
+
+import { Icon } from '../../primitives/icon/icon';
+import {
+  getMenuItemGhostStyle,
+  getMenuItemLabelStyle,
+  getMenuItemSecondaryStyle,
+  menuItemIcons,
+} from './menu-item.styles';
+import type { MenuItemProps, MenuItemState } from './menu-item.types';
+
+const defaultRegularIcon = menuItemIcons.regular;
+const defaultSelectedIcon = menuItemIcons.selected;
+const defaultChevron = menuItemIcons.chevron;
+const defaultCheckmark = menuItemIcons.checkmark;
+
+export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
+  const {
+    accessibilityLabel,
+    accessibilityHint,
+    avatar: avatarProp,
+    checkmark: checkmarkProp,
+    chevron: chevronProp,
+    content,
+    secondaryContent,
+    secondaryContentPosition = 'right',
+    disabled = false,
+    hasCheckmark = false,
+    hasChevron = false,
+    hasMultiselect = false,
+    loading = false,
+    menuStyle = 'list-item',
+    selected = false,
+    icon: iconProp,
+    selectedIcon: selectedIconProp,
+    multiselectCheckbox: multiselectCheckboxProp,
+    style: userStyle,
+    ...rest
+  } = props;
+
+  const isListItem = menuStyle === 'list-item';
+  const isInteractive = isListItem && !loading;
+  const isSelectionIndicator = hasCheckmark || hasMultiselect;
+  const isSelectedVisual = selected && !hasMultiselect && isListItem;
+  const contentText = content ?? 'Menu item';
+  const secondaryContentText = secondaryContent === undefined ? 'Secondary' : secondaryContent;
+  const hasSecondaryContent = secondaryContentText !== null && secondaryContentText !== undefined && secondaryContentText !== '';
+  const themeState = useThemeState();
+
+  if (__DEV__ && hasCheckmark && hasMultiselect) {
+    console.warn('MenuItem: checkmark and multiselect are mutually exclusive.');
+  }
+
+  const [pressableProps, pressableState] = usePressableState({
+    ...rest,
+    accessible: rest.accessible ?? true,
+    accessibilityHint: accessibilityHint ?? (hasChevron ? 'Has submenu' : undefined),
+    accessibilityLabel: accessibilityLabel ?? contentText,
+    accessibilityRole: isListItem
+      ? hasMultiselect
+        ? 'menuitemcheckbox'
+        : hasCheckmark
+          ? 'menuitemradio'
+          : 'menuitem'
+      : 'none',
+    accessibilityState: {
+      ...props.accessibilityState,
+      disabled: disabled && isInteractive,
+      ...(isSelectionIndicator ? { checked: selected } : isSelectedVisual ? { selected: true } : {}),
+    },
+    disabled: !isInteractive || disabled,
+    focusable: isInteractive && !disabled,
+    onPress: isInteractive ? rest.onPress : undefined,
+  });
+
+  const root = useSlot(Pressable, pressableProps);
+  const icon = useOptionalSlot(Icon, iconProp, { defaultProps: defaultRegularIcon, renderByDefault: true });
+  const selectedIcon = useOptionalSlot(Icon, selectedIconProp, { defaultProps: defaultSelectedIcon, renderByDefault: selected });
+  const avatar = useOptionalSlot(View, avatarProp);
+  const chevronSlot = useOptionalSlot(Icon, chevronProp, { defaultProps: defaultChevron, renderByDefault: hasChevron });
+  const checkmarkSlot = useOptionalSlot(Icon, checkmarkProp, { defaultProps: defaultCheckmark, renderByDefault: hasCheckmark || hasMultiselect });
+  const multiselectCheckbox = useOptionalSlot(View, multiselectCheckboxProp, { renderByDefault: hasMultiselect });
+
+  const styleState = {
+    ...themeState,
+    ...pressableState,
+    contentGhostStyle: {} as never,
+    contentStyle: {} as never,
+    contentText,
+    disabled,
+    hasCheckmark,
+    hasChevron,
+    hasMultiselect,
+    hasSecondaryContent,
+    icon,
+    isListItem,
+    isSelectedVisual,
+    loading,
+    menuStyle,
+    multiselectCheckbox,
+    secondaryContentPosition,
+    secondaryContentText,
+    secondaryGhostStyle: {} as never,
+    secondaryStyle: {} as never,
+    selected,
+    selectedIcon,
+    userStyle,
+    rootAccessibilityHint: pressableProps.accessibilityHint,
+    rootAccessibilityLabel: pressableProps.accessibilityLabel ?? contentText,
+    root: undefined as never,
+    avatar,
+    checkmark: checkmarkSlot,
+    chevron: chevronSlot,
+  } as MenuItemState;
+
+  const labelStyle = getMenuItemLabelStyle(styleState);
+  const secondaryStyle = getMenuItemSecondaryStyle(styleState);
+
+  return {
+    ...themeState,
+    ...pressableState,
+    avatar,
+    checkmark: checkmarkSlot,
+    chevron: chevronSlot,
+    contentGhostStyle: getMenuItemGhostStyle(labelStyle),
+    contentStyle: labelStyle,
+    contentText,
+    disabled,
+    hasSecondaryContent,
+    icon,
+    isListItem,
+    isSelectedVisual,
+    loading,
+    menuStyle,
+    multiselectCheckbox,
+    root,
+    secondaryContentPosition,
+    secondaryContentText,
+    secondaryGhostStyle: getMenuItemGhostStyle(secondaryStyle),
+    secondaryStyle,
+    selected,
+    selectedIcon,
+    userStyle,
+    rootAccessibilityHint: pressableProps.accessibilityHint,
+    rootAccessibilityLabel: pressableProps.accessibilityLabel ?? contentText,
+    hasCheckmark,
+    hasChevron,
+    hasMultiselect,
+  };
+}

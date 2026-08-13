@@ -108,6 +108,7 @@ tokens:
   motion:
     status: pending
     guidance: State color transitions should be fast (typically <=150ms) with standard ease-in-out. Reduced motion — remove transitions entirely.
+
 sizes:
   height: auto
   height-notes: Item height is derived from vertical padding + content line-height + inner gap (Under only). No explicit height constraint.
@@ -121,8 +122,7 @@ sizes:
       notes: >
         The single-select checkmark is a plain SVG icon — it is NOT a flex-components:checkbox instance.
         It has no background, no stroke, no border radius, and no interaction states of its own.
-        It inherits foreground color from the parent menu item row and toggles visibility based on
-        the Selected axis. Do not apply Checkbox component tokens to this slot.
+        It inherits foreground color from the parent menu item row and toggles visibility based on the Selected axis. Do not apply Checkbox component tokens to this slot.
     chevron: 20px
     avatar: 16px
     multiselect-checkbox:

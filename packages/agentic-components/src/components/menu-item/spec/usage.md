@@ -19,8 +19,6 @@ Button triggers a discrete action and lives in the page flow. MenuItem lives ins
 
 Tag represents applied metadata or filters and is dismissed on click. MenuItem represents available options within a menu. MenuItem's Selected state means "this option is chosen"; Tag has no Selected state.
 
----
-
 ## Behavior
 
 - **Never use Section Header as an interactive item.** Section Headers are non-focusable labels. Use List Item for all interactive options.
@@ -28,8 +26,6 @@ Tag represents applied metadata or filters and is dismissed on click. MenuItem r
 - **Never mix Checkmark and Multiselect on the same item.** Checkmark indicates single-select (radio); Multiselect uses a Checkbox component instance for multi-select. The parent menu determines which pattern is active.
 - **Always use a label-hidden Checkbox instance for Multiselect.** The Checkbox component's label is hidden — the MenuItem label serves as the accessible name. Use square style only.
 - **Always prevent layout reflow on selectable items.** When the Selected axis is active, the label weight changes from Regular to Semibold. Reserve layout space at Semibold width using a ghost node or hidden pseudo-element.
-
----
 
 ## Content
 

@@ -20,8 +20,6 @@ platform: react-native (Windows, macOS)
   - **2.5.8 — Target Size (Minimum, AA):** Minimum interactive target height is 40px (met by the default item height).
 - **Screen reader:** Announces label, role, and state (checked/unchecked for selection, disabled when applicable, "has submenu" when Chevron is present).
 
----
-
 ## Usage
 
 - **Correct ARIA role per selection pattern:** Use `menuitemradio` for single-select with Checkmark; `menuitemcheckbox` for Multiselect; `menuitem` for non-selectable actions.
