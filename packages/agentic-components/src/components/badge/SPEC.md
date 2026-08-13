@@ -3,10 +3,10 @@ name: badge
 platform: react-native (Windows, macOS)
 description: Atomic non-interactive indicator that communicates a status, count, or category for an associated UI element. Two styles (Outline, Tint), five colors (Brand, Danger, Success, Warning, Informative), two sizes, two shapes, two layouts (Icon and text, Icon only), and independent Leading icon + Trailing icon slots.
 argument-hint: "[variant axis or token question, e.g. 'Tint color tokens' or 'why no focus ring']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata
@@ -39,7 +39,7 @@ Answer design questions directly — lead with rationale, then tokens. The two m
 | Label         | Yes on `Icon and text`; hidden on `Icon only`                                                                    | Badge                |
 | Trailing icon | No (controlled by `Trailing icon` BOOLEAN, default false); not rendered on `Icon only`                           | Image icon (Regular) |
 
-> **At least one of Leading icon, Label, or Trailing icon should be visible.** The defaults enforce this in the dropped-in state (Layout=Icon and text, Label string=Badge, Leading icon=true). On `Layout=Icon only`, the Leading icon is structurally always visible. The empty state — Layout=Icon and text with both icon BOOLEANs off and Label string blanked — is reachable but not a default authoring path; authors must actively produce it.
+> **At least one of Leading icon, Label, or Trailing icon should be visible.** The defaults enforce this in the dropped-in state (Layout=Icon and text, Label string=Badge, Leading icon=true, Trailing icon=false). On `Layout=Icon only`, the Leading icon is structurally always visible. The empty state — Layout=Icon and text with both icon BOOLEANs off and Label string blanked — is reachable but not a default authoring path; authors must actively produce it.
 
 ---
 
@@ -50,7 +50,7 @@ Variant properties are ordered in the design tool: **Style → Color → Size �
 #### Style
 
 | Value       | Description                                                    | When to Use                                                                                                                                    |
-| ----------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| ----------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Outline** | Transparent fill, 1px colored stroke, colored foreground       | When the badge sits on a surface whose background already communicates context (a card, an active row) and a fill would over-saturate the area |
 | **Tint**    | Soft colored fill, no stroke, colored foreground. **Default.** | General-purpose. Reads as a softly colored chip — strong enough to draw the eye, quiet enough to sit next to body text                         |
 

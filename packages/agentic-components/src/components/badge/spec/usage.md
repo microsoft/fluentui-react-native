@@ -54,5 +54,5 @@ Message Bar communicates page-level or section-level status with optional action
   - **Danger** — errors, blocked items, destructive state
   - **Success** — completed, healthy, confirmed
   - **Warning** — caution, attention-needed, non-blocking issue
-  - **Informative** — quiet metadata, counts, neutral status
+  - **Informative** — quiet, metadata, counts, neutral status
 - **Avoid mixing colors in a single row.** A row of Badges with mixed Brand / Danger / Success colors creates visual noise. Pick the most relevant color per item or settle on one color across the row.
