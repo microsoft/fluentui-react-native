@@ -9,7 +9,7 @@ platform: react-native (Windows, macOS)
 
 - **ARIA role:** `button` on the tag element.
 - **Required attributes:**
-  - `aria-label` — required on Icon only layout; must describe the tag category, not the icon (e.g., "Remove Engineering filter", not "X icon"). For Icon and text layout, the label text serves as the accessible name; supplement with an `aria-label` if the dismiss intent is not clear from context (e.g., "Dismiss {tag name}").
+  - `aria-label` — required on Icon only layout; must describe the tag category, not the icon (e.g., "Remove Engineering filter", not "X icon").
   - `aria-disabled="true"` — use on disabled tags that should remain in the tab order. Use native `disabled` when the tag should be excluded from interaction entirely.
 - **WCAG:**
   - **1.4.3 — Contrast (Minimum):** All text and icon colors must meet 4.5:1 against their background at rest. This applies to both styles — Primary (`neutral-onloud` on `brand-heavy`) and Secondary (`brand-primary` on `brand-soft`). Verify disabled tokens — intentionally below full contrast but should remain legible.
