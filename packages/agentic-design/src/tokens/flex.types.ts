@@ -7,204 +7,196 @@ type BorderRadius = ViewStyle['borderRadius'];
 type StrokeWidth = ViewStyle['borderWidth'];
 
 /**
- * The themable semantic token set: all `SemanticColors` plus the shadow tokens.
- */
-export type FlexTokens = SemanticColors & SemanticShadows;
-
-/**
- * Flat map of every semantic color token to its rest value. Keys are the
- * camelCased `--gnrc-*` names, each prefixed with `color` so the color tokens
- * can be merged into a single flat token object alongside future non-color
- * tokens (spacing, radius, etc.). Interactive tokens carry only their rest
- * value here; their `hover`/`pressed` states live in `SemanticColors`.
+ * Every semantic color token's rest value. Interactive tokens carry only their
+ * rest value here; their `hover`/`pressed` states live in `SemanticColors`.
  */
 export type SemanticColorTokenValues = {
   // surface / neutral
-  colorSurfaceNeutralFarther: ColorValue;
-  colorSurfaceNeutralFar: ColorValue;
-  colorSurfaceNeutralNear: ColorValue;
-  colorSurfaceNeutralNearer: ColorValue;
-  colorSurfaceNeutralTranslucent: ColorValue;
+  surfaceNeutralFarther: ColorValue;
+  surfaceNeutralFar: ColorValue;
+  surfaceNeutralNear: ColorValue;
+  surfaceNeutralNearer: ColorValue;
+  surfaceNeutralTranslucent: ColorValue;
 
   // background / neutral
-  colorBackgroundNeutralHeavy: ColorValue;
-  colorBackgroundNeutralLoud: ColorValue;
-  colorBackgroundNeutralSoft: ColorValue;
-  colorBackgroundNeutralSubtle: ColorValue;
-  colorBackgroundNeutralTransparent: ColorValue;
-  colorBackgroundNeutralTranslucent: ColorValue;
+  backgroundNeutralHeavy: ColorValue;
+  backgroundNeutralLoud: ColorValue;
+  backgroundNeutralSoft: ColorValue;
+  backgroundNeutralSubtle: ColorValue;
+  backgroundNeutralTransparent: ColorValue;
+  backgroundNeutralTranslucent: ColorValue;
 
   // background / brand
-  colorBackgroundBrandHeavy: ColorValue;
-  colorBackgroundBrandLoud: ColorValue;
-  colorBackgroundBrandSoft: ColorValue;
-  colorBackgroundBrandSubtle: ColorValue;
-  colorBackgroundBrandTransparent: ColorValue;
+  backgroundBrandHeavy: ColorValue;
+  backgroundBrandLoud: ColorValue;
+  backgroundBrandSoft: ColorValue;
+  backgroundBrandSubtle: ColorValue;
+  backgroundBrandTransparent: ColorValue;
 
   // background / danger
-  colorBackgroundDangerLoud: ColorValue;
-  colorBackgroundDangerSoft: ColorValue;
-  colorBackgroundDangerSubtle: ColorValue;
+  backgroundDangerLoud: ColorValue;
+  backgroundDangerSoft: ColorValue;
+  backgroundDangerSubtle: ColorValue;
 
   // background / warning
-  colorBackgroundWarningLoud: ColorValue;
-  colorBackgroundWarningSoft: ColorValue;
-  colorBackgroundWarningSubtle: ColorValue;
+  backgroundWarningLoud: ColorValue;
+  backgroundWarningSoft: ColorValue;
+  backgroundWarningSubtle: ColorValue;
 
   // background / success
-  colorBackgroundSuccessLoud: ColorValue;
-  colorBackgroundSuccessSoft: ColorValue;
-  colorBackgroundSuccessSubtle: ColorValue;
+  backgroundSuccessLoud: ColorValue;
+  backgroundSuccessSoft: ColorValue;
+  backgroundSuccessSubtle: ColorValue;
 
   // stroke / neutral
-  colorStrokeNeutralHeavy: ColorValue;
-  colorStrokeNeutralLoud: ColorValue;
-  colorStrokeNeutralSoft: ColorValue;
-  colorStrokeNeutralSubtle: ColorValue;
-  colorStrokeNeutralTransparent: ColorValue;
-  colorStrokeNeutralOnloud: ColorValue;
+  strokeNeutralHeavy: ColorValue;
+  strokeNeutralLoud: ColorValue;
+  strokeNeutralSoft: ColorValue;
+  strokeNeutralSubtle: ColorValue;
+  strokeNeutralTransparent: ColorValue;
+  strokeNeutralOnloud: ColorValue;
 
   // stroke / brand
-  colorStrokeBrandLoud: ColorValue;
-  colorStrokeBrandSoft: ColorValue;
-  colorStrokeBrandSubtle: ColorValue;
-  colorStrokeBrandOnloud: ColorValue;
+  strokeBrandLoud: ColorValue;
+  strokeBrandSoft: ColorValue;
+  strokeBrandSubtle: ColorValue;
+  strokeBrandOnloud: ColorValue;
 
   // stroke / danger
-  colorStrokeDangerLoud: ColorValue;
-  colorStrokeDangerSoft: ColorValue;
-  colorStrokeDangerSubtle: ColorValue;
-  colorStrokeDangerOnloud: ColorValue;
+  strokeDangerLoud: ColorValue;
+  strokeDangerSoft: ColorValue;
+  strokeDangerSubtle: ColorValue;
+  strokeDangerOnloud: ColorValue;
 
   // stroke / warning
-  colorStrokeWarningLoud: ColorValue;
-  colorStrokeWarningSoft: ColorValue;
-  colorStrokeWarningSubtle: ColorValue;
-  colorStrokeWarningOnloud: ColorValue;
+  strokeWarningLoud: ColorValue;
+  strokeWarningSoft: ColorValue;
+  strokeWarningSubtle: ColorValue;
+  strokeWarningOnloud: ColorValue;
 
   // stroke / success
-  colorStrokeSuccessLoud: ColorValue;
-  colorStrokeSuccessSoft: ColorValue;
-  colorStrokeSuccessSubtle: ColorValue;
-  colorStrokeSuccessOnloud: ColorValue;
+  strokeSuccessLoud: ColorValue;
+  strokeSuccessSoft: ColorValue;
+  strokeSuccessSubtle: ColorValue;
+  strokeSuccessOnloud: ColorValue;
 
   // foreground / neutral
-  colorForegroundNeutralPrimary: ColorValue;
-  colorForegroundNeutralSecondary: ColorValue;
-  colorForegroundNeutralTertiary: ColorValue;
-  colorForegroundNeutralOnloud: ColorValue;
+  foregroundNeutralPrimary: ColorValue;
+  foregroundNeutralSecondary: ColorValue;
+  foregroundNeutralTertiary: ColorValue;
+  foregroundNeutralOnloud: ColorValue;
 
   // foreground / brand
-  colorForegroundBrandPrimary: ColorValue;
-  colorForegroundBrandOnloud: ColorValue;
+  foregroundBrandPrimary: ColorValue;
+  foregroundBrandOnloud: ColorValue;
 
   // foreground / danger
-  colorForegroundDangerPrimary: ColorValue;
-  colorForegroundDangerOnloud: ColorValue;
+  foregroundDangerPrimary: ColorValue;
+  foregroundDangerOnloud: ColorValue;
 
   // foreground / warning
-  colorForegroundWarningPrimary: ColorValue;
-  colorForegroundWarningOnloud: ColorValue;
+  foregroundWarningPrimary: ColorValue;
+  foregroundWarningOnloud: ColorValue;
 
   // foreground / success
-  colorForegroundSuccessPrimary: ColorValue;
-  colorForegroundSuccessOnloud: ColorValue;
+  foregroundSuccessPrimary: ColorValue;
+  foregroundSuccessOnloud: ColorValue;
 
   // fixed
-  colorFixedWhite: ColorValue;
-  colorFixedBlack: ColorValue;
+  fixedWhite: ColorValue;
+  fixedBlack: ColorValue;
 
   // expression / accent
-  colorExpressionAccentHeavy: ColorValue;
-  colorExpressionAccentLoud: ColorValue;
-  colorExpressionAccentSoft: ColorValue;
-  colorExpressionAccentSubtle: ColorValue;
+  expressionAccentHeavy: ColorValue;
+  expressionAccentLoud: ColorValue;
+  expressionAccentSoft: ColorValue;
+  expressionAccentSubtle: ColorValue;
 
   // expression / achromatic
-  colorExpressionAchromaticHeavy: ColorValue;
-  colorExpressionAchromaticSubtle: ColorValue;
+  expressionAchromaticHeavy: ColorValue;
+  expressionAchromaticSubtle: ColorValue;
 
   // expression / gray
-  colorExpressionGrayHeavy: ColorValue;
-  colorExpressionGrayLoud: ColorValue;
-  colorExpressionGraySoft: ColorValue;
-  colorExpressionGraySubtle: ColorValue;
+  expressionGrayHeavy: ColorValue;
+  expressionGrayLoud: ColorValue;
+  expressionGraySoft: ColorValue;
+  expressionGraySubtle: ColorValue;
 
   // expression / navy
-  colorExpressionNavyHeavy: ColorValue;
-  colorExpressionNavyLoud: ColorValue;
-  colorExpressionNavySoft: ColorValue;
-  colorExpressionNavySubtle: ColorValue;
+  expressionNavyHeavy: ColorValue;
+  expressionNavyLoud: ColorValue;
+  expressionNavySoft: ColorValue;
+  expressionNavySubtle: ColorValue;
 
   // expression / blue
-  colorExpressionBlueHeavy: ColorValue;
-  colorExpressionBlueLoud: ColorValue;
-  colorExpressionBlueSoft: ColorValue;
-  colorExpressionBlueSubtle: ColorValue;
+  expressionBlueHeavy: ColorValue;
+  expressionBlueLoud: ColorValue;
+  expressionBlueSoft: ColorValue;
+  expressionBlueSubtle: ColorValue;
 
   // expression / green
-  colorExpressionGreenHeavy: ColorValue;
-  colorExpressionGreenLoud: ColorValue;
-  colorExpressionGreenSoft: ColorValue;
-  colorExpressionGreenSubtle: ColorValue;
+  expressionGreenHeavy: ColorValue;
+  expressionGreenLoud: ColorValue;
+  expressionGreenSoft: ColorValue;
+  expressionGreenSubtle: ColorValue;
 
   // expression / lime
-  colorExpressionLimeHeavy: ColorValue;
-  colorExpressionLimeLoud: ColorValue;
-  colorExpressionLimeSoft: ColorValue;
-  colorExpressionLimeSubtle: ColorValue;
+  expressionLimeHeavy: ColorValue;
+  expressionLimeLoud: ColorValue;
+  expressionLimeSoft: ColorValue;
+  expressionLimeSubtle: ColorValue;
 
   // expression / yellow
-  colorExpressionYellowHeavy: ColorValue;
-  colorExpressionYellowLoud: ColorValue;
-  colorExpressionYellowSoft: ColorValue;
-  colorExpressionYellowSubtle: ColorValue;
+  expressionYellowHeavy: ColorValue;
+  expressionYellowLoud: ColorValue;
+  expressionYellowSoft: ColorValue;
+  expressionYellowSubtle: ColorValue;
 
   // expression / pumpkin
-  colorExpressionPumpkinHeavy: ColorValue;
-  colorExpressionPumpkinLoud: ColorValue;
-  colorExpressionPumpkinSoft: ColorValue;
-  colorExpressionPumpkinSubtle: ColorValue;
+  expressionPumpkinHeavy: ColorValue;
+  expressionPumpkinLoud: ColorValue;
+  expressionPumpkinSoft: ColorValue;
+  expressionPumpkinSubtle: ColorValue;
 
   // expression / red
-  colorExpressionRedHeavy: ColorValue;
-  colorExpressionRedLoud: ColorValue;
-  colorExpressionRedSoft: ColorValue;
-  colorExpressionRedSubtle: ColorValue;
+  expressionRedHeavy: ColorValue;
+  expressionRedLoud: ColorValue;
+  expressionRedSoft: ColorValue;
+  expressionRedSubtle: ColorValue;
 
   // expression / pink
-  colorExpressionPinkHeavy: ColorValue;
-  colorExpressionPinkLoud: ColorValue;
-  colorExpressionPinkSoft: ColorValue;
-  colorExpressionPinkSubtle: ColorValue;
+  expressionPinkHeavy: ColorValue;
+  expressionPinkLoud: ColorValue;
+  expressionPinkSoft: ColorValue;
+  expressionPinkSubtle: ColorValue;
 
   // expression / purple
-  colorExpressionPurpleHeavy: ColorValue;
-  colorExpressionPurpleLoud: ColorValue;
-  colorExpressionPurpleSoft: ColorValue;
-  colorExpressionPurpleSubtle: ColorValue;
+  expressionPurpleHeavy: ColorValue;
+  expressionPurpleLoud: ColorValue;
+  expressionPurpleSoft: ColorValue;
+  expressionPurpleSubtle: ColorValue;
 
   // overlay
-  colorOverlayNeutralTranslucent: ColorValue;
+  overlayNeutralTranslucent: ColorValue;
 
   // material / background
-  colorMaterialBackgroundThick: ColorValue;
-  colorMaterialBackgroundRegular: ColorValue;
-  colorMaterialBackgroundThin: ColorValue;
+  materialBackgroundThick: ColorValue;
+  materialBackgroundRegular: ColorValue;
+  materialBackgroundThin: ColorValue;
 
   // disabled
-  colorBackgroundNeutralDisabled: ColorValue;
-  colorBackgroundNeutralHeavyDisabled: ColorValue;
-  colorBackgroundNeutralSubtleDisabled: ColorValue;
-  colorStrokeNeutralDisabled: ColorValue;
-  colorForegroundNeutralDisabled: ColorValue;
+  backgroundNeutralDisabled: ColorValue;
+  backgroundNeutralHeavyDisabled: ColorValue;
+  backgroundNeutralSubtleDisabled: ColorValue;
+  strokeNeutralDisabled: ColorValue;
+  foregroundNeutralDisabled: ColorValue;
 
   // focus strokes
-  colorStrokeFocusInner: ColorValue;
-  colorStrokeFocusOuter: ColorValue;
+  strokeFocusInner: ColorValue;
+  strokeFocusOuter: ColorValue;
 
   // shadow
-  colorShadow: ColorValue;
+  shadow: ColorValue;
 };
 
 /**
@@ -215,65 +207,65 @@ export type SemanticColorTokenValues = {
  */
 export type InteractiveColorOverrides = Pick<
   SemanticColorTokenValues,
-  | 'colorSurfaceNeutralFarther'
-  | 'colorSurfaceNeutralFar'
-  | 'colorSurfaceNeutralNear'
-  | 'colorSurfaceNeutralNearer'
-  | 'colorSurfaceNeutralTranslucent'
-  | 'colorBackgroundNeutralHeavy'
-  | 'colorBackgroundNeutralLoud'
-  | 'colorBackgroundNeutralSoft'
-  | 'colorBackgroundNeutralSubtle'
-  | 'colorBackgroundNeutralTransparent'
-  | 'colorBackgroundNeutralTranslucent'
-  | 'colorBackgroundBrandHeavy'
-  | 'colorBackgroundBrandLoud'
-  | 'colorBackgroundBrandSoft'
-  | 'colorBackgroundBrandSubtle'
-  | 'colorBackgroundBrandTransparent'
-  | 'colorBackgroundDangerLoud'
-  | 'colorBackgroundDangerSoft'
-  | 'colorBackgroundDangerSubtle'
-  | 'colorBackgroundWarningLoud'
-  | 'colorBackgroundWarningSoft'
-  | 'colorBackgroundWarningSubtle'
-  | 'colorBackgroundSuccessLoud'
-  | 'colorBackgroundSuccessSoft'
-  | 'colorBackgroundSuccessSubtle'
-  | 'colorStrokeNeutralHeavy'
-  | 'colorStrokeNeutralLoud'
-  | 'colorStrokeNeutralSoft'
-  | 'colorStrokeNeutralSubtle'
-  | 'colorStrokeNeutralTransparent'
-  | 'colorStrokeNeutralOnloud'
-  | 'colorStrokeBrandLoud'
-  | 'colorStrokeBrandSoft'
-  | 'colorStrokeBrandSubtle'
-  | 'colorStrokeBrandOnloud'
-  | 'colorStrokeDangerLoud'
-  | 'colorStrokeDangerSoft'
-  | 'colorStrokeDangerSubtle'
-  | 'colorStrokeDangerOnloud'
-  | 'colorStrokeWarningLoud'
-  | 'colorStrokeWarningSoft'
-  | 'colorStrokeWarningSubtle'
-  | 'colorStrokeWarningOnloud'
-  | 'colorStrokeSuccessLoud'
-  | 'colorStrokeSuccessSoft'
-  | 'colorStrokeSuccessSubtle'
-  | 'colorStrokeSuccessOnloud'
-  | 'colorForegroundNeutralPrimary'
-  | 'colorForegroundNeutralSecondary'
-  | 'colorForegroundNeutralTertiary'
-  | 'colorForegroundNeutralOnloud'
-  | 'colorForegroundBrandPrimary'
-  | 'colorForegroundBrandOnloud'
-  | 'colorForegroundDangerPrimary'
-  | 'colorForegroundDangerOnloud'
-  | 'colorForegroundWarningPrimary'
-  | 'colorForegroundWarningOnloud'
-  | 'colorForegroundSuccessPrimary'
-  | 'colorForegroundSuccessOnloud'
+  | 'surfaceNeutralFarther'
+  | 'surfaceNeutralFar'
+  | 'surfaceNeutralNear'
+  | 'surfaceNeutralNearer'
+  | 'surfaceNeutralTranslucent'
+  | 'backgroundNeutralHeavy'
+  | 'backgroundNeutralLoud'
+  | 'backgroundNeutralSoft'
+  | 'backgroundNeutralSubtle'
+  | 'backgroundNeutralTransparent'
+  | 'backgroundNeutralTranslucent'
+  | 'backgroundBrandHeavy'
+  | 'backgroundBrandLoud'
+  | 'backgroundBrandSoft'
+  | 'backgroundBrandSubtle'
+  | 'backgroundBrandTransparent'
+  | 'backgroundDangerLoud'
+  | 'backgroundDangerSoft'
+  | 'backgroundDangerSubtle'
+  | 'backgroundWarningLoud'
+  | 'backgroundWarningSoft'
+  | 'backgroundWarningSubtle'
+  | 'backgroundSuccessLoud'
+  | 'backgroundSuccessSoft'
+  | 'backgroundSuccessSubtle'
+  | 'strokeNeutralHeavy'
+  | 'strokeNeutralLoud'
+  | 'strokeNeutralSoft'
+  | 'strokeNeutralSubtle'
+  | 'strokeNeutralTransparent'
+  | 'strokeNeutralOnloud'
+  | 'strokeBrandLoud'
+  | 'strokeBrandSoft'
+  | 'strokeBrandSubtle'
+  | 'strokeBrandOnloud'
+  | 'strokeDangerLoud'
+  | 'strokeDangerSoft'
+  | 'strokeDangerSubtle'
+  | 'strokeDangerOnloud'
+  | 'strokeWarningLoud'
+  | 'strokeWarningSoft'
+  | 'strokeWarningSubtle'
+  | 'strokeWarningOnloud'
+  | 'strokeSuccessLoud'
+  | 'strokeSuccessSoft'
+  | 'strokeSuccessSubtle'
+  | 'strokeSuccessOnloud'
+  | 'foregroundNeutralPrimary'
+  | 'foregroundNeutralSecondary'
+  | 'foregroundNeutralTertiary'
+  | 'foregroundNeutralOnloud'
+  | 'foregroundBrandPrimary'
+  | 'foregroundBrandOnloud'
+  | 'foregroundDangerPrimary'
+  | 'foregroundDangerOnloud'
+  | 'foregroundWarningPrimary'
+  | 'foregroundWarningOnloud'
+  | 'foregroundSuccessPrimary'
+  | 'foregroundSuccessOnloud'
 >;
 
 /**
@@ -289,171 +281,188 @@ export type SemanticColors = SemanticColorTokenValues & {
  * The semantic shadow token set
  */
 export type SemanticShadows = {
-  // shadow
-  shadowLowest: ShadowToken;
-  shadowLower: ShadowToken;
-  shadowLow: ShadowToken;
-  shadowHigh: ShadowToken;
-  shadowHigher: ShadowToken;
-  shadowHighest: ShadowToken;
+  lowest: ShadowToken;
+  lower: ShadowToken;
+  low: ShadowToken;
+  high: ShadowToken;
+  higher: ShadowToken;
+  highest: ShadowToken;
 };
 
 /**
- * The complete semantic token set: all `SemanticColors` plus the non-color
- * semantic tokens (shadows, font weights/families, letter spacing, font sizes,
- * line heights, border radii, spacing, and stroke widths). Keys are the
- * camelCased `--gnrc-*` names.
+ * Semantic font weight tokens.
  *
  * Source of truth: `dev/web/flex-themes/css/semantic.css`.
  */
-export type SemanticTokens = SemanticColors &
-  SemanticShadows & {
-    // font weight
-    fontWeightFunctionalRegular: FontWeight;
-    fontWeightFunctionalMedium: FontWeight;
-    fontWeightFunctionalSemibold: FontWeight;
-    fontWeightFunctionalBold: FontWeight;
-    fontWeightContentRegular: FontWeight;
-    fontWeightContentMedium: FontWeight;
-    fontWeightContentSemibold: FontWeight;
-    fontWeightContentBold: FontWeight;
-    fontWeightContentEditorialRegular: FontWeight;
-    fontWeightContentEditorialMedium: FontWeight;
-    fontWeightContentEditorialSemibold: FontWeight;
-    fontWeightContentEditorialBold: FontWeight;
+export type SemanticFontWeights = {
+  functionalRegular: FontWeight;
+  functionalMedium: FontWeight;
+  functionalSemibold: FontWeight;
+  functionalBold: FontWeight;
+  contentRegular: FontWeight;
+  contentMedium: FontWeight;
+  contentSemibold: FontWeight;
+  contentBold: FontWeight;
+  contentEditorialRegular: FontWeight;
+  contentEditorialMedium: FontWeight;
+  contentEditorialSemibold: FontWeight;
+  contentEditorialBold: FontWeight;
+};
 
-    // font family
-    fontFamilyFunctional: string;
-    fontFamilyContent: string;
-    fontFamilyContentEditorial: string;
-    fontFamilyContentCode: string;
+export type SemanticFontFamilies = {
+  functional: string;
+  content: string;
+  contentEditorial: string;
+  contentCode: string;
+};
 
-    // font size
-    fontSizeFunctionalDisplay: FontSize;
-    fontSizeFunctionalPagetitle: FontSize;
-    fontSizeFunctionalTitleLarge: FontSize;
-    fontSizeFunctionalTitleMedium: FontSize;
-    fontSizeFunctionalTitleSmall: FontSize;
-    fontSizeFunctionalSubtitle: FontSize;
-    fontSizeFunctionalBodyLarge: FontSize;
-    fontSizeFunctionalBodyMedium: FontSize;
-    fontSizeFunctionalBodySmall: FontSize;
-    fontSizeFunctionalCaption: FontSize;
-    fontSizeContentStatement: FontSize;
-    fontSizeContentExpressiveLarge: FontSize;
-    fontSizeContentExpressiveMedium: FontSize;
-    fontSizeContentExpressiveSmall: FontSize;
-    fontSizeContentH1: FontSize;
-    fontSizeContentH2: FontSize;
-    fontSizeContentH3: FontSize;
-    fontSizeContentH4: FontSize;
-    fontSizeContentH5: FontSize;
-    fontSizeContentSubheadline: FontSize;
-    fontSizeContentParagraphLarge: FontSize;
-    fontSizeContentParagraphMedium: FontSize;
-    fontSizeContentParagraphSmall: FontSize;
-    fontSizeContentSubtext: FontSize;
-    fontSizeContentTable: FontSize;
-    fontSizeContentCode: FontSize;
+export type SemanticFontSizes = {
+  functionalDisplay: FontSize;
+  functionalPagetitle: FontSize;
+  functionalTitleLarge: FontSize;
+  functionalTitleMedium: FontSize;
+  functionalTitleSmall: FontSize;
+  functionalSubtitle: FontSize;
+  functionalBodyLarge: FontSize;
+  functionalBodyMedium: FontSize;
+  functionalBodySmall: FontSize;
+  functionalCaption: FontSize;
+  contentStatement: FontSize;
+  contentExpressiveLarge: FontSize;
+  contentExpressiveMedium: FontSize;
+  contentExpressiveSmall: FontSize;
+  contentH1: FontSize;
+  contentH2: FontSize;
+  contentH3: FontSize;
+  contentH4: FontSize;
+  contentH5: FontSize;
+  contentSubheadline: FontSize;
+  contentParagraphLarge: FontSize;
+  contentParagraphMedium: FontSize;
+  contentParagraphSmall: FontSize;
+  contentSubtext: FontSize;
+  contentTable: FontSize;
+  contentCode: FontSize;
+};
 
-    // line height
-    lineHeightFunctionalDisplay: number;
-    lineHeightFunctionalPagetitle: number;
-    lineHeightFunctionalTitleLarge: number;
-    lineHeightFunctionalTitleMedium: number;
-    lineHeightFunctionalTitleSmall: number;
-    lineHeightFunctionalSubtitle: number;
-    lineHeightFunctionalBodyLarge: number;
-    lineHeightFunctionalBodyMedium: number;
-    lineHeightFunctionalBodySmall: number;
-    lineHeightFunctionalCaption: number;
-    lineHeightContentStatement: number;
-    lineHeightContentExpressiveLarge: number;
-    lineHeightContentExpressiveMedium: number;
-    lineHeightContentExpressiveSmall: number;
-    lineHeightContentH1: number;
-    lineHeightContentH2: number;
-    lineHeightContentH3: number;
-    lineHeightContentH4: number;
-    lineHeightContentH5: number;
-    lineHeightContentSubheadline: number;
-    lineHeightContentParagraphLarge: number;
-    lineHeightContentParagraphMedium: number;
-    lineHeightContentParagraphSmall: number;
-    lineHeightContentSubtext: number;
-    lineHeightContentTable: number;
-    lineHeightContentCode: number;
+export type SemanticLineHeights = {
+  functionalDisplay: number;
+  functionalPagetitle: number;
+  functionalTitleLarge: number;
+  functionalTitleMedium: number;
+  functionalTitleSmall: number;
+  functionalSubtitle: number;
+  functionalBodyLarge: number;
+  functionalBodyMedium: number;
+  functionalBodySmall: number;
+  functionalCaption: number;
+  contentStatement: number;
+  contentExpressiveLarge: number;
+  contentExpressiveMedium: number;
+  contentExpressiveSmall: number;
+  contentH1: number;
+  contentH2: number;
+  contentH3: number;
+  contentH4: number;
+  contentH5: number;
+  contentSubheadline: number;
+  contentParagraphLarge: number;
+  contentParagraphMedium: number;
+  contentParagraphSmall: number;
+  contentSubtext: number;
+  contentTable: number;
+  contentCode: number;
+};
 
-    // border radius
-    borderRadiusBase100: BorderRadius;
-    borderRadiusBase200: BorderRadius;
-    borderRadiusBase300: BorderRadius;
-    borderRadiusBase400: BorderRadius;
-    borderRadiusBase600: BorderRadius;
-    borderRadiusBase700: BorderRadius;
-    borderRadiusCircular: BorderRadius;
+export type SemanticBorderRadii = {
+  base100: BorderRadius;
+  base200: BorderRadius;
+  base300: BorderRadius;
+  base400: BorderRadius;
+  base600: BorderRadius;
+  base700: BorderRadius;
+  circular: BorderRadius;
+};
 
-    // spacing / component
-    spacingComponentBase50: DimensionValue;
-    spacingComponentBase100: DimensionValue;
-    spacingComponentBase150: DimensionValue;
-    spacingComponentBase200: DimensionValue;
-    spacingComponentBase250: DimensionValue;
-    spacingComponentBase300: DimensionValue;
-    spacingComponentBase400: DimensionValue;
-    spacingComponentBase500: DimensionValue;
-    spacingComponentBase600: DimensionValue;
-    spacingComponentBase700: DimensionValue;
+export type SemanticSpacing = {
+  componentBase50: DimensionValue;
+  componentBase100: DimensionValue;
+  componentBase150: DimensionValue;
+  componentBase200: DimensionValue;
+  componentBase250: DimensionValue;
+  componentBase300: DimensionValue;
+  componentBase400: DimensionValue;
+  componentBase500: DimensionValue;
+  componentBase600: DimensionValue;
+  componentBase700: DimensionValue;
+  layoutBase100: DimensionValue;
+  layoutBase200: DimensionValue;
+  layoutBase300: DimensionValue;
+  layoutBase400: DimensionValue;
+  layoutBase450: DimensionValue;
+  layoutBase500: DimensionValue;
+  layoutBase600: DimensionValue;
+  layoutBase700: DimensionValue;
+  layoutBase800: DimensionValue;
+  layoutBase1000: DimensionValue;
+  layoutBase1200: DimensionValue;
+};
 
-    // spacing / layout
-    spacingLayoutBase100: DimensionValue;
-    spacingLayoutBase200: DimensionValue;
-    spacingLayoutBase300: DimensionValue;
-    spacingLayoutBase400: DimensionValue;
-    spacingLayoutBase450: DimensionValue;
-    spacingLayoutBase500: DimensionValue;
-    spacingLayoutBase600: DimensionValue;
-    spacingLayoutBase700: DimensionValue;
-    spacingLayoutBase800: DimensionValue;
-    spacingLayoutBase1000: DimensionValue;
-    spacingLayoutBase1200: DimensionValue;
+export type SemanticStrokeWidths = {
+  thin: StrokeWidth;
+  thick: StrokeWidth;
+  thicker: StrokeWidth;
+  thickest: StrokeWidth;
+};
 
-    // stroke width
-    strokeWidthThin: StrokeWidth;
-    strokeWidthThick: StrokeWidth;
-    strokeWidthThicker: StrokeWidth;
-    strokeWidthThickest: StrokeWidth;
-  };
+/**
+ * The complete, grouped Flex token set. Category prefixes are represented by
+ * sub-objects and removed from the token names inside each category.
+ */
+export type FlexTokens = {
+  color: SemanticColors;
+  shadow: SemanticShadows;
+  fontWeight: SemanticFontWeights;
+  fontFamily: SemanticFontFamilies;
+  fontSize: SemanticFontSizes;
+  lineHeight: SemanticLineHeights;
+  borderRadius: SemanticBorderRadii;
+  spacing: SemanticSpacing;
+  strokeWidth: SemanticStrokeWidths;
+};
+
+export type SemanticTokens = FlexTokens;
 
 /**
  * These are flex tokens from web that are not supported on native.
  */
 export type UnsupportedFlexTokens = {
-  // letter spacing
-  letterSpacingFunctionalDisplay: string;
-  letterSpacingFunctionalPagetitle: string;
-  letterSpacingFunctionalTitleLarge: string;
-  letterSpacingFunctionalTitleMedium: string;
-  letterSpacingFunctionalTitleSmall: string;
-  letterSpacingFunctionalSubtitle: string;
-  letterSpacingFunctionalBodyLarge: string;
-  letterSpacingFunctionalBodyMedium: string;
-  letterSpacingFunctionalBodySmall: string;
-  letterSpacingFunctionalCaption: string;
-  letterSpacingContentStatement: string;
-  letterSpacingContentExpressiveLarge: string;
-  letterSpacingContentExpressiveMedium: string;
-  letterSpacingContentExpressiveSmall: string;
-  letterSpacingContentH1: string;
-  letterSpacingContentH2: string;
-  letterSpacingContentH3: string;
-  letterSpacingContentH4: string;
-  letterSpacingContentH5: string;
-  letterSpacingContentSubheadline: string;
-  letterSpacingContentParagraphLarge: string;
-  letterSpacingContentParagraphMedium: string;
-  letterSpacingContentParagraphSmall: string;
-  letterSpacingContentSubtext: string;
-  letterSpacingContentTable: string;
-  letterSpacingContentCode: string;
+  letterSpacing: {
+    functionalDisplay: string;
+    functionalPagetitle: string;
+    functionalTitleLarge: string;
+    functionalTitleMedium: string;
+    functionalTitleSmall: string;
+    functionalSubtitle: string;
+    functionalBodyLarge: string;
+    functionalBodyMedium: string;
+    functionalBodySmall: string;
+    functionalCaption: string;
+    contentStatement: string;
+    contentExpressiveLarge: string;
+    contentExpressiveMedium: string;
+    contentExpressiveSmall: string;
+    contentH1: string;
+    contentH2: string;
+    contentH3: string;
+    contentH4: string;
+    contentH5: string;
+    contentSubheadline: string;
+    contentParagraphLarge: string;
+    contentParagraphMedium: string;
+    contentParagraphSmall: string;
+    contentSubtext: string;
+    contentTable: string;
+    contentCode: string;
+  };
 };

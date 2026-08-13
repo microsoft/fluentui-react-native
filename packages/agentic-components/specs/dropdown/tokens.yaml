@@ -43,13 +43,13 @@ tokens:
       delegated to flex-components:input. Dropdown does not redefine them.
 
       Specifically forwarded:
-        - background.all-states.all-styles = colorBackgroundNeutralTransparent
+        - background.all-states.all-styles = color.backgroundNeutralTransparent
         - stroke (Outline) rest/focus/hover/pressed = flex-components:input tokens.stroke.outline
         - stroke (Underline) rest/focus/hover/pressed = flex-components:input tokens.stroke.underline
-        - stroke error = colorStrokeDangerLoud
-        - stroke disabled = colorStrokeNeutralDisabled
-        - foreground.value = colorForegroundNeutralPrimary
-        - foreground.placeholder = colorForegroundNeutralTertiary
+        - stroke error = color.strokeDangerLoud
+        - stroke disabled = color.strokeNeutralDisabled
+        - foreground.value = color.foregroundNeutralPrimary
+        - foreground.placeholder = color.foregroundNeutralTertiary
         - radius per Size: Small base-200, Medium base-300, Large base-400
         - typography per Size: textstyle-functional-body-{small|medium|large}
         - padding per Size: see flex-components:input
@@ -58,10 +58,10 @@ tokens:
 
   trigger-chevron:
     foreground:
-      rest: colorForegroundNeutralSecondary
-      focused: colorForegroundNeutralPrimary
-      error: colorForegroundNeutralPrimary
-      disabled: colorForegroundNeutralDisabled
+      rest: color.foregroundNeutralSecondary
+      focused: color.foregroundNeutralPrimary
+      error: color.foregroundNeutralPrimary
+      disabled: color.foregroundNeutralDisabled
       rationale: Secondary at rest keeps the chevron from competing with the value text; promotes to primary on focus so the actionable affordance is visible.
     rotation:
       closed: 0deg

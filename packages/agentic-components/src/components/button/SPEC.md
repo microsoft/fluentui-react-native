@@ -3,10 +3,10 @@ name: button
 platform: react-native (Windows, macOS)
 description: Atomic interactive control that triggers a discrete action. Covers style hierarchy (Primary/Secondary/Outline/Subtle), layout modes (Icon and text/Icon only), three sizes, Selected toggle axis, and the font-weight swap pattern used for Selected labels.
 argument-hint: "[variant axis or token question, e.g. 'Primary hover token' or 'icon-only accessibility']"
-tokens: tokens.yaml
-accessibility: accessibility.md
-interaction: interaction.md
-usage: usage.md
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 ## Metadata

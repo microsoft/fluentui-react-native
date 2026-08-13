@@ -8,8 +8,8 @@ variants:
     notes: >
       Controls label position relative to the line segments.
       Center uses two equal flex-grow lines. Start uses a
-      spacingComponentBase100 leading stub. End uses a
-      spacingComponentBase100 trailing stub.
+      spacing.componentBase100 leading stub. End uses a
+      spacing.componentBase100 trailing stub.
   Vertical:
     values: [false, true]
     default: false
@@ -19,7 +19,7 @@ variants:
 tokens:
   background:
     line:
-      token: colorStrokeNeutralSubtle
+      token: color.strokeNeutralSubtle
       rationale: >
         The divider line uses a stroke-namespaced token because the line's
         semantic role is a stroke — it is a boundary mark, not a surface fill.
@@ -30,12 +30,12 @@ tokens:
 
   foreground:
     label:
-      token: colorForegroundNeutralSecondary
+      token: color.foregroundNeutralSecondary
       rationale: >
         Secondary foreground keeps the label legible but subordinate to
         primary content on either side of the divider.
     icon:
-      token: colorForegroundNeutralSecondary
+      token: color.foregroundNeutralSecondary
       rationale: Matches label color for visual consistency within the content slot.
 
   stroke:
@@ -46,25 +46,25 @@ tokens:
 
   typography:
     label: textstyle-functional-body-small
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     content:
-      horizontal-padding: spacingComponentBase300
-      vertical-padding: spacingComponentBase300
+      horizontal-padding: spacing.componentBase300
+      vertical-padding: spacing.componentBase300
       rationale: >
         Regular tier at large size provides comfortable breathing room around
         the label. In horizontal orientation, padding is on the X axis; in
         vertical orientation, padding is on the Y axis.
     gap:
-      icon-to-label: spacingComponentBase150
+      icon-to-label: spacing.componentBase150
       rationale: Atomic-tier medium gap between icon and label within the content slot.
     stub:
-      length: spacingComponentBase100
+      length: spacing.componentBase100
       rationale: >
         Atomic-tier small gap anchors the content slot near the respective edge
         in Start and End layouts. Same tier as the content slot's internal gap
-        (spacingComponentBase150), one step down the scale.
+        (spacing.componentBase150), one step down the scale.
 
   elevation: n/a
 

@@ -11,26 +11,26 @@ variants:
 
 tokens:
   background:
-    track: colorBackgroundNeutralSoft
+    track: color.backgroundNeutralSoft
     indicator:
-      Neutral: colorForegroundBrandPrimary
-      Error: colorForegroundDangerPrimary
-      Success: colorForegroundSuccessPrimary
+      Neutral: color.foregroundBrandPrimary
+      Error: color.foregroundDangerPrimary
+      Success: color.foregroundSuccessPrimary
 
   foreground:
-    label: colorForegroundNeutralPrimary
-    value-text: colorForegroundNeutralSecondary
+    label: color.foregroundNeutralPrimary
+    value-text: color.foregroundNeutralSecondary
     validation-icon:
-      Error: colorForegroundDangerPrimary
-      Success: colorForegroundSuccessPrimary
+      Error: color.foregroundDangerPrimary
+      Success: color.foregroundSuccessPrimary
 
   stroke:
     container: no-stroke
     focus: n/a # Non-interactive — no focus ring.
 
   radius:
-    track: borderRadiusCircular
-    indicator: borderRadiusCircular
+    track: borderRadius.circular
+    indicator: borderRadius.circular
     rationale: >
       Pill ends on both Track and Indicator. Circular radius is independent of
       bar thickness and matches Fluent's progress bar convention. The Indicator
@@ -39,14 +39,14 @@ tokens:
   typography:
     label: textstyle-functional-body-medium
     value-text: textstyle-functional-body-small
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     header-to-bar:
-      token: spacingComponentBase100
+      token: spacing.componentBase100
       rationale: Atomic-tier — component-base applies because the Header and bar are tightly coupled within a single component.
     header-internal-gap:
-      token: spacingComponentBase100
+      token: spacing.componentBase100
       rationale: Atomic-tier — component-base applies because the slot grouping sits within a single component.
 
   elevation: n/a
@@ -66,7 +66,7 @@ tokens:
 
 sizes:
   bar-thickness:
-    token: spacingComponentBase100
+    token: spacing.componentBase100
     rationale: >
       The bar's Track and Indicator are filled rails with a fixed height, not
       strokes — so a sizing/spacing generic is the correct family rather than

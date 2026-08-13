@@ -11,22 +11,22 @@ variants:
 tokens:
   background:
     rest:
-      Unselected: colorBackgroundNeutralTransparent
-      Selected: colorBackgroundNeutralTransparent
+      Unselected: color.backgroundNeutralTransparent
+      Selected: color.backgroundNeutralTransparent
     disabled:
-      Unselected: colorBackgroundNeutralTransparent
-      Selected: colorBackgroundNeutralTransparent
+      Unselected: color.backgroundNeutralTransparent
+      Selected: color.backgroundNeutralTransparent
 
   foreground:
     indicator:
       rest:
         Selected:
-          value: colorForegroundBrandPrimary
-          hover: hover.colorForegroundBrandPrimary
-          pressed: pressed.colorForegroundBrandPrimary
+          value: color.foregroundBrandPrimary
+          hover: color.hover.foregroundBrandPrimary
+          pressed: color.pressed.foregroundBrandPrimary
         Unselected: n/a — no indicator dot visible.
       disabled:
-        Selected: colorForegroundNeutralDisabled
+        Selected: color.foregroundNeutralDisabled
     label:
       rationale: >
         Radio-level override applied to the composed flex-components:label
@@ -37,51 +37,51 @@ tokens:
         <label for> association behavior.
       rest:
         Unselected:
-          value: colorForegroundNeutralSecondary
-          hover: hover.colorForegroundNeutralSecondary
-          pressed: pressed.colorForegroundNeutralSecondary
+          value: color.foregroundNeutralSecondary
+          hover: color.hover.foregroundNeutralSecondary
+          pressed: color.pressed.foregroundNeutralSecondary
         Selected:
-          value: colorForegroundNeutralPrimary
-          hover: hover.colorForegroundNeutralPrimary
-          pressed: pressed.colorForegroundNeutralPrimary
+          value: color.foregroundNeutralPrimary
+          hover: color.hover.foregroundNeutralPrimary
+          pressed: color.pressed.foregroundNeutralPrimary
       disabled:
-        Unselected: colorForegroundNeutralDisabled
-        Selected: colorForegroundNeutralDisabled
+        Unselected: color.foregroundNeutralDisabled
+        Selected: color.foregroundNeutralDisabled
     secondary-text:
       rationale: Stays at secondary regardless of Status — does not promote on Selected.
       rest:
         Unselected:
-          value: colorForegroundNeutralSecondary
-          hover: hover.colorForegroundNeutralSecondary
-          pressed: pressed.colorForegroundNeutralSecondary
+          value: color.foregroundNeutralSecondary
+          hover: color.hover.foregroundNeutralSecondary
+          pressed: color.pressed.foregroundNeutralSecondary
         Selected:
-          value: colorForegroundNeutralSecondary
-          hover: hover.colorForegroundNeutralSecondary
-          pressed: pressed.colorForegroundNeutralSecondary
+          value: color.foregroundNeutralSecondary
+          hover: color.hover.foregroundNeutralSecondary
+          pressed: color.pressed.foregroundNeutralSecondary
       disabled:
-        Unselected: colorForegroundNeutralDisabled
-        Selected: colorForegroundNeutralDisabled
+        Unselected: color.foregroundNeutralDisabled
+        Selected: color.foregroundNeutralDisabled
 
   stroke:
-    width: strokeWidthThin
+    width: strokeWidth.thin
     width-rationale: Standard containment stroke for form controls; consistent with other atomic input components.
     rest:
       Unselected:
-        value: colorStrokeNeutralHeavy
-        hover: hover.colorStrokeNeutralHeavy
-        pressed: pressed.colorStrokeNeutralHeavy
+        value: color.strokeNeutralHeavy
+        hover: color.hover.strokeNeutralHeavy
+        pressed: color.pressed.strokeNeutralHeavy
       Selected:
-        value: colorStrokeBrandLoud
-        hover: hover.colorStrokeBrandLoud
-        pressed: pressed.colorStrokeBrandLoud
+        value: color.strokeBrandLoud
+        hover: color.hover.strokeBrandLoud
+        pressed: color.pressed.strokeBrandLoud
     focus: See flex-system:styling — universal dual-outline focus ring.
     disabled:
-      Unselected: colorStrokeNeutralDisabled
-      Selected: colorStrokeNeutralDisabled
+      Unselected: color.strokeNeutralDisabled
+      Selected: color.strokeNeutralDisabled
 
   radius:
-    indicator: borderRadiusCircular
-    focus-ring: borderRadiusBase300
+    indicator: borderRadius.circular
+    focus-ring: borderRadius.base300
     focus-ring-rationale: >
       Focus ring wraps the entire interactive area (indicator + label),
       so it uses a larger radius than the indicator itself.
@@ -96,12 +96,12 @@ tokens:
         source of truth for the label's text style.
     secondary-text:
       token: textstyle-functional-body-small
-      font-family: fontFamilyFunctional
+      font-family: fontFamily.functional
       rationale: One step smaller than body-medium to create clear hierarchy between primary label and description.
 
   spacing:
     indicator:
-      margin: spacingComponentBase200
+      margin: spacing.componentBase200
       margin-rationale: >
         Margin on the visible indicator provides visual breathing room
         without introducing an extra DOM/Figma wrapper layer. The Radio's
@@ -110,24 +110,24 @@ tokens:
         If a consumer scopes the hit target to the indicator alone rather
         than the Root, the indicator margin must still count toward the
         hit area so that indicator + margin meets WCAG 2.5.5/2.5.8
-        (24×24 minimum) — with the current `spacingComponentBase200`
+        (24×24 minimum) — with the current `spacing.componentBase200`
         value (8px), standalone indicator + margin = 16 + 2×8 = 32×32,
         comfortably above the minimum. Figma re-introduces a wrapper
         layer at export time when needed for auto-layout fidelity; the
         spec's canonical model is margin on the indicator.
     label-wrapper:
-      horizontal-end: spacingComponentBase200
-      vertical: spacingComponentBase150
+      horizontal-end: spacing.componentBase200
+      vertical: spacing.componentBase150
       rationale: >
         End-side padding only — provides breathing room after the label.
         No start-side padding — the gap token controls indicator-to-label spacing.
         Vertical padding vertically centers the text baseline with the indicator center.
-    label-inner-gap: spacingComponentBase50
+    label-inner-gap: spacing.componentBase50
     label-inner-gap-rationale: >
       Tightest tier between primary label and secondary text — they read as
       a single text cluster. Matches Label's internal gap (text ↔ required
       indicator) for consistency. Only applies when secondary text is visible.
-    gap: spacingComponentBase100
+    gap: spacing.componentBase100
     gap-rationale: Tightest atomic tier for tightly coupled elements — controls indicator-to-label spacing.
 
   elevation: n/a

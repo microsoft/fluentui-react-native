@@ -29,19 +29,19 @@ tokens:
 
   radius:
     root: n/a
-    trigger: borderRadiusCircular # per flex-components:button → radius for Icon only
-    popover: borderRadiusBase400 # per flex-components:popover → radius
+    trigger: borderRadius.circular # per flex-components:button → radius for Icon only
+    popover: borderRadius.base400 # per flex-components:popover → radius
 
   typography:
     label: See flex-components:label → typography (Weight × Size matrix).
     trigger: n/a — Icon only.
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     root-gap:
-      Small: spacingComponentBase50
-      Medium: spacingComponentBase50
-      Large: spacingComponentBase50
+      Small: spacing.componentBase50
+      Medium: spacing.componentBase50
+      Large: spacing.componentBase50
       rationale: >
         2px (base-50) — the minimum that reads as intentional separation. At this
         distance the focus ring (outline-offset 2px + 2px outline) visually overlaps

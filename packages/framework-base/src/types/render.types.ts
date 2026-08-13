@@ -119,9 +119,10 @@ export type PropsTransform<TPropsIn, TPropsOut = TPropsIn> = (props: TPropsIn) =
  * - Optional attached props for the slot, these will be merged with the props passed in during rendering.
  * - Optional props transformation function, this can be used to do things like filtering or making final modifications to the props before they are passed to the inner component.
  */
-export type SlotComponent<TProps> = FunctionComponent<TProps> & {
+export type SlotComponent<TProps> = FunctionComponent<Partial<TProps>> & {
   /**
-   * This is the inner component type used to render the slot.
+   * This is the inner component type used to render the slot. Its required props are resolved when the slot is created;
+   * the slot component itself accepts partial props as render-time overrides.
    */
   [SLOT_COMPONENT_KEY]: React.ComponentType<TProps>;
 

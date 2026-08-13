@@ -2,7 +2,7 @@
   "name": "@fluentui-react-native/agentic-components-storybook",
   "version": "0.1.0",
   "private": true,
-  "description": "On-device Storybook app for @fluentui-react-native/agentic-components",
+  "description": "On-device Storybook app for @fluentui-react-native/components",
   "license": "MIT",
   "author": "",
   "repository": {
@@ -12,6 +12,10 @@
   },
   "scripts": {
     "start": "rnx-cli start",
+    "pods:macos": "pod install --project-directory=macos",
+    "pods:macos:update": "pod update --no-repo-update --project-directory=macos",
+    "macos:build": "xcodebuild -workspace macos/AgenticStorybook.xcworkspace -scheme AgenticStorybook -configuration Debug -destination 'platform=macOS' -derivedDataPath macos/DerivedData CODE_SIGNING_ALLOWED=NO build",
+    "macos:build:clean": "xcodebuild -workspace macos/AgenticStorybook.xcworkspace -scheme AgenticStorybook -configuration Debug -destination 'platform=macOS' -derivedDataPath macos/DerivedData CODE_SIGNING_ALLOWED=NO clean build",
     "macos": "rnx-cli run --platform macos",
     "windows": "react-native run-windows --arch x64 --sln windows/AgenticStorybook.sln",
     "windows:offline": "yarn bundle:windows && yarn windows:generate && yarn windows --release --no-packager --no-deploy --no-launch --msbuildprops UseBundle=false && pwsh -NoProfile -File scripts/run-windows-offline.ps1",
@@ -24,7 +28,7 @@
     "format": "fluentui-scripts format"
   },
   "dependencies": {
-    "@fluentui-react-native/agentic-components": "workspace:*",
+    "@fluentui-react-native/components": "workspace:*",
     "@types/react": "~19.1.4",
     "react": "19.1.4",
     "react-native": "^0.81.6",
@@ -64,7 +68,7 @@
   "furn": {
     "knip": {
       "ignoreDependencies": [
-        "@fluentui-react-native/agentic-components"
+        "@fluentui-react-native/components"
       ]
     }
   },

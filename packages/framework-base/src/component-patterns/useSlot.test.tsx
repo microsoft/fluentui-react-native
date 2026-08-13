@@ -159,9 +159,21 @@ const FulfilledRequiredSlotPropConsumer: React.FunctionComponent = () => {
 };
 
 const UnresolvedRequiredSlotPropConsumer: React.FunctionComponent = () => {
+  // @ts-expect-error Required props must be resolved when the slot is created.
   const RequiredSlot = useSlot(RequiredSlotComponent, undefined);
-  // @ts-expect-error The required prop was not resolved by the slot prop or base props.
   return <RequiredSlot />;
+};
+
+const UnresolvedRequiredOptionalSlotPropConsumer: React.FunctionComponent = () => {
+  // @ts-expect-error Provided optional slots must include required component props.
+  const RequiredSlot = useOptionalSlot(RequiredSlotComponent, {});
+  return RequiredSlot ? <RequiredSlot /> : null;
+};
+
+const UnresolvedDefaultOptionalSlotPropConsumer: React.FunctionComponent = () => {
+  // @ts-expect-error A default-rendered optional slot must resolve required props when it is created.
+  const RequiredSlot = useOptionalSlot(RequiredSlotComponent, undefined, { renderByDefault: true });
+  return RequiredSlot ? <RequiredSlot /> : null;
 };
 
 const OptionalSlotPropConsumer: React.FunctionComponent<OptionalSlotPropConsumerProps> = ({ slot, renderByDefault }) => {
@@ -201,6 +213,8 @@ describe('slot prop resolution', () => {
 
     expect(component!.root.findByType(Text).props.children).toBe('resolved');
     expect(UnresolvedRequiredSlotPropConsumer).toBeDefined();
+    expect(UnresolvedRequiredOptionalSlotPropConsumer).toBeDefined();
+    expect(UnresolvedDefaultOptionalSlotPropConsumer).toBeDefined();
   });
 
   it('accepts required props supplied directly through the slot prop', () => {

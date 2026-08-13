@@ -12,18 +12,18 @@ variants:
 tokens:
   surface:
     container:
-      token: colorSurfaceNeutralNearer
+      token: color.surfaceNeutralNearer
       rationale: Highest elevation step in the ordinal surface scale, pairing with the low-elevation shadow to read as a distinct floating layer above the page.
     arrow:
-      token: colorSurfaceNeutralNearer
+      token: color.surfaceNeutralNearer
       rationale: Matches container fill so the arrow reads as a continuous extension of the floating surface.
 
   stroke:
-    width: strokeWidthThin
-    color: colorStrokeNeutralSubtle
+    width: strokeWidth.thin
+    color: color.strokeNeutralSubtle
     notes: >
       The container stroke uses the neutral subtle stroke generic
-      (colorStrokeNeutralSubtle), giving the floating
+      (color.strokeNeutralSubtle), giving the floating
       surface a defined boundary that adapts with the theme's stroke ramp. The
       arrow carries the same stroke on only its two outward-facing (beak) edges
       per placement, so the stroke traces the beak silhouette while the arrow's
@@ -31,19 +31,19 @@ tokens:
       the container surface.
 
   radius:
-    container: borderRadiusBase400
+    container: borderRadius.base400
     notes: Generous radius appropriate for a floating surface that contains composed content.
 
   spacing:
-    container-padding: spacingComponentBase400
-    arrow-to-target-gap: spacingComponentBase100
+    container-padding: spacing.componentBase400
+    arrow-to-target-gap: spacing.componentBase100
     notes: >
       Container owns the inner padding around its content.
       Arrow-to-target gap is the distance from the arrow tip to the nearest edge of the trigger element.
 
   elevation:
     level: 3
-    shadow: shadowLow
+    shadow: shadow.low
     notes: >
       A consistent shadow around the full popover shape (container + arrow) is
       recommended where the platform allows. Shadow compositing is an

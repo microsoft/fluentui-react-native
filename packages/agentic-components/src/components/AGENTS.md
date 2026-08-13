@@ -1,0 +1,36 @@
+# Higher-order component authoring
+
+These instructions apply to `packages/agentic-components/src/components` and its descendants.
+
+Higher-order components own design-token styling, interaction state, layout, and component-level accessibility. Use
+`components/button` as the canonical implementation.
+
+## Required structure
+
+- `<component>.types.ts`: public slots, props, named variants, private state slots, and resolved state.
+- `<component>.styles.ts`: structural styles and module-scoped state or theme style factories.
+- `use<Component>.ts`: defaults, derived state, accessibility, interaction hooks, theme state, and slot construction.
+- `useApplyStyles.ts`: cached style selection, ordered style arrays, and `attachSlotProps`.
+- `render<Component>.tsx`: pure slot ordering and conditional structure.
+- `<component>.ts`: state -> styles -> render assembly and `displayName`.
+
+## Non-negotiable invariants
+
+- Keep render-only slots private to state.
+- Exclude native `children` or other props the component owns.
+- Preserve the distinction between omitted and false controlled values.
+- Use Flex tokens first and document genuine token gaps.
+- Create style factories only at module scope and cache theme-only styles.
+- Declare state precedence explicitly; disabled wins over pressed, which wins over hovered.
+- Apply user styles after component styles.
+- Keep render functions free of hooks, token reads, style creation, and slot mutation.
+- Test public accessibility, every finite variant axis, interactions, optional slots, user forwarding, and constrained
+  layout.
+
+## Focused references
+
+- [Types and slots](../../../../.github/skills/agentic-component-authoring/references/types-and-slots.md)
+- [State and accessibility](../../../../.github/skills/agentic-component-authoring/references/state-and-accessibility.md)
+- [Styles and tokens](../../../../.github/skills/agentic-component-authoring/references/styles-and-tokens.md)
+- [Rendering and assembly](../../../../.github/skills/agentic-component-authoring/references/rendering.md)
+- [Tests and stories](../../../../.github/skills/agentic-component-authoring/references/tests-and-stories.md)

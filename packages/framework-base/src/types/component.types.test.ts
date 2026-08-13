@@ -62,6 +62,7 @@ const componentPropsRejectRequiredNull: Expect<Equal<Extends<{ requiredRootProp:
 const requiredStateSlotHasConcreteProps: Expect<Equal<TestComponentState['content'], SlotComponent<ContentProps>>> = true;
 const optionalStateSlotHasConcretePropsOrUndefined: Expect<Equal<TestComponentState['optional'], SlotComponent<ContentProps> | undefined>> =
   true;
+const resolvedRootSlotAcceptsOptionalProps: Expect<Extends<Record<never, never>, Parameters<TestComponentState['root']>[0]>> = true;
 const componentAcceptanceTypesRemainValidSlots: Expect<Equal<Slot<React.ComponentType<ContentProps>>, React.ComponentType<ContentProps>>> =
   true;
 const slotPropUsesComponentProps: Expect<Extends<ContentProps, SlotProp<ContentComponent>>> = true;
@@ -84,6 +85,7 @@ describe('component slot type consistency', () => {
     expect(componentPropsRejectRequiredNull).toBe(true);
     expect(requiredStateSlotHasConcreteProps).toBe(true);
     expect(optionalStateSlotHasConcretePropsOrUndefined).toBe(true);
+    expect(resolvedRootSlotAcceptsOptionalProps).toBe(true);
     expect(componentAcceptanceTypesRemainValidSlots).toBe(true);
     expect(slotPropUsesComponentProps).toBe(true);
     expect(nativeSlotPropAllowsPropsCompatibleAs).toBe(true);

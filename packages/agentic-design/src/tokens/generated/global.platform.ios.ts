@@ -3,6 +3,8 @@
  */
 
 export const fontFamilyBase = 'System';
+export const fontFamilyMonospace = 'System';
+export const fontFamilyNumeric = 'System';
 export const fontLineHeight200 = 18;
 export const fontLineHeight300 = 20;
 export const fontLineHeight400 = 22;

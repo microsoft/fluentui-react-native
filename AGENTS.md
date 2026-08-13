@@ -41,7 +41,9 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
 
 **Slots**: The slot pattern is used to compose higher-order components. A slot represents an inner component (actual entry in the render tree). For example, a Button might have slots for `root`, `icon`, and `content`. This allows advanced customization scenarios. Components wrapping a single native component typically have one slot.
 
-**Tokens**: Design tokens handle styling and customization. Tokens are design-time values set via theme or component customization (e.g., "brandColor"). Tokens can also be props (specified via "TokensThatAreAlsoProps"). This system enables simpler customization and better memoization.
+**Tokens**: Design tokens handle styling and customization. Tokens are design-time values set via theme or component customization (e.g., "brandColor"). Tokens can also be props (specified via "TokensThatAreAlsoProps"). This system enables simpler customization and better memoization. For Flex token authoring, use `packages/agentic-design/src/tokens/mappings/flex-token-map.yaml` as the canonical mapping from generic CSS and Fluent token sources to grouped React Native Flex token paths.
+
+**Theme-specific styles**: Cache `StyleSheet.create` results that depend only on `ThemeState` with a module-scoped getter created by `themedStyleSheetFactory`. Treat them as immutable, and apply props, interaction state, and user styles separately so the cached sheet is safe to share between component instances.
 
 **Platform-Specific Files**: Components use platform-specific files with extensions like `.ios.ts`, `.android.ts`, `.win32.ts`, `.macos.ts` for platform-specific implementations.
 
@@ -99,6 +101,25 @@ Each package's own `build` script is `tsc -b` (it builds that package together w
 - `yarn format` / `yarn format:fix` - Check / fix formatting
 
 `fluentui-scripts` also retains a `build` command that can emit dual ESM (`lib/`) and CommonJS (`lib-commonjs/`) output driven by per-package build config, but packages on this branch build with `tsc -b` directly.
+
+### Agent validation and investigation discipline
+
+- Run commands through the owning workspace's declared scripts. Inspect its `package.json` before invoking an underlying
+  runner directly; do not assume scripts such as `jest` or `check` exist, and do not bypass project references with
+  ad-hoc `tsc` file arguments.
+- Run working-directory-sensitive native tools from the owning app workspace. Flags such as CocoaPods'
+  `--project-directory` select project files but do not necessarily change subprocess resolution roots.
+- During iteration, use the smallest relevant test and run package lint/build early after type-heavy edits. For final
+  validation, run format, lint, package build, package tests, then the root build when public types, manifests, or project
+  references changed.
+- After fixing a failed validation step, rerun that step and its downstream checks. Avoid repeatedly running the entire
+  validation chain before the immediate failure is resolved.
+- Prefer committed `*.types.test.ts` coverage for compile-time contracts. Keep exploratory probes outside package source,
+  or remove them before running package validation.
+- Review small, localized diffs directly. Use an independent review agent only after focused validation passes and only
+  when the change still has a genuinely ambiguous or cross-cutting contract.
+- Keep sessions scoped to one reviewable outcome. After capturing a durable result, start unrelated work in a fresh
+  session so stale context and generated output do not dominate later investigation.
 
 ## TypeScript Configuration
 

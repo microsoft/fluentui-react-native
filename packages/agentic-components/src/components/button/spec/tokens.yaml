@@ -21,123 +21,127 @@ tokens:
   background:
     rest:
       Primary:
-        value: colorBackgroundBrandHeavy
-        hover: hover.colorBackgroundBrandHeavy
-        pressed: pressed.colorBackgroundBrandHeavy
+        value: color.backgroundBrandHeavy
+        hover: color.hover.backgroundBrandHeavy
+        pressed: color.pressed.backgroundBrandHeavy
         rationale: Maximum-emphasis brand fill; highest contrast against surface.
       Secondary:
-        value: colorBackgroundNeutralSubtle
-        hover: hover.colorBackgroundNeutralSubtle
-        pressed: pressed.colorBackgroundNeutralSubtle
+        value: color.backgroundNeutralSubtle
+        hover: color.hover.backgroundNeutralSubtle
+        pressed: color.pressed.backgroundNeutralSubtle
         rationale: Visible but non-dominant fill.
       Outline:
-        value: colorBackgroundNeutralTransparent
-        hover: hover.colorBackgroundNeutralTransparent
-        pressed: pressed.colorBackgroundNeutralTransparent
+        value: color.backgroundNeutralTransparent
+        hover: color.hover.backgroundNeutralTransparent
+        pressed: color.pressed.backgroundNeutralTransparent
         rationale: Containment communicated by border alone.
       Subtle:
-        value: colorBackgroundNeutralTransparent
-        hover: hover.colorBackgroundNeutralTransparent
-        pressed: pressed.colorBackgroundNeutralTransparent
+        value: color.backgroundNeutralTransparent
+        hover: color.hover.backgroundNeutralSubtle
+        pressed: color.pressed.backgroundNeutralSubtle
         rationale: No visual weight at rest; a fill would compete with content, so affordance is deferred to hover.
     selected:
       Primary:
-        value: colorBackgroundBrandHeavy
-        hover: hover.colorBackgroundBrandHeavy
-        pressed: pressed.colorBackgroundBrandHeavy
+        value: color.backgroundBrandHeavy
+        hover: color.hover.backgroundBrandHeavy
+        pressed: color.pressed.backgroundBrandHeavy
       Secondary:
-        value: colorBackgroundNeutralHeavy
-        hover: hover.colorBackgroundNeutralHeavy
-        pressed: pressed.colorBackgroundNeutralHeavy
+        value: color.backgroundNeutralHeavy
+        hover: color.hover.backgroundNeutralHeavy
+        pressed: color.pressed.backgroundNeutralHeavy
         rationale: Selected increases fill weight from subtle to heavy for visual emphasis.
       Outline:
-        value: colorBackgroundNeutralHeavy
-        hover: hover.colorBackgroundNeutralHeavy
-        pressed: pressed.colorBackgroundNeutralHeavy
+        value: color.backgroundNeutralHeavy
+        hover: color.hover.backgroundNeutralHeavy
+        pressed: color.pressed.backgroundNeutralHeavy
         rationale: Selected fills the previously transparent container with heavy weight, matching Secondary.
       Subtle:
-        value: colorBackgroundNeutralSoft
-        hover: hover.colorBackgroundNeutralSoft
-        pressed: pressed.colorBackgroundNeutralSoft
+        value: color.backgroundNeutralSoft
+        hover: color.hover.backgroundNeutralSoft
+        pressed: color.pressed.backgroundNeutralSoft
         rationale: Soft (not heavy) — Subtle is the low-weight style, so Selected increases emphasis proportionally rather than jumping to maximum weight.
     disabled:
       unselected:
-        Primary: colorBackgroundNeutralHeavyDisabled
-        Secondary: colorBackgroundNeutralSubtleDisabled
-        Outline: colorBackgroundNeutralTransparent
-        Subtle: colorBackgroundNeutralTransparent
+        Primary: color.backgroundNeutralHeavyDisabled
+        Secondary: color.backgroundNeutralSubtleDisabled
+        Outline: color.backgroundNeutralTransparent
+        Subtle: color.backgroundNeutralTransparent
       selected:
-        Primary: colorBackgroundNeutralHeavyDisabled
-        Secondary: colorBackgroundNeutralHeavyDisabled
-        Outline: colorBackgroundNeutralHeavyDisabled
-        Subtle: colorBackgroundNeutralSubtleDisabled
+        Primary: color.backgroundNeutralHeavyDisabled
+        Secondary: color.backgroundNeutralHeavyDisabled
+        Outline: color.backgroundNeutralHeavyDisabled
+        Subtle: color.backgroundNeutralSubtleDisabled
 
   foreground:
     rest:
       Primary:
-        value: colorForegroundBrandOnloud
-        hover: hover.colorForegroundBrandOnloud
-        pressed: pressed.colorForegroundBrandOnloud
+        value: color.foregroundBrandOnloud
+        hover: color.hover.foregroundBrandOnloud
+        pressed: color.pressed.foregroundBrandOnloud
         rationale: Inverted brand foreground paired with the brand-heavy background — brand-onloud preserves the brand relationship the neutral-onloud variant breaks.
       Secondary:
-        value: colorForegroundNeutralPrimary
-        hover: hover.colorForegroundNeutralPrimary
-        pressed: pressed.colorForegroundNeutralPrimary
+        value: color.foregroundNeutralPrimary
+        hover: color.hover.foregroundNeutralPrimary
+        pressed: color.pressed.foregroundNeutralPrimary
       Outline:
-        value: colorForegroundNeutralPrimary
-        hover: hover.colorForegroundNeutralPrimary
-        pressed: pressed.colorForegroundNeutralPrimary
+        value: color.foregroundNeutralPrimary
+        hover: color.hover.foregroundNeutralPrimary
+        pressed: color.pressed.foregroundNeutralPrimary
       Subtle:
-        value: colorForegroundNeutralPrimary
-        hover: hover.colorForegroundNeutralPrimary
-        pressed: pressed.colorForegroundNeutralPrimary
+        value: color.foregroundNeutralPrimary
+        hover: color.hover.foregroundNeutralPrimary
+        pressed: color.pressed.foregroundNeutralPrimary
     selected:
       Primary:
-        value: colorForegroundBrandOnloud
-        hover: hover.colorForegroundBrandOnloud
-        pressed: pressed.colorForegroundBrandOnloud
+        value: color.foregroundBrandOnloud
+        hover: color.hover.foregroundBrandOnloud
+        pressed: color.pressed.foregroundBrandOnloud
       Secondary:
-        value: colorForegroundNeutralOnloud
-        hover: hover.colorForegroundNeutralOnloud
-        pressed: pressed.colorForegroundNeutralOnloud
+        value: color.foregroundNeutralOnloud
+        hover: color.hover.foregroundNeutralOnloud
+        pressed: color.pressed.foregroundNeutralOnloud
       Outline:
-        value: colorForegroundNeutralOnloud
-        hover: hover.colorForegroundNeutralOnloud
-        pressed: pressed.colorForegroundNeutralOnloud
+        value: color.foregroundNeutralOnloud
+        hover: color.hover.foregroundNeutralOnloud
+        pressed: color.pressed.foregroundNeutralOnloud
       Subtle:
-        value: colorForegroundNeutralPrimary
-        hover: hover.colorForegroundNeutralPrimary
-        pressed: pressed.colorForegroundNeutralPrimary
-    disabled: colorForegroundNeutralDisabled
+        value: color.foregroundNeutralPrimary
+        hover: color.hover.foregroundNeutralPrimary
+        pressed: color.pressed.foregroundNeutralPrimary
+    disabled: color.foregroundNeutralDisabled
 
   stroke:
-    width: strokeWidthThin
+    width: strokeWidth.thin
     width-rationale: All styles carry the same stroke width to maintain identical outer dimensions. Non-Outline styles set the color to transparent.
     rest:
-      Outline: colorStrokeNeutralSubtle
+      Outline: color.strokeNeutralLoud
       Primary: transparent
       Secondary: transparent
       Subtle: transparent
+    hover:
+      Outline: color.hover.strokeNeutralLoud
+    pressed:
+      Outline: color.pressed.strokeNeutralLoud
     selected:
       Outline:
-        color: colorStrokeNeutralHeavy
+        color: color.strokeNeutralHeavy
         rationale: Heavy stroke matches the heavy background fill.
       Primary: transparent
       Secondary: transparent
       Subtle: transparent
     focus: See flex-system:styling — universal dual-outline focus ring.
     disabled:
-      Outline: colorStrokeNeutralDisabled
+      Outline: color.strokeNeutralDisabled
       Primary: transparent
       Secondary: transparent
       Subtle: transparent
 
   radius:
     Icon and text:
-      Small: borderRadiusBase200
-      Medium: borderRadiusBase300
-      Large: borderRadiusBase400
-    Icon only: borderRadiusCircular
+      Small: borderRadius.base200
+      Medium: borderRadius.base300
+      Large: borderRadius.base400
+    Icon only: borderRadius.circular
 
   typography:
     rest:
@@ -148,28 +152,28 @@ tokens:
       Small: textstyle-functional-body-small-strong
       Medium: textstyle-functional-body-medium-strong
       Large: textstyle-functional-body-large-strong
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     Icon and text:
       Small:
-        horizontal: spacingComponentBase200
-        vertical: spacingComponentBase100
+        horizontal: spacing.componentBase200
+        vertical: spacing.componentBase100
       Medium:
-        horizontal: spacingComponentBase250
-        vertical: spacingComponentBase150
+        horizontal: spacing.componentBase250
+        vertical: spacing.componentBase150
         rationale: Tight tier — Medium is the dense interactive default; Small and Large use Regular.
       Large:
-        horizontal: spacingComponentBase300
-        vertical: spacingComponentBase200
+        horizontal: spacing.componentBase300
+        vertical: spacing.componentBase200
     Icon only:
-      Small: spacingComponentBase100
-      Medium: spacingComponentBase150
-      Large: spacingComponentBase250
+      Small: spacing.componentBase100
+      Medium: spacing.componentBase150
+      Large: spacing.componentBase250
     gap:
-      Small: spacingComponentBase50
-      Medium: spacingComponentBase100
-      Large: spacingComponentBase150
+      Small: spacing.componentBase50
+      Medium: spacing.componentBase100
+      Large: spacing.componentBase150
 
   elevation: n/a
 
@@ -190,7 +194,8 @@ sizes:
     Heights are resultant — derived from padding + typography + stroke. Listed values are for Icon-and-text;
     Icon-only buttons are square by design and their dimensions are determined by icon size + padding (24 / 32 / 40).
     Prefer responsive sizing; use min/max constraints when a fixed bound is needed.
-    Icon sizes have no token coverage and must be hardcoded.
+    Icon sizes have no component-specific semantic token coverage. Use the equivalent
+    global size tokens (size160 and size200) rather than numeric literals.
 
 properties:
   component:

@@ -13,24 +13,24 @@ tokens:
 
   stroke:
     divider:
-      color: colorStrokeNeutralSubtle
+      color: color.strokeNeutralSubtle
       rationale: Subtle stroke weight — the divider should recede behind the button icons, not compete for attention.
-    width: strokeWidthThin
+    width: strokeWidth.thin
     width-rationale: Thin is the standard weight for low-emphasis separators.
     focus: See flex-system:styling — universal dual-outline focus ring (applied on child Buttons, not the toolbar container).
 
   radius: n/a
   radius-notes: >
     Toolbar has no visible container surface. Child Button radius is owned by the Button component.
-    If a toolbar surface is introduced in the future, use borderRadiusBase300
+    If a toolbar surface is introduced in the future, use borderRadius.base300
     as the starting point, per the composite staircase rule with atomic-small child buttons.
 
   typography: n/a # No text content at the toolbar level. Delegated to child Button.
 
   spacing:
     gap:
-      Large: spacingComponentBase150
-      Small: spacingComponentBase50
+      Large: spacing.componentBase150
+      Small: spacing.componentBase50
     gap-rationale: >
       Component category — spacing is between tightly coupled sibling elements within a single component.
     padding: n/a # Toolbar container has no internal padding — children align flush to the container edges.
@@ -59,8 +59,8 @@ dependencies:
     skill: flex-components:divider
     usage: Vertical separator between logical button groups. Stretches to full toolbar height.
     tokens:
-      stroke-color: colorStrokeNeutralSubtle
-      stroke-width: strokeWidthThin
+      stroke-color: color.strokeNeutralSubtle
+      stroke-width: strokeWidth.thin
 
 properties:
   component:

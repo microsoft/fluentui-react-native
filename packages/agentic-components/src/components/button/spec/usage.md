@@ -33,3 +33,5 @@ component: Button
 ## Content
 
 - **Always use the functional type ramp on labels.** Buttons are interactive UI chrome — the content ramp is reserved for editorial and AI-generated content.
+- Allow labels to wrap when the surrounding layout constrains the button. Do not force truncation unless the consuming
+  surface explicitly supplies that behavior through the content slot.

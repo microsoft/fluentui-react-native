@@ -214,9 +214,9 @@ This preserves native ref information. Explicit props-first calls such as
 `useSlot<ViewProps>(View, rootProps)` remain supported for compatibility but cannot
 derive the native instance type as precisely.
 
-`useSlot` tracks whether required props were resolved. If neither the slot prop nor
-`options.defaultProps` provides a required value, that value remains required when
-the resolved slot is rendered.
+`useSlot` requires all required props to be resolved by the slot prop or
+`options.defaultProps`. Once the slot is created, every prop is optional when it is
+rendered because JSX props act as overrides for the resolved values.
 
 ### Slot component example
 

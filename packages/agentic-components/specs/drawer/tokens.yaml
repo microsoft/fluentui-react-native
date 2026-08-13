@@ -39,7 +39,7 @@ variants:
 tokens:
   surface:
     container:
-      token: colorSurfaceNeutralNearer
+      token: color.surfaceNeutralNearer
       rationale: >
         Same surface token as Popover — highest ordinal surface step, reading as a
         distinct layer whether inline or floating. Consistent with other secondary
@@ -47,7 +47,7 @@ tokens:
 
   background:
     scrim:
-      token: colorOverlayNeutralTranslucent
+      token: color.overlayNeutralTranslucent
       rationale: >
         Semi-transparent overlay that dims main content behind a Modal or Alert
         Overlay drawer. Resolves to black at 50% in dark mode and white at 50%
@@ -56,23 +56,23 @@ tokens:
 
   foreground:
     title:
-      token: colorForegroundNeutralPrimary
+      token: color.foregroundNeutralPrimary
       rationale: Primary neutral foreground for the header title text.
 
   stroke:
-    width: strokeWidthThin
+    width: strokeWidth.thin
     width-rationale: >
       Thin stroke on the edge opposite the position anchor — separates the drawer
       from main content in Inline type. Overlay type relies on shadow instead.
     inline-edge:
-      token: colorStrokeNeutralSubtle
+      token: color.strokeNeutralSubtle
       rationale: Subtle neutral stroke visible on the Inline drawer's inward edge.
     overlay: no-stroke
     overlay-notes: >
       Overlay Start/End type uses shadow for boundary; no visible stroke. Bottom
       position is the exception — see bottom-top-edge.
     bottom-top-edge:
-      token: colorStrokeNeutralSubtle
+      token: color.strokeNeutralSubtle
       rationale: >
         Bottom drawers add a subtle stroke on their top edge — the only edge adjacent
         to underlying content. The elevation shadow casts downward (all shadow tokens
@@ -93,7 +93,7 @@ tokens:
       token: 0px
       rationale: Same as Start — flush to the viewport edge.
     Bottom:
-      top-corners: borderRadiusBase400
+      top-corners: borderRadius.base400
       bottom-corners: 0px
       rationale: >
         Bottom drawers round only the top corners to signal the slide-up origin
@@ -104,12 +104,12 @@ tokens:
     notes: >
       Header title uses body medium strong for clear hierarchy within the drawer
       without competing with page-level headings.
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     header:
-      horizontal: spacingLayoutBase200
-      vertical: spacingLayoutBase100
+      horizontal: spacing.layoutBase200
+      vertical: spacing.layoutBase100
       rationale: >
         Layout-tier spacing — the header is a section-level region within the drawer,
         not an inline control. 16px horizontal, 8px vertical.
@@ -125,15 +125,15 @@ tokens:
         Header content (title and navigation slot) is vertically centered within the
         fixed-height header rather than top-aligned, so the title sits on the optical
         center line of the navigation Button.
-    header-gap: spacingComponentBase200
+    header-gap: spacing.componentBase200
     body:
-      horizontal: spacingLayoutBase200
-      vertical: spacingLayoutBase100
+      horizontal: spacing.layoutBase200
+      vertical: spacing.layoutBase100
       rationale: >
         Matches header padding for consistent alignment of content edges.
     footer:
-      horizontal: spacingLayoutBase200
-      vertical: spacingLayoutBase100
+      horizontal: spacing.layoutBase200
+      vertical: spacing.layoutBase100
       min-height: 48px
       min-height-rationale: >
         Fixed minimum footer height — mirrors the header (Button Medium 32px + 8px
@@ -142,7 +142,7 @@ tokens:
       align: center
       align-rationale: >
         Footer action buttons are vertically centered within the fixed-height footer.
-    footer-gap: spacingComponentBase200
+    footer-gap: spacing.componentBase200
     footer-notes: >
       Gap between action buttons in the footer.
 
@@ -152,7 +152,7 @@ tokens:
       notes: Inline drawers sit in the layout flow — no elevation.
     Overlay:
       level: 5
-      shadow: shadowHighest
+      shadow: shadow.highest
       notes: >
         Highest elevation — the Overlay drawer is a page-level surface that floats
         above all other content, similar to a modal. Uses the same shadow tier

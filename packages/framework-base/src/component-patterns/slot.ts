@@ -116,7 +116,7 @@ export function setSlotStatics<TProps>(
  *
  * @internal
  */
-export function prepareSlotProps<TProps>(slotInfo: SlotComponentStatics<TProps>, userProps?: TProps): TProps {
+export function prepareSlotProps<TProps>(slotInfo: SlotComponentStatics<TProps>, userProps?: TProps | Partial<TProps>): TProps {
   const baseProps = slotInfo[SLOT_PROPS_KEY];
   const transform = slotInfo[SLOT_PROP_TRANSFORM_KEY];
   const baseRef = getPropsRef(baseProps);

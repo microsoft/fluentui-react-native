@@ -19,79 +19,79 @@ variants:
 tokens:
   background:
     all-states:
-      all-styles: colorBackgroundNeutralTransparent
+      all-styles: color.backgroundNeutralTransparent
 
   foreground:
     rest:
-      placeholder: colorForegroundNeutralTertiary
-      value: colorForegroundNeutralPrimary
+      placeholder: color.foregroundNeutralTertiary
+      value: color.foregroundNeutralPrimary
     disabled:
-      all: colorForegroundNeutralDisabled
+      all: color.foregroundNeutralDisabled
     read-only:
-      value: colorForegroundNeutralPrimary
+      value: color.foregroundNeutralPrimary
       rationale: Primary foreground distinguishes a real value from Disabled's low-contrast state.
 
   stroke:
-    width: strokeWidthThin
+    width: strokeWidth.thin
     outline:
       rest:
-        value: colorStrokeNeutralLoud
-        hover: hover.colorStrokeNeutralLoud
-        pressed: pressed.colorStrokeNeutralLoud
+        value: color.strokeNeutralLoud
+        hover: color.hover.strokeNeutralLoud
+        pressed: color.pressed.strokeNeutralLoud
       focus:
-        value: colorStrokeNeutralHeavy
-        hover: hover.colorStrokeNeutralHeavy
-        pressed: pressed.colorStrokeNeutralHeavy
-      error: colorStrokeDangerLoud
-      disabled: colorStrokeNeutralDisabled
-      read-only: colorStrokeNeutralDisabled
+        value: color.strokeNeutralHeavy
+        hover: color.hover.strokeNeutralHeavy
+        pressed: color.pressed.strokeNeutralHeavy
+      error: color.strokeDangerLoud
+      disabled: color.strokeNeutralDisabled
+      read-only: color.strokeNeutralDisabled
     underline:
       rest:
-        value: colorStrokeNeutralLoud
-        hover: hover.colorStrokeNeutralLoud
-        pressed: pressed.colorStrokeNeutralLoud
+        value: color.strokeNeutralLoud
+        hover: color.hover.strokeNeutralLoud
+        pressed: color.pressed.strokeNeutralLoud
       focus:
-        value: colorStrokeNeutralHeavy
-        hover: hover.colorStrokeNeutralHeavy
-        pressed: pressed.colorStrokeNeutralHeavy
-      error: colorStrokeDangerLoud
-      disabled: colorStrokeNeutralDisabled
-      read-only: colorStrokeNeutralDisabled
+        value: color.strokeNeutralHeavy
+        hover: color.hover.strokeNeutralHeavy
+        pressed: color.pressed.strokeNeutralHeavy
+      error: color.strokeDangerLoud
+      disabled: color.strokeNeutralDisabled
+      read-only: color.strokeNeutralDisabled
     focus-ring: >
       Input does not use the universal dual-outline focus ring. The boundary
-      stroke itself swaps to colorStrokeNeutralHeavy on focus —
+      stroke itself swaps to color.strokeNeutralHeavy on focus —
       Outline as a full border, Underline as the bottom edge.
 
   radius:
     all-styles:
-      Small: borderRadiusBase200
-      Medium: borderRadiusBase300
-      Large: borderRadiusBase400
+      Small: borderRadius.base200
+      Medium: borderRadius.base300
+      Large: borderRadius.base400
 
   typography:
     rest:
       Small: textstyle-functional-body-small
       Medium: textstyle-functional-body-medium
       Large: textstyle-functional-body-large
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     all-styles:
       Small:
-        horizontal: spacingComponentBase150
-        vertical: spacingComponentBase100
+        horizontal: spacing.componentBase150
+        vertical: spacing.componentBase100
       Medium:
-        horizontal: spacingComponentBase250
-        vertical: spacingComponentBase150
+        horizontal: spacing.componentBase250
+        vertical: spacing.componentBase150
       Large:
-        horizontal: spacingComponentBase300
-        vertical: spacingComponentBase200
+        horizontal: spacing.componentBase300
+        vertical: spacing.componentBase200
     gap:
-      all-sizes: spacingComponentBase250
+      all-sizes: spacing.componentBase250
     icon-end-padding:
-      Small: spacingComponentBase100
-      Medium: spacingComponentBase150
-      Large: spacingComponentBase150
+      Small: spacing.componentBase100
+      Medium: spacing.componentBase150
+      Large: spacing.componentBase150
 
   elevation: n/a
 

@@ -10,6 +10,7 @@ export const colorBrandTint10 = '#2b88d8';
 export const colorBrandTint20 = '#c7e0f4';
 export const colorBrandTint30 = '#deecf9';
 export const colorBrandTint40 = '#eff6fc';
+export const fontFamilyBase = 'Helvetica Neue';
 export const fontFamilyDefault = 'Helvetica Neue';
 export const fontFamilyMonospace = 'Courier New';
 export const fontFamilyNumeric = 'Helvetica Neue';

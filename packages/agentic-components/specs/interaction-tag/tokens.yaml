@@ -44,27 +44,27 @@ tokens:
     container:
       rest:
         Secondary:
-          value: colorBackgroundNeutralSubtle
-          hover: hover.colorBackgroundNeutralSubtle
-          pressed: pressed.colorBackgroundNeutralSubtle
+          value: color.backgroundNeutralSubtle
+          hover: color.hover.backgroundNeutralSubtle
+          pressed: color.pressed.backgroundNeutralSubtle
           rationale: Subtle background fill is the lower-emphasis default surface, inherited from Tag.
         Primary:
-          value: colorBackgroundBrandHeavy
-          hover: hover.colorBackgroundBrandHeavy
-          pressed: pressed.colorBackgroundBrandHeavy
+          value: color.backgroundBrandHeavy
+          hover: color.hover.backgroundBrandHeavy
+          pressed: color.pressed.backgroundBrandHeavy
           rationale: Brand-heavy fill is the higher-emphasis surface, inherited from Tag.
-      disabled: colorBackgroundNeutralHeavyDisabled
+      disabled: color.backgroundNeutralHeavyDisabled
 
   foreground:
     container:
       rest:
         Secondary:
-          token: colorForegroundNeutralPrimary
+          token: color.foregroundNeutralPrimary
           rationale: Neutral primary foreground reads clearly on the subtle background.
         Primary:
-          token: colorForegroundNeutralOnloud
+          token: color.foregroundNeutralOnloud
           rationale: Inverted foreground for readability on the heavy brand background (inherited from Tag).
-      disabled: colorForegroundNeutralDisabled
+      disabled: color.foregroundNeutralDisabled
     notes: >
       No foreground shift on hover/pressed — the background overlay
       provides sufficient interaction feedback for both styles.
@@ -73,9 +73,9 @@ tokens:
     container: no-stroke
     divider:
       color:
-        Secondary: colorStrokeNeutralSoft
-        Primary: colorStrokeNeutralOnloud
-      width: strokeWidthThin
+        Secondary: color.strokeNeutralSoft
+        Primary: color.strokeNeutralOnloud
+      width: strokeWidth.thin
       rationale: >
         Vertical stroke between primary action and secondary action;
         visually separates the two interactive regions. The color tracks
@@ -88,10 +88,10 @@ tokens:
     container:
       Icon and text:
         Rounded:
-          Small: borderRadiusBase200
-          Medium: borderRadiusBase300
-        Circular: borderRadiusCircular
-      Icon only: borderRadiusCircular
+          Small: borderRadius.base200
+          Medium: borderRadius.base300
+        Circular: borderRadius.circular
+      Icon only: borderRadius.circular
     notes: >
       The Shape axis sets the Icon and text corner radius: Rounded uses the
       size-dependent base radius (default); Circular uses the fully circular
@@ -106,7 +106,7 @@ tokens:
     rest:
       Small: textstyle-functional-body-small
       Medium: textstyle-functional-body-medium
-    font-family: fontFamilyFunctional
+    font-family: fontFamily.functional
 
   spacing:
     container:
@@ -120,15 +120,15 @@ tokens:
         the divider; a container gap would add unwanted space around it.
         This differs from Tag, where padding sits on the container.
     primary-action-inner-gap:
-      token: spacingComponentBase50
+      token: spacing.componentBase50
       rationale: Gap between leading content and label within the primary action area.
     action-padding:
       Small:
-        inline: spacingComponentBase150
-        block: spacingComponentBase100
+        inline: spacing.componentBase150
+        block: spacing.componentBase100
       Medium:
-        inline: spacingComponentBase200
-        block: spacingComponentBase150
+        inline: spacing.componentBase200
+        block: spacing.componentBase150
       rationale: >
         Symmetric padding applied to both the primary and secondary action
         areas, giving equal breathing room on both sides of the divider
@@ -138,7 +138,7 @@ tokens:
         of truth for the tag's interactive padding — the container itself owns
         no padding.
     label-wrapper-padding:
-      inline: spacingComponentBase50
+      inline: spacing.componentBase50
       rationale: Horizontal padding on the label wrapper frame, matching Tag.
 
   elevation: n/a

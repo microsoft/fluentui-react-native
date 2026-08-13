@@ -3,11 +3,6 @@ const { makeMetroConfig } = require('@rnx-kit/metro-config');
 const MetroSymlinksResolver = require('@rnx-kit/metro-resolver-symlinks');
 const { withStorybook } = require('@storybook/react-native/withStorybook');
 
-// The library source (which contains the *.stories.* files) lives one level up from this
-// app, so Metro needs to watch the whole package directory in addition to the repo root.
-const packageRoot = path.resolve(__dirname, '..');
-const repoRoot = path.resolve(__dirname, '../../..');
-
 const symlinkResolver = MetroSymlinksResolver({
   resolver: 'oxc-resolver',
 });
@@ -17,8 +12,6 @@ const symlinkResolver = MetroSymlinksResolver({
 const safeAreaStub = path.resolve(__dirname, './src/storybook-mocks/react-native-safe-area-context.js');
 
 const config = makeMetroConfig({
-  projectRoot: __dirname,
-  watchFolders: [packageRoot, repoRoot],
   resolver: {
     resolveRequest: (context, moduleName, platform) => {
       // Storybook liteMode mocks out the heavy default UI (`@storybook/react-native-ui`, which
