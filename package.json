@@ -88,7 +88,7 @@
   "engines": {
     "node": ">=22.12"
   },
-  "packageManager": "yarn@4.13.0",
+  "packageManager": "yarn@4.18.0",
   "rnx-kit": {
     "extends": "./scripts/configs/rnx-kit/rnx-kit.config.cts",
     "kitType": "library"
