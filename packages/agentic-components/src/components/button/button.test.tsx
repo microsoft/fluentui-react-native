@@ -293,9 +293,9 @@ describe('Button', () => {
   );
 
   it.each([
-    ['small', 12, 8, 8],
-    ['medium', 14, 10, 12],
-    ['large', 16, 12, 12],
+    ['small', 12, 8, 4],
+    ['medium', 14, 10, 4],
+    ['large', 16, 12, 6],
   ] as const)('resolves the %s size', async (size, fontSize, paddingHorizontal, borderRadius) => {
     const component = await renderButton({ content: size, size });
     expect(StyleSheet.flatten(component.getByText(size).props.style)).toMatchObject({
