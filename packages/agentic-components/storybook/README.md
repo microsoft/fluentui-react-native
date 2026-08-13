@@ -1,7 +1,7 @@
 # Agentic Components Storybook
 
 On-device [Storybook](https://storybook.js.org/) app (Storybook for React Native v10) for
-`@fluentui-react-native/agentic-components`. It loads every `*.stories.(ts|tsx)` file from the
+`@fluentui-react-native/components`. It loads every `*.stories.(ts|tsx)` file from the
 library source (`../src`) so new component stories appear automatically.
 
 It runs in Storybook **liteMode**, which mocks out the heavy default on-device UI
@@ -42,7 +42,10 @@ matching the other test apps in this repo. Only the hand-written `macos/Podfile`
 ```sh
 # from this directory
 # 1. Generate the Xcode project/workspace + install pods
-pod install --project-directory=macos
+yarn pods:macos
+
+# Optional: verify a native build without launching the app
+yarn macos:build
 
 # 2. Start Metro (also generates storybook.requires)
 yarn start
@@ -53,9 +56,12 @@ yarn macos
 
 Requires Xcode + CocoaPods.
 
-> Xcode 26 / Apple Clang 21 note: React Native 0.81 pins `fmt` 11.0.2, which fails to compile
-> under the stricter `consteval` checks. `macos/Podfile` includes a `post_install` patch that
-> disables fmt's compile-time format-string checking (ABI-safe), re-applied on every `pod install`.
+If `Pods` was generated against an older React Native macOS patch release and CocoaPods reports
+that a local podspec such as `fmt` changed, refresh the local native dependencies:
+
+```sh
+yarn pods:macos:update
+```
 
 > `react-native-safe-area-context` note: Storybook's UI imports it, but its native module is
 > iOS-only (UIKit) and uses a Yoga API that doesn't compile for react-native-macos 0.81. It is

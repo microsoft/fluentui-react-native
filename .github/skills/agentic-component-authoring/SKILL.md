@@ -15,6 +15,8 @@ Build components in `packages/agentic-components` as React Native adaptations of
   them.
 - Primitive components live in `src/primitives`. Read the
   [primitive instructions](../../../packages/agentic-components/src/primitives/AGENTS.md) before changing them.
+- Work on the Storybook application, native projects, bundling, or CocoaPods belongs to the
+  [agentic Storybook development skill](../agentic-storybook-development/SKILL.md), not this component workflow.
 
 ## Workflow
 
@@ -32,4 +34,8 @@ Build components in `packages/agentic-components` as React Native adaptations of
 Use `@testing-library/react-native` with accessible queries and async events for component rendering tests; do not import
 `react-test-renderer` directly. Keep visual-state snapshots focused on resolved component output.
 
-Run the package build, test, lint, and format commands, then run the root `yarn build` when public types or project references change.
+Use the package's declared scripts rather than invoking Jest or TypeScript directly. During iteration, run the smallest
+affected test and run package lint/build early after type-heavy changes. For final validation, run format, lint, package
+build, and the full package test suite, then run the root `yarn build` when public types or project references change.
+Request an independent implementation review only after those focused checks pass and only for a remaining ambiguous or
+cross-cutting contract.

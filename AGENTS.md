@@ -102,6 +102,25 @@ Each package's own `build` script is `tsc -b` (it builds that package together w
 
 `fluentui-scripts` also retains a `build` command that can emit dual ESM (`lib/`) and CommonJS (`lib-commonjs/`) output driven by per-package build config, but packages on this branch build with `tsc -b` directly.
 
+### Agent validation and investigation discipline
+
+- Run commands through the owning workspace's declared scripts. Inspect its `package.json` before invoking an underlying
+  runner directly; do not assume scripts such as `jest` or `check` exist, and do not bypass project references with
+  ad-hoc `tsc` file arguments.
+- Run working-directory-sensitive native tools from the owning app workspace. Flags such as CocoaPods'
+  `--project-directory` select project files but do not necessarily change subprocess resolution roots.
+- During iteration, use the smallest relevant test and run package lint/build early after type-heavy edits. For final
+  validation, run format, lint, package build, package tests, then the root build when public types, manifests, or project
+  references changed.
+- After fixing a failed validation step, rerun that step and its downstream checks. Avoid repeatedly running the entire
+  validation chain before the immediate failure is resolved.
+- Prefer committed `*.types.test.ts` coverage for compile-time contracts. Keep exploratory probes outside package source,
+  or remove them before running package validation.
+- Review small, localized diffs directly. Use an independent review agent only after focused validation passes and only
+  when the change still has a genuinely ambiguous or cross-cutting contract.
+- Keep sessions scoped to one reviewable outcome. After capturing a durable result, start unrelated work in a fresh
+  session so stale context and generated output do not dominate later investigation.
+
 ## TypeScript Configuration
 
 The repo uses **TypeScript 7.0.2** via **tsc**, which is automatically added as a dev dependency to every package that has a `tsconfig.json` through dynamic package extensions (`scripts/dynamic.extensions.mts`).

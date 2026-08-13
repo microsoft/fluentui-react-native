@@ -2591,7 +2591,7 @@ __metadata:
   resolution: "@fluentui-react-native/agentic-components-storybook@workspace:packages/agentic-components/storybook"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/agentic-components": "workspace:*"
+    "@fluentui-react-native/components": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -2624,41 +2624,6 @@ __metadata:
     storybook: "npm:^10.4.0"
     tmcp: "npm:^1.19.4"
     valibot: "npm:^1.4.1"
-  languageName: unknown
-  linkType: soft
-
-"@fluentui-react-native/agentic-components@workspace:*, @fluentui-react-native/agentic-components@workspace:packages/agentic-components":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/agentic-components@workspace:packages/agentic-components"
-  dependencies:
-    "@babel/core": "catalog:"
-    "@fluentui-react-native/design": "workspace:*"
-    "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native-community/cli": "npm:^20.0.0"
-    "@react-native-community/cli-platform-android": "npm:^20.0.0"
-    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
-    "@react-native/babel-preset": "npm:^0.81.0"
-    "@react-native/metro-config": "npm:^0.81.0"
-    "@testing-library/react-native": "catalog:0.81"
-    "@types/react": "npm:~19.1.4"
-    react: "npm:19.1.4"
-    react-native: "npm:^0.81.6"
-    react-native-macos: "npm:^0.81.0"
-    test-renderer: "catalog:0.81"
-  peerDependencies:
-    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
-    react: 18.2.0 || 19.0.0 || 19.1.4
-    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
-    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    react-native-macos:
-      optional: true
-    react-native-windows:
-      optional: true
   languageName: unknown
   linkType: soft
 
@@ -3062,6 +3027,41 @@ __metadata:
     yargs: "npm:^17.0.0"
   bin:
     transform: ./transform.js
+  languageName: unknown
+  linkType: soft
+
+"@fluentui-react-native/components@workspace:*, @fluentui-react-native/components@workspace:packages/agentic-components":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/components@workspace:packages/agentic-components"
+  dependencies:
+    "@babel/core": "catalog:"
+    "@fluentui-react-native/design": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@testing-library/react-native": "catalog:0.81"
+    "@types/react": "npm:~19.1.4"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
+    react-native-macos: "npm:^0.81.0"
+    test-renderer: "catalog:0.81"
+  peerDependencies:
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-windows:
+      optional: true
   languageName: unknown
   linkType: soft
 

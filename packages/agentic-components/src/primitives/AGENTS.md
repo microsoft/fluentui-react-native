@@ -13,3 +13,6 @@ These instructions apply to `packages/agentic-components/src/primitives` and its
 - Keep source variants mutually exclusive when a primitive can wrap several inner component types.
 - Add compile-time `SlotProp` coverage, runtime coverage for each inner component type, and Storybook stories that
   demonstrate the primitive without adding component-level styling.
+- Test with React Native Testing Library and assert the primitive's public props and resolved output. Some platform
+  adapters do not expose inner images through role queries consistently; use a stable `testID` in that case rather than
+  importing React Test Renderer or asserting renderer-specific tree structure.
