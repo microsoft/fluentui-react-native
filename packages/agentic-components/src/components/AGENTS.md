@@ -23,7 +23,8 @@ Use `components/button` as the canonical implementation.
   Fluent authoring sources to grouped React Native Flex token paths.
 - Read semantic colors from `useThemeState().tokens.color` so Flex interaction overrides and future themes flow through
   the component. Use `getThemedColorStyleFactory` for semantic state branches and automatic hover/pressed token
-  resolution.
+  resolution. Declare state precedence as an ordered tuple of hierarchy levels; each level contains mutually exclusive
+  states in priority order.
 - Access other Flex categories through their grouped objects, such as `tokens.shadow`, `tokens.fontWeight`,
   `tokens.fontFamily`, `tokens.fontSize`, `tokens.lineHeight`, `tokens.borderRadius`, `tokens.spacing`, and
   `tokens.strokeWidth`.
@@ -40,12 +41,29 @@ Use `components/button` as the canonical implementation.
   within that state.
 - Apply user styles after token-derived component styles.
 
+## Style creation and consumption rules
+
+- Create one module-scoped `StyleSheet` for structural styles that do not depend on tokens, theme values, props, or state.
+- For styles that depend on state but not the theme, create module-scoped selectors with `getStateStyleFactory`.
+- Define color hierarchy levels in this order: appearance, selected (when supported), then interaction. Order interaction
+  states as disabled, pressed, and hovered so the first active state has the required priority.
+- Create background and foreground getters with `getThemedColorStyleFactory`. Use the resolved foreground style for slot
+  props such as an icon's `color`.
+- Combine size, shape, and content-layout axes into one hierarchy selected by a getter from
+  `getThemedStateStyleFactory`. Use separate themed state factories for independent concerns such as typography or focus.
+- Destructure the relevant `FlexTokens` groups in factory parameters, for example
+  `({ borderRadius, spacing }: FlexTokens)`, rather than repeatedly dereferencing a `tokens` parameter.
+- Compose slot styles as arrays ordered from constant structural styles, to resolved state styles, to semantic colors,
+  to conditional overrides, and finally user styles.
+- Create all factories at module scope. A render or style hook should only select cached styles, never create a factory.
+
 ## Canonical file responsibilities
 
 - `<component>.types.ts`: public slots, props, named variants, and resolved state.
+- `<component>.styles.ts`: style definitions, module-scoped factories, lookups, and selector helpers.
 - `use<Component>.ts`: defaults, accessibility, interaction hooks, and slot construction.
-- `useApplyStyles.ts`: retrieve cached theme styles through module-scoped `themedStyleSheetFactory` getters, select
-  state-specific styles, and call `attachSlotProps`.
+- `useApplyStyles.ts`: select cached styles through module-scoped style getters, compose style arrays, and call
+  `attachSlotProps`.
 - `render<Component>.tsx`: slot ordering and conditional layout only; no hooks or token lookup.
 - `<component>.ts`: compose the state, style, and render stages.
 

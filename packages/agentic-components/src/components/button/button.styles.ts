@@ -1,139 +1,164 @@
 import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
-import { themedStyleSheetFactory } from '@fluentui-react-native/design';
-import type { ThemeState } from '@fluentui-react-native/design';
+import type { FlexTokens } from '@fluentui-react-native/design';
 import { cornerRadiusNone, size160, size200, size240, sizeNone } from '@fluentui-react-native/design/tokens/global';
 
+import { getStateStyleFactory, getThemedStateStyleFactory } from '../../utils/branchedStyle';
+import type { StateNames, StyleDefinition } from '../../utils/branchedStyle';
 import { getThemedColorStyleFactory } from '../../utils/colorStyles';
 import type { ColorStyleDefinition, TextColorStyle, ViewColorStyle } from '../../utils/colorStyles';
-import type { ButtonAppearance, ButtonShape, ButtonSize, ButtonState } from './button.types';
+import type { ButtonSize, ButtonState } from './button.types';
 
-type FlexTokens = ThemeState['tokens'];
-type ButtonRootState = 'selected';
-type ButtonBranchState = 'disabled' | 'pressed' | 'hovered';
-type BackgroundColorDefinition = ColorStyleDefinition<ViewColorStyle, ButtonRootState, ButtonBranchState>;
-type ForegroundColorDefinition = ColorStyleDefinition<TextColorStyle, ButtonRootState, ButtonBranchState>;
+export const buttonStyles = StyleSheet.create({
+  root: {
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    borderStyle: 'solid',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  content: {
+    textAlign: 'center',
+  },
+  contentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+});
 
-const rootStates = ['selected'] as const;
-const branchStates = ['disabled', 'pressed', 'hovered'] as const;
+const colorStateLevels = [['primary', 'secondary', 'outline', 'subtle'], ['selected'], ['disabled', 'pressed', 'hovered']] as const;
+type ColorStateLevels = typeof colorStateLevels;
+type ColorState = StateNames<ColorStateLevels>;
 
-type AppearanceColorDefinitions = {
-  background: BackgroundColorDefinition;
-  foreground: ForegroundColorDefinition;
-};
-
-const appearanceColorDefinitions: Record<ButtonAppearance, AppearanceColorDefinitions> = {
+const backgroundColorDefinition: ColorStyleDefinition<ViewColorStyle, ColorStateLevels> = {
   primary: {
-    background: {
-      backgroundColor: 'backgroundBrandHeavy',
-      borderColor: 'strokeNeutralTransparent',
+    backgroundColor: 'backgroundBrandHeavy',
+    borderColor: 'strokeNeutralTransparent',
+    disabled: {
+      backgroundColor: 'backgroundNeutralHeavyDisabled',
+    },
+  },
+  secondary: {
+    backgroundColor: 'backgroundNeutralSubtle',
+    borderColor: 'strokeNeutralTransparent',
+    selected: {
+      backgroundColor: 'backgroundNeutralHeavy',
       disabled: {
         backgroundColor: 'backgroundNeutralHeavyDisabled',
       },
     },
-    foreground: {
-      color: 'foregroundBrandOnloud',
-      disabled: {
-        color: 'foregroundNeutralDisabled',
-      },
+    disabled: {
+      backgroundColor: 'backgroundNeutralSubtleDisabled',
     },
   },
-  secondary: {
-    background: {
-      backgroundColor: 'backgroundNeutralSubtle',
-      borderColor: 'strokeNeutralTransparent',
-      selected: {
-        backgroundColor: 'backgroundNeutralHeavy',
-        disabled: {
-          backgroundColor: 'backgroundNeutralHeavyDisabled',
-        },
+  outline: {
+    backgroundColor: 'backgroundNeutralTransparent',
+    borderColor: 'strokeNeutralSubtle',
+    selected: {
+      backgroundColor: 'backgroundNeutralHeavy',
+      borderColor: 'strokeNeutralHeavy',
+      disabled: {
+        backgroundColor: 'backgroundNeutralHeavyDisabled',
+        borderColor: 'strokeNeutralDisabled',
       },
+    },
+    disabled: {
+      borderColor: 'strokeNeutralDisabled',
+    },
+  },
+  subtle: {
+    backgroundColor: 'backgroundNeutralTransparent',
+    borderColor: 'strokeNeutralTransparent',
+    selected: {
+      backgroundColor: 'backgroundNeutralSoft',
       disabled: {
         backgroundColor: 'backgroundNeutralSubtleDisabled',
       },
     },
-    foreground: {
-      color: 'foregroundNeutralPrimary',
-      selected: {
-        color: 'foregroundNeutralOnloud',
-      },
-      disabled: {
-        color: 'foregroundNeutralDisabled',
-      },
+  },
+};
+
+const foregroundColorDefinition: ColorStyleDefinition<TextColorStyle, ColorStateLevels> = {
+  primary: {
+    color: 'foregroundBrandOnloud',
+    disabled: {
+      color: 'foregroundNeutralDisabled',
+    },
+  },
+  secondary: {
+    color: 'foregroundNeutralPrimary',
+    selected: {
+      color: 'foregroundNeutralOnloud',
+    },
+    disabled: {
+      color: 'foregroundNeutralDisabled',
     },
   },
   outline: {
-    background: {
-      backgroundColor: 'backgroundNeutralTransparent',
-      borderColor: 'strokeNeutralSubtle',
-      selected: {
-        backgroundColor: 'backgroundNeutralHeavy',
-        borderColor: 'strokeNeutralHeavy',
-        disabled: {
-          backgroundColor: 'backgroundNeutralHeavyDisabled',
-          borderColor: 'strokeNeutralDisabled',
-        },
-      },
-      disabled: {
-        borderColor: 'strokeNeutralDisabled',
-      },
+    color: 'foregroundNeutralPrimary',
+    selected: {
+      color: 'foregroundNeutralOnloud',
     },
-    foreground: {
-      color: 'foregroundNeutralPrimary',
-      selected: {
-        color: 'foregroundNeutralOnloud',
-      },
-      disabled: {
-        color: 'foregroundNeutralDisabled',
-      },
+    disabled: {
+      color: 'foregroundNeutralDisabled',
     },
   },
   subtle: {
-    background: {
-      backgroundColor: 'backgroundNeutralTransparent',
-      borderColor: 'strokeNeutralTransparent',
-      selected: {
-        backgroundColor: 'backgroundNeutralSoft',
-        disabled: {
-          backgroundColor: 'backgroundNeutralSubtleDisabled',
-        },
-      },
-    },
-    foreground: {
-      color: 'foregroundNeutralPrimary',
-      disabled: {
-        color: 'foregroundNeutralDisabled',
-      },
+    color: 'foregroundNeutralPrimary',
+    disabled: {
+      color: 'foregroundNeutralDisabled',
     },
   },
 };
 
-type AppearanceStyleGetter = (state: ButtonState) => {
+const getThemedBackgroundStyle = getThemedColorStyleFactory<ViewColorStyle, ColorStateLevels>(
+  'Button.background',
+  backgroundColorDefinition,
+  colorStateLevels,
+);
+const getThemedForegroundStyle = getThemedColorStyleFactory<TextColorStyle, ColorStateLevels>(
+  'Button.foreground',
+  foregroundColorDefinition,
+  colorStateLevels,
+);
+
+function getColorStateSource(state: ButtonState): ColorState[] {
+  const source: ColorState[] = [state.appearance];
+  if (state.selected) {
+    source.push('selected');
+  }
+  if (state.disabled) {
+    source.push('disabled');
+  }
+  if (state.pressed) {
+    source.push('pressed');
+  }
+  if (state.hovered) {
+    source.push('hovered');
+  }
+  return source;
+}
+
+export function getButtonColorStyles(state: ButtonState): {
   background: ViewColorStyle;
   foreground: TextColorStyle;
-};
-
-function createAppearanceStyleGetter(appearance: ButtonAppearance, definitions: AppearanceColorDefinitions): AppearanceStyleGetter {
-  const getBackground = getThemedColorStyleFactory(`Button.${appearance}.background`, definitions.background, rootStates, branchStates);
-  const getForeground = getThemedColorStyleFactory(`Button.${appearance}.foreground`, definitions.foreground, rootStates, branchStates);
-
-  return (state) => ({
-    background: getBackground(state, state),
-    foreground: getForeground(state, state),
-  });
+} {
+  const source = getColorStateSource(state);
+  return {
+    background: getThemedBackgroundStyle(state, source),
+    foreground: getThemedForegroundStyle(state, source),
+  };
 }
 
-const appearanceStyleGetters: Record<ButtonAppearance, AppearanceStyleGetter> = {
-  primary: createAppearanceStyleGetter('primary', appearanceColorDefinitions.primary),
-  secondary: createAppearanceStyleGetter('secondary', appearanceColorDefinitions.secondary),
-  outline: createAppearanceStyleGetter('outline', appearanceColorDefinitions.outline),
-  subtle: createAppearanceStyleGetter('subtle', appearanceColorDefinitions.subtle),
-};
-
-export function getAppearanceStyles(state: ButtonState): ReturnType<AppearanceStyleGetter> {
-  return appearanceStyleGetters[state.appearance](state);
-}
+const rootStyleStateLevels = [
+  ['small', 'medium', 'large'],
+  ['rounded', 'square', 'circle'],
+  ['withContent', 'iconOnly'],
+] as const;
+type RootStyleStateLevels = typeof rootStyleStateLevels;
+type RootStyleState = StateNames<RootStyleStateLevels>;
 
 function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullable<ViewStyle['gap']> {
   if (typeof value === 'number' || typeof value === 'string') {
@@ -142,140 +167,182 @@ function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullab
   throw new TypeError('Button gap tokens must resolve to a number or string.');
 }
 
-function createButtonThemeStyles({ tokens }: ThemeState) {
-  return StyleSheet.create({
-    root: {
-      alignItems: 'center',
-      alignSelf: 'flex-start',
-      borderStyle: 'solid',
-      borderWidth: tokens.strokeWidth.thin,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      minHeight: size240,
-      minWidth: size240,
+function createSizeStyle(
+  roundedRadius: NonNullable<ViewStyle['borderRadius']>,
+  circleRadius: NonNullable<ViewStyle['borderRadius']>,
+  withContent: ViewStyle,
+  iconOnly: ViewStyle,
+) {
+  return {
+    rounded: {
+      borderRadius: roundedRadius,
+      iconOnly,
+      withContent,
     },
-    rootWithContentSmall: {
-      gap: getGapValue(tokens.spacing.componentBase50),
-      paddingHorizontal: tokens.spacing.componentBase200,
-      paddingVertical: tokens.spacing.componentBase100,
+    square: {
+      borderRadius: cornerRadiusNone,
+      iconOnly,
+      withContent,
     },
-    rootWithContentMedium: {
-      gap: getGapValue(tokens.spacing.componentBase100),
-      paddingHorizontal: tokens.spacing.componentBase250,
-      paddingVertical: tokens.spacing.componentBase150,
+    circle: {
+      borderRadius: circleRadius,
+      iconOnly,
+      withContent,
     },
-    rootWithContentLarge: {
-      gap: getGapValue(tokens.spacing.componentBase150),
-      paddingHorizontal: tokens.spacing.componentBase300,
-      paddingVertical: tokens.spacing.componentBase200,
+  };
+}
+
+function createRootStyleDefinition({ borderRadius, spacing, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
+  return {
+    borderWidth: strokeWidth.thin,
+    minHeight: size240,
+    minWidth: size240,
+    small: createSizeStyle(
+      borderRadius.base200,
+      borderRadius.circular,
+      {
+        gap: getGapValue(spacing.componentBase50),
+        paddingHorizontal: spacing.componentBase200,
+        paddingVertical: spacing.componentBase100,
+      },
+      {
+        paddingHorizontal: spacing.componentBase100,
+        paddingVertical: spacing.componentBase100,
+      },
+    ),
+    medium: createSizeStyle(
+      borderRadius.base300,
+      borderRadius.circular,
+      {
+        gap: getGapValue(spacing.componentBase100),
+        paddingHorizontal: spacing.componentBase250,
+        paddingVertical: spacing.componentBase150,
+      },
+      {
+        paddingHorizontal: spacing.componentBase150,
+        paddingVertical: spacing.componentBase150,
+      },
+    ),
+    large: createSizeStyle(
+      borderRadius.base400,
+      borderRadius.circular,
+      {
+        gap: getGapValue(spacing.componentBase150),
+        paddingHorizontal: spacing.componentBase300,
+        paddingVertical: spacing.componentBase200,
+      },
+      {
+        paddingHorizontal: spacing.componentBase250,
+        paddingVertical: spacing.componentBase250,
+      },
+    ),
+  };
+}
+
+const getThemedRootStyle = getThemedStateStyleFactory('Button.root', createRootStyleDefinition, rootStyleStateLevels);
+
+function getRootStyleStateSource(state: ButtonState): RootStyleState[] {
+  return [state.size, state.shape, state.iconOnly ? 'iconOnly' : 'withContent'];
+}
+
+export function getButtonRootStyle(state: ButtonState): ViewStyle {
+  return getThemedRootStyle(state, getRootStyleStateSource(state));
+}
+
+const contentStyleStateLevels = [['small', 'medium', 'large'], ['selected']] as const;
+type ContentStyleStateLevels = typeof contentStyleStateLevels;
+type ContentStyleState = StateNames<ContentStyleStateLevels>;
+
+function createContentStyleDefinition({
+  fontFamily,
+  fontSize,
+  fontWeight,
+  lineHeight,
+}: FlexTokens): StyleDefinition<TextStyle, ContentStyleStateLevels> {
+  const selected: TextStyle = { fontWeight: fontWeight.functionalSemibold };
+  return {
+    fontFamily: fontFamily.functional,
+    small: {
+      fontSize: fontSize.functionalBodySmall,
+      fontWeight: fontWeight.functionalRegular,
+      lineHeight: lineHeight.functionalBodySmall,
+      selected,
     },
-    rootIconOnlySmall: {
-      paddingHorizontal: tokens.spacing.componentBase100,
-      paddingVertical: tokens.spacing.componentBase100,
+    medium: {
+      fontSize: fontSize.functionalBodyMedium,
+      fontWeight: fontWeight.functionalRegular,
+      lineHeight: lineHeight.functionalBodyMedium,
+      selected,
     },
-    rootIconOnlyMedium: {
-      paddingHorizontal: tokens.spacing.componentBase150,
-      paddingVertical: tokens.spacing.componentBase150,
+    large: {
+      fontSize: fontSize.functionalBodyLarge,
+      fontWeight: fontWeight.functionalRegular,
+      lineHeight: lineHeight.functionalBodyLarge,
+      selected,
     },
-    rootIconOnlyLarge: {
-      paddingHorizontal: tokens.spacing.componentBase250,
-      paddingVertical: tokens.spacing.componentBase250,
-    },
-    roundedSmall: { borderRadius: tokens.borderRadius.base200 },
-    roundedMedium: { borderRadius: tokens.borderRadius.base300 },
-    roundedLarge: { borderRadius: tokens.borderRadius.base400 },
-    circle: { borderRadius: tokens.borderRadius.circular },
-    square: { borderRadius: cornerRadiusNone },
+  };
+}
+
+const getThemedContentStyle = getThemedStateStyleFactory('Button.content', createContentStyleDefinition, contentStyleStateLevels);
+
+export function getButtonContentStyle(state: ButtonState, selected = state.selected): TextStyle {
+  const source: ContentStyleState[] = [state.size];
+  if (selected) {
+    source.push('selected');
+  }
+  return getThemedContentStyle(state, source);
+}
+
+const focusStyleStateLevels = [['focused']] as const;
+
+const getThemedFocusStyle = getThemedStateStyleFactory(
+  'Button.focus',
+  ({ color, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof focusStyleStateLevels> => ({
     focused: {
-      borderColor: tokens.color.strokeFocusInner,
-      outlineColor: tokens.color.strokeFocusOuter,
-      outlineOffset: tokens.strokeWidth.thin,
+      borderColor: color.strokeFocusInner,
+      outlineColor: color.strokeFocusOuter,
+      outlineOffset: strokeWidth.thin,
       outlineStyle: 'solid',
-      outlineWidth: tokens.strokeWidth.thick,
+      outlineWidth: strokeWidth.thick,
     },
-    content: {
-      fontFamily: tokens.fontFamily.functional,
-      textAlign: 'center',
-    },
-    contentSmall: {
-      fontSize: tokens.fontSize.functionalBodySmall,
-      lineHeight: tokens.lineHeight.functionalBodySmall,
-    },
-    contentMedium: {
-      fontSize: tokens.fontSize.functionalBodyMedium,
-      lineHeight: tokens.lineHeight.functionalBodyMedium,
-    },
-    contentLarge: {
-      fontSize: tokens.fontSize.functionalBodyLarge,
-      lineHeight: tokens.lineHeight.functionalBodyLarge,
-    },
-    contentRegular: { fontWeight: tokens.fontWeight.functionalRegular },
-    contentSemibold: { fontWeight: tokens.fontWeight.functionalSemibold },
-    contentHidden: { opacity: sizeNone },
-    contentVisible: {
+  }),
+  focusStyleStateLevels,
+);
+
+const focusedState = ['focused'] as const;
+
+export function getButtonFocusStyle(state: ButtonState): ViewStyle | undefined {
+  return state.focused && !state.disabled ? getThemedFocusStyle(state, focusedState) : undefined;
+}
+
+const contentVisibilityStateLevels = [['visible', 'hidden']] as const;
+type ContentVisibility = StateNames<typeof contentVisibilityStateLevels>;
+
+const getContentVisibilityStyle = getStateStyleFactory<TextStyle, typeof contentVisibilityStateLevels>(
+  {
+    visible: {
       bottom: sizeNone,
       left: sizeNone,
       position: 'absolute',
       right: sizeNone,
       top: sizeNone,
     },
-    contentContainer: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      position: 'relative',
+    hidden: {
+      opacity: sizeNone,
     },
-  });
+  },
+  contentVisibilityStateLevels,
+);
+
+export function getButtonContentVisibilityStyle(visibility: ContentVisibility): TextStyle {
+  return getContentVisibilityStyle([visibility]);
 }
-
-export type ButtonThemeStyles = ReturnType<typeof createButtonThemeStyles>;
-
-const getThemedButtonStyles = themedStyleSheetFactory('Button', createButtonThemeStyles);
-
-const rootSizeStyleKeys = {
-  small: { withContent: 'rootWithContentSmall', iconOnly: 'rootIconOnlySmall' },
-  medium: { withContent: 'rootWithContentMedium', iconOnly: 'rootIconOnlyMedium' },
-  large: { withContent: 'rootWithContentLarge', iconOnly: 'rootIconOnlyLarge' },
-} as const;
-
-const roundedStyleKeys = {
-  small: 'roundedSmall',
-  medium: 'roundedMedium',
-  large: 'roundedLarge',
-} as const;
-
-const contentSizeStyleKeys = {
-  small: 'contentSmall',
-  medium: 'contentMedium',
-  large: 'contentLarge',
-} as const;
 
 const iconSizes: Record<ButtonSize, number> = {
   small: size160,
   medium: size200,
   large: size200,
 };
-
-export function getButtonThemeStyles(themeState: ThemeState): ButtonThemeStyles {
-  return getThemedButtonStyles(themeState);
-}
-
-export function getButtonRootSizeStyle(styles: ButtonThemeStyles, size: ButtonSize, iconOnly: boolean): ViewStyle {
-  return styles[rootSizeStyleKeys[size][iconOnly ? 'iconOnly' : 'withContent']];
-}
-
-export function getButtonShapeStyle(styles: ButtonThemeStyles, shape: ButtonShape, size: ButtonSize): ViewStyle {
-  if (shape === 'circle') {
-    return styles.circle;
-  }
-  if (shape === 'square') {
-    return styles.square;
-  }
-  return styles[roundedStyleKeys[size]];
-}
-
-export function getButtonContentSizeStyle(styles: ButtonThemeStyles, size: ButtonSize): TextStyle {
-  return styles[contentSizeStyleKeys[size]];
-}
 
 export function getButtonIconSize(size: ButtonSize): number {
   return iconSizes[size];

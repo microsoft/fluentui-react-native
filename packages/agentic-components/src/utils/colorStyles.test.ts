@@ -4,12 +4,8 @@ import type { FlexTokens, ThemeState } from '@fluentui-react-native/design';
 import { colorStyleDef, getThemedColorStyleFactory } from './colorStyles';
 import type { ColorStyleDefinition, ViewColorStyle } from './colorStyles';
 
-type RootState = 'selected';
-type BranchState = 'disabled' | 'pressed' | 'hovered';
-
-const rootStates = ['selected'] as const;
-const branchStates = ['disabled', 'pressed', 'hovered'] as const;
-const definition: ColorStyleDefinition<ViewColorStyle, RootState, BranchState> = {
+const stateLevels = [['selected'], ['disabled', 'pressed', 'hovered']] as const;
+const definition: ColorStyleDefinition<ViewColorStyle, typeof stateLevels> = {
   backgroundColor: 'backgroundNeutralSubtle',
   borderColor: 'strokeNeutralTransparent',
   selected: {
@@ -39,7 +35,7 @@ function createThemeState(): ThemeState {
 describe('colorStyles', () => {
   it('resolves base and explicitly defined semantic colors', () => {
     const tokens = useFlexTokens();
-    const styles = colorStyleDef(definition, rootStates, branchStates)(tokens);
+    const styles = colorStyleDef(definition, stateLevels)(tokens);
 
     expect(styles.backgroundColor).toBe(tokens.color.backgroundNeutralSubtle);
     expect(styles.borderColor).toBe(tokens.color.strokeNeutralTransparent);
@@ -54,7 +50,7 @@ describe('colorStyles', () => {
 
   it('synthesizes hovered and pressed colors at the base and under root states', () => {
     const tokens = useFlexTokens();
-    const styles = colorStyleDef(definition, rootStates, branchStates)(tokens);
+    const styles = colorStyleDef(definition, stateLevels)(tokens);
 
     expect(styles.hovered).toEqual({
       backgroundColor: tokens.color.hover.backgroundNeutralSubtle,
@@ -76,14 +72,15 @@ describe('colorStyles', () => {
 
   it('falls back to rest colors when an interaction map does not override a semantic key', () => {
     const tokens = useFlexTokens();
-    const styles = colorStyleDef<ViewColorStyle, 'hovered'>(
+    const levels = [['hovered']] as const;
+    const styles = colorStyleDef<ViewColorStyle, typeof levels>(
       {
         backgroundColor: 'backgroundNeutralSubtle',
         hovered: {
           backgroundColor: 'backgroundNeutralHeavyDisabled',
         },
       },
-      ['hovered'],
+      levels,
     )(tokens);
 
     expect(styles.hovered?.backgroundColor).toBe(tokens.color.backgroundNeutralHeavyDisabled);
@@ -98,20 +95,44 @@ describe('colorStyles', () => {
         backgroundBrandHeavy: '',
       },
     } satisfies FlexTokens;
-    const styles = colorStyleDef<ViewColorStyle, 'disabled'>(
+    const levels = [['disabled']] as const;
+    const styles = colorStyleDef<ViewColorStyle, typeof levels>(
       {
         backgroundColor: 'backgroundBrandHeavy',
       },
-      ['disabled'],
+      levels,
     )(zeroColorTokens);
 
     expect(styles.backgroundColor).toBe('');
   });
 
+  it('propagates interaction colors through later hierarchy levels', () => {
+    const tokens = useFlexTokens();
+    const levels = [['selected'], ['pressed', 'hovered'], ['highContrast']] as const;
+    const threeLevelDefinition: ColorStyleDefinition<ViewColorStyle, typeof levels> = {
+      backgroundColor: 'backgroundNeutralSubtle',
+      borderColor: 'strokeNeutralTransparent',
+      selected: {
+        backgroundColor: 'backgroundNeutralHeavy',
+        pressed: {
+          highContrast: {
+            borderColor: 'strokeNeutralHeavy',
+          },
+        },
+      },
+    };
+    const styles = colorStyleDef(threeLevelDefinition, levels)(tokens);
+
+    expect(styles.selected?.pressed?.highContrast).toEqual({
+      backgroundColor: tokens.color.pressed.backgroundNeutralHeavy,
+      borderColor: tokens.color.pressed.strokeNeutralHeavy,
+    });
+  });
+
   it('selects state styles and caches resolved definitions per ThemeState', () => {
     const themeState = createThemeState();
     const colors = themeState.tokens.color;
-    const getStyle = getThemedColorStyleFactory('test.colors', definition, rootStates, branchStates);
+    const getStyle = getThemedColorStyleFactory('test.colors', definition, stateLevels);
 
     expect(getStyle(themeState, { selected: true, hovered: true })).toEqual({
       backgroundColor: colors.hover.backgroundNeutralHeavy,

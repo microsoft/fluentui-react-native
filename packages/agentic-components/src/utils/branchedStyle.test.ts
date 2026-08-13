@@ -12,12 +12,11 @@ import {
 } from './branchedStyle';
 import type { StyleDefinition } from './branchedStyle';
 
-type RootState = 'disabled' | 'selected';
-type BranchState = 'pressed' | 'hovered';
-
-const rootStates = ['disabled', 'selected'] as const;
-const branchStates = ['pressed', 'hovered'] as const;
-const definition: StyleDefinition<ViewStyle, RootState, BranchState> = {
+const stateLevels = [
+  ['disabled', 'selected'],
+  ['pressed', 'hovered'],
+] as const;
+const definition: StyleDefinition<ViewStyle, typeof stateLevels> = {
   borderWidth: 1,
   opacity: 1,
   disabled: {
@@ -47,13 +46,13 @@ function createThemeState(): ThemeState {
 
 describe('branchedStyle', () => {
   it('selects the first truthy state in precedence order', () => {
-    expect(getActiveState({ hovered: true, pressed: true }, branchStates)).toBe('pressed');
-    expect(getActiveState(['selected', 'hovered'], rootStates)).toBe('selected');
-    expect(getActiveState({ disabled: false, selected: true }, rootStates)).toBe('selected');
+    expect(getActiveState({ hovered: true, pressed: true }, stateLevels[1])).toBe('pressed');
+    expect(getActiveState(['selected', 'hovered'], stateLevels[0])).toBe('selected');
+    expect(getActiveState({ disabled: false, selected: true }, stateLevels[0])).toBe('selected');
   });
 
   it('flattens base, root, branch, and combined styles with inheritance', () => {
-    expect(styleDefinitionToBranchedStyles(definition, rootStates, branchStates)).toEqual({
+    expect(styleDefinitionToBranchedStyles(definition, stateLevels)).toEqual({
       base: {
         borderWidth: 1,
         opacity: 1,
@@ -82,46 +81,103 @@ describe('branchedStyle', () => {
   });
 
   it('selects combined, branch, root, and base styles in that order', () => {
-    const styles = styleDefinitionToBranchedStyles(definition, rootStates, branchStates);
+    const styles = styleDefinitionToBranchedStyles(definition, stateLevels);
 
-    expect(pickActiveStyle({ selected: true, hovered: true }, rootStates, branchStates, styles)).toEqual({
+    expect(pickActiveStyle({ selected: true, hovered: true }, stateLevels, styles)).toEqual({
       borderWidth: 1,
       opacity: 0.7,
     });
-    expect(pickActiveStyle({ selected: true, pressed: true }, rootStates, branchStates, styles)).toEqual({
+    expect(pickActiveStyle({ selected: true, pressed: true }, stateLevels, styles)).toEqual({
       borderWidth: 1,
       opacity: 0.6,
     });
-    expect(pickActiveStyle({ selected: true }, rootStates, branchStates, styles)).toEqual({
+    expect(pickActiveStyle({ selected: true }, stateLevels, styles)).toEqual({
       borderWidth: 1,
       opacity: 0.8,
     });
-    expect(pickActiveStyle({}, rootStates, branchStates, styles)).toEqual({
+    expect(pickActiveStyle({}, stateLevels, styles)).toEqual({
       borderWidth: 1,
       opacity: 1,
     });
   });
 
-  it('supports definitions with root states and no branch states', () => {
-    const getStyle = getStateStyleFactory<ViewStyle, 'disabled'>(
+  it('supports definitions with one state level', () => {
+    const levels = [['disabled']] as const;
+    const getStyle = getStateStyleFactory<ViewStyle, typeof levels>(
       {
         opacity: 1,
         disabled: {
           opacity: 0.4,
         },
       },
-      ['disabled'],
+      levels,
     );
 
     expect(getStyle({ disabled: true })).toEqual({ opacity: 0.4 });
     expect(getStyle({})).toEqual({ opacity: 1 });
   });
 
+  it('supports three-level definitions and prefers deeper fallback combinations', () => {
+    const levels = [['selected'], ['pressed', 'hovered'], ['highContrast']] as const;
+    const threeLevelDefinition: StyleDefinition<ViewStyle, typeof levels> = {
+      borderWidth: 1,
+      opacity: 1,
+      selected: {
+        opacity: 0.8,
+        pressed: {
+          opacity: 0.7,
+          highContrast: {
+            borderWidth: 3,
+          },
+        },
+        highContrast: {
+          opacity: 0.75,
+        },
+      },
+      pressed: {
+        opacity: 0.6,
+        highContrast: {
+          opacity: 0.55,
+        },
+      },
+      highContrast: {
+        opacity: 0.5,
+      },
+    };
+    const styles = styleDefinitionToBranchedStyles(threeLevelDefinition, levels);
+
+    expect(styles['selected.pressed.highContrast']).toEqual({
+      borderWidth: 3,
+      opacity: 0.7,
+    });
+    expect(pickActiveStyle({ selected: true, pressed: true, highContrast: true }, levels, styles)).toEqual({
+      borderWidth: 3,
+      opacity: 0.7,
+    });
+
+    delete styles['selected.pressed.highContrast'];
+    expect(pickActiveStyle({ selected: true, pressed: true, highContrast: true }, levels, styles)).toEqual({
+      borderWidth: 1,
+      opacity: 0.55,
+    });
+  });
+
+  it('rejects states repeated across hierarchy levels', () => {
+    const levels = [['selected'], ['selected']] as const;
+    const invalidDefinition: StyleDefinition<ViewStyle, typeof levels> = {
+      opacity: 1,
+    };
+
+    expect(() => styleDefinitionToBranchedStyles(invalidDefinition, levels)).toThrow(
+      'State "selected" must belong to only one hierarchy level.',
+    );
+  });
+
   it('resolves themed definitions once per ThemeState', () => {
     const firstTheme = createThemeState();
     const secondTheme = createThemeState();
     const factory = jest.fn(() => definition);
-    const getStyle = getThemedStateStyleFactory('test.style', factory, rootStates, branchStates);
+    const getStyle = getThemedStateStyleFactory('test.style', factory, stateLevels);
 
     expect(getStyle(firstTheme, { selected: true }).opacity).toBe(0.8);
     expect(getStyle(firstTheme, { hovered: true }).borderWidth).toBe(2);

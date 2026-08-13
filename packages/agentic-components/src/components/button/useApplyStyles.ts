@@ -3,12 +3,13 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import {
-  getAppearanceStyles,
-  getButtonContentSizeStyle,
+  buttonStyles,
+  getButtonColorStyles,
+  getButtonContentStyle,
+  getButtonContentVisibilityStyle,
+  getButtonFocusStyle,
   getButtonIconSize,
-  getButtonRootSizeStyle,
-  getButtonShapeStyle,
-  getButtonThemeStyles,
+  getButtonRootStyle,
 } from './button.styles';
 import type { ButtonState } from './button.types';
 
@@ -17,24 +18,16 @@ import type { ButtonState } from './button.types';
  * button slots.
  */
 export function useApplyStyles_unstable(state: ButtonState) {
-  const { disabled, focused, iconOnly, selected, shape, size, userStyle } = state;
-  const styles = getButtonThemeStyles(state);
-  const colors = getAppearanceStyles(state);
+  const { size, userStyle } = state;
+  const colors = getButtonColorStyles(state);
   const rootStyle: StyleProp<ViewStyle> = [
-    styles.root,
-    getButtonRootSizeStyle(styles, size, iconOnly),
-    getButtonShapeStyle(styles, shape, size),
+    buttonStyles.root,
+    getButtonRootStyle(state),
     colors.background,
-    focused && !disabled && styles.focused,
+    getButtonFocusStyle(state),
     userStyle,
   ];
-  const contentSizeStyle = getButtonContentSizeStyle(styles, size);
-  const contentStyle: StyleProp<TextStyle> = [
-    styles.content,
-    contentSizeStyle,
-    selected ? styles.contentSemibold : styles.contentRegular,
-    colors.foreground,
-  ];
+  const contentStyle: StyleProp<TextStyle> = [buttonStyles.content, getButtonContentStyle(state), colors.foreground];
   const iconSize = getButtonIconSize(size);
 
   attachSlotProps(state.root, { style: rootStyle });
@@ -57,7 +50,7 @@ export function useApplyStyles_unstable(state: ButtonState) {
   if (state.content) {
     attachSlotProps(state.content, {
       numberOfLines: 1,
-      style: state.isToggleButton ? [contentStyle, styles.contentVisible] : contentStyle,
+      style: state.isToggleButton ? [contentStyle, getButtonContentVisibilityStyle('visible')] : contentStyle,
     });
   }
   if (state.contentHidden) {
@@ -66,10 +59,10 @@ export function useApplyStyles_unstable(state: ButtonState) {
       accessible: false,
       importantForAccessibility: 'no-hide-descendants',
       numberOfLines: 1,
-      style: [styles.content, contentSizeStyle, styles.contentSemibold, colors.foreground, styles.contentHidden],
+      style: [buttonStyles.content, getButtonContentStyle(state, true), colors.foreground, getButtonContentVisibilityStyle('hidden')],
     });
   }
   if (state.contentContainer) {
-    attachSlotProps(state.contentContainer, { accessible: false, style: styles.contentContainer });
+    attachSlotProps(state.contentContainer, { accessible: false, style: buttonStyles.contentContainer });
   }
 }

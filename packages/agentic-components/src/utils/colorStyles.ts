@@ -2,8 +2,8 @@ import type { ColorValue, TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens, SemanticColors, ThemeState } from '@fluentui-react-native/design';
 
-import { getThemedStateStyleFactory } from './branchedStyle';
-import type { StateSource, StyleDefinition, StyleDefFromTokens } from './branchedStyle';
+import { createStateLevelMap, getThemedStateStyleFactory } from './branchedStyle';
+import type { StateLevels, StateNames, StateSource, StyleDefinition, StyleDefFromTokens } from './branchedStyle';
 
 export type ViewColorStyle = Pick<ViewStyle, 'backgroundColor' | 'borderColor'>;
 export type TextColorStyle = Pick<TextStyle, 'color'>;
@@ -18,20 +18,20 @@ export type ColorKey = keyof Omit<SemanticColors, 'hover' | 'pressed'>;
 
 type AnyColorStyle = ViewColorStyle | TextColorStyle;
 type ColorKeysForStyle<StyleType extends AnyColorStyle> = { [K in keyof StyleType]: ColorKey };
-type ColorStyleWithStates<StyleType extends AnyColorStyle, States> = ColorKeysForStyle<StyleType> &
-  Partial<Record<Extract<States, string>, ColorKeysForStyle<StyleType>>>;
+
+type ColorStateEntries<StyleType extends AnyColorStyle, Levels extends StateLevels> = Levels extends readonly [
+  infer Head extends readonly string[],
+  ...infer Tail extends StateLevels,
+]
+  ? Partial<Record<Head[number], ColorStyleDefinition<StyleType, Tail>>> & ColorStateEntries<StyleType, Tail>
+  : unknown;
 
 /**
  * A hierarchical style definition that uses semantic color keys in place of
  * resolved React Native color values.
  */
-export type ColorStyleDefinition<
-  StyleType extends AnyColorStyle,
-  RootState extends string,
-  BranchState = never,
-> = ColorKeysForStyle<StyleType> &
-  Partial<Record<RootState, ColorStyleWithStates<StyleType, BranchState>>> &
-  Partial<Record<Extract<BranchState, string>, ColorKeysForStyle<StyleType>>>;
+export type ColorStyleDefinition<StyleType extends AnyColorStyle, Levels extends StateLevels> = ColorKeysForStyle<StyleType> &
+  ColorStateEntries<StyleType, Levels>;
 
 interface RawColorDef {
   [key: string]: ColorKey | RawColorDef | undefined;
@@ -69,12 +69,14 @@ function convertToStyleDef(
   parent: InheritedColorKeys | undefined,
   colors: SemanticColors,
   rawColorDef: RawColorDef,
-  rootStates?: readonly string[],
-  branchStates?: readonly string[],
+  stateLevels: StateLevels,
+  nextLevel: number,
+  activeInteractionState?: string,
 ): RawStyleDef {
   const result: RawStyleDef = {};
   const inheritedKeys: InheritedColorKeys = { ...parent };
-  const interactionColors = getInteractionColors(colors, name);
+  const interactionState = getInteractionColors(colors, name) ? name : activeInteractionState;
+  const interactionColors = getInteractionColors(colors, interactionState);
 
   for (const styleKey of colorStyleKeys) {
     const colorKey = getColorKey(rawColorDef, styleKey) ?? (interactionColors ? parent?.[styleKey] : undefined);
@@ -87,18 +89,18 @@ function convertToStyleDef(
     }
   }
 
-  const childStates = new Set<string>([...(rootStates ?? []), ...(branchStates ?? [])]);
-  for (const state of childStates) {
-    const stateDefinition = getStateDefinition(rawColorDef, state);
-    const isInteractionState = state === 'hovered' || state === 'pressed';
-    if (!stateDefinition && !isInteractionState) {
-      continue;
-    }
+  for (let level = nextLevel; level < stateLevels.length; level++) {
+    for (const state of stateLevels[level]) {
+      const stateDefinition = getStateDefinition(rawColorDef, state);
+      const isInteractionState = state === 'hovered' || state === 'pressed';
+      if (!stateDefinition && !isInteractionState) {
+        continue;
+      }
 
-    const nestedRootStates = rootStates?.includes(state) ? branchStates : undefined;
-    const subStyle = convertToStyleDef(state, inheritedKeys, colors, stateDefinition ?? {}, nestedRootStates);
-    if (Object.keys(subStyle).length > 0) {
-      result[state] = subStyle;
+      const subStyle = convertToStyleDef(state, inheritedKeys, colors, stateDefinition ?? {}, stateLevels, level + 1, interactionState);
+      if (Object.keys(subStyle).length > 0) {
+        result[state] = subStyle;
+      }
     }
   }
 
@@ -108,27 +110,22 @@ function convertToStyleDef(
 /**
  * Creates a token factory that resolves a semantic color definition.
  */
-export function colorStyleDef<StyleType extends AnyColorStyle, RootState extends string, BranchState extends string = never>(
-  colorDef: ColorStyleDefinition<StyleType, RootState, BranchState>,
-  rootStates: readonly RootState[],
-  branchStates?: readonly BranchState[],
-): StyleDefFromTokens<StyleType, RootState, BranchState> {
+export function colorStyleDef<StyleType extends AnyColorStyle, Levels extends StateLevels>(
+  colorDef: ColorStyleDefinition<StyleType, Levels>,
+  stateLevels: Levels,
+): StyleDefFromTokens<StyleType, Levels> {
+  createStateLevelMap(stateLevels);
   return ({ color }: FlexTokens) =>
-    convertToStyleDef(undefined, undefined, color, colorDef as RawColorDef, rootStates, branchStates) as StyleDefinition<
-      StyleType,
-      RootState,
-      BranchState
-    >;
+    convertToStyleDef(undefined, undefined, color, colorDef as RawColorDef, stateLevels, 0) as StyleDefinition<StyleType, Levels>;
 }
 
 /**
- * Creates a themed semantic color getter with root/branch state precedence.
+ * Creates a themed semantic color getter with ordered hierarchy precedence.
  */
-export function getThemedColorStyleFactory<StyleType extends AnyColorStyle, RootState extends string, BranchState extends string = never>(
+export function getThemedColorStyleFactory<StyleType extends AnyColorStyle, Levels extends StateLevels>(
   name: string,
-  colorDef: ColorStyleDefinition<StyleType, RootState, BranchState>,
-  rootStates: readonly RootState[],
-  branchStates?: readonly BranchState[],
-): (state: ThemeState, source: StateSource<RootState | BranchState>) => StyleType {
-  return getThemedStateStyleFactory(name, colorStyleDef(colorDef, rootStates, branchStates), rootStates, branchStates);
+  colorDef: ColorStyleDefinition<StyleType, Levels>,
+  stateLevels: Levels,
+): (state: ThemeState, source: StateSource<StateNames<Levels>>) => StyleType {
+  return getThemedStateStyleFactory(name, colorStyleDef(colorDef, stateLevels), stateLevels);
 }
