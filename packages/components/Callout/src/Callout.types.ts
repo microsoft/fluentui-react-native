@@ -1,7 +1,5 @@
 import type * as React from 'react';
-import type { AnimatableNumericValue, ColorValue, KeyboardMetrics } from 'react-native';
-
-import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { AnimatableNumericValue, ColorValue, KeyboardMetrics, ViewProps } from 'react-native';
 
 export const calloutName = 'Callout';
 
@@ -71,7 +69,7 @@ export interface CalloutHandle {
   focusWindow: () => void;
 }
 
-export interface CalloutProps extends IViewProps, CalloutTokens {
+export interface CalloutProps extends ViewProps, CalloutTokens {
   /**
    * A string announced when the Callout is shown.
    * @platform win32

@@ -9,9 +9,6 @@
   "include": ["src"],
   "references": [
     {
-      "path": "../../utils/adapters/tsconfig.json"
-    },
-    {
       "path": "../../framework-base/tsconfig.json"
     },
     {

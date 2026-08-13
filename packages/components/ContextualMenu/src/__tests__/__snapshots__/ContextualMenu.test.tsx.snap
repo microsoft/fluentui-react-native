@@ -9,7 +9,12 @@ exports[`ContextualMenu default props 1`] = `
       {
         "position": "absolute",
       },
-      undefined,
+      {
+        "backgroundColor": "#00000000",
+        "borderColor": "#00000000",
+        "borderRadius": 0,
+        "borderWidth": 0,
+      },
       {
         "backgroundColor": "#ffffff",
         "borderColor": "#8a8886",

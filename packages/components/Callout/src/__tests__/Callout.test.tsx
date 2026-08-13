@@ -33,14 +33,14 @@ describe('Callout', () => {
     jest.restoreAllMocks();
   });
 
-  it('uses phased rendering and applies only structural default styling', async () => {
+  it('uses phased rendering and applies native-safe default styling', async () => {
     expect(isPhasedComponent(Callout)).toBe(true);
 
     const component = await render(<Callout testID="callout" />);
     const callout = component.getByTestId('callout');
 
     expect(callout.type).toBe('RCTCallout');
-    expect(StyleSheet.flatten(callout.props.style)).toEqual({ position: 'absolute' });
+    expect(StyleSheet.flatten(callout.props.style)).toMatchSnapshot();
   });
 
   it('translates caller-supplied appearance values and preserves user style precedence', async () => {

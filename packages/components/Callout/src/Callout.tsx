@@ -1,52 +1,20 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
 import { findNodeHandle, StyleSheet } from 'react-native';
-import type { ViewStyle } from 'react-native';
 
 import { directComponent, mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
 
-import type { CalloutProps, CalloutTokens } from './Callout.types';
+import type { CalloutProps } from './Callout.types';
 import { calloutName } from './Callout.types';
 import NativeCalloutView, { Commands } from './CalloutNativeComponent';
+
+const colorTransparent = '#00000000';
 
 const styles = StyleSheet.create({
   root: {
     position: 'absolute',
   },
 });
-
-function getCalloutStyle({
-  backgroundColor,
-  borderColor,
-  borderRadius,
-  borderWidth,
-  maxHeight,
-  maxWidth,
-  minWidth,
-}: CalloutTokens): ViewStyle | undefined {
-  const hasStyle =
-    backgroundColor !== undefined ||
-    borderColor !== undefined ||
-    borderRadius !== undefined ||
-    borderWidth !== undefined ||
-    maxHeight !== undefined ||
-    maxWidth !== undefined ||
-    minWidth !== undefined;
-
-  if (!hasStyle) {
-    return undefined;
-  }
-
-  return {
-    backgroundColor,
-    borderColor,
-    borderRadius,
-    borderWidth,
-    maxHeight,
-    maxWidth,
-    minWidth,
-  };
-}
 
 /**
  * Renders the native Callout without applying theme or appearance defaults.
@@ -103,21 +71,20 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
       target: _target,
       ...nativeProps
     } = mergeProps(props, renderProps);
-    const calloutStyle = getCalloutStyle({
-      anchorRect,
-      backgroundColor,
-      beakWidth,
-      borderColor,
-      borderRadius,
-      borderWidth,
-      directionalHint,
-      dismissBehaviors,
-      gapSpace,
-      maxHeight,
-      maxWidth,
-      minPadding,
-      minWidth,
-    });
+
+    /**
+     * Build the style for the callout based on the props. For `borderColor`, `borderWidth`, `backgroundColor`, and
+     * `borderRadius` defaults values are required otherwise crashes in CalloutView.swift:updateLayer() will occur.
+     */
+    const calloutStyle = {
+      backgroundColor: backgroundColor ?? colorTransparent,
+      borderColor: borderColor ?? colorTransparent,
+      borderWidth: borderWidth ?? 0,
+      borderRadius: borderRadius ?? 0,
+      ...(maxHeight != null && { maxHeight }),
+      ...(maxWidth != null && { maxWidth }),
+      ...(minWidth != null && { minWidth }),
+    };
 
     return (
       <NativeCalloutView

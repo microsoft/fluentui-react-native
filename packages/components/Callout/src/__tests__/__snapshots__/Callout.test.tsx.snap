@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Callout uses phased rendering and applies native-safe default styling 1`] = `
+{
+  "backgroundColor": "#00000000",
+  "borderColor": "#00000000",
+  "borderRadius": 0,
+  "borderWidth": 0,
+  "position": "absolute",
+}
+`;

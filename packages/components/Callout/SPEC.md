@@ -9,16 +9,17 @@ CocoaPods integration.
 
 ## Contract
 
-- `CalloutProps` exposes the native view contract plus target resolution,
+- `CalloutProps` extends React Native `ViewProps` with target resolution,
   dismissal callbacks, and `componentRef`.
 - `target` accepts a React component ref or registered native anchor string.
   When omitted, native positioning may use `anchorRect`.
 - `componentRef` exposes `focusWindow()` and `blurWindow()`.
 - Caller-supplied background, border, and dimension values are translated to
   native view style. User `style` is applied last.
-- The primitive applies no theme tokens or appearance defaults. Its only
-  structural default is `position: 'absolute'`, which keeps popup content out
-  of the parent page layout.
+- The primitive applies no theme tokens or visible appearance defaults.
+  `position: 'absolute'` keeps popup content out of the parent page layout.
+  Transparent colors and zero-width/radius values satisfy the macOS native
+  layer contract when callers omit border and background props.
 - Children, accessibility props, test props, native events, and supported
   Callout behavior props are forwarded to `RCTCallout`.
 
