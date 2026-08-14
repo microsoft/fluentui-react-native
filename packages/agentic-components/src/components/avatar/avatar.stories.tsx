@@ -30,7 +30,7 @@ const meta: Meta<typeof Avatar> = {
   },
   argTypes: {
     activityRing: { control: 'boolean' },
-    size: { control: { type: 'select', options: [16, 20, 24, 28, 32, 40, 56, 120] } },
+    size: { control: 'select', options: [16, 20, 24, 28, 32, 40, 56, 120] },
   },
   parameters: {
     docs: {

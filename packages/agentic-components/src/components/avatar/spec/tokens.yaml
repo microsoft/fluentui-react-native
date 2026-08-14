@@ -56,15 +56,14 @@ tokens:
       120: textstyle-functional-title-large
     font-family: fontFamily.functional
     initials-line-height-override:
-      all-sizes: 1
+      all-sizes: equal to the resolved font size
       rationale: >
         Most UI fonts (Segoe, Inter, the system stack) have a taller descender region than ascender region.
-        CSS centers an inline text node on its line-box, so this asymmetry pushes the visible glyphs below the
-        geometric center of the circle — especially noticeable at small sizes (16, 20, 24) where the container
-        has no slack. Setting line-height to the unitless literal 1 (equal to font-size) collapses the line-box
-        onto the cap-height/baseline band, restoring optical center at every size. The value is a direct override,
-        not a token, because it must remain 1 regardless of theme. The Figma source mirrors this with a Cap height
-        → Baseline vertical trim on the Initials text node at every size (issue #610).
+        React Native interprets numeric line-height values as absolute pixels rather than CSS unitless
+        multipliers, so a literal 1 creates a one-pixel line box and shifts the glyphs upward. Setting line-height
+        to the resolved font size provides the intended 1:1 ratio and restores optical centering at every size.
+        The Figma source mirrors this with a Cap height → Baseline vertical trim on the Initials text node at
+        every size (issue #610).
     vertical-trim: cap-height-to-baseline
     notes: >
       Typography applies to the Initials content mode only. Size 16 uses caption to fit a single character inside

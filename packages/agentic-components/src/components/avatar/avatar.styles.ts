@@ -10,6 +10,7 @@ import type { AvatarContentMode, AvatarSize, AvatarState } from './avatar.types'
 export const avatarStyles = StyleSheet.create({
   root: {
     alignItems: 'center',
+    flexDirection: 'row',
     justifyContent: 'center',
     position: 'relative',
   },
@@ -142,25 +143,31 @@ export function getAvatarRootStyle(state: AvatarState): ViewStyle {
   return getThemedAvatarRootStyle(state, getAvatarRootStateSource(state));
 }
 
+function createInitialsTextStyle(size: number): TextStyle {
+  return {
+    fontSize: size,
+    lineHeight: size,
+  };
+}
+
 const getThemedAvatarInitialsStyle = getThemedStateStyleFactory(
   'Avatar.initials',
   ({ fontFamily, fontSize, fontWeight }: FlexTokens): StyleDefinition<TextStyle, AvatarInitialsStateLevels> => {
     return {
       fontFamily: fontFamily.functional,
       fontWeight: fontWeight.functionalRegular,
-      lineHeight: 1,
       padding: 0,
       textAlign: 'center',
       textAlignVertical: 'center',
       textTransform: 'uppercase',
-      '16': { fontSize: fontSize.functionalCaption },
-      '20': { fontSize: fontSize.functionalCaption },
-      '24': { fontSize: fontSize.functionalCaption },
-      '28': { fontSize: fontSize.functionalBodySmall },
-      '32': { fontSize: fontSize.functionalBodyMedium },
-      '40': { fontSize: fontSize.functionalBodyLarge },
-      '56': { fontSize: fontSize.functionalTitleSmall },
-      '120': { fontSize: fontSize.functionalTitleLarge },
+      '16': createInitialsTextStyle(fontSize.functionalCaption),
+      '20': createInitialsTextStyle(fontSize.functionalCaption),
+      '24': createInitialsTextStyle(fontSize.functionalCaption),
+      '28': createInitialsTextStyle(fontSize.functionalBodySmall),
+      '32': createInitialsTextStyle(fontSize.functionalBodyMedium),
+      '40': createInitialsTextStyle(fontSize.functionalBodyLarge),
+      '56': createInitialsTextStyle(fontSize.functionalTitleSmall),
+      '120': createInitialsTextStyle(fontSize.functionalTitleLarge),
     };
   },
   avatarInitialsStateLevels,

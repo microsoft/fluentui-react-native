@@ -68,6 +68,14 @@ Adapt the structure to React Native. Do not copy DOM props, CSS class hooks, or 
 
 Colocate `<component>.stories.tsx`; the Storybook source glob discovers it automatically.
 
+Declare module-scoped styles and other values referenced by metadata before the `Meta` object. Storybook evaluates
+metadata while importing the module, so referencing a later `const` drops the complete story module with an
+initialization error.
+
+Keep on-device controls limited to scalar, serializable props. For required React elements or style objects, supply the
+fixed demonstration values inside the story render function and expose only meaningful finite or numeric args; object
+controls for React elements are noisy and cannot safely edit the contract.
+
 Each story module should provide:
 
 - typed `Meta` with `component` and `Components/<Name>` or `Primitives/<Name>` title
@@ -106,3 +114,6 @@ Run the smallest affected package test while iterating. Run the full package seq
 
 A successful bundle proves story discovery and compilation only. For visual changes, inspect the running target-platform
 story across hover, pressed, disabled, optional-slot, and constrained-content scenarios.
+
+Adding a new story file changes Metro's `require.context` catalog and may require restarting Metro and the native app
+before the running Storybook index includes it.

@@ -42,7 +42,9 @@ describe('Avatar', () => {
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
       backgroundColor: tokens.color.backgroundNeutralSoft,
+      flexDirection: 'row',
       height: 40,
+      justifyContent: 'center',
       minHeight: 40,
       minWidth: 40,
       padding: tokens.spacing.componentBase200,
@@ -118,7 +120,7 @@ describe('Avatar', () => {
       expect(getRootStyle(component)).toMatchObject({ height: size, minHeight: size, minWidth: size, padding, width: size });
       expect(StyleSheet.flatten(component.getByText(expectedInitials, { includeHiddenElements: true }).props.style)).toMatchObject({
         fontSize,
-        lineHeight: 1,
+        lineHeight: fontSize,
       });
     }
   });
