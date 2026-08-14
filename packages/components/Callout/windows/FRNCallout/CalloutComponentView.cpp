@@ -345,10 +345,58 @@ struct CalloutComponentView : winrt::implements<CalloutComponentView, winrt::IIn
 
 void RegisterCalloutComponentView(
     winrt::Microsoft::ReactNative::IReactPackageBuilder const &packageBuilder) noexcept {
-  FRNCalloutCodegen::RegisterRCTCalloutNativeComponent<winrt::FRNCallout::CalloutComponentView>(
-      packageBuilder,
-      [](const winrt::Microsoft::ReactNative::Composition::IReactCompositionViewComponentBuilder &builder) {
-        builder.SetPortalComponentViewInitializer(
+  packageBuilder.as<winrt::Microsoft::ReactNative::IReactPackageBuilderFabric>().AddViewComponent(
+      L"Callout", [](const winrt::Microsoft::ReactNative::IReactViewComponentBuilder &builder) noexcept {
+        auto compositionBuilder =
+            builder.as<winrt::Microsoft::ReactNative::Composition::IReactCompositionViewComponentBuilder>();
+
+        builder.SetCreateProps(
+            [](winrt::Microsoft::ReactNative::ViewProps props,
+               const winrt::Microsoft::ReactNative::IComponentProps &cloneFrom) noexcept {
+              return winrt::make<FRNCalloutCodegen::RCTCalloutProps>(props, cloneFrom);
+            });
+        builder.SetUpdatePropsHandler(
+            [](const winrt::Microsoft::ReactNative::ComponentView &view,
+               const winrt::Microsoft::ReactNative::IComponentProps &newProps,
+               const winrt::Microsoft::ReactNative::IComponentProps &oldProps) noexcept {
+              view.UserData()
+                  .as<winrt::FRNCallout::CalloutComponentView>()
+                  ->UpdateProps(
+                      view,
+                      newProps ? newProps.as<FRNCalloutCodegen::RCTCalloutProps>() : nullptr,
+                      oldProps ? oldProps.as<FRNCalloutCodegen::RCTCalloutProps>() : nullptr);
+            });
+        compositionBuilder.SetUpdateLayoutMetricsHandler(
+            [](const winrt::Microsoft::ReactNative::ComponentView &view,
+               const winrt::Microsoft::ReactNative::LayoutMetrics &newLayoutMetrics,
+               const winrt::Microsoft::ReactNative::LayoutMetrics &oldLayoutMetrics) noexcept {
+              view.UserData()
+                  .as<winrt::FRNCallout::CalloutComponentView>()
+                  ->UpdateLayoutMetrics(view, newLayoutMetrics, oldLayoutMetrics);
+            });
+        builder.SetUpdateEventEmitterHandler(
+            [](const winrt::Microsoft::ReactNative::ComponentView &view,
+               const winrt::Microsoft::ReactNative::EventEmitter &eventEmitter) noexcept {
+              view.UserData()
+                  .as<winrt::FRNCallout::CalloutComponentView>()
+                  ->UpdateEventEmitter(std::make_shared<FRNCalloutCodegen::RCTCalloutEventEmitter>(eventEmitter));
+            });
+        builder.SetCustomCommandHandler(
+            [](const winrt::Microsoft::ReactNative::ComponentView &view,
+               const winrt::Microsoft::ReactNative::HandleCommandArgs &args) noexcept {
+              view.UserData().as<winrt::FRNCallout::CalloutComponentView>()->HandleCommand(view, args);
+            });
+        builder.SetMountChildComponentViewHandler(
+            [](const winrt::Microsoft::ReactNative::ComponentView &view,
+               const winrt::Microsoft::ReactNative::MountChildComponentViewArgs &args) noexcept {
+              view.UserData().as<winrt::FRNCallout::CalloutComponentView>()->MountChildComponentView(view, args);
+            });
+        builder.SetUnmountChildComponentViewHandler(
+            [](const winrt::Microsoft::ReactNative::ComponentView &view,
+               const winrt::Microsoft::ReactNative::UnmountChildComponentViewArgs &args) noexcept {
+              view.UserData().as<winrt::FRNCallout::CalloutComponentView>()->UnmountChildComponentView(view, args);
+            });
+        compositionBuilder.SetPortalComponentViewInitializer(
             [](const winrt::Microsoft::ReactNative::Composition::PortalComponentView &portalView) noexcept {
               auto userData = winrt::make_self<winrt::FRNCallout::CalloutComponentView>();
               userData->InitializePortal(portalView);
