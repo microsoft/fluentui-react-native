@@ -7,17 +7,28 @@
 #import <react/renderer/components/FRNCalloutSpec/Props.h>
 #import <react/renderer/components/FRNCalloutSpec/RCTComponentViewHelpers.h>
 
-#import <React/RCTBridge+Private.h>
-#import <React/RCTBridge.h>
 #import <React/RCTComponent.h>
+#import <React/RCTComponentViewProtocol.h>
 #import <React/RCTConversions.h>
-#import <React/RCTSurfacePresenterStub.h>
 #import <React/RCTSurfaceTouchHandler.h>
 #import <React/RCTView.h>
 
 #import "FRNCallout-Swift.h"
 
 using namespace facebook::react;
+
+namespace facebook::react {
+
+extern const char CalloutComponentName[] = "Callout";
+
+using CalloutShadowNode = ConcreteViewShadowNode<
+    CalloutComponentName,
+    RCTCalloutProps,
+    RCTCalloutEventEmitter,
+    RCTCalloutState>;
+using CalloutComponentDescriptor = ConcreteComponentDescriptor<CalloutShadowNode>;
+
+} // namespace facebook::react
 
 static NSRectEdge RCTNSRectEdgeFromDirectionalHint(RCTCalloutDirectionalHint hint)
 {
@@ -57,17 +68,36 @@ static void RCTApplyCalloutAppearance(
   [calloutView setNeedsDisplay:YES];
 }
 
+static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, NSInteger tag)
+{
+  if ([rootView conformsToProtocol:@protocol(RCTComponentViewProtocol)] &&
+      [((id<RCTComponentViewProtocol>)rootView).reactTag integerValue] == tag) {
+    return rootView;
+  }
+
+  for (RCTPlatformView *subview in rootView.subviews) {
+    RCTPlatformView *match = RCTFindComponentViewWithTag(subview, tag);
+    if (match) {
+      return match;
+    }
+  }
+
+  return nil;
+}
+
 @interface RCTCalloutComponentView () <RCTRCTCalloutViewProtocol>
 @end
 
 @implementation RCTCalloutComponentView {
   FRNCalloutView *_calloutView;
+  NSInteger _targetTag;
   RCTSurfaceTouchHandler *_touchHandler;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
 {
-  return concreteComponentDescriptorProvider<RCTCalloutComponentDescriptor>();
+  // Fabric normalizes the legacy RCT-prefixed view name before component lookup.
+  return concreteComponentDescriptorProvider<CalloutComponentDescriptor>();
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -114,14 +144,20 @@ static void RCTApplyCalloutAppearance(
   const auto &rect = newProps.anchorRect;
   _calloutView.anchorRect = NSMakeRect(rect.screenX, rect.screenY, rect.width, rect.height);
 
-  NSInteger targetTag = 0;
+  _targetTag = 0;
   if (newProps.target.isNumber()) {
-    targetTag = (NSInteger)newProps.target.asDouble();
+    _targetTag = (NSInteger)newProps.target.asDouble();
   }
-  [_calloutView setAnchorView:[self anchorViewForTag:targetTag]];
+  [self updateAnchorView];
   RCTApplyCalloutAppearance(_calloutView, newProps, _layoutMetrics);
 
   [super updateProps:props oldProps:oldProps];
+}
+
+- (void)viewDidMoveToWindow
+{
+  [super viewDidMoveToWindow];
+  [self updateAnchorView];
 }
 
 - (void)updateLayoutMetrics:(const LayoutMetrics &)layoutMetrics
@@ -139,6 +175,7 @@ static void RCTApplyCalloutAppearance(
 - (void)prepareForRecycle
 {
   [super prepareForRecycle];
+  _targetTag = 0;
   [_calloutView setAnchorView:nil];
 }
 
@@ -157,14 +194,10 @@ static void RCTApplyCalloutAppearance(
   [_calloutView blurWindow];
 }
 
-- (nullable RCTPlatformView *)anchorViewForTag:(NSInteger)tag
+- (void)updateAnchorView
 {
-  if (tag <= 0) {
-    return nil;
-  }
-
-  id<RCTSurfacePresenterStub> surfacePresenter = [RCTBridge currentBridge].surfacePresenter;
-  return [surfacePresenter findComponentViewWithTag_DO_NOT_USE_DEPRECATED:tag];
+  RCTPlatformView *rootView = self.window.contentView;
+  [_calloutView setAnchorView:_targetTag > 0 && rootView ? RCTFindComponentViewWithTag(rootView, _targetTag) : nil];
 }
 
 - (void)emitOnShow

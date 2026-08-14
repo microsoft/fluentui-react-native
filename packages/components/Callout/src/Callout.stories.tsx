@@ -48,13 +48,14 @@ const CalloutExample = ({ defaultVisible = false, onDismiss, onShow, showWindowC
 
   return (
     <View style={styles.story}>
-      <View ref={anchorRef}>
+      <View>
         <Pressable
           accessibilityRole="button"
           onPress={() => {
             setVisible((current) => !current);
             setStatus(visible ? 'Closed' : 'Opening');
           }}
+          ref={anchorRef}
           style={({ pressed }) => [styles.trigger, pressed && styles.triggerPressed]}
         >
           <Text style={styles.triggerText}>{visible ? 'Close callout' : 'Open callout'}</Text>
@@ -108,10 +109,11 @@ const PlacementExample = (props: CalloutProps) => {
   return (
     <View style={styles.placementStory}>
       {placements.map(({ hint, label }, index) => (
-        <View key={hint} ref={targetRefs[index]} style={styles.placementAnchor}>
+        <View key={hint} style={styles.placementAnchor}>
           <Pressable
             accessibilityRole="button"
             onPress={() => setSelectedIndex(index)}
+            ref={targetRefs[index]}
             style={({ pressed }) => [styles.trigger, pressed && styles.triggerPressed]}
           >
             <Text style={styles.triggerText}>{label}</Text>

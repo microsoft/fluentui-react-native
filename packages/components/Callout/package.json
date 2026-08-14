@@ -80,7 +80,7 @@
     "jsSrcsDir": "src",
     "ios": {
       "componentProvider": {
-        "RCTCallout": "RCTCalloutComponentView"
+        "Callout": "RCTCalloutComponentView"
       }
     }
   },
