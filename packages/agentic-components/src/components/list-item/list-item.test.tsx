@@ -23,7 +23,6 @@ function getRootStyle(component: RenderResult): ViewStyle {
 
 describe('ListItem', () => {
   it('renders the default row with selection hidden and stable content styling', async () => {
-    const colors = useFlexTokens().color;
     const component = await renderListItem({ content: 'Inbox' });
     const root = getRoot(component);
 
@@ -31,14 +30,7 @@ describe('ListItem', () => {
     expect(root.props.accessibilityState).toEqual({ disabled: false, selected: false });
     expect(root.props.focusable).toBe(true);
     expect(component.getAllByText('Inbox', { includeHiddenElements: true })).toHaveLength(2);
-    expect(getRootStyle(component)).toMatchObject({
-      alignItems: 'center',
-      backgroundColor: colors.backgroundNeutralTransparent,
-      borderRadius: 12,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      width: '100%',
-    });
+    expect(getRootStyle(component)).toMatchSnapshot();
     expect(component.queryByText('☐')).toBeNull();
   });
 

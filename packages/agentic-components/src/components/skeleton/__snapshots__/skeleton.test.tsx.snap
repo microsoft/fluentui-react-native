@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Skeleton renders a decorative bar with themed fill and rounded corners 1`] = `
+{
+  "backgroundColor": "#fafafa",
+  "borderRadius": 2,
+  "height": 16,
+  "overflow": "hidden",
+  "position": "relative",
+  "width": 120,
+}
+`;

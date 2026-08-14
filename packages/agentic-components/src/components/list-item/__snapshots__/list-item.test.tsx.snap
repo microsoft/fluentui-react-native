@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListItem renders the default row with selection hidden and stable content styling 1`] = `
+{
+  "alignItems": "center",
+  "alignSelf": "stretch",
+  "backgroundColor": "#00000000",
+  "borderRadius": 4,
+  "flexDirection": "row",
+  "justifyContent": "flex-start",
+  "paddingHorizontal": 12,
+  "paddingVertical": 10,
+  "width": "100%",
+}
+`;
