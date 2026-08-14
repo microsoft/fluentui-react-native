@@ -76,16 +76,29 @@
   },
   "codegenConfig": {
     "name": "FRNCalloutSpec",
-    "type": "components",
+    "type": "all",
     "jsSrcsDir": "src",
     "ios": {
       "componentProvider": {
         "Callout": "RCTCalloutComponentView"
       }
+    },
+    "windows": {
+      "generators": "componentsWindows",
+      "namespace": "FRNCalloutCodegen",
+      "outputDirectory": "windows/FRNCallout/codegen",
+      "separateDataTypes": true
     }
   },
   "furn": {
     "jestPlatform": "win32"
+  },
+  "react-native-windows": {
+    "init-windows": {
+      "name": "FRNCallout",
+      "namespace": "FRNCallout",
+      "template": "cpp-lib"
+    }
   },
   "rnx-kit": {
     "kitType": "library",

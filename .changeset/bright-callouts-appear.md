@@ -2,4 +2,4 @@
 "@fluentui-react-native/callout": patch
 ---
 
-Add the macOS Fabric component view and interactive Callout stories
+Add macOS and Windows Fabric component views and interactive Callout stories

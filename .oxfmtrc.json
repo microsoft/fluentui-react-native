@@ -10,6 +10,7 @@
     "**/*.generated.*",
     "**/lib-commonjs/**",
     "**/dist/**",
+    "packages/components/Callout/windows/FRNCallout/codegen/**",
     "**/CHANGELOG.*",
     "**/CODE_OF_CONDUCT.md",
     "**/SECURITY.md",

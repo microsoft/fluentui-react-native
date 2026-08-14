@@ -76,7 +76,8 @@ yarn pods:macos:update
 ## Running on Windows
 
 The Windows app also uses `react-native-test-app`. Its generated Win32 project uses React Native
-Windows' New Architecture and Fabric renderer.
+Windows 0.81's New Architecture and Fabric renderer. The Callout package is autolinked as a
+Windows Fabric native library; its Paper implementation remains built into the platform.
 
 ```powershell
 # from this directory
