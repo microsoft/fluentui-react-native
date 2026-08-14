@@ -26,4 +26,3 @@ platform: react-native (Windows, macOS)
 
 - **Hidden label fallback:** When the visible label is hidden (Label boolean is false), provide an `aria-label` for screen readers. A checkbox with no accessible name is inaccessible.
 - **Secondary text association:** When Checkbox renders secondary text, the implementation must wire `aria-describedby` on the `<input>` element to reference the secondary text node's `id`. This ensures screen readers announce the supplementary description after the label name (e.g. "Option A, checkbox, not checked — description text"). Do not merge secondary text into the accessible name — it is supplementary context, not identification.
-

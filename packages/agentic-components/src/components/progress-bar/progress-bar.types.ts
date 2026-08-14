@@ -1,6 +1,6 @@
 import type { Animated, AccessibilityState, AccessibilityValue, ColorValue, StyleProp, View, ViewProps, ViewStyle } from 'react-native';
 
-import type { ComponentProps, ComponentState, OptionalSlot, Slot } from '@fluentui-react-native/framework-base';
+import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
@@ -29,9 +29,7 @@ export type ProgressBarStateProps = {
   showValidationIcon?: boolean;
 };
 
-export type ProgressBarRootProps = Omit<ViewProps, 'children' | 'style'> & {
-  style?: StyleProp<ViewStyle>;
-};
+export type ProgressBarRootProps = OwnedRootProps<ViewProps>;
 
 export type ProgressBarProps = ProgressBarStateProps & ComponentProps<ProgressBarSlots, ProgressBarRootProps>;
 

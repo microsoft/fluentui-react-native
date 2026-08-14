@@ -3,7 +3,7 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import { getGapStyleValue, getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
 import type {
   ColorStyleDefinition,
   StateNames,
@@ -168,15 +168,8 @@ const rootStyleStateLevels = [
 type RootStyleStateLevels = typeof rootStyleStateLevels;
 type RootStyleState = StateNames<RootStyleStateLevels>;
 
-function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullable<ViewStyle['gap']> {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value;
-  }
-  throw new TypeError('Badge gap tokens must resolve to a number or string.');
-}
-
 function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
-  const gap = getGapValue(spacing.componentBase50);
+  const gap = getGapStyleValue(spacing.componentBase50);
 
   return {
     alignItems: 'center',

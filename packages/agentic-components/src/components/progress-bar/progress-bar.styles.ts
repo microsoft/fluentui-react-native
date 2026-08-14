@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
+import { getGapStyleValue } from '@fluentui-react-native/design/styling';
 import { cornerRadiusCircular, size160 } from '@fluentui-react-native/design/tokens/global';
 
 export type ProgressBarThemeStyles = {
@@ -17,14 +18,6 @@ export type ProgressBarThemeStyles = {
 
 const progressBarThemeStylesKey = Symbol('ProgressBar.themeStyles');
 
-function getGapValue(value: ThemeState['tokens']['spacing']['componentBase100']): NonNullable<ViewStyle['gap']> {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value;
-  }
-
-  throw new TypeError('ProgressBar gap tokens must resolve to a number or string.');
-}
-
 export function getProgressBarThemeStyles(themeState: ThemeState): ProgressBarThemeStyles {
   const cachedStyles = themeState.themeStyles[progressBarThemeStylesKey] as ProgressBarThemeStyles | undefined;
   if (cachedStyles) {
@@ -37,7 +30,7 @@ export function getProgressBarThemeStyles(themeState: ThemeState): ProgressBarTh
     header: {
       alignItems: 'center',
       flexDirection: 'row',
-      gap: getGapValue(spacing.componentBase100),
+      gap: getGapStyleValue(spacing.componentBase100),
       minWidth: 0,
     },
     indicator: {
@@ -64,7 +57,7 @@ export function getProgressBarThemeStyles(themeState: ThemeState): ProgressBarTh
       alignItems: 'center',
       flexDirection: 'row',
       flexShrink: 0,
-      gap: getGapValue(spacing.componentBase100),
+      gap: getGapStyleValue(spacing.componentBase100),
     },
     track: {
       backgroundColor: color.backgroundNeutralSoft,

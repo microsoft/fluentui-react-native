@@ -34,4 +34,3 @@ Radio restricts selection to exactly one option within a group. Checkbox allows 
 ## Layout
 
 - **Never add padding between the indicator and label.** The `gap` token controls indicator-to-label spacing. Padding belongs on the label wrapper's outer edges (horizontal end and vertical) — not the start edge adjacent to the indicator.
-

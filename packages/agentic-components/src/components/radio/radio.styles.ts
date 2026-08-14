@@ -3,7 +3,12 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  getNumericStyleValue,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+  interactiveStatePriority,
+} from '@fluentui-react-native/design/styling';
 import type { ColorStyleDefinition, StyleDefinition, TextColorStyle, ViewColorStyle } from '@fluentui-react-native/design/styling';
 import type { RadioState } from './radio.types';
 
@@ -37,16 +42,11 @@ export const radioStyles = StyleSheet.create({
 });
 
 const noStateLevels = [[]] as const;
-const selectionStateLevels = [['selected'], ['disabled', 'pressed', 'hovered']] as const;
+const selectionStateLevels = [['selected'], interactiveStatePriority] as const;
 const focusStateLevels = [['focused']] as const;
 type RadioColorState = 'selected' | 'disabled' | 'pressed' | 'hovered';
 
-function toDimensionValue(value: unknown): number {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return Number(value);
-  }
-  throw new TypeError('Radio dimension tokens must resolve to a number or string.');
-}
+const toDimensionValue = (value: unknown): number => Number(getNumericStyleValue(value));
 
 const getRadioRootLayoutStyle = getThemedStateStyleFactory(
   'Radio.rootLayout',

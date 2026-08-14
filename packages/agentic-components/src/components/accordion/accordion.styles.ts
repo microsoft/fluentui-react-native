@@ -4,7 +4,12 @@ import type { TextStyle, ViewStyle } from 'react-native';
 import type { FlexTokens } from '@fluentui-react-native/design';
 import { size160 } from '@fluentui-react-native/design/tokens/global';
 
-import { getStateStyleFactory, getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  getGapStyleValue,
+  getStateStyleFactory,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+} from '@fluentui-react-native/design/styling';
 import type { ColorStyleDefinition, StyleDefinition, TextColorStyle, ViewColorStyle } from '@fluentui-react-native/design/styling';
 import type { AccordionState } from './accordion.types';
 
@@ -46,18 +51,11 @@ export const accordionStyles = StyleSheet.create({
 const sizeStateLevels = [['small']] as const;
 type SizeStateLevels = typeof sizeStateLevels;
 
-function getGapValue(value: FlexTokens['spacing']['componentBase100']): NonNullable<ViewStyle['gap']> {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value;
-  }
-  throw new TypeError('Accordion gap tokens must resolve to a number or string.');
-}
-
 function createHeaderLayoutStyleDefinition({ borderRadius, spacing }: FlexTokens): StyleDefinition<ViewStyle, SizeStateLevels> {
   return {
     small: {
       borderRadius: borderRadius.base200,
-      gap: getGapValue(spacing.componentBase100),
+      gap: getGapStyleValue(spacing.componentBase100),
       paddingHorizontal: spacing.componentBase200,
       paddingVertical: spacing.componentBase100,
     },

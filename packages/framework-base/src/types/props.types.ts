@@ -65,6 +65,18 @@ export type PropsWithoutChildren<P> = 'children' extends keyof P ? DistributiveO
  */
 export type PartialWithoutChildren<P> = PropsWithoutChildren<Partial<P>>;
 
+type ReintroducedStyle<TProps> = TProps extends { style?: unknown } ? Pick<TProps, 'style'> : Record<never, never>;
+
+/**
+ * Props for a root-owned native component where the wrapper owns children and any extra keys while preserving the
+ * original native style prop type.
+ */
+export type OwnedRootProps<TProps, TOmittedKeys extends PropertyKey = never> = DistributiveOmit<
+  TProps,
+  TOmittedKeys | 'children' | 'style'
+> &
+  ReintroducedStyle<TProps>;
+
 /**
  * A signature for a property filter function.
  * @param propName - The name of a property to test.

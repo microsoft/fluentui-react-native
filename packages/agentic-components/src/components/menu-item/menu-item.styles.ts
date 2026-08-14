@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
-import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import { getThemedColorStyleFactory, getThemedStateStyleFactory, interactiveStatePriority } from '@fluentui-react-native/design/styling';
 import type {
   ColorStyleDefinition,
   StateNames,
@@ -42,24 +42,6 @@ export const menuItemStyles = StyleSheet.create({
     justifyContent: 'space-between',
     minWidth: 0,
   },
-  labelContainer: {
-    flexShrink: 1,
-    justifyContent: 'center',
-    minWidth: 0,
-    position: 'relative',
-  },
-  labelGhost: {
-    opacity: 0,
-  },
-  secondaryContainer: {
-    flexShrink: 1,
-    justifyContent: 'center',
-    minWidth: 0,
-    position: 'relative',
-  },
-  secondaryGhost: {
-    opacity: 0,
-  },
   trailing: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -89,7 +71,7 @@ export const menuItemStyles = StyleSheet.create({
   },
 });
 
-const backgroundStateLevels = [['list-item', 'section-header'], ['selected'], ['disabled', 'pressed', 'hovered']] as const;
+const backgroundStateLevels = [['list-item', 'section-header'], ['selected'], interactiveStatePriority] as const;
 type BackgroundStateLevels = typeof backgroundStateLevels;
 type BackgroundState = StateNames<BackgroundStateLevels>;
 
@@ -223,7 +205,7 @@ const getThemedSecondaryFont = getThemedStateStyleFactory(
   secondaryFontStateLevels,
 );
 
-const labelColorStateLevels = [['list-item', 'section-header'], ['selected'], ['disabled', 'pressed', 'hovered']] as const;
+const labelColorStateLevels = [['list-item', 'section-header'], ['selected'], interactiveStatePriority] as const;
 type LabelColorStateLevels = typeof labelColorStateLevels;
 type LabelColorState = StateNames<LabelColorStateLevels>;
 
@@ -266,7 +248,7 @@ function getLabelColorStateSource(state: MenuItemState): LabelColorState[] {
   return source;
 }
 
-const secondaryColorStateLevels = [['list-item', 'section-header'], ['selected'], ['disabled', 'pressed', 'hovered']] as const;
+const secondaryColorStateLevels = [['list-item', 'section-header'], ['selected'], interactiveStatePriority] as const;
 type SecondaryColorStateLevels = typeof secondaryColorStateLevels;
 type SecondaryColorState = StateNames<SecondaryColorStateLevels>;
 
@@ -309,24 +291,17 @@ function getSecondaryColorStateSource(state: MenuItemState): SecondaryColorState
   return source;
 }
 
-export function getMenuItemLabelStyle(state: MenuItemState): TextStyle {
+export function getMenuItemLabelStyle(state: MenuItemState, reserveSelected = false): TextStyle {
   return {
-    ...getThemedLabelFont(state, [state.menuStyle, ...(state.isSelectedVisual ? ['selected'] : [])]),
+    ...getThemedLabelFont(state, [state.menuStyle, ...(reserveSelected || state.isSelectedVisual ? ['selected'] : [])]),
     ...getThemedLabelColor(state, getLabelColorStateSource(state)),
   };
 }
 
-export function getMenuItemSecondaryStyle(state: MenuItemState): TextStyle {
+export function getMenuItemSecondaryStyle(state: MenuItemState, reserveSelected = false): TextStyle {
   return {
-    ...getThemedSecondaryFont(state, [state.menuStyle, ...(state.isSelectedVisual ? ['selected'] : [])]),
+    ...getThemedSecondaryFont(state, [state.menuStyle, ...(reserveSelected || state.isSelectedVisual ? ['selected'] : [])]),
     ...getThemedSecondaryColor(state, getSecondaryColorStateSource(state)),
-  };
-}
-
-export function getMenuItemGhostStyle(base: TextStyle): TextStyle {
-  return {
-    ...base,
-    opacity: 0,
   };
 }
 
@@ -381,30 +356,3 @@ export function getMenuItemRootLayoutStyle(state: MenuItemState): ViewStyle {
     alignItems: state.secondaryContentPosition === 'under' ? 'flex-start' : 'center',
   };
 }
-
-export const menuItemIcons = {
-  regular: {
-    fontSource: {
-      codepoint: 0x25cb,
-      fontFamily: 'Arial',
-    },
-  },
-  selected: {
-    fontSource: {
-      codepoint: 0x25cf,
-      fontFamily: 'Arial',
-    },
-  },
-  chevron: {
-    fontSource: {
-      codepoint: 0x203a,
-      fontFamily: 'Arial',
-    },
-  },
-  checkmark: {
-    fontSource: {
-      codepoint: 0x2713,
-      fontFamily: 'Arial',
-    },
-  },
-} as const;

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
-import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import { getThemedColorStyleFactory, getThemedStateStyleFactory, interactiveStatePriority } from '@fluentui-react-native/design/styling';
 import type {
   ColorStyleDefinition,
   StateNames,
@@ -21,27 +21,6 @@ export const listItemStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     width: '100%',
-  },
-  primaryStack: {
-    flexGrow: 1,
-    flexShrink: 1,
-    minWidth: 0,
-    position: 'relative',
-  },
-  contentVisible: {
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    top: 0,
-  },
-  contentHidden: {
-    bottom: 0,
-    left: 0,
-    opacity: 0,
-    position: 'absolute',
-    right: 0,
-    top: 0,
   },
   trailingContainer: {
     alignItems: 'center',
@@ -73,10 +52,7 @@ export const listItemStyles = StyleSheet.create({
   },
 });
 
-const backgroundStateLevels = [
-  ['rest', 'selected'],
-  ['disabled', 'pressed', 'hovered'],
-] as const;
+const backgroundStateLevels = [['rest', 'selected'], interactiveStatePriority] as const;
 type BackgroundStateLevels = typeof backgroundStateLevels;
 type BackgroundState = StateNames<BackgroundStateLevels>;
 
@@ -129,7 +105,7 @@ export function getListItemBackgroundStyle(state: ListItemState): ViewColorStyle
   return getThemedBackgroundStyle(state, getBackgroundStateSource(state));
 }
 
-const primaryForegroundStateLevels = [['rest'], ['disabled', 'pressed', 'hovered']] as const;
+const primaryForegroundStateLevels = [['rest'], interactiveStatePriority] as const;
 type PrimaryForegroundStateLevels = typeof primaryForegroundStateLevels;
 type PrimaryForegroundState = StateNames<PrimaryForegroundStateLevels>;
 
@@ -173,10 +149,7 @@ export function getListItemPrimaryForegroundStyle(state: ListItemState): TextCol
   return getThemedPrimaryForegroundStyle(state, getPrimaryForegroundStateSource(state));
 }
 
-const secondaryForegroundStateLevels = [
-  ['rest', 'selected'],
-  ['disabled', 'pressed', 'hovered'],
-] as const;
+const secondaryForegroundStateLevels = [['rest', 'selected'], interactiveStatePriority] as const;
 type SecondaryForegroundStateLevels = typeof secondaryForegroundStateLevels;
 type SecondaryForegroundState = StateNames<SecondaryForegroundStateLevels>;
 

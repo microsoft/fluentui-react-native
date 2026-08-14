@@ -19,8 +19,7 @@ const StoryGroup = ({ children, label }: StoryGroupProps) => (
   </View>
 );
 
-const imageDataUri =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+const imageDataUri = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
 
 const meta: Meta<typeof Avatar> = {
   title: 'Components/Avatar',

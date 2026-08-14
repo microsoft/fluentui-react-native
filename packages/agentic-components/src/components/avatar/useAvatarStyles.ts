@@ -2,6 +2,7 @@ import type { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import { avatarStyles, getAvatarIconSize, getAvatarInitialsStyle, getAvatarRootStyle } from './avatar.styles';
 import type { AvatarState } from './avatar.types';
 
@@ -20,28 +21,22 @@ export function useAvatarStyles_unstable(state: AvatarState) {
   attachSlotProps(state.root, { style: rootStyle });
   if (state.image) {
     attachSlotProps(state.image, {
-      accessible: false,
-      accessibilityElementsHidden: true,
+      ...hiddenFromAccessibilityProps,
       resizeMode: 'cover',
-      importantForAccessibility: 'no-hide-descendants',
       style: imageStyle,
     });
   }
   if (state.icon) {
     attachSlotProps(state.icon, {
-      accessible: false,
-      accessibilityElementsHidden: true,
+      ...hiddenFromAccessibilityProps,
       color: foregroundColor,
       height: iconSize,
-      importantForAccessibility: 'no-hide-descendants',
       width: iconSize,
     });
   }
   if (state.initials) {
     attachSlotProps(state.initials, {
-      accessible: false,
-      accessibilityElementsHidden: true,
-      importantForAccessibility: 'no-hide-descendants',
+      ...hiddenFromAccessibilityProps,
       style: initialsStyle,
     });
   }

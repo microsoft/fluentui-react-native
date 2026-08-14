@@ -1,13 +1,21 @@
 import type { Pressable, PressableProps, StyleProp, Text, View, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
-import type { ComponentProps, ComponentState, OptionalSlot, PressableState, Slot } from '@fluentui-react-native/framework-base';
+import type {
+  ComponentProps,
+  ComponentState,
+  OptionalSlot,
+  OwnedRootProps,
+  PressableState,
+  Slot,
+} from '@fluentui-react-native/framework-base';
 
 import type { Icon } from '../../primitives/icon/icon';
+import type { ItemSecondaryContentPosition } from '../../common/item.types';
 
 export type ListItemSize = 'small' | 'medium' | 'large';
 export type ListItemSelectionMode = 'none' | 'single' | 'multiple';
-export type ListItemSecondaryContentPosition = 'right' | 'under';
+export type ListItemSecondaryContentPosition = ItemSecondaryContentPosition;
 
 export type ListItemSlots = {
   root: Slot<typeof Pressable>;
@@ -32,9 +40,7 @@ export type ListItemStateProps = {
   size?: ListItemSize;
 };
 
-export type ListItemExposedPressableProps = Omit<PressableProps, 'children' | 'style'> & {
-  style?: StyleProp<ViewStyle>;
-};
+export type ListItemExposedPressableProps = OwnedRootProps<PressableProps>;
 
 export type ListItemProps = ListItemStateProps & ComponentProps<ListItemSlots, ListItemExposedPressableProps>;
 

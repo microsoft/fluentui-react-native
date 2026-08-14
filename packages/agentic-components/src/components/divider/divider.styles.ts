@@ -2,17 +2,9 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
-import { getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import { getGapStyleValue, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
 import type { StyleDefinition } from '@fluentui-react-native/design/styling';
 import type { DividerState } from './divider.types';
-
-function getGapValue(value: FlexTokens['spacing']['componentBase150']): NonNullable<ViewStyle['gap']> {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value;
-  }
-
-  throw new TypeError('Divider gap tokens must resolve to a number or string.');
-}
 
 export const dividerStyles = StyleSheet.create({
   root: {
@@ -50,7 +42,7 @@ export function getDividerRootStyle(state: DividerState): ViewStyle {
 
 function createContentStyleDefinition({ spacing }: FlexTokens): StyleDefinition<ViewStyle, OrientationStateLevels> {
   const padding = spacing.componentBase300;
-  const gap = getGapValue(spacing.componentBase150);
+  const gap = getGapStyleValue(spacing.componentBase150);
 
   return {
     horizontal: {

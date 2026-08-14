@@ -4,6 +4,7 @@ import { useThemeState } from '@fluentui-react-native/design';
 import { useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
+import { hideSlotProps } from '../../common/accessibility';
 
 import { getListItemAvatarSize, getListItemIconSize, getListItemSelectionIndicatorGlyph } from './list-item.styles';
 import type { ListItemMetrics, ListItemProps, ListItemState } from './list-item.types';
@@ -54,16 +55,6 @@ function getMetrics(size: ListItemState['size'], tokens: ListItemState['tokens']
   }
 }
 
-function hideTextProps<TProps extends { ref?: unknown; testID?: string }>(props: TProps): TProps {
-  const { ref: _ref, testID: _testID, ...rest } = props;
-  return {
-    ...rest,
-    accessibilityElementsHidden: true,
-    accessible: false,
-    importantForAccessibility: 'no-hide-descendants',
-  } as unknown as TProps;
-}
-
 /**
  * Hook to create the state for a ListItem component.
  */
@@ -105,13 +96,13 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
 
   const root = useSlot(Pressable, pressableProps);
   const content = useSlot(Text, contentProp);
-  const contentHidden = useSlot(Text, contentProp, { transform: hideTextProps });
+  const contentHidden = useSlot(Text, contentProp);
   const secondaryContent = useOptionalSlot(Text, secondaryContentProp);
   const icon = useOptionalSlot(Icon, iconProp);
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
   const avatar = useOptionalSlot(View, avatarProp);
   const trailing = useOptionalSlot(View, trailingProp);
-  const selectionIndicator = useOptionalSlot(Text, selectionGlyph, { transform: hideTextProps });
+  const selectionIndicator = useOptionalSlot(Text, selectionGlyph, { transform: hideSlotProps });
 
   return {
     root,

@@ -64,4 +64,10 @@ describe('component composition exports', () => {
       expect(helper).toEqual(expect.any(Function));
     });
   });
+
+  it('exports shared primitives', () => {
+    expect(components.CheckboxIndicator).toEqual(expect.any(Function));
+    expect(components.CompoundItemLayout).toEqual(expect.any(Function));
+    expect(components.LayoutStableText).toEqual(expect.any(Function));
+  });
 });

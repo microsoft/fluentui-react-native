@@ -11,10 +11,10 @@ usage: spec/usage.md
 
 ## Metadata
 
-| Field      | Value  |
-| ---------- | ------ |
-| Type       | atomic |
-| Component  | Tag    |
+| Field     | Value  |
+| --------- | ------ |
+| Type      | atomic |
+| Component | Tag    |
 
 This spec covers the Tag component for React Native (Windows & macOS). React Native tokens are in `spec/tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `spec/interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `spec/accessibility.md`, and shared usage guidance is in `spec/usage.md` — read the relevant companion file before answering.
 

@@ -145,31 +145,30 @@ describe('ListItem', () => {
     expect(component.getByTestId('trailing')).toBeOnTheScreen();
   });
 
-  it.each([
-    ['small', 8, 6, 4, 16] as const,
-    ['medium', 12, 10, 8, 20] as const,
-    ['large', 16, 12, 8, 24] as const,
-  ])('resolves the %s size', async (size, paddingHorizontal, paddingVertical, leadingMargin, iconSize) => {
-    const component = await renderListItem({ content: size, size });
-    const rootStyle = getRootStyle(component);
+  it.each([['small', 8, 6, 4, 16] as const, ['medium', 12, 10, 8, 20] as const, ['large', 16, 12, 8, 24] as const])(
+    'resolves the %s size',
+    async (size, paddingHorizontal, paddingVertical, leadingMargin, iconSize) => {
+      const component = await renderListItem({ content: size, size });
+      const rootStyle = getRootStyle(component);
 
-    expect(rootStyle.paddingHorizontal).toBe(paddingHorizontal);
-    expect(rootStyle.paddingVertical).toBe(paddingVertical);
+      expect(rootStyle.paddingHorizontal).toBe(paddingHorizontal);
+      expect(rootStyle.paddingVertical).toBe(paddingVertical);
 
-    const icon = await renderListItem({
-      content: `${size} icon`,
-      icon: { imageSource: { uri: `${size}.png` }, testID: `${size}-icon` },
-      size,
-    });
-    expect(StyleSheet.flatten(icon.getByTestId(`${size}-icon`).props.style)).toMatchObject({ height: iconSize, width: iconSize });
-    expect(getRootStyle(icon).paddingHorizontal).toBe(paddingHorizontal);
-    expect(getRootStyle(icon).paddingVertical).toBe(paddingVertical);
-    expect(getRootStyle(icon)).toMatchObject({ paddingHorizontal, paddingVertical });
-    expect(StyleSheet.flatten(icon.getAllByText(`${size} icon`, { includeHiddenElements: true })[1].props.style)).toMatchObject({
-      fontFamily: expect.any(String),
-    });
-    expect(leadingMargin).toBeGreaterThan(0);
-  });
+      const icon = await renderListItem({
+        content: `${size} icon`,
+        icon: { imageSource: { uri: `${size}.png` }, testID: `${size}-icon` },
+        size,
+      });
+      expect(StyleSheet.flatten(icon.getByTestId(`${size}-icon`).props.style)).toMatchObject({ height: iconSize, width: iconSize });
+      expect(getRootStyle(icon).paddingHorizontal).toBe(paddingHorizontal);
+      expect(getRootStyle(icon).paddingVertical).toBe(paddingVertical);
+      expect(getRootStyle(icon)).toMatchObject({ paddingHorizontal, paddingVertical });
+      expect(StyleSheet.flatten(icon.getAllByText(`${size} icon`, { includeHiddenElements: true })[1].props.style)).toMatchObject({
+        fontFamily: expect.any(String),
+      });
+      expect(leadingMargin).toBeGreaterThan(0);
+    },
+  );
 
   it('renders a dual-token focus outline', async () => {
     const colors = useFlexTokens().color;

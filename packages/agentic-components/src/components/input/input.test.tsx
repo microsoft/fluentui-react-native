@@ -107,7 +107,11 @@ describe('Input', () => {
     );
     const colors = useFlexTokens().color;
 
-    expect(flattenStyle(component.getByTestId('icon-start').props.style)).toMatchObject({ color: colors.foregroundNeutralPrimary, height: 24, width: 24 });
+    expect(flattenStyle(component.getByTestId('icon-start').props.style)).toMatchObject({
+      color: colors.foregroundNeutralPrimary,
+      height: 24,
+      width: 24,
+    });
     expect(component.getByTestId('icon-end-1').props.style).toMatchObject({ height: 24, width: 24 });
     expect(component.getByTestId('icon-end-2').props.style).toMatchObject({ height: 24, width: 24 });
   });

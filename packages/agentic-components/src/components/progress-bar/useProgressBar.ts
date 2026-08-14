@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { AccessibilityInfo, Animated, Easing, View } from 'react-native';
+import { Animated, Easing, View } from 'react-native';
 import type { AccessibilityState, AccessibilityValue, ColorValue } from 'react-native';
 
-import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useOptionalSlot, useReducedMotion, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { semanticIconSources } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
 import type { ProgressBarState, ProgressBarProps, ProgressBarStatus } from './progress-bar.types';
 import { getProgressBarThemeStyles } from './progress-bar.styles';
@@ -41,11 +42,11 @@ function getDefaultIcon(status: ProgressBarStatus) {
   switch (status) {
     case 'error':
       return {
-        fontSource: { codepoint: 0x2716, fontFamily: 'Arial' },
+        fontSource: semanticIconSources.error,
       } as const;
     case 'success':
       return {
-        fontSource: { codepoint: 0x2713, fontFamily: 'Arial' },
+        fontSource: semanticIconSources.checkmark,
       } as const;
     default:
       return undefined;
@@ -95,27 +96,11 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
   const labelId = React.useId();
   const resolvedProgress = clampProgress(progressProp);
   const [trackLayoutWidth, setTrackLayoutWidth] = React.useState(0);
-  const [isReduceMotionEnabled, setIsReduceMotionEnabled] = React.useState(false);
+  const isReduceMotionEnabled = useReducedMotion() ?? false;
   const [resolvedDeterminateProgress, setResolvedDeterminateProgress] = React.useState(resolvedProgress);
   const previousType = React.useRef(type);
   const indicatorTranslateX = React.useRef(new Animated.Value(0)).current;
   const indeterminateAnimation = React.useRef<Animated.CompositeAnimation | undefined>(undefined);
-
-  React.useEffect(() => {
-    let isMounted = true;
-
-    AccessibilityInfo.isReduceMotionEnabled().then((enabled) => {
-      if (isMounted) {
-        setIsReduceMotionEnabled(enabled);
-      }
-    });
-
-    const subscription = AccessibilityInfo.addEventListener('reduceMotionChanged', setIsReduceMotionEnabled);
-    return () => {
-      isMounted = false;
-      subscription?.remove?.();
-    };
-  }, []);
 
   React.useEffect(() => {
     if (type === 'indeterminate') {

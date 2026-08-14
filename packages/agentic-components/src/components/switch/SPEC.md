@@ -78,4 +78,3 @@ Variant properties are ordered in the design tool: **Layout → Checked → Stat
 | **Disabled** | Reduced-contrast track and thumb; non-interactive       | Setting is unavailable or locked |
 
 **Interaction model:** All three categories (background, foreground, stroke) participate in hover/pressed. The unchecked transparent background uses alpha shift; the checked heavy background uses inverse lightness shift.
-

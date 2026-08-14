@@ -1,5 +1,12 @@
 import type { AccessibilityState, Pressable, StyleProp, Text, View, ViewProps, ViewStyle } from 'react-native';
-import type { ComponentProps, ComponentState, OptionalSlot, PressableState, Slot } from '@fluentui-react-native/framework-base';
+import type {
+  ComponentProps,
+  ComponentState,
+  OptionalSlot,
+  OwnedRootProps,
+  PressableState,
+  Slot,
+} from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
 
@@ -70,9 +77,9 @@ export type AccordionStateProps = {
   size?: AccordionSize;
 };
 
-export type AccordionRootProps = Omit<
+export type AccordionRootProps = OwnedRootProps<
   ViewProps,
-  'accessible' | 'accessibilityHint' | 'accessibilityLabel' | 'accessibilityRole' | 'accessibilityState' | 'children' | 'focusable'
+  'accessible' | 'accessibilityHint' | 'accessibilityLabel' | 'accessibilityRole' | 'accessibilityState' | 'focusable'
 >;
 
 export type AccordionProps = AccordionStateProps & ComponentProps<AccordionSlots, AccordionRootProps>;

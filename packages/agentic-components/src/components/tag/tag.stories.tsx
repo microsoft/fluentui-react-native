@@ -147,7 +147,13 @@ export const Size: Story = {
       {sizes.map(({ label, value }) => (
         <StoryGroup key={value} label={label}>
           <Tag content={label} dismissIcon={dismissIcon} leadingIcon={leadingIcon} size={value} />
-          <Tag accessibilityLabel={`Remove ${label} filter`} dismissIcon={dismissIcon} layout="iconOnly" leadingIcon={leadingIcon} size={value} />
+          <Tag
+            accessibilityLabel={`Remove ${label} filter`}
+            dismissIcon={dismissIcon}
+            layout="iconOnly"
+            leadingIcon={leadingIcon}
+            size={value}
+          />
         </StoryGroup>
       ))}
     </View>
@@ -215,7 +221,12 @@ export const ConstrainedText: Story = {
   render: () => (
     <StoryGroup label="Constrained text">
       <Tag content="Short label" dismissIcon={dismissIcon} leadingIcon={leadingIcon} />
-      <Tag content="Long tag text wraps when the row constrains the width" dismissIcon={dismissIcon} leadingIcon={leadingIcon} style={styles.longTag} />
+      <Tag
+        content="Long tag text wraps when the row constrains the width"
+        dismissIcon={dismissIcon}
+        leadingIcon={leadingIcon}
+        style={styles.longTag}
+      />
     </StoryGroup>
   ),
   parameters: {

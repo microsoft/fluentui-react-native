@@ -1,6 +1,13 @@
 import type { Pressable, PressableProps, StyleProp, Text, View, ViewStyle } from 'react-native';
 
-import type { ComponentProps, ComponentState, OptionalSlot, PressableState, Slot } from '@fluentui-react-native/framework-base';
+import type {
+  ComponentProps,
+  ComponentState,
+  OptionalSlot,
+  OwnedRootProps,
+  PressableState,
+  Slot,
+} from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 type AnimatedViewComponent = typeof import('react-native').Animated.View;
@@ -31,9 +38,7 @@ export type SwitchStateProps = {
   onChange?: (checked: boolean) => void;
 };
 
-export type SwitchExposedPressableProps = Omit<PressableProps, 'children' | 'style'> & {
-  style?: StyleProp<ViewStyle>;
-};
+export type SwitchExposedPressableProps = OwnedRootProps<PressableProps>;
 
 export type SwitchProps = SwitchStateProps & ComponentProps<SwitchSlots, SwitchExposedPressableProps>;
 

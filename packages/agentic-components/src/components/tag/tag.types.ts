@@ -1,5 +1,12 @@
 import type { Pressable, PressableProps, StyleProp, Text, ViewStyle } from 'react-native';
-import type { ComponentProps, ComponentState, OptionalSlot, PressableState, Slot } from '@fluentui-react-native/framework-base';
+import type {
+  ComponentProps,
+  ComponentState,
+  OptionalSlot,
+  OwnedRootProps,
+  PressableState,
+  Slot,
+} from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
@@ -25,9 +32,7 @@ export type TagStateProps = {
   dismiss?: boolean;
 };
 
-export type TagRootProps = Omit<PressableProps, 'children' | 'style'> & {
-  style?: StyleProp<ViewStyle>;
-};
+export type TagRootProps = OwnedRootProps<PressableProps>;
 
 export type TagProps = TagStateProps & ComponentProps<TagSlots, TagRootProps>;
 

@@ -2,6 +2,7 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import {
   getListItemBackgroundStyle,
   getListItemContentStyle,
@@ -25,12 +26,8 @@ export function useListItemStyles_unstable(state: ListItemState) {
     getListItemFocusStyle(state),
     state.userStyle,
   ];
-  const contentStyle: StyleProp<TextStyle> = [listItemStyles.contentVisible, getListItemContentStyle(state)];
-  const hiddenContentStyle: StyleProp<TextStyle> = [
-    listItemStyles.contentVisible,
-    listItemStyles.contentHidden,
-    getListItemContentStyle(state, true),
-  ];
+  const contentStyle: StyleProp<TextStyle> = getListItemContentStyle(state);
+  const hiddenContentStyle: StyleProp<TextStyle> = getListItemContentStyle(state, true);
   const secondaryContentStyle: StyleProp<TextStyle> = [
     getListItemSecondaryContentStyle(state),
     getListItemSecondaryForegroundStyle(state),
@@ -66,9 +63,6 @@ export function useListItemStyles_unstable(state: ListItemState) {
   attachSlotProps(state.root, { style: rootStyle });
   attachSlotProps(state.content, { style: contentStyle });
   attachSlotProps(state.contentHidden, {
-    accessibilityElementsHidden: true,
-    accessible: false,
-    importantForAccessibility: 'no-hide-descendants',
     style: hiddenContentStyle,
   });
 
@@ -112,9 +106,7 @@ export function useListItemStyles_unstable(state: ListItemState) {
 
   if (state.selectionIndicator) {
     attachSlotProps(state.selectionIndicator, {
-      accessibilityElementsHidden: true,
-      accessible: false,
-      importantForAccessibility: 'no-hide-descendants',
+      ...hiddenFromAccessibilityProps,
       style: selectionIndicatorStyle,
     });
   }

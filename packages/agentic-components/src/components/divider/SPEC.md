@@ -11,10 +11,10 @@ usage: ./spec/usage.md
 
 ## Metadata
 
-| Field     | Value     |
-| --------- | --------- |
-| Type      | atomic    |
-| Component | Divider   |
+| Field     | Value   |
+| --------- | ------- |
+| Type      | atomic  |
+| Component | Divider |
 
 This spec covers the Divider component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance is in `interaction.md`, React Native accessibility guidance is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
 
@@ -34,10 +34,10 @@ Answer design questions directly — lead with rationale, then tokens. The most 
 4. **Label** — optional text node bound to the label slot. Uses `textstyle-functional-body-small` in secondary foreground color.
 5. **Divider line (after)** — flex-grow stroke element that follows the content container. In Center layout, grows equally with the leading line. In End layout, it becomes the short stub near the end edge.
 
-| Slot    | Required | Default                           |
-| ------- | ------- | --------------------------------- |
-| Label   | No      | Visible                           |
-| Icon    | No      | Hidden                            |
+| Slot  | Required | Default |
+| ----- | -------- | ------- |
+| Label | No       | Visible |
+| Icon  | No       | Hidden  |
 
 > **Content visibility:** Hiding both icon and label collapses the content container, leaving only the divider line. This is equivalent to the "No text" presentation shown in the speclet.
 
@@ -49,11 +49,11 @@ Variant properties are ordered in the design tool: **Layout → Vertical**.
 
 #### Layout
 
-| Value                | Description                                                                                           | When to Use                                                                              |
-| -------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| **Center (Default)** | Content is centered between two equal flex-grow lines                                                 | Default. Use when the label should sit at the midpoint of the divider.                   |
-| **Start**            | Content is positioned near the start edge; leading line is a `spacing.componentBase100` stub         | When the label should read left-aligned (LTR) or right-aligned (RTL) within the divider. |
-| **End**              | Content is positioned near the end edge; trailing line is a `spacing.componentBase100` stub           | When the label should appear at the far edge of the divider.                             |
+| Value                | Description                                                                                  | When to Use                                                                              |
+| -------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Center (Default)** | Content is centered between two equal flex-grow lines                                        | Default. Use when the label should sit at the midpoint of the divider.                   |
+| **Start**            | Content is positioned near the start edge; leading line is a `spacing.componentBase100` stub | When the label should read left-aligned (LTR) or right-aligned (RTL) within the divider. |
+| **End**              | Content is positioned near the end edge; trailing line is a `spacing.componentBase100` stub  | When the label should appear at the far edge of the divider.                             |
 
 **Why Layout is a variant axis:** The position of the content fundamentally changes the flex behavior of the two line segments — Center uses two equal flex-grow lines, while Start and End use a fixed stub on one side. This structural difference cannot be achieved by toggling a property on a single layout configuration.
 

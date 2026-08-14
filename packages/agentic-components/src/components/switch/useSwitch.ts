@@ -1,7 +1,14 @@
 import * as React from 'react';
-import { AccessibilityInfo, Animated, Easing, Pressable, Text, View } from 'react-native';
+import { Animated, Easing, Pressable, Text, View } from 'react-native';
 
-import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import {
+  useAccessibilityLabelWarning,
+  useControllableValue,
+  usePressableState,
+  useOptionalSlot,
+  useReducedMotion,
+  useSlot,
+} from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import type { SwitchProps, SwitchState } from './switch.types';
@@ -10,26 +17,6 @@ const TOGGLE_KEYS = new Set(['Enter', ' ', 'Spacebar', 'Space']);
 
 function isToggleKey(key: string | undefined): boolean {
   return key !== undefined && TOGGLE_KEYS.has(key);
-}
-
-function useReduceMotion(): boolean {
-  const [reduceMotion, setReduceMotion] = React.useState(false);
-
-  React.useEffect(() => {
-    let active = true;
-    void AccessibilityInfo.isReduceMotionEnabled().then((enabled) => {
-      if (active) {
-        setReduceMotion(enabled);
-      }
-    });
-    const subscription = AccessibilityInfo.addEventListener?.('reduceMotionChanged', setReduceMotion);
-    return () => {
-      active = false;
-      subscription?.remove?.();
-    };
-  }, []);
-
-  return reduceMotion;
 }
 
 /**
@@ -56,15 +43,18 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     ...rest
   } = props;
 
-  const isControlled = checkedProp !== undefined;
-  const [uncontrolledChecked, setUncontrolledChecked] = React.useState(defaultChecked);
-  const checked = (isControlled ? checkedProp : uncontrolledChecked) ?? false;
+  const [checkedValue, setChecked] = useControllableValue(checkedProp, defaultChecked, (nextChecked) => {
+    if (nextChecked !== undefined) {
+      onChange?.(nextChecked);
+    }
+  });
+  const checked = checkedValue ?? false;
   const hasBeforeLabel = layout === 'horizontal' && labelBefore && beforeLabelProp !== null;
   const hasAfterLabel = layout === 'horizontal' && labelAfter && afterLabelProp !== null;
   const hasAboveLabel = layout === 'vertical' && aboveLabelProp !== null;
   const hasVisibleLabel = hasBeforeLabel || hasAfterLabel || hasAboveLabel;
   const themeState = useThemeState();
-  const reduceMotion = useReduceMotion();
+  const reduceMotion = useReducedMotion() ?? false;
   const checkedProgress = React.useRef(new Animated.Value(checked ? 1 : 0)).current;
   const hasMounted = React.useRef(false);
   const switchId = React.useId().replaceAll(':', '');
@@ -73,13 +63,18 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const aboveLabelId = `switch-${switchId}-above`;
 
   const explicitAccessibleName =
-    accessibilityLabel !== undefined || accessibilityLabelledBy !== undefined || rest['aria-label'] !== undefined || rest['aria-labelledby'] !== undefined;
+    accessibilityLabel !== undefined ||
+    accessibilityLabelledBy !== undefined ||
+    rest['aria-label'] !== undefined ||
+    rest['aria-labelledby'] !== undefined;
 
-  React.useEffect(() => {
-    if (__DEV__ && !hasVisibleLabel && !explicitAccessibleName && (!label || label === 'Label')) {
-      console.warn('Switch: standalone switches require an accessibilityLabel when no visible labels are rendered.');
-    }
-  }, [explicitAccessibleName, hasVisibleLabel, label]);
+  useAccessibilityLabelWarning({
+    accessibilityLabel: accessibilityLabel ?? rest['aria-label'],
+    accessibilityLabelledBy: accessibilityLabelledBy ?? rest['aria-labelledby'],
+    componentName: 'Switch',
+    requireLabel: !hasVisibleLabel && (!label || label === 'Label'),
+    warning: 'Switch: standalone switches require an accessibilityLabel when no visible labels are rendered.',
+  });
 
   React.useEffect(() => {
     if (!hasMounted.current) {
@@ -101,16 +96,6 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     }).start();
   }, [checked, checkedProgress, reduceMotion]);
 
-  const commitChecked = React.useCallback(
-    (nextChecked: boolean) => {
-      if (!isControlled) {
-        setUncontrolledChecked(nextChecked);
-      }
-      onChange?.(nextChecked);
-    },
-    [isControlled, onChange],
-  );
-
   const pressableNameProps =
     explicitAccessibleName || !hasVisibleLabel
       ? {
@@ -120,11 +105,17 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
           'aria-labelledby': rest['aria-labelledby'],
         }
       : {
-            accessibilityLabel: label,
-            accessibilityLabelledBy: [hasBeforeLabel ? beforeLabelId : undefined, hasAfterLabel ? afterLabelId : undefined, hasAboveLabel ? aboveLabelId : undefined].filter(
-              Boolean,
-            ) as string[],
-          'aria-labelledby': [hasBeforeLabel ? beforeLabelId : undefined, hasAfterLabel ? afterLabelId : undefined, hasAboveLabel ? aboveLabelId : undefined]
+          accessibilityLabel: label,
+          accessibilityLabelledBy: [
+            hasBeforeLabel ? beforeLabelId : undefined,
+            hasAfterLabel ? afterLabelId : undefined,
+            hasAboveLabel ? aboveLabelId : undefined,
+          ].filter(Boolean) as string[],
+          'aria-labelledby': [
+            hasBeforeLabel ? beforeLabelId : undefined,
+            hasAfterLabel ? afterLabelId : undefined,
+            hasAboveLabel ? aboveLabelId : undefined,
+          ]
             .filter(Boolean)
             .join(' '),
         };
@@ -150,19 +141,19 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
         return;
       }
       pressableProps.onPress?.(event);
-      commitChecked(!checked);
+      setChecked(!checked);
     },
-    [checked, commitChecked, disabled, pressableProps],
+    [checked, disabled, pressableProps, setChecked],
   );
 
   const handleKeyUp = React.useCallback(
     (event: Parameters<NonNullable<typeof pressableProps.onKeyUp>>[0]) => {
       pressableProps.onKeyUp?.(event);
       if (!disabled && isToggleKey((event as { nativeEvent?: { key?: string } }).nativeEvent?.key)) {
-        commitChecked(!checked);
+        setChecked(!checked);
       }
     },
-    [checked, commitChecked, disabled, pressableProps],
+    [checked, disabled, pressableProps, setChecked],
   );
 
   const layoutContainer = useSlot(View, { testID: 'switch-layout-container' });
@@ -174,7 +165,10 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const track = useSlot(Animated.View, trackProp);
   const thumb = useSlot(Animated.View, thumbProp);
 
-  const beforeLabel = useOptionalSlot(Text, hasBeforeLabel ? (beforeLabelProp === undefined ? { children: label } : beforeLabelProp) : null);
+  const beforeLabel = useOptionalSlot(
+    Text,
+    hasBeforeLabel ? (beforeLabelProp === undefined ? { children: label } : beforeLabelProp) : null,
+  );
   const afterLabel = useOptionalSlot(Text, hasAfterLabel ? (afterLabelProp === undefined ? { children: label } : afterLabelProp) : null);
   const aboveLabel = useOptionalSlot(Text, hasAboveLabel ? (aboveLabelProp === undefined ? { children: label } : aboveLabelProp) : null);
 

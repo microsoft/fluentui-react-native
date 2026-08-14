@@ -1,6 +1,6 @@
 import type { StyleProp, ViewStyle, ViewProps, Text, View } from 'react-native';
 
-import type { ComponentProps, ComponentState, OptionalSlot, Slot } from '@fluentui-react-native/framework-base';
+import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
@@ -22,9 +22,7 @@ export type DividerStateProps = {
   vertical?: boolean;
 };
 
-export type DividerExposedViewProps = Omit<ViewProps, 'children' | 'style' | 'accessibilityRole' | 'focusable'> & {
-  style?: StyleProp<ViewStyle>;
-};
+export type DividerExposedViewProps = OwnedRootProps<ViewProps, 'accessibilityRole' | 'focusable'>;
 
 export type DividerProps = DividerStateProps & ComponentProps<DividerSlots, DividerExposedViewProps>;
 

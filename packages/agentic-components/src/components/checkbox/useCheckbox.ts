@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Pressable, Text } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useControllableValue, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import type { CheckboxProps, CheckboxState, CheckboxStatus } from './checkbox.types';
@@ -30,9 +30,12 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     ...rest
   } = props;
 
-  const isControlled = statusProp !== undefined;
-  const [internalStatus, setInternalStatus] = React.useState<CheckboxStatus>(defaultStatus);
-  const status = (isControlled ? statusProp : internalStatus) as CheckboxStatus;
+  const [statusValue, setStatus] = useControllableValue(statusProp, defaultStatus, (nextStatus) => {
+    if (nextStatus !== undefined) {
+      onStatusChange?.(nextStatus);
+    }
+  });
+  const status = statusValue ?? defaultStatus;
   const renderSecondaryText = showLabel && showSecondaryText;
   const themeState = useThemeState();
 
@@ -42,31 +45,19 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     }
   }, [showLabel, showSecondaryText]);
 
-  const handleStatusChange = React.useCallback(
-    (nextStatus: CheckboxStatus) => {
-      if (!isControlled) {
-        setInternalStatus(nextStatus);
-      }
-      onStatusChange?.(nextStatus);
-    },
-    [isControlled, onStatusChange],
-  );
-
   const handlePress = React.useCallback(
     (event: Parameters<NonNullable<CheckboxProps['onPress']>>[0]) => {
       if (disabled) {
         return;
       }
-      handleStatusChange(getNextStatus(status));
+      setStatus(getNextStatus(status));
       onPress?.(event);
     },
-    [disabled, handleStatusChange, onPress, status],
+    [disabled, onPress, setStatus, status],
   );
 
   const rootAccessibilityLabel = accessibilityLabel ?? label;
-  const rootAccessibilityHint = renderSecondaryText
-    ? [accessibilityHint, secondaryText].filter(Boolean).join('. ')
-    : accessibilityHint;
+  const rootAccessibilityHint = renderSecondaryText ? [accessibilityHint, secondaryText].filter(Boolean).join('. ') : accessibilityHint;
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
@@ -85,10 +76,7 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
   });
 
   const root = useSlot(Pressable, pressableProps);
-  const labelText = useOptionalSlot(
-    Text,
-    showLabel ? { accessible: false, children: label, testID: 'checkbox-label' } : null,
-  );
+  const labelText = useOptionalSlot(Text, showLabel ? { accessible: false, children: label, testID: 'checkbox-label' } : null);
   const secondaryTextSlot = useOptionalSlot(
     Text,
     renderSecondaryText

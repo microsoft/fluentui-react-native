@@ -3,7 +3,12 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  getGapStyleValue,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+  interactiveStatePriority,
+} from '@fluentui-react-native/design/styling';
 import type {
   ColorStyleDefinition,
   StateNames,
@@ -29,10 +34,7 @@ export const tagStyles = StyleSheet.create({
   },
 });
 
-const backgroundStateLevels = [
-  ['primary', 'secondary'],
-  ['disabled', 'pressed', 'hovered'],
-] as const;
+const backgroundStateLevels = [['primary', 'secondary'], interactiveStatePriority] as const;
 type BackgroundStateLevels = typeof backgroundStateLevels;
 type BackgroundState = StateNames<BackgroundStateLevels>;
 
@@ -118,14 +120,6 @@ const rootStateLevels = [
 type RootStateLevels = typeof rootStateLevels;
 type RootState = StateNames<RootStateLevels>;
 
-function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullable<ViewStyle['gap']> {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value;
-  }
-
-  throw new TypeError('Tag gap tokens must resolve to a number or string.');
-}
-
 function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): StyleDefinition<ViewStyle, RootStateLevels> {
   return {
     borderWidth: 0,
@@ -141,7 +135,7 @@ function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): Style
         },
         rounded: {
           borderRadius: borderRadius.base200,
-          gap: getGapValue(spacing.componentBase50),
+          gap: getGapStyleValue(spacing.componentBase50),
           paddingHorizontal: spacing.componentBase200,
           paddingVertical: spacing.componentBase100,
         },
@@ -159,13 +153,13 @@ function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): Style
       iconAndText: {
         circular: {
           borderRadius: borderRadius.circular,
-          gap: getGapValue(spacing.componentBase50),
+          gap: getGapStyleValue(spacing.componentBase50),
           paddingHorizontal: spacing.componentBase250,
           paddingVertical: spacing.componentBase150,
         },
         rounded: {
           borderRadius: borderRadius.base300,
-          gap: getGapValue(spacing.componentBase50),
+          gap: getGapStyleValue(spacing.componentBase50),
           paddingHorizontal: spacing.componentBase250,
           paddingVertical: spacing.componentBase150,
         },
@@ -173,7 +167,7 @@ function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): Style
       iconOnly: {
         circular: {
           borderRadius: borderRadius.circular,
-          gap: getGapValue(spacing.componentBase50),
+          gap: getGapStyleValue(spacing.componentBase50),
           paddingHorizontal: spacing.componentBase150,
           paddingVertical: spacing.componentBase150,
         },

@@ -22,4 +22,3 @@
   - a **platform-native RN approximation** that drops exact resize-handle parity, or
   - a **web/CSS implementation** instead of a pure RN control.
 - If the native approximation is acceptable, update the spec to explicitly allow the missing resize-handle parity and define the expected behavior for macOS/Windows `TextInput`.
-

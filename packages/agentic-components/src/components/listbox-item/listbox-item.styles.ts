@@ -127,7 +127,8 @@ export function getListboxItemLabelTypographyStyle(state: ListboxItemState): Tex
     fontFamily: state.tokens.fontFamily.functional,
     fontSize: state.variant === 'sectionHeader' ? state.tokens.fontSize.functionalBodySmall : state.tokens.fontSize.functionalBodyMedium,
     fontWeight: getLabelWeight(state),
-    lineHeight: state.variant === 'sectionHeader' ? state.tokens.lineHeight.functionalBodySmall : state.tokens.lineHeight.functionalBodyMedium,
+    lineHeight:
+      state.variant === 'sectionHeader' ? state.tokens.lineHeight.functionalBodySmall : state.tokens.lineHeight.functionalBodyMedium,
   };
 }
 

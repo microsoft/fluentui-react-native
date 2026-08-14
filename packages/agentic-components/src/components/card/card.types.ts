@@ -1,6 +1,6 @@
 import type { Pressable, PressableProps, StyleProp, View, ViewStyle } from 'react-native';
 
-import type { ComponentProps, ComponentState, OptionalSlot, Slot } from '@fluentui-react-native/framework-base';
+import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 export type CardSize = 'small' | 'large';
@@ -29,9 +29,8 @@ export type CardStateProps = {
   direction?: CardDirection;
 };
 
-export type CardExposedPressableProps = Omit<PressableProps, 'children' | 'style' | 'accessibilityRole'> & {
+export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessibilityRole'> & {
   children?: never;
-  style?: StyleProp<ViewStyle>;
 };
 
 export type CardProps = CardStateProps & ComponentProps<CardSlots, CardExposedPressableProps>;

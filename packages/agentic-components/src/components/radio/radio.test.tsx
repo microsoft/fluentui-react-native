@@ -92,15 +92,11 @@ describe('Radio', () => {
     const root = getRoot(component);
 
     await fireEvent(root, 'hoverIn', {});
-    expect(StyleSheet.flatten(component.getByTestId('radio-indicator').props.style).borderColor).toBe(
-      tokens.hover.strokeNeutralHeavy,
-    );
+    expect(StyleSheet.flatten(component.getByTestId('radio-indicator').props.style).borderColor).toBe(tokens.hover.strokeNeutralHeavy);
     expect(StyleSheet.flatten(component.getByText('Choice').props.style).color).toBe(tokens.hover.foregroundNeutralSecondary);
 
     await fireEvent(root, 'pressIn', {});
-    expect(StyleSheet.flatten(component.getByTestId('radio-indicator').props.style).borderColor).toBe(
-      tokens.pressed.strokeNeutralHeavy,
-    );
+    expect(StyleSheet.flatten(component.getByTestId('radio-indicator').props.style).borderColor).toBe(tokens.pressed.strokeNeutralHeavy);
     expect(StyleSheet.flatten(component.getByText('Choice').props.style).color).toBe(tokens.pressed.foregroundNeutralSecondary);
   });
 
@@ -135,7 +131,9 @@ describe('Radio', () => {
     });
 
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
-    expect(StyleSheet.flatten(component.getByText('A long option label that needs room to wrap when the control is constrained').props.style)).toMatchObject({
+    expect(
+      StyleSheet.flatten(component.getByText('A long option label that needs room to wrap when the control is constrained').props.style),
+    ).toMatchObject({
       flexShrink: 1,
     });
   });

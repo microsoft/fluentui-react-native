@@ -2,15 +2,7 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
-import {
-  tabStyles,
-  getTabColorStyles,
-  getTabContentStyle,
-  getTabContentVisibilityStyle,
-  getTabFocusStyle,
-  getTabIconSize,
-  getTabRootStyle,
-} from './tab.styles';
+import { tabStyles, getTabColorStyles, getTabContentStyle, getTabFocusStyle, getTabIconSize, getTabRootStyle } from './tab.styles';
 import type { TabState } from './tab.types';
 
 /**
@@ -25,18 +17,8 @@ export function useTabStyles_unstable(state: TabState) {
     getTabFocusStyle(state),
     state.userStyle,
   ];
-  const contentStyle: StyleProp<TextStyle> = [
-    tabStyles.content,
-    getTabContentStyle(state),
-    colors.foreground,
-    getTabContentVisibilityStyle('visible'),
-  ];
-  const hiddenContentStyle: StyleProp<TextStyle> = [
-    tabStyles.content,
-    getTabContentStyle(state, true),
-    colors.foreground,
-    getTabContentVisibilityStyle('hidden'),
-  ];
+  const contentStyle: StyleProp<TextStyle> = [tabStyles.content, getTabContentStyle(state), colors.foreground];
+  const hiddenContentStyle: StyleProp<TextStyle> = [tabStyles.content, getTabContentStyle(state, true), colors.foreground];
   const iconSize = getTabIconSize();
 
   attachSlotProps(state.root, { style: rootStyle });
@@ -63,16 +45,7 @@ export function useTabStyles_unstable(state: TabState) {
   }
   if (state.contentHidden) {
     attachSlotProps(state.contentHidden, {
-      accessibilityElementsHidden: true,
-      accessible: false,
-      importantForAccessibility: 'no-hide-descendants',
       style: hiddenContentStyle,
-    });
-  }
-  if (state.contentContainer) {
-    attachSlotProps(state.contentContainer, {
-      accessible: false,
-      style: tabStyles.contentContainer,
     });
   }
 }

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { AccessibilityInfo, Animated, Easing, View } from 'react-native';
+import { Animated, Easing, View } from 'react-native';
 import { Svg } from 'react-native-svg';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useSlot } from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, useReducedMotion, useSlot } from '@fluentui-react-native/framework-base';
 
 import { getSpinnerMetrics } from './spinner.styles';
 import type { SpinnerProps, SpinnerState } from './spinner.types';
@@ -16,44 +16,14 @@ const spinnerDuration = 1500;
  * Builds the Spinner state, resolving accessibility, slots, animation, and defaults.
  */
 export function useSpinner_unstable(props: SpinnerProps): SpinnerState {
-  const {
-    accessibilityLabel,
-    accessibilityLabelledBy,
-    accessibilityState,
-    accessible,
-    size = 'medium',
-    style: userStyle,
-    ...rest
-  } = props;
+  const { accessibilityLabel, accessibilityLabelledBy, accessibilityState, accessible, size = 'medium', style: userStyle, ...rest } = props;
 
   const themeState = useThemeState();
   const { center, diameter, radius, strokeWidth } = getSpinnerMetrics(size, themeState.tokens);
   const trackColor = themeState.tokens.color.strokeNeutralSubtle;
   const indicatorColor = themeState.tokens.color.strokeNeutralLoud;
   const rotation = React.useRef(new Animated.Value(0)).current;
-  const [reduceMotionEnabled, setReduceMotionEnabled] = React.useState<boolean | undefined>(undefined);
-
-  React.useEffect(() => {
-    let mounted = true;
-
-    void AccessibilityInfo.isReduceMotionEnabled()
-      .then((enabled) => {
-        if (mounted) {
-          setReduceMotionEnabled(enabled);
-        }
-      })
-      .catch(() => {
-        if (mounted) {
-          setReduceMotionEnabled(false);
-        }
-      });
-
-    const subscription = AccessibilityInfo.addEventListener('reduceMotionChanged', setReduceMotionEnabled);
-    return () => {
-      mounted = false;
-      subscription.remove();
-    };
-  }, []);
+  const reduceMotionEnabled = useReducedMotion();
 
   React.useEffect(() => {
     if (reduceMotionEnabled) {
@@ -81,11 +51,13 @@ export function useSpinner_unstable(props: SpinnerProps): SpinnerState {
     return undefined;
   }, [reduceMotionEnabled, rotation]);
 
-  React.useEffect(() => {
-    if (__DEV__ && accessible !== false && !accessibilityLabel && !accessibilityLabelledBy) {
-      console.warn('Spinner: accessibilityLabel or accessibilityLabelledBy is required when the spinner is exposed directly.');
-    }
-  }, [accessibilityLabel, accessibilityLabelledBy, accessible]);
+  useAccessibilityLabelWarning({
+    accessibilityLabel: accessibilityLabel ?? rest['aria-label'],
+    accessibilityLabelledBy: accessibilityLabelledBy ?? rest['aria-labelledby'],
+    componentName: 'Spinner',
+    requireLabel: accessible !== false,
+    warning: 'Spinner: accessibilityLabel or accessibilityLabelledBy is required when the spinner is exposed directly.',
+  });
 
   const root = useSlot(View, {
     ...rest,

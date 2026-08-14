@@ -1,5 +1,12 @@
 import type { ColorValue, Pressable, PressableProps, StyleProp, Text, ViewStyle } from 'react-native';
-import type { ComponentProps, ComponentState, OptionalSlot, Slot, PressableState } from '@fluentui-react-native/framework-base';
+import type {
+  ComponentProps,
+  ComponentState,
+  OptionalSlot,
+  OwnedRootProps,
+  Slot,
+  PressableState,
+} from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 export type CheckboxVariant = 'standard' | 'circular';
@@ -26,9 +33,8 @@ export type CheckboxStateProps = {
   onStatusChange?: (nextStatus: CheckboxStatus) => void;
 };
 
-export type CheckboxRootProps = Omit<PressableProps, 'children' | 'style'> & {
+export type CheckboxRootProps = OwnedRootProps<PressableProps> & {
   children?: never;
-  style?: StyleProp<ViewStyle>;
 };
 
 export type CheckboxProps = CheckboxStateProps & ComponentProps<CheckboxSlots, CheckboxRootProps>;

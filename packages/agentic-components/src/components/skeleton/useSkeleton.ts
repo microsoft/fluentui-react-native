@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { AccessibilityInfo, Animated, Easing, View } from 'react-native';
+import { Animated, Easing, View } from 'react-native';
 import type { LayoutRectangle } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useSlot } from '@fluentui-react-native/framework-base';
+import { useReducedMotion, useSlot } from '@fluentui-react-native/framework-base';
 
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import { skeletonStyles, getSkeletonThemeStyles } from './skeleton.styles';
 import type { SkeletonProps, SkeletonState } from './skeleton.types';
 
@@ -19,7 +20,7 @@ export function useSkeleton_unstable(props: SkeletonProps): SkeletonState {
   const themeState = useThemeState();
   const progress = React.useRef(new Animated.Value(0)).current;
   const [layout, setLayout] = React.useState<LayoutRectangle>(createEmptyLayout);
-  const [reduceMotion, setReduceMotion] = React.useState(false);
+  const reduceMotion = useReducedMotion() ?? false;
   const themeStyles = getSkeletonThemeStyles(themeState);
 
   const handleLayout = React.useCallback(
@@ -29,24 +30,6 @@ export function useSkeleton_unstable(props: SkeletonProps): SkeletonState {
     },
     [onLayout],
   );
-
-  React.useEffect(() => {
-    let mounted = true;
-
-    AccessibilityInfo.isReduceMotionEnabled()
-      .then((enabled) => {
-        if (mounted) {
-          setReduceMotion(enabled);
-        }
-      })
-      .catch(() => undefined);
-
-    const subscription = AccessibilityInfo.addEventListener('reduceMotionChanged', setReduceMotion);
-    return () => {
-      mounted = false;
-      subscription.remove();
-    };
-  }, []);
 
   React.useEffect(() => {
     if (reduceMotion || layout.width <= 0 || layout.height <= 0) {
@@ -82,9 +65,7 @@ export function useSkeleton_unstable(props: SkeletonProps): SkeletonState {
 
   const root = useSlot(View, {
     ...rest,
-    accessible: false,
-    accessibilityElementsHidden: true,
-    importantForAccessibility: 'no-hide-descendants',
+    ...hiddenFromAccessibilityProps,
     onLayout: handleLayout,
   });
 

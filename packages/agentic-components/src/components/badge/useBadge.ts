@@ -1,14 +1,14 @@
-import * as React from 'react';
 import { Text, View } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
+import { semanticIconSources } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
 import type { BadgeProps, BadgeState } from './badge.types';
 
 const defaultBadgeIcon = {
-  fontSource: { codepoint: 0x25cf, fontFamily: 'Arial' },
+  fontSource: semanticIconSources.selectedCircle,
 } as const;
 
 /**
@@ -40,19 +40,25 @@ export function useBadge_unstable(props: BadgeProps): BadgeState {
   const size = sizeProp ?? 'medium';
   const shape = shapeProp ?? 'circular';
   const iconOnly = layout === 'iconOnly';
-  const leadingIconVisible = iconOnly ? true : leadingIconVisibleProp ?? true;
-  const trailingIconVisible = iconOnly ? false : trailingIconVisibleProp ?? false;
+  const leadingIconVisible = iconOnly ? true : (leadingIconVisibleProp ?? true);
+  const trailingIconVisible = iconOnly ? false : (trailingIconVisibleProp ?? false);
   const hasContent = !iconOnly && contentProp !== null;
   const hasLeadingIcon = leadingIconProp !== undefined && leadingIconProp !== null;
   const hasTrailingIcon = trailingIconProp !== undefined && trailingIconProp !== null;
-  const isInformative = accessibilityLabel !== undefined;
+  const isInformative =
+    accessibilityLabel !== undefined ||
+    rest.accessibilityLabelledBy !== undefined ||
+    rest['aria-label'] !== undefined ||
+    rest['aria-labelledby'] !== undefined;
   const isAccessible = accessible ?? isInformative;
 
-  React.useEffect(() => {
-    if (__DEV__ && iconOnly && !accessibilityLabel) {
-      console.warn('Badge: icon-only badges require an accessibilityLabel.');
-    }
-  }, [accessibilityLabel, iconOnly]);
+  useAccessibilityLabelWarning({
+    accessibilityLabel: accessibilityLabel ?? rest['aria-label'],
+    accessibilityLabelledBy: rest.accessibilityLabelledBy ?? rest['aria-labelledby'],
+    componentName: 'Badge',
+    requireLabel: iconOnly,
+    warning: 'Badge: icon-only badges require an accessibilityLabel.',
+  });
 
   const themeState = useThemeState();
   const root = useSlot(View, {

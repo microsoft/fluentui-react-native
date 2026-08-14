@@ -205,4 +205,3 @@ properties:
         Toggles secondary text visibility. Hidden by default — the primary
         use case remains single-label Checkbox. Requires Label to be true —
         secondary text without a primary label is not valid.
-

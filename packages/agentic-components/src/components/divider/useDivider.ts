@@ -25,19 +25,11 @@ function getTextFromSlotProp(slot: DividerProps['label']): string | undefined {
  * Builds the Divider state, resolving accessibility, slots, and defaults.
  */
 export function useDivider_unstable(props: DividerProps): DividerState {
-  const {
-    accessibilityLabel,
-    icon: iconProp,
-    label: labelProp,
-    layout = 'center',
-    style: userStyle,
-    vertical = false,
-    ...rest
-  } = props;
+  const { accessibilityLabel, icon: iconProp, label: labelProp, layout = 'center', style: userStyle, vertical = false, ...rest } = props;
   const hasIcon = iconProp !== undefined && iconProp !== null;
   const hasLabel = labelProp !== null;
   const contentVisible = hasIcon || hasLabel;
-  const labelText = hasLabel ? getTextFromSlotProp(labelProp) ?? 'Text' : undefined;
+  const labelText = hasLabel ? (getTextFromSlotProp(labelProp) ?? 'Text') : undefined;
   const themeState = useThemeState();
   const root = useSlot(View, {
     ...rest,

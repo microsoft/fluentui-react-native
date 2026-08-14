@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import type { PressableProps } from 'react-native';
 
-import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import type { TabProps, TabState } from './tab.types';
@@ -26,11 +25,13 @@ export function useTab_unstable(props: TabProps): TabState {
   } = props;
   const iconOnly = layout === 'iconOnly';
 
-  React.useEffect(() => {
-    if (__DEV__ && iconOnly && !rest.accessibilityLabel) {
-      console.warn('Tab: icon-only tabs require an accessibilityLabel that describes the content panel.');
-    }
-  }, [iconOnly, rest.accessibilityLabel]);
+  useAccessibilityLabelWarning({
+    accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
+    accessibilityLabelledBy: rest.accessibilityLabelledBy ?? rest['aria-labelledby'],
+    componentName: 'Tab',
+    requireLabel: iconOnly,
+    warning: 'Tab: icon-only tabs require an accessibilityLabel that describes the content panel.',
+  });
 
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({
@@ -46,19 +47,15 @@ export function useTab_unstable(props: TabProps): TabState {
     focusable: rest.focusable ?? !disabled,
   });
 
-  const root = useSlot(
-    Pressable,
-    {
-      ...pressableProps,
-      accessibilityControls: controls,
-    } as PressableProps & { accessibilityControls: string },
-  );
+  const root = useSlot(Pressable, {
+    ...pressableProps,
+    accessibilityControls: controls,
+  } as PressableProps & { accessibilityControls: string });
   const icon = useOptionalSlot(Icon, iconProp);
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
-  const contentSlotProp = iconOnly ? null : contentProp ?? 'Tab';
+  const contentSlotProp = iconOnly ? null : (contentProp ?? 'Tab');
   const content = useOptionalSlot(Text, contentSlotProp);
   const contentHidden = useOptionalSlot(Text, contentSlotProp);
-  const contentContainer = useOptionalSlot(View, iconOnly ? null : {});
 
   return {
     root,
@@ -66,7 +63,6 @@ export function useTab_unstable(props: TabProps): TabState {
     selectedIcon,
     content,
     contentHidden,
-    contentContainer,
     disabled,
     layout,
     controls,

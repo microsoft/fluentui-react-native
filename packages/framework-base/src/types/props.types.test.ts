@@ -9,7 +9,8 @@
  * than `true`.
  */
 
-import type { StyleProp, ObjectBase, ObjectFallback } from './props.types';
+import type React from 'react';
+import type { StyleProp, ObjectBase, ObjectFallback, OwnedRootProps } from './props.types';
 import type { StyleProp as RNStyleProp } from 'react-native';
 
 // --- type assertion helpers ---------------------------------------------------------------------
@@ -35,6 +36,15 @@ interface IStyleBase {
   fontSize?: number;
 }
 
+type OwnedRootBase = {
+  children?: React.ReactNode;
+  style?: StyleBase;
+  owned?: string;
+  keep?: number;
+};
+
+type OwnedRootResult = OwnedRootProps<OwnedRootBase, 'owned'>;
+
 // --- compile-time assertions --------------------------------------------------------------------
 // Each constant is typed via `Expect<...>`; if a type relationship regresses, the build fails here.
 // The runtime value is always `true`, so the Jest assertions below pass while still exercising the
@@ -59,6 +69,12 @@ const objectFallbackRejectsInterface: Expect<Equal<Extends<IStyleBase, ObjectFal
 const fallbackAssignableToBase: Expect<Extends<ObjectFallback, ObjectBase>> = true;
 const baseNotAssignableToFallback: Expect<Equal<Extends<ObjectBase, ObjectFallback>, false>> = true;
 
+// OwnedRootProps should remove children and owned keys while preserving the native style prop.
+const ownedRootPropsDropsChildren: Expect<Equal<'children' extends keyof OwnedRootResult ? true : false, false>> = true;
+const ownedRootPropsDropsOwnedKey: Expect<Equal<'owned' extends keyof OwnedRootResult ? true : false, false>> = true;
+const ownedRootPropsPreservesStyle: Expect<Equal<OwnedRootResult['style'], StyleBase | undefined>> = true;
+const ownedRootPropsKeepsOtherKeys: Expect<Extends<{ keep: number }, OwnedRootResult>> = true;
+
 // --- runtime suite ------------------------------------------------------------------------------
 
 describe('base prop type consistency', () => {
@@ -82,5 +98,12 @@ describe('base prop type consistency', () => {
   it('allows ObjectFallback to widen to ObjectBase but not the reverse', () => {
     expect(fallbackAssignableToBase).toBe(true);
     expect(baseNotAssignableToFallback).toBe(true);
+  });
+
+  it('drops owned root props while preserving style typing', () => {
+    expect(ownedRootPropsDropsChildren).toBe(true);
+    expect(ownedRootPropsDropsOwnedKey).toBe(true);
+    expect(ownedRootPropsPreservesStyle).toBe(true);
+    expect(ownedRootPropsKeepsOtherKeys).toBe(true);
   });
 });

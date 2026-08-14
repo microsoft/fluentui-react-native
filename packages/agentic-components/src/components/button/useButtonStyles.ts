@@ -6,7 +6,6 @@ import {
   buttonStyles,
   getButtonColorStyles,
   getButtonContentStyle,
-  getButtonContentVisibilityStyle,
   getButtonFocusStyle,
   getButtonIconSize,
   getButtonRootStyle,
@@ -49,18 +48,12 @@ export function useButtonStyles_unstable(state: ButtonState) {
   }
   if (state.content) {
     attachSlotProps(state.content, {
-      style: state.isToggleButton ? [contentStyle, getButtonContentVisibilityStyle('visible')] : contentStyle,
+      style: contentStyle,
     });
   }
   if (state.contentHidden) {
     attachSlotProps(state.contentHidden, {
-      accessibilityElementsHidden: true,
-      accessible: false,
-      importantForAccessibility: 'no-hide-descendants',
-      style: [buttonStyles.content, getButtonContentStyle(state, true), colors.foreground, getButtonContentVisibilityStyle('hidden')],
+      style: [buttonStyles.content, getButtonContentStyle(state, true), colors.foreground],
     });
-  }
-  if (state.contentContainer) {
-    attachSlotProps(state.contentContainer, { accessible: false, style: buttonStyles.contentContainer });
   }
 }

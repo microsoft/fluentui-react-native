@@ -3,7 +3,12 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getStateStyleFactory, getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  getGapStyleValue,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+  interactiveStatePriority,
+} from '@fluentui-react-native/design/styling';
 import type {
   ColorStyleDefinition,
   StateNames,
@@ -26,15 +31,9 @@ export const tabStyles = StyleSheet.create({
     flexShrink: 1,
     textAlign: 'center',
   },
-  contentContainer: {
-    alignItems: 'center',
-    flexShrink: 1,
-    justifyContent: 'center',
-    position: 'relative',
-  },
 });
 
-const colorStateLevels = [['selected'], ['disabled', 'pressed', 'hovered']] as const;
+const colorStateLevels = [['selected'], interactiveStatePriority] as const;
 type ColorStateLevels = typeof colorStateLevels;
 type ColorState = StateNames<ColorStateLevels>;
 
@@ -107,18 +106,11 @@ const rootStyleStateLevels = [['iconAndText', 'iconOnly']] as const;
 type RootStyleStateLevels = typeof rootStyleStateLevels;
 type RootStyleState = StateNames<RootStyleStateLevels>;
 
-function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullable<ViewStyle['gap']> {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value;
-  }
-  throw new TypeError('Tab gap tokens must resolve to a number or string.');
-}
-
 function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
   return {
     iconAndText: {
       borderRadius: borderRadius.base300,
-      gap: getGapValue(spacing.componentBase100),
+      gap: getGapStyleValue(spacing.componentBase100),
       paddingHorizontal: spacing.componentBase300,
       paddingVertical: spacing.componentBase150,
     },
@@ -188,29 +180,6 @@ const focusedState = ['focused'] as const;
 
 export function getTabFocusStyle(state: TabState): ViewStyle | undefined {
   return state.focused && !state.disabled ? getThemedFocusStyle(state, focusedState) : undefined;
-}
-
-const contentVisibilityStateLevels = [['visible', 'hidden']] as const;
-type ContentVisibility = StateNames<typeof contentVisibilityStateLevels>;
-
-const getContentVisibilityStyle = getStateStyleFactory<TextStyle, typeof contentVisibilityStateLevels>(
-  {
-    visible: {
-      bottom: 0,
-      left: 0,
-      position: 'absolute',
-      right: 0,
-      top: 0,
-    },
-    hidden: {
-      opacity: 0,
-    },
-  },
-  contentVisibilityStateLevels,
-);
-
-export function getTabContentVisibilityStyle(visibility: ContentVisibility): TextStyle {
-  return getContentVisibilityStyle([visibility]);
 }
 
 export function getTabIconSize(): number {

@@ -44,10 +44,8 @@ describe('Divider', () => {
     const content = root.children[1] as { props: { style?: unknown } };
     const afterLine = root.children[2] as { props: { style?: unknown } };
     const stub = tokens.spacing.componentBase100;
-    const beforeExpected =
-      layout === 'start' ? { flexBasis: stub, flexGrow: 0 } : { flexBasis: 0, flexGrow: 1 };
-    const afterExpected =
-      layout === 'end' ? { flexBasis: stub, flexGrow: 0 } : { flexBasis: 0, flexGrow: 1 };
+    const beforeExpected = layout === 'start' ? { flexBasis: stub, flexGrow: 0 } : { flexBasis: 0, flexGrow: 1 };
+    const afterExpected = layout === 'end' ? { flexBasis: stub, flexGrow: 0 } : { flexBasis: 0, flexGrow: 1 };
 
     expect(StyleSheet.flatten(beforeLine.props.style)).toMatchObject({
       backgroundColor: tokens.color.strokeNeutralSubtle,

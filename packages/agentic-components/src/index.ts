@@ -156,3 +156,12 @@ export { useTag_unstable } from './components/tag/useTag';
 
 export { Icon } from './primitives/icon/icon';
 export type { FontIconSource, IconElementProps, IconProps, SvgIconSource } from './primitives/icon/icon.types';
+
+export { CheckboxIndicator } from './primitives/checkbox-indicator/checkbox-indicator';
+export type { CheckboxIndicatorProps, CheckboxIndicatorStatus } from './primitives/checkbox-indicator/checkbox-indicator.types';
+
+export { CompoundItemLayout } from './primitives/compound-item-layout/compound-item-layout';
+export type { CompoundItemLayoutProps } from './primitives/compound-item-layout/compound-item-layout.types';
+
+export { LayoutStableText } from './primitives/layout-stable-text/layout-stable-text';
+export type { LayoutStableTextProps } from './primitives/layout-stable-text/layout-stable-text.types';

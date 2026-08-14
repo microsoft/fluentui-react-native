@@ -188,10 +188,8 @@ describe('Checkbox', () => {
     const component = await renderCheckbox({ label: status, status });
     const label = component.getByTestId('checkbox-label');
     const indicator = component.getByTestId('checkbox-indicator');
-    const expectedBackground =
-      status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundBrandHeavy;
-    const expectedLabelColor =
-      status === 'unchecked' ? colors.foregroundNeutralSecondary : colors.foregroundNeutralPrimary;
+    const expectedBackground = status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundBrandHeavy;
+    const expectedLabelColor = status === 'unchecked' ? colors.foregroundNeutralSecondary : colors.foregroundNeutralPrimary;
 
     expect(StyleSheet.flatten(indicator.props.style).backgroundColor).toBe(expectedBackground);
     expect(StyleSheet.flatten(label.props.style).color).toBe(expectedLabelColor);

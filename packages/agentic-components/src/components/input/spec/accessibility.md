@@ -34,4 +34,3 @@ Implementation-time considerations that cannot be solved at build.
 - **Read only vs Disabled for screen readers:** Read only inputs remain in the tab order and announce their value. Disabled inputs may be skipped by some screen readers. Choose Disabled when the user does not need to discover the value; Read only when the value carries information (e.g., a confirmation summary).
 - **Combinations with Field:** When combining with Field, ensure the Field label is programmatically associated via `for`/`id` or `aria-labelledby`. Do not rely on visual proximity alone — adjacency does not create a programmatic label.
 - **Placeholder vs label:** Never use placeholder text as the only label. Placeholder text disappears on input and is announced inconsistently across assistive technologies.
-

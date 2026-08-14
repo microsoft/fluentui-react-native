@@ -2,14 +2,21 @@ import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
+import {
+  useAccessibilityLabelWarning,
+  useControllableValue,
+  useOptionalSlot,
+  usePressableState,
+  useSlot,
+} from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
+import { semanticIconSources } from '../../common/iconSources';
 import type { AccordionProps, AccordionState } from './accordion.types';
 
 const defaultTitle = 'Section title';
-const defaultLeadingIconSource = { codepoint: 0x25cf, fontFamily: 'Arial' } as const;
-const defaultChevronSource = { codepoint: 0x203a, fontFamily: 'Arial' } as const;
+const defaultLeadingIconSource = semanticIconSources.selectedCircle;
+const defaultChevronSource = semanticIconSources.chevron;
 
 /**
  * Creates the resolved Accordion state, accessibility, interaction, and slots.
@@ -31,23 +38,25 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
     ...rootProps
   } = props;
 
-  const [uncontrolledExpanded, setUncontrolledExpanded] = React.useState(expandedProp ?? false);
-  const resolvedExpanded = expandedProp ?? uncontrolledExpanded;
+  const [expandedValue, setExpanded] = useControllableValue(expandedProp, expandedProp ?? false, (nextExpanded) => {
+    if (nextExpanded !== undefined) {
+      onExpandedChange?.(nextExpanded);
+    }
+  });
+  const resolvedExpanded = expandedValue ?? false;
   const bodyId = React.useId().replace(/:/g, '');
 
-  React.useEffect(() => {
-    if (__DEV__ && titleProp === null && !accessibilityLabel) {
-      console.warn('Accordion: provide a meaningful title or accessibilityLabel for the header button.');
-    }
-  }, [accessibilityLabel, titleProp]);
+  useAccessibilityLabelWarning({
+    accessibilityLabel,
+    componentName: 'Accordion',
+    requireLabel: titleProp === null,
+    warning: 'Accordion: provide a meaningful title or accessibilityLabel for the header button.',
+  });
 
   const toggleExpanded = React.useCallback(() => {
     const nextExpanded = !resolvedExpanded;
-    if (expandedProp === undefined) {
-      setUncontrolledExpanded(nextExpanded);
-    }
-    onExpandedChange?.(nextExpanded);
-  }, [expandedProp, onExpandedChange, resolvedExpanded]);
+    setExpanded(nextExpanded);
+  }, [resolvedExpanded, setExpanded]);
 
   const themeState = useThemeState();
   const [headerProps, pressableState] = usePressableState({

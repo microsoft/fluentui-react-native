@@ -50,7 +50,7 @@ Variant properties are ordered in the design tool: **Style → Color → Size �
 #### Style
 
 | Value       | Description                                                    | When to Use                                                                                                                                    |
-| ----------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| ----------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Outline** | Transparent fill, 1px colored stroke, colored foreground       | When the badge sits on a surface whose background already communicates context (a card, an active row) and a fill would over-saturate the area |
 | **Tint**    | Soft colored fill, no stroke, colored foreground. **Default.** | General-purpose. Reads as a softly colored chip — strong enough to draw the eye, quiet enough to sit next to body text                         |
 

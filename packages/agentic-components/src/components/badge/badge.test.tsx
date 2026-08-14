@@ -74,6 +74,19 @@ describe('Badge', () => {
     warn.mockRestore();
   });
 
+  it('accepts an ARIA label as the accessible name for an icon-only badge', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation();
+    const component = await renderBadge({ 'aria-label': '3 unread messages', layout: 'iconOnly' });
+
+    expect(getRoot(component).props).toMatchObject({
+      accessibilityRole: 'image',
+      accessible: true,
+      'aria-label': '3 unread messages',
+    });
+    expect(warn).not.toHaveBeenCalled();
+    warn.mockRestore();
+  });
+
   it('uses the trailing icon only when requested and applies user styles last', async () => {
     const style: ViewStyle = { backgroundColor: 'hotpink' };
     const component = await renderBadge({
@@ -95,26 +108,23 @@ describe('Badge', () => {
     ['tint', 'informative', 'backgroundNeutralSoft', 'foregroundNeutralPrimary', 'strokeNeutralTransparent', 0],
     ['outline', 'danger', 'backgroundNeutralTransparent', 'foregroundDangerPrimary', 'strokeDangerLoud', 1],
     ['outline', 'warning', 'backgroundNeutralTransparent', 'foregroundWarningPrimary', 'strokeWarningLoud', 1],
-  ] as const)(
-    'resolves %s %s colors',
-    async (appearance, color, backgroundToken, foregroundToken, borderToken, borderWidth) => {
-      const tokens = useFlexTokens();
-      const component = await renderBadge({
-        accessibilityLabel: `${appearance} ${color} badge`,
-        appearance,
-        color,
-        content: 'Badge',
-        leadingIcon: badgeIcon,
-      });
+  ] as const)('resolves %s %s colors', async (appearance, color, backgroundToken, foregroundToken, borderToken, borderWidth) => {
+    const tokens = useFlexTokens();
+    const component = await renderBadge({
+      accessibilityLabel: `${appearance} ${color} badge`,
+      appearance,
+      color,
+      content: 'Badge',
+      leadingIcon: badgeIcon,
+    });
 
-      expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: tokens.color[backgroundToken],
-        borderColor: tokens.color[borderToken],
-        borderWidth,
-      });
-      expect(StyleSheet.flatten(component.getByText('Badge').props.style).color).toBe(tokens.color[foregroundToken]);
-    },
-  );
+    expect(getRootStyle(component)).toMatchObject({
+      backgroundColor: tokens.color[backgroundToken],
+      borderColor: tokens.color[borderToken],
+      borderWidth,
+    });
+    expect(StyleSheet.flatten(component.getByText('Badge').props.style).color).toBe(tokens.color[foregroundToken]);
+  });
 
   it.each([
     ['small', 16, 12, 'componentBase100', 'base100'],

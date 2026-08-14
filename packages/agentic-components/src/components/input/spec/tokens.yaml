@@ -124,4 +124,3 @@ properties:
     Icon End 2 24px Regular: { type: INSTANCE_SWAP, default: Image icon (24px Regular), binding: Large size, second trailing icon }
     Icon End 2 20px Regular: { type: INSTANCE_SWAP, default: Image icon (20px Regular), binding: Medium size, second trailing icon }
     Icon End 2 16px Regular: { type: INSTANCE_SWAP, default: Image icon (16px Regular), binding: Small size, second trailing icon }
-

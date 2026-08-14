@@ -3,7 +3,12 @@ import type { ViewStyle } from 'react-native';
 
 import { themedStyleSheetFactory } from '@fluentui-react-native/design';
 import type { FlexTokens } from '@fluentui-react-native/design';
-import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  getGapStyleValue,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+  interactiveStatePriority,
+} from '@fluentui-react-native/design/styling';
 import type { ColorStyleDefinition, StyleDefinition, TextColorStyle, ViewColorStyle } from '@fluentui-react-native/design/styling';
 import { size120, size160, size240 } from '@fluentui-react-native/design/tokens/global';
 
@@ -39,18 +44,8 @@ export const checkboxStyles = StyleSheet.create({
 const rootStateLevels = [['withLabel', 'iconOnly']] as const;
 const labelContainerStateLevels = [['withSecondaryText', 'withoutSecondaryText']] as const;
 const indicatorShapeStateLevels = [['standard', 'circular']] as const;
-const statusStateLevels = [
-  ['unchecked', 'checked', 'indeterminate'],
-  ['disabled', 'pressed', 'hovered'],
-] as const;
+const statusStateLevels = [['unchecked', 'checked', 'indeterminate'], interactiveStatePriority] as const;
 const focusStateLevels = [['focused']] as const;
-
-function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullable<ViewStyle['gap']> {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value;
-  }
-  throw new TypeError('Checkbox gap tokens must resolve to a number or string.');
-}
 
 export const checkboxTextStyles = themedStyleSheetFactory('Checkbox.text', ({ tokens }) =>
   StyleSheet.create({
@@ -106,7 +101,7 @@ function createRootLayoutDefinition({ spacing }: FlexTokens): StyleDefinition<Vi
       minWidth: size240,
     },
     withLabel: {
-      gap: getGapValue(spacing.componentBase100),
+      gap: getGapStyleValue(spacing.componentBase100),
       minHeight: size240,
       minWidth: size240,
     },
@@ -118,7 +113,7 @@ const getRootLayoutStyle = getThemedStateStyleFactory('Checkbox.rootLayout', cre
 function createLabelContainerDefinition({ spacing }: FlexTokens): StyleDefinition<ViewStyle, typeof labelContainerStateLevels> {
   return {
     withSecondaryText: {
-      gap: getGapValue(spacing.componentBase50),
+      gap: getGapStyleValue(spacing.componentBase50),
       paddingEnd: spacing.componentBase200,
       paddingVertical: spacing.componentBase150,
     },

@@ -214,7 +214,13 @@ export const IconVisibility: Story = {
     <StoryGroup label="Icon visibility">
       <Badge content="Both" leadingIcon={badgeLeadingIcon} trailingIcon={badgeTrailingIcon} trailingIconVisible />
       <Badge content="Leading only" leadingIcon={badgeLeadingIcon} />
-      <Badge content="Trailing only" leadingIcon={badgeLeadingIcon} trailingIcon={badgeTrailingIcon} leadingIconVisible={false} trailingIconVisible />
+      <Badge
+        content="Trailing only"
+        leadingIcon={badgeLeadingIcon}
+        trailingIcon={badgeTrailingIcon}
+        leadingIconVisible={false}
+        trailingIconVisible
+      />
     </StoryGroup>
   ),
   parameters: {

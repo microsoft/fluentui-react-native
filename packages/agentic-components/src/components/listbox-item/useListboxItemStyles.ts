@@ -4,8 +4,8 @@ import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import {
   getListboxItemAvatarSize,
+  getListboxItemCheckmarkSize,
   getListboxItemFocusStyle,
-  getListboxItemGhostLabelStyle,
   getListboxItemHeaderStyle,
   getListboxItemIconSize,
   getListboxItemLabelColorStyle,
@@ -13,7 +13,6 @@ import {
   getListboxItemRootStyle,
   getListboxItemSecondaryColorStyle,
   getListboxItemSecondaryTypographyStyle,
-  getListboxItemVisibleLabelStyle,
   listboxItemStyles,
 } from './listbox-item.styles';
 import type { ListboxItemState } from './listbox-item.types';
@@ -25,24 +24,18 @@ export function useListboxItemStyles_unstable(state: ListboxItemState) {
     getListboxItemFocusStyle(state),
     state.userStyle,
   ];
-  state.rootProps.style = rootStyle;
+  attachSlotProps(state.root, { style: rootStyle });
 
   const headerStyle: StyleProp<ViewStyle> = [listboxItemStyles.root, getListboxItemHeaderStyle(state), state.userStyle];
-  state.headerProps.style = headerStyle;
+  attachSlotProps(state.header, { style: headerStyle });
 
   if (state.content) {
-    const contentStyle: StyleProp<TextStyle> = [
-      getListboxItemLabelTypographyStyle(state),
-      getListboxItemLabelColorStyle(state),
-      getListboxItemVisibleLabelStyle(state),
-    ];
+    const contentStyle: StyleProp<TextStyle> = [getListboxItemLabelTypographyStyle(state), getListboxItemLabelColorStyle(state)];
     attachSlotProps(state.content, { style: contentStyle });
   }
 
   if (state.contentHidden) {
     attachSlotProps(state.contentHidden, {
-      accessible: false,
-      importantForAccessibility: 'no-hide-descendants',
       style: [
         {
           fontFamily: state.tokens.fontFamily.functional,
@@ -50,7 +43,6 @@ export function useListboxItemStyles_unstable(state: ListboxItemState) {
           fontWeight: state.tokens.fontWeight.functionalSemibold,
           lineHeight: state.tokens.lineHeight.functionalBodyMedium,
         },
-        getListboxItemGhostLabelStyle(),
         getListboxItemLabelColorStyle(state),
       ],
     });
@@ -95,6 +87,41 @@ export function useListboxItemStyles_unstable(state: ListboxItemState) {
         overflow: 'hidden',
         width: getListboxItemAvatarSize(),
       },
+    });
+  }
+
+  if (state.chevronIndicator) {
+    attachSlotProps(state.chevronIndicator, {
+      accessible: false,
+      color: state.tokens.color.foregroundNeutralPrimary,
+      height: getListboxItemIconSize(),
+      width: getListboxItemIconSize(),
+    });
+  }
+
+  if (state.checkmarkIndicator) {
+    attachSlotProps(state.checkmarkIndicator, {
+      accessible: false,
+      color: state.tokens.color.foregroundNeutralPrimary,
+      height: getListboxItemCheckmarkSize(),
+      width: getListboxItemCheckmarkSize(),
+    });
+  }
+
+  if (state.checkboxIndicator) {
+    attachSlotProps(state.checkboxIndicator, {
+      iconColor: state.tokens.color.foregroundNeutralOnloud,
+      iconSize: 12,
+      status: state.selected ? 'checked' : 'unchecked',
+      style: [
+        listboxItemStyles.checkboxBox,
+        {
+          backgroundColor: state.selected ? state.tokens.color.backgroundBrandHeavy : state.tokens.color.backgroundNeutralTransparent,
+          borderColor: state.selected ? state.tokens.color.backgroundBrandHeavy : state.tokens.color.foregroundNeutralSecondary,
+          height: getListboxItemCheckmarkSize(),
+          width: getListboxItemCheckmarkSize(),
+        },
+      ],
     });
   }
 }

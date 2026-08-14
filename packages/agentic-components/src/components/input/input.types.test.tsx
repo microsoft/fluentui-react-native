@@ -46,4 +46,3 @@ describe('Input slot types', () => {
     expect(TextInputSlot).toBeDefined();
   });
 });
-

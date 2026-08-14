@@ -84,4 +84,3 @@ Variant properties are ordered in the design tool: **Style → Size → State**.
 **Pressed is transient:** Clicking an input immediately triggers Focus, so the pressed visual is only visible for the instant between mousedown and focus. Unlike Button, Input does not perform an action on click; it enters an editing mode. Pressed is included so every hover value has a corresponding pressed value.
 
 **Bases vs hover/pressed values.** Rest, Focus, Error, Disabled, and Read only are mutually exclusive _bases_ — each defines the active stroke. Hover and Pressed use the active base's inline state value from `tokens.yaml`. Focus is a higher-priority base than Rest, so a focused-and-hovered input shifts the Focus stroke (`--gnrc-color-stroke-neutral-heavy`), not the Rest stroke; Pressed composes the same way. Error, Disabled, and Read only suppress hover and pressed entirely.
-

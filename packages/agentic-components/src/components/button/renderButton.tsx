@@ -1,5 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ButtonState } from './button.types';
+import { LayoutStableText } from '../../primitives/layout-stable-text/layout-stable-text';
 
 /**
  * Render the Button component
@@ -7,15 +8,12 @@ import type { ButtonState } from './button.types';
  * @returns The rendered Button component.
  */
 export function renderButton_unstable(state: ButtonState) {
-  const { content, contentContainer: ContentContainer, contentHidden: ContentHidden, iconPosition, isToggleButton } = state;
+  const { content, contentHidden: ContentHidden, iconPosition, isToggleButton } = state;
   const ActiveIcon = state.selected ? (state.selectedIcon ?? state.icon) : state.icon;
   const Content = content;
   const contentElement =
-    Content && isToggleButton && ContentContainer && ContentHidden ? (
-      <ContentContainer>
-        <ContentHidden />
-        <Content />
-      </ContentContainer>
+    Content && isToggleButton && ContentHidden ? (
+      <LayoutStableText reserve={<ContentHidden />} visible={<Content />} />
     ) : (
       Content && <Content />
     );

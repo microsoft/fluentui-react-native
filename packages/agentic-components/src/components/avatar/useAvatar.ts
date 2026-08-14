@@ -4,11 +4,12 @@ import { Image, Text, View } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
+import { semanticIconSources } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
 import type { AvatarProps, AvatarState } from './avatar.types';
 
 const defaultAvatarIcon = {
-  fontSource: { codepoint: 0x1f464 },
+  fontSource: semanticIconSources.person,
 } as const;
 
 function normalizeInitialsChildren(children: React.ReactNode, size: number): React.ReactNode {

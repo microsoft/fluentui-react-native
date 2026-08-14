@@ -75,4 +75,3 @@ Variant properties are ordered in the design tool: **Style → Status → State*
 | **Pressed**  | Active press/tap             | Momentary state during click or touch                     |
 | **Disabled** | Non-interactive              | When the option is unavailable in the current context     |
 | **Focus**    | Keyboard focus ring visible  | When the component receives focus via keyboard navigation |
-

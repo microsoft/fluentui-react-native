@@ -1,7 +1,7 @@
 import type { Pressable, PressableProps, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
-import type { ComponentProps, ComponentState, PressableState, Slot } from '@fluentui-react-native/framework-base';
+import type { ComponentProps, ComponentState, OwnedRootProps, PressableState, Slot } from '@fluentui-react-native/framework-base';
 
 export type RadioSlots = {
   /**
@@ -33,9 +33,8 @@ export type RadioStateProps = {
   selected?: boolean;
 };
 
-export type RadioExposedPressableProps = Omit<PressableProps, 'children' | 'style'> & {
+export type RadioExposedPressableProps = OwnedRootProps<PressableProps> & {
   children?: never;
-  style?: StyleProp<ViewStyle>;
 };
 
 export type RadioProps = RadioStateProps & ComponentProps<RadioSlots, RadioExposedPressableProps>;

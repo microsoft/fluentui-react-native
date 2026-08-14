@@ -39,15 +39,15 @@ Answer design questions directly — lead with rationale, then tokens. ListboxIt
 9. **Checkmark** — optional 16px icon inside the Trailing container indicating single-select selection state. Positioned after the chevron slot — aligned with the Multiselect checkbox zone so all selection indicators occupy the same trailing region. Shown when `Checkmark` prop is true.
 10. **Multiselect checkbox** — optional `flex-components:checkbox` instance inside the Trailing container, after the checkmark slot. Shown when `Multiselect` prop is true. Checkmark and Multiselect are mutually exclusive and share the same trailing zone. Uses square style, label hidden. The Checkbox visual Status maps to the ListboxItem's Selected axis: Selected=True → Checked, Selected=False → Unchecked. The Checkbox uses its standard standalone styling (brand-heavy fill, onLoud indicator when Checked). The Multiselect Checkbox is **presentational** — the row's own `aria-pressed` (carried on the container `<button>`) is what assistive technology announces. **The ListboxItem row itself does not apply its own selected styling when Multiselect is active** — no soft background fill, no Semibold label weight. The checkbox independently communicates the selection state. The icon swap (Regular→Filled on Selected=True) still applies — it is driven by the Selected axis universally, regardless of selection pattern.
 
-| Slot              | Required                   | Default        |
-| ----------------- | -------------------------- | -------------- |
-| Label             | Yes (List Item style)      | "Listbox item" |
-| Icon              | No                         | Shown          |
-| Avatar            | No                         | Hidden         |
-| Secondary content | No                         | Shown          |
-| Chevron           | No                         | Hidden         |
-| Checkmark         | No                         | Hidden         |
-| Multiselect       | No                         | Hidden         |
+| Slot              | Required              | Default        |
+| ----------------- | --------------------- | -------------- |
+| Label             | Yes (List Item style) | "Listbox item" |
+| Icon              | No                    | Shown          |
+| Avatar            | No                    | Hidden         |
+| Secondary content | No                    | Shown          |
+| Chevron           | No                    | Hidden         |
+| Checkmark         | No                    | Hidden         |
+| Multiselect       | No                    | Hidden         |
 
 > **Font-weight swap (primary Label only):** A ghost Semibold node reserves layout width at opacity 0 above the primary Label; a visible Regular or Semibold node renders on top. Selected=False shows Regular, Selected=True shows Semibold. This prevents container width reflow on selection. Secondary content stays Regular weight across the Selected axis — no swap pattern applies there.
 

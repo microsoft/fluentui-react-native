@@ -34,7 +34,8 @@ const meta: Meta<typeof ListboxItem> = {
   parameters: {
     docs: {
       description: {
-        component: 'ListboxItem is a selectable row for Dropdown-style overlays. It supports Right/Under secondary content, selected and multiselect visuals, and non-interactive section headers.',
+        component:
+          'ListboxItem is a selectable row for Dropdown-style overlays. It supports Right/Under secondary content, selected and multiselect visuals, and non-interactive section headers.',
       },
     },
   },

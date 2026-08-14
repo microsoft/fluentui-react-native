@@ -2,7 +2,12 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
-import { getStateStyleFactory, getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  getGapStyleValue,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+  interactiveStatePriority,
+} from '@fluentui-react-native/design/styling';
 import type {
   ColorStyleDefinition,
   StateNames,
@@ -10,7 +15,7 @@ import type {
   TextColorStyle,
   ViewColorStyle,
 } from '@fluentui-react-native/design/styling';
-import { cornerRadiusNone, size160, size200, size240, sizeNone } from '@fluentui-react-native/design/tokens/global';
+import { cornerRadiusNone, size160, size200, size240 } from '@fluentui-react-native/design/tokens/global';
 
 import type { ButtonSize, ButtonState } from './button.types';
 
@@ -26,15 +31,9 @@ export const buttonStyles = StyleSheet.create({
     flexShrink: 1,
     textAlign: 'center',
   },
-  contentContainer: {
-    alignItems: 'center',
-    flexShrink: 1,
-    justifyContent: 'center',
-    position: 'relative',
-  },
 });
 
-const colorStateLevels = [['primary', 'secondary', 'outline', 'subtle'], ['selected'], ['disabled', 'pressed', 'hovered']] as const;
+const colorStateLevels = [['primary', 'secondary', 'outline', 'subtle'], ['selected'], interactiveStatePriority] as const;
 type ColorStateLevels = typeof colorStateLevels;
 type ColorState = StateNames<ColorStateLevels>;
 
@@ -172,13 +171,6 @@ const rootStyleStateLevels = [
 type RootStyleStateLevels = typeof rootStyleStateLevels;
 type RootStyleState = StateNames<RootStyleStateLevels>;
 
-function getGapValue(value: FlexTokens['spacing']['componentBase50']): NonNullable<ViewStyle['gap']> {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value;
-  }
-  throw new TypeError('Button gap tokens must resolve to a number or string.');
-}
-
 function createSizeStyle(
   roundedRadius: NonNullable<ViewStyle['borderRadius']>,
   circleRadius: NonNullable<ViewStyle['borderRadius']>,
@@ -213,7 +205,7 @@ function createRootStyleDefinition({ borderRadius, spacing, strokeWidth }: FlexT
       borderRadius.base200,
       borderRadius.circular,
       {
-        gap: getGapValue(spacing.componentBase50),
+        gap: getGapStyleValue(spacing.componentBase50),
         paddingHorizontal: spacing.componentBase200,
         paddingVertical: spacing.componentBase100,
       },
@@ -226,7 +218,7 @@ function createRootStyleDefinition({ borderRadius, spacing, strokeWidth }: FlexT
       borderRadius.base300,
       borderRadius.circular,
       {
-        gap: getGapValue(spacing.componentBase100),
+        gap: getGapStyleValue(spacing.componentBase100),
         paddingHorizontal: spacing.componentBase250,
         paddingVertical: spacing.componentBase150,
       },
@@ -239,7 +231,7 @@ function createRootStyleDefinition({ borderRadius, spacing, strokeWidth }: FlexT
       borderRadius.base400,
       borderRadius.circular,
       {
-        gap: getGapValue(spacing.componentBase150),
+        gap: getGapStyleValue(spacing.componentBase150),
         paddingHorizontal: spacing.componentBase300,
         paddingVertical: spacing.componentBase200,
       },
@@ -325,29 +317,6 @@ const focusedState = ['focused'] as const;
 
 export function getButtonFocusStyle(state: ButtonState): ViewStyle | undefined {
   return state.focused && !state.disabled ? getThemedFocusStyle(state, focusedState) : undefined;
-}
-
-const contentVisibilityStateLevels = [['visible', 'hidden']] as const;
-type ContentVisibility = StateNames<typeof contentVisibilityStateLevels>;
-
-const getContentVisibilityStyle = getStateStyleFactory<TextStyle, typeof contentVisibilityStateLevels>(
-  {
-    visible: {
-      bottom: sizeNone,
-      left: sizeNone,
-      position: 'absolute',
-      right: sizeNone,
-      top: sizeNone,
-    },
-    hidden: {
-      opacity: sizeNone,
-    },
-  },
-  contentVisibilityStateLevels,
-);
-
-export function getButtonContentVisibilityStyle(visibility: ContentVisibility): TextStyle {
-  return getContentVisibilityStyle([visibility]);
 }
 
 const iconSizes: Record<ButtonSize, number> = {

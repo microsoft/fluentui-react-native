@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { Pressable, Text } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
-import { useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
 
+import { semanticIconSources } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
 import type { TagProps, TagState } from './tag.types';
 
 const defaultDismissIcon = {
-  fontSource: {
-    codepoint: 0x2715,
-    fontFamily: 'Arial',
-  },
+  fontSource: semanticIconSources.dismiss,
 };
 
 export function useTag_unstable(props: TagProps): TagState {
@@ -34,14 +32,19 @@ export function useTag_unstable(props: TagProps): TagState {
   const iconOnly = layout === 'iconOnly';
   const showDismissIcon = dismiss;
 
+  useAccessibilityLabelWarning({
+    accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
+    accessibilityLabelledBy: rest.accessibilityLabelledBy ?? rest['aria-labelledby'],
+    componentName: 'Tag',
+    requireLabel: iconOnly,
+    warning: 'Tag: icon-only tags require an accessibilityLabel that describes the tag.',
+  });
+
   React.useEffect(() => {
-    if (__DEV__ && iconOnly && !rest.accessibilityLabel) {
-      console.warn('Tag: icon-only tags require an accessibilityLabel that describes the tag.');
-    }
     if (__DEV__ && iconOnly && !hasLeadingIcon) {
       console.warn('Tag: icon-only tags require a leading icon.');
     }
-  }, [hasLeadingIcon, iconOnly, rest.accessibilityLabel]);
+  }, [hasLeadingIcon, iconOnly]);
 
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({

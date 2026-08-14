@@ -20,4 +20,3 @@ Focus follows standard platform behavior. Checkbox does not trap focus or manage
 Status transitions (Unchecked → Checked) may include a brief checkmark reveal animation. State transitions (Rest → Hover) are platform-driven color transitions.
 
 > **Reduced motion:** When the OS reduce-motion setting is set, all transitions should be instant (duration 0ms). No scale, translate, or opacity animation.
-

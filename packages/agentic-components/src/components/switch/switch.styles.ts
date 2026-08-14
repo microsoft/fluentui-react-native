@@ -2,7 +2,12 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
-import { getStateStyleFactory, getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  getStateStyleFactory,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+  interactiveStatePriority,
+} from '@fluentui-react-native/design/styling';
 import type { ColorStyleDefinition, StateNames, StyleDefinition, ViewColorStyle } from '@fluentui-react-native/design/styling';
 import { size20, size40, size80, size200, size360, size400, size560 } from '@fluentui-react-native/design/tokens/global';
 
@@ -160,7 +165,7 @@ export function getSwitchLabelStyle(state: SwitchState): TextStyle {
   return getLabelStyle(state, state.disabled ? ['disabled'] : []);
 }
 
-const colorStateLevels = [['checked'], ['disabled', 'pressed', 'hovered']] as const;
+const colorStateLevels = [['checked'], interactiveStatePriority] as const;
 type ColorStateLevels = typeof colorStateLevels;
 type ColorState = StateNames<ColorStateLevels>;
 

@@ -2,6 +2,7 @@ import type { StyleProp, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
+import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import {
   getMenuItemCheckboxStyle,
   getMenuItemFocusStyle,
@@ -9,6 +10,7 @@ import {
   getMenuItemLabelStyle,
   getMenuItemRootLayoutStyle,
   getMenuItemRootStyle,
+  getMenuItemSecondaryStyle,
   getMenuItemTrailingStyle,
   menuItemStyles,
 } from './menu-item.styles';
@@ -25,6 +27,10 @@ export function useMenuItemStyles_unstable(state: MenuItemState) {
   ];
 
   attachSlotProps(state.root, { style: rootStyle });
+  state.contentReserveStyle = getMenuItemLabelStyle(state, true);
+  state.contentStyle = getMenuItemLabelStyle(state);
+  state.secondaryReserveStyle = getMenuItemSecondaryStyle(state, true);
+  state.secondaryStyle = getMenuItemSecondaryStyle(state);
 
   if (state.icon) {
     attachSlotProps(state.icon, {
@@ -72,8 +78,10 @@ export function useMenuItemStyles_unstable(state: MenuItemState) {
 
   if (state.multiselectCheckbox) {
     attachSlotProps(state.multiselectCheckbox, {
-      accessible: false,
-      importantForAccessibility: 'no-hide-descendants',
+      ...hiddenFromAccessibilityProps,
+      iconColor: state.tokens.color.foregroundBrandOnloud,
+      iconSize: 12,
+      status: state.selected ? 'checked' : 'unchecked',
       style: [menuItemStyles.multiselectCheckbox, getMenuItemCheckboxStyle(state), getMenuItemTrailingStyle(state)],
     });
   }

@@ -3,7 +3,12 @@ import type { ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  getGapStyleValue,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+  interactiveStatePriority,
+} from '@fluentui-react-native/design/styling';
 import type { ColorStyleDefinition, StateNames, StyleDefinition, ViewColorStyle } from '@fluentui-react-native/design/styling';
 import type { CardState } from './card.types';
 
@@ -34,7 +39,7 @@ export const cardStyles = StyleSheet.create({
   },
 });
 
-const surfaceColorStateLevels = [['selected'], ['disabled', 'pressed', 'hovered']] as const;
+const surfaceColorStateLevels = [['selected'], interactiveStatePriority] as const;
 type SurfaceColorStateLevels = typeof surfaceColorStateLevels;
 type SurfaceColorState = StateNames<SurfaceColorStateLevels>;
 
@@ -90,15 +95,8 @@ const rootStyleStateLevels = [
 type RootStyleStateLevels = typeof rootStyleStateLevels;
 type RootStyleState = StateNames<RootStyleStateLevels>;
 
-function getGapValue(value: FlexTokens['spacing']['componentBase300']): NonNullable<ViewStyle['gap']> {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value;
-  }
-  throw new TypeError('Card gap tokens must resolve to a number or string.');
-}
-
 function createRootStyleDefinition({ borderRadius, spacing, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
-  const gap = getGapValue(spacing.componentBase300);
+  const gap = getGapStyleValue(spacing.componentBase300);
   const padding = spacing.componentBase300;
   return {
     borderWidth: strokeWidth.thin,

@@ -2,7 +2,7 @@ import type { Animated, StyleProp, ViewProps, ViewStyle } from 'react-native';
 import type { View } from 'react-native';
 import type { Svg } from 'react-native-svg';
 
-import type { ComponentProps, ComponentState, Slot } from '@fluentui-react-native/framework-base';
+import type { ComponentProps, ComponentState, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 export type SpinnerSize = 'x-tiny' | 'tiny' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'huge';
@@ -19,9 +19,7 @@ export type SpinnerStateProps = {
   size?: SpinnerSize;
 };
 
-export type SpinnerExposedViewProps = Omit<ViewProps, 'children' | 'style' | 'accessibilityRole' | 'focusable'> & {
-  style?: StyleProp<ViewStyle>;
-};
+export type SpinnerExposedViewProps = OwnedRootProps<ViewProps, 'accessibilityRole' | 'focusable'>;
 
 export type SpinnerProps = SpinnerStateProps & ComponentProps<SpinnerSlots, SpinnerExposedViewProps>;
 

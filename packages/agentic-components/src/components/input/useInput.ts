@@ -3,7 +3,7 @@ import { TextInput, View } from 'react-native';
 import type { TextInputProps } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useControllableValue, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
 
@@ -80,7 +80,7 @@ export function useInput_unstable(props: InputProps): InputState {
     ...rootProps
   } = props;
   const themeState = useThemeState();
-  const [uncontrolledValue, setUncontrolledValue] = React.useState(defaultValue ?? '');
+  const [currentValue = '', setCurrentValue] = useControllableValue(controlledValue, defaultValue ?? '');
   const [focused, setFocused] = React.useState(false);
   const [hovered, setHovered] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
@@ -99,7 +99,6 @@ export function useInput_unstable(props: InputProps): InputState {
     }
   }, [iconEnd1Prop, iconEnd2Prop]);
 
-  const currentValue = controlledValue !== undefined ? controlledValue : uncontrolledValue;
   const visualState = getVisualState({ disabled, error, focused, hovered, pressed, readOnly });
   const resolvedStyles = getInputResolvedStyles({ ...themeState, size, variant, visualState });
 
@@ -108,11 +107,9 @@ export function useInput_unstable(props: InputProps): InputState {
       if (disabled || readOnly) {
         return;
       }
-      if (controlledValue === undefined) {
-        setUncontrolledValue(text);
-      }
+      setCurrentValue(text);
     },
-    [controlledValue, disabled, readOnly],
+    [disabled, readOnly, setCurrentValue],
   );
 
   const handleFocus = React.useCallback(() => {

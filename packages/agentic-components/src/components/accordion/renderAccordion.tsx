@@ -13,7 +13,16 @@ type AccordionRenderStyles = {
  * Renders the resolved Accordion slot tree.
  */
 export function renderAccordion_unstable(state: AccordionState, styles: AccordionRenderStyles) {
-  const { body: Body, bodyContent: BodyContent, chevron: Chevron, chevronContainer: ChevronContainer, header: Header, layout, leadingIcon: LeadingIcon, title: Title } = state;
+  const {
+    body: Body,
+    bodyContent: BodyContent,
+    chevron: Chevron,
+    chevronContainer: ChevronContainer,
+    header: Header,
+    layout,
+    leadingIcon: LeadingIcon,
+    title: Title,
+  } = state;
   const bodyFallback: ReactNode = <Text style={styles.bodyPlaceholderStyle}>Content placeholder</Text>;
 
   return (

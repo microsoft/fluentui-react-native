@@ -94,7 +94,7 @@ export function useCard_unstable(props: CardProps): CardState {
           disabled,
         },
         accessible: accessible ?? false,
-        accessibilityRole: accessible ?? false ? 'group' : undefined,
+        accessibilityRole: (accessible ?? false) ? 'group' : undefined,
         focusable: false,
         testID,
       } as ViewProps);

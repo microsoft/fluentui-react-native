@@ -95,7 +95,16 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="Leading content">
         <ListItem content="Icon row" icon={folderIcon} />
-        <ListItem content="Avatar row" avatar={{ children: <View style={styles.avatar}><Text style={styles.avatarLabel}>A</Text></View> }} />
+        <ListItem
+          content="Avatar row"
+          avatar={{
+            children: (
+              <View style={styles.avatar}>
+                <Text style={styles.avatarLabel}>A</Text>
+              </View>
+            ),
+          }}
+        />
       </StoryGroup>
       <StoryGroup label="Selection">
         <ListItem content="Not selected" icon={regularStarIcon} selected={false} selectedIcon={filledStarIcon} selectionMode="single" />
@@ -195,7 +204,11 @@ export const ConstrainedContent: Story = {
   render: () => (
     <StoryGroup label="Constrained content">
       <ListItem content="Short" secondaryContent="Metadata" />
-      <ListItem content="A longer label that can flex and wrap when the row is constrained" secondaryContent="Long metadata that should stay aligned" style={styles.constrained} />
+      <ListItem
+        content="A longer label that can flex and wrap when the row is constrained"
+        secondaryContent="Long metadata that should stay aligned"
+        style={styles.constrained}
+      />
     </StoryGroup>
   ),
   parameters: {

@@ -1,14 +1,16 @@
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
 import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { semanticIconSources } from '../../common/iconSources';
+import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import { Icon } from '../../primitives/icon/icon';
 import type { ListboxItemProps, ListboxItemState } from './listbox-item.types';
 
-const defaultRegularIcon = { fontSource: { codepoint: 0x25cb, fontFamily: 'Arial' }, testID: 'listbox-item-default-icon' } as const;
-const defaultFilledIcon = { fontSource: { codepoint: 0x25cf, fontFamily: 'Arial' }, testID: 'listbox-item-default-selected-icon' } as const;
+const defaultRegularIcon = { fontSource: semanticIconSources.unselectedCircle, testID: 'listbox-item-default-icon' } as const;
+const defaultFilledIcon = { fontSource: semanticIconSources.selectedCircle, testID: 'listbox-item-default-selected-icon' } as const;
 export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemState {
   const {
     avatar: avatarProp,
@@ -33,19 +35,20 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
   const isListItem = variant === 'listItem';
   const themeState = useThemeState();
   const content = useSlot(Text, contentProp);
-  const contentHidden = isListItem && !multiselect ? useSlot(Text, contentProp) : undefined;
+  const contentHidden = useOptionalSlot(Text, isListItem && !multiselect ? contentProp : null);
   const iconSlotProp = iconProp === null ? null : iconProp;
   const selectedIconSlotProp = selectedIconProp === null ? null : selectedIconProp;
-  const icon = isListItem ? useOptionalSlot(Icon, iconSlotProp, { defaultProps: defaultRegularIcon, renderByDefault: true }) : undefined;
-  const selectedIcon = isListItem
-    ? useOptionalSlot(Icon, selectedIconSlotProp, { defaultProps: defaultFilledIcon, renderByDefault: true })
-    : undefined;
-  const avatar = isListItem ? useOptionalSlot(View, avatarProp) : undefined;
-  const secondaryContent = isListItem
-    ? useOptionalSlot(Text, secondaryContentProp === undefined ? { children: 'Secondary' } : secondaryContentProp, {
-        renderByDefault: true,
-      })
-    : undefined;
+  const icon = useOptionalSlot(Icon, isListItem ? iconSlotProp : null, { defaultProps: defaultRegularIcon, renderByDefault: true });
+  const selectedIcon = useOptionalSlot(Icon, isListItem ? selectedIconSlotProp : null, {
+    defaultProps: defaultFilledIcon,
+    renderByDefault: true,
+  });
+  const avatar = useOptionalSlot(View, isListItem ? avatarProp : null);
+  const secondaryContent = useOptionalSlot(
+    Text,
+    isListItem ? (secondaryContentProp === undefined ? { children: 'Secondary' } : secondaryContentProp) : null,
+    { renderByDefault: true },
+  );
 
   const rootAccessibilityState = isListItem
     ? {
@@ -64,31 +67,31 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     focusable: rest.focusable ?? (isListItem && !disabled),
   });
 
-  if (isListItem) {
-    rootProps.accessibilityState = {
-      ...(rootProps.accessibilityState as Record<string, unknown> | undefined),
-      disabled,
-      pressed: selected,
-    } as never;
-  }
-
   const { onBlur, onFocus, onHoverIn, onHoverOut, onLongPress, onPress, onPressIn, onPressOut, ...headerRest } = rootProps;
   const headerProps: ViewProps = headerRest as unknown as ViewProps;
+  const root = useSlot(Pressable, rootProps);
+  const header = useSlot(View, headerProps);
+  const chevronIndicator = useOptionalSlot(Icon, chevron ? { fontSource: semanticIconSources.chevron } : null);
+  const checkmarkIndicator = useOptionalSlot(Icon, checkmark && selected ? { fontSource: semanticIconSources.checkmark } : null);
+  const checkboxIndicator = useOptionalSlot(CheckboxIndicator, multiselect ? {} : null);
 
   return {
     ...themeState,
     ...pressableState,
     avatar,
+    checkboxIndicator,
     checkmark,
+    checkmarkIndicator,
     chevron,
+    chevronIndicator,
     content,
     contentHidden,
     disabled,
-    headerProps,
+    header,
     icon,
     loading,
     multiselect,
-    rootProps,
+    root,
     secondaryContent,
     secondaryContentPosition,
     selected,

@@ -34,7 +34,10 @@ describe('Tab', () => {
     expect(root.props.focusable).toBe(true);
     expect(labels).toHaveLength(2);
     expect(StyleSheet.flatten(labels[0].props.style)).toMatchObject({ fontWeight: tokens.fontWeight.functionalSemibold, opacity: 0 });
-    expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ fontWeight: tokens.fontWeight.functionalRegular, position: 'absolute' });
+    expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({
+      fontWeight: tokens.fontWeight.functionalRegular,
+      position: 'absolute',
+    });
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
       backgroundColor: tokens.color.backgroundNeutralTransparent,

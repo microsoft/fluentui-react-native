@@ -2,14 +2,22 @@
 import type { InputState } from './input.types';
 
 export function renderInput_unstable(state: InputState) {
-  const { iconEnd: IconEnd, iconEnd1: IconEnd1, iconEnd2: IconEnd2, iconStart: IconStart, iconTextStack: IconTextStack, textInput: TextInputSlot } = state;
+  const {
+    iconEnd: IconEnd,
+    iconEnd1: IconEnd1,
+    iconEnd2: IconEnd2,
+    iconStart: IconStart,
+    iconTextStack: IconTextStack,
+    textInput: TextInputSlot,
+  } = state;
 
-  const trailingIcons = IconEnd && (IconEnd1 || IconEnd2) ? (
-    <IconEnd>
-      {IconEnd1 && <IconEnd1 />}
-      {IconEnd2 && IconEnd1 && <IconEnd2 />}
-    </IconEnd>
-  ) : null;
+  const trailingIcons =
+    IconEnd && (IconEnd1 || IconEnd2) ? (
+      <IconEnd>
+        {IconEnd1 && <IconEnd1 />}
+        {IconEnd2 && IconEnd1 && <IconEnd2 />}
+      </IconEnd>
+    ) : null;
 
   return (
     <state.root>
@@ -24,4 +32,3 @@ export function renderInput_unstable(state: InputState) {
     </state.root>
   );
 }
-
