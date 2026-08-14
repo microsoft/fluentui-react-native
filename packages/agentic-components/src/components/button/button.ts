@@ -1,6 +1,6 @@
 import type { ButtonProps } from './button.types';
 import { useButton_unstable } from './useButton';
-import { useApplyStyles_unstable } from './useApplyStyles';
+import { useButtonStyles_unstable } from './useButtonStyles';
 import { renderButton_unstable } from './renderButton';
 
 /**
@@ -8,7 +8,7 @@ import { renderButton_unstable } from './renderButton';
  */
 export const Button = (props: ButtonProps) => {
   const state = useButton_unstable(props);
-  useApplyStyles_unstable(state);
+  useButtonStyles_unstable(state);
   return renderButton_unstable(state);
 };
 Button.displayName = 'Button';

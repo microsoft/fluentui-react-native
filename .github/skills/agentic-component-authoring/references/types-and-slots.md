@@ -70,9 +70,17 @@ sources. Verify the primitive remains assignable to `SlotProp<typeof Primitive>`
 
 ## Exports
 
-Export components and public types explicitly from
-[`src/index.ts`](../../../../packages/agentic-components/src/index.ts). Never use wildcard exports. Do not export private
-state-only slots, internal style definitions, or render helpers.
+Export each component and its composition pipeline explicitly from
+[`src/index.ts`](../../../../packages/agentic-components/src/index.ts):
+
+- the component and its public props, slots, variants, and resolved state type
+- the state hook as `use<Component>_unstable`
+- the style-application hook as `use<Component>Styles_unstable`
+- the render helper as `render<Component>_unstable`
+
+Name the source file `use<Component>Styles.ts` and the implementation `use<Component>Styles_unstable` so the local and
+public composition APIs match without aliases. Never use wildcard exports. Do not export private state-only slots or
+internal style definitions.
 
 ## Review checklist
 
@@ -82,4 +90,4 @@ state-only slots, internal style definitions, or render helpers.
 - Omitted and false values retain distinct semantics where required.
 - Root native props cannot bypass owned children or style ordering.
 - Resolved state contains every defaulted and derived value needed downstream.
-- Public exports are explicit and tree-shakeable.
+- Public component, state, style-application, render, and resolved-state exports are explicit and tree-shakeable.

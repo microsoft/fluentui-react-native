@@ -6,6 +6,10 @@ module.exports = {
       "name": "@fluentui-react-native/tester",
       "version": "0.170.54"
     },
+    "@fluentui-react-native/components": {
+      "name": "@fluentui-react-native/components",
+      "version": "0.1.0"
+    },
     "@fluentui-react-native/design": {
       "name": "@fluentui-react-native/design",
       "version": "0.2.0"

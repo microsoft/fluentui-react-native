@@ -1,0 +1,131 @@
+import { Pressable, View, useWindowDimensions } from 'react-native';
+import type { PressableProps, ViewProps } from 'react-native';
+
+import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useThemeState } from '@fluentui-react-native/design';
+
+import type { CardProps, CardState } from './card.types';
+
+const horizontalCollapseWidth = 480;
+
+/**
+ * Hook to create the state for a Card component.
+ */
+export function useCard_unstable(props: CardProps): CardState {
+  const {
+    accessibilityHint,
+    accessibilityLabel,
+    accessibilityLabelledBy,
+    accessibilityState,
+    accessible,
+    android_ripple,
+    delayLongPress,
+    delayPressIn,
+    disabled = false,
+    direction = 'vertical',
+    focusable,
+    footer: footerProp,
+    header: headerProp,
+    layout = 'default',
+    onBlur,
+    onFocus,
+    onHoverIn,
+    onHoverOut,
+    onLongPress,
+    onPress,
+    onPressIn,
+    onPressOut,
+    padding = 'default',
+    pressRetentionOffset,
+    selected,
+    size = 'small',
+    style: userStyle,
+    testID,
+    unstable_pressDelay,
+    content: contentProp,
+    content02: content02Prop,
+    ...rest
+  } = props;
+
+  const hasSelected = selected !== undefined;
+  const isInteractive = onPress !== undefined || hasSelected;
+  const isSelectable = hasSelected;
+  const { width } = useWindowDimensions();
+  const resolvedDirection = direction === 'horizontal' && width < horizontalCollapseWidth ? 'vertical' : direction;
+  const themeState = useThemeState();
+
+  const [overlayProps, pressableState] = usePressableState({
+    ...rest,
+    accessibilityHint,
+    accessibilityLabel,
+    accessibilityLabelledBy,
+    accessibilityRole: 'button',
+    accessibilityState: {
+      ...accessibilityState,
+      disabled,
+      ...(isSelectable && { selected }),
+    },
+    accessible: true,
+    android_ripple,
+    delayLongPress,
+    delayPressIn,
+    disabled: !isInteractive || disabled,
+    focusable: isInteractive && !disabled && (focusable ?? true),
+    onBlur,
+    onFocus,
+    onHoverIn,
+    onHoverOut,
+    onLongPress,
+    onPress,
+    onPressIn,
+    onPressOut,
+    pressRetentionOffset,
+    unstable_pressDelay,
+  } as PressableProps);
+
+  const rootProps: ViewProps = isInteractive
+    ? ({ ...rest, accessible: false, accessibilityState: { ...accessibilityState, disabled }, testID } as ViewProps)
+    : ({
+        ...rest,
+        accessibilityLabel,
+        accessibilityLabelledBy,
+        accessibilityState: {
+          ...accessibilityState,
+          disabled,
+        },
+        accessible: accessible ?? false,
+        accessibilityRole: (accessible ?? false) ? 'group' : undefined,
+        focusable: false,
+        testID,
+      } as ViewProps);
+
+  const root = useSlot(View, rootProps);
+  const overlay = useOptionalSlot(Pressable, isInteractive ? overlayProps : null);
+  const header = useOptionalSlot(View, headerProp);
+  const content = useSlot(View, contentProp);
+  const content02 = useOptionalSlot(View, content02Prop);
+  const footer = useOptionalSlot(View, footerProp);
+
+  return {
+    root,
+    overlay,
+    header,
+    content,
+    content02,
+    footer,
+    disabled,
+    direction,
+    layout,
+    padding,
+    resolvedDirection,
+    selected: selected ?? false,
+    size,
+    hovered: pressableState.hovered,
+    pressed: pressableState.pressed,
+    focused: pressableState.focused,
+    isInteractive,
+    isSelectable,
+    userStyle,
+    ...themeState,
+  };
+}

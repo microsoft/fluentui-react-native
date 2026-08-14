@@ -5,12 +5,18 @@ These instructions apply to `packages/agentic-components/src/components` and its
 Higher-order components own design-token styling, interaction state, layout, and component-level accessibility. Use
 `components/button` as the canonical implementation.
 
+For package-wide dependency or extraction reviews, also read
+[`packages/agentic-components/src/AGENTS.md`](../AGENTS.md) and the
+[agentic-component-optimization](../../../../.github/skills/agentic-component-optimization/SKILL.md) skill. A focused
+component edit should stay within this file and the relevant `SPEC.md`; do not turn every small change into a whole-package
+audit.
+
 ## Required structure
 
 - `<component>.types.ts`: public slots, props, named variants, private state slots, and resolved state.
 - `<component>.styles.ts`: structural styles and module-scoped state or theme style factories.
 - `use<Component>.ts`: defaults, derived state, accessibility, interaction hooks, theme state, and slot construction.
-- `useApplyStyles.ts`: cached style selection, ordered style arrays, and `attachSlotProps`.
+- `use<Component>Styles.ts`: cached style selection, ordered style arrays, and `attachSlotProps`.
 - `render<Component>.tsx`: pure slot ordering and conditional structure.
 - `<component>.ts`: state -> styles -> render assembly and `displayName`.
 
@@ -24,6 +30,8 @@ Higher-order components own design-token styling, interaction state, layout, and
 - Declare state precedence explicitly; disabled wins over pressed, which wins over hovered.
 - Apply user styles after component styles.
 - Keep render functions free of hooks, token reads, style creation, and slot mutation.
+- Export the resolved state type and the state, style-application, and render stages from the package root under
+  component-qualified unstable names so another component can reuse the pipeline.
 - Test public accessibility, every finite variant axis, interactions, optional slots, user forwarding, and constrained
   layout.
 

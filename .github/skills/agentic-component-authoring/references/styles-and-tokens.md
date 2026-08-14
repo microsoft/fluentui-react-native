@@ -1,9 +1,9 @@
 # Styles and tokens
 
-Use this reference for `<component>.styles.ts`, `useApplyStyles.ts`, token mapping, theme caching, state precedence, and
+Use this reference for `<component>.styles.ts`, `use<Component>Styles.ts`, token mapping, theme caching, state precedence, and
 slot prop application. The canonical examples are
 [`button.styles.ts`](../../../../packages/agentic-components/src/components/button/button.styles.ts) and
-[`useApplyStyles.ts`](../../../../packages/agentic-components/src/components/button/useApplyStyles.ts).
+[`useButtonStyles.ts`](../../../../packages/agentic-components/src/components/button/useButtonStyles.ts).
 
 ## Resolve values from the correct token source
 
@@ -101,7 +101,8 @@ token before assigning it to `ViewStyle['gap']`.
 
 ## Apply slot props in one stage
 
-`useApplyStyles.ts` should select styles and call `attachSlotProps`; it should not create factories.
+`use<Component>Styles.ts` should export `use<Component>Styles_unstable`, select styles, and call `attachSlotProps`; it
+should not create factories. Export that hook directly from the package root under the same name.
 
 Compose root styles in this order:
 

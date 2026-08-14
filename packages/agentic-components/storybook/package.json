@@ -35,6 +35,7 @@
     "react": "19.1.4",
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",
+    "react-native-svg": "^15.12.1",
     "react-native-windows": "^0.81.0"
   },
   "devDependencies": {
@@ -70,7 +71,8 @@
   "furn": {
     "knip": {
       "ignoreDependencies": [
-        "@fluentui-react-native/components"
+        "@fluentui-react-native/components",
+        "react-native-svg"
       ]
     }
   },

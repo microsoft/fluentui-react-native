@@ -51,6 +51,11 @@ export { withSlots } from './component-patterns/withSlots';
  */
 export { usePressableState } from './hooks/usePressableState';
 export type { UsePressableResult } from './hooks/usePressableState';
+export { useReducedMotion } from './hooks/useReducedMotion';
+export { useControllableValue } from './hooks/useControllableValue';
+export type { ControllableValueChangeCallback } from './hooks/useControllableValue';
+export { useAccessibilityLabelWarning } from './hooks/useAccessibilityLabelWarning';
+export type { AccessibilityLabelWarningOptions } from './hooks/useAccessibilityLabelWarning';
 export type { PressableState, PressableStateKeys } from './types/interactive.types';
 
 /**
@@ -85,6 +90,7 @@ export type {
   PropsChildren,
   PropsWithoutChildren,
   PartialWithoutChildren,
+  OwnedRootProps,
   PropsWithoutRef,
 } from './types/props.types';
 export type {
