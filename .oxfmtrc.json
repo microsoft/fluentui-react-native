@@ -11,6 +11,7 @@
     "**/lib-commonjs/**",
     "**/dist/**",
     "packages/components/Callout/windows/FRNCallout/codegen/**",
+    "**/esrp-npm-release-temp/**",
     "**/CHANGELOG.*",
     "**/CODE_OF_CONDUCT.md",
     "**/SECURITY.md",
