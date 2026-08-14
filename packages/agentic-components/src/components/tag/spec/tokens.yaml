@@ -1,0 +1,147 @@
+---
+component: Tag
+type: atomic
+
+variants:
+  Layout:
+    values: [Icon and text, Icon only]
+  Style:
+    values: [Primary, Secondary]
+    default: Secondary
+  Size:
+    values: [Small, Medium]
+    default: Medium
+  Shape:
+    values: [Rounded, Circular]
+    default: Rounded
+  State:
+    values: [Rest, Hover, Pressed, Disabled]
+
+dismiss-step-down:
+  applies: true
+
+tokens:
+  background:
+    container:
+      rest:
+        Primary:
+          value: color.backgroundBrandHeavy
+          hover: color.hover.backgroundBrandHeavy
+          pressed: color.pressed.backgroundBrandHeavy
+          rationale: Brand-heavy fill is the default, highest-emphasis Tag surface.
+        Secondary:
+          value: color.backgroundNeutralSubtle
+          hover: color.hover.backgroundNeutralSubtle
+          pressed: color.pressed.backgroundNeutralSubtle
+          rationale: Subtle background fill is the lower-emphasis secondary surface.
+      disabled:
+        Primary: color.backgroundNeutralHeavyDisabled
+        Secondary: color.backgroundNeutralSubtleDisabled
+
+  foreground:
+    container:
+      rest:
+        Primary:
+          token: color.foregroundNeutralOnloud
+          rationale: Inverted foreground for readability on the heavy brand background.
+        Secondary:
+          token: color.foregroundNeutralPrimary
+          rationale: Neutral primary foreground reads clearly on the subtle background.
+      disabled: color.foregroundNeutralDisabled
+    notes: >
+      No foreground shift on hover/pressed — the background overlay
+      provides sufficient interaction feedback for both styles.
+
+  stroke:
+    container: no-stroke
+    focus: See flex-system:styling — universal dual-outline focus ring.
+
+  radius:
+    container:
+      Icon only: borderRadius.circular
+      Icon and text:
+        Rounded:
+          Small: borderRadius.base200
+          Medium: borderRadius.base300
+        Circular: borderRadius.circular
+    notes: >
+      The Shape axis sets the Icon and text corner radius: Rounded uses the
+      size-dependent base radius (default); Circular uses the fully circular
+      radius even with a visible label. Icon only is always circular
+      regardless of Shape.
+
+  typography:
+    Small: textstyle-functional-body-small
+    Medium: textstyle-functional-body-medium
+    font-family: fontFamily.functional
+
+  spacing:
+    container:
+      padding:
+        Icon and text:
+          Small:
+            horizontal: spacing.componentBase200
+            vertical: spacing.componentBase100
+          Medium:
+            horizontal: spacing.componentBase250
+            vertical: spacing.componentBase150
+        Icon only:
+          Small:
+            horizontal: spacing.componentBase100
+            vertical: spacing.componentBase100
+          Medium:
+            horizontal: spacing.componentBase150
+            vertical: spacing.componentBase150
+      gap:
+        Medium: spacing.componentBase50
+        Small:
+          Icon and text: spacing.componentBase50
+          Icon only: 0
+      rationale: >
+        Padding, gap, and corner radius are owned by the root container.
+        The container is the single interactive element so its painted area
+        is the full tag surface.
+    label-inner-padding:
+      token: spacing.componentBase50
+      rationale: Tight/Small provides minimal inner breathing room for the label text. Prevents text from touching adjacent icon edges.
+
+  elevation: n/a
+
+  motion:
+    status: pending
+    guidance: State color transitions should be fast (typically ≤150ms) with standard ease-in-out. Reduced motion — remove transitions entirely.
+sizes:
+  Small:
+    dismiss-icon: 12px
+    leading-icon: 16px
+  Medium:
+    dismiss-icon: 16px
+    leading-icon: 20px
+  notes: >
+    Tag is typography-driven — height resolves from padding + line height + stroke
+    declared above; no fixed height is recorded. Icon sizes lack token coverage so
+    literal px values are used. The dismiss icon steps one size below the leading
+    icon per the dismiss step-down convention (see dismiss-step-down block and
+    flex-system:styling § Dismiss step-down).
+
+properties:
+  component:
+    Label string:
+      type: TEXT
+      default: 'Tag text'
+    Dismiss:
+      type: BOOLEAN
+      default: true
+      notes: Shows/hides the trailing Dismiss icon.
+    Icon before:
+      type: BOOLEAN
+      default: false
+      notes: Shows/hides the optional leading icon slot.
+    20px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (20px Regular)
+      binding: Medium size leading icon node
+    16px Regular:
+      type: INSTANCE_SWAP
+      default: Image icon (16px Regular)
+      binding: Small size leading icon node
