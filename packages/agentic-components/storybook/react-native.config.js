@@ -17,14 +17,7 @@ const project = (() => {
 
 module.exports = {
   dependencies: {
-    // These optional Storybook control dependencies only provide legacy UWP projects. Linking
-    // them into the WinUI 3 Fabric app fails, while liteMode does not require their native views.
-    '@react-native-community/datetimepicker': {
-      platforms: {
-        windows: null,
-      },
-    },
-    '@react-native-community/slider': {
+    'react-native-svg': {
       platforms: {
         windows: null,
       },

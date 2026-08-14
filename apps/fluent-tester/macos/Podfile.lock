@@ -2640,7 +2640,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 3cde5aa3abeda29fd70560e5a3e3199e6add163f
   fmt: 4cf0c5ec5864511c96d8d4bd7b03c3c69040af06
   FRNAvatar: 7c377a859feea236a20eb0413c2e73afcc21e0d2
-  FRNCallout: f2acc41ab57051facfadcd7e3a6c68c98ddab0e4
+  FRNCallout: bb597344d0051c47d12f37192910a2e145e40543
   FRNCheckbox: 48dcf237f30dff0cb66ab1befa1401b72d2393df
   FRNMenuButton: f7d6ef3c81a6308fd00dc5f4241dcc6d5e5e63dd
   FRNRadioButton: c9421d2736512aa64bbf46517fe702e43013586a

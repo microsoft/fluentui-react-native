@@ -1,8 +1,9 @@
 # Agentic Components Storybook
 
 On-device [Storybook](https://storybook.js.org/) app (Storybook for React Native v10) for
-`@fluentui-react-native/components`. It loads every `*.stories.(ts|tsx)` file from the
-library source (`../src`) so new component stories appear automatically.
+`@fluentui-react-native/components` and linked standalone native packages. It loads every
+`*.stories.(ts|tsx)` file from the agentic library source (`../src`) plus the standalone
+Callout package so its native stories run in the Fabric host.
 
 It runs in Storybook **liteMode**, which mocks out the heavy default on-device UI
 (`@storybook/react-native-ui`). This avoids the `react-native-reanimated` /
@@ -19,8 +20,7 @@ selected while navigating between stories.
 
 ```
 storybook/
-  .rnstorybook/        Storybook config (main.ts, preview.tsx, index.tsx)
-  StorybookApp.tsx     Root component -> renders the Storybook UI
+  src/                 Storybook config, generated requires, and root component
   index.js             AppRegistry entry
   app.json             react-native-test-app manifest
   metro.config.js      rnx-kit metro config wrapped with withStorybook (liteMode)
@@ -31,11 +31,11 @@ storybook/
 > `StorybookApp.tsx` is intentionally not named `App.tsx`: on a case-insensitive macOS
 > filesystem `App` collides with `app.json` during Metro resolution.
 
-The `.rnstorybook/storybook.requires.ts` file is **generated** (git-ignored) from the
+The `src/storybook.requires.ts` file is **generated** (git-ignored) from the
 `main.ts` stories glob by the `withStorybook` metro wrapper when Metro starts, or on demand via:
 
 ```sh
-yarn workspace @fluentui-react-native/agentic-components-storybook storybook-generate
+yarn workspace @fluentui-react-native/agentic-components-storybook prebuild
 ```
 
 ## Running on macOS
@@ -76,7 +76,8 @@ yarn pods:macos:update
 ## Running on Windows
 
 The Windows app also uses `react-native-test-app`. Its generated Win32 project uses React Native
-Windows' New Architecture and Fabric renderer.
+Windows 0.81's New Architecture and Fabric renderer. The Callout package is autolinked as a
+Windows Fabric native library; its Paper implementation remains built into the platform.
 
 ```powershell
 # from this directory
@@ -131,7 +132,7 @@ yarn storybook-server   # WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.
 ```
 
 Run it alongside `yarn start` + `yarn macos` or `yarn windows`. The on-device app connects to it automatically
-(`.rnstorybook/index.tsx` calls `getStorybookUI({ enableWebsockets: true, host, port })`).
+(`src/StorybookApp.tsx` calls `getStorybookUI({ enableWebsockets: true, host, port })`).
 
 - **WebSocket channel** (`ws://127.0.0.1:7007/`): agents connect and emit Storybook channel events
   to drive the app — e.g. `setCurrentStory` (`{ storyId }`) to switch story, and arg-update events
@@ -153,5 +154,5 @@ Run it alongside `yarn start` + `yarn macos` or `yarn windows`. The on-device ap
 ## Writing stories
 
 Follow the package-level story authoring instructions in `../AGENTS.md`. Add a `*.stories.tsx` file next to its component
-under `../src`; the `src/main.ts` glob discovers it automatically. See
+under `../src`; standalone native package story globs are listed explicitly in `src/main.ts`. See
 `../src/components/button/button.stories.tsx` for the canonical higher-order component example.

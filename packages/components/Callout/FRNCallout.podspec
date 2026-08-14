@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.swift_version    = "5"
 
   s.osx.deployment_target = "10.15"
-  s.osx.source_files      = "macos/*.{swift,h,m}"
+  s.osx.source_files      = "macos/*.{swift,h,m,mm}"
 
   s.dependency 'React'
 

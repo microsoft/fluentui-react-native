@@ -15,7 +15,6 @@ export type DirectionalHint =
   | 'rightCenter'
   | 'rightBottomEdge'
   | 'bottomLeftEdge'
-  | 'bottonLeftEdge'
   | 'bottomAutoEdge'
   | 'bottomCenter'
   | 'bottomRightEdge';
