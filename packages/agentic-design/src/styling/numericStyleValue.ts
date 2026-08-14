@@ -10,7 +10,7 @@ export function getNumericStyleValue(value: unknown): number | string {
     const trimmed = value.trim();
     if (trimmed.length > 0) {
       const normalized = Number(trimmed);
-      if (Number.isFinite(normalized) && /^[-+]?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?$/i.test(trimmed)) {
+      if (Number.isFinite(normalized) && /^[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[-+]?\d+)?$/i.test(trimmed)) {
         return trimmed;
       }
     }
