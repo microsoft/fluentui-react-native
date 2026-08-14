@@ -47,7 +47,6 @@ static NSRectEdge RCTNSRectEdgeFromDirectionalHint(RCTCalloutDirectionalHint hin
     case RCTCalloutDirectionalHint::RightBottomEdge:
       return NSRectEdgeMaxX;
     case RCTCalloutDirectionalHint::BottomLeftEdge:
-    case RCTCalloutDirectionalHint::BottonLeftEdge:
     case RCTCalloutDirectionalHint::BottomAutoEdge:
     case RCTCalloutDirectionalHint::BottomCenter:
     case RCTCalloutDirectionalHint::BottomRightEdge:

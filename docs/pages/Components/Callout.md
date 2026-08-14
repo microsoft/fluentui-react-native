@@ -135,7 +135,6 @@ type DirectionalHint =
   | 'rightCenter'
   | 'rightBottomEdge'
   | 'bottomLeftEdge'
-  | 'bottonLeftEdge' // Deprecated misspelling retained for compatibility
   | 'bottomAutoEdge'
   | 'bottomCenter'
   | 'bottomRightEdge';
