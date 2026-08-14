@@ -68,9 +68,24 @@ describe('Skeleton', () => {
   });
 
   it('hides the shimmer when reduce motion is enabled', async () => {
-    reduceMotionSpy.mockResolvedValue(true);
+    let resolveReducedMotion!: (value: boolean) => void;
+    reduceMotionSpy.mockReturnValue(
+      new Promise<boolean>((resolve) => {
+        resolveReducedMotion = resolve;
+      }),
+    );
     const component = await renderSkeleton({ style: { height: 16, width: 120 } });
-    await act(async () => undefined);
+    const root = getRoot(component);
+
+    await act(async () => {
+      await fireEvent(root, 'layout', { nativeEvent: { layout: { height: 16, width: 120, x: 0, y: 0 } } });
+    });
+
+    expect(component.getByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeOnTheScreen();
+
+    await act(async () => {
+      resolveReducedMotion(true);
+    });
 
     expect(component.queryByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeNull();
   });
