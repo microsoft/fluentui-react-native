@@ -11,6 +11,11 @@ It runs in Storybook **liteMode**, which mocks out the heavy default on-device U
 chain, which does not bundle cleanly with this repo's Metro + Babel + pnpm-linker toolchain
 (Reanimated's Babel plugin crashes when Metro bundles Reanimated from source).
 
+The app shell includes a persistent theme header above the Storybook UI. It can leave stories
+unwrapped (`No theme`, the default) or apply the default light, dark, or high-contrast FURN Theme.
+The selected Theme wraps the preview decorator, so it applies to every rendered story and remains
+selected while navigating between stories.
+
 ## Layout
 
 ```

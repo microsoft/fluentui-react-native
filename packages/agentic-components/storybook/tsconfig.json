@@ -18,7 +18,13 @@
       "path": "../../components/Callout/tsconfig.json"
     },
     {
+      "path": "../../agentic-design/tsconfig.json"
+    },
+    {
       "path": "../tsconfig.json"
+    },
+    {
+      "path": "../../theming/default-theme/tsconfig.json"
     },
     {
       "path": "../../../scripts/tsconfig.json"

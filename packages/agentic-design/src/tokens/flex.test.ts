@@ -1,8 +1,21 @@
-import { defaultFlexTokens } from './defaultTokens';
+import { defaultFlexTokens, nonFluentFlexTokens } from './defaultTokens';
 import type { FlexTokens, SemanticColorTokenValues } from './flex.types';
 
 const colorTokens: SemanticColorTokenValues = defaultFlexTokens.color;
 const flexTokens: FlexTokens = defaultFlexTokens;
+const flexFromTheme = jest.requireActual<Record<string, string>>('./mappings/flex-from-theme.json');
+
+function getTokenPaths(tokens: object, color: { hover: object; pressed: object }): string[] {
+  const colorPaths = Object.keys(color)
+    .filter((name) => name !== 'hover' && name !== 'pressed')
+    .map((name) => `color.${name}`);
+  const interactiveColorPaths = ['hover', 'pressed'].flatMap((state) => Object.keys(color[state]).map((name) => `color.${state}.${name}`));
+  const groupPaths = Object.entries(tokens)
+    .filter(([group]) => group !== 'color')
+    .flatMap(([group, values]) => Object.keys(values).map((name) => `${group}.${name}`));
+
+  return [...colorPaths, ...interactiveColorPaths, ...groupPaths].sort();
+}
 
 describe('FlexTokens', () => {
   it('groups tokens and removes category prefixes from their names', () => {
@@ -24,5 +37,31 @@ describe('FlexTokens', () => {
     expect('colorSurfaceNeutralFarther' in flexTokens).toBe(false);
     expect('shadowLowest' in flexTokens).toBe(false);
     expect('fontWeightFunctionalRegular' in flexTokens).toBe(false);
+  });
+
+  it('builds defaults from values without FURN Theme sources', () => {
+    const themeBackedPaths = new Set(Object.keys(flexFromTheme));
+    const expectedNonFluentPaths = getTokenPaths(defaultFlexTokens, defaultFlexTokens.color).filter((path) => {
+      if (themeBackedPaths.has(path)) {
+        return false;
+      }
+
+      const interactiveColor = path.match(/^color\.(?:hover|pressed)\.(.+)$/);
+      return !interactiveColor || !themeBackedPaths.has(`color.${interactiveColor[1]}`);
+    });
+
+    expect(getTokenPaths(nonFluentFlexTokens, nonFluentFlexTokens.color)).toEqual(expectedNonFluentPaths);
+    expect(Object.keys(nonFluentFlexTokens)).toEqual(['color', 'lineHeight', 'borderRadius', 'spacing', 'strokeWidth']);
+    expect(nonFluentFlexTokens.color.backgroundNeutralSoft).toBe('#0000001a');
+    expect(nonFluentFlexTokens.color.hover.backgroundNeutralSoft).toBe('#0000001a');
+    expect(nonFluentFlexTokens.borderRadius.base100).toBe(2);
+    expect('backgroundBrandHeavy' in nonFluentFlexTokens.color).toBe(false);
+    expect('backgroundBrandSoft' in nonFluentFlexTokens.color.hover).toBe(false);
+    expect('surfaceNeutralFarther' in nonFluentFlexTokens.color.hover).toBe(false);
+    expect('base200' in nonFluentFlexTokens.borderRadius).toBe(false);
+    expect(defaultFlexTokens.lineHeight).toBe(nonFluentFlexTokens.lineHeight);
+    expect(defaultFlexTokens.color.backgroundNeutralSoft).toBe(nonFluentFlexTokens.color.backgroundNeutralSoft);
+    expect(defaultFlexTokens.color.backgroundBrandHeavy).toBe('#185abd');
+    expect(defaultFlexTokens.color.hover.backgroundBrandSoft).toBe('#d2e0f4');
   });
 });

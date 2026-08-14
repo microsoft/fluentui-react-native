@@ -2,6 +2,7 @@
 // `storybook-generate` script) from the `main.ts` stories glob. It is git-ignored.
 import { view } from './storybook.requires';
 import { LiteUI } from '@storybook/react-native-ui-lite';
+import { StorybookThemeHost } from './StorybookTheme';
 
 // We run Storybook in lite mode: the heavy default on-device UI (`@storybook/react-native-ui`,
 // which needs reanimated/gesture-handler/etc.) is not bundled. `getStorybookUI` would otherwise
@@ -23,12 +24,18 @@ const storage = {
 // (`yarn storybook-server`, default ws://127.0.0.1:7007). This lets external agents drive the app —
 // select stories, read/update control args — and powers the MCP endpoint. If the server isn't
 // running the transport just logs a connection error; the app still works standalone.
-const StorybookApp = view.getStorybookUI({
+const StorybookUI = view.getStorybookUI({
   enableWebsockets: true,
   host: '127.0.0.1',
   port: 7007,
   CustomUIComponent: LiteUI,
   storage,
 });
+
+const StorybookApp = () => (
+  <StorybookThemeHost>
+    <StorybookUI />
+  </StorybookThemeHost>
+);
 
 export default StorybookApp;

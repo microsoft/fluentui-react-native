@@ -163,7 +163,7 @@ describe('Tag', () => {
   });
 
   it.each([
-    ['rounded', 12],
+    ['rounded', 4],
     ['circular', 9999],
   ] as const)('resolves the %s shape', async (shape, borderRadius) => {
     const component = await renderTag({ content: shape, shape });

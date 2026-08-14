@@ -30,6 +30,8 @@
   "dependencies": {
     "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/components": "workspace:*",
+    "@fluentui-react-native/default-theme": "workspace:*",
+    "@fluentui-react-native/design": "workspace:*",
     "@types/react": "~19.1.4",
     "react": "19.1.4",
     "react-native": "^0.81.6",
