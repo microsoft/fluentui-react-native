@@ -47,7 +47,6 @@ static NSRectEdge RCTNSRectEdgeFromDirectionalHint(RCTCalloutDirectionalHint hin
     case RCTCalloutDirectionalHint::RightBottomEdge:
       return NSRectEdgeMaxX;
     case RCTCalloutDirectionalHint::BottomLeftEdge:
-    case RCTCalloutDirectionalHint::BottonLeftEdge:
     case RCTCalloutDirectionalHint::BottomAutoEdge:
     case RCTCalloutDirectionalHint::BottomCenter:
     case RCTCalloutDirectionalHint::BottomRightEdge:
@@ -105,6 +104,9 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
   if (self = [super initWithFrame:frame]) {
     static const auto defaultProps = std::make_shared<const RCTCalloutProps>();
     _props = defaultProps;
+
+    // This view manages content mounted in the Callout window and must not render in the React surface.
+    self.hidden = YES;
 
     _calloutView = [[FRNCalloutView alloc] initWithFrame:self.bounds];
 
