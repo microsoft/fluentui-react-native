@@ -5,7 +5,6 @@ import type { ViewStyle } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
 
 import { Skeleton } from './skeleton';
