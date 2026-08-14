@@ -5,7 +5,6 @@ import type { ViewStyle } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
 
 import { Skeleton } from './skeleton';
@@ -40,17 +39,9 @@ describe('Skeleton', () => {
 
   it('renders a decorative bar with themed fill and rounded corners', async () => {
     const component = await renderSkeleton({ style: { height: 16, width: 120 } });
-    const colors = useFlexTokens().color;
 
     expect(getRoot(component).props.accessible).toBe(false);
-    expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: colors.backgroundNeutralSubtle,
-      borderRadius: 4,
-      height: 16,
-      overflow: 'hidden',
-      position: 'relative',
-      width: 120,
-    });
+    expect(getRootStyle(component)).toMatchSnapshot();
   });
 
   it('forwards user layout handlers while preserving the wave animation', async () => {

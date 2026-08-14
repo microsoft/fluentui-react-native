@@ -20,6 +20,11 @@ sources:
       alias.: Stateful semantic alias token — colorful/tokens-aliases.json.
       global.: Raw global token — colorful/tokens-global.json.
       shadow.: Elevation shadow token — colorful/tokens-shadow.json.
+  furn-theme:
+    description: Dot path to the corresponding value in the Fluent UI React Native
+      Theme type.
+    definition: '../../theming/types/Theme.types.ts'
+    projection: './flex-from-theme.json'
 rules:
   colorStates:
     shape: Each color has a required rest mapping and optional hover and pressed mappings.
@@ -49,25 +54,41 @@ rules:
       semantic.css.
     - letterSpacing* are null — Fluent global has no letter-spacing/tracking token.
     - fontFamily.contentEditorial is null — Fluent global has no serif family token.
+    - furn-theme is omitted when Theme has no corresponding value path.
+    - Keep flex-from-theme.json synchronized with furn-theme mappings. Add, update,
+      or remove its FlexTokens destination-to-Theme source path whenever a furn-theme
+      value changes; do not include tokens without a furn-theme mapping.
+    - flexTokensFromTheme.ts consumes flex-from-theme.json and merges the projected
+      Theme values over nonFluentFlexTokens.
+    - Keep nonFluentFlexTokens in ../defaultTokens.ts synchronized with unmapped
+      supported destinations. Include an unmapped hover or pressed fallback only
+      when its rest destination is also unmapped; otherwise keep the state value
+      only in defaultFlexTokens so a Theme-provided rest value does not inherit a
+      mismatched fallback interaction color.
+    - Button uses borderRadius.base200 / base300 / base400 for small / medium / large.
+      The FURN Theme exposes its shared small/medium Button radius, but its large
+      size-specific radius remains sourced from Fluent global tokens.
     - Flex has finer/larger steps than Fluent in a few scales (e.g. radius 16/24/28,
       spacing 96); nearest emits the closest Fluent token — prefer the flex default
       where an exact step matters.
 tokens:
   borderRadius.base100:
     generic: '--gnrc-border-radius-base-100'
-    fluent: global.corner.radius40
+    fluent: global.corner.radius20
   borderRadius.base200:
     generic: '--gnrc-border-radius-base-200'
-    fluent: global.corner.radius80
+    fluent: global.corner.radius40
+    furn-theme: components.Button.tokens.borderRadius
   borderRadius.base300:
     generic: '--gnrc-border-radius-base-300'
-    fluent: global.corner.radius120
+    fluent: global.corner.radius40
+    furn-theme: components.Button.tokens.borderRadius
   borderRadius.base400:
     generic: '--gnrc-border-radius-base-400'
-    fluent: global.corner.radius120
+    fluent: global.corner.radius60
   borderRadius.base600:
     generic: '--gnrc-border-radius-base-600'
-    fluent: global.corner.radius120
+    fluent: global.corner.radius80
   borderRadius.base700:
     generic: '--gnrc-border-radius-base-700'
     fluent: global.corner.radius120
@@ -78,26 +99,33 @@ tokens:
     rest:
       generic: '--gnrc-color-background-brand-heavy'
       fluent: alias.brandBackground.rest
+      furn-theme: colors.brandBackground
     hover:
       generic: '--gnrc-color-background-brand-heavy-hover'
       fluent: alias.brandBackground.hover
+      furn-theme: colors.brandBackgroundHover
     pressed:
       generic: '--gnrc-color-background-brand-heavy-pressed'
       fluent: alias.brandBackground.pressed
+      furn-theme: colors.brandBackgroundPressed
   color.backgroundBrandLoud:
     rest:
       generic: '--gnrc-color-background-brand-loud'
       fluent: alias.compoundBrandBackground1.rest
+      furn-theme: colors.compoundBrandBackground1
     hover:
       generic: '--gnrc-color-background-brand-loud-hover'
       fluent: alias.compoundBrandBackground1.hover
+      furn-theme: colors.compoundBrandBackground1Hover
     pressed:
       generic: '--gnrc-color-background-brand-loud-pressed'
       fluent: alias.compoundBrandBackground1.pressed
+      furn-theme: colors.compoundBrandBackground1Pressed
   color.backgroundBrandSoft:
     rest:
       generic: '--gnrc-color-background-brand-soft'
       fluent: alias.brandBackground2.rest
+      furn-theme: colors.brandBackground2
     hover:
       generic: '--gnrc-color-background-brand-soft-hover'
     pressed:
@@ -106,6 +134,7 @@ tokens:
     rest:
       generic: '--gnrc-color-background-brand-subtle'
       fluent: alias.brandBackground2.rest
+      furn-theme: colors.brandBackground2
     hover:
       generic: '--gnrc-color-background-brand-subtle-hover'
     pressed:
@@ -114,16 +143,20 @@ tokens:
     rest:
       generic: '--gnrc-color-background-brand-transparent'
       fluent: alias.transparentBackground.rest
+      furn-theme: colors.transparentBackground
     hover:
       generic: '--gnrc-color-background-brand-transparent-hover'
       fluent: alias.transparentBackground.hover
+      furn-theme: colors.transparentBackgroundHover
     pressed:
       generic: '--gnrc-color-background-brand-transparent-pressed'
       fluent: alias.transparentBackground.pressed
+      furn-theme: colors.transparentBackgroundPressed
   color.backgroundDangerLoud:
     rest:
       generic: '--gnrc-color-background-danger-loud'
       fluent: alias.dangerBackground3.rest
+      furn-theme: colors.dangerBackground3
     hover:
       generic: '--gnrc-color-background-danger-loud-hover'
     pressed:
@@ -132,6 +165,7 @@ tokens:
     rest:
       generic: '--gnrc-color-background-danger-soft'
       fluent: alias.dangerBackground2.rest
+      furn-theme: colors.dangerBackground2
     hover:
       generic: '--gnrc-color-background-danger-soft-hover'
     pressed:
@@ -140,6 +174,7 @@ tokens:
     rest:
       generic: '--gnrc-color-background-danger-subtle'
       fluent: alias.dangerBackground1.rest
+      furn-theme: colors.dangerBackground1
     hover:
       generic: '--gnrc-color-background-danger-subtle-hover'
     pressed:
@@ -148,10 +183,12 @@ tokens:
     rest:
       generic: '--gnrc-color-background-neutral-disabled'
       fluent: alias.neutralBackgroundDisabled.rest
+      furn-theme: colors.neutralBackgroundDisabled
   color.backgroundNeutralHeavy:
     rest:
       generic: '--gnrc-color-background-neutral-heavy'
       fluent: alias.neutralBackgroundInverted.rest
+      furn-theme: colors.neutralBackgroundInverted
     hover:
       generic: '--gnrc-color-background-neutral-heavy-hover'
     pressed:
@@ -160,10 +197,12 @@ tokens:
     rest:
       generic: '--gnrc-color-background-neutral-heavy-disabled'
       fluent: alias.neutralBackgroundDisabled.rest
+      furn-theme: colors.neutralBackgroundDisabled
   color.backgroundNeutralLoud:
     rest:
       generic: '--gnrc-color-background-neutral-loud'
       fluent: alias.neutralBackgroundInverted.rest
+      furn-theme: colors.neutralBackgroundInverted
     hover:
       generic: '--gnrc-color-background-neutral-loud-hover'
     pressed:
@@ -180,16 +219,20 @@ tokens:
     rest:
       generic: '--gnrc-color-background-neutral-subtle'
       fluent: alias.neutralBackground2.rest
+      furn-theme: colors.neutralBackground2
     hover:
       generic: '--gnrc-color-background-neutral-subtle-hover'
       fluent: alias.neutralBackground2.hover
+      furn-theme: colors.neutralBackground2Hover
     pressed:
       generic: '--gnrc-color-background-neutral-subtle-pressed'
       fluent: alias.neutralBackground2.pressed
+      furn-theme: colors.neutralBackground2Pressed
   color.backgroundNeutralSubtleDisabled:
     rest:
       generic: '--gnrc-color-background-neutral-subtle-disabled'
       fluent: alias.neutralBackgroundDisabled.rest
+      furn-theme: colors.neutralBackgroundDisabled
   color.backgroundNeutralTranslucent:
     rest:
       generic: '--gnrc-color-background-neutral-translucent'
@@ -202,16 +245,20 @@ tokens:
     rest:
       generic: '--gnrc-color-background-neutral-transparent'
       fluent: alias.transparentBackground.rest
+      furn-theme: colors.transparentBackground
     hover:
       generic: '--gnrc-color-background-neutral-transparent-hover'
       fluent: alias.transparentBackground.hover
+      furn-theme: colors.transparentBackgroundHover
     pressed:
       generic: '--gnrc-color-background-neutral-transparent-pressed'
       fluent: alias.transparentBackground.pressed
+      furn-theme: colors.transparentBackgroundPressed
   color.backgroundSuccessLoud:
     rest:
       generic: '--gnrc-color-background-success-loud'
       fluent: alias.successBackground3.rest
+      furn-theme: colors.successBackground3
     hover:
       generic: '--gnrc-color-background-success-loud-hover'
     pressed:
@@ -220,6 +267,7 @@ tokens:
     rest:
       generic: '--gnrc-color-background-success-soft'
       fluent: alias.successBackground2.rest
+      furn-theme: colors.successBackground2
     hover:
       generic: '--gnrc-color-background-success-soft-hover'
     pressed:
@@ -228,6 +276,7 @@ tokens:
     rest:
       generic: '--gnrc-color-background-success-subtle'
       fluent: alias.successBackground1.rest
+      furn-theme: colors.successBackground1
     hover:
       generic: '--gnrc-color-background-success-subtle-hover'
     pressed:
@@ -236,6 +285,7 @@ tokens:
     rest:
       generic: '--gnrc-color-background-warning-loud'
       fluent: alias.warningBackground3.rest
+      furn-theme: colors.warningBackground3
     hover:
       generic: '--gnrc-color-background-warning-loud-hover'
     pressed:
@@ -244,6 +294,7 @@ tokens:
     rest:
       generic: '--gnrc-color-background-warning-soft'
       fluent: alias.warningBackground2.rest
+      furn-theme: colors.warningBackground2
     hover:
       generic: '--gnrc-color-background-warning-soft-hover'
     pressed:
@@ -252,6 +303,7 @@ tokens:
     rest:
       generic: '--gnrc-color-background-warning-subtle'
       fluent: alias.warningBackground1.rest
+      furn-theme: colors.warningBackground1
     hover:
       generic: '--gnrc-color-background-warning-subtle-hover'
     pressed:
@@ -276,10 +328,12 @@ tokens:
     rest:
       generic: '--gnrc-color-expression-achromatic-heavy'
       fluent: global.color.black
+      furn-theme: colors.black
   color.expressionAchromaticSubtle:
     rest:
       generic: '--gnrc-color-expression-achromatic-subtle'
       fluent: global.color.white
+      furn-theme: colors.white
   color.expressionBlueHeavy:
     rest:
       generic: '--gnrc-color-expression-blue-heavy'
@@ -444,24 +498,30 @@ tokens:
     rest:
       generic: '--gnrc-color-fixed-black'
       fluent: global.color.black
+      furn-theme: colors.black
   color.fixedWhite:
     rest:
       generic: '--gnrc-color-fixed-white'
       fluent: global.color.white
+      furn-theme: colors.white
   color.foregroundBrandOnloud:
     rest:
       generic: '--gnrc-color-foreground-brand-onloud'
       fluent: alias.neutralForegroundOnBrand.rest
+      furn-theme: colors.neutralForegroundOnBrand
     hover:
       generic: '--gnrc-color-foreground-brand-onloud-hover'
       fluent: alias.neutralForegroundOnBrand.hover
+      furn-theme: colors.neutralForegroundOnBrandHover
     pressed:
       generic: '--gnrc-color-foreground-brand-onloud-pressed'
       fluent: alias.neutralForegroundOnBrand.pressed
+      furn-theme: colors.neutralForegroundOnBrandPressed
   color.foregroundBrandPrimary:
     rest:
       generic: '--gnrc-color-foreground-brand-primary'
       fluent: alias.brandForeground1.rest
+      furn-theme: colors.brandForeground1
     hover:
       generic: '--gnrc-color-foreground-brand-primary-hover'
     pressed:
@@ -470,16 +530,20 @@ tokens:
     rest:
       generic: '--gnrc-color-foreground-danger-onloud'
       fluent: alias.neutralForegroundOnBrand.rest
+      furn-theme: colors.neutralForegroundOnBrand
     hover:
       generic: '--gnrc-color-foreground-danger-onloud-hover'
       fluent: alias.neutralForegroundOnBrand.hover
+      furn-theme: colors.neutralForegroundOnBrandHover
     pressed:
       generic: '--gnrc-color-foreground-danger-onloud-pressed'
       fluent: alias.neutralForegroundOnBrand.pressed
+      furn-theme: colors.neutralForegroundOnBrandPressed
   color.foregroundDangerPrimary:
     rest:
       generic: '--gnrc-color-foreground-danger-primary'
       fluent: alias.dangerForeground1.rest
+      furn-theme: colors.dangerForeground1
     hover:
       generic: '--gnrc-color-foreground-danger-primary-hover'
     pressed:
@@ -488,60 +552,77 @@ tokens:
     rest:
       generic: '--gnrc-color-foreground-neutral-disabled'
       fluent: alias.neutralForegroundDisabled.rest
+      furn-theme: colors.neutralForegroundDisabled
   color.foregroundNeutralOnloud:
     rest:
       generic: '--gnrc-color-foreground-neutral-onloud'
       fluent: alias.neutralForegroundOnBrand.rest
+      furn-theme: colors.neutralForegroundOnBrand
     hover:
       generic: '--gnrc-color-foreground-neutral-onloud-hover'
       fluent: alias.neutralForegroundOnBrand.hover
+      furn-theme: colors.neutralForegroundOnBrandHover
     pressed:
       generic: '--gnrc-color-foreground-neutral-onloud-pressed'
       fluent: alias.neutralForegroundOnBrand.pressed
+      furn-theme: colors.neutralForegroundOnBrandPressed
   color.foregroundNeutralPrimary:
     rest:
       generic: '--gnrc-color-foreground-neutral-primary'
       fluent: alias.neutralForeground1.rest
+      furn-theme: colors.neutralForeground1
     hover:
       generic: '--gnrc-color-foreground-neutral-primary-hover'
       fluent: alias.neutralForeground1.hover
+      furn-theme: colors.neutralForeground1Hover
     pressed:
       generic: '--gnrc-color-foreground-neutral-primary-pressed'
       fluent: alias.neutralForeground1.pressed
+      furn-theme: colors.neutralForeground1Pressed
   color.foregroundNeutralSecondary:
     rest:
       generic: '--gnrc-color-foreground-neutral-secondary'
       fluent: alias.neutralForeground2.rest
+      furn-theme: colors.neutralForeground2
     hover:
       generic: '--gnrc-color-foreground-neutral-secondary-hover'
       fluent: alias.neutralForeground2.hover
+      furn-theme: colors.neutralForeground2Hover
     pressed:
       generic: '--gnrc-color-foreground-neutral-secondary-pressed'
       fluent: alias.neutralForeground2.pressed
+      furn-theme: colors.neutralForeground2Pressed
   color.foregroundNeutralTertiary:
     rest:
       generic: '--gnrc-color-foreground-neutral-tertiary'
       fluent: alias.neutralForeground3.rest
+      furn-theme: colors.neutralForeground3
     hover:
       generic: '--gnrc-color-foreground-neutral-tertiary-hover'
       fluent: alias.neutralForeground3.hover
+      furn-theme: colors.neutralForeground3Hover
     pressed:
       generic: '--gnrc-color-foreground-neutral-tertiary-pressed'
       fluent: alias.neutralForeground3.pressed
+      furn-theme: colors.neutralForeground3Pressed
   color.foregroundSuccessOnloud:
     rest:
       generic: '--gnrc-color-foreground-success-onloud'
       fluent: alias.neutralForegroundOnBrand.rest
+      furn-theme: colors.neutralForegroundOnBrand
     hover:
       generic: '--gnrc-color-foreground-success-onloud-hover'
       fluent: alias.neutralForegroundOnBrand.hover
+      furn-theme: colors.neutralForegroundOnBrandHover
     pressed:
       generic: '--gnrc-color-foreground-success-onloud-pressed'
       fluent: alias.neutralForegroundOnBrand.pressed
+      furn-theme: colors.neutralForegroundOnBrandPressed
   color.foregroundSuccessPrimary:
     rest:
       generic: '--gnrc-color-foreground-success-primary'
       fluent: alias.successForeground1.rest
+      furn-theme: colors.successForeground1
     hover:
       generic: '--gnrc-color-foreground-success-primary-hover'
     pressed:
@@ -550,16 +631,20 @@ tokens:
     rest:
       generic: '--gnrc-color-foreground-warning-onloud'
       fluent: alias.neutralForegroundOnBrand.rest
+      furn-theme: colors.neutralForegroundOnBrand
     hover:
       generic: '--gnrc-color-foreground-warning-onloud-hover'
       fluent: alias.neutralForegroundOnBrand.hover
+      furn-theme: colors.neutralForegroundOnBrandHover
     pressed:
       generic: '--gnrc-color-foreground-warning-onloud-pressed'
       fluent: alias.neutralForegroundOnBrand.pressed
+      furn-theme: colors.neutralForegroundOnBrandPressed
   color.foregroundWarningPrimary:
     rest:
       generic: '--gnrc-color-foreground-warning-primary'
       fluent: alias.warningForeground1.rest
+      furn-theme: colors.warningForeground1
     hover:
       generic: '--gnrc-color-foreground-warning-primary-hover'
     pressed:
@@ -584,10 +669,12 @@ tokens:
     rest:
       generic: '--gnrc-color-shadow'
       fluent: global.color.black
+      furn-theme: colors.black
   color.strokeBrandLoud:
     rest:
       generic: '--gnrc-color-stroke-brand-loud'
       fluent: alias.brandStroke1.rest
+      furn-theme: colors.brandStroke1
     hover:
       generic: '--gnrc-color-stroke-brand-loud-hover'
     pressed:
@@ -596,16 +683,20 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-brand-onloud'
       fluent: alias.neutralForegroundOnBrand.rest
+      furn-theme: colors.neutralForegroundOnBrand
     hover:
       generic: '--gnrc-color-stroke-brand-onloud-hover'
       fluent: alias.neutralForegroundOnBrand.hover
+      furn-theme: colors.neutralForegroundOnBrandHover
     pressed:
       generic: '--gnrc-color-stroke-brand-onloud-pressed'
       fluent: alias.neutralForegroundOnBrand.pressed
+      furn-theme: colors.neutralForegroundOnBrandPressed
   color.strokeBrandSoft:
     rest:
       generic: '--gnrc-color-stroke-brand-soft'
       fluent: alias.brandStroke1.rest
+      furn-theme: colors.brandStroke1
     hover:
       generic: '--gnrc-color-stroke-brand-soft-hover'
     pressed:
@@ -614,6 +705,7 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-brand-subtle'
       fluent: alias.brandStroke2.rest
+      furn-theme: colors.brandStroke2
     hover:
       generic: '--gnrc-color-stroke-brand-subtle-hover'
     pressed:
@@ -622,6 +714,7 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-danger-loud'
       fluent: alias.dangerBorder2.rest
+      furn-theme: colors.dangerBorder2
     hover:
       generic: '--gnrc-color-stroke-danger-loud-hover'
     pressed:
@@ -630,16 +723,20 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-danger-onloud'
       fluent: alias.neutralForegroundOnBrand.rest
+      furn-theme: colors.neutralForegroundOnBrand
     hover:
       generic: '--gnrc-color-stroke-danger-onloud-hover'
       fluent: alias.neutralForegroundOnBrand.hover
+      furn-theme: colors.neutralForegroundOnBrandHover
     pressed:
       generic: '--gnrc-color-stroke-danger-onloud-pressed'
       fluent: alias.neutralForegroundOnBrand.pressed
+      furn-theme: colors.neutralForegroundOnBrandPressed
   color.strokeDangerSoft:
     rest:
       generic: '--gnrc-color-stroke-danger-soft'
       fluent: alias.dangerBorder1.rest
+      furn-theme: colors.dangerBorder1
     hover:
       generic: '--gnrc-color-stroke-danger-soft-hover'
     pressed:
@@ -648,6 +745,7 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-danger-subtle'
       fluent: alias.dangerBorder1.rest
+      furn-theme: colors.dangerBorder1
     hover:
       generic: '--gnrc-color-stroke-danger-subtle-hover'
     pressed:
@@ -656,58 +754,74 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-focus-inner'
       fluent: alias.strokeFocus1.rest
+      furn-theme: colors.strokeFocus1
   color.strokeFocusOuter:
     rest:
       generic: '--gnrc-color-stroke-focus-outer'
       fluent: alias.strokeFocus2.rest
+      furn-theme: colors.strokeFocus2
   color.strokeNeutralDisabled:
     rest:
       generic: '--gnrc-color-stroke-neutral-disabled'
       fluent: alias.neutralStrokeDisabled.rest
+      furn-theme: colors.neutralStrokeDisabled
   color.strokeNeutralHeavy:
     rest:
       generic: '--gnrc-color-stroke-neutral-heavy'
       fluent: alias.neutralStrokeAccessible.rest
+      furn-theme: colors.neutralStrokeAccessible
     hover:
       generic: '--gnrc-color-stroke-neutral-heavy-hover'
       fluent: alias.neutralStrokeAccessible.hover
+      furn-theme: colors.neutralStrokeAccessibleHover
     pressed:
       generic: '--gnrc-color-stroke-neutral-heavy-pressed'
       fluent: alias.neutralStrokeAccessible.pressed
+      furn-theme: colors.neutralStrokeAccessiblePressed
   color.strokeNeutralLoud:
     rest:
       generic: '--gnrc-color-stroke-neutral-loud'
       fluent: alias.neutralStroke1.rest
+      furn-theme: colors.neutralStroke1
     hover:
       generic: '--gnrc-color-stroke-neutral-loud-hover'
       fluent: alias.neutralStroke1.hover
+      furn-theme: colors.neutralStroke1Hover
     pressed:
       generic: '--gnrc-color-stroke-neutral-loud-pressed'
       fluent: alias.neutralStroke1.pressed
+      furn-theme: colors.neutralStroke1Pressed
   color.strokeNeutralOnloud:
     rest:
       generic: '--gnrc-color-stroke-neutral-onloud'
       fluent: alias.neutralForegroundOnBrand.rest
+      furn-theme: colors.neutralForegroundOnBrand
     hover:
       generic: '--gnrc-color-stroke-neutral-onloud-hover'
       fluent: alias.neutralForegroundOnBrand.hover
+      furn-theme: colors.neutralForegroundOnBrandHover
     pressed:
       generic: '--gnrc-color-stroke-neutral-onloud-pressed'
       fluent: alias.neutralForegroundOnBrand.pressed
+      furn-theme: colors.neutralForegroundOnBrandPressed
   color.strokeNeutralSoft:
     rest:
       generic: '--gnrc-color-stroke-neutral-soft'
       fluent: alias.neutralStroke1.rest
+      furn-theme: colors.neutralStroke1
     hover:
       generic: '--gnrc-color-stroke-neutral-soft-hover'
       fluent: alias.neutralStroke1.hover
+      furn-theme: colors.neutralStroke1Hover
     pressed:
       generic: '--gnrc-color-stroke-neutral-soft-pressed'
       fluent: alias.neutralStroke1.pressed
+      furn-theme: colors.neutralStroke1Pressed
   color.strokeNeutralSubtle:
     rest:
       generic: '--gnrc-color-stroke-neutral-subtle'
       fluent: alias.neutralStroke2.rest
+      furn-theme: colors.neutralStroke2
     hover:
       generic: '--gnrc-color-stroke-neutral-subtle-hover'
     pressed:
@@ -716,9 +830,11 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-neutral-transparent'
       fluent: alias.transparentStroke.rest
+      furn-theme: colors.transparentStroke
     hover:
       generic: '--gnrc-color-stroke-neutral-transparent-hover'
       fluent: alias.transparentStroke.hover
+      furn-theme: colors.transparentStrokeInteractive
     pressed:
       generic: '--gnrc-color-stroke-neutral-transparent-pressed'
       fluent: alias.transparentStroke.pressed
@@ -726,6 +842,7 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-success-loud'
       fluent: alias.successBorder2.rest
+      furn-theme: colors.successBorder2
     hover:
       generic: '--gnrc-color-stroke-success-loud-hover'
     pressed:
@@ -734,16 +851,20 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-success-onloud'
       fluent: alias.neutralForegroundOnBrand.rest
+      furn-theme: colors.neutralForegroundOnBrand
     hover:
       generic: '--gnrc-color-stroke-success-onloud-hover'
       fluent: alias.neutralForegroundOnBrand.hover
+      furn-theme: colors.neutralForegroundOnBrandHover
     pressed:
       generic: '--gnrc-color-stroke-success-onloud-pressed'
       fluent: alias.neutralForegroundOnBrand.pressed
+      furn-theme: colors.neutralForegroundOnBrandPressed
   color.strokeSuccessSoft:
     rest:
       generic: '--gnrc-color-stroke-success-soft'
       fluent: alias.successBorder1.rest
+      furn-theme: colors.successBorder1
     hover:
       generic: '--gnrc-color-stroke-success-soft-hover'
     pressed:
@@ -752,6 +873,7 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-success-subtle'
       fluent: alias.successBorder1.rest
+      furn-theme: colors.successBorder1
     hover:
       generic: '--gnrc-color-stroke-success-subtle-hover'
     pressed:
@@ -760,6 +882,7 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-warning-loud'
       fluent: alias.warningBorder2.rest
+      furn-theme: colors.warningBorder2
     hover:
       generic: '--gnrc-color-stroke-warning-loud-hover'
     pressed:
@@ -768,16 +891,20 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-warning-onloud'
       fluent: alias.neutralForegroundOnBrand.rest
+      furn-theme: colors.neutralForegroundOnBrand
     hover:
       generic: '--gnrc-color-stroke-warning-onloud-hover'
       fluent: alias.neutralForegroundOnBrand.hover
+      furn-theme: colors.neutralForegroundOnBrandHover
     pressed:
       generic: '--gnrc-color-stroke-warning-onloud-pressed'
       fluent: alias.neutralForegroundOnBrand.pressed
+      furn-theme: colors.neutralForegroundOnBrandPressed
   color.strokeWarningSoft:
     rest:
       generic: '--gnrc-color-stroke-warning-soft'
       fluent: alias.warningBorder1.rest
+      furn-theme: colors.warningBorder1
     hover:
       generic: '--gnrc-color-stroke-warning-soft-hover'
     pressed:
@@ -786,6 +913,7 @@ tokens:
     rest:
       generic: '--gnrc-color-stroke-warning-subtle'
       fluent: alias.warningBorder1.rest
+      furn-theme: colors.warningBorder1
     hover:
       generic: '--gnrc-color-stroke-warning-subtle-hover'
     pressed:
@@ -794,42 +922,54 @@ tokens:
     rest:
       generic: '--gnrc-color-surface-neutral-far'
       fluent: alias.neutralBackground3.rest
+      furn-theme: colors.neutralBackground3
     hover:
       generic: '--gnrc-color-surface-neutral-far-hover'
       fluent: alias.neutralBackground3.hover
+      furn-theme: colors.neutralBackground3Hover
     pressed:
       generic: '--gnrc-color-surface-neutral-far-pressed'
       fluent: alias.neutralBackground3.pressed
+      furn-theme: colors.neutralBackground3Pressed
   color.surfaceNeutralFarther:
     rest:
       generic: '--gnrc-color-surface-neutral-farther'
       fluent: alias.neutralBackground5.rest
+      furn-theme: colors.neutralBackground5
     hover:
       generic: '--gnrc-color-surface-neutral-farther-hover'
       fluent: alias.neutralBackground5.hover
+      furn-theme: colors.neutralBackground5Hover
     pressed:
       generic: '--gnrc-color-surface-neutral-farther-pressed'
       fluent: alias.neutralBackground5.pressed
+      furn-theme: colors.neutralBackground5Pressed
   color.surfaceNeutralNear:
     rest:
       generic: '--gnrc-color-surface-neutral-near'
       fluent: alias.neutralBackground2.rest
+      furn-theme: colors.neutralBackground2
     hover:
       generic: '--gnrc-color-surface-neutral-near-hover'
       fluent: alias.neutralBackground2.hover
+      furn-theme: colors.neutralBackground2Hover
     pressed:
       generic: '--gnrc-color-surface-neutral-near-pressed'
       fluent: alias.neutralBackground2.pressed
+      furn-theme: colors.neutralBackground2Pressed
   color.surfaceNeutralNearer:
     rest:
       generic: '--gnrc-color-surface-neutral-nearer'
       fluent: alias.neutralBackground1.rest
+      furn-theme: colors.neutralBackground1
     hover:
       generic: '--gnrc-color-surface-neutral-nearer-hover'
       fluent: alias.neutralBackground1.hover
+      furn-theme: colors.neutralBackground1Hover
     pressed:
       generic: '--gnrc-color-surface-neutral-nearer-pressed'
       fluent: alias.neutralBackground1.pressed
+      furn-theme: colors.neutralBackground1Pressed
   color.surfaceNeutralTranslucent:
     rest:
       generic: '--gnrc-color-surface-neutral-translucent'
@@ -841,129 +981,171 @@ tokens:
   fontFamily.content:
     generic: '--gnrc-font-family-content'
     fluent: global.font.family.base
+    furn-theme: typography.families.primary
   fontFamily.contentCode:
     generic: '--gnrc-font-family-content-code'
     fluent: global.font.family.monospace
+    furn-theme: typography.families.monospace
   fontFamily.contentEditorial:
     generic: '--gnrc-font-family-content-editorial'
     fluent:
+    furn-theme: typography.families.serif
   fontFamily.functional:
     generic: '--gnrc-font-family-functional'
     fluent: global.font.family.base
+    furn-theme: typography.families.primary
   fontSize.contentCode:
     generic: '--gnrc-font-size-content-code'
     fluent: global.font.size400
+    furn-theme: typography.sizes.subheader
   fontSize.contentExpressiveLarge:
     generic: '--gnrc-font-size-content-expressive-large'
     fluent: global.font.size900
+    furn-theme: typography.sizes.heroLarge
   fontSize.contentExpressiveMedium:
     generic: '--gnrc-font-size-content-expressive-medium'
     fluent: global.font.size800
+    furn-theme: typography.sizes.hero
   fontSize.contentExpressiveSmall:
     generic: '--gnrc-font-size-content-expressive-small'
     fluent: global.font.size700
+    furn-theme: typography.sizes.hero
   fontSize.contentH1:
     generic: '--gnrc-font-size-content-h1'
     fluent: global.font.size800
+    furn-theme: typography.sizes.hero
   fontSize.contentH2:
     generic: '--gnrc-font-size-content-h2'
     fluent: global.font.size800
+    furn-theme: typography.sizes.hero
   fontSize.contentH3:
     generic: '--gnrc-font-size-content-h3'
     fluent: global.font.size700
+    furn-theme: typography.sizes.hero
   fontSize.contentH4:
     generic: '--gnrc-font-size-content-h4'
     fluent: global.font.size600
+    furn-theme: typography.sizes.header
   fontSize.contentH5:
     generic: '--gnrc-font-size-content-h5'
     fluent: global.font.size500
+    furn-theme: typography.sizes.header
   fontSize.contentParagraphLarge:
     generic: '--gnrc-font-size-content-paragraph-large'
     fluent: global.font.size500
+    furn-theme: typography.sizes.header
   fontSize.contentParagraphMedium:
     generic: '--gnrc-font-size-content-paragraph-medium'
     fluent: global.font.size400
+    furn-theme: typography.sizes.subheader
   fontSize.contentParagraphSmall:
     generic: '--gnrc-font-size-content-paragraph-small'
     fluent: global.font.size200
+    furn-theme: typography.sizes.secondary
   fontSize.contentStatement:
     generic: '--gnrc-font-size-content-statement'
     fluent: global.font.size1000
+    furn-theme: typography.sizes.heroLarge
   fontSize.contentSubheadline:
     generic: '--gnrc-font-size-content-subheadline'
     fluent: global.font.size400
+    furn-theme: typography.sizes.subheader
   fontSize.contentSubtext:
     generic: '--gnrc-font-size-content-subtext'
     fluent: global.font.size100
+    furn-theme: typography.sizes.caption
   fontSize.contentTable:
     generic: '--gnrc-font-size-content-table'
     fluent: global.font.size400
+    furn-theme: typography.sizes.subheader
   fontSize.functionalBodyLarge:
     generic: '--gnrc-font-size-functional-body-large'
     fluent: global.font.size400
+    furn-theme: typography.sizes.subheader
   fontSize.functionalBodyMedium:
     generic: '--gnrc-font-size-functional-body-medium'
     fluent: global.font.size300
+    furn-theme: typography.sizes.body
   fontSize.functionalBodySmall:
     generic: '--gnrc-font-size-functional-body-small'
     fluent: global.font.size200
+    furn-theme: typography.sizes.secondary
   fontSize.functionalCaption:
     generic: '--gnrc-font-size-functional-caption'
     fluent: global.font.size100
+    furn-theme: typography.sizes.caption
   fontSize.functionalDisplay:
     generic: '--gnrc-font-size-functional-display'
     fluent: global.font.size1000
+    furn-theme: typography.sizes.heroLarge
   fontSize.functionalPagetitle:
     generic: '--gnrc-font-size-functional-pagetitle'
     fluent: global.font.size900
+    furn-theme: typography.sizes.heroLarge
   fontSize.functionalSubtitle:
     generic: '--gnrc-font-size-functional-subtitle'
     fluent: global.font.size500
+    furn-theme: typography.sizes.header
   fontSize.functionalTitleLarge:
     generic: '--gnrc-font-size-functional-title-large'
     fluent: global.font.size800
+    furn-theme: typography.sizes.hero
   fontSize.functionalTitleMedium:
     generic: '--gnrc-font-size-functional-title-medium'
     fluent: global.font.size700
+    furn-theme: typography.sizes.hero
   fontSize.functionalTitleSmall:
     generic: '--gnrc-font-size-functional-title-small'
     fluent: global.font.size600
+    furn-theme: typography.sizes.header
   fontWeight.contentBold:
     generic: '--gnrc-font-weight-content-bold'
     fluent: global.font.weight.bold
+    furn-theme: typography.weights.semiBold
   fontWeight.contentEditorialBold:
     generic: '--gnrc-font-weight-content-editorial-bold'
     fluent: global.font.weight.bold
+    furn-theme: typography.weights.semiBold
   fontWeight.contentEditorialMedium:
     generic: '--gnrc-font-weight-content-editorial-medium'
     fluent: global.font.weight.medium
+    furn-theme: typography.weights.semiBold
   fontWeight.contentEditorialRegular:
     generic: '--gnrc-font-weight-content-editorial-regular'
     fluent: global.font.weight.regular
+    furn-theme: typography.weights.regular
   fontWeight.contentEditorialSemibold:
     generic: '--gnrc-font-weight-content-editorial-semibold'
     fluent: global.font.weight.semibold
+    furn-theme: typography.weights.semiBold
   fontWeight.contentMedium:
     generic: '--gnrc-font-weight-content-medium'
     fluent: global.font.weight.medium
+    furn-theme: typography.weights.semiBold
   fontWeight.contentRegular:
     generic: '--gnrc-font-weight-content-regular'
     fluent: global.font.weight.regular
+    furn-theme: typography.weights.regular
   fontWeight.contentSemibold:
     generic: '--gnrc-font-weight-content-semibold'
     fluent: global.font.weight.semibold
+    furn-theme: typography.weights.semiBold
   fontWeight.functionalBold:
     generic: '--gnrc-font-weight-functional-bold'
     fluent: global.font.weight.bold
+    furn-theme: typography.weights.semiBold
   fontWeight.functionalMedium:
     generic: '--gnrc-font-weight-functional-medium'
     fluent: global.font.weight.medium
+    furn-theme: typography.weights.semiBold
   fontWeight.functionalRegular:
     generic: '--gnrc-font-weight-functional-regular'
     fluent: global.font.weight.regular
+    furn-theme: typography.weights.regular
   fontWeight.functionalSemibold:
     generic: '--gnrc-font-weight-functional-semibold'
     fluent: global.font.weight.semibold
+    furn-theme: typography.weights.semiBold
   letterSpacing.contentCode:
     generic: '--gnrc-letter-spacing-content-code'
     fluent:
@@ -1123,21 +1305,27 @@ tokens:
   shadow.high:
     generic: '--gnrc-shadow-high'
     fluent: shadow.shadow16
+    furn-theme: shadows.shadow16
   shadow.higher:
     generic: '--gnrc-shadow-higher'
     fluent: shadow.shadow28
+    furn-theme: shadows.shadow28
   shadow.highest:
     generic: '--gnrc-shadow-highest'
     fluent: shadow.shadow64
+    furn-theme: shadows.shadow64
   shadow.low:
     generic: '--gnrc-shadow-low'
     fluent: shadow.shadow8
+    furn-theme: shadows.shadow8
   shadow.lower:
     generic: '--gnrc-shadow-lower'
     fluent: shadow.shadow4
+    furn-theme: shadows.shadow4
   shadow.lowest:
     generic: '--gnrc-shadow-lowest'
     fluent: shadow.shadow2
+    furn-theme: shadows.shadow2
   spacing.componentBase100:
     generic: '--gnrc-spacing-component-base-100'
     fluent: global.size40

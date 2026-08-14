@@ -1,7 +1,11 @@
 import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
+import { useTheme } from './theming/context';
+import { isHighContrast } from './theming/platformUtils';
+import type { Theme } from './theming/types/Theme.types';
+import { defaultFlexTokens } from './tokens/defaultTokens';
 import type { FlexTokens } from './tokens/flex.types';
-import { useFlexTokens } from './tokens/useFlexTokens';
+import { flexTokensFromTheme } from './tokens/flexTokensFromTheme';
 
 export type ThemeStyleSheet = Record<string, ViewStyle | TextStyle | ImageStyle>;
 
@@ -30,19 +34,42 @@ export type ThemeState = {
  * theme state must own a new themeStyles registry so cached style sheets cannot leak across themes.
  */
 const defaultThemeState: ThemeState = {
-  tokens: useFlexTokens(),
+  tokens: defaultFlexTokens,
   highContrast: false,
   themeStyles: {},
 };
 
+const themeStateKey = Symbol('ThemeState');
+
+type ThemeWithState = Theme & {
+  [themeStateKey]?: ThemeState;
+};
+
+function getThemeState(theme: Theme): ThemeState {
+  const themeWithState = theme as ThemeWithState;
+  const cachedState = themeWithState[themeStateKey];
+  if (cachedState) {
+    return cachedState;
+  }
+
+  const state: ThemeState = {
+    tokens: flexTokensFromTheme(theme),
+    highContrast: theme.host.appearance === 'highContrast' || isHighContrast(theme),
+    themeStyles: {},
+  };
+  Object.defineProperty(theme, themeStateKey, { value: state });
+  return state;
+}
+
 /**
- * Placeholder hook for accessing the current theme state. The theme state should have consistent object identity
- * until a theme change or system appearance change occurs so it can be used as a memo key.
+ * Access the current theme state. A state created from context is cached on its
+ * Theme object so every consumer of that Theme shares the same state identity.
  *
  * @returns The current theme state, including flex tokens, high contrast mode status, and shared theme style sheets.
  */
 export function useThemeState(): ThemeState {
-  return defaultThemeState;
+  const theme = useTheme();
+  return theme ? getThemeState(theme) : defaultThemeState;
 }
 
 /**
