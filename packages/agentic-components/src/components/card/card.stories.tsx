@@ -41,6 +41,60 @@ const directions: readonly { label: string; value: CardDirection }[] = [
   { label: 'Horizontal', value: 'horizontal' },
 ];
 
+const styles = StyleSheet.create({
+  avatar: {
+    backgroundColor: '#d6d6d6',
+    borderRadius: 12,
+    height: 24,
+    width: 24,
+  },
+  body: {
+    fontSize: 14,
+  },
+  cardRow: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 16,
+  },
+  footerRow: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  group: {
+    alignItems: 'flex-start',
+    gap: 8,
+  },
+  groupLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  headerRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 12,
+  },
+  headerText: {
+    gap: 2,
+  },
+  meta: {
+    fontSize: 12,
+  },
+  preview: {
+    backgroundColor: '#e9e9e9',
+    height: 96,
+    width: 160,
+  },
+  story: {
+    alignItems: 'flex-start',
+    gap: 16,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});
+
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
   component: Card,
@@ -249,57 +303,3 @@ export const Horizontal: Story = {
     />
   ),
 };
-
-const styles = StyleSheet.create({
-  avatar: {
-    backgroundColor: '#d6d6d6',
-    borderRadius: 12,
-    height: 24,
-    width: 24,
-  },
-  body: {
-    fontSize: 14,
-  },
-  cardRow: {
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 16,
-  },
-  footerRow: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  group: {
-    alignItems: 'flex-start',
-    gap: 8,
-  },
-  groupLabel: {
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  headerRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 12,
-  },
-  headerText: {
-    gap: 2,
-  },
-  meta: {
-    fontSize: 12,
-  },
-  preview: {
-    backgroundColor: '#e9e9e9',
-    height: 96,
-    width: 160,
-  },
-  story: {
-    alignItems: 'flex-start',
-    gap: 16,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-});
