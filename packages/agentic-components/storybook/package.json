@@ -28,6 +28,7 @@
     "format": "fluentui-scripts format"
   },
   "dependencies": {
+    "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/components": "workspace:*",
     "@fluentui-react-native/default-theme": "workspace:*",
     "@fluentui-react-native/design": "workspace:*",
@@ -44,8 +45,6 @@
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
     "@react-native-community/cli-platform-ios": "^20.0.0",
-    "@react-native-community/datetimepicker": "^9.1.0",
-    "@react-native-community/slider": "^5.0.0",
     "@react-native-windows/cli": "^0.81.0",
     "@react-native/babel-preset": "^0.81.0",
     "@react-native/metro-babel-transformer": "^0.81.0",
@@ -71,6 +70,7 @@
   "furn": {
     "knip": {
       "ignoreDependencies": [
+        "@fluentui-react-native/callout",
         "@fluentui-react-native/components",
         "react-native-svg"
       ]

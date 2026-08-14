@@ -40,7 +40,7 @@ const config = makeMetroConfig({
 });
 
 module.exports = withStorybook(config, {
-  configPath: path.resolve(__dirname, '.rnstorybook'),
+  configPath: path.resolve(__dirname, 'src'),
   // Lite mode mocks out the heavy default Storybook UI so we don't need react-native-reanimated,
   // react-native-gesture-handler, @gorhom/bottom-sheet or react-native-svg.
   liteMode: true,

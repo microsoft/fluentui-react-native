@@ -3,7 +3,7 @@
 // This lets external agents drive the running on-device Storybook app:
 //   - WebSocket channel (ws://<host>:<port>/): select the current story, read/update control
 //     args, and receive Storybook channel events. The on-device app connects to this server
-//     (configured via getStorybookUI({ enableWebsockets: true, host, port }) in .rnstorybook/index.tsx).
+//     (configured via getStorybookUI({ enableWebsockets: true, host, port }) in src/StorybookApp.tsx).
 //   - MCP endpoint (http://<host>:<port>/mcp): an MCP server for AI agents to query story /
 //     component documentation and metadata (enabled via experimental_mcp).
 //
@@ -21,7 +21,7 @@ const port = Number(process.env.STORYBOOK_WS_PORT) || 7007;
 createChannelServer({
   host,
   port,
-  configPath: path.resolve(__dirname, '.rnstorybook'),
+  configPath: path.resolve(__dirname, 'src'),
   websockets: true,
   experimental_mcp: true,
   keepNodeProcessAlive: true,
