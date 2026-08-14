@@ -1,24 +1,25 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { act } from 'react';
-import { AccessibilityInfo, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 
 import { useFlexTokens } from '@fluentui-react-native/design';
+import { useReducedMotion } from '@fluentui-react-native/framework-base';
 
 import { Skeleton } from './skeleton';
 
-describe('Skeleton', () => {
-  let handleReducedMotionChange: (value: boolean) => void;
+jest.mock('@fluentui-react-native/framework-base', () => ({
+  ...jest.requireActual('@fluentui-react-native/framework-base'),
+  useReducedMotion: jest.fn(),
+}));
 
+const mockUseReducedMotion = jest.mocked(useReducedMotion);
+
+describe('Skeleton', () => {
   beforeEach(() => {
-    jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
-    jest.spyOn(AccessibilityInfo, 'addEventListener').mockImplementation((eventName, handler) => {
-      expect(eventName).toBe('reduceMotionChanged');
-      handleReducedMotionChange = handler as unknown as (value: boolean) => void;
-      return { remove: jest.fn() } as never;
-    });
+    mockUseReducedMotion.mockReturnValue(false);
   });
 
   afterEach(() => {
@@ -72,17 +73,12 @@ describe('Skeleton', () => {
   });
 
   it('hides the shimmer when reduce motion is enabled', async () => {
+    mockUseReducedMotion.mockReturnValue(true);
     const component = await renderSkeleton({ style: { height: 16, width: 120 } });
     const root = getRoot(component);
 
     await act(async () => {
       await fireEvent(root, 'layout', { nativeEvent: { layout: { height: 16, width: 120, x: 0, y: 0 } } });
-    });
-
-    expect(component.getByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeOnTheScreen();
-
-    act(() => {
-      handleReducedMotionChange(true);
     });
 
     expect(component.queryByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeNull();
