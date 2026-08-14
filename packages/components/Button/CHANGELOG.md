@@ -1,5 +1,30 @@
 # Change Log - @fluentui-react-native/button
 
+## 0.40.7
+
+### Patch Changes
+
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [1157793]
+- Updated dependencies [778d82b]
+- Updated dependencies [ea738f0]
+  - @fluentui-react-native/design@0.3.0
+  - @fluentui-react-native/framework-base@0.6.0
+  - @fluentui-react-native/use-styling@0.16.1
+  - @uifabricshared/foundation-settings@0.16.7
+  - @uifabricshared/foundation-compose@1.16.7
+  - @fluentui-react-native/framework@0.17.1
+  - @fluentui-react-native/text@0.25.7
+  - @fluentui-react-native/experimental-shadow@0.7.7
+  - @fluentui-react-native/tokens@0.24.7
+  - @fluentui-react-native/icon@0.22.7
+  - @uifabricshared/foundation-composable@0.15.1
+  - @fluentui-react-native/experimental-activity-indicator@0.11.7
+  - @fluentui-react-native/interactive-hooks@0.28.7
+  - @fluentui-react-native/pressable@0.13.7
+
 ## 0.40.6
 
 ### Patch Changes

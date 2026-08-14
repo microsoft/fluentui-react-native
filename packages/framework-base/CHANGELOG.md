@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.6.0
+
+### Minor Changes
+
+- 778d82b: Add shared component primitives, styling utilities, state hooks, accessibility diagnostics, and owned native-root prop types.
+
+### Patch Changes
+
+- 3abc13a: Updated packages with agent instructions and type fixes
+- 778d82b: Consolidation of shared utilities, dependency profile updates, and more generated components
+
 ## 0.5.0
 
 ### Minor Changes

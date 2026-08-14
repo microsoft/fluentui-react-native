@@ -1,5 +1,25 @@
 # Change Log - @uifabricshared/foundation-compose
 
+## 1.16.7
+
+### Patch Changes
+
+- 3abc13a: Updated packages with agent instructions and type fixes
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [1157793]
+- Updated dependencies [778d82b]
+- Updated dependencies [ea738f0]
+  - @fluentui-react-native/design@0.3.0
+  - @fluentui-react-native/framework-base@0.6.0
+  - @uifabricshared/foundation-settings@0.16.7
+  - @uifabricshared/themed-settings@0.13.7
+  - @uifabricshared/theming-ramp@0.21.7
+  - @fluentui-react-native/default-theme@0.27.7
+  - @uifabricshared/foundation-composable@0.15.1
+  - @uifabricshared/foundation-tokens@0.16.7
+
 ## 1.16.6
 
 ### Patch Changes

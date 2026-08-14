@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/overflow
 
+## 0.5.1
+
+### Patch Changes
+
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+  - @fluentui-react-native/framework-base@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes

@@ -1,5 +1,21 @@
 # Change Log - @fluentui-react-native/drawer
 
+## 0.5.7
+
+### Patch Changes
+
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [1157793]
+- Updated dependencies [778d82b]
+- Updated dependencies [ea738f0]
+  - @fluentui-react-native/design@0.3.0
+  - @fluentui-react-native/framework-base@0.6.0
+  - @fluentui-react-native/use-styling@0.16.1
+  - @fluentui-react-native/framework@0.17.1
+  - @fluentui-react-native/interactive-hooks@0.28.7
+
 ## 0.5.6
 
 ### Patch Changes

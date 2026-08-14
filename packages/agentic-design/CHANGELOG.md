@@ -1,5 +1,23 @@
 # @fluentui-react-native/design
 
+## 0.3.0
+
+### Minor Changes
+
+- 3abc13a: Group Flex tokens by category and remove category prefixes from individual token names
+- 778d82b: Add shared component primitives, styling utilities, state hooks, accessibility diagnostics, and owned native-root prop types.
+- 1157793: Export shared state-based styling utilities from the design package styling submodule
+
+### Patch Changes
+
+- 3abc13a: Updated packages with agent instructions and type fixes
+- 778d82b: Consolidation of shared utilities, dependency profile updates, and more generated components
+- ea738f0: Align agentic Button corner radii with desktop V1 values and add context-backed FURN Theme-to-Flex token conversion
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+  - @fluentui-react-native/framework-base@0.6.0
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/theming-utils
 
+## 0.27.7
+
+### Patch Changes
+
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [1157793]
+- Updated dependencies [778d82b]
+- Updated dependencies [ea738f0]
+  - @fluentui-react-native/design@0.3.0
+  - @fluentui-react-native/tokens@0.24.7
+
 ## 0.27.6
 
 ### Patch Changes

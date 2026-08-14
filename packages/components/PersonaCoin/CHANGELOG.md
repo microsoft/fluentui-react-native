@@ -1,5 +1,24 @@
 # Change Log - @fluentui-react-native/persona-coin
 
+## 0.17.1
+
+### Patch Changes
+
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [1157793]
+- Updated dependencies [778d82b]
+- Updated dependencies [ea738f0]
+  - @fluentui-react-native/design@0.3.0
+  - @fluentui-react-native/framework-base@0.6.0
+  - @uifabricshared/foundation-settings@0.16.7
+  - @uifabricshared/foundation-compose@1.16.7
+  - @fluentui-react-native/framework@0.17.1
+  - @fluentui-react-native/tokens@0.24.7
+  - @uifabricshared/foundation-composable@0.15.1
+  - @uifabricshared/foundation-tokens@0.16.7
+
 ## 0.17.0
 
 ### Minor Changes

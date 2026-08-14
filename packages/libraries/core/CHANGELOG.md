@@ -1,5 +1,33 @@
 # Change Log - @fluentui/react-native
 
+## 0.44.0
+
+### Minor Changes
+
+- 0f2b987: Reauthor Callout as an unstyled native primitive with modern props and command handle types
+
+### Patch Changes
+
+- Updated dependencies [a99b3a8]
+- Updated dependencies [0f2b987]
+- Updated dependencies [0f2b987]
+  - @fluentui-react-native/callout@0.29.0
+  - @fluentui-react-native/contextual-menu@0.25.7
+  - @fluentui-react-native/button@0.40.7
+  - @fluentui-react-native/checkbox@0.24.7
+  - @fluentui-react-native/persona-coin@0.17.1
+  - @fluentui-react-native/radio-group@0.22.7
+  - @fluentui-react-native/separator@0.19.7
+  - @fluentui-react-native/tablist@0.8.7
+  - @fluentui-react-native/text@0.25.7
+  - @fluentui-react-native/link@0.24.7
+  - @fluentui-react-native/menu-button@0.15.1
+  - @fluentui-react-native/persona@0.18.1
+  - @fluentui-react-native/interactive-hooks@0.28.7
+  - @fluentui-react-native/focus-trap-zone@0.14.1
+  - @fluentui-react-native/focus-zone@0.23.1
+  - @fluentui-react-native/pressable@0.13.7
+
 ## 0.43.6
 
 ### Patch Changes
