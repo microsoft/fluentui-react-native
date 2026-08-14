@@ -54,6 +54,7 @@
 
   "search.exclude": {
     "**/node_modules": true,
+    "**/.yarn": true,
     "**/lib": true,
     "**/lib-amd": true,
     "**/lib-commonjs": true,

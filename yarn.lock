@@ -3201,7 +3201,7 @@ __metadata:
     react-native-svg: "npm:>=15.4.0 <15.13.0"
     react-native-windows: "npm:^0.81.0"
     semver: "npm:^7.7.3"
-    workspace-tools: "npm:^0.26.3"
+    workspace-tools: "npm:^0.42.0"
   peerDependencies:
     "@fluentui-react-native/adapters": "*"
     "@fluentui-react-native/android-theme": "*"
@@ -4824,6 +4824,7 @@ __metadata:
     "@babel/runtime": "catalog:"
     "@changesets/changelog-github": "npm:^0.5.0"
     "@changesets/cli": "npm:^2.30.0"
+    "@microsoft/esrp-npm-release": "npm:^0.1.1"
     "@rnx-kit/align-deps": "catalog:"
     "@rnx-kit/lint-lockfile": "catalog:"
     "@yarnpkg/types": "npm:^4.0.1"
@@ -4886,10 +4887,11 @@ __metadata:
     micromatch: "npm:^4.0.8"
     oxlint: "npm:1.76.0"
     oxlint-tsgolint: "npm:^0.17.4"
+    p-graph: "npm:^3.0.0-alpha.4"
     react: "npm:19.1.4"
     react-native: "npm:^0.81.0"
     typescript: "npm:7.0.2"
-    workspace-tools: "npm:^0.26.3"
+    workspace-tools: "npm:^0.42.0"
     zx: "npm:^8.2.4"
   bin:
     fluentui-scripts: ./src/cli.ts
@@ -7045,6 +7047,15 @@ __metadata:
   peerDependencies:
     eslint: ^9
   checksum: 10c0/01cf9a7f590f13b3e403e97128d891cadc5d3654b90a0a1d050d4cd4008d11f1e56deda5d8cdbdf84f2d6904403640f690e794cc9bca7d91ab8b630b57342a2e
+  languageName: node
+  linkType: hard
+
+"@microsoft/esrp-npm-release@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@microsoft/esrp-npm-release@npm:0.1.1"
+  bin:
+    esrp-npm-release: bin/esrp-npm-release.js
+  checksum: 10c0/3800aa43b84e787325e7752207065887b20adabb7fbfa8a5443ea902bde57551d34742fa045b4627f91353e2ad29ba032c02beb4080a4d77554f1aaa61ebddb7
   languageName: node
   linkType: hard
 
@@ -10257,6 +10268,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/fs-extra@npm:*":
+  version: 11.0.4
+  resolution: "@types/fs-extra@npm:11.0.4"
+  dependencies:
+    "@types/jsonfile": "npm:*"
+    "@types/node": "npm:*"
+  checksum: 10c0/9e34f9b24ea464f3c0b18c3f8a82aefc36dc524cc720fc2b886e5465abc66486ff4e439ea3fb2c0acebf91f6d3f74e514f9983b1f02d4243706bdbb7511796ad
+  languageName: node
+  linkType: hard
+
 "@types/graceful-fs@npm:^4.1.3":
   version: 4.1.6
   resolution: "@types/graceful-fs@npm:4.1.6"
@@ -10332,6 +10353,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jsonfile@npm:*":
+  version: 6.1.4
+  resolution: "@types/jsonfile@npm:6.1.4"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/b12d068b021e4078f6ac4441353965769be87acf15326173e2aea9f3bf8ead41bd0ad29421df5bbeb0123ec3fc02eb0a734481d52903704a1454a1845896b9eb
+  languageName: node
+  linkType: hard
+
 "@types/micromatch@npm:^4.0.9":
   version: 4.0.9
   resolution: "@types/micromatch@npm:4.0.9"
@@ -10393,6 +10423,13 @@ __metadata:
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
   checksum: 10c0/1d3012ab2fcdad1ba313e1d065b737578f6506c8958e2a7a5bdbdef517c7e930796cb1599ee067d5dee942fb3a764df64b5eef7e9ae98548d776e86dcffba985
+  languageName: node
+  linkType: hard
+
+"@types/parse-path@npm:^7.0.0":
+  version: 7.0.3
+  resolution: "@types/parse-path@npm:7.0.3"
+  checksum: 10c0/8344b6c7acba4e4e5a8d542f56f53c297685fa92f9b0c085d7532cc7e1b661432cecfc1c75c76cdb0d161c95679b6ecfe0573d9fef7c836962aacf604150a984
   languageName: node
   linkType: hard
 
@@ -15469,7 +15506,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.2":
+"fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.2, fast-glob@npm:^3.3.3":
   version: 3.3.3
   resolution: "fast-glob@npm:3.3.3"
   dependencies:
@@ -16099,22 +16136,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"git-up@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "git-up@npm:7.0.0"
+"git-up@npm:^8.1.0":
+  version: 8.1.1
+  resolution: "git-up@npm:8.1.1"
   dependencies:
     is-ssh: "npm:^1.4.0"
-    parse-url: "npm:^8.1.0"
-  checksum: 10c0/a3fa02e1a63c7c824b5ebbf23f4a9a6b34dd80031114c5dd8adb7ef53493642e39d3d80dfef4025a452128400c35c2c138d20a0f6ae5d7d7ef70d9ba13083d34
+    parse-url: "npm:^9.2.0"
+  checksum: 10c0/2cc4461d8565a3f7a1ecd3d262a58ddb8df0a67f7f7d4915df2913c460b2e88ae570a6ea810700a6d22fb3b9e4bea8dd10a8eb469900ddc12e35c62208608c03
   languageName: node
   linkType: hard
 
-"git-url-parse@npm:^13.0.0":
-  version: 13.1.0
-  resolution: "git-url-parse@npm:13.1.0"
+"git-url-parse@npm:^16.1.0":
+  version: 16.1.0
+  resolution: "git-url-parse@npm:16.1.0"
   dependencies:
-    git-up: "npm:^7.0.0"
-  checksum: 10c0/2ef6126c42d999e240dbcdf1e96172cf7a2044ffa1ef78a518acf823df9bbe2a1ea9e6b443d42948e3c581e4d899559afc4c1de024b3eaa8eb6a4229f73285aa
+    git-up: "npm:^8.1.0"
+  checksum: 10c0/b8f5ebcbd5b2baf9f1bb77a217376f0247c47fe1d42811ccaac3015768eebb0759a59051f758e50e70adf5c67ae059d1975bf6b750164f36bfd39138d11b940b
   languageName: node
   linkType: hard
 
@@ -21105,6 +21142,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"p-graph@npm:^3.0.0-alpha.4":
+  version: 3.0.0-alpha.4
+  resolution: "p-graph@npm:3.0.0-alpha.4"
+  checksum: 10c0/84452847e6cb761aedcfe1d2d02faff2fd8e9155807e97e7beb90006d2e14e46c2f55c51b3578198a1d28b9c3e576bef9980a063e47b5ff681655d1433c6a03f
+  languageName: node
+  linkType: hard
+
 "p-is-promise@npm:^2.0.0, p-is-promise@npm:^2.1.0":
   version: 2.1.0
   resolution: "p-is-promise@npm:2.1.0"
@@ -21359,12 +21403,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-url@npm:^8.1.0":
-  version: 8.1.0
-  resolution: "parse-url@npm:8.1.0"
+"parse-url@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "parse-url@npm:9.2.0"
   dependencies:
+    "@types/parse-path": "npm:^7.0.0"
     parse-path: "npm:^7.0.0"
-  checksum: 10c0/68b95afdf4bbf72e57c7ab66f8757c935fff888f7e2b0f1e06098b4faa19e06b6b743bddaed5bc8df4f0c2de6fc475355d787373b2fdd40092be9e4e4b996648
+  checksum: 10c0/b8f56cdb01e76616255dff82544f4b5ab4378f6f4bac8604ed6fde03a75b0f71c547d92688386d8f22f38fad3c928c075abf69458677c6185da76c841bfd7a93
   languageName: node
   linkType: hard
 
@@ -25392,18 +25437,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"workspace-tools@npm:^0.26.3":
-  version: 0.26.6
-  resolution: "workspace-tools@npm:0.26.6"
+"workspace-tools@npm:^0.42.0":
+  version: 0.42.0
+  resolution: "workspace-tools@npm:0.42.0"
   dependencies:
     "@yarnpkg/lockfile": "npm:^1.1.0"
-    find-up: "npm:^5.0.0"
-    git-url-parse: "npm:^13.0.0"
-    globby: "npm:^11.0.0"
+    fast-glob: "npm:^3.3.3"
+    git-url-parse: "npm:^16.1.0"
     jju: "npm:^1.4.0"
-    js-yaml: "npm:^4.1.0"
-    micromatch: "npm:^4.0.0"
-  checksum: 10c0/16ac20390e6c19393432367ad4a94d065293df677c440b202ee8e31b718aa28403fc1b80881505231570153ba493f3b0dcfbbb4efa3b5b72e00367417b0d029e
+    js-yaml: "npm:^4.2.0"
+    micromatch: "npm:^4.0.8"
+  checksum: 10c0/a39edf688de49f3e183ab57ffd0b0740350048b2c5fc656bfee93ec9c438bd90b07b98033e52709f8d92b7eef65fc5c8c70632e47f972601650706819db3d114
   languageName: node
   linkType: hard
 

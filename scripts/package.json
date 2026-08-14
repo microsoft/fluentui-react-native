@@ -85,10 +85,11 @@
     "micromatch": "^4.0.8",
     "oxlint": "1.76.0",
     "oxlint-tsgolint": "^0.17.4",
+    "p-graph": "^3.0.0-alpha.4",
     "react": "19.1.4",
     "react-native": "^0.81.0",
     "typescript": "7.0.2",
-    "workspace-tools": "^0.26.3",
+    "workspace-tools": "^0.42.0",
     "zx": "^8.2.4"
   },
   "bundlesize": [

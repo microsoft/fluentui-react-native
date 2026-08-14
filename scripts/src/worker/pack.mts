@@ -25,7 +25,7 @@ export const run: WorkerRunnerFunction = async ({ target }) => {
 
   // Resolve relative to cwd (lage runs from repo root, so this resolves correctly)
   const stagingDir = resolve(outputDir);
-  await fs.mkdirp(stagingDir);
+  fs.mkdirpSync(stagingDir);
 
   // Skip if this version is already published
   const result = await $`npm view ${pkg.name}@${pkg.version} version`.nothrow().quiet();
@@ -38,6 +38,10 @@ export const run: WorkerRunnerFunction = async ({ target }) => {
   const safeName = (pkg.name as string).replace(/@/g, '').replace(/\//g, '-');
   const tgzFilename = `${safeName}-${pkg.version}.tgz`;
   const outPath = join(stagingDir, tgzFilename);
+
+  // Synchronously save the package to the list
+  const packagesFile = join(stagingDir, 'packages.txt');
+  fs.appendFileSync(packagesFile, `${pkg.name} ${tgzFilename}\n`);
 
   await $({ cwd: target.cwd, verbose: true })`yarn pack --out ${outPath}`;
 };

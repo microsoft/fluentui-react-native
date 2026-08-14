@@ -20,6 +20,20 @@ variables:
   - group: InfoSec-SecurityResults
   - name: tags
     value: production,externalfacing
+  # Use the private registry mirror due to network restrictions (this is added to .npmrc in a step below)
+  - name: REGISTRY_URL
+    value: https://pkgs.dev.azure.com/office/_packaging/Office/npm/registry/
+  - name: YARN_NPM_REGISTRY_SERVER
+    value: $(REGISTRY_URL)
+  - name: YARN_NPM_ALWAYS_AUTH
+    value: 1
+  # Enable yarn-plugin-npmrc
+  - name: YARN_NPMRC_AUTH_ENABLED
+    value: 1
+  - name: packagesArtifactName
+    value: packed-tarballs
+  - name: releaseToolArtifactName
+    value: release-api-tool
 
 resources:
   repositories:
@@ -35,6 +49,8 @@ extends:
       name: Azure-Pipelines-1ESPT-ExDShared
       image: windows-latest
       os: windows
+    settings:
+      networkIsolationPolicy: AzureActiveDirectory,AzureKeyVault,AzureResourceManager,AzureStorage,GitHub
     sdl:
       eslint:
         configuration: 'recommended'
@@ -54,19 +70,33 @@ extends:
               name: Azure-Pipelines-1ESPT-ExDShared
               image: ubuntu-latest
               os: linux
+            variables:
+              packagesArtifactPath: $(System.DefaultWorkingDirectory)/_packed/layers
+              releaseToolArtifactPath: $(Build.StagingDirectory)/${{ variables.releaseToolArtifactName }}
             templateContext:
               outputs:
                 - output: pipelineArtifact
-                  targetPath: $(System.DefaultWorkingDirectory)/_packed
-                  artifactName: packed-tarballs
+                  targetPath: $(packagesArtifactPath)
+                  artifactName: ${{ variables.packagesArtifactName }}
+                - output: pipelineArtifact
+                  targetPath: $(releaseToolArtifactPath)
+                  artifactName: ${{ variables.releaseToolArtifactName }}
             steps:
               - task: UseNode@1
                 inputs:
                   version: '22.x'
                 displayName: 'Use Node.js 22.x'
 
+              - script: echo 'registry=$(REGISTRY_URL)' >> .npmrc
+                displayName: 'Configure npm registry'
+
+              - task: npmAuthenticate@0
+                inputs:
+                  workingFile: $(Build.SourcesDirectory)/.npmrc
+                displayName: 'npm authenticate'
+
               - script: |
-                  yarn
+                  yarn --immutable
                 displayName: 'yarn install'
 
               - script: |
@@ -74,17 +104,23 @@ extends:
                 displayName: 'yarn buildci [build + test + lint]'
 
               - script: |
-                  yarn lage pack --verbose --grouped
-                displayName: 'Pack all public packages'
+                  yarn lage pack --verbose --grouped && yarn organize-packs
+                displayName: 'Pack public packages (new versions only)'
 
               - script: |
-                  ls -la $(System.DefaultWorkingDirectory)/_packed/
+                  ls -laR '$(packagesArtifactPath)'
                 displayName: 'List packed tarballs'
+
+              - script: |
+                  mkdir -p '$(releaseToolArtifactPath)'
+                  cp node_modules/@microsoft/esrp-npm-release/dist/index.mjs '$(releaseToolArtifactPath)'
+                displayName: 'Copy ESRP release tool'
 
       - stage: Publish
         displayName: Publish to NPM
         dependsOn: Build
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), ne('${{ parameters.skipNpmPublish }}', 'true'))
+        # TODO uncomment
+        # condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'), ne('${{ parameters.skipNpmPublish }}', 'true'))
         jobs:
           - job: PublishPackages
             displayName: Publish NPM Packages
@@ -92,58 +128,74 @@ extends:
               name: Azure-Pipelines-1ESPT-ExDShared
               image: ubuntu-latest
               os: linux
+            variables:
+              packagesArtifactPath: $(Agent.BuildDirectory)/${{ variables.packagesArtifactName }}
+              releaseToolArtifactPath: $(Agent.BuildDirectory)/${{ variables.releaseToolArtifactName }}
+            templateContext:
+              type: releaseJob
+              isProduction: true
+              inputs:
+                - input: pipelineArtifact
+                  artifactName: ${{ variables.packagesArtifactName }}
+                  targetPath: $(packagesArtifactPath)
+                - input: pipelineArtifact
+                  artifactName: ${{ variables.releaseToolArtifactName }}
+                  targetPath: $(releaseToolArtifactPath)
             steps:
               - task: UseNode@1
                 inputs:
                   version: '22.x'
                 displayName: 'Use Node.js 22.x'
 
-              - task: DownloadPipelineArtifact@2
-                inputs:
-                  artifactName: packed-tarballs
-                  targetPath: $(System.DefaultWorkingDirectory)/_packed
-                displayName: 'Download packed tarballs'
-
               - script: |
                   echo "Downloaded tarballs:"
-                  ls -la $(System.DefaultWorkingDirectory)/_packed/
-                  if ls $(System.DefaultWorkingDirectory)/_packed/*.tgz > /dev/null 2>&1; then
-                    echo "##vso[task.setvariable variable=hasTarballs]true"
+                  ls -laR '$(packagesArtifactPath)'
+                  if ls "$(packagesArtifactPath)/*/*.tgz" > /dev/null 2>&1; then
+                    echo "##vso[task.setvariable variable=hasTarballs]yes"
                   else
                     echo "No tarballs found — nothing to publish."
-                    echo "##vso[task.setvariable variable=hasTarballs]false"
+                    echo "##vso[task.setvariable variable=hasTarballs]no"
                   fi
                 displayName: 'Check downloaded tarballs'
 
-              - script: |
-                  yarn
-                displayName: 'yarn install'
-                condition: eq(variables['hasTarballs'], 'true')
+              - task: AzureCLI@2
+                displayName: 'Get credentials for staging blob storage'
+                condition: eq(variables['hasTarballs'], 'yes')
+                inputs:
+                  azureSubscription: ogx-esrp-infra-bot
+                  scriptType: bash
+                  scriptLocation: inlineScript
+                  addSpnToEnvironment: true
+                  inlineScript: |
+                    echo "##vso[task.setvariable variable=STAGING_TENANT_ID]$tenantId"
+                    echo "##vso[task.setvariable variable=STAGING_CLIENT_ID]$servicePrincipalId"
+                    echo "##vso[task.setvariable variable=STAGING_ID_TOKEN;issecret=true]$idToken"
 
-              - script: |
-                  yarn config set npmPublishAccess public
-                  yarn config set npmPublishRegistry "https://registry.npmjs.org"
-                  yarn config set npmAuthToken $(npmAuth)
-                  npm config set //registry.npmjs.org/:_authToken $(npmAuth)
-                displayName: 'Configure npm publishing auth'
-                condition: eq(variables['hasTarballs'], 'true')
+              - task: AzureKeyVault@2
+                displayName: 'Get ESRP certificates from Key Vault'
+                condition: eq(variables['hasTarballs'], 'yes')
+                inputs:
+                  azureSubscription: ESRP-JSHost3
+                  KeyVaultName: OGX-JSHost-KV
+                  SecretsFilter: OGX-JSHost-Auth4,OGX-JSHost-Sign3
 
-              - script: |
-                  # https://github.com/changesets/changesets/issues/432
-                  # We can't use `changeset publish` because it doesn't support workspaces, so we have to publish each package individually
-                  yarn lage publish --verbose --grouped --reporter azureDevops
-                displayName: 'Publish NPM Packages'
-                condition: eq(variables['hasTarballs'], 'true')
-
-              - script: |
-                  yarn config unset npmPublishAccess
-                  yarn config unset npmAuthToken
-                  yarn config unset npmPublishRegistry
-                  npm config delete //registry.npmjs.org/:_authToken
-                displayName: 'Cleanup npm publishing auth'
-                condition: always()
-
-              - script: |
-                  git clean -dfx
-                displayName: 'Clean up working directory'
-                condition: always()
+              # TODO uncomment
+              # - script: node '$(releaseToolArtifactPath)/index.mjs'
+              #   displayName: 'Publish packages using ESRP Release API'
+              #   condition: eq(variables['hasTarballs'], 'yes')
+              #   retryCountOnTaskFailure: 3
+              #   env:
+              #     PACKED_PACKAGES_PATH: $(packagesArtifactPath)
+              #     ESRP_PRODUCT_NAME: fluentui-react-native
+              #     ESRP_NPM_TAG: latest
+              #     # TODO should be somebody else
+              #     ESRP_USER: elcraig@microsoft.com
+              #     ESRP_APPROVERS: dannyvv@microsoft.com
+              #     ESRP_TENANT_ID: cdc5aeea-15c5-4db6-b079-fcadd2505dc2
+              #     ESRP_CLIENT_ID: 0a35e01f-eadf-420a-a2bf-def002ba898d
+              #     ESRP_AUTH_CERT: $(OGX-JSHost-Auth4)
+              #     ESRP_REQUEST_SIGNING_CERT: $(OGX-JSHost-Sign3)
+              #     STAGING_STORAGE_ACCOUNT_NAME: ogxesrptempstorage
+              #     STAGING_CLIENT_ID: $(STAGING_CLIENT_ID)
+              #     STAGING_TENANT_ID: $(STAGING_TENANT_ID)
+              #     STAGING_ID_TOKEN: $(STAGING_ID_TOKEN)

@@ -117,6 +117,9 @@ apps/*/.vscode/.react/
 !**/.yarn/sdks
 !**/.yarn/versions
 
+# May contain credentials
+.npmrc
+
 # Ccache
 .ccache
 
