@@ -1,8 +1,7 @@
-import * as React from 'react';
 import type { ButtonProps, ButtonState } from './button.types';
-import { usePressableState, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, usePressableState, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import { Icon } from '../../primitives/icon/icon';
 
 /**
@@ -32,11 +31,13 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   const hasSelectedIcon = selectedIconProp !== undefined && selectedIconProp !== null;
   const iconOnly = !hasContent && (hasIcon || hasSelectedIcon);
   const isToggleButton = selected !== undefined;
-  React.useEffect(() => {
-    if (__DEV__ && iconOnly && !rest.accessibilityLabel) {
-      console.warn('Button: icon-only buttons require an accessibilityLabel that describes the action.');
-    }
-  }, [iconOnly, rest.accessibilityLabel]);
+  useAccessibilityLabelWarning({
+    accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
+    accessibilityLabelledBy: rest.accessibilityLabelledBy ?? rest['aria-labelledby'],
+    componentName: 'Button',
+    requireLabel: iconOnly,
+    warning: 'Button: icon-only buttons require an accessibilityLabel that describes the action.',
+  });
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
@@ -55,7 +56,6 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
   const content = useOptionalSlot(Text, contentProp);
   const contentHidden = useOptionalSlot(Text, isToggleButton ? contentProp : null);
-  const contentContainer = useOptionalSlot(View, isToggleButton && hasContent ? {} : null);
 
   return {
     root,
@@ -63,7 +63,6 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     selectedIcon,
     content,
     contentHidden,
-    contentContainer,
     disabled,
     appearance: appearance ?? 'secondary',
     size,

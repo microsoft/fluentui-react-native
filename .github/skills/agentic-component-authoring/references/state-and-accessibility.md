@@ -81,6 +81,9 @@ Return:
 Keep property ordering intentional so later spreads cannot silently replace component-owned values. If two state sources
 can share a key, assign the final owned value explicitly after spreading.
 
+Export the hook from the package root as `use<Component>_unstable`, together with its resolved `<Component>State` type,
+so another component can extend the state stage without importing package internals.
+
 ## Platform behavior
 
 Keep platform-specific native imports out of shared files when React Native forks expose incompatible types. Put fork

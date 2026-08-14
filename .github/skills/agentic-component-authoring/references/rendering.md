@@ -50,7 +50,7 @@ let consumers bypass slot order.
 ```ts
 export const Component = (props: ComponentProps) => {
   const state = useComponent_unstable(props);
-  useApplyStyles_unstable(state);
+  useComponentStyles_unstable(state);
   return renderComponent_unstable(state);
 };
 ```
@@ -59,8 +59,10 @@ Set `displayName` for diagnostics and Storybook metadata. Keep unstable stage fu
 future composition work can identify them. Do not wrap the component in memoization or another boundary without measured
 need and repository precedent.
 
-After assembly, update the package public surface according to the
-[types and slots export rules](types-and-slots.md#exports).
+After assembly, export `use<Component>_unstable`, `use<Component>Styles_unstable`, and
+`render<Component>_unstable` from the package root together with `<Component>State`, according to the
+[types and slots export rules](types-and-slots.md#exports). These stages are intentionally unstable but public so other
+components can reuse and extend the pipeline without importing internal paths.
 
 ## Review checklist
 
@@ -69,4 +71,4 @@ After assembly, update the package public surface according to the
 - Optional and replacement slots fall back intentionally.
 - State-only structure does not leak into public props.
 - The assembly file is a readable state -> styles -> render pipeline.
-- `displayName` is present and the public surface follows the types and slots export rules.
+- `displayName` is present and all three composition stages are exported under component-qualified unstable names.

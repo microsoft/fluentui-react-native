@@ -31,6 +31,8 @@ updates:
     schedule:
       interval: daily
       time: '13:00'
+    cooldown:
+      default-days: 7
     labels:
       - 'Type: Dependencies'
     versioning-strategy: lockfile-only

@@ -1,5 +1,12 @@
-import type { Pressable, PressableProps, StyleProp, Text, View, ViewStyle } from 'react-native';
-import type { Slot, OptionalSlot, ComponentProps, ComponentState, PressableState } from '@fluentui-react-native/framework-base';
+import type { Pressable, PressableProps, StyleProp, Text, ViewStyle } from 'react-native';
+import type {
+  Slot,
+  OptionalSlot,
+  OwnedRootProps,
+  ComponentProps,
+  ComponentState,
+  PressableState,
+} from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
 
@@ -29,7 +36,6 @@ export type ButtonSlots = {
 };
 
 type ButtonStateSlots = ButtonSlots & {
-  contentContainer: OptionalSlot<typeof View>;
   contentHidden: OptionalSlot<typeof Text>;
 };
 
@@ -69,9 +75,7 @@ export type ButtonStateProps = {
  * Props that are exposed from the underlying Pressable component at the top level. A button controls its
  * own children and resolves styles from tokens, so those props are exposed separately.
  */
-export type ButtonExposedPressableProps = Omit<PressableProps, 'children' | 'style'> & {
-  style?: StyleProp<ViewStyle>;
-};
+export type ButtonExposedPressableProps = OwnedRootProps<PressableProps>;
 
 /**
  * Props for the Button component, including state props, slot props, and exposed Pressable props.

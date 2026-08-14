@@ -16,18 +16,23 @@ authoring rule in one always-loaded instruction file.
   [higher-order component instructions](../../../packages/agentic-components/src/components/AGENTS.md).
 - Primitive components live in `src/primitives`. Read the
   [primitive instructions](../../../packages/agentic-components/src/primitives/AGENTS.md).
+- If the change spans multiple components, repeated helpers, or shared dependency boundaries, read the
+  [package-wide optimization guidance](../agentic-component-optimization/SKILL.md) and
+  [`packages/agentic-components/src/AGENTS.md`](../../../packages/agentic-components/src/AGENTS.md). Do not run a
+  whole-package audit for a tiny single-component edit.
 - Work on the Storybook application, native projects, bundling, or CocoaPods belongs to the
   [agentic Storybook development skill](../agentic-storybook-development/SKILL.md), not this component workflow.
 
 ## Load focused references
 
-| Work                                                                                | Reference                                                        |
-| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| Public props, slots, state types, native prop exposure, or exports                  | [Types and slots](references/types-and-slots.md)                 |
-| Defaults, derived state, interaction hooks, accessibility, or slot construction     | [State and accessibility](references/state-and-accessibility.md) |
-| Tokens, style factories, theme caching, state precedence, or slot style application | [Styles and tokens](references/styles-and-tokens.md)             |
-| Pure slot rendering, component assembly, or display names                           | [Rendering and assembly](references/rendering.md)                |
-| Runtime tests, type tests, snapshots, Storybook stories, or validation              | [Tests and stories](references/tests-and-stories.md)             |
+| Work                                                                                | Reference                                                          |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Public props, slots, state types, native prop exposure, or exports                  | [Types and slots](references/types-and-slots.md)                   |
+| Defaults, derived state, interaction hooks, accessibility, or slot construction     | [State and accessibility](references/state-and-accessibility.md)   |
+| Tokens, style factories, theme caching, state precedence, or slot style application | [Styles and tokens](references/styles-and-tokens.md)               |
+| Pure slot rendering, component assembly, or display names                           | [Rendering and assembly](references/rendering.md)                  |
+| Runtime tests, type tests, snapshots, Storybook stories, or validation              | [Tests and stories](references/tests-and-stories.md)               |
+| Cross-component duplication, shared helper extraction, or dependency hygiene        | [Package optimization](../agentic-component-optimization/SKILL.md) |
 
 A new higher-order component normally needs every reference. A focused fix should load only the affected reference and
 its immediate neighbors. Keep the component's colocated `SPEC.md` and companion files authoritative for its contract.
@@ -35,7 +40,8 @@ its immediate neighbors. Keep the component's colocated `SPEC.md` and companion 
 ## Workflow
 
 1. Read the repository and package instructions, the component `SPEC.md`, and every companion file referenced by the
-   spec.
+   spec. Use the package-wide optimization guidance only when the change clearly involves repeated patterns or shared
+   dependency boundaries.
 2. Inspect the closest canonical implementation. Use
    [`components/button`](../../../packages/agentic-components/src/components/button) for a styled higher-order component
    and [`primitives/icon`](../../../packages/agentic-components/src/primitives/icon) for a direct primitive.
