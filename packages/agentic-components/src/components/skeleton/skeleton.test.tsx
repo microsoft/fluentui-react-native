@@ -10,11 +10,15 @@ import { useFlexTokens } from '@fluentui-react-native/design';
 import { Skeleton } from './skeleton';
 
 describe('Skeleton', () => {
-  let reduceMotionSpy: jest.SpyInstance;
+  let handleReducedMotionChange: (value: boolean) => void;
 
   beforeEach(() => {
-    reduceMotionSpy = jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
-    jest.spyOn(AccessibilityInfo, 'addEventListener').mockReturnValue({ remove: jest.fn() } as never);
+    jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
+    jest.spyOn(AccessibilityInfo, 'addEventListener').mockImplementation((eventName, handler) => {
+      expect(eventName).toBe('reduceMotionChanged');
+      handleReducedMotionChange = handler as unknown as (value: boolean) => void;
+      return { remove: jest.fn() } as never;
+    });
   });
 
   afterEach(() => {
@@ -68,12 +72,6 @@ describe('Skeleton', () => {
   });
 
   it('hides the shimmer when reduce motion is enabled', async () => {
-    let resolveReducedMotion!: (value: boolean) => void;
-    reduceMotionSpy.mockReturnValue(
-      new Promise<boolean>((resolve) => {
-        resolveReducedMotion = resolve;
-      }),
-    );
     const component = await renderSkeleton({ style: { height: 16, width: 120 } });
     const root = getRoot(component);
 
@@ -83,8 +81,8 @@ describe('Skeleton', () => {
 
     expect(component.getByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeOnTheScreen();
 
-    await act(async () => {
-      resolveReducedMotion(true);
+    act(() => {
+      handleReducedMotionChange(true);
     });
 
     expect(component.queryByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeNull();
