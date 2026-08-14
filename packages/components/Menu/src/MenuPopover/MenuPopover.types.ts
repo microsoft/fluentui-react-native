@@ -21,9 +21,10 @@ export type MenuPopoverTokens = Omit<ICalloutTokens, 'anchorRect' | 'beakWidth' 
   elevation?: number;
 };
 
-export type MenuPopoverProps = ICalloutProps;
+// MenuPopover owns the desktop view extensions it uses; Callout stays limited to React Native ViewProps.
+export type MenuPopoverProps = IViewProps & Omit<ICalloutProps, keyof IViewProps>;
 
 export interface MenuPopoverState {
-  props: ICalloutProps;
+  props: MenuPopoverProps;
   innerView: IViewProps;
 }
