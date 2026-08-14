@@ -1,5 +1,26 @@
 # Change Log - @fluentui-react-native/dropdown
 
+## 0.11.7
+
+### Patch Changes
+
+- Updated dependencies [a99b3a8]
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [1157793]
+- Updated dependencies [778d82b]
+- Updated dependencies [ea738f0]
+- Updated dependencies [0f2b987]
+- Updated dependencies [0f2b987]
+  - @fluentui-react-native/callout@0.29.0
+  - @fluentui-react-native/design@0.3.0
+  - @fluentui-react-native/framework-base@0.6.0
+  - @fluentui-react-native/framework@0.17.1
+  - @fluentui-react-native/button@0.40.7
+  - @fluentui-react-native/text@0.25.7
+  - @fluentui-react-native/interactive-hooks@0.28.7
+
 ## 0.11.6
 
 ### Patch Changes

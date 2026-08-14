@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/use-tokens
 
+## 0.9.1
+
+### Patch Changes
+
+- 778d82b: Add shared component primitives, styling utilities, state hooks, accessibility diagnostics, and owned native-root prop types.
+- 778d82b: Consolidation of shared utilities, dependency profile updates, and more generated components
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+  - @fluentui-react-native/framework-base@0.6.0
+
 ## 0.9.0
 
 ### Minor Changes

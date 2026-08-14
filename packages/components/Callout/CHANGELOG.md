@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/callout
 
+## 0.29.0
+
+### Minor Changes
+
+- 0f2b987: Reauthor Callout as an unstyled native primitive with modern props and command handle types
+
+### Patch Changes
+
+- a99b3a8: Add macOS and Windows Fabric component views and interactive Callout stories
+- 0f2b987: Use the RCTCallout native component name on macOS and share its native component definition across platforms
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+  - @fluentui-react-native/framework-base@0.6.0
+
 ## 0.28.6
 
 ### Patch Changes

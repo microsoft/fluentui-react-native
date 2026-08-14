@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
+## 0.10.2
+
+### Patch Changes
+
+- 778d82b: Consolidation of shared utilities, dependency profile updates, and more generated components
+
 ## 0.10.0
 
 ### Minor Changes

@@ -1,5 +1,25 @@
 # Change Log - @fluentui-react-native/framework
 
+## 0.17.1
+
+### Patch Changes
+
+- 3abc13a: Updated packages with agent instructions and type fixes
+- Updated dependencies [3abc13a]
+- Updated dependencies [778d82b]
+- Updated dependencies [3abc13a]
+- Updated dependencies [1157793]
+- Updated dependencies [778d82b]
+- Updated dependencies [ea738f0]
+  - @fluentui-react-native/design@0.3.0
+  - @fluentui-react-native/framework-base@0.6.0
+  - @fluentui-react-native/composition@0.14.1
+  - @fluentui-react-native/use-slots@0.13.1
+  - @fluentui-react-native/use-styling@0.16.1
+  - @fluentui-react-native/use-tokens@0.9.1
+  - @fluentui-react-native/default-theme@0.27.7
+  - @fluentui-react-native/tokens@0.24.7
+
 ## 0.17.0
 
 ### Minor Changes
