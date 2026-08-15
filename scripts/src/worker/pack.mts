@@ -1,7 +1,7 @@
 import type { WorkerRunnerFunction } from 'lage';
 
 import { $, fs } from 'zx';
-import { join, resolve } from 'node:path';
+import path from 'node:path';
 import { type PGraphNodeMap, PGraph } from 'p-graph';
 import { findGitRoot, getPackageDependencies, getPackageInfos } from 'workspace-tools';
 
@@ -14,7 +14,7 @@ import { findGitRoot, getPackageDependencies, getPackageInfos } from 'workspace-
  * unique and easy to correlate back to the package.
  */
 export const run: WorkerRunnerFunction = async ({ target }) => {
-  const pkg = await fs.readJson(join(target.cwd, 'package.json'));
+  const pkg = await fs.readJson(path.join(target.cwd, 'package.json'));
 
   if (pkg.private) {
     return;
@@ -26,7 +26,7 @@ export const run: WorkerRunnerFunction = async ({ target }) => {
   }
 
   // Resolve relative to cwd (lage runs from repo root, so this resolves correctly)
-  const packRoot = resolve(outputDir);
+  const packRoot = path.resolve(outputDir);
   fs.mkdirpSync(packRoot);
 
   // Skip if this version is already published
@@ -46,13 +46,13 @@ export const run: WorkerRunnerFunction = async ({ target }) => {
 
   // Convert packageLayer from 0- to 1-indexed and pad with leading zeros based on the total
   const layerNum = String(packageLayer + 1).padStart(String(packageLayers.length).length, '0');
-  const layerDir = join(packRoot, layerNum);
+  const layerDir = path.join(packRoot, layerNum);
   fs.mkdirpSync(layerDir);
 
   // Build a safe filename: @fluentui-react-native/button@1.0.0 -> fluentui-react-native-button-1.0.0.tgz
   const safeName = (pkg.name as string).replace(/@/g, '').replace(/\//g, '-');
   const tgzFilename = `${safeName}-${pkg.version}.tgz`;
-  const outPath = join(layerDir, tgzFilename);
+  const outPath = path.join(layerDir, tgzFilename);
 
   await $({ cwd: target.cwd, verbose: true })`yarn pack --out ${outPath}`;
 };

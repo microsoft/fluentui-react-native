@@ -71,9 +71,12 @@ extends:
               image: ubuntu-latest
               os: linux
             variables:
-              packagesArtifactPath: $(System.DefaultWorkingDirectory)/_packed/layers
+              # set in lage.config.mjs under BUILD_STAGINGDIRECTORY
+              packagesArtifactPath: $(Build.StagingDirectory)/_packed
               releaseToolArtifactPath: $(Build.StagingDirectory)/${{ variables.releaseToolArtifactName }}
             templateContext:
+              # run SDL tasks once on this directory for all outputs
+              outputParentDirectory: $(Build.StagingDirectory)
               outputs:
                 - output: pipelineArtifact
                   targetPath: $(packagesArtifactPath)

@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 /** @type {import('lage').ConfigOptions} */
 const config = {
   npmClient: 'yarn',
@@ -79,7 +81,7 @@ const config = {
       type: 'worker',
       options: {
         worker: 'scripts/src/worker/pack.mts',
-        outputDir: '_packed',
+        outputDir: path.join(process.env.BUILD_STAGINGDIRECTORY || import.meta.dirname, '_packed'),
       },
       cache: false,
     },
