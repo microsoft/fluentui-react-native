@@ -104,7 +104,7 @@ extends:
                 displayName: 'yarn buildci [build + test + lint]'
 
               - script: |
-                  yarn lage pack --verbose --grouped && yarn organize-packs
+                  yarn lage pack --verbose --grouped
                 displayName: 'Pack public packages (new versions only)'
 
               - script: |

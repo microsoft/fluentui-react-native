@@ -329,9 +329,7 @@ jobs:
         run: yarn build
 
       - name: Pack packages
-        run: |
-          yarn lage pack --verbose --grouped
-          yarn organize-packs
+        run: yarn lage pack --verbose --grouped
 
       - name: List packed tarballs
         id: check
