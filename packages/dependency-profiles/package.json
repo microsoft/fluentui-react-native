@@ -25,7 +25,7 @@
     "react-native-svg": ">=15.4.0 <15.13.0",
     "react-native-windows": "^0.81.0",
     "semver": "^7.7.3",
-    "workspace-tools": "^0.26.3"
+    "workspace-tools": "^0.42.0"
   },
   "peerDependencies": {
     "@fluentui-react-native/adapters": "*",

@@ -40,20 +40,19 @@
     "**/lib-amd": true
   },
 
-  "javascript.preferences.quoteStyle": "single",
-
   "json.format.enable": false,
 
-  "typescript.preferences.quoteStyle": "single",
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+  "js/ts.preferences.quoteStyle": "single",
+  "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
+  "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
   // Points at the workspace's typescript package (7.0.2, native tsc). The
   // TypeScript 7 (native-preview) extension detects that this tsdk has no
   // tsserver.js and automatically runs it as a native LSP server.
-  "typescript.tsdk": "./node_modules/typescript/lib",
+  "js/ts.tsdk.path": "./node_modules/typescript/lib",
 
   "search.exclude": {
     "**/node_modules": true,
+    "**/.yarn": true,
     "**/lib": true,
     "**/lib-amd": true,
     "**/lib-commonjs": true,

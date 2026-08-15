@@ -334,8 +334,8 @@ jobs:
       - name: List packed tarballs
         id: check
         run: |
-          ls -la _packed/
-          if ls _packed/*.tgz > /dev/null 2>&1; then
+          ls -laR _packed/
+          if ls _packed/*/*.tgz > /dev/null 2>&1; then
             echo "has-tarballs=true" >> $GITHUB_OUTPUT
           else
             echo "has-tarballs=false" >> $GITHUB_OUTPUT
@@ -347,33 +347,6 @@ jobs:
         with:
           name: packed-tarballs-dry-run
           path: _packed/
-
-  publish-dry-run:
-    name: NPM Publish Dry Run — Publish
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    needs: publish-dry-run-pack
-    if: needs.publish-dry-run-pack.outputs.has-tarballs == 'true'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
-        with:
-          node-version: 22
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Download packed tarballs
-        uses: actions/download-artifact@v8
-        with:
-          name: packed-tarballs-dry-run
-          path: _packed/
-
-      - name: Simulate publish
-        run: yarn lage publish:dry-run --verbose --grouped
 
   test-links:
     name: Test repo links
@@ -407,7 +380,6 @@ jobs:
       - win32
       - check-changesets
       - publish-dry-run-pack
-      - publish-dry-run
       - test-links
     steps:
       - name: Check for failures or cancellations

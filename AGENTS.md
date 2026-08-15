@@ -283,7 +283,7 @@ Components require `ThemeProvider` from `@fluentui-react-native/design/theming` 
 - Changesets config in `.changeset/config.json`
 - Major versions are disallowed (validated in CI via `.github/scripts/validate-changesets.mts`)
 - Version bump PRs are created automatically by GitHub Actions; `yarn changeset:version` applies version bumps
-- Publishing happens in Azure Pipelines using `changeset publish`
+- Publishing happens in Azure Pipelines using `.ado/azure-pipelines.publish.yml`
 
 ## Important Notes
 
