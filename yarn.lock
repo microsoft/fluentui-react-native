@@ -3035,6 +3035,7 @@ __metadata:
   resolution: "@fluentui-react-native/components@workspace:packages/agentic-components"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"

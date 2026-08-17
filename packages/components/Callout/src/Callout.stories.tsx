@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 
@@ -66,7 +66,7 @@ const CalloutExample = ({ defaultVisible = false, onDismiss, onShow, showWindowC
       </Text>
       {visible && (
         <Callout {...props} componentRef={calloutRef} onDismiss={dismiss} onShow={show} target={anchorRef}>
-          <View style={styles.calloutContent}>
+          <View style={styles.calloutContent} collapsable={false}>
             <Text style={styles.heading}>Fabric Callout</Text>
             <Text style={styles.body}>This content is hosted in a separate native macOS window.</Text>
             {showWindowCommands && (
@@ -127,7 +127,7 @@ const PlacementExample = (props: CalloutProps) => {
           onDismiss={() => setSelectedIndex(undefined)}
           target={targetRefs[selectedIndex]}
         >
-          <View style={styles.calloutContent}>
+          <View style={styles.calloutContent} collapsable={false}>
             <Text style={styles.heading}>{placements[selectedIndex].label}</Text>
             <Text style={styles.body}>Click outside the native window to dismiss it.</Text>
           </View>

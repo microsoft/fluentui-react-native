@@ -30,6 +30,7 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
+    "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*"
   },
