@@ -10,11 +10,13 @@ Work on the native Storybook application in `packages/agentic-components/storybo
 
 ## Workflow
 
-1. Read the repository `AGENTS.md`, then the
+1. Read the repository `AGENTS.md`, then the compact
+   [agent map](../../../packages/agentic-components/storybook/agent-map.yaml). Read the
    [Storybook instructions](../../../packages/agentic-components/storybook/AGENTS.md) and
-   [README](../../../packages/agentic-components/storybook/README.md).
+   [README](../../../packages/agentic-components/storybook/README.md) only as needed for the task.
 2. Inspect the Storybook `package.json` and run its declared workspace scripts; do not invent direct runner commands.
-3. Reproduce the first failure from the Storybook workspace so pnpm-linked React Native tooling resolves from the app.
+3. Use `storybook-agent` to query runtime story IDs, select stories, and sweep renderability. Reproduce the first
+   failure from the Storybook workspace so pnpm-linked React Native tooling resolves from the app.
 4. Treat native workspaces, Pods, lockfiles, generated solutions, build directories, and DerivedData as disposable
    outputs. Fix the owning manifest, Podfile, configuration, or script instead.
 5. After dependency or workaround changes, regenerate the affected native dependency source and use a clean build so

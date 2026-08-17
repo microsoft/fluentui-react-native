@@ -2,7 +2,19 @@
 
 These instructions apply to `packages/agentic-components/storybook` and its descendants.
 
-Read this file, `README.md`, and `package.json` before changing the Storybook application or its native projects.
+Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, lookup, and interaction map. Read this file,
+`README.md`, and `package.json` before changing the Storybook application or its native projects.
+
+## Agent-efficient discovery and interaction
+
+- Query the live story index with `yarn storybook-agent stories <query>` instead of guessing IDs or searching the
+  sidebar.
+- Select stories with `yarn storybook-agent select <runtime-story-id>` and sweep renderability with
+  `yarn storybook-agent sweep [query]`.
+- Use screenshots only for visual evidence. Use WebSocket events and accessibility bounds for lookup and interaction.
+- Treat `src/storybook.requires.ts` as generated output; use `src/main.ts` for source configuration.
+- Keep `agent-map.yaml` synchronized when stable paths, scripts, services, or interaction contracts change. Do not list
+  individual stories there; the runtime index is authoritative.
 
 ## Command and dependency discipline
 

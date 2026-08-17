@@ -16,6 +16,17 @@ unwrapped (`No theme`, the default) or apply the default light, dark, or high-co
 The selected Theme wraps the preview decorator, so it applies to every rendered story and remains
 selected while navigating between stories.
 
+For agent-driven work, [`agent-map.yaml`](agent-map.yaml) is the compact map of stable files,
+services, runtime events, lookup order, and native interaction rules. The checked-in
+`yarn storybook-agent` helper queries the live index rather than duplicating story IDs:
+
+```sh
+yarn storybook-agent status
+yarn storybook-agent stories FocusZone
+yarn storybook-agent select primitives-focuszone--circular-navigation
+yarn storybook-agent sweep FocusZone
+```
+
 ## Layout
 
 ```
