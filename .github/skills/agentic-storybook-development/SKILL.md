@@ -19,6 +19,9 @@ Work on the native Storybook application in `packages/agentic-components/storybo
    outputs. Fix the owning manifest, Podfile, configuration, or script instead.
 5. After dependency or workaround changes, regenerate the affected native dependency source and use a clean build so
    stale output cannot produce a false success.
+   When adding a codegen-enabled workspace dependency to existing macOS Pods, the first pod install can generate its
+   spec without refreshing ReactCodegen's source list. If the clean build then reports a missing generated spec header,
+   run `pods:macos` once more before changing native configuration.
 6. Validate the JavaScript bundle and the affected native build. Run Storybook format/lint and the root build when
    manifests or shared package references changed.
 

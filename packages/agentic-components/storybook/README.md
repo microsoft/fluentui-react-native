@@ -3,7 +3,7 @@
 On-device [Storybook](https://storybook.js.org/) app (Storybook for React Native v10) for
 `@fluentui-react-native/components` and linked standalone native packages. It loads every
 `*.stories.(ts|tsx)` file from the agentic library source (`../src`) plus the standalone
-Callout package so its native stories run in the Fabric host.
+Callout and FocusZone packages so their native stories run in the Fabric host.
 
 It runs in Storybook **liteMode**, which mocks out the heavy default on-device UI
 (`@storybook/react-native-ui`). This avoids the `react-native-reanimated` /
@@ -94,6 +94,9 @@ yarn windows
 Requires Visual Studio 2022 with the React Native Windows build prerequisites. The generated
 solution, `ExperimentalFeatures.props`, and build outputs are git-ignored and can be regenerated
 with `yarn windows:generate`.
+
+FocusZone continues to use the platform-provided Windows implementation; its package-owned Fabric
+component view is macOS-specific.
 
 The Debug app always loads from Metro; `react-native-test-app` does not automatically fall back
 to an embedded bundle in Debug builds. To bundle, build, and launch a Release app that runs

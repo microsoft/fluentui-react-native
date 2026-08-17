@@ -32,6 +32,7 @@
     "@fluentui-react-native/components": "workspace:*",
     "@fluentui-react-native/default-theme": "workspace:*",
     "@fluentui-react-native/design": "workspace:*",
+    "@fluentui-react-native/focus-zone": "workspace:*",
     "@types/react": "~19.1.4",
     "react": "19.1.4",
     "react-native": "^0.81.6",
@@ -72,6 +73,7 @@
       "ignoreDependencies": [
         "@fluentui-react-native/callout",
         "@fluentui-react-native/components",
+        "@fluentui-react-native/focus-zone",
         "react-native-svg"
       ]
     }
