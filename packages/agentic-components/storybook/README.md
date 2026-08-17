@@ -95,6 +95,15 @@ Requires Visual Studio 2022 with the React Native Windows build prerequisites. T
 solution, `ExperimentalFeatures.props`, and build outputs are git-ignored and can be regenerated
 with `yarn windows:generate`.
 
+For a non-deploying build with structured logs:
+
+```powershell
+yarn windows:info
+yarn windows:build
+```
+
+Logs are written beneath `artifacts/windows/build-logs`.
+
 The Debug app always loads from Metro; `react-native-test-app` does not automatically fall back
 to an embedded bundle in Debug builds. To bundle, build, and launch a Release app that runs
 without Metro:
@@ -112,6 +121,34 @@ the Debug app again.
 Storybook's development bundle intentionally contains separate `pretty-format` and `react-is`
 versions used by its internal tooling. They are excluded from the duplicate-module enforcement;
 React, React Native, and application dependencies remain checked.
+
+### Windows agent workflow
+
+The complete agent workflow starts the Storybook channel server and Metro, builds and launches the
+app, selects representative stories, and verifies their stable native UI Automation selectors:
+
+```powershell
+yarn windows:agent
+```
+
+The command records the exact server, Metro, and app process IDs in
+`artifacts/windows/agent-session.json`. Stop that session without affecting unrelated development
+processes:
+
+```powershell
+yarn windows:agent:stop
+```
+
+Use `yarn windows:agent:start` to leave the app ready for manual or external agent interaction
+without immediately running the smoke tests. WinAppDriver 1.2.1 is required for automation.
+The RNW automation package is pinned to the same 0.81.32 release as the resolved
+`react-native-windows` dependency. Set `WINAPPDRIVERPATH` when the executable is not installed at
+`C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe`.
+
+WinAppDriver 1.2.1 can attach to this WinAppSDK window and inspect its UI Automation tree, but its
+screenshot endpoint does not reliably capture React Native Windows Composition content. Agents
+that have a desktop screenshot tool should use it after selecting a story with
+`storybook:control`; UI Automation remains the deterministic automated validation gate.
 
 ## Bundling (no native toolchain required)
 
@@ -145,6 +182,20 @@ Run it alongside `yarn start` + `yarn macos` or `yarn windows`. The on-device ap
   ```sh
   npx mcp-add --type http --url "http://localhost:7007/mcp" --scope project
   ```
+
+- **REST control endpoints**:
+  - `GET /index.json` returns the story index.
+  - `POST /select-story-sync/<storyId>` selects a story and waits for `storyRendered`.
+  - `POST /send-event` broadcasts a Storybook channel event.
+
+The declared helper wraps these endpoints:
+
+```powershell
+yarn storybook:control list
+yarn storybook:control select components-button--default
+yarn storybook:control args components-button--default '{"appearance":"primary"}'
+yarn storybook:smoke
+```
 
 > We run the channel server standalone (via `@storybook/react-native/node`'s `createChannelServer`)
 > rather than through `withStorybook`, because the bundler-agnostic `withStorybook` only starts it in

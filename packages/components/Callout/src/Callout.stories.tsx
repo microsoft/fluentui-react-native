@@ -57,6 +57,7 @@ const CalloutExample = ({ defaultVisible = false, onDismiss, onShow, showWindowC
           }}
           ref={anchorRef}
           style={({ pressed }) => [styles.trigger, pressed && styles.triggerPressed]}
+          testID="agentic-storybook-callout-trigger"
         >
           <Text style={styles.triggerText}>{visible ? 'Close callout' : 'Open callout'}</Text>
         </Pressable>
@@ -150,6 +151,7 @@ const meta: Meta<typeof Callout> = {
     directionalHint: 'bottomCenter',
     maxWidth: 320,
     setInitialFocus: false,
+    testID: 'agentic-storybook-callout',
   },
   argTypes: {
     backgroundColor: { control: 'color' },

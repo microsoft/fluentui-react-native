@@ -1,0 +1,17 @@
+[
+  {
+    "storyId": "components-button--default",
+    "testId": "agentic-storybook-button",
+    "artifactName": "button-default"
+  },
+  {
+    "storyId": "primitives-icon--default",
+    "testId": "agentic-storybook-icon",
+    "artifactName": "icon-default"
+  },
+  {
+    "storyId": "primitives-callout--default",
+    "testId": "agentic-storybook-callout-trigger",
+    "artifactName": "callout-default"
+  }
+]

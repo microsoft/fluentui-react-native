@@ -29,7 +29,7 @@ export function StorybookThemeHost({ children }: React.PropsWithChildren) {
   return (
     <StorybookThemeContext.Provider value={selectedTheme}>
       <View style={styles.root}>
-        <View accessibilityRole="toolbar" style={styles.header}>
+        <View accessibilityRole="toolbar" style={styles.header} testID="agentic-storybook-theme-toolbar">
           <Text style={styles.label}>Theme</Text>
           {themeChoiceNames.map((name) => {
             const choice = themeChoices[name];
@@ -41,6 +41,7 @@ export function StorybookThemeHost({ children }: React.PropsWithChildren) {
                 key={name}
                 onPress={() => setSelectedName(name)}
                 style={({ pressed }) => [styles.option, selected && styles.selectedOption, pressed && styles.pressedOption]}
+                testID={`agentic-storybook-theme-${name}`}
               >
                 <Text style={[styles.optionText, selected && styles.selectedOptionText]}>{choice.label}</Text>
               </Pressable>

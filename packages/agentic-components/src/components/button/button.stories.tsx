@@ -52,6 +52,7 @@ const meta: Meta<typeof Button> = {
     iconPosition: 'before',
     shape: 'rounded',
     size: 'medium',
+    testID: 'agentic-storybook-button',
   },
   argTypes: {
     appearance: { control: 'select', options: appearances.map(({ value }) => value) },
