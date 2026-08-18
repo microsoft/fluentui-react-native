@@ -14,5 +14,10 @@
     "testId": "agentic-storybook-callout-trigger",
     "statusTestId": "agentic-storybook-callout-status",
     "artifactName": "callout-default"
+  },
+  {
+    "storyId": "primitives-focuszone--two-dimensional-navigation",
+    "testId": "focus-zone-item-1",
+    "artifactName": "focus-zone-two-dimensional-navigation"
   }
 ]

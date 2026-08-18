@@ -21,4 +21,6 @@ export interface NativeProps extends ViewProps {
 
 export type FocusZoneComponentType = HostComponent<NativeProps>;
 
-export default codegenNativeComponent<NativeProps>('RCTFocusZone') as FocusZoneComponentType;
+export default codegenNativeComponent<NativeProps>('FocusZone', {
+  paperComponentName: 'RCTFocusZone',
+}) as FocusZoneComponentType;

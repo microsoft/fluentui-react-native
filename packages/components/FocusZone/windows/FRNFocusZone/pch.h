@@ -30,7 +30,10 @@
 #include <stdlib.h>
 #include <tchar.h>
 
+#include <algorithm>
+#include <cmath>
 #include <cstdint>
+#include <optional>
 #include <string>
 #include <vector>
 

@@ -1,6 +1,6 @@
 
 /*
- * This file is auto-generated from RCTFocusZoneNativeComponent spec file in flow / TypeScript.
+ * This file is auto-generated from FocusZoneNativeComponent spec file in flow / TypeScript.
  */
 // clang-format off
 #pragma once
@@ -18,13 +18,13 @@
 
 namespace FRNFocusZoneCodegen {
 
-REACT_STRUCT(RCTFocusZoneProps)
-struct RCTFocusZoneProps : winrt::implements<RCTFocusZoneProps, winrt::Microsoft::ReactNative::IComponentProps> {
-  RCTFocusZoneProps(winrt::Microsoft::ReactNative::ViewProps props, const winrt::Microsoft::ReactNative::IComponentProps& cloneFrom)
+REACT_STRUCT(FocusZoneProps)
+struct FocusZoneProps : winrt::implements<FocusZoneProps, winrt::Microsoft::ReactNative::IComponentProps> {
+  FocusZoneProps(winrt::Microsoft::ReactNative::ViewProps props, const winrt::Microsoft::ReactNative::IComponentProps& cloneFrom)
     : ViewProps(props)
   {
      if (cloneFrom) {
-       auto cloneFromProps = cloneFrom.as<RCTFocusZoneProps>();
+       auto cloneFromProps = cloneFrom.as<FocusZoneProps>();
        navigateAtEnd = cloneFromProps->navigateAtEnd;
        defaultTabbableElement = cloneFromProps->defaultTabbableElement.Copy();
        focusZoneDirection = cloneFromProps->focusZoneDirection;
@@ -68,8 +68,8 @@ struct RCTFocusZoneProps : winrt::implements<RCTFocusZoneProps, winrt::Microsoft
   const winrt::Microsoft::ReactNative::ViewProps ViewProps;
 };
 
-struct RCTFocusZoneEventEmitter {
-  RCTFocusZoneEventEmitter(const winrt::Microsoft::ReactNative::EventEmitter &eventEmitter)
+struct FocusZoneEventEmitter {
+  FocusZoneEventEmitter(const winrt::Microsoft::ReactNative::EventEmitter &eventEmitter)
       : m_eventEmitter(eventEmitter) {}
 
  private:
@@ -77,12 +77,12 @@ struct RCTFocusZoneEventEmitter {
 };
 
 template<typename TUserData>
-struct BaseRCTFocusZone {
+struct BaseFocusZone {
 
   virtual void UpdateProps(
     const winrt::Microsoft::ReactNative::ComponentView &/*view*/,
-    const winrt::com_ptr<RCTFocusZoneProps> &newProps,
-    const winrt::com_ptr<RCTFocusZoneProps> &/*oldProps*/) noexcept {
+    const winrt::com_ptr<FocusZoneProps> &newProps,
+    const winrt::com_ptr<FocusZoneProps> &/*oldProps*/) noexcept {
     m_props = newProps;
   }
 
@@ -99,7 +99,7 @@ struct BaseRCTFocusZone {
     const winrt::Microsoft::ReactNative::IComponentState &/*newState*/) noexcept {
   }
 
-  virtual void UpdateEventEmitter(const std::shared_ptr<RCTFocusZoneEventEmitter> &eventEmitter) noexcept {
+  virtual void UpdateEventEmitter(const std::shared_ptr<FocusZoneEventEmitter> &eventEmitter) noexcept {
     m_eventEmitter = eventEmitter;
   }
 
@@ -135,32 +135,32 @@ struct BaseRCTFocusZone {
 
   
 
-  const std::shared_ptr<RCTFocusZoneEventEmitter>& EventEmitter() const { return m_eventEmitter; }
-  const winrt::com_ptr<RCTFocusZoneProps>& Props() const { return m_props; }
+  const std::shared_ptr<FocusZoneEventEmitter>& EventEmitter() const { return m_eventEmitter; }
+  const winrt::com_ptr<FocusZoneProps>& Props() const { return m_props; }
 
 private:
-  winrt::com_ptr<RCTFocusZoneProps> m_props;
-  std::shared_ptr<RCTFocusZoneEventEmitter> m_eventEmitter;
+  winrt::com_ptr<FocusZoneProps> m_props;
+  std::shared_ptr<FocusZoneEventEmitter> m_eventEmitter;
 };
 
 template <typename TUserData>
-void RegisterRCTFocusZoneNativeComponent(
+void RegisterFocusZoneNativeComponent(
     winrt::Microsoft::ReactNative::IReactPackageBuilder const &packageBuilder,
     std::function<void(const winrt::Microsoft::ReactNative::Composition::IReactCompositionViewComponentBuilder&)> builderCallback) noexcept {
   packageBuilder.as<winrt::Microsoft::ReactNative::IReactPackageBuilderFabric>().AddViewComponent(
-      L"RCTFocusZone", [builderCallback](winrt::Microsoft::ReactNative::IReactViewComponentBuilder const &builder) noexcept {
+      L"FocusZone", [builderCallback](winrt::Microsoft::ReactNative::IReactViewComponentBuilder const &builder) noexcept {
         auto compBuilder = builder.as<winrt::Microsoft::ReactNative::Composition::IReactCompositionViewComponentBuilder>();
 
         builder.SetCreateProps([](winrt::Microsoft::ReactNative::ViewProps props,
                               const winrt::Microsoft::ReactNative::IComponentProps& cloneFrom) noexcept {
-            return winrt::make<RCTFocusZoneProps>(props, cloneFrom); 
+            return winrt::make<FocusZoneProps>(props, cloneFrom); 
         });
 
         builder.SetUpdatePropsHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                      const winrt::Microsoft::ReactNative::IComponentProps &newProps,
                                      const winrt::Microsoft::ReactNative::IComponentProps &oldProps) noexcept {
             auto userData = view.UserData().as<TUserData>();
-            userData->UpdateProps(view, newProps ? newProps.as<RCTFocusZoneProps>() : nullptr, oldProps ? oldProps.as<RCTFocusZoneProps>() : nullptr);
+            userData->UpdateProps(view, newProps ? newProps.as<FocusZoneProps>() : nullptr, oldProps ? oldProps.as<FocusZoneProps>() : nullptr);
         });
 
         compBuilder.SetUpdateLayoutMetricsHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
@@ -173,10 +173,10 @@ void RegisterRCTFocusZoneNativeComponent(
         builder.SetUpdateEventEmitterHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                      const winrt::Microsoft::ReactNative::EventEmitter &eventEmitter) noexcept {
           auto userData = view.UserData().as<TUserData>();
-          userData->UpdateEventEmitter(std::make_shared<RCTFocusZoneEventEmitter>(eventEmitter));
+          userData->UpdateEventEmitter(std::make_shared<FocusZoneEventEmitter>(eventEmitter));
         });
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::FinalizeUpdate != &BaseRCTFocusZone<TUserData>::FinalizeUpdate) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::FinalizeUpdate != &BaseFocusZone<TUserData>::FinalizeUpdate) {
             builder.SetFinalizeUpdateHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                      winrt::Microsoft::ReactNative::ComponentViewUpdateMask mask) noexcept {
             auto userData = view.UserData().as<TUserData>();
@@ -184,7 +184,7 @@ void RegisterRCTFocusZoneNativeComponent(
           });
         } 
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::UpdateState != &BaseRCTFocusZone<TUserData>::UpdateState) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::UpdateState != &BaseFocusZone<TUserData>::UpdateState) {
           builder.SetUpdateStateHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                      const winrt::Microsoft::ReactNative::IComponentState &newState) noexcept {
             auto userData = view.UserData().as<TUserData>();
@@ -192,7 +192,7 @@ void RegisterRCTFocusZoneNativeComponent(
           });
         }
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::MountChildComponentView != &BaseRCTFocusZone<TUserData>::MountChildComponentView) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::MountChildComponentView != &BaseFocusZone<TUserData>::MountChildComponentView) {
           builder.SetMountChildComponentViewHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                       const winrt::Microsoft::ReactNative::MountChildComponentViewArgs &args) noexcept {
             auto userData = view.UserData().as<TUserData>();
@@ -200,7 +200,7 @@ void RegisterRCTFocusZoneNativeComponent(
           });
         }
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::UnmountChildComponentView != &BaseRCTFocusZone<TUserData>::UnmountChildComponentView) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::UnmountChildComponentView != &BaseFocusZone<TUserData>::UnmountChildComponentView) {
           builder.SetUnmountChildComponentViewHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                       const winrt::Microsoft::ReactNative::UnmountChildComponentViewArgs &args) noexcept {
             auto userData = view.UserData().as<TUserData>();
@@ -208,7 +208,7 @@ void RegisterRCTFocusZoneNativeComponent(
           });
         }
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::CreateAutomationPeer != &BaseRCTFocusZone<TUserData>::CreateAutomationPeer) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::CreateAutomationPeer != &BaseFocusZone<TUserData>::CreateAutomationPeer) {
             builder.SetCreateAutomationPeerHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                      const winrt::Microsoft::ReactNative::CreateAutomationPeerArgs& args) noexcept {
             auto userData = view.UserData().as<TUserData>();
@@ -218,13 +218,13 @@ void RegisterRCTFocusZoneNativeComponent(
 
         compBuilder.SetViewComponentViewInitializer([](const winrt::Microsoft::ReactNative::ComponentView &view) noexcept {
           auto userData = winrt::make_self<TUserData>();
-          if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::Initialize != &BaseRCTFocusZone<TUserData>::Initialize) {
+          if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::Initialize != &BaseFocusZone<TUserData>::Initialize) {
             userData->Initialize(view);
           }
           view.UserData(*userData);
         });
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::CreateVisual != &BaseRCTFocusZone<TUserData>::CreateVisual) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::CreateVisual != &BaseFocusZone<TUserData>::CreateVisual) {
           compBuilder.SetCreateVisualHandler([](const winrt::Microsoft::ReactNative::ComponentView &view) noexcept {
             auto userData = view.UserData().as<TUserData>();
             return userData->CreateVisual(view);
