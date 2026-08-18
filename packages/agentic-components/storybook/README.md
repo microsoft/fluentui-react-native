@@ -106,8 +106,10 @@ Requires Visual Studio 2022 with the React Native Windows build prerequisites. T
 solution, `ExperimentalFeatures.props`, and build outputs are git-ignored and can be regenerated
 with `yarn windows:generate`.
 
-FocusZone continues to use the platform-provided Windows implementation; its package-owned Fabric
-component view is macOS-specific.
+FocusZone is autolinked as a package-owned Windows Fabric native library. Its
+Windows component view handles directional navigation, single-stop Tab
+navigation, and focus restoration while the existing Win32 implementation
+remains platform-provided.
 
 The Debug app always loads from Metro; `react-native-test-app` does not automatically fall back
 to an embedded bundle in Debug builds. To bundle, build, and launch a Release app that runs

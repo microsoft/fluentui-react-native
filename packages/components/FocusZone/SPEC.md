@@ -22,8 +22,10 @@ because it owns native macOS code and CocoaPods integration.
 
 - macOS includes both the existing Paper view manager and a package-owned Fabric
   component view. Both reuse the same `RCTFocusZone` navigation implementation.
-- Windows and Win32 continue to use their platform-provided native FocusZone
-  implementations.
+- Windows includes a package-owned Fabric component view that coordinates
+  directional, Home/End, Tab, and focus-restoration behavior through RNW
+  `ComponentView` focus APIs.
+- Win32 continues to use its platform-provided native FocusZone implementation.
 - Unsupported behavior remains platform-defined rather than being simulated in
   JavaScript.
 

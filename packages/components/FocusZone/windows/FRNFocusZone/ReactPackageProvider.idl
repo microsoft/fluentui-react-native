@@ -1,0 +1,9 @@
+namespace FRNFocusZone
+{
+  [webhosthidden]
+  [default_interface]
+  runtimeclass ReactPackageProvider : Microsoft.ReactNative.IReactPackageProvider
+  {
+    ReactPackageProvider();
+  };
+}
