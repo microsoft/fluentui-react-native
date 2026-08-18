@@ -74,7 +74,12 @@
     }
   },
   "furn": {
-    "jestPlatform": "macos"
+    "jestPlatform": "macos",
+    "knip": {
+      "ignoreDependencies": [
+        "@fluentui-react-native/callout"
+      ]
+    }
   },
   "rnx-kit": {
     "kitType": "library",
