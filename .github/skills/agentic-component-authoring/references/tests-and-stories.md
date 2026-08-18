@@ -87,6 +87,12 @@ Each story module should provide:
 - focused named stories that compare all values of one axis in one canvas
 - `parameters.docs.description.story` for focused scenarios
 
+Stories included in native agent validation also need a stable root `testID`.
+Use selectors that describe the component or scenario rather than visible text,
+layout order, or native class names. Keep the initial args deterministic and
+add identifiers only to the small smoke set that agents and CI actively
+validate.
+
 Button uses focused appearance, size, shape, icon, selection, disabled, and constrained-content stories. Icon uses a
 source and size overview plus focused font, image, SVG, size, color, and accessibility stories.
 
@@ -107,6 +113,7 @@ yarn workspace @fluentui-react-native/components lint
 yarn workspace @fluentui-react-native/components build
 yarn workspace @fluentui-react-native/components test
 yarn workspace @fluentui-react-native/agentic-components-storybook bundle:macos
+yarn workspace @fluentui-react-native/agentic-components-storybook bundle:windows
 ```
 
 Run the smallest affected package test while iterating. Run the full package sequence before completion. Run the root

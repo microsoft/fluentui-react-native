@@ -1,6 +1,6 @@
 
 /*
- * This file is auto-generated from RCTCalloutNativeComponent spec file in flow / TypeScript.
+ * This file is auto-generated from CalloutNativeComponent spec file in flow / TypeScript.
  */
 // clang-format off
 #pragma once
@@ -16,10 +16,10 @@
 
 #ifdef RNW_NEW_ARCH
 
-namespace FRNCalloutCodegen {
+namespace winrt::FluentUI::Callout::Codegen {
 
-REACT_STRUCT(RCTCalloutSpec_RCTCalloutProps_anchorRect)
-struct RCTCalloutSpec_RCTCalloutProps_anchorRect {
+REACT_STRUCT(CalloutSpec_CalloutProps_anchorRect)
+struct CalloutSpec_CalloutProps_anchorRect {
   REACT_FIELD(screenX)
   double screenX{};
 
@@ -33,13 +33,13 @@ struct RCTCalloutSpec_RCTCalloutProps_anchorRect {
   double height{};
 };
 
-REACT_STRUCT(RCTCalloutProps)
-struct RCTCalloutProps : winrt::implements<RCTCalloutProps, winrt::Microsoft::ReactNative::IComponentProps> {
-  RCTCalloutProps(winrt::Microsoft::ReactNative::ViewProps props, const winrt::Microsoft::ReactNative::IComponentProps& cloneFrom)
+REACT_STRUCT(CalloutProps)
+struct CalloutProps : winrt::implements<CalloutProps, winrt::Microsoft::ReactNative::IComponentProps> {
+  CalloutProps(winrt::Microsoft::ReactNative::ViewProps props, const winrt::Microsoft::ReactNative::IComponentProps& cloneFrom)
     : ViewProps(props)
   {
      if (cloneFrom) {
-       auto cloneFromProps = cloneFrom.as<RCTCalloutProps>();
+       auto cloneFromProps = cloneFrom.as<CalloutProps>();
        accessibilityLabel = cloneFromProps->accessibilityLabel;
        accessibilityOnShowAnnouncement = cloneFromProps->accessibilityOnShowAnnouncement;
        anchorRect = cloneFromProps->anchorRect;
@@ -74,7 +74,7 @@ struct RCTCalloutProps : winrt::implements<RCTCalloutProps, winrt::Microsoft::Re
   std::optional<std::string> accessibilityOnShowAnnouncement;
 
   REACT_FIELD(anchorRect)
-  std::optional<RCTCalloutSpec_RCTCalloutProps_anchorRect> anchorRect;
+  std::optional<CalloutSpec_CalloutProps_anchorRect> anchorRect;
 
   REACT_FIELD(beakWidth)
   std::optional<int32_t> beakWidth{};
@@ -131,20 +131,20 @@ struct RCTCalloutProps : winrt::implements<RCTCalloutProps, winrt::Microsoft::Re
   const winrt::Microsoft::ReactNative::ViewProps ViewProps;
 };
 
-REACT_STRUCT(RCTCalloutSpec_onShow)
-struct RCTCalloutSpec_onShow {
+REACT_STRUCT(CalloutSpec_onShow)
+struct CalloutSpec_onShow {
   REACT_FIELD(target)
   int32_t target{};
 };
 
-REACT_STRUCT(RCTCalloutSpec_onDismiss)
-struct RCTCalloutSpec_onDismiss {
+REACT_STRUCT(CalloutSpec_onDismiss)
+struct CalloutSpec_onDismiss {
   REACT_FIELD(target)
   int32_t target{};
 };
 
-REACT_STRUCT(RCTCalloutSpec_onRestoreFocus)
-struct RCTCalloutSpec_onRestoreFocus {
+REACT_STRUCT(CalloutSpec_onRestoreFocus)
+struct CalloutSpec_onRestoreFocus {
   REACT_FIELD(target)
   int32_t target{};
 
@@ -152,13 +152,13 @@ struct RCTCalloutSpec_onRestoreFocus {
   bool containsFocus{};
 };
 
-struct RCTCalloutEventEmitter {
-  RCTCalloutEventEmitter(const winrt::Microsoft::ReactNative::EventEmitter &eventEmitter)
+struct CalloutEventEmitter {
+  CalloutEventEmitter(const winrt::Microsoft::ReactNative::EventEmitter &eventEmitter)
       : m_eventEmitter(eventEmitter) {}
 
-  using OnRestoreFocus = RCTCalloutSpec_onRestoreFocus;
-  using OnDismiss = RCTCalloutSpec_onDismiss;
-  using OnShow = RCTCalloutSpec_onShow;
+  using OnRestoreFocus = CalloutSpec_onRestoreFocus;
+  using OnDismiss = CalloutSpec_onDismiss;
+  using OnShow = CalloutSpec_onShow;
 
   void onRestoreFocus(OnRestoreFocus &&value) const {
     m_eventEmitter.DispatchEvent(L"restoreFocus", [value = std::move(value)](const winrt::Microsoft::ReactNative::IJSValueWriter writer) {
@@ -183,12 +183,12 @@ struct RCTCalloutEventEmitter {
 };
 
 template<typename TUserData>
-struct BaseRCTCallout {
+struct BaseCallout {
 
   virtual void UpdateProps(
     const winrt::Microsoft::ReactNative::ComponentView &/*view*/,
-    const winrt::com_ptr<RCTCalloutProps> &newProps,
-    const winrt::com_ptr<RCTCalloutProps> &/*oldProps*/) noexcept {
+    const winrt::com_ptr<CalloutProps> &newProps,
+    const winrt::com_ptr<CalloutProps> &/*oldProps*/) noexcept {
     m_props = newProps;
   }
 
@@ -205,7 +205,7 @@ struct BaseRCTCallout {
     const winrt::Microsoft::ReactNative::IComponentState &/*newState*/) noexcept {
   }
 
-  virtual void UpdateEventEmitter(const std::shared_ptr<RCTCalloutEventEmitter> &eventEmitter) noexcept {
+  virtual void UpdateEventEmitter(const std::shared_ptr<CalloutEventEmitter> &eventEmitter) noexcept {
     m_eventEmitter = eventEmitter;
   }
 
@@ -261,32 +261,32 @@ struct BaseRCTCallout {
     }
   }
 
-  const std::shared_ptr<RCTCalloutEventEmitter>& EventEmitter() const { return m_eventEmitter; }
-  const winrt::com_ptr<RCTCalloutProps>& Props() const { return m_props; }
+  const std::shared_ptr<CalloutEventEmitter>& EventEmitter() const { return m_eventEmitter; }
+  const winrt::com_ptr<CalloutProps>& Props() const { return m_props; }
 
 private:
-  winrt::com_ptr<RCTCalloutProps> m_props;
-  std::shared_ptr<RCTCalloutEventEmitter> m_eventEmitter;
+  winrt::com_ptr<CalloutProps> m_props;
+  std::shared_ptr<CalloutEventEmitter> m_eventEmitter;
 };
 
 template <typename TUserData>
-void RegisterRCTCalloutNativeComponent(
+void RegisterCalloutNativeComponent(
     winrt::Microsoft::ReactNative::IReactPackageBuilder const &packageBuilder,
     std::function<void(const winrt::Microsoft::ReactNative::Composition::IReactCompositionViewComponentBuilder&)> builderCallback) noexcept {
   packageBuilder.as<winrt::Microsoft::ReactNative::IReactPackageBuilderFabric>().AddViewComponent(
-      L"RCTCallout", [builderCallback](winrt::Microsoft::ReactNative::IReactViewComponentBuilder const &builder) noexcept {
+      L"Callout", [builderCallback](winrt::Microsoft::ReactNative::IReactViewComponentBuilder const &builder) noexcept {
         auto compBuilder = builder.as<winrt::Microsoft::ReactNative::Composition::IReactCompositionViewComponentBuilder>();
 
         builder.SetCreateProps([](winrt::Microsoft::ReactNative::ViewProps props,
                               const winrt::Microsoft::ReactNative::IComponentProps& cloneFrom) noexcept {
-            return winrt::make<RCTCalloutProps>(props, cloneFrom); 
+            return winrt::make<CalloutProps>(props, cloneFrom); 
         });
 
         builder.SetUpdatePropsHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                      const winrt::Microsoft::ReactNative::IComponentProps &newProps,
                                      const winrt::Microsoft::ReactNative::IComponentProps &oldProps) noexcept {
             auto userData = view.UserData().as<TUserData>();
-            userData->UpdateProps(view, newProps ? newProps.as<RCTCalloutProps>() : nullptr, oldProps ? oldProps.as<RCTCalloutProps>() : nullptr);
+            userData->UpdateProps(view, newProps ? newProps.as<CalloutProps>() : nullptr, oldProps ? oldProps.as<CalloutProps>() : nullptr);
         });
 
         compBuilder.SetUpdateLayoutMetricsHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
@@ -299,10 +299,10 @@ void RegisterRCTCalloutNativeComponent(
         builder.SetUpdateEventEmitterHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                      const winrt::Microsoft::ReactNative::EventEmitter &eventEmitter) noexcept {
           auto userData = view.UserData().as<TUserData>();
-          userData->UpdateEventEmitter(std::make_shared<RCTCalloutEventEmitter>(eventEmitter));
+          userData->UpdateEventEmitter(std::make_shared<CalloutEventEmitter>(eventEmitter));
         });
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::FinalizeUpdate != &BaseRCTCallout<TUserData>::FinalizeUpdate) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::FinalizeUpdate != &BaseCallout<TUserData>::FinalizeUpdate) {
             builder.SetFinalizeUpdateHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                      winrt::Microsoft::ReactNative::ComponentViewUpdateMask mask) noexcept {
             auto userData = view.UserData().as<TUserData>();
@@ -310,7 +310,7 @@ void RegisterRCTCalloutNativeComponent(
           });
         } 
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::UpdateState != &BaseRCTCallout<TUserData>::UpdateState) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::UpdateState != &BaseCallout<TUserData>::UpdateState) {
           builder.SetUpdateStateHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                      const winrt::Microsoft::ReactNative::IComponentState &newState) noexcept {
             auto userData = view.UserData().as<TUserData>();
@@ -324,7 +324,7 @@ void RegisterRCTCalloutNativeComponent(
           userData->HandleCommand(view, args);
         });
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::MountChildComponentView != &BaseRCTCallout<TUserData>::MountChildComponentView) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::MountChildComponentView != &BaseCallout<TUserData>::MountChildComponentView) {
           builder.SetMountChildComponentViewHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                       const winrt::Microsoft::ReactNative::MountChildComponentViewArgs &args) noexcept {
             auto userData = view.UserData().as<TUserData>();
@@ -332,7 +332,7 @@ void RegisterRCTCalloutNativeComponent(
           });
         }
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::UnmountChildComponentView != &BaseRCTCallout<TUserData>::UnmountChildComponentView) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::UnmountChildComponentView != &BaseCallout<TUserData>::UnmountChildComponentView) {
           builder.SetUnmountChildComponentViewHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                       const winrt::Microsoft::ReactNative::UnmountChildComponentViewArgs &args) noexcept {
             auto userData = view.UserData().as<TUserData>();
@@ -340,7 +340,7 @@ void RegisterRCTCalloutNativeComponent(
           });
         }
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::CreateAutomationPeer != &BaseRCTCallout<TUserData>::CreateAutomationPeer) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::CreateAutomationPeer != &BaseCallout<TUserData>::CreateAutomationPeer) {
             builder.SetCreateAutomationPeerHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
                                      const winrt::Microsoft::ReactNative::CreateAutomationPeerArgs& args) noexcept {
             auto userData = view.UserData().as<TUserData>();
@@ -350,13 +350,13 @@ void RegisterRCTCalloutNativeComponent(
 
         compBuilder.SetViewComponentViewInitializer([](const winrt::Microsoft::ReactNative::ComponentView &view) noexcept {
           auto userData = winrt::make_self<TUserData>();
-          if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::Initialize != &BaseRCTCallout<TUserData>::Initialize) {
+          if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::Initialize != &BaseCallout<TUserData>::Initialize) {
             userData->Initialize(view);
           }
           view.UserData(*userData);
         });
 
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::CreateVisual != &BaseRCTCallout<TUserData>::CreateVisual) {
+        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::CreateVisual != &BaseCallout<TUserData>::CreateVisual) {
           compBuilder.SetCreateVisualHandler([](const winrt::Microsoft::ReactNative::ComponentView &view) noexcept {
             auto userData = view.UserData().as<TUserData>();
             return userData->CreateVisual(view);
@@ -370,6 +370,6 @@ void RegisterRCTCalloutNativeComponent(
       });
 }
 
-} // namespace FRNCalloutCodegen
+} // namespace winrt::FluentUI::Callout::Codegen
 
 #endif // #ifdef RNW_NEW_ARCH

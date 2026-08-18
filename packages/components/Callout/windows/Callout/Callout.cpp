@@ -66,7 +66,7 @@ DirectionalHint parseDirectionHint(std::string &directionHint) {
 struct CalloutComponentView
     : public winrt::implements<CalloutComponentView,
                                winrt::Windows::Foundation::IInspectable>,
-      Codegen::BaseRCTCallout<CalloutComponentView> {
+      Codegen::BaseCallout<CalloutComponentView> {
   ~CalloutComponentView() {
     if (m_popup && !m_popup.IsClosed()) {
       /*
@@ -95,8 +95,8 @@ struct CalloutComponentView
   }
 
   void UpdateProps(const winrt::Microsoft::ReactNative::ComponentView &view,
-                   const winrt::com_ptr<Codegen::RCTCalloutProps> &newProps,
-                   const winrt::com_ptr<Codegen::RCTCalloutProps>
+                   const winrt::com_ptr<Codegen::CalloutProps> &newProps,
+                   const winrt::com_ptr<Codegen::CalloutProps>
                        &oldProps) noexcept override {
     if (!oldProps || newProps->directionalHint != oldProps->directionalHint) {
       m_directionalHint =
@@ -380,169 +380,9 @@ private:
 
 } // namespace winrt::FluentUI::Callout
 
-namespace winrt::FluentUI::Callout::Codegen {
-
-// Copy/Paste of codegen'd RegisterRCTCalloutNativeComponent, but uses "Callout"
-// to register the component instead of RCTCallout RN has special cased RCT* to
-// be just *.  But the codegen doesn't know that. We should probably eventually
-// move away from using RCT prefixes everywhere too.
-template <typename TUserData>
-void RegisterRCTCalloutNativeComponent2(
-    winrt::Microsoft::ReactNative::IReactPackageBuilder const &packageBuilder,
-    std::function<void(const winrt::Microsoft::ReactNative::Composition::
-                           IReactCompositionViewComponentBuilder &)>
-        builderCallback) noexcept {
-  packageBuilder.as<winrt::Microsoft::ReactNative::IReactPackageBuilderFabric>()
-      .AddViewComponent(L"Callout", [builderCallback](
-                                        winrt::Microsoft::ReactNative::
-                                            IReactViewComponentBuilder const
-                                                &builder) noexcept {
-        auto compBuilder =
-            builder.as<winrt::Microsoft::ReactNative::Composition::
-                           IReactCompositionViewComponentBuilder>();
-
-        builder.SetCreateProps(
-            [](winrt::Microsoft::ReactNative::ViewProps props,
-               const winrt::Microsoft::ReactNative::IComponentProps
-                   &cloneFrom) noexcept {
-              return winrt::make<RCTCalloutProps>(props, cloneFrom);
-            });
-
-        builder.SetUpdatePropsHandler(
-            [](const winrt::Microsoft::ReactNative::ComponentView &view,
-               const winrt::Microsoft::ReactNative::IComponentProps &newProps,
-               const winrt::Microsoft::ReactNative::IComponentProps
-                   &oldProps) noexcept {
-              auto userData = view.UserData().as<TUserData>();
-              userData->UpdateProps(
-                  view, newProps ? newProps.as<RCTCalloutProps>() : nullptr,
-                  oldProps ? oldProps.as<RCTCalloutProps>() : nullptr);
-            });
-
-        compBuilder.SetUpdateLayoutMetricsHandler(
-            [](const winrt::Microsoft::ReactNative::ComponentView &view,
-               const winrt::Microsoft::ReactNative::LayoutMetrics
-                   &newLayoutMetrics,
-               const winrt::Microsoft::ReactNative::LayoutMetrics
-                   &oldLayoutMetrics) noexcept {
-              auto userData = view.UserData().as<TUserData>();
-              userData->UpdateLayoutMetrics(view, newLayoutMetrics,
-                                            oldLayoutMetrics);
-            });
-
-        builder.SetUpdateEventEmitterHandler(
-            [](const winrt::Microsoft::ReactNative::ComponentView &view,
-               const winrt::Microsoft::ReactNative::EventEmitter
-                   &eventEmitter) noexcept {
-              auto userData = view.UserData().as<TUserData>();
-              userData->UpdateEventEmitter(
-                  std::make_shared<RCTCalloutEventEmitter>(eventEmitter));
-            });
-
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (
-            &TUserData::FinalizeUpdate !=
-            &BaseRCTCallout<TUserData>::FinalizeUpdate) {
-          builder.SetFinalizeUpdateHandler(
-              [](const winrt::Microsoft::ReactNative::ComponentView &view,
-                 winrt::Microsoft::ReactNative::ComponentViewUpdateMask
-                     mask) noexcept {
-                auto userData = view.UserData().as<TUserData>();
-                userData->FinalizeUpdate(view, mask);
-              });
-        }
-
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::UpdateState !=
-                                                      &BaseRCTCallout<
-                                                          TUserData>::
-                                                          UpdateState) {
-          builder.SetUpdateStateHandler(
-              [](const winrt::Microsoft::ReactNative::ComponentView &view,
-                 const winrt::Microsoft::ReactNative::IComponentState
-                     &newState) noexcept {
-                auto userData = view.UserData().as<TUserData>();
-                userData->UpdateState(view, newState);
-              });
-        }
-
-        builder.SetCustomCommandHandler(
-            [](const winrt::Microsoft::ReactNative::ComponentView &view,
-               const winrt::Microsoft::ReactNative::HandleCommandArgs
-                   &args) noexcept {
-              auto userData = view.UserData().as<TUserData>();
-              userData->HandleCommand(view, args);
-            });
-
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (
-            &TUserData::MountChildComponentView !=
-            &BaseRCTCallout<TUserData>::MountChildComponentView) {
-          builder.SetMountChildComponentViewHandler(
-              [](const winrt::Microsoft::ReactNative::ComponentView &view,
-                 const winrt::Microsoft::ReactNative::
-                     MountChildComponentViewArgs &args) noexcept {
-                auto userData = view.UserData().as<TUserData>();
-                return userData->MountChildComponentView(view, args);
-              });
-        }
-
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (
-            &TUserData::UnmountChildComponentView !=
-            &BaseRCTCallout<TUserData>::UnmountChildComponentView) {
-          builder.SetUnmountChildComponentViewHandler(
-              [](const winrt::Microsoft::ReactNative::ComponentView &view,
-                 const winrt::Microsoft::ReactNative::
-                     UnmountChildComponentViewArgs &args) noexcept {
-                auto userData = view.UserData().as<TUserData>();
-                return userData->UnmountChildComponentView(view, args);
-              });
-        }
-
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (
-            &TUserData::CreateAutomationPeer !=
-            &BaseRCTCallout<TUserData>::CreateAutomationPeer) {
-          builder.SetCreateAutomationPeerHandler(
-              [](const winrt::Microsoft::ReactNative::ComponentView &view,
-                 const winrt::Microsoft::ReactNative::CreateAutomationPeerArgs
-                     &args) noexcept {
-                auto userData = view.UserData().as<TUserData>();
-                return userData->CreateAutomationPeer(view, args);
-              });
-        }
-
-        compBuilder.SetViewComponentViewInitializer(
-            [](const winrt::Microsoft::ReactNative::ComponentView
-                   &view) noexcept {
-              auto userData = winrt::make_self<TUserData>();
-              if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (
-                  &TUserData::Initialize !=
-                  &BaseRCTCallout<TUserData>::Initialize) {
-                userData->Initialize(view);
-              }
-              view.UserData(*userData);
-            });
-
-        if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (
-            &TUserData::CreateVisual !=
-            &BaseRCTCallout<TUserData>::CreateVisual) {
-          compBuilder.SetCreateVisualHandler(
-              [](const winrt::Microsoft::ReactNative::ComponentView
-                     &view) noexcept {
-                auto userData = view.UserData().as<TUserData>();
-                return userData->CreateVisual(view);
-              });
-        }
-
-        // Allow app to further customize the builder
-        if (builderCallback) {
-          builderCallback(compBuilder);
-        }
-      });
-}
-
-} // namespace winrt::FluentUI::Callout::Codegen
-
 void RegisterCalloutComponentView(
     winrt::Microsoft::ReactNative::IReactPackageBuilder const &packageBuilder) {
-  winrt::FluentUI::Callout::Codegen::RegisterRCTCalloutNativeComponent2<
+  winrt::FluentUI::Callout::Codegen::RegisterCalloutNativeComponent<
       winrt::FluentUI::Callout::CalloutComponentView>(
       packageBuilder, [](const winrt::Microsoft::ReactNative::Composition::
                              IReactCompositionViewComponentBuilder &builder) {
