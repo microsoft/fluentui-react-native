@@ -203,6 +203,9 @@
       "path": "packages/libraries/core/tsconfig.json"
     },
     {
+      "path": "packages/native/macos-native/tsconfig.json"
+    },
+    {
       "path": "packages/theming/android-theme/tsconfig.json"
     },
     {
