@@ -36,12 +36,12 @@ updates:
     labels:
       - 'Type: Dependencies'
     versioning-strategy: lockfile-only
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     groups:
       github-actions:
-        patterns: ["*"]
+        patterns: ['*']
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     cooldown:
       default-days: 7
