@@ -1,5 +1,15 @@
 # Change Log - @fluentui/react-native
 
+## 0.44.1
+
+### Patch Changes
+
+- Updated dependencies [2cb34bb]
+- Updated dependencies [3405262]
+  - @fluentui-react-native/callout@0.29.1
+  - @fluentui-react-native/contextual-menu@0.25.8
+  - @fluentui-react-native/menu-button@0.15.2
+
 ## 0.44.0
 
 ### Minor Changes

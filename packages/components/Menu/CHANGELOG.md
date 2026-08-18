@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/menu
 
+## 1.16.2
+
+### Patch Changes
+
+- Updated dependencies [2cb34bb]
+- Updated dependencies [3405262]
+  - @fluentui-react-native/callout@0.29.1
+
 ## 1.16.1
 
 ### Patch Changes
