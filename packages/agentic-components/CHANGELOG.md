@@ -1,5 +1,14 @@
 # @fluentui-react-native/components
 
+## 0.2.1
+
+### Patch Changes
+
+- 3405262: Very initial framework for RNW fabric callout implementation
+- Updated dependencies [2cb34bb]
+- Updated dependencies [3405262]
+  - @fluentui-react-native/callout@0.29.1
+
 ## 0.2.0
 
 ### Minor Changes

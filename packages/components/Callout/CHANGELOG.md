@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/callout
 
+## 0.29.1
+
+### Patch Changes
+
+- 2cb34bb: Use generated Windows Fabric bindings for Callout while preserving the native popup implementation.
+- 3405262: Very initial framework for RNW fabric callout implementation
+
 ## 0.29.0
 
 ### Minor Changes

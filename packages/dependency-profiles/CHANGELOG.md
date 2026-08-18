@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
+## 0.10.4
+
+### Patch Changes
+
+- 46aabca: Update `workspace-tools` to `^0.42.0`
+
 ## 0.10.2
 
 ### Patch Changes
