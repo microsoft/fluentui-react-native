@@ -13,21 +13,21 @@ jobs:
     if: ${{ github.repository == 'microsoft/fluentui-react-native' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           filter: blob:none
           fetch-depth: 0
           persist-credentials: false
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
 
       - name: Install dependencies
         run: |
           yarn install --immutable
 
       - name: Generate token for version PR
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
         id: app-token
         with:
           app-id: ${{ vars.APP_ID }}
@@ -37,7 +37,7 @@ jobs:
 
       - name: Create Version Bump PR
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1.9.0
         with:
           version: yarn changeset:version
           createGithubReleases: false
