@@ -103,8 +103,6 @@ struct ExampleNativeView
 
  private:
   winrt::Microsoft::UI::Composition::SpriteVisual m_visual{nullptr};
-  winrt::Microsoft::ReactNative::ComponentView::LayoutMetricsChanged_revoker
-      m_layoutMetricsChangedRevoker;
 };
 #endif
 ```
