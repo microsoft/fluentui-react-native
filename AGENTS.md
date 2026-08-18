@@ -18,6 +18,7 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
   /component-generator/ - Tool to generate new components
 /packages/       - Core library packages
   /components/   - UI component implementations (Button, Checkbox, Avatar, etc.)
+  /native/       - Standalone native-backed component packages (Callout, etc.)
   /framework/    - Core theming and composition framework
     /composition/ - Component composition factory (current approach)
     /theme/      - Theme system
@@ -165,7 +166,8 @@ The composition framework uses precise types for better type safety:
 
 ### Component Development
 
-**Component Location**: Components are in `/packages/components/` (stable) or `/packages/experimental/` (under development).
+**Component Location**: Stable JavaScript components are in `/packages/components/`, standalone native-backed components are in
+`/packages/native/`, and components under development are in `/packages/experimental/`.
 
 **Component Structure**: Each component typically has:
 
@@ -199,7 +201,8 @@ The composition framework uses precise types for better type safety:
 
 - **Do not use barrel exports (`export * from '...'`)** - wildcard re-exports break tree-shaking because bundlers cannot statically determine which symbols are used, so unused code is retained in consumers' bundles. Always use explicit named re-exports instead, e.g. `export { Foo, Bar } from './module'` and `export type { Baz } from './module'`.
 
-**Native Modules**: Components with native code (iOS/Android/Windows):
+**Native Modules**: Standalone native-backed component packages, such as Callout, live in `/packages/native/`. Components with
+native code (iOS/Android/Windows):
 
 - Typically have one root slot wrapping the native component
 - Use `codegenNativeComponent` for new architecture compatibility
@@ -209,7 +212,8 @@ The composition framework uses precise types for better type safety:
 
 ### Creating a New Component
 
-1. Create directory: `/packages/components/<ComponentName>` or `/packages/experimental/<ComponentName>`
+1. Create the package under `/packages/components/<ComponentName>`, `/packages/native/<ComponentName>` for a standalone
+   native-backed component, or `/packages/experimental/<ComponentName>` while it is under development
 2. Copy structure from existing component (e.g., Shimmer, Button)
 3. Update `package.json` with correct name and dependencies (use `workspace:*` for internal packages)
 4. Add the new package's `tsconfig.json` to the root `tsconfig.json` `references` so it joins the unified build

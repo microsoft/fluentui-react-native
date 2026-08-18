@@ -147,7 +147,7 @@ automatically.
   `ref` during preparation, commonly with `useViewCommandFocus`; type ref-bearing
   roots with `React.PropsWithRef<...>`. For imperative native APIs, use an
   internal native ref plus `useImperativeHandle`, as in
-  `packages/components/Callout/src/Callout.tsx`.
+  `packages/native/Callout/src/Callout.tsx`.
 - Do not introduce `forwardRef` or a new public `ref` convention into an
   established v0 API without an explicit migration requirement.
 

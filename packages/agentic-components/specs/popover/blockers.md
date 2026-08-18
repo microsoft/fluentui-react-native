@@ -15,7 +15,7 @@ Reviewed:
 - `specs/popover/accessibility.md`
 - `specs/popover/tokens.yaml`
 - canonical authoring references for tests, rendering, and state/accessibility
-- comparable overlay implementations in `packages/components/Menu` and `packages/components/Callout`
+- comparable overlay implementations in `packages/components/Menu` and `packages/native/Callout`
 
 ## Blockers
 
