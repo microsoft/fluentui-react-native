@@ -3,7 +3,7 @@
 On-device [Storybook](https://storybook.js.org/) app (Storybook for React Native v10) for
 `@fluentui-react-native/components` and linked standalone native packages. It loads every
 `*.stories.(ts|tsx)` file from the agentic library source (`../src`) plus the standalone
-Callout package so its native stories run in the Fabric host.
+Callout and FocusZone packages so their native stories run in the Fabric host.
 
 It runs in Storybook **liteMode**, which mocks out the heavy default on-device UI
 (`@storybook/react-native-ui`). This avoids the `react-native-reanimated` /
@@ -15,6 +15,17 @@ The app shell includes a persistent theme header above the Storybook UI. It can 
 unwrapped (`No theme`, the default) or apply the default light, dark, or high-contrast FURN Theme.
 The selected Theme wraps the preview decorator, so it applies to every rendered story and remains
 selected while navigating between stories.
+
+For agent-driven work, [`agent-map.yaml`](agent-map.yaml) is the compact map of stable files,
+services, runtime events, lookup order, and native interaction rules. The checked-in
+`yarn storybook-agent` helper queries the live index rather than duplicating story IDs:
+
+```sh
+yarn storybook-agent status
+yarn storybook-agent stories FocusZone
+yarn storybook-agent select primitives-focuszone--circular-navigation
+yarn storybook-agent sweep FocusZone
+```
 
 ## Layout
 
@@ -92,6 +103,10 @@ Requires Visual Studio 2022 with the React Native Windows build prerequisites. T
 solution, `ExperimentalFeatures.props`, and build outputs are git-ignored and can be regenerated
 with `yarn windows:generate`.
 
+FocusZone is autolinked as a package-owned Windows Fabric native library. Its
+Windows component view handles directional navigation, single-stop Tab
+navigation, and focus restoration while the existing Win32 implementation
+remains platform-provided.
 The raw React Native Windows CLI path remains available as `yarn windows:cli`, but the declared
 `windows` workflow avoids two failure modes in this app: CLI deployment can stall while enabling
 Developer Mode, and starting Metro before the native build can make its watcher observe generated

@@ -1,0 +1,87 @@
+version: 1
+purpose: Agent-optimized map of stable Storybook structure and runtime discovery paths.
+
+sources:
+  config: src/main.ts
+  app_entry: index.js
+  app_shell: src/StorybookApp.tsx
+  theme_host: src/StorybookTheme.tsx
+  channel_server: storybook-server.cjs
+  generated_requires:
+    path: src/storybook.requires.ts
+    policy: generated-do-not-edit
+  story_globs:
+    - ../../src/**/*.stories.?(ts|tsx)
+    - ../../../components/Callout/src/**/*.stories.?(ts|tsx)
+    - ../../../components/FocusZone/src/**/*.stories.?(ts|tsx)
+
+services:
+  metro:
+    script: start
+    health_url: http://127.0.0.1:8081/status
+  channel:
+    script: storybook-server
+    websocket_url: ws://127.0.0.1:7007/
+    mcp_url: http://127.0.0.1:7007/mcp
+
+runtime_protocol:
+  index:
+    request:
+      type: RN_GET_INDEX
+      args: []
+    response: RN_GET_INDEX_RESPONSE
+  select:
+    request:
+      type: setCurrentStory
+      args:
+        - storyId: <runtime-story-id>
+    success: storyFinished
+    failures:
+      - storyErrored
+      - storyMissing
+      - storyThrewException
+
+agent_commands:
+  status: yarn storybook-agent status
+  find_stories: yarn storybook-agent stories <query>
+  select_story: yarn storybook-agent select <runtime-story-id>
+  sweep_stories: yarn storybook-agent sweep [query]
+
+lookup_order:
+  - Use "storybook-agent stories <query>" for runtime IDs; never guess ID slugging.
+  - Read this map for stable paths, services, and commands.
+  - Read src/main.ts for story-source changes.
+  - Read a matched story file for component-specific behavior.
+  - Read generated requires only to diagnose generation output.
+
+interaction_order:
+  - Use the WebSocket helper for listing, selecting, and sweeping stories.
+  - Use accessibility elements for native focus and control state.
+  - Use HID mouse or keyboard events when accessibility actions do not invoke React Native handlers.
+  - Use screenshots for visual evidence, not element lookup.
+
+native:
+  macos:
+    process: ReactTestApp
+    app_bundle: macos/DerivedData/Build/Products/Debug/ReactTestApp.app
+    coordinate_notes:
+      accessibility: logical-points
+      screenshots: backing-pixels
+      rule: Query element bounds and display scale; do not copy screenshot coordinates.
+  windows:
+    project_policy: generated
+    generation_script: windows:generate
+
+validation:
+  javascript:
+    - format
+    - lint
+    - bundle:macos
+  native:
+    normal: macos:build
+    after_native_or_pod_change: macos:build:clean
+
+output_hygiene:
+  - Use the helper's filtered and summary output instead of logging raw channel events.
+  - Search large native build logs for errors and final status instead of reading them in full.
+  - Keep warning suppression exact; console diagnostics remain available even when LogBox hides a warning.
