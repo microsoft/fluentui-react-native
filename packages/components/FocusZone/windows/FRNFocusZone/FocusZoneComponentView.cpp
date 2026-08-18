@@ -4,7 +4,7 @@
 
 #ifdef RNW_NEW_ARCH
 
-#include "codegen/react/components/FRNFocusZoneSpec/RCTFocusZone.g.h"
+#include "codegen/react/components/FRNFocusZoneSpec/FocusZone.g.h"
 
 namespace winrt::FRNFocusZone {
 
@@ -12,18 +12,24 @@ namespace winrtComp = winrt::Microsoft::ReactNative::Composition;
 namespace winrtInput = winrt::Microsoft::ReactNative::Composition::Input;
 namespace winrtRN = winrt::Microsoft::ReactNative;
 
-void CollectDescendants(const winrtRN::ComponentView &view, std::vector<winrtRN::ComponentView> &descendants) {
+void CollectFocusableDescendants(
+    const winrtRN::ComponentView &view,
+    std::vector<winrtRN::ComponentView> &descendants) {
   auto children = view.Children();
   for (uint32_t index = 0; index < children.Size(); ++index) {
     auto child = children.GetAt(index);
-    descendants.push_back(child);
-    CollectDescendants(child, descendants);
+    auto firstFocusable = winrtComp::FocusManager::FindFirstFocusableElement(child);
+    if (firstFocusable && firstFocusable.Tag() == child.Tag()) {
+      descendants.push_back(child);
+      continue;
+    }
+    CollectFocusableDescendants(child, descendants);
   }
 }
 
 struct FocusZoneComponentView
     : winrt::implements<FocusZoneComponentView, winrt::Windows::Foundation::IInspectable>,
-      FRNFocusZoneCodegen::BaseRCTFocusZone<FocusZoneComponentView> {
+      FRNFocusZoneCodegen::BaseFocusZone<FocusZoneComponentView> {
   void Initialize(const winrtRN::ComponentView &view) noexcept override {
     m_containerTag = view.Tag();
 
@@ -75,6 +81,7 @@ struct FocusZoneComponentView
     }
 
     int direction = 0;
+    bool horizontalNavigation = false;
     bool moveToStart = false;
     bool moveToEnd = false;
 
@@ -84,24 +91,28 @@ struct FocusZoneComponentView
           return;
         }
         direction = 1;
+        horizontalNavigation = false;
         break;
       case VirtualKey::Up:
         if (!IsVertical()) {
           return;
         }
         direction = -1;
+        horizontalNavigation = false;
         break;
       case VirtualKey::Right:
         if (!IsHorizontal()) {
           return;
         }
         direction = 1;
+        horizontalNavigation = true;
         break;
       case VirtualKey::Left:
         if (!IsHorizontal()) {
           return;
         }
         direction = -1;
+        horizontalNavigation = true;
         break;
       case VirtualKey::Home:
         moveToStart = true;
@@ -113,7 +124,11 @@ struct FocusZoneComponentView
         return;
     }
 
-    if (MoveFocus(view, direction, moveToStart, moveToEnd, ShouldWrap())) {
+    const bool moved =
+        Use2DNavigation() && direction != 0
+        ? MoveFocus2D(view, direction, horizontalNavigation, ShouldWrap())
+        : MoveFocus(view, direction, moveToStart, moveToEnd, ShouldWrap());
+    if (moved) {
       args.Handled(true);
     }
   }
@@ -128,10 +143,8 @@ struct FocusZoneComponentView
 
     if (tabNavigation == "NavigateWrap" || tabNavigation == "NavigateStopAtEnds") {
       const bool wrap = tabNavigation == "NavigateWrap";
-      const bool moved = MoveFocus(view, forward ? 1 : -1, false, false, wrap);
-      if (moved || !wrap) {
-        args.Handled(true);
-      }
+      MoveFocus(view, forward ? 1 : -1, false, false, wrap);
+      args.Handled(true);
       return;
     }
 
@@ -154,7 +167,7 @@ struct FocusZoneComponentView
       bool moveToEnd,
       bool wrap) noexcept {
     std::vector<winrtRN::ComponentView> candidates;
-    CollectDescendants(view, candidates);
+    CollectFocusableDescendants(view, candidates);
     if (candidates.empty()) {
       return false;
     }
@@ -182,6 +195,16 @@ struct FocusZoneComponentView
           index = ((index % count) + count) % count;
         } else if (index < 0 || index >= count) {
           break;
+        }
+
+        if (root) {
+          if (auto focused = root.GetFocusedComponent()) {
+            if (IsWithinContainer(focused, candidates[index]) ||
+                IsWithinContainer(candidates[index], focused) ||
+                OverlapsFocusedComponent(view, focused, candidates[index])) {
+              continue;
+            }
+          }
         }
 
         if (!candidates[index].TryFocus(winrtRN::FocusState::Keyboard)) {
@@ -213,6 +236,158 @@ struct FocusZoneComponentView
       return direction > 0 ? tryFocusFrom(0, 1) : tryFocusFrom(count - 1, -1);
     }
     return tryFocusFrom(focusedIndex + direction, direction);
+  }
+
+  struct RelativeRect {
+    double x;
+    double y;
+    double width;
+    double height;
+  };
+
+  static std::optional<RelativeRect> RelativeRectWithin(
+      const winrtRN::ComponentView &container,
+      const winrtRN::ComponentView &node) noexcept {
+    const auto metrics = node.LayoutMetrics();
+    RelativeRect rect{
+        metrics.Frame.X,
+        metrics.Frame.Y,
+        metrics.Frame.Width,
+        metrics.Frame.Height};
+
+    auto current = node.Parent();
+    while (current && current.Tag() != container.Tag()) {
+      const auto parentMetrics = current.LayoutMetrics();
+      rect.x += parentMetrics.Frame.X;
+      rect.y += parentMetrics.Frame.Y;
+      current = current.Parent();
+    }
+    return current ? std::optional<RelativeRect>{rect} : std::nullopt;
+  }
+
+  static bool OverlapsFocusedComponent(
+      const winrtRN::ComponentView &container,
+      const winrtRN::ComponentView &focused,
+      const winrtRN::ComponentView &candidate) noexcept {
+    const auto focusedRect = RelativeRectWithin(container, focused);
+    const auto candidateRect = RelativeRectWithin(container, candidate);
+    if (!focusedRect || !candidateRect) {
+      return false;
+    }
+
+    const double overlapWidth =
+        std::min(focusedRect->x + focusedRect->width, candidateRect->x + candidateRect->width) -
+        std::max(focusedRect->x, candidateRect->x);
+    const double overlapHeight =
+        std::min(focusedRect->y + focusedRect->height, candidateRect->y + candidateRect->height) -
+        std::max(focusedRect->y, candidateRect->y);
+    return overlapWidth > 0.5 && overlapHeight > 0.5;
+  }
+
+  bool MoveFocus2D(
+      const winrtRN::ComponentView &view,
+      int direction,
+      bool horizontal,
+      bool wrap) noexcept {
+    auto root = view.as<winrtComp::ComponentView>().Root();
+    if (!root) {
+      return false;
+    }
+
+    auto focused = root.GetFocusedComponent();
+    if (!focused || !IsWithinContainer(view, focused)) {
+      return MoveFocus(view, direction, false, false, wrap);
+    }
+
+    const auto focusedRect = RelativeRectWithin(view, focused);
+    if (!focusedRect) {
+      return MoveFocus(view, direction, false, false, wrap);
+    }
+
+    const double focusedPrimary =
+        horizontal ? focusedRect->x + focusedRect->width / 2 : focusedRect->y + focusedRect->height / 2;
+    const double focusedCross =
+        horizontal ? focusedRect->y + focusedRect->height / 2 : focusedRect->x + focusedRect->width / 2;
+
+    struct Candidate {
+      winrtRN::ComponentView view;
+      double primary;
+      double cross;
+      double distance;
+      size_t order;
+    };
+
+    std::vector<winrtRN::ComponentView> descendants;
+    CollectFocusableDescendants(view, descendants);
+    std::vector<Candidate> directionalCandidates;
+    std::vector<Candidate> allCandidates;
+    allCandidates.reserve(descendants.size());
+
+    for (size_t order = 0; order < descendants.size(); ++order) {
+      const auto &candidate = descendants[order];
+      if (candidate.Tag() == focused.Tag()) {
+        continue;
+      }
+      const auto rect = RelativeRectWithin(view, candidate);
+      if (!rect) {
+        continue;
+      }
+
+      const double primary = horizontal ? rect->x + rect->width / 2 : rect->y + rect->height / 2;
+      const double cross = horizontal ? rect->y + rect->height / 2 : rect->x + rect->width / 2;
+      const double primaryDelta = primary - focusedPrimary;
+      const double crossDelta = cross - focusedCross;
+      Candidate ranked{
+          candidate,
+          primary,
+          cross,
+          std::hypot(primaryDelta, crossDelta),
+          order};
+      allCandidates.push_back(ranked);
+      if (direction * primaryDelta > 0.5) {
+        directionalCandidates.push_back(ranked);
+      }
+    }
+
+    auto tryRankedCandidates = [&](std::vector<Candidate> &candidates) noexcept {
+      std::sort(candidates.begin(), candidates.end(), [focusedCross](const Candidate &left, const Candidate &right) {
+        if (left.distance != right.distance) {
+          return left.distance < right.distance;
+        }
+        const double leftCross = std::abs(left.cross - focusedCross);
+        const double rightCross = std::abs(right.cross - focusedCross);
+        return leftCross != rightCross ? leftCross < rightCross : left.order < right.order;
+      });
+
+      for (const auto &candidate : candidates) {
+        if (!candidate.view.TryFocus(winrtRN::FocusState::Keyboard)) {
+          continue;
+        }
+        if (auto newlyFocused = root.GetFocusedComponent(); newlyFocused && newlyFocused.Tag() != focused.Tag()) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    if (tryRankedCandidates(directionalCandidates)) {
+      return true;
+    }
+    if (!wrap || allCandidates.empty()) {
+      return false;
+    }
+
+    const auto edge = std::minmax_element(
+        allCandidates.begin(),
+        allCandidates.end(),
+        [](const Candidate &left, const Candidate &right) { return left.primary < right.primary; });
+    const double wrapEdge = direction > 0 ? edge.first->primary : edge.second->primary;
+    for (auto &candidate : allCandidates) {
+      const double edgeDistance = std::abs(candidate.primary - wrapEdge);
+      const double crossDistance = std::abs(candidate.cross - focusedCross);
+      candidate.distance = edgeDistance * 10000 + crossDistance;
+    }
+    return tryRankedCandidates(allCandidates);
   }
 
   static int SiblingIndex(const winrtRN::ComponentView &node, const winrtRN::ComponentView &parent) noexcept {
@@ -270,13 +445,15 @@ struct FocusZoneComponentView
   bool FocusOutsideZone(const winrtRN::ComponentView &container, bool forward) noexcept {
     if (forward) {
       for (auto node = NextSkippingSubtree(container); node; node = PreOrderNext(node)) {
-        if (node.TryFocus(winrtRN::FocusState::Keyboard)) {
+        auto candidate = winrtComp::FocusManager::FindFirstFocusableElement(node);
+        if (candidate && candidate.TryFocus(winrtRN::FocusState::Keyboard)) {
           return true;
         }
       }
     } else {
       for (auto node = PreOrderPrevious(container); node; node = PreOrderPrevious(node)) {
-        if (node.TryFocus(winrtRN::FocusState::Keyboard)) {
+        auto candidate = winrtComp::FocusManager::FindLastFocusableElement(node);
+        if (candidate && candidate.TryFocus(winrtRN::FocusState::Keyboard)) {
           return true;
         }
       }
@@ -285,22 +462,11 @@ struct FocusZoneComponentView
   }
 
   bool FocusEdgeDescendant(const winrtRN::ComponentView &view, bool last) noexcept {
-    std::vector<winrtRN::ComponentView> candidates;
-    CollectDescendants(view, candidates);
-    if (last) {
-      for (auto candidate = candidates.rbegin(); candidate != candidates.rend(); ++candidate) {
-        if (candidate->TryFocus(winrtRN::FocusState::Keyboard)) {
-          return true;
-        }
-      }
-    } else {
-      for (const auto &candidate : candidates) {
-        if (candidate.TryFocus(winrtRN::FocusState::Keyboard)) {
-          return true;
-        }
-      }
-    }
-    return false;
+    auto candidate =
+        last
+        ? winrtComp::FocusManager::FindLastFocusableElement(view)
+        : winrtComp::FocusManager::FindFirstFocusableElement(view);
+    return candidate && candidate.TryFocus(winrtRN::FocusState::Keyboard);
   }
 
   void HandleGotFocus(const winrtRN::ComponentView &container) noexcept {
@@ -335,7 +501,7 @@ struct FocusZoneComponentView
     }
 
     std::vector<winrtRN::ComponentView> candidates;
-    CollectDescendants(container, candidates);
+    CollectFocusableDescendants(container, candidates);
     for (const auto &candidate : candidates) {
       if (candidate.Tag() == preferredTag) {
         args.TrySetNewFocusedComponent(candidate);
@@ -382,6 +548,11 @@ struct FocusZoneComponentView
     return props && props->navigateAtEnd && *props->navigateAtEnd == "NavigateWrap";
   }
 
+  bool Use2DNavigation() const noexcept {
+    auto props = Props();
+    return props && props->use2DNavigation.value_or(false);
+  }
+
   std::string TabNavigation() const noexcept {
     auto props = Props();
     return props && props->tabKeyNavigation ? *props->tabKeyNavigation : "None";
@@ -411,38 +582,9 @@ struct FocusZoneComponentView
 } // namespace winrt::FRNFocusZone
 
 void RegisterFocusZoneComponentView(const winrt::Microsoft::ReactNative::IReactPackageBuilder &packageBuilder) noexcept {
-  namespace winrtComp = winrt::Microsoft::ReactNative::Composition;
-  namespace winrtRN = winrt::Microsoft::ReactNative;
   using ComponentView = winrt::FRNFocusZone::FocusZoneComponentView;
 
-  packageBuilder.as<winrtRN::IReactPackageBuilderFabric>().AddViewComponent(
-      L"FocusZone", [](const winrtRN::IReactViewComponentBuilder &builder) noexcept {
-        auto compositionBuilder = builder.as<winrtComp::IReactCompositionViewComponentBuilder>();
-
-        builder.SetCreateProps(
-            [](winrtRN::ViewProps props, const winrtRN::IComponentProps &cloneFrom) noexcept {
-              return winrt::make<FRNFocusZoneCodegen::RCTFocusZoneProps>(props, cloneFrom);
-            });
-        builder.SetUpdatePropsHandler(
-            [](const winrtRN::ComponentView &view,
-               const winrtRN::IComponentProps &newProps,
-               const winrtRN::IComponentProps &oldProps) noexcept {
-              view.UserData().as<ComponentView>()->UpdateProps(
-                  view,
-                  newProps ? newProps.as<FRNFocusZoneCodegen::RCTFocusZoneProps>() : nullptr,
-                  oldProps ? oldProps.as<FRNFocusZoneCodegen::RCTFocusZoneProps>() : nullptr);
-            });
-        builder.SetUpdateEventEmitterHandler(
-            [](const winrtRN::ComponentView &view, const winrtRN::EventEmitter &eventEmitter) noexcept {
-              view.UserData().as<ComponentView>()->UpdateEventEmitter(
-                  std::make_shared<FRNFocusZoneCodegen::RCTFocusZoneEventEmitter>(eventEmitter));
-            });
-        compositionBuilder.SetViewComponentViewInitializer([](const winrtRN::ComponentView &view) noexcept {
-          auto userData = winrt::make_self<ComponentView>();
-          userData->Initialize(view);
-          view.UserData(*userData);
-        });
-      });
+  FRNFocusZoneCodegen::RegisterFocusZoneNativeComponent<ComponentView>(packageBuilder, {});
 }
 
 #endif

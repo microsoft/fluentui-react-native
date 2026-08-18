@@ -35,6 +35,7 @@ const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9,
         onPress={() => beforeRef.current?.focus()}
         ref={beforeRef}
         style={({ pressed }) => [styles.outsideButton, pressed && styles.pressed]}
+        testID="focus-zone-before"
       >
         <Text>Outside before</Text>
       </Pressable>
@@ -43,6 +44,7 @@ const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9,
         componentRef={focusZoneRef}
         defaultTabbableElement={defaultToCenter ? centerRef : undefined}
         style={styles.focusZone}
+        testID="focus-zone-root"
       >
         <View style={styles.grid}>
           {items.map((item, index) => (
@@ -65,6 +67,7 @@ const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9,
                 focusedItem === `Item ${item}` && styles.focused,
                 pressed && styles.pressed,
               ]}
+              testID={`focus-zone-item-${item}`}
             >
               <Text style={styles.itemText}>{item}</Text>
             </Pressable>
@@ -78,6 +81,7 @@ const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9,
         onPress={() => afterRef.current?.focus()}
         ref={afterRef}
         style={({ pressed }) => [styles.outsideButton, pressed && styles.pressed]}
+        testID="focus-zone-after"
       >
         <Text>Outside after</Text>
       </Pressable>
@@ -88,7 +92,7 @@ const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9,
       >
         <Text style={styles.focusButtonText}>Focus the zone</Text>
       </Pressable>
-      <Text accessibilityLiveRegion="polite" style={styles.status}>
+      <Text accessibilityLiveRegion="polite" style={styles.status} testID="focus-zone-status">
         Focused: {focusedItem}
       </Text>
     </View>
@@ -149,6 +153,20 @@ export const CircularNavigation: Story = {
     docs: {
       description: {
         story: 'Horizontal arrow navigation wraps from the first and last items.',
+      },
+    },
+  },
+};
+
+export const TwoDimensionalNavigation: Story = {
+  args: {
+    use2DNavigation: true,
+  },
+  render: (args) => <FocusZoneExample {...args} />,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Geometric navigation moves vertically between rows and horizontally within each row.',
       },
     },
   },
