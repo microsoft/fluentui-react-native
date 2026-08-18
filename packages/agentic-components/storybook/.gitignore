@@ -32,3 +32,4 @@ windows/*.wrn
 windows/ExperimentalFeatures.props
 windows/NuGet.Config
 dist/
+artifacts/

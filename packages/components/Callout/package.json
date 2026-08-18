@@ -78,6 +78,7 @@
     "name": "FRNCalloutSpec",
     "type": "all",
     "jsSrcsDir": "src",
+    "includesGeneratedCode": true,
     "ios": {
       "componentProvider": {
         "Callout": "RCTCalloutComponentView"
@@ -85,8 +86,8 @@
     },
     "windows": {
       "generators": "componentsWindows",
-      "namespace": "FRNCalloutCodegen",
-      "outputDirectory": "windows/FRNCallout/codegen",
+      "namespace": "winrt::FluentUI::Callout::Codegen",
+      "outputDirectory": "windows/Callout/codegen",
       "separateDataTypes": true
     }
   },
@@ -95,8 +96,8 @@
   },
   "react-native-windows": {
     "init-windows": {
-      "name": "FRNCallout",
-      "namespace": "FRNCallout",
+      "name": "Callout",
+      "namespace": "FluentUI.Callout",
       "template": "cpp-lib"
     }
   },

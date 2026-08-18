@@ -69,4 +69,6 @@ export const Commands: NativeCalloutCommands = codegenNativeCommands<NativeCallo
   supportedCommands: ['blurWindow', 'focusWindow'],
 });
 
-export default codegenNativeComponent<NativeProps>('RCTCallout') as CalloutComponentType;
+export default codegenNativeComponent<NativeProps>('Callout', {
+  paperComponentName: 'RCTCallout',
+}) as CalloutComponentType;
