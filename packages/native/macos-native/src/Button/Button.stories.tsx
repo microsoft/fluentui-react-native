@@ -14,6 +14,10 @@ const meta: Meta<typeof Button> = {
     title: 'Button',
     bezelStyle: 'rounded',
     disabled: false,
+    style: {
+      height: 32,
+      minWidth: 100,
+    },
   },
   parameters: {
     docs: {

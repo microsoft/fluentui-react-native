@@ -14,7 +14,7 @@ export interface NativeProps extends ViewProps {
   pullsDown?: boolean;
   disabled?: boolean;
   tooltip?: string;
-  onChange?: BubblingEventHandler<{ selectedIndex: number; identifier: string | null }>;
+  onChange?: BubblingEventHandler<{ selectedIndex: number; identifier: string }>;
 }
 
 export default requireNativeComponent<NativeProps>('FRNPopUpButton');

@@ -47,7 +47,7 @@ class FRNPopUpButton: NSPopUpButton {
   @objc(sendChangeEvent:)
   private func sendChangeEvent(sender: NSPopUpButton) {
     let index = indexOfSelectedItem
-    let identifier = titleOfSelectedItem != nil ? selectedItem?.identifier?.rawValue : nil
-    onChange?(["selectedIndex": index, "identifier": identifier as Any])
+    let identifier = selectedItem?.identifier?.rawValue ?? ""
+    onChange?(["selectedIndex": index, "identifier": identifier])
   }
 }

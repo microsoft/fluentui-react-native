@@ -26,5 +26,5 @@ export interface PopUpButtonProps extends ViewProps {
   /** Native tooltip shown on hover. */
   tooltip?: string;
   /** Fired when the user selects an item. */
-  onChange?: (selectedIndex: number, identifier: string | null) => void;
+  onChange?: (selectedIndex: number, identifier: string) => void;
 }

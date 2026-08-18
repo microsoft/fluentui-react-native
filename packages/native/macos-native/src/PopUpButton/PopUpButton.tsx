@@ -5,7 +5,7 @@ import NativePopUpButton from './PopUpButtonNativeComponent';
 export const PopUpButton = (props: PopUpButtonProps) => {
   const { onChange, ...rest } = props;
   const onChangeNative = onChange
-    ? (event: { nativeEvent: { selectedIndex: number; identifier: string | null } }) =>
+    ? (event: { nativeEvent: { selectedIndex: number; identifier: string } }) =>
         onChange(event.nativeEvent.selectedIndex, event.nativeEvent.identifier)
     : undefined;
   return <NativePopUpButton {...rest} onChange={onChangeNative} />;

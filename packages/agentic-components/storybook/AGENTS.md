@@ -30,6 +30,21 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
 - Avoid patching generated pod source. If a temporary source patch is unavoidable, document its exact version boundary.
   When removing it, reinstall the affected pod and perform a clean build so stale generated source cannot mask the result.
 
+## Interacting with the running macOS app
+
+- Use the repository-pinned `agent-device` root dev dependency for live app inspection. Invoke it from the repository
+  root as `yarn exec agent-device`; do not install another copy or fall back to `npx`.
+- Start Metro and launch the app with the declared `start` and `macos` scripts, then attach with
+  `yarn exec agent-device open "Agentic Components Storybook" --platform macos`. Continue from the initial interactive
+  snapshot.
+- Prefer the loop `open -> snapshot -i -> act with current refs -> snapshot -i -> verify -> close`. Refs are invalidated
+  by UI changes, so only use refs from the latest snapshot or settled command output.
+- Use `yarn exec agent-device screenshot <path>` when visual evidence is useful. For a blank window, runtime error,
+  Metro/Fast Refresh issue, or React Native diagnostics, read `yarn exec agent-device help react-native`,
+  `yarn exec agent-device help debugging`, or `yarn exec agent-device help macos` before choosing specialized commands.
+- Keep all commands for one investigation on the same agent-device session. Accessibility labels, roles, and test IDs
+  are the primary inspection signal; use screenshots as evidence or when the accessibility tree is sparse.
+
 ## Windows native workflow
 
 - Use `windows:generate` to regenerate the Fabric solution, `windows` for the development build, and `windows:offline`

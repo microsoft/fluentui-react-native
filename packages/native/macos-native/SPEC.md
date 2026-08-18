@@ -13,6 +13,7 @@ and decisions (Now / Later / Don't implement).
 | Component           | AppKit control                     | Notes                                                                                                                              |
 | ------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `Button`            | `NSButton` (momentary push button) | `bezelStyle` includes `'glass'` (macOS 26 Tahoe Liquid Glass), which falls back to the default rounded bezel on older OS versions. |
+| `DisclosureGroup`   | SwiftUI `DisclosureGroup`          | Expandable native container that hosts React Native children and reports expansion changes.                                        |
 | `Switch`            | `NSSwitch`                         | Simple on/off toggle.                                                                                                              |
 | `Slider`            | `NSSlider`                         | Continuous or commit-on-release value slider, with optional tick marks.                                                            |
 | `SegmentedControl`  | `NSSegmentedControl`               | Array-of-segments API; segments rebuild natively whenever the `segments` prop changes.                                             |
@@ -51,20 +52,18 @@ such as `packages/experimental/Checkbox` and `packages/components/MenuButton`:
   event payloads into plain callback arguments (e.g. `onValueChange?: (value: number) => void`).
 - `src/<Name>/<Name>.stories.tsx` — a colocated Storybook story (Storybook CSF3, `Meta`/`StoryObj`).
 
+`DisclosureGroup` additionally embeds SwiftUI through `NSHostingView` and redirects React Native child views into the
+SwiftUI disclosure content. On macOS 10.15, where SwiftUI's `DisclosureGroup` is unavailable, it falls back to a plain
+React Native container.
+
 All native `.swift`/`.h`/`.m` sources live together under a single `macos/` directory and are packaged by
 `FRNMacosNative.podspec`, matching the single-package structure requested by `PLAN.md`.
 
 ## Known limitations / follow-ups
 
-- **Storybook wiring**: stories are colocated with each component per package convention, but this package is not
-  yet wired into the `packages/agentic-components/storybook` app's Podfile/native project. `agentic-components`
-  production source (including its Storybook app) is restricted to depending on RN core components,
-  `@fluentui-react-native/design`, and `@fluentui-react-native/framework-base` — a native package like this one is
-  out of that boundary today. Wiring these stories into a running Storybook (Podfile entry, pod install, Xcode/
-  Metro build) is a follow-up requiring a decision on where these native-control stories should be hosted.
-- **No automated test/build verification of the native Swift/Objective-C code**: this environment does not have an
-  Xcode toolchain or the FluentTester/Storybook macOS native projects built, so the native sources have not been
-  compiled. The TypeScript side has been typechecked (`tsc -b`) and linted.
+- **Storybook host**: the colocated stories are loaded by `packages/agentic-components/storybook`, which directly
+  depends on this package so React Native autolinking includes the macOS pod. Use that app for native build and runtime
+  verification.
 - **Liquid Glass availability gating**: `Button`'s `'glass'` bezel style is guarded with `@available(macOS 26.0, *)`
   and falls back to `rounded` on older OS versions; this has not been runtime-verified against an actual macOS 26
   device/simulator.

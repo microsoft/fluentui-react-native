@@ -205,6 +205,14 @@ Legend for **Decision**:
   Requires macOS 26+ availability guards and careful fallback for older OS versions. **Decision: Now** (flagged as
   higher risk due to newness/availability gating — validate against the target minimum OS deployment first).
 
+### SwiftUI DisclosureGroup
+
+- **Description**: Expandable container with a native disclosure indicator, text label, and content region.
+- **Customizations**: label, expanded state, disabled state, and arbitrary React Native child content.
+- **Liquid Glass**: No explicit glass API; it follows the surrounding SwiftUI environment.
+- **Summary**: Provides native macOS disclosure interaction and accessibility semantics while remaining a small
+  container primitive. **Decision: Now**
+
 ## Overall Recommendations (Decision Summary)
 
 | Control                                        | Decision                                     |
@@ -230,13 +238,14 @@ Legend for **Decision**:
 | NSSplitView                                    | Later                                        |
 | NSVisualEffectView                             | Now                                          |
 | NSGlassEffectView / NSGlassEffectContainerView | Now (higher risk — new/OS-gated API)         |
+| SwiftUI DisclosureGroup                        | Now                                          |
 
-**First wave ("Now") — 8 components implemented**: NSButton, NSSwitch, NSSlider, NSSegmentedControl, NSPopUpButton,
-NSProgressIndicator, NSStepper, NSVisualEffectView. These share a common shape: no data-source/cell-provider
-bridging, small typed prop surface, and a single change event — ideal for `framework-base` primitives with
-`codegenNativeComponent`. See `@fluentui-react-native/macos-native` (`packages/native/macos-native`) and its
-`SPEC.md` for the implementation. The Liquid Glass views (NSGlassEffectView / NSGlassEffectContainerView) were
-treated as a stretch item and are not yet implemented, pending confirmation of a minimum macOS 26 deployment target.
+**Implemented controls**: NSButton, NSSwitch, NSSlider, NSSegmentedControl, NSPopUpButton, NSProgressIndicator,
+NSStepper, NSVisualEffectView, and SwiftUI DisclosureGroup. These share a small typed prop surface and native event
+contract suitable for `framework-base` primitives with `codegenNativeComponent`. See
+`@fluentui-react-native/macos-native` (`packages/native/macos-native`) and its `SPEC.md` for the implementation. The
+Liquid Glass views (NSGlassEffectView / NSGlassEffectContainerView) remain unimplemented pending confirmation of a
+minimum macOS 26 deployment target.
 
 **Second wave ("Later")**: NSColorWell, NSDatePicker, NSTableView/NSOutlineView, NSComboBox, NSCollectionView,
 NSToolbar, NSSplitView — each needs a dedicated design pass (data source bridging, window-level integration, or

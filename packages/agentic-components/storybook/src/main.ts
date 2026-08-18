@@ -7,7 +7,11 @@ import type { StorybookConfig } from '@storybook/react-native';
  * that are linked into this application.
  */
 const main: StorybookConfig = {
-  stories: ['../../src/**/*.stories.?(ts|tsx)', '../../../components/Callout/src/**/*.stories.?(ts|tsx)'],
+  stories: [
+    '../../src/**/*.stories.?(ts|tsx)',
+    '../../../components/Callout/src/**/*.stories.?(ts|tsx)',
+    '../../../native/macos-native/src/**/*.stories.?(ts|tsx)',
+  ],
   addons: [],
   deviceAddons: ['@storybook/addon-ondevice-controls', '@storybook/addon-ondevice-actions'],
 };

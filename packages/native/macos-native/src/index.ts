@@ -1,6 +1,9 @@
 export { Button } from './Button';
 export type { ButtonBezelStyle, ButtonProps } from './Button';
 
+export { DisclosureGroup } from './DisclosureGroup';
+export type { DisclosureGroupProps } from './DisclosureGroup';
+
 export { PopUpButton } from './PopUpButton';
 export type { PopUpButtonItem, PopUpButtonProps } from './PopUpButton';
 

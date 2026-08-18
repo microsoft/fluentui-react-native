@@ -47,6 +47,7 @@
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/lint-lockfile": "catalog:",
     "@yarnpkg/types": "^4.0.1",
+    "agent-device": "^0.20.7",
     "babel-jest": "^29.7.0",
     "cross-env": "catalog:",
     "knip": "catalog:",

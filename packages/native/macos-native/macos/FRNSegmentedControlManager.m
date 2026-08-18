@@ -3,7 +3,7 @@
 
 @implementation RCTConvert (FRNSegmentedControlAdditions)
 
-RCT_ENUM_CONVERTER(NSSegmentedControlTrackingMode, (@{
+RCT_ENUM_CONVERTER(NSSegmentSwitchTracking, (@{
 	@"selectOne": @(NSSegmentSwitchTrackingSelectOne),
 	@"selectAny": @(NSSegmentSwitchTrackingSelectAny),
 	@"momentary": @(NSSegmentSwitchTrackingMomentary),
@@ -26,7 +26,7 @@ RCT_ENUM_CONVERTER(NSSegmentStyle, (@{
 
 RCT_EXPORT_VIEW_PROPERTY(segments, NSArray)
 RCT_REMAP_VIEW_PROPERTY(selectedIndex, selectedSegment, NSInteger)
-RCT_EXPORT_VIEW_PROPERTY(trackingMode, NSSegmentedControlTrackingMode)
+RCT_EXPORT_VIEW_PROPERTY(trackingMode, NSSegmentSwitchTracking)
 RCT_EXPORT_VIEW_PROPERTY(segmentStyle, NSSegmentStyle)
 RCT_CUSTOM_VIEW_PROPERTY(disabled, BOOL, NSSegmentedControl) {
   [view setEnabled:![RCTConvert BOOL:json]];

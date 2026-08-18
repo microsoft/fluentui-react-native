@@ -73,6 +73,29 @@ yarn pods:macos:update
 > therefore not installed; `metro.config.js` aliases the import to a JS-only stub in
 > `.storybook-mocks/`, so no native module is needed.
 
+### Inspecting the running macOS app with agent-device
+
+The repository pins [`agent-device`](https://github.com/callstack/agent-device) as a root dev dependency. With Metro and
+the macOS app running, invoke it through Yarn from the repository root:
+
+```sh
+yarn exec agent-device open "Agentic Components Storybook" --platform macos
+yarn exec agent-device snapshot -i
+yarn exec agent-device screenshot ./storybook-macos.png
+yarn exec agent-device close
+```
+
+Use refs such as `@e3` only from the latest snapshot, since refs change after UI updates. For runtime errors, Metro/Fast
+Refresh issues, logs, or macOS-specific command details, use the installed version's matching guidance:
+
+```sh
+yarn exec agent-device help react-native
+yarn exec agent-device help debugging
+yarn exec agent-device help macos
+```
+
+Do not install another copy or fall back to `npx`; use the version recorded in the root manifest and lockfile.
+
 ## Running on Windows
 
 The Windows app also uses `react-native-test-app`. Its generated Win32 project uses React Native
