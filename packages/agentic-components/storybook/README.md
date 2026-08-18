@@ -81,19 +81,22 @@ Windows Fabric native library; its Paper implementation remains built into the p
 
 ```powershell
 # from this directory
-# 1. Generate the Fabric Windows solution
-yarn windows:generate
-
-# 2. Start Metro (also generates storybook.requires)
-yarn start
-
-# 3. In another terminal, build and launch the Windows app
+# Generate when needed, build and register before Metro, then launch the Debug app
 yarn windows
+
+# Stop the Storybook server, Metro, and app processes owned by this session
+yarn windows:agent:stop
 ```
 
 Requires Visual Studio 2022 with the React Native Windows build prerequisites. The generated
 solution, `ExperimentalFeatures.props`, and build outputs are git-ignored and can be regenerated
 with `yarn windows:generate`.
+
+The raw React Native Windows CLI path remains available as `yarn windows:cli`, but the declared
+`windows` workflow avoids two failure modes in this app: CLI deployment can stall while enabling
+Developer Mode, and starting Metro before the native build can make its watcher observe generated
+AppPackages being rewritten. A manually launched Debug app has no embedded JavaScript bundle and
+will remain on the loading screen unless Metro is already serving this workspace on port 8081.
 
 For a non-deploying build with structured logs:
 

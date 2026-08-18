@@ -183,6 +183,12 @@ The complete persistence chain is:
 
 A file on disk but absent from `.vcxproj` is not compiled.
 
+When Fabric and Paper use different component names, generate the Fabric name
+directly and set `paperComponentName` in `codegenNativeComponent`. Callout uses
+the Fabric name `Callout` and the Paper fallback `RCTCallout`; Windows can
+therefore use the generated `RegisterCalloutNativeComponent` helper without
+copying or modifying generated registration code.
+
 ## Paper compatibility
 
 When a package intentionally supports both architectures, guard Fabric-only

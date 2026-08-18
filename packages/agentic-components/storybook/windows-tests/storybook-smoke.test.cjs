@@ -12,12 +12,24 @@ beforeAll(async () => {
   await getIndex();
 });
 
-test.each(smokeStories)('renders $storyId with a stable native selector', async ({ artifactName, storyId, testId }) => {
+test.each(smokeStories)('renders $storyId with stable native selectors', async ({ artifactName, statusTestId, storyId, testId }) => {
   await selectStory(storyId);
 
   const element = await app.findElementByTestID(testId);
   await element.waitForDisplayed({ timeout: 30000 });
   const displayed = await element.isDisplayed();
   expect(displayed).toBe(true);
-  fs.writeFileSync(path.join(artifactsDirectory, `${artifactName}.json`), `${JSON.stringify({ storyId, testId, displayed }, null, 2)}\n`);
+
+  let statusText;
+  if (statusTestId) {
+    const statusElement = await app.findElementByTestID(statusTestId);
+    await statusElement.waitForDisplayed({ timeout: 30000 });
+    statusText = await statusElement.getText();
+    expect(statusText).toBe('Native window: Shown');
+  }
+
+  fs.writeFileSync(
+    path.join(artifactsDirectory, `${artifactName}.json`),
+    `${JSON.stringify({ storyId, testId, displayed, statusTestId, statusText }, null, 2)}\n`,
+  );
 });

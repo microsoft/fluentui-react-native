@@ -12,6 +12,7 @@
   {
     "storyId": "primitives-callout--default",
     "testId": "agentic-storybook-callout-trigger",
+    "statusTestId": "agentic-storybook-callout-status",
     "artifactName": "callout-default"
   }
 ]
