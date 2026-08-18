@@ -6,7 +6,7 @@
 
 #include "NativeModules.h"
 
-#include "../codegen/react/components/FRNCalloutSpec/RCTCallout.g.h"
+#include "codegen/react/components/FRNCalloutSpec/Callout.g.h"
 
 #include <winrt/Microsoft.ReactNative.Composition.Experimental.h>
 #include <winrt/Microsoft.ReactNative.Composition.Input.h>

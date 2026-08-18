@@ -57,18 +57,19 @@ const CalloutExample = ({ defaultVisible = false, onDismiss, onShow, showWindowC
           }}
           ref={anchorRef}
           style={({ pressed }) => [styles.trigger, pressed && styles.triggerPressed]}
+          testID="agentic-storybook-callout-trigger"
         >
           <Text style={styles.triggerText}>{visible ? 'Close callout' : 'Open callout'}</Text>
         </Pressable>
       </View>
-      <Text accessibilityLiveRegion="polite" style={styles.status}>
+      <Text accessibilityLiveRegion="polite" style={styles.status} testID="agentic-storybook-callout-status">
         Native window: {status}
       </Text>
       {visible && (
         <Callout {...props} componentRef={calloutRef} onDismiss={dismiss} onShow={show} target={anchorRef}>
           <View style={styles.calloutContent} collapsable={false}>
             <Text style={styles.heading}>Fabric Callout</Text>
-            <Text style={styles.body}>This content is hosted in a separate native macOS window.</Text>
+            <Text style={styles.body}>This content is hosted in a separate native window.</Text>
             {showWindowCommands && (
               <View style={styles.commandRow}>
                 <Pressable accessibilityRole="button" onPress={() => calloutRef.current?.focusWindow()} style={styles.command}>
@@ -150,6 +151,7 @@ const meta: Meta<typeof Callout> = {
     directionalHint: 'bottomCenter',
     maxWidth: 320,
     setInitialFocus: false,
+    testID: 'agentic-storybook-callout',
   },
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -185,7 +187,7 @@ export const Placement: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Each trigger requests one of the four macOS placement edges. The native Callout may flip or slide to remain on screen.',
+        story: 'Each trigger requests one of four placement edges. The native Callout remains within the available work area.',
       },
     },
   },

@@ -44,8 +44,20 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 
 ## Windows native workflow
 
-- Use `windows:generate` to regenerate the Fabric solution, `windows` for the development build, and `windows:offline`
-  for the bundled Release workflow.
+- Run `windows:info` before investigating a machine-specific toolchain failure.
+- Use `windows:generate` to regenerate the Fabric solution, `windows` for the ordinary development build,
+  `windows:build` for a non-deploying native build, and `windows:offline` for the bundled Release workflow.
+- Use `windows:agent` for the complete agent workflow: start the channel server and Metro, build and launch the app,
+  and validate the smoke stories through stable UI Automation selectors. Use `windows:agent:stop` to stop only the
+  process IDs recorded by that session.
+- WinAppDriver screenshots are not a reliable capture path for WinAppSDK Composition content. After selecting a story
+  with `storybook:control`, use the agent host's desktop screenshot tool when visual evidence is required.
+- Build logs, automation evidence, visual trees, screenshots, and session manifests belong under ignored
+  `artifacts/windows`.
+- Stable native automation selectors use explicit `testID` props. Do not select by visible text, layout order, or
+  generated native class name.
+- The Storybook REST control helper is `storybook:control`; `storybook:smoke` selects every indexed story and waits for
+  its rendered event.
 - Keep generated solutions, packages, registrations, and build outputs uncommitted.
 
 ## Validation

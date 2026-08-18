@@ -65,6 +65,7 @@ const meta: Meta<typeof Icon> = {
     accessibilityLabel: 'Favorite',
     color: '#185abd',
     height: 24,
+    testID: 'agentic-storybook-icon',
     width: 24,
   },
   argTypes: {
