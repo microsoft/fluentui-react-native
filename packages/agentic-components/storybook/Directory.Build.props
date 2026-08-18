@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+
+    <!-- RNW needs to be updated to use yarn exec instead of npx when detecting a yarn repo, to correctly trigger auto-linking -->
+    <AutolinkCommand Condition="'$(AutolinkCommand)' == ''">yarn exec rnc-cli autolink-windows</AutolinkCommand>
+    <RunCodegenWindows>false</RunCodegenWindows>
+    <CodegenCommand Condition="'$(CodegenCommand)' == ''">yarn exec rnc-cli codegen-windows</CodegenCommand>
+  </PropertyGroup>
+
+</Project>
