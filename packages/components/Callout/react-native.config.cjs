@@ -1,6 +1,5 @@
-
 module.exports = {
-    dependency: {
+  dependency: {
     platforms: {
       windows: {
         sourceDir: 'windows',
@@ -13,4 +12,4 @@ module.exports = {
       },
     },
   },
-}
+};
