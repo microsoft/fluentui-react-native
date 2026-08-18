@@ -35,9 +35,6 @@
       "path": "packages/components/Button/tsconfig.json"
     },
     {
-      "path": "packages/components/Callout/tsconfig.json"
-    },
-    {
       "path": "packages/components/Checkbox/tsconfig.json"
     },
     {
@@ -201,6 +198,9 @@
     },
     {
       "path": "packages/libraries/core/tsconfig.json"
+    },
+    {
+      "path": "packages/native/Callout/tsconfig.json"
     },
     {
       "path": "packages/theming/android-theme/tsconfig.json"
