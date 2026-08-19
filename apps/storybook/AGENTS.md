@@ -1,6 +1,6 @@
 # Agentic Components Storybook development
 
-These instructions apply to `packages/agentic-components/storybook` and its descendants.
+These instructions apply to `apps/storybook` and its descendants.
 
 Read this file, `README.md`, and `package.json` before changing the Storybook application or its native projects.
 
