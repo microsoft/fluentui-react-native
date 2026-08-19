@@ -29,7 +29,7 @@
       "path": "../../packages/components/Button/tsconfig.json"
     },
     {
-      "path": "../../packages/components/Callout/tsconfig.json"
+      "path": "../../packages/native/Callout/tsconfig.json"
     },
     {
       "path": "../../packages/components/Chip/tsconfig.json"

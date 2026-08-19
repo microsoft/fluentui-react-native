@@ -6,13 +6,13 @@ license: MIT
 
 # Agentic Storybook development
 
-Work on the native Storybook application in `packages/agentic-components/storybook`.
+Work on the native Storybook application in `apps/storybook`.
 
 ## Workflow
 
 1. Read the repository `AGENTS.md`, then the
-   [Storybook instructions](../../../packages/agentic-components/storybook/AGENTS.md) and
-   [README](../../../packages/agentic-components/storybook/README.md).
+   [Storybook instructions](../../../apps/storybook/AGENTS.md) and
+   [README](../../../apps/storybook/README.md).
 2. Inspect the Storybook `package.json` and run its declared workspace scripts; do not invent direct runner commands.
 3. Reproduce the first failure from the Storybook workspace so pnpm-linked React Native tooling resolves from the app.
 4. Treat native workspaces, Pods, lockfiles, generated solutions, build directories, and DerivedData as disposable
