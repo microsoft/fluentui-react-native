@@ -2872,9 +2872,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/callout@workspace:*, @fluentui-react-native/callout@workspace:packages/components/Callout":
+"@fluentui-react-native/callout@workspace:*, @fluentui-react-native/callout@workspace:packages/native/Callout":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/callout@workspace:packages/components/Callout"
+  resolution: "@fluentui-react-native/callout@workspace:packages/native/Callout"
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/framework-base": "workspace:*"

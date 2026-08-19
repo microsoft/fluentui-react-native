@@ -15,7 +15,7 @@
   "exclude": ["node_modules", "dist", ".cache"],
   "references": [
     {
-      "path": "../../packages/components/Callout/tsconfig.json"
+      "path": "../../packages/native/Callout/tsconfig.json"
     },
     {
       "path": "../../packages/agentic-components/tsconfig.json"

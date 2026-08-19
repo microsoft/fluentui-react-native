@@ -12,7 +12,7 @@
       "path": "../../components/Button/tsconfig.json"
     },
     {
-      "path": "../../components/Callout/tsconfig.json"
+      "path": "../../native/Callout/tsconfig.json"
     },
     {
       "path": "../../framework-base/tsconfig.json"
