@@ -3,8 +3,6 @@ import type { Pressable, PressableProps, StyleProp, TextStyle, ViewStyle } from 
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { ComponentProps, ComponentState, OwnedRootProps, PressableState, Slot } from '@fluentui-react-native/framework-base';
 
-import type { SelectionDriverKeys, SelectionStateProps } from '../../common/selection.types';
-
 export type RadioSlots = {
   /**
    * The interactive root of the radio.
@@ -29,7 +27,12 @@ export type RadioStateProps = {
    * Whether the supporting text is shown.
    */
   showSecondaryText?: boolean;
-} & SelectionStateProps;
+  /**
+   * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
+   * owns the value, and the component reports interactions through `onPress` rather than changing it.
+   */
+  selected?: boolean;
+};
 
 export type RadioExposedPressableProps = OwnedRootProps<PressableProps> & {
   children?: never;
@@ -38,7 +41,7 @@ export type RadioExposedPressableProps = OwnedRootProps<PressableProps> & {
 export type RadioProps = RadioStateProps & ComponentProps<RadioSlots, RadioExposedPressableProps>;
 
 export type RadioState = ComponentState<RadioSlots> &
-  Required<Omit<RadioStateProps, SelectionDriverKeys>> &
+  Required<RadioStateProps> &
   ThemeState &
   PressableState & {
     /**

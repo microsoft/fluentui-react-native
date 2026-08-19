@@ -9,7 +9,6 @@ import type {
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
-import type { SelectionDriverKeys, SelectionStateProps } from '../../common/selection.types';
 
 export type ButtonSlots = {
   /**
@@ -66,7 +65,13 @@ export type ButtonStateProps = {
    * The position of the icon relative to the button content.
    */
   iconPosition?: ButtonIconPosition;
-} & SelectionStateProps;
+  /**
+   * Whether the button renders as selected. Supplying this prop enables toggle-button accessibility semantics.
+   * Selection is externally driven: the button never changes it on press, because a press is an action rather than a
+   * state change. Own the value in the caller and update it from `onPress`.
+   */
+  selected?: boolean;
+};
 
 /**
  * Props that are exposed from the underlying Pressable component at the top level. A button controls its
@@ -83,7 +88,7 @@ export type ButtonProps = ButtonStateProps & ComponentProps<ButtonSlots, ButtonE
  * The button state, returned from the useButton hook
  */
 export type ButtonState = ComponentState<ButtonStateSlots> &
-  Required<Omit<ButtonStateProps, SelectionDriverKeys>> &
+  Required<ButtonStateProps> &
   ThemeState &
   PressableState & {
     /**

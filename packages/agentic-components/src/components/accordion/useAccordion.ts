@@ -50,7 +50,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
     warning: 'Accordion: provide a meaningful title or accessibilityLabel for the header button.',
   });
 
-  const toggleExpanded = expansion.activate;
+  const toggleExpanded = expansion.toggle;
 
   const themeState = useThemeState();
   const [headerProps, pressableState] = usePressableState({

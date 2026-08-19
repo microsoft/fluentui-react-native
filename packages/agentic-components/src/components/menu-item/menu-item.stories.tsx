@@ -26,12 +26,12 @@ const meta: Meta<typeof MenuItem> = {
     content: 'Menu item',
     secondaryContent: 'Secondary',
     secondaryContentPosition: 'right',
-    defaultSelected: false,
+    selected: false,
     menuStyle: 'list-item',
   },
   argTypes: {
     secondaryContentPosition: { control: 'select', options: ['right', 'under'] },
-    defaultSelected: { control: 'boolean' },
+    selected: { control: 'boolean' },
     menuStyle: { control: 'select', options: ['list-item', 'section-header'] },
   },
   parameters: {
@@ -59,9 +59,9 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="Selection">
         <MenuItem content="Not selected" />
-        <MenuItem content="Selected" defaultSelected />
-        <MenuItem hasCheckmark content="Checked" defaultSelected />
-        <MenuItem content="Multi-select" hasMultiselect defaultSelected />
+        <MenuItem content="Selected" selected />
+        <MenuItem hasCheckmark content="Checked" selected />
+        <MenuItem content="Multi-select" hasMultiselect selected />
       </StoryGroup>
       <StoryGroup label="Secondary content">
         <MenuItem content="Right" secondaryContent="Meta" secondaryContentPosition="right" />
@@ -81,7 +81,7 @@ export const SectionHeader: Story = {
 export const Selected: Story = {
   args: {
     content: 'Favorite',
-    defaultSelected: true,
+    selected: true,
   },
 };
 
@@ -89,7 +89,7 @@ export const Checkmark: Story = {
   args: {
     hasCheckmark: true,
     content: 'Single select',
-    defaultSelected: true,
+    selected: true,
   },
 };
 
@@ -97,7 +97,7 @@ export const Multiselect: Story = {
   args: {
     content: 'Multi select',
     hasMultiselect: true,
-    defaultSelected: true,
+    selected: true,
   },
 };
 
@@ -113,7 +113,7 @@ export const ExternallyDrivenSelection: Story = {
               key={option}
               content={option}
               hasCheckmark
-              onSelectedChange={(selected) => selected && setChoice(option)}
+              onPress={() => setChoice(option)}
               secondaryContent={null}
               selected={choice === option}
             />
@@ -127,7 +127,7 @@ export const ExternallyDrivenSelection: Story = {
     docs: {
       description: {
         story:
-          'A menu owns which command is active. Each checkmark item is externally driven and only ever selects itself, so the menu clears the previous choice through onSelectedChange.',
+          'A menu owns which command is active. Each checkmark item renders the selected value it is given and reports presses through onPress, so the menu is what clears the previous choice.',
       },
     },
   },

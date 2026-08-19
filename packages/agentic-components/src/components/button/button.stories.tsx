@@ -58,7 +58,6 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     appearance: { control: 'select', options: appearances.map(({ value }) => value) },
     iconPosition: { control: 'select', options: ['before', 'after'] },
-    defaultSelected: { control: 'boolean' },
     shape: { control: 'select', options: shapes.map(({ value }) => value) },
     size: { control: 'select', options: sizes.map(({ value }) => value) },
   },
@@ -192,8 +191,8 @@ export const Icon: Story = {
 export const Selected: Story = {
   render: () => (
     <StoryGroup label="Selection">
-      <Button content="Not selected" icon={regularStarIcon} defaultSelected={false} selectedIcon={filledStarIcon} />
-      <Button content="Selected" icon={regularStarIcon} defaultSelected selectedIcon={filledStarIcon} />
+      <Button content="Not selected" icon={regularStarIcon} selected={false} selectedIcon={filledStarIcon} />
+      <Button content="Selected" icon={regularStarIcon} selected selectedIcon={filledStarIcon} />
     </StoryGroup>
   ),
   parameters: {
@@ -215,7 +214,7 @@ export const ExternallyDrivenSelection: Story = {
           <Button
             content="Favorite"
             icon={regularStarIcon}
-            onSelectedChange={setSelected}
+            onPress={() => setSelected(!selected)}
             selected={selected}
             selectedIcon={filledStarIcon}
           />
@@ -229,7 +228,7 @@ export const ExternallyDrivenSelection: Story = {
     docs: {
       description: {
         story:
-          'Supplying selected makes the caller the owner of the state. The button reports every press through onSelectedChange and renders only what it is given, so an external action such as Reset can also change it.',
+          'A toggle button never changes its own state. The caller owns selected and updates it from onPress, which is why an external action such as Reset can change it just as easily.',
       },
     },
   },

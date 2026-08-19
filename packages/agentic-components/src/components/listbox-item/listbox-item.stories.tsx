@@ -53,7 +53,7 @@ export const Overview: Story = {
     <View style={styles.story}>
       <StoryGroup label="Style">
         <ListboxItem content="Option" />
-        <ListboxItem content="Selected" defaultSelected />
+        <ListboxItem content="Selected" selected />
         <ListboxItem content="Section header" variant="sectionHeader" />
       </StoryGroup>
       <StoryGroup label="Layout">
@@ -62,12 +62,12 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="Indicators">
         <ListboxItem content="Chevron" chevron />
-        <ListboxItem content="Checkmark" checkmark defaultSelected />
-        <ListboxItem content="Multiselect" multiselect defaultSelected />
+        <ListboxItem content="Checkmark" checkmark selected />
+        <ListboxItem content="Multiselect" multiselect selected />
       </StoryGroup>
       <StoryGroup label="Custom">
         <ListboxItem content="Avatar" avatar={{ as: Avatar }} />
-        <ListboxItem content="Icon swap" defaultSelected />
+        <ListboxItem content="Icon swap" selected />
       </StoryGroup>
     </View>
   ),
@@ -84,7 +84,7 @@ export const ExternallyDrivenSelection: Story = {
             <ListboxItem
               key={option}
               content={option}
-              onSelectedChange={(selected) => selected && setChoice(option)}
+              onPress={() => setChoice(option)}
               secondaryContent={null}
               selected={choice === option}
             />
@@ -98,7 +98,7 @@ export const ExternallyDrivenSelection: Story = {
     docs: {
       description: {
         story:
-          'A single-selection listbox owns the chosen value. Each option is externally driven and only ever selects itself, so the listbox clears the previous choice through onSelectedChange.',
+          'A single-selection listbox owns the chosen value. Each option renders the selected value it is given and reports presses through onPress, so the listbox is what clears the previous choice.',
       },
     },
   },

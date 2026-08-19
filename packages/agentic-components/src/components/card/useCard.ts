@@ -1,8 +1,7 @@
 import { Pressable, View, useWindowDimensions } from 'react-native';
-import type { GestureResponderEvent, PressableProps, ViewProps } from 'react-native';
-import * as React from 'react';
+import type { PressableProps, ViewProps } from 'react-native';
 
-import { usePressableState, useOptionalSlot, useSlot, useToggleState } from '@fluentui-react-native/framework-base';
+import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import type { CardProps, CardState } from './card.types';
@@ -20,7 +19,6 @@ export function useCard_unstable(props: CardProps): CardState {
     accessibilityState,
     accessible,
     android_ripple,
-    defaultSelected,
     delayLongPress,
     delayPressIn,
     disabled = false,
@@ -37,7 +35,6 @@ export function useCard_unstable(props: CardProps): CardState {
     onPress,
     onPressIn,
     onPressOut,
-    onSelectedChange,
     padding = 'default',
     pressRetentionOffset,
     selected,
@@ -50,22 +47,12 @@ export function useCard_unstable(props: CardProps): CardState {
     ...rest
   } = props;
 
-  // A selectable card toggles between chosen and not chosen; a card with only onPress stays a plain action surface.
-  const selection = useToggleState({ value: selected, defaultValue: defaultSelected, onChange: onSelectedChange, disabled });
-  const isSelectable = selection.enabled;
+  // Selection is externally driven; the card renders the value it is given and reports presses through onPress.
+  const isSelectable = selected !== undefined;
   const isInteractive = onPress !== undefined || isSelectable;
   const { width } = useWindowDimensions();
   const resolvedDirection = direction === 'horizontal' && width < horizontalCollapseWidth ? 'vertical' : direction;
   const themeState = useThemeState();
-
-  const { activate } = selection;
-  const handlePress = React.useCallback(
-    (event: GestureResponderEvent) => {
-      activate();
-      onPress?.(event);
-    },
-    [activate, onPress],
-  );
 
   const [overlayProps, pressableState] = usePressableState({
     ...rest,
@@ -76,7 +63,7 @@ export function useCard_unstable(props: CardProps): CardState {
     accessibilityState: {
       ...accessibilityState,
       disabled,
-      ...(isSelectable && { selected: selection.value }),
+      ...(isSelectable && { selected }),
     },
     accessible: true,
     android_ripple,
@@ -89,7 +76,7 @@ export function useCard_unstable(props: CardProps): CardState {
     onHoverIn,
     onHoverOut,
     onLongPress,
-    onPress: handlePress,
+    onPress,
     onPressIn,
     onPressOut,
     pressRetentionOffset,
@@ -131,7 +118,7 @@ export function useCard_unstable(props: CardProps): CardState {
     layout,
     padding,
     resolvedDirection,
-    selected: selection.value,
+    selected: selected ?? false,
     size,
     hovered: pressableState.hovered,
     pressed: pressableState.pressed,

@@ -14,7 +14,6 @@ import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
 import type { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
-import type { SelectionDriverKeys, SelectionStateProps } from '../../common/selection.types';
 
 export type ListboxItemSecondaryContentPosition = ItemSecondaryContentPosition;
 export type ListboxItemVariant = 'listItem' | 'sectionHeader';
@@ -44,14 +43,19 @@ export type ListboxItemStateProps = {
   chevron?: boolean;
   multiselect?: boolean;
   loading?: boolean;
-} & SelectionStateProps;
+  /**
+   * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
+   * owns the value, and the component reports interactions through `onPress` rather than changing it.
+   */
+  selected?: boolean;
+};
 
 export type ListboxItemRootProps = OwnedRootProps<PressableProps>;
 
 export type ListboxItemProps = ListboxItemStateProps & ComponentProps<ListboxItemSlots, ListboxItemRootProps>;
 
 export type ListboxItemState = ComponentState<ListboxItemStateSlots> &
-  Required<Omit<ListboxItemStateProps, SelectionDriverKeys>> &
+  Required<ListboxItemStateProps> &
   ThemeState &
   PressableState & {
     userStyle?: StyleProp<ViewStyle>;

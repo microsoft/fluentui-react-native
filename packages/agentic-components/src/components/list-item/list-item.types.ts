@@ -12,7 +12,6 @@ import type {
 
 import type { Icon } from '../../primitives/icon/icon';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
-import type { SelectionDriverKeys, SelectionStateProps } from '../../common/selection.types';
 
 export type ListItemSize = 'small' | 'medium' | 'large';
 export type ListItemSelectionMode = 'none' | 'single' | 'multiple';
@@ -38,7 +37,12 @@ export type ListItemStateProps = {
   secondaryContentPosition?: ListItemSecondaryContentPosition;
   selectionMode?: ListItemSelectionMode;
   size?: ListItemSize;
-} & SelectionStateProps;
+  /**
+   * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
+   * owns the value, and the component reports interactions through `onPress` rather than changing it.
+   */
+  selected?: boolean;
+};
 
 export type ListItemExposedPressableProps = OwnedRootProps<PressableProps>;
 
@@ -58,7 +62,7 @@ export type ListItemMetrics = {
 };
 
 export type ListItemState = ComponentState<ListItemStateSlots> &
-  Required<Omit<ListItemStateProps, SelectionDriverKeys>> &
+  Required<ListItemStateProps> &
   ThemeState &
   PressableState & {
     metrics: ListItemMetrics;

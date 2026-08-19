@@ -1,8 +1,6 @@
 import { Pressable, View } from 'react-native';
-import type { GestureResponderEvent } from 'react-native';
-import * as React from 'react';
 
-import { usePressableState, useOptionalSlot, useSlot, useToggleState } from '@fluentui-react-native/framework-base';
+import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { semanticIconSources } from '../../common/iconSources';
@@ -23,7 +21,6 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     checkmark: checkmarkProp,
     chevron: chevronProp,
     content,
-    defaultSelected,
     secondaryContent,
     secondaryContentPosition = 'right',
     disabled = false,
@@ -32,9 +29,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     hasMultiselect = false,
     loading = false,
     menuStyle = 'list-item',
-    onPress,
-    onSelectedChange,
-    selected,
+    selected = false,
     icon: iconProp,
     selectedIcon: selectedIconProp,
     multiselectCheckbox: multiselectCheckboxProp,
@@ -47,16 +42,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   const resolvedLoading = !isListItem && loading;
   const isSelectionIndicator = hasCheckmark || hasMultiselect;
 
-  // A multiselect item toggles itself, a checkmark item only selects, and a plain command carries no selection state.
-  const selection = useToggleState({
-    value: selected,
-    defaultValue: defaultSelected,
-    onChange: onSelectedChange,
-    mode: hasMultiselect ? 'toggle' : 'select',
-    disabled: disabled || !isInteractive || !isSelectionIndicator,
-  });
-
-  const isSelectedVisual = selection.value && !hasMultiselect && isListItem;
+  const isSelectedVisual = selected && !hasMultiselect && isListItem;
   const contentText = content ?? 'Menu item';
   const secondaryContentText = secondaryContent === undefined ? 'Secondary' : secondaryContent;
   const hasSecondaryContent = secondaryContentText !== null && secondaryContentText !== undefined && secondaryContentText !== '';
@@ -65,15 +51,6 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   if (__DEV__ && hasCheckmark && hasMultiselect) {
     console.warn('MenuItem: checkmark and multiselect are mutually exclusive.');
   }
-
-  const { activate } = selection;
-  const handlePress = React.useCallback(
-    (event: GestureResponderEvent) => {
-      activate();
-      onPress?.(event);
-    },
-    [activate, onPress],
-  );
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
@@ -84,16 +61,16 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     accessibilityState: {
       ...props.accessibilityState,
       disabled: disabled && isInteractive,
-      ...(isSelectionIndicator ? { checked: selection.value } : isSelectedVisual ? { selected: true } : {}),
+      ...(isSelectionIndicator ? { checked: selected } : isSelectedVisual ? { selected: true } : {}),
     },
     disabled: !isInteractive || disabled,
     focusable: isInteractive && !disabled,
-    onPress: isInteractive ? handlePress : undefined,
+    onPress: isInteractive ? rest.onPress : undefined,
   });
 
   const root = useSlot(Pressable, pressableProps);
   const icon = useOptionalSlot(Icon, iconProp, { defaultProps: defaultRegularIcon, renderByDefault: true });
-  const selectedIcon = useOptionalSlot(Icon, selectedIconProp, { defaultProps: defaultSelectedIcon, renderByDefault: selection.value });
+  const selectedIcon = useOptionalSlot(Icon, selectedIconProp, { defaultProps: defaultSelectedIcon, renderByDefault: selected });
   const avatar = useOptionalSlot(View, avatarProp);
   const chevronSlot = useOptionalSlot(Icon, chevronProp, { defaultProps: defaultChevron, renderByDefault: hasChevron });
   const checkmarkSlot = useOptionalSlot(Icon, checkmarkProp, { defaultProps: defaultCheckmark, renderByDefault: hasCheckmark });
@@ -116,7 +93,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     multiselectCheckbox,
     secondaryContentPosition,
     secondaryContentText,
-    selected: selection.value,
+    selected,
     selectedIcon,
     userStyle,
     rootAccessibilityHint: pressableProps.accessibilityHint,

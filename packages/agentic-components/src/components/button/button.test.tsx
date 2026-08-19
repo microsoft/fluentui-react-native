@@ -139,45 +139,33 @@ describe('Button', () => {
     expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ fontWeight: '600', position: 'absolute' });
   });
 
-  it('toggles its own selection when selection is internally driven', async () => {
-    const onSelectedChange = jest.fn();
+  it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
-    const component = await renderButton({ content: 'Favorite', defaultSelected: false, onPress, onSelectedChange });
+    const component = await renderButton({ content: 'Favorite', onPress, selected: false });
 
     expect(getRoot(component).props.accessibilityState.checked).toBe(false);
 
     await fireEvent.press(getRoot(component));
 
-    expect(onSelectedChange).toHaveBeenCalledWith(true);
     expect(onPress).toHaveBeenCalledTimes(1);
-    expect(getRoot(component).props.accessibilityState.checked).toBe(true);
-
-    await fireEvent.press(getRoot(component));
-
-    expect(onSelectedChange).toHaveBeenLastCalledWith(false);
     expect(getRoot(component).props.accessibilityState.checked).toBe(false);
   });
 
-  it('reports presses without changing state when selection is externally driven', async () => {
-    const onSelectedChange = jest.fn();
-    const component = await renderButton({ content: 'Favorite', onSelectedChange, selected: false });
+  it('reserves the selected label width in both selected states so toggling cannot reflow', async () => {
+    const unselected = await renderButton({ content: 'Favorite', selected: false });
+    const selected = await renderButton({ content: 'Favorite', selected: true });
+    const tokens = useFlexTokens();
 
-    await fireEvent.press(getRoot(component));
-
-    expect(onSelectedChange).toHaveBeenCalledWith(true);
-    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
-  });
-
-  it('enables toggle semantics from onSelectedChange alone and never toggles while disabled', async () => {
-    const onSelectedChange = jest.fn();
-    const component = await renderButton({ content: 'Favorite', onSelectedChange });
-
-    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
-
-    const disabled = await renderButton({ content: 'Favorite', defaultSelected: false, disabled: true, onSelectedChange });
-    await fireEvent.press(disabled.getByRole('button'));
-
-    expect(onSelectedChange).not.toHaveBeenCalled();
+    for (const component of [unselected, selected]) {
+      const labels = component.getAllByText('Favorite', { includeHiddenElements: true });
+      expect(labels).toHaveLength(2);
+      // The ghost always reserves Semibold width, so the visible weight swap cannot resize the button.
+      expect(StyleSheet.flatten(labels[0].props.style)).toMatchObject({
+        fontWeight: tokens.fontWeight.functionalSemibold,
+        opacity: 0,
+      });
+      expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ position: 'absolute' });
+    }
   });
 
   it('omits selection semantics when no selection prop is supplied', async () => {

@@ -132,23 +132,23 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     'aria-checked': checked,
   });
 
-  const { activate } = toggle;
+  const { toggle: toggleChecked } = toggle;
   const handlePress = React.useCallback(
     (event: Parameters<NonNullable<typeof pressableProps.onPress>>[0]) => {
-      activate();
+      toggleChecked();
       onPress?.(event);
     },
-    [activate, onPress],
+    [onPress, toggleChecked],
   );
 
   const handleKeyUp = React.useCallback(
     (event: Parameters<NonNullable<typeof pressableProps.onKeyUp>>[0]) => {
       pressableProps.onKeyUp?.(event);
       if (isToggleKey((event as { nativeEvent?: { key?: string } }).nativeEvent?.key)) {
-        activate();
+        toggleChecked();
       }
     },
-    [activate, pressableProps],
+    [pressableProps, toggleChecked],
   );
 
   const layoutContainer = useSlot(View, { testID: 'switch-layout-container' });

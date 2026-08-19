@@ -22,53 +22,13 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('ListItem', () => {
-  it('toggles its own selection in multiple selection mode', async () => {
-    const onSelectedChange = jest.fn();
+  it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
-    const component = await renderListItem({
-      content: 'Inbox',
-      defaultSelected: false,
-      onPress,
-      onSelectedChange,
-      selectionMode: 'multiple',
-    });
+    const component = await renderListItem({ content: 'Inbox', onPress, selected: false, selectionMode: 'multiple' });
 
     await fireEvent.press(getRoot(component));
 
-    expect(onSelectedChange).toHaveBeenCalledWith(true);
     expect(onPress).toHaveBeenCalledTimes(1);
-    expect(getRoot(component).props.accessibilityState.selected).toBe(true);
-
-    await fireEvent.press(getRoot(component));
-
-    expect(onSelectedChange).toHaveBeenLastCalledWith(false);
-    expect(getRoot(component).props.accessibilityState.selected).toBe(false);
-  });
-
-  it('only selects in single selection mode and never selects without a selection mode', async () => {
-    const onSelectedChange = jest.fn();
-    const single = await renderListItem({ content: 'Inbox', defaultSelected: false, onSelectedChange, selectionMode: 'single' });
-
-    await fireEvent.press(single.getAllByRole('button')[0]);
-    await fireEvent.press(single.getAllByRole('button')[0]);
-
-    expect(onSelectedChange).toHaveBeenCalledTimes(1);
-    expect(single.getAllByRole('button')[0].props.accessibilityState.selected).toBe(true);
-
-    const none = await renderListItem({ content: 'Inbox', defaultSelected: false, onSelectedChange, selectionMode: 'none' });
-
-    await fireEvent.press(none.getAllByRole('button')[0]);
-
-    expect(onSelectedChange).toHaveBeenCalledTimes(1);
-  });
-
-  it('reports presses without changing state when selection is externally driven', async () => {
-    const onSelectedChange = jest.fn();
-    const component = await renderListItem({ content: 'Inbox', onSelectedChange, selected: false, selectionMode: 'multiple' });
-
-    await fireEvent.press(getRoot(component));
-
-    expect(onSelectedChange).toHaveBeenCalledWith(true);
     expect(getRoot(component).props.accessibilityState.selected).toBe(false);
   });
 

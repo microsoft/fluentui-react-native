@@ -1,9 +1,7 @@
 import { Pressable, Text, View } from 'react-native';
-import type { GestureResponderEvent } from 'react-native';
-import * as React from 'react';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useOptionalSlot, usePressableState, useSlot, useToggleState } from '@fluentui-react-native/framework-base';
+import { useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
 import { hideSlotProps } from '../../common/accessibility';
@@ -65,14 +63,11 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     accessibilityState,
     avatar: avatarProp,
     content: contentProp = 'List item',
-    defaultSelected,
     disabled = false,
     icon: iconProp,
-    onPress,
-    onSelectedChange,
     secondaryContent: secondaryContentProp,
     secondaryContentPosition = 'right',
-    selected,
+    selected = false,
     selectedIcon: selectedIconProp,
     selectionMode = 'none',
     size = 'medium',
@@ -81,29 +76,10 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     ...rest
   } = props;
 
-  // Multi-select rows toggle their own selection; single-select rows only select, and the parent list clears siblings.
-  // A row with no selection mode still reports selection changes but never drives them from a press.
-  const selection = useToggleState({
-    value: selected,
-    defaultValue: defaultSelected,
-    onChange: onSelectedChange,
-    mode: selectionMode === 'multiple' ? 'toggle' : 'select',
-    disabled: disabled || selectionMode === 'none',
-  });
-
   const themeState = useThemeState();
   const metrics = getMetrics(size, themeState.tokens);
-  const selectedFill = selection.value && selectionMode !== 'multiple' && !disabled;
-  const selectionGlyph = selectionMode === 'none' ? undefined : getListItemSelectionIndicatorGlyph(selection.value, selectionMode);
-
-  const { activate } = selection;
-  const handlePress = React.useCallback(
-    (event: GestureResponderEvent) => {
-      activate();
-      onPress?.(event);
-    },
-    [activate, onPress],
-  );
+  const selectedFill = selected && selectionMode !== 'multiple' && !disabled;
+  const selectionGlyph = selectionMode === 'none' ? undefined : getListItemSelectionIndicatorGlyph(selected, selectionMode);
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
@@ -111,12 +87,11 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     accessibilityState: {
       ...accessibilityState,
       disabled,
-      selected: selection.value,
+      selected,
     },
     accessible: rest.accessible ?? true,
     disabled,
     focusable: rest.focusable ?? !disabled,
-    onPress: handlePress,
   });
 
   const root = useSlot(Pressable, pressableProps);
@@ -140,7 +115,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     trailing,
     selectionIndicator,
     disabled,
-    selected: selection.value,
+    selected,
     selectionMode,
     secondaryContentPosition,
     size,

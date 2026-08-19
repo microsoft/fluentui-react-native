@@ -55,7 +55,7 @@ export { useReducedMotion } from './hooks/useReducedMotion';
 export { useControllableValue } from './hooks/useControllableValue';
 export type { ControllableValueChangeCallback } from './hooks/useControllableValue';
 export { useToggleState } from './hooks/useToggleState';
-export type { ToggleActivationMode, ToggleState, UseToggleStateOptions } from './hooks/useToggleState';
+export type { ToggleState, UseToggleStateOptions } from './hooks/useToggleState';
 export { useAccessibilityLabelWarning } from './hooks/useAccessibilityLabelWarning';
 export type { AccessibilityLabelWarningOptions } from './hooks/useAccessibilityLabelWarning';
 export type { PressableState, PressableStateKeys } from './types/interactive.types';

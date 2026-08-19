@@ -23,9 +23,9 @@ function renderToggleState(props: UseToggleStateOptions) {
     get state() {
       return latest.current;
     },
-    activate() {
+    toggle() {
       act(() => {
-        latest.current.activate();
+        latest.current.toggle();
       });
     },
     setValue(next: boolean) {
@@ -45,28 +45,25 @@ describe('useToggleState', () => {
   it('drives the value internally and reports every change', () => {
     const onChange = jest.fn();
     const result = renderToggleState({ defaultValue: false, onChange });
-    const firstActivate = result.state.activate;
+    const firstToggle = result.state.toggle;
 
     expect(result.state.value).toBe(false);
-    expect(result.state.controlled).toBe(false);
 
-    result.activate();
+    result.toggle();
     expect(result.state.value).toBe(true);
     expect(onChange).toHaveBeenLastCalledWith(true);
 
-    result.activate();
+    result.toggle();
     expect(result.state.value).toBe(false);
     expect(onChange).toHaveBeenLastCalledWith(false);
-    expect(result.state.activate).toBe(firstActivate);
+    expect(result.state.toggle).toBe(firstToggle);
   });
 
   it('honors an externally driven value without changing it internally', () => {
     const onChange = jest.fn();
     const result = renderToggleState({ value: false, onChange });
 
-    expect(result.state.controlled).toBe(true);
-
-    result.activate();
+    result.toggle();
     expect(onChange).toHaveBeenCalledWith(true);
     expect(result.state.value).toBe(false);
 
@@ -74,24 +71,11 @@ describe('useToggleState', () => {
     expect(result.state.value).toBe(true);
   });
 
-  it('only turns the value on in select mode', () => {
-    const onChange = jest.fn();
-    const result = renderToggleState({ defaultValue: false, mode: 'select', onChange });
-
-    result.activate();
-    expect(result.state.value).toBe(true);
-    expect(onChange).toHaveBeenCalledTimes(1);
-
-    result.activate();
-    expect(result.state.value).toBe(true);
-    expect(onChange).toHaveBeenCalledTimes(1);
-  });
-
-  it('ignores activation and explicit sets while disabled', () => {
+  it('ignores toggles and explicit sets while disabled', () => {
     const onChange = jest.fn();
     const result = renderToggleState({ defaultValue: false, disabled: true, onChange });
 
-    result.activate();
+    result.toggle();
     result.setValue(true);
 
     expect(result.state.value).toBe(false);
@@ -108,17 +92,5 @@ describe('useToggleState', () => {
     result.setValue(false);
     expect(result.state.value).toBe(false);
     expect(onChange).toHaveBeenCalledWith(false);
-  });
-
-  it('reports whether the caller opted into the state axis', () => {
-    expect(renderToggleState({}).state.enabled).toBe(false);
-    expect(renderToggleState({ value: false }).state.enabled).toBe(true);
-    expect(renderToggleState({ defaultValue: false }).state.enabled).toBe(true);
-    expect(renderToggleState({ onChange: jest.fn() }).state.enabled).toBe(true);
-  });
-
-  it('falls back to the supplied fallback value when nothing is specified', () => {
-    expect(renderToggleState({}).state.value).toBe(false);
-    expect(renderToggleState({ fallbackValue: true }).state.value).toBe(true);
   });
 });

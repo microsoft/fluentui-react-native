@@ -132,7 +132,6 @@ const meta: Meta<typeof Card> = {
     direction: { control: 'select', options: directions.map(({ value }) => value) },
     layout: { control: 'select', options: layouts.map(({ value }) => value) },
     padding: { control: 'select', options: paddings.map(({ value }) => value) },
-    defaultSelected: { control: 'boolean' },
     size: { control: 'select', options: sizes.map(({ value }) => value) },
   },
   parameters: {
@@ -222,7 +221,7 @@ export const Interactive: Story = {
       }}
       layout="structured"
       onPress={() => undefined}
-      defaultSelected={false}
+      selected={false}
     />
   ),
 };
@@ -236,7 +235,7 @@ export const Selected: Story = {
       }}
       layout="structured"
       onPress={() => undefined}
-      defaultSelected
+      selected
       header={{
         children: (
           <View style={styles.headerRow}>
@@ -265,7 +264,7 @@ export const ExternallyDrivenSelection: Story = {
               accessibilityLabel={name}
               content={{ children: <Text style={styles.body}>{name}</Text> }}
               layout="structured"
-              onSelectedChange={(next) => setSelected(next ? [...selected, name] : selected.filter((current) => current !== name))}
+              onPress={() => setSelected(selected.includes(name) ? selected.filter((current) => current !== name) : [...selected, name])}
               selected={selected.includes(name)}
             />
           ))}
@@ -279,7 +278,7 @@ export const ExternallyDrivenSelection: Story = {
     docs: {
       description: {
         story:
-          'A multi-select grid owns which cards are chosen. Each card is externally driven and reports presses through onSelectedChange.',
+          'A multi-select grid owns which cards are chosen. Each card renders the selected value it is given and reports presses through onPress.',
       },
     },
   },

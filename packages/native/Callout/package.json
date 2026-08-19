@@ -78,7 +78,6 @@
     "name": "FRNCalloutSpec",
     "type": "all",
     "jsSrcsDir": "src",
-    "includesGeneratedCode": true,
     "ios": {
       "componentProvider": {
         "Callout": "RCTCalloutComponentView"

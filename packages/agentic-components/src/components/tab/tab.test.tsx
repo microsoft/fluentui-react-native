@@ -22,48 +22,13 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Tab', () => {
-  it('selects itself when selection is internally driven and never deselects', async () => {
-    const onSelectedChange = jest.fn();
+  it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
-    const component = await renderTab({ controls: 'files-panel', content: 'Files', defaultSelected: false, onPress, onSelectedChange });
-
-    expect(getRoot(component).props.accessibilityState.selected).toBe(false);
+    const component = await renderTab({ controls: 'files-panel', content: 'Files', onPress, selected: false });
 
     await fireEvent.press(getRoot(component));
 
-    expect(onSelectedChange).toHaveBeenCalledWith(true);
     expect(onPress).toHaveBeenCalledTimes(1);
-    expect(getRoot(component).props.accessibilityState.selected).toBe(true);
-
-    await fireEvent.press(getRoot(component));
-
-    expect(onSelectedChange).toHaveBeenCalledTimes(1);
-    expect(getRoot(component).props.accessibilityState.selected).toBe(true);
-  });
-
-  it('reports presses without changing state when selection is externally driven', async () => {
-    const onSelectedChange = jest.fn();
-    const component = await renderTab({ controls: 'files-panel', content: 'Files', onSelectedChange, selected: false });
-
-    await fireEvent.press(getRoot(component));
-
-    expect(onSelectedChange).toHaveBeenCalledWith(true);
-    expect(getRoot(component).props.accessibilityState.selected).toBe(false);
-  });
-
-  it('does not change selection while disabled', async () => {
-    const onSelectedChange = jest.fn();
-    const component = await renderTab({
-      controls: 'files-panel',
-      content: 'Files',
-      defaultSelected: false,
-      disabled: true,
-      onSelectedChange,
-    });
-
-    await fireEvent.press(getRoot(component));
-
-    expect(onSelectedChange).not.toHaveBeenCalled();
     expect(getRoot(component).props.accessibilityState.selected).toBe(false);
   });
 

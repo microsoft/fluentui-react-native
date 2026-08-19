@@ -3,8 +3,6 @@ import type { Pressable, PressableProps, StyleProp, View, ViewStyle } from 'reac
 import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
-import type { SelectionDriverKeys, SelectionStateProps } from '../../common/selection.types';
-
 export type CardSize = 'small' | 'large';
 export type CardPadding = 'default' | 'none';
 export type CardLayout = 'default' | 'nested' | 'structured';
@@ -28,7 +26,12 @@ export type CardStateProps = {
   padding?: CardPadding;
   layout?: CardLayout;
   direction?: CardDirection;
-} & SelectionStateProps;
+  /**
+   * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
+   * owns the value, and the component reports interactions through `onPress` rather than changing it.
+   */
+  selected?: boolean;
+};
 
 export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessibilityRole'> & {
   children?: never;
@@ -37,7 +40,7 @@ export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessib
 export type CardProps = CardStateProps & ComponentProps<CardSlots, CardExposedPressableProps>;
 
 export type CardState = ComponentState<CardStateSlots> &
-  Required<Omit<CardStateProps, SelectionDriverKeys>> &
+  Required<CardStateProps> &
   ThemeState & {
     hovered: boolean;
     pressed: boolean;

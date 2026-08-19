@@ -38,13 +38,13 @@ const meta: Meta<typeof Tab> = {
     content: 'Files',
     disabled: false,
     layout: 'iconAndText',
-    defaultSelected: false,
+    selected: false,
   },
   argTypes: {
     content: { control: 'text' },
     disabled: { control: 'boolean' },
     layout: { control: 'select', options: layouts.map(({ value }) => value) },
-    defaultSelected: { control: 'boolean' },
+    selected: { control: 'boolean' },
   },
   parameters: {
     docs: {
@@ -70,8 +70,8 @@ export const Overview: Story = {
         <Tab accessibilityLabel="Settings" controls="settings-panel" icon={settingsIcon} layout="iconOnly" />
       </StoryGroup>
       <StoryGroup label="Selected">
-        <Tab controls="files-panel" content="Files" icon={regularStarIcon} defaultSelected={false} selectedIcon={filledStarIcon} />
-        <Tab controls="files-panel" content="Files" icon={regularStarIcon} defaultSelected selectedIcon={filledStarIcon} />
+        <Tab controls="files-panel" content="Files" icon={regularStarIcon} selected={false} selectedIcon={filledStarIcon} />
+        <Tab controls="files-panel" content="Files" icon={regularStarIcon} selected selectedIcon={filledStarIcon} />
       </StoryGroup>
     </View>
   ),
@@ -109,8 +109,8 @@ export const IconOnly: Story = {
 export const Selected: Story = {
   render: () => (
     <StoryGroup label="Selected">
-      <Tab controls="files-panel" content="Files" icon={regularStarIcon} defaultSelected={false} selectedIcon={filledStarIcon} />
-      <Tab controls="files-panel" content="Files" icon={regularStarIcon} defaultSelected selectedIcon={filledStarIcon} />
+      <Tab controls="files-panel" content="Files" icon={regularStarIcon} selected={false} selectedIcon={filledStarIcon} />
+      <Tab controls="files-panel" content="Files" icon={regularStarIcon} selected selectedIcon={filledStarIcon} />
     </StoryGroup>
   ),
   parameters: {
@@ -134,7 +134,7 @@ export const Tablist: Story = {
               key={name}
               content={name}
               controls={`${name.toLowerCase()}-panel`}
-              onSelectedChange={(selected) => selected && setActive(name)}
+              onPress={() => setActive(name)}
               selected={active === name}
             />
           ))}
@@ -147,7 +147,7 @@ export const Tablist: Story = {
     docs: {
       description: {
         story:
-          'A tablist owns which tab is selected. Each tab is externally driven and reports presses through onSelectedChange, so pressing a tab never deselects it and the list deselects its siblings instead.',
+          'A tablist owns which tab is selected. Each tab renders the selected value it is given and reports presses through onPress, so the list is what moves selection between tabs.',
       },
     },
   },

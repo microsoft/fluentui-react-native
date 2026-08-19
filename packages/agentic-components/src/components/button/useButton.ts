@@ -1,16 +1,7 @@
-import * as React from 'react';
-
 import type { ButtonProps, ButtonState } from './button.types';
-import {
-  useAccessibilityLabelWarning,
-  usePressableState,
-  useSlot,
-  useOptionalSlot,
-  useToggleState,
-} from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, usePressableState, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 import { Pressable, Text } from 'react-native';
-import type { GestureResponderEvent } from 'react-native';
 import { Icon } from '../../primitives/icon/icon';
 
 /**
@@ -26,12 +17,9 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     accessibilityState,
     appearance,
     content: contentProp,
-    defaultSelected,
     disabled = false,
     icon: iconProp,
     iconPosition = 'before',
-    onPress,
-    onSelectedChange,
     selected,
     selectedIcon: selectedIconProp,
     shape,
@@ -44,9 +32,8 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   const hasSelectedIcon = selectedIconProp !== undefined && selectedIconProp !== null;
   const iconOnly = !hasContent && (hasIcon || hasSelectedIcon);
 
-  // The button becomes a toggle button when the caller opts into the selection axis, externally or internally driven.
-  const selection = useToggleState({ value: selected, defaultValue: defaultSelected, onChange: onSelectedChange, disabled });
-  const isToggleButton = selection.enabled;
+  // A button renders selection but never changes it: a press is an action, so the caller owns the selected value.
+  const isToggleButton = selected !== undefined;
 
   useAccessibilityLabelWarning({
     accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
@@ -56,15 +43,6 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     warning: 'Button: icon-only buttons require an accessibilityLabel that describes the action.',
   });
 
-  const { activate } = selection;
-  const handlePress = React.useCallback(
-    (event: GestureResponderEvent) => {
-      activate();
-      onPress?.(event);
-    },
-    [activate, onPress],
-  );
-
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
@@ -72,12 +50,11 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     accessibilityState: {
       ...accessibilityState,
       disabled,
-      ...(isToggleButton && { checked: selection.value }),
+      ...(isToggleButton && { checked: selected }),
     },
     accessible: rest.accessible ?? true,
     disabled,
     focusable: rest.focusable ?? !disabled,
-    onPress: handlePress,
   });
   const root = useSlot(Pressable, pressableProps);
   const icon = useOptionalSlot(Icon, iconProp);
@@ -96,7 +73,7 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     size,
     shape: shape ?? (iconOnly ? 'circle' : 'rounded'),
     iconPosition,
-    selected: selection.value,
+    selected: selected ?? false,
     iconOnly,
     isToggleButton,
     userStyle,

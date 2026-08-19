@@ -50,13 +50,13 @@ const meta: Meta<typeof ListItem> = {
     disabled: false,
     secondaryContent: 'Secondary',
     secondaryContentPosition: 'right',
-    defaultSelected: false,
+    selected: false,
     selectionMode: 'single',
     size: 'medium',
   },
   argTypes: {
     secondaryContentPosition: { control: 'select', options: positions.map(({ value }) => value) },
-    defaultSelected: { control: 'boolean' },
+    selected: { control: 'boolean' },
     selectionMode: { control: 'select', options: selectionModes.map(({ value }) => value) },
     size: { control: 'select', options: sizes.map(({ value }) => value) },
   },
@@ -86,7 +86,7 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="Selection mode">
         {selectionModes.map(({ label, value }) => (
-          <ListItem key={value} content={label} selectionMode={value} defaultSelected={value !== 'none'} />
+          <ListItem key={value} content={label} selectionMode={value} selected={value !== 'none'} />
         ))}
       </StoryGroup>
       <StoryGroup label="Secondary position">
@@ -108,14 +108,8 @@ export const Overview: Story = {
         />
       </StoryGroup>
       <StoryGroup label="Selection">
-        <ListItem
-          content="Not selected"
-          icon={regularStarIcon}
-          defaultSelected={false}
-          selectedIcon={filledStarIcon}
-          selectionMode="single"
-        />
-        <ListItem content="Selected" icon={regularStarIcon} defaultSelected selectedIcon={filledStarIcon} selectionMode="single" />
+        <ListItem content="Not selected" icon={regularStarIcon} selected={false} selectedIcon={filledStarIcon} selectionMode="single" />
+        <ListItem content="Selected" icon={regularStarIcon} selected selectedIcon={filledStarIcon} selectionMode="single" />
       </StoryGroup>
       <StoryGroup label="Trailing actions">
         <ListItem
@@ -162,7 +156,7 @@ export const SelectionMode: Story = {
   render: () => (
     <StoryGroup label="Selection mode">
       {selectionModes.map(({ label, value }) => (
-        <ListItem key={value} content={label} defaultSelected={value !== 'none'} selectionMode={value} />
+        <ListItem key={value} content={label} selected={value !== 'none'} selectionMode={value} />
       ))}
     </StoryGroup>
   ),
@@ -178,14 +172,8 @@ export const SelectionMode: Story = {
 export const Selected: Story = {
   render: () => (
     <StoryGroup label="Selected">
-      <ListItem
-        content="Not selected"
-        icon={regularStarIcon}
-        defaultSelected={false}
-        selectedIcon={filledStarIcon}
-        selectionMode="single"
-      />
-      <ListItem content="Selected" icon={regularStarIcon} defaultSelected selectedIcon={filledStarIcon} selectionMode="single" />
+      <ListItem content="Not selected" icon={regularStarIcon} selected={false} selectedIcon={filledStarIcon} selectionMode="single" />
+      <ListItem content="Selected" icon={regularStarIcon} selected selectedIcon={filledStarIcon} selectionMode="single" />
     </StoryGroup>
   ),
   parameters: {
@@ -208,7 +196,7 @@ export const ExternallyDrivenSelection: Story = {
             <ListItem
               key={name}
               content={name}
-              onSelectedChange={(next) => setSelected(next ? [...selected, name] : selected.filter((current) => current !== name))}
+              onPress={() => setSelected(selected.includes(name) ? selected.filter((current) => current !== name) : [...selected, name])}
               secondaryContent={null}
               selected={selected.includes(name)}
               selectionMode="multiple"
@@ -223,7 +211,7 @@ export const ExternallyDrivenSelection: Story = {
     docs: {
       description: {
         story:
-          'A multi-select list owns which rows are chosen. Each row is externally driven and reports presses through onSelectedChange.',
+          'A multi-select list owns which rows are chosen. Each row renders the selected value it is given and reports presses through onPress.',
       },
     },
   },

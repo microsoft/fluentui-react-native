@@ -20,47 +20,13 @@ function getRootStyle(component: RenderResult, role: 'menuitem' | 'menuitemcheck
 }
 
 describe('MenuItem', () => {
-  it('toggles its own selection when multiselect is active', async () => {
-    const onSelectedChange = jest.fn();
+  it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
-    const component = await renderMenuItem({ content: 'Inbox', defaultSelected: false, hasMultiselect: true, onPress, onSelectedChange });
+    const component = await renderMenuItem({ content: 'Inbox', hasMultiselect: true, onPress, selected: false });
 
     await fireEvent.press(getRoot(component, 'menuitemcheckbox'));
 
-    expect(onSelectedChange).toHaveBeenCalledWith(true);
     expect(onPress).toHaveBeenCalledTimes(1);
-    expect(getRoot(component, 'menuitemcheckbox').props.accessibilityState.checked).toBe(true);
-
-    await fireEvent.press(getRoot(component, 'menuitemcheckbox'));
-
-    expect(onSelectedChange).toHaveBeenLastCalledWith(false);
-    expect(getRoot(component, 'menuitemcheckbox').props.accessibilityState.checked).toBe(false);
-  });
-
-  it('only selects a checkmark item and leaves a plain command without selection state', async () => {
-    const onSelectedChange = jest.fn();
-    const checkmark = await renderMenuItem({ content: 'Inbox', defaultSelected: false, hasCheckmark: true, onSelectedChange });
-
-    await fireEvent.press(getRoot(checkmark, 'menuitemradio'));
-    await fireEvent.press(getRoot(checkmark, 'menuitemradio'));
-
-    expect(onSelectedChange).toHaveBeenCalledTimes(1);
-    expect(getRoot(checkmark, 'menuitemradio').props.accessibilityState.checked).toBe(true);
-
-    const command = await renderMenuItem({ content: 'Inbox', defaultSelected: false, onSelectedChange });
-
-    await fireEvent.press(getRoot(command));
-
-    expect(onSelectedChange).toHaveBeenCalledTimes(1);
-  });
-
-  it('reports presses without changing state when selection is externally driven', async () => {
-    const onSelectedChange = jest.fn();
-    const component = await renderMenuItem({ content: 'Inbox', hasMultiselect: true, onSelectedChange, selected: false });
-
-    await fireEvent.press(getRoot(component, 'menuitemcheckbox'));
-
-    expect(onSelectedChange).toHaveBeenCalledWith(true);
     expect(getRoot(component, 'menuitemcheckbox').props.accessibilityState.checked).toBe(false);
   });
 

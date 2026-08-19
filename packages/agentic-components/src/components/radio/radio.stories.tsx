@@ -25,14 +25,14 @@ const meta: Meta<typeof Radio> = {
   args: {
     label: 'Radio option',
     secondaryText: 'Additional detail',
-    defaultSelected: false,
+    selected: false,
     showSecondaryText: true,
   },
   argTypes: {
     disabled: { control: 'boolean' },
     label: { control: 'text' },
     secondaryText: { control: 'text' },
-    defaultSelected: { control: 'boolean' },
+    selected: { control: 'boolean' },
     showSecondaryText: { control: 'boolean' },
   },
   parameters: {
@@ -56,7 +56,7 @@ export const Overview: Story = {
     <View style={styles.story}>
       <StoryGroup label="Selection">
         <Radio label={label} secondaryText={secondaryText} showSecondaryText />
-        <Radio label="Selected option" secondaryText="This option is active" defaultSelected showSecondaryText />
+        <Radio label="Selected option" secondaryText="This option is active" selected showSecondaryText />
       </StoryGroup>
       <StoryGroup label="Supporting text">
         <Radio label="Label only" showSecondaryText={false} />
@@ -81,7 +81,7 @@ export const Selection: Story = {
   render: () => (
     <StoryGroup label="Selection">
       <Radio label="Unselected" />
-      <Radio label="Selected" defaultSelected />
+      <Radio label="Selected" selected />
     </StoryGroup>
   ),
   parameters: {
@@ -101,13 +101,7 @@ export const Group: Story = {
       return (
         <StoryGroup label={`Notify me: ${choice}`}>
           {options.map((option) => (
-            <Radio
-              key={option}
-              label={option}
-              onSelectedChange={(selected) => selected && setChoice(option)}
-              selected={choice === option}
-              showSecondaryText={false}
-            />
+            <Radio key={option} label={option} onPress={() => setChoice(option)} selected={choice === option} showSecondaryText={false} />
           ))}
         </StoryGroup>
       );
@@ -118,7 +112,7 @@ export const Group: Story = {
     docs: {
       description: {
         story:
-          'A radio group owns the chosen option. Each radio is externally driven and only ever selects itself, so the group is responsible for clearing the previous choice.',
+          'A radio group owns the chosen option. Each radio renders the selected value it is given and reports presses through onPress, so the group is responsible for clearing the previous choice.',
       },
     },
   },

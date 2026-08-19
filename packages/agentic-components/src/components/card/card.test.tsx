@@ -27,30 +27,13 @@ describe('Card', () => {
     jest.restoreAllMocks();
   });
 
-  it('toggles its own selection when selection is internally driven', async () => {
-    const onSelectedChange = jest.fn();
+  it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
-    const component = await renderCard({ accessibilityLabel: 'Report', defaultSelected: false, onPress, onSelectedChange });
+    const component = await renderCard({ accessibilityLabel: 'Report', onPress, selected: false });
 
     await fireEvent.press(component.getByRole('button'));
 
-    expect(onSelectedChange).toHaveBeenCalledWith(true);
     expect(onPress).toHaveBeenCalledTimes(1);
-    expect(component.getByRole('button').props.accessibilityState.selected).toBe(true);
-
-    await fireEvent.press(component.getByRole('button'));
-
-    expect(onSelectedChange).toHaveBeenLastCalledWith(false);
-    expect(component.getByRole('button').props.accessibilityState.selected).toBe(false);
-  });
-
-  it('reports presses without changing state when selection is externally driven', async () => {
-    const onSelectedChange = jest.fn();
-    const component = await renderCard({ accessibilityLabel: 'Report', onSelectedChange, selected: false });
-
-    await fireEvent.press(component.getByRole('button'));
-
-    expect(onSelectedChange).toHaveBeenCalledWith(true);
     expect(component.getByRole('button').props.accessibilityState.selected).toBe(false);
   });
 

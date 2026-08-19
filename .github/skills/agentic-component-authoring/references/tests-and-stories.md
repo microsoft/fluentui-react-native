@@ -76,16 +76,21 @@ Keep on-device controls limited to scalar, serializable props. For required Reac
 fixed demonstration values inside the story render function and expose only meaningful finite or numeric args; object
 controls for React elements are noisy and cannot safely edit the contract.
 
-Do not put a controlled state prop in `args`. A pinned `selected`, `checked`, `expanded`, or `status` arg makes every
-story instance externally driven by Storybook, so pressing the component does nothing and the story looks broken.
-Instead:
+Story controls follow the axis's ownership, described in
+[State and accessibility](./state-and-accessibility.md#decide-who-owns-a-stateful-axis).
 
-- Expose the `default<State>` prop as the on-device control and use it in `args`, so the `Default` story starts in a
-  chosen state and still responds to presses.
-- Use `default<State>` for variant-scan stories too, so a scan of every value stays comparable at first render while
-  each instance remains interactive.
-- Demonstrate external control in one dedicated story that owns the value with `React.useState` and updates it from
-  `on<State>Change`.
+For a self-driving control such as Checkbox, Switch, or Accordion, do not put the controlled prop in `args`. A pinned
+`checked`, `expanded`, or `status` arg forces every instance into externally driven mode, so pressing the component does
+nothing and the story looks broken. Expose `default<State>` as the on-device control and use it in `args`, including for
+variant-scan stories, so each instance starts in the demonstrated state and still responds to presses.
+
+For externally driven selection such as Button, Tab, Radio, Card, or the item components, a fixed `selected` arg is
+correct: the component never changes it. Give the interactive demonstration in one story that owns the value with
+`React.useState` and updates it from `onPress`.
+
+Do not expose an axis that changes component identity as a control. Button's `selected` decides whether it is a toggle
+button at all, and Card's decides whether it is selectable, so a control that flips between `undefined` and `false`
+resizes or re-roles the component instead of demonstrating a value.
 
 Each story module should provide:
 
@@ -96,8 +101,8 @@ Each story module should provide:
 - an args-driven `Default`
 - a grouped `Overview` when the contract has several axes
 - focused named stories that compare all values of one axis in one canvas
-- an interactive story for each toggleable axis, driven by `default<State>`, plus one story that owns the value with
-  `React.useState` and `on<State>Change`
+- an interactive story for each stateful axis: `default<State>` for a self-driving control, or a story owning the value
+  with `React.useState` and `onPress` for externally driven selection
 - `parameters.docs.description.story` for focused scenarios
 
 Stories included in native agent validation also need a stable root `testID`.
