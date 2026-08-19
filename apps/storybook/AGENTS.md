@@ -46,6 +46,12 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   generated native class name.
 - The Storybook REST control helper is `storybook:control`; `storybook:smoke` selects every indexed story and waits for
   its rendered event.
+- Desktop story tests run through `@fluentui-react-native/desktop-driver` and `wdio.conf.ts`. Regenerate the manifest
+  with `desktop:generate`, then use `desktop:test:macos`, `desktop:test:windows`, or `desktop:test:fake`. Specs must not
+  branch on the platform or import a platform extension; all platform selection belongs in `wdio.conf.ts`.
+- Attach is the default desktop test target so a run never terminates an app it did not launch. Only set
+  `DESKTOP_TEST_APP` when a run is meant to own the application lifecycle.
+- `desktop-tests/generated` and `artifacts/desktop-tests` are generated and ignored; never commit or hand-edit them.
 - Keep generated solutions, packages, registrations, and build outputs uncommitted.
 
 ## Validation

@@ -1,0 +1,23 @@
+{
+  "extends": "@fluentui-react-native/scripts/tsconfig",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "es2023",
+    "lib": ["es2023"],
+    "types": ["jest", "node"],
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src", "src/**/*.json"],
+  "references": [
+    {
+      "path": "../../../scripts/tsconfig.json"
+    }
+  ]
+}

@@ -22,5 +22,9 @@ invariants; detailed authoring recipes live in the
 - Keep public props and slots small, typed, and spec-driven.
 - Export components and public types explicitly from `src/index.ts`; never use wildcard exports.
 - Colocate runtime tests, type tests, and Storybook stories with the implementation.
+- Desktop story tests are declared on a story through the serializable `parameters.desktopTest`, either as an inline plan
+  or as a link to a colocated `*.desktop.spec.ts`. Those specs are WebdriverIO tests run by
+  `@fluentui-react-native/desktop-driver`; they are excluded from the package build and from Jest, must address elements
+  only by `testID`, and must never branch on the platform.
 - Use package scripts for format, lint, build, tests, and snapshots.
 - Do not copy web-only APIs, CSS behavior, or DOM assumptions into React Native.

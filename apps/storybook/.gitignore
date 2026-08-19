@@ -2,6 +2,9 @@
 src/storybook.requires.ts
 src/storybook.requires.js
 
+# Generated desktop story-test manifest and compiled inline plans
+desktop-tests/generated/
+
 # Metro bundle output
 *.jsbundle
 

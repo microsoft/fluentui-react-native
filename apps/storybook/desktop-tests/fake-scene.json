@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "stories": {
+    "components-button--default": {
+      "elements": [
+        {
+          "testId": "agentic-storybook-button",
+          "role": "button",
+          "name": "Button",
+          "text": "Button"
+        }
+      ]
+    },
+    "components-button--interaction": {
+      "elements": [
+        {
+          "testId": "agentic-storybook-button-interactive",
+          "role": "button",
+          "name": "Press me",
+          "text": "Press me",
+          "onClick": [{ "testId": "agentic-storybook-button-interactive-status", "incrementText": "Pressed {count}" }]
+        },
+        {
+          "testId": "agentic-storybook-button-interactive-disabled",
+          "role": "button",
+          "name": "Unavailable",
+          "text": "Unavailable",
+          "enabled": false,
+          "onClick": [{ "testId": "agentic-storybook-button-interactive-status", "incrementText": "Pressed {count}" }]
+        },
+        {
+          "testId": "agentic-storybook-button-interactive-status",
+          "role": "text",
+          "text": "Not pressed"
+        }
+      ]
+    },
+    "primitives-icon--default": {
+      "elements": [
+        {
+          "testId": "agentic-storybook-icon",
+          "role": "image",
+          "name": "Icon"
+        }
+      ]
+    }
+  }
+}

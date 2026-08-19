@@ -1,0 +1,133 @@
+import { attachIdentityPrecedence, defaultBackendFor, resolveDesktopOptions } from './config.ts';
+import { DesktopValidationError } from './errors.ts';
+import { buildCapabilities, describeAttachResolution } from './wdio/capability-map.ts';
+
+describe('desktop driver configuration', () => {
+  it('fills in defaults for a minimal launch target', () => {
+    const resolved = resolveDesktopOptions({ platform: 'macos', target: { mode: 'launch', app: '/Applications/Sample.app' } });
+
+    expect(resolved.backend).toBe('mac2');
+    expect(resolved.host).toBe('127.0.0.1');
+    expect(resolved.port).toBe(0);
+    expect(resolved.readiness.requireWindow).toBe(true);
+    expect(resolved.storybook.port).toBe(7007);
+    expect(resolved.artifactsDirectory.endsWith('artifacts/desktop-tests')).toBe(true);
+  });
+
+  it('rejects a non-loopback driver host', () => {
+    expect(() => resolveDesktopOptions({ platform: 'macos', host: '0.0.0.0', target: { mode: 'launch', app: 'com.example.app' } })).toThrow(
+      /loopback/,
+    );
+  });
+
+  it('rejects a backend that does not belong to the platform', () => {
+    expect(() => resolveDesktopOptions({ platform: 'macos', backend: 'windows', target: { mode: 'launch', app: 'a' } })).toThrow(
+      DesktopValidationError,
+    );
+  });
+
+  it('rejects an attach target with no identity', () => {
+    expect(() => resolveDesktopOptions({ platform: 'windows', target: { mode: 'attach' } })).toThrow(
+      /identity, processId, windowHandle, or title/,
+    );
+  });
+
+  it('ranks attach identities so exact handles win over fuzzy ones', () => {
+    const order = attachIdentityPrecedence({ mode: 'attach', title: 'Storybook', identity: 'com.example', processId: 42 });
+    expect(order).toEqual(['processId', 'identity', 'title']);
+    expect(describeAttachResolution({ mode: 'attach', title: 'Storybook' })).toEqual({ exact: false, order: ['title'] });
+    expect(describeAttachResolution({ mode: 'attach', processId: 7 }).exact).toBe(true);
+  });
+
+  it('defaults each platform to its documented backend', () => {
+    expect(defaultBackendFor('macos')).toBe('mac2');
+    expect(defaultBackendFor('windows')).toBe('windows');
+    expect(defaultBackendFor('fake')).toBe('fake');
+  });
+});
+
+describe('capability mapping', () => {
+  it('maps a macOS launch target to Mac2 capabilities', () => {
+    const capabilities = buildCapabilities(
+      resolveDesktopOptions({ platform: 'macos', target: { mode: 'launch', app: '/Applications/Sample.app', args: ['--flag'] } }),
+    );
+
+    expect(capabilities).toMatchObject({
+      platformName: 'mac',
+      'appium:automationName': 'Mac2',
+      'appium:appPath': '/Applications/Sample.app',
+      'appium:arguments': ['--flag'],
+    });
+  });
+
+  it('treats a bare macOS identifier as a bundle id', () => {
+    const capabilities = buildCapabilities(
+      resolveDesktopOptions({ platform: 'macos', target: { mode: 'launch', app: 'com.example.Sample' } }),
+    );
+    expect(capabilities['appium:bundleId']).toBe('com.example.Sample');
+    expect(capabilities['appium:appPath']).toBeUndefined();
+  });
+
+  it('never relaunches or kills an attached macOS application', () => {
+    const capabilities = buildCapabilities(
+      resolveDesktopOptions({ platform: 'macos', target: { mode: 'attach', identity: 'com.example.Sample' } }),
+    );
+
+    expect(capabilities['appium:noReset']).toBe(true);
+    expect(capabilities['appium:skipAppKill']).toBe(true);
+  });
+
+  it('attaches on Windows through a root session without enabling WinAppDriver force-quit', () => {
+    const capabilities = buildCapabilities(
+      resolveDesktopOptions({ platform: 'windows', target: { mode: 'attach', windowHandle: '0x1234' } }),
+    );
+
+    expect(capabilities).toMatchObject({
+      platformName: 'Windows',
+      'appium:automationName': 'Windows',
+      'appium:app': 'Root',
+      'appium:appTopLevelWindow': '0x1234',
+      // Windows Driver's own capability name; an invented one would be silently ignored.
+      'ms:forcequit': false,
+    });
+  });
+
+  it('stops NovaWindows from closing an attached window at session end', () => {
+    const capabilities = buildCapabilities(
+      resolveDesktopOptions({ platform: 'windows', backend: 'novawindows', target: { mode: 'attach', windowHandle: '0x1234' } }),
+    );
+
+    expect(capabilities).toMatchObject({
+      'appium:automationName': 'NovaWindows',
+      // NovaWindows closes the window under test by default, so this must be set explicitly.
+      'appium:shouldCloseApp': false,
+    });
+    expect(capabilities['ms:forcequit']).toBeUndefined();
+  });
+
+  it('does not set attach-only capabilities for a launch target', () => {
+    const capabilities = buildCapabilities(resolveDesktopOptions({ platform: 'windows', target: { mode: 'launch', app: 'C:/app.exe' } }));
+
+    expect(capabilities['ms:forcequit']).toBeUndefined();
+    expect(capabilities['appium:shouldCloseApp']).toBeUndefined();
+  });
+
+  it('pins browserName so both platforms resolve the same WebdriverIO command implementations', () => {
+    const macos = buildCapabilities(resolveDesktopOptions({ platform: 'macos', target: { mode: 'launch', app: 'com.example.app' } }));
+    const windows = buildCapabilities(resolveDesktopOptions({ platform: 'windows', target: { mode: 'launch', app: 'C:/app.exe' } }));
+
+    expect(macos.browserName).toBe('');
+    expect(windows.browserName).toBe('');
+  });
+
+  it('lets a consumer override a generated capability', () => {
+    const capabilities = buildCapabilities(
+      resolveDesktopOptions({
+        platform: 'windows',
+        target: { mode: 'launch', app: 'C:/app.exe' },
+        backendCapabilities: { 'appium:appArguments': '--custom' },
+      }),
+    );
+    expect(capabilities['appium:appArguments']).toBe('--custom');
+  });
+});

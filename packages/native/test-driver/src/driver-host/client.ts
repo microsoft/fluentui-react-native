@@ -1,0 +1,189 @@
+/**
+ * Parent-side lifecycle for the single-driver host.
+ *
+ * Allocates the port, writes the allowlisted configuration, spawns the host, waits for its ready
+ * handshake, streams its logs, and tears down exactly what it started.
+ */
+
+import { spawn, type ChildProcess } from 'node:child_process';
+import * as fs from 'node:fs';
+import * as os from 'node:os';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { DesktopDriverError } from '../errors.ts';
+import { allocatePort } from '../net.ts';
+import { DESKTOP_PROTOCOL_VERSION } from '../protocol.ts';
+import { PACKAGE_VERSION } from '../package-version.ts';
+import type { DesktopBackendId, DesktopFakeScene, DriverHostHealth } from '../types.ts';
+import type { DriverHostConfigFile } from './host-main.ts';
+
+export interface StartDriverHostOptions {
+  backend: DesktopBackendId;
+  host?: string;
+  /** `0` allocates a free loopback port. */
+  port?: number;
+  startupTimeout?: number;
+  fakeScene?: string | DesktopFakeScene;
+  /** Directory that receives `driver-host.log` and the generated host configuration. */
+  logDirectory?: string;
+}
+
+export interface DriverHostHandle {
+  health: DriverHostHealth;
+  pid: number;
+  port: number;
+  logFile?: string;
+  stop(): Promise<void>;
+}
+
+/** Resolves the host entry next to this module, in either source or built form. */
+function resolveHostEntry(): string {
+  const extension = import.meta.url.endsWith('.ts') ? '.ts' : '.js';
+  return fileURLToPath(new URL(`./host-main${extension}`, import.meta.url));
+}
+
+export async function startDriverHost(options: StartDriverHostOptions): Promise<DriverHostHandle> {
+  const host = options.host ?? '127.0.0.1';
+  const port = options.port && options.port > 0 ? options.port : await allocatePort(host);
+  const startupTimeout = options.startupTimeout ?? 120_000;
+
+  const workDirectory = options.logDirectory ?? fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-host-'));
+  fs.mkdirSync(workDirectory, { recursive: true });
+
+  const config: DriverHostConfigFile = {
+    protocolVersion: DESKTOP_PROTOCOL_VERSION,
+    backend: options.backend,
+    host,
+    port,
+    packageVersion: PACKAGE_VERSION,
+    fakeScene: options.fakeScene,
+    parentPid: process.pid,
+  };
+  const configFile = path.join(workDirectory, 'driver-host.config.json');
+  fs.writeFileSync(configFile, `${JSON.stringify(config, null, 2)}\n`, 'utf8');
+
+  const logFile = path.join(workDirectory, 'driver-host.log');
+  const logStream = fs.createWriteStream(logFile, { flags: 'a' });
+
+  const child = spawn(process.execPath, [resolveHostEntry(), configFile], {
+    stdio: ['ignore', 'pipe', 'pipe'],
+    env: { ...process.env, NODE_NO_WARNINGS: '1' },
+  });
+
+  const health = await waitForReady(child, logStream, startupTimeout).catch(async (error: unknown) => {
+    await stopChild(child);
+    logStream.end();
+    throw error;
+  });
+
+  return {
+    health,
+    pid: child.pid ?? -1,
+    port,
+    logFile,
+    stop: async () => {
+      await stopChild(child);
+      logStream.end();
+    },
+  };
+}
+
+function waitForReady(child: ChildProcess, logStream: fs.WriteStream, timeout: number): Promise<DriverHostHealth> {
+  return new Promise<DriverHostHealth>((resolve, reject) => {
+    let settled = false;
+    let stdoutBuffer = '';
+    const stderrTail: string[] = [];
+
+    const timer = setTimeout(() => {
+      finish(
+        new DesktopDriverError(`Driver host did not become ready within ${timeout}ms`, {
+          kind: 'driverHost',
+          detail: { stderr: stderrTail.join('') },
+        }),
+      );
+    }, timeout);
+    timer.unref();
+
+    const finish = (error?: Error, health?: DriverHostHealth): void => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      clearTimeout(timer);
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(health!);
+    };
+
+    child.stdout?.on('data', (chunk: Buffer) => {
+      const text = chunk.toString('utf8');
+      logStream.write(text);
+      if (settled) {
+        return;
+      }
+      stdoutBuffer += text;
+      const newlineIndex = stdoutBuffer.indexOf('\n');
+      if (newlineIndex < 0) {
+        return;
+      }
+      for (const line of stdoutBuffer.split('\n')) {
+        if (line.trim().length === 0) {
+          continue;
+        }
+        try {
+          const message = JSON.parse(line) as { type?: string; health?: DriverHostHealth; message?: string };
+          if (message.type === 'desktop-driver-host/ready' && message.health) {
+            finish(undefined, message.health);
+            return;
+          }
+          if (message.type === 'desktop-driver-host/error') {
+            finish(new DesktopDriverError(`Driver host failed to start: ${message.message ?? 'unknown error'}`, { kind: 'driverHost' }));
+            return;
+          }
+        } catch {
+          // Non-JSON output is ordinary driver logging; it is captured, not parsed.
+        }
+      }
+    });
+
+    child.stderr?.on('data', (chunk: Buffer) => {
+      const text = chunk.toString('utf8');
+      logStream.write(text);
+      stderrTail.push(text);
+      if (stderrTail.length > 50) {
+        stderrTail.shift();
+      }
+    });
+
+    child.on('error', (error) => finish(new DesktopDriverError('Failed to spawn the driver host', { kind: 'driverHost', cause: error })));
+    child.on('exit', (code, signal) => {
+      finish(
+        new DesktopDriverError(`Driver host exited before becoming ready (code ${String(code)}, signal ${String(signal)})`, {
+          kind: 'driverHost',
+          detail: { stderr: stderrTail.join('') },
+        }),
+      );
+    });
+  });
+}
+
+async function stopChild(child: ChildProcess): Promise<void> {
+  if (child.exitCode !== null || child.signalCode !== null) {
+    return;
+  }
+  await new Promise<void>((resolve) => {
+    const timer = setTimeout(() => {
+      child.kill('SIGKILL');
+      resolve();
+    }, 5000);
+    timer.unref();
+    child.once('exit', () => {
+      clearTimeout(timer);
+      resolve();
+    });
+    child.kill('SIGTERM');
+  });
+}

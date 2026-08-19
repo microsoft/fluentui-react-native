@@ -4,7 +4,7 @@
 >
 > Research snapshot: 2026-08-18
 >
-> Initial consumer: `packages/agentic-components/storybook`
+> Initial consumer: `apps/storybook`
 >
 > Target platforms: React Native Windows and React Native macOS
 
@@ -215,12 +215,12 @@ Important boundaries:
    as a fallback and require an explicit architecture decision before adopting
    it.
 
-| Hosting option | Appium CLI/router | Benefit | Primary risk | Disposition |
-| --- | --- | --- | --- | --- |
-| Base-driver single-driver host | No | Smallest path that reuses both driver classes and their command maps | Embedding contract is not stable and the convenience server is deprecated for Appium 4 | **Preferred Phase 0 prototype** |
-| Maintained desktop-driver route host | No | Product owns lifecycle and compatibility boundary | Must track W3C routes, driver command maps, and upstream changes | Preferred product fallback if bounded |
-| Private Appium core host | Yes, internally | Uses the drivers through their best-supported loader | Adds the runtime explicitly excluded from the preferred design | Decision-gated fallback only |
-| Direct endpoint access | No | Fewest Node layers | WinAppDriver loses compatibility shims; WebDriverAgentMac lifecycle still needs Mac2 | Diagnostic spike, not default |
+| Hosting option                       | Appium CLI/router | Benefit                                                              | Primary risk                                                                           | Disposition                           |
+| ------------------------------------ | ----------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------- |
+| Base-driver single-driver host       | No                | Smallest path that reuses both driver classes and their command maps | Embedding contract is not stable and the convenience server is deprecated for Appium 4 | **Preferred Phase 0 prototype**       |
+| Maintained desktop-driver route host | No                | Product owns lifecycle and compatibility boundary                    | Must track W3C routes, driver command maps, and upstream changes                       | Preferred product fallback if bounded |
+| Private Appium core host             | Yes, internally   | Uses the drivers through their best-supported loader                 | Adds the runtime explicitly excluded from the preferred design                         | Decision-gated fallback only          |
+| Direct endpoint access               | No                | Fewest Node layers                                                   | WinAppDriver loses compatibility shims; WebDriverAgentMac lifecycle still needs Mac2   | Diagnostic spike, not default         |
 
 ### 4.3 macOS: Mac2 Driver
 
@@ -324,18 +324,18 @@ the same contract test.
 
 **Observed at version 0.20.10**
 
-| Area | Current capability | Relevance |
-| --- | --- | --- |
-| Interfaces | CLI, typed Node API, and stdio MCP tools share one command implementation | Reference the parity principle for optional integration |
-| Session model | Named and default sessions, worktree-scoped defaults, state directories, per-session logs, serialized mutation guidance | Strong model for parallel agents and artifact ownership |
-| macOS app surface | XCUITest runner for app snapshots, selectors, click/press, focus, type/fill, scroll/gestures, alerts, and app screenshots | Complementary exploration capability |
-| macOS host surfaces | Swift `AXUIElement` helper for frontmost app, desktop, and menu bar; app discovery/open/quit; permissions; coordinate press/read; screenshots | Useful for lifecycle discovery and agent exploration |
-| Selectors | Accessibility snapshots, semantic selectors, transient refs, ref generations, and snapshot diffs | Adopt the durable-selector lessons, not the runtime |
-| Evidence | Screenshots, recordings, logs, events, performance data, request logs, and bounded/redacted timelines depending on platform | Align the artifact schema where practical |
-| Deterministic runs | `.ad` recording/replay, serial suite runner, retries, JUnit, divergence details, ranked selector suggestions, and resumable unchanged plans | Optional interoperability; shared WebdriverIO specs remain primary |
-| Agent support | Token-efficient output, structured MCP results, no generic shell tool, and the inspect-act-verify workflow | Directly relevant to agent workflows |
-| Security | Loopback-only daemon, per-boot token, state-file permissions, path-safe artifacts, and explicit sensitive-artifact guidance | Use as a minimum bar |
-| Packaging | Node 22.12+, MIT; source checkouts build a Swift 5.9/macOS 13 helper lazily | Compatible with this repository, but distribution needs a release gate |
+| Area                | Current capability                                                                                                                            | Relevance                                                              |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Interfaces          | CLI, typed Node API, and stdio MCP tools share one command implementation                                                                     | Reference the parity principle for optional integration                |
+| Session model       | Named and default sessions, worktree-scoped defaults, state directories, per-session logs, serialized mutation guidance                       | Strong model for parallel agents and artifact ownership                |
+| macOS app surface   | XCUITest runner for app snapshots, selectors, click/press, focus, type/fill, scroll/gestures, alerts, and app screenshots                     | Complementary exploration capability                                   |
+| macOS host surfaces | Swift `AXUIElement` helper for frontmost app, desktop, and menu bar; app discovery/open/quit; permissions; coordinate press/read; screenshots | Useful for lifecycle discovery and agent exploration                   |
+| Selectors           | Accessibility snapshots, semantic selectors, transient refs, ref generations, and snapshot diffs                                              | Adopt the durable-selector lessons, not the runtime                    |
+| Evidence            | Screenshots, recordings, logs, events, performance data, request logs, and bounded/redacted timelines depending on platform                   | Align the artifact schema where practical                              |
+| Deterministic runs  | `.ad` recording/replay, serial suite runner, retries, JUnit, divergence details, ranked selector suggestions, and resumable unchanged plans   | Optional interoperability; shared WebdriverIO specs remain primary     |
+| Agent support       | Token-efficient output, structured MCP results, no generic shell tool, and the inspect-act-verify workflow                                    | Directly relevant to agent workflows                                   |
+| Security            | Loopback-only daemon, per-boot token, state-file permissions, path-safe artifacts, and explicit sensitive-artifact guidance                   | Use as a minimum bar                                                   |
+| Packaging           | Node 22.12+, MIT; source checkouts build a Swift 5.9/macOS 13 helper lazily                                                                   | Compatible with this repository, but distribution needs a release gate |
 
 Important boundaries:
 
@@ -804,14 +804,17 @@ those exact resources; it never kills by process name.
    tags, and one executable spec/grep entry. Inline plans compile into a
    generated WebdriverIO spec; linked specs resolve from the static metadata
    described in Section 6.4.
+
 2. **Story controller**
 
    Lists stories, selects a story, updates args, and waits for the matching
    rendered event.
+
 3. **Desktop test service**
 
    Owns the test queue, WebdriverIO runner child process, app/session
    attachment, progress events, cancellation, and artifact paths.
+
 4. **On-device controls**
 
    A small Storybook addon or host component renders Run current, Run all,
@@ -821,14 +824,14 @@ those exact resources; it never kills by process name.
 
 Minimum loopback API:
 
-| Endpoint | Purpose |
-| --- | --- |
-| `GET /v1/health` | Liveness and protocol version |
-| `GET /v1/stories` | Tested story manifest |
-| `POST /v1/runs` | Start current-story, selected-story, or all-story run |
-| `GET /v1/runs/:id` | Current structured status |
-| `GET /v1/runs/:id/events` | Server-sent progress events |
-| `POST /v1/runs/:id/cancel` | Cooperative cancellation |
+| Endpoint                   | Purpose                                               |
+| -------------------------- | ----------------------------------------------------- |
+| `GET /v1/health`           | Liveness and protocol version                         |
+| `GET /v1/stories`          | Tested story manifest                                 |
+| `POST /v1/runs`            | Start current-story, selected-story, or all-story run |
+| `GET /v1/runs/:id`         | Current structured status                             |
+| `GET /v1/runs/:id/events`  | Server-sent progress events                           |
+| `POST /v1/runs/:id/cancel` | Cooperative cancellation                              |
 
 The service binds to `127.0.0.1`, generates a random token per boot, validates
 origin/protocol versions, permits one mutating run per app session, and never
@@ -1184,23 +1187,23 @@ Run one unchanged WebdriverIO suite against fake, Windows, and macOS endpoints:
 
 ## 15. Risks and mitigations
 
-| Risk | Impact | Mitigation |
-| --- | --- | --- |
-| Base-driver single-host API is removed in Appium 4 | backend cannot upgrade | exact pins, isolated host boundary, maintained route-host spike, explicit private-core fallback decision |
-| Driver packages require Appium 3 peer imports | larger or misleading dependency boundary | backend-only optional dependencies, accurate notices, no CLI invocation, dependency compatibility tests |
-| Mac2/Xcode/WDA startup is slow | poor run-all UX | WDA build cache, one warm host/session, measured budgets |
-| macOS Accessibility or automation-mode setup drifts | developer and CI failures | doctor command, clean-machine CI, versioned prerequisites |
-| WinAppDriver remains unmaintained | Windows compatibility and security risk | compare NovaWindows in Phase 0; pin and isolate WinAppDriver if retained |
-| NovaWindows is not mature enough | incomplete or slow Windows backend | run identical parity and performance suite; retain evidence-based fallback |
-| Driver protocol behavior differs | shared specs become flaky or branched | conservative portable matrix and identical cross-platform contract suite |
-| Windows title attachment selects wrong window | destructive or flaky tests | PID/handle-first target resolution and ownership manifest |
-| WebDriver screenshot misses Composition content | invalid visual evidence | OS-level Windows capture fallback and explicit capability result |
-| Storybook app requests arbitrary execution | local code execution risk | versioned allowlisted plans, generated manifest, token, loopback, no arbitrary paths |
-| Inline plan becomes too limited | duplicated tests | companion WebdriverIO specs are first-class; keep inline DSL intentionally small |
-| Portable subset collapses real platform differences | misleading portability | versioned matrix, runtime capabilities, explicit platform suites |
-| Parallel tests fight over one desktop | nondeterminism | serial default; require isolated app/ports/artifacts before enabling workers |
-| Cleanup hides the original failure | poor diagnostics | preserve primary failure and append structured cleanup failures |
-| Agent tools expose sensitive evidence | data leak | local-only defaults, redacted event log, bounded output, artifact guidance |
+| Risk                                                | Impact                                   | Mitigation                                                                                               |
+| --------------------------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Base-driver single-host API is removed in Appium 4  | backend cannot upgrade                   | exact pins, isolated host boundary, maintained route-host spike, explicit private-core fallback decision |
+| Driver packages require Appium 3 peer imports       | larger or misleading dependency boundary | backend-only optional dependencies, accurate notices, no CLI invocation, dependency compatibility tests  |
+| Mac2/Xcode/WDA startup is slow                      | poor run-all UX                          | WDA build cache, one warm host/session, measured budgets                                                 |
+| macOS Accessibility or automation-mode setup drifts | developer and CI failures                | doctor command, clean-machine CI, versioned prerequisites                                                |
+| WinAppDriver remains unmaintained                   | Windows compatibility and security risk  | compare NovaWindows in Phase 0; pin and isolate WinAppDriver if retained                                 |
+| NovaWindows is not mature enough                    | incomplete or slow Windows backend       | run identical parity and performance suite; retain evidence-based fallback                               |
+| Driver protocol behavior differs                    | shared specs become flaky or branched    | conservative portable matrix and identical cross-platform contract suite                                 |
+| Windows title attachment selects wrong window       | destructive or flaky tests               | PID/handle-first target resolution and ownership manifest                                                |
+| WebDriver screenshot misses Composition content     | invalid visual evidence                  | OS-level Windows capture fallback and explicit capability result                                         |
+| Storybook app requests arbitrary execution          | local code execution risk                | versioned allowlisted plans, generated manifest, token, loopback, no arbitrary paths                     |
+| Inline plan becomes too limited                     | duplicated tests                         | companion WebdriverIO specs are first-class; keep inline DSL intentionally small                         |
+| Portable subset collapses real platform differences | misleading portability                   | versioned matrix, runtime capabilities, explicit platform suites                                         |
+| Parallel tests fight over one desktop               | nondeterminism                           | serial default; require isolated app/ports/artifacts before enabling workers                             |
+| Cleanup hides the original failure                  | poor diagnostics                         | preserve primary failure and append structured cleanup failures                                          |
+| Agent tools expose sensitive evidence               | data leak                                | local-only defaults, redacted event log, bounded output, artifact guidance                               |
 
 ## 16. Open decisions resolved by Phase 0
 
@@ -1263,12 +1266,12 @@ Run one unchanged WebdriverIO suite against fake, Windows, and macOS endpoints:
 
 ### First-consumer context
 
-- [`packages/agentic-components/storybook/README.md`](../../agentic-components/storybook/README.md)
-- [`packages/agentic-components/storybook/storybook-server.cjs`](../../agentic-components/storybook/storybook-server.cjs)
-- [`packages/agentic-components/storybook/scripts/storybook-control.cjs`](../../agentic-components/storybook/scripts/storybook-control.cjs)
-- [`packages/agentic-components/storybook/jest.windows.config.cjs`](../../agentic-components/storybook/jest.windows.config.cjs)
-- [`packages/agentic-components/storybook/windows-tests/storybook-smoke.test.cjs`](../../agentic-components/storybook/windows-tests/storybook-smoke.test.cjs)
-- [`packages/agentic-components/storybook/scripts/start-windows-agent-session.ps1`](../../agentic-components/storybook/scripts/start-windows-agent-session.ps1)
+- [`apps/storybook/README.md`](../../../apps/storybook/README.md)
+- [`apps/storybook/storybook-server.cjs`](../../../apps/storybook/storybook-server.cjs)
+- [`apps/storybook/scripts/storybook-control.cjs`](../../../apps/storybook/scripts/storybook-control.cjs)
+- [`apps/storybook/jest.windows.config.cjs`](../../../apps/storybook/jest.windows.config.cjs)
+- [`apps/storybook/windows-tests/storybook-smoke.test.cjs`](../../../apps/storybook/windows-tests/storybook-smoke.test.cjs)
+- [`apps/storybook/scripts/start-windows-agent-session.ps1`](../../../apps/storybook/scripts/start-windows-agent-session.ps1)
 
 These Storybook files establish integration and migration context only. The
 existing Windows smoke harness and legacy repository E2E harness were

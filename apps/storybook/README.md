@@ -207,6 +207,67 @@ yarn storybook:smoke
 
 ## Writing stories
 
-Follow the package-level story authoring instructions in `../AGENTS.md`. Add a `*.stories.tsx` file next to its component
-under `../src`; standalone native package story globs are listed explicitly in `src/main.ts`. See
-`../src/components/button/button.stories.tsx` for the canonical higher-order component example.
+Follow the package-level story authoring instructions in the agentic-components package. Add a `*.stories.tsx` file next
+to its component under `packages/agentic-components/src`; standalone native package story globs are listed explicitly in
+`src/main.ts`. See `packages/agentic-components/src/components/button/button.stories.tsx` for the canonical higher-order
+component example.
+
+## Desktop story tests
+
+Story tests are written next to the components, run on Windows and macOS from the same source, and
+are executed by [`@fluentui-react-native/desktop-driver`](../../packages/native/test-driver/README.md)
+through the ordinary WebdriverIO testrunner. `wdio.conf.ts` holds all platform selection; the specs
+contain none.
+
+A story declares its test through `parameters.desktopTest`, either as a serializable inline plan or
+as a link to a colocated spec. `packages/agentic-components/src/components/button/button.stories.tsx`
+demonstrates both, with `button.desktop.spec.ts` as the linked spec.
+
+```sh
+# Regenerate the manifest and the compiled inline-plan spec (git-ignored)
+yarn desktop:generate
+
+# Report backends, the portable command matrix, and platform prerequisites
+yarn desktop:doctor --platform macos
+
+# Run against a Storybook app that is already running, leaving it running afterwards
+yarn desktop:test:macos
+yarn desktop:test:windows
+
+# Run the same specs against the in-process contract backend, with no app or native driver
+yarn desktop:test:fake
+```
+
+Attach is the default so a run never terminates the app it inspected. Set `DESKTOP_TEST_APP` to
+launch a build instead; only then may the run stop the application. `DESKTOP_TEST_GREP` selects a
+single story's tests by its `[story:<id>]` tag.
+
+The channel server must be running (`yarn storybook-server`) before a macOS or Windows run, because
+each test selects its story through it.
+
+Artifacts — `run.json`, `events.ndjson`, `junit.xml`, per-test source, and screenshots — are written
+under the ignored `artifacts/desktop-tests` directory. They can contain private screen content;
+review before sharing.
+
+### On-device controls
+
+The app renders **Run current test**, **Run all tests**, and **Cancel** beneath the Storybook UI.
+They send allowlisted run requests to a host-side service and render its progress; the device never
+runs the test runner or native automation itself.
+
+```sh
+yarn desktop:generate
+yarn desktop:service   # prints the loopback URL and a per-boot token
+
+# then start Metro with the printed values
+DESKTOP_TEST_SERVICE_URL=... DESKTOP_TEST_SERVICE_TOKEN=... yarn start
+```
+
+Without those variables the controls render in an unavailable state rather than guessing an
+endpoint.
+
+### Relationship to the Windows Jest smoke harness
+
+`yarn windows:test` and `yarn windows:agent` still use the older `@react-native-windows/automation`
+Jest harness. The two paths use different ports and different commands and must not be run at the
+same time; the desktop-driver path replaces the smoke harness once it reaches parity.

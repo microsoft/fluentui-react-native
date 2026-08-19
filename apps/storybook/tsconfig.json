@@ -11,11 +11,14 @@
     "composite": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["index.js", "src", "app.json"],
-  "exclude": ["node_modules", "dist", ".cache"],
+  "include": ["index.js", "src", "app.json", "wdio.conf.ts"],
+  "exclude": ["node_modules", "dist", ".cache", "desktop-tests/generated"],
   "references": [
     {
       "path": "../../packages/native/Callout/tsconfig.json"
+    },
+    {
+      "path": "../../packages/native/test-driver/tsconfig.json"
     },
     {
       "path": "../../packages/agentic-components/tsconfig.json"

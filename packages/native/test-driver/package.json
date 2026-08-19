@@ -1,0 +1,105 @@
+{
+  "name": "@fluentui-react-native/desktop-driver",
+  "version": "0.1.0",
+  "description": "Write-once WebdriverIO desktop tests for React Native Windows and React Native macOS applications",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/native/test-driver"
+  },
+  "bin": "./lib/cli/main.js",
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./wdio": {
+      "types": "./lib/wdio/index.d.ts",
+      "default": "./lib/wdio/index.js"
+    },
+    "./storybook": {
+      "types": "./lib/storybook/index.d.ts",
+      "default": "./lib/storybook/index.js"
+    },
+    "./cli": {
+      "types": "./lib/cli/main.d.ts",
+      "default": "./lib/cli/main.js"
+    },
+    "./driver-host": {
+      "types": "./lib/driver-host/index.d.ts",
+      "default": "./lib/driver-host/index.js"
+    },
+    "./macos": {
+      "types": "./lib/platforms/macos.d.ts",
+      "default": "./lib/platforms/macos.js"
+    },
+    "./windows": {
+      "types": "./lib/platforms/windows.d.ts",
+      "default": "./lib/platforms/windows.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "fluentui-scripts clean",
+    "contract-test": "node ./src/cli/main.ts contract-test",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "fluentui-scripts jest"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.20.0"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@types/node": "catalog:",
+    "expect-webdriverio": "catalog:",
+    "webdriverio": "catalog:"
+  },
+  "peerDependencies": {
+    "webdriverio": "^9.0.0"
+  },
+  "peerDependenciesMeta": {
+    "webdriverio": {
+      "optional": true
+    }
+  },
+  "optionalDependencies": {
+    "appium": "catalog:",
+    "appium-mac2-driver": "catalog:",
+    "appium-windows-driver": "catalog:"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "furn": {
+    "jestPlatform": "react",
+    "depcheck": {
+      "ignoreMatches": [
+        "appium",
+        "appium-mac2-driver",
+        "appium-windows-driver"
+      ]
+    },
+    "knip": {
+      "extraEntries": [
+        "src/**/*.test.ts"
+      ]
+    }
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/scripts/kit-config",
+    "alignDeps": {
+      "capabilities": []
+    }
+  }
+}

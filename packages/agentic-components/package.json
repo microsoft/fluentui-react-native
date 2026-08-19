@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@fluentui-react-native/desktop-driver": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
@@ -76,6 +77,9 @@
   "furn": {
     "jestPlatform": "macos",
     "knip": {
+      "extraEntries": [
+        "src/**/*.desktop.spec.ts"
+      ],
       "ignoreDependencies": [
         "@fluentui-react-native/callout"
       ]

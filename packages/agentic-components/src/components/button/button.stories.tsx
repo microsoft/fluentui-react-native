@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import type { ReactNode } from 'react';
+import { useCallback, useState, type ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
@@ -18,6 +18,29 @@ const StoryGroup = ({ children, label }: StoryGroupProps) => (
     <View style={styles.row}>{children}</View>
   </View>
 );
+
+/**
+ * Press-feedback scenario used by the desktop story tests.
+ *
+ * The counter is rendered as text so a native automation session can observe the result of a
+ * press through the accessibility tree rather than through a screenshot.
+ */
+const InteractionDemo = () => {
+  const [pressCount, setPressCount] = useState(0);
+  const onPress = useCallback(() => setPressCount((count) => count + 1), []);
+
+  return (
+    <View style={styles.story}>
+      <StoryGroup label="Press feedback">
+        <Button content="Press me" onPress={onPress} testID="agentic-storybook-button-interactive" />
+        <Button content="Unavailable" disabled onPress={onPress} testID="agentic-storybook-button-interactive-disabled" />
+      </StoryGroup>
+      <Text style={styles.status} testID="agentic-storybook-button-interactive-status">
+        {pressCount === 0 ? 'Not pressed' : `Pressed ${pressCount}`}
+      </Text>
+    </View>
+  );
+};
 
 const appearances: readonly { label: string; value: ButtonAppearance }[] = [
   { label: 'Primary', value: 'primary' },
@@ -75,7 +98,43 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    // Desktop story test. `desktopTest` is a serializable plan read statically by
+    // `@fluentui-react-native/desktop-driver`; the same plan runs unchanged on React Native
+    // Windows and React Native macOS.
+    desktopTest: {
+      kind: 'inline',
+      id: 'button-default',
+      description: 'The default button renders, is enabled, and exposes its content as text.',
+      steps: [
+        { action: 'expectVisible', target: { testId: 'agentic-storybook-button' } },
+        { action: 'expectEnabled', target: { testId: 'agentic-storybook-button' } },
+        { action: 'expect', target: { testId: 'agentic-storybook-button' }, property: 'text', equals: 'Button' },
+      ],
+    },
+  },
+};
+
+export const Interaction: Story = {
+  render: () => <InteractionDemo />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'An enabled button invokes onPress and a disabled button does not. This is the scenario the desktop story tests drive on Windows and macOS.',
+      },
+    },
+    // This story needs sequencing and repeated presses, so it links a colocated WebdriverIO spec
+    // instead of an inline plan. The spec is ordinary TypeScript and uses standard WebdriverIO.
+    desktopTest: {
+      kind: 'spec',
+      id: 'button-interaction',
+      description: 'Press feedback, repeated presses, disabled inertness, and focus after a press.',
+      spec: './button.desktop.spec.ts',
+    },
+  },
+};
 
 export const Overview: Story = {
   render: () => (
@@ -258,6 +317,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 12,
+  },
+  status: {
+    fontSize: 14,
   },
   story: {
     alignItems: 'flex-start',

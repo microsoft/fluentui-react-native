@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/agentic-components/storybook"
+    "directory": "apps/storybook"
   },
   "scripts": {
     "start": "rnx-cli start",
@@ -37,6 +37,13 @@
     "storybook-server": "node storybook-server.cjs",
     "storybook:control": "node scripts/storybook-control.cjs",
     "storybook:smoke": "node scripts/storybook-control.cjs smoke",
+    "desktop:doctor": "node desktop-tests/desktop-driver.mjs doctor",
+    "desktop:generate": "node desktop-tests/desktop-driver.mjs stories generate --story-root ../../packages/agentic-components/src,../../packages/native/Callout/src --out desktop-tests/generated",
+    "desktop:test": "yarn desktop:generate && wdio run wdio.conf.ts",
+    "desktop:test:fake": "cross-env DESKTOP_TEST_PLATFORM=fake yarn desktop:test",
+    "desktop:test:macos": "cross-env DESKTOP_TEST_PLATFORM=macos yarn desktop:test",
+    "desktop:test:windows": "cross-env DESKTOP_TEST_PLATFORM=windows yarn desktop:test",
+    "desktop:service": "node desktop-tests/test-service.mjs",
     "lint": "fluentui-scripts lint",
     "format": "fluentui-scripts format"
   },
@@ -55,6 +62,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@fluentui-react-native/desktop-driver": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
@@ -75,6 +83,12 @@
     "@storybook/react-native-ui-lite": "^10.4.7",
     "@tmcp/adapter-valibot": "^0.1.6",
     "@tmcp/transport-http": "^0.8.6",
+    "@wdio/cli": "catalog:",
+    "@wdio/local-runner": "catalog:",
+    "@wdio/mocha-framework": "^9.24.0",
+    "@wdio/spec-reporter": "catalog:",
+    "cross-env": "catalog:",
+    "expect-webdriverio": "catalog:",
     "jest": "^29.7.0",
     "jest-environment-node": "^29.7.0",
     "metro": "^0.83.1",
@@ -82,7 +96,8 @@
     "react-native-test-app": "catalog:",
     "storybook": "^10.4.0",
     "tmcp": "^1.19.4",
-    "valibot": "^1.4.1"
+    "valibot": "^1.4.1",
+    "webdriverio": "catalog:"
   },
   "furn": {
     "knip": {

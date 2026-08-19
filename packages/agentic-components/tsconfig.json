@@ -7,13 +7,16 @@
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
-  "exclude": ["**/*.stories.ts", "**/*.stories.tsx"],
+  "exclude": ["**/*.stories.ts", "**/*.stories.tsx", "**/*.desktop.spec.ts"],
   "references": [
     {
       "path": "../native/Callout/tsconfig.json"
     },
     {
       "path": "../agentic-design/tsconfig.json"
+    },
+    {
+      "path": "../native/test-driver/tsconfig.json"
     },
     {
       "path": "../framework-base/tsconfig.json"

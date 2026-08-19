@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "stories": {
+    "components-button--default": {
+      "elements": [
+        {
+          "testId": "agentic-storybook-button",
+          "role": "button",
+          "name": "Button",
+          "text": "Button",
+          "onClick": [{ "testId": "agentic-storybook-button-status", "set": { "text": "Pressed", "displayed": true } }]
+        },
+        {
+          "testId": "agentic-storybook-button-status",
+          "role": "text",
+          "text": "Not pressed"
+        }
+      ]
+    },
+    "components-button--disabled": {
+      "elements": [
+        {
+          "testId": "agentic-storybook-button-disabled",
+          "role": "button",
+          "name": "Disabled",
+          "text": "Disabled",
+          "enabled": false
+        }
+      ]
+    },
+    "components-input--default": {
+      "elements": [
+        {
+          "testId": "agentic-storybook-input",
+          "role": "textbox",
+          "name": "Input",
+          "value": "seed"
+        }
+      ]
+    }
+  }
+}
