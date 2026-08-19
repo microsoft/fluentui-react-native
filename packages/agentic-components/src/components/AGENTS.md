@@ -25,6 +25,8 @@ audit.
 - Keep render-only slots private to state.
 - Exclude native `children` or other props the component owns.
 - Preserve the distinction between omitted and false controlled values.
+- Support both externally driven and internally driven values for every toggleable state axis, using the
+  `<state>` / `default<State>` / `on<State>Change` prop triple and `useToggleState` from `framework-base`.
 - Use Flex tokens first and document genuine token gaps.
 - Create style factories only at module scope and cache theme-only styles.
 - Declare state precedence explicitly; disabled wins over pressed, which wins over hovered.
@@ -34,6 +36,8 @@ audit.
   component-qualified unstable names so another component can reuse the pipeline.
 - Test public accessibility, every finite variant axis, interactions, optional slots, user forwarding, and constrained
   layout.
+- Test both the controlled and uncontrolled path of every toggleable axis, and keep controlled state props out of story
+  `args`.
 
 ## Focused references
 

@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -131,7 +132,7 @@ const meta: Meta<typeof Card> = {
     direction: { control: 'select', options: directions.map(({ value }) => value) },
     layout: { control: 'select', options: layouts.map(({ value }) => value) },
     padding: { control: 'select', options: paddings.map(({ value }) => value) },
-    selected: { control: 'boolean' },
+    defaultSelected: { control: 'boolean' },
     size: { control: 'select', options: sizes.map(({ value }) => value) },
   },
   parameters: {
@@ -221,7 +222,7 @@ export const Interactive: Story = {
       }}
       layout="structured"
       onPress={() => undefined}
-      selected={false}
+      defaultSelected={false}
     />
   ),
 };
@@ -235,7 +236,7 @@ export const Selected: Story = {
       }}
       layout="structured"
       onPress={() => undefined}
-      selected
+      defaultSelected
       header={{
         children: (
           <View style={styles.headerRow}>
@@ -249,6 +250,39 @@ export const Selected: Story = {
       }}
     />
   ),
+};
+
+export const ExternallyDrivenSelection: Story = {
+  render: () => {
+    const reports = ['Q3 report', 'Q4 forecast'];
+    const Picker = () => {
+      const [selected, setSelected] = useState<readonly string[]>([]);
+      return (
+        <View style={styles.story}>
+          {reports.map((name) => (
+            <Card
+              key={name}
+              accessibilityLabel={name}
+              content={{ children: <Text style={styles.body}>{name}</Text> }}
+              layout="structured"
+              onSelectedChange={(next) => setSelected(next ? [...selected, name] : selected.filter((current) => current !== name))}
+              selected={selected.includes(name)}
+            />
+          ))}
+          <Text style={styles.meta}>{selected.length} selected</Text>
+        </View>
+      );
+    };
+    return <Picker />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A multi-select grid owns which cards are chosen. Each card is externally driven and reports presses through onSelectedChange.',
+      },
+    },
+  },
 };
 
 export const Disabled: Story = {

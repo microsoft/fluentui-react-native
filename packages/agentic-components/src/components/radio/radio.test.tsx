@@ -22,6 +22,43 @@ function getRootStyle(component: RenderResult) {
 }
 
 describe('Radio', () => {
+  it('selects itself when selection is internally driven and never deselects', async () => {
+    const onSelectedChange = jest.fn();
+    const onPress = jest.fn();
+    const component = await renderRadio({ defaultSelected: false, onPress, onSelectedChange });
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onSelectedChange).toHaveBeenCalledWith(true);
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(getRoot(component).props.accessibilityState.checked).toBe(true);
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onSelectedChange).toHaveBeenCalledTimes(1);
+    expect(getRoot(component).props.accessibilityState.checked).toBe(true);
+  });
+
+  it('reports presses without changing state when selection is externally driven', async () => {
+    const onSelectedChange = jest.fn();
+    const component = await renderRadio({ onSelectedChange, selected: false });
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onSelectedChange).toHaveBeenCalledWith(true);
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+  });
+
+  it('does not change selection while disabled', async () => {
+    const onSelectedChange = jest.fn();
+    const component = await renderRadio({ defaultSelected: false, disabled: true, onSelectedChange });
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onSelectedChange).not.toHaveBeenCalled();
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+  });
+
   it('renders the default label and accessibility state', async () => {
     const component = await renderRadio({});
     const root = getRoot(component);

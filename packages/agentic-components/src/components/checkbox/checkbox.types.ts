@@ -23,15 +23,31 @@ type CheckboxStateSlots = CheckboxSlots & {
 
 export type CheckboxStateProps = {
   disabled?: boolean;
-  defaultStatus?: CheckboxStatus;
   label?: string;
   showLabel?: boolean;
   secondaryText?: string;
   showSecondaryText?: boolean;
+  /**
+   * The externally driven status. While this is supplied the checkbox renders what it is given and reports presses
+   * through `onStatusChange` instead of changing status itself.
+   */
   status?: CheckboxStatus;
-  variant?: CheckboxVariant;
+  /**
+   * The initial status when the checkbox is internally driven. Ignored while `status` is supplied.
+   */
+  defaultStatus?: CheckboxStatus;
+  /**
+   * Called with the next status whenever a press changes it, in both the externally driven and internally driven
+   * cases.
+   */
   onStatusChange?: (nextStatus: CheckboxStatus) => void;
+  variant?: CheckboxVariant;
 };
+
+/**
+ * The status props that describe how the axis is driven rather than its resolved value.
+ */
+export type CheckboxStatusDriverKeys = 'defaultStatus' | 'onStatusChange';
 
 export type CheckboxRootProps = OwnedRootProps<PressableProps> & {
   children?: never;
@@ -40,7 +56,7 @@ export type CheckboxRootProps = OwnedRootProps<PressableProps> & {
 export type CheckboxProps = CheckboxStateProps & ComponentProps<CheckboxSlots, CheckboxRootProps>;
 
 export type CheckboxState = ComponentState<CheckboxStateSlots> &
-  Required<CheckboxStateProps> &
+  Required<Omit<CheckboxStateProps, CheckboxStatusDriverKeys>> &
   ThemeState &
   PressableState & {
     indicatorIconColor?: ColorValue;

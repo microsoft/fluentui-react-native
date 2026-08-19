@@ -12,6 +12,7 @@ import type {
 
 import type { Icon } from '../../primitives/icon/icon';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
+import type { SelectionDriverKeys, SelectionStateProps } from '../../common/selection.types';
 
 export type ListItemSize = 'small' | 'medium' | 'large';
 export type ListItemSelectionMode = 'none' | 'single' | 'multiple';
@@ -34,11 +35,10 @@ export type ListItemStateSlots = ListItemSlots & {
 
 export type ListItemStateProps = {
   disabled?: boolean;
-  selected?: boolean;
   secondaryContentPosition?: ListItemSecondaryContentPosition;
   selectionMode?: ListItemSelectionMode;
   size?: ListItemSize;
-};
+} & SelectionStateProps;
 
 export type ListItemExposedPressableProps = OwnedRootProps<PressableProps>;
 
@@ -58,7 +58,7 @@ export type ListItemMetrics = {
 };
 
 export type ListItemState = ComponentState<ListItemStateSlots> &
-  Required<ListItemStateProps> &
+  Required<Omit<ListItemStateProps, SelectionDriverKeys>> &
   ThemeState &
   PressableState & {
     metrics: ListItemMetrics;

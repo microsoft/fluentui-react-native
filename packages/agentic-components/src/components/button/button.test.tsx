@@ -139,6 +139,53 @@ describe('Button', () => {
     expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ fontWeight: '600', position: 'absolute' });
   });
 
+  it('toggles its own selection when selection is internally driven', async () => {
+    const onSelectedChange = jest.fn();
+    const onPress = jest.fn();
+    const component = await renderButton({ content: 'Favorite', defaultSelected: false, onPress, onSelectedChange });
+
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onSelectedChange).toHaveBeenCalledWith(true);
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(getRoot(component).props.accessibilityState.checked).toBe(true);
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onSelectedChange).toHaveBeenLastCalledWith(false);
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+  });
+
+  it('reports presses without changing state when selection is externally driven', async () => {
+    const onSelectedChange = jest.fn();
+    const component = await renderButton({ content: 'Favorite', onSelectedChange, selected: false });
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onSelectedChange).toHaveBeenCalledWith(true);
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+  });
+
+  it('enables toggle semantics from onSelectedChange alone and never toggles while disabled', async () => {
+    const onSelectedChange = jest.fn();
+    const component = await renderButton({ content: 'Favorite', onSelectedChange });
+
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+
+    const disabled = await renderButton({ content: 'Favorite', defaultSelected: false, disabled: true, onSelectedChange });
+    await fireEvent.press(disabled.getByRole('button'));
+
+    expect(onSelectedChange).not.toHaveBeenCalled();
+  });
+
+  it('omits selection semantics when no selection prop is supplied', async () => {
+    const component = await renderButton({ content: 'Action' });
+
+    expect(getRoot(component).props.accessibilityState).toEqual({ disabled: false });
+  });
+
   it('places the icon after content and applies user styles last', async () => {
     const style: ViewStyle = { backgroundColor: 'hotpink' };
     const component = await renderButton({

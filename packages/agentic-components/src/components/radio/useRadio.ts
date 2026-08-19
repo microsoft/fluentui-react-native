@@ -1,6 +1,8 @@
+import * as React from 'react';
 import { Pressable } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
-import { usePressableState, useSlot } from '@fluentui-react-native/framework-base';
+import { usePressableState, useSlot, useToggleState } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import type { RadioProps, RadioState } from './radio.types';
@@ -13,14 +15,35 @@ export function useRadio_unstable(props: RadioProps): RadioState {
     accessibilityHint,
     accessibilityLabel,
     accessibilityState,
+    defaultSelected,
     disabled = false,
     label = 'Label',
+    onPress,
+    onSelectedChange,
     secondaryText = 'Description',
-    selected = false,
+    selected,
     showSecondaryText = false,
     style: userStyle,
     ...rest
   } = props;
+
+  // Radio is single-select: pressing an already-selected radio keeps it selected, and the owning group deselects peers.
+  const selection = useToggleState({
+    value: selected,
+    defaultValue: defaultSelected,
+    onChange: onSelectedChange,
+    mode: 'select',
+    disabled,
+  });
+
+  const { activate } = selection;
+  const handlePress = React.useCallback(
+    (event: GestureResponderEvent) => {
+      activate();
+      onPress?.(event);
+    },
+    [activate, onPress],
+  );
 
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({
@@ -30,12 +53,13 @@ export function useRadio_unstable(props: RadioProps): RadioState {
     accessibilityRole: 'radio',
     accessibilityState: {
       ...accessibilityState,
-      checked: selected,
+      checked: selection.value,
       disabled,
     },
     accessible: rest.accessible ?? true,
     disabled,
     focusable: rest.focusable ?? !disabled,
+    onPress: handlePress,
   });
   const root = useSlot(Pressable, pressableProps);
 
@@ -49,7 +73,7 @@ export function useRadio_unstable(props: RadioProps): RadioState {
     disabled,
     label,
     secondaryText,
-    selected,
+    selected: selection.value,
     showSecondaryText,
     secondaryTextStyle: [],
     userStyle,

@@ -87,11 +87,9 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
   return {
     ...themeState,
     ...pressableState,
-    defaultStatus,
     disabled,
     label,
     labelText,
-    onStatusChange: onStatusChange ?? (() => undefined),
     renderSecondaryText,
     root,
     secondaryText,

@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -25,12 +26,12 @@ const meta: Meta<typeof MenuItem> = {
     content: 'Menu item',
     secondaryContent: 'Secondary',
     secondaryContentPosition: 'right',
-    selected: false,
+    defaultSelected: false,
     menuStyle: 'list-item',
   },
   argTypes: {
     secondaryContentPosition: { control: 'select', options: ['right', 'under'] },
-    selected: { control: 'boolean' },
+    defaultSelected: { control: 'boolean' },
     menuStyle: { control: 'select', options: ['list-item', 'section-header'] },
   },
   parameters: {
@@ -58,9 +59,9 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="Selection">
         <MenuItem content="Not selected" />
-        <MenuItem content="Selected" selected />
-        <MenuItem hasCheckmark content="Checked" selected />
-        <MenuItem content="Multi-select" hasMultiselect selected />
+        <MenuItem content="Selected" defaultSelected />
+        <MenuItem hasCheckmark content="Checked" defaultSelected />
+        <MenuItem content="Multi-select" hasMultiselect defaultSelected />
       </StoryGroup>
       <StoryGroup label="Secondary content">
         <MenuItem content="Right" secondaryContent="Meta" secondaryContentPosition="right" />
@@ -80,7 +81,7 @@ export const SectionHeader: Story = {
 export const Selected: Story = {
   args: {
     content: 'Favorite',
-    selected: true,
+    defaultSelected: true,
   },
 };
 
@@ -88,7 +89,7 @@ export const Checkmark: Story = {
   args: {
     hasCheckmark: true,
     content: 'Single select',
-    selected: true,
+    defaultSelected: true,
   },
 };
 
@@ -96,7 +97,39 @@ export const Multiselect: Story = {
   args: {
     content: 'Multi select',
     hasMultiselect: true,
-    selected: true,
+    defaultSelected: true,
+  },
+};
+
+export const ExternallyDrivenSelection: Story = {
+  render: () => {
+    const options = ['Compact', 'Comfortable', 'Spacious'];
+    const Menu = () => {
+      const [choice, setChoice] = useState('Comfortable');
+      return (
+        <StoryGroup label={`Density: ${choice}`}>
+          {options.map((option) => (
+            <MenuItem
+              key={option}
+              content={option}
+              hasCheckmark
+              onSelectedChange={(selected) => selected && setChoice(option)}
+              secondaryContent={null}
+              selected={choice === option}
+            />
+          ))}
+        </StoryGroup>
+      );
+    };
+    return <Menu />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A menu owns which command is active. Each checkmark item is externally driven and only ever selects itself, so the menu clears the previous choice through onSelectedChange.',
+      },
+    },
   },
 };
 

@@ -1,7 +1,8 @@
 import { Pressable, Text, View } from 'react-native';
-import type { ViewProps } from 'react-native';
+import type { GestureResponderEvent, ViewProps } from 'react-native';
+import * as React from 'react';
 
-import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { usePressableState, useOptionalSlot, useSlot, useToggleState } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { semanticIconSources } from '../../common/iconSources';
@@ -17,13 +18,16 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     checkmark = false,
     chevron = false,
     content: contentProp = { children: 'Listbox item' },
+    defaultSelected,
     disabled = false,
     icon: iconProp,
     loading = false,
     multiselect = false,
+    onPress,
+    onSelectedChange,
     secondaryContent: secondaryContentProp,
     secondaryContentPosition = 'right',
-    selected = false,
+    selected,
     selectedIcon: selectedIconProp,
     variant = 'listItem',
     style: userStyle,
@@ -33,6 +37,17 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
   } = props;
 
   const isListItem = variant === 'listItem';
+
+  // Multi-select options toggle themselves; single-select options only select, and the owning listbox clears peers.
+  // A section header is not interactive, so it never drives selection from a press.
+  const selection = useToggleState({
+    value: selected,
+    defaultValue: defaultSelected,
+    onChange: onSelectedChange,
+    mode: multiselect ? 'toggle' : 'select',
+    disabled: disabled || !isListItem,
+  });
+
   const themeState = useThemeState();
   const content = useSlot(Text, contentProp);
   const contentHidden = useOptionalSlot(Text, isListItem && !multiselect ? contentProp : null);
@@ -54,9 +69,18 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     ? {
         ...accessibilityState,
         disabled,
-        pressed: selected,
+        pressed: selection.value,
       }
     : accessibilityState;
+
+  const { activate } = selection;
+  const handlePress = React.useCallback(
+    (event: GestureResponderEvent) => {
+      activate();
+      onPress?.(event);
+    },
+    [activate, onPress],
+  );
 
   const [rootProps, pressableState] = usePressableState({
     ...rest,
@@ -65,14 +89,15 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     accessible: rest.accessible ?? true,
     disabled: isListItem ? disabled : false,
     focusable: rest.focusable ?? (isListItem && !disabled),
+    onPress: isListItem ? handlePress : undefined,
   });
 
-  const { onBlur, onFocus, onHoverIn, onHoverOut, onLongPress, onPress, onPressIn, onPressOut, ...headerRest } = rootProps;
+  const { onBlur, onFocus, onHoverIn, onHoverOut, onLongPress, onPress: _rootOnPress, onPressIn, onPressOut, ...headerRest } = rootProps;
   const headerProps: ViewProps = headerRest as unknown as ViewProps;
   const root = useSlot(Pressable, rootProps);
   const header = useSlot(View, headerProps);
   const chevronIndicator = useOptionalSlot(Icon, chevron ? { fontSource: semanticIconSources.chevron } : null);
-  const checkmarkIndicator = useOptionalSlot(Icon, checkmark && selected ? { fontSource: semanticIconSources.checkmark } : null);
+  const checkmarkIndicator = useOptionalSlot(Icon, checkmark && selection.value ? { fontSource: semanticIconSources.checkmark } : null);
   const checkboxIndicator = useOptionalSlot(CheckboxIndicator, multiselect ? {} : null);
 
   return {
@@ -94,7 +119,7 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     root,
     secondaryContent,
     secondaryContentPosition,
-    selected,
+    selected: selection.value,
     selectedIcon,
     userStyle,
     variant,

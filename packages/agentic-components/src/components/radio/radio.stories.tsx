@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -24,14 +25,14 @@ const meta: Meta<typeof Radio> = {
   args: {
     label: 'Radio option',
     secondaryText: 'Additional detail',
-    selected: false,
+    defaultSelected: false,
     showSecondaryText: true,
   },
   argTypes: {
     disabled: { control: 'boolean' },
     label: { control: 'text' },
     secondaryText: { control: 'text' },
-    selected: { control: 'boolean' },
+    defaultSelected: { control: 'boolean' },
     showSecondaryText: { control: 'boolean' },
   },
   parameters: {
@@ -55,7 +56,7 @@ export const Overview: Story = {
     <View style={styles.story}>
       <StoryGroup label="Selection">
         <Radio label={label} secondaryText={secondaryText} showSecondaryText />
-        <Radio label="Selected option" secondaryText="This option is active" selected showSecondaryText />
+        <Radio label="Selected option" secondaryText="This option is active" defaultSelected showSecondaryText />
       </StoryGroup>
       <StoryGroup label="Supporting text">
         <Radio label="Label only" showSecondaryText={false} />
@@ -80,13 +81,44 @@ export const Selection: Story = {
   render: () => (
     <StoryGroup label="Selection">
       <Radio label="Unselected" />
-      <Radio label="Selected" selected />
+      <Radio label="Selected" defaultSelected />
     </StoryGroup>
   ),
   parameters: {
     docs: {
       description: {
         story: 'Selected radios shift the label and indicator colors to the active choice palette and expose checked semantics.',
+      },
+    },
+  },
+};
+
+export const Group: Story = {
+  render: () => {
+    const options = ['Daily', 'Weekly', 'Never'];
+    const Group = () => {
+      const [choice, setChoice] = useState('Daily');
+      return (
+        <StoryGroup label={`Notify me: ${choice}`}>
+          {options.map((option) => (
+            <Radio
+              key={option}
+              label={option}
+              onSelectedChange={(selected) => selected && setChoice(option)}
+              selected={choice === option}
+              showSecondaryText={false}
+            />
+          ))}
+        </StoryGroup>
+      );
+    };
+    return <Group />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A radio group owns the chosen option. Each radio is externally driven and only ever selects itself, so the group is responsible for clearing the previous choice.',
       },
     },
   },

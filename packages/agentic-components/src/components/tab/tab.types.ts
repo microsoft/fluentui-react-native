@@ -12,6 +12,7 @@ import type {
 import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
+import type { SelectionDriverKeys, SelectionStateProps } from '../../common/selection.types';
 
 export type TabLayout = 'iconAndText' | 'iconOnly';
 
@@ -36,14 +37,10 @@ export type TabStateProps = {
    */
   layout?: TabLayout;
   /**
-   * Whether the tab is selected.
-   */
-  selected?: boolean;
-  /**
    * The id of the tabpanel controlled by this tab.
    */
   controls: string;
-};
+} & SelectionStateProps;
 
 export type TabExposedPressableProps = OwnedRootProps<PressableProps>;
 
@@ -61,7 +58,7 @@ type TabIconAndTextProps = {
 export type TabProps = TabStateProps & ComponentProps<TabSlots, TabExposedPressableProps> & (TabIconAndTextProps | TabIconOnlyProps);
 
 export type TabState = ComponentState<TabStateSlots> &
-  Required<TabStateProps> &
+  Required<Omit<TabStateProps, SelectionDriverKeys>> &
   ThemeState &
   PressableState & {
     iconOnly: boolean;

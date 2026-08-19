@@ -3,6 +3,8 @@ import type { Pressable, PressableProps, StyleProp, View, ViewStyle } from 'reac
 import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
+import type { SelectionDriverKeys, SelectionStateProps } from '../../common/selection.types';
+
 export type CardSize = 'small' | 'large';
 export type CardPadding = 'default' | 'none';
 export type CardLayout = 'default' | 'nested' | 'structured';
@@ -22,12 +24,11 @@ type CardStateSlots = CardSlots & {
 
 export type CardStateProps = {
   disabled?: boolean;
-  selected?: boolean;
   size?: CardSize;
   padding?: CardPadding;
   layout?: CardLayout;
   direction?: CardDirection;
-};
+} & SelectionStateProps;
 
 export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessibilityRole'> & {
   children?: never;
@@ -36,7 +37,7 @@ export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessib
 export type CardProps = CardStateProps & ComponentProps<CardSlots, CardExposedPressableProps>;
 
 export type CardState = ComponentState<CardStateSlots> &
-  Required<CardStateProps> &
+  Required<Omit<CardStateProps, SelectionDriverKeys>> &
   ThemeState & {
     hovered: boolean;
     pressed: boolean;

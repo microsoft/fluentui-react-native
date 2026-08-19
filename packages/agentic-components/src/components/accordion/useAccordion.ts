@@ -4,10 +4,10 @@ import { Pressable, Text, View } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
 import {
   useAccessibilityLabelWarning,
-  useControllableValue,
   useOptionalSlot,
   usePressableState,
   useSlot,
+  useToggleState,
 } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
@@ -27,6 +27,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
     accessibilityLabel,
     accessibilityState,
     bodyContent: bodyContentProp,
+    defaultExpanded,
     expanded: expandedProp,
     focused: focusedProp,
     layout = 'chevronStart',
@@ -38,12 +39,8 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
     ...rootProps
   } = props;
 
-  const [expandedValue, setExpanded] = useControllableValue(expandedProp, expandedProp ?? false, (nextExpanded) => {
-    if (nextExpanded !== undefined) {
-      onExpandedChange?.(nextExpanded);
-    }
-  });
-  const resolvedExpanded = expandedValue ?? false;
+  const expansion = useToggleState({ value: expandedProp, defaultValue: defaultExpanded, onChange: onExpandedChange });
+  const resolvedExpanded = expansion.value;
   const bodyId = React.useId().replace(/:/g, '');
 
   useAccessibilityLabelWarning({
@@ -53,10 +50,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
     warning: 'Accordion: provide a meaningful title or accessibilityLabel for the header button.',
   });
 
-  const toggleExpanded = React.useCallback(() => {
-    const nextExpanded = !resolvedExpanded;
-    setExpanded(nextExpanded);
-  }, [resolvedExpanded, setExpanded]);
+  const toggleExpanded = expansion.activate;
 
   const themeState = useThemeState();
   const [headerProps, pressableState] = usePressableState({

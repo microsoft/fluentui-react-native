@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -57,7 +58,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     appearance: { control: 'select', options: appearances.map(({ value }) => value) },
     iconPosition: { control: 'select', options: ['before', 'after'] },
-    selected: { control: 'boolean' },
+    defaultSelected: { control: 'boolean' },
     shape: { control: 'select', options: shapes.map(({ value }) => value) },
     size: { control: 'select', options: sizes.map(({ value }) => value) },
   },
@@ -191,8 +192,8 @@ export const Icon: Story = {
 export const Selected: Story = {
   render: () => (
     <StoryGroup label="Selection">
-      <Button content="Not selected" icon={regularStarIcon} selected={false} selectedIcon={filledStarIcon} />
-      <Button content="Selected" icon={regularStarIcon} selected selectedIcon={filledStarIcon} />
+      <Button content="Not selected" icon={regularStarIcon} defaultSelected={false} selectedIcon={filledStarIcon} />
+      <Button content="Selected" icon={regularStarIcon} defaultSelected selectedIcon={filledStarIcon} />
     </StoryGroup>
   ),
   parameters: {
@@ -200,6 +201,35 @@ export const Selected: Story = {
       description: {
         story:
           'Supplying selected enables toggle-button semantics. selectedIcon replaces icon in the selected state while the label layout remains stable.',
+      },
+    },
+  },
+};
+
+export const ExternallyDrivenSelection: Story = {
+  render: () => {
+    const ToggleGroup = () => {
+      const [selected, setSelected] = useState(false);
+      return (
+        <StoryGroup label={selected ? 'Selected' : 'Not selected'}>
+          <Button
+            content="Favorite"
+            icon={regularStarIcon}
+            onSelectedChange={setSelected}
+            selected={selected}
+            selectedIcon={filledStarIcon}
+          />
+          <Button appearance="subtle" content="Reset" onPress={() => setSelected(false)} />
+        </StoryGroup>
+      );
+    };
+    return <ToggleGroup />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Supplying selected makes the caller the owner of the state. The button reports every press through onSelectedChange and renders only what it is given, so an external action such as Reset can also change it.',
       },
     },
   },

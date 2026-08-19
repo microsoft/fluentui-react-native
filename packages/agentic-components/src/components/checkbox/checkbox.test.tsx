@@ -60,6 +60,16 @@ describe('Checkbox', () => {
     expect(getRoot(component).props.accessibilityState).toEqual({ checked: true, disabled: false });
   });
 
+  it('reports presses without changing state when the status is externally driven', async () => {
+    const onStatusChange = jest.fn();
+    const component = await renderCheckbox({ onStatusChange, status: 'unchecked' });
+
+    await fireEvent.press(component.getByRole('checkbox'));
+
+    expect(onStatusChange).toHaveBeenCalledWith('checked');
+    expect(component.getByRole('checkbox').props.accessibilityState.checked).toBe(false);
+  });
+
   it('advances indeterminate status to checked on press', async () => {
     const onStatusChange = jest.fn();
     const component = await renderCheckbox({

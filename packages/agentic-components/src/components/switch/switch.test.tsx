@@ -51,6 +51,32 @@ describe('Switch', () => {
     expect(component.getByRole('switch', { name: 'Wi-Fi' }).props.accessibilityState.checked).toBe(true);
   });
 
+  it('reports presses without changing state when the checked value is externally driven', async () => {
+    const onChange = jest.fn();
+    const component = await renderSwitch({ checked: false, label: 'Wi-Fi', labelAfter: false, onChange });
+
+    await fireEvent.press(component.getByRole('switch', { name: 'Wi-Fi' }));
+    await flushAnimationFrame();
+
+    expect(onChange).toHaveBeenCalledWith(true);
+    expect(component.getByRole('switch', { name: 'Wi-Fi' }).props.accessibilityState.checked).toBe(false);
+  });
+
+  it('starts from defaultChecked and forwards the user press handler', async () => {
+    const onChange = jest.fn();
+    const onPress = jest.fn();
+    const component = await renderSwitch({ defaultChecked: true, label: 'Wi-Fi', labelAfter: false, onChange, onPress });
+
+    expect(component.getByRole('switch', { name: 'Wi-Fi' }).props.accessibilityState.checked).toBe(true);
+
+    await fireEvent.press(component.getByRole('switch', { name: 'Wi-Fi' }));
+    await flushAnimationFrame();
+
+    expect(onChange).toHaveBeenCalledWith(false);
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(component.getByRole('switch', { name: 'Wi-Fi' }).props.accessibilityState.checked).toBe(false);
+  });
+
   it('toggles on Enter and Space', async () => {
     const onChange = jest.fn();
     const component = await renderSwitch({ accessibilityLabel: 'Wi-Fi', layout: 'switch', onChange });

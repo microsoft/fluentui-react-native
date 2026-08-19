@@ -76,6 +76,17 @@ Keep on-device controls limited to scalar, serializable props. For required Reac
 fixed demonstration values inside the story render function and expose only meaningful finite or numeric args; object
 controls for React elements are noisy and cannot safely edit the contract.
 
+Do not put a controlled state prop in `args`. A pinned `selected`, `checked`, `expanded`, or `status` arg makes every
+story instance externally driven by Storybook, so pressing the component does nothing and the story looks broken.
+Instead:
+
+- Expose the `default<State>` prop as the on-device control and use it in `args`, so the `Default` story starts in a
+  chosen state and still responds to presses.
+- Use `default<State>` for variant-scan stories too, so a scan of every value stays comparable at first render while
+  each instance remains interactive.
+- Demonstrate external control in one dedicated story that owns the value with `React.useState` and updates it from
+  `on<State>Change`.
+
 Each story module should provide:
 
 - typed `Meta` with `component` and `Components/<Name>` or `Primitives/<Name>` title
@@ -85,6 +96,8 @@ Each story module should provide:
 - an args-driven `Default`
 - a grouped `Overview` when the contract has several axes
 - focused named stories that compare all values of one axis in one canvas
+- an interactive story for each toggleable axis, driven by `default<State>`, plus one story that owns the value with
+  `React.useState` and `on<State>Change`
 - `parameters.docs.description.story` for focused scenarios
 
 Stories included in native agent validation also need a stable root `testID`.

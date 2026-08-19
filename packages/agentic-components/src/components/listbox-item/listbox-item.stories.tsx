@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import type { ViewProps } from 'react-native';
@@ -52,7 +53,7 @@ export const Overview: Story = {
     <View style={styles.story}>
       <StoryGroup label="Style">
         <ListboxItem content="Option" />
-        <ListboxItem content="Selected" selected />
+        <ListboxItem content="Selected" defaultSelected />
         <ListboxItem content="Section header" variant="sectionHeader" />
       </StoryGroup>
       <StoryGroup label="Layout">
@@ -61,15 +62,46 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="Indicators">
         <ListboxItem content="Chevron" chevron />
-        <ListboxItem content="Checkmark" checkmark selected />
-        <ListboxItem content="Multiselect" multiselect selected />
+        <ListboxItem content="Checkmark" checkmark defaultSelected />
+        <ListboxItem content="Multiselect" multiselect defaultSelected />
       </StoryGroup>
       <StoryGroup label="Custom">
         <ListboxItem content="Avatar" avatar={{ as: Avatar }} />
-        <ListboxItem content="Icon swap" selected />
+        <ListboxItem content="Icon swap" defaultSelected />
       </StoryGroup>
     </View>
   ),
+};
+
+export const ExternallyDrivenSelection: Story = {
+  render: () => {
+    const options = ['Ascending', 'Descending'];
+    const Listbox = () => {
+      const [choice, setChoice] = useState('Ascending');
+      return (
+        <StoryGroup label={`Sort: ${choice}`}>
+          {options.map((option) => (
+            <ListboxItem
+              key={option}
+              content={option}
+              onSelectedChange={(selected) => selected && setChoice(option)}
+              secondaryContent={null}
+              selected={choice === option}
+            />
+          ))}
+        </StoryGroup>
+      );
+    };
+    return <Listbox />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A single-selection listbox owns the chosen value. Each option is externally driven and only ever selects itself, so the listbox clears the previous choice through onSelectedChange.',
+      },
+    },
+  },
 };
 
 const styles = StyleSheet.create({

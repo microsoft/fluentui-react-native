@@ -1,7 +1,14 @@
 import { Pressable, Text } from 'react-native';
-import type { PressableProps } from 'react-native';
+import type { GestureResponderEvent, PressableProps } from 'react-native';
+import * as React from 'react';
 
-import { useAccessibilityLabelWarning, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import {
+  useAccessibilityLabelWarning,
+  usePressableState,
+  useOptionalSlot,
+  useSlot,
+  useToggleState,
+} from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import type { TabProps, TabState } from './tab.types';
@@ -15,15 +22,27 @@ export function useTab_unstable(props: TabProps): TabState {
     accessibilityState,
     controls,
     content: contentProp,
+    defaultSelected,
     disabled = false,
     icon: iconProp,
     layout = 'iconAndText',
-    selected = false,
+    onPress,
+    onSelectedChange,
+    selected,
     selectedIcon: selectedIconProp,
     style: userStyle,
     ...rest
   } = props;
   const iconOnly = layout === 'iconOnly';
+
+  // A tab within a tablist only ever selects itself; the owning tablist is responsible for deselecting its siblings.
+  const selection = useToggleState({
+    value: selected,
+    defaultValue: defaultSelected,
+    onChange: onSelectedChange,
+    mode: 'select',
+    disabled,
+  });
 
   useAccessibilityLabelWarning({
     accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
@@ -33,6 +52,15 @@ export function useTab_unstable(props: TabProps): TabState {
     warning: 'Tab: icon-only tabs require an accessibilityLabel that describes the content panel.',
   });
 
+  const { activate } = selection;
+  const handlePress = React.useCallback(
+    (event: GestureResponderEvent) => {
+      activate();
+      onPress?.(event);
+    },
+    [activate, onPress],
+  );
+
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
@@ -40,11 +68,12 @@ export function useTab_unstable(props: TabProps): TabState {
     accessibilityState: {
       ...accessibilityState,
       disabled,
-      selected,
+      selected: selection.value,
     },
     accessible: rest.accessible ?? true,
     disabled,
     focusable: rest.focusable ?? !disabled,
+    onPress: handlePress,
   });
 
   const root = useSlot(Pressable, {
@@ -66,7 +95,7 @@ export function useTab_unstable(props: TabProps): TabState {
     disabled,
     layout,
     controls,
-    selected,
+    selected: selection.value,
     iconOnly,
     userStyle,
     ...themeState,

@@ -17,6 +17,49 @@ function renderListboxItem(props: React.ComponentProps<typeof ListboxItem>): Pro
 }
 
 describe('ListboxItem', () => {
+  it('toggles its own selection when multiselect is active', async () => {
+    const onSelectedChange = jest.fn();
+    const onPress = jest.fn();
+    const component = await renderListboxItem({ content: 'Inbox', defaultSelected: false, multiselect: true, onPress, onSelectedChange });
+
+    expect(component.queryByText('✓')).toBeNull();
+
+    await fireEvent.press(component.getByRole('button'));
+
+    expect(onSelectedChange).toHaveBeenCalledWith(true);
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(component.getByText('✓')).toBeOnTheScreen();
+
+    await fireEvent.press(component.getByRole('button'));
+
+    expect(onSelectedChange).toHaveBeenLastCalledWith(false);
+    expect(component.queryByText('✓')).toBeNull();
+  });
+
+  it('only selects in single selection and reports presses when externally driven', async () => {
+    const onSelectedChange = jest.fn();
+    const single = await renderListboxItem({
+      content: 'Inbox',
+      defaultSelected: false,
+      icon: { fontSource: { codepoint: 0x25cb, fontFamily: 'Arial' }, testID: 'regular-icon' },
+      onSelectedChange,
+      selectedIcon: { fontSource: { codepoint: 0x25cf, fontFamily: 'Arial' }, testID: 'filled-icon' },
+    });
+
+    await fireEvent.press(single.getByRole('button'));
+    await fireEvent.press(single.getByRole('button'));
+
+    expect(onSelectedChange).toHaveBeenCalledTimes(1);
+    expect(single.getByTestId('filled-icon')).toBeOnTheScreen();
+
+    const controlled = await renderListboxItem({ content: 'Inbox', multiselect: true, onSelectedChange, selected: false });
+
+    await fireEvent.press(controlled.getByRole('button'));
+
+    expect(onSelectedChange).toHaveBeenCalledTimes(2);
+    expect(controlled.queryByText('✓')).toBeNull();
+  });
+
   it('is directly renderable through the component boundary', () => {
     expect(isDirectComponent(ListboxItem)).toBe(false);
   });

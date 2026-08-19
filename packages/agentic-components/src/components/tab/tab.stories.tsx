@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -37,13 +38,13 @@ const meta: Meta<typeof Tab> = {
     content: 'Files',
     disabled: false,
     layout: 'iconAndText',
-    selected: false,
+    defaultSelected: false,
   },
   argTypes: {
     content: { control: 'text' },
     disabled: { control: 'boolean' },
     layout: { control: 'select', options: layouts.map(({ value }) => value) },
-    selected: { control: 'boolean' },
+    defaultSelected: { control: 'boolean' },
   },
   parameters: {
     docs: {
@@ -69,8 +70,8 @@ export const Overview: Story = {
         <Tab accessibilityLabel="Settings" controls="settings-panel" icon={settingsIcon} layout="iconOnly" />
       </StoryGroup>
       <StoryGroup label="Selected">
-        <Tab controls="files-panel" content="Files" icon={regularStarIcon} selected={false} selectedIcon={filledStarIcon} />
-        <Tab controls="files-panel" content="Files" icon={regularStarIcon} selected selectedIcon={filledStarIcon} />
+        <Tab controls="files-panel" content="Files" icon={regularStarIcon} defaultSelected={false} selectedIcon={filledStarIcon} />
+        <Tab controls="files-panel" content="Files" icon={regularStarIcon} defaultSelected selectedIcon={filledStarIcon} />
       </StoryGroup>
     </View>
   ),
@@ -108,14 +109,45 @@ export const IconOnly: Story = {
 export const Selected: Story = {
   render: () => (
     <StoryGroup label="Selected">
-      <Tab controls="files-panel" content="Files" icon={regularStarIcon} selected={false} selectedIcon={filledStarIcon} />
-      <Tab controls="files-panel" content="Files" icon={regularStarIcon} selected selectedIcon={filledStarIcon} />
+      <Tab controls="files-panel" content="Files" icon={regularStarIcon} defaultSelected={false} selectedIcon={filledStarIcon} />
+      <Tab controls="files-panel" content="Files" icon={regularStarIcon} defaultSelected selectedIcon={filledStarIcon} />
     </StoryGroup>
   ),
   parameters: {
     docs: {
       description: {
         story: 'Selected toggles the heavy background, semibold label weight, and filled icon.',
+      },
+    },
+  },
+};
+
+export const Tablist: Story = {
+  render: () => {
+    const tabs = ['Files', 'Shared', 'Recent'];
+    const Tablist = () => {
+      const [active, setActive] = useState('Files');
+      return (
+        <StoryGroup label={`Active panel: ${active}`}>
+          {tabs.map((name) => (
+            <Tab
+              key={name}
+              content={name}
+              controls={`${name.toLowerCase()}-panel`}
+              onSelectedChange={(selected) => selected && setActive(name)}
+              selected={active === name}
+            />
+          ))}
+        </StoryGroup>
+      );
+    };
+    return <Tablist />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A tablist owns which tab is selected. Each tab is externally driven and reports presses through onSelectedChange, so pressing a tab never deselects it and the list deselects its siblings instead.',
       },
     },
   },
