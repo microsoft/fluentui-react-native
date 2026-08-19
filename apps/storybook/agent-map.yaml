@@ -11,9 +11,9 @@ sources:
     path: src/storybook.requires.ts
     policy: generated-do-not-edit
   story_globs:
-    - ../../src/**/*.stories.?(ts|tsx)
-    - ../../../components/Callout/src/**/*.stories.?(ts|tsx)
-    - ../../../components/FocusZone/src/**/*.stories.?(ts|tsx)
+    - ../../../packages/agentic-components/src/**/*.stories.?(ts|tsx)
+    - ../../../packages/native/Callout/src/**/*.stories.?(ts|tsx)
+    - ../../../packages/components/FocusZone/src/**/*.stories.?(ts|tsx)
 
 services:
   metro:

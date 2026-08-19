@@ -9,8 +9,8 @@ invariants; detailed authoring recipes live in the
 - Higher-order components live in `src/components`; read `src/components/AGENTS.md`.
 - Primitive components live in `src/primitives`; read `src/primitives/AGENTS.md`.
 - Story files are library source and follow the tests and stories reference.
-- Storybook application, native project, Metro, bundle, or CocoaPods work follows `storybook/AGENTS.md` and the
-  `agentic-storybook-development` skill.
+- Storybook application, native project, Metro, bundle, or CocoaPods work follows the
+  [Storybook instructions](../../apps/storybook/AGENTS.md) and the `agentic-storybook-development` skill.
 - Native React Native Windows Fabric component work follows the
   [Windows Fabric native component reference](../../.github/skills/agentic-component-authoring/references/windows-fabric-native-components.md).
 

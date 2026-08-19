@@ -11,7 +11,7 @@
   "include": ["src"],
   "references": [
     {
-      "path": "../../packages/components/Callout/tsconfig.json"
+      "path": "../../packages/native/Callout/tsconfig.json"
     },
     {
       "path": "../../packages/experimental/AppearanceAdditions/tsconfig.json"

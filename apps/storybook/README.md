@@ -2,7 +2,7 @@
 
 On-device [Storybook](https://storybook.js.org/) app (Storybook for React Native v10) for
 `@fluentui-react-native/components` and linked standalone native packages. It loads every
-`*.stories.(ts|tsx)` file from the agentic library source (`../src`) plus the standalone
+`*.stories.(ts|tsx)` file from the agentic library source (`../../packages/agentic-components/src`) plus the standalone
 Callout and FocusZone packages so their native stories run in the Fabric host.
 
 It runs in Storybook **liteMode**, which mocks out the heavy default on-device UI
