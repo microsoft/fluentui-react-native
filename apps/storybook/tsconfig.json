@@ -15,22 +15,22 @@
   "exclude": ["node_modules", "dist", ".cache"],
   "references": [
     {
-      "path": "../../native/Callout/tsconfig.json"
+      "path": "../../packages/native/Callout/tsconfig.json"
     },
     {
-      "path": "../tsconfig.json"
+      "path": "../../packages/agentic-components/tsconfig.json"
     },
     {
-      "path": "../../theming/default-theme/tsconfig.json"
+      "path": "../../packages/theming/default-theme/tsconfig.json"
     },
     {
-      "path": "../../agentic-design/tsconfig.json"
+      "path": "../../packages/agentic-design/tsconfig.json"
     },
     {
-      "path": "../../components/FocusZone/tsconfig.json"
+      "path": "../../packages/components/FocusZone/tsconfig.json"
     },
     {
-      "path": "../../../scripts/tsconfig.json"
+      "path": "../../scripts/tsconfig.json"
     }
   ]
 }

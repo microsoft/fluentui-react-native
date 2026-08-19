@@ -2586,9 +2586,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/agentic-components-storybook@workspace:packages/agentic-components/storybook":
+"@fluentui-react-native/agentic-components-storybook@workspace:apps/storybook":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/agentic-components-storybook@workspace:packages/agentic-components/storybook"
+  resolution: "@fluentui-react-native/agentic-components-storybook@workspace:apps/storybook"
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/callout": "workspace:*"
