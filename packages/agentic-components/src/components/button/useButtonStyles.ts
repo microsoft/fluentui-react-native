@@ -2,14 +2,7 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
-import {
-  buttonStyles,
-  getButtonColorStyles,
-  getButtonContentStyle,
-  getButtonFocusStyle,
-  getButtonIconSize,
-  getButtonRootStyle,
-} from './button.styles';
+import { buttonStyles, getButtonColorStyles, getButtonContentStyle, getButtonIconSize, getButtonRootStyle } from './button.styles';
 import type { ButtonState } from './button.types';
 
 /**
@@ -19,13 +12,7 @@ import type { ButtonState } from './button.types';
 export function useButtonStyles_unstable(state: ButtonState) {
   const { size, userStyle } = state;
   const colors = getButtonColorStyles(state);
-  const rootStyle: StyleProp<ViewStyle> = [
-    buttonStyles.root,
-    getButtonRootStyle(state),
-    colors.background,
-    getButtonFocusStyle(state),
-    userStyle,
-  ];
+  const rootStyle: StyleProp<ViewStyle> = [buttonStyles.root, getButtonRootStyle(state), colors.background, userStyle];
   const contentStyle: StyleProp<TextStyle> = [buttonStyles.content, getButtonContentStyle(state), colors.foreground];
   const iconSize = getButtonIconSize(size);
 

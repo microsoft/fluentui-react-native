@@ -297,28 +297,6 @@ export function getButtonContentStyle(state: ButtonState, selected = state.selec
   return getThemedContentStyle(state, source);
 }
 
-const focusStyleStateLevels = [['focused']] as const;
-
-const getThemedFocusStyle = getThemedStateStyleFactory(
-  'Button.focus',
-  ({ color, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof focusStyleStateLevels> => ({
-    focused: {
-      borderColor: color.strokeFocusInner,
-      outlineColor: color.strokeFocusOuter,
-      outlineOffset: strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: strokeWidth.thick,
-    },
-  }),
-  focusStyleStateLevels,
-);
-
-const focusedState = ['focused'] as const;
-
-export function getButtonFocusStyle(state: ButtonState): ViewStyle | undefined {
-  return state.focused && !state.disabled ? getThemedFocusStyle(state, focusedState) : undefined;
-}
-
 const iconSizes: Record<ButtonSize, number> = {
   small: size160,
   medium: size200,

@@ -38,7 +38,7 @@ describe('Button', () => {
     const component = await renderButton({ content: 'Save' });
     const root = getRoot(component);
 
-    expect(root.props.accessibilityRole).toBe('button');
+    expect(root.props.role).toBe('button');
     expect(root.props.accessibilityState).toEqual({ disabled: false });
     expect(root.props.focusable).toBe(true);
     expect(component.getByText('Save')).toBeOnTheScreen();
@@ -190,18 +190,16 @@ describe('Button', () => {
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
   });
 
-  it('renders a dual-token focus outline', async () => {
+  it('uses the platform-native focus ring without adding outline styles during focus', async () => {
     const component = await renderButton({ content: 'Focused' });
     const root = getRoot(component);
+
+    expect(root.props.enableFocusRing).toBe(true);
+    expect(getRootStyle(component)).not.toHaveProperty('outlineWidth');
+
     await fireEvent(root, 'focus', {});
 
-    expect(getRootStyle(component)).toMatchObject({
-      borderColor: '#ffffff',
-      outlineColor: '#000000',
-      outlineOffset: 1,
-      outlineStyle: 'solid',
-      outlineWidth: 2,
-    });
+    expect(getRootStyle(component)).not.toHaveProperty('outlineWidth');
   });
 
   it.each([
