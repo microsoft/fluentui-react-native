@@ -5,12 +5,14 @@
  * run requests to the loopback desktop test service and renders the progress it streams back.
  * It never receives or executes code, and it never learns a command line.
  *
- * The service prints its URL and per-boot token when `yarn desktop:service` starts; the app reads
- * them from the Metro environment so a build without them simply shows the controls as
- * unavailable.
+ * The service announces its loopback URL and per-boot token over the Storybook channel (see
+ * `useDesktopTestService`). Until an announcement arrives the controls render as unavailable
+ * rather than guessing an endpoint.
  */
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+
+import type { DesktopServiceEndpoint } from './useDesktopTestService';
 
 const PROTOCOL_VERSION = 1;
 
@@ -35,8 +37,8 @@ type RunStatus = {
 export type DesktopTestControlsProps = {
   /** Story currently shown by the Storybook UI, used by "Run current". */
   currentStoryId?: string;
-  serviceUrl?: string;
-  serviceToken?: string;
+  /** Endpoint announced by the host-side service, or undefined until one arrives. */
+  service?: DesktopServiceEndpoint;
 };
 
 async function request(serviceUrl: string, token: string, pathname: string, init?: RequestInit): Promise<unknown> {
@@ -51,7 +53,9 @@ async function request(serviceUrl: string, token: string, pathname: string, init
   return body;
 }
 
-export const DesktopTestControls = ({ currentStoryId, serviceUrl, serviceToken }: DesktopTestControlsProps) => {
+export const DesktopTestControls = ({ currentStoryId, service }: DesktopTestControlsProps) => {
+  const serviceUrl = service?.url;
+  const serviceToken = service?.token;
   const [available, setAvailable] = useState(false);
   const [status, setStatus] = useState<RunStatus | undefined>();
   const [error, setError] = useState<string | undefined>();
@@ -139,14 +143,17 @@ export const DesktopTestControls = ({ currentStoryId, serviceUrl, serviceToken }
       return `Error: ${error}`;
     }
     if (!status) {
-      return available ? 'Ready' : 'Desktop test service not running';
+      if (!configured) {
+        return 'Waiting for the desktop test service (run `yarn desktop:service`)';
+      }
+      return available ? 'Ready' : 'Desktop test service announced but unreachable';
     }
     const failed = status.results.filter((result) => result.status !== 'passed' && result.status !== 'skipped');
     if (status.state === 'running') {
       return `Running… ${status.results.length} finished`;
     }
     return `${status.state}: ${status.results.length - failed.length} passed, ${failed.length} failed`;
-  }, [available, error, status]);
+  }, [available, configured, error, status]);
 
   const running = busy || status?.state === 'running';
   const disabled = !configured || !available || running;

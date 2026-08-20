@@ -43,7 +43,7 @@
     "desktop:test:fake": "cross-env DESKTOP_TEST_PLATFORM=fake yarn desktop:test",
     "desktop:test:macos": "cross-env DESKTOP_TEST_PLATFORM=macos yarn desktop:test",
     "desktop:test:windows": "cross-env DESKTOP_TEST_PLATFORM=windows yarn desktop:test",
-    "desktop:service": "node desktop-tests/test-service.mjs",
+    "desktop:service": "node desktop-tests/desktop-driver.mjs serve --manifest desktop-tests/generated/story-tests.manifest.json --runner yarn --runner-arg wdio --runner-arg run --runner-arg wdio.conf.ts",
     "lint": "fluentui-scripts lint",
     "format": "fluentui-scripts format"
   },

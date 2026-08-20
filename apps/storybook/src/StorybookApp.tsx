@@ -6,6 +6,7 @@ import { addons } from 'storybook/preview-api';
 import { view } from './storybook.requires';
 import { LiteUI } from '@storybook/react-native-ui-lite';
 import { DesktopTestControls } from './DesktopTestControls';
+import { useDesktopTestService } from './useDesktopTestService';
 import { StorybookThemeHost } from './StorybookTheme';
 
 // We run Storybook in lite mode: the heavy default on-device UI (`@storybook/react-native-ui`,
@@ -62,15 +63,10 @@ const useCurrentStoryId = (): string | undefined => {
   return storyId;
 };
 
-/**
- * The desktop test service URL and token are injected by `yarn desktop:service`. Without them the
- * controls render in an unavailable state rather than guessing an endpoint.
- */
-const desktopServiceUrl = process.env.DESKTOP_TEST_SERVICE_URL;
-const desktopServiceToken = process.env.DESKTOP_TEST_SERVICE_TOKEN;
-
 const StorybookApp = () => {
   const currentStoryId = useCurrentStoryId();
+  // The service announces itself over the Storybook channel; nothing is configured at build time.
+  const service = useDesktopTestService();
 
   return (
     <StorybookThemeHost>
@@ -78,7 +74,7 @@ const StorybookApp = () => {
         <View style={styles.preview}>
           <StorybookUI />
         </View>
-        <DesktopTestControls currentStoryId={currentStoryId} serviceToken={desktopServiceToken} serviceUrl={desktopServiceUrl} />
+        <DesktopTestControls currentStoryId={currentStoryId} service={service} />
       </View>
     </StorybookThemeHost>
   );

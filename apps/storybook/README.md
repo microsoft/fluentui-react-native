@@ -257,14 +257,19 @@ runs the test runner or native automation itself.
 
 ```sh
 yarn desktop:generate
-yarn desktop:service   # prints the loopback URL and a per-boot token
-
-# then start Metro with the printed values
-DESKTOP_TEST_SERVICE_URL=... DESKTOP_TEST_SERVICE_TOKEN=... yarn start
+yarn desktop:service   # host-side; announces itself to the running app
 ```
 
-Without those variables the controls render in an unavailable state rather than guessing an
-endpoint.
+There is nothing to copy and nothing to configure at build time. The service broadcasts its
+loopback URL and per-boot token over the Storybook channel the app is already connected to, and
+re-broadcasts on an interval, so reloading the app or restarting the service re-discovers it
+without rebuilding the bundle. Until an announcement arrives the controls show
+`Waiting for the desktop test service` and stay disabled.
+
+This has to be a host-side process: the app is the subject of automation, so it cannot drive
+itself, and a runner inside the app would die with the app and could never observe a crash,
+an unexpected exit, or a timeout. The device only ever sends a story id that already exists in the
+generated manifest, and the runner command comes entirely from `desktop:service` configuration.
 
 ### Relationship to the Windows Jest smoke harness
 
