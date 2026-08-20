@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/codemods
 
+## 0.6.6
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+
 ## 0.6.5
 
 ### Patch Changes

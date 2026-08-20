@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/tester
 
+## 0.170.55
+
+### Patch Changes
+
+- 853f1fd: Moved the location of callout, with links to new location
+- cbd319c: Bump package to publish via ESRP (no changes)
+
 ## 0.170.54
 
 ### Patch Changes
