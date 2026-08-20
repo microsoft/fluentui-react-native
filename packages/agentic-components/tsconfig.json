@@ -16,7 +16,7 @@
       "path": "../agentic-design/tsconfig.json"
     },
     {
-      "path": "../native/test-driver/tsconfig.json"
+      "path": "../agentic/test-driver/tsconfig.json"
     },
     {
       "path": "../framework-base/tsconfig.json"

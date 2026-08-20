@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/native/test-driver"
+    "directory": "packages/agentic/test-driver"
   },
   "bin": "./lib/cli/main.js",
   "type": "module",

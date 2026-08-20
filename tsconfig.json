@@ -203,7 +203,7 @@
       "path": "packages/native/Callout/tsconfig.json"
     },
     {
-      "path": "packages/native/test-driver/tsconfig.json"
+      "path": "packages/agentic/test-driver/tsconfig.json"
     },
     {
       "path": "packages/theming/android-theme/tsconfig.json"

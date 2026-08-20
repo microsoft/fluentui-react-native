@@ -215,7 +215,7 @@ component example.
 ## Desktop story tests
 
 Story tests are written next to the components, run on Windows and macOS from the same source, and
-are executed by [`@fluentui-react-native/desktop-driver`](../../packages/native/test-driver/README.md)
+are executed by [`@fluentui-react-native/desktop-driver`](../../packages/agentic/test-driver/README.md)
 through the ordinary WebdriverIO testrunner. `wdio.conf.ts` holds all platform selection; the specs
 contain none.
 

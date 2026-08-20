@@ -3508,9 +3508,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/desktop-driver@workspace:*, @fluentui-react-native/desktop-driver@workspace:packages/native/test-driver":
+"@fluentui-react-native/desktop-driver@workspace:*, @fluentui-react-native/desktop-driver@workspace:packages/agentic/test-driver":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/desktop-driver@workspace:packages/native/test-driver"
+  resolution: "@fluentui-react-native/desktop-driver@workspace:packages/agentic/test-driver"
   dependencies:
     "@babel/core": "catalog:"
     "@babel/parser": "npm:^7.20.0"

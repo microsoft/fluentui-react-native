@@ -7,8 +7,10 @@
 
 ## 1. Where the work stands
 
-`@fluentui-react-native/desktop-driver` is implemented end to end, and the **Windows path now runs
-against a real application**.
+`@fluentui-react-native/desktop-driver` has a functional end-to-end implementation, and the
+**Windows path now runs against a real application**. Two independent package reviews on
+2026-08-20 found correctness and contract-enforcement gaps that must be closed before treating the
+implementation as release-ready; see §7.3.
 
 **Proven on Windows** (Windows 11 26200, Node 24.15, `appium@3.2.0`,
 `appium-windows-driver@5.1.9`, `webdriverio@9.24.0`, WinAppDriver 1.2.1, RNW 0.81.32):
@@ -16,7 +18,7 @@ against a real application**.
 - 129 package tests pass, including the portable-command contract suite, the window-discovery
   selection rules, and the doctor probes.
 - `desktop:generate` produces the digest `a28a8ae5…e0e3bf`, **byte-identical to the macOS value**.
-  The portability gate holds.
+  The current metadata gate holds, but it does not yet hash linked spec contents; see §7.3.
 - `yarn desktop:test:fake` completes a real loopback run: driver-host spawn, W3C HTTP server,
   launcher/worker split, one warm session for the whole suite, `browser.desktop`, artifacts, JUnit.
 - The **real Windows backend runs**. `startAppiumHostedDriver` constructs `WindowsDriver`, spawns
@@ -180,14 +182,162 @@ yarn desktop:service:windows     # or desktop:service:macos
 That is how the on-device controls were verified below. If an on-device run passes suspiciously
 fast, check the service console for `RUNNING in fake on fake`.
 
-### 7.3 Screenshots and Composition content — PLAN open decision 5
+### 7.3 Test-driver correctness and consolidation review
+
+Two independent read-only reviews were run in parallel on 2026-08-20: an Opus 5
+correctness/lifecycle review and a GPT-5.6 Sol architecture/consolidation review. They agreed that
+the package structure is sound, but several documented guarantees are not enforced by the current
+implementation. Work through this backlog before macOS re-verification so both platforms are
+measured with trustworthy lifecycle, portability, and reporting semantics.
+
+#### P0 — restore safety and eliminate false greens
+
+1. **Make attach ownership fail closed everywhere.**
+   - Reserve backend capability keys that control ownership or routing. Reject conflicting
+     `backendCapabilities` overrides for Mac2, Windows, NovaWindows, and root-window discovery.
+   - Refuse termination when ownership is absent or not `self`; `terminateLaunchedApp` currently
+     permits unknown ownership. Apply the same guard to termination-shaped Windows extensions such
+     as `windows: closeApp`.
+   - Make macOS target validation backend-aware. Until Mac2 process/window discovery is implemented,
+     require `identity` for attach and reject PID-, title-, or window-only targets instead of
+     silently dropping them.
+
+2. **Implement observed lifecycle and readiness rather than hook-derived state.**
+   - Add a platform-neutral monitor for the driver host, app/native-driver PIDs, window, and session.
+     Emit `processStarted`, `exitObserved`, `crashObserved`, and `monitorError` from observations,
+     and make `waitForAppState` stop immediately on a terminal state.
+   - Enforce `readiness.requireWindow` along with process, session, Storybook, and selector gates.
+     A launch must not become `ready` merely because the WDIO `before` hook ran.
+   - Record exact owned PIDs and endpoints so requested shutdown, normal exit, crash, lost process,
+     and monitor failure remain distinguishable.
+
+3. **Make the portability gate cover what executes.**
+   - Include normalized entry metadata and each linked spec's SHA-256 in the manifest digest.
+     Recompute and verify the digest when loading a manifest and when creating WDIO configuration.
+   - Reject missing or unreadable story roots, an empty tested-story set, duplicate story IDs,
+     malformed story source, unsupported `parameters` indirection that hides `desktopTest`, and
+     `Run all` against an empty manifest. Do not generate a passing "nothing to run" spec.
+   - Replace linked-spec substring checks with real test discovery and write generated outputs
+     atomically only after validation succeeds.
+   - Expand shared-spec globs before checking for platform-specific paths; inspecting the glob
+     basename does not enforce the no-platform-branch contract.
+
+4. **Make cleanup bounded, awaited, and process-tree-safe.**
+   - Introduce one owned-process supervisor with graceful shutdown, a deadline, escalation, exact
+     PID-tree termination, and aggregated cleanup errors.
+   - Await active runs during service shutdown, delete driver sessions before closing transports,
+     and preserve session/app/native-driver cleanup failures alongside the primary error.
+   - Add tests for ignored graceful shutdown, descendants, Windows command-interpreter trees,
+     session deletion failure, service stop during a run, and cleanup after a primary test failure.
+
+#### P1 — make diagnosis, artifacts, and public commands truthful
+
+1. **Normalize result classification and startup diagnosis.**
+   - Map configuration, capability, ownership, driver-host, readiness, and runner-spawn errors to
+     `infrastructureError`; preserve framework skips and cancellation instead of collapsing
+     everything into `failed`.
+   - Treat application crashes and driver/host failures distinctly, retain lifecycle evidence in
+     either case, and ensure every startup/session/readiness failure writes events, `run.json`, and
+     JUnit.
+   - Wrap the whole WDIO `onPrepare` path, clear stale endpoint environment state before starting,
+     publish the original failure, stop the host, and abort rather than letting workers report a
+     misleading "endpoint not published" error.
+
+2. **Fix report and artifact integrity.**
+   - Return only files captured for the current test from `captureArtifacts`, not the cumulative run
+     manifest.
+   - Keep key redaction, but do not apply event payload's 100-item/2,000-character truncation to
+     `run.json`.
+   - For `sessionStrategy: 'spec'`, write per-worker results and merge once in the launcher; workers
+     must not overwrite the shared `run.json` and `junit.xml`.
+   - Add a trailing newline to JUnit and cover full reports with more than 100 results.
+
+3. **Harden the Storybook executor.**
+   - Run `Run all` through one owned WDIO invocation and warm session, preserving manifest order and
+     per-story progress. Add a runner deadline and use the P0 process supervisor for cancellation.
+   - Make `createDesktopWdioConfig` consume `DESKTOP_TEST_GREP` by default and document that filter
+     as a required consumer contract so "Run current" cannot silently run every test.
+   - Resolve Windows commands through `PATH`/`PATHEXT` rather than appending `.cmd` to every bare
+     command.
+
+4. **Correct backend and CLI claims.**
+   - Do not advertise NovaWindows as available until its module resolves and the optional dependency
+     and real-backend contract are verified.
+   - Make `desktop-driver start` remain alive until explicitly stopped; its current endpoint is
+     destroyed immediately after printing. Let `stories list` validate only Storybook channel
+     options, not an unused app target.
+   - Report a supplied `windowHandle` as `matchedBy: 'windowHandle'`, and preserve backend/transport
+     failures during window discovery instead of turning every failure into "no matching window."
+
+#### P2 — harden transport and runtime validation
+
+1. Validate every nested runtime field: attach identifiers, launch directory/environment, readiness
+   booleans and deadlines, test IDs, Storybook host/port/root/render timeout, fake scene, and numeric
+   CLI values.
+2. Give every Storybook HTTP request an abort signal bounded by the remaining operation deadline.
+   Distinguish retryable responses from terminal errors.
+3. Return a valid W3C error response for oversized request bodies without destroying the response
+   socket; test malformed JSON and keep-alive reuse with real loopback requests.
+4. Reject shared-but-acyclic object graphs only when they are truly cyclic; the serializer's visited
+   set currently rejects valid plans that reuse one target object.
+5. Add focused robustness coverage for stream errors, temporary-directory cleanup, startup buffer
+   growth, long-lived service run retention, and missing desktop augmentation in story-plan steps.
+
+#### P3 — consolidate after behavior is covered
+
+1. Split the combined service internally into launcher and worker responsibilities with a validated
+   published-endpoint/run-context codec. Keep the current exported service as a compatibility
+   wrapper until a deliberate API revision.
+2. Extract one internal loopback transport layer for deadlines, JSON parsing, body limits, shutdown,
+   and loopback validation while keeping W3C and Storybook response schemas separate.
+3. Use one process supervisor for driver hosts, runners, apps, and native drivers instead of
+   separate cancellation and cleanup implementations.
+4. Move `sanitizeNodeOptions`, CLI argument parsing, and direct-invocation detection out of
+   `import.meta` entry modules so the pure behavior can be tested.
+5. Consolidate the four loopback allowlists, duplicate `delay`, JSON response, and XML escaping
+   helpers; centralize `DesktopErrorKind` to result-status mapping; remove the one-line
+   `resolveAttachWindow` delegate.
+6. Use bounded concurrency for per-window attribute reads, but never cache a window handle across
+   runs. Keep build-time package-version generation as an optional low-priority cleanup because the
+   current literal drift test is effective.
+
+#### Open decisions and recommendations
+
+| Open decision                                                  | Recommendation                                                                                                                                                                                                   |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Can `backendCapabilities` expose an unsafe ownership override? | **No by default.** Keep protected keys non-overridable; add a separately named expert API only if a real use case justifies weakening the invariant.                                                             |
+| Should public `terminateLaunchedApp` remain available?         | **Deprecate it in favor of owned lifecycle cleanup.** Until removal, require positively observed `self` ownership and fail closed.                                                                               |
+| How should Windows descendant processes be terminated?         | **Prefer an owned Job Object or another tested PID-tree primitive.** A PID-targeted `taskkill /T` fallback is acceptable only with bounded, cross-version integration coverage; never terminate by process name. |
+| What satisfies `requireWindow` on macOS?                       | **Require an identity-pinned session plus at least one observed app window.** Do not let session creation alone satisfy the gate.                                                                                |
+| Should macOS attach types be platform-specific?                | **Add runtime backend validation now; move toward a discriminated platform target union in the next intentional public API revision.**                                                                           |
+| What content belongs in the portability digest?                | **Hash direct linked spec bytes now.** Add transitive imported test modules later if deterministic module-graph hashing can be implemented without machine-specific paths.                                       |
+| Are intentionally empty manifests supported?                   | **Fail by default.** If needed, add explicit `allowEmpty` and report `skipped`, never `passed`.                                                                                                                  |
+| Parser or framework discovery for linked tests?                | **Use actual Mocha discovery for the documented default.** A syntax parser is acceptable only if it proves executable, non-skipped selection equivalently.                                                       |
+| Is an app crash a test failure or infrastructure error?        | **Treat an app-under-test crash as `failed` with a distinct lifecycle reason; treat driver, host, monitor, or runner crashes as `infrastructureError`.**                                                         |
+| Should WDIO startup use `SevereServiceError`?                  | **Yes inside the WDIO adapter** so launcher failures abort immediately; keep the core package independent of WDIO error types.                                                                                   |
+| Is `Run all` isolated per story or one warm session?           | **Use one warm invocation/session**, matching PLAN and current documentation. Add an explicit isolation mode later only if consumers require it.                                                                 |
+| Is NovaWindows currently supported?                            | **No.** Mark it unavailable until the optional dependency resolves, doctor verifies it, and the shared real-backend suite passes.                                                                                |
+| Is `desktop-driver start` a foreground server or a probe?      | **Make it a foreground server** that lives until SIGINT/SIGTERM. Add daemonized `status`/`stop` only as a separate future feature.                                                                               |
+| May the Storybook channel use a remote host?                   | **No for the first release.** Enforce numeric loopback addresses consistently; do not accept resolver-dependent `localhost` unless the contract is deliberately broadened.                                       |
+| Should oversized W3C bodies return HTTP 413 or W3C 400?        | **Keep a W3C `invalid argument` 400 envelope** for client compatibility, but drain or pause safely so the response reaches the client.                                                                           |
+| Should the launcher/worker split break the public service API? | **No immediate break.** Refactor behind the existing constructor and schedule any surface change with a versioned migration.                                                                                     |
+
+#### Coverage gate for this backlog
+
+Before considering P0/P1 complete, add direct coverage for `wdio/service.ts`, the
+`DesktopTestService` HTTP/auth/SSE/cancellation surface, `wdio/config-factory.ts`, the real
+`w3c-server.ts` HTTP boundary, `net.ts`, CLI lifecycle, manifest tampering, and full run-report
+shapes. The existing fake-driver contract suite is valuable, but it does not cover the launcher,
+worker, reporting, or process-lifecycle paths where these defects live.
+
+### 7.4 Screenshots and Composition content — PLAN open decision 5
 
 A capture of the Storybook window returned a PNG at exactly the window size (582×791) with varied
 content, which argues that no Windows Graphics Capture fallback is needed. It was taken on a locked
 desktop, though, and may simply be the lock screen. Repeat it unlocked, look at the image, and
 record the result. `COMPOSITION_SCREENSHOT_CAVEAT` in `src/platforms/windows.ts` stands until then.
 
-### 7.4 macOS re-verification
+### 7.5 macOS re-verification
 
 Three changes affect macOS and none has run there:
 
@@ -200,14 +350,14 @@ Three changes affect macOS and none has run there:
 
 Also re-run `desktop:generate` on macOS and confirm the digest still matches.
 
-### 7.5 NovaWindows — PLAN open decision 2
+### 7.6 NovaWindows — PLAN open decision 2
 
 Once the suite passes on `windows`, install `appium-novawindows-driver`, run the identical suite
 against `backend: 'novawindows'`, and record startup and per-command timings for both. Two
 capability details are unverified for it: whether it accepts `appium:appTopLevelWindow` in the same
 form, and whether `appium:shouldCloseApp: false` genuinely keeps an attached window open.
 
-### 7.6 The on-device controls — verified, with one caveat
+### 7.7 The on-device controls — verified, with two caveats
 
 All three controls were pressed on Windows and behaved correctly, so this section is a record
 rather than a task:
@@ -229,15 +379,20 @@ device rendered `passed: 1 passed, 0 failed` about sixteen seconds after the pre
 sequenced both stories in order; _Cancel_ was disabled when idle, enabled while running, and moved
 the run to `cancelled: 0 passed, 1 failed` within two seconds.
 
-The caveat is timing, and it misleads: the runner prints a full `Spec Files: 1 passed` summary
+The first caveat is timing, and it misleads: the runner prints a full `Spec Files: 1 passed` summary
 after **each** story, so a "Run all" looks finished in the console while the next story is still
 being spawned. The device is the honest indicator — it says `Running… N finished` until the whole
 run resolves, and it updates about a second after the service does.
 
-A spawn failure is already covered: the executor's `child.on('error')` handler turns it into a
-failed run, and `serve.test.ts` asserts it.
+The second caveat is cleanup: the observed `cancelled` transition proves the service state changed,
+not that the WDIO command-interpreter process tree stopped. P0/P1 in §7.3 must make cancellation
+bounded and verify descendant termination before this is considered complete.
 
-### 7.7 The Button's accessible name
+A spawn failure is already covered: the executor's `child.on('error')` handler turns it into a
+reported run, and `serve.test.ts` asserts it. P1 in §7.3 changes its classification from a product
+failure to `infrastructureError`.
+
+### 7.8 The Button's accessible name
 
 The interactive Button stories now set an explicit `accessibilityLabel`, because React Native
 Windows publishes a Button whose label comes only from `content` with an empty UI Automation `Name`.
@@ -245,7 +400,7 @@ That was the minimal fix for the test fixture, but the underlying question belon
 should `Button` derive an accessible name from string `content` so every consumer gets one on
 Windows? That is an `agentic-components` decision, not a desktop-driver one.
 
-### 7.8 Enumeration cost
+### 7.9 Enumeration cost
 
 Enumerating 16 top-level windows takes about 5 s, nearly all of it inside one WinAppDriver XPath
 query. It happens once per run and is currently fine. If a busier desktop makes it painful, narrow
@@ -274,8 +429,9 @@ session manifest; never kill by process name.
   Windows-only, put it in a separate `*.windows.spec.ts` and accept that it does not count toward
   shared coverage.
 - **Elements are addressed only by `testID`**, through `byTestId()`.
-- **Attach never terminates anything.** Only `mode: 'launch'` may stop a process, and cleanup
-  resolves the exact PIDs and ports in `ownership.json` — never a process name.
+- **Attach must never terminate anything.** This remains the required invariant, but P0 in §7.3
+  records capability and extension paths that do not yet enforce it. Only `mode: 'launch'` may stop
+  a process, and cleanup resolves exact PIDs and ports in `ownership.json` — never a process name.
 - **An ambiguous attach match is a failure**, never a first-match guess.
 - **The story-plan schema stays closed.** Nothing the device sends may reach a command line, a
   module path, or arbitrary code.
@@ -309,15 +465,16 @@ From PLAN §3, marked against what has actually been observed:
 4. Launch mode shuts down only what it launched — **not verified**.
 5. Attach mode leaves the externally launched app running — **met on Windows**.
 6. Unexpected termination fails the active test with process, endpoint, driver, and app diagnostics
-   — **partly met**: driver-host startup failures now carry the host's own message and stack, and an
-   app that dies mid-run surfaces as `Currently selected window has been closed` rather than a
-   hang.
+   — **not met**: startup errors carry useful detail, but no post-startup driver/app monitor emits
+   the required exit, crash, lost-process, or monitor events; see §7.3.
 7. Storybook "Run current test" runs only the selected story and renders pass/fail — **met on
    Windows**.
 8. Storybook "Run all tests" sequences every tested story and reports a summary — **met on
    Windows**.
 9. CLI, testrunner, and standalone runs emit the same normalized events and artifact manifest —
-   **met for the testrunner, standalone, and `serve` paths**.
+   **not met**: startup and infrastructure results are classified inconsistently, lifecycle events
+   are incomplete, and per-test artifact attribution and multi-worker report merging need the P1
+   work in §7.3.
 10. No Appium CLI or multi-driver router process is started — **met**: the only processes are the
     node host and WinAppDriver.
 
