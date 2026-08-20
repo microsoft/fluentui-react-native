@@ -31,7 +31,7 @@ Answer design questions directly — lead with rationale, then tokens. Tab has a
 1. **Container** — auto-layout root frame; owns padding, border radius, background fill. No stroke.
 2. **Icon** — optional Fluent Iconography instance (Regular theme at rest; Filled theme when Selected=True). Hidden by default.
 3. **Label** — text node bound to the `Tab string` component property. Uses the font-weight swap pattern: a ghost Semibold node reserves layout width, a visible Regular or Semibold node renders on top.
-4. **Focus ring** — dual-outline overlay controlled by the system focus ring pattern. Absolutely positioned over the container.
+4. **Focus ring** — persistent dual-ring visual controlled by focus state. Absolutely positioned over the container.
 
 | Slot  | Required                  | Default |
 | ----- | ------------------------- | ------- |

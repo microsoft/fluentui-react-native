@@ -276,28 +276,6 @@ export function getListItemSecondaryContentStyle(state: ListItemState): TextStyl
   return getThemedSecondaryStyle(state, [state.size]);
 }
 
-const focusStateLevels = [['focused']] as const;
-
-const getThemedFocusStyle = getThemedStateStyleFactory(
-  'ListItem.focus',
-  ({ color, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof focusStateLevels> => ({
-    focused: {
-      borderColor: color.strokeFocusInner,
-      outlineColor: color.strokeFocusOuter,
-      outlineOffset: strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: strokeWidth.thick,
-    },
-  }),
-  focusStateLevels,
-);
-
-const focusedState = ['focused'] as const;
-
-export function getListItemFocusStyle(state: ListItemState): ViewStyle | undefined {
-  return state.focused && !state.disabled ? getThemedFocusStyle(state, focusedState) : undefined;
-}
-
 export function getListItemRootSizeStyle(state: ListItemState): ViewStyle {
   return {
     borderRadius: state.tokens.borderRadius.base300,

@@ -186,20 +186,30 @@ describe('Button', () => {
     const content = component.getByTestId('content');
     const icon = component.getByTestId('icon');
 
-    expect(root.children).toEqual([content, icon]);
+    expect(root.children.slice(1)).toEqual([content, icon]);
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
   });
 
-  it('uses the platform-native focus ring without adding outline styles during focus', async () => {
+  it('renders a persistent dual-ring focus visual', async () => {
     const component = await renderButton({ content: 'Focused' });
     const root = getRoot(component);
 
-    expect(root.props.enableFocusRing).toBe(true);
-    expect(getRootStyle(component)).not.toHaveProperty('outlineWidth');
+    expect(root.props.enableFocusRing).toBe(false);
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
 
     await fireEvent(root, 'focus', {});
 
-    expect(getRootStyle(component)).not.toHaveProperty('outlineWidth');
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: '#000000',
+      borderWidth: 2,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
+      'opacity',
+    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: '#ffffff',
+      borderWidth: 1,
+    });
   });
 
   it.each([

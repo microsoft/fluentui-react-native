@@ -34,7 +34,7 @@ describe('Tag', () => {
       minHeight: 24,
       minWidth: 24,
     });
-    expect(getRoot(component).children).toHaveLength(2);
+    expect(getRoot(component).children).toHaveLength(3);
   });
 
   it('forwards press and interaction handlers while updating background state', async () => {
@@ -76,7 +76,7 @@ describe('Tag', () => {
 
     expect(StyleSheet.flatten(component.getByTestId('leading').props.style)).toMatchObject({ height: 20, width: 20 });
     expect(StyleSheet.flatten(component.getByTestId('dismiss').props.style)).toMatchObject({ height: 16, width: 16 });
-    expect(getRoot(component).children).toHaveLength(3);
+    expect(getRoot(component).children).toHaveLength(4);
   });
 
   it('renders icon-only layout with a required accessible label', async () => {
@@ -135,6 +135,25 @@ describe('Tag', () => {
     expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud);
   });
 
+  it('renders a persistent dual-ring focus visual', async () => {
+    const component = await renderTag({ content: 'Focused' });
+    const root = getRoot(component);
+
+    await fireEvent(root, 'focus', {});
+
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: useFlexTokens().color.strokeFocusOuter,
+      borderWidth: useFlexTokens().strokeWidth.thick,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
+      'opacity',
+    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: useFlexTokens().color.strokeFocusInner,
+      borderWidth: useFlexTokens().strokeWidth.thin,
+    });
+  });
+
   it.each([
     ['primary', '#185abd'],
     ['secondary', '#fafafa'],
@@ -181,6 +200,6 @@ describe('Tag', () => {
 
     expect(component.queryByTestId('dismiss')).toBeNull();
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
-    expect(getRoot(component).children).toHaveLength(2);
+    expect(getRoot(component).children).toHaveLength(3);
   });
 });

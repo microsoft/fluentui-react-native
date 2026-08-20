@@ -2,6 +2,7 @@
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { CompoundItemLayout } from '../../primitives/compound-item-layout/compound-item-layout';
+import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import { LayoutStableText } from '../../primitives/layout-stable-text/layout-stable-text';
 import { listItemStyles } from './list-item.styles';
 import type { ListItemState } from './list-item.types';
@@ -20,6 +21,7 @@ export function renderListItem_unstable(state: ListItemState) {
 
   return (
     <state.root>
+      <FocusVisual {...state.focusVisualProps} />
       {state.selectionIndicator && <state.selectionIndicator />}
       <CompoundItemLayout
         contentStyle={state.secondaryContentPosition === 'under' ? { gap: state.metrics.contentGap } : undefined}

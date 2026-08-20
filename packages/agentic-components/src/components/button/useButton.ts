@@ -59,8 +59,8 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    // Adding outline styles after focus triggers an RNW 0.81 Fabric border-layer crash. Both desktop platforms provide native focus visuals.
-    enableFocusRing: true,
+    // RNW 0.81 crashes when either outline props or its native focus ring creates border visuals after mount.
+    enableFocusRing: false,
     focusable: rest.focusable ?? !disabled,
   };
   const [pressableProps, pressableState] = usePressableState(nativeProps);

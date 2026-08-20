@@ -14,7 +14,7 @@ platform: react-native (Windows, macOS)
 ## Focus management
 
 - Focus ring appears on the full interactive surface (track + tappable padding) — the 36px hit-area box, not just the 20px pill. The focus ring communicates the focusable element boundary.
-- Focus ring uses the universal dual-outline pattern (see `flex-system:styling`).
+- Focus ring uses the universal persistent dual-ring pattern (see `flex-system:styling`).
 - Focus is not trapped — Tab moves to the next focusable element.
 
 ## Animation

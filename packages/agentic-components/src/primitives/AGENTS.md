@@ -13,6 +13,8 @@ the canonical implementation.
 - Keep alternative source or renderer props mutually exclusive.
 - Add compile-time `SlotProp` coverage and runtime coverage for every renderer branch.
 - Demonstrate the primitive in Storybook without adding component-level styling.
+- `FocusVisual` mounts configured ring Views eagerly, owns accessibility and hit testing, and changes only opacity when
+  focus visibility changes. Keep token selection and component-specific ring geometry in the consuming component.
 
 ## Focused references
 

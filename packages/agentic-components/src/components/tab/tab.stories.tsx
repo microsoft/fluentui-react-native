@@ -109,8 +109,22 @@ export const IconOnly: Story = {
 export const Selected: Story = {
   render: () => (
     <StoryGroup label="Selected">
-      <Tab controls="files-panel" content="Files" icon={regularStarIcon} selected={false} selectedIcon={filledStarIcon} />
-      <Tab controls="files-panel" content="Files" icon={regularStarIcon} selected selectedIcon={filledStarIcon} />
+      <Tab
+        controls="files-panel"
+        content="Files"
+        icon={regularStarIcon}
+        selected={false}
+        selectedIcon={filledStarIcon}
+        testID="agentic-storybook-tab-unselected"
+      />
+      <Tab
+        controls="files-panel"
+        content="Files"
+        icon={regularStarIcon}
+        selected
+        selectedIcon={filledStarIcon}
+        testID="agentic-storybook-tab-selected"
+      />
     </StoryGroup>
   ),
   parameters: {

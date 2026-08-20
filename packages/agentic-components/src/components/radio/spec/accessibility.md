@@ -20,7 +20,7 @@ Build-time requirements that must be satisfied by the component implementation.
   - **1.4.3 — Contrast (Minimum):** Indicator stroke and inner dot must meet 3:1 against the surrounding background. Label text must meet 4.5:1.
   - **1.4.11 — Non-text Contrast:** The indicator (as a UI component boundary) must meet 3:1 against adjacent colors in all non-disabled states.
   - **2.1.1 — Keyboard:** Arrow keys must move focus and selection between enabled Radios in the RadioGroup; Space activates the focused Radio if it is not already selected. Tab must move focus to and from the RadioGroup as a unit. Disabled radios are skipped — native via `disabled` (platform-managed), custom via `aria-disabled` plus explicit skip logic.
-  - **2.4.7 — Focus Visible:** Focus ring must be visible in all non-disabled states. Uses the universal dual-outline focus ring.
+  - **2.4.7 — Focus Visible:** Focus ring must be visible in all non-disabled states. Uses the universal persistent dual-ring focus visual.
   - **3.3.2 — Labels or Instructions:** Each RadioGroup must have a group-level label describing the choice being made, in addition to the per-option labels.
   - **4.1.2 — Name, Role, Value:** Each radio must expose its name, role, and current checked state to assistive technology.
 - **Screen reader:** Announces the per-radio label, role ("radio button"), state ("selected" or "not selected"), and position within the group ("1 of 3"). The group label is announced when focus enters the group.

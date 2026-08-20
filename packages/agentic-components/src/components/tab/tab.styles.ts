@@ -160,28 +160,6 @@ export function getTabContentStyle(state: TabState, selected = state.selected): 
   return getThemedContentStyle(state, source);
 }
 
-const focusStyleStateLevels = [['focused']] as const;
-
-const getThemedFocusStyle = getThemedStateStyleFactory(
-  'Tab.focus',
-  ({ color, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof focusStyleStateLevels> => ({
-    focused: {
-      borderColor: color.strokeFocusInner,
-      outlineColor: color.strokeFocusOuter,
-      outlineOffset: strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: strokeWidth.thick,
-    },
-  }),
-  focusStyleStateLevels,
-);
-
-const focusedState = ['focused'] as const;
-
-export function getTabFocusStyle(state: TabState): ViewStyle | undefined {
-  return state.focused && !state.disabled ? getThemedFocusStyle(state, focusedState) : undefined;
-}
-
 export function getTabIconSize(): number {
   return 20;
 }

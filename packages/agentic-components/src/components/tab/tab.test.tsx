@@ -140,17 +140,21 @@ describe('Tab', () => {
     expect(component.getByTestId('filled-icon').props.testID).toBe('filled-icon');
   });
 
-  it('renders a dual-token focus outline', async () => {
+  it('renders a persistent dual-ring focus visual', async () => {
     const component = await renderTab({ controls: 'files-panel', content: 'Files' });
     const root = getRoot(component);
     await fireEvent(root, 'focus', {});
 
-    expect(getRootStyle(component)).toMatchObject({
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: useFlexTokens().color.strokeFocusOuter,
+      borderWidth: useFlexTokens().strokeWidth.thick,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
+      'opacity',
+    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: useFlexTokens().color.strokeFocusInner,
-      outlineColor: useFlexTokens().color.strokeFocusOuter,
-      outlineOffset: useFlexTokens().strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: useFlexTokens().strokeWidth.thick,
+      borderWidth: useFlexTokens().strokeWidth.thin,
     });
   });
 

@@ -46,6 +46,7 @@ const meta: Meta<typeof Switch> = {
     labelAfter: false,
     labelBefore: true,
     layout: 'horizontal',
+    testID: 'agentic-storybook-switch',
   },
   argTypes: {
     defaultChecked: { control: 'boolean' },

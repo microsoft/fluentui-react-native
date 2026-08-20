@@ -98,12 +98,16 @@ describe('Card', () => {
     });
 
     await fireEvent(button, 'focus', {});
-    expect(StyleSheet.flatten(button.props.style)).toMatchObject({
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: colors.strokeFocusOuter,
+      borderWidth: 2,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
+      'opacity',
+    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: colors.strokeFocusInner,
-      outlineColor: colors.strokeFocusOuter,
-      outlineOffset: 1,
-      outlineStyle: 'solid',
-      outlineWidth: 2,
+      borderWidth: 1,
     });
   });
 

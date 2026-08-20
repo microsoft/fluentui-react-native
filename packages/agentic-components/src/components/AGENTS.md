@@ -33,6 +33,8 @@ audit.
 - Create style factories only at module scope and cache theme-only styles.
 - Declare state precedence explicitly; disabled wins over pressed, which wins over hovered.
 - Apply user styles after component styles.
+- Render focus feedback through `FocusVisual`; do not add `outline*` props or enable RNW native
+  focus visuals because RNW 0.81 can fail-fast when either path creates border visuals after mount.
 - Keep render functions free of hooks, token reads, style creation, and slot mutation.
 - Export the resolved state type and the state, style-application, and render stages from the package root under
   component-qualified unstable names so another component can reuse the pipeline.

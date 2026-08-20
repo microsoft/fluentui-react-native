@@ -18,7 +18,7 @@ Card has two interaction profiles. **Static** cards are non-interactive grouping
 
 ## Focus management
 
-- Interactive cards take focus on the **surface** element and render the universal dual-outline focus ring, which inherits the surface border radius. See `flex-system:styling` for the focus ring.
+- Interactive cards take focus on the **surface** element and render the universal persistent dual-ring focus visual, which inherits the surface border radius. See `flex-system:styling` for the focus ring.
 - **Focus order follows visual order:** card surface → Header controls → Footer controls, matching the card's top-to-bottom (or, for Direction=Horizontal, leading-to-trailing) layout.
 - The card does **not** trap focus and is not a composite (roving-tabindex) widget — each interactive element inside it is its own tab stop. The card surface and its nested controls are siblings in tab order, not parent-managed.
 - Avoid making a card clickable when it contains multiple equally-weighted controls; overlapping a surface click target with independently focusable children is the most common source of "I can't tab to the button" and "clicking the button also opened the card" bugs.

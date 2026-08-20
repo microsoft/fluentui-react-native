@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Text } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
+import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import type { AccordionState } from './accordion.types';
 
 type AccordionRenderStyles = {
@@ -28,6 +29,7 @@ export function renderAccordion_unstable(state: AccordionState, styles: Accordio
   return (
     <state.root>
       <Header>
+        <FocusVisual {...state.focusVisualProps} />
         {layout === 'chevronStart' ? (
           <>
             <ChevronContainer>

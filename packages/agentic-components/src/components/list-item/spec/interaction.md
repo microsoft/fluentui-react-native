@@ -21,7 +21,7 @@ Disabled rows are skipped by the parent's navigation cycle.
 
 ListItem rows receive **real DOM focus** from the parent List. The parent moves focus between rows (and onto the initially-focused row when the List is entered) by calling `.focus()` on the row's interactive element.
 
-- **Focus ring** — ListItem renders the universal dual-outline focus ring (see `flex-system:styling`) when its interactive element matches `:focus-visible`. The ring is absolutely positioned over the row and overlays content without affecting layout dimensions.
+- **Focus ring** — ListItem renders the universal persistent dual-ring focus visual (see `flex-system:styling`) when its interactive element matches `:focus-visible`. The ring is absolutely positioned over the row and overlays content without affecting layout dimensions.
 - **No self-managed `tabindex`.** The parent List controls roving tabindex: typically the focused row carries `tabindex="0"` while the rest carry `tabindex="-1"`. ListItem must not set its own `tabindex`.
 - **Inner focusables in composite mode.** When the parent List is in `navigationMode="composite"`, Action items and any other inner focusables receive their own DOM focus and render their own `:focus-visible` rings. Composite rows must follow the accessibility wrapper contract documented in `accessibility.md`; ListItem provides the slot but does not enforce the wrapper.
 

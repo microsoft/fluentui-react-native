@@ -1,6 +1,7 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
 
 import {
   accordionStyles,
@@ -9,7 +10,6 @@ import {
   getAccordionBodyTypographyStyle,
   getAccordionChevronLayoutStyle,
   getAccordionHeaderColorStyles,
-  getAccordionHeaderFocusStyle,
   getAccordionHeaderLayoutStyle,
   getAccordionIconSize,
   getAccordionTitleLayoutStyle,
@@ -22,13 +22,9 @@ import type { AccordionState } from './accordion.types';
  */
 export function useAccordionStyles_unstable(state: AccordionState) {
   const headerColors = getAccordionHeaderColorStyles(state);
+  const headerLayoutStyle = getAccordionHeaderLayoutStyle(state);
   const rootStyle: StyleProp<ViewStyle> = [accordionStyles.root, state.userStyle];
-  const headerStyle: StyleProp<ViewStyle> = [
-    accordionStyles.header,
-    getAccordionHeaderLayoutStyle(state),
-    headerColors.background,
-    getAccordionHeaderFocusStyle(state),
-  ];
+  const headerStyle: StyleProp<ViewStyle> = [accordionStyles.header, headerLayoutStyle, headerColors.background];
   const titleStyle: StyleProp<TextStyle> = [
     accordionStyles.title,
     getAccordionTitleLayoutStyle(state),
@@ -55,6 +51,14 @@ export function useAccordionStyles_unstable(state: AccordionState) {
   ];
   const iconSize = getAccordionIconSize();
 
+  state.focusVisualProps = createFocusVisualProps({
+    borderRadius: headerLayoutStyle.borderRadius,
+    innerColor: state.tokens.color.strokeFocusInner,
+    innerWidth: state.tokens.strokeWidth.thin,
+    outerColor: state.tokens.color.strokeFocusOuter,
+    outerWidth: state.tokens.strokeWidth.thick,
+    visible: state.focused,
+  });
   attachSlotProps(state.root, { style: rootStyle });
   attachSlotProps(state.header, { style: headerStyle });
   if (state.title) {

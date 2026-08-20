@@ -1,9 +1,9 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
 
 import {
-  getSwitchFocusStyle,
   getSwitchLabelStyle,
   getSwitchLayoutStyle,
   getSwitchRootBaseStyle,
@@ -26,7 +26,8 @@ export function useSwitchStyles_unstable(state: SwitchState) {
   const thumbCheckedColor = getSwitchThumbColorStyle(state, true);
   const thumbTranslateDistance = getSwitchThumbTranslateDistance(state);
 
-  const rootStyle: StyleProp<ViewStyle> = [switchStyles.root, getSwitchRootBaseStyle(state), getSwitchFocusStyle(state), state.userStyle];
+  const rootBaseStyle = getSwitchRootBaseStyle(state);
+  const rootStyle: StyleProp<ViewStyle> = [switchStyles.root, rootBaseStyle, state.userStyle];
   const layoutStyle: StyleProp<ViewStyle> = [switchStyles.container, getSwitchLayoutStyle(state.layout)];
   const trackStyle: StyleProp<ViewStyle> = [
     switchStyles.track,
@@ -62,6 +63,14 @@ export function useSwitchStyles_unstable(state: SwitchState) {
   ];
   const labelStyle: StyleProp<TextStyle> = [switchStyles.label, getSwitchLabelStyle(state)];
 
+  state.focusVisualProps = createFocusVisualProps({
+    borderRadius: rootBaseStyle.borderRadius,
+    innerColor: state.tokens.color.strokeFocusInner,
+    innerWidth: state.tokens.strokeWidth.thin,
+    outerColor: state.tokens.color.strokeFocusOuter,
+    outerWidth: state.tokens.strokeWidth.thick,
+    visible: state.focused && !state.disabled,
+  });
   attachSlotProps(state.layoutContainer, { style: layoutStyle });
   attachSlotProps(state.root, { style: rootStyle });
   attachSlotProps(state.track, { accessible: false, style: trackStyle });

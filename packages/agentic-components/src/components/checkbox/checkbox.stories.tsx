@@ -40,6 +40,7 @@ const meta: Meta<typeof Checkbox> = {
     showLabel: true,
     showSecondaryText: false,
     defaultStatus: 'unchecked',
+    testID: 'agentic-storybook-checkbox',
     variant: 'standard',
   },
   argTypes: {

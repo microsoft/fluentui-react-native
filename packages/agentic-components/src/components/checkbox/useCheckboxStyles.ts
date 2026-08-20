@@ -1,12 +1,12 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
 
 import {
   checkboxStyles,
   checkboxIndicatorIconSize,
   checkboxTextStyles,
-  getCheckboxFocusStyle,
   getCheckboxIndicatorColors,
   getCheckboxIndicatorIconColors,
   getCheckboxIndicatorStyle,
@@ -24,12 +24,20 @@ export function useCheckboxStyles_unstable(state: CheckboxState) {
   const secondaryTextColors = getCheckboxSecondaryTextColors(state);
   const indicatorIconColors = getCheckboxIndicatorIconColors(state);
 
-  const rootStyle: StyleProp<ViewStyle> = [checkboxStyles.root, getCheckboxRootStyle(state), getCheckboxFocusStyle(state), state.userStyle];
+  const rootStyle: StyleProp<ViewStyle> = [checkboxStyles.root, getCheckboxRootStyle(state), state.userStyle];
   const indicatorStyle: StyleProp<ViewStyle> = [checkboxStyles.indicator, getCheckboxIndicatorStyle(state), indicatorColors];
   const labelContainerStyle: StyleProp<ViewStyle> = [checkboxStyles.labelContainer, getCheckboxLabelContainerStyle(state)];
   const labelStyle: StyleProp<TextStyle> = [checkboxStyles.labelText, textThemeStyles.label, labelColors];
   const secondaryTextStyle: StyleProp<TextStyle> = [checkboxStyles.secondaryText, textThemeStyles.secondaryText, secondaryTextColors];
 
+  state.focusVisualProps = createFocusVisualProps({
+    borderRadius: state.tokens.borderRadius.base300,
+    innerColor: state.tokens.color.strokeFocusInner,
+    innerWidth: state.tokens.strokeWidth.thin,
+    outerColor: state.tokens.color.strokeFocusOuter,
+    outerWidth: state.tokens.strokeWidth.thick,
+    visible: state.focused && !state.disabled,
+  });
   attachSlotProps(state.root, { style: rootStyle });
   state.indicatorStyle = indicatorStyle;
   state.labelContainerStyle = labelContainerStyle;

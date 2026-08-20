@@ -30,6 +30,7 @@ const meta: Meta<typeof ListboxItem> = {
     content: 'Listbox item',
     secondaryContent: 'Secondary',
     secondaryContentPosition: 'right',
+    testID: 'agentic-storybook-listbox-item',
     variant: 'listItem',
   },
   parameters: {

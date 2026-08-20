@@ -69,12 +69,12 @@ Variant properties are ordered in the design tool: **Layout → Checked → Stat
 
 #### State
 
-| Value        | Description                                             | When to Use                      |
-| ------------ | ------------------------------------------------------- | -------------------------------- |
-| **Rest**     | Default idle appearance                                 | No user interaction              |
-| **Hover**    | Background, thumb, and stroke shift via OKLCH           | Pointer is over the switch       |
-| **Pressed**  | Stronger background, thumb, and stroke shift            | Active pointer down              |
-| **Focus**    | Dual-outline focus ring on the switch (excluding label) | Keyboard focus                   |
-| **Disabled** | Reduced-contrast track and thumb; non-interactive       | Setting is unavailable or locked |
+| Value        | Description                                                       | When to Use                      |
+| ------------ | ----------------------------------------------------------------- | -------------------------------- |
+| **Rest**     | Default idle appearance                                           | No user interaction              |
+| **Hover**    | Background, thumb, and stroke shift via OKLCH                     | Pointer is over the switch       |
+| **Pressed**  | Stronger background, thumb, and stroke shift                      | Active pointer down              |
+| **Focus**    | Persistent dual-ring focus visual on the switch (excluding label) | Keyboard focus                   |
+| **Disabled** | Reduced-contrast track and thumb; non-interactive                 | Setting is unavailable or locked |
 
 **Interaction model:** All three categories (background, foreground, stroke) participate in hover/pressed. The unchecked transparent background uses alpha shift; the checked heavy background uses inverse lightness shift.

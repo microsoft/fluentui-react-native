@@ -121,26 +121,6 @@ export function getMenuItemRootStyle(state: MenuItemState): ViewStyle {
   return getThemedBackground(state, getBackgroundStateSource(state));
 }
 
-const focusStateLevels = [['focused']] as const;
-
-const getThemedFocus = getThemedStateStyleFactory(
-  'MenuItem.focus',
-  ({ color, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof focusStateLevels> => ({
-    focused: {
-      borderColor: color.strokeFocusInner,
-      outlineColor: color.strokeFocusOuter,
-      outlineOffset: strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: strokeWidth.thick,
-    },
-  }),
-  focusStateLevels,
-);
-
-export function getMenuItemFocusStyle(state: MenuItemState): ViewStyle | undefined {
-  return state.focused && !state.disabled && state.isListItem ? getThemedFocus(state, ['focused']) : undefined;
-}
-
 const labelFontStateLevels = [['list-item', 'section-header'], ['selected']] as const;
 type LabelFontStateLevels = typeof labelFontStateLevels;
 

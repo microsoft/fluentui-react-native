@@ -13,7 +13,7 @@ Radio-specific note: selecting a Radio via arrow keys simultaneously moves focus
 
 ## Focus management
 
-Radio does not manage its own focus within a group — focus management lives at the parent RadioGroup level. For native `<input type="radio">` siblings sharing a `name` attribute, the platform provides the single-tab-stop behavior; do not set `tabindex` on the inputs. For custom radios (non-native elements using `role="radio"`), RadioGroup implements roving tabindex — only the currently selected Radio (or the first one if none is selected) carries `tabindex="0"`, and others have `tabindex="-1"`. Either way, the focus ring wraps the entire interactive area (indicator + label), not just the indicator. Focus visualization uses the universal dual-outline focus ring — see `flex-system:styling`.
+Radio does not manage its own focus within a group — focus management lives at the parent RadioGroup level. For native `<input type="radio">` siblings sharing a `name` attribute, the platform provides the single-tab-stop behavior; do not set `tabindex` on the inputs. For custom radios (non-native elements using `role="radio"`), RadioGroup implements roving tabindex — only the currently selected Radio (or the first one if none is selected) carries `tabindex="0"`, and others have `tabindex="-1"`. Either way, the focus ring wraps the entire interactive area (indicator + label), not just the indicator. Focus visualization uses the universal persistent dual-ring focus visual — see `flex-system:styling`.
 
 ## Pointer interaction
 

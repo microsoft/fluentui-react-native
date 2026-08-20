@@ -115,20 +115,6 @@ function createBodyLayoutStyleDefinition({ spacing }: FlexTokens): StyleDefiniti
 
 const getBodyLayoutStyle = getThemedStateStyleFactory('Accordion.bodyLayout', createBodyLayoutStyleDefinition, sizeStateLevels);
 
-function createHeaderFocusStyleDefinition({ color, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, [['focused']]> {
-  return {
-    focused: {
-      borderColor: color.strokeFocusInner,
-      outlineColor: color.strokeFocusOuter,
-      outlineOffset: strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: strokeWidth.thick,
-    },
-  };
-}
-
-const getHeaderFocusStyle = getThemedStateStyleFactory('Accordion.headerFocus', createHeaderFocusStyleDefinition, [['focused']]);
-
 const headerBackgroundStateLevels = [['pressed', 'hovered']] as const;
 type HeaderBackgroundStateLevels = typeof headerBackgroundStateLevels;
 
@@ -224,10 +210,6 @@ const getBodyVisibilityStyle = getStateStyleFactory<ViewStyle, ExpansionStateLev
 
 export function getAccordionHeaderLayoutStyle(state: AccordionState): ViewStyle {
   return getHeaderLayoutStyle(state, [state.size]);
-}
-
-export function getAccordionHeaderFocusStyle(state: AccordionState): ViewStyle | undefined {
-  return state.focused ? getHeaderFocusStyle(state, ['focused']) : undefined;
 }
 
 export function getAccordionHeaderColorStyles(state: AccordionState): {

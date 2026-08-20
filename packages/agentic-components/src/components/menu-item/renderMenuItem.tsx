@@ -2,6 +2,7 @@
 import { Text } from 'react-native';
 
 import { CompoundItemLayout } from '../../primitives/compound-item-layout/compound-item-layout';
+import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import { LayoutStableText } from '../../primitives/layout-stable-text/layout-stable-text';
 import { Skeleton } from '../skeleton/skeleton';
 import { getMenuItemContentLayoutStyle, getMenuItemLeadingStyle, getMenuItemTrailingStyle, menuItemStyles } from './menu-item.styles';
@@ -34,6 +35,7 @@ export function renderMenuItem_unstable(state: MenuItemState) {
 
   return (
     <state.root>
+      <FocusVisual {...state.focusVisualProps} />
       {state.loading ? (
         <CompoundItemLayout
           contentStyle={getMenuItemContentLayoutStyle(state)}

@@ -75,18 +75,18 @@ Variant properties are ordered in the design tool: **Secondary content position 
 
 #### State
 
-| Value        | Applies to                | Visual                                                                                                              |
-| ------------ | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Rest**     | List Item, Section Header | Default appearance                                                                                                  |
-| **Hover**    | List Item only            | Transparent-hover background tint; foreground shifts via interaction algorithm                                      |
-| **Pressed**  | List Item only            | Deepened background tint; foreground shifts via interaction algorithm                                               |
-| **Focused**  | List Item only            | Universal dual-outline focus ring; rendered on `:focus-visible` because the row's `<button>` carries real DOM focus |
-| **Disabled** | List Item, Section Header | Disabled foreground color; no interaction                                                                           |
-| **Loading**  | Section Header only       | Skeleton shimmer placeholders replace icon and label                                                                |
+| Value        | Applies to                | Visual                                                                                                                        |
+| ------------ | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Rest**     | List Item, Section Header | Default appearance                                                                                                            |
+| **Hover**    | List Item only            | Transparent-hover background tint; foreground shifts via interaction algorithm                                                |
+| **Pressed**  | List Item only            | Deepened background tint; foreground shifts via interaction algorithm                                                         |
+| **Focused**  | List Item only            | Universal persistent dual-ring focus visual; rendered on `:focus-visible` because the row's `<button>` carries real DOM focus |
+| **Disabled** | List Item, Section Header | Disabled foreground color; no interaction                                                                                     |
+| **Loading**  | Section Header only       | Skeleton shimmer placeholders replace icon and label                                                                          |
 
 **Why Loading exists only on Section Header:** Loading represents the entire option list being fetched. The Section Header skeleton signals structure while options load. Individual List Items do not have a Loading state — they are either present or absent.
 
-**Why Focused is a State on the option:** ListboxItem rows receive real DOM focus from the parent Dropdown (arrow keys move focus between row buttons). The Focused state renders the universal dual-outline focus ring (see `flex-system:styling`) whenever the row's `<button>` matches `:focus-visible` — the same pattern used by every other focusable element in the system.
+**Why Focused is a State on the option:** ListboxItem rows receive real DOM focus from the parent Dropdown (arrow keys move focus between row buttons). The Focused state renders the universal persistent dual-ring focus visual (see `flex-system:styling`) whenever the row's `<button>` matches `:focus-visible` — the same pattern used by every other focusable element in the system.
 
 #### Selected
 

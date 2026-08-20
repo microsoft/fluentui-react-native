@@ -94,7 +94,18 @@ describe('ListboxItem', () => {
     expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(useFlexTokens().color.pressed.backgroundNeutralTransparent);
 
     await fireEvent(root, 'focus', {});
-    expect(StyleSheet.flatten(root.props.style)).toMatchObject({
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: useFlexTokens().color.strokeFocusOuter,
+      borderWidth: useFlexTokens().strokeWidth.thick,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
+      'opacity',
+    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: useFlexTokens().color.strokeFocusInner,
+      borderWidth: useFlexTokens().strokeWidth.thin,
+    });
+    expect(StyleSheet.flatten(root.props.style)).not.toMatchObject({
       outlineColor: useFlexTokens().color.strokeFocusOuter,
       outlineStyle: 'solid',
     });

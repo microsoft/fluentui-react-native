@@ -93,15 +93,19 @@ describe('Accordion', () => {
     expect(getHeader(component).props.accessibilityState).toEqual({ busy: true, expanded: false });
   });
 
-  it('uses the focused prop to render the universal dual-outline focus ring', async () => {
+  it('uses the focused prop to render the universal dual-ring focus visual', async () => {
     const component = await renderAccordion({ focused: true });
 
-    expect(getHeaderStyle(component)).toMatchObject({
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: '#000000',
+      borderWidth: 2,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
+      'opacity',
+    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: '#ffffff',
-      outlineColor: '#000000',
-      outlineOffset: 1,
-      outlineStyle: 'solid',
-      outlineWidth: 2,
+      borderWidth: 1,
     });
   });
 
@@ -134,8 +138,18 @@ describe('Accordion', () => {
     const startChildren = getHeader(start).children as { props: { testID?: string } }[];
     const endChildren = getHeader(end).children as { props: { testID?: string } }[];
 
-    expect(startChildren.map((child) => child.props.testID)).toEqual(['accordion-chevron', 'accordion-leading-icon', 'accordion-title']);
-    expect(endChildren.map((child) => child.props.testID)).toEqual(['accordion-leading-icon', 'accordion-title', 'accordion-chevron']);
+    expect(startChildren.map((child) => child.props.testID)).toEqual([
+      'focus-visual',
+      'accordion-chevron',
+      'accordion-leading-icon',
+      'accordion-title',
+    ]);
+    expect(endChildren.map((child) => child.props.testID)).toEqual([
+      'focus-visual',
+      'accordion-leading-icon',
+      'accordion-title',
+      'accordion-chevron',
+    ]);
   });
 
   it('renders custom title and body slots', async () => {

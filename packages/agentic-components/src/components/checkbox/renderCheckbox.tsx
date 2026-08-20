@@ -2,6 +2,7 @@
 import { View } from 'react-native';
 
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
+import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import type { CheckboxState } from './checkbox.types';
 
 export function renderCheckbox_unstable(state: CheckboxState) {
@@ -9,6 +10,7 @@ export function renderCheckbox_unstable(state: CheckboxState) {
 
   return (
     <state.root>
+      <FocusVisual {...state.focusVisualProps} />
       <CheckboxIndicator
         iconColor={state.indicatorIconColor}
         iconSize={state.indicatorIconSize}

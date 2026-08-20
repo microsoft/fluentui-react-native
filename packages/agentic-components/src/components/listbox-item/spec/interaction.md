@@ -22,7 +22,7 @@ Section Header rows are skipped during keyboard navigation — they are not focu
 
 ListboxItem rows receive **real DOM focus** from the parent Dropdown. The parent moves focus between rows (and onto the initially-selected row when the Popover opens) by calling `.focus()` on the target row's `<button>`. There is no `aria-activedescendant`.
 
-ListboxItem renders the universal dual-outline focus ring (see `flex-system:styling`) when its `<button>` matches `:focus-visible` — the same mechanism used by every other focusable element in the system. The ring is absolutely positioned over the row and overlays content without affecting layout dimensions.
+ListboxItem renders the universal persistent dual-ring focus visual (see `flex-system:styling`) when its `<button>` matches `:focus-visible` — the same mechanism used by every other focusable element in the system. The ring is absolutely positioned over the row and overlays content without affecting layout dimensions.
 
 ListboxItem must not set its own `tabindex`. The parent Dropdown controls the focus model: typically the focused row carries `tabindex="0"` while the rest carry `tabindex="-1"` (a roving tabindex pattern). When the parent Dropdown closes the Popover, focus returns to the Dropdown trigger — that is the Dropdown's responsibility, not ListboxItem's.
 

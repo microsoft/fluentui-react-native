@@ -2,4 +2,4 @@
 "@fluentui-react-native/components": patch
 ---
 
-Use native Button focus visuals to avoid a React Native Windows Fabric crash.
+Render persistent single- and dual-ring focus visuals across agentic components to avoid React Native Windows Fabric crashes.

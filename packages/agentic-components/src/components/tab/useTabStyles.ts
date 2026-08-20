@@ -1,8 +1,9 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
 
-import { tabStyles, getTabColorStyles, getTabContentStyle, getTabFocusStyle, getTabIconSize, getTabRootStyle } from './tab.styles';
+import { tabStyles, getTabColorStyles, getTabContentStyle, getTabIconSize, getTabRootStyle } from './tab.styles';
 import type { TabState } from './tab.types';
 
 /**
@@ -10,17 +11,20 @@ import type { TabState } from './tab.types';
  */
 export function useTabStyles_unstable(state: TabState) {
   const colors = getTabColorStyles(state);
-  const rootStyle: StyleProp<ViewStyle> = [
-    tabStyles.root,
-    getTabRootStyle(state),
-    colors.background,
-    getTabFocusStyle(state),
-    state.userStyle,
-  ];
+  const rootLayoutStyle = getTabRootStyle(state);
+  const rootStyle: StyleProp<ViewStyle> = [tabStyles.root, rootLayoutStyle, colors.background, state.userStyle];
   const contentStyle: StyleProp<TextStyle> = [tabStyles.content, getTabContentStyle(state), colors.foreground];
   const hiddenContentStyle: StyleProp<TextStyle> = [tabStyles.content, getTabContentStyle(state, true), colors.foreground];
   const iconSize = getTabIconSize();
 
+  state.focusVisualProps = createFocusVisualProps({
+    borderRadius: rootLayoutStyle.borderRadius,
+    innerColor: state.tokens.color.strokeFocusInner,
+    innerWidth: state.tokens.strokeWidth.thin,
+    outerColor: state.tokens.color.strokeFocusOuter,
+    outerWidth: state.tokens.strokeWidth.thick,
+    visible: state.focused && !state.disabled,
+  });
   attachSlotProps(state.root, { style: rootStyle });
   if (state.icon) {
     attachSlotProps(state.icon, {

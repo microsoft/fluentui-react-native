@@ -1,9 +1,9 @@
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
 
 import {
   radioStyles,
-  getRadioFocus,
   getRadioIndicatorBorder,
   getRadioIndicatorDotColorStyle,
   getRadioIndicatorDotLayout,
@@ -21,7 +21,8 @@ import type { RadioState } from './radio.types';
  * Applies styles and slot props to the Radio component state.
  */
 export function useRadioStyles_unstable(state: RadioState) {
-  const rootStyle: StyleProp<ViewStyle> = [radioStyles.root, getRadioRootLayout(state), getRadioFocus(state), state.userStyle];
+  const rootLayoutStyle = getRadioRootLayout(state);
+  const rootStyle: StyleProp<ViewStyle> = [radioStyles.root, rootLayoutStyle, state.userStyle];
   const indicatorStyle: StyleProp<ViewStyle> = [radioStyles.indicator, getRadioIndicatorLayout(state), getRadioIndicatorBorder(state)];
   const indicatorDotStyle: StyleProp<ViewStyle> = [
     radioStyles.dot,
@@ -37,6 +38,14 @@ export function useRadioStyles_unstable(state: RadioState) {
     getRadioSecondaryTextColorStyle(state),
   ];
 
+  state.focusVisualProps = createFocusVisualProps({
+    borderRadius: rootLayoutStyle.borderRadius,
+    innerColor: state.tokens.color.strokeFocusInner,
+    innerWidth: state.tokens.strokeWidth.thin,
+    outerColor: state.tokens.color.strokeFocusOuter,
+    outerWidth: state.tokens.strokeWidth.thick,
+    visible: state.focused && !state.disabled,
+  });
   state.rootStyle = rootStyle;
   state.indicatorStyle = indicatorStyle;
   state.indicatorDotStyle = indicatorDotStyle;
