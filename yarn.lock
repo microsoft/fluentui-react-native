@@ -3034,9 +3034,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/components@workspace:*, @fluentui-react-native/components@workspace:packages/agentic-components":
+"@fluentui-react-native/components@workspace:*, @fluentui-react-native/components@workspace:packages/agentic/components":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/components@workspace:packages/agentic-components"
+  resolution: "@fluentui-react-native/components@workspace:packages/agentic/components"
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/callout": "workspace:*"
@@ -3458,9 +3458,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/design@workspace:*, @fluentui-react-native/design@workspace:packages/agentic-design":
+"@fluentui-react-native/design@workspace:*, @fluentui-react-native/design@workspace:packages/agentic/design":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/design@workspace:packages/agentic-design"
+  resolution: "@fluentui-react-native/design@workspace:packages/agentic/design"
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/design-tokens-android": "catalog:"
