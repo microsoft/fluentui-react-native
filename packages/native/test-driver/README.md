@@ -259,6 +259,10 @@ On Windows a bare `--runner` name is resolved to its `.cmd` launcher and run thr
 directly, and `shell: true` would join the arguments unquoted, which breaks the first spec path
 containing a space.
 
+The runner inherits the service's environment, which is how the platform is selected: a config that
+reads `DESKTOP_TEST_PLATFORM` sees whatever the service was started with. Start the service with
+the platform set, or every on-device run silently executes against whatever the config defaults to.
+
 **Discovery.** The service announces `{ url, token, protocolVersion, manifestDigest }` over the
 Storybook channel the application is already connected to, using the channel server's existing
 `send-event` endpoint, and re-broadcasts on an interval. Nothing is configured at build time. This
@@ -335,9 +339,11 @@ installed or registered, and (for the `windows` backend) WinAppDriver plus Devel
 
 A locked workstation is the failure mode worth knowing about: every read still works — the
 accessibility tree, attributes, screenshots — while every click, key, and scroll is refused, so
-interaction tests fail with opaque driver errors. `doctor` detects it. This is not incidental on
-Windows: a React Native pressable publishes no UI Automation `InvokePattern`, so a click is always
-synthetic mouse input and always needs a real interactive desktop.
+interaction tests fail with opaque driver errors. `doctor` reports the prerequisite but cannot
+probe it: no signal is readable from Node without a native call, and the obvious candidate
+(`LogonUI.exe`) keeps running after an unlock. This is not incidental on Windows: a React Native
+pressable publishes no UI Automation `InvokePattern`, so a click is always synthetic mouse input
+and always needs a real interactive desktop.
 
 `appium-windows-driver` locates WinAppDriver through the **`APPIUM_WAD_PATH`** environment
 variable and then through `%ProgramFiles(x86)%\Windows Application Driver\WinAppDriver.exe`. No

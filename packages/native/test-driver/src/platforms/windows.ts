@@ -120,25 +120,19 @@ export function isDeveloperModeEnabled(): boolean | undefined {
 /**
  * Reports whether the interactive session is locked.
  *
- * This matters more than it looks. A locked workstation still answers every read: the
- * accessibility tree, element attributes, and screenshots all work. What it refuses is synthetic
- * input, so `click` either fails with an opaque driver error or reports success while doing
- * nothing at all. Detecting it turns a baffling test failure into a one-line diagnosis.
+ * Always `undefined`: there is no signal this package can read without a native call.
+ * `LogonUI.exe` looked like one and is not — measured on Windows 11 26200, it keeps running long
+ * after the session is unlocked, so treating its presence as "locked" reported every unlocked
+ * machine as locked. `quser` cannot tell the two apart either. The correct answers come from
+ * `OpenInputDesktop` or `WTSQuerySessionInformation`, neither of which is reachable from Node
+ * without an FFI dependency.
  *
- * `LogonUI.exe` owns the secure desktop for as long as the session is locked, which is the signal
- * used here; `quser` reports the session as `Active` either way and cannot distinguish them.
+ * The prerequisite is still reported, because it is the most confusing failure mode available: a
+ * locked workstation answers every read — accessibility tree, attributes, screenshots — while
+ * refusing every click, key, and scroll.
  */
 export function isSessionLocked(): boolean | undefined {
-  try {
-    const output = execFileSync('tasklist.exe', ['/FI', 'IMAGENAME eq LogonUI.exe', '/NH'], {
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-      timeout: 10_000,
-    });
-    return /LogonUI\.exe/i.test(output);
-  } catch {
-    return undefined;
-  }
+  return undefined;
 }
 
 /** Runs the Windows prerequisite probes. */
@@ -168,10 +162,9 @@ export function checkWindowsPrerequisites(environment: NodeJS.ProcessEnv = proce
     {
       ...byId('session-unlocked'),
       status: locked === undefined ? 'unknown' : locked ? 'missing' : 'ok',
-      detail: locked
-        ? 'The workstation is locked. Reads still work, but every click, key, and scroll is refused; unlock the session before running interaction tests.'
-        : locked === undefined
-          ? 'Could not determine whether the workstation is locked'
+      detail:
+        locked === undefined
+          ? 'Not probed. A locked workstation answers every read and refuses every click, key, and scroll, so unlock the session before running interaction tests.'
           : undefined,
     },
     {

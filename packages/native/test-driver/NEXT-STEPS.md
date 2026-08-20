@@ -34,25 +34,27 @@ against a real application**.
   Storybook app, and **two of the six shared tests pass against it**: the inline `button-default`
   plan (visible, enabled, text) and the `Button interaction` state-and-label test.
 - **`desktop-driver serve` works end to end on Windows.** The service starts, announces itself over
-  the Storybook channel, and the on-device controls report `Ready` — meaning the app received the
-  announcement and reached the service's health endpoint with the announced token. A run requested
-  over the service API spawned the WebdriverIO runner and **passed** `components-button--default`
-  against the live app.
+  the Storybook channel, and the on-device controls report `Ready`. **All three on-device controls
+  were pressed and verified against the real Windows backend**: _Run current test_ ran only the
+  selected story and the device rendered `passed: 1 passed, 0 failed`; _Run all tests_ sequenced
+  both stories; _Cancel_ is disabled when idle, enabled while running, and moved a running run to
+  `cancelled` within two seconds. Use `yarn desktop:service:windows`, not `yarn desktop:service` —
+  see §7.2.
 - `apps/storybook` builds and launches on Windows with **Visual Studio 2026** (18.8); RNW 0.81 did
   not object.
 
 **Still unproven anywhere:**
 
-- **Every interaction.** The machine used for this work stayed locked for the whole session, and a
-  locked workstation refuses all synthetic input. `click`, `setValue`, `clearValue`, and keyboard
-  input have therefore never been observed to work against the Storybook app. See §3 and §7.1.
 - **macOS.** Nothing in this round ran on macOS. The Mac2 attach capabilities, the WDA ownership
   model, and every macOS prerequisite remain as they were.
 - **NovaWindows.** `appium-novawindows-driver` is still not installed and has never been
   constructed.
-- **The on-device buttons.** Everything behind them is proven (see above), but **Run current test**,
-  **Run all tests**, and **Cancel** have never been pressed, because pressing anything needs the
-  synthetic input a locked session refuses.
+
+**Blocked by an application bug, not by the harness:**
+
+Four of the six shared tests press the Button, and they fail because **clicking the agentic
+`Button` crashes the Storybook app** — see §7.1. Clicking works: the same session clicks the
+Storybook shell's own `Pressable` controls without incident.
 
 ## 2. State of the tree
 
@@ -63,23 +65,19 @@ against a real application**.
 
 ## 3. Unlock the workstation first
 
-This is the single most important line in this file.
-
 A locked Windows session still answers **every read**: the accessibility tree, element attributes,
 `getText`, and screenshots all work, and window discovery succeeds. What it refuses is synthetic
 input. `windows: click` and `windows: keys` fail with `SendInput API call failed. 0 inputs
-succeeded`, and WinAppDriver's own `element/:id/click` either throws `An unknown error occurred in
-the remote end` or — worse — **reports success while doing nothing at all**.
+succeeded`, and WinAppDriver's own `element/:id/click` throws `An unknown error occurred in the
+remote end`. The result is a test run that looks like a product bug and is not one.
 
-The result is a test run that looks like a product bug and is not one.
+`doctor` reports `session-unlocked` as `unknown`, not `ok` or `missing`, and that is deliberate:
+there is no signal Node can read without a native call. `LogonUI.exe` was tried and disproved — it
+keeps running long after a session is unlocked, so it reported every unlocked machine as locked.
+`OpenInputDesktop` is the correct check and needs an FFI dependency this package does not carry.
 
-```powershell
-cd packages\native\test-driver
-node ./src/cli/main.ts doctor --platform windows
-```
-
-`session-unlocked` must be `ok`. If it is `missing`, unlock the machine and stay logged in;
-nothing about interaction testing works otherwise.
+If clicks fail with the errors above, unlock the machine and stay logged in before looking any
+further.
 
 ## 4. Environment setup
 
@@ -136,87 +134,110 @@ PLAN success criterion 6 and the whole point of attach mode.
 
 ## 7. What is left, in priority order
 
-### 7.1 Finish the interaction verification — the top item
+### 7.1 Clicking the agentic `Button` crashes the app — the top item, and it is not a harness bug
 
-Four of the six shared tests press the Button, and none of them has ever been observed to pass.
-Everything around them works: the story is selected, `agentic-storybook-button-interactive`
-resolves, its state and label read correctly, and the status text
-`agentic-storybook-button-interactive-status` reads `Not pressed` or `Pressed <n>` as ground truth.
+This is the only thing standing between the shared suite and a green Windows run, and it is an
+application defect. Reproduced repeatedly on an unlocked session:
 
-Three facts to carry into that work, all measured:
+- Clicking `agentic-storybook-button-interactive` (Interaction story) kills `ReactApp.exe` about
+  **three seconds later**, with exception `0xc0000409` (fail-fast) in `ucrtbase.dll` in the
+  Application event log.
+- Clicking `agentic-storybook-button` (Default story, **no `onPress` at all**) kills it the same
+  way, so the story's handler is not involved.
+- Clicking the Storybook shell's own controls — `agentic-storybook-theme-light`,
+  `agentic-storybook-theme-dark`, `addon-tab-controls`, and every `desktop-test-*` control — works
+  and leaves the app running. Those are plain React Native `Pressable`s.
 
-1. **A React Native Windows pressable exposes no `InvokePattern`.** Queried through plain UI
-   Automation, `agentic-storybook-button-interactive` supports exactly one pattern:
-   `ScrollItemPattern`. There is no Invoke, so no driver can activate it through a UIA pattern —
-   WinAppDriver has to fall back to synthetic mouse input at the element's centre. That makes
-   `click` on Windows structurally dependent on a real, unlocked, interactive desktop, which is a
-   constraint worth deciding about before this ever runs in CI. It may also be an RNW accessibility
-   gap worth reporting upstream.
-2. **A locked session turns that into an opaque failure.** WinAppDriver answers a click with
-   `An unknown error occurred in the remote end`, and the app is untouched.
-3. **`ReactApp.exe` fail-fast crashed twice during click attempts** — exception `0xc0000409` in
-   `ucrtbase.dll`, recorded in the Application event log. It did not reproduce on a later click
-   attempt, and both crashes happened while the workstation was locked, so this is an observation
-   rather than a diagnosis. If it reproduces on an unlocked session it is an app or RNW bug found
-   by this harness, not a harness bug, and it belongs in an `agentic-components` issue with the
-   faulting module and exception code above.
+So the crash is in the agentic `Button` component's press path on React Native Windows, not in a
+React Native pressable generally, not in the story, and not in the driver. The delay is what makes
+it read like a harness fault: the click returns success, the next command fails with
+`Currently selected window has been closed`, and every later test in the file fails with it too.
 
-Watch for the failure mode in §3: a click that resolves without changing anything is not a pass.
+Next steps for whoever picks this up: get a stack for the fail-fast (enable WER local dumps or
+attach a debugger before clicking), then narrow it inside `packages/agentic-components`. File it
+there with the faulting module and exception code above. Once it is fixed, run
+`yarn desktop:test:windows` and the four remaining shared tests should be the only thing left to
+judge.
 
-### 7.2 Screenshots and Composition content — PLAN open decision 5
+One related fact worth carrying: **a React Native Windows pressable exposes no `InvokePattern`**.
+Queried through plain UI Automation it supports exactly one pattern, `ScrollItemPattern`, so no
+driver can activate it through a UIA pattern and WinAppDriver falls back to synthetic mouse input
+at the element's centre. That makes `click` on Windows structurally dependent on a real, unlocked,
+interactive desktop, which is a CI constraint worth deciding about, and may be an RNW accessibility
+gap worth reporting upstream.
+
+### 7.2 The service runs whatever platform its own environment names
+
+`desktop:service` starts `desktop-driver serve`, whose runner inherits the service process's
+environment. `wdio.conf.ts` reads `DESKTOP_TEST_PLATFORM` and **defaults to `fake`**, so a plain
+`yarn desktop:service` makes every on-device run execute against the contract fake: the buttons
+work, the results say `passed`, and nothing ever touches the application. Use the explicit scripts:
+
+```powershell
+yarn desktop:service:windows     # or desktop:service:macos
+```
+
+That is how the on-device controls were verified below. If an on-device run passes suspiciously
+fast, check the service console for `RUNNING in fake on fake`.
+
+### 7.3 Screenshots and Composition content — PLAN open decision 5
 
 A capture of the Storybook window returned a PNG at exactly the window size (582×791) with varied
 content, which argues that no Windows Graphics Capture fallback is needed. It was taken on a locked
 desktop, though, and may simply be the lock screen. Repeat it unlocked, look at the image, and
 record the result. `COMPOSITION_SCREENSHOT_CAVEAT` in `src/platforms/windows.ts` stands until then.
 
-### 7.3 macOS re-verification
+### 7.4 macOS re-verification
 
-Two changes affect macOS and neither has run there:
+Three changes affect macOS and none has run there:
 
 - `isFocused` now reads the `focused` attribute first and only falls back to the active-element
   route. Confirm Mac2 answers `focused`; the fallback covers it either way, but verify rather than
   assume.
 - `scrollIntoView` now sends `macos: scroll` with a wheel delta instead of no delta at all.
+- The run executor now wraps a Windows launcher in `cmd.exe`; the macOS path is unchanged but
+  should be re-run once through `desktop:service:macos`.
 
 Also re-run `desktop:generate` on macOS and confirm the digest still matches.
 
-### 7.4 NovaWindows — PLAN open decision 2
+### 7.5 NovaWindows — PLAN open decision 2
 
 Once the suite passes on `windows`, install `appium-novawindows-driver`, run the identical suite
 against `backend: 'novawindows'`, and record startup and per-command timings for both. Two
 capability details are unverified for it: whether it accepts `appium:appTopLevelWindow` in the same
 form, and whether `appium:shouldCloseApp: false` genuinely keeps an attached window open.
 
-### 7.5 The on-device buttons
+### 7.6 The on-device controls — verified, with one caveat
 
-The service and everything behind it are proven on Windows. With the app already running:
+All three controls were pressed on Windows and behaved correctly, so this section is a record
+rather than a task:
 
 ```powershell
 cd apps\storybook
 yarn desktop:generate
-yarn desktop:service          # starts `desktop-driver serve` and announces over the channel
+yarn desktop:service:windows     # not `desktop:service`; see §7.2
 ```
 
 No environment variables and no rebuild: the service broadcasts its URL, token, and manifest digest
 over the Storybook channel every few seconds, and the controls pick up a restarted service with a
-new token on their own. When the app has received an announcement and reached the service, the
-`desktop-test-status` element reads `Ready`, which is observable through the driver without pressing
-anything:
+new token on their own. `desktop-test-status` reads `Ready` once the app has received an
+announcement and reached the service, and it is readable through the driver without pressing
+anything.
 
-```powershell
-yarn desktop:generate; yarn desktop:test:windows   # any run attaches; read ~desktop-test-status
-```
+Observed: _Run current test_ ran only the selected story (`RUNNING in Windows on Windows`) and the
+device rendered `passed: 1 passed, 0 failed` about sixteen seconds after the press; _Run all tests_
+sequenced both stories in order; _Cancel_ was disabled when idle, enabled while running, and moved
+the run to `cancelled: 0 passed, 1 failed` within two seconds.
 
-What remains is only the three presses — **Run current test**, **Run all tests**, and **Cancel** —
-which need the synthetic input a locked session refuses. Confirm that a run started from the device
-reports progress and that Cancel moves a running run to `cancelled` rather than leaving it in
-`running`.
+The caveat is timing, and it misleads: the runner prints a full `Spec Files: 1 passed` summary
+after **each** story, so a "Run all" looks finished in the console while the next story is still
+being spawned. The device is the honest indicator — it says `Running… N finished` until the whole
+run resolves, and it updates about a second after the service does.
 
 A spawn failure is already covered: the executor's `child.on('error')` handler turns it into a
 failed run, and `serve.test.ts` asserts it.
 
-### 7.6 The Button's accessible name
+### 7.7 The Button's accessible name
 
 The interactive Button stories now set an explicit `accessibilityLabel`, because React Native
 Windows publishes a Button whose label comes only from `content` with an empty UI Automation `Name`.
@@ -224,7 +245,7 @@ That was the minimal fix for the test fixture, but the underlying question belon
 should `Button` derive an accessible name from string `content` so every consumer gets one on
 Windows? That is an `agentic-components` decision, not a desktop-driver one.
 
-### 7.7 Enumeration cost
+### 7.8 Enumeration cost
 
 Enumerating 16 top-level windows takes about 5 s, nearly all of it inside one WinAppDriver XPath
 query. It happens once per run and is currently fine. If a busier desktop makes it painful, narrow
@@ -279,18 +300,22 @@ session manifest; never kill by process name.
 From PLAN §3, marked against what has actually been observed:
 
 1. The same spec source passes on Windows and macOS with no platform branch or import — **not met**:
-   it runs on Windows, and the interaction assertions are unverified.
+   it runs on Windows and two of six tests pass; the other four are blocked by the application
+   crash in §7.1, not by the spec.
 2. `testID` resolves through the accessibility-ID strategy to the intended native element — **met on
    Windows**.
-3. The full portable command subset works — **met on Windows except the interaction commands**.
+3. The full portable command subset works — **met on Windows**, including `click`, which works
+   against the Storybook shell's own controls. It crashes the app only on the agentic `Button`.
 4. Launch mode shuts down only what it launched — **not verified**.
 5. Attach mode leaves the externally launched app running — **met on Windows**.
 6. Unexpected termination fails the active test with process, endpoint, driver, and app diagnostics
-   — **partly met**: driver-host startup failures now carry the host's own message and stack.
-7. Storybook "Run current test" runs only the selected story — **partly met**: a single-story run
-   requested over the service API selected exactly that story's spec and grep and passed on
-   Windows; the on-device press itself is unverified.
-8. Storybook "Run all tests" sequences every tested story — **not verified**.
+   — **partly met**: driver-host startup failures now carry the host's own message and stack, and an
+   app that dies mid-run surfaces as `Currently selected window has been closed` rather than a
+   hang.
+7. Storybook "Run current test" runs only the selected story and renders pass/fail — **met on
+   Windows**.
+8. Storybook "Run all tests" sequences every tested story and reports a summary — **met on
+   Windows**.
 9. CLI, testrunner, and standalone runs emit the same normalized events and artifact manifest —
    **met for the testrunner, standalone, and `serve` paths**.
 10. No Appium CLI or multi-driver router process is started — **met**: the only processes are the

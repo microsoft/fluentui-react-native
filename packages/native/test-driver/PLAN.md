@@ -1263,18 +1263,29 @@ Specify either app or appTopLevelWindow`, which makes attach a strict two-step
   hook breaks module resolution inside the platform driver's dependency tree.
 - A locked workstation is the most confusing failure mode available: reads all
   succeed while every click, key, and scroll is refused, and WinAppDriver
-  answers a click with `An unknown error occurred in the remote end`. `doctor`
-  now detects it.
+  answers a click with `An unknown error occurred in the remote end`. It cannot
+  be probed from Node without a native call — `LogonUI.exe` keeps running after
+  an unlock and reports every unlocked machine as locked — so `doctor` names the
+  prerequisite and reports it as `unknown` rather than guessing.
 - A React Native Windows pressable publishes no `InvokePattern` — only
   `ScrollItemPattern` — so no driver can activate it through a UI Automation
   pattern, and `click` on Windows depends on synthetic mouse input at the
   element's centre. Windows desktop tests therefore require a real, unlocked,
   interactive desktop; that is a CI constraint, not a preference.
+- Clicking the agentic `Button` fail-fast crashes the Storybook application
+  about three seconds later (`0xc0000409` in `ucrtbase.dll`), with and without
+  an `onPress`, while the shell's own React Native `Pressable`s click normally.
+  That is an application defect this harness found, and it is what currently
+  fails four of the six shared tests.
 - Node refuses to `spawn` a `.cmd` launcher directly and fails with `EINVAL`, so
   the run executor cannot simply name `yarn` on Windows. `shell: true` is not the
   fix either, because it joins the runner's arguments into one command line
   without quoting any of them; the executor builds an explicit `cmd.exe /d /s /c`
   invocation with every argument quoted instead.
+- The runner inherits the service's environment, and `wdio.conf.ts` defaults
+  `DESKTOP_TEST_PLATFORM` to `fake`. A service started without naming a platform
+  therefore runs every on-device request against the contract fake and reports a
+  confident pass that never touched the application.
 - A WinAppDriver session negotiates as JSONWireProtocol (`isW3C === false`) while
   Mac2 is W3C. Pinning `browserName: ''` still makes WebdriverIO resolve the same
   command implementations, which is what the portable set depends on.

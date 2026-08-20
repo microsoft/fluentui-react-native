@@ -44,6 +44,8 @@
     "desktop:test:macos": "cross-env DESKTOP_TEST_PLATFORM=macos yarn desktop:test",
     "desktop:test:windows": "cross-env DESKTOP_TEST_PLATFORM=windows yarn desktop:test",
     "desktop:service": "node desktop-tests/desktop-driver.mjs serve --manifest desktop-tests/generated/story-tests.manifest.json --runner yarn --runner-arg wdio --runner-arg run --runner-arg wdio.conf.ts",
+    "desktop:service:macos": "cross-env DESKTOP_TEST_PLATFORM=macos yarn desktop:service",
+    "desktop:service:windows": "cross-env DESKTOP_TEST_PLATFORM=windows yarn desktop:service",
     "lint": "fluentui-scripts lint",
     "format": "fluentui-scripts format"
   },

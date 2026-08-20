@@ -2,7 +2,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 import { doctor } from './cli/commands.ts';
-import { checkWindowsPrerequisites, findWinAppDriver, WAD_PATH_ENV } from './platforms/windows.ts';
+import { checkWindowsPrerequisites, findWinAppDriver, isSessionLocked, WAD_PATH_ENV } from './platforms/windows.ts';
 
 const isWindows = process.platform === 'win32';
 const describeOnWindows = isWindows ? describe : describe.skip;
@@ -82,5 +82,14 @@ describeOnWindows('Windows prerequisite probes', () => {
       'ProgramFiles(x86)': 'Z:\\nowhere',
     });
     expect(statuses.find((status) => status.id === 'winappdriver')?.status).toBe('unknown');
+  });
+
+  it('reports the lock state as unknown rather than guessing from a process list', () => {
+    // LogonUI.exe keeps running after a session is unlocked, so its presence proves nothing;
+    // reporting `missing` from it called every unlocked machine locked.
+    expect(isSessionLocked()).toBeUndefined();
+    const locked = checkWindowsPrerequisites().find((status) => status.id === 'session-unlocked');
+    expect(locked?.status).toBe('unknown');
+    expect(locked?.detail).toContain('refuses every click');
   });
 });
