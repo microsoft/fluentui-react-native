@@ -139,6 +139,41 @@ describe('Button', () => {
     expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ fontWeight: '600', position: 'absolute' });
   });
 
+  it('renders selection without changing it on press', async () => {
+    const onPress = jest.fn();
+    const component = await renderButton({ content: 'Favorite', onPress, selected: false });
+
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+  });
+
+  it('reserves the selected label width in both selected states so toggling cannot reflow', async () => {
+    const unselected = await renderButton({ content: 'Favorite', selected: false });
+    const selected = await renderButton({ content: 'Favorite', selected: true });
+    const tokens = useFlexTokens();
+
+    for (const component of [unselected, selected]) {
+      const labels = component.getAllByText('Favorite', { includeHiddenElements: true });
+      expect(labels).toHaveLength(2);
+      // The ghost always reserves Semibold width, so the visible weight swap cannot resize the button.
+      expect(StyleSheet.flatten(labels[0].props.style)).toMatchObject({
+        fontWeight: tokens.fontWeight.functionalSemibold,
+        opacity: 0,
+      });
+      expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ position: 'absolute' });
+    }
+  });
+
+  it('omits selection semantics when no selection prop is supplied', async () => {
+    const component = await renderButton({ content: 'Action' });
+
+    expect(getRoot(component).props.accessibilityState).toEqual({ disabled: false });
+  });
+
   it('places the icon after content and applies user styles last', async () => {
     const style: ViewStyle = { backgroundColor: 'hotpink' };
     const component = await renderButton({

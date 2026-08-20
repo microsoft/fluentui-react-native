@@ -1,5 +1,16 @@
 # Change Log - @uifabricshared/foundation-composable
 
+## 0.15.2
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @uifabricshared/foundation-settings@0.16.8
+
 ## 0.15.1
 
 ### Patch Changes

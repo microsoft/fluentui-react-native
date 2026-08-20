@@ -1,5 +1,22 @@
 # Change Log - @fluentui-react-native/avatar
 
+## 1.14.2
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/badge@0.12.8
+  - @fluentui-react-native/icon@0.22.8
+  - @fluentui-react-native/framework@0.17.2
+  - @fluentui-react-native/use-styling@0.16.2
+  - @fluentui-react-native/adapters@0.15.1
+  - @fluentui-react-native/tokens@0.24.8
+
 ## 1.14.1
 
 ### Patch Changes

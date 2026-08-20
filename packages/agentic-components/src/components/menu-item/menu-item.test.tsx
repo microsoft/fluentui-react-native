@@ -20,6 +20,16 @@ function getRootStyle(component: RenderResult, role: 'menuitem' | 'menuitemcheck
 }
 
 describe('MenuItem', () => {
+  it('renders selection without changing it on press', async () => {
+    const onPress = jest.fn();
+    const component = await renderMenuItem({ content: 'Inbox', hasMultiselect: true, onPress, selected: false });
+
+    await fireEvent.press(getRoot(component, 'menuitemcheckbox'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(getRoot(component, 'menuitemcheckbox').props.accessibilityState.checked).toBe(false);
+  });
+
   it('renders a default interactive row with icon and secondary content', async () => {
     const component = await renderMenuItem({ content: 'Save' });
 

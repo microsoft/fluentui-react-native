@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -87,6 +88,31 @@ export const Selection: Story = {
     docs: {
       description: {
         story: 'Selected radios shift the label and indicator colors to the active choice palette and expose checked semantics.',
+      },
+    },
+  },
+};
+
+export const Group: Story = {
+  render: () => {
+    const options = ['Daily', 'Weekly', 'Never'];
+    const Group = () => {
+      const [choice, setChoice] = useState('Daily');
+      return (
+        <StoryGroup label={`Notify me: ${choice}`}>
+          {options.map((option) => (
+            <Radio key={option} label={option} onPress={() => setChoice(option)} selected={choice === option} showSecondaryText={false} />
+          ))}
+        </StoryGroup>
+      );
+    };
+    return <Group />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A radio group owns the chosen option. Each radio renders the selected value it is given and reports presses through onPress, so the group is responsible for clearing the previous choice.',
       },
     },
   },

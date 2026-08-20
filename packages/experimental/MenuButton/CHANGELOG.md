@@ -1,5 +1,26 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
+## 0.11.9
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [853f1fd]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/contextual-menu@0.25.9
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/button@0.40.8
+  - @fluentui-react-native/framework@0.17.2
+  - @fluentui-react-native/tokens@0.24.8
+
+## 0.11.8
+
+### Patch Changes
+
+- @fluentui-react-native/contextual-menu@0.25.8
+
 ## 0.11.7
 
 ### Patch Changes

@@ -30,14 +30,14 @@ At the same time refine the overall plan but hold off on implementing it until d
 - `src/index.ts` — explicit named exports only (no barrel `export *`), one export per component plus its prop types.
 - One subfolder per native control under `src/<ControlName>/` (e.g. `src/Button/`), each with:
   - `<ControlName>NativeComponent.ts` — `codegenNativeComponent` spec (fabric) shared with paper via the existing
-    RN interop, following the `RCT*ComponentView` pattern used in `packages/components/Callout/macos`.
+    RN interop, following the `RCT*ComponentView` pattern used in `packages/native/Callout/macos`.
   - `<ControlName>.tsx` — thin RN component (`@jsxImportSource @fluentui-react-native/framework-base`) that renders
     the native component, mapping/validating props but adding no Fluent styling.
   - `<ControlName>.types.ts` — public prop types.
   - `<ControlName>.stories.tsx` — storybook story per component (per PLAN.md item 5), pattern to match existing
     storybook entries under `packages/agentic-components/src/*/*.stories.tsx`.
 - Native implementation lives in `macos/` (Swift + `RCT*ComponentView.mm`/`.h`), plus a `FRNMacosNative.podspec`
-  at package root, following `packages/components/Callout` as the structural template.
+  at package root, following `packages/native/Callout` as the structural template.
 - `apps/win32` is not applicable; add to FluentTester's macOS test app / Podfile per component as done for other
   native modules ("must be added to FluentTester's Podfile — transitive dependencies aren't autolinked").
 

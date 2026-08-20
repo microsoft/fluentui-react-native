@@ -36,7 +36,8 @@ export type TabStateProps = {
    */
   layout?: TabLayout;
   /**
-   * Whether the tab is selected.
+   * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
+   * owns the value, and the component reports interactions through `onPress` rather than changing it.
    */
   selected?: boolean;
   /**

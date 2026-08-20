@@ -12,7 +12,7 @@
       "path": "../../utils/adapters/tsconfig.json"
     },
     {
-      "path": "../Callout/tsconfig.json"
+      "path": "../../native/Callout/tsconfig.json"
     },
     {
       "path": "../FocusZone/tsconfig.json"

@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import type { ViewProps } from 'react-native';
@@ -70,6 +71,37 @@ export const Overview: Story = {
       </StoryGroup>
     </View>
   ),
+};
+
+export const ExternallyDrivenSelection: Story = {
+  render: () => {
+    const options = ['Ascending', 'Descending'];
+    const Listbox = () => {
+      const [choice, setChoice] = useState('Ascending');
+      return (
+        <StoryGroup label={`Sort: ${choice}`}>
+          {options.map((option) => (
+            <ListboxItem
+              key={option}
+              content={option}
+              onPress={() => setChoice(option)}
+              secondaryContent={null}
+              selected={choice === option}
+            />
+          ))}
+        </StoryGroup>
+      );
+    };
+    return <Listbox />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A single-selection listbox owns the chosen value. Each option renders the selected value it is given and reports presses through onPress, so the listbox is what clears the previous choice.',
+      },
+    },
+  },
 };
 
 const styles = StyleSheet.create({

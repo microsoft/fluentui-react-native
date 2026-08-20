@@ -25,14 +25,15 @@ authoring rule in one always-loaded instruction file.
 
 ## Load focused references
 
-| Work                                                                                | Reference                                                          |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| Public props, slots, state types, native prop exposure, or exports                  | [Types and slots](references/types-and-slots.md)                   |
-| Defaults, derived state, interaction hooks, accessibility, or slot construction     | [State and accessibility](references/state-and-accessibility.md)   |
-| Tokens, style factories, theme caching, state precedence, or slot style application | [Styles and tokens](references/styles-and-tokens.md)               |
-| Pure slot rendering, component assembly, or display names                           | [Rendering and assembly](references/rendering.md)                  |
-| Runtime tests, type tests, snapshots, Storybook stories, or validation              | [Tests and stories](references/tests-and-stories.md)               |
-| Cross-component duplication, shared helper extraction, or dependency hygiene        | [Package optimization](../agentic-component-optimization/SKILL.md) |
+| Work                                                                                | Reference                                                                          |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Public props, slots, state types, native prop exposure, or exports                  | [Types and slots](references/types-and-slots.md)                                   |
+| Defaults, derived state, interaction hooks, accessibility, or slot construction     | [State and accessibility](references/state-and-accessibility.md)                   |
+| Tokens, style factories, theme caching, state precedence, or slot style application | [Styles and tokens](references/styles-and-tokens.md)                               |
+| Pure slot rendering, component assembly, or display names                           | [Rendering and assembly](references/rendering.md)                                  |
+| Runtime tests, type tests, snapshots, Storybook stories, or validation              | [Tests and stories](references/tests-and-stories.md)                               |
+| Native React Native Windows Fabric components, codegen, registration, or UIA        | [Windows Fabric native components](references/windows-fabric-native-components.md) |
+| Cross-component duplication, shared helper extraction, or dependency hygiene        | [Package optimization](../agentic-component-optimization/SKILL.md)                 |
 
 A new higher-order component normally needs every reference. A focused fix should load only the affected reference and
 its immediate neighbors. Keep the component's colocated `SPEC.md` and companion files authoritative for its contract.

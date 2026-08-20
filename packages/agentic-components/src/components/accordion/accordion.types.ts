@@ -48,9 +48,14 @@ export type AccordionStateProps = {
    */
   layout?: AccordionLayout;
   /**
-   * Whether the body panel is visible.
+   * Whether the body panel is visible. Supplying this prop makes expansion externally driven, so the accordion renders
+   * what it is given and reports header presses through `onExpandedChange`.
    */
   expanded?: boolean;
+  /**
+   * The initial expanded value when expansion is internally driven. Ignored while `expanded` is supplied.
+   */
+  defaultExpanded?: boolean;
   /**
    * Forces the visual focus state when provided.
    */
@@ -68,7 +73,8 @@ export type AccordionStateProps = {
    */
   accessibilityState?: AccessibilityState;
   /**
-   * Notifies consumers after the expanded state changes.
+   * Notifies consumers with the next expanded value whenever a header press changes expansion, in both the externally
+   * driven and internally driven cases.
    */
   onExpandedChange?: (expanded: boolean) => void;
   /**

@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -38,13 +39,13 @@ const meta: Meta<typeof Checkbox> = {
     secondaryText: 'Description',
     showLabel: true,
     showSecondaryText: false,
-    status: 'unchecked',
+    defaultStatus: 'unchecked',
     variant: 'standard',
   },
   argTypes: {
     showLabel: { control: 'boolean' },
     showSecondaryText: { control: 'boolean' },
-    status: { control: 'select', options: statuses.map(({ value }) => value) },
+    defaultStatus: { control: 'select', options: statuses.map(({ value }) => value) },
     variant: { control: 'select', options: variants.map(({ value }) => value) },
   },
   parameters: {
@@ -73,7 +74,7 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="Status">
         {statuses.map(({ label, value }) => (
-          <Checkbox key={value} label={label} status={value} />
+          <Checkbox key={value} label={label} defaultStatus={value} />
         ))}
       </StoryGroup>
     </View>
@@ -91,14 +92,50 @@ export const SecondaryText: Story = {
   render: () => (
     <StoryGroup label="Secondary text">
       <Checkbox label="Label" secondaryText="Supporting context" showSecondaryText />
-      <Checkbox label="Label" secondaryText="Supporting context" showSecondaryText status="checked" />
-      <Checkbox label="Label" secondaryText="Supporting context" showSecondaryText status="indeterminate" />
+      <Checkbox label="Label" secondaryText="Supporting context" showSecondaryText defaultStatus="checked" />
+      <Checkbox label="Label" secondaryText="Supporting context" showSecondaryText defaultStatus="indeterminate" />
     </StoryGroup>
   ),
   parameters: {
     docs: {
       description: {
         story: 'Secondary text stays visually subordinate while still being announced as supporting context.',
+      },
+    },
+  },
+};
+
+export const ExternallyDrivenStatus: Story = {
+  render: () => {
+    const SelectAll = () => {
+      const [statuses, setStatuses] = useState<readonly CheckboxStatus[]>(['unchecked', 'checked']);
+      const allChecked = statuses.every((status) => status === 'checked');
+      const parentStatus: CheckboxStatus = allChecked ? 'checked' : statuses.some((s) => s === 'checked') ? 'indeterminate' : 'unchecked';
+      return (
+        <StoryGroup label="Select all">
+          <Checkbox
+            label="All options"
+            onStatusChange={() => setStatuses(statuses.map(() => (allChecked ? 'unchecked' : 'checked')))}
+            status={parentStatus}
+          />
+          {statuses.map((status, index) => (
+            <Checkbox
+              key={index}
+              label={`Option ${index + 1}`}
+              onStatusChange={(next) => setStatuses(statuses.map((current, i) => (i === index ? next : current)))}
+              status={status}
+            />
+          ))}
+        </StoryGroup>
+      );
+    };
+    return <SelectAll />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A parent checkbox owns the status of its children. Every checkbox is externally driven and reports presses through onStatusChange, which is how the parent resolves its own indeterminate state.',
       },
     },
   },

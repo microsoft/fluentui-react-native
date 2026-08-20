@@ -15,9 +15,13 @@ export type MenuItemStateProps = {
   hasMultiselect?: boolean;
   hasCheckmark?: boolean;
   hasChevron?: boolean;
-  selected?: boolean;
   menuStyle?: MenuItemStyle;
   secondaryContentPosition?: MenuItemSecondaryContentPosition;
+  /**
+   * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
+   * owns the value, and the component reports interactions through `onPress` rather than changing it.
+   */
+  selected?: boolean;
 };
 
 export type MenuItemSlots = {

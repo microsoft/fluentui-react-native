@@ -7,6 +7,7 @@ import { Icon } from '../../primitives/icon/icon';
 /**
  * Hook to create the state for a Button component. This is responsible for:
  * - resolving the prop states to their default values if unset
+ * - resolving the externally driven or internally driven selected state
  * - setting up any accessibility for the component
  * - querying the theme state for the component
  * - initializing the component slots
@@ -30,7 +31,10 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   const hasIcon = iconProp !== undefined && iconProp !== null;
   const hasSelectedIcon = selectedIconProp !== undefined && selectedIconProp !== null;
   const iconOnly = !hasContent && (hasIcon || hasSelectedIcon);
+
+  // A button renders selection but never changes it: a press is an action, so the caller owns the selected value.
   const isToggleButton = selected !== undefined;
+
   useAccessibilityLabelWarning({
     accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
     accessibilityLabelledBy: rest.accessibilityLabelledBy ?? rest['aria-labelledby'],
@@ -38,6 +42,7 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     requireLabel: iconOnly,
     warning: 'Button: icon-only buttons require an accessibilityLabel that describes the action.',
   });
+
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({
     ...rest,

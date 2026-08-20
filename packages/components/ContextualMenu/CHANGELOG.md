@@ -1,5 +1,36 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
+## 0.25.9
+
+### Patch Changes
+
+- 853f1fd: Moved the location of callout, with links to new location
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [853f1fd]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @uifabricshared/foundation-compose@1.16.8
+  - @fluentui-react-native/callout@0.29.2
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/focus-zone@0.23.2
+  - @fluentui-react-native/icon@0.22.8
+  - @fluentui-react-native/text@0.25.8
+  - @uifabricshared/foundation-composable@0.15.2
+  - @uifabricshared/foundation-settings@0.16.8
+  - @fluentui-react-native/adapters@0.15.1
+  - @fluentui-react-native/interactive-hooks@0.28.8
+  - @fluentui-react-native/tokens@0.24.8
+
+## 0.25.8
+
+### Patch Changes
+
+- Updated dependencies [2cb34bb]
+- Updated dependencies [3405262]
+  - @fluentui-react-native/callout@0.29.1
+
 ## 0.25.7
 
 ### Patch Changes

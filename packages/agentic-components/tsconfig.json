@@ -10,6 +10,9 @@
   "exclude": ["**/*.stories.ts", "**/*.stories.tsx"],
   "references": [
     {
+      "path": "../native/Callout/tsconfig.json"
+    },
+    {
       "path": "../agentic-design/tsconfig.json"
     },
     {

@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/default-theme
 
+## 0.27.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/theme-tokens@0.29.2
+  - @fluentui-react-native/theming-utils@0.27.8
+
 ## 0.27.7
 
 ### Patch Changes

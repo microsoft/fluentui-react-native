@@ -11,6 +11,8 @@ invariants; detailed authoring recipes live in the
 - Story files are library source and follow the tests and stories reference.
 - Storybook application, native project, Metro, bundle, or CocoaPods work follows `storybook/AGENTS.md` and the
   `agentic-storybook-development` skill.
+- Native React Native Windows Fabric component work follows the
+  [Windows Fabric native component reference](../../.github/skills/agentic-component-authoring/references/windows-fabric-native-components.md).
 
 ## Package invariants
 

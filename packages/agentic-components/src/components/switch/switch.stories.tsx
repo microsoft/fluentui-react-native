@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -47,7 +48,7 @@ const meta: Meta<typeof Switch> = {
     layout: 'horizontal',
   },
   argTypes: {
-    checked: { control: 'boolean' },
+    defaultChecked: { control: 'boolean' },
     disabled: { control: 'boolean' },
     label: { control: 'text' },
     labelAfter: { control: 'boolean' },
@@ -78,7 +79,7 @@ export const Overview: Story = {
           <StoryItem key={value} label={label}>
             <Switch
               {...(value === 'switch' ? { accessibilityLabel: label } : { labelAfter: false })}
-              checked={false}
+              defaultChecked={false}
               label={label}
               layout={value}
             />
@@ -87,10 +88,10 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="Checked">
         <StoryItem label="Off">
-          <Switch accessibilityLabel="Wi-Fi" checked={false} label="Wi-Fi" labelAfter={false} />
+          <Switch accessibilityLabel="Wi-Fi" defaultChecked={false} label="Wi-Fi" labelAfter={false} />
         </StoryItem>
         <StoryItem label="On">
-          <Switch accessibilityLabel="Wi-Fi" checked label="Wi-Fi" labelAfter={false} />
+          <Switch accessibilityLabel="Wi-Fi" defaultChecked label="Wi-Fi" labelAfter={false} />
         </StoryItem>
       </StoryGroup>
     </View>
@@ -108,7 +109,7 @@ export const Layout: Story = {
   render: () => (
     <View style={styles.story}>
       <StoryGroup label="Switch">
-        <Switch accessibilityLabel="Airplane mode" checked={false} layout="switch" />
+        <Switch accessibilityLabel="Airplane mode" defaultChecked={false} layout="switch" />
       </StoryGroup>
       <StoryGroup label="Horizontal">
         <Switch label="Wi-Fi" labelAfter={false} labelBefore layout="horizontal" />
@@ -131,17 +132,41 @@ export const Checked: Story = {
   render: () => (
     <StoryGroup label="Checked">
       <StoryItem label="Off">
-        <Switch accessibilityLabel="Notifications" checked={false} layout="switch" />
+        <Switch accessibilityLabel="Notifications" defaultChecked={false} layout="switch" />
       </StoryItem>
       <StoryItem label="On">
-        <Switch accessibilityLabel="Notifications" checked layout="switch" />
+        <Switch accessibilityLabel="Notifications" defaultChecked layout="switch" />
       </StoryItem>
     </StoryGroup>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'checked controls the toggle state and drives the filled track, thumb position, and checked accessibility state.',
+        story:
+          'The checked axis drives the filled track, thumb position, and checked accessibility state. These instances start from defaultChecked and still toggle when pressed.',
+      },
+    },
+  },
+};
+
+export const ExternallyDrivenChecked: Story = {
+  render: () => {
+    const Setting = () => {
+      const [checked, setChecked] = useState(false);
+      return (
+        <StoryGroup label={checked ? 'Wi-Fi is on' : 'Wi-Fi is off'}>
+          <Switch accessibilityLabel="Wi-Fi" checked={checked} layout="switch" onChange={setChecked} />
+          <Text style={styles.caption}>The caller owns the value and updates it from onChange.</Text>
+        </StoryGroup>
+      );
+    };
+    return <Setting />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Supplying checked makes the caller the owner of the value. The switch reports every press and key activation through onChange and renders only what it is given.',
       },
     },
   },
@@ -187,6 +212,9 @@ export const ConstrainedContent: Story = {
 };
 
 const styles = StyleSheet.create({
+  caption: {
+    fontSize: 11,
+  },
   constrained: {
     width: 160,
   },

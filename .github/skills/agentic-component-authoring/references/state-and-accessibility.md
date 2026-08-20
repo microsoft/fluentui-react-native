@@ -28,6 +28,65 @@ semantics are enabled even when `selected` is false.
 Apply context-sensitive defaults only after those facts are known. Button defaults shape to `circle` for icon-only use
 and `rounded` otherwise.
 
+## Decide who owns a stateful axis
+
+Before wiring any state, decide which of two kinds of axis you are building. Getting this wrong produces a component
+that either cannot be used interactively or changes state when it should not.
+
+### Self-driving controls
+
+The interaction _is_ the state change. Pressing a checkbox checks it; pressing a switch flips it; pressing a disclosure
+header expands it. There is no other reasonable interpretation of the press, and the control needs no outside
+coordination to be correct on its own.
+
+These support both directions with one prop triple per axis:
+
+| Prop              | Purpose                                                                   |
+| ----------------- | ------------------------------------------------------------------------- |
+| `<state>`         | The externally driven value. Supplying it makes the axis controlled.      |
+| `default<State>`  | The initial internally driven value. Ignored while `<state>` is supplied. |
+| `on<State>Change` | The state change event, called with the next value in both directions.    |
+
+Name the triple after the axis: `checked` / `defaultChecked` / `onChange` for Switch, `status` / `defaultStatus` /
+`onStatusChange` for Checkbox, `expanded` / `defaultExpanded` / `onExpandedChange` for Accordion.
+
+Resolve a boolean axis with `useToggleState` from `@fluentui-react-native/framework-base`, which wraps
+`useControllableValue` and adds the disabled guard and no-op suppression:
+
+```ts
+const expansion = useToggleState({ value: expanded, defaultValue: defaultExpanded, onChange: onExpandedChange });
+```
+
+Then drive it from the interaction handler and forward the user's own handler. Multi-value axes such as Checkbox's
+tri-state `status` use `useControllableValue` directly.
+
+### Externally driven selection
+
+The press is an _activation_, and what it means for selection is decided by a caller or a surrounding group. A button
+press runs an action; a tab, radio, list item, listbox item, or menu item press tells its group which entry was chosen,
+and the group decides what to select and what to clear.
+
+These components must **not** change their own selection:
+
+- Expose only `selected?: boolean`, and render exactly what is given.
+- Do not add `defaultSelected` or `onSelectedChange`. There is no internally driven mode to seed or report.
+- Forward `onPress` unchanged; it is the interaction event the owner reacts to.
+- Derive selection semantics from the resolved value, and gate optional semantics on `selected !== undefined` when the
+  axis is opt-in.
+
+A normal button must not change state on a press. A lone radio or tab that selected itself would also be wrong, because
+it could never deselect and nothing would clear its siblings.
+
+### Watch axes that change component identity
+
+When `selected !== undefined` switches a component between two shapes, that is an identity change rather than a value
+change. Button uses it to become a toggle button, which adds the Semibold ghost label that reserves layout width, and
+Card uses it to become selectable, which adds the interactive overlay.
+
+Keep those axes stable for a given instance and do not expose them as a Storybook control, because flipping the control
+between `undefined` and `false` visibly resizes or re-roles the component. Demonstrate the axis with focused stories
+that always supply a value.
+
 ## Merge accessibility deliberately
 
 Start with consumer-provided accessibility state, then apply component-owned semantics:
@@ -94,6 +153,11 @@ than silently pretending it succeeded.
 
 - Defaults match the spec and depend on already-derived facts.
 - Omitted controlled props retain their meaning.
+- Each stateful axis is classified before it is wired: a self-driving control exposes `<state>`, `default<State>`, and
+  `on<State>Change` and changes state on interaction, while externally driven selection exposes only `selected` and
+  never changes it.
+- A press on a button, tab, radio, or item does not change that component's own selection.
+- An axis that changes component identity stays stable per instance and is not a Storybook control.
 - User native handlers and unrelated accessibility state are preserved.
 - Disabled, focusable, and selected semantics agree.
 - Icon-only or unlabeled usage is diagnosed consistently.

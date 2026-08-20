@@ -3,11 +3,11 @@ import { Animated, Easing, Pressable, Text, View } from 'react-native';
 
 import {
   useAccessibilityLabelWarning,
-  useControllableValue,
   usePressableState,
   useOptionalSlot,
   useReducedMotion,
   useSlot,
+  useToggleState,
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
@@ -30,25 +30,22 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     afterLabel: afterLabelProp,
     beforeLabel: beforeLabelProp,
     checked: checkedProp,
-    defaultChecked = false,
+    defaultChecked,
     disabled = false,
     label = 'Label',
     labelAfter = true,
     labelBefore = true,
     layout = 'horizontal',
     onChange,
+    onPress,
     thumb: thumbProp,
     style: userStyle,
     track: trackProp,
     ...rest
   } = props;
 
-  const [checkedValue, setChecked] = useControllableValue(checkedProp, defaultChecked, (nextChecked) => {
-    if (nextChecked !== undefined) {
-      onChange?.(nextChecked);
-    }
-  });
-  const checked = checkedValue ?? false;
+  const toggle = useToggleState({ value: checkedProp, defaultValue: defaultChecked, onChange, disabled });
+  const checked = toggle.value;
   const hasBeforeLabel = layout === 'horizontal' && labelBefore && beforeLabelProp !== null;
   const hasAfterLabel = layout === 'horizontal' && labelAfter && afterLabelProp !== null;
   const hasAboveLabel = layout === 'vertical' && aboveLabelProp !== null;
@@ -135,25 +132,23 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     'aria-checked': checked,
   });
 
+  const { toggle: toggleChecked } = toggle;
   const handlePress = React.useCallback(
     (event: Parameters<NonNullable<typeof pressableProps.onPress>>[0]) => {
-      if (disabled) {
-        return;
-      }
-      pressableProps.onPress?.(event);
-      setChecked(!checked);
+      toggleChecked();
+      onPress?.(event);
     },
-    [checked, disabled, pressableProps, setChecked],
+    [onPress, toggleChecked],
   );
 
   const handleKeyUp = React.useCallback(
     (event: Parameters<NonNullable<typeof pressableProps.onKeyUp>>[0]) => {
       pressableProps.onKeyUp?.(event);
-      if (!disabled && isToggleKey((event as { nativeEvent?: { key?: string } }).nativeEvent?.key)) {
-        setChecked(!checked);
+      if (isToggleKey((event as { nativeEvent?: { key?: string } }).nativeEvent?.key)) {
+        toggleChecked();
       }
     },
-    [checked, disabled, pressableProps, setChecked],
+    [pressableProps, toggleChecked],
   );
 
   const layoutContainer = useSlot(View, { testID: 'switch-layout-container' });

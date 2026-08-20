@@ -8,6 +8,9 @@
       "path": "apps/fluent-tester/tsconfig.json"
     },
     {
+      "path": "apps/storybook/tsconfig.json"
+    },
+    {
       "path": "apps/tester-core/tsconfig.json"
     },
     {
@@ -15,9 +18,6 @@
     },
     {
       "path": "packages/agentic-components/tsconfig.json"
-    },
-    {
-      "path": "packages/agentic-components/storybook/tsconfig.json"
     },
     {
       "path": "packages/agentic-design/tsconfig.json"
@@ -33,9 +33,6 @@
     },
     {
       "path": "packages/components/Button/tsconfig.json"
-    },
-    {
-      "path": "packages/components/Callout/tsconfig.json"
     },
     {
       "path": "packages/components/Checkbox/tsconfig.json"
@@ -201,6 +198,9 @@
     },
     {
       "path": "packages/libraries/core/tsconfig.json"
+    },
+    {
+      "path": "packages/native/Callout/tsconfig.json"
     },
     {
       "path": "packages/native/macos-native/tsconfig.json"

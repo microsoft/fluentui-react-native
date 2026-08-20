@@ -61,7 +61,7 @@ All native `.swift`/`.h`/`.m` sources live together under a single `macos/` dire
 
 ## Known limitations / follow-ups
 
-- **Storybook host**: the colocated stories are loaded by `packages/agentic-components/storybook`, which directly
+- **Storybook host**: the colocated stories are loaded by `apps/storybook`, which directly
   depends on this package so React Native autolinking includes the macOS pod. Use that app for native build and runtime
   verification.
 - **Liquid Glass availability gating**: `Button`'s `'glass'` bezel style is guarded with `@available(macOS 26.0, *)`

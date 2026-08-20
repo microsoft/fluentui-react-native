@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -52,11 +53,11 @@ const meta: Meta<typeof Button> = {
     iconPosition: 'before',
     shape: 'rounded',
     size: 'medium',
+    testID: 'agentic-storybook-button',
   },
   argTypes: {
     appearance: { control: 'select', options: appearances.map(({ value }) => value) },
     iconPosition: { control: 'select', options: ['before', 'after'] },
-    selected: { control: 'boolean' },
     shape: { control: 'select', options: shapes.map(({ value }) => value) },
     size: { control: 'select', options: sizes.map(({ value }) => value) },
   },
@@ -199,6 +200,35 @@ export const Selected: Story = {
       description: {
         story:
           'Supplying selected enables toggle-button semantics. selectedIcon replaces icon in the selected state while the label layout remains stable.',
+      },
+    },
+  },
+};
+
+export const ExternallyDrivenSelection: Story = {
+  render: () => {
+    const ToggleGroup = () => {
+      const [selected, setSelected] = useState(false);
+      return (
+        <StoryGroup label={selected ? 'Selected' : 'Not selected'}>
+          <Button
+            content="Favorite"
+            icon={regularStarIcon}
+            onPress={() => setSelected(!selected)}
+            selected={selected}
+            selectedIcon={filledStarIcon}
+          />
+          <Button appearance="subtle" content="Reset" onPress={() => setSelected(false)} />
+        </StoryGroup>
+      );
+    };
+    return <ToggleGroup />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A toggle button never changes its own state. The caller owns selected and updates it from onPress, which is why an external action such as Reset can change it just as easily.',
       },
     },
   },

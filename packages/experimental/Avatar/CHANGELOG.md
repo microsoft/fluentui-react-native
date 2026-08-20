@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
+## 0.22.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/framework@0.17.2
+
 ## 0.22.7
 
 ### Patch Changes

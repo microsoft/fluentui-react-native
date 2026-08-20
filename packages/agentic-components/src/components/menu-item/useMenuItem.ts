@@ -41,6 +41,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   const isInteractive = isListItem;
   const resolvedLoading = !isListItem && loading;
   const isSelectionIndicator = hasCheckmark || hasMultiselect;
+
   const isSelectedVisual = selected && !hasMultiselect && isListItem;
   const contentText = content ?? 'Menu item';
   const secondaryContentText = secondaryContent === undefined ? 'Secondary' : secondaryContent;

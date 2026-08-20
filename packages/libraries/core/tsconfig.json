@@ -21,7 +21,7 @@
       "path": "../../components/Button/tsconfig.json"
     },
     {
-      "path": "../../components/Callout/tsconfig.json"
+      "path": "../../native/Callout/tsconfig.json"
     },
     {
       "path": "../../components/Checkbox/tsconfig.json"

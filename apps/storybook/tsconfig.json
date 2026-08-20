@@ -1,0 +1,36 @@
+{
+  "extends": "@fluentui-react-native/scripts/tsconfig",
+  "compilerOptions": {
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+  },
+  "include": ["index.js", "src", "app.json"],
+  "exclude": ["node_modules", "dist", ".cache"],
+  "references": [
+    {
+      "path": "../../packages/native/Callout/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic-components/tsconfig.json"
+    },
+    {
+      "path": "../../packages/theming/default-theme/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic-design/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/FocusZone/tsconfig.json"
+    },
+    {
+      "path": "../../scripts/tsconfig.json"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -131,7 +132,6 @@ const meta: Meta<typeof Card> = {
     direction: { control: 'select', options: directions.map(({ value }) => value) },
     layout: { control: 'select', options: layouts.map(({ value }) => value) },
     padding: { control: 'select', options: paddings.map(({ value }) => value) },
-    selected: { control: 'boolean' },
     size: { control: 'select', options: sizes.map(({ value }) => value) },
   },
   parameters: {
@@ -249,6 +249,39 @@ export const Selected: Story = {
       }}
     />
   ),
+};
+
+export const ExternallyDrivenSelection: Story = {
+  render: () => {
+    const reports = ['Q3 report', 'Q4 forecast'];
+    const Picker = () => {
+      const [selected, setSelected] = useState<readonly string[]>([]);
+      return (
+        <View style={styles.story}>
+          {reports.map((name) => (
+            <Card
+              key={name}
+              accessibilityLabel={name}
+              content={{ children: <Text style={styles.body}>{name}</Text> }}
+              layout="structured"
+              onPress={() => setSelected(selected.includes(name) ? selected.filter((current) => current !== name) : [...selected, name])}
+              selected={selected.includes(name)}
+            />
+          ))}
+          <Text style={styles.meta}>{selected.length} selected</Text>
+        </View>
+      );
+    };
+    return <Picker />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A multi-select grid owns which cards are chosen. Each card renders the selected value it is given and reports presses through onPress.',
+      },
+    },
+  },
 };
 
 export const Disabled: Story = {

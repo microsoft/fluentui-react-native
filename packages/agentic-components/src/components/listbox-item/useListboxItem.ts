@@ -33,6 +33,7 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
   } = props;
 
   const isListItem = variant === 'listItem';
+
   const themeState = useThemeState();
   const content = useSlot(Text, contentProp);
   const contentHidden = useOptionalSlot(Text, isListItem && !multiselect ? contentProp : null);

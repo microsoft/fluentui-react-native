@@ -1,5 +1,33 @@
 # Change Log - @fluentui-react-native/dropdown
 
+## 0.11.9
+
+### Patch Changes
+
+- 853f1fd: Moved the location of callout, with links to new location
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [853f1fd]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/callout@0.29.2
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/button@0.40.8
+  - @fluentui-react-native/text@0.25.8
+  - @fluentui-react-native/framework@0.17.2
+  - @fluentui-react-native/adapters@0.15.1
+  - @fluentui-react-native/interactive-hooks@0.28.8
+
+## 0.11.8
+
+### Patch Changes
+
+- Updated dependencies [2cb34bb]
+- Updated dependencies [3405262]
+  - @fluentui-react-native/callout@0.29.1
+
 ## 0.11.7
 
 ### Patch Changes

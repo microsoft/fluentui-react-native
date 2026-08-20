@@ -22,11 +22,15 @@ type CardStateSlots = CardSlots & {
 
 export type CardStateProps = {
   disabled?: boolean;
-  selected?: boolean;
   size?: CardSize;
   padding?: CardPadding;
   layout?: CardLayout;
   direction?: CardDirection;
+  /**
+   * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
+   * owns the value, and the component reports interactions through `onPress` rather than changing it.
+   */
+  selected?: boolean;
 };
 
 export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessibilityRole'> & {
