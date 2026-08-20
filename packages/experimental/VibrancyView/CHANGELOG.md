@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/vibrancy-view
 
+## 0.4.7
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/adapters@0.15.1
+
 ## 0.4.6
 
 ### Patch Changes

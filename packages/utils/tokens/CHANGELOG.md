@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/tokens
 
+## 0.24.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/adapters@0.15.1
+
 ## 0.24.7
 
 ### Patch Changes

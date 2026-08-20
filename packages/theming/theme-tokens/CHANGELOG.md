@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
+## 0.29.2
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/design@0.3.1
+
 ## 0.29.1
 
 ### Patch Changes

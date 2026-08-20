@@ -1,5 +1,23 @@
 # Change Log - @uifabricshared/foundation-compose
 
+## 1.16.8
+
+### Patch Changes
+
+- 853f1fd: Moved the location of callout, with links to new location
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @uifabricshared/foundation-composable@0.15.2
+  - @uifabricshared/foundation-settings@0.16.8
+  - @uifabricshared/foundation-tokens@0.16.8
+  - @uifabricshared/themed-settings@0.13.8
+  - @uifabricshared/theming-ramp@0.21.8
+  - @fluentui-react-native/default-theme@0.27.8
+
 ## 1.16.7
 
 ### Patch Changes

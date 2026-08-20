@@ -1,5 +1,32 @@
 # Change Log - @fluentui/react-native
 
+## 0.44.2
+
+### Patch Changes
+
+- 853f1fd: Moved the location of callout, with links to new location
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [853f1fd]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/contextual-menu@0.25.9
+  - @fluentui-react-native/callout@0.29.2
+  - @fluentui-react-native/button@0.40.8
+  - @fluentui-react-native/checkbox@0.24.8
+  - @fluentui-react-native/focus-trap-zone@0.14.2
+  - @fluentui-react-native/focus-zone@0.23.2
+  - @fluentui-react-native/link@0.24.8
+  - @fluentui-react-native/menu-button@0.15.3
+  - @fluentui-react-native/persona@0.18.2
+  - @fluentui-react-native/persona-coin@0.17.2
+  - @fluentui-react-native/pressable@0.13.8
+  - @fluentui-react-native/radio-group@0.22.8
+  - @fluentui-react-native/separator@0.19.8
+  - @fluentui-react-native/tablist@0.8.8
+  - @fluentui-react-native/text@0.25.8
+  - @fluentui-react-native/interactive-hooks@0.28.8
+
 ## 0.44.1
 
 ### Patch Changes

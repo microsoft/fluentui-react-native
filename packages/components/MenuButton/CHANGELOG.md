@@ -1,5 +1,23 @@
 # Change Log - @fluentui-react-native/menu-button
 
+## 0.15.3
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [853f1fd]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @uifabricshared/foundation-compose@1.16.8
+  - @fluentui-react-native/contextual-menu@0.25.9
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/button@0.40.8
+  - @fluentui-react-native/icon@0.22.8
+  - @uifabricshared/foundation-composable@0.15.2
+  - @uifabricshared/foundation-settings@0.16.8
+  - @fluentui-react-native/tokens@0.24.8
+
 ## 0.15.2
 
 ### Patch Changes

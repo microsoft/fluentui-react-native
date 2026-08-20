@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
+## 0.10.6
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+
 ## 0.10.4
 
 ### Patch Changes

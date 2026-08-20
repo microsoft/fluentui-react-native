@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
+## 0.23.2
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [cbd319c]
+  - @uifabricshared/foundation-composable@0.15.2
+  - @uifabricshared/foundation-settings@0.16.8
+  - @fluentui-react-native/adapters@0.15.1
+  - @fluentui-react-native/interactive-hooks@0.28.8
+
 ## 0.23.1
 
 ### Patch Changes
