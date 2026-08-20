@@ -9,7 +9,7 @@ export { StoryController } from './controller.ts';
 export type { StoryControllerOptions, StoryIndexEntry } from './controller.ts';
 export { createAnnouncement, DESKTOP_SERVICE_ANNOUNCE_EVENT, startServiceAnnouncer } from './announce.ts';
 export type { AnnouncerHandle, AnnouncerOptions, DesktopServiceAnnouncement } from './announce.ts';
-export { digestEntries, findStoryFiles, generateStoryTestManifest, resolveLinkedSpec } from './manifest.ts';
+export { digestEntries, findStoryFiles, generateStoryTestManifest, resolveLinkedSpec, validateStoryTestManifest } from './manifest.ts';
 export type { GenerateManifestOptions } from './manifest.ts';
 export { emitGeneratedStorySpec, verifyLinkedSpecTags } from './generated-spec.ts';
 export type { EmitGeneratedSpecOptions } from './generated-spec.ts';

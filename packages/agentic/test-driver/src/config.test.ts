@@ -34,6 +34,15 @@ describe('desktop driver configuration', () => {
     );
   });
 
+  it('requires an identity-pinned macOS attach target', () => {
+    expect(() => resolveDesktopOptions({ platform: 'macos', target: { mode: 'attach', processId: 42 } })).toThrow(
+      /macOS attach requires identity/,
+    );
+    expect(() =>
+      resolveDesktopOptions({ platform: 'macos', target: { mode: 'attach', identity: 'com.example.Sample', title: 'Sample' } }),
+    ).toThrow(/does not support processId, windowHandle, or title/);
+  });
+
   it('ranks attach identities so exact handles win over fuzzy ones', () => {
     const order = attachIdentityPrecedence({ mode: 'attach', title: 'Storybook', identity: 'com.example', processId: 42 });
     expect(order).toEqual(['processId', 'identity', 'title']);
@@ -154,5 +163,56 @@ describe('capability mapping', () => {
       }),
     );
     expect(capabilities['appium:appArguments']).toBe('--custom');
+  });
+
+  it.each([
+    {
+      name: 'Mac2 app termination',
+      options: { platform: 'macos', target: { mode: 'attach', identity: 'com.example.Sample' } } as const,
+      capability: { 'appium:skipAppKill': false },
+    },
+    {
+      name: 'Windows app termination',
+      options: { platform: 'windows', target: { mode: 'attach', windowHandle: '0x1234' } } as const,
+      capability: { 'ms:forcequit': true },
+    },
+    {
+      name: 'NovaWindows app termination',
+      options: {
+        platform: 'windows',
+        backend: 'novawindows',
+        target: { mode: 'attach', windowHandle: '0x1234' },
+      } as const,
+      capability: { 'appium:shouldCloseApp': true },
+    },
+    {
+      name: 'attached window routing',
+      options: { platform: 'windows', target: { mode: 'attach', windowHandle: '0x1234' } } as const,
+      capability: { 'appium:app': 'OtherApp' },
+    },
+  ])('rejects an unsafe $name capability override', ({ options, capability }) => {
+    expect(() => buildCapabilities(resolveDesktopOptions({ ...options, backendCapabilities: capability }))).toThrow(
+      /cannot override attach ownership or routing/,
+    );
+  });
+
+  it('allows a protected capability override when it preserves the generated value', () => {
+    const capabilities = buildCapabilities(
+      resolveDesktopOptions({
+        platform: 'windows',
+        target: { mode: 'attach', windowHandle: '0x1234' },
+        backendCapabilities: { 'ms:forcequit': false },
+      }),
+    );
+    expect(capabilities['ms:forcequit']).toBe(false);
+  });
+
+  it('protects root-session routing from backend overrides', () => {
+    const options = resolveDesktopOptions({
+      platform: 'windows',
+      target: { mode: 'attach', title: 'Storybook' },
+      backendCapabilities: { 'appium:app': 'OtherApp' },
+    });
+    expect(() => buildRootSessionCapabilities(options)).toThrow(/cannot override attach ownership or routing/);
   });
 });

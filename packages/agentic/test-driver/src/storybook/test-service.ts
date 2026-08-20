@@ -35,12 +35,15 @@ export interface DesktopTestServiceOptions {
   port?: number;
   /** Overrides the generated per-boot token. Only used by tests. */
   token?: string;
+  /** Maximum time to await cancelled runners during shutdown. Defaults to 10000. */
+  shutdownTimeoutMs?: number;
 }
 
 interface RunRecord {
   status: DesktopServiceRunStatus;
   controller: AbortController;
   subscribers: Set<http.ServerResponse>;
+  completion?: Promise<void>;
 }
 
 const LOOPBACK_HOSTS = new Set(['127.0.0.1', '::1', 'localhost']);
@@ -51,6 +54,7 @@ export class DesktopTestService {
   private readonly host: string;
   private readonly requestedPort: number;
   readonly token: string;
+  private readonly shutdownTimeoutMs: number;
 
   private server?: http.Server;
   private boundPort = 0;
@@ -63,6 +67,7 @@ export class DesktopTestService {
     this.host = options.host ?? '127.0.0.1';
     this.requestedPort = options.port ?? 7017;
     this.token = options.token ?? crypto.randomBytes(24).toString('base64url');
+    this.shutdownTimeoutMs = options.shutdownTimeoutMs ?? 10_000;
 
     if (!LOOPBACK_HOSTS.has(this.host)) {
       throw new DesktopDriverError(`The desktop test service refuses to bind to non-loopback address "${this.host}"`, {
@@ -90,21 +95,39 @@ export class DesktopTestService {
   }
 
   async stop(): Promise<void> {
+    const completions: Promise<void>[] = [];
     for (const run of this.runs.values()) {
       run.controller.abort();
+      if (run.completion) {
+        completions.push(run.completion);
+      }
       for (const subscriber of run.subscribers) {
         subscriber.end();
+      }
+    }
+    let shutdownFailure: unknown;
+    if (completions.length > 0) {
+      try {
+        await withTimeout(Promise.allSettled(completions), this.shutdownTimeoutMs);
+      } catch (error) {
+        shutdownFailure = error;
       }
     }
     const server = this.server;
     this.server = undefined;
     if (!server) {
+      if (shutdownFailure) {
+        throw shutdownFailure;
+      }
       return;
     }
     await new Promise<void>((resolve, reject) => {
       server.close((error) => (error ? reject(error) : resolve()));
       server.closeAllConnections();
     });
+    if (shutdownFailure) {
+      throw shutdownFailure;
+    }
   }
 
   private authorized(request: http.IncomingMessage): boolean {
@@ -245,7 +268,7 @@ export class DesktopTestService {
       this.runs.set(runId, record);
 
       send(response, 202, record.status);
-      void this.runInBackground(record, storyIds);
+      record.completion = this.runInBackground(record, storyIds);
     } finally {
       // The slot stays reserved only for a run that actually started.
       if (!this.runs.has(runId)) {
@@ -321,6 +344,29 @@ export class DesktopTestService {
     }
     response.end();
   }
+}
+
+function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => {
+      reject(
+        new DesktopDriverError(`Desktop test service shutdown exceeded ${timeoutMs}ms while awaiting active runners`, {
+          kind: 'lifecycle',
+        }),
+      );
+    }, timeoutMs);
+    timer.unref();
+    promise.then(
+      (value) => {
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (error) => {
+        clearTimeout(timer);
+        reject(error);
+      },
+    );
+  });
 }
 
 /**

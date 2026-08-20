@@ -48,6 +48,17 @@ describe('lifecycle state machine', () => {
     expect(lifecycle.events().at(-1)?.type).toBe('crashObserved');
   });
 
+  it('makes monitor failure terminal and preserves its reason', () => {
+    const lifecycle = new DesktopLifecycle({ platform: 'windows', ownership: 'self' });
+    lifecycle.advance('starting', 'launchRequested');
+    lifecycle.advance('connected', 'webDriverSessionCreated');
+    lifecycle.observeExit('monitorFailure', { processId: 42 });
+
+    expect(lifecycle.current).toBe('crashed');
+    expect(lifecycle.reason).toBe('monitorFailure');
+    expect(lifecycle.events().at(-1)?.type).toBe('monitorError');
+  });
+
   it('bounds the retained event history', () => {
     const lifecycle = new DesktopLifecycle({ platform: 'fake', ownership: 'self', historyLimit: 3 });
     for (let index = 0; index < 10; index += 1) {

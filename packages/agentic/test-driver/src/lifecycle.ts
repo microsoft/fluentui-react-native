@@ -137,6 +137,13 @@ export class DesktopLifecycle {
    * gone" fail a test very differently: a requested shutdown is expected, a crash is not.
    */
   observeExit(reason: DesktopExitReason, detail?: Record<string, unknown>): DesktopLifecycleEvent {
+    if (isTerminalState(this.state)) {
+      return this.emit(reason === 'monitorFailure' ? 'monitorError' : 'exitObserved', {
+        ...detail,
+        reason,
+        duplicate: true,
+      });
+    }
     this.exitReason = reason;
     switch (reason) {
       case 'requestedShutdown':
@@ -151,6 +158,7 @@ export class DesktopLifecycle {
         return this.emit('crashObserved', { ...detail, reason });
       case 'monitorFailure':
       default:
+        this.transition('crashed');
         return this.emit('monitorError', { ...detail, reason });
     }
   }

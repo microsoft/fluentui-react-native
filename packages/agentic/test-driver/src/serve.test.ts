@@ -14,6 +14,7 @@ import * as path from 'node:path';
 import { buildInvocation, createWebdriverIoRunExecutor, resolveRunnerCommand } from './storybook/run-executor.ts';
 import { createAnnouncement, DESKTOP_SERVICE_ANNOUNCE_EVENT, startServiceAnnouncer } from './storybook/announce.ts';
 import { loadStoryTestManifest } from './storybook/serve.ts';
+import { digestEntries } from './storybook/manifest.ts';
 import { StoryController } from './storybook/controller.ts';
 import { DesktopCancelledError, DesktopValidationError } from './errors.ts';
 import type { StoryTestManifest } from './types.ts';
@@ -35,6 +36,7 @@ const manifest: StoryTestManifest = {
     },
   ],
 };
+manifest.digest = digestEntries(manifest.entries);
 
 const runner = { command: 'yarn', args: ['wdio', 'run', 'wdio.conf.ts'], cwd: '/repo' };
 
@@ -43,6 +45,7 @@ class FakeChild extends EventEmitter {
   stdout = new EventEmitter();
   stderr = new EventEmitter();
   killed = false;
+  pid = 42;
   kill(): boolean {
     this.killed = true;
     return true;
@@ -101,7 +104,11 @@ describe('runner command resolution', () => {
 });
 
 describe('run executor', () => {
-  function createExecutor(behaviour: (child: FakeChild) => void, platform: NodeJS.Platform = 'darwin') {
+  function createExecutor(
+    behaviour: (child: FakeChild) => void,
+    platform: NodeJS.Platform = 'darwin',
+    terminateProcess?: () => Promise<void>,
+  ) {
     const calls: { command: string; args: readonly string[]; options?: { windowsVerbatimArguments?: boolean } }[] = [];
     const spawnImpl = ((command: string, args: readonly string[], options?: { windowsVerbatimArguments?: boolean }) => {
       calls.push({ command, args, options });
@@ -111,7 +118,7 @@ describe('run executor', () => {
     }) as never;
 
     // The platform is pinned so the assertions below describe the executor, not the host.
-    return { calls, execute: createWebdriverIoRunExecutor({ manifest, runner, spawnImpl, platform }) };
+    return { calls, execute: createWebdriverIoRunExecutor({ manifest, runner, spawnImpl, platform, terminateProcess }) };
   }
 
   it('passes a story when the runner exits zero', async () => {
@@ -170,6 +177,45 @@ describe('run executor', () => {
     controller.abort();
 
     await expect(execute(['components-button--default'], () => undefined, controller.signal)).rejects.toBeInstanceOf(DesktopCancelledError);
+  });
+
+  it('awaits process-tree termination when cancelled during a run', async () => {
+    let child: FakeChild | undefined;
+    let finishTermination: (() => void) | undefined;
+    const terminateProcess = jest.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          finishTermination = resolve;
+        }),
+    );
+    const executor = createExecutor(
+      (spawned) => {
+        child = spawned;
+      },
+      'win32',
+      terminateProcess,
+    );
+    const controller = new AbortController();
+    const running = executor.execute(['components-button--default'], () => undefined, controller.signal);
+    await new Promise((resolve) => setTimeout(resolve, 1));
+    controller.abort();
+    child?.emit('exit', null, 'SIGTERM');
+
+    let settled = false;
+    void running.then(
+      () => {
+        settled = true;
+      },
+      () => {
+        settled = true;
+      },
+    );
+    await new Promise((resolve) => setTimeout(resolve, 1));
+    expect(settled).toBe(false);
+    finishTermination?.();
+
+    await expect(running).rejects.toBeInstanceOf(DesktopCancelledError);
+    expect(terminateProcess).toHaveBeenCalledWith(expect.objectContaining({ pid: 42, platform: 'win32', processGroup: false }));
   });
 
   it('never lets a requested id reach the command line', async () => {

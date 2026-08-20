@@ -152,7 +152,15 @@ type DesktopAppTarget =
 Only `launch` permits automatic termination. `attach` requires at least one identity; process id
 and native window handle are exact, while identity and title are queries that must be rejected
 when they match ambiguously. Cleanup resolves the exact process ids and ports recorded in the
-run's `ownership.json`; it never kills by process name.
+run's `ownership.json`; it never kills by process name. Cleanup uses a bounded, PID-targeted
+process-tree supervisor: graceful shutdown is attempted first, then the owned tree is force-stopped
+if it does not exit within the deadline.
+
+Mac2 attach currently requires `identity` (the bundle identifier). PID, title, and native-window
+selectors are rejected on macOS until a verified Mac2 discovery path exists. Backend capability
+overrides remain available for tuning, but they cannot replace attach ownership or routing values
+such as `appium:skipAppKill`, `ms:forcequit`, `appium:shouldCloseApp`, `appium:app`, or
+`appium:appTopLevelWindow`.
 
 ### Attach-mode window discovery
 
@@ -229,13 +237,16 @@ export const RichInteraction = {
 generation needs no running application. It emits:
 
 - `story-tests.manifest.json` — story id, `[story:<id>]` tag, resolved spec path, exact Mocha
-  grep, and a digest of the executable content; and
+  grep, and a digest of the executable content, including the bytes of every linked spec; and
 - `story-plans.generated.spec.ts` — one tagged Mocha test per inline plan.
 
 The inline plan schema is closed: only the listed actions exist, only a `testID` may address an
 element, and a linked spec is a relative path resolved inside configured roots. Nothing in a plan
-can express arbitrary JavaScript, and generation fails when a linked spec is missing its story
-tag or when two stories claim the same plan id.
+can express arbitrary JavaScript. Generation fails for missing or unreadable roots, no tested
+stories, duplicate plan or Storybook ids, malformed story source, hidden `desktopTest` parameters,
+or a linked spec without a runnable tagged suite. Outputs are replaced atomically only after those
+checks pass. Manifest consumers recompute the digest, so changed linked code or a tampered manifest
+cannot silently pass the portability gate.
 
 ## Loopback test service
 
@@ -282,7 +293,7 @@ from the application.
 | `POST /v1/runs`            | Start a current-story, selected-story, or all-story run |
 | `GET /v1/runs/:id`         | Structured status                                       |
 | `GET /v1/runs/:id/events`  | Server-sent progress                                    |
-| `POST /v1/runs/:id/cancel` | Cooperative cancellation                                |
+| `POST /v1/runs/:id/cancel` | Bounded cancellation of the owned runner process tree   |
 
 ## Artifacts
 

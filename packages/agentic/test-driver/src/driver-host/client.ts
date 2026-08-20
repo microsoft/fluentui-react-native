@@ -15,6 +15,7 @@ import { DesktopDriverError } from '../errors.ts';
 import { allocatePort } from '../net.ts';
 import { DESKTOP_PROTOCOL_VERSION } from '../protocol.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
+import { terminateProcessTree } from '../process-supervisor.ts';
 import type { DesktopBackendId, DesktopFakeScene, DriverHostHealth } from '../types.ts';
 import type { DriverHostConfigFile } from './host-main.ts';
 
@@ -34,7 +35,15 @@ export interface DriverHostHandle {
   pid: number;
   port: number;
   logFile?: string;
+  /** Subscribes to host termination after startup. */
+  onExit(listener: (event: DriverHostExit) => void): () => void;
   stop(): Promise<void>;
+}
+
+export interface DriverHostExit {
+  code: number | null;
+  signal: NodeJS.Signals | null;
+  error?: Error;
 }
 
 /** Resolves the host entry next to this module, in either source or built form. */
@@ -100,7 +109,8 @@ export async function startDriverHost(options: StartDriverHostOptions): Promise<
   const logStream = fs.createWriteStream(logFile, { flags: 'a' });
 
   const child = spawn(process.execPath, [resolveHostEntry(), configFile], {
-    stdio: ['ignore', 'pipe', 'pipe'],
+    stdio: ['ignore', 'pipe', 'pipe', 'ipc'],
+    detached: process.platform !== 'win32',
     env: { ...process.env, NODE_NO_WARNINGS: '1', NODE_OPTIONS: sanitizeNodeOptions(process.env.NODE_OPTIONS) },
   });
 
@@ -109,12 +119,32 @@ export async function startDriverHost(options: StartDriverHostOptions): Promise<
     logStream.end();
     throw error;
   });
+  const exitListeners = new Set<(event: DriverHostExit) => void>();
+  let exitEvent: DriverHostExit | undefined;
+  const publishExit = (event: DriverHostExit): void => {
+    if (exitEvent) {
+      return;
+    }
+    exitEvent = event;
+    for (const listener of exitListeners) {
+      listener(event);
+    }
+  };
+  child.once('error', (error) => publishExit({ code: child.exitCode, signal: child.signalCode, error }));
+  child.once('exit', (code, signal) => publishExit({ code, signal }));
 
   return {
     health,
     pid: child.pid ?? -1,
     port,
     logFile,
+    onExit: (listener) => {
+      exitListeners.add(listener);
+      if (exitEvent) {
+        listener(exitEvent);
+      }
+      return () => exitListeners.delete(listener);
+    },
     stop: async () => {
       await stopChild(child);
       logStream.end();
@@ -231,16 +261,58 @@ async function stopChild(child: ChildProcess): Promise<void> {
   if (child.exitCode !== null || child.signalCode !== null) {
     return;
   }
-  await new Promise<void>((resolve) => {
-    const timer = setTimeout(() => {
-      child.kill('SIGKILL');
-      resolve();
-    }, 5000);
-    timer.unref();
-    child.once('exit', () => {
-      clearTimeout(timer);
-      resolve();
-    });
+  const pid = child.pid;
+  if (!pid) {
+    throw new DesktopDriverError('Cannot stop driver host because it has no process id', { kind: 'driverHost' });
+  }
+  await terminateProcessTree({
+    pid,
+    processGroup: process.platform !== 'win32',
+    gracefulShutdown: () => requestHostShutdown(child),
+  });
+}
+
+function requestHostShutdown(child: ChildProcess): Promise<void> {
+  if (!child.connected) {
     child.kill('SIGTERM');
+    return Promise.resolve();
+  }
+  return new Promise((resolve, reject) => {
+    const cleanup = (): void => {
+      child.off('message', onMessage);
+      child.off('exit', onExit);
+    };
+    const onMessage = (message: unknown): void => {
+      const result = message as { type?: string; ok?: boolean; message?: string };
+      if (result.type !== 'desktop-driver-host/stopped') {
+        return;
+      }
+      cleanup();
+      if (result.ok) {
+        resolve();
+      } else {
+        reject(new DesktopDriverError(`Driver host cleanup failed: ${result.message ?? 'unknown error'}`, { kind: 'driverHost' }));
+      }
+    };
+    const onExit = (code: number | null, signal: NodeJS.Signals | null): void => {
+      cleanup();
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(
+          new DesktopDriverError(`Driver host exited during cleanup (code ${String(code)}, signal ${String(signal)})`, {
+            kind: 'driverHost',
+          }),
+        );
+      }
+    };
+    child.on('message', onMessage);
+    child.once('exit', onExit);
+    child.send({ type: 'desktop-driver-host/shutdown' }, (error) => {
+      if (error) {
+        cleanup();
+        reject(new DesktopDriverError('Failed to request driver host shutdown', { kind: 'driverHost', cause: error }));
+      }
+    });
   });
 }

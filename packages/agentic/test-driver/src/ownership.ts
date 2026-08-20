@@ -10,6 +10,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 import { DesktopDriverError } from './errors.ts';
+import { isProcessAlive, terminateProcessTree } from './process-supervisor.ts';
 import type { DesktopOwnedResource, DesktopOwnership } from './types.ts';
 
 export interface OwnershipManifestData {
@@ -82,24 +83,9 @@ export class OwnershipManifest {
 
     for (const pid of pids) {
       try {
-        if (isAlive(pid)) {
-          process.kill(pid, 'SIGTERM');
-        }
+        await terminateProcessTree({ pid, gracePeriodMs });
       } catch (error) {
-        failures.push(new DesktopDriverError(`Failed to signal owned process ${pid}`, { kind: 'ownership', cause: error }));
-      }
-    }
-
-    const deadline = Date.now() + gracePeriodMs;
-    while (Date.now() < deadline && pids.some((pid) => isAlive(pid))) {
-      await delay(100);
-    }
-
-    for (const pid of pids.filter((candidate) => isAlive(candidate))) {
-      try {
-        process.kill(pid, 'SIGKILL');
-      } catch (error) {
-        failures.push(new DesktopDriverError(`Failed to force-stop owned process ${pid}`, { kind: 'ownership', cause: error }));
+        failures.push(new DesktopDriverError(`Failed to terminate owned process tree ${pid}`, { kind: 'ownership', cause: error }));
       }
     }
 
@@ -109,16 +95,5 @@ export class OwnershipManifest {
 
 /** Returns true when a process id currently exists and is signalable. */
 export function isAlive(pid: number): boolean {
-  try {
-    process.kill(pid, 0);
-    return true;
-  } catch (error) {
-    return (error as NodeJS.ErrnoException).code === 'EPERM';
-  }
-}
-
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
+  return isProcessAlive(pid);
 }

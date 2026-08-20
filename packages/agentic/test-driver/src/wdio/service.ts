@@ -14,7 +14,7 @@ import { ArtifactStore } from '../artifacts.ts';
 import { buildCapabilities, buildRootSessionCapabilities } from './capability-map.ts';
 import { attachDesktopCommands, type DesktopBrowserLike } from './commands.ts';
 import { DesktopLifecycle } from '../lifecycle.ts';
-import { OwnershipManifest } from '../ownership.ts';
+import { isAlive, OwnershipManifest } from '../ownership.ts';
 import { resolveDesktopOptions } from '../config.ts';
 import { StoryController } from '../storybook/controller.ts';
 import { appendCleanupFailure, DesktopDriverError } from '../errors.ts';
@@ -51,6 +51,9 @@ export interface PublishedEndpoint {
   runId: string;
   artifactsDirectory: string;
   driverHostLog?: string;
+  driverHostPid?: number;
+  /** Application process observed during attach-mode discovery. */
+  appProcessId?: number;
   specDigest?: string;
   /** Native window handle resolved from an attach target, when the backend needs one. */
   windowHandle?: string;
@@ -92,6 +95,7 @@ export class DesktopDriverService {
   private artifacts?: ArtifactStore;
   private browser?: DesktopBrowserLike;
   private endpoint?: PublishedEndpoint;
+  private stopMonitor?: () => void;
 
   constructor(serviceOptions: DesktopServiceOptions) {
     this.options = resolveDesktopOptions(serviceOptions);
@@ -158,6 +162,8 @@ export class DesktopDriverService {
       runId: artifacts.runId,
       artifactsDirectory: this.options.artifactsDirectory,
       driverHostLog: this.host.logFile,
+      driverHostPid: this.host.pid,
+      appProcessId: window?.candidate.processId,
       specDigest: typeof config.desktopSpecDigest === 'string' ? config.desktopSpecDigest : this.specDigest,
       windowHandle: window?.candidate.handle,
       windowMatch: window
@@ -267,6 +273,9 @@ export class DesktopDriverService {
       mode: this.options.target.mode,
     });
     this.lifecycle.emit('driverHostStarted', { url: `http://${endpoint.hostname}:${endpoint.port}` });
+    if (endpoint.appProcessId !== undefined) {
+      this.lifecycle.emit('processStarted', { observed: true, mode: this.options.target.mode }, { processId: endpoint.appProcessId });
+    }
     if (endpoint.windowHandle) {
       this.lifecycle.emit(
         'windowDiscovered',
@@ -280,6 +289,7 @@ export class DesktopDriverService {
       );
     }
     this.lifecycle.advance('connected', 'webDriverSessionCreated', undefined, { sessionId: browser.sessionId });
+    this.startLivenessMonitor(endpoint);
 
     const storyController = new StoryController({
       baseUrl: endpoint.storybookUrl ?? `http://${this.options.storybook.host}:${this.options.storybook.port}`,
@@ -296,15 +306,38 @@ export class DesktopDriverService {
     });
 
     await this.waitForReadiness(browser, storyController);
+    this.throwIfTerminatedBeforeReady();
     this.lifecycle.advance('ready', 'ready');
   }
 
   private async waitForReadiness(browser: DesktopBrowserLike, storyController: StoryController): Promise<void> {
     const deadline = Date.now() + this.options.readiness.timeout;
 
+    if (this.options.readiness.requireWindow) {
+      let observed = this.options.platform === 'fake' || Boolean(this.endpoint?.windowHandle);
+      while (Date.now() < deadline && !observed) {
+        this.throwIfTerminatedBeforeReady();
+        if (!browser.getWindowHandles) {
+          throw new DesktopDriverError('The connected backend cannot verify the required application window', {
+            kind: 'capability',
+          });
+        }
+        observed = (await browser.getWindowHandles().catch(() => [])).length > 0;
+        if (!observed) {
+          await new Promise((resolve) => setTimeout(resolve, 250));
+        }
+      }
+      if (!observed) {
+        throw new DesktopDriverError('No application window was observed within the readiness budget', {
+          kind: 'lifecycle',
+        });
+      }
+    }
+
     if (this.options.readiness.requireStorybookChannel) {
       let connected = false;
       while (Date.now() < deadline && !connected) {
+        this.throwIfTerminatedBeforeReady();
         connected = await storyController.isConnected();
         if (!connected) {
           await new Promise((resolve) => setTimeout(resolve, 250));
@@ -318,6 +351,7 @@ export class DesktopDriverService {
     }
 
     if (this.options.readiness.requireTestId) {
+      this.throwIfTerminatedBeforeReady();
       const element = await browser.$(`~${this.options.readiness.requireTestId}`);
       const displayed = await element.waitForDisplayed({ timeout: Math.max(1000, deadline - Date.now()) }).catch(() => false);
       if (!displayed) {
@@ -325,6 +359,43 @@ export class DesktopDriverService {
           kind: 'lifecycle',
         });
       }
+    }
+  }
+
+  private startLivenessMonitor(endpoint: PublishedEndpoint): void {
+    const checks = [
+      endpoint.driverHostPid ? { pid: endpoint.driverHostPid, reason: 'monitorFailure' as const, resource: 'driver host' } : undefined,
+      endpoint.appProcessId ? { pid: endpoint.appProcessId, reason: 'lostProcess' as const, resource: 'application' } : undefined,
+    ].filter((entry): entry is NonNullable<typeof entry> => entry !== undefined);
+    if (checks.length === 0) {
+      return;
+    }
+
+    let stopped = false;
+    const timer = setInterval(() => {
+      if (stopped || this.lifecycle.reason) {
+        return;
+      }
+      for (const check of checks) {
+        if (!isAlive(check.pid)) {
+          this.lifecycle.observeExit(check.reason, { resource: check.resource, processId: check.pid });
+          break;
+        }
+      }
+    }, 250);
+    timer.unref();
+    this.stopMonitor = () => {
+      stopped = true;
+      clearInterval(timer);
+    };
+  }
+
+  private throwIfTerminatedBeforeReady(): void {
+    if (this.lifecycle.reason) {
+      throw new DesktopDriverError(`Application lifecycle ended before readiness: ${this.lifecycle.reason}`, {
+        kind: 'lifecycle',
+        detail: { state: this.lifecycle.current, reason: this.lifecycle.reason },
+      });
     }
   }
 
@@ -339,13 +410,27 @@ export class DesktopDriverService {
       this.storyIds.add(storyId);
     }
 
+    const unexpectedExit = this.unexpectedLifecycleError();
     const testResult: DesktopTestResult = {
       testId: title,
       storyId,
       title,
-      status: result.passed ? 'passed' : 'failed',
+      status: unexpectedExit
+        ? this.lifecycle.reason === 'monitorFailure'
+          ? 'infrastructureError'
+          : 'failed'
+        : result.passed
+          ? 'passed'
+          : 'failed',
       durationMs: result.duration ?? 0,
-      error: result.error ? { message: result.error.message, stack: result.error.stack } : undefined,
+      error: unexpectedExit
+        ? {
+            message: `${result.error?.message ? `${result.error.message}\n` : ''}${unexpectedExit.message}`,
+            stack: result.error?.stack,
+          }
+        : result.error
+          ? { message: result.error.message, stack: result.error.stack }
+          : undefined,
     };
 
     if (!result.passed && this.browser?.desktop) {
@@ -365,10 +450,13 @@ export class DesktopDriverService {
   }
 
   async after(): Promise<void> {
+    this.stopMonitor?.();
+    this.stopMonitor = undefined;
     const artifacts = this.artifacts;
     if (!artifacts || !this.browser) {
       return;
     }
+    const unexpectedExit = this.unexpectedLifecycleError();
     if (!this.lifecycle.reason) {
       this.lifecycle.transition('stopping');
       this.lifecycle.emit('shutdownRequested', { ownership: this.lifecycle.ownership });
@@ -392,6 +480,19 @@ export class DesktopDriverService {
       summary: summarize(this.results),
     });
     await artifacts.close();
+    if (unexpectedExit) {
+      throw unexpectedExit;
+    }
+  }
+
+  private unexpectedLifecycleError(): DesktopDriverError | undefined {
+    if (!this.lifecycle.reason || this.lifecycle.reason === 'requestedShutdown') {
+      return undefined;
+    }
+    return new DesktopDriverError(`Desktop lifecycle ended unexpectedly: ${this.lifecycle.reason}`, {
+      kind: this.lifecycle.reason === 'monitorFailure' ? 'driverHost' : 'lifecycle',
+      detail: { state: this.lifecycle.current, reason: this.lifecycle.reason },
+    });
   }
 }
 
@@ -505,8 +606,18 @@ export async function startDesktopDriver(options: DesktopDriverOptions): Promise
     health: host.health,
     ownedResources: ownership.list(),
     stop: async () => {
-      await host.stop();
-      await ownership.terminateOwnedProcesses();
+      let failure: unknown;
+      try {
+        await host.stop();
+      } catch (error) {
+        failure = error;
+      }
+      for (const cleanupFailure of await ownership.terminateOwnedProcesses()) {
+        failure = appendCleanupFailure(failure, cleanupFailure);
+      }
+      if (failure) {
+        throw failure;
+      }
     },
   };
 }

@@ -10,6 +10,7 @@
 import { spawn as nodeSpawn, type ChildProcess } from 'node:child_process';
 
 import { DesktopCancelledError, DesktopValidationError } from '../errors.ts';
+import { terminateProcessTree } from '../process-supervisor.ts';
 import type { DesktopRunExecutor } from './test-service.ts';
 import type { DesktopTestResult, StoryTestManifest } from '../types.ts';
 
@@ -34,6 +35,8 @@ export interface RunExecutorOptions {
   platform?: NodeJS.Platform;
   /** Receives runner stdout/stderr lines for logging. */
   onOutput?: (chunk: string) => void;
+  /** Injected for tests; defaults to the owned process-tree supervisor. */
+  terminateProcess?: typeof terminateProcessTree;
 }
 
 /**
@@ -113,6 +116,8 @@ export function buildInvocation(
 /** Creates the executor the loopback test service calls for each requested story. */
 export function createWebdriverIoRunExecutor(options: RunExecutorOptions): DesktopRunExecutor {
   const spawnImpl = options.spawnImpl ?? nodeSpawn;
+  const platform = options.platform ?? process.platform;
+  const terminateProcess = options.terminateProcess ?? terminateProcessTree;
 
   const runStory = (storyId: string, signal: AbortSignal): Promise<{ ok: boolean; message?: string }> => {
     const entry = options.manifest.entries.find((candidate) => candidate.storyId === storyId);
@@ -121,7 +126,7 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
       return Promise.resolve({ ok: false, message: `Story "${storyId}" is not in the generated manifest` });
     }
 
-    const invocation = buildInvocation(options.runner, entry, options.platform);
+    const invocation = buildInvocation(options.runner, entry, platform);
 
     return new Promise((resolve) => {
       const child: ChildProcess = spawnImpl(invocation.command, [...invocation.args], {
@@ -129,9 +134,11 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
         env: invocation.env,
         stdio: ['ignore', 'pipe', 'pipe'],
         windowsVerbatimArguments: invocation.windowsVerbatimArguments,
+        detached: platform !== 'win32',
       });
 
       let settled = false;
+      let cancelling = false;
       const finish = (result: { ok: boolean; message?: string }): void => {
         if (settled) {
           return;
@@ -142,7 +149,20 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
       };
 
       function onAbort(): void {
-        child.kill('SIGTERM');
+        cancelling = true;
+        const pid = child.pid;
+        if (!pid) {
+          finish({ ok: false, message: 'Run cancelled before the test runner started' });
+          return;
+        }
+        void terminateProcess({
+          pid,
+          platform,
+          processGroup: platform !== 'win32',
+        }).then(
+          () => finish({ ok: false, message: 'Run cancelled' }),
+          (error: Error) => finish({ ok: false, message: `Run cancellation failed: ${error.message}` }),
+        );
       }
       signal.addEventListener('abort', onAbort, { once: true });
 
@@ -154,8 +174,7 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
       // the service, and 'exit' would never fire, leaving the run reported as running forever.
       child.on('error', (error: Error) => finish({ ok: false, message: `Failed to start the test runner: ${error.message}` }));
       child.on('exit', (code, signalName) => {
-        if (signal.aborted) {
-          finish({ ok: false, message: 'Run cancelled' });
+        if (cancelling) {
           return;
         }
         finish({

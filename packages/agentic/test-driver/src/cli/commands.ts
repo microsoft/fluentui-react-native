@@ -5,11 +5,13 @@
  * every surface produces the same structured result for the same request.
  */
 
+import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 import { availableBackends } from '../driver-host/backends.ts';
 import { missingPortableCommands, PORTABLE_COMMANDS, PORTABLE_COMMAND_SURFACES, portableCommandsFor } from '../capabilities.ts';
 import { defaultBackendFor, resolveDesktopOptions } from '../config.ts';
+import { DesktopValidationError } from '../errors.ts';
 import { emitGeneratedStorySpec, verifyLinkedSpecTags } from '../storybook/generated-spec.ts';
 import { findStoryFiles, generateStoryTestManifest } from '../storybook/manifest.ts';
 import { checkMacosPrerequisites } from '../platforms/macos.ts';
@@ -92,6 +94,10 @@ export function generateStories(options: GenerateStoriesOptions): GenerateStorie
   const outputDirectory = path.resolve(options.outputDirectory);
   const generatedSpecPath = path.join(outputDirectory, 'story-plans.generated.spec.ts');
   const manifestPath = path.join(outputDirectory, 'story-tests.manifest.json');
+  // Remove stale outputs before validation so a failed generation cannot leave an older runnable
+  // manifest looking current.
+  fs.rmSync(generatedSpecPath, { force: true });
+  fs.rmSync(manifestPath, { force: true });
 
   const manifest = generateStoryTestManifest({
     storyFiles: findStoryFiles(storyRoots),
@@ -99,9 +105,13 @@ export function generateStories(options: GenerateStoriesOptions): GenerateStorie
     generatedSpecPath,
   });
 
-  emitGeneratedStorySpec({ manifest, outputPath: generatedSpecPath, manifestPath, packageSpecifier: options.packageSpecifier });
+  const problems = verifyLinkedSpecTags(manifest);
+  if (problems.length > 0) {
+    throw new DesktopValidationError('Invalid linked desktop specs', problems);
+  }
 
-  return { manifest, manifestPath, specPath: generatedSpecPath, problems: verifyLinkedSpecTags(manifest) };
+  emitGeneratedStorySpec({ manifest, outputPath: generatedSpecPath, manifestPath, packageSpecifier: options.packageSpecifier });
+  return { manifest, manifestPath, specPath: generatedSpecPath, problems: [] };
 }
 
 /** Lists the stories a running application reports. */

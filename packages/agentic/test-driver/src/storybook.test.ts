@@ -4,8 +4,9 @@ import * as path from 'node:path';
 
 import { DesktopTestService, secretsMatch } from './storybook/test-service.ts';
 import { emitGeneratedStorySpec, verifyLinkedSpecTags } from './storybook/generated-spec.ts';
-import { generateStoryTestManifest, resolveLinkedSpec } from './storybook/manifest.ts';
+import { findStoryFiles, generateStoryTestManifest, resolveLinkedSpec, validateStoryTestManifest } from './storybook/manifest.ts';
 import { StoryController } from './storybook/controller.ts';
+import { DesktopCancelledError } from './errors.ts';
 import { DESKTOP_PROTOCOL_VERSION } from './protocol.ts';
 
 function workspace(): string {
@@ -86,7 +87,7 @@ describe('story test manifest generation', () => {
     expect(manifest.digest).toMatch(/^[0-9a-f]{64}$/);
   });
 
-  it('produces a stable digest that changes only when a plan changes', () => {
+  it('produces a stable digest that changes when a plan or linked spec changes', () => {
     const root = workspace();
     const storyPath = seedStoryModule(root);
     const options = {
@@ -101,6 +102,11 @@ describe('story test manifest generation', () => {
 
     fs.writeFileSync(storyPath, BUTTON_STORY.replace("equals: 'Pressed'", "equals: 'Tapped'"), 'utf8');
     expect(generateStoryTestManifest(options).digest).not.toBe(first.digest);
+
+    fs.writeFileSync(storyPath, BUTTON_STORY, 'utf8');
+    const restored = generateStoryTestManifest(options);
+    fs.appendFileSync(path.join(root, 'src', 'components', 'button', 'button.desktop.spec.ts'), '// changed\n', 'utf8');
+    expect(generateStoryTestManifest(options).digest).not.toBe(restored.digest);
   });
 
   it('rejects a duplicate plan id across stories', () => {
@@ -115,6 +121,64 @@ describe('story test manifest generation', () => {
         generatedSpecPath: path.join(root, 'generated.spec.ts'),
       }),
     ).toThrow(/Duplicate desktop story-test id/);
+  });
+
+  it('rejects duplicate Storybook ids', () => {
+    const root = workspace();
+    const storyPath = seedStoryModule(root);
+    fs.writeFileSync(
+      storyPath,
+      BUTTON_STORY.replace(
+        "    docs: { description: { story: 'wraps' } },",
+        "    __id: 'components-button--default',\n    docs: { description: { story: 'wraps' } },",
+      ),
+      'utf8',
+    );
+
+    expect(() =>
+      generateStoryTestManifest({
+        storyFiles: [storyPath],
+        specRoots: [path.join(root, 'src')],
+        generatedSpecPath: path.join(root, 'generated.spec.ts'),
+      }),
+    ).toThrow(/Duplicate desktop story id/);
+  });
+
+  it('rejects empty discovery instead of producing a passing no-op suite', () => {
+    const root = workspace();
+    const storyPath = path.join(root, 'empty.stories.tsx');
+    fs.writeFileSync(storyPath, "export default { title: 'Empty' }; export const Default = {};\n", 'utf8');
+    expect(() =>
+      generateStoryTestManifest({ storyFiles: [storyPath], specRoots: [root], generatedSpecPath: path.join(root, 'generated.spec.ts') }),
+    ).toThrow(/No desktop story tests were discovered/);
+  });
+
+  it('rejects invalid source and parameters indirection that can hide desktop tests', () => {
+    const root = workspace();
+    const storyPath = seedStoryModule(root);
+    fs.writeFileSync(
+      storyPath,
+      `
+const sharedParameters = { desktopTest: { kind: 'inline', id: 'hidden', steps: [{ action: 'wait', milliseconds: 1 }] } };
+export default { title: 'Hidden' };
+export const Default = { parameters: sharedParameters };
+`,
+      'utf8',
+    );
+    expect(() =>
+      generateStoryTestManifest({ storyFiles: [storyPath], specRoots: [root], generatedSpecPath: path.join(root, 'generated.spec.ts') }),
+    ).toThrow(/parameters must be an inline object literal/);
+
+    fs.writeFileSync(storyPath, 'export default { title: "Broken" }; export const Default = {', 'utf8');
+    expect(() =>
+      generateStoryTestManifest({ storyFiles: [storyPath], specRoots: [root], generatedSpecPath: path.join(root, 'generated.spec.ts') }),
+    ).toThrow(/Failed to parse story module/);
+  });
+
+  it('fails when a story root is missing or contains no tested stories', () => {
+    const root = workspace();
+    expect(() => findStoryFiles([path.join(root, 'missing')])).toThrow(/Cannot read story root/);
+    expect(findStoryFiles([root])).toEqual([]);
   });
 
   it('rejects a plan that is not a JSON literal', () => {
@@ -182,6 +246,32 @@ describe('story test manifest generation', () => {
     expect(manifest.entries.find((candidate) => candidate.plan.id === 'button-default')?.storyId).toBe('totally--custom');
     expect(manifest.entries.find((candidate) => candidate.plan.id === 'button-long-text')?.storyId).toBe('custom-button--with-long-text');
   });
+
+  it('rejects a manifest whose linked executable content changed', () => {
+    const root = workspace();
+    const storyPath = seedStoryModule(root);
+    const manifest = generateStoryTestManifest({
+      storyFiles: [storyPath],
+      specRoots: [path.join(root, 'src')],
+      generatedSpecPath: path.join(root, 'generated.spec.ts'),
+    });
+    expect(validateStoryTestManifest(manifest, 'memory')).toEqual(manifest);
+
+    fs.appendFileSync(path.join(root, 'src', 'components', 'button', 'button.desktop.spec.ts'), '// tampered\n', 'utf8');
+    expect(() => validateStoryTestManifest(manifest, 'memory')).toThrow(/Stale or tampered/);
+  });
+
+  it('rejects duplicate story ids in a loaded manifest', () => {
+    const root = workspace();
+    const storyPath = seedStoryModule(root);
+    const manifest = generateStoryTestManifest({
+      storyFiles: [storyPath],
+      specRoots: [path.join(root, 'src')],
+      generatedSpecPath: path.join(root, 'generated.spec.ts'),
+    });
+    const duplicate = { ...manifest, entries: [manifest.entries[0], manifest.entries[0]] };
+    expect(() => validateStoryTestManifest(duplicate, 'memory')).toThrow(/Duplicate desktop story id/);
+  });
 });
 
 describe('generated spec emission', () => {
@@ -218,8 +308,29 @@ describe('generated spec emission', () => {
     });
 
     expect(verifyLinkedSpecTags(manifest)).toEqual([
-      expect.stringContaining('does not contain the required suite tag [story:components-button--with-long-text]'),
+      expect.stringContaining('does not declare a runnable suite with the required tag [story:components-button--with-long-text]'),
     ]);
+  });
+
+  it('does not accept a tag in a comment, skipped suite, or suite without a test', () => {
+    const root = workspace();
+    const storyPath = seedStoryModule(root);
+    const spec = path.join(root, 'src', 'components', 'button', 'button.desktop.spec.ts');
+    const manifest = generateStoryTestManifest({
+      storyFiles: [storyPath],
+      specRoots: [path.join(root, 'src')],
+      generatedSpecPath: path.join(root, 'generated.spec.ts'),
+    });
+
+    for (const source of [
+      '// [story:components-button--with-long-text]\n',
+      "describe.skip('[story:components-button--with-long-text]', () => { it('wraps', () => undefined); });\n",
+      "describe('[story:components-button--with-long-text]', () => { describe.skip('disabled', () => { it('wraps', () => undefined); }); });\n",
+      "describe('[story:components-button--with-long-text]', () => {});\n",
+    ]) {
+      fs.writeFileSync(spec, source, 'utf8');
+      expect(verifyLinkedSpecTags(manifest)).toHaveLength(1);
+    }
   });
 });
 
@@ -300,5 +411,28 @@ describe('loopback test service', () => {
     expect(secretsMatch(lookalike, token)).toBe(false);
     expect(secretsMatch('', token)).toBe(false);
     expect(secretsMatch(token, token)).toBe(true);
+  });
+
+  it('awaits an active runner after aborting it during shutdown', async () => {
+    let cleanupFinished = false;
+    const service = new DesktopTestService({
+      manifest,
+      port: 0,
+      token: 'test-token',
+      execute: async (_storyIds, _progress, signal) => {
+        await new Promise<void>((resolve) => signal.addEventListener('abort', () => setTimeout(resolve, 5), { once: true }));
+        cleanupFinished = true;
+        throw new DesktopCancelledError();
+      },
+    });
+    const { url } = await service.start();
+    await fetch(`${url}/v1/runs`, {
+      method: 'POST',
+      headers: { authorization: 'Bearer test-token', 'content-type': 'application/json' },
+      body: JSON.stringify({ protocolVersion: 1, mode: 'all' }),
+    });
+
+    await service.stop();
+    expect(cleanupFinished).toBe(true);
   });
 });

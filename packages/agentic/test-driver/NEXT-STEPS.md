@@ -17,8 +17,9 @@ implementation as release-ready; see §7.3.
 
 - 129 package tests pass, including the portable-command contract suite, the window-discovery
   selection rules, and the doctor probes.
-- `desktop:generate` produces the digest `a28a8ae5…e0e3bf`, **byte-identical to the macOS value**.
-  The current metadata gate holds, but it does not yet hash linked spec contents; see §7.3.
+- Before linked-spec hashing, `desktop:generate` produced `a28a8ae5…e0e3bf` on both platforms. The
+  new macOS executable-content digest is `7067b710…24b92`; regenerate on Windows and compare it
+  before treating portability as proven; see §7.3.
 - `yarn desktop:test:fake` completes a real loopback run: driver-host spawn, W3C HTTP server,
   launcher/worker split, one warm session for the whole suite, `browser.desktop`, artifacts, JUnit.
 - The **real Windows backend runs**. `startAppiumHostedDriver` constructs `WindowsDriver`, spawns
@@ -109,7 +110,7 @@ yarn workspace @fluentui-react-native/desktop-driver lint
 
 cd apps\storybook
 yarn desktop:doctor --platform windows
-yarn desktop:generate                                          # digest a28a8ae5…e0e3bf
+yarn desktop:generate                                          # expect 7067b710…24b92 after P0
 yarn desktop:test:fake                                         # expect 6 passing, one worker
 ```
 
@@ -191,6 +192,15 @@ implementation. Work through this backlog before macOS re-verification so both p
 measured with trustworthy lifecycle, portability, and reporting semantics.
 
 #### P0 — restore safety and eliminate false greens
+
+**Implementation status (2026-08-20):** the code changes below are complete for protected attach
+capabilities, fail-closed platform termination, macOS target validation, linked-spec hashing and
+manifest verification, non-empty/unique/static story discovery, shared-glob enforcement, observed
+driver-host and attached-app liveness, window readiness, bounded PID-tree cancellation, awaited
+service shutdown, and error-preserving cleanup. Focused unit tests and the real Storybook generator
+pass. Remaining proof is platform-specific: re-run Windows cancellation and lifecycle observation,
+verify macOS window readiness and attach behavior, and capture a backend-provided launched-app or
+native-driver PID before claiming complete application-process telemetry.
 
 1. **Make attach ownership fail closed everywhere.**
    - Reserve backend capability keys that control ownership or routing. Reject conflicting
@@ -384,9 +394,9 @@ after **each** story, so a "Run all" looks finished in the console while the nex
 being spawned. The device is the honest indicator — it says `Running… N finished` until the whole
 run resolves, and it updates about a second after the service does.
 
-The second caveat is cleanup: the observed `cancelled` transition proves the service state changed,
-not that the WDIO command-interpreter process tree stopped. P0/P1 in §7.3 must make cancellation
-bounded and verify descendant termination before this is considered complete.
+The second caveat is cleanup: the observed `cancelled` transition predates the bounded process-tree
+supervisor added in P0. Re-run cancellation on Windows and confirm the command interpreter, WDIO,
+driver host, and WinAppDriver descendants all exit before considering the behavioral proof current.
 
 A spawn failure is already covered: the executor's `child.on('error')` handler turns it into a
 reported run, and `serve.test.ts` asserts it. P1 in §7.3 changes its classification from a product
@@ -429,9 +439,9 @@ session manifest; never kill by process name.
   Windows-only, put it in a separate `*.windows.spec.ts` and accept that it does not count toward
   shared coverage.
 - **Elements are addressed only by `testID`**, through `byTestId()`.
-- **Attach must never terminate anything.** This remains the required invariant, but P0 in §7.3
-  records capability and extension paths that do not yet enforce it. Only `mode: 'launch'` may stop
-  a process, and cleanup resolves exact PIDs and ports in `ownership.json` — never a process name.
+- **Attach must never terminate anything.** Protected capability keys and platform termination
+  extensions now enforce this invariant in code. Only `mode: 'launch'` may stop a process, and
+  cleanup resolves exact PIDs and ports in `ownership.json` — never a process name.
 - **An ambiguous attach match is a failure**, never a first-match guess.
 - **The story-plan schema stays closed.** Nothing the device sends may reach a command line, a
   module path, or arbitrary code.

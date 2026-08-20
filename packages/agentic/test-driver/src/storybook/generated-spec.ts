@@ -9,7 +9,10 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
+import { parse } from '@babel/parser';
+
 import { isInlinePlan } from '../story-plan.ts';
+import { DesktopValidationError } from '../errors.ts';
 import type { StoryTestManifest } from '../types.ts';
 
 export interface EmitGeneratedSpecOptions {
@@ -26,9 +29,6 @@ export interface EmitGeneratedSpecOptions {
 export function emitGeneratedStorySpec(options: EmitGeneratedSpecOptions): { specPath: string; manifestPath: string } {
   const packageSpecifier = options.packageSpecifier ?? '@fluentui-react-native/desktop-driver';
   const inlineEntries = options.manifest.entries.filter((entry) => isInlinePlan(entry.plan));
-
-  fs.mkdirSync(path.dirname(options.manifestPath), { recursive: true });
-  fs.writeFileSync(options.manifestPath, `${JSON.stringify(options.manifest, null, 2)}\n`, 'utf8');
 
   const relativeManifest = toModuleSpecifier(path.dirname(options.outputPath), options.manifestPath);
 
@@ -59,14 +59,32 @@ export function emitGeneratedStorySpec(options: EmitGeneratedSpecOptions): { spe
     `import type { InlineStoryPlan } from ${JSON.stringify(packageSpecifier)};`,
     `import { runInlineStoryPlan } from ${JSON.stringify(`${packageSpecifier}/wdio`)};`,
     '',
-    body.length > 0
-      ? body
-      : "describe('[story:none] no inline desktop story plans', () => {\n  it('has nothing to run', () => undefined);\n});",
+    body,
     '',
   ].join('\n');
 
+  fs.mkdirSync(path.dirname(options.manifestPath), { recursive: true });
   fs.mkdirSync(path.dirname(options.outputPath), { recursive: true });
-  fs.writeFileSync(options.outputPath, contents, 'utf8');
+  const nonce = `${process.pid}-${Date.now()}`;
+  const manifestTemporary = `${options.manifestPath}.${nonce}.tmp`;
+  const specTemporary = `${options.outputPath}.${nonce}.tmp`;
+  try {
+    fs.writeFileSync(manifestTemporary, `${JSON.stringify(options.manifest, null, 2)}\n`, 'utf8');
+    fs.writeFileSync(specTemporary, contents, 'utf8');
+    // The manifest is the commit marker: a consumer cannot observe it until the matching spec is
+    // already in place.
+    fs.renameSync(specTemporary, options.outputPath);
+    fs.renameSync(manifestTemporary, options.manifestPath);
+  } catch (error) {
+    for (const temporary of [manifestTemporary, specTemporary]) {
+      try {
+        fs.unlinkSync(temporary);
+      } catch {
+        // The file may already have been renamed or never created.
+      }
+    }
+    throw error;
+  }
 
   return { specPath: options.outputPath, manifestPath: options.manifestPath };
 }
@@ -95,9 +113,69 @@ export function verifyLinkedSpecTags(manifest: StoryTestManifest): readonly stri
       problems.push(`${entry.storyId}: cannot read ${entry.spec} (${(error as Error).message})`);
       continue;
     }
-    if (!contents.includes(entry.tag)) {
-      problems.push(`${entry.storyId}: ${entry.spec} does not contain the required suite tag ${entry.tag}`);
+    if (!hasExecutableTaggedTest(contents, entry.tag, entry.spec)) {
+      problems.push(`${entry.storyId}: ${entry.spec} does not declare a runnable suite with the required tag ${entry.tag}`);
     }
   }
   return problems;
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any -- Babel nodes are traversed structurally */
+function hasExecutableTaggedTest(contents: string, tag: string, file: string): boolean {
+  let ast: any;
+  try {
+    ast = parse(contents, { sourceType: 'module', plugins: ['typescript', 'jsx'], errorRecovery: false });
+  } catch (error) {
+    throw new DesktopValidationError(`Failed to parse linked desktop spec ${file}`, [(error as Error).message]);
+  }
+
+  const calleeName = (callee: any): { name?: string; skipped: boolean } => {
+    if (callee?.type === 'Identifier') {
+      return { name: callee.name, skipped: false };
+    }
+    if (callee?.type === 'MemberExpression' && !callee.computed && callee.object?.type === 'Identifier') {
+      return { name: callee.object.name, skipped: callee.property?.name === 'skip' || callee.property?.name === 'todo' };
+    }
+    return { skipped: false };
+  };
+  const stringValue = (node: any): string | undefined =>
+    node?.type === 'StringLiteral'
+      ? node.value
+      : node?.type === 'TemplateLiteral' && node.expressions.length === 0
+        ? node.quasis[0]?.value.raw
+        : undefined;
+  const containsRunnableTest = (node: any, skippedAncestor = false): boolean => {
+    if (!node || typeof node !== 'object') {
+      return false;
+    }
+    if (node.type === 'CallExpression') {
+      const callee = calleeName(node.callee);
+      if (['describe', 'context', 'suite'].includes(callee.name ?? '')) {
+        return node.arguments.slice(1).some((child: any) => containsRunnableTest(child, skippedAncestor || callee.skipped));
+      }
+      if (!callee.skipped && ['it', 'test', 'specify'].includes(callee.name ?? '')) {
+        return !skippedAncestor;
+      }
+    }
+    return Object.values(node).some((child) =>
+      Array.isArray(child)
+        ? child.some((candidate) => containsRunnableTest(candidate, skippedAncestor))
+        : containsRunnableTest(child, skippedAncestor),
+    );
+  };
+  const findTaggedSuite = (node: any): boolean => {
+    if (!node || typeof node !== 'object') {
+      return false;
+    }
+    if (node.type === 'CallExpression') {
+      const callee = calleeName(node.callee);
+      const title = stringValue(node.arguments?.[0]);
+      if (!callee.skipped && ['describe', 'context', 'suite'].includes(callee.name ?? '') && title?.includes(tag)) {
+        return node.arguments.slice(1).some(containsRunnableTest);
+      }
+    }
+    return Object.values(node).some((child) => (Array.isArray(child) ? child.some(findTaggedSuite) : findTaggedSuite(child)));
+  };
+  return findTaggedSuite(ast.program);
+}
+/* eslint-enable @typescript-eslint/no-explicit-any */

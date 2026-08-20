@@ -115,6 +115,19 @@ export function resolveDesktopOptions(options: DesktopDriverOptions): ResolvedDe
   }
 
   validateAppTarget(options.target, issues);
+  if (
+    platform === 'macos' &&
+    options.target?.mode === 'attach' &&
+    (!isNonEmptyString(options.target.identity) ||
+      options.target.processId !== undefined ||
+      options.target.windowHandle !== undefined ||
+      options.target.title !== undefined)
+  ) {
+    issues.add(
+      'target',
+      'macOS attach requires identity and does not support processId, windowHandle, or title until Mac2 window discovery is implemented',
+    );
+  }
 
   const host = options.host ?? '127.0.0.1';
   if (!LOOPBACK_HOSTS.has(host)) {

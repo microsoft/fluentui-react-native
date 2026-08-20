@@ -32,7 +32,14 @@ export type Mac2ExecuteMethod =
   | 'macos: getClipboard';
 
 /** Invokes a Mac2 execute method. */
-export function macos(browser: DesktopBrowserLike, method: Mac2ExecuteMethod, options: Record<string, unknown> = {}): Promise<unknown> {
+export async function macos(
+  browser: DesktopBrowserLike,
+  method: Mac2ExecuteMethod,
+  options: Record<string, unknown> = {},
+): Promise<unknown> {
+  if (method === 'macos: terminateApp') {
+    await assertSelfOwnership(browser, method);
+  }
   return browser.execute(method, options);
 }
 
@@ -63,12 +70,15 @@ export function checkMacosPrerequisites(): readonly DesktopPrerequisiteStatus[] 
 
 /** Terminates a launched macOS application. Refuses to run for an attached target. */
 export async function terminateLaunchedApp(browser: DesktopBrowserLike, bundleId: string): Promise<void> {
+  await macos(browser, 'macos: terminateApp', { bundleId });
+}
+
+async function assertSelfOwnership(browser: DesktopBrowserLike, method: Mac2ExecuteMethod): Promise<void> {
   const info = await browser.desktop?.getSessionInfo();
-  if (info && info.ownership !== 'self') {
-    throw new DesktopDriverError('Refusing to terminate an application this session attached to but does not own', {
+  if (!info || info.ownership !== 'self') {
+    throw new DesktopDriverError('Refusing to terminate an application without positively observed self ownership', {
       kind: 'ownership',
-      detail: { bundleId },
+      detail: { method },
     });
   }
-  await macos(browser, 'macos: terminateApp', { bundleId });
 }

@@ -117,7 +117,7 @@ function parseModule(file: string): ParsedStoryModule | undefined {
     ast = parse(source, {
       sourceType: 'module',
       plugins: ['typescript', 'jsx'],
-      errorRecovery: true,
+      errorRecovery: false,
     }) as ParseResult<Node>;
   } catch (error) {
     throw new DesktopValidationError(`Failed to parse story module ${file}`, [(error as Error).message]);
@@ -162,6 +162,11 @@ function parseModule(file: string): ParsedStoryModule | undefined {
       const storyObject = unwrap(declarator.init);
       const nameNode = findProperty(storyObject, 'name');
       const parameters = findProperty(storyObject, 'parameters');
+      if (parameters && unwrap(parameters).type !== 'ObjectExpression' && source.includes('desktopTest')) {
+        throw new DesktopValidationError(`Unsupported desktopTest syntax in ${file}`, [
+          `${exportName}.parameters must be an inline object literal when the module declares desktopTest`,
+        ]);
+      }
       const desktopTest = parameters ? findProperty(parameters, 'desktopTest') : undefined;
       const explicitIdNode = parameters ? findProperty(parameters, '__id') : undefined;
 
@@ -203,6 +208,7 @@ export function resolveLinkedSpec(storyPath: string, spec: string, specRoots: re
 export function generateStoryTestManifest(options: GenerateManifestOptions): StoryTestManifest {
   const entries: StoryTestManifestEntry[] = [];
   const seenPlanIds = new Map<string, string>();
+  const seenStoryIds = new Map<string, string>();
 
   for (const storyFile of [...options.storyFiles].sort()) {
     const parsed = parseModule(storyFile);
@@ -218,6 +224,13 @@ export function generateStoryTestManifest(options: GenerateManifestOptions): Sto
       // declared name is display text only. Deriving the id any other way produces a manifest the
       // running application disagrees with.
       const storyId = story.explicitId ?? toStoryId(parsed.metaId ?? parsed.title, storyNameFromExport(story.exportName));
+      const previousStory = seenStoryIds.get(storyId);
+      if (previousStory) {
+        throw new DesktopValidationError('Duplicate desktop story id', [
+          `"${storyId}" is declared by both ${previousStory} and ${storyFile}#${story.exportName}`,
+        ]);
+      }
+      seenStoryIds.set(storyId, `${storyFile}#${story.exportName}`);
       const previous = seenPlanIds.get(story.plan.id);
       if (previous) {
         throw new DesktopValidationError('Duplicate desktop story-test id', [
@@ -240,6 +253,11 @@ export function generateStoryTestManifest(options: GenerateManifestOptions): Sto
   }
 
   entries.sort((left, right) => left.storyId.localeCompare(right.storyId));
+  if (entries.length === 0) {
+    throw new DesktopValidationError('No desktop story tests were discovered', [
+      'at least one story must declare parameters.desktopTest; an empty run cannot pass',
+    ]);
+  }
 
   return {
     version: STORY_PLAN_SCHEMA_VERSION,
@@ -251,19 +269,73 @@ export function generateStoryTestManifest(options: GenerateManifestOptions): Sto
 
 /** Stable digest over the executable content of the manifest, recorded in `run.json`. */
 export function digestEntries(entries: readonly StoryTestManifestEntry[]): string {
-  const normalized = entries.map((entry) => ({ storyId: entry.storyId, tag: entry.tag, plan: entry.plan }));
+  const normalized = entries.map((entry) => ({
+    storyId: entry.storyId,
+    tag: entry.tag,
+    plan: entry.plan,
+    linkedSpecSha256: isSpecPlan(entry.plan) ? hashFile(entry.spec) : undefined,
+  }));
   return crypto.createHash('sha256').update(JSON.stringify(normalized)).digest('hex');
+}
+
+function hashFile(file: string): string {
+  try {
+    return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+  } catch (error) {
+    throw new DesktopValidationError('Cannot hash linked desktop spec', [`${file}: ${(error as Error).message}`]);
+  }
+}
+
+/** Validates a loaded manifest and verifies that its digest still matches executable content. */
+export function validateStoryTestManifest(value: unknown, source: string): StoryTestManifest {
+  if (!value || typeof value !== 'object') {
+    throw new DesktopValidationError('Malformed story-test manifest', [`${source} must contain a JSON object`]);
+  }
+  const manifest = value as Partial<StoryTestManifest>;
+  if (manifest.version !== STORY_PLAN_SCHEMA_VERSION) {
+    throw new DesktopValidationError('Unsupported story-test manifest', [
+      `${source} version ${String(manifest.version)} does not match ${STORY_PLAN_SCHEMA_VERSION}`,
+    ]);
+  }
+  if (!Array.isArray(manifest.entries) || manifest.entries.length === 0) {
+    throw new DesktopValidationError('Malformed story-test manifest', [`${source} entries must be a non-empty array`]);
+  }
+  if (typeof manifest.digest !== 'string' || !/^[0-9a-f]{64}$/.test(manifest.digest)) {
+    throw new DesktopValidationError('Malformed story-test manifest', [`${source} digest must be a SHA-256 hex string`]);
+  }
+
+  const seen = new Set<string>();
+  for (const [index, entry] of manifest.entries.entries()) {
+    if (!entry || typeof entry.storyId !== 'string' || typeof entry.spec !== 'string' || typeof entry.tag !== 'string' || !entry.plan) {
+      throw new DesktopValidationError('Malformed story-test manifest', [`${source} entries[${index}] is incomplete`]);
+    }
+    if (seen.has(entry.storyId)) {
+      throw new DesktopValidationError('Duplicate desktop story id', [`"${entry.storyId}" appears more than once in ${source}`]);
+    }
+    seen.add(entry.storyId);
+  }
+
+  const actual = digestEntries(manifest.entries);
+  if (actual !== manifest.digest) {
+    throw new DesktopValidationError('Stale or tampered story-test manifest', [
+      `${source} digest ${manifest.digest} does not match executable content ${actual}; regenerate the manifest`,
+    ]);
+  }
+  return manifest as StoryTestManifest;
 }
 
 /** Recursively finds `*.stories.ts(x)` modules under the given roots. */
 export function findStoryFiles(roots: readonly string[]): readonly string[] {
+  if (roots.length === 0) {
+    throw new DesktopValidationError('No story roots configured', ['at least one story root is required']);
+  }
   const found: string[] = [];
   const visit = (directory: string): void => {
     let dirents: fs.Dirent[];
     try {
       dirents = fs.readdirSync(directory, { withFileTypes: true });
-    } catch {
-      return;
+    } catch (error) {
+      throw new DesktopValidationError('Cannot read story root', [`${directory}: ${(error as Error).message}`]);
     }
     for (const dirent of dirents) {
       const full = path.join(directory, dirent.name);
@@ -280,7 +352,17 @@ export function findStoryFiles(roots: readonly string[]): readonly string[] {
     }
   };
   for (const root of roots) {
-    visit(path.resolve(root));
+    const resolved = path.resolve(root);
+    let stat: fs.Stats;
+    try {
+      stat = fs.statSync(resolved);
+    } catch (error) {
+      throw new DesktopValidationError('Cannot read story root', [`${resolved}: ${(error as Error).message}`]);
+    }
+    if (!stat.isDirectory()) {
+      throw new DesktopValidationError('Cannot read story root', [`${resolved} is not a directory`]);
+    }
+    visit(resolved);
   }
   return found.sort();
 }

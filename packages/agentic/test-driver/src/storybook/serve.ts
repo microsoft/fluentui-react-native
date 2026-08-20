@@ -17,7 +17,7 @@ import { createWebdriverIoRunExecutor, type DesktopRunnerCommand } from './run-e
 import { DesktopTestService } from './test-service.ts';
 import { DesktopValidationError } from '../errors.ts';
 import { StoryController } from './controller.ts';
-import { STORY_PLAN_SCHEMA_VERSION } from '../protocol.ts';
+import { validateStoryTestManifest } from './manifest.ts';
 import type { StoryTestManifest } from '../types.ts';
 
 export interface DesktopTestServerOptions {
@@ -51,16 +51,13 @@ export function loadStoryTestManifest(manifestPath: string): StoryTestManifest {
       `${resolved} does not exist; run "desktop-driver stories generate" first`,
     ]);
   }
-  const manifest = JSON.parse(fs.readFileSync(resolved, 'utf8')) as StoryTestManifest;
-  if (manifest.version !== STORY_PLAN_SCHEMA_VERSION) {
-    throw new DesktopValidationError('Unsupported story-test manifest', [
-      `version ${String(manifest.version)} does not match ${STORY_PLAN_SCHEMA_VERSION}`,
-    ]);
+  let value: unknown;
+  try {
+    value = JSON.parse(fs.readFileSync(resolved, 'utf8'));
+  } catch (error) {
+    throw new DesktopValidationError('Malformed story-test manifest', [`${resolved}: ${(error as Error).message}`]);
   }
-  if (!Array.isArray(manifest.entries)) {
-    throw new DesktopValidationError('Malformed story-test manifest', ['entries must be an array']);
-  }
-  return manifest;
+  return validateStoryTestManifest(value, resolved);
 }
 
 /** Starts the desktop test server and announces it to the running application. */

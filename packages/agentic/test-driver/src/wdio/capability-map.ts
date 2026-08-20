@@ -13,6 +13,7 @@
  */
 
 import { attachIdentityPrecedence } from '../config.ts';
+import { DesktopValidationError } from '../errors.ts';
 import { normalizeWindowHandle } from './window-discovery.ts';
 import type { DesktopAppTarget, ResolvedDesktopDriverOptions } from '../types.ts';
 
@@ -46,6 +47,7 @@ export function buildCapabilities(options: ResolvedDesktopDriverOptions, overrid
   }
 
   base['appium:newCommandTimeout'] = 0;
+  assertSafeCapabilityOverrides(options, base, overrides);
   return { ...base, ...options.backendCapabilities };
 }
 
@@ -127,6 +129,46 @@ function windowsCapabilities(
     capabilities['appium:app'] = 'Root';
   }
   return capabilities;
+}
+
+function assertSafeCapabilityOverrides(
+  options: ResolvedDesktopDriverOptions,
+  generated: Readonly<Record<string, unknown>>,
+  overrides: CapabilityOverrides,
+): void {
+  const protectedKeys = new Set<string>();
+
+  if (options.target.mode === 'attach') {
+    if (options.backend === 'mac2') {
+      protectedKeys.add('appium:noReset');
+      protectedKeys.add('appium:skipAppKill');
+      protectedKeys.add('appium:bundleId');
+      protectedKeys.add('appium:appPath');
+    } else if (options.backend === 'windows') {
+      protectedKeys.add('ms:forcequit');
+      protectedKeys.add('appium:app');
+      protectedKeys.add('appium:appTopLevelWindow');
+    } else if (options.backend === 'novawindows') {
+      protectedKeys.add('appium:shouldCloseApp');
+      protectedKeys.add('appium:app');
+      protectedKeys.add('appium:appTopLevelWindow');
+    }
+  }
+
+  if (overrides.rootSession) {
+    protectedKeys.add('appium:app');
+    protectedKeys.add('appium:appTopLevelWindow');
+  }
+
+  const conflicts = [...protectedKeys].filter(
+    (key) => key in options.backendCapabilities && options.backendCapabilities[key] !== generated[key],
+  );
+  if (conflicts.length > 0) {
+    throw new DesktopValidationError(
+      'Backend capabilities cannot override attach ownership or routing',
+      conflicts.map((key) => `backendCapabilities.${key} conflicts with the protected value`),
+    );
+  }
 }
 
 /**

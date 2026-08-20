@@ -48,12 +48,27 @@ export function windows(
   options: WindowsExecuteOptions = {},
 ): Promise<unknown> {
   if (DISABLED_BY_DEFAULT.has(method) && !options.allowUnsafe) {
-    throw new DesktopDriverError(`"${method}" is disabled by default because it grants arbitrary local execution`, {
-      kind: 'capability',
+    return Promise.reject(
+      new DesktopDriverError(`"${method}" is disabled by default because it grants arbitrary local execution`, {
+        kind: 'capability',
+        detail: { method },
+      }),
+    );
+  }
+  if (method === 'windows: closeApp') {
+    return assertSelfOwnership(browser, method).then(() => browser.execute(method, args));
+  }
+  return browser.execute(method, args);
+}
+
+async function assertSelfOwnership(browser: DesktopBrowserLike, method: WindowsExecuteMethod): Promise<void> {
+  const info = await browser.desktop?.getSessionInfo();
+  if (!info || info.ownership !== 'self') {
+    throw new DesktopDriverError(`Refusing to invoke "${method}" without positively observed self ownership`, {
+      kind: 'ownership',
       detail: { method },
     });
   }
-  return browser.execute(method, args);
 }
 
 /** Prerequisites `desktop-driver doctor` checks before a Windows run. */

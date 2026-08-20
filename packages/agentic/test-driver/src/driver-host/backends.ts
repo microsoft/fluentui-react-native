@@ -13,6 +13,7 @@
 
 import { createFakeRoutes, FakeDriver, loadFakeScene } from './fake-driver.ts';
 import { startW3CServer, type RouteDefinition, type W3CServerHandle } from './w3c-server.ts';
+import { appendCleanupFailure } from '../errors.ts';
 import type { DesktopBackendId, DesktopFakeScene } from '../types.ts';
 
 export interface BackendStartOptions {
@@ -52,10 +53,23 @@ async function startAppiumHostedDriver(options: BackendStartOptions): Promise<Ba
   return {
     server: { url, port: options.port, close: () => hosted.close() },
     stop: async () => {
-      await hosted.close();
-      const deleteSession = (driver as { deleteSession?: () => Promise<void> }).deleteSession;
-      if (typeof deleteSession === 'function') {
-        await deleteSession.call(driver).catch(() => undefined);
+      let failure: unknown;
+      const sessionDriver = driver as { sessionId?: string; deleteSession?: () => Promise<void> };
+      const deleteSession = sessionDriver.deleteSession;
+      if (typeof deleteSession === 'function' && sessionDriver.sessionId) {
+        try {
+          await deleteSession.call(driver);
+        } catch (error) {
+          failure = error;
+        }
+      }
+      try {
+        await hosted.close();
+      } catch (error) {
+        failure = appendCleanupFailure(failure, error);
+      }
+      if (failure) {
+        throw failure;
       }
     },
   };

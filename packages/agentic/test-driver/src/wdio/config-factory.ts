@@ -13,6 +13,7 @@ import { buildCapabilities } from './capability-map.ts';
 import { DesktopDriverService, type DesktopServiceOptions } from './service.ts';
 import { resolveDesktopOptions } from '../config.ts';
 import { DesktopValidationError } from '../errors.ts';
+import { validateStoryTestManifest } from '../storybook/manifest.ts';
 import type { DesktopDriverOptions } from '../types.ts';
 
 /** How specs are distributed across WebdriverIO workers. */
@@ -71,20 +72,15 @@ export function readStoryManifestDigest(manifestPath: string): string {
       `storyManifest "${manifestPath}" does not exist; run \`desktop-driver stories generate\` before the testrunner`,
     ]);
   }
-  let digest: unknown;
+  let value: unknown;
   try {
-    digest = (JSON.parse(raw) as { digest?: unknown }).digest;
+    value = JSON.parse(raw);
   } catch (error) {
     throw new DesktopValidationError('Invalid desktop WebdriverIO config', [
       `storyManifest "${manifestPath}" is not valid JSON: ${(error as Error).message}`,
     ]);
   }
-  if (typeof digest !== 'string' || digest.length === 0) {
-    throw new DesktopValidationError('Invalid desktop WebdriverIO config', [
-      `storyManifest "${manifestPath}" has no "digest"; regenerate it with \`desktop-driver stories generate\``,
-    ]);
-  }
-  return digest;
+  return validateStoryTestManifest(value, manifestPath).digest;
 }
 
 /**
@@ -97,8 +93,12 @@ export function readStoryManifestDigest(manifestPath: string): string {
  */
 const PLATFORM_SPEC_PATTERN = /(^|[./\\-])(windows|macos|win32|darwin)([./\\-]|$)/i;
 
-export function assertSharedSpecs(specs: readonly string[]): void {
-  const offenders = specs.filter((spec) => PLATFORM_SPEC_PATTERN.test(path.basename(spec)));
+export function assertSharedSpecs(specs: readonly string[], rootDir = process.cwd()): void {
+  const expanded = specs.flatMap((spec) => {
+    const matches = fs.globSync(spec, { cwd: rootDir });
+    return matches.length > 0 ? matches : [spec];
+  });
+  const offenders = expanded.filter((spec) => PLATFORM_SPEC_PATTERN.test(spec));
   if (offenders.length > 0) {
     throw new DesktopValidationError(
       'Shared spec globs must not reference platform-specific files',
@@ -118,7 +118,7 @@ export function createDesktopWdioConfig(options: DesktopWdioConfigOptions): Reco
   if (!Array.isArray(options.specs) || options.specs.length === 0) {
     throw new DesktopValidationError('Invalid desktop WebdriverIO config', ['specs must be a non-empty array']);
   }
-  assertSharedSpecs(options.specs);
+  assertSharedSpecs(options.specs, rootDir);
 
   const resolvedSpecs = options.specs.map((spec) => (path.isAbsolute(spec) ? spec : path.join(rootDir, spec)));
 

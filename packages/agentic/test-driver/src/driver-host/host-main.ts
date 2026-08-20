@@ -55,16 +55,33 @@ export async function runDriverHost(configFile: string): Promise<void> {
     fakeScene: config.fakeScene,
   });
 
+  let shuttingDown = false;
   const shutdown = async (code: number): Promise<void> => {
+    if (shuttingDown) {
+      return;
+    }
+    shuttingDown = true;
     try {
       await handle.stop();
-    } finally {
+      await sendToParent({ type: 'desktop-driver-host/stopped', ok: true });
       process.exit(code);
+    } catch (error) {
+      await sendToParent({
+        type: 'desktop-driver-host/stopped',
+        ok: false,
+        message: error instanceof Error ? error.message : String(error),
+      });
+      process.exit(1);
     }
   };
 
   process.on('SIGTERM', () => void shutdown(0));
   process.on('SIGINT', () => void shutdown(0));
+  process.on('message', (message) => {
+    if ((message as { type?: string } | undefined)?.type === 'desktop-driver-host/shutdown') {
+      void shutdown(0);
+    }
+  });
 
   // The host must never outlive the service that owns it, even if that service is killed hard.
   const parentWatch = setInterval(() => {
@@ -89,6 +106,15 @@ export async function runDriverHost(configFile: string): Promise<void> {
   // The parent reads health from stdout rather than probing an extra port, which keeps the host
   // to exactly one listening socket.
   process.stdout.write(`${JSON.stringify({ type: 'desktop-driver-host/ready', health })}\n`);
+}
+
+function sendToParent(message: Record<string, unknown>): Promise<void> {
+  if (!process.send) {
+    return Promise.resolve();
+  }
+  return new Promise((resolve) => {
+    process.send!(message, () => resolve());
+  });
 }
 
 const invokedDirectly = process.argv[1] !== undefined && import.meta.url === new URL(`file://${process.argv[1]}`).href;

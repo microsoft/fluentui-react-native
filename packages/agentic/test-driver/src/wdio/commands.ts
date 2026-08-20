@@ -9,6 +9,7 @@
 
 import { PORTABLE_COMMANDS, portableCommandsFor, platformExtensionsFor } from '../capabilities.ts';
 import { DesktopDriverError } from '../errors.ts';
+import { isTerminalState } from '../lifecycle.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import { DESKTOP_PROTOCOL_VERSION, PORTABLE_COMMAND_MATRIX_VERSION } from '../protocol.ts';
 import { byTestId } from '../selectors.ts';
@@ -25,6 +26,7 @@ export interface DesktopBrowserLike {
   getPageSource(): Promise<string>;
   takeScreenshot(): Promise<string>;
   getActiveElement?(): Promise<Record<string, string>>;
+  getWindowHandles?(): Promise<readonly string[]>;
   addCommand(name: string, handler: (...args: never[]) => unknown, isElementCommand?: boolean): void;
   desktop?: DesktopBrowserCommands;
 }
@@ -121,6 +123,12 @@ export function createDesktopCommands(browser: DesktopBrowserLike, context: Desk
       while (Date.now() < deadline) {
         if (lifecycle.current === state) {
           return;
+        }
+        if (isTerminalState(lifecycle.current)) {
+          throw new DesktopDriverError(`Application entered terminal state "${lifecycle.current}" before reaching "${state}"`, {
+            kind: 'lifecycle',
+            detail: { expected: state, actual: lifecycle.current, exitReason: lifecycle.reason },
+          });
         }
         await new Promise((resolve) => setTimeout(resolve, 100));
       }

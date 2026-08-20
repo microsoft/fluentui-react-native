@@ -131,8 +131,8 @@ export interface DesktopDriverOptions {
   storybook?: DesktopStorybookOptions;
   artifactsDirectory?: string;
   /**
-   * Escape hatch for backend-specific W3C capabilities. Values are merged after the generated
-   * capabilities, so a consumer can override a mapping the package gets wrong.
+   * Escape hatch for backend-specific W3C capabilities. Ownership- and routing-sensitive attach
+   * capabilities cannot be overridden.
    */
   backendCapabilities?: Readonly<Record<string, unknown>>;
   /** Scene document (or path to one) used only by the `fake` backend. */
