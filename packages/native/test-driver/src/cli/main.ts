@@ -10,6 +10,7 @@ import * as path from 'node:path';
 
 import { doctor, generateStories, listRunningStories } from './commands.ts';
 import { startDesktopDriver } from '../wdio/service.ts';
+import { startDesktopTestServer } from '../storybook/serve.ts';
 import { DesktopDriverError } from '../errors.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import type { DesktopAppTarget, DesktopPlatform } from '../types.ts';
@@ -17,11 +18,21 @@ import type { DesktopAppTarget, DesktopPlatform } from '../types.ts';
 interface ParsedArgs {
   command: string[];
   flags: Record<string, string | boolean>;
+  /** Every occurrence of each flag, in order, so a flag can be repeated. */
+  repeated: Record<string, string[]>;
 }
 
 function parseArgs(argv: readonly string[]): ParsedArgs {
   const command: string[] = [];
   const flags: Record<string, string | boolean> = {};
+  const repeated: Record<string, string[]> = {};
+
+  const record = (name: string, value: string | boolean): void => {
+    flags[name] = value;
+    if (typeof value === 'string') {
+      (repeated[name] ??= []).push(value);
+    }
+  };
 
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index];
@@ -31,19 +42,19 @@ function parseArgs(argv: readonly string[]): ParsedArgs {
     }
     const [name, inline] = token.slice(2).split('=', 2);
     if (inline !== undefined) {
-      flags[name] = inline;
+      record(name, inline);
       continue;
     }
     const next = argv[index + 1];
     if (next === undefined || next.startsWith('--')) {
-      flags[name] = true;
+      record(name, true);
       continue;
     }
-    flags[name] = next;
+    record(name, next);
     index += 1;
   }
 
-  return { command, flags };
+  return { command, flags, repeated };
 }
 
 function requirePlatform(flags: ParsedArgs['flags']): DesktopPlatform {
@@ -84,6 +95,7 @@ Commands
   doctor                     Report backends, portable commands, and platform prerequisites
   stories generate           Scan story modules and emit the manifest and generated spec
   stories list               List the stories a running Storybook application reports
+  serve                      Run the loopback desktop test service for the on-device controls
   start                      Start an owned driver host and print its endpoint
   version                    Print the package version
 
@@ -97,10 +109,18 @@ Common options
   --story-root <dir>                Story scan root (repeatable via comma separation)
   --out <dir>                       Output directory for generated story tests
   --storybook-port <port>           Storybook channel server port (default: 7007)
+
+serve options
+  --manifest <path>                 Generated story-tests.manifest.json (required)
+  --runner <command>                Runner executable (default: yarn)
+  --runner-arg <arg>                Runner argument before the spec selection; repeatable
+  --cwd <dir>                       Working directory for the runner (default: current directory)
+  --port <port>                     Service port (default: 7017)
+  --announce-interval <ms>          Channel re-broadcast interval (default: 5000)
 `;
 
 export async function main(argv: readonly string[] = process.argv.slice(2)): Promise<number> {
-  const { command, flags } = parseArgs(argv);
+  const { command, flags, repeated } = parseArgs(argv);
   const [first, second] = command;
 
   if (!first || flags.help === true || first === 'help') {
@@ -151,6 +171,43 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
       }
       process.stderr.write(`Unknown "stories" subcommand "${String(second)}"\n${USAGE}`);
       return 2;
+    }
+
+    case 'serve': {
+      if (typeof flags.manifest !== 'string') {
+        process.stderr.write('serve requires --manifest <path to story-tests.manifest.json>\n');
+        return 2;
+      }
+      const server = await startDesktopTestServer({
+        manifestPath: flags.manifest,
+        port: flags.port ? Number(flags.port) : undefined,
+        announceIntervalMs: flags['announce-interval'] ? Number(flags['announce-interval']) : undefined,
+        storybook: { port: flags['storybook-port'] ? Number(flags['storybook-port']) : undefined },
+        runner: {
+          command: typeof flags.runner === 'string' ? flags.runner : 'yarn',
+          args: repeated['runner-arg'] ?? ['wdio', 'run', 'wdio.conf.ts'],
+          cwd: typeof flags.cwd === 'string' ? path.resolve(flags.cwd) : process.cwd(),
+        },
+        onOutput: (chunk) => process.stdout.write(chunk),
+      });
+
+      print({
+        url: server.url,
+        token: server.token,
+        manifestDigest: server.manifest.digest,
+        stories: server.manifest.entries.map((entry) => entry.storyId),
+        discovery: 'announced over the Storybook channel; the app needs no build-time configuration',
+      });
+
+      // The service owns its lifetime; it runs until interrupted.
+      await new Promise<void>((resolve) => {
+        const stop = (): void => {
+          void server.stop().finally(resolve);
+        };
+        process.on('SIGINT', stop);
+        process.on('SIGTERM', stop);
+      });
+      return 0;
     }
 
     case 'start': {

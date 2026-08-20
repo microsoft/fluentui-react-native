@@ -104,10 +104,20 @@ export class StoryController {
 
   /** Updates on-device control args for a story. */
   async updateArgs(storyId: string, updatedArgs: Record<string, unknown>): Promise<void> {
+    await this.sendEvent('updateStoryArgs', { storyId, updatedArgs });
+  }
+
+  /**
+   * Broadcasts a Storybook channel event to the connected application.
+   *
+   * The payload is ordinary JSON data. This is the transport the desktop test service uses to
+   * announce itself, so the device never needs a build-time endpoint or token.
+   */
+  async sendEvent(type: string, ...args: readonly unknown[]): Promise<void> {
     await this.request('/send-event', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ type: 'updateStoryArgs', args: [{ storyId, updatedArgs }] }),
+      body: JSON.stringify({ type, args }),
     });
   }
 }

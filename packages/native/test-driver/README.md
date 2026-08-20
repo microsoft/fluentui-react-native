@@ -239,9 +239,32 @@ tag or when two stories claim the same plan id.
 
 ## Loopback test service
 
-`DesktopTestService` lets an on-device Storybook UI request a run without executing anything
-itself. It binds to `127.0.0.1`, mints a per-boot token, validates every story id against the
-generated manifest, and permits one mutating run per application session.
+`desktop-driver serve` runs the loopback test service, the WebdriverIO run executor, and the
+Storybook channel announcer as one owned host-side process. It lets an on-device Storybook UI
+request a run without executing anything itself: it binds to `127.0.0.1`, mints a per-boot token,
+validates every story id against the generated manifest, and permits one mutating run per
+application session.
+
+```sh
+desktop-driver serve --manifest desktop-tests/generated/story-tests.manifest.json \
+  --runner yarn --runner-arg wdio --runner-arg run --runner-arg wdio.conf.ts
+```
+
+The runner command line comes entirely from these options. A request contributes only a story id,
+which is looked up in the generated manifest to obtain an already-known spec path and Mocha grep,
+so nothing an application sends can reach `spawn`.
+
+**Discovery.** The service announces `{ url, token, protocolVersion, manifestDigest }` over the
+Storybook channel the application is already connected to, using the channel server's existing
+`send-event` endpoint, and re-broadcasts on an interval. Nothing is configured at build time. This
+matters on React Native, where `process.env` carries only `NODE_ENV` and no other value is inlined
+into the bundle, so a build-time endpoint cannot be read on device at all.
+
+**What the token is and is not.** It stops a drive-by request from something that has not observed
+an announcement. It is not a defence against a local attacker: the Storybook channel it is
+announced over is itself unauthenticated on loopback. The controls that carry real weight are the
+loopback binding, the manifest allowlist, one run per session, and never accepting a command line
+from the application.
 
 | Endpoint                   | Purpose                                                 |
 | -------------------------- | ------------------------------------------------------- |
@@ -278,6 +301,7 @@ directories should stay ignored and be reviewed before sharing.
 desktop-driver doctor              Backends, portable commands, and platform prerequisites
 desktop-driver stories generate    Scan story modules and emit the manifest and generated spec
 desktop-driver stories list        List the stories a running Storybook application reports
+desktop-driver serve               Run the loopback test service for the on-device controls
 desktop-driver start               Start an owned driver host and print its endpoint
 desktop-driver version
 ```
