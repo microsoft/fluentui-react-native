@@ -1,5 +1,11 @@
 # @fluentui-react-native/components
 
+## 0.2.3
+
+### Patch Changes
+
+- 4777e54: Render persistent single- and dual-ring focus visuals across agentic components to avoid React Native Windows Fabric crashes.
+
 ## 0.2.2
 
 ### Patch Changes
