@@ -1,6 +1,6 @@
 # Agentic Components authoring
 
-These instructions apply to `packages/agentic-components` and its descendants. Keep this file limited to durable package
+These instructions apply to `packages/agentic/components` and its descendants. Keep this file limited to durable package
 invariants; detailed authoring recipes live in the
 [agentic component authoring references](../../.github/skills/agentic-component-authoring/references).
 

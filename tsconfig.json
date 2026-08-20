@@ -17,10 +17,10 @@
       "path": "apps/win32/tsconfig.json"
     },
     {
-      "path": "packages/agentic-components/tsconfig.json"
+      "path": "packages/agentic/components/tsconfig.json"
     },
     {
-      "path": "packages/agentic-design/tsconfig.json"
+      "path": "packages/agentic/design/tsconfig.json"
     },
     {
       "path": "packages/codemods/tsconfig.json"

@@ -13,7 +13,7 @@
       "path": "../default-theme/tsconfig.json"
     },
     {
-      "path": "../../agentic-design/tsconfig.json"
+      "path": "../../agentic/design/tsconfig.json"
     },
     {
       "path": "../../experimental/AppearanceAdditions/tsconfig.json"

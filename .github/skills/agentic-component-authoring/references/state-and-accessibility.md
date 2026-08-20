@@ -2,7 +2,7 @@
 
 Use this reference for `<Component>StateProps`, `use<Component>.ts`, defaults, interaction hooks, accessibility, derived
 state, and slot construction. The canonical example is
-[`useButton.ts`](../../../../packages/agentic-components/src/components/button/useButton.ts).
+[`useButton.ts`](../../../../packages/agentic/components/src/components/button/useButton.ts).
 
 ## State hook responsibilities
 

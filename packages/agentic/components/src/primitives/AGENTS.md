@@ -1,6 +1,6 @@
 # Primitive component authoring
 
-These instructions apply to `packages/agentic-components/src/primitives` and its descendants. Use `primitives/icon` as
+These instructions apply to `packages/agentic/components/src/primitives` and its descendants. Use `primitives/icon` as
 the canonical implementation.
 
 ## Non-negotiable invariants

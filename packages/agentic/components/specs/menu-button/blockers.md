@@ -17,7 +17,7 @@ Reviewed:
 - `specs/menu-button/tokens.yaml`
 - canonical `src/components/button/*`
 - canonical `src/primitives/icon/*`
-- package manifest and source tree under `packages/agentic-components`
+- package manifest and source tree under `packages/agentic/components`
 
 ## Blockers
 

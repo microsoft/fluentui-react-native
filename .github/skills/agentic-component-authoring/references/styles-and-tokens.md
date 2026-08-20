@@ -2,13 +2,13 @@
 
 Use this reference for `<component>.styles.ts`, `use<Component>Styles.ts`, token mapping, theme caching, state precedence, and
 slot prop application. The canonical examples are
-[`button.styles.ts`](../../../../packages/agentic-components/src/components/button/button.styles.ts) and
-[`useButtonStyles.ts`](../../../../packages/agentic-components/src/components/button/useButtonStyles.ts).
+[`button.styles.ts`](../../../../packages/agentic/components/src/components/button/button.styles.ts) and
+[`useButtonStyles.ts`](../../../../packages/agentic/components/src/components/button/useButtonStyles.ts).
 
 ## Resolve values from the correct token source
 
 Consult
-[`flex-token-map.yaml`](../../../../packages/agentic-design/src/tokens/mappings/flex-token-map.yaml) before choosing a
+[`flex-token-map.yaml`](../../../../packages/agentic/design/src/tokens/mappings/flex-token-map.yaml) before choosing a
 value.
 
 - Read semantic colors from `useThemeState().tokens.color`.
@@ -35,16 +35,16 @@ Never create a style factory inside a hook or render function.
 
 Reuse the design package's `@fluentui-react-native/design/styling` submodule:
 
-- [`getStateStyleFactory`](../../../../packages/agentic-design/src/styling/branchedStyle.ts) lazily flattens and caches
+- [`getStateStyleFactory`](../../../../packages/agentic/design/src/styling/branchedStyle.ts) lazily flattens and caches
   one theme-independent state definition.
-- [`getThemedStateStyleFactory`](../../../../packages/agentic-design/src/styling/branchedStyle.ts) resolves and caches
+- [`getThemedStateStyleFactory`](../../../../packages/agentic/design/src/styling/branchedStyle.ts) resolves and caches
   one flattened definition per `ThemeState`.
-- [`getThemedColorStyleFactory`](../../../../packages/agentic-design/src/styling/colorStyles.ts) converts semantic
+- [`getThemedColorStyleFactory`](../../../../packages/agentic/design/src/styling/colorStyles.ts) converts semantic
   color keys and delegates its hierarchy and caching to `getThemedStateStyleFactory`.
 
 These are the canonical Button mechanisms and cache plain resolved style objects in `state.themeStyles`. Do not wrap them
 in another `StyleSheet.create` cache. Use
-[`themedStyleSheetFactory`](../../../../packages/agentic-design/src/useThemeState.ts) only when a component genuinely
+[`themedStyleSheetFactory`](../../../../packages/agentic/design/src/useThemeState.ts) only when a component genuinely
 needs a complete theme-only `StyleSheet.create` result that is not represented by a branched state definition.
 
 Every theme factory may depend only on `ThemeState` values such as tokens and high contrast. Props, interaction state,

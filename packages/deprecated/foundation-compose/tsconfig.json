@@ -12,7 +12,7 @@
       "path": "../../theming/default-theme/tsconfig.json"
     },
     {
-      "path": "../../agentic-design/tsconfig.json"
+      "path": "../../agentic/design/tsconfig.json"
     },
     {
       "path": "../../framework-base/tsconfig.json"
