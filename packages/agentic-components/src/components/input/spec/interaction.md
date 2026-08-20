@@ -14,7 +14,7 @@ platform: react-native (Windows, macOS)
 
 ## Focus management
 
-Focus follows standard platform behavior for `<input>` elements. Input does **not** use the standard dual-outline focus ring described in `flex-system:styling` — instead, the boundary stroke itself serves as the focus indicator. On focus, both styles swap their stroke to `--gnrc-color-stroke-neutral-heavy` — Outline as a full border, Underline as the bottom edge.
+Focus follows standard platform behavior for `<input>` elements. Input does **not** use the standard persistent dual-ring focus visual described in `flex-system:styling` — instead, the boundary stroke itself serves as the focus indicator. On focus, both styles swap their stroke to `--gnrc-color-stroke-neutral-heavy` — Outline as a full border, Underline as the bottom edge.
 
 Hover and pressed are resolved state values, not base states of their own — they ride on top of whichever base is active. When the input is focused and hovered, the inline Focus hover value from `tokens.yaml` shifts the Focus stroke, not the Rest stroke. In CSS, write `:focus-visible` before `:hover` and `:active` so the hover/pressed value wins via cascade order.
 

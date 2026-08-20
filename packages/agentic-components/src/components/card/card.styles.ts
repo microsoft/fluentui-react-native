@@ -219,25 +219,3 @@ const getThemedOverlayStyle = getThemedStateStyleFactory('Card.overlay', createO
 export function getCardOverlayStyle(state: CardState): ViewStyle {
   return getThemedOverlayStyle(state, [state.size]);
 }
-
-const focusStyleStateLevels = [['focused']] as const;
-
-const getThemedFocusStyle = getThemedStateStyleFactory(
-  'Card.focus',
-  ({ color, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof focusStyleStateLevels> => ({
-    focused: {
-      borderColor: color.strokeFocusInner,
-      outlineColor: color.strokeFocusOuter,
-      outlineOffset: strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: strokeWidth.thick,
-    },
-  }),
-  focusStyleStateLevels,
-);
-
-const focusedState = ['focused'] as const;
-
-export function getCardFocusStyle(state: CardState): ViewStyle | undefined {
-  return state.focused && !state.disabled ? getThemedFocusStyle(state, focusedState) : undefined;
-}

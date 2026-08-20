@@ -1,5 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ButtonState } from './button.types';
+import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import { LayoutStableText } from '../../primitives/layout-stable-text/layout-stable-text';
 
 /**
@@ -20,6 +21,7 @@ export function renderButton_unstable(state: ButtonState) {
 
   return (
     <state.root>
+      <FocusVisual {...state.focusVisualProps} />
       {iconPosition === 'before' && ActiveIcon && <ActiveIcon />}
       {contentElement}
       {iconPosition === 'after' && ActiveIcon && <ActiveIcon />}

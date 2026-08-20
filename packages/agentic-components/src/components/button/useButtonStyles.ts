@@ -1,15 +1,9 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
 
-import {
-  buttonStyles,
-  getButtonColorStyles,
-  getButtonContentStyle,
-  getButtonFocusStyle,
-  getButtonIconSize,
-  getButtonRootStyle,
-} from './button.styles';
+import { buttonStyles, getButtonColorStyles, getButtonContentStyle, getButtonIconSize, getButtonRootStyle } from './button.styles';
 import type { ButtonState } from './button.types';
 
 /**
@@ -19,16 +13,19 @@ import type { ButtonState } from './button.types';
 export function useButtonStyles_unstable(state: ButtonState) {
   const { size, userStyle } = state;
   const colors = getButtonColorStyles(state);
-  const rootStyle: StyleProp<ViewStyle> = [
-    buttonStyles.root,
-    getButtonRootStyle(state),
-    colors.background,
-    getButtonFocusStyle(state),
-    userStyle,
-  ];
+  const rootLayoutStyle = getButtonRootStyle(state);
+  const rootStyle: StyleProp<ViewStyle> = [buttonStyles.root, rootLayoutStyle, colors.background, userStyle];
   const contentStyle: StyleProp<TextStyle> = [buttonStyles.content, getButtonContentStyle(state), colors.foreground];
   const iconSize = getButtonIconSize(size);
 
+  state.focusVisualProps = createFocusVisualProps({
+    borderRadius: rootLayoutStyle.borderRadius,
+    innerColor: state.tokens.color.strokeFocusInner,
+    innerWidth: state.tokens.strokeWidth.thin,
+    outerColor: state.tokens.color.strokeFocusOuter,
+    outerWidth: state.tokens.strokeWidth.thick,
+    visible: state.focused && !state.disabled,
+  });
   attachSlotProps(state.root, { style: rootStyle });
   if (state.icon) {
     attachSlotProps(state.icon, {

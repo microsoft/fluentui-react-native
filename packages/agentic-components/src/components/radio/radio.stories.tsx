@@ -27,6 +27,7 @@ const meta: Meta<typeof Radio> = {
     secondaryText: 'Additional detail',
     selected: false,
     showSecondaryText: true,
+    testID: 'agentic-storybook-radio',
   },
   argTypes: {
     disabled: { control: 'boolean' },

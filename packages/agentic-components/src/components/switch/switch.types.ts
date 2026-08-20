@@ -9,6 +9,7 @@ import type {
   Slot,
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
+import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 
 type AnimatedViewComponent = typeof import('react-native').Animated.View;
 
@@ -48,6 +49,7 @@ export type SwitchState = ComponentState<SwitchStateSlots> &
   PressableState & {
     checked: boolean;
     checkedProgress: import('react-native').Animated.Value;
+    focusVisualProps?: FocusVisualProps;
     hasVisibleLabel: boolean;
     userStyle?: StyleProp<ViewStyle>;
   };

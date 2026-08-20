@@ -2,6 +2,7 @@ import type { Pressable, PressableProps, StyleProp, TextStyle, View, ViewStyle }
 import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
+import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 import type { Icon } from '../../primitives/icon/icon';
 import type { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
@@ -45,6 +46,7 @@ export type MenuItemState = ComponentState<MenuItemSlots> &
   Required<MenuItemStateProps> &
   ThemeState & {
     contentText: string;
+    focusVisualProps?: FocusVisualProps;
     secondaryContentText?: string | null;
     hasSecondaryContent: boolean;
     isListItem: boolean;

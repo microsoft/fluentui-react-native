@@ -52,6 +52,7 @@ const meta: Meta<typeof Tag> = {
     layout: 'iconAndText',
     shape: 'rounded',
     size: 'medium',
+    testID: 'agentic-storybook-tag',
   },
   argTypes: {
     appearance: { control: 'select', options: appearances.map(({ value }) => value) },

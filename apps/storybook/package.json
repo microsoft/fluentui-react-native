@@ -17,7 +17,7 @@
     "macos:build": "xcodebuild -workspace macos/AgenticStorybook.xcworkspace -scheme AgenticStorybook -configuration Debug -destination 'platform=macOS' -derivedDataPath macos/DerivedData CODE_SIGNING_ALLOWED=NO build",
     "macos:build:clean": "xcodebuild -workspace macos/AgenticStorybook.xcworkspace -scheme AgenticStorybook -configuration Debug -destination 'platform=macOS' -derivedDataPath macos/DerivedData CODE_SIGNING_ALLOWED=NO clean build",
     "macos": "rnx-cli run --platform macos",
-    "windows": "pwsh -NoProfile -File scripts/start-windows-agent-session.ps1",
+    "windows": "rnx-cli run --platform windows",
     "windows:cli": "react-native run-windows --arch x64 --sln windows/AgenticStorybook.sln",
     "windows:info": "react-native run-windows --info --no-telemetry",
     "windows:build": "react-native run-windows --arch x64 --sln windows/AgenticStorybook.sln --no-packager --no-deploy --no-launch --logging --no-telemetry --buildLogDirectory artifacts/windows/build-logs",

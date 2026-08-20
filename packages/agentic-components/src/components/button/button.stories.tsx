@@ -82,7 +82,7 @@ export const Overview: Story = {
     <View style={styles.story}>
       <StoryGroup label="Appearance">
         {appearances.map(({ label, value }) => (
-          <Button key={value} appearance={value} content={label} />
+          <Button key={value} appearance={value} content={label} testID={`agentic-storybook-button-overview-${value}`} />
         ))}
       </StoryGroup>
       <StoryGroup label="Size">

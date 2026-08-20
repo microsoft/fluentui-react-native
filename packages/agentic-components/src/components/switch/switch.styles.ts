@@ -124,26 +124,6 @@ export function getSwitchThumbBaseStyle(state: SwitchState): ViewStyle {
   return getThumbBaseStyle(state, ['base']);
 }
 
-const focusStateLevels = [['focused']] as const;
-
-const getFocusStyle = getThemedStateStyleFactory(
-  'Switch.focus',
-  ({ color, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof focusStateLevels> => ({
-    focused: {
-      borderColor: color.strokeFocusInner,
-      outlineColor: color.strokeFocusOuter,
-      outlineOffset: strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: strokeWidth.thick,
-    },
-  }),
-  focusStateLevels,
-);
-
-export function getSwitchFocusStyle(state: SwitchState): ViewStyle | undefined {
-  return state.focused && !state.disabled ? getFocusStyle(state, ['focused']) : undefined;
-}
-
 const labelStateLevels = [['disabled']] as const;
 
 const getLabelStyle = getThemedStateStyleFactory(

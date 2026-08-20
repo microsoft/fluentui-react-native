@@ -110,18 +110,22 @@ describe('Radio', () => {
     expect(StyleSheet.flatten(component.getByText('Choice').props.style).color).toBe(tokens.pressed.foregroundNeutralSecondary);
   });
 
-  it('renders a focus ring when focused', async () => {
+  it('renders a persistent dual-ring focus visual when focused', async () => {
     const component = await renderRadio({ label: 'Choice' });
     const root = getRoot(component);
 
     await fireEvent(root, 'focus', {});
 
-    expect(getRootStyle(component)).toMatchObject({
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: '#000000',
+      borderWidth: 2,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
+      'opacity',
+    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: '#ffffff',
-      outlineColor: '#000000',
-      outlineOffset: 1,
-      outlineStyle: 'solid',
-      outlineWidth: 2,
+      borderWidth: 1,
     });
   });
 

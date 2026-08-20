@@ -19,10 +19,6 @@ function renderSwitch(props: ComponentProps<typeof Switch> = {}) {
   return render(<Switch {...props} />);
 }
 
-function getRootStyle(root: { props: { style?: unknown } }) {
-  return StyleSheet.flatten(root.props.style);
-}
-
 async function flushAnimationFrame() {
   await act(async () => {
     await new Promise((resolve) => setTimeout(resolve, 200));
@@ -122,19 +118,23 @@ describe('Switch', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('renders the dual-outline focus ring on the hit area', async () => {
+  it('renders the persistent dual-ring focus visual on the hit area', async () => {
     const tokens = useFlexTokens();
     const component = await renderSwitch({ label: 'Wi-Fi', labelAfter: false });
     const root = component.getByRole('switch', { name: 'Wi-Fi' });
 
     await fireEvent(root, 'focus', {});
 
-    expect(getRootStyle(root)).toMatchObject({
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: tokens.color.strokeFocusOuter,
+      borderWidth: tokens.strokeWidth.thick,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
+      'opacity',
+    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: tokens.color.strokeFocusInner,
-      outlineColor: tokens.color.strokeFocusOuter,
-      outlineOffset: tokens.strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: tokens.strokeWidth.thick,
+      borderWidth: tokens.strokeWidth.thin,
     });
   });
 

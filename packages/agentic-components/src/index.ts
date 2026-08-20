@@ -163,5 +163,13 @@ export type { CheckboxIndicatorProps, CheckboxIndicatorStatus } from './primitiv
 export { CompoundItemLayout } from './primitives/compound-item-layout/compound-item-layout';
 export type { CompoundItemLayoutProps } from './primitives/compound-item-layout/compound-item-layout.types';
 
+export { FocusVisual, createFocusVisualProps } from './primitives/focus-visual/focus-visual';
+export type {
+  FocusVisualOptions,
+  FocusVisualProps,
+  FocusVisualRingProps,
+  FocusVisualStyles,
+} from './primitives/focus-visual/focus-visual.types';
+
 export { LayoutStableText } from './primitives/layout-stable-text/layout-stable-text';
 export type { LayoutStableTextProps } from './primitives/layout-stable-text/layout-stable-text.types';

@@ -38,7 +38,7 @@ describe('Button', () => {
     const component = await renderButton({ content: 'Save' });
     const root = getRoot(component);
 
-    expect(root.props.accessibilityRole).toBe('button');
+    expect(root.props.role).toBe('button');
     expect(root.props.accessibilityState).toEqual({ disabled: false });
     expect(root.props.focusable).toBe(true);
     expect(component.getByText('Save')).toBeOnTheScreen();
@@ -186,21 +186,29 @@ describe('Button', () => {
     const content = component.getByTestId('content');
     const icon = component.getByTestId('icon');
 
-    expect(root.children).toEqual([content, icon]);
+    expect(root.children.slice(1)).toEqual([content, icon]);
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
   });
 
-  it('renders a dual-token focus outline', async () => {
+  it('renders a persistent dual-ring focus visual', async () => {
     const component = await renderButton({ content: 'Focused' });
     const root = getRoot(component);
+
+    expect(root.props.enableFocusRing).toBe(false);
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
+
     await fireEvent(root, 'focus', {});
 
-    expect(getRootStyle(component)).toMatchObject({
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: '#000000',
+      borderWidth: 2,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
+      'opacity',
+    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: '#ffffff',
-      outlineColor: '#000000',
-      outlineOffset: 1,
-      outlineStyle: 'solid',
-      outlineWidth: 2,
+      borderWidth: 1,
     });
   });
 

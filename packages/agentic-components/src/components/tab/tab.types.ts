@@ -11,6 +11,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
+import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 import type { Icon } from '../../primitives/icon/icon';
 
 export type TabLayout = 'iconAndText' | 'iconOnly';
@@ -65,6 +66,7 @@ export type TabState = ComponentState<TabStateSlots> &
   Required<TabStateProps> &
   ThemeState &
   PressableState & {
+    focusVisualProps?: FocusVisualProps;
     iconOnly: boolean;
     userStyle?: StyleProp<ViewStyle>;
   };

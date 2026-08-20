@@ -3,9 +3,9 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
 import {
   getMenuItemCheckboxStyle,
-  getMenuItemFocusStyle,
   getMenuItemLeadingStyle,
   getMenuItemLabelStyle,
   getMenuItemRootLayoutStyle,
@@ -18,14 +18,17 @@ import type { MenuItemState } from './menu-item.types';
 
 export function useMenuItemStyles_unstable(state: MenuItemState) {
   const labelColor = getMenuItemLabelStyle(state).color;
-  const rootStyle: StyleProp<ViewStyle> = [
-    menuItemStyles.root,
-    getMenuItemRootLayoutStyle(state),
-    getMenuItemRootStyle(state),
-    getMenuItemFocusStyle(state),
-    state.userStyle,
-  ];
+  const rootLayoutStyle = getMenuItemRootLayoutStyle(state);
+  const rootStyle: StyleProp<ViewStyle> = [menuItemStyles.root, rootLayoutStyle, getMenuItemRootStyle(state), state.userStyle];
 
+  state.focusVisualProps = createFocusVisualProps({
+    borderRadius: rootLayoutStyle.borderRadius,
+    innerColor: state.tokens.color.strokeFocusInner,
+    innerWidth: state.tokens.strokeWidth.thin,
+    outerColor: state.tokens.color.strokeFocusOuter,
+    outerWidth: state.tokens.strokeWidth.thick,
+    visible: state.focused && !state.disabled && state.isListItem,
+  });
   attachSlotProps(state.root, { style: rootStyle });
   state.contentReserveStyle = getMenuItemLabelStyle(state, true);
   state.contentStyle = getMenuItemLabelStyle(state);

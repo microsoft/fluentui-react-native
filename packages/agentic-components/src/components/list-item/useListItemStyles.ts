@@ -3,10 +3,10 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
 import {
   getListItemBackgroundStyle,
   getListItemContentStyle,
-  getListItemFocusStyle,
   getListItemPrimaryForegroundStyle,
   getListItemRootSizeStyle,
   getListItemSecondaryContentStyle,
@@ -19,13 +19,8 @@ import type { ListItemState } from './list-item.types';
  * Applies stable theme styles and instance-specific style selections to the ListItem slots.
  */
 export function useListItemStyles_unstable(state: ListItemState) {
-  const rootStyle: StyleProp<ViewStyle> = [
-    listItemStyles.root,
-    getListItemRootSizeStyle(state),
-    getListItemBackgroundStyle(state),
-    getListItemFocusStyle(state),
-    state.userStyle,
-  ];
+  const rootSizeStyle = getListItemRootSizeStyle(state);
+  const rootStyle: StyleProp<ViewStyle> = [listItemStyles.root, rootSizeStyle, getListItemBackgroundStyle(state), state.userStyle];
   const contentStyle: StyleProp<TextStyle> = getListItemContentStyle(state);
   const hiddenContentStyle: StyleProp<TextStyle> = getListItemContentStyle(state, true);
   const secondaryContentStyle: StyleProp<TextStyle> = [
@@ -60,6 +55,14 @@ export function useListItemStyles_unstable(state: ListItemState) {
     },
   ];
 
+  state.focusVisualProps = createFocusVisualProps({
+    borderRadius: rootSizeStyle.borderRadius,
+    innerColor: state.tokens.color.strokeFocusInner,
+    innerWidth: state.tokens.strokeWidth.thin,
+    outerColor: state.tokens.color.strokeFocusOuter,
+    outerWidth: state.tokens.strokeWidth.thick,
+    visible: state.focused && !state.disabled,
+  });
   attachSlotProps(state.root, { style: rootStyle });
   attachSlotProps(state.content, { style: contentStyle });
   attachSlotProps(state.contentHidden, {

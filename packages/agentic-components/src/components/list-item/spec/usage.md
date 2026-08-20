@@ -103,10 +103,10 @@ Variant properties are ordered in the design tool: **Size → Selection mode →
 | **Rest**     | All rows              | Default appearance.                                                       |
 | **Hover**    | Interactive rows only | Background and foreground use the inline hover values in `tokens.yaml`.   |
 | **Pressed**  | Interactive rows only | Background and foreground use the inline pressed values in `tokens.yaml`. |
-| **Focused**  | Interactive rows only | Universal dual-outline focus ring (see `flex-system:styling`).            |
+| **Focused**  | Interactive rows only | Universal persistent dual-ring focus visual (see `flex-system:styling`).  |
 | **Disabled** | All rows              | Disabled foreground; no interaction.                                      |
 
-**Why Focused is its own State value:** The parent List moves focus to the row's interactive element. The focus ring is rendered by ListItem itself using the universal dual-outline pattern — the same ring every other focusable element in the system uses.
+**Why Focused is its own State value:** The parent List moves focus to the row's interactive element. The focus ring is rendered by ListItem itself using the universal persistent dual-ring pattern — the same ring every other focusable element in the system uses.
 
 #### Selected
 

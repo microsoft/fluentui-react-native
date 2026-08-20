@@ -9,6 +9,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
+import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 
 export type AccordionLayout = 'chevronStart' | 'chevronEnd';
 export type AccordionSize = 'small';
@@ -95,6 +96,7 @@ export type AccordionState = ComponentState<AccordionStateSlots> &
   ThemeState &
   PressableState & {
     expanded: boolean;
+    focusVisualProps?: FocusVisualProps;
     focused: boolean;
     userStyle?: StyleProp<ViewStyle>;
   };

@@ -28,6 +28,7 @@ const meta: Meta<typeof MenuItem> = {
     secondaryContentPosition: 'right',
     selected: false,
     menuStyle: 'list-item',
+    testID: 'agentic-storybook-menu-item',
   },
   argTypes: {
     secondaryContentPosition: { control: 'select', options: ['right', 'under'] },

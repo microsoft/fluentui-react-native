@@ -135,6 +135,26 @@ export const Overview: Story = {
   },
 };
 
+export const SelectedFocus: Story = {
+  render: () => (
+    <ListItem
+      content="Selected"
+      icon={regularStarIcon}
+      selected
+      selectedIcon={filledStarIcon}
+      selectionMode="single"
+      testID="agentic-storybook-list-item-selected"
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'A selected row with a stable native selector for keyboard-focus regression coverage.',
+      },
+    },
+  },
+};
+
 export const SecondaryPosition: Story = {
   render: () => (
     <StoryGroup label="Secondary position">

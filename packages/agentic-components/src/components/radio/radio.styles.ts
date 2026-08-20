@@ -43,7 +43,6 @@ export const radioStyles = StyleSheet.create({
 
 const noStateLevels = [[]] as const;
 const selectionStateLevels = [['selected'], interactiveStatePriority] as const;
-const focusStateLevels = [['focused']] as const;
 type RadioColorState = 'selected' | 'disabled' | 'pressed' | 'hovered';
 
 const toDimensionValue = (value: unknown): number => Number(getNumericStyleValue(value));
@@ -112,21 +111,6 @@ const getRadioSecondaryTypographyStyle = getThemedStateStyleFactory(
     lineHeight: lineHeight.functionalBodySmall,
   }),
   noStateLevels,
-);
-
-const getRadioFocusStyle = getThemedStateStyleFactory(
-  'Radio.focus',
-  ({ borderRadius, color, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof focusStateLevels> => ({
-    focused: {
-      borderColor: color.strokeFocusInner,
-      borderRadius: borderRadius.base300,
-      outlineColor: color.strokeFocusOuter,
-      outlineOffset: strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: strokeWidth.thick,
-    },
-  }),
-  focusStateLevels,
 );
 
 const indicatorBorderDefinition: ColorStyleDefinition<ViewColorStyle, typeof selectionStateLevels> = {
@@ -244,10 +228,6 @@ export function getRadioLabelTypography(state: RadioState): TextStyle {
 
 export function getRadioSecondaryTypography(state: RadioState): TextStyle {
   return getRadioSecondaryTypographyStyle(state, []);
-}
-
-export function getRadioFocus(state: RadioState): ViewStyle | undefined {
-  return state.focused && !state.disabled ? getRadioFocusStyle(state, ['focused']) : undefined;
 }
 
 export function getRadioIndicatorBorder(state: RadioState) {

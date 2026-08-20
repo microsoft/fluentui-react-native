@@ -45,7 +45,6 @@ const rootStateLevels = [['withLabel', 'iconOnly']] as const;
 const labelContainerStateLevels = [['withSecondaryText', 'withoutSecondaryText']] as const;
 const indicatorShapeStateLevels = [['standard', 'circular']] as const;
 const statusStateLevels = [['unchecked', 'checked', 'indeterminate'], interactiveStatePriority] as const;
-const focusStateLevels = [['focused']] as const;
 
 export const checkboxTextStyles = themedStyleSheetFactory('Checkbox.text', ({ tokens }) =>
   StyleSheet.create({
@@ -128,21 +127,6 @@ const getLabelContainerLayoutStyle = getThemedStateStyleFactory(
   'Checkbox.labelContainer',
   createLabelContainerDefinition,
   labelContainerStateLevels,
-);
-
-const getFocusRingStyle = getThemedStateStyleFactory(
-  'Checkbox.focus',
-  ({ color, borderRadius, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof focusStateLevels> => ({
-    focused: {
-      borderColor: color.strokeFocusInner,
-      borderRadius: borderRadius.base300,
-      outlineColor: color.strokeFocusOuter,
-      outlineOffset: strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: strokeWidth.thick,
-    },
-  }),
-  focusStateLevels,
 );
 
 const indicatorColorDefinition: ColorStyleDefinition<ViewColorStyle, typeof statusStateLevels> = {
@@ -358,10 +342,6 @@ export function getCheckboxRootStyle(state: CheckboxState): ViewStyle {
 
 export function getCheckboxLabelContainerStyle(state: CheckboxState): ViewStyle {
   return getLabelContainerLayoutStyle(state, [state.renderSecondaryText ? 'withSecondaryText' : 'withoutSecondaryText']);
-}
-
-export function getCheckboxFocusStyle(state: CheckboxState): ViewStyle | undefined {
-  return state.focused && !state.disabled ? getFocusRingStyle(state, ['focused']) : undefined;
 }
 
 export function getCheckboxIndicatorColors(state: CheckboxState): ViewColorStyle {

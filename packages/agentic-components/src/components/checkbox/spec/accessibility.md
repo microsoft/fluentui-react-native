@@ -16,7 +16,7 @@ platform: react-native (Windows, macOS)
   - **1.4.3 — Contrast (Minimum):** Indicator stroke and fill must meet 3:1 against the surrounding background. Label text must meet 4.5:1.
   - **1.4.11 — Non-text Contrast:** The indicator (as a UI component boundary) must meet 3:1 against adjacent colors in all non-disabled states.
   - **2.1.1 — Keyboard:** Space must toggle the checkbox. Do not intercept Tab or use Enter for activation.
-  - **2.4.7 — Focus Visible:** Focus ring must be visible in all non-disabled states. Uses the universal dual-outline focus ring.
+  - **2.4.7 — Focus Visible:** Focus ring must be visible in all non-disabled states. Uses the universal persistent dual-ring focus visual.
   - **4.1.2 — Name, Role, Value:** Checkbox must expose its name, role, and current checked state to assistive technology.
 - **Screen reader:** Announces label (or `aria-label`), role ("checkbox"), and state ("checked", "not checked", or "mixed").
 

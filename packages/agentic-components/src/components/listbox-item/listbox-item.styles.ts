@@ -153,19 +153,6 @@ export function getListboxItemSecondaryColorStyle(state: ListboxItemState): Text
   };
 }
 
-export function getListboxItemFocusStyle(state: ListboxItemState): ViewStyle | undefined {
-  if (state.variant !== 'listItem' || state.disabled || !state.focused) {
-    return undefined;
-  }
-
-  return {
-    outlineColor: state.tokens.color.strokeFocusOuter,
-    outlineOffset: state.tokens.strokeWidth.thin,
-    outlineStyle: 'solid',
-    outlineWidth: state.tokens.strokeWidth.thick,
-  };
-}
-
 export function getListboxItemVisibleLabelStyle(state: ListboxItemState): TextStyle {
   return state.variant === 'listItem' && !state.multiselect
     ? {

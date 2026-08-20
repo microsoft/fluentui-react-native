@@ -9,6 +9,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
+import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 import type { Icon } from '../../primitives/icon/icon';
 
 export type TagSlots = {
@@ -40,6 +41,7 @@ export type TagState = ComponentState<TagSlots> &
   Required<TagStateProps> &
   ThemeState &
   PressableState & {
+    focusVisualProps?: FocusVisualProps;
     hasContent: boolean;
     hasLeadingIcon: boolean;
     iconOnly: boolean;

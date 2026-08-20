@@ -68,6 +68,8 @@ describe('component composition exports', () => {
   it('exports shared primitives', () => {
     expect(components.CheckboxIndicator).toEqual(expect.any(Function));
     expect(components.CompoundItemLayout).toEqual(expect.any(Function));
+    expect(components.FocusVisual).toEqual(expect.any(Function));
+    expect(components.createFocusVisualProps).toEqual(expect.any(Function));
     expect(components.LayoutStableText).toEqual(expect.any(Function));
   });
 });

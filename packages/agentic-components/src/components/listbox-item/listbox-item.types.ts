@@ -13,6 +13,7 @@ import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
 import type { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
+import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
 
 export type ListboxItemSecondaryContentPosition = ItemSecondaryContentPosition;
@@ -58,5 +59,6 @@ export type ListboxItemState = ComponentState<ListboxItemStateSlots> &
   Required<ListboxItemStateProps> &
   ThemeState &
   PressableState & {
+    focusVisualProps?: FocusVisualProps;
     userStyle?: StyleProp<ViewStyle>;
   };

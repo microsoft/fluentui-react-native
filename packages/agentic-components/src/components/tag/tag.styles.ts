@@ -218,28 +218,6 @@ export function getTagContentStyle(state: TagState): TextStyle {
   return getThemedContentStyle(state, [state.size]);
 }
 
-const focusStateLevels = [['focused']] as const;
-
-const getThemedFocusStyle = getThemedStateStyleFactory(
-  'Tag.focus',
-  ({ color, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof focusStateLevels> => ({
-    focused: {
-      borderColor: color.strokeFocusInner,
-      outlineColor: color.strokeFocusOuter,
-      outlineOffset: strokeWidth.thin,
-      outlineStyle: 'solid',
-      outlineWidth: strokeWidth.thick,
-    },
-  }),
-  focusStateLevels,
-);
-
-const focusedState = ['focused'] as const;
-
-export function getTagFocusStyle(state: TagState): ViewStyle | undefined {
-  return state.focused && !state.disabled ? getThemedFocusStyle(state, focusedState) : undefined;
-}
-
 const iconSizes: Record<TagSize, { dismiss: number; leading: number }> = {
   small: {
     dismiss: 12,

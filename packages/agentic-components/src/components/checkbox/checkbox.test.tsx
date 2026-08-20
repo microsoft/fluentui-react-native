@@ -169,18 +169,23 @@ describe('Checkbox', () => {
     expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.pressed.foregroundNeutralSecondary);
   });
 
-  it('renders the dual-outline focus ring', async () => {
+  it('renders the persistent dual-ring focus visual', async () => {
     const colors = useFlexTokens().color;
     const component = await renderCheckbox({ label: 'Focused' });
     const root = getRoot(component);
 
     await fireEvent(root, 'focus', {});
 
-    expect(getRootStyle(component)).toMatchObject({
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: colors.strokeFocusOuter,
+      borderWidth: 2,
+    });
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
+      'opacity',
+    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: colors.strokeFocusInner,
-      outlineColor: colors.strokeFocusOuter,
-      outlineStyle: 'solid',
-      outlineWidth: 2,
+      borderWidth: 1,
     });
   });
 

@@ -1,6 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { Text, View } from 'react-native';
 
+import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import type { RadioState } from './radio.types';
 
 /**
@@ -9,6 +10,7 @@ import type { RadioState } from './radio.types';
 export function renderRadio_unstable(state: RadioState) {
   return (
     <state.root>
+      <FocusVisual {...state.focusVisualProps} />
       <View testID="radio-indicator" style={state.indicatorStyle}>
         <View testID="radio-dot" style={state.indicatorDotStyle} />
       </View>

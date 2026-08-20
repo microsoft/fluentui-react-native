@@ -1,11 +1,11 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
 
 import {
   getListboxItemAvatarSize,
   getListboxItemCheckmarkSize,
-  getListboxItemFocusStyle,
   getListboxItemHeaderStyle,
   getListboxItemIconSize,
   getListboxItemLabelColorStyle,
@@ -18,12 +18,16 @@ import {
 import type { ListboxItemState } from './listbox-item.types';
 
 export function useListboxItemStyles_unstable(state: ListboxItemState) {
-  const rootStyle: StyleProp<ViewStyle> = [
-    listboxItemStyles.root,
-    getListboxItemRootStyle(state),
-    getListboxItemFocusStyle(state),
-    state.userStyle,
-  ];
+  const resolvedRootStyle = getListboxItemRootStyle(state);
+  const rootStyle: StyleProp<ViewStyle> = [listboxItemStyles.root, resolvedRootStyle, state.userStyle];
+  state.focusVisualProps = createFocusVisualProps({
+    borderRadius: resolvedRootStyle.borderRadius,
+    innerColor: state.tokens.color.strokeFocusInner,
+    innerWidth: state.tokens.strokeWidth.thin,
+    outerColor: state.tokens.color.strokeFocusOuter,
+    outerWidth: state.tokens.strokeWidth.thick,
+    visible: state.variant === 'listItem' && state.focused && !state.disabled,
+  });
   attachSlotProps(state.root, { style: rootStyle });
 
   const headerStyle: StyleProp<ViewStyle> = [listboxItemStyles.root, getListboxItemHeaderStyle(state), state.userStyle];

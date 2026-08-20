@@ -1,5 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { TabState } from './tab.types';
+import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import { LayoutStableText } from '../../primitives/layout-stable-text/layout-stable-text';
 
 /**
@@ -13,6 +14,7 @@ export function renderTab_unstable(state: TabState) {
 
   return (
     <state.root>
+      <FocusVisual {...state.focusVisualProps} />
       {ActiveIcon && <ActiveIcon />}
       {contentElement}
     </state.root>

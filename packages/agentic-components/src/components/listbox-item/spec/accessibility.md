@@ -18,7 +18,7 @@ Build-time requirements that must be satisfied by the component implementation.
 - **WCAG:**
   - **1.4.3 — Contrast (Minimum):** All text and icon foreground must meet 4.5:1 against their background at rest. Verify disabled tokens — intentionally below full contrast but should remain legible.
   - **2.1.1 — Keyboard:** Enter / Space activates the focused row. Arrow keys, Home/End, and Escape/Tab are handled by the parent — see `interaction.md`. Every row must be reachable via the parent's keyboard model.
-  - **2.4.7 — Focus Visible:** The universal dual-outline focus ring (see `flex-system:styling`) must render on the row whose `<button>` matches `:focus-visible`.
+  - **2.4.7 — Focus Visible:** The universal persistent dual-ring focus visual (see `flex-system:styling`) must render on the row whose `<button>` matches `:focus-visible`.
   - **2.5.8 — Target Size (Minimum, AA):** Minimum interactive target height is 40px (met by the default option height with the documented padding tokens).
   - **4.1.2 — Name, Role, Value:** Every row must have a programmatically-determinable name (label or `aria-label`), the `button` role (native `<button>`), and the `aria-pressed` value.
 - **Screen reader:** Announces the row's label, "button", and pressed state ("pressed" when `aria-pressed="true"`, "not pressed" when `aria-pressed="false"`). Disabled rows announce as "dimmed" or "unavailable". Section Header announces as a heading or non-interactive group label preceding the rows it scopes.
