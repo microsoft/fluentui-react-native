@@ -1259,8 +1259,14 @@ Specify either app or appTopLevelWindow`, which makes attach a strict two-step
   WebdriverIO testrunner registers `tsx` there to load `wdio.conf.ts`, and that
   hook breaks module resolution inside the platform driver's dependency tree.
 - A locked workstation is the most confusing failure mode available: reads all
-  succeed while every click, key, and scroll is refused, and WinAppDriver's own
-  click can report success while doing nothing. `doctor` now detects it.
+  succeed while every click, key, and scroll is refused, and WinAppDriver
+  answers a click with `An unknown error occurred in the remote end`. `doctor`
+  now detects it.
+- A React Native Windows pressable publishes no `InvokePattern` — only
+  `ScrollItemPattern` — so no driver can activate it through a UI Automation
+  pattern, and `click` on Windows depends on synthetic mouse input at the
+  element's centre. Windows desktop tests therefore require a real, unlocked,
+  interactive desktop; that is a CI constraint, not a preference.
 - A WinAppDriver session negotiates as JSONWireProtocol (`isW3C === false`) while
   Mac2 is W3C. Pinning `browserName: ''` still makes WebdriverIO resolve the same
   command implementations, which is what the portable set depends on.

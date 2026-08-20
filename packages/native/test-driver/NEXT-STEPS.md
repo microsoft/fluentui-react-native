@@ -30,16 +30,17 @@ against a real application**.
   lookup, `isDisplayed`, `isEnabled`, `isSelected`, `getText`, `getValue`, `waitForDisplayed`,
   `takeScreenshot`, `browser.desktop.getSessionInfo`, `isFocused` (both the `true` and the `false`
   case), and `scrollIntoView`.
-- The shared suite selects stories through the channel and resolves every `testID` in the live
-  Storybook app.
+- The shared suite selects stories through the channel, resolves every `testID` in the live
+  Storybook app, and **two of the six shared tests pass against it**: the inline `button-default`
+  plan (visible, enabled, text) and the `Button interaction` state-and-label test.
 - `apps/storybook` builds and launches on Windows with **Visual Studio 2026** (18.8); RNW 0.81 did
   not object.
 
 **Still unproven anywhere:**
 
-- **Every interaction.** The machine used for this work was locked for the whole session, and a
+- **Every interaction.** The machine used for this work stayed locked for the whole session, and a
   locked workstation refuses all synthetic input. `click`, `setValue`, `clearValue`, and keyboard
-  input have therefore never been observed to work against the Storybook app. See §3.
+  input have therefore never been observed to work against the Storybook app. See §3 and §7.1.
 - **macOS.** Nothing in this round ran on macOS. The Mac2 attach capabilities, the WDA ownership
   model, and every macOS prerequisite remain as they were.
 - **NovaWindows.** `appium-novawindows-driver` is still not installed and has never been
@@ -131,17 +132,30 @@ PLAN success criterion 6 and the whole point of attach mode.
 
 ### 7.1 Finish the interaction verification — the top item
 
-On an unlocked session, run `yarn desktop:test:windows` and work through whatever the six shared
-tests report. Everything except interaction has already been observed to work, so a failure there is
-about input, focus, or the component — not about the harness.
+Four of the six shared tests press the Button, and none of them has ever been observed to pass.
+Everything around them works: the story is selected, `agentic-storybook-button-interactive`
+resolves, its state and label read correctly, and the status text
+`agentic-storybook-button-interactive-status` reads `Not pressed` or `Pressed <n>` as ground truth.
+
+Three facts to carry into that work, all measured:
+
+1. **A React Native Windows pressable exposes no `InvokePattern`.** Queried through plain UI
+   Automation, `agentic-storybook-button-interactive` supports exactly one pattern:
+   `ScrollItemPattern`. There is no Invoke, so no driver can activate it through a UIA pattern —
+   WinAppDriver has to fall back to synthetic mouse input at the element's centre. That makes
+   `click` on Windows structurally dependent on a real, unlocked, interactive desktop, which is a
+   constraint worth deciding about before this ever runs in CI. It may also be an RNW accessibility
+   gap worth reporting upstream.
+2. **A locked session turns that into an opaque failure.** WinAppDriver answers a click with
+   `An unknown error occurred in the remote end`, and the app is untouched.
+3. **`ReactApp.exe` fail-fast crashed twice during click attempts** — exception `0xc0000409` in
+   `ucrtbase.dll`, recorded in the Application event log. It did not reproduce on a later click
+   attempt, and both crashes happened while the workstation was locked, so this is an observation
+   rather than a diagnosis. If it reproduces on an unlocked session it is an app or RNW bug found
+   by this harness, not a harness bug, and it belongs in an `agentic-components` issue with the
+   faulting module and exception code above.
 
 Watch for the failure mode in §3: a click that resolves without changing anything is not a pass.
-`agentic-storybook-button-interactive-status` is the ground truth; it reads `Not pressed` or
-`Pressed <n>`.
-
-If WinAppDriver's click still does nothing against a React Native Composition view on an unlocked
-session, the next question is whether RNW publishes an Invoke pattern for a pressable; the fallback
-is `windows: click` with explicit coordinates. Record the answer in PLAN §16.
 
 ### 7.2 Screenshots and Composition content — PLAN open decision 5
 

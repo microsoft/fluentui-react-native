@@ -306,8 +306,9 @@ installed or registered, and (for the `windows` backend) WinAppDriver plus Devel
 
 A locked workstation is the failure mode worth knowing about: every read still works — the
 accessibility tree, attributes, screenshots — while every click, key, and scroll is refused, so
-interaction tests fail with opaque driver errors or, worse, a click that reports success and does
-nothing. `doctor` detects it.
+interaction tests fail with opaque driver errors. `doctor` detects it. This is not incidental on
+Windows: a React Native pressable publishes no UI Automation `InvokePattern`, so a click is always
+synthetic mouse input and always needs a real interactive desktop.
 
 `appium-windows-driver` locates WinAppDriver through the **`APPIUM_WAD_PATH`** environment
 variable and then through `%ProgramFiles(x86)%\Windows Application Driver\WinAppDriver.exe`. No
