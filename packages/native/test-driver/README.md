@@ -254,6 +254,11 @@ The runner command line comes entirely from these options. A request contributes
 which is looked up in the generated manifest to obtain an already-known spec path and Mocha grep,
 so nothing an application sends can reach `spawn`.
 
+On Windows a bare `--runner` name is resolved to its `.cmd` launcher and run through an explicit
+`cmd.exe /d /s /c` invocation with every argument quoted. Node refuses to `spawn` a batch launcher
+directly, and `shell: true` would join the arguments unquoted, which breaks the first spec path
+containing a space.
+
 **Discovery.** The service announces `{ url, token, protocolVersion, manifestDigest }` over the
 Storybook channel the application is already connected to, using the channel server's existing
 `send-event` endpoint, and re-broadcasts on an interval. Nothing is configured at build time. This

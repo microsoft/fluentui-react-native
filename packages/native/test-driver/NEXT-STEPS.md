@@ -33,6 +33,11 @@ against a real application**.
 - The shared suite selects stories through the channel, resolves every `testID` in the live
   Storybook app, and **two of the six shared tests pass against it**: the inline `button-default`
   plan (visible, enabled, text) and the `Button interaction` state-and-label test.
+- **`desktop-driver serve` works end to end on Windows.** The service starts, announces itself over
+  the Storybook channel, and the on-device controls report `Ready` — meaning the app received the
+  announcement and reached the service's health endpoint with the announced token. A run requested
+  over the service API spawned the WebdriverIO runner and **passed** `components-button--default`
+  against the live app.
 - `apps/storybook` builds and launches on Windows with **Visual Studio 2026** (18.8); RNW 0.81 did
   not object.
 
@@ -45,8 +50,9 @@ against a real application**.
   model, and every macOS prerequisite remain as they were.
 - **NovaWindows.** `appium-novawindows-driver` is still not installed and has never been
   constructed.
-- **The on-device controls.** `DesktopTestControls`, `desktop:service`, and the loopback run
-  service have still never been driven from the app.
+- **The on-device buttons.** Everything behind them is proven (see above), but **Run current test**,
+  **Run all tests**, and **Cancel** have never been pressed, because pressing anything needs the
+  synthetic input a locked session refuses.
 
 ## 2. State of the tree
 
@@ -182,22 +188,33 @@ against `backend: 'novawindows'`, and record startup and per-command timings for
 capability details are unverified for it: whether it accepts `appium:appTopLevelWindow` in the same
 form, and whether `appium:shouldCloseApp: false` genuinely keeps an attached window open.
 
-### 7.5 The on-device controls
+### 7.5 The on-device buttons
+
+The service and everything behind it are proven on Windows. With the app already running:
 
 ```powershell
 cd apps\storybook
 yarn desktop:generate
-yarn desktop:service          # prints a loopback URL and a per-boot token
-
-# in another terminal, with the printed values
-$env:DESKTOP_TEST_SERVICE_URL = '<url>'
-$env:DESKTOP_TEST_SERVICE_TOKEN = '<token>'
-yarn start
+yarn desktop:service          # starts `desktop-driver serve` and announces over the channel
 ```
 
-Exercise **Run current test**, **Run all tests**, and **Cancel**. `test-service.mjs` spawns
-`yarn.cmd` on win32 and has a `child.on('error')` handler that has never executed; verify a spawn
-failure surfaces as a failed run rather than hanging in `running` forever.
+No environment variables and no rebuild: the service broadcasts its URL, token, and manifest digest
+over the Storybook channel every few seconds, and the controls pick up a restarted service with a
+new token on their own. When the app has received an announcement and reached the service, the
+`desktop-test-status` element reads `Ready`, which is observable through the driver without pressing
+anything:
+
+```powershell
+yarn desktop:generate; yarn desktop:test:windows   # any run attaches; read ~desktop-test-status
+```
+
+What remains is only the three presses — **Run current test**, **Run all tests**, and **Cancel** —
+which need the synthetic input a locked session refuses. Confirm that a run started from the device
+reports progress and that Cancel moves a running run to `cancelled` rather than leaving it in
+`running`.
+
+A spawn failure is already covered: the executor's `child.on('error')` handler turns it into a
+failed run, and `serve.test.ts` asserts it.
 
 ### 7.6 The Button's accessible name
 
@@ -216,13 +233,13 @@ wrong window.
 
 ## 8. Port and process hygiene
 
-| Port      | Owner                                              |
-| --------- | -------------------------------------------------- |
-| 7007      | Storybook channel server                           |
-| 7017      | Desktop test service (`DESKTOP_TEST_SERVICE_PORT`) |
-| 8081      | Metro                                              |
-| 4724+     | WinAppDriver, chosen by `appium-windows-driver`    |
-| ephemeral | Driver host (allocated per run)                    |
+| Port      | Owner                                                |
+| --------- | ---------------------------------------------------- |
+| 7007      | Storybook channel server                             |
+| 7017      | Desktop test service (`desktop-driver serve --port`) |
+| 8081      | Metro                                                |
+| 4724+     | WinAppDriver, chosen by `appium-windows-driver`      |
+| ephemeral | Driver host (allocated per run)                      |
 
 **Do not run `yarn windows:test` (the legacy `@react-native-windows/automation` Jest smoke harness)
 at the same time as the desktop-driver path.** PLAN §13 Phase 4 item 6 requires the two to stay
@@ -250,6 +267,10 @@ session manifest; never kill by process name.
 - **The driver host starts with a clean loader environment.** `sanitizeNodeOptions` strips
   `--require`, `--import`, and `--loader` from the inherited `NODE_OPTIONS`; without it the
   testrunner's `tsx` hook breaks the platform driver's module resolution.
+- **A Windows launcher is spawned through the command interpreter, not `shell: true`.** Node
+  refuses to `spawn` a `.cmd` directly (`EINVAL`), and `shell: true` would join the runner's
+  arguments unquoted. `buildInvocation` builds an explicit `cmd.exe /d /s /c` line with every
+  argument quoted and rejects a value the interpreter cannot be given safely.
 - **Do not commit** `desktop-tests/generated/`, `artifacts/`, `dist/`, or the generated Windows
   solution.
 
@@ -266,10 +287,12 @@ From PLAN §3, marked against what has actually been observed:
 5. Attach mode leaves the externally launched app running — **met on Windows**.
 6. Unexpected termination fails the active test with process, endpoint, driver, and app diagnostics
    — **partly met**: driver-host startup failures now carry the host's own message and stack.
-7. Storybook "Run current test" runs only the selected story — **not verified**.
+7. Storybook "Run current test" runs only the selected story — **partly met**: a single-story run
+   requested over the service API selected exactly that story's spec and grep and passed on
+   Windows; the on-device press itself is unverified.
 8. Storybook "Run all tests" sequences every tested story — **not verified**.
 9. CLI, testrunner, and standalone runs emit the same normalized events and artifact manifest —
-   **met for the testrunner and standalone paths**.
+   **met for the testrunner, standalone, and `serve` paths**.
 10. No Appium CLI or multi-driver router process is started — **met**: the only processes are the
     node host and WinAppDriver.
 

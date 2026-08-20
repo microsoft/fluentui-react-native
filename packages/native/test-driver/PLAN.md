@@ -1240,7 +1240,10 @@ that machine.
    about Composition content. Repeat it on an unlocked session before deciding.
 6. **Resolved.** Static extraction of `parameters.desktopTest` is sufficient; no
    Storybook plugin is required. The manifest digest is byte-identical to the
-   value produced on macOS, so the portability gate works as designed.
+   value produced on macOS, so the portability gate works as designed. Service
+   discovery needs no plugin either: the host-side service announces itself over
+   the channel server's existing `send-event` endpoint, which was verified on
+   Windows by the on-device controls reporting `Ready`.
 7. **Partly resolved.** Measured on Windows: driver-host start plus attach-window
    discovery took 5.5 s; enumerating 16 top-level windows cost about 5 s, nearly
    all of it inside a single WinAppDriver XPath query; the six-test shared suite
@@ -1267,6 +1270,11 @@ Specify either app or appTopLevelWindow`, which makes attach a strict two-step
   pattern, and `click` on Windows depends on synthetic mouse input at the
   element's centre. Windows desktop tests therefore require a real, unlocked,
   interactive desktop; that is a CI constraint, not a preference.
+- Node refuses to `spawn` a `.cmd` launcher directly and fails with `EINVAL`, so
+  the run executor cannot simply name `yarn` on Windows. `shell: true` is not the
+  fix either, because it joins the runner's arguments into one command line
+  without quoting any of them; the executor builds an explicit `cmd.exe /d /s /c`
+  invocation with every argument quoted instead.
 - A WinAppDriver session negotiates as JSONWireProtocol (`isW3C === false`) while
   Mac2 is W3C. Pinning `browserName: ''` still makes WebdriverIO resolve the same
   command implementations, which is what the portable set depends on.

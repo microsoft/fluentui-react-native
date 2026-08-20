@@ -68,20 +68,50 @@ describe('runner command resolution', () => {
     expect(invocation.command).toBe('yarn');
     expect(invocation.args).toEqual(['wdio', 'run', 'wdio.conf.ts', '--spec', manifest.entries[0].spec]);
     expect(invocation.env.DESKTOP_TEST_GREP).toBe(manifest.entries[0].grep);
+    expect(invocation.windowsVerbatimArguments).toBeUndefined();
+  });
+
+  it('runs a Windows launcher through the command interpreter with every argument quoted', () => {
+    // Node fails with EINVAL when asked to spawn a .cmd directly, and `shell: true` would join the
+    // arguments unquoted, so a spec path containing a space has to survive this.
+    const spaced = { spec: 'C:\\dev\\my repo\\generated.spec.ts', grep: '\\[story:x\\]' };
+    const invocation = buildInvocation(runner, spaced, 'win32');
+
+    expect(invocation.command.toLowerCase()).toContain('cmd.exe');
+    expect(invocation.args.slice(0, 3)).toEqual(['/d', '/s', '/c']);
+    expect(invocation.args[3]).toBe('""yarn.cmd" "wdio" "run" "wdio.conf.ts" "--spec" "C:\\dev\\my repo\\generated.spec.ts""');
+    expect(invocation.windowsVerbatimArguments).toBe(true);
+    expect(invocation.env.DESKTOP_TEST_GREP).toBe(spaced.grep);
+  });
+
+  it('leaves a real executable unwrapped on Windows', () => {
+    // A bare command is always treated as a launcher, so an executable is named explicitly.
+    const invocation = buildInvocation({ ...runner, command: 'node.exe' }, manifest.entries[0], 'win32');
+
+    expect(invocation.command).toBe('node.exe');
+    expect(invocation.args).toContain('--spec');
+    expect(invocation.windowsVerbatimArguments).toBeUndefined();
+  });
+
+  it('refuses an argument the command interpreter cannot be given safely', () => {
+    const hostile = { spec: 'C:\\dev\\repo & calc.exe\\generated.spec.ts', grep: 'x' };
+
+    expect(() => buildInvocation(runner, hostile, 'win32')).toThrow(DesktopValidationError);
   });
 });
 
 describe('run executor', () => {
-  function createExecutor(behaviour: (child: FakeChild) => void) {
-    const calls: { command: string; args: readonly string[] }[] = [];
-    const spawnImpl = ((command: string, args: readonly string[]) => {
-      calls.push({ command, args });
+  function createExecutor(behaviour: (child: FakeChild) => void, platform: NodeJS.Platform = 'darwin') {
+    const calls: { command: string; args: readonly string[]; options?: { windowsVerbatimArguments?: boolean } }[] = [];
+    const spawnImpl = ((command: string, args: readonly string[], options?: { windowsVerbatimArguments?: boolean }) => {
+      calls.push({ command, args, options });
       const child = new FakeChild();
       setTimeout(() => behaviour(child), 0);
       return child as never;
     }) as never;
 
-    return { calls, execute: createWebdriverIoRunExecutor({ manifest, runner, spawnImpl }) };
+    // The platform is pinned so the assertions below describe the executor, not the host.
+    return { calls, execute: createWebdriverIoRunExecutor({ manifest, runner, spawnImpl, platform }) };
   }
 
   it('passes a story when the runner exits zero', async () => {
@@ -93,6 +123,15 @@ describe('run executor', () => {
     expect(results[0].status).toBe('passed');
     expect(progress).toEqual(['passed']);
     expect(calls[0].args).toContain('--spec');
+  });
+
+  it('spawns a Windows launcher verbatim through the command interpreter', async () => {
+    const { calls, execute } = createExecutor((child) => child.emit('exit', 0, null), 'win32');
+
+    await execute(['components-button--default'], () => undefined, new AbortController().signal);
+
+    expect(calls[0].command.toLowerCase()).toContain('cmd.exe');
+    expect(calls[0].options?.windowsVerbatimArguments).toBe(true);
   });
 
   it('fails the story when the runner exits non-zero', async () => {

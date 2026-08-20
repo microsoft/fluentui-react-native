@@ -9,7 +9,7 @@
 
 import { spawn as nodeSpawn, type ChildProcess } from 'node:child_process';
 
-import { DesktopCancelledError } from '../errors.ts';
+import { DesktopCancelledError, DesktopValidationError } from '../errors.ts';
 import type { DesktopRunExecutor } from './test-service.ts';
 import type { DesktopTestResult, StoryTestManifest } from '../types.ts';
 
@@ -30,6 +30,8 @@ export interface RunExecutorOptions {
   runner: DesktopRunnerCommand;
   /** Injected for tests; defaults to `child_process.spawn`. */
   spawnImpl?: typeof nodeSpawn;
+  /** Injected for tests; defaults to the current platform. */
+  platform?: NodeJS.Platform;
   /** Receives runner stdout/stderr lines for logging. */
   onOutput?: (chunk: string) => void;
 }
@@ -54,6 +56,42 @@ export interface RunnerInvocation {
   command: string;
   args: readonly string[];
   env: Record<string, string | undefined>;
+  /** Set when the command line is handed to `cmd.exe` already quoted. */
+  windowsVerbatimArguments?: boolean;
+}
+
+/** Windows batch launchers, which `spawn` cannot execute directly. */
+const WINDOWS_LAUNCHER = /\.(?:cmd|bat)$/i;
+
+/**
+ * Characters `cmd.exe` still acts on inside a quoted argument, or that break quoting outright.
+ *
+ * Every value that reaches this point comes from the consumer's own configuration or from a
+ * generated manifest path, never from the application, so rejecting them is a guard against an
+ * unquotable command line rather than against a hostile one.
+ */
+const CMD_UNSAFE = /["%!^&|<>]/;
+
+/**
+ * Wraps a Windows launcher in an explicit `cmd.exe` call.
+ *
+ * Node refuses to `spawn` a `.cmd` or `.bat` file directly — it fails with `EINVAL` — because a
+ * batch launcher is only executable through a command interpreter. The obvious fix, `shell: true`,
+ * joins the arguments into the command line without quoting any of them, which breaks the moment a
+ * spec path contains a space. Building the interpreter call here instead keeps every argument
+ * quoted and is exercised by tests on any platform.
+ */
+function toCommandInterpreterInvocation(command: string, args: readonly string[]): { command: string; args: string[] } {
+  for (const value of [command, ...args]) {
+    if (CMD_UNSAFE.test(value)) {
+      throw new DesktopValidationError('Runner invocation cannot be passed to the Windows command interpreter', [
+        `"${value}" contains one of " % ! ^ & | < >`,
+      ]);
+    }
+  }
+  // `/d` skips AutoRun scripts, and `/s` makes the interpreter strip exactly the outer quotes.
+  const commandLine = [command, ...args].map((value) => `"${value}"`).join(' ');
+  return { command: process.env.ComSpec ?? 'cmd.exe', args: ['/d', '/s', '/c', `"${commandLine}"`] };
 }
 
 /** Builds the exact invocation for one manifest entry, for logging and for tests. */
@@ -62,11 +100,14 @@ export function buildInvocation(
   entry: { spec: string; grep: string },
   platform: NodeJS.Platform = process.platform,
 ): RunnerInvocation {
-  return {
-    command: resolveRunnerCommand(runner.command, platform),
-    args: [...(runner.args ?? []), '--spec', entry.spec],
-    env: { ...process.env, ...runner.env, DESKTOP_TEST_GREP: entry.grep },
-  };
+  const command = resolveRunnerCommand(runner.command, platform);
+  const args = [...(runner.args ?? []), '--spec', entry.spec];
+  const env = { ...process.env, ...runner.env, DESKTOP_TEST_GREP: entry.grep };
+
+  if (platform === 'win32' && WINDOWS_LAUNCHER.test(command)) {
+    return { ...toCommandInterpreterInvocation(command, args), env, windowsVerbatimArguments: true };
+  }
+  return { command, args, env };
 }
 
 /** Creates the executor the loopback test service calls for each requested story. */
@@ -80,13 +121,14 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
       return Promise.resolve({ ok: false, message: `Story "${storyId}" is not in the generated manifest` });
     }
 
-    const invocation = buildInvocation(options.runner, entry);
+    const invocation = buildInvocation(options.runner, entry, options.platform);
 
     return new Promise((resolve) => {
       const child: ChildProcess = spawnImpl(invocation.command, [...invocation.args], {
         cwd: options.runner.cwd,
         env: invocation.env,
         stdio: ['ignore', 'pipe', 'pipe'],
+        windowsVerbatimArguments: invocation.windowsVerbatimArguments,
       });
 
       let settled = false;
