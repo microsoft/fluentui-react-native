@@ -8,7 +8,7 @@ module.exports = {
     },
     "@fluentui-react-native/components": {
       "name": "@fluentui-react-native/components",
-      "version": "0.2.2"
+      "version": "0.2.3"
     },
     "@fluentui-react-native/design": {
       "name": "@fluentui-react-native/design",
