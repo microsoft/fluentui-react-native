@@ -22,6 +22,16 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Tab', () => {
+  it('renders selection without changing it on press', async () => {
+    const onPress = jest.fn();
+    const component = await renderTab({ controls: 'files-panel', content: 'Files', onPress, selected: false });
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(getRoot(component).props.accessibilityState.selected).toBe(false);
+  });
+
   it('renders default icon-and-text accessibility and stable label overlay', async () => {
     const component = await renderTab({ controls: 'files-panel', content: 'Files' });
     const root = getRoot(component);

@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -97,6 +98,38 @@ export const Multiselect: Story = {
     content: 'Multi select',
     hasMultiselect: true,
     selected: true,
+  },
+};
+
+export const ExternallyDrivenSelection: Story = {
+  render: () => {
+    const options = ['Compact', 'Comfortable', 'Spacious'];
+    const Menu = () => {
+      const [choice, setChoice] = useState('Comfortable');
+      return (
+        <StoryGroup label={`Density: ${choice}`}>
+          {options.map((option) => (
+            <MenuItem
+              key={option}
+              content={option}
+              hasCheckmark
+              onPress={() => setChoice(option)}
+              secondaryContent={null}
+              selected={choice === option}
+            />
+          ))}
+        </StoryGroup>
+      );
+    };
+    return <Menu />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A menu owns which command is active. Each checkmark item renders the selected value it is given and reports presses through onPress, so the menu is what clears the previous choice.',
+      },
+    },
   },
 };
 

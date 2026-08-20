@@ -60,6 +60,28 @@ describe('Accordion', () => {
     expect(component.getByText('Content placeholder')).toBeOnTheScreen();
   });
 
+  it('starts from defaultExpanded and still collapses on press', async () => {
+    const onExpandedChange = jest.fn();
+    const component = await renderAccordion({ defaultExpanded: true, onExpandedChange });
+
+    expect(getHeader(component).props.accessibilityState.expanded).toBe(true);
+
+    await fireEvent.press(getHeader(component));
+
+    expect(onExpandedChange).toHaveBeenCalledWith(false);
+    expect(getHeader(component).props.accessibilityState.expanded).toBe(false);
+  });
+
+  it('reports presses without changing state when expansion is externally driven', async () => {
+    const onExpandedChange = jest.fn();
+    const component = await renderAccordion({ expanded: false, onExpandedChange });
+
+    await fireEvent.press(getHeader(component));
+
+    expect(onExpandedChange).toHaveBeenCalledWith(true);
+    expect(getHeader(component).props.accessibilityState.expanded).toBe(false);
+  });
+
   it('keeps user accessibility state values and uses the visible title for the accessible name', async () => {
     const component = await renderAccordion({
       accessibilityState: { busy: true },

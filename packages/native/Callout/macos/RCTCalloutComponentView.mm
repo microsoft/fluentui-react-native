@@ -17,46 +17,33 @@
 
 using namespace facebook::react;
 
-namespace facebook::react {
-
-extern const char CalloutComponentName[] = "Callout";
-
-using CalloutShadowNode = ConcreteViewShadowNode<
-    CalloutComponentName,
-    RCTCalloutProps,
-    RCTCalloutEventEmitter,
-    RCTCalloutState>;
-using CalloutComponentDescriptor = ConcreteComponentDescriptor<CalloutShadowNode>;
-
-} // namespace facebook::react
-
-static NSRectEdge RCTNSRectEdgeFromDirectionalHint(RCTCalloutDirectionalHint hint)
+static NSRectEdge RCTNSRectEdgeFromDirectionalHint(CalloutDirectionalHint hint)
 {
   switch (hint) {
-    case RCTCalloutDirectionalHint::LeftTopEdge:
-    case RCTCalloutDirectionalHint::LeftCenter:
-    case RCTCalloutDirectionalHint::LeftBottomEdge:
+    case CalloutDirectionalHint::LeftTopEdge:
+    case CalloutDirectionalHint::LeftCenter:
+    case CalloutDirectionalHint::LeftBottomEdge:
       return NSRectEdgeMinX;
-    case RCTCalloutDirectionalHint::TopLeftEdge:
-    case RCTCalloutDirectionalHint::TopAutoEdge:
-    case RCTCalloutDirectionalHint::TopCenter:
-    case RCTCalloutDirectionalHint::TopRightEdge:
+    case CalloutDirectionalHint::TopLeftEdge:
+    case CalloutDirectionalHint::TopAutoEdge:
+    case CalloutDirectionalHint::TopCenter:
+    case CalloutDirectionalHint::TopRightEdge:
       return NSRectEdgeMaxY;
-    case RCTCalloutDirectionalHint::RightTopEdge:
-    case RCTCalloutDirectionalHint::RightCenter:
-    case RCTCalloutDirectionalHint::RightBottomEdge:
+    case CalloutDirectionalHint::RightTopEdge:
+    case CalloutDirectionalHint::RightCenter:
+    case CalloutDirectionalHint::RightBottomEdge:
       return NSRectEdgeMaxX;
-    case RCTCalloutDirectionalHint::BottomLeftEdge:
-    case RCTCalloutDirectionalHint::BottomAutoEdge:
-    case RCTCalloutDirectionalHint::BottomCenter:
-    case RCTCalloutDirectionalHint::BottomRightEdge:
+    case CalloutDirectionalHint::BottomLeftEdge:
+    case CalloutDirectionalHint::BottomAutoEdge:
+    case CalloutDirectionalHint::BottomCenter:
+    case CalloutDirectionalHint::BottomRightEdge:
       return NSRectEdgeMinY;
   }
 }
 
 static void RCTApplyCalloutAppearance(
     FRNCalloutView *calloutView,
-    const RCTCalloutProps &props,
+    const CalloutProps &props,
     const LayoutMetrics &layoutMetrics)
 {
   const auto borderMetrics = props.resolveBorderMetrics(layoutMetrics);
@@ -84,7 +71,7 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
   return nil;
 }
 
-@interface RCTCalloutComponentView () <RCTRCTCalloutViewProtocol>
+@interface RCTCalloutComponentView () <RCTCalloutViewProtocol>
 @end
 
 @implementation RCTCalloutComponentView {
@@ -102,7 +89,7 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 - (instancetype)initWithFrame:(CGRect)frame
 {
   if (self = [super initWithFrame:frame]) {
-    static const auto defaultProps = std::make_shared<const RCTCalloutProps>();
+    static const auto defaultProps = std::make_shared<const CalloutProps>();
     _props = defaultProps;
 
     // This view manages content mounted in the Callout window and must not render in the React surface.
@@ -138,7 +125,7 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 
 - (void)updateProps:(const Props::Shared &)props oldProps:(const Props::Shared &)oldProps
 {
-  const auto &newProps = *std::static_pointer_cast<const RCTCalloutProps>(props);
+  const auto &newProps = *std::static_pointer_cast<const CalloutProps>(props);
 
   _calloutView.directionalHint = RCTNSRectEdgeFromDirectionalHint(newProps.directionalHint);
   _calloutView.setInitialFocus = newProps.setInitialFocus;
@@ -170,7 +157,7 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
   const auto size = layoutMetrics.frame.size;
   [_calloutView updateContentSize:NSMakeSize(size.width, size.height)];
 
-  const auto &props = *std::static_pointer_cast<const RCTCalloutProps>(_props);
+  const auto &props = *std::static_pointer_cast<const CalloutProps>(_props);
   RCTApplyCalloutAppearance(_calloutView, props, layoutMetrics);
 }
 
@@ -183,7 +170,7 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 
 - (void)handleCommand:(const NSString *)commandName args:(const NSArray *)args
 {
-  RCTRCTCalloutHandleCommand(self, commandName, args);
+  RCTCalloutHandleCommand(self, commandName, args);
 }
 
 - (void)focusWindow
@@ -205,14 +192,14 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 - (void)emitOnShow
 {
   if (_eventEmitter) {
-    std::static_pointer_cast<const RCTCalloutEventEmitter>(_eventEmitter)->onShow({.target = 0});
+    std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)->onShow({.target = 0});
   }
 }
 
 - (void)emitOnDismiss
 {
   if (_eventEmitter) {
-    std::static_pointer_cast<const RCTCalloutEventEmitter>(_eventEmitter)->onDismiss({.target = 0});
+    std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)->onDismiss({.target = 0});
   }
 }
 

@@ -25,6 +25,10 @@ audit.
 - Keep render-only slots private to state.
 - Exclude native `children` or other props the component owns.
 - Preserve the distinction between omitted and false controlled values.
+- Classify every stateful axis before wiring it. A self-driving control, where the interaction _is_ the state change,
+  supports both directions through the `<state>` / `default<State>` / `on<State>Change` triple and `useToggleState`
+  from `framework-base`. Externally driven selection exposes only `selected`, never changes it, and reports the
+  interaction through `onPress`.
 - Use Flex tokens first and document genuine token gaps.
 - Create style factories only at module scope and cache theme-only styles.
 - Declare state precedence explicitly; disabled wins over pressed, which wins over hovered.
@@ -34,6 +38,8 @@ audit.
   component-qualified unstable names so another component can reuse the pipeline.
 - Test public accessibility, every finite variant axis, interactions, optional slots, user forwarding, and constrained
   layout.
+- Test both paths of a self-driving axis, and test that an externally driven `selected` does not change on press.
+- Keep a self-driving controlled prop out of story `args`, and keep an identity-changing axis out of story controls.
 
 ## Focused references
 

@@ -37,13 +37,17 @@ type ListboxItemStateSlots = ListboxItemSlots & {
 
 export type ListboxItemStateProps = {
   variant?: ListboxItemVariant;
-  selected?: boolean;
   disabled?: boolean;
   secondaryContentPosition?: ListboxItemSecondaryContentPosition;
   checkmark?: boolean;
   chevron?: boolean;
   multiselect?: boolean;
   loading?: boolean;
+  /**
+   * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
+   * owns the value, and the component reports interactions through `onPress` rather than changing it.
+   */
+  selected?: boolean;
 };
 
 export type ListboxItemRootProps = OwnedRootProps<PressableProps>;

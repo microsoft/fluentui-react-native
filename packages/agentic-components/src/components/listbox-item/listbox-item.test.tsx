@@ -17,6 +17,18 @@ function renderListboxItem(props: React.ComponentProps<typeof ListboxItem>): Pro
 }
 
 describe('ListboxItem', () => {
+  it('renders selection without changing it on press', async () => {
+    const onPress = jest.fn();
+    const component = await renderListboxItem({ content: 'Inbox', multiselect: true, onPress, selected: false });
+
+    expect(component.queryByText('✓')).toBeNull();
+
+    await fireEvent.press(component.getByRole('button'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(component.queryByText('✓')).toBeNull();
+  });
+
   it('is directly renderable through the component boundary', () => {
     expect(isDirectComponent(ListboxItem)).toBe(false);
   });

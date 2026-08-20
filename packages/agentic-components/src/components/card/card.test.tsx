@@ -27,6 +27,16 @@ describe('Card', () => {
     jest.restoreAllMocks();
   });
 
+  it('renders selection without changing it on press', async () => {
+    const onPress = jest.fn();
+    const component = await renderCard({ accessibilityLabel: 'Report', onPress, selected: false });
+
+    await fireEvent.press(component.getByRole('button'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(component.getByRole('button').props.accessibilityState.selected).toBe(false);
+  });
+
   it('renders the default surface and content', async () => {
     const component = await renderCard({
       content: {

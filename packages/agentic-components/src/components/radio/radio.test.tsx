@@ -22,6 +22,16 @@ function getRootStyle(component: RenderResult) {
 }
 
 describe('Radio', () => {
+  it('renders selection without changing it on press', async () => {
+    const onPress = jest.fn();
+    const component = await renderRadio({ onPress, selected: false });
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+  });
+
   it('renders the default label and accessibility state', async () => {
     const component = await renderRadio({});
     const root = getRoot(component);

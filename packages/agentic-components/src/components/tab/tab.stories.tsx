@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -116,6 +117,37 @@ export const Selected: Story = {
     docs: {
       description: {
         story: 'Selected toggles the heavy background, semibold label weight, and filled icon.',
+      },
+    },
+  },
+};
+
+export const Tablist: Story = {
+  render: () => {
+    const tabs = ['Files', 'Shared', 'Recent'];
+    const Tablist = () => {
+      const [active, setActive] = useState('Files');
+      return (
+        <StoryGroup label={`Active panel: ${active}`}>
+          {tabs.map((name) => (
+            <Tab
+              key={name}
+              content={name}
+              controls={`${name.toLowerCase()}-panel`}
+              onPress={() => setActive(name)}
+              selected={active === name}
+            />
+          ))}
+        </StoryGroup>
+      );
+    };
+    return <Tablist />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A tablist owns which tab is selected. Each tab renders the selected value it is given and reports presses through onPress, so the list is what moves selection between tabs.',
       },
     },
   },

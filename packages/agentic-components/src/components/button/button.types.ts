@@ -66,7 +66,9 @@ export type ButtonStateProps = {
    */
   iconPosition?: ButtonIconPosition;
   /**
-   * Whether the button is selected. Supplying this prop enables toggle-button accessibility semantics.
+   * Whether the button renders as selected. Supplying this prop enables toggle-button accessibility semantics.
+   * Selection is externally driven: the button never changes it on press, because a press is an action rather than a
+   * state change. Own the value in the caller and update it from `onPress`.
    */
   selected?: boolean;
 };

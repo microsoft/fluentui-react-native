@@ -34,10 +34,14 @@ export type ListItemStateSlots = ListItemSlots & {
 
 export type ListItemStateProps = {
   disabled?: boolean;
-  selected?: boolean;
   secondaryContentPosition?: ListItemSecondaryContentPosition;
   selectionMode?: ListItemSelectionMode;
   size?: ListItemSize;
+  /**
+   * Whether the component renders as selected. Selection is externally driven: the caller or the surrounding group
+   * owns the value, and the component reports interactions through `onPress` rather than changing it.
+   */
+  selected?: boolean;
 };
 
 export type ListItemExposedPressableProps = OwnedRootProps<PressableProps>;

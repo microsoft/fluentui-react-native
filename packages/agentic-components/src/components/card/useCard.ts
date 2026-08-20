@@ -47,9 +47,9 @@ export function useCard_unstable(props: CardProps): CardState {
     ...rest
   } = props;
 
-  const hasSelected = selected !== undefined;
-  const isInteractive = onPress !== undefined || hasSelected;
-  const isSelectable = hasSelected;
+  // Selection is externally driven; the card renders the value it is given and reports presses through onPress.
+  const isSelectable = selected !== undefined;
+  const isInteractive = onPress !== undefined || isSelectable;
   const { width } = useWindowDimensions();
   const resolvedDirection = direction === 'horizontal' && width < horizontalCollapseWidth ? 'vertical' : direction;
   const themeState = useThemeState();

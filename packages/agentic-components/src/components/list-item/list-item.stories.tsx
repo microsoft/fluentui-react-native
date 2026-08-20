@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -50,7 +51,7 @@ const meta: Meta<typeof ListItem> = {
     secondaryContent: 'Secondary',
     secondaryContentPosition: 'right',
     selected: false,
-    selectionMode: 'none',
+    selectionMode: 'single',
     size: 'medium',
   },
   argTypes: {
@@ -179,6 +180,38 @@ export const Selected: Story = {
     docs: {
       description: {
         story: 'Selected swaps the primary label to semibold and can swap the leading icon when a filled variant is provided.',
+      },
+    },
+  },
+};
+
+export const ExternallyDrivenSelection: Story = {
+  render: () => {
+    const rows = ['Inbox', 'Drafts', 'Archive'];
+    const Picker = () => {
+      const [selected, setSelected] = useState<readonly string[]>(['Inbox']);
+      return (
+        <StoryGroup label={`${selected.length} of ${rows.length} selected`}>
+          {rows.map((name) => (
+            <ListItem
+              key={name}
+              content={name}
+              onPress={() => setSelected(selected.includes(name) ? selected.filter((current) => current !== name) : [...selected, name])}
+              secondaryContent={null}
+              selected={selected.includes(name)}
+              selectionMode="multiple"
+            />
+          ))}
+        </StoryGroup>
+      );
+    };
+    return <Picker />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A multi-select list owns which rows are chosen. Each row renders the selected value it is given and reports presses through onPress.',
       },
     },
   },

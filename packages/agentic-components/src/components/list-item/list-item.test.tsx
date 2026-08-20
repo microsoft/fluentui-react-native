@@ -22,6 +22,16 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('ListItem', () => {
+  it('renders selection without changing it on press', async () => {
+    const onPress = jest.fn();
+    const component = await renderListItem({ content: 'Inbox', onPress, selected: false, selectionMode: 'multiple' });
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(getRoot(component).props.accessibilityState.selected).toBe(false);
+  });
+
   it('renders the default row with selection hidden and stable content styling', async () => {
     const component = await renderListItem({ content: 'Inbox' });
     const root = getRoot(component);

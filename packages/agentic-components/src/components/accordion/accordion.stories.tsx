@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -28,11 +29,11 @@ const meta: Meta<typeof Accordion> = {
   title: 'Components/Accordion',
   component: Accordion,
   args: {
-    expanded: false,
+    defaultExpanded: false,
     layout: 'chevronStart',
   },
   argTypes: {
-    expanded: { control: 'boolean' },
+    defaultExpanded: { control: 'boolean' },
     focused: { control: 'boolean' },
     layout: { control: 'select', options: layouts.map(({ value }) => value) },
   },
@@ -68,8 +69,8 @@ export const Overview: Story = {
         <Accordion layout="chevronEnd" />
       </StoryGroup>
       <StoryGroup label="State">
-        <Accordion expanded={false} />
-        <Accordion expanded />
+        <Accordion defaultExpanded={false} />
+        <Accordion defaultExpanded />
       </StoryGroup>
     </View>
   ),
@@ -102,9 +103,9 @@ export const Layout: Story = {
 export const Expanded: Story = {
   render: () => (
     <View style={styles.story}>
-      <Accordion expanded={false} />
+      <Accordion defaultExpanded={false} />
       <Accordion
-        expanded
+        defaultExpanded
         bodyContent={{
           children: (
             <View style={styles.bodyCard}>
@@ -124,10 +125,40 @@ export const Expanded: Story = {
   },
 };
 
+export const ExternallyDrivenExpansion: Story = {
+  render: () => {
+    const sections = ['General', 'Advanced'];
+    const Group = () => {
+      const [open, setOpen] = useState<string | null>('General');
+      return (
+        <View style={styles.story}>
+          {sections.map((name) => (
+            <Accordion
+              key={name}
+              expanded={open === name}
+              onExpandedChange={(expanded) => setOpen(expanded ? name : null)}
+              title={{ children: name }}
+            />
+          ))}
+        </View>
+      );
+    };
+    return <Group />;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Supplying expanded makes the caller the owner of the state. Here one owner keeps at most a single section open by reacting to each header press through onExpandedChange.',
+      },
+    },
+  },
+};
+
 export const BodyContent: Story = {
   render: () => (
     <Accordion
-      expanded
+      defaultExpanded
       bodyContent={{
         children: (
           <View style={styles.bodyCard}>
@@ -152,7 +183,7 @@ export const Accessibility: Story = {
   args: {
     accessibilityLabel: 'Accordion section',
     focused: true,
-    expanded: false,
+    defaultExpanded: false,
   },
   parameters: {
     docs: {
