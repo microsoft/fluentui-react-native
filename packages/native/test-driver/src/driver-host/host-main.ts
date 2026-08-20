@@ -100,8 +100,16 @@ if (invokedDirectly) {
     process.exit(2);
   }
   runDriverHost(configFile).catch((error: unknown) => {
+    // The parent surfaces this verbatim as the run's infrastructure failure, so it carries the
+    // stack: a driver that fails to construct almost always fails inside a dependency, and the
+    // message alone does not say which one.
     process.stderr.write(
-      `${JSON.stringify({ type: 'desktop-driver-host/error', message: error instanceof Error ? error.message : String(error) })}\n`,
+      `${JSON.stringify({
+        type: 'desktop-driver-host/error',
+        message: error instanceof Error ? error.message : String(error),
+        code: (error as NodeJS.ErrnoException | undefined)?.code,
+        stack: error instanceof Error ? error.stack : undefined,
+      })}\n`,
     );
     process.exit(1);
   });

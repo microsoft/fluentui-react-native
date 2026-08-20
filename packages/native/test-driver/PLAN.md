@@ -1207,20 +1207,63 @@ Run one unchanged WebdriverIO suite against fake, Windows, and macOS endpoints:
 
 ## 16. Open decisions resolved by Phase 0
 
-1. Whether the deprecated base-driver `server` host is acceptable behind an
-   exact-pinned adapter, needs a maintained local replacement, or forces the
-   private Appium core fallback.
-2. Whether Windows Driver plus WinAppDriver or NovaWindows is the initial
-   Windows backend.
-3. The exact Mac2 attach/no-relaunch capability combination and WDA ownership
-   model.
-4. The first versioned portable WebdriverIO command and matcher matrix.
-5. Whether Windows Graphics Capture is required in the first public release.
-6. Whether Storybook parameters can be extracted through supported APIs or
-   require a small generated manifest plugin.
-7. Acceptable cold-start and warm-command performance budgets.
-8. Initial supported version ranges for RNW, RN macOS, WebdriverIO, platform
-   drivers, native endpoints, and Storybook.
+Status recorded from a Windows 11 (26200) machine on 2026-08-19, running Node
+24.15, Yarn 4.18, `appium@3.2.0`, `appium-windows-driver@5.1.9`,
+`webdriverio@9.24.0`, WinAppDriver 1.2.1, and React Native Windows 0.81.32.
+Anything not marked **Resolved** is still open, and macOS was not reachable from
+that machine.
+
+1. **Resolved.** The base-driver `server` plus `routeConfiguringFunction` host is
+   acceptable behind the isolated adapter. `startAppiumHostedDriver` constructs
+   `WindowsDriver` inside the child host, serves real W3C sessions on loopback,
+   and spawns and reaps WinAppDriver. The imports stay confined to
+   `src/driver-host/backends.ts`, and `src/driver-host/w3c-server.ts` remains the
+   maintained fallback.
+2. **Open.** WinAppDriver plus Windows Driver is proven for session creation,
+   attach-by-window-handle, element lookup by accessibility id, state and text
+   reads, source, and screenshots. NovaWindows has still never been constructed;
+   `appium-novawindows-driver` is not installed. Note that WinAppDriver 1.2.1 is
+   distributed only as an MSI, and 1.2.99 only as per-architecture installers.
+3. **Open.** Mac2 attach and WDA ownership are unchanged and unverified.
+4. **Resolved for Windows.** Version 1 of the portable matrix holds, with two
+   implementations corrected by measurement: `isFocused` reads the backend focus
+   attribute (`HasKeyboardFocus`) because WinAppDriver implements no
+   active-element route at all, and `scrollIntoView` is a no-op when the element
+   is already displayed and otherwise sends a real wheel delta. One portability
+   limit is now documented rather than assumed: `getText` returns an element's
+   own accessible name, which is empty for a React Native pressable whose label
+   lives in a child `Text`.
+5. **Open.** A WinAppDriver screenshot of the Storybook window returned a PNG at
+   exactly the window's size with varied content, which argues against needing a
+   Windows Graphics Capture fallback — but the only capture obtained was taken
+   while the workstation was locked, so it cannot yet be trusted as evidence
+   about Composition content. Repeat it on an unlocked session before deciding.
+6. **Resolved.** Static extraction of `parameters.desktopTest` is sufficient; no
+   Storybook plugin is required. The manifest digest is byte-identical to the
+   value produced on macOS, so the portability gate works as designed.
+7. **Partly resolved.** Measured on Windows: driver-host start plus attach-window
+   discovery took 5.5 s; enumerating 16 top-level windows cost about 5 s, nearly
+   all of it inside a single WinAppDriver XPath query; the six-test shared suite
+   ran in 51 s wall clock against the live app. No macOS numbers yet.
+8. **Partly resolved.** The versions listed above are the first verified set for
+   Windows. macOS ranges are still unverified.
+
+### 16.1 Environment findings that belong in the contract
+
+- `appium:app` and `appium:appTopLevelWindow` are mutually exclusive.
+  WinAppDriver rejects a session that carries both with `Bad capabilities.
+Specify either app or appTopLevelWindow`, which makes attach a strict two-step
+  operation: discover through a root session, then create the real session with
+  the handle alone.
+- The driver host must not inherit loader registrations from `NODE_OPTIONS`. The
+  WebdriverIO testrunner registers `tsx` there to load `wdio.conf.ts`, and that
+  hook breaks module resolution inside the platform driver's dependency tree.
+- A locked workstation is the most confusing failure mode available: reads all
+  succeed while every click, key, and scroll is refused, and WinAppDriver's own
+  click can report success while doing nothing. `doctor` now detects it.
+- A WinAppDriver session negotiates as JSONWireProtocol (`isW3C === false`) while
+  Mac2 is W3C. Pinning `browserName: ''` still makes WebdriverIO resolve the same
+  command implementations, which is what the portable set depends on.
 
 ## 17. Research sources
 

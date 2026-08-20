@@ -11,13 +11,14 @@
  */
 
 import { ArtifactStore } from '../artifacts.ts';
-import { buildCapabilities } from './capability-map.ts';
+import { buildCapabilities, buildRootSessionCapabilities } from './capability-map.ts';
 import { attachDesktopCommands, type DesktopBrowserLike } from './commands.ts';
 import { DesktopLifecycle } from '../lifecycle.ts';
 import { OwnershipManifest } from '../ownership.ts';
 import { resolveDesktopOptions } from '../config.ts';
 import { StoryController } from '../storybook/controller.ts';
 import { appendCleanupFailure, DesktopDriverError } from '../errors.ts';
+import { createRootSessionEnumerator, discoverAttachWindow, type DesktopWindowMatch } from './window-discovery.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import { portableCommandsFor } from '../capabilities.ts';
 import type { DriverHostHandle } from '../driver-host/client.ts';
@@ -51,6 +52,10 @@ export interface PublishedEndpoint {
   artifactsDirectory: string;
   driverHostLog?: string;
   specDigest?: string;
+  /** Native window handle resolved from an attach target, when the backend needs one. */
+  windowHandle?: string;
+  /** How the window was selected, for the `windowDiscovered` lifecycle event. */
+  windowMatch?: { matchedBy: string; exact: boolean; name?: string; processId?: number };
   /** Set instead of the endpoint fields when the driver host failed to start. */
   error?: string;
 }
@@ -63,6 +68,17 @@ interface MutableWdioConfig {
   [key: string]: unknown;
 }
 
+export interface DesktopServiceOptions extends DesktopDriverOptions {
+  /**
+   * Digest of the generated story-test manifest.
+   *
+   * Recorded in `run.json` so a CI job can prove that two platform jobs executed the same story
+   * tests. The config factory sets it; `desktopSpecDigest` on the WebdriverIO config overrides it
+   * for a hand-written config.
+   */
+  specDigest?: string;
+}
+
 export class DesktopDriverService {
   private readonly options: ResolvedDesktopDriverOptions;
   private readonly ownership: OwnershipManifest;
@@ -70,14 +86,16 @@ export class DesktopDriverService {
   private readonly results: DesktopTestResult[] = [];
   private readonly startedAt = new Date().toISOString();
   private readonly storyIds = new Set<string>();
+  private readonly specDigest?: string;
 
   private host?: DriverHostHandle;
   private artifacts?: ArtifactStore;
   private browser?: DesktopBrowserLike;
   private endpoint?: PublishedEndpoint;
 
-  constructor(serviceOptions: DesktopDriverOptions) {
+  constructor(serviceOptions: DesktopServiceOptions) {
     this.options = resolveDesktopOptions(serviceOptions);
+    this.specDigest = serviceOptions.specDigest;
     this.ownership = new OwnershipManifest(`desktop-driver-${process.pid}`);
     this.lifecycle = new DesktopLifecycle({
       platform: this.options.platform,
@@ -115,6 +133,16 @@ export class DesktopDriverService {
 
     this.ownership.record('driverHost', this.host.pid, 'self', `${this.options.backend} driver host`);
     this.ownership.record('port', this.host.port, 'self');
+
+    const window = await this.resolveAttachWindow(this.host.health.webDriverUrl);
+    if (window) {
+      // The application and its window belong to whoever launched them; recording them as
+      // `external` is what stops cleanup from ever touching them.
+      this.ownership.record('window', window.candidate.handle, 'external', window.candidate.name);
+      if (window.candidate.processId !== undefined) {
+        this.ownership.record('app', window.candidate.processId, 'external', window.candidate.name);
+      }
+    }
     this.ownership.save(artifacts.runDirectory);
 
     const storybookUrl =
@@ -130,7 +158,16 @@ export class DesktopDriverService {
       runId: artifacts.runId,
       artifactsDirectory: this.options.artifactsDirectory,
       driverHostLog: this.host.logFile,
-      specDigest: typeof config.desktopSpecDigest === 'string' ? config.desktopSpecDigest : undefined,
+      specDigest: typeof config.desktopSpecDigest === 'string' ? config.desktopSpecDigest : this.specDigest,
+      windowHandle: window?.candidate.handle,
+      windowMatch: window
+        ? {
+            matchedBy: window.matchedBy,
+            exact: window.exact,
+            name: window.candidate.name,
+            processId: window.candidate.processId,
+          }
+        : undefined,
     };
 
     // Workers are forked from this process after `onPrepare`, so the environment carries the
@@ -140,6 +177,23 @@ export class DesktopDriverService {
     config.hostname = endpoint.hostname;
     config.port = endpoint.port;
     config.path = endpoint.path;
+    if (window && Array.isArray(config.capabilities)) {
+      for (const capability of config.capabilities as Record<string, unknown>[]) {
+        applyWindowHandle(capability, window.candidate.handle);
+      }
+    }
+  }
+
+  /**
+   * Resolves an attach target to one native window handle.
+   *
+   * Only the Windows backends need this: `appium:appTopLevelWindow` is the only way to pin a
+   * session to an already running window, and it takes a handle, while a portable target names
+   * the application by pid, identity, or title. Mac2 attaches by bundle identifier instead, and
+   * the `fake` backend has no windows.
+   */
+  private async resolveAttachWindow(webDriverUrl: string): Promise<DesktopWindowMatch | undefined> {
+    return resolveAttachWindow(this.options, webDriverUrl);
   }
 
   async onComplete(): Promise<void> {
@@ -167,15 +221,19 @@ export class DesktopDriverService {
    * Applies the owned endpoint before WebdriverIO creates the session.
    *
    * Reading it here rather than relying on the launcher's config mutation surviving worker
-   * serialization means the worker always talks to the port that was actually allocated, and a
-   * failed host start surfaces as an infrastructure error instead of a connection refusal.
+   * serialization means the worker always talks to the port that was actually allocated, the
+   * session attaches to the window the launcher resolved, and a failed host start surfaces as an
+   * infrastructure error instead of a connection refusal.
    */
-  beforeSession(config: MutableWdioConfig): void {
+  beforeSession(config: MutableWdioConfig, capabilities?: Record<string, unknown>): void {
     const endpoint = this.readEndpoint();
     config.protocol = 'http';
     config.hostname = endpoint.hostname;
     config.port = endpoint.port;
     config.path = endpoint.path;
+    if (endpoint.windowHandle && capabilities) {
+      applyWindowHandle(capabilities, endpoint.windowHandle);
+    }
   }
 
   private readEndpoint(): PublishedEndpoint {
@@ -209,6 +267,18 @@ export class DesktopDriverService {
       mode: this.options.target.mode,
     });
     this.lifecycle.emit('driverHostStarted', { url: `http://${endpoint.hostname}:${endpoint.port}` });
+    if (endpoint.windowHandle) {
+      this.lifecycle.emit(
+        'windowDiscovered',
+        {
+          windowHandle: endpoint.windowHandle,
+          matchedBy: endpoint.windowMatch?.matchedBy,
+          exact: endpoint.windowMatch?.exact,
+          title: endpoint.windowMatch?.name,
+        },
+        { processId: endpoint.windowMatch?.processId },
+      );
+    }
     this.lifecycle.advance('connected', 'webDriverSessionCreated', undefined, { sessionId: browser.sessionId });
 
     const storyController = new StoryController({
@@ -342,6 +412,52 @@ export function summarize(results: readonly DesktopTestResult[]): {
 }
 
 /**
+ * Pins a capability set to one already running window.
+ *
+ * `appium:app` is removed rather than left alongside the handle: WinAppDriver rejects a session
+ * that carries both with "Bad capabilities. Specify either app or appTopLevelWindow", so the
+ * root-session marker has to go when the real window is known.
+ */
+function applyWindowHandle(capabilities: Record<string, unknown>, windowHandle: string): void {
+  capabilities['appium:appTopLevelWindow'] = windowHandle;
+  delete capabilities['appium:app'];
+}
+
+/**
+ * Resolves an attach target to one native window handle.
+ *
+ * Only the Windows backends need this: `appium:appTopLevelWindow` is the only way to pin a
+ * session to an already running window, and it takes a handle, while a portable target names the
+ * application by pid, identity, or title. Mac2 attaches by bundle identifier instead, and the
+ * `fake` backend has no windows.
+ */
+export async function resolveAttachWindow(
+  options: ResolvedDesktopDriverOptions,
+  webDriverUrl: string,
+): Promise<DesktopWindowMatch | undefined> {
+  const target = options.target;
+  if (target.mode !== 'attach' || (options.backend !== 'windows' && options.backend !== 'novawindows')) {
+    return undefined;
+  }
+
+  const enumerate = createRootSessionEnumerator({
+    webDriverUrl,
+    capabilities: buildRootSessionCapabilities(options),
+    need: { identity: target.identity !== undefined },
+  });
+
+  try {
+    return await discoverAttachWindow(target, enumerate);
+  } catch (error) {
+    throw new DesktopDriverError(`Failed to resolve the attach target to a single top-level window: ${(error as Error).message}`, {
+      kind: error instanceof DesktopDriverError ? error.kind : 'ownership',
+      cause: error,
+      detail: { target, ...(error instanceof DesktopDriverError ? error.detail : undefined) },
+    });
+  }
+}
+
+/**
  * Starts an owned driver host for a standalone session.
  *
  * Lets a consumer use Jest, Vitest, `node:test`, or a plain script without adopting a different
@@ -362,13 +478,27 @@ export async function startDesktopDriver(options: DesktopDriverOptions): Promise
   ownership.record('driverHost', host.pid, 'self', `${resolved.backend} driver host`);
   ownership.record('port', host.port, 'self');
 
+  const window = await resolveAttachWindow(resolved, host.health.webDriverUrl).catch(async (error: unknown) => {
+    // The host is ours, so a failed discovery must not leak it.
+    await host.stop();
+    throw error;
+  });
+  if (window) {
+    ownership.record('window', window.candidate.handle, 'external', window.candidate.name);
+    if (window.candidate.processId !== undefined) {
+      ownership.record('app', window.candidate.processId, 'external', window.candidate.name);
+    }
+  }
+
+  const capabilities = buildCapabilities(resolved, { windowHandle: window?.candidate.handle });
+
   return {
     webdriverOptions: {
       protocol: 'http',
       hostname: resolved.host,
       port: host.port,
       path: '/',
-      capabilities: buildCapabilities(resolved),
+      capabilities,
       logLevel: resolved.logLevel,
     },
     options: resolved,

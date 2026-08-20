@@ -24,6 +24,11 @@ const StoryGroup = ({ children, label }: StoryGroupProps) => (
  *
  * The counter is rendered as text so a native automation session can observe the result of a
  * press through the accessibility tree rather than through a screenshot.
+ *
+ * The pressable button carries an explicit `accessibilityLabel`. Verified against React Native
+ * Windows 0.81: a Button whose label comes only from its `content` text is published to UI
+ * Automation with an empty `Name`, so its accessible name is not portable and a shared desktop
+ * spec cannot assert it without one.
  */
 const InteractionDemo = () => {
   const [pressCount, setPressCount] = useState(0);
@@ -32,8 +37,14 @@ const InteractionDemo = () => {
   return (
     <View style={styles.story}>
       <StoryGroup label="Press feedback">
-        <Button content="Press me" onPress={onPress} testID="agentic-storybook-button-interactive" />
-        <Button content="Unavailable" disabled onPress={onPress} testID="agentic-storybook-button-interactive-disabled" />
+        <Button accessibilityLabel="Press me" content="Press me" onPress={onPress} testID="agentic-storybook-button-interactive" />
+        <Button
+          accessibilityLabel="Unavailable"
+          content="Unavailable"
+          disabled
+          onPress={onPress}
+          testID="agentic-storybook-button-interactive-disabled"
+        />
       </StoryGroup>
       <Text style={styles.status} testID="agentic-storybook-button-interactive-status">
         {pressCount === 0 ? 'Not pressed' : `Pressed ${pressCount}`}
@@ -69,6 +80,10 @@ const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
   args: {
+    // React Native Windows publishes a Button whose label comes only from `content` with an empty
+    // UI Automation `Name`, so the shared desktop plans below could not assert its text without
+    // an explicit accessible name.
+    accessibilityLabel: 'Button',
     appearance: 'secondary',
     content: 'Button',
     disabled: false,

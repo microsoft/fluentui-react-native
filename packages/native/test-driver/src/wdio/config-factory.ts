@@ -6,10 +6,11 @@
  * capabilities, and a session strategy that keeps one warm session per run.
  */
 
+import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 import { buildCapabilities } from './capability-map.ts';
-import { DesktopDriverService } from './service.ts';
+import { DesktopDriverService, type DesktopServiceOptions } from './service.ts';
 import { resolveDesktopOptions } from '../config.ts';
 import { DesktopValidationError } from '../errors.ts';
 import type { DesktopDriverOptions } from '../types.ts';
@@ -43,6 +44,47 @@ export interface DesktopWdioConfigOptions extends DesktopDriverOptions {
   /** Mocha grep expression, used by "run current story" to select exactly one test. */
   grep?: string;
   bail?: number;
+  /**
+   * Path to the generated `story-tests.manifest.json`, resolved relative to `rootDir`.
+   *
+   * Its digest is recorded in `run.json` so a CI job can prove that two platforms executed the
+   * same story tests. Every platform must therefore read the same manifest, and a manifest that
+   * has not been generated is an error rather than a missing field.
+   */
+  storyManifest?: string;
+  /** Explicit spec digest, for a consumer that generates its manifest some other way. */
+  specDigest?: string;
+}
+
+/**
+ * Reads the digest out of a generated story-test manifest.
+ *
+ * The digest is the portability gate, so an unreadable or malformed manifest fails loudly here
+ * rather than silently leaving `run.json.specDigest` undefined.
+ */
+export function readStoryManifestDigest(manifestPath: string): string {
+  let raw: string;
+  try {
+    raw = fs.readFileSync(manifestPath, 'utf8');
+  } catch {
+    throw new DesktopValidationError('Invalid desktop WebdriverIO config', [
+      `storyManifest "${manifestPath}" does not exist; run \`desktop-driver stories generate\` before the testrunner`,
+    ]);
+  }
+  let digest: unknown;
+  try {
+    digest = (JSON.parse(raw) as { digest?: unknown }).digest;
+  } catch (error) {
+    throw new DesktopValidationError('Invalid desktop WebdriverIO config', [
+      `storyManifest "${manifestPath}" is not valid JSON: ${(error as Error).message}`,
+    ]);
+  }
+  if (typeof digest !== 'string' || digest.length === 0) {
+    throw new DesktopValidationError('Invalid desktop WebdriverIO config', [
+      `storyManifest "${manifestPath}" has no "digest"; regenerate it with \`desktop-driver stories generate\``,
+    ]);
+  }
+  return digest;
 }
 
 /**
@@ -80,11 +122,18 @@ export function createDesktopWdioConfig(options: DesktopWdioConfigOptions): Reco
 
   const resolvedSpecs = options.specs.map((spec) => (path.isAbsolute(spec) ? spec : path.join(rootDir, spec)));
 
+  const manifestPath = options.storyManifest
+    ? path.isAbsolute(options.storyManifest)
+      ? options.storyManifest
+      : path.join(rootDir, options.storyManifest)
+    : undefined;
+  const specDigest = options.specDigest ?? (manifestPath ? readStoryManifestDigest(manifestPath) : undefined);
+
   // Grouping the specs into one nested array makes WebdriverIO treat them as a single unit of
   // work, which keeps one worker and one warm session for the whole run.
   const specs = sessionStrategy === 'suite' ? [resolvedSpecs] : resolvedSpecs;
 
-  const serviceOptions: DesktopDriverOptions = {
+  const serviceOptions: DesktopServiceOptions = {
     platform: resolved.platform,
     backend: resolved.backend,
     target: resolved.target,
@@ -97,6 +146,7 @@ export function createDesktopWdioConfig(options: DesktopWdioConfigOptions): Reco
     backendCapabilities: options.backendCapabilities,
     fakeScene: resolved.fakeScene,
     logLevel: resolved.logLevel,
+    specDigest,
   };
 
   const frameworkOptions: Record<string, unknown> = {};
@@ -112,6 +162,8 @@ export function createDesktopWdioConfig(options: DesktopWdioConfigOptions): Reco
     runner: 'local',
     rootDir,
     specs,
+    // Recorded in `run.json` so a CI job can prove both platforms ran the same story tests.
+    desktopSpecDigest: specDigest,
     exclude: options.exclude ? options.exclude.map((spec) => (path.isAbsolute(spec) ? spec : path.join(rootDir, spec))) : [],
     // One desktop is one shared resource. Parallelism is only safe once every worker owns an
     // isolated application, endpoint, port set, and artifact directory.

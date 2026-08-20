@@ -309,6 +309,15 @@ export interface DesktopRunReport {
   artifacts: readonly string[];
 }
 
+/** Result of one prerequisite probe reported by `desktop-driver doctor`. */
+export interface DesktopPrerequisiteStatus {
+  id: string;
+  description: string;
+  /** `unknown` means the probe could not run, never that the prerequisite is satisfied. */
+  status: 'ok' | 'missing' | 'unknown';
+  detail?: string;
+}
+
 /** One element of a `fake` backend scene. */
 export interface DesktopFakeElement {
   testId: string;

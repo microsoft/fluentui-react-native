@@ -38,6 +38,8 @@ export const config = createDesktopWdioConfig({
   sessionStrategy: 'suite',
   target: process.env.DESKTOP_TEST_APP ? { mode: 'launch', app: process.env.DESKTOP_TEST_APP } : { mode: 'attach', title: 'MyApp' },
   artifactsDirectory: './artifacts/desktop-tests',
+  // Its digest lands in run.json, so a CI job can prove both platforms ran the same story tests.
+  storyManifest: './desktop-tests/generated/story-tests.manifest.json',
 });
 ```
 
@@ -100,10 +102,30 @@ capability is an infrastructure failure, never a silent skip.
 evaluating a DOM script, which no native desktop driver can run. Routing them through
 `browser.desktop` keeps them portable rather than dropping them from the matrix.
 
+- **`isFocused`** reads the backend's focus attribute — `HasKeyboardFocus` on Windows, `focused`
+  on macOS — and only falls back to the W3C active-element route when a backend answers that
+  instead. WinAppDriver 1.2.1 implements neither `GET` nor `POST /session/:id/element/active`, and
+  an absent answer is reported as an infrastructure failure rather than as "not focused", so a
+  focus assertion can never become quietly unfalsifiable.
+- **`scrollIntoView`** returns immediately when the element is already displayed, which is the
+  case almost every spec hits and the only one with no side effects. Otherwise it issues the
+  backend's native scroll with a real wheel delta and re-checks, because both `windows: scroll`
+  and `macos: scroll` reject a call with no delta. Synthetic wheel input can be refused by the OS,
+  and that is surfaced as an infrastructure error with the driver's own message.
+
 The generated capabilities always pin `browserName: ''`. WebdriverIO picks between its web and
 native command implementations from the capability shape, and the two backends would otherwise
 disagree; pinning it makes `getValue()`, `setValue()`, and the wait commands resolve to the same
-implementation on both platforms.
+implementation on both platforms. The two backends still differ underneath — a WinAppDriver
+session negotiates as JSONWireProtocol (`browser.isW3C === false`) while Mac2 is W3C — which is
+exactly why the portable set is defined at the WebdriverIO API level and not at the wire level.
+
+### What is not portable
+
+`getText()` returns the element's own accessible name. A React Native `Pressable` whose label
+comes only from a child `Text` is published to UI Automation with an empty `Name`, so its text is
+readable on macOS and empty on Windows. Assert text on the element that owns it, or give the
+control an explicit `accessibilityLabel`.
 
 ## `browser.desktop`
 
@@ -131,6 +153,28 @@ Only `launch` permits automatic termination. `attach` requires at least one iden
 and native window handle are exact, while identity and title are queries that must be rejected
 when they match ambiguously. Cleanup resolves the exact process ids and ports recorded in the
 run's `ownership.json`; it never kills by process name.
+
+### Attach-mode window discovery
+
+A Windows session can only be pinned to an already running application through
+`appium:appTopLevelWindow`, which takes a native window handle, so an attach target that names the
+application any other way is resolved before the session is created:
+
+1. a throwaway root-desktop session enumerates the top-level windows;
+2. the configured process id, identity, or title selects **exactly one** of them;
+3. the handle, its title, and the owning process id are recorded as `external` resources; and
+4. a `windowDiscovered` lifecycle event is emitted before the session is created.
+
+An ambiguous match is a failure, never a first-match guess: attaching to the wrong window is how
+an automated run interacts with something it does not own. An exact title match wins over a
+substring match, and the resolved handle is normalized to the `0x`-prefixed hexadecimal form the
+driver parses.
+
+`appium:app` and `appium:appTopLevelWindow` are mutually exclusive — WinAppDriver rejects a
+session carrying both with `Bad capabilities. Specify either app or appTopLevelWindow` — so the
+root-desktop marker is dropped once the window is known.
+
+macOS needs none of this: Mac2 attaches by bundle identifier.
 
 ## Standalone sessions
 
@@ -255,12 +299,23 @@ desktop capture when visual evidence matters on Windows.
 
 **macOS** — macOS 11.3+, Xcode 13+ with Command Line Tools, Accessibility permission for Xcode
 Helper, automation mode enabled, a logged-in GUI session, and a writable WebDriverAgentMac
-derived-data cache.
+derived-data cache. These are reported, not probed.
 
-**Windows** — an interactive desktop session, the application installed or registered, and (for
-the `windows` backend) WinAppDriver plus Developer Mode.
+**Windows** — an interactive desktop session, an **unlocked** workstation, the application
+installed or registered, and (for the `windows` backend) WinAppDriver plus Developer Mode.
 
-Run `desktop-driver doctor --platform <macos|windows>` to see the current list.
+A locked workstation is the failure mode worth knowing about: every read still works — the
+accessibility tree, attributes, screenshots — while every click, key, and scroll is refused, so
+interaction tests fail with opaque driver errors or, worse, a click that reports success and does
+nothing. `doctor` detects it.
+
+`appium-windows-driver` locates WinAppDriver through the **`APPIUM_WAD_PATH`** environment
+variable and then through `%ProgramFiles(x86)%\Windows Application Driver\WinAppDriver.exe`. No
+other variable has any effect.
+
+Run `desktop-driver doctor --platform <macos|windows>` to see what this machine actually has:
+every prerequisite is reported with `ok`, `missing`, or `unknown`, and `unknown` always means the
+probe could not run — never that the prerequisite is satisfied.
 
 ## Honest dependency notes
 
@@ -277,6 +332,14 @@ Those imports are isolated in `src/driver-host/backends.ts` and only ever load i
 driver-host child process, so replacing them with the local W3C route host in
 `src/driver-host/w3c-server.ts` is a single-file change that no test notices. "No Appium CLI"
 must never be shortened to "no Appium code".
+
+The host child is spawned with loader registrations stripped from `NODE_OPTIONS`. A parent that
+runs TypeScript sources — the WebdriverIO testrunner registers `tsx` this way to load
+`wdio.conf.ts` — would otherwise push its transpiler hook into the host, where it rewrites module
+resolution for the platform driver's dependency tree and breaks it. Other options are preserved.
+
+Verified against `appium@3.2.0`, `appium-windows-driver@5.1.9`, `webdriverio@9.24.0`, and
+WinAppDriver 1.2.1 on Windows 11 26200.
 
 ## Testing this package
 

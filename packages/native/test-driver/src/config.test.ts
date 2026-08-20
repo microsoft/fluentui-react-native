@@ -1,6 +1,8 @@
+import * as path from 'node:path';
+
 import { attachIdentityPrecedence, defaultBackendFor, resolveDesktopOptions } from './config.ts';
 import { DesktopValidationError } from './errors.ts';
-import { buildCapabilities, describeAttachResolution } from './wdio/capability-map.ts';
+import { buildCapabilities, buildRootSessionCapabilities, describeAttachResolution } from './wdio/capability-map.ts';
 
 describe('desktop driver configuration', () => {
   it('fills in defaults for a minimal launch target', () => {
@@ -11,7 +13,7 @@ describe('desktop driver configuration', () => {
     expect(resolved.port).toBe(0);
     expect(resolved.readiness.requireWindow).toBe(true);
     expect(resolved.storybook.port).toBe(7007);
-    expect(resolved.artifactsDirectory.endsWith('artifacts/desktop-tests')).toBe(true);
+    expect(resolved.artifactsDirectory.endsWith(path.join('artifacts', 'desktop-tests'))).toBe(true);
   });
 
   it('rejects a non-loopback driver host', () => {
@@ -77,7 +79,7 @@ describe('capability mapping', () => {
     expect(capabilities['appium:skipAppKill']).toBe(true);
   });
 
-  it('attaches on Windows through a root session without enabling WinAppDriver force-quit', () => {
+  it('pins an attached Windows session to one window instead of the desktop root', () => {
     const capabilities = buildCapabilities(
       resolveDesktopOptions({ platform: 'windows', target: { mode: 'attach', windowHandle: '0x1234' } }),
     );
@@ -85,11 +87,34 @@ describe('capability mapping', () => {
     expect(capabilities).toMatchObject({
       platformName: 'Windows',
       'appium:automationName': 'Windows',
-      'appium:app': 'Root',
       'appium:appTopLevelWindow': '0x1234',
       // Windows Driver's own capability name; an invented one would be silently ignored.
       'ms:forcequit': false,
     });
+    // Verified against WinAppDriver 1.2.1: a session carrying both is rejected with
+    // "Bad capabilities. Specify either app or appTopLevelWindow".
+    expect(capabilities['appium:app']).toBeUndefined();
+  });
+
+  it('normalizes a decimal window handle to the hexadecimal form the driver parses', () => {
+    const capabilities = buildCapabilities(
+      resolveDesktopOptions({ platform: 'windows', target: { mode: 'attach', windowHandle: '264316' } }),
+    );
+    expect(capabilities['appium:appTopLevelWindow']).toBe('0x4087c');
+  });
+
+  it('asks for the desktop root only while discovering the window', () => {
+    const options = resolveDesktopOptions({ platform: 'windows', target: { mode: 'attach', title: 'AgenticStorybook' } });
+
+    expect(buildCapabilities(options)).toMatchObject({ 'appium:app': 'Root' });
+    expect(buildRootSessionCapabilities(options)).toMatchObject({ 'appium:app': 'Root' });
+
+    const pinned = buildCapabilities(options, { windowHandle: '0x501e2' });
+    expect(pinned['appium:appTopLevelWindow']).toBe('0x501e2');
+    expect(pinned['appium:app']).toBeUndefined();
+
+    // The root session must never be pinned: it is what finds the handle in the first place.
+    expect(buildRootSessionCapabilities(options)['appium:appTopLevelWindow']).toBeUndefined();
   });
 
   it('stops NovaWindows from closing an attached window at session end', () => {

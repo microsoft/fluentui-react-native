@@ -28,6 +28,9 @@ const platform = (process.env.DESKTOP_TEST_PLATFORM ?? 'fake') as DesktopPlatfor
 /**
  * Attach is the default so a "Run current test" action from the on-device UI never terminates the
  * Storybook app it was invoked from. Launch mode is opt-in through `DESKTOP_TEST_APP`.
+ *
+ * The default title is the app's real top-level window title, which is what attach-mode window
+ * discovery matches against.
  */
 const target: DesktopAppTarget = process.env.DESKTOP_TEST_APP
   ? { mode: 'launch', app: process.env.DESKTOP_TEST_APP }
@@ -36,7 +39,7 @@ const target: DesktopAppTarget = process.env.DESKTOP_TEST_APP
       identity: process.env.DESKTOP_TEST_IDENTITY,
       processId: process.env.DESKTOP_TEST_PID ? Number(process.env.DESKTOP_TEST_PID) : undefined,
       windowHandle: process.env.DESKTOP_TEST_WINDOW,
-      title: process.env.DESKTOP_TEST_WINDOW_TITLE ?? 'AgenticStorybook',
+      title: process.env.DESKTOP_TEST_WINDOW_TITLE ?? 'Agentic Components Storybook',
     };
 
 export const config = createDesktopWdioConfig({
@@ -61,6 +64,7 @@ export const config = createDesktopWdioConfig({
     requireStorybookChannel: platform !== 'fake',
   },
   fakeScene: platform === 'fake' ? path.join(rootDir, 'desktop-tests', 'fake-scene.json') : undefined,
+  storyManifest: path.join('desktop-tests', 'generated', 'story-tests.manifest.json'),
   artifactsDirectory: path.join(rootDir, 'artifacts', 'desktop-tests'),
   grep: process.env.DESKTOP_TEST_GREP,
   reporters: ['spec'],

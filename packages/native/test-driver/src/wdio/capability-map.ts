@@ -13,10 +13,22 @@
  */
 
 import { attachIdentityPrecedence } from '../config.ts';
+import { normalizeWindowHandle } from './window-discovery.ts';
 import type { DesktopAppTarget, ResolvedDesktopDriverOptions } from '../types.ts';
 
+/** Overrides applied on top of the mapping derived from the resolved options. */
+export interface CapabilityOverrides {
+  /** Native window handle resolved by attach-mode window discovery. */
+  windowHandle?: string;
+  /**
+   * Build the capabilities for the throwaway root-desktop session used to discover a window,
+   * rather than for the session under test.
+   */
+  rootSession?: boolean;
+}
+
 /** Builds the backend capabilities for a resolved configuration. */
-export function buildCapabilities(options: ResolvedDesktopDriverOptions): Record<string, unknown> {
+export function buildCapabilities(options: ResolvedDesktopDriverOptions, overrides: CapabilityOverrides = {}): Record<string, unknown> {
   const base: Record<string, unknown> = { browserName: '' };
 
   switch (options.backend) {
@@ -25,7 +37,7 @@ export function buildCapabilities(options: ResolvedDesktopDriverOptions): Record
       break;
     case 'windows':
     case 'novawindows':
-      Object.assign(base, windowsCapabilities(options.target, options.backend));
+      Object.assign(base, windowsCapabilities(options.target, options.backend, overrides));
       break;
     case 'fake':
     default:
@@ -35,6 +47,11 @@ export function buildCapabilities(options: ResolvedDesktopDriverOptions): Record
 
   base['appium:newCommandTimeout'] = 0;
   return { ...base, ...options.backendCapabilities };
+}
+
+/** Capabilities for the throwaway root-desktop session that enumerates top-level windows. */
+export function buildRootSessionCapabilities(options: ResolvedDesktopDriverOptions): Record<string, unknown> {
+  return buildCapabilities(options, { rootSession: true });
 }
 
 function macosCapabilities(target: DesktopAppTarget): Record<string, unknown> {
@@ -68,7 +85,11 @@ function macosCapabilities(target: DesktopAppTarget): Record<string, unknown> {
   return capabilities;
 }
 
-function windowsCapabilities(target: DesktopAppTarget, backend: 'windows' | 'novawindows'): Record<string, unknown> {
+function windowsCapabilities(
+  target: DesktopAppTarget,
+  backend: 'windows' | 'novawindows',
+  overrides: CapabilityOverrides,
+): Record<string, unknown> {
   const capabilities: Record<string, unknown> = {
     platformName: 'Windows',
     'appium:automationName': backend === 'windows' ? 'Windows' : 'NovaWindows',
@@ -85,20 +106,25 @@ function windowsCapabilities(target: DesktopAppTarget, backend: 'windows' | 'nov
     return capabilities;
   }
 
-  // Attaching starts from a root-desktop session; the window is then selected by handle.
-  //
   // The "never terminate what we did not start" guarantee is expressed with each backend's own
   // capability, because Appium only warns about an unrecognized one and would silently keep its
   // default. Windows Driver gates WinAppDriver's `/forcequit` on `ms:forcequit`, and NovaWindows
   // closes the window under test at session end unless `shouldCloseApp` is false.
-  capabilities['appium:app'] = 'Root';
   if (backend === 'windows') {
     capabilities['ms:forcequit'] = false;
   } else {
     capabilities['appium:shouldCloseApp'] = false;
   }
-  if (target.windowHandle) {
-    capabilities['appium:appTopLevelWindow'] = target.windowHandle;
+
+  // `app` and `appTopLevelWindow` are mutually exclusive: WinAppDriver rejects a session that
+  // carries both with "Bad capabilities. Specify either app or appTopLevelWindow". Attaching is
+  // therefore two steps — a root-desktop session that enumerates windows, then the real session
+  // pinned to the one handle that matched.
+  const handle = overrides.rootSession ? undefined : (overrides.windowHandle ?? target.windowHandle);
+  if (handle) {
+    capabilities['appium:appTopLevelWindow'] = normalizeWindowHandle(handle);
+  } else {
+    capabilities['appium:app'] = 'Root';
   }
   return capabilities;
 }

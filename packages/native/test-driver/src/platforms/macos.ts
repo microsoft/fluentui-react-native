@@ -8,6 +8,7 @@
 
 import { DesktopDriverError } from '../errors.ts';
 import type { DesktopBrowserLike } from '../wdio/commands.ts';
+import type { DesktopPrerequisiteStatus } from '../types.ts';
 
 /** Mac2 execute methods this package exposes. The full set is documented by `appium-mac2-driver`. */
 export type Mac2ExecuteMethod =
@@ -35,7 +36,7 @@ export function macos(browser: DesktopBrowserLike, method: Mac2ExecuteMethod, op
   return browser.execute(method, options);
 }
 
-/** Prerequisites `desktop-driver doctor` checks before a macOS run. */
+/** Prerequisites `desktop-driver doctor` reports before a macOS run. */
 export const MACOS_PREREQUISITES: readonly { id: string; description: string }[] = [
   { id: 'macos-version', description: 'macOS 11.3 or newer' },
   { id: 'xcode', description: 'Xcode 13 or newer with matching Command Line Tools' },
@@ -44,6 +45,21 @@ export const MACOS_PREREQUISITES: readonly { id: string; description: string }[]
   { id: 'gui-session', description: 'A logged-in GUI session (WebDriverAgentMac cannot run headless)' },
   { id: 'wda-build-cache', description: 'A writable, reusable WebDriverAgentMac derived-data cache' },
 ];
+
+/**
+ * Reports the macOS prerequisites.
+ *
+ * They are reported, not probed: every one of them (Accessibility grants, automation mode, the
+ * WebDriverAgentMac cache) needs a macOS API this package has no verified probe for, and a
+ * fabricated "ok" is worse than an honest "unknown".
+ */
+export function checkMacosPrerequisites(): readonly DesktopPrerequisiteStatus[] {
+  return MACOS_PREREQUISITES.map((prerequisite) => ({
+    ...prerequisite,
+    status: 'unknown',
+    detail: process.platform === 'darwin' ? 'Not probed' : `Not probed: this machine is ${process.platform}, not darwin`,
+  }));
+}
 
 /** Terminates a launched macOS application. Refuses to run for an attached target. */
 export async function terminateLaunchedApp(browser: DesktopBrowserLike, bundleId: string): Promise<void> {

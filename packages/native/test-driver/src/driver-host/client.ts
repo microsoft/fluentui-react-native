@@ -43,6 +43,39 @@ function resolveHostEntry(): string {
   return fileURLToPath(new URL(`./host-main${extension}`, import.meta.url));
 }
 
+/** Flags that register a module loader or transpiler hook into a Node process. */
+const LOADER_FLAGS = ['--require', '-r', '--import', '--loader', '--experimental-loader'];
+
+/**
+ * Removes loader registrations from an inherited `NODE_OPTIONS`.
+ *
+ * The driver host is plain JavaScript and must start in a clean module resolver. A parent that
+ * runs TypeScript sources — the WebdriverIO testrunner registers `tsx` this way to load
+ * `wdio.conf.ts` — would otherwise push its transpiler hook into the host, where it rewrites
+ * resolution for the platform driver's dependency tree and breaks it. Other options (heap size,
+ * proxies, TLS roots) are deliberately preserved.
+ */
+export function sanitizeNodeOptions(value: string | undefined): string | undefined {
+  if (!value) {
+    return value;
+  }
+  const tokens = value.split(/\s+/).filter(Boolean);
+  const kept: string[] = [];
+  for (let index = 0; index < tokens.length; index++) {
+    const token = tokens[index];
+    const flag = token.includes('=') ? token.slice(0, token.indexOf('=')) : token;
+    if (!LOADER_FLAGS.includes(flag)) {
+      kept.push(token);
+      continue;
+    }
+    if (!token.includes('=')) {
+      // The value is the next token, and it goes with the flag.
+      index++;
+    }
+  }
+  return kept.join(' ');
+}
+
 export async function startDriverHost(options: StartDriverHostOptions): Promise<DriverHostHandle> {
   const host = options.host ?? '127.0.0.1';
   const port = options.port && options.port > 0 ? options.port : await allocatePort(host);
@@ -68,7 +101,7 @@ export async function startDriverHost(options: StartDriverHostOptions): Promise<
 
   const child = spawn(process.execPath, [resolveHostEntry(), configFile], {
     stdio: ['ignore', 'pipe', 'pipe'],
-    env: { ...process.env, NODE_NO_WARNINGS: '1' },
+    env: { ...process.env, NODE_NO_WARNINGS: '1', NODE_OPTIONS: sanitizeNodeOptions(process.env.NODE_OPTIONS) },
   });
 
   const health = await waitForReady(child, logStream, startupTimeout).catch(async (error: unknown) => {
@@ -155,6 +188,30 @@ function waitForReady(child: ChildProcess, logStream: fs.WriteStream, timeout: n
       stderrTail.push(text);
       if (stderrTail.length > 50) {
         stderrTail.shift();
+      }
+      if (settled) {
+        return;
+      }
+      // The host reports a structured startup failure on stderr. Surfacing it here means the run
+      // fails with the real cause rather than "exited before becoming ready".
+      for (const line of text.split('\n')) {
+        if (!line.includes('desktop-driver-host/error')) {
+          continue;
+        }
+        try {
+          const message = JSON.parse(line) as { type?: string; message?: string; stack?: string };
+          if (message.type === 'desktop-driver-host/error') {
+            finish(
+              new DesktopDriverError(`Driver host failed to start: ${message.message ?? 'unknown error'}`, {
+                kind: 'driverHost',
+                detail: { stack: message.stack },
+              }),
+            );
+            return;
+          }
+        } catch {
+          // Partial or non-JSON stderr is ordinary driver logging.
+        }
       }
     });
 

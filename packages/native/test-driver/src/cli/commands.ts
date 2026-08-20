@@ -12,12 +12,12 @@ import { missingPortableCommands, PORTABLE_COMMANDS, PORTABLE_COMMAND_SURFACES, 
 import { defaultBackendFor, resolveDesktopOptions } from '../config.ts';
 import { emitGeneratedStorySpec, verifyLinkedSpecTags } from '../storybook/generated-spec.ts';
 import { findStoryFiles, generateStoryTestManifest } from '../storybook/manifest.ts';
-import { MACOS_PREREQUISITES } from '../platforms/macos.ts';
+import { checkMacosPrerequisites } from '../platforms/macos.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import { DESKTOP_PROTOCOL_VERSION, PORTABLE_COMMAND_MATRIX_VERSION } from '../protocol.ts';
 import { StoryController } from '../storybook/controller.ts';
-import { WINDOWS_PREREQUISITES } from '../platforms/windows.ts';
-import type { DesktopDriverOptions, DesktopPlatform, StoryTestManifest } from '../types.ts';
+import { checkWindowsPrerequisites } from '../platforms/windows.ts';
+import type { DesktopDriverOptions, DesktopPlatform, DesktopPrerequisiteStatus, StoryTestManifest } from '../types.ts';
 
 export interface DoctorReport {
   packageVersion: string;
@@ -28,7 +28,7 @@ export interface DoctorReport {
   availableBackends: readonly string[];
   defaultBackend: string;
   portableCommands: readonly { command: string; surface: string; supported: boolean }[];
-  prerequisites: readonly { id: string; description: string }[];
+  prerequisites: readonly DesktopPrerequisiteStatus[];
   warnings: readonly string[];
 }
 
@@ -46,6 +46,11 @@ export function doctor(platform: DesktopPlatform): DoctorReport {
     warnings.push(`Backend "${backend}" does not implement portable command "${command}".`);
   }
 
+  const prerequisites = platform === 'macos' ? checkMacosPrerequisites() : platform === 'windows' ? checkWindowsPrerequisites() : [];
+  for (const prerequisite of prerequisites.filter((entry) => entry.status === 'missing')) {
+    warnings.push(`Prerequisite "${prerequisite.id}" is not satisfied: ${prerequisite.description}.`);
+  }
+
   return {
     packageVersion: PACKAGE_VERSION,
     protocolVersion: DESKTOP_PROTOCOL_VERSION,
@@ -59,7 +64,7 @@ export function doctor(platform: DesktopPlatform): DoctorReport {
       surface: PORTABLE_COMMAND_SURFACES[command],
       supported: supported.has(command),
     })),
-    prerequisites: platform === 'macos' ? MACOS_PREREQUISITES : platform === 'windows' ? WINDOWS_PREREQUISITES : [],
+    prerequisites,
     warnings,
   };
 }

@@ -73,6 +73,25 @@ const SCROLL_SCRIPTS: Readonly<Record<string, string>> = {
   fake: 'desktop: scroll',
 };
 
+/**
+ * Accessibility attribute that reports keyboard focus, per backend.
+ *
+ * WinAppDriver implements neither `GET` nor `POST /session/:id/element/active` (verified against
+ * 1.2.1: 405 and 404), so focus has to come from the UI Automation `HasKeyboardFocus` property.
+ * Mac2 exposes the same idea as `focused`. The active-element route stays as a fallback for a
+ * backend that answers it but not the attribute.
+ */
+const FOCUS_ATTRIBUTES: Readonly<Record<string, string>> = {
+  mac2: 'focused',
+  windows: 'HasKeyboardFocus',
+  novawindows: 'HasKeyboardFocus',
+  fake: 'focused',
+};
+
+/** One wheel notch. Used only when an element has to be scrolled into view. */
+const SCROLL_DELTA = 120;
+const SCROLL_ATTEMPTS = 10;
+
 /** Builds the command implementations for a session. */
 export function createDesktopCommands(browser: DesktopBrowserLike, context: DesktopCommandContext): DesktopBrowserCommands {
   const { options, lifecycle, artifacts, storyController } = context;
@@ -143,24 +162,75 @@ export function createDesktopCommands(browser: DesktopBrowserLike, context: Desk
 
     async isFocused(selector: string): Promise<boolean> {
       const element = await browser.$(selector);
+
+      const attribute = FOCUS_ATTRIBUTES[options.backend];
+      if (attribute) {
+        const value = await element.getAttribute(attribute).catch(() => null);
+        if (value !== null && value !== undefined) {
+          return String(value).toLowerCase() === 'true';
+        }
+      }
+
       if (!browser.getActiveElement) {
-        throw new DesktopDriverError('The connected driver does not report an active element', { kind: 'capability' });
+        throw new DesktopDriverError(`Backend "${options.backend}" reports neither a focus attribute nor an active element`, {
+          kind: 'capability',
+          detail: { attribute },
+        });
       }
       const active = await browser.getActiveElement().catch(() => undefined);
       if (!active) {
-        return false;
+        // Reporting "not focused" for an endpoint that does not exist would make a focus
+        // assertion silently unfalsifiable, so an absent answer is an infrastructure failure.
+        throw new DesktopDriverError(`Backend "${options.backend}" did not report an active element`, {
+          kind: 'capability',
+          detail: { attribute },
+        });
       }
       const activeId = Object.values(active)[0];
       return activeId === element.elementId;
     },
 
+    /**
+     * Brings an element into view.
+     *
+     * The fast path is a no-op: when the element is already displayed nothing is sent, which is
+     * what almost every spec hits and what keeps the command free of side effects. Otherwise the
+     * backend's native scroll is issued with a real wheel delta — both `windows: scroll` and
+     * `macos: scroll` reject a call with no delta — and the result is verified rather than
+     * assumed. Synthetic wheel input can be refused by the OS (UIPI blocks it while a
+     * higher-integrity window is in the foreground), so a failure is reported as an
+     * infrastructure error with the driver's own message.
+     */
     async scrollIntoView(selector: string): Promise<void> {
       const element = await browser.$(selector);
+      if (await element.isDisplayed().catch(() => false)) {
+        return;
+      }
+
       const script = SCROLL_SCRIPTS[options.backend];
       if (!script) {
         throw new DesktopDriverError(`Backend "${options.backend}" does not implement a portable scroll command`, { kind: 'capability' });
       }
-      await browser.execute(script, { elementId: element.elementId });
+
+      for (let attempt = 0; attempt < SCROLL_ATTEMPTS; attempt++) {
+        try {
+          await browser.execute(script, { elementId: element.elementId, deltaY: -SCROLL_DELTA });
+        } catch (error) {
+          throw new DesktopDriverError(`Backend "${options.backend}" could not scroll: ${(error as Error).message}`, {
+            kind: 'capability',
+            cause: error,
+            detail: { script, selector },
+          });
+        }
+        if (await element.isDisplayed().catch(() => false)) {
+          return;
+        }
+      }
+
+      throw new DesktopDriverError(`"${selector}" did not become displayed after ${SCROLL_ATTEMPTS} scroll steps`, {
+        kind: 'capability',
+        detail: { selector, script },
+      });
     },
   };
 }
