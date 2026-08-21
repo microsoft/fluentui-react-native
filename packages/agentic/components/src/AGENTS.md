@@ -10,7 +10,7 @@ the change crosses component boundaries.
 - Primitive components live in `src/primitives`; read `src/primitives/AGENTS.md`.
 - Shared package-private helpers live in `src/common`.
 - Package-wide dependency and extraction reviews use
-  [agentic-component-optimization](../../../.github/skills/agentic-component-optimization/SKILL.md).
+  [agentic-component-optimization](../../../../.github/skills/agentic-component-optimization/SKILL.md).
 
 ## Source boundaries
 

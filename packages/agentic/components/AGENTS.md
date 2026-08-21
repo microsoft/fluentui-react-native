@@ -2,7 +2,7 @@
 
 These instructions apply to `packages/agentic/components` and its descendants. Keep this file limited to durable package
 invariants; detailed authoring recipes live in the
-[agentic component authoring references](../../.github/skills/agentic-component-authoring/references).
+[agentic component authoring skill](../../../.github/skills/agentic-component-authoring/SKILL.md).
 
 ## Routing
 
@@ -12,7 +12,7 @@ invariants; detailed authoring recipes live in the
 - Storybook application, native project, Metro, bundle, or CocoaPods work follows `storybook/AGENTS.md` and the
   `agentic-storybook-development` skill.
 - Native React Native Windows Fabric component work follows the
-  [Windows Fabric native component reference](../../.github/skills/agentic-component-authoring/references/windows-fabric-native-components.md).
+  [Windows Fabric native component reference](../../../.github/skills/agentic-component-authoring/references/windows-fabric-native-components.md).
 
 ## Package invariants
 
