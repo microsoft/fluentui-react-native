@@ -1,6 +1,6 @@
 # Primitive component authoring
 
-These instructions apply to `packages/agentic-components/src/primitives` and its descendants. Use `primitives/icon` as
+These instructions apply to `packages/agentic/components/src/primitives` and its descendants. Use `primitives/icon` as
 the canonical implementation.
 
 ## Non-negotiable invariants
@@ -18,6 +18,6 @@ the canonical implementation.
 
 ## Focused references
 
-- [Types and slots](../../../../.github/skills/agentic-component-authoring/references/types-and-slots.md)
-- [Rendering and assembly](../../../../.github/skills/agentic-component-authoring/references/rendering.md)
-- [Tests and stories](../../../../.github/skills/agentic-component-authoring/references/tests-and-stories.md)
+- [Types and slots](../../../../../.github/skills/agentic-component-authoring/references/types-and-slots.md)
+- [Rendering and assembly](../../../../../.github/skills/agentic-component-authoring/references/rendering.md)
+- [Tests and stories](../../../../../.github/skills/agentic-component-authoring/references/tests-and-stories.md)

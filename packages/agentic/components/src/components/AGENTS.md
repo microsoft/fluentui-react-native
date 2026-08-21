@@ -1,13 +1,13 @@
 # Higher-order component authoring
 
-These instructions apply to `packages/agentic-components/src/components` and its descendants.
+These instructions apply to `packages/agentic/components/src/components` and its descendants.
 
 Higher-order components own design-token styling, interaction state, layout, and component-level accessibility. Use
 `components/button` as the canonical implementation.
 
 For package-wide dependency or extraction reviews, also read
-[`packages/agentic-components/src/AGENTS.md`](../AGENTS.md) and the
-[agentic-component-optimization](../../../../.github/skills/agentic-component-optimization/SKILL.md) skill. A focused
+[`packages/agentic/components/src/AGENTS.md`](../AGENTS.md) and the
+[agentic-component-optimization](../../../../../.github/skills/agentic-component-optimization/SKILL.md) skill. A focused
 component edit should stay within this file and the relevant `SPEC.md`; do not turn every small change into a whole-package
 audit.
 
@@ -45,8 +45,8 @@ audit.
 
 ## Focused references
 
-- [Types and slots](../../../../.github/skills/agentic-component-authoring/references/types-and-slots.md)
-- [State and accessibility](../../../../.github/skills/agentic-component-authoring/references/state-and-accessibility.md)
-- [Styles and tokens](../../../../.github/skills/agentic-component-authoring/references/styles-and-tokens.md)
-- [Rendering and assembly](../../../../.github/skills/agentic-component-authoring/references/rendering.md)
-- [Tests and stories](../../../../.github/skills/agentic-component-authoring/references/tests-and-stories.md)
+- [Types and slots](../../../../../.github/skills/agentic-component-authoring/references/types-and-slots.md)
+- [State and accessibility](../../../../../.github/skills/agentic-component-authoring/references/state-and-accessibility.md)
+- [Styles and tokens](../../../../../.github/skills/agentic-component-authoring/references/styles-and-tokens.md)
+- [Rendering and assembly](../../../../../.github/skills/agentic-component-authoring/references/rendering.md)
+- [Tests and stories](../../../../../.github/skills/agentic-component-authoring/references/tests-and-stories.md)

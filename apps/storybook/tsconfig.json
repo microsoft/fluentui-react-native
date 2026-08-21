@@ -18,13 +18,13 @@
       "path": "../../packages/native/Callout/tsconfig.json"
     },
     {
-      "path": "../../packages/agentic-components/tsconfig.json"
+      "path": "../../packages/agentic/components/tsconfig.json"
     },
     {
       "path": "../../packages/theming/default-theme/tsconfig.json"
     },
     {
-      "path": "../../packages/agentic-design/tsconfig.json"
+      "path": "../../packages/agentic/design/tsconfig.json"
     },
     {
       "path": "../../packages/components/FocusZone/tsconfig.json"

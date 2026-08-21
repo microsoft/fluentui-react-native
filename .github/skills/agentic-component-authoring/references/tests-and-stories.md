@@ -1,9 +1,9 @@
 # Tests and stories
 
 Use this reference for runtime coverage, type coverage, visual snapshots, Storybook CSF, and validation. Canonical examples
-are [`button.test.tsx`](../../../../packages/agentic-components/src/components/button/button.test.tsx),
-[`button.stories.tsx`](../../../../packages/agentic-components/src/components/button/button.stories.tsx), and
-[`icon.stories.tsx`](../../../../packages/agentic-components/src/primitives/icon/icon.stories.tsx).
+are [`button.test.tsx`](../../../../packages/agentic/components/src/components/button/button.test.tsx),
+[`button.stories.tsx`](../../../../packages/agentic/components/src/components/button/button.stories.tsx), and
+[`icon.stories.tsx`](../../../../packages/agentic/components/src/primitives/icon/icon.stories.tsx).
 
 ## Runtime tests
 

@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/agentic-components/storybook"
+    "directory": "packages/agentic/components/storybook"
   },
   "scripts": {
     "start": "rnx-cli start",
