@@ -7,6 +7,22 @@ const symlinkResolver = MetroSymlinksResolver({
   resolver: 'oxc-resolver',
 });
 
+function resolvePlatformModule(moduleName, platform) {
+  if (platform !== 'win32') {
+    return moduleName;
+  }
+
+  if (moduleName === 'react-native') {
+    return '@office-iss/react-native-win32';
+  }
+
+  if (moduleName.startsWith('react-native/')) {
+    return `@office-iss/react-native-win32/${moduleName.slice('react-native/'.length)}`;
+  }
+
+  return moduleName;
+}
+
 // JS-only replacement for react-native-safe-area-context (its native module does not build for
 // react-native-macos 0.81 — see the stub file for details).
 const safeAreaStub = path.resolve(__dirname, './src/storybook-mocks/react-native-safe-area-context.js');
@@ -27,7 +43,7 @@ const config = makeMetroConfig({
       if (moduleName === 'react-native-safe-area-context') {
         return { type: 'sourceFile', filePath: safeAreaStub };
       }
-      return symlinkResolver(context, moduleName, platform);
+      return symlinkResolver(context, resolvePlatformModule(moduleName, platform), platform);
     },
     unstable_enablePackageExports: true,
     unstable_conditionNames: ['react-native', 'import', 'require'],

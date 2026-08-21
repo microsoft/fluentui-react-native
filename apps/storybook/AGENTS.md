@@ -48,6 +48,33 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   its rendered event.
 - Keep generated solutions, packages, registrations, and build outputs uncommitted.
 
+## Win32 native workflow
+
+- Win32 is the `@office-iss/react-native-win32` Paper endpoint hosted by
+  `@office-iss/rex-win32`; do not treat it as the React Native Windows Fabric
+  endpoint or generate a `react-native-test-app` project for it.
+- Run `bundle:win32` before `win32`. The bundle is the native dependency source
+  for the prebuilt REX host.
+- Keep shared Storybook source platform-neutral. Win32-specific source belongs
+  in `.win32.ts` or `.win32.tsx` files, and Metro platform resolution belongs in
+  `metro.config.js`.
+- REX 0.81.1's V8 cannot parse the Unicode-property regular expressions
+  bundled by Storybook 10.4. Keep their compatibility transform scoped to
+  Win32; remove it when the REX engine supports Unicode property escapes.
+- Win32 uses a preview-only `StorybookUI.win32.tsx` because react-native-win32
+  omits window dimensions and Storybook's mobile LiteUI drawer crashes the
+  Paper host. Keep macOS and Windows on LiteUI, and drive Win32 navigation
+  through the shared Storybook channel.
+- Generate Win32 stories with `prebuild:win32`. It intentionally excludes the
+  Callout, ListItem, and Accordion stories because their Paper implementations
+  fail-fast crash REX 0.81.1; keep the ordinary `prebuild` catalog unchanged
+  for macOS and Windows.
+- Keep the Win32 window title distinct from the Windows Fabric title so
+  automation never attaches to the wrong endpoint.
+- Use `win32:ci` for the complete bundle/launch/smoke workflow. Its logs belong
+  under ignored `artifacts/win32`, and it must stop only the process IDs it
+  started or resolved by its exact port and window title.
+
 ## Validation
 
 Run the smallest command that reproduces the issue first. For native or dependency changes, finish with the relevant

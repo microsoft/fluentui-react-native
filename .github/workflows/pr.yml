@@ -270,6 +270,10 @@ jobs:
         run: yarn e2etest:win32
         working-directory: apps/E2E
 
+      - name: Run Storybook Win32 smoke tests
+        run: yarn win32:ci
+        working-directory: apps/storybook
+
       - name: Upload E2E Win32 artifacts
         if: ${{ always() }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -278,6 +282,7 @@ jobs:
           path: |
             apps/E2E/reports
             apps/E2E/errorShots
+            apps/storybook/artifacts/win32
 
   check-changesets:
     name: Check for Changesets

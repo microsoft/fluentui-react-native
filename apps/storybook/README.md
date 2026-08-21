@@ -16,6 +16,13 @@ unwrapped (`No theme`, the default) or apply the default light, dark, or high-co
 The selected Theme wraps the preview decorator, so it applies to every rendered story and remains
 selected while navigating between stories.
 
+The macOS, Windows Fabric, and Win32 Paper endpoints live in this workspace and
+share the same entry point and generated story catalog. Win32 stays here rather
+than in a sibling package so story discovery and agent control cannot drift.
+Shared Storybook source remains platform-neutral; `metro.config.js` redirects
+`react-native` imports to `@office-iss/react-native-win32` only while producing
+the Win32 bundle.
+
 ## Layout
 
 ```
@@ -125,6 +132,61 @@ Storybook's development bundle intentionally contains separate `pretty-format` a
 versions used by its internal tooling. They are excluded from the duplicate-module enforcement;
 React, React Native, and application dependencies remain checked.
 
+## Running on Win32
+
+The Win32 endpoint uses the `@office-iss/react-native-win32` Paper renderer in
+the prebuilt `@office-iss/rex-win32` host. It is separate from the React Native
+Windows Fabric endpoint above and does not use a generated
+`react-native-test-app` native project.
+
+```powershell
+# from this directory
+# Produce dist/index.win32.bundle from the same story catalog as the other endpoints
+yarn bundle:win32
+
+# Launch the prebuilt Paper host
+yarn win32
+```
+
+The host window title is `Agentic Components Storybook (Win32)` so automation
+can distinguish it from the Windows Fabric app. The pinned REX 0.81.1 host runs
+the resolved react-native-win32 0.81 release line. Runtime diagnostics are
+written to the ignored `artifacts/win32/console.log`. For the development loop,
+run `yarn start` and then `yarn win32:dev` in separate terminals.
+`yarn bundle:win32:dev` produces a debuggable local bundle when Metro cannot be
+kept running.
+
+Storybook 10.4 bundles regular expressions that use Unicode properties
+unsupported by the V8 engine in REX 0.81.1. The Win32-only Babel plugin in
+`scripts/transform-win32-unicode-regex.cjs` expands those expressions at bundle
+time. Remove the workaround after the REX host accepts Unicode property
+escapes; other platform bundles never load the plugin.
+
+react-native-win32 intentionally leaves window width and height undefined, and
+Storybook's mobile `LiteUI` drawer crashes the Paper host after those metrics
+are supplied. The Win32 endpoint therefore uses the preview-only
+`StorybookUI.win32.tsx` surface: it renders the same stories beneath the
+persistent theme header, while story navigation and controls use the existing
+WebSocket/REST channel. macOS and Windows continue to use `LiteUI`.
+
+The three standalone Callout stories, nine ListItem stories, and seven
+Accordion stories are omitted from the Win32-generated catalog. Selecting the
+built-in Paper `RCTCallout`, agentic ListItem, or Accordion overview through the
+current REX 0.81.1 host terminates `ReactTest.exe` with fail-fast code
+`0xC0000409`; macOS and Windows continue to include those stories. The
+remaining 127 agentic component stories render through the Win32 control-plane
+smoke sweep.
+Run `yarn storybook-server:win32` with this endpoint so the server exposes the
+same 127-story index as the app; the ordinary `storybook-server` command keeps
+the full macOS and Windows catalog. Use `yarn storybook:smoke:win32` for the
+native sweep; its short settle interval prevents REX Paper teardown races
+between rapid story transitions.
+
+`yarn win32:ci` bundles the endpoint, starts the scoped channel server and REX
+host without the direct-debugger listener, runs the 127-story sweep, verifies
+that the host remains alive, and stops only its recorded process IDs. Logs are
+written beneath `artifacts/win32`.
+
 ### Windows agent workflow
 
 The complete agent workflow starts the Storybook channel server and Metro, builds and launches the
@@ -159,6 +221,7 @@ You can produce the JS bundle without Xcode. This also generates `storybook.requ
 
 ```sh
 yarn bundle:macos     # -> writes dist/index.macos.jsbundle
+yarn bundle:win32     # -> writes dist/index.win32.bundle
 yarn bundle:windows   # -> writes dist/index.windows.bundle
 ```
 
