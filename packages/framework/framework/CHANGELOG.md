@@ -1,5 +1,22 @@
 # Change Log - @fluentui-react-native/framework
 
+## 0.17.2
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/composition@0.14.2
+  - @fluentui-react-native/use-slots@0.13.2
+  - @fluentui-react-native/use-styling@0.16.2
+  - @fluentui-react-native/use-tokens@0.9.2
+  - @fluentui-react-native/default-theme@0.27.8
+  - @fluentui-react-native/tokens@0.24.8
+
 ## 0.17.1
 
 ### Patch Changes

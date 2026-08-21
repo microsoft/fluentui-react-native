@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
+## 0.7.7
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+
 ## 0.7.6
 
 ### Patch Changes

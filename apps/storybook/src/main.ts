@@ -9,8 +9,8 @@ import type { StorybookConfig } from '@storybook/react-native';
  */
 const main: StorybookConfig = {
   stories: [
-    '../../../packages/agentic-components/src/**/*.stories.?(ts|tsx)',
-    '../../../packages/native/callout/src/**/*.stories.?(ts|tsx)',
+    '../../../packages/agentic/components/src/**/*.stories.?(ts|tsx)',
+    '../../../packages/native/Callout/src/**/*.stories.?(ts|tsx)',
   ],
   addons: [],
   deviceAddons: ['@storybook/addon-ondevice-controls', '@storybook/addon-ondevice-actions'],

@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/adapters
 
+## 0.15.1
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+
 ## 0.15.0
 
 ### Minor Changes

@@ -49,7 +49,7 @@ failure. Clicking the component fail-fast terminates `ReactApp.exe` roughly thre
 with `0xc0000409` in `ucrtbase.dll`; plain React Native `Pressable` controls in the Storybook shell
 click successfully.
 
-Collect a native crash dump, fix or file the defect in `packages/agentic-components`, then rerun the
+Collect a native crash dump, fix or file the defect in `packages/agentic/components`, then rerun the
 unchanged shared suite. Keep this investigation outside the driver package unless new evidence
 shows the automation lifecycle or click implementation is at fault.
 
@@ -126,22 +126,22 @@ Do these after the behavior above is covered so refactoring cannot hide contract
 
 ## Open decisions
 
-| Decision | Recommendation |
-| -------- | -------------- |
-| Should `terminateLaunchedApp` remain public? | Deprecate it in favor of owned lifecycle cleanup. Until removal, continue requiring observed `self` ownership. |
-| Should Windows use Job Objects for descendants? | Evaluate an owned Job Object against supported Windows versions. Keep bounded PID-targeted `taskkill /T` only while its integration behavior remains proven. |
-| Should app crashes be product failures or infrastructure errors? | Record an app-under-test crash as `failed` with a distinct lifecycle reason; record driver, host, monitor, and runner crashes as `infrastructureError`. |
-| Should macOS attach have platform-specific types? | Move toward a discriminated platform target union in the next intentional public API revision; retain strict runtime validation meanwhile. |
-| Should the portability digest include transitive test imports? | Add deterministic module-graph hashing only if paths can be normalized across machines. Direct linked spec bytes remain the required baseline. |
-| Should empty manifests ever be valid? | Continue failing by default. Add an explicit `allowEmpty` mode only for a demonstrated use case, and report it as skipped rather than passed. |
-| How should linked tests be discovered? | Use actual framework discovery for the documented Mocha path. Parser validation is acceptable only if it proves the same runnable, non-skipped selection. |
-| Should Run all isolate every story? | Keep one warm invocation/session as the default. Add isolation only as an explicit mode for consumers that accept the startup cost. |
-| Is NovaWindows a supported backend? | No. Decide only after installability, capability, ownership, parity, reliability, and timing evidence exists. |
-| Is `desktop-driver start` a foreground host or a probe? | Make it a foreground host. Add daemonized status/stop behavior only as a separate, owned feature. |
-| May Storybook control use a remote host? | Keep the first release loopback-only. Broaden this only with a separate authentication and threat model. |
-| Should a launcher/worker split change the public service API? | No immediate break. Refactor behind the current surface and version any later migration. |
-| Is a Windows Graphics Capture fallback required? | Decide after inspecting unlocked real-app screenshots containing Composition content. |
-| What is the long-term Appium 4 hosting path? | Keep driver-author imports isolated, measure the supported replacement, and require an explicit decision before adopting a private Appium core host. |
+| Decision                                                         | Recommendation                                                                                                                                               |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Should `terminateLaunchedApp` remain public?                     | Deprecate it in favor of owned lifecycle cleanup. Until removal, continue requiring observed `self` ownership.                                               |
+| Should Windows use Job Objects for descendants?                  | Evaluate an owned Job Object against supported Windows versions. Keep bounded PID-targeted `taskkill /T` only while its integration behavior remains proven. |
+| Should app crashes be product failures or infrastructure errors? | Record an app-under-test crash as `failed` with a distinct lifecycle reason; record driver, host, monitor, and runner crashes as `infrastructureError`.      |
+| Should macOS attach have platform-specific types?                | Move toward a discriminated platform target union in the next intentional public API revision; retain strict runtime validation meanwhile.                   |
+| Should the portability digest include transitive test imports?   | Add deterministic module-graph hashing only if paths can be normalized across machines. Direct linked spec bytes remain the required baseline.               |
+| Should empty manifests ever be valid?                            | Continue failing by default. Add an explicit `allowEmpty` mode only for a demonstrated use case, and report it as skipped rather than passed.                |
+| How should linked tests be discovered?                           | Use actual framework discovery for the documented Mocha path. Parser validation is acceptable only if it proves the same runnable, non-skipped selection.    |
+| Should Run all isolate every story?                              | Keep one warm invocation/session as the default. Add isolation only as an explicit mode for consumers that accept the startup cost.                          |
+| Is NovaWindows a supported backend?                              | No. Decide only after installability, capability, ownership, parity, reliability, and timing evidence exists.                                                |
+| Is `desktop-driver start` a foreground host or a probe?          | Make it a foreground host. Add daemonized status/stop behavior only as a separate, owned feature.                                                            |
+| May Storybook control use a remote host?                         | Keep the first release loopback-only. Broaden this only with a separate authentication and threat model.                                                     |
+| Should a launcher/worker split change the public service API?    | No immediate break. Refactor behind the current surface and version any later migration.                                                                     |
+| Is a Windows Graphics Capture fallback required?                 | Decide after inspecting unlocked real-app screenshots containing Composition content.                                                                        |
+| What is the long-term Appium 4 hosting path?                     | Keep driver-author imports isolated, measure the supported replacement, and require an explicit decision before adopting a private Appium core host.         |
 
 ## Release gate
 

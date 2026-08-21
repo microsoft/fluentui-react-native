@@ -25,7 +25,7 @@ import type { InlineStoryPlan, StoryTestManifest } from './types.ts';
 // Jest runs with the package root as the working directory.
 const packageRoot = process.cwd();
 const repoRoot = path.resolve(packageRoot, '..', '..', '..');
-const buttonDirectory = path.join(repoRoot, 'packages', 'agentic-components', 'src', 'components', 'button');
+const buttonDirectory = path.join(repoRoot, 'packages', 'agentic', 'components', 'src', 'components', 'button');
 const buttonStories = path.join(buttonDirectory, 'button.stories.tsx');
 const storybookScene = path.join(repoRoot, 'apps', 'storybook', 'desktop-tests', 'fake-scene.json');
 
@@ -46,7 +46,7 @@ describe('agentic-components Button story tests', () => {
   beforeAll(() => {
     manifest = generateStoryTestManifest({
       storyFiles: [buttonStories],
-      specRoots: [path.join(repoRoot, 'packages', 'agentic-components', 'src')],
+      specRoots: [path.join(repoRoot, 'packages', 'agentic', 'components', 'src')],
       generatedSpecPath: path.join(repoRoot, 'apps', 'storybook', 'desktop-tests', 'generated', 'story-plans.generated.spec.ts'),
     });
   });

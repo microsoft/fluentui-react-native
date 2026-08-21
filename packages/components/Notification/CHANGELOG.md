@@ -1,5 +1,27 @@
 # Change Log - @fluentui-react-native/notification
 
+## 0.26.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/button@0.40.8
+  - @fluentui-react-native/icon@0.22.8
+  - @fluentui-react-native/pressable@0.13.8
+  - @fluentui-react-native/text@0.25.8
+  - @fluentui-react-native/experimental-appearance-additions@0.8.8
+  - @fluentui-react-native/experimental-shadow@0.7.8
+  - @fluentui-react-native/framework@0.17.2
+  - @fluentui-react-native/use-styling@0.16.2
+  - @fluentui-react-native/adapters@0.15.1
+  - @fluentui-react-native/interactive-hooks@0.28.8
+  - @fluentui-react-native/tokens@0.24.8
+
 ## 0.26.7
 
 ### Patch Changes

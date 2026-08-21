@@ -1,5 +1,17 @@
 # Change Log - @uifabricshared/foundation-tokens
 
+## 0.16.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @uifabricshared/foundation-settings@0.16.8
+  - @fluentui-react-native/tokens@0.24.8
+
 ## 0.16.7
 
 ### Patch Changes

@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/apple-theme
 
+## 0.29.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/experimental-appearance-additions@0.8.8
+  - @fluentui-react-native/default-theme@0.27.8
+  - @fluentui-react-native/theme-tokens@0.29.2
+  - @fluentui-react-native/theming-utils@0.27.8
+
 ## 0.29.7
 
 ### Patch Changes

@@ -68,15 +68,15 @@ host boundary for future migration.
 
 ### Public surfaces
 
-| Export | Responsibility |
-| ------ | -------------- |
-| `@fluentui-react-native/desktop-driver` | Portable selectors, Storybook helper, plans, lifecycle and result types |
-| `@fluentui-react-native/desktop-driver/wdio` | Config factory, WebdriverIO services, standalone driver lifecycle |
-| `@fluentui-react-native/desktop-driver/storybook` | Manifest generation, channel controller, loopback run service |
-| `@fluentui-react-native/desktop-driver/cli` | JSON command-line interface |
-| `@fluentui-react-native/desktop-driver/macos` | Explicit macOS-only execute extensions |
-| `@fluentui-react-native/desktop-driver/windows` | Explicit Windows-only execute extensions |
-| `@fluentui-react-native/desktop-driver/driver-host` | Internal host integration contract |
+| Export                                              | Responsibility                                                          |
+| --------------------------------------------------- | ----------------------------------------------------------------------- |
+| `@fluentui-react-native/desktop-driver`             | Portable selectors, Storybook helper, plans, lifecycle and result types |
+| `@fluentui-react-native/desktop-driver/wdio`        | Config factory, WebdriverIO services, standalone driver lifecycle       |
+| `@fluentui-react-native/desktop-driver/storybook`   | Manifest generation, channel controller, loopback run service           |
+| `@fluentui-react-native/desktop-driver/cli`         | JSON command-line interface                                             |
+| `@fluentui-react-native/desktop-driver/macos`       | Explicit macOS-only execute extensions                                  |
+| `@fluentui-react-native/desktop-driver/windows`     | Explicit Windows-only execute extensions                                |
+| `@fluentui-react-native/desktop-driver/driver-host` | Internal host integration contract                                      |
 
 Platform backend dependencies are loaded only after platform selection and only in the driver-host
 process. The neutral package graph imports no React Native platform fork.
@@ -121,15 +121,15 @@ that owns it or give the control an explicit `accessibilityLabel`.
 The versioned portable matrix is reported by `browser.desktop.getSessionInfo()`. A missing portable
 capability is an infrastructure error, not a skip.
 
-| Command | Surface |
-| ------- | ------- |
+| Command                                     | Surface              |
+| ------------------------------------------- | -------------------- |
 | `findElement`, `findElements`, `isExisting` | Standard WebdriverIO |
-| `isDisplayed`, `isEnabled`, `isSelected` | Standard WebdriverIO |
-| `click`, `clearValue`, `setValue` | Standard WebdriverIO |
-| `getText`, `getValue` | Standard WebdriverIO |
-| `waitForDisplayed`, `waitForExist` | Standard WebdriverIO |
-| `getPageSource`, `takeScreenshot` | Standard WebdriverIO |
-| `isFocused`, `scrollIntoView` | `browser.desktop` |
+| `isDisplayed`, `isEnabled`, `isSelected`    | Standard WebdriverIO |
+| `click`, `clearValue`, `setValue`           | Standard WebdriverIO |
+| `getText`, `getValue`                       | Standard WebdriverIO |
+| `waitForDisplayed`, `waitForExist`          | Standard WebdriverIO |
+| `getPageSource`, `takeScreenshot`           | Standard WebdriverIO |
+| `isFocused`, `scrollIntoView`               | `browser.desktop`    |
 
 Native desktop drivers cannot execute the DOM scripts that WebdriverIO's browser implementations of
 focus and scrolling use:
@@ -319,14 +319,14 @@ The service binds to loopback, mints a per-boot token, allows one mutating run a
 only story IDs already present in the manifest. The runner command is fixed by host configuration;
 no device-supplied value can become a command, module path, or grep expression.
 
-| Endpoint | Purpose |
-| -------- | ------- |
-| `GET /v1/health` | Liveness and protocol version |
-| `GET /v1/stories` | Tested story manifest |
-| `POST /v1/runs` | Start current, selected, or all-story execution |
-| `GET /v1/runs/:id` | Structured run status |
-| `GET /v1/runs/:id/events` | Server-sent progress |
-| `POST /v1/runs/:id/cancel` | Bounded cancellation |
+| Endpoint                   | Purpose                                         |
+| -------------------------- | ----------------------------------------------- |
+| `GET /v1/health`           | Liveness and protocol version                   |
+| `GET /v1/stories`          | Tested story manifest                           |
+| `POST /v1/runs`            | Start current, selected, or all-story execution |
+| `GET /v1/runs/:id`         | Structured run status                           |
+| `GET /v1/runs/:id/events`  | Server-sent progress                            |
+| `POST /v1/runs/:id/cancel` | Bounded cancellation                            |
 
 The service announces `{ url, token, protocolVersion, manifestDigest }` over the Storybook channel.
 The token prevents requests from clients that have not observed an announcement, but it is not a

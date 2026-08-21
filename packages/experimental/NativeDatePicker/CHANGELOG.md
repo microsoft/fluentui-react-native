@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
+## 0.12.7
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+
 ## 0.12.6
 
 ### Patch Changes

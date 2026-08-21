@@ -207,9 +207,9 @@ yarn storybook:smoke
 
 ## Writing stories
 
-Follow the package-level story authoring instructions in the agentic-components package. Add a `*.stories.tsx` file next
-to its component under `packages/agentic-components/src`; standalone native package story globs are listed explicitly in
-`src/main.ts`. See `packages/agentic-components/src/components/button/button.stories.tsx` for the canonical higher-order
+Follow the package-level story authoring instructions in the agentic components package. Add a `*.stories.tsx` file next
+to its component under `packages/agentic/components/src`; standalone native package story globs are listed explicitly in
+`src/main.ts`. See `packages/agentic/components/src/components/button/button.stories.tsx` for the canonical higher-order
 component example.
 
 ## Desktop story tests
@@ -220,7 +220,7 @@ through the ordinary WebdriverIO testrunner. `wdio.conf.ts` holds all platform s
 contain none.
 
 A story declares its test through `parameters.desktopTest`, either as a serializable inline plan or
-as a link to a colocated spec. `packages/agentic-components/src/components/button/button.stories.tsx`
+as a link to a colocated spec. `packages/agentic/components/src/components/button/button.stories.tsx`
 demonstrates both, with `button.desktop.spec.ts` as the linked spec.
 
 ```sh

@@ -2,7 +2,7 @@
  * WebdriverIO configuration for the on-device Storybook desktop tests.
  *
  * One config serves Windows and macOS. Platform selection lives here and in the environment, not
- * in the specs: `desktop-tests/**` and the linked story specs in `packages/agentic-components`
+ * in the specs: `desktop-tests/**` and the linked story specs in `packages/agentic/components`
  * run unchanged on both platforms.
  *
  * Usage:
@@ -20,7 +20,7 @@ import type { DesktopAppTarget, DesktopPlatform } from '@fluentui-react-native/d
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(rootDir, '..', '..');
-const agenticComponents = path.join(repoRoot, 'packages', 'agentic-components', 'src');
+const agenticComponents = path.join(repoRoot, 'packages', 'agentic', 'components', 'src');
 const calloutPackage = path.join(repoRoot, 'packages', 'native', 'Callout', 'src');
 
 const platform = (process.env.DESKTOP_TEST_PLATFORM ?? 'fake') as DesktopPlatform;

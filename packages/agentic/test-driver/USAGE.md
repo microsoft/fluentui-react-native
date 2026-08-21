@@ -319,10 +319,7 @@ export const config = createDesktopWdioConfig({
   rootDir: process.cwd(),
   framework: 'mocha',
   sessionStrategy: 'suite',
-  specs: [
-    './desktop-tests/generated/story-plans.generated.spec.ts',
-    './src/**/*.desktop.spec.ts',
-  ],
+  specs: ['./desktop-tests/generated/story-plans.generated.spec.ts', './src/**/*.desktop.spec.ts'],
   storyManifest: './desktop-tests/generated/story-tests.manifest.json',
   storybook: {
     host: '127.0.0.1',
@@ -369,8 +366,8 @@ driver-launched Storybook app at completion.
 The repository implementation is a working reference:
 
 - [`apps/storybook/wdio.conf.ts`](../../../apps/storybook/wdio.conf.ts)
-- [`packages/agentic-components/src/components/button/button.stories.tsx`](../../agentic-components/src/components/button/button.stories.tsx)
-- [`packages/agentic-components/src/components/button/button.desktop.spec.ts`](../../agentic-components/src/components/button/button.desktop.spec.ts)
+- [`packages/agentic/components/src/components/button/button.stories.tsx`](../components/src/components/button/button.stories.tsx)
+- [`packages/agentic/components/src/components/button/button.desktop.spec.ts`](../components/src/components/button/button.desktop.spec.ts)
 
 ## 3. Run all tests from inside Storybook
 
@@ -525,7 +522,7 @@ For a host-initiated one-page run without using the on-device control, set the e
 DESKTOP_TEST_PLATFORM=windows \
 DESKTOP_TEST_GREP='\[story:components-button--interaction\]' \
 wdio run wdio.conf.ts \
-  --spec packages/agentic-components/src/components/button/button.desktop.spec.ts
+  --spec packages/agentic/components/src/components/button/button.desktop.spec.ts
 ```
 
 Prefer a declared workspace script around this command in CI or agent automation so the working
@@ -608,16 +605,16 @@ workflow.
 
 Choose output surfaces based on the workflow:
 
-| Surface | Use |
-| ------- | --- |
-| WDIO `spec` reporter | Immediate pass/fail details and stacks in a terminal or CI log |
-| `desktop-driver serve` stdout/stderr | Host-side output for in-app Storybook runs |
-| Run status JSON | App UI, React Native debugger, agents, and custom dashboards |
-| SSE events endpoint | Streaming in-app or agent progress |
-| `run.json` | Complete machine-readable run result |
-| `junit.xml` | CI test reporting |
-| `events.ndjson` | Lifecycle and infrastructure diagnosis |
-| Per-test source and screenshots | Native UI failure diagnosis |
+| Surface                              | Use                                                            |
+| ------------------------------------ | -------------------------------------------------------------- |
+| WDIO `spec` reporter                 | Immediate pass/fail details and stacks in a terminal or CI log |
+| `desktop-driver serve` stdout/stderr | Host-side output for in-app Storybook runs                     |
+| Run status JSON                      | App UI, React Native debugger, agents, and custom dashboards   |
+| SSE events endpoint                  | Streaming in-app or agent progress                             |
+| `run.json`                           | Complete machine-readable run result                           |
+| `junit.xml`                          | CI test reporting                                              |
+| `events.ndjson`                      | Lifecycle and infrastructure diagnosis                         |
+| Per-test source and screenshots      | Native UI failure diagnosis                                    |
 
 Screenshots and accessibility source can contain private content. Keep artifact directories ignored,
 review them before sharing, and never publish the service token.
