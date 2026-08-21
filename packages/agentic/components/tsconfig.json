@@ -16,7 +16,7 @@
       "path": "../design/tsconfig.json"
     },
     {
-      "path": "../test-driver/tsconfig.json"
+      "path": "../desktop-driver/tsconfig.json"
     },
     {
       "path": "../../framework-base/tsconfig.json"
