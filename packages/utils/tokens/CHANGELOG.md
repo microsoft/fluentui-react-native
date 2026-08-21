@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/tokens
 
+## 0.24.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+  - @fluentui-react-native/design@0.3.2
+
 ## 0.24.8
 
 ### Patch Changes

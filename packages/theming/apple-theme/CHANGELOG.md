@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/apple-theme
 
+## 0.29.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+  - @fluentui-react-native/default-theme@0.27.9
+  - @fluentui-react-native/theming-utils@0.27.9
+  - @fluentui-react-native/theme-tokens@0.29.3
+  - @fluentui-react-native/design@0.3.2
+
 ## 0.29.8
 
 ### Patch Changes

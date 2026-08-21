@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
+## 0.15.3
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/design@0.3.2
+  - @fluentui-react-native/tokens@0.24.9
+
 ## 0.15.2
 
 ### Patch Changes

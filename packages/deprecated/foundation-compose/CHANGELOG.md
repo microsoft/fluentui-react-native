@@ -1,5 +1,16 @@
 # Change Log - @uifabricshared/foundation-compose
 
+## 1.16.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+  - @uifabricshared/theming-ramp@0.21.9
+  - @fluentui-react-native/default-theme@0.27.9
+  - @fluentui-react-native/design@0.3.2
+  - @uifabricshared/foundation-tokens@0.16.9
+
 ## 1.16.8
 
 ### Patch Changes

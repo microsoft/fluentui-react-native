@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/checkbox
 
+## 0.24.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+  - @uifabricshared/foundation-compose@1.16.9
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/text@0.25.9
+  - @fluentui-react-native/design@0.3.2
+  - @fluentui-react-native/tokens@0.24.9
+
 ## 0.24.8
 
 ### Patch Changes

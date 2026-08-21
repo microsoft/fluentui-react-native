@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/icon
 
+## 0.22.9
+
+### Patch Changes
+
+- Updated dependencies [51fab45]
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/text@0.25.9
+
 ## 0.22.8
 
 ### Patch Changes

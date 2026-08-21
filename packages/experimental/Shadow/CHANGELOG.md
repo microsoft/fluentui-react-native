@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
+## 0.7.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/design@0.3.2
+
 ## 0.7.8
 
 ### Patch Changes
