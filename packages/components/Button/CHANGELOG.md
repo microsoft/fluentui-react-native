@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/button
 
+## 0.40.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+  - @uifabricshared/foundation-compose@1.16.9
+  - @fluentui-react-native/experimental-shadow@0.7.9
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/text@0.25.9
+  - @fluentui-react-native/design@0.3.2
+  - @fluentui-react-native/tokens@0.24.9
+  - @fluentui-react-native/icon@0.22.9
+  - @fluentui-react-native/experimental-activity-indicator@0.11.9
+
 ## 0.40.8
 
 ### Patch Changes

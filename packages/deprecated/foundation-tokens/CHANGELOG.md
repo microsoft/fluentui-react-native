@@ -1,5 +1,12 @@
 # Change Log - @uifabricshared/foundation-tokens
 
+## 0.16.9
+
+### Patch Changes
+
+- Updated dependencies [51fab45]
+  - @fluentui-react-native/tokens@0.24.9
+
 ## 0.16.8
 
 ### Patch Changes

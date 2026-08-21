@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/android-theme
 
+## 0.26.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+  - @fluentui-react-native/theming-utils@0.27.9
+  - @fluentui-react-native/theme-tokens@0.29.3
+  - @fluentui-react-native/design@0.3.2
+
 ## 0.26.8
 
 ### Patch Changes

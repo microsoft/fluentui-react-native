@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/input
 
+## 0.8.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/text@0.25.9
+  - @fluentui-react-native/design@0.3.2
+  - @fluentui-react-native/tokens@0.24.9
+  - @fluentui-react-native/icon@0.22.9
+
 ## 0.8.8
 
 ### Patch Changes
