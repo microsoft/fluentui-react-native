@@ -4,7 +4,7 @@
  * A deterministic in-process W3C endpoint plus a Storybook-compatible channel surface. It exists
  * so the launcher/worker service, the `browser.desktop` commands, the story controller, the
  * artifact pipeline, and the shared-spec contract suite can all be exercised on any machine,
- * without Xcode, WinAppDriver, or a built application.
+ * without Xcode, Windows PowerShell, or a built application.
  *
  * It is a contract fake for this package's own plumbing. It is never a substitute for running the
  * shared suite against a real platform backend.

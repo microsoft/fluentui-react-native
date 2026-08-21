@@ -38,9 +38,9 @@ WebdriverIO runner or standalone client
                 v
        owned single-driver host
           /                 \
-   Mac2Driver          WindowsDriver
+   Mac2Driver       NovaWindowsDriver
        |                    |
-WebDriverAgentMac      WinAppDriver
+WebDriverAgentMac   Windows PowerShell
                 |
                 v
        React Native application
@@ -60,11 +60,11 @@ The driver host is a child process that binds to loopback, constructs exactly on
 publishes health metadata, and owns its logs and cleanup. Driver classes and Appium base-driver
 types do not cross that process boundary. WebdriverIO sees an ordinary WebDriver endpoint.
 
-The package does not run the Appium CLI, extension manager, or multi-driver router. It does reuse
-`appium-mac2-driver` and `appium-windows-driver`; those packages peer-depend on Appium 3 and import
-driver-author support from `appium/driver.js`. The hosting imports are isolated in
-`src/driver-host/backends.ts`, with `src/driver-host/w3c-server.ts` retaining a product-owned route
-host boundary for future migration.
+The package does not run the Appium CLI, extension manager, or multi-driver router. WebdriverIO,
+Appium, `appium-mac2-driver`, and `appium-novawindows-driver` are direct runtime dependencies.
+The platform drivers import driver-author support from `appium/driver.js`; their hosting imports
+are isolated in `src/driver-host/backends.ts`, with `src/driver-host/w3c-server.ts` retaining a
+product-owned route-host boundary for future migration.
 
 ### Public surfaces
 
@@ -140,8 +140,8 @@ focus and scrolling use:
   wheel delta and verifies the result.
 
 Generated capabilities pin `browserName: ''` so WebdriverIO selects the same native command
-implementations for both backends. WinAppDriver negotiates as JSONWireProtocol while Mac2 is W3C;
-the portability boundary is therefore the tested WebdriverIO behavior, not wire-level equivalence.
+implementations for both backends. The portability boundary is the tested WebdriverIO behavior,
+not backend implementation equivalence.
 
 The package adds only these browser commands:
 
@@ -200,7 +200,7 @@ option after cross-version proof.
 
 ### Windows attach
 
-WinAppDriver attaches through `appium:appTopLevelWindow`, so non-handle targets are resolved before
+NovaWindows attaches through `appium:appTopLevelWindow`, so non-handle targets are resolved before
 the real session starts:
 
 1. a temporary root-desktop session enumerates top-level windows;
@@ -373,7 +373,8 @@ sharing.
   synthetic input and fail on a locked workstation.
 - A locked session can still return source, attributes, and screenshots, making the failure look
   like an application defect.
-- WinAppDriver is located through `APPIUM_WAD_PATH` or its standard installation path.
+- NovaWindows is embedded and uses the built-in Windows PowerShell runtime; no native driver
+  service or Developer Mode is required.
 - Window enumeration is intentionally performed per run; caching a native handle risks attaching
   to an unrelated later window.
 - WebDriver screenshots may not reliably capture all WinAppSDK Composition content. Visual evidence
@@ -424,17 +425,11 @@ measured.
 
 ## Alternatives and rationale
 
-### Direct WinAppDriver access
+### WinAppDriver
 
-WebdriverIO can connect directly to WinAppDriver, but this loses
-`appium-windows-driver` compatibility shims for protocol and screenshot differences. The package
-uses Windows Driver as the compatibility layer until a measured alternative is selected.
-
-### NovaWindows
-
-NovaWindows avoids the aging WinAppDriver dependency, but it has not passed this package's
-real-backend contract. It is not a supported backend until dependency resolution, ownership,
-capability, command parity, and performance are verified.
+WinAppDriver and `appium-windows-driver` are unmaintained and require a separately installed native
+service. The package does not expose that backend; NovaWindows is the only supported Windows
+backend. Real-platform contract and performance evidence remains a release gate.
 
 ### Private Appium server
 

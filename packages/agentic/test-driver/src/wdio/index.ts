@@ -9,6 +9,8 @@
 
 import './augmentation.ts';
 
+export { remote } from 'webdriverio';
+
 export { createDesktopWdioConfig, assertSharedSpecs, readStoryManifestDigest } from './config-factory.ts';
 export type { DesktopSessionStrategy, DesktopWdioConfigOptions } from './config-factory.ts';
 export { DesktopDriverService, DESKTOP_ENDPOINT_ENV, resolveAttachWindow, startDesktopDriver, summarize } from './service.ts';

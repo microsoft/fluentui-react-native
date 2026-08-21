@@ -33,25 +33,19 @@ Repeat the native Windows run after the process-supervision and lifecycle change
 - verify attach leaves the original PID and window running;
 - verify launch mode stops only the launched application;
 - cancel an on-device run and confirm the command interpreter, WDIO runner, driver host, and
-  WinAppDriver descendants all exit within the deadline;
+  NovaWindows PowerShell descendants all exit within the deadline;
 - force post-readiness app and driver-host failures and confirm the run cannot report success;
-- inspect an unlocked WinAppDriver screenshot for WinAppSDK Composition content; and
+- inspect an unlocked NovaWindows screenshot for WinAppSDK Composition content; and
 - regenerate the Storybook manifest and compare its digest with macOS.
 
 Capture backend-provided application and native-driver PIDs where the native drivers expose them.
 Until then, lifecycle reporting must remain explicit about what was observed rather than imply
 complete process telemetry.
 
-### Blocking application defect
+### Historical application defect regression
 
-The shared Windows Storybook suite remains blocked by an agentic `Button` crash, not a known driver
-failure. Clicking the component fail-fast terminates `ReactApp.exe` roughly three seconds later
-with `0xc0000409` in `ucrtbase.dll`; plain React Native `Pressable` controls in the Storybook shell
-click successfully.
-
-Collect a native crash dump, fix or file the defect in `packages/agentic/components`, then rerun the
-unchanged shared suite. Keep this investigation outside the driver package unless new evidence
-shows the automation lifecycle or click implementation is at fault.
+The agentic `Button` focus crash is fixed on `main`. Rerun the unchanged shared suite against
+NovaWindows to prove the migrated backend still covers click and keyboard-focus transitions.
 
 ## Priority 1: reporting and public behavior
 
@@ -87,7 +81,6 @@ shows the automation lifecycle or click implementation is at fault.
 
 ### Correct CLI and backend claims
 
-- Keep NovaWindows unavailable until its dependency resolves and the real-backend contract passes.
 - Make `desktop-driver start` remain alive until SIGINT or SIGTERM, or rename it to communicate
   probe-only behavior.
 - Make `stories list` validate only the Storybook connection it uses.
@@ -136,7 +129,6 @@ Do these after the behavior above is covered so refactoring cannot hide contract
 | Should empty manifests ever be valid?                            | Continue failing by default. Add an explicit `allowEmpty` mode only for a demonstrated use case, and report it as skipped rather than passed.                |
 | How should linked tests be discovered?                           | Use actual framework discovery for the documented Mocha path. Parser validation is acceptable only if it proves the same runnable, non-skipped selection.    |
 | Should Run all isolate every story?                              | Keep one warm invocation/session as the default. Add isolation only as an explicit mode for consumers that accept the startup cost.                          |
-| Is NovaWindows a supported backend?                              | No. Decide only after installability, capability, ownership, parity, reliability, and timing evidence exists.                                                |
 | Is `desktop-driver start` a foreground host or a probe?          | Make it a foreground host. Add daemonized status/stop behavior only as a separate, owned feature.                                                            |
 | May Storybook control use a remote host?                         | Keep the first release loopback-only. Broaden this only with a separate authentication and threat model.                                                     |
 | Should a launcher/worker split change the public service API?    | No immediate break. Refactor behind the current surface and version any later migration.                                                                     |

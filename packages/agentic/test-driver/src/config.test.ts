@@ -23,7 +23,7 @@ describe('desktop driver configuration', () => {
   });
 
   it('rejects a backend that does not belong to the platform', () => {
-    expect(() => resolveDesktopOptions({ platform: 'macos', backend: 'windows', target: { mode: 'launch', app: 'a' } })).toThrow(
+    expect(() => resolveDesktopOptions({ platform: 'macos', backend: 'novawindows', target: { mode: 'launch', app: 'a' } })).toThrow(
       DesktopValidationError,
     );
   });
@@ -52,7 +52,7 @@ describe('desktop driver configuration', () => {
 
   it('defaults each platform to its documented backend', () => {
     expect(defaultBackendFor('macos')).toBe('mac2');
-    expect(defaultBackendFor('windows')).toBe('windows');
+    expect(defaultBackendFor('windows')).toBe('novawindows');
     expect(defaultBackendFor('fake')).toBe('fake');
   });
 });
@@ -95,13 +95,10 @@ describe('capability mapping', () => {
 
     expect(capabilities).toMatchObject({
       platformName: 'Windows',
-      'appium:automationName': 'Windows',
+      'appium:automationName': 'NovaWindows',
       'appium:appTopLevelWindow': '0x1234',
-      // Windows Driver's own capability name; an invented one would be silently ignored.
-      'ms:forcequit': false,
+      'appium:shouldCloseApp': false,
     });
-    // Verified against WinAppDriver 1.2.1: a session carrying both is rejected with
-    // "Bad capabilities. Specify either app or appTopLevelWindow".
     expect(capabilities['appium:app']).toBeUndefined();
   });
 
@@ -172,11 +169,6 @@ describe('capability mapping', () => {
       capability: { 'appium:skipAppKill': false },
     },
     {
-      name: 'Windows app termination',
-      options: { platform: 'windows', target: { mode: 'attach', windowHandle: '0x1234' } } as const,
-      capability: { 'ms:forcequit': true },
-    },
-    {
       name: 'NovaWindows app termination',
       options: {
         platform: 'windows',
@@ -201,10 +193,10 @@ describe('capability mapping', () => {
       resolveDesktopOptions({
         platform: 'windows',
         target: { mode: 'attach', windowHandle: '0x1234' },
-        backendCapabilities: { 'ms:forcequit': false },
+        backendCapabilities: { 'appium:shouldCloseApp': false },
       }),
     );
-    expect(capabilities['ms:forcequit']).toBe(false);
+    expect(capabilities['appium:shouldCloseApp']).toBe(false);
   });
 
   it('protects root-session routing from backend overrides', () => {

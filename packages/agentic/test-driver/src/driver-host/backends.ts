@@ -4,11 +4,13 @@
  * The Appium driver classes and their base-driver types never leave this module tree: they are
  * constructed inside the host child process, and the parent only ever sees a plain WebDriver
  * endpoint. That boundary is what lets the package reuse `appium-mac2-driver` and
- * `appium-windows-driver` without making Appium part of the product's test-authoring model, and
- * what makes an Appium 4 migration (or a fully local route host) a change nobody's specs notice.
+ * `appium-novawindows-driver` without making Appium part of the product's test-authoring model,
+ * and what makes an Appium 4 migration (or a fully local route host) a change nobody's specs
+ * notice.
  *
- * The imports below are dynamic and optional on purpose: a macOS machine must not be required to
- * install the Windows driver, and neither driver may be loaded when the `fake` backend is used.
+ * The imports below are dynamic so a platform driver is loaded only in its host child process.
+ * Both drivers are runtime dependencies, which makes a package installation self-contained
+ * without loading Windows native bindings on macOS or vice versa.
  */
 
 import { createFakeRoutes, FakeDriver, loadFakeScene } from './fake-driver.ts';
@@ -81,12 +83,8 @@ async function constructDriver(backend: DesktopBackendId): Promise<unknown> {
       const module = (await import('appium-mac2-driver')) as { Mac2Driver: new (options: Record<string, unknown>) => unknown };
       return new module.Mac2Driver({});
     }
-    case 'windows': {
-      const module = (await import('appium-windows-driver')) as { WindowsDriver: new (options: Record<string, unknown>) => unknown };
-      return new module.WindowsDriver({});
-    }
     case 'novawindows': {
-      const module = (await import('appium-novawindows-driver' as string)) as {
+      const module = (await import('appium-novawindows-driver')) as {
         NovaWindowsDriver: new (options: Record<string, unknown>) => unknown;
       };
       return new module.NovaWindowsDriver({});
@@ -121,7 +119,7 @@ export function availableBackends(platform: NodeJS.Platform = process.platform):
     return ['fake', 'mac2'];
   }
   if (platform === 'win32') {
-    return ['fake', 'windows', 'novawindows'];
+    return ['fake', 'novawindows'];
   }
   return ['fake'];
 }

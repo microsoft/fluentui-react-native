@@ -36,11 +36,9 @@ Use Node 20.19 or newer and WebdriverIO 9. The repository currently uses Yarn 4.
 
 **Windows**
 
+- Windows 10 or newer with Windows PowerShell
 - An interactive, unlocked desktop session
 - The application installed or registered
-- Developer Mode
-- WinAppDriver for the `windows` backend
-- `APPIUM_WAD_PATH` set when WinAppDriver is not in its default installation directory
 
 Synthetic clicks do not work on a locked Windows workstation even though source, screenshots, and
 element reads may continue to work.
@@ -50,10 +48,15 @@ Before a real run, inspect the machine-readable prerequisite report:
 ```sh
 desktop-driver doctor --platform macos
 desktop-driver doctor --platform windows
+desktop-driver driver detect
+desktop-driver driver install
 ```
 
 The command prints JSON and exits nonzero when it has warnings. An agent should parse the JSON and
 treat `missing` as a blocker and `unknown` as something that still requires explicit verification.
+The driver commands detect the host platform when `--platform` is omitted. Installation is
+idempotent: platform drivers are bundled, NovaWindows has no external service, and Mac2 builds
+WebDriverAgentMac when the first session starts.
 
 ## Integrate the package
 
@@ -65,7 +68,6 @@ workspace:
 ```sh
 yarn add --dev \
   @fluentui-react-native/desktop-driver \
-  webdriverio \
   @wdio/cli \
   @wdio/local-runner \
   @wdio/mocha-framework \
@@ -73,11 +75,10 @@ yarn add --dev \
   expect-webdriverio
 ```
 
-The platform drivers are optional dependencies of the package. A consumer that manages optional
-dependencies explicitly must make the backend needed by its job available:
-
-- `appium`, `appium-mac2-driver` for macOS
-- `appium`, `appium-windows-driver` for Windows
+`webdriverio`, `appium`, `appium-mac2-driver`, and `appium-novawindows-driver` are runtime
+dependencies of the package. Consumers do not install, register, or select a native driver.
+Standalone clients import `remote` from `@fluentui-react-native/desktop-driver/wdio` so the package
+owns the WebdriverIO version.
 
 ### Base WebdriverIO configuration
 
@@ -198,7 +199,7 @@ Run every configured test against a packaged app:
 # macOS: .app path or bundle identifier accepted by Mac2
 DESKTOP_TEST_APP=/absolute/path/MyApp.app yarn desktop:e2e:macos
 
-# Windows: executable path, UWP application id, or other Windows Driver launch identity
+# Windows: executable path, UWP application id, or other NovaWindows launch identity
 DESKTOP_TEST_APP='Contoso.MyApp_abc123!App' yarn desktop:e2e:windows
 ```
 

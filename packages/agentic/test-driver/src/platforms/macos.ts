@@ -6,6 +6,8 @@
  * for exactly this reason.
  */
 
+import { execFileSync } from 'node:child_process';
+
 import { DesktopDriverError } from '../errors.ts';
 import type { DesktopBrowserLike } from '../wdio/commands.ts';
 import type { DesktopPrerequisiteStatus } from '../types.ts';
@@ -53,19 +55,67 @@ export const MACOS_PREREQUISITES: readonly { id: string; description: string }[]
   { id: 'wda-build-cache', description: 'A writable, reusable WebDriverAgentMac derived-data cache' },
 ];
 
-/**
- * Reports the macOS prerequisites.
- *
- * They are reported, not probed: every one of them (Accessibility grants, automation mode, the
- * WebDriverAgentMac cache) needs a macOS API this package has no verified probe for, and a
- * fabricated "ok" is worse than an honest "unknown".
- */
-export function checkMacosPrerequisites(): readonly DesktopPrerequisiteStatus[] {
-  return MACOS_PREREQUISITES.map((prerequisite) => ({
-    ...prerequisite,
-    status: 'unknown',
-    detail: process.platform === 'darwin' ? 'Not probed' : `Not probed: this machine is ${process.platform}, not darwin`,
-  }));
+interface CommandProbe {
+  status: 'ok' | 'missing' | 'unknown';
+  detail?: string;
+}
+
+/** Runs a bounded command probe without turning every execution failure into "missing". */
+function probe(command: string, args: readonly string[]): CommandProbe {
+  try {
+    return {
+      status: 'ok',
+      detail: execFileSync(command, args, {
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+        timeout: 10_000,
+      }).trim(),
+    };
+  } catch (error) {
+    const failure = error as NodeJS.ErrnoException;
+    return {
+      status: failure.code === 'ENOENT' ? 'missing' : 'unknown',
+      detail: failure.code ?? failure.message,
+    };
+  }
+}
+
+/** Reports the macOS prerequisites, probing only versioned command-line tools. */
+export function checkMacosPrerequisites(hostPlatform: NodeJS.Platform = process.platform): readonly DesktopPrerequisiteStatus[] {
+  if (hostPlatform !== 'darwin') {
+    return MACOS_PREREQUISITES.map((prerequisite) => ({
+      ...prerequisite,
+      status: 'unknown',
+      detail: `Not probed: this machine is ${hostPlatform}, not darwin`,
+    }));
+  }
+
+  const byId = (id: string): { id: string; description: string } => MACOS_PREREQUISITES.find((entry) => entry.id === id)!;
+  const version = probe('sw_vers', ['-productVersion']);
+  const majorMinor = version.status === 'ok' ? version.detail?.split('.').slice(0, 2).map(Number) : undefined;
+  const supportedVersion = majorMinor && majorMinor.length === 2 && (majorMinor[0] > 11 || (majorMinor[0] === 11 && majorMinor[1] >= 3));
+  const xcode = probe('xcodebuild', ['-version']);
+  const xcodeMajor = xcode.status === 'ok' ? Number.parseInt(/^Xcode\s+(\d+)/.exec(xcode.detail ?? '')?.[1] ?? '', 10) : undefined;
+  const xcodeStatus =
+    xcode.status !== 'ok' ? xcode.status : xcodeMajor !== undefined && !Number.isNaN(xcodeMajor) && xcodeMajor >= 13 ? 'ok' : 'missing';
+
+  return [
+    {
+      ...byId('macos-version'),
+      status: version.status !== 'ok' ? 'unknown' : supportedVersion ? 'ok' : 'missing',
+      detail: version.detail,
+    },
+    {
+      ...byId('xcode'),
+      status: xcodeStatus,
+      detail: xcode.status === 'ok' ? xcode.detail?.split('\n')[0] : xcode.detail,
+    },
+    ...MACOS_PREREQUISITES.filter((entry) => entry.id !== 'macos-version' && entry.id !== 'xcode').map((prerequisite) => ({
+      ...prerequisite,
+      status: 'unknown' as const,
+      detail: 'Not probed',
+    })),
+  ];
 }
 
 /** Terminates a launched macOS application. Refuses to run for an attached target. */

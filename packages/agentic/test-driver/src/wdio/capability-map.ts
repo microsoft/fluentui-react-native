@@ -36,9 +36,8 @@ export function buildCapabilities(options: ResolvedDesktopDriverOptions, overrid
     case 'mac2':
       Object.assign(base, macosCapabilities(options.target));
       break;
-    case 'windows':
     case 'novawindows':
-      Object.assign(base, windowsCapabilities(options.target, options.backend, overrides));
+      Object.assign(base, windowsCapabilities(options.target, overrides));
       break;
     case 'fake':
     default:
@@ -87,14 +86,10 @@ function macosCapabilities(target: DesktopAppTarget): Record<string, unknown> {
   return capabilities;
 }
 
-function windowsCapabilities(
-  target: DesktopAppTarget,
-  backend: 'windows' | 'novawindows',
-  overrides: CapabilityOverrides,
-): Record<string, unknown> {
+function windowsCapabilities(target: DesktopAppTarget, overrides: CapabilityOverrides): Record<string, unknown> {
   const capabilities: Record<string, unknown> = {
     platformName: 'Windows',
-    'appium:automationName': backend === 'windows' ? 'Windows' : 'NovaWindows',
+    'appium:automationName': 'NovaWindows',
   };
 
   if (target.mode === 'launch') {
@@ -108,20 +103,12 @@ function windowsCapabilities(
     return capabilities;
   }
 
-  // The "never terminate what we did not start" guarantee is expressed with each backend's own
-  // capability, because Appium only warns about an unrecognized one and would silently keep its
-  // default. Windows Driver gates WinAppDriver's `/forcequit` on `ms:forcequit`, and NovaWindows
-  // closes the window under test at session end unless `shouldCloseApp` is false.
-  if (backend === 'windows') {
-    capabilities['ms:forcequit'] = false;
-  } else {
-    capabilities['appium:shouldCloseApp'] = false;
-  }
+  // NovaWindows closes the window under test at session end unless this is false.
+  capabilities['appium:shouldCloseApp'] = false;
 
-  // `app` and `appTopLevelWindow` are mutually exclusive: WinAppDriver rejects a session that
-  // carries both with "Bad capabilities. Specify either app or appTopLevelWindow". Attaching is
-  // therefore two steps — a root-desktop session that enumerates windows, then the real session
-  // pinned to the one handle that matched.
+  // `app` and `appTopLevelWindow` are mutually exclusive. Attaching is therefore two steps: a
+  // root-desktop session that enumerates windows, then the real session pinned to the handle that
+  // matched.
   const handle = overrides.rootSession ? undefined : (overrides.windowHandle ?? target.windowHandle);
   if (handle) {
     capabilities['appium:appTopLevelWindow'] = normalizeWindowHandle(handle);
@@ -144,10 +131,6 @@ function assertSafeCapabilityOverrides(
       protectedKeys.add('appium:skipAppKill');
       protectedKeys.add('appium:bundleId');
       protectedKeys.add('appium:appPath');
-    } else if (options.backend === 'windows') {
-      protectedKeys.add('ms:forcequit');
-      protectedKeys.add('appium:app');
-      protectedKeys.add('appium:appTopLevelWindow');
     } else if (options.backend === 'novawindows') {
       protectedKeys.add('appium:shouldCloseApp');
       protectedKeys.add('appium:app');

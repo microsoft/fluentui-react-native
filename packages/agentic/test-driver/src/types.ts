@@ -10,7 +10,7 @@
 export type DesktopPlatform = 'macos' | 'windows' | 'fake';
 
 /** Concrete backend implementation hosted by the single-driver host. */
-export type DesktopBackendId = 'mac2' | 'windows' | 'novawindows' | 'fake';
+export type DesktopBackendId = 'mac2' | 'novawindows' | 'fake';
 
 /**
  * How a session obtains the application under test.

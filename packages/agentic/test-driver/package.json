@@ -55,27 +55,17 @@
     "test": "fluentui-scripts jest"
   },
   "dependencies": {
-    "@babel/parser": "^7.20.0"
+    "@babel/parser": "^7.20.0",
+    "appium": "catalog:",
+    "appium-mac2-driver": "catalog:",
+    "appium-novawindows-driver": "catalog:",
+    "webdriverio": "catalog:"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/node": "catalog:",
-    "expect-webdriverio": "catalog:",
-    "webdriverio": "catalog:"
-  },
-  "peerDependencies": {
-    "webdriverio": "^9.0.0"
-  },
-  "peerDependenciesMeta": {
-    "webdriverio": {
-      "optional": true
-    }
-  },
-  "optionalDependencies": {
-    "appium": "catalog:",
-    "appium-mac2-driver": "catalog:",
-    "appium-windows-driver": "catalog:"
+    "expect-webdriverio": "catalog:"
   },
   "engines": {
     "node": ">=20.19.0"
@@ -86,7 +76,7 @@
       "ignoreMatches": [
         "appium",
         "appium-mac2-driver",
-        "appium-windows-driver"
+        "appium-novawindows-driver"
       ]
     },
     "knip": {

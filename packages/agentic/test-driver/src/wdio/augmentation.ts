@@ -2,9 +2,8 @@
  * WebdriverIO type augmentation.
  *
  * Declares `browser.desktop` on the global WebdriverIO `Browser` interface so a shared spec gets
- * type checking and completion without importing anything platform-specific. Augmenting the
- * global namespace (rather than the `webdriverio` module) means this file type-checks even when
- * the optional `webdriverio` peer dependency is not installed.
+ * type checking and completion without importing anything platform-specific. The package owns its
+ * WebdriverIO version, while the global namespace remains the custom-command augmentation point.
  */
 
 import type { DesktopBrowserCommands } from './commands.ts';

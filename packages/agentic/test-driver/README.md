@@ -22,13 +22,13 @@ available through explicit extension exports, but a test that uses them is not p
 suite.
 
 The package does not automate mobile platforms or browsers, replace Storybook's unit-test tooling,
-or run the Appium CLI. It reuses the Mac2 and Windows Appium driver implementations behind an
-isolated single-driver host.
+or run the Appium CLI. It embeds WebdriverIO, Appium, Mac2, and NovaWindows as runtime dependencies
+behind an isolated single-driver host.
 
 ## Quick start
 
-Install the package, WebdriverIO 9, a framework adapter, and a reporter. Then create a standard WDIO
-configuration:
+Install the package, a WebdriverIO runner, a framework adapter, and a reporter. The package already
+provides the WebdriverIO client and both platform drivers. Then create a standard WDIO configuration:
 
 ```ts
 // wdio.conf.ts
@@ -163,8 +163,7 @@ structured progress back to the app.
 Jest, Vitest, `node:test`, and scripts can use the same backend without the WDIO testrunner:
 
 ```ts
-import { remote } from 'webdriverio';
-import { startDesktopDriver } from '@fluentui-react-native/desktop-driver/wdio';
+import { remote, startDesktopDriver } from '@fluentui-react-native/desktop-driver/wdio';
 
 const service = await startDesktopDriver(options);
 const browser = await remote(service.webdriverOptions);
@@ -201,6 +200,8 @@ and never publish service tokens.
 
 ```text
 desktop-driver doctor              Report backends and platform prerequisites
+desktop-driver driver detect       Detect the embedded driver and native runtime
+desktop-driver driver install      Verify the self-contained driver installation
 desktop-driver stories generate    Generate the Storybook test manifest and WDIO spec
 desktop-driver stories list        List stories reported by a running Storybook app
 desktop-driver serve               Host on-device Storybook test requests
@@ -224,11 +225,12 @@ interactive host.
 
 **Windows**
 
+- Windows 10 or newer with Windows PowerShell
 - An interactive, unlocked desktop session
 - The application installed or registered
-- Developer Mode
-- WinAppDriver for the Windows backend
-- `APPIUM_WAD_PATH` when WinAppDriver is not in its standard installation directory
+
+NovaWindows uses the built-in Windows PowerShell runtime. It does not require WinAppDriver,
+Developer Mode, an Appium driver registry, or a separately installed native service.
 
 Run `desktop-driver doctor --platform <macos|windows>` before a real test. A prerequisite reported
 as `unknown` has not been verified and must not be treated as satisfied.

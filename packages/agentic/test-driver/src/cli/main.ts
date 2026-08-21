@@ -8,7 +8,8 @@
 
 import * as path from 'node:path';
 
-import { doctor, generateStories, listRunningStories } from './commands.ts';
+import { detectDesktopDriver, doctor, generateStories, installDesktopDriver, listRunningStories } from './commands.ts';
+import { detectHostPlatform } from '../drivers.ts';
 import { startDesktopDriver } from '../wdio/service.ts';
 import { startDesktopTestServer } from '../storybook/serve.ts';
 import { DesktopDriverError } from '../errors.ts';
@@ -65,6 +66,10 @@ function requirePlatform(flags: ParsedArgs['flags']): DesktopPlatform {
   return platform;
 }
 
+function driverPlatform(flags: ParsedArgs['flags']): DesktopPlatform {
+  return flags.platform === undefined && process.env.DESKTOP_TEST_PLATFORM === undefined ? detectHostPlatform() : requirePlatform(flags);
+}
+
 function buildTarget(flags: ParsedArgs['flags']): DesktopAppTarget {
   if (typeof flags.app === 'string') {
     return { mode: 'launch', app: flags.app };
@@ -93,6 +98,8 @@ const USAGE = `desktop-driver <command> [options]
 
 Commands
   doctor                     Report backends, portable commands, and platform prerequisites
+  driver detect              Detect the embedded platform driver and native runtime
+  driver install             Verify the embedded platform driver installation
   stories generate           Scan story modules and emit the manifest and generated spec
   stories list               List the stories a running Storybook application reports
   serve                      Run the loopback desktop test service for the on-device controls
@@ -137,6 +144,36 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
       const report = doctor(requirePlatform(flags));
       print(report);
       return report.warnings.length > 0 ? 1 : 0;
+    }
+
+    case 'driver': {
+      const platform = driverPlatform(flags);
+      if (second === 'detect') {
+        const result = await detectDesktopDriver(platform);
+        print(result);
+        return result.status === 'ready' ? 0 : 1;
+      }
+      if (second === 'install') {
+        try {
+          print(await installDesktopDriver(platform));
+          return 0;
+        } catch (error) {
+          if (!(error instanceof DesktopDriverError)) {
+            throw error;
+          }
+          print({
+            changed: false,
+            error: {
+              message: error.message,
+              kind: error.kind,
+              detail: error.detail,
+            },
+          });
+          return 1;
+        }
+      }
+      process.stderr.write(`Unknown "driver" subcommand "${String(second)}"\n${USAGE}`);
+      return 2;
     }
 
     case 'stories': {

@@ -50,7 +50,6 @@ export const PORTABLE_COMMANDS: readonly PortableCommand[] = Object.keys(PORTABL
 const BACKEND_SUPPORT: Readonly<Record<DesktopBackendId, readonly PortableCommand[]>> = {
   fake: PORTABLE_COMMANDS,
   mac2: PORTABLE_COMMANDS,
-  windows: PORTABLE_COMMANDS,
   novawindows: PORTABLE_COMMANDS,
 };
 
@@ -58,7 +57,6 @@ const BACKEND_SUPPORT: Readonly<Record<DesktopBackendId, readonly PortableComman
 const BACKEND_EXTENSIONS: Readonly<Record<DesktopBackendId, readonly string[]>> = {
   fake: [],
   mac2: ['macos'],
-  windows: ['windows'],
   novawindows: ['windows'],
 };
 

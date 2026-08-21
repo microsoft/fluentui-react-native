@@ -24,7 +24,7 @@ export interface DriverHostConfigFile {
   parentPid: number;
 }
 
-const VALID_BACKENDS: readonly DesktopBackendId[] = ['fake', 'mac2', 'windows', 'novawindows'];
+const VALID_BACKENDS: readonly DesktopBackendId[] = ['fake', 'mac2', 'novawindows'];
 const LOOPBACK_HOSTS = new Set(['127.0.0.1', '::1', 'localhost']);
 
 export function readDriverHostConfig(file: string): DriverHostConfigFile {

@@ -70,7 +70,6 @@ export interface DesktopCommandContext {
 
 const SCROLL_SCRIPTS: Readonly<Record<string, string>> = {
   mac2: 'macos: scroll',
-  windows: 'windows: scroll',
   novawindows: 'windows: scroll',
   fake: 'desktop: scroll',
 };
@@ -78,14 +77,12 @@ const SCROLL_SCRIPTS: Readonly<Record<string, string>> = {
 /**
  * Accessibility attribute that reports keyboard focus, per backend.
  *
- * WinAppDriver implements neither `GET` nor `POST /session/:id/element/active` (verified against
- * 1.2.1: 405 and 404), so focus has to come from the UI Automation `HasKeyboardFocus` property.
- * Mac2 exposes the same idea as `focused`. The active-element route stays as a fallback for a
- * backend that answers it but not the attribute.
+ * Windows focus comes from the UI Automation `HasKeyboardFocus` property. Mac2 exposes the same
+ * idea as `focused`. The active-element route stays as a fallback for a backend that answers it
+ * but not the attribute.
  */
 const FOCUS_ATTRIBUTES: Readonly<Record<string, string>> = {
   mac2: 'focused',
-  windows: 'HasKeyboardFocus',
   novawindows: 'HasKeyboardFocus',
   fake: 'focused',
 };

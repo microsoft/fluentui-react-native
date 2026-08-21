@@ -46,6 +46,14 @@ export { allocatePort, delay, waitForHttp, type WaitForHttpOptions } from './net
 export { DESKTOP_PROTOCOL_VERSION, STORY_PLAN_SCHEMA_VERSION } from './protocol.ts';
 export { PACKAGE_VERSION } from './package-version.ts';
 export { isInlinePlan, isSpecPlan, planTestIds, validateStoryPlan } from './story-plan.ts';
+export {
+  detectDesktopDriver,
+  detectHostPlatform,
+  installDesktopDriver,
+  type DesktopDriverDetection,
+  type DesktopDriverDetectionStatus,
+  type DesktopDriverInstallResult,
+} from './drivers.ts';
 
 export type {
   ArtifactManifest,
@@ -63,6 +71,7 @@ export type {
   DesktopOwnedResource,
   DesktopOwnership,
   DesktopPlatform,
+  DesktopPrerequisiteStatus,
   DesktopReadinessOptions,
   DesktopRunReport,
   DesktopServiceRunStatus,

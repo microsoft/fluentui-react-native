@@ -13,7 +13,7 @@ import type { DesktopAppTarget, DesktopBackendId, DesktopDriverOptions, DesktopP
 import { expectEnum, isNonEmptyString, isPlainObject, ValidationIssues } from './validate.ts';
 
 const PLATFORMS: readonly DesktopPlatform[] = ['macos', 'windows', 'fake'];
-const BACKENDS: readonly DesktopBackendId[] = ['mac2', 'windows', 'novawindows', 'fake'];
+const BACKENDS: readonly DesktopBackendId[] = ['mac2', 'novawindows', 'fake'];
 const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error', 'silent'] as const;
 
 const LOOPBACK_HOSTS = new Set(['127.0.0.1', '::1', 'localhost']);
@@ -21,7 +21,7 @@ const LOOPBACK_HOSTS = new Set(['127.0.0.1', '::1', 'localhost']);
 /** Backends that are legal for each platform. The first entry is the default. */
 const PLATFORM_BACKENDS: Readonly<Record<DesktopPlatform, readonly DesktopBackendId[]>> = {
   macos: ['mac2'],
-  windows: ['windows', 'novawindows'],
+  windows: ['novawindows'],
   fake: ['fake'],
 };
 

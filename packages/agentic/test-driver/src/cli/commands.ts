@@ -11,6 +11,7 @@ import * as path from 'node:path';
 import { availableBackends } from '../driver-host/backends.ts';
 import { missingPortableCommands, PORTABLE_COMMANDS, PORTABLE_COMMAND_SURFACES, portableCommandsFor } from '../capabilities.ts';
 import { defaultBackendFor, resolveDesktopOptions } from '../config.ts';
+import { detectDesktopDriver, installDesktopDriver } from '../drivers.ts';
 import { DesktopValidationError } from '../errors.ts';
 import { emitGeneratedStorySpec, verifyLinkedSpecTags } from '../storybook/generated-spec.ts';
 import { findStoryFiles, generateStoryTestManifest } from '../storybook/manifest.ts';
@@ -20,6 +21,8 @@ import { DESKTOP_PROTOCOL_VERSION, PORTABLE_COMMAND_MATRIX_VERSION } from '../pr
 import { StoryController } from '../storybook/controller.ts';
 import { checkWindowsPrerequisites } from '../platforms/windows.ts';
 import type { DesktopDriverOptions, DesktopPlatform, DesktopPrerequisiteStatus, StoryTestManifest } from '../types.ts';
+
+export { detectDesktopDriver, installDesktopDriver };
 
 export interface DoctorReport {
   packageVersion: string;

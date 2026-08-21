@@ -193,7 +193,7 @@ export class DesktopDriverService {
   /**
    * Resolves an attach target to one native window handle.
    *
-   * Only the Windows backends need this: `appium:appTopLevelWindow` is the only way to pin a
+   * Only the Windows backend needs this: `appium:appTopLevelWindow` is the only way to pin a
    * session to an already running window, and it takes a handle, while a portable target names
    * the application by pid, identity, or title. Mac2 attaches by bundle identifier instead, and
    * the `fake` backend has no windows.
@@ -515,9 +515,8 @@ export function summarize(results: readonly DesktopTestResult[]): {
 /**
  * Pins a capability set to one already running window.
  *
- * `appium:app` is removed rather than left alongside the handle: WinAppDriver rejects a session
- * that carries both with "Bad capabilities. Specify either app or appTopLevelWindow", so the
- * root-session marker has to go when the real window is known.
+ * `appium:app` is removed rather than left alongside the handle because the two routing
+ * capabilities are mutually exclusive.
  */
 function applyWindowHandle(capabilities: Record<string, unknown>, windowHandle: string): void {
   capabilities['appium:appTopLevelWindow'] = windowHandle;
@@ -537,7 +536,7 @@ export async function resolveAttachWindow(
   webDriverUrl: string,
 ): Promise<DesktopWindowMatch | undefined> {
   const target = options.target;
-  if (target.mode !== 'attach' || (options.backend !== 'windows' && options.backend !== 'novawindows')) {
+  if (target.mode !== 'attach' || options.backend !== 'novawindows') {
     return undefined;
   }
 
