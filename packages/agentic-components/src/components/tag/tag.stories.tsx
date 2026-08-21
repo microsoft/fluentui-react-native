@@ -1,11 +1,12 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 
 import { Tag } from './tag';
-import type { TagAppearance, TagLayout, TagShape, TagSize } from './tag.types';
+import type { TagAppearance, TagLayout, TagProps, TagShape, TagSize } from './tag.types';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -18,6 +19,24 @@ const StoryGroup = ({ children, label }: StoryGroupProps) => (
     <View style={styles.row}>{children}</View>
   </View>
 );
+
+const DismissibleTag = ({ dismissedMessage = 'Tag dismissed', onPress, ...props }: TagProps & { dismissedMessage?: string }) => {
+  const [visible, setVisible] = useState(true);
+
+  return visible ? (
+    <Tag
+      {...props}
+      onPress={(event) => {
+        setVisible(false);
+        onPress?.(event);
+      }}
+    />
+  ) : (
+    <Text accessibilityLiveRegion="polite" style={styles.dismissed}>
+      {dismissedMessage}
+    </Text>
+  );
+};
 
 const appearances: readonly { label: string; value: TagAppearance }[] = [
   { label: 'Primary', value: 'primary' },
@@ -74,7 +93,9 @@ export default meta;
 
 type Story = StoryObj<typeof Tag>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: (args) => <DismissibleTag {...args} />,
+};
 
 export const Overview: Story = {
   render: () => (
@@ -187,8 +208,8 @@ export const Shape: Story = {
 export const Dismiss: Story = {
   render: () => (
     <StoryGroup label="Dismiss">
-      <Tag content="Dismiss on" dismissIcon={dismissIcon} leadingIcon={leadingIcon} />
-      <Tag content="Dismiss off" dismiss={false} leadingIcon={leadingIcon} />
+      <DismissibleTag content="Dismiss on" dismissIcon={dismissIcon} dismissedMessage="Dismiss-on tag removed" leadingIcon={leadingIcon} />
+      <DismissibleTag content="Dismiss off" dismiss={false} dismissedMessage="Dismiss-off tag removed" leadingIcon={leadingIcon} />
     </StoryGroup>
   ),
   parameters: {
@@ -239,6 +260,10 @@ export const ConstrainedText: Story = {
 };
 
 const styles = StyleSheet.create({
+  dismissed: {
+    fontSize: 12,
+    fontStyle: 'italic',
+  },
   group: {
     alignItems: 'flex-start',
     gap: 8,

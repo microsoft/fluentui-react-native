@@ -2,7 +2,11 @@
 // `storybook-generate` script) from the `main.ts` stories glob. It is git-ignored.
 import { view } from './storybook.requires';
 import { LiteUI } from '@storybook/react-native-ui-lite';
+import { LogBox } from 'react-native';
 import { StorybookThemeHost } from './StorybookTheme';
+
+// LegendList can temporarily underestimate the containers needed by Storybook's variable-height tree.
+LogBox.ignoreLogs(['[legend-list] No unused container available']);
 
 // We run Storybook in lite mode: the heavy default on-device UI (`@storybook/react-native-ui`,
 // which needs reanimated/gesture-handler/etc.) is not bundled. `getStorybookUI` would otherwise

@@ -1,6 +1,6 @@
 import type { HostComponent, ViewProps } from 'react-native';
 import type { BubblingEventHandler, Int32, UnsafeMixed, WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
+import { codegenNativeComponent } from 'react-native';
 
 export interface NativeProps extends ViewProps {
   // An array of `{ label?: string; enabled?: boolean; width?: number }` segment descriptors. Codegen

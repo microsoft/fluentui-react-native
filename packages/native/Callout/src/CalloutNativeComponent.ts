@@ -1,5 +1,4 @@
-import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
+import { codegenNativeCommands, codegenNativeComponent } from 'react-native';
 
 import type { HostComponent, ViewProps } from 'react-native';
 import type { WithDefault, UnsafeMixed, Int32, DirectEventHandler, Double } from 'react-native/Libraries/Types/CodegenTypes';
