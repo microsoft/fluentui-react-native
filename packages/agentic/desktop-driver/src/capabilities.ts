@@ -44,12 +44,14 @@ export const PORTABLE_COMMANDS: readonly PortableCommand[] = Object.keys(PORTABL
 /**
  * Backend support for the portable matrix.
  *
- * Every supported backend must implement the full matrix; the map exists so a backend that
- * regresses can be described honestly instead of having the matrix quietly shrink for everyone.
+ * Backend omissions stay explicit so capability reporting cannot silently claim a command whose
+ * native state is unavailable.
  */
 const BACKEND_SUPPORT: Readonly<Record<DesktopBackendId, readonly PortableCommand[]>> = {
   fake: PORTABLE_COMMANDS,
-  mac2: PORTABLE_COMMANDS,
+  // React Native macOS Fabric 0.81 does not project accessibilityState.disabled to AXEnabled, so
+  // Mac2 cannot distinguish a disabled Pressable from an enabled one.
+  mac2: PORTABLE_COMMANDS.filter((command) => command !== 'isEnabled'),
   novawindows: PORTABLE_COMMANDS,
 };
 

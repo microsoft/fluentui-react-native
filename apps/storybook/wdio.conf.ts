@@ -34,13 +34,18 @@ const platform = (process.env.DESKTOP_TEST_PLATFORM ?? 'fake') as DesktopPlatfor
  */
 const target: DesktopAppTarget = process.env.DESKTOP_TEST_APP
   ? { mode: 'launch', app: process.env.DESKTOP_TEST_APP }
-  : {
-      mode: 'attach',
-      identity: process.env.DESKTOP_TEST_IDENTITY,
-      processId: process.env.DESKTOP_TEST_PID ? Number(process.env.DESKTOP_TEST_PID) : undefined,
-      windowHandle: process.env.DESKTOP_TEST_WINDOW,
-      title: process.env.DESKTOP_TEST_WINDOW_TITLE ?? 'Agentic Components Storybook',
-    };
+  : platform === 'macos'
+    ? {
+        mode: 'attach',
+        identity: process.env.DESKTOP_TEST_IDENTITY ?? 'com.microsoft.fluentui.agenticstorybook',
+      }
+    : {
+        mode: 'attach',
+        identity: process.env.DESKTOP_TEST_IDENTITY,
+        processId: process.env.DESKTOP_TEST_PID ? Number(process.env.DESKTOP_TEST_PID) : undefined,
+        windowHandle: process.env.DESKTOP_TEST_WINDOW,
+        title: process.env.DESKTOP_TEST_WINDOW_TITLE ?? 'Agentic Components Storybook',
+      };
 
 export const config = createDesktopWdioConfig({
   platform,
@@ -62,6 +67,8 @@ export const config = createDesktopWdioConfig({
   readiness: {
     // The story controller must answer before any test selects a story.
     requireStorybookChannel: platform !== 'fake',
+    // A running native process is not enough; wait until React Native has mounted the app shell.
+    requireTestId: platform === 'fake' ? undefined : 'agentic-storybook-theme-none',
   },
   fakeScene: platform === 'fake' ? path.join(rootDir, 'desktop-tests', 'fake-scene.json') : undefined,
   storyManifest: path.join('desktop-tests', 'generated', 'story-tests.manifest.json'),

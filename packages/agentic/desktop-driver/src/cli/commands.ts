@@ -11,7 +11,7 @@ import * as path from 'node:path';
 import { availableBackends } from '../driver-host/backends.ts';
 import { missingPortableCommands, PORTABLE_COMMANDS, PORTABLE_COMMAND_SURFACES, portableCommandsFor } from '../capabilities.ts';
 import { defaultBackendFor, resolveDesktopOptions } from '../config.ts';
-import { detectDesktopDriver, installDesktopDriver } from '../drivers.ts';
+import { detectDesktopDriver, installDesktopDriver, isBlockingDriverPrerequisite } from '../drivers.ts';
 import { DesktopValidationError } from '../errors.ts';
 import { emitGeneratedStorySpec, verifyLinkedSpecTags } from '../storybook/generated-spec.ts';
 import { findStoryFiles, generateStoryTestManifest } from '../storybook/manifest.ts';
@@ -35,6 +35,7 @@ export interface DoctorReport {
   portableCommands: readonly { command: string; surface: string; supported: boolean }[];
   prerequisites: readonly DesktopPrerequisiteStatus[];
   warnings: readonly string[];
+  ready: boolean;
 }
 
 /** Reports what this machine can run, without starting anything. */
@@ -43,9 +44,11 @@ export function doctor(platform: DesktopPlatform): DoctorReport {
   const backend = defaultBackendFor(platform);
   const supported = new Set(portableCommandsFor(backend));
   const warnings: string[] = [];
+  let ready = true;
 
   if (!backends.includes(backend)) {
     warnings.push(`Backend "${backend}" is not available on ${process.platform}; only ${backends.join(', ')} can be started here.`);
+    ready = false;
   }
   for (const command of missingPortableCommands(backend)) {
     warnings.push(`Backend "${backend}" does not implement portable command "${command}".`);
@@ -54,6 +57,9 @@ export function doctor(platform: DesktopPlatform): DoctorReport {
   const prerequisites = platform === 'macos' ? checkMacosPrerequisites() : platform === 'windows' ? checkWindowsPrerequisites() : [];
   for (const prerequisite of prerequisites.filter((entry) => entry.status === 'missing')) {
     warnings.push(`Prerequisite "${prerequisite.id}" is not satisfied: ${prerequisite.description}.`);
+    if (isBlockingDriverPrerequisite(platform, prerequisite.id)) {
+      ready = false;
+    }
   }
 
   return {
@@ -71,6 +77,7 @@ export function doctor(platform: DesktopPlatform): DoctorReport {
     })),
     prerequisites,
     warnings,
+    ready,
   };
 }
 

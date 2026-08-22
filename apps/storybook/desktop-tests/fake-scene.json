@@ -30,7 +30,8 @@
         },
         {
           "testId": "agentic-storybook-button-interactive-status",
-          "role": "text",
+          "role": "group",
+          "name": "Not pressed",
           "text": "Not pressed"
         }
       ]

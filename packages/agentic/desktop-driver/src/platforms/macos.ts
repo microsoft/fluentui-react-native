@@ -50,7 +50,7 @@ export const MACOS_PREREQUISITES: readonly { id: string; description: string }[]
   { id: 'macos-version', description: 'macOS 11.3 or newer' },
   { id: 'xcode', description: 'Xcode 13 or newer with matching Command Line Tools' },
   { id: 'accessibility-permission', description: 'Xcode Helper granted Accessibility permission' },
-  { id: 'automation-mode', description: 'Automation mode enabled for the current macOS release' },
+  { id: 'automation-mode', description: 'Authentication-free Automation Mode for unattended runs' },
   { id: 'gui-session', description: 'A logged-in GUI session (WebDriverAgentMac cannot run headless)' },
   { id: 'wda-build-cache', description: 'A writable, reusable WebDriverAgentMac derived-data cache' },
 ];
@@ -98,6 +98,15 @@ export function checkMacosPrerequisites(hostPlatform: NodeJS.Platform = process.
   const xcodeMajor = xcode.status === 'ok' ? Number.parseInt(/^Xcode\s+(\d+)/.exec(xcode.detail ?? '')?.[1] ?? '', 10) : undefined;
   const xcodeStatus =
     xcode.status !== 'ok' ? xcode.status : xcodeMajor !== undefined && !Number.isNaN(xcodeMajor) && xcodeMajor >= 13 ? 'ok' : 'missing';
+  const automationMode = probe('automationmodetool', []);
+  const automationModeEnabled = automationMode.detail?.includes('Automation Mode is enabled.');
+  const automationModeWithoutAuthentication = automationMode.detail?.includes('DOES NOT REQUIRE');
+  const automationModeStatus =
+    automationMode.status === 'ok'
+      ? automationModeEnabled && automationModeWithoutAuthentication
+        ? 'ok'
+        : 'missing'
+      : automationMode.status;
 
   return [
     {
@@ -110,11 +119,18 @@ export function checkMacosPrerequisites(hostPlatform: NodeJS.Platform = process.
       status: xcodeStatus,
       detail: xcode.status === 'ok' ? xcode.detail?.split('\n')[0] : xcode.detail,
     },
-    ...MACOS_PREREQUISITES.filter((entry) => entry.id !== 'macos-version' && entry.id !== 'xcode').map((prerequisite) => ({
-      ...prerequisite,
-      status: 'unknown' as const,
-      detail: 'Not probed',
-    })),
+    {
+      ...byId('automation-mode'),
+      status: automationModeStatus,
+      detail: automationMode.detail,
+    },
+    ...MACOS_PREREQUISITES.filter((entry) => entry.id !== 'macos-version' && entry.id !== 'xcode' && entry.id !== 'automation-mode').map(
+      (prerequisite) => ({
+        ...prerequisite,
+        status: 'unknown' as const,
+        detail: 'Not probed',
+      }),
+    ),
   ];
 }
 

@@ -2737,7 +2737,6 @@ __metadata:
     "@wdio/mocha-framework": "npm:^9.24.0"
     "@wdio/spec-reporter": "catalog:"
     cross-env: "catalog:"
-    expect-webdriverio: "catalog:"
     jest: "npm:^29.7.0"
     jest-environment-node: "npm:^29.7.0"
     metro: "npm:^0.83.1"
@@ -2751,7 +2750,6 @@ __metadata:
     storybook: "npm:^10.4.0"
     tmcp: "npm:^1.19.4"
     valibot: "npm:^1.4.1"
-    webdriverio: "catalog:"
   languageName: unknown
   linkType: soft
 

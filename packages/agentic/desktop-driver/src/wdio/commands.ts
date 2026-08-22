@@ -42,8 +42,8 @@ export interface DesktopElementLike {
   click(): Promise<void>;
   clearValue(): Promise<void>;
   setValue(value: string): Promise<void>;
-  waitForDisplayed(options?: { timeout?: number; reverse?: boolean }): Promise<boolean>;
-  waitForExist(options?: { timeout?: number; reverse?: boolean }): Promise<boolean>;
+  waitForDisplayed(options?: { timeout?: number; interval?: number; reverse?: boolean }): Promise<boolean>;
+  waitForExist(options?: { timeout?: number; interval?: number; reverse?: boolean }): Promise<boolean>;
 }
 
 /** The commands added to `browser.desktop`. */

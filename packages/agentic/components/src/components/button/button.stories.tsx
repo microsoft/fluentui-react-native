@@ -34,6 +34,7 @@ const StoryGroup = ({ children, label }: StoryGroupProps) => (
 const InteractionDemo = () => {
   const [pressCount, setPressCount] = useState(0);
   const onPress = useCallback(() => setPressCount((count) => count + 1), []);
+  const status = pressCount === 0 ? 'Not pressed' : `Pressed ${pressCount}`;
 
   return (
     <View style={styles.story}>
@@ -47,9 +48,9 @@ const InteractionDemo = () => {
           testID="agentic-storybook-button-interactive-disabled"
         />
       </StoryGroup>
-      <Text style={styles.status} testID="agentic-storybook-button-interactive-status">
-        {pressCount === 0 ? 'Not pressed' : `Pressed ${pressCount}`}
-      </Text>
+      <View accessibilityLabel={status} accessible testID="agentic-storybook-button-interactive-status">
+        <Text style={styles.status}>{status}</Text>
+      </View>
     </View>
   );
 };
@@ -124,7 +125,6 @@ export const Default: Story = {
       description: 'The default button renders, is enabled, and exposes its content as text.',
       steps: [
         { action: 'expectVisible', target: { testId: 'agentic-storybook-button' } },
-        { action: 'expectEnabled', target: { testId: 'agentic-storybook-button' } },
         { action: 'expect', target: { testId: 'agentic-storybook-button' }, property: 'text', equals: 'Button' },
       ],
     },
@@ -145,7 +145,7 @@ export const Interaction: Story = {
     desktopTest: {
       kind: 'spec',
       id: 'button-interaction',
-      description: 'Press feedback, repeated presses, disabled inertness, and focus after a press.',
+      description: 'Press feedback, repeated presses, and disabled inertness.',
       spec: './button.desktop.spec.ts',
     },
   },

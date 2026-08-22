@@ -143,7 +143,7 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
     case 'doctor': {
       const report = doctor(requirePlatform(flags));
       print(report);
-      return report.warnings.length > 0 ? 1 : 0;
+      return report.ready ? 0 : 1;
     }
 
     case 'driver': {

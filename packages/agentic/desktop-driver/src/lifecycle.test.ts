@@ -144,7 +144,7 @@ describe('artifacts', () => {
     await store.close();
 
     expect(report.protocolVersion).toBe(1);
-    expect(report.portableCommandMatrixVersion).toBe(1);
+    expect(report.portableCommandMatrixVersion).toBe(2);
     expect(fs.existsSync(path.join(store.runDirectory, 'run.json'))).toBe(true);
     expect(fs.readFileSync(path.join(store.runDirectory, 'events.ndjson'), 'utf8')).toContain('"type":"ready"');
   });

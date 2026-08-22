@@ -61,6 +61,9 @@ yarn macos
 
 Requires Xcode + CocoaPods.
 
+The `macos` script reopens the generated app after the React Native CLI launch so macOS restores a
+visible window even when the previous automation session closed the last one.
+
 If `Pods` was generated against an older React Native macOS patch release and CocoaPods reports
 that a local podspec such as `fmt` changed, refresh the local native dependencies:
 
@@ -215,7 +218,7 @@ component example.
 ## Desktop story tests
 
 Story tests are written next to the components, run on Windows and macOS from the same source, and
-are executed by [`@fluentui-react-native/desktop-driver`](../../packages/agentic/test-driver/README.md)
+are executed by [`@fluentui-react-native/desktop-driver`](../../packages/agentic/desktop-driver/README.md)
 through the ordinary WebdriverIO testrunner. `wdio.conf.ts` holds all platform selection; the specs
 contain none.
 
@@ -226,6 +229,10 @@ demonstrates both, with `button.desktop.spec.ts` as the linked spec.
 ```sh
 # Regenerate the manifest and the compiled inline-plan spec (git-ignored)
 yarn desktop:generate
+
+# Detect and verify the package-owned native driver for this host
+yarn desktop:driver:detect --platform macos
+yarn desktop:driver:install --platform macos
 
 # Report backends, the portable command matrix, and platform prerequisites
 yarn desktop:doctor --platform macos
@@ -240,7 +247,9 @@ yarn desktop:test:fake
 
 Attach is the default so a run never terminates the app it inspected. Set `DESKTOP_TEST_APP` to
 launch a build instead; only then may the run stop the application. `DESKTOP_TEST_GREP` selects a
-single story's tests by its `[story:<id>]` tag.
+single story's tests by its `[story:<id>]` tag. macOS attaches to the generated
+`com.microsoft.fluentui.agenticstorybook` bundle by default; override
+`DESKTOP_TEST_IDENTITY` for a custom host.
 
 The channel server must be running (`yarn storybook-server`) before a macOS or Windows run, because
 each test selects its story through it.

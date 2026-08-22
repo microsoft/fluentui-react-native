@@ -312,17 +312,34 @@ export class DesktopDriverService {
 
   private async waitForReadiness(browser: DesktopBrowserLike, storyController: StoryController): Promise<void> {
     const deadline = Date.now() + this.options.readiness.timeout;
+    let lastWindowError: unknown;
 
     if (this.options.readiness.requireWindow) {
       let observed = this.options.platform === 'fake' || Boolean(this.endpoint?.windowHandle);
       while (Date.now() < deadline && !observed) {
         this.throwIfTerminatedBeforeReady();
-        if (!browser.getWindowHandles) {
-          throw new DesktopDriverError('The connected backend cannot verify the required application window', {
-            kind: 'capability',
-          });
+        if (this.options.backend === 'mac2') {
+          const target = this.options.target;
+          const application =
+            target.mode === 'attach'
+              ? { bundleId: target.identity }
+              : target.app.endsWith('.app') || target.app.includes('/')
+                ? { path: target.app }
+                : { bundleId: target.app };
+          try {
+            const state = Number(await browser.execute('macos: queryAppState', application));
+            observed = state >= 3;
+          } catch (error) {
+            lastWindowError = error;
+          }
+        } else {
+          if (!browser.getWindowHandles) {
+            throw new DesktopDriverError('The connected backend cannot verify the required application window', {
+              kind: 'capability',
+            });
+          }
+          observed = (await browser.getWindowHandles().catch(() => [])).length > 0;
         }
-        observed = (await browser.getWindowHandles().catch(() => [])).length > 0;
         if (!observed) {
           await new Promise((resolve) => setTimeout(resolve, 250));
         }
@@ -330,6 +347,10 @@ export class DesktopDriverService {
       if (!observed) {
         throw new DesktopDriverError('No application window was observed within the readiness budget', {
           kind: 'lifecycle',
+          cause: lastWindowError,
+          detail: lastWindowError
+            ? { lastError: lastWindowError instanceof Error ? lastWindowError.message : String(lastWindowError) }
+            : undefined,
         });
       }
     }
@@ -352,8 +373,15 @@ export class DesktopDriverService {
 
     if (this.options.readiness.requireTestId) {
       this.throwIfTerminatedBeforeReady();
+      if (this.options.backend === 'mac2') {
+        // Repeated XCTest snapshots can monopolize the React Native main thread during a cold
+        // launch. Leave one idle interval for the app shell to mount before polling.
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
       const element = await browser.$(`~${this.options.readiness.requireTestId}`);
-      const displayed = await element.waitForDisplayed({ timeout: Math.max(1000, deadline - Date.now()) }).catch(() => false);
+      const displayed = await element
+        .waitForDisplayed({ timeout: Math.max(1000, deadline - Date.now()), interval: this.options.backend === 'mac2' ? 1000 : undefined })
+        .catch(() => false);
       if (!displayed) {
         throw new DesktopDriverError(`Readiness selector "${this.options.readiness.requireTestId}" never became visible`, {
           kind: 'lifecycle',

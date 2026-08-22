@@ -52,8 +52,9 @@ desktop-driver driver detect
 desktop-driver driver install
 ```
 
-The command prints JSON and exits nonzero when it has warnings. An agent should parse the JSON and
-treat `missing` as a blocker and `unknown` as something that still requires explicit verification.
+The command prints JSON and exits nonzero when the selected backend or a blocking prerequisite is
+unavailable. An agent should inspect warnings for documented backend omissions and optional or
+unverified prerequisites.
 The driver commands detect the host platform when `--platform` is omitted. Installation is
 idempotent: platform drivers are bundled, NovaWindows has no external service, and Mac2 builds
 WebDriverAgentMac when the first session starts.
@@ -243,7 +244,6 @@ export const Default = {
       id: 'button-default',
       steps: [
         { action: 'expectVisible', target: { testId: 'button-default' } },
-        { action: 'expectEnabled', target: { testId: 'button-default' } },
         { action: 'press', target: { testId: 'button-default' } },
         {
           action: 'expect',

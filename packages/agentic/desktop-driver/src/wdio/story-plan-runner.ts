@@ -7,29 +7,76 @@
 
 import { DesktopDriverError } from '../errors.ts';
 import { byTestId } from '../selectors.ts';
-import type { InlineStoryPlan, StoryPlanStep } from '../types.ts';
+import type { InlineStoryPlan, PortableCommand, StoryPlanStep } from '../types.ts';
 import type { DesktopBrowserLike } from './commands.ts';
 
 export interface StoryPlanRunContext {
   browser: DesktopBrowserLike;
   /** Default wait applied to visibility assertions that do not specify one. */
   defaultTimeout?: number;
+  /** Overrides session-reported support for focused executor tests. */
+  portableCommands?: readonly PortableCommand[];
 }
 
 /** Executes every step in order, failing on the first mismatch with a step-qualified message. */
 export async function runInlineStoryPlan(plan: InlineStoryPlan, context: StoryPlanRunContext): Promise<void> {
   const timeout = context.defaultTimeout ?? 30_000;
+  const reportedCommands = context.portableCommands ?? (await context.browser.desktop?.getSessionInfo())?.portableCommands;
+  if (!reportedCommands) {
+    throw new DesktopDriverError('Story plans require the desktop driver command augmentation', { kind: 'capability' });
+  }
+  const supportedCommands = new Set(reportedCommands);
 
   for (const [index, step] of plan.steps.entries()) {
     try {
+      assertStepSupported(step, supportedCommands);
       await runStep(step, context.browser, timeout);
     } catch (error) {
       throw new DesktopDriverError(`Story plan "${plan.id}" failed at step ${index + 1} (${step.action}): ${(error as Error).message}`, {
-        kind: 'lifecycle',
+        kind: error instanceof DesktopDriverError ? error.kind : 'lifecycle',
         cause: error,
         detail: { planId: plan.id, stepIndex: index, action: step.action },
       });
     }
+  }
+}
+
+function assertStepSupported(step: StoryPlanStep, supportedCommands: ReadonlySet<PortableCommand>): void {
+  const required: readonly PortableCommand[] =
+    step.action === 'expectVisible' || step.action === 'expectHidden'
+      ? ['findElement', 'waitForDisplayed']
+      : step.action === 'expectEnabled' || step.action === 'expectDisabled'
+        ? ['findElement', 'isEnabled']
+        : step.action === 'press'
+          ? ['findElement', 'waitForDisplayed', 'click']
+          : step.action === 'clearValue'
+            ? ['findElement', 'clearValue']
+            : step.action === 'setValue'
+              ? ['findElement', 'setValue']
+              : step.action === 'scrollIntoView'
+                ? ['scrollIntoView']
+                : step.action === 'screenshot'
+                  ? ['getPageSource', 'takeScreenshot']
+                  : step.action === 'expect'
+                    ? [
+                        'findElement',
+                        step.property === 'text'
+                          ? 'getText'
+                          : step.property === 'value'
+                            ? 'getValue'
+                            : step.property === 'displayed'
+                              ? 'isDisplayed'
+                              : step.property === 'enabled'
+                                ? 'isEnabled'
+                                : 'isSelected',
+                      ]
+                    : [];
+  const missing = required.filter((command) => !supportedCommands.has(command));
+  if (missing.length > 0) {
+    throw new DesktopDriverError(`The connected backend does not support ${missing.join(', ')} required by "${step.action}"`, {
+      kind: 'capability',
+      detail: { action: step.action, missing },
+    });
   }
 }
 

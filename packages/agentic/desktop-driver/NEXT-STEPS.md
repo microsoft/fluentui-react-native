@@ -11,17 +11,23 @@ They still need current evidence from both native backends.
 
 ### macOS verification
 
-Run the complete shared suite and on-device Storybook workflows on macOS, then record:
+The shared attach suite passes on macOS 26.6.2 with Xcode 26.4.1 and Mac2 3.2.16. This verifies the
+unique Storybook bundle identity, application-state readiness, attach survival, standard clicks,
+repeated presses, disabled inertness, Storybook navigation, and matching manifest execution.
+Remaining macOS work is:
 
-- Mac2 launch and bundle-identity attach behavior;
-- attach leaving the application running;
-- observed window readiness;
+- Mac2-owned launch behavior;
 - `focused` attribute behavior and active-element fallback;
 - native wheel scrolling;
 - application, WebDriverAgentMac, xcodebuild, and host lifecycle evidence;
 - bounded cancellation and cleanup;
 - Storybook Run current, Run all, and Cancel behavior; and
 - a generated manifest digest matching the Windows job byte for byte.
+
+React Native macOS Fabric 0.81 does not expose `accessibilityState.disabled` through AXEnabled, and
+pointer activation does not imply keyboard focus. The portable suite therefore verifies disabled
+inertness and treats focus as a separate interaction rather than asserting those platform-specific
+states after a click.
 
 The package must not claim a verified macOS compatibility range until this passes on a clean
 machine with documented Xcode, accessibility, automation-mode, signing, and GUI-session setup.

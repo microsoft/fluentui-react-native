@@ -143,6 +143,10 @@ Generated capabilities pin `browserName: ''` so WebdriverIO selects the same nat
 implementations for both backends. The portability boundary is the tested WebdriverIO behavior,
 not backend implementation equivalence.
 
+React Native macOS Fabric 0.81 does not project `accessibilityState.disabled` to AXEnabled, so
+Mac2 cannot reliably implement `isEnabled()` for React Native controls. The runtime capability
+report omits that command on Mac2; shared tests assert disabled inertness instead.
+
 The package adds only these browser commands:
 
 ```ts
@@ -245,9 +249,10 @@ Normalized events include:
 - `monitorError`
 
 Readiness may require an observed window, a responsive WebDriver session, the Storybook channel,
-and a visible `testID`. Session hooks do not by themselves prove readiness. Driver-host and attached
-application liveness are monitored after readiness; a terminal lifecycle state aborts waits and
-cannot produce a passing run.
+and a visible `testID`. Windows observes a native handle; Mac2, which has no window-handles route,
+queries the configured application's XCTest state. Session hooks do not by themselves prove
+readiness. Driver-host and attached application liveness are monitored after readiness; a terminal
+lifecycle state aborts waits and cannot produce a passing run.
 
 The current backend contract does not expose every launched application or native-driver PID.
 Where a PID cannot be observed, the package must not manufacture ownership or process telemetry.

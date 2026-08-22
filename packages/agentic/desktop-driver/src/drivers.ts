@@ -74,6 +74,11 @@ export function detectHostPlatform(hostPlatform: NodeJS.Platform = process.platf
   return 'fake';
 }
 
+/** Whether a prerequisite must pass before the embedded driver can be considered ready. */
+export function isBlockingDriverPrerequisite(platform: DesktopPlatform, prerequisiteId: string): boolean {
+  return DRIVER_DEFINITIONS[platform].blockingPrerequisites.includes(prerequisiteId);
+}
+
 /** Resolves the installed version of an embedded driver package without executing it. */
 export async function resolveDriverPackageVersion(packageName: string): Promise<string | undefined> {
   try {

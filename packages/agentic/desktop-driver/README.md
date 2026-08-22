@@ -99,8 +99,9 @@ Prefer selectors in this order:
 
 The portable commands cover element lookup, display/enabled/selected state, click, clear and set
 value, text and value reads, waits, source, screenshots, focus, and scrolling. Runtime support is
-reported by `browser.desktop.getSessionInfo()`; a missing portable capability is an infrastructure
-failure, not a silent skip.
+reported by `browser.desktop.getSessionInfo()`; a missing portable capability is never a silent
+skip. React Native macOS Fabric 0.81 does not expose disabled state through AXEnabled, so Mac2
+omits `isEnabled()` and shared tests verify disabled inertness instead.
 
 ### Launch and attach
 

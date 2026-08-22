@@ -84,6 +84,20 @@ describe('agentic-components Button story tests', () => {
     );
   });
 
+  it('rejects a step whose command is not supported by the connected backend', async () => {
+    const plan: InlineStoryPlan = {
+      kind: 'inline',
+      id: 'unsupported-command',
+      steps: [{ action: 'expectEnabled', target: { testId: 'button' } }],
+    };
+    const browser = { $: jest.fn() } as unknown as InProcessSession['browser'];
+
+    await expect(runInlineStoryPlan(plan, { browser, portableCommands: ['findElement'] })).rejects.toMatchObject({
+      kind: 'capability',
+    });
+    expect(browser.$).not.toHaveBeenCalled();
+  });
+
   it('reproduces the interaction spec assertions: press feedback, repeats, and disabled inertness', async () => {
     const session = await createInProcessSession(storybookScene, { initialStory: 'components-button--interaction' });
     attach(session);

@@ -18,11 +18,11 @@ function endpoint(artifactsDirectory: string, overrides: Record<string, unknown>
   });
 }
 
-function browser(windowHandles?: readonly string[]): DesktopBrowserLike {
+function browser(windowHandles?: readonly string[], executeResult?: unknown): DesktopBrowserLike {
   return {
     sessionId: 'session-1',
     $: jest.fn(),
-    execute: jest.fn(),
+    execute: jest.fn().mockResolvedValue(executeResult),
     getPageSource: jest.fn(),
     takeScreenshot: jest.fn(),
     addCommand: jest.fn(),
@@ -35,17 +35,18 @@ describe('WebdriverIO lifecycle service', () => {
     delete process.env[DESKTOP_ENDPOINT_ENV];
   });
 
-  it('rejects readiness when the backend cannot verify a required window', async () => {
+  it('verifies Mac2 readiness through application state instead of unsupported window handles', async () => {
     const artifactsDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-service-'));
     process.env[DESKTOP_ENDPOINT_ENV] = endpoint(artifactsDirectory);
     const service = new DesktopDriverService({
       platform: 'macos',
-      target: { mode: 'launch', app: 'com.example.Sample' },
+      target: { mode: 'attach', identity: 'com.example.Sample' },
       artifactsDirectory,
     });
-    const instance = browser();
+    const instance = browser(undefined, 4);
 
-    await expect(service.before({}, [], instance)).rejects.toThrow(/cannot verify the required application window/);
+    await service.before({}, [], instance);
+    expect(instance.execute).toHaveBeenCalledWith('macos: queryAppState', { bundleId: 'com.example.Sample' });
     await service.after();
   });
 
@@ -69,6 +70,19 @@ describe('WebdriverIO lifecycle service', () => {
     expect(events).toContain('"type":"processStarted"');
     expect(events).toContain(`"processId":${process.pid}`);
     expect(events).toContain('"type":"ready"');
+  });
+
+  it('rejects Windows readiness when no window handle or window command is available', async () => {
+    const artifactsDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-service-'));
+    process.env[DESKTOP_ENDPOINT_ENV] = endpoint(artifactsDirectory);
+    const service = new DesktopDriverService({
+      platform: 'windows',
+      target: { mode: 'attach', identity: 'Sample' },
+      artifactsDirectory,
+    });
+
+    await expect(service.before({}, [], browser())).rejects.toMatchObject({ kind: 'capability' });
+    await service.after();
   });
 
   it('cannot report success after an observed post-readiness host failure', async () => {

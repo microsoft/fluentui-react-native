@@ -17,4 +17,4 @@ export const STORY_PLAN_SCHEMA_VERSION = 1;
  * Bump this whenever a command enters or leaves the shared subset. A cross-platform result pair is
  * only comparable when both jobs report the same matrix version.
  */
-export const PORTABLE_COMMAND_MATRIX_VERSION = 1;
+export const PORTABLE_COMMAND_MATRIX_VERSION = 2;
