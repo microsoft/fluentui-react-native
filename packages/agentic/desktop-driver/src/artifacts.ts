@@ -42,19 +42,24 @@ const REDACTED = '[redacted]';
  * text a user typed.
  */
 export function redact(input: unknown, depth = 0): unknown {
-  if (depth > 6) {
+  return redactValue(input, depth, true);
+}
+
+function redactValue(input: unknown, depth: number, bounded: boolean): unknown {
+  if (bounded && depth > 6) {
     return '[truncated]';
   }
   if (typeof input === 'string') {
-    return input.length > 2000 ? `${input.slice(0, 2000)}…[truncated]` : input;
+    return bounded && input.length > 2000 ? `${input.slice(0, 2000)}…[truncated]` : input;
   }
   if (Array.isArray(input)) {
-    return input.slice(0, 100).map((entry) => redact(entry, depth + 1));
+    const entries = bounded ? input.slice(0, 100) : input;
+    return entries.map((entry) => redactValue(entry, depth + 1, bounded));
   }
   if (typeof input === 'object' && input !== null) {
     const output: Record<string, unknown> = {};
     for (const [key, entry] of Object.entries(input as Record<string, unknown>)) {
-      output[key] = REDACTED_KEYS.has(key.toLowerCase()) ? REDACTED : redact(entry, depth + 1);
+      output[key] = REDACTED_KEYS.has(key.toLowerCase()) ? REDACTED : redactValue(entry, depth + 1, bounded);
     }
     return output;
   }
@@ -132,13 +137,14 @@ export class ArtifactStore {
   }
 
   writeRunReport(report: Omit<DesktopRunReport, 'protocolVersion' | 'portableCommandMatrixVersion' | 'artifacts'>): DesktopRunReport {
+    this.files.add('run.json');
     const full: DesktopRunReport = {
       ...report,
       protocolVersion: DESKTOP_PROTOCOL_VERSION,
       portableCommandMatrixVersion: PORTABLE_COMMAND_MATRIX_VERSION,
-      artifacts: [...this.files].sort(),
+      artifacts: this.collectFiles(),
     };
-    this.write('run.json', `${JSON.stringify(redact(full), null, 2)}\n`);
+    this.write('run.json', `${JSON.stringify(redactValue(full, 0, false), null, 2)}\n`);
     return full;
   }
 
@@ -147,7 +153,7 @@ export class ArtifactStore {
   }
 
   manifest(): ArtifactManifest {
-    return { runId: this.runId, directory: this.runDirectory, files: [...this.files].sort() };
+    return { runId: this.runId, directory: this.runDirectory, files: this.collectFiles() };
   }
 
   async close(): Promise<void> {
@@ -159,5 +165,21 @@ export class ArtifactStore {
     await new Promise<void>((resolve) => {
       stream.end(resolve);
     });
+  }
+
+  private collectFiles(): string[] {
+    const files = new Set(this.files);
+    const visit = (directory: string): void => {
+      for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+        const target = path.join(directory, entry.name);
+        if (entry.isDirectory()) {
+          visit(target);
+        } else if (entry.isFile()) {
+          files.add(path.relative(this.runDirectory, target));
+        }
+      }
+    };
+    visit(this.runDirectory);
+    return [...files].sort();
   }
 }

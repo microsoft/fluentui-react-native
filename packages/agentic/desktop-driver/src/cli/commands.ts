@@ -8,22 +8,22 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-import { availableBackends } from '../driver-host/backends.ts';
+import { availableBackends } from '../server/webdriver/backends.ts';
 import { missingPortableCommands, PORTABLE_COMMANDS, PORTABLE_COMMAND_SURFACES, portableCommandsFor } from '../capabilities.ts';
-import { defaultBackendFor, resolveDesktopOptions } from '../config.ts';
-import { detectDesktopDriver, installDesktopDriver, isBlockingDriverPrerequisite } from '../drivers.ts';
+import { DEFAULT_RENDER_TIMEOUT, DEFAULT_STORYBOOK_PORT, defaultBackendFor } from '../config.ts';
+import { detectDesktopDriver, isBlockingDriverPrerequisite, verifyDesktopDriver } from '../drivers.ts';
 import { DesktopValidationError } from '../errors.ts';
 import { emitGeneratedStorySpec, verifyLinkedSpecTags } from '../storybook/generated-spec.ts';
-import { findStoryFiles, generateStoryTestManifest } from '../storybook/manifest.ts';
+import { digestEntries, findStoryFiles, generateStoryTestManifest } from '../storybook/manifest.ts';
 import { checkMacosPrerequisites } from '../platforms/macos.ts';
 import { hostForUrl } from '../net.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import { DESKTOP_PROTOCOL_VERSION, PORTABLE_COMMAND_MATRIX_VERSION } from '../protocol.ts';
-import { StoryController } from '../storybook/controller.ts';
+import { StoryController } from '../server/channel/client.ts';
 import { checkWindowsPrerequisites } from '../platforms/windows.ts';
-import type { DesktopDriverOptions, DesktopPlatform, DesktopPrerequisiteStatus, StoryTestManifest } from '../types.ts';
+import type { DesktopPlatform, DesktopPrerequisiteStatus, StoryTestManifest } from '../types.ts';
 
-export { detectDesktopDriver, installDesktopDriver };
+export { detectDesktopDriver, verifyDesktopDriver };
 
 export interface DoctorReport {
   packageVersion: string;
@@ -85,6 +85,8 @@ export function doctor(platform: DesktopPlatform): DoctorReport {
 export interface GenerateStoriesOptions {
   /** Directories scanned for `*.stories.tsx`. */
   storyRoots: readonly string[];
+  /** Exact story files supplied by a project config. */
+  storyFiles?: readonly string[];
   /** Directory that receives the generated manifest and spec. */
   outputDirectory: string;
   /** Directories a linked spec may resolve into. Defaults to `storyRoots`. */
@@ -111,7 +113,7 @@ export function generateStories(options: GenerateStoriesOptions): GenerateStorie
   fs.rmSync(manifestPath, { force: true });
 
   const manifest = generateStoryTestManifest({
-    storyFiles: findStoryFiles(storyRoots),
+    storyFiles: options.storyFiles ?? findStoryFiles(storyRoots),
     specRoots: (options.specRoots ?? storyRoots).map((root) => path.resolve(root)),
     generatedSpecPath,
   });
@@ -121,16 +123,40 @@ export function generateStories(options: GenerateStoriesOptions): GenerateStorie
     throw new DesktopValidationError('Invalid linked desktop specs', problems);
   }
 
-  emitGeneratedStorySpec({ manifest, outputPath: generatedSpecPath, manifestPath, packageSpecifier: options.packageSpecifier });
-  return { manifest, manifestPath, specPath: generatedSpecPath, problems: [] };
+  const portableManifest: StoryTestManifest = {
+    ...manifest,
+    entries: manifest.entries.map((entry) => ({
+      ...entry,
+      spec: path.relative(outputDirectory, entry.spec).replaceAll(path.sep, '/'),
+      storyPath: path.relative(outputDirectory, entry.storyPath).replaceAll(path.sep, '/'),
+    })),
+  };
+  portableManifest.digest = digestEntries(portableManifest.entries, outputDirectory);
+  emitGeneratedStorySpec({
+    manifest: portableManifest,
+    outputPath: generatedSpecPath,
+    manifestPath,
+    packageSpecifier: options.packageSpecifier,
+  });
+  return { manifest: portableManifest, manifestPath, specPath: generatedSpecPath, problems: [] };
 }
 
 /** Lists the stories a running application reports. */
-export async function listRunningStories(options: DesktopDriverOptions): Promise<readonly { id: string; title: string; name: string }[]> {
-  const resolved = resolveDesktopOptions(options);
+export async function listRunningStories(
+  options: { host?: string; port?: number; renderTimeout?: number } = {},
+): Promise<readonly { id: string; title: string; name: string }[]> {
+  const host = options.host ?? '127.0.0.1';
+  const port = options.port ?? DEFAULT_STORYBOOK_PORT;
+  const renderTimeout = options.renderTimeout ?? DEFAULT_RENDER_TIMEOUT;
+  if (!['127.0.0.1', '::1', 'localhost'].includes(host)) {
+    throw new DesktopValidationError('Invalid Storybook connection', ['host must be a loopback address']);
+  }
+  if (!Number.isInteger(port) || port <= 0 || port > 65535) {
+    throw new DesktopValidationError('Invalid Storybook connection', ['port must be an integer between 1 and 65535']);
+  }
   const controller = new StoryController({
-    baseUrl: `http://${hostForUrl(resolved.storybook.host)}:${resolved.storybook.port}`,
-    renderTimeout: resolved.storybook.renderTimeout,
+    baseUrl: `http://${hostForUrl(host)}:${port}`,
+    renderTimeout,
   });
   const stories = await controller.listStories();
   return stories.map((entry) => ({ id: entry.id, title: entry.title, name: entry.name }));

@@ -70,26 +70,19 @@ NovaWindows to prove the migrated backend still covers click and keyboard-focus 
 
 - Make `captureArtifacts()` return only files captured by that call, not the cumulative run
   manifest.
-- Keep bounded event payloads without applying the same truncation to the complete `run.json`.
 - Merge per-worker reports for `sessionStrategy: 'spec'` instead of allowing workers to overwrite
   shared `run.json` and `junit.xml`.
-- Cover full reports larger than 100 results and ensure generated JUnit ends with a newline.
+- Ensure generated JUnit ends with a newline.
 
 ### Harden Storybook execution
 
-- Execute Run all through one owned WDIO invocation and warm session while preserving per-story
-  progress.
-- Add a runner deadline in addition to cancellation.
-- Make the generated exact story filter an explicit config-factory contract so Run current cannot
-  silently execute every test.
+- Stream framework-level per-test progress from the one owned Run all invocation rather than
+  deriving every selected story result from the process exit.
 - Resolve Windows launchers through `PATH` and `PATHEXT` instead of assuming every bare command is
   a `.cmd` file.
 
 ### Correct CLI and backend claims
 
-- Make `desktop-driver start` remain alive until SIGINT or SIGTERM, or rename it to communicate
-  probe-only behavior.
-- Make `stories list` validate only the Storybook connection it uses.
 - Report direct window-handle discovery as `matchedBy: 'windowHandle'`.
 - Preserve backend and transport failures during window discovery instead of rewriting all failures
   as "no matching window."
@@ -107,9 +100,7 @@ NovaWindows to prove the migrated backend still covers click and keyboard-focus 
 - Add robustness coverage for stream failures, temporary-directory cleanup, startup buffer growth,
   long-lived service run retention, and missing desktop augmentation in generated plan steps.
 
-## Priority 3: consolidation
-
-Do these after the behavior above is covered so refactoring cannot hide contract regressions.
+## Priority 3: consolidation follow-ups
 
 - Separate launcher and worker responsibilities behind a validated endpoint/run-context codec while
   keeping the exported service compatible.
@@ -119,7 +110,6 @@ Do these after the behavior above is covered so refactoring cannot hide contract
   entry modules so their pure behavior can be tested normally.
 - Consolidate duplicate loopback allowlists, delays, JSON responses, XML escaping, and error-kind
   to result-status mapping.
-- Remove the one-line attach-window delegate.
 - Use bounded concurrency for window attribute reads, but never cache a native window handle across
   runs.
 

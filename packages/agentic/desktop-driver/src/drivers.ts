@@ -164,7 +164,7 @@ export async function detectDesktopDriver(
  * Mac2 builds WebDriverAgentMac on demand. This command validates that complete setup and fails
  * with the exact missing host requirement rather than changing package-manager or Appium state.
  */
-export async function installDesktopDriver(
+export async function verifyDesktopDriver(
   platform: DesktopPlatform = detectHostPlatform(),
   options: DriverDetectionOptions = {},
 ): Promise<DesktopDriverInstallResult> {
@@ -177,3 +177,6 @@ export async function installDesktopDriver(
   }
   return { changed: false, driver, message: DRIVER_DEFINITIONS[platform].installMessage };
 }
+
+/** @deprecated Use `verifyDesktopDriver`; the package already embeds its driver dependencies. */
+export const installDesktopDriver = verifyDesktopDriver;

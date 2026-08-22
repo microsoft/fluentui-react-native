@@ -11,8 +11,8 @@
     "composite": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["index.js", "src", "app.json", "wdio.conf.ts"],
-  "exclude": ["node_modules", "dist", ".cache", "desktop-tests/generated"],
+  "include": ["index.js", "src", "app.json", "desktop.config.ts", "desktop-tests/generated/desktop-runtime.generated.ts", "wdio.conf.ts"],
+  "exclude": ["node_modules", "dist", ".cache"],
   "references": [
     {
       "path": "../../packages/native/Callout/tsconfig.json"

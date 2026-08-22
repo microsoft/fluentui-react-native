@@ -36,13 +36,14 @@ export const DesktopTestControls = ({ currentStoryId, host }: DesktopTestControl
 
   const running = busy || status?.state === 'running';
   const disabled = !available || running;
+  const currentHasTest = currentStoryId !== undefined && host.testedStoryIds.includes(currentStoryId);
 
   return (
     <View style={styles.root} testID="desktop-test-controls">
       <View style={styles.row}>
         <ControlButton
           label="Run current test"
-          disabled={disabled || !currentStoryId}
+          disabled={disabled || !currentHasTest}
           onPress={() => host.start('current', currentStoryId)}
           testID="desktop-test-run-current"
         />

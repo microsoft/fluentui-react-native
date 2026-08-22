@@ -13,7 +13,7 @@ import * as path from 'node:path';
 
 import { ArtifactStore } from './artifacts.ts';
 import { attachDesktopCommands } from './wdio/commands.ts';
-import { createInProcessSession, type InProcessSession } from './driver-host/in-process-session.ts';
+import { createInProcessSession, type InProcessSession } from './testing/in-process-session.ts';
 import { DesktopLifecycle } from './lifecycle.ts';
 import { generateStoryTestManifest } from './storybook/manifest.ts';
 import { resolveDesktopOptions } from './config.ts';

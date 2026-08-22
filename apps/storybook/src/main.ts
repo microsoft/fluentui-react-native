@@ -1,4 +1,8 @@
+import * as path from 'node:path';
+
 import type { StorybookConfig } from '@storybook/react-native';
+
+import desktopConfig from '../desktop.config';
 
 /**
  * Storybook configuration for the agentic-components on-device app.
@@ -8,10 +12,9 @@ import type { StorybookConfig } from '@storybook/react-native';
  * (`apps/storybook/src`).
  */
 const main: StorybookConfig = {
-  stories: [
-    '../../../packages/agentic/components/src/**/*.stories.?(ts|tsx)',
-    '../../../packages/native/Callout/src/**/*.stories.?(ts|tsx)',
-  ],
+  stories: desktopConfig.storybook.stories.map((entry) =>
+    path.relative(desktopConfig.storybook.configDir, entry.directory).replaceAll(path.sep, '/').concat('/', entry.files),
+  ),
   addons: [],
   deviceAddons: ['@storybook/addon-ondevice-controls', '@storybook/addon-ondevice-actions'],
 };

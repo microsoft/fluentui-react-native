@@ -49,14 +49,14 @@ Before a real run, inspect the machine-readable prerequisite report:
 desktop-driver doctor --platform macos
 desktop-driver doctor --platform windows
 desktop-driver driver detect
-desktop-driver driver install
+desktop-driver driver verify
 ```
 
 The command prints JSON and exits nonzero when the selected backend or a blocking prerequisite is
 unavailable. An agent should inspect warnings for documented backend omissions and optional or
 unverified prerequisites.
-The driver commands detect the host platform when `--platform` is omitted. Installation is
-idempotent: platform drivers are bundled, NovaWindows has no external service, and Mac2 builds
+The driver commands detect the host platform when `--platform` is omitted. Verification is
+read-only: platform drivers are bundled, NovaWindows has no external service, and Mac2 builds
 WebDriverAgentMac when the first session starts.
 
 ## Integrate the package
@@ -81,54 +81,29 @@ dependencies of the package. Consumers do not install, register, or select a nat
 Standalone clients import `remote` from `@fluentui-react-native/desktop-driver/wdio` so the package
 owns the WebdriverIO version.
 
+### Common project configuration
+
+Create `desktop.config.ts` as the single source for application identity, story sources, generated
+tests, channel, runner, readiness, artifacts, and platform targets. See
+[`apps/storybook/desktop.config.ts`](../../../apps/storybook/desktop.config.ts) for the complete
+reference.
+
+Generate and inspect it with:
+
+```sh
+desktop-driver config resolve --config desktop.config.ts
+desktop-driver stories generate --config desktop.config.ts
+```
+
 ### Base WebdriverIO configuration
 
-Create `wdio.conf.ts` in the application workspace:
+Project the common config into `wdio.conf.ts`:
 
 ```ts
-import * as path from 'node:path';
-
+import { loadDesktopConfig, toDesktopWdioOptions } from '@fluentui-react-native/desktop-driver/config/node';
 import { createDesktopWdioConfig } from '@fluentui-react-native/desktop-driver/wdio';
-import type { DesktopAppTarget, DesktopPlatform } from '@fluentui-react-native/desktop-driver';
 
-const platform = process.env.DESKTOP_TEST_PLATFORM as DesktopPlatform;
-
-if (!['macos', 'windows', 'fake'].includes(platform)) {
-  throw new Error('Set DESKTOP_TEST_PLATFORM to macos, windows, or fake');
-}
-
-const target: DesktopAppTarget = process.env.DESKTOP_TEST_APP
-  ? {
-      mode: 'launch',
-      app: process.env.DESKTOP_TEST_APP,
-    }
-  : platform === 'macos'
-    ? {
-        mode: 'attach',
-        identity: process.env.DESKTOP_TEST_IDENTITY,
-      }
-    : {
-        mode: 'attach',
-        processId: process.env.DESKTOP_TEST_PID ? Number(process.env.DESKTOP_TEST_PID) : undefined,
-        windowHandle: process.env.DESKTOP_TEST_WINDOW,
-        title: process.env.DESKTOP_TEST_WINDOW_TITLE,
-      };
-
-export const config = createDesktopWdioConfig({
-  platform,
-  target,
-  rootDir: process.cwd(),
-  framework: 'mocha',
-  sessionStrategy: 'suite',
-  specs: ['./desktop-tests/**/*.spec.ts'],
-  readiness: {
-    requireWindow: true,
-    timeout: 60_000,
-  },
-  artifactsDirectory: path.resolve('artifacts/desktop-tests'),
-  reporters: ['spec'],
-  logLevel: 'error',
-});
+export const config = createDesktopWdioConfig(toDesktopWdioOptions(loadDesktopConfig(new URL('./desktop.config.ts', import.meta.url))));
 ```
 
 Important configuration rules:
@@ -387,8 +362,8 @@ Add scripts equivalent to:
 ```json
 {
   "scripts": {
-    "desktop:generate": "desktop-driver stories generate --story-root src --spec-root src --out desktop-tests/generated",
-    "desktop:host": "yarn desktop:generate && desktop-driver host --config-path src --manifest desktop-tests/generated/story-tests.manifest.json --runner yarn --runner-arg wdio --runner-arg run --runner-arg wdio.conf.ts",
+    "desktop:generate": "desktop-driver stories generate --config desktop.config.ts",
+    "desktop:host": "yarn desktop:generate && desktop-driver host --config desktop.config.ts",
     "desktop:host:macos": "cross-env DESKTOP_TEST_PLATFORM=macos yarn desktop:host",
     "desktop:host:windows": "cross-env DESKTOP_TEST_PLATFORM=windows yarn desktop:host"
   }
@@ -412,7 +387,8 @@ its environment, and an omitted platform may run a configured fake backend inste
 In the Storybook app:
 
 1. Subscribe to the `desktopTestHostReady` Storybook channel event.
-2. Validate `protocolVersion`, `serviceId`, and `manifestDigest`.
+2. Validate the shared protocol payload and its manifest digest with
+   `@fluentui-react-native/desktop-driver/protocol`.
 3. Emit `desktopTestRunRequest`:
 
 ```json
@@ -420,6 +396,7 @@ In the Storybook app:
   "protocolVersion": 1,
   "serviceId": "<announced service id>",
   "requestId": "<client correlation id>",
+  "manifestDigest": "<announced manifest digest>",
   "mode": "all"
 }
 ```
@@ -442,16 +419,11 @@ For a debuggable custom Node host, use the programmatic API and place a breakpoi
 `onOutput`:
 
 ```ts
-import { startDesktopStorybookHost } from '@fluentui-react-native/desktop-driver/storybook';
+import { loadDesktopConfig } from '@fluentui-react-native/desktop-driver/config/node';
+import { startDesktopHost } from '@fluentui-react-native/desktop-driver/server';
 
-const host = await startDesktopStorybookHost({
-  configPath: 'src',
-  manifestPath: 'desktop-tests/generated/story-tests.manifest.json',
-  runner: {
-    command: 'yarn',
-    args: ['wdio', 'run', 'wdio.conf.ts'],
-    cwd: process.cwd(),
-  },
+const host = await startDesktopHost({
+  project: loadDesktopConfig('./desktop.config.ts'),
   onOutput: (chunk) => {
     console.log(chunk);
   },
@@ -481,7 +453,7 @@ Track the currently rendered story from Storybook's `storyRendered` channel even
 current test** only when:
 
 - a host-ready event has been received; and
-- the current story ID is rendered.
+- the current story ID is listed in the announced tested-story manifest.
 
 Start a page-specific run with:
 
@@ -490,6 +462,7 @@ Start a page-specific run with:
   "protocolVersion": 1,
   "serviceId": "<announced service id>",
   "requestId": "<client correlation id>",
+  "manifestDigest": "<announced manifest digest>",
   "mode": "selected",
   "storyIds": ["components-button--interaction"]
 }
@@ -509,17 +482,8 @@ Navigate to a tested component story and press **Run current test**. The reposit
 the stable `testID` `desktop-test-run-current`, so an agent can activate the same workflow through
 native automation. Progress is available in the UI, host console, and channel status events.
 
-For a host-initiated one-page run without using the on-device control, set the exact generated grep:
-
-```sh
-DESKTOP_TEST_PLATFORM=windows \
-DESKTOP_TEST_GREP='\[story:components-button--interaction\]' \
-wdio run wdio.conf.ts \
-  --spec packages/agentic/components/src/components/button/button.desktop.spec.ts
-```
-
-Prefer a declared workspace script around this command in CI or agent automation so the working
-directory, environment, and runner version remain stable.
+For host-initiated selection, use the generated manifest and protocol rather than supplying a
+module path or grep from the application.
 
 ## 5. Test an already-running app without shutting it down
 

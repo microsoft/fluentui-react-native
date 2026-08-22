@@ -9,7 +9,7 @@
 import { execFileSync } from 'node:child_process';
 
 import { DesktopDriverError } from '../errors.ts';
-import type { DesktopBrowserLike } from '../wdio/commands.ts';
+import type { DesktopBrowserLike } from '../core/session.ts';
 import type { DesktopPrerequisiteStatus } from '../types.ts';
 
 /** Mac2 execute methods this package exposes. The full set is documented by `appium-mac2-driver`. */

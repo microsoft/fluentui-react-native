@@ -12,7 +12,7 @@
  */
 
 import { DESKTOP_PROTOCOL_VERSION } from '../protocol.ts';
-import type { StoryController } from './controller.ts';
+import type { StoryController } from '../server/channel/client.ts';
 
 /** The payload broadcast to the device. It is data only; nothing here is executable. */
 export interface DesktopServiceAnnouncement {

@@ -13,21 +13,8 @@ import * as http from 'node:http';
 import { DesktopCancelledError, DesktopDriverError } from '../errors.ts';
 import { hostForUrl } from '../net.ts';
 import { DESKTOP_PROTOCOL_VERSION } from '../protocol.ts';
+import type { DesktopRunExecutor, DesktopRunRequest } from '../server/coordinator.ts';
 import type { DesktopServiceRunStatus, DesktopTestResult, StoryTestManifest } from '../types.ts';
-
-/** What the service is asked to run. Only ids present in the manifest are accepted. */
-export interface DesktopRunRequest {
-  protocolVersion: number;
-  mode: 'current' | 'selected' | 'all';
-  storyIds?: readonly string[];
-}
-
-/** Executes a set of stories. Injected so the CLI, the service, and tests share one path. */
-export type DesktopRunExecutor = (
-  storyIds: readonly string[],
-  progress: (result: DesktopTestResult) => void,
-  signal: AbortSignal,
-) => Promise<readonly DesktopTestResult[]>;
 
 export interface DesktopTestServiceOptions {
   manifest: StoryTestManifest;

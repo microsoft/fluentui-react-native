@@ -2,12 +2,11 @@
  * Portable command matrix contract test.
  *
  * Exercises every portable command against the `fake` backend through the same W3C routes a real
- * driver serves. It runs in-process so it works where binding a loopback socket is not permitted;
- * `contract.wdio.spec.ts` runs the same assertions through a real WebdriverIO session.
+ * driver serves. It runs in-process so it works where binding a loopback socket is not permitted.
  */
 
-import { createFakeRoutes, FakeDriver } from './driver-host/fake-driver.ts';
-import { createRouteDispatcher, type DispatchResult } from './driver-host/w3c-server.ts';
+import { createFakeRoutes, FakeDriver } from './server/webdriver/fake-driver.ts';
+import { createRouteDispatcher, type DispatchResult } from './server/webdriver/w3c-server.ts';
 import { PORTABLE_COMMANDS, PORTABLE_COMMAND_SURFACES } from './capabilities.ts';
 import contractScene from './__fixtures__/contract-scene.json' with { type: 'json' };
 import type { DesktopFakeScene } from './types.ts';

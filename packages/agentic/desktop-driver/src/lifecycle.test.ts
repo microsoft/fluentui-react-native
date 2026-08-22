@@ -59,6 +59,16 @@ describe('lifecycle state machine', () => {
     expect(lifecycle.events().at(-1)?.type).toBe('monitorError');
   });
 
+  it('records a timeout as a distinct terminal outcome', () => {
+    const lifecycle = new DesktopLifecycle({ platform: 'macos', ownership: 'external' });
+    lifecycle.advance('attaching', 'launchRequested');
+    lifecycle.observeTimeout({ gate: 'window' });
+
+    expect(lifecycle.current).toBe('timed_out');
+    expect(lifecycle.reason).toBe('timedOut');
+    expect(lifecycle.events().at(-1)?.type).toBe('timedOut');
+  });
+
   it('bounds the retained event history', () => {
     const lifecycle = new DesktopLifecycle({ platform: 'fake', ownership: 'self', historyLimit: 3 });
     for (let index = 0; index < 10; index += 1) {
@@ -145,8 +155,42 @@ describe('artifacts', () => {
 
     expect(report.protocolVersion).toBe(1);
     expect(report.portableCommandMatrixVersion).toBe(2);
+    expect(report.artifacts).toEqual(expect.arrayContaining(['events.ndjson', 'run.json']));
     expect(fs.existsSync(path.join(store.runDirectory, 'run.json'))).toBe(true);
     expect(fs.readFileSync(path.join(store.runDirectory, 'events.ndjson'), 'utf8')).toContain('"type":"ready"');
+  });
+
+  it('does not truncate complete run reports and inventories files written by other owners', () => {
+    const store = new ArtifactStore({ rootDirectory: tempDirectory() });
+    fs.writeFileSync(path.join(store.runDirectory, 'ownership.json'), '{}\n', 'utf8');
+    const longMessage = 'x'.repeat(3000);
+    const results = Array.from({ length: 120 }, (_, index) => ({
+      testId: `test-${index}`,
+      title: `test-${index}`,
+      status: 'failed' as const,
+      durationMs: 1,
+      error: { message: longMessage },
+    }));
+
+    const report = store.writeRunReport({
+      packageVersion: '0.1.0',
+      runId: store.runId,
+      startedAt: new Date().toISOString(),
+      finishedAt: new Date().toISOString(),
+      platform: 'fake',
+      backend: 'fake',
+      target: { mode: 'attach', identity: 'x' },
+      ownership: 'external',
+      capabilities: [],
+      storyIds: [],
+      results,
+      summary: { passed: 0, failed: results.length, skipped: 0, infrastructureError: 0, durationMs: results.length },
+    });
+    const persisted = JSON.parse(fs.readFileSync(path.join(store.runDirectory, 'run.json'), 'utf8')) as typeof report;
+
+    expect(persisted.results).toHaveLength(120);
+    expect(persisted.results[0].error?.message).toHaveLength(3000);
+    expect(persisted.artifacts).toEqual(expect.arrayContaining(['ownership.json', 'run.json']));
   });
 
   it('derives a stable directory name from a test title', () => {

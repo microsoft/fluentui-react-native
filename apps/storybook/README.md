@@ -233,7 +233,7 @@ yarn desktop:generate
 
 # Detect and verify the package-owned native driver for this host
 yarn desktop:driver:detect --platform macos
-yarn desktop:driver:install --platform macos
+yarn desktop:driver:verify --platform macos
 
 # Report backends, the portable command matrix, and platform prerequisites
 yarn desktop:doctor --platform macos
@@ -247,8 +247,8 @@ yarn desktop:test:fake
 ```
 
 Attach is the default so a run never terminates the app it inspected. Set `DESKTOP_TEST_APP` to
-launch a build instead; only then may the run stop the application. `DESKTOP_TEST_GREP` selects a
-single story's tests by its `[story:<id>]` tag. macOS attaches to the generated
+launch a build instead; only then may the run stop the application. Story selection is derived
+from the generated manifest rather than supplied by the app. macOS attaches to the generated
 `com.microsoft.fluentui.agenticstorybook` bundle by default; override
 `DESKTOP_TEST_IDENTITY` for a custom host.
 

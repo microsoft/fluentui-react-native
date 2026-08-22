@@ -13,7 +13,7 @@ import { execFileSync } from 'node:child_process';
 import { release } from 'node:os';
 
 import { DesktopDriverError } from '../errors.ts';
-import type { DesktopBrowserLike } from '../wdio/commands.ts';
+import type { DesktopBrowserLike } from '../core/session.ts';
 import type { DesktopPrerequisiteStatus } from '../types.ts';
 
 /** Windows Driver execute methods this package exposes. */

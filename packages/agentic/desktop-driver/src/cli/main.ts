@@ -9,11 +9,12 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 
-import { detectDesktopDriver, doctor, generateStories, installDesktopDriver, listRunningStories } from './commands.ts';
+import { detectDesktopDriver, doctor, generateStories, listRunningStories, verifyDesktopDriver } from './commands.ts';
+import { loadDesktopConfig, serializeResolvedDesktopProject, toDesktopHostOptions, writeDesktopRuntime } from '../config/node.ts';
 import { detectHostPlatform } from '../drivers.ts';
 import { hostForUrl } from '../net.ts';
 import { startDesktopDriver } from '../wdio/service.ts';
-import { startDesktopStorybookHost } from '../storybook/serve.ts';
+import { startDesktopStorybookHost } from '../server/host.ts';
 import { DesktopDriverError } from '../errors.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import type { DesktopAppTarget, DesktopPlatform } from '../types.ts';
@@ -101,7 +102,8 @@ const USAGE = `desktop-driver <command> [options]
 Commands
   doctor                     Report backends, portable commands, and platform prerequisites
   driver detect              Detect the embedded platform driver and native runtime
-  driver install             Verify the embedded platform driver installation
+  driver verify              Verify the embedded platform driver installation
+  config resolve             Print the fully resolved project configuration
   host                       Run the Storybook channel, MCP, and desktop test coordinator
   stories generate           Scan story modules and emit the manifest and generated spec
   stories list               List the stories a running Storybook application reports
@@ -116,6 +118,7 @@ Common options
   --window <handle>                 Attach by native window handle
   --title <text>                    Attach by window title
   --story-root <dir>                Story scan root (repeatable via comma separation)
+  --config <file>                   Desktop project config (default: ./desktop.config.ts)
   --out <dir>                       Output directory for generated story tests
   --storybook-port <port>           Storybook channel server port (default: 7007)
 
@@ -148,6 +151,18 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
       return report.ready ? 0 : 1;
     }
 
+    case 'config': {
+      if (second !== 'resolve' && second !== 'print') {
+        process.stderr.write(`Unknown "config" subcommand "${String(second)}"\n${USAGE}`);
+        return 2;
+      }
+      const project = await loadDesktopConfig(typeof flags.config === 'string' ? flags.config : undefined, {
+        platform: flags.platform === undefined ? undefined : requirePlatform(flags),
+      });
+      print(serializeResolvedDesktopProject(project));
+      return 0;
+    }
+
     case 'driver': {
       const platform = driverPlatform(flags);
       if (second === 'detect') {
@@ -155,9 +170,9 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
         print(result);
         return result.status === 'ready' ? 0 : 1;
       }
-      if (second === 'install') {
+      if (second === 'verify' || second === 'install') {
         try {
-          print(await installDesktopDriver(platform));
+          print(await verifyDesktopDriver(platform));
           return 0;
         } catch (error) {
           if (!(error instanceof DesktopDriverError)) {
@@ -180,18 +195,42 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
 
     case 'stories': {
       if (second === 'generate') {
-        const storyRoots = String(flags['story-root'] ?? 'src')
-          .split(',')
-          .map((entry) => entry.trim())
-          .filter(Boolean);
+        const configFile =
+          typeof flags.config === 'string'
+            ? flags.config
+            : fs.existsSync(path.resolve('desktop.config.ts'))
+              ? path.resolve('desktop.config.ts')
+              : undefined;
+        const project = configFile ? await loadDesktopConfig(configFile) : undefined;
+        const storyRoots = project
+          ? project.storybook.stories.map((entry) => entry.directory)
+          : String(flags['story-root'] ?? 'src')
+              .split(',')
+              .map((entry) => entry.trim())
+              .filter(Boolean);
         const result = generateStories({
           storyRoots,
-          outputDirectory: String(flags.out ?? path.join('desktop-tests', 'generated')),
-          specRoots: typeof flags['spec-root'] === 'string' ? flags['spec-root'].split(',') : undefined,
+          storyFiles: project
+            ? [
+                ...new Set(
+                  project.storybook.stories.flatMap((entry) =>
+                    fs.globSync(entry.files, { cwd: entry.directory }).map((file) => path.resolve(entry.directory, file)),
+                  ),
+                ),
+              ]
+            : undefined,
+          outputDirectory: project?.tests.generatedDirectory ?? String(flags.out ?? path.join('desktop-tests', 'generated')),
+          specRoots: project
+            ? project.storybook.stories.map((entry) => entry.directory)
+            : typeof flags['spec-root'] === 'string'
+              ? flags['spec-root'].split(',')
+              : undefined,
         });
+        const runtimePath = project ? writeDesktopRuntime(project, result.manifest) : undefined;
         print({
           manifestPath: result.manifestPath,
           specPath: result.specPath,
+          runtimePath,
           digest: result.manifest.digest,
           stories: result.manifest.entries.map((entry) => ({ storyId: entry.storyId, kind: entry.plan.kind, planId: entry.plan.id })),
           problems: result.problems,
@@ -199,11 +238,11 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
         return result.problems.length > 0 ? 1 : 0;
       }
       if (second === 'list') {
+        const project = typeof flags.config === 'string' ? await loadDesktopConfig(flags.config) : undefined;
         print(
           await listRunningStories({
-            platform: requirePlatform(flags),
-            target: buildTarget(flags),
-            storybook: { port: flags['storybook-port'] ? Number(flags['storybook-port']) : undefined },
+            host: project?.storybook.channel.host,
+            port: flags['storybook-port'] ? Number(flags['storybook-port']) : project?.storybook.channel.port,
           }),
         );
         return 0;
@@ -214,7 +253,8 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
 
     case 'host':
     case 'serve': {
-      if (typeof flags.manifest !== 'string') {
+      const project = typeof flags.config === 'string' ? await loadDesktopConfig(flags.config) : undefined;
+      if (!project && typeof flags.manifest !== 'string') {
         process.stderr.write(`${first} requires --manifest <path to story-tests.manifest.json>\n`);
         return 2;
       }
@@ -222,24 +262,32 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
       if (shutdownFile) {
         fs.rmSync(shutdownFile, { force: true });
       }
-      const server = await startDesktopStorybookHost({
-        configPath: typeof flags['config-path'] === 'string' ? flags['config-path'] : 'src',
-        manifestPath: flags.manifest,
-        port: flags.port
-          ? Number(flags.port)
-          : flags['storybook-port']
-            ? Number(flags['storybook-port'])
-            : process.env.STORYBOOK_WS_PORT
-              ? Number(process.env.STORYBOOK_WS_PORT)
-              : undefined,
-        announceIntervalMs: flags['announce-interval'] ? Number(flags['announce-interval']) : undefined,
-        runner: {
-          command: typeof flags.runner === 'string' ? flags.runner : 'yarn',
-          args: repeated['runner-arg'] ?? ['wdio', 'run', 'wdio.conf.ts'],
-          cwd: typeof flags.cwd === 'string' ? path.resolve(flags.cwd) : process.cwd(),
-        },
-        onOutput: (chunk) => process.stdout.write(chunk),
-      });
+      const server = await startDesktopStorybookHost(
+        project
+          ? {
+              ...toDesktopHostOptions(project),
+              announceIntervalMs: flags['announce-interval'] ? Number(flags['announce-interval']) : undefined,
+              onOutput: (chunk) => process.stdout.write(chunk),
+            }
+          : {
+              configPath: typeof flags['config-path'] === 'string' ? flags['config-path'] : 'src',
+              manifestPath: flags.manifest as string,
+              port: flags.port
+                ? Number(flags.port)
+                : flags['storybook-port']
+                  ? Number(flags['storybook-port'])
+                  : process.env.STORYBOOK_WS_PORT
+                    ? Number(process.env.STORYBOOK_WS_PORT)
+                    : undefined,
+              announceIntervalMs: flags['announce-interval'] ? Number(flags['announce-interval']) : undefined,
+              runner: {
+                command: typeof flags.runner === 'string' ? flags.runner : 'yarn',
+                args: repeated['runner-arg'] ?? ['wdio', 'run', 'wdio.conf.ts'],
+                cwd: typeof flags.cwd === 'string' ? path.resolve(flags.cwd) : process.cwd(),
+              },
+              onOutput: (chunk) => process.stdout.write(chunk),
+            },
+      );
 
       print({
         url: server.url,
@@ -264,8 +312,7 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
         health: service.health,
         ownedResources: service.ownedResources,
       });
-      // The host is owned by this process; stopping here keeps the CLI from leaking a driver.
-      await service.stop();
+      await waitForHostShutdown(service);
       return 0;
     }
 

@@ -16,13 +16,13 @@ import { attachDesktopCommands, type DesktopBrowserLike } from './commands.ts';
 import { DesktopLifecycle } from '../lifecycle.ts';
 import { isAlive, OwnershipManifest } from '../ownership.ts';
 import { resolveDesktopOptions } from '../config.ts';
-import { StoryController } from '../storybook/controller.ts';
+import { StoryController } from '../server/channel/client.ts';
 import { appendCleanupFailure, DesktopDriverError } from '../errors.ts';
 import { createRootSessionEnumerator, discoverAttachWindow, type DesktopWindowMatch } from './window-discovery.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import { hostForUrl } from '../net.ts';
 import { portableCommandsFor } from '../capabilities.ts';
-import type { DriverHostHandle } from '../driver-host/client.ts';
+import type { DriverHostHandle } from '../server/webdriver/client.ts';
 import type {
   DesktopDriverOptions,
   DesktopDriverService as DesktopDriverServiceHandle,
@@ -37,8 +37,8 @@ import type {
  * the import dynamic means the neutral parts of this module stay loadable from tooling and tests
  * that never start a host.
  */
-async function driverHostClient(): Promise<typeof import('../driver-host/client.ts')> {
-  return import('../driver-host/client.ts');
+async function driverHostClient(): Promise<typeof import('../server/webdriver/client.ts')> {
+  return import('../server/webdriver/client.ts');
 }
 
 /** Environment variable through which the launcher publishes the owned endpoint to workers. */
@@ -346,6 +346,7 @@ export class DesktopDriverService {
         }
       }
       if (!observed) {
+        this.lifecycle.observeTimeout({ gate: 'window' });
         throw new DesktopDriverError('No application window was observed within the readiness budget', {
           kind: 'lifecycle',
           cause: lastWindowError,
@@ -366,6 +367,7 @@ export class DesktopDriverService {
         }
       }
       if (!connected) {
+        this.lifecycle.observeTimeout({ gate: 'storybookChannel' });
         throw new DesktopDriverError(`Storybook channel at ${storyController.url} did not answer within the readiness budget`, {
           kind: 'storybook',
         });
@@ -384,6 +386,7 @@ export class DesktopDriverService {
         .waitForDisplayed({ timeout: Math.max(1000, deadline - Date.now()), interval: this.options.backend === 'mac2' ? 1000 : undefined })
         .catch(() => false);
       if (!displayed) {
+        this.lifecycle.observeTimeout({ gate: 'testId', testId: this.options.readiness.requireTestId });
         throw new DesktopDriverError(`Readiness selector "${this.options.readiness.requireTestId}" never became visible`, {
           kind: 'lifecycle',
         });
@@ -488,8 +491,14 @@ export class DesktopDriverService {
     const unexpectedExit = this.unexpectedLifecycleError();
     if (!this.lifecycle.reason) {
       this.lifecycle.transition('stopping');
-      this.lifecycle.emit('shutdownRequested', { ownership: this.lifecycle.ownership });
-      this.lifecycle.observeExit('requestedShutdown');
+      if (this.options.target.mode === 'attach') {
+        this.lifecycle.emit('sessionCloseRequested', { ownership: this.lifecycle.ownership });
+        this.lifecycle.transition('stopped');
+        this.lifecycle.emit('sessionClosed', { ownership: this.lifecycle.ownership });
+      } else {
+        this.lifecycle.emit('shutdownRequested', { ownership: this.lifecycle.ownership });
+        this.lifecycle.observeExit('requestedShutdown');
+      }
     }
 
     artifacts.writeJUnit(`desktop-driver ${this.options.platform}`, this.results);

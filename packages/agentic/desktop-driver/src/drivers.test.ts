@@ -1,6 +1,6 @@
 import { defaultBackendFor } from './config.ts';
 import { detectDesktopDriver, detectHostPlatform, installDesktopDriver, resolveDriverPackageVersion } from './drivers.ts';
-import { availableBackends } from './driver-host/backends.ts';
+import { availableBackends } from './server/webdriver/backends.ts';
 import { DesktopDriverError } from './errors.ts';
 import type { DesktopPrerequisiteStatus } from './types.ts';
 

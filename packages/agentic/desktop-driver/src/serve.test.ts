@@ -11,8 +11,9 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { buildInvocation, createWebdriverIoRunExecutor, resolveRunnerCommand } from './storybook/run-executor.ts';
+import { buildInvocation, createWebdriverIoRunExecutor, resolveRunnerCommand } from './server/runner/wdio-runner.ts';
 import { createAnnouncement, DESKTOP_SERVICE_ANNOUNCE_EVENT, startServiceAnnouncer } from './storybook/announce.ts';
+import { RunCoordinator } from './server/coordinator.ts';
 import {
   DESKTOP_HOST_READY_EVENT,
   DESKTOP_RUN_REQUEST_EVENT,
@@ -20,10 +21,10 @@ import {
   startDesktopChannelBridge,
   type ChannelServerLike,
   type ChannelSocketLike,
-} from './storybook/channel-service.ts';
-import { loadStoryTestManifest, startDesktopStorybookHost } from './storybook/serve.ts';
+} from './server/channel/bridge.ts';
+import { loadStoryTestManifest, startDesktopStorybookHost } from './server/host.ts';
 import { digestEntries } from './storybook/manifest.ts';
-import { StoryController } from './storybook/controller.ts';
+import { StoryController } from './server/channel/client.ts';
 import { DesktopCancelledError, DesktopValidationError } from './errors.ts';
 import type { StoryTestManifest } from './types.ts';
 
@@ -155,6 +156,49 @@ describe('run executor', () => {
     expect(calls[0].args).toContain('--spec');
   });
 
+  it('runs multiple selected stories in one warm invocation', async () => {
+    const second = {
+      ...manifest.entries[0],
+      storyId: 'components-button--interaction',
+      tag: '[story:components-button--interaction]',
+      grep: '\\[story:components-button--interaction\\]',
+      plan: { kind: 'inline' as const, id: 'button-interaction', steps: [{ action: 'wait' as const, milliseconds: 1 }] },
+    };
+    const multiManifest = { ...manifest, entries: [manifest.entries[0], second] };
+    const calls: { args: readonly string[]; env?: NodeJS.ProcessEnv }[] = [];
+    const spawnImpl = ((_command: string, args: readonly string[], options?: { env?: NodeJS.ProcessEnv }) => {
+      calls.push({ args, env: options?.env });
+      const child = new FakeChild();
+      setTimeout(() => child.emit('exit', 0, null), 0);
+      return child as never;
+    }) as never;
+    const execute = createWebdriverIoRunExecutor({
+      manifest: multiManifest,
+      runner,
+      spawnImpl,
+      platform: 'darwin',
+    });
+    const progress: string[] = [];
+
+    const results = await execute(
+      multiManifest.entries.map((entry) => entry.storyId),
+      (result) => progress.push(result.storyId ?? ''),
+      new AbortController().signal,
+    );
+
+    expect(calls).toHaveLength(1);
+    expect(calls[0].args.filter((argument) => argument === '--spec')).toHaveLength(1);
+    expect(calls[0].env?.DESKTOP_TEST_GREP).toBe('(?:\\[story:components-button--default\\]|\\[story:components-button--interaction\\])');
+    expect(results).toEqual([
+      expect.objectContaining({
+        testId: 'desktop-run',
+        title: '2 selected desktop stories',
+        status: 'passed',
+      }),
+    ]);
+    expect(progress).toEqual(['']);
+  });
+
   it('spawns a Windows launcher verbatim through the command interpreter', async () => {
     const { calls, execute } = createExecutor((child) => child.emit('exit', 0, null), 'win32');
 
@@ -169,7 +213,7 @@ describe('run executor', () => {
 
     const results = await execute(['components-button--default'], () => undefined, new AbortController().signal);
 
-    expect(results[0].status).toBe('failed');
+    expect(results[0].status).toBe('infrastructureError');
     expect(results[0].error?.message).toContain('code 1');
   });
 
@@ -178,7 +222,7 @@ describe('run executor', () => {
 
     const results = await execute(['components-button--default'], () => undefined, new AbortController().signal);
 
-    expect(results[0].status).toBe('failed');
+    expect(results[0].status).toBe('infrastructureError');
     expect(results[0].error?.message).toContain('Failed to start the test runner');
   });
 
@@ -317,45 +361,55 @@ describe('service announcement', () => {
 describe('Storybook channel run transport', () => {
   it('announces readiness and carries run status without exposing the hidden service', async () => {
     const channel = new FakeChannel();
-    const requests: string[] = [];
-    let statusReads = 0;
-    const fetchImpl = (async (url: string, init?: RequestInit) => {
-      requests.push(`${init?.method ?? 'GET'} ${url}`);
-      const status =
-        init?.method === 'POST'
-          ? {
-              runId: 'run-1',
-              protocolVersion: 1,
-              state: 'running',
-              requestedStoryIds: ['components-button--default'],
-              results: [],
-            }
-          : {
-              runId: 'run-1',
-              protocolVersion: 1,
-              state: ++statusReads > 0 ? 'passed' : 'running',
-              requestedStoryIds: ['components-button--default'],
-              results: [],
-            };
-      return { ok: true, status: 200, json: async () => status } as Response;
-    }) as typeof fetch;
+    const coordinator = new RunCoordinator({
+      manifest,
+      execute: async (storyIds, progress) => {
+        const results = storyIds.map((storyId) => ({
+          testId: storyId,
+          storyId,
+          title: storyId,
+          status: 'passed' as const,
+          durationMs: 1,
+        }));
+        results.forEach(progress);
+        return results;
+      },
+    });
 
     const bridge = startDesktopChannelBridge({
       channel,
-      serviceUrl: 'http://127.0.0.1:49123',
-      token: 'hidden-token',
-      manifestDigest: 'deadbeef',
+      coordinator,
+      manifest,
       serviceId: 'service-1',
-      pollIntervalMs: 1,
-      fetchImpl,
     });
     const socket = new FakeSocket();
     channel.connect(socket);
 
-    const ready = JSON.parse(socket.sent[0]) as { type: string; args: [{ serviceId: string; manifestDigest: string }] };
+    const ready = JSON.parse(socket.sent[0]) as { type: string; args: [{ serviceId: string; manifest: { digest: string } }] };
     expect(ready).toEqual({
       type: DESKTOP_HOST_READY_EVENT,
-      args: [{ protocolVersion: 1, serviceId: 'service-1', manifestDigest: 'deadbeef' }],
+      args: [
+        {
+          protocolVersion: 1,
+          serviceId: 'service-1',
+          manifest: {
+            schemaVersion: 1,
+            digest: manifest.digest,
+            tests: [
+              {
+                storyId: 'components-button--default',
+                planId: 'button-default',
+                kind: 'inline',
+              },
+            ],
+          },
+          capabilities: {
+            runModes: ['selected', 'all'],
+            cancellation: true,
+            maxConcurrentRuns: 1,
+          },
+        },
+      ],
     });
 
     socket.emit(
@@ -367,6 +421,7 @@ describe('Storybook channel run transport', () => {
             protocolVersion: 1,
             serviceId: 'service-1',
             requestId: 'request-1',
+            manifestDigest: manifest.digest,
             mode: 'selected',
             storyIds: ['components-button--default'],
           },
@@ -375,15 +430,16 @@ describe('Storybook channel run transport', () => {
     );
     await new Promise((resolve) => setTimeout(resolve, 10));
     bridge.stop();
+    await coordinator.stop();
 
-    const events = socket.sent.map((message) => JSON.parse(message) as { type: string; args: [{ status?: { state: string } }] });
-    expect(events.filter((event) => event.type === DESKTOP_RUN_STATUS_EVENT).map((event) => event.args[0].status?.state)).toEqual([
-      'running',
-      'passed',
-    ]);
-    expect(requests).toEqual(['POST http://127.0.0.1:49123/v1/runs', 'GET http://127.0.0.1:49123/v1/runs/run-1']);
-    expect(socket.sent.join('')).not.toContain('hidden-token');
-    expect(socket.sent.join('')).not.toContain('49123');
+    const events = socket.sent.map(
+      (message) => JSON.parse(message) as { type: string; args: [{ sequence?: number; status?: { state: string } }] },
+    );
+    const statuses = events.filter((event) => event.type === DESKTOP_RUN_STATUS_EVENT);
+    expect(statuses.map((event) => event.args[0].status?.state)).toEqual(['running', 'running', 'passed']);
+    expect(statuses.map((event) => event.args[0].sequence)).toEqual([1, 2, 3]);
+    expect(socket.sent.join('')).not.toContain('token');
+    expect(socket.sent.join('')).not.toContain('/v1/runs');
   });
 });
 

@@ -16,6 +16,15 @@ describe('desktop WebdriverIO configuration', () => {
     expect(() => assertSharedSpecs(['specs/**/*.desktop.spec.ts'], root)).toThrow(/specs\/windows\/button.desktop.spec.ts/);
   });
 
+  it.each(['windows', 'macos', 'darwin', 'win32'])('ignores platform names in the checkout path: %s', (platformName) => {
+    const parent = fs.mkdtempSync(path.join(os.tmpdir(), `desktop-driver-${platformName}-`));
+    const root = path.join(parent, 'project');
+    fs.mkdirSync(path.join(root, 'specs'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'specs', 'button.desktop.spec.ts'), '', 'utf8');
+
+    expect(() => assertSharedSpecs([path.join(root, 'specs', '*.desktop.spec.ts')], root)).not.toThrow();
+  });
+
   it('verifies manifest executable content before returning its digest', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-config-'));
     const spec = path.join(root, 'button.desktop.spec.ts');

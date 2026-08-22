@@ -63,20 +63,22 @@ types do not cross that process boundary. WebdriverIO sees an ordinary WebDriver
 The package does not run the Appium CLI, extension manager, or multi-driver router. WebdriverIO,
 Appium, `appium-mac2-driver`, and `appium-novawindows-driver` are direct runtime dependencies.
 The platform drivers import driver-author support from `appium/driver.js`; their hosting imports
-are isolated in `src/driver-host/backends.ts`, with `src/driver-host/w3c-server.ts` retaining a
+are isolated in `src/server/webdriver/backends.ts`, with `src/server/webdriver/w3c-server.ts` retaining a
 product-owned route-host boundary for future migration.
 
 ### Public surfaces
 
-| Export                                              | Responsibility                                                          |
-| --------------------------------------------------- | ----------------------------------------------------------------------- |
-| `@fluentui-react-native/desktop-driver`             | Portable selectors, Storybook helper, plans, lifecycle and result types |
-| `@fluentui-react-native/desktop-driver/wdio`        | Config factory, WebdriverIO services, standalone driver lifecycle       |
-| `@fluentui-react-native/desktop-driver/storybook`   | Manifest generation, Storybook channel host, and run coordination       |
-| `@fluentui-react-native/desktop-driver/cli`         | JSON command-line interface                                             |
-| `@fluentui-react-native/desktop-driver/macos`       | Explicit macOS-only execute extensions                                  |
-| `@fluentui-react-native/desktop-driver/windows`     | Explicit Windows-only execute extensions                                |
-| `@fluentui-react-native/desktop-driver/driver-host` | Internal host integration contract                                      |
+| Export                                              | Responsibility                                                    |
+| --------------------------------------------------- | ----------------------------------------------------------------- |
+| `@fluentui-react-native/desktop-driver`             | Portable selectors, Storybook helper, plans, errors, result types |
+| `@fluentui-react-native/desktop-driver/config`      | Data-only project config schema and Storybook projection          |
+| `@fluentui-react-native/desktop-driver/config/node` | Config loading, resolution, generation projections                |
+| `@fluentui-react-native/desktop-driver/protocol`    | React-Native-safe channel constants, payloads, and decoders       |
+| `@fluentui-react-native/desktop-driver/wdio`        | Config factory and standalone driver lifecycle                    |
+| `@fluentui-react-native/desktop-driver/server`      | Config-driven Storybook desktop host                              |
+| `@fluentui-react-native/desktop-driver/storybook`   | Static manifest and generated-spec tooling                        |
+| `@fluentui-react-native/desktop-driver/macos`       | Explicit macOS-only execute extensions                            |
+| `@fluentui-react-native/desktop-driver/windows`     | Explicit Windows-only execute extensions                          |
 
 Platform backend dependencies are loaded only after platform selection and only in the driver-host
 process. The neutral package graph imports no React Native platform fork.
@@ -244,8 +246,11 @@ Normalized events include:
 - `ready`
 - `exitObserved`
 - `crashObserved`
+- `sessionCloseRequested`
+- `sessionClosed`
 - `shutdownRequested`
 - `shutdownCompleted`
+- `timedOut`
 - `monitorError`
 
 Readiness may require an observed window, a responsive WebDriver session, the Storybook channel,
@@ -263,7 +268,7 @@ WebdriverIO with Mocha is the documented default. Jasmine and Cucumber work thro
 adapters. `startDesktopDriver()` supports Jest, Vitest, `node:test`, scripts, and other consumers
 without introducing another test API.
 
-`sessionStrategy: 'suite'` is the default. It groups resolved specs into one ordered WebdriverIO
+`sessionStrategy: 'suite'` is the default. It groups manifest-referenced specs into one ordered WebdriverIO
 unit, producing one worker and one warm desktop session. Desktop automation is a single shared
 resource; parallelism is safe only when every worker owns an isolated application, endpoint, port
 set, Storybook channel, and artifact directory.
@@ -293,9 +298,10 @@ A story opts in through `parameters.desktopTest`:
 The app never receives or evaluates test code. `desktop-driver stories generate` parses story
 source statically and emits:
 
-- `story-tests.manifest.json`, containing stable story IDs, exact tags, resolved spec paths, exact
+- `story-tests.manifest.json`, containing stable story IDs, exact tags, relocatable spec paths, exact
   Mocha grep, and an executable-content digest; and
-- `story-plans.generated.spec.ts`, containing one tagged Mocha test per inline plan.
+- `story-plans.generated.spec.ts`, containing one tagged Mocha test per inline plan; and
+- `desktop-runtime.generated.ts`, containing only the RN-safe channel and manifest projection.
 
 The generator rejects missing roots, empty tested-story sets, duplicate plan or story IDs,
 malformed or indirect hidden declarations, paths outside configured roots, and linked specs
@@ -320,17 +326,18 @@ uses Storybook's maintained `createChannelServer` and combines:
 - a manifest-constrained WebdriverIO executor; and
 - channel-native readiness, run request, progress, result, and cancellation events.
 
-The app sees one loopback channel. The proven HTTP run coordinator still uses an ephemeral port
-inside the host process, but its URL and token never leave that process and are not user-facing
-contracts. The host allows one mutating run at a time and accepts only story IDs already present
+The app sees one loopback channel. A transport-free in-process coordinator validates requests,
+owns the single-active-run invariant, and publishes progress directly through that channel. The
+host allows one mutating run at a time and accepts only story IDs already present
 in the manifest. No device-supplied value can become a command, module path, or grep expression.
 
-| Channel event           | Purpose                                     |
-| ----------------------- | ------------------------------------------- |
-| `desktopTestHostReady`  | Service identity, protocol, manifest digest |
-| `desktopTestRunRequest` | Start selected or all-story execution       |
-| `desktopTestRunStatus`  | Acceptance, progress, and terminal result   |
-| `desktopTestRunCancel`  | Bounded cancellation of the active run      |
+| Channel event            | Purpose                                     |
+| ------------------------ | ------------------------------------------- |
+| `desktopTestHostReady`   | Service identity, protocol, manifest digest |
+| `desktopTestHostClosing` | Invalidate the current host identity        |
+| `desktopTestRunRequest`  | Start selected or all-story execution       |
+| `desktopTestRunStatus`   | Acceptance, progress, and terminal result   |
+| `desktopTestRunCancel`   | Bounded cancellation of the active run      |
 
 The spawned runner inherits the service environment. Consumers must start explicit platform
 scripts; otherwise a configuration that defaults to `fake` can return a valid fake-backend pass

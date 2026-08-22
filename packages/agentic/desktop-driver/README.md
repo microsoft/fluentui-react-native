@@ -29,29 +29,47 @@ for its control plane.
 ## Quick start
 
 Install the package, a WebdriverIO runner, a framework adapter, and a reporter. The package already
-provides the WebdriverIO client and both platform drivers. Then create a standard WDIO configuration:
+provides the WebdriverIO client and both platform drivers. Define the application once:
+
+```ts
+// desktop.config.ts
+import { defineDesktopConfig } from '@fluentui-react-native/desktop-driver/config';
+
+export default defineDesktopConfig({
+  schemaVersion: 1,
+  application: { manifest: './app.json', readyTestId: 'app-ready' },
+  storybook: {
+    configDir: './src',
+    stories: [{ directory: './src', files: '**/*.stories.?(ts|tsx)' }],
+    channel: { host: '127.0.0.1', port: 7007 },
+  },
+  tests: {
+    generatedDirectory: './desktop-tests/generated',
+    artifactsDirectory: './artifacts/desktop-tests',
+    runner: { command: 'yarn', args: ['wdio', 'run', 'wdio.conf.ts'] },
+  },
+  platforms: {
+    fake: { backend: 'fake', target: { defaultMode: 'attach', attach: { identity: 'fake' } } },
+    macos: {
+      backend: 'mac2',
+      target: { defaultMode: 'attach', attach: { identityFromApplicationManifest: 'macos.bundleIdentifier' } },
+    },
+    windows: {
+      backend: 'novawindows',
+      target: { defaultMode: 'attach', attach: { titleFromApplicationManifest: 'displayName' } },
+    },
+  },
+});
+```
+
+Project the same config into WebdriverIO:
 
 ```ts
 // wdio.conf.ts
+import { loadDesktopConfig, toDesktopWdioOptions } from '@fluentui-react-native/desktop-driver/config/node';
 import { createDesktopWdioConfig } from '@fluentui-react-native/desktop-driver/wdio';
-import type { DesktopAppTarget, DesktopPlatform } from '@fluentui-react-native/desktop-driver';
 
-const platform = process.env.DESKTOP_TEST_PLATFORM as DesktopPlatform;
-const target: DesktopAppTarget = process.env.DESKTOP_TEST_APP
-  ? { mode: 'launch', app: process.env.DESKTOP_TEST_APP }
-  : platform === 'macos'
-    ? { mode: 'attach', identity: process.env.DESKTOP_TEST_IDENTITY }
-    : { mode: 'attach', title: process.env.DESKTOP_TEST_WINDOW_TITLE ?? 'MyApp' };
-
-export const config = createDesktopWdioConfig({
-  platform,
-  target,
-  specs: ['./desktop-tests/**/*.spec.ts'],
-  framework: 'mocha',
-  sessionStrategy: 'suite',
-  artifactsDirectory: './artifacts/desktop-tests',
-  reporters: ['spec'],
-});
+export const config = createDesktopWdioConfig(toDesktopWdioOptions(loadDesktopConfig(new URL('./desktop.config.ts', import.meta.url))));
 ```
 
 Write an ordinary WebdriverIO test:
@@ -150,7 +168,7 @@ export const Default = {
 A story can instead link a colocated `*.desktop.spec.ts` for arbitrary TypeScript. Run:
 
 ```sh
-desktop-driver stories generate --story-root src --out desktop-tests/generated
+desktop-driver stories generate --config desktop.config.ts
 ```
 
 Generation emits a validated manifest and a generated WDIO spec. The manifest hashes executable
@@ -203,7 +221,8 @@ sharing.
 ```text
 desktop-driver doctor              Report backends and platform prerequisites
 desktop-driver driver detect       Detect the embedded driver and native runtime
-desktop-driver driver install      Verify the self-contained driver installation
+desktop-driver driver verify       Verify the self-contained driver installation
+desktop-driver config resolve      Print the fully resolved project configuration
 desktop-driver host                 Host Storybook channel, MCP, and desktop test coordination
 desktop-driver stories generate    Generate the Storybook test manifest and WDIO spec
 desktop-driver stories list        List stories reported by a running Storybook app
@@ -211,9 +230,8 @@ desktop-driver start               Start a driver host and print endpoint metada
 desktop-driver version             Print the package version
 ```
 
-Commands print JSON for scripting and agent workflows. Prefer the WDIO integration or
-`startDesktopDriver()` for normal sessions; the current `start` command is not yet a persistent
-interactive host.
+Commands print JSON for scripting and agent workflows. `start` and `host` remain alive until
+SIGINT or SIGTERM and stop only resources they own.
 
 ## Prerequisites
 

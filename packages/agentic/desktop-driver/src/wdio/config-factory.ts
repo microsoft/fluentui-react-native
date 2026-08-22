@@ -98,7 +98,10 @@ export function assertSharedSpecs(specs: readonly string[], rootDir = process.cw
     const matches = fs.globSync(spec, { cwd: rootDir });
     return matches.length > 0 ? matches : [spec];
   });
-  const offenders = expanded.filter((spec) => PLATFORM_SPEC_PATTERN.test(spec));
+  const offenders = expanded.filter((spec) => {
+    const projectPath = path.isAbsolute(spec) ? path.relative(rootDir, spec) : spec;
+    return PLATFORM_SPEC_PATTERN.test(projectPath);
+  });
   if (offenders.length > 0) {
     throw new DesktopValidationError(
       'Shared spec globs must not reference platform-specific files',

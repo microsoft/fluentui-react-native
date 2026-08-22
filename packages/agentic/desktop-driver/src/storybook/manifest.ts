@@ -268,21 +268,29 @@ export function generateStoryTestManifest(options: GenerateManifestOptions): Sto
 }
 
 /** Stable digest over the executable content of the manifest, recorded in `run.json`. */
-export function digestEntries(entries: readonly StoryTestManifestEntry[]): string {
+export function digestEntries(entries: readonly StoryTestManifestEntry[], baseDirectory?: string): string {
   const normalized = entries.map((entry) => ({
     storyId: entry.storyId,
     tag: entry.tag,
     plan: entry.plan,
-    linkedSpecSha256: isSpecPlan(entry.plan) ? hashFile(entry.spec) : undefined,
+    spec: baseDirectory ? digestPath(entry.spec, baseDirectory) : undefined,
+    storyPath: baseDirectory ? digestPath(entry.storyPath, baseDirectory) : undefined,
+    linkedSpecSha256: isSpecPlan(entry.plan) ? hashFile(entry.spec, baseDirectory) : undefined,
   }));
   return crypto.createHash('sha256').update(JSON.stringify(normalized)).digest('hex');
 }
 
-function hashFile(file: string): string {
+function digestPath(file: string, baseDirectory: string): string {
+  const relative = path.isAbsolute(file) ? path.relative(baseDirectory, file) : file;
+  return relative.replaceAll(path.sep, '/');
+}
+
+function hashFile(file: string, baseDirectory?: string): string {
+  const resolved = path.isAbsolute(file) || !baseDirectory ? file : path.resolve(baseDirectory, file);
   try {
-    return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+    return crypto.createHash('sha256').update(fs.readFileSync(resolved)).digest('hex');
   } catch (error) {
-    throw new DesktopValidationError('Cannot hash linked desktop spec', [`${file}: ${(error as Error).message}`]);
+    throw new DesktopValidationError('Cannot hash linked desktop spec', [`${resolved}: ${(error as Error).message}`]);
   }
 }
 
@@ -305,7 +313,8 @@ export function validateStoryTestManifest(value: unknown, source: string): Story
   }
 
   const seen = new Set<string>();
-  for (const [index, entry] of manifest.entries.entries()) {
+  const sourceDirectory = path.dirname(path.resolve(source));
+  const entries = manifest.entries.map((entry, index) => {
     if (!entry || typeof entry.storyId !== 'string' || typeof entry.spec !== 'string' || typeof entry.tag !== 'string' || !entry.plan) {
       throw new DesktopValidationError('Malformed story-test manifest', [`${source} entries[${index}] is incomplete`]);
     }
@@ -313,15 +322,21 @@ export function validateStoryTestManifest(value: unknown, source: string): Story
       throw new DesktopValidationError('Duplicate desktop story id', [`"${entry.storyId}" appears more than once in ${source}`]);
     }
     seen.add(entry.storyId);
-  }
+    return {
+      ...entry,
+      spec: path.isAbsolute(entry.spec) ? entry.spec : path.resolve(sourceDirectory, entry.spec),
+      storyPath: path.isAbsolute(entry.storyPath) ? entry.storyPath : path.resolve(sourceDirectory, entry.storyPath),
+    };
+  });
 
-  const actual = digestEntries(manifest.entries);
-  if (actual !== manifest.digest) {
+  const actual = digestEntries(entries, sourceDirectory);
+  const legacy = digestEntries(entries);
+  if (actual !== manifest.digest && legacy !== manifest.digest) {
     throw new DesktopValidationError('Stale or tampered story-test manifest', [
       `${source} digest ${manifest.digest} does not match executable content ${actual}; regenerate the manifest`,
     ]);
   }
-  return manifest as StoryTestManifest;
+  return { ...(manifest as StoryTestManifest), entries };
 }
 
 /** Recursively finds `*.stories.ts(x)` modules under the given roots. */

@@ -48,6 +48,9 @@ describe('WebdriverIO lifecycle service', () => {
     await service.before({}, [], instance);
     expect(instance.execute).toHaveBeenCalledWith('macos: queryAppState', { bundleId: 'com.example.Sample' });
     await service.after();
+    const events = fs.readFileSync(path.join(artifactsDirectory, 'service-test', 'events.ndjson'), 'utf8');
+    expect(events).toContain('"type":"sessionClosed"');
+    expect(events).not.toContain('"type":"shutdownCompleted"');
   });
 
   it('records observed app processes and accepts a verified window', async () => {

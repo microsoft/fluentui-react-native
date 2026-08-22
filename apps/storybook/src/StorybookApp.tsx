@@ -8,6 +8,7 @@ import { LiteUI } from '@storybook/react-native-ui-lite';
 import { DesktopTestControls } from './DesktopTestControls';
 import { useDesktopTestHost } from './useDesktopTestHost';
 import { StorybookThemeHost } from './StorybookTheme';
+import { desktopRuntime } from '../desktop-tests/generated/desktop-runtime.generated';
 
 // We run Storybook in lite mode: the heavy default on-device UI (`@storybook/react-native-ui`,
 // which needs reanimated/gesture-handler/etc.) is not bundled. `getStorybookUI` would otherwise
@@ -30,8 +31,8 @@ const storage = {
 // MCP, and desktop test coordination. If it is absent the app still works without those services.
 const StorybookUI = view.getStorybookUI({
   enableWebsockets: true,
-  host: '127.0.0.1',
-  port: 7007,
+  host: desktopRuntime.channel.host,
+  port: desktopRuntime.channel.port,
   CustomUIComponent: LiteUI,
   storage,
 });
@@ -65,7 +66,7 @@ const useCurrentStoryId = (): string | undefined => {
 const StorybookApp = () => {
   const currentStoryId = useCurrentStoryId();
   // The desktop host announces itself over the Storybook channel.
-  const desktopHost = useDesktopTestHost();
+  const desktopHost = useDesktopTestHost(desktopRuntime);
 
   return (
     <StorybookThemeHost>

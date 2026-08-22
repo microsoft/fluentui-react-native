@@ -14,50 +14,12 @@ import { PACKAGE_VERSION } from '../package-version.ts';
 import { DESKTOP_PROTOCOL_VERSION, PORTABLE_COMMAND_MATRIX_VERSION } from '../protocol.ts';
 import { byTestId } from '../selectors.ts';
 import type { ArtifactStore } from '../artifacts.ts';
+import type { DesktopBrowserCommands, DesktopBrowserLike } from '../core/session.ts';
 import type { DesktopLifecycle } from '../lifecycle.ts';
-import type { StoryController } from '../storybook/controller.ts';
+import type { StoryController } from '../server/channel/client.ts';
 import type { ArtifactManifest, DesktopAppState, DesktopSessionInfo, ResolvedDesktopDriverOptions } from '../types.ts';
 
-/** The minimal WebdriverIO surface these commands need, so the package does not hard-depend on it. */
-export interface DesktopBrowserLike {
-  sessionId: string;
-  $(selector: string): Promise<DesktopElementLike>;
-  execute(script: string, ...args: unknown[]): Promise<unknown>;
-  getPageSource(): Promise<string>;
-  takeScreenshot(): Promise<string>;
-  getActiveElement?(): Promise<Record<string, string>>;
-  getWindowHandles?(): Promise<readonly string[]>;
-  addCommand(name: string, handler: (...args: never[]) => unknown, isElementCommand?: boolean): void;
-  desktop?: DesktopBrowserCommands;
-}
-
-export interface DesktopElementLike {
-  elementId: string;
-  isExisting(): Promise<boolean>;
-  isDisplayed(): Promise<boolean>;
-  isEnabled(): Promise<boolean>;
-  isSelected(): Promise<boolean>;
-  getText(): Promise<string>;
-  getAttribute(name: string): Promise<string | null>;
-  click(): Promise<void>;
-  clearValue(): Promise<void>;
-  setValue(value: string): Promise<void>;
-  waitForDisplayed(options?: { timeout?: number; interval?: number; reverse?: boolean }): Promise<boolean>;
-  waitForExist(options?: { timeout?: number; interval?: number; reverse?: boolean }): Promise<boolean>;
-}
-
-/** The commands added to `browser.desktop`. */
-export interface DesktopBrowserCommands {
-  getSessionInfo(): Promise<DesktopSessionInfo>;
-  waitForAppState(state: DesktopAppState, options?: { timeout?: number }): Promise<void>;
-  captureArtifacts(reason: string): Promise<ArtifactManifest>;
-  selectStory(storyId: string): Promise<void>;
-  waitForStory(storyId: string): Promise<void>;
-  /** Focus inspection; WebdriverIO's `isFocused()` evaluates a DOM script and cannot be used. */
-  isFocused(selector: string): Promise<boolean>;
-  /** Scrolls an element into view through the backend's native scroll command. */
-  scrollIntoView(selector: string): Promise<void>;
-}
+export type { DesktopBrowserCommands, DesktopBrowserLike, DesktopElementLike } from '../core/session.ts';
 
 export interface DesktopCommandContext {
   options: ResolvedDesktopDriverOptions;

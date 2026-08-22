@@ -28,13 +28,21 @@
       "types": "./lib/storybook/index.d.ts",
       "default": "./lib/storybook/index.js"
     },
-    "./cli": {
-      "types": "./lib/cli/main.d.ts",
-      "default": "./lib/cli/main.js"
+    "./protocol": {
+      "types": "./lib/protocol/index.d.ts",
+      "default": "./lib/protocol/index.js"
     },
-    "./driver-host": {
-      "types": "./lib/driver-host/index.d.ts",
-      "default": "./lib/driver-host/index.js"
+    "./config": {
+      "types": "./lib/config/index.d.ts",
+      "default": "./lib/config/index.js"
+    },
+    "./config/node": {
+      "types": "./lib/config/node.d.ts",
+      "default": "./lib/config/node.js"
+    },
+    "./server": {
+      "types": "./lib/server/index.d.ts",
+      "default": "./lib/server/index.js"
     },
     "./macos": {
       "types": "./lib/platforms/macos.d.ts",
@@ -49,7 +57,6 @@
   "scripts": {
     "build": "tsc -b",
     "clean": "fluentui-scripts clean",
-    "contract-test": "node ./src/cli/main.ts contract-test",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "test": "fluentui-scripts jest"
@@ -59,6 +66,7 @@
     "appium": "catalog:",
     "appium-mac2-driver": "catalog:",
     "appium-novawindows-driver": "catalog:",
+    "jiti": "catalog:",
     "webdriverio": "catalog:"
   },
   "devDependencies": {

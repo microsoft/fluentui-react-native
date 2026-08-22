@@ -61,12 +61,15 @@ export type DesktopLifecycleEventType =
   | 'ready'
   | 'exitObserved'
   | 'crashObserved'
+  | 'sessionCloseRequested'
+  | 'sessionClosed'
   | 'shutdownRequested'
   | 'shutdownCompleted'
+  | 'timedOut'
   | 'monitorError';
 
 /** Why an application stopped running. */
-export type DesktopExitReason = 'normalExit' | 'requestedShutdown' | 'crashed' | 'lostProcess' | 'monitorFailure';
+export type DesktopExitReason = 'normalExit' | 'requestedShutdown' | 'crashed' | 'lostProcess' | 'monitorFailure' | 'timedOut';
 
 /** Which party owns a tracked resource. Only `self` resources may be terminated. */
 export type DesktopOwnership = 'self' | 'external';
@@ -246,12 +249,12 @@ export interface StoryTestManifestEntry {
   name: string;
   /** Stable test tag embedded in the suite title, for example `[story:components-button--default]`. */
   tag: string;
-  /** Absolute path of the spec that owns this test. */
+  /** Output-relative on disk and normalized to an absolute path when loaded. */
   spec: string;
   /** Escaped Mocha grep that selects exactly this story's tests. */
   grep: string;
   plan: StoryPlan;
-  /** Absolute path of the story module the plan came from. */
+  /** Output-relative on disk and normalized to an absolute path when loaded. */
   storyPath: string;
 }
 
@@ -382,7 +385,7 @@ export interface DesktopDriverService {
 export interface DesktopServiceRunStatus {
   runId: string;
   protocolVersion: number;
-  state: 'queued' | 'running' | 'passed' | 'failed' | 'cancelled' | 'error';
+  state: 'running' | 'passed' | 'failed' | 'cancelled' | 'error';
   requestedStoryIds: readonly string[];
   startedAt?: string;
   finishedAt?: string;

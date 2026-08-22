@@ -7,7 +7,7 @@
  */
 
 import { DesktopDriverError } from './errors.ts';
-import type { DesktopBrowserCommands } from './wdio/commands.ts';
+import type { DesktopBrowserCommands } from './core/session.ts';
 
 export interface StoryHelper {
   /** Selects a story and waits for it to finish rendering. */

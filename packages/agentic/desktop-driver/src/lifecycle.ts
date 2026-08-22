@@ -146,6 +146,9 @@ export class DesktopLifecycle {
     }
     this.exitReason = reason;
     switch (reason) {
+      case 'timedOut':
+        this.transition('timed_out');
+        return this.emit('timedOut', { ...detail, reason });
       case 'requestedShutdown':
         this.transition('stopped');
         return this.emit('shutdownCompleted', detail);
@@ -161,5 +164,10 @@ export class DesktopLifecycle {
         this.transition('crashed');
         return this.emit('monitorError', { ...detail, reason });
     }
+  }
+
+  /** Records that a bounded readiness or shutdown operation exhausted its deadline. */
+  observeTimeout(detail?: Record<string, unknown>): DesktopLifecycleEvent {
+    return this.observeExit('timedOut', detail);
   }
 }
