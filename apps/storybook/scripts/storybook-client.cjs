@@ -1,9 +1,6 @@
-const DEFAULT_HOST = process.env.STORYBOOK_WS_HOST || '127.0.0.1';
-const DEFAULT_PORT = Number(process.env.STORYBOOK_WS_PORT) || 7007;
-
 function baseUrl() {
   // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the agent channel is loopback-only and intentionally has no TLS setup
-  return `http://${DEFAULT_HOST}:${DEFAULT_PORT}`;
+  return 'http://127.0.0.1:7007';
 }
 
 async function request(pathname, options) {

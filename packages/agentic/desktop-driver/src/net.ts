@@ -6,6 +6,11 @@ import * as net from 'node:net';
 
 import { DesktopDriverError } from './errors.ts';
 
+/** Formats an IPv4, IPv6, or hostname value for use in an HTTP URL authority. */
+export function hostForUrl(host: string): string {
+  return host.includes(':') && !host.startsWith('[') ? `[${host}]` : host;
+}
+
 /** Reserves a free loopback port by binding and immediately releasing it. */
 export async function allocatePort(host = '127.0.0.1'): Promise<number> {
   return new Promise<number>((resolve, reject) => {

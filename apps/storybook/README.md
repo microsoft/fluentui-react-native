@@ -61,8 +61,9 @@ yarn macos
 
 Requires Xcode + CocoaPods.
 
-The `macos` script reopens the generated app after the React Native CLI launch so macOS restores a
-visible window even when the previous automation session closed the last one.
+The `macos` script waits briefly and reopens the generated app after the React Native CLI launch,
+reducing cases where macOS restores only a process after automation closed the last window. The
+desktop readiness selector still fails closed if no React Native window mounts.
 
 If `Pods` was generated against an older React Native macOS patch release and CocoaPods reports
 that a local podspec such as `fmt` changed, refresh the local native dependencies:
@@ -165,22 +166,23 @@ yarn bundle:macos     # -> writes dist/index.macos.jsbundle
 yarn bundle:windows   # -> writes dist/index.windows.bundle
 ```
 
-## Agent interaction (WebSocket channel + MCP)
+## Desktop host: Storybook channel, tests, and MCP
 
-The running app can be driven by external agents through a standalone Storybook channel server
-(`storybook-server.cjs`, default `127.0.0.1:7007`):
+The desktop driver owns the Storybook channel, desktop test coordination, and MCP in one process:
 
 ```sh
-yarn storybook-server   # WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.1:7007/mcp
+yarn desktop:host:macos
+# or
+yarn desktop:host:windows
 ```
 
-Run it alongside `yarn start` + `yarn macos` or `yarn windows`. The on-device app connects to it automatically
-(`src/StorybookApp.tsx` calls `getStorybookUI({ enableWebsockets: true, host, port })`).
+Metro remains the explicit bundle server (`yarn start`). Run the desktop host alongside Metro and
+`yarn macos` or `yarn windows`. The app connects to the host automatically.
 
 - **WebSocket channel** (`ws://127.0.0.1:7007/`): agents connect and emit Storybook channel events
   to drive the app — e.g. `setCurrentStory` (`{ storyId }`) to switch story, and arg-update events
-  to change controls — and receive state/events back. Host/port can be overridden with
-  `STORYBOOK_WS_HOST` / `STORYBOOK_WS_PORT`.
+  to change controls — and receive state/events back. This app fixes the loopback endpoint at
+  `127.0.0.1:7007` so every participant uses the same channel without configuration.
 - **MCP server** (`http://127.0.0.1:7007/mcp`): an MCP endpoint for AI agents, exposing tools like
   `list-all-documentation` and `get-documentation` to query component/story metadata, prop types,
   and usage snippets. Register it with an MCP client, e.g.:
@@ -203,10 +205,9 @@ yarn storybook:control args components-button--default '{"appearance":"primary"}
 yarn storybook:smoke
 ```
 
-> We run the channel server standalone (via `@storybook/react-native/node`'s `createChannelServer`)
-> rather than through `withStorybook`, because the bundler-agnostic `withStorybook` only starts it in
-> entry-point-swapping mode (`STORYBOOK_ENABLED=true`), which conflicts with this app's in-app
-> integration.
+The desktop host uses `@storybook/react-native/node`'s `createChannelServer` directly because the
+bundler-agnostic `withStorybook` server mode swaps entry points and conflicts with this app's
+in-app integration.
 
 ## Writing stories
 
@@ -251,8 +252,8 @@ single story's tests by its `[story:<id>]` tag. macOS attaches to the generated
 `com.microsoft.fluentui.agenticstorybook` bundle by default; override
 `DESKTOP_TEST_IDENTITY` for a custom host.
 
-The channel server must be running (`yarn storybook-server`) before a macOS or Windows run, because
-each test selects its story through it.
+The desktop host must be running before a macOS or Windows run because each test selects its story
+through the channel.
 
 Artifacts — `run.json`, `events.ndjson`, `junit.xml`, per-test source, and screenshots — are written
 under the ignored `artifacts/desktop-tests` directory. They can contain private screen content;
@@ -261,24 +262,21 @@ review before sharing.
 ### On-device controls
 
 The app renders **Run current test**, **Run all tests**, and **Cancel** beneath the Storybook UI.
-They send allowlisted run requests to a host-side service and render its progress; the device never
-runs the test runner or native automation itself.
+They send allowlisted channel events to the desktop host and render status events returned on the
+same channel; the device never runs the test runner or native automation itself.
 
 ```sh
-yarn desktop:generate
-yarn desktop:service   # host-side; announces itself to the running app
+yarn desktop:host:macos
 ```
 
-There is nothing to copy and nothing to configure at build time. The service broadcasts its
-loopback URL and per-boot token over the Storybook channel the app is already connected to, and
-re-broadcasts on an interval, so reloading the app or restarting the service re-discovers it
-without rebuilding the bundle. Until an announcement arrives the controls show
-`Waiting for the desktop test service` and stay disabled.
+There is no test URL, token, or second server to configure. The host broadcasts a per-boot service
+identity and manifest digest; run requests, progress, results, and cancellation stay on the
+Storybook channel. Until the host announces, the controls show `Waiting for the desktop host`.
 
 This has to be a host-side process: the app is the subject of automation, so it cannot drive
 itself, and a runner inside the app would die with the app and could never observe a crash,
 an unexpected exit, or a timeout. The device only ever sends a story id that already exists in the
-generated manifest, and the runner command comes entirely from `desktop:service` configuration.
+generated manifest, and the runner command comes entirely from `desktop:host` configuration.
 
 ### Relationship to the Windows Jest smoke harness
 

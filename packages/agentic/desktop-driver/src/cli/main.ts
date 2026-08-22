@@ -7,11 +7,13 @@
  */
 
 import * as path from 'node:path';
+import * as fs from 'node:fs';
 
 import { detectDesktopDriver, doctor, generateStories, installDesktopDriver, listRunningStories } from './commands.ts';
 import { detectHostPlatform } from '../drivers.ts';
+import { hostForUrl } from '../net.ts';
 import { startDesktopDriver } from '../wdio/service.ts';
-import { startDesktopTestServer } from '../storybook/serve.ts';
+import { startDesktopStorybookHost } from '../storybook/serve.ts';
 import { DesktopDriverError } from '../errors.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import type { DesktopAppTarget, DesktopPlatform } from '../types.ts';
@@ -100,9 +102,9 @@ Commands
   doctor                     Report backends, portable commands, and platform prerequisites
   driver detect              Detect the embedded platform driver and native runtime
   driver install             Verify the embedded platform driver installation
+  host                       Run the Storybook channel, MCP, and desktop test coordinator
   stories generate           Scan story modules and emit the manifest and generated spec
   stories list               List the stories a running Storybook application reports
-  serve                      Run the loopback desktop test service for the on-device controls
   start                      Start an owned driver host and print its endpoint
   version                    Print the package version
 
@@ -117,13 +119,13 @@ Common options
   --out <dir>                       Output directory for generated story tests
   --storybook-port <port>           Storybook channel server port (default: 7007)
 
-serve options
+host options
+  --config-path <dir>              Storybook config directory (default: src)
   --manifest <path>                 Generated story-tests.manifest.json (required)
   --runner <command>                Runner executable (default: yarn)
   --runner-arg <arg>                Runner argument before the spec selection; repeatable
   --cwd <dir>                       Working directory for the runner (default: current directory)
-  --port <port>                     Service port (default: 7017)
-  --announce-interval <ms>          Channel re-broadcast interval (default: 5000)
+  --port <port>                     Storybook channel and MCP port (default: 7007)
 `;
 
 export async function main(argv: readonly string[] = process.argv.slice(2)): Promise<number> {
@@ -210,16 +212,27 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
       return 2;
     }
 
+    case 'host':
     case 'serve': {
       if (typeof flags.manifest !== 'string') {
-        process.stderr.write('serve requires --manifest <path to story-tests.manifest.json>\n');
+        process.stderr.write(`${first} requires --manifest <path to story-tests.manifest.json>\n`);
         return 2;
       }
-      const server = await startDesktopTestServer({
+      const shutdownFile = typeof flags['shutdown-file'] === 'string' ? path.resolve(flags['shutdown-file']) : undefined;
+      if (shutdownFile) {
+        fs.rmSync(shutdownFile, { force: true });
+      }
+      const server = await startDesktopStorybookHost({
+        configPath: typeof flags['config-path'] === 'string' ? flags['config-path'] : 'src',
         manifestPath: flags.manifest,
-        port: flags.port ? Number(flags.port) : undefined,
+        port: flags.port
+          ? Number(flags.port)
+          : flags['storybook-port']
+            ? Number(flags['storybook-port'])
+            : process.env.STORYBOOK_WS_PORT
+              ? Number(process.env.STORYBOOK_WS_PORT)
+              : undefined,
         announceIntervalMs: flags['announce-interval'] ? Number(flags['announce-interval']) : undefined,
-        storybook: { port: flags['storybook-port'] ? Number(flags['storybook-port']) : undefined },
         runner: {
           command: typeof flags.runner === 'string' ? flags.runner : 'yarn',
           args: repeated['runner-arg'] ?? ['wdio', 'run', 'wdio.conf.ts'],
@@ -230,20 +243,13 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
 
       print({
         url: server.url,
-        token: server.token,
+        serviceId: server.serviceId,
         manifestDigest: server.manifest.digest,
         stories: server.manifest.entries.map((entry) => entry.storyId),
-        discovery: 'announced over the Storybook channel; the app needs no build-time configuration',
+        discovery: 'Storybook channel events; no separate test endpoint is exposed to clients',
       });
 
-      // The service owns its lifetime; it runs until interrupted.
-      await new Promise<void>((resolve) => {
-        const stop = (): void => {
-          void server.stop().finally(resolve);
-        };
-        process.on('SIGINT', stop);
-        process.on('SIGTERM', stop);
-      });
+      await waitForHostShutdown(server, shutdownFile);
       return 0;
     }
 
@@ -254,7 +260,7 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
         fakeScene: typeof flags.scene === 'string' ? flags.scene : undefined,
       });
       print({
-        webdriverUrl: `http://${service.webdriverOptions.hostname}:${service.webdriverOptions.port}`,
+        webdriverUrl: `http://${hostForUrl(service.webdriverOptions.hostname)}:${service.webdriverOptions.port}`,
         health: service.health,
         ownedResources: service.ownedResources,
       });
@@ -267,6 +273,38 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
       process.stderr.write(`Unknown command "${first}"\n${USAGE}`);
       return 2;
   }
+}
+
+async function waitForHostShutdown(server: { stop(): Promise<void> }, shutdownFile?: string): Promise<void> {
+  await new Promise<void>((resolve, reject) => {
+    let stopping = false;
+    const timer = shutdownFile
+      ? setInterval(() => {
+          if (fs.existsSync(shutdownFile)) {
+            void stop();
+          }
+        }, 250)
+      : undefined;
+    timer?.unref();
+
+    const cleanup = (): void => {
+      if (timer) {
+        clearInterval(timer);
+      }
+      process.off('SIGINT', stop);
+      process.off('SIGTERM', stop);
+    };
+    const stop = (): void => {
+      if (stopping) {
+        return;
+      }
+      stopping = true;
+      cleanup();
+      void server.stop().then(resolve, reject);
+    };
+    process.once('SIGINT', stop);
+    process.once('SIGTERM', stop);
+  });
 }
 
 const invokedDirectly = process.argv[1] !== undefined && import.meta.url === new URL(`file://${process.argv[1]}`).href;

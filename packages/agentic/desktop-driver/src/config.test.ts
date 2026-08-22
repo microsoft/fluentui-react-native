@@ -2,9 +2,16 @@ import * as path from 'node:path';
 
 import { attachIdentityPrecedence, defaultBackendFor, resolveDesktopOptions } from './config.ts';
 import { DesktopValidationError } from './errors.ts';
+import { hostForUrl } from './net.ts';
 import { buildCapabilities, buildRootSessionCapabilities, describeAttachResolution } from './wdio/capability-map.ts';
 
 describe('desktop driver configuration', () => {
+  it('formats IPv6 loopback addresses for HTTP URLs', () => {
+    expect(hostForUrl('127.0.0.1')).toBe('127.0.0.1');
+    expect(hostForUrl('localhost')).toBe('localhost');
+    expect(hostForUrl('::1')).toBe('[::1]');
+  });
+
   it('fills in defaults for a minimal launch target', () => {
     const resolved = resolveDesktopOptions({ platform: 'macos', target: { mode: 'launch', app: '/Applications/Sample.app' } });
 

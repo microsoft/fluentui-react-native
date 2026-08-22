@@ -10,3 +10,5 @@ The loopback test service, the WebdriverIO run executor, and Storybook channel d
 WebdriverIO, Appium, Mac2, and NovaWindows now ship as runtime dependencies. NovaWindows replaces the unmaintained WinAppDriver backend, and `desktop-driver driver detect|install` provides backend-aware setup verification without requiring an Appium driver registry or a separate Windows driver service.
 
 Storybook now invokes the package CLI directly and uses a unique macOS bundle identity. Mac2 readiness queries application state instead of the unsupported window-handles route, and the shared Button story test uses macOS-visible status semantics while accounting for React Native macOS Fabric's missing AXEnabled projection.
+
+`desktop-driver host` now owns Storybook's maintained channel/MCP server and desktop test coordination in one process. Applications and clients use channel events for readiness, run requests, progress, results, and cancellation; the hidden run service no longer exposes a second user-configured endpoint.

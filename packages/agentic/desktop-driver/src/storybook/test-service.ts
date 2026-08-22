@@ -11,6 +11,7 @@ import * as crypto from 'node:crypto';
 import * as http from 'node:http';
 
 import { DesktopCancelledError, DesktopDriverError } from '../errors.ts';
+import { hostForUrl } from '../net.ts';
 import { DESKTOP_PROTOCOL_VERSION } from '../protocol.ts';
 import type { DesktopServiceRunStatus, DesktopTestResult, StoryTestManifest } from '../types.ts';
 
@@ -77,7 +78,7 @@ export class DesktopTestService {
   }
 
   get url(): string {
-    return `http://${this.host}:${this.boundPort}`;
+    return `http://${hostForUrl(this.host)}:${this.boundPort}`;
   }
 
   async start(): Promise<{ url: string; token: string }> {

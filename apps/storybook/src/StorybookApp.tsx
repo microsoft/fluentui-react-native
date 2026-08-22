@@ -6,7 +6,7 @@ import { addons } from 'storybook/preview-api';
 import { view } from './storybook.requires';
 import { LiteUI } from '@storybook/react-native-ui-lite';
 import { DesktopTestControls } from './DesktopTestControls';
-import { useDesktopTestService } from './useDesktopTestService';
+import { useDesktopTestHost } from './useDesktopTestHost';
 import { StorybookThemeHost } from './StorybookTheme';
 
 // We run Storybook in lite mode: the heavy default on-device UI (`@storybook/react-native-ui`,
@@ -25,10 +25,9 @@ const storage = {
   },
 };
 
-// `enableWebsockets` + `host`/`port` connect the app to the standalone Storybook channel server
-// (`yarn storybook-server`, default ws://127.0.0.1:7007). This lets external agents drive the app —
-// select stories, read/update control args — and powers the MCP endpoint. If the server isn't
-// running the transport just logs a connection error; the app still works standalone.
+// `enableWebsockets` + `host`/`port` connect the app to the desktop host
+// (`yarn desktop:host:<platform>`, default ws://127.0.0.1:7007). The host owns Storybook control,
+// MCP, and desktop test coordination. If it is absent the app still works without those services.
 const StorybookUI = view.getStorybookUI({
   enableWebsockets: true,
   host: '127.0.0.1',
@@ -65,8 +64,8 @@ const useCurrentStoryId = (): string | undefined => {
 
 const StorybookApp = () => {
   const currentStoryId = useCurrentStoryId();
-  // The service announces itself over the Storybook channel; nothing is configured at build time.
-  const service = useDesktopTestService();
+  // The desktop host announces itself over the Storybook channel.
+  const desktopHost = useDesktopTestHost();
 
   return (
     <StorybookThemeHost>
@@ -74,7 +73,7 @@ const StorybookApp = () => {
         <View style={styles.preview}>
           <StorybookUI />
         </View>
-        <DesktopTestControls currentStoryId={currentStoryId} service={service} />
+        <DesktopTestControls currentStoryId={currentStoryId} host={desktopHost} />
       </View>
     </StorybookThemeHost>
   );

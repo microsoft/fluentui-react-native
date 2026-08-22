@@ -60,8 +60,8 @@ export const config = createDesktopWdioConfig({
     path.join(calloutPackage, '**', '*.desktop.spec.ts'),
   ],
   storybook: {
-    host: process.env.STORYBOOK_WS_HOST ?? '127.0.0.1',
-    port: Number(process.env.STORYBOOK_WS_PORT ?? 7007),
+    host: '127.0.0.1',
+    port: 7007,
     specRoots: [agenticComponents, calloutPackage],
   },
   readiness: {

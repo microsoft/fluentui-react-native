@@ -72,7 +72,7 @@ product-owned route-host boundary for future migration.
 | --------------------------------------------------- | ----------------------------------------------------------------------- |
 | `@fluentui-react-native/desktop-driver`             | Portable selectors, Storybook helper, plans, lifecycle and result types |
 | `@fluentui-react-native/desktop-driver/wdio`        | Config factory, WebdriverIO services, standalone driver lifecycle       |
-| `@fluentui-react-native/desktop-driver/storybook`   | Manifest generation, channel controller, loopback run service           |
+| `@fluentui-react-native/desktop-driver/storybook`   | Manifest generation, Storybook channel host, and run coordination       |
 | `@fluentui-react-native/desktop-driver/cli`         | JSON command-line interface                                             |
 | `@fluentui-react-native/desktop-driver/macos`       | Explicit macOS-only execute extensions                                  |
 | `@fluentui-react-native/desktop-driver/windows`     | Explicit Windows-only execute extensions                                |
@@ -311,33 +311,26 @@ Linked specs call `story.select(storyId)`. Generated inline tests call the equiv
 browser command. The host-side Storybook controller sends the selection through the existing
 channel server and waits for the matching `storyRendered` acknowledgement.
 
-### On-device service
+### Desktop host
 
-The Storybook app cannot execute Node, WebdriverIO, or native automation. `desktop-driver serve`
-combines:
+The Storybook app cannot execute Node, WebdriverIO, or native automation. `desktop-driver host`
+uses Storybook's maintained `createChannelServer` and combines:
 
-- the loopback HTTP run service;
+- Storybook WebSocket control and MCP;
 - a manifest-constrained WebdriverIO executor; and
-- a Storybook channel announcer.
+- channel-native readiness, run request, progress, result, and cancellation events.
 
-The service binds to loopback, mints a per-boot token, allows one mutating run at a time, and accepts
-only story IDs already present in the manifest. The runner command is fixed by host configuration;
-no device-supplied value can become a command, module path, or grep expression.
+The app sees one loopback channel. The proven HTTP run coordinator still uses an ephemeral port
+inside the host process, but its URL and token never leave that process and are not user-facing
+contracts. The host allows one mutating run at a time and accepts only story IDs already present
+in the manifest. No device-supplied value can become a command, module path, or grep expression.
 
-| Endpoint                   | Purpose                                         |
-| -------------------------- | ----------------------------------------------- |
-| `GET /v1/health`           | Liveness and protocol version                   |
-| `GET /v1/stories`          | Tested story manifest                           |
-| `POST /v1/runs`            | Start current, selected, or all-story execution |
-| `GET /v1/runs/:id`         | Structured run status                           |
-| `GET /v1/runs/:id/events`  | Server-sent progress                            |
-| `POST /v1/runs/:id/cancel` | Bounded cancellation                            |
-
-The service announces `{ url, token, protocolVersion, manifestDigest }` over the Storybook channel.
-The token prevents requests from clients that have not observed an announcement, but it is not a
-defense against a local attacker because the channel is also local and unauthenticated. The primary
-controls are loopback binding, manifest allowlisting, serialized mutation, and rejection of
-arbitrary execution.
+| Channel event           | Purpose                                     |
+| ----------------------- | ------------------------------------------- |
+| `desktopTestHostReady`  | Service identity, protocol, manifest digest |
+| `desktopTestRunRequest` | Start selected or all-story execution       |
+| `desktopTestRunStatus`  | Acceptance, progress, and terminal result   |
+| `desktopTestRunCancel`  | Bounded cancellation of the active run      |
 
 The spawned runner inherits the service environment. Consumers must start explicit platform
 scripts; otherwise a configuration that defaults to `fake` can return a valid fake-backend pass

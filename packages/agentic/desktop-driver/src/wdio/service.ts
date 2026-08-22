@@ -20,6 +20,7 @@ import { StoryController } from '../storybook/controller.ts';
 import { appendCleanupFailure, DesktopDriverError } from '../errors.ts';
 import { createRootSessionEnumerator, discoverAttachWindow, type DesktopWindowMatch } from './window-discovery.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
+import { hostForUrl } from '../net.ts';
 import { portableCommandsFor } from '../capabilities.ts';
 import type { DriverHostHandle } from '../driver-host/client.ts';
 import type {
@@ -152,7 +153,7 @@ export class DesktopDriverService {
     const storybookUrl =
       this.options.platform === 'fake'
         ? this.host.health.storybookUrl
-        : `http://${this.options.storybook.host}:${this.options.storybook.port}`;
+        : `http://${hostForUrl(this.options.storybook.host)}:${this.options.storybook.port}`;
 
     const endpoint: PublishedEndpoint = {
       hostname: this.options.host,
@@ -272,7 +273,7 @@ export class DesktopDriverService {
     this.lifecycle.advance(this.options.target.mode === 'launch' ? 'starting' : 'attaching', 'launchRequested', {
       mode: this.options.target.mode,
     });
-    this.lifecycle.emit('driverHostStarted', { url: `http://${endpoint.hostname}:${endpoint.port}` });
+    this.lifecycle.emit('driverHostStarted', { url: `http://${hostForUrl(endpoint.hostname)}:${endpoint.port}` });
     if (endpoint.appProcessId !== undefined) {
       this.lifecycle.emit('processStarted', { observed: true, mode: this.options.target.mode }, { processId: endpoint.appProcessId });
     }
@@ -292,7 +293,7 @@ export class DesktopDriverService {
     this.startLivenessMonitor(endpoint);
 
     const storyController = new StoryController({
-      baseUrl: endpoint.storybookUrl ?? `http://${this.options.storybook.host}:${this.options.storybook.port}`,
+      baseUrl: endpoint.storybookUrl ?? `http://${hostForUrl(this.options.storybook.host)}:${this.options.storybook.port}`,
       renderTimeout: this.options.storybook.renderTimeout,
     });
 
@@ -301,7 +302,7 @@ export class DesktopDriverService {
       lifecycle: this.lifecycle,
       artifacts,
       storyController,
-      driverHostUrl: `http://${endpoint.hostname}:${endpoint.port}`,
+      driverHostUrl: `http://${hostForUrl(endpoint.hostname)}:${endpoint.port}`,
       storybookUrl: endpoint.storybookUrl,
     });
 

@@ -9,12 +9,19 @@ $packageRoot = Split-Path -Parent $PSScriptRoot
 $artifactRoot = Join-Path $packageRoot 'artifacts\windows'
 $logRoot = Join-Path $artifactRoot 'logs'
 $sessionPath = Join-Path $artifactRoot 'agent-session.json'
-$storybookPort = if ($env:STORYBOOK_WS_PORT) { [int]$env:STORYBOOK_WS_PORT } else { 7007 }
+$desktopHostShutdownPath = Join-Path $artifactRoot 'desktop-host.stop'
+$storybookPort = 7007
 $metroPort = 8081
 $defaultWinAppDriverPath = "${env:ProgramFiles(x86)}\Windows Application Driver\WinAppDriver.exe"
 $localWinAppDriverPath = Join-Path $artifactRoot 'winappdriver\SourceDir\Windows Application Driver\WinAppDriver.exe'
 
 New-Item -ItemType Directory -Path $logRoot -Force | Out-Null
+$desktopHostProcess = $null
+$desktopHostPid = $null
+$metroProcess = $null
+$metroPid = $null
+$appProcess = $null
+$sessionWritten = $false
 
 function Start-YarnScript {
   param(
@@ -62,6 +69,28 @@ function Get-PortOwner {
 
   return Get-NetTCPConnection -State Listen -LocalPort $Port -ErrorAction SilentlyContinue |
     Select-Object -First 1 -ExpandProperty OwningProcess
+}
+
+function Get-DescendantProcessIds {
+  param([Parameter(Mandatory)][int]$ProcessId)
+
+  $all = @(Get-CimInstance Win32_Process)
+  $result = @()
+  $frontier = @($ProcessId)
+  while ($frontier.Count -gt 0) {
+    $children = @($all | Where-Object { $_.ParentProcessId -in $frontier } | Select-Object -ExpandProperty ProcessId)
+    $result += $children
+    $frontier = $children
+  }
+  return $result
+}
+
+function Stop-OwnedProcessTree {
+  param([int]$ProcessId)
+
+  if ($ProcessId -and (Get-Process -Id $ProcessId -ErrorAction SilentlyContinue)) {
+    & taskkill.exe /PID $ProcessId /T /F | Out-Null
+  }
 }
 
 function Wait-ForApp {
@@ -114,9 +143,21 @@ try {
     }
   }
 
-  $storybookProcess = Start-YarnScript -Script 'storybook-server' -LogName 'storybook-server'
+  Remove-Item -LiteralPath $desktopHostShutdownPath -Force -ErrorAction SilentlyContinue
+  $desktopHostProcess = Start-YarnScript `
+    -Script "desktop:host:windows --port $storybookPort --shutdown-file `"$desktopHostShutdownPath`"" `
+    -LogName 'desktop-host'
   Wait-ForTcpPort -Port $storybookPort
   Invoke-RestMethod -Uri "http://127.0.0.1:$storybookPort/index.json" | Out-Null
+  $desktopHostProcess.Refresh()
+  if ($desktopHostProcess.HasExited) {
+    throw "The desktop host exited before readiness. See '$logRoot\\desktop-host.err.log'."
+  }
+  $desktopHostPid = Get-PortOwner -Port $storybookPort
+  $desktopHostDescendants = @(Get-DescendantProcessIds -ProcessId $desktopHostProcess.Id)
+  if (-not $desktopHostPid -or ($desktopHostPid -ne $desktopHostProcess.Id -and $desktopHostPid -notin $desktopHostDescendants)) {
+    throw "Port $storybookPort is not owned by the desktop host process tree."
+  }
 
   & yarn windows:deploy
   if ($LASTEXITCODE -ne 0) {
@@ -125,6 +166,15 @@ try {
 
   $metroProcess = Start-YarnScript -Script 'start' -LogName 'metro'
   Wait-ForTcpPort -Port $metroPort
+  $metroProcess.Refresh()
+  if ($metroProcess.HasExited) {
+    throw "Metro exited before readiness. See '$logRoot\\metro.err.log'."
+  }
+  $metroPid = Get-PortOwner -Port $metroPort
+  $metroDescendants = @(Get-DescendantProcessIds -ProcessId $metroProcess.Id)
+  if (-not $metroPid -or ($metroPid -ne $metroProcess.Id -and $metroPid -notin $metroDescendants)) {
+    throw "Port $metroPort is not owned by the Metro process tree."
+  }
 
   $existingAppIds = @(Get-Process -Name ReactApp -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Id)
   & yarn windows:launch-only
@@ -137,16 +187,18 @@ try {
     startedAt = (Get-Date).ToString('o')
     storybookPort = $storybookPort
     metroPort = $metroPort
+    desktopHostShutdownPath = $desktopHostShutdownPath
     appWindowTitle = $appProcess.MainWindowTitle
     processes = @(
-      [ordered]@{ role = 'storybook-launcher'; id = $storybookProcess.Id }
-      [ordered]@{ role = 'storybook-server'; id = Get-PortOwner -Port $storybookPort }
+      [ordered]@{ role = 'desktop-host-launcher'; id = $desktopHostProcess.Id }
+      [ordered]@{ role = 'desktop-host'; id = $desktopHostPid }
       [ordered]@{ role = 'metro-launcher'; id = $metroProcess.Id }
-      [ordered]@{ role = 'metro'; id = Get-PortOwner -Port $metroPort }
+      [ordered]@{ role = 'metro'; id = $metroPid }
       [ordered]@{ role = 'app'; id = $appProcess.Id }
     )
   }
   $session | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $sessionPath
+  $sessionWritten = $true
 
   if ($RunSmokeTest) {
     $env:STORYBOOK_WINDOWS_WINDOW_TITLE = $appProcess.MainWindowTitle
@@ -158,6 +210,25 @@ try {
   }
 
   Write-Host "Windows agent session ready. Manifest: $sessionPath"
+} catch {
+  if (-not $sessionWritten) {
+    if ($desktopHostProcess) {
+      Set-Content -LiteralPath $desktopHostShutdownPath -Value 'stop'
+      Start-Sleep -Seconds 2
+    }
+    @(
+      $appProcess.Id
+      $metroPid
+      $metroProcess.Id
+      $desktopHostPid
+      $desktopHostProcess.Id
+    ) |
+      Where-Object { $_ } |
+      Select-Object -Unique |
+      ForEach-Object { Stop-OwnedProcessTree -ProcessId $_ }
+    Remove-Item -LiteralPath $desktopHostShutdownPath -Force -ErrorAction SilentlyContinue
+  }
+  throw
 } finally {
   Pop-Location
 }

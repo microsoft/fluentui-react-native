@@ -10,6 +10,8 @@
 
 import * as http from 'node:http';
 
+import { hostForUrl } from '../net.ts';
+
 /** W3C error codes used by the hosted drivers. */
 export type W3CErrorCode =
   | 'invalid session id'
@@ -198,7 +200,7 @@ export async function startW3CServer(options: W3CServerOptions): Promise<W3CServ
 
   return {
     port,
-    url: `http://${options.host}:${port}`,
+    url: `http://${hostForUrl(options.host)}:${port}`,
     close: () =>
       new Promise<void>((resolve, reject) => {
         server.close((error) => (error ? reject(error) : resolve()));

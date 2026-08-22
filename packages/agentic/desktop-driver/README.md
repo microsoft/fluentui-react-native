@@ -23,7 +23,8 @@ suite.
 
 The package does not automate mobile platforms or browsers, replace Storybook's unit-test tooling,
 or run the Appium CLI. It embeds WebdriverIO, Appium, Mac2, and NovaWindows as runtime dependencies
-behind an isolated single-driver host.
+behind an isolated single-driver host and uses Storybook's maintained React Native channel server
+for its control plane.
 
 ## Quick start
 
@@ -155,9 +156,9 @@ desktop-driver stories generate --story-root src --out desktop-tests/generated
 Generation emits a validated manifest and a generated WDIO spec. The manifest hashes executable
 story metadata and linked spec contents so Windows and macOS jobs can prove they ran the same tests.
 
-`desktop-driver serve` lets an on-device Storybook UI request the current story or all tested
-stories. The app sends only allowlisted story IDs; the host owns WebdriverIO execution and streams
-structured progress back to the app.
+`desktop-driver host` owns Storybook's channel/MCP server and desktop test coordination in one
+process. The app sends only allowlisted story IDs over the channel; the host owns WebdriverIO
+execution and returns structured progress on that same channel.
 
 ### Standalone sessions
 
@@ -194,8 +195,8 @@ Runs write machine-readable results and diagnostics under the configured artifac
     screenshot.png
 ```
 
-Artifacts can contain private application content. Keep them ignored, review them before sharing,
-and never publish service tokens.
+Artifacts can contain private application content. Keep them ignored and review them before
+sharing.
 
 ## CLI
 
@@ -203,9 +204,9 @@ and never publish service tokens.
 desktop-driver doctor              Report backends and platform prerequisites
 desktop-driver driver detect       Detect the embedded driver and native runtime
 desktop-driver driver install      Verify the self-contained driver installation
+desktop-driver host                 Host Storybook channel, MCP, and desktop test coordination
 desktop-driver stories generate    Generate the Storybook test manifest and WDIO spec
 desktop-driver stories list        List stories reported by a running Storybook app
-desktop-driver serve               Host on-device Storybook test requests
 desktop-driver start               Start a driver host and print endpoint metadata
 desktop-driver version             Print the package version
 ```

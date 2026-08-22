@@ -13,7 +13,15 @@ import * as path from 'node:path';
 
 import { buildInvocation, createWebdriverIoRunExecutor, resolveRunnerCommand } from './storybook/run-executor.ts';
 import { createAnnouncement, DESKTOP_SERVICE_ANNOUNCE_EVENT, startServiceAnnouncer } from './storybook/announce.ts';
-import { loadStoryTestManifest } from './storybook/serve.ts';
+import {
+  DESKTOP_HOST_READY_EVENT,
+  DESKTOP_RUN_REQUEST_EVENT,
+  DESKTOP_RUN_STATUS_EVENT,
+  startDesktopChannelBridge,
+  type ChannelServerLike,
+  type ChannelSocketLike,
+} from './storybook/channel-service.ts';
+import { loadStoryTestManifest, startDesktopStorybookHost } from './storybook/serve.ts';
 import { digestEntries } from './storybook/manifest.ts';
 import { StoryController } from './storybook/controller.ts';
 import { DesktopCancelledError, DesktopValidationError } from './errors.ts';
@@ -49,6 +57,21 @@ class FakeChild extends EventEmitter {
   kill(): boolean {
     this.killed = true;
     return true;
+  }
+}
+
+class FakeSocket extends EventEmitter implements ChannelSocketLike {
+  readonly sent: string[] = [];
+  send(data: string): void {
+    this.sent.push(data);
+  }
+}
+
+class FakeChannel extends EventEmitter implements ChannelServerLike {
+  readonly clients = new Set<FakeSocket>();
+  connect(socket: FakeSocket): void {
+    this.clients.add(socket);
+    this.emit('connection', socket);
   }
 }
 
@@ -291,9 +314,98 @@ describe('service announcement', () => {
   });
 });
 
+describe('Storybook channel run transport', () => {
+  it('announces readiness and carries run status without exposing the hidden service', async () => {
+    const channel = new FakeChannel();
+    const requests: string[] = [];
+    let statusReads = 0;
+    const fetchImpl = (async (url: string, init?: RequestInit) => {
+      requests.push(`${init?.method ?? 'GET'} ${url}`);
+      const status =
+        init?.method === 'POST'
+          ? {
+              runId: 'run-1',
+              protocolVersion: 1,
+              state: 'running',
+              requestedStoryIds: ['components-button--default'],
+              results: [],
+            }
+          : {
+              runId: 'run-1',
+              protocolVersion: 1,
+              state: ++statusReads > 0 ? 'passed' : 'running',
+              requestedStoryIds: ['components-button--default'],
+              results: [],
+            };
+      return { ok: true, status: 200, json: async () => status } as Response;
+    }) as typeof fetch;
+
+    const bridge = startDesktopChannelBridge({
+      channel,
+      serviceUrl: 'http://127.0.0.1:49123',
+      token: 'hidden-token',
+      manifestDigest: 'deadbeef',
+      serviceId: 'service-1',
+      pollIntervalMs: 1,
+      fetchImpl,
+    });
+    const socket = new FakeSocket();
+    channel.connect(socket);
+
+    const ready = JSON.parse(socket.sent[0]) as { type: string; args: [{ serviceId: string; manifestDigest: string }] };
+    expect(ready).toEqual({
+      type: DESKTOP_HOST_READY_EVENT,
+      args: [{ protocolVersion: 1, serviceId: 'service-1', manifestDigest: 'deadbeef' }],
+    });
+
+    socket.emit(
+      'message',
+      JSON.stringify({
+        type: DESKTOP_RUN_REQUEST_EVENT,
+        args: [
+          {
+            protocolVersion: 1,
+            serviceId: 'service-1',
+            requestId: 'request-1',
+            mode: 'selected',
+            storyIds: ['components-button--default'],
+          },
+        ],
+      }),
+    );
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    bridge.stop();
+
+    const events = socket.sent.map((message) => JSON.parse(message) as { type: string; args: [{ status?: { state: string } }] });
+    expect(events.filter((event) => event.type === DESKTOP_RUN_STATUS_EVENT).map((event) => event.args[0].status?.state)).toEqual([
+      'running',
+      'passed',
+    ]);
+    expect(requests).toEqual(['POST http://127.0.0.1:49123/v1/runs', 'GET http://127.0.0.1:49123/v1/runs/run-1']);
+    expect(socket.sent.join('')).not.toContain('hidden-token');
+    expect(socket.sent.join('')).not.toContain('49123');
+  });
+});
+
 describe('manifest loading', () => {
   it('rejects a missing manifest with an actionable message', () => {
     expect(() => loadStoryTestManifest(path.join(os.tmpdir(), 'definitely-missing.json'))).toThrow(/stories generate/);
+  });
+
+  describe('combined desktop host validation', () => {
+    it('rejects a non-loopback host before loading or binding Storybook', async () => {
+      const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-host-')), 'manifest.json');
+      fs.writeFileSync(file, JSON.stringify(manifest), 'utf8');
+
+      await expect(
+        startDesktopStorybookHost({
+          configPath: path.dirname(file),
+          manifestPath: file,
+          host: '0.0.0.0',
+          runner,
+        }),
+      ).rejects.toThrow(/non-loopback/);
+    });
   });
 
   it('rejects a manifest from a different schema version', () => {

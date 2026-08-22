@@ -348,11 +348,11 @@ const StorybookUI = view.getStorybookUI({
 });
 ```
 
-Start the channel server through the Storybook application's declared script, then run the suite:
+Start the desktop host through the Storybook application's declared script, then run the suite:
 
 ```sh
 # Terminal or supervised process 1
-yarn storybook-server
+yarn desktop:host:macos
 
 # Terminal or supervised process 2: launch and own the app
 DESKTOP_TEST_APP=/absolute/path/MyStorybook.app \
@@ -374,12 +374,11 @@ The repository implementation is a working reference:
 
 The app cannot safely run native automation inside its own process. Instead:
 
-1. A host-side `desktop-driver serve` process owns the test runner.
-2. It announces its loopback URL, token, protocol version, and manifest digest over the existing
-   Storybook channel.
-3. The app receives the announcement and renders a **Run all tests** control.
-4. Pressing the control sends an allowlisted `mode: "all"` request.
-5. The service runs the manifest's tests and returns structured progress.
+1. A host-side `desktop-driver host` process owns Storybook's channel and the test runner.
+2. It announces a per-boot service identity, protocol version, and manifest digest.
+3. The app renders a **Run all tests** control after that channel event arrives.
+4. Pressing the control sends an allowlisted run-request event.
+5. The host returns progress, results, and cancellation on the same channel.
 
 ### Host integration
 
@@ -389,9 +388,9 @@ Add scripts equivalent to:
 {
   "scripts": {
     "desktop:generate": "desktop-driver stories generate --story-root src --spec-root src --out desktop-tests/generated",
-    "desktop:service": "desktop-driver serve --manifest desktop-tests/generated/story-tests.manifest.json --runner yarn --runner-arg wdio --runner-arg run --runner-arg wdio.conf.ts",
-    "desktop:service:macos": "cross-env DESKTOP_TEST_PLATFORM=macos yarn desktop:service",
-    "desktop:service:windows": "cross-env DESKTOP_TEST_PLATFORM=windows yarn desktop:service"
+    "desktop:host": "yarn desktop:generate && desktop-driver host --config-path src --manifest desktop-tests/generated/story-tests.manifest.json --runner yarn --runner-arg wdio --runner-arg run --runner-arg wdio.conf.ts",
+    "desktop:host:macos": "cross-env DESKTOP_TEST_PLATFORM=macos yarn desktop:host",
+    "desktop:host:windows": "cross-env DESKTOP_TEST_PLATFORM=windows yarn desktop:host"
   }
 }
 ```
@@ -399,39 +398,34 @@ Add scripts equivalent to:
 For in-app runs, the WDIO target must be **attach mode**. The app is already running and initiated
 the request, so setting `DESKTOP_TEST_APP` here would incorrectly create a second owned app.
 
-Start the channel server, app, and service as separately supervised processes:
+Start the host and app:
 
 ```sh
-yarn desktop:generate
-yarn storybook-server
-yarn desktop:service:macos
+yarn desktop:host:macos
 ```
 
-Use `desktop:service:windows` on Windows. Always select the platform explicitly; a service inherits
+Use `desktop:host:windows` on Windows. Always select the platform explicitly; the host inherits
 its environment, and an omitted platform may run a configured fake backend instead of the app.
 
 ### App integration
 
 In the Storybook app:
 
-1. Subscribe to the `desktopTestServiceAnnounce` Storybook channel event.
-2. Validate `protocolVersion`, `url`, `token`, and `manifestDigest`.
-3. Check `GET <url>/v1/health`.
-4. Send an authenticated request to `POST <url>/v1/runs`:
+1. Subscribe to the `desktopTestHostReady` Storybook channel event.
+2. Validate `protocolVersion`, `serviceId`, and `manifestDigest`.
+3. Emit `desktopTestRunRequest`:
 
 ```json
 {
   "protocolVersion": 1,
+  "serviceId": "<announced service id>",
+  "requestId": "<client correlation id>",
   "mode": "all"
 }
 ```
 
-5. Poll `GET <url>/v1/runs/<run-id>` or subscribe to
-   `GET <url>/v1/runs/<run-id>/events`.
-6. Render or log the returned `state`, `results`, and error messages.
-
-The per-boot token is announced at runtime; do not compile it into the app, commit it, or print it
-in durable logs.
+4. Render `desktopTestRunStatus` events matching the request and service IDs.
+5. Emit `desktopTestRunCancel` with the active run ID to cancel.
 
 The host process forwards WebdriverIO stdout/stderr to its own console. To inspect results in the
 React Native debugger, log the structured run status received by the app:
@@ -448,9 +442,10 @@ For a debuggable custom Node host, use the programmatic API and place a breakpoi
 `onOutput`:
 
 ```ts
-import { startDesktopTestServer } from '@fluentui-react-native/desktop-driver/storybook';
+import { startDesktopStorybookHost } from '@fluentui-react-native/desktop-driver/storybook';
 
-const server = await startDesktopTestServer({
+const host = await startDesktopStorybookHost({
+  configPath: 'src',
   manifestPath: 'desktop-tests/generated/story-tests.manifest.json',
   runner: {
     command: 'yarn',
@@ -465,20 +460,19 @@ const server = await startDesktopTestServer({
 
 The repository's app-side reference is:
 
-- [`apps/storybook/src/useDesktopTestService.ts`](../../../apps/storybook/src/useDesktopTestService.ts)
+- [`apps/storybook/src/useDesktopTestHost.ts`](../../../apps/storybook/src/useDesktopTestHost.ts)
 - [`apps/storybook/src/DesktopTestControls.tsx`](../../../apps/storybook/src/DesktopTestControls.tsx)
 - [`apps/storybook/src/StorybookApp.tsx`](../../../apps/storybook/src/StorybookApp.tsx)
 
 ### Agent workflow
 
-An agent can start the declared channel-server and service scripts, wait for their readiness
-messages, and then either:
+An agent can start the declared desktop host, wait for `desktopTestHostReady`, and then either:
 
 - activate the `desktop-test-run-all` control by `testID`; or
-- send the same allowlisted HTTP request after obtaining the current service announcement.
+- emit the same allowlisted `desktopTestRunRequest` channel event.
 
 The agent should wait for a terminal run state (`passed`, `failed`, `cancelled`, or `error`) and
-inspect both the structured results and host process output. A successful HTTP `202` means the run
+inspect both the structured results and host process output. A `running` status means the run
 started; it does not mean the tests passed.
 
 ## 4. Run tests for the current Storybook page
@@ -486,15 +480,16 @@ started; it does not mean the tests passed.
 Track the currently rendered story from Storybook's `storyRendered` channel event. Enable **Run
 current test** only when:
 
-- a service announcement has been received;
-- `/v1/health` succeeds; and
-- the current story ID appears in `GET /v1/stories`.
+- a host-ready event has been received; and
+- the current story ID is rendered.
 
 Start a page-specific run with:
 
 ```json
 {
   "protocolVersion": 1,
+  "serviceId": "<announced service id>",
+  "requestId": "<client correlation id>",
   "mode": "selected",
   "storyIds": ["components-button--interaction"]
 }
@@ -507,15 +502,12 @@ story into the known spec path and exact `[story:<id>]` grep.
 In practice:
 
 ```sh
-yarn desktop:generate
-yarn storybook-server
-yarn desktop:service:windows
+yarn desktop:host:windows
 ```
 
 Navigate to a tested component story and press **Run current test**. The repository control exposes
 the stable `testID` `desktop-test-run-current`, so an agent can activate the same workflow through
-native automation. Progress is available in the UI, service console, status endpoint, and events
-stream.
+native automation. Progress is available in the UI, host console, and channel status events.
 
 For a host-initiated one-page run without using the on-device control, set the exact generated grep:
 
@@ -606,19 +598,19 @@ workflow.
 
 Choose output surfaces based on the workflow:
 
-| Surface                              | Use                                                            |
-| ------------------------------------ | -------------------------------------------------------------- |
-| WDIO `spec` reporter                 | Immediate pass/fail details and stacks in a terminal or CI log |
-| `desktop-driver serve` stdout/stderr | Host-side output for in-app Storybook runs                     |
-| Run status JSON                      | App UI, React Native debugger, agents, and custom dashboards   |
-| SSE events endpoint                  | Streaming in-app or agent progress                             |
-| `run.json`                           | Complete machine-readable run result                           |
-| `junit.xml`                          | CI test reporting                                              |
-| `events.ndjson`                      | Lifecycle and infrastructure diagnosis                         |
-| Per-test source and screenshots      | Native UI failure diagnosis                                    |
+| Surface                             | Use                                                            |
+| ----------------------------------- | -------------------------------------------------------------- |
+| WDIO `spec` reporter                | Immediate pass/fail details and stacks in a terminal or CI log |
+| `desktop-driver host` stdout/stderr | Host-side output for in-app Storybook runs                     |
+| Run status JSON                     | App UI, React Native debugger, agents, and custom dashboards   |
+| Storybook channel status events     | Streaming in-app or agent progress                             |
+| `run.json`                          | Complete machine-readable run result                           |
+| `junit.xml`                         | CI test reporting                                              |
+| `events.ndjson`                     | Lifecycle and infrastructure diagnosis                         |
+| Per-test source and screenshots     | Native UI failure diagnosis                                    |
 
-Screenshots and accessibility source can contain private content. Keep artifact directories ignored,
-review them before sharing, and never publish the service token.
+Screenshots and accessibility source can contain private content. Keep artifact directories ignored
+and review them before sharing.
 
 ## Recommended agent protocol
 

@@ -16,6 +16,7 @@ import { DesktopValidationError } from '../errors.ts';
 import { emitGeneratedStorySpec, verifyLinkedSpecTags } from '../storybook/generated-spec.ts';
 import { findStoryFiles, generateStoryTestManifest } from '../storybook/manifest.ts';
 import { checkMacosPrerequisites } from '../platforms/macos.ts';
+import { hostForUrl } from '../net.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import { DESKTOP_PROTOCOL_VERSION, PORTABLE_COMMAND_MATRIX_VERSION } from '../protocol.ts';
 import { StoryController } from '../storybook/controller.ts';
@@ -128,7 +129,7 @@ export function generateStories(options: GenerateStoriesOptions): GenerateStorie
 export async function listRunningStories(options: DesktopDriverOptions): Promise<readonly { id: string; title: string; name: string }[]> {
   const resolved = resolveDesktopOptions(options);
   const controller = new StoryController({
-    baseUrl: `http://${resolved.storybook.host}:${resolved.storybook.port}`,
+    baseUrl: `http://${hostForUrl(resolved.storybook.host)}:${resolved.storybook.port}`,
     renderTimeout: resolved.storybook.renderTimeout,
   });
   const stories = await controller.listStories();

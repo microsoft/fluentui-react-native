@@ -16,6 +16,7 @@
 import { createFakeRoutes, FakeDriver, loadFakeScene } from './fake-driver.ts';
 import { startW3CServer, type RouteDefinition, type W3CServerHandle } from './w3c-server.ts';
 import { appendCleanupFailure } from '../errors.ts';
+import { hostForUrl } from '../net.ts';
 import type { DesktopBackendId, DesktopFakeScene } from '../types.ts';
 
 export interface BackendStartOptions {
@@ -51,7 +52,7 @@ async function startAppiumHostedDriver(options: BackendStartOptions): Promise<Ba
     routeConfiguringFunction: routeConfiguringFunction(driver),
   });
 
-  const url = `http://${options.host}:${options.port}`;
+  const url = `http://${hostForUrl(options.host)}:${options.port}`;
   return {
     server: { url, port: options.port, close: () => hosted.close() },
     stop: async () => {

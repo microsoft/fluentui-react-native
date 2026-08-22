@@ -15,8 +15,30 @@ export { emitGeneratedStorySpec, verifyLinkedSpecTags } from './generated-spec.t
 export type { EmitGeneratedSpecOptions } from './generated-spec.ts';
 export { buildInvocation, createWebdriverIoRunExecutor, resolveRunnerCommand } from './run-executor.ts';
 export type { DesktopRunnerCommand, RunExecutorOptions, RunnerInvocation } from './run-executor.ts';
-export { loadStoryTestManifest, startDesktopTestServer } from './serve.ts';
-export type { DesktopTestServerHandle, DesktopTestServerOptions } from './serve.ts';
+export {
+  DESKTOP_HOST_READY_EVENT,
+  DESKTOP_RUN_CANCEL_EVENT,
+  DESKTOP_RUN_REQUEST_EVENT,
+  DESKTOP_RUN_STATUS_EVENT,
+  startDesktopChannelBridge,
+} from './channel-service.ts';
+export type {
+  ChannelServerLike,
+  ChannelSocketLike,
+  DesktopChannelBridgeHandle,
+  DesktopChannelBridgeOptions,
+  DesktopChannelRunCancel,
+  DesktopChannelRunRequest,
+  DesktopChannelRunStatus,
+  DesktopHostReady,
+} from './channel-service.ts';
+export { loadStoryTestManifest, startDesktopStorybookHost, startDesktopTestServer } from './serve.ts';
+export type {
+  DesktopStorybookHostHandle,
+  DesktopStorybookHostOptions,
+  DesktopTestServerHandle,
+  DesktopTestServerOptions,
+} from './serve.ts';
 export { sanitizeStoryPart, storyGrep, storyNameFromExport, storyTag, toStoryId } from './story-id.ts';
 export { DesktopTestService, secretsMatch } from './test-service.ts';
 export type { DesktopRunExecutor, DesktopRunRequest, DesktopTestServiceOptions } from './test-service.ts';
