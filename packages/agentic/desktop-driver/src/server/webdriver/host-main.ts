@@ -10,7 +10,7 @@
 import * as fs from 'node:fs';
 
 import { startBackend } from './backends.ts';
-import { DESKTOP_PROTOCOL_VERSION } from '../../protocol.ts';
+import { DESKTOP_PROTOCOL_VERSION } from '../../protocol/versions.ts';
 import { isLoopbackHost } from '../../core/loopback.ts';
 import type { DesktopBackendId, DesktopFakeScene, DriverHostHealth } from '../../types.ts';
 

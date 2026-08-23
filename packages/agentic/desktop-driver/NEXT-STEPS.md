@@ -1,82 +1,155 @@
 # Next steps
 
-This file tracks only unfinished work and open decisions. Implemented behavior and constraints live
-in [DESIGN.md](./DESIGN.md); setup and execution instructions live in
-[README.md](./README.md) and [USAGE.md](./USAGE.md).
+This is the only unfinished-work list for `@fluentui-react-native/desktop-driver`.
 
-## Priority 0: real-platform proof
+Refactor Phases 0-5 are complete. Implemented architecture and invariants live in
+[DESIGN.md](./DESIGN.md); setup and operation live in [README.md](./README.md) and
+[USAGE.md](./USAGE.md). The original refactor review is summarized in
+[suggestions.md](./suggestions.md).
 
-The safety and false-green fixes are implemented and covered by focused tests and the fake backend.
-They still need current evidence from both native backends.
+## Phase 6: native proof and compatibility retirement
 
-### macOS verification
+Phase 6 requires real interactive macOS and Windows machines. Fake runs, JavaScript bundles, unit
+tests, and package builds cannot satisfy these gates.
 
-The shared attach suite passes on macOS 26.6.2 with Xcode 26.4.1 and Mac2 3.2.16. This verifies the
-unique Storybook bundle identity, application-state readiness, attach survival, standard clicks,
-repeated presses, disabled inertness, Storybook navigation, and matching manifest execution.
-Remaining macOS work is:
+### Shared portability proof
 
-- Mac2-owned launch behavior;
-- `focused` attribute behavior and active-element fallback;
-- native wheel scrolling;
-- application, WebDriverAgentMac, xcodebuild, and host lifecycle evidence;
-- bounded cancellation and cleanup;
-- Storybook Run current, Run all, and Cancel behavior; and
-- a generated manifest digest matching the Windows job byte for byte.
+Run one unchanged generated manifest on both platforms and record:
 
-React Native macOS Fabric 0.81 does not expose `accessibilityState.disabled` through AXEnabled, and
-pointer activation does not imply keyboard focus. The portable suite therefore verifies disabled
-inertness and treats focus as a separate interaction rather than asserting those platform-specific
-states after a click.
+- config fingerprint;
+- manifest digest;
+- story IDs and plan IDs;
+- portable command-matrix version;
+- backend and native dependency versions;
+- test result summary; and
+- lifecycle and ownership artifacts.
 
-The package must not claim a verified macOS compatibility range until this passes on a clean
-machine with documented Xcode, accessibility, automation-mode, signing, and GUI-session setup.
+The config fingerprint, manifest digest, story IDs, and command-matrix version must match byte for
+byte. Any platform-specific test source, branch, or extension disqualifies the run from shared
+coverage.
 
-### Windows re-verification
+### macOS proof
 
-Repeat the native Windows run after the process-supervision and lifecycle changes:
+The shared attach suite previously passed on macOS 26.6.2 with Xcode 26.4.1 and Mac2 3.2.16. Repeat
+the proof after the reporting, coordinator, and module refactor and add:
 
-- verify attach leaves the original PID and window running;
-- verify launch mode stops only the launched application;
-- cancel an on-device run and confirm the command interpreter, WDIO runner, driver host, and
-  NovaWindows PowerShell descendants all exit within the deadline;
-- force post-readiness app and driver-host failures and confirm the run cannot report success;
-- inspect an unlocked NovaWindows screenshot for WinAppSDK Composition content; and
-- regenerate the Storybook manifest and compare its digest with macOS.
+1. **Launch ownership**
+   - launch a package-owned `.app`;
+   - record observable application and host processes;
+   - confirm cleanup stops only self-owned resources.
+2. **Attach preservation**
+   - attach by unique bundle ID;
+   - confirm the original app survives session and host cleanup;
+   - verify `ownership.json` records app/window as external.
+3. **Readiness**
+   - prove XCTest application-state readiness;
+   - prove Storybook channel readiness;
+   - prove app-shell `testID` readiness.
+4. **Portable commands**
+   - verify `focused` attribute behavior;
+   - verify active-element fallback where supported;
+   - verify native wheel scrolling.
+5. **Failure behavior**
+   - stop the app after readiness and reject a false green;
+   - stop the driver host after readiness and classify infrastructure failure;
+   - preserve root reports and JUnit.
+6. **On-device controls**
+   - Run current;
+   - Run all with live per-test progress;
+   - Cancel with bounded runner/host cleanup.
+7. **Process evidence**
+   - record application, WebDriverAgentMac, xcodebuild, WDIO runner, and host behavior where the
+     backend exposes it.
 
-Capture backend-provided application and native-driver PIDs where the native drivers expose them.
-Until then, lifecycle reporting must remain explicit about what was observed rather than imply
-complete process telemetry.
+Document the clean-machine requirements: Xcode version, signing, accessibility permission,
+Automation Mode, GUI session, and writable build cache.
 
-### Historical application defect regression
+React Native macOS Fabric 0.81 does not reliably project
+`accessibilityState.disabled` through AXEnabled. Keep disabled-inertness assertions and do not
+claim `isEnabled()` support until native projection changes.
 
-The agentic `Button` focus crash is fixed on `main`. Rerun the unchanged shared suite against
-NovaWindows to prove the migrated backend still covers click and keyboard-focus transitions.
+### Windows proof
+
+Use NovaWindows on an unlocked interactive Windows desktop.
+
+1. **Driver and prerequisites**
+   - run `doctor`, `driver detect`, and `driver verify`;
+   - confirm no global Appium driver registry, WinAppDriver service, or Developer Mode dependency.
+2. **Attach resolution**
+   - attach by PID, exact native handle, identity, exact title, and unique substring;
+   - confirm exact title wins over substring;
+   - confirm ambiguity fails before the real application session;
+   - confirm root discovery session cleanup on success and failure.
+3. **Attach preservation**
+   - record the original PID/window;
+   - run the shared suite;
+   - confirm the original app remains alive;
+   - verify external ownership.
+4. **Launch ownership**
+   - launch a package-owned app;
+   - confirm only that app and owned descendants are stopped.
+5. **Cancellation**
+   - cancel an on-device run;
+   - confirm the command interpreter, WDIO runner, driver host, and NovaWindows PowerShell
+     descendants exit within the deadline;
+   - confirm the attached Storybook app survives.
+6. **False-green prevention**
+   - force post-readiness app exit;
+   - force driver-host exit;
+   - verify both produce non-passing root reports and JUnit.
+7. **Input and historical regression**
+   - rerun the unchanged Button click and keyboard-focus suite;
+   - confirm the historical RNW focus crash does not recur;
+   - cover the focusable components currently protected by the legacy harness.
+8. **Visual evidence**
+   - inspect an unlocked NovaWindows screenshot for WinAppSDK Composition content;
+   - do not treat a blank WebDriver screenshot as valid visual proof.
+
+### Retire the legacy Windows harness
+
+The `@react-native-windows/automation`/WinAppDriver Jest harness remains only as temporary
+regression coverage.
+
+Remove it after NovaWindows covers:
+
+- stable story selection;
+- attach survival;
+- Button pointer-to-keyboard focus transition;
+- focus regression cases for migrated components;
+- crash detection;
+- deterministic UI Automation assertions; and
+- required evidence/artifacts in CI.
+
+Retirement includes:
+
+- deleting `windows-tests/`, `jest.windows.config.cjs`, and `smoke-stories.json`;
+- removing `@react-native-windows/automation`, WinAppDriver discovery, and legacy scripts;
+- updating Storybook instructions and README; and
+- proving the replacement workflow on Windows before and after deletion.
+
+## Release readiness
+
+After native proof:
+
+1. validate a clean external consumer with no globally installed Appium driver;
+2. inspect the packed artifact and public exports from that consumer;
+3. document verified Node, platform, Xcode, React Native, Mac2, and NovaWindows ranges;
+4. publish native prerequisite troubleshooting;
+5. attach cross-platform digest and ownership evidence to the release change;
+6. confirm the changeset and publishing metadata; and
+7. decide whether the package remains alpha or advances to the next prerelease stage.
 
 ## Open decisions
 
-| Decision                                                         | Recommendation                                                                                                                                               |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Should `terminateLaunchedApp` remain public?                     | Deprecate it in favor of owned lifecycle cleanup. Until removal, continue requiring observed `self` ownership.                                               |
-| Should Windows use Job Objects for descendants?                  | Evaluate an owned Job Object against supported Windows versions. Keep bounded PID-targeted `taskkill /T` only while its integration behavior remains proven. |
-| Should app crashes be product failures or infrastructure errors? | Record an app-under-test crash as `failed` with a distinct lifecycle reason; record driver, host, monitor, and runner crashes as `infrastructureError`.      |
-| Should macOS attach have platform-specific types?                | Move toward a discriminated platform target union in the next intentional public API revision; retain strict runtime validation meanwhile.                   |
-| Should the portability digest include transitive test imports?   | Add deterministic module-graph hashing only if paths can be normalized across machines. Direct linked spec bytes remain the required baseline.               |
-| Should empty manifests ever be valid?                            | Continue failing by default. Add an explicit `allowEmpty` mode only for a demonstrated use case, and report it as skipped rather than passed.                |
-| How should linked tests be discovered?                           | Use actual framework discovery for the documented Mocha path. Parser validation is acceptable only if it proves the same runnable, non-skipped selection.    |
-| Should Run all isolate every story?                              | Keep one warm invocation/session as the default. Add isolation only as an explicit mode for consumers that accept the startup cost.                          |
-| May Storybook control use a remote host?                         | Keep the first release loopback-only. Broaden this only with a separate authentication and threat model.                                                     |
-| Is a Windows Graphics Capture fallback required?                 | Decide after inspecting unlocked real-app screenshots containing Composition content.                                                                        |
-| What is the long-term Appium 4 hosting path?                     | Keep driver-author imports isolated, measure the supported replacement, and require an explicit decision before adopting a private Appium core host.         |
-
-## Release gate
-
-Before treating the package as release-ready:
-
-1. Run one unchanged shared spec manifest on Windows and macOS.
-2. Compare manifest digest, test IDs, and portable command-matrix version.
-3. Prove launch ownership, attach preservation, unexpected termination, cancellation, and bounded
-   cleanup on both platforms.
-4. Validate a clean external consumer with no globally installed Appium driver.
-5. Document verified native dependency and platform compatibility ranges.
-6. Add the required changeset and publishing metadata.
+| Decision                             | Current recommendation                                                                                        | Trigger                                          |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Remove `terminateLaunchedApp`?       | Deprecate in favor of owned session cleanup; continue requiring observed self ownership.                      | Next intentional platform-extension API revision |
+| Use Windows Job Objects?             | Keep bounded PID-targeted `taskkill /T` while proven; evaluate Job Objects for stronger descendant ownership. | Native Windows reliability evidence              |
+| Platform-specific attach types?      | Move toward a discriminated target union; preserve strict runtime validation meanwhile.                       | Next public type revision                        |
+| Hash transitive linked-spec imports? | Add only with a deterministic, cross-platform normalized module graph.                                        | A stale transitive import causes real drift      |
+| Allow empty manifests?               | Continue failing. If a real consumer needs it, make it explicit and report skipped, never passed.             | Demonstrated consumer need                       |
+| Linked-spec discovery strategy?      | Use actual framework discovery for the documented Mocha path.                                                 | Broader framework support or parser mismatch     |
+| Isolate each Run all story?          | Keep one warm session by default; add explicit isolation only for consumers accepting startup cost.           | Measured state-leak failures                     |
+| Remote Storybook control?            | Keep loopback-only until a separate authentication and threat model exists.                                   | Approved remote-host requirement                 |
+| Windows Graphics Capture fallback?   | Decide after unlocked NovaWindows screenshot evidence.                                                        | Native screenshot proof                          |
+| Appium 4 hosting path?               | Keep driver-author imports isolated and require explicit approval before private Appium-core hosting.         | Appium 4 compatibility work                      |

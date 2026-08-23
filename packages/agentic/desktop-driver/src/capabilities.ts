@@ -12,7 +12,7 @@
  * instead of quietly dropping them from the matrix.
  */
 
-import { PORTABLE_COMMAND_MATRIX_VERSION } from './protocol.ts';
+import { PORTABLE_COMMAND_MATRIX_VERSION } from './protocol/versions.ts';
 import type { DesktopBackendId, PortableCommand } from './types.ts';
 
 /** Where a portable command is invoked from. */

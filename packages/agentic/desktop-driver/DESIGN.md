@@ -1,184 +1,185 @@
 # Desktop driver design
 
-This document describes the implemented architecture and the constraints that future changes must
-preserve. See [README.md](./README.md) for the package overview,
-[USAGE.md](./USAGE.md) for integration examples, and
-[NEXT-STEPS.md](./NEXT-STEPS.md) for unfinished work and open decisions.
+This document defines the implemented architecture and invariants of
+`@fluentui-react-native/desktop-driver`.
 
-## Goals and boundaries
+- [README.md](./README.md) introduces the package.
+- [USAGE.md](./USAGE.md) contains operating recipes.
+- [NEXT-STEPS.md](./NEXT-STEPS.md) is the only unfinished-work list.
+- [`src/README.md`](./src/README.md) describes maintainer module boundaries.
 
-`@fluentui-react-native/desktop-driver` provides one deterministic test-authoring model for React
-Native Windows and React Native macOS:
+## Goals
+
+The package provides one deterministic test-authoring model for React Native Windows and React
+Native macOS:
 
 - one shared `*.spec.ts` source runs unchanged on both platforms;
-- tests use standard WebdriverIO sessions, elements, expectations, hooks, page objects, and
-  reporters;
-- platform selection, native driver startup, and capability mapping stay outside shared tests;
-- applications may be launched or safely attached to without confusing resource ownership;
-- Storybook stories can declare serializable tests or link ordinary WebdriverIO specs;
-- command-line, WebdriverIO, standalone, and Storybook service runs use the same lifecycle and
-  artifact contracts; and
-- deterministic suites remain usable from non-interactive agent workflows.
+- tests use normal WebdriverIO APIs;
+- platform selection, native host startup, and capabilities stay outside shared tests;
+- launch and attach have explicit ownership;
+- stories declare serializable inline tests or link ordinary specs;
+- WDIO and Storybook runs share reporting and lifecycle contracts, while standalone sessions use
+  the same ownership-safe host and leave runner-specific reporting to the caller; and
+- non-interactive agents can discover, start, observe, cancel, and clean up runs safely.
 
-The package intentionally does not:
+The package does not automate mobile, browsers, or React Native Web; replace Storybook unit tests;
+provide visual-diff infrastructure; schedule devices; expose arbitrary shell execution; or create
+a second element/session API.
 
-- automate Android, iOS, browsers, or React Native Web;
-- replace Storybook portable stories or its web test runner;
-- provide visual-diff approval infrastructure or device-farm scheduling;
-- expose arbitrary shell execution through Storybook or an agent endpoint;
-- guarantee that platform extension tests are portable; or
-- introduce a second element/session API for ordinary tests.
+## System topology
 
-## Architecture
+### Direct WDIO or standalone session
 
 ```text
-WebdriverIO runner or standalone client
-                |
-                | W3C WebDriver over loopback
-                v
-       owned single-driver host
-          /                 \
-   Mac2Driver       NovaWindowsDriver
-       |                    |
-WebDriverAgentMac   Windows PowerShell
-                |
-                v
-       React Native application
+WDIO runner or standalone client
+              │ W3C WebDriver on loopback
+              ▼
+isolated single-driver child
+       ├─ Mac2Driver ── WebDriverAgentMac
+       ├─ NovaWindowsDriver ── Windows PowerShell
+       └─ FakeDriver ── package-owned W3C routes
+              │
+              ▼
+React Native application
 ```
 
-The primary integration is `createDesktopWdioConfig()`. It:
+The child hosts exactly one backend. Driver classes and Appium base-driver types do not cross the
+process boundary. The package does not run the Appium CLI, extension manager, or multi-driver
+router.
 
-1. validates the portable configuration;
-2. selects one platform backend;
-3. builds protected backend capabilities;
-4. registers launcher and worker services;
-5. groups specs into one warm worker/session by default;
-6. adds the narrow `browser.desktop` command set; and
-7. composes consumer hooks, services, framework options, and reporters.
+### Storybook on-device run
 
-The driver host is a child process that binds to loopback, constructs exactly one native driver,
-publishes health metadata, and owns its logs and cleanup. Driver classes and Appium base-driver
-types do not cross that process boundary. WebdriverIO sees an ordinary WebDriver endpoint.
+```text
+React Native Storybook app
+              │ versioned channel events
+              ▼
+desktop-driver host
+  ├─ Storybook channel and MCP server
+  ├─ RunCoordinator (one active run)
+  └─ one owned WDIO runner
+         └─ isolated single-driver child
+```
 
-The package does not run the Appium CLI, extension manager, or multi-driver router. WebdriverIO,
-Appium, `appium-mac2-driver`, and `appium-novawindows-driver` are direct runtime dependencies.
-The platform drivers import driver-author support from `appium/driver.js`; their hosting imports
-are isolated in `src/server/webdriver/backends.ts`, with `src/server/webdriver/w3c-server.ts` retaining a
-product-owned route-host boundary for future migration.
+Metro remains a separate explicit bundle server. There is no secondary tokenized run server.
 
-### Public surfaces
+## Module architecture
 
-| Export                                              | Responsibility                                                    |
-| --------------------------------------------------- | ----------------------------------------------------------------- |
-| `@fluentui-react-native/desktop-driver`             | Portable selectors, Storybook helper, plans, errors, result types |
-| `@fluentui-react-native/desktop-driver/config`      | Data-only project config schema and Storybook projection          |
-| `@fluentui-react-native/desktop-driver/config/node` | Config loading, resolution, generation projections                |
-| `@fluentui-react-native/desktop-driver/protocol`    | React-Native-safe channel constants, payloads, and decoders       |
-| `@fluentui-react-native/desktop-driver/wdio`        | Config factory and standalone driver lifecycle                    |
-| `@fluentui-react-native/desktop-driver/server`      | Config-driven Storybook desktop host                              |
-| `@fluentui-react-native/desktop-driver/storybook`   | Static manifest and generated-spec tooling                        |
-| `@fluentui-react-native/desktop-driver/macos`       | Explicit macOS-only execute extensions                            |
-| `@fluentui-react-native/desktop-driver/windows`     | Explicit Windows-only execute extensions                          |
+| Module                                        | Responsibility                                                         |
+| --------------------------------------------- | ---------------------------------------------------------------------- |
+| [`src/core/`](./src/core/README.md)           | Runtime-neutral session, reporting, and loopback contracts             |
+| [`src/config/`](./src/config/README.md)       | Project schema, loading, validation, fingerprints, and projections     |
+| [`src/protocol/`](./src/protocol/README.md)   | React-Native-safe host/app wire contract                               |
+| [`src/storybook/`](./src/storybook/README.md) | Static story discovery and generated tests                             |
+| [`src/server/`](./src/server/README.md)       | Host composition, coordination, runner, and native WebDriver child     |
+| [`src/wdio/`](./src/wdio/README.md)           | WDIO config, lifecycle facade, commands, readiness, and standalone API |
+| [`src/cli/`](./src/cli/README.md)             | JSON command-line interface                                            |
+| [`src/platforms/`](./src/platforms/README.md) | Explicit non-portable extensions                                       |
+| [`src/testing/`](./src/testing/README.md)     | In-process fake session for package tests                              |
 
-Platform backend dependencies are loaded only after platform selection and only in the driver-host
-process. The neutral package graph imports no React Native platform fork.
+Dependency direction is enforced by `import-boundaries.test.ts`. Protocol has no Node dependency;
+core and platform modules do not import WDIO/server implementation; server does not import the WDIO
+service layer; and Appium imports remain isolated in `server/webdriver/backends.ts`.
 
-### Project configuration
+## Public surface
 
-One schema-versioned `desktop.config.ts` is the source of truth for application identity,
-Storybook sources, desktop discovery, generated output, channel settings, runner invocation,
-readiness, artifacts, environment overrides, and every platform target. The data-only config
-entry is safe to use from Storybook tooling; Node loading and path resolution live in
-`config/node`.
+| Export               | Responsibility                                                    |
+| -------------------- | ----------------------------------------------------------------- |
+| package root         | `byTestId`, `story`, plan/error/result types                      |
+| `/config`            | Data-only config schema and Storybook story projection            |
+| `/config/node`       | Config loading, resolution, fingerprint, WDIO/server projection   |
+| `/protocol`          | Channel constants, payloads, and runtime decoders                 |
+| `/wdio`              | WDIO config, service, commands, inline plans, standalone sessions |
+| `/server`            | Config-driven Storybook desktop host                              |
+| `/storybook`         | Static manifest and generated-spec tooling                        |
+| `/macos`, `/windows` | Explicit platform-only execute extensions                         |
 
-The loader validates every platform, rejects unknown keys, canonicalizes existing inputs, confines
-generated and artifact output to `rootDir`, and verifies dotted application-manifest references.
-Generation applies configured story globs and atomically commits the RN runtime projection and
-generated spec before the manifest commit marker.
+The CLI is exposed through `bin`, not a package subpath. Native host internals and test helpers are
+not exported.
 
-## Portability contract
+## Project config
 
-### Test source
+One schema-versioned `desktop.config.ts` is authoritative for:
+
+- application manifest and readiness `testID`;
+- Storybook source globs and channel endpoint;
+- generated, fake-scene, artifact, framework, session, and runner settings;
+- environment variable names; and
+- fake, macOS, and Windows target defaults.
+
+### Validation
+
+The loader:
+
+- rejects unknown keys;
+- validates every platform block;
+- checks enums, strings, booleans, ports, and timeouts;
+- allows only loopback listeners;
+- canonicalizes existing input paths;
+- confines output to `rootDir`;
+- resolves and validates application-manifest field references;
+- reports non-sensitive source provenance; and
+- verifies generated manifest fingerprints.
+
+Platform overrides cannot change discovery inputs. The same config therefore produces one portable
+manifest on Windows and macOS.
+
+### Generated transaction
+
+Generation statically scans configured story globs and creates:
+
+1. `desktop-runtime.generated.ts`;
+2. `story-plans.generated.spec.ts`; and
+3. `story-tests.manifest.json` last as the commit marker.
+
+The manifest digest covers normalized IDs, tags, plans, relative paths, linked spec bytes, and the
+config fingerprint. Consumers recompute and validate it before execution.
+
+## Portable test contract
 
 A shared spec:
 
-- contains no platform branch;
+- has no platform branch;
 - imports no platform extension;
-- uses only the documented portable command set;
-- runs from the same path in Windows and macOS jobs; and
+- uses the documented portable matrix;
+- runs from the same source path on both platforms; and
 - uses normal framework discovery, hooks, assertions, retries, and page objects.
 
-Shared-spec globs are expanded before validation and reject platform-named files. Platform-specific
-escape hatches belong in separately named suites and do not satisfy shared coverage.
+Shared-spec paths are expanded and rejected when the spec itself is platform-named. Checkout path
+segments do not affect that decision.
 
 ### Selectors
 
-React Native maps `testID` to UI Automation `AutomationId` on Windows and the native accessibility
-identifier on macOS. Both native drivers expose it through the W3C accessibility-ID strategy.
+React Native maps `testID` to UI Automation `AutomationId` on Windows and accessibility identifier
+on macOS. `byTestId()` validates and emits the W3C accessibility-ID selector.
 
-Selector priority is:
+Priority:
 
-1. `testID` through `byTestId()`;
+1. `testID`;
 2. role plus accessible name;
 3. accessible name;
 4. visible text as an explicit fallback; and
-5. platform-specific selectors through an extension subpath.
+5. platform-only selectors in platform-only suites.
 
-`byTestId()` rejects identifiers that WebdriverIO would reinterpret as another selector strategy.
-XPath, predicate strings, class chains, layout order, and coordinates are not portable API.
-
-`getText()` reads the element's own accessible name. On React Native Windows, a `Pressable` whose
-label exists only in child `Text` may expose an empty name. Tests should assert text on the element
-that owns it or give the control an explicit `accessibilityLabel`.
+XPath, predicate strings, class chains, layout order, and coordinates are not portable.
 
 ### Commands
 
-The versioned portable matrix is reported by `browser.desktop.getSessionInfo()`. A missing portable
-capability is an infrastructure error, not a skip.
+Standard WebdriverIO owns lookup, display/enabled/selected state, click, values, text, waits, source,
+and screenshots. `browser.desktop` adds only operations that native drivers cannot express through
+browser DOM scripts or that expose package lifecycle:
 
-| Command                                     | Surface              |
-| ------------------------------------------- | -------------------- |
-| `findElement`, `findElements`, `isExisting` | Standard WebdriverIO |
-| `isDisplayed`, `isEnabled`, `isSelected`    | Standard WebdriverIO |
-| `click`, `clearValue`, `setValue`           | Standard WebdriverIO |
-| `getText`, `getValue`                       | Standard WebdriverIO |
-| `waitForDisplayed`, `waitForExist`          | Standard WebdriverIO |
-| `getPageSource`, `takeScreenshot`           | Standard WebdriverIO |
-| `isFocused`, `scrollIntoView`               | `browser.desktop`    |
+- session info;
+- app-state waits;
+- scoped artifact capture;
+- Storybook select/wait;
+- native focus; and
+- native scroll.
 
-Native desktop drivers cannot execute the DOM scripts that WebdriverIO's browser implementations of
-focus and scrolling use:
+The versioned matrix is reported at runtime. A missing required command is an infrastructure error.
+Mac2 omits `isEnabled` for React Native macOS Fabric 0.81 because AXEnabled is not reliable; shared
+tests assert disabled inertness instead.
 
-- `isFocused()` reads `HasKeyboardFocus` on Windows and `focused` on macOS, falling back to the W3C
-  active-element route only when a backend supports it.
-- `scrollIntoView()` returns when the element is already displayed; otherwise it sends a native
-  wheel delta and verifies the result.
-
-Generated capabilities pin `browserName: ''` so WebdriverIO selects the same native command
-implementations for both backends. The portability boundary is the tested WebdriverIO behavior,
-not backend implementation equivalence.
-
-React Native macOS Fabric 0.81 does not project `accessibilityState.disabled` to AXEnabled, so
-Mac2 cannot reliably implement `isEnabled()` for React Native controls. The runtime capability
-report omits that command on Mac2; shared tests assert disabled inertness instead.
-
-The package adds only these browser commands:
-
-```ts
-interface DesktopBrowserCommands {
-  getSessionInfo(): Promise<DesktopSessionInfo>;
-  waitForAppState(state: DesktopAppState, options?: { timeout?: number }): Promise<void>;
-  captureArtifacts(reason: string): Promise<ArtifactManifest>;
-  selectStory(storyId: string): Promise<void>;
-  waitForStory(storyId: string): Promise<void>;
-  isFocused(selector: string): Promise<boolean>;
-  scrollIntoView(selector: string): Promise<void>;
-}
-```
-
-## Session ownership
-
-Every application target is explicit:
+## Ownership
 
 ```ts
 type DesktopAppTarget =
@@ -198,289 +199,158 @@ type DesktopAppTarget =
     };
 ```
 
-Only `launch` grants permission to terminate the application. `attach` records the app and window
-as external resources and must leave them running.
+Only launch grants permission to stop the application. Attach records the app/window as external.
 
-Ownership-sensitive backend capabilities are protected from consumer overrides, including launch,
-attach, routing, and shutdown controls. Direct platform termination methods require positively
-observed `self` ownership and otherwise fail closed.
+Protected capabilities prevent consumers from weakening routing or cleanup. Ownership records
+every resource the package can positively observe: self-owned driver-host processes and ports, plus
+externally owned Windows windows/app PIDs found during attach discovery. Some native backends do
+not expose application or native-driver PIDs; the package does not manufacture those records.
+Cleanup never targets process names, attempts graceful shutdown first, uses deadlines, escalates
+only for self-owned resources, and appends cleanup failures to the primary result.
 
-Every owned PID, port, window, endpoint, and session is written to `ownership.json`. Cleanup:
+### Windows attach discovery
 
-- targets exact recorded resources, never a process name;
-- attempts graceful shutdown first;
-- uses a bounded deadline;
-- escalates to process-tree termination only for owned resources; and
-- preserves cleanup failures alongside the primary run failure.
+NovaWindows attaches with `appium:appTopLevelWindow`.
 
-POSIX host and runner processes use dedicated process groups. Windows runner and host descendants
-are terminated by exact PID tree with `taskkill /T`; a future Job Object implementation remains an
-option after cross-version proof.
+1. A temporary root-desktop session enumerates top-level windows.
+2. Window attributes are read with bounded concurrency.
+3. PID, handle, identity, or title must select exactly one candidate.
+4. Exact title wins over substring.
+5. The temporary session is always deleted.
+6. The normalized handle starts the real application session.
 
-### Windows attach
-
-NovaWindows attaches through `appium:appTopLevelWindow`, so non-handle targets are resolved before
-the real session starts:
-
-1. a temporary root-desktop session enumerates top-level windows;
-2. process ID, identity, or title must select exactly one window;
-3. the handle, title, and owning PID are recorded as external;
-4. a `windowDiscovered` event is emitted; and
-5. the real session starts with the normalized native handle.
-
-An exact title match wins over a substring match. Ambiguity is always an error. `appium:app` and
-`appium:appTopLevelWindow` are mutually exclusive, so root discovery and application attachment are
-separate sessions.
+Handles are never cached across runs.
 
 ### macOS attach
 
-Mac2 attach currently requires `identity`, the bundle identifier. PID, title, and native-window
-selectors are rejected until a verified Mac2 discovery path exists. This is runtime-enforced even
-though the current cross-platform target type still represents all selectors.
+Mac2 attach currently accepts only bundle identity. PID, title, and native-window selectors fail
+validation until a verified discovery path exists.
 
 ## Lifecycle and readiness
 
-The common state model is:
-
 ```text
-created -> starting|attaching -> connected -> ready -> stopping -> stopped
-                                      |          |
-                                      +-> exited +-> crashed
-                                      +-> timed_out
+created → starting|attaching → connected → ready → stopping → stopped
+                                ├─ exited
+                                ├─ crashed
+                                └─ timed_out
 ```
 
-Normalized events include:
+Readiness can require:
 
-- `launchRequested`
-- `driverHostStarted`
-- `processStarted`
-- `windowDiscovered`
-- `webDriverSessionCreated`
-- `ready`
-- `exitObserved`
-- `crashObserved`
-- `sessionCloseRequested`
-- `sessionClosed`
-- `shutdownRequested`
-- `shutdownCompleted`
-- `timedOut`
-- `monitorError`
+- observed application window/state;
+- responsive WebDriver session;
+- Storybook channel; and
+- visible application-shell `testID`.
 
-Readiness may require an observed window, a responsive WebDriver session, the Storybook channel,
-and a visible `testID`. Windows observes a native handle; Mac2, which has no window-handles route,
-queries the configured application's XCTest state. Session hooks do not by themselves prove
-readiness. Driver-host and attached application liveness are monitored after readiness; a terminal
-lifecycle state aborts waits and cannot produce a passing run.
+Windows observes a discovered handle. Mac2 queries XCTest application state because it has no
+window-handles route.
 
-The current backend contract does not expose every launched application or native-driver PID.
-Where a PID cannot be observed, the package must not manufacture ownership or process telemetry.
+Post-readiness monitoring prevents driver-host death, and death of any app PID the backend exposed,
+from producing a passing run. Backends that do not expose an app PID cannot provide process-level
+app monitoring; native Phase 6 evidence must state that limitation. Attach closure emits
+session-close events, not application-shutdown events.
 
-## Runner model
+## Run and report model
 
-WebdriverIO with Mocha is the documented default. Jasmine and Cucumber work through their standard
-adapters. `startDesktopDriver()` supports Jest, Vitest, `node:test`, scripts, and other consumers
-without introducing another test API.
+`sessionStrategy: 'suite'` groups exact manifest specs into one WDIO worker and warm session.
+`sessionStrategy: 'spec'` writes isolated worker reports that the launcher merges.
 
-`sessionStrategy: 'suite'` is the default. It groups manifest-referenced specs into one ordered WebdriverIO
-unit, producing one worker and one warm desktop session. Desktop automation is a single shared
-resource; parallelism is safe only when every worker owns an isolated application, endpoint, port
-set, Storybook channel, and artifact directory.
+Result status is:
 
-The launcher owns driver-host startup and endpoint publication. Workers consume the published
-endpoint, apply readiness, augment `browser.desktop`, record results, and delete their sessions.
-`DesktopWdioService` remains the WebdriverIO compatibility facade while run-context validation,
-readiness, standalone startup, and reporting live in separate modules.
+- `passed`
+- `failed`
+- `skipped`
+- `cancelled`
+- `timed_out`
+- `infrastructureError`
 
-The driver host strips loader registrations such as `--require`, `--import`, and `--loader` from
-inherited `NODE_OPTIONS`. WebdriverIO uses a `tsx` registration to load TypeScript configuration;
-allowing that hook into the isolated driver dependency tree changes module resolution and breaks
-native backend startup.
+Configuration, ownership, capability, driver, transport, spawn, readiness, and monitor failures are
+infrastructure errors. App-under-test crashes are test failures with distinct lifecycle reason.
+Timeout and cancellation remain distinct.
 
-On Windows, Node cannot directly spawn a `.cmd` launcher. The Storybook executor uses an explicit
-`cmd.exe /d /s /c` invocation with validated quoting rather than `shell: true`, which would flatten
-arguments unsafely.
+Startup and readiness failures write lifecycle, `run.json`, and JUnit even before a session exists.
+Framework results stream from workers through a private marker protocol that tolerates WDIO's
+worker-prefix logging. Completed worker artifacts remain the final source of truth.
+
+`captureArtifacts()` returns only files captured by that call. Root reports include worker, startup,
+and cleanup results. Event payloads are bounded/redacted; complete `run.json` is not truncated.
 
 ## Storybook model
 
-### Static test declarations
+Story modules are parsed, never executed.
 
-A story opts in through `parameters.desktopTest`:
+- **Inline plan:** a closed serializable action set compiled into a generated WDIO test.
+- **Linked spec:** arbitrary host-side TypeScript with the exact generated story tag.
 
-1. an **inline plan** for a closed, serializable set of common interactions; or
-2. a **linked spec** for arbitrary host-side TypeScript.
+The app never receives code, commands, paths, or grep expressions.
 
-The app never receives or evaluates test code. `desktop-driver stories generate` parses story
-source statically and emits:
+The host uses Storybook's maintained `createChannelServer` and publishes:
 
-- `story-tests.manifest.json`, containing stable story IDs, exact tags, relocatable spec paths, exact
-  Mocha grep, and an executable-content digest; and
-- `story-plans.generated.spec.ts`, containing one tagged Mocha test per inline plan; and
-- `desktop-runtime.generated.ts`, containing only the RN-safe channel and manifest projection.
+| Event                    | Purpose                                                  |
+| ------------------------ | -------------------------------------------------------- |
+| `desktopTestHostReady`   | Service identity, manifest, tested stories, capabilities |
+| `desktopTestHostClosing` | Invalidate current host                                  |
+| `desktopTestRunRequest`  | Request selected/all tests                               |
+| `desktopTestRunStatus`   | Ordered progress and terminal status                     |
+| `desktopTestRunCancel`   | Cancel active run                                        |
 
-The generator rejects missing roots, empty tested-story sets, duplicate plan or story IDs,
-malformed or indirect hidden declarations, paths outside configured roots, and linked specs
-without a runnable tagged suite. It writes output only after validation succeeds.
+The coordinator reserves the single active slot synchronously, validates protocol/service/manifest
+and story IDs, owns cancellation, and isolates broken channel clients from run state.
 
-The manifest digest includes normalized entries and linked spec bytes. Consumers recompute it when
-loading the manifest, so stale generated output or modified linked code fails before execution.
-Transitive modules imported by a linked spec are not currently part of the digest.
+## Native host
 
-### Story selection
+The native child:
 
-Linked specs call `story.select(storyId)`. Generated inline tests call the equivalent desktop
-browser command. The host-side Storybook controller sends the selection through the existing
-channel server and waits for the matching `storyRendered` acknowledgement.
+- binds only loopback;
+- validates an allowlisted config;
+- constructs one backend;
+- strips inherited Node loader hooks;
+- bounds startup output buffers;
+- exits when its parent disappears;
+- removes temporary work directories it owns; and
+- returns W3C errors for malformed or oversized bodies without destroying later serviceability.
 
-### Desktop host
-
-The Storybook app cannot execute Node, WebdriverIO, or native automation. `desktop-driver host`
-uses Storybook's maintained `createChannelServer` and combines:
-
-- Storybook WebSocket control and MCP;
-- a manifest-constrained WebdriverIO executor; and
-- channel-native readiness, run request, progress, result, and cancellation events.
-
-The app sees one loopback channel. A transport-free in-process coordinator validates requests,
-owns the single-active-run invariant, and publishes progress directly through that channel. The
-host allows one mutating run at a time and accepts only story IDs already present
-in the manifest. No device-supplied value can become a command, module path, or grep expression.
-
-| Channel event            | Purpose                                     |
-| ------------------------ | ------------------------------------------- |
-| `desktopTestHostReady`   | Service identity, protocol, manifest digest |
-| `desktopTestHostClosing` | Invalidate the current host identity        |
-| `desktopTestRunRequest`  | Start selected or all-story execution       |
-| `desktopTestRunStatus`   | Acceptance, progress, and terminal result   |
-| `desktopTestRunCancel`   | Bounded cancellation of the active run      |
-
-Console and agent clients use `desktop-driver stories list|select|args|smoke`; applications no
-longer carry a second Storybook REST implementation. Supervisors can consume `config resolve` and
-the host's atomic `--ready-file` output rather than duplicating ports or identities.
-
-The spawned runner inherits the service environment. Consumers must start explicit platform
-scripts; otherwise a configuration that defaults to `fake` can return a valid fake-backend pass
-without touching the real app.
-
-## Results and artifacts
-
-Each run writes:
-
-```text
-artifacts/desktop-tests/<run-id>/
-  run.json
-  events.ndjson
-  junit.xml
-  ownership.json
-  driver-host.log
-  tests/<test-id>/
-    result.json
-    source.xml
-    screenshot.png
-```
-
-`run.json` is the complete machine-readable result. `events.ndjson` records bounded lifecycle
-evidence, and JUnit supports CI reporting. Test failures may capture accessibility source and a
-screenshot.
-
-Artifact paths are confined to the run directory. Sensitive keys such as tokens, authorization,
-clipboard values, environment, and entered values are redacted before persistence. Screenshots,
-source, and logs can still contain private content and must remain ignored and be reviewed before
-sharing.
-
-## Platform constraints
-
-### Windows
-
-- Tests require a real, interactive, unlocked desktop.
-- React Native Windows pressables generally expose no UI Automation `InvokePattern`; clicks use
-  synthetic input and fail on a locked workstation.
-- A locked session can still return source, attributes, and screenshots, making the failure look
-  like an application defect.
-- NovaWindows is embedded and uses the built-in Windows PowerShell runtime; no native driver
-  service or Developer Mode is required.
-- Window enumeration is intentionally performed per run; caching a native handle risks attaching
-  to an unrelated later window.
-- WebDriver screenshots may not reliably capture all WinAppSDK Composition content. Visual evidence
-  requires separate real-platform verification.
-
-### macOS
-
-- macOS 11.3+, Xcode 13+, Command Line Tools, Xcode Helper accessibility permission, automation
-  mode, a logged-in GUI session, and a writable WDA build cache are required.
-- Mac2 owns WebDriverAgentMac/xcodebuild startup unless configured against an external WDA.
-- Attach behavior, window observation, focused-state lookup, scrolling, and bounded cancellation
-  require continued real-platform compatibility coverage.
-
-### Fake backend
-
-The fake backend is a deterministic contract endpoint for package plumbing. It covers the
-single-driver host, commands, Storybook controller, service, generated plans, lifecycle, and
-artifact pipeline without a GUI. It does not prove native driver behavior and cannot substitute for
-the identical suite on Windows and macOS.
+`backends.ts` is the only Appium driver-author import site. The package-owned W3C route host remains
+the stable fake-backend and future-hosting boundary.
 
 ## Security invariants
 
-- All hosts and services bind only to allowlisted loopback addresses.
-- Attach never grants termination ownership.
-- Cleanup never targets a process by name.
-- Backend capability overrides cannot weaken ownership or routing.
-- Storybook requests cannot choose commands, paths, or test code.
-- Inline plans use a closed schema and `testID` selectors only.
-- Platform commands capable of arbitrary local execution stay disabled by default.
-- Artifact paths remain inside the run directory and sensitive fields are redacted.
-- Protocol and manifest versions are validated at every process boundary.
+- listeners are loopback-only;
+- attach never grants termination ownership;
+- cleanup never targets a process name;
+- routing/ownership capabilities cannot be overridden;
+- device values cannot become commands, paths, or code;
+- inline plans use a closed schema and `testID`;
+- arbitrary platform execution stays outside the portable API;
+- artifacts stay inside the run directory and sensitive fields are redacted; and
+- config, protocol, manifest, endpoint, and host versions are validated at boundaries.
 
-## Validation strategy
+## Validation
 
-The package uses four complementary layers:
+1. Unit tests cover config, protocol, lifecycle, ownership, reporting, process supervision, and
+   boundaries.
+2. Fake contract tests exercise W3C commands, Storybook control, generated plans, progress, and
+   artifacts.
+3. Shared native tests run one unchanged manifest on macOS and Windows.
+4. Platform-specific proof covers native launch/attach, process ownership, input, screenshots,
+   cancellation, and prerequisites.
 
-1. **Unit tests** cover configuration, capabilities, selectors, lifecycle, ownership, process
-   supervision, manifest validation, redaction, and protocol behavior.
-2. **Fake-backend contract tests** drive the full WebdriverIO and Storybook paths without native
-   dependencies.
-3. **Shared real-platform tests** run the exact same spec digest and test IDs on Windows and macOS.
-4. **Platform-specific integration tests** prove launch, attach, native driver process ownership,
-   readiness, cancellation, screenshots, and prerequisites.
+Fake success is necessary but not sufficient for native compatibility.
 
-A portable command is added only with one unchanged contract assertion on both real platforms.
-Platform jobs remain serial until isolated multi-session execution is explicitly designed and
-measured.
+## Alternatives
 
-## Alternatives and rationale
+- **WinAppDriver:** retained only in the app's temporary legacy regression harness; not a supported
+  desktop-driver backend.
+- **Private Appium server:** excluded unless Appium 4 forces an explicit, reviewed hosting change.
+- **`agent-device`:** useful for macOS exploration, not a cross-platform deterministic suite.
+- **MCP:** an optional projection of stable operations, never the internal run transport.
 
-### WinAppDriver
+## Maintainer constraints
 
-WinAppDriver and `appium-windows-driver` are unmaintained and require a separately installed native
-service. The package does not expose that backend; NovaWindows is the only supported Windows
-backend. Real-platform contract and performance evidence remains a release gate.
-
-### Private Appium server
-
-Running Appium core would use the drivers through their best-supported loader, but would add the CLI
-or router architecture deliberately excluded from this product. It remains a decision-gated
-fallback, not an implicit migration path.
-
-### `agent-device`
-
-`agent-device` offers useful macOS exploration, snapshots, evidence, and replay patterns, but has no
-Windows backend and does not expose the common local WebDriver endpoint this package requires. It
-may be used independently for agent-led exploration; it is not a deterministic suite dependency.
-
-### MCP
-
-MCP can eventually expose coarse agent operations such as listing stories, starting allowlisted
-runs, and reading structured results. It is not the internal transport and is not needed for normal
-WebdriverIO or Storybook execution. Any future MCP surface must call the same service handlers,
-default to stdio, and expose no shell tool.
-
-## Implementation constraints
-
-- Keep explicit named exports; do not introduce wildcard barrels.
-- Keep backend imports out of neutral modules.
-- Keep `import.meta` entry modules out of the Jest CommonJS graph.
-- Keep generated Storybook tests and artifacts uncommitted.
-- Preserve the package-version drift test while `PACKAGE_VERSION` remains a literal.
-- Keep consumer hooks and reporters composed rather than overwritten.
-- Preserve primary failures when cleanup also fails.
-- Update this document whenever ownership, portability, protocol, process topology, or security
-  behavior changes.
+- use explicit named exports;
+- keep backend imports out of neutral modules;
+- keep entry-only `import.meta` behavior out of Jest-loaded modules;
+- keep generated files and artifacts uncommitted;
+- preserve primary failures when cleanup also fails;
+- run clean build and pack inspection after file moves or export changes; and
+- update this document when process topology, ownership, protocol, portability, or security changes.

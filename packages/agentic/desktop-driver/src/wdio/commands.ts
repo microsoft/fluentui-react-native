@@ -11,7 +11,7 @@ import { PORTABLE_COMMANDS, portableCommandsFor, platformExtensionsFor } from '.
 import { DesktopDriverError } from '../errors.ts';
 import { isTerminalState } from '../lifecycle.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
-import { DESKTOP_PROTOCOL_VERSION, PORTABLE_COMMAND_MATRIX_VERSION } from '../protocol.ts';
+import { DESKTOP_PROTOCOL_VERSION, PORTABLE_COMMAND_MATRIX_VERSION } from '../protocol/versions.ts';
 import { byTestId } from '../selectors.ts';
 import type { ArtifactStore } from '../artifacts.ts';
 import type { DesktopBrowserCommands, DesktopBrowserLike } from '../core/session.ts';

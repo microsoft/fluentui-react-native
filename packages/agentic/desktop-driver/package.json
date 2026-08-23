@@ -21,9 +21,16 @@
     "!lib/storybook/run-executor.*",
     "!lib/storybook/serve.*",
     "!lib/storybook/test-service.*",
+    "!lib/testing/**",
+    "!lib/protocol.*",
+    "!lib/server/webdriver/index.*",
     "README.md",
     "USAGE.md",
-    "DESIGN.md"
+    "DESIGN.md",
+    "NEXT-STEPS.md",
+    "suggestions.md",
+    "src/README.md",
+    "src/**/README.md"
   ],
   "type": "module",
   "main": "lib/index.js",

@@ -18,7 +18,7 @@ import * as path from 'node:path';
 import { parse, type ParseResult } from '@babel/parser';
 
 import { DesktopValidationError } from '../errors.ts';
-import { STORY_PLAN_SCHEMA_VERSION } from '../protocol.ts';
+import { STORY_PLAN_SCHEMA_VERSION } from '../protocol/versions.ts';
 import { isSpecPlan, validateStoryPlan } from '../story-plan.ts';
 import { storyGrep, storyNameFromExport, storyTag, toStoryId } from './story-id.ts';
 import type { StoryPlan, StoryTestManifest, StoryTestManifestEntry } from '../types.ts';

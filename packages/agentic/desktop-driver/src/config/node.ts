@@ -485,6 +485,7 @@ function resolutionSources(
   sources.logLevel =
     environmentSource(config, env, 'logLevel', 'DESKTOP_TEST_LOG_LEVEL') ??
     (config.base?.driverHost?.logLevel !== undefined ? 'base.driverHost.logLevel' : 'default:warn');
+  sources.storyFilter = environmentSource(config, env, 'storyFilter', 'DESKTOP_TEST_GREP') ?? 'unset';
   for (const field of ['requireWindow', 'requireStorybookChannel', 'timeout'] as const) {
     sources[`readiness.${field}`] =
       platformConfig.readiness?.[field] !== undefined
@@ -692,6 +693,20 @@ export function toDesktopHostOptions(project: ResolvedDesktopProject): {
 
 /** JSON-safe projection for scripts and diagnostics. */
 export function serializeResolvedDesktopProject(project: ResolvedDesktopProject): Record<string, unknown> {
+  const driver: Record<string, unknown> = {
+    ...project.driver,
+    target: { ...project.driver.target } as Record<string, unknown>,
+  };
+  const target = driver.target as Record<string, unknown>;
+  for (const field of ['app', 'identity', 'processId', 'windowHandle', 'title'] as const) {
+    const source = project.sources[`target.${field}`];
+    if (source?.startsWith('environment:') && field in target) {
+      target[field] = `[from ${source}]`;
+    }
+  }
+  if (project.sources.logLevel?.startsWith('environment:')) {
+    driver.logLevel = `[from ${project.sources.logLevel}]`;
+  }
   return {
     configFile: project.configFile,
     configFingerprint: project.configFingerprint,
@@ -700,7 +715,7 @@ export function serializeResolvedDesktopProject(project: ResolvedDesktopProject)
     sources: project.sources,
     storybook: project.storybook,
     tests: project.tests,
-    driver: project.driver,
-    storyFilter: project.storyFilter,
+    driver,
+    storyFilter: project.sources.storyFilter?.startsWith('environment:') ? `[from ${project.sources.storyFilter}]` : project.storyFilter,
   };
 }

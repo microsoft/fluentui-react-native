@@ -9,7 +9,7 @@
 
 import { DesktopValidationError } from './errors.ts';
 import { assertPortableTestId } from './selectors.ts';
-import { STORY_PLAN_SCHEMA_VERSION } from './protocol.ts';
+import { STORY_PLAN_SCHEMA_VERSION } from './protocol/versions.ts';
 import type { InlineStoryPlan, SpecStoryPlan, StoryPlan, StoryPlanStep, StoryStepProperty } from './types.ts';
 import { expectEnum, isJsonSerializable, isNonEmptyString, isPlainObject, ValidationIssues } from './validate.ts';
 

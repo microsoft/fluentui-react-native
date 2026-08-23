@@ -1,11 +1,11 @@
-import { DesktopDriverError } from './errors.ts';
+import { DesktopDriverError } from '../errors.ts';
 import {
   createRootSessionEnumerator,
   discoverAttachWindow,
   normalizeWindowHandle,
   selectWindow,
   type DesktopWindowCandidate,
-} from './wdio/window-discovery.ts';
+} from './window-discovery.ts';
 
 const storybook: DesktopWindowCandidate = {
   handle: '0x501e2',

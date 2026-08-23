@@ -12,7 +12,7 @@ import * as path from 'node:path';
 
 import { DesktopDriverError } from './errors.ts';
 import { PORTABLE_COMMAND_MATRIX_VERSION } from './capabilities.ts';
-import { DESKTOP_PROTOCOL_VERSION } from './protocol.ts';
+import { DESKTOP_PROTOCOL_VERSION } from './protocol/versions.ts';
 import { renderJUnit } from './junit.ts';
 import type { ArtifactManifest, DesktopLifecycleEvent, DesktopRunReport, DesktopTestResult } from './types.ts';
 

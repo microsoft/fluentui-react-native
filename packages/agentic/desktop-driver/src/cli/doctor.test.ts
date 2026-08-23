@@ -1,5 +1,5 @@
-import { doctor } from './cli/commands.ts';
-import { checkWindowsPrerequisites, isSessionLocked } from './platforms/windows.ts';
+import { doctor } from './commands.ts';
+import { checkWindowsPrerequisites, isSessionLocked } from '../platforms/windows.ts';
 
 const isWindows = process.platform === 'win32';
 const describeOnWindows = isWindows ? describe : describe.skip;

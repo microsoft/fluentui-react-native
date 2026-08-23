@@ -2,10 +2,10 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { emitGeneratedStorySpec, verifyLinkedSpecTags } from './storybook/generated-spec.ts';
-import { generateStories } from './cli/commands.ts';
-import { findStoryFiles, generateStoryTestManifest, resolveLinkedSpec, validateStoryTestManifest } from './storybook/manifest.ts';
-import { StoryController } from './server/channel/client.ts';
+import { emitGeneratedStorySpec, verifyLinkedSpecTags } from './generated-spec.ts';
+import { generateStories } from '../cli/commands.ts';
+import { findStoryFiles, generateStoryTestManifest, resolveLinkedSpec, validateStoryTestManifest } from './manifest.ts';
+import { StoryController } from '../server/channel/client.ts';
 
 function workspace(): string {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-storybook-'));

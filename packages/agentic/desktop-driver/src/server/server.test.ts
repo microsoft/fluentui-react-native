@@ -11,9 +11,9 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { buildInvocation, createWebdriverIoRunExecutor, resolveRunnerCommand } from './server/runner/wdio-runner.ts';
-import { RunCoordinator } from './server/coordinator.ts';
-import { encodeDesktopResult } from './server/runner/reporter-protocol.ts';
+import { buildInvocation, createWebdriverIoRunExecutor, resolveRunnerCommand } from './runner/wdio-runner.ts';
+import { RunCoordinator } from './coordinator.ts';
+import { encodeDesktopResult } from './runner/reporter-protocol.ts';
 import {
   DESKTOP_HOST_READY_EVENT,
   DESKTOP_RUN_REQUEST_EVENT,
@@ -21,11 +21,11 @@ import {
   startDesktopChannelBridge,
   type ChannelServerLike,
   type ChannelSocketLike,
-} from './server/channel/bridge.ts';
-import { loadStoryTestManifest, startDesktopStorybookHost } from './server/host.ts';
-import { digestEntries } from './storybook/manifest.ts';
-import { DesktopCancelledError, DesktopValidationError } from './errors.ts';
-import type { StoryTestManifest } from './types.ts';
+} from './channel/bridge.ts';
+import { loadStoryTestManifest, startDesktopStorybookHost } from './host.ts';
+import { digestEntries } from '../storybook/manifest.ts';
+import { DesktopCancelledError, DesktopValidationError } from '../errors.ts';
+import type { StoryTestManifest } from '../types.ts';
 
 const manifest: StoryTestManifest = {
   version: 1,

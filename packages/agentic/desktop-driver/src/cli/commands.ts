@@ -19,7 +19,7 @@ import { checkMacosPrerequisites } from '../platforms/macos.ts';
 import { hostForUrl } from '../net.ts';
 import { isLoopbackHost } from '../core/loopback.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
-import { DESKTOP_PROTOCOL_VERSION, PORTABLE_COMMAND_MATRIX_VERSION } from '../protocol.ts';
+import { DESKTOP_PROTOCOL_VERSION, PORTABLE_COMMAND_MATRIX_VERSION } from '../protocol/versions.ts';
 import { StoryController } from '../server/channel/client.ts';
 import { checkWindowsPrerequisites } from '../platforms/windows.ts';
 import type { DesktopPlatform, DesktopPrerequisiteStatus, StoryTestManifest } from '../types.ts';

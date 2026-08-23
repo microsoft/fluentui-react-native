@@ -11,7 +11,7 @@ export type { DesktopBrowserCommands } from './core/session.ts';
 
 export { DesktopCancelledError, DesktopDriverError, DesktopValidationError, type DesktopErrorKind } from './errors.ts';
 
-export { DESKTOP_PROTOCOL_VERSION, STORY_PLAN_SCHEMA_VERSION } from './protocol.ts';
+export { DESKTOP_PROTOCOL_VERSION, STORY_PLAN_SCHEMA_VERSION } from './protocol/versions.ts';
 export { PACKAGE_VERSION } from './package-version.ts';
 
 export type {

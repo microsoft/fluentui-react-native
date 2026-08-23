@@ -1,35 +1,53 @@
 # `@fluentui-react-native/desktop-driver`
 
-Write one WebdriverIO test and run it unchanged against React Native Windows and React Native
-macOS applications.
+Write one WebdriverIO test and run it unchanged against React Native Windows and React Native macOS.
 
-> Status: alpha. The public API may change before 1.0.
+> **Status:** alpha. Refactor Phases 0-5 are complete. Native release proof and legacy Windows
+> harness retirement remain in [NEXT-STEPS.md](./NEXT-STEPS.md).
 
-## Overview
+## What the package provides
 
-The desktop driver keeps platform automation out of test source. Tests use normal WebdriverIO
-sessions, elements, expectations, hooks, page objects, and reporters. The package adds:
+- ordinary WebdriverIO sessions, elements, expectations, hooks, page objects, and reporters;
+- one schema-versioned project config for stories, tests, targets, readiness, runner, and artifacts;
+- a validated `testID` selector and small portable desktop command matrix;
+- one owned, loopback-only native WebDriver host;
+- ownership-safe launch and attach modes;
+- static Storybook test discovery with inline plans or linked specs;
+- one Storybook channel for control, MCP, on-device runs, progress, and cancellation;
+- structured run reports, lifecycle events, JUnit, ownership, source, screenshots, and logs; and
+- an in-process fake backend for deterministic package and CI coverage.
 
-- a validated `testID` selector;
-- an owned, loopback-only host for one native desktop driver;
-- safe launch and attach lifecycle modes;
-- a small portable `browser.desktop` command set;
-- Storybook story discovery, navigation, and on-device run controls; and
-- structured lifecycle events, JUnit, screenshots, source, and ownership artifacts.
+The package embeds WebdriverIO, Appium, Mac2, and NovaWindows. It does not run the Appium CLI,
+expose native driver objects, automate mobile or browser targets, or replace Storybook's unit-test
+tooling.
 
-The same shared spec runs in separate Windows and macOS jobs. Platform-specific commands remain
-available through explicit extension exports, but a test that uses them is not part of the portable
-suite.
+## Requirements
 
-The package does not automate mobile platforms or browsers, replace Storybook's unit-test tooling,
-or run the Appium CLI. It embeds WebdriverIO, Appium, Mac2, and NovaWindows as runtime dependencies
-behind an isolated single-driver host and uses Storybook's maintained React Native channel server
-for its control plane.
+- Node 22.12 or newer;
+- WebdriverIO 9 runner/framework packages in the consuming test workspace;
+- an interactive GUI session for real native runs;
+- macOS 11.3+ and Xcode 13+ for Mac2; or
+- Windows 10+ and Windows PowerShell for NovaWindows.
+
+Windows input requires an unlocked desktop. Fake-backend success does not prove native behavior.
+
+## Install
+
+```sh
+yarn add --dev \
+  @fluentui-react-native/desktop-driver \
+  @wdio/cli \
+  @wdio/local-runner \
+  @wdio/mocha-framework \
+  @wdio/spec-reporter \
+  expect-webdriverio
+```
+
+Consumers do not install or register Appium drivers separately.
 
 ## Quick start
 
-Install the package, a WebdriverIO runner, a framework adapter, and a reporter. The package already
-provides the WebdriverIO client and both platform drivers. Define the application once:
+### 1. Define the project once
 
 ```ts
 // desktop.config.ts
@@ -37,45 +55,70 @@ import { defineDesktopConfig } from '@fluentui-react-native/desktop-driver/confi
 
 export default defineDesktopConfig({
   schemaVersion: 1,
-  application: { manifest: './app.json', readyTestId: 'app-ready' },
+  application: {
+    manifest: './app.json',
+    readyTestId: 'app-ready',
+  },
   storybook: {
     configDir: './src',
     stories: [{ directory: './src', files: '**/*.stories.?(ts|tsx)' }],
-    channel: { host: '127.0.0.1', port: 7007 },
+    channel: { host: '127.0.0.1', port: 7007, mcp: true },
   },
   tests: {
     generatedDirectory: './desktop-tests/generated',
+    fakeScene: './desktop-tests/fake-scene.json',
     artifactsDirectory: './artifacts/desktop-tests',
-    runner: { command: 'yarn', args: ['wdio', 'run', 'wdio.conf.ts'] },
+    framework: 'mocha',
+    sessionStrategy: 'suite',
+    runner: {
+      command: 'yarn',
+      args: ['wdio', 'run', 'wdio.conf.ts'],
+    },
   },
   platforms: {
-    fake: { backend: 'fake', target: { defaultMode: 'attach', attach: { identity: 'fake' } } },
+    fake: {
+      backend: 'fake',
+      target: { defaultMode: 'attach', attach: { identity: 'fake' } },
+      readiness: { requireStorybookChannel: false, requireTestId: null },
+    },
     macos: {
       backend: 'mac2',
-      target: { defaultMode: 'attach', attach: { identityFromApplicationManifest: 'macos.bundleIdentifier' } },
+      target: {
+        defaultMode: 'attach',
+        attach: { identityFromApplicationManifest: 'macos.bundleIdentifier' },
+      },
     },
     windows: {
       backend: 'novawindows',
-      target: { defaultMode: 'attach', attach: { titleFromApplicationManifest: 'displayName' } },
+      target: {
+        defaultMode: 'attach',
+        attach: { titleFromApplicationManifest: 'displayName' },
+      },
     },
   },
 });
 ```
 
-Project the same config into WebdriverIO:
+The loader rejects unknown keys, invalid targets, non-loopback hosts, missing inputs, stale
+manifests, and output paths outside the project root before starting a process.
+
+### 2. Project it into WDIO
 
 ```ts
 // wdio.conf.ts
 import { loadDesktopConfig, toDesktopWdioOptions } from '@fluentui-react-native/desktop-driver/config/node';
 import { createDesktopWdioConfig } from '@fluentui-react-native/desktop-driver/wdio';
 
-export const config = createDesktopWdioConfig(toDesktopWdioOptions(loadDesktopConfig(new URL('./desktop.config.ts', import.meta.url))));
+const project = loadDesktopConfig(new URL('./desktop.config.ts', import.meta.url));
+
+export const config = createDesktopWdioConfig(toDesktopWdioOptions(project));
 ```
 
-Write an ordinary WebdriverIO test:
+WDIO runs only the generated inline spec and linked specs referenced by the validated manifest.
+
+### 3. Write a portable test
 
 ```ts
-// desktop-tests/button.spec.ts
 import { byTestId } from '@fluentui-react-native/desktop-driver';
 
 describe('Button', () => {
@@ -83,66 +126,47 @@ describe('Button', () => {
     const button = await $(byTestId('button-default'));
     await expect(button).toBeDisplayed();
     await button.click();
-
     await expect(await $(byTestId('button-status'))).toHaveText('Pressed');
   });
 });
 ```
 
-Run the configured platform:
+Use standard WebdriverIO commands first. `browser.desktop` adds only:
+
+- `getSessionInfo()`
+- `waitForAppState()`
+- `captureArtifacts()`
+- `selectStory()` / `waitForStory()`
+- `isFocused()`
+- `scrollIntoView()`
+
+### 4. Generate and run
 
 ```sh
-DESKTOP_TEST_PLATFORM=macos DESKTOP_TEST_APP=/path/to/MyApp.app wdio run wdio.conf.ts
+desktop-driver stories generate --config desktop.config.ts
+
+# Contract backend, no GUI
+DESKTOP_TEST_PLATFORM=fake wdio run wdio.conf.ts
+
+# Attach to a running macOS app
+DESKTOP_TEST_PLATFORM=macos \
+DESKTOP_TEST_IDENTITY=com.contoso.MyApp \
+wdio run wdio.conf.ts
+
+# Launch and own a Windows app
+DESKTOP_TEST_PLATFORM=windows \
+DESKTOP_TEST_APP='Contoso.MyApp_abc123!App' \
+wdio run wdio.conf.ts
 ```
 
-Set `DESKTOP_TEST_APP` for launch mode. Omit it and provide an attach selector to test an
-already-running app without shutting it down.
+Setting `DESKTOP_TEST_APP` selects launch mode. Without it, the selected platform uses attach mode
+and leaves the external app running.
 
-See [USAGE.md](./USAGE.md) for complete launch, attach, Storybook, on-device, console, debugger,
-and agent workflow examples.
+## Storybook tests
 
-## Core concepts
+Stories opt in through `parameters.desktopTest`.
 
-### Portable tests
-
-Shared tests use `byTestId()` and the documented WebdriverIO command subset. `testID` maps to the
-native automation identifier on both platforms.
-
-Prefer selectors in this order:
-
-1. `testID` through `byTestId()`
-2. role plus accessible name
-3. accessible name
-4. visible text as an explicit fallback
-5. a platform-specific selector in a platform-specific suite
-
-The portable commands cover element lookup, display/enabled/selected state, click, clear and set
-value, text and value reads, waits, source, screenshots, focus, and scrolling. Runtime support is
-reported by `browser.desktop.getSessionInfo()`; a missing portable capability is never a silent
-skip. React Native macOS Fabric 0.81 does not expose disabled state through AXEnabled, so Mac2
-omits `isEnabled()` and shared tests verify disabled inertness instead.
-
-### Launch and attach
-
-```ts
-type DesktopAppTarget =
-  | { mode: 'launch'; app: string; args?: readonly string[]; workingDirectory?: string }
-  | { mode: 'attach'; identity?: string; processId?: number; windowHandle?: string; title?: string };
-```
-
-- **Launch mode** owns the app and may shut down only the resources it started.
-- **Attach mode** records the app as external and leaves it running.
-
-Windows supports process ID, native window handle, identity, or an unambiguous title. macOS attach
-currently requires the application bundle identifier in `identity`.
-
-Cleanup uses exact resources recorded in `ownership.json`, never process names. Protected backend
-capabilities cannot override ownership or route the session to a different app.
-
-### Storybook tests
-
-Stories opt in through `parameters.desktopTest`. An inline plan handles common serializable
-interactions:
+### Inline plan
 
 ```ts
 export const Default = {
@@ -165,99 +189,95 @@ export const Default = {
 };
 ```
 
-A story can instead link a colocated `*.desktop.spec.ts` for arbitrary TypeScript. Run:
-
-```sh
-desktop-driver stories generate --config desktop.config.ts
-```
-
-Generation emits a validated manifest and a generated WDIO spec. The manifest hashes executable
-story metadata and linked spec contents so Windows and macOS jobs can prove they ran the same tests.
-
-`desktop-driver host` owns Storybook's channel/MCP server and desktop test coordination in one
-process. The app sends only allowlisted story IDs over the channel; the host owns WebdriverIO
-execution and returns structured progress on that same channel.
-
-### Standalone sessions
-
-Jest, Vitest, `node:test`, and scripts can use the same backend without the WDIO testrunner:
+### Linked spec
 
 ```ts
-import { remote, startDesktopDriver } from '@fluentui-react-native/desktop-driver/wdio';
-
-const service = await startDesktopDriver(options);
-const browser = await remote(service.webdriverOptions);
-
-try {
-  // Use the same WebdriverIO commands and page objects.
-} finally {
-  await browser.deleteSession();
-  await service.stop();
-}
+export const Interaction = {
+  parameters: {
+    desktopTest: {
+      kind: 'spec',
+      id: 'button-interaction',
+      spec: './button.desktop.spec.ts',
+    },
+  },
+};
 ```
 
-## Artifacts
+The linked suite must contain the exact generated `[story:<id>]` tag. Story modules are parsed
+statically and never executed during discovery.
 
-Runs write machine-readable results and diagnostics under the configured artifact directory:
+## Desktop host and on-device runs
+
+```sh
+desktop-driver host --config desktop.config.ts
+```
+
+The host owns Storybook's channel/MCP listener and the run coordinator. The app sends only
+versioned, manifest-constrained story IDs. Run all uses one WDIO process and one warm session while
+streaming framework results.
+
+Host-side control uses the same config:
+
+```sh
+desktop-driver stories list --config desktop.config.ts
+desktop-driver stories select components-button--default --config desktop.config.ts
+desktop-driver stories args components-button--default '{"appearance":"primary"}' --config desktop.config.ts
+desktop-driver stories smoke --config desktop.config.ts
+```
+
+`host --ready-file <path>` atomically publishes the host URL, service ID, manifest digest, and
+tested stories for supervisors.
+
+## Ownership and artifacts
+
+- **Launch mode** owns the app and may stop only resources it started.
+- **Attach mode** records the app/window as external and never terminates them.
+- Cleanup uses exact observed resources, never process names.
+
+Every completed WDIO run writes the root report, lifecycle stream, JUnit, and driver-host log:
 
 ```text
-<run-id>/
+artifacts/desktop-tests/<run-id>/
   run.json
   events.ndjson
   junit.xml
-  ownership.json
   driver-host.log
+```
+
+`ownership.json` is written after host startup and attach discovery. Per-test diagnostics are
+conditional: they are created for failed tests or an explicit `captureArtifacts()` call.
+`sessionStrategy: 'spec'` also creates worker reports before the launcher merge:
+
+```text
+artifacts/desktop-tests/<run-id>/
+  ownership.json
+  workers/<worker-id>/
+    run.json
+    junit.xml
   tests/<test-id>/
     result.json
     source.xml
     screenshot.png
 ```
 
-Artifacts can contain private application content. Keep them ignored and review them before
+Result status distinguishes passed, failed, skipped, cancelled, timed out, and infrastructure
+error. Artifacts can contain private screen content and must remain ignored and reviewed before
 sharing.
 
 ## CLI
 
 ```text
-desktop-driver doctor              Report backends and platform prerequisites
-desktop-driver driver detect       Detect the embedded driver and native runtime
-desktop-driver driver verify       Verify the self-contained driver installation
-desktop-driver config resolve      Print the fully resolved project configuration
-desktop-driver host                 Host Storybook channel, MCP, and desktop test coordination
-desktop-driver stories generate    Generate the Storybook test manifest and WDIO spec
-desktop-driver stories list        List stories reported by a running Storybook app
-desktop-driver stories select      Select a story and wait for its rendered event
-desktop-driver stories args        Update a story's control args
-desktop-driver stories smoke       Select every indexed story and report render failures
-desktop-driver start               Start a driver host and print endpoint metadata
-desktop-driver version             Print the package version
+desktop-driver doctor
+desktop-driver driver detect|verify
+desktop-driver config resolve|print
+desktop-driver stories generate|list|select|args|smoke
+desktop-driver host
+desktop-driver start
+desktop-driver version
 ```
 
-Commands print JSON for scripting and agent workflows. `start` and `host` remain alive until
-SIGINT or SIGTERM and stop only resources they own. `host --ready-file <path>` atomically writes
-the service identity, URL, manifest digest, and tested stories for process supervisors.
-
-## Prerequisites
-
-**macOS**
-
-- macOS 11.3 or newer and Xcode 13 or newer
-- Command Line Tools and a writable WebDriverAgentMac build cache
-- Accessibility permission for Xcode Helper
-- Automation mode enabled
-- A logged-in GUI session
-
-**Windows**
-
-- Windows 10 or newer with Windows PowerShell
-- An interactive, unlocked desktop session
-- The application installed or registered
-
-NovaWindows uses the built-in Windows PowerShell runtime. It does not require WinAppDriver,
-Developer Mode, an Appium driver registry, or a separately installed native service.
-
-Run `desktop-driver doctor --platform <macos|windows>` before a real test. A prerequisite reported
-as `unknown` has not been verified and must not be treated as satisfied.
+One-shot commands print JSON. Long-lived `host` forwards runner output, so automation should read
+its atomic `--ready-file` and run artifacts rather than parse the complete stdout stream.
 
 ## Package development
 
@@ -268,12 +288,10 @@ yarn workspace @fluentui-react-native/desktop-driver build
 yarn workspace @fluentui-react-native/desktop-driver test
 ```
 
-The `fake` backend exercises the package's host, service, commands, Storybook, lifecycle, and
-artifact contracts without a native GUI. It is not a substitute for real Windows and macOS
-coverage.
+## Documentation
 
-## More information
-
-- [USAGE.md](./USAGE.md) — complete integration and execution recipes
-- [DESIGN.md](./DESIGN.md) — architecture, ownership, portability, protocol, and security details
-- [NEXT-STEPS.md](./NEXT-STEPS.md) — unfinished work and open decisions only
+- [USAGE.md](./USAGE.md) — complete operating recipes
+- [DESIGN.md](./DESIGN.md) — implemented architecture and invariants
+- [NEXT-STEPS.md](./NEXT-STEPS.md) — unfinished work and open decisions
+- [suggestions.md](./suggestions.md) — completed refactor decision record
+- [`src/README.md`](./src/README.md) — maintainer module map

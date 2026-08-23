@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 import { appendCleanupFailure, DesktopDriverError } from '../../errors.ts';
 import { allocatePort } from '../../net.ts';
-import { DESKTOP_PROTOCOL_VERSION } from '../../protocol.ts';
+import { DESKTOP_PROTOCOL_VERSION } from '../../protocol/versions.ts';
 import { PACKAGE_VERSION } from '../../package-version.ts';
 import { terminateProcessTree } from '../../process-supervisor.ts';
 import type { DesktopBackendId, DesktopFakeScene, DriverHostHealth } from '../../types.ts';

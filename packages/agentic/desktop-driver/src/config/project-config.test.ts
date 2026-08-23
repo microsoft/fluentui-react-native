@@ -2,7 +2,7 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { loadDesktopConfig, toDesktopHostOptions, toDesktopWdioOptions } from './node.ts';
+import { loadDesktopConfig, serializeResolvedDesktopProject, toDesktopHostOptions, toDesktopWdioOptions } from './node.ts';
 import { toStorybookStories, type DesktopProjectConfig } from './index.ts';
 import { digestEntries } from '../storybook/manifest.ts';
 import { createDesktopWdioConfig } from '../wdio/config-factory.ts';
@@ -95,6 +95,10 @@ describe('desktop project config', () => {
     expect(project.driver.target).toEqual({ mode: 'launch', app: 'C:\\Sample\\App.exe' });
     expect(project.sources['target.mode']).toBe('environment:DESKTOP_TEST_APP');
     expect(project.sources['target.app']).toBe('environment:DESKTOP_TEST_APP');
+    expect(serializeResolvedDesktopProject(project)).toMatchObject({
+      driver: { target: { app: '[from environment:DESKTOP_TEST_APP]' } },
+    });
+    expect(JSON.stringify(serializeResolvedDesktopProject(project))).not.toContain('C:\\\\Sample\\\\App.exe');
   });
 
   it('loads a TypeScript config and rejects unknown keys', () => {

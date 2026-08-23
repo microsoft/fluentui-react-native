@@ -5,11 +5,11 @@
  * driver serves. It runs in-process so it works where binding a loopback socket is not permitted.
  */
 
-import { createFakeRoutes, FakeDriver } from './server/webdriver/fake-driver.ts';
-import { createRouteDispatcher, startW3CServer, type DispatchResult } from './server/webdriver/w3c-server.ts';
-import { PORTABLE_COMMANDS, PORTABLE_COMMAND_SURFACES } from './capabilities.ts';
-import contractScene from './__fixtures__/contract-scene.json' with { type: 'json' };
-import type { DesktopFakeScene } from './types.ts';
+import { createFakeRoutes, FakeDriver } from './fake-driver.ts';
+import { createRouteDispatcher, startW3CServer, type DispatchResult } from './w3c-server.ts';
+import { PORTABLE_COMMANDS, PORTABLE_COMMAND_SURFACES } from '../../capabilities.ts';
+import contractScene from '../../__fixtures__/contract-scene.json' with { type: 'json' };
+import type { DesktopFakeScene } from '../../types.ts';
 
 const ELEMENT_KEY = 'element-6066-11e4-a52e-4f735466cecf';
 
