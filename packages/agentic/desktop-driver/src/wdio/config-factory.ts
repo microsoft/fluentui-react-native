@@ -10,7 +10,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 import { buildCapabilities } from './capability-map.ts';
-import { DesktopDriverService, type DesktopServiceOptions } from './service.ts';
+import { DesktopWdioService, type DesktopServiceOptions } from './service.ts';
 import { resolveDesktopOptions } from '../config.ts';
 import { DesktopValidationError } from '../errors.ts';
 import { validateStoryTestManifest } from '../storybook/manifest.ts';
@@ -150,6 +150,7 @@ export function createDesktopWdioConfig(options: DesktopWdioConfigOptions): Reco
     fakeScene: resolved.fakeScene,
     logLevel: resolved.logLevel,
     specDigest,
+    sessionStrategy,
   };
 
   const frameworkOptions: Record<string, unknown> = {};
@@ -183,7 +184,7 @@ export function createDesktopWdioConfig(options: DesktopWdioConfigOptions): Reco
     framework,
     ...frameworkOptions,
     reporters: options.reporters ?? ['spec'],
-    services: [[DesktopDriverService, serviceOptions], ...(options.services ?? [])],
+    services: [[DesktopWdioService, serviceOptions], ...(options.services ?? [])],
     ...options.hooks,
   };
 }

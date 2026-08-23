@@ -18,6 +18,7 @@ import { createWebdriverIoRunExecutor, type DesktopRunnerCommand } from './runne
 import { RunCoordinator } from './coordinator.ts';
 import { appendCleanupFailure, DesktopValidationError } from '../errors.ts';
 import { hostForUrl, waitForHttp } from '../net.ts';
+import { isLoopbackHost } from '../core/loopback.ts';
 import { validateStoryTestManifest } from '../storybook/manifest.ts';
 import type { StoryTestManifest } from '../types.ts';
 
@@ -79,7 +80,7 @@ export function loadStoryTestManifest(manifestPath: string): StoryTestManifest {
  */
 export async function startDesktopStorybookHost(options: DesktopStorybookHostOptions): Promise<DesktopStorybookHostHandle> {
   const host = options.host ?? '127.0.0.1';
-  if (!['127.0.0.1', '::1', 'localhost'].includes(host)) {
+  if (!isLoopbackHost(host)) {
     throw new DesktopValidationError('Cannot start the Storybook desktop host', [
       `The desktop host refuses to bind to non-loopback address "${host}"`,
     ]);

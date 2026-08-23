@@ -93,6 +93,7 @@ export class ArtifactStore {
   readonly runDirectory: string;
   private readonly files = new Set<string>();
   private eventStream?: fs.WriteStream;
+  private eventStreamError?: Error;
 
   constructor(options: ArtifactStoreOptions) {
     this.runId = options.runId ?? createRunId();
@@ -131,29 +132,54 @@ export class ArtifactStore {
   appendEvent(event: DesktopLifecycleEvent): void {
     if (!this.eventStream) {
       this.eventStream = fs.createWriteStream(this.resolve('events.ndjson'), { flags: 'a' });
+      this.eventStream.on('error', (error) => {
+        this.eventStreamError = error;
+      });
       this.files.add('events.ndjson');
+    }
+    if (this.eventStreamError) {
+      throw new DesktopDriverError(`Lifecycle event stream failed: ${this.eventStreamError.message}`, {
+        kind: 'lifecycle',
+        cause: this.eventStreamError,
+      });
     }
     this.eventStream.write(`${JSON.stringify(redact(event))}\n`);
   }
 
-  writeRunReport(report: Omit<DesktopRunReport, 'protocolVersion' | 'portableCommandMatrixVersion' | 'artifacts'>): DesktopRunReport {
-    this.files.add('run.json');
+  writeRunReport(
+    report: Omit<DesktopRunReport, 'protocolVersion' | 'portableCommandMatrixVersion' | 'artifacts'>,
+    relativePath = 'run.json',
+  ): DesktopRunReport {
+    this.files.add(relativePath);
     const full: DesktopRunReport = {
       ...report,
       protocolVersion: DESKTOP_PROTOCOL_VERSION,
       portableCommandMatrixVersion: PORTABLE_COMMAND_MATRIX_VERSION,
       artifacts: this.collectFiles(),
     };
-    this.write('run.json', `${JSON.stringify(redactValue(full, 0, false), null, 2)}\n`);
+    this.write(relativePath, `${JSON.stringify(redactValue(full, 0, false), null, 2)}\n`);
     return full;
   }
 
-  writeJUnit(suiteName: string, results: readonly DesktopTestResult[]): string {
-    return this.write('junit.xml', renderJUnit(suiteName, results));
+  writeJUnit(suiteName: string, results: readonly DesktopTestResult[], relativePath = 'junit.xml'): string {
+    return this.write(relativePath, renderJUnit(suiteName, results));
   }
 
   manifest(): ArtifactManifest {
     return { runId: this.runId, directory: this.runDirectory, files: this.collectFiles() };
+  }
+
+  /** Returns an immutable snapshot used to scope one capture operation. */
+  snapshot(): ReadonlySet<string> {
+    return new Set(this.collectFiles());
+  }
+
+  /** Returns only files added after `before`, optionally rooted at a narrower directory. */
+  manifestSince(before: ReadonlySet<string>, directory = this.runDirectory): ArtifactManifest {
+    const files = this.collectFiles()
+      .filter((file) => !before.has(file))
+      .map((file) => path.relative(directory, this.resolve(file)));
+    return { runId: this.runId, directory, files };
   }
 
   async close(): Promise<void> {
@@ -165,6 +191,12 @@ export class ArtifactStore {
     await new Promise<void>((resolve) => {
       stream.end(resolve);
     });
+    if (this.eventStreamError) {
+      throw new DesktopDriverError(`Lifecycle event stream failed: ${this.eventStreamError.message}`, {
+        kind: 'lifecycle',
+        cause: this.eventStreamError,
+      });
+    }
   }
 
   private collectFiles(): string[] {

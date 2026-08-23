@@ -268,7 +268,7 @@ export function generateStoryTestManifest(options: GenerateManifestOptions): Sto
 }
 
 /** Stable digest over the executable content of the manifest, recorded in `run.json`. */
-export function digestEntries(entries: readonly StoryTestManifestEntry[], baseDirectory?: string): string {
+export function digestEntries(entries: readonly StoryTestManifestEntry[], baseDirectory?: string, configDigest?: string): string {
   const normalized = entries.map((entry) => ({
     storyId: entry.storyId,
     tag: entry.tag,
@@ -277,7 +277,8 @@ export function digestEntries(entries: readonly StoryTestManifestEntry[], baseDi
     storyPath: baseDirectory ? digestPath(entry.storyPath, baseDirectory) : undefined,
     linkedSpecSha256: isSpecPlan(entry.plan) ? hashFile(entry.spec, baseDirectory) : undefined,
   }));
-  return crypto.createHash('sha256').update(JSON.stringify(normalized)).digest('hex');
+  const payload = configDigest ? { configDigest, entries: normalized } : normalized;
+  return crypto.createHash('sha256').update(JSON.stringify(payload)).digest('hex');
 }
 
 function digestPath(file: string, baseDirectory: string): string {
@@ -311,6 +312,9 @@ export function validateStoryTestManifest(value: unknown, source: string): Story
   if (typeof manifest.digest !== 'string' || !/^[0-9a-f]{64}$/.test(manifest.digest)) {
     throw new DesktopValidationError('Malformed story-test manifest', [`${source} digest must be a SHA-256 hex string`]);
   }
+  if (manifest.configDigest !== undefined && (typeof manifest.configDigest !== 'string' || !/^[0-9a-f]{64}$/.test(manifest.configDigest))) {
+    throw new DesktopValidationError('Malformed story-test manifest', [`${source} configDigest must be a SHA-256 hex string`]);
+  }
 
   const seen = new Set<string>();
   const sourceDirectory = path.dirname(path.resolve(source));
@@ -329,7 +333,7 @@ export function validateStoryTestManifest(value: unknown, source: string): Story
     };
   });
 
-  const actual = digestEntries(entries, sourceDirectory);
+  const actual = digestEntries(entries, sourceDirectory, manifest.configDigest);
   const legacy = digestEntries(entries);
   if (actual !== manifest.digest && legacy !== manifest.digest) {
     throw new DesktopValidationError('Stale or tampered story-test manifest', [

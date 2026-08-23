@@ -27,6 +27,11 @@ export interface DesktopHostReady {
   };
 }
 
+export interface DesktopHostClosing {
+  protocolVersion: typeof DESKTOP_PROTOCOL_VERSION;
+  serviceId: string;
+}
+
 export interface DesktopChannelRunRequest {
   protocolVersion: typeof DESKTOP_PROTOCOL_VERSION;
   serviceId: string;

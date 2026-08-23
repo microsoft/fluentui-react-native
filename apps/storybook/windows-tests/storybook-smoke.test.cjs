@@ -1,15 +1,30 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const { promisify } = require('node:util');
+const { execFile } = require('node:child_process');
 
 const { app } = require('@react-native-windows/automation');
 const smokeStories = require('../scripts/smoke-stories.json');
-const { getIndex, selectStory } = require('../scripts/storybook-client.cjs');
 
 const artifactsDirectory = path.join(__dirname, '..', 'artifacts', 'windows', 'automation');
+const packageRoot = path.join(__dirname, '..');
+const desktopDriverPackagePath = require.resolve('@fluentui-react-native/desktop-driver/package.json');
+const desktopDriverPackage = require(desktopDriverPackagePath);
+const desktopDriverCli = path.resolve(path.dirname(desktopDriverPackagePath), desktopDriverPackage.bin);
+const execFileAsync = promisify(execFile);
+
+async function runStoryCommand(...args) {
+  const { stdout } = await execFileAsync(process.execPath, [desktopDriverCli, 'stories', ...args, '--config', 'desktop.config.ts'], {
+    cwd: packageRoot,
+  });
+  return JSON.parse(stdout);
+}
+
+const selectStory = (storyId) => runStoryCommand('select', storyId);
 
 beforeAll(async () => {
   fs.mkdirSync(artifactsDirectory, { recursive: true });
-  await getIndex();
+  await runStoryCommand('list');
 });
 
 test.each(smokeStories)('renders $storyId with stable native selectors', async ({ artifactName, statusTestId, storyId, testId }) => {

@@ -11,6 +11,7 @@
 import * as http from 'node:http';
 
 import { hostForUrl } from '../../net.ts';
+import { isLoopbackHost } from '../../core/loopback.ts';
 
 /** W3C error codes used by the hosted drivers. */
 export type W3CErrorCode =
@@ -166,11 +167,9 @@ export interface W3CServerHandle {
   close(): Promise<void>;
 }
 
-const LOOPBACK_HOSTS = new Set(['127.0.0.1', '::1', 'localhost']);
-
 /** Starts the route host. Refuses to bind to anything other than loopback. */
 export async function startW3CServer(options: W3CServerOptions): Promise<W3CServerHandle> {
-  if (!LOOPBACK_HOSTS.has(options.host)) {
+  if (!isLoopbackHost(options.host)) {
     throw new Error(`Refusing to bind the desktop driver host to non-loopback address "${options.host}"`);
   }
 
@@ -231,17 +230,25 @@ function readBody(request: http.IncomingMessage, maxBodyBytes: number): Promise<
   return new Promise((resolve, reject) => {
     const chunks: Buffer[] = [];
     let size = 0;
+    let overflow = false;
     request.on('data', (chunk: Buffer) => {
+      if (overflow) {
+        return;
+      }
       size += chunk.length;
       if (size > maxBodyBytes) {
-        reject(new Error('Request body exceeds the configured limit'));
-        request.destroy();
+        overflow = true;
+        chunks.length = 0;
         return;
       }
       chunks.push(chunk);
     });
     request.on('error', reject);
     request.on('end', () => {
+      if (overflow) {
+        reject(new Error('Request body exceeds the configured limit'));
+        return;
+      }
       if (chunks.length === 0) {
         resolve(undefined);
         return;

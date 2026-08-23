@@ -12,8 +12,8 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 
 import { buildInvocation, createWebdriverIoRunExecutor, resolveRunnerCommand } from './server/runner/wdio-runner.ts';
-import { createAnnouncement, DESKTOP_SERVICE_ANNOUNCE_EVENT, startServiceAnnouncer } from './storybook/announce.ts';
 import { RunCoordinator } from './server/coordinator.ts';
+import { encodeDesktopResult } from './server/runner/reporter-protocol.ts';
 import {
   DESKTOP_HOST_READY_EVENT,
   DESKTOP_RUN_REQUEST_EVENT,
@@ -24,7 +24,6 @@ import {
 } from './server/channel/bridge.ts';
 import { loadStoryTestManifest, startDesktopStorybookHost } from './server/host.ts';
 import { digestEntries } from './storybook/manifest.ts';
-import { StoryController } from './server/channel/client.ts';
 import { DesktopCancelledError, DesktopValidationError } from './errors.ts';
 import type { StoryTestManifest } from './types.ts';
 
@@ -87,6 +86,14 @@ describe('runner command resolution', () => {
     expect(resolveRunnerCommand('C:\\tools\\yarn.cmd', 'win32')).toBe('C:\\tools\\yarn.cmd');
     expect(resolveRunnerCommand('./bin/runner.exe', 'win32')).toBe('./bin/runner.exe');
     expect(resolveRunnerCommand('node_modules/.bin/wdio', 'win32')).toBe('node_modules/.bin/wdio');
+  });
+
+  it('resolves a Windows launcher through PATH and PATHEXT before falling back', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-runner-'));
+    const launcher = path.join(root, 'custom.CMD');
+    fs.writeFileSync(launcher, '', 'utf8');
+
+    expect(resolveRunnerCommand('custom', 'win32', { PATH: root, PATHEXT: '.EXE;.CMD' }).toLowerCase()).toBe(launcher.toLowerCase());
   });
 
   it('derives the invocation entirely from configuration and the manifest entry', () => {
@@ -154,6 +161,33 @@ describe('run executor', () => {
     expect(results[0].status).toBe('passed');
     expect(progress).toEqual(['passed']);
     expect(calls[0].args).toContain('--spec');
+  });
+
+  it('streams framework results before the runner exits', async () => {
+    let child: FakeChild | undefined;
+    const { execute } = createExecutor((spawned) => {
+      child = spawned;
+    });
+    const progress: string[] = [];
+    const running = execute(['components-button--default'], (result) => progress.push(result.status), new AbortController().signal);
+    await new Promise((resolve) => setTimeout(resolve, 1));
+    child?.stdout.emit(
+      'data',
+      Buffer.from(
+        `[0-0] ${encodeDesktopResult({
+          testId: 'button',
+          storyId: 'components-button--default',
+          title: 'button',
+          status: 'passed',
+          durationMs: 1,
+        })}\n`,
+      ),
+    );
+
+    expect(progress).toEqual(['passed']);
+    child?.emit('exit', 0, null);
+    await expect(running).resolves.toEqual([expect.objectContaining({ testId: 'button', status: 'passed' })]);
+    expect(progress).toEqual(['passed']);
   });
 
   it('runs multiple selected stories in one warm invocation', async () => {
@@ -294,67 +328,6 @@ describe('run executor', () => {
     expect(calls).toHaveLength(0);
     expect(results[0].status).toBe('failed');
     expect(results[0].error?.message).toContain('not in the generated manifest');
-  });
-});
-
-describe('service announcement', () => {
-  function createController(onSend: (body: unknown) => void, ok = true) {
-    return new StoryController({
-      baseUrl: 'http://127.0.0.1:7007',
-      fetchImpl: (async (_url: string, init?: RequestInit) => {
-        onSend(JSON.parse(String(init?.body ?? '{}')));
-        return { ok, status: ok ? 200 : 503, json: async () => ({}) } as Response;
-      }) as typeof fetch,
-    });
-  }
-
-  it('broadcasts the endpoint over the Storybook channel', async () => {
-    const sent: unknown[] = [];
-    const announcer = startServiceAnnouncer({
-      controller: createController((body) => sent.push(body)),
-      announcement: createAnnouncement('http://127.0.0.1:7017', 'tok', 'deadbeef'),
-    });
-
-    await expect(announcer.announceNow()).resolves.toBe(true);
-    announcer.stop();
-
-    expect(sent).toEqual([
-      {
-        type: DESKTOP_SERVICE_ANNOUNCE_EVENT,
-        args: [{ protocolVersion: 1, url: 'http://127.0.0.1:7017', token: 'tok', manifestDigest: 'deadbeef' }],
-      },
-    ]);
-  });
-
-  it('treats an unreachable channel as non-fatal', async () => {
-    const announcer = startServiceAnnouncer({
-      controller: createController(() => undefined, false),
-      announcement: createAnnouncement('http://127.0.0.1:7017', 'tok', 'deadbeef'),
-    });
-
-    await expect(announcer.announceNow()).resolves.toBe(false);
-    announcer.stop();
-  });
-
-  it('re-broadcasts on an interval so a late or reloaded app still discovers it', async () => {
-    jest.useFakeTimers();
-    try {
-      const sent: unknown[] = [];
-      const announcer = startServiceAnnouncer({
-        controller: createController((body) => sent.push(body)),
-        announcement: createAnnouncement('http://127.0.0.1:7017', 'tok', 'deadbeef'),
-        intervalMs: 1000,
-      });
-
-      jest.advanceTimersByTime(3000);
-      announcer.stop();
-      jest.advanceTimersByTime(5000);
-
-      // Three ticks fired; nothing further after stop().
-      expect(sent.length).toBe(3);
-    } finally {
-      jest.useRealTimers();
-    }
   });
 });
 

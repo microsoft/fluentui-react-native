@@ -2740,7 +2740,6 @@ __metadata:
     esbuild: "catalog:"
     jest: "npm:^29.7.0"
     jest-environment-node: "npm:^29.7.0"
-    jiti: "catalog:"
     metro: "npm:^0.83.1"
     oxc-resolver: "catalog:"
     react: "npm:19.1.4"
@@ -3637,7 +3636,7 @@ __metadata:
     jiti: "catalog:"
     webdriverio: "catalog:"
   bin:
-    desktop-driver: ./lib/cli/main.js
+    desktop-driver: ./lib/cli/entry.js
   languageName: unknown
   linkType: soft
 

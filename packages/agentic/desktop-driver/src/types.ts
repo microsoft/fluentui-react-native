@@ -262,6 +262,8 @@ export interface StoryTestManifestEntry {
 export interface StoryTestManifest {
   version: number;
   generatedAt: string;
+  /** Digest of the project config and normalized story-source declarations. */
+  configDigest?: string;
   /** SHA-256 over the normalized entry list; recorded in `run.json` for the portability gate. */
   digest: string;
   entries: readonly StoryTestManifestEntry[];
@@ -272,7 +274,7 @@ export interface DesktopTestResult {
   testId: string;
   storyId?: string;
   title: string;
-  status: 'passed' | 'failed' | 'skipped' | 'infrastructureError';
+  status: 'passed' | 'failed' | 'skipped' | 'cancelled' | 'timed_out' | 'infrastructureError';
   durationMs: number;
   error?: { message: string; stack?: string };
   artifacts?: readonly string[];
@@ -306,6 +308,8 @@ export interface DesktopRunReport {
     passed: number;
     failed: number;
     skipped: number;
+    cancelled: number;
+    timedOut: number;
     infrastructureError: number;
     durationMs: number;
   };
@@ -365,7 +369,7 @@ export interface DriverHostHealth {
 }
 
 /** Handle returned by `startDesktopDriver` for standalone (non-testrunner) sessions. */
-export interface DesktopDriverService {
+export interface DesktopDriverHandle {
   /** WebdriverIO `remote()` options pointing at the owned driver host. */
   webdriverOptions: {
     protocol: 'http';

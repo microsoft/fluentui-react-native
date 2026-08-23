@@ -196,7 +196,8 @@ Metro remains the explicit bundle server (`yarn start`). Run the desktop host al
   - `POST /select-story-sync/<storyId>` selects a story and waits for `storyRendered`.
   - `POST /send-event` broadcasts a Storybook channel event.
 
-The declared helper wraps these endpoints:
+The declared helper delegates these endpoints to the packaged desktop-driver CLI and common
+`desktop.config.ts`:
 
 ```powershell
 yarn storybook:control list
@@ -204,6 +205,9 @@ yarn storybook:control select components-button--default
 yarn storybook:control args components-button--default '{"appearance":"primary"}'
 yarn storybook:smoke
 ```
+
+The Windows agent workflow resolves the channel port from the same config and waits for an atomic
+host-ready JSON file before checking ownership or launching the app.
 
 The desktop host uses `@storybook/react-native/node`'s `createChannelServer` directly because the
 bundler-agnostic `withStorybook` server mode swaps entry points and conflicts with this app's

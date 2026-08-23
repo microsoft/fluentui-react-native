@@ -35,6 +35,33 @@ describe('desktop driver configuration', () => {
     );
   });
 
+  it('validates nested runtime configuration before starting a host', () => {
+    expect(() =>
+      resolveDesktopOptions({
+        platform: 'windows',
+        target: { mode: 'launch', app: 'Sample.exe', environment: { VALID: 'yes', INVALID: 42 as unknown as string } },
+        readiness: { requireWindow: 'yes' as unknown as boolean, timeout: -1 },
+        storybook: { host: '0.0.0.0', port: 70_000, renderTimeout: 0, specRoots: ['src', ''] },
+      }),
+    ).toThrow(/environment|requireWindow|timeout|storybook/);
+  });
+
+  it('accepts repeated acyclic fake-scene values', () => {
+    const element = { testId: 'shared' };
+    expect(() =>
+      resolveDesktopOptions({
+        platform: 'fake',
+        target: { mode: 'attach', identity: 'fake' },
+        fakeScene: {
+          stories: {
+            one: { elements: [element] },
+            two: { elements: [element] },
+          },
+        },
+      }),
+    ).not.toThrow();
+  });
+
   it('rejects an attach target with no identity', () => {
     expect(() => resolveDesktopOptions({ platform: 'windows', target: { mode: 'attach' } })).toThrow(
       /identity, processId, windowHandle, or title/,

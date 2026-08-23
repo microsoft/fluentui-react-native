@@ -1,6 +1,8 @@
 import { assertPortableTestId, byTestId, isPortableTestId } from './selectors.ts';
 import { planTestIds, validateStoryPlan } from './story-plan.ts';
 import { sanitizeStoryPart, storyGrep, storyNameFromExport, storyTag, toStoryId } from './storybook/story-id.ts';
+import { runInlineStoryPlan } from './wdio/story-plan-runner.ts';
+import type { DesktopBrowserLike } from './core/session.ts';
 import type { InlineStoryPlan } from './types.ts';
 
 describe('portable selectors', () => {
@@ -71,6 +73,24 @@ describe('story plan validation', () => {
     expect(planTestIds(inline)).toEqual(['button', 'status']);
   });
 
+  describe('story plan execution prerequisites', () => {
+    it('fails clearly when the desktop command augmentation is missing', async () => {
+      const browser = {
+        sessionId: 'session',
+        $: jest.fn(),
+        execute: jest.fn(),
+        getPageSource: jest.fn(),
+        takeScreenshot: jest.fn(),
+        addCommand: jest.fn(),
+      } as unknown as DesktopBrowserLike;
+
+      await expect(runInlineStoryPlan({ kind: 'inline', id: 'missing-augmentation', steps: [] }, { browser })).rejects.toMatchObject({
+        kind: 'capability',
+        message: expect.stringContaining('command augmentation'),
+      });
+    });
+  });
+
   it('accepts a linked spec plan', () => {
     expect(validateStoryPlan({ kind: 'spec', id: 'button-rich', spec: './button.desktop.spec.ts' })).toMatchObject({ kind: 'spec' });
   });
@@ -107,6 +127,20 @@ describe('story plan validation', () => {
     const cyclic: Record<string, unknown> = { kind: 'inline', id: 'x', steps: [] };
     cyclic.self = cyclic;
     expect(() => validateStoryPlan(cyclic)).toThrow(/JSON-serializable/);
+  });
+
+  it('accepts repeated references that are not cyclic', () => {
+    const target = { testId: 'shared-target' };
+    expect(() =>
+      validateStoryPlan({
+        kind: 'inline',
+        id: 'shared',
+        steps: [
+          { action: 'expectVisible', target },
+          { action: 'press', target },
+        ],
+      }),
+    ).not.toThrow();
   });
 
   it('rejects an unsupported schema version', () => {

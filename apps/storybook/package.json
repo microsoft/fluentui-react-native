@@ -34,12 +34,13 @@
     "bundle:macos": "yarn prebuild && rnx-cli bundle --dev false --platform macos",
     "bundle:windows": "yarn prebuild && rnx-cli bundle --dev false --platform windows",
     "prebuild": "yarn desktop:generate && sb-rn-get-stories --config-path src",
-    "storybook:control": "node scripts/storybook-control.cjs",
-    "storybook:smoke": "node scripts/storybook-control.cjs smoke",
+    "storybook:control": "desktop-driver stories --config desktop.config.ts",
+    "storybook:smoke": "desktop-driver stories smoke --config desktop.config.ts",
     "desktop:doctor": "desktop-driver doctor",
     "desktop:driver:detect": "desktop-driver driver detect",
     "desktop:driver:verify": "desktop-driver driver verify",
-    "desktop:generate": "jiti ../../packages/agentic/desktop-driver/src/cli/main.ts stories generate --config desktop.config.ts",
+    "desktop:config:resolve": "yarn workspace @fluentui-react-native/desktop-driver build --force && desktop-driver config resolve --config desktop.config.ts",
+    "desktop:generate": "yarn workspace @fluentui-react-native/desktop-driver build --force && desktop-driver stories generate --config desktop.config.ts",
     "desktop:test": "yarn desktop:generate && wdio run wdio.conf.ts",
     "desktop:test:fake": "cross-env DESKTOP_TEST_PLATFORM=fake yarn desktop:test",
     "desktop:test:macos": "cross-env DESKTOP_TEST_PLATFORM=macos yarn desktop:test",
@@ -47,6 +48,7 @@
     "desktop:host": "yarn desktop:generate && desktop-driver host --config desktop.config.ts",
     "desktop:host:macos": "cross-env DESKTOP_TEST_PLATFORM=macos yarn desktop:host",
     "desktop:host:windows": "cross-env DESKTOP_TEST_PLATFORM=windows yarn desktop:host",
+    "test": "fluentui-scripts jest && yarn desktop:test:fake",
     "lint": "fluentui-scripts lint",
     "format": "fluentui-scripts format"
   },
@@ -94,7 +96,6 @@
     "esbuild": "catalog:",
     "jest": "^29.7.0",
     "jest-environment-node": "^29.7.0",
-    "jiti": "catalog:",
     "metro": "^0.83.1",
     "oxc-resolver": "catalog:",
     "react-native-test-app": "catalog:",
@@ -103,6 +104,7 @@
     "valibot": "^1.4.1"
   },
   "furn": {
+    "jestPlatform": "react",
     "knip": {
       "ignoreDependencies": [
         "@fluentui-react-native/callout",

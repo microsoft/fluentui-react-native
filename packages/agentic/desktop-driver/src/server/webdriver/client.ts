@@ -11,7 +11,7 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { DesktopDriverError } from '../../errors.ts';
+import { appendCleanupFailure, DesktopDriverError } from '../../errors.ts';
 import { allocatePort } from '../../net.ts';
 import { DESKTOP_PROTOCOL_VERSION } from '../../protocol.ts';
 import { PACKAGE_VERSION } from '../../package-version.ts';
@@ -90,6 +90,7 @@ export async function startDriverHost(options: StartDriverHostOptions): Promise<
   const port = options.port && options.port > 0 ? options.port : await allocatePort(host);
   const startupTimeout = options.startupTimeout ?? 120_000;
 
+  const ownsWorkDirectory = options.logDirectory === undefined;
   const workDirectory = options.logDirectory ?? fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-host-'));
   fs.mkdirSync(workDirectory, { recursive: true });
 
@@ -116,7 +117,10 @@ export async function startDriverHost(options: StartDriverHostOptions): Promise<
 
   const health = await waitForReady(child, logStream, startupTimeout).catch(async (error: unknown) => {
     await stopChild(child);
-    logStream.end();
+    await new Promise<void>((resolve) => logStream.end(resolve));
+    if (ownsWorkDirectory) {
+      fs.rmSync(workDirectory, { recursive: true, force: true });
+    }
     throw error;
   });
   const exitListeners = new Set<(event: DriverHostExit) => void>();
@@ -146,8 +150,23 @@ export async function startDriverHost(options: StartDriverHostOptions): Promise<
       return () => exitListeners.delete(listener);
     },
     stop: async () => {
-      await stopChild(child);
-      logStream.end();
+      let failure: unknown;
+      try {
+        await stopChild(child);
+      } catch (error) {
+        failure = error;
+      }
+      await new Promise<void>((resolve) => logStream.end(resolve));
+      if (ownsWorkDirectory) {
+        try {
+          fs.rmSync(workDirectory, { recursive: true, force: true });
+        } catch (error) {
+          failure = appendCleanupFailure(failure, error);
+        }
+      }
+      if (failure) {
+        throw failure;
+      }
     },
   };
 }
@@ -188,11 +207,12 @@ function waitForReady(child: ChildProcess, logStream: fs.WriteStream, timeout: n
         return;
       }
       stdoutBuffer += text;
-      const newlineIndex = stdoutBuffer.indexOf('\n');
-      if (newlineIndex < 0) {
-        return;
+      const lines = stdoutBuffer.split('\n');
+      stdoutBuffer = lines.pop() ?? '';
+      if (stdoutBuffer.length > 1024 * 1024) {
+        stdoutBuffer = stdoutBuffer.slice(-1024 * 1024);
       }
-      for (const line of stdoutBuffer.split('\n')) {
+      for (const line of lines) {
         if (line.trim().length === 0) {
           continue;
         }
@@ -215,7 +235,7 @@ function waitForReady(child: ChildProcess, logStream: fs.WriteStream, timeout: n
     child.stderr?.on('data', (chunk: Buffer) => {
       const text = chunk.toString('utf8');
       logStream.write(text);
-      stderrTail.push(text);
+      stderrTail.push(text.slice(-8192));
       if (stderrTail.length > 50) {
         stderrTail.shift();
       }

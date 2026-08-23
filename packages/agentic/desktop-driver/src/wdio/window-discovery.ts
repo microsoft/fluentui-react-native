@@ -30,7 +30,7 @@ export interface DesktopWindowCandidate {
 /** Which configured identity selected a window, and whether the match was exact. */
 export interface DesktopWindowMatch {
   candidate: DesktopWindowCandidate;
-  matchedBy: 'processId' | 'identity' | 'title';
+  matchedBy: 'processId' | 'windowHandle' | 'identity' | 'title';
   exact: boolean;
 }
 
@@ -136,7 +136,7 @@ export async function discoverAttachWindow(target: DesktopAppTarget, enumerate: 
     throw new DesktopDriverError('Window discovery only applies to an attach target', { kind: 'configuration' });
   }
   if (target.windowHandle) {
-    return { candidate: { handle: normalizeWindowHandle(target.windowHandle) }, matchedBy: 'processId', exact: true };
+    return { candidate: { handle: normalizeWindowHandle(target.windowHandle) }, matchedBy: 'windowHandle', exact: true };
   }
   return selectWindow(await enumerate(), target);
 }
@@ -247,34 +247,57 @@ export function createRootSessionEnumerator(options: RootSessionEnumeratorOption
         }
       }
 
-      const candidates: DesktopWindowCandidate[] = [];
-      for (const element of elements.slice(0, maxWindows)) {
-        const id = elementId(element);
-        if (!id) {
-          continue;
-        }
-        const rawHandle = await attribute(id, 'NativeWindowHandle');
-        if (!rawHandle) {
-          continue;
-        }
-        let handle: string;
-        try {
-          handle = normalizeWindowHandle(rawHandle);
-        } catch {
-          // Elements that are not real windows report a zero handle.
-          continue;
-        }
-        candidates.push({
-          handle,
-          name: await attribute(id, 'Name'),
-          processId: Number(await attribute(id, 'ProcessId')) || undefined,
-          automationId: options.need?.identity ? await attribute(id, 'AutomationId') : undefined,
-          className: options.need?.identity ? await attribute(id, 'ClassName') : undefined,
-        });
-      }
-      return candidates;
+      const candidates = await mapConcurrent(
+        elements.slice(0, maxWindows),
+        8,
+        async (element): Promise<DesktopWindowCandidate | undefined> => {
+          const id = elementId(element);
+          if (!id) {
+            return undefined;
+          }
+          const rawHandle = await attribute(id, 'NativeWindowHandle');
+          if (!rawHandle) {
+            return undefined;
+          }
+          let handle: string;
+          try {
+            handle = normalizeWindowHandle(rawHandle);
+          } catch {
+            // Elements that are not real windows report a zero handle.
+            return undefined;
+          }
+          const [name, processId, automationId, className] = await Promise.all([
+            attribute(id, 'Name'),
+            attribute(id, 'ProcessId'),
+            options.need?.identity ? attribute(id, 'AutomationId') : undefined,
+            options.need?.identity ? attribute(id, 'ClassName') : undefined,
+          ]);
+          return {
+            handle,
+            name,
+            processId: Number(processId) || undefined,
+            automationId,
+            className,
+          };
+        },
+      );
+      return candidates.filter((candidate): candidate is DesktopWindowCandidate => candidate !== undefined);
     } finally {
       await w3c('DELETE', sessionBase, undefined, timeout).catch(() => undefined);
     }
   };
+}
+
+async function mapConcurrent<T, U>(values: readonly T[], concurrency: number, map: (value: T) => Promise<U>): Promise<U[]> {
+  const results = Array.from<U>({ length: values.length });
+  let next = 0;
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, values.length) }, async () => {
+      while (next < values.length) {
+        const index = next++;
+        results[index] = await map(values[index]);
+      }
+    }),
+  );
+  return results;
 }

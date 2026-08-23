@@ -25,7 +25,7 @@ workflows.
 
 ## Prerequisites
 
-Use Node 20.19 or newer and WebdriverIO 9. The repository currently uses Yarn 4.
+Use Node 22.12 or newer and WebdriverIO 9. The repository currently uses Yarn 4.
 
 **macOS**
 
@@ -94,6 +94,17 @@ Generate and inspect it with:
 desktop-driver config resolve --config desktop.config.ts
 desktop-driver stories generate --config desktop.config.ts
 ```
+
+Loading rejects unknown keys, unsupported platform/backend pairs, invalid timeouts or ports,
+non-loopback listeners, missing manifest references and input directories, and generated or
+artifact paths outside `rootDir` before starting a process. Story source globs drive both
+Storybook and desktop discovery. Manifest, generated spec, and RN runtime projection are committed
+as one generation so clients cannot observe mixed digests.
+
+`config resolve` and `config print` include a `sources` map describing whether target, readiness,
+channel, and logging values came from explicit options, named environment variables, platform
+configuration, application manifest fields, base configuration, or defaults without exposing
+environment values.
 
 ### Base WebdriverIO configuration
 
@@ -370,6 +381,10 @@ Add scripts equivalent to:
 }
 ```
 
+Process supervisors may add `--ready-file <path>` to `desktop-driver host`. The file is written
+atomically after the channel is ready and contains the host URL, service ID, manifest digest, and
+tested story IDs.
+
 For in-app runs, the WDIO target must be **attach mode**. The app is already running and initiated
 the request, so setting `DESKTOP_TEST_APP` here would incorrectly create a second owned app.
 
@@ -446,6 +461,15 @@ An agent can start the declared desktop host, wait for `desktopTestHostReady`, a
 The agent should wait for a terminal run state (`passed`, `failed`, `cancelled`, or `error`) and
 inspect both the structured results and host process output. A `running` status means the run
 started; it does not mean the tests passed.
+
+Host-side Storybook control uses the same project config:
+
+```sh
+desktop-driver stories list --config desktop.config.ts
+desktop-driver stories select components-button--default --config desktop.config.ts
+desktop-driver stories args components-button--default '{"appearance":"primary"}' --config desktop.config.ts
+desktop-driver stories smoke --config desktop.config.ts
+```
 
 ## 4. Run tests for the current Storybook page
 

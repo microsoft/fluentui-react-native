@@ -9,14 +9,13 @@
 import * as path from 'node:path';
 
 import { DesktopValidationError } from './errors.ts';
+import { isLoopbackHost } from './core/loopback.ts';
 import type { DesktopAppTarget, DesktopBackendId, DesktopDriverOptions, DesktopPlatform, ResolvedDesktopDriverOptions } from './types.ts';
-import { expectEnum, isNonEmptyString, isPlainObject, ValidationIssues } from './validate.ts';
+import { expectEnum, isJsonSerializable, isNonEmptyString, isPlainObject, ValidationIssues } from './validate.ts';
 
 const PLATFORMS: readonly DesktopPlatform[] = ['macos', 'windows', 'fake'];
 const BACKENDS: readonly DesktopBackendId[] = ['mac2', 'novawindows', 'fake'];
 const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error', 'silent'] as const;
-
-const LOOPBACK_HOSTS = new Set(['127.0.0.1', '::1', 'localhost']);
 
 /** Backends that are legal for each platform. The first entry is the default. */
 const PLATFORM_BACKENDS: Readonly<Record<DesktopPlatform, readonly DesktopBackendId[]>> = {
@@ -56,6 +55,16 @@ export function validateAppTarget(target: unknown, issues: ValidationIssues, pat
     }
     if (target.args !== undefined && (!Array.isArray(target.args) || target.args.some((arg) => typeof arg !== 'string'))) {
       issues.add(`${path_}.args`, 'must be an array of strings');
+    }
+    if (target.workingDirectory !== undefined && !isNonEmptyString(target.workingDirectory)) {
+      issues.add(`${path_}.workingDirectory`, 'must be a non-empty string');
+    }
+    if (
+      target.environment !== undefined &&
+      (!isPlainObject(target.environment) ||
+        Object.entries(target.environment).some(([key, value]) => !isNonEmptyString(key) || typeof value !== 'string'))
+    ) {
+      issues.add(`${path_}.environment`, 'must be an object of string values');
     }
     return;
   }
@@ -130,7 +139,7 @@ export function resolveDesktopOptions(options: DesktopDriverOptions): ResolvedDe
   }
 
   const host = options.host ?? '127.0.0.1';
-  if (!LOOPBACK_HOSTS.has(host)) {
+  if (!isLoopbackHost(host)) {
     issues.add('host', 'must be a loopback address; the driver host never binds to an external interface');
   }
 
@@ -150,6 +159,61 @@ export function resolveDesktopOptions(options: DesktopDriverOptions): ResolvedDe
 
   if (options.backendCapabilities !== undefined && !isPlainObject(options.backendCapabilities)) {
     issues.add('backendCapabilities', 'must be an object');
+  }
+
+  if (options.readiness !== undefined) {
+    if (!isPlainObject(options.readiness)) {
+      issues.add('readiness', 'must be an object');
+    } else {
+      if (options.readiness.requireWindow !== undefined && typeof options.readiness.requireWindow !== 'boolean') {
+        issues.add('readiness.requireWindow', 'must be a boolean');
+      }
+      if (options.readiness.requireStorybookChannel !== undefined && typeof options.readiness.requireStorybookChannel !== 'boolean') {
+        issues.add('readiness.requireStorybookChannel', 'must be a boolean');
+      }
+      if (options.readiness.requireTestId !== undefined && !isNonEmptyString(options.readiness.requireTestId)) {
+        issues.add('readiness.requireTestId', 'must be a non-empty string');
+      }
+      const readinessTimeout = options.readiness.timeout;
+      if (
+        readinessTimeout !== undefined &&
+        (typeof readinessTimeout !== 'number' || !Number.isInteger(readinessTimeout) || readinessTimeout <= 0)
+      ) {
+        issues.add('readiness.timeout', 'must be a positive integer');
+      }
+    }
+  }
+
+  if (options.storybook !== undefined) {
+    if (!isPlainObject(options.storybook)) {
+      issues.add('storybook', 'must be an object');
+    } else {
+      const storybookHost = options.storybook.host;
+      if (storybookHost !== undefined && !isLoopbackHost(storybookHost)) {
+        issues.add('storybook.host', 'must be a loopback address');
+      }
+      const storybookPort = options.storybook.port;
+      if (
+        storybookPort !== undefined &&
+        (typeof storybookPort !== 'number' || !Number.isInteger(storybookPort) || storybookPort <= 0 || storybookPort > 65535)
+      ) {
+        issues.add('storybook.port', 'must be an integer between 1 and 65535');
+      }
+      const renderTimeout = options.storybook.renderTimeout;
+      if (renderTimeout !== undefined && (typeof renderTimeout !== 'number' || !Number.isInteger(renderTimeout) || renderTimeout <= 0)) {
+        issues.add('storybook.renderTimeout', 'must be a positive integer');
+      }
+      if (
+        options.storybook.specRoots !== undefined &&
+        (!Array.isArray(options.storybook.specRoots) || options.storybook.specRoots.some((root) => !isNonEmptyString(root)))
+      ) {
+        issues.add('storybook.specRoots', 'must be an array of non-empty strings');
+      }
+    }
+  }
+
+  if (options.fakeScene !== undefined && typeof options.fakeScene !== 'string' && !isJsonSerializable(options.fakeScene)) {
+    issues.add('fakeScene', 'must be a path or JSON-serializable scene');
   }
 
   if (issues.length > 0) {

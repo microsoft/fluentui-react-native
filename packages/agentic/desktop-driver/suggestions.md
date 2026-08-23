@@ -1,10 +1,15 @@
 # Desktop driver refactoring suggestions
 
-> Implementation status: Phases 0-5 were substantially implemented on the
+> Implementation status: Phases 0-5 are implemented on the
 > `user/jasonvmo/test-driver` branch. The common config, RN-safe protocol, direct run coordinator,
 > consolidated `src/server` layout, relocatable manifests, narrowed exports, and Storybook
-> migration are now present. Remaining follow-ups include result taxonomy and app-side CI coverage
-> in addition to native platform proof and retirement of the Windows compatibility harness.
+> migration are now present. Result taxonomy, startup/report integrity, per-spec merging,
+> framework progress, transport hardening, module boundaries, and package-content cleanup are
+> complete. Remaining work is native platform proof and retirement of the Windows compatibility
+> harness.
+> Phase 1 and Phase 2 are complete: config loading is strict and generation is transactional;
+> Storybook runtime, WDIO, control CLI, app tests, fake CI coverage, and Windows orchestration all
+> consume the common config and protocol.
 
 This document combines two independent architecture reviews of
 `packages/agentic/desktop-driver` and its integration in `apps/storybook`, followed by a
@@ -568,7 +573,7 @@ export async function loadDesktopConfig(
 The CLI should accept `--config`; otherwise it may use `./desktop.config.ts` in the current
 workspace. It should not search unbounded parent directories.
 
-Because the package supports Node 20 and the CLI runs outside WDIO, TypeScript config loading must
+Because the package supports Node 22.12 and the CLI runs outside WDIO, TypeScript config loading must
 use one owned programmatic loader dependency. Do not rely on WDIO's `tsx` registration or inject a
 loader through `NODE_OPTIONS`; the driver-host child intentionally strips those registrations.
 Support `.mjs` and `.json` as loader-free alternatives.

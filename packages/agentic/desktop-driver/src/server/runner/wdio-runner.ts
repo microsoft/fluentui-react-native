@@ -15,6 +15,7 @@ import { DesktopCancelledError, DesktopDriverError, DesktopValidationError } fro
 import { terminateProcessTree } from '../../process-supervisor.ts';
 import type { DesktopRunExecutor } from '../coordinator.ts';
 import type { DesktopTestResult, StoryTestManifest } from '../../types.ts';
+import { decodeDesktopResult, DESKTOP_RESULT_STREAM_ENV } from './reporter-protocol.ts';
 
 /** How the runner is invoked. Fully specified by the consumer, never by a run request. */
 export interface DesktopRunnerCommand {
@@ -51,13 +52,35 @@ export interface RunExecutorOptions {
  * `spawn` without a shell cannot resolve `yarn` on Windows, where the launcher is `yarn.cmd`. A
  * path or an already-suffixed command is left alone.
  */
-export function resolveRunnerCommand(command: string, platform: NodeJS.Platform = process.platform): string {
+export function resolveRunnerCommand(
+  command: string,
+  platform: NodeJS.Platform = process.platform,
+  env: Readonly<Record<string, string | undefined>> = process.env,
+): string {
   if (platform !== 'win32') {
     return command;
   }
   if (command.includes('/') || command.includes('\\') || /\.(cmd|bat|exe)$/i.test(command)) {
     return command;
   }
+  const environmentValue = (name: string): string | undefined =>
+    Object.entries(env).find(([key]) => key.toLowerCase() === name.toLowerCase())?.[1];
+  const pathValue = environmentValue('PATH') ?? '';
+  const extensions = (environmentValue('PATHEXT') ?? '.COM;.EXE;.BAT;.CMD').split(';').filter(Boolean);
+  for (const directory of pathValue.split(';').filter(Boolean)) {
+    for (const extension of extensions) {
+      const candidate = path.join(directory, `${command}${extension.toLowerCase()}`);
+      if (fs.existsSync(candidate)) {
+        return candidate;
+      }
+      const originalCase = path.join(directory, `${command}${extension}`);
+      if (fs.existsSync(originalCase)) {
+        return originalCase;
+      }
+    }
+  }
+  // Preserve the conventional launcher name so spawn reports a focused ENOENT if PATH changed
+  // after invocation construction.
   return `${command}.cmd`;
 }
 
@@ -114,10 +137,15 @@ export function buildInvocation(
   platform: NodeJS.Platform = process.platform,
 ): RunnerInvocation {
   const entries = Array.isArray(selected) ? selected : [selected];
-  const command = resolveRunnerCommand(runner.command, platform);
+  const env = {
+    ...process.env,
+    ...runner.env,
+    DESKTOP_TEST_GREP: combinedGrep(entries),
+    [DESKTOP_RESULT_STREAM_ENV]: '1',
+  };
+  const command = resolveRunnerCommand(runner.command, platform, env);
   const specs = [...new Set(entries.map((entry) => entry.spec))];
   const args = [...(runner.args ?? []), ...specs.flatMap((spec) => ['--spec', spec])];
-  const env = { ...process.env, ...runner.env, DESKTOP_TEST_GREP: combinedGrep(entries) };
 
   if (platform === 'win32' && WINDOWS_LAUNCHER.test(command)) {
     return { ...toCommandInterpreterInvocation(command, args), env, windowsVerbatimArguments: true };
@@ -134,7 +162,15 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
   const runStories = (
     entries: readonly StoryTestManifest['entries'][number][],
     signal: AbortSignal,
-  ): Promise<{ ok: boolean; message?: string; cancellationFailed?: boolean; results?: readonly DesktopTestResult[] }> => {
+    onProgress: (result: DesktopTestResult) => void,
+  ): Promise<{
+    ok: boolean;
+    message?: string;
+    cancellationFailed?: boolean;
+    timedOut?: boolean;
+    results?: readonly DesktopTestResult[];
+    streamed?: boolean;
+  }> => {
     const invocation = buildInvocation(options.runner, entries, platform);
     const startedAt = Date.now();
 
@@ -149,11 +185,15 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
 
       let settled = false;
       let cancelling = false;
+      const streamedResults: DesktopTestResult[] = [];
+      let stdoutBuffer = '';
       const finish = (result: {
         ok: boolean;
         message?: string;
         cancellationFailed?: boolean;
+        timedOut?: boolean;
         results?: readonly DesktopTestResult[];
+        streamed?: boolean;
       }): void => {
         if (settled) {
           return;
@@ -175,7 +215,14 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
           platform,
           processGroup: platform !== 'win32',
         }).then(
-          () => finish({ ok: false, message: `Test runner exceeded its ${options.runner.timeoutMs ?? 900_000}ms deadline` }),
+          () =>
+            finish({
+              ok: false,
+              timedOut: true,
+              message: `Test runner exceeded its ${options.runner.timeoutMs ?? 900_000}ms deadline`,
+              results: streamedResults,
+              streamed: true,
+            }),
           (error: Error) => finish({ ok: false, message: `Timed-out runner cleanup failed: ${error.message}` }),
         );
       }, options.runner.timeoutMs ?? 900_000);
@@ -199,9 +246,21 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
       }
       signal.addEventListener('abort', onAbort, { once: true });
 
-      const forward = (chunk: Buffer): void => options.onOutput?.(chunk.toString('utf8'));
-      child.stdout?.on('data', forward);
-      child.stderr?.on('data', forward);
+      child.stdout?.on('data', (chunk: Buffer) => {
+        stdoutBuffer += chunk.toString('utf8');
+        const lines = stdoutBuffer.split(/\r?\n/);
+        stdoutBuffer = lines.pop() ?? '';
+        for (const line of lines) {
+          const result = decodeDesktopResult(line);
+          if (result) {
+            streamedResults.push(result);
+            onProgress(result);
+          } else {
+            options.onOutput?.(`${line}\n`);
+          }
+        }
+      });
+      child.stderr?.on('data', (chunk: Buffer) => options.onOutput?.(chunk.toString('utf8')));
 
       // Without an 'error' listener a spawn failure is an unhandled 'error' event that would kill
       // the service, and 'exit' would never fire, leaving the run reported as running forever.
@@ -213,7 +272,13 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
         finish({
           ok: code === 0,
           message: code === 0 ? undefined : `Test runner exited with ${signalName ? `signal ${signalName}` : `code ${String(code)}`}`,
-          results: options.runner.resultsDirectory ? readRunnerResults(options.runner.resultsDirectory, startedAt) : undefined,
+          results:
+            streamedResults.length > 0
+              ? streamedResults
+              : options.runner.resultsDirectory
+                ? readRunnerResults(options.runner.resultsDirectory, startedAt)
+                : undefined,
+          streamed: streamedResults.length > 0,
         });
       });
     });
@@ -237,7 +302,7 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
     }
 
     const startedAt = Date.now();
-    const outcome = await runStories(entries as StoryTestManifest['entries'], signal);
+    const outcome = await runStories(entries as StoryTestManifest['entries'], signal, progress);
     if (outcome.cancellationFailed) {
       throw new DesktopDriverError(outcome.message ?? 'Run cancellation failed', { kind: 'lifecycle' });
     }
@@ -245,6 +310,17 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
       throw new DesktopCancelledError();
     }
     const durationMs = Date.now() - startedAt;
+    if (outcome.timedOut) {
+      const timedOut: DesktopTestResult = {
+        testId: 'desktop-runner-timeout',
+        title: 'Desktop runner timeout',
+        status: 'timed_out',
+        durationMs,
+        error: { message: outcome.message ?? 'Desktop runner timed out' },
+      };
+      progress(timedOut);
+      return [...(outcome.results ?? []), timedOut];
+    }
     if (outcome.results && outcome.results.length > 0) {
       const results = [...outcome.results];
       const hasRecordedFailure = results.some((result) => result.status === 'failed' || result.status === 'infrastructureError');
@@ -257,8 +333,10 @@ export function createWebdriverIoRunExecutor(options: RunExecutorOptions): Deskt
           error: { message: outcome.message ?? 'The desktop runner exited unsuccessfully after its tests completed' },
         });
       }
-      for (const result of results) {
-        progress(result);
+      if (!outcome.streamed) {
+        for (const result of results) {
+          progress(result);
+        }
       }
       return results;
     }

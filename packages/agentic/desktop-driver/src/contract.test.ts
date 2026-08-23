@@ -6,7 +6,7 @@
  */
 
 import { createFakeRoutes, FakeDriver } from './server/webdriver/fake-driver.ts';
-import { createRouteDispatcher, type DispatchResult } from './server/webdriver/w3c-server.ts';
+import { createRouteDispatcher, startW3CServer, type DispatchResult } from './server/webdriver/w3c-server.ts';
 import { PORTABLE_COMMANDS, PORTABLE_COMMAND_SURFACES } from './capabilities.ts';
 import contractScene from './__fixtures__/contract-scene.json' with { type: 'json' };
 import type { DesktopFakeScene } from './types.ts';
@@ -56,6 +56,30 @@ describe('portable command matrix (fake backend)', () => {
     }
     expect(PORTABLE_COMMAND_SURFACES.isFocused).toBe('desktop');
     expect(PORTABLE_COMMAND_SURFACES.scrollIntoView).toBe('desktop');
+  });
+
+  describe('W3C loopback transport', () => {
+    it('returns a W3C error for an oversized body and keeps serving requests', async () => {
+      const server = await startW3CServer({
+        host: '127.0.0.1',
+        port: 0,
+        maxBodyBytes: 8,
+        routes: [{ method: 'GET', path: '/health', raw: true, handler: () => ({ status: 'ok' }) }],
+      });
+      try {
+        const oversized = await fetch(`${server.url}/health`, {
+          method: 'POST',
+          body: JSON.stringify({ value: 'too large' }),
+        });
+        expect(oversized.status).toBe(400);
+        await expect(oversized.json()).resolves.toMatchObject({ value: { error: 'invalid argument' } });
+
+        const health = await fetch(`${server.url}/health`);
+        await expect(health.json()).resolves.toEqual({ status: 'ok' });
+      } finally {
+        await server.close();
+      }
+    });
   });
 
   it('finds, inspects, clicks, and observes the resulting state change', async () => {

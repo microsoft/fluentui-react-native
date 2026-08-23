@@ -13,8 +13,10 @@ export { remote } from 'webdriverio';
 
 export { createDesktopWdioConfig, assertSharedSpecs, readStoryManifestDigest } from './config-factory.ts';
 export type { DesktopSessionStrategy, DesktopWdioConfigOptions } from './config-factory.ts';
-export { DesktopDriverService, DESKTOP_ENDPOINT_ENV, resolveAttachWindow, startDesktopDriver, summarize } from './service.ts';
-export type { DesktopServiceOptions, PublishedEndpoint } from './service.ts';
+export { DesktopWdioService, DESKTOP_ENDPOINT_ENV, summarize } from './service.ts';
+export type { DesktopServiceOptions } from './service.ts';
+export type { PublishedEndpoint } from './run-context.ts';
+export { resolveAttachWindow, startDesktopDriver } from './standalone.ts';
 export { buildCapabilities, buildRootSessionCapabilities, describeAttachResolution } from './capability-map.ts';
 export type { CapabilityOverrides } from './capability-map.ts';
 export { attachDesktopCommands, createDesktopCommands } from './commands.ts';

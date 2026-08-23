@@ -226,12 +226,16 @@ desktop-driver config resolve      Print the fully resolved project configuratio
 desktop-driver host                 Host Storybook channel, MCP, and desktop test coordination
 desktop-driver stories generate    Generate the Storybook test manifest and WDIO spec
 desktop-driver stories list        List stories reported by a running Storybook app
+desktop-driver stories select      Select a story and wait for its rendered event
+desktop-driver stories args        Update a story's control args
+desktop-driver stories smoke       Select every indexed story and report render failures
 desktop-driver start               Start a driver host and print endpoint metadata
 desktop-driver version             Print the package version
 ```
 
 Commands print JSON for scripting and agent workflows. `start` and `host` remain alive until
-SIGINT or SIGTERM and stop only resources they own.
+SIGINT or SIGTERM and stop only resources they own. `host --ready-file <path>` atomically writes
+the service identity, URL, manifest digest, and tested stories for process supervisors.
 
 ## Prerequisites
 

@@ -1,4 +1,10 @@
-import { decodeDesktopHostReady, decodeDesktopRunCancel, decodeDesktopRunRequest, decodeDesktopRunStatus } from './index.ts';
+import {
+  decodeDesktopHostClosing,
+  decodeDesktopHostReady,
+  decodeDesktopRunCancel,
+  decodeDesktopRunRequest,
+  decodeDesktopRunStatus,
+} from './index.ts';
 
 describe('desktop channel protocol codecs', () => {
   const ready = {
@@ -15,6 +21,14 @@ describe('desktop channel protocol codecs', () => {
   it('decodes a complete host readiness payload', () => {
     expect(decodeDesktopHostReady(ready)).toEqual(ready);
     expect(decodeDesktopHostReady({ ...ready, manifest: { ...ready.manifest, tests: [{ storyId: 'button--default' }] } })).toBeUndefined();
+  });
+
+  it('decodes only matching host-closing envelopes', () => {
+    expect(decodeDesktopHostClosing({ protocolVersion: 1, serviceId: 'service-1' })).toEqual({
+      protocolVersion: 1,
+      serviceId: 'service-1',
+    });
+    expect(decodeDesktopHostClosing({ protocolVersion: 99, serviceId: 'service-1' })).toBeUndefined();
   });
 
   it('requires an exact manifest and selected story list in run requests', () => {

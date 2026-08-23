@@ -10,25 +10,39 @@
  * never terminates the application.
  */
 
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
 import { ArtifactStore } from '../artifacts.ts';
-import { buildCapabilities, buildRootSessionCapabilities } from './capability-map.ts';
+import { statusForFailure, summarizeResults } from '../core/reporting.ts';
 import { attachDesktopCommands, type DesktopBrowserLike } from './commands.ts';
 import { DesktopLifecycle } from '../lifecycle.ts';
 import { isAlive, OwnershipManifest } from '../ownership.ts';
 import { resolveDesktopOptions } from '../config.ts';
 import { StoryController } from '../server/channel/client.ts';
 import { appendCleanupFailure, DesktopDriverError } from '../errors.ts';
-import { createRootSessionEnumerator, discoverAttachWindow, type DesktopWindowMatch } from './window-discovery.ts';
+import type { DesktopWindowMatch } from './window-discovery.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import { hostForUrl } from '../net.ts';
 import { portableCommandsFor } from '../capabilities.ts';
+import { DESKTOP_RESULT_STREAM_ENV, encodeDesktopResult } from '../server/runner/reporter-protocol.ts';
+import {
+  clearPublishedEndpoint,
+  DESKTOP_ENDPOINT_ENV,
+  publishEndpoint,
+  readPublishedEndpoint,
+  type PublishedEndpoint,
+} from './run-context.ts';
+import { waitForDesktopReadiness } from './readiness.ts';
 import type { DriverHostHandle } from '../server/webdriver/client.ts';
 import type {
   DesktopDriverOptions,
-  DesktopDriverService as DesktopDriverServiceHandle,
+  DesktopExitReason,
+  DesktopRunReport,
   DesktopTestResult,
   ResolvedDesktopDriverOptions,
 } from '../types.ts';
+import { resolveAttachWindow } from './standalone.ts';
 
 /**
  * The driver-host client is loaded on demand.
@@ -41,28 +55,8 @@ async function driverHostClient(): Promise<typeof import('../server/webdriver/cl
   return import('../server/webdriver/client.ts');
 }
 
-/** Environment variable through which the launcher publishes the owned endpoint to workers. */
-export const DESKTOP_ENDPOINT_ENV = 'FURN_DESKTOP_DRIVER_ENDPOINT';
-
-export interface PublishedEndpoint {
-  hostname: string;
-  port: number;
-  path: string;
-  storybookUrl?: string;
-  runId: string;
-  artifactsDirectory: string;
-  driverHostLog?: string;
-  driverHostPid?: number;
-  /** Application process observed during attach-mode discovery. */
-  appProcessId?: number;
-  specDigest?: string;
-  /** Native window handle resolved from an attach target, when the backend needs one. */
-  windowHandle?: string;
-  /** How the window was selected, for the `windowDiscovered` lifecycle event. */
-  windowMatch?: { matchedBy: string; exact: boolean; name?: string; processId?: number };
-  /** Set instead of the endpoint fields when the driver host failed to start. */
-  error?: string;
-}
+export { DESKTOP_ENDPOINT_ENV } from './run-context.ts';
+export type { PublishedEndpoint } from './run-context.ts';
 
 interface MutableWdioConfig {
   protocol?: string;
@@ -81,9 +75,10 @@ export interface DesktopServiceOptions extends DesktopDriverOptions {
    * for a hand-written config.
    */
   specDigest?: string;
+  sessionStrategy?: 'suite' | 'spec';
 }
 
-export class DesktopDriverService {
+export class DesktopWdioService {
   private readonly options: ResolvedDesktopDriverOptions;
   private readonly ownership: OwnershipManifest;
   private readonly lifecycle: DesktopLifecycle;
@@ -91,16 +86,20 @@ export class DesktopDriverService {
   private readonly startedAt = new Date().toISOString();
   private readonly storyIds = new Set<string>();
   private readonly specDigest?: string;
+  private readonly sessionStrategy: 'suite' | 'spec';
 
   private host?: DriverHostHandle;
   private artifacts?: ArtifactStore;
   private browser?: DesktopBrowserLike;
   private endpoint?: PublishedEndpoint;
   private stopMonitor?: () => void;
+  private workerId?: string;
+  private finalized = false;
 
   constructor(serviceOptions: DesktopServiceOptions) {
     this.options = resolveDesktopOptions(serviceOptions);
     this.specDigest = serviceOptions.specDigest;
+    this.sessionStrategy = serviceOptions.sessionStrategy ?? 'suite';
     this.ownership = new OwnershipManifest(`desktop-driver-${process.pid}`);
     this.lifecycle = new DesktopLifecycle({
       platform: this.options.platform,
@@ -111,8 +110,14 @@ export class DesktopDriverService {
   // ---------------------------------------------------------------- launcher
 
   async onPrepare(config: MutableWdioConfig): Promise<void> {
+    clearPublishedEndpoint();
     const artifacts = new ArtifactStore({ rootDirectory: this.options.artifactsDirectory });
     this.artifacts = artifacts;
+    this.lifecycle.on((event) => artifacts.appendEvent(event));
+    this.lifecycle.advance(this.options.target.mode === 'launch' ? 'starting' : 'attaching', 'launchRequested', {
+      mode: this.options.target.mode,
+      phase: 'launcher',
+    });
 
     try {
       const { startDriverHost } = await driverHostClient();
@@ -128,18 +133,37 @@ export class DesktopDriverService {
       // WebdriverIO continues past a failing `onPrepare`, which would otherwise surface as an
       // opaque "unable to connect" error in every worker. Publishing the real cause makes the
       // run fail as an infrastructure error with the diagnosis attached.
-      process.env[DESKTOP_ENDPOINT_ENV] = JSON.stringify({
+      publishEndpoint({
+        hostname: '',
+        port: 0,
+        path: '/',
         error: error instanceof Error ? error.message : String(error),
         artifactsDirectory: this.options.artifactsDirectory,
         runId: artifacts.runId,
       });
+      await this.writeFailureReport(artifacts, error, 'Driver host startup');
       throw error;
     }
 
     this.ownership.record('driverHost', this.host.pid, 'self', `${this.options.backend} driver host`);
     this.ownership.record('port', this.host.port, 'self');
 
-    const window = await this.resolveAttachWindow(this.host.health.webDriverUrl);
+    let window: DesktopWindowMatch | undefined;
+    try {
+      window = await resolveAttachWindow(this.options, this.host.health.webDriverUrl);
+    } catch (error) {
+      await this.host.stop().catch(() => undefined);
+      publishEndpoint({
+        hostname: '',
+        port: 0,
+        path: '/',
+        error: error instanceof Error ? error.message : String(error),
+        artifactsDirectory: this.options.artifactsDirectory,
+        runId: artifacts.runId,
+      });
+      await this.writeFailureReport(artifacts, error, 'Attach-window discovery');
+      throw error;
+    }
     if (window) {
       // The application and its window belong to whoever launched them; recording them as
       // `external` is what stops cleanup from ever touching them.
@@ -176,10 +200,11 @@ export class DesktopDriverService {
           }
         : undefined,
     };
+    this.endpoint = endpoint;
 
     // Workers are forked from this process after `onPrepare`, so the environment carries the
     // endpoint. The config fields are also set because that is the documented service contract.
-    process.env[DESKTOP_ENDPOINT_ENV] = JSON.stringify(endpoint);
+    publishEndpoint(endpoint);
     config.protocol = 'http';
     config.hostname = endpoint.hostname;
     config.port = endpoint.port;
@@ -191,31 +216,21 @@ export class DesktopDriverService {
     }
   }
 
-  /**
-   * Resolves an attach target to one native window handle.
-   *
-   * Only the Windows backend needs this: `appium:appTopLevelWindow` is the only way to pin a
-   * session to an already running window, and it takes a handle, while a portable target names
-   * the application by pid, identity, or title. Mac2 attaches by bundle identifier instead, and
-   * the `fake` backend has no windows.
-   */
-  private async resolveAttachWindow(webDriverUrl: string): Promise<DesktopWindowMatch | undefined> {
-    return resolveAttachWindow(this.options, webDriverUrl);
-  }
-
   async onComplete(): Promise<void> {
-    if (!this.host) {
-      return;
-    }
     const failures: unknown[] = [];
-    try {
-      await this.host.stop();
-    } catch (error) {
-      failures.push(error);
+    if (this.host) {
+      try {
+        await this.host.stop();
+      } catch (error) {
+        failures.push(error);
+      }
     }
     failures.push(...(await this.ownership.terminateOwnedProcesses()));
-    await this.artifacts?.close();
-    delete process.env[DESKTOP_ENDPOINT_ENV];
+    if (this.artifacts) {
+      await this.mergeFinalReports(this.artifacts, failures);
+      await this.artifacts.close();
+    }
+    clearPublishedEndpoint();
 
     if (failures.length > 0) {
       throw failures.reduce((accumulated, failure) => appendCleanupFailure(accumulated, failure)) as Error;
@@ -232,8 +247,26 @@ export class DesktopDriverService {
    * session attaches to the window the launcher resolved, and a failed host start surfaces as an
    * infrastructure error instead of a connection refusal.
    */
-  beforeSession(config: MutableWdioConfig, capabilities?: Record<string, unknown>): void {
-    const endpoint = this.readEndpoint();
+  async beforeSession(config: MutableWdioConfig, capabilities?: Record<string, unknown>): Promise<void> {
+    let endpoint: PublishedEndpoint;
+    try {
+      endpoint = this.readEndpoint();
+    } catch (error) {
+      const raw = process.env[DESKTOP_ENDPOINT_ENV];
+      let failed: PublishedEndpoint | undefined;
+      if (raw) {
+        try {
+          failed = JSON.parse(raw) as PublishedEndpoint;
+        } catch {
+          // Preserve the validated endpoint error from readEndpoint.
+        }
+      }
+      if (failed?.runId && failed.artifactsDirectory) {
+        const artifacts = new ArtifactStore({ rootDirectory: failed.artifactsDirectory, runId: failed.runId });
+        await this.writeFailureReport(artifacts, error, 'WebDriver session setup');
+      }
+      throw error;
+    }
     config.protocol = 'http';
     config.hostname = endpoint.hostname;
     config.port = endpoint.port;
@@ -247,27 +280,16 @@ export class DesktopDriverService {
     if (this.endpoint) {
       return this.endpoint;
     }
-    const raw = process.env[DESKTOP_ENDPOINT_ENV];
-    if (!raw) {
-      throw new DesktopDriverError('The desktop driver launcher did not publish an endpoint; is the service registered in `services`?', {
-        kind: 'configuration',
-      });
-    }
-    this.endpoint = JSON.parse(raw) as PublishedEndpoint;
-    if (this.endpoint.error) {
-      throw new DesktopDriverError(`The desktop driver host failed to start: ${this.endpoint.error}`, {
-        kind: 'driverHost',
-        detail: { runId: this.endpoint.runId },
-      });
-    }
+    this.endpoint = readPublishedEndpoint();
     return this.endpoint;
   }
 
-  async before(_capabilities: unknown, _specs: readonly string[], browser: DesktopBrowserLike): Promise<void> {
+  async before(_capabilities: unknown, specs: readonly string[], browser: DesktopBrowserLike): Promise<void> {
     const endpoint = this.readEndpoint();
     this.browser = browser;
     const artifacts = new ArtifactStore({ rootDirectory: endpoint.artifactsDirectory, runId: endpoint.runId });
     this.artifacts = artifacts;
+    this.workerId = workerReportId(specs);
 
     this.lifecycle.on((event) => artifacts.appendEvent(event));
     this.lifecycle.advance(this.options.target.mode === 'launch' ? 'starting' : 'attaching', 'launchRequested', {
@@ -306,91 +328,20 @@ export class DesktopDriverService {
       storybookUrl: endpoint.storybookUrl,
     });
 
-    await this.waitForReadiness(browser, storyController);
-    this.throwIfTerminatedBeforeReady();
-    this.lifecycle.advance('ready', 'ready');
-  }
-
-  private async waitForReadiness(browser: DesktopBrowserLike, storyController: StoryController): Promise<void> {
-    const deadline = Date.now() + this.options.readiness.timeout;
-    let lastWindowError: unknown;
-
-    if (this.options.readiness.requireWindow) {
-      let observed = this.options.platform === 'fake' || Boolean(this.endpoint?.windowHandle);
-      while (Date.now() < deadline && !observed) {
-        this.throwIfTerminatedBeforeReady();
-        if (this.options.backend === 'mac2') {
-          const target = this.options.target;
-          const application =
-            target.mode === 'attach'
-              ? { bundleId: target.identity }
-              : target.app.endsWith('.app') || target.app.includes('/')
-                ? { path: target.app }
-                : { bundleId: target.app };
-          try {
-            const state = Number(await browser.execute('macos: queryAppState', application));
-            observed = state >= 3;
-          } catch (error) {
-            lastWindowError = error;
-          }
-        } else {
-          if (!browser.getWindowHandles) {
-            throw new DesktopDriverError('The connected backend cannot verify the required application window', {
-              kind: 'capability',
-            });
-          }
-          observed = (await browser.getWindowHandles().catch(() => [])).length > 0;
-        }
-        if (!observed) {
-          await new Promise((resolve) => setTimeout(resolve, 250));
-        }
-      }
-      if (!observed) {
-        this.lifecycle.observeTimeout({ gate: 'window' });
-        throw new DesktopDriverError('No application window was observed within the readiness budget', {
-          kind: 'lifecycle',
-          cause: lastWindowError,
-          detail: lastWindowError
-            ? { lastError: lastWindowError instanceof Error ? lastWindowError.message : String(lastWindowError) }
-            : undefined,
-        });
-      }
-    }
-
-    if (this.options.readiness.requireStorybookChannel) {
-      let connected = false;
-      while (Date.now() < deadline && !connected) {
-        this.throwIfTerminatedBeforeReady();
-        connected = await storyController.isConnected();
-        if (!connected) {
-          await new Promise((resolve) => setTimeout(resolve, 250));
-        }
-      }
-      if (!connected) {
-        this.lifecycle.observeTimeout({ gate: 'storybookChannel' });
-        throw new DesktopDriverError(`Storybook channel at ${storyController.url} did not answer within the readiness budget`, {
-          kind: 'storybook',
-        });
-      }
-    }
-
-    if (this.options.readiness.requireTestId) {
+    try {
+      await waitForDesktopReadiness({
+        browser,
+        controller: storyController,
+        driver: this.options,
+        lifecycle: this.lifecycle,
+        endpoint: this.endpoint,
+      });
       this.throwIfTerminatedBeforeReady();
-      if (this.options.backend === 'mac2') {
-        // Repeated XCTest snapshots can monopolize the React Native main thread during a cold
-        // launch. Leave one idle interval for the app shell to mount before polling.
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-      }
-      const element = await browser.$(`~${this.options.readiness.requireTestId}`);
-      const displayed = await element
-        .waitForDisplayed({ timeout: Math.max(1000, deadline - Date.now()), interval: this.options.backend === 'mac2' ? 1000 : undefined })
-        .catch(() => false);
-      if (!displayed) {
-        this.lifecycle.observeTimeout({ gate: 'testId', testId: this.options.readiness.requireTestId });
-        throw new DesktopDriverError(`Readiness selector "${this.options.readiness.requireTestId}" never became visible`, {
-          kind: 'lifecycle',
-        });
-      }
+      this.lifecycle.advance('ready', 'ready');
+    } catch (error) {
+      this.results.push(failureResult('Desktop readiness', error, this.lifecycle.reason));
+      await this.finalizeWorkerArtifacts();
+      throw error;
     }
   }
 
@@ -432,7 +383,7 @@ export class DesktopDriverService {
   }
 
   async afterTest(
-    test: { title?: string; parent?: string },
+    test: { title?: string; parent?: string; pending?: boolean },
     _context: unknown,
     result: { passed?: boolean; error?: Error; duration?: number },
   ): Promise<void> {
@@ -448,12 +399,12 @@ export class DesktopDriverService {
       storyId,
       title,
       status: unexpectedExit
-        ? this.lifecycle.reason === 'monitorFailure'
-          ? 'infrastructureError'
-          : 'failed'
-        : result.passed
-          ? 'passed'
-          : 'failed',
+        ? statusForFailure(unexpectedExit, this.lifecycle.reason)
+        : test.pending || (result.passed === undefined && !result.error)
+          ? 'skipped'
+          : result.passed
+            ? 'passed'
+            : 'failed',
       durationMs: result.duration ?? 0,
       error: unexpectedExit
         ? {
@@ -479,6 +430,9 @@ export class DesktopDriverService {
     }
 
     this.results.push(testResult);
+    if (process.env[DESKTOP_RESULT_STREAM_ENV] === '1') {
+      process.stdout.write(`${encodeDesktopResult(testResult)}\n`);
+    }
   }
 
   async after(): Promise<void> {
@@ -501,10 +455,34 @@ export class DesktopDriverService {
       }
     }
 
-    artifacts.writeJUnit(`desktop-driver ${this.options.platform}`, this.results);
-    artifacts.writeRunReport({
+    await this.finalizeWorkerArtifacts();
+    if (unexpectedExit) {
+      throw unexpectedExit;
+    }
+  }
+
+  private async finalizeWorkerArtifacts(): Promise<void> {
+    const artifacts = this.artifacts;
+    if (!artifacts || this.finalized) {
+      return;
+    }
+    this.finalized = true;
+    const reportBase = this.runReport(this.results, artifacts.runId);
+    if (this.sessionStrategy === 'spec') {
+      const worker = this.workerId ?? `worker-${process.pid}`;
+      artifacts.writeJUnit(`desktop-driver ${this.options.platform}`, this.results, `workers/${worker}/junit.xml`);
+      artifacts.writeRunReport(reportBase, `workers/${worker}/run.json`);
+    } else {
+      artifacts.writeJUnit(`desktop-driver ${this.options.platform}`, this.results);
+      artifacts.writeRunReport(reportBase);
+    }
+    await artifacts.close();
+  }
+
+  private runReport(results: readonly DesktopTestResult[], runId: string) {
+    return {
       packageVersion: PACKAGE_VERSION,
-      runId: artifacts.runId,
+      runId,
       startedAt: this.startedAt,
       finishedAt: new Date().toISOString(),
       platform: this.options.platform,
@@ -512,15 +490,48 @@ export class DesktopDriverService {
       target: this.options.target,
       ownership: this.lifecycle.ownership,
       capabilities: portableCommandsFor(this.options.backend),
-      storyIds: [...this.storyIds],
-      specDigest: this.endpoint?.specDigest,
-      results: this.results,
-      summary: summarize(this.results),
-    });
-    await artifacts.close();
-    if (unexpectedExit) {
-      throw unexpectedExit;
+      storyIds: [...new Set(results.map((result) => result.storyId).filter((storyId): storyId is string => storyId !== undefined))],
+      specDigest: this.endpoint?.specDigest ?? this.specDigest,
+      results,
+      summary: summarizeResults(results),
+    };
+  }
+
+  private async writeFailureReport(artifacts: ArtifactStore, error: unknown, title: string): Promise<void> {
+    const result = failureResult(title, error, this.lifecycle.reason);
+    this.lifecycle.emit('monitorError', { phase: title, message: result.error?.message });
+    if (this.sessionStrategy === 'spec' && this.workerId) {
+      artifacts.writeJUnit(`desktop-driver ${this.options.platform}`, [result], `workers/${this.workerId}/junit.xml`);
+      artifacts.writeRunReport(this.runReport([result], artifacts.runId), `workers/${this.workerId}/run.json`);
+    } else {
+      artifacts.writeJUnit(`desktop-driver ${this.options.platform}`, [result]);
+      artifacts.writeRunReport(this.runReport([result], artifacts.runId));
     }
+    await artifacts.close();
+  }
+
+  private async mergeFinalReports(artifacts: ArtifactStore, cleanupFailures: readonly unknown[]): Promise<void> {
+    const workerReports = readWorkerReports(artifacts.runDirectory);
+    const existing = readRunReport(path.join(artifacts.runDirectory, 'run.json'));
+    const results = [...(existing?.results ?? []), ...workerReports.flatMap((report) => report.results)];
+    const deduplicated = results.filter(
+      (result, index, all) =>
+        all.findIndex(
+          (candidate) =>
+            candidate.testId === result.testId &&
+            candidate.title === result.title &&
+            candidate.status === result.status &&
+            candidate.error?.message === result.error?.message,
+        ) === index,
+    );
+    for (const failure of cleanupFailures) {
+      deduplicated.push(failureResult('Desktop cleanup', failure));
+    }
+    if (deduplicated.length === 0) {
+      return;
+    }
+    artifacts.writeJUnit(`desktop-driver ${this.options.platform}`, deduplicated);
+    artifacts.writeRunReport(this.runReport(deduplicated, artifacts.runId));
   }
 
   private unexpectedLifecycleError(): DesktopDriverError | undefined {
@@ -534,20 +545,47 @@ export class DesktopDriverService {
   }
 }
 
-export function summarize(results: readonly DesktopTestResult[]): {
-  passed: number;
-  failed: number;
-  skipped: number;
-  infrastructureError: number;
-  durationMs: number;
-} {
+export const summarize = summarizeResults;
+
+function workerReportId(specs: readonly string[]): string {
+  const source = specs.length > 0 ? specs.join('--') : `worker-${process.pid}`;
+  const normalized = source
+    .replaceAll('\\', '/')
+    .replace(/[^a-zA-Z0-9._-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(-100);
+  return normalized || `worker-${process.pid}`;
+}
+
+function failureResult(title: string, error: unknown, exitReason?: DesktopExitReason): DesktopTestResult {
+  const failure = error instanceof Error ? error : new Error(String(error));
   return {
-    passed: results.filter((result) => result.status === 'passed').length,
-    failed: results.filter((result) => result.status === 'failed').length,
-    skipped: results.filter((result) => result.status === 'skipped').length,
-    infrastructureError: results.filter((result) => result.status === 'infrastructureError').length,
-    durationMs: results.reduce((total, result) => total + result.durationMs, 0),
+    testId: title,
+    title,
+    status: statusForFailure(error, exitReason),
+    durationMs: 0,
+    error: { message: failure.message, stack: failure.stack },
   };
+}
+
+function readRunReport(file: string): DesktopRunReport | undefined {
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8')) as DesktopRunReport;
+  } catch {
+    return undefined;
+  }
+}
+
+function readWorkerReports(runDirectory: string): DesktopRunReport[] {
+  const workers = path.join(runDirectory, 'workers');
+  if (!fs.existsSync(workers)) {
+    return [];
+  }
+  return fs
+    .readdirSync(workers, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => readRunReport(path.join(workers, entry.name, 'run.json')))
+    .filter((report): report is DesktopRunReport => report !== undefined);
 }
 
 /**
@@ -559,102 +597,4 @@ export function summarize(results: readonly DesktopTestResult[]): {
 function applyWindowHandle(capabilities: Record<string, unknown>, windowHandle: string): void {
   capabilities['appium:appTopLevelWindow'] = windowHandle;
   delete capabilities['appium:app'];
-}
-
-/**
- * Resolves an attach target to one native window handle.
- *
- * Only the Windows backends need this: `appium:appTopLevelWindow` is the only way to pin a
- * session to an already running window, and it takes a handle, while a portable target names the
- * application by pid, identity, or title. Mac2 attaches by bundle identifier instead, and the
- * `fake` backend has no windows.
- */
-export async function resolveAttachWindow(
-  options: ResolvedDesktopDriverOptions,
-  webDriverUrl: string,
-): Promise<DesktopWindowMatch | undefined> {
-  const target = options.target;
-  if (target.mode !== 'attach' || options.backend !== 'novawindows') {
-    return undefined;
-  }
-
-  const enumerate = createRootSessionEnumerator({
-    webDriverUrl,
-    capabilities: buildRootSessionCapabilities(options),
-    need: { identity: target.identity !== undefined },
-  });
-
-  try {
-    return await discoverAttachWindow(target, enumerate);
-  } catch (error) {
-    throw new DesktopDriverError(`Failed to resolve the attach target to a single top-level window: ${(error as Error).message}`, {
-      kind: error instanceof DesktopDriverError ? error.kind : 'ownership',
-      cause: error,
-      detail: { target, ...(error instanceof DesktopDriverError ? error.detail : undefined) },
-    });
-  }
-}
-
-/**
- * Starts an owned driver host for a standalone session.
- *
- * Lets a consumer use Jest, Vitest, `node:test`, or a plain script without adopting a different
- * test API or backend contract.
- */
-export async function startDesktopDriver(options: DesktopDriverOptions): Promise<DesktopDriverServiceHandle> {
-  const resolved = resolveDesktopOptions(options);
-  const ownership = new OwnershipManifest(`standalone-${process.pid}`);
-
-  const { startDriverHost } = await driverHostClient();
-  const host = await startDriverHost({
-    backend: resolved.backend,
-    host: resolved.host,
-    port: resolved.port,
-    startupTimeout: resolved.startupTimeout,
-    fakeScene: resolved.fakeScene,
-  });
-  ownership.record('driverHost', host.pid, 'self', `${resolved.backend} driver host`);
-  ownership.record('port', host.port, 'self');
-
-  const window = await resolveAttachWindow(resolved, host.health.webDriverUrl).catch(async (error: unknown) => {
-    // The host is ours, so a failed discovery must not leak it.
-    await host.stop();
-    throw error;
-  });
-  if (window) {
-    ownership.record('window', window.candidate.handle, 'external', window.candidate.name);
-    if (window.candidate.processId !== undefined) {
-      ownership.record('app', window.candidate.processId, 'external', window.candidate.name);
-    }
-  }
-
-  const capabilities = buildCapabilities(resolved, { windowHandle: window?.candidate.handle });
-
-  return {
-    webdriverOptions: {
-      protocol: 'http',
-      hostname: resolved.host,
-      port: host.port,
-      path: '/',
-      capabilities,
-      logLevel: resolved.logLevel,
-    },
-    options: resolved,
-    health: host.health,
-    ownedResources: ownership.list(),
-    stop: async () => {
-      let failure: unknown;
-      try {
-        await host.stop();
-      } catch (error) {
-        failure = error;
-      }
-      for (const cleanupFailure of await ownership.terminateOwnedProcesses()) {
-        failure = appendCleanupFailure(failure, cleanupFailure);
-      }
-      if (failure) {
-        throw failure;
-      }
-    },
-  };
 }

@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * `desktop-driver` command line.
  *
@@ -9,57 +8,25 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 
-import { detectDesktopDriver, doctor, generateStories, listRunningStories, verifyDesktopDriver } from './commands.ts';
-import { loadDesktopConfig, serializeResolvedDesktopProject, toDesktopHostOptions, writeDesktopRuntime } from '../config/node.ts';
+import {
+  detectDesktopDriver,
+  doctor,
+  generateStories,
+  listRunningStories,
+  selectRunningStory,
+  smokeRunningStories,
+  updateRunningStoryArgs,
+  verifyDesktopDriver,
+} from './commands.ts';
+import { assertKnownFlags, parseArgs, type ParsedArgs } from './args.ts';
+import { loadDesktopConfig, renderDesktopRuntime, serializeResolvedDesktopProject, toDesktopHostOptions } from '../config/node.ts';
 import { detectHostPlatform } from '../drivers.ts';
 import { hostForUrl } from '../net.ts';
-import { startDesktopDriver } from '../wdio/service.ts';
+import { startDesktopDriver } from '../wdio/standalone.ts';
 import { startDesktopStorybookHost } from '../server/host.ts';
 import { DesktopDriverError } from '../errors.ts';
 import { PACKAGE_VERSION } from '../package-version.ts';
 import type { DesktopAppTarget, DesktopPlatform } from '../types.ts';
-
-interface ParsedArgs {
-  command: string[];
-  flags: Record<string, string | boolean>;
-  /** Every occurrence of each flag, in order, so a flag can be repeated. */
-  repeated: Record<string, string[]>;
-}
-
-function parseArgs(argv: readonly string[]): ParsedArgs {
-  const command: string[] = [];
-  const flags: Record<string, string | boolean> = {};
-  const repeated: Record<string, string[]> = {};
-
-  const record = (name: string, value: string | boolean): void => {
-    flags[name] = value;
-    if (typeof value === 'string') {
-      (repeated[name] ??= []).push(value);
-    }
-  };
-
-  for (let index = 0; index < argv.length; index += 1) {
-    const token = argv[index];
-    if (!token.startsWith('--')) {
-      command.push(token);
-      continue;
-    }
-    const [name, inline] = token.slice(2).split('=', 2);
-    if (inline !== undefined) {
-      record(name, inline);
-      continue;
-    }
-    const next = argv[index + 1];
-    if (next === undefined || next.startsWith('--')) {
-      record(name, true);
-      continue;
-    }
-    record(name, next);
-    index += 1;
-  }
-
-  return { command, flags, repeated };
-}
 
 function requirePlatform(flags: ParsedArgs['flags']): DesktopPlatform {
   const platform = (flags.platform ?? process.env.DESKTOP_TEST_PLATFORM ?? 'fake') as DesktopPlatform;
@@ -107,6 +74,9 @@ Commands
   host                       Run the Storybook channel, MCP, and desktop test coordinator
   stories generate           Scan story modules and emit the manifest and generated spec
   stories list               List the stories a running Storybook application reports
+  stories select <id>        Select a story and wait for it to render
+  stories args <id> <json>   Update a story's control args
+  stories smoke              Select every indexed story and report failures
   start                      Start an owned driver host and print its endpoint
   version                    Print the package version
 
@@ -121,6 +91,7 @@ Common options
   --config <file>                   Desktop project config (default: ./desktop.config.ts)
   --out <dir>                       Output directory for generated story tests
   --storybook-port <port>           Storybook channel server port (default: 7007)
+  --storybook-host <host>           Storybook channel host (loopback only)
 
 host options
   --config-path <dir>              Storybook config directory (default: src)
@@ -129,16 +100,19 @@ host options
   --runner-arg <arg>                Runner argument before the spec selection; repeatable
   --cwd <dir>                       Working directory for the runner (default: current directory)
   --port <port>                     Storybook channel and MCP port (default: 7007)
+  --ready-file <path>               Atomically write host-ready JSON
 `;
 
 export async function main(argv: readonly string[] = process.argv.slice(2)): Promise<number> {
   const { command, flags, repeated } = parseArgs(argv);
-  const [first, second] = command;
+  const [first, rawSecond] = command;
+  const second = first === 'stories' && rawSecond === undefined ? 'list' : rawSecond;
 
   if (!first || flags.help === true || first === 'help') {
     process.stdout.write(USAGE);
     return first ? 0 : 2;
   }
+  assertKnownFlags(first, second, flags);
 
   switch (first) {
     case 'version':
@@ -156,7 +130,7 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
         process.stderr.write(`Unknown "config" subcommand "${String(second)}"\n${USAGE}`);
         return 2;
       }
-      const project = await loadDesktopConfig(typeof flags.config === 'string' ? flags.config : undefined, {
+      const project = loadDesktopConfig(typeof flags.config === 'string' ? flags.config : undefined, {
         platform: flags.platform === undefined ? undefined : requirePlatform(flags),
       });
       print(serializeResolvedDesktopProject(project));
@@ -201,11 +175,11 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
             : fs.existsSync(path.resolve('desktop.config.ts'))
               ? path.resolve('desktop.config.ts')
               : undefined;
-        const project = configFile ? await loadDesktopConfig(configFile) : undefined;
+        const project = configFile ? loadDesktopConfig(configFile) : undefined;
         const storyRoots = project
           ? project.storybook.stories.map((entry) => entry.directory)
-          : String(flags['story-root'] ?? 'src')
-              .split(',')
+          : (repeated['story-root'] ?? [String(flags['story-root'] ?? 'src')])
+              .flatMap((entry) => entry.split(','))
               .map((entry) => entry.trim())
               .filter(Boolean);
         const result = generateStories({
@@ -214,7 +188,7 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
             ? [
                 ...new Set(
                   project.storybook.stories.flatMap((entry) =>
-                    fs.globSync(entry.files, { cwd: entry.directory }).map((file) => path.resolve(entry.directory, file)),
+                    fs.globSync(entry.files, { cwd: entry.directory }).map((file) => fs.realpathSync(path.resolve(entry.directory, file))),
                   ),
                 ),
               ]
@@ -225,8 +199,13 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
             : typeof flags['spec-root'] === 'string'
               ? flags['spec-root'].split(',')
               : undefined,
+          additionalOutputPaths: project ? [project.tests.runtimePath] : undefined,
+          additionalOutputs: project
+            ? (manifest) => [{ path: project.tests.runtimePath, contents: renderDesktopRuntime(project, manifest) }]
+            : undefined,
+          configDigest: project?.configFingerprint,
         });
-        const runtimePath = project ? writeDesktopRuntime(project, result.manifest) : undefined;
+        const runtimePath = project?.tests.runtimePath;
         print({
           manifestPath: result.manifestPath,
           specPath: result.specPath,
@@ -237,14 +216,35 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
         });
         return result.problems.length > 0 ? 1 : 0;
       }
-      if (second === 'list') {
-        const project = typeof flags.config === 'string' ? await loadDesktopConfig(flags.config) : undefined;
-        print(
-          await listRunningStories({
-            host: project?.storybook.channel.host,
-            port: flags['storybook-port'] ? Number(flags['storybook-port']) : project?.storybook.channel.port,
-          }),
-        );
+      if (second === 'list' || second === 'select' || second === 'args' || second === 'smoke') {
+        const project = loadOptionalProject(flags);
+        const connection = {
+          host: typeof flags['storybook-host'] === 'string' ? flags['storybook-host'] : project?.storybook.channel.host,
+          port: flags['storybook-port'] ? Number(flags['storybook-port']) : project?.storybook.channel.port,
+        };
+        if (second === 'list') {
+          print(await listRunningStories(connection));
+          return 0;
+        }
+        if (second === 'select') {
+          const storyId = command[2];
+          print(await selectRunningStory(connection, storyId));
+          return 0;
+        }
+        if (second === 'args') {
+          const storyId = command[2];
+          const json = command[3];
+          if (!json) {
+            throw new DesktopDriverError('stories args requires <story-id> <json>', { kind: 'configuration' });
+          }
+          const updatedArgs = JSON.parse(json) as unknown;
+          if (typeof updatedArgs !== 'object' || updatedArgs === null || Array.isArray(updatedArgs)) {
+            throw new DesktopDriverError('stories args JSON must be an object', { kind: 'configuration' });
+          }
+          print(await updateRunningStoryArgs(connection, storyId, updatedArgs as Record<string, unknown>));
+          return 0;
+        }
+        print(await smokeRunningStories(connection));
         return 0;
       }
       process.stderr.write(`Unknown "stories" subcommand "${String(second)}"\n${USAGE}`);
@@ -253,14 +253,18 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
 
     case 'host':
     case 'serve': {
-      const project = typeof flags.config === 'string' ? await loadDesktopConfig(flags.config) : undefined;
+      const project = loadOptionalProject(flags);
       if (!project && typeof flags.manifest !== 'string') {
         process.stderr.write(`${first} requires --manifest <path to story-tests.manifest.json>\n`);
         return 2;
       }
       const shutdownFile = typeof flags['shutdown-file'] === 'string' ? path.resolve(flags['shutdown-file']) : undefined;
+      const readyFile = typeof flags['ready-file'] === 'string' ? path.resolve(flags['ready-file']) : undefined;
       if (shutdownFile) {
         fs.rmSync(shutdownFile, { force: true });
+      }
+      if (readyFile) {
+        fs.rmSync(readyFile, { force: true });
       }
       const server = await startDesktopStorybookHost(
         project
@@ -289,13 +293,17 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
             },
       );
 
-      print({
+      const ready = {
         url: server.url,
         serviceId: server.serviceId,
         manifestDigest: server.manifest.digest,
         stories: server.manifest.entries.map((entry) => entry.storyId),
         discovery: 'Storybook channel events; no separate test endpoint is exposed to clients',
-      });
+      };
+      if (readyFile) {
+        writeJsonAtomic(readyFile, ready);
+      }
+      print(ready);
 
       await waitForHostShutdown(server, shutdownFile);
       return 0;
@@ -319,6 +327,28 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
     default:
       process.stderr.write(`Unknown command "${first}"\n${USAGE}`);
       return 2;
+  }
+}
+
+function loadOptionalProject(flags: ParsedArgs['flags']) {
+  const configFile =
+    typeof flags.config === 'string'
+      ? flags.config
+      : fs.existsSync(path.resolve('desktop.config.ts'))
+        ? path.resolve('desktop.config.ts')
+        : undefined;
+  return configFile ? loadDesktopConfig(configFile) : undefined;
+}
+
+function writeJsonAtomic(file: string, value: unknown): void {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const temporary = `${file}.${process.pid}-${Date.now()}.tmp`;
+  try {
+    fs.writeFileSync(temporary, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+    fs.renameSync(temporary, file);
+  } catch (error) {
+    fs.rmSync(temporary, { force: true });
+    throw error;
   }
 }
 
@@ -352,17 +382,4 @@ async function waitForHostShutdown(server: { stop(): Promise<void> }, shutdownFi
     process.once('SIGINT', stop);
     process.once('SIGTERM', stop);
   });
-}
-
-const invokedDirectly = process.argv[1] !== undefined && import.meta.url === new URL(`file://${process.argv[1]}`).href;
-
-if (invokedDirectly) {
-  main()
-    .then((code) => {
-      process.exitCode = code;
-    })
-    .catch((error: unknown) => {
-      process.stderr.write(`${error instanceof Error ? error.message : String(error)}\n`);
-      process.exitCode = 1;
-    });
 }

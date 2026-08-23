@@ -83,6 +83,19 @@ product-owned route-host boundary for future migration.
 Platform backend dependencies are loaded only after platform selection and only in the driver-host
 process. The neutral package graph imports no React Native platform fork.
 
+### Project configuration
+
+One schema-versioned `desktop.config.ts` is the source of truth for application identity,
+Storybook sources, desktop discovery, generated output, channel settings, runner invocation,
+readiness, artifacts, environment overrides, and every platform target. The data-only config
+entry is safe to use from Storybook tooling; Node loading and path resolution live in
+`config/node`.
+
+The loader validates every platform, rejects unknown keys, canonicalizes existing inputs, confines
+generated and artifact output to `rootDir`, and verifies dotted application-manifest references.
+Generation applies configured story globs and atomically commits the RN runtime projection and
+generated spec before the manifest commit marker.
+
 ## Portability contract
 
 ### Test source
@@ -275,7 +288,8 @@ set, Storybook channel, and artifact directory.
 
 The launcher owns driver-host startup and endpoint publication. Workers consume the published
 endpoint, apply readiness, augment `browser.desktop`, record results, and delete their sessions.
-The exported service remains a compatibility wrapper around those responsibilities.
+`DesktopWdioService` remains the WebdriverIO compatibility facade while run-context validation,
+readiness, standalone startup, and reporting live in separate modules.
 
 The driver host strips loader registrations such as `--require`, `--import`, and `--loader` from
 inherited `NODE_OPTIONS`. WebdriverIO uses a `tsx` registration to load TypeScript configuration;
@@ -338,6 +352,10 @@ in the manifest. No device-supplied value can become a command, module path, or 
 | `desktopTestRunRequest`  | Start selected or all-story execution       |
 | `desktopTestRunStatus`   | Acceptance, progress, and terminal result   |
 | `desktopTestRunCancel`   | Bounded cancellation of the active run      |
+
+Console and agent clients use `desktop-driver stories list|select|args|smoke`; applications no
+longer carry a second Storybook REST implementation. Supervisors can consume `config resolve` and
+the host's atomic `--ready-file` output rather than duplicating ports or identities.
 
 The spawned runner inherits the service environment. Consumers must start explicit platform
 scripts; otherwise a configuration that defaults to `fake` can return a valid fake-backend pass

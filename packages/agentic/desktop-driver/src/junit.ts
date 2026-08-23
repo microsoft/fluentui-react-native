@@ -22,8 +22,8 @@ function escapeXml(value: string): string {
 
 export function renderJUnit(suiteName: string, results: readonly DesktopTestResult[]): string {
   const failures = results.filter((result) => result.status === 'failed').length;
-  const errors = results.filter((result) => result.status === 'infrastructureError').length;
-  const skipped = results.filter((result) => result.status === 'skipped').length;
+  const errors = results.filter((result) => result.status === 'infrastructureError' || result.status === 'timed_out').length;
+  const skipped = results.filter((result) => result.status === 'skipped' || result.status === 'cancelled').length;
   const time = results.reduce((total, result) => total + result.durationMs, 0) / 1000;
 
   const cases = results
@@ -37,25 +37,25 @@ export function renderJUnit(suiteName: string, results: readonly DesktopTestResu
       if (result.status === 'passed') {
         return `    <testcase ${attributes} />`;
       }
-      if (result.status === 'skipped') {
-        return `    <testcase ${attributes}>\n      <skipped />\n    </testcase>`;
+      if (result.status === 'skipped' || result.status === 'cancelled') {
+        const message = result.status === 'cancelled' ? ' message="cancelled"' : '';
+        return `    <testcase ${attributes}>\n      <skipped${message} />\n    </testcase>`;
       }
-      const tag = result.status === 'infrastructureError' ? 'error' : 'failure';
+      const tag = result.status === 'infrastructureError' || result.status === 'timed_out' ? 'error' : 'failure';
       const message = escapeXml(result.error?.message ?? 'Unknown failure');
       const body = escapeXml(result.error?.stack ?? result.error?.message ?? '');
       return `    <testcase ${attributes}>\n      <${tag} message="${message}">${body}</${tag}>\n    </testcase>`;
     })
     .join('\n');
 
-  return [
+  return `${[
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<testsuites>',
     `  <testsuite name="${escapeXml(suiteName)}" tests="${results.length}" failures="${failures}" errors="${errors}" skipped="${skipped}" time="${time.toFixed(3)}">`,
     cases,
     '  </testsuite>',
     '</testsuites>',
-    '',
   ]
     .filter((line) => line.length > 0)
-    .join('\n');
+    .join('\n')}\n`;
 }

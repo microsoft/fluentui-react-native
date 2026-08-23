@@ -44,5 +44,8 @@ $session.processes |
 if ($session.desktopHostShutdownPath) {
   Remove-Item -LiteralPath $session.desktopHostShutdownPath -Force -ErrorAction SilentlyContinue
 }
+if ($session.desktopHostReadyPath) {
+  Remove-Item -LiteralPath $session.desktopHostReadyPath -Force -ErrorAction SilentlyContinue
+}
 Remove-Item -LiteralPath $sessionPath
 Write-Host 'Windows agent session stopped.'

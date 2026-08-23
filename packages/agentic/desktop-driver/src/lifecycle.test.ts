@@ -149,7 +149,7 @@ describe('artifacts', () => {
       capabilities: [],
       storyIds: ['components-button--default'],
       results: [],
-      summary: { passed: 0, failed: 0, skipped: 0, infrastructureError: 0, durationMs: 0 },
+      summary: { passed: 0, failed: 0, skipped: 0, cancelled: 0, timedOut: 0, infrastructureError: 0, durationMs: 0 },
     });
     await store.close();
 
@@ -184,7 +184,15 @@ describe('artifacts', () => {
       capabilities: [],
       storyIds: [],
       results,
-      summary: { passed: 0, failed: results.length, skipped: 0, infrastructureError: 0, durationMs: results.length },
+      summary: {
+        passed: 0,
+        failed: results.length,
+        skipped: 0,
+        cancelled: 0,
+        timedOut: 0,
+        infrastructureError: 0,
+        durationMs: results.length,
+      },
     });
     const persisted = JSON.parse(fs.readFileSync(path.join(store.runDirectory, 'run.json'), 'utf8')) as typeof report;
 
@@ -207,11 +215,14 @@ describe('JUnit rendering', () => {
       { testId: 'b', title: 'fails', status: 'failed', durationMs: 20, error: { message: 'boom & <bad>' } },
       { testId: 'c', title: 'broken', status: 'infrastructureError', durationMs: 0, error: { message: 'no driver' } },
       { testId: 'd', title: 'skipped', status: 'skipped', durationMs: 0 },
+      { testId: 'e', title: 'cancelled', status: 'cancelled', durationMs: 0 },
+      { testId: 'f', title: 'timed out', status: 'timed_out', durationMs: 0, error: { message: 'deadline' } },
     ]);
 
     expect(xml).toContain('failures="1"');
-    expect(xml).toContain('errors="1"');
-    expect(xml).toContain('skipped="1"');
+    expect(xml).toContain('errors="2"');
+    expect(xml).toContain('skipped="2"');
+    expect(xml.endsWith('\n')).toBe(true);
     expect(xml).toContain('<failure message="boom &amp; &lt;bad&gt;">');
     expect(xml).toContain('<error message="no driver">');
   });

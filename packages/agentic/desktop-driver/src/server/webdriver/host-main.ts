@@ -1,7 +1,7 @@
 /**
  * Single-driver host child-process entry point.
  *
- * Started by `driver-host/client.ts`, never by a user. It reads one validated configuration
+ * Started by `server/webdriver/client.ts`, never by a user. It reads one validated configuration
  * document from an allowlisted file, constructs exactly one backend, binds only to loopback, and
  * exits when its owning parent disappears. It intentionally accepts no module names, no command
  * lines, and no external hosts.
@@ -11,6 +11,7 @@ import * as fs from 'node:fs';
 
 import { startBackend } from './backends.ts';
 import { DESKTOP_PROTOCOL_VERSION } from '../../protocol.ts';
+import { isLoopbackHost } from '../../core/loopback.ts';
 import type { DesktopBackendId, DesktopFakeScene, DriverHostHealth } from '../../types.ts';
 
 export interface DriverHostConfigFile {
@@ -25,8 +26,6 @@ export interface DriverHostConfigFile {
 }
 
 const VALID_BACKENDS: readonly DesktopBackendId[] = ['fake', 'mac2', 'novawindows'];
-const LOOPBACK_HOSTS = new Set(['127.0.0.1', '::1', 'localhost']);
-
 export function readDriverHostConfig(file: string): DriverHostConfigFile {
   const parsed = JSON.parse(fs.readFileSync(file, 'utf8')) as DriverHostConfigFile;
   if (parsed.protocolVersion !== DESKTOP_PROTOCOL_VERSION) {
@@ -35,7 +34,7 @@ export function readDriverHostConfig(file: string): DriverHostConfigFile {
   if (!VALID_BACKENDS.includes(parsed.backend)) {
     throw new Error(`Unknown driver host backend "${parsed.backend}"`);
   }
-  if (!LOOPBACK_HOSTS.has(parsed.host)) {
+  if (!isLoopbackHost(parsed.host)) {
     throw new Error(`Driver host refuses to bind to non-loopback address "${parsed.host}"`);
   }
   if (!Number.isInteger(parsed.port) || parsed.port < 1 || parsed.port > 65535) {

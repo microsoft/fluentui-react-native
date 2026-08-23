@@ -37,7 +37,7 @@ export function isNonEmptyString(value: unknown): value is string {
  * Used to reject anything that could smuggle executable behaviour across the device/host
  * boundary before it is written to a manifest or a service payload.
  */
-export function isJsonSerializable(value: unknown, seen = new Set<unknown>()): boolean {
+export function isJsonSerializable(value: unknown, ancestors = new Set<unknown>()): boolean {
   if (value === null) {
     return true;
   }
@@ -48,17 +48,20 @@ export function isJsonSerializable(value: unknown, seen = new Set<unknown>()): b
   if (kind !== 'object') {
     return false;
   }
-  if (seen.has(value)) {
+  if (ancestors.has(value)) {
     return false;
   }
-  seen.add(value);
+  ancestors.add(value);
+  let serializable: boolean;
   if (Array.isArray(value)) {
-    return value.every((entry) => isJsonSerializable(entry, seen));
+    serializable = value.every((entry) => isJsonSerializable(entry, ancestors));
+  } else if (!isPlainObject(value)) {
+    serializable = false;
+  } else {
+    serializable = Object.values(value).every((entry) => entry === undefined || isJsonSerializable(entry, ancestors));
   }
-  if (!isPlainObject(value)) {
-    return false;
-  }
-  return Object.values(value).every((entry) => entry === undefined || isJsonSerializable(entry, seen));
+  ancestors.delete(value);
+  return serializable;
 }
 
 /** Asserts that `value` is one of `allowed`, recording an issue otherwise. */

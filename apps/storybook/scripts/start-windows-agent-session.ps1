@@ -10,7 +10,7 @@ $artifactRoot = Join-Path $packageRoot 'artifacts\windows'
 $logRoot = Join-Path $artifactRoot 'logs'
 $sessionPath = Join-Path $artifactRoot 'agent-session.json'
 $desktopHostShutdownPath = Join-Path $artifactRoot 'desktop-host.stop'
-$storybookPort = 7007
+$desktopHostReadyPath = Join-Path $artifactRoot 'desktop-host.ready.json'
 $metroPort = 8081
 $defaultWinAppDriverPath = "${env:ProgramFiles(x86)}\Windows Application Driver\WinAppDriver.exe"
 $localWinAppDriverPath = Join-Path $artifactRoot 'winappdriver\SourceDir\Windows Application Driver\WinAppDriver.exe'
@@ -62,6 +62,24 @@ function Wait-ForTcpPort {
   }
 
   throw "Timed out waiting for port $Port."
+}
+
+function Wait-ForFile {
+  param(
+    [Parameter(Mandatory)]
+    [string]$Path,
+    [int]$TimeoutSeconds = 120
+  )
+
+  $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+  while ((Get-Date) -lt $deadline) {
+    if (Test-Path -LiteralPath $Path) {
+      return
+    }
+    Start-Sleep -Milliseconds 250
+  }
+
+  throw "Timed out waiting for '$Path'."
 }
 
 function Get-PortOwner {
@@ -135,6 +153,16 @@ try {
     }
   }
 
+  $configOutput = @(& yarn desktop:config:resolve --platform windows)
+  if ($LASTEXITCODE -ne 0) {
+    throw 'Desktop project configuration resolution failed.'
+  }
+  $desktopConfig = ($configOutput -join "`n") | ConvertFrom-Json
+  if (-not $desktopConfig.storybook.channel.port -or -not $desktopConfig.tests.manifestPath) {
+    throw 'Resolved desktop config is missing storybook.channel.port or tests.manifestPath.'
+  }
+  $storybookPort = [int]$desktopConfig.storybook.channel.port
+
   $solutionPath = Join-Path $packageRoot 'windows\AgenticStorybook.sln'
   if ($Generate -or -not (Test-Path -LiteralPath $solutionPath)) {
     & yarn windows:generate
@@ -144,11 +172,34 @@ try {
   }
 
   Remove-Item -LiteralPath $desktopHostShutdownPath -Force -ErrorAction SilentlyContinue
+  Remove-Item -LiteralPath $desktopHostReadyPath -Force -ErrorAction SilentlyContinue
   $desktopHostProcess = Start-YarnScript `
-    -Script "desktop:host:windows --port $storybookPort --shutdown-file `"$desktopHostShutdownPath`"" `
+    -Script "desktop:host:windows --shutdown-file `"$desktopHostShutdownPath`" --ready-file `"$desktopHostReadyPath`"" `
     -LogName 'desktop-host'
+  Wait-ForFile -Path $desktopHostReadyPath
+  $desktopHostReady = Get-Content -LiteralPath $desktopHostReadyPath -Raw | ConvertFrom-Json
+  if (
+    -not $desktopHostReady.url -or
+    -not $desktopHostReady.serviceId -or
+    -not $desktopHostReady.manifestDigest -or
+    $null -eq $desktopHostReady.stories
+  ) {
+    throw "Host-ready JSON at '$desktopHostReadyPath' is incomplete."
+  }
+  $generatedManifestPath = [string]$desktopConfig.tests.manifestPath
+  if (-not (Test-Path -LiteralPath $generatedManifestPath)) {
+    throw "Generated desktop manifest does not exist at '$generatedManifestPath'."
+  }
+  $generatedManifest = Get-Content -LiteralPath $generatedManifestPath -Raw | ConvertFrom-Json
+  if ($generatedManifest.digest -ne $desktopHostReady.manifestDigest) {
+    throw 'The desktop host and generated manifest digests do not match.'
+  }
+  $desktopHostUri = [Uri]$desktopHostReady.url
+  if ($desktopHostUri.Port -ne $storybookPort) {
+    throw "Resolved Storybook port $storybookPort does not match host-ready port $($desktopHostUri.Port)."
+  }
   Wait-ForTcpPort -Port $storybookPort
-  Invoke-RestMethod -Uri "http://127.0.0.1:$storybookPort/index.json" | Out-Null
+  Invoke-RestMethod -Uri "$($desktopHostReady.url)/index.json" | Out-Null
   $desktopHostProcess.Refresh()
   if ($desktopHostProcess.HasExited) {
     throw "The desktop host exited before readiness. See '$logRoot\\desktop-host.err.log'."
@@ -186,8 +237,10 @@ try {
   $session = [ordered]@{
     startedAt = (Get-Date).ToString('o')
     storybookPort = $storybookPort
+    desktopHost = $desktopHostReady
     metroPort = $metroPort
     desktopHostShutdownPath = $desktopHostShutdownPath
+    desktopHostReadyPath = $desktopHostReadyPath
     appWindowTitle = $appProcess.MainWindowTitle
     processes = @(
       [ordered]@{ role = 'desktop-host-launcher'; id = $desktopHostProcess.Id }
@@ -227,6 +280,7 @@ try {
       Select-Object -Unique |
       ForEach-Object { Stop-OwnedProcessTree -ProcessId $_ }
     Remove-Item -LiteralPath $desktopHostShutdownPath -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $desktopHostReadyPath -Force -ErrorAction SilentlyContinue
   }
   throw
 } finally {

@@ -1,4 +1,10 @@
-import type { DesktopChannelRunCancel, DesktopChannelRunRequest, DesktopChannelRunStatus, DesktopHostReady } from './channel-events.ts';
+import type {
+  DesktopChannelRunCancel,
+  DesktopChannelRunRequest,
+  DesktopChannelRunStatus,
+  DesktopHostClosing,
+  DesktopHostReady,
+} from './channel-events.ts';
 import { DESKTOP_PROTOCOL_VERSION } from './versions.ts';
 
 function record(value: unknown): Record<string, unknown> | undefined {
@@ -16,7 +22,7 @@ function testResult(value: unknown): boolean {
     typeof candidate?.testId === 'string' &&
     (candidate.storyId === undefined || typeof candidate.storyId === 'string') &&
     typeof candidate.title === 'string' &&
-    ['passed', 'failed', 'skipped', 'infrastructureError'].includes(String(candidate.status)) &&
+    ['passed', 'failed', 'skipped', 'cancelled', 'timed_out', 'infrastructureError'].includes(String(candidate.status)) &&
     typeof candidate.durationMs === 'number' &&
     Number.isFinite(candidate.durationMs) &&
     candidate.durationMs >= 0 &&
@@ -53,6 +59,14 @@ export function decodeDesktopHostReady(value: unknown): DesktopHostReady | undef
     return undefined;
   }
   return value as DesktopHostReady;
+}
+
+export function decodeDesktopHostClosing(value: unknown): DesktopHostClosing | undefined {
+  const candidate = record(value);
+  if (candidate?.protocolVersion !== DESKTOP_PROTOCOL_VERSION || typeof candidate.serviceId !== 'string') {
+    return undefined;
+  }
+  return value as DesktopHostClosing;
 }
 
 export function decodeDesktopRunRequest(value: unknown): DesktopChannelRunRequest | undefined {

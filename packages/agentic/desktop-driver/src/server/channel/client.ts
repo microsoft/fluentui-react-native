@@ -42,8 +42,18 @@ export class StoryController {
     return this.baseUrl;
   }
 
-  private async request(pathname: string, init?: RequestInit): Promise<unknown> {
-    const response = await this.fetchImpl(`${this.baseUrl}${pathname}`, init);
+  private async request(pathname: string, init?: RequestInit, deadline = Date.now() + this.renderTimeout): Promise<unknown> {
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) {
+      throw new DesktopDriverError(`Storybook request deadline expired for ${pathname}`, {
+        kind: 'storybook',
+        detail: { pathname },
+      });
+    }
+    const response = await this.fetchImpl(`${this.baseUrl}${pathname}`, {
+      ...init,
+      signal: init?.signal ?? AbortSignal.timeout(remaining),
+    });
     const body = (await response.json().catch(() => ({}))) as { error?: string };
     if (!response.ok) {
       throw new DesktopDriverError(body.error ?? `Storybook channel server returned ${response.status} for ${pathname}`, {
@@ -63,7 +73,7 @@ export class StoryController {
   /** Returns true when the channel server answers, used as a readiness gate. */
   async isConnected(): Promise<boolean> {
     try {
-      await this.request('/index.json');
+      await this.request('/index.json', undefined, Date.now() + Math.min(this.renderTimeout, 5000));
       return true;
     } catch {
       return false;
@@ -82,7 +92,7 @@ export class StoryController {
 
     while (Date.now() < deadline) {
       try {
-        await this.request(`/select-story-sync/${encodeURIComponent(storyId)}`, { method: 'POST' });
+        await this.request(`/select-story-sync/${encodeURIComponent(storyId)}`, { method: 'POST' }, deadline);
         return;
       } catch (error) {
         lastError = error;

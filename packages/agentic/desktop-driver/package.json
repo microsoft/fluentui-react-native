@@ -10,7 +10,21 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/agentic/desktop-driver"
   },
-  "bin": "./lib/cli/main.js",
+  "bin": "./lib/cli/entry.js",
+  "files": [
+    "lib",
+    "!lib/**/*.test.*",
+    "!lib/driver-host/**",
+    "!lib/storybook/announce.*",
+    "!lib/storybook/channel-service.*",
+    "!lib/storybook/controller.*",
+    "!lib/storybook/run-executor.*",
+    "!lib/storybook/serve.*",
+    "!lib/storybook/test-service.*",
+    "README.md",
+    "USAGE.md",
+    "DESIGN.md"
+  ],
   "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -76,7 +90,7 @@
     "expect-webdriverio": "catalog:"
   },
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=22.12"
   },
   "furn": {
     "jestPlatform": "react",

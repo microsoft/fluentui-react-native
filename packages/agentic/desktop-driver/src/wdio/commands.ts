@@ -98,6 +98,7 @@ export function createDesktopCommands(browser: DesktopBrowserLike, context: Desk
     },
 
     async captureArtifacts(reason: string): Promise<ArtifactManifest> {
+      const before = artifacts.snapshot();
       const directory = artifacts.testDirectory(reason);
       const relative = (name: string) => `${directory.slice(artifacts.runDirectory.length + 1)}/${name}`;
 
@@ -116,7 +117,7 @@ export function createDesktopCommands(browser: DesktopBrowserLike, context: Desk
         relative('result.json'),
         `${JSON.stringify({ reason, state: lifecycle.current, exitReason: lifecycle.reason, captureFailures: failures }, null, 2)}\n`,
       );
-      return artifacts.manifest();
+      return artifacts.manifestSince(before, directory);
     },
 
     async selectStory(storyId: string): Promise<void> {

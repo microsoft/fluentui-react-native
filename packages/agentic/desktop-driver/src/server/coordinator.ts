@@ -1,6 +1,7 @@
 import * as crypto from 'node:crypto';
 
 import { DesktopCancelledError, DesktopDriverError, DesktopValidationError } from '../errors.ts';
+import { runStateForResults } from '../core/reporting.ts';
 import { DESKTOP_PROTOCOL_VERSION } from '../protocol/index.ts';
 import type { DesktopServiceRunStatus, DesktopTestResult, StoryTestManifest } from '../types.ts';
 
@@ -147,7 +148,7 @@ export class RunCoordinator {
       const merged = finalResults.length > 0 ? finalResults : results;
       this.publish(record, {
         ...record.status,
-        state: merged.some((result) => result.status === 'failed' || result.status === 'infrastructureError') ? 'failed' : 'passed',
+        state: runStateForResults(merged),
         finishedAt: new Date().toISOString(),
         results: merged,
       });

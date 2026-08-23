@@ -9,19 +9,23 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { addons } from 'storybook/preview-api';
 
 import {
-  decodeDesktopHostReady,
-  decodeDesktopRunStatus,
   DESKTOP_HOST_CLOSING_EVENT,
   DESKTOP_HOST_READY_EVENT,
-  DESKTOP_PROTOCOL_VERSION,
   DESKTOP_RUN_CANCEL_EVENT,
   DESKTOP_RUN_REQUEST_EVENT,
   DESKTOP_RUN_STATUS_EVENT,
-  type DesktopChannelRunStatus,
   type DesktopHostReady,
 } from '@fluentui-react-native/desktop-driver/protocol';
+import {
+  createCancelRequest,
+  createRunRequest,
+  isHostClosing,
+  resolveHostReady,
+  resolveRunStatus,
+  type DesktopRuntimeContract,
+} from './desktopTestProtocol';
 
-export type DesktopRunStatus = DesktopChannelRunStatus['status'];
+export type DesktopRunStatus = NonNullable<ReturnType<typeof resolveRunStatus>>['status'];
 
 export type DesktopTestHost = {
   available: boolean;
@@ -32,12 +36,6 @@ export type DesktopTestHost = {
   status?: DesktopRunStatus;
   start(mode: 'current' | 'all', currentStoryId?: string): void;
   cancel(): void;
-};
-
-export type DesktopRuntimeContract = {
-  protocolVersion: number;
-  manifestDigest: string;
-  testedStoryIds: readonly string[];
 };
 
 const requestId = (): string => `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
@@ -64,13 +62,19 @@ export const useDesktopTestHost = (runtime: DesktopRuntimeContract): DesktopTest
 
     let expiry: ReturnType<typeof setTimeout> | undefined;
     const onReady = (payload: unknown) => {
-      const ready = decodeDesktopHostReady(payload);
-      if (!ready) {
+      const decision = resolveHostReady(payload, runtime);
+      const ready = decision.ready;
+      if (decision.error) {
+        hostRef.current = undefined;
+        activeRequest.current = undefined;
+        activeSequence.current = 0;
+        setError(decision.error);
+        setHost(undefined);
+        setStatus(undefined);
+        setBusy(false);
         return;
       }
-      if (ready.protocolVersion !== runtime.protocolVersion || ready.manifest.digest !== runtime.manifestDigest) {
-        setError('The Storybook app and desktop host use different generated desktop-test manifests');
-        setHost(undefined);
+      if (!ready) {
         return;
       }
       if (hostRef.current && hostRef.current.serviceId !== ready.serviceId) {
@@ -98,13 +102,12 @@ export const useDesktopTestHost = (runtime: DesktopRuntimeContract): DesktopTest
       }, 15_000);
     };
     const onStatus = (payload: unknown) => {
-      const next = decodeDesktopRunStatus(payload);
-      if (
-        !next ||
-        next.serviceId !== hostRef.current?.serviceId ||
-        next.requestId !== activeRequest.current ||
-        next.sequence <= activeSequence.current
-      ) {
+      const next = resolveRunStatus(payload, {
+        serviceId: hostRef.current?.serviceId,
+        requestId: activeRequest.current,
+        sequence: activeSequence.current,
+      });
+      if (!next) {
         return;
       }
       activeSequence.current = next.sequence;
@@ -117,8 +120,7 @@ export const useDesktopTestHost = (runtime: DesktopRuntimeContract): DesktopTest
       }
     };
     const onClosing = (payload: unknown) => {
-      const candidate = payload as { protocolVersion?: unknown; serviceId?: unknown } | undefined;
-      if (candidate?.protocolVersion !== DESKTOP_PROTOCOL_VERSION || candidate.serviceId !== hostRef.current?.serviceId) {
+      if (!isHostClosing(payload, hostRef.current?.serviceId)) {
         return;
       }
       hostRef.current = undefined;
@@ -143,31 +145,27 @@ export const useDesktopTestHost = (runtime: DesktopRuntimeContract): DesktopTest
       channelRef.current = undefined;
       hostRef.current = undefined;
     };
-  }, [runtime.manifestDigest, runtime.protocolVersion]);
+  }, [runtime]);
 
   const start = useCallback(
     (mode: 'current' | 'all', currentStoryId?: string): void => {
       const channel = channelRef.current;
-      const testedStoryIds = new Set(runtime.testedStoryIds);
-      if (!channel || !host || (mode === 'current' && (!currentStoryId || !testedStoryIds.has(currentStoryId)))) {
+      if (!channel || !host) {
         return;
       }
       const nextRequestId = requestId();
+      const request = createRunRequest(runtime, host.serviceId, nextRequestId, mode, currentStoryId);
+      if (!request) {
+        return;
+      }
       activeRequest.current = nextRequestId;
       activeSequence.current = 0;
       setError(undefined);
       setStatus(undefined);
       setBusy(true);
-      channel.emit(DESKTOP_RUN_REQUEST_EVENT, {
-        protocolVersion: DESKTOP_PROTOCOL_VERSION,
-        serviceId: host.serviceId,
-        requestId: nextRequestId,
-        manifestDigest: runtime.manifestDigest,
-        mode: mode === 'all' ? 'all' : 'selected',
-        storyIds: mode === 'all' ? undefined : [currentStoryId],
-      });
+      channel.emit(DESKTOP_RUN_REQUEST_EVENT, request);
     },
-    [host, runtime.manifestDigest, runtime.testedStoryIds],
+    [host, runtime],
   );
 
   const cancel = useCallback((): void => {
@@ -175,11 +173,7 @@ export const useDesktopTestHost = (runtime: DesktopRuntimeContract): DesktopTest
     if (!channel || !host || !status?.runId) {
       return;
     }
-    channel.emit(DESKTOP_RUN_CANCEL_EVENT, {
-      protocolVersion: DESKTOP_PROTOCOL_VERSION,
-      serviceId: host.serviceId,
-      runId: status.runId,
-    });
+    channel.emit(DESKTOP_RUN_CANCEL_EVENT, createCancelRequest(host.serviceId, status.runId));
   }, [host, status?.runId]);
 
   return {

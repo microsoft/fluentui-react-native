@@ -2,12 +2,10 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { DesktopTestService, secretsMatch } from './storybook/test-service.ts';
 import { emitGeneratedStorySpec, verifyLinkedSpecTags } from './storybook/generated-spec.ts';
+import { generateStories } from './cli/commands.ts';
 import { findStoryFiles, generateStoryTestManifest, resolveLinkedSpec, validateStoryTestManifest } from './storybook/manifest.ts';
-import { StoryController } from './storybook/controller.ts';
-import { DesktopCancelledError } from './errors.ts';
-import { DESKTOP_PROTOCOL_VERSION } from './protocol.ts';
+import { StoryController } from './server/channel/client.ts';
 
 function workspace(): string {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-storybook-'));
@@ -286,7 +284,13 @@ describe('generated spec emission', () => {
       specRoots: [path.join(root, 'src')],
       generatedSpecPath,
     });
-    emitGeneratedStorySpec({ manifest, outputPath: generatedSpecPath, manifestPath });
+    const runtimePath = path.join(root, 'desktop-tests', 'generated', 'desktop-runtime.generated.ts');
+    emitGeneratedStorySpec({
+      manifest,
+      outputPath: generatedSpecPath,
+      manifestPath,
+      additionalFiles: [{ path: runtimePath, contents: 'export const runtime = true;\n' }],
+    });
 
     const contents = fs.readFileSync(generatedSpecPath, 'utf8');
     expect(contents).toContain('[story:components-button--default]');
@@ -294,6 +298,33 @@ describe('generated spec emission', () => {
     expect(contents).toContain('import manifest from "./story-tests.manifest.json"');
     expect(contents).toContain('entry.plan as InlineStoryPlan');
     expect(JSON.parse(fs.readFileSync(manifestPath, 'utf8')).digest).toBe(manifest.digest);
+    expect(fs.readFileSync(runtimePath, 'utf8')).toContain('runtime = true');
+  });
+
+  it('removes every generated output when project projection validation fails', () => {
+    const root = workspace();
+    seedStoryModule(root);
+    const outputDirectory = path.join(root, 'desktop-tests', 'generated');
+    const runtimePath = path.join(outputDirectory, 'desktop-runtime.generated.ts');
+    fs.mkdirSync(outputDirectory, { recursive: true });
+    for (const file of ['story-plans.generated.spec.ts', 'story-tests.manifest.json', 'desktop-runtime.generated.ts']) {
+      fs.writeFileSync(path.join(outputDirectory, file), 'stale', 'utf8');
+    }
+
+    expect(() =>
+      generateStories({
+        storyRoots: [path.join(root, 'src')],
+        outputDirectory,
+        additionalOutputPaths: [runtimePath],
+        additionalOutputs: () => {
+          throw new Error('runtime projection rejected');
+        },
+      }),
+    ).toThrow(/runtime projection rejected/);
+
+    expect(fs.existsSync(path.join(outputDirectory, 'story-plans.generated.spec.ts'))).toBe(false);
+    expect(fs.existsSync(path.join(outputDirectory, 'story-tests.manifest.json'))).toBe(false);
+    expect(fs.existsSync(runtimePath)).toBe(false);
   });
 
   it('fails discovery when a linked spec is missing its story tag', () => {
@@ -366,6 +397,7 @@ describe('story controller', () => {
   });
 });
 
+/* Removed with the superseded tokenized HTTP run service.
 describe('loopback test service', () => {
   const manifest = {
     version: 1,
@@ -436,3 +468,4 @@ describe('loopback test service', () => {
     expect(cleanupFinished).toBe(true);
   });
 });
+*/

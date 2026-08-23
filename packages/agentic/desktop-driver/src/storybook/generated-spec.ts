@@ -23,6 +23,8 @@ export interface EmitGeneratedSpecOptions {
   manifestPath: string;
   /** Module specifier used for the desktop-driver imports. */
   packageSpecifier?: string;
+  /** Additional generated files committed before the manifest commit marker. */
+  additionalFiles?: readonly { path: string; contents: string | Uint8Array }[];
 }
 
 /** Writes the manifest JSON and the compiled inline-plan spec. */
@@ -68,15 +70,26 @@ export function emitGeneratedStorySpec(options: EmitGeneratedSpecOptions): { spe
   const nonce = `${process.pid}-${Date.now()}`;
   const manifestTemporary = `${options.manifestPath}.${nonce}.tmp`;
   const specTemporary = `${options.outputPath}.${nonce}.tmp`;
+  const additionalTemporary = (options.additionalFiles ?? []).map((file) => ({
+    ...file,
+    temporary: `${file.path}.${nonce}.tmp`,
+  }));
   try {
+    for (const file of additionalTemporary) {
+      fs.mkdirSync(path.dirname(file.path), { recursive: true });
+      fs.writeFileSync(file.temporary, file.contents);
+    }
     fs.writeFileSync(manifestTemporary, `${JSON.stringify(options.manifest, null, 2)}\n`, 'utf8');
     fs.writeFileSync(specTemporary, contents, 'utf8');
     // The manifest is the commit marker: a consumer cannot observe it until the matching spec is
-    // already in place.
+    // and runtime projection are already in place.
+    for (const file of additionalTemporary) {
+      fs.renameSync(file.temporary, file.path);
+    }
     fs.renameSync(specTemporary, options.outputPath);
     fs.renameSync(manifestTemporary, options.manifestPath);
   } catch (error) {
-    for (const temporary of [manifestTemporary, specTemporary]) {
+    for (const temporary of [manifestTemporary, specTemporary, ...additionalTemporary.map((file) => file.temporary)]) {
       try {
         fs.unlinkSync(temporary);
       } catch {

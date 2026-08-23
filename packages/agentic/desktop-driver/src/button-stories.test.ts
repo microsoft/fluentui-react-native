@@ -18,7 +18,7 @@ import { DesktopLifecycle } from './lifecycle.ts';
 import { generateStoryTestManifest } from './storybook/manifest.ts';
 import { resolveDesktopOptions } from './config.ts';
 import { runInlineStoryPlan } from './wdio/story-plan-runner.ts';
-import { StoryController } from './storybook/controller.ts';
+import { StoryController } from './server/channel/client.ts';
 import { byTestId } from './selectors.ts';
 import type { InlineStoryPlan, StoryTestManifest } from './types.ts';
 
@@ -150,6 +150,7 @@ describe('agentic-components Button story tests', () => {
 
     const artifacts = await session.browser.desktop!.captureArtifacts('button default failure');
 
+    expect(artifacts.directory).toContain(path.join('tests', 'button-default-failure'));
     expect(artifacts.files).toEqual(
       expect.arrayContaining([
         expect.stringContaining('source.xml'),
