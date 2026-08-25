@@ -18,22 +18,29 @@ parameters:
 variables:
   - group: 'FluentUI React Native Secrets'
   - group: InfoSec-SecurityResults
-  - name: tags
-    value: production,externalfacing
-  # Use the private registry mirror due to network restrictions (this is added to .npmrc in a step below)
-  - name: REGISTRY_URL
-    value: https://pkgs.dev.azure.com/office/_packaging/Office/npm/registry/
-  - name: YARN_NPM_REGISTRY_SERVER
-    value: $(REGISTRY_URL)
-  - name: YARN_NPM_ALWAYS_AUTH
-    value: 1
-  # Enable yarn-plugin-npmrc
-  - name: YARN_NPMRC_AUTH_ENABLED
-    value: 1
-  - name: packagesArtifactName
-    value: packed-tarballs
-  - name: releaseToolArtifactName
-    value: release-api-tool
+  - group: ogx-oss-release
+  - template: .ado/templates/readonly-variables.yml
+    parameters:
+      variables:
+        tags: production,externalfacing
+
+        # Use the private registry mirror due to network restrictions (this is added to .npmrc in a step below)
+        REGISTRY_URL: https://pkgs.dev.azure.com/office/_packaging/Office/npm/registry/
+        YARN_NPM_REGISTRY_SERVER: $(REGISTRY_URL)
+        YARN_NPM_ALWAYS_AUTH: 1
+        # Enable yarn-plugin-npmrc
+        YARN_NPMRC_AUTH_ENABLED: 1
+
+        packagesArtifactName: packed-tarballs
+        releaseToolArtifactName: release-api-tool
+
+        # Map in variable group values as readonly (with this syntax, they'll be empty strings if unset)
+        esrpStagingAzureSubscription: $[variables.grp_esrpStagingAzureSubscription]
+        esrpStagingStorageAccount: $[variables.grp_esrpStagingStorageAccount]
+        esrpReleaseAzureSubscription: $[variables.grp_esrpReleaseAzureSubscription]
+        esrpReleaseClientId: $[variables.grp_esrpReleaseClientId]
+        esrpReleaseKeyVaultName: $[variables.grp_esrpReleaseKeyVaultName]
+        esrpReleaseTenantId: $[variables.grp_esrpReleaseTenantId]
 
 resources:
   repositories:
@@ -116,7 +123,7 @@ extends:
 
               - script: |
                   mkdir -p '$(releaseToolArtifactPath)'
-                  cp scripts/esrp-npm-release-temp/index.mjs '$(releaseToolArtifactPath)'
+                  cp node_modules/@microsoft/esrp-npm-release/index.mjs '$(releaseToolArtifactPath)'
                 displayName: 'Copy ESRP release tool'
 
       - stage: Publish
@@ -157,7 +164,7 @@ extends:
               - task: AzureCLI@2
                 displayName: 'Get credentials for staging blob storage'
                 inputs:
-                  azureSubscription: ogx-esrp-infra-bot
+                  azureSubscription: $(esrpStagingAzureSubscription)
                   scriptType: bash
                   scriptLocation: inlineScript
                   addSpnToEnvironment: true
@@ -169,8 +176,8 @@ extends:
               - task: AzureKeyVault@2
                 displayName: 'Get ESRP certificates from Key Vault'
                 inputs:
-                  azureSubscription: ESRP-JSHost3
-                  KeyVaultName: OGX-JSHost-KV
+                  azureSubscription: $(esrpReleaseAzureSubscription)
+                  KeyVaultName: $(esrpReleaseKeyVaultName)
                   SecretsFilter: OGX-JSHost-Auth4,OGX-JSHost-Sign3
 
               - script: node '$(releaseToolArtifactPath)/index.mjs'
@@ -180,14 +187,13 @@ extends:
                   PACKED_PACKAGES_PATH: $(packagesArtifactPath)
                   ESRP_PRODUCT_NAME: fluentui-react-native
                   ESRP_NPM_TAG: latest
-                  # TODO should be somebody else
-                  ESRP_USER: elcraig@microsoft.com
-                  ESRP_APPROVERS: dannyvv@microsoft.com
+                  ESRP_USER: sanajmi@microsoft.com
+                  ESRP_APPROVERS: jasonmo@microsoft.com
                   ESRP_TENANT_ID: cdc5aeea-15c5-4db6-b079-fcadd2505dc2
                   ESRP_CLIENT_ID: 0a35e01f-eadf-420a-a2bf-def002ba898d
                   ESRP_AUTH_CERT: $(OGX-JSHost-Auth4)
                   ESRP_REQUEST_SIGNING_CERT: $(OGX-JSHost-Sign3)
-                  STAGING_STORAGE_ACCOUNT_NAME: ogxesrptempstorage
+                  STAGING_STORAGE_ACCOUNT_NAME: $(esrpStagingStorageAccount)
                   STAGING_CLIENT_ID: $(STAGING_CLIENT_ID)
                   STAGING_TENANT_ID: $(STAGING_TENANT_ID)
                   STAGING_ID_TOKEN: $(STAGING_ID_TOKEN)
