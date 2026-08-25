@@ -1,0 +1,11 @@
+# This template is a helper to declare many readonly variables in a readable manner.
+parameters:
+  - name: variables
+    type: object
+    default: {}
+
+variables:
+  - ${{ each variable in parameters.variables }}:
+      - name: ${{ variable.key }}
+        value: ${{ variable.value }}
+        readonly: true
