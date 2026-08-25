@@ -164,12 +164,19 @@ escapes; other platform bundles never load the plugin.
 
 react-native-win32 intentionally leaves window width and height undefined, and
 Storybook's mobile `LiteUI` drawer crashes the Paper host after those metrics
-are supplied. The Win32 endpoint therefore uses the desktop-only
-`StorybookUI.win32.tsx` chrome. It composes LiteUI's public `Sidebar` with its
-theme and storage providers beside the story preview, but does not mount the
-mobile drawers, portals, resize animations, or addon panel that enter the
-problematic paths. The sidebar supports browsing, search, selection, and the
-current-story indicator; the persistent FURN theme header remains above it.
+are supplied. The Win32 endpoint therefore uses desktop-only chrome in
+`StorybookUI.win32.tsx` with the same conceptual structure as macOS and
+Windows: a persistent Sidebar on the left, story preview on the upper right,
+and an Actions-first addon panel along the bottom. Local splitters resize the
+sidebar width and addon height without reading global window dimensions.
+
+Optional toolbar actions move Stories or Addons into
+`Win32CalloutPortal`, which presents the same content in the platform's native
+Paper `RCTCallout` window without relying on `@gorhom/portal`, window
+dimensions, React Native animations, or mobile drawer gestures. Dismissing a
+pop-out restores its default inline region. The toolbar stays hidden during the
+normal persistent-sidebar layout and appears only after the Sidebar is hidden,
+keeping the default story preview free of redundant navigation controls.
 
 macOS and Windows continue to use upstream `LiteUI`. Keeping the full upstream
 chrome there preserves its resizable sidebar, addon controls, responsive
@@ -177,23 +184,23 @@ layout, and future Storybook fixes. Moving those endpoints to the reduced
 Win32 chrome would create a maintained fork and regress features without
 solving a platform problem they currently have.
 
-The three standalone Callout stories, nine ListItem stories, and seven
-Accordion stories are omitted from the Win32-generated catalog. Selecting the
-built-in Paper `RCTCallout`, agentic ListItem, or Accordion overview through the
-current REX 0.81.1 host terminates `ReactTest.exe` with fail-fast code
-`0xC0000409`; macOS and Windows continue to include those stories. The
-remaining 127 agentic component stories render through the Win32 control-plane
-smoke sweep.
+Nine ListItem stories and seven Accordion stories are omitted from the
+Win32-generated catalog because those components terminate the current REX
+0.81.1 host with fail-fast code `0xC0000409`; macOS and Windows continue to
+include them. The three standalone Callout stories run through the same Paper
+`RCTCallout` implementation as the portal chrome. All 130 included stories
+render through the Win32 control-plane smoke sweep.
 Run `yarn storybook-server:win32` with this endpoint so the server exposes the
-same 127-story index as the app; the ordinary `storybook-server` command keeps
+same 130-story index as the app; the ordinary `storybook-server` command keeps
 the full macOS and Windows catalog. Use `yarn storybook:smoke:win32` for the
 native sweep; its short settle interval prevents REX Paper teardown races
 between rapid story transitions.
 
 `yarn win32:ci` bundles the endpoint, starts the scoped channel server and REX
-host without the direct-debugger listener, runs the 127-story sweep, verifies
-that the host remains alive, and stops only its recorded process IDs. Logs are
-written beneath `artifacts/win32`.
+host without the direct-debugger listener, verifies the default desktop
+regions, resizes both splitters, opens and dismisses both native pop-outs, runs
+the 130-story sweep, verifies that the host remains alive, and stops only its
+recorded process IDs. Logs are written beneath `artifacts/win32`.
 
 ### Windows agent workflow
 

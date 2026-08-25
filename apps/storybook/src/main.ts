@@ -11,6 +11,7 @@ const stories =
     ? [
         '../../../packages/agentic/components/src/primitives/**/*.stories.?(ts|tsx)',
         '../../../packages/agentic/components/src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)',
+        '../../../packages/native/Callout/src/**/*.stories.?(ts|tsx)',
       ]
     : ['../../../packages/agentic/components/src/**/*.stories.?(ts|tsx)', '../../../packages/native/Callout/src/**/*.stories.?(ts|tsx)'];
 

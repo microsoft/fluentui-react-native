@@ -64,16 +64,22 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   escapes.
 - Win32 uses desktop-only chrome in `StorybookUI.win32.tsx` because
   react-native-win32 omits window dimensions and Storybook's mobile LiteUI
-  drawer crashes the Paper host. Compose only LiteUI's public sidebar with its
-  theme/storage providers; do not add drawers, portals, resize animation, or
-  addon panels without live Paper proof.
+  drawer crashes the Paper host. Keep its default layout conceptually aligned
+  with desktop LiteUI: persistent resizable Sidebar, story preview, and
+  resizable bottom addon panel. Use `Win32CalloutPortal` only for optional
+  pop-outs: native Paper Callout owns the separate window while public
+  Storybook exports supply sidebar and addon content. Do not reintroduce
+  `@gorhom/portal`, window dimension hooks, or animated mobile drawers. Keep
+  the pop-out toolbar contextual: it is mounted only while the inline Sidebar
+  is hidden.
 - Keep macOS and Windows on upstream LiteUI. Replacing it with the reduced
   Win32 chrome would regress addon controls and responsive behavior while
   increasing local maintenance.
 - Generate Win32 stories with `prebuild:win32`. It intentionally excludes the
-  Callout, ListItem, and Accordion stories because their Paper implementations
-  fail-fast crash REX 0.81.1; keep the ordinary `prebuild` catalog unchanged
-  for macOS and Windows.
+  ListItem and Accordion stories because their Paper implementations fail-fast
+  crash REX 0.81.1. Callout stories and the Callout-backed portal chrome remain
+  included; keep the ordinary `prebuild` catalog unchanged for macOS and
+  Windows.
 - Keep the Win32 window title distinct from the Windows Fabric title so
   automation never attaches to the wrong endpoint.
 - Use `win32:ci` for the complete bundle/launch/smoke workflow. Its logs belong
