@@ -2415,6 +2415,8 @@ __metadata:
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@office-iss/react-native-win32": "npm:^0.81.0"
+    "@office-iss/rex-win32": "npm:0.81.1"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
@@ -2431,10 +2433,13 @@ __metadata:
     "@storybook/mcp": "npm:^0.7.0"
     "@storybook/react": "npm:^10.4.6"
     "@storybook/react-native": "npm:^10.4.7"
+    "@storybook/react-native-theming": "npm:^10.4.7"
+    "@storybook/react-native-ui-common": "npm:^10.4.7"
     "@storybook/react-native-ui-lite": "npm:^10.4.7"
     "@tmcp/adapter-valibot": "npm:^0.1.6"
     "@tmcp/transport-http": "npm:^0.8.6"
     "@types/react": "npm:~19.1.4"
+    cross-env: "catalog:"
     jest: "npm:^29.7.0"
     jest-environment-node: "npm:^29.7.0"
     metro: "npm:^0.83.1"
@@ -2445,6 +2450,7 @@ __metadata:
     react-native-svg: "npm:^15.12.1"
     react-native-test-app: "catalog:"
     react-native-windows: "npm:^0.81.0"
+    regexpu-core: "npm:^6.3.1"
     storybook: "npm:^10.4.0"
     tmcp: "npm:^1.19.4"
     valibot: "npm:^1.4.1"
@@ -9580,7 +9586,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-theming@npm:^10.5.4":
+"@storybook/react-native-theming@npm:^10.4.7, @storybook/react-native-theming@npm:^10.5.4":
   version: 10.5.4
   resolution: "@storybook/react-native-theming@npm:10.5.4"
   dependencies:
@@ -9592,7 +9598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-ui-common@npm:^10.5.4":
+"@storybook/react-native-ui-common@npm:^10.4.7, @storybook/react-native-ui-common@npm:^10.5.4":
   version: 10.5.4
   resolution: "@storybook/react-native-ui-common@npm:10.5.4"
   dependencies:

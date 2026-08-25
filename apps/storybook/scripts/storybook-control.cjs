@@ -36,14 +36,22 @@ async function main() {
     const index = await getIndex();
     const entries = Object.values(index.entries || {}).filter(({ type }) => type === 'story');
     const failures = [];
+    const settleMilliseconds = Number(process.env.STORYBOOK_SMOKE_SETTLE_MS) || 0;
+    const failFast = process.env.STORYBOOK_SMOKE_FAIL_FAST === '1';
 
     for (const { id } of entries) {
       try {
         await selectStory(id);
+        if (settleMilliseconds > 0) {
+          await new Promise((resolve) => setTimeout(resolve, settleMilliseconds));
+        }
         process.stdout.write(`rendered ${id}\n`);
       } catch (error) {
         failures.push({ id, error: error.message });
         process.stderr.write(`failed ${id}: ${error.message}\n`);
+        if (failFast) {
+          break;
+        }
       }
     }
 

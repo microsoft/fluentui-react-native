@@ -16,6 +16,13 @@ unwrapped (`No theme`, the default) or apply the default light, dark, or high-co
 The selected Theme wraps the preview decorator, so it applies to every rendered story and remains
 selected while navigating between stories.
 
+The macOS, Windows Fabric, and Win32 Paper endpoints live in this workspace and
+share the same entry point and generated story catalog. Win32 stays here rather
+than in a sibling package so story discovery and agent control cannot drift.
+Shared Storybook source remains platform-neutral; `metro.config.js` redirects
+`react-native` imports to `@office-iss/react-native-win32` only while producing
+the Win32 bundle.
+
 ## Layout
 
 ```
@@ -125,6 +132,76 @@ Storybook's development bundle intentionally contains separate `pretty-format` a
 versions used by its internal tooling. They are excluded from the duplicate-module enforcement;
 React, React Native, and application dependencies remain checked.
 
+## Running on Win32
+
+The Win32 endpoint uses the `@office-iss/react-native-win32` Paper renderer in
+the prebuilt `@office-iss/rex-win32` host. It is separate from the React Native
+Windows Fabric endpoint above and does not use a generated
+`react-native-test-app` native project.
+
+```powershell
+# from this directory
+# Produce dist/index.win32.bundle from the same story catalog as the other endpoints
+yarn bundle:win32
+
+# Launch the prebuilt Paper host
+yarn win32
+```
+
+The host window title is `Agentic Components Storybook (Win32)` so automation
+can distinguish it from the Windows Fabric app. The pinned REX 0.81.1 host runs
+the resolved react-native-win32 0.81 release line. Runtime diagnostics are
+written to the ignored `artifacts/win32/console.log`. For the development loop,
+run `yarn start` and then `yarn win32:dev` in separate terminals.
+`yarn bundle:win32:dev` produces a debuggable local bundle when Metro cannot be
+kept running.
+
+The current Storybook bundle contains regular expressions that use Unicode
+properties unsupported by the V8 engine in REX 0.81.1. The Win32-only Babel plugin in
+`scripts/transform-win32-unicode-regex.cjs` expands those expressions at bundle
+time. Remove the workaround after the REX host accepts Unicode property
+escapes; other platform bundles never load the plugin.
+
+react-native-win32 intentionally leaves window width and height undefined, and
+Storybook's mobile `LiteUI` drawer crashes the Paper host after those metrics
+are supplied. The Win32 endpoint therefore uses desktop-only chrome in
+`StorybookUI.win32.tsx` with the same conceptual structure as macOS and
+Windows: a persistent Sidebar on the left, story preview on the upper right,
+and an Actions-first addon panel along the bottom. Local splitters resize the
+sidebar width and addon height without reading global window dimensions.
+
+Optional toolbar actions move Stories or Addons into
+`Win32CalloutPortal`, which presents the same content in the platform's native
+Paper `RCTCallout` window without relying on `@gorhom/portal`, window
+dimensions, React Native animations, or mobile drawer gestures. Dismissing a
+pop-out restores its default inline region. The toolbar stays hidden during the
+normal persistent-sidebar layout and appears only after the Sidebar is hidden,
+keeping the default story preview free of redundant navigation controls.
+
+macOS and Windows continue to use upstream `LiteUI`. Keeping the full upstream
+chrome there preserves its resizable sidebar, addon controls, responsive
+layout, and future Storybook fixes. Moving those endpoints to the reduced
+Win32 chrome would create a maintained fork and regress features without
+solving a platform problem they currently have.
+
+Nine ListItem stories and seven Accordion stories are omitted from the
+Win32-generated catalog because those components terminate the current REX
+0.81.1 host with fail-fast code `0xC0000409`; macOS and Windows continue to
+include them. The three standalone Callout stories run through the same Paper
+`RCTCallout` implementation as the portal chrome. All 130 included stories
+render through the Win32 control-plane smoke sweep.
+Run `yarn storybook-server:win32` with this endpoint so the server exposes the
+same 130-story index as the app; the ordinary `storybook-server` command keeps
+the full macOS and Windows catalog. Use `yarn storybook:smoke:win32` for the
+native sweep; its short settle interval prevents REX Paper teardown races
+between rapid story transitions.
+
+`yarn win32:ci` bundles the endpoint, starts the scoped channel server and REX
+host without the direct-debugger listener, verifies the default desktop
+regions, resizes both splitters, opens and dismisses both native pop-outs, runs
+the 130-story sweep, verifies that the host remains alive, and stops only its
+recorded process IDs. Logs are written beneath `artifacts/win32`.
+
 ### Windows agent workflow
 
 The complete agent workflow starts the Storybook channel server and Metro, builds and launches the
@@ -159,6 +236,7 @@ You can produce the JS bundle without Xcode. This also generates `storybook.requ
 
 ```sh
 yarn bundle:macos     # -> writes dist/index.macos.jsbundle
+yarn bundle:win32     # -> writes dist/index.win32.bundle
 yarn bundle:windows   # -> writes dist/index.windows.bundle
 ```
 

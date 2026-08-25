@@ -15,6 +15,10 @@ react_native_path = "#{__dir__}/../node_modules/react-native"
 # (node-modules mode)
 # react_native_path = "#{__dir__}/../../../node_modules/react-native"
 
+# Resolve the pinned Fluent UI Apple release directly instead of enumerating its full
+# CocoaPods spec history, whose GitHub fallback is frequently rate-limited in CI.
+microsoft_fluent_ui_podspec = 'https://cdn.cocoapods.org/Specs/5/f/8/MicrosoftFluentUI/0.13.1/MicrosoftFluentUI.podspec.json'
+
 # fmt 11.0.2 (pinned by React Native 0.81) fails to compile with Xcode 26 / Apple Clang 21, which is
 # stricter about `consteval` (fixed upstream in fmt 11.1). Force fmt's compile-time consteval
 # format-string checking off so the bundled fmt builds. This is ABI-safe and avoids a version bump
@@ -36,5 +40,6 @@ end
 use_test_app!(:post_install => ->(installer) { patch_fmt_consteval(installer) }) do |target|
   target.app do
     platform :osx, '14'
+    pod 'MicrosoftFluentUI', :podspec => microsoft_fluent_ui_podspec
   end
 end
