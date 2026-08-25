@@ -4,15 +4,15 @@ PODS:
   - fast_float (8.0.0)
   - FBLazyVector (0.81.6)
   - fmt (11.0.2)
-  - FRNAppearanceAdditions (0.8.4):
+  - FRNAppearanceAdditions (0.8.8):
     - React
-  - FRNAvatar (0.22.4):
+  - FRNAvatar (0.22.8):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNDatePicker (0.12.4):
+  - FRNDatePicker (0.12.7):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNFontMetrics (0.7.4):
+  - FRNFontMetrics (0.7.7):
     - React
   - glog (0.3.5)
   - hermes-engine (0.81.6):
@@ -2713,15 +2713,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
-  DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
+  DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   fast_float: b32c788ed9c6a8c584d114d0047beda9664e7cc6
   FBLazyVector: 812782f0506ba4c4a1b9f4b793e6de1bfdfc4c25
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
-  FRNAppearanceAdditions: 58fe872ed668bac5b1f6b3f81b61c7f9fccd6788
-  FRNAvatar: 586585a440e2b23c9ac872fd1fa2ddb7819cd7bd
-  FRNDatePicker: 6cf33c0f00f68606e2e301689670a7f90a9e5f37
-  FRNFontMetrics: dba3c15a2feef87ee987d7c502cc3e2ba15adb5b
-  glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
+  FRNAppearanceAdditions: 706f6363f4f69e2b6d5ea71efa6487e9ce832c5d
+  FRNAvatar: a521e92d786b57f168897918d4c02f8c52239ca0
+  FRNDatePicker: 5458ca02b022733ebfa8c2a851f52dd188fadd92
+  FRNFontMetrics: 06e3fec8860d2e45ccb9febfeaa988ab4101dbb6
+  glog: 5683914934d5b6e4240e497e0f4a3b42d1854183
   hermes-engine: 7219f6e751ad6ec7f3d7ec121830ee34dae40749
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: 846fda9475e61ec7bcbf8a3fe81edfcaeb090669
@@ -2796,4 +2796,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fec1d0c29d19b06181402b781cf7db0e3b52a2c8
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.17.0
