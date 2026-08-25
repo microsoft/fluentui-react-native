@@ -119,6 +119,44 @@ jobs:
             apps/E2E/reports
             apps/E2E/errorShots
 
+  macos-storybook:
+    name: macOS Storybook PR
+    runs-on: macos-26
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        with:
+          platform: macos
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Bundle macOS
+        run: |
+          set -eox pipefail
+          yarn bundle:macos
+        working-directory: apps/storybook
+
+      - name: Pod install
+        run: |
+          set -eox pipefail
+          pod install --verbose
+        working-directory: apps/storybook/macos
+
+      - name: Build macOS app
+        run: yarn rnx-cli build-macos --scheme AgenticStorybook --mode Debug --verbose
+        working-directory: apps/storybook
+        env:
+          CCACHE_DISABLE: 1
+
   ios:
     name: iOS PR
     runs-on: macos-26
