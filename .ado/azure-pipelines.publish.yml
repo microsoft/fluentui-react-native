@@ -187,8 +187,7 @@ extends:
                   PACKED_PACKAGES_PATH: $(packagesArtifactPath)
                   ESRP_PRODUCT_NAME: fluentui-react-native
                   ESRP_NPM_TAG: latest
-                  # TODO choose someone else who works on this?
-                  ESRP_USER: elcraig@microsoft.com
+                  ESRP_USER: sanajmi@microsoft.com
                   ESRP_APPROVERS: jasonmo@microsoft.com
                   ESRP_TENANT_ID: cdc5aeea-15c5-4db6-b079-fcadd2505dc2
                   ESRP_CLIENT_ID: 0a35e01f-eadf-420a-a2bf-def002ba898d
