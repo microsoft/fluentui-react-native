@@ -1,5 +1,8 @@
 # Switching between node-modules mode and pnpm mode requires changing how relative paths are handled.
 
+require 'fileutils'
+require 'json'
+
 # (pnpm mode) allow modules to resolve correctly in upstream podfiles
 ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(__dir__, '../node_modules')
 
@@ -10,6 +13,24 @@ workspace 'AgenticStorybook.xcworkspace'
 
 # (pnpm mode)
 react_native_path = "#{__dir__}/../node_modules/react-native"
+
+def write_storybook_autolinking_config!(app_root)
+  command = ['node', '-e', "process.argv=['', '', 'config'];require('@react-native-community/cli').run()"]
+  config, error, status = Dir.chdir(app_root) do
+    Pod::Executable.capture_command(command[0], command[1..], capture: :both)
+  end
+
+  unless status.success?
+    raise Pod::Informative, "Failed to generate the Storybook autolinking config: #{error}"
+  end
+
+  output_path = File.join(__dir__, 'build/generated/autolinking/autolinking.json')
+  FileUtils.mkdir_p(File.dirname(output_path))
+  File.write(output_path, "#{JSON.pretty_generate(JSON.parse(config))}\n")
+end
+
+# react-native-test-app runs codegen before autolinking, so seed its clean-install input first.
+write_storybook_autolinking_config!(File.expand_path('..', __dir__))
 
 use_test_app!(:fabric_enabled => true, :bridgeless_enabled => false) do |target|
   target.app do

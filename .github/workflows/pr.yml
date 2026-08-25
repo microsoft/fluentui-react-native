@@ -146,13 +146,11 @@ jobs:
         working-directory: apps/storybook
 
       - name: Pod install
-        run: |
-          set -eox pipefail
-          pod install --verbose
-        working-directory: apps/storybook/macos
+        run: yarn pods:macos
+        working-directory: apps/storybook
 
       - name: Build macOS app
-        run: yarn rnx-cli build-macos --scheme AgenticStorybook --mode Debug --verbose
+        run: yarn macos:build
         working-directory: apps/storybook
         env:
           CCACHE_DISABLE: 1
