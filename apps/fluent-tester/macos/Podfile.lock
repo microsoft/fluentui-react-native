@@ -2389,6 +2389,7 @@ DEPENDENCIES:
   - "FRNVibrancyView (from `../node_modules/@fluentui-react-native/vibrancy-view`)"
   - glog (from `../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native-macos/sdks/hermes-engine/hermes-engine.podspec`)
+  - MicrosoftFluentUI (from `https://cdn.cocoapods.org/Specs/5/f/8/MicrosoftFluentUI/0.13.1/MicrosoftFluentUI.podspec.json`)
   - RCT-Folly (from `../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTDeprecation (from `../node_modules/react-native-macos/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
   - "RCTFocusZone (from `../node_modules/@fluentui-react-native/focus-zone`)"
@@ -2463,7 +2464,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - MicrosoftFluentUI
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -2494,6 +2494,8 @@ EXTERNAL SOURCES:
   hermes-engine:
     :podspec: "../node_modules/react-native-macos/sdks/hermes-engine/hermes-engine.podspec"
     :tag: hermes-2025-07-07-RNv0.81.0-e0fc67142ec0763c6b6153ca2bf96df815539782
+  MicrosoftFluentUI:
+    :podspec: https://cdn.cocoapods.org/Specs/5/f/8/MicrosoftFluentUI/0.13.1/MicrosoftFluentUI.podspec.json
   RCT-Folly:
     :podspec: "../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec"
   RCTDeprecation:
@@ -2647,7 +2649,7 @@ SPEC CHECKSUMS:
   FRNVibrancyView: 6f7790778e33064c851b6d28d18296d31c7597f0
   glog: 0b31c25149b9d350b2666c7d459229861a00ec07
   hermes-engine: 7219f6e751ad6ec7f3d7ec121830ee34dae40749
-  MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
+  MicrosoftFluentUI: 117135c06c8ae043a9811af6312e4ce68b197860
   RCT-Folly: a3d9b23289a456c318f4814703664bdc33c771cc
   RCTDeprecation: ae9e1391708bf992a2a94fb724b0923015be995b
   RCTFocusZone: 3ada547397cc3d8cd17fb3ea9599123353cf4bd9
@@ -2719,6 +2721,6 @@ SPEC CHECKSUMS:
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: a88f30ac6f89fded00f9840e7d043315e5ab4fe0
 
-PODFILE CHECKSUM: 9142426f666c393ccea255cd25936728beda6e75
+PODFILE CHECKSUM: 666246d33b45dd85f1e33ca8fd184f399505d449
 
 COCOAPODS: 1.17.0

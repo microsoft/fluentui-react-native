@@ -2474,6 +2474,7 @@ DEPENDENCIES:
   - "FRNFontMetrics (from `../node_modules/@fluentui-react-native/experimental-native-font-metrics`)"
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
+  - MicrosoftFluentUI (from `https://cdn.cocoapods.org/Specs/5/f/8/MicrosoftFluentUI/0.13.1/MicrosoftFluentUI.podspec.json`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
   - RCTRequired (from `../node_modules/react-native/Libraries/Required`)
@@ -2547,7 +2548,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - MicrosoftFluentUI
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -2574,6 +2574,8 @@ EXTERNAL SOURCES:
   hermes-engine:
     :podspec: "../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec"
     :tag: hermes-2025-07-07-RNv0.81.0-e0fc67142ec0763c6b6153ca2bf96df815539782
+  MicrosoftFluentUI:
+    :podspec: https://cdn.cocoapods.org/Specs/5/f/8/MicrosoftFluentUI/0.13.1/MicrosoftFluentUI.podspec.json
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTDeprecation:
@@ -2723,7 +2725,7 @@ SPEC CHECKSUMS:
   FRNFontMetrics: 06e3fec8860d2e45ccb9febfeaa988ab4101dbb6
   glog: 5683914934d5b6e4240e497e0f4a3b42d1854183
   hermes-engine: 7219f6e751ad6ec7f3d7ec121830ee34dae40749
-  MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
+  MicrosoftFluentUI: 117135c06c8ae043a9811af6312e4ce68b197860
   RCT-Folly: 846fda9475e61ec7bcbf8a3fe81edfcaeb090669
   RCTDeprecation: d4ef510f229cea15314176aee5e3ba10064a8496
   RCTRequired: 1e41b794629558f6626e2bc39c166ac0ec1c5878
@@ -2794,6 +2796,6 @@ SPEC CHECKSUMS:
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 3196a843cc5f4bc433f1a41cf17cdf804a01a529
 
-PODFILE CHECKSUM: fec1d0c29d19b06181402b781cf7db0e3b52a2c8
+PODFILE CHECKSUM: 79d0e7585d741181bef1b57ec0a885efaf034dd3
 
 COCOAPODS: 1.17.0

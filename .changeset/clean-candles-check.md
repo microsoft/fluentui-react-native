@@ -2,4 +2,4 @@
 "@fluentui-react-native/tester": patch
 ---
 
-pod updates
+Avoid CocoaPods Specs rate limits when installing FluentTester Apple dependencies.
