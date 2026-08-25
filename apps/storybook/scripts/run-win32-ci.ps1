@@ -73,16 +73,51 @@ function Wait-ForApp {
   throw "Timed out waiting for the '$windowTitle' window."
 }
 
-$ownedProcessIds = [System.Collections.Generic.HashSet[int]]::new()
+function Wait-ForAutomationId {
+  param(
+    [Parameter(Mandatory)]
+    [System.Diagnostics.Process]$Process,
+    [Parameter(Mandatory)]
+    [string]$AutomationId,
+    [int]$TimeoutSeconds = 30
+  )
+
+  Add-Type -AssemblyName UIAutomationClient
+  $condition = New-Object System.Windows.Automation.PropertyCondition(
+    [System.Windows.Automation.AutomationElement]::AutomationIdProperty,
+    $AutomationId
+  )
+  $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+  while ((Get-Date) -lt $deadline) {
+    $root = [System.Windows.Automation.AutomationElement]::FromHandle($Process.MainWindowHandle)
+    if ($root.FindFirst([System.Windows.Automation.TreeScope]::Descendants, $condition)) {
+      return
+    }
+    Start-Sleep -Milliseconds 250
+    $Process.Refresh()
+  }
+
+  throw "Timed out waiting for automation id '$AutomationId'."
+}
+
+$ownedProcessIds = [System.Collections.Generic.List[int]]::new()
+
+function Add-OwnedProcess {
+  param([Parameter(Mandatory)][int]$Id)
+
+  if (-not $ownedProcessIds.Contains($Id)) {
+    $ownedProcessIds.Add($Id)
+  }
+}
 
 try {
   $serverLauncher = Start-YarnScript -Script 'storybook-server:win32' -LogName 'storybook-server'
-  $ownedProcessIds.Add($serverLauncher.Id) | Out-Null
+  Add-OwnedProcess -Id $serverLauncher.Id
   Wait-ForTcpPort -Port $storybookPort
 
   $serverProcessId = Get-NetTCPConnection -State Listen -LocalPort $storybookPort |
     Select-Object -First 1 -ExpandProperty OwningProcess
-  $ownedProcessIds.Add($serverProcessId) | Out-Null
+  Add-OwnedProcess -Id $serverProcessId
 
   $index = Invoke-RestMethod -Uri "http://127.0.0.1:$storybookPort/index.json"
   $storyCount = @($index.entries.PSObject.Properties).Count
@@ -91,9 +126,12 @@ try {
   }
 
   $hostLauncher = Start-YarnScript -Script 'win32:ci:host' -LogName 'win32-host'
-  $ownedProcessIds.Add($hostLauncher.Id) | Out-Null
+  Add-OwnedProcess -Id $hostLauncher.Id
   $appProcess = Wait-ForApp
-  $ownedProcessIds.Add($appProcess.Id) | Out-Null
+  $appProcessInfo = Get-CimInstance Win32_Process -Filter "ProcessId=$($appProcess.Id)"
+  Add-OwnedProcess -Id $appProcessInfo.ParentProcessId
+  Add-OwnedProcess -Id $appProcess.Id
+  Wait-ForAutomationId -Process $appProcess -AutomationId 'agentic-storybook-win32-sidebar-header'
 
   & yarn storybook:smoke:win32
   if ($LASTEXITCODE -ne 0) {
@@ -104,11 +142,12 @@ try {
     throw 'The Win32 Storybook host exited during the smoke test.'
   }
 } finally {
-  $ownedProcessIds |
-    Where-Object { $_ -and $_ -ne $PID } |
-    ForEach-Object {
-      if (Get-Process -Id $_ -ErrorAction SilentlyContinue) {
-        Stop-Process -Id $_
+  for ($index = $ownedProcessIds.Count - 1; $index -ge 0; $index -= 1) {
+    $ownedProcessId = $ownedProcessIds[$index]
+    if ($ownedProcessId -and $ownedProcessId -ne $PID) {
+      if (Get-Process -Id $ownedProcessId -ErrorAction SilentlyContinue) {
+        Stop-Process -Id $ownedProcessId
       }
     }
+  }
 }

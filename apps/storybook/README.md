@@ -156,18 +156,26 @@ run `yarn start` and then `yarn win32:dev` in separate terminals.
 `yarn bundle:win32:dev` produces a debuggable local bundle when Metro cannot be
 kept running.
 
-Storybook 10.4 bundles regular expressions that use Unicode properties
-unsupported by the V8 engine in REX 0.81.1. The Win32-only Babel plugin in
+The current Storybook bundle contains regular expressions that use Unicode
+properties unsupported by the V8 engine in REX 0.81.1. The Win32-only Babel plugin in
 `scripts/transform-win32-unicode-regex.cjs` expands those expressions at bundle
 time. Remove the workaround after the REX host accepts Unicode property
 escapes; other platform bundles never load the plugin.
 
 react-native-win32 intentionally leaves window width and height undefined, and
 Storybook's mobile `LiteUI` drawer crashes the Paper host after those metrics
-are supplied. The Win32 endpoint therefore uses the preview-only
-`StorybookUI.win32.tsx` surface: it renders the same stories beneath the
-persistent theme header, while story navigation and controls use the existing
-WebSocket/REST channel. macOS and Windows continue to use `LiteUI`.
+are supplied. The Win32 endpoint therefore uses the desktop-only
+`StorybookUI.win32.tsx` chrome. It composes LiteUI's public `Sidebar` with its
+theme and storage providers beside the story preview, but does not mount the
+mobile drawers, portals, resize animations, or addon panel that enter the
+problematic paths. The sidebar supports browsing, search, selection, and the
+current-story indicator; the persistent FURN theme header remains above it.
+
+macOS and Windows continue to use upstream `LiteUI`. Keeping the full upstream
+chrome there preserves its resizable sidebar, addon controls, responsive
+layout, and future Storybook fixes. Moving those endpoints to the reduced
+Win32 chrome would create a maintained fork and regress features without
+solving a platform problem they currently have.
 
 The three standalone Callout stories, nine ListItem stories, and seven
 Accordion stories are omitted from the Win32-generated catalog. Selecting the

@@ -59,12 +59,17 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   in `.win32.ts` or `.win32.tsx` files, and Metro platform resolution belongs in
   `metro.config.js`.
 - REX 0.81.1's V8 cannot parse the Unicode-property regular expressions
-  bundled by Storybook 10.4. Keep their compatibility transform scoped to
-  Win32; remove it when the REX engine supports Unicode property escapes.
-- Win32 uses a preview-only `StorybookUI.win32.tsx` because react-native-win32
-  omits window dimensions and Storybook's mobile LiteUI drawer crashes the
-  Paper host. Keep macOS and Windows on LiteUI, and drive Win32 navigation
-  through the shared Storybook channel.
+  bundled by the current Storybook release. Keep their compatibility transform
+  scoped to Win32; remove it when the REX engine supports Unicode property
+  escapes.
+- Win32 uses desktop-only chrome in `StorybookUI.win32.tsx` because
+  react-native-win32 omits window dimensions and Storybook's mobile LiteUI
+  drawer crashes the Paper host. Compose only LiteUI's public sidebar with its
+  theme/storage providers; do not add drawers, portals, resize animation, or
+  addon panels without live Paper proof.
+- Keep macOS and Windows on upstream LiteUI. Replacing it with the reduced
+  Win32 chrome would regress addon controls and responsive behavior while
+  increasing local maintenance.
 - Generate Win32 stories with `prebuild:win32`. It intentionally excludes the
   Callout, ListItem, and Accordion stories because their Paper implementations
   fail-fast crash REX 0.81.1; keep the ordinary `prebuild` catalog unchanged

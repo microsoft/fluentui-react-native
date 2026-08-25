@@ -83,6 +83,8 @@
     "@storybook/mcp": "^0.7.0",
     "@storybook/react": "^10.4.6",
     "@storybook/react-native": "^10.4.7",
+    "@storybook/react-native-theming": "^10.4.7",
+    "@storybook/react-native-ui-common": "^10.4.7",
     "@storybook/react-native-ui-lite": "^10.4.7",
     "@tmcp/adapter-valibot": "^0.1.6",
     "@tmcp/transport-http": "^0.8.6",

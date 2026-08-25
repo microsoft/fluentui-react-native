@@ -2615,6 +2615,8 @@ __metadata:
     "@storybook/mcp": "npm:^0.7.0"
     "@storybook/react": "npm:^10.4.6"
     "@storybook/react-native": "npm:^10.4.7"
+    "@storybook/react-native-theming": "npm:^10.4.7"
+    "@storybook/react-native-ui-common": "npm:^10.4.7"
     "@storybook/react-native-ui-lite": "npm:^10.4.7"
     "@tmcp/adapter-valibot": "npm:^0.1.6"
     "@tmcp/transport-http": "npm:^0.8.6"
@@ -9763,7 +9765,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-theming@npm:^10.5.4":
+"@storybook/react-native-theming@npm:^10.4.7, @storybook/react-native-theming@npm:^10.5.4":
   version: 10.5.4
   resolution: "@storybook/react-native-theming@npm:10.5.4"
   dependencies:
@@ -9775,7 +9777,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-ui-common@npm:^10.5.4":
+"@storybook/react-native-ui-common@npm:^10.4.7, @storybook/react-native-ui-common@npm:^10.5.4":
   version: 10.5.4
   resolution: "@storybook/react-native-ui-common@npm:10.5.4"
   dependencies:
