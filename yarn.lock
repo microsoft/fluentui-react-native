@@ -4650,6 +4650,7 @@ __metadata:
     "@babel/runtime": "catalog:"
     "@changesets/changelog-github": "npm:^0.5.0"
     "@changesets/cli": "npm:^2.30.0"
+    "@microsoft/esrp-npm-release": "npm:^0.1.2"
     "@rnx-kit/align-deps": "catalog:"
     "@rnx-kit/lint-lockfile": "catalog:"
     "@yarnpkg/types": "npm:^4.0.1"
@@ -6872,6 +6873,15 @@ __metadata:
   peerDependencies:
     eslint: ^9
   checksum: 10c0/01cf9a7f590f13b3e403e97128d891cadc5d3654b90a0a1d050d4cd4008d11f1e56deda5d8cdbdf84f2d6904403640f690e794cc9bca7d91ab8b630b57342a2e
+  languageName: node
+  linkType: hard
+
+"@microsoft/esrp-npm-release@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@microsoft/esrp-npm-release@npm:0.1.2"
+  bin:
+    esrp-npm-release: bin/esrp-npm-release.js
+  checksum: 10c0/f5482fa2433b211d9b5bfacfcf2a148424c1d41352f7cb26416951fb82edd70ab0995fca510f58774d6fc0f2055960bd0853f6956875e8c336e1d9577963a1e8
   languageName: node
   linkType: hard
 
