@@ -119,6 +119,42 @@ jobs:
             apps/E2E/reports
             apps/E2E/errorShots
 
+  macos-storybook:
+    name: macOS Storybook PR
+    runs-on: macos-26
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        with:
+          platform: macos
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Bundle macOS
+        run: |
+          set -eox pipefail
+          yarn bundle:macos
+        working-directory: apps/storybook
+
+      - name: Pod install
+        run: yarn pods:macos
+        working-directory: apps/storybook
+
+      - name: Build macOS app
+        run: yarn macos:build
+        working-directory: apps/storybook
+        env:
+          CCACHE_DISABLE: 1
+
   ios:
     name: iOS PR
     runs-on: macos-26
@@ -231,6 +267,40 @@ jobs:
             apps/E2E/errorShots
             apps/fluent-tester/packager.log
 
+  windows-storybook:
+    name: Windows Storybook PR
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 5
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        with:
+          platform: windows
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Bundle Windows
+        run: yarn bundle:windows
+        working-directory: apps/storybook
+
+      - name: Generate RNW app
+        run: yarn install-windows-test-app --use-nuget
+        working-directory: apps/storybook
+
+      - name: Build RNW app
+        run: yarn rnx-cli run-windows --no-packager --no-deploy --no-launch
+        working-directory: apps/storybook
+
   win32:
     name: Win32 PR
     runs-on: windows-latest
@@ -283,6 +353,30 @@ jobs:
             apps/E2E/reports
             apps/E2E/errorShots
             apps/storybook/artifacts/win32
+
+  win32-storybook:
+    name: Win32 Storybook PR
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        with:
+          platform: windows
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Bundle Win32
+        run: yarn bundle:win32
+        working-directory: apps/storybook
 
   check-changesets:
     name: Check for Changesets
