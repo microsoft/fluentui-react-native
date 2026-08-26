@@ -1,6 +1,7 @@
 {
   "extends": "@fluentui-react-native/scripts/tsconfig",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "module": "esnext",
@@ -11,7 +12,7 @@
     "composite": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["index.js", "src", "app.json"],
+  "include": ["index.js", "src", "app.json", "storybook.config.mts"],
   "exclude": ["node_modules", "dist", ".cache"],
   "references": [
     {

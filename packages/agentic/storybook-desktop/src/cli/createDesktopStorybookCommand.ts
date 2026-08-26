@@ -1,0 +1,89 @@
+import { Command, Option } from 'commander';
+
+import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
+import type { Platforms } from '../config/platforms.js';
+import type { DesktopStorybookCliOptions } from './DesktopStorybookCli.js';
+import { DesktopStorybookCli } from './DesktopStorybookCli.js';
+import { loadDesktopStorybookConfig } from './loadConfig.js';
+
+type PlatformFlags = {
+  macos?: boolean;
+  win32?: boolean;
+  windows?: boolean;
+};
+
+export type CreateDesktopStorybookCommandOptions = DesktopStorybookCliOptions & {
+  config?: DesktopStorybookConfig;
+  cwd?: string;
+};
+
+export function createDesktopStorybookCommand(options: CreateDesktopStorybookCommandOptions = {}): Command {
+  const program = new Command()
+    .name('storybook-desktop')
+    .description('Prepare, bundle, build, run, and smoke test a React Native desktop Storybook app.')
+    .option('-c, --config <path>', 'path to storybook.config.ts');
+  let apiPromise: Promise<DesktopStorybookCli> | undefined;
+
+  const getApi = () =>
+    (apiPromise ??= Promise.resolve(
+      options.config ?? loadDesktopStorybookConfig(program.opts<{ config?: string }>().config, options.cwd),
+    ).then(
+      (config) =>
+        new DesktopStorybookCli(config, {
+          runner: options.runner,
+          fetch: options.fetch,
+          output: options.output,
+          isPortAvailable: options.isPortAvailable,
+        }),
+    ));
+
+  addActionCommand(program, 'prep', 'Prepare native dependencies and generated projects.', getApi);
+  addActionCommand(program, 'bundle', 'Generate stories and create the platform JavaScript bundle.', getApi);
+  addActionCommand(program, 'run', 'Build and launch the native Storybook app.', getApi);
+  addActionCommand(program, 'build', 'Build the native Storybook app without launching it.', getApi);
+  addActionCommand(program, 'smoke', 'Launch the app, render every story, and shut the app down.', getApi);
+
+  return program;
+}
+
+export async function runDesktopStorybookCli(argv: readonly string[] = process.argv): Promise<void> {
+  await createDesktopStorybookCommand().parseAsync([...argv]);
+}
+
+function addActionCommand(
+  program: Command,
+  action: 'prep' | 'bundle' | 'run' | 'build' | 'smoke',
+  description: string,
+  getApi: () => Promise<DesktopStorybookCli>,
+): void {
+  const command = program.command(action).description(description);
+  addPlatformOptions(command);
+  command.action(async (flags: PlatformFlags) => {
+    const api = await getApi();
+    const platform = selectedPlatform(flags) ?? api.config.platform;
+    if (!platform) {
+      throw new Error('Select --windows, --macos, or --win32, or set FURN_STORYBOOK_PLATFORM.');
+    }
+    await api[action](platform);
+  });
+}
+
+function addPlatformOptions(command: Command): void {
+  command
+    .addOption(new Option('--windows', 'target React Native Windows').conflicts(['macos', 'win32']))
+    .addOption(new Option('--macos', 'target React Native macOS').conflicts(['windows', 'win32']))
+    .addOption(new Option('--win32', 'target React Native Win32').conflicts(['windows', 'macos']));
+}
+
+function selectedPlatform(flags: PlatformFlags): Platforms | undefined {
+  if (flags.windows) {
+    return 'windows';
+  }
+  if (flags.macos) {
+    return 'macos';
+  }
+  if (flags.win32) {
+    return 'win32';
+  }
+  return undefined;
+}

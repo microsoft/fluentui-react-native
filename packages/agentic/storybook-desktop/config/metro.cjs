@@ -1,3 +1,4 @@
+const fs = require('node:fs');
 const path = require('node:path');
 const { makeMetroConfig } = require('@rnx-kit/metro-config');
 const MetroSymlinksResolver = require('@rnx-kit/metro-resolver-symlinks');
@@ -26,6 +27,7 @@ function createDesktopStorybookMetroConfig({ configPath }) {
     throw new TypeError('createDesktopStorybookMetroConfig requires an app-owned Storybook configPath.');
   }
 
+  const runtimeModulePath = writeRuntimeInstanceModule(path.dirname(configPath));
   const symlinkResolver = MetroSymlinksResolver({
     resolver: 'oxc-resolver',
   });
@@ -51,10 +53,44 @@ function createDesktopStorybookMetroConfig({ configPath }) {
     },
   });
 
-  return withStorybook(config, {
+  const storybookConfig = withStorybook(config, {
     configPath,
     liteMode: true,
   });
+  const getPolyfills = storybookConfig.serializer?.getPolyfills;
+
+  return {
+    ...storybookConfig,
+    serializer: {
+      ...storybookConfig.serializer,
+      getPolyfills: (...args) => [...(getPolyfills?.(...args) ?? []), runtimeModulePath],
+    },
+  };
+}
+
+function writeRuntimeInstanceModule(projectRoot) {
+  const generatedDirectory = path.join(projectRoot, '.cache', 'storybook-desktop');
+  const runtimeModulePath = path.join(generatedDirectory, 'runtime-instance.js');
+  const storybookPort = readPort(process.env.STORYBOOK_WS_PORT, 7007);
+  const instanceId = process.env.FURN_STORYBOOK_INSTANCE_ID || 'default';
+  const content = `globalThis.__FURN_DESKTOP_STORYBOOK_INSTANCE__ = Object.freeze(${JSON.stringify({
+    instanceId,
+    storybookPort,
+  })});\n`;
+
+  fs.mkdirSync(generatedDirectory, { recursive: true });
+  if (!fs.existsSync(runtimeModulePath) || fs.readFileSync(runtimeModulePath, 'utf8') !== content) {
+    fs.writeFileSync(runtimeModulePath, content);
+  }
+  return runtimeModulePath;
+}
+
+function readPort(value, fallback) {
+  const port = Number(value) || fallback;
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new RangeError(`Invalid Storybook port "${value}".`);
+  }
+  return port;
 }
 
 module.exports = {

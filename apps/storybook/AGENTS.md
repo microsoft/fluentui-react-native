@@ -13,6 +13,9 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
 - Run `yarn` from the repository root only after dependency manifests change or when a declared command fails because a
   dependency is missing.
 - Preserve unrelated manifest and lockfile edits already present in the worktree.
+- Keep native command overrides and full-lifecycle smoke settings in `storybook.config.mts`. The declared
+  `pods:macos`, `macos:build`, `macos`, `windows:generate`, `windows:build`, `windows`, bundle, and smoke scripts route
+  through the shared `storybook-desktop` CLI.
 
 ## macOS native workflow
 
@@ -23,8 +26,13 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   changed local podspec.
 - Run `bundle:macos` to verify the JavaScript bundle, `macos:build` for a non-launching native build, and
   `macos:build:clean` after changing pods, native workarounds, Xcode settings, or React Native versions.
+- Use `smoke:macos` for the reusable channel-server, Metro, launch, all-story traversal, and app shutdown lifecycle.
+- Preserve the shared smoke instance context: its canonical-root hash coordinates the macOS bundle identifier,
+  Storybook port, Metro port, generated runtime polyfill, and exact app shutdown. Do not replace those values with
+  process-name matching or fixed smoke ports.
 - Only `macos/Podfile` is hand-authored. The workspace, Pods, Podfile.lock, build directory, and DerivedData are generated
-  and ignored; never patch or commit them.
+  and ignored; `.cache/storybook-desktop` and `macos/.storybook-desktop` are generated instance state. Never patch or
+  commit these outputs.
 - Diagnose the first actionable CocoaPods or compiler error before editing configuration. If autolinking claims a listed
   dependency is missing, verify resolution from this app directory before adding another dependency.
 - Avoid patching generated pod source. If a temporary source patch is unavoidable, document its exact version boundary.
@@ -38,6 +46,7 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
 - Use `windows:agent` for the complete agent workflow: start the channel server and Metro, build and launch the app,
   and validate the smoke stories through stable UI Automation selectors. Use `windows:agent:stop` to stop only the
   process IDs recorded by that session.
+- Use `smoke:windows` for full indexed-story traversal with the same owned-session cleanup.
 - WinAppDriver screenshots are not a reliable capture path for WinAppSDK Composition content. After selecting a story
   with `storybook:control`, use the agent host's desktop screenshot tool when visual evidence is required.
 - Build logs, automation evidence, visual trees, screenshots, and session manifests belong under ignored
@@ -55,6 +64,8 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   endpoint or generate a `react-native-test-app` project for it.
 - Run `bundle:win32` before `win32`. The bundle is the native dependency source
   for the prebuilt REX host.
+- Keep package discovery and platform-specific story inclusion in
+  `storybook.config.mts`; keep `src/main.ts` as the shared config adapter.
 - Keep shared Storybook source platform-neutral. Win32-specific source belongs
   in `.win32.ts` or `.win32.tsx` files, and Metro platform resolution belongs in
   `metro.config.js`.
@@ -86,6 +97,8 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
 - Use `win32:ci` for the complete bundle/launch/smoke workflow. Its logs belong
   under ignored `artifacts/win32`, and it must stop only the process IDs it
   started or resolved by its exact port and window title.
+- `smoke:win32` exposes `win32:ci` through the shared CLI. Keep `build --win32` unsupported because the endpoint uses
+  a prebuilt host rather than an app-owned native project.
 
 ## Validation
 

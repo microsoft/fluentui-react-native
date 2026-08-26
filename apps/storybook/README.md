@@ -19,13 +19,15 @@ selected while navigating between stories.
 
 The macOS, Windows Fabric, and Win32 Paper native endpoints live in this workspace and
 share the same entry point and generated story catalog. Story discovery and native identity stay
-app-owned, while the platform-neutral UI and configuration helpers come from the shared package.
+app-owned, while the platform-neutral UI, configuration helpers, and `storybook-desktop` CLI come
+from the shared package. The app's declared native scripts are compatibility aliases over that CLI.
 
 ## Layout
 
 ```
 storybook/
-  src/                 App-owned story config, generated requires, and shared-runtime integration
+  src/                 Storybook adapters, generated requires, and shared-runtime integration
+  storybook.config.mts App-owned package discovery, platform patterns, and native CLI settings
   index.js             AppRegistry entry
   app.json             react-native-test-app manifest
   metro.config.js      rnx-kit metro config wrapped with withStorybook (liteMode)
@@ -65,6 +67,12 @@ yarn macos
 ```
 
 Requires Xcode + CocoaPods.
+
+Run `yarn smoke:macos` for the complete server, Metro, build/launch, all-story traversal, and
+ownership-safe shutdown lifecycle. The shared CLI hashes this enlistment's canonical project root,
+uses that suffix in the native bundle identifier, and selects dedicated Storybook and Metro ports.
+Parallel smoke tests from different enlistments therefore launch, drive, and stop only their own app
+and services, even when the default ports are already occupied.
 
 If `Pods` was generated against an older React Native macOS patch release and CocoaPods reports
 that a local podspec such as `fmt` changed, refresh the local native dependencies:
@@ -111,6 +119,9 @@ yarn windows:build
 ```
 
 Logs are written beneath `artifacts/windows/build-logs`.
+
+Run `yarn smoke:windows` to start the owned Windows agent session, navigate every indexed story,
+and stop the recorded app, Metro, and channel-server process IDs even when traversal fails.
 
 The Debug app always loads from Metro; `react-native-test-app` does not automatically fall back
 to an embedded bundle in Debug builds. To bundle, build, and launch a Release app that runs
@@ -198,6 +209,9 @@ host without the direct-debugger listener, verifies the default desktop
 regions, resizes both splitters, opens and dismisses both native pop-outs, runs
 the 130-story sweep, verifies that the host remains alive, and stops only its
 recorded process IDs. Logs are written beneath `artifacts/win32`.
+`yarn smoke:win32` exposes the same lifecycle through the shared desktop CLI. A native
+`build --win32` operation is intentionally unsupported because this endpoint uses the prebuilt
+REX host.
 
 ### Windows agent workflow
 
@@ -237,10 +251,14 @@ yarn bundle:win32     # -> writes dist/index.win32.bundle
 yarn bundle:windows   # -> writes dist/index.windows.bundle
 ```
 
+These scripts route to `storybook-desktop bundle --macos|--win32|--windows`. The binary can also
+infer the target from `FURN_STORYBOOK_PLATFORM` or the host platform when no explicit option is
+provided.
+
 ## Agent interaction (WebSocket channel + MCP)
 
-The running app can be driven by external agents through a standalone Storybook channel server
-(`storybook-server.cjs`, default `127.0.0.1:7007`):
+The running app can be driven by external agents through the reusable standalone Storybook channel
+server (`storybook-server`, default `127.0.0.1:7007`):
 
 ```sh
 yarn storybook-server   # WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.1:7007/mcp

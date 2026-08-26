@@ -11,10 +11,19 @@ export type DesktopStorybookOptions = {
   testIDPrefix?: string;
 };
 
+type DesktopStorybookRuntimeInstance = {
+  storybookPort?: number;
+};
+
 export function createDesktopStorybookApp(
   view: Pick<View, 'getStorybookUI'>,
-  { enableWebsockets = true, host = '127.0.0.1', port = 7007, testIDPrefix = 'storybook-desktop' }: DesktopStorybookOptions = {},
+  { enableWebsockets = true, host = '127.0.0.1', port, testIDPrefix = 'storybook-desktop' }: DesktopStorybookOptions = {},
 ) {
+  const runtimeInstance = (
+    globalThis as typeof globalThis & {
+      __FURN_DESKTOP_STORYBOOK_INSTANCE__?: DesktopStorybookRuntimeInstance;
+    }
+  ).__FURN_DESKTOP_STORYBOOK_INSTANCE__;
   const memoryStore: Record<string, string> = {};
   const storage = {
     getItem: async (key: string) => (key in memoryStore ? memoryStore[key] : null),
@@ -25,7 +34,7 @@ export function createDesktopStorybookApp(
   const StorybookUI = view.getStorybookUI({
     enableWebsockets,
     host,
-    port,
+    port: port ?? runtimeInstance?.storybookPort ?? 7007,
     CustomUIComponent: StorybookUIComponent,
     storage,
   });

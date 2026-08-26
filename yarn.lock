@@ -4860,6 +4860,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/metro-config": "catalog:"
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
+    "@rnx-kit/tools-react-native": "catalog:"
     "@storybook/mcp": "npm:^0.7.0"
     "@storybook/react": "npm:^10.4.6"
     "@storybook/react-native": "npm:^10.4.7"
@@ -4869,6 +4870,7 @@ __metadata:
     "@tmcp/adapter-valibot": "npm:^0.1.6"
     "@tmcp/transport-http": "npm:^0.8.6"
     "@types/react": "npm:~19.1.4"
+    commander: "npm:^14.0.2"
     oxc-resolver: "catalog:"
     react: "npm:19.1.4"
     react-native: "npm:^0.81.6"
@@ -4894,6 +4896,9 @@ __metadata:
       optional: true
     react-native-windows:
       optional: true
+  bin:
+    storybook-desktop: ./config/cli.cjs
+    storybook-server: ./config/server-cli.cjs
   languageName: unknown
   linkType: soft
 
@@ -9282,6 +9287,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/tools-node@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "@rnx-kit/tools-node@npm:3.0.5"
+  dependencies:
+    "@rnx-kit/types-node": "npm:^1.0.0"
+  checksum: 10c0/3ad531069ae14c87869b52cde3f31cf19b58702a28ddb10a4d95f6e1030ba9fbe1040d4ac6c777cb10c845d0644399d4b0546e774259552259b26f2bda9c821f
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/tools-packages@npm:^0.1.3":
   version: 0.1.3
   resolution: "@rnx-kit/tools-packages@npm:0.1.3"
@@ -9301,6 +9315,22 @@ __metadata:
     "@rnx-kit/tools-node": "npm:^3.0.4"
     "@rnx-kit/types-bundle-config": "npm:^1.0.0"
   checksum: 10c0/4ae1830efabcb10fd24a7970e4200d5fabb52a517f53e76e6c0e9657a1a2fcf90b986c0a4cdb7b39861db615298812c05c6207b62b02901bfaf6682198f1720f
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-react-native@npm:^2.3.8":
+  version: 2.3.8
+  resolution: "@rnx-kit/tools-react-native@npm:2.3.8"
+  dependencies:
+    "@rnx-kit/tools-filesystem": "npm:^0.2.0"
+    "@rnx-kit/tools-node": "npm:^3.0.5"
+    "@rnx-kit/types-bundle-config": "npm:^1.0.0"
+  peerDependencies:
+    "@react-native-community/cli-types": "*"
+  peerDependenciesMeta:
+    "@react-native-community/cli-types":
+      optional: true
+  checksum: 10c0/2881b698aaea20d4ea92f2bf0b08997255cd574b257c8942bf2a72bd3e692e00fea69cf2af31c3527495d78d8e8ece7c490e2250724c942153d9a904e60dcda8
   languageName: node
   linkType: hard
 
