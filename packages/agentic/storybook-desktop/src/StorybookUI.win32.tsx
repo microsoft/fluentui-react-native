@@ -6,6 +6,7 @@ import { StorageProvider } from '@storybook/react-native-ui-common';
 import type { SBUI, Selection } from '@storybook/react-native-ui-common';
 import { Sidebar } from '@storybook/react-native-ui-lite';
 
+import { useDesktopStorybookTestID } from './DesktopStorybookConfig';
 import { Win32AddonsPanel } from './Win32AddonsPanel';
 import { Win32CalloutPortal } from './Win32CalloutPortal';
 import { Win32ResizeHandle } from './Win32ResizeHandle';
@@ -22,6 +23,21 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
   const [addonsHeight, setAddonsHeight] = React.useState(280);
   const [storyDrawerOpen, setStoryDrawerOpen] = React.useState(false);
   const [addonsPanelOpen, setAddonsPanelOpen] = React.useState(false);
+  const chromeTestID = useDesktopStorybookTestID('win32-chrome');
+  const sidebarTestID = useDesktopStorybookTestID('win32-sidebar');
+  const sidebarResizeTestID = useDesktopStorybookTestID('win32-sidebar-resize');
+  const toolbarTestID = useDesktopStorybookTestID('win32-desktop-toolbar');
+  const showSidebarTestID = useDesktopStorybookTestID('win32-show-sidebar');
+  const popoutStoriesTestID = useDesktopStorybookTestID('win32-popout-stories');
+  const showAddonsTestID = useDesktopStorybookTestID('win32-show-addons');
+  const popoutAddonsTestID = useDesktopStorybookTestID('win32-popout-addons');
+  const previewTestID = useDesktopStorybookTestID('win32-preview');
+  const addonsResizeTestID = useDesktopStorybookTestID('win32-addons-resize');
+  const inlineAddonsTestID = useDesktopStorybookTestID('win32-inline-addons');
+  const storyDrawerTestID = useDesktopStorybookTestID('win32-story-drawer');
+  const closeStoriesTestID = useDesktopStorybookTestID('win32-close-stories');
+  const addonsDrawerTestID = useDesktopStorybookTestID('win32-addons-drawer');
+  const hideSidebarTestID = useDesktopStorybookTestID('win32-hide-sidebar');
 
   const setSelection = React.useCallback(
     (selection: Selection) => {
@@ -51,7 +67,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
   return (
     <ThemeProvider theme={theme}>
       <StorageProvider storage={storage}>
-        <View style={styles.root} testID="agentic-storybook-win32-chrome">
+        <View style={styles.root} testID={chromeTestID}>
           {sidebarVisible ? (
             <>
               <View
@@ -63,21 +79,16 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                     width: sidebarWidth,
                   },
                 ]}
-                testID="agentic-storybook-win32-sidebar"
+                testID={sidebarTestID}
               >
-                <View
-                  accessibilityLabel="Storybook sidebar"
-                  accessible
-                  style={styles.sidebarHeader}
-                  testID="agentic-storybook-win32-sidebar-header"
-                >
+                <View accessibilityLabel="Storybook sidebar" accessible style={styles.sidebarHeader} testID={`${sidebarTestID}-header`}>
                   <Text style={[styles.sidebarTitle, { color: theme.barTextColor }]}>Stories</Text>
                   <Pressable
                     accessibilityLabel="Hide story sidebar"
                     accessibilityRole="button"
                     onPress={() => setSidebarVisible(false)}
                     style={styles.headerButton}
-                    testID="agentic-storybook-win32-hide-sidebar"
+                    testID={hideSidebarTestID}
                   >
                     <Text style={{ color: theme.color.mediumdark }}>Hide</Text>
                   </Pressable>
@@ -94,7 +105,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                   />
                 </View>
               </View>
-              <Win32ResizeHandle direction="horizontal" onResize={resizeSidebar} testID="agentic-storybook-win32-sidebar-resize" />
+              <Win32ResizeHandle direction="horizontal" onResize={resizeSidebar} testID={sidebarResizeTestID} />
             </>
           ) : null}
           <View style={styles.main}>
@@ -103,13 +114,13 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                 accessibilityLabel="Storybook desktop toolbar"
                 accessible
                 style={[styles.toolbar, { backgroundColor: theme.background.content, borderBottomColor: theme.appBorderColor }]}
-                testID="agentic-storybook-win32-desktop-toolbar"
+                testID={toolbarTestID}
               >
                 <Pressable
                   accessibilityRole="button"
                   onPress={() => setSidebarVisible(true)}
                   style={[styles.toolbarButton, { backgroundColor: theme.button.background, borderColor: theme.appBorderColor }]}
-                  testID="agentic-storybook-win32-show-sidebar"
+                  testID={showSidebarTestID}
                 >
                   <Text style={{ color: theme.color.mediumdark }}>Show stories</Text>
                 </Pressable>
@@ -125,7 +136,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                       opacity: pressed ? 0.75 : 1,
                     },
                   ]}
-                  testID="agentic-storybook-win32-popout-stories"
+                  testID={popoutStoriesTestID}
                 >
                   <Text style={{ color: storyDrawerOpen ? theme.color.lightest : theme.color.mediumdark }}>Pop out stories</Text>
                 </Pressable>
@@ -134,7 +145,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                     accessibilityRole="button"
                     onPress={() => setAddonsVisible(true)}
                     style={[styles.toolbarButton, { backgroundColor: theme.button.background, borderColor: theme.appBorderColor }]}
-                    testID="agentic-storybook-win32-show-addons"
+                    testID={showAddonsTestID}
                   >
                     <Text style={{ color: theme.color.mediumdark }}>Show addons</Text>
                   </Pressable>
@@ -154,7 +165,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                       opacity: pressed ? 0.75 : 1,
                     },
                   ]}
-                  testID="agentic-storybook-win32-popout-addons"
+                  testID={popoutAddonsTestID}
                 >
                   <Text style={{ color: addonsPanelOpen ? theme.color.lightest : theme.color.mediumdark }}>Pop out addons</Text>
                 </Pressable>
@@ -163,12 +174,12 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                 </Text>
               </View>
             ) : null}
-            <View style={styles.preview} testID="agentic-storybook-win32-preview">
+            <View style={styles.preview} testID={previewTestID}>
               {children}
             </View>
             {addonsVisible ? (
               <>
-                <Win32ResizeHandle direction="vertical" onResize={resizeAddons} testID="agentic-storybook-win32-addons-resize" />
+                <Win32ResizeHandle direction="vertical" onResize={resizeAddons} testID={addonsResizeTestID} />
                 <View
                   style={[
                     styles.addons,
@@ -177,7 +188,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                       height: addonsHeight,
                     },
                   ]}
-                  testID="agentic-storybook-win32-inline-addons"
+                  testID={inlineAddonsTestID}
                 >
                   <Win32AddonsPanel onClose={() => setAddonsVisible(false)} parameters={story?.parameters} storyId={story?.id} />
                 </View>
@@ -190,7 +201,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
             height={600}
             onDismiss={closeStoryDrawer}
             target={storiesAnchorRef}
-            testID="agentic-storybook-win32-story-drawer"
+            testID={storyDrawerTestID}
             visible={storyDrawerOpen}
             width={360}
           >
@@ -201,7 +212,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                 accessibilityRole="button"
                 onPress={closeStoryDrawer}
                 style={styles.closeButton}
-                testID="agentic-storybook-win32-close-stories"
+                testID={closeStoriesTestID}
               >
                 <Text style={{ color: theme.color.mediumdark }}>Close</Text>
               </Pressable>
@@ -224,7 +235,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
             height={480}
             onDismiss={closeAddonsDrawer}
             target={addonsAnchorRef}
-            testID="agentic-storybook-win32-addons-drawer"
+            testID={addonsDrawerTestID}
             visible={addonsPanelOpen}
             width={520}
           >

@@ -7,6 +7,8 @@ import { Addon_TypesEnum } from 'storybook/internal/types';
 import type { Addon_BaseType, Addon_Collection } from 'storybook/internal/types';
 import { addons } from 'storybook/manager-api';
 
+import { useDesktopStorybookTestID } from './DesktopStorybookConfig';
+
 type Win32AddonsPanelProps = {
   onClose: () => void;
   parameters?: Parameters;
@@ -19,6 +21,9 @@ function preferredPanelId(panels: [string, Addon_BaseType][]) {
 
 export function Win32AddonsPanel({ onClose, parameters, storyId }: Win32AddonsPanelProps) {
   const theme = useTheme();
+  const panelTestID = useDesktopStorybookTestID('win32-addons-panel');
+  const addonTestID = useDesktopStorybookTestID('win32-addon');
+  const closeTestID = useDesktopStorybookTestID('win32-close-addons');
   const panels = React.useMemo(() => {
     const allPanels: Addon_Collection<Addon_BaseType> = addons.getElements(Addon_TypesEnum.PANEL);
     return Object.entries(allPanels).filter(([, panel]) => !panel.paramKey || !parameters?.[panel.paramKey]?.disable);
@@ -33,12 +38,12 @@ export function Win32AddonsPanel({ onClose, parameters, storyId }: Win32AddonsPa
   }, [panels, selectedPanelId]);
 
   return (
-    <View style={styles.root} testID="agentic-storybook-win32-addons-panel">
+    <View style={styles.root} testID={panelTestID}>
       <View
         accessibilityLabel="Storybook addons panel"
         accessible
         style={[styles.header, { borderBottomColor: theme.appBorderColor }]}
-        testID="agentic-storybook-win32-addons-panel-header"
+        testID={`${panelTestID}-header`}
       >
         <ScrollView
           contentContainerStyle={styles.tabs}
@@ -64,7 +69,7 @@ export function Win32AddonsPanel({ onClose, parameters, storyId }: Win32AddonsPa
                     borderBottomWidth: 2,
                   },
                 ]}
-                testID={`agentic-storybook-win32-addon-${id.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`}
+                testID={`${addonTestID}-${id.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`}
               >
                 <Text style={{ color: selected ? theme.barSelectedColor : theme.color.mediumdark }}>{String(title)}</Text>
               </Pressable>
@@ -76,7 +81,7 @@ export function Win32AddonsPanel({ onClose, parameters, storyId }: Win32AddonsPa
           accessibilityRole="button"
           onPress={onClose}
           style={styles.closeButton}
-          testID="agentic-storybook-win32-close-addons"
+          testID={closeTestID}
         >
           <Text style={{ color: theme.color.mediumdark }}>Close</Text>
         </Pressable>

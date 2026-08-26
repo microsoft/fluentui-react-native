@@ -59,10 +59,11 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   in `.win32.ts` or `.win32.tsx` files, and Metro platform resolution belongs in
   `metro.config.js`.
 - REX 0.81.1's V8 cannot parse the Unicode-property regular expressions
-  bundled by the current Storybook release. Keep their compatibility transform
+  bundled by the current Storybook release. Keep the shared desktop package's compatibility transform
   scoped to Win32; remove it when the REX engine supports Unicode property
   escapes.
-- Win32 uses desktop-only chrome in `StorybookUI.win32.tsx` because
+- Win32 uses desktop-only chrome in
+  `../../packages/agentic/storybook-desktop/src/StorybookUI.win32.tsx` because
   react-native-win32 omits window dimensions and Storybook's mobile LiteUI
   drawer crashes the Paper host. Keep its default layout conceptually aligned
   with desktop LiteUI: persistent resizable Sidebar, story preview, and

@@ -1,0 +1,113 @@
+{
+  "name": "@fluentui-react-native/storybook-desktop",
+  "version": "0.1.0",
+  "description": "Reusable on-device Storybook implementation for React Native macOS, Windows, and Win32",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic/storybook-desktop"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "react-native": "./src/index.ts",
+      "import": "./lib/index.js",
+      "default": "./src/index.ts"
+    },
+    "./babel": "./config/babel.cjs",
+    "./metro": "./config/metro.cjs",
+    "./server": "./config/server.cjs",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "fluentui-scripts clean",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint"
+  },
+  "dependencies": {
+    "@fluentui-react-native/callout": "workspace:*",
+    "@fluentui-react-native/default-theme": "workspace:*",
+    "@fluentui-react-native/design": "workspace:*",
+    "@rnx-kit/metro-config": "catalog:",
+    "@rnx-kit/metro-resolver-symlinks": "catalog:",
+    "@storybook/mcp": "^0.7.0",
+    "@storybook/react": "^10.4.6",
+    "@storybook/react-native": "^10.4.7",
+    "@storybook/react-native-theming": "^10.4.7",
+    "@storybook/react-native-ui-common": "^10.4.7",
+    "@storybook/react-native-ui-lite": "^10.4.7",
+    "@tmcp/adapter-valibot": "^0.1.6",
+    "@tmcp/transport-http": "^0.8.6",
+    "oxc-resolver": "catalog:",
+    "regexpu-core": "^6.3.1",
+    "storybook": "^10.4.0",
+    "tmcp": "^1.19.4",
+    "valibot": "^1.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@office-iss/react-native-win32": "^0.81.0",
+    "@react-native/babel-preset": "^0.81.0",
+    "@types/react": "~19.1.4",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-native-macos": "^0.81.0",
+    "react-native-windows": "^0.81.0"
+  },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
+    "react": "18.2.0 || 19.0.0 || 19.1.4",
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "@types/react": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
+  },
+  "furn": {
+    "knip": {
+      "ignoreDependencies": [
+        "@react-native/babel-preset",
+        "@storybook/mcp",
+        "@storybook/react",
+        "@tmcp/adapter-valibot",
+        "@tmcp/transport-http",
+        "tmcp",
+        "valibot"
+      ]
+    }
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "babel-preset-react-native",
+        "core",
+        "core-macos",
+        "core-win32",
+        "core-windows"
+      ]
+    },
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

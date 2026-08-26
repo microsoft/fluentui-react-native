@@ -1,33 +1,31 @@
 # Agentic Components Storybook
 
-On-device [Storybook](https://storybook.js.org/) app (Storybook for React Native v10) for
+On-device [Storybook](https://storybook.js.org/) test app (Storybook for React Native v10) for
 `@fluentui-react-native/components` and linked standalone native packages. It loads every
-`*.stories.(ts|tsx)` file from the agentic library source (`../src`) plus the standalone
-Callout package so its native stories run in the Fabric host.
+`*.stories.(ts|tsx)` file from the agentic components package plus the standalone Callout
+package so its native stories run in the Fabric host.
 
-It runs in Storybook **liteMode**, which mocks out the heavy default on-device UI
+The reusable desktop implementation lives in
+`packages/agentic/storybook-desktop`. It runs Storybook in **liteMode**, which mocks out the heavy default on-device UI
 (`@storybook/react-native-ui`). This avoids the `react-native-reanimated` /
 `react-native-gesture-handler` / `@gorhom/bottom-sheet` / `react-native-svg` native dependency
 chain, which does not bundle cleanly with this repo's Metro + Babel + pnpm-linker toolchain
 (Reanimated's Babel plugin crashes when Metro bundles Reanimated from source).
 
-The app shell includes a persistent theme header above the Storybook UI. It can leave stories
+The shared app shell includes a persistent theme header above the Storybook UI. It can leave stories
 unwrapped (`No theme`, the default) or apply the default light, dark, or high-contrast FURN Theme.
 The selected Theme wraps the preview decorator, so it applies to every rendered story and remains
 selected while navigating between stories.
 
-The macOS, Windows Fabric, and Win32 Paper endpoints live in this workspace and
-share the same entry point and generated story catalog. Win32 stays here rather
-than in a sibling package so story discovery and agent control cannot drift.
-Shared Storybook source remains platform-neutral; `metro.config.js` redirects
-`react-native` imports to `@office-iss/react-native-win32` only while producing
-the Win32 bundle.
+The macOS, Windows Fabric, and Win32 Paper native endpoints live in this workspace and
+share the same entry point and generated story catalog. Story discovery and native identity stay
+app-owned, while the platform-neutral UI and configuration helpers come from the shared package.
 
 ## Layout
 
 ```
 storybook/
-  src/                 Storybook config, generated requires, and root component
+  src/                 App-owned story config, generated requires, and shared-runtime integration
   index.js             AppRegistry entry
   app.json             react-native-test-app manifest
   metro.config.js      rnx-kit metro config wrapped with withStorybook (liteMode)
@@ -77,8 +75,8 @@ yarn pods:macos:update
 
 > `react-native-safe-area-context` note: Storybook's UI imports it, but its native module is
 > iOS-only (UIKit) and uses a Yoga API that doesn't compile for react-native-macos 0.81. It is
-> therefore not installed; `metro.config.js` aliases the import to a JS-only stub in
-> `.storybook-mocks/`, so no native module is needed.
+> therefore not installed; the shared Metro helper aliases the import to a JS-only stub, so no
+> native module is needed.
 
 ## Running on Windows
 
@@ -158,14 +156,13 @@ kept running.
 
 The current Storybook bundle contains regular expressions that use Unicode
 properties unsupported by the V8 engine in REX 0.81.1. The Win32-only Babel plugin in
-`scripts/transform-win32-unicode-regex.cjs` expands those expressions at bundle
+`packages/agentic/storybook-desktop/config/transform-win32-unicode-regex.cjs` expands those expressions at bundle
 time. Remove the workaround after the REX host accepts Unicode property
 escapes; other platform bundles never load the plugin.
 
 react-native-win32 intentionally leaves window width and height undefined, and
 Storybook's mobile `LiteUI` drawer crashes the Paper host after those metrics
-are supplied. The Win32 endpoint therefore uses desktop-only chrome in
-`StorybookUI.win32.tsx` with the same conceptual structure as macOS and
+are supplied. The Win32 endpoint therefore uses the shared package's desktop-only chrome with the same conceptual structure as macOS and
 Windows: a persistent Sidebar on the left, story preview on the upper right,
 and an Actions-first addon panel along the bottom. Local splitters resize the
 sidebar width and addon height without reading global window dimensions.
@@ -250,7 +247,7 @@ yarn storybook-server   # WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.
 ```
 
 Run it alongside `yarn start` + `yarn macos` or `yarn windows`. The on-device app connects to it automatically
-(`src/StorybookApp.tsx` calls `getStorybookUI({ enableWebsockets: true, host, port })`).
+(`src/StorybookApp.tsx` creates the shared desktop Storybook app around the generated view).
 
 - **WebSocket channel** (`ws://127.0.0.1:7007/`): agents connect and emit Storybook channel events
   to drive the app — e.g. `setCurrentStory` (`{ storyId }`) to switch story, and arg-update events
@@ -285,6 +282,6 @@ yarn storybook:smoke
 
 ## Writing stories
 
-Follow the package-level story authoring instructions in `../AGENTS.md`. Add a `*.stories.tsx` file next to its component
-under `../src`; standalone native package story globs are listed explicitly in `src/main.ts`. See
-`../src/components/button/button.stories.tsx` for the canonical higher-order component example.
+Follow the package-level story authoring instructions in `../../packages/agentic/components/AGENTS.md`. Add a
+`*.stories.tsx` file next to its component; standalone native package story globs are listed explicitly in `src/main.ts`.
+See `../../packages/agentic/components/src/components/button/button.stories.tsx` for the canonical higher-order component example.

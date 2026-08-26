@@ -5,6 +5,8 @@ import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 import { ThemeProvider } from '@fluentui-react-native/design/theming';
 import type { ThemeReference } from '@fluentui-react-native/design/theming';
 
+import { useDesktopStorybookTestID } from './DesktopStorybookConfig';
+
 type ThemeChoice = {
   label: string;
   theme?: ThemeReference;
@@ -25,11 +27,13 @@ const StorybookThemeContext = React.createContext<ThemeReference | undefined>(un
 export function StorybookThemeHost({ children }: React.PropsWithChildren) {
   const [selectedName, setSelectedName] = React.useState<ThemeChoiceName>('none');
   const selectedTheme = themeChoices[selectedName].theme;
+  const toolbarTestID = useDesktopStorybookTestID('theme-toolbar');
+  const optionTestID = useDesktopStorybookTestID('theme');
 
   return (
     <StorybookThemeContext.Provider value={selectedTheme}>
       <View style={styles.root}>
-        <View accessibilityRole="toolbar" style={styles.header} testID="agentic-storybook-theme-toolbar">
+        <View accessibilityRole="toolbar" style={styles.header} testID={toolbarTestID}>
           <Text style={styles.label}>Theme</Text>
           {themeChoiceNames.map((name) => {
             const choice = themeChoices[name];
@@ -41,7 +45,7 @@ export function StorybookThemeHost({ children }: React.PropsWithChildren) {
                 key={name}
                 onPress={() => setSelectedName(name)}
                 style={({ pressed }) => [styles.option, selected && styles.selectedOption, pressed && styles.pressedOption]}
-                testID={`agentic-storybook-theme-${name}`}
+                testID={`${optionTestID}-${name}`}
               >
                 <Text style={[styles.optionText, selected && styles.selectedOptionText]}>{choice.label}</Text>
               </Pressable>

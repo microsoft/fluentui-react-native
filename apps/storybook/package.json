@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/agentic/components/storybook"
+    "directory": "apps/storybook"
   },
   "scripts": {
     "start": "rnx-cli start",
@@ -52,9 +52,8 @@
   "dependencies": {
     "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/components": "workspace:*",
-    "@fluentui-react-native/default-theme": "workspace:*",
-    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/storybook-desktop": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
     "@types/react": "~19.1.4",
     "react": "19.1.4",
@@ -76,28 +75,15 @@
     "@react-native/metro-babel-transformer": "^0.81.0",
     "@react-native/metro-config": "^0.81.0",
     "@rnx-kit/cli": "catalog:",
-    "@rnx-kit/metro-config": "catalog:",
-    "@rnx-kit/metro-resolver-symlinks": "catalog:",
     "@storybook/addon-ondevice-actions": "^10.4.7",
     "@storybook/addon-ondevice-controls": "^10.4.7",
-    "@storybook/mcp": "^0.7.0",
-    "@storybook/react": "^10.4.6",
     "@storybook/react-native": "^10.4.7",
-    "@storybook/react-native-theming": "^10.4.7",
-    "@storybook/react-native-ui-common": "^10.4.7",
-    "@storybook/react-native-ui-lite": "^10.4.7",
-    "@tmcp/adapter-valibot": "^0.1.6",
-    "@tmcp/transport-http": "^0.8.6",
     "cross-env": "catalog:",
     "jest": "^29.7.0",
     "jest-environment-node": "^29.7.0",
     "metro": "^0.83.1",
-    "oxc-resolver": "catalog:",
     "react-native-test-app": "catalog:",
-    "regexpu-core": "^6.3.1",
-    "storybook": "^10.4.0",
-    "tmcp": "^1.19.4",
-    "valibot": "^1.4.1"
+    "storybook": "^10.4.0"
   },
   "furn": {
     "knip": {
