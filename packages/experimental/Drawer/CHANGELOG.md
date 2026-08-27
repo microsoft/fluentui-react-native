@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/drawer
 
+## 0.5.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/design@0.3.2
+
 ## 0.5.8
 
 ### Patch Changes

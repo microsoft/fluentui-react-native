@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
+## 0.9.9
+
+### Patch Changes
+
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/framework@0.17.3
+
 ## 0.9.8
 
 ### Patch Changes
