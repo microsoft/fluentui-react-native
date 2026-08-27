@@ -4,6 +4,7 @@
     "outDir": "lib",
     "rootDir": "src",
     "composite": true,
+    "rewriteRelativeImportExtensions": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],

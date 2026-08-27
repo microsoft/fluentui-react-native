@@ -10,9 +10,9 @@ import type {
   DesktopPlatformOptionsMap,
   DesktopSmokeOptions,
   DesktopStorybookAction,
-} from './commands.js';
-import { getAllPlatforms, getPlatform, isPlatform } from './platforms.js';
-import type { Platforms } from './platforms.js';
+} from './commands.ts';
+import { getAllPlatforms, getPlatform, isPlatform } from './platforms.ts';
+import type { Platforms } from './platforms.ts';
 
 const defaultStoryPatterns = ['src/**/*.stories.?(ts|tsx)'] as const;
 const defaultDeviceAddons = ['@storybook/addon-ondevice-controls', '@storybook/addon-ondevice-actions'] as const;

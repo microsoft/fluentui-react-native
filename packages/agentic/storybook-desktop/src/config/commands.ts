@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { createRequire } from 'node:module';
 
-import type { Platforms } from './platforms.js';
+import type { Platforms } from './platforms.ts';
 
 export const desktopStorybookActions = ['server', 'prep', 'bundle', 'run', 'build', 'smoke'] as const;
 
