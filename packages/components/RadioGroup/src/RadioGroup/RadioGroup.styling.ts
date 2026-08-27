@@ -1,6 +1,6 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
-import { fontStyles } from '@fluentui-react-native/tokens';
+import { fontStyles } from '@fluentui-react-native/design/styling/tokens';
 
 import type { RadioGroupTokens, RadioGroupSlotProps, RadioGroupProps } from './RadioGroup.types';
 import { radioGroupName } from './RadioGroup.types';

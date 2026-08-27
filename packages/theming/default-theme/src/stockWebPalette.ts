@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { globalTokens } from '@fluentui-react-native/design/tokens/legacy';
 import type { ThemeColorDefinition } from '@fluentui-react-native/design/theming';
 import { colorBlack, colorBurgundyPrimary, colorRedPrimary, colorWhite } from '@fluentui-react-native/design/tokens/global';
 

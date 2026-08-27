@@ -7,7 +7,7 @@ import type { Theme } from '@fluentui-react-native/framework';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';
 import { size200 } from '@fluentui-react-native/design/tokens/global';
-import { fontStyles } from '@fluentui-react-native/tokens';
+import { fontStyles } from '@fluentui-react-native/design/styling/tokens';
 
 import type { DividerTokens, DividerProps, DividerAppearance } from './Divider.types';
 

@@ -6,7 +6,7 @@ import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import type { Theme } from '@fluentui-react-native/framework';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { mergeStyles } from '@fluentui-react-native/framework-base';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { themedStyleSheet } from '@fluentui-react-native/design/styling/stylesheet';
 
 import { shadowTestPageStyles } from './ShadowTestPageStyles';
 

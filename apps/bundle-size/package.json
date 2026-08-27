@@ -1,0 +1,74 @@
+{
+  "name": "@fluentui-react-native/bundle-size",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Deterministic Metro consumer-bundle measurements",
+  "license": "MIT",
+  "scripts": {
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "measure": "node scripts/measure.mjs",
+    "update-baseline": "node scripts/measure.mjs --update-baseline"
+  },
+  "dependencies": {
+    "@fluentui-react-native/components": "workspace:*",
+    "@office-iss/react-native-win32": "^0.81.0",
+    "@types/react": "~19.1.4",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-native-macos": "^0.81.0",
+    "react-native-svg": "^15.12.1",
+    "react-native-windows": "^0.81.0"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@babel/plugin-transform-react-jsx": "catalog:",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-android": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
+    "@react-native-windows/cli": "^0.81.0",
+    "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-config": "^0.81.0",
+    "@rnx-kit/cli": "catalog:",
+    "@rnx-kit/metro-config": "catalog:",
+    "@rnx-kit/metro-resolver-symlinks": "catalog:",
+    "@rnx-kit/metro-serializer-esbuild": "catalog:",
+    "@rnx-kit/tools-filesystem": "^0.2.0",
+    "metro": "^0.83.1",
+    "oxc-resolver": "catalog:"
+  },
+  "rnx-kit": {
+    "kitType": "app",
+    "bundle": [
+      {
+        "id": "measure",
+        "entryFile": "src/bootstrap.js",
+        "treeShake": true,
+        "targets": [
+          "macos",
+          "win32",
+          "windows"
+        ]
+      }
+    ],
+    "alignDeps": {
+      "requirements": {
+        "production": [
+          "react-native@0.81"
+        ]
+      },
+      "capabilities": [
+        "babel-preset-react-native",
+        "community/cli",
+        "core",
+        "core-macos",
+        "core-win32",
+        "core-windows",
+        "core/metro-config",
+        "metro"
+      ]
+    },
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

@@ -10,7 +10,7 @@ import type { ImageResolvedAssetSource } from 'react-native';
 
 import type { IconProps } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/icon';
-import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/design/styling/tokens';
 import type { ISlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';

@@ -24,7 +24,7 @@
       "path": "../../../scripts/tsconfig.json"
     },
     {
-      "path": "../../utils/tokens/tsconfig.json"
+      "path": "../../agentic/design/tsconfig.json"
     }
   ]
 }

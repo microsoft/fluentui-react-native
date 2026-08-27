@@ -4,7 +4,12 @@ import type { ViewProps } from 'react-native';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import type { IPressableProps } from '@fluentui-react-native/pressable';
 import type { ITextProps } from '@fluentui-react-native/text';
-import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type {
+  FontTokens,
+  IForegroundColorTokens,
+  IBackgroundColorTokens,
+  IBorderTokens,
+} from '@fluentui-react-native/design/styling/tokens';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 
