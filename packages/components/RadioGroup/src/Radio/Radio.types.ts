@@ -10,7 +10,7 @@ import type {
   IBackgroundColorTokens,
   IBorderTokens,
   IColorTokens,
-} from '@fluentui-react-native/tokens';
+} from '@fluentui-react-native/design/styling/tokens';
 import type { SvgProps } from 'react-native-svg';
 
 export const radioName = 'Radio';

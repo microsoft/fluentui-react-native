@@ -9,7 +9,7 @@ This package serves as an entry point which aggregates and re-exports some of th
 You may want a few different packages from this repo. Let's start with the following:
 
 - `@uifabricshared/theming-react-native`
-- `@fluentui-react-native/themed-stylesheets` for styling react-native's primitives components.
+- `@fluentui-react-native/design/styling/stylesheet` for styling React Native primitive components.
 
 E.g. In your package.json file:
 
@@ -21,7 +21,7 @@ E.g. In your package.json file:
   "main": "lib/index.js",
   "dependencies": {
     "@uifabricshared/theming-react-native": "^0.2.0",
-    "@fluentui-react-native/themed-stylesheet": "^0.2.0"
+    "@fluentui-react-native/design": "^0.3.1"
   }
 }
 ```
@@ -112,7 +112,7 @@ You can read more about the [ThemeRegistry here](../theme-registry/README.md).
 
 ### Create a Themed Stylesheet
 
-The `themed-stylesheet` package allows you to author View/Text/Image Style objects similar to `StyleSheet.create(...);`. You can learn more at the [themed-stylesheet's README](../../framework/themed-stylesheet/README.md)
+The `themed-stylesheet` package allows you to author View/Text/Image Style objects similar to `StyleSheet.create(...);`. You can learn more at the [themed-stylesheet's README](../../shim/themed-stylesheet/README.md)
 
 ```tsx
 // styles.ts

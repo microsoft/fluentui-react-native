@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { globalTokens } from '@fluentui-react-native/design/tokens/legacy';
 import type { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/design/theming';
 import { fontWeightRegular, fontWeightSemibold } from '@fluentui-react-native/design/tokens/global';
 

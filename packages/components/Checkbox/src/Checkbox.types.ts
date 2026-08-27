@@ -9,7 +9,7 @@ import type {
   IForegroundColorTokens,
   IBackgroundColorTokens,
   LayoutTokens,
-} from '@fluentui-react-native/tokens';
+} from '@fluentui-react-native/design/styling/tokens';
 import type { SvgProps } from 'react-native-svg';
 
 export const checkboxName = 'Checkbox';

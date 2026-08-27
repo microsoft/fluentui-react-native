@@ -4,7 +4,7 @@ import type {
   StyleFactoryFunction,
   StyleFactoryFunctionRaw,
   StyleFactoryOperation,
-} from '@fluentui-react-native/tokens';
+} from '@fluentui-react-native/design/styling/tokens';
 
 import type { ICachedPropHandlers } from './Token.internal';
 

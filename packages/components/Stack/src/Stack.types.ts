@@ -1,7 +1,7 @@
 import type { ViewStyle, ViewProps, DimensionValue } from 'react-native';
 
 import type { Spacing } from '@fluentui-react-native/framework';
-import type { IBackgroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
+import type { IBackgroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/design/styling/tokens';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 import type { IStackItemProps } from './StackItem/StackItem.types';

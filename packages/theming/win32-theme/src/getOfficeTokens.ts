@@ -5,7 +5,7 @@ import colorfulShadowTokens from '@fluentui-react-native/design-tokens-win32/col
 import darkGrayAliasTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-aliases.json';
 import darkGrayShadowTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-shadow.json';
 import hcShadowTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json';
-import { hcAliasTokens } from '@fluentui-react-native/theme-tokens';
+import { hcAliasTokens } from '@fluentui-react-native/design/tokens/legacy';
 
 export function getOfficeAliasTokens(officeTheme: string) {
   if (officeTheme === 'White' || officeTheme === 'Colorful') {

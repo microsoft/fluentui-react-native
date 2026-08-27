@@ -33,8 +33,8 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/tokens": "workspace:*",
     "@types/node": "catalog:",
     "@uifabricshared/foundation-settings": "workspace:*"
   },

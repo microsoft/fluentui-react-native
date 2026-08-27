@@ -20,12 +20,6 @@
     },
     {
       "path": "../../../scripts/tsconfig.json"
-    },
-    {
-      "path": "../theme-tokens/tsconfig.json"
-    },
-    {
-      "path": "../theming-utils/tsconfig.json"
     }
   ]
 }

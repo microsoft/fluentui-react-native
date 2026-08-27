@@ -4,7 +4,7 @@ import type { ScrollViewProps, View, AnimatableNumericValue } from 'react-native
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import type { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/design/styling/tokens';
 
 export const menuListName = 'MenuList';
 

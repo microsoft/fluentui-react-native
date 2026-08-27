@@ -88,7 +88,7 @@ Documentation for Theming can be found in our docs file, or for more in depth do
 - [Theming Overview](./docs/pages/Theming/Basics.md)
 - [StyleSheets](./docs/pages/Theming/ThemedStylesheet.md)
 - [Customizing Theme Settings](./docs/pages/Theming/CustomTheme.md)
-- [Theme Reference](./packages/framework/theme/README.md)
+- [Theme Reference](./packages/shim/theme/README.md)
 - [Tokens](./packages/framework/use-tokens/README.md)
 - [Slots](./packages/framework/use-slots/README.md)
 - [Customize and Compose](./packages/framework/composition/README.md)
