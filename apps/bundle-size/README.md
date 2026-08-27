@@ -29,6 +29,20 @@ The Babel configuration preserves ESM for the serializer while explicitly loweri
 explicit JSX transform is required because the desktop React Native packages publish JSX in
 `.js` files, which esbuild otherwise parses with its plain JavaScript loader.
 
+## Baselines and pull requests
+
+`baseline.json` is the reviewed comparison point for pull requests. Ordinary measurement writes
+`dist/bundle-size/report.md` with advisory deltas and never changes the baseline. Update it only
+for an intentional bundle change:
+
+```sh
+yarn bundle-size:update
+```
+
+Review the baseline diff together with the implementation that caused it. The PR workflow adds
+the Markdown comparison to its job summary and uploads the complete `dist/bundle-size` directory,
+including the esbuild metafiles, for investigation.
+
 ## Adding a package or submodule
 
 1. Add the package to this fixture's dependencies so the pnpm linker exposes it to Metro.

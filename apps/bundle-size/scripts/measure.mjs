@@ -10,19 +10,24 @@ const repositoryRoot = dirname(dirname(workspaceRoot));
 const yarnVersion = JSON.parse(readFileSync(join(repositoryRoot, 'package.json'), 'utf8')).packageManager.split('@')[1];
 const yarnPath = join(repositoryRoot, '.yarn', 'releases', `yarn-${yarnVersion}.cjs`);
 const configPath = join(workspaceRoot, 'scenarios.json');
+const defaultBaselinePath = join(workspaceRoot, 'baseline.json');
 const outputRoot = join(workspaceRoot, 'dist', 'bundle-size');
 const entryRoot = join(outputRoot, 'entries');
 
 function parseArgs(args) {
-  const options = { config: configPath, platforms: undefined };
+  const options = { baseline: defaultBaselinePath, config: configPath, platforms: undefined, updateBaseline: false };
 
   for (let index = 0; index < args.length; index += 1) {
     const argument = args[index];
-    if (argument === '--config') {
+    if (argument === '--baseline') {
+      options.baseline = resolve(args[++index]);
+    } else if (argument === '--config') {
       options.config = args[++index];
     } else if (argument === '--platform') {
       options.platforms ??= [];
       options.platforms.push(args[++index]);
+    } else if (argument === '--update-baseline') {
+      options.updateBaseline = true;
     } else {
       throw new Error(`Unknown argument: ${argument}`);
     }
@@ -165,7 +170,99 @@ function runBundle(platform, scenario, resetCache) {
   };
 }
 
-const { config: selectedConfigPath, platforms: selectedPlatforms } = parseArgs(process.argv.slice(2));
+function baselineResult(measurement) {
+  const { platform, scenario, rawBytes, gzipBytes, moduleCount, metroModuleCount, metafileInputCount, workspaceModules, workspaceBytes } =
+    measurement;
+  return {
+    platform,
+    scenario,
+    rawBytes,
+    gzipBytes,
+    moduleCount,
+    metroModuleCount,
+    metafileInputCount,
+    workspaceModules,
+    workspaceBytes,
+  };
+}
+
+function resultKey({ platform, scenario }) {
+  return `${platform}:${scenario}`;
+}
+
+function createComparison(measurement, baseline, baselineShell) {
+  const isShell = measurement.scenario === 'shell';
+  if (!baseline || (!isShell && !baselineShell)) {
+    return { status: 'new' };
+  }
+
+  const baselineCost = isShell ? baseline.rawBytes : baseline.rawBytes - baselineShell.rawBytes;
+  const currentCost = isShell ? measurement.rawBytes : measurement.deltaBytes;
+  const baselineGzipCost = isShell ? baseline.gzipBytes : baseline.gzipBytes - baselineShell.gzipBytes;
+  const currentGzipCost = isShell ? measurement.gzipBytes : measurement.deltaGzipBytes;
+  const baselineModuleCost = isShell ? baseline.moduleCount : baseline.moduleCount - baselineShell.moduleCount;
+  const currentModuleCost = isShell ? measurement.moduleCount : measurement.deltaModules;
+  const costDelta = currentCost - baselineCost;
+  return {
+    status: 'compared',
+    baselineCost,
+    currentCost,
+    costDelta,
+    costPercent: baselineCost === 0 ? 0 : (costDelta / baselineCost) * 100,
+    gzipCostDelta: currentGzipCost - baselineGzipCost,
+    moduleCostDelta: currentModuleCost - baselineModuleCost,
+    absoluteRawDelta: measurement.rawBytes - baseline.rawBytes,
+  };
+}
+
+function formatBytes(bytes) {
+  const sign = bytes > 0 ? '+' : '';
+  return `${sign}${(bytes / 1024).toFixed(1)} KiB`;
+}
+
+function formatPercent(percent) {
+  const sign = percent > 0 ? '+' : '';
+  return `${sign}${percent.toFixed(2)}%`;
+}
+
+function createMarkdownReport(results) {
+  const lines = [
+    '# Bundle size report',
+    '',
+    'Tree-shaken production Metro bundles. Component costs are relative to their platform shell; shell costs are absolute.',
+    '',
+    '| Platform | Scenario | Baseline cost | Current cost | Cost delta | Change | Gzip delta | Module delta |',
+    '| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |',
+  ];
+
+  for (const result of results) {
+    const { comparison } = result;
+    if (comparison.status === 'new') {
+      lines.push(`| ${result.platform} | ${result.scenario} | New | ${(result.rawBytes / 1024).toFixed(1)} KiB | New | New | New | New |`);
+    } else {
+      lines.push(
+        `| ${result.platform} | ${result.scenario} | ${(comparison.baselineCost / 1024).toFixed(1)} KiB | ${(comparison.currentCost / 1024).toFixed(1)} KiB | ${formatBytes(comparison.costDelta)} | ${formatPercent(comparison.costPercent)} | ${formatBytes(comparison.gzipCostDelta)} | ${comparison.moduleCostDelta >= 0 ? '+' : ''}${comparison.moduleCostDelta} |`,
+      );
+    }
+  }
+
+  lines.push(
+    '',
+    'The job is advisory: size changes are reported but do not fail the pull request. Bundle or analysis errors still fail.',
+    '',
+  );
+  return lines.join('\n');
+}
+
+const {
+  baseline: selectedBaselinePath,
+  config: selectedConfigPath,
+  platforms: selectedPlatforms,
+  updateBaseline,
+} = parseArgs(process.argv.slice(2));
+if (updateBaseline && selectedPlatforms) {
+  throw new Error('Baseline updates must include every configured platform; omit --platform');
+}
 const selectedConfig = JSON.parse(readFileSync(selectedConfigPath, 'utf8'));
 const platforms = selectedPlatforms ?? selectedConfig.platforms;
 
@@ -182,13 +279,34 @@ for (const platform of platforms) {
 const shells = new Map(
   measurements.filter(({ scenario }) => scenario === 'shell').map((measurement) => [measurement.platform, measurement]),
 );
+const currentBaseline = {
+  schemaVersion: 1,
+  results: measurements.map(baselineResult),
+};
+if (updateBaseline) {
+  writeFileSync(selectedBaselinePath, `${JSON.stringify(currentBaseline, null, 2)}\n`);
+}
+
+const baseline = existsSync(selectedBaselinePath)
+  ? JSON.parse(readFileSync(selectedBaselinePath, 'utf8'))
+  : { schemaVersion: 1, results: [] };
+if (baseline.schemaVersion !== 1) {
+  throw new Error(`Unsupported baseline schema version: ${baseline.schemaVersion}`);
+}
+const baselineResults = new Map(baseline.results.map((result) => [resultKey(result), result]));
+const baselineShells = new Map(baseline.results.filter(({ scenario }) => scenario === 'shell').map((result) => [result.platform, result]));
+
 const results = measurements.map((measurement) => {
   const shell = shells.get(measurement.platform);
-  return {
+  const result = {
     ...measurement,
     deltaBytes: measurement.rawBytes - shell.rawBytes,
     deltaGzipBytes: measurement.gzipBytes - shell.gzipBytes,
     deltaModules: measurement.moduleCount - shell.moduleCount,
+  };
+  return {
+    ...result,
+    comparison: createComparison(result, baselineResults.get(resultKey(result)), baselineShells.get(result.platform)),
   };
 });
 const report = {
@@ -196,7 +314,10 @@ const report = {
   results,
 };
 const reportPath = join(outputRoot, 'results.json');
+const markdownReportPath = join(outputRoot, 'report.md');
 writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
+writeFileSync(markdownReportPath, createMarkdownReport(results));
 
 console.table(results);
 process.stdout.write(`Results: ${reportPath}\n`);
+process.stdout.write(`Report: ${markdownReportPath}\n`);

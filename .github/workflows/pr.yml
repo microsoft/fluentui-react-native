@@ -34,6 +34,53 @@ jobs:
       - name: Build CI
         run: yarn lage buildci
 
+  bundle-size:
+    name: Bundle Size PR
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Read base branch bundle baseline
+        shell: powershell
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          $baseline = "$env:RUNNER_TEMP\bundle-size-baseline.json"
+          $baselinePath = 'apps/bundle-size/baseline.json'
+          $baselineExists = git ls-tree --name-only $env:BASE_SHA -- $baselinePath
+          if ($baselineExists) {
+            git show "$env:BASE_SHA`:apps/bundle-size/baseline.json" | Out-File -FilePath $baseline -Encoding utf8
+          } else {
+            Copy-Item $baselinePath $baseline
+          }
+
+      - name: Measure bundle sizes
+        run: yarn bundle-size --baseline "$env:RUNNER_TEMP\bundle-size-baseline.json"
+
+      - name: Publish bundle size summary
+        run: Get-Content apps\bundle-size\dist\bundle-size\report.md -Raw | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+
+      - name: Upload bundle analysis
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: bundle-size-analysis
+          path: apps/bundle-size/dist/bundle-size
+          if-no-files-found: warn
+          retention-days: 14
+
   android:
     name: Android PR
     runs-on: ubuntu-latest

@@ -7,7 +7,8 @@
   "scripts": {
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "measure": "node scripts/measure.mjs"
+    "measure": "node scripts/measure.mjs",
+    "update-baseline": "node scripts/measure.mjs --update-baseline"
   },
   "dependencies": {
     "@fluentui-react-native/components": "workspace:*",
