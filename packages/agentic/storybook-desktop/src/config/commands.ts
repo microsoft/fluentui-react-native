@@ -1,6 +1,6 @@
 import type { Platforms } from './platforms.js';
 
-export const desktopStorybookActions = ['prep', 'bundle', 'run', 'build', 'smoke'] as const;
+export const desktopStorybookActions = ['server', 'prep', 'bundle', 'run', 'build', 'smoke'] as const;
 
 export type DesktopStorybookAction = (typeof desktopStorybookActions)[number];
 
@@ -17,12 +17,6 @@ export type DesktopCommand = {
 export type DesktopCommandPlan = DesktopCommand | readonly DesktopCommand[];
 
 export type DesktopNativeProjectOptions = {
-  /**
-   * Base bundle identifier to suffix with the enlistment identity during isolated macOS smoke tests.
-   * @default "com.microsoft.ReactTestApp"
-   */
-  bundleIdentifier?: string;
-
   /**
    * Xcode workspace used by rnx-cli on macOS.
    * @default "macos/<appName>.xcworkspace"
@@ -100,6 +94,7 @@ export type DesktopPlatformOptions = {
   /**
    * Override an action's default command plan. Set an action to false when it is intentionally unsupported.
    */
+  server?: DesktopCommand | false;
   prep?: DesktopCommandPlan | false;
   bundle?: DesktopCommandPlan | false;
   run?: DesktopCommandPlan | false;

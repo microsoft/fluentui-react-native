@@ -13,9 +13,9 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
 - Run `yarn` from the repository root only after dependency manifests change or when a declared command fails because a
   dependency is missing.
 - Preserve unrelated manifest and lockfile edits already present in the worktree.
-- Keep native command overrides and full-lifecycle smoke settings in `storybook.config.mts`. The declared
-  `pods:macos`, `macos:build`, `macos`, `windows:generate`, `windows:build`, `windows`, bundle, and smoke scripts route
-  through the shared `storybook-desktop` CLI.
+- Keep only native command exceptions and ownership-specific smoke settings in `storybook.config.mts`. Standard macOS
+  and Windows prep, bundle, build, and run commands come from the shared config, derive identity from `app.json`, and
+  route through `rnx-cli`. The declared platform scripts route through the shared `storybook-desktop` CLI.
 
 ## macOS native workflow
 

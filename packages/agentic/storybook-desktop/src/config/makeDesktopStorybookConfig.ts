@@ -4,12 +4,21 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { StorybookConfig } from '@storybook/react-native';
 
-import type { DesktopCommand, DesktopCommandPlan, DesktopPlatformOptions, DesktopPlatformOptionsMap } from './commands.js';
+import type {
+  DesktopCommand,
+  DesktopCommandPlan,
+  DesktopNativeProjectOptions,
+  DesktopPlatformOptions,
+  DesktopPlatformOptionsMap,
+  DesktopSmokeOptions,
+  DesktopStorybookAction,
+} from './commands.js';
 import { getAllPlatforms, getPlatform, isPlatform } from './platforms.js';
 import type { Platforms } from './platforms.js';
 
 const defaultStoryPatterns = ['src/**/*.stories.?(ts|tsx)'] as const;
 const defaultDeviceAddons = ['@storybook/addon-ondevice-controls', '@storybook/addon-ondevice-actions'] as const;
+const defaultMacOSBundleIdentifier = 'com.microsoft.ReactTestApp';
 
 type JsonObject = Record<string, unknown>;
 
@@ -23,6 +32,9 @@ type AppManifest = JsonObject & {
     displayName?: string;
   }[];
   displayName?: string;
+  macos?: {
+    bundleIdentifier?: string;
+  };
   name?: string;
 };
 
@@ -158,6 +170,10 @@ export class DesktopStorybookConfig {
     return this.appManifest.components?.[0]?.displayName ?? this.appManifest.displayName ?? this.appName;
   }
 
+  get macosBundleIdentifier(): string {
+    return this.appManifest.macos?.bundleIdentifier ?? defaultMacOSBundleIdentifier;
+  }
+
   resolvePackage(packageName: string): ResolvedPackage {
     const cachedPackage = this.packageCache.get(packageName);
     if (cachedPackage) {
@@ -213,11 +229,39 @@ export class DesktopStorybookConfig {
   }
 
   getPlatformOptions(platformSetting: Platforms | string | undefined = this.platform): Readonly<DesktopPlatformOptions> {
-    const platform = getPlatform(platformSetting);
-    if (!platform) {
-      throw new Error('A desktop platform must be selected.');
+    const platform = requirePlatform(platformSetting);
+    const configured = this.config.platformOptions?.[platform] ?? {};
+    const nativeProject = {
+      ...defaultNativeProjectOptions(this, platform),
+      ...configured.nativeProject,
+    };
+
+    return Object.freeze({
+      nativeProject: Object.freeze(nativeProject),
+      server: configured.server !== undefined ? configured.server : defaultServerCommand(this),
+      prep: configured.prep !== undefined ? configured.prep : defaultPrepPlan(platform),
+      bundle: configured.bundle !== undefined ? configured.bundle : defaultBundlePlan(this, platform),
+      run: configured.run !== undefined ? configured.run : defaultNativePlan(platform, 'run', nativeProject),
+      build: configured.build !== undefined ? configured.build : defaultNativePlan(platform, 'build', nativeProject),
+      smoke: configured.smoke !== undefined ? configured.smoke : defaultSmokeOptions(this, platform),
+    });
+  }
+
+  getCommandPlan(
+    action: Exclude<DesktopStorybookAction, 'smoke'>,
+    platformSetting: Platforms | string | undefined = this.platform,
+  ): DesktopCommandPlan | false {
+    const platform = requirePlatform(platformSetting);
+    const plan = this.getPlatformOptions(platform)[action];
+    if (plan === undefined) {
+      throw new Error(`No default ${action} command is available for ${platform}.`);
     }
-    return this.config.platformOptions?.[platform] ?? {};
+    return plan;
+  }
+
+  getSmokeOptions(platformSetting: Platforms | string | undefined = this.platform): Readonly<DesktopSmokeOptions> | false | undefined {
+    const platform = requirePlatform(platformSetting);
+    return this.getPlatformOptions(platform).smoke;
   }
 
   private resolveStoryPackage(spec: StoryPackageSpec, platform?: Platforms): ResolvedStoryPackage | undefined {
@@ -286,6 +330,115 @@ function resolveFromProject(projectRoot: string, setting: string): string {
   return path.isAbsolute(setting) ? path.normalize(setting) : path.resolve(projectRoot, setting);
 }
 
+function requirePlatform(platformSetting: Platforms | string | undefined): Platforms {
+  const platform = getPlatform(platformSetting);
+  if (!platform) {
+    throw new Error('A desktop platform must be selected.');
+  }
+  return platform;
+}
+
+function defaultPrepPlan(platform: Platforms): DesktopCommandPlan {
+  switch (platform) {
+    case 'macos':
+      return { command: 'pod', args: ['install', '--project-directory=macos'] };
+    case 'windows':
+      return { command: 'install-windows-test-app', args: ['--use-fabric'] };
+    case 'win32':
+      return [];
+  }
+}
+
+function defaultServerCommand(config: DesktopStorybookConfig): DesktopCommand {
+  return {
+    command: process.execPath,
+    args: [path.join(config.resolvePackage('@fluentui-react-native/storybook-desktop').root, 'config', 'server-runner.cjs')],
+    env: {
+      STORYBOOK_CONFIG_PATH: config.storybookConfigDir,
+    },
+  };
+}
+
+function defaultBundlePlan(config: DesktopStorybookConfig, platform: Platforms): DesktopCommandPlan {
+  return [
+    {
+      command: 'sb-rn-get-stories',
+      args: ['--config-path', config.storybookConfigDir],
+    },
+    {
+      command: 'rnx-cli',
+      args: ['bundle', '--dev', 'false', '--platform', platform],
+    },
+  ];
+}
+
+function defaultNativePlan(
+  platform: Platforms,
+  action: 'build' | 'run',
+  nativeProject: DesktopNativeProjectOptions,
+): DesktopCommandPlan | false {
+  if (platform === 'win32') {
+    return false;
+  }
+
+  return {
+    command: 'rnx-cli',
+    args: [action, '--platform', platform, ...nativeProjectArgs(platform, nativeProject, action)],
+  };
+}
+
+function nativeProjectArgs(
+  platform: Exclude<Platforms, 'win32'>,
+  nativeProject: DesktopNativeProjectOptions,
+  action: 'build' | 'run',
+): string[] {
+  const args: string[] = [];
+  if (platform === 'macos') {
+    args.push('--workspace', requireSetting(nativeProject.workspace, 'The macOS workspace was not resolved.'));
+    args.push('--scheme', requireSetting(nativeProject.scheme, 'The macOS scheme was not resolved.'));
+  } else {
+    args.push('--solution', requireSetting(nativeProject.solution, 'The Windows solution was not resolved.'));
+  }
+  if (nativeProject.configuration) {
+    args.push('--configuration', nativeProject.configuration);
+  }
+  if (nativeProject.destination) {
+    args.push('--destination', nativeProject.destination);
+  }
+  if (action === 'run' && nativeProject.device) {
+    args.push('--device', nativeProject.device);
+  }
+  return args;
+}
+
+function defaultNativeProjectOptions(config: DesktopStorybookConfig, platform: Platforms): DesktopNativeProjectOptions {
+  switch (platform) {
+    case 'macos':
+      return {
+        workspace: `macos/${config.appName}.xcworkspace`,
+        scheme: config.appName,
+      };
+    case 'windows':
+      return {
+        solution: `windows/${config.appName}.sln`,
+      };
+    case 'win32':
+      return {};
+  }
+}
+
+function defaultSmokeOptions(config: DesktopStorybookConfig, platform: Platforms): DesktopSmokeOptions | undefined {
+  if (platform !== 'macos') {
+    return undefined;
+  }
+  return {
+    stop: {
+      command: 'osascript',
+      args: [path.join(config.resolvePackage('@fluentui-react-native/storybook-desktop').root, 'config', 'stop-macos-app.applescript')],
+    },
+  };
+}
+
 function normalizeConfig(config: DesktopStorybookConfigOptions, projectRoot: string): DesktopStorybookConfigOptions {
   validatePlatforms(config.platforms, 'config');
   validatePlatformSettings(config.platformSettings, 'config');
@@ -333,6 +486,7 @@ function normalizeDesktopPlatformOptions(platformOptions: DesktopPlatformOptions
       {
         ...options,
         nativeProject: options.nativeProject ? { ...options.nativeProject } : undefined,
+        server: normalizeCommand(options.server),
         prep: normalizeCommandPlan(options.prep),
         bundle: normalizeCommandPlan(options.bundle),
         run: normalizeCommandPlan(options.run),
@@ -415,6 +569,7 @@ function validateDesktopPlatformOptions(platformOptions: DesktopPlatformOptionsM
     if (!isPlatform(platform)) {
       throw new RangeError(`config contains unsupported desktop platform options "${platform}".`);
     }
+    validateCommand(options.server, `${platform}.server`);
     validateCommandPlan(options.prep, `${platform}.prep`);
     validateCommandPlan(options.bundle, `${platform}.bundle`);
     validateCommandPlan(options.run, `${platform}.run`);

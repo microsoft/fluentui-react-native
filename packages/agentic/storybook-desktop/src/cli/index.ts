@@ -3,7 +3,7 @@ export {
   runDesktopStorybookCli,
   type CreateDesktopStorybookCommandOptions,
 } from './createDesktopStorybookCommand.js';
-export { DesktopStorybookCli, type DesktopStorybookCliOptions } from './DesktopStorybookCli.js';
+export { DesktopStorybookCli, type DesktopStorybookCliOptions, type DesktopStorybookServerOptions } from './DesktopStorybookCli.js';
 export {
   NodeDesktopCommandRunner,
   type DesktopCommandRunner,

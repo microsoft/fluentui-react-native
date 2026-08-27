@@ -16,52 +16,7 @@ export default makeDesktopStorybookConfig({
     '@fluentui-react-native/callout',
   ],
   platformOptions: {
-    macos: {
-      nativeProject: {
-        bundleIdentifier: 'com.microsoft.fluentui.agenticstorybook',
-      },
-      build: {
-        command: 'xcodebuild',
-        args: [
-          '-workspace',
-          'macos/AgenticStorybook.xcworkspace',
-          '-scheme',
-          'AgenticStorybook',
-          '-configuration',
-          'Debug',
-          '-destination',
-          'platform=macOS',
-          '-derivedDataPath',
-          'macos/DerivedData',
-          'CODE_SIGNING_ALLOWED=NO',
-          'build',
-        ],
-      },
-      smoke: {
-        stop: {
-          command: 'osascript',
-          args: ['scripts/stop-macos-storybook.applescript'],
-        },
-      },
-    },
     windows: {
-      build: {
-        command: 'react-native',
-        args: [
-          'run-windows',
-          '--arch',
-          'x64',
-          '--sln',
-          'windows/AgenticStorybook.sln',
-          '--no-packager',
-          '--no-deploy',
-          '--no-launch',
-          '--logging',
-          '--no-telemetry',
-          '--buildLogDirectory',
-          'artifacts/windows/build-logs',
-        ],
-      },
       smoke: {
         command: {
           command: 'pwsh',
@@ -70,7 +25,6 @@ export default makeDesktopStorybookConfig({
       },
     },
     win32: {
-      build: false,
       run: {
         command: 'node',
         args: ['scripts/run-win32.cjs'],

@@ -7,11 +7,11 @@ Reusable on-device Storybook runtime for Fluent UI React Native desktop test app
 - a Fluent theme toolbar and preview decorator;
 - Metro and Babel configuration for the repo's pnpm-linked desktop hosts; and
 - the standalone Storybook channel and MCP server; and
-- a Commander CLI and matching API for native preparation, bundling, builds, launches, and smoke tests.
+- a Commander CLI and matching API for serving, native preparation, bundling, builds, launches, and smoke tests.
 
-Consuming apps own their native identity, story globs, generated `storybook.requires` file, component dependencies, and
-platform automation. A root `storybook.config.ts` declares which packages supply stories and can override package
-patterns per platform:
+Consuming apps own their native identity in `app.json`, story globs, generated `storybook.requires` file, component
+dependencies, and exceptional platform automation. A root `storybook.config.ts` declares which packages supply stories
+and overrides only platform behavior that cannot use the shared defaults:
 
 ```ts
 import { makeDesktopStorybookConfig } from '@fluentui-react-native/storybook-desktop/config';
@@ -28,19 +28,7 @@ export default makeDesktopStorybookConfig({
     ],
   ],
   platformOptions: {
-    macos: {
-      nativeProject: {
-        bundleIdentifier: 'com.example.my-storybook',
-      },
-      smoke: {
-        stop: {
-          command: 'osascript',
-          args: ['scripts/stop-storybook.applescript'],
-        },
-      },
-    },
     win32: {
-      build: false,
       run: {
         command: 'node',
         args: ['scripts/run-win32.cjs'],
@@ -48,6 +36,18 @@ export default makeDesktopStorybookConfig({
     },
   },
 });
+```
+
+The corresponding React Native Test App manifest supplies native identity:
+
+```json
+{
+  "name": "MyStorybook",
+  "displayName": "My Storybook",
+  "macos": {
+    "bundleIdentifier": "com.example.my-storybook"
+  }
+}
 ```
 
 The app's `src/main.ts` becomes a small adapter:
@@ -68,6 +68,7 @@ Use `.mts` when the consuming package otherwise defaults JavaScript files to Com
 platform option, or omit it to use `FURN_STORYBOOK_PLATFORM` and then the host default:
 
 ```sh
+storybook-desktop server --win32
 storybook-desktop prep --macos
 storybook-desktop bundle --windows
 storybook-desktop build --macos
@@ -78,13 +79,21 @@ storybook-desktop smoke --win32
 Use `--config <path>` for a differently named configuration file. `prep` installs CocoaPods on macOS, generates the
 React Native Test App solution on Windows, and is a no-op for the prebuilt Win32 host. `bundle` generates the selected
 story catalog and routes to `rnx-cli bundle`. `build` and `run` route to `rnx-cli` by default using native project names
-derived from the app manifest. Win32 has no native project to build, so consumers configure its launch command and
-leave `build` unsupported.
+derived from the app manifest. The config supplies default macOS workspace/scheme and Windows solution arguments from
+the app key, and reads the macOS bundle identifier directly from `app.json`. Win32 has no native project to build, so
+its default build and run operations are unsupported until the consumer provides a prebuilt-host launch command.
+
+`server` loads the same config, selects the matching platform catalog, and derives the app-owned Storybook config
+directory automatically. It accepts `--host` and `--port`; the separate `storybook-server` binary is a convenience
+alias for this subcommand. Consumer package scripts should forward arguments rather than define one server alias per
+platform. See [`src/cli/README.md`](src/cli/README.md) for the recommended minimal scripts and development, E2E, CI,
+and agent workflows.
 
 `smoke` can use a complete app-owned command or the reusable lifecycle. The reusable lifecycle starts the shared
 channel server and Metro, builds and launches the app, selects every indexed story, runs the configured app stop
-command, and terminates only the server processes it started. A `smoke.stop` command is required so the native
-application can be shut down without broad process-name matching.
+command, and terminates only the server processes it started. macOS uses the package's bundle-ID-based stop command by
+default. Other generic platform lifecycles require an explicit `smoke.stop`, while consumers can replace the complete
+smoke command when native process ownership needs platform-specific handling.
 
 Each reusable smoke run derives a stable instance ID from the canonical consuming-project root. That ID suffixes the
 configured macOS bundle identifier and seeds separate Storybook and Metro ports, with occupied-port probing before
@@ -106,7 +115,8 @@ await storybook.smoke('macos');
 
 Command runners are injectable through the constructor for higher-level automation and tests. `DesktopCommand`,
 `DesktopPlatformOptions`, `createDesktopStorybookInstance()`, and the related configuration types are exported from the
-`/config` subpath.
+`/config` subpath. `server()` runs the foreground server until it is stopped, so supervisors should invoke it as a
+dedicated task rather than await it before another operation.
 
 The app integrates its generated Storybook view with the shared runtime:
 

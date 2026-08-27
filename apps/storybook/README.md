@@ -198,7 +198,7 @@ Win32-generated catalog because those components terminate the current REX
 include them. The three standalone Callout stories run through the same Paper
 `RCTCallout` implementation as the portal chrome. All 130 included stories
 render through the Win32 control-plane smoke sweep.
-Run `yarn storybook-server:win32` with this endpoint so the server exposes the
+Run `yarn storybook-server --win32` with this endpoint so the server exposes the
 same 130-story index as the app; the ordinary `storybook-server` command keeps
 the full macOS and Windows catalog. Use `yarn storybook:smoke:win32` for the
 native sweep; its short settle interval prevents REX Paper teardown races
@@ -261,7 +261,9 @@ The running app can be driven by external agents through the reusable standalone
 server (`storybook-server`, default `127.0.0.1:7007`):
 
 ```sh
-yarn storybook-server   # WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.1:7007/mcp
+yarn storybook-server           # host-platform default
+yarn storybook-server --win32   # explicit Win32 catalog
+# WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.1:7007/mcp
 ```
 
 Run it alongside `yarn start` + `yarn macos` or `yarn windows`. The on-device app connects to it automatically

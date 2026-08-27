@@ -2,13 +2,7 @@ import fs from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
 
-import type {
-  DesktopCommand,
-  DesktopCommandPlan,
-  DesktopNativeProjectOptions,
-  DesktopSmokeOptions,
-  DesktopStorybookAction,
-} from '../config/commands.js';
+import type { DesktopCommand, DesktopCommandPlan, DesktopSmokeOptions, DesktopStorybookAction } from '../config/commands.js';
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import { createDesktopStorybookInstance, FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance.js';
 import type { DesktopStorybookInstance } from '../config/instance.js';
@@ -28,6 +22,11 @@ export type DesktopStorybookCliOptions = {
   isPortAvailable?: (port: number) => Promise<boolean>;
 };
 
+export type DesktopStorybookServerOptions = {
+  host?: string;
+  port?: number;
+};
+
 export class DesktopStorybookCli {
   readonly config: DesktopStorybookConfig;
   readonly instance: DesktopStorybookInstance;
@@ -41,12 +40,31 @@ export class DesktopStorybookCli {
     this.config = config;
     this.instance = createDesktopStorybookInstance({
       projectRoot: config.projectRoot,
-      bundleIdentifierPrefix: config.getPlatformOptions('macos').nativeProject?.bundleIdentifier,
+      bundleIdentifierPrefix: config.macosBundleIdentifier,
     });
     this.runner = options.runner ?? new NodeDesktopCommandRunner();
     this.fetch = options.fetch ?? globalThis.fetch;
     this.output = options.output ?? process.stdout;
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
+  }
+
+  async server(platform: Platforms, options: DesktopStorybookServerOptions = {}): Promise<void> {
+    validateServerOptions(options);
+    const command = this.config.getPlatformOptions(platform).server;
+    if (command === false || command === undefined) {
+      throw unsupportedAction('server', platform);
+    }
+    await this.executePlan(
+      {
+        ...command,
+        env: {
+          ...command.env,
+          ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
+          ...(options.port ? { STORYBOOK_WS_PORT: String(options.port) } : {}),
+        },
+      },
+      platform,
+    );
   }
 
   prep(platform: Platforms): Promise<void> {
@@ -66,7 +84,7 @@ export class DesktopStorybookCli {
   }
 
   async smoke(platform: Platforms): Promise<void> {
-    const smoke = this.config.getPlatformOptions(platform).smoke;
+    const smoke = this.config.getSmokeOptions(platform);
     if (smoke === false) {
       throw unsupportedAction('smoke', platform);
     }
@@ -89,29 +107,11 @@ export class DesktopStorybookCli {
     platform: Platforms,
     instance?: ResolvedDesktopStorybookInstance,
   ): Promise<void> {
-    const plan = this.getActionPlan(action, platform);
+    const plan = this.config.getCommandPlan(action, platform);
     if (plan === false) {
       throw unsupportedAction(action, platform);
     }
     await this.executePlan(plan, platform, instance);
-  }
-
-  private getActionPlan(action: Exclude<DesktopStorybookAction, 'smoke'>, platform: Platforms): DesktopCommandPlan | false {
-    const configured = this.config.getPlatformOptions(platform)[action];
-    if (configured !== undefined) {
-      return configured;
-    }
-
-    switch (action) {
-      case 'prep':
-        return defaultPrepPlan(platform);
-      case 'bundle':
-        return defaultBundlePlan(this.config, platform);
-      case 'run':
-        return defaultNativePlan(this.config, platform, 'run');
-      case 'build':
-        return defaultNativePlan(this.config, platform, 'build');
-    }
   }
 
   private async runSmokeLifecycle(
@@ -126,7 +126,8 @@ export class DesktopStorybookCli {
     const metroUrl = smoke.metroUrl ?? loopbackUrl(instance.metroPort, '/status');
 
     try {
-      const server = smoke.server === false ? undefined : (smoke.server ?? defaultServerCommand(this.config));
+      const configuredServer = this.config.getPlatformOptions(platform).server;
+      const server = smoke.server === false ? undefined : (smoke.server ?? (configuredServer === false ? undefined : configuredServer));
       const metro = smoke.metro === false ? undefined : (smoke.metro ?? defaultMetroCommand(instance));
       const readiness: Promise<void>[] = [];
 
@@ -326,78 +327,6 @@ export class DesktopStorybookCli {
   }
 }
 
-function defaultPrepPlan(platform: Platforms): DesktopCommandPlan {
-  switch (platform) {
-    case 'macos':
-      return { command: 'pod', args: ['install', '--project-directory=macos'] };
-    case 'windows':
-      return { command: 'install-windows-test-app', args: ['--use-fabric'] };
-    case 'win32':
-      return [];
-  }
-}
-
-function defaultBundlePlan(config: DesktopStorybookConfig, platform: Platforms): DesktopCommandPlan {
-  return [
-    {
-      command: 'sb-rn-get-stories',
-      args: ['--config-path', config.storybookConfigDir],
-    },
-    {
-      command: 'rnx-cli',
-      args: ['bundle', '--dev', 'false', '--platform', platform],
-    },
-  ];
-}
-
-function defaultNativePlan(config: DesktopStorybookConfig, platform: Platforms, action: 'build' | 'run'): DesktopCommandPlan | false {
-  if (platform === 'win32') {
-    return false;
-  }
-
-  const nativeProject = config.getPlatformOptions(platform).nativeProject ?? {};
-  return {
-    command: 'rnx-cli',
-    args: [action, '--platform', platform, ...nativeProjectArgs(config, platform, nativeProject, action)],
-  };
-}
-
-function nativeProjectArgs(
-  config: DesktopStorybookConfig,
-  platform: Exclude<Platforms, 'win32'>,
-  nativeProject: DesktopNativeProjectOptions,
-  action: 'build' | 'run',
-): string[] {
-  const args: string[] = [];
-  if (platform === 'macos') {
-    args.push('--workspace', nativeProject.workspace ?? `macos/${config.appName}.xcworkspace`);
-    args.push('--scheme', nativeProject.scheme ?? config.appName);
-  } else {
-    args.push('--solution', nativeProject.solution ?? `windows/${config.appName}.sln`);
-  }
-  if (nativeProject.configuration) {
-    args.push('--configuration', nativeProject.configuration);
-  }
-  if (nativeProject.destination) {
-    args.push('--destination', nativeProject.destination);
-  }
-  if (action === 'run' && nativeProject.device) {
-    args.push('--device', nativeProject.device);
-  }
-  return args;
-}
-
-function defaultServerCommand(config: DesktopStorybookConfig): DesktopCommand {
-  const serverCliPath = path.join(config.resolvePackage('@fluentui-react-native/storybook-desktop').root, 'config/server-cli.cjs');
-  return {
-    command: process.execPath,
-    args: [serverCliPath],
-    env: {
-      STORYBOOK_CONFIG_PATH: config.storybookConfigDir,
-    },
-  };
-}
-
 function defaultMetroCommand(instance: DesktopStorybookInstance): DesktopCommand {
   return {
     command: 'rnx-cli',
@@ -470,6 +399,15 @@ function unsupportedAction(action: DesktopStorybookAction, platform: Platforms):
   return new Error(
     `Desktop Storybook ${action} is not configured for ${platform}. Set platformOptions.${platform}.${action} in storybook.config.ts.`,
   );
+}
+
+function validateServerOptions(options: DesktopStorybookServerOptions): void {
+  if (options.host !== undefined && !options.host.trim()) {
+    throw new TypeError('Storybook server host cannot be empty.');
+  }
+  if (options.port !== undefined && (!Number.isInteger(options.port) || options.port < 1 || options.port > 65535)) {
+    throw new RangeError(`Storybook server port must be an integer between 1 and 65535. Received "${options.port}".`);
+  }
 }
 
 function resolveFromProject(projectRoot: string, target: string): string {

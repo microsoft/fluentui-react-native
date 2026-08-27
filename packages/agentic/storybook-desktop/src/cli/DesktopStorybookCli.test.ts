@@ -42,6 +42,25 @@ function makeConfig(platformOptions = {}) {
 }
 
 describe('DesktopStorybookCli', () => {
+  test('starts the config-owned server with platform and connection options', async () => {
+    const runner = new RecordingRunner();
+    const cli = new DesktopStorybookCli(makeConfig(), { runner });
+
+    await cli.server('win32', { host: '0.0.0.0', port: 7100 });
+
+    expect(runner.foreground[0]).toMatchObject({
+      command: process.execPath,
+      args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
+      cwd: storybookRoot,
+      env: {
+        [FURN_STORYBOOK_PLATFORM]: 'win32',
+        STORYBOOK_CONFIG_PATH: path.join(storybookRoot, 'src'),
+        STORYBOOK_WS_HOST: '0.0.0.0',
+        STORYBOOK_WS_PORT: '7100',
+      },
+    });
+  });
+
   test('uses shared preparation and rnx-cli bundle defaults', async () => {
     const runner = new RecordingRunner();
     const cli = new DesktopStorybookCli(makeConfig(), { runner });
@@ -175,6 +194,22 @@ describe('DesktopStorybookCli', () => {
 });
 
 describe('createDesktopStorybookCommand', () => {
+  test('forwards server platform and connection options', async () => {
+    const runner = new RecordingRunner();
+    const program = createDesktopStorybookCommand({ config: makeConfig(), runner });
+
+    await program.parseAsync(['node', 'test', 'server', '--win32', '--host', 'localhost', '--port', '7101']);
+
+    expect(runner.foreground[0]).toMatchObject({
+      args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
+      env: {
+        [FURN_STORYBOOK_PLATFORM]: 'win32',
+        STORYBOOK_WS_HOST: 'localhost',
+        STORYBOOK_WS_PORT: '7101',
+      },
+    });
+  });
+
   test('honors an explicit platform flag', async () => {
     const runner = new RecordingRunner();
     const program = createDesktopStorybookCommand({ config: makeConfig(), runner });

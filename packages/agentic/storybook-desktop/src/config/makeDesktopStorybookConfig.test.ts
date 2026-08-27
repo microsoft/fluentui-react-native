@@ -31,6 +31,7 @@ describe('DesktopStorybookConfig', () => {
     expect(config.packageName).toBe('@fluentui-react-native/agentic-components-storybook');
     expect(config.appName).toBe('AgenticStorybook');
     expect(config.displayName).toBe('Agentic Components Storybook');
+    expect(config.macosBundleIdentifier).toBe('com.microsoft.fluentui.agenticstorybook');
   });
 
   test('resolves package roots and default story patterns', () => {
@@ -65,6 +66,69 @@ describe('DesktopStorybookConfig', () => {
     expect(config.getStorybookConfig('windows')).toMatchObject({
       stories: [],
       deviceAddons: ['@storybook/addon-ondevice-controls', '@storybook/addon-ondevice-actions'],
+    });
+  });
+
+  test('builds platform command defaults from app metadata with rnx-cli', () => {
+    const config = makeAgenticConfig();
+
+    expect(config.getCommandPlan('server', 'win32')).toEqual({
+      command: process.execPath,
+      args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
+      env: {
+        STORYBOOK_CONFIG_PATH: path.join(storybookRoot, 'src'),
+      },
+    });
+    expect(config.getPlatformOptions('macos')).toMatchObject({
+      nativeProject: {
+        workspace: 'macos/AgenticStorybook.xcworkspace',
+        scheme: 'AgenticStorybook',
+      },
+      build: {
+        command: 'rnx-cli',
+        args: ['build', '--platform', 'macos', '--workspace', 'macos/AgenticStorybook.xcworkspace', '--scheme', 'AgenticStorybook'],
+      },
+    });
+    expect(config.getCommandPlan('build', 'macos')).toEqual({
+      command: 'rnx-cli',
+      args: ['build', '--platform', 'macos', '--workspace', 'macos/AgenticStorybook.xcworkspace', '--scheme', 'AgenticStorybook'],
+    });
+    expect(config.getCommandPlan('run', 'windows')).toEqual({
+      command: 'rnx-cli',
+      args: ['run', '--platform', 'windows', '--solution', 'windows/AgenticStorybook.sln'],
+    });
+    expect(config.getCommandPlan('build', 'win32')).toBe(false);
+    expect(config.getSmokeOptions('macos')).toEqual({
+      stop: {
+        command: 'osascript',
+        args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/stop-macos-app.applescript')],
+      },
+    });
+  });
+
+  test('preserves explicit platform command overrides', () => {
+    const config = makeDesktopStorybookConfig({
+      projectRoot: storybookRoot,
+      platformOptions: {
+        windows: {
+          nativeProject: {
+            configuration: 'Release',
+          },
+          build: {
+            command: 'custom-build',
+          },
+        },
+      },
+    });
+
+    expect(config.getCommandPlan('build', 'windows')).toEqual({ command: 'custom-build' });
+    expect(config.getPlatformOptions('windows').nativeProject).toEqual({
+      solution: 'windows/AgenticStorybook.sln',
+      configuration: 'Release',
+    });
+    expect(config.getCommandPlan('run', 'windows')).toEqual({
+      command: 'rnx-cli',
+      args: ['run', '--platform', 'windows', '--solution', 'windows/AgenticStorybook.sln', '--configuration', 'Release'],
     });
   });
 

@@ -2,7 +2,7 @@ import { Command, Option } from 'commander';
 
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
-import type { DesktopStorybookCliOptions } from './DesktopStorybookCli.js';
+import type { DesktopStorybookCliOptions, DesktopStorybookServerOptions } from './DesktopStorybookCli.js';
 import { DesktopStorybookCli } from './DesktopStorybookCli.js';
 import { loadDesktopStorybookConfig } from './loadConfig.js';
 
@@ -12,6 +12,8 @@ type PlatformFlags = {
   windows?: boolean;
 };
 
+type ServerFlags = PlatformFlags & DesktopStorybookServerOptions;
+
 export type CreateDesktopStorybookCommandOptions = DesktopStorybookCliOptions & {
   config?: DesktopStorybookConfig;
   cwd?: string;
@@ -20,7 +22,7 @@ export type CreateDesktopStorybookCommandOptions = DesktopStorybookCliOptions & 
 export function createDesktopStorybookCommand(options: CreateDesktopStorybookCommandOptions = {}): Command {
   const program = new Command()
     .name('storybook-desktop')
-    .description('Prepare, bundle, build, run, and smoke test a React Native desktop Storybook app.')
+    .description('Serve, prepare, bundle, build, run, and smoke test a React Native desktop Storybook app.')
     .option('-c, --config <path>', 'path to storybook.config.ts');
   let apiPromise: Promise<DesktopStorybookCli> | undefined;
 
@@ -37,6 +39,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
         }),
     ));
 
+  addServerCommand(program, getApi);
   addActionCommand(program, 'prep', 'Prepare native dependencies and generated projects.', getApi);
   addActionCommand(program, 'bundle', 'Generate stories and create the platform JavaScript bundle.', getApi);
   addActionCommand(program, 'run', 'Build and launch the native Storybook app.', getApi);
@@ -60,11 +63,24 @@ function addActionCommand(
   addPlatformOptions(command);
   command.action(async (flags: PlatformFlags) => {
     const api = await getApi();
-    const platform = selectedPlatform(flags) ?? api.config.platform;
-    if (!platform) {
-      throw new Error('Select --windows, --macos, or --win32, or set FURN_STORYBOOK_PLATFORM.');
-    }
+    const platform = resolvePlatform(flags, api);
     await api[action](platform);
+  });
+}
+
+function addServerCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+  const command = program
+    .command('server')
+    .description('Start the Storybook channel and MCP server.')
+    .option('--host <host>', 'server host; defaults to STORYBOOK_WS_HOST or 127.0.0.1')
+    .option('--port <port>', 'server port; defaults to STORYBOOK_WS_PORT or 7007', parsePort);
+  addPlatformOptions(command);
+  command.action(async (flags: ServerFlags) => {
+    const api = await getApi();
+    await api.server(resolvePlatform(flags, api), {
+      host: flags.host,
+      port: flags.port,
+    });
   });
 }
 
@@ -86,4 +102,20 @@ function selectedPlatform(flags: PlatformFlags): Platforms | undefined {
     return 'win32';
   }
   return undefined;
+}
+
+function resolvePlatform(flags: PlatformFlags, api: DesktopStorybookCli): Platforms {
+  const platform = selectedPlatform(flags) ?? api.config.platform;
+  if (!platform) {
+    throw new Error('Select --windows, --macos, or --win32, or set FURN_STORYBOOK_PLATFORM.');
+  }
+  return platform;
+}
+
+function parsePort(value: string): number {
+  const port = Number(value);
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new TypeError(`Server port must be an integer between 1 and 65535. Received "${value}".`);
+  }
+  return port;
 }
