@@ -18,7 +18,7 @@ export {
   shadowTokens,
   textTokens,
   tokenBuilder,
-} from '@fluentui-react-native/tokens';
+} from '@fluentui-react-native/design/styling/tokens';
 export type {
   FontStyleTokens,
   FontTokens,
@@ -30,7 +30,7 @@ export type {
   IShadowTokens,
   LayoutTokens,
   TokenBuilder,
-} from '@fluentui-react-native/tokens';
+} from '@fluentui-react-native/design/styling/tokens';
 
 export { renderSlot, stagedComponent, withSlots, useSlot } from '@fluentui-react-native/framework-base';
 export type { RenderType as NativeReactType } from '@fluentui-react-native/framework-base';

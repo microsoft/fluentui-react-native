@@ -11,7 +11,7 @@ import type {
   IBorderTokens,
   IForegroundColorTokens,
   LayoutTokens,
-} from '@fluentui-react-native/tokens';
+} from '@fluentui-react-native/design/styling/tokens';
 
 export const tabName = 'Tab';
 

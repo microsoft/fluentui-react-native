@@ -3,7 +3,7 @@ import React, { useRef, useState, useCallback } from 'react';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
-import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/design/styling/tokens';
 import type { ISlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';

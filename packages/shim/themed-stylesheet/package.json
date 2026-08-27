@@ -56,6 +56,9 @@
     "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
   },
   "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
     "@types/react": {
       "optional": true
     },
@@ -63,9 +66,6 @@
       "optional": true
     },
     "react-native-windows": {
-      "optional": true
-    },
-    "@office-iss/react-native-win32": {
       "optional": true
     }
   },

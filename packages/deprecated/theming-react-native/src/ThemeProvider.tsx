@@ -8,7 +8,7 @@ import { useThemeRegistry, ThemeRegistryContext } from './ThemeContext';
 import type { IThemeProviderProps } from './ThemeProvider.types';
 
 /**
- * @deprecated Use ThemeProvider from @fluentui-react-native/theme instead.
+ * @deprecated Use ThemeProvider from @fluentui-react-native/design/theming instead.
  * See https://github.com/microsoft/fluentui-react-native/blob/main/docs/pages/Guides/UpdateThemeProvider.md for details
  */
 export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (props: IThemeProviderProps) => {

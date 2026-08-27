@@ -23,12 +23,6 @@
     },
     {
       "path": "../../../scripts/tsconfig.json"
-    },
-    {
-      "path": "../../shim/theme-tokens/tsconfig.json"
-    },
-    {
-      "path": "../../shim/theming-utils/tsconfig.json"
     }
   ]
 }

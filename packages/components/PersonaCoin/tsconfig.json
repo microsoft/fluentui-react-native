@@ -24,9 +24,6 @@
       "path": "../../../scripts/tsconfig.json"
     },
     {
-      "path": "../../shim/tokens/tsconfig.json"
-    },
-    {
       "path": "../../deprecated/foundation-composable/tsconfig.json"
     },
     {

@@ -24,9 +24,6 @@
       "path": "../../../scripts/tsconfig.json"
     },
     {
-      "path": "../../shim/tokens/tsconfig.json"
-    },
-    {
       "path": "../../deprecated/foundation-composable/tsconfig.json"
     },
     {
@@ -37,6 +34,9 @@
     },
     {
       "path": "../../deprecated/foundation-tokens/tsconfig.json"
+    },
+    {
+      "path": "../../agentic/design/tsconfig.json"
     }
   ]
 }

@@ -16,10 +16,10 @@
       "path": "../../../scripts/tsconfig.json"
     },
     {
-      "path": "../../shim/tokens/tsconfig.json"
+      "path": "../foundation-settings/tsconfig.json"
     },
     {
-      "path": "../foundation-settings/tsconfig.json"
+      "path": "../../agentic/design/tsconfig.json"
     }
   ]
 }

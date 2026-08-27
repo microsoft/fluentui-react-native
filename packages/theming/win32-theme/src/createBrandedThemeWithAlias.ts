@@ -1,6 +1,6 @@
 import type { ColorValue } from 'react-native';
 
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { globalTokens } from '@fluentui-react-native/design/tokens/legacy';
 import type { Theme, PartialTheme, AliasColorTokens } from '@fluentui-react-native/design/theming';
 
 export function createBrandedThemeWithAlias(themeName: string, theme: Theme): PartialTheme {

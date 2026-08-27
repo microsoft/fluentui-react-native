@@ -4,7 +4,12 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconProps } from '@fluentui-react-native/icon';
 import type { IFocusable, IPressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps } from '@fluentui-react-native/text';
-import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type {
+  FontTokens,
+  IForegroundColorTokens,
+  IBackgroundColorTokens,
+  IBorderTokens,
+} from '@fluentui-react-native/design/styling/tokens';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const contextualMenuItemName = 'ContextualMenuItem';

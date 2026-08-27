@@ -28,9 +28,6 @@
     },
     {
       "path": "../Text/tsconfig.json"
-    },
-    {
-      "path": "../../shim/tokens/tsconfig.json"
     }
   ]
 }

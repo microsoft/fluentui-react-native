@@ -3,7 +3,7 @@ import type { LayoutRectangle, View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import type { LayoutTokens } from '@fluentui-react-native/tokens';
+import type { LayoutTokens } from '@fluentui-react-native/design/styling/tokens';
 
 import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 

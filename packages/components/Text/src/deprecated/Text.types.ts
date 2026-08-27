@@ -1,5 +1,5 @@
 import type { ITextProps as INativeTextProps } from '@fluentui-react-native/adapters';
-import type { FontTokens, FontVariantTokens, IForegroundColorTokens, IColorTokens } from '@fluentui-react-native/tokens';
+import type { FontTokens, FontVariantTokens, IForegroundColorTokens, IColorTokens } from '@fluentui-react-native/design/styling/tokens';
 
 export const textName = 'RNFText';
 

@@ -5,7 +5,7 @@ import type { ShadowProps } from '@fluentui-react-native/experimental-shadow';
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';
 import type { ShadowToken } from '@fluentui-react-native/design/theming';
-import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/design/styling/tokens';
 
 export const badgeName = 'Badge';
 export const BadgeSizes = ['tiny', 'extraSmall', 'small', 'medium', 'large', 'extraLarge'] as const;
