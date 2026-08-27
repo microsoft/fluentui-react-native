@@ -17,6 +17,7 @@
   "scripts": {
     "build": "lage root-build",
     "build:clean": "yarn root-build --clean && yarn build",
+    "bundle-size": "yarn workspace @fluentui-react-native/bundle-size measure",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle:repo": "lage bundle",
     "clean": "tsc -b --clean && lage clean",
