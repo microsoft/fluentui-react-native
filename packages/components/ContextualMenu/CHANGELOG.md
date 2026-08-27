@@ -1,5 +1,24 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
+## 0.25.10
+
+### Patch Changes
+
+- cfef63e: update package references to use consolidated package directly
+- cfef63e: Consolidate theming utilities in the design package and move compatibility packages to the shim directory
+- 34bdf23: Version updates for security
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [34bdf23]
+- Updated dependencies [cfef63e]
+  - @uifabricshared/foundation-compose@1.16.9
+  - @fluentui-react-native/text@0.25.9
+  - @fluentui-react-native/design@0.3.2
+  - @fluentui-react-native/callout@0.29.3
+  - @fluentui-react-native/icon@0.22.9
+
 ## 0.25.9
 
 ### Patch Changes

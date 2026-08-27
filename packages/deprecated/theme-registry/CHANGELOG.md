@@ -1,5 +1,11 @@
 # Change Log - @uifabricshared/theme-registry
 
+## 0.13.8
+
+### Patch Changes
+
+- cfef63e: update package references to use consolidated package directly
+
 ## 0.13.7
 
 ### Patch Changes

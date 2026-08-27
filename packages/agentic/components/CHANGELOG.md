@@ -1,5 +1,20 @@
 # @fluentui-react-native/components
 
+## 0.2.4
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- 34bdf23: Version updates for security
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [34bdf23]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/design@0.3.2
+  - @fluentui-react-native/callout@0.29.3
+
 ## 0.2.3
 
 ### Patch Changes

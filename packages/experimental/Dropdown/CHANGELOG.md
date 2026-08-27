@@ -1,5 +1,22 @@
 # Change Log - @fluentui-react-native/dropdown
 
+## 0.11.10
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [34bdf23]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/button@0.40.9
+  - @fluentui-react-native/text@0.25.9
+  - @fluentui-react-native/design@0.3.2
+  - @fluentui-react-native/callout@0.29.3
+
 ## 0.11.9
 
 ### Patch Changes
