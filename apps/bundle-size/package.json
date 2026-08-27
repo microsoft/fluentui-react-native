@@ -35,7 +35,7 @@
     "@rnx-kit/metro-resolver-symlinks": "catalog:",
     "@rnx-kit/metro-serializer-esbuild": "catalog:",
     "@rnx-kit/tools-filesystem": "^0.2.0",
-    "metro": "^0.83.1",
+    "metro": "^0.83.8",
     "oxc-resolver": "catalog:"
   },
   "rnx-kit": {

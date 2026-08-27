@@ -91,13 +91,13 @@
     "cross-env": "catalog:",
     "jest": "^29.7.0",
     "jest-environment-node": "^29.7.0",
-    "metro": "^0.83.1",
+    "metro": "^0.83.8",
     "oxc-resolver": "catalog:",
     "react-native-test-app": "catalog:",
     "regexpu-core": "^6.3.1",
     "storybook": "^10.4.0",
     "tmcp": "^1.19.4",
-    "valibot": "^1.4.1"
+    "valibot": "^1.4.2"
   },
   "furn": {
     "knip": {
