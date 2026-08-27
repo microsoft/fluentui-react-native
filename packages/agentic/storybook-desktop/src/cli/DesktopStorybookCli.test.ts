@@ -123,7 +123,7 @@ describe('DesktopStorybookCli', () => {
     await expect(cli.smoke('macos')).rejects.toThrow('launch-storybook failed');
 
     expect(runner.foreground.map(({ command }) => command)).toEqual(['launch-storybook', 'stop-storybook']);
-    expect(runner.background.map(({ command }) => path.basename(command))).toEqual(['node', 'rnx-cli']);
+    expect(runner.background.map(({ command }) => path.basename(command))).toEqual([path.basename(process.execPath), 'rnx-cli']);
     expect(runner.foreground[0].env).toMatchObject({
       [FURN_STORYBOOK_INSTANCE_ID]: cli.instance.id,
       [FURN_STORYBOOK_BUNDLE_IDENTIFIER]: cli.instance.bundleIdentifier,

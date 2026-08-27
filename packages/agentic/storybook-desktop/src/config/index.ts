@@ -1,4 +1,7 @@
 export {
+  createWindowsSmokeCommand,
+  createWin32RunCommand,
+  createWin32SmokeCommand,
   desktopStorybookActions,
   type DesktopCommand,
   type DesktopCommandPlan,
@@ -7,6 +10,9 @@ export {
   type DesktopPlatformOptionsMap,
   type DesktopSmokeOptions,
   type DesktopStorybookAction,
+  type WindowsSmokeCommandOptions,
+  type Win32HostCommandOptions,
+  type Win32SmokeCommandOptions,
 } from './commands.js';
 export {
   createDesktopStorybookInstance,

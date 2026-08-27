@@ -130,8 +130,8 @@ yarn workspace @fluentui-react-native/components format
 yarn workspace @fluentui-react-native/components lint
 yarn workspace @fluentui-react-native/components build
 yarn workspace @fluentui-react-native/components test
-yarn workspace @fluentui-react-native/agentic-components-storybook bundle:macos
-yarn workspace @fluentui-react-native/agentic-components-storybook bundle:windows
+yarn workspace @fluentui-react-native/agentic-components-storybook storybook bundle --macos
+yarn workspace @fluentui-react-native/agentic-components-storybook storybook bundle --windows
 ```
 
 Run the smallest affected package test while iterating. Run the full package sequence before completion. Run the root

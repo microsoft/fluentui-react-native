@@ -1,5 +1,6 @@
 import path from 'node:path';
 
+import { createWindowsSmokeCommand, createWin32RunCommand, createWin32SmokeCommand } from './commands';
 import { makeDesktopStorybookConfig } from './makeDesktopStorybookConfig';
 import type { Platforms } from './platforms';
 
@@ -129,6 +130,44 @@ describe('DesktopStorybookConfig', () => {
     expect(config.getCommandPlan('run', 'windows')).toEqual({
       command: 'rnx-cli',
       args: ['run', '--platform', 'windows', '--solution', 'windows/AgenticStorybook.sln', '--configuration', 'Release'],
+    });
+  });
+
+  test('creates package-owned Windows and Win32 smoke commands', () => {
+    const configDirectory = path.resolve(__dirname, '../../config');
+
+    expect(createWindowsSmokeCommand({ windowTitle: 'Consumer Storybook' })).toEqual({
+      command: 'pwsh',
+      args: ['-NoProfile', '-File', path.join(configDirectory, 'smoke-windows.ps1')],
+      env: {
+        STORYBOOK_WINDOWS_CONFIGURATION: 'Debug',
+        STORYBOOK_WINDOWS_WINDOW_TITLE: 'Consumer Storybook',
+      },
+    });
+    expect(createWin32RunCommand({ component: 'ConsumerStorybook', windowTitle: 'Consumer Storybook (Win32)' })).toEqual({
+      command: process.execPath,
+      args: [path.join(configDirectory, 'run-win32.cjs')],
+      env: {
+        STORYBOOK_WIN32_COMPONENT: 'ConsumerStorybook',
+        STORYBOOK_WIN32_WINDOW_TITLE: 'Consumer Storybook (Win32)',
+      },
+    });
+    expect(
+      createWin32SmokeCommand({
+        component: 'ConsumerStorybook',
+        requiredStoryIds: ['first--story', 'second--story'],
+        testIDPrefix: 'consumer-storybook',
+        windowTitle: 'Consumer Storybook (Win32)',
+      }),
+    ).toEqual({
+      command: 'pwsh',
+      args: ['-NoProfile', '-File', path.join(configDirectory, 'smoke-win32.ps1')],
+      env: {
+        STORYBOOK_TEST_ID_PREFIX: 'consumer-storybook',
+        STORYBOOK_WIN32_COMPONENT: 'ConsumerStorybook',
+        STORYBOOK_WIN32_REQUIRED_STORIES: 'first--story,second--story',
+        STORYBOOK_WIN32_WINDOW_TITLE: 'Consumer Storybook (Win32)',
+      },
     });
   });
 

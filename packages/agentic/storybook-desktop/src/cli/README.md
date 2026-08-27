@@ -116,12 +116,16 @@ Use `smoke` for the standard renderability gate:
 
 ```sh
 yarn storybook smoke --macos
+yarn storybook smoke --windows
+yarn storybook smoke --win32
 ```
 
 It is preferable to a shell chain because it owns the exact server, Metro, app
 identity, traversal, and cleanup. Consumer configuration should provide any
-platform-specific app stop command or replace the complete smoke lifecycle
-when native ownership cannot use the shared implementation.
+platform-specific app stop command. For Windows Fabric and the prebuilt REX
+Win32 host, configure the package-owned commands returned by
+`createWindowsSmokeCommand`, `createWin32RunCommand`, and
+`createWin32SmokeCommand`; do not copy lifecycle scripts into the consumer.
 
 For a broader E2E suite, let the test coordinator own the service processes:
 

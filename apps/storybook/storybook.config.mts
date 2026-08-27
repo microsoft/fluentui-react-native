@@ -1,4 +1,14 @@
-import { makeDesktopStorybookConfig } from '@fluentui-react-native/storybook-desktop/config';
+import {
+  createWindowsSmokeCommand,
+  createWin32RunCommand,
+  createWin32SmokeCommand,
+  makeDesktopStorybookConfig,
+} from '@fluentui-react-native/storybook-desktop/config';
+
+const win32Host = {
+  component: 'AgenticStorybook',
+  windowTitle: 'Agentic Components Storybook (Win32)',
+} as const;
 
 export default makeDesktopStorybookConfig({
   projectRoot: new URL('.', import.meta.url),
@@ -7,33 +17,42 @@ export default makeDesktopStorybookConfig({
       '@fluentui-react-native/components',
       {
         platformSettings: {
+          windows: {
+            storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion)/**/*.stories.?(ts|tsx)'],
+          },
           win32: {
             storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)'],
           },
         },
       },
     ],
-    '@fluentui-react-native/callout',
+    [
+      '@fluentui-react-native/callout',
+      {
+        platformSettings: {
+          windows: {
+            storyPatterns: [],
+          },
+        },
+      },
+    ],
   ],
   platformOptions: {
     windows: {
       smoke: {
-        command: {
-          command: 'pwsh',
-          args: ['-NoProfile', '-File', 'scripts/run-windows-smoke.ps1'],
-        },
+        command: createWindowsSmokeCommand({
+          windowTitle: 'Agentic Components Storybook',
+        }),
       },
     },
     win32: {
-      run: {
-        command: 'node',
-        args: ['scripts/run-win32.cjs'],
-      },
+      run: createWin32RunCommand(win32Host),
       smoke: {
-        command: {
-          command: 'yarn',
-          args: ['win32:ci'],
-        },
+        command: createWin32SmokeCommand({
+          ...win32Host,
+          testIDPrefix: 'agentic-storybook',
+          requiredStoryIds: ['primitives-callout--default', 'primitives-callout--placement', 'primitives-callout--window-commands'],
+        }),
       },
     },
   },

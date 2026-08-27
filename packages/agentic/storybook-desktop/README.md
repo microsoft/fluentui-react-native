@@ -14,7 +14,17 @@ dependencies, and exceptional platform automation. A root `storybook.config.ts` 
 and overrides only platform behavior that cannot use the shared defaults:
 
 ```ts
-import { makeDesktopStorybookConfig } from '@fluentui-react-native/storybook-desktop/config';
+import {
+  createWindowsSmokeCommand,
+  createWin32RunCommand,
+  createWin32SmokeCommand,
+  makeDesktopStorybookConfig,
+} from '@fluentui-react-native/storybook-desktop/config';
+
+const win32Host = {
+  component: 'MyStorybook',
+  windowTitle: 'My Storybook (Win32)',
+} as const;
 
 export default makeDesktopStorybookConfig({
   projectRoot: new URL('.', import.meta.url),
@@ -28,10 +38,20 @@ export default makeDesktopStorybookConfig({
     ],
   ],
   platformOptions: {
+    windows: {
+      smoke: {
+        command: createWindowsSmokeCommand({
+          windowTitle: 'My Storybook',
+        }),
+      },
+    },
     win32: {
-      run: {
-        command: 'node',
-        args: ['scripts/run-win32.cjs'],
+      run: createWin32RunCommand(win32Host),
+      smoke: {
+        command: createWin32SmokeCommand({
+          ...win32Host,
+          testIDPrefix: 'my-storybook',
+        }),
       },
     },
   },
@@ -89,18 +109,29 @@ alias for this subcommand. Consumer package scripts should forward arguments rat
 platform. See [`src/cli/README.md`](src/cli/README.md) for the recommended minimal scripts and development, E2E, CI,
 and agent workflows.
 
-`smoke` can use a complete app-owned command or the reusable lifecycle. The reusable lifecycle starts the shared
+`createWindowsSmokeCommand` supplies a package-owned Fabric lifecycle that bundles the Windows catalog, prepares and
+builds the generated app, registers and launches its Debug package, starts the channel server and Metro, traverses every story, and stops only
+the processes it recorded. `createWin32SmokeCommand` bundles and launches the configured REX host, verifies the shared
+desktop chrome, resize handles, and addon surface through the configured test-ID prefix, traverses every story, and
+performs the same ownership-safe cleanup. Consumers provide only native identity, title, test-ID prefix, and optional
+required story IDs.
+Artifacts are written beneath the consuming app's `artifacts/windows` or `artifacts/win32` directory.
+
+`smoke` can also use a complete consumer command or the generic reusable lifecycle. The generic lifecycle starts the shared
 channel server and Metro, builds and launches the app, selects every indexed story, runs the configured app stop
 command, and terminates only the server processes it started. macOS uses the package's bundle-ID-based stop command by
 default. Other generic platform lifecycles require an explicit `smoke.stop`, while consumers can replace the complete
-smoke command when native process ownership needs platform-specific handling.
+smoke command when native process ownership needs platform-specific handling. Prefer the package-owned Windows and
+Win32 command factories over app-local lifecycle scripts.
 
 Each reusable smoke run derives a stable instance ID from the canonical consuming-project root. That ID suffixes the
 configured macOS bundle identifier and seeds separate Storybook and Metro ports, with occupied-port probing before
 launch. The CLI supplies a generated Xcode configuration containing `PRODUCT_BUNDLE_IDENTIFIER` and `RCT_METRO_PORT`;
 the Metro helper serializes the matching Storybook port into a generated runtime polyfill. This lets separate
 enlistments run the same app concurrently without selecting or stopping one another. Generated instance files live
-under the consuming app's `.cache/storybook-desktop` and `macos/.storybook-desktop` directories and should be ignored.
+under the consuming app's `storybook-desktop.generated` and `macos/.storybook-desktop` directories and should be
+ignored. The runtime module intentionally uses a visible directory because Metro's Windows file map excludes hidden
+cache directories.
 
 The same operations are available without Commander:
 

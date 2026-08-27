@@ -142,15 +142,15 @@ jobs:
       - name: Bundle macOS
         run: |
           set -eox pipefail
-          yarn bundle:macos
+          yarn storybook bundle --macos
         working-directory: apps/storybook
 
       - name: Pod install
-        run: yarn pods:macos
+        run: yarn storybook prep --macos
         working-directory: apps/storybook
 
       - name: Build macOS app
-        run: yarn macos:build
+        run: yarn storybook build --macos
         working-directory: apps/storybook
         env:
           CCACHE_DISABLE: 1
@@ -289,17 +289,16 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Bundle Windows
-        run: yarn bundle:windows
+      - name: Smoke test Windows Storybook
+        run: yarn storybook smoke --windows
         working-directory: apps/storybook
 
-      - name: Generate RNW app
-        run: yarn install-windows-test-app --use-nuget
-        working-directory: apps/storybook
-
-      - name: Build RNW app
-        run: yarn rnx-cli run-windows --no-packager --no-deploy --no-launch
-        working-directory: apps/storybook
+      - name: Upload Windows Storybook artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Storybook_windows_Dump
+          path: apps/storybook/artifacts/windows
 
   win32:
     name: Win32 PR
@@ -340,10 +339,6 @@ jobs:
         run: yarn e2etest:win32
         working-directory: apps/E2E
 
-      - name: Run Storybook Win32 smoke tests
-        run: yarn win32:ci
-        working-directory: apps/storybook
-
       - name: Upload E2E Win32 artifacts
         if: ${{ always() }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -352,7 +347,6 @@ jobs:
           path: |
             apps/E2E/reports
             apps/E2E/errorShots
-            apps/storybook/artifacts/win32
 
   win32-storybook:
     name: Win32 Storybook PR
@@ -374,9 +368,16 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Bundle Win32
-        run: yarn bundle:win32
+      - name: Smoke test Win32 Storybook
+        run: yarn storybook smoke --win32
         working-directory: apps/storybook
+
+      - name: Upload Win32 Storybook artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Storybook_win32_Dump
+          path: apps/storybook/artifacts/win32
 
   check-changesets:
     name: Check for Changesets

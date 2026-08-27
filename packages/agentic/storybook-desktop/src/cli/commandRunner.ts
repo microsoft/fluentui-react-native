@@ -51,9 +51,18 @@ function spawnCommand(command: PreparedDesktopCommand, background: boolean) {
     cwd: command.cwd,
     detached: background && process.platform !== 'win32',
     env: { ...process.env, ...command.env },
-    shell: process.platform === 'win32',
+    shell: requiresWindowsShell(command.command),
     stdio: 'inherit',
   });
+}
+
+function requiresWindowsShell(command: string): boolean {
+  if (process.platform !== 'win32') {
+    return false;
+  }
+
+  const executable = path.basename(command).toLowerCase();
+  return path.extname(executable) !== '.exe' && !['node', 'powershell', 'pwsh'].includes(executable);
 }
 
 function completed(child: ReturnType<typeof spawn>): Promise<number> {

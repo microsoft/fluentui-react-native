@@ -1,3 +1,6 @@
+import path from 'node:path';
+import { createRequire } from 'node:module';
+
 import type { Platforms } from './platforms.js';
 
 export const desktopStorybookActions = ['server', 'prep', 'bundle', 'run', 'build', 'smoke'] as const;
@@ -103,3 +106,73 @@ export type DesktopPlatformOptions = {
 };
 
 export type DesktopPlatformOptionsMap = Partial<Record<Platforms, DesktopPlatformOptions>>;
+
+export type WindowsSmokeCommandOptions = {
+  configuration?: 'Debug' | 'Release';
+  windowTitle: string;
+};
+
+export type Win32HostCommandOptions = {
+  component: string;
+  windowTitle: string;
+};
+
+export type Win32SmokeCommandOptions = Win32HostCommandOptions & {
+  requiredStoryIds?: readonly string[];
+  testIDPrefix: string;
+};
+
+/**
+ * Creates the shared Windows Fabric smoke lifecycle command.
+ */
+export function createWindowsSmokeCommand({ configuration = 'Debug', windowTitle }: WindowsSmokeCommandOptions): DesktopCommand {
+  return {
+    command: 'pwsh',
+    args: ['-NoProfile', '-File', resolveConfigScript('smoke-windows.ps1')],
+    env: {
+      STORYBOOK_WINDOWS_CONFIGURATION: configuration,
+      STORYBOOK_WINDOWS_WINDOW_TITLE: windowTitle,
+    },
+  };
+}
+
+/**
+ * Creates the shared prebuilt REX Win32 host command.
+ */
+export function createWin32RunCommand({ component, windowTitle }: Win32HostCommandOptions): DesktopCommand {
+  return {
+    command: process.execPath,
+    args: [resolveConfigScript('run-win32.cjs')],
+    env: {
+      STORYBOOK_WIN32_COMPONENT: component,
+      STORYBOOK_WIN32_WINDOW_TITLE: windowTitle,
+    },
+  };
+}
+
+/**
+ * Creates the shared Win32 bundle, native UX, and story traversal smoke lifecycle command.
+ */
+export function createWin32SmokeCommand({
+  component,
+  requiredStoryIds = [],
+  testIDPrefix,
+  windowTitle,
+}: Win32SmokeCommandOptions): DesktopCommand {
+  return {
+    command: 'pwsh',
+    args: ['-NoProfile', '-File', resolveConfigScript('smoke-win32.ps1')],
+    env: {
+      STORYBOOK_TEST_ID_PREFIX: testIDPrefix,
+      STORYBOOK_WIN32_COMPONENT: component,
+      STORYBOOK_WIN32_REQUIRED_STORIES: requiredStoryIds.join(','),
+      STORYBOOK_WIN32_WINDOW_TITLE: windowTitle,
+    },
+  };
+}
+
+function resolveConfigScript(fileName: string): string {
+  const workspaceRequire = createRequire(path.resolve(process.cwd(), 'package.json'));
+  const packageJsonPath = workspaceRequire.resolve('@fluentui-react-native/storybook-desktop/package.json');
+  return path.resolve(path.dirname(packageJsonPath), 'config', fileName);
+}

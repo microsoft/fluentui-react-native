@@ -69,7 +69,7 @@ function createDesktopStorybookMetroConfig({ configPath }) {
 }
 
 function writeRuntimeInstanceModule(projectRoot) {
-  const generatedDirectory = path.join(projectRoot, '.cache', 'storybook-desktop');
+  const generatedDirectory = path.join(projectRoot, 'storybook-desktop.generated');
   const runtimeModulePath = path.join(generatedDirectory, 'runtime-instance.js');
   const storybookPort = readPort(process.env.STORYBOOK_WS_PORT, 7007);
   const instanceId = process.env.FURN_STORYBOOK_INSTANCE_ID || 'default';
