@@ -1,3 +1,4 @@
+import { readJSONFileSync, writeJSONFileSync } from '@rnx-kit/tools-filesystem';
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
@@ -7,7 +8,7 @@ import { gzipSync } from 'node:zlib';
 
 const workspaceRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const repositoryRoot = dirname(dirname(workspaceRoot));
-const yarnVersion = JSON.parse(readFileSync(join(repositoryRoot, 'package.json'), 'utf8')).packageManager.split('@')[1];
+const yarnVersion = readJSONFileSync(join(repositoryRoot, 'package.json')).packageManager.split('@')[1];
 const yarnPath = join(repositoryRoot, '.yarn', 'releases', `yarn-${yarnVersion}.cjs`);
 const configPath = join(workspaceRoot, 'scenarios.json');
 const defaultBaselinePath = join(workspaceRoot, 'baseline.json');
@@ -68,7 +69,7 @@ function getWorkspacePackage(source) {
   while (directory.startsWith(packagesRoot)) {
     const manifestPath = join(directory, 'package.json');
     if (existsSync(manifestPath)) {
-      return JSON.parse(readFileSync(manifestPath, 'utf8')).name;
+      return readJSONFileSync(manifestPath).name;
     }
     directory = dirname(directory);
   }
@@ -153,8 +154,8 @@ function runBundle(platform, scenario, resetCache) {
   }
 
   const bundle = readFileSync(bundlePath);
-  const sourceMap = JSON.parse(readFileSync(sourceMapPath, 'utf8'));
-  const metafile = JSON.parse(readFileSync(metafilePath, 'utf8'));
+  const sourceMap = readJSONFileSync(sourceMapPath);
+  const metafile = readJSONFileSync(metafilePath);
   const contributions = getWorkspaceContributions(metafile);
 
   return {
@@ -263,7 +264,7 @@ const {
 if (updateBaseline && selectedPlatforms) {
   throw new Error('Baseline updates must include every configured platform; omit --platform');
 }
-const selectedConfig = JSON.parse(readFileSync(selectedConfigPath, 'utf8'));
+const selectedConfig = readJSONFileSync(selectedConfigPath);
 const platforms = selectedPlatforms ?? selectedConfig.platforms;
 
 await mkdir(entryRoot, { recursive: true });
@@ -284,12 +285,10 @@ const currentBaseline = {
   results: measurements.map(baselineResult),
 };
 if (updateBaseline) {
-  writeFileSync(selectedBaselinePath, `${JSON.stringify(currentBaseline, null, 2)}\n`);
+  writeJSONFileSync(selectedBaselinePath, currentBaseline);
 }
 
-const baseline = existsSync(selectedBaselinePath)
-  ? JSON.parse(readFileSync(selectedBaselinePath, 'utf8'))
-  : { schemaVersion: 1, results: [] };
+const baseline = existsSync(selectedBaselinePath) ? readJSONFileSync(selectedBaselinePath) : { schemaVersion: 1, results: [] };
 if (baseline.schemaVersion !== 1) {
   throw new Error(`Unsupported baseline schema version: ${baseline.schemaVersion}`);
 }
@@ -315,7 +314,7 @@ const report = {
 };
 const reportPath = join(outputRoot, 'results.json');
 const markdownReportPath = join(outputRoot, 'report.md');
-writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
+writeJSONFileSync(reportPath, report);
 writeFileSync(markdownReportPath, createMarkdownReport(results));
 
 console.table(results);
