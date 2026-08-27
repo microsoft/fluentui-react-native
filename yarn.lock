@@ -8371,7 +8371,7 @@ __metadata:
 
 "@react-native-windows/cli@npm:0.81.8":
   version: 0.81.8
-  resolution: "@react-native-windows/cli@npm:0.81.8::__archiveUrl=https%3A%2F%2Fms-feed-25.pkgs.visualstudio.com%2F1es-public%2F_packaging%2Fnpm-public%2Fnpm%2Fregistry%2F%40react-native-windows%2Fcli%2F-%2Fcli-0.81.8.tgz"
+  resolution: "@react-native-windows/cli@npm:0.81.8"
   dependencies:
     "@react-native-windows/codegen": "npm:0.81.7"
     "@react-native-windows/find-dotnet-tools": "npm:0.0.0-canary.3"
@@ -8403,7 +8403,7 @@ __metadata:
 
 "@react-native-windows/cli@patch:@react-native-windows/cli@npm%3A0.81.8#~/.yarn/patches/@react-native-windows-cli-npm-0.81.8-9ffb7042e8.patch":
   version: 0.81.8
-  resolution: "@react-native-windows/cli@patch:@react-native-windows/cli@npm%3A0.81.8%3A%3A__archiveUrl=https%253A%252F%252Fms-feed-25.pkgs.visualstudio.com%252F1es-public%252F_packaging%252Fnpm-public%252Fnpm%252Fregistry%252F%2540react-native-windows%252Fcli%252F-%252Fcli-0.81.8.tgz#~/.yarn/patches/@react-native-windows-cli-npm-0.81.8-9ffb7042e8.patch::version=0.81.8&hash=c0543d"
+  resolution: "@react-native-windows/cli@patch:@react-native-windows/cli@npm%3A0.81.8#~/.yarn/patches/@react-native-windows-cli-npm-0.81.8-9ffb7042e8.patch::version=0.81.8&hash=c0543d"
   dependencies:
     "@react-native-windows/codegen": "npm:0.81.7"
     "@react-native-windows/find-dotnet-tools": "npm:0.0.0-canary.3"
@@ -8435,7 +8435,7 @@ __metadata:
 
 "@react-native-windows/codegen@npm:0.81.7":
   version: 0.81.7
-  resolution: "@react-native-windows/codegen@npm:0.81.7::__archiveUrl=https%3A%2F%2Fms-feed-12.pkgs.visualstudio.com%2F1es-public%2F_packaging%2Fnpm-public%2Fnpm%2Fregistry%2F%40react-native-windows%2Fcodegen%2F-%2Fcodegen-0.81.7.tgz"
+  resolution: "@react-native-windows/codegen@npm:0.81.7"
   dependencies:
     "@react-native-windows/fs": "npm:0.81.2"
     chalk: "npm:^4.1.0"
@@ -8462,7 +8462,7 @@ __metadata:
 
 "@react-native-windows/find-dotnet-tools@npm:0.0.0-canary.3":
   version: 0.0.0-canary.3
-  resolution: "@react-native-windows/find-dotnet-tools@npm:0.0.0-canary.3::__archiveUrl=https%3A%2F%2Fms-feed-12.pkgs.visualstudio.com%2F1es-public%2F_packaging%2Fnpm-public%2Fnpm%2Fregistry%2F%40react-native-windows%2Ffind-dotnet-tools%2F-%2Ffind-dotnet-tools-0.0.0-canary.3.tgz"
+  resolution: "@react-native-windows/find-dotnet-tools@npm:0.0.0-canary.3"
   dependencies:
     "@react-native-windows/fs": "npm:^0.81.2"
   checksum: 10c0/640cd7a5fc3e6c98c13956ff63e02bc729a70ef5caad88a724374551a51728eed723411badc313cef0b81c496e96ba448ea2dd9911b0240793119401d7353b7f
@@ -8471,7 +8471,7 @@ __metadata:
 
 "@react-native-windows/find-repo-root@npm:0.81.2":
   version: 0.81.2
-  resolution: "@react-native-windows/find-repo-root@npm:0.81.2::__archiveUrl=https%3A%2F%2Fms-feed-17.pkgs.visualstudio.com%2F1es-public%2F_packaging%2Fnpm-public%2Fnpm%2Fregistry%2F%40react-native-windows%2Ffind-repo-root%2F-%2Ffind-repo-root-0.81.2.tgz"
+  resolution: "@react-native-windows/find-repo-root@npm:0.81.2"
   dependencies:
     "@react-native-windows/fs": "npm:0.81.2"
     find-up: "npm:^4.1.0"
@@ -8490,7 +8490,7 @@ __metadata:
 
 "@react-native-windows/fs@npm:0.81.2, @react-native-windows/fs@npm:^0.81.2":
   version: 0.81.2
-  resolution: "@react-native-windows/fs@npm:0.81.2::__archiveUrl=https%3A%2F%2Fms-feed-25.pkgs.visualstudio.com%2F1es-public%2F_packaging%2Fnpm-public%2Fnpm%2Fregistry%2F%40react-native-windows%2Ffs%2F-%2Ffs-0.81.2.tgz"
+  resolution: "@react-native-windows/fs@npm:0.81.2"
   dependencies:
     graceful-fs: "npm:^4.2.8"
   checksum: 10c0/4377f6f34a94a0a5b81c42325501ea0907fb175c40e8a92b7c1d2220a19a6bd8fdbf515553d7a5d46fda73bec8e6c1c25c97a773bfbff93f7dc548fdc691b3c6
@@ -8509,7 +8509,7 @@ __metadata:
 
 "@react-native-windows/package-utils@npm:0.81.2":
   version: 0.81.2
-  resolution: "@react-native-windows/package-utils@npm:0.81.2::__archiveUrl=https%3A%2F%2Fms-feed-17.pkgs.visualstudio.com%2F1es-public%2F_packaging%2Fnpm-public%2Fnpm%2Fregistry%2F%40react-native-windows%2Fpackage-utils%2F-%2Fpackage-utils-0.81.2.tgz"
+  resolution: "@react-native-windows/package-utils@npm:0.81.2"
   dependencies:
     "@react-native-windows/find-repo-root": "npm:0.81.2"
     "@react-native-windows/fs": "npm:0.81.2"
@@ -8521,7 +8521,7 @@ __metadata:
 
 "@react-native-windows/telemetry@npm:0.81.4":
   version: 0.81.4
-  resolution: "@react-native-windows/telemetry@npm:0.81.4::__archiveUrl=https%3A%2F%2Fms-feed-17.pkgs.visualstudio.com%2F1es-public%2F_packaging%2Fnpm-public%2Fnpm%2Fregistry%2F%40react-native-windows%2Ftelemetry%2F-%2Ftelemetry-0.81.4.tgz"
+  resolution: "@react-native-windows/telemetry@npm:0.81.4"
   dependencies:
     "@microsoft/1ds-core-js": "npm:^4.3.0"
     "@microsoft/1ds-post-js": "npm:^4.3.0"
@@ -11620,7 +11620,7 @@ __metadata:
 
 "@xmldom/xmldom@npm:^0.8.13":
   version: 0.8.14
-  resolution: "@xmldom/xmldom@npm:0.8.14::__archiveUrl=https%3A%2F%2Fms-feed-25.pkgs.visualstudio.com%2F1es-public%2F_packaging%2Fnpm-public%2Fnpm%2Fregistry%2F%40xmldom%2Fxmldom%2F-%2Fxmldom-0.8.14.tgz"
+  resolution: "@xmldom/xmldom@npm:0.8.14"
   checksum: 10c0/dde6f8ca418ff7436ff61063e7bb8c3773ed9d01f420bf1251a6c13a5d3b088ead7c9c66ca56343615a1f304fe4907db0a9b8ff55fc9319e215fa5ca198555c9
   languageName: node
   linkType: hard
@@ -22712,7 +22712,7 @@ __metadata:
 
 "react-native-windows@npm:^0.81.0":
   version: 0.81.34
-  resolution: "react-native-windows@npm:0.81.34::__archiveUrl=https%3A%2F%2Fms-feed-25.pkgs.visualstudio.com%2F1es-public%2F_packaging%2Fnpm-public%2Fnpm%2Fregistry%2Freact-native-windows%2F-%2Freact-native-windows-0.81.34.tgz"
+  resolution: "react-native-windows@npm:0.81.34"
   dependencies:
     "@babel/runtime": "npm:^7.0.0"
     "@jest/create-cache-key-function": "npm:^29.7.0"
