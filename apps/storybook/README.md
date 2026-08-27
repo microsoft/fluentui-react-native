@@ -5,8 +5,10 @@ On-device [Storybook](https://storybook.js.org/) test app (Storybook for React N
 `*.stories.(ts|tsx)` file from the agentic components package plus the standalone Callout
 package so its native stories run in the Fabric host.
 
-The reusable desktop implementation lives in
-`packages/agentic/storybook-desktop`. It runs Storybook in **liteMode**, which mocks out the heavy default on-device UI
+The reusable desktop CLI and configuration live in
+`packages/agentic/storybook-desktop`, with peer-dependent React Native
+implementation in `packages/agentic/storybook-desktop-runtime`. The runtime
+runs Storybook in **liteMode**, which mocks out the heavy default on-device UI
 (`@storybook/react-native-ui`). This avoids the `react-native-reanimated` /
 `react-native-gesture-handler` / `@gorhom/bottom-sheet` / `react-native-svg` native dependency
 chain, which does not bundle cleanly with this repo's Metro + Babel + pnpm-linker toolchain

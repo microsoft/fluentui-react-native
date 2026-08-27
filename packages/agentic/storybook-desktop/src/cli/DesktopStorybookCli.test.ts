@@ -136,7 +136,7 @@ describe('DesktopStorybookCli', () => {
   test('renders every indexed story before cleanup', async () => {
     const runner = new RecordingRunner();
     const output: string[] = [];
-    const fetch = jest.fn(async (input: URL | RequestInfo) => {
+    const fetch = jest.fn(async (input: Parameters<typeof globalThis.fetch>[0]) => {
       const url = input.toString();
       if (url.endsWith('/index.json')) {
         return new Response(

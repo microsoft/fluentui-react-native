@@ -78,6 +78,7 @@ describe('DesktopStorybookConfig', () => {
       args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
       env: {
         STORYBOOK_CONFIG_PATH: path.join(storybookRoot, 'src'),
+        STORYBOOK_PROJECT_ROOT: storybookRoot,
       },
     });
     expect(config.getPlatformOptions('macos')).toMatchObject({

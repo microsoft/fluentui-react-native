@@ -9,6 +9,15 @@
   "include": ["src"],
   "references": [
     {
+      "path": "../../native/Callout/tsconfig.json"
+    },
+    {
+      "path": "../../theming/default-theme/tsconfig.json"
+    },
+    {
+      "path": "../design/tsconfig.json"
+    },
+    {
       "path": "../../../scripts/tsconfig.json"
     }
   ]

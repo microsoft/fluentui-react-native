@@ -1,4 +1,4 @@
-import { createDesktopStorybookApp } from '@fluentui-react-native/storybook-desktop';
+import { createDesktopStorybookApp } from '@fluentui-react-native/storybook-desktop-runtime';
 
 import { view } from './storybook.requires';
 

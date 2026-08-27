@@ -2414,6 +2414,7 @@ __metadata:
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/storybook-desktop": "workspace:*"
+    "@fluentui-react-native/storybook-desktop-runtime": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
     "@office-iss/rex-win32": "npm:0.81.1"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -4844,9 +4845,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/storybook-desktop@workspace:*, @fluentui-react-native/storybook-desktop@workspace:packages/agentic/storybook-desktop":
+"@fluentui-react-native/storybook-desktop-runtime@workspace:*, @fluentui-react-native/storybook-desktop-runtime@workspace:packages/agentic/storybook-desktop-runtime":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/storybook-desktop@workspace:packages/agentic/storybook-desktop"
+  resolution: "@fluentui-react-native/storybook-desktop-runtime@workspace:packages/agentic/storybook-desktop-runtime"
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/callout": "workspace:*"
@@ -4857,26 +4858,17 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/metro-config": "catalog:"
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
-    "@rnx-kit/tools-react-native": "catalog:"
-    "@storybook/mcp": "npm:^0.7.0"
-    "@storybook/react": "npm:^10.4.6"
     "@storybook/react-native": "npm:^10.4.7"
     "@storybook/react-native-theming": "npm:^10.4.7"
     "@storybook/react-native-ui-common": "npm:^10.4.7"
     "@storybook/react-native-ui-lite": "npm:^10.4.7"
-    "@tmcp/adapter-valibot": "npm:^0.1.6"
-    "@tmcp/transport-http": "npm:^0.8.6"
     "@types/react": "npm:~19.1.4"
-    commander: "npm:^14.0.2"
     oxc-resolver: "catalog:"
     react: "npm:19.1.4"
     react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
-    regexpu-core: "npm:^6.3.1"
     storybook: "npm:^10.4.0"
-    tmcp: "npm:^1.19.4"
-    valibot: "npm:^1.4.1"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
@@ -4893,6 +4885,19 @@ __metadata:
       optional: true
     react-native-windows:
       optional: true
+  languageName: unknown
+  linkType: soft
+
+"@fluentui-react-native/storybook-desktop@workspace:*, @fluentui-react-native/storybook-desktop@workspace:packages/agentic/storybook-desktop":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/storybook-desktop@workspace:packages/agentic/storybook-desktop"
+  dependencies:
+    "@babel/core": "catalog:"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@rnx-kit/tools-react-native": "catalog:"
+    commander: "npm:^14.0.2"
+    regexpu-core: "npm:^6.3.1"
   bin:
     storybook-desktop: ./config/cli.cjs
     storybook-server: ./config/server-cli.cjs
@@ -9542,18 +9547,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/mcp@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@storybook/mcp@npm:0.7.0"
-  dependencies:
-    "@tmcp/adapter-valibot": "npm:^0.1.5"
-    "@tmcp/transport-http": "npm:^0.8.5"
-    tmcp: "npm:^1.19.3"
-    valibot: "npm:1.2.0"
-  checksum: 10c0/56c90e597684e55e40451da47fc41e581d21365f405990c3cfbaaf8a19b71da17ede83399ed1524c6a1726050b0e0ba55474de5344cdeefe0cf9045faccb92b8
-  languageName: node
-  linkType: hard
-
 "@storybook/mcp@npm:^0.8.0":
   version: 0.8.0
   resolution: "@storybook/mcp@npm:0.8.0"
@@ -9699,7 +9692,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:^10.4.6, @storybook/react@npm:^10.5.4":
+"@storybook/react@npm:^10.5.4":
   version: 10.5.6
   resolution: "@storybook/react@npm:10.5.6"
   dependencies:
@@ -24171,7 +24164,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tmcp@npm:^1.19.3, tmcp@npm:^1.19.4":
+"tmcp@npm:^1.19.4":
   version: 1.19.4
   resolution: "tmcp@npm:1.19.4"
   dependencies:
@@ -24848,7 +24841,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"valibot@npm:^1.1.0, valibot@npm:^1.4.1, valibot@npm:^1.4.2":
+"valibot@npm:^1.1.0, valibot@npm:^1.4.2":
   version: 1.4.2
   resolution: "valibot@npm:1.4.2"
   peerDependencies:

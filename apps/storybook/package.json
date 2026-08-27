@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "rnx-cli start",
-    "storybook": "node ../../packages/agentic/storybook-desktop/config/cli.cjs",
+    "storybook": "storybook-desktop",
     "storybook-server": "storybook-desktop server",
     "prebuild": "sb-rn-get-stories --config-path src",
     "lint": "fluentui-scripts lint",
@@ -23,6 +23,7 @@
     "@fluentui-react-native/components": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/storybook-desktop": "workspace:*",
+    "@fluentui-react-native/storybook-desktop-runtime": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
     "@types/react": "~19.1.4",
     "react": "19.1.4",

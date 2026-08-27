@@ -23,6 +23,9 @@
       "path": "packages/agentic/design/tsconfig.json"
     },
     {
+      "path": "packages/agentic/storybook-desktop-runtime/tsconfig.json"
+    },
+    {
       "path": "packages/agentic/storybook-desktop/tsconfig.json"
     },
     {

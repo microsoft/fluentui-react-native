@@ -2,8 +2,6 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { StorybookConfig } from '@storybook/react-native';
-
 import type {
   DesktopCommand,
   DesktopCommandPlan,
@@ -115,6 +113,11 @@ export type ResolvedStoryPackage = ResolvedPackage & {
   storyPatterns: readonly string[];
 };
 
+export type DesktopReactNativeStorybookConfig = {
+  deviceAddons: string[];
+  stories: string[];
+};
+
 /**
  * Class representing the configuration for a desktop Storybook instance. This takes relevant user settings
  * and can build various configurations on demand for different platforms and environments.
@@ -221,7 +224,7 @@ export class DesktopStorybookConfig {
     );
   }
 
-  getStorybookConfig(platformSetting: Platforms | string | undefined = this.platform): StorybookConfig {
+  getStorybookConfig(platformSetting: Platforms | string | undefined = this.platform): DesktopReactNativeStorybookConfig {
     return {
       stories: [...this.getStoryGlobs(platformSetting)],
       deviceAddons: [...(this.config.deviceAddons ?? defaultDeviceAddons)],
@@ -355,6 +358,7 @@ function defaultServerCommand(config: DesktopStorybookConfig): DesktopCommand {
     args: [path.join(config.resolvePackage('@fluentui-react-native/storybook-desktop').root, 'config', 'server-runner.cjs')],
     env: {
       STORYBOOK_CONFIG_PATH: config.storybookConfigDir,
+      STORYBOOK_PROJECT_ROOT: config.projectRoot,
     },
   };
 }

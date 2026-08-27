@@ -65,7 +65,7 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   scoped to Win32; remove it when the REX engine supports Unicode property
   escapes.
 - Win32 uses desktop-only chrome in
-  `../../packages/agentic/storybook-desktop/src/StorybookUI.win32.tsx` because
+  `../../packages/agentic/storybook-desktop-runtime/src/StorybookUI.win32.tsx` because
   react-native-win32 omits window dimensions and Storybook's mobile LiteUI
   drawer crashes the Paper host. Keep its default layout conceptually aligned
   with desktop LiteUI: persistent resizable Sidebar, story preview, and

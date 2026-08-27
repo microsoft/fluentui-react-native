@@ -1,6 +1,6 @@
 # React Native Desktop Storybook
 
-Reusable on-device Storybook runtime for Fluent UI React Native desktop test apps. It provides:
+Reusable CLI and configuration for Fluent UI React Native desktop test apps. Together with the companion runtime, it provides:
 
 - the macOS and Windows Lite UI shell;
 - the Win32 Paper desktop chrome and Callout-backed pop-outs;
@@ -8,6 +8,13 @@ Reusable on-device Storybook runtime for Fluent UI React Native desktop test app
 - Metro and Babel configuration for the repo's pnpm-linked desktop hosts; and
 - the standalone Storybook channel and MCP server; and
 - a Commander CLI and matching API for serving, native preparation, bundling, builds, launches, and smoke tests.
+
+The React Native implementation lives in the companion
+`@fluentui-react-native/storybook-desktop-runtime` package. Keeping its React
+and React Native peers out of this package gives the CLI a physical Yarn
+workspace locator, so `storybook-desktop` and `storybook-server` binaries work
+with Yarn's pnpm linker instead of resolving through an unmaterialized virtual
+workspace path.
 
 Consuming apps own their native identity in `app.json`, story globs, generated `storybook.requires` file, component
 dependencies, and exceptional platform automation. A root `storybook.config.ts` declares which packages supply stories
@@ -152,7 +159,7 @@ dedicated task rather than await it before another operation.
 The app integrates its generated Storybook view with the shared runtime:
 
 ```tsx
-import { createDesktopStorybookApp } from '@fluentui-react-native/storybook-desktop';
+import { createDesktopStorybookApp } from '@fluentui-react-native/storybook-desktop-runtime';
 
 import { view } from './storybook.requires';
 
@@ -161,6 +168,6 @@ export default createDesktopStorybookApp(view, {
 });
 ```
 
-Use `createDesktopStorybookPreview()` from the app's `preview.tsx`. The Node configuration helpers are exposed from the
-`/metro`, `/babel`, `/server`, and `/cli` subpaths so native test apps can keep their root configuration files minimal
-while still passing an app-owned Storybook config path.
+Use `createDesktopStorybookPreview()` from the runtime package in the app's `preview.tsx`. Metro configuration is exposed
+from `@fluentui-react-native/storybook-desktop-runtime/metro`; Babel, server, config, and CLI helpers are exposed from the
+corresponding `@fluentui-react-native/storybook-desktop` subpaths.

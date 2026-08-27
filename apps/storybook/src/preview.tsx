@@ -1,4 +1,4 @@
-import { createDesktopStorybookPreview } from '@fluentui-react-native/storybook-desktop';
+import { createDesktopStorybookPreview } from '@fluentui-react-native/storybook-desktop-runtime';
 
 const preview = createDesktopStorybookPreview();
 

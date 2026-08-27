@@ -1,3 +1,15 @@
-export { createDesktopStorybookApp } from './createDesktopStorybookApp';
-export type { DesktopStorybookOptions } from './createDesktopStorybookApp';
-export { createDesktopStorybookPreview } from './createDesktopStorybookPreview';
+export {
+  createDesktopStorybookCommand,
+  DesktopStorybookCli,
+  loadDesktopStorybookConfig,
+  NodeDesktopCommandRunner,
+  runDesktopStorybookCli,
+} from './cli/index.js';
+export type {
+  CreateDesktopStorybookCommandOptions,
+  DesktopCommandRunner,
+  DesktopStorybookCliOptions,
+  DesktopStorybookServerOptions,
+  PreparedDesktopCommand,
+  RunningDesktopCommand,
+} from './cli/index.js';
