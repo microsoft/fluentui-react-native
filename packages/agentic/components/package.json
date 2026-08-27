@@ -19,6 +19,12 @@
       "react-native": "./src/index.ts",
       "import": "./lib/index.js",
       "default": "./src/index.ts"
+    },
+    "./primitives": {
+      "types": "./lib/primitives/index.d.ts",
+      "react-native": "./src/primitives/index.ts",
+      "import": "./lib/primitives/index.js",
+      "default": "./src/primitives/index.ts"
     }
   },
   "scripts": {

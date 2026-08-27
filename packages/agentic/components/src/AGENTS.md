@@ -19,14 +19,17 @@ the change crosses component boundaries.
 - Generalizable non-styling hooks belong in `framework-base/src/hooks`.
 - Styling helpers belong in `agentic/design/src/styling`.
 - Component-library-specific non-public types, constants, and helpers belong in `src/common`.
-- Primitives must remain unstyled and should only be extracted for repeated behavioral or structural contracts.
+- Primitives are public from `@fluentui-react-native/components/primitives`, must remain unstyled, and require a colocated
+  `CONTRACT.md`. Extract one only for a repeated behavioral or structural contract that is useful to consumers; keep
+  package-private helpers in `src/common`.
 
 ## Optimization principles
 
 - Audit dependency direction before introducing shared code.
 - Look for repeated types, constants, routines, and subtrees across components.
 - Validate extraction payoff before creating another layer of indirection.
-- Preserve public component-qualified APIs and explicit exports.
+- Preserve public component-qualified APIs and explicit exports. Higher-order components belong to the root entry point;
+  primitives belong to the `./primitives` entry point.
 - Keep local component fixes local; do not widen a tiny edit into a whole-package audit unless repetition or extraction
   is part of the work.
 - Do not extract one-off logic, styling choices, or thin wrappers that are clearer in place.

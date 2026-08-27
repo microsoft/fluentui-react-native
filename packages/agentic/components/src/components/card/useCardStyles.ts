@@ -1,7 +1,7 @@
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
-import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
+import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
 
 import { cardStyles, getCardNestedBlockStyle, getCardOverlayStyle, getCardRootStyle, getCardSurfaceColors } from './card.styles';
 import type { CardState } from './card.types';
@@ -14,7 +14,7 @@ export function useCardStyles_unstable(state: CardState) {
   const rootStyle: StyleProp<ViewStyle> = [cardStyles.root, getCardRootStyle(state), colors, state.userStyle];
   const overlayStyle = getCardOverlayStyle(state);
 
-  state.focusVisualProps = createFocusVisualProps({
+  state.focusVisualProps = createFocusVisualProps_unstable({
     borderRadius: overlayStyle.borderRadius,
     innerColor: state.tokens.color.strokeFocusInner,
     innerWidth: state.tokens.strokeWidth.thin,

@@ -1,6 +1,6 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
-import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
+import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
 
 import { tagStyles, getTagBackgroundStyle, getTagContentStyle, getTagForegroundStyle, getTagIconSize, getTagRootStyle } from './tag.styles';
 import type { TagState } from './tag.types';
@@ -14,7 +14,7 @@ export function useTagStyles_unstable(state: TagState) {
   const contentStyle: StyleProp<TextStyle> = [tagStyles.content, getTagContentStyle(state), foreground];
   const iconSizes = getTagIconSize(size);
 
-  state.focusVisualProps = createFocusVisualProps({
+  state.focusVisualProps = createFocusVisualProps_unstable({
     borderRadius: rootLayoutStyle.borderRadius,
     innerColor: state.tokens.color.strokeFocusInner,
     innerWidth: state.tokens.strokeWidth.thin,

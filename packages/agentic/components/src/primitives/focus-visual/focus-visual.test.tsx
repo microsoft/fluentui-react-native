@@ -3,11 +3,11 @@ import { StyleSheet } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 
-import { FocusVisual, createFocusVisualProps } from './focus-visual';
+import { FocusVisual, createFocusVisualProps_unstable } from './focus-visual';
 
 describe('FocusVisual', () => {
   it('keeps both rings mounted while visibility changes', async () => {
-    const props = createFocusVisualProps({
+    const props = createFocusVisualProps_unstable({
       borderRadius: 4,
       innerColor: 'white',
       innerWidth: 1,
@@ -49,7 +49,7 @@ describe('FocusVisual', () => {
   it('renders a single ring when no inner ring is requested', async () => {
     const component = await render(
       <FocusVisual
-        {...createFocusVisualProps({
+        {...createFocusVisualProps_unstable({
           outerColor: 'black',
           outerWidth: 2,
           visible: true,
