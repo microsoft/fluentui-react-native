@@ -107,10 +107,9 @@ function formFurnPreset(rnPreset: VersionPreset, _version: number): VersionPrese
     const cap = capString as Capability;
     const pkgEntry = newPreset[cap] as Package;
     if (pkgEntry) {
-      // patch metro/metro-core/etc packages to not allow progressing beyond 83.1 because
-      // of serializer incompatibility
-      if (cap.startsWith('metro') && pkgEntry.version.startsWith('^83.1')) {
-        pkgEntry.version = pkgEntry.version.replace('^83.1', '83.1');
+      // Keep the React Native 0.81 Metro family on the release that removes vulnerable image parsers.
+      if (cap.startsWith('metro') && pkgEntry.version === '^0.83.1') {
+        pkgEntry.version = '^0.83.8';
       }
       // add dev-only capability if this is a core capability
       const devCap = toDevCapability(cap);

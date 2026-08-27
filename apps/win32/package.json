@@ -55,7 +55,7 @@
     "@rnx-kit/metro-resolver-symlinks": "catalog:",
     "@rnx-kit/metro-serializer-esbuild": "catalog:",
     "@types/react-test-renderer": "^19.1.0",
-    "metro-config": "^0.83.3",
+    "metro-config": "^0.83.8",
     "oxc-resolver": "catalog:",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "catalog:",
