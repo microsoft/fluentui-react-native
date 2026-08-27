@@ -1,6 +1,6 @@
 import type { ViewStyle, ColorValue, AnimatableNumericValue } from 'react-native';
 
-import type { Theme } from '@fluentui-react-native/design/theming';
+import type { Theme } from '../../theming';
 
 import { getPaletteFromTheme } from './color-tokens';
 import type { OperationSet } from './token.types';

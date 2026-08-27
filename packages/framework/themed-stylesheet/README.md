@@ -1,5 +1,11 @@
 # Themed StyleSheet
 
+> **Deprecated:** Import `themedStyleSheet` and `NamedStyles` from
+> `@fluentui-react-native/design/styling/stylesheet` instead.
+
+This package is a compatibility shim and will not receive new APIs. It preserves
+the existing entry point while consumers migrate to the design package.
+
 A convenience wrapper to create style sheets which depend upon values in a theme, and use them in a manner
 where they are built and cached once per theme. This doesn't have a huge amount of code, it is mainly about standardizing the usage patterns.
 

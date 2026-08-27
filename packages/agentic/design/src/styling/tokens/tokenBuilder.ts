@@ -1,6 +1,6 @@
 import type { ViewStyle, TextStyle, ImageStyle } from 'react-native';
 
-import type { Theme } from '@fluentui-react-native/design/theming';
+import type { Theme } from '../../theming';
 
 export type TokenBuilder<TTokens, TStyle extends ViewStyle | TextStyle | ImageStyle> = {
   from: (tokens: TTokens, theme: Theme) => TStyle;

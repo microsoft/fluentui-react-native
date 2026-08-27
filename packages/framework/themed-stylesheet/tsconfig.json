@@ -9,7 +9,7 @@
   "include": ["src"],
   "references": [
     {
-      "path": "../../framework-base/tsconfig.json"
+      "path": "../../agentic/design/tsconfig.json"
     },
     {
       "path": "../../../scripts/tsconfig.json"

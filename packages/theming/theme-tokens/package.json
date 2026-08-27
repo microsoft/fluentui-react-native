@@ -33,12 +33,7 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
-    "@fluentui-react-native/design": "workspace:*",
-    "@fluentui-react-native/design-tokens-android": "catalog:",
-    "@fluentui-react-native/design-tokens-ios": "catalog:",
-    "@fluentui-react-native/design-tokens-win32": "catalog:",
-    "@fluentui-react-native/design-tokens-windows": "catalog:",
-    "assert-never": "^1.2.1"
+    "@fluentui-react-native/design": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

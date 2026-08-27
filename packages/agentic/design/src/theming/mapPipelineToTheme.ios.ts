@@ -1,5 +1,6 @@
-import type { AliasColorTokens, FontDynamicTypeRamp, Variants, VariantValue } from '@fluentui-react-native/design/theming';
-import type { FontStyleTokens } from '@fluentui-react-native/tokens';
+import type { FontStyleTokens } from '../styling/tokens';
+import type { AliasColorTokens } from './types/Color.types';
+import type { FontDynamicTypeRamp, Variants, VariantValue } from './types/Typography.types';
 
 // API that maps tokens coming from the iOS token pipeline to Theme color values.
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {

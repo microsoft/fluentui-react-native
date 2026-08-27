@@ -30,13 +30,10 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
-    "@fluentui-react-native/design": "workspace:*",
-    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@fluentui-react-native/design-tokens-win32": "catalog:",
-    "@fluentui-react-native/design-tokens-windows": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
