@@ -12,5 +12,5 @@
 
 ## Theme types and utilities
 
-[Theme-types](./theme-types/README.md)  
-[Theme-tokens](./theme-tokens/README.md)
+- [Theme-types](../shim/theme-types/README.md)
+- [Theme-tokens](../shim/theme-tokens/README.md)

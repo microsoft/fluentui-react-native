@@ -3,7 +3,7 @@ import type { Animated, ViewStyle, ColorValue, PressableProps, ViewProps, Animat
 
 import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
-import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/design/styling/tokens';
 import type { PropsOf } from '@fluentui-react-native/framework-base';
 
 export const switchName = 'Switch';

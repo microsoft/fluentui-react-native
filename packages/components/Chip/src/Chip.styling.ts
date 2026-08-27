@@ -1,6 +1,6 @@
 import type { UseStylingOptions, Theme } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/design/styling/tokens';
 
 import { chipName, ChipColors, ChipSizes } from './Chip.types';
 import type { ChipTokens, ChipSlotProps, ChipProps, ChipConfigurableProps } from './Chip.types';

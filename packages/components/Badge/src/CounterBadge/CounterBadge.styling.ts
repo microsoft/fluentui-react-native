@@ -1,6 +1,6 @@
 import type { UseStylingOptions, Theme } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
-import { borderStyles } from '@fluentui-react-native/tokens';
+import { borderStyles } from '@fluentui-react-native/design/styling/tokens';
 
 import { counterBadgeName } from './CounterBadge.types';
 import type { CounterBadgeTokens, CounterBadgeProps, CounterBadgeSlotProps } from './CounterBadge.types';

@@ -222,14 +222,6 @@ module.exports = {
       "name": "@fluentui-react-native/framework",
       "version": "0.17.2"
     },
-    "@fluentui-react-native/theme": {
-      "name": "@fluentui-react-native/theme",
-      "version": "0.14.2"
-    },
-    "@fluentui-react-native/themed-stylesheet": {
-      "name": "@fluentui-react-native/themed-stylesheet",
-      "version": "1.10.2"
-    },
     "@fluentui-react-native/use-slots": {
       "name": "@fluentui-react-native/use-slots",
       "version": "0.13.2"
@@ -250,6 +242,30 @@ module.exports = {
       "name": "@fluentui-react-native/callout",
       "version": "0.29.2"
     },
+    "@fluentui-react-native/theme-tokens": {
+      "name": "@fluentui-react-native/theme-tokens",
+      "version": "0.29.2"
+    },
+    "@fluentui-react-native/theme-types": {
+      "name": "@fluentui-react-native/theme-types",
+      "version": "0.44.8"
+    },
+    "@fluentui-react-native/theme": {
+      "name": "@fluentui-react-native/theme",
+      "version": "0.14.2"
+    },
+    "@fluentui-react-native/themed-stylesheet": {
+      "name": "@fluentui-react-native/themed-stylesheet",
+      "version": "1.10.2"
+    },
+    "@fluentui-react-native/theming-utils": {
+      "name": "@fluentui-react-native/theming-utils",
+      "version": "0.27.8"
+    },
+    "@fluentui-react-native/tokens": {
+      "name": "@fluentui-react-native/tokens",
+      "version": "0.24.8"
+    },
     "@fluentui-react-native/android-theme": {
       "name": "@fluentui-react-native/android-theme",
       "version": "0.26.8"
@@ -260,18 +276,6 @@ module.exports = {
     },
     "@fluentui-react-native/default-theme": {
       "name": "@fluentui-react-native/default-theme",
-      "version": "0.27.8"
-    },
-    "@fluentui-react-native/theme-tokens": {
-      "name": "@fluentui-react-native/theme-tokens",
-      "version": "0.29.2"
-    },
-    "@fluentui-react-native/theme-types": {
-      "name": "@fluentui-react-native/theme-types",
-      "version": "0.44.8"
-    },
-    "@fluentui-react-native/theming-utils": {
-      "name": "@fluentui-react-native/theming-utils",
       "version": "0.27.8"
     },
     "@fluentui-react-native/win32-theme": {
@@ -289,10 +293,6 @@ module.exports = {
     "@fluentui-react-native/styling-utils": {
       "name": "@fluentui-react-native/styling-utils",
       "version": "0.8.7"
-    },
-    "@fluentui-react-native/tokens": {
-      "name": "@fluentui-react-native/tokens",
-      "version": "0.24.8"
     }
   },
   "0.74": {

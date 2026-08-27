@@ -30,9 +30,6 @@
       "path": "../../utils/test-tools/tsconfig.json"
     },
     {
-      "path": "../../utils/tokens/tsconfig.json"
-    },
-    {
       "path": "../../deprecated/foundation-compose/tsconfig.json"
     }
   ]

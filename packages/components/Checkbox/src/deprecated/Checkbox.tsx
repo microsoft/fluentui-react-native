@@ -12,8 +12,8 @@ import {
 } from '@fluentui-react-native/interactive-hooks';
 import type { IPressableProps } from '@fluentui-react-native/pressable';
 import { Text } from '@fluentui-react-native/text';
-import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import { backgroundColorTokens } from '@fluentui-react-native/tokens';
+import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/design/styling/tokens';
+import { backgroundColorTokens } from '@fluentui-react-native/design/styling/tokens';
 import type { ISlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';

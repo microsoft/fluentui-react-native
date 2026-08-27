@@ -3,7 +3,7 @@ import type { ColorValue, ViewStyle } from 'react-native';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { TextProps } from '@fluentui-react-native/text';
-import type { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
+import type { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/design/styling/tokens';
 
 export const radioGroupName = 'RadioGroup';
 

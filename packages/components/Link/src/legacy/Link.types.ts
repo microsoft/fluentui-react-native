@@ -3,7 +3,7 @@ import type * as React from 'react';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IFocusable, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps } from '@fluentui-react-native/text';
-import type { IForegroundColorTokens, FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type { IForegroundColorTokens, FontTokens, IBorderTokens } from '@fluentui-react-native/design/styling/tokens';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

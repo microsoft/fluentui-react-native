@@ -1,7 +1,12 @@
 import type { ButtonProps } from '@fluentui-react-native/button';
 import type { ContextualMenuItemProps, ContextualMenuProps, SubmenuProps } from '@fluentui-react-native/contextual-menu';
 import type { IconSourcesType } from '@fluentui-react-native/icon';
-import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type {
+  FontTokens,
+  IForegroundColorTokens,
+  IBackgroundColorTokens,
+  IBorderTokens,
+} from '@fluentui-react-native/design/styling/tokens';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
 import type { XmlProps } from 'react-native-svg';
 

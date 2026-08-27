@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 
 import type { Theme } from '@fluentui-react-native/design/theming';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { themedStyleSheet } from '@fluentui-react-native/design/styling/stylesheet';
 
 /**
  * The default dark mode iOS background color from the theme is black ('#000000'), which shadows are not visible against.

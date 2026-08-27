@@ -21,9 +21,6 @@
       "path": "../../../scripts/tsconfig.json"
     },
     {
-      "path": "../../utils/tokens/tsconfig.json"
-    },
-    {
       "path": "../../framework/use-styling/tsconfig.json"
     }
   ]

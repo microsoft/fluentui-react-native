@@ -1,8 +1,8 @@
 import { memoize } from '@fluentui-react-native/framework-base';
-import { getAliasTokens, getShadowTokens } from '@fluentui-react-native/theme-tokens';
+import { getAliasTokens, getShadowTokens } from '@fluentui-react-native/design/tokens/legacy';
 import type { AliasColorTokens, AppearanceOptions } from '@fluentui-react-native/design/theming';
 import type { ThemeShadowDefinition } from '@fluentui-react-native/design/theming';
-import { mapPipelineToTheme, mapPipelineToShadow } from '@fluentui-react-native/theming-utils';
+import { mapPipelineToTheme, mapPipelineToShadow } from '@fluentui-react-native/design/theming';
 
 function createiOSColorAliasTokensWorker(mode: AppearanceOptions): AliasColorTokens {
   const aliasTokens = getAliasTokens(mode);

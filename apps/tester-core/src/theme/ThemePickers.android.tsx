@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import type { Theme } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { themedStyleSheet } from '@fluentui-react-native/design/styling/stylesheet';
 import type { PickerProps } from '@react-native-picker/picker';
 import { Picker } from '@react-native-picker/picker';
 

@@ -1,5 +1,5 @@
 import type { TextProps } from '@fluentui-react-native/text';
-import type { FontTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type { FontTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/design/styling/tokens';
 
 export const menuGroupHeaderName = 'MenuGroupHeader';
 

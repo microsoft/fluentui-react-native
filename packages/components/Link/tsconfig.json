@@ -30,9 +30,6 @@
       "path": "../Text/tsconfig.json"
     },
     {
-      "path": "../../utils/tokens/tsconfig.json"
-    },
-    {
       "path": "../../framework/use-styling/tsconfig.json"
     },
     {
@@ -43,6 +40,9 @@
     },
     {
       "path": "../../deprecated/foundation-settings/tsconfig.json"
+    },
+    {
+      "path": "../../agentic/design/tsconfig.json"
     }
   ]
 }
