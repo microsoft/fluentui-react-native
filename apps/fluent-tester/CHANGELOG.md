@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/tester
 
+## 0.170.56
+
+### Patch Changes
+
+- 11a8381: Avoid CocoaPods Specs rate limits when installing FluentTester Apple dependencies.
+- 34bdf23: Version updates for security
+
 ## 0.170.55
 
 ### Patch Changes

@@ -1,5 +1,18 @@
 # Change Log - @uifabricshared/theming-ramp
 
+## 0.21.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- cfef63e: update package references to use consolidated package directly
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/design@0.3.2
+
 ## 0.21.8
 
 ### Patch Changes
