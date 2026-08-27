@@ -2701,7 +2701,7 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@testing-library/react-native": "catalog:0.81"
+    "@testing-library/react-native": "catalog:"
     "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
     react: "npm:19.1.4"
@@ -2709,7 +2709,7 @@ __metadata:
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.4"
-    test-renderer: "catalog:0.81"
+    test-renderer: "catalog:"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0 || ^0.81.0
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
@@ -2862,13 +2862,13 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
-    "@testing-library/react-native": "catalog:0.81"
+    "@testing-library/react-native": "catalog:"
     "@types/react": "npm:~19.1.4"
     react: "npm:19.1.4"
     react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-svg: "npm:^15.12.1"
-    test-renderer: "catalog:0.81"
+    test-renderer: "catalog:"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0 || ^0.81.0
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
@@ -4672,7 +4672,7 @@ __metadata:
     "@babel/runtime": "catalog:"
     "@fluentui-react-native/scripts": "workspace:*"
     "@microsoft/eslint-plugin-sdl": "npm:^1.1.0"
-    "@react-native/babel-preset": "catalog:0.81"
+    "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/align-deps": "catalog:"
     "@rnx-kit/babel-preset-metro-react-native": "catalog:"
     "@rnx-kit/config": "catalog:"
