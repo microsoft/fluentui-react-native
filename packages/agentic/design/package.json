@@ -101,6 +101,7 @@
     "react-test-renderer": "19.1.4"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
     "react": "18.2.0 || 19.0.0 || 19.1.4",
     "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
@@ -115,6 +116,9 @@
       "optional": true
     },
     "react-native-windows": {
+      "optional": true
+    },
+    "@office-iss/react-native-win32": {
       "optional": true
     }
   },
