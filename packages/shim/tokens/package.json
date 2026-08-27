@@ -1,13 +1,13 @@
 {
-  "name": "@fluentui-react-native/theming-utils",
-  "version": "0.27.8",
-  "description": "Utils for dealing with theming",
+  "name": "@fluentui-react-native/tokens",
+  "version": "0.24.8",
+  "description": "Token interface parts and helpers",
   "license": "MIT",
   "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/theming/theming-utils"
+    "directory": "packages/shim/tokens"
   },
   "type": "module",
   "main": "lib/index.js",
@@ -38,7 +38,6 @@
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
     "@react-native-community/cli-platform-ios": "^20.0.0",
-    "@react-native/babel-preset": "^0.81.0",
     "@react-native/metro-config": "^0.81.0",
     "@types/react": "~19.1.4",
     "react": "19.1.4",
@@ -68,20 +67,15 @@
       "optional": true
     }
   },
-  "furn": {
-    "jestPlatform": "windows"
-  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
       "capabilities": [
-        "babel-preset-react-native",
         "core",
         "core-android",
         "core-ios",
         "core-macos",
-        "core-windows",
-        "react"
+        "core-windows"
       ]
     },
     "extends": "@fluentui-react-native/scripts/kit-config"

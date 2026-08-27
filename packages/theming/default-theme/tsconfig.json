@@ -18,10 +18,10 @@
       "path": "../../../scripts/tsconfig.json"
     },
     {
-      "path": "../theme-tokens/tsconfig.json"
+      "path": "../../shim/theme-tokens/tsconfig.json"
     },
     {
-      "path": "../theming-utils/tsconfig.json"
+      "path": "../../shim/theming-utils/tsconfig.json"
     }
   ]
 }

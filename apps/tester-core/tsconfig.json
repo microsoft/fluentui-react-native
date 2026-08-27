@@ -137,13 +137,13 @@
       "path": "../../packages/components/Text/tsconfig.json"
     },
     {
-      "path": "../../packages/theming/theme-tokens/tsconfig.json"
+      "path": "../../packages/shim/theme-tokens/tsconfig.json"
     },
     {
-      "path": "../../packages/framework/theme/tsconfig.json"
+      "path": "../../packages/shim/theme/tsconfig.json"
     },
     {
-      "path": "../../packages/framework/themed-stylesheet/tsconfig.json"
+      "path": "../../packages/shim/themed-stylesheet/tsconfig.json"
     },
     {
       "path": "../../packages/experimental/Tooltip/tsconfig.json"

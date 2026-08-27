@@ -36,7 +36,7 @@
       "path": "../Text/tsconfig.json"
     },
     {
-      "path": "../../utils/tokens/tsconfig.json"
+      "path": "../../shim/tokens/tsconfig.json"
     },
     {
       "path": "../../framework/use-styling/tsconfig.json"

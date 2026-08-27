@@ -1,14 +1,14 @@
 {
-  "name": "@fluentui-react-native/themed-stylesheet",
-  "version": "1.10.2",
-  "description": "Helper for using react-native StyleSheets with themes",
+  "name": "@fluentui-react-native/theme",
+  "version": "0.14.2",
+  "description": "Experimental version of fluentui-react-native theme framework",
   "keywords": [],
   "license": "MIT",
   "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
-    "directory": "packages/framework/themed-stylesheet"
+    "directory": "packages/shim/theme"
   },
   "type": "module",
   "main": "./lib/index.js",
@@ -50,10 +50,18 @@
   "peerDependencies": {
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
     "react": "18.2.0 || 19.0.0 || 19.1.4",
-    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6"
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
   },
   "peerDependenciesMeta": {
     "@types/react": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
       "optional": true
     }
   },
@@ -67,7 +75,8 @@
         "babel-preset-react-native",
         "core",
         "core-android",
-        "core-ios"
+        "core-ios",
+        "react"
       ]
     },
     "extends": "@fluentui-react-native/scripts/kit-config"
