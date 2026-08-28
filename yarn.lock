@@ -3332,6 +3332,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/desktop-driver@workspace:*, @fluentui-react-native/desktop-driver@workspace:packages/agentic/desktop-driver":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/desktop-driver@workspace:packages/agentic/desktop-driver"
+  dependencies:
+    "@fluentui-react-native/scripts": "workspace:*"
+    webdriverio: "catalog:"
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/divider@workspace:*, @fluentui-react-native/divider@workspace:packages/components/Divider":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/divider@workspace:packages/components/Divider"
@@ -4910,6 +4919,7 @@ __metadata:
   resolution: "@fluentui-react-native/storybook-desktop@workspace:packages/agentic/storybook-desktop"
   dependencies:
     "@babel/core": "catalog:"
+    "@fluentui-react-native/desktop-driver": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/tools-react-native": "catalog:"

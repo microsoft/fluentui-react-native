@@ -6,7 +6,9 @@ Reusable CLI and configuration for Fluent UI React Native desktop test apps. Tog
 - the Win32 Paper desktop chrome and Callout-backed pop-outs;
 - a Fluent theme toolbar and preview decorator;
 - Metro and Babel configuration for the repo's pnpm-linked desktop hosts; and
-- the standalone Storybook channel and MCP server; and
+- the standalone Storybook channel and MCP server;
+- generated platform Story Manifests and authenticated runtime readiness; and
+- an embedded W3C Desktop Driver listener in the same server process; and
 - a Commander CLI and matching API for serving, native preparation, bundling, builds, launches, and smoke tests.
 
 The React Native implementation lives in the companion
@@ -73,6 +75,9 @@ The corresponding React Native Test App manifest supplies native identity:
   "displayName": "My Storybook",
   "macos": {
     "bundleIdentifier": "com.example.my-storybook"
+  },
+  "storybook": {
+    "testIDPrefix": "my-storybook"
   }
 }
 ```
@@ -85,8 +90,10 @@ import config from '../storybook.config.ts';
 export default config.getStorybookConfig();
 ```
 
-The returned `DesktopStorybookConfig` resolves package roots lazily and exposes app identity, display name, package
-metadata, resolved story packages, and generated story globs for CLI and test orchestration.
+The returned `DesktopStorybookConfig` resolves package roots lazily and exposes app identity, display name, the custom
+`storybook.testIDPrefix` field, package metadata, resolved story packages, and generated story globs for CLI and test
+orchestration. A config-level `testIDPrefix` remains available as an explicit override for consumers that do not store
+Storybook identity in `app.json`.
 
 ## CLI and API
 
@@ -96,6 +103,9 @@ platform option, or omit it to use `FURN_STORYBOOK_PLATFORM` and then the host d
 
 ```sh
 storybook-desktop server --win32
+storybook-desktop driver --windows
+storybook-desktop manifest --windows
+storybook-desktop instance --windows
 storybook-desktop prep --macos
 storybook-desktop bundle --windows
 storybook-desktop build --macos
@@ -116,6 +126,13 @@ alias for this subcommand. Consumer package scripts should forward arguments rat
 platform. See [`src/cli/README.md`](src/cli/README.md) for the recommended minimal scripts and development, E2E, CI,
 and agent workflows.
 
+`manifest` statically extracts the selected platform's stories and serializable
+`parameters.desktopDriver` plans, then writes exact-platform and portable-plan
+digests. `instance` prints the enlistment-specific channel, Metro, and driver
+identity. `driver` starts the Storybook channel/MCP server and the W3C Desktop
+Driver listener on separate loopback ports in one Node process. The initial
+target uses the deterministic fake host; native providers are a later stage.
+
 `createWindowsSmokeCommand` supplies a package-owned Fabric lifecycle that bundles the Windows catalog, prepares and
 builds the generated app, registers and launches its Debug package, starts the channel server and Metro, traverses every story, and stops only
 the processes it recorded. `createWin32SmokeCommand` bundles and launches the configured REX host, verifies the shared
@@ -132,7 +149,7 @@ smoke command when native process ownership needs platform-specific handling. Pr
 Win32 command factories over app-local lifecycle scripts.
 
 Each reusable smoke run derives a stable instance ID from the canonical consuming-project root. That ID suffixes the
-configured macOS bundle identifier and seeds separate Storybook and Metro ports, with occupied-port probing before
+configured macOS bundle identifier and seeds separate Storybook, Metro, and Desktop Driver ports, with occupied-port probing before
 launch. The CLI supplies a generated Xcode configuration containing `PRODUCT_BUNDLE_IDENTIFIER` and `RCT_METRO_PORT`;
 the Metro helper serializes the matching Storybook port into a generated runtime polyfill. This lets separate
 enlistments run the same app concurrently without selecting or stopping one another. Generated instance files live
@@ -163,11 +180,15 @@ import { createDesktopStorybookApp } from '@fluentui-react-native/storybook-desk
 
 import { view } from './storybook.requires';
 
-export default createDesktopStorybookApp(view, {
-  testIDPrefix: 'my-storybook',
-});
+export default createDesktopStorybookApp(view);
 ```
 
 Use `createDesktopStorybookPreview()` from the runtime package in the app's `preview.tsx`. Metro configuration is exposed
 from `@fluentui-react-native/storybook-desktop-runtime/metro`; Babel, server, config, and CLI helpers are exposed from the
 corresponding `@fluentui-react-native/storybook-desktop` subpaths.
+
+When launched through `driver` or the reusable smoke lifecycle, the generated
+runtime instance supplies the configured test-ID prefix, bridge nonce, target
+identity, and manifest digests. The runtime exposes stable app/story root
+markers and correlates each story selection or reset with a run ID and preview
+generation.

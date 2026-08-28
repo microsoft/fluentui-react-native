@@ -2,14 +2,71 @@
 
 ## Status
 
-Initial architecture plan. This document starts from the current checked-out
-tree and public platform/protocol documentation. It does not depend on work
-from other branches.
+Active architecture and implementation plan. This document starts from the
+current checked-out tree and public platform/protocol documentation. It does
+not depend on work from other branches.
 
 The effort starts with the platform-neutral protocol, fake host, Storybook
 orchestration, WebdriverIO authoring, and agent contracts. Windows and macOS
 native code is an explicit later stage, so native transport, signing, and
 distribution choices do not block the initial implementation.
+
+## Implementation status
+
+Updated 2026-08-28.
+
+### Stage 1 Phase 1: Complete
+
+- Added the public `@fluentui-react-native/desktop-driver` package and repository
+  project references.
+- Implemented W3C response/error routing, capability negotiation,
+  server-registered targets, one-session-per-target reservation, sessions,
+  timeouts, windows, elements, actions, screenshots, source, and unsupported
+  browser-command handling.
+- Implemented stable WebDriver element references, native liveness checks,
+  preview-scoped staleness, configurable click modes, input-state tracking,
+  action validation, command deadlines, and ownership-safe shutdown.
+- Added the deterministic fake host, typed low-level client, raw HTTP contract
+  coverage, and a WebdriverIO remote-session contract with no Appium service.
+- Portable fake-host coverage exercises element lookup, click, text entry,
+  actions, waits, screenshots, stale references, concurrent session rejection,
+  and shutdown during session creation.
+
+### Stage 1 Phase 2: Complete
+
+- Added exact-platform Story Manifest generation with statically extracted,
+  validated `parameters.desktopDriver` plans, relocatable source paths,
+  platform digests, and portable-plan digests.
+- Added a per-enlistment driver port and generated driver manifest containing
+  target identity, test-ID prefix, nonce, catalog digests, and service ports.
+- Added authenticated, bridge-only runtime hello/readiness/error events with
+  request/run correlation, explicit hello challenges, same-story reset, and
+  preview generation.
+- Added stable native app and story-root markers, native marker verification,
+  preview-only element invalidation, and a keyed per-run remount/error boundary.
+- Added Storybook selection, reset, manifest, current-story, and args extension
+  commands to the WebDriver session.
+- Added `storybook-desktop manifest`, `instance`, and `driver` flows. The
+  `driver` supervisor runs Metro plus separate Storybook and WebDriver listeners
+  while keeping both server protocols in one Node process.
+- Added an embedded-server integration test and verified the live Windows
+  Stage 1 supervisor exposes equivalent 136-story channel and driver manifests.
+- All macOS, Windows, and Win32 JavaScript bundles include the runtime bridge.
+
+### Remaining work
+
+No Phase 1 or Phase 2 deliverables are left incomplete.
+
+- Stage 1 Phase 3 remains: complete the sanctioned WebdriverIO authoring API,
+  assertions and matchers, representative component plans, full plan runner,
+  agent API, reports/artifacts, and MCP evaluation.
+- Stage 2 remains: implement Windows/Win32 and macOS native host providers and
+  replace the Stage 1 fake target in native runs.
+- Stage 3 remains: release hardening, native artifact ownership, security
+  review, and CI promotion.
+- On-device bridge execution is intentionally deferred to Stage 2; Phase 2 is
+  validated through the fake host, runtime/server contract tests, live
+  same-process services, and production bundles.
 
 ## Outcome
 
@@ -302,19 +359,19 @@ Return a standard capability only when its semantics are implemented.
 
 Map native failures to specific WebDriver errors:
 
-| Condition | WebDriver error |
-| --- | --- |
-| target cannot launch or attach | `session not created` |
-| missing/closed session | `invalid session id` |
-| missing/closed window | `no such window` |
-| lookup does not resolve | `no such element` |
-| retained native node is detached/replaced | `stale element reference` |
-| malformed locator | `invalid selector` |
-| disabled, unfocusable, or empty-bounds target | `element not interactable` |
-| another node owns the hit-tested point | `element click intercepted` |
-| capture backend fails | `unable to capture screen` |
-| deadline expires | `timeout` |
-| capability/property/operation is unavailable | `unsupported operation` |
+| Condition                                     | WebDriver error             |
+| --------------------------------------------- | --------------------------- |
+| target cannot launch or attach                | `session not created`       |
+| missing/closed session                        | `invalid session id`        |
+| missing/closed window                         | `no such window`            |
+| lookup does not resolve                       | `no such element`           |
+| retained native node is detached/replaced     | `stale element reference`   |
+| malformed locator                             | `invalid selector`          |
+| disabled, unfocusable, or empty-bounds target | `element not interactable`  |
+| another node owns the hit-tested point        | `element click intercepted` |
+| capture backend fails                         | `unable to capture screen`  |
+| deadline expires                              | `timeout`                   |
+| capability/property/operation is unavailable  | `unsupported operation`     |
 
 Error `data` may contain redacted native error codes, operation names, and
 artifact IDs. It must not expose environment variables, arbitrary paths, or
@@ -379,9 +436,7 @@ Native platforms expose different state sets. Absence must never become a
 false-shaped passing assertion.
 
 ```ts
-type SupportedValue<T> =
-  | { supported: true; value: T }
-  | { supported: false; reason: string };
+type SupportedValue<T> = { supported: true; value: T } | { supported: false; reason: string };
 ```
 
 Normalize, when supported:
@@ -606,13 +661,13 @@ Native platform providers are a separate second delivery stage:
 
 Evaluate at least these options against the same host contract:
 
-| Endpoint | Candidate | Purpose |
-| --- | --- | --- |
-| Windows/Win32 | long-lived PowerShell UIA worker with P/Invoke input | zero-published-binary baseline |
-| Windows/Win32 | C++/WinRT helper using UIA, SendInput, and WGC | highest-fidelity capture and typed native implementation |
-| macOS local | direct AX/CGEvent transport | fast developer attach loop, requires TCC |
-| macOS CI | first-party XCTest-based transport | preserve hosted-CI automation without Appium |
-| macOS | Swift helper using AX, CGEvent, and ScreenCaptureKit | stable native implementation if build/signing is funded |
+| Endpoint      | Candidate                                            | Purpose                                                  |
+| ------------- | ---------------------------------------------------- | -------------------------------------------------------- |
+| Windows/Win32 | long-lived PowerShell UIA worker with P/Invoke input | zero-published-binary baseline                           |
+| Windows/Win32 | C++/WinRT helper using UIA, SendInput, and WGC       | highest-fidelity capture and typed native implementation |
+| macOS local   | direct AX/CGEvent transport                          | fast developer attach loop, requires TCC                 |
+| macOS CI      | first-party XCTest-based transport                   | preserve hosted-CI automation without Appium             |
+| macOS         | Swift helper using AX, CGEvent, and ScreenCaptureKit | stable native implementation if build/signing is funded  |
 
 Before native implementation begins, the stage must answer:
 
@@ -672,9 +727,10 @@ type DesktopStorybookDriverManifest = {
 };
 ```
 
-This becomes the single source for the runtime, supervisor, server target, and
-smoke/test commands. In particular, it removes duplicate `testIDPrefix`
-configuration.
+This generated projection becomes the single source for the runtime,
+supervisor, server target, and smoke/test commands. Its `testIDPrefix`
+originates from the consuming app's custom `app.json` Storybook identity, so
+the app does not maintain a second identity file or duplicate runtime setting.
 
 Use two digests:
 
@@ -1050,7 +1106,7 @@ When implementation starts, conform to repository package rules:
 
 Stage 1 intentionally contains no Windows or macOS native code.
 
-#### Phase 1: W3C core and fake host
+#### Phase 1: W3C core and fake host - Complete
 
 Deliver:
 
@@ -1069,7 +1125,7 @@ Exit:
   host;
 - unsupported routes return explicit W3C errors.
 
-#### Phase 2: Storybook manifests, bridge, and supervisor
+#### Phase 2: Storybook manifests, bridge, and supervisor - Complete
 
 Deliver:
 
@@ -1088,7 +1144,7 @@ Exit:
 - exact-platform and portable-plan digests are checked;
 - no additional Node server process is required.
 
-#### Phase 3: WebdriverIO, authoring, and agent surface
+#### Phase 3: WebdriverIO, authoring, and agent surface - Not started
 
 Deliver:
 
@@ -1112,7 +1168,7 @@ Exit:
 
 Stage 2 implements the platform contracts proven in Stage 1.
 
-#### Phase 4: Windows and Win32 native provider
+#### Phase 4: Windows and Win32 native provider - Not started
 
 Deliver:
 
@@ -1136,7 +1192,7 @@ Exit:
 Land the first platform jobs as non-required until reliability and artifact
 quality are established.
 
-#### Phase 5: macOS native provider
+#### Phase 5: macOS native provider - Not started
 
 Deliver:
 
@@ -1158,7 +1214,7 @@ Exit:
 
 ### Stage 3: Release hardening
 
-#### Phase 6: Release readiness
+#### Phase 6: Release readiness - Not started
 
 Deliver:
 
@@ -1179,22 +1235,22 @@ Exit:
 
 ## Validation matrix
 
-| Capability | macOS | Windows Fabric | Win32 Paper |
-| --- | --- | --- | --- |
-| attach and preserve | bundle/window identity | process/AUMID/HWND | process/HWND |
-| launch and owned cleanup | provider-defined | packaged activation | prebuilt-host provider |
-| `testID` lookup | verify AX mapping | verify UIA mapping | current UIA smoke establishes baseline |
-| role/name/state | AX/XCTest | UIA | UIA |
-| pointer input | CGEvent/XCTest | SendInput | SendInput |
-| keyboard/Unicode | CGEvent/XCTest | SendInput | SendInput |
-| wheel/scroll | provider capability | SendInput/UIA | SendInput/UIA |
-| window screenshot | SCK/XCTest/provider | WGC/provider | WGC/provider |
-| element screenshot | crop with scale | crop with DPI | crop with DPI |
-| multiple windows | app windows | HWNDs | REX/Callout HWNDs |
-| story select/reset | channel bridge | channel bridge | channel bridge |
-| stale preview detection | generation + native liveness | generation + native liveness | generation + native liveness |
-| app/render error | bridge + process watch | bridge + process watch | bridge + process watch |
-| permission/desktop doctor | TCC/test authority | interactive session/UIPI | interactive session/UIPI |
+| Capability                | macOS                        | Windows Fabric               | Win32 Paper                            |
+| ------------------------- | ---------------------------- | ---------------------------- | -------------------------------------- |
+| attach and preserve       | bundle/window identity       | process/AUMID/HWND           | process/HWND                           |
+| launch and owned cleanup  | provider-defined             | packaged activation          | prebuilt-host provider                 |
+| `testID` lookup           | verify AX mapping            | verify UIA mapping           | current UIA smoke establishes baseline |
+| role/name/state           | AX/XCTest                    | UIA                          | UIA                                    |
+| pointer input             | CGEvent/XCTest               | SendInput                    | SendInput                              |
+| keyboard/Unicode          | CGEvent/XCTest               | SendInput                    | SendInput                              |
+| wheel/scroll              | provider capability          | SendInput/UIA                | SendInput/UIA                          |
+| window screenshot         | SCK/XCTest/provider          | WGC/provider                 | WGC/provider                           |
+| element screenshot        | crop with scale              | crop with DPI                | crop with DPI                          |
+| multiple windows          | app windows                  | HWNDs                        | REX/Callout HWNDs                      |
+| story select/reset        | channel bridge               | channel bridge               | channel bridge                         |
+| stale preview detection   | generation + native liveness | generation + native liveness | generation + native liveness           |
+| app/render error          | bridge + process watch       | bridge + process watch       | bridge + process watch                 |
+| permission/desktop doctor | TCC/test authority           | interactive session/UIPI     | interactive session/UIPI               |
 
 Also validate:
 
@@ -1245,20 +1301,20 @@ Pilot stories:
 
 ## Principal risks
 
-| Risk | Mitigation |
-| --- | --- |
-| platform state projection differs | capability-gated assertions; unsupported is not false |
-| native element identity changes on remount | session UUIDs, liveness checks, preview generations |
-| physical input is global and flaky | one input owner, foreground verification, serialized actions |
-| macOS authority differs locally and in CI | native-stage dual-transport evaluation and fail-fast doctor |
-| composited-window capture is backend-specific | direct capture gate before advertising screenshots |
-| native artifacts cannot be built by current publish pipeline | keep binaries off critical path until an owned pipeline exists |
-| Storybook channel is broadcast-oriented | nonce/instance/digest handshake plus native marker verification |
-| static test extraction misses dynamic values | literal schema and loud file/location errors |
-| authored DSL becomes too limited | add an imperative escape hatch only from demonstrated cases |
-| agent/server can control a real desktop | loopback, origin rejection, target registry, bounded APIs |
-| Storybook upgrades change channel behavior | isolate behind adapter and contract tests |
-| sanctioned WebdriverIO surface drifts from raw W3C behavior | run the same contract cases through raw HTTP and WebdriverIO |
+| Risk                                                         | Mitigation                                                      |
+| ------------------------------------------------------------ | --------------------------------------------------------------- |
+| platform state projection differs                            | capability-gated assertions; unsupported is not false           |
+| native element identity changes on remount                   | session UUIDs, liveness checks, preview generations             |
+| physical input is global and flaky                           | one input owner, foreground verification, serialized actions    |
+| macOS authority differs locally and in CI                    | native-stage dual-transport evaluation and fail-fast doctor     |
+| composited-window capture is backend-specific                | direct capture gate before advertising screenshots              |
+| native artifacts cannot be built by current publish pipeline | keep binaries off critical path until an owned pipeline exists  |
+| Storybook channel is broadcast-oriented                      | nonce/instance/digest handshake plus native marker verification |
+| static test extraction misses dynamic values                 | literal schema and loud file/location errors                    |
+| authored DSL becomes too limited                             | add an imperative escape hatch only from demonstrated cases     |
+| agent/server can control a real desktop                      | loopback, origin rejection, target registry, bounded APIs       |
+| Storybook upgrades change channel behavior                   | isolate behind adapter and contract tests                       |
+| sanctioned WebdriverIO surface drifts from raw W3C behavior  | run the same contract cases through raw HTTP and WebdriverIO    |
 
 ## Open questions
 
@@ -1267,7 +1323,7 @@ Pilot stories:
 2. **MCP:** Is typed API plus JSON CLI enough for the initial agent experience,
    or is a real MCP endpoint required for the first release?
 3. **CI promotion:** What duration and pass-rate threshold should move new
-    desktop-driver jobs from advisory to required?
+   desktop-driver jobs from advisory to required?
 
 ## Future considerations
 

@@ -13,6 +13,7 @@ type PlatformFlags = {
 };
 
 type ServerFlags = PlatformFlags & DesktopStorybookServerOptions;
+type ManifestFlags = PlatformFlags & { out?: string };
 
 export type CreateDesktopStorybookCommandOptions = DesktopStorybookCliOptions & {
   config?: DesktopStorybookConfig;
@@ -33,6 +34,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
       (config) =>
         new DesktopStorybookCli(config, {
           runner: options.runner,
+          createStoryManifest: options.createStoryManifest,
           fetch: options.fetch,
           output: options.output,
           isPortAvailable: options.isPortAvailable,
@@ -40,6 +42,9 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
     ));
 
   addServerCommand(program, getApi);
+  addDriverCommand(program, getApi);
+  addManifestCommand(program, getApi);
+  addInstanceCommand(program, getApi);
   addActionCommand(program, 'prep', 'Prepare native dependencies and generated projects.', getApi);
   addActionCommand(program, 'bundle', 'Generate stories and create the platform JavaScript bundle.', getApi);
   addActionCommand(program, 'run', 'Build and launch the native Storybook app.', getApi);
@@ -47,6 +52,37 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
   addActionCommand(program, 'smoke', 'Launch the app, render every story, and shut the app down.', getApi);
 
   return program;
+}
+
+function addDriverCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+  const command = program
+    .command('driver')
+    .description('Start the Storybook channel, MCP, and embedded Desktop Driver servers.')
+    .option('--host <host>', 'server host; defaults to STORYBOOK_WS_HOST or 127.0.0.1')
+    .option('--port <port>', 'Storybook channel port; defaults to the enlistment-specific port', parsePort);
+  addPlatformOptions(command);
+  command.action(async (flags: ServerFlags) => {
+    const api = await getApi();
+    await api.driver(resolvePlatform(flags, api), { host: flags.host, port: flags.port });
+  });
+}
+
+function addManifestCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+  const command = program.command('manifest').description('Generate the platform Story Manifest.').option('--out <path>', 'output path');
+  addPlatformOptions(command);
+  command.action(async (flags: ManifestFlags) => {
+    const api = await getApi();
+    await api.manifest(resolvePlatform(flags, api), flags.out);
+  });
+}
+
+function addInstanceCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+  const command = program.command('instance').description('Print the platform instance identity as JSON.');
+  addPlatformOptions(command);
+  command.action(async (flags: PlatformFlags) => {
+    const api = await getApi();
+    api.printInstance(resolvePlatform(flags, api));
+  });
 }
 
 export async function runDesktopStorybookCli(argv: readonly string[] = process.argv): Promise<void> {

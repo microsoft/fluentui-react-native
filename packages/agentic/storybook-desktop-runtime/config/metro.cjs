@@ -73,16 +73,43 @@ function writeRuntimeInstanceModule(projectRoot) {
   const runtimeModulePath = path.join(generatedDirectory, 'runtime-instance.js');
   const storybookPort = readPort(process.env.STORYBOOK_WS_PORT, 7007);
   const instanceId = process.env.FURN_STORYBOOK_INSTANCE_ID || 'default';
-  const content = `globalThis.__FURN_DESKTOP_STORYBOOK_INSTANCE__ = Object.freeze(${JSON.stringify({
+  const driverManifest = readDriverManifest(process.env.STORYBOOK_DRIVER_MANIFEST);
+  const runtimeInstance = {
     instanceId,
     storybookPort,
-  })});\n`;
+    ...(driverManifest
+      ? {
+          bridgeNonce: driverManifest.bridgeNonce,
+          endpoint: driverManifest.endpoint,
+          platformManifestDigest: driverManifest.platformManifestDigest,
+          portablePlanDigest: driverManifest.portablePlanDigest,
+          targetId: driverManifest.targetId,
+          testIDPrefix: driverManifest.testIDPrefix,
+        }
+      : {}),
+  };
+  const content = `globalThis.__FURN_DESKTOP_STORYBOOK_INSTANCE__ = Object.freeze(${JSON.stringify(runtimeInstance)});\n`;
 
   fs.mkdirSync(generatedDirectory, { recursive: true });
   if (!fs.existsSync(runtimeModulePath) || fs.readFileSync(runtimeModulePath, 'utf8') !== content) {
     fs.writeFileSync(runtimeModulePath, content);
   }
+
   return runtimeModulePath;
+}
+
+function readDriverManifest(manifestPath) {
+  if (!manifestPath) {
+    return undefined;
+  }
+  if (!fs.existsSync(manifestPath)) {
+    throw new Error(`Desktop Driver manifest does not exist at ${manifestPath}.`);
+  }
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  if (manifest.schemaVersion !== 1) {
+    throw new Error(`Unsupported Desktop Driver manifest schema "${manifest.schemaVersion}".`);
+  }
+  return manifest;
 }
 
 function readPort(value, fallback) {

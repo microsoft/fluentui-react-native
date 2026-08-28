@@ -8,14 +8,22 @@ import { createDesktopStorybookInstance, FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_
 import type { DesktopStorybookInstance } from '../config/instance.js';
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms.js';
 import type { Platforms } from '../config/platforms.js';
+import {
+  createDesktopStorybookDriverManifest,
+  createDesktopStoryManifest,
+  writeDesktopStorybookDriverManifest,
+  writeDesktopStoryManifest,
+} from '../driver/index.js';
 import { NodeDesktopCommandRunner } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
+  driverManifestPath?: string;
   macosXcconfigPath?: string;
 };
 
 export type DesktopStorybookCliOptions = {
+  createStoryManifest?: typeof createDesktopStoryManifest;
   runner?: DesktopCommandRunner;
   fetch?: typeof globalThis.fetch;
   output?: Pick<NodeJS.WriteStream, 'write'>;
@@ -32,6 +40,7 @@ export class DesktopStorybookCli {
   readonly instance: DesktopStorybookInstance;
 
   private readonly runner: DesktopCommandRunner;
+  private readonly createStoryManifest: typeof createDesktopStoryManifest;
   private readonly fetch: typeof globalThis.fetch;
   private readonly output: Pick<NodeJS.WriteStream, 'write'>;
   private readonly isPortAvailable: (port: number) => Promise<boolean>;
@@ -43,6 +52,7 @@ export class DesktopStorybookCli {
       bundleIdentifierPrefix: config.macosBundleIdentifier,
     });
     this.runner = options.runner ?? new NodeDesktopCommandRunner();
+    this.createStoryManifest = options.createStoryManifest ?? createDesktopStoryManifest;
     this.fetch = options.fetch ?? globalThis.fetch;
     this.output = options.output ?? process.stdout;
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
@@ -64,6 +74,68 @@ export class DesktopStorybookCli {
         },
       },
       platform,
+    );
+  }
+
+  async driver(platform: Platforms, options: DesktopStorybookServerOptions = {}): Promise<void> {
+    validateServerOptions(options);
+    validateDriverHost(options.host);
+    const command = this.config.getPlatformOptions(platform).server;
+    if (command === false || command === undefined) {
+      throw unsupportedAction('server', platform);
+    }
+    const storybookPort = options.port ?? (await findAvailablePort(this.instance.storybookPort, this.isPortAvailable));
+    const metroPort = await findAvailablePort(this.instance.metroPort, this.isPortAvailable, new Set([storybookPort]));
+    const driverPort = await findAvailablePort(this.instance.driverPort, this.isPortAvailable, new Set([storybookPort, metroPort]));
+    const resolvedInstance: ResolvedDesktopStorybookInstance = {
+      ...this.instance,
+      driverPort,
+      metroPort,
+      storybookPort,
+    };
+    resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance);
+    this.output.write(`Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}\n`);
+    const metro = this.runner.start(this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
+    try {
+      await this.executePlan(
+        {
+          ...command,
+          env: {
+            ...command.env,
+            ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
+          },
+        },
+        platform,
+        resolvedInstance,
+      );
+    } finally {
+      await metro.stop();
+    }
+  }
+
+  async manifest(platform: Platforms, outputPath?: string): Promise<string> {
+    const manifest = await this.createStoryManifest(this.config, platform);
+    const resolvedOutput = resolveFromProject(
+      this.config.projectRoot,
+      outputPath ?? path.join('storybook-desktop.generated', `story-manifest.${platform}.json`),
+    );
+    writeDesktopStoryManifest(manifest, resolvedOutput);
+    this.output.write(`${resolvedOutput}\n`);
+    return resolvedOutput;
+  }
+
+  printInstance(platform: Platforms): void {
+    this.output.write(
+      `${JSON.stringify(
+        {
+          ...this.instance,
+          endpoint: platform,
+          targetId: `${this.config.appName}-${platform}`.toLowerCase(),
+          testIDPrefix: this.config.testIDPrefix,
+        },
+        null,
+        2,
+      )}\n`,
     );
   }
 
@@ -180,21 +252,38 @@ export class DesktopStorybookCli {
     const metroPort = smoke.metroUrl
       ? portFromUrl(smoke.metroUrl)
       : await findAvailablePort(this.instance.metroPort, this.isPortAvailable, new Set([storybookPort]));
+    const driverPort = await findAvailablePort(this.instance.driverPort, this.isPortAvailable, new Set([storybookPort, metroPort]));
     const resolvedInstance: ResolvedDesktopStorybookInstance = {
       ...this.instance,
+      driverPort,
       storybookPort,
       metroPort,
     };
 
+    resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance);
     if (platform === 'macos') {
       resolvedInstance.macosXcconfigPath = writeMacOSInstanceConfig(this.config.projectRoot, resolvedInstance);
     }
     this.output.write(
-      `Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}` +
+      `Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}` +
         (platform === 'macos' ? `, bundle=${resolvedInstance.bundleIdentifier}` : '') +
         '\n',
     );
     return Object.freeze(resolvedInstance);
+  }
+
+  private async writeDriverManifest(platform: Platforms, instance: DesktopStorybookInstance): Promise<string> {
+    const storyManifest = await this.createStoryManifest(this.config, platform);
+    const outputPath = path.join(this.config.projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
+    const driverManifest = createDesktopStorybookDriverManifest({
+      bridgeNonce: readReusableBridgeNonce(outputPath, instance, storyManifest.platformManifestDigest),
+      config: this.config,
+      instance,
+      platform,
+      storyManifest,
+    });
+    writeDesktopStorybookDriverManifest(driverManifest, outputPath);
+    return outputPath;
   }
 
   private async renderEveryStory(serverUrl: string, settleMs: number): Promise<void> {
@@ -318,12 +407,36 @@ export class DesktopStorybookCli {
               [FURN_STORYBOOK_INSTANCE_ID]: instance.id,
               [FURN_STORYBOOK_BUNDLE_IDENTIFIER]: instance.bundleIdentifier,
               STORYBOOK_WS_PORT: String(instance.storybookPort),
+              STORYBOOK_DRIVER_PORT: String(instance.driverPort),
+              ...(instance.driverManifestPath ? { STORYBOOK_DRIVER_MANIFEST: instance.driverManifestPath } : {}),
               RCT_METRO_PORT: String(instance.metroPort),
               ...(instance.macosXcconfigPath ? { XCODE_XCCONFIG_FILE: instance.macosXcconfigPath } : {}),
             }
           : {}),
       },
     };
+  }
+}
+
+function readReusableBridgeNonce(
+  manifestPath: string,
+  instance: DesktopStorybookInstance,
+  platformManifestDigest: string,
+): string | undefined {
+  if (!fs.existsSync(manifestPath)) {
+    return undefined;
+  }
+  try {
+    const current = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Record<string, unknown>;
+    return current.instanceId === instance.id &&
+      current.storybookPort === instance.storybookPort &&
+      current.driverPort === instance.driverPort &&
+      current.platformManifestDigest === platformManifestDigest &&
+      typeof current.bridgeNonce === 'string'
+      ? current.bridgeNonce
+      : undefined;
+  } catch {
+    return undefined;
   }
 }
 
@@ -407,6 +520,12 @@ function validateServerOptions(options: DesktopStorybookServerOptions): void {
   }
   if (options.port !== undefined && (!Number.isInteger(options.port) || options.port < 1 || options.port > 65535)) {
     throw new RangeError(`Storybook server port must be an integer between 1 and 65535. Received "${options.port}".`);
+  }
+}
+
+function validateDriverHost(host: string | undefined): void {
+  if (host !== undefined && host !== '127.0.0.1' && host !== 'localhost') {
+    throw new TypeError('The embedded Desktop Driver supports only the 127.0.0.1 and localhost loopback hosts.');
   }
 }
 

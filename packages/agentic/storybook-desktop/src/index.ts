@@ -13,3 +13,16 @@ export type {
   PreparedDesktopCommand,
   RunningDesktopCommand,
 } from './cli/index.js';
+export {
+  createDesktopStorybookDriverManifest,
+  createDesktopStoryManifest,
+  StorybookChannelOrchestrator,
+  writeDesktopStorybookDriverManifest,
+  writeDesktopStoryManifest,
+} from './driver/index.js';
+export type {
+  CreateDesktopStorybookDriverManifestOptions,
+  DesktopStorybookDriverManifest,
+  StorybookChannelOrchestratorOptions,
+  StorybookChannelServer,
+} from './driver/index.js';

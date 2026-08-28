@@ -1,0 +1,67 @@
+{
+  "name": "@fluentui-react-native/desktop-driver",
+  "version": "0.1.0",
+  "description": "W3C WebDriver-compatible automation for React Native desktop applications",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic/desktop-driver"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "default": "./src/index.ts"
+    },
+    "./client": {
+      "types": "./lib/client/index.d.ts",
+      "import": "./lib/client/index.js",
+      "default": "./src/client/index.ts"
+    },
+    "./authoring": {
+      "types": "./lib/authoring/index.d.ts",
+      "import": "./lib/authoring/index.js",
+      "default": "./src/authoring/index.ts"
+    },
+    "./server": {
+      "types": "./lib/server/index.d.ts",
+      "import": "./lib/server/index.js",
+      "default": "./src/server/index.ts"
+    },
+    "./storybook": {
+      "types": "./lib/storybook.d.ts",
+      "import": "./lib/storybook.js",
+      "default": "./src/storybook.ts"
+    },
+    "./testing": {
+      "types": "./lib/testing/index.d.ts",
+      "import": "./lib/testing/index.js",
+      "default": "./src/testing/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "fluentui-scripts clean",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "fluentui-scripts jest"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*",
+    "webdriverio": "catalog:"
+  },
+  "furn": {
+    "jestPlatform": "react"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

@@ -1,8 +1,10 @@
 const { createRequire } = require('node:module');
+const fs = require('node:fs');
 const path = require('node:path');
 
-function startDesktopStorybookServer({
+async function startDesktopStorybookServer({
   configPath,
+  driverManifestPath = process.env.STORYBOOK_DRIVER_MANIFEST,
   host = process.env.STORYBOOK_WS_HOST || '127.0.0.1',
   port = Number(process.env.STORYBOOK_WS_PORT) || 7007,
   projectRoot = process.cwd(),
@@ -27,7 +29,73 @@ function startDesktopStorybookServer({
   WebSocket : ws://${host}:${port}/
   MCP       : http://${host}:${port}/mcp`);
 
-  return server;
+  let driver;
+  if (driverManifestPath) {
+    if (!fs.existsSync(driverManifestPath)) {
+      throw new Error(`Desktop Driver manifest does not exist at ${driverManifestPath}.`);
+    }
+    const driverManifest = JSON.parse(fs.readFileSync(driverManifestPath, 'utf8'));
+    const [{ createDesktopDriverServer }, { FakeDesktopHost }, { StorybookChannelOrchestrator }] = await Promise.all([
+      import('@fluentui-react-native/desktop-driver/server'),
+      import('@fluentui-react-native/desktop-driver/testing'),
+      import('../lib/driver/index.js'),
+    ]);
+    if (!server) {
+      throw new Error('Desktop Driver Storybook orchestration requires WebSockets.');
+    }
+    const serverUrl = loopbackUrl(host, port);
+    const channelOrchestrator = new StorybookChannelOrchestrator({
+      channelServer: server,
+      driverManifest,
+      serverUrl,
+    });
+    const targetHost = new FakeDesktopHost({
+      endpoint: driverManifest.endpoint,
+      platformName: driverManifest.endpoint === 'macos' ? 'macos' : 'windows',
+      storyRootTestId: `${driverManifest.testIDPrefix}-story-root`,
+    });
+    const setStoryMarker = (result) => {
+      targetHost.setElementName('story-root', JSON.stringify(result));
+      return result;
+    };
+    const orchestrator = {
+      getManifest: () => channelOrchestrator.getManifest(),
+      getCurrentStory: () => channelOrchestrator.getCurrentStory(),
+      selectStory: async (request) => setStoryMarker(await channelOrchestrator.selectStory(request)),
+      resetStory: async (request) => setStoryMarker(await channelOrchestrator.resetStory(request)),
+      updateArgs: (storyId, args) => channelOrchestrator.updateArgs(storyId, args),
+    };
+    driver = await createDesktopDriverServer({
+      host,
+      port: driverManifest.driverPort,
+      targets: [
+        {
+          endpoint: driverManifest.endpoint,
+          host: targetHost,
+          id: driverManifest.targetId,
+          platformName: driverManifest.endpoint === 'macos' ? 'macos' : 'windows',
+          renderer: driverManifest.renderer,
+          storyRootTestId: `${driverManifest.testIDPrefix}-story-root`,
+          storyOrchestrator: orchestrator,
+        },
+      ],
+    });
+    console.log(`  WebDriver: ${driver.url}/`);
+    const closeDriver = () => {
+      driver.close().finally(() => {
+        process.exit();
+      });
+    };
+    process.once('SIGINT', closeDriver);
+    process.once('SIGTERM', closeDriver);
+  }
+
+  return { channelServer: server, driver };
+}
+
+function loopbackUrl(host, port) {
+  // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- native Storybook services are loopback-only
+  return `http://${host}:${port}`;
 }
 
 module.exports = {

@@ -17,6 +17,7 @@ import type { Platforms } from './platforms.ts';
 const defaultStoryPatterns = ['src/**/*.stories.?(ts|tsx)'] as const;
 const defaultDeviceAddons = ['@storybook/addon-ondevice-controls', '@storybook/addon-ondevice-actions'] as const;
 const defaultMacOSBundleIdentifier = 'com.microsoft.ReactTestApp';
+const defaultTestIDPrefix = 'storybook-desktop';
 
 type JsonObject = Record<string, unknown>;
 
@@ -34,6 +35,9 @@ type AppManifest = JsonObject & {
     bundleIdentifier?: string;
   };
   name?: string;
+  storybook?: {
+    testIDPrefix?: string;
+  };
 };
 
 export type PlatformStorySettings = {
@@ -96,6 +100,12 @@ export type DesktopStorybookConfigOptions = StorySettings & {
    * @default controls and actions
    */
   deviceAddons?: readonly string[];
+
+  /**
+   * Prefix for native Storybook chrome and story-root automation identifiers.
+   * @default "storybook-desktop"
+   */
+  testIDPrefix?: string;
 
   /**
    * Native project, command, and smoke-test settings for each desktop platform.
@@ -175,6 +185,12 @@ export class DesktopStorybookConfig {
 
   get macosBundleIdentifier(): string {
     return this.appManifest.macos?.bundleIdentifier ?? defaultMacOSBundleIdentifier;
+  }
+
+  get testIDPrefix(): string {
+    const prefix = this.config.testIDPrefix ?? this.appManifest.storybook?.testIDPrefix ?? defaultTestIDPrefix;
+    validateTestIDPrefix(prefix);
+    return prefix;
   }
 
   resolvePackage(packageName: string): ResolvedPackage {
@@ -447,6 +463,9 @@ function normalizeConfig(config: DesktopStorybookConfigOptions, projectRoot: str
   validatePlatforms(config.platforms, 'config');
   validatePlatformSettings(config.platformSettings, 'config');
   validateDesktopPlatformOptions(config.platformOptions);
+  if (config.testIDPrefix !== undefined) {
+    validateTestIDPrefix(config.testIDPrefix);
+  }
 
   const seenPackages = new Set<string>();
   const normalizedStoryPackages: StoryPackageSpec[] = [];
@@ -477,6 +496,12 @@ function normalizeConfig(config: DesktopStorybookConfigOptions, projectRoot: str
     deviceAddons: config.deviceAddons ? [...config.deviceAddons] : undefined,
     platformOptions: normalizeDesktopPlatformOptions(config.platformOptions),
   };
+}
+
+function validateTestIDPrefix(prefix: string): void {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(prefix)) {
+    throw new TypeError('testIDPrefix must contain lowercase alphanumeric segments separated by hyphens.');
+  }
 }
 
 function normalizeDesktopPlatformOptions(platformOptions: DesktopPlatformOptionsMap | undefined): DesktopPlatformOptionsMap | undefined {

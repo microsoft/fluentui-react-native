@@ -30,6 +30,11 @@
       "import": "./lib/config/index.js",
       "default": "./src/config/index.ts"
     },
+    "./driver": {
+      "types": "./lib/driver/index.d.ts",
+      "import": "./lib/driver/index.js",
+      "default": "./src/driver/index.ts"
+    },
     "./cli": {
       "types": "./lib/cli/index.d.ts",
       "import": "./lib/cli/index.js",
@@ -46,6 +51,7 @@
     "test": "fluentui-scripts jest"
   },
   "dependencies": {
+    "@fluentui-react-native/desktop-driver": "workspace:*",
     "@rnx-kit/tools-react-native": "catalog:",
     "commander": "^14.0.2",
     "regexpu-core": "^6.3.1"

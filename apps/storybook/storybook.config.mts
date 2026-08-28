@@ -5,6 +5,8 @@ import {
   makeDesktopStorybookConfig,
 } from '@fluentui-react-native/storybook-desktop/config';
 
+import appManifest from './app.json' with { type: 'json' };
+
 const win32Host = {
   component: 'AgenticStorybook',
   windowTitle: 'Agentic Components Storybook (Win32)',
@@ -50,7 +52,7 @@ export default makeDesktopStorybookConfig({
       smoke: {
         command: createWin32SmokeCommand({
           ...win32Host,
-          testIDPrefix: 'agentic-storybook',
+          testIDPrefix: appManifest.storybook.testIDPrefix,
           requiredStoryIds: ['primitives-callout--default', 'primitives-callout--placement', 'primitives-callout--window-commands'],
         }),
       },

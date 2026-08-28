@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import path from 'node:path';
 
 import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
@@ -8,6 +9,13 @@ import { createDesktopStorybookCommand } from './createDesktopStorybookCommand';
 import { DesktopStorybookCli } from './DesktopStorybookCli';
 
 const storybookRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'windows' | 'win32') => ({
+  endpoint: platform,
+  entries: [],
+  platformManifestDigest: `${platform}-digest`,
+  portablePlanDigest: 'portable-digest',
+  schemaVersion: 1 as const,
+});
 
 class RecordingRunner implements DesktopCommandRunner {
   readonly foreground: PreparedDesktopCommand[] = [];
@@ -114,6 +122,7 @@ describe('DesktopStorybookCli', () => {
         },
       }),
       {
+        createStoryManifest: createEmptyStoryManifest,
         runner,
         fetch: jest.fn(async () => new Response('{}')),
         isPortAvailable: async () => true,
@@ -162,6 +171,7 @@ describe('DesktopStorybookCli', () => {
         },
       }),
       {
+        createStoryManifest: createEmptyStoryManifest,
         runner,
         fetch,
         isPortAvailable: async (port) => !blockedPorts.has(port),
@@ -194,6 +204,56 @@ describe('DesktopStorybookCli', () => {
 });
 
 describe('createDesktopStorybookCommand', () => {
+  test('starts the channel and embedded driver from one server command', async () => {
+    const runner = new RecordingRunner();
+    const program = createDesktopStorybookCommand({
+      config: makeConfig(),
+      createStoryManifest: createEmptyStoryManifest,
+      isPortAvailable: async () => true,
+      runner,
+    });
+    const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.win32.json');
+
+    try {
+      await program.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102']);
+
+      expect(runner.foreground[0]).toMatchObject({
+        args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
+        env: {
+          [FURN_STORYBOOK_PLATFORM]: 'win32',
+          STORYBOOK_DRIVER_MANIFEST: manifestPath,
+          STORYBOOK_DRIVER_PORT: expect.any(String),
+          STORYBOOK_WS_HOST: 'localhost',
+          STORYBOOK_WS_PORT: '7102',
+        },
+      });
+      expect(runner.background[0]).toMatchObject({
+        command: 'rnx-cli',
+        args: ['start', '--no-interactive', '--port', expect.any(String)],
+        env: { STORYBOOK_DRIVER_MANIFEST: manifestPath },
+      });
+      const firstManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Record<string, unknown>;
+      expect(firstManifest).toMatchObject({
+        endpoint: 'win32',
+        targetId: 'agenticstorybook-win32',
+        testIDPrefix: 'agentic-storybook',
+      });
+
+      const secondRunner = new RecordingRunner();
+      const secondProgram = createDesktopStorybookCommand({
+        config: makeConfig(),
+        createStoryManifest: createEmptyStoryManifest,
+        isPortAvailable: async () => true,
+        runner: secondRunner,
+      });
+      await secondProgram.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102']);
+      const secondManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Record<string, unknown>;
+      expect(secondManifest.bridgeNonce).toBe(firstManifest.bridgeNonce);
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+    }
+  });
+
   test('forwards server platform and connection options', async () => {
     const runner = new RecordingRunner();
     const program = createDesktopStorybookCommand({ config: makeConfig(), runner });

@@ -23,6 +23,8 @@ describe('createDesktopStorybookInstance', () => {
     expect(first.storybookPort).toBeLessThan(27_000);
     expect(first.metroPort).toBeGreaterThanOrEqual(27_000);
     expect(first.metroPort).toBeLessThan(37_000);
+    expect(first.driverPort).toBeGreaterThanOrEqual(37_000);
+    expect(first.driverPort).toBeLessThan(47_000);
   });
 
   test('disambiguates separate project roots', () => {
@@ -31,9 +33,10 @@ describe('createDesktopStorybookInstance', () => {
 
     expect(storybookInstance.id).not.toBe(packageInstance.id);
     expect(storybookInstance.bundleIdentifier).not.toBe(packageInstance.bundleIdentifier);
-    expect([storybookInstance.storybookPort, storybookInstance.metroPort]).not.toEqual([
+    expect([storybookInstance.storybookPort, storybookInstance.metroPort, storybookInstance.driverPort]).not.toEqual([
       packageInstance.storybookPort,
       packageInstance.metroPort,
+      packageInstance.driverPort,
     ]);
   });
 

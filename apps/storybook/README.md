@@ -197,6 +197,21 @@ yarn storybook-server --win32   # explicit Win32 catalog
 # WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.1:7007/mcp
 ```
 
+For the Stage 1 desktop-driver control plane, use the combined supervisor:
+
+```sh
+yarn storybook driver --windows
+yarn storybook manifest --windows
+yarn storybook instance --windows
+```
+
+`driver` runs the Storybook channel/MCP listener and a separate W3C WebDriver
+listener in the same Node process. `instance` reports the enlistment-specific
+ports and target identity. The generated manifest contains the exact platform
+catalog, relocatable source paths, serializable story-test plans, and platform
+and portable-plan digests. The current provider is a deterministic fake host;
+native Windows, Win32, and macOS providers are a later implementation stage.
+
 Run it alongside `yarn start` and `yarn storybook run --macos|--windows`. The on-device app connects to it automatically
 (`src/StorybookApp.tsx` creates the shared desktop Storybook app around the generated view).
 

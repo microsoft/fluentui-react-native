@@ -33,6 +33,7 @@ describe('DesktopStorybookConfig', () => {
     expect(config.appName).toBe('AgenticStorybook');
     expect(config.displayName).toBe('Agentic Components Storybook');
     expect(config.macosBundleIdentifier).toBe('com.microsoft.fluentui.agenticstorybook');
+    expect(config.testIDPrefix).toBe('agentic-storybook');
   });
 
   test('resolves package roots and default story patterns', () => {
