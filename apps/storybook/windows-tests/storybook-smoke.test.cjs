@@ -48,6 +48,46 @@ test('moves focus between Button Overview controls after a click', async () => {
   expect(await secondary.getAttribute('HasKeyboardFocus')).toBe('True');
 });
 
+const calloutPlacements = [
+  {
+    hint: 'topCenter',
+    isCorrect: (trigger, callout) => callout.y + callout.height <= trigger.y,
+  },
+  {
+    hint: 'rightCenter',
+    isCorrect: (trigger, callout) => callout.x >= trigger.x + trigger.width,
+  },
+  {
+    hint: 'bottomCenter',
+    isCorrect: (trigger, callout) => callout.y >= trigger.y + trigger.height,
+  },
+  {
+    hint: 'leftCenter',
+    isCorrect: (trigger, callout) => callout.x + callout.width <= trigger.x,
+  },
+];
+
+test.each(calloutPlacements)('anchors the Callout in the $hint direction', async ({ hint, isCorrect }) => {
+  await selectStory('components-button--default');
+  await selectStory('native-callout--placement');
+
+  const trigger = await app.findElementByTestID(`agentic-storybook-callout-placement-${hint}-trigger`);
+  await trigger.waitForDisplayed({ timeout: 30000 });
+  await trigger.click();
+
+  const callout = await app.findElementByTestID('agentic-storybook-callout-placement-content');
+  await callout.waitForDisplayed({ timeout: 30000 });
+
+  const [triggerLocation, triggerSize, calloutLocation, calloutSize] = await Promise.all([
+    trigger.getLocation(),
+    trigger.getSize(),
+    callout.getLocation(),
+    callout.getSize(),
+  ]);
+
+  expect(isCorrect({ ...triggerLocation, ...triggerSize }, { ...calloutLocation, ...calloutSize })).toBe(true);
+});
+
 test.each([
   ['components-tag--default', 'agentic-storybook-tag'],
   ['components-accordion--default', 'accordion-header'],

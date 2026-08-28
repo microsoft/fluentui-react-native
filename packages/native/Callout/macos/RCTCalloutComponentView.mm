@@ -19,6 +19,7 @@ using namespace facebook::react;
 
 static NSRectEdge RCTNSRectEdgeFromDirectionalHint(CalloutDirectionalHint hint)
 {
+  // CalloutView uses MinY for placement above the anchor and MaxY for placement below it.
   switch (hint) {
     case CalloutDirectionalHint::LeftTopEdge:
     case CalloutDirectionalHint::LeftCenter:
@@ -28,7 +29,7 @@ static NSRectEdge RCTNSRectEdgeFromDirectionalHint(CalloutDirectionalHint hint)
     case CalloutDirectionalHint::TopAutoEdge:
     case CalloutDirectionalHint::TopCenter:
     case CalloutDirectionalHint::TopRightEdge:
-      return NSRectEdgeMaxY;
+      return NSRectEdgeMinY;
     case CalloutDirectionalHint::RightTopEdge:
     case CalloutDirectionalHint::RightCenter:
     case CalloutDirectionalHint::RightBottomEdge:
@@ -37,7 +38,7 @@ static NSRectEdge RCTNSRectEdgeFromDirectionalHint(CalloutDirectionalHint hint)
     case CalloutDirectionalHint::BottomAutoEdge:
     case CalloutDirectionalHint::BottomCenter:
     case CalloutDirectionalHint::BottomRightEdge:
-      return NSRectEdgeMinY;
+      return NSRectEdgeMaxY;
   }
 }
 
