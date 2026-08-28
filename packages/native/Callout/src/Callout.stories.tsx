@@ -139,7 +139,7 @@ const PlacementExample = (props: CalloutProps) => {
 };
 
 const meta: Meta<typeof Callout> = {
-  title: 'Primitives/Callout',
+  title: 'Native/Callout',
   component: Callout,
   args: {
     accessibilityLabel: 'Callout example',

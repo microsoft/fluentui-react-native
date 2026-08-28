@@ -10,7 +10,7 @@
     "artifactName": "icon-default"
   },
   {
-    "storyId": "primitives-callout--default",
+    "storyId": "native-callout--default",
     "testId": "agentic-storybook-callout-trigger",
     "statusTestId": "agentic-storybook-callout-status",
     "artifactName": "callout-default"
