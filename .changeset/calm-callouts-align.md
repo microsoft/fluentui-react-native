@@ -2,4 +2,4 @@
 "@fluentui-react-native/callout": patch
 ---
 
-Fix macOS Callout top and bottom placement directions.
+Fix macOS placement directions and anchor Windows Callouts to the requested target edge.

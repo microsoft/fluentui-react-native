@@ -116,6 +116,7 @@ const PlacementExample = (props: CalloutProps) => {
             onPress={() => setSelectedIndex(index)}
             ref={targetRefs[index]}
             style={({ pressed }) => [styles.trigger, pressed && styles.triggerPressed]}
+            testID={`agentic-storybook-callout-placement-${hint}-trigger`}
           >
             <Text style={styles.triggerText}>{label}</Text>
           </Pressable>
@@ -128,7 +129,7 @@ const PlacementExample = (props: CalloutProps) => {
           onDismiss={() => setSelectedIndex(undefined)}
           target={targetRefs[selectedIndex]}
         >
-          <View style={styles.calloutContent} collapsable={false}>
+          <View accessible style={styles.calloutContent} collapsable={false} testID="agentic-storybook-callout-placement-content">
             <Text style={styles.heading}>{placements[selectedIndex].label}</Text>
             <Text style={styles.body}>Click outside the native window to dismiss it.</Text>
           </View>
@@ -213,6 +214,10 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   calloutContent: {
+    backgroundColor: '#ffffff',
+    borderColor: '#d1d1d1',
+    borderRadius: 8,
+    borderWidth: 1,
     padding: 16,
     width: 280,
   },
