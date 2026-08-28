@@ -1,5 +1,12 @@
 # @fluentui-react-native/design
 
+## 0.3.3
+
+### Patch Changes
+
+- 587845c: Enforce Flex mapping consistency and record reproducible x3 upstream drift.
+- a0ef3f4: Add sideEffects: false to package manifests
+
 ## 0.3.2
 
 ### Patch Changes

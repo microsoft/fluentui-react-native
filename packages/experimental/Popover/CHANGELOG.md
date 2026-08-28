@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/popover
 
+## 0.5.10
+
+### Patch Changes
+
+- @fluentui-react-native/framework@0.17.4
+
 ## 0.5.9
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
+## 0.29.4
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+
 ## 0.29.3
 
 ### Patch Changes

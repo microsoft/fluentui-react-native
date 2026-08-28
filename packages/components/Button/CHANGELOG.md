@@ -1,5 +1,19 @@
 # Change Log - @fluentui-react-native/button
 
+## 0.40.10
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+  - @fluentui-react-native/text@0.25.10
+  - @uifabricshared/foundation-compose@1.16.10
+  - @fluentui-react-native/experimental-shadow@0.7.10
+  - @fluentui-react-native/framework@0.17.4
+  - @fluentui-react-native/icon@0.22.10
+  - @fluentui-react-native/experimental-activity-indicator@0.11.10
+
 ## 0.40.9
 
 ### Patch Changes
