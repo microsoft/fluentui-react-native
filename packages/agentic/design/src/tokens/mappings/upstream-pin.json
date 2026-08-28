@@ -1,0 +1,25 @@
+{
+  "repository": "x3-design/fluent-design",
+  "commit": "d334acf5cbad813f2b7cd554da942b09a7ff8f10",
+  "verifiedDate": "2026-08-27",
+  "files": [
+    {
+      "id": "semanticCss",
+      "upstreamPath": "dev/web/flex-themes/css/semantic.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/semantic.css",
+      "blobSha": "6dac670ac83f3251898d40f07c0e90a2779a1915"
+    },
+    {
+      "id": "interactionFallbackCss",
+      "upstreamPath": "dev/web/flex-themes/css/interaction-fallback.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/interaction-fallback.css",
+      "blobSha": "c69ff3145f4f9b1228a694a3e7ba8b1a65d2c032"
+    },
+    {
+      "id": "mappings",
+      "upstreamPath": "dev/web/flex-tokens/mappings.json",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/mappings.json",
+      "blobSha": "4b917a8c93a18591741482136ee0df2b05bdce2f"
+    }
+  ]
+}

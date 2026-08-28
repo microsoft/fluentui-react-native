@@ -67,12 +67,15 @@
   },
   "scripts": {
     "build": "tsc -b",
+    "check:mappings": "node ./scripts/token-mappings/check-mappings.cjs",
     "clean": "fluentui-scripts clean",
     "format": "fluentui-scripts format",
+    "gen:upstream-drift": "node ./scripts/token-mappings/upstream-drift.cjs",
     "lint": "fluentui-scripts lint",
     "prebuild": "node ./scripts/codegen.cts",
     "test": "fluentui-scripts jest",
-    "update-snapshots": "fluentui-scripts jest -u"
+    "update-snapshots": "fluentui-scripts jest -u",
+    "update:upstream-snapshots": "node ./scripts/token-mappings/upstream-drift.cjs --update-snapshots"
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
@@ -85,6 +88,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@babel/parser": "^7.29.7",
     "@fluentui-react-native/design-tokens-macos": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
@@ -99,7 +103,8 @@
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",
     "react-native-windows": "^0.81.0",
-    "react-test-renderer": "19.1.4"
+    "react-test-renderer": "19.1.4",
+    "yaml": "^2.9.0"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
