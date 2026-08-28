@@ -38,6 +38,9 @@ jobs:
     name: Bundle Size PR
     runs-on: windows-latest
     timeout-minutes: 30
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
@@ -71,6 +74,22 @@ jobs:
 
       - name: Publish bundle size summary
         run: Get-Content apps\bundle-size\dist\bundle-size\report.md -Raw | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+
+      - name: Publish bundle size PR comment
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.user.login != 'dependabot[bot]' }}
+        env:
+          EXPECTED_HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPORT_PATH: apps/bundle-size/dist/bundle-size/report.md
+          SOURCE_RUN_ID: ${{ github.run_id }}
+        run: node apps/bundle-size/scripts/post-pr-comment.mjs
+
+      - name: Add pull request metadata
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: Set-Content apps\bundle-size\dist\bundle-size\pull-request-number.txt $env:PR_NUMBER -NoNewline
 
       - name: Upload bundle analysis
         if: ${{ always() }}

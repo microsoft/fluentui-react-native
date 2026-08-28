@@ -2621,6 +2621,7 @@ __metadata:
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
     "@rnx-kit/metro-serializer-esbuild": "catalog:"
     "@rnx-kit/tools-filesystem": "npm:^0.2.0"
+    "@rnx-kit/tools-formatting": "npm:^0.1.0"
     "@types/react": "npm:~19.1.4"
     metro: "npm:^0.83.8"
     oxc-resolver: "catalog:"

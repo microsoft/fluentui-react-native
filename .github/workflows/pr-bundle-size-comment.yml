@@ -1,0 +1,46 @@
+name: Bundle Size PR Comment
+
+on:
+  workflow_run:
+    workflows: [PR]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: bundle-size-comment-${{ github.event.workflow_run.head_repository.id }}-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: true
+
+jobs:
+  comment:
+    name: Publish trusted bundle-size report
+    if: ${{ github.event.workflow_run.event == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout trusted reporter
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+
+      - name: Download bundle-size report
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: bundle-size-analysis
+          path: bundle-size-analysis
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Publish bundle size PR comment
+        env:
+          EXPECTED_HEAD_REPOSITORY: ${{ github.event.workflow_run.head_repository.full_name }}
+          EXPECTED_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_NUMBER_PATH: bundle-size-analysis/pull-request-number.txt
+          REPORT_PATH: bundle-size-analysis/report.md
+          SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: node apps/bundle-size/scripts/post-pr-comment.mjs

@@ -6,6 +6,8 @@ import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
+import { formatBundleSizeTable } from './format.mjs';
+
 const workspaceRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const repositoryRoot = dirname(dirname(workspaceRoot));
 const yarnVersion = readJSONFileSync(join(repositoryRoot, 'package.json')).packageManager.split('@')[1];
@@ -193,21 +195,22 @@ function resultKey({ platform, scenario }) {
 
 function createComparison(measurement, baseline, baselineShell) {
   const isShell = measurement.scenario === 'shell';
+  const currentCost = isShell ? measurement.rawBytes : measurement.deltaBytes;
+  const currentModuleCost = isShell ? measurement.moduleCount : measurement.deltaModules;
   if (!baseline || (!isShell && !baselineShell)) {
-    return { status: 'new' };
+    return { status: 'new', currentCost, currentModuleCost };
   }
 
   const baselineCost = isShell ? baseline.rawBytes : baseline.rawBytes - baselineShell.rawBytes;
-  const currentCost = isShell ? measurement.rawBytes : measurement.deltaBytes;
   const baselineGzipCost = isShell ? baseline.gzipBytes : baseline.gzipBytes - baselineShell.gzipBytes;
   const currentGzipCost = isShell ? measurement.gzipBytes : measurement.deltaGzipBytes;
   const baselineModuleCost = isShell ? baseline.moduleCount : baseline.moduleCount - baselineShell.moduleCount;
-  const currentModuleCost = isShell ? measurement.moduleCount : measurement.deltaModules;
   const costDelta = currentCost - baselineCost;
   return {
     status: 'compared',
     baselineCost,
     currentCost,
+    currentModuleCost,
     costDelta,
     costPercent: baselineCost === 0 ? 0 : (costDelta / baselineCost) * 100,
     gzipCostDelta: currentGzipCost - baselineGzipCost,
@@ -239,7 +242,9 @@ function createMarkdownReport(results) {
   for (const result of results) {
     const { comparison } = result;
     if (comparison.status === 'new') {
-      lines.push(`| ${result.platform} | ${result.scenario} | New | ${(result.rawBytes / 1024).toFixed(1)} KiB | New | New | New | New |`);
+      lines.push(
+        `| ${result.platform} | ${result.scenario} | New | ${(comparison.currentCost / 1024).toFixed(1)} KiB | New | New | New | New |`,
+      );
     } else {
       lines.push(
         `| ${result.platform} | ${result.scenario} | ${(comparison.baselineCost / 1024).toFixed(1)} KiB | ${(comparison.currentCost / 1024).toFixed(1)} KiB | ${formatBytes(comparison.costDelta)} | ${formatPercent(comparison.costPercent)} | ${formatBytes(comparison.gzipCostDelta)} | ${comparison.moduleCostDelta >= 0 ? '+' : ''}${comparison.moduleCostDelta} |`,
@@ -317,6 +322,6 @@ const markdownReportPath = join(outputRoot, 'report.md');
 writeJSONFileSync(reportPath, report);
 writeFileSync(markdownReportPath, createMarkdownReport(results));
 
-console.table(results);
+process.stdout.write(`${formatBundleSizeTable(results)}\n`);
 process.stdout.write(`Results: ${reportPath}\n`);
 process.stdout.write(`Report: ${markdownReportPath}\n`);

@@ -10,6 +10,7 @@
     "directory": "packages/agentic/design"
   },
   "type": "module",
+  "sideEffects": false,
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",

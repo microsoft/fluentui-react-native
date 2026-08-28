@@ -23,7 +23,9 @@ Results, source maps, and esbuild metafiles are written to the ignored `dist/bun
 directory. The runner passes `--tree-shake true` and `--metafile <scenario>.meta.json` to
 `rnx-cli bundle`. The JSON report contains raw bytes, gzip bytes, contributing esbuild input
 counts, Metro source-map counts, workspace package contribution bytes, and shell deltas. Raw
-bytes are the primary comparison; gzip and module attribution are diagnostic signals.
+bytes are the primary comparison; gzip and module attribution are diagnostic signals. The
+terminal summary shows the shell's absolute cost and each package scenario's incremental module
+and byte cost above its platform shell, plus signed deltas from the baseline.
 
 The Babel configuration preserves ESM for the serializer while explicitly lowering JSX. The
 explicit JSX transform is required because the desktop React Native packages publish JSX in
@@ -40,8 +42,10 @@ yarn bundle-size:update
 ```
 
 Review the baseline diff together with the implementation that caused it. The PR workflow adds
-the Markdown comparison to its job summary and uploads the complete `dist/bundle-size` directory,
-including the esbuild metafiles, for investigation.
+the Markdown comparison to its job summary, updates one persistent PR comment, and uploads the
+complete `dist/bundle-size` directory, including the esbuild metafiles, for investigation.
+Same-repository PRs publish directly; fork and Dependabot reports are strictly validated and
+published by a separate trusted completion workflow.
 
 ## Adding a package or submodule
 
