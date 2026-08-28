@@ -16,22 +16,23 @@
 	return NSMakeRect(x, y, width, height);
 }
 
-// Collapse the directional hint options to the 4 NSRectEdge options
+// Collapse the directional hint options to the 4 NSRectEdge options.
+// CalloutView uses MinY for placement above the anchor and MaxY for placement below it.
 RCT_ENUM_CONVERTER(NSRectEdge, (@{
 	@"leftTopEdge": @(NSRectEdgeMinX),
 	@"leftCenter": @(NSRectEdgeMinX),
 	@"leftBottomEdge": @(NSRectEdgeMinX),
-	@"topLeftEdge": @(NSRectEdgeMaxY),
-	@"topAutoEdge": @(NSRectEdgeMaxY),
-	@"topCenter": @(NSRectEdgeMaxY),
-	@"topRightEdge": @(NSRectEdgeMaxY),
+	@"topLeftEdge": @(NSRectEdgeMinY),
+	@"topAutoEdge": @(NSRectEdgeMinY),
+	@"topCenter": @(NSRectEdgeMinY),
+	@"topRightEdge": @(NSRectEdgeMinY),
 	@"rightTopEdge": @(NSRectEdgeMaxX),
 	@"rightCenter": @(NSRectEdgeMaxX),
 	@"rightBottomEdge": @(NSRectEdgeMaxX),
-	@"bottomLeftEdge": @(NSRectEdgeMinY),
-	@"bottomAutoEdge": @(NSRectEdgeMinY),
-	@"bottomCenter": @(NSRectEdgeMinY),
-	@"bottomRightEdge": @(NSRectEdgeMinY),
+	@"bottomLeftEdge": @(NSRectEdgeMaxY),
+	@"bottomAutoEdge": @(NSRectEdgeMaxY),
+	@"bottomCenter": @(NSRectEdgeMaxY),
+	@"bottomRightEdge": @(NSRectEdgeMaxY),
 }), NSRectEdgeMaxY, integerValue);
 
 @end
