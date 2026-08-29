@@ -1,33 +1,55 @@
 import * as React from 'react';
 
-import { ThemeContext } from './context';
-
-import type { ThemeReference } from './themeReference';
+import { resolveThemeAppearance } from './appearance';
+import type { ResolvedThemeAppearance, ThemeAppearanceOptions, ThemeAppearanceSource } from './appearance.types';
+import { ThemeContext, ThemeSourceContext } from './context';
+import { platformAppearance } from './platformAppearance';
+import type { ThemeSource } from './themeSource';
 
 export interface ThemeProviderProps extends React.PropsWithChildren<Record<string, unknown>> {
   /**
-   * to set themes into the provider wrap them in a reference
+   * Theme source for this provider boundary.
    */
-  theme: ThemeReference;
+  theme: ThemeSource;
+  appearance?: ThemeAppearanceOptions;
+  appearanceSource?: ThemeAppearanceSource;
+  fallbackAppearance?: Partial<ResolvedThemeAppearance>;
 }
 
 export const ThemeProvider: React.FunctionComponent<ThemeProviderProps> = (props: React.PropsWithChildren<ThemeProviderProps>) => {
-  const { theme: themeRef, children } = props;
-  const [theme, setThemeState] = React.useState(() => themeRef.theme);
+  const {
+    theme: source,
+    appearance: appearanceOverride,
+    appearanceSource: appearanceSourceOverride,
+    fallbackAppearance: fallbackOverride,
+    children,
+  } = props;
+  const subscribeSource = React.useCallback(
+    (listener: () => void) => {
+      source.addOnThemeChanged(listener);
+      return () => source.removeOnThemeChanged(listener);
+    },
+    [source],
+  );
+  const getSourceSnapshot = React.useCallback(() => source.revision, [source]);
+  const sourceRevision = React.useSyncExternalStore(subscribeSource, getSourceSnapshot, getSourceSnapshot);
+  const appearanceSource = appearanceSourceOverride ?? source.appearanceSource ?? platformAppearance;
+  const subscribeAppearance = React.useCallback((listener: () => void) => appearanceSource.subscribe(listener), [appearanceSource]);
+  const getAppearanceSnapshot = React.useCallback(() => appearanceSource.getSnapshot(), [appearanceSource]);
+  const appearanceSnapshot = React.useSyncExternalStore(subscribeAppearance, getAppearanceSnapshot, getAppearanceSnapshot);
+  const appearance = resolveThemeAppearance({ ...source.appearanceOptions, ...appearanceOverride }, appearanceSnapshot, {
+    ...source.fallbackAppearance,
+    ...fallbackOverride,
+  });
+  const publishedLegacyTheme = source.kind === 'legacy' ? source.resolveTheme(appearance.resolved) : undefined;
+  const sourceContext = React.useMemo(
+    () => ({ source, sourceRevision, appearance, publishedLegacyTheme }),
+    [appearance, publishedLegacyTheme, source, sourceRevision],
+  );
 
-  React.useEffect(() => {
-    // If the theme passed by prop is different, we directly update state. We also add a listener to update state if there's a change within the passed theme.
-    setThemeState(themeRef.theme);
-
-    const onInvalidate = () => {
-      setThemeState(themeRef.theme);
-    };
-
-    themeRef.addOnThemeChanged(onInvalidate);
-    return () => {
-      themeRef.removeOnThemeChanged(onInvalidate);
-    };
-  }, [themeRef, setThemeState]);
-
-  return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeSourceContext.Provider value={sourceContext}>
+      <ThemeContext.Provider value={publishedLegacyTheme}>{children}</ThemeContext.Provider>
+    </ThemeSourceContext.Provider>
+  );
 };

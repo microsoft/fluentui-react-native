@@ -73,11 +73,11 @@ export const appleComponents = {
   },
 };
 
-function getBaseAppleThemeMacOSWorker(mode: AppearanceOptions): Theme {
+function getBaseAppleThemeMacOSWorker(mode: AppearanceOptions, highContrast: boolean): Theme {
   return {
-    colors: fallbackApplePalette(mode),
+    colors: fallbackApplePalette(mode, highContrast),
     typography: fallbackAppleTypography(),
-    shadows: fallbackAppleShadows(mode),
+    shadows: fallbackAppleShadows(mode, highContrast),
     spacing: appleSpacing(),
     components: appleComponents,
     host: { appearance: 'dynamic' },

@@ -1,4 +1,4 @@
-schemaVersion: 1
+schemaVersion: 2
 description: Authoring-source mappings used to populate the grouped React Native Flex
   token contract.
 target:
@@ -25,6 +25,7 @@ sources:
       Theme type.
     definition: '../../theming/types/Theme.types.ts'
     projection: './flex-from-theme.json'
+    reverseProjection: './theme-from-flex.json'
 rules:
   colorStates:
     shape: Each color has a required rest mapping and optional hover and pressed mappings.
@@ -70,6 +71,213 @@ rules:
     - Flex has finer/larger steps than Fluent in a few scales (e.g. radius 16/24/28,
       spacing 96); nearest emits the closest Fluent token — prefer the flex default
       where an exact step matters.
+reverse:
+  projection: ./theme-from-flex.json
+  interactionFallback: rest
+  transforms: {}
+  canonical:
+    colors.black:
+      source: color.fixedBlack
+      omitted:
+        - color.expressionAchromaticHeavy
+        - color.shadow
+      reason: The fixed invariant is the canonical legacy black value; expression and shadow roles may diverge in Flex themes.
+    colors.brandBackground2:
+      source: color.backgroundBrandSoft
+      omitted:
+        - color.backgroundBrandSubtle
+      reason: The soft brand background is the closest general-purpose match for legacy brandBackground2.
+    colors.brandStroke1:
+      source: color.strokeBrandLoud
+      omitted:
+        - color.strokeBrandSoft
+      reason: The loud brand stroke is the primary stroke role represented by legacy brandStroke1.
+    colors.dangerBorder1:
+      source: color.strokeDangerSoft
+      omitted:
+        - color.strokeDangerSubtle
+      reason: The soft danger stroke is the closest general-purpose match for legacy dangerBorder1.
+    colors.neutralBackground2:
+      source: color.surfaceNeutralNear
+      omitted:
+        - color.backgroundNeutralSubtle
+      reason: The near neutral surface preserves the legacy neutralBackground2 surface progression.
+    colors.neutralBackground2Hover:
+      source: color.hover.surfaceNeutralNear
+      omitted:
+        - color.hover.backgroundNeutralSubtle
+      reason: Use the interaction state paired with the canonical near neutral surface.
+    colors.neutralBackground2Pressed:
+      source: color.pressed.surfaceNeutralNear
+      omitted:
+        - color.pressed.backgroundNeutralSubtle
+      reason: Use the interaction state paired with the canonical near neutral surface.
+    colors.neutralBackgroundDisabled:
+      source: color.backgroundNeutralDisabled
+      omitted:
+        - color.backgroundNeutralHeavyDisabled
+        - color.backgroundNeutralSubtleDisabled
+      reason: The unqualified disabled background is the canonical general legacy disabled value.
+    colors.neutralBackgroundInverted:
+      source: color.backgroundNeutralHeavy
+      omitted:
+        - color.backgroundNeutralLoud
+      reason: The heavy neutral background is the strongest general inverted background role.
+    colors.neutralForegroundOnBrand:
+      source: color.foregroundNeutralOnloud
+      omitted:
+        - color.foregroundBrandOnloud
+        - color.foregroundDangerOnloud
+        - color.foregroundSuccessOnloud
+        - color.foregroundWarningOnloud
+        - color.strokeBrandOnloud
+        - color.strokeDangerOnloud
+        - color.strokeNeutralOnloud
+        - color.strokeSuccessOnloud
+        - color.strokeWarningOnloud
+      reason: The neutral on-loud foreground is the generic on-color legacy foreground role.
+    colors.neutralForegroundOnBrandHover:
+      source: color.hover.foregroundNeutralOnloud
+      omitted:
+        - color.hover.foregroundBrandOnloud
+        - color.hover.foregroundDangerOnloud
+        - color.hover.foregroundSuccessOnloud
+        - color.hover.foregroundWarningOnloud
+        - color.hover.strokeBrandOnloud
+        - color.hover.strokeDangerOnloud
+        - color.hover.strokeNeutralOnloud
+        - color.hover.strokeSuccessOnloud
+        - color.hover.strokeWarningOnloud
+      reason: Use the interaction state paired with the canonical neutral on-loud foreground.
+    colors.neutralForegroundOnBrandPressed:
+      source: color.pressed.foregroundNeutralOnloud
+      omitted:
+        - color.pressed.foregroundBrandOnloud
+        - color.pressed.foregroundDangerOnloud
+        - color.pressed.foregroundSuccessOnloud
+        - color.pressed.foregroundWarningOnloud
+        - color.pressed.strokeBrandOnloud
+        - color.pressed.strokeDangerOnloud
+        - color.pressed.strokeNeutralOnloud
+        - color.pressed.strokeSuccessOnloud
+        - color.pressed.strokeWarningOnloud
+      reason: Use the interaction state paired with the canonical neutral on-loud foreground.
+    colors.neutralStroke1:
+      source: color.strokeNeutralLoud
+      omitted:
+        - color.strokeNeutralSoft
+      reason: The loud neutral stroke is the primary stroke role represented by legacy neutralStroke1.
+    colors.neutralStroke1Hover:
+      source: color.hover.strokeNeutralLoud
+      omitted:
+        - color.hover.strokeNeutralSoft
+      reason: Use the interaction state paired with the canonical loud neutral stroke.
+    colors.neutralStroke1Pressed:
+      source: color.pressed.strokeNeutralLoud
+      omitted:
+        - color.pressed.strokeNeutralSoft
+      reason: Use the interaction state paired with the canonical loud neutral stroke.
+    colors.successBorder1:
+      source: color.strokeSuccessSoft
+      omitted:
+        - color.strokeSuccessSubtle
+      reason: The soft success stroke is the closest general-purpose match for legacy successBorder1.
+    colors.transparentBackground:
+      source: color.backgroundNeutralTransparent
+      omitted:
+        - color.backgroundBrandTransparent
+      reason: The neutral transparent background is the generic legacy transparent background role.
+    colors.transparentBackgroundHover:
+      source: color.hover.backgroundNeutralTransparent
+      omitted:
+        - color.hover.backgroundBrandTransparent
+      reason: Use the interaction state paired with the canonical neutral transparent background.
+    colors.transparentBackgroundPressed:
+      source: color.pressed.backgroundNeutralTransparent
+      omitted:
+        - color.pressed.backgroundBrandTransparent
+      reason: Use the interaction state paired with the canonical neutral transparent background.
+    colors.warningBorder1:
+      source: color.strokeWarningSoft
+      omitted:
+        - color.strokeWarningSubtle
+      reason: The soft warning stroke is the closest general-purpose match for legacy warningBorder1.
+    colors.white:
+      source: color.fixedWhite
+      omitted:
+        - color.expressionAchromaticSubtle
+      reason: The fixed invariant is the canonical legacy white value; expression roles may diverge in Flex themes.
+    components.Button.tokens.borderRadius:
+      source: borderRadius.base200
+      omitted:
+        - borderRadius.base300
+      reason: base200 is the small/shared Button radius and is canonical when base200 and base300 diverge.
+    typography.families.primary:
+      source: fontFamily.functional
+      omitted:
+        - fontFamily.content
+      reason: The functional family is the canonical UI family represented by legacy primary.
+    typography.sizes.caption:
+      source: fontSize.functionalCaption
+      omitted:
+        - fontSize.contentSubtext
+      reason: The functional caption is the direct UI role for the legacy caption size.
+    typography.sizes.header:
+      source: fontSize.functionalSubtitle
+      omitted:
+        - fontSize.contentH4
+        - fontSize.contentH5
+        - fontSize.contentParagraphLarge
+        - fontSize.functionalTitleSmall
+      reason: The functional subtitle uses the same Fluent size500 scale as the legacy header default.
+    typography.sizes.hero:
+      source: fontSize.functionalTitleMedium
+      omitted:
+        - fontSize.contentExpressiveMedium
+        - fontSize.contentExpressiveSmall
+        - fontSize.contentH1
+        - fontSize.contentH2
+        - fontSize.contentH3
+        - fontSize.functionalTitleLarge
+      reason: The functional title-medium role uses the same Fluent size700 scale as the legacy hero default.
+    typography.sizes.heroLarge:
+      source: fontSize.functionalPagetitle
+      omitted:
+        - fontSize.contentExpressiveLarge
+        - fontSize.contentStatement
+        - fontSize.functionalDisplay
+      reason: The functional page-title role uses the same Fluent size900 scale as the legacy heroLarge default.
+    typography.sizes.secondary:
+      source: fontSize.functionalBodySmall
+      omitted:
+        - fontSize.contentParagraphSmall
+      reason: The functional body-small role is the direct UI role for the legacy secondary size.
+    typography.sizes.subheader:
+      source: fontSize.functionalBodyLarge
+      omitted:
+        - fontSize.contentCode
+        - fontSize.contentParagraphMedium
+        - fontSize.contentSubheadline
+        - fontSize.contentTable
+      reason: The functional body-large role uses the same Fluent size400 scale as the legacy subheader default.
+    typography.weights.regular:
+      source: fontWeight.functionalRegular
+      omitted:
+        - fontWeight.contentEditorialRegular
+        - fontWeight.contentRegular
+      reason: The functional regular role is the canonical UI regular weight.
+    typography.weights.semiBold:
+      source: fontWeight.functionalSemibold
+      omitted:
+        - fontWeight.contentBold
+        - fontWeight.contentEditorialBold
+        - fontWeight.contentEditorialMedium
+        - fontWeight.contentEditorialSemibold
+        - fontWeight.contentMedium
+        - fontWeight.contentSemibold
+        - fontWeight.functionalBold
+        - fontWeight.functionalMedium
+      reason: The functional semibold role matches the legacy semibold role and Fluent semibold source.
 tokens:
   borderRadius.base100:
     generic: '--gnrc-border-radius-base-100'

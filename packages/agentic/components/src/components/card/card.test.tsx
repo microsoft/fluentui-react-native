@@ -5,7 +5,7 @@ import type { ViewStyle } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Button } from '../button/button';
 import { Card } from './card';
@@ -44,7 +44,7 @@ describe('Card', () => {
       },
       testID: 'card-root',
     });
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
 
     expect(getRootStyle(component)).toMatchObject({
       backgroundColor: colors.surfaceNeutralTranslucent,
@@ -76,7 +76,7 @@ describe('Card', () => {
       selected: true,
       testID: 'card-root',
     });
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
     const button = component.getByRole('button', { name: 'Open report' });
 
     expect(button.props.accessibilityState).toEqual({ disabled: false, selected: true });
@@ -152,7 +152,7 @@ describe('Card', () => {
     });
 
     expect(StyleSheet.flatten(component.getByTestId('nested-content').props.style)).toMatchObject({
-      borderRadius: useFlexTokens().borderRadius.base400,
+      borderRadius: defaultFlexTokens.borderRadius.base400,
     });
   });
 

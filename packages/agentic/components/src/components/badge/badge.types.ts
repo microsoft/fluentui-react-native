@@ -64,7 +64,7 @@ export type BadgeExposedViewProps = OwnedRootProps<ViewProps, 'accessibilityRole
 export type BadgeProps = BadgeStateProps & ComponentProps<BadgeSlots, BadgeExposedViewProps>;
 
 export type BadgeState = ComponentState<BadgeSlots> &
-  ThemeState & {
+  Omit<ThemeState, 'appearance'> & {
     appearance: BadgeAppearance;
     color: BadgeColor;
     size: BadgeSize;

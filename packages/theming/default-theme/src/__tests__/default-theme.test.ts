@@ -34,6 +34,28 @@ describe('createDefaultTheme test', () => {
     const defaultTheme = createDefaultTheme(themeOption).theme;
     expect(defaultTheme).toMatchSnapshot();
   });
+
+  it('resolves mutable compatibility options again after invalidation', () => {
+    const options: ThemeOptions = { appearance: 'light' };
+    const reference = createDefaultTheme(options);
+    expect(reference.theme.host.appearance).toBe('light');
+
+    options.appearance = 'dark';
+    reference.invalidate();
+
+    expect(reference.theme.host.appearance).toBe('dark');
+  });
+
+  it('resolves mutable default appearance options again after invalidation', () => {
+    const options: ThemeOptions = { defaultAppearance: 'light' };
+    const reference = createDefaultTheme(options);
+    expect(reference.theme.host.appearance).toBe('light');
+
+    options.defaultAppearance = 'dark';
+    reference.invalidate();
+
+    expect(reference.theme.host.appearance).toBe('dark');
+  });
 });
 
 describe('createColorAliasTokens test', () => {

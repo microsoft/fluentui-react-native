@@ -6,6 +6,7 @@ export type {
   CxxException,
   NativeColorRamps,
   NativeColorNames,
+  OfficeThemingConstants,
   OfficeThemingModule,
   IEventEmitter,
 } from './officeThemingModule';

@@ -5,7 +5,7 @@ import type { ViewStyle } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Checkbox } from './checkbox';
 
@@ -27,7 +27,7 @@ function getIndicatorStyle(component: RenderResult): ViewStyle {
 
 describe('Checkbox', () => {
   it('renders default checkbox accessibility and secondary styling', async () => {
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
     const component = await renderCheckbox({ label: 'Save drafts' });
     const root = getRoot(component);
 
@@ -145,7 +145,7 @@ describe('Checkbox', () => {
   });
 
   it('resolves hover and pressed feedback for label, indicator, and status colors', async () => {
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
     const component = await renderCheckbox({ label: 'Hover me' });
     const root = getRoot(component);
 
@@ -170,7 +170,7 @@ describe('Checkbox', () => {
   });
 
   it('renders the persistent dual-ring focus visual', async () => {
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
     const component = await renderCheckbox({ label: 'Focused' });
     const root = getRoot(component);
 
@@ -193,13 +193,13 @@ describe('Checkbox', () => {
     ['standard', 'base100'],
     ['circular', 'circular'],
   ] as const)('resolves the %s variant', async (variant, radiusKey) => {
-    const tokens = useFlexTokens().borderRadius;
+    const tokens = defaultFlexTokens.borderRadius;
     const component = await renderCheckbox({ label: variant, variant });
     expect(getIndicatorStyle(component).borderRadius).toBe(tokens[radiusKey]);
   });
 
   it.each(['unchecked', 'checked', 'indeterminate'] as const)('resolves %s status colors', async (status) => {
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
     const component = await renderCheckbox({ label: status, status });
     const label = component.getByTestId('checkbox-label');
     const indicator = component.getByTestId('checkbox-indicator');
@@ -227,7 +227,7 @@ describe('Checkbox', () => {
 
   it('applies disabled colors to the label and indicator', async () => {
     const component = await renderCheckbox({ disabled: true, label: 'Disabled', status: 'checked' });
-    const tokens = useFlexTokens().color;
+    const tokens = defaultFlexTokens.color;
 
     expect(StyleSheet.flatten(component.getByTestId('checkbox-indicator').props.style)).toMatchObject({
       backgroundColor: tokens.backgroundNeutralHeavyDisabled,

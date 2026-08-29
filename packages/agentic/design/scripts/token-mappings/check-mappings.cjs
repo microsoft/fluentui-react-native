@@ -13,7 +13,10 @@ const defaultPaths = {
   flexFromTheme: path.join(packageRoot, 'src/tokens/mappings/flex-from-theme.json'),
   flexTokenMap: path.join(packageRoot, 'src/tokens/mappings/flex-token-map.yaml'),
   flexTypes: path.join(packageRoot, 'src/tokens/flex.types.ts'),
+  themeFromFlex: path.join(packageRoot, 'src/tokens/mappings/theme-from-flex.json'),
 };
+
+const reverseTransforms = new Set(['identity', 'numberToPx']);
 
 function isRecord(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -80,6 +83,172 @@ function flattenTokenMappings(mapping, violations) {
   }
 
   return entries;
+}
+
+function sortedObject(entries) {
+  return Object.fromEntries([...entries].sort(([left], [right]) => left.localeCompare(right)));
+}
+
+function buildThemeProjection(mappingEntries) {
+  return sortedObject(
+    [...mappingEntries].filter(([, entry]) => entry.themeSource !== undefined).map(([tokenPath, entry]) => [tokenPath, entry.themeSource]),
+  );
+}
+
+function groupThemeSources(mappingEntries) {
+  const sources = new Map();
+  for (const [tokenPath, entry] of mappingEntries) {
+    if (entry.themeSource === undefined) {
+      continue;
+    }
+    const candidates = sources.get(entry.themeSource) ?? [];
+    candidates.push(tokenPath);
+    sources.set(entry.themeSource, candidates);
+  }
+  for (const candidates of sources.values()) {
+    candidates.sort();
+  }
+  return sources;
+}
+
+function getReverseConfiguration(mapping, violations) {
+  if (!isRecord(mapping.reverse)) {
+    addViolation(violations, 'schema', 'reverse', 'a reverse mapping configuration object', mapping.reverse);
+    return undefined;
+  }
+
+  const reverse = mapping.reverse;
+  if (reverse.projection !== './theme-from-flex.json') {
+    addViolation(violations, 'schema', 'reverse.projection', './theme-from-flex.json', reverse.projection);
+  }
+  if (reverse.interactionFallback !== 'rest') {
+    addViolation(violations, 'schema', 'reverse.interactionFallback', 'rest', reverse.interactionFallback);
+  }
+  if (!isRecord(reverse.canonical)) {
+    addViolation(violations, 'schema', 'reverse.canonical', 'an object of ambiguous Theme paths to canonical choices', reverse.canonical);
+  }
+  if (!isRecord(reverse.transforms)) {
+    addViolation(violations, 'schema', 'reverse.transforms', 'an object of Theme paths to transform names', reverse.transforms);
+  }
+
+  return {
+    canonical: isRecord(reverse.canonical) ? reverse.canonical : {},
+    interactionFallback: reverse.interactionFallback,
+    transforms: isRecord(reverse.transforms) ? reverse.transforms : {},
+  };
+}
+
+function validateCanonicalChoice(themePath, candidates, canonicalEntry, violations) {
+  if (!isRecord(canonicalEntry)) {
+    addViolation(violations, 'reverse-canonical', themePath, 'an object with source, omitted, and reason', canonicalEntry);
+    return undefined;
+  }
+
+  const { source, omitted, reason } = canonicalEntry;
+  if (typeof source !== 'string' || !candidates.includes(source)) {
+    addViolation(violations, 'reverse-canonical', themePath, `one of ${JSON.stringify(candidates)}`, source);
+  }
+  if (!Array.isArray(omitted) || omitted.some((entry) => typeof entry !== 'string')) {
+    addViolation(violations, 'reverse-omission', themePath, 'an array of omitted Flex paths', omitted);
+  } else {
+    const expectedOmissions = candidates.filter((candidate) => candidate !== source).sort();
+    const actualOmissions = [...omitted].sort();
+    if (JSON.stringify(actualOmissions) !== JSON.stringify(expectedOmissions)) {
+      addViolation(violations, 'reverse-omission', themePath, expectedOmissions, actualOmissions);
+    }
+  }
+  if (typeof reason !== 'string' || reason.trim().length === 0) {
+    addViolation(violations, 'reverse-omission', themePath, 'a non-empty omission reason', reason);
+  }
+
+  return typeof source === 'string' && candidates.includes(source) ? source : undefined;
+}
+
+function buildReverseProjection(mapping, mappingEntries, supportedTypePaths, violations) {
+  const reverse = getReverseConfiguration(mapping, violations);
+  if (!reverse) {
+    return {};
+  }
+
+  const candidatesByThemePath = groupThemeSources(mappingEntries);
+  const projectionEntries = [];
+
+  for (const [themePath, candidates] of [...candidatesByThemePath].sort(([left], [right]) => left.localeCompare(right))) {
+    const canonicalEntry = reverse.canonical[themePath];
+    let source;
+    if (candidates.length === 1) {
+      source = candidates[0];
+      if (canonicalEntry !== undefined) {
+        addViolation(violations, 'reverse-canonical', themePath, '<absent because the Theme path is unambiguous>', canonicalEntry);
+      }
+    } else if (canonicalEntry === undefined) {
+      addViolation(violations, 'reverse-canonical', themePath, 'an explicit canonical choice for the ambiguous Theme path', '<missing>');
+    } else {
+      source = validateCanonicalChoice(themePath, candidates, canonicalEntry, violations);
+    }
+
+    if (!source) {
+      continue;
+    }
+
+    const descriptor = { source };
+    const restPath = getInteractionRestPath(source);
+    if (restPath !== undefined && reverse.interactionFallback === 'rest') {
+      if (!supportedTypePaths.has(restPath)) {
+        addViolation(violations, 'reverse-fallback', themePath, 'a declared Flex rest path', restPath);
+      } else {
+        descriptor.fallback = restPath;
+      }
+    }
+
+    const transform = reverse.transforms[themePath];
+    if (transform !== undefined) {
+      if (typeof transform !== 'string' || !reverseTransforms.has(transform)) {
+        addViolation(violations, 'reverse-transform', themePath, [...reverseTransforms].sort(), transform);
+      } else if (transform !== 'identity') {
+        descriptor.transform = transform;
+      }
+    }
+
+    projectionEntries.push([themePath, descriptor]);
+  }
+
+  for (const [themePath, canonicalEntry] of Object.entries(reverse.canonical)) {
+    if (!candidatesByThemePath.has(themePath)) {
+      addViolation(violations, 'reverse-canonical', themePath, 'a Theme path present in the forward projection', canonicalEntry);
+    }
+  }
+
+  for (const [themePath, transform] of Object.entries(reverse.transforms)) {
+    if (!candidatesByThemePath.has(themePath)) {
+      addViolation(violations, 'reverse-transform', themePath, 'a Theme path present in the forward projection', transform);
+    }
+  }
+
+  return sortedObject(projectionEntries);
+}
+
+function createMappingProjections(mapping, supportedTypePaths) {
+  const violations = [];
+  if (!isRecord(mapping)) {
+    return {
+      mappingEntries: new Map(),
+      themeProjection: {},
+      reverseProjection: {},
+      violations: [{ rule: 'schema', path: '<root>', expected: 'a mapping object', actual: mapping }],
+    };
+  }
+  if (mapping.schemaVersion !== 2) {
+    addViolation(violations, 'schema', 'schemaVersion', 2, mapping.schemaVersion);
+  }
+
+  const mappingEntries = flattenTokenMappings(mapping, violations);
+  return {
+    mappingEntries,
+    themeProjection: buildThemeProjection(mappingEntries),
+    reverseProjection: buildReverseProjection(mapping, mappingEntries, supportedTypePaths, violations),
+    violations,
+  };
 }
 
 function getDeclaration(statement) {
@@ -285,6 +454,7 @@ function loadMappingInputs(paths = defaultPaths) {
   return {
     mapping: parseYaml(fs.readFileSync(paths.flexTokenMap, 'utf8')),
     nonFluentValues: readNonFluentValues(paths.defaultTokens, supportedTypePaths),
+    reverseProjection: JSON.parse(fs.readFileSync(paths.themeFromFlex, 'utf8')),
     supportedTypePaths,
     themeProjection: JSON.parse(fs.readFileSync(paths.flexFromTheme, 'utf8')),
     unsupportedTypePaths: readTypePaths(paths.flexTypes, 'UnsupportedFlexTokens'),
@@ -298,20 +468,23 @@ function getInteractionRestPath(tokenPath) {
 
 function validateMappingInputs(inputs) {
   const violations = [];
-  const { mapping, nonFluentValues, supportedTypePaths, themeProjection, unsupportedTypePaths } = inputs;
+  const { mapping, nonFluentValues, reverseProjection, supportedTypePaths, themeProjection, unsupportedTypePaths } = inputs;
 
   if (!isRecord(mapping)) {
     return [{ rule: 'schema', path: '<root>', expected: 'a mapping object', actual: mapping }];
-  }
-  if (mapping.schemaVersion !== 1) {
-    addViolation(violations, 'schema', 'schemaVersion', 1, mapping.schemaVersion);
   }
   if (!isRecord(themeProjection)) {
     addViolation(violations, 'theme-projection', '<root>', 'an object of FlexTokens paths to Theme paths', themeProjection);
     return violations;
   }
+  if (!isRecord(reverseProjection)) {
+    addViolation(violations, 'reverse-projection', '<root>', 'an object of Theme paths to Flex projection descriptors', reverseProjection);
+    return violations;
+  }
 
-  const mappingEntries = flattenTokenMappings(mapping, violations);
+  const generated = createMappingProjections(mapping, supportedTypePaths);
+  violations.push(...generated.violations);
+  const mappingEntries = generated.mappingEntries;
   const supportedEntries = new Map();
 
   for (const [tokenPath, entry] of mappingEntries) {
@@ -340,6 +513,19 @@ function validateMappingInputs(inputs) {
   for (const [tokenPath, source] of Object.entries(themeProjection)) {
     if (!supportedEntries.has(tokenPath)) {
       addViolation(violations, 'theme-projection', tokenPath, 'a supported YAML destination with the same furn-theme path', source);
+    }
+
+    for (const [themePath, expectedDescriptor] of Object.entries(generated.reverseProjection)) {
+      const actualDescriptor = reverseProjection[themePath];
+      if (JSON.stringify(actualDescriptor) !== JSON.stringify(expectedDescriptor)) {
+        addViolation(violations, 'reverse-projection', themePath, expectedDescriptor, actualDescriptor);
+      }
+    }
+
+    for (const themePath of Object.keys(reverseProjection)) {
+      if (!Object.hasOwn(generated.reverseProjection, themePath)) {
+        addViolation(violations, 'reverse-projection', themePath, '<absent>', reverseProjection[themePath]);
+      }
     }
   }
 
@@ -402,6 +588,29 @@ function assertMappingsConsistent(paths) {
   }
 }
 
+function serializeProjection(projection) {
+  return `${JSON.stringify(projection, null, 2)}\n`;
+}
+
+function writeFileIfChanged(filePath, contents) {
+  if (fs.existsSync(filePath) && fs.readFileSync(filePath, 'utf8') === contents) {
+    return;
+  }
+  fs.writeFileSync(filePath, contents);
+}
+
+function writeMappingProjections(paths = defaultPaths) {
+  const mapping = parseYaml(fs.readFileSync(paths.flexTokenMap, 'utf8'));
+  const supportedTypePaths = readTypePaths(paths.flexTypes, 'FlexTokens');
+  const generated = createMappingProjections(mapping, supportedTypePaths);
+  if (generated.violations.length > 0) {
+    throw new Error(formatMappingViolations(generated.violations));
+  }
+
+  writeFileIfChanged(paths.flexFromTheme, serializeProjection(generated.themeProjection));
+  writeFileIfChanged(paths.themeFromFlex, serializeProjection(generated.reverseProjection));
+}
+
 if (require.main === module) {
   try {
     assertMappingsConsistent();
@@ -415,7 +624,9 @@ if (require.main === module) {
 module.exports = {
   assertMappingsConsistent,
   checkMappings,
+  createMappingProjections,
   formatMappingViolations,
   loadMappingInputs,
   validateMappingInputs,
+  writeMappingProjections,
 };

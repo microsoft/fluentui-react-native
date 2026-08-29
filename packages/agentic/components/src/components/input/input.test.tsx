@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Input } from './input';
 
@@ -43,7 +43,7 @@ describe('Input', () => {
       <Input placeholder="Search" onChangeText={onChangeText} onFocus={onFocus} onHoverIn={onHoverIn} onPressIn={onPressIn} />,
     );
     const textbox = getTextbox(component);
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
 
     await fireEvent(textbox, 'hoverIn', {});
     await fireEvent(textbox, 'pressIn', {});
@@ -63,7 +63,7 @@ describe('Input', () => {
     const onChangeText = jest.fn();
     const component = await render(<Input disabled onChangeText={onChangeText} placeholder="Unavailable" />);
     const textbox = getTextbox(component);
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
 
     expect(textbox.props.editable).toBe(false);
     expect(textbox.props.accessibilityState).toMatchObject({ disabled: true, readOnly: false });
@@ -78,7 +78,7 @@ describe('Input', () => {
   it('marks read only inputs without disabling accessibility', async () => {
     const component = await render(<Input readOnly placeholder="Read only" value="Value" />);
     const textbox = getTextbox(component);
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
 
     expect(textbox.props.editable).toBe(false);
     expect(textbox.props.accessibilityState).toMatchObject({ disabled: false, readOnly: true });
@@ -105,7 +105,7 @@ describe('Input', () => {
         size="large"
       />,
     );
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
 
     expect(flattenStyle(component.getByTestId('icon-start').props.style)).toMatchObject({
       color: colors.foregroundNeutralPrimary,
@@ -117,7 +117,7 @@ describe('Input', () => {
   });
 
   it('resolves the size axis', async () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const cases = [
       {
         fontSize: Number(tokens.fontSize.functionalBodySmall),

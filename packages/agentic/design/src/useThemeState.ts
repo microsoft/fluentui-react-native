@@ -1,11 +1,10 @@
 import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
-import { useTheme } from './theming/context';
-import { isHighContrast } from './theming/platformUtils';
-import type { Theme } from './theming/types/Theme.types';
-import { defaultFlexTokens } from './tokens/defaultTokens';
+import { defaultThemeAppearanceState } from './theming/appearance';
+import type { ResolvedThemeAppearance, ThemeAppearanceState } from './theming/appearance.types';
+import { useThemeBoundary } from './theming/context';
+import { defaultThemeState, getThemeState } from './theming/themeRuntime';
 import type { FlexTokens } from './tokens/flex.types';
-import { flexTokensFromTheme } from './tokens/flexTokensFromTheme';
 
 export type ThemeStyleSheet = Record<string, ViewStyle | TextStyle | ImageStyle>;
 
@@ -15,7 +14,11 @@ export type ThemeState = {
    */
   readonly tokens: FlexTokens;
   /**
-   * Whether the system is in high contrast mode
+   * Structured appearance values used to resolve this theme state.
+   */
+  readonly appearance: Readonly<ResolvedThemeAppearance>;
+  /**
+   * @deprecated Use appearance.contrast.
    */
   readonly highContrast: boolean;
   /**
@@ -33,43 +36,23 @@ export type ThemeState = {
  * Theme state should be consistent on object identity until a theme change or system appearance change occurs. Each new
  * theme state must own a new themeStyles registry so cached style sheets cannot leak across themes.
  */
-const defaultThemeState: ThemeState = {
-  tokens: defaultFlexTokens,
-  highContrast: false,
-  themeStyles: {},
-};
-
-const themeStateKey = Symbol('ThemeState');
-
-type ThemeWithState = Theme & {
-  [themeStateKey]?: ThemeState;
-};
-
-function getThemeState(theme: Theme): ThemeState {
-  const themeWithState = theme as ThemeWithState;
-  const cachedState = themeWithState[themeStateKey];
-  if (cachedState) {
-    return cachedState;
-  }
-
-  const state: ThemeState = {
-    tokens: flexTokensFromTheme(theme),
-    highContrast: theme.host.appearance === 'highContrast' || isHighContrast(theme),
-    themeStyles: {},
-  };
-  Object.defineProperty(theme, themeStateKey, { value: state });
-  return state;
-}
-
 /**
- * Access the current theme state. A state created from context is cached on its
- * Theme object so every consumer of that Theme shares the same state identity.
+ * Access the current theme state. Every consumer of the same source revision
+ * and resolved appearance shares one state identity.
  *
  * @returns The current theme state, including flex tokens, high contrast mode status, and shared theme style sheets.
  */
 export function useThemeState(): ThemeState {
-  const theme = useTheme();
-  return theme ? getThemeState(theme) : defaultThemeState;
+  const boundary = useThemeBoundary();
+  return boundary ? getThemeState(boundary.source, boundary.appearance.resolved) : defaultThemeState;
+}
+
+/**
+ * Access both the requested appearance and its concrete resolution.
+ */
+export function useThemeAppearance(): Readonly<ThemeAppearanceState> {
+  const boundary = useThemeBoundary();
+  return boundary?.appearance ?? defaultThemeAppearanceState;
 }
 
 /**

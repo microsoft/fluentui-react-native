@@ -4,7 +4,7 @@ import type { ViewStyle } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Badge } from './badge';
 
@@ -30,7 +30,7 @@ describe('Badge', () => {
       content: 'Badge',
       leadingIcon: { ...badgeIcon, testID: 'leading-icon' },
     });
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
 
     expect(getRoot(component).props.accessible).toBe(true);
     expect(getRootStyle(component)).toMatchObject({
@@ -109,7 +109,7 @@ describe('Badge', () => {
     ['outline', 'danger', 'backgroundNeutralTransparent', 'foregroundDangerPrimary', 'strokeDangerLoud', 1],
     ['outline', 'warning', 'backgroundNeutralTransparent', 'foregroundWarningPrimary', 'strokeWarningLoud', 1],
   ] as const)('resolves %s %s colors', async (appearance, color, backgroundToken, foregroundToken, borderToken, borderWidth) => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const component = await renderBadge({
       accessibilityLabel: `${appearance} ${color} badge`,
       appearance,
@@ -130,7 +130,7 @@ describe('Badge', () => {
     ['small', 16, 12, 'componentBase100', 'base100'],
     ['medium', 20, 16, 'componentBase150', 'base200'],
   ] as const)('resolves the %s size and shape', async (size, height, iconSize, paddingToken, roundedRadiusToken) => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const rounded = await renderBadge({
       accessibilityLabel: `${size} badge`,
       content: size,

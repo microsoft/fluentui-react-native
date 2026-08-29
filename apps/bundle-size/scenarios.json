@@ -13,6 +13,32 @@
       "name": "components-catalog",
       "module": "@fluentui-react-native/components",
       "namespace": true
+    },
+    {
+      "name": "design-theme-state",
+      "module": "@fluentui-react-native/design",
+      "exports": ["FlexThemeReference", "ThemeProvider", "useThemeState"],
+      "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/"]
+    },
+    {
+      "name": "design-theme-state-legacy-source",
+      "imports": [
+        {
+          "module": "@fluentui-react-native/design",
+          "exports": ["ThemeProvider", "useThemeState"]
+        },
+        {
+          "module": "@fluentui-react-native/design/theming/legacy-source",
+          "exports": ["ThemeReference"]
+        }
+      ],
+      "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/"]
+    },
+    {
+      "name": "design-legacy-theme-from-flex",
+      "module": "@fluentui-react-native/design/theming",
+      "exports": ["FlexThemeReference", "ThemeProvider", "useTheme"],
+      "requiredInputPatterns": ["/theming/compat/themeFromFlexTokens.", "/tokens/legacy/"]
     }
   ]
 }

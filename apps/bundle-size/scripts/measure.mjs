@@ -41,17 +41,24 @@ function parseArgs(args) {
 
 function createEntry(scenario) {
   const lines = [];
+  const targets = [];
 
-  if (scenario.module) {
-    if (scenario.namespace) {
-      lines.push(`import * as bundleSizeTarget from ${JSON.stringify(scenario.module)};`);
-      lines.push('globalThis.__bundleSizeTarget = bundleSizeTarget;');
-    } else if (scenario.exports?.length) {
-      lines.push(`import { ${scenario.exports.join(', ')} } from ${JSON.stringify(scenario.module)};`);
-      lines.push(`globalThis.__bundleSizeTarget = [${scenario.exports.join(', ')}];`);
+  const imports = scenario.imports ?? (scenario.module ? [scenario] : []);
+  for (const [index, moduleImport] of imports.entries()) {
+    if (moduleImport.namespace) {
+      const target = `bundleSizeTarget${index}`;
+      lines.push(`import * as ${target} from ${JSON.stringify(moduleImport.module)};`);
+      targets.push(target);
+    } else if (moduleImport.exports?.length) {
+      const specifiers = moduleImport.exports.map((name) => `${name} as bundleSizeTarget${index}_${name}`);
+      lines.push(`import { ${specifiers.join(', ')} } from ${JSON.stringify(moduleImport.module)};`);
+      targets.push(...moduleImport.exports.map((name) => `bundleSizeTarget${index}_${name}`));
     } else {
-      throw new Error(`Scenario "${scenario.name}" must set "namespace" or "exports"`);
+      throw new Error(`Scenario "${scenario.name}" imports must set "namespace" or "exports"`);
     }
+  }
+  if (targets.length) {
+    lines.push(`globalThis.__bundleSizeTarget = [${targets.join(', ')}];`);
   }
 
   const bootstrapPath = relative(entryRoot, join(workspaceRoot, 'src', 'bootstrap.js')).replaceAll('\\', '/');
@@ -158,6 +165,18 @@ function runBundle(platform, scenario, resetCache) {
   const bundle = readFileSync(bundlePath);
   const sourceMap = readJSONFileSync(sourceMapPath);
   const metafile = readJSONFileSync(metafilePath);
+  const inputPaths = Object.keys(metafile.inputs).map((source) => source.replaceAll('\\', '/'));
+  for (const pattern of scenario.forbiddenInputPatterns ?? []) {
+    const match = inputPaths.find((source) => source.includes(pattern));
+    if (match) {
+      throw new Error(`Scenario "${scenario.name}" unexpectedly includes "${match}" (forbidden by "${pattern}")`);
+    }
+  }
+  for (const pattern of scenario.requiredInputPatterns ?? []) {
+    if (!inputPaths.some((source) => source.includes(pattern))) {
+      throw new Error(`Scenario "${scenario.name}" does not include a module matching required pattern "${pattern}"`);
+    }
+  }
   const contributions = getWorkspaceContributions(metafile);
 
   return {

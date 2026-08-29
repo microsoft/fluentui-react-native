@@ -7,12 +7,22 @@
 // Unfortunately, native changes take a long time to roundtrip,
 // so as a workaround we store a copy of that information instead to last the
 // entire lifetime of the instance.
-let currentHostThemeSetting: string = '';
+export interface CurrentHostThemeState {
+  hostThemeSetting: string;
+  colorScheme?: 'light' | 'dark';
+  isHighContrast?: boolean;
+}
 
-export const getCurrentHostThemeSetting = () => {
-  return currentHostThemeSetting;
+let currentHostThemeState: CurrentHostThemeState = { hostThemeSetting: '' };
+
+export const getCurrentHostThemeSetting = () => currentHostThemeState.hostThemeSetting;
+
+export const getCurrentHostThemeState = () => currentHostThemeState;
+
+export const setCurrentHostThemeSetting = (hostThemeSetting: string) => {
+  currentHostThemeState = { hostThemeSetting };
 };
 
-export const setCurrentHostThemeSetting = (newHostThemeSetting: string) => {
-  currentHostThemeSetting = newHostThemeSetting;
+export const setCurrentHostThemeState = (state: CurrentHostThemeState) => {
+  currentHostThemeState = state;
 };

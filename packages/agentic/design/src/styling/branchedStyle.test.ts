@@ -1,6 +1,7 @@
 import type { ViewStyle } from 'react-native';
 
-import { useFlexTokens } from '../tokens/useFlexTokens';
+import { defaultResolvedThemeAppearance } from '../theming/appearance';
+import { defaultFlexTokens } from '../tokens/defaultTokens';
 import type { ThemeState } from '../useThemeState';
 
 import {
@@ -38,7 +39,8 @@ const definition: StyleDefinition<ViewStyle, typeof stateLevels> = {
 
 function createThemeState(): ThemeState {
   return {
-    tokens: useFlexTokens(),
+    tokens: defaultFlexTokens,
+    appearance: defaultResolvedThemeAppearance,
     highContrast: false,
     themeStyles: {},
   };
