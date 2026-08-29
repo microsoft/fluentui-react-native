@@ -5,6 +5,11 @@ These instructions apply to `packages/agentic/components/src/components` and its
 Higher-order components own design-token styling, interaction state, layout, and component-level accessibility. Use
 `components/button` as the canonical implementation.
 
+Draft and review the component's React Native contract from the pinned
+`flex-components:<name>` reference before implementation. Ratify the contract
+after types, tests, stories, and platform evidence agree; never mechanically
+promote a web-authored spec.
+
 For package-wide dependency or extraction reviews, also read
 [`packages/agentic/components/src/AGENTS.md`](../AGENTS.md) and the
 [agentic-component-optimization](../../../../../.github/skills/agentic-component-optimization/SKILL.md) skill. A focused
@@ -45,6 +50,7 @@ audit.
 
 ## Focused references
 
+- [Flex source adaptation](../../../../../.github/skills/agentic-component-authoring/references/spec-source-adaptation.md)
 - [Types and slots](../../../../../.github/skills/agentic-component-authoring/references/types-and-slots.md)
 - [State and accessibility](../../../../../.github/skills/agentic-component-authoring/references/state-and-accessibility.md)
 - [Styles and tokens](../../../../../.github/skills/agentic-component-authoring/references/styles-and-tokens.md)

@@ -1,126 +1,152 @@
-component: Input
-type: atomic
+schemaVersion: 1
+component: input
+implementation: input.styles.ts
 
-variants:
-  Style:
-    values: [Outline, Underline]
-    default: Outline
-  Size:
-    values: [Small, Medium, Large]
-    default: Medium
-  State:
-    values: [Rest, Hover, Pressed, Focus, Error, Disabled, Read only]
-    notes: >
-      Rest, Focus, Error, Disabled, and Read only are mutually exclusive base
-      states. Hover and Pressed are resolved interaction states that ride on top of the
-      active base — not states of their own. Pressed is transient; clicking an
-      input immediately triggers Focus.
+# Every binding below is resolved once per render from the variant, the size,
+# and a single visual state. The visual state is picked with this precedence.
+statePrecedence:
+  - disabled
+  - error
+  - readOnly
+  - focused
+  - pressed
+  - hovered
+  - rest
 
-tokens:
-  background:
-    all-states:
-      all-styles: color.backgroundNeutralTransparent
+bindings:
+  root:
+    layout:
+      alignSelf: stretch
+      flexDirection: column
+      overflow: hidden
+    variant:
+      outline:
+        borderRadius:
+          small: borderRadius.base200
+          medium: borderRadius.base300
+          large: borderRadius.base400
+      underline:
+        borderRadius: cornerRadiusNone
 
-  foreground:
-    rest:
-      placeholder: color.foregroundNeutralTertiary
-      value: color.foregroundNeutralPrimary
-    disabled:
-      all: color.foregroundNeutralDisabled
-    read-only:
-      value: color.foregroundNeutralPrimary
-      rationale: Primary foreground distinguishes a real value from Disabled's low-contrast state.
-
-  stroke:
-    width: strokeWidth.thin
-    outline:
-      rest:
-        value: color.strokeNeutralLoud
-        hover: color.hover.strokeNeutralLoud
-        pressed: color.pressed.strokeNeutralLoud
-      focus:
-        value: color.strokeNeutralHeavy
-        hover: color.hover.strokeNeutralHeavy
-        pressed: color.pressed.strokeNeutralHeavy
-      error: color.strokeDangerLoud
-      disabled: color.strokeNeutralDisabled
-      read-only: color.strokeNeutralDisabled
-    underline:
-      rest:
-        value: color.strokeNeutralLoud
-        hover: color.hover.strokeNeutralLoud
-        pressed: color.pressed.strokeNeutralLoud
-      focus:
-        value: color.strokeNeutralHeavy
-        hover: color.hover.strokeNeutralHeavy
-        pressed: color.pressed.strokeNeutralHeavy
-      error: color.strokeDangerLoud
-      disabled: color.strokeNeutralDisabled
-      read-only: color.strokeNeutralDisabled
-    focus-ring: >
-      Input does not use the universal dual-outline focus ring. The boundary
-      stroke itself swaps to color.strokeNeutralHeavy on focus —
-      Outline as a full border, Underline as the bottom edge.
-
-  radius:
-    all-styles:
-      Small: borderRadius.base200
-      Medium: borderRadius.base300
-      Large: borderRadius.base400
-
-  typography:
-    rest:
-      Small: textstyle-functional-body-small
-      Medium: textstyle-functional-body-medium
-      Large: textstyle-functional-body-large
-    font-family: fontFamily.functional
-
-  spacing:
-    all-styles:
-      Small:
-        horizontal: spacing.componentBase150
-        vertical: spacing.componentBase100
-      Medium:
-        horizontal: spacing.componentBase250
-        vertical: spacing.componentBase150
-      Large:
-        horizontal: spacing.componentBase300
-        vertical: spacing.componentBase200
+  contents:
+    layout:
+      alignItems: center
+      backgroundColor: transparent
+      borderStyle: solid
+      flexDirection: row
+      overflow: hidden
+      position: relative
     gap:
-      all-sizes: spacing.componentBase250
-    icon-end-padding:
-      Small: spacing.componentBase100
-      Medium: spacing.componentBase150
-      Large: spacing.componentBase150
+      small: spacing.componentBase250
+      medium: spacing.componentBase250
+      large: spacing.componentBase250
+    minHeight:
+      small: lineHeight.functionalBodySmall + spacing.componentBase100 * 2
+      medium: lineHeight.functionalBodyMedium + spacing.componentBase150 * 2
+      large: lineHeight.functionalBodyLarge + spacing.componentBase200 * 2
+    strokeWidth:
+      outline:
+        borderWidth: strokeWidth.thin
+      underline:
+        borderBottomWidth: strokeWidth.thin
+        borderWidth: 0
+    strokeColor:
+      # Applied as borderColor for outline and borderBottomColor for underline.
+      disabled: color.strokeNeutralDisabled
+      error: color.strokeDangerLoud
+      readOnly: color.strokeNeutralDisabled
+      focused: color.strokeNeutralHeavy
+      pressed: color.pressed.strokeNeutralLoud
+      hovered: color.hover.strokeNeutralLoud
+      rest: color.strokeNeutralLoud
 
-  elevation: n/a
+  iconTextStack:
+    layout:
+      alignItems: center
+      flexDirection: row
+      flexGrow: 1
+      flexShrink: 1
+      minWidth: 0
+    gap:
+      small: spacing.componentBase250
+      medium: spacing.componentBase250
+      large: spacing.componentBase250
+    paddingHorizontal:
+      small: spacing.componentBase150
+      medium: spacing.componentBase250
+      large: spacing.componentBase300
 
-  motion:
-    status: pending
-    guidance: Stroke transitions ≤150ms ease-in-out. Focus may be instant. Reduced motion removes transitions entirely.
-sizes:
-  Small:
-    resultant-height: 25px # round(12 × 1.4) + 4×2 = 17 + 8
-    icon: 16px
-  Medium:
-    resultant-height: 32px # round(14 × 1.4) + 6×2 = 20 + 12
-    icon: 20px
-  Large:
-    resultant-height: 38px # round(16 × 1.4) + 8×2 = 22 + 16. Vertical padding matches Button Large for cross-component height alignment.
-    icon: 24px
-  notes: Heights are resultant from padding + typography + stroke. Icon sizes (16/20/24px) are hardcoded — no token coverage.
+  iconEnd:
+    layout:
+      alignItems: center
+      flexDirection: row
+      flexShrink: 0
+      minWidth: 0
+    gap:
+      small: spacing.componentBase100
+      medium: spacing.componentBase100
+      large: spacing.componentBase100
+    paddingRight:
+      small: spacing.componentBase150
+      medium: spacing.componentBase250
+      large: spacing.componentBase300
 
-properties:
-  component:
-    Icon Start: { type: BOOLEAN, default: false }
-    Icon End 1: { type: BOOLEAN, default: false, notes: shows Icon End container }
-    Icon End 2: { type: BOOLEAN, default: false, notes: requires Icon End 1 }
-    Icon Start 24px Regular: { type: INSTANCE_SWAP, default: Image icon (24px Regular), binding: Large size, leading icon }
-    Icon Start 20px Regular: { type: INSTANCE_SWAP, default: Image icon (20px Regular), binding: Medium size, leading icon }
-    Icon Start 16px Regular: { type: INSTANCE_SWAP, default: Image icon (16px Regular), binding: Small size, leading icon }
-    Icon End 1 24px Regular: { type: INSTANCE_SWAP, default: Image icon (24px Regular), binding: Large size, first trailing icon }
-    Icon End 1 20px Regular: { type: INSTANCE_SWAP, default: Image icon (20px Regular), binding: Medium size, first trailing icon }
-    Icon End 1 16px Regular: { type: INSTANCE_SWAP, default: Image icon (16px Regular), binding: Small size, first trailing icon }
-    Icon End 2 24px Regular: { type: INSTANCE_SWAP, default: Image icon (24px Regular), binding: Large size, second trailing icon }
-    Icon End 2 20px Regular: { type: INSTANCE_SWAP, default: Image icon (20px Regular), binding: Medium size, second trailing icon }
-    Icon End 2 16px Regular: { type: INSTANCE_SWAP, default: Image icon (16px Regular), binding: Small size, second trailing icon }
+  textInput:
+    layout:
+      backgroundColor: transparent
+      borderWidth: 0
+      flexGrow: 1
+      flexShrink: 1
+      minWidth: 0
+      paddingHorizontal: 0
+    typography:
+      fontFamily: fontFamily.functional
+      fontSize:
+        small: fontSize.functionalBodySmall
+        medium: fontSize.functionalBodyMedium
+        large: fontSize.functionalBodyLarge
+      lineHeight:
+        small: lineHeight.functionalBodySmall
+        medium: lineHeight.functionalBodyMedium
+        large: lineHeight.functionalBodyLarge
+    paddingVertical:
+      small: spacing.componentBase100
+      medium: spacing.componentBase150
+      large: spacing.componentBase200
+    color:
+      disabled: color.foregroundNeutralDisabled
+      default: color.foregroundNeutralPrimary
+
+  placeholder:
+    placeholderTextColor:
+      disabled: color.foregroundNeutralDisabled
+      readOnly: color.foregroundNeutralPrimary
+      default: color.foregroundNeutralTertiary
+
+  icons:
+    # iconStart, iconEnd1, and iconEnd2 share one size and one color.
+    size:
+      small: size160
+      medium: size200
+      large: size240
+    color: inherited from textInput.color
+
+  underline:
+    renderedWhen: variant is underline
+    layout:
+      bottom: 0
+      left: 0
+      position: absolute
+      right: 0
+    borderBottomWidth: strokeWidth.thin
+    borderBottomColor: same mapping as contents.strokeColor
+
+tokenGaps:
+  - binding: underline.borderBottomWidth, contents.strokeWidth.underline.borderBottomWidth
+    detail: For the underline variant the bottom edge is stroked twice, once by the contents row and once by the absolutely positioned underline view, so the rendered thickness is not a single token binding.
+  - binding: contents.strokeColor.focused
+    detail: Focus is expressed only as a stroke color change at the rest thickness. There is no focus visual binding and no focus stroke-width token.
+  - binding: icons.color
+    detail: The icon color is inherited from the resolved text color rather than bound to its own foreground token, so a disabled field dims the icons only because the text color changed.
+  - binding: contents.gap, iconEnd.gap
+    detail: The contents gap and the trailing icon gap resolve to the same value for all three sizes, so the size axis carries no distinction for these two bindings.

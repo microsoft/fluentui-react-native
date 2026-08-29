@@ -1,135 +1,62 @@
-component: Badge
-type: atomic
+schemaVersion: 1
+component: badge
+implementation: badge.styles.ts
 
-variants:
-  Style:
-    values: [Outline, Tint]
-    default: Tint
-  Color:
-    values: [Brand, Danger, Success, Warning, Informative]
-    default: Brand
-  Size:
-    values: [Small, Medium]
-    default: Medium
-  Shape:
-    values: [Circular, Rounded]
-    default: Circular
-  Layout:
-    values: [Icon and text, Icon only]
-    default: Icon and text
-  State:
-    values: [Rest]
+statePrecedence:
+  - appearance
+  - color
+  - size
+  - shape
+  - layout
 
-tokens:
-  background:
-    container:
-      Tint:
-        Brand: color.backgroundBrandSoft
-        Danger: color.backgroundDangerSoft
-        Success: color.backgroundSuccessSoft
-        Warning: color.backgroundWarningSoft
-        Informative: color.backgroundNeutralSoft
-      Outline:
-        all-colors: color.backgroundNeutralTransparent
+bindings:
+  root:
+    layout:
+      alignment: center
+      borderStyle: solid
+      direction: row
+    tint:
+      brand: { backgroundColor: color.backgroundBrandSoft, borderColor: color.strokeNeutralTransparent }
+      danger: { backgroundColor: color.backgroundDangerSoft, borderColor: color.strokeNeutralTransparent }
+      success: { backgroundColor: color.backgroundSuccessSoft, borderColor: color.strokeNeutralTransparent }
+      warning: { backgroundColor: color.backgroundWarningSoft, borderColor: color.strokeNeutralTransparent }
+      informative: { backgroundColor: color.backgroundNeutralSoft, borderColor: color.strokeNeutralTransparent }
+    outline:
+      backgroundColor: color.backgroundNeutralTransparent
+      borderWidth: strokeWidth.thin
+      borderColor:
+        brand: color.strokeBrandLoud
+        danger: color.strokeDangerLoud
+        success: color.strokeSuccessLoud
+        warning: color.strokeWarningLoud
+        informative: color.strokeNeutralLoud
+    shape:
+      circular: borderRadius.circular
+      roundedSmall: borderRadius.base100
+      roundedMedium: borderRadius.base200
+    size:
+      small: { minHeight: 16, iconAndTextPadding: spacing.componentBase100, gap: spacing.componentBase50 }
+      medium: { minHeight: 20, iconAndTextPadding: spacing.componentBase150, gap: spacing.componentBase50 }
+    iconOnly:
+      small: { minWidth: 16, paddingHorizontal: 0 }
+      medium: { minWidth: 20, paddingHorizontal: 0 }
+  content:
+    fontFamily: fontFamily.functional
+    fontWeight: fontWeight.functionalRegular
+    small: { fontSize: fontSize.functionalCaption, lineHeight: lineHeight.functionalCaption }
+    medium: { fontSize: fontSize.functionalBodySmall, lineHeight: lineHeight.functionalBodySmall }
+    color:
+      brand: color.foregroundBrandPrimary
+      danger: color.foregroundDangerPrimary
+      success: color.foregroundSuccessPrimary
+      warning: color.foregroundWarningPrimary
+      informative: color.foregroundNeutralPrimary
+  icons:
+    color: resolved content foreground
+    small: 12
+    medium: 16
 
-  foreground:
-    container:
-      all-styles:
-        Brand: color.foregroundBrandPrimary
-        Danger: color.foregroundDangerPrimary
-        Success: color.foregroundSuccessPrimary
-        Warning: color.foregroundWarningPrimary
-        Informative: color.foregroundNeutralPrimary
-    notes: Same foreground tokens drive label text and icon paint in both Tint and Outline.
-
-  stroke:
-    container:
-      Tint:
-        width: 0
-        color: no-stroke
-      Outline:
-        width: strokeWidth.thin
-        color:
-          Brand: color.strokeBrandLoud
-          Danger: color.strokeDangerLoud
-          Success: color.strokeSuccessLoud
-          Warning: color.strokeWarningLoud
-          Informative: color.strokeNeutralLoud
-    focus: n/a
-
-  radius:
-    container:
-      Circular:
-        all-sizes: borderRadius.circular
-      Rounded:
-        Small: borderRadius.base100
-        Medium: borderRadius.base200
-    notes: Rounded radius scales with Size so the corner reads as a softened rectangle at both heights.
-
-  typography:
-    Small: textstyle-functional-caption
-    Medium: textstyle-functional-body-small
-    font-family: fontFamily.functional
-
-  spacing:
-    container:
-      padding:
-        Icon and text:
-          Small:
-            inline: spacing.componentBase100
-            block: 0
-          Medium:
-            inline: spacing.componentBase150
-            block: 0
-        Icon only:
-          Small:
-            inline: 0
-            block: 0
-          Medium:
-            inline: 0
-            block: 0
-      gap:
-        Small: spacing.componentBase50
-        Medium: spacing.componentBase50
-
-  elevation: n/a
-
-  motion:
-    status: pending
-    guidance: Badge has no state transitions. If a parent animates the badge in or out (e.g. a counter incrementing), the parent owns that motion. Reduced motion — no accommodation required on Badge.
-
-sizes:
-  Small:
-    height: 16
-    icon: 12
-  Medium:
-    height: 20
-    icon: 16
-  notes: Heights and icon sizes are px literals — no --gnrc-* sizing tokens exist for these dimensions.
-
-properties:
-  component:
-    Label string:
-      type: TEXT
-      default: Badge
-      notes: Bound to the Label slot. Only visible when Layout = Icon and text.
-    Leading icon:
-      type: BOOLEAN
-      default: true
-      notes: Shows or hides the Leading icon slot on Layout = Icon and text. Inert on Icon only, where the slot is structurally always visible.
-    Trailing icon:
-      type: BOOLEAN
-      default: false
-      notes: Shows or hides the Trailing icon slot on Layout = Icon and text. Inert on Icon only.
-    Leading 16px Regular:
-      type: INSTANCE_SWAP
-      default: Image icon (16px Regular)
-    Leading 12px Regular:
-      type: INSTANCE_SWAP
-      default: Image icon (12px Regular)
-    Trailing 16px Regular:
-      type: INSTANCE_SWAP
-      default: Image icon (16px Regular)
-    Trailing 12px Regular:
-      type: INSTANCE_SWAP
-      default: Image icon (12px Regular)
+tokenGaps:
+  - property: badge and icon dimensions
+    values: [12, 16, 20]
+    reason: implementation uses fixed dimensions because no mapped FURN Flex dimension token exists.

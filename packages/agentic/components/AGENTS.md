@@ -16,7 +16,13 @@ invariants; detailed authoring recipes live in the
 
 ## Package invariants
 
-- Read the component `SPEC.md` and all referenced companions before changing its contract.
+- For a higher-order component contract, start Agency with the
+  `flex-authoring` profile, invoke `flex-components:<name>`, and follow the
+  [Flex source adaptation reference](../../../.github/skills/agentic-component-authoring/references/spec-source-adaptation.md).
+- Follow [SPEC-SOURCE.md](./SPEC-SOURCE.md) for provenance fields, contract
+  lifecycle, review state, and drift commands.
+- Read the component `SPEC.md`, `spec/source.json`, and all referenced React
+  Native companions before changing its contract.
 - Use `src/components/button` as the canonical higher-order implementation and `src/primitives/icon` as the canonical
   primitive.
 - Keep public props and slots small, typed, and spec-driven.
@@ -25,3 +31,6 @@ invariants; detailed authoring recipes live in the
 - Colocate runtime tests, type tests, and Storybook stories with the implementation.
 - Use package scripts for format, lint, build, tests, and snapshots.
 - Do not copy web-only APIs, CSS behavior, or DOM assumptions into React Native.
+- Do not copy or mechanically transform private Flex skill bodies into this
+  public package. Record source identifiers and digests, then author the local
+  React Native contract.

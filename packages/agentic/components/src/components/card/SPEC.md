@@ -1,111 +1,53 @@
 ---
 name: card
 platform: react-native (Windows, macOS)
-description: Molecular surface container that groups related content and actions into a single, bounded unit. Covers the translucent surface boundary, Size / Padding / Layout / Direction variant axes, the Header / Content / Footer slot model, and how an optional clickable mode is layered on.
-argument-hint: "[variant axis or slot question, e.g. 'Nested vs Structured layout' or 'Padding=None tokens']"
+status: implemented
+source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
 ---
 
-## Metadata
-
-| Field     | Value     |
-| --------- | --------- |
-| Type      | molecular |
-| Component | Card      |
-
-This spec covers the Card component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
-
-Answer design questions directly — lead with rationale, then tokens. The most common misuse is treating Card as a decorative box: Card is a _grouping boundary_ for related content and actions, not a wrapper applied for visual weight. The second is making the whole surface clickable while also placing interactive controls inside it — a card is interactive only when it has a single primary navigation target, and nested controls must remain independently operable.
-
----
-
 # Card
 
-## Spec
+## Scope
 
-### Dependencies
+Card is a bounded React Native surface for related content. It owns surface styling, optional interactive overlay, selection presentation, responsive direction, and slot order. It does not supply a title, text typography, navigation destination, selection manager, or a schema for the supplied slot contents.
 
-Card is molecular: it provides the surface and slot structure, and composes other components inside its slots. It does not bake in a fixed content schema.
+## Public contract
 
-- **Avatar** (`flex-components:avatar`) — consumed inside the Header slot to represent a person or entity (e.g. alongside a title or identity metadata).
-- **Button** (`flex-components:button`) — consumed inside the Header and Footer slots. Prefer **icon-only or overflow** Buttons in the Header so it stays compact and the title keeps hierarchy; the Footer can carry full-label Buttons for primary/secondary actions. Card delegates all button tokens and interaction to `flex-components:button`.
+`size` defaults to `small`; `padding` to `default`; `layout` to `default`; `direction` to `vertical`; and `disabled` to `false`. Size accepts `small` or `large`; padding accepts `default` or `none`; layout accepts `default`, `nested`, or `structured`; direction accepts `vertical` or `horizontal`. `selected` is optional and externally driven: its presence makes the card selectable, but press only calls the supplied `onPress`.
 
-> Arranging cards in a horizontally-scrolling **carousel** is a layout pattern — see `usage.md` → Layout for carousel guidance (paging controls, item sizing, reflow). This spec covers Card and its Header / Content / Footer slots only.
+`root` and `content` are required. `header`, `content02`, and `footer` are optional. Rendering always begins with the interactive overlay when enabled. `default` renders content only. `nested` renders content followed by `content02`. `structured` renders header, content, optional `content02`, and footer. Each supplied public slot is a `View` slot; Card does not add child layout beyond its section style.
 
----
+Providing `onPress` or `selected` enables the pressable overlay. The resolved state derives interactive and selectable state, direction after the current window-width check, pressable hover/pressed/focused values, theme state, and user root style. A horizontal card becomes vertical below 480 React Native layout units. Surface state precedence is selection, then disabled, pressed, and hovered; user style is final.
 
-### Anatomy
+### Requirements
 
-1. **Surface** — the root container and the card's only structural boundary. Owns the translucent surface fill, thin neutral stroke, border radius, and `overflow: clip` so nested media and the Content block are masked to the corner radius. Content is inset from the boundary by default and can run edge-to-edge when padding is removed (see Padding). Height is content-driven — the surface grows to fit its slots, with no fixed height — and width is capped at a max so cards do not stretch arbitrarily wide.
-2. **Header slot** — present in **Structured** layout. Holds card identity and metadata — a title, supporting metadata (authors, avatars, timestamps, counts), and optional compact actions. Aligned to the top of the card.
-3. **Content 01 slot** — the primary body/media region. Present in every layout; in **Default** it sits directly on the surface.
-4. **Content 02 slot** — a second content region added in **Nested** layout, rendered as a nested rounded block with its own translucent fill and inner radius, inset from the surface.
-5. **Footer slot** — present in **Structured** layout. Holds secondary actions, supplementary metadata, or other contextual controls. Aligned to the bottom of the card.
+- **CRD-001:** Resolve the documented variants and default values, derive interactivity from `onPress` or the presence of `selected`, and collapse horizontal direction below the implementation width threshold.
+- **CRD-002:** Render the overlay and public slots in the layout-specific order without injecting a content schema.
+- **CRD-003:** Apply root, nested-content, interaction, focus, and user-style layers from the verified FURN bindings.
+- **CRD-004:** Keep static cards non-focusable by default and expose interactive cards as disabled-aware pressable buttons with persistent focus feedback.
+- **CRD-005:** Preserve externally owned selection and keep nested slot controls independently usable.
 
-Which slots are populated is driven by Layout:
+## Platform behavior
 
-| Layout         | Header | Content 01 | Content 02       | Footer |
-| -------------- | ------ | ---------- | ---------------- | ------ |
-| **Default**    | —      | ✓          | —                | —      |
-| **Nested**     | —      | ✓          | ✓ (nested block) | —      |
-| **Structured** | ✓      | ✓          | optional         | ✓      |
+Static cards use a non-focusable `View`. A caller can explicitly make a static root accessible; then it uses React Native group role and preserves its label and accessibility state. Interactive cards hide the structural root from accessibility and expose an absolute-fill React Native `Pressable` overlay with button role, disabled state, optional selected state, and `FocusVisual`.
 
-> **Boundary, not elevation:** At rest the card is defined by a translucent surface fill + thin stroke, not a drop shadow. The stroke is what carries the grouping boundary and must meet non-text contrast (see `accessibility.md`). An interactive card _may_ gain a shadow on hover/press to reinforce the click affordance; a static card never lifts.
+On Windows and macOS, interactive overlays respond to native pointer, touch, `Enter`, and `Space` press behavior. The overlay is disabled and unfocusable when `disabled`; nested controls remain rendered as sibling content and keep their own press behavior. Windows maps the overlay to a UI Automation button; macOS maps it to an AX button. The component does not navigate, manage a card collection, or animate state changes.
 
----
+## Divergences from Flex
 
-### Variants
+- `card-button-only-activation` — **accepted.** The FURN interactive path always uses a React Native pressable button; it has no separate link or navigation-destination contract.
+- `card-static-accessibility-opt-in` — **accepted.** FURN cannot infer a title-to-region association from generic `View` slots. Static cards are hidden from accessibility by default and become a labeled group only when the caller explicitly sets `accessible`.
 
-Variant properties are ordered in the design tool: **Size → Padding → Layout → Direction**.
+## Conformance
 
-#### Size
-
-| Value     | Description                                                        | When to Use                                                           |
-| --------- | ------------------------------------------------------------------ | --------------------------------------------------------------------- |
-| **Small** | Compact surface with a tighter corner radius.                      | Dense grids, sidebars, and feeds where many cards share the viewport. |
-| **Large** | Full surface (up to the max width) with the largest corner radius. | Primary content surfaces, hero cards, and detail-level groupings.     |
-
-**Why Size drives corner radius:** Larger surfaces carry a larger radius so the corner reads proportionally to the surface; the Small footprint steps the radius down so corners do not dominate the smaller area. See `tokens.yaml` → `radius`.
-
-#### Padding
-
-| Value       | Description                                                            | When to Use                                                            |
-| ----------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| **Default** | Content sits inset from the card edge on all sides.                    | Text-led cards, and any card whose content should sit inside the edge. |
-| **None**    | Content runs all the way to the card edge (the corners still clip it). | Full-bleed media cards where an image or preview should meet the edge. |
-
-**Why padding is its own axis:** The card keeps its rounded, clipped edge whether or not there's padding. Removing padding just lets media reach that edge — so there's no need for a separate "bleed" card. The gap between Header, Content, and Footer stays the same either way.
-
-#### Layout
-
-| Value          | Description                                                                                                                                                                                   | When to Use                                                                                                                                                                                                              |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Default**    | A single Content region sits directly on the surface. No nested block, no enforced Header/Footer.                                                                                             | The simplest grouping — one block of content inside a bounded surface.                                                                                                                                                   |
-| **Nested**     | Adds a second content region (Content 02) as a rounded block set inside the card, with its own fill. Its corners follow the card's corners, stepping with Size. See `tokens.yaml` → `radius`. | When a piece of media needs to look like its own tile sitting _on_ the card — for example a file preview or thumbnail, an embedded chart or map, or a linked object you want to feel separate from the rest of the card. |
-| **Structured** | Promotes the Header and Footer slots: content is organized into stacked Header → Content → Footer.                                                                                            | Rich cards with a titled header, a body/media region, and an actions footer.                                                                                                                                             |
-
-**Why three layouts instead of always-on slots:** Most cards are a single content block (Default). Nested adds an inner container only when the content needs to read as a distinct object on the surface. Structured promotes the Header/Footer slots to first-class regions only when the card genuinely has header and footer content — avoiding empty slots and their gaps on simpler cards.
-
-#### Direction
-
-| Value          | Description                          | When to Use                                                        |
-| -------------- | ------------------------------------ | ------------------------------------------------------------------ |
-| **Vertical**   | Slots / content stack top-to-bottom. | Default reading order; portrait media; feed and grid cards.        |
-| **Horizontal** | Media and content sit side-by-side.  | List-style rows and cards where a thumbnail leads a block of text. |
-
-Note the reflow consequence: a Horizontal card must collapse to a single column at narrow viewports — see `accessibility.md` → Reflow.
-
-#### State
-
-| Value        | Description                                        | When to Use                                                                                      |
-| ------------ | -------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| **Rest**     | The default resting surface.                       | Always — and the **only** state a static (non-interactive) card uses.                            |
-| **Hover**    | Pointer-over feedback hook for interactive cards.  | Interactive cards only; no component-owned hover color token is authored in `tokens.yaml`.       |
-| **Pressed**  | Active/press feedback hook for interactive cards.  | Interactive cards only; no component-owned pressed color token is authored in `tokens.yaml`.     |
-| **Selected** | Persistent "chosen" state for a card within a set. | Selectable cards (e.g. pick-one or multi-select grids). Soft neutral fill + soft neutral stroke. |
-| **Disabled** | The whole card unit is unavailable.                | Rare — disable a single action instead when only that action is unavailable.                     |
-
-See `tokens.yaml` → `tokens.background` / `tokens.stroke` for the per-state assignments and `interaction.md` for behavior.
+| Requirement | Evidence                                                                  |
+| ----------- | ------------------------------------------------------------------------- |
+| CRD-001     | `card.types.ts`, `useCard.ts`, `card.stories.tsx`                         |
+| CRD-002     | `useCard.ts`, `renderCard.tsx`, `card.types.test.tsx`, `card.stories.tsx` |
+| CRD-003     | `card.styles.ts`, `useCardStyles.ts`, `card.test.tsx`                     |
+| CRD-004     | `useCard.ts`, `useCardStyles.ts`, `card.test.tsx`                         |
+| CRD-005     | `useCard.ts`, `renderCard.tsx`, `card.test.tsx`, `card.stories.tsx`       |

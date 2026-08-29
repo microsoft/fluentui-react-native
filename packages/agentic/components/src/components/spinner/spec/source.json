@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "component": "spinner",
+  "skill": "flex-components:spinner",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-28",
+  "availableSurfaces": ["shared", "web"],
+  "surfacesConsulted": ["shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/spinner/SKILL.md",
+      "marketplaceBlobSha": "3c61677e18f349cd4551fee124c94ea181ae4a0c",
+      "marketplaceSha256": "259c4715f9c97a130c587a5373778203c3d1a25a58f442094cce90cc0fdc589f",
+      "originPath": "plugins/components/skills/spinner/SKILL.md",
+      "originBlobSha": "3c61677e18f349cd4551fee124c94ea181ae4a0c",
+      "originSha256": "259c4715f9c97a130c587a5373778203c3d1a25a58f442094cce90cc0fdc589f",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/spinner/usage.md",
+      "marketplaceBlobSha": "2290c2c8dda7dbe0abb87b49b4b9e1c87ca9d2ed",
+      "marketplaceSha256": "bf4ed82e8aeeb2586c0616d091a3dfb00e1e1e02f9e38edbe5bfb71a1f0dde15",
+      "originPath": "plugins/components/skills/spinner/usage.md",
+      "originBlobSha": "2290c2c8dda7dbe0abb87b49b4b9e1c87ca9d2ed",
+      "originSha256": "bf4ed82e8aeeb2586c0616d091a3dfb00e1e1e02f9e38edbe5bfb71a1f0dde15",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/spinner/web/accessibility.md",
+      "marketplaceBlobSha": "f50e79bcb4b9d7f1bfd5cc4aa9db8e7f3439337a",
+      "marketplaceSha256": "ef14fa15dac54c6175d59c5693ab9a7d01d6ea24652dcbc5f50eccb85c02a379",
+      "originPath": "plugins/components/skills/spinner/web/accessibility.md",
+      "originBlobSha": "f50e79bcb4b9d7f1bfd5cc4aa9db8e7f3439337a",
+      "originSha256": "ef14fa15dac54c6175d59c5693ab9a7d01d6ea24652dcbc5f50eccb85c02a379",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/spinner/web/interaction.md",
+      "marketplaceBlobSha": "3ce896c9a2a80ae85a975f5ba0af314a88fac3cf",
+      "marketplaceSha256": "588d6f7a1214c0b2c2cfa9d86c60aca01e717b612df768406f9ca9e9219b62fb",
+      "originPath": "plugins/components/skills/spinner/web/interaction.md",
+      "originBlobSha": "3ce896c9a2a80ae85a975f5ba0af314a88fac3cf",
+      "originSha256": "588d6f7a1214c0b2c2cfa9d86c60aca01e717b612df768406f9ca9e9219b62fb",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/spinner/web/tokens.yaml",
+      "marketplaceBlobSha": "9288191474c19aaa10878fb8a3f48d76e8e47996",
+      "marketplaceSha256": "ad5ba5130124464515bc9fb9fda36bd8ee4278fc0a40917533d67d6d1b66bfd7",
+      "originPath": "plugins/components/skills/spinner/web/tokens.yaml",
+      "originBlobSha": "9288191474c19aaa10878fb8a3f48d76e8e47996",
+      "originSha256": "ad5ba5130124464515bc9fb9fda36bd8ee4278fc0a40917533d67d6d1b66bfd7",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [],
+  "divergences": [
+    {
+      "id": "spinner-busy-state-on-root",
+      "status": "accepted"
+    },
+    {
+      "id": "spinner-instance-timeline",
+      "status": "deferred"
+    },
+    {
+      "id": "spinner-adjacent-label-gap",
+      "status": "not-applicable"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "SPIN-001",
+      "evidence": ["spinner.types.ts", "spinner.styles.ts", "spinner.types.test.ts", "spinner.test.tsx"]
+    },
+    {
+      "id": "SPIN-002",
+      "evidence": ["spinner.types.ts", "useSpinner.ts", "spinner.test.tsx"]
+    },
+    {
+      "id": "SPIN-003",
+      "evidence": ["renderSpinner.tsx", "spinner.test.tsx"]
+    },
+    {
+      "id": "SPIN-004",
+      "evidence": ["spinner.styles.ts", "useSpinnerStyles.ts", "spinner.test.tsx"]
+    },
+    {
+      "id": "SPIN-005",
+      "evidence": ["useSpinner.ts", "spinner.test.tsx"]
+    },
+    {
+      "id": "SPIN-006",
+      "evidence": ["useSpinner.ts", "useSpinnerStyles.ts", "spinner.test.tsx", "spinner.stories.tsx"]
+    }
+  ]
+}

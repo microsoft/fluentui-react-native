@@ -1,80 +1,66 @@
-component: Accordion
-type: atomic
+schemaVersion: 1
+component: accordion
+implementation: accordion.styles.ts
 
-variants:
-  Layout:
-    values: [Chevron start, Chevron end]
-  Size:
-    values: [Small]
-    notes: Only size currently defined.
-  State:
-    values: [Rest, Hover, Pressed]
-    notes: Hover and Pressed are resolved as nested token state values. Disabled not present in current component set.
-  Expanded:
-    values: [false, true]
-    default: false
-    notes: Parallel axis — runs independently of State. Not a State value.
+statePrecedence:
+  - pressed
+  - hovered
 
-tokens:
-  background:
-    header:
-      rest:
-        value: color.backgroundNeutralTransparent
-        hover: color.hover.backgroundNeutralTransparent
-        pressed: color.pressed.backgroundNeutralTransparent
-    header-notes: Transparent at rest; gains visible fill through the inline hover/pressed state values.
+bindings:
+  root:
+    layout:
+      alignSelf: stretch
+      width: 100%
+    userStyle: applied after root structural style
+  header:
+    size:
+      small:
+        borderRadius: borderRadius.base200
+        gap: spacing.componentBase100
+        paddingHorizontal: spacing.componentBase200
+        paddingVertical: spacing.componentBase100
+    background:
+      rest: color.backgroundNeutralTransparent
+      hovered: color.hover.backgroundNeutralSubtle
+      pressed: color.pressed.backgroundNeutralSubtle
+  title:
+    small:
+      fontFamily: fontFamily.functional
+      fontSize: fontSize.functionalBodySmall
+      fontWeight: fontWeight.functionalSemibold
+      lineHeight: lineHeight.functionalBodySmall
+      color: color.foregroundNeutralPrimary
+  body:
+    small:
+      paddingHorizontal: spacing.componentBase200
+      paddingTop: spacing.componentBase200
+      foreground: color.foregroundNeutralPrimary
+      typography:
+        fontFamily: fontFamily.functional
+        fontSize: fontSize.functionalBodySmall
+        fontWeight: fontWeight.functionalRegular
+        lineHeight: lineHeight.functionalBodySmall
+    collapsed:
+      height: 0
+      opacity: 0
+      overflow: hidden
+      paddingHorizontal: 0
+      paddingTop: 0
+    expanded:
+      opacity: 1
+      overflow: visible
+  icons:
+    leadingIcon: size160
+    chevron: size160
+    color: resolved header foreground
+  focusVisual:
+    innerColor: color.strokeFocusInner
+    innerWidth: strokeWidth.thin
+    outerColor: color.strokeFocusOuter
+    outerWidth: strokeWidth.thick
+    radius: resolved header border radius
 
-  foreground:
-    rest:
-      value: color.foregroundNeutralPrimary
-      hover: color.hover.foregroundNeutralPrimary
-      pressed: color.pressed.foregroundNeutralPrimary
-      applies-to: Title, chevron, and leading icon.
-
-  stroke:
-    container: no-stroke
-    focus: See flex-system:styling — universal dual-outline focus ring.
-
-  radius:
-    header: borderRadius.base200
-
-  typography:
-    title: textstyle-functional-body-small-strong
-    notes: Title is always Semibold — no weight swap pattern. Consistent weight provides persistent visual hierarchy regardless of state.
-    font-family: fontFamily.functional
-
-  spacing:
-    header:
-      horizontal: spacing.componentBase200
-      vertical: spacing.componentBase100
-    header-gap: spacing.componentBase100
-    body: spacing.componentBase200
-
-  elevation: n/a
-
-  motion:
-    status: pending
-    guidance: Chevron rotation and body height transition should use fast duration with ease-in-out. Reduced motion — instant, no animation.
-sizes:
-  Small:
-    chevron-icon: 16px
-    leading-icon: 16px
-
-properties:
-  component:
-    Title string:
-      type: TEXT
-      default: 'Section title'
-      notes: Bound to the title text node in the Header.
-    Icon:
-      type: BOOLEAN
-      default: true
-      notes: Shows/hides the leading icon slot.
-    Icon (swap):
-      type: INSTANCE_SWAP
-      default: Image icon (16px Regular)
-      notes: Leading icon slot.
-    Body content:
-      type: INSTANCE_SWAP
-      default: Content placeholder
-      notes: The body slot; swap with any component.
+tokenGaps:
+  - property: icon dimensions
+    binding: size160 global token
+    reason: the mapped Flex token groups do not provide the component icon dimension.

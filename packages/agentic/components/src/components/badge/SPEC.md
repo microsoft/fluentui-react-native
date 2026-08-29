@@ -1,106 +1,52 @@
 ---
 name: badge
 platform: react-native (Windows, macOS)
-description: Atomic non-interactive indicator that communicates a status, count, or category for an associated UI element. Two styles (Outline, Tint), five colors (Brand, Danger, Success, Warning, Informative), two sizes, two shapes, two layouts (Icon and text, Icon only), and independent Leading icon + Trailing icon slots.
-argument-hint: "[variant axis or token question, e.g. 'Tint color tokens' or 'why no focus ring']"
+status: implemented
+source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
 ---
 
-## Metadata
-
-| Field     | Value  |
-| --------- | ------ |
-| Type      | atomic |
-| Component | Badge  |
-
-This spec covers the Badge component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
-
-Answer design questions directly — lead with rationale, then tokens. The two most common misuses are (1) treating Badge as interactive — Badge never receives focus and has no hover or pressed states; if the indicator needs to be actionable, use Button or Tag instead — and (2) using color alone to communicate state, since color is not conveyed to assistive tech. Badge always defers to its host control for interaction and announces through that control's accessible name, not its own.
-
----
-
 # Badge
 
-## Spec
+## Scope
 
-### Anatomy
+Badge is a non-interactive React Native indicator for a compact status, count, or category. It owns visual appearance, color, size, shape, and icon/text composition. It does not provide an action, focus target, positioning overlay, disabled state, or a status-management model.
 
-1. **Container** — auto-layout root frame; owns padding, border radius, background fill, optional stroke, and gap between children. Non-interactive — does not render a focus ring, does not respond to hover or pressed.
-2. **Leading icon** — optional Fluent Iconography instance (Regular style) at the leading edge of the container. Shown when **Layout** is `Icon and text` and the `Leading icon` BOOLEAN component property is true, or unconditionally when **Layout** is `Icon only`. Sized per the **Size** variant (12px at Small, 16px at Medium).
-3. **Label** — text node bound to the `Label string` component property. Renders short text — a counter ("1", "999+"), a status word ("New", "Beta"), or a category label ("Engineering"). Only renders when **Layout** is `Icon and text`.
-4. **Trailing icon** — optional Fluent Iconography instance (Regular style) at the trailing edge of the container. Shown only when **Layout** is `Icon and text` and the `Trailing icon` BOOLEAN component property is true. Sized per the **Size** variant.
+## Public contract
 
-| Slot          | Required                                                                                                         | Default              |
-| ------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------- |
-| Leading icon  | No on `Icon and text` (controlled by `Leading icon` BOOLEAN, default true); structurally required on `Icon only` | Image icon (Regular) |
-| Label         | Yes on `Icon and text`; hidden on `Icon only`                                                                    | Badge                |
-| Trailing icon | No (controlled by `Trailing icon` BOOLEAN, default false); not rendered on `Icon only`                           | Image icon (Regular) |
+`appearance` defaults to `tint`; `color` defaults to `brand`; `size` defaults to `medium`; `shape` defaults to `circular`; and `layout` defaults to `iconAndText`. Appearance accepts `tint` or `outline`; color accepts `brand`, `danger`, `success`, `warning`, or `informative`; size accepts `small` or `medium`; shape accepts `circular` or `rounded`.
 
-> **At least one of Leading icon, Label, or Trailing icon should be visible.** The defaults enforce this in the dropped-in state (Layout=Icon and text, Label string=Badge, Leading icon=true, Trailing icon=false). On `Layout=Icon only`, the Leading icon is structurally always visible. The empty state — Layout=Icon and text with both icon BOOLEANs off and Label string blanked — is reachable but not a default authoring path; authors must actively produce it.
+`root` is required. In `iconAndText` layout, `content`, `leadingIcon`, and `trailingIcon` are optional slots. Content renders by default as “Badge” unless explicitly `null`. `leadingIconVisible` defaults to `true`, and the leading slot defaults to the selected-circle icon. `trailingIconVisible` defaults to `false`; enabling it renders only a supplied trailing slot. In `iconOnly` layout, `leadingIcon` is required by the public type, it is always visible, and text/trailing icon props are excluded.
 
----
+Rendering order is leading icon, content, then trailing icon, omitting unavailable slots. The root is non-focusable. Resolved state stores the variant values, slot-presence facts, visibility booleans, icon-only state, theme state, and user style. User root style follows structural, layout, appearance, and color styles.
 
-### Variants
+### Requirements
 
-Variant properties are ordered in the design tool: **Style → Color → Size → Shape → Layout → State**.
+- **BDG-001:** Expose the documented finite variant axes, defaults, and discriminated `iconOnly` prop shape.
+- **BDG-002:** Render only visible slots in leading-icon, content, trailing-icon order, including slot defaults and icon-only exclusion.
+- **BDG-003:** Map appearance, color, size, shape, typography, and icon dimensions to the documented FURN bindings and apply user root style last.
+- **BDG-004:** Keep normal badges out of the accessibility tree, expose a labeled badge as an image, and warn when an icon-only badge has no accessible name.
+- **BDG-005:** Remain non-interactive and leave host placement, activation, and state meaning to the containing component.
 
-#### Style
+## Platform behavior
 
-| Value       | Description                                                    | When to Use                                                                                                                                    |
-| ----------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Outline** | Transparent fill, 1px colored stroke, colored foreground       | When the badge sits on a surface whose background already communicates context (a card, an active row) and a fill would over-saturate the area |
-| **Tint**    | Soft colored fill, no stroke, colored foreground. **Default.** | General-purpose. Reads as a softly colored chip — strong enough to draw the eye, quiet enough to sit next to body text                         |
+Badge uses a React Native `View` and is never focusable on Windows or macOS. A badge with `accessibilityLabel` or a referenced accessible label is exposed with image role; otherwise its default root and descendants are hidden from accessibility. Icon slots are always decorative.
 
-**Why Tint is the default and Filled is not offered:** This design system's aesthetic favors lower-contrast surface chrome. A Filled (`*-loud`) Badge competes with primary content and shouts in dense layouts; Tint (`*-soft`) draws the eye without dominating. Filled may be added later if a high-emphasis case emerges.
+Windows maps an informative badge to a UI Automation image; macOS maps it to an AX image. Neither platform receives press, keyboard, hover, focus, or disabled behavior from this component. Positioning is normal React Native layout unless a parent supplies placement through its own layout or a user style.
 
-#### Color
+## Divergences from Flex
 
-| Value           | Semantic intent                                                               | Token family               |
-| --------------- | ----------------------------------------------------------------------------- | -------------------------- |
-| **Brand**       | Branded identification — featured, promoted, or branded content. **Default.** | `--gnrc-color-*-brand-*`   |
-| **Danger**      | Error, blocker, destructive outcome                                           | `--gnrc-color-*-danger-*`  |
-| **Success**     | Confirmation, healthy state                                                   | `--gnrc-color-*-success-*` |
-| **Warning**     | Caution, non-blocking issue                                                   | `--gnrc-color-*-warning-*` |
-| **Informative** | Quiet, informational metadata — counts, tags, neutral status                  | `--gnrc-color-*-neutral-*` |
+No material behavioral divergence was identified. The source evidence’s web accessibility concepts are adapted to React Native accessibility props and platform accessibility APIs.
 
-**Why Informative maps to neutral:** Flex does not expose an `informative` color family. Informative binds to neutral, which matches the design intent — a quiet, default-informational badge that doesn't pull focus, with Brand carrying the louder, identified case. The variant name stays semantic so the binding can move if an `informative` family is ever introduced to Flex.
+## Conformance
 
-#### Size
-
-| Value      | When to Use                                                                  |
-| ---------- | ---------------------------------------------------------------------------- |
-| **Small**  | Inline with body text, on small icons or avatars (16–24px), in dense rows    |
-| **Medium** | Default. Inline with most UI text and on standard icons or avatars (28–40px) |
-
-**Why only two sizes:** v9 ships six (Tiny through Extra-large). This system's v1 trims to the two that cover the dominant inline cases. Dot-only and hero sizes from v9 are out of scope for v1 and can be added if a real use case appears.
-
-#### Shape
-
-| Value        | When to Use                                                                                         |
-| ------------ | --------------------------------------------------------------------------------------------------- |
-| **Circular** | Default. Pill-shaped at any aspect ratio — reads as a true badge indicator                          |
-| **Rounded**  | Softened rectangle. Use when adjacent components are rectangular and a pill would feel out of place |
-
-**Why no Square:** Square corners read as a button or tag, not a badge. Removed for clarity of affordance.
-
-#### Layout
-
-| Value             | Renders                                                                                                                                                                                                                          | When to Use                                                                                                                                                         |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Icon and text** | Container with optional Leading icon, Label, and optional Trailing icon. Slot visibility is controlled by the `Leading icon` and `Trailing icon` BOOLEAN component properties (defaults: Leading on, Trailing off). **Default.** | The general-purpose Badge. Covers counter Badges (both icon BOOLEANs off → text only), icon-plus-label, label-plus-trailing-icon, and label-bracketed-by-two-icons. |
-| **Icon only**     | Container with only the Leading icon slot rendered. Square (`inline-size = block-size`, zero inline padding); icon BOOLEANs are inert.                                                                                           | Status glyph where the icon carries the meaning (a check, a warning sign).                                                                                          |
-
-**Why two Layout values and not three:** Following v9 Figma precedent, Badge uses BOOLEANs for icon slot visibility rather than a separate `Text only` Layout. The `Icon and text` Layout encodes which control surface is exposed (icon slots + label) rather than which slots are currently rendered — toggling `Leading icon` and `Trailing icon` off on `Icon and text` produces a text-only Badge without expanding the variant grid. `Icon only` remains a separate Layout because removing the label structurally changes the container to a square pill with zero inline padding and recalculates spacing.
-
-**Why two icon slots:** Matches the v9 Figma Badge model, which authors are already accustomed to. Common compositions — `Leading=true, Trailing=false` (default icon-and-label) and `Leading=false, Trailing=true` (label with trailing chevron or modifier) — are reachable without an `Icon position` axis. The both-icons case (`Leading=true, Trailing=true`) is supported for parity with v9 Figma; v9 React currently exposes only one icon slot, so two-icon Badges live in the design tool ahead of code.
-
-#### State
-
-| Value    | Description                                                                  |
-| -------- | ---------------------------------------------------------------------------- |
-| **Rest** | Only state. Badge is non-interactive — no Hover, Pressed, Focus, or Disabled |
-
-**Why Badge has no Disabled state:** Badge has no action to disable. If the host control (Button, ListItem, NavItem) is disabled, the parent's foreground tokens grey out everything inside it including the Badge. Per v9 guidance, Badge does not receive focus and is not a tab stop — adding a Disabled state would imply interactivity that does not exist.
+| Requirement | Evidence                                                                    |
+| ----------- | --------------------------------------------------------------------------- |
+| BDG-001     | `badge.types.ts`, `useBadge.ts`, `badge.types.test.ts`, `badge.stories.tsx` |
+| BDG-002     | `useBadge.ts`, `renderBadge.tsx`, `badge.test.tsx`                          |
+| BDG-003     | `badge.styles.ts`, `useBadgeStyles.ts`, `badge.test.tsx`                    |
+| BDG-004     | `useBadge.ts`, `useBadgeStyles.ts`, `badge.test.tsx`                        |
+| BDG-005     | `badge.types.ts`, `useBadge.ts`, `badge.stories.tsx`                        |

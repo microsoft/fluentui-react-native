@@ -1,24 +1,64 @@
----
-component: Tag
-platform: react-native (Windows, macOS)
----
+# Tag accessibility
 
-# Tag Accessibility (React Native — Windows & macOS)
+## Native semantics
 
-## Spec
+The root is the only accessible element. It sets `accessibilityRole="button"`
+and publishes `disabled` through `accessibilityState`, merged over any state the
+caller passes. There is no selected or checked state to expose, because a tag
+has neither.
 
-- **ARIA role:** `button` on the tag element.
-- **Required attributes:**
-  - `aria-label` — required on Icon only layout; must describe the tag category, not the icon (e.g., "Remove Engineering filter", not "X icon").
-  - `aria-disabled="true"` — use on disabled tags that should remain in the tab order. Use native `disabled` when the tag should be excluded from interaction entirely.
-- **WCAG:**
-  - **1.4.3 — Contrast (Minimum):** All text and icon colors must meet 4.5:1 against their background at rest. This applies to both styles — Primary (`neutral-onloud` on `brand-heavy`) and Secondary (`brand-primary` on `brand-soft`). Verify disabled tokens — intentionally below full contrast but should remain legible.
-  - **2.1.1 — Keyboard:** Enter and Space must trigger dismiss.
-  - **2.4.7 — Focus Visible:** Focus ring must be visible in all non-disabled states.
-  - **2.5.8 — Target Size (Minimum, AA):** Minimum interactive target is 24×24px. Small Icon only meets the minimum boundary.
+On Windows the root maps to a UI Automation button that reports its disabled
+state; Narrator reads the name and the control type. On macOS it maps to the
+equivalent button element for VoiceOver. The leading icon and the dismiss glyph
+both set `accessible={false}`, so neither is announced and neither can be
+reached on its own.
 
----
+A user therefore hears one control per tag. There is no way to move to the
+dismiss glyph separately, which is intentional: the whole tag is the target.
 
-## Usage
+## Naming
 
-- **Icon-only labels:** Icon only Tags require `aria-label` describing the tag's category and dismiss intent (e.g., "Remove Engineering filter"). Never label with the icon's shape.
+In the default layout the label text is the accessible name. That name should
+describe the tag, not the removal: "Engineering", not "Remove". If the removal
+intent is not obvious from context, override the name on the root with an
+`accessibilityLabel` that states both, such as "Remove Engineering filter".
+
+Icon-only tags render no text, so they must always be named. Development builds
+warn once when an icon-only tag has neither `accessibilityLabel` nor a
+labelled-by reference. Name the category, never the glyph.
+
+An icon-only tag with no leading icon has nothing to identify it visually at
+all, so development builds warn about that case as well.
+
+## Dismiss expectations
+
+Because the visible dismiss glyph is decorative, the announcement must carry the
+affordance when it matters. If a screen reader user cannot tell from context
+that activating the tag removes it, put that in the name.
+
+The component never removes itself. When the caller drops a tag in response to
+`onPress`, focus is destroyed with it, so the caller must move focus somewhere
+sensible: the next tag, or the container that held the list. Announce the
+removal from the surrounding surface if the change is not otherwise visible.
+
+## Focus and keyboard
+
+The root is focusable while enabled and leaves the tab order while disabled, so
+a row of tags is one tab stop per enabled tag. Enter and Space activate the
+focused tag. A disabled tag stays in the accessibility tree and reports its
+disabled state, so it can still be read.
+
+A two-ring focus visual is drawn inside the tag, following the resolved corner
+radius, whenever the root is focused and not disabled, so it is rounded on a
+rounded tag and circular on a circular or icon-only tag.
+
+## Contrast
+
+The primary appearance pairs a heavy brand background with the on-heavy
+foreground, and the secondary appearance pairs a subtle neutral background with
+the primary neutral foreground. Icons take the same resolved foreground as the
+label, so a glyph is never lower contrast than the text beside it.
+
+The disabled state moves both the background and the foreground to their
+disabled tokens together, so a disabled tag reads as one unavailable unit rather
+than as live text on a dead surface.

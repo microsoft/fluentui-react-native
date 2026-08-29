@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "component": "checkbox",
+  "skill": "flex-components:checkbox",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-28",
+  "availableSurfaces": ["shared", "web"],
+  "surfacesConsulted": ["shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/checkbox/SKILL.md",
+      "marketplaceBlobSha": "e96989b46ef40bd81431b338e57c588953b37f0e",
+      "marketplaceSha256": "59c18766842da8533e8ce210ccf3fa1631ca1976e2dadede405619d4d5e94160",
+      "originPath": "plugins/components/skills/checkbox/SKILL.md",
+      "originBlobSha": "e96989b46ef40bd81431b338e57c588953b37f0e",
+      "originSha256": "59c18766842da8533e8ce210ccf3fa1631ca1976e2dadede405619d4d5e94160",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/checkbox/usage.md",
+      "marketplaceBlobSha": "c77c7f010abd0fac1d1b4592ae9565d3992137aa",
+      "marketplaceSha256": "c509d947ead1537929fe0fccd889972a2d77150fe737450f115da7c97d884a22",
+      "originPath": "plugins/components/skills/checkbox/usage.md",
+      "originBlobSha": "c77c7f010abd0fac1d1b4592ae9565d3992137aa",
+      "originSha256": "c509d947ead1537929fe0fccd889972a2d77150fe737450f115da7c97d884a22",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/checkbox/web/accessibility.md",
+      "marketplaceBlobSha": "fa11412a3a1b036dd2be18de360eb11ea9bd615f",
+      "marketplaceSha256": "c591162d0f3f1f43cbf8498c8202aaec9a7f25bf9a6d6d9091d93cb344629dd7",
+      "originPath": "plugins/components/skills/checkbox/web/accessibility.md",
+      "originBlobSha": "fa11412a3a1b036dd2be18de360eb11ea9bd615f",
+      "originSha256": "c591162d0f3f1f43cbf8498c8202aaec9a7f25bf9a6d6d9091d93cb344629dd7",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/checkbox/web/interaction.md",
+      "marketplaceBlobSha": "613f6cfe8b652afb9ec6bd369b5d993d3f3b7961",
+      "marketplaceSha256": "856d2dc8082b99d97826f94b3a6bc802fa86e7cdd69a29c8e53704c57e56fa46",
+      "originPath": "plugins/components/skills/checkbox/web/interaction.md",
+      "originBlobSha": "613f6cfe8b652afb9ec6bd369b5d993d3f3b7961",
+      "originSha256": "856d2dc8082b99d97826f94b3a6bc802fa86e7cdd69a29c8e53704c57e56fa46",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/checkbox/web/tokens.yaml",
+      "marketplaceBlobSha": "222ab7de9e085109232a0abd50a5655794e6103e",
+      "marketplaceSha256": "5a8706211772a4d42b5051431c995698591c1522d1931dd3d66734add2be2d7b",
+      "originPath": "plugins/components/skills/checkbox/web/tokens.yaml",
+      "originBlobSha": "222ab7de9e085109232a0abd50a5655794e6103e",
+      "originSha256": "5a8706211772a4d42b5051431c995698591c1522d1931dd3d66734add2be2d7b",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [],
+  "divergences": [
+    {
+      "id": "checkbox-secondary-text-description",
+      "status": "accepted"
+    },
+    {
+      "id": "checkbox-secondary-text-requires-label",
+      "status": "accepted"
+    },
+    {
+      "id": "checkbox-focus-visual-modality",
+      "status": "deferred"
+    },
+    {
+      "id": "checkbox-native-focus-ring",
+      "status": "deferred"
+    },
+    {
+      "id": "checkbox-owned-props-type-surface",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "CBX-001",
+      "evidence": ["checkbox.types.ts", "useCheckbox.ts", "checkbox.types.test.ts", "checkbox.test.tsx"]
+    },
+    {
+      "id": "CBX-002",
+      "evidence": ["useCheckbox.ts", "checkbox.test.tsx"]
+    },
+    {
+      "id": "CBX-003",
+      "evidence": ["renderCheckbox.tsx", "useCheckbox.ts", "checkbox.test.tsx", "checkbox.stories.tsx"]
+    },
+    {
+      "id": "CBX-004",
+      "evidence": ["useCheckbox.ts", "checkbox.test.tsx"]
+    },
+    {
+      "id": "CBX-005",
+      "evidence": ["useCheckbox.ts", "useCheckboxStyles.ts", "checkbox.test.tsx"]
+    },
+    {
+      "id": "CBX-006",
+      "evidence": ["checkbox.styles.ts", "useCheckboxStyles.ts", "checkbox.test.tsx"]
+    }
+  ]
+}

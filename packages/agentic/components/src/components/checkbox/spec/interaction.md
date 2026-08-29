@@ -1,22 +1,46 @@
----
-component: Checkbox
-platform: react-native (Windows, macOS)
----
+# Checkbox interaction
 
-# Checkbox Interaction (React Native — Windows & macOS)
+## State model
 
-## Keyboard navigation
+Hover, press, and focus are derived from the root `Pressable` through the
+shared pressable-state hook. Color resolution reads the status first, then
+disabled, pressed, and hovered in that order. Hover and press values come from
+the hover and pressed sub-palettes of the same semantic color the status
+already selected, so an unchecked indicator shifts within its neutral stroke
+and a checked indicator shifts within its brand fill.
 
-- **Tab / Shift+Tab** — moves focus to and from the checkbox.
-- **Space** — toggles the checkbox status (Unchecked ↔ Checked). Does not use Enter — this follows native HTML checkbox behavior.
-- In a checkbox group, each checkbox is an independent tab stop (not arrow-key navigable like radio groups).
+The caller `style` is the final layer applied to the root, after all
+token-derived styles.
 
-## Focus management
+## Activation and status
 
-Focus follows standard platform behavior. Checkbox does not trap focus or manage programmatic focus placement. The focus ring wraps the entire interactive area (indicator + label), not just the indicator.
+The entire row is one press target: the indicator, the gap, the label, and the
+secondary text all activate the same control. Space activation comes from the
+native pressable button behavior on Windows and macOS; Checkbox adds no key
+handling and does not intercept Tab.
 
-## Animation
+A press resolves the next status from the current one. `checked` resolves to
+`unchecked`. Both `unchecked` and `indeterminate` resolve to `checked`, so a
+mixed parent moves forward to fully selected rather than cycling back through
+mixed. `onStatusChange` receives the resolved value and any caller `onPress`
+handler runs afterward.
 
-Status transitions (Unchecked → Checked) may include a brief checkmark reveal animation. State transitions (Rest → Hover) are platform-driven color transitions.
+Status ownership follows the supplied props. While `status` is supplied the
+control is externally driven: it renders exactly what it is given, reports the
+resolved value, and does not move on its own. Without `status` it starts from
+`defaultStatus` and applies the resolved value itself while still reporting it.
 
-> **Reduced motion:** When the OS reduce-motion setting is set, all transitions should be instant (duration 0ms). No scale, translate, or opacity animation.
+A disabled Checkbox returns from the press handler before resolving a status,
+so neither `onStatusChange` nor the caller `onPress` runs.
+
+## Focus and motion
+
+The focus visual stays in the tree for the lifetime of the control. Focus
+changes its visibility rather than mounting or unmounting a border-bearing
+native view. It is shown only when the control is focused and enabled.
+
+Focus is tracked from focus and blur events without distinguishing input
+modality, so a pointer press that moves focus also shows the ring.
+
+Checkbox runs no timed animation. Status, hover, press, and focus styling
+change on the next render, so reduced-motion settings need no separate path.

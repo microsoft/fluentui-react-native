@@ -1,31 +1,44 @@
-# Divider Usage
+# Divider usage
 
-## When to Use
+Use Divider when the boundary between two content groups needs a visible line.
+Reach for spacing and type hierarchy first; a Divider on every boundary turns
+the rule into noise rather than a signal.
 
-- To visually separate distinct content groups within a surface when spacing and typographic hierarchy alone are insufficient.
-- To break a long vertical list or form into logical sections with optional section labels.
-- To create a vertical boundary between side-by-side content regions (e.g., panel edges, column separators).
-- To add a labeled section break where the label provides contextual orientation (e.g., "Or", a date, a category name).
+```tsx
+<Divider label="Recent files" />
+<Divider label={null} icon={null} />
+```
 
-### When NOT to Use
+The label renders by default. Pass `label={null}` together with `icon={null}`
+for a plain rule, which is the right choice when the sections around it are
+already named by headings.
 
-- Do not use a Divider purely for decoration — if the content groups are already visually distinct through spacing, background color, or type hierarchy, a Divider adds clutter.
-- Do not use a Divider between every item in a list — prefer spacing. Reserve Dividers for grouping boundaries.
-- Do not use a Divider as an interactive element — it has no states, no focus behavior, and no click/tap behavior.
+## Layout
 
----
+`center` is the default and reads as a balanced section break. Use `start` when
+the label should align with the leading edge of the surrounding content, which
+usually matches a list or form that is aligned the same way. Use `end` for the
+mirror case. Writing direction determines which end is the start, so do not
+pick `start` or `end` to mean left or right.
 
-## Behavior
+```tsx
+<Divider layout="start" label="Shared with me" />
+```
 
-- **Never use a Divider when spacing alone communicates the boundary.** A Divider is explicit visual reinforcement — if gap tokens or typographic hierarchy already separate content, adding a Divider creates visual noise.
-- **Never use a Divider as an interactive element.** It has no states, no focus behavior, and no click/tap behavior. If you need a clickable separator, use a different pattern.
-- **Always use semantic separator markup.** Use the separator role on the root so assistive technology can announce the thematic break.
-- **Always let the Divider stretch to fill its parent container.** Do not set a fixed width or height on the Divider itself — the parent layout controls extent.
-- **Use the label slot visibility to toggle between labeled and plain dividers.** Do not hide the label by setting it to an empty string — set the label slot to `null` instead.
+## Orientation
 
----
+Set `vertical` for a separator between side-by-side columns or inline groups.
+A vertical Divider stretches along its parent's height, so give the parent a
+definite cross-axis size or let the row stretch its children. Keep vertical
+labels short: the text still reads horizontally and widens the separator.
 
 ## Content
 
-- **Never place long-form text in the label slot.** Divider labels are short navigational cues — a word or brief phrase. If you need more than a few words, use a heading instead.
-- **Always use the functional type ramp for labels.** Dividers are UI chrome — the content ramp is reserved for editorial and AI-generated content.
+Both content slots accept a props object or an `as` replacement, so a product
+can substitute its own icon or text component while keeping the layout. The
+component sets icon size and color and marks the content non-accessible, so a
+replacement should accept those props rather than fix its own.
+
+Keep the label to a few words. It is styled as small secondary text and is not
+a substitute for a section heading; use a heading when the group needs a name
+in the reading order.

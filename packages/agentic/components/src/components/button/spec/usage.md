@@ -1,37 +1,45 @@
----
-component: Button
----
+# Button usage
 
-# Button Usage
+Use Button for a discrete action such as saving, creating, confirming, or
+opening a command surface. Use navigation components for destinations and a
+dedicated menu or split-button component when the action has choices.
 
-## When to Use
+`secondary` is the default appearance. Reserve `primary` for the highest
+emphasis action in a surface, use `outline` for lighter containment, and use
+`subtle` where the action should not compete with surrounding content.
 
-- To trigger a single, discrete action (submit, save, delete, open).
-- As the primary call to action on a surface — use Primary style.
-- In toolbars and command bars where toggle behavior is needed — use the Selected axis.
+```tsx
+<Button appearance="primary" content="Save" onPress={save} />
+<Button content="Add item" icon={addIcon} onPress={addItem} />
+<Button accessibilityLabel="Close dialog" icon={closeIcon} onPress={close} />
+```
 
----
+Icon-only buttons need an action-oriented accessible label and visible product
+context such as a tooltip. Small buttons are intended for dense command
+surfaces; medium is the general default; large gives an action more physical
+presence.
 
-## Behavior
+## Externally controlled selection
 
-- **Never use Disabled to represent a toggled-off state.** Disabled means the control is unavailable. Use Selected=False for the inactive toggle state.
-- **Always apply the correct radius token per layout.** Do not hardcode pixel values. If the design source contains a literal that is not covered by tokens, flag it as a token gap before building.
-- **Always use the Fluent Iconography Image icon as the default INSTANCE_SWAP value.** Never use placeholder frames, shapes, or custom vectors in icon slots.
-- **Always prevent layout reflow on toggle buttons.** When the Selected axis is active, the label weight changes from Regular to Semibold, which shifts the text width. Reserve layout space at Semibold width so the container does not resize on toggle. In CSS, use a hidden pseudo-element or ghost span with Semibold weight and zero height; in Figma, use the ghost node pattern. Non-toggle buttons (no Selected axis) do not need this.
+The existing FURN API permits toggle presentation on Button. Treat the value
+as controlled state:
 
-> **Icon style rule:** Selected=False renders the **Regular** icon; Selected=True renders the **Filled** icon. This applies across all platforms — in code, swap the icon asset when the selected state changes; in Figma, bind Regular props to Selected=False nodes and Filled props to Selected=True nodes.
+```tsx
+const [favorite, setFavorite] = useState(false);
 
----
+<Button
+  content="Favorite"
+  icon={regularStar}
+  selected={favorite}
+  selectedIcon={filledStar}
+  onPress={() => setFavorite((value) => !value)}
+/>;
+```
 
-## Layout
+Do not use `disabled` to represent an unselected value. Avoid introducing new
+uses of this Button-specific selection API when a dedicated ToggleButton
+contract is required for alignment with current Flex guidance.
 
-- **Never use more than one Primary button per surface.** Multiple Primaries eliminate hierarchy and create visual noise.
-- **Never mix icon sizes across sizes.** Small buttons use 16px icons; Medium and Large use 20px icons. Mismatched icon sizes break the proportional relationship between icon weight and container height.
-
----
-
-## Content
-
-- **Always use the functional type ramp on labels.** Buttons are interactive UI chrome — the content ramp is reserved for editorial and AI-generated content.
-- Allow labels to wrap when the surrounding layout constrains the button. Do not force truncation unless the consuming
-  surface explicitly supplies that behavior through the content slot.
+Content wraps when a consumer constrains the root. Supply a content-slot
+override only when a product deliberately needs a different truncation or
+text presentation policy.

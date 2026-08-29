@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "component": "progress-bar",
+  "skill": "flex-components:progress-bar",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-28",
+  "availableSurfaces": ["shared", "web"],
+  "surfacesConsulted": ["shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/progress-bar/SKILL.md",
+      "marketplaceBlobSha": "fff90659253e9b1480208a32396999fcfd44bcd5",
+      "marketplaceSha256": "0c91374fd4a0daaa512b49af07e2b7203d15150b01316bf06cc1b177c68d0f86",
+      "originPath": "plugins/components/skills/progress-bar/SKILL.md",
+      "originBlobSha": "fff90659253e9b1480208a32396999fcfd44bcd5",
+      "originSha256": "0c91374fd4a0daaa512b49af07e2b7203d15150b01316bf06cc1b177c68d0f86",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/progress-bar/usage.md",
+      "marketplaceBlobSha": "ad9272776b8db8908a1df567015e54f5d9bfe19a",
+      "marketplaceSha256": "475b1e1b9b54f60576ac634ffe2c88e82bf77cfbb84dd9bd3b320680eba8ce90",
+      "originPath": "plugins/components/skills/progress-bar/usage.md",
+      "originBlobSha": "ad9272776b8db8908a1df567015e54f5d9bfe19a",
+      "originSha256": "475b1e1b9b54f60576ac634ffe2c88e82bf77cfbb84dd9bd3b320680eba8ce90",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/progress-bar/web/accessibility.md",
+      "marketplaceBlobSha": "76f9ba800b55ab858d3e418796900b7fea54c97d",
+      "marketplaceSha256": "8009c1a22dfa14e7eb4bf2a762a6d2e7c201506295b5a5644918d36da9ae5f2c",
+      "originPath": "plugins/components/skills/progress-bar/web/accessibility.md",
+      "originBlobSha": "76f9ba800b55ab858d3e418796900b7fea54c97d",
+      "originSha256": "8009c1a22dfa14e7eb4bf2a762a6d2e7c201506295b5a5644918d36da9ae5f2c",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/progress-bar/web/interaction.md",
+      "marketplaceBlobSha": "13860529f02ca7299b75c1ab596c392582828174",
+      "marketplaceSha256": "bbf495b921cba77e0584555dc8812103404ab7af1ad64d531a7d3cdaa824e917",
+      "originPath": "plugins/components/skills/progress-bar/web/interaction.md",
+      "originBlobSha": "13860529f02ca7299b75c1ab596c392582828174",
+      "originSha256": "bbf495b921cba77e0584555dc8812103404ab7af1ad64d531a7d3cdaa824e917",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/progress-bar/web/tokens.yaml",
+      "marketplaceBlobSha": "84df4df9c5a795147e8d62ad34eb82d17f0b86d8",
+      "marketplaceSha256": "0c93ee9d7ace8b4e601f6e4d434317d1202f9b5e43acf393bf309f15ff3f5768",
+      "originPath": "plugins/components/skills/progress-bar/web/tokens.yaml",
+      "originBlobSha": "84df4df9c5a795147e8d62ad34eb82d17f0b86d8",
+      "originSha256": "0c93ee9d7ace8b4e601f6e4d434317d1202f9b5e43acf393bf309f15ff3f5768",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [],
+  "divergences": [
+    {
+      "id": "progress-bar-value-transition",
+      "status": "deferred"
+    },
+    {
+      "id": "progress-bar-monotonic-value",
+      "status": "deferred"
+    },
+    {
+      "id": "progress-bar-header-alignment",
+      "status": "deferred"
+    },
+    {
+      "id": "progress-bar-status-live-region",
+      "status": "not-applicable"
+    },
+    {
+      "id": "progress-bar-empty-trailing-group",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "PGB-001",
+      "evidence": ["progress-bar.types.ts", "useProgressBar.ts", "progress-bar.types.test.ts", "progress-bar.test.tsx"]
+    },
+    {
+      "id": "PGB-002",
+      "evidence": ["renderProgressBar.tsx", "useProgressBar.ts", "progress-bar.test.tsx", "progress-bar.stories.tsx"]
+    },
+    {
+      "id": "PGB-003",
+      "evidence": ["useProgressBar.ts", "progress-bar.test.tsx"]
+    },
+    {
+      "id": "PGB-004",
+      "evidence": ["useProgressBar.ts", "useProgressBarStyles.ts", "progress-bar.test.tsx"]
+    },
+    {
+      "id": "PGB-005",
+      "evidence": ["useProgressBar.ts", "useProgressBarStyles.ts", "progress-bar.test.tsx"]
+    },
+    {
+      "id": "PGB-006",
+      "evidence": ["useProgressBar.ts", "renderProgressBar.tsx", "progress-bar.test.tsx"]
+    },
+    {
+      "id": "PGB-007",
+      "evidence": ["progress-bar.styles.ts", "useProgressBarStyles.ts", "progress-bar.test.tsx"]
+    }
+  ]
+}

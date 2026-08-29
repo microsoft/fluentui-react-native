@@ -1,44 +1,66 @@
----
-component: Input
----
+# Input usage
 
-# Input Usage
+Use Input for a single line of free-form text inside a form. It is the entry
+control only: the field label, the helper text, the error message, and the
+validation rules belong to the surrounding form.
 
-## When to Use
+```tsx
+<Input accessibilityLabel="Display name" placeholder="How others see you" onChangeText={setDisplayName} value={displayName} />
+```
 
-- To collect short, single-line text data: names, email addresses, search queries, URLs.
-- As the text entry surface inside a Field component for labeled, validated form fields.
-- In toolbars or command bars for inline search or filter patterns.
+Do not use Input for multi-line notes, for a value picked from a list, or for a
+search box with its own result behavior. Those need controls that own their
+extra affordances.
 
-### vs Textarea
+## Variant
 
-Input is for short, single-line text. Textarea is for multi-line, free-form content — descriptions, comments, or any context where the user may need to write more than one line. If the expected input could exceed one line, use Textarea.
+`outline` is the default and is the right choice for a standalone field, a
+dialog, or a form on a plain surface, because the full border makes the target
+area unambiguous. Use `underline` for dense rows where a full border would
+crowd the layout, such as a settings list or a compact toolbar. Keep one variant
+per form.
 
-### vs Field
+## Size
 
-Input is the bare text entry control. Field is the container that wraps Input with a label, helper text, info button, and validation message. Use Input alone only when external context provides the label and error handling. Use Field in all standard form layouts.
+`medium` is the default. Use `small` for dense secondary surfaces and `large`
+for a primary field on a spacious layout or where a larger touch target is
+needed. Size drives typography, padding, minimum height, icon size, and the
+outline corner radius together, so pick it from the surrounding density rather
+than adjusting individual metrics.
 
----
+## Value
 
-## Behavior
+Supplying `value` makes the field externally driven, in which case
+`onChangeText` must write the next value back or the text will not change.
+Supply `defaultValue` instead to let the component keep the value while still
+observing edits.
 
-- **Never use Disabled to represent Read only.** Disabled means the control is unavailable and should not be interacted with. Read only means the value is visible and selectable but not editable. They serve different purposes and use different foreground tokens — Disabled uses `neutral-disabled` (low contrast), Read only uses `neutral-primary` (full contrast).
-- **Always synchronize the visual Error state with the underlying validation signal.** A red border without a programmatic error signal is invisible to assistive technology; the validation signal without the visual state confuses sighted users. Both must change together.
-- **Placeholder text is not a label.** Placeholder text disappears on input and is unreliably surfaced by assistive technology. Always provide a persistent label via Field or an equivalent platform-appropriate accessible name.
-- **Icon End slots are for status or action affordances.** Common patterns: a clear button (dismiss icon), a visibility toggle (eye icon for password fields), or a validation indicator. Do not use trailing icons for decorative purposes.
+## Disabled and read only
 
----
+Use `disabled` when the field is not applicable yet, for example when it depends
+on a choice that has not been made. Use `readOnly` when the value matters and
+should still be readable and copyable but cannot be edited here, for example a
+generated identifier. Read-only fields stay reachable and keep primary
+foreground emphasis; disabled fields are dimmed and leave the tab order.
 
-## Layout
+## Error
 
-- **Input fills the width of its container.** Do not constrain Input to a fixed pixel width unless the content type demands it (e.g., a 4-digit PIN input). Let the parent container determine width.
-- **Size should match adjacent interactive components.** When placing Input next to a Button in a search bar, use the same Size value for both to maintain vertical alignment.
-- **Use Small in dense contexts only.** Small meets the 24px minimum target size but leaves no room for error. Prefer Medium as the default.
+`error` selects the danger boundary and marks the field invalid, but it renders
+no message. Always pair it with a visible message near the field, and reference
+that reason from `accessibilityHint` so it is announced. Set the flag when the
+user can act on the problem rather than on every keystroke.
 
----
+## Icons
 
-## Content
+`iconStart` suits a category marker such as a currency or unit symbol.
+`iconEnd1` and `iconEnd2` suit trailing status or affordance indicators, and
+`iconEnd2` requires `iconEnd1`. Icons are decorative and non-interactive here:
+anything the user must click, such as a reveal toggle or a clear action, belongs
+in a separate control next to the field.
 
-- **Placeholder text should describe the expected input format or provide an example** — e.g., "Search files...", "name@example.com". Keep it short; placeholder text is truncated when the input is narrow.
-- **Do not repeat the label in the placeholder.** If the Field label says "Email address", the placeholder should not also say "Email address" — use "name@example.com" instead.
-- **Use sentence case for placeholder text.** No trailing punctuation unless the placeholder is a complete sentence (which it generally should not be).
+## Naming
+
+Give every field a name. Use a visible label in the form and mirror it with
+`accessibilityLabel`, or supply `accessibilityLabel` alone when the layout has no
+room for a visible label. A placeholder is a hint about the expected content and
+is not a substitute for either.

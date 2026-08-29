@@ -1,82 +1,138 @@
 ---
 name: progress-bar
 platform: react-native (Windows, macOS)
-description: Non-interactive indicator for task progress or continuous-value snapshots. Covers three Type modes (Determinate, Indeterminate, Static), a three-status semantic palette (Neutral, Error, Success), and optional Label, Value text, and Validation icon slots.
-argument-hint: "[variant axis or behavior question, e.g. 'when should I use Indeterminate vs Static?']"
-tokens: spec/tokens.yaml
-accessibility: spec/accessibility.md
-interaction: spec/interaction.md
-usage: spec/usage.md
----
-
-## Metadata
-
-| Field     | Value       |
-| --------- | ----------- |
-| Type      | atomic      |
-| Component | ProgressBar |
-
-This spec covers the ProgressBar component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (animation, reduced motion) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
-
-Answer design questions directly — lead with rationale, then tokens. The most common misuse is reaching for **Indeterminate** when the duration is actually knowable — Determinate offers a better experience and should be preferred whenever a percentage can be calculated. The second most common misuse is conflating **Static** with Determinate — Static is for snapshot values that do not advance over time (storage usage, quota fill), and must not animate.
-
+status: implemented
+source: ./spec/source.json
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 # ProgressBar
 
-## Spec
+## Scope
 
-### Anatomy
+ProgressBar is a non-interactive indicator for the progress of a task or for a
+snapshot of a continuous quantity. It renders a header row with a label and an
+optional validation icon and value text, above a track containing a fill
+indicator.
 
-1. **Container** — root auto-layout column. Holds the Header row and the Bar row. Stretches to fill available width.
-2. **Header** — auto-layout row above the bar. Always present. Lays out as `[Label … (gap, flex) … Validation icon, Value text]`.
-3. **Label** — text node bound to the `Label string` component property. Required — see "Why the Label is required" in Variants below.
-4. **Validation icon** — optional 16px Fluent Iconography instance shown only for Error and Success statuses. Sits immediately before Value text. Color is set per the matching Status (see `tokens.yaml`).
-5. **Value text** — optional text node bound to the `Value string` component property. Right-aligned within the Header.
-6. **Track** — full-width rail beneath the Header. Owns the bar's pill radius.
-7. **Indicator** — fill positioned inside the Track. Width is value-driven for Determinate and Static (percentage of Track width); for Indeterminate it animates across the Track (see `interaction.md`). Color is set per the active Status — see "Why the Indicator uses cross-family token application" in Variants below.
+It supports three modes: a value-driven determinate bar, a looping
+indeterminate bar, and a value-driven static bar that never animates. A
+three-value status axis recolors the indicator and selects a default validation
+icon.
 
-| Slot            | Required | Default                                                    |
-| --------------- | -------- | ---------------------------------------------------------- |
-| Header          | Yes      | Visible                                                    |
-| Label           | Yes      | Visible inside the Header                                  |
-| Value text      | No       | Visible inside the Header                                  |
-| Validation icon | No       | Hidden; enable for Error / Success when feedback is needed |
+ProgressBar owns no cancel, pause, retry, or dismissal affordance, and it does
+not announce outcome messages. It never takes focus and never responds to
+pointer or keyboard input. It is not a spinner, a step indicator, or a slider.
 
-> **Indicator color and Status:** The Indicator fill is the only token that changes with Status. The Track stays neutral across all statuses so the bar's affordance is consistent and the color signal is carried by the moving/filled portion alone.
+## Public contract
 
----
+### Props and defaults
 
-### Variants
+| Prop                 | Type                                     | Default                | Contract                                                                                                                                       |
+| -------------------- | ---------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`               | `determinate \| indeterminate \| static` | `determinate`          | Selects value-driven, looping, or non-animating rendering.                                                                                     |
+| `status`             | `neutral \| error \| success`            | `neutral`              | Selects the indicator and validation icon color, and the default validation icon.                                                              |
+| `progress`           | `number`                                 | `0`                    | The value, interpreted as a percentage. Missing and non-numeric values resolve to `0` and the value is clamped to the range `0` through `100`. |
+| `label`              | `string`                                 | `Label`                | The header text. It is also the accessible name source.                                                                                        |
+| `valueText`          | `string`                                 | derived                | Overrides the derived value text.                                                                                                              |
+| `showValueText`      | `boolean`                                | `true`                 | Controls whether the value text renders.                                                                                                       |
+| `showValidationIcon` | `boolean`                                | `status !== 'neutral'` | Controls whether the validation icon renders.                                                                                                  |
+| `validationIcon`     | slot for `Icon`                          | derived from `status`  | Replaces the default icon. `null` removes it.                                                                                                  |
 
-Variant properties are ordered in the design tool: **Type → Status**.
+The root accepts the owned `ViewProps` surface. A caller `style` is applied
+after the token-derived root style. `accessibilityLabelledBy` supplied by a
+caller is preserved and the generated label identifier is appended to it.
 
-#### Type
+Derived value text is the supplied `valueText` when present, otherwise
+`Progress failed` for the error status, `Complete` for the success status,
+`Working…` for an indeterminate bar, and the resolved percentage followed by a
+percent sign otherwise.
 
-| Value                     | Description                                                                                           | When to Use                                                                                                            |
-| ------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **Determinate (Default)** | Animated indicator whose width reflects a known percentage.                                           | Tasks where progress is calculable — uploads, downloads, multi-step flows. Preferred whenever a percentage exists.     |
-| **Indeterminate**         | Continuously-animated indicator with no fixed width. Communicates "work in flight, duration unknown." | Brief operations where progress cannot be calculated. Switch to Determinate as soon as a percentage becomes available. |
-| **Static**                | Indicator width reflects a fixed value. No animation.                                                 | Snapshots of a continuous quantity — storage capacity, quota fill, score. The value is a state, not a moving target.   |
+### Slots and anatomy
 
-**Why three Type values instead of a boolean `indeterminate`:** Determinate and Static share width-driven rendering but differ in animation behavior — Determinate animates value transitions, Static does not. Collapsing both under a single "determinate" mode would force consumers to disable animation per-instance and obscures the snapshot-vs-progress distinction. Indeterminate has its own rendering path entirely (continuous loop, no value).
+The render order is the root, then the header row containing the label and,
+when either is shown, a trailing group holding the validation icon followed by
+the value text, then the track containing the indicator.
 
-#### Status
+| Slot             | Rendered when                                                                                         | Contract                                                                                                    |
+| ---------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `root`           | always                                                                                                | A `View` that carries progress semantics, the accessible value, and the caller style.                       |
+| Header           | always                                                                                                | A row that holds the label and the trailing group.                                                          |
+| Label            | always                                                                                                | A non-accessible `Text` that carries the generated identifier the root is named from. It shrinks and wraps. |
+| Trailing group   | `showValidationIcon` or `showValueText` resolves true                                                 | A non-shrinking row that can be empty when the icon flag is true but no icon resolves.                      |
+| `validationIcon` | the icon flag is true and a custom icon resolves, or status is non-neutral and the slot is not `null` | Sized and colored by the component and hidden from the accessibility tree.                                  |
+| Value text       | `showValueText`                                                                                       | A non-accessible `Text` holding the derived or supplied value text.                                         |
+| Track            | always                                                                                                | A non-accessible `View` that owns the pill radius, clips the indicator, and reports its measured width.     |
+| Indicator        | always                                                                                                | A non-accessible animated `View` absolutely positioned inside the track.                                    |
 
-| Value                 | Description                                                                                          | When to Use                                                                       |
-| --------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **Neutral (Default)** | Indicator uses the brand palette. No Validation icon.                                                | Default — task is in progress without success or failure semantics.               |
-| **Error**             | Indicator uses the danger palette. Validation icon (Error Circle Filled) appears in the Header.      | Task has failed or cannot complete. Replace the Value text with an error message. |
-| **Success**           | Indicator uses the success palette. Validation icon (Checkmark Circle Filled) appears in the Header. | Task has completed successfully and the bar is held briefly before dismissal.     |
+The label is always rendered and cannot be hidden; there is no bare-track form.
+The track and the indicator are internal and are not public slots.
 
-**Why three statuses, not four:** Warning is intentionally omitted. A progress bar is binary at the boundary — it either succeeds or it doesn't. "In trouble but not failed" is a Determinate progress state with neutral semantics; the surrounding context (a MessageBar, helper text) carries the caution signal. See [`flex-components:message-bar`](../../../specs/message-bar/SPEC.md) for the Warning palette.
+### Requirements
 
-**Why Neutral uses brand and not neutral palette:** The brand-colored indicator is the long-standing Fluent default for an in-progress bar — it reads as "live, moving toward completion" without implying any outcome. A neutral-gray indicator would be ambiguous against the Track (also neutral) and would read as inactive.
+- **PGB-001:** Resolve the documented defaults, clamp the value to the range
+  `0` through `100`, resolve a non-numeric value to `0`, and keep the supported
+  native root props.
+- **PGB-002:** Render the documented order, always render the label, and gate
+  the trailing group on the icon and value-text flags even when no icon slot
+  resolves.
+- **PGB-003:** Derive the value text from `valueText`, the status, and the type
+  in that order, falling back to the resolved percentage.
+- **PGB-004:** Size the indicator from the measured track width: the resolved
+  fraction of the track for determinate and static, and a fixed segment for
+  indeterminate.
+- **PGB-005:** Run the looping indeterminate translation only for an
+  indeterminate bar with a measured track and reduced motion off, and stop the
+  loop and reset the offset otherwise.
+- **PGB-006:** Expose progress semantics that are not focusable, name the bar
+  from the label through the generated identifier while preserving a caller
+  identifier list, publish the bounded value for determinate and static, and
+  publish a busy state with no value for indeterminate.
+- **PGB-007:** Resolve the track, indicator, label, value text, and validation
+  icon values from theme tokens with the indicator and the validation icon
+  sharing one status color, and apply the caller `style` last.
 
-**Why the Indicator uses cross-family token application:** The Track is a neutral background token and the Indicator is a semantic foreground primary token for each Status. The pairing prioritizes a soft, recessive Track that reads as a quiet rail rather than a high-contrast bar; the visual contrast between page surface, Track, and Indicator does not meet WCAG 1.4.11 (3:1 non-text contrast) on its own — the required Label closes that gap (see "Why the Label is required" below and `accessibility.md` § 1.4.11). A side effect of the cross-family choice: the Indicator and the Validation icon for a given Status render in identical color, which keeps the status signal coherent across both surfaces.
+## Platform behavior
 
-**Why the Label is required:** The Track and Indicator are tuned for a soft, recessive visual — the contrast between page surface, unfilled Track, and filled Indicator is below WCAG 1.4.11's 3:1 non-text contrast threshold. The Label, which meets 1.4.3 text contrast at 4.5:1, is required so the component's identity and current state are perceivable through text. Suppressing the Label removes the accessibility bridge and is not supported — there is no `Label` boolean prop. Value text and Validation icon remain optional and do not carry this responsibility.
+Windows and macOS render the same structure. The root sets `focusable={false}`
+and no press, hover, or focus handlers are attached, so ProgressBar never enters
+the tab order and has no focus visual on either platform.
 
-**Indeterminate × Status interaction:** Status changes the Indicator's color in all three Types. However, Indeterminate is typically used only with Neutral status — Error and Success are terminal outcomes that imply a known result, which contradicts "duration unknown." If Status becomes Error or Success on an Indeterminate bar, transition to Determinate or Static and hold the final value.
+The indicator is measured, not proportioned by layout: the track reports its
+width on layout and the indicator width is computed from that number. Before the
+first layout pass the indicator width is zero, so the bar renders empty for one
+frame on both platforms.
 
-**Why no State axis:** ProgressBar is non-interactive — it announces information but does not respond to pointer or keyboard input. There is no Hover, Pressed, or Focus state. A Disabled state was considered and rejected: when the underlying task is paused or unavailable, hiding the bar or replacing it with surrounding context (e.g. a MessageBar) communicates intent more clearly than dimming. Platform token files omit hover/pressed token entries because ProgressBar owns no hover/pressed token values.
+The indeterminate loop is a two-second linear translation driven on the
+JavaScript thread rather than the native driver, because it animates a computed
+offset alongside a width that also comes from layout. Reduced motion, reported
+by the platform accessibility settings, stops the loop and leaves the segment at
+its starting position.
+
+Determinate value changes apply immediately on both platforms; there is no
+animated width transition.
+
+## Divergences from Flex
+
+| ID                                  | Disposition    | React Native contract                                                                                                                                                                                                                                                                        | Follow-up                                                                                                  |
+| ----------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `progress-bar-value-transition`     | Deferred       | Determinate value changes snap to the new width. The transition intent is carried by web-only style keys that the Windows and macOS renderers ignore, so a determinate bar and a static bar animate identically, which is to say not at all.                                                 | Drive the width through an animated value so determinate transitions ease and static changes stay instant. |
+| `progress-bar-monotonic-value`      | Deferred       | The determinate and static value never decreases while the type stays the same, because each update keeps the larger of the previous and the incoming value. Only a change from indeterminate resets it. A caller reporting a genuine decrease, such as a freed quota, cannot lower the bar. | Keep the resolved value equal to the clamped incoming value and drop the monotonic clamp.                  |
+| `progress-bar-header-alignment`     | Deferred       | The header packs the label and the trailing group together at the leading edge with a fixed gap. Flex pushes the validation icon and the value text to the trailing edge with flexible space between.                                                                                        | Let the label take the free space or set the header to distribute space between its two children.          |
+| `progress-bar-status-live-region`   | Not applicable | React Native exposes no live-region primitive here, so a status change to error or success is not announced. The component reports role, name, and value only.                                                                                                                               | None available at the component level. The surrounding surface must announce the outcome.                  |
+| `progress-bar-empty-trailing-group` | Deferred       | When the icon flag is true for neutral status or a `null` icon and value text is hidden, FURN renders an empty trailing group.                                                                                                                                                               | Gate the group on the resolved icon slot or visible value text.                                            |
+
+## Conformance
+
+| Requirement | Evidence                                                                                            |
+| ----------- | --------------------------------------------------------------------------------------------------- |
+| PGB-001     | `progress-bar.types.ts`, `useProgressBar.ts`, `progress-bar.types.test.ts`, `progress-bar.test.tsx` |
+| PGB-002     | `renderProgressBar.tsx`, `useProgressBar.ts`, `progress-bar.test.tsx`, `progress-bar.stories.tsx`   |
+| PGB-003     | `useProgressBar.ts`, `progress-bar.test.tsx`                                                        |
+| PGB-004     | `useProgressBar.ts`, `useProgressBarStyles.ts`, `progress-bar.test.tsx`                             |
+| PGB-005     | `useProgressBar.ts`, `useProgressBarStyles.ts`, `progress-bar.test.tsx`                             |
+| PGB-006     | `useProgressBar.ts`, `renderProgressBar.tsx`, `progress-bar.test.tsx`                               |
+| PGB-007     | `progress-bar.styles.ts`, `useProgressBarStyles.ts`, `progress-bar.test.tsx`                        |

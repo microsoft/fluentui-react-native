@@ -1,87 +1,57 @@
 ---
 name: avatar
 platform: react-native (Windows, macOS)
-description: Atomic identity element representing a person, group, or entity. Covers three mutually exclusive display modes (Image, Icon, Initials), eight numeric sizes (16 / 20 / 24 / 28 / 32 / 40 / 56 / 120 px diameter), and non-interactive state handling.
-argument-hint: "[display mode or token question, e.g. 'icon avatar background token' or 'initials accessibility']"
+status: implemented
+source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
 ---
 
-## Metadata
-
-| Field     | Value  |
-| --------- | ------ |
-| Type      | atomic |
-| Component | Avatar |
-
-This spec covers the Avatar component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
-
-Answer design questions directly — lead with rationale, then tokens. Image, Icon, and Initials are mutually exclusive display modes — never show more than one simultaneously. Avatar is non-interactive; the component carries no focus ring, hover, or pressed states.
-
----
-
 # Avatar
 
-## Spec
+## Scope
 
-### Anatomy
+Avatar is a non-interactive identity marker. It renders exactly one image, icon, or initials presentation inside a circular React Native view, with optional active-ring styling. It does not open a profile, manage presence state, crop supplied image data, or compose a multi-avatar group.
 
-1. **Container** — circular frame; owns the fixed diameter per size, border radius, and background fill. Avatar has no container stroke — the fill defines the circle across all three content modes.
-2. **Image slot** — a user photo or entity image that covers the **entire** container edge-to-edge (full-bleed). The image spans the full diameter and is clipped to the circular radius — the per-size padding (see `tokens.yaml` `spacing`) applies to the Icon and Initials slots only, **never** to Image; an image inset by padding would render as a square that never reaches the circular clip. Active only in the Image display mode.
-3. **Icon slot** — centered Fluent Iconography instance representing the entity type. Active only in the Icon display mode.
-4. **Initials slot** — centered text node showing 1–2 characters (1 character at size 16). Active only in the Initials display mode. Uses a line height equal to its resolved font size at all sizes for optical centering — the React Native equivalent of CSS `line-height: 1`; see `tokens.yaml` (`typography.initials-line-height-override`) for rationale.
-5. **Activity ring** — a brand outline offset from the avatar container, indicating the person is active or collaborating in a shared space. The offset creates a true transparent gap that reveals the surface beneath. Both offset and stroke width scale with avatar size so the ring stays proportional at every diameter. Controlled by a boolean property. Does not affect layout dimensions (rendered as `outline` + `outline-offset`).
+## Public contract
 
-| Slot          | Required                          | Default     |
-| ------------- | --------------------------------- | ----------- |
-| Image         | No — active in Image mode only    | —           |
-| Icon          | No — active in Icon mode only     | Person icon |
-| Initials      | No — active in Initials mode only | "AB"        |
-| Activity ring | No                                | Hidden      |
+`size` defaults to `40` and accepts `16`, `20`, `24`, `28`, `32`, `40`, `56`, or `120`. `activityRing` defaults to `false`. `root` is required; `image`, `icon`, and `initials` are optional slots. The resolved content mode uses image first, then initials, then icon. Icon mode renders a person icon by default. Initials mode defaults to `AB`, uppercases string or numeric content, trims whitespace, and limits output to one character at size `16` or two characters otherwise.
 
----
+The root contains only the active content slot. Images are absolute-fill and use cover resizing. Icon and initials slots are centered; all content slots are decorative because the root owns any accessible identity. Supplying more than one content slot is accepted for compatibility, resolves through the documented priority, and issues a development warning.
 
-### Variants
+The resolved state retains size, activity-ring value, content mode, theme state, and user root style. User style is applied last. Avatar has no interaction-state ownership.
 
-Variant properties are ordered in the design tool: **Content → Size → State**.
+### Requirements
 
-#### Content
+- **AVT-001:** Resolve the allowed sizes, activity-ring default, content-mode precedence, icon fallback, and initials normalization.
+- **AVT-002:** Render only the selected content slot in the circular root and retain user root style after component styles.
+- **AVT-003:** Apply the size, content-mode, active-ring, icon, and initials token bindings documented in the companion.
+- **AVT-004:** Make a labeled avatar informative and an unlabeled default avatar hidden from accessibility descendants.
+- **AVT-005:** Add no interaction or focus behavior of its own and delegate
+  those semantics to a containing control, while forwarding the broad root
+  `ViewProps` surface.
 
-| Value        | Description                                                                | When to Use                                                                |
-| ------------ | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| **Image**    | Photo or entity image fills the container                                  | When a real user photo or entity brand image is available                  |
-| **Icon**     | Fluent Iconography icon centered in a filled container                     | When no photo is available and entity type can be represented by an icon   |
-| **Initials** | 1–2 character text centered in a filled container (1 character at size 16) | When no photo is available and entity type is best represented by initials |
+## Platform behavior
 
-**Why three modes share the same component:** Image, Icon, and Initials all resolve to the same circular container with identical sizing, padding, and accessibility surface — they differ only in which inner slot is rendered. A Content variant keeps the three fallback paths consistent so callers can swap between them based on data availability without reflowing layout.
+An Avatar with `accessibilityLabel` is accessible with React Native image role; callers can also explicitly control `accessible`. Without an informative label, the default root is hidden from accessibility descendants. Its image, icon, and initials children are always hidden so identity is not announced twice.
 
----
+Windows exposes an informative root as a UI Automation image; macOS exposes it as an AX image. Avatar adds no tab stop or `FocusVisual`, although a caller can opt the forwarded root into focus with `focusable`. The active ring uses React Native root outline properties and does not introduce a separate rendered child or change the requested width and height.
 
-#### Size
+## Divergences from Flex
 
-Size is a numeric scale — the variant value is the container's pixel diameter. Eight sizes are valid: **16, 20, 24, 28, 32, 40, 56, 120**. The numeric scale lets the component grow new stops without naming churn while still capturing the full set of valid sizes the design system supports.
+- `avatar-content-precedence` — **accepted.** Flex evidence treats the three content presentations as an authoring-time exclusive choice. FURN preserves a permissive slot API: image wins over initials and initials wins over icon, while development builds warn about multiple supplied modes.
+- `avatar-focusable-prop-surface` — **deferred.** FURN forwards
+  `focusable` through root `ViewProps` even though Avatar supplies no action or
+  focus visual. Product code should keep an identity-only Avatar unfocusable.
 
-| Value   | Diameter | When to Use                                                                                                                            |
-| ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **16**  | 16px     | Dense surfaces: inline mentions, compact participant lists, chat bubbles. Initials are constrained to a single character at this size. |
-| **20**  | 20px     | Dense rows where 16 reads too small but 28 reads too heavy: compact toolbars, tight list cells, status strips.                         |
-| **24**  | 24px     | Dense rows where 20 reads too small but 28 reads too heavy: compact toolbars, tight list cells, status strips.                         |
-| **28**  | 28px     | Compact list rows and inline person chips that need slightly more identity weight than 16                                              |
-| **32**  | 32px     | Tight rows where text and avatar share a single line: input chips, condensed participant rosters                                       |
-| **40**  | 40px     | Default. Comment threads, assignment fields, profile headers                                                                           |
-| **56**  | 56px     | High-emphasis identity moments: profile cards, people pickers, detail views                                                            |
-| **120** | 120px    | Hero moments: large profile views, about pages, onboarding flows                                                                       |
+## Conformance
 
-**Why sizes share the same content treatment:** Size changes only the container diameter, icon size, and typography scale — not semantic meaning. **Why a numeric scale rather than named buckets:** Once a system carries more than ~4 sizes, names like Small / Medium / Large / XL run out fast. A pixel-named scale keeps the contract honest while still constraining consumers to the documented set.
-
----
-
-#### State
-
-| Value    | Description     |
-| -------- | --------------- |
-| **Rest** | Default display |
-
-Avatar is non-interactive — no Hover, Pressed, Focus, or Disabled states apply.
+| Requirement | Evidence                                                                     |
+| ----------- | ---------------------------------------------------------------------------- |
+| AVT-001     | `avatar.types.ts`, `useAvatar.ts`, `avatar.test.tsx`, `avatar.types.test.ts` |
+| AVT-002     | `useAvatarStyles.ts`, `renderAvatar.tsx`, `avatar.test.tsx`                  |
+| AVT-003     | `avatar.styles.ts`, `useAvatarStyles.ts`, `avatar.test.tsx`                  |
+| AVT-004     | `useAvatar.ts`, `useAvatarStyles.ts`, `avatar.test.tsx`                      |
+| AVT-005     | `avatar.types.ts`, `useAvatar.ts`, `avatar.stories.tsx`                      |

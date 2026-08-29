@@ -1,26 +1,16 @@
----
-component: MenuItem
-platform: react-native (Windows, macOS)
----
+# MenuItem accessibility
 
-# MenuItem Accessibility (React Native — Windows & macOS)
+An interactive root exposes `menuitem` by default, `menuitemradio` with
+`hasCheckmark`, or `menuitemcheckbox` with `hasMultiselect`. Indicator roles
+include checked state from the caller-supplied selected value. A selected
+default menu item instead exposes selected state. The root is accessible; its
+name defaults to content and a chevron receives the default submenu hint.
 
-## Spec
+A section header exposes the React Native `none` role, is disabled, and is not
+focusable. Icon, avatar, chevron, checkmark, and checkbox visuals are
+inaccessible presentation. On Windows the root is represented through UIA,
+and on macOS through AX, using the resolved role, name, state, and availability.
 
-- **ARIA role:** `menuitem` (default), `menuitemcheckbox` (when Multiselect is true), or `menuitemradio` (when single-select via Checkmark). Section Header uses `presentation` or `separator` — it is not an interactive element.
-- **Required attributes:**
-  - `aria-checked="true|false"` — required on `menuitemcheckbox` and `menuitemradio` roles when selection state is exposed.
-  - `aria-disabled="true"` — on disabled items that should remain announced by screen readers.
-  - `aria-haspopup="menu"` — required when the item has a Chevron indicating a submenu.
-  - `aria-expanded="true|false"` — required alongside `aria-haspopup` when the submenu is open.
-- **WCAG:**
-  - **1.4.3 — Contrast (Minimum):** All text and icon foreground must meet 4.5:1 against their background at rest. Verify disabled tokens — intentionally below full contrast but should remain legible.
-  - **2.1.1 — Keyboard:** Enter and Space must activate the item.
-  - **2.4.7 — Focus Visible:** Focus ring must be visible on all non-disabled List Items.
-  - **2.5.8 — Target Size (Minimum, AA):** Minimum interactive target height is 40px (met by the default item height).
-- **Screen reader:** Announces label, role, and state (checked/unchecked for selection, disabled when applicable, "has submenu" when Chevron is present).
-
-## Usage
-
-- **Correct ARIA role per selection pattern:** Use `menuitemradio` for single-select with Checkmark; `menuitemcheckbox` for Multiselect; `menuitem` for non-selectable actions.
-- **Section Header navigation:** Section Headers must not appear in the tab sequence or arrow key cycle — they are non-interactive labels.
+FocusVisual is the component's visible focus treatment. An owning menu remains
+responsible for a menu-level name, menu position, and relationships to any
+submenu.

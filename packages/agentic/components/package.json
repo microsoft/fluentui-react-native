@@ -30,10 +30,12 @@
   },
   "scripts": {
     "build": "tsc -b",
+    "check:spec-contracts": "node ./scripts/spec-contracts/check-spec-contracts.cjs",
     "clean": "fluentui-scripts clean",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "test": "fluentui-scripts jest",
+    "report:spec-source-drift": "node ./scripts/spec-contracts/report-spec-source-drift.cjs",
+    "test": "node ./scripts/spec-contracts/check-spec-contracts.cjs && fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {

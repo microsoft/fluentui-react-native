@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "component": "list-item",
+  "skill": "flex-components:list-item",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-28",
+  "availableSurfaces": ["shared", "web"],
+  "surfacesConsulted": ["shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/list-item/SKILL.md",
+      "marketplaceBlobSha": "2847a936612c6864061461ebb9fc85108c5a7abf",
+      "marketplaceSha256": "038271b4000fdc07834a526bbaf687520e3bbc7d40d2ef68ee78373fcb45d91e",
+      "originPath": "plugins/components/skills/list-item/SKILL.md",
+      "originBlobSha": "2847a936612c6864061461ebb9fc85108c5a7abf",
+      "originSha256": "038271b4000fdc07834a526bbaf687520e3bbc7d40d2ef68ee78373fcb45d91e",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/list-item/usage.md",
+      "marketplaceBlobSha": "eeba12db175de73668f457c4440f26213c85620a",
+      "marketplaceSha256": "935e3723b8192bcec31a825337c52c8aa3eda786102c765e8f92355195005c98",
+      "originPath": "plugins/components/skills/list-item/usage.md",
+      "originBlobSha": "eeba12db175de73668f457c4440f26213c85620a",
+      "originSha256": "935e3723b8192bcec31a825337c52c8aa3eda786102c765e8f92355195005c98",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/list-item/web/accessibility.md",
+      "marketplaceBlobSha": "7518007cec46b09daef813a01f73ef1bea680444",
+      "marketplaceSha256": "f1d77e547b1b23c04cc175d815c8ca31b96dc16c66790d409c3bffdd3bbbd7c4",
+      "originPath": "plugins/components/skills/list-item/web/accessibility.md",
+      "originBlobSha": "7518007cec46b09daef813a01f73ef1bea680444",
+      "originSha256": "f1d77e547b1b23c04cc175d815c8ca31b96dc16c66790d409c3bffdd3bbbd7c4",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/list-item/web/interaction.md",
+      "marketplaceBlobSha": "1ab0233491f014b96b661a8865c5f88ee19ac5c0",
+      "marketplaceSha256": "2d55c9d6a07afa3268cb03acf0c4430584d9f4c7d009cf75d22e907e832d965b",
+      "originPath": "plugins/components/skills/list-item/web/interaction.md",
+      "originBlobSha": "1ab0233491f014b96b661a8865c5f88ee19ac5c0",
+      "originSha256": "2d55c9d6a07afa3268cb03acf0c4430584d9f4c7d009cf75d22e907e832d965b",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/list-item/web/tokens.yaml",
+      "marketplaceBlobSha": "cdd550012283398483b6588a9521b2468880a278",
+      "marketplaceSha256": "6a22dd9afbec673016cc5e6bfd5fab82e103da901982a2b17a3b6341ffd4f299",
+      "originPath": "plugins/components/skills/list-item/web/tokens.yaml",
+      "originBlobSha": "cdd550012283398483b6588a9521b2468880a278",
+      "originSha256": "6a22dd9afbec673016cc5e6bfd5fab82e103da901982a2b17a3b6341ffd4f299",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [],
+  "divergences": [
+    {
+      "id": "list-item-native-selection-indicators",
+      "status": "accepted"
+    },
+    {
+      "id": "list-item-native-role",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "LIT-001",
+      "evidence": ["list-item.types.ts", "useListItem.ts", "list-item.types.test.ts"]
+    },
+    {
+      "id": "LIT-002",
+      "evidence": ["renderListItem.tsx", "useListItem.ts", "list-item.test.tsx"]
+    },
+    {
+      "id": "LIT-003",
+      "evidence": ["useListItem.ts", "list-item.styles.ts", "list-item.test.tsx"]
+    },
+    {
+      "id": "LIT-004",
+      "evidence": ["useListItem.ts", "useListItemStyles.ts", "list-item.test.tsx"]
+    },
+    {
+      "id": "LIT-005",
+      "evidence": ["list-item.styles.ts", "list-item.stories.tsx", "list-item.test.tsx"]
+    }
+  ]
+}

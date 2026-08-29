@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "component": "skeleton",
+  "skill": "flex-components:skeleton",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-28",
+  "availableSurfaces": ["shared", "web"],
+  "surfacesConsulted": ["shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/skeleton/SKILL.md",
+      "marketplaceBlobSha": "7aa1d11e5d9ee718dd69b4acc481394e503d5cae",
+      "marketplaceSha256": "4a013aa7e03dc3fb8ced640b116331460aa7791aee0bb691629fe34351f8bad8",
+      "originPath": "plugins/components/skills/skeleton/SKILL.md",
+      "originBlobSha": "7aa1d11e5d9ee718dd69b4acc481394e503d5cae",
+      "originSha256": "4a013aa7e03dc3fb8ced640b116331460aa7791aee0bb691629fe34351f8bad8",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/skeleton/usage.md",
+      "marketplaceBlobSha": "e360112ff3ddd3ada7026906300907513a998efa",
+      "marketplaceSha256": "642a57670df13a1297c8f71a0b2d5fa077f1b4cb84ac062661ba43174cbc8418",
+      "originPath": "plugins/components/skills/skeleton/usage.md",
+      "originBlobSha": "e360112ff3ddd3ada7026906300907513a998efa",
+      "originSha256": "642a57670df13a1297c8f71a0b2d5fa077f1b4cb84ac062661ba43174cbc8418",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/skeleton/web/accessibility.md",
+      "marketplaceBlobSha": "b112c488532fd00d2f560379fd2a3879e1500e87",
+      "marketplaceSha256": "c101c80e80ea265f378b9f6d4eacb817cfbf71274a0f110f71b2ed5494374b74",
+      "originPath": "plugins/components/skills/skeleton/web/accessibility.md",
+      "originBlobSha": "b112c488532fd00d2f560379fd2a3879e1500e87",
+      "originSha256": "c101c80e80ea265f378b9f6d4eacb817cfbf71274a0f110f71b2ed5494374b74",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/skeleton/web/interaction.md",
+      "marketplaceBlobSha": "2a7ed4cd2ababdc994a45e1dab7bc53af2134102",
+      "marketplaceSha256": "0763a33452890d37374baf0828ca5f62fad8b04dab88efa412d021f8bd033b38",
+      "originPath": "plugins/components/skills/skeleton/web/interaction.md",
+      "originBlobSha": "2a7ed4cd2ababdc994a45e1dab7bc53af2134102",
+      "originSha256": "0763a33452890d37374baf0828ca5f62fad8b04dab88efa412d021f8bd033b38",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/skeleton/web/tokens.yaml",
+      "marketplaceBlobSha": "9482b54087b8c8e00486e02a5d6543e4e20d2387",
+      "marketplaceSha256": "eaad9de35412d679134b8caaabdbf7334decb76620585b4abcc17f7598375f74",
+      "originPath": "plugins/components/skills/skeleton/web/tokens.yaml",
+      "originBlobSha": "9482b54087b8c8e00486e02a5d6543e4e20d2387",
+      "originSha256": "eaad9de35412d679134b8caaabdbf7334decb76620585b4abcc17f7598375f74",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [],
+  "divergences": [
+    {
+      "id": "skeleton-highlight-band-fill",
+      "status": "accepted"
+    },
+    {
+      "id": "skeleton-instance-timeline",
+      "status": "deferred"
+    },
+    {
+      "id": "skeleton-container-busy-state",
+      "status": "not-applicable"
+    },
+    {
+      "id": "skeleton-pointer-events",
+      "status": "deferred"
+    },
+    {
+      "id": "skeleton-focusable-prop-surface",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "SKEL-001",
+      "evidence": ["skeleton.types.ts", "useSkeleton.ts", "skeleton.types.test.ts", "skeleton.test.tsx"]
+    },
+    {
+      "id": "SKEL-002",
+      "evidence": ["renderSkeleton.tsx", "skeleton.test.tsx"]
+    },
+    {
+      "id": "SKEL-003",
+      "evidence": ["useSkeleton.ts", "skeleton.test.tsx"]
+    },
+    {
+      "id": "SKEL-004",
+      "evidence": ["skeleton.styles.ts", "useSkeletonStyles.ts", "__snapshots__/skeleton.test.tsx.snap", "skeleton.test.tsx"]
+    },
+    {
+      "id": "SKEL-005",
+      "evidence": ["useSkeleton.ts", "renderSkeleton.tsx", "skeleton.test.tsx"]
+    },
+    {
+      "id": "SKEL-006",
+      "evidence": ["useSkeleton.ts", "renderSkeleton.tsx", "skeleton.stories.tsx"]
+    }
+  ]
+}

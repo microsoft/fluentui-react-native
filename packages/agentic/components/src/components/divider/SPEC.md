@@ -1,67 +1,112 @@
 ---
 name: divider
 platform: react-native (Windows, macOS)
-description: Non-interactive visual separator that groups sections of content to create rhythm and hierarchy. Covers orientation (horizontal/vertical), label alignment (Center/Start/End), optional icon slot, and label visibility.
-argument-hint: "[variant axis or token question, e.g. 'vertical divider tokens' or 'label alignment options']"
+status: implemented
+source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
 ---
 
-## Metadata
-
-| Field     | Value   |
-| --------- | ------- |
-| Type      | atomic  |
-| Component | Divider |
-
-This spec covers the Divider component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance is in `interaction.md`, React Native accessibility guidance is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
-
-Answer design questions directly — lead with rationale, then tokens. The most common misuse is reaching for a Divider when spacing alone would suffice — a Divider is a visible stroke that explicitly separates content groups, not a substitute for gap or padding. Use spacing and typographic hierarchy first; add a Divider only when the boundary between sections needs visual reinforcement.
-
----
-
 # Divider
 
-## Spec
+## Scope
 
-### Anatomy
+Divider is a non-interactive separator. It draws a line segment, optional
+content in the middle of that line, and a second line segment, along either the
+horizontal or the vertical axis. Content is an optional icon followed by an
+optional label.
 
-1. **Divider line (before)** — flex-grow stroke element that precedes the content container. In Center layout, grows equally with the trailing line. In Start layout, it becomes the short stub near the start edge.
-2. **Content container** — private auto-layout frame holding icon and label. Owns internal gap and padding. Hidden when both label and icon are hidden, collapsing the component to a plain line.
-3. **Icon** — optional Fluent Iconography instance (20px, Regular theme). Hidden by default.
-4. **Label** — optional text node bound to the label slot. Uses `textstyle-functional-body-small` in secondary foreground color.
-5. **Divider line (after)** — flex-grow stroke element that follows the content container. In Center layout, grows equally with the leading line. In End layout, it becomes the short stub near the end edge.
+Divider is never focusable and never activates. It owns no collapsing,
+expanding, resizing, or drag behavior, and it is not a section heading. It
+stretches along its parent's primary axis and does not define its own extent.
 
-| Slot  | Required | Default |
-| ----- | -------- | ------- |
-| Label | No       | Visible |
-| Icon  | No       | Hidden  |
+## Public contract
 
-> **Content visibility:** Hiding both icon and label collapses the content container, leaving only the divider line. This is equivalent to the "No text" presentation shown in the speclet.
+### Props and defaults
 
----
+| Prop       | Type                     | Default                 | Contract                                                                    |
+| ---------- | ------------------------ | ----------------------- | --------------------------------------------------------------------------- |
+| `layout`   | `center \| start \| end` | `center`                | Positions the content between the two line segments.                        |
+| `vertical` | `boolean`                | `false`                 | Selects the axis the line and content lay out along.                        |
+| `label`    | slot for `Text`          | renders the text `Text` | The label content. `null` removes the label.                                |
+| `icon`     | slot for `Icon`          | absent                  | A leading icon inside the content container. `null` or omission removes it. |
 
-### Variants
+The root accepts the owned `ViewProps` surface except `accessibilityRole` and
+`focusable`, which the component owns. A caller `style` is applied after the
+token-derived root styles.
 
-Variant properties are ordered in the design tool: **Layout → Vertical**.
+`label` and `icon` are slots: they accept shorthand children, a props object,
+or an `as` replacement component. The label renders by default, so omitting it
+produces the default text rather than a bare line.
 
-#### Layout
+### Slots and anatomy
 
-| Value                | Description                                                                                  | When to Use                                                                              |
-| -------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| **Center (Default)** | Content is centered between two equal flex-grow lines                                        | Default. Use when the label should sit at the midpoint of the divider.                   |
-| **Start**            | Content is positioned near the start edge; leading line is a `spacing.componentBase100` stub | When the label should read left-aligned (LTR) or right-aligned (RTL) within the divider. |
-| **End**              | Content is positioned near the end edge; trailing line is a `spacing.componentBase100` stub  | When the label should appear at the far edge of the divider.                             |
+The render order is the leading line, the content container when it is present,
+and the trailing line. Inside the content container the icon renders before the
+label.
 
-**Why Layout is a variant axis:** The position of the content fundamentally changes the flex behavior of the two line segments — Center uses two equal flex-grow lines, while Start and End use a fixed stub on one side. This structural difference cannot be achieved by toggling a property on a single layout configuration.
+| Slot              | Rendered when                | Contract                                                                             |
+| ----------------- | ---------------------------- | ------------------------------------------------------------------------------------ |
+| `root`            | always                       | A `View` that carries separator semantics, axis direction, and cross-axis centering. |
+| Leading line      | always                       | A flexible line segment. It becomes a fixed stub for `layout="start"`.               |
+| Content container | `label` or `icon` is present | A non-accessible row holding the icon and label with internal gap and padding.       |
+| `icon`            | supplied and not `null`      | Sized and colored by the component and hidden from the accessibility tree.           |
+| `label`           | not `null`                   | Wraps and centers rather than truncating.                                            |
+| Trailing line     | always                       | A flexible line segment. It becomes a fixed stub for `layout="end"`.                 |
 
-#### Vertical
+Setting both `label` and `icon` to `null` collapses the content container so
+the two line segments meet, producing a plain rule.
 
-| Value     | Description                                                            | When to Use                                                                               |
-| --------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| **False** | Horizontal orientation; line runs left to right, fills available width | Default. Use for most content separation — between sections, list groups, or form blocks. |
-| **True**  | Vertical orientation; line runs top to bottom, fills available height  | Use for side-by-side column separators, panel edges, or inline vertical breaks.           |
+### Requirements
 
-**Why Vertical is a variant axis, not a property:** Switching orientation changes the flex direction of the root container and swaps which axis the line and padding expand along — a structural layout change, not a style toggle.
+- **DIV-001:** Resolve the documented defaults, render the label by default,
+  and keep the supported native root props while owning role and focusability.
+- **DIV-002:** Render the documented order, collapse the content container only
+  when both `label` and `icon` are absent, and honor an `as` replacement for
+  either content slot.
+- **DIV-003:** Give the leading line a fixed stub for `layout="start"` and the
+  trailing line a fixed stub for `layout="end"`, and let both grow otherwise.
+- **DIV-004:** Switch the root direction, the line's measured axis, and the
+  content padding axis from `vertical`, keeping the content horizontally
+  written in both orientations.
+- **DIV-005:** Expose separator semantics that are not focusable, name the
+  separator from the label text when no caller name is supplied, and hide the
+  icon and label from the accessibility tree.
+- **DIV-006:** Resolve line, content, and label values from theme tokens and
+  apply the caller `style` last.
+
+## Platform behavior
+
+Windows and macOS render the same structure. The root sets `focusable={false}`
+and the component attaches no press, hover, or focus handlers, so Divider never
+appears in the tab order or takes focus on either platform.
+
+There is no focus visual, no interaction state, and no animation, so hover,
+press, and reduced-motion settings have no effect on the rendered output.
+
+Both platforms measure the line along one axis only: a horizontal Divider fixes
+the line height and lets width grow, and a vertical Divider fixes the line
+width and lets height grow. In the vertical orientation the icon and label
+still lay out horizontally; no rotation or vertical text mode is applied.
+
+## Divergences from Flex
+
+| ID                                 | Disposition    | React Native contract                                                                                                                                                                                   | Follow-up                                                                                               |
+| ---------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `divider-orientation-semantics`    | Not applicable | React Native's separator role carries no orientation value, so a vertical Divider is announced the same way as a horizontal one. Flex requires an explicit orientation declaration.                     | None available at the platform level. Convey column grouping through the surrounding structure instead. |
+| `divider-content-visibility-model` | Accepted       | There is no single content-visibility switch. The content container collapses only when both `label` and `icon` resolve to absent, and `label` must be explicitly `null` because it renders by default. | None. The slot-level control matches the rest of the React Native component surface.                    |
+| `divider-size-axis`                | Deferred       | The React Native contract has no size axis. Flex's mobile surface exposes a size axis that varies the vertical space around the line.                                                                   | Requires a reviewed public API addition and a spacing token mapping.                                    |
+| `divider-line-thickness`           | Deferred       | The line is a filled rectangle whose measured axis is a literal 1, not a stroke-width token. Flex binds the line thickness to a thin stroke token.                                                      | Bind the value to the stroke token so density themes can scale the line.                                |
+
+## Conformance
+
+| Requirement | Evidence                                                                         |
+| ----------- | -------------------------------------------------------------------------------- |
+| DIV-001     | `divider.types.ts`, `useDivider.ts`, `divider.types.test.ts`, `divider.test.tsx` |
+| DIV-002     | `renderDivider.tsx`, `useDivider.ts`, `divider.test.tsx`, `divider.stories.tsx`  |
+| DIV-003     | `divider.styles.ts`, `useDividerStyles.ts`, `divider.test.tsx`                   |
+| DIV-004     | `divider.styles.ts`, `divider.test.tsx`, `divider.stories.tsx`                   |
+| DIV-005     | `useDivider.ts`, `useDividerStyles.ts`, `divider.test.tsx`                       |
+| DIV-006     | `divider.styles.ts`, `useDividerStyles.ts`, `divider.test.tsx`                   |

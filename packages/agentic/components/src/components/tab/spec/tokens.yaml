@@ -1,101 +1,92 @@
-component: Tab
-type: atomic
+schemaVersion: 1
+component: tab
+implementation: tab.styles.ts
 
-variants:
-  Layout:
-    values: [Icon and text, Icon only]
-  State:
-    values: [Rest, Hover, Pressed, Disabled]
-    notes: Hover and Pressed are resolved as nested token state values.
-  Selected:
-    values: [false, true]
-    default: false
+statePrecedence:
+  - base
+  - selected
+  - disabled
+  - pressed
+  - hovered
 
-tokens:
-  background:
-    rest:
-      value: color.backgroundNeutralTransparent
-      hover: color.hover.backgroundNeutralTransparent
-      pressed: color.pressed.backgroundNeutralTransparent
-      rationale: No visual weight at rest — transparent surface defers to the Tablist container and surrounding content.
+notes:
+  colorLevels: getThemedColorStyleFactory is configured with a selected level followed by the shared interactiveStatePriority level, so selected picks the color family and disabled, pressed, and hovered refine it.
+  layoutLevels: Root radius and padding are resolved from the layout level alone and do not vary with interaction state.
+
+bindings:
+  root:
+    static:
+      alignItems: center
+      alignSelf: flex-start
+      flexDirection: row
+      justifyContent: center
+    layout:
+      iconAndText:
+        borderRadius: borderRadius.base300
+        gap: spacing.componentBase100
+        paddingHorizontal: spacing.componentBase300
+        paddingVertical: spacing.componentBase150
+      iconOnly:
+        borderRadius: borderRadius.circular
+        paddingHorizontal: spacing.componentBase150
+        paddingVertical: spacing.componentBase150
+    backgroundColor:
+      base: color.backgroundNeutralTransparent
+      disabled: color.backgroundNeutralTransparent
+      selected: color.backgroundNeutralHeavy
+      selectedDisabled: color.backgroundNeutralHeavyDisabled
+    userStyle: applied last by useTabStyles_unstable
+
+  focusVisual:
+    borderRadius: resolved layout borderRadius
+    innerColor: color.strokeFocusInner
+    innerWidth: strokeWidth.thin
+    outerColor: color.strokeFocusOuter
+    outerWidth: strokeWidth.thick
+    visible: focused and not disabled
+
+  icon:
+    slots:
+      - icon
+      - selectedIcon
+    color: resolved content color
+    height: 20
+    width: 20
+    accessible: false
+
+  content:
+    static:
+      flexShrink: 1
+      textAlign: center
+    themed:
+      fontFamily: fontFamily.functional
+      fontSize: fontSize.functionalBodyMedium
+      fontWeight: fontWeight.functionalRegular
+      lineHeight: lineHeight.functionalBodyMedium
     selected:
-      value: color.backgroundNeutralHeavy
-      hover: color.hover.backgroundNeutralHeavy
-      pressed: color.pressed.backgroundNeutralHeavy
-      rationale: Heavy fill provides strong visual distinction for the active tab, creating a clear pill shape on the selected item.
-    disabled:
-      unselected: color.backgroundNeutralTransparent
-      selected: color.backgroundNeutralHeavyDisabled
+      fontWeight: fontWeight.functionalSemibold
+    color:
+      base: color.foregroundNeutralPrimary
+      disabled: color.foregroundNeutralDisabled
+      selected: color.foregroundNeutralOnloud
+      selectedDisabled: color.foregroundNeutralDisabled
 
-  foreground:
-    rest:
-      value: color.foregroundNeutralPrimary
-      hover: color.hover.foregroundNeutralPrimary
-      pressed: color.pressed.foregroundNeutralPrimary
-      rationale: Standard primary foreground for readable unselected labels.
-    selected:
-      value: color.foregroundNeutralOnloud
-      hover: color.hover.foregroundNeutralOnloud
-      pressed: color.pressed.foregroundNeutralOnloud
-      rationale: Inverted foreground for readability on the heavy background fill.
-    disabled: color.foregroundNeutralDisabled
+  contentHidden:
+    inherits: content
+    fontWeight: fontWeight.functionalSemibold at every selection state, so the reserved width never changes
+    opacity: 0
+    role: internal width reservation, hidden from assistive technology
 
-  stroke:
-    container: no-stroke
-    focus: See flex-system:styling — universal dual-outline focus ring.
-
-  radius:
-    Icon and text: borderRadius.base300
-    Icon only: borderRadius.circular
-
-  typography:
-    rest: textstyle-functional-body-medium
-    selected: textstyle-functional-body-medium-strong
-    font-family: fontFamily.functional
-
-  spacing:
-    Icon and text:
-      horizontal: spacing.componentBase300
-      vertical: spacing.componentBase150
-      rationale: >
-        Half heuristic — horizontal padding is double the vertical padding.
-        Matches Button Medium spacing pattern, which shares the same 32px resultant height.
-    Icon only: spacing.componentBase150
-    gap: spacing.componentBase100
-
-  elevation: n/a
-
-  motion:
-    status: pending
-    guidance: >
-      State color transitions should be fast (typically ≤150ms) with standard ease-in-out.
-      Selected swap (background + foreground + weight) should feel instant or near-instant.
-      Reduced motion — remove transitions entirely.
-
-sizes:
-  Default:
-    resultant-height: 32px # round(14 × 1.4) + 6×2 = 20 + 12
-    icon: 20px
-  notes: >
-    Single size. Height is resultant — derived from padding + typography.
-    Prefer responsive sizing; do not hardcode height constraints.
-    Icon size has no token coverage and must be hardcoded.
-
-properties:
-  component:
-    Tab string:
-      type: TEXT
-      default: 'Tab'
-      notes: Bound to the visible label node only; ghost node has no prop binding.
-    Icon:
-      type: BOOLEAN
-      default: false
-      notes: Shows/hides the optional icon slot (Icon + label layout only).
-    20px Regular:
-      type: INSTANCE_SWAP
-      default: Image icon (20px Regular)
-      binding: Selected=False icon nodes
-    20px Filled:
-      type: INSTANCE_SWAP
-      default: Image icon (20px Filled)
-      binding: Selected=True icon nodes
+tokenGaps:
+  - id: tab-icon-size
+    binding: icon.height and icon.width
+    value: 20
+    reason: getTabIconSize returns a literal because this package publishes no icon sizing scale.
+  - id: tab-selection-indicator
+    binding: root
+    value: none
+    reason: Selection is expressed with a filled background and a heavier label rather than a separate indicator element, so no indicator size, color, or radius token is bound.
+  - id: tab-single-size
+    binding: root.padding and content.fontSize
+    value: one size only
+    reason: The component exposes no size axis, so there is no small or large token set to bind.

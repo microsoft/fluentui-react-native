@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "component": "card",
+  "skill": "flex-components:card",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-28",
+  "availableSurfaces": ["mobile", "shared", "web"],
+  "surfacesConsulted": ["mobile", "shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "mobile:overview",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/card/mobile/overview.md",
+      "marketplaceBlobSha": "a36db6e53fb5b18a61a835737f70a0fe8409234d",
+      "marketplaceSha256": "7c7506797bf95944ca9c61681bd6243c647e3d0516a9446fa85680668e0c706f",
+      "originPath": "plugins/components/skills/card/mobile/overview.md",
+      "originBlobSha": "a36db6e53fb5b18a61a835737f70a0fe8409234d",
+      "originSha256": "7c7506797bf95944ca9c61681bd6243c647e3d0516a9446fa85680668e0c706f",
+      "contentDiffers": false
+    },
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/card/SKILL.md",
+      "marketplaceBlobSha": "0ae2be0c99fd081258e9734e06811bf844a6d6eb",
+      "marketplaceSha256": "e65fda0accc6f672b21e19a1978662d1315138db29da072ec958b35f3aca3ffc",
+      "originPath": "plugins/components/skills/card/SKILL.md",
+      "originBlobSha": "0ae2be0c99fd081258e9734e06811bf844a6d6eb",
+      "originSha256": "e65fda0accc6f672b21e19a1978662d1315138db29da072ec958b35f3aca3ffc",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/card/usage.md",
+      "marketplaceBlobSha": "8e896eef4df658dec4b0af9555912aa307f34e1f",
+      "marketplaceSha256": "01f4698d3c93d42d4d9c6e44bd0539f1764079808eb9a25afb3049a2ef73cf9c",
+      "originPath": "plugins/components/skills/card/usage.md",
+      "originBlobSha": "8e896eef4df658dec4b0af9555912aa307f34e1f",
+      "originSha256": "01f4698d3c93d42d4d9c6e44bd0539f1764079808eb9a25afb3049a2ef73cf9c",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/card/web/accessibility.md",
+      "marketplaceBlobSha": "41dd3f0f62ca6ff81c7663c67be82b8aea8342a9",
+      "marketplaceSha256": "8fb85024bf2c3b01b4afeff402d01c765d77e24eae6d7d5d437d7ae0fff5dea5",
+      "originPath": "plugins/components/skills/card/web/accessibility.md",
+      "originBlobSha": "41dd3f0f62ca6ff81c7663c67be82b8aea8342a9",
+      "originSha256": "8fb85024bf2c3b01b4afeff402d01c765d77e24eae6d7d5d437d7ae0fff5dea5",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/card/web/interaction.md",
+      "marketplaceBlobSha": "39c1fdcff6b11e56784ae14026ce5df1314f68f0",
+      "marketplaceSha256": "defb1eac5f33da7c2ccabeb756550b53c2cc11b7845a6e6ba9a716568bc9152e",
+      "originPath": "plugins/components/skills/card/web/interaction.md",
+      "originBlobSha": "39c1fdcff6b11e56784ae14026ce5df1314f68f0",
+      "originSha256": "defb1eac5f33da7c2ccabeb756550b53c2cc11b7845a6e6ba9a716568bc9152e",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/card/web/tokens.yaml",
+      "marketplaceBlobSha": "6dc51b581a7bd38b5fe4da2ad4b68039a08c0dfc",
+      "marketplaceSha256": "2abcf45e1f87f04217c22a602efdcfdfd6cd306a173b917f87b99ee7eff56d95",
+      "originPath": "plugins/components/skills/card/web/tokens.yaml",
+      "originBlobSha": "6dc51b581a7bd38b5fe4da2ad4b68039a08c0dfc",
+      "originSha256": "2abcf45e1f87f04217c22a602efdcfdfd6cd306a173b917f87b99ee7eff56d95",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [],
+  "divergences": [
+    {
+      "id": "card-button-only-activation",
+      "status": "accepted"
+    },
+    {
+      "id": "card-static-accessibility-opt-in",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "CRD-001",
+      "evidence": ["card.types.ts", "useCard.ts", "card.stories.tsx"]
+    },
+    {
+      "id": "CRD-002",
+      "evidence": ["useCard.ts", "renderCard.tsx", "card.types.test.tsx", "card.stories.tsx"]
+    },
+    {
+      "id": "CRD-003",
+      "evidence": ["card.styles.ts", "useCardStyles.ts", "card.test.tsx"]
+    },
+    {
+      "id": "CRD-004",
+      "evidence": ["useCard.ts", "useCardStyles.ts", "card.test.tsx"]
+    },
+    {
+      "id": "CRD-005",
+      "evidence": ["useCard.ts", "renderCard.tsx", "card.test.tsx", "card.stories.tsx"]
+    }
+  ]
+}

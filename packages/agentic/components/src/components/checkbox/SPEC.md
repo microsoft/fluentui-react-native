@@ -1,77 +1,121 @@
 ---
 name: checkbox
 platform: react-native (Windows, macOS)
-description: Molecular selection control with two indicator styles (Standard/Circular), three statuses (Unchecked/Checked/Indeterminate), optional label, optional secondary description text, and status-driven foreground emphasis.
-argument-hint: "[variant axis or behavior question, e.g. 'when to use Circular vs Standard style']"
-tokens: spec/tokens.yaml
-accessibility: spec/accessibility.md
-interaction: spec/interaction.md
-usage: spec/usage.md
----
-
-## Metadata
-
-| Field     | Value     |
-| --------- | --------- |
-| Type      | molecular |
-| Component | Checkbox  |
-
-This spec covers the Checkbox component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
-
-Answer design questions directly — lead with rationale, then tokens. The most important distinction: Checkbox requires a submission step — it does not trigger an immediate effect. If the user needs an immediate-effect toggle, direct them to Switch. The label foreground intentionally shifts between statuses — unchecked labels use secondary to de-emphasize unselected options, while checked/indeterminate labels use primary.
-
-Checkbox also supports an optional **secondary text** slot beneath the primary label. Secondary text provides additional descriptive context for an option without overloading the label. It is hidden by default and toggled via a boolean property.
-
+status: implemented
+source: ./spec/source.json
+tokens: ./spec/tokens.yaml
+accessibility: ./spec/accessibility.md
+interaction: ./spec/interaction.md
+usage: ./spec/usage.md
 ---
 
 # Checkbox
 
-## Spec
+## Scope
 
-### Anatomy
+Checkbox is a tri-state selection control built on a React Native `Pressable`.
+A single press target covers the indicator and the optional label column. The
+status axis carries three values, `unchecked`, `checked`, and `indeterminate`,
+and the indicator shape is selected by a two-value `variant` axis.
 
-1. **Root** — auto-layout row container; owns the gap between the indicator and the label area, and via the native `<label>` association is itself the click/tap target for the entire row.
-2. **Indicator** — 16×16px indicator box; owns fill, stroke, and border radius. Shape varies by Style (square vs circular). Carries its own margin for visual breathing room (see `spacing.indicator.margin`, which also documents how the margin counts toward the WCAG 2.5.5/2.5.8 hit-target minimum).
-3. **Indicator icon** — checkmark (Checked) or dash (Indeterminate, both Standard and Circular). Hidden when Unchecked.
-4. **Text wrapper** — auto-layout column that offsets the label and optional secondary text vertically relative to the indicator center. When secondary text is hidden, the container holds only the label and behaves identically to the previous single-node wrapper.
-5. **Label** — text node displaying the checkbox label. Optional via the Label boolean property.
-6. **Secondary text** — optional text node beneath the label displaying supplementary description. Hidden by default via the Secondary text boolean property. Uses `textstyle-functional-body-small` (one step smaller than the primary label) and stays at secondary foreground regardless of Status — the description is always supporting text and does not shift emphasis on selection. On web, wired to the `<input>` via `aria-describedby` so screen readers announce it as supplementary context after the label name.
+Checkbox does not group, validate, or submit. It owns no field label, helper
+text, or error message, and it does not provide an immediate-effect toggle.
+A caller that needs a group relationship, mixed-state roll-up, or validation
+messaging composes those from surrounding components and owns the status of
+each Checkbox itself.
 
-| Slot           | Required   | Default                                           |
-| -------------- | ---------- | ------------------------------------------------- |
-| Label          | No         | Visible ("Label")                                 |
-| Secondary text | No         | Hidden                                            |
-| Indicator icon | Structural | Determined by Status variant — not user-swappable |
+## Public contract
 
----
+### Props and defaults
 
-### Variants
+| Prop                | Type                                    | Default         | Contract                                                                                                       |
+| ------------------- | --------------------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |
+| `status`            | `unchecked \| checked \| indeterminate` | absent          | When supplied, the status is externally driven and Checkbox renders the supplied value without changing it.    |
+| `defaultStatus`     | `unchecked \| checked \| indeterminate` | `unchecked`     | The starting status while the status is internally driven. Ignored while `status` is supplied.                 |
+| `onStatusChange`    | `(nextStatus) => void`                  | absent          | Called with the next status whenever a press resolves one, in both the externally and internally driven cases. |
+| `variant`           | `standard \| circular`                  | `standard`      | Selects the indicator corner radius. All other indicator values are shared.                                    |
+| `disabled`          | `boolean`                               | `false`         | Blocks activation, removes the root from focus, and selects disabled colors.                                   |
+| `label`             | `string`                                | `'Label'`       | The label text and the accessible-name fallback.                                                               |
+| `showLabel`         | `boolean`                               | `true`          | Controls whether the label column renders. The name fallback survives hiding it.                               |
+| `secondaryText`     | `string`                                | `'Description'` | Supporting text rendered beneath the label.                                                                    |
+| `showSecondaryText` | `boolean`                               | `false`         | Renders secondary text; effective only while `showLabel` is `true`.                                            |
 
-Variant properties are ordered in the design tool: **Style → Status → State**.
+The root also accepts the owned `PressableProps` surface. `children` is typed
+`never`; Checkbox owns its subtree. A caller `style` is applied after the
+token-derived root styles. The broad root type accepts `accessibilityRole` and
+caller checked or disabled accessibility state, but the implementation writes
+its resolved role and state afterward, so those caller values are ignored.
 
-#### Style
+### Slots and anatomy
 
-| Value        | Description                                | When to Use                                                 |
-| ------------ | ------------------------------------------ | ----------------------------------------------------------- |
-| **Standard** | Square indicator with xSmall border radius | Default for most form contexts                              |
-| **Circular** | Fully rounded indicator (circular radius)  | When visual language requires softer, rounded form controls |
+`root` is the only public slot surface. The label, secondary text, indicator,
+and focus visual are internal and are configured through the props above.
 
-**Why two indicator shapes share the same component:** Both shapes use identical token assignments, spacing, touch targets, and interaction behavior — they differ only in border radius. A Style variant avoids duplicating the entire component for a single radius swap.
+The render order inside the root is the persistent focus visual, the indicator,
+and then the label column when either text node is present. The label column
+renders the label first and secondary text second.
 
-#### Status
+| Element        | Rendered when                          | Contract                                                                                                                                             |
+| -------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Focus visual   | always mounted                         | A dual-ring overlay whose visibility, not mounting, tracks focus.                                                                                    |
+| Indicator      | always                                 | A fixed 16 by 16 box carrying fill, stroke, and radius. It draws a checkmark for `checked`, a dash for `indeterminate`, and nothing for `unchecked`. |
+| Label column   | `showLabel`, or secondary text renders | A non-accessible column that holds the visible text nodes.                                                                                           |
+| Label          | `showLabel`                            | Wraps rather than truncates when the root width is constrained.                                                                                      |
+| Secondary text | `showLabel` and `showSecondaryText`    | Stays at secondary emphasis for every status.                                                                                                        |
 
-| Value             | Description                                | When to Use                                                            |
-| ----------------- | ------------------------------------------ | ---------------------------------------------------------------------- |
-| **Unchecked**     | Empty indicator — option is not selected   | Default state for unselected options                                   |
-| **Checked**       | Checkmark indicator — option is selected   | When the user has actively selected the option                         |
-| **Indeterminate** | Partial indicator (dash) — mixed selection | Parent checkbox in a group where some but not all children are checked |
+### Requirements
 
-#### State
+- **CBX-001:** Resolve the documented defaults, keep the supported native root
+  props, and reject caller-supplied children at the type level.
+- **CBX-002:** Own the status axis as a controllable value. An externally driven
+  Checkbox reports the next status and does not change its own; an internally
+  driven Checkbox reports and applies it. `checked` resolves to `unchecked`;
+  `unchecked` and `indeterminate` both resolve to `checked`.
+- **CBX-003:** Render the documented anatomy and order, gate secondary text on a
+  visible label, and warn in development builds when secondary text is requested
+  without one.
+- **CBX-004:** Expose checkbox semantics with a three-valued checked state, a
+  name that falls back to `label`, secondary text delivered as supporting
+  context, and non-accessible inner text and indicator nodes.
+- **CBX-005:** Resolve indicator, label, secondary text, and indicator glyph
+  colors from status first and then disabled, pressed, and hovered state, select
+  the indicator radius from `variant`, and apply the caller `style` last.
+- **CBX-006:** Keep the dual-ring focus visual mounted and show it only for a
+  focused, enabled Checkbox.
 
-| Value        | Description                  | When to Use                                               |
-| ------------ | ---------------------------- | --------------------------------------------------------- |
-| **Rest**     | Default idle appearance      | No user interaction                                       |
-| **Hover**    | Cursor is over the component | Web only — mouse pointer enters the hit area              |
-| **Pressed**  | Active press/tap             | Momentary state during click or touch                     |
-| **Disabled** | Non-interactive              | When the option is unavailable in the current context     |
-| **Focus**    | Keyboard focus ring visible  | When the component receives focus via keyboard navigation |
+## Platform behavior
+
+Windows and macOS resolve press, hover, and focus from React Native `Pressable`
+events. Space activation comes from the native pressable button behavior on both
+platforms; Checkbox adds no key handling of its own and does not intercept Tab.
+A disabled Checkbox sets `focusable` to `false` and is skipped by keyboard
+navigation.
+
+Checkbox does not suppress the react-native-windows native focus visual, so on
+Windows the platform indicator can draw alongside the shared focus visual. The
+shared visual stays mounted for the lifetime of the control and only changes
+visibility, which avoids creating border-bearing native views after mount.
+
+No timed animation is present. Status, hover, press, and focus styling change on
+the next render, so reduced-motion settings need no separate branch.
+
+## Divergences from Flex
+
+| ID                                       | Disposition | React Native contract                                                                                                                                                                                                            | Follow-up                                                                                                                    |
+| ---------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `checkbox-secondary-text-description`    | Accepted    | Secondary text is appended to the root accessibility hint rather than associated as a separate described-by target. React Native exposes no equivalent description relationship, and the hint is the platform-idiomatic channel. | None. Revisit only if React Native adds a description association.                                                           |
+| `checkbox-secondary-text-requires-label` | Accepted    | Secondary text renders only alongside a visible label, and a development warning fires otherwise. Flex treats the two visibility toggles as independent.                                                                         | None. The pairing keeps the label column from presenting supporting text with nothing to support.                            |
+| `checkbox-focus-visual-modality`         | Deferred    | The focus visual shows for any focus event, including focus taken by a pointer press. Flex restricts the ring to keyboard modality.                                                                                              | Requires focus-modality plumbing that is not available in the shared interaction hook.                                       |
+| `checkbox-native-focus-ring`             | Deferred    | The platform focus visual on Windows is left enabled, so two indicators can appear at once.                                                                                                                                      | Needs the same native focus-ring suppression that Button applies, validated against supported react-native-windows versions. |
+| `checkbox-owned-props-type-surface`      | Deferred    | The root type accepts role and checked or disabled state values that the implementation always overwrites.                                                                                                                       | Omit those owned keys from the exposed native-prop type in a separately reviewed API correction.                             |
+
+## Conformance
+
+| Requirement | Evidence                                                                             |
+| ----------- | ------------------------------------------------------------------------------------ |
+| CBX-001     | `checkbox.types.ts`, `useCheckbox.ts`, `checkbox.types.test.ts`, `checkbox.test.tsx` |
+| CBX-002     | `useCheckbox.ts`, `checkbox.test.tsx`, `checkbox.stories.tsx`                        |
+| CBX-003     | `renderCheckbox.tsx`, `useCheckbox.ts`, `checkbox.test.tsx`                          |
+| CBX-004     | `useCheckbox.ts`, `checkbox.test.tsx`                                                |
+| CBX-005     | `checkbox.styles.ts`, `useCheckboxStyles.ts`, `checkbox.test.tsx`                    |
+| CBX-006     | `useCheckboxStyles.ts`, `renderCheckbox.tsx`, `checkbox.test.tsx`                    |

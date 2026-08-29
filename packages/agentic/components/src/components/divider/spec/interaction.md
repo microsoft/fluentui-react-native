@@ -1,27 +1,42 @@
----
-component: Divider
-platform: react-native (Windows, macOS)
----
+# Divider interaction
 
-# Divider Interaction (React Native — Windows & macOS)
+## State model
 
-## Keyboard navigation
+Divider has no interaction state. It attaches no press, hover, or focus
+handlers, tracks nothing across renders, and exposes no hover or pressed token
+bindings. Its rendered output depends only on `layout`, `vertical`, the two
+content slots, and the active theme.
 
-None — Divider is not focusable and not part of the tab order.
+The caller `style` is the final layer applied to the root, after the
+token-derived root styles.
 
-## Focus management
+## Keyboard and pointer
 
-None — Divider does not receive or manage focus. It has no focus ring.
+Divider is not focusable and is not a tab stop on Windows or macOS. It has no
+focus visual. Pointer events over the line and the content produce no visual
+change and no callbacks.
 
-## Orientation and content flow
+## Layout behavior
 
-- **Horizontal (Vertical=False):** Root container is `flex-row`. Lines are 1px tall, flex-grow horizontally. Content padding is applied on the horizontal axis.
-- **Vertical (Vertical=True):** Root container is `flex-column`. Lines are 1px wide, flex-grow vertically. Content padding is applied on the vertical axis. Label and icon text remain horizontal — do not rotate or apply `writing-mode` changes to the content slot.
+The root stretches along its parent's primary axis and centers its children on
+the cross axis, so the line passes through the middle of the content rather
+than along one edge.
 
-## Cross-axis alignment
+For `layout="center"` both line segments grow equally and the content sits at
+the midpoint. For `layout="start"` the leading line becomes a fixed stub and
+the trailing line takes the remaining space; `layout="end"` is the mirror
+image. Writing direction determines which end reads as the start.
 
-In both orientations, the line segments and the content slot share a common cross-axis center so the line passes through the geometric midpoint of the label. In horizontal orientation this is vertical centering; in vertical orientation this is horizontal centering. The 1px line must not collapse to the leading edge — it stays visually anchored to the label.
+A horizontal Divider fixes the line's height and lets its width grow, and pads
+the content on the horizontal axis. A vertical Divider fixes the line's width
+and lets its height grow, and pads the content on the vertical axis. The icon
+and label lay out horizontally in both orientations; no rotation or vertical
+writing mode is applied.
 
-## Responsive behavior
+A constrained root shrinks the content container and wraps the label rather
+than clipping it or collapsing the lines.
 
-Divider stretches to fill its parent container along its primary axis. It does not define a fixed width or height — the parent layout determines extent.
+## Motion
+
+Divider runs no animation and holds no timers, so reduced-motion settings need
+no separate path.

@@ -1,28 +1,52 @@
----
-component: Checkbox
-platform: react-native (Windows, macOS)
----
+# Checkbox accessibility
 
-# Checkbox Accessibility (React Native — Windows & macOS)
+## Native semantics
 
-## Spec
+The root is a single accessible React Native element with
+`accessibilityRole="checkbox"`. It defaults to `accessible={true}` and is
+focusable unless disabled.
 
-- **ARIA role:** `checkbox` (native `<input type="checkbox">` preferred; `role="checkbox"` on custom elements requires manual keyboard and state management).
-- **Required attributes:**
-  - `aria-checked="true|false|mixed"` — maps directly to the Status variant (Unchecked → `false`, Checked → `true`, Indeterminate → `mixed`).
-  - `aria-label` or visible label association — every checkbox must have an accessible name, either from the visible label or an explicit `aria-label`.
-  - `aria-disabled="true"` — use on disabled checkboxes that should remain in the tab order for screen reader discoverability.
-- **WCAG:**
-  - **1.4.3 — Contrast (Minimum):** Indicator stroke and fill must meet 3:1 against the surrounding background. Label text must meet 4.5:1.
-  - **1.4.11 — Non-text Contrast:** The indicator (as a UI component boundary) must meet 3:1 against adjacent colors in all non-disabled states.
-  - **2.1.1 — Keyboard:** Space must toggle the checkbox. Do not intercept Tab or use Enter for activation.
-  - **2.4.7 — Focus Visible:** Focus ring must be visible in all non-disabled states. Uses the universal persistent dual-ring focus visual.
-  - **4.1.2 — Name, Role, Value:** Checkbox must expose its name, role, and current checked state to assistive technology.
-- **Screen reader:** Announces label (or `aria-label`), role ("checkbox"), and state ("checked", "not checked", or "mixed").
+`accessibilityState.checked` carries the status directly: `false` for
+`unchecked`, `true` for `checked`, and `'mixed'` for `indeterminate`.
+`accessibilityState.disabled` always reflects `disabled`. Any other caller
+accessibility state, such as `busy`, is merged and preserved; the checked and
+disabled entries are owned by the component.
 
----
+On Windows, UI Automation reports the control as a check box and maps the
+three-valued checked state to its toggle state, so an indeterminate parent
+announces as mixed rather than as a third unnamed value. On macOS, VoiceOver
+announces the name, the check box role, and the checked, unchecked, or mixed
+value.
 
-## Usage
+## Naming and description
 
-- **Hidden label fallback:** When the visible label is hidden (Label boolean is false), provide an `aria-label` for screen readers. A checkbox with no accessible name is inaccessible.
-- **Secondary text association:** When Checkbox renders secondary text, the implementation must wire `aria-describedby` on the `<input>` element to reference the secondary text node's `id`. This ensures screen readers announce the supplementary description after the label name (e.g. "Option A, checkbox, not checked — description text"). Do not merge secondary text into the accessible name — it is supplementary context, not identification.
+The accessible name is `accessibilityLabel` when supplied and the `label`
+string otherwise. Hiding the visible label with `showLabel={false}` therefore
+never removes the name; it falls back to `label`. Supply an explicit
+`accessibilityLabel` whenever the visible label text would not read as a
+complete option on its own.
+
+When secondary text renders, it is appended to the root `accessibilityHint`
+after any caller-supplied hint, joined with a period and a space. Screen
+readers announce it after the name and state rather than folding it into the
+name.
+
+The label, secondary text, and indicator are marked `accessible={false}` and
+the secondary text additionally sets `accessibilityElementsHidden`, so the row
+is announced once from the root instead of as several sibling elements.
+
+## State and focus
+
+A disabled Checkbox reports disabled state, sets `focusable={false}`, and does
+not respond to activation. It is skipped by keyboard navigation rather than
+announced as an unavailable stop.
+
+The visible focus indicator is a persistent dual-ring overlay drawn from the
+focus stroke tokens. It stays mounted and toggles visibility, and it is hidden
+while disabled. It surrounds the whole row, including the label column, so the
+indicated region matches the press target. The overlay is hidden from the
+accessibility tree and does not receive pointer events.
+
+Checkbox does not disable the react-native-windows platform focus visual, so a
+Windows consumer may see the platform indicator in addition to the shared one.
+Treat that as a known gap rather than an intended dual indicator.
