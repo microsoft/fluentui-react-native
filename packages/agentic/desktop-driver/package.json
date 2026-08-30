@@ -9,6 +9,7 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/agentic/desktop-driver"
   },
+  "bin": "./config/cli.cjs",
   "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -24,10 +25,25 @@
       "import": "./lib/client/index.js",
       "default": "./src/client/index.ts"
     },
+    "./cli": {
+      "types": "./lib/cli/index.d.ts",
+      "import": "./lib/cli/index.js",
+      "default": "./src/cli/index.ts"
+    },
     "./authoring": {
       "types": "./lib/authoring/index.d.ts",
       "import": "./lib/authoring/index.js",
       "default": "./src/authoring/index.ts"
+    },
+    "./agent": {
+      "types": "./lib/agent/index.d.ts",
+      "import": "./lib/agent/index.js",
+      "default": "./src/agent/index.ts"
+    },
+    "./artifacts": {
+      "types": "./lib/artifacts/index.d.ts",
+      "import": "./lib/artifacts/index.js",
+      "default": "./src/artifacts/index.ts"
     },
     "./server": {
       "types": "./lib/server/index.d.ts",
@@ -44,6 +60,16 @@
       "import": "./lib/testing/index.js",
       "default": "./src/testing/index.ts"
     },
+    "./wdio": {
+      "types": "./lib/wdio/index.d.ts",
+      "import": "./lib/wdio/index.js",
+      "default": "./src/wdio/index.ts"
+    },
+    "./runner": {
+      "types": "./lib/runner/index.d.ts",
+      "import": "./lib/runner/index.js",
+      "default": "./src/runner/index.ts"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -53,9 +79,12 @@
     "lint": "fluentui-scripts lint",
     "test": "fluentui-scripts jest"
   },
-  "devDependencies": {
-    "@fluentui-react-native/scripts": "workspace:*",
+  "dependencies": {
+    "commander": "^14.0.2",
     "webdriverio": "catalog:"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*"
   },
   "furn": {
     "jestPlatform": "react"

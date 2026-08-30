@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 
 import { WebDriverError } from '../protocol/errors.js';
 import { webElementIdentifier } from '../protocol/constants.js';
+import type { DesktopTreeNode } from '../host/types.js';
 import type {
   NewSessionCapabilities,
   WebDriverActionSequence,
@@ -125,6 +126,10 @@ export class DesktopSessionClient {
     return this.command('GET', '/source');
   }
 
+  getTree(): Promise<DesktopTreeNode[]> {
+    return this.command('GET', '/furn/tree');
+  }
+
   getStoryManifest(): Promise<DesktopStoryManifest> {
     return this.command('GET', '/furn/manifest');
   }
@@ -183,12 +188,20 @@ export class DesktopElementClient {
     return this.command('GET', '/enabled');
   }
 
+  isDisplayed(): Promise<boolean> {
+    return this.command('GET', '/displayed');
+  }
+
   isSelected(): Promise<boolean> {
     return this.command('GET', '/selected');
   }
 
   getAttribute(name: string): Promise<unknown> {
     return this.command('GET', `/attribute/${encodeURIComponent(name)}`);
+  }
+
+  getProperty(name: string): Promise<unknown> {
+    return this.command('GET', `/property/${encodeURIComponent(name)}`);
   }
 
   takeScreenshot(): Promise<string> {

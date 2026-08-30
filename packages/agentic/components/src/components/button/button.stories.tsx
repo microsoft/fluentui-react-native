@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Button } from './button';
 import type { ButtonAppearance, ButtonShape, ButtonSize } from './button.types';
@@ -75,7 +76,29 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'pointer-focus',
+          title: 'Responds to activation and receives focus',
+          requires: ['element-screenshot', 'focus'],
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-button' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-button' }, value: 'button' } },
+            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-button' }, value: true } },
+            { action: 'click', target: { testId: 'agentic-storybook-button' } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-button' }, value: true } },
+            { action: 'screenshot', name: 'button-focused', target: { testId: 'agentic-storybook-button' } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
 
 export const Overview: Story = {
   render: () => (

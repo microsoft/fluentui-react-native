@@ -25,7 +25,9 @@ Updated 2026-08-28.
   browser-command handling.
 - Implemented stable WebDriver element references, native liveness checks,
   preview-scoped staleness, configurable click modes, input-state tracking,
-  action validation, command deadlines, and ownership-safe shutdown.
+  action validation, element-origin resolution, per-session command queues,
+  a global input mutex, abortable host deadlines, drained runner cancellation,
+  and ownership-safe shutdown.
 - Added the deterministic fake host, typed low-level client, raw HTTP contract
   coverage, and a WebdriverIO remote-session contract with no Appium service.
 - Portable fake-host coverage exercises element lookup, click, text entry,
@@ -53,13 +55,37 @@ Updated 2026-08-28.
   Stage 1 supervisor exposes equivalent 136-story channel and driver manifests.
 - All macOS, Windows, and Win32 JavaScript bundles include the runtime bridge.
 
+### Stage 1 Phase 3: Complete
+
+- Finalized strict static plan, selector, action, assertion, capability,
+  platform, result, test, step, and artifact contracts under `/authoring`.
+- Added deterministic filtering and sharding plus complete fake-host execution
+  for clicks, text entry, key/action sequences, scrolling, waits, Storybook
+  args, screenshots, source, and semantic assertions.
+- Added the sanctioned `/wdio` API and typed browser commands for listing,
+  opening, resetting, asserting, and running story plans without Appium.
+- Added confined atomic artifacts, host metadata, `run.json`, and automatic
+  screenshot, source, and compact-tree failure evidence.
+- Added the bounded `/agent` API for listing, explaining, inspecting, finding,
+  acting, checking, capturing, and running the same story plans.
+- Added the JSON `desktop-driver` CLI for fake serving, story list/explain/run,
+  sharding, evidence, and bounded agent describe/screenshot operations.
+- Added manifest-derived fake elements and repeatable per-test state reset so
+  real component plans can run repeatedly in Stage 1.
+- Added typed, statically extractable `desktop-e2e` plans to Button, Checkbox,
+  and Input. All three extract from real CSF and pass repeatedly through the
+  sanctioned WebdriverIO runner.
+- Evaluated MCP integration and deferred a composed executable adapter until
+  Stage 2 proves the native command and security model; a schema-only claim is
+  explicitly insufficient.
+- Updated package, Storybook, runtime, app, component, skill, and agent
+  documentation for the final Stage 1 responsibilities.
+
 ### Remaining work
 
-No Phase 1 or Phase 2 deliverables are left incomplete.
+Stage 1 is complete; no Phase 1, Phase 2, or Phase 3 deliverables are left
+incomplete.
 
-- Stage 1 Phase 3 remains: complete the sanctioned WebdriverIO authoring API,
-  assertions and matchers, representative component plans, full plan runner,
-  agent API, reports/artifacts, and MCP evaluation.
 - Stage 2 remains: implement Windows/Win32 and macOS native host providers and
   replace the Stage 1 fake target in native runs.
 - Stage 3 remains: release hardening, native artifact ownership, security
@@ -1017,7 +1043,7 @@ The Storybook supervisor:
 8. runs tests or writes agent-ready connection data;
 9. releases input and tears down only owned resources.
 
-## Proposed package shape
+## Implemented package shape
 
 ```text
 packages/agentic/desktop-driver/
@@ -1028,49 +1054,52 @@ packages/agentic/desktop-driver/
   package.json
   tsconfig.json
   jest.config.cjs
-  eslint.config.js
   config/
     cli.cjs
   src/
     index.ts
     authoring/
       index.ts
-      selectors.ts
-      storyTests.ts
       results.ts
+      storyTests.ts
+    artifacts/
+      ArtifactManager.ts
+      index.ts
     client/
       DesktopDriverClient.ts
-      DesktopSession.ts
-      DesktopElement.ts
+      index.ts
+    cli/
+      createDesktopDriverCommand.ts
+      index.ts
     protocol/
-      routes.ts
-      codecs.ts
-      capabilities.ts
-      errors.ts
-      elements.ts
       actions.ts
+      capabilities.ts
+      constants.ts
+      errors.ts
+      timeouts.ts
+      types.ts
     server/
       createDesktopDriverServer.ts
+      index.ts
       SessionManager.ts
-      CommandQueue.ts
       TargetRegistry.ts
-      ArtifactManager.ts
     host/
-      DesktopHost.ts
-      protocol.ts
       types.ts
-      errors.ts
     hosts/
-      fake/
+      fake/FakeDesktopHost.ts
     runner/
+      index.ts
       StoryTestRunner.ts
-      assertions.ts
-      waits.ts
+    wdio/
+      DesktopWebdriver.ts
+      index.ts
     agent/
       DesktopAgent.ts
-      describe.ts
+      index.ts
     testing/
-      FakeDesktopHost.ts
+      FakeStoryOrchestrator.ts
+      fakeStoryElements.ts
+      index.ts
       protocolHarness.ts
 ```
 
@@ -1081,10 +1110,14 @@ Potential subpath exports:
 
 - `.`;
 - `./authoring`;
+- `./artifacts`;
 - `./client`;
+- `./cli`;
 - `./server`;
 - `./agent`;
+- `./runner`;
 - `./testing`;
+- `./wdio`;
 - `./package.json`.
 
 Use explicit named exports. Keep platform code under `hosts`. The package
@@ -1144,7 +1177,7 @@ Exit:
 - exact-platform and portable-plan digests are checked;
 - no additional Node server process is required.
 
-#### Phase 3: WebdriverIO, authoring, and agent surface - Not started
+#### Phase 3: WebdriverIO, authoring, and agent surface - Complete
 
 Deliver:
 

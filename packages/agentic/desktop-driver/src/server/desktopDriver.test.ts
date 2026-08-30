@@ -3,8 +3,8 @@ import { Buffer } from 'node:buffer';
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
 import type { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
 import { webElementIdentifier } from '../protocol/constants.js';
+import { runDesktopStoryTests } from '../runner/StoryTestRunner.js';
 import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
-import { runDesktopStoryTest } from '../testing/runStoryPlan.js';
 import type { DesktopStoryManifest, StoryOrchestrator, StoryReadyResult } from '../storybook.js';
 
 describe('Desktop Driver W3C remote end', () => {
@@ -139,13 +139,57 @@ describe('Desktop Driver W3C remote end', () => {
     const creating = client.newSession({
       alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
     });
+
     await waitUntil(() => harness.host.actions.some(({ type }) => type === 'launch'));
 
     const closing = harness.server.close();
-    await expect(creating).resolves.toBeDefined();
+    await expect(creating).rejects.toMatchObject({ code: 'session not created' });
     await closing;
     expect(harness.host.actions).toContainEqual(expect.objectContaining({ type: 'release-actions' }));
     expect(harness.host.actions).toContainEqual(expect.objectContaining({ type: 'close-application' }));
+  });
+
+  test('serializes release behind a timed-out native action and drains the host operation', async () => {
+    const harness = await createDesktopDriverTestHarness({ actionDelayMs: 50 });
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+
+      harness.server.sessions.get(session.id).desktopTimeouts.nativeCommand = 10;
+      const performing = session.performActions([{ id: 'key', type: 'key', actions: [{ type: 'keyDown', value: 'A' }] }]);
+      await waitUntil(() => harness.host.actions.some(({ type }) => type === 'actions-start'));
+      const releasing = session.releaseActions();
+
+      await expect(performing).rejects.toMatchObject({ code: 'timeout' });
+      await expect(releasing).resolves.toBeNull();
+      const started = harness.host.actions.findIndex(({ type }) => type === 'actions-start');
+      const released = harness.host.actions.findIndex(({ type }) => type === 'release-actions');
+      expect(harness.host.actions.some(({ type }) => type === 'actions')).toBe(false);
+      expect(released).toBeGreaterThan(started);
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
+  test('keeps a target reserved until application teardown completes', async () => {
+    const harness = await createDesktopDriverTestHarness({ closeDelayMs: 50 });
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const capabilities = { alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id } };
+      const session = await client.newSession(capabilities);
+      const deleting = session.delete();
+      await waitUntil(() => harness.host.actions.some(({ type }) => type === 'close-application-start'));
+
+      await expect(client.newSession(capabilities)).rejects.toMatchObject({ code: 'session not created' });
+      await deleting;
+      const replacement = await client.newSession(capabilities);
+      await replacement.delete();
+    } finally {
+      await harness.close();
+    }
   });
 
   test('supports the typed client for elements, text entry, actions, and screenshots', async () => {
@@ -219,6 +263,31 @@ describe('Desktop Driver W3C remote end', () => {
       });
       const previewBefore = await session.findElement('accessibility id', 'button-primary');
       const chromeBefore = await session.findElement('accessibility id', 'app-root');
+      const elementOriginActions = [
+        {
+          id: 'wheel',
+          type: 'wheel' as const,
+          actions: [
+            {
+              type: 'scroll',
+              deltaX: 0,
+              deltaY: 100,
+              origin: { [webElementIdentifier]: previewBefore.id },
+              x: 0,
+              y: 0,
+            },
+          ],
+        },
+      ];
+      await session.performActions(elementOriginActions);
+      expect(harness.host.actions).toContainEqual({
+        type: 'actions',
+        actions: [
+          expect.objectContaining({
+            actions: [expect.objectContaining({ origin: { elementId: 'button' } })],
+          }),
+        ],
+      });
 
       await expect(session.getStoryManifest()).resolves.toEqual(manifest);
       await expect(session.selectStory('components-button--default', 'run-1')).resolves.toMatchObject({
@@ -226,32 +295,100 @@ describe('Desktop Driver W3C remote end', () => {
         runId: 'run-1',
       });
       await expect(previewBefore.getText()).rejects.toMatchObject({ code: 'stale element reference' });
+      await expect(session.performActions(elementOriginActions)).rejects.toMatchObject({ code: 'stale element reference' });
       await expect(chromeBefore.getTagName()).resolves.toBe('application');
 
       const previewAfter = await session.findElement('accessibility id', 'button-primary');
       expect(previewAfter.id).not.toBe(previewBefore.id);
-      await runDesktopStoryTest(
-        session,
-        {
-          version: 1,
-          tests: [
-            {
-              id: 'clicks-button',
-              steps: [
-                { action: 'wait', target: { testId: 'button-primary' }, timeoutMs: 100 },
-                { action: 'click', target: { testId: 'button-primary' } },
+      const runnerManifest: DesktopStoryManifest = {
+        ...manifest,
+        entries: [
+          {
+            ...manifest.entries[0],
+            tests: {
+              version: 1,
+              tests: [
+                {
+                  id: 'clicks-button',
+                  steps: [
+                    { action: 'wait', target: { testId: 'button-primary' }, timeoutMs: 100 },
+                    { action: 'click', target: { testId: 'button-primary' } },
+                  ],
+                },
               ],
             },
-          ],
-        },
-        'clicks-button',
-      );
+          },
+        ],
+      };
+      await expect(
+        runDesktopStoryTests({
+          endpoint: 'windows',
+          manifest: runnerManifest,
+          platformName: 'windows',
+          selection: { test: 'clicks-button' },
+          session,
+          targetId: harness.target.id,
+        }),
+      ).resolves.toMatchObject({ status: 'passed' });
       expect(harness.host.actions).toContainEqual({ type: 'click', elementId: 'button', mode: 'physical' });
       await expect(session.resetStory('components-button--default', 'run-2')).resolves.toMatchObject({
         previewGeneration: 2,
         runId: 'run-2',
       });
       await expect(previewAfter.getText()).rejects.toMatchObject({ code: 'stale element reference' });
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
+  test('invalidates preview references before a reset whose marker verification fails', async () => {
+    const manifest: DesktopStoryManifest = {
+      endpoint: 'windows',
+      entries: [
+        {
+          id: 'components-button--default',
+          name: 'Default',
+          packageName: '@fluentui-react-native/components',
+          sourcePath: 'button.stories.tsx',
+          tags: ['story'],
+          title: 'Components/Button',
+        },
+      ],
+      platformManifestDigest: 'platform',
+      portablePlanDigest: 'portable',
+      schemaVersion: 1,
+    };
+    const hostRef: { current?: FakeDesktopHost } = {};
+    const orchestrator: StoryOrchestrator = {
+      async getCurrentStory() {
+        return null;
+      },
+      async getManifest() {
+        return manifest;
+      },
+      async resetStory(request) {
+        hostRef.current?.resetPreview();
+        return { previewGeneration: 1, runId: request.runId, storyId: request.storyId };
+      },
+      async selectStory(request) {
+        return { previewGeneration: 1, runId: request.runId, storyId: request.storyId };
+      },
+    };
+    const harness = await createDesktopDriverTestHarness({}, orchestrator);
+    hostRef.current = harness.host;
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+      harness.server.sessions.get(session.id).desktopTimeouts.storyRender = 20;
+      const preview = await session.findElement('accessibility id', 'button-primary');
+
+      await expect(session.resetStory('components-button--default', 'failed-run')).rejects.toMatchObject({
+        code: 'timeout',
+      });
+      await expect(preview.getText()).rejects.toMatchObject({ code: 'stale element reference' });
       await session.delete();
     } finally {
       await harness.close();

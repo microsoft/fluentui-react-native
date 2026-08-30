@@ -1,13 +1,20 @@
 import { WebDriverError } from './errors.js';
 
-export async function withCommandTimeout<T>(operation: () => Promise<T>, timeoutMs: number, description: string): Promise<T> {
+export async function withCommandTimeout<T>(
+  operation: (signal: AbortSignal) => Promise<T>,
+  timeoutMs: number,
+  description: string,
+): Promise<T> {
   let timer: ReturnType<typeof setTimeout> | undefined;
+  const controller = new AbortController();
   try {
     return await Promise.race([
-      operation(),
+      operation(controller.signal),
       new Promise<never>((_resolve, reject) => {
         timer = setTimeout(() => {
-          reject(new WebDriverError('timeout', `${description} exceeded ${timeoutMs}ms.`));
+          const error = new WebDriverError('timeout', `${description} exceeded ${timeoutMs}ms.`);
+          controller.abort(error);
+          reject(error);
         }, timeoutMs);
       }),
     ]);

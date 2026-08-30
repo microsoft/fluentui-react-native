@@ -14,6 +14,7 @@
     "start": "rnx-cli start",
     "storybook": "storybook-desktop",
     "storybook-server": "storybook-desktop server",
+    "desktop-driver": "desktop-driver",
     "prebuild": "sb-rn-get-stories --config-path src",
     "lint": "fluentui-scripts lint",
     "format": "fluentui-scripts format"
@@ -34,6 +35,7 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@fluentui-react-native/desktop-driver": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/rex-win32": "0.81.1",
     "@react-native-community/cli": "^20.0.0",

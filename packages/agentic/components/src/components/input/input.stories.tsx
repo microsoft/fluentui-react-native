@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 import { directComponent } from '@fluentui-react-native/framework-base';
 
 import type { IconElementProps } from '../../primitives/icon/icon.types';
@@ -47,6 +48,7 @@ const meta: Meta<typeof Input> = {
   args: {
     placeholder: 'Search files',
     size: 'medium',
+    testID: 'agentic-storybook-input',
     variant: 'outline',
   },
   argTypes: {
@@ -67,7 +69,29 @@ export default meta;
 
 type Story = StoryObj<typeof Input>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'types-and-clears',
+          title: 'Accepts keyboard input and clears it',
+          requires: ['keyboard'],
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-input' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-input' }, value: 'textbox' } },
+            { action: 'type', target: { testId: 'agentic-storybook-input' }, text: 'Ada' },
+            { expect: { state: 'value', target: { testId: 'agentic-storybook-input' }, value: 'Ada' } },
+            { action: 'clear', target: { testId: 'agentic-storybook-input' } },
+            { expect: { state: 'value', target: { testId: 'agentic-storybook-input' }, value: '' } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
 
 export const Overview: Story = {
   render: () => (

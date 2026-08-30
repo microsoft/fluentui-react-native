@@ -212,6 +212,25 @@ catalog, relocatable source paths, serializable story-test plans, and platform
 and portable-plan digests. The current provider is a deterministic fake host;
 native Windows, Win32, and macOS providers are a later implementation stage.
 
+The app exposes the shared JSON CLI as `yarn desktop-driver`. After the
+supervisor and app are running, list or run the component-authored plans:
+
+```sh
+yarn desktop-driver stories list \
+  --url http://127.0.0.1:<driver-port> \
+  --target agenticstorybook-windows
+
+yarn desktop-driver stories run \
+  --url http://127.0.0.1:<driver-port> \
+  --target agenticstorybook-windows \
+  --tag desktop-e2e \
+  --artifacts artifacts/windows/desktop-driver
+```
+
+Use `agent describe` for a bounded native tree and `agent screenshot` for a
+confined evidence artifact. These commands and the programmatic agent API use
+the same manifests, selectors, runner, and result schema as WebdriverIO.
+
 Run it alongside `yarn start` and `yarn storybook run --macos|--windows`. The on-device app connects to it automatically
 (`src/StorybookApp.tsx` creates the shared desktop Storybook app around the generated view).
 
@@ -242,3 +261,5 @@ Run it alongside `yarn start` and `yarn storybook run --macos|--windows`. The on
 Follow the package-level story authoring instructions in `../../packages/agentic/components/AGENTS.md`. Add a
 `*.stories.tsx` file next to its component; standalone native package story globs are listed explicitly in `src/main.ts`.
 See `../../packages/agentic/components/src/components/button/button.stories.tsx` for the canonical higher-order component example.
+Portable tests are static `parameters.desktopDriver` data with stable `testID`
+selectors; Button, Checkbox, and Input demonstrate the initial contract.

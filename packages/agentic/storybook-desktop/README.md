@@ -133,6 +133,29 @@ identity. `driver` starts the Storybook channel/MCP server and the W3C Desktop
 Driver listener on separate loopback ports in one Node process. The initial
 target uses the deterministic fake host; native providers are a later stage.
 
+Component authors tag portable plans with `desktop-e2e`. Button, Checkbox, and
+Input provide the initial examples. Plan extraction evaluates only the inline
+static `desktopDriver` literal and supports TypeScript `satisfies`; dynamic
+values fail with source context instead of being omitted.
+
+Run the resulting plans through the consuming app's Desktop Driver CLI:
+
+```sh
+yarn desktop-driver stories list \
+  --url http://127.0.0.1:<driver-port> \
+  --target <target-id>
+
+yarn desktop-driver stories run \
+  --url http://127.0.0.1:<driver-port> \
+  --target <target-id> \
+  --tag desktop-e2e \
+  --artifacts artifacts/<platform>/desktop-driver
+```
+
+The `driver` startup output and `instance` command report the driver port and
+target identity. WebdriverIO is the sanctioned high-level runner; raw W3C and
+typed client surfaces remain available for integration and conformance tests.
+
 `createWindowsSmokeCommand` supplies a package-owned Fabric lifecycle that bundles the Windows catalog, prepares and
 builds the generated app, registers and launches its Debug package, starts the channel server and Metro, traverses every story, and stops only
 the processes it recorded. `createWin32SmokeCommand` bundles and launches the configured REX host, verifies the shared

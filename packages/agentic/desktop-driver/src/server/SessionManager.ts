@@ -30,9 +30,10 @@ export type DesktopSession = {
   hostInfo: DesktopHostInfo;
   id: string;
   inputState: WebDriverInputState;
+  issuedElementIds: Set<string>;
   lease: ApplicationLease;
   previewGeneration: number;
-  story: { runId: string; storyId: string } | null;
+  story: { previewGeneration: number; runId: string; storyId: string } | null;
   target: DesktopTarget;
   timeouts: WebDriverTimeouts;
   windows: DesktopWindow[];
@@ -42,8 +43,44 @@ export class SessionManager {
   private readonly sessions = new Map<string, DesktopSession>();
   private readonly sessionsByTarget = new Map<string, string>();
   private readonly reservedTargets = new Set<string>();
+  private readonly commandQueues = new Map<string, Promise<void>>();
+  private readonly inFlightCreates = new Set<Promise<void>>();
+  private inputQueue: Promise<void> = Promise.resolve();
+  private closing = false;
 
-  async create(target: DesktopTarget, hostInfo: DesktopHostInfo, clickMode: DesktopClickMode, launchMode: 'attach' | 'launch') {
+  create(
+    target: DesktopTarget,
+    hostInfo: DesktopHostInfo,
+    clickMode: DesktopClickMode,
+    launchMode: 'attach' | 'launch',
+  ): Promise<DesktopSession> {
+    if (this.closing) {
+      return Promise.reject(new WebDriverError('session not created', 'Desktop Driver is shutting down.'));
+    }
+    const result = this.createSession(target, hostInfo, clickMode, launchMode);
+    const settled = result.then(
+      () => undefined,
+      () => undefined,
+    );
+    this.inFlightCreates.add(settled);
+    void settled.finally(() => this.inFlightCreates.delete(settled));
+    return result;
+  }
+
+  beginClose(): void {
+    this.closing = true;
+  }
+
+  async waitForCreates(): Promise<void> {
+    await Promise.all(this.inFlightCreates);
+  }
+
+  private async createSession(
+    target: DesktopTarget,
+    hostInfo: DesktopHostInfo,
+    clickMode: DesktopClickMode,
+    launchMode: 'attach' | 'launch',
+  ): Promise<DesktopSession> {
     if (this.sessionsByTarget.has(target.id) || this.reservedTargets.has(target.id)) {
       throw new WebDriverError('session not created', `Target "${target.id}" already has an active session.`);
     }
@@ -51,16 +88,27 @@ export class SessionManager {
     this.reservedTargets.add(target.id);
     let lease: ApplicationLease | undefined;
     let releaseReservation = true;
-    const leasePromise = launchMode === 'attach' ? target.host.attach(target) : target.host.launch(target);
+    let leasePromise: Promise<ApplicationLease> | undefined;
     try {
       lease = await withCommandTimeout(
-        () => leasePromise,
+        (signal) => {
+          leasePromise = launchMode === 'attach' ? target.host.attach(target, signal) : target.host.launch(target, signal);
+          return leasePromise;
+        },
         120_000,
         `${launchMode === 'attach' ? 'Attaching to' : 'Launching'} target "${target.id}"`,
       );
-      const windows = await withCommandTimeout(() => target.host.windows(lease!), 10_000, `Reading windows for target "${target.id}"`);
+      const activeLease = lease;
+      const windows = await withCommandTimeout(
+        (signal) => target.host.windows(activeLease, signal),
+        10_000,
+        `Reading windows for target "${target.id}"`,
+      );
       if (windows.length === 0) {
         throw new WebDriverError('session not created', `Target "${target.id}" did not expose any windows.`);
+      }
+      if (this.closing) {
+        throw new WebDriverError('session not created', 'Desktop Driver shut down while the target was starting.');
       }
       const session: DesktopSession = {
         clickMode,
@@ -76,6 +124,7 @@ export class SessionManager {
         hostInfo,
         id: randomUUID(),
         inputState: createInputState(),
+        issuedElementIds: new Set(),
         lease,
         previewGeneration: 0,
         story: null,
@@ -91,24 +140,28 @@ export class SessionManager {
       this.sessionsByTarget.set(target.id, session.id);
       return session;
     } catch (error) {
-      await withCommandTimeout(() => target.host.releaseActions(), 10_000, `Releasing input for target "${target.id}"`).catch(
-        () => undefined,
-      );
+      await this.runInputCommand(() =>
+        withCommandTimeout((signal) => target.host.releaseActions(signal), 10_000, `Releasing input for target "${target.id}"`),
+      ).catch(() => undefined);
       if (lease) {
         const failedLease = lease;
-        await withCommandTimeout(() => target.host.closeApplication(failedLease), 10_000, `Closing failed target "${target.id}"`).catch(
-          () => undefined,
-        );
-      } else {
+        await withCommandTimeout(
+          (signal) => target.host.closeApplication(failedLease, signal),
+          10_000,
+          `Closing failed target "${target.id}"`,
+        ).catch(() => undefined);
+      } else if (leasePromise) {
         releaseReservation = false;
         void leasePromise
           .then(async (lateLease) => {
-            await withCommandTimeout(() => target.host.releaseActions(), 10_000, `Releasing late input for target "${target.id}"`).catch(
-              () => undefined,
-            );
-            await withCommandTimeout(() => target.host.closeApplication(lateLease), 10_000, `Closing late target "${target.id}"`).catch(
-              () => undefined,
-            );
+            await this.runInputCommand(() =>
+              withCommandTimeout((signal) => target.host.releaseActions(signal), 10_000, `Releasing late input for target "${target.id}"`),
+            ).catch(() => undefined);
+            await withCommandTimeout(
+              (signal) => target.host.closeApplication(lateLease, signal),
+              10_000,
+              `Closing late target "${target.id}"`,
+            ).catch(() => undefined);
           })
           .catch(() => undefined)
           .finally(() => this.reservedTargets.delete(target.id));
@@ -129,34 +182,66 @@ export class SessionManager {
     return session;
   }
 
+  runCommand<T>(sessionId: string, operation: () => Promise<T>): Promise<T> {
+    const previous = this.commandQueues.get(sessionId) ?? Promise.resolve();
+    const result = previous.catch(() => undefined).then(operation);
+    const tail = result.then(
+      () => undefined,
+      () => undefined,
+    );
+    this.commandQueues.set(sessionId, tail);
+    void tail.finally(() => {
+      if (this.commandQueues.get(sessionId) === tail) {
+        this.commandQueues.delete(sessionId);
+      }
+    });
+    return result;
+  }
+
+  runInputCommand<T>(operation: () => Promise<T>): Promise<T> {
+    const result = this.inputQueue.catch(() => undefined).then(operation);
+    this.inputQueue = result.then(
+      () => undefined,
+      () => undefined,
+    );
+    return result;
+  }
+
   async delete(id: string): Promise<void> {
     const session = this.get(id);
-    this.sessions.delete(id);
-    this.sessionsByTarget.delete(session.target.id);
+    this.reservedTargets.add(session.target.id);
     const failures: unknown[] = [];
     try {
-      await withCommandTimeout(
-        () => session.target.host.releaseActions(),
-        session.desktopTimeouts.nativeCommand,
-        `Releasing input for session "${id}"`,
-      );
-    } catch (error) {
-      failures.push(error);
-    }
-    try {
-      await withCommandTimeout(
-        () => session.target.host.closeApplication(session.lease),
-        session.desktopTimeouts.nativeCommand,
-        `Closing application for session "${id}"`,
-      );
-    } catch (error) {
-      failures.push(error);
-    }
-    if (failures.length === 1) {
-      throw failures[0];
-    }
-    if (failures.length > 1) {
-      throw new AggregateError(failures, `Failed to close session "${id}".`);
+      try {
+        await this.runInputCommand(() =>
+          withCommandTimeout(
+            (signal) => session.target.host.releaseActions(signal),
+            session.desktopTimeouts.nativeCommand,
+            `Releasing input for session "${id}"`,
+          ),
+        );
+      } catch (error) {
+        failures.push(error);
+      }
+      try {
+        await withCommandTimeout(
+          (signal) => session.target.host.closeApplication(session.lease, signal),
+          session.desktopTimeouts.nativeCommand,
+          `Closing application for session "${id}"`,
+        );
+      } catch (error) {
+        failures.push(error);
+      }
+      if (failures.length === 1) {
+        throw failures[0];
+      }
+      if (failures.length > 1) {
+        throw new AggregateError(failures, `Failed to close session "${id}".`);
+      }
+      this.sessions.delete(id);
+      this.sessionsByTarget.delete(session.target.id);
+    } finally {
+      this.reservedTargets.delete(session.target.id);
     }
   }
 
@@ -187,12 +272,19 @@ export class SessionManager {
     };
     session.elements.set(record.id, record);
     session.elementIdsByNativeId.set(record.nativeId, record.id);
+    session.issuedElementIds.add(record.id);
     return record;
   }
 
   resolveElement(session: DesktopSession, id: string): ElementRecord {
     const element = session.elements.get(id);
-    if (!element || (element.scope === 'preview' && element.previewGeneration !== session.previewGeneration)) {
+    if (!element) {
+      throw new WebDriverError(
+        session.issuedElementIds.has(id) ? 'stale element reference' : 'no such element',
+        `Element "${id}" is not available in this session.`,
+      );
+    }
+    if (element.scope === 'preview' && element.previewGeneration !== session.previewGeneration) {
       throw new WebDriverError('stale element reference', `Element "${id}" is no longer attached to the current view.`);
     }
     return element;

@@ -35,11 +35,12 @@ async function startDesktopStorybookServer({
       throw new Error(`Desktop Driver manifest does not exist at ${driverManifestPath}.`);
     }
     const driverManifest = JSON.parse(fs.readFileSync(driverManifestPath, 'utf8'));
-    const [{ createDesktopDriverServer }, { FakeDesktopHost }, { StorybookChannelOrchestrator }] = await Promise.all([
-      import('@fluentui-react-native/desktop-driver/server'),
-      import('@fluentui-react-native/desktop-driver/testing'),
-      import('../lib/driver/index.js'),
-    ]);
+    const [{ createDesktopDriverServer }, { createFakeStoryWindows, FakeDesktopHost }, { StorybookChannelOrchestrator }] =
+      await Promise.all([
+        import('@fluentui-react-native/desktop-driver/server'),
+        import('@fluentui-react-native/desktop-driver/testing'),
+        import('../lib/driver/index.js'),
+      ]);
     if (!server) {
       throw new Error('Desktop Driver Storybook orchestration requires WebSockets.');
     }
@@ -53,8 +54,10 @@ async function startDesktopStorybookServer({
       endpoint: driverManifest.endpoint,
       platformName: driverManifest.endpoint === 'macos' ? 'macos' : 'windows',
       storyRootTestId: `${driverManifest.testIDPrefix}-story-root`,
+      windows: createFakeStoryWindows(driverManifest.storyManifest, `${driverManifest.testIDPrefix}-story-root`),
     });
     const setStoryMarker = (result) => {
+      targetHost.resetPreview();
       targetHost.setElementName('story-root', JSON.stringify(result));
       return result;
     };

@@ -2,13 +2,13 @@ import { Buffer } from 'node:buffer';
 import { createServer } from 'node:http';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 
-import type { DesktopTarget, NativeElementSnapshot, NativeSelector, Rect } from '../host/types.js';
+import type { DesktopTarget, DesktopTreeNode, NativeActionSequence, NativeElementSnapshot, NativeSelector, Rect } from '../host/types.js';
 import { createInputState, parseActionSequences } from '../protocol/actions.js';
 import { createReturnedCapabilities, matchCapabilities } from '../protocol/capabilities.js';
 import { webElementIdentifier } from '../protocol/constants.js';
 import { invalidArgument, toWebDriverError, WebDriverError } from '../protocol/errors.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
-import type { NewSessionRequest, WebDriverElement, WebDriverResponse } from '../protocol/types.js';
+import type { NewSessionRequest, WebDriverActionSequence, WebDriverElement, WebDriverResponse } from '../protocol/types.js';
 import { SessionManager } from './SessionManager.js';
 import type { DesktopSession, ElementRecord } from './SessionManager.js';
 import { TargetRegistry } from './TargetRegistry.js';
@@ -63,8 +63,10 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
     url: `http://${formatHost(host)}:${port}`,
     async close() {
       closing = true;
+      sessions.beginClose();
       let sessionError: unknown;
       await closeServer(httpServer);
+      await sessions.waitForCreates();
       try {
         await sessions.deleteAll();
       } catch (error) {
@@ -72,7 +74,7 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
       }
       const hosts = new Set(targets.list().map(({ host: targetHost }) => targetHost));
       const results = await Promise.allSettled(
-        [...hosts].map((targetHost) => withCommandTimeout(() => targetHost.dispose(), 10_000, 'Disposing a desktop host')),
+        [...hosts].map((targetHost) => withCommandTimeout((signal) => targetHost.dispose(signal), 10_000, 'Disposing a desktop host')),
       );
       const hostErrors = results
         .filter((result): result is PromiseRejectedResult => result.status === 'rejected')
@@ -100,7 +102,8 @@ async function handleRequest(
     const segments = url.pathname.split('/').filter(Boolean).map(decodeURIComponent);
     const method = request.method ?? 'GET';
     const body = method === 'GET' || method === 'DELETE' ? undefined : await readJsonBody(request, maxBodyBytes);
-    const value = await route({ body, method, segments }, sessions, targets);
+    const operation = () => route({ body, method, segments }, sessions, targets);
+    const value = segments[0] === 'session' && segments[1] ? await sessions.runCommand(segments[1], operation) : await operation();
     writeJson(response, 200, { value });
   } catch (error) {
     const webdriverError = toWebDriverError(error);
@@ -118,7 +121,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
         id: target.id,
         platformName: target.platformName,
         renderer: target.renderer,
-        host: await withCommandTimeout(() => target.host.probe(), 10_000, `Probing target "${target.id}"`),
+        host: await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`),
       })),
     );
     return { message: 'Desktop Driver is ready.', ready: true, targets: targetInfo };
@@ -130,7 +133,11 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       throw invalidArgument('New Session requires "capabilities".');
     }
     const matched = await matchCapabilities(request.capabilities, targets.list());
-    const hostInfo = await withCommandTimeout(() => matched.target.host.probe(), 10_000, `Probing target "${matched.target.id}"`);
+    const hostInfo = await withCommandTimeout(
+      (signal) => matched.target.host.probe(signal),
+      10_000,
+      `Probing target "${matched.target.id}"`,
+    );
     const launchMode = matched.requested['furn:launchMode'] ?? 'launch';
     if (launchMode !== 'attach' && launchMode !== 'launch') {
       throw invalidArgument('"furn:launchMode" must be "attach" or "launch".');
@@ -157,14 +164,14 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     return handleTimeouts(method, body, session);
   }
   if (command[0] === 'window') {
-    return handleWindowCommand(method, command.slice(1), body, session);
+    return handleWindowCommand(method, command.slice(1), body, session, sessions);
   }
   if (method === 'POST' && (command[0] === 'element' || command[0] === 'elements') && command.length === 1) {
     return findElements(session, sessions, body, command[0] === 'element');
   }
   if (method === 'GET' && command[0] === 'element' && command[1] === 'active') {
-    const active = await hostCommand(session, 'Reading the active element', () =>
-      session.target.host.activeElement(session.currentWindowId),
+    const active = await hostCommand(session, 'Reading the active element', (signal) =>
+      session.target.host.activeElement(session.currentWindowId, signal),
     );
     return active ? toElementReference(sessions.registerElement(session, active)) : null;
   }
@@ -174,27 +181,107 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
   if (command[0] === 'actions') {
     if (method === 'POST') {
       const { actions, nextState } = parseActionSequences(requireObject(body, 'actions request').actions, session.inputState);
-      await hostCommand(session, 'Performing input actions', () => session.target.host.performActions(actions));
-      session.inputState = nextState;
+      const resolvedActions = await resolveActionOrigins(actions, session, sessions);
+      await sessions.runInputCommand(async () => {
+        session.inputState = nextState;
+        try {
+          await hostCommand(session, 'Performing input actions', (signal) => session.target.host.performActions(resolvedActions, signal));
+        } catch (error) {
+          await hostCommand(session, 'Releasing failed input actions', (signal) => session.target.host.releaseActions(signal)).catch(
+            () => undefined,
+          );
+          session.inputState = createInputState();
+          throw error;
+        }
+      });
       return null;
     }
     if (method === 'DELETE') {
-      await hostCommand(session, 'Releasing input actions', () => session.target.host.releaseActions());
+      await sessions.runInputCommand(() =>
+        hostCommand(session, 'Releasing input actions', (signal) => session.target.host.releaseActions(signal)),
+      );
       session.inputState = createInputState();
       return null;
     }
   }
   if (method === 'GET' && command[0] === 'screenshot' && command.length === 1) {
-    const image = await hostCommand(session, 'Capturing the current window', () =>
-      session.target.host.captureWindow(session.currentWindowId),
+    const image = await hostCommand(session, 'Capturing the current window', (signal) =>
+      session.target.host.captureWindow(session.currentWindowId, signal),
     );
     return Buffer.from(image.data).toString('base64');
   }
   if (method === 'GET' && command[0] === 'source' && command.length === 1) {
-    return hostCommand(session, 'Reading the accessibility source', () => session.target.host.source(session.currentWindowId));
+    return hostCommand(session, 'Reading the accessibility source', (signal) =>
+      session.target.host.source(session.currentWindowId, signal),
+    );
   }
   if (command[0] === 'furn') {
+    if (method === 'GET' && command[1] === 'tree' && command.length === 2) {
+      const snapshots = await hostCommand(session, 'Reading the compact accessibility tree', (signal) =>
+        session.target.host.tree(session.currentWindowId, signal),
+      );
+      return buildDesktopTree(snapshots);
+    }
     return handleStorybookCommand(method, command.slice(1), body, session, sessions);
+  }
+
+  function buildDesktopTree(snapshots: readonly NativeElementSnapshot[]): DesktopTreeNode[] {
+    const children = new Map<string | undefined, NativeElementSnapshot[]>();
+    for (const snapshot of snapshots) {
+      const siblings = children.get(snapshot.parentId) ?? [];
+      siblings.push(snapshot);
+      children.set(snapshot.parentId, siblings);
+    }
+    const build = (snapshot: NativeElementSnapshot): DesktopTreeNode => ({
+      children: (children.get(snapshot.id) ?? []).map(build),
+      ...(snapshot.name ? { name: snapshot.name } : {}),
+      rect: snapshot.rect,
+      role: snapshot.role,
+      states: {
+        ...(snapshot.checked.supported ? { checked: snapshot.checked.value } : {}),
+        ...(snapshot.enabled.supported ? { enabled: snapshot.enabled.value } : {}),
+        ...(snapshot.expanded.supported ? { expanded: snapshot.expanded.value } : {}),
+        ...(snapshot.focused.supported ? { focused: snapshot.focused.value } : {}),
+        ...(snapshot.selected.supported ? { selected: snapshot.selected.value } : {}),
+        ...(snapshot.visible.supported ? { visible: snapshot.visible.value } : {}),
+      },
+      ...(snapshot.automationId ? { testId: snapshot.automationId } : {}),
+      ...(snapshot.text ? { text: snapshot.text } : {}),
+      ...(snapshot.value !== undefined ? { value: snapshot.value } : {}),
+    });
+    return (children.get(undefined) ?? []).map(build);
+  }
+
+  async function resolveActionOrigins(
+    actions: readonly WebDriverActionSequence[],
+    session: DesktopSession,
+    sessions: SessionManager,
+  ): Promise<NativeActionSequence[]> {
+    const resolved: NativeActionSequence[] = [];
+    for (const sequence of actions) {
+      const resolvedSequence: NativeActionSequence = { ...sequence, actions: [] };
+      for (const action of sequence.actions) {
+        const origin = action.origin;
+        if (!origin || origin === 'viewport' || origin === 'pointer') {
+          resolvedSequence.actions.push(action);
+          continue;
+        }
+        const elementId = typeof origin === 'object' ? origin[webElementIdentifier] : undefined;
+        if (typeof elementId !== 'string') {
+          throw invalidArgument('Action element origin is missing a valid WebDriver element reference.');
+        }
+        const record = sessions.resolveElement(session, elementId);
+        await hostCommand(session, `Resolving action origin element "${elementId}"`, (signal) =>
+          session.target.host.snapshot(record.nativeId, signal),
+        );
+        resolvedSequence.actions.push({
+          ...action,
+          origin: { elementId: record.nativeId },
+        });
+      }
+      resolved.push(resolvedSequence);
+    }
+    return resolved;
   }
 
   if (isUnsupportedBrowserCommand(command)) {
@@ -216,49 +303,49 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       return withCommandTimeout(() => orchestrator.getManifest(), session.desktopTimeouts.nativeCommand, 'Reading the Storybook manifest');
     }
     if (method === 'GET' && command[0] === 'story' && command.length === 1) {
-      return withCommandTimeout(
-        () => orchestrator.getCurrentStory(),
-        session.desktopTimeouts.nativeCommand,
-        'Reading the current Storybook story',
-      );
+      return session.story;
     }
     if (method === 'POST' && command[0] === 'story' && command.length === 1) {
       const request = parseStorySelection(body);
+      const deadline = Date.now() + session.desktopTimeouts.storyRender;
+      sessions.invalidatePreview(session);
+      session.story = null;
       const result = await withCommandTimeout(
         () => orchestrator.selectStory(request),
-        session.desktopTimeouts.storyRender,
+        remainingTime(deadline),
         `Selecting Storybook story "${request.storyId}"`,
       );
-      await verifyStoryMarker(session, result);
-      sessions.invalidatePreview(session);
-      session.story = { runId: result.runId, storyId: result.storyId };
+      await verifyStoryMarker(session, result, deadline);
+      session.story = result;
       return result;
     }
     if (method === 'POST' && command[0] === 'story' && command[1] === 'reset') {
       const request = parseStorySelection(body);
+      const deadline = Date.now() + session.desktopTimeouts.storyRender;
+      sessions.invalidatePreview(session);
+      session.story = null;
       const result = await withCommandTimeout(
         () => orchestrator.resetStory(request),
-        session.desktopTimeouts.storyRender,
+        remainingTime(deadline),
         `Resetting Storybook story "${request.storyId}"`,
       );
-      await verifyStoryMarker(session, result);
-      sessions.invalidatePreview(session);
-      session.story = { runId: result.runId, storyId: result.storyId };
+      await verifyStoryMarker(session, result, deadline);
+      session.story = result;
       return result;
     }
 
     async function verifyStoryMarker(
       session: DesktopSession,
       expected: { previewGeneration: number; runId: string; storyId: string },
+      deadline: number,
     ): Promise<void> {
       const testId = session.target.storyRootTestId;
       if (!testId) {
         return;
       }
-      const deadline = Date.now() + session.desktopTimeouts.storyRender;
       do {
-        const matches = await hostCommand(session, 'Finding the native Storybook story marker', () =>
-          session.target.host.find({ windowId: session.currentWindowId }, { strategy: 'accessibility id', value: testId }),
+        const matches = await hostCommand(session, 'Finding the native Storybook story marker', (signal) =>
+          session.target.host.find({ windowId: session.currentWindowId }, { strategy: 'accessibility id', value: testId }, signal),
         );
         for (const marker of matches) {
           const value = marker.name ?? marker.value ?? marker.text;
@@ -293,6 +380,8 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
         throw invalidArgument('Storybook args request requires a string "storyId".');
       }
       const args = requireObject(request.args, 'Storybook args request "args"');
+      sessions.invalidatePreview(session);
+      session.story = null;
       await withCommandTimeout(
         () => orchestrator.updateArgs!(request.storyId as string, args),
         session.desktopTimeouts.storyRender,
@@ -339,7 +428,13 @@ function handleTimeouts(method: string, body: unknown, session: DesktopSession):
   return null;
 }
 
-async function handleWindowCommand(method: string, command: string[], body: unknown, session: DesktopSession): Promise<unknown> {
+async function handleWindowCommand(
+  method: string,
+  command: string[],
+  body: unknown,
+  session: DesktopSession,
+  sessions: SessionManager,
+): Promise<unknown> {
   const host = session.target.host;
   if (command.length === 0 && method === 'GET') {
     ensureCurrentWindow(session);
@@ -350,29 +445,33 @@ async function handleWindowCommand(method: string, command: string[], body: unkn
     if (typeof handle !== 'string' || !session.windows.some(({ id }) => id === handle)) {
       throw new WebDriverError('no such window', `Window "${String(handle)}" does not exist in this session.`);
     }
-    await hostCommand(session, `Activating window "${handle}"`, () => host.activate(handle));
+    await sessions.runInputCommand(() => hostCommand(session, `Activating window "${handle}"`, (signal) => host.activate(handle, signal)));
     session.currentWindowId = handle;
     return null;
   }
   if (command.length === 0 && method === 'DELETE') {
     ensureCurrentWindow(session);
-    await hostCommand(session, `Closing window "${session.currentWindowId}"`, () => host.closeWindow(session.currentWindowId));
-    session.windows = await hostCommand(session, 'Reading application windows', () => host.windows(session.lease));
+    await sessions.runInputCommand(() =>
+      hostCommand(session, `Closing window "${session.currentWindowId}"`, (signal) => host.closeWindow(session.currentWindowId, signal)),
+    );
+    session.windows = await hostCommand(session, 'Reading application windows', (signal) => host.windows(session.lease, signal));
     session.currentWindowId = session.windows[0]?.id ?? '';
     return session.windows.map(({ id }) => id);
   }
   if (command[0] === 'handles' && command.length === 1 && method === 'GET') {
-    session.windows = await hostCommand(session, 'Reading application windows', () => host.windows(session.lease));
+    session.windows = await hostCommand(session, 'Reading application windows', (signal) => host.windows(session.lease, signal));
     return session.windows.map(({ id }) => id);
   }
   if (command[0] === 'rect' && command.length === 1) {
     ensureCurrentWindow(session);
     if (method === 'GET') {
-      return hostCommand(session, 'Reading the current window rectangle', () => host.getWindowRect(session.currentWindowId));
+      return hostCommand(session, 'Reading the current window rectangle', (signal) => host.getWindowRect(session.currentWindowId, signal));
     }
     if (method === 'POST') {
       const rect = validatePartialRect(requireObject(body, 'window rectangle'));
-      return hostCommand(session, 'Setting the current window rectangle', () => host.setWindowRect(session.currentWindowId, rect));
+      return hostCommand(session, 'Setting the current window rectangle', (signal) =>
+        host.setWindowRect(session.currentWindowId, rect, signal),
+      );
     }
   }
   throw new WebDriverError('unknown command', `Unknown window command "${command.join('/')}".`);
@@ -386,7 +485,9 @@ async function handleElementCommand(
   sessions: SessionManager,
 ): Promise<unknown> {
   const record = sessions.resolveElement(session, command[0]);
-  const snapshot = await hostCommand(session, `Reading element "${record.id}"`, () => session.target.host.snapshot(record.nativeId));
+  const snapshot = await hostCommand(session, `Reading element "${record.id}"`, (signal) =>
+    session.target.host.snapshot(record.nativeId, signal),
+  );
   const operation = command.slice(1);
 
   if (operation[0] === 'shadow') {
@@ -423,24 +524,32 @@ async function handleElementCommand(
     if (!requireSupported(snapshot.enabled, 'enabled') || !requireSupported(snapshot.visible, 'visible')) {
       throw new WebDriverError('element not interactable', `Element "${record.id}" cannot be clicked.`);
     }
-    await hostCommand(session, `Activating window "${snapshot.windowId}"`, () => session.target.host.activate(snapshot.windowId));
-    if (session.clickMode !== 'accessibility') {
-      const point = {
-        x: snapshot.rect.x + snapshot.rect.width / 2,
-        y: snapshot.rect.y + snapshot.rect.height / 2,
-      };
-      const hit = await hostCommand(session, `Hit testing element "${record.id}"`, () =>
-        session.target.host.hitTest(snapshot.windowId, point.x, point.y),
+    await sessions.runInputCommand(async () => {
+      await hostCommand(session, `Activating window "${snapshot.windowId}"`, (signal) =>
+        session.target.host.activate(snapshot.windowId, signal),
       );
-      if (hit && hit.id !== snapshot.id) {
-        throw new WebDriverError('element click intercepted', `Element "${record.id}" is obscured by another native element.`);
+      if (session.clickMode !== 'accessibility') {
+        const point = {
+          x: snapshot.rect.x + snapshot.rect.width / 2,
+          y: snapshot.rect.y + snapshot.rect.height / 2,
+        };
+        const hit = await hostCommand(session, `Hit testing element "${record.id}"`, (signal) =>
+          session.target.host.hitTest(snapshot.windowId, point.x, point.y, signal),
+        );
+        if (hit && hit.id !== snapshot.id) {
+          throw new WebDriverError('element click intercepted', `Element "${record.id}" is obscured by another native element.`);
+        }
       }
-    }
-    await hostCommand(session, `Clicking element "${record.id}"`, () => session.target.host.click(record.nativeId, session.clickMode));
+      await hostCommand(session, `Clicking element "${record.id}"`, (signal) =>
+        session.target.host.click(record.nativeId, session.clickMode, signal),
+      );
+    });
     return null;
   }
   if (method === 'POST' && operation[0] === 'clear') {
-    await hostCommand(session, `Clearing element "${record.id}"`, () => session.target.host.clear(record.nativeId));
+    await sessions.runInputCommand(() =>
+      hostCommand(session, `Clearing element "${record.id}"`, (signal) => session.target.host.clear(record.nativeId, signal)),
+    );
     return null;
   }
   if (method === 'POST' && operation[0] === 'value') {
@@ -454,11 +563,17 @@ async function handleElementCommand(
     if (text === undefined) {
       throw invalidArgument('Send Keys requires a string "text" or string-array "value".');
     }
-    await hostCommand(session, `Sending keys to element "${record.id}"`, () => session.target.host.sendKeys(record.nativeId, text));
+    await sessions.runInputCommand(() =>
+      hostCommand(session, `Sending keys to element "${record.id}"`, (signal) =>
+        session.target.host.sendKeys(record.nativeId, text, signal),
+      ),
+    );
     return null;
   }
   if (method === 'GET' && operation[0] === 'screenshot') {
-    const image = await hostCommand(session, `Capturing element "${record.id}"`, () => session.target.host.captureElement(record.nativeId));
+    const image = await hostCommand(session, `Capturing element "${record.id}"`, (signal) =>
+      session.target.host.captureElement(record.nativeId, signal),
+    );
     return Buffer.from(image.data).toString('base64');
   }
 
@@ -476,8 +591,8 @@ async function findElements(
   const deadline = Date.now() + session.timeouts.implicit;
   let matches: NativeElementSnapshot[] = [];
   do {
-    matches = await hostCommand(session, `Finding elements by ${selector.strategy}`, () =>
-      session.target.host.find({ elementId: rootElement?.nativeId, windowId: session.currentWindowId }, selector),
+    matches = await hostCommand(session, `Finding elements by ${selector.strategy}`, (signal) =>
+      session.target.host.find({ elementId: rootElement?.nativeId, windowId: session.currentWindowId }, selector, signal),
     );
     if (matches.length > 0 || Date.now() >= deadline) {
       break;
@@ -499,7 +614,13 @@ function parseSelector(body: unknown): NativeSelector {
   const request = requireObject(body, 'element lookup');
   const strategy = request.using;
   const value = request.value;
-  if (strategy !== 'accessibility id' && strategy !== 'tag name' && strategy !== 'link text' && strategy !== 'partial link text') {
+  if (
+    strategy !== '-furn:text' &&
+    strategy !== 'accessibility id' &&
+    strategy !== 'tag name' &&
+    strategy !== 'link text' &&
+    strategy !== 'partial link text'
+  ) {
     throw new WebDriverError('invalid selector', `Locator strategy "${String(strategy)}" is not supported.`);
   }
   if (typeof value !== 'string') {
@@ -536,6 +657,10 @@ function getElementValue(snapshot: NativeElementSnapshot, name: string): unknown
       return requireSupported(snapshot.focused, 'focused');
     case 'enabled':
       return requireSupported(snapshot.enabled, 'enabled');
+    case 'checked':
+      return requireSupported(snapshot.checked, 'checked');
+    case 'expanded':
+      return requireSupported(snapshot.expanded, 'expanded');
     case 'selected':
       return requireSupported(snapshot.selected, 'selected');
     default:
@@ -565,7 +690,7 @@ function ensureCurrentWindow(session: DesktopSession): void {
   }
 }
 
-function hostCommand<T>(session: DesktopSession, description: string, operation: () => Promise<T>): Promise<T> {
+function hostCommand<T>(session: DesktopSession, description: string, operation: (signal: AbortSignal) => Promise<T>): Promise<T> {
   return withCommandTimeout(operation, session.desktopTimeouts.nativeCommand, description);
 }
 
@@ -643,4 +768,8 @@ function closeServer(server: Server): Promise<void> {
 
 function delay(milliseconds: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+function remainingTime(deadline: number): number {
+  return Math.max(1, deadline - Date.now());
 }

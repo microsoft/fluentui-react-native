@@ -32,6 +32,9 @@
     },
     {
       "path": "../../packages/agentic/storybook-desktop-runtime/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/desktop-driver/tsconfig.json"
     }
   ]
 }

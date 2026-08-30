@@ -2411,6 +2411,7 @@ __metadata:
     "@babel/core": "catalog:"
     "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/components": "workspace:*"
+    "@fluentui-react-native/desktop-driver": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/storybook-desktop": "workspace:*"
@@ -2871,6 +2872,7 @@ __metadata:
     "@babel/core": "catalog:"
     "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
+    "@fluentui-react-native/desktop-driver": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -3337,7 +3339,10 @@ __metadata:
   resolution: "@fluentui-react-native/desktop-driver@workspace:packages/agentic/desktop-driver"
   dependencies:
     "@fluentui-react-native/scripts": "workspace:*"
+    commander: "npm:^14.0.2"
     webdriverio: "catalog:"
+  bin:
+    desktop-driver: ./config/cli.cjs
   languageName: unknown
   linkType: soft
 

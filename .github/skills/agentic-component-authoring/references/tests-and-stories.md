@@ -111,6 +111,38 @@ layout order, or native class names. Keep the initial args deterministic and
 add identifiers only to the small smoke set that agents and CI actively
 validate.
 
+Portable desktop automation is authored inline under
+`parameters.desktopDriver` and typed with `DesktopStoryTests` from
+`@fluentui-react-native/desktop-driver/authoring`:
+
+```tsx
+export const Default: Story = {
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'enabled-button',
+          steps: [
+            { action: 'wait', target: { testId: 'story-button' } },
+            { expect: { state: 'enabled', target: { testId: 'story-button' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
+```
+
+Keep the plan a static JSON literal. Storybook extracts it without importing
+the React Native module, so variables, functions, spreads, computed properties,
+and runtime platform branches are rejected. Express real differences with
+`platforms`, `requires`, and explicit skip results. Use `testID` for actions;
+use role, accessible name, state, and value assertions to verify the public
+accessibility contract. Button, Checkbox, and Input defaults are the canonical
+initial examples.
+
 Button uses focused appearance, size, shape, icon, selection, disabled, and constrained-content stories. Icon uses a
 source and size overview plus focused font, image, SVG, size, color, and accessibility stories.
 

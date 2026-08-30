@@ -17,6 +17,29 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   and Windows prep, bundle, build, and run commands come from the shared config, derive identity from `app.json`, and
   route through `rnx-cli`. Use `yarn storybook <command> --<platform>`; do not add platform aliases or app-local
   lifecycle scripts.
+- `app.json` owns the custom `storybook.testIDPrefix`. Do not create another
+  app identity file or duplicate the prefix in runtime source.
+
+## Desktop Driver workflow
+
+- Use `yarn storybook manifest --<platform>` to validate static story-plan
+  extraction.
+- Use `yarn storybook driver --<platform>` to start Metro, the Storybook
+  channel/MCP listener, and the WebDriver listener under one owned supervisor.
+- Use the app's `yarn desktop-driver` script for JSON story-run and agent
+  commands against that listener.
+- The Stage 1 provider is deliberately fake. Do not add Windows or macOS native
+  automation code until the corresponding Stage 2 plan begins.
+- Authored tests belong in component story `parameters.desktopDriver`, not in
+  this app. The app owns identity, package discovery, platform exclusions, and
+  generated manifests.
+- Keep `storybook-desktop.generated`, reports, trees, screenshots, and run
+  manifests ignored. Never patch generated runtime identity or story manifests.
+- Treat the exact-platform and portable-plan digests as contracts. A dynamic or
+  invalid plan must fail generation rather than disappear from the manifest.
+- Preserve nonce-authenticated runtime hello/readiness/error messages and
+  native story-root verification; do not fall back to uncorrelated channel
+  events.
 
 ## macOS native workflow
 

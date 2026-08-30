@@ -10,15 +10,18 @@ import type {
   DesktopWindow,
   NativeElementSnapshot,
   NativeImage,
+  NativeActionSequence,
   NativeSearchRoot,
   NativeSelector,
   Rect,
 } from '../../host/types.js';
 import { HostStaleError, HostUnsupportedError } from '../../protocol/errors.js';
-import type { DesktopClickMode, DesktopEndpoint, DesktopPlatformName, WebDriverActionSequence } from '../../protocol/types.js';
+import type { DesktopClickMode, DesktopEndpoint, DesktopPlatformName } from '../../protocol/types.js';
 
-export type FakeDesktopElement = Omit<NativeElementSnapshot, 'enabled' | 'focused' | 'selected' | 'visible'> & {
+export type FakeDesktopElement = Omit<NativeElementSnapshot, 'checked' | 'enabled' | 'expanded' | 'focused' | 'selected' | 'visible'> & {
+  checked?: boolean | 'mixed';
   enabled?: boolean;
+  expanded?: boolean;
   focused?: boolean;
   selected?: boolean;
   visible?: boolean;
@@ -30,6 +33,8 @@ export type FakeDesktopWindow = Omit<DesktopWindow, 'rect'> & {
 };
 
 export type FakeDesktopHostOptions = {
+  actionDelayMs?: number;
+  closeDelayMs?: number;
   endpoint?: DesktopEndpoint;
   features?: Partial<DesktopHostFeatures>;
   launchDelayMs?: number;
@@ -47,6 +52,7 @@ const defaultRect = { x: 0, y: 0, width: 800, height: 600 };
 const defaultFeatures: DesktopHostFeatures = {
   accessibilityClick: true,
   elementScreenshot: true,
+  focus: true,
   keyboard: true,
   physicalClick: true,
   screenshot: true,
@@ -59,15 +65,20 @@ export class FakeDesktopHost implements DesktopHost {
   readonly actions: Record<string, unknown>[] = [];
 
   private readonly platformName: DesktopPlatformName;
+  private readonly actionDelayMs: number;
+  private readonly closeDelayMs: number;
   private readonly features: DesktopHostFeatures;
   private readonly launchDelayMs: number;
   private readonly screenshot: Uint8Array;
   private readonly windowsById = new Map<string, DesktopWindow>();
   private readonly elements = new Map<string, NativeElementSnapshot>();
+  private readonly initialElements = new Map<string, NativeElementSnapshot>();
   private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
 
   constructor(options: FakeDesktopHostOptions = {}) {
     this.endpoint = options.endpoint ?? 'windows';
+    this.actionDelayMs = options.actionDelayMs ?? 0;
+    this.closeDelayMs = options.closeDelayMs ?? 0;
     this.platformName = options.platformName ?? (this.endpoint === 'macos' ? 'macos' : 'windows');
     this.features = { ...defaultFeatures, ...options.features };
     this.launchDelayMs = options.launchDelayMs ?? 0;
@@ -84,13 +95,51 @@ export class FakeDesktopHost implements DesktopHost {
         this.elements.set(element.id, toSnapshot(element));
       }
     }
+    for (const [id, element] of this.elements) {
+      this.initialElements.set(id, cloneElement(element));
+    }
   }
 
   setElementName(elementId: string, name: string): void {
     this.requireElement(elementId).name = name;
   }
 
-  async probe(): Promise<DesktopHostInfo> {
+  setElementStateUnsupported(
+    elementId: string,
+    state: 'checked' | 'enabled' | 'expanded' | 'focused' | 'selected' | 'visible',
+    reason: string,
+  ): void {
+    const update = (element: NativeElementSnapshot) => {
+      switch (state) {
+        case 'checked':
+          element.checked = { supported: false, reason };
+          break;
+        case 'enabled':
+          element.enabled = { supported: false, reason };
+          break;
+        case 'expanded':
+          element.expanded = { supported: false, reason };
+          break;
+        case 'focused':
+          element.focused = { supported: false, reason };
+          break;
+        case 'selected':
+          element.selected = { supported: false, reason };
+          break;
+        case 'visible':
+          element.visible = { supported: false, reason };
+          break;
+      }
+    };
+    update(this.requireElement(elementId));
+    const initial = this.initialElements.get(elementId);
+    if (initial) {
+      update(initial);
+    }
+  }
+
+  async probe(signal?: AbortSignal): Promise<DesktopHostInfo> {
+    throwIfAborted(signal);
     return {
       endpoint: this.endpoint,
       features: { ...this.features },
@@ -99,19 +148,22 @@ export class FakeDesktopHost implements DesktopHost {
     };
   }
 
-  async launch(target: DesktopTarget): Promise<ApplicationLease> {
+  async launch(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease> {
     this.actions.push({ type: 'launch', target: target.id });
-    await delay(this.launchDelayMs);
+    await delay(this.launchDelayMs, signal);
     return { id: randomUUID(), ownership: 'launched', processId: 1000, processStartedAt: new Date(0).toISOString() };
   }
 
-  async attach(target: DesktopTarget): Promise<ApplicationLease> {
+  async attach(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease> {
     this.actions.push({ type: 'attach', target: target.id });
-    await delay(this.launchDelayMs);
+    await delay(this.launchDelayMs, signal);
     return { id: randomUUID(), ownership: 'attached', processId: 1000, processStartedAt: new Date(0).toISOString() };
   }
 
-  async closeApplication(lease: ApplicationLease): Promise<void> {
+  async closeApplication(lease: ApplicationLease, signal?: AbortSignal): Promise<void> {
+    throwIfAborted(signal);
+    this.actions.push({ type: 'close-application-start', lease: lease.id });
+    await delay(this.closeDelayMs, signal);
     this.actions.push({ type: 'close-application', lease: lease.id, ownership: lease.ownership });
   }
 
@@ -191,7 +243,8 @@ export class FakeDesktopHost implements DesktopHost {
     return element ? cloneElement(element) : null;
   }
 
-  async click(elementId: string, mode: DesktopClickMode): Promise<void> {
+  async click(elementId: string, mode: DesktopClickMode, signal?: AbortSignal): Promise<void> {
+    throwIfAborted(signal);
     const element = this.requireElement(elementId);
     const resolvedMode =
       mode === 'auto' ? (this.features.physicalClick ? 'physical' : this.features.accessibilityClick ? 'accessibility' : undefined) : mode;
@@ -207,28 +260,36 @@ export class FakeDesktopHost implements DesktopHost {
         current.focused = { supported: true, value: current.id === element.id };
       }
     }
+    if (element.role === 'checkbox' && element.checked.supported) {
+      element.checked = { supported: true, value: element.checked.value === true ? false : true };
+    }
     this.actions.push({ type: 'click', elementId, mode: resolvedMode });
   }
 
-  async clear(elementId: string): Promise<void> {
+  async clear(elementId: string, signal?: AbortSignal): Promise<void> {
+    throwIfAborted(signal);
     const element = this.requireElement(elementId);
     element.value = '';
     element.text = '';
     this.actions.push({ type: 'clear', elementId });
   }
 
-  async sendKeys(elementId: string, text: string): Promise<void> {
+  async sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void> {
+    throwIfAborted(signal);
     const element = this.requireElement(elementId);
     element.value = `${element.value ?? ''}${text}`;
     element.text = element.value;
     this.actions.push({ type: 'send-keys', elementId, text });
   }
 
-  async performActions(actions: readonly WebDriverActionSequence[]): Promise<void> {
+  async performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void> {
+    this.actions.push({ type: 'actions-start' });
+    await delay(this.actionDelayMs, signal);
     this.actions.push({ type: 'actions', actions });
   }
 
-  async releaseActions(): Promise<void> {
+  async releaseActions(signal?: AbortSignal): Promise<void> {
+    throwIfAborted(signal);
     this.actions.push({ type: 'release-actions' });
   }
 
@@ -254,12 +315,18 @@ export class FakeDesktopHost implements DesktopHost {
     return `<application>${roots.map((element) => serializeElement(element, this.elements)).join('')}</application>`;
   }
 
+  async tree(windowId: string): Promise<NativeElementSnapshot[]> {
+    this.requireWindow(windowId);
+    return [...this.elements.values()].filter((element) => element.windowId === windowId).map(cloneElement);
+  }
+
   subscribe(listener: (event: DesktopHostEvent) => void): () => void {
     this.listeners.add(listener);
     return () => this.listeners.delete(listener);
   }
 
-  async dispose(): Promise<void> {
+  async dispose(signal?: AbortSignal): Promise<void> {
+    throwIfAborted(signal);
     this.listeners.clear();
     this.actions.push({ type: 'dispose' });
   }
@@ -286,6 +353,19 @@ export class FakeDesktopHost implements DesktopHost {
     for (const windowId of new Set(elements.map((element) => element.windowId))) {
       for (const listener of this.listeners) {
         listener({ type: 'structure-changed', windowId });
+      }
+    }
+  }
+
+  resetPreview(): void {
+    for (const [id, element] of this.elements) {
+      if (element.scope === 'preview') {
+        this.elements.delete(id);
+      }
+    }
+    for (const [id, element] of this.initialElements) {
+      if (element.scope === 'preview') {
+        this.elements.set(id, cloneElement(element));
       }
     }
   }
@@ -376,7 +456,9 @@ function toSnapshot(element: FakeDesktopElement): NativeElementSnapshot {
   return {
     ...element,
     rect: { ...element.rect },
+    checked: { supported: true, value: element.checked ?? false },
     enabled: { supported: true, value: element.enabled ?? true },
+    expanded: { supported: true, value: element.expanded ?? false },
     focused: { supported: true, value: element.focused ?? false },
     selected: { supported: true, value: element.selected ?? false },
     visible: { supported: true, value: element.visible ?? true },
@@ -387,7 +469,9 @@ function cloneElement(element: NativeElementSnapshot): NativeElementSnapshot {
   return {
     ...element,
     rect: { ...element.rect },
+    checked: { ...element.checked },
     enabled: { ...element.enabled },
+    expanded: { ...element.expanded },
     focused: { ...element.focused },
     selected: { ...element.selected },
     visible: { ...element.visible },
@@ -411,6 +495,8 @@ function isDescendantOf(element: NativeElementSnapshot, ancestorId: string, elem
 
 function matches(element: NativeElementSnapshot, selector: NativeSelector): boolean {
   switch (selector.strategy) {
+    case '-furn:text':
+      return element.text?.includes(selector.value) ?? element.value?.includes(selector.value) ?? false;
     case 'accessibility id':
       return element.automationId === selector.value;
     case 'tag name':
@@ -447,6 +533,26 @@ function escapeXml(value: string): string {
   return value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 }
 
-function delay(milliseconds: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+function throwIfAborted(signal: AbortSignal | undefined): void {
+  if (signal?.aborted) {
+    throw signal.reason instanceof Error ? signal.reason : new Error('Fake desktop host operation was aborted.');
+  }
+}
+
+function delay(milliseconds: number, signal?: AbortSignal): Promise<void> {
+  throwIfAborted(signal);
+  if (!signal) {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  }
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      signal.removeEventListener('abort', onAbort);
+      resolve();
+    }, milliseconds);
+    const onAbort = () => {
+      clearTimeout(timer);
+      reject(signal.reason instanceof Error ? signal.reason : new Error('Fake desktop host operation was aborted.'));
+    };
+    signal.addEventListener('abort', onAbort, { once: true });
+  });
 }

@@ -5,10 +5,39 @@ export {
   DesktopSessionClient,
 } from './client/DesktopDriverClient.js';
 export type { DesktopDriverClientOptions } from './client/DesktopDriverClient.js';
-export { validateDesktopStoryTests } from './authoring/storyTests.js';
+export { connectDesktopAgent, DesktopAgent } from './agent/DesktopAgent.js';
+export type {
+  DesktopAgentCheckResult,
+  DesktopAgentDescribeOptions,
+  DesktopAgentElement,
+  DesktopAgentOptions,
+  DesktopAgentStory,
+} from './agent/DesktopAgent.js';
+export { ArtifactManager } from './artifacts/ArtifactManager.js';
+export { createDesktopDriverCommand, runDesktopDriverCli } from './cli/createDesktopDriverCommand.js';
+export type { CreateDesktopDriverCommandOptions } from './cli/createDesktopDriverCommand.js';
+export type {
+  DesktopArtifact,
+  DesktopRunStatus,
+  DesktopStepStatus,
+  DesktopStoryRunResult,
+  DesktopStoryStepResult,
+  DesktopStoryTestResult,
+  DesktopTestStatus,
+} from './authoring/results.js';
+export {
+  defineDesktopStoryTests,
+  desktopBy,
+  desktopStoryCapabilities,
+  desktopStoryPlatforms,
+  validateDesktopStoryTests,
+} from './authoring/storyTests.js';
 export type {
   DesktopStoryCapability,
+  DesktopStoryExpectation,
+  DesktopStoryPlatform,
   DesktopStorySelector,
+  DesktopStoryState,
   DesktopStoryStep,
   DesktopStoryTest,
   DesktopStoryTests,
@@ -19,10 +48,14 @@ export type {
   DesktopHostFeatures,
   DesktopHostInfo,
   DesktopTarget,
+  DesktopTreeNode,
   DesktopWindow,
   NativeElementScope,
   NativeElementSnapshot,
   NativeImage,
+  NativeAction,
+  NativeActionOrigin,
+  NativeActionSequence,
   NativeSearchRoot,
   NativeSelector,
   Rect,
@@ -55,3 +88,14 @@ export type {
   StoryReadyResult,
   StorySelectionRequest,
 } from './storybook.js';
+export {
+  assertDesktopExpectation,
+  DesktopAssertionError,
+  findDesktopElement,
+  findDesktopElements,
+  runDesktopStoryTests,
+  selectDesktopStoryTests,
+} from './runner/StoryTestRunner.js';
+export type { DesktopStoryTestRunnerOptions, DesktopStoryTestSelection } from './runner/StoryTestRunner.js';
+export { connectDesktopWebdriver, DesktopWebdriverSession } from './wdio/DesktopWebdriver.js';
+export type { DesktopWebdriverOptions, DesktopWebdriverRunOptions } from './wdio/DesktopWebdriver.js';

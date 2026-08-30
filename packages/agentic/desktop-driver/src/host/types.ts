@@ -1,10 +1,5 @@
-import type {
-  DesktopClickMode,
-  DesktopEndpoint,
-  DesktopPlatformName,
-  DesktopRenderer,
-  WebDriverActionSequence,
-} from '../protocol/types.js';
+import type { DesktopClickMode, DesktopEndpoint, DesktopPlatformName, DesktopRenderer } from '../protocol/types.js';
+import type { WebDriverAction, WebDriverActionSequence } from '../protocol/types.js';
 import type { StoryOrchestrator } from '../storybook.js';
 
 export type Rect = {
@@ -19,6 +14,7 @@ export type SupportedValue<T> = { supported: true; value: T } | { supported: fal
 export type DesktopHostFeatures = {
   accessibilityClick: boolean;
   elementScreenshot: boolean;
+  focus: boolean;
   keyboard: boolean;
   physicalClick: boolean;
   screenshot: boolean;
@@ -51,7 +47,9 @@ export type NativeElementScope = 'application' | 'chrome' | 'preview' | 'seconda
 export type NativeElementSnapshot = {
   id: string;
   automationId?: string;
+  checked: SupportedValue<boolean | 'mixed'>;
   enabled: SupportedValue<boolean>;
+  expanded: SupportedValue<boolean>;
   focused: SupportedValue<boolean>;
   name?: string;
   parentId?: string;
@@ -66,7 +64,7 @@ export type NativeElementSnapshot = {
 };
 
 export type NativeSelector = {
-  strategy: 'accessibility id' | 'link text' | 'partial link text' | 'tag name';
+  strategy: '-furn:text' | 'accessibility id' | 'link text' | 'partial link text' | 'tag name';
   value: string;
 };
 
@@ -81,6 +79,32 @@ export type NativeImage = {
   mimeType: 'image/png';
   scaleFactor: number;
   width: number;
+};
+
+export type NativeActionOrigin = 'pointer' | 'viewport' | { elementId: string };
+export type NativeAction = WebDriverAction & {
+  origin?: NativeActionOrigin;
+};
+export type NativeActionSequence = Omit<WebDriverActionSequence, 'actions'> & {
+  actions: NativeAction[];
+};
+
+export type DesktopTreeNode = {
+  children: readonly DesktopTreeNode[];
+  name?: string;
+  rect: Rect;
+  role: string;
+  states: {
+    checked?: boolean | 'mixed';
+    enabled?: boolean;
+    expanded?: boolean;
+    focused?: boolean;
+    selected?: boolean;
+    visible?: boolean;
+  };
+  testId?: string;
+  text?: string;
+  value?: string;
 };
 
 export type DesktopTarget = {
@@ -102,32 +126,33 @@ export type DesktopHostEvent =
 export interface DesktopHost {
   readonly endpoint: DesktopEndpoint;
 
-  probe(): Promise<DesktopHostInfo>;
-  launch(target: DesktopTarget): Promise<ApplicationLease>;
-  attach(target: DesktopTarget): Promise<ApplicationLease>;
-  closeApplication(lease: ApplicationLease): Promise<void>;
+  probe(signal?: AbortSignal): Promise<DesktopHostInfo>;
+  launch(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease>;
+  attach(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease>;
+  closeApplication(lease: ApplicationLease, signal?: AbortSignal): Promise<void>;
 
-  windows(lease: ApplicationLease): Promise<DesktopWindow[]>;
-  closeWindow(windowId: string): Promise<void>;
-  activate(windowId: string): Promise<void>;
-  getWindowRect(windowId: string): Promise<Rect>;
-  setWindowRect(windowId: string, rect: Partial<Rect>): Promise<Rect>;
+  windows(lease: ApplicationLease, signal?: AbortSignal): Promise<DesktopWindow[]>;
+  closeWindow(windowId: string, signal?: AbortSignal): Promise<void>;
+  activate(windowId: string, signal?: AbortSignal): Promise<void>;
+  getWindowRect(windowId: string, signal?: AbortSignal): Promise<Rect>;
+  setWindowRect(windowId: string, rect: Partial<Rect>, signal?: AbortSignal): Promise<Rect>;
 
-  find(root: NativeSearchRoot, selector: NativeSelector): Promise<NativeElementSnapshot[]>;
-  snapshot(elementId: string): Promise<NativeElementSnapshot>;
-  activeElement(windowId: string): Promise<NativeElementSnapshot | null>;
-  hitTest(windowId: string, x: number, y: number): Promise<NativeElementSnapshot | null>;
+  find(root: NativeSearchRoot, selector: NativeSelector, signal?: AbortSignal): Promise<NativeElementSnapshot[]>;
+  snapshot(elementId: string, signal?: AbortSignal): Promise<NativeElementSnapshot>;
+  activeElement(windowId: string, signal?: AbortSignal): Promise<NativeElementSnapshot | null>;
+  hitTest(windowId: string, x: number, y: number, signal?: AbortSignal): Promise<NativeElementSnapshot | null>;
 
-  click(elementId: string, mode: DesktopClickMode): Promise<void>;
-  clear(elementId: string): Promise<void>;
-  sendKeys(elementId: string, text: string): Promise<void>;
-  performActions(actions: readonly WebDriverActionSequence[]): Promise<void>;
-  releaseActions(): Promise<void>;
+  click(elementId: string, mode: DesktopClickMode, signal?: AbortSignal): Promise<void>;
+  clear(elementId: string, signal?: AbortSignal): Promise<void>;
+  sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void>;
+  performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void>;
+  releaseActions(signal?: AbortSignal): Promise<void>;
 
-  captureWindow(windowId: string): Promise<NativeImage>;
-  captureElement(elementId: string): Promise<NativeImage>;
-  source(windowId: string): Promise<string>;
+  captureWindow(windowId: string, signal?: AbortSignal): Promise<NativeImage>;
+  captureElement(elementId: string, signal?: AbortSignal): Promise<NativeImage>;
+  source(windowId: string, signal?: AbortSignal): Promise<string>;
+  tree(windowId: string, signal?: AbortSignal): Promise<NativeElementSnapshot[]>;
 
   subscribe?(listener: (event: DesktopHostEvent) => void): () => void;
-  dispose(): Promise<void>;
+  dispose(signal?: AbortSignal): Promise<void>;
 }

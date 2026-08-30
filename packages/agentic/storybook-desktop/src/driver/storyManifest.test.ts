@@ -67,4 +67,104 @@ describe('createDesktopStoryManifest', () => {
     expect(windows.platformManifestDigest).not.toBe(macos.platformManifestDigest);
     expect(windows.portablePlanDigest).toBe(macos.portablePlanDigest);
   });
+
+  test('rejects dynamic, spread, and computed parameter containers and plan keys', async () => {
+    const story = { id: 'components-fixturebutton--default', name: 'Default' };
+    const dynamicParameterTools = {
+      loadCsf: () => ({
+        parse: () => ({
+          _stories: { Default: story },
+          _storyAnnotations: {
+            Default: {
+              parameters: { type: 'CallExpression', loc: { start: { line: 8 } } },
+            },
+          },
+          meta: { title: 'Components/FixtureButton' },
+          stories: [story],
+        }),
+      }),
+    };
+    await expect(createDesktopStoryManifest(fixtureConfig(), 'windows', dynamicParameterTools)).rejects.toThrow('static object literal');
+
+    const spreadParameterTools = {
+      loadCsf: () => ({
+        parse: () => ({
+          _stories: { Default: story },
+          _storyAnnotations: {
+            Default: {
+              parameters: {
+                type: 'ObjectExpression',
+                properties: [{ type: 'SpreadElement', argument: { type: 'Identifier', name: 'shared' } }],
+              },
+            },
+          },
+          meta: { title: 'Components/FixtureButton' },
+          stories: [story],
+        }),
+      }),
+    };
+    await expect(createDesktopStoryManifest(fixtureConfig(), 'windows', spreadParameterTools)).rejects.toThrow('use a spread');
+
+    const computedParameterTools = {
+      loadCsf: () => ({
+        parse: () => ({
+          _stories: { Default: story },
+          _storyAnnotations: {
+            Default: {
+              parameters: {
+                type: 'ObjectExpression',
+                properties: [
+                  {
+                    type: 'ObjectProperty',
+                    computed: true,
+                    key: { type: 'Identifier', name: 'planKey' },
+                    value: { type: 'ObjectExpression', properties: [] },
+                    loc: { start: { line: 12 } },
+                  },
+                ],
+              },
+            },
+          },
+          meta: { title: 'Components/FixtureButton' },
+          stories: [story],
+        }),
+      }),
+    };
+    await expect(createDesktopStoryManifest(fixtureConfig(), 'windows', computedParameterTools)).rejects.toThrow('computed property');
+
+    const computedPlanTools = {
+      loadCsf: () => ({
+        parse: () => ({
+          _stories: { Default: story },
+          _storyAnnotations: {
+            Default: {
+              parameters: {
+                type: 'ObjectExpression',
+                properties: [
+                  {
+                    type: 'ObjectProperty',
+                    key: { type: 'Identifier', name: 'desktopDriver' },
+                    value: {
+                      type: 'ObjectExpression',
+                      properties: [
+                        {
+                          type: 'ObjectProperty',
+                          computed: true,
+                          key: { type: 'Identifier', name: 'version' },
+                          value: { type: 'NumericLiteral', value: 1 },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          meta: { title: 'Components/FixtureButton' },
+          stories: [story],
+        }),
+      }),
+    };
+    await expect(createDesktopStoryManifest(fixtureConfig(), 'windows', computedPlanTools)).rejects.toThrow('Computed object properties');
+  });
 });

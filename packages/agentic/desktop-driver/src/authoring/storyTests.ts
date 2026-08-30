@@ -1,38 +1,83 @@
+import type { WebDriverActionSequence } from '../protocol/types.js';
+import { createInputState, parseActionSequences } from '../protocol/actions.js';
+
+export const desktopStoryPlatforms = ['macos', 'windows', 'win32'] as const;
+export const desktopStoryCapabilities = [
+  'accessibility-click',
+  'element-screenshot',
+  'focus',
+  'keyboard',
+  'physical-click',
+  'screenshot',
+  'wheel',
+] as const;
+
+export type DesktopStoryPlatform = (typeof desktopStoryPlatforms)[number];
+export type DesktopStoryCapability = (typeof desktopStoryCapabilities)[number];
+
 export type DesktopStorySelector = { testId: string } | { role: string; name?: string } | { accessibleName: string } | { text: string };
 
-export type DesktopStoryCapability =
-  | 'accessibility-click'
-  | 'element-screenshot'
-  | 'focus'
-  | 'keyboard'
-  | 'physical-click'
-  | 'screenshot'
-  | 'wheel';
+export type DesktopStoryState =
+  | 'accessibleName'
+  | 'checked'
+  | 'count'
+  | 'displayed'
+  | 'enabled'
+  | 'expanded'
+  | 'exists'
+  | 'focused'
+  | 'role'
+  | 'selected'
+  | 'text'
+  | 'value';
+
+export type DesktopStoryExpectation = {
+  state: DesktopStoryState;
+  target: DesktopStorySelector;
+  value?: boolean | number | string;
+};
 
 export type DesktopStoryStep =
+  | { action: 'actions'; sequences: readonly WebDriverActionSequence[] }
   | { action: 'clear' | 'click' | 'doubleClick'; target: DesktopStorySelector }
   | { action: 'keys'; value: readonly string[] }
+  | { action: 'note'; message: string }
   | { action: 'screenshot'; name: string; target?: DesktopStorySelector }
+  | { action: 'scroll'; deltaX?: number; deltaY: number; target?: DesktopStorySelector }
+  | { action: 'setArgs'; args: Readonly<Record<string, unknown>> }
+  | { action: 'source'; name: string }
   | { action: 'type'; target: DesktopStorySelector; text: string }
-  | { action: 'wait'; target?: DesktopStorySelector; timeoutMs?: number }
-  | { expect: { target: DesktopStorySelector; state: string; value?: unknown } };
+  | { action: 'wait'; target?: DesktopStorySelector; timeoutMs?: number; until?: DesktopStoryExpectation }
+  | { expect: DesktopStoryExpectation };
 
 export type DesktopStoryTest = {
   id: string;
-  title?: string;
-  platforms?: readonly ('macos' | 'windows' | 'win32')[];
+  platforms?: readonly DesktopStoryPlatform[];
   requires?: readonly DesktopStoryCapability[];
   steps: readonly DesktopStoryStep[];
+  title?: string;
 };
 
 export type DesktopStoryTests = {
-  version: 1;
   portable?: boolean;
   tests: readonly DesktopStoryTest[];
+  version: 1;
 };
+
+export const desktopBy = {
+  accessibleName: (accessibleName: string): DesktopStorySelector => ({ accessibleName }),
+  role: (role: string, name?: string): DesktopStorySelector => ({ role, ...(name ? { name } : {}) }),
+  testId: (testId: string): DesktopStorySelector => ({ testId }),
+  text: (text: string): DesktopStorySelector => ({ text }),
+};
+
+export function defineDesktopStoryTests(plan: DesktopStoryTests): DesktopStoryTests {
+  return validateDesktopStoryTests(plan);
+}
 
 export function validateDesktopStoryTests(value: unknown, source = 'desktopDriver'): DesktopStoryTests {
   const plan = requireObject(value, source);
+  requireExactKeys(plan, ['portable', 'tests', 'version'], source);
   if (plan.version !== 1) {
     throw new TypeError(`${source}.version must be 1.`);
   }
@@ -45,20 +90,228 @@ export function validateDesktopStoryTests(value: unknown, source = 'desktopDrive
 
   const ids = new Set<string>();
   for (const [index, value] of plan.tests.entries()) {
-    const test = requireObject(value, `${source}.tests[${index}]`);
-    if (typeof test.id !== 'string' || !test.id) {
-      throw new TypeError(`${source}.tests[${index}].id must be a non-empty string.`);
-    }
-    if (ids.has(test.id)) {
-      throw new TypeError(`${source} contains duplicate test id "${test.id}".`);
-    }
-    ids.add(test.id);
-    if (!Array.isArray(test.steps)) {
-      throw new TypeError(`${source}.tests[${index}].steps must be an array.`);
-    }
-    assertJsonValue(test, `${source}.tests[${index}]`);
+    validateTest(value, `${source}.tests[${index}]`, ids);
   }
+  assertJsonValue(value, source);
   return value as DesktopStoryTests;
+}
+
+function validateTest(value: unknown, source: string, ids: Set<string>): void {
+  const test = requireObject(value, source);
+  requireExactKeys(test, ['id', 'platforms', 'requires', 'steps', 'title'], source);
+  if (typeof test.id !== 'string' || !test.id) {
+    throw new TypeError(`${source}.id must be a non-empty string.`);
+  }
+  if (ids.has(test.id)) {
+    throw new TypeError(`${source} contains duplicate test id "${test.id}".`);
+  }
+  ids.add(test.id);
+  if (test.title !== undefined && (typeof test.title !== 'string' || !test.title)) {
+    throw new TypeError(`${source}.title must be a non-empty string when provided.`);
+  }
+  validateEnumArray(test.platforms, desktopStoryPlatforms, `${source}.platforms`);
+  validateEnumArray(test.requires, desktopStoryCapabilities, `${source}.requires`);
+  if (!Array.isArray(test.steps) || test.steps.length === 0) {
+    throw new TypeError(`${source}.steps must be a non-empty array.`);
+  }
+  for (const [index, step] of test.steps.entries()) {
+    validateStep(step, `${source}.steps[${index}]`);
+  }
+}
+
+function validateStep(value: unknown, source: string): void {
+  const step = requireObject(value, source);
+  if ('expect' in step) {
+    requireExactKeys(step, ['expect'], source);
+    validateExpectation(step.expect, `${source}.expect`);
+    return;
+  }
+  if (typeof step.action !== 'string') {
+    throw new TypeError(`${source}.action must be a supported action string.`);
+  }
+  switch (step.action) {
+    case 'actions':
+      requireExactKeys(step, ['action', 'sequences'], source);
+      if (!Array.isArray(step.sequences) || step.sequences.length === 0) {
+        throw new TypeError(`${source}.sequences must be a non-empty array.`);
+      }
+      try {
+        parseActionSequences(step.sequences, createInputState());
+      } catch (error) {
+        throw new TypeError(`${source}.sequences are invalid: ${(error as Error).message}`, { cause: error });
+      }
+      return;
+    case 'clear':
+    case 'click':
+    case 'doubleClick':
+      requireExactKeys(step, ['action', 'target'], source);
+      validateSelector(step.target, `${source}.target`);
+      return;
+    case 'keys':
+      requireExactKeys(step, ['action', 'value'], source);
+      if (!Array.isArray(step.value) || !step.value.every((key) => typeof key === 'string' && key.length > 0)) {
+        throw new TypeError(`${source}.value must be a non-empty string array.`);
+      }
+      return;
+    case 'note':
+      requireExactKeys(step, ['action', 'message'], source);
+      requireNonEmptyString(step.message, `${source}.message`);
+      return;
+    case 'screenshot':
+      requireExactKeys(step, ['action', 'name', 'target'], source);
+      requireNonEmptyString(step.name, `${source}.name`);
+      if (step.target !== undefined) {
+        validateSelector(step.target, `${source}.target`);
+      }
+      return;
+    case 'scroll':
+      requireExactKeys(step, ['action', 'deltaX', 'deltaY', 'target'], source);
+      requireFiniteNumber(step.deltaY, `${source}.deltaY`);
+      if (step.deltaX !== undefined) {
+        requireFiniteNumber(step.deltaX, `${source}.deltaX`);
+      }
+      if (step.target !== undefined) {
+        validateSelector(step.target, `${source}.target`);
+      }
+      return;
+    case 'setArgs':
+      requireExactKeys(step, ['action', 'args'], source);
+      requireObject(step.args, `${source}.args`);
+      return;
+    case 'source':
+      requireExactKeys(step, ['action', 'name'], source);
+      requireNonEmptyString(step.name, `${source}.name`);
+      return;
+    case 'type':
+      requireExactKeys(step, ['action', 'target', 'text'], source);
+      validateSelector(step.target, `${source}.target`);
+      if (typeof step.text !== 'string') {
+        throw new TypeError(`${source}.text must be a string.`);
+      }
+      return;
+    case 'wait':
+      requireExactKeys(step, ['action', 'target', 'timeoutMs', 'until'], source);
+      if (step.target !== undefined) {
+        validateSelector(step.target, `${source}.target`);
+      }
+      if (step.until !== undefined) {
+        validateExpectation(step.until, `${source}.until`);
+      }
+      if (step.target === undefined && step.until === undefined) {
+        throw new TypeError(`${source} requires "target" or "until".`);
+      }
+      if (step.timeoutMs !== undefined && (!Number.isInteger(step.timeoutMs) || (step.timeoutMs as number) < 0)) {
+        throw new TypeError(`${source}.timeoutMs must be a non-negative integer.`);
+      }
+      return;
+    default:
+      throw new TypeError(`${source}.action "${step.action}" is not supported.`);
+  }
+}
+
+function validateExpectation(value: unknown, source: string): void {
+  const expectation = requireObject(value, source);
+  requireExactKeys(expectation, ['state', 'target', 'value'], source);
+  if (
+    typeof expectation.state !== 'string' ||
+    !(
+      [
+        'accessibleName',
+        'checked',
+        'count',
+        'displayed',
+        'enabled',
+        'expanded',
+        'exists',
+        'focused',
+        'role',
+        'selected',
+        'text',
+        'value',
+      ] as const
+    ).includes(expectation.state as DesktopStoryState)
+  ) {
+    throw new TypeError(`${source}.state is not supported.`);
+  }
+  validateSelector(expectation.target, `${source}.target`);
+  if (expectation.value !== undefined && !['boolean', 'number', 'string'].includes(typeof expectation.value)) {
+    throw new TypeError(`${source}.value must be a boolean, number, or string.`);
+  }
+  if (typeof expectation.value === 'number' && !Number.isFinite(expectation.value)) {
+    throw new TypeError(`${source}.value must be finite.`);
+  }
+  if (expectation.state === 'count' && typeof expectation.value !== 'number') {
+    throw new TypeError(`${source}.value must be a number for a count assertion.`);
+  }
+  if (
+    (expectation.state === 'accessibleName' ||
+      expectation.state === 'role' ||
+      expectation.state === 'text' ||
+      expectation.state === 'value') &&
+    typeof expectation.value !== 'string'
+  ) {
+    throw new TypeError(`${source}.value must be a string for a ${expectation.state} assertion.`);
+  }
+  if (
+    (expectation.state === 'checked' ||
+      expectation.state === 'displayed' ||
+      expectation.state === 'enabled' ||
+      expectation.state === 'expanded' ||
+      expectation.state === 'exists' ||
+      expectation.state === 'focused' ||
+      expectation.state === 'selected') &&
+    expectation.value !== undefined &&
+    typeof expectation.value !== 'boolean' &&
+    !(expectation.state === 'checked' && expectation.value === 'mixed')
+  ) {
+    throw new TypeError(`${source}.value must be a boolean for a ${expectation.state} assertion.`);
+  }
+}
+
+function validateSelector(value: unknown, source: string): void {
+  const selector = requireObject(value, source);
+  const selectorKeys = ['accessibleName', 'role', 'testId', 'text'].filter((key) => selector[key] !== undefined);
+  if (selectorKeys.length !== 1) {
+    throw new TypeError(`${source} must define exactly one selector strategy.`);
+  }
+  const strategy = selectorKeys[0];
+  requireNonEmptyString(selector[strategy], `${source}.${strategy}`);
+  if (strategy === 'role') {
+    requireExactKeys(selector, ['name', 'role'], source);
+    if (selector.name !== undefined) {
+      requireNonEmptyString(selector.name, `${source}.name`);
+    }
+  } else {
+    requireExactKeys(selector, [strategy], source);
+  }
+}
+
+function validateEnumArray<T extends string>(value: unknown, allowed: readonly T[], source: string): void {
+  if (value === undefined) {
+    return;
+  }
+  if (!Array.isArray(value) || !value.every((item) => typeof item === 'string' && allowed.includes(item as T))) {
+    throw new TypeError(`${source} contains an unsupported value.`);
+  }
+}
+
+function requireExactKeys(value: Record<string, unknown>, allowed: readonly string[], source: string): void {
+  const unknown = Object.keys(value).filter((key) => !allowed.includes(key));
+  if (unknown.length > 0) {
+    throw new TypeError(`${source} contains unknown field "${unknown[0]}".`);
+  }
+}
+
+function requireNonEmptyString(value: unknown, source: string): asserts value is string {
+  if (typeof value !== 'string' || !value) {
+    throw new TypeError(`${source} must be a non-empty string.`);
+  }
+}
+
+function requireFiniteNumber(value: unknown, source: string): asserts value is number {
+  if (typeof value !== 'number' || !Number.isFinite(value)) {
+    throw new TypeError(`${source} must be a finite number.`);
+  }
 }
 
 function requireObject(value: unknown, source: string): Record<string, unknown> {
@@ -69,7 +322,13 @@ function requireObject(value: unknown, source: string): Record<string, unknown> 
 }
 
 function assertJsonValue(value: unknown, source: string): void {
-  if (value === null || ['boolean', 'number', 'string'].includes(typeof value)) {
+  if (typeof value === 'number') {
+    if (!Number.isFinite(value)) {
+      throw new TypeError(`${source} must contain only finite numbers.`);
+    }
+    return;
+  }
+  if (value === null || typeof value === 'boolean' || typeof value === 'string') {
     return;
   }
   if (Array.isArray(value)) {

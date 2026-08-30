@@ -69,7 +69,7 @@ export async function matchCapabilities(
         continue;
       }
 
-      const host = await withCommandTimeout(() => target.host.probe(), 10_000, `Probing target "${target.id}"`);
+      const host = await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`);
       const clickMode = resolveClickMode(requested['furn:clickMode'], host);
       return { clickMode, requested, target };
     }
