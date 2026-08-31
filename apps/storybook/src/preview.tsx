@@ -1,19 +1,5 @@
-import { View } from 'react-native';
-import type { Preview } from '@storybook/react-native';
+import { createDesktopStorybookPreview } from '@fluentui-react-native/storybook-desktop-runtime';
 
-import { StorybookThemeProvider } from './StorybookTheme';
-
-const preview: Preview = {
-  decorators: [
-    (Story) => (
-      <StorybookThemeProvider>
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-          <Story />
-        </View>
-      </StorybookThemeProvider>
-    ),
-  ],
-  parameters: {},
-};
+const preview = createDesktopStorybookPreview();
 
 export default preview;

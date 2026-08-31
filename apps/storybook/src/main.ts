@@ -1,24 +1,7 @@
-import type { StorybookConfig } from '@storybook/react-native';
+import type { DesktopReactNativeStorybookConfig } from '@fluentui-react-native/storybook-desktop/config';
 
-/**
- * Storybook configuration for the agentic-components on-device app.
- *
- * Stories are loaded from the sibling agentic library and standalone native packages
- * that are linked into this application.
- */
-const stories =
-  process.env.STORYBOOK_PLATFORM === 'win32'
-    ? [
-        '../../../packages/agentic/components/src/primitives/**/*.stories.?(ts|tsx)',
-        '../../../packages/agentic/components/src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)',
-        '../../../packages/native/Callout/src/**/*.stories.?(ts|tsx)',
-      ]
-    : ['../../../packages/agentic/components/src/**/*.stories.?(ts|tsx)', '../../../packages/native/Callout/src/**/*.stories.?(ts|tsx)'];
+import config from '../storybook.config.mts';
 
-const main: StorybookConfig = {
-  stories,
-  addons: [],
-  deviceAddons: ['@storybook/addon-ondevice-controls', '@storybook/addon-ondevice-actions'],
-};
+const storybookConfig: DesktopReactNativeStorybookConfig = config.getStorybookConfig();
 
-export default main;
+export default storybookConfig;

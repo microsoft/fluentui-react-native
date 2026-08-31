@@ -1,0 +1,101 @@
+export {
+  createDesktopDriverClient,
+  DesktopDriverClient,
+  DesktopElementClient,
+  DesktopSessionClient,
+} from './client/DesktopDriverClient.js';
+export type { DesktopDriverClientOptions } from './client/DesktopDriverClient.js';
+export { connectDesktopAgent, DesktopAgent } from './agent/DesktopAgent.js';
+export type {
+  DesktopAgentCheckResult,
+  DesktopAgentDescribeOptions,
+  DesktopAgentElement,
+  DesktopAgentOptions,
+  DesktopAgentStory,
+} from './agent/DesktopAgent.js';
+export { ArtifactManager } from './artifacts/ArtifactManager.js';
+export { createDesktopDriverCommand, runDesktopDriverCli } from './cli/createDesktopDriverCommand.js';
+export type { CreateDesktopDriverCommandOptions } from './cli/createDesktopDriverCommand.js';
+export type {
+  DesktopArtifact,
+  DesktopRunStatus,
+  DesktopStepStatus,
+  DesktopStoryRunResult,
+  DesktopStoryStepResult,
+  DesktopStoryTestResult,
+  DesktopTestStatus,
+} from './authoring/results.js';
+export {
+  defineDesktopStoryTests,
+  desktopBy,
+  desktopStoryCapabilities,
+  desktopStoryPlatforms,
+  validateDesktopStoryTests,
+} from './authoring/storyTests.js';
+export type {
+  DesktopStoryCapability,
+  DesktopStoryExpectation,
+  DesktopStoryPlatform,
+  DesktopStorySelector,
+  DesktopStoryState,
+  DesktopStoryStep,
+  DesktopStoryTest,
+  DesktopStoryTests,
+} from './authoring/storyTests.js';
+export type {
+  ApplicationLease,
+  DesktopHost,
+  DesktopHostFeatures,
+  DesktopHostInfo,
+  DesktopTarget,
+  DesktopTreeNode,
+  DesktopWindow,
+  NativeElementScope,
+  NativeElementSnapshot,
+  NativeImage,
+  NativeAction,
+  NativeActionOrigin,
+  NativeActionSequence,
+  NativeSearchRoot,
+  NativeSelector,
+  Rect,
+  SupportedValue,
+} from './host/types.js';
+export { webElementIdentifier } from './protocol/constants.js';
+export { HostStaleError, HostUnsupportedError, WebDriverError } from './protocol/errors.js';
+export type { WebDriverErrorCode } from './protocol/errors.js';
+export {
+  type DesktopClickMode,
+  type DesktopEndpoint,
+  type DesktopPlatformName,
+  type DesktopRenderer,
+  type DesktopTimeouts,
+  type NewSessionCapabilities,
+  type NewSessionRequest,
+  type WebDriverAction,
+  type WebDriverActionSequence,
+  type WebDriverElement,
+  type WebDriverErrorResponse,
+  type WebDriverResponse,
+  type WebDriverTimeouts,
+} from './protocol/types.js';
+export { createDesktopDriverServer, SessionManager, TargetRegistry } from './server/index.js';
+export type { DesktopDriverServer, DesktopDriverServerOptions, DesktopSession, ElementRecord } from './server/index.js';
+export type {
+  DesktopStoryManifest,
+  DesktopStoryManifestEntry,
+  StoryOrchestrator,
+  StoryReadyResult,
+  StorySelectionRequest,
+} from './storybook.js';
+export {
+  assertDesktopExpectation,
+  DesktopAssertionError,
+  findDesktopElement,
+  findDesktopElements,
+  runDesktopStoryTests,
+  selectDesktopStoryTests,
+} from './runner/StoryTestRunner.js';
+export type { DesktopStoryTestRunnerOptions, DesktopStoryTestSelection } from './runner/StoryTestRunner.js';
+export { connectDesktopWebdriver, DesktopWebdriverSession } from './wdio/DesktopWebdriver.js';
+export type { DesktopWebdriverOptions, DesktopWebdriverRunOptions } from './wdio/DesktopWebdriver.js';
