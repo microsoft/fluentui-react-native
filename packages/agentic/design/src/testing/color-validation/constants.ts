@@ -1,4 +1,4 @@
-/** Fallback surface colors used to resolve translucent validation pairs. */
+/** Test fallback surfaces used to resolve translucent validation pairs. */
 export const MODE_SURFACE = {
   light: '#ffffff',
   dark: '#000000',

@@ -39,12 +39,6 @@
       "import": "./lib/color-lib/index.js",
       "default": "./src/color-lib/index.ts"
     },
-    "./color-validation": {
-      "types": "./lib/color-validation/index.d.ts",
-      "react-native": "./src/color-validation/index.ts",
-      "import": "./lib/color-validation/index.js",
-      "default": "./src/color-validation/index.ts"
-    },
     "./theming": {
       "types": "./lib/theming/index.d.ts",
       "react-native": "./src/theming/index.ts",

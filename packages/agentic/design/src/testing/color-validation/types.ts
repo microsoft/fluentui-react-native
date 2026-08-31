@@ -1,7 +1,7 @@
 import type { ColorValue } from 'react-native';
 
-import type { ColorDiagnostic, ColorMode } from '../color-lib';
-import type { SemanticColorTokenValues } from '../tokens/flex.types';
+import type { ColorDiagnostic, ColorMode } from '../../color-lib';
+import type { SemanticColorTokenValues } from '../../tokens/flex.types';
 
 export type ContrastColorToken = keyof SemanticColorTokenValues;
 

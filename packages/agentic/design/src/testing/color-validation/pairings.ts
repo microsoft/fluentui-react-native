@@ -13,7 +13,7 @@ function token(tokenName: ContrastColorToken): ContrastTokenReference {
 }
 
 /**
- * Canonical x3 contrast pairings adapted to FURN token names, plus the
+ * Test-only canonical x3 contrast pairings adapted to FURN token names, plus the
  * issue-required FURN visible-stroke pairing.
  *
  * Source: x3-design/fluent-design@d334acf5cbad813f2b7cd554da942b09a7ff8f10.

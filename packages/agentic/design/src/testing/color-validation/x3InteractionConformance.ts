@@ -10,7 +10,7 @@ export type InteractionConformanceVector = readonly [
 ];
 
 /**
- * Base and interaction fallback values from the pinned x3 source commit.
+ * Test fixture with base and interaction fallback values from the pinned x3 source commit.
  * Each row covers hover and pressed in both light and dark modes.
  */
 export const x3InteractionConformance = {

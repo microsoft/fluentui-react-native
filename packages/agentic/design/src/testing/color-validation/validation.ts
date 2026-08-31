@@ -1,6 +1,6 @@
-import { parseColorValue, resolveContrastColors } from '../color-lib';
-import type { ColorDiagnostic, ColorMode } from '../color-lib';
-import type { SemanticColorTokenValues } from '../tokens/flex.types';
+import { parseColorValue, resolveContrastColors } from '../../color-lib';
+import type { ColorDiagnostic, ColorMode } from '../../color-lib';
+import type { SemanticColorTokenValues } from '../../tokens/flex.types';
 import { MODE_SURFACE } from './constants';
 import { PAIRINGS } from './pairings';
 import type {

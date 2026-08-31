@@ -29,5 +29,9 @@ const hover = getHoverColor('#c02e56', 'backgroundDangerLoud', 'light', {
 const ratio = getContrastRatio('#000000db', '#ffffff');
 ```
 
-The submodule is absent from the design root barrel and does not import
-`color-validation`.
+The public interaction surface is intentionally limited to generating one
+hover or pressed value at a time. Bulk fallback helpers and algorithm constants
+remain internal until a production consumer needs them.
+
+The submodule is absent from the design root barrel and does not import the
+test-only `testing` submodule.

@@ -4,7 +4,7 @@ import {
   x3BebopWarmInteractionConformance,
   x3InteractionConformance,
   x3WarmVariantDeviations,
-} from '../color-validation/testing/x3InteractionConformance';
+} from '../testing/color-validation/x3InteractionConformance';
 import { defaultFlexTokens } from '../tokens/defaultTokens';
 import type { SemanticColorTokenValues } from '../tokens/flex.types';
 import {
@@ -13,10 +13,7 @@ import {
   getContrastRatio,
   getHoverColor,
   getInteractionColor,
-  getInteractionColorOverrides,
-  getInteractionColors,
   getPressColor,
-  INTERACTIVE_COLOR_TOKENS,
   isInverseInteractionToken,
   oklchToRgb,
   parseColorValue,
@@ -25,6 +22,7 @@ import {
   rgbToOklch,
 } from './index';
 import type { ColorMode, InteractionColorState } from './index';
+import { getInteractionColorOverrides, getInteractionColors, INTERACTIVE_COLOR_TOKENS } from './interaction';
 
 const modeIndexes = {
   light: { rest: 0, hover: 1, pressed: 2 },

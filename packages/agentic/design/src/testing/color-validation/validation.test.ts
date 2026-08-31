@@ -1,12 +1,11 @@
 import { PlatformColor } from 'react-native';
 
-import { getInteractionColorOverrides, INTERACTIVE_COLOR_TOKENS } from '../color-lib';
-import type { ColorMode, InteractionColorState, InteractionColorVariant } from '../color-lib';
-import { defaultFlexTokens } from '../tokens/defaultTokens';
-import type { SemanticColorTokenValues } from '../tokens/flex.types';
-import { MODE_SURFACE, PAIRINGS, WCAG } from './index';
-import { getContrastFailures, getUnresolvableContrastPairs, validateContrastPairs } from './index';
-import { x3BebopWarmInteractionConformance, x3InteractionConformance } from './testing/x3InteractionConformance';
+import { getInteractionColorOverrides, INTERACTIVE_COLOR_TOKENS } from '../../color-lib/interaction';
+import type { ColorMode, InteractionColorState, InteractionColorVariant } from '../../color-lib/types';
+import { defaultFlexTokens } from '../../tokens/defaultTokens';
+import type { SemanticColorTokenValues } from '../../tokens/flex.types';
+import { getContrastFailures, getUnresolvableContrastPairs, MODE_SURFACE, PAIRINGS, validateContrastPairs, WCAG } from '../index';
+import { x3BebopWarmInteractionConformance, x3InteractionConformance } from './x3InteractionConformance';
 
 function conformanceColors(
   mode: ColorMode,
