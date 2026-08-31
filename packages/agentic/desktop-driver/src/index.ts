@@ -61,6 +61,35 @@ export type {
   Rect,
   SupportedValue,
 } from './host/types.js';
+export { NativeDesktopHost, NativeHostProcess } from './hosts/native/index.js';
+export type { NativeDesktopHostOptions, NativeHostProcessOptions, NativeHostRequestResult } from './hosts/native/index.js';
+export {
+  buildNativeDesktopDriver,
+  FURN_DESKTOP_DRIVER_BUILD_POLICY,
+  FURN_DESKTOP_DRIVER_CACHE_ROOT,
+  FURN_DESKTOP_DRIVER_HELPER_PATH,
+  FURN_DESKTOP_DRIVER_INSTALL_ROOT,
+  nativeDriverWireProtocol,
+  NativeDriverError,
+  resolveNativeDesktopDriver,
+  verifyNativeDriverArtifact,
+} from './native/index.js';
+export type {
+  NativeDesktopApplicationDescriptor,
+  NativeDriverArchitecture,
+  NativeDriverArtifact,
+  NativeDriverArtifactOrigin,
+  NativeDriverBuildOptions,
+  NativeDriverBuildPolicy,
+  NativeDriverConfiguration,
+  NativeDriverProvider,
+  NativeDriverResolveOptions,
+  NativeDriverSigning,
+  NativeDriverWireProtocol,
+  NativeHostEventMessage,
+  NativeHostHello,
+  NativeHostJsonMessage,
+} from './native/index.js';
 export { webElementIdentifier } from './protocol/constants.js';
 export { HostStaleError, HostUnsupportedError, WebDriverError } from './protocol/errors.js';
 export type { WebDriverErrorCode } from './protocol/errors.js';

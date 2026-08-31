@@ -4,10 +4,18 @@ import { Command, Option } from 'commander';
 
 import { connectDesktopAgent } from '../agent/DesktopAgent.js';
 import { validateDesktopStoryTests } from '../authoring/storyTests.js';
-import type { DesktopStoryManifest } from '../storybook.js';
 import { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
+import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from '../native/nativeDriver.js';
+import type {
+  NativeDriverArchitecture,
+  NativeDriverBuildOptions,
+  NativeDriverBuildPolicy,
+  NativeDriverConfiguration,
+  NativeDriverResolveOptions,
+} from '../native/types.js';
 import type { DesktopEndpoint, DesktopPlatformName, DesktopRenderer } from '../protocol/types.js';
 import { createDesktopDriverServer } from '../server/createDesktopDriverServer.js';
+import type { DesktopStoryManifest } from '../storybook.js';
 import { FakeStoryOrchestrator } from '../testing/FakeStoryOrchestrator.js';
 import { createFakeStoryWindows } from '../testing/fakeStoryElements.js';
 import { connectDesktopWebdriver } from '../wdio/DesktopWebdriver.js';
@@ -28,11 +36,15 @@ type SelectionFlags = ConnectionFlags & {
 };
 
 export type CreateDesktopDriverCommandOptions = {
+  buildDriver?: typeof buildNativeDesktopDriver;
+  resolveDriver?: typeof resolveNativeDesktopDriver;
   stderr?: Pick<NodeJS.WriteStream, 'write'>;
   stdout?: Pick<NodeJS.WriteStream, 'write'>;
 };
 
 export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOptions = {}): Command {
+  const buildDriver = options.buildDriver ?? buildNativeDesktopDriver;
+  const resolveDriver = options.resolveDriver ?? resolveNativeDesktopDriver;
   const stdout = options.stdout ?? process.stdout;
   const stderr = options.stderr ?? process.stderr;
   const program = new Command()
@@ -42,6 +54,10 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
       writeErr: (value) => stderr.write(value),
       writeOut: (value) => stdout.write(value),
     });
+
+  addNativeBuildCommand(program, buildDriver, stdout);
+  addNativeResolveCommand(program, resolveDriver, stdout);
+  addNativeDoctorCommand(program, resolveDriver, stdout);
 
   program
     .command('serve')
@@ -196,6 +212,71 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
   return program;
 }
 
+function addNativeBuildCommand(
+  program: Command,
+  buildDriver: typeof buildNativeDesktopDriver,
+  stdout: Pick<NodeJS.WriteStream, 'write'>,
+): void {
+  const command = program.command('build-driver').description('Build the native desktop helper for the selected platform.');
+  addNativePlatformOptions(command)
+    .addOption(new Option('--architecture <architecture>', 'native architecture').choices(['arm64', 'x64']))
+    .addOption(new Option('--configuration <configuration>', 'native build configuration').choices(['debug', 'release']).default('release'))
+    .option('--cache-root <path>', 'native helper cache root')
+    .option('--force', 'build and publish a new immutable selection even when a compatible artifact exists')
+    .action(async (flags: NativeBuildFlags) => {
+      const result = await buildDriver(toBuildOptions(flags));
+      writeJson(stdout, result);
+    });
+}
+
+function addNativeResolveCommand(
+  program: Command,
+  resolveDriver: typeof resolveNativeDesktopDriver,
+  stdout: Pick<NodeJS.WriteStream, 'write'>,
+): void {
+  const command = program.command('resolve-driver').description('Resolve and verify a native desktop helper.');
+  addNativePlatformOptions(command)
+    .addOption(new Option('--architecture <architecture>', 'native architecture').choices(['arm64', 'x64']))
+    .addOption(new Option('--configuration <configuration>', 'native build configuration').choices(['debug', 'release']).default('release'))
+    .addOption(new Option('--build-policy <policy>', 'source build policy').choices(['if-missing', 'never']).default('if-missing'))
+    .option('--cache-root <path>', 'native helper cache root')
+    .option('--helper-path <path>', 'exact prebuilt helper executable')
+    .option('--install-root <path>', 'managed native helper install root')
+    .action(async (flags: NativeResolveFlags) => {
+      const result = await resolveDriver(toResolveOptions(flags));
+      writeJson(stdout, result);
+    });
+}
+
+function addNativeDoctorCommand(
+  program: Command,
+  resolveDriver: typeof resolveNativeDesktopDriver,
+  stdout: Pick<NodeJS.WriteStream, 'write'>,
+): void {
+  const command = program.command('doctor').description('Report the selected native helper or an actionable readiness failure.');
+  addNativePlatformOptions(command)
+    .addOption(new Option('--architecture <architecture>', 'native architecture').choices(['arm64', 'x64']))
+    .addOption(new Option('--configuration <configuration>', 'native build configuration').choices(['debug', 'release']).default('release'))
+    .option('--cache-root <path>', 'native helper cache root')
+    .option('--helper-path <path>', 'exact prebuilt helper executable')
+    .option('--install-root <path>', 'managed native helper install root')
+    .action(async (flags: NativeResolveFlags) => {
+      try {
+        const result = await resolveDriver({ ...toResolveOptions(flags), buildPolicy: 'never' });
+        writeJson(stdout, { ready: true, result });
+      } catch (error) {
+        writeJson(stdout, {
+          error: {
+            code: error instanceof Error && 'code' in error ? String(error.code) : 'unknown',
+            message: error instanceof Error ? error.message : String(error),
+          },
+          ready: false,
+        });
+        process.exitCode = 1;
+      }
+    });
+}
+
 export async function runDesktopDriverCli(argv: readonly string[] = process.argv): Promise<void> {
   await createDesktopDriverCommand().parseAsync([...argv]);
 }
@@ -205,6 +286,55 @@ function addConnectionOptions<T extends Command>(command: T): T {
     .requiredOption('--url <url>', 'Desktop Driver server URL')
     .requiredOption('--target <id>', 'registered target id')
     .addOption(new Option('--platform <name>', 'WebDriver platform name').choices(['macos', 'windows']).default('windows')) as T;
+}
+
+type NativePlatformFlags = {
+  platform: DesktopEndpoint;
+};
+
+type NativeBuildFlags = NativePlatformFlags & {
+  architecture?: NativeDriverArchitecture;
+  cacheRoot?: string;
+  configuration: NativeDriverConfiguration;
+  force?: boolean;
+};
+
+type NativeResolveFlags = NativeBuildFlags & {
+  buildPolicy?: NativeDriverBuildPolicy;
+  helperPath?: string;
+  installRoot?: string;
+};
+
+function addNativePlatformOptions<T extends Command>(command: T): T {
+  return command.requiredOption('--platform <platform>', 'native endpoint', (value: string) =>
+    parseChoice(value, ['macos', 'windows', 'win32'] as const, 'platform'),
+  ) as T;
+}
+
+function toBuildOptions(flags: NativeBuildFlags): NativeDriverBuildOptions {
+  return {
+    architecture: flags.architecture,
+    cacheRoot: flags.cacheRoot,
+    configuration: flags.configuration,
+    force: flags.force,
+    platform: flags.platform,
+  };
+}
+
+function toResolveOptions(flags: NativeResolveFlags): NativeDriverResolveOptions {
+  return {
+    ...toBuildOptions(flags),
+    buildPolicy: flags.buildPolicy,
+    helperPath: flags.helperPath,
+    installRoot: flags.installRoot,
+  };
+}
+
+function parseChoice<T extends string>(value: string, choices: readonly T[], name: string): T {
+  if (!choices.includes(value as T)) {
+    throw new TypeError(`${name} must be one of ${choices.join(', ')}. Received "${value}".`);
+  }
+  return value as T;
 }
 
 function addSelectionOptions<T extends Command>(command: T): T {

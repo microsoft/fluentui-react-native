@@ -1,0 +1,228 @@
+import type {
+  ApplicationLease,
+  DesktopHost,
+  DesktopHostEvent,
+  DesktopHostInfo,
+  DesktopTarget,
+  DesktopWindow,
+  NativeActionSequence,
+  NativeElementSnapshot,
+  NativeImage,
+  NativeSearchRoot,
+  NativeSelector,
+  Rect,
+} from '../../host/types.js';
+import type { NativeDesktopApplicationDescriptor, NativeDriverArtifact, NativeHostEventMessage } from '../../native/types.js';
+import { NativeDriverError } from '../../native/NativeDriverError.js';
+import { HostStaleError, HostUnsupportedError } from '../../protocol/errors.js';
+import type { DesktopEndpoint } from '../../protocol/types.js';
+import { NativeHostProcess } from './NativeHostProcess.js';
+
+export type NativeDesktopHostOptions = {
+  application: NativeDesktopApplicationDescriptor;
+  artifact: NativeDriverArtifact;
+  endpoint: DesktopEndpoint;
+  onStderr?: (message: string) => void;
+};
+
+export class NativeDesktopHost implements DesktopHost {
+  readonly endpoint: DesktopEndpoint;
+
+  private readonly application: NativeDesktopApplicationDescriptor;
+  private readonly artifact: NativeDriverArtifact;
+  private readonly onStderr?: (message: string) => void;
+  private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
+  private failure?: Error;
+  private processPromise?: Promise<NativeHostProcess>;
+
+  constructor({ application, artifact, endpoint, onStderr }: NativeDesktopHostOptions) {
+    if (!artifact.endpoints.includes(endpoint)) {
+      throw new TypeError(`Native helper ${artifact.provider} does not support endpoint "${endpoint}".`);
+    }
+    this.application = Object.freeze({ ...application });
+    this.artifact = artifact;
+    this.endpoint = endpoint;
+    this.onStderr = onStderr;
+  }
+
+  async probe(signal?: AbortSignal): Promise<DesktopHostInfo> {
+    return this.request('probe', { endpoint: this.endpoint }, signal);
+  }
+
+  async launch(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease> {
+    return this.request('launch', this.targetParams(target), signal);
+  }
+
+  async attach(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease> {
+    return this.request('attach', this.targetParams(target), signal);
+  }
+
+  async closeApplication(lease: ApplicationLease, signal?: AbortSignal): Promise<void> {
+    await this.request('closeApplication', { lease }, signal);
+  }
+
+  windows(lease: ApplicationLease, signal?: AbortSignal): Promise<DesktopWindow[]> {
+    return this.request('windows', { lease }, signal);
+  }
+
+  async closeWindow(windowId: string, signal?: AbortSignal): Promise<void> {
+    await this.request('closeWindow', { windowId }, signal);
+  }
+
+  async activate(windowId: string, signal?: AbortSignal): Promise<void> {
+    await this.request('activate', { windowId }, signal);
+  }
+
+  getWindowRect(windowId: string, signal?: AbortSignal): Promise<Rect> {
+    return this.request('getWindowRect', { windowId }, signal);
+  }
+
+  setWindowRect(windowId: string, rect: Partial<Rect>, signal?: AbortSignal): Promise<Rect> {
+    return this.request('setWindowRect', { rect, windowId }, signal);
+  }
+
+  find(root: NativeSearchRoot, selector: NativeSelector, signal?: AbortSignal): Promise<NativeElementSnapshot[]> {
+    return this.request('find', { root, selector }, signal);
+  }
+
+  snapshot(elementId: string, signal?: AbortSignal): Promise<NativeElementSnapshot> {
+    return this.request('snapshot', { elementId }, signal);
+  }
+
+  activeElement(windowId: string, signal?: AbortSignal): Promise<NativeElementSnapshot | null> {
+    return this.request('activeElement', { windowId }, signal);
+  }
+
+  hitTest(windowId: string, x: number, y: number, signal?: AbortSignal): Promise<NativeElementSnapshot | null> {
+    return this.request('hitTest', { windowId, x, y }, signal);
+  }
+
+  async click(elementId: string, mode: 'accessibility' | 'auto' | 'physical', signal?: AbortSignal): Promise<void> {
+    await this.request('click', { elementId, mode }, signal);
+  }
+
+  async clear(elementId: string, signal?: AbortSignal): Promise<void> {
+    await this.request('clear', { elementId }, signal);
+  }
+
+  async sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void> {
+    await this.request('sendKeys', { elementId, text }, signal);
+  }
+
+  async performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void> {
+    await this.request('performActions', { actions }, signal);
+  }
+
+  async releaseActions(signal?: AbortSignal): Promise<void> {
+    await this.request('releaseActions', undefined, signal);
+  }
+
+  captureWindow(windowId: string, signal?: AbortSignal): Promise<NativeImage> {
+    return this.requestImage('captureWindow', { windowId }, signal);
+  }
+
+  captureElement(elementId: string, signal?: AbortSignal): Promise<NativeImage> {
+    return this.requestImage('captureElement', { elementId }, signal);
+  }
+
+  source(windowId: string, signal?: AbortSignal): Promise<string> {
+    return this.request('source', { windowId }, signal);
+  }
+
+  tree(windowId: string, signal?: AbortSignal): Promise<NativeElementSnapshot[]> {
+    return this.request('tree', { windowId }, signal);
+  }
+
+  subscribe(listener: (event: DesktopHostEvent) => void): () => void {
+    this.listeners.add(listener);
+    void this.getProcess().catch(() => undefined);
+    return () => this.listeners.delete(listener);
+  }
+
+  async dispose(): Promise<void> {
+    const process = await this.processPromise;
+    await process?.dispose();
+  }
+
+  private targetParams(target: DesktopTarget): Record<string, unknown> {
+    return {
+      application: this.application,
+      endpoint: target.endpoint,
+      renderer: target.renderer,
+      storyRootTestId: target.storyRootTestId,
+      targetId: target.id,
+    };
+  }
+
+  private async request<T>(command: string, params?: unknown, signal?: AbortSignal): Promise<T> {
+    try {
+      const process = await this.getProcess();
+      const response = await process.request<T>(command, params, signal);
+      return response.result;
+    } catch (error) {
+      throw translateNativeError(error);
+    }
+  }
+
+  private async requestImage(command: string, params?: unknown, signal?: AbortSignal): Promise<NativeImage> {
+    try {
+      const process = await this.getProcess();
+      const response = await process.request<Omit<NativeImage, 'data'>>(command, params, signal);
+      if (!response.binary) {
+        throw new Error(`Native helper did not return binary data for "${command}".`);
+      }
+      return { ...response.result, data: response.binary };
+    } catch (error) {
+      throw translateNativeError(error);
+    }
+  }
+
+  private getProcess(): Promise<NativeHostProcess> {
+    if (this.failure) {
+      return Promise.reject(this.failure);
+    }
+    return (this.processPromise ??= NativeHostProcess.start({
+      artifact: this.artifact,
+      onStderr: this.onStderr,
+    }).then((process) => {
+      process.on('event', (message) => this.onEvent(message));
+      process.on('exit', (error) => {
+        this.failure = error;
+        this.processPromise = undefined;
+      });
+      return process;
+    }));
+  }
+
+  private onEvent(message: NativeHostEventMessage): void {
+    const payload = message.payload as Record<string, unknown> | undefined;
+    let event: DesktopHostEvent | undefined;
+    if (message.event === 'application-exited' && typeof payload?.applicationId === 'string') {
+      event = { applicationId: payload.applicationId, type: 'application-exited' };
+    } else if (message.event === 'structure-changed' && typeof payload?.windowId === 'string') {
+      event = { type: 'structure-changed', windowId: payload.windowId };
+    } else if (message.event === 'window-closed' && typeof payload?.windowId === 'string') {
+      event = { type: 'window-closed', windowId: payload.windowId };
+    } else if (message.event === 'window-opened' && typeof payload?.windowId === 'string') {
+      event = { type: 'window-opened', windowId: payload.windowId };
+    }
+    if (event) {
+      for (const listener of this.listeners) {
+        listener(event);
+      }
+    }
+  }
+}
+
+function translateNativeError(error: unknown): unknown {
+  if (!(error instanceof NativeDriverError)) {
+    return error;
+  }
+  if (error.code === 'unsupported-operation') {
+    return new HostUnsupportedError(error.message);
+  }
+  if (error.code === 'stale-element') {
+    return new HostStaleError(error.message);
+  }
+  return error;
+}

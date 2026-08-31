@@ -4,11 +4,74 @@ import { createServer } from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 
+import type { NativeDriverArtifact } from '../native/types';
 import type { DesktopStoryManifest } from '../storybook.js';
+import { createDesktopDriverCommand } from './createDesktopDriverCommand';
 
 jest.setTimeout(30_000);
 
 describe('desktop-driver CLI', () => {
+  test('exposes isolated native build and resolution commands', async () => {
+    const artifact = createNativeArtifact();
+    const buildDriver = jest.fn(async () => artifact);
+    const resolveDriver = jest.fn(async () => ({ ...artifact, origin: 'cache' as const }));
+    const output: string[] = [];
+    const createProgram = () =>
+      createDesktopDriverCommand({
+        buildDriver,
+        resolveDriver,
+        stdout: {
+          write(value) {
+            output.push(String(value));
+            return true;
+          },
+        },
+      });
+
+    await createProgram().parseAsync([
+      'node',
+      'test',
+      'build-driver',
+      '--platform',
+      'windows',
+      '--configuration',
+      'release',
+      '--cache-root',
+      'native-cache',
+    ]);
+    await createProgram().parseAsync([
+      'node',
+      'test',
+      'resolve-driver',
+      '--platform',
+      'win32',
+      '--build-policy',
+      'never',
+      '--helper-path',
+      'driver.exe',
+    ]);
+
+    expect(buildDriver).toHaveBeenCalledWith({
+      architecture: undefined,
+      cacheRoot: 'native-cache',
+      configuration: 'release',
+      force: undefined,
+      platform: 'windows',
+    });
+    expect(resolveDriver).toHaveBeenCalledWith({
+      architecture: undefined,
+      buildPolicy: 'never',
+      cacheRoot: undefined,
+      configuration: 'release',
+      force: undefined,
+      helperPath: 'driver.exe',
+      installRoot: undefined,
+      platform: 'win32',
+    });
+    expect(JSON.parse(output[0])).toMatchObject({ artifactId: 'artifact-id', origin: 'built' });
+    expect(JSON.parse(output[1])).toMatchObject({ artifactId: 'artifact-id', origin: 'cache' });
+  });
+
   test('serves, lists, runs, and describes a fake authored plan as JSON', async () => {
     const port = await getAvailablePort();
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-cli-'));
@@ -80,6 +143,27 @@ describe('desktop-driver CLI', () => {
       fs.rmSync(temporaryDirectory, { force: true, recursive: true });
     }
   });
+
+  function createNativeArtifact(): NativeDriverArtifact {
+    return {
+      architecture: 'x64',
+      artifactId: 'artifact-id',
+      artifactRoot: 'artifact-root',
+      buildFingerprint: 'build-fingerprint',
+      buildId: 'build-id',
+      compatibilityKey: 'compatibility-key',
+      configuration: 'release',
+      endpoints: ['windows', 'win32'],
+      executablePath: 'driver.exe',
+      features: ['probe'],
+      origin: 'built',
+      provider: 'windows',
+      schemaVersion: 1,
+      signing: { mode: 'none' },
+      sourceDigest: 'source-digest',
+      wireProtocol: { major: 1, minor: 0 },
+    };
+  }
 });
 
 function spawnCli(args: readonly string[]) {

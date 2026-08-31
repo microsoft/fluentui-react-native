@@ -6,14 +6,22 @@ Active architecture and implementation plan. This document starts from the
 current checked-out tree and public platform/protocol documentation. It does
 not depend on work from other branches.
 
-The effort starts with the platform-neutral protocol, fake host, Storybook
-orchestration, WebdriverIO authoring, and agent contracts. Windows and macOS
-native code is an explicit later stage, so native transport, signing, and
-distribution choices do not block the initial implementation.
+The platform-neutral protocol, fake host, Storybook orchestration, WebdriverIO
+authoring, and agent contracts are complete. The native stage now has a selected
+source-build architecture: a C++ Windows helper and a Swift Package Manager
+macOS helper are built explicitly on the target operating system, reused from a
+verified shared cache, and optionally replaced by an operator-provided prebuilt
+artifact. The npm package does not publish native binaries or compile during
+installation.
+
+The 2026-08-31 native-stage refinement reconciles independent GPT-5.6 Sol and
+Claude Opus 5 investigations plus reciprocal reviews. Decisions below retain
+only conclusions supported by both reviews or by primary platform evidence;
+remaining uncertainty is recorded as an explicit Stage 2 gate.
 
 ## Implementation status
 
-Updated 2026-08-28.
+Updated 2026-08-31.
 
 ### Stage 1 Phase 1: Complete
 
@@ -86,10 +94,15 @@ Updated 2026-08-28.
 Stage 1 is complete; no Phase 1, Phase 2, or Phase 3 deliverables are left
 incomplete.
 
-- Stage 2 remains: implement Windows/Win32 and macOS native host providers and
-  replace the Stage 1 fake target in native runs.
-- Stage 3 remains: release hardening, native artifact ownership, security
-  review, and CI promotion.
+- Stage 2 Phase 4A remains: implement native helper build, resolution, cache,
+  transport, verification, Storybook attachment, and crash-recovery
+  infrastructure.
+- Stage 2 Phases 4B and 4C remain: implement and complete the shared Windows and
+  Win32 C++ provider.
+- Stage 2 Phases 5A and 5B remain: prove macOS identity, authority, capture, and
+  hosted-runner behavior, then complete the Swift provider.
+- Stage 3 remains: release hardening, source-package proof, optional prebuilt
+  trust policy, security review, reliability qualification, and CI promotion.
 - On-device bridge execution is intentionally deferred to Stage 2; Phase 2 is
   validated through the fake host, runtime/server contract tests, live
   same-process services, and production bundles.
@@ -654,79 +667,341 @@ is not silently restarted during a test.
 
 ## Native implementation staging
 
-Keep the transport replaceable behind `DesktopHost`. Do not make an unproven
-FFI library or an unsigned native binary a permanent API decision.
+Keep all operating-system code replaceable behind `DesktopHost`. The Node
+package owns target registration, W3C semantics, cancellation deadlines,
+session state, element identity, artifacts, and public APIs. Native helpers own
+only operating-system automation and communicate through a private versioned
+process protocol.
 
-The initial stage contains no Windows or macOS native code. It delivers the
-complete protocol, fake host, Storybook integration, WebdriverIO authoring
-surface, agent API, and native-host contract using TypeScript/Node only.
+### Selected native implementations
 
-Native platform providers are a separate second delivery stage:
+| Provider          | Selected implementation                                                                                                                                                                           | Runtime dependency contract                                                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows and Win32 | One C++20 x64 helper using Win32 and COM for UI Automation, process/window management, input, Direct3D, and WIC, with narrow C++/WinRT use for Windows Graphics Capture and `Windows.Data.Json`   | Windows system DLLs only; link the multithreaded CRT statically with `/MT`; do not depend on Windows App SDK or the VC++ Redistributable |
+| macOS             | One Swift Package Manager arm64 executable wrapped after compilation in a minimal signed agent `.app`, using Foundation, AppKit, ApplicationServices, CoreGraphics, ScreenCaptureKit, and ImageIO | Apple system frameworks and the Swift runtime shipped by supported macOS versions; no third-party Swift packages or bundled Swift dylibs |
 
-- Windows 11 x64 and Win32 Paper share a Windows provider built around UI
-  Automation, configurable physical/accessibility interaction, app/window
-  ownership, and occlusion-independent Windows Graphics Capture;
-- macOS 14 on Apple Silicon receives a provider selected to preserve the
-  required local and hosted-CI authority while implementing the same host
-  contract;
-- native build, signing, notarization, and artifact distribution are scoped to
-  that stage rather than prerequisites for the platform-neutral package.
+The React Native Windows Storybook application may independently require
+Windows App Runtime. That target dependency does not create a helper-side
+Windows App SDK dependency.
+
+C# remains a documented fallback rather than the Stage 2 implementation:
+
+- framework-dependent modern .NET requires an installed runtime;
+- self-contained and single-file deployments carry and service a managed
+  runtime payload;
+- .NET Framework is an in-box but legacy dependency with a worse modern WinRT
+  capture fit;
+- NativeAOT is credible, but it requires the .NET SDK in addition to the C++
+  toolchain and moves the event-heavy UI Automation surface onto generated COM
+  interop with known `VARIANT`, `SAFEARRAY`, and callback risk.
+
+Reconsider NativeAOT only if a focused UI Automation event/cancellation spike
+passes and native C++ maintenance proves materially worse than expected.
+PowerShell remains useful for throwaway probes, but is not the production host.
+
+### Native source distribution and explicit builds
+
+The public npm package contains JavaScript output, CLI/config files,
+documentation, and `native/**` source. It contains no `.exe`, `.app`, native
+object, Swift build, Visual Studio build, or signed helper output.
+
+Do not add `install`, `postinstall`, or package-download hooks. Native
+compilation occurs only through a declared command on the target operating
+system:
+
+```text
+desktop-driver build-driver --platform windows
+desktop-driver build-driver --platform macos
+storybook-desktop build-driver --windows|--win32|--macos
+```
+
+`desktop-driver build-driver` is the strict isolated source-build command. It
+may reuse an already verified build produced from the same inputs, but it does
+not select a direct helper path or managed prebuilt root. A separate
+`resolve-driver` API and JSON CLI select a direct artifact, managed install
+root, verified cache artifact, or source build according to policy.
+
+Windows uses a checked-in MSBuild C++ project and the installed Visual Studio
+C++ toolchain plus Windows SDK. It requires no CMake, NuGet restore, .NET
+runtime, or Windows App SDK package. macOS invokes `swift build` with explicit
+package and scratch paths, locates the product through `--show-bin-path`,
+assembles the minimal application bundle, writes its `Info.plist`, and applies
+the configured code signature.
+
+### Native build and prebuilt configuration
+
+The typed resolver accepts:
+
+```ts
+type DesktopNativeDriverOptions = {
+  buildPolicy?: 'if-missing' | 'never';
+  cacheRoot?: string;
+  configuration?: 'debug' | 'release';
+  helperPath?: string;
+  installRoot?: string;
+  macosSigningIdentity?: string;
+};
+```
+
+V1 accepts only Windows/Win32 x64 and macOS arm64. Unsupported cross-builds and
+architectures fail before any compiler is probed.
+
+Configuration precedence is:
+
+1. explicit CLI option;
+2. explicit environment variable;
+3. explicitly loaded config or typed API option;
+4. built-in default.
+
+Do not walk the current directory for an implicit executable-selecting config.
+Storybook passes its validated typed configuration. The supported environment
+surface is limited to helper path, install root, cache root, build policy, and
+macOS signing identity; none may come from WebDriver capabilities.
+
+Helper source resolution and selection precedence is:
+
+1. explicit helper path;
+2. explicit managed install root;
+3. verified shared cache;
+4. source build when `buildPolicy` is `if-missing`.
+
+An invalid explicit path or install root fails immediately rather than silently
+falling through. The package never downloads or updates a prebuilt helper.
+
+### Shared cache and build-once behavior
+
+The default native store is user-level and shared across repositories,
+worktrees, applications, and packages:
+
+```text
+Windows: %LOCALAPPDATA%\Microsoft\FluentUIReactNative\desktop-driver\native
+macOS:   ~/Library/Caches/com.microsoft.fluentui-react-native.desktop-driver/native
+```
+
+CI and managed environments may override it with `--cache-root` or
+`FURN_DESKTOP_DRIVER_CACHE_ROOT`, including a workspace-local `.cache` path.
+Never write beneath the resolved npm package, a pnpm store, or `node_modules`.
+
+Separate identifiers prevent rebuild and multi-version conflicts:
+
+- a **compatibility key** covers provider, architecture, configuration, native
+  source and build-coordinator digests, wire protocol range and required
+  features, minimum operating system, runtime model, bundle identifier, and
+  signing policy;
+- a **build fingerprint** adds the actual compiler, linker, SDK, MSBuild or
+  SwiftPM, build flags, and signing identity;
+- an **artifact ID** adds hashes of the verified output tree.
+
+Artifacts are immutable:
+
+```text
+<cache-root>/v1/
+  artifacts/<provider>-<arch>/<compatibility-key>/<build-fingerprint>/<artifact-id>/
+  selections/<compatibility-key>/<generation>-<artifact-id>.json
+  locks/<compatibility-key>/
+  staging/
+  runtime/
+  trash/
+```
+
+Multiple package versions and multiple toolchains may coexist. Identical native
+sources and compatible build settings may reuse one artifact. `--force`
+publishes a new immutable selection generation and never replaces a running
+Windows executable. Cleanup removes only unselected, unleased artifacts and
+reports sharing violations rather than truncating or replacing in-use files.
+
+Builds use an atomic directory lock with owner PID, process start time,
+hostname, random token, and heartbeat. A contender rechecks for a published
+winner while waiting. Stale-lock recovery requires proven-dead owner identity
+and atomic lock-directory quarantine; a merely slow build is never broken
+automatically. Build into same-volume staging, verify completely, atomically
+rename to the immutable artifact directory, then atomically publish the
+selection generation.
+
+### Verification and trust
+
+Every selected helper is verified before use:
+
+- real-path and confinement checks;
+- architecture and platform inspection;
+- executable or app-bundle hashes;
+- dependency inspection;
+- platform signature policy;
+- source-build metadata consistency when the artifact claims the current
+  source;
+- native wire major/minor and required-feature negotiation;
+- handshake on the actual long-lived helper process used by the provider.
+
+Do not rely on a short-lived probe plus a time-based verification cache for the
+process that receives automation commands. Direct mutable paths are rehashed
+immediately before spawn. The long-lived child must identify the same artifact
+and complete the mandatory handshake before target registration succeeds.
+
+Trust policy depends on origin:
+
+- a locally built Windows helper may be unsigned but must pass hash,
+  dependency, and handshake checks;
+- a locally built macOS helper is always code signed, using the configured
+  stable identity when available and ad hoc signing as an explicitly warned
+  development fallback;
+- an explicit developer path is trusted by operator choice, with optional
+  signer pinning;
+- an organization-managed install root requires its configured Authenticode or
+  Developer ID identity, hashes, and handshake.
+
+Notarization applies only to an externally distributed optional macOS prebuilt.
+It is not required for a locally source-built, non-quarantined helper and does
+not grant Accessibility or Screen Recording authority.
+
+### Native host transport and cancellation
+
+Run one long-lived helper child per native provider instance. Use inherited
+stdin/stdout with a fixed binary frame header, UTF-8 JSON control frames, and
+raw binary payload frames for PNG data. Reserve stderr for bounded native logs.
+Do not add another loopback listener, platform-specific named-pipe protocol, or
+per-command process.
+
+The handshake reports:
+
+- wire protocol major and minor;
+- helper and build identity;
+- provider, architecture, and minimum OS;
+- supported commands, events, and feature flags;
+- signing identity and live permission/desktop state;
+- process ID and command limits.
+
+Reject wire-major mismatches. Negotiate the lower compatible minor and require
+every feature used by the Node provider. A cache artifact claiming to be built
+from the current source must also match its recorded source and artifact
+identity.
+
+Requests, responses, events, cancellation, and cancellation acknowledgements
+carry correlation IDs. Queries remain authoritative; events are hints for
+waits, invalidation, and failure classification. Helper, application, primary
+window, or event-sequence failure marks the session unusable and is never
+silently restarted during a test.
+
+When a command deadline aborts:
+
+1. stop dispatching new session commands while retaining the session queue and
+   physical-input ownership;
+2. send `cancel` and require a prompt acknowledgement;
+3. allow a separate bounded cleanup deadline for the helper to stop side
+   effects and release input;
+4. terminate the helper only after cleanup fails;
+5. invalidate the session and classify the failure as infrastructure.
+
+Node mirrors the planned depressed-key and pointer-button ledger. If the helper
+dies after input-down and cannot release normally, start the same verified
+binary in a restricted release-only mode that may emit only the required
+key/button-up events. Keep physical input disabled and the machine input lock
+held until recovery succeeds or the server is stopped with an actionable
+diagnostic.
+
+The existing in-process input mutex remains, and every native helper also
+acquires an operating-system-level lock for the physical action chain so two
+driver processes cannot interleave input on the same interactive desktop.
+
+### Storybook integration and application ownership
+
+`storybook-desktop` imports the typed build/resolution API; it does not
+duplicate native source, compiler commands, cache rules, or verification.
+
+- `build-driver` builds only the helper and returns structured JSON.
+- `prep` ensures the helper with `if-missing` before running existing native
+  project preparation. Win32 therefore gains a real prep action even though it
+  has no generated native project.
+- `driver` resolves the helper before allocating services or starting Metro so
+  missing tools fail quickly.
+- `smoke --mode stories` remains render-only and neither resolves a helper nor
+  starts WebDriver.
+- `smoke --mode stories-and-tests` resolves the helper before services or app
+  launch and uses the native provider.
+- `bundle`, `build`, `run`, `server`, `manifest`, and `instance` remain
+  independent of helper compilation.
+
+Build policy never changes implicitly because a generic `CI` variable exists.
+The default is `if-missing` for `prep`, `driver`, and
+`stories-and-tests`. A CI or managed workflow may explicitly set `never` after
+provisioning or restoring a verified artifact.
+
+The private generated driver manifest advances to schema version 2 and records
+two separate objects:
+
+1. immutable helper artifact identity, path, hashes, wire range, features,
+   origin, architecture, configuration, and signing metadata;
+2. a validated server-owned application descriptor containing the allowed
+   bundle identifier, AUMID/package identity, canonical executable identity,
+   fixed launch arguments, expected window/root identity, and a nonce-bound
+   runtime lease-hint path.
+
+Live permissions, interactive-desktop state, capture availability, and
+integrity level come from `probe` or `doctor`, not the immutable manifest.
+Machine-local helper paths are allowed in the ignored private manifest but are
+redacted from WebDriver capabilities, agent APIs, and public diagnostics.
+
+Storybook smoke already owns application launch. It must atomically provide the
+native provider with exact PID and process-start identity plus endpoint-specific
+bundle, AUMID, executable, and window information. The provider independently
+verifies the nonce-bound hint against the live OS. Storybook WebdriverIO
+sessions explicitly request `furn:launchMode: "attach"`, return an attached
+lease, preserve the app during session deletion, and leave final app cleanup to
+the Storybook owner.
 
 ### Current constraints
 
-- package installation scripts are disabled;
-- new dependencies must satisfy the repository age policy;
-- public packages are built and packed on Linux;
-- the current publish pipeline does not build, sign, or notarize Windows/macOS
-  native artifacts;
-- current macOS E2E uses a Mac2/XCTest substrate on hosted macOS CI;
-- current Win32 Storybook smoke uses in-box Windows UI Automation from
-  PowerShell on hosted Windows CI.
+- package installation scripts are disabled in this repository, but external
+  consumers may not disable them; the package manifest must therefore contain
+  no native install lifecycle;
+- public packages are built and packed on Linux, so Linux validation must
+  prove that native source is included, native outputs are excluded, and a
+  target build is not attempted;
+- Windows source builds use the installed Visual Studio C++ workload and
+  Windows SDK already expected for React Native Windows development;
+- macOS Storybook already requires Xcode and CocoaPods; Command Line Tools-only
+  Swift builds are a useful portability check, not a blocker when full Xcode
+  succeeds;
+- current macOS E2E uses a Mac2/XCTest substrate on hosted CI. The Swift helper
+  is the selected implementation, while XCTest remains only a measured fallback
+  if the direct helper cannot satisfy required hosted authority;
+- current hosted Windows Storybook and Win32 jobs establish a useful baseline,
+  but UIA events, physical input, WGC, and cancellation remain empirical gates;
+- real automation requires an interactive user desktop and matching integrity
+  authority.
 
-### Native-stage feasibility gates
+### Stage 2 entry gates
 
-Evaluate at least these options against the same host contract:
+Before each provider is promoted beyond an advisory vertical slice, prove:
 
-| Endpoint      | Candidate                                            | Purpose                                                  |
-| ------------- | ---------------------------------------------------- | -------------------------------------------------------- |
-| Windows/Win32 | long-lived PowerShell UIA worker with P/Invoke input | zero-published-binary baseline                           |
-| Windows/Win32 | C++/WinRT helper using UIA, SendInput, and WGC       | highest-fidelity capture and typed native implementation |
-| macOS local   | direct AX/CGEvent transport                          | fast developer attach loop, requires TCC                 |
-| macOS CI      | first-party XCTest-based transport                   | preserve hosted-CI automation without Appium             |
-| macOS         | Swift helper using AX, CGEvent, and ScreenCaptureKit | stable native implementation if build/signing is funded  |
+- the packed npm artifact builds from extracted native source without writing
+  beneath the package;
+- two packages and two compatible package versions resolve concurrently without
+  duplicate builds or selection interference;
+- a direct helper, managed install root, shared cache, source build, explicit
+  `never` policy, force rebuild, corrupt artifact, stale lock, and in-use
+  Windows artifact all produce deterministic outcomes;
+- the actual long-lived helper passes hash, dependency, signature-policy, and
+  handshake validation;
+- cancellation at the command deadline settles under the separate cleanup
+  deadline, and forced helper death after key/button-down either releases the
+  exact owned inputs or disables further physical input;
+- Storybook `stories` smoke succeeds without a helper, while
+  `stories-and-tests` attaches to exactly the app Storybook launched;
+- Windows Graphics Capture produces correct occluded-window content and
+  element crops at supported DPI values without promising borderless or
+  minimized capture before measurement;
+- hosted Windows support is decided per capability from the current repository
+  runner rather than assumed;
+- macOS direct-spawn versus Launch Services identity, Accessibility and Screen
+  Recording behavior across signing/rebuild modes, AX-to-ScreenCaptureKit
+  window correlation, and hosted authority are measured;
+- every existing `DesktopHost` method has an implementation or explicit
+  unsupported result plus a shared conformance test.
 
-Before native implementation begins, the stage must answer:
-
-- Can the candidate be built, packaged, and invoked through declared repository
-  scripts without install-time compilation?
-- What identity receives Accessibility and Screen Recording permission?
-- Can hosted CI grant or inherit the required authority?
-- Can it enumerate and interact with current app windows?
-- Does physical pointer/keyboard input reach React Native controls?
-- Can it capture composited window content when occluded, scaled, and spread
-  across monitors? Occlusion-independent capture is required for the Windows
-  provider in this stage.
-- Can it capture secondary Callout windows?
-- What is its cold-start and command latency?
-- How are native errors and events represented?
-
-Current direction:
-
-- keep these platform experiments out of the initial implementation;
-- start the native Windows/Win32 stage with a long-lived PowerShell UIA worker
-  as a contract probe because the current tree proves that substrate can
-  inspect Win32 on hosted CI;
-- implement Windows.Graphics.Capture or equivalent direct HWND capture as part
-  of that same native stage before advertising full screenshot support;
-- retain an XCTest-backed macOS CI transport unless a non-Appium replacement
-  proves the same hosted-runner authority;
-- allow a raw AX/CGEvent macOS provider for local attach workflows;
-- introduce signed Swift/C++ helpers only within the native stage and only
-  after build/sign/notarization and artifact-package ownership are approved.
-
-Using XCTest as an internal host transport does not make Appium part of the
-authoring or wire contract; the package still owns the W3C server, sessions,
-capabilities, errors, and public APIs.
+If the direct Swift helper cannot provide required hosted-macOS authority, use
+the existing XCTest substrate only after an explicit fallback decision. A
+second transport must pass the same native-host conformance suite and must not
+change the public W3C or authoring contract.
 
 ## Storybook device contract
 
@@ -1015,8 +1290,10 @@ separate MCP package.
 `desktop-driver`:
 
 ```text
+desktop-driver build-driver --platform windows|macos
+desktop-driver resolve-driver --platform windows|win32|macos --json
+desktop-driver doctor --platform windows|win32|macos --json
 desktop-driver serve
-desktop-driver doctor --target <id> --json
 desktop-driver tree --session <id> --json
 desktop-driver screenshot --session <id> --output <path>
 ```
@@ -1024,9 +1301,10 @@ desktop-driver screenshot --session <id> --output <path>
 `storybook-desktop`:
 
 ```text
+storybook-desktop build-driver --windows|--win32|--macos
+storybook-desktop prep --windows|--win32|--macos
 storybook-desktop driver --windows
-storybook-desktop test --windows [--story <glob>] [--tag <tag>]
-storybook-desktop agent --windows
+storybook-desktop smoke --windows --mode stories-and-tests
 storybook-desktop manifest --windows
 storybook-desktop instance --windows --json
 ```
@@ -1034,16 +1312,19 @@ storybook-desktop instance --windows --json
 The Storybook supervisor:
 
 1. resolves platform and instance identity;
-2. generates manifests;
-3. starts the channel server and embedded driver listener;
-4. starts Metro when needed;
-5. registers the exact target;
-6. launches or attaches the app;
-7. authenticates the runtime bridge;
-8. runs tests or writes agent-ready connection data;
-9. releases input and tears down only owned resources.
+2. resolves and verifies the selected native helper when the operation needs
+   authored tests;
+3. generates private helper and application descriptors plus Storybook
+   manifests;
+4. starts the channel server and embedded driver listener;
+5. starts Metro when needed;
+6. registers the exact target;
+7. launches the app or attaches through the owner-provided runtime lease;
+8. authenticates the runtime bridge;
+9. runs tests or writes agent-ready connection data;
+10. releases input and tears down only owned resources.
 
-## Implemented package shape
+## Package shape
 
 ```text
 packages/agentic/desktop-driver/
@@ -1056,6 +1337,15 @@ packages/agentic/desktop-driver/
   jest.config.cjs
   config/
     cli.cjs
+  native/                         # Stage 2 source; included in the npm package
+    protocol.json
+    PROTOCOL.md
+    windows/
+      DesktopDriverHost.vcxproj
+      src/
+    macos/
+      Package.swift
+      Sources/DesktopDriverHost/
   src/
     index.ts
     authoring/
@@ -1087,6 +1377,16 @@ packages/agentic/desktop-driver/
       types.ts
     hosts/
       fake/FakeDesktopHost.ts
+      native/
+        NativeDesktopHost.ts
+        NativeHostProcess.ts
+        index.ts
+    native/
+      build/
+      cache/
+      protocol/
+      resolve/
+      verify/
     runner/
       index.ts
       StoryTestRunner.ts
@@ -1103,8 +1403,11 @@ packages/agentic/desktop-driver/
       protocolHarness.ts
 ```
 
-The later native stage adds `hosts/windows` and `hosts/macos`, plus any
-platform artifact packages approved by the native distribution design.
+The native stage adds platform-neutral build and process modules under
+`src/native`, provider adapters under `src/hosts/native`, and checked-in source
+under `native/windows` and `native/macos`. Do not create platform artifact npm
+packages initially. Optional organization-built helpers use the same verified
+artifact layout outside npm.
 
 Potential subpath exports:
 
@@ -1201,17 +1504,81 @@ Exit:
 
 Stage 2 implements the platform contracts proven in Stage 1.
 
-#### Phase 4: Windows and Win32 native provider - Not started
+#### Phase 4A: Native build, cache, transport, and Storybook attachment - Not started
 
 Deliver:
 
-- selected Windows host transport;
+- checked-in native wire specification and protocol version/feature contract;
+- `desktop-driver build-driver`, `resolve-driver`, and native `doctor` flows;
+- target-OS toolchain discovery and strict V1 platform validation;
+- compatibility-scoped, content-addressed cache, immutable selections,
+  cross-process locks, exact verification, cleanup, and runtime leases;
+- direct helper and managed install-root resolution without automatic download;
+- long-lived framed stdio transport, correlated events, cancellation
+  acknowledgements, separate cleanup deadlines, and fatal transport handling;
+- Node-mirrored input state, release-only crash recovery, and an
+  operating-system-level physical-input lock;
+- Storybook `build-driver` and `prep` integration;
+- private driver manifest schema version 2 with separate helper and application
+  descriptors;
+- exact Storybook runtime lease hints and `furn:launchMode: "attach"`;
+- mode-specific smoke behavior that leaves `stories` independent of the helper.
+
+Exit:
+
+- a packed Linux npm artifact contains all native source and no native output,
+  install hook, or automatic downloader;
+- extracted package source builds from a read-only installation on Windows and
+  macOS;
+- two packages and compatible package versions request the helper concurrently
+  and produce one reusable build without selection interference;
+- direct path, managed install root, cache hit, source build, explicit
+  prebuilt-only failure, force rebuild, corrupt artifact, stale lock, and
+  in-use Windows artifact cases are deterministic;
+- the exact long-lived helper process passes hash, dependency, signature-policy,
+  wire, feature, and build-identity verification;
+- a forced helper death after key/button-down either releases exactly the
+  owned inputs or disables further physical input with an actionable failure;
+- `smoke --mode stories` passes with no helper or native helper toolchain;
+- `stories-and-tests` creates exactly one app, attaches to it, preserves it on
+  WebDriver teardown, and leaves final cleanup to Storybook.
+
+#### Phase 4B: Windows C++ vertical slice - Not started
+
+Deliver:
+
+- one C++20 x64 MSBuild helper with `/MT`, no NuGet restore, and no Windows App
+  SDK dependency;
+- mandatory handshake, self-test, logging, and dependency inventory;
+- a windowless MTA UI Automation thread with cached bulk reads and event
+  subscription/removal on the same thread;
+- exact packaged and unpackaged launch/attach leases;
+- window discovery, activation verification, DPI awareness, `testID` lookup,
+  snapshot, focus, hit testing, physical click/key input, and release;
+- HWND Windows Graphics Capture through a free-threaded D3D11 frame pool and
+  WIC PNG encoding;
+- Button coverage through the unchanged Storybook/WebdriverIO plan.
+
+Exit:
+
+- the helper depends only on an empirically frozen Windows-system import and
+  loaded-module allowlist;
+- the Button plan passes through the native provider on Windows Fabric and
+  Win32 Paper;
+- occluded capture and element crop geometry pass at 100%, 150%, and 200% DPI;
+- the current hosted Windows runner is measured for UIA events, physical input,
+  WGC, and cancellation; unsupported or unreliable capabilities move to a
+  self-hosted interactive runner based on evidence rather than assumption.
+
+#### Phase 4C: Complete Windows and Win32 native provider - Not started
+
+Deliver:
+
 - UI Automation tree and event support;
 - configurable physical and accessibility click modes;
 - physical keyboard, pointer, and wheel actions;
 - app attach/launch leases;
-- occlusion-independent HWND capture through Windows Graphics Capture or an
-  equivalent native implementation;
+- occlusion-independent HWND capture through Windows Graphics Capture;
 - multi-window and Callout handling.
 
 Exit:
@@ -1222,21 +1589,50 @@ Exit:
 - exact owned resources are cleaned;
 - artifacts distinguish assertion, app, and host failures.
 
-Land the first platform jobs as non-required until reliability and artifact
-quality are established.
+Minimized capture returns an explicit unsupported/capture-unavailable result by
+default. Add restore/capture/restore only as an explicit registered-target
+policy after its foreground and state-restoration effects are measured.
 
-#### Phase 5: macOS native provider - Not started
+#### Phase 5A: macOS identity, authority, and capture gate - Not started
 
 Deliver:
 
-- selected local and CI transport(s);
+- zero-dependency Swift Package Manager executable and minimal agent app-bundle
+  assembly;
+- stable bundle identifier, `LSUIElement`, macOS 14 deployment target,
+  `NSScreenCaptureUsageDescription`, and explicit code signing;
+- direct-spawn versus Launch Services identity experiment;
+- Accessibility and Screen Recording behavior across unchanged ad hoc,
+  rebuilt ad hoc, Apple Development, and Developer ID signatures;
+- AX window to ScreenCaptureKit window correlation experiment;
+- `testID`, CGEvent, SCScreenshotManager, scale/crop, secondary-window, and
+  hosted-runner authority experiments;
+- comparison with the existing XCTest substrate only as a fallback gate.
+
+Exit:
+
+- one signed Swift helper builds through SwiftPM and can attach, find, click,
+  and capture the macOS Storybook application locally;
+- missing permissions fail before session creation with exact remediation;
+- signing and launch choices are based on measured Accessibility and Screen
+  Recording behavior rather than assumed TCC matching;
+- hosted native authority is either proven repeatable or assigned to a
+  self-hosted interactive runner;
+- any XCTest fallback decision is explicit and carries the same native-host
+  conformance requirements.
+
+#### Phase 5B: Complete macOS native provider - Not started
+
+Deliver:
+
+- Swift native host transport;
 - accessibility tree and events;
 - configurable physical and accessibility click modes;
 - keyboard and pointer actions;
 - bundle-identity launch/attach;
 - direct window capture;
 - permission diagnostics;
-- XCTest-backed provider if required to preserve hosted CI.
+- multi-window and secondary-Callout support.
 
 Exit:
 
@@ -1251,39 +1647,68 @@ Exit:
 
 Deliver:
 
-- protocol compatibility suite;
+- wire major/minor/feature compatibility suite;
 - security review;
 - performance/timeout budgets;
-- clean-install and package-pack validation;
+- clean-install, extracted-package build, and package-pack validation;
 - package-size review;
-- helper signing/notarization and artifact packages if selected;
+- dependency and platform-signature policy;
+- cache corruption, stale-lock, multi-version, force-rebuild, running-artifact,
+  and garbage-collection coverage;
+- optional organization-built signed/notarized prebuilt pipeline using the
+  managed install-root format;
 - documentation, changeset, and CI promotion criteria.
 
 Exit:
 
-- public package contents are reproducible;
-- native artifacts have an owned build/signing pipeline;
+- the native build procedure, inputs, provenance, and artifact hashes are
+  reproducible and auditable; byte-identical output remains a measured goal
+  rather than an unsupported promise;
+- source builds remain complete when no optional prebuilt pipeline exists;
 - no required install scripts are needed;
+- each endpoint completes at least 100 representative runs over 14 days with at
+  least 99% infrastructure success, zero leaked app/helper processes, zero
+  unreleased-input incidents, complete helper metadata/logs for every
+  infrastructure failure, and no unexplained recurring failure signature;
 - supported platform jobs are promotable to required gates.
 
 ## Validation matrix
 
-| Capability                | macOS                        | Windows Fabric               | Win32 Paper                            |
-| ------------------------- | ---------------------------- | ---------------------------- | -------------------------------------- |
-| attach and preserve       | bundle/window identity       | process/AUMID/HWND           | process/HWND                           |
-| launch and owned cleanup  | provider-defined             | packaged activation          | prebuilt-host provider                 |
-| `testID` lookup           | verify AX mapping            | verify UIA mapping           | current UIA smoke establishes baseline |
-| role/name/state           | AX/XCTest                    | UIA                          | UIA                                    |
-| pointer input             | CGEvent/XCTest               | SendInput                    | SendInput                              |
-| keyboard/Unicode          | CGEvent/XCTest               | SendInput                    | SendInput                              |
-| wheel/scroll              | provider capability          | SendInput/UIA                | SendInput/UIA                          |
-| window screenshot         | SCK/XCTest/provider          | WGC/provider                 | WGC/provider                           |
-| element screenshot        | crop with scale              | crop with DPI                | crop with DPI                          |
-| multiple windows          | app windows                  | HWNDs                        | REX/Callout HWNDs                      |
-| story select/reset        | channel bridge               | channel bridge               | channel bridge                         |
-| stale preview detection   | generation + native liveness | generation + native liveness | generation + native liveness           |
-| app/render error          | bridge + process watch       | bridge + process watch       | bridge + process watch                 |
-| permission/desktop doctor | TCC/test authority           | interactive session/UIPI     | interactive session/UIPI               |
+| Capability                | macOS                                              | Windows Fabric               | Win32 Paper                            |
+| ------------------------- | -------------------------------------------------- | ---------------------------- | -------------------------------------- |
+| attach and preserve       | bundle/window identity                             | process/AUMID/HWND           | process/HWND                           |
+| launch and owned cleanup  | provider-defined                                   | packaged activation          | prebuilt-host provider                 |
+| `testID` lookup           | verify AX mapping                                  | verify UIA mapping           | current UIA smoke establishes baseline |
+| role/name/state           | AX; XCTest only if selected fallback               | UIA                          | UIA                                    |
+| pointer input             | CGEvent; XCTest only if selected fallback          | SendInput                    | SendInput                              |
+| keyboard/Unicode          | CGEvent; XCTest only if selected fallback          | SendInput                    | SendInput                              |
+| wheel/scroll              | provider capability                                | SendInput/UIA                | SendInput/UIA                          |
+| window screenshot         | ScreenCaptureKit; XCTest only if selected fallback | WGC                          | WGC                                    |
+| element screenshot        | crop with scale                                    | crop with DPI                | crop with DPI                          |
+| multiple windows          | app windows                                        | HWNDs                        | REX/Callout HWNDs                      |
+| story select/reset        | channel bridge                                     | channel bridge               | channel bridge                         |
+| stale preview detection   | generation + native liveness                       | generation + native liveness | generation + native liveness           |
+| app/render error          | bridge + process watch                             | bridge + process watch       | bridge + process watch                 |
+| permission/desktop doctor | TCC/test authority                                 | interactive session/UIPI     | interactive session/UIPI               |
+
+Build and resolution validation:
+
+| Scenario                         | Expected result                                                        |
+| -------------------------------- | ---------------------------------------------------------------------- |
+| Linux package pack               | native source present; native outputs and install hooks absent         |
+| read-only package installation   | build succeeds with all scratch/output under the native store          |
+| two packages request one helper  | one build and one selected compatible artifact                         |
+| two compatible package versions  | independent compatibility-scoped selections without overwrite          |
+| Windows and Win32                | identical Windows helper artifact                                      |
+| direct helper override           | explicit verification; invalid selection hard-fails without fallback   |
+| managed install root             | confined relative paths, publisher trust policy, hashes, and handshake |
+| source build disabled            | deterministic machine-readable failure before Metro or app launch      |
+| concurrent build                 | one publisher; waiters adopt the verified winner                       |
+| force rebuild                    | new immutable selection; running executables remain untouched          |
+| actual helper startup            | rehash/signature policy plus handshake on the long-lived child         |
+| render-only smoke                | no helper resolution or WebDriver listener                             |
+| authored-test smoke              | exact attached application lease; app survives session teardown        |
+| hard helper failure during input | exact release-only recovery or physical input is disabled              |
 
 Also validate:
 
@@ -1294,6 +1719,7 @@ Also validate:
 - multiple monitors and non-primary virtual-desktop origins;
 - light, dark, and high-contrast themes;
 - foreground, background, minimized, and occluded windows;
+- default non-mutating failure for minimized capture;
 - denied macOS permissions;
 - elevated Windows targets;
 - locked/disconnected desktops;
@@ -1302,6 +1728,7 @@ Also validate:
 - channel reconnect, duplicate runtime, stale nonce, and wrong digest;
 - app and host failure during a command;
 - port collision and parallel enlistments;
+- concurrent independent driver processes contending for physical input;
 - raw HTTP, first-party, and WebdriverIO clients.
 
 Pilot stories:
@@ -1319,35 +1746,49 @@ Pilot stories:
 - Reject browser-origin requests; do not enable permissive CORS.
 - Require explicit authentication and configuration for any non-loopback bind.
 - Use server-registered targets, not client-supplied commands.
+- Never accept helper paths, cache roots, install roots, signing identities,
+  app paths, launch arguments, or lease paths from WebDriver capabilities.
 - Scope trees and screenshots to registered target windows.
 - Cap request body size, tree depth/node count, screenshot dimensions, command
   deadlines, and retained logs.
 - Confine artifact paths beneath an owned run root; reject absolute paths,
   traversal, Windows device/alternate-stream paths, and symlink escapes.
 - Redact environment variables and physical roots from public diagnostics.
+- Resolve selected helpers to real paths, verify the actual long-lived process,
+  and quarantine failing cache artifacts.
+- Require configured publisher identities for organization-managed prebuilts;
+  hashes stored beside an artifact are not a publisher trust boundary.
 - Record PID plus process creation time.
 - Never kill by process name or fixed port.
 - Preserve attached applications.
 - Release all input state on every teardown path.
+- Mirror depressed input in Node, use restricted release-only recovery after a
+  helper crash, and block further physical input if recovery cannot be proven.
+- Serialize physical input both inside the Node server and across independent
+  native helper processes on the same interactive desktop.
 - Run automation only in an interactive desktop session.
 - Treat screenshots and accessibility trees as potentially sensitive evidence.
 
 ## Principal risks
 
-| Risk                                                         | Mitigation                                                      |
-| ------------------------------------------------------------ | --------------------------------------------------------------- |
-| platform state projection differs                            | capability-gated assertions; unsupported is not false           |
-| native element identity changes on remount                   | session UUIDs, liveness checks, preview generations             |
-| physical input is global and flaky                           | one input owner, foreground verification, serialized actions    |
-| macOS authority differs locally and in CI                    | native-stage dual-transport evaluation and fail-fast doctor     |
-| composited-window capture is backend-specific                | direct capture gate before advertising screenshots              |
-| native artifacts cannot be built by current publish pipeline | keep binaries off critical path until an owned pipeline exists  |
-| Storybook channel is broadcast-oriented                      | nonce/instance/digest handshake plus native marker verification |
-| static test extraction misses dynamic values                 | literal schema and loud file/location errors                    |
-| authored DSL becomes too limited                             | add an imperative escape hatch only from demonstrated cases     |
-| agent/server can control a real desktop                      | loopback, origin rejection, target registry, bounded APIs       |
-| Storybook upgrades change channel behavior                   | isolate behind adapter and contract tests                       |
-| sanctioned WebdriverIO surface drifts from raw W3C behavior  | run the same contract cases through raw HTTP and WebdriverIO    |
+| Risk                                                        | Mitigation                                                                                    |
+| ----------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| platform state projection differs                           | capability-gated assertions; unsupported is not false                                         |
+| native element identity changes on remount                  | session UUIDs, liveness checks, preview generations                                           |
+| physical input is global and flaky                          | in-process mutex, OS-level lock, foreground verification, serialized actions                  |
+| helper dies while input is depressed                        | Node ledger, bounded cancel cleanup, restricted release-only recovery, disable on uncertainty |
+| macOS authority differs locally and in CI                   | signing/launch/TCC matrix, fail-fast doctor, explicit XCTest fallback gate                    |
+| composited-window capture is backend-specific               | direct capture gate before advertising screenshots                                            |
+| shared native cache is corrupted or races                   | immutable artifacts, compatibility-scoped selections, locks, hashes, quarantine               |
+| native C++ raises maintenance cost                          | narrow protocol surface, RAII, shared conformance tests, measured NativeAOT re-entry gate     |
+| optional prebuilt is substituted                            | explicit origin policy, configured publisher identity, hash and live handshake                |
+| hosted runners differ from local desktops                   | capability-specific hosted spikes with self-hosted fallback only where measured               |
+| Storybook channel is broadcast-oriented                     | nonce/instance/digest handshake plus native marker verification                               |
+| static test extraction misses dynamic values                | literal schema and loud file/location errors                                                  |
+| authored DSL becomes too limited                            | add an imperative escape hatch only from demonstrated cases                                   |
+| agent/server can control a real desktop                     | loopback, origin rejection, target registry, bounded APIs                                     |
+| Storybook upgrades change channel behavior                  | isolate behind adapter and contract tests                                                     |
+| sanctioned WebdriverIO surface drifts from raw W3C behavior | run the same contract cases through raw HTTP and WebdriverIO                                  |
 
 ## Open questions
 
@@ -1355,8 +1796,18 @@ Pilot stories:
    serializable DSL support before an executable sidecar is justified?
 2. **MCP:** Is typed API plus JSON CLI enough for the initial agent experience,
    or is a real MCP endpoint required for the first release?
-3. **CI promotion:** What duration and pass-rate threshold should move new
-   desktop-driver jobs from advisory to required?
+3. **Hosted Windows capability:** Which of UIA events, physical input, WGC, and
+   cancellation are repeatable on the current hosted runner, and which require
+   a self-hosted interactive machine?
+4. **macOS authority:** Does the directly spawned bundled helper receive stable
+   Accessibility and Screen Recording identity across the supported signing
+   modes, and can the hosted runner provide repeatable authority?
+5. **macOS fallback:** If the direct Swift helper cannot satisfy required
+   hosted authority, does the existing XCTest substrate justify a second
+   transport after shared conformance cost is measured?
+6. **Minimized capture:** Should registered targets be allowed to opt into a
+   restore/capture/restore policy, or should minimized windows always return an
+   explicit capture-unavailable result?
 
 ## Future considerations
 
@@ -1387,8 +1838,23 @@ and concurrent sessions are future expansion work.
 - [AXUIElement](https://developer.apple.com/documentation/applicationservices/axuielement)
 - [Quartz Event Services](https://developer.apple.com/documentation/coregraphics/quartz-event-services)
 - [ScreenCaptureKit](https://developer.apple.com/documentation/screencapturekit)
+- [SCScreenshotManager](https://developer.apple.com/documentation/screencapturekit/scscreenshotmanager)
+- [Swift ABI stability on Apple platforms](https://www.swift.org/blog/abi-stability-and-apple/)
+- [Swift Package Manager build settings](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0238-package-manager-build-settings.md)
+- [Inside Code Signing: Requirements](https://developer.apple.com/documentation/technotes/tn3127-inside-code-signing-requirements)
 - [XCUIApplication](https://developer.apple.com/documentation/xcuiautomation/xcuiapplication)
 - [Microsoft UI Automation](https://learn.microsoft.com/en-us/windows/win32/winauto/entry-uiauto-win32)
+- [UI Automation threading](https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-threading)
+- [UI Automation caching](https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-cachingforclients)
+- [UI Automation and screen scaling](https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-screenscaling)
 - [UI Automation control patterns](https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-controlpatternsoverview)
 - [SendInput](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendinput)
 - [Windows screen capture](https://learn.microsoft.com/en-us/windows/apps/develop/media-authoring-processing/screen-capture)
+- [Create a capture item for an HWND](https://learn.microsoft.com/en-us/windows/win32/api/windows.graphics.capture.interop/nf-windows-graphics-capture-interop-igraphicscaptureiteminterop-createforwindow)
+- [Use C++/WinRT](https://learn.microsoft.com/en-us/windows/uwp/cpp-and-winrt-apis/)
+- [Use the static multithreaded runtime](https://learn.microsoft.com/en-us/cpp/build/reference/md-mt-ld-use-run-time-library)
+- [Windows Imaging Component](https://learn.microsoft.com/en-us/windows/win32/wic/-wic-about-windows-imaging-codec)
+- [Modern .NET deployment](https://learn.microsoft.com/en-us/dotnet/core/deploying/)
+- [Native AOT interop](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/interop)
+- [Windows App SDK](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/)
+- [WinAppCLI NativeAOT reference implementation](https://github.com/microsoft/winappCli)
