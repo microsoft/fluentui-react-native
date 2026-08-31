@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.7.0
+
+### Minor Changes
+
+- 24be698: Add TabList group coordination, shared focus-modality and animation hooks, and align component behavior with the ratified React Native contracts.
+
 ## 0.6.1
 
 ### Patch Changes

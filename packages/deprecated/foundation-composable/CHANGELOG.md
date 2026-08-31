@@ -1,5 +1,13 @@
 # Change Log - @uifabricshared/foundation-composable
 
+## 0.15.3
+
+### Patch Changes
+
+- Updated dependencies [24be698]
+  - @fluentui-react-native/framework-base@0.7.0
+  - @uifabricshared/foundation-settings@0.16.9
+
 ## 0.15.2
 
 ### Patch Changes

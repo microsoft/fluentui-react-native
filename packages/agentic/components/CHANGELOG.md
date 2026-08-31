@@ -1,5 +1,31 @@
 # @fluentui-react-native/components
 
+## 0.4.0
+
+### Minor Changes
+
+- 24be698: Add TabList group coordination, shared focus-modality and animation hooks, and align component behavior with the ratified React Native contracts.
+
+### Patch Changes
+
+- 59b6003: Add the platform-neutral W3C desktop driver and integrate Storybook manifests,
+  authenticated runtime readiness, deterministic preview resets, and same-process
+  driver supervision. Add portable Button, Checkbox, and Input story plans for
+  WebdriverIO and agent validation. Desktop Storybook smoke runs can now either
+  traverse the complete catalog or traverse it and then execute the authored
+  desktop-e2e plans.
+  Smoke startup now waits through the initial Metro compilation, macOS cleanup
+  terminates the exact bundle-identifier process, and Windows CI installs the
+  required Windows App Runtime while the shared registration lifecycle installs
+  the SDK-provided Debug VCLibs frameworks.
+- 4157768: Add appearance-aware Flex theme sources with stable token identity and lazy compatibility bridges for legacy themes.
+- Updated dependencies [24be698]
+- Updated dependencies [6259f5d]
+- Updated dependencies [4157768]
+  - @fluentui-react-native/framework-base@0.7.0
+  - @fluentui-react-native/callout@0.29.4
+  - @fluentui-react-native/design@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes
