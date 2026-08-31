@@ -14,4 +14,4 @@ desktop-e2e plans.
 Smoke startup now waits through the initial Metro compilation, macOS cleanup
 terminates the exact bundle-identifier process, and Windows CI installs the
 required Windows App Runtime while the shared registration lifecycle installs
-the SDK-provided Debug VCLibs framework.
+the SDK-provided Debug VCLibs frameworks.

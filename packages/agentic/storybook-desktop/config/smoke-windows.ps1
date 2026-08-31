@@ -107,9 +107,18 @@ function Invoke-DesktopCli {
   }
 }
 
-function Install-WindowsDebugDependencies {
-  $packageName = 'Microsoft.VCLibs.140.00.Debug.UWPDesktop'
-  $minimumVersion = [Version]'14.0.33728.0'
+function Install-WindowsFrameworkPackage {
+  param(
+    [Parameter(Mandatory)]
+    [string]$PackageName,
+    [Parameter(Mandatory)]
+    [Version]$MinimumVersion,
+    [Parameter(Mandatory)]
+    [string]$SdkName,
+    [Parameter(Mandatory)]
+    [string]$FileName
+  )
+
   $installedPackage = Get-AppxPackage -Name $packageName |
     Where-Object { $_.Architecture -eq 'X64' -and [Version]$_.Version -ge $minimumVersion } |
     Select-Object -First 1
@@ -117,22 +126,33 @@ function Install-WindowsDebugDependencies {
     return
   }
 
-  $sdkRoot = Join-Path ${env:ProgramFiles(x86)} 'Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs.Desktop'
-  $frameworkPackage = Get-ChildItem -LiteralPath $sdkRoot -Filter 'Microsoft.VCLibs.x64.Debug.14.00.Desktop.appx' -Recurse `
+  $sdkRoot = Join-Path ${env:ProgramFiles(x86)} "Microsoft SDKs\Windows Kits\10\ExtensionSDKs\$SdkName"
+  $frameworkPackage = Get-ChildItem -LiteralPath $sdkRoot -Filter $FileName -Recurse `
     -ErrorAction SilentlyContinue |
     Sort-Object FullName -Descending |
     Select-Object -First 1
   if (-not $frameworkPackage) {
-    throw "Could not find the $packageName framework beneath '$sdkRoot'."
+    throw "Could not find the $PackageName framework beneath '$sdkRoot'."
   }
 
   Add-AppxPackage -Path $frameworkPackage.FullName
-  $installedPackage = Get-AppxPackage -Name $packageName |
-    Where-Object { $_.Architecture -eq 'X64' -and [Version]$_.Version -ge $minimumVersion } |
+  $installedPackage = Get-AppxPackage -Name $PackageName |
+    Where-Object { $_.Architecture -eq 'X64' -and [Version]$_.Version -ge $MinimumVersion } |
     Select-Object -First 1
   if (-not $installedPackage) {
-    throw "$packageName $minimumVersion or newer was not registered for the current user."
+    throw "$PackageName $MinimumVersion or newer was not registered for the current user."
   }
+}
+
+function Install-WindowsDebugDependencies {
+  Install-WindowsFrameworkPackage -PackageName 'Microsoft.VCLibs.140.00.Debug' `
+    -MinimumVersion ([Version]'14.0.33519.0') `
+    -SdkName 'Microsoft.VCLibs' `
+    -FileName 'Microsoft.VCLibs.x64.Debug.14.00.appx'
+  Install-WindowsFrameworkPackage -PackageName 'Microsoft.VCLibs.140.00.Debug.UWPDesktop' `
+    -MinimumVersion ([Version]'14.0.33728.0') `
+    -SdkName 'Microsoft.VCLibs.Desktop' `
+    -FileName 'Microsoft.VCLibs.x64.Debug.14.00.Desktop.appx'
 }
 
 function Register-WindowsApp {
