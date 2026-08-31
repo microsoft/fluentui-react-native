@@ -336,8 +336,12 @@ jobs:
       - name: Build packages
         run: yarn build
 
+      - name: Prep Windows Storybook
+        run: yarn storybook prep --windows
+        working-directory: apps/storybook
+
       - name: Smoke test Windows Storybook
-        run: yarn storybook smoke --windows
+        run: yarn storybook smoke --windows --mode stories-and-tests
         working-directory: apps/storybook
 
       - name: Upload Windows Storybook artifacts
@@ -416,7 +420,7 @@ jobs:
         run: yarn build
 
       - name: Smoke test Win32 Storybook
-        run: yarn storybook smoke --win32
+        run: yarn storybook smoke --win32 --mode stories-and-tests
         working-directory: apps/storybook
 
       - name: Upload Win32 Storybook artifacts
