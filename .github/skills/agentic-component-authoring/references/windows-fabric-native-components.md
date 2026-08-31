@@ -84,6 +84,27 @@ TurboModules and components. Run the package's declared codegen command.
 Never edit generated props, event-emitter, registration, or `.g.h` files.
 Persist corrections in the TypeScript schema or codegen configuration.
 
+### `includesGeneratedCode` is not Windows-scoped
+
+`includesGeneratedCode` is read by React Native core's codegen executor, not by
+`react-native-windows`. It declares that the package ships generated code for
+**every** platform, so React Native stops generating Apple and Android
+artifacts for that package.
+
+Set it only on a Windows-only package. On a package that also builds for Apple
+or Android, it silently removes the generated
+`react/renderer/components/<Name>Spec/*` headers those platforms compile
+against, and the failure surfaces far away as a missing pod library at the app
+link step rather than as a codegen error.
+
+Renaming the component in `codegenNativeComponent` also renames the generated
+C++ types, for example `Callout` produces `CalloutProps` and
+`RCTCalloutViewProtocol` while `RCTCallout` produces `RCTCalloutProps` and
+`RCTRCTCalloutViewProtocol`. Update every platform's component view in the same
+change, and do not redeclare the generated component name, shadow node, or
+component descriptor by hand; import them from the generated headers so a
+rename cannot leave a stale duplicate behind.
+
 ## C++/WinRT component view
 
 Third-party Fabric components normally derive from the generated CRTP base:

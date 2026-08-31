@@ -12,7 +12,7 @@
       "path": "../../utils/adapters/tsconfig.json"
     },
     {
-      "path": "../../agentic-design/tsconfig.json"
+      "path": "../../agentic/design/tsconfig.json"
     },
     {
       "path": "../../experimental/ActivityIndicator/tsconfig.json"
@@ -46,9 +46,6 @@
     },
     {
       "path": "../Text/tsconfig.json"
-    },
-    {
-      "path": "../../utils/tokens/tsconfig.json"
     },
     {
       "path": "../../framework/use-styling/tsconfig.json"

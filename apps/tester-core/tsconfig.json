@@ -38,7 +38,7 @@
       "path": "../../packages/theming/default-theme/tsconfig.json"
     },
     {
-      "path": "../../packages/agentic-design/tsconfig.json"
+      "path": "../../packages/agentic/design/tsconfig.json"
     },
     {
       "path": "../../packages/components/Divider/tsconfig.json"
@@ -135,15 +135,6 @@
     },
     {
       "path": "../../packages/components/Text/tsconfig.json"
-    },
-    {
-      "path": "../../packages/theming/theme-tokens/tsconfig.json"
-    },
-    {
-      "path": "../../packages/framework/theme/tsconfig.json"
-    },
-    {
-      "path": "../../packages/framework/themed-stylesheet/tsconfig.json"
     },
     {
       "path": "../../packages/experimental/Tooltip/tsconfig.json"

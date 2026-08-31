@@ -1,0 +1,28 @@
+{
+  "extends": "@fluentui-react-native/scripts/tsconfig",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+  },
+  "include": ["src"],
+  "exclude": ["**/*.stories.ts", "**/*.stories.tsx"],
+  "references": [
+    {
+      "path": "../../native/Callout/tsconfig.json"
+    },
+    {
+      "path": "../design/tsconfig.json"
+    },
+    {
+      "path": "../desktop-driver/tsconfig.json"
+    },
+    {
+      "path": "../../framework-base/tsconfig.json"
+    },
+    {
+      "path": "../../../scripts/tsconfig.json"
+    }
+  ]
+}

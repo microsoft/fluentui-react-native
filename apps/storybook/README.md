@@ -1,37 +1,36 @@
 # Agentic Components Storybook
 
-On-device [Storybook](https://storybook.js.org/) app (Storybook for React Native v10) for
+On-device [Storybook](https://storybook.js.org/) test app (Storybook for React Native v10) for
 `@fluentui-react-native/components` and linked standalone native packages. It loads every
-`*.stories.(ts|tsx)` file from the agentic library source (`../../packages/agentic-components/src`) plus the standalone
-Callout and FocusZone packages so their native stories run in the Fabric host.
+`*.stories.(ts|tsx)` file from the agentic components package plus the standalone Callout
+and FocusZone packages so their native stories run in the Fabric host.
 
-It runs in Storybook **liteMode**, which mocks out the heavy default on-device UI
+The reusable desktop CLI and configuration live in
+`packages/agentic/storybook-desktop`, with peer-dependent React Native
+implementation in `packages/agentic/storybook-desktop-runtime`. The runtime
+runs Storybook in **liteMode**, which mocks out the heavy default on-device UI
 (`@storybook/react-native-ui`). This avoids the `react-native-reanimated` /
 `react-native-gesture-handler` / `@gorhom/bottom-sheet` / `react-native-svg` native dependency
 chain, which does not bundle cleanly with this repo's Metro + Babel + pnpm-linker toolchain
 (Reanimated's Babel plugin crashes when Metro bundles Reanimated from source).
 
-The app shell includes a persistent theme header above the Storybook UI. It can leave stories
+The shared app shell includes a persistent theme header above the Storybook UI. It can leave stories
 unwrapped (`No theme`, the default) or apply the default light, dark, or high-contrast FURN Theme.
 The selected Theme wraps the preview decorator, so it applies to every rendered story and remains
 selected while navigating between stories.
 
-For agent-driven work, [`agent-map.yaml`](agent-map.yaml) is the compact map of stable files,
-services, runtime events, lookup order, and native interaction rules. The checked-in
-`yarn storybook-agent` helper queries the live index rather than duplicating story IDs:
-
-```sh
-yarn storybook-agent status
-yarn storybook-agent stories FocusZone
-yarn storybook-agent select primitives-focuszone--circular-navigation
-yarn storybook-agent sweep FocusZone
-```
+The macOS, Windows Fabric, and Win32 Paper native endpoints live in this workspace and
+share the same entry point and generated story catalog. Story discovery and native identity stay
+app-owned, while the platform-neutral UI, configuration helpers, and `storybook-desktop` CLI come
+from the shared package. The app exposes only the shared CLI entry points; native lifecycle scripts
+remain package-owned.
 
 ## Layout
 
 ```
 storybook/
-  src/                 Storybook config, generated requires, and root component
+  src/                 Storybook adapters, generated requires, and shared-runtime integration
+  storybook.config.mts App-owned package discovery, platform patterns, and native CLI settings
   index.js             AppRegistry entry
   app.json             react-native-test-app manifest
   metro.config.js      rnx-kit metro config wrapped with withStorybook (liteMode)
@@ -58,136 +57,196 @@ matching the other test apps in this repo. Only the hand-written `macos/Podfile`
 ```sh
 # from this directory
 # 1. Generate the Xcode project/workspace + install pods
-yarn pods:macos
+yarn storybook prep --macos
 
 # Optional: verify a native build without launching the app
-yarn macos:build
+yarn storybook build --macos
 
 # 2. Start Metro (also generates storybook.requires)
 yarn start
 
 # 3. In another terminal, build & launch the macOS app
-yarn macos
+yarn storybook run --macos
 ```
 
 Requires Xcode + CocoaPods.
 
-If `Pods` was generated against an older React Native macOS patch release and CocoaPods reports
-that a local podspec such as `fmt` changed, refresh the local native dependencies:
-
-```sh
-yarn pods:macos:update
-```
+Run `yarn storybook smoke --macos` for the complete server, Metro, build/launch, all-story traversal, and
+ownership-safe shutdown lifecycle. The shared CLI hashes this enlistment's canonical project root,
+uses that suffix in the native bundle identifier, and selects dedicated Storybook and Metro ports.
+Parallel smoke tests from different enlistments therefore launch, drive, and stop only their own app
+and services, even when the default ports are already occupied.
 
 > `react-native-safe-area-context` note: Storybook's UI imports it, but its native module is
 > iOS-only (UIKit) and uses a Yoga API that doesn't compile for react-native-macos 0.81. It is
-> therefore not installed; `metro.config.js` aliases the import to a JS-only stub in
-> `.storybook-mocks/`, so no native module is needed.
+> therefore not installed; the shared Metro helper aliases the import to a JS-only stub, so no
+> native module is needed.
 
 ## Running on Windows
 
 The Windows app also uses `react-native-test-app`. Its generated Win32 project uses React Native
-Windows 0.81's New Architecture and Fabric renderer. The Callout package is autolinked as a
-Windows Fabric native library; its Paper implementation remains built into the platform.
+Windows 0.81's New Architecture and Fabric renderer. The Callout and FocusZone packages are
+autolinked as Windows Fabric native libraries; their Paper implementations remain available on
+their supported legacy endpoints.
 
 ```powershell
 # from this directory
-# Generate when needed, build and register before Metro, then launch the Debug app
-yarn windows
+# Traverse the complete story catalog
+yarn storybook smoke --windows --mode stories
 
-# Stop the Storybook server, Metro, and app processes owned by this session
-yarn windows:agent:stop
+# Traverse the complete catalog, then run authored desktop-e2e plans
+yarn storybook smoke --windows --mode stories-and-tests
+
+# Individual development stages
+yarn storybook prep --windows
+yarn storybook build --windows
+yarn storybook run --windows
 ```
 
-Requires Visual Studio 2022 with the React Native Windows build prerequisites. The generated
-solution, `ExperimentalFeatures.props`, and build outputs are git-ignored and can be regenerated
-with `yarn windows:generate`.
-
-FocusZone is autolinked as a package-owned Windows Fabric native library. Its
-Windows component view handles directional navigation, single-stop Tab
-navigation, and focus restoration while the existing Win32 implementation
-remains platform-provided.
-The raw React Native Windows CLI path remains available as `yarn windows:cli`, but the declared
-`windows` workflow avoids two failure modes in this app: CLI deployment can stall while enabling
-Developer Mode, and starting Metro before the native build can make its watcher observe generated
-AppPackages being rewritten. A manually launched Debug app has no embedded JavaScript bundle and
-will remain on the loading screen unless Metro is already serving this workspace on port 8081.
-
-For a non-deploying build with structured logs:
-
-```powershell
-yarn windows:info
-yarn windows:build
-```
-
-Logs are written beneath `artifacts/windows/build-logs`.
-
-The Debug app always loads from Metro; `react-native-test-app` does not automatically fall back
-to an embedded bundle in Debug builds. To bundle, build, and launch a Release app that runs
-without Metro:
-
-```powershell
-yarn windows:offline
-```
-
-The Release package embeds `dist/index.windows.bundle`. Storybook's optional color-picker image
-is intentionally not packaged because the Yarn pnpm asset path exceeds Windows' deployment path
-limit; controls and stories otherwise run from the embedded bundle. The command replaces this
-app's current Debug registration with its Release layout; running `yarn windows` later deploys
-the Debug app again.
+`stories` is the default smoke mode. Requires Visual Studio 2022 with the React Native Windows build prerequisites. The generated
+solution, `ExperimentalFeatures.props`, registrations, and build outputs are git-ignored. The shared smoke command
+bundles the Windows catalog, generates the solution, starts the platform-scoped channel server, builds and registers the Debug app, starts Metro,
+launches the exact app window, renders every indexed story, optionally runs the component-authored plans, and stops only the processes it recorded.
+During Stage 1 the authored plans use the manifest-derived fake target; the full story traversal remains native. Logs are written
+beneath `artifacts/windows/smoke-logs`.
+The Accordion and Callout stories remain excluded from the Windows catalog
+because the current RNW 0.81 Fabric host still fail-fasts while traversing
+them. Win32 continues to exercise Callout through its Paper endpoint.
 
 Storybook's development bundle intentionally contains separate `pretty-format` and `react-is`
 versions used by its internal tooling. They are excluded from the duplicate-module enforcement;
 React, React Native, and application dependencies remain checked.
 
-### Windows agent workflow
+## Running on Win32
 
-The complete agent workflow starts the Storybook channel server and Metro, builds and launches the
-app, selects representative stories, and verifies their stable native UI Automation selectors:
-
-```powershell
-yarn windows:agent
-```
-
-The command records the exact server, Metro, and app process IDs in
-`artifacts/windows/agent-session.json`. Stop that session without affecting unrelated development
-processes:
+The Win32 endpoint uses the `@office-iss/react-native-win32` Paper renderer in
+the prebuilt `@office-iss/rex-win32` host. It is separate from the React Native
+Windows Fabric endpoint above and does not use a generated
+`react-native-test-app` native project.
 
 ```powershell
-yarn windows:agent:stop
+# from this directory
+# Produce dist/index.win32.bundle from the same story catalog as the other endpoints
+yarn storybook bundle --win32
+
+# Launch the prebuilt Paper host
+yarn storybook run --win32
+
+# Complete CI-ready bundle, native UX, and story traversal lifecycle
+yarn storybook smoke --win32 --mode stories
+
+# Run the same traversal followed by authored desktop-e2e plans
+yarn storybook smoke --win32 --mode stories-and-tests
 ```
 
-Use `yarn windows:agent:start` to leave the app ready for manual or external agent interaction
-without immediately running the smoke tests. WinAppDriver 1.2.1 is required for automation.
-The RNW automation package is pinned to the same 0.81.32 release as the resolved
-`react-native-windows` dependency. Set `WINAPPDRIVERPATH` when the executable is not installed at
-`C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe`.
+The host window title is `Agentic Components Storybook (Win32)` so automation
+can distinguish it from the Windows Fabric app. The pinned REX 0.81.1 host runs
+the resolved react-native-win32 0.81 release line. Runtime diagnostics are
+written to the ignored `artifacts/win32/console.log`.
 
-WinAppDriver 1.2.1 can attach to this WinAppSDK window and inspect its UI Automation tree, but its
-screenshot endpoint does not reliably capture React Native Windows Composition content. Agents
-that have a desktop screenshot tool should use it after selecting a story with
-`storybook:control`; UI Automation remains the deterministic automated validation gate.
+The current Storybook bundle contains regular expressions that use Unicode
+properties unsupported by the V8 engine in REX 0.81.1. The Win32-only Babel plugin in
+`packages/agentic/storybook-desktop/config/transform-win32-unicode-regex.cjs` expands those expressions at bundle
+time. Remove the workaround after the REX host accepts Unicode property
+escapes; other platform bundles never load the plugin.
+
+react-native-win32 intentionally leaves window width and height undefined, and
+Storybook's mobile `LiteUI` drawer crashes the Paper host after those metrics
+are supplied. The Win32 endpoint therefore uses the shared package's desktop-only chrome with the same conceptual structure as macOS and
+Windows: a persistent Sidebar on the left, story preview on the upper right,
+and an Actions-first addon panel along the bottom. Local splitters resize the
+sidebar width and addon height without reading global window dimensions.
+
+Optional toolbar actions move Stories or Addons into
+`Win32CalloutPortal`, which presents the same content in the platform's native
+Paper `RCTCallout` window without relying on `@gorhom/portal`, window
+dimensions, React Native animations, or mobile drawer gestures. Dismissing a
+pop-out restores its default inline region. The toolbar stays hidden during the
+normal persistent-sidebar layout and appears only after the Sidebar is hidden,
+keeping the default story preview free of redundant navigation controls.
+
+macOS and Windows continue to use upstream `LiteUI`. Keeping the full upstream
+chrome there preserves its resizable sidebar, addon controls, responsive
+layout, and future Storybook fixes. Moving those endpoints to the reduced
+Win32 chrome would create a maintained fork and regress features without
+solving a platform problem they currently have.
+
+Nine ListItem stories and seven Accordion stories are omitted from the
+Win32-generated catalog because those components terminate the current REX
+0.81.1 host with fail-fast code `0xC0000409`; macOS continues to include them,
+while Windows also omits Accordion and Callout. The three standalone Callout stories run through the same Paper
+`RCTCallout` implementation as the portal chrome. All 130 included stories
+render through the Win32 control-plane smoke sweep.
+Run `yarn storybook-server --win32` with this endpoint so the server exposes the
+same 130-story index as the app; the ordinary `storybook-server` command keeps the full macOS and Windows catalog.
+`yarn storybook smoke --win32` defaults to `--mode stories` and verifies the package-owned desktop regions, resize
+handles, addon surface, the complete 130-story sweep, host liveness, and ownership-safe cleanup. The
+`stories-and-tests` mode then runs the component-authored plans through the Stage 1 manifest-derived fake target. Native
+plan execution begins with the Stage 2 providers. Logs are written
+beneath `artifacts/win32/smoke-logs`. A native `build --win32` operation is intentionally unsupported because this
+endpoint uses the prebuilt REX host.
 
 ## Bundling (no native toolchain required)
 
 You can produce the JS bundle without Xcode. This also generates `storybook.requires` first:
 
 ```sh
-yarn bundle:macos     # -> writes dist/index.macos.jsbundle
-yarn bundle:windows   # -> writes dist/index.windows.bundle
+yarn storybook bundle --macos     # -> writes dist/index.macos.jsbundle
+yarn storybook bundle --win32     # -> writes dist/index.win32.bundle
+yarn storybook bundle --windows   # -> writes dist/index.windows.bundle
 ```
+
+These scripts route to `storybook-desktop bundle --macos|--win32|--windows`. The binary can also
+infer the target from `FURN_STORYBOOK_PLATFORM` or the host platform when no explicit option is
+provided.
 
 ## Agent interaction (WebSocket channel + MCP)
 
-The running app can be driven by external agents through a standalone Storybook channel server
-(`storybook-server.cjs`, default `127.0.0.1:7007`):
+The running app can be driven by external agents through the reusable standalone Storybook channel
+server (`storybook-server`, default `127.0.0.1:7007`):
 
 ```sh
-yarn storybook-server   # WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.1:7007/mcp
+yarn storybook-server           # host-platform default
+yarn storybook-server --win32   # explicit Win32 catalog
+# WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.1:7007/mcp
 ```
 
-Run it alongside `yarn start` + `yarn macos` or `yarn windows`. The on-device app connects to it automatically
-(`src/StorybookApp.tsx` calls `getStorybookUI({ enableWebsockets: true, host, port })`).
+For the Stage 1 desktop-driver control plane, use the combined supervisor:
+
+```sh
+yarn storybook driver --windows
+yarn storybook manifest --windows
+yarn storybook instance --windows
+```
+
+`driver` runs the Storybook channel/MCP listener and a separate W3C WebDriver
+listener in the same Node process. `instance` reports the enlistment-specific
+ports and target identity. The generated manifest contains the exact platform
+catalog, relocatable source paths, serializable story-test plans, and platform
+and portable-plan digests. The current provider is a deterministic fake host;
+native Windows, Win32, and macOS providers are a later implementation stage.
+
+The app exposes the shared JSON CLI as `yarn desktop-driver`. After the
+supervisor and app are running, list or run the component-authored plans:
+
+```sh
+yarn desktop-driver stories list \
+  --url http://127.0.0.1:<driver-port> \
+  --target agenticstorybook-windows
+
+yarn desktop-driver stories run \
+  --url http://127.0.0.1:<driver-port> \
+  --target agenticstorybook-windows \
+  --tag desktop-e2e \
+  --artifacts artifacts/windows/desktop-driver
+```
+
+Use `agent describe` for a bounded native tree and `agent screenshot` for a
+confined evidence artifact. These commands and the programmatic agent API use
+the same manifests, selectors, runner, and result schema as WebdriverIO.
+
+Run it alongside `yarn start` and `yarn storybook run --macos|--windows`. The on-device app connects to it automatically
+(`src/StorybookApp.tsx` creates the shared desktop Storybook app around the generated view).
 
 - **WebSocket channel** (`ws://127.0.0.1:7007/`): agents connect and emit Storybook channel events
   to drive the app — e.g. `setCurrentStory` (`{ storyId }`) to switch story, and arg-update events
@@ -206,15 +265,6 @@ Run it alongside `yarn start` + `yarn macos` or `yarn windows`. The on-device ap
   - `POST /select-story-sync/<storyId>` selects a story and waits for `storyRendered`.
   - `POST /send-event` broadcasts a Storybook channel event.
 
-The declared helper wraps these endpoints:
-
-```powershell
-yarn storybook:control list
-yarn storybook:control select components-button--default
-yarn storybook:control args components-button--default '{"appearance":"primary"}'
-yarn storybook:smoke
-```
-
 > We run the channel server standalone (via `@storybook/react-native/node`'s `createChannelServer`)
 > rather than through `withStorybook`, because the bundler-agnostic `withStorybook` only starts it in
 > entry-point-swapping mode (`STORYBOOK_ENABLED=true`), which conflicts with this app's in-app
@@ -222,6 +272,8 @@ yarn storybook:smoke
 
 ## Writing stories
 
-Follow the package-level story authoring instructions in `../AGENTS.md`. Add a `*.stories.tsx` file next to its component
-under `../src`; standalone native package story globs are listed explicitly in `src/main.ts`. See
-`../src/components/button/button.stories.tsx` for the canonical higher-order component example.
+Follow the package-level story authoring instructions in `../../packages/agentic/components/AGENTS.md`. Add a
+`*.stories.tsx` file next to its component; standalone native package story globs are listed explicitly in `src/main.ts`.
+See `../../packages/agentic/components/src/components/button/button.stories.tsx` for the canonical higher-order component example.
+Portable tests are static `parameters.desktopDriver` data with stable `testID`
+selectors; Button, Checkbox, and Input demonstrate the initial contract.

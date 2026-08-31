@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/persona",
-  "version": "0.18.1",
+  "version": "0.18.4",
   "description": "A cross-platform Persona component using the Fluent Design System",
   "license": "MIT",
   "author": "",
@@ -31,10 +31,10 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/persona-coin": "workspace:*",
-    "@fluentui-react-native/tokens": "workspace:*",
     "@uifabricshared/foundation-composable": "workspace:*",
     "@uifabricshared/foundation-compose": "workspace:*",
     "@uifabricshared/foundation-settings": "workspace:*",

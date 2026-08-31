@@ -6,7 +6,13 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { Text } from '@fluentui-react-native/text';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import {
+  backgroundColorTokens,
+  borderTokens,
+  textTokens,
+  foregroundColorTokens,
+  getPaletteFromTheme,
+} from '@fluentui-react-native/design/styling/tokens';
 import type { ISlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';

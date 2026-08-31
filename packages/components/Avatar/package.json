@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/avatar",
-  "version": "1.14.1",
+  "version": "1.14.4",
   "description": "A cross-platform Avatar component using the Fluent Design System",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "license": "MIT",
@@ -37,7 +37,6 @@
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/icon": "workspace:*",
-    "@fluentui-react-native/tokens": "workspace:*",
     "@fluentui-react-native/use-styling": "workspace:*",
     "unicode-segmenter": "^0.14.4"
   },

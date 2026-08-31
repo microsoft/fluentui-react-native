@@ -2,13 +2,13 @@
 
 Use this reference for `<component>.styles.ts`, `use<Component>Styles.ts`, token mapping, theme caching, state precedence, and
 slot prop application. The canonical examples are
-[`button.styles.ts`](../../../../packages/agentic-components/src/components/button/button.styles.ts) and
-[`useButtonStyles.ts`](../../../../packages/agentic-components/src/components/button/useButtonStyles.ts).
+[`button.styles.ts`](../../../../packages/agentic/components/src/components/button/button.styles.ts) and
+[`useButtonStyles.ts`](../../../../packages/agentic/components/src/components/button/useButtonStyles.ts).
 
 ## Resolve values from the correct token source
 
 Consult
-[`flex-token-map.yaml`](../../../../packages/agentic-design/src/tokens/mappings/flex-token-map.yaml) before choosing a
+[`flex-token-map.yaml`](../../../../packages/agentic/design/src/tokens/mappings/flex-token-map.yaml) before choosing a
 value.
 
 - Read semantic colors from `useThemeState().tokens.color`.
@@ -35,16 +35,16 @@ Never create a style factory inside a hook or render function.
 
 Reuse the design package's `@fluentui-react-native/design/styling` submodule:
 
-- [`getStateStyleFactory`](../../../../packages/agentic-design/src/styling/branchedStyle.ts) lazily flattens and caches
+- [`getStateStyleFactory`](../../../../packages/agentic/design/src/styling/branchedStyle.ts) lazily flattens and caches
   one theme-independent state definition.
-- [`getThemedStateStyleFactory`](../../../../packages/agentic-design/src/styling/branchedStyle.ts) resolves and caches
+- [`getThemedStateStyleFactory`](../../../../packages/agentic/design/src/styling/branchedStyle.ts) resolves and caches
   one flattened definition per `ThemeState`.
-- [`getThemedColorStyleFactory`](../../../../packages/agentic-design/src/styling/colorStyles.ts) converts semantic
+- [`getThemedColorStyleFactory`](../../../../packages/agentic/design/src/styling/colorStyles.ts) converts semantic
   color keys and delegates its hierarchy and caching to `getThemedStateStyleFactory`.
 
 These are the canonical Button mechanisms and cache plain resolved style objects in `state.themeStyles`. Do not wrap them
 in another `StyleSheet.create` cache. Use
-[`themedStyleSheetFactory`](../../../../packages/agentic-design/src/useThemeState.ts) only when a component genuinely
+[`themedStyleSheetFactory`](../../../../packages/agentic/design/src/useThemeState.ts) only when a component genuinely
 needs a complete theme-only `StyleSheet.create` result that is not represented by a branched state definition.
 
 Every theme factory may depend only on `ThemeState` values such as tokens and high contrast. Props, interaction state,
@@ -118,6 +118,24 @@ marks decorative icons inaccessible, and applies typography plus foreground colo
 Preserve consumer slot behavior unless the component owns it. Button no longer forces `numberOfLines`; its content and
 toggle container use `flexShrink` so constrained labels can wrap. A consumer can still request truncation through the
 content slot.
+
+## Keep focus visuals mounted
+
+Agentic focusable components render `FocusVisual` inside the interactive slot. Configure its outer
+ring and optional inner ring from the component's semantic focus tokens and resolved radius, but keep both configured
+Views mounted at rest. `FocusVisual` changes only opacity when focus changes and owns accessibility and hit testing.
+
+Do not apply React Native `outline*` props conditionally and do not enable the RNW native focus ring. RNW 0.81 Fabric
+creates both through a late `BorderPrimitive`; on a background-filled target its owning-root bookkeeping can insert at
+index 1 in an empty visual and fail-fast. A style helper alone is insufficient because the invariant is native View
+lifetime.
+
+Keep the ring policy local to the higher-order component:
+
+- choose single versus dual rings from the component specification
+- resolve colors, widths, radius, and positioning from its tokens and variants
+- place the visual inside the actual focus target
+- keep functional component borders separate from focus feedback
 
 ## Selected text without layout shift
 

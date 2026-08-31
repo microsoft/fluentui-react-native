@@ -1,9 +1,9 @@
 # Tests and stories
 
 Use this reference for runtime coverage, type coverage, visual snapshots, Storybook CSF, and validation. Canonical examples
-are [`button.test.tsx`](../../../../packages/agentic-components/src/components/button/button.test.tsx),
-[`button.stories.tsx`](../../../../packages/agentic-components/src/components/button/button.stories.tsx), and
-[`icon.stories.tsx`](../../../../packages/agentic-components/src/primitives/icon/icon.stories.tsx).
+are [`button.test.tsx`](../../../../packages/agentic/components/src/components/button/button.test.tsx),
+[`button.stories.tsx`](../../../../packages/agentic/components/src/components/button/button.stories.tsx), and
+[`icon.stories.tsx`](../../../../packages/agentic/components/src/primitives/icon/icon.stories.tsx).
 
 ## Runtime tests
 
@@ -76,15 +76,35 @@ Keep on-device controls limited to scalar, serializable props. For required Reac
 fixed demonstration values inside the story render function and expose only meaningful finite or numeric args; object
 controls for React elements are noisy and cannot safely edit the contract.
 
+Story controls follow the axis's ownership, described in
+[State and accessibility](./state-and-accessibility.md#decide-who-owns-a-stateful-axis).
+
+For a self-driving control such as Checkbox, Switch, or Accordion, do not put the controlled prop in `args`. A pinned
+`checked`, `expanded`, or `status` arg forces every instance into externally driven mode, so pressing the component does
+nothing and the story looks broken. Expose `default<State>` as the on-device control and use it in `args`, including for
+variant-scan stories, so each instance starts in the demonstrated state and still responds to presses.
+
+For externally driven selection such as Button, Tab, Radio, Card, or the item components, a fixed `selected` arg is
+correct: the component never changes it. Give the interactive demonstration in one story that owns the value with
+`React.useState` and updates it from `onPress`.
+
+Do not expose an axis that changes component identity as a control. Button's `selected` decides whether it is a toggle
+button at all, and Card's decides whether it is selectable, so a control that flips between `undefined` and `false`
+resizes or re-roles the component instead of demonstrating a value.
+
 Each story module should provide:
 
-- typed `Meta` with `component` and `Components/<Name>` or `Primitives/<Name>` title
+- typed `Meta` with `component` and a title matching the component location:
+  `Components/<Name>` for higher-order components, `Primitives/<Name>` for agentic primitives, or `Native/<Name>` for
+  standalone native component packages
 - useful common args
 - controls for finite or numeric public props
 - a short component description
 - an args-driven `Default`
 - a grouped `Overview` when the contract has several axes
 - focused named stories that compare all values of one axis in one canvas
+- an interactive story for each stateful axis: `default<State>` for a self-driving control, or a story owning the value
+  with `React.useState` and `onPress` for externally driven selection
 - `parameters.docs.description.story` for focused scenarios
 
 Stories included in native agent validation also need a stable root `testID`.
@@ -92,6 +112,38 @@ Use selectors that describe the component or scenario rather than visible text,
 layout order, or native class names. Keep the initial args deterministic and
 add identifiers only to the small smoke set that agents and CI actively
 validate.
+
+Portable desktop automation is authored inline under
+`parameters.desktopDriver` and typed with `DesktopStoryTests` from
+`@fluentui-react-native/desktop-driver/authoring`:
+
+```tsx
+export const Default: Story = {
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'enabled-button',
+          steps: [
+            { action: 'wait', target: { testId: 'story-button' } },
+            { expect: { state: 'enabled', target: { testId: 'story-button' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
+```
+
+Keep the plan a static JSON literal. Storybook extracts it without importing
+the React Native module, so variables, functions, spreads, computed properties,
+and runtime platform branches are rejected. Express real differences with
+`platforms`, `requires`, and explicit skip results. Use `testID` for actions;
+use role, accessible name, state, and value assertions to verify the public
+accessibility contract. Button, Checkbox, and Input defaults are the canonical
+initial examples.
 
 Button uses focused appearance, size, shape, icon, selection, disabled, and constrained-content stories. Icon uses a
 source and size overview plus focused font, image, SVG, size, color, and accessibility stories.
@@ -112,8 +164,8 @@ yarn workspace @fluentui-react-native/components format
 yarn workspace @fluentui-react-native/components lint
 yarn workspace @fluentui-react-native/components build
 yarn workspace @fluentui-react-native/components test
-yarn workspace @fluentui-react-native/agentic-components-storybook bundle:macos
-yarn workspace @fluentui-react-native/agentic-components-storybook bundle:windows
+yarn workspace @fluentui-react-native/agentic-components-storybook storybook bundle --macos
+yarn workspace @fluentui-react-native/agentic-components-storybook storybook bundle --windows
 ```
 
 Run the smallest affected package test while iterating. Run the full package sequence before completion. Run the root

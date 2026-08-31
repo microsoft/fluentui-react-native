@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/design/styling/tokens';
 
 import type { MenuItemRadioProps, MenuItemRadioSlotProps, MenuItemRadioTokens } from './MenuItemRadio.types';
 import { menuItemRadioName } from './MenuItemRadio.types';

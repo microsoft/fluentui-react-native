@@ -7,7 +7,7 @@ import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER, TESTPAGE_CONTENT_SCROLLVI
 import { ROOT_VIEW } from '@fluentui-react-native/e2e-testing';
 import type { Theme } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/design/theming';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { themedStyleSheet } from '@fluentui-react-native/design/styling/stylesheet';
 
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { testProps } from './TestComponents/Common/TestProps';

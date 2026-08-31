@@ -1,6 +1,6 @@
 import { componentName, ComponentNameTokens, ComponentNameSlotProps, ComponentNameProps } from './ComponentName.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles } from '@fluentui-react-native/design/styling/tokens';
 import { defaultComponentNameTokens } from './ComponentNameTokens';
 
 export const componentNameStates: (keyof ComponentNameTokens)[] = ['small', 'medium', 'large'];

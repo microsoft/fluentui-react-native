@@ -1,5 +1,41 @@
 # Change Log - @fluentui-react-native/drawer
 
+## 0.5.10
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+  - @fluentui-react-native/framework@0.17.4
+
+## 0.5.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/design@0.3.2
+
+## 0.5.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/framework@0.17.2
+  - @fluentui-react-native/use-styling@0.16.2
+  - @fluentui-react-native/interactive-hooks@0.28.8
+
 ## 0.5.7
 
 ### Patch Changes

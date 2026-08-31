@@ -12,4 +12,4 @@ export type {
 } from './Token.types';
 export { processTokens } from './Token';
 export { buildComponentTokens } from './Token.function';
-export { styleFunction } from '@fluentui-react-native/tokens';
+export { styleFunction } from '@fluentui-react-native/design/styling/tokens';

@@ -1,5 +1,56 @@
 # Change Log - @fluentui-react-native/radio-group
 
+## 0.22.10
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+  - @fluentui-react-native/text@0.25.10
+  - @uifabricshared/foundation-compose@1.16.10
+  - @fluentui-react-native/framework@0.17.4
+
+## 0.22.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- cfef63e: update package references to use consolidated package directly
+- cfef63e: Consolidate theming utilities in the design package and move compatibility packages to the shim directory
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @uifabricshared/foundation-compose@1.16.9
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/text@0.25.9
+  - @fluentui-react-native/design@0.3.2
+
+## 0.22.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [853f1fd]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @uifabricshared/foundation-compose@1.16.8
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/focus-zone@0.23.2
+  - @fluentui-react-native/pressable@0.13.8
+  - @fluentui-react-native/text@0.25.8
+  - @uifabricshared/foundation-composable@0.15.2
+  - @uifabricshared/foundation-settings@0.16.8
+  - @fluentui-react-native/framework@0.17.2
+  - @fluentui-react-native/use-styling@0.16.2
+  - @fluentui-react-native/adapters@0.15.1
+  - @fluentui-react-native/interactive-hooks@0.28.8
+  - @fluentui-react-native/tokens@0.24.8
+
 ## 0.22.7
 
 ### Patch Changes

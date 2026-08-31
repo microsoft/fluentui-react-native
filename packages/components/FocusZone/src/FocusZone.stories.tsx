@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
 import { FocusZone } from './FocusZone';
@@ -133,8 +134,30 @@ export default meta;
 type Story = StoryObj<typeof FocusZone>;
 
 export const Default: Story = {
+  tags: ['desktop-e2e'],
   render: (args) => <FocusZoneExample {...args} />,
   parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'linear-navigation-and-tab-exit',
+          title: 'Performs linear navigation and exits on Tab',
+          platforms: ['windows'],
+          requires: ['focus', 'keyboard'],
+          steps: [
+            { action: 'click', target: { testId: 'focus-zone-item-1' } },
+            { expect: { state: 'focused', target: { testId: 'focus-zone-item-1' }, value: true } },
+            { action: 'keys', value: ['\uE014'] },
+            { expect: { state: 'focused', target: { testId: 'focus-zone-item-2' }, value: true } },
+            { action: 'keys', value: ['\uE015'] },
+            { expect: { state: 'focused', target: { testId: 'focus-zone-item-3' }, value: true } },
+            { action: 'keys', value: ['\uE004'] },
+            { expect: { state: 'focused', target: { testId: 'focus-zone-after' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'Focus an item, then use the arrow keys to move through the two-dimensional grid.',
@@ -159,11 +182,29 @@ export const CircularNavigation: Story = {
 };
 
 export const TwoDimensionalNavigation: Story = {
+  tags: ['desktop-e2e'],
   args: {
     use2DNavigation: true,
   },
   render: (args) => <FocusZoneExample {...args} />,
   parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'geometric-navigation',
+          title: 'Performs geometric two-dimensional navigation',
+          platforms: ['windows'],
+          requires: ['focus', 'keyboard'],
+          steps: [
+            { action: 'click', target: { testId: 'focus-zone-item-1' } },
+            { expect: { state: 'focused', target: { testId: 'focus-zone-item-1' }, value: true } },
+            { action: 'keys', value: ['\uE015'] },
+            { expect: { state: 'focused', target: { testId: 'focus-zone-item-4' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'Geometric navigation moves vertically between rows and horizontally within each row.',

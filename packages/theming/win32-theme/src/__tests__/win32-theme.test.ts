@@ -41,6 +41,10 @@ it('createOfficeTheme test', () => {
   expect(officeTheme).toMatchSnapshot();
 });
 
+it('preserves high contrast identity on the direct legacy theme path', () => {
+  expect(createOfficeTheme({ paletteName: 'TaskPane', appearance: 'highContrast' }).theme.host.appearance).toBe('highContrast');
+});
+
 it.concurrent.each(officeThemes)('createBrandedThemeWithAlias test themeName: %s', async (themeName: string) => {
   setCurrentHostThemeSetting('Colorful');
   const officeTheme = createOfficeTheme({ paletteName: 'TaskPane', appearance: 'light' }).theme;

@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/styling-utils
 
+## 0.8.7
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+
 ## 0.8.6
 
 ### Patch Changes

@@ -43,4 +43,4 @@ export const Component = () => {
 
 ## Additional Reading
 
-For more detailed information, check out [our README](../../../packages/framework/themed-stylesheet/README.md).
+For more detailed information, check out [our README](../../../packages/shim/themed-stylesheet/README.md).

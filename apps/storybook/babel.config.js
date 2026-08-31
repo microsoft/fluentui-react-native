@@ -1,3 +1,3 @@
-module.exports = {
-  presets: ['module:@react-native/babel-preset'],
-};
+const { createDesktopStorybookBabelConfig } = require('@fluentui-react-native/storybook-desktop/babel');
+
+module.exports = createDesktopStorybookBabelConfig;

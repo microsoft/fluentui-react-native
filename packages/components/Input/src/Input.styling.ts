@@ -1,7 +1,7 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
-import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/design/styling/tokens';
 
 import { input } from './Input.types';
 import type { InputTokens, InputSlotProps, InputProps } from './Input.types';

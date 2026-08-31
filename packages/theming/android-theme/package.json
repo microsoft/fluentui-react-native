@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/android-theme",
-  "version": "0.26.7",
+  "version": "0.26.10",
   "description": "A FluentUI React Native theme that pulls constants from FluentUI Android",
   "keywords": [],
   "license": "MIT",
@@ -34,9 +34,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/design": "workspace:*",
-    "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/theme-tokens": "workspace:*",
-    "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

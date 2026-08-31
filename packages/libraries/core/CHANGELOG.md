@@ -1,5 +1,69 @@
 # Change Log - @fluentui/react-native
 
+## 0.44.4
+
+### Patch Changes
+
+- @fluentui-react-native/button@0.40.10
+- @fluentui-react-native/checkbox@0.24.10
+- @fluentui-react-native/contextual-menu@0.25.11
+- @fluentui-react-native/link@0.24.10
+- @fluentui-react-native/menu-button@0.15.5
+- @fluentui-react-native/persona@0.18.4
+- @fluentui-react-native/persona-coin@0.17.4
+- @fluentui-react-native/radio-group@0.22.10
+- @fluentui-react-native/separator@0.19.10
+- @fluentui-react-native/tablist@0.8.10
+- @fluentui-react-native/text@0.25.10
+
+## 0.44.3
+
+### Patch Changes
+
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+- Updated dependencies [34bdf23]
+  - @fluentui-react-native/persona-coin@0.17.3
+  - @fluentui-react-native/radio-group@0.22.9
+  - @fluentui-react-native/separator@0.19.9
+  - @fluentui-react-native/checkbox@0.24.9
+  - @fluentui-react-native/tablist@0.8.9
+  - @fluentui-react-native/button@0.40.9
+  - @fluentui-react-native/text@0.25.9
+  - @fluentui-react-native/contextual-menu@0.25.10
+  - @fluentui-react-native/menu-button@0.15.4
+  - @fluentui-react-native/persona@0.18.3
+  - @fluentui-react-native/link@0.24.9
+  - @fluentui-react-native/callout@0.29.3
+
+## 0.44.2
+
+### Patch Changes
+
+- 853f1fd: Moved the location of callout, with links to new location
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [853f1fd]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/contextual-menu@0.25.9
+  - @fluentui-react-native/callout@0.29.2
+  - @fluentui-react-native/button@0.40.8
+  - @fluentui-react-native/checkbox@0.24.8
+  - @fluentui-react-native/focus-trap-zone@0.14.2
+  - @fluentui-react-native/focus-zone@0.23.2
+  - @fluentui-react-native/link@0.24.8
+  - @fluentui-react-native/menu-button@0.15.3
+  - @fluentui-react-native/persona@0.18.2
+  - @fluentui-react-native/persona-coin@0.17.2
+  - @fluentui-react-native/pressable@0.13.8
+  - @fluentui-react-native/radio-group@0.22.8
+  - @fluentui-react-native/separator@0.19.8
+  - @fluentui-react-native/tablist@0.8.8
+  - @fluentui-react-native/text@0.25.8
+  - @fluentui-react-native/interactive-hooks@0.28.8
+
 ## 0.44.1
 
 ### Patch Changes

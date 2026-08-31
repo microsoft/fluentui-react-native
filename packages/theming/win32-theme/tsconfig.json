@@ -13,19 +13,13 @@
       "path": "../default-theme/tsconfig.json"
     },
     {
-      "path": "../../agentic-design/tsconfig.json"
+      "path": "../../agentic/design/tsconfig.json"
     },
     {
       "path": "../../framework-base/tsconfig.json"
     },
     {
       "path": "../../../scripts/tsconfig.json"
-    },
-    {
-      "path": "../theme-tokens/tsconfig.json"
-    },
-    {
-      "path": "../theming-utils/tsconfig.json"
     }
   ]
 }

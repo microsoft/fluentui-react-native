@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-ramp",
-  "version": "0.21.7",
+  "version": "0.21.10",
   "description": "Theming Library",
   "keywords": [],
   "license": "MIT",
@@ -47,6 +47,7 @@
     "react-native": "^0.81.6"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
     "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
     "react": "18.2.0 || 19.0.0 || 19.1.4",
     "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
@@ -54,6 +55,9 @@
     "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
   },
   "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
     "@types/react": {
       "optional": true
     },

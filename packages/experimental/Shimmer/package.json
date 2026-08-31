@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-shimmer",
-  "version": "0.15.1",
+  "version": "0.15.4",
   "description": "A cross-platform Fluent Shimmer component",
   "license": "MIT",
   "author": "",
@@ -33,7 +33,6 @@
     "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/tokens": "workspace:*",
     "@fluentui-react-native/use-styling": "workspace:*",
     "assert-never": "^1.2.1"
   },

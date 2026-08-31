@@ -4,7 +4,7 @@ import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { InteractionEvent, PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
 import type { FocusState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
-import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/design/styling/tokens';
 
 export const input = 'Input';
 

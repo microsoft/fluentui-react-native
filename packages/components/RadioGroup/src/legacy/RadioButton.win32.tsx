@@ -7,7 +7,13 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import type { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
 import { useAsPressable, useViewCommandFocus, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
 import { Text } from '@fluentui-react-native/text';
-import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import {
+  foregroundColorTokens,
+  textTokens,
+  borderTokens,
+  backgroundColorTokens,
+  getPaletteFromTheme,
+} from '@fluentui-react-native/design/styling/tokens';
 import type { ISlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';

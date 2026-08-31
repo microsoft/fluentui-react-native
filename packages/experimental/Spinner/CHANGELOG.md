@@ -1,5 +1,43 @@
 # Change Log - @fluentui-react-native/spinner
 
+## 0.10.10
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+  - @fluentui-react-native/text@0.25.10
+  - @fluentui-react-native/framework@0.17.4
+
+## 0.10.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/text@0.25.9
+  - @fluentui-react-native/design@0.3.2
+
+## 0.10.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/text@0.25.8
+  - @fluentui-react-native/framework@0.17.2
+  - @fluentui-react-native/use-styling@0.16.2
+
 ## 0.10.7
 
 ### Patch Changes

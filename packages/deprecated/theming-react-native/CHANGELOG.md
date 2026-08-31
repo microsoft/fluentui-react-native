@@ -1,5 +1,39 @@
 # Change Log - @uifabricshared/theming-react-native
 
+## 0.21.10
+
+### Patch Changes
+
+- @uifabricshared/theming-ramp@0.21.10
+- @fluentui-react-native/default-theme@0.27.10
+- @fluentui-react-native/win32-theme@0.39.10
+
+## 0.21.9
+
+### Patch Changes
+
+- cfef63e: update package references to use consolidated package directly
+- cfef63e: Consolidate theming utilities in the design package and move compatibility packages to the shim directory
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+  - @uifabricshared/theming-ramp@0.21.9
+  - @fluentui-react-native/default-theme@0.27.9
+  - @fluentui-react-native/win32-theme@0.39.9
+  - @uifabricshared/theme-registry@0.13.8
+
+## 0.21.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [cbd319c]
+  - @uifabricshared/theme-registry@0.13.7
+  - @uifabricshared/theming-ramp@0.21.8
+  - @fluentui-react-native/default-theme@0.27.8
+  - @fluentui-react-native/win32-theme@0.39.8
+
 ## 0.21.7
 
 ### Patch Changes

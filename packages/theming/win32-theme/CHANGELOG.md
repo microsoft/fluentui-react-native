@@ -1,5 +1,44 @@
 # Change Log - @fluentui-react-native/win32-theme
 
+## 0.39.10
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+  - @fluentui-react-native/default-theme@0.27.10
+
+## 0.39.9
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- cfef63e: update package references to use consolidated package directly
+- cfef63e: Consolidate theming utilities in the design package and move compatibility packages to the shim directory
+- 7372841: Reuse high-contrast alias tokens from `@fluentui-react-native/design/tokens/legacy`.
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/default-theme@0.27.9
+  - @fluentui-react-native/design@0.3.2
+
+## 0.39.8
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/design@0.3.1
+  - @fluentui-react-native/default-theme@0.27.8
+  - @fluentui-react-native/theme-tokens@0.29.2
+  - @fluentui-react-native/theming-utils@0.27.8
+
 ## 0.39.7
 
 ### Patch Changes

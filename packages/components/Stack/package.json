@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/stack",
-  "version": "0.12.1",
+  "version": "0.12.4",
   "description": "A cross-platform opinionated Fluent Text component",
   "license": "MIT",
   "author": "",
@@ -31,9 +31,9 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/tokens": "workspace:*",
     "@uifabricshared/foundation-composable": "workspace:*",
     "@uifabricshared/foundation-compose": "workspace:*",
     "@uifabricshared/foundation-settings": "workspace:*",

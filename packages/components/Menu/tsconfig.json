@@ -18,7 +18,7 @@
       "path": "../../native/Callout/tsconfig.json"
     },
     {
-      "path": "../../agentic-design/tsconfig.json"
+      "path": "../../agentic/design/tsconfig.json"
     },
     {
       "path": "../FocusZone/tsconfig.json"
@@ -43,9 +43,6 @@
     },
     {
       "path": "../Text/tsconfig.json"
-    },
-    {
-      "path": "../../utils/tokens/tsconfig.json"
     },
     {
       "path": "../../framework/use-styling/tsconfig.json"

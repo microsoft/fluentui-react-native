@@ -130,10 +130,11 @@ const appleComponents = {
 };
 
 function getBaseAppleThemeIOSWorker(isLightMode: boolean, isElevated: boolean): Theme {
+  const mode = isLightMode ? 'light' : isElevated ? 'darkElevated' : 'dark';
   return {
-    colors: paletteFromAppleColors(isLightMode, isElevated),
+    colors: paletteFromAppleColors(isLightMode, mode),
     typography: appleTypography(),
-    shadows: iOSShadows(),
+    shadows: iOSShadows(mode),
     spacing: appleSpacing(),
     components: appleComponents,
     host: { appearance: isLightMode ? 'light' : 'dark' },

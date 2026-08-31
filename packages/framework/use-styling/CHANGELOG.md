@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/use-styling
 
+## 0.16.2
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @fluentui-react-native/framework-base@0.6.1
+  - @fluentui-react-native/use-tokens@0.9.2
+
 ## 0.16.1
 
 ### Patch Changes

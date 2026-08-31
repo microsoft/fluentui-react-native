@@ -18,7 +18,7 @@ import { STROKEWIDTH_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import type { Theme } from '@fluentui-react-native/framework';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { Stack } from '@fluentui-react-native/stack';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { themedStyleSheet } from '@fluentui-react-native/design/styling/stylesheet';
 import { getCurrentAppearance } from '@fluentui-react-native/design/theming';
 
 import { stackStyle } from '../Common/styles';

@@ -7,6 +7,12 @@
       "displayName": "Agentic Components Storybook"
     }
   ],
+  "macos": {
+    "bundleIdentifier": "com.microsoft.fluentui.agenticstorybook"
+  },
+  "storybook": {
+    "testIDPrefix": "agentic-storybook"
+  },
   "resources": {
     "macos": ["dist/assets", "dist/index.macos.jsbundle"],
     "windows": ["dist/index.windows.bundle"]

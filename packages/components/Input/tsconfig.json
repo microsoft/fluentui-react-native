@@ -9,7 +9,7 @@
   "include": ["src", "svgs.d.ts"],
   "references": [
     {
-      "path": "../../agentic-design/tsconfig.json"
+      "path": "../../agentic/design/tsconfig.json"
     },
     {
       "path": "../../framework-base/tsconfig.json"
@@ -34,9 +34,6 @@
     },
     {
       "path": "../Text/tsconfig.json"
-    },
-    {
-      "path": "../../utils/tokens/tsconfig.json"
     },
     {
       "path": "../../framework/use-styling/tsconfig.json"

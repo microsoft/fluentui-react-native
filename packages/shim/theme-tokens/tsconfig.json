@@ -1,0 +1,19 @@
+{
+  "extends": "@fluentui-react-native/scripts/tsconfig",
+  "compilerOptions": {
+    "outDir": "lib",
+    "resolveJsonModule": true,
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+  },
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../agentic/design/tsconfig.json"
+    },
+    {
+      "path": "../../../scripts/tsconfig.json"
+    }
+  ]
+}

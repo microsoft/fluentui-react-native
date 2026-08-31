@@ -1,5 +1,50 @@
 # Change Log - @fluentui-react-native/stack
 
+## 0.12.4
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+  - @uifabricshared/foundation-compose@1.16.10
+  - @uifabricshared/foundation-tokens@0.16.10
+  - @fluentui-react-native/framework@0.17.4
+
+## 0.12.3
+
+### Patch Changes
+
+- cfef63e: update package references to use consolidated package directly
+- cfef63e: Consolidate theming utilities in the design package and move compatibility packages to the shim directory
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @uifabricshared/foundation-compose@1.16.9
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/design@0.3.2
+  - @uifabricshared/foundation-tokens@0.16.9
+
+## 0.12.2
+
+### Patch Changes
+
+- cbd319c: Bump package to publish via ESRP (no changes)
+- Updated dependencies [853f1fd]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [5bc9e81]
+- Updated dependencies [cbd319c]
+  - @uifabricshared/foundation-compose@1.16.8
+  - @fluentui-react-native/framework-base@0.6.1
+  - @uifabricshared/foundation-composable@0.15.2
+  - @uifabricshared/foundation-settings@0.16.8
+  - @uifabricshared/foundation-tokens@0.16.8
+  - @fluentui-react-native/framework@0.17.2
+  - @fluentui-react-native/adapters@0.15.1
+  - @fluentui-react-native/tokens@0.24.8
+
 ## 0.12.1
 
 ### Patch Changes

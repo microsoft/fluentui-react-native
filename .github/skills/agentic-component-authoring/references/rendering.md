@@ -2,8 +2,8 @@
 
 Use this reference for `render<Component>.tsx`, `<component>.ts`, slot ordering, conditional structure, display names,
 and package exports. The canonical examples are
-[`renderButton.tsx`](../../../../packages/agentic-components/src/components/button/renderButton.tsx) and
-[`button.ts`](../../../../packages/agentic-components/src/components/button/button.ts).
+[`renderButton.tsx`](../../../../packages/agentic/components/src/components/button/renderButton.tsx) and
+[`button.ts`](../../../../packages/agentic/components/src/components/button/button.ts).
 
 ## Keep render functions pure
 

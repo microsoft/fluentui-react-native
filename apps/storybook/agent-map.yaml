@@ -2,62 +2,49 @@ version: 1
 purpose: Agent-optimized map of stable Storybook structure and runtime discovery paths.
 
 sources:
-  config: src/main.ts
+  config: storybook.config.mts
+  config_adapter: src/main.ts
   app_entry: index.js
   app_shell: src/StorybookApp.tsx
   theme_host: src/StorybookTheme.tsx
-  channel_server: storybook-server.cjs
+  shared_cli: ../../packages/agentic/storybook-desktop
+  shared_runtime: ../../packages/agentic/storybook-desktop-runtime
   generated_requires:
     path: src/storybook.requires.ts
     policy: generated-do-not-edit
-  story_globs:
-    - ../../../packages/agentic-components/src/**/*.stories.?(ts|tsx)
-    - ../../../packages/native/Callout/src/**/*.stories.?(ts|tsx)
-    - ../../../packages/components/FocusZone/src/**/*.stories.?(ts|tsx)
+  story_packages:
+    - '@fluentui-react-native/components'
+    - '@fluentui-react-native/callout'
+    - '@fluentui-react-native/focus-zone'
 
 services:
-  metro:
-    script: start
-    health_url: http://127.0.0.1:8081/status
-  channel:
-    script: storybook-server
-    websocket_url: ws://127.0.0.1:7007/
-    mcp_url: http://127.0.0.1:7007/mcp
-
-runtime_protocol:
-  index:
-    request:
-      type: RN_GET_INDEX
-      args: []
-    response: RN_GET_INDEX_RESPONSE
-  select:
-    request:
-      type: setCurrentStory
-      args:
-        - storyId: <runtime-story-id>
-    success: storyFinished
-    failures:
-      - storyErrored
-      - storyMissing
-      - storyThrewException
+  supervisor:
+    command: yarn storybook driver --<platform>
+    owns:
+      - metro
+      - storybook-channel
+      - desktop-driver
+  instance:
+    command: yarn storybook instance --<platform>
+    policy: use-reported-ports-and-target-id
 
 agent_commands:
-  status: yarn storybook-agent status
-  find_stories: yarn storybook-agent stories <query>
-  select_story: yarn storybook-agent select <runtime-story-id>
-  sweep_stories: yarn storybook-agent sweep [query]
+  generate_manifest: yarn storybook manifest --<platform>
+  start_driver: yarn storybook driver --<platform>
+  inspect_instance: yarn storybook instance --<platform>
+  list_stories: yarn desktop-driver stories list --url <driver-url> --target <target-id>
+  run_stories: yarn desktop-driver stories run --url <driver-url> --target <target-id> --tag desktop-e2e
 
 lookup_order:
-  - Use "storybook-agent stories <query>" for runtime IDs; never guess ID slugging.
+  - Generate the exact platform manifest; never guess ID slugging.
   - Read this map for stable paths, services, and commands.
-  - Read src/main.ts for story-source changes.
+  - Read storybook.config.mts for story-package and platform changes.
   - Read a matched story file for component-specific behavior.
   - Read generated requires only to diagnose generation output.
 
 interaction_order:
-  - Use the WebSocket helper for listing, selecting, and sweeping stories.
+  - Use the desktop-driver JSON CLI for listing and running authored story plans.
   - Use accessibility elements for native focus and control state.
-  - Use HID mouse or keyboard events when accessibility actions do not invoke React Native handlers.
   - Use screenshots for visual evidence, not element lookup.
 
 native:
@@ -70,18 +57,19 @@ native:
       rule: Query element bounds and display scale; do not copy screenshot coordinates.
   windows:
     project_policy: generated
-    generation_script: windows:generate
+    generation_command: yarn storybook prep --windows
 
 validation:
   javascript:
     - format
     - lint
-    - bundle:macos
+    - yarn storybook manifest --<platform>
+    - yarn storybook bundle --<platform>
   native:
-    normal: macos:build
-    after_native_or_pod_change: macos:build:clean
+    normal: yarn storybook build --<platform>
+    lifecycle: yarn storybook smoke --<platform> --mode stories-and-tests
 
 output_hygiene:
-  - Use the helper's filtered and summary output instead of logging raw channel events.
+  - Use structured CLI output instead of logging raw channel events.
   - Search large native build logs for errors and final status instead of reading them in full.
   - Keep warning suppression exact; console diagnostics remain available even when LogBox hides a warning.

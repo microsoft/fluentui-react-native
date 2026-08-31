@@ -6,7 +6,7 @@ import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-nati
 import { THEME_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import type { Theme } from '@fluentui-react-native/design/theming';
 import { useTheme } from '@fluentui-react-native/design/theming';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { themedStyleSheet } from '@fluentui-react-native/design/styling/stylesheet';
 
 import { commonTestStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';

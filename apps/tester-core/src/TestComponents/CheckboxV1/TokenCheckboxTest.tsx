@@ -5,7 +5,7 @@ import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import type { Theme } from '@fluentui-react-native/design/theming';
 import { useTheme } from '@fluentui-react-native/design/theming';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { themedStyleSheet } from '@fluentui-react-native/design/styling/stylesheet';
 
 import { commonTestStyles as commonStyles } from '../Common/styles';
 

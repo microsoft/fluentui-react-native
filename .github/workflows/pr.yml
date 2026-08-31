@@ -34,6 +34,72 @@ jobs:
       - name: Build CI
         run: yarn lage buildci
 
+  bundle-size:
+    name: Bundle Size PR
+    runs-on: windows-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Read base branch bundle baseline
+        shell: powershell
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          $baseline = "$env:RUNNER_TEMP\bundle-size-baseline.json"
+          $baselinePath = 'apps/bundle-size/baseline.json'
+          $baselineExists = git ls-tree --name-only $env:BASE_SHA -- $baselinePath
+          if ($baselineExists) {
+            git show "$env:BASE_SHA`:apps/bundle-size/baseline.json" | Out-File -FilePath $baseline -Encoding utf8
+          } else {
+            Copy-Item $baselinePath $baseline
+          }
+
+      - name: Measure bundle sizes
+        run: yarn bundle-size --baseline "$env:RUNNER_TEMP\bundle-size-baseline.json"
+
+      - name: Publish bundle size summary
+        run: Get-Content apps\bundle-size\dist\bundle-size\report.md -Raw | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+
+      - name: Publish bundle size PR comment
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.user.login != 'dependabot[bot]' }}
+        env:
+          EXPECTED_HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPORT_PATH: apps/bundle-size/dist/bundle-size/report.md
+          SOURCE_RUN_ID: ${{ github.run_id }}
+        run: node apps/bundle-size/scripts/post-pr-comment.mjs
+
+      - name: Add pull request metadata
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: Set-Content apps\bundle-size\dist\bundle-size\pull-request-number.txt $env:PR_NUMBER -NoNewline
+
+      - name: Upload bundle analysis
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: bundle-size-analysis
+          path: apps/bundle-size/dist/bundle-size
+          if-no-files-found: warn
+          retention-days: 14
+
   android:
     name: Android PR
     runs-on: ubuntu-latest
@@ -118,6 +184,42 @@ jobs:
           path: |
             apps/E2E/reports
             apps/E2E/errorShots
+
+  macos-storybook:
+    name: macOS Storybook PR
+    runs-on: macos-26
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        with:
+          platform: macos
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Bundle macOS
+        run: |
+          set -eox pipefail
+          yarn storybook bundle --macos
+        working-directory: apps/storybook
+
+      - name: Pod install
+        run: yarn storybook prep --macos
+        working-directory: apps/storybook
+
+      - name: Run through storybook smoke tests
+        run: yarn storybook smoke --macos --mode stories-and-tests
+        working-directory: apps/storybook
+        env:
+          CCACHE_DISABLE: 1
 
   ios:
     name: iOS PR
@@ -231,6 +333,58 @@ jobs:
             apps/E2E/errorShots
             apps/fluent-tester/packager.log
 
+  windows-storybook:
+    name: Windows Storybook PR
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 5
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        with:
+          platform: windows
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Prep Windows Storybook
+        run: yarn storybook prep --windows
+        working-directory: apps/storybook
+
+      - name: Install Windows App Runtime 1.8
+        shell: pwsh
+        run: |
+          $installer = Join-Path $env:RUNNER_TEMP 'WindowsAppRuntimeInstall-x64.exe'
+          Invoke-WebRequest 'https://aka.ms/windowsappsdk/1.8/1.8.260804001/windowsappruntimeinstall-x64.exe' -OutFile $installer
+          & $installer --quiet
+          if ($LASTEXITCODE -ne 0) {
+            throw "Windows App Runtime installer exited with code $LASTEXITCODE."
+          }
+
+          $runtime = Get-AppxPackage -Name 'Microsoft.WindowsAppRuntime.1.8'
+          if (-not $runtime) {
+            throw 'Microsoft.WindowsAppRuntime.1.8 was not registered for the runner user.'
+          }
+
+      - name: Smoke test Windows Storybook
+        run: yarn storybook smoke --windows --mode stories-and-tests
+        working-directory: apps/storybook
+
+      - name: Upload Windows Storybook artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Storybook_windows_Dump
+          path: apps/storybook/artifacts/windows
+
   win32:
     name: Win32 PR
     runs-on: windows-latest
@@ -278,6 +432,37 @@ jobs:
           path: |
             apps/E2E/reports
             apps/E2E/errorShots
+
+  win32-storybook:
+    name: Win32 Storybook PR
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        with:
+          platform: windows
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Smoke test Win32 Storybook
+        run: yarn storybook smoke --win32 --mode stories-and-tests
+        working-directory: apps/storybook
+
+      - name: Upload Win32 Storybook artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Storybook_win32_Dump
+          path: apps/storybook/artifacts/win32
 
   check-changesets:
     name: Check for Changesets

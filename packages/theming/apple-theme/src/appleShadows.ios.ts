@@ -1,12 +1,7 @@
-import { Appearance } from 'react-native';
-
-import type { ThemeShadowDefinition } from '@fluentui-react-native/design/theming';
-import { getCurrentAppearance } from '@fluentui-react-native/design/theming';
+import type { AppearanceOptions, ThemeShadowDefinition } from '@fluentui-react-native/design/theming';
 
 import { createiOSShadowAliasTokens } from './createiOSAliasTokens';
 
-export function iOSShadows(): ThemeShadowDefinition {
-  const appearance = Appearance.getColorScheme();
-  const mode = getCurrentAppearance(appearance, 'light');
+export function iOSShadows(mode: AppearanceOptions): ThemeShadowDefinition {
   return createiOSShadowAliasTokens(mode);
 }
