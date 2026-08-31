@@ -33,17 +33,17 @@
       "import": "./lib/tokens/legacy/index.js",
       "default": "./src/tokens/legacy/index.ts"
     },
-    "./runtime-colors": {
-      "types": "./lib/runtime-colors/index.d.ts",
-      "react-native": "./src/runtime-colors/index.ts",
-      "import": "./lib/runtime-colors/index.js",
-      "default": "./src/runtime-colors/index.ts"
+    "./color-lib": {
+      "types": "./lib/color-lib/index.d.ts",
+      "react-native": "./src/color-lib/index.ts",
+      "import": "./lib/color-lib/index.js",
+      "default": "./src/color-lib/index.ts"
     },
-    "./contrast": {
-      "types": "./lib/contrast/index.d.ts",
-      "react-native": "./src/contrast/index.ts",
-      "import": "./lib/contrast/index.js",
-      "default": "./src/contrast/index.ts"
+    "./color-validation": {
+      "types": "./lib/color-validation/index.d.ts",
+      "react-native": "./src/color-validation/index.ts",
+      "import": "./lib/color-validation/index.js",
+      "default": "./src/color-validation/index.ts"
     },
     "./theming": {
       "types": "./lib/theming/index.d.ts",

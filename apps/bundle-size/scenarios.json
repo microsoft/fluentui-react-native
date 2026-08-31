@@ -18,19 +18,20 @@
       "name": "design-theme-state",
       "module": "@fluentui-react-native/design",
       "exports": ["FlexThemeReference", "ThemeProvider", "useThemeState"],
-      "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/", "/runtime-colors/", "/contrast/", "/color/colorValue."]
+      "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/", "/color-lib/", "/color-validation/"]
     },
     {
-      "name": "design-runtime-colors",
-      "module": "@fluentui-react-native/design/runtime-colors",
-      "exports": ["deriveInteractionColors"],
-      "requiredInputPatterns": ["/runtime-colors/index.", "/color/colorValue."]
+      "name": "design-color-lib",
+      "module": "@fluentui-react-native/design/color-lib",
+      "exports": ["getContrastRatio", "getHoverColor", "getPressColor"],
+      "requiredInputPatterns": ["/color-lib/compositing.", "/color-lib/conversion.", "/color-lib/interaction.", "/color-lib/parsing."],
+      "forbiddenInputPatterns": ["/color-validation/"]
     },
     {
-      "name": "design-contrast",
-      "module": "@fluentui-react-native/design/contrast",
-      "exports": ["resolvedPairs"],
-      "requiredInputPatterns": ["/contrast/index.", "/color/colorValue."]
+      "name": "design-color-validation",
+      "module": "@fluentui-react-native/design/color-validation",
+      "exports": ["validateContrastPairs"],
+      "requiredInputPatterns": ["/color-validation/validation.", "/color-lib/compositing.", "/color-lib/parsing."]
     },
     {
       "name": "design-theme-state-legacy-source",

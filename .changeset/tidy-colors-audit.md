@@ -2,4 +2,4 @@
 "@fluentui-react-native/design": minor
 ---
 
-Add opt-in runtime interaction color derivation and contrast auditing submodules.
+Add an opt-in runtime color library and a separate test-focused color validation submodule.

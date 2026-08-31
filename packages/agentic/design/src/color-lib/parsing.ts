@@ -1,37 +1,11 @@
 import type { ColorValue } from 'react-native';
 
-export type ColorDiagnosticReason = 'non-literal-color' | 'unsupported-color-format';
-
-export interface ColorDiagnostic {
-  readonly reason: ColorDiagnosticReason;
-  readonly value: ColorValue;
-  readonly message: string;
-}
-
-export interface RgbaColor {
-  readonly r: number;
-  readonly g: number;
-  readonly b: number;
-  readonly a: number;
-}
-
-export type ParsedColorValue =
-  | {
-      readonly status: 'resolved';
-      readonly color: RgbaColor;
-    }
-  | {
-      readonly status: 'unresolvable';
-      readonly diagnostic: ColorDiagnostic;
-    };
+import { channelToByte } from './math';
+import type { ParsedColorValue, RgbaColor } from './types';
 
 const HEX_COLOR = /^#([\da-f]{3,4}|[\da-f]{6}|[\da-f]{8})$/i;
 const RGB_COLOR = /^(rgba?)\((.*)\)$/i;
 const NUMERIC_CHANNEL = /^(?:\d+(?:\.\d*)?|\.\d+)%?$/;
-
-export function clamp(value: number, minimum = 0, maximum = 1): number {
-  return Math.max(minimum, Math.min(maximum, value));
-}
 
 function parseHexColor(value: string): RgbaColor | undefined {
   const match = HEX_COLOR.exec(value);
@@ -117,6 +91,10 @@ function parseRgbColor(value: string): RgbaColor | undefined {
   };
 }
 
+/**
+ * Parse a React Native color value when it is a hex, `rgb()`, or `rgba()`
+ * literal. Native and dynamic color objects return a structured diagnostic.
+ */
 export function parseColorValue(value: ColorValue): ParsedColorValue {
   if (typeof value !== 'string') {
     return {
@@ -143,28 +121,22 @@ export function parseColorValue(value: ColorValue): ParsedColorValue {
       };
 }
 
-function channelToHex(value: number): string {
-  return Math.round(clamp(value) * 255)
-    .toString(16)
-    .padStart(2, '0');
-}
-
+/**
+ * Format normalized RGBA channels as `#rrggbb` or `#rrggbbaa` when alpha is
+ * translucent.
+ */
 export function rgbaToHex(color: RgbaColor): string {
-  const rgb = `#${channelToHex(color.r)}${channelToHex(color.g)}${channelToHex(color.b)}`;
-  const alpha = channelToHex(color.a);
+  const toHex = (value: number) => channelToByte(value).toString(16).padStart(2, '0');
+  const rgb = `#${toHex(color.r)}${toHex(color.g)}${toHex(color.b)}`;
+  const alpha = toHex(color.a);
   return alpha === 'ff' ? rgb : `${rgb}${alpha}`;
 }
 
-export function compositeRgba(foreground: RgbaColor, background: RgbaColor): RgbaColor {
-  const outputAlpha = foreground.a + background.a * (1 - foreground.a);
-  if (outputAlpha === 0) {
-    return { r: 0, g: 0, b: 0, a: 0 };
+/** @internal Resolve a literal color or throw a descriptive operation error. */
+export function requireLiteralColor(value: ColorValue, operation: string): RgbaColor {
+  const result = parseColorValue(value);
+  if (result.status === 'unresolvable') {
+    throw new TypeError(`${operation}: ${result.diagnostic.message}`);
   }
-
-  return {
-    r: (foreground.r * foreground.a + background.r * background.a * (1 - foreground.a)) / outputAlpha,
-    g: (foreground.g * foreground.a + background.g * background.a * (1 - foreground.a)) / outputAlpha,
-    b: (foreground.b * foreground.a + background.b * background.a * (1 - foreground.a)) / outputAlpha,
-    a: outputAlpha,
-  };
+  return result.color;
 }
