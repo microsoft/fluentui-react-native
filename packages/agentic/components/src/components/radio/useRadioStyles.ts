@@ -1,6 +1,6 @@
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
-import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
+import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
 
 import {
   radioStyles,
@@ -38,7 +38,7 @@ export function useRadioStyles_unstable(state: RadioState) {
     getRadioSecondaryTextColorStyle(state),
   ];
 
-  state.focusVisualProps = createFocusVisualProps({
+  state.focusVisualProps = createFocusVisualProps_unstable({
     borderRadius: rootLayoutStyle.borderRadius,
     innerColor: state.tokens.color.strokeFocusInner,
     innerWidth: state.tokens.strokeWidth.thin,

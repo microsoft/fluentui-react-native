@@ -64,6 +64,9 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   stages. Use `yarn storybook smoke --windows --mode stories` for the package-owned generation, channel server, native
   build and registration, Metro launch, full indexed-story traversal, and ownership-safe cleanup. Use
   `--mode stories-and-tests` to run the component-authored desktop-e2e plans after the complete traversal.
+- Keep the Windows story-pattern overrides in `storybook.config.mts`; the
+  current Accordion and Callout Fabric stories still fail-fast the RNW 0.81
+  host during traversal.
 - WinAppDriver screenshots are not a reliable capture path for WinAppSDK Composition content. After selecting a story
   through the Storybook control channel, use the agent host's desktop screenshot tool when visual evidence is required.
 - Build logs, automation evidence, visual trees, screenshots, and session manifests belong under ignored

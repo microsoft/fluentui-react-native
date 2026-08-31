@@ -1,5 +1,35 @@
 # Change Log - @fluentui-react-native/menu-button
 
+## 0.15.5
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+  - @fluentui-react-native/button@0.40.10
+  - @fluentui-react-native/contextual-menu@0.25.11
+  - @uifabricshared/foundation-compose@1.16.10
+  - @fluentui-react-native/icon@0.22.10
+
+## 0.15.4
+
+### Patch Changes
+
+- cfef63e: update package references to use consolidated package directly
+- cfef63e: Consolidate theming utilities in the design package and move compatibility packages to the shim directory
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [34bdf23]
+- Updated dependencies [cfef63e]
+  - @uifabricshared/foundation-compose@1.16.9
+  - @fluentui-react-native/button@0.40.9
+  - @fluentui-react-native/design@0.3.2
+  - @fluentui-react-native/contextual-menu@0.25.10
+  - @fluentui-react-native/icon@0.22.9
+
 ## 0.15.3
 
 ### Patch Changes

@@ -1,5 +1,26 @@
 # Change Log - @uifabricshared/foundation-tokens
 
+## 0.16.10
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+
+## 0.16.9
+
+### Patch Changes
+
+- cfef63e: update package references to use consolidated package directly
+- cfef63e: Consolidate theming utilities in the design package and move compatibility packages to the shim directory
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/design@0.3.2
+
 ## 0.16.8
 
 ### Patch Changes

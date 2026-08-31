@@ -1,5 +1,27 @@
 # Change Log - @fluentui-react-native/themed-stylesheet
 
+## 1.10.4
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+
+## 1.10.3
+
+### Patch Changes
+
+- cfef63e: update package references to use consolidated package directly
+- cfef63e: Consolidate theming utilities in the design package and move compatibility packages to the shim directory
+- cfef63e: Consolidate legacy theming and styling implementations into design submodules, deprecate their former packages as compatibility shims, and group those shims under `packages/shim`.
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/design@0.3.2
+
 ## 1.10.2
 
 ### Patch Changes

@@ -8,6 +8,7 @@
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "measure": "node scripts/measure.mjs",
+    "test": "node --test scripts/*.test.mjs",
     "update-baseline": "node scripts/measure.mjs --update-baseline"
   },
   "dependencies": {
@@ -35,7 +36,8 @@
     "@rnx-kit/metro-resolver-symlinks": "catalog:",
     "@rnx-kit/metro-serializer-esbuild": "catalog:",
     "@rnx-kit/tools-filesystem": "^0.2.0",
-    "metro": "^0.83.1",
+    "@rnx-kit/tools-formatting": "^0.1.0",
+    "metro": "^0.83.8",
     "oxc-resolver": "catalog:"
   },
   "rnx-kit": {

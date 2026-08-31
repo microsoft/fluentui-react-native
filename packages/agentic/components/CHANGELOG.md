@@ -1,5 +1,34 @@
 # @fluentui-react-native/components
 
+## 0.3.0
+
+### Minor Changes
+
+- f21f82c: Move public primitive exports from the package root to the `./primitives`
+  subpath and document their contracts.
+
+### Patch Changes
+
+- a0ef3f4: Add sideEffects: false to package manifests
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+
+## 0.2.4
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- 34bdf23: Version updates for security
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [34bdf23]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/design@0.3.2
+  - @fluentui-react-native/callout@0.29.3
+
 ## 0.2.3
 
 ### Patch Changes

@@ -153,23 +153,3 @@ export type { TagAppearance, TagLayout, TagProps, TagShape, TagSize, TagSlots, T
 export { renderTag_unstable } from './components/tag/renderTag';
 export { useTagStyles_unstable } from './components/tag/useTagStyles';
 export { useTag_unstable } from './components/tag/useTag';
-
-export { Icon } from './primitives/icon/icon';
-export type { FontIconSource, IconElementProps, IconProps, SvgIconSource } from './primitives/icon/icon.types';
-
-export { CheckboxIndicator } from './primitives/checkbox-indicator/checkbox-indicator';
-export type { CheckboxIndicatorProps, CheckboxIndicatorStatus } from './primitives/checkbox-indicator/checkbox-indicator.types';
-
-export { CompoundItemLayout } from './primitives/compound-item-layout/compound-item-layout';
-export type { CompoundItemLayoutProps } from './primitives/compound-item-layout/compound-item-layout.types';
-
-export { FocusVisual, createFocusVisualProps } from './primitives/focus-visual/focus-visual';
-export type {
-  FocusVisualOptions,
-  FocusVisualProps,
-  FocusVisualRingProps,
-  FocusVisualStyles,
-} from './primitives/focus-visual/focus-visual.types';
-
-export { LayoutStableText } from './primitives/layout-stable-text/layout-stable-text';
-export type { LayoutStableTextProps } from './primitives/layout-stable-text/layout-stable-text.types';

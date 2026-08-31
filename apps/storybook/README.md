@@ -108,6 +108,9 @@ bundles the Windows catalog, generates the solution, starts the platform-scoped 
 launches the exact app window, renders every indexed story, optionally runs the component-authored plans, and stops only the processes it recorded.
 During Stage 1 the authored plans use the manifest-derived fake target; the full story traversal remains native. Logs are written
 beneath `artifacts/windows/smoke-logs`.
+The Accordion and Callout stories remain excluded from the Windows catalog
+because the current RNW 0.81 Fabric host still fail-fasts while traversing
+them. Win32 continues to exercise Callout through its Paper endpoint.
 
 Storybook's development bundle intentionally contains separate `pretty-format` and `react-is`
 versions used by its internal tooling. They are excluded from the duplicate-module enforcement;
@@ -169,8 +172,8 @@ solving a platform problem they currently have.
 
 Nine ListItem stories and seven Accordion stories are omitted from the
 Win32-generated catalog because those components terminate the current REX
-0.81.1 host with fail-fast code `0xC0000409`; macOS and Windows continue to
-include them. The three standalone Callout stories run through the same Paper
+0.81.1 host with fail-fast code `0xC0000409`; macOS continues to include them,
+while Windows also omits Accordion and Callout. The three standalone Callout stories run through the same Paper
 `RCTCallout` implementation as the portal chrome. All 130 included stories
 render through the Win32 control-plane smoke sweep.
 Run `yarn storybook-server --win32` with this endpoint so the server exposes the

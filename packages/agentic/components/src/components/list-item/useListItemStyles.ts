@@ -3,7 +3,7 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
-import { createFocusVisualProps } from '../../primitives/focus-visual/focus-visual';
+import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
 import {
   getListItemBackgroundStyle,
   getListItemContentStyle,
@@ -55,7 +55,7 @@ export function useListItemStyles_unstable(state: ListItemState) {
     },
   ];
 
-  state.focusVisualProps = createFocusVisualProps({
+  state.focusVisualProps = createFocusVisualProps_unstable({
     borderRadius: rootSizeStyle.borderRadius,
     innerColor: state.tokens.color.strokeFocusInner,
     innerWidth: state.tokens.strokeWidth.thin,

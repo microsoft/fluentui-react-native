@@ -50,7 +50,7 @@
     "@storybook/addon-ondevice-controls": "^10.4.7",
     "@storybook/react-native": "^10.4.7",
     "cross-env": "catalog:",
-    "metro": "^0.83.1",
+    "metro": "^0.83.8",
     "react-native-test-app": "catalog:",
     "storybook": "^10.4.0"
   },

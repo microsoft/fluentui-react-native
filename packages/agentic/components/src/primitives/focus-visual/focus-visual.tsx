@@ -7,7 +7,7 @@ import { directComponent } from '@fluentui-react-native/framework-base';
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import type { FocusVisualOptions, FocusVisualProps } from './focus-visual.types';
 
-export function createFocusVisualProps({
+export function createFocusVisualProps_unstable({
   borderRadius,
   innerColor,
   innerWidth,

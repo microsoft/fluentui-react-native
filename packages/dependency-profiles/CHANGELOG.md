@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
+## 0.10.9
+
+### Patch Changes
+
+- cfef63e: update package references to use consolidated package directly
+
 ## 0.10.6
 
 ### Patch Changes

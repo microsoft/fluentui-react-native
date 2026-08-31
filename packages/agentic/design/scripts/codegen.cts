@@ -1,5 +1,6 @@
 const { processPlatformJsonFiles, outputCodegenFile } = require('@fluentui-react-native/scripts');
 const path = require('node:path');
+const { assertMappingsConsistent } = require('./token-mappings/check-mappings.cjs');
 
 const globalHeader = `WARNING: This file is auto-generated. Do not edit it manually.
 
@@ -34,6 +35,7 @@ function processGlobals() {
 }
 
 function main() {
+  assertMappingsConsistent();
   processGlobals();
 }
 

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 
-import { FocusVisual, createFocusVisualProps } from './focus-visual';
+import { FocusVisual, createFocusVisualProps_unstable } from './focus-visual';
 
 const meta: Meta<typeof FocusVisual> = {
   title: 'Primitives/Focus Visual',
@@ -26,7 +26,7 @@ const FocusTarget = ({ dual, testID, visible = true }: { dual?: boolean; testID?
   <View style={styles.target}>
     <Text>Focus target</Text>
     <FocusVisual
-      {...createFocusVisualProps({
+      {...createFocusVisualProps_unstable({
         borderRadius: 6,
         innerColor: dual ? '#ffffff' : undefined,
         innerWidth: dual ? 1 : undefined,

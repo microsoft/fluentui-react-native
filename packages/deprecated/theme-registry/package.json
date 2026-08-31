@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theme-registry",
-  "version": "0.13.7",
+  "version": "0.13.8",
   "description": "Implementation of the theme graph",
   "keywords": [],
   "license": "MIT",

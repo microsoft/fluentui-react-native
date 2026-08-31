@@ -5,6 +5,11 @@ the canonical implementation.
 
 ## Non-negotiable invariants
 
+- Primitives are public only from `@fluentui-react-native/components/primitives`; do not re-export them from the package root.
+- Give primitive components stable public names. Suffix public composition helpers whose contracts may evolve with
+  `_unstable`, matching higher-order component pipeline helpers.
+- Maintain a colocated `CONTRACT.md` for every public primitive. Derive its test obligations from that contract, its public
+  types, and each renderer branch rather than creating an upstream-backed `SPEC.md`.
 - Primitives are unstyled building blocks. Do not read themes, apply design tokens, or choose product appearance
   defaults.
 - Define the smallest acceptance contract needed for `SlotProp` consumption.
@@ -15,6 +20,8 @@ the canonical implementation.
 - Demonstrate the primitive in Storybook without adding component-level styling.
 - `FocusVisual` mounts configured ring Views eagerly, owns accessibility and hit testing, and changes only opacity when
   focus visibility changes. Keep token selection and component-specific ring geometry in the consuming component.
+- Extract a new primitive only when multiple components share a stable behavioral or structural contract and the public
+  abstraction is smaller than the duplication. Keep one-off helpers and component-specific behavior local.
 
 ## Focused references
 

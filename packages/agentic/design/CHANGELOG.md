@@ -1,5 +1,22 @@
 # @fluentui-react-native/design
 
+## 0.3.3
+
+### Patch Changes
+
+- 587845c: Enforce Flex mapping consistency and record reproducible x3 upstream drift.
+- a0ef3f4: Add sideEffects: false to package manifests
+
+## 0.3.2
+
+### Patch Changes
+
+- 51fab45: Updating path references to components and design packages
+- cfef63e: update package references to use consolidated package directly
+- 7372841: Share high-contrast alias token processing across Windows platforms from the design package and expose it through the theme-tokens compatibility shim.
+- cfef63e: Consolidate theming utilities in the design package and move compatibility packages to the shim directory
+- cfef63e: Consolidate legacy theming and styling implementations into design submodules, deprecate their former packages as compatibility shims, and group those shims under `packages/shim`.
+
 ## 0.3.1
 
 ### Patch Changes

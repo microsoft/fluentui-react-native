@@ -94,7 +94,9 @@ resizes or re-roles the component instead of demonstrating a value.
 
 Each story module should provide:
 
-- typed `Meta` with `component` and `Components/<Name>` or `Primitives/<Name>` title
+- typed `Meta` with `component` and a title matching the component location:
+  `Components/<Name>` for higher-order components, `Primitives/<Name>` for agentic primitives, or `Native/<Name>` for
+  standalone native component packages
 - useful common args
 - controls for finite or numeric public props
 - a short component description

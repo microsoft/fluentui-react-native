@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/experimental-activity-indicator
 
+## 0.11.10
+
+### Patch Changes
+
+- @fluentui-react-native/framework@0.17.4
+
+## 0.11.9
+
+### Patch Changes
+
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @fluentui-react-native/framework@0.17.3
+
 ## 0.11.8
 
 ### Patch Changes

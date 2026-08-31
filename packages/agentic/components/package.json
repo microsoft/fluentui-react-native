@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/components",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "A library of agent-generated FluentUI React Native components",
   "license": "MIT",
   "author": "",
@@ -10,6 +10,7 @@
     "directory": "packages/agentic/components"
   },
   "type": "module",
+  "sideEffects": false,
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -19,6 +20,12 @@
       "react-native": "./src/index.ts",
       "import": "./lib/index.js",
       "default": "./src/index.ts"
+    },
+    "./primitives": {
+      "types": "./lib/primitives/index.d.ts",
+      "react-native": "./src/primitives/index.ts",
+      "import": "./lib/primitives/index.js",
+      "default": "./src/primitives/index.ts"
     }
   },
   "scripts": {
@@ -43,13 +50,13 @@
     "@react-native-community/cli-platform-ios": "^20.0.0",
     "@react-native/babel-preset": "^0.81.0",
     "@react-native/metro-config": "^0.81.0",
-    "@testing-library/react-native": "catalog:0.81",
+    "@testing-library/react-native": "catalog:",
     "@types/react": "~19.1.4",
     "react": "19.1.4",
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",
     "react-native-svg": "^15.12.1",
-    "test-renderer": "catalog:0.81"
+    "test-renderer": "catalog:"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.74.0 || ^0.81.0",

@@ -108,7 +108,7 @@
     "@wdio/runner": "catalog:",
     "expect-webdriverio": "catalog:",
     "flow-bin": "^0.113.0",
-    "metro-config": "^0.80.3",
+    "metro-config": "^0.83.8",
     "react": "19.1.4",
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",

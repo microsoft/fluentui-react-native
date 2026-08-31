@@ -51,7 +51,7 @@ export default makeDesktopStorybookConfig({
         command: createWin32SmokeCommand({
           ...win32Host,
           testIDPrefix: appManifest.storybook.testIDPrefix,
-          requiredStoryIds: ['primitives-callout--default', 'primitives-callout--placement', 'primitives-callout--window-commands'],
+          requiredStoryIds: ['native-callout--default', 'native-callout--placement', 'native-callout--window-commands'],
         }),
       },
     },

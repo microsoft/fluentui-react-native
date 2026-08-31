@@ -297,44 +297,66 @@ private:
           CompositionUIService::ComponentFromReactTag(
               m_reactContext.Handle(), Props()->target.AsInt64());
       auto targetPos = ViewToScreenOffset(targetView);
+      auto targetScaleFactor =
+          targetView.LayoutMetrics().PointScaleFactor;
+      auto targetWidthPx = static_cast<int32_t>(
+          targetView.LayoutMetrics().Frame.Width * targetScaleFactor);
+      auto targetHeightPx = static_cast<int32_t>(
+          targetView.LayoutMetrics().Frame.Height * targetScaleFactor);
+      auto targetRight = targetPos.X + targetWidthPx;
+      auto targetBottom = targetPos.Y + targetHeightPx;
+      auto targetCenterX = targetPos.X + targetWidthPx / 2;
+      auto targetCenterY = targetPos.Y + targetHeightPx / 2;
 
       POINT anchorPoint{targetPos.X, targetPos.Y};
       SIZE windowSize{clientWidthPx, clientHeightPx};
 
-      RECT excludeRect{targetPos.X, targetPos.Y,
-                       targetPos.X + targetView.LayoutMetrics().Frame.Width,
-                       targetPos.Y + targetView.LayoutMetrics().Frame.Height};
+      RECT excludeRect{targetPos.X, targetPos.Y, targetRight, targetBottom};
 
       UINT flags = 0;
 
       if (m_directionalHint == DirectionalHint::LeftTopEdge) {
-        flags = TPM_LEFTALIGN | TPM_TOPALIGN | TPM_HORIZONTAL;
-      } else if (m_directionalHint == DirectionalHint::LeftCenter) {
-        flags = TPM_LEFTALIGN | TPM_VCENTERALIGN | TPM_HORIZONTAL;
-      } else if (m_directionalHint == DirectionalHint::LeftBottomEdge) {
-        flags = TPM_LEFTALIGN | TPM_BOTTOMALIGN | TPM_HORIZONTAL;
-      } else if (m_directionalHint == DirectionalHint::TopLeftEdge) {
-        flags = TPM_LEFTALIGN | TPM_TOPALIGN | TPM_VERTICAL;
-      } else if (m_directionalHint == DirectionalHint::TopAutoEdge) {
-        flags = TPM_LEFTALIGN | TPM_TOPALIGN | TPM_VERTICAL;
-      } else if (m_directionalHint == DirectionalHint::TopCenter) {
-        flags = TPM_CENTERALIGN | TPM_TOPALIGN | TPM_VERTICAL;
-      } else if (m_directionalHint == DirectionalHint::TopRightEdge) {
-        flags = TPM_RIGHTALIGN | TPM_TOPALIGN | TPM_VERTICAL;
-      } else if (m_directionalHint == DirectionalHint::RightTopEdge) {
+        anchorPoint = {targetPos.X, targetPos.Y};
         flags = TPM_RIGHTALIGN | TPM_TOPALIGN | TPM_HORIZONTAL;
-      } else if (m_directionalHint == DirectionalHint::RightCenter) {
+      } else if (m_directionalHint == DirectionalHint::LeftCenter) {
+        anchorPoint = {targetPos.X, targetCenterY};
         flags = TPM_RIGHTALIGN | TPM_VCENTERALIGN | TPM_HORIZONTAL;
-      } else if (m_directionalHint == DirectionalHint::RightBottomEdge) {
+      } else if (m_directionalHint == DirectionalHint::LeftBottomEdge) {
+        anchorPoint = {targetPos.X, targetBottom};
         flags = TPM_RIGHTALIGN | TPM_BOTTOMALIGN | TPM_HORIZONTAL;
-      } else if (m_directionalHint == DirectionalHint::BottomLeftEdge) {
+      } else if (m_directionalHint == DirectionalHint::TopLeftEdge) {
+        anchorPoint = {targetPos.X, targetPos.Y};
         flags = TPM_LEFTALIGN | TPM_BOTTOMALIGN | TPM_VERTICAL;
-      } else if (m_directionalHint == DirectionalHint::BottomAutoEdge) {
+      } else if (m_directionalHint == DirectionalHint::TopAutoEdge) {
+        anchorPoint = {targetPos.X, targetPos.Y};
         flags = TPM_LEFTALIGN | TPM_BOTTOMALIGN | TPM_VERTICAL;
-      } else if (m_directionalHint == DirectionalHint::BottomCenter) {
+      } else if (m_directionalHint == DirectionalHint::TopCenter) {
+        anchorPoint = {targetCenterX, targetPos.Y};
         flags = TPM_CENTERALIGN | TPM_BOTTOMALIGN | TPM_VERTICAL;
-      } else if (m_directionalHint == DirectionalHint::BottomRightEdge) {
+      } else if (m_directionalHint == DirectionalHint::TopRightEdge) {
+        anchorPoint = {targetRight, targetPos.Y};
         flags = TPM_RIGHTALIGN | TPM_BOTTOMALIGN | TPM_VERTICAL;
+      } else if (m_directionalHint == DirectionalHint::RightTopEdge) {
+        anchorPoint = {targetRight, targetPos.Y};
+        flags = TPM_LEFTALIGN | TPM_TOPALIGN | TPM_HORIZONTAL;
+      } else if (m_directionalHint == DirectionalHint::RightCenter) {
+        anchorPoint = {targetRight, targetCenterY};
+        flags = TPM_LEFTALIGN | TPM_VCENTERALIGN | TPM_HORIZONTAL;
+      } else if (m_directionalHint == DirectionalHint::RightBottomEdge) {
+        anchorPoint = {targetRight, targetBottom};
+        flags = TPM_LEFTALIGN | TPM_BOTTOMALIGN | TPM_HORIZONTAL;
+      } else if (m_directionalHint == DirectionalHint::BottomLeftEdge) {
+        anchorPoint = {targetPos.X, targetBottom};
+        flags = TPM_LEFTALIGN | TPM_TOPALIGN | TPM_VERTICAL;
+      } else if (m_directionalHint == DirectionalHint::BottomAutoEdge) {
+        anchorPoint = {targetPos.X, targetBottom};
+        flags = TPM_LEFTALIGN | TPM_TOPALIGN | TPM_VERTICAL;
+      } else if (m_directionalHint == DirectionalHint::BottomCenter) {
+        anchorPoint = {targetCenterX, targetBottom};
+        flags = TPM_CENTERALIGN | TPM_TOPALIGN | TPM_VERTICAL;
+      } else if (m_directionalHint == DirectionalHint::BottomRightEdge) {
+        anchorPoint = {targetRight, targetBottom};
+        flags = TPM_RIGHTALIGN | TPM_TOPALIGN | TPM_VERTICAL;
       }
 
       flags |= TPM_WORKAREA;

@@ -63,17 +63,30 @@
   },
   "resolutions": {
     "@fluentui/react-native-icons/@types/react-native": "ignore:",
+    "@nevware21/ts-utils": "0.14.0",
     "@react-native-windows/cli": "patch:@react-native-windows/cli@npm%3A0.81.8#~/.yarn/patches/@react-native-windows-cli-npm-0.81.8-9ffb7042e8.patch",
+    "@rnx-kit/tools-apple@npm:^0.2.2": "0.2.3",
     "@types/react": "19.1.17",
     "axios@npm:1.13.3": "^1.18.1",
+    "basic-ftp@npm:^5.0.2": "5.3.1",
+    "body-parser@npm:^1.20.3": "1.20.6",
+    "deepmerge-ts@npm:^7.0.3": "8.0.1",
     "esbuild@npm:~0.25.0": "^0.28.0",
     "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch",
+    "extract-zip": "ignore:",
+    "fast-xml-parser@npm:^4.4.1": "5.11.0",
     "form-data@npm:4.0.5": "^4.0.6",
+    "launch-editor@npm:^2.9.1": "2.14.1",
     "lodash": "^4.18.1",
     "path-to-regexp@npm:8.3.0": "^8.4.2",
     "shell-quote": "^1.9.0",
+    "socks@npm:^2.8.3": "2.8.9",
     "unicorn-magic@npm:^0.3.0": "^0.4.0",
-    "ws@npm:8.19.0": "^8.21.0"
+    "uuid@npm:13.0.0": "13.0.1",
+    "uuid@npm:^8.0.0": "11.1.1",
+    "valibot@npm:1.2.0": "1.4.2",
+    "ws@npm:8.19.0": "^8.21.0",
+    "yaml@npm:^1.10.0": "1.10.3"
   },
   "engines": {
     "node": ">=22.12"

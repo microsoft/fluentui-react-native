@@ -1,5 +1,34 @@
 # Change Log - @fluentui-react-native/persona
 
+## 0.18.4
+
+### Patch Changes
+
+- Updated dependencies [587845c]
+- Updated dependencies [a0ef3f4]
+  - @fluentui-react-native/design@0.3.3
+  - @fluentui-react-native/persona-coin@0.17.4
+  - @uifabricshared/foundation-compose@1.16.10
+  - @uifabricshared/foundation-tokens@0.16.10
+  - @fluentui-react-native/framework@0.17.4
+
+## 0.18.3
+
+### Patch Changes
+
+- cfef63e: update package references to use consolidated package directly
+- cfef63e: Consolidate theming utilities in the design package and move compatibility packages to the shim directory
+- Updated dependencies [51fab45]
+- Updated dependencies [cfef63e]
+- Updated dependencies [7372841]
+- Updated dependencies [cfef63e]
+- Updated dependencies [cfef63e]
+  - @uifabricshared/foundation-compose@1.16.9
+  - @fluentui-react-native/persona-coin@0.17.3
+  - @fluentui-react-native/framework@0.17.3
+  - @fluentui-react-native/design@0.3.2
+  - @uifabricshared/foundation-tokens@0.16.9
+
 ## 0.18.2
 
 ### Patch Changes
