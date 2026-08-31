@@ -1,5 +1,5 @@
 {
-  "platforms": ["macos", "win32", "windows"],
+  "platforms": ["macos", "windows"],
   "scenarios": [
     {
       "name": "shell"
