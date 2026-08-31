@@ -18,7 +18,19 @@
       "name": "design-theme-state",
       "module": "@fluentui-react-native/design",
       "exports": ["FlexThemeReference", "ThemeProvider", "useThemeState"],
-      "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/"]
+      "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/", "/runtime-colors/", "/contrast/", "/color/colorValue."]
+    },
+    {
+      "name": "design-runtime-colors",
+      "module": "@fluentui-react-native/design/runtime-colors",
+      "exports": ["deriveInteractionColors"],
+      "requiredInputPatterns": ["/runtime-colors/index.", "/color/colorValue."]
+    },
+    {
+      "name": "design-contrast",
+      "module": "@fluentui-react-native/design/contrast",
+      "exports": ["resolvedPairs"],
+      "requiredInputPatterns": ["/contrast/index.", "/color/colorValue."]
     },
     {
       "name": "design-theme-state-legacy-source",
