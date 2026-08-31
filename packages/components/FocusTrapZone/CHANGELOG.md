@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/focus-trap-zone
 
+## 0.14.3
+
+### Patch Changes
+
+- @uifabricshared/foundation-composable@0.15.3
+- @uifabricshared/foundation-settings@0.16.9
+- @fluentui-react-native/interactive-hooks@0.28.9
+
 ## 0.14.2
 
 ### Patch Changes

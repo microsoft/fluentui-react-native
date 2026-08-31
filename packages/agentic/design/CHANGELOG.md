@@ -1,5 +1,16 @@
 # @fluentui-react-native/design
 
+## 0.4.0
+
+### Minor Changes
+
+- 4157768: Add appearance-aware Flex theme sources with stable token identity and lazy compatibility bridges for legacy themes.
+
+### Patch Changes
+
+- Updated dependencies [24be698]
+  - @fluentui-react-native/framework-base@0.7.0
+
 ## 0.3.3
 
 ### Patch Changes

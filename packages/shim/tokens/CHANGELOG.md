@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/tokens
 
+## 0.24.11
+
+### Patch Changes
+
+- Updated dependencies [4157768]
+  - @fluentui-react-native/design@0.4.0
+
 ## 0.24.10
 
 ### Patch Changes
