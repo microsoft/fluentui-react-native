@@ -1,0 +1,96 @@
+{
+  "name": "@fluentui-react-native/desktop-driver",
+  "version": "0.1.0",
+  "description": "W3C WebDriver-compatible automation for React Native desktop applications",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic/desktop-driver"
+  },
+  "bin": "./config/cli.cjs",
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "default": "./src/index.ts"
+    },
+    "./client": {
+      "types": "./lib/client/index.d.ts",
+      "import": "./lib/client/index.js",
+      "default": "./src/client/index.ts"
+    },
+    "./cli": {
+      "types": "./lib/cli/index.d.ts",
+      "import": "./lib/cli/index.js",
+      "default": "./src/cli/index.ts"
+    },
+    "./authoring": {
+      "types": "./lib/authoring/index.d.ts",
+      "import": "./lib/authoring/index.js",
+      "default": "./src/authoring/index.ts"
+    },
+    "./agent": {
+      "types": "./lib/agent/index.d.ts",
+      "import": "./lib/agent/index.js",
+      "default": "./src/agent/index.ts"
+    },
+    "./artifacts": {
+      "types": "./lib/artifacts/index.d.ts",
+      "import": "./lib/artifacts/index.js",
+      "default": "./src/artifacts/index.ts"
+    },
+    "./server": {
+      "types": "./lib/server/index.d.ts",
+      "import": "./lib/server/index.js",
+      "default": "./src/server/index.ts"
+    },
+    "./storybook": {
+      "types": "./lib/storybook.d.ts",
+      "import": "./lib/storybook.js",
+      "default": "./src/storybook.ts"
+    },
+    "./testing": {
+      "types": "./lib/testing/index.d.ts",
+      "import": "./lib/testing/index.js",
+      "default": "./src/testing/index.ts"
+    },
+    "./wdio": {
+      "types": "./lib/wdio/index.d.ts",
+      "import": "./lib/wdio/index.js",
+      "default": "./src/wdio/index.ts"
+    },
+    "./runner": {
+      "types": "./lib/runner/index.d.ts",
+      "import": "./lib/runner/index.js",
+      "default": "./src/runner/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "fluentui-scripts clean",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "fluentui-scripts jest"
+  },
+  "dependencies": {
+    "commander": "^14.0.2",
+    "webdriverio": "catalog:"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*"
+  },
+  "furn": {
+    "jestPlatform": "react"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

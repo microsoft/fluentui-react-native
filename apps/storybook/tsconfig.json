@@ -1,6 +1,7 @@
 {
   "extends": "@fluentui-react-native/scripts/tsconfig",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "module": "esnext",
@@ -11,9 +12,12 @@
     "composite": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["index.js", "src", "app.json"],
+  "include": ["index.js", "src", "app.json", "storybook.config.mts"],
   "exclude": ["node_modules", "dist", ".cache"],
   "references": [
+    {
+      "path": "../../packages/agentic/storybook-desktop/tsconfig.json"
+    },
     {
       "path": "../../packages/native/Callout/tsconfig.json"
     },
@@ -21,16 +25,16 @@
       "path": "../../packages/agentic/components/tsconfig.json"
     },
     {
-      "path": "../../packages/theming/default-theme/tsconfig.json"
-    },
-    {
-      "path": "../../packages/agentic/design/tsconfig.json"
-    },
-    {
       "path": "../../packages/components/FocusZone/tsconfig.json"
     },
     {
       "path": "../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/storybook-desktop-runtime/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/desktop-driver/tsconfig.json"
     }
   ]
 }

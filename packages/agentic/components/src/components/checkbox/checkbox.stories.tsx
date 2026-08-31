@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Checkbox } from './checkbox';
 import type { CheckboxStatus, CheckboxVariant } from './checkbox.types';
@@ -63,7 +64,30 @@ export default meta;
 
 type Story = StoryObj<typeof Checkbox>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'toggles-checked-state',
+          title: 'Toggles through native activation',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-checkbox' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-checkbox' }, value: 'checkbox' } },
+            { expect: { state: 'checked', target: { testId: 'agentic-storybook-checkbox' }, value: false } },
+            { action: 'click', target: { testId: 'agentic-storybook-checkbox' } },
+            {
+              action: 'wait',
+              until: { state: 'checked', target: { testId: 'agentic-storybook-checkbox' }, value: true },
+            },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
 
 export const Overview: Story = {
   render: () => (

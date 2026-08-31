@@ -47,6 +47,10 @@ audit.
   layout.
 - Test both paths of a self-driving axis, and test that an externally driven `selected` does not change on press.
 - Keep a self-driving controlled prop out of story `args`, and keep an identity-changing axis out of story controls.
+- Author desktop automation under `parameters.desktopDriver` as static data
+  satisfying `DesktopStoryTests`. Use one stable `testID` per interacted
+  element, declare capabilities, and assert public native semantics rather than
+  implementation structure.
 
 ## Focused references
 
