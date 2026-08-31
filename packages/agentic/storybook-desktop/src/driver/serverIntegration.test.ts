@@ -4,12 +4,14 @@ import { createServer } from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 
+import { createDesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
+
 import type { DesktopStorybookDriverManifest } from './driverManifest.js';
 
 jest.setTimeout(30_000);
 
 describe('desktop Storybook server integration', () => {
-  test('hosts the Storybook channel and Desktop Driver in one process', async () => {
+  test('hosts the Storybook channel and Stage 1 smoke-test target in one process', async () => {
     const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
     const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
@@ -28,7 +30,16 @@ describe('desktop Storybook server integration', () => {
       schemaVersion: 1,
       storyManifest: {
         endpoint: 'windows',
-        entries: [],
+        entries: [
+          {
+            id: 'components-button--default',
+            name: 'Default',
+            packageName: '@fluentui-react-native/components',
+            sourcePath: 'src/components/button/button.stories.tsx',
+            tags: ['desktop-e2e'],
+            title: 'Components/Button',
+          },
+        ],
         platformManifestDigest: 'platform-digest',
         portablePlanDigest: 'portable-digest',
         schemaVersion: 1,
@@ -45,6 +56,7 @@ describe('desktop Storybook server integration', () => {
         STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
         STORYBOOK_DRIVER_MANIFEST: manifestPath,
         STORYBOOK_PROJECT_ROOT: projectRoot,
+        STORYBOOK_SMOKE_MODE: 'stories-and-tests',
         STORYBOOK_WS_PORT: String(storybookPort),
       },
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -66,6 +78,20 @@ describe('desktop Storybook server integration', () => {
         ready: true,
         targets: [{ id: 'integration-windows' }],
       });
+
+      const client = createDesktopDriverClient({ url: loopbackUrl(driverPort, '') });
+      const session = await client.newSession({
+        alwaysMatch: {
+          platformName: 'windows',
+          'furn:target': 'integration-windows',
+        },
+      });
+      await expect(session.selectStory('components-button--default', 'integration-run')).resolves.toEqual({
+        previewGeneration: 1,
+        runId: 'integration-run',
+        storyId: 'components-button--default',
+      });
+      await session.delete();
     } finally {
       child.kill();
       await waitForExit(child);

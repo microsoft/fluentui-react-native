@@ -4,18 +4,27 @@ $Component = $env:STORYBOOK_WIN32_COMPONENT
 $WindowTitle = $env:STORYBOOK_WIN32_WINDOW_TITLE
 $TestIDPrefix = $env:STORYBOOK_TEST_ID_PREFIX
 $RequiredStoryIds = $env:STORYBOOK_WIN32_REQUIRED_STORIES
+$SmokeMode = if ($env:STORYBOOK_SMOKE_MODE) { $env:STORYBOOK_SMOKE_MODE } else { 'stories' }
 if (-not $Component -or -not $WindowTitle -or -not $TestIDPrefix) {
   throw 'STORYBOOK_WIN32_COMPONENT, STORYBOOK_WIN32_WINDOW_TITLE, and STORYBOOK_TEST_ID_PREFIX are required.'
+}
+if ($SmokeMode -notin @('stories', 'stories-and-tests')) {
+  throw "STORYBOOK_SMOKE_MODE must be stories or stories-and-tests. Received '$SmokeMode'."
 }
 
 $projectRoot = (Get-Location).Path
 $artifactRoot = Join-Path $projectRoot 'artifacts\win32'
 $logRoot = Join-Path $artifactRoot 'smoke-logs'
 $storybookPort = if ($env:STORYBOOK_WS_PORT) { [int]$env:STORYBOOK_WS_PORT } else { 7007 }
+$driverPort = if ($env:STORYBOOK_DRIVER_PORT) { [int]$env:STORYBOOK_DRIVER_PORT } else { 0 }
 $cliPath = Join-Path $PSScriptRoot 'cli.cjs'
 $controlPath = Join-Path $PSScriptRoot 'storybook-control.cjs'
 $hostPath = Join-Path $PSScriptRoot 'run-win32.cjs'
 $requiredStories = @($RequiredStoryIds -split ',' | Where-Object { $_ })
+
+if ($SmokeMode -eq 'stories-and-tests' -and (-not $driverPort -or -not $env:STORYBOOK_DRIVER_MANIFEST)) {
+  throw 'STORYBOOK_DRIVER_PORT and STORYBOOK_DRIVER_MANIFEST are required for stories-and-tests smoke mode.'
+}
 
 New-Item -ItemType Directory -Path $logRoot -Force | Out-Null
 
@@ -158,6 +167,12 @@ try {
   $serverProcessId = Get-NetTCPConnection -State Listen -LocalPort $storybookPort |
     Select-Object -First 1 -ExpandProperty OwningProcess
   Add-OwnedProcess -Id $serverProcessId
+  if ($SmokeMode -eq 'stories-and-tests') {
+    Wait-ForTcpPort -Port $driverPort
+    $driverProcessId = Get-NetTCPConnection -State Listen -LocalPort $driverPort |
+      Select-Object -First 1 -ExpandProperty OwningProcess
+    Add-OwnedProcess -Id $driverProcessId
+  }
 
   $index = Invoke-RestMethod -Uri "http://127.0.0.1:$storybookPort/index.json"
   $storyCount = @($index.entries.PSObject.Properties).Count
@@ -189,7 +204,7 @@ try {
   $env:STORYBOOK_SMOKE_SETTLE_MS = '250'
   & node $controlPath
   if ($LASTEXITCODE -ne 0) {
-    throw 'Win32 Storybook traversal failed.'
+    throw 'Win32 Storybook smoke validation failed.'
   }
 
   if (-not (Get-Process -Id $appProcess.Id -ErrorAction SilentlyContinue)) {

@@ -35,39 +35,34 @@ async function startDesktopStorybookServer({
       throw new Error(`Desktop Driver manifest does not exist at ${driverManifestPath}.`);
     }
     const driverManifest = JSON.parse(fs.readFileSync(driverManifestPath, 'utf8'));
-    const [{ createDesktopDriverServer }, { createFakeStoryWindows, FakeDesktopHost }, { StorybookChannelOrchestrator }] =
-      await Promise.all([
-        import('@fluentui-react-native/desktop-driver/server'),
-        import('@fluentui-react-native/desktop-driver/testing'),
-        import('../lib/driver/index.js'),
-      ]);
+    const [
+      { createDesktopDriverServer },
+      { createFakeStoryWindows, FakeDesktopHost, FakeStoryOrchestrator },
+      { StorybookChannelOrchestrator },
+    ] = await Promise.all([
+      import('@fluentui-react-native/desktop-driver/server'),
+      import('@fluentui-react-native/desktop-driver/testing'),
+      import('../lib/driver/index.js'),
+    ]);
     if (!server) {
       throw new Error('Desktop Driver Storybook orchestration requires WebSockets.');
     }
-    const serverUrl = loopbackUrl(host, port);
-    const channelOrchestrator = new StorybookChannelOrchestrator({
-      channelServer: server,
-      driverManifest,
-      serverUrl,
-    });
     const targetHost = new FakeDesktopHost({
       endpoint: driverManifest.endpoint,
       platformName: driverManifest.endpoint === 'macos' ? 'macos' : 'windows',
       storyRootTestId: `${driverManifest.testIDPrefix}-story-root`,
       windows: createFakeStoryWindows(driverManifest.storyManifest, `${driverManifest.testIDPrefix}-story-root`),
     });
-    const setStoryMarker = (result) => {
-      targetHost.resetPreview();
-      targetHost.setElementName('story-root', JSON.stringify(result));
-      return result;
-    };
-    const orchestrator = {
-      getManifest: () => channelOrchestrator.getManifest(),
-      getCurrentStory: () => channelOrchestrator.getCurrentStory(),
-      selectStory: async (request) => setStoryMarker(await channelOrchestrator.selectStory(request)),
-      resetStory: async (request) => setStoryMarker(await channelOrchestrator.resetStory(request)),
-      updateArgs: (storyId, args) => channelOrchestrator.updateArgs(storyId, args),
-    };
+    const orchestrator =
+      process.env.STORYBOOK_SMOKE_MODE === 'stories-and-tests'
+        ? new FakeStoryOrchestrator(driverManifest.storyManifest, targetHost)
+        : createChannelOrchestrator({
+            channelServer: server,
+            driverManifest,
+            serverUrl: loopbackUrl(host, port),
+            targetHost,
+            StorybookChannelOrchestrator,
+          });
     driver = await createDesktopDriverServer({
       host,
       port: driverManifest.driverPort,
@@ -94,6 +89,26 @@ async function startDesktopStorybookServer({
   }
 
   return { channelServer: server, driver };
+}
+
+function createChannelOrchestrator({ channelServer, driverManifest, serverUrl, targetHost, StorybookChannelOrchestrator }) {
+  const channelOrchestrator = new StorybookChannelOrchestrator({
+    channelServer,
+    driverManifest,
+    serverUrl,
+  });
+  const setStoryMarker = (result) => {
+    targetHost.resetPreview();
+    targetHost.setElementName('story-root', JSON.stringify(result));
+    return result;
+  };
+  return {
+    getManifest: () => channelOrchestrator.getManifest(),
+    getCurrentStory: () => channelOrchestrator.getCurrentStory(),
+    selectStory: async (request) => setStoryMarker(await channelOrchestrator.selectStory(request)),
+    resetStory: async (request) => setStoryMarker(await channelOrchestrator.resetStory(request)),
+    updateArgs: (storyId, args) => channelOrchestrator.updateArgs(storyId, args),
+  };
 }
 
 function loopbackUrl(host, port) {

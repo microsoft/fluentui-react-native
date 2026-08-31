@@ -7,6 +7,21 @@ export const desktopStorybookActions = ['server', 'prep', 'bundle', 'run', 'buil
 
 export type DesktopStorybookAction = (typeof desktopStorybookActions)[number];
 
+export const desktopSmokeModes = ['stories', 'stories-and-tests'] as const;
+
+export type DesktopSmokeMode = (typeof desktopSmokeModes)[number];
+
+export type DesktopSmokeRunOptions = {
+  /**
+   * `stories` traverses the complete indexed catalog. `stories-and-tests` also
+   * runs component-authored desktop-e2e plans after traversal.
+   * @default "stories"
+   */
+  mode?: DesktopSmokeMode;
+};
+
+export const STORYBOOK_SMOKE_MODE = 'STORYBOOK_SMOKE_MODE';
+
 /**
  * A command launched from the consuming Storybook app.
  */
@@ -112,6 +127,14 @@ export type WindowsSmokeCommandOptions = {
   windowTitle: string;
 };
 
+export type WindowsSmokeOptions = WindowsSmokeCommandOptions & {
+  /**
+   * React Native Test App's Windows Debug host reads Metro from this fixed port.
+   * @default 8081
+   */
+  metroPort?: number;
+};
+
 export type Win32HostCommandOptions = {
   component: string;
   windowTitle: string;
@@ -133,6 +156,20 @@ export function createWindowsSmokeCommand({ configuration = 'Debug', windowTitle
       STORYBOOK_WINDOWS_CONFIGURATION: configuration,
       STORYBOOK_WINDOWS_WINDOW_TITLE: windowTitle,
     },
+  };
+}
+
+/**
+ * Creates the shared Windows Fabric smoke lifecycle and its native Metro-port constraint.
+ */
+export function createWindowsSmokeOptions({ configuration, metroPort = 8081, windowTitle }: WindowsSmokeOptions): DesktopSmokeOptions {
+  if (!Number.isInteger(metroPort) || metroPort < 1 || metroPort > 65_535) {
+    throw new RangeError(`Windows smoke Metro port must be an integer between 1 and 65535. Received "${metroPort}".`);
+  }
+  return {
+    command: createWindowsSmokeCommand({ configuration, windowTitle }),
+    // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- React Native Test App connects to loopback Metro
+    metroUrl: `http://127.0.0.1:${metroPort}/status`,
   };
 }
 

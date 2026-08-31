@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { STORYBOOK_SMOKE_MODE } from '../config/commands';
 import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance';
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms';
@@ -201,9 +202,119 @@ describe('DesktopStorybookCli', () => {
     expect(runner.foreground.at(-1)?.command).toBe('stop-storybook');
     expect(runner.stopped).toBe(2);
   });
+
+  test('runs authored tests after traversing the complete story index', async () => {
+    const runner = new RecordingRunner();
+    const events: string[] = [];
+    const fetch = jest.fn(async (input: Parameters<typeof globalThis.fetch>[0]) => {
+      const url = input.toString();
+      if (url.endsWith('/index.json')) {
+        return new Response(
+          JSON.stringify({
+            entries: {
+              first: { id: 'first--story', type: 'story' },
+              second: { id: 'second--story', type: 'story' },
+            },
+          }),
+        );
+      }
+      if (url.includes('select-story-sync')) {
+        events.push(`select:${url.split('/').at(-1)}`);
+      }
+      return new Response('{}');
+    });
+    const runSmokeTests = jest.fn(async () => {
+      events.push('tests');
+      return {
+        endpoint: 'macos' as const,
+        finishedAt: '2026-08-30T08:00:01.000Z',
+        manifest: {
+          platform: 'macos-digest',
+          portable: 'portable-digest',
+        },
+        platformName: 'macos' as const,
+        runId: 'smoke-run',
+        schemaVersion: 1 as const,
+        startedAt: '2026-08-30T08:00:00.000Z',
+        status: 'passed' as const,
+        targetId: 'agenticstorybook-macos',
+        tests: [],
+      };
+    });
+    const cli = new DesktopStorybookCli(
+      makeConfig({
+        macos: {
+          run: { command: 'launch-storybook' },
+          smoke: {
+            stop: { command: 'stop-storybook' },
+          },
+        },
+      }),
+      {
+        createStoryManifest: createEmptyStoryManifest,
+        fetch,
+        isPortAvailable: async () => true,
+        runSmokeTests,
+        runner,
+      },
+    );
+
+    await cli.smoke('macos', { mode: 'stories-and-tests' });
+
+    expect(events).toEqual(['select:first--story', 'select:second--story', 'tests']);
+    expect(runSmokeTests).toHaveBeenCalledWith({
+      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the test exercises the loopback Desktop Driver
+      driverUrl: `http://127.0.0.1:${cli.instance.driverPort}`,
+      platform: 'macos',
+      projectRoot: storybookRoot,
+      targetId: 'agenticstorybook-macos',
+    });
+    expect(fetch.mock.calls.map(([input]) => input.toString())).toContain(
+      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the test exercises the loopback Desktop Driver
+      `http://127.0.0.1:${cli.instance.driverPort}/status`,
+    );
+    expect(runner.background[0].env).toMatchObject({
+      [STORYBOOK_SMOKE_MODE]: 'stories-and-tests',
+    });
+  });
 });
 
 describe('createDesktopStorybookCommand', () => {
+  test('forwards the selected smoke mode and isolated instance to a package-owned lifecycle', async () => {
+    const runner = new RecordingRunner();
+    const program = createDesktopStorybookCommand({
+      config: makeConfig({
+        windows: {
+          smoke: {
+            command: { command: 'smoke-windows' },
+          },
+        },
+      }),
+      createStoryManifest: createEmptyStoryManifest,
+      isPortAvailable: async () => true,
+      runner,
+    });
+    const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.windows.json');
+
+    try {
+      await program.parseAsync(['node', 'test', 'smoke', '--windows', '--mode', 'stories-and-tests']);
+
+      expect(runner.foreground[0]).toMatchObject({
+        command: 'smoke-windows',
+        env: {
+          [FURN_STORYBOOK_INSTANCE_ID]: expect.any(String),
+          [STORYBOOK_SMOKE_MODE]: 'stories-and-tests',
+          STORYBOOK_DRIVER_MANIFEST: manifestPath,
+          STORYBOOK_DRIVER_PORT: expect.any(String),
+          STORYBOOK_WS_PORT: expect.any(String),
+          RCT_METRO_PORT: expect.any(String),
+        },
+      });
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+    }
+  });
+
   test('starts the channel and embedded driver from one server command', async () => {
     const runner = new RecordingRunner();
     const program = createDesktopStorybookCommand({

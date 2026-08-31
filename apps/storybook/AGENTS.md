@@ -61,10 +61,11 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
 ## Windows native workflow
 
 - Use `yarn storybook prep --windows`, `bundle --windows`, `build --windows`, and `run --windows` for individual
-  stages. Use `yarn storybook smoke --windows` for the package-owned generation, channel server, native build and
-  registration, Metro launch, full indexed-story traversal, and ownership-safe cleanup.
+  stages. Use `yarn storybook smoke --windows --mode stories` for the package-owned generation, channel server, native
+  build and registration, Metro launch, full indexed-story traversal, and ownership-safe cleanup. Use
+  `--mode stories-and-tests` to run the component-authored desktop-e2e plans after the complete traversal.
 - WinAppDriver screenshots are not a reliable capture path for WinAppSDK Composition content. After selecting a story
-  with `storybook:control`, use the agent host's desktop screenshot tool when visual evidence is required.
+  through the Storybook control channel, use the agent host's desktop screenshot tool when visual evidence is required.
 - Build logs, automation evidence, visual trees, screenshots, and session manifests belong under ignored
   `artifacts/windows`.
 - Stable native automation selectors use explicit `testID` props. Do not select by visible text, layout order, or
@@ -105,9 +106,10 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   because their Paper implementations fail-fast crash REX 0.81.1.
 - Keep the Win32 window title distinct from the Windows Fabric title so
   automation never attaches to the wrong endpoint.
-- Use `yarn storybook smoke --win32` for the package-owned bundle, launch, native desktop-chrome checks, full story
-  traversal, and cleanup. Logs belong under ignored `artifacts/win32`. Keep `build --win32` unsupported because the
-  endpoint uses a prebuilt host rather than an app-owned native project.
+- Use `yarn storybook smoke --win32 --mode stories` for the package-owned bundle, launch, native desktop-chrome checks,
+  full story traversal, and cleanup. Use `--mode stories-and-tests` to run the component-authored desktop-e2e plans
+  afterward. Logs belong under ignored `artifacts/win32`. Keep `build --win32` unsupported because the endpoint uses a
+  prebuilt host rather than an app-owned native project.
 
 ## Validation
 

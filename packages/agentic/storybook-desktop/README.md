@@ -24,7 +24,7 @@ and overrides only platform behavior that cannot use the shared defaults:
 
 ```ts
 import {
-  createWindowsSmokeCommand,
+  createWindowsSmokeOptions,
   createWin32RunCommand,
   createWin32SmokeCommand,
   makeDesktopStorybookConfig,
@@ -48,11 +48,9 @@ export default makeDesktopStorybookConfig({
   ],
   platformOptions: {
     windows: {
-      smoke: {
-        command: createWindowsSmokeCommand({
-          windowTitle: 'My Storybook',
-        }),
-      },
+      smoke: createWindowsSmokeOptions({
+        windowTitle: 'My Storybook',
+      }),
     },
     win32: {
       run: createWin32RunCommand(win32Host),
@@ -110,7 +108,8 @@ storybook-desktop prep --macos
 storybook-desktop bundle --windows
 storybook-desktop build --macos
 storybook-desktop run --windows
-storybook-desktop smoke --win32
+storybook-desktop smoke --win32 --mode stories
+storybook-desktop smoke --windows --mode stories-and-tests
 ```
 
 Use `--config <path>` for a differently named configuration file. `prep` installs CocoaPods on macOS, generates the
@@ -156,12 +155,16 @@ The `driver` startup output and `instance` command report the driver port and
 target identity. WebdriverIO is the sanctioned high-level runner; raw W3C and
 typed client surfaces remain available for integration and conformance tests.
 
-`createWindowsSmokeCommand` supplies a package-owned Fabric lifecycle that bundles the Windows catalog, prepares and
+`createWindowsSmokeOptions` supplies a package-owned Fabric lifecycle that bundles the Windows catalog, prepares and
 builds the generated app, registers and launches its Debug package, starts the channel server and Metro, traverses every story, and stops only
 the processes it recorded. `createWin32SmokeCommand` bundles and launches the configured REX host, verifies the shared
 desktop chrome, resize handles, and addon surface through the configured test-ID prefix, traverses every story, and
-performs the same ownership-safe cleanup. Consumers provide only native identity, title, test-ID prefix, and optional
-required story IDs.
+performs the same ownership-safe cleanup. `--mode stories` is the default renderability gate;
+`--mode stories-and-tests` performs the same complete traversal and then runs every `desktop-e2e` authored plan through
+the Stage 1 manifest-derived fake target. Native plan execution replaces that target when the Stage 2 providers land.
+Consumers provide only native identity, title, test-ID prefix, and optional required story IDs.
+The Windows helper also records React Native Test App's Debug Metro port (`8081` by default), while Storybook and
+Desktop Driver ports remain enlistment-specific.
 Artifacts are written beneath the consuming app's `artifacts/windows` or `artifacts/win32` directory.
 
 `smoke` can also use a complete consumer command or the generic reusable lifecycle. The generic lifecycle starts the shared
@@ -172,13 +175,15 @@ smoke command when native process ownership needs platform-specific handling. Pr
 Win32 command factories over app-local lifecycle scripts.
 
 Each reusable smoke run derives a stable instance ID from the canonical consuming-project root. That ID suffixes the
-configured macOS bundle identifier and seeds separate Storybook, Metro, and Desktop Driver ports, with occupied-port probing before
-launch. The CLI supplies a generated Xcode configuration containing `PRODUCT_BUNDLE_IDENTIFIER` and `RCT_METRO_PORT`;
-the Metro helper serializes the matching Storybook port into a generated runtime polyfill. This lets separate
-enlistments run the same app concurrently without selecting or stopping one another. Generated instance files live
-under the consuming app's `storybook-desktop.generated` and `macos/.storybook-desktop` directories and should be
-ignored. The runtime module intentionally uses a visible directory because Metro's Windows file map excludes hidden
-cache directories.
+configured macOS bundle identifier and seeds separate Storybook and Desktop Driver ports, with occupied-port probing
+before launch. Generic and macOS lifecycles also use an enlistment-specific Metro port. The Windows React Native Test
+App lifecycle reserves its required `8081` Metro port, so two Metro-backed Windows smoke runs cannot execute
+concurrently. The CLI supplies a generated Xcode configuration containing `PRODUCT_BUNDLE_IDENTIFIER` and
+`RCT_METRO_PORT`; the Metro helper serializes the matching Storybook port into a generated runtime polyfill. Separate
+enlistments therefore never select or stop one another's app or owned services. Generated instance files live under the
+consuming app's `storybook-desktop.generated` and `macos/.storybook-desktop` directories and should be ignored. The
+runtime module intentionally uses a visible directory because Metro's Windows file map excludes hidden cache
+directories.
 
 The same operations are available without Commander:
 
@@ -188,7 +193,7 @@ import config from './storybook.config.ts';
 
 const storybook = new DesktopStorybookCli(config);
 await storybook.bundle('macos');
-await storybook.smoke('macos');
+await storybook.smoke('macos', { mode: 'stories-and-tests' });
 ```
 
 Command runners are injectable through the constructor for higher-level automation and tests. `DesktopCommand`,

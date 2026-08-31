@@ -2,11 +2,15 @@ $ErrorActionPreference = 'Stop'
 
 $Configuration = if ($env:STORYBOOK_WINDOWS_CONFIGURATION) { $env:STORYBOOK_WINDOWS_CONFIGURATION } else { 'Debug' }
 $WindowTitle = $env:STORYBOOK_WINDOWS_WINDOW_TITLE
+$SmokeMode = if ($env:STORYBOOK_SMOKE_MODE) { $env:STORYBOOK_SMOKE_MODE } else { 'stories' }
 if ($Configuration -notin @('Debug', 'Release')) {
   throw "STORYBOOK_WINDOWS_CONFIGURATION must be Debug or Release. Received '$Configuration'."
 }
 if (-not $WindowTitle) {
   throw 'STORYBOOK_WINDOWS_WINDOW_TITLE is required.'
+}
+if ($SmokeMode -notin @('stories', 'stories-and-tests')) {
+  throw "STORYBOOK_SMOKE_MODE must be stories or stories-and-tests. Received '$SmokeMode'."
 }
 
 $projectRoot = (Get-Location).Path
@@ -14,8 +18,13 @@ $artifactRoot = Join-Path $projectRoot 'artifacts\windows'
 $logRoot = Join-Path $artifactRoot 'smoke-logs'
 $storybookPort = if ($env:STORYBOOK_WS_PORT) { [int]$env:STORYBOOK_WS_PORT } else { 7007 }
 $metroPort = if ($env:RCT_METRO_PORT) { [int]$env:RCT_METRO_PORT } else { 8081 }
+$driverPort = if ($env:STORYBOOK_DRIVER_PORT) { [int]$env:STORYBOOK_DRIVER_PORT } else { 0 }
 $cliPath = Join-Path $PSScriptRoot 'cli.cjs'
 $controlPath = Join-Path $PSScriptRoot 'storybook-control.cjs'
+
+if ($SmokeMode -eq 'stories-and-tests' -and (-not $driverPort -or -not $env:STORYBOOK_DRIVER_MANIFEST)) {
+  throw 'STORYBOOK_DRIVER_PORT and STORYBOOK_DRIVER_MANIFEST are required for stories-and-tests smoke mode.'
+}
 
 New-Item -ItemType Directory -Path $logRoot -Force | Out-Null
 
@@ -143,6 +152,10 @@ try {
   Add-OwnedProcess -Id $serverLauncher.Id
   Wait-ForTcpPort -Port $storybookPort
   Add-OwnedProcess -Id (Get-PortOwner -Port $storybookPort)
+  if ($SmokeMode -eq 'stories-and-tests') {
+    Wait-ForTcpPort -Port $driverPort
+    Add-OwnedProcess -Id (Get-PortOwner -Port $driverPort)
+  }
 
   Invoke-DesktopCli -Arguments @('build', '--windows')
   $launchTarget = Register-WindowsApp
@@ -163,9 +176,9 @@ try {
   & node $controlPath
   if ($LASTEXITCODE -ne 0) {
     if (-not (Get-Process -Id $appProcess.Id -ErrorAction SilentlyContinue)) {
-      throw "Windows Storybook host terminated while traversing stories."
+      throw 'Windows Storybook host terminated during smoke validation.'
     }
-    throw "Windows Storybook traversal failed with exit code $LASTEXITCODE."
+    throw "Windows Storybook smoke validation failed with exit code $LASTEXITCODE."
   }
 } finally {
   for ($index = $ownedProcessIds.Count - 1; $index -ge 0; $index -= 1) {

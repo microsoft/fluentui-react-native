@@ -2,7 +2,16 @@ import fs from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
 
-import type { DesktopCommand, DesktopCommandPlan, DesktopSmokeOptions, DesktopStorybookAction } from '../config/commands.js';
+import {
+  desktopSmokeModes,
+  STORYBOOK_SMOKE_MODE,
+  type DesktopCommand,
+  type DesktopCommandPlan,
+  type DesktopSmokeMode,
+  type DesktopSmokeOptions,
+  type DesktopSmokeRunOptions,
+  type DesktopStorybookAction,
+} from '../config/commands.js';
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import { createDesktopStorybookInstance, FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance.js';
 import type { DesktopStorybookInstance } from '../config/instance.js';
@@ -16,6 +25,7 @@ import {
 } from '../driver/index.js';
 import { NodeDesktopCommandRunner } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
+import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   driverManifestPath?: string;
@@ -28,6 +38,7 @@ export type DesktopStorybookCliOptions = {
   fetch?: typeof globalThis.fetch;
   output?: Pick<NodeJS.WriteStream, 'write'>;
   isPortAvailable?: (port: number) => Promise<boolean>;
+  runSmokeTests?: typeof runDesktopStorybookSmokeTests;
 };
 
 export type DesktopStorybookServerOptions = {
@@ -44,6 +55,7 @@ export class DesktopStorybookCli {
   private readonly fetch: typeof globalThis.fetch;
   private readonly output: Pick<NodeJS.WriteStream, 'write'>;
   private readonly isPortAvailable: (port: number) => Promise<boolean>;
+  private readonly runSmokeTests: typeof runDesktopStorybookSmokeTests;
 
   constructor(config: DesktopStorybookConfig, options: DesktopStorybookCliOptions = {}) {
     this.config = config;
@@ -56,6 +68,7 @@ export class DesktopStorybookCli {
     this.fetch = options.fetch ?? globalThis.fetch;
     this.output = options.output ?? process.stdout;
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
+    this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
   }
 
   async server(platform: Platforms, options: DesktopStorybookServerOptions = {}): Promise<void> {
@@ -155,13 +168,15 @@ export class DesktopStorybookCli {
     return this.executeAction('build', platform);
   }
 
-  async smoke(platform: Platforms): Promise<void> {
+  async smoke(platform: Platforms, options: DesktopSmokeRunOptions = {}): Promise<void> {
+    const mode = resolveSmokeMode(options.mode);
     const smoke = this.config.getSmokeOptions(platform);
     if (smoke === false) {
       throw unsupportedAction('smoke', platform);
     }
     if (smoke?.command) {
-      await this.executePlan(smoke.command, platform);
+      const instance = await this.resolveSmokeInstance(platform, smoke);
+      await this.executePlan(withEnvironment(smoke.command, { [STORYBOOK_SMOKE_MODE]: mode }), platform, instance);
       return;
     }
     if (!smoke?.stop) {
@@ -171,7 +186,7 @@ export class DesktopStorybookCli {
     }
 
     const instance = await this.resolveSmokeInstance(platform, smoke);
-    await this.runSmokeLifecycle(platform, smoke, instance);
+    await this.runSmokeLifecycle(platform, smoke, instance, mode);
   }
 
   private async executeAction(
@@ -190,6 +205,7 @@ export class DesktopStorybookCli {
     platform: Platforms,
     smoke: DesktopSmokeOptions,
     instance: ResolvedDesktopStorybookInstance,
+    mode: DesktopSmokeMode,
   ): Promise<void> {
     const backgroundCommands: RunningDesktopCommand[] = [];
     const failures: unknown[] = [];
@@ -204,9 +220,26 @@ export class DesktopStorybookCli {
       const readiness: Promise<void>[] = [];
 
       if (server) {
-        const runningServer = this.runner.start(this.prepareCommand(server, platform, instance));
+        const runningServer = this.runner.start(
+          this.prepareCommand(
+            {
+              ...server,
+              env: {
+                ...server.env,
+                [STORYBOOK_SMOKE_MODE]: mode,
+              },
+            },
+            platform,
+            instance,
+          ),
+        );
         backgroundCommands.push(runningServer);
         readiness.push(this.waitForUrl(new URL('/index.json', serverUrl).href, runningServer, smoke.startupTimeoutMs));
+        if (mode === 'stories-and-tests') {
+          readiness.push(this.waitForUrl(loopbackUrl(instance.driverPort, '/status'), runningServer, smoke.startupTimeoutMs));
+        }
+      } else if (mode === 'stories-and-tests') {
+        throw new Error('The stories-and-tests smoke mode requires the Storybook server and embedded Desktop Driver.');
       }
       if (metro) {
         const runningMetro = this.runner.start(this.prepareCommand(metro, platform, instance));
@@ -217,6 +250,15 @@ export class DesktopStorybookCli {
       await Promise.all(readiness);
       await this.executeAction('run', platform, instance);
       await this.renderEveryStory(serverUrl, smoke.settleMs ?? 0);
+      if (mode === 'stories-and-tests') {
+        const result = await this.runSmokeTests({
+          driverUrl: loopbackUrl(instance.driverPort),
+          platform,
+          projectRoot: this.config.projectRoot,
+          targetId: `${this.config.appName}-${platform}`.toLowerCase(),
+        });
+        this.output.write(`${formatDesktopStorybookSmokeTestSummary(result)}\n`);
+      }
     } catch (error) {
       primaryFailure = error;
     } finally {
@@ -531,6 +573,26 @@ function validateDriverHost(host: string | undefined): void {
 
 function resolveFromProject(projectRoot: string, target: string): string {
   return path.isAbsolute(target) ? target : path.resolve(projectRoot, target);
+}
+
+function resolveSmokeMode(mode: DesktopSmokeMode | undefined): DesktopSmokeMode {
+  const resolvedMode = mode ?? 'stories';
+  if (!desktopSmokeModes.includes(resolvedMode)) {
+    throw new TypeError(`Smoke mode must be one of ${desktopSmokeModes.join(', ')}. Received "${resolvedMode}".`);
+  }
+  return resolvedMode;
+}
+
+function withEnvironment(plan: DesktopCommandPlan, environment: Readonly<Record<string, string>>): DesktopCommandPlan {
+  const commands = Array.isArray(plan) ? plan : [plan];
+  const prepared = commands.map((command) => ({
+    ...command,
+    env: {
+      ...command.env,
+      ...environment,
+    },
+  }));
+  return Array.isArray(plan) ? prepared : prepared[0];
 }
 
 function delay(milliseconds: number): Promise<void> {

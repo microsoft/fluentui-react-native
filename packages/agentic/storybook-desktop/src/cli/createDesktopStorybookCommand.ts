@@ -1,5 +1,6 @@
 import { Command, Option } from 'commander';
 
+import { desktopSmokeModes, type DesktopSmokeMode } from '../config/commands.js';
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
 import type { DesktopStorybookCliOptions, DesktopStorybookServerOptions } from './DesktopStorybookCli.js';
@@ -14,6 +15,7 @@ type PlatformFlags = {
 
 type ServerFlags = PlatformFlags & DesktopStorybookServerOptions;
 type ManifestFlags = PlatformFlags & { out?: string };
+type SmokeFlags = PlatformFlags & { mode: DesktopSmokeMode };
 
 export type CreateDesktopStorybookCommandOptions = DesktopStorybookCliOptions & {
   config?: DesktopStorybookConfig;
@@ -38,6 +40,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
           fetch: options.fetch,
           output: options.output,
           isPortAvailable: options.isPortAvailable,
+          runSmokeTests: options.runSmokeTests,
         }),
     ));
 
@@ -49,7 +52,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
   addActionCommand(program, 'bundle', 'Generate stories and create the platform JavaScript bundle.', getApi);
   addActionCommand(program, 'run', 'Build and launch the native Storybook app.', getApi);
   addActionCommand(program, 'build', 'Build the native Storybook app without launching it.', getApi);
-  addActionCommand(program, 'smoke', 'Launch the app, render every story, and shut the app down.', getApi);
+  addSmokeCommand(program, getApi);
 
   return program;
 }
@@ -91,7 +94,7 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
 
 function addActionCommand(
   program: Command,
-  action: 'prep' | 'bundle' | 'run' | 'build' | 'smoke',
+  action: 'prep' | 'bundle' | 'run' | 'build',
   description: string,
   getApi: () => Promise<DesktopStorybookCli>,
 ): void {
@@ -101,6 +104,22 @@ function addActionCommand(
     const api = await getApi();
     const platform = resolvePlatform(flags, api);
     await api[action](platform);
+  });
+}
+
+function addSmokeCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+  const command = program
+    .command('smoke')
+    .description('Launch the app, traverse every story, optionally run authored tests, and shut the app down.')
+    .addOption(
+      new Option('--mode <mode>', 'coverage mode: traverse stories only, or traverse stories and run authored tests')
+        .choices([...desktopSmokeModes])
+        .default('stories'),
+    );
+  addPlatformOptions(command);
+  command.action(async (flags: SmokeFlags) => {
+    const api = await getApi();
+    await api.smoke(resolvePlatform(flags, api), { mode: flags.mode });
   });
 }
 

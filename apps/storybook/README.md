@@ -22,7 +22,8 @@ selected while navigating between stories.
 The macOS, Windows Fabric, and Win32 Paper native endpoints live in this workspace and
 share the same entry point and generated story catalog. Story discovery and native identity stay
 app-owned, while the platform-neutral UI, configuration helpers, and `storybook-desktop` CLI come
-from the shared package. The app's declared native scripts are compatibility aliases over that CLI.
+from the shared package. The app exposes only the shared CLI entry points; native lifecycle scripts
+remain package-owned.
 
 ## Layout
 
@@ -89,8 +90,11 @@ Windows Fabric native library; its Paper implementation remains built into the p
 
 ```powershell
 # from this directory
-# Complete unattended lifecycle
-yarn storybook smoke --windows
+# Traverse the complete story catalog
+yarn storybook smoke --windows --mode stories
+
+# Traverse the complete catalog, then run authored desktop-e2e plans
+yarn storybook smoke --windows --mode stories-and-tests
 
 # Individual development stages
 yarn storybook prep --windows
@@ -98,10 +102,11 @@ yarn storybook build --windows
 yarn storybook run --windows
 ```
 
-Requires Visual Studio 2022 with the React Native Windows build prerequisites. The generated
+`stories` is the default smoke mode. Requires Visual Studio 2022 with the React Native Windows build prerequisites. The generated
 solution, `ExperimentalFeatures.props`, registrations, and build outputs are git-ignored. The shared smoke command
 bundles the Windows catalog, generates the solution, starts the platform-scoped channel server, builds and registers the Debug app, starts Metro,
-launches the exact app window, renders every indexed story, and stops only the processes it recorded. Logs are written
+launches the exact app window, renders every indexed story, optionally runs the component-authored plans, and stops only the processes it recorded.
+During Stage 1 the authored plans use the manifest-derived fake target; the full story traversal remains native. Logs are written
 beneath `artifacts/windows/smoke-logs`.
 
 Storybook's development bundle intentionally contains separate `pretty-format` and `react-is`
@@ -124,7 +129,10 @@ yarn storybook bundle --win32
 yarn storybook run --win32
 
 # Complete CI-ready bundle, native UX, and story traversal lifecycle
-yarn storybook smoke --win32
+yarn storybook smoke --win32 --mode stories
+
+# Run the same traversal followed by authored desktop-e2e plans
+yarn storybook smoke --win32 --mode stories-and-tests
 ```
 
 The host window title is `Agentic Components Storybook (Win32)` so automation
@@ -167,8 +175,10 @@ include them. The three standalone Callout stories run through the same Paper
 render through the Win32 control-plane smoke sweep.
 Run `yarn storybook-server --win32` with this endpoint so the server exposes the
 same 130-story index as the app; the ordinary `storybook-server` command keeps the full macOS and Windows catalog.
-`yarn storybook smoke --win32` additionally verifies the package-owned desktop regions, resize handles, and addon
-surface, the complete 130-story sweep, host liveness, and ownership-safe cleanup. Logs are written
+`yarn storybook smoke --win32` defaults to `--mode stories` and verifies the package-owned desktop regions, resize
+handles, addon surface, the complete 130-story sweep, host liveness, and ownership-safe cleanup. The
+`stories-and-tests` mode then runs the component-authored plans through the Stage 1 manifest-derived fake target. Native
+plan execution begins with the Stage 2 providers. Logs are written
 beneath `artifacts/win32/smoke-logs`. A native `build --win32` operation is intentionally unsupported because this
 endpoint uses the prebuilt REX host.
 

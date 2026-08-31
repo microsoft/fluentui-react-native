@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import { createWindowsSmokeCommand, createWin32RunCommand, createWin32SmokeCommand } from './commands';
+import { createWindowsSmokeCommand, createWindowsSmokeOptions, createWin32RunCommand, createWin32SmokeCommand } from './commands';
 import { makeDesktopStorybookConfig } from './makeDesktopStorybookConfig';
 import type { Platforms } from './platforms';
 
@@ -145,6 +145,18 @@ describe('DesktopStorybookConfig', () => {
         STORYBOOK_WINDOWS_CONFIGURATION: 'Debug',
         STORYBOOK_WINDOWS_WINDOW_TITLE: 'Consumer Storybook',
       },
+    });
+    expect(createWindowsSmokeOptions({ windowTitle: 'Consumer Storybook' })).toEqual({
+      command: {
+        command: 'pwsh',
+        args: ['-NoProfile', '-File', path.join(configDirectory, 'smoke-windows.ps1')],
+        env: {
+          STORYBOOK_WINDOWS_CONFIGURATION: 'Debug',
+          STORYBOOK_WINDOWS_WINDOW_TITLE: 'Consumer Storybook',
+        },
+      },
+      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- React Native Test App uses loopback Metro
+      metroUrl: 'http://127.0.0.1:8081/status',
     });
     expect(createWin32RunCommand({ component: 'ConsumerStorybook', windowTitle: 'Consumer Storybook (Win32)' })).toEqual({
       command: process.execPath,

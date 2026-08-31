@@ -67,7 +67,7 @@ root filename.
 | `bundle` | Generate the selected story catalog and produce its release JavaScript bundle through `rnx-cli`.  |
 | `build`  | Build the selected native project without launching it.                                           |
 | `run`    | Build and launch the selected native app or configured prebuilt host.                             |
-| `smoke`  | Own the server, Metro, app launch, all-story traversal, app shutdown, and service cleanup.        |
+| `smoke`  | Own the server, Metro, app launch, all-story traversal, optional authored tests, and cleanup.     |
 
 The TypeScript API exposes the same operations through
 `DesktopStorybookCli`. Use it when a test coordinator needs injected process
@@ -115,16 +115,22 @@ Metro process is required.
 Use `smoke` for the standard renderability gate:
 
 ```sh
-yarn storybook smoke --macos
-yarn storybook smoke --windows
-yarn storybook smoke --win32
+yarn storybook smoke --macos --mode stories
+yarn storybook smoke --windows --mode stories
+yarn storybook smoke --win32 --mode stories
+
+yarn storybook smoke --windows --mode stories-and-tests
+yarn storybook smoke --win32 --mode stories-and-tests
 ```
 
-It is preferable to a shell chain because it owns the exact server, Metro, app
-identity, traversal, and cleanup. Consumer configuration should provide any
-platform-specific app stop command. For Windows Fabric and the prebuilt REX
-Win32 host, configure the package-owned commands returned by
-`createWindowsSmokeCommand`, `createWin32RunCommand`, and
+`stories` is the default and traverses the complete indexed catalog.
+`stories-and-tests` performs the same traversal and then runs the
+component-authored `desktop-e2e` plans against the Stage 1 manifest-derived
+fake target; native plan execution begins with the Stage 2 providers. Both modes are preferable to a shell
+chain because they own the exact server, Metro, app identity, traversal, test
+session, and cleanup. Consumer configuration should provide any platform-specific
+app stop command. For Windows Fabric and the prebuilt REX Win32 host, configure the package-owned commands returned by
+`createWindowsSmokeOptions`, `createWin32RunCommand`, and
 `createWin32SmokeCommand`; do not copy lifecycle scripts into the consumer.
 
 For a broader E2E suite, let the test coordinator own the service processes:

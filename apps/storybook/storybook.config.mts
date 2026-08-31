@@ -1,5 +1,5 @@
 import {
-  createWindowsSmokeCommand,
+  createWindowsSmokeOptions,
   createWin32RunCommand,
   createWin32SmokeCommand,
   makeDesktopStorybookConfig,
@@ -41,11 +41,9 @@ export default makeDesktopStorybookConfig({
   ],
   platformOptions: {
     windows: {
-      smoke: {
-        command: createWindowsSmokeCommand({
-          windowTitle: 'Agentic Components Storybook',
-        }),
-      },
+      smoke: createWindowsSmokeOptions({
+        windowTitle: 'Agentic Components Storybook',
+      }),
     },
     win32: {
       run: createWin32RunCommand(win32Host),
