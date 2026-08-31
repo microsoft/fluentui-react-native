@@ -1,0 +1,81 @@
+{
+  "name": "@fluentui-react-native/storybook-desktop",
+  "version": "0.1.0",
+  "description": "CLI and configuration for React Native desktop Storybook applications",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic/storybook-desktop"
+  },
+  "bin": {
+    "storybook-desktop": "./config/cli.cjs",
+    "storybook-server": "./config/server-cli.cjs"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "react-native": "./src/index.ts",
+      "import": "./lib/index.js",
+      "default": "./src/index.ts"
+    },
+    "./babel": "./config/babel.cjs",
+    "./config": {
+      "types": "./lib/config/index.d.ts",
+      "import": "./lib/config/index.js",
+      "default": "./src/config/index.ts"
+    },
+    "./driver": {
+      "types": "./lib/driver/index.d.ts",
+      "import": "./lib/driver/index.js",
+      "default": "./src/driver/index.ts"
+    },
+    "./cli": {
+      "types": "./lib/cli/index.d.ts",
+      "import": "./lib/cli/index.js",
+      "default": "./lib/cli/index.js"
+    },
+    "./server": "./config/server.cjs",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "fluentui-scripts clean",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "fluentui-scripts jest"
+  },
+  "dependencies": {
+    "@fluentui-react-native/desktop-driver": "workspace:*",
+    "@rnx-kit/tools-react-native": "catalog:",
+    "commander": "^14.0.2",
+    "regexpu-core": "^6.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native/babel-preset": "^0.81.0"
+  },
+  "furn": {
+    "jestPlatform": "react",
+    "knip": {
+      "ignoreDependencies": [
+        "@react-native/babel-preset"
+      ]
+    }
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "babel-preset-react-native"
+      ]
+    },
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

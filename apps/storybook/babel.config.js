@@ -1,8 +1,3 @@
-module.exports = (api) => {
-  const platform = api.caller((caller) => caller?.platform);
+const { createDesktopStorybookBabelConfig } = require('@fluentui-react-native/storybook-desktop/babel');
 
-  return {
-    presets: ['module:@react-native/babel-preset'],
-    plugins: platform === 'win32' ? [require.resolve('./scripts/transform-win32-unicode-regex.cjs')] : [],
-  };
-};
+module.exports = createDesktopStorybookBabelConfig;

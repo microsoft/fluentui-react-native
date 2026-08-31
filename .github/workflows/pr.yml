@@ -208,15 +208,15 @@ jobs:
       - name: Bundle macOS
         run: |
           set -eox pipefail
-          yarn bundle:macos
+          yarn storybook bundle --macos
         working-directory: apps/storybook
 
       - name: Pod install
-        run: yarn pods:macos
+        run: yarn storybook prep --macos
         working-directory: apps/storybook
 
-      - name: Build macOS app
-        run: yarn macos:build
+      - name: Run through storybook smoke tests
+        run: yarn storybook smoke --macos --mode stories-and-tests
         working-directory: apps/storybook
         env:
           CCACHE_DISABLE: 1
@@ -355,17 +355,35 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Bundle Windows
-        run: yarn bundle:windows
+      - name: Prep Windows Storybook
+        run: yarn storybook prep --windows
         working-directory: apps/storybook
 
-      - name: Generate RNW app
-        run: yarn install-windows-test-app --use-nuget
+      - name: Install Windows App Runtime 1.8
+        shell: pwsh
+        run: |
+          $installer = Join-Path $env:RUNNER_TEMP 'WindowsAppRuntimeInstall-x64.exe'
+          Invoke-WebRequest 'https://aka.ms/windowsappsdk/1.8/1.8.260804001/windowsappruntimeinstall-x64.exe' -OutFile $installer
+          & $installer --quiet
+          if ($LASTEXITCODE -ne 0) {
+            throw "Windows App Runtime installer exited with code $LASTEXITCODE."
+          }
+
+          $runtime = Get-AppxPackage -Name 'Microsoft.WindowsAppRuntime.1.8'
+          if (-not $runtime) {
+            throw 'Microsoft.WindowsAppRuntime.1.8 was not registered for the runner user.'
+          }
+
+      - name: Smoke test Windows Storybook
+        run: yarn storybook smoke --windows --mode stories-and-tests
         working-directory: apps/storybook
 
-      - name: Build RNW app
-        run: yarn rnx-cli run-windows --no-packager --no-deploy --no-launch
-        working-directory: apps/storybook
+      - name: Upload Windows Storybook artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Storybook_windows_Dump
+          path: apps/storybook/artifacts/windows
 
   win32:
     name: Win32 PR
@@ -414,7 +432,6 @@ jobs:
           path: |
             apps/E2E/reports
             apps/E2E/errorShots
-            apps/storybook/artifacts/win32
 
   win32-storybook:
     name: Win32 Storybook PR
@@ -436,9 +453,16 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Bundle Win32
-        run: yarn bundle:win32
+      - name: Smoke test Win32 Storybook
+        run: yarn storybook smoke --win32 --mode stories-and-tests
         working-directory: apps/storybook
+
+      - name: Upload Win32 Storybook artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Storybook_win32_Dump
+          path: apps/storybook/artifacts/win32
 
   check-changesets:
     name: Check for Changesets
