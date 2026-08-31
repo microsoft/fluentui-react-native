@@ -5,7 +5,7 @@ import { render } from '@testing-library/react-native';
 
 import { directComponent } from '@fluentui-react-native/framework-base';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Divider } from './divider';
 import type { DividerProps } from './divider.types';
@@ -38,7 +38,7 @@ describe('Divider', () => {
 
   it.each(['center', 'start', 'end'] as const)('resolves the %s layout', async (layout) => {
     const component = await renderDivider({ layout });
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const root = getRoot(component);
     const beforeLine = root.children[0] as { props: { style?: unknown } };
     const content = root.children[1] as { props: { style?: unknown } };
@@ -65,7 +65,7 @@ describe('Divider', () => {
 
   it('switches to vertical layout and uses vertical padding', async () => {
     const component = await renderDivider({ vertical: true, label: 'Section' });
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const root = getRoot(component);
     const beforeLine = root.children[0] as { props: { style?: unknown } };
     const content = root.children[1] as { props: { style?: unknown } };

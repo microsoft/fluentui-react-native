@@ -8,9 +8,22 @@ type MappingViolation = {
 type MappingInputs = {
   mapping: {
     schemaVersion: number;
+    reverse: {
+      interactionFallback: string;
+      canonical: Record<
+        string,
+        {
+          source: string;
+          omitted: string[];
+          reason: string;
+        }
+      >;
+      transforms: Record<string, string>;
+    };
     tokens: Record<string, unknown>;
   };
   nonFluentValues: Map<string, string>;
+  reverseProjection: Record<string, { source: string; fallback?: string; transform?: string }>;
   supportedTypePaths: Set<string>;
   themeProjection: Record<string, string>;
   unsupportedTypePaths: Set<string>;
@@ -18,14 +31,21 @@ type MappingInputs = {
 
 type MappingChecks = {
   assertMappingsConsistent(): void;
+  createMappingProjections(
+    mapping: MappingInputs['mapping'],
+    supportedTypePaths: Set<string>,
+  ): {
+    themeProjection: MappingInputs['themeProjection'];
+    reverseProjection: MappingInputs['reverseProjection'];
+    violations: MappingViolation[];
+  };
   formatMappingViolations(violations: MappingViolation[]): string;
   loadMappingInputs(): MappingInputs;
   validateMappingInputs(inputs: MappingInputs): MappingViolation[];
 };
 
-const { assertMappingsConsistent, formatMappingViolations, loadMappingInputs, validateMappingInputs } = jest.requireActual<MappingChecks>(
-  '../../../scripts/token-mappings/check-mappings.cjs',
-);
+const { assertMappingsConsistent, createMappingProjections, formatMappingViolations, loadMappingInputs, validateMappingInputs } =
+  jest.requireActual<MappingChecks>('../../../scripts/token-mappings/check-mappings.cjs');
 
 function cloneInputs(inputs: MappingInputs): MappingInputs {
   return structuredClone(inputs);
@@ -36,6 +56,14 @@ describe('Flex token mapping consistency', () => {
 
   it('keeps the checked-in mapping artifacts consistent', () => {
     expect(assertMappingsConsistent).not.toThrow();
+  });
+
+  it('deterministically derives both projections from the YAML source', () => {
+    const generated = createMappingProjections(inputs.mapping, inputs.supportedTypePaths);
+
+    expect(generated.violations).toEqual([]);
+    expect(generated.themeProjection).toEqual(inputs.themeProjection);
+    expect(generated.reverseProjection).toEqual(inputs.reverseProjection);
   });
 
   it('reports a conflicting Theme projection with both values', () => {
@@ -117,15 +145,109 @@ describe('Flex token mapping consistency', () => {
     });
   });
 
+  it('requires an explicit canonical source for every reverse collision', () => {
+    const changed = cloneInputs(inputs);
+    delete changed.mapping.reverse.canonical['colors.black'];
+
+    expect(validateMappingInputs(changed)).toContainEqual({
+      rule: 'reverse-canonical',
+      path: 'colors.black',
+      expected: 'an explicit canonical choice for the ambiguous Theme path',
+      actual: '<missing>',
+    });
+  });
+
+  it('rejects canonical sources outside the collision candidates', () => {
+    const changed = cloneInputs(inputs);
+    changed.mapping.reverse.canonical['colors.black'].source = 'color.notARealToken';
+
+    expect(validateMappingInputs(changed)).toContainEqual({
+      rule: 'reverse-canonical',
+      path: 'colors.black',
+      expected: 'one of ["color.expressionAchromaticHeavy","color.fixedBlack","color.shadow"]',
+      actual: 'color.notARealToken',
+    });
+  });
+
+  it('requires every non-canonical candidate and an omission reason', () => {
+    const changed = cloneInputs(inputs);
+    changed.mapping.reverse.canonical['colors.black'].omitted = ['color.expressionAchromaticHeavy'];
+    changed.mapping.reverse.canonical['colors.white'].reason = '';
+
+    const violations = validateMappingInputs(changed);
+
+    expect(violations).toContainEqual({
+      rule: 'reverse-omission',
+      path: 'colors.black',
+      expected: ['color.expressionAchromaticHeavy', 'color.shadow'],
+      actual: ['color.expressionAchromaticHeavy'],
+    });
+    expect(violations).toContainEqual({
+      rule: 'reverse-omission',
+      path: 'colors.white',
+      expected: 'a non-empty omission reason',
+      actual: '',
+    });
+  });
+
+  it('validates generated interaction fallbacks against declared Flex paths', () => {
+    const changed = cloneInputs(inputs);
+    changed.supportedTypePaths.delete('color.backgroundBrandHeavy');
+
+    expect(validateMappingInputs(changed)).toContainEqual({
+      rule: 'reverse-fallback',
+      path: 'colors.brandBackgroundHover',
+      expected: 'a declared Flex rest path',
+      actual: 'color.backgroundBrandHeavy',
+    });
+  });
+
+  it('rejects unknown reverse transforms', () => {
+    const changed = cloneInputs(inputs);
+    changed.mapping.reverse.transforms['colors.black'] = 'notARealTransform';
+
+    expect(validateMappingInputs(changed)).toContainEqual({
+      rule: 'reverse-transform',
+      path: 'colors.black',
+      expected: ['identity', 'numberToPx'],
+      actual: 'notARealTransform',
+    });
+  });
+
+  it('emits declared reverse transforms into the generated projection', () => {
+    const changed = cloneInputs(inputs);
+    changed.mapping.reverse.transforms['typography.sizes.body'] = 'numberToPx';
+
+    const generated = createMappingProjections(changed.mapping, changed.supportedTypePaths);
+
+    expect(generated.violations).toEqual([]);
+    expect(generated.reverseProjection['typography.sizes.body']).toEqual({
+      source: 'fontSize.functionalBodyMedium',
+      transform: 'numberToPx',
+    });
+  });
+
+  it('reports drift in the checked-in reverse projection', () => {
+    const changed = cloneInputs(inputs);
+    changed.reverseProjection['colors.black'] = { source: 'color.shadow' };
+
+    expect(validateMappingInputs(changed)).toContainEqual({
+      rule: 'reverse-projection',
+      path: 'colors.black',
+      expected: { source: 'color.fixedBlack' },
+      actual: { source: 'color.shadow' },
+    });
+  });
+
   it('rejects unknown mapping schema versions', () => {
     const changed = cloneInputs(inputs);
-    changed.mapping.schemaVersion = 2;
+    changed.mapping.schemaVersion = 3;
 
     expect(validateMappingInputs(changed)).toContainEqual({
       rule: 'schema',
       path: 'schemaVersion',
-      expected: 1,
-      actual: 2,
+      expected: 2,
+      actual: 3,
     });
   });
 });

@@ -1,8 +1,5 @@
-import { Appearance } from 'react-native';
-
-import type { ThemeColorDefinition } from '@fluentui-react-native/design/theming';
+import type { AppearanceOptions, ThemeColorDefinition } from '@fluentui-react-native/design/theming';
 import { colorGrey26 } from '@fluentui-react-native/design/tokens/global';
-import { getCurrentAppearance } from '@fluentui-react-native/design/theming';
 
 import type { ApplePalette } from './appleColors.types.ios';
 import { createiOSColorAliasTokens } from './createiOSAliasTokens';
@@ -50,14 +47,8 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
 }
 
 /** Creates a palette of colors for the apple theme, using the appropriate FluentUI Apple Palette based on appearance */
-export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean): ThemeColorDefinition {
+export function paletteFromAppleColors(isLightMode: boolean, mode: AppearanceOptions): ThemeColorDefinition {
   const fluentApple = isLightMode ? getFluentUIAppleLightPalette() : getFluentUIAppleDarkPalette();
-
-  const appearance = Appearance.getColorScheme();
-  let mode = getCurrentAppearance(appearance, 'light');
-  if (mode === 'dark' && isElevated) {
-    mode = 'darkElevated';
-  }
 
   const fluent2AliasColorTokens = createiOSColorAliasTokens(mode);
 

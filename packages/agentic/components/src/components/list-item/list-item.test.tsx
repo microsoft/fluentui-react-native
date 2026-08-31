@@ -5,7 +5,7 @@ import type { PressableProps, ViewStyle } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 import { Button } from '../button/button';
 import { ListItem } from './list-item';
 
@@ -45,7 +45,7 @@ describe('ListItem', () => {
   });
 
   it('forwards press and interaction handlers while updating visual state', async () => {
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
     const onHoverIn = jest.fn();
     const onPress = jest.fn();
     const component = await renderListItem({ content: 'Save', onHoverIn, onPress });
@@ -82,7 +82,7 @@ describe('ListItem', () => {
   });
 
   it('suppresses the selected fill in multiple selection mode', async () => {
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
     const component = await renderListItem({ content: 'Selected', selectionMode: 'multiple', selected: true });
 
     expect(getRootStyle(component)).toMatchObject({
@@ -173,7 +173,7 @@ describe('ListItem', () => {
   );
 
   it('renders a persistent dual-ring focus visual', async () => {
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
     const component = await renderListItem({ content: 'Focused' });
     const root = getRoot(component);
 

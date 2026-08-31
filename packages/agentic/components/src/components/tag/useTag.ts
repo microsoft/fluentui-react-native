@@ -78,7 +78,6 @@ export function useTag_unstable(props: TagProps): TagState {
     leadingIcon,
     dismissIcon,
     disabled,
-    appearance,
     layout,
     size,
     shape,
@@ -90,5 +89,6 @@ export function useTag_unstable(props: TagProps): TagState {
     userStyle,
     ...themeState,
     ...pressableState,
+    appearance,
   };
 }

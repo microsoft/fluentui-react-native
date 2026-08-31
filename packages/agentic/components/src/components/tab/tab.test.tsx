@@ -5,7 +5,7 @@ import type { ViewStyle } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Tab } from './tab';
 
@@ -36,7 +36,7 @@ describe('Tab', () => {
     const component = await renderTab({ controls: 'files-panel', content: 'Files' });
     const root = getRoot(component);
     const labels = component.getAllByText('Files', { includeHiddenElements: true });
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
 
     expect(root.props.accessibilityRole).toBe('tab');
     expect(root.props.accessibilityControls).toBe('files-panel');
@@ -68,7 +68,7 @@ describe('Tab', () => {
     const onPress = jest.fn();
     const component = await renderTab({ controls: 'files-panel', content: 'Files', onHoverIn, onPress, selected: true });
     const root = getRoot(component);
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
 
     expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundNeutralHeavy);
     await fireEvent(root, 'hoverIn', {});
@@ -83,7 +83,7 @@ describe('Tab', () => {
   it('uses a semibold ghost and visible label when selected', async () => {
     const component = await renderTab({ controls: 'files-panel', content: 'Files', selected: true });
     const labels = component.getAllByText('Files', { includeHiddenElements: true });
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
 
     expect(labels).toHaveLength(2);
     expect(StyleSheet.flatten(labels[0].props.style)).toMatchObject({
@@ -103,7 +103,7 @@ describe('Tab', () => {
     expect(root).toBeDisabled();
     expect(root.props.focusable).toBe(false);
     expect(root.props.accessibilityState).toEqual({ disabled: true, selected: true });
-    expect(getRootStyle(component).backgroundColor).toBe(useFlexTokens().color.backgroundNeutralHeavyDisabled);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralHeavyDisabled);
   });
 
   it('renders icon-only tabs with icon swap and accessible labels', async () => {
@@ -118,9 +118,9 @@ describe('Tab', () => {
 
     expect(root.props.accessibilityLabel).toBe('Settings');
     expect(getRootStyle(component)).toMatchObject({
-      borderRadius: useFlexTokens().borderRadius.circular,
-      paddingHorizontal: useFlexTokens().spacing.componentBase150,
-      paddingVertical: useFlexTokens().spacing.componentBase150,
+      borderRadius: defaultFlexTokens.borderRadius.circular,
+      paddingHorizontal: defaultFlexTokens.spacing.componentBase150,
+      paddingVertical: defaultFlexTokens.spacing.componentBase150,
     });
     expect(component.getByTestId('regular-icon').props.testID).toBe('regular-icon');
     expect(component.queryByTestId('filled-icon')).toBeNull();
@@ -146,15 +146,15 @@ describe('Tab', () => {
     await fireEvent(root, 'focus', {});
 
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: useFlexTokens().color.strokeFocusOuter,
-      borderWidth: useFlexTokens().strokeWidth.thick,
+      borderColor: defaultFlexTokens.color.strokeFocusOuter,
+      borderWidth: defaultFlexTokens.strokeWidth.thick,
     });
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
       'opacity',
     );
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: useFlexTokens().color.strokeFocusInner,
-      borderWidth: useFlexTokens().strokeWidth.thin,
+      borderColor: defaultFlexTokens.color.strokeFocusInner,
+      borderWidth: defaultFlexTokens.strokeWidth.thin,
     });
   });
 

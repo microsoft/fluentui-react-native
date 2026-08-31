@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { MenuItem } from './menu-item';
 import type { MenuItemProps } from './menu-item.types';
@@ -116,15 +116,15 @@ describe('MenuItem', () => {
     await fireEvent(root, 'focus', {});
 
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: useFlexTokens().color.strokeFocusOuter,
-      borderWidth: useFlexTokens().strokeWidth.thick,
+      borderColor: defaultFlexTokens.color.strokeFocusOuter,
+      borderWidth: defaultFlexTokens.strokeWidth.thick,
     });
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
       'opacity',
     );
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: useFlexTokens().color.strokeFocusInner,
-      borderWidth: useFlexTokens().strokeWidth.thin,
+      borderColor: defaultFlexTokens.color.strokeFocusInner,
+      borderWidth: defaultFlexTokens.strokeWidth.thin,
     });
   });
 

@@ -90,7 +90,7 @@ export type ButtonProps = ButtonStateProps & ComponentProps<ButtonSlots, ButtonE
  */
 export type ButtonState = ComponentState<ButtonStateSlots> &
   Required<ButtonStateProps> &
-  ThemeState &
+  Omit<ThemeState, 'appearance'> &
   PressableState & {
     focusVisualProps?: FocusVisualProps;
     /**

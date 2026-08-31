@@ -6,7 +6,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { directComponent, isDirectComponent } from '@fluentui-react-native/framework-base';
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { ListboxItem } from './listbox-item';
 
@@ -60,8 +60,8 @@ describe('ListboxItem', () => {
     const component = await renderListboxItem({ content: 'Choice', multiselect: true, selected: true });
     const root = component.getByRole('button');
 
-    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(useFlexTokens().color.backgroundNeutralTransparent);
-    expect(StyleSheet.flatten(component.getByText('Choice').props.style).fontWeight).toBe(useFlexTokens().fontWeight.functionalRegular);
+    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent);
+    expect(StyleSheet.flatten(component.getByText('Choice').props.style).fontWeight).toBe(defaultFlexTokens.fontWeight.functionalRegular);
     expect(component.getByText('✓')).toBeOnTheScreen();
   });
 
@@ -88,25 +88,25 @@ describe('ListboxItem', () => {
     const component = await renderListboxItem({ content: 'Choice' });
     const root = component.getByRole('button');
     await fireEvent(root, 'hoverIn', {});
-    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(useFlexTokens().color.hover.backgroundNeutralTransparent);
+    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.hover.backgroundNeutralTransparent);
 
     await fireEvent(root, 'pressIn', {});
-    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(useFlexTokens().color.pressed.backgroundNeutralTransparent);
+    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.pressed.backgroundNeutralTransparent);
 
     await fireEvent(root, 'focus', {});
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: useFlexTokens().color.strokeFocusOuter,
-      borderWidth: useFlexTokens().strokeWidth.thick,
+      borderColor: defaultFlexTokens.color.strokeFocusOuter,
+      borderWidth: defaultFlexTokens.strokeWidth.thick,
     });
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
       'opacity',
     );
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: useFlexTokens().color.strokeFocusInner,
-      borderWidth: useFlexTokens().strokeWidth.thin,
+      borderColor: defaultFlexTokens.color.strokeFocusInner,
+      borderWidth: defaultFlexTokens.strokeWidth.thin,
     });
     expect(StyleSheet.flatten(root.props.style)).not.toMatchObject({
-      outlineColor: useFlexTokens().color.strokeFocusOuter,
+      outlineColor: defaultFlexTokens.color.strokeFocusOuter,
       outlineStyle: 'solid',
     });
   });

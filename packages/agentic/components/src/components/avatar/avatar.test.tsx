@@ -5,7 +5,7 @@ import type { ViewStyle } from 'react-native';
 import { render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Avatar } from './avatar';
 
@@ -36,7 +36,7 @@ describe('Avatar', () => {
 
   it('uses the initials mode when initials are provided', async () => {
     const component = await renderAvatar({ accessibilityLabel: 'Lydia Mitchelson', initials: { children: 'lm' } });
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
 
     expect(component.getByText('LM', { includeHiddenElements: true })).toBeOnTheScreen();
     expect(getRootStyle(component)).toMatchObject({
@@ -64,7 +64,7 @@ describe('Avatar', () => {
       image: { source: { uri: 'avatar.png' }, testID: 'avatar-image' },
       size: 56,
     });
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
 
     expect(component.getByTestId('avatar-image', { includeHiddenElements: true }).props.resizeMode).toBe('cover');
     expect(StyleSheet.flatten(component.getByTestId('avatar-image', { includeHiddenElements: true }).props.style)).toMatchObject({
@@ -89,7 +89,7 @@ describe('Avatar', () => {
       initials: 'AB',
       size: 120,
     });
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
 
     expect(getRootStyle(component)).toMatchObject({
       outlineColor: tokens.color.strokeBrandLoud,
@@ -102,7 +102,7 @@ describe('Avatar', () => {
   });
 
   it('applies the correct size and initials scale across the supported sizes', async () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const sizes = [
       [16, tokens.spacing.componentBase50, tokens.fontSize.functionalCaption],
       [20, tokens.spacing.componentBase50, tokens.fontSize.functionalCaption],

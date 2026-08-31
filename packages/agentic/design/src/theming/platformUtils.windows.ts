@@ -6,7 +6,7 @@ import type { AppearanceOptions, Theme, ThemeOptions } from './types/Theme.types
 export { setIsHighContrast } from './platformUtils.defaults';
 
 export function getCurrentAppearance(appearance: ThemeOptions['appearance'], fallback: AppearanceOptions): AppearanceOptions {
-  if (appearance === undefined) {
+  if (appearance === undefined || appearance === null) {
     return fallback;
   }
 

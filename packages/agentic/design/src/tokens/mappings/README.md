@@ -1,9 +1,21 @@
 # Flex token mapping maintenance
 
-`flex-token-map.yaml` is the authoring source for the grouped Flex token contract.
-`flex-from-theme.json` projects its `furn-theme` entries into the FURN `Theme`,
-and `nonFluentFlexTokens` supplies values for supported destinations without a
-Theme source.
+`flex-token-map.yaml` is the authoring source for the grouped Flex token contract
+and both legacy conversion directions. `flex-from-theme.json` projects legacy
+FURN `Theme` values into Flex destinations. `theme-from-flex.json` projects one
+canonical Flex value back to each representable legacy Theme path.
+
+The reverse projection is intentionally lossy. When several Flex roles share one
+legacy Theme path, `reverse.canonical` names the selected source, lists every
+omitted candidate, and records why that choice is stable. Interactive reverse
+entries fall back to their rest value when the authored hover or pressed map
+does not override that token. `reverse.transforms` owns any value conversion
+required by a target path.
+
+`nonFluentFlexTokens` supplies values for supported Flex destinations without a
+Theme source. A complete legacy Theme also requires values that Flex cannot
+represent; those values are supplied by the lazy compatibility base under
+`src/theming/compat`.
 
 ## Internal consistency
 
@@ -13,11 +25,13 @@ Run the offline-only consistency check from the repository root:
 yarn workspace @fluentui-react-native/design check:mappings
 ```
 
-The check validates the mapping schema, the bidirectional YAML-to-JSON
-projection, `nonFluentFlexTokens` coverage, interaction fallback ownership, and
+The check validates the mapping schema, both generated projections,
+`nonFluentFlexTokens` coverage, forward interaction fallback ownership,
+canonical reverse collisions, reverse rest fallbacks, reverse transforms, and
 every YAML destination against `FlexTokens` or `UnsupportedFlexTokens`.
-`scripts/codegen.cts` runs this check before generating files, and the package
-Jest suite exercises the same validator.
+`scripts/codegen.cts` regenerates both projection files and then runs the check
+before generating token constants. The package Jest suite exercises the same
+validator.
 
 ## Pinned x3 source
 

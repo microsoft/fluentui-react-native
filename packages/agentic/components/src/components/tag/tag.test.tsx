@@ -5,7 +5,7 @@ import type { ViewStyle } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Tag } from './tag';
 
@@ -111,7 +111,7 @@ describe('Tag', () => {
   });
 
   it('keeps foreground color stable while hover and pressed change background color', async () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const component = await renderTag({ appearance: 'primary', content: 'Engineering' });
     const root = getRoot(component);
     const text = component.getByText('Engineering');
@@ -142,15 +142,15 @@ describe('Tag', () => {
     await fireEvent(root, 'focus', {});
 
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: useFlexTokens().color.strokeFocusOuter,
-      borderWidth: useFlexTokens().strokeWidth.thick,
+      borderColor: defaultFlexTokens.color.strokeFocusOuter,
+      borderWidth: defaultFlexTokens.strokeWidth.thick,
     });
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
       'opacity',
     );
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: useFlexTokens().color.strokeFocusInner,
-      borderWidth: useFlexTokens().strokeWidth.thin,
+      borderColor: defaultFlexTokens.color.strokeFocusInner,
+      borderWidth: defaultFlexTokens.strokeWidth.thin,
     });
   });
 

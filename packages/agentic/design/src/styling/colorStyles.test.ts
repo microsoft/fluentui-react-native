@@ -1,5 +1,6 @@
 import type { FlexTokens } from '../tokens/flex.types';
-import { useFlexTokens } from '../tokens/useFlexTokens';
+import { defaultFlexTokens } from '../tokens/defaultTokens';
+import { defaultResolvedThemeAppearance } from '../theming/appearance';
 import type { ThemeState } from '../useThemeState';
 
 import { colorStyleDef, getThemedColorStyleFactory } from './colorStyles';
@@ -27,7 +28,8 @@ const definition: ColorStyleDefinition<ViewColorStyle, typeof stateLevels> = {
 
 function createThemeState(): ThemeState {
   return {
-    tokens: useFlexTokens(),
+    tokens: defaultFlexTokens,
+    appearance: defaultResolvedThemeAppearance,
     highContrast: false,
     themeStyles: {},
   };
@@ -35,7 +37,7 @@ function createThemeState(): ThemeState {
 
 describe('colorStyles', () => {
   it('resolves base and explicitly defined semantic colors', () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const styles = colorStyleDef(definition, stateLevels)(tokens);
 
     expect(styles.backgroundColor).toBe(tokens.color.backgroundNeutralSubtle);
@@ -50,7 +52,7 @@ describe('colorStyles', () => {
   });
 
   it('synthesizes hovered and pressed colors at the base and under root states', () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const styles = colorStyleDef(definition, stateLevels)(tokens);
 
     expect(styles.hovered).toEqual({
@@ -72,7 +74,7 @@ describe('colorStyles', () => {
   });
 
   it('falls back to rest colors when an interaction map does not override a semantic key', () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const levels = [['hovered']] as const;
     const styles = colorStyleDef<ViewColorStyle, typeof levels>(
       {
@@ -88,7 +90,7 @@ describe('colorStyles', () => {
   });
 
   it('preserves valid falsy color values', () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const zeroColorTokens = {
       ...tokens,
       color: {
@@ -108,7 +110,7 @@ describe('colorStyles', () => {
   });
 
   it('propagates interaction colors through later hierarchy levels', () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const levels = [['selected'], ['pressed', 'hovered'], ['highContrast']] as const;
     const threeLevelDefinition: ColorStyleDefinition<ViewColorStyle, typeof levels> = {
       backgroundColor: 'backgroundNeutralSubtle',
