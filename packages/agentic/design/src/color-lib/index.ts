@@ -20,14 +20,4 @@ export type {
 export { parseColorValue, rgbaToHex } from './parsing';
 export { oklchToRgb, rgbToOklch } from './conversion';
 export { compositeColor, compositeRgba, getContrastRatio, resolveContrastColors } from './compositing';
-export {
-  BEBOP_WARM_REFERENCE_BACKDROP,
-  getHoverColor,
-  getInteractionColor,
-  getInteractionColorOverrides,
-  getInteractionColors,
-  getPressColor,
-  INTERACTION_COLOR_DELTAS,
-  INTERACTIVE_COLOR_TOKENS,
-  isInverseInteractionToken,
-} from './interaction';
+export { getHoverColor, getInteractionColor, getPressColor, isInverseInteractionToken } from './interaction';
