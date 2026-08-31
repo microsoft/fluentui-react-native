@@ -107,6 +107,34 @@ function Invoke-DesktopCli {
   }
 }
 
+function Install-WindowsDebugDependencies {
+  $packageName = 'Microsoft.VCLibs.140.00.Debug.UWPDesktop'
+  $minimumVersion = [Version]'14.0.33728.0'
+  $installedPackage = Get-AppxPackage -Name $packageName |
+    Where-Object { $_.Architecture -eq 'X64' -and [Version]$_.Version -ge $minimumVersion } |
+    Select-Object -First 1
+  if ($installedPackage) {
+    return
+  }
+
+  $sdkRoot = Join-Path ${env:ProgramFiles(x86)} 'Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs.Desktop'
+  $frameworkPackage = Get-ChildItem -LiteralPath $sdkRoot -Filter 'Microsoft.VCLibs.x64.Debug.14.00.Desktop.appx' -Recurse `
+    -ErrorAction SilentlyContinue |
+    Sort-Object FullName -Descending |
+    Select-Object -First 1
+  if (-not $frameworkPackage) {
+    throw "Could not find the $packageName framework beneath '$sdkRoot'."
+  }
+
+  Add-AppxPackage -Path $frameworkPackage.FullName
+  $installedPackage = Get-AppxPackage -Name $packageName |
+    Where-Object { $_.Architecture -eq 'X64' -and [Version]$_.Version -ge $minimumVersion } |
+    Select-Object -First 1
+  if (-not $installedPackage) {
+    throw "$packageName $minimumVersion or newer was not registered for the current user."
+  }
+}
+
 function Register-WindowsApp {
   $manifestPath = Join-Path $projectRoot "windows\ReactApp.Package\bin\x64\$Configuration\AppxManifest.xml"
   if (-not (Test-Path -LiteralPath $manifestPath)) {
@@ -120,6 +148,7 @@ function Register-WindowsApp {
   if ($installedPackage) {
     Remove-AppxPackage -Package $installedPackage.PackageFullName
   }
+  Install-WindowsDebugDependencies
   Add-AppxPackage -Register $manifestPath
 
   $registeredPackage = Get-AppxPackage -Name $identityName

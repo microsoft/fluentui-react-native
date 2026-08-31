@@ -307,8 +307,7 @@ describe('runDesktopStoryTests', () => {
       const session = await client.newSession({
         alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
       });
-      setTimeout(() => controller.abort(), 10);
-      const result = await runDesktopStoryTests({
+      const running = runDesktopStoryTests({
         endpoint: 'windows',
         manifest,
         platformName: 'windows',
@@ -316,6 +315,9 @@ describe('runDesktopStoryTests', () => {
         signal: controller.signal,
         targetId: harness.target.id,
       });
+      await waitUntil(() => harness.host.actions.some(({ type }) => type === 'actions-start'));
+      controller.abort();
+      const result = await running;
 
       expect(result).toMatchObject({ status: 'failed', tests: [{ status: 'cancelled' }] });
       const completed = harness.host.actions.findIndex(({ type }) => type === 'actions');
@@ -347,4 +349,14 @@ function makeManifest(tests: DesktopStoryTests): DesktopStoryManifest {
     portablePlanDigest: 'portable-digest',
     schemaVersion: 1,
   };
+}
+
+async function waitUntil(predicate: () => boolean, timeoutMs = 1000): Promise<void> {
+  const deadline = Date.now() + timeoutMs;
+  while (!predicate()) {
+    if (Date.now() >= deadline) {
+      throw new Error('Timed out waiting for the expected test condition.');
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1));
+  }
 }
