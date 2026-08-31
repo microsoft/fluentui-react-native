@@ -77,7 +77,6 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     content,
     contentHidden,
     disabled,
-    appearance: appearance ?? 'secondary',
     size,
     shape: shape ?? (iconOnly ? 'circle' : 'rounded'),
     iconPosition,
@@ -87,5 +86,6 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     userStyle,
     ...themeState,
     ...pressableState,
+    appearance: appearance ?? 'secondary',
   };
 }

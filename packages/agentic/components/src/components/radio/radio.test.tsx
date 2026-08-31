@@ -5,7 +5,7 @@ import type { ComponentProps } from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Radio } from './radio';
 
@@ -61,7 +61,7 @@ describe('Radio', () => {
   });
 
   it('resolves unselected colors and layout tokens', async () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const component = await renderRadio({ label: 'Choice' });
 
     expect(getRootStyle(component)).toMatchObject({
@@ -91,7 +91,7 @@ describe('Radio', () => {
   });
 
   it('resolves selected colors and exposes checked accessibility state', async () => {
-    const tokens = useFlexTokens().color;
+    const tokens = defaultFlexTokens.color;
     const component = await renderRadio({ label: 'Choice', selected: true });
     const root = getRoot(component);
 
@@ -105,7 +105,7 @@ describe('Radio', () => {
   });
 
   it('updates interaction colors on hover and press', async () => {
-    const tokens = useFlexTokens().color;
+    const tokens = defaultFlexTokens.color;
     const component = await renderRadio({ label: 'Choice' });
     const root = getRoot(component);
 

@@ -41,7 +41,7 @@ function getAndroidThemeWorker(appearance: 'light' | 'dark'): Theme {
   return {
     colors: paletteFromAndroidColors(getFluentUIAndroidPalette(getAndroidPalette(appearance))),
     typography: androidTypography(),
-    shadows: androidShadows(),
+    shadows: androidShadows(appearance),
     spacing: androidSpacing(),
     components: androidComponents,
     host: { appearance },

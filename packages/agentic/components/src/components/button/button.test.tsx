@@ -5,7 +5,7 @@ import type { PressableProps, ViewStyle } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Button } from './button';
 import type { ButtonAppearance } from './button.types';
@@ -154,7 +154,7 @@ describe('Button', () => {
   it('reserves the selected label width in both selected states so toggling cannot reflow', async () => {
     const unselected = await renderButton({ content: 'Favorite', selected: false });
     const selected = await renderButton({ content: 'Favorite', selected: true });
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
 
     for (const component of [unselected, selected]) {
       const labels = component.getAllByText('Favorite', { includeHiddenElements: true });
@@ -228,7 +228,7 @@ describe('Button', () => {
   ] as const)(
     'resolves visible interaction feedback for the %s appearance',
     async (appearance, restBackground, restBorder, interactionBackground, interactionBorder) => {
-      const colors = useFlexTokens().color;
+      const colors = defaultFlexTokens.color;
       const component = await renderButton({ appearance, content: appearance });
       const root = getRoot(component);
 
@@ -298,7 +298,7 @@ describe('Button', () => {
   ] as const)(
     'resolves selected %s colors by interaction state',
     async (appearance, background, border, foreground, disabledBackground, disabledBorder) => {
-      const colors = useFlexTokens().color;
+      const colors = defaultFlexTokens.color;
       const component = await renderButton({ appearance, content: appearance, selected: true });
       const root = getRoot(component);
       const getForegroundColor = () =>

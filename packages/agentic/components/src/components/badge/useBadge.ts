@@ -85,7 +85,6 @@ export function useBadge_unstable(props: BadgeProps): BadgeState {
     content,
     leadingIcon,
     trailingIcon,
-    appearance,
     color,
     size,
     shape,
@@ -98,5 +97,6 @@ export function useBadge_unstable(props: BadgeProps): BadgeState {
     hasTrailingIcon,
     userStyle,
     ...themeState,
+    appearance,
   };
 }

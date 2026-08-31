@@ -5,7 +5,7 @@ import type { ComponentProps } from 'react';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens, defaultResolvedThemeAppearance } from '@fluentui-react-native/design/testing';
 import { directComponent } from '@fluentui-react-native/framework-base';
 
 import { Switch } from './switch';
@@ -121,7 +121,7 @@ describe('Switch', () => {
   });
 
   it('renders the persistent dual-ring focus visual on the hit area', async () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const component = await renderSwitch({ label: 'Wi-Fi', labelAfter: false });
     const root = component.getByRole('switch', { name: 'Wi-Fi' });
 
@@ -186,9 +186,18 @@ describe('Switch', () => {
     ['disabled unchecked', false, true, false, false],
     ['disabled checked', true, true, false, false],
   ] as const)('resolves switch token colors for %s', async (_label, checked, disabled, hovered, pressed) => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const colors = tokens.color;
-    const state = { checked, disabled, hovered, pressed, highContrast: false, themeStyles: {}, tokens } as SwitchState;
+    const state = {
+      checked,
+      disabled,
+      hovered,
+      pressed,
+      appearance: defaultResolvedThemeAppearance,
+      highContrast: false,
+      themeStyles: {},
+      tokens,
+    } as SwitchState;
     const baseBackgroundKey = checked ? 'backgroundNeutralHeavy' : 'backgroundNeutralTransparent';
     const baseBorderKey = checked ? 'strokeNeutralHeavy' : 'foregroundNeutralSecondary';
     const baseThumbKey = checked ? 'foregroundNeutralOnloud' : 'foregroundNeutralSecondary';
@@ -225,7 +234,7 @@ describe('Switch', () => {
   });
 
   it('uses the documented thumb translation distance', () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
 
     expect(getSwitchThumbTranslateDistance({ tokens })).toBe(20);
   });

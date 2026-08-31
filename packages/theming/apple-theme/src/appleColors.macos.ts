@@ -2,7 +2,6 @@ import type { ThemeColorDefinition, AppearanceOptions } from '@fluentui-react-na
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 
 import type { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
-import { getIsHighContrast } from './appleHighContrast.macos';
 import { createMacOSColorAliasTokens } from './createMacOSAliasTokens';
 
 /** Creates a Palette of PlatformColors defined for macOS */
@@ -257,10 +256,10 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
 /** Creates a palette of colors for the apple theme, given the FluentUI Apple Palette and Apple Semantic Palette
  * The fallback palette is loaded while we wait for  the native theming module to load, or if the module is not found
  */
-export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinition {
+export function fallbackApplePalette(mode: AppearanceOptions, highContrast: boolean): ThemeColorDefinition {
   const fluentUIApple = getFluentUIApplePalette();
   const applePlatform = getAppleSemanticPalette();
-  const macOSAliasColorTokens = createMacOSColorAliasTokens(mode, getIsHighContrast());
+  const macOSAliasColorTokens = createMacOSColorAliasTokens(mode, highContrast);
 
   return {
     ...macOSAliasColorTokens,

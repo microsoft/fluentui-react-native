@@ -1,7 +1,7 @@
 import { NativeEventEmitter, TurboModuleRegistry } from 'react-native';
 
 import { fallbackGetPalette, fallbackOfficeModule } from './fallbackOfficeModule';
-import { setCurrentHostThemeSetting } from './hostThemeSetting';
+import { setCurrentHostThemeState } from './hostThemeSetting';
 import type { OfficeThemingModule } from './officeThemingModule';
 
 /**
@@ -22,6 +22,7 @@ function themeGetConstants(): ReturnType<OfficeThemingModule['getConstants']> {
 let themingModule: OfficeThemingModule = undefined;
 let themingModuleConstants: ReturnType<OfficeThemingModule['getConstants']> = undefined;
 let themingModuleEmitter: NativeEventEmitter = undefined;
+
 export function getThemingModule(): [OfficeThemingModule, NativeEventEmitter | undefined] {
   if (!themingModule) {
     const module = TurboModuleRegistry.get<OfficeThemingModule>('Theming');
@@ -30,7 +31,12 @@ export function getThemingModule(): [OfficeThemingModule, NativeEventEmitter | u
       if (!isInstantiated) {
         // We need to store the host theme so that when themes are created
         // they can use this information.
-        setCurrentHostThemeSetting(module.getConstants().initialHostThemeSetting);
+        const initialConstants = module.getConstants();
+        setCurrentHostThemeState({
+          hostThemeSetting: initialConstants.initialHostThemeSetting ?? '',
+          colorScheme: initialConstants.initialColorScheme,
+          isHighContrast: initialConstants.initialIsHighContrast,
+        });
         isInstantiated = true;
       }
 

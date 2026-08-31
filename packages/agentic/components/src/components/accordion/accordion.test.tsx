@@ -6,7 +6,7 @@ import type { TextProps, TextStyle, ViewProps, ViewStyle } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 import { directComponent } from '@fluentui-react-native/framework-base';
 
 import { Accordion } from './accordion';
@@ -110,7 +110,7 @@ describe('Accordion', () => {
   });
 
   it('renders hover and pressed header feedback with the resolved foreground color', async () => {
-    const colors = useFlexTokens().color;
+    const colors = defaultFlexTokens.color;
     const component = await renderAccordion({});
     const header = getHeader(component);
 

@@ -4,7 +4,7 @@ import type { ColorValue, ViewStyle } from 'react-native';
 
 import { render, waitFor } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Spinner } from './spinner';
 
@@ -59,7 +59,7 @@ describe('Spinner', () => {
     const svg = getSvg(component);
     const track = getTrack(component);
     const indicator = getIndicator(component);
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
 
     expect(root.props.accessibilityRole).toBe('progressbar');
     expect(root.props.accessibilityState).toEqual({ busy: true });
@@ -87,7 +87,7 @@ describe('Spinner', () => {
   ] as const)('resolves the %s size', async (size, diameter, strokeWidthToken) => {
     jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(true);
     const component = await renderSpinner({ accessibilityLabel: size, size });
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const track = getTrack(component);
     const indicator = getIndicator(component);
 

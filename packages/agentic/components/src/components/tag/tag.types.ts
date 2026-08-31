@@ -39,7 +39,7 @@ export type TagProps = TagStateProps & ComponentProps<TagSlots, TagRootProps>;
 
 export type TagState = ComponentState<TagSlots> &
   Required<TagStateProps> &
-  ThemeState &
+  Omit<ThemeState, 'appearance'> &
   PressableState & {
     focusVisualProps?: FocusVisualProps;
     hasContent: boolean;

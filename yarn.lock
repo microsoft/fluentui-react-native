@@ -2775,6 +2775,7 @@ __metadata:
     "@babel/core": "catalog:"
     "@babel/plugin-transform-react-jsx": "catalog:"
     "@fluentui-react-native/components": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
     "@react-native-community/cli": "npm:^20.0.0"

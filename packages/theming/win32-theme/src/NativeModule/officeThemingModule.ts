@@ -1,11 +1,15 @@
 import type { NativeModule, ColorValue } from 'react-native';
 
-import type { OfficePalette, Typography } from '@fluentui-react-native/design/theming';
+import type { OfficePalette, ThemeColorScheme, Typography } from '@fluentui-react-native/design/theming';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type ObjectBase = {};
 
-export type PlatformDefaultsChangedArgs = { hostThemeSetting: string };
+export type PlatformDefaultsChangedArgs = {
+  hostThemeSetting: string;
+  colorScheme?: ThemeColorScheme;
+  isHighContrast?: boolean;
+};
 export type PlatformDefaultsChangedCallback = (args?: PlatformDefaultsChangedArgs) => void;
 
 export interface CxxException {
@@ -27,15 +31,19 @@ export interface NativeColorNames {
   Sepias: string[];
 }
 
+export interface OfficeThemingConstants {
+  typography: ObjectBase;
+  fluentTypography: Typography;
+  ramps: NativeColorRamps;
+  rampNames: NativeColorNames;
+  initialHostThemeSetting?: string;
+  initialColorScheme?: ThemeColorScheme;
+  initialIsHighContrast?: boolean;
+}
+
 export interface OfficeThemingModule extends NativeModule {
   getPalette(palette?: string): OfficePalette | CxxException;
-  getConstants(): {
-    typography: ObjectBase; // TODO: figure out why this is not a real type
-    fluentTypography: Typography;
-    ramps: NativeColorRamps;
-    rampNames: NativeColorNames;
-    initialHostThemeSetting?: string;
-  };
+  getConstants(): OfficeThemingConstants;
 }
 
 export interface IEventEmitter {

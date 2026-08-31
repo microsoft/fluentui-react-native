@@ -39,6 +39,24 @@
       "import": "./lib/theming/index.js",
       "default": "./src/theming/index.ts"
     },
+    "./theming/legacy-source": {
+      "types": "./lib/theming/legacySource.d.ts",
+      "react-native": "./src/theming/legacySource.ts",
+      "import": "./lib/theming/legacySource.js",
+      "default": "./src/theming/legacySource.ts"
+    },
+    "./theming/compat": {
+      "types": "./lib/theming/compat/index.d.ts",
+      "react-native": "./src/theming/compat/index.ts",
+      "import": "./lib/theming/compat/index.js",
+      "default": "./src/theming/compat/index.ts"
+    },
+    "./theming/compat/defaults": {
+      "types": "./lib/theming/compat/defaultLegacyTheme.d.ts",
+      "react-native": "./src/theming/compat/defaultLegacyTheme.ts",
+      "import": "./lib/theming/compat/defaultLegacyTheme.js",
+      "default": "./src/theming/compat/defaultLegacyTheme.ts"
+    },
     "./testing": {
       "types": "./lib/testing/index.d.ts",
       "react-native": "./src/testing/index.ts",

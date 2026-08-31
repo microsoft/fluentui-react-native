@@ -1,13 +1,12 @@
 import type { Theme } from './types/Theme.types';
+import { platformAppearance, setPlatformHighContrast } from './platformAppearance';
 
 export { getCurrentAppearance } from './platformUtils.defaults';
 
-let isHighContrastEnabled = false;
-
-export function setIsHighContrast(isHighContrast: boolean) {
-  isHighContrastEnabled = isHighContrast;
+export function setIsHighContrast(isHighContrast: boolean): void {
+  setPlatformHighContrast(isHighContrast);
 }
 
 export function isHighContrast(_theme?: Theme): boolean {
-  return isHighContrastEnabled;
+  return platformAppearance.getSnapshot().contrast === 'highContrast';
 }
