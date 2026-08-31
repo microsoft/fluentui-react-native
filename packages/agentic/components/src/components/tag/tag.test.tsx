@@ -190,7 +190,7 @@ describe('Tag', () => {
   });
 
   it('keeps small icon-and-text spacing independent of circular shape', async () => {
-    const tokens = useFlexTokens();
+    const tokens = defaultFlexTokens;
     const component = await renderTag({
       content: 'Small',
       leadingIcon: { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' } },

@@ -5,7 +5,7 @@ import type { ViewStyle } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
-import { useFlexTokens } from '@fluentui-react-native/design';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Tab } from '../tab/tab';
 import { TabList } from './tablist';
@@ -217,7 +217,7 @@ describe('TabList', () => {
     );
     expect(StyleSheet.flatten(getRoot(component).props.style)).toMatchObject({
       flexDirection: 'row',
-      gap: useFlexTokens().spacing.componentBase100,
+      gap: defaultFlexTokens.spacing.componentBase100,
     });
   });
 });
