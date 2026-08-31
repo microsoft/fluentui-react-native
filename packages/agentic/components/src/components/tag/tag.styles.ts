@@ -129,8 +129,8 @@ function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): Style
       iconAndText: {
         circular: {
           borderRadius: borderRadius.circular,
-          gap: 0,
-          paddingHorizontal: spacing.componentBase100,
+          gap: getGapStyleValue(spacing.componentBase50),
+          paddingHorizontal: spacing.componentBase200,
           paddingVertical: spacing.componentBase100,
         },
         rounded: {

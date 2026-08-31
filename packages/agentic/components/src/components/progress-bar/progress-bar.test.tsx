@@ -51,6 +51,33 @@ describe('ProgressBar', () => {
     expect(component.getByText('Halfway there')).toBeOnTheScreen();
   });
 
+  it('allows determinate progress to decrease', async () => {
+    const component = await renderProgressBar({ progress: 80 });
+
+    await fireEvent(getTrack(component), 'layout', {
+      nativeEvent: { layout: { height: 4, width: 200, x: 0, y: 0 } },
+    });
+    expect(getIndicatorStyle(component).width).toBe(160);
+
+    await component.rerender(<ProgressBar progress={25} />);
+    expect(getIndicatorStyle(component).width).toBe(50);
+    expect(getRoot(component).props.accessibilityValue.now).toBe(25);
+  });
+
+  it('separates header content and omits an empty trailing group', async () => {
+    const component = await renderProgressBar({
+      showValidationIcon: true,
+      showValueText: false,
+      status: 'neutral',
+    });
+
+    expect(StyleSheet.flatten(component.getByTestId('progress-bar-header').props.style)).toMatchObject({
+      justifyContent: 'space-between',
+    });
+    expect(StyleSheet.flatten(component.getByText('Label').props.style)).toMatchObject({ flexGrow: 1 });
+    expect(component.queryByTestId('progress-bar-trailing')).toBeNull();
+  });
+
   it('shows a custom validation icon and error text when status is error', async () => {
     const component = await renderProgressBar({
       label: 'Uploading',

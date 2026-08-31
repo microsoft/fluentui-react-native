@@ -26,9 +26,9 @@ bindings:
       backgroundColor: color.strokeNeutralSubtle
     orientation:
       horizontal:
-        height: 1
+        height: strokeWidth.thin
       vertical:
-        width: 1
+        width: strokeWidth.thin
     layout:
       grow:
         flexBasis: 0
@@ -72,8 +72,6 @@ bindings:
     color: color.foregroundNeutralSecondary
 
 tokenGaps:
-  - binding: line.orientation.horizontal.height, line.orientation.vertical.width
-    detail: The line thickness is a literal 1 rather than the thin stroke-width token, so it does not scale with a density or stroke theme.
   - binding: icon.height, icon.width
     detail: The 20 by 20 icon box is a literal in useDividerStyles.ts and is not bound to a global size constant or component token.
   - binding: label.typography, icon.color

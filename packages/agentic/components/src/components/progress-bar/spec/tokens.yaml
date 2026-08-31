@@ -19,11 +19,13 @@ bindings:
     layout:
       alignItems: center
       flexDirection: row
+      justifyContent: space-between
       minWidth: 0
       gap: spacing.componentBase100
 
   label:
     layout:
+      flexGrow: 1
       flexShrink: 1
       minWidth: 0
     typography:

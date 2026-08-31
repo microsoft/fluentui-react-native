@@ -54,11 +54,6 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const reduceMotion = useReducedMotion() ?? false;
   const checkedProgress = React.useRef(new Animated.Value(checked ? 1 : 0)).current;
   const hasMounted = React.useRef(false);
-  const switchId = React.useId().replaceAll(':', '');
-  const beforeLabelId = `switch-${switchId}-before`;
-  const afterLabelId = `switch-${switchId}-after`;
-  const aboveLabelId = `switch-${switchId}-above`;
-
   const explicitAccessibleName =
     accessibilityLabel !== undefined ||
     accessibilityLabelledBy !== undefined ||
@@ -103,18 +98,6 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
         }
       : {
           accessibilityLabel: label,
-          accessibilityLabelledBy: [
-            hasBeforeLabel ? beforeLabelId : undefined,
-            hasAfterLabel ? afterLabelId : undefined,
-            hasAboveLabel ? aboveLabelId : undefined,
-          ].filter(Boolean) as string[],
-          'aria-labelledby': [
-            hasBeforeLabel ? beforeLabelId : undefined,
-            hasAfterLabel ? afterLabelId : undefined,
-            hasAboveLabel ? aboveLabelId : undefined,
-          ]
-            .filter(Boolean)
-            .join(' '),
         };
 
   const [pressableProps, pressableState] = usePressableState({

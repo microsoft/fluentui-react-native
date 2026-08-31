@@ -69,11 +69,11 @@
     },
     {
       "id": "progress-bar-monotonic-value",
-      "status": "deferred"
+      "status": "resolved"
     },
     {
       "id": "progress-bar-header-alignment",
-      "status": "deferred"
+      "status": "resolved"
     },
     {
       "id": "progress-bar-status-live-region",
@@ -81,7 +81,7 @@
     },
     {
       "id": "progress-bar-empty-trailing-group",
-      "status": "deferred"
+      "status": "resolved"
     }
   ],
   "requirements": [

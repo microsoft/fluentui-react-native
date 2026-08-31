@@ -60,8 +60,7 @@ primary emphasizes nothing.
 
 Use `small` inside dense surfaces such as list rows, and keep one size within a
 row. Prefer `rounded` for labeled tags; `circular` is for compact, pill-shaped
-treatments. Note that a small circular labeled tag is currently tighter than the
-rounded equivalent, which is a tracked divergence.
+treatments. Small circular and rounded labeled tags use the same spacing.
 
 ## Leading icons and the icon-only layout
 

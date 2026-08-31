@@ -61,6 +61,7 @@ export type CheckboxState = ComponentState<CheckboxStateSlots> &
   ThemeState &
   PressableState & {
     focusVisualProps?: FocusVisualProps;
+    focusVisible: boolean;
     indicatorIconColor?: ColorValue;
     indicatorIconSize: number;
     indicatorStyle: StyleProp<ViewStyle>;

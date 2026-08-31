@@ -2,10 +2,14 @@ import * as React from 'react';
 import { Pressable, Text } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { useControllableValue, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useControllableValue, useFocusVisible, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import type { CheckboxProps, CheckboxState, CheckboxStatus } from './checkbox.types';
+
+type NativeFocusPressableProps = React.ComponentProps<typeof Pressable> & {
+  enableFocusRing: boolean;
+};
 
 function getNextStatus(status: CheckboxStatus): CheckboxStatus {
   return status === 'checked' ? 'unchecked' : 'checked';
@@ -59,7 +63,7 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
   const rootAccessibilityLabel = accessibilityLabel ?? label;
   const rootAccessibilityHint = renderSecondaryText ? [accessibilityHint, secondaryText].filter(Boolean).join('. ') : accessibilityHint;
 
-  const [pressableProps, pressableState] = usePressableState({
+  const nativeProps: NativeFocusPressableProps = {
     ...rest,
     accessibilityHint: rootAccessibilityHint,
     accessibilityLabel: rootAccessibilityLabel,
@@ -71,9 +75,12 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     },
     accessible: rest.accessible ?? true,
     disabled,
+    enableFocusRing: false,
     focusable: rest.focusable ?? !disabled,
     onPress: handlePress,
-  });
+  };
+  const [focusVisibleProps, focusVisible] = useFocusVisible(nativeProps);
+  const [pressableProps, pressableState] = usePressableState(focusVisibleProps);
 
   const root = useSlot(Pressable, pressableProps);
   const labelText = useOptionalSlot(Text, showLabel ? { accessible: false, children: label, testID: 'checkbox-label' } : null);
@@ -88,6 +95,7 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     ...themeState,
     ...pressableState,
     disabled,
+    focusVisible,
     label,
     labelText,
     renderSecondaryText,

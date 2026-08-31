@@ -91,23 +91,24 @@ platforms; Checkbox adds no key handling of its own and does not intercept Tab.
 A disabled Checkbox sets `focusable` to `false` and is skipped by keyboard
 navigation.
 
-Checkbox does not suppress the react-native-windows native focus visual, so on
-Windows the platform indicator can draw alongside the shared focus visual. The
-shared visual stays mounted for the lifetime of the control and only changes
-visibility, which avoids creating border-bearing native views after mount.
+Checkbox suppresses the react-native-windows native focus visual so the shared
+dual-ring visual is the single indicator. Pointer focus hides that visual;
+keyboard and programmatic focus show it. The shared visual stays mounted for the
+lifetime of the control and only changes visibility, which avoids creating
+border-bearing native views after mount.
 
 No timed animation is present. Status, hover, press, and focus styling change on
 the next render, so reduced-motion settings need no separate branch.
 
 ## Divergences from Flex
 
-| ID                                       | Disposition | React Native contract                                                                                                                                                                                                            | Follow-up                                                                                                                    |
-| ---------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `checkbox-secondary-text-description`    | Accepted    | Secondary text is appended to the root accessibility hint rather than associated as a separate described-by target. React Native exposes no equivalent description relationship, and the hint is the platform-idiomatic channel. | None. Revisit only if React Native adds a description association.                                                           |
-| `checkbox-secondary-text-requires-label` | Accepted    | Secondary text renders only alongside a visible label, and a development warning fires otherwise. Flex treats the two visibility toggles as independent.                                                                         | None. The pairing keeps the label column from presenting supporting text with nothing to support.                            |
-| `checkbox-focus-visual-modality`         | Deferred    | The focus visual shows for any focus event, including focus taken by a pointer press. Flex restricts the ring to keyboard modality.                                                                                              | Requires focus-modality plumbing that is not available in the shared interaction hook.                                       |
-| `checkbox-native-focus-ring`             | Deferred    | The platform focus visual on Windows is left enabled, so two indicators can appear at once.                                                                                                                                      | Needs the same native focus-ring suppression that Button applies, validated against supported react-native-windows versions. |
-| `checkbox-owned-props-type-surface`      | Deferred    | The root type accepts role and checked or disabled state values that the implementation always overwrites.                                                                                                                       | Omit those owned keys from the exposed native-prop type in a separately reviewed API correction.                             |
+| ID                                       | Disposition | React Native contract                                                                                                                                                                                                            | Follow-up                                                                                         |
+| ---------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `checkbox-secondary-text-description`    | Accepted    | Secondary text is appended to the root accessibility hint rather than associated as a separate described-by target. React Native exposes no equivalent description relationship, and the hint is the platform-idiomatic channel. | None. Revisit only if React Native adds a description association.                                |
+| `checkbox-secondary-text-requires-label` | Accepted    | Secondary text renders only alongside a visible label, and a development warning fires otherwise. Flex treats the two visibility toggles as independent.                                                                         | None. The pairing keeps the label column from presenting supporting text with nothing to support. |
+| `checkbox-focus-visual-modality`         | Resolved    | The shared focus-modality hook suppresses the visual for pointer focus and shows it for keyboard or programmatic focus.                                                                                                          | Implemented in `useCheckbox.ts` and covered by interaction tests.                                 |
+| `checkbox-native-focus-ring`             | Resolved    | The native Windows focus ring is disabled so it cannot compete with the shared dual-ring visual.                                                                                                                                 | Implemented in `useCheckbox.ts` and covered by root-prop tests.                                   |
+| `checkbox-owned-props-type-surface`      | Deferred    | The root type accepts role and checked or disabled state values that the implementation always overwrites.                                                                                                                       | Omit those owned keys from the exposed native-prop type in a separately reviewed API correction.  |
 
 ## Conformance
 

@@ -110,14 +110,17 @@ describe('Spinner', () => {
     warn.mockRestore();
   });
 
-  it('starts continuous rotation when reduce motion is disabled', async () => {
+  it('shares continuous rotation when reduce motion is disabled', async () => {
     const loop = jest.spyOn(Animated, 'loop').mockReturnValue({ start: jest.fn(), stop: jest.fn() } as never);
     const timing = jest.spyOn(Animated, 'timing').mockReturnValue({ start: jest.fn(), stop: jest.fn() } as never);
     jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
 
     await renderSpinner({ accessibilityLabel: 'Loading messages' });
+    await renderSpinner({ accessibilityLabel: 'Loading contacts' });
 
     await waitFor(() => expect(loop).toHaveBeenCalled());
+    expect(loop).toHaveBeenCalledTimes(1);
+    expect(timing).toHaveBeenCalledTimes(1);
     expect(timing).toHaveBeenCalledWith(
       expect.any(Animated.Value),
       expect.objectContaining({

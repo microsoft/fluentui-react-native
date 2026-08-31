@@ -89,6 +89,7 @@ describe('Input', () => {
 
   it('renders the underline variant with a bottom edge indicator only', async () => {
     const component = await render(<Input placeholder="Underline" variant="underline" />);
+    expect(flattenStyle(getContents(component).props.style)).not.toHaveProperty('borderBottomWidth');
     expect(component.getByTestId('input-underline')).toBeOnTheScreen();
     expect(flattenStyle(component.getByTestId('input-underline').props.style)).toMatchObject({
       borderBottomWidth: 1,

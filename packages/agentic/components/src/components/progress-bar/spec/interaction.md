@@ -34,11 +34,10 @@ track, with a small floor so a narrow track still shows a visible segment.
 The value is clamped to the range `0` through `100`, and a missing or non-numeric
 value resolves to `0`.
 
-While the type stays determinate or static, the resolved value never decreases:
-each update keeps the larger of the previous and the incoming value. A change
-away from indeterminate resets the resolved value to the incoming one, so
-switching from an indeterminate bar to a measured bar snaps directly to the
-calculated value rather than easing from the looping segment.
+Determinate and static bars use the clamped incoming value directly, so they
+move forward or backward as the reported percentage changes. Switching from an
+indeterminate bar to a measured bar snaps directly to the calculated value
+rather than easing from the looping segment.
 
 ## Motion
 

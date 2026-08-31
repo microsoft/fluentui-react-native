@@ -4,13 +4,10 @@
 
 Skeleton is not a `Pressable`, exposes no press, hover, or focus handlers, and
 holds no interaction state. The root is not focusable by default, but a caller
-can opt it into focus through forwarded `ViewProps`. It also keeps the default
-React Native pointer behavior and can intercept input when layered over an
-interactive surface.
-
-The highlight overlay sets `pointerEvents="none"`, but the root does not.
-Callers must avoid placing Skeleton over an interactive target until the
-`skeleton-pointer-events` divergence is resolved.
+can opt it into focus through forwarded `ViewProps`. The root and highlight
+overlay default to `pointerEvents="none"`, so a placeholder layered over an
+interactive surface does not intercept input. An explicit root override is
+preserved.
 
 ## Measurement
 
@@ -32,9 +29,8 @@ cycle. The loop repeats without pausing for as long as the placeholder is
 mounted.
 
 The animation runs through `Animated` with the native driver, so it is not
-affected by JavaScript thread work. Each placeholder owns its own clock and
-starts it from its own first measurement, so placeholders that mount at
-different times are not in phase with each other.
+affected by JavaScript thread work. Active placeholders subscribe to one shared
+sweep channel, so instances mounted at different times read the same phase.
 
 ## Motion and lifecycle
 
@@ -43,5 +39,5 @@ is reset, and the highlight overlay is not rendered. Turning the setting off
 restarts the loop from the beginning. No alternative motion is substituted.
 
 There is no enter or exit animation. Mounting a placeholder shows it
-immediately, and swapping it for real content is an instant replacement.
-Unmounting stops the loop.
+immediately, and swapping it for real content is an instant replacement. The
+shared loop stops and resets when its last active subscriber leaves.

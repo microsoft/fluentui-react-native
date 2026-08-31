@@ -125,7 +125,7 @@
   "divergences": [
     {
       "id": "tag-small-circular-padding",
-      "status": "deferred"
+      "status": "resolved"
     },
     {
       "id": "tag-dismiss-is-caller-owned",

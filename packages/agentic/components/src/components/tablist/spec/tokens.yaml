@@ -1,0 +1,22 @@
+schemaVersion: 1
+component: tablist
+implementation: tablist.styles.ts
+
+statePrecedence:
+  - orientation
+  - userStyle
+
+bindings:
+  root:
+    static:
+      alignItems: flex-start
+      alignSelf: flex-start
+    orientation:
+      horizontal:
+        flexDirection: row
+      vertical:
+        flexDirection: column
+    gap: spacing.componentBase100
+    userStyle: applied last by useTabListStyles_unstable
+
+tokenGaps: []

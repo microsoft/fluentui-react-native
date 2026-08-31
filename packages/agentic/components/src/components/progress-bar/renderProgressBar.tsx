@@ -8,12 +8,12 @@ export function renderProgressBar_unstable(state: ProgressBarState) {
 
   return (
     <state.root>
-      <View style={state.styles.header}>
+      <View style={state.styles.header} testID="progress-bar-header">
         <Text accessible={false} nativeID={state.labelId} style={state.styles.label}>
           {state.label}
         </Text>
-        {(state.showValidationIcon || state.showValueText) && (
-          <View style={state.styles.trailing}>
+        {(ValidationIcon || state.showValueText) && (
+          <View style={state.styles.trailing} testID="progress-bar-trailing">
             {ValidationIcon && <ValidationIcon />}
             {state.showValueText && (
               <Text accessible={false} style={state.styles.valueText}>

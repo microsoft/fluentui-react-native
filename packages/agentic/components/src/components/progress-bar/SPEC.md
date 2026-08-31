@@ -77,8 +77,8 @@ The track and the indicator are internal and are not public slots.
   `0` through `100`, resolve a non-numeric value to `0`, and keep the supported
   native root props.
 - **PGB-002:** Render the documented order, always render the label, and gate
-  the trailing group on the icon and value-text flags even when no icon slot
-  resolves.
+  the trailing group only when a validation icon slot resolves or value text is
+  visible.
 - **PGB-003:** Derive the value text from `valueText`, the status, and the type
   in that order, falling back to the resolved percentage.
 - **PGB-004:** Size the indicator from the measured track width: the resolved
@@ -112,18 +112,19 @@ offset alongside a width that also comes from layout. Reduced motion, reported
 by the platform accessibility settings, stops the loop and leaves the segment at
 its starting position.
 
-Determinate value changes apply immediately on both platforms; there is no
-animated width transition.
+Determinate and static values follow the clamped incoming percentage in either
+direction and apply immediately on both platforms; there is no animated width
+transition.
 
 ## Divergences from Flex
 
-| ID                                  | Disposition    | React Native contract                                                                                                                                                                                                                                                                        | Follow-up                                                                                                  |
-| ----------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `progress-bar-value-transition`     | Deferred       | Determinate value changes snap to the new width. The transition intent is carried by web-only style keys that the Windows and macOS renderers ignore, so a determinate bar and a static bar animate identically, which is to say not at all.                                                 | Drive the width through an animated value so determinate transitions ease and static changes stay instant. |
-| `progress-bar-monotonic-value`      | Deferred       | The determinate and static value never decreases while the type stays the same, because each update keeps the larger of the previous and the incoming value. Only a change from indeterminate resets it. A caller reporting a genuine decrease, such as a freed quota, cannot lower the bar. | Keep the resolved value equal to the clamped incoming value and drop the monotonic clamp.                  |
-| `progress-bar-header-alignment`     | Deferred       | The header packs the label and the trailing group together at the leading edge with a fixed gap. Flex pushes the validation icon and the value text to the trailing edge with flexible space between.                                                                                        | Let the label take the free space or set the header to distribute space between its two children.          |
-| `progress-bar-status-live-region`   | Not applicable | React Native exposes no live-region primitive here, so a status change to error or success is not announced. The component reports role, name, and value only.                                                                                                                               | None available at the component level. The surrounding surface must announce the outcome.                  |
-| `progress-bar-empty-trailing-group` | Deferred       | When the icon flag is true for neutral status or a `null` icon and value text is hidden, FURN renders an empty trailing group.                                                                                                                                                               | Gate the group on the resolved icon slot or visible value text.                                            |
+| ID                                  | Disposition    | React Native contract                                                                                                                                                                                                                        | Follow-up                                                                                                  |
+| ----------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `progress-bar-value-transition`     | Deferred       | Determinate value changes snap to the new width. The transition intent is carried by web-only style keys that the Windows and macOS renderers ignore, so a determinate bar and a static bar animate identically, which is to say not at all. | Drive the width through an animated value so determinate transitions ease and static changes stay instant. |
+| `progress-bar-monotonic-value`      | Resolved       | Determinate and static values follow the clamped incoming value in both directions, including genuine decreases such as freed quota.                                                                                                         | Implemented in `useProgressBar.ts` and covered by value update tests.                                      |
+| `progress-bar-header-alignment`     | Resolved       | The label grows into available space and the header distributes its label and trailing group to opposite edges.                                                                                                                              | Implemented in `progress-bar.styles.ts` and covered by layout tests.                                       |
+| `progress-bar-status-live-region`   | Not applicable | React Native exposes no live-region primitive here, so a status change to error or success is not announced. The component reports role, name, and value only.                                                                               | None available at the component level. The surrounding surface must announce the outcome.                  |
+| `progress-bar-empty-trailing-group` | Resolved       | The trailing group renders only when the resolved validation icon slot exists or value text is visible, so neutral and explicitly null icon cases leave no empty view.                                                                       | Implemented in `renderProgressBar.tsx` and covered by anatomy tests.                                       |
 
 ## Conformance
 

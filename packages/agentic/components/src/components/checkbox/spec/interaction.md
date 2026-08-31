@@ -39,8 +39,9 @@ The focus visual stays in the tree for the lifetime of the control. Focus
 changes its visibility rather than mounting or unmounting a border-bearing
 native view. It is shown only when the control is focused and enabled.
 
-Focus is tracked from focus and blur events without distinguishing input
-modality, so a pointer press that moves focus also shows the ring.
+Pointer press state suppresses the visual when the press moves focus. A keyboard
+event restores focus-visible state, and programmatic focus is treated as
+focus-visible because no pointer interaction preceded it.
 
 Checkbox runs no timed animation. Status, hover, press, and focus styling
 change on the next render, so reduced-motion settings need no separate path.

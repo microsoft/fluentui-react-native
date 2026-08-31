@@ -189,6 +189,22 @@ describe('Tag', () => {
     expect(getRootStyle(component).borderRadius).toBe(borderRadius);
   });
 
+  it('keeps small icon-and-text spacing independent of circular shape', async () => {
+    const tokens = useFlexTokens();
+    const component = await renderTag({
+      content: 'Small',
+      leadingIcon: { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' } },
+      shape: 'circular',
+      size: 'small',
+    });
+
+    expect(getRootStyle(component)).toMatchObject({
+      gap: tokens.spacing.componentBase50,
+      paddingHorizontal: tokens.spacing.componentBase200,
+      paddingVertical: tokens.spacing.componentBase100,
+    });
+  });
+
   it('renders a dismiss toggle and preserves user styles last', async () => {
     const style: ViewStyle = { backgroundColor: 'hotpink' };
     const component = await renderTag({

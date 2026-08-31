@@ -7,24 +7,20 @@ and the space around them all activate the tab. Hover changes the background and
 the foreground together; pressed applies the same resolution at a higher
 precedence, so a press reads as a distinct step from a hover.
 
-A press calls `onPress` and nothing else. The component does not become
-selected, so a tab whose caller ignores `onPress` visibly does nothing. Selection
-is applied on the next render, when the caller passes a new `selected` value.
+A standalone press calls `onPress` and does not mutate `selected`. Inside
+TabList, the same press requests group selection and then preserves the caller's
+`onPress` handler.
 
 While `disabled`, the underlying pressable stops reporting presses and the
 disabled colors apply to the background, the label, and the icon.
 
 ## Keyboard
 
-Tab moves focus to an enabled tab; a disabled tab is skipped because it is not
-focusable. Enter and Space activate the focused tab through the shared pressable
-behavior, producing the same `onPress` a pointer press would.
-
-No arrow-key handling ships with this component. Moving between tabs with the
-arrow keys, wrapping at the ends, jumping to the first or last tab, and choosing
-whether selection follows focus are all decisions for the caller's list, because
-no list container ships in this package. A caller that adds roving focus must
-manage `focusable` on its own and keep exactly one tab reachable.
+A standalone enabled Tab is focusable and a disabled Tab is skipped. Inside
+TabList, the parent keeps exactly one enabled Tab focusable, handles the arrow
+axis selected by its orientation, supports Home and End, and skips disabled
+Tabs. Enter and Space activate the focused Tab through the shared pressable
+behavior, producing the same selection request and `onPress` as a pointer press.
 
 ## Focus visual
 

@@ -21,6 +21,14 @@ function getRootStyle(component: RenderResult) {
   return StyleSheet.flatten(getRoot(component).props.style);
 }
 
+function getText(component: RenderResult, text: string) {
+  return component.getByText(text, { includeHiddenElements: true });
+}
+
+function getTestId(component: RenderResult, testID: string) {
+  return component.getByTestId(testID, { includeHiddenElements: true });
+}
+
 describe('Radio', () => {
   it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
@@ -39,7 +47,7 @@ describe('Radio', () => {
     expect(root.props.accessibilityLabel).toBe('Label');
     expect(root.props.accessibilityState).toEqual({ checked: false, disabled: false });
     expect(root.props.focusable).toBe(true);
-    expect(component.getByText('Label')).toBeOnTheScreen();
+    expect(getText(component, 'Label')).toBeOnTheScreen();
     expect(component.queryByText('Description')).toBeNull();
   });
 
@@ -49,7 +57,7 @@ describe('Radio', () => {
 
     expect(root.props.accessibilityLabel).toBe('Mail');
     expect(root.props.accessibilityHint).toBe('Saves your selection');
-    expect(component.getByText('Saves your selection')).toBeOnTheScreen();
+    expect(getText(component, 'Saves your selection')).toBeOnTheScreen();
   });
 
   it('resolves unselected colors and layout tokens', async () => {
@@ -62,7 +70,7 @@ describe('Radio', () => {
       borderRadius: tokens.borderRadius.base300,
       gap: tokens.spacing.componentBase100,
     });
-    expect(StyleSheet.flatten(component.getByTestId('radio-indicator').props.style)).toMatchObject({
+    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style)).toMatchObject({
       backgroundColor: tokens.color.backgroundNeutralTransparent,
       borderColor: tokens.color.strokeNeutralHeavy,
       borderStyle: 'solid',
@@ -70,13 +78,13 @@ describe('Radio', () => {
       height: 16,
       width: 16,
     });
-    expect(StyleSheet.flatten(component.getByTestId('radio-dot').props.style)).toMatchObject({
+    expect(StyleSheet.flatten(getTestId(component, 'radio-dot').props.style)).toMatchObject({
       backgroundColor: tokens.color.foregroundBrandPrimary,
       height: 10,
       opacity: 0,
       width: 10,
     });
-    expect(StyleSheet.flatten(component.getByText('Choice').props.style)).toMatchObject({
+    expect(StyleSheet.flatten(getText(component, 'Choice').props.style)).toMatchObject({
       color: tokens.color.foregroundNeutralSecondary,
       fontSize: expect.any(Number),
     });
@@ -88,12 +96,12 @@ describe('Radio', () => {
     const root = getRoot(component);
 
     expect(root.props.accessibilityState).toEqual({ checked: true, disabled: false });
-    expect(StyleSheet.flatten(component.getByTestId('radio-indicator').props.style).borderColor).toBe(tokens.strokeBrandLoud);
-    expect(StyleSheet.flatten(component.getByTestId('radio-dot').props.style)).toMatchObject({
+    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.strokeBrandLoud);
+    expect(StyleSheet.flatten(getTestId(component, 'radio-dot').props.style)).toMatchObject({
       backgroundColor: tokens.foregroundBrandPrimary,
       opacity: 1,
     });
-    expect(StyleSheet.flatten(component.getByText('Choice').props.style).color).toBe(tokens.foregroundNeutralPrimary);
+    expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.foregroundNeutralPrimary);
   });
 
   it('updates interaction colors on hover and press', async () => {
@@ -102,12 +110,12 @@ describe('Radio', () => {
     const root = getRoot(component);
 
     await fireEvent(root, 'hoverIn', {});
-    expect(StyleSheet.flatten(component.getByTestId('radio-indicator').props.style).borderColor).toBe(tokens.hover.strokeNeutralHeavy);
-    expect(StyleSheet.flatten(component.getByText('Choice').props.style).color).toBe(tokens.hover.foregroundNeutralSecondary);
+    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.hover.strokeNeutralHeavy);
+    expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.hover.foregroundNeutralSecondary);
 
     await fireEvent(root, 'pressIn', {});
-    expect(StyleSheet.flatten(component.getByTestId('radio-indicator').props.style).borderColor).toBe(tokens.pressed.strokeNeutralHeavy);
-    expect(StyleSheet.flatten(component.getByText('Choice').props.style).color).toBe(tokens.pressed.foregroundNeutralSecondary);
+    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.pressed.strokeNeutralHeavy);
+    expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.pressed.foregroundNeutralSecondary);
   });
 
   it('renders a persistent dual-ring focus visual when focused', async () => {
@@ -146,9 +154,26 @@ describe('Radio', () => {
 
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
     expect(
-      StyleSheet.flatten(component.getByText('A long option label that needs room to wrap when the control is constrained').props.style),
+      StyleSheet.flatten(getText(component, 'A long option label that needs room to wrap when the control is constrained').props.style),
     ).toMatchObject({
       flexShrink: 1,
+    });
+  });
+
+  it('explicitly hides decorative descendants from accessibility', async () => {
+    const component = await renderRadio({ label: 'Choice', secondaryText: 'Description', showSecondaryText: true });
+    const indicator = getTestId(component, 'radio-indicator');
+    const label = getText(component, 'Choice');
+
+    expect(indicator.props).toMatchObject({
+      accessibilityElementsHidden: true,
+      accessible: false,
+      importantForAccessibility: 'no-hide-descendants',
+    });
+    expect(label.parent?.props).toMatchObject({
+      accessibilityElementsHidden: true,
+      accessible: false,
+      importantForAccessibility: 'no-hide-descendants',
     });
   });
 });

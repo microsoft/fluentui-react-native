@@ -21,9 +21,8 @@ Use `static` for a snapshot that does not advance on its own, such as storage
 used against a quota or a score against a maximum. A static value is a state,
 not a moving target, so framing it as progress misleads.
 
-Note that a determinate or static bar does not move backward. If a value can
-genuinely decrease, such as freed storage, remount the bar or use a different
-representation.
+A determinate or static bar follows genuine decreases as well as increases, so
+it can represent values such as storage usage that drops when space is freed.
 
 ## Status
 
@@ -60,8 +59,9 @@ color.
 ## Layout
 
 The root stretches across its parent, so give it a container with a definite
-width. Keep the label short: it shrinks and wraps before the value text does, and
-a long label pushes the header taller than the bar it introduces.
+width. The label grows into the available header space while the validation
+icon and value text stay aligned to the trailing edge. Keep labels concise so
+they do not make the header unnecessarily tall.
 
 ## Update frequency
 

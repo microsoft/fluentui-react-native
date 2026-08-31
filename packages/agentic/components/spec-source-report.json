@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-29T02:20:41.717Z",
+  "generatedAt": "2026-08-31T05:04:03.307Z",
   "sourceLock": "flex-1.5.0-206c4996",
   "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
   "baseline": {
@@ -10,7 +10,7 @@
   "external": {
     "mode": "live",
     "status": "drift-detected",
-    "marketplaceHead": "f23766486d849c5fcddbcdeb254481c322e3cc44",
+    "marketplaceHead": "eb8cf20cb1c6ce4fdc563ac1ebd34197cb347735",
     "originHead": "dfdaeba2f79c2c2c33cdc074cf1e60f1c3a2929c"
   },
   "catalog": {
@@ -141,6 +141,7 @@
       "spinner",
       "switch",
       "tab",
+      "tablist",
       "tag"
     ],
     "adaptedDrafts": [],
@@ -162,6 +163,7 @@
       "spinner",
       "switch",
       "tab",
+      "tablist",
       "tag"
     ],
     "implementationGap": [
@@ -190,7 +192,6 @@
       "select",
       "simple-nav",
       "split-button",
-      "tablist",
       "teaching-popover",
       "textarea",
       "toggle-button",
@@ -223,7 +224,6 @@
       "select",
       "simple-nav",
       "split-button",
-      "tablist",
       "teaching-popover",
       "textarea",
       "toggle-button",
@@ -727,6 +727,23 @@
         "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
       },
       "candidateStatus": "review-required"
+    },
+    {
+      "component": "tablist",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
     },
     {
       "component": "tag",

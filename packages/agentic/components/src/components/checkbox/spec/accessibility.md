@@ -43,10 +43,10 @@ announced as an unavailable stop.
 
 The visible focus indicator is a persistent dual-ring overlay drawn from the
 focus stroke tokens. It stays mounted and toggles visibility, and it is hidden
-while disabled. It surrounds the whole row, including the label column, so the
-indicated region matches the press target. The overlay is hidden from the
-accessibility tree and does not receive pointer events.
+while disabled or while focus came from a pointer press. Keyboard and
+programmatic focus show it. It surrounds the whole row, including the label
+column, so the indicated region matches the press target. The overlay is hidden
+from the accessibility tree and does not receive pointer events.
 
-Checkbox does not disable the react-native-windows platform focus visual, so a
-Windows consumer may see the platform indicator in addition to the shared one.
-Treat that as a known gap rather than an intended dual indicator.
+Checkbox disables the react-native-windows platform focus visual so the shared
+dual-ring overlay is the single visible focus treatment.

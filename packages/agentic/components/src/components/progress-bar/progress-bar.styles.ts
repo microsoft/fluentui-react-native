@@ -31,6 +31,7 @@ export function getProgressBarThemeStyles(themeState: ThemeState): ProgressBarTh
       alignItems: 'center',
       flexDirection: 'row',
       gap: getGapStyleValue(spacing.componentBase100),
+      justifyContent: 'space-between',
       minWidth: 0,
     },
     indicator: {
@@ -43,6 +44,7 @@ export function getProgressBarThemeStyles(themeState: ThemeState): ProgressBarTh
     },
     label: {
       color: color.foregroundNeutralPrimary,
+      flexGrow: 1,
       flexShrink: 1,
       fontFamily: fontFamily.functional,
       fontSize: fontSize.functionalBodyMedium,

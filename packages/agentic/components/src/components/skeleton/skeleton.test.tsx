@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { act } from 'react';
-import { StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
@@ -41,7 +41,14 @@ describe('Skeleton', () => {
     const component = await renderSkeleton({ style: { height: 16, width: 120 } });
 
     expect(getRoot(component).props.accessible).toBe(false);
+    expect(getRoot(component).props.pointerEvents).toBe('none');
     expect(getRootStyle(component)).toMatchSnapshot();
+  });
+
+  it('preserves an explicit pointer-events override', async () => {
+    const component = await renderSkeleton({ pointerEvents: 'box-only', style: { height: 16, width: 120 } });
+
+    expect(getRoot(component).props.pointerEvents).toBe('box-only');
   });
 
   it('forwards user layout handlers while preserving the wave animation', async () => {
@@ -73,5 +80,18 @@ describe('Skeleton', () => {
     });
 
     expect(component.queryByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeNull();
+  });
+
+  it('shares one animation timeline across mounted placeholders', async () => {
+    const loop = jest.spyOn(Animated, 'loop').mockReturnValue({ start: jest.fn(), stop: jest.fn() } as never);
+    const first = await renderSkeleton({ style: { height: 16, width: 120 } });
+    const second = await renderSkeleton({ style: { height: 16, width: 120 } });
+
+    await act(async () => {
+      await fireEvent(getRoot(first), 'layout', { nativeEvent: { layout: { height: 16, width: 120, x: 0, y: 0 } } });
+      await fireEvent(getRoot(second), 'layout', { nativeEvent: { layout: { height: 16, width: 120, x: 0, y: 0 } } });
+    });
+
+    expect(loop).toHaveBeenCalledTimes(1);
   });
 });

@@ -94,8 +94,8 @@ layout:
         paddingVertical: spacing.componentBase100
       circular:
         borderRadius: borderRadius.circular
-        gap: 0
-        paddingHorizontal: spacing.componentBase100
+        gap: spacing.componentBase50
+        paddingHorizontal: spacing.componentBase200
         paddingVertical: spacing.componentBase100
     iconOnly:
       borderRadius: borderRadius.circular
@@ -129,10 +129,6 @@ tokenGaps:
     binding: root.minHeight and root.minWidth
     value: 24
     reason: The minimum box is a literal in the style definition and is not drawn from the sizing scale.
-  - id: tag-small-circular-branch
-    binding: layout.small.iconAndText.circular
-    value: gap 0 with spacing.componentBase100 on both axes
-    reason: This branch carries the icon-only spacing rather than the small icon-and-text spacing, which is the tag-small-circular-padding divergence.
   - id: tag-state-motion
     binding: root.backgroundColor
     value: no transition

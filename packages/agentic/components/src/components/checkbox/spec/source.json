@@ -73,11 +73,11 @@
     },
     {
       "id": "checkbox-focus-visual-modality",
-      "status": "deferred"
+      "status": "resolved"
     },
     {
       "id": "checkbox-native-focus-ring",
-      "status": "deferred"
+      "status": "resolved"
     },
     {
       "id": "checkbox-owned-props-type-surface",

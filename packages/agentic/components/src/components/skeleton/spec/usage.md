@@ -51,6 +51,5 @@ that has no bounded end.
 ## Motion
 
 The sweep stops entirely under the platform reduced-motion setting, so never
-rely on movement alone to communicate that a region is busy. Placeholders that
-mount at different moments run on independent clocks, so avoid arrangements
-where several adjacent placeholders are expected to sweep in unison.
+rely on movement alone to communicate that a region is busy. Active
+placeholders share one phase even when they mount at different moments.

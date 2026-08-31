@@ -57,9 +57,8 @@ compact circle holding a leading icon and the dismiss glyph. It is not a smaller
 version of the labeled tag; it is a different anatomy, and it depends entirely
 on the name for meaning.
 
-A small icon-and-text tag with the circular shape currently uses the icon-only
-spacing step rather than the small labeled spacing, so it is tighter than the
-equivalent rounded tag. That is a tracked divergence, not intended behavior.
+Small icon-and-text tags use the same gap and padding in circular and rounded
+shapes. Shape changes only the corner radius.
 
 ## Long labels
 

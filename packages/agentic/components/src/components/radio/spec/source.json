@@ -73,7 +73,7 @@
     },
     {
       "id": "radio-descendant-accessibility",
-      "status": "deferred"
+      "status": "resolved"
     }
   ],
   "requirements": [

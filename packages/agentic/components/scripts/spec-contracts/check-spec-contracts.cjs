@@ -225,7 +225,7 @@ function validateSource(component, spec, lock) {
     validateExactKeys(divergence, ['id', 'status'], [], `${component} divergence`);
     invariant(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(divergence.id), `${component} has an invalid divergence id.`);
     invariant(
-      ['accepted', 'deferred', 'aligning', 'not-applicable'].includes(divergence.status),
+      ['accepted', 'deferred', 'aligning', 'not-applicable', 'resolved'].includes(divergence.status),
       `${component}:${divergence.id} has an invalid divergence status.`,
     );
     invariant(spec.includes(`\`${divergence.id}\``), `${component} SPEC.md must describe divergence ${divergence.id}.`);

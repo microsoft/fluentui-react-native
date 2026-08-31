@@ -86,8 +86,8 @@ loop.
 
 Windows and macOS behave identically. The root is hidden from accessibility
 and has no tab stop by default, but the broad `ViewProps` surface permits a
-caller to set `focusable`. It retains the default React Native pointer
-behavior; only the highlight overlay disables pointer input.
+caller to set `focusable`. The root defaults to `pointerEvents="none"` so an
+overlay cannot intercept input, while preserving an explicit caller override.
 
 The sweep uses the native driver, so it continues on the platform's animation
 thread rather than the JavaScript thread. The reduced-motion source is the
@@ -101,13 +101,13 @@ height, which is the caller's responsibility to avoid.
 
 ## Divergences from Flex
 
-| ID                                | Disposition    | React Native contract                                                                                                                                                                                                                  | Follow-up                                                                                      |
-| --------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `skeleton-highlight-band-fill`    | Accepted       | FURN paints the sweep as a translating opaque band view held at a fixed opacity. Flex describes a gradient highlight that fades in and out across the bar.                                                                             | Revisit only if this package takes a gradient dependency.                                      |
-| `skeleton-instance-timeline`      | Deferred       | Each placeholder starts its own loop from its own first measurement, so placeholders in one group are not phase locked. Flex requires a single shared timeline across a group.                                                         | Needs a shared clock or group provider; that is a new public surface and is out of scope here. |
-| `skeleton-container-busy-state`   | Not applicable | The root is removed from the accessibility tree and exposes no busy state. Flex assigns the busy semantic to the container that owns the loading region, which in FURN is caller-owned composition rather than part of this component. | None.                                                                                          |
-| `skeleton-pointer-events`         | Deferred       | The root retains the default React Native pointer behavior and can intercept input when placed over interactive content.                                                                                                               | Default the root to `pointerEvents="none"` while preserving an explicit caller override.       |
-| `skeleton-focusable-prop-surface` | Deferred       | The root type forwards `focusable` even though the component is hidden from accessibility and supplies no focus visual or action.                                                                                                      | Omit or override `focusable` in a separately reviewed native-prop correction.                  |
+| ID                                | Disposition    | React Native contract                                                                                                                                                                                                                  | Follow-up                                                                          |
+| --------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `skeleton-highlight-band-fill`    | Accepted       | FURN paints the sweep as a translating opaque band view held at a fixed opacity. Flex describes a gradient highlight that fades in and out across the bar.                                                                             | Revisit only if this package takes a gradient dependency.                          |
+| `skeleton-instance-timeline`      | Resolved       | Active placeholders share one package-level sweep timeline, so instances mounted at different times render at the same phase.                                                                                                          | Implemented through the shared animation hook and covered by multi-instance tests. |
+| `skeleton-container-busy-state`   | Not applicable | The root is removed from the accessibility tree and exposes no busy state. Flex assigns the busy semantic to the container that owns the loading region, which in FURN is caller-owned composition rather than part of this component. | None.                                                                              |
+| `skeleton-pointer-events`         | Resolved       | The root defaults to `pointerEvents="none"` so it cannot intercept covered controls, while an explicit caller value is preserved.                                                                                                      | Implemented in `useSkeleton.ts` and covered by root-prop tests.                    |
+| `skeleton-focusable-prop-surface` | Deferred       | The root type forwards `focusable` even though the component is hidden from accessibility and supplies no focus visual or action.                                                                                                      | Omit or override `focusable` in a separately reviewed native-prop correction.      |
 
 ## Conformance
 

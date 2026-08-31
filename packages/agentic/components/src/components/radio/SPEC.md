@@ -57,8 +57,8 @@ rather than explicitly hiding the indicator and text children.
 On Windows and macOS the root is an accessible React Native `Pressable` with
 the `radio` role. UIA and AX receive its name, checked value, and disabled
 value from the root. Disabled radios cannot be focused or activated. The
-implementation expects the named root to group the indicator, dot, and text,
-but does not explicitly hide those descendants.
+indicator and text subtrees are explicitly hidden from assistive technology so
+the named root is the single announced element.
 
 Native Pressable events provide hover, press, focus, and keyboard activation.
 The FocusVisual remains in the tree and is visible only for an enabled focused
@@ -74,9 +74,9 @@ renders the radios.
 - `radio-group-coordination` (**accepted**): FURN Radio exposes only
   externally driven `selected` state; mutual exclusion and group navigation
   are not included in this component.
-- `radio-descendant-accessibility` (**deferred**): FURN relies on root
-  accessibility grouping and does not explicitly hide the indicator, dot, or
-  text descendants, which can risk duplicate platform announcements.
+- `radio-descendant-accessibility` (**resolved**): The indicator, dot, and text
+  descendants are explicitly hidden from assistive technology, leaving the
+  named radio root as the single announced element.
 
 ## Conformance
 

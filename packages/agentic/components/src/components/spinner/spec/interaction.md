@@ -41,11 +41,9 @@ reporting that work is in progress.
 
 ## Timing and lifecycle
 
-Each spinner runs its own clock, starting when it mounts. Several spinners
-rendered at the same time are therefore not guaranteed to be in phase. Prefer a
-single spinner for a region over one spinner per row.
+Active spinners subscribe to one shared rotation channel, so instances mounted
+at different times read the same phase. The loop stops and resets when its last
+active subscriber leaves.
 
 Do not mount a spinner for work that usually completes in a frame or two: a
-spinner that appears and disappears immediately reads as a flicker. Do not swap
-sizes or remount the spinner mid-load, because remounting restarts the rotation
-from its starting angle.
+spinner that appears and disappears immediately reads as a flicker.

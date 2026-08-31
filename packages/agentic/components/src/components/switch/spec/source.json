@@ -65,7 +65,7 @@
   "divergences": [
     {
       "id": "switch-label-association-ids",
-      "status": "deferred"
+      "status": "resolved"
     },
     {
       "id": "switch-label-spacing",

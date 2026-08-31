@@ -24,15 +24,13 @@ There are three naming paths, in priority order:
 1. A caller-supplied name on the root wins. Passing `accessibilityLabel` or a
    labelled-by reference is always respected.
 2. When labels are rendered and the caller supplies no name, the component uses
-   the `label` text as the accessible name and additionally emits labelled-by
-   references for the generated label ids.
+   the `label` text as the accessible name.
 3. When no label is rendered, in the `switch` layout or when the label slots are
    suppressed, the `label` text becomes the accessible name on its own.
 
-The generated ids in the second path are not currently assigned to the rendered
-label elements, so the working mechanism is the copied text rather than the
-reference. That divergence is tracked in the spec; it does not change what is
-announced, because the copied name resolves first.
+Rendered labels are hidden from assistive technology, so the component does not
+generate ids or emit labelled-by references for them. Copied text is the single
+fallback mechanism and cannot leave a dead relationship.
 
 Development builds warn once when no label is visible and `label` is still the
 placeholder default, because that combination produces a switch that announces

@@ -48,7 +48,6 @@ bindings:
       outline:
         borderWidth: strokeWidth.thin
       underline:
-        borderBottomWidth: strokeWidth.thin
         borderWidth: 0
     strokeColor:
       # Applied as borderColor for outline and borderBottomColor for underline.
@@ -142,8 +141,6 @@ bindings:
     borderBottomColor: same mapping as contents.strokeColor
 
 tokenGaps:
-  - binding: underline.borderBottomWidth, contents.strokeWidth.underline.borderBottomWidth
-    detail: For the underline variant the bottom edge is stroked twice, once by the contents row and once by the absolutely positioned underline view, so the rendered thickness is not a single token binding.
   - binding: contents.strokeColor.focused
     detail: Focus is expressed only as a stroke color change at the rest thickness. There is no focus visual binding and no focus stroke-width token.
   - binding: icons.color

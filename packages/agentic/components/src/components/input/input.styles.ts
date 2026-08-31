@@ -168,7 +168,6 @@ function createContentsStrokeDefinition(tokens: FlexTokens): StyleDefinition<Vie
     borderWidth: toNumber(strokeWidth.thin),
   };
   const underlineBase = {
-    borderBottomWidth: toNumber(strokeWidth.thin),
     borderWidth: 0,
   };
   const outlineStates = {

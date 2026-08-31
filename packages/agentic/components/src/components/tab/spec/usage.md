@@ -12,25 +12,23 @@ a navigation surface. Do not use them for a step-by-step flow, which needs a
 wizard, or for filtering a single list, which is a filter control. Do not use a
 tab as a toggle for an option.
 
-## Owning selection
+## Group selection
 
-Tab renders the selection it is given and reports presses. The caller keeps the
-value:
+Use TabList to coordinate selection, list semantics, and roving keyboard focus:
 
 ```tsx
-import { Tab } from '@fluentui-react-native/agentic-components';
+import { Tab, TabList } from '@fluentui-react-native/agentic-components';
 
 const [selected, setSelected] = React.useState('overview');
 
-<View accessibilityRole="tablist" style={{ flexDirection: 'row', gap: 4 }}>
-  <Tab controls="overview-panel" selected={selected === 'overview'} onPress={() => setSelected('overview')} content="Overview" />
-  <Tab controls="activity-panel" selected={selected === 'activity'} onPress={() => setSelected('activity')} content="Activity" />
-</View>;
+<TabList selectedValue={selected} onSelectionChange={setSelected}>
+  <Tab value="overview" controls="overview-panel" content="Overview" />
+  <Tab value="activity" controls="activity-panel" content="Activity" />
+</TabList>;
 ```
 
-Exactly one tab in a group should be selected at a time. The component does not
-enforce that, so a caller that sets `selected` on two tabs will render two
-selected tabs.
+Omit `selectedValue` and use `defaultSelectedValue` for an uncontrolled group.
+When `value` is omitted from a Tab, TabList uses its `controls` identifier.
 
 Render the panel yourself and give it the identifier each tab points at:
 
@@ -68,13 +66,12 @@ rejects `content`; all three are enforced by the compiler. Use it only when the
 glyphs are unambiguous on their own, and keep a whole group icon-only rather
 than mixing layouts in one row.
 
-## Keyboard navigation
+## Standalone control
 
-This package ships no list container, so a plain group of tabs is reached by tab
-order, one stop per tab. If the group is long enough that this is tedious, the
-caller implements roving focus over the tabs and manages `focusable` itself. If
-you add arrow-key movement, decide once whether selection follows focus and
-apply it consistently across the app.
+Tab can still participate in a custom caller-owned group. In that case pass
+`selected`, handle `onPress`, and own the list semantics and keyboard model.
+Prefer TabList for ordinary tab groups so only one enabled Tab enters the native
+tab order.
 
 ## Disabled tabs
 
@@ -88,8 +85,8 @@ permanently dead one in the row.
 
 ## Common mistakes
 
-Expecting a press to select the tab. Selection only moves when the caller passes
-a new `selected` value.
+Passing both standalone `selected` state and TabList selection. The parent
+context owns selection while a Tab is grouped.
 
 Pointing several tabs at the same `controls` identifier, which breaks the
 relationship between each tab and its panel.

@@ -34,20 +34,20 @@ the panel must exist while the tab is rendered. Point every tab at its own panel
 identifier; reusing one identifier across tabs breaks the relationship for all
 of them.
 
-The panel itself is entirely the caller's responsibility. This package ships no
-panel component and no list container, so the caller also owns the grouping
-semantics around the tabs and any label for that group.
+The panel itself is entirely the caller's responsibility. TabList supplies the
+grouping semantics and its accessible name; it does not render or hide panels.
 
 ## Focus and keyboard
 
-A tab is focusable while enabled and is removed from the tab order while
-disabled. Disabled tabs remain in the accessibility tree and report their
-disabled state, so they can still be read even though they cannot be focused.
+A standalone Tab is focusable while enabled and is removed from the tab order
+while disabled. Inside TabList, exactly one enabled Tab is focusable and each
+Tab receives its one-based position and the total set size. Disabled Tabs remain
+in the accessibility tree and report their disabled state while roving
+navigation skips them.
 
-Because no list container ships, tabs are reached by plain tab order unless the
-caller implements roving focus. If the caller does implement arrow-key movement,
-it must also decide whether selection follows focus, and keep the rendered
-`selected` value in step with whatever it chooses.
+TabList owns arrow, Home, and End movement and the selection-follows-focus
+policy. It overrides grouped selection and focusability while preserving the
+Tab's name, controlled-panel relationship, and consumer handlers.
 
 A two-ring focus visual is drawn inside the hit area, following the corner
 radius of the active layout, whenever the root is focused and not disabled.

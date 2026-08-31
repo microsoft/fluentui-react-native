@@ -104,11 +104,11 @@ loop only when reduced motion is known to be off.
 
 ## Divergences from Flex
 
-| ID                           | Disposition    | React Native contract                                                                                                                                                       | Follow-up                                                                      |
-| ---------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `spinner-busy-state-on-root` | Accepted       | The single root carries both the progress role and the busy state. Flex treats the role pattern and the busy container pattern as alternatives owned by different elements. | None. React Native has one accessibility node here, so the two cannot collide. |
-| `spinner-instance-timeline`  | Deferred       | Each spinner starts its own rotation clock on mount, so several spinners on one surface are not in phase. Flex requires a shared timeline within a group.                   | Needs a shared clock or group provider, which is a new public surface.         |
-| `spinner-adjacent-label-gap` | Not applicable | Spinner has no label slot and publishes no spacing. Flex documents size-stepped gap tokens for a spinner paired with adjacent status text.                                  | None. That spacing belongs to the caller's layout in React Native.             |
+| ID                           | Disposition    | React Native contract                                                                                                                                                       | Follow-up                                                                          |
+| ---------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `spinner-busy-state-on-root` | Accepted       | The single root carries both the progress role and the busy state. Flex treats the role pattern and the busy container pattern as alternatives owned by different elements. | None. React Native has one accessibility node here, so the two cannot collide.     |
+| `spinner-instance-timeline`  | Resolved       | Active spinners share one package-level rotation timeline, so instances mounted at different times render at the same phase.                                                | Implemented through the shared animation hook and covered by multi-instance tests. |
+| `spinner-adjacent-label-gap` | Not applicable | Spinner has no label slot and publishes no spacing. Flex documents size-stepped gap tokens for a spinner paired with adjacent status text.                                  | None. That spacing belongs to the caller's layout in React Native.                 |
 
 ## Conformance
 

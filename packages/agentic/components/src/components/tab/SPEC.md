@@ -15,13 +15,14 @@ usage: ./spec/usage.md
 
 Tab is a single selectable item that switches which panel of content is shown.
 It renders a `Pressable` containing an optional icon and, in the default layout,
-a text label; it reports presses and renders the selection it is given.
+a text label; it reports presses and renders either its standalone props or the
+selection and roving-focus state supplied by TabList.
 
-Tab does not own selection, does not render the panel, and does not ship a list
-container. The caller keeps the selected value, renders exactly one tab as
-selected, and owns the surrounding list semantics, its orientation, and arrow-key
-navigation between tabs. Tab is also not a navigation link, not a toggle button,
-and has no overflow, close, badge, or counter affordance.
+Tab does not own selection and does not render the panel. Use TabList to own
+group selection, list semantics, orientation, and arrow-key navigation. Tab can
+still render standalone under a caller-managed group. Tab is also not a
+navigation link, not a toggle button, and has no overflow, close, badge, or
+counter affordance.
 
 ## Public contract
 
@@ -30,7 +31,8 @@ and has no overflow, close, badge, or counter affordance.
 | Prop       | Type                        | Default       | Contract                                                                                                  |
 | ---------- | --------------------------- | ------------- | --------------------------------------------------------------------------------------------------------- |
 | `controls` | `string`                    | required      | Identifier of the panel this tab shows; forwarded to the platform as the controlled-element relationship. |
-| `selected` | `boolean`                   | `false`       | Externally driven. The component renders it and never changes it.                                         |
+| `selected` | `boolean`                   | `false`       | Externally driven when standalone; TabList context takes precedence inside a group.                       |
+| `value`    | `string`                    | `controls`    | Stable TabList selection value.                                                                           |
 | `disabled` | `boolean`                   | `false`       | Blocks presses, removes the tab from the tab order, and selects the disabled colors.                      |
 | `layout`   | `iconAndText \| iconOnly`   | `iconAndText` | Selects the anatomy, the corner radius, and the padding.                                                  |
 | `onPress`  | `PressableProps['onPress']` | none          | The only signal a tab emits. The caller changes `selected` in response.                                   |
@@ -43,8 +45,9 @@ and `icon`, and rejects `content`. The compiler enforces all three.
 and reject an icon-only tab at compile time unless it supplies both an icon and
 an accessibility label and omits text content.
 
-**TAB-002:** Render the selection the caller passes and never mutate it; report
-interaction only through `onPress`.
+**TAB-002:** Render standalone selection without mutating it, consume TabList
+selection when grouped, and preserve `onPress` while reporting group
+interaction to the parent.
 
 ### Slots and anatomy
 
@@ -74,8 +77,9 @@ without moving the tab or its neighbors.
 ### State ownership
 
 Tab owns no selection state. Hover, press, and focus come from the shared
-pressable state and drive colors and the focus visual. Every other visible
-difference is a direct function of the `selected` and `disabled` props.
+pressable state and drive colors and the focus visual. Standalone visible state
+comes from `selected` and `disabled`; TabList context owns those values,
+focusability, set position, and keyboard navigation when present.
 
 **TAB-005:** Resolve the background and foreground from selected, disabled,
 pressed, and hovered state through the shared interactive precedence, and apply
@@ -93,10 +97,10 @@ disabled, following the corner radius of the active layout.
 
 ## Platform behavior
 
-Windows and macOS behave identically. The root is focusable while enabled and
-non-focusable while disabled, so Tab moves between the enabled tabs of a list in
-order. Because no list container ships in this package, roving focus, arrow-key
-movement, and Home and End belong to the caller.
+Windows and macOS behave identically. A standalone root is focusable while
+enabled and non-focusable while disabled. Inside TabList, exactly one enabled
+Tab is focusable and the parent moves that roving focus with orientation-aware
+arrows, Home, and End.
 
 On Windows the root maps to a UI Automation tab item that exposes its selected
 state, and the controlled-panel identifier is forwarded so Narrator can move to
@@ -112,7 +116,7 @@ precedence over hover.
 | ID                                | Disposition | React Native contract                                                                                                                                                                            | Follow-up                                                                                                 |
 | --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
 | `tab-disabled-focusability`       | Accepted    | A disabled tab is removed from the tab order and cannot be focused, while still reporting its disabled state. Flex keeps a disabled tab reachable so its state can be discovered by keyboard.    | None for this component. Reachability would have to come from a list container that manages roving focus. |
-| `tab-list-navigation-not-shipped` | Deferred    | Only the item ships. There is no list container, so arrow-key movement, roving focus, and the selection-follows-focus policy are the caller's responsibility.                                    | A list container is needed before this component can own those semantics.                                 |
+| `tab-list-navigation-not-shipped` | Resolved    | TabList now coordinates group selection, roving focus, orientation-aware arrows, Home and End, disabled-item skipping, and the selection-follows-focus policy.                                   | Implemented by the adjacent TabList contract and integration tests.                                       |
 | `tab-focus-modality`              | Accepted    | The focus visual appears whenever the root is focused, including after a press. Flex shows it only for keyboard-modality focus.                                                                  | None. React Native exposes no focus modality on these platforms.                                          |
 | `tab-selected-weight-reservation` | Accepted    | The selected label is heavier than the resting label, and the width for that heavier text is reserved on every tab so selection does not reflow the list. Flex describes only the weight change. | None. The reservation is an implementation requirement of the shared text layout, not a visual addition.  |
 
