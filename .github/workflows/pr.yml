@@ -215,8 +215,8 @@ jobs:
         run: yarn storybook prep --macos
         working-directory: apps/storybook
 
-      - name: Build macOS app
-        run: yarn storybook build --macos
+      - name: Run through storybook smoke tests
+        run: yarn storybook smoke --macos --mode stories-and-tests
         working-directory: apps/storybook
         env:
           CCACHE_DISABLE: 1
