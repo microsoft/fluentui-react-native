@@ -174,6 +174,14 @@ describe('Checkbox', () => {
     const component = await renderCheckbox({ label: 'Focused' });
     const root = getRoot(component);
 
+    expect(root.props.enableFocusRing).toBe(false);
+    await fireEvent(root, 'pressIn', {});
+    await fireEvent(root, 'focus', {});
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
+      opacity: 0,
+    });
+
+    await fireEvent(root, 'blur', {});
     await fireEvent(root, 'focus', {});
 
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({

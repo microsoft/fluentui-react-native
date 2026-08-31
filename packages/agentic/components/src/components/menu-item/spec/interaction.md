@@ -1,27 +1,15 @@
----
-component: MenuItem
-platform: react-native (Windows, macOS)
----
+# MenuItem interaction
 
-# MenuItem Interaction (React Native — Windows & macOS)
+Interactive list-item roots forward React Native Pressable handlers. Native
+pointer and keyboard activation call `onPress`; disabled rows cannot activate
+or receive focus. Pressing never changes `selected`, so an owning menu must
+update that value and clear peers when required.
 
-## Keyboard navigation
+Hover and press state select the root and text colors after style selection.
+The dual-ring FocusVisual remains mounted and is visible only for an enabled,
+focused list item. Section headers do not activate or focus, including when
+their skeleton is shown.
 
-- **Arrow Up / Arrow Down** — moves focus between items within the menu. Managed by the parent Menu container.
-- **Enter / Space** — activates the focused List Item (triggers action or toggles Selected state).
-- **Right Arrow** — opens a submenu if the item has a Chevron (submenu indicator).
-- **Left Arrow** — closes the current submenu and returns focus to the parent item.
-- **Home / End** — moves focus to the first or last item in the menu.
-- **Type-ahead** — typing a character moves focus to the next item whose label starts with that character.
-
-## Focus management
-
-Focus is managed by the parent Menu container using `roving tabindex` or `aria-activedescendant`. Individual items do not manage their own focus sequence — the Menu owns it.
-
-Section Header items are skipped during keyboard navigation — they are not focusable.
-
-## Animation
-
-State transitions (Rest → Hover) are platform-driven color transitions. Duration and easing reference motion tokens once defined.
-
-> **Reduced motion:** When the OS reduce-motion setting is set, all transitions should be instant. No scale, translate, or opacity animation is used on MenuItem.
+This component does not implement arrow navigation, Home/End, type-ahead,
+submenu opening, focus restoration, dismissal, or timed motion. Those are
+menu-container responsibilities on Windows and macOS.

@@ -97,25 +97,9 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
   const resolvedProgress = clampProgress(progressProp);
   const [trackLayoutWidth, setTrackLayoutWidth] = React.useState(0);
   const isReduceMotionEnabled = useReducedMotion() ?? false;
-  const [resolvedDeterminateProgress, setResolvedDeterminateProgress] = React.useState(resolvedProgress);
-  const previousType = React.useRef(type);
+  const resolvedDeterminateProgress = resolvedProgress;
   const indicatorTranslateX = React.useRef(new Animated.Value(0)).current;
   const indeterminateAnimation = React.useRef<Animated.CompositeAnimation | undefined>(undefined);
-
-  React.useEffect(() => {
-    if (type === 'indeterminate') {
-      previousType.current = type;
-      return;
-    }
-
-    setResolvedDeterminateProgress((current) => {
-      if (previousType.current === 'indeterminate') {
-        return resolvedProgress;
-      }
-      return Math.max(current, resolvedProgress);
-    });
-    previousType.current = type;
-  }, [resolvedProgress, type]);
 
   React.useEffect(() => {
     if (type !== 'indeterminate' || isReduceMotionEnabled || trackLayoutWidth <= 0) {

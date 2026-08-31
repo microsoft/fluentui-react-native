@@ -49,12 +49,12 @@ describe('Divider', () => {
 
     expect(StyleSheet.flatten(beforeLine.props.style)).toMatchObject({
       backgroundColor: tokens.color.strokeNeutralSubtle,
-      height: 1,
+      height: tokens.strokeWidth.thin,
       ...beforeExpected,
     });
     expect(StyleSheet.flatten(afterLine.props.style)).toMatchObject({
       backgroundColor: tokens.color.strokeNeutralSubtle,
-      height: 1,
+      height: tokens.strokeWidth.thin,
       ...afterExpected,
     });
     expect(StyleSheet.flatten(content.props.style)).toMatchObject({
@@ -73,7 +73,7 @@ describe('Divider', () => {
     expect(StyleSheet.flatten(root.props.style)).toMatchObject({ flexDirection: 'column' });
     expect(StyleSheet.flatten(beforeLine.props.style)).toMatchObject({
       backgroundColor: tokens.color.strokeNeutralSubtle,
-      width: 1,
+      width: tokens.strokeWidth.thin,
       flexGrow: 1,
     });
     expect(StyleSheet.flatten(content.props.style)).toMatchObject({

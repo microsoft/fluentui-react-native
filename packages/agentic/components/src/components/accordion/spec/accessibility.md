@@ -1,28 +1,7 @@
----
-component: Accordion
-platform: react-native (Windows, macOS)
----
+# Accordion accessibility
 
-# Accordion Accessibility (React Native — Windows & macOS)
+The header is the only accessible control. It uses React Native button semantics, remains accessible, and exposes `accessibilityState.expanded`. A supplied `accessibilityLabel` replaces the visible title for the accessible name; otherwise the visible title supplies the name. A title set to `null` requires an explicit label and triggers a development warning when absent.
 
-## Spec
+The header associates with the generated body identifier through React Native `accessibilityControls`. The body is not itself accessible and is hidden from accessibility descendants while collapsed. Its content becomes available in reading order only while expanded. Decorative leading and chevron icons are inaccessible.
 
-- **ARIA role:** The Header should render as a `<button>` (or `role="button"`).
-- **Required attributes:**
-  - `aria-expanded="true|false"` — on the Header button; reflects the Expanded variant state.
-  - `aria-controls="{bodyId}"` — points to the Body panel element.
-  - `id` on the Body panel — referenced by `aria-controls`.
-  - `aria-label` or visible title text — the Header must have an accessible name.
-- **WCAG:**
-  - **4.1.2 — Name, Role, Value:** The expanded/collapsed state must be programmatically determinable via `aria-expanded`.
-  - **1.4.3 — Contrast (Minimum):** Title and icon foreground must meet 4.5:1 at rest and hover.
-  - **2.1.1 — Keyboard:** Enter and Space must toggle the expanded state.
-  - **2.4.7 — Focus Visible:** Focus ring must be visible on the Header.
-  - **2.3.3 — Animation from Interactions:** Chevron rotation and body expand animation must be suppressed under reduce-motion.
-- **Screen reader:** On activation, should announce the new `aria-expanded` state ("expanded" or "collapsed").
-
----
-
-## Usage
-
-- **Required ARIA attributes for state:** Set `aria-expanded` and `aria-controls` on the Header button. Without them, keyboard and screen reader users cannot determine the expanded state.
+On Windows, the header maps to a UI Automation button and reports expanded state. On macOS, it maps to an AX button with the same state. `FocusVisual` provides the visible focus feedback; it has no accessible name and cannot intercept input.

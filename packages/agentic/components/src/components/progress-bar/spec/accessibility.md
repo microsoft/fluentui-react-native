@@ -1,43 +1,64 @@
----
-component: ProgressBar
-platform: react-native (Windows, macOS)
----
+# ProgressBar accessibility
 
-# ProgressBar Accessibility (React Native — Windows & macOS)
+## Native semantics
 
-## Spec
+The root is a `View` with `accessibilityRole="progressbar"` and defaults to
+`accessible={true}`. The header, the label, the trailing group, the value text,
+the validation icon, the track, and the indicator are all non-accessible, so the
+bar is announced once from the root.
 
-Build-time requirements that must be satisfied by the component implementation.
+On Windows, UI Automation reports a progress control with a name and, for a
+measured bar, a range value. On macOS, VoiceOver announces a progress indicator
+with its name and value.
 
-- **ARIA role:** `role="progressbar"`. Prefer the native `<progress>` element when no animation customization is required — it carries the role and value semantics intrinsically. Custom `<div role="progressbar">` is acceptable when CSS control of Indicator animation is needed (typical for Indeterminate).
-- **Required attributes:**
-  - `aria-valuemin="0"` and `aria-valuemax="100"` — required for **Determinate** and **Static**. Omit both for **Indeterminate**.
-  - `aria-valuenow="{0–100}"` — required for **Determinate** and **Static**. Omit entirely for **Indeterminate** — the absence of `aria-valuenow` is the ARIA signal for indeterminate progress.
-  - `aria-valuetext` — optional but recommended when the visible Value text is something other than a raw percentage ("3 of 10 files", "240 GB of 500 GB used"). Without this, screen readers announce the numeric `aria-valuenow` rather than the contextual phrase.
-  - `aria-labelledby` — required, pointing at the Label node. The Label slot is always rendered (see `SKILL.md` § Anatomy and § Variants "Why the Label is required"), so the bar's accessible name comes from visible text in every case.
-  - `aria-describedby` — optional. Use to associate supplementary text (an inline help message, an error explanation) with the bar.
-  - `aria-busy="true"` — set on **Indeterminate** bars. Reinforces the "work in flight" semantic, especially when reduce-motion removes the visual animation.
-  - **Status changes** (Neutral → Error / Success) — when the bar is associated with a status change that requires user awareness (e.g. a failed upload), announce the change via a live region (`role="status"` for Success, `role="alert"` for Error) on a sibling element, not on the progressbar itself. The progressbar role's announcement semantics are not designed to deliver outcome messages.
-- **WCAG:**
-  - **1.3.1 — Info and Relationships:** The progressbar role and its `aria-value*` attributes programmatically communicate progress. Visual progress alone (Indicator width) is insufficient — the values must be exposed to assistive technology.
-  - **1.4.3 — Contrast (Minimum):** Label text (`--gnrc-color-foreground-neutral-primary`) and Value text (`--gnrc-color-foreground-neutral-secondary`) must meet 4.5:1 against the page surface. Validation icon foreground tokens carry semantic meaning and must also meet 3:1 minimum against the page surface.
-  - **1.4.11 — Non-text Contrast:** The Track and Indicator pair is tuned for a soft, recessive visual and does **not** meet 3:1 against the page surface or between Track and Indicator on its own. The required Label (covered under 1.4.3 below) bridges this gap by naming the component and its state in text that does meet contrast — see `SKILL.md` § Variants "Why the Label is required". Consumers must not suppress the Label or rely on `aria-label` in place of the visible Label node.
-  - **2.2.2 — Pause, Stop, Hide:** Indeterminate animation longer than 5 seconds must offer a mechanism to pause, stop, or hide it (typically a cancel button on the parent operation, not on the bar itself). The reduced-motion path (see `interaction.md`) satisfies this for users with the OS setting enabled, but a user-controllable affordance is still required for those without.
-  - **2.3.3 — Animation from Interactions:** Determinate value-transition animation must be removable via the OS reduce-motion setting. Indeterminate's continuous loop must also be removable — see `interaction.md`.
-  - **4.1.2 — Name, Role, Value:** Role is `progressbar`. Name comes from `aria-label` / `aria-labelledby`. Value is `aria-valuenow` (or the absence thereof, for Indeterminate). All three must be programmatically determinable.
-- **Screen reader:**
-  - **Determinate / Static:** Announces the label, the role ("progress bar"), and the current value — either the raw percentage from `aria-valuenow` or the `aria-valuetext` string when provided. Updates to `aria-valuenow` are announced politely by most screen readers; very frequent updates (every frame) should be throttled to once per ~10% step to avoid announcement spam.
-  - **Indeterminate:** Announces the label, the role, and "busy" (from `aria-busy="true"` plus the absence of `aria-valuenow`). The screen reader does not announce ongoing progress; the user understands the operation is in flight but unmeasured.
-  - **Status changes:** The progressbar itself does not announce Status transitions. Pair with a live region for outcome announcements (see `aria-busy` and status announcement notes above).
+## Naming
 
----
+The label text is always rendered and always carries a generated identifier. The
+root references that identifier through `accessibilityLabelledBy`, so the
+accessible name comes from visible text in every case. A caller value for
+`accessibilityLabelledBy` is preserved and the generated identifier is appended,
+so extra description nodes can be referenced without losing the name.
 
-## Usage
+Because the name comes from the visible label, replace the default label text
+with something that identifies the task. `Label` names nothing.
 
-Implementation-time considerations that cannot be solved at build. Cover only what applies.
+## Value
 
-- **Reduced motion:** Respect the OS reduce-motion setting per `interaction.md`. The Indeterminate visual loop must be removed and `aria-busy="true"` must carry the "in flight" semantic instead. Determinate value transitions become instant; the final value is still announced.
-- **Value announcement throttling:** `aria-valuenow` updates that fire many times per second (e.g. byte-level upload progress) cause screen-reader announcement storms. Throttle DOM updates to ~10% increments or to no more than one announcement every ~500ms.
-- **Indeterminate timeout and stuck-bar handling:** A bar that remains Indeterminate for an extended period appears stuck to all users, and is especially confusing for screen-reader users who cannot see the animation at all. If a backend has no progress signal, surface an estimated time or a cancel control in the surrounding UI — do not rely on the bar alone to communicate liveness.
-- **Live regions for outcomes:** Status transitions (Error / Success) should be announced through a sibling live region, not the progressbar's own ARIA. `role="alert"` for Error (assertive), `role="status"` for Success (polite). Overusing `role="alert"` desensitizes users to genuine alerts.
-- **Combinations with MessageBar:** When pairing a failed-status ProgressBar with an Error MessageBar, the MessageBar carries the page-level announcement (`role="alert"`); the bar's role stays `progressbar`. Avoid duplicating the failure announcement on both nodes — pick one source.
+| Type            | Reported value                                                                                     |
+| --------------- | -------------------------------------------------------------------------------------------------- |
+| `determinate`   | A bounded value with minimum `0`, maximum `100`, and the resolved percentage as the current value. |
+| `static`        | The same bounded value as determinate.                                                             |
+| `indeterminate` | No value at all. The absence of a value is what marks the progress as unmeasured.                  |
+
+A text form of the value is published only when the resolved value text differs
+from the plain percentage, so a contextual phrase such as a byte count or a file
+count is announced instead of the bare number, while a plain percentage is not
+duplicated.
+
+An indeterminate bar also reports a busy state. That state is what carries the
+work-in-flight meaning when reduced motion has removed the visual loop, so an
+indeterminate bar remains meaningful to assistive technology with no animation
+running.
+
+## Status
+
+ProgressBar does not announce a change from neutral to error or success. React
+Native exposes no live-region facility here, and the progress role is not a
+delivery mechanism for outcome messages. Announce outcomes from the surrounding
+surface, for example a status message rendered next to the bar, and do not
+duplicate the same message in two places.
+
+The validation icon is hidden from the accessibility tree, so status must also
+be carried by the value text or the label. Color alone is not sufficient.
+
+## Update frequency
+
+Value changes are published on every render. Updating many times per second
+produces an announcement storm on both platforms. Throttle updates to roughly
+one step every ten percent, or to no more than one update every half second.
+
+## Focus
+
+ProgressBar sets `focusable={false}` on the root and attaches no focus handlers,
+so it never enters the tab order and has no focus indicator. Any cancel or retry
+affordance must be a separate focusable control.

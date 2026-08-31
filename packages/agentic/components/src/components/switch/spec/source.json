@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "component": "switch",
+  "skill": "flex-components:switch",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-28",
+  "availableSurfaces": ["shared", "web"],
+  "surfacesConsulted": ["shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/switch/SKILL.md",
+      "marketplaceBlobSha": "309957ff5997e0e659f67a47bf52abf75a17c6dd",
+      "marketplaceSha256": "d3f35b73afe0a76e07189fe8e5a82d134fddad6c3f8fec3fa75844d7e7c83040",
+      "originPath": "plugins/components/skills/switch/SKILL.md",
+      "originBlobSha": "309957ff5997e0e659f67a47bf52abf75a17c6dd",
+      "originSha256": "d3f35b73afe0a76e07189fe8e5a82d134fddad6c3f8fec3fa75844d7e7c83040",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/switch/usage.md",
+      "marketplaceBlobSha": "ba92c061f7027802befa271e538243acf0381698",
+      "marketplaceSha256": "966fd0a311abc3666c7851e0503738c7325dc3862fd909be05627296e572b6ad",
+      "originPath": "plugins/components/skills/switch/usage.md",
+      "originBlobSha": "ba92c061f7027802befa271e538243acf0381698",
+      "originSha256": "966fd0a311abc3666c7851e0503738c7325dc3862fd909be05627296e572b6ad",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/switch/web/accessibility.md",
+      "marketplaceBlobSha": "7e10e09d1f0bd674e79e7ce065a0f906b6b58beb",
+      "marketplaceSha256": "04c07022d7b464059196dd3a3e2dcc05088975424cc1c908c652fd7965791dc7",
+      "originPath": "plugins/components/skills/switch/web/accessibility.md",
+      "originBlobSha": "7e10e09d1f0bd674e79e7ce065a0f906b6b58beb",
+      "originSha256": "04c07022d7b464059196dd3a3e2dcc05088975424cc1c908c652fd7965791dc7",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/switch/web/interaction.md",
+      "marketplaceBlobSha": "61cf6c42ca454ca481f38111c08daf8e4176794c",
+      "marketplaceSha256": "053aedc2d42fc355dbab0603986d0abd1e04958c197c5f8d312f05a3f645c799",
+      "originPath": "plugins/components/skills/switch/web/interaction.md",
+      "originBlobSha": "61cf6c42ca454ca481f38111c08daf8e4176794c",
+      "originSha256": "053aedc2d42fc355dbab0603986d0abd1e04958c197c5f8d312f05a3f645c799",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/switch/web/tokens.yaml",
+      "marketplaceBlobSha": "26c4305c1c928834324d5aa0c2b47898f380cc36",
+      "marketplaceSha256": "d965f2469095e36034214719999b2b847d41101ef2cac3562d02602965e374d8",
+      "originPath": "plugins/components/skills/switch/web/tokens.yaml",
+      "originBlobSha": "26c4305c1c928834324d5aa0c2b47898f380cc36",
+      "originSha256": "d965f2469095e36034214719999b2b847d41101ef2cac3562d02602965e374d8",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [],
+  "divergences": [
+    {
+      "id": "switch-label-association-ids",
+      "status": "resolved"
+    },
+    {
+      "id": "switch-label-spacing",
+      "status": "accepted"
+    },
+    {
+      "id": "switch-focus-modality",
+      "status": "accepted"
+    },
+    {
+      "id": "switch-keyboard-activation-path",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "SWCH-001",
+      "evidence": ["switch.types.ts", "useSwitch.ts", "switch.types.test.ts", "switch.test.tsx"]
+    },
+    {
+      "id": "SWCH-002",
+      "evidence": ["useSwitch.ts", "switch.test.tsx"]
+    },
+    {
+      "id": "SWCH-003",
+      "evidence": ["renderSwitch.tsx", "useSwitch.ts", "switch.test.tsx"]
+    },
+    {
+      "id": "SWCH-004",
+      "evidence": ["switch.styles.ts", "useSwitchStyles.ts", "switch.test.tsx"]
+    },
+    {
+      "id": "SWCH-005",
+      "evidence": ["useSwitchStyles.ts", "switch.test.tsx"]
+    },
+    {
+      "id": "SWCH-006",
+      "evidence": ["useSwitch.ts", "switch.test.tsx"]
+    },
+    {
+      "id": "SWCH-007",
+      "evidence": ["switch.styles.ts", "switch.test.tsx"]
+    },
+    {
+      "id": "SWCH-008",
+      "evidence": ["useSwitch.ts", "useSwitchStyles.ts", "switch.stories.tsx"]
+    }
+  ]
+}

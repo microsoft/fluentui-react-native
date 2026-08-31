@@ -1,179 +1,51 @@
-component: Radio
-type: molecular
+schemaVersion: 1
+component: radio
+implementation: radio.styles.ts
 
-variants:
-  State:
-    values: [Rest, Hover, Pressed, Disabled, Focus]
-  Status:
-    values: [Unselected, Selected]
-    default: Unselected
+statePrecedence:
+  - selected
+  - disabled
+  - pressed
+  - hovered
 
-tokens:
-  background:
-    rest:
-      Unselected: color.backgroundNeutralTransparent
-      Selected: color.backgroundNeutralTransparent
-    disabled:
-      Unselected: color.backgroundNeutralTransparent
-      Selected: color.backgroundNeutralTransparent
-
-  foreground:
-    indicator:
-      rest:
-        Selected:
-          value: color.foregroundBrandPrimary
-          hover: color.hover.foregroundBrandPrimary
-          pressed: color.pressed.foregroundBrandPrimary
-        Unselected: n/a — no indicator dot visible.
-      disabled:
-        Selected: color.foregroundNeutralDisabled
-    label:
-      rationale: >
-        Radio-level override applied to the composed flex-components:label
-        sub-component. Label's own state model is Rest/Disabled only — the
-        secondary→primary shift across Status (Unselected/Selected) is
-        Radio-owned because it communicates the active choice within a group.
-        Label remains the source of truth for the label's typography and
-        <label for> association behavior.
-      rest:
-        Unselected:
-          value: color.foregroundNeutralSecondary
-          hover: color.hover.foregroundNeutralSecondary
-          pressed: color.pressed.foregroundNeutralSecondary
-        Selected:
-          value: color.foregroundNeutralPrimary
-          hover: color.hover.foregroundNeutralPrimary
-          pressed: color.pressed.foregroundNeutralPrimary
-      disabled:
-        Unselected: color.foregroundNeutralDisabled
-        Selected: color.foregroundNeutralDisabled
-    secondary-text:
-      rationale: Stays at secondary regardless of Status — does not promote on Selected.
-      rest:
-        Unselected:
-          value: color.foregroundNeutralSecondary
-          hover: color.hover.foregroundNeutralSecondary
-          pressed: color.pressed.foregroundNeutralSecondary
-        Selected:
-          value: color.foregroundNeutralSecondary
-          hover: color.hover.foregroundNeutralSecondary
-          pressed: color.pressed.foregroundNeutralSecondary
-      disabled:
-        Unselected: color.foregroundNeutralDisabled
-        Selected: color.foregroundNeutralDisabled
-
-  stroke:
-    width: strokeWidth.thin
-    width-rationale: Standard containment stroke for form controls; consistent with other atomic input components.
-    rest:
-      Unselected:
-        value: color.strokeNeutralHeavy
-        hover: color.hover.strokeNeutralHeavy
-        pressed: color.pressed.strokeNeutralHeavy
-      Selected:
-        value: color.strokeBrandLoud
-        hover: color.hover.strokeBrandLoud
-        pressed: color.pressed.strokeBrandLoud
-    focus: See flex-system:styling — universal dual-outline focus ring.
-    disabled:
-      Unselected: color.strokeNeutralDisabled
-      Selected: color.strokeNeutralDisabled
-
-  radius:
-    indicator: borderRadius.circular
-    focus-ring: borderRadius.base300
-    focus-ring-rationale: >
-      Focus ring wraps the entire interactive area (indicator + label),
-      so it uses a larger radius than the indicator itself.
-
-  typography:
-    label:
-      source: flex-components:label
-      rationale: >
-        Typography is sourced from the composed Label sub-component
-        (Weight=Regular × Size=Medium → textstyle-functional-body-medium).
-        Radio does not bind typography directly so there is a single
-        source of truth for the label's text style.
-    secondary-text:
-      token: textstyle-functional-body-small
-      font-family: fontFamily.functional
-      rationale: One step smaller than body-medium to create clear hierarchy between primary label and description.
-
-  spacing:
-    indicator:
-      margin: spacing.componentBase200
-      margin-rationale: >
-        Margin on the visible indicator provides visual breathing room
-        without introducing an extra DOM/Figma wrapper layer. The Radio's
-        hit target is the Root container (which includes the label when
-        present), and the indicator margin sits inside that hit area.
-        If a consumer scopes the hit target to the indicator alone rather
-        than the Root, the indicator margin must still count toward the
-        hit area so that indicator + margin meets WCAG 2.5.5/2.5.8
-        (24×24 minimum) — with the current `spacing.componentBase200`
-        value (8px), standalone indicator + margin = 16 + 2×8 = 32×32,
-        comfortably above the minimum. Figma re-introduces a wrapper
-        layer at export time when needed for auto-layout fidelity; the
-        spec's canonical model is margin on the indicator.
-    label-wrapper:
-      horizontal-end: spacing.componentBase200
-      vertical: spacing.componentBase150
-      rationale: >
-        End-side padding only — provides breathing room after the label.
-        No start-side padding — the gap token controls indicator-to-label spacing.
-        Vertical padding vertically centers the text baseline with the indicator center.
-    label-inner-gap: spacing.componentBase50
-    label-inner-gap-rationale: >
-      Tightest tier between primary label and secondary text — they read as
-      a single text cluster. Matches Label's internal gap (text ↔ required
-      indicator) for consistency. Only applies when secondary text is visible.
+bindings:
+  root:
+    backgroundColor: color.backgroundNeutralTransparent
+    borderRadius: borderRadius.base300
     gap: spacing.componentBase100
-    gap-rationale: Tightest atomic tier for tightly coupled elements — controls indicator-to-label spacing.
+  indicator:
+    size: 16
+    radius: 8
+    margin: spacing.componentBase200
+    borderWidth: strokeWidth.thin
+    border:
+      rest: color.strokeNeutralHeavy
+      selected: color.strokeBrandLoud
+      disabled: color.strokeNeutralDisabled
+  dot:
+    size: 10
+    radius: 5
+    visibleWhen: selected
+    background:
+      selected: color.foregroundBrandPrimary
+      disabled: color.foregroundNeutralDisabled
+  label:
+    typography: [fontFamily.functional, fontSize.functionalBodyMedium, fontWeight.functionalRegular, lineHeight.functionalBodyMedium]
+    color:
+      unselected: color.foregroundNeutralSecondary
+      selected: color.foregroundNeutralPrimary
+      disabled: color.foregroundNeutralDisabled
+  secondaryText:
+    typography: [fontFamily.functional, fontSize.functionalBodySmall, fontWeight.functionalRegular, lineHeight.functionalBodySmall]
+    color:
+      rest: color.foregroundNeutralSecondary
+      disabled: color.foregroundNeutralDisabled
+  labelContainer:
+    gap: spacing.componentBase50
+    paddingEnd: spacing.componentBase200
+    paddingVertical: spacing.componentBase150
+  focusVisual:
+    outer: [color.strokeFocusOuter, strokeWidth.thick]
+    inner: [color.strokeFocusInner, strokeWidth.thin]
 
-  elevation: n/a
-
-  motion:
-    status: pending
-    guidance: >
-      State color transitions should be fast (≤150ms) with standard ease-in-out.
-      Status transitions (Unselected → Selected) may include a brief dot scale-in animation.
-      Reduced motion — instant, no animation.
-
-sizes:
-  Default:
-    indicator: 16px
-    indicator-dot: 10px
-  notes: >
-    Single size — no Size variant axis. Height is always auto — emergent from
-    indicator margin + indicator size when only the label is shown, and from
-    primary label line-height + inner-gap + secondary text line-height +
-    vertical padding when secondary text is visible. Indicator vertically aligns
-    to the primary label baseline, not the full text stack center.
-    Indicator and dot sizes have no token coverage and must be hardcoded.
-
-dependencies:
-  Label:
-    skill: flex-components:label
-    usage: >
-      Sub-component for the radio's text label. Composed with
-      Weight=Regular × Size=Medium × Required=Off. Label sources the
-      text node, typography, and <label for> association; Radio applies
-      a foreground override per Status (secondary on Unselected →
-      primary on Selected) because Label does not model selection.
-
-properties:
-  component:
-    Label string:
-      type: TEXT
-      default: 'Label'
-      notes: Binds through to the text node of the composed flex-components:label sub-component.
-    Secondary text string:
-      type: TEXT
-      default: 'Description'
-      notes: Bound to the secondary text node beneath the label. Only visible when Secondary text property is true.
-    Secondary text:
-      type: BOOLEAN
-      default: false
-      notes: >
-        Toggles secondary text visibility. Hidden by default — the primary
-        use case remains single-label Radio.
+tokenGaps: []

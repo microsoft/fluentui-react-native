@@ -1,9 +1,8 @@
-import * as React from 'react';
-import { Animated, Easing, View } from 'react-native';
+import { Animated, View } from 'react-native';
 import { Svg } from 'react-native-svg';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useAccessibilityLabelWarning, useReducedMotion, useSlot } from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, useReducedMotion, useSharedAnimatedLoop, useSlot } from '@fluentui-react-native/framework-base';
 
 import { getSpinnerMetrics } from './spinner.styles';
 import type { SpinnerProps, SpinnerState } from './spinner.types';
@@ -22,34 +21,13 @@ export function useSpinner_unstable(props: SpinnerProps): SpinnerState {
   const { center, diameter, radius, strokeWidth } = getSpinnerMetrics(size, themeState.tokens);
   const trackColor = themeState.tokens.color.strokeNeutralSubtle;
   const indicatorColor = themeState.tokens.color.strokeNeutralLoud;
-  const rotation = React.useRef(new Animated.Value(0)).current;
   const reduceMotionEnabled = useReducedMotion();
-
-  React.useEffect(() => {
-    if (reduceMotionEnabled) {
-      rotation.stopAnimation();
-      rotation.setValue(0);
-      return undefined;
-    }
-
-    if (reduceMotionEnabled === false) {
-      rotation.setValue(0);
-      const animation = Animated.loop(
-        Animated.timing(rotation, {
-          toValue: 1,
-          duration: spinnerDuration,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-      );
-      animation.start();
-      return () => animation.stop();
-    }
-
-    rotation.stopAnimation();
-    rotation.setValue(0);
-    return undefined;
-  }, [reduceMotionEnabled, rotation]);
+  const rotation = useSharedAnimatedLoop({
+    channel: 'agentic-components:spinner',
+    duration: spinnerDuration,
+    enabled: reduceMotionEnabled === false,
+    useNativeDriver: true,
+  });
 
   useAccessibilityLabelWarning({
     accessibilityLabel: accessibilityLabel ?? rest['aria-label'],

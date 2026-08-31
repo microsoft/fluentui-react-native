@@ -1,35 +1,94 @@
----
-component: Tab
----
+# Tab usage
 
-# Tab Usage
+## When to use
 
-## When to Use
+Use tabs to switch between peer views of the same subject where only one view is
+visible at a time and the user can move freely between them: Overview, Activity,
+Files. Keep the set small and stable; tabs are a poor fit for a long or
+changing list.
 
-- To switch between related content panels within a persistent container (e.g., Files, People, Chats).
-- As a navigation affordance within a Tablist where only one panel is visible at a time.
-- When the user needs to compare categories of related information without leaving the current surface.
+Do not use tabs for navigation that changes the address of the app; use links or
+a navigation surface. Do not use them for a step-by-step flow, which needs a
+wizard, or for filtering a single list, which is a filter control. Do not use a
+tab as a toggle for an option.
 
-### vs Button
+## Group selection
 
-Button triggers a discrete action (submit, delete, open). Tab navigates between content views within a persistent container. Button is a standalone focus target; Tab is part of a navigation group owned by Tablist. Button has a Style axis (Primary, Secondary, Outline, Subtle); Tab has a single implicit style with selected/unselected visual distinction.
+Use TabList to coordinate selection, list semantics, and roving keyboard focus:
 
-### vs Tag
+```tsx
+import { Tab, TabList } from '@fluentui-react-native/agentic-components';
 
-Tag labels, categorizes, or filters content and can be dismissed. Tab navigates between content panels. Tag uses `brand-heavy` fill at rest regardless of selection; Tab uses `transparent` at rest and `neutral-heavy` only when selected. Tag supports a dismiss action; Tab does not.
+const [selected, setSelected] = React.useState('overview');
 
----
+<TabList selectedValue={selected} onSelectionChange={setSelected}>
+  <Tab value="overview" controls="overview-panel" content="Overview" />
+  <Tab value="activity" controls="activity-panel" content="Activity" />
+</TabList>;
+```
 
-## Behavior
+Omit `selectedValue` and use `defaultSelectedValue` for an uncontrolled group.
+When `value` is omitted from a Tab, TabList uses its `controls` identifier.
 
-- **Never use Disabled to represent an inactive tab.** Disabled means the tab is unavailable. Use Selected=False for the non-active tab.
-- **Always ensure exactly one tab is Selected=True.** A tablist must always have one active tab — zero or multiple selected tabs is invalid.
-- **Always apply the correct radius token per layout.** Icon + label uses `--gnrc-border-radius-base-300`; Icon only uses `--gnrc-border-radius-circular`. Do not hardcode pixel values.
-- **Always prevent layout reflow on toggle.** When Selected changes, the label weight changes from Regular to Semibold. Reserve layout space at Semibold width using the ghost node pattern. See Anatomy.
-- **Always use the Fluent Iconography Image icon as the default INSTANCE_SWAP value.** Never use placeholder frames, shapes, or custom vectors in icon slots.
-- **Never use Tab outside of a Tablist.** Tab is not a standalone control — it must be a child of a Tablist container to function correctly.
-- **Always connect each tab to its panel.** Pass the controlled panel id through the `controls` prop so accessibility can map it to the associated tabpanel.
+Render the panel yourself and give it the identifier each tab points at:
 
-## Content
+```tsx
+<View nativeID="overview-panel">{selected === 'overview' ? <Overview /> : null}</View>
+```
 
-- **Always use functional typography on labels.** Never apply content-set type to tab labels — tabs are interactive UI chrome, not editorial content.
+## Icons
+
+Supply `icon` for the resting state and `selectedIcon` for the selected state,
+usually the filled variant of the same glyph. When only `icon` is supplied it is
+used in both states.
+
+```tsx
+<Tab
+  controls="activity-panel"
+  selected={isActivity}
+  icon={<Icon svg={ActivityRegular} />}
+  selectedIcon={<Icon svg={ActivityFilled} />}
+  content="Activity"
+/>
+```
+
+Do not size or color the icon yourself; the tab applies its own size and the
+resolved foreground so the icon and the label always match.
+
+## Icon-only tabs
+
+```tsx
+<Tab layout="iconOnly" controls="activity-panel" accessibilityLabel="Activity" icon={<Icon svg={ActivityRegular} />} />
+```
+
+The icon-only layout requires both an icon and an `accessibilityLabel` and
+rejects `content`; all three are enforced by the compiler. Use it only when the
+glyphs are unambiguous on their own, and keep a whole group icon-only rather
+than mixing layouts in one row.
+
+## Standalone control
+
+Tab can still participate in a custom caller-owned group. In that case pass
+`selected`, handle `onPress`, and own the list semantics and keyboard model.
+Prefer TabList for ordinary tab groups so only one enabled Tab enters the native
+tab order.
+
+## Disabled tabs
+
+```tsx
+<Tab controls="files-panel" disabled content="Files" />
+```
+
+A disabled tab cannot be focused or pressed but still reports its disabled
+state. Prefer removing a tab that will never be available over leaving a
+permanently dead one in the row.
+
+## Common mistakes
+
+Passing both standalone `selected` state and TabList selection. The parent
+context owns selection while a Tab is grouped.
+
+Pointing several tabs at the same `controls` identifier, which breaks the
+relationship between each tab and its panel.
+
+Labeling an icon-only tab after its glyph instead of after the panel it shows.

@@ -1,45 +1,55 @@
----
-component: Skeleton
----
+# Skeleton usage
 
-# Skeleton Usage
+Use Skeleton when a region is fetching content whose shape is already known and
+the wait is long enough that an empty gap would read as breakage. Give each
+placeholder the size of the block it stands in for so the layout does not shift
+when the real content arrives.
 
-## When to Use
+Reach for Spinner instead when the incoming layout is unknown or the region is
+too small to imitate, and for a determinate progress control when a measurable
+percentage exists. Do not stand in for fixed chrome that is already on screen.
 
-- To occupy space for content that takes longer than ~1s to load and whose layout is known in advance (avatar + name + subtitle, card grid, list of rows).
-- To preserve page structure during data fetches so the surrounding layout does not shift when content arrives.
-- To signal that a specific region is loading without blocking interaction elsewhere on the page.
+```tsx
+<Skeleton style={{ height: 12, width: 176 }} />
+<Skeleton style={{ borderRadius: 24, height: 48, width: 48 }} />
+<Skeleton style={{ borderRadius: 12, height: 96, width: 224 }} />
+```
 
-### When NOT to Use
+## Sizing and shape
 
-- Do not use Skeleton when the incoming content's structure is unknown — the placeholder will misrepresent what's coming. Use a Spinner or progress indicator instead.
-- Do not use Skeleton for fixed chrome that is already present (app bars, navigation, tabs) — only stand in for variable content.
-- Do not use Skeleton for long-running background processes — the implicit promise of "content shortly" breaks. Use a determinate progress bar or status message.
-- Do not use Skeleton for content under ~1s of expected load time — the flash of placeholder is more disruptive than the brief blank.
+Skeleton has no intrinsic size and no size or shape props. Everything comes
+from `style`, which is applied after the component's own root styles: set
+`height` and `width` to the block being replaced, and override `borderRadius`
+for a circular avatar or a larger media tile. A placeholder without a height
+collapses and renders nothing visible.
 
-### vs Spinner
+A single placeholder is one block. Build a loading silhouette by composing
+several placeholders in the caller's own layout, keeping the silhouette coarse
+enough that it never promises detail the real content may not have.
 
-Skeleton communicates **what is about to appear** by mimicking the layout of the incoming content. Spinner communicates only that **something is happening** with no structural information. Reach for Skeleton when the layout is known and meaningful; reach for Spinner when it isn't, or when the region is too small to mimic structure.
+```tsx
+<View style={{ flexDirection: 'row', gap: 12 }}>
+  <Skeleton style={{ borderRadius: 20, height: 40, width: 40 }} />
+  <View style={{ gap: 6 }}>
+    <Skeleton style={{ height: 12, width: 160 }} />
+    <Skeleton style={{ height: 12, width: 96 }} />
+  </View>
+</View>
+```
 
-### vs ProgressBar
+## Loading semantics
 
-ProgressBar communicates **how much of a known task is complete**. Skeleton communicates **a placeholder for an unknown-duration content fetch**. Use ProgressBar when you have a measurable percentage (upload, install, multi-step flow); use Skeleton when you have layout but no measurable progress.
+Placeholders are hidden from assistive technology, so announce the loading
+state once on the region that owns the fetch rather than on any placeholder.
+Swap placeholders for real content in one step; prefer resolving a group of
+fetches together over replacing placeholders one at a time.
 
----
+Do not wrap a placeholder in a pressable surface to make loading content
+"clickable early", and do not keep placeholders mounted for background work
+that has no bounded end.
 
-## Behavior
+## Motion
 
-- **Keep the skeleton silhouette simple and high-level.** Approximate the layout block — avatar circle, title bar, subtitle bar — and stop. Do not render placeholder copy, fake initials, or specific shapes that may differ from the actual content. The skeleton is a silhouette, not a forgery; specific details set false expectations that the real content may not meet.
-- **Synchronize skeletons within a single group.** When multiple skeletons appear together, their animation cycles must share a single timeline so the highlight band crosses every bar in unison. Staggered animations read as unintended noise rather than as a coordinated loading state.
-- **Prefer simultaneous data fetches over staggered ones.** Staggered loads produce staggered skeleton-to-content swaps, which feel jittery. If a staggered load is unavoidable, hold all skeletons until the slowest finishes rather than swapping them in piecemeal.
-- **Do not block interaction outside the skeleton region.** Skeletons signal that a region is loading; the rest of the page should remain interactive. If the entire page is unusable until load completes, use a different pattern (blocking spinner, full-screen progress).
-- **Replace skeletons with real content directly, without a fade or transition.** The swap should be an instant substitution at the moment the data arrives. Animated fades extend the perceived load time without adding information.
-
----
-
-## Layout
-
-- **Match the dimensions of the content the Skeleton replaces.** A title-bar skeleton should be the height of the title's textstyle line-height; an avatar skeleton should be the diameter of the avatar it stands in for. Mismatched dimensions cause layout shift when content arrives, which is the exact failure mode Skeleton exists to prevent.
-- **Group skeletons by content block, not by uniform rows.** A persona placeholder is a circle plus two bars (name, subtitle), not three identical bars. The placeholder should read as the shape of the content even at a glance.
-- **Use Skeleton at the leaf level — one Bar per content element.** Do not draw a single large skeleton spanning multiple content blocks; granularity of the placeholder should match the granularity of the data fetch where possible.
-- **Override radius on the instance to match content shape.** Override radius on the instance to match content shape. The default radius is a neutral starting point, not a rule.
+The sweep stops entirely under the platform reduced-motion setting, so never
+rely on movement alone to communicate that a region is busy. Active
+placeholders share one phase even when they mount at different moments.

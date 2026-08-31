@@ -1,65 +1,52 @@
 ---
 name: accordion
 platform: react-native (Windows, macOS)
-description: Atomic collapsible panel with an interactive header and a free body content slot. Covers chevron layout (start/end), expand/collapse state, optional leading icon, focus ring behavior, and body content slot conventions.
-argument-hint: "[variant axis or behavior question, e.g. 'chevron end layout' or 'focus ring tokens']"
+status: implemented
+source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
 ---
 
-## Metadata
-
-| Field     | Value     |
-| --------- | --------- |
-| Type      | atomic    |
-| Component | Accordion |
-
-This spec covers the Accordion component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
-
-Answer design questions directly — lead with rationale, then tokens. The most important principle: the body slot is a free content area — never put information required for the current task inside an accordion. The Expanded axis is a variant property (not a State), and Focused is a boolean component prop — do not conflate these with the State axis.
-
----
-
 # Accordion
 
-## Spec
+## Scope
 
-### Anatomy
+Accordion is a disclosure component with one pressable header and one body region. It owns expanded state, header semantics, chevron presentation, and body visibility; its consumer supplies title, leading icon, and body content. It does not coordinate sibling accordions, impose a body schema, or animate expansion.
 
-1. **Container** — root auto-layout wrapper; owns the full component width.
-2. **Header** — interactive row; owns padding, gap, border radius, and the focus ring. The only interactive surface on the component.
-3. **Chevron** — 16px Fluent Iconography instance. ChevronRight at rest (Expanded=False), rotates to ChevronDown when Expanded=True. Position determined by Layout variant: at the leading edge in Chevron start, pushed to the far trailing edge in Chevron end.
-4. **Leading icon** — optional 16px Fluent Iconography instance before the title. Shown by default.
-5. **Title** — section label text; always Semibold (`body-small-strong`). Fills remaining header width in Chevron start layout; natural width in Chevron end layout.
-6. **Body** — content panel visible only when Expanded=True. Accepts any child component via the `Body content` slot.
-7. **Content placeholder** — default body content shown when no child is provided. Swap with your component.
+## Public contract
 
-| Slot         | Required | Default             |
-| ------------ | -------- | ------------------- |
-| Title        | Yes      | "Section title"     |
-| Leading icon | No       | Shown               |
-| Body content | No       | Content placeholder |
+`layout` defaults to `chevronStart`; `size` is currently always `small`. Expansion is self-driving: `defaultExpanded` initializes uncontrolled state, `expanded` makes the value controlled, and `onExpandedChange` receives the requested next value in either mode. `focused` can force the focus visual for an instance. The root accepts the owned `ViewProps` surface, including `style`, while the component owns its accessibility and focus behavior.
 
----
+`root` is required. `title` and `leadingIcon` are optional public slots but render by default as “Section title” and a selected-circle icon; pass `null` to omit either. `bodyContent` is optional. The rendered root contains the header, then the body. Header children are always `FocusVisual`, followed by chevron, leading icon, and title for `chevronStart`; `chevronEnd` orders leading icon, title, then chevron. The body always exists and renders `bodyContent` or a text placeholder.
 
-### Variants
+The resolved state retains the controlled/uncontrolled expansion result, pressable hover/press/focus state, layout, size, theme state, and user root style. User root style follows the structural root style. Header colors give pressed state priority over hovered state.
 
-Variant properties are ordered in the design tool: **Layout → Size → State → Expanded**.
+### Requirements
 
-#### Layout
+- **ACC-001:** Resolve the documented defaults and implement controlled and uncontrolled expansion without mutating a controlled value.
+- **ACC-002:** Render the public slots, default slot content, body fallback, and layout-specific header order.
+- **ACC-003:** Apply theme-token header, title, body, chevron, visibility, and persistent focus-visual styling.
+- **ACC-004:** Expose a labeled button header with expanded state and an accessibility relationship to the body; hide collapsed body descendants.
+- **ACC-005:** Keep grouping policy, body contents, and motion outside the component contract.
 
-| Value             | When to Use                                                                                                                                         |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Chevron start** | Default. Anchors the expand affordance to the leading edge; title fills remaining width.                                                            |
-| **Chevron end**   | When the leading icon is the primary anchor; chevron is pushed to the far end of the header (opposite edge from the title). Title at natural width. |
+## Platform behavior
 
-#### Expanded
+On Windows and macOS, the header is a React Native `Pressable` with button role. Its native keyboard and pointer activation request expansion; `Enter` and `Space` are handled by the platform pressable behavior. The header exposes `accessibilityState.expanded`, its `accessibilityControls` target is the generated body identifier, and caller-provided accessibility state is retained.
 
-| Value     | Visual                                           |
-| --------- | ------------------------------------------------ |
-| **False** | Body hidden; chevron points right (ChevronRight) |
-| **True**  | Body visible; chevron points down (ChevronDown)  |
+The body remains mounted. Collapsing it sets height to zero, hides overflow, removes padding, and hides descendants from assistive technology; expanding restores visibility. `FocusVisual` remains mounted inside the header and is shown for resolved focus. There is no group-level arrow navigation, focus transfer, native Windows focus ring, or timed rotation/height animation.
 
-**Expanded is a variant axis, not a State.** It runs in parallel with State — a Rest+Expanded=True accordion is valid.
+## Divergences from Flex
+
+- `accordion-chevron-end-rotation` — **accepted.** Flex design evidence gives the trailing chevron a down-to-up caret sequence. FURN uses the same chevron source in both layouts and rotates it right-to-down as expansion changes. Changing that sequence requires an implementation and visual-contract review.
+
+## Conformance
+
+| Requirement | Evidence                                                                                   |
+| ----------- | ------------------------------------------------------------------------------------------ |
+| ACC-001     | `accordion.types.ts`, `useAccordion.ts`, `accordion.test.tsx`, `accordion.stories.tsx`     |
+| ACC-002     | `useAccordion.ts`, `renderAccordion.tsx`, `accordion.test.tsx`, `accordion.types.test.tsx` |
+| ACC-003     | `accordion.styles.ts`, `useAccordionStyles.ts`, `accordion.test.tsx`                       |
+| ACC-004     | `useAccordion.ts`, `useAccordionStyles.ts`, `accordion.test.tsx`                           |
+| ACC-005     | `accordion.types.ts`, `useAccordion.ts`, `accordion.stories.tsx`                           |

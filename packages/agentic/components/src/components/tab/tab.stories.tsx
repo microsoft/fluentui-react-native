@@ -7,6 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 
 import { Tab } from './tab';
 import type { TabLayout } from './tab.types';
+import { TabList } from '../tablist/tablist';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -143,15 +144,11 @@ export const Tablist: Story = {
       const [active, setActive] = useState('Files');
       return (
         <StoryGroup label={`Active panel: ${active}`}>
-          {tabs.map((name) => (
-            <Tab
-              key={name}
-              content={name}
-              controls={`${name.toLowerCase()}-panel`}
-              onPress={() => setActive(name)}
-              selected={active === name}
-            />
-          ))}
+          <TabList onSelectionChange={setActive} selectedValue={active}>
+            {tabs.map((name) => (
+              <Tab key={name} content={name} controls={`${name.toLowerCase()}-panel`} value={name} />
+            ))}
+          </TabList>
         </StoryGroup>
       );
     };
@@ -160,8 +157,7 @@ export const Tablist: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          'A tablist owns which tab is selected. Each tab renders the selected value it is given and reports presses through onPress, so the list is what moves selection between tabs.',
+        story: 'TabList owns the selected value, group semantics, and roving keyboard focus while each Tab keeps its item presentation.',
       },
     },
   },

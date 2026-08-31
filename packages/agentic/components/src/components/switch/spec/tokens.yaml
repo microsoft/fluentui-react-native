@@ -1,158 +1,140 @@
-component: Switch
-type: atomic
+schemaVersion: 1
+component: switch
+implementation: switch.styles.ts
 
-variants:
-  Layout:
-    values: [Switch, Horizontal, Vertical]
-    default: Horizontal
-    notes: Horizontal is the most common usage — most switches need a visible inline label.
-  Checked:
-    values: [false, true]
-    default: false
-  State:
-    values: [Rest, Hover, Pressed, Focus, Disabled]
-    notes: Hover and Pressed are resolved as nested token state values.
+statePrecedence:
+  - base
+  - checked
+  - disabled
+  - pressed
+  - hovered
 
-tokens:
-  background:
-    notes: >
-      Unchecked uses transparent — invisible at rest, gains opacity on hover/pressed
-      (alpha shift). Checked uses heavy — solid fill, shifts lightness inversely.
-    rest:
+notes:
+  colorLevels: getThemedColorStyleFactory is configured with a checked level followed by the shared interactiveStatePriority level, so checked selects the color family and disabled, pressed, and hovered refine it.
+  animatedColors: Track and thumb colors are supplied as an interpolation between the unchecked and checked resolutions of the same definition rather than as a single resolved value.
+
+bindings:
+  layoutContainer:
+    static:
+      alignSelf: flex-start
+    layout:
+      switch:
+        flexDirection: column
+        gap: 0
+        padding: 0
+      horizontal:
+        alignItems: center
+        flexDirection: row
+        gap: size40
+        padding: size80
+      vertical:
+        alignItems: flex-start
+        flexDirection: column
+        gap: size40
+        padding: size80
+
+  root:
+    static:
+      alignItems: center
+      alignSelf: flex-start
+      backgroundColor: transparent
+      justifyContent: center
+      minHeight: size360
+      minWidth: size560
+      paddingHorizontal: size80
+      paddingVertical: size80
+    themed:
+      borderRadius: borderRadius.circular
+    userStyle: applied last by useSwitchStyles_unstable
+
+  focusVisual:
+    borderRadius: resolved root borderRadius
+    innerColor: color.strokeFocusInner
+    innerWidth: strokeWidth.thin
+    outerColor: color.strokeFocusOuter
+    outerWidth: strokeWidth.thick
+    visible: focused and not disabled
+
+  track:
+    static:
+      alignItems: center
+      height: size200
+      justifyContent: center
+      position: relative
+      width: size400
+    themed:
+      borderRadius: borderRadius.circular
+      borderWidth: strokeWidth.thin
+    color:
+      base:
+        backgroundColor: color.backgroundNeutralTransparent
+        borderColor: color.foregroundNeutralSecondary
+      disabled:
+        backgroundColor: color.backgroundNeutralTransparent
+        borderColor: color.strokeNeutralDisabled
       checked:
-        value: color.backgroundNeutralHeavy
-        hover: color.hover.backgroundNeutralHeavy
-        pressed: color.pressed.backgroundNeutralHeavy
-        rationale: Maximum-weight fill signals "on" — high contrast against surface.
-      unchecked:
-        value: color.backgroundNeutralTransparent
-        hover: color.hover.backgroundNeutralTransparent
-        pressed: color.pressed.backgroundNeutralTransparent
-        rationale: Invisible at rest; the track stroke alone defines the control boundary when off.
+        backgroundColor: color.backgroundNeutralHeavy
+        borderColor: color.strokeNeutralHeavy
+      checkedDisabled:
+        backgroundColor: color.backgroundNeutralHeavyDisabled
+        borderColor: color.strokeNeutralDisabled
+
+  thumb:
+    static:
+      height: 14
+      width: 14
+      position: absolute
+      left: size20
+      top: size20
+    themed:
+      borderRadius: borderRadius.circular
+    color:
+      base:
+        backgroundColor: color.foregroundNeutralSecondary
+      disabled:
+        backgroundColor: color.foregroundNeutralDisabled
+      checked:
+        backgroundColor: color.foregroundNeutralOnloud
+      checkedDisabled:
+        backgroundColor: color.foregroundNeutralDisabled
+    translateX:
+      implementation: getSwitchThumbTranslateDistance
+      formula: size400 minus twice strokeWidth.thin minus twice size20 minus the thumb width
+
+  label:
+    slots:
+      - beforeLabel
+      - afterLabel
+      - aboveLabel
+    static:
+      flexShrink: 1
+      minWidth: 0
+    themed:
+      color: color.foregroundNeutralPrimary
+      fontFamily: fontFamily.functional
+      fontSize: fontSize.functionalBodyMedium
+      fontWeight: fontWeight.functionalRegular
+      lineHeight: lineHeight.functionalBodyMedium
     disabled:
-      checked: color.backgroundNeutralHeavyDisabled
-      unchecked: color.backgroundNeutralTransparent
+      color: color.foregroundNeutralDisabled
 
-  foreground:
-    notes: Foreground tokens apply to the thumb indicator.
-    rest:
-      checked:
-        value: color.foregroundNeutralOnloud
-        hover: color.hover.foregroundNeutralOnloud
-        pressed: color.pressed.foregroundNeutralOnloud
-        rationale: Inverted foreground for readability on the heavy track fill.
-      unchecked:
-        value: color.foregroundNeutralSecondary
-        hover: color.hover.foregroundNeutralSecondary
-        pressed: color.pressed.foregroundNeutralSecondary
-        rationale: Medium-weight foreground — visible on the soft track without competing with checked state contrast.
-    disabled: color.foregroundNeutralDisabled
+motion:
+  implementation: useSwitch.ts
+  driver: Animated.timing with useNativeDriver false
+  duration: 150
+  easing: Easing.inOut(Easing.ease)
+  skipped: first mount, and whenever the platform reduced-motion setting is on
 
-  stroke:
-    width: strokeWidth.thin
-    width-rationale: Thin stroke defines the track boundary at rest; maintains consistent outer dimensions.
-    rest:
-      unchecked:
-        value: color.foregroundNeutralSecondary
-        hover: color.hover.foregroundNeutralSecondary
-        pressed: color.pressed.foregroundNeutralSecondary
-        rationale: Matches the thumb foreground color — track border and thumb read as a unified control at rest.
-      checked:
-        value: color.strokeNeutralHeavy
-        hover: color.hover.strokeNeutralHeavy
-        pressed: color.pressed.strokeNeutralHeavy
-        rationale: Heavy stroke matches the heavy background fill, creating a seamless filled appearance.
-    focus: See flex-system:styling — universal dual-outline focus ring.
-    disabled:
-      unchecked: color.strokeNeutralDisabled
-      checked: color.strokeNeutralDisabled
-
-  radius:
-    track: borderRadius.circular
-    thumb: borderRadius.circular
-    notes: Both track and thumb are pill/circular — 9999px ensures full rounding at any dimension.
-
-  typography:
-    rest: textstyle-functional-body-medium
-    font-family: fontFamily.functional
-    notes: Single text style — Switch has no size variants. Labels use body-medium (14px / 400 weight).
-
-  spacing:
-    hit-area:
-      token: spacing.componentBase200
-      rationale: >
-        Transparent padding around the track to enlarge the pointer hit target.
-        The hit-area padding is invisible — the track's border, background fill,
-        and border-radius define the inner pill shape and must not stretch to
-        fill the padded box. In CSS this means the visible pill (stroke + fill)
-        is an inner element or pseudo-element inside the hit-area surface. The
-        focus ring wraps the outer hit-area box, not the inner pill.
-    label:
-      inner: spacing.componentBase100
-      outer: spacing.componentBase200
-      rationale: >
-        Inner (closest to switch) is 4px for tight coupling; outer is 8px for
-        breathing room at the component boundary. Confirmed from Figma source.
-    gap:
-      notes: >
-        Gap between track and label is handled by label padding, not a gap token.
-        Internal track gap (spacing.componentBase250) is declared in Figma but
-        resolves to 0px effective spacing since thumb is positioned within the track.
-
-  elevation: n/a
-
-  motion:
-    status: pending
-    guidance: >
-      Thumb position: slide transition ≤150ms ease-in-out.
-      Track fill: cross-fade between unchecked and checked colors on toggle.
-      Reduced motion — instant state change, no animation.
-
-sizes:
-  Default:
-    track-width: 40px
-    track-height: 20px
-    thumb-diameter: 14px
-    thumb-inset: 2px
-    resultant-height: 36px # track 20 + outer hit-area padding 8×2. Switch is a fixed-dimensional control, not a typography-driven resultant — the formula is geometry-from-tokens, not text-from-tokens.
-    notes: >
-      Single size. Track is 20px tall (including stroke). Hit area adds 8px padding
-      on each side, giving a 36px interactive surface. No size variants exist.
-    inset-rule: >
-      Thumb-inset is the breathing room between the thumb and the inner stroke
-      on every side at rest. It is derived from the vertical fit and applied
-      symmetrically on both axes — the same value sets the top/bottom centring
-      gap and the left/right anchor gap at each end position. This guarantees
-      the thumb looks identically positioned in unchecked rest (anchored at
-      start) and checked rest (anchored at end).
-
-      Formula (platform-agnostic; all measurements taken inside the stroke):
-
-        thumb-inset    = (track-height − 2 × stroke-width − thumb-diameter) ÷ 2
-        slide-distance = track-width − 2 × stroke-width − 2 × thumb-inset − thumb-diameter
-
-      Default size:
-        thumb-inset    = (20 − 2 − 14) ÷ 2 = 2px
-        slide-distance = 40 − 2 − 4 − 14   = 20px
-
-      Constraints when choosing dimensions:
-        - (track-height − 2 × stroke-width − thumb-diameter) must be even, so
-          thumb-inset is an integer. Non-integer insets render blurry on
-          bitmap platforms (iOS, Android, Figma).
-        - thumb-diameter < track-width − 2 × stroke-width − 2 × thumb-inset,
-          so the slide-distance is positive (the thumb actually moves).
-
-properties:
-  component:
-    Label string:
-      type: TEXT
-      default: 'Label'
-      notes: Bound to visible label nodes in VLabel and HLabel layouts.
-    Label Before:
-      type: BOOLEAN
-      default: true
-      notes: Toggles visibility of the label-before slot in Horizontal layout.
-    Label After:
-      type: BOOLEAN
-      default: true
-      notes: Toggles visibility of the label-after slot in Horizontal layout.
+tokenGaps:
+  - id: switch-thumb-size
+    binding: thumb.height and thumb.width
+    value: 14
+    reason: The thumb diameter is derived from the track height minus the border and inset and has no token on the sizing scale.
+  - id: switch-motion-duration
+    binding: motion.duration
+    value: 150
+    reason: This package publishes no motion tokens, so the transition duration is a literal.
+  - id: switch-global-size-tokens
+    binding: layoutContainer.gap, layoutContainer.padding, root.minHeight, root.minWidth, root.padding, track.height, track.width, thumb.left, thumb.top
+    value: size20, size40, size80, size200, size360, size400, size560
+    reason: These come from the global size scale rather than from a themed spacing or sizing token, so they do not respond to theme state.

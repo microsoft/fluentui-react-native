@@ -148,6 +148,20 @@ export { renderTab_unstable } from './components/tab/renderTab';
 export { useTabStyles_unstable } from './components/tab/useTabStyles';
 export { useTab_unstable } from './components/tab/useTab';
 
+export { TabList } from './components/tablist/tablist';
+export type {
+  TabKeyEvent,
+  TabListExposedViewProps,
+  TabListOrientation,
+  TabListProps,
+  TabListSlots,
+  TabListState,
+  TabListStateProps,
+} from './components/tablist/tablist.types';
+export { renderTabList_unstable } from './components/tablist/renderTabList';
+export { useTabListStyles_unstable } from './components/tablist/useTabListStyles';
+export { useTabList_unstable } from './components/tablist/useTabList';
+
 export { Tag } from './components/tag/tag';
 export type { TagAppearance, TagLayout, TagProps, TagShape, TagSize, TagSlots, TagState } from './components/tag/tag.types';
 export { renderTag_unstable } from './components/tag/renderTag';

@@ -1,26 +1,43 @@
----
-component: Skeleton
-platform: react-native (Windows & macOS)
----
+# Skeleton interaction
 
-# Skeleton Interaction (React Native — Windows & macOS)
+## Pointer and keyboard
 
-## Keyboard navigation
+Skeleton is not a `Pressable`, exposes no press, hover, or focus handlers, and
+holds no interaction state. The root is not focusable by default, but a caller
+can opt it into focus through forwarded `ViewProps`. The root and highlight
+overlay default to `pointerEvents="none"`, so a placeholder layered over an
+interactive surface does not intercept input. An explicit root override is
+preserved.
 
-None — Skeleton is not focusable and not part of the tab order. It is a non-interactive placeholder element.
+## Measurement
 
-## Focus management
+The component tracks the root rectangle from `onLayout`. A caller-supplied
+`onLayout` runs first and the measured rectangle is recorded afterwards, so
+forwarding a layout handler never disables the sweep.
 
-None — Skeleton does not receive or manage focus. When the loading state ends and real content replaces the skeleton, ensure focus is not stranded inside a skeleton subtree mid-swap. Manage focus on the parent container that owns the loading region, not on individual bars.
+The sweep is gated on measurement: it starts only once the measured width and
+height are both greater than zero, and it restarts when either changes. A
+placeholder with no measured size renders as a static themed block.
 
-## Animation
+## Sweep
 
-- **Default — Wave:** A lighter highlight band travels across the bar on a continuous loop. Cycle duration is approximately 1500–2000ms with linear easing so the motion reads as a steady pulse rather than a beat. The animation runs for as long as the loading state is active.
-- **Synchronization:** When multiple Skeleton bars appear together, their animations must share a single timeline so the highlight band crosses every bar in unison. Use a shared `animation-duration` and `animation-delay: 0s` on all instances within a logical group; do not stagger by index.
-- **End of loading:** The animation stops at the moment the bar is unmounted in favor of real content. Do not fade or wind down — the swap is instant.
+The sweep is a highlight band that travels across the placeholder on a
+continuous linear loop. The band is a fraction of the measured width with a
+fixed minimum, and it translates from just before the leading edge to just past
+the trailing edge, so the band is fully off the placeholder at both ends of a
+cycle. The loop repeats without pausing for as long as the placeholder is
+mounted.
 
-> **Reduced motion:** Under the OS reduce-motion setting, the Wave animation does not run. The bar renders as a static fill at the base background color. The placeholder still communicates loading via its presence and ARIA semantics; the motion is purely supplementary and is removed without an alternative animation (no slow pulse, no fade).
+The animation runs through `Animated` with the native driver, so it is not
+affected by JavaScript thread work. Active placeholders subscribe to one shared
+sweep channel, so instances mounted at different times read the same phase.
 
-## Responsive behavior
+## Motion and lifecycle
 
-Skeleton has no intrinsic dimensions. The Bar fills the width and height set by the consumer on each instance — typically the bounding box of the content it replaces. Width and height are independent; the Bar does not enforce an aspect-ratio constraint.
+While the platform reduced-motion setting is on, the loop is stopped, the clock
+is reset, and the highlight overlay is not rendered. Turning the setting off
+restarts the loop from the beginning. No alternative motion is substituted.
+
+There is no enter or exit animation. Mounting a placeholder shows it
+immediately, and swapping it for real content is an instant replacement. The
+shared loop stops and resets when its last active subscriber leaves.

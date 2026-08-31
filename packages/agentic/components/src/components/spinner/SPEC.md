@@ -1,59 +1,122 @@
 ---
 name: spinner
 platform: react-native (Windows, macOS)
-description: Atomic non-interactive indeterminate progress indicator — a continuously rotating arc on a low-emphasis ring. Single variant axis (Size) across eight steps from inline-with-text (16px) to focal-element (44px).
-argument-hint: "[e.g. 'which size for inline text', 'reduced-motion behavior', 'vs Skeleton']"
+status: implemented
+source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
 ---
 
-## Metadata
-
-| Field     | Value   |
-| --------- | ------- |
-| Type      | atomic  |
-| Component | Spinner |
-
-This spec covers the Spinner component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (animation, reduced motion) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
-
-Answer design questions directly — lead with rationale, then tokens. The most common misuse is reaching for Spinner when the incoming content's layout is already known — at that point Skeleton is the honest signal, because it tells the user what is about to appear. Spinner says only "something is happening" and earns its keep in short, indeterminate waits or in regions too small to mimic structure.
-
----
-
 # Spinner
 
-## Spec
+## Scope
 
-### Anatomy
+Spinner is an indeterminate progress indicator: a circular track with a
+quarter-circumference arc rotating over it, drawn with `react-native-svg` inside
+a React Native `View`. It reports that work is in progress when no percentage
+is available. Eight fixed sizes cover placement from inline with body text to a
+standalone focal indicator.
 
-1. **Track ring** — full-circumference circular stroke at low-emphasis color. Establishes the diameter and reads as the recessed background of the spin.
-2. **Indicator arc** — partial-arc stroke at high-emphasis color, overlaid on the track. Covers **approximately 25% of the circumference (one quarter turn) at every size** — the visible fraction is a design constant, not a function of diameter, so the rotation reads identically across the size range. Rotates continuously around the shared center to communicate motion.
+Spinner is not determinate progress, not a status message, and not a blocking
+overlay. It has no text or icon slot, no appearance axis, and no interaction
+states: a caller that needs a label composes one next to the spinner and owns
+the spacing. It never manages focus and never blocks input by itself.
 
-The two strokes share an identical diameter, stroke width, circular shape, and rotation center. Visual distinction is color only — track uses the subtle neutral stroke, indicator uses the loud neutral stroke. There are no text slots, no icon slots, and no boolean toggles on the component itself; adjacent status text is composed outside the spinner.
+## Public contract
 
----
+### Props and defaults
 
-### Variants
+| Prop                      | Type                                                                       | Default  | Contract                                                                                                                             |
+| ------------------------- | -------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `size`                    | `x-tiny \| tiny \| x-small \| small \| medium \| large \| x-large \| huge` | `medium` | Selects the diameter and the stroke width token for both circles.                                                                    |
+| `accessibilityLabel`      | `string`                                                                   | none     | Names what is loading. Required unless the caller opts the root out of the accessibility tree or supplies `accessibilityLabelledBy`. |
+| `accessibilityLabelledBy` | `string \| string[]`                                                       | none     | Points at an adjacent visible label instead of duplicating its text.                                                                 |
+| `accessibilityState`      | `AccessibilityState`                                                       | none     | Merged under the component's own busy state.                                                                                         |
+| `accessible`              | `boolean`                                                                  | `true`   | Setting `false` hides the root from assistive technology and suppresses the missing-name warning.                                    |
+| `pointerEvents`           | `ViewProps['pointerEvents']`                                               | `none`   | Overridable, but the default keeps the indicator out of hit testing.                                                                 |
+| `style`                   | `StyleProp<ViewStyle>`                                                     | none     | Applied after the resolved root styles.                                                                                              |
 
-Variant properties are ordered in the design tool: **Size**.
+The root accepts the remaining owned `ViewProps`. `accessibilityRole` and
+`focusable` are removed from the public surface because the component fixes
+both, and `children` is not accepted.
 
-#### Size
+**SPIN-001:** Resolve `size` to its diameter and stroke width token, default to
+`medium`, and apply the resolved diameter to both the root box and the drawing
+surface.
 
-| Value       | Diameter | Stroke width                  | When to Use                                                                          |
-| ----------- | -------- | ----------------------------- | ------------------------------------------------------------------------------------ |
-| **X-Tiny**  | 16px     | `--gnrc-stroke-width-thin`    | Embedded inline next to body text — inside a message bar, list item, or input field. |
-| **Tiny**    | 20px     | `--gnrc-stroke-width-thin`    | Inline with a Small Button or Small Input.                                           |
-| **X-Small** | 24px     | `--gnrc-stroke-width-thin`    | Inline with a Medium Button or Medium Input.                                         |
-| **Small**   | 28px     | `--gnrc-stroke-width-thick`   | Inline with a Large Button or Large Input. Standalone in compact regions.            |
-| **Medium**  | 32px     | `--gnrc-stroke-width-thick`   | Default for standalone spinners that occupy their own region.                        |
-| **Large**   | 36px     | `--gnrc-stroke-width-thicker` | Empty-state regions, modal dialogs, or large empty containers.                       |
-| **X-Large** | 40px     | `--gnrc-stroke-width-thicker` | Full-page spinner inside an overlay or hero section.                                 |
-| **Huge**    | 44px     | `--gnrc-stroke-width-thicker` | Marketing or onboarding contexts where the spinner is the focal element.             |
+**SPIN-002:** Expose indeterminate progress semantics on the root, merge caller
+accessibility state under the component's busy state, keep the root
+non-focusable, and default it out of hit testing.
 
-**Why eight steps:** Spinner is the only loading signal for regions too small for Skeleton. Eight steps span from inline-with-text (16px) to focal-element (44px) so the indicator can scale with its host control rather than appearing under- or over-sized. Stroke width steps with the size group — `thin` up to 24px, `thick` at 28–32px, `thicker` at 36–44px — so the arc remains perceptible at every diameter without dominating small embeds.
+### Slots and anatomy
 
-**Why no Appearance axis:** Track and indicator both bind to neutral stroke tokens (`--gnrc-color-stroke-neutral-subtle` and `--gnrc-color-stroke-neutral-loud`), which the theme layer remaps when the spinner sits on a colored or inverted surface. An explicit Inverted axis would duplicate what theming already does and would have to be threaded through every Spinner consumer manually.
+| Slot   | Required | Contract                                                                     |
+| ------ | -------- | ---------------------------------------------------------------------------- |
+| `root` | yes      | A `View` that carries the semantics, the square box, and the caller's style. |
 
-**Why no States:** Spinner is non-interactive — there is no hover, pressed, focus, or disabled state. The component exists in a single, always-spinning visual state at rest; reduced-motion handling lives in `interaction.md` and the `motion` block in `tokens.yaml`, not as a State variant.
+The root has one child, an animated SVG surface that is hidden from assistive
+technology and holds the rotation. Inside it the track circle is drawn first and
+the indicator arc second, so the arc paints over the track. Both circles share a
+center, a radius, and a stroke width, and differ only in color and in the dash
+pattern that shortens the indicator to an arc. The drawing surface is not a
+public slot; there is no way to replace either circle.
+
+**SPIN-003:** Draw the track first and the indicator second inside a
+non-accessible drawing surface, and keep the visible arc at one quarter of the
+circumference at every size by normalizing the dash pattern to the path length.
+
+**SPIN-004:** Bind the track and indicator colors and the per-size stroke widths
+to theme tokens, and apply the caller's `style` last.
+
+### State ownership
+
+Spinner owns only its rotation clock. There is no value, no completion state,
+no hover, press, focus, or disabled state, and nothing for a caller to control.
+Mounting the spinner means work is in progress; unmounting it means the work is
+over. The component never announces completion.
+
+**SPIN-005:** Warn in development when the root is exposed to assistive
+technology without an accessible name.
+
+**SPIN-006:** Rotate the drawing surface a full turn on a continuous linear
+loop, hold a static arc while the platform reduced-motion setting is on, and
+start no animation until that setting is known.
+
+## Platform behavior
+
+Windows and macOS behave identically. The root is not focusable, is not in the
+keyboard tab order, and defaults to `pointerEvents="none"`, so it is never a
+keyboard or pointer target and never becomes the initial focus of a dialog.
+
+On Windows the root maps to a UI Automation progress element in the
+indeterminate pattern: the busy state is exposed and no current, minimum, or
+maximum value is published. On macOS it maps to the equivalent indeterminate
+progress element. Narrator and VoiceOver read the accessible name and the busy
+state when the element is encountered, and neither platform re-announces the
+spinner while it rotates.
+
+The rotation runs on the native driver. The reduced-motion setting is read
+asynchronously from the platform, so the first render can occur before the value
+is known; the component holds the arc static until it resolves and starts the
+loop only when reduced motion is known to be off.
+
+## Divergences from Flex
+
+| ID                           | Disposition    | React Native contract                                                                                                                                                       | Follow-up                                                                          |
+| ---------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `spinner-busy-state-on-root` | Accepted       | The single root carries both the progress role and the busy state. Flex treats the role pattern and the busy container pattern as alternatives owned by different elements. | None. React Native has one accessibility node here, so the two cannot collide.     |
+| `spinner-instance-timeline`  | Resolved       | Active spinners share one package-level rotation timeline, so instances mounted at different times render at the same phase.                                                | Implemented through the shared animation hook and covered by multi-instance tests. |
+| `spinner-adjacent-label-gap` | Not applicable | Spinner has no label slot and publishes no spacing. Flex documents size-stepped gap tokens for a spinner paired with adjacent status text.                                  | None. That spacing belongs to the caller's layout in React Native.                 |
+
+## Conformance
+
+| Requirement | Evidence                                                                             |
+| ----------- | ------------------------------------------------------------------------------------ |
+| SPIN-001    | `spinner.types.ts`, `spinner.styles.ts`, `spinner.types.test.ts`, `spinner.test.tsx` |
+| SPIN-002    | `spinner.types.ts`, `useSpinner.ts`, `spinner.test.tsx`                              |
+| SPIN-003    | `renderSpinner.tsx`, `spinner.test.tsx`                                              |
+| SPIN-004    | `spinner.styles.ts`, `useSpinnerStyles.ts`, `spinner.test.tsx`                       |
+| SPIN-005    | `useSpinner.ts`, `spinner.test.tsx`                                                  |
+| SPIN-006    | `useSpinner.ts`, `useSpinnerStyles.ts`, `spinner.test.tsx`, `spinner.stories.tsx`    |

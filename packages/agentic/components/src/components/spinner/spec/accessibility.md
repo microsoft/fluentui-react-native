@@ -1,53 +1,51 @@
----
-component: Spinner
-platform: react-native (Windows & macOS)
----
+# Spinner accessibility
 
-# Spinner Accessibility (React Native — Windows & macOS)
+## Native semantics
 
-## Spec
+The root is a single accessible element with `accessibilityRole="progressbar"`
+and `accessibilityState.busy` set to `true`. No progress value is published, so
+the element is reported as indeterminate: on Windows it surfaces as a UI
+Automation progress element in the indeterminate pattern, and on macOS as the
+equivalent indeterminate progress element. Narrator and VoiceOver read the
+accessible name and the busy state once when the element is reached.
 
-Build-time requirements that must be satisfied by the component implementation.
+Caller-supplied `accessibilityState` is merged first and the component's busy
+state is applied over it, so a caller cannot clear busy while the spinner is
+mounted. `accessibilityRole` and `focusable` are removed from the public props
+because the component owns both.
 
-- **ARIA role:** `progressbar` in the indeterminate pattern — set `role="progressbar"` and omit `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`. Indeterminate progress is conveyed by the absence of value attributes plus an accessible name. Alternative pattern: wrap the spinner in an `aria-busy="true"` region and rely on the container for state. Choose one pattern per region — combining both produces duplicate announcements.
+The drawing surface inside the root sets `accessible={false}`, so the circles
+never appear as separate elements and never produce a second announcement.
 
-  **`role="progressbar"` pattern** — the spinner itself carries the role and accessible name:
+## Naming
 
-  ```html
-  <span class="spinner" role="progressbar" aria-label="Loading messages">
-    <svg …>…</svg>
-  </span>
-  ```
+Name what is loading, not the indicator: "Loading messages" rather than
+"Spinner". Supply `accessibilityLabel`, or `accessibilityLabelledBy` pointing at
+an adjacent visible label so the visible text and the announcement stay in sync.
 
-  **`aria-busy` container pattern** — the container carries the loading semantics and the spinner is decorative:
+Development builds warn once when the root is exposed to assistive technology
+with neither naming prop present. Setting `accessible={false}` is the supported
+way to opt out: it removes the root from the accessibility tree and suppresses
+the warning, and it is the correct choice when the surrounding region already
+announces that it is busy.
 
-  ```html
-  <div aria-busy="true" aria-live="polite" aria-label="Loading user profile">
-    <span class="spinner" aria-hidden="true">
-      <svg …>…</svg>
-    </span>
-  </div>
-  ```
+## Focus and completion
 
-- **Required attributes:**
-  - `aria-label` — required on the spinner itself when no visible label sits adjacent. Describe what is loading ("Loading messages"), not the indicator ("Spinner").
-  - `aria-labelledby` — preferred over `aria-label` when an adjacent visible label exists; point at that label's element so the visible text and the screen-reader announcement stay in sync.
-  - `aria-busy="true"` — when wrapping a region with a spinner, set this on the container so assistive technology suppresses the inner content while loading. Remove (or set `"false"`) when content arrives.
-- **WCAG:**
-  - **1.4.11 — Non-text Contrast:** Track (`--gnrc-color-stroke-neutral-subtle`) and indicator (`--gnrc-color-stroke-neutral-loud`) must each meet the 3:1 ratio against their surrounding surface. The indicator carries the loading meaning; the track must remain perceptible enough to read as the spinner's diameter rather than as page chrome.
-  - **2.2.2 — Pause, Stop, Hide:** The rotation is continuous and may exceed five seconds. The WCAG exemption for essential indeterminate loading typically applies, but the OS reduce-motion setting must still disable the rotation entirely — see `interaction.md`.
-  - **2.3.3 — Animation from Interactions (AAA):** Spinner motion is not interaction-triggered, but the principle applies — provide a reduced-motion fallback so users sensitive to motion are not exposed to a continuous loop they did not opt into.
-  - **4.1.2 — Name, Role, Value:** The loading state must be programmatically determinable. Either `role="progressbar"` with an accessible name, or an `aria-busy` container plus a live region, satisfies this criterion. The visual rotation alone does not.
-- **Screen reader:** With `role="progressbar"` and an accessible name, the spinner is announced once on first encounter ("Loading messages, busy"). For longer or important loads, pair the spinner with a sibling `aria-live="polite"` region announcing a short status string ("Loading…" / "Content loaded") — the spinner alone provides no completion announcement. Do not duplicate the spinner's name in the live region's text; the announcements then collide.
+The root is never focusable and never enters the keyboard tab order, so focus
+cannot land on it and it cannot become the initial focus target of a dialog or
+other focus-scoped surface.
 
----
+The spinner does not announce completion. Mounting it means work started and
+unmounting it means the work is over. When a load matters enough to be reported,
+announce a short status for the region once and let the spinner carry only the
+in-progress signal, so the two do not repeat each other.
 
-## Usage
+## Contrast and motion
 
-Implementation-time considerations that cannot be solved at build. Cover only what applies.
+The track and the indicator resolve from neutral stroke tokens that the theme
+remaps per surface, and the indicator is intentionally the higher-contrast of
+the two so the moving arc stays readable at the smallest diameter.
 
-- **Live regions:** Use one `aria-live="polite"` region per logical loading group, not one per spinner. Excessive live regions cause overlapping announcements that desensitize users to the pattern. Never use `aria-live="assertive"` for spinners — a load is not urgent.
-- **Focus lifecycle:** Do not move focus to a spinner — there is nothing to interact with. When loading completes and content swaps in, focus should remain where the user placed it. If the user was focused inside the region pre-load and the swap destroys their focus target, return focus to a stable parent landmark rather than letting it fall to `<body>`.
-- **Reduced motion:** Honor the OS reduce-motion setting as described in `tokens.yaml` and `interaction.md`. The static arc plus ARIA semantics carry the loading state; do not substitute a slow rotation or pulsing fallback — both still trigger motion sensitivity.
-- **Zoom:** Spinner diameters are fixed pixels per size variant. At 200% / 400% zoom the spinner grows proportionally via platform zoom rather than layout reflow. Ensure the spinner remains within its host region at zoomed scales — do not pin it to a position that clips outside the viewport.
-- **Combinations:** A spinner inside an `aria-busy` container plus an additional `role="progressbar"` produces duplicate announcements — pick one pattern. A spinner inside a focus-trapped modal must not be the trap's initial focusable target; place it as content, not as the initial focus.
+While the platform reduced-motion setting is on, the rotation does not run and
+the arc renders at its starting angle. Presence plus the busy state carries the
+meaning; no slower rotation, fade, or pulse is substituted.

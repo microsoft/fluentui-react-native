@@ -8,6 +8,7 @@ import type { RenderResult } from '@testing-library/react-native';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Tab } from './tab';
+import { TabList } from '../tablist/tablist';
 
 function renderTab(props: React.ComponentProps<typeof Tab>): Promise<RenderResult> {
   return render(<Tab {...props} />);
@@ -30,6 +31,23 @@ describe('Tab', () => {
 
     expect(onPress).toHaveBeenCalledTimes(1);
     expect(getRoot(component).props.accessibilityState.selected).toBe(false);
+  });
+
+  it('takes selection, disabled state, and set metadata from TabList context', async () => {
+    const component = await render(
+      <TabList defaultSelectedValue="activity">
+        <Tab controls="overview-panel" content="Overview" value="overview" />
+        <Tab controls="activity-panel" content="Activity" value="activity" />
+      </TabList>,
+    );
+    const tabs = component.getAllByRole('tab');
+
+    expect(tabs[0].props.accessibilityState).toEqual({ disabled: false, selected: false });
+    expect(tabs[0].props.focusable).toBe(false);
+    expect(tabs[0].props.accessibilityPosInSet).toBe(1);
+    expect(tabs[1].props.accessibilityState).toEqual({ disabled: false, selected: true });
+    expect(tabs[1].props.focusable).toBe(true);
+    expect(tabs[1].props.accessibilitySetSize).toBe(2);
   });
 
   it('renders default icon-and-text accessibility and stable label overlay', async () => {

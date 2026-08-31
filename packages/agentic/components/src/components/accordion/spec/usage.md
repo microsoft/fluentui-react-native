@@ -1,31 +1,7 @@
----
-component: Accordion
----
+# Accordion usage
 
-# Accordion Usage
+Use Accordion for optional supporting details that a person can reveal on demand. Provide a title that makes the disclosed content predictable, and keep information needed to complete the immediate task visible outside the disclosure.
 
-## When to Use
+Use `defaultExpanded` for an independent section. Use `expanded` and `onExpandedChange` when a parent controls one-or-many-open behavior across several sections. Put arbitrary React Native content in `bodyContent`; Accordion does not constrain its layout or navigation.
 
-- To progressively disclose content in sections — FAQs, settings categories, reference details.
-- When a surface has multiple content sections and screen space is limited.
-- When most users will only need a subset of the available sections.
-
-### When NOT to Use
-
-- Never place content that is required to complete the current task inside an accordion.
-- Do not use as a navigation pattern; use a nav component or tree instead.
-- If only one section exists, use a plain content block — the expand/collapse affordance implies multiplicity.
-
----
-
-## Behavior
-
-- **Never place required content inside an accordion.** If completing the current task depends on the content, it must be visible by default.
-- **Never use the Expanded axis to simulate a Selected state.** Expanded communicates content visibility, not persistent selection.
-- **Never hardcode body content dimensions.** The Body panel must grow to fit its child component.
-
----
-
-## Content
-
-- **Always provide a meaningful title.** Generic labels like "More" or "Details" are insufficient for users to decide whether to expand.
+Choose one chevron layout within a related set for predictable scanning. Do not use Accordion as a navigation control, selected-state indicator, or a substitute for a static section that must always be read.

@@ -36,7 +36,7 @@ export function useCheckboxStyles_unstable(state: CheckboxState) {
     innerWidth: state.tokens.strokeWidth.thin,
     outerColor: state.tokens.color.strokeFocusOuter,
     outerWidth: state.tokens.strokeWidth.thick,
-    visible: state.focused && !state.disabled,
+    visible: state.focusVisible && !state.disabled,
   });
   attachSlotProps(state.root, { style: rootStyle });
   state.indicatorStyle = indicatorStyle;

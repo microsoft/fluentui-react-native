@@ -1,26 +1,63 @@
----
-component: Tab
-platform: react-native (Windows, macOS)
----
+# Tab accessibility
 
-# Tab Accessibility (React Native — Windows & macOS)
+## Native semantics
 
-## Spec
+The root is the accessible element. It sets `accessibilityRole="tab"` and
+publishes `selected` and `disabled` through `accessibilityState`, merged over
+any state the caller passes so a caller cannot contradict the rendered
+selection. The `controls` prop is forwarded to the platform as the
+controlled-element relationship, which is how a screen reader user moves from
+the tab to the panel it shows.
 
-- **ARIA role:** `tab` (within a `role="tablist"` container).
-- **Required attributes:**
-  - `aria-selected="true|false"` — reflects the Selected axis. Exactly one tab in the set must be `aria-selected="true"`.
-  - `aria-controls="{panel-id}"` — references the associated `role="tabpanel"` element.
-  - `aria-label` — required on Icon only layout; must describe the content panel, not the icon name (e.g., "Settings", not "Gear icon").
-  - `aria-disabled="true"` — use on disabled tabs that should remain in the tab order for screen reader announcement.
-- **WCAG:**
-  - **1.4.3 — Contrast (Minimum):** Foreground tokens meet 4.5:1 against their background at rest and selected states. `onloud` on `neutral-heavy` is white on near-black.
-  - **2.1.1 — Keyboard:** Arrow keys must navigate between tabs within the Tablist. Enter/Space must activate.
-  - **2.4.7 — Focus Visible:** Focus ring must be visible in all non-disabled states. Uses the system focus ring.
-  - **2.5.8 — Target Size (Minimum, AA):** Resultant height of `32px` with minimum width of `32px` exceeds the `24×24px` minimum.
-- **Screen reader:** Announces label (or `aria-label`), role (`tab`), selection state (`selected`), and position within set (e.g., "1 of 5").
+On Windows the root maps to a UI Automation tab item that exposes the selection
+state; Narrator reads the name, the control type, and whether the tab is
+selected. On macOS it maps to the equivalent tab element for VoiceOver, which
+reads the same parts. Icons set `accessible={false}` so they add nothing to the
+announcement, and the hidden width-reservation copy of the label is removed from
+the accessibility tree, so the label is announced exactly once.
 
-## Usage
+## Naming
 
-- **Icon-only labels:** Always provide `aria-label` on Icon only tabs. The label must describe the content panel the tab controls, not the icon.
-- **Panel linkage:** Pass the controlled panel id through the component's `controls` prop so it can map to the native accessibility controls relationship.
+In the default layout the visible text is the accessible name. Keep it short and
+make it name the panel's content, since the tab and its panel are announced
+together.
+
+Icon-only tabs have no text, so `accessibilityLabel` is required by the type
+shape and the compiler rejects an icon-only tab without one. Development builds
+additionally warn once when an icon-only tab reaches runtime with no name and no
+labelled-by reference. Name the panel, not the glyph: "Activity", not "Bell".
+
+## Panel wiring
+
+`controls` must match the identifier of the element that renders the panel, and
+the panel must exist while the tab is rendered. Point every tab at its own panel
+identifier; reusing one identifier across tabs breaks the relationship for all
+of them.
+
+The panel itself is entirely the caller's responsibility. TabList supplies the
+grouping semantics and its accessible name; it does not render or hide panels.
+
+## Focus and keyboard
+
+A standalone Tab is focusable while enabled and is removed from the tab order
+while disabled. Inside TabList, exactly one enabled Tab is focusable and each
+Tab receives its one-based position and the total set size. Disabled Tabs remain
+in the accessibility tree and report their disabled state while roving
+navigation skips them.
+
+TabList owns arrow, Home, and End movement and the selection-follows-focus
+policy. It overrides grouped selection and focusability while preserving the
+Tab's name, controlled-panel relationship, and consumer handlers.
+
+A two-ring focus visual is drawn inside the hit area, following the corner
+radius of the active layout, whenever the root is focused and not disabled.
+
+## Contrast and state
+
+Selection is carried by a filled heavy background with the on-heavy foreground
+and a heavier label weight, not by color alone at the same fill. The disabled
+state keeps the same structure and shifts both layers to the disabled tokens, so
+a disabled selected tab still reads as selected.
+
+The icon takes the same resolved foreground as the label at every state, so the
+two never disagree.

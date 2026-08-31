@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "component": "radio",
+  "skill": "flex-components:radio",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-28",
+  "availableSurfaces": ["shared", "web"],
+  "surfacesConsulted": ["shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/radio/SKILL.md",
+      "marketplaceBlobSha": "1939ba38f7fad44ab0b7f0d7c21ff62081d6cefd",
+      "marketplaceSha256": "16a475dfd2e9a05ca87aaa9f6bdeb467d1617c7f393d45f80dff210dfc47fb54",
+      "originPath": "plugins/components/skills/radio/SKILL.md",
+      "originBlobSha": "1939ba38f7fad44ab0b7f0d7c21ff62081d6cefd",
+      "originSha256": "16a475dfd2e9a05ca87aaa9f6bdeb467d1617c7f393d45f80dff210dfc47fb54",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/radio/usage.md",
+      "marketplaceBlobSha": "527bf9421ee7c7b8b944c6519cd014caabdf1dbf",
+      "marketplaceSha256": "2f1cbf0d01b196378a37a2df87aa0f633acb8e8c23c2766c500df66b59231e7e",
+      "originPath": "plugins/components/skills/radio/usage.md",
+      "originBlobSha": "527bf9421ee7c7b8b944c6519cd014caabdf1dbf",
+      "originSha256": "2f1cbf0d01b196378a37a2df87aa0f633acb8e8c23c2766c500df66b59231e7e",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/radio/web/accessibility.md",
+      "marketplaceBlobSha": "a9244cfc433bc51e8efb6ba60a6ead3c04634cc5",
+      "marketplaceSha256": "6ea9925d168bab8d9950946e9206e95a1eab43ad055fdf760cdd80629b61523d",
+      "originPath": "plugins/components/skills/radio/web/accessibility.md",
+      "originBlobSha": "a9244cfc433bc51e8efb6ba60a6ead3c04634cc5",
+      "originSha256": "6ea9925d168bab8d9950946e9206e95a1eab43ad055fdf760cdd80629b61523d",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/radio/web/interaction.md",
+      "marketplaceBlobSha": "4a474107c539828eb6c415ca1ed0fc4d7230b2a8",
+      "marketplaceSha256": "dfc15569c688384e967b8384ba35b86320b0edfcce4a959ae2a5d79bc1fbc4e4",
+      "originPath": "plugins/components/skills/radio/web/interaction.md",
+      "originBlobSha": "4a474107c539828eb6c415ca1ed0fc4d7230b2a8",
+      "originSha256": "dfc15569c688384e967b8384ba35b86320b0edfcce4a959ae2a5d79bc1fbc4e4",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/radio/web/tokens.yaml",
+      "marketplaceBlobSha": "7aa265ca7d6ddadf3129e73902112d33dc5bb6c0",
+      "marketplaceSha256": "18de8e57b18b2de77c686d95696dafcdcb775a13afef1062d5e66732cfc971a2",
+      "originPath": "plugins/components/skills/radio/web/tokens.yaml",
+      "originBlobSha": "7aa265ca7d6ddadf3129e73902112d33dc5bb6c0",
+      "originSha256": "18de8e57b18b2de77c686d95696dafcdcb775a13afef1062d5e66732cfc971a2",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [],
+  "divergences": [
+    {
+      "id": "radio-native-composition",
+      "status": "accepted"
+    },
+    {
+      "id": "radio-group-coordination",
+      "status": "accepted"
+    },
+    {
+      "id": "radio-descendant-accessibility",
+      "status": "resolved"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "RAD-001",
+      "evidence": ["radio.types.ts", "useRadio.ts", "radio.types.test.ts"]
+    },
+    {
+      "id": "RAD-002",
+      "evidence": ["renderRadio.tsx", "useRadioStyles.ts", "radio.test.tsx"]
+    },
+    {
+      "id": "RAD-003",
+      "evidence": ["useRadio.ts", "radio.test.tsx", "radio.stories.tsx"]
+    },
+    {
+      "id": "RAD-004",
+      "evidence": ["radio.styles.ts", "useRadioStyles.ts", "radio.test.tsx"]
+    },
+    {
+      "id": "RAD-005",
+      "evidence": ["useRadio.ts", "useRadioStyles.ts", "radio.test.tsx"]
+    }
+  ]
+}

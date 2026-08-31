@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "component": "input",
+  "skill": "flex-components:input",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-28",
+  "availableSurfaces": ["shared", "web"],
+  "surfacesConsulted": ["shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/input/SKILL.md",
+      "marketplaceBlobSha": "b45afe659bd156e4f8dd4c1a40dfcbd03f49fdca",
+      "marketplaceSha256": "e89ce5d97de6999df25b4fcfc30d4f5319b5d60689699ad088acbccc34e56b4c",
+      "originPath": "plugins/components/skills/input/SKILL.md",
+      "originBlobSha": "b45afe659bd156e4f8dd4c1a40dfcbd03f49fdca",
+      "originSha256": "e89ce5d97de6999df25b4fcfc30d4f5319b5d60689699ad088acbccc34e56b4c",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/input/usage.md",
+      "marketplaceBlobSha": "0feb5189a798b2d414376e28b680efb468c2a346",
+      "marketplaceSha256": "a7d3b87a3608195c6146a56bfe46895af7a0a92c36dff701ba34e8f2433d2bf6",
+      "originPath": "plugins/components/skills/input/usage.md",
+      "originBlobSha": "0feb5189a798b2d414376e28b680efb468c2a346",
+      "originSha256": "a7d3b87a3608195c6146a56bfe46895af7a0a92c36dff701ba34e8f2433d2bf6",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/input/web/accessibility.md",
+      "marketplaceBlobSha": "a64c91fe49081bcecf3bfa6cd3aa7a9369e00b97",
+      "marketplaceSha256": "0ec138a7a079f1231364cd73c2b6f1dc65b5b7e04cc684f5804815e218221f0f",
+      "originPath": "plugins/components/skills/input/web/accessibility.md",
+      "originBlobSha": "a64c91fe49081bcecf3bfa6cd3aa7a9369e00b97",
+      "originSha256": "0ec138a7a079f1231364cd73c2b6f1dc65b5b7e04cc684f5804815e218221f0f",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/input/web/interaction.md",
+      "marketplaceBlobSha": "03ede936e51eaa069994fa9626dfeff690bf1044",
+      "marketplaceSha256": "7faac6e33f10a723c3c5be137c202e63225e289a222c209f36c447068da371cc",
+      "originPath": "plugins/components/skills/input/web/interaction.md",
+      "originBlobSha": "dd57747c495974741305460b73a9d034103bdc75",
+      "originSha256": "540ad4fbf93ef29dae48b89be8bb5bf49706504f389ccb87bfd8c59c259c02bf",
+      "contentDiffers": true
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/input/web/tokens.yaml",
+      "marketplaceBlobSha": "8eac23f893ffba81664ee633b32d552efe483723",
+      "marketplaceSha256": "c3cd8e3b92f17d1c87983681cdee70e2260b262d37457a6cc24abe92f1504d64",
+      "originPath": "plugins/components/skills/input/web/tokens.yaml",
+      "originBlobSha": "8eac23f893ffba81664ee633b32d552efe483723",
+      "originSha256": "c3cd8e3b92f17d1c87983681cdee70e2260b262d37457a6cc24abe92f1504d64",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [
+    {
+      "role": "web:interaction",
+      "status": "reviewed",
+      "resolution": "marketplace-authoring-input",
+      "note": "The pinned Marketplace payload is the exact Agency session input; the differing x3 blob remains recorded as release lineage."
+    }
+  ],
+  "divergences": [
+    {
+      "id": "input-focus-indicator",
+      "status": "deferred"
+    },
+    {
+      "id": "input-hover-target-scope",
+      "status": "deferred"
+    },
+    {
+      "id": "input-underline-double-stroke",
+      "status": "resolved"
+    },
+    {
+      "id": "input-icon-count",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "INP-001",
+      "evidence": ["input.types.ts", "useInput.ts", "input.types.test.tsx", "input.test.tsx"]
+    },
+    {
+      "id": "INP-002",
+      "evidence": ["useInput.ts", "input.test.tsx"]
+    },
+    {
+      "id": "INP-003",
+      "evidence": ["useInput.ts", "input.styles.ts", "input.test.tsx"]
+    },
+    {
+      "id": "INP-004",
+      "evidence": ["renderInput.tsx", "useInput.ts", "input.test.tsx", "input.stories.tsx"]
+    },
+    {
+      "id": "INP-005",
+      "evidence": ["useInput.ts", "useInputStyles.ts", "input.test.tsx"]
+    },
+    {
+      "id": "INP-006",
+      "evidence": ["input.styles.ts", "useInputStyles.ts", "input.test.tsx"]
+    }
+  ]
+}

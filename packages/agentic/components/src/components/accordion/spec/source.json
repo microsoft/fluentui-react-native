@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "component": "accordion",
+  "skill": "flex-components:accordion",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-28",
+  "availableSurfaces": ["shared", "web"],
+  "surfacesConsulted": ["shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/accordion/SKILL.md",
+      "marketplaceBlobSha": "2b18787639ff817789e36ba1e318c86f65e59929",
+      "marketplaceSha256": "c1ea94d075eaf931903f7df8d4767aefc4c741227ca4318f34cdb64436aa1320",
+      "originPath": "plugins/components/skills/accordion/SKILL.md",
+      "originBlobSha": "2b18787639ff817789e36ba1e318c86f65e59929",
+      "originSha256": "c1ea94d075eaf931903f7df8d4767aefc4c741227ca4318f34cdb64436aa1320",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/accordion/usage.md",
+      "marketplaceBlobSha": "cd263e7897b28545a6f61c7e1a8162b95ce4687d",
+      "marketplaceSha256": "ee8cb81565a6ebc612231a57440301605dac65155f068cd3afa6b974ea668e75",
+      "originPath": "plugins/components/skills/accordion/usage.md",
+      "originBlobSha": "cd263e7897b28545a6f61c7e1a8162b95ce4687d",
+      "originSha256": "ee8cb81565a6ebc612231a57440301605dac65155f068cd3afa6b974ea668e75",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/accordion/web/accessibility.md",
+      "marketplaceBlobSha": "28ed0f0b8a04dafa52bff9145c14b4eef0de0306",
+      "marketplaceSha256": "7aa113875a4643a3796321407b86de321e81cebf9705eb37a923da3835c89e0c",
+      "originPath": "plugins/components/skills/accordion/web/accessibility.md",
+      "originBlobSha": "28ed0f0b8a04dafa52bff9145c14b4eef0de0306",
+      "originSha256": "7aa113875a4643a3796321407b86de321e81cebf9705eb37a923da3835c89e0c",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/accordion/web/interaction.md",
+      "marketplaceBlobSha": "a587e8d12cdf037f63a8f0f38556c8df928e536a",
+      "marketplaceSha256": "84b518e67a94c048d834765a8a834ab030dcc2c2cf539056d1c50e172871f2d9",
+      "originPath": "plugins/components/skills/accordion/web/interaction.md",
+      "originBlobSha": "a587e8d12cdf037f63a8f0f38556c8df928e536a",
+      "originSha256": "84b518e67a94c048d834765a8a834ab030dcc2c2cf539056d1c50e172871f2d9",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/accordion/web/tokens.yaml",
+      "marketplaceBlobSha": "d7d162ea334a50f0498d14c7b79880979e90a66d",
+      "marketplaceSha256": "af44425f9ddac74743e9b91c803865f0ce331aff65175a074744bed73eab2d1f",
+      "originPath": "plugins/components/skills/accordion/web/tokens.yaml",
+      "originBlobSha": "d7d162ea334a50f0498d14c7b79880979e90a66d",
+      "originSha256": "af44425f9ddac74743e9b91c803865f0ce331aff65175a074744bed73eab2d1f",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [],
+  "divergences": [
+    {
+      "id": "accordion-chevron-end-rotation",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "ACC-001",
+      "evidence": ["accordion.types.ts", "useAccordion.ts", "accordion.test.tsx", "accordion.stories.tsx"]
+    },
+    {
+      "id": "ACC-002",
+      "evidence": ["useAccordion.ts", "renderAccordion.tsx", "accordion.test.tsx", "accordion.types.test.tsx"]
+    },
+    {
+      "id": "ACC-003",
+      "evidence": ["accordion.styles.ts", "useAccordionStyles.ts", "accordion.test.tsx"]
+    },
+    {
+      "id": "ACC-004",
+      "evidence": ["useAccordion.ts", "useAccordionStyles.ts", "accordion.test.tsx"]
+    },
+    {
+      "id": "ACC-005",
+      "evidence": ["accordion.types.ts", "useAccordion.ts", "accordion.stories.tsx"]
+    }
+  ]
+}

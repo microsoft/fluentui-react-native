@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "id": "flex-1.5.0-206c4996",
+  "fingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "verifiedDate": "2026-08-28",
+  "release": {
+    "marketplaceRepository": "agency-microsoft/.github-private",
+    "marketplaceIndexCommit": "206c4996205b027f4d806ac4ac7366f1f0ab0d5a",
+    "promotionCommit": "6adfeccb3d49ed600beed98f14ee159e8c7a6208",
+    "playgroundRepository": "agency-microsoft/playground",
+    "playgroundSyncCommit": "cbf3f8b7dbc024a9acc338c276cefcab009cd667",
+    "originRepository": "x3-design/fluent-design",
+    "originCommit": "334d3b82a08b610b0002fe922ce9b4dac4db64f2",
+    "originComponentTreeSha": "b7e8a28465aa336223709e91f35d4c4684e16f61",
+    "originCatalogBlobSha": "df2e433c0d7501642179fa54f628203bc05d5ab6"
+  },
+  "plugins": [
+    {
+      "name": "flex-components",
+      "version": "1.5.0",
+      "versionIsAdvisory": true,
+      "spec": "market:flex-components@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a",
+      "treeSha": "b08bdc0d5ad2677f34d2010fd384bd37109a14e3"
+    },
+    {
+      "name": "flex-system",
+      "version": "1.5.0",
+      "versionIsAdvisory": true,
+      "spec": "market:flex-system@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a",
+      "treeSha": "4529d8f9af7a4790ca66de183487147a08667916"
+    },
+    {
+      "name": "flex-tokens",
+      "version": "1.4.0",
+      "versionIsAdvisory": true,
+      "spec": "market:flex-tokens@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a",
+      "treeSha": "0ccc639601bff986c4c197813df85eebacf4909e"
+    }
+  ],
+  "catalog": {
+    "sourcePath": "component-map.yaml",
+    "entries": [
+      "accordion",
+      "avatar",
+      "avatar-group",
+      "badge",
+      "breadcrumb",
+      "button",
+      "card",
+      "checkbox",
+      "combobox",
+      "destructive-button",
+      "dialog",
+      "divider",
+      "drawer",
+      "dropdown",
+      "field",
+      "info-label",
+      "input",
+      "interaction-tag",
+      "label",
+      "link",
+      "list",
+      "list-item",
+      "listbox-item",
+      "menu",
+      "menu-button",
+      "menu-item",
+      "message-bar",
+      "nav",
+      "nav-item",
+      "popover",
+      "progress-bar",
+      "radio",
+      "radio-group",
+      "scrollbar",
+      "search-box",
+      "select",
+      "simple-nav",
+      "skeleton",
+      "spinner",
+      "split-button",
+      "switch",
+      "tab",
+      "tablist",
+      "tag",
+      "teaching-popover",
+      "textarea",
+      "toggle-button",
+      "toolbar",
+      "tooltip"
+    ]
+  },
+  "legacySpecEvidence": {
+    "repository": "microsoft/fluentui-react-native",
+    "commit": "6259f5d0d9113bf0af264dff09f63e45bea08e77",
+    "pathTemplate": "packages/agentic/components/specs/{component}/blockers.md"
+  },
+  "legacyStagedSpecs": [
+    {
+      "component": "breadcrumb",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4219",
+      "status": "decision-required",
+      "feasibility": "partial",
+      "reason": "Requires overlay, menu, and tooltip behavior.",
+      "reevaluation": "Define or provide the overlay and menu stack.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "drawer",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4223",
+      "status": "decision-required",
+      "feasibility": "partial",
+      "reason": "Requires focus trapping and return-focus behavior for arbitrary children.",
+      "reevaluation": "Define a supported native focus-management path.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "dropdown",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4224",
+      "status": "decision-required",
+      "feasibility": "feasible-in-principle",
+      "reason": "Requires Popover and ListboxItem contracts.",
+      "reevaluation": "Reuse ListboxItem and decide the remaining overlay dependency.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "info-label",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4226",
+      "status": "decision-required",
+      "feasibility": "blocked",
+      "reason": "Requires popover anchoring, dismissal, focus, and trigger accessibility.",
+      "reevaluation": "Unblock the shared overlay contract.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "interaction-tag",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4227",
+      "status": "decision-required",
+      "feasibility": "feasible-in-principle",
+      "reason": "Originally required Avatar and Tag contracts plus public package wiring.",
+      "reevaluation": "Reuse Avatar and Tag, then decide export scope.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "label",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4228",
+      "status": "decision-required",
+      "feasibility": "blocked-as-authored",
+      "reason": "HTML label-to-control association has no pure React Native equivalent.",
+      "reevaluation": "Choose a native association contract or a visual-only contract.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "link",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4229",
+      "status": "decision-required",
+      "feasibility": "partial",
+      "reason": "Web navigation semantics and underline geometry do not map directly.",
+      "reevaluation": "Accept a native text-link approximation or retarget the contract.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "list",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4230",
+      "status": "decision-required",
+      "feasibility": "feasible-in-principle",
+      "reason": "Requires a ListItem row plus collection focus and accessibility behavior.",
+      "reevaluation": "Reuse ListItem and define collection focus and accessibility.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "menu",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4232",
+      "status": "decision-required",
+      "feasibility": "partial",
+      "reason": "Requires overlay hosting and composite keyboard and focus behavior.",
+      "reevaluation": "Reuse MenuItem and Divider, then define overlay and focus behavior.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "menu-button",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4231",
+      "status": "decision-required",
+      "feasibility": "feasible-in-principle",
+      "reason": "Requires the Menu, Popover, and MenuItem stack.",
+      "reevaluation": "Land the remaining menu and overlay dependencies.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "message-bar",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4233",
+      "status": "decision-required",
+      "feasibility": "partial",
+      "reason": "Requires a cross-platform Fluent status-icon source.",
+      "reevaluation": "Provide canonical status-icon assets.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "popover",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4236",
+      "status": "decision-required",
+      "feasibility": "blocked",
+      "reason": "Requires anchor measurement, placement, dismissal, and focus hosting.",
+      "reevaluation": "Establish reusable native overlay infrastructure.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "radio-group",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4237",
+      "status": "decision-required",
+      "feasibility": "feasible-in-principle",
+      "reason": "Requires Radio children plus group labeling and navigation.",
+      "reevaluation": "Reuse Radio and decide group labeling and navigation.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "scrollbar",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4238",
+      "status": "decision-required",
+      "feasibility": "blocked",
+      "reason": "Requires scroll metrics, thumb control, drag interaction, and a native host.",
+      "reevaluation": "Define a scroll-source API and platform scrollbar bridge.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "tablist",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4243",
+      "status": "decision-required",
+      "feasibility": "feasible-in-principle",
+      "reason": "Requires Tab child selection and roving focus.",
+      "reevaluation": "Reuse Tab and define roving focus and selection ownership.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "textarea",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4245",
+      "status": "decision-required",
+      "feasibility": "blocked-as-authored",
+      "reason": "HTML textarea semantics and CSS resize behavior do not map to TextInput.",
+      "reevaluation": "Choose a native approximation without resize parity or a web-specific component.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "toolbar",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4248",
+      "status": "decision-required",
+      "feasibility": "partial",
+      "reason": "Requires imperative focus for child controls and roving focus.",
+      "reevaluation": "Reuse Divider and define the child focus contract.",
+      "lastEvaluated": "2026-08-28"
+    },
+    {
+      "component": "tooltip",
+      "issue": "https://github.com/microsoft/fluentui-react-native/issues/4249",
+      "status": "decision-required",
+      "feasibility": "blocked-as-authored",
+      "reason": "Requires an overlay host, anchor behavior, and trigger-coupled accessibility.",
+      "reevaluation": "Establish overlay infrastructure or retarget the contract.",
+      "lastEvaluated": "2026-08-28"
+    }
+  ]
+}

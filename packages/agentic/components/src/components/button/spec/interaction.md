@@ -1,22 +1,36 @@
----
-component: Button
-platform: react-native (Windows, macOS)
----
+# Button interaction
 
-# Button Interaction (React Native — Windows & macOS)
+## State model
 
-## Keyboard navigation
+`usePressableState` derives hover, press, and focus from the root
+`Pressable`. Token resolution uses appearance first, then selected and
+interaction state. Disabled values override interactive presentation. User
+root style is the final style layer.
 
-- **Tab / Shift+Tab** — moves focus to and from the button.
-- **Enter / Space** — activates the button (fires the action or toggles Selected state).
-- No arrow key navigation — Button is a single focusable element, not part of a composite widget.
+The component forwards native action and interaction handlers. It does not
+trap focus, implement arrow-key navigation, or move focus after activation.
 
-## Focus management
+## Activation and selection
 
-Focus follows standard platform behavior. Button does not trap focus or manage programmatic focus placement.
+Native button behavior handles keyboard and pointer activation on Windows and
+macOS. A disabled button neither focuses nor invokes its action.
 
-## Animation
+Button never changes `selected` in response to activation. A caller that uses
+toggle presentation updates its own state from `onPress`. Supplying
+`selected={false}` is meaningful: it enables checked-state semantics and the
+layout-stable label path while rendering the unselected visuals.
 
-State transitions (Rest → Hover, Rest → Pressed) are platform-driven color transitions. Duration and easing reference motion tokens once defined.
+When selected, `selectedIcon` replaces `icon`; if `selectedIcon` is absent,
+the normal icon remains. Selected text renders semibold over a hidden
+semibold reservation so changing the visible weight does not resize the
+button.
 
-> **Reduced motion:** When the OS reduce-motion setting is set, all transitions should be instant (duration 0ms or near-0ms). No scale, translate, or opacity animation is used on Button — color-only transitions are acceptable under reduced motion but should still be removed if duration is non-zero.
+## Focus and motion
+
+The focus visual stays in the tree for the lifetime of the button. Focus
+changes its visibility rather than adding or removing border-bearing native
+views. It is hidden while disabled.
+
+Button currently performs no timed state animation. Hover, press, selection,
+and focus styles update immediately, so reduced-motion handling adds no
+separate branch.

@@ -1,97 +1,78 @@
-component: Divider
-type: atomic
+schemaVersion: 1
+component: divider
+implementation: divider.styles.ts
 
-variants:
-  Layout:
-    values: [Center (Default), Start, End]
-    default: Center (Default)
-    notes: >
-      Controls label position relative to the line segments.
-      Center uses two equal flex-grow lines. Start uses a
-      spacing.componentBase100 leading stub. End uses a
-      spacing.componentBase100 trailing stub.
-  Vertical:
-    values: [false, true]
-    default: false
-    notes: >
-      Controls orientation. False = horizontal (flex-row); True = vertical (flex-column).
+# Divider has no interaction state, so every binding below resolves from the
+# orientation axis and the layout axis only.
+statePrecedence:
+  - vertical
+  - layout
 
-tokens:
-  background:
-    line:
-      token: color.strokeNeutralSubtle
-      rationale: >
-        The divider line uses a stroke-namespaced token because the line's
-        semantic role is a stroke — it is a boundary mark, not a surface fill.
-        The CSS property used is background-color on a 1px rectangle rather than
-        a border, for sub-pixel rendering consistency.
+bindings:
+  root:
+    layout:
+      alignItems: center
+      alignSelf: stretch
+      justifyContent: center
+    orientation:
+      horizontal:
+        flexDirection: row
+      vertical:
+        flexDirection: column
 
-  foreground:
-    label:
-      token: color.foregroundNeutralSecondary
-      rationale: >
-        Secondary foreground keeps the label legible but subordinate to
-        primary content on either side of the divider.
-    icon:
-      token: color.foregroundNeutralSecondary
-      rationale: Matches label color for visual consistency within the content slot.
+  line:
+    implementation: divider.styles.ts getDividerLineStyle
+    color:
+      backgroundColor: color.strokeNeutralSubtle
+    orientation:
+      horizontal:
+        height: strokeWidth.thin
+      vertical:
+        width: strokeWidth.thin
+    layout:
+      grow:
+        flexBasis: 0
+        flexGrow: 1
+      stub:
+        flexBasis: spacing.componentBase100
+        flexGrow: 0
+    stubSelection:
+      center: none
+      start: leading line
+      end: trailing line
 
-  stroke:
-    container: no-stroke
-    focus: n/a
+  contentContainer:
+    layout:
+      alignItems: center
+      flexDirection: row
+      flexShrink: 1
+      justifyContent: center
+      gap: spacing.componentBase150
+    orientation:
+      horizontal:
+        paddingHorizontal: spacing.componentBase300
+      vertical:
+        paddingVertical: spacing.componentBase300
 
-  radius: n/a
+  icon:
+    implementation: useDividerStyles.ts
+    color: color.foregroundNeutralSecondary
+    height: 20
+    width: 20
 
-  typography:
-    label: textstyle-functional-body-small
-    font-family: fontFamily.functional
+  label:
+    layout:
+      flexShrink: 1
+      textAlign: center
+    typography:
+      fontFamily: fontFamily.functional
+      fontSize: fontSize.functionalBodySmall
+      fontWeight: fontWeight.functionalRegular
+      lineHeight: lineHeight.functionalBodySmall
+    color: color.foregroundNeutralSecondary
 
-  spacing:
-    content:
-      horizontal-padding: spacing.componentBase300
-      vertical-padding: spacing.componentBase300
-      rationale: >
-        Regular tier at large size provides comfortable breathing room around
-        the label. In horizontal orientation, padding is on the X axis; in
-        vertical orientation, padding is on the Y axis.
-    gap:
-      icon-to-label: spacing.componentBase150
-      rationale: Atomic-tier medium gap between icon and label within the content slot.
-    stub:
-      length: spacing.componentBase100
-      rationale: >
-        Atomic-tier small gap anchors the content slot near the respective edge
-        in Start and End layouts. Same tier as the content slot's internal gap
-        (spacing.componentBase150), one step down the scale.
-
-  elevation: n/a
-
-  motion:
-    status: n/a
-    guidance: Non-interactive — no state transitions.
-
-sizes:
-  line-thickness: 1px
-  icon: 20px
-  notes: >
-    Line thickness is 1px, rendered as a filled rectangle (not a border).
-    Icon slot expects a 20px Fluent Iconography instance (Regular theme).
-
-properties:
-  component:
-    Label slot:
-      type: BOOLEAN
-      default: true
-      notes: Shows/hides the label text. When false, the divider can collapse to a plain line.
-    Icon:
-      type: BOOLEAN
-      default: false
-      notes: Shows/hides the icon within the content container.
-    Label text:
-      type: TEXT
-      default: 'Text'
-      notes: Bound to the label text node.
-    20px Regular:
-      type: INSTANCE_SWAP
-      default: Image icon (20px Regular)
-      notes: Icon slot; expects a 20px Fluent Iconography instance (Regular theme).
+tokenGaps:
+  - binding: icon.height, icon.width
+    detail: The 20 by 20 icon box is a literal in useDividerStyles.ts and is not bound to a global size constant or component token.
+  - binding: label.typography, icon.color
+    detail: The horizontal and vertical orientation branches resolve identical typography and color values, so the orientation axis carries no color or type distinction.

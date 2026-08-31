@@ -1,0 +1,766 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-31T05:04:03.307Z",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "baseline": {
+    "marketplaceIndexCommit": "206c4996205b027f4d806ac4ac7366f1f0ab0d5a",
+    "originCommit": "334d3b82a08b610b0002fe922ce9b4dac4db64f2"
+  },
+  "external": {
+    "mode": "live",
+    "status": "drift-detected",
+    "marketplaceHead": "eb8cf20cb1c6ce4fdc563ac1ebd34197cb347735",
+    "originHead": "dfdaeba2f79c2c2c33cdc074cf1e60f1c3a2929c"
+  },
+  "catalog": {
+    "releaseEntries": [
+      "accordion",
+      "avatar",
+      "avatar-group",
+      "badge",
+      "breadcrumb",
+      "button",
+      "card",
+      "checkbox",
+      "combobox",
+      "destructive-button",
+      "dialog",
+      "divider",
+      "drawer",
+      "dropdown",
+      "field",
+      "info-label",
+      "input",
+      "interaction-tag",
+      "label",
+      "link",
+      "list",
+      "list-item",
+      "listbox-item",
+      "menu",
+      "menu-button",
+      "menu-item",
+      "message-bar",
+      "nav",
+      "nav-item",
+      "popover",
+      "progress-bar",
+      "radio",
+      "radio-group",
+      "scrollbar",
+      "search-box",
+      "select",
+      "simple-nav",
+      "skeleton",
+      "spinner",
+      "split-button",
+      "switch",
+      "tab",
+      "tablist",
+      "tag",
+      "teaching-popover",
+      "textarea",
+      "toggle-button",
+      "toolbar",
+      "tooltip"
+    ],
+    "candidateEntries": [
+      "accordion",
+      "avatar",
+      "avatar-group",
+      "badge",
+      "breadcrumb",
+      "button",
+      "card",
+      "checkbox",
+      "combobox",
+      "destructive-button",
+      "dialog",
+      "divider",
+      "drawer",
+      "dropdown",
+      "field",
+      "info-label",
+      "input",
+      "interaction-tag",
+      "label",
+      "link",
+      "list",
+      "list-item",
+      "listbox-item",
+      "menu",
+      "menu-button",
+      "menu-item",
+      "message-bar",
+      "nav",
+      "nav-item",
+      "persona",
+      "popover",
+      "presence-badge",
+      "progress-bar",
+      "radio",
+      "radio-group",
+      "scrollbar",
+      "search-box",
+      "select",
+      "simple-nav",
+      "skeleton",
+      "spinner",
+      "split-button",
+      "switch",
+      "tab",
+      "tablist",
+      "tag",
+      "teaching-popover",
+      "textarea",
+      "toast",
+      "toggle-button",
+      "toolbar",
+      "tooltip"
+    ],
+    "added": ["persona", "presence-badge", "toast"],
+    "removed": []
+  },
+  "local": {
+    "contracts": [
+      "accordion",
+      "avatar",
+      "badge",
+      "button",
+      "card",
+      "checkbox",
+      "divider",
+      "input",
+      "list-item",
+      "listbox-item",
+      "menu-item",
+      "progress-bar",
+      "radio",
+      "skeleton",
+      "spinner",
+      "switch",
+      "tab",
+      "tablist",
+      "tag"
+    ],
+    "adaptedDrafts": [],
+    "implemented": [
+      "accordion",
+      "avatar",
+      "badge",
+      "button",
+      "card",
+      "checkbox",
+      "divider",
+      "input",
+      "list-item",
+      "listbox-item",
+      "menu-item",
+      "progress-bar",
+      "radio",
+      "skeleton",
+      "spinner",
+      "switch",
+      "tab",
+      "tablist",
+      "tag"
+    ],
+    "implementationGap": [
+      "avatar-group",
+      "breadcrumb",
+      "combobox",
+      "destructive-button",
+      "dialog",
+      "drawer",
+      "dropdown",
+      "field",
+      "info-label",
+      "interaction-tag",
+      "label",
+      "link",
+      "list",
+      "menu",
+      "menu-button",
+      "message-bar",
+      "nav",
+      "nav-item",
+      "popover",
+      "radio-group",
+      "scrollbar",
+      "search-box",
+      "select",
+      "simple-nav",
+      "split-button",
+      "teaching-popover",
+      "textarea",
+      "toggle-button",
+      "toolbar",
+      "tooltip"
+    ],
+    "noLocalContract": [
+      "avatar-group",
+      "breadcrumb",
+      "combobox",
+      "destructive-button",
+      "dialog",
+      "drawer",
+      "dropdown",
+      "field",
+      "info-label",
+      "interaction-tag",
+      "label",
+      "link",
+      "list",
+      "menu",
+      "menu-button",
+      "message-bar",
+      "nav",
+      "nav-item",
+      "popover",
+      "radio-group",
+      "scrollbar",
+      "search-box",
+      "select",
+      "simple-nav",
+      "split-button",
+      "teaching-popover",
+      "textarea",
+      "toggle-button",
+      "toolbar",
+      "tooltip"
+    ],
+    "legacyMigration": [
+      {
+        "component": "breadcrumb",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4219",
+        "status": "decision-required",
+        "feasibility": "partial",
+        "reason": "Requires overlay, menu, and tooltip behavior.",
+        "reevaluation": "Define or provide the overlay and menu stack.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "drawer",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4223",
+        "status": "decision-required",
+        "feasibility": "partial",
+        "reason": "Requires focus trapping and return-focus behavior for arbitrary children.",
+        "reevaluation": "Define a supported native focus-management path.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "dropdown",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4224",
+        "status": "decision-required",
+        "feasibility": "feasible-in-principle",
+        "reason": "Requires Popover and ListboxItem contracts.",
+        "reevaluation": "Reuse ListboxItem and decide the remaining overlay dependency.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "info-label",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4226",
+        "status": "decision-required",
+        "feasibility": "blocked",
+        "reason": "Requires popover anchoring, dismissal, focus, and trigger accessibility.",
+        "reevaluation": "Unblock the shared overlay contract.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "interaction-tag",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4227",
+        "status": "decision-required",
+        "feasibility": "feasible-in-principle",
+        "reason": "Originally required Avatar and Tag contracts plus public package wiring.",
+        "reevaluation": "Reuse Avatar and Tag, then decide export scope.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "label",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4228",
+        "status": "decision-required",
+        "feasibility": "blocked-as-authored",
+        "reason": "HTML label-to-control association has no pure React Native equivalent.",
+        "reevaluation": "Choose a native association contract or a visual-only contract.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "link",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4229",
+        "status": "decision-required",
+        "feasibility": "partial",
+        "reason": "Web navigation semantics and underline geometry do not map directly.",
+        "reevaluation": "Accept a native text-link approximation or retarget the contract.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "list",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4230",
+        "status": "decision-required",
+        "feasibility": "feasible-in-principle",
+        "reason": "Requires a ListItem row plus collection focus and accessibility behavior.",
+        "reevaluation": "Reuse ListItem and define collection focus and accessibility.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "menu",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4232",
+        "status": "decision-required",
+        "feasibility": "partial",
+        "reason": "Requires overlay hosting and composite keyboard and focus behavior.",
+        "reevaluation": "Reuse MenuItem and Divider, then define overlay and focus behavior.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "menu-button",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4231",
+        "status": "decision-required",
+        "feasibility": "feasible-in-principle",
+        "reason": "Requires the Menu, Popover, and MenuItem stack.",
+        "reevaluation": "Land the remaining menu and overlay dependencies.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "message-bar",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4233",
+        "status": "decision-required",
+        "feasibility": "partial",
+        "reason": "Requires a cross-platform Fluent status-icon source.",
+        "reevaluation": "Provide canonical status-icon assets.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "popover",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4236",
+        "status": "decision-required",
+        "feasibility": "blocked",
+        "reason": "Requires anchor measurement, placement, dismissal, and focus hosting.",
+        "reevaluation": "Establish reusable native overlay infrastructure.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "radio-group",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4237",
+        "status": "decision-required",
+        "feasibility": "feasible-in-principle",
+        "reason": "Requires Radio children plus group labeling and navigation.",
+        "reevaluation": "Reuse Radio and decide group labeling and navigation.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "scrollbar",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4238",
+        "status": "decision-required",
+        "feasibility": "blocked",
+        "reason": "Requires scroll metrics, thumb control, drag interaction, and a native host.",
+        "reevaluation": "Define a scroll-source API and platform scrollbar bridge.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "tablist",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4243",
+        "status": "decision-required",
+        "feasibility": "feasible-in-principle",
+        "reason": "Requires Tab child selection and roving focus.",
+        "reevaluation": "Reuse Tab and define roving focus and selection ownership.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "textarea",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4245",
+        "status": "decision-required",
+        "feasibility": "blocked-as-authored",
+        "reason": "HTML textarea semantics and CSS resize behavior do not map to TextInput.",
+        "reevaluation": "Choose a native approximation without resize parity or a web-specific component.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "toolbar",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4248",
+        "status": "decision-required",
+        "feasibility": "partial",
+        "reason": "Requires imperative focus for child controls and roving focus.",
+        "reevaluation": "Reuse Divider and define the child focus contract.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      },
+      {
+        "component": "tooltip",
+        "issue": "https://github.com/microsoft/fluentui-react-native/issues/4249",
+        "status": "decision-required",
+        "feasibility": "blocked-as-authored",
+        "reason": "Requires an overlay host, anchor behavior, and trigger-coupled accessibility.",
+        "reevaluation": "Establish overlay infrastructure or retarget the contract.",
+        "lastEvaluated": "2026-08-28",
+        "outcome": "source-copy-removed",
+        "record": "SPEC-MIGRATION.md"
+      }
+    ]
+  },
+  "components": [
+    {
+      "component": "accordion",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "avatar",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "badge",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "button",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "card",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "checkbox",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "divider",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "input",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [
+        {
+          "role": "web:interaction",
+          "status": "reviewed",
+          "resolution": "marketplace-authoring-input",
+          "note": "The pinned Marketplace payload is the exact Agency session input; the differing x3 blob remains recorded as release lineage."
+        }
+      ],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "list-item",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "listbox-item",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "menu-item",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "progress-bar",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "radio",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "skeleton",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "spinner",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "switch",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "tab",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "tablist",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "tag",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    }
+  ]
+}

@@ -12,6 +12,9 @@ const config = {
     clean: {
       cache: false,
     },
+    'check:spec-contracts': {
+      cache: false,
+    },
     lint: {
       inputs: ['*', 'src/**/*'],
       outputs: [],
@@ -22,7 +25,7 @@ const config = {
       // which doesn't exist, so lage silently drops the edge. Point at the
       // specific root target with the packageName#task syntax so every
       // package's tests wait for the whole-repo build to finish.
-      dependsOn: ['@fluentui-react-native/root#root-build'],
+      dependsOn: ['@fluentui-react-native/root#root-build', 'check:spec-contracts'],
       inputs: [],
       outputs: [],
     },

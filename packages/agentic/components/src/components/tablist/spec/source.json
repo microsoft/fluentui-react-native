@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "component": "tablist",
+  "skill": "flex-components:tablist",
+  "sourceLock": "flex-1.5.0-206c4996",
+  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-08-30",
+  "availableSurfaces": ["mobile", "shared", "web"],
+  "surfacesConsulted": ["mobile", "shared", "web"],
+  "sourceFiles": [
+    {
+      "role": "mobile:android:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/mobile/android/accessibility.md",
+      "marketplaceBlobSha": "f84a4e9fa6a8cc0f8b8233de4b8322b6f050f974",
+      "marketplaceSha256": "52f9238ee1732868564112686ea6b2d78274706c0ae9b6fb922339869e73718c",
+      "originPath": "plugins/components/skills/tablist/mobile/android/accessibility.md",
+      "originBlobSha": "f84a4e9fa6a8cc0f8b8233de4b8322b6f050f974",
+      "originSha256": "52f9238ee1732868564112686ea6b2d78274706c0ae9b6fb922339869e73718c",
+      "contentDiffers": false
+    },
+    {
+      "role": "mobile:android:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/mobile/android/interaction.md",
+      "marketplaceBlobSha": "863dd8b683757cf7a5f71392de51332cf50da666",
+      "marketplaceSha256": "7eebac898c0d5b051e07624006b107ccf7e87d2e3b520128da7da11a9573ca22",
+      "originPath": "plugins/components/skills/tablist/mobile/android/interaction.md",
+      "originBlobSha": "863dd8b683757cf7a5f71392de51332cf50da666",
+      "originSha256": "7eebac898c0d5b051e07624006b107ccf7e87d2e3b520128da7da11a9573ca22",
+      "contentDiffers": false
+    },
+    {
+      "role": "mobile:ios:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/mobile/ios/accessibility.md",
+      "marketplaceBlobSha": "89ba23c710e99a4bf9371d661951ab803b862015",
+      "marketplaceSha256": "c7fafbd60b747d7500112cf6816b84f22641c9da27bbe773c46804a2820e58eb",
+      "originPath": "plugins/components/skills/tablist/mobile/ios/accessibility.md",
+      "originBlobSha": "89ba23c710e99a4bf9371d661951ab803b862015",
+      "originSha256": "c7fafbd60b747d7500112cf6816b84f22641c9da27bbe773c46804a2820e58eb",
+      "contentDiffers": false
+    },
+    {
+      "role": "mobile:ios:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/mobile/ios/interaction.md",
+      "marketplaceBlobSha": "0ce59f92c4b03ddc87bbc44291c08c936ffca022",
+      "marketplaceSha256": "a750f1dcab6682cd0da51bce0f21e073576f6e636d7fee179674da7690e18c2a",
+      "originPath": "plugins/components/skills/tablist/mobile/ios/interaction.md",
+      "originBlobSha": "0ce59f92c4b03ddc87bbc44291c08c936ffca022",
+      "originSha256": "a750f1dcab6682cd0da51bce0f21e073576f6e636d7fee179674da7690e18c2a",
+      "contentDiffers": false
+    },
+    {
+      "role": "mobile:overview",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/mobile/overview.md",
+      "marketplaceBlobSha": "e939603e35cc33c55d16693c76ce9e7e0dfaf6a2",
+      "marketplaceSha256": "1f200e0e077a92fd86136f4652d76e96db2800ade9943b69aea6707aad44e052",
+      "originPath": "plugins/components/skills/tablist/mobile/overview.md",
+      "originBlobSha": "e939603e35cc33c55d16693c76ce9e7e0dfaf6a2",
+      "originSha256": "1f200e0e077a92fd86136f4652d76e96db2800ade9943b69aea6707aad44e052",
+      "contentDiffers": false
+    },
+    {
+      "role": "mobile:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/mobile/tokens.yaml",
+      "marketplaceBlobSha": "8637fac272b22f0fcd9ebe19197ea3187a06d299",
+      "marketplaceSha256": "89d1d6098f44af6abc561baa70f17d986d69e5a6ad66c4de4d3d9aedc74b096c",
+      "originPath": "plugins/components/skills/tablist/mobile/tokens.yaml",
+      "originBlobSha": "8637fac272b22f0fcd9ebe19197ea3187a06d299",
+      "originSha256": "89d1d6098f44af6abc561baa70f17d986d69e5a6ad66c4de4d3d9aedc74b096c",
+      "contentDiffers": false
+    },
+    {
+      "role": "skill",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/SKILL.md",
+      "marketplaceBlobSha": "e4e19702982280fcb057fcd452c1125952d52887",
+      "marketplaceSha256": "636361908921af105a98e00b0c3c6ef12d19057e4ddab9ef9d3451dbd454d029",
+      "originPath": "plugins/components/skills/tablist/SKILL.md",
+      "originBlobSha": "e4e19702982280fcb057fcd452c1125952d52887",
+      "originSha256": "636361908921af105a98e00b0c3c6ef12d19057e4ddab9ef9d3451dbd454d029",
+      "contentDiffers": false
+    },
+    {
+      "role": "usage",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/usage.md",
+      "marketplaceBlobSha": "2c1e9af165e23e486f249402f749568712a1f0c5",
+      "marketplaceSha256": "8a206fa3d301d7dfc1a0a0af8352f2ccbd68bf48c84c338117540730c113e984",
+      "originPath": "plugins/components/skills/tablist/usage.md",
+      "originBlobSha": "2c1e9af165e23e486f249402f749568712a1f0c5",
+      "originSha256": "8a206fa3d301d7dfc1a0a0af8352f2ccbd68bf48c84c338117540730c113e984",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:accessibility",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/web/accessibility.md",
+      "marketplaceBlobSha": "19c89074081286996cf5a828f503a731ea77d3a3",
+      "marketplaceSha256": "15c9e27338eb47b08607f92e16923f8952209ddc94fd996d193e5e0e34a566cd",
+      "originPath": "plugins/components/skills/tablist/web/accessibility.md",
+      "originBlobSha": "19c89074081286996cf5a828f503a731ea77d3a3",
+      "originSha256": "15c9e27338eb47b08607f92e16923f8952209ddc94fd996d193e5e0e34a566cd",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:interaction",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/web/interaction.md",
+      "marketplaceBlobSha": "1bc5eb645bfe152505c022cd5b23bd0fbb50e8f5",
+      "marketplaceSha256": "3abbb40b527fe98f5c008840f1866895e246f3767288b6359128670e692c600d",
+      "originPath": "plugins/components/skills/tablist/web/interaction.md",
+      "originBlobSha": "1bc5eb645bfe152505c022cd5b23bd0fbb50e8f5",
+      "originSha256": "3abbb40b527fe98f5c008840f1866895e246f3767288b6359128670e692c600d",
+      "contentDiffers": false
+    },
+    {
+      "role": "web:tokens",
+      "marketplacePath": "catalogs/flex/plugins/components/skills/tablist/web/tokens.yaml",
+      "marketplaceBlobSha": "013a024ce5c7449877eadf9f9d0a65af583c00f2",
+      "marketplaceSha256": "f72934fb768f0569ffe5f43d36ed54b92c6b555550dcf1e23a8002ddefcbab40",
+      "originPath": "plugins/components/skills/tablist/web/tokens.yaml",
+      "originBlobSha": "013a024ce5c7449877eadf9f9d0a65af583c00f2",
+      "originSha256": "f72934fb768f0569ffe5f43d36ed54b92c6b555550dcf1e23a8002ddefcbab40",
+      "contentDiffers": false
+    }
+  ],
+  "releaseDifferences": [],
+  "divergences": [
+    {
+      "id": "tablist-controls-value-fallback",
+      "status": "accepted"
+    },
+    {
+      "id": "tablist-native-focus-command",
+      "status": "accepted"
+    },
+    {
+      "id": "tablist-no-selection-indicator",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "TBL-001",
+      "evidence": ["tablist.types.ts", "useTabList.ts", "tablist.test.tsx"]
+    },
+    {
+      "id": "TBL-002",
+      "evidence": ["useTabList.ts", "tablist.test.tsx"]
+    },
+    {
+      "id": "TBL-003",
+      "evidence": ["TabListContext.ts", "renderTabList.tsx", "tablist.test.tsx"]
+    },
+    {
+      "id": "TBL-004",
+      "evidence": ["useTabList.ts", "tablist.test.tsx"]
+    },
+    {
+      "id": "TBL-005",
+      "evidence": ["useTabList.ts", "tablist.test.tsx"]
+    },
+    {
+      "id": "TBL-006",
+      "evidence": ["useTabList.ts", "tablist.test.tsx"]
+    },
+    {
+      "id": "TBL-007",
+      "evidence": ["useTabList.ts", "tablist.test.tsx"]
+    },
+    {
+      "id": "TBL-008",
+      "evidence": ["tablist.styles.ts", "useTabListStyles.ts", "tablist.test.tsx"]
+    }
+  ]
+}

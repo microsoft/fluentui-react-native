@@ -1,23 +1,56 @@
----
-component: Tab
-platform: react-native (Windows, macOS)
----
+# Tab interaction
 
-# Tab Interaction (React Native — Windows & macOS)
+## Pointer
 
-## Keyboard navigation
+The whole root is the hit area, including its padding, so the icon, the label,
+and the space around them all activate the tab. Hover changes the background and
+the foreground together; pressed applies the same resolution at a higher
+precedence, so a press reads as a distinct step from a hover.
 
-- **Tab / Shift+Tab** — moves focus into and out of the parent Tablist as a group.
-- **Arrow Left / Arrow Right** — moves focus between tabs within the Tablist (roving tabindex, managed by Tablist).
-- **Enter / Space** — activates the focused tab, setting Selected=True and deselecting all siblings.
-- **Home / End** — moves focus to the first or last tab in the Tablist.
+A standalone press calls `onPress` and does not mutate `selected`. Inside
+TabList, the same press requests group selection and then preserves the caller's
+`onPress` handler.
 
-## Focus management
+While `disabled`, the underlying pressable stops reporting presses and the
+disabled colors apply to the background, the label, and the icon.
 
-Tab does not manage its own focus — focus is managed by the parent Tablist via roving tabindex. Only one tab within the Tablist is in the tab order at any time. The Focus ring is rendered on the Tab container when it receives keyboard focus.
+## Keyboard
 
-## Animation
+A standalone enabled Tab is focusable and a disabled Tab is skipped. Inside
+TabList, the parent keeps exactly one enabled Tab focusable, handles the arrow
+axis selected by its orientation, supports Home and End, and skips disabled
+Tabs. Enter and Space activate the focused Tab through the shared pressable
+behavior, producing the same selection request and `onPress` as a pointer press.
 
-State transitions (Rest → Hover, Selected swap) are platform-driven color transitions. Duration and easing reference motion tokens once defined.
+## Focus visual
 
-> **Reduced motion:** When the OS reduce-motion setting is set, all transitions should be instant (duration 0ms). No scale, translate, or opacity animation is used — color-only transitions should still be removed when reduced motion is active.
+A two-ring focus visual is drawn inside the hit area, following the corner radius
+of the active layout, so it is rounded on an icon-and-text tab and circular on an
+icon-only tab. It is shown whenever the root is focused and not disabled.
+
+React Native does not report focus modality on these platforms, so the ring
+appears for pointer focus as well as keyboard focus.
+
+## Selection appearance
+
+Selection changes four things at once: the background becomes a filled heavy
+surface, the foreground becomes the on-heavy color for both the label and the
+icon, the label weight becomes semibold, and the icon swaps to `selectedIcon`
+when one was supplied.
+
+The weight change would normally make the tab wider and push its neighbors. To
+prevent that, the label is rendered twice: a hidden copy always drawn at the
+selected weight reserves the width, and the visible copy is positioned over it.
+The tab therefore occupies the same width whether or not it is selected, and
+selecting a tab never reflows the row.
+
+There is no transition between the selected and unselected appearance; the
+change is applied on the render that carries the new `selected` value.
+
+## Layout differences
+
+The icon-and-text layout puts a gap between the icon and the label and uses
+wider horizontal padding with a rounded corner radius. The icon-only layout uses
+equal padding on both axes and a fully circular radius, and never renders text,
+so it is a square target regardless of what the label would have been. The icon
+is the same size in both layouts.

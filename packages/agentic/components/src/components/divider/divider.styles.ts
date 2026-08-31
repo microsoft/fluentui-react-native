@@ -99,10 +99,11 @@ export function getDividerLabelStyle(state: DividerState): TextStyle {
 export function getDividerLineStyle(state: DividerState, position: 'before' | 'after'): ViewStyle {
   const isStub = (state.layout === 'start' && position === 'before') || (state.layout === 'end' && position === 'after');
   const flexBasis = isStub ? state.tokens.spacing.componentBase100 : 0;
+  const lineThickness = Number(state.tokens.strokeWidth.thin);
 
   return {
     backgroundColor: state.tokens.color.strokeNeutralSubtle,
-    ...(state.vertical ? { width: 1 } : { height: 1 }),
+    ...(state.vertical ? { width: lineThickness } : { height: lineThickness }),
     flexBasis,
     flexGrow: isStub ? 0 : 1,
   };

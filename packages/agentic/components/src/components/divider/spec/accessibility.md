@@ -1,27 +1,40 @@
----
-component: Divider
-platform: react-native (Windows, macOS)
----
+# Divider accessibility
 
-# Divider Accessibility (React Native — Windows & macOS)
+## Native semantics
 
-## Spec
+The root is a `View` with `accessibilityRole="separator"` and defaults to
+`accessible={true}`. The role is owned by the component and is not part of the
+public root prop surface.
 
-- **ARIA role:** `separator`.
-- **Required attributes:**
-  - When Vertical=True, keep the divider semantic as a separator and ensure the host accessibility API can distinguish the orientation if available.
-  - When the Divider contains a visible label, the separator should reference the label via `accessibilityLabel` so assistive technology can announce the section boundary context.
-- **WCAG:**
-  - **1.3.1 — Info and Relationships:** The separator role communicates that a thematic break exists between content groups.
-  - **1.4.3 — Contrast (Minimum):** The label text (`foregroundNeutralSecondary`) on the page surface must meet 4.5:1 contrast. The line itself (`strokeNeutralSubtle`) is decorative and not subject to minimum contrast, but should remain perceptible.
-  - **1.4.11 — Non-text Contrast:** The divider line must have at least 3:1 contrast against the adjacent background if it conveys meaningful boundaries (not purely decorative).
-- **Keyboard:** Not applicable — Divider is not focusable.
-- **Screen reader:** Announces "separator" with label text if present. Decorative dividers may be hidden from accessibility when the separation is already communicated by heading structure.
+On Windows, UI Automation reports the element as a separator. On macOS,
+VoiceOver announces it as a splitter or separator with its name. Neither
+platform exposes an orientation value for a separator, so a vertical Divider is
+announced exactly like a horizontal one; convey column or panel structure
+through the surrounding layout and headings instead.
 
----
+## Naming
 
-## Usage
+The accessible name is `accessibilityLabel` when supplied, and otherwise the
+label text resolved from the `label` slot. Shorthand children and a `children`
+entry in a props object are both read for this fallback, so a labeled Divider
+announces the section boundary it introduces without extra wiring.
 
-- **Semantic markup:** Use the separator role on the root. Purely visual views without a semantic role are inaccessible.
-- **Orientation attribute:** When Vertical=True, keep the host accessibility tree aligned with the vertical layout.
-- **Decorative dividers:** When the separation is already communicated by heading structure, hide the divider from accessibility to reduce screen reader verbosity.
+A Divider with `label={null}` and no `accessibilityLabel` has no name and
+announces only its role.
+
+The icon and the label are marked `accessible={false}`, and the content
+container is as well, so the separator is announced once from the root rather
+than as several nested elements.
+
+## Decorative dividers
+
+When the separation is already carried by headings or grouping, pass
+`accessible={false}` on the root to keep the separator out of the accessibility
+tree. Prefer that over removing the label, because the label is what gives an
+announced separator its meaning.
+
+## Focus
+
+Divider sets `focusable={false}` on the root and attaches no focus handlers, so
+it never enters the tab order and has no focus indicator. `focusable` is not
+part of the public root prop surface, so this cannot be overridden.

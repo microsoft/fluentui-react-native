@@ -51,7 +51,11 @@ export { withSlots } from './component-patterns/withSlots';
  */
 export { usePressableState } from './hooks/usePressableState';
 export type { UsePressableResult } from './hooks/usePressableState';
+export { useFocusVisible } from './hooks/useFocusVisible';
+export type { FocusVisibleKeyEvent, FocusVisiblePressableProps, UseFocusVisibleResult } from './hooks/useFocusVisible';
 export { useReducedMotion } from './hooks/useReducedMotion';
+export { useSharedAnimatedLoop } from './hooks/useSharedAnimatedLoop';
+export type { SharedAnimatedLoopOptions } from './hooks/useSharedAnimatedLoop';
 export { useControllableValue } from './hooks/useControllableValue';
 export type { ControllableValueChangeCallback } from './hooks/useControllableValue';
 export { useToggleState } from './hooks/useToggleState';

@@ -1,74 +1,102 @@
 ---
 name: button
 platform: react-native (Windows, macOS)
-description: Atomic interactive control that triggers a discrete action. Covers style hierarchy (Primary/Secondary/Outline/Subtle), layout modes (Icon and text/Icon only), three sizes, Selected toggle axis, and the font-weight swap pattern used for Selected labels.
-argument-hint: "[variant axis or token question, e.g. 'Primary hover token' or 'icon-only accessibility']"
+status: implemented
+source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
 ---
 
-## Metadata
-
-| Field     | Value  |
-| --------- | ------ |
-| Type      | atomic |
-| Component | Button |
-
-This spec covers the Button component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
-
-Answer design questions directly — lead with rationale, then tokens. The most common misuse is reaching for Primary when Secondary or Subtle is correct — Primary is reserved for the single loudest action on a surface, not every clickable element. The Selected axis makes Button a toggle; do not use Disabled to simulate a toggled state.
-
----
-
 # Button
 
-## Spec
+## Scope
 
-### Anatomy
+Button presents a single action through a React Native `Pressable`. It supports
+text, an icon, or both on Windows and macOS. This contract describes the
+existing public API; issue #4252 does not change Button behavior to match newer
+Flex APIs.
 
-1. **Container** — auto-layout root frame; owns all padding, border radius, background fill, and stroke.
-2. **Icon** — optional Fluent Iconography instance (Regular theme at rest; Filled theme when Selected=True). Hidden by default.
-3. **Label** — text node bound to the `Label string` component property. Uses the font-weight swap pattern: a ghost Semibold node reserves layout width, a visible Regular or Semibold node renders on top.
+Button is not a link, menu trigger, split button, or state container. Supplying
+`selected` opts into toggle-button presentation, but the caller owns and
+updates that value.
 
-| Slot  | Required                   | Default  |
-| ----- | -------------------------- | -------- |
-| Label | Yes (Icon and text layout) | "Button" |
-| Icon  | No                         | Hidden   |
+## Public contract
 
-> **Font-weight swap:** In Icon and text layout, the label changes weight between Selected=False (Regular) and Selected=True (Semibold). The ghost node is always Semibold at opacity 0 to prevent layout reflow on selection. The visible node is absolutely positioned over the ghost.
+### Props and defaults
 
----
+| Prop           | Type                                        | Default                                         | Contract                                                    |
+| -------------- | ------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
+| `appearance`   | `primary \| secondary \| outline \| subtle` | `secondary`                                     | Selects the visual emphasis.                                |
+| `size`         | `small \| medium \| large`                  | `medium`                                        | Selects typography, icon size, spacing, and rounded radius. |
+| `shape`        | `rounded \| square \| circle`               | `rounded` with content; `circle` when icon-only | Controls the root corner radius.                            |
+| `disabled`     | `boolean`                                   | `false`                                         | Disables activation and removes the root from focus.        |
+| `iconPosition` | `before \| after`                           | `before`                                        | Places the active icon relative to content.                 |
+| `selected`     | `boolean`                                   | absent                                          | When present, exposes externally controlled toggle state.   |
 
-### Variants
+The root also exposes owned `PressableProps`, except children and styles that
+the component resolves itself. A user `style` is applied after token-derived
+root styles.
 
-Variant properties are ordered in the design tool: **Layout → Style → Size → State → Selected**.
+### Slots and anatomy
 
-#### Layout
+The render order is the persistent focus visual, the icon when positioned
+before, content, and the icon when positioned after.
 
-| Value             | Description                         | When to Use                                                   |
-| ----------------- | ----------------------------------- | ------------------------------------------------------------- |
-| **Icon and text** | Icon slot + label side by side      | Default for most actions — label improves discoverability     |
-| **Icon only**     | Icon slot alone, centered, no label | Space-constrained contexts where the icon is self-explanatory |
+| Slot           | Required | Contract                                                          |
+| -------------- | -------- | ----------------------------------------------------------------- |
+| `root`         | yes      | A `Pressable` that owns action semantics and interaction state.   |
+| `content`      | no       | A `Text` slot. It may wrap when the root width is constrained.    |
+| `icon`         | no       | The normal `Icon` slot. It is hidden from the accessibility tree. |
+| `selectedIcon` | no       | Replaces `icon` while selected; falls back to `icon` when absent. |
 
-**Why Icon only is a Layout variant, not a separate component:** Removing the label fundamentally changes the container shape, padding calculation, and minimum tap target — it is not equivalent to hiding a text prop. A Layout variant ensures tokens, spacing, and the focus ring are all recalculated correctly for the new form factor.
+An icon-only button has an icon and no content. It keeps a minimum 24 by 24
+layout and requires an action-oriented `accessibilityLabel`.
 
-#### Style
+### Requirements
 
-| Value         | When to Use                                                         |
-| ------------- | ------------------------------------------------------------------- |
-| **Primary**   | The single highest-emphasis action on a surface.                    |
-| **Secondary** | Default for most actions — visually grounded without dominating.    |
-| **Outline**   | Containment with minimal fill weight — often alongside Primary.     |
-| **Subtle**    | Low-emphasis actions, inline controls, and secondary toolbar items. |
+- **BTN-001:** Resolve documented defaults and preserve supported native root
+  props.
+- **BTN-002:** Render only supplied optional slots in the documented order,
+  with the selected-icon fallback and wrapping content behavior.
+- **BTN-003:** Resolve appearance, selection, disabled, pressed, and hovered
+  visual state from Flex tokens; user root style wins last.
+- **BTN-004:** Expose button semantics, merge caller accessibility state, warn
+  for an unnamed icon-only button, and hide decorative icons.
+- **BTN-005:** Treat `selected` as externally owned state, expose checked
+  accessibility state when that prop is present, and reserve semibold label
+  width to prevent toggle reflow.
+- **BTN-006:** Keep the dual-ring `FocusVisual` mounted and show it only for a
+  focused, enabled button while disabling the native Windows focus ring.
 
-#### Size
+## Platform behavior
 
-| Value      | When to Use                                                                   |
-| ---------- | ----------------------------------------------------------------------------- |
-| **Small**  | Dense surfaces: toolbars, inline controls, data-table rows                    |
-| **Medium** | Default. General-purpose across all surfaces.                                 |
-| **Large**  | High-touch surfaces, prominent CTAs, or contexts requiring larger tap targets |
+Windows and macOS use React Native press, hover, and focus events. `Enter` and
+`Space` activation are supplied by the native `Pressable` button behavior.
+Disabled buttons are not focusable.
 
-**Why three sizes share the same style tokens:** Size changes spacing and typography scale only — not semantic meaning. Using the same background and foreground tokens across sizes ensures a Primary Medium and a Primary Large carry identical visual weight per their context.
+React Native Windows native focus visuals are disabled because dynamically
+mounting its border visual can crash supported RNW versions. The component
+instead keeps the shared dual-ring `FocusVisual` mounted and changes only its
+visibility state. The contract does not add motion; visual state changes are
+immediate.
+
+## Divergences from Flex
+
+| ID                        | Disposition              | React Native contract                                                                                                                                 | Follow-up                                                           |
+| ------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `button-selection-axis`   | Deferred alignment       | FURN retains `selected` on Button and exposes checked state. Current Flex models toggle behavior as a separate ToggleButton.                          | A separate API proposal, migration, and changeset are required.     |
+| `button-single-icon-slot` | Deferred alignment       | FURN has one `icon` plus `iconPosition`, with `selectedIcon` for selected presentation. Current Flex has independent leading and trailing icon slots. | Align only through a separately reviewed public API change.         |
+| `button-square-shape`     | Accepted local extension | FURN supports `square` in addition to rounded and circular forms.                                                                                     | Preserve for compatibility unless a future API proposal removes it. |
+
+## Conformance
+
+| Requirement | Evidence                                                    |
+| ----------- | ----------------------------------------------------------- |
+| BTN-001     | `button.types.ts`, `useButton.ts`, `button.test.tsx`        |
+| BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx` |
+| BTN-003     | `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx` |
+| BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`     |
+| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`       |
+| BTN-006     | `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx` |

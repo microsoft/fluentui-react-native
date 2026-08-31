@@ -32,6 +32,8 @@ describe('Switch', () => {
 
     expect(root.props.accessibilityRole).toBe('switch');
     expect(root.props.accessibilityState).toEqual({ checked: false, disabled: false });
+    expect(root.props.accessibilityLabelledBy).toBeUndefined();
+    expect(root.props['aria-labelledby']).toBeUndefined();
     expect(root.props.focusable).toBe(true);
   });
 

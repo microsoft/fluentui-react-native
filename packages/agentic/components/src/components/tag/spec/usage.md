@@ -1,47 +1,106 @@
----
-component: Tag
----
+# Tag usage
 
-# Tag Usage
+## When to use
 
-## When to Use
+Use a tag to show a keyword, a category, or a filter that has been applied, and
+to let the user take it back off. Tags work best in a row above or beside the
+content they filter, or attached to an item to describe it.
 
-- To label content with categories or keywords where the user can dismiss (remove) individual tags.
-- To represent applied filters in a filter bar or search context — clicking the tag removes the filter.
-- In any context where a compact, dismissible label is needed (e.g., email recipients, selected items).
+Do not use a tag as a button for an action; it reads as a label, and its only
+action is removal. Do not use it as a toggle or a selection control, because it
+has no selected state. Do not use it for a static badge or count that the user
+cannot remove, and do not use it for status, which needs a control that carries
+meaning without implying it can be dismissed.
 
-### vs Button
+## Basic usage
 
-Button triggers a discrete action or toggles a persistent toolbar state. Tag represents a label or applied filter — clicking it dismisses (removes) the tag. Use Tag when the element _is_ the content (a keyword, category, or filter); use Button when the element _performs_ an action.
+```tsx
+import { Tag } from '@fluentui-react-native/agentic-components';
 
----
+<Tag content="Engineering" onPress={() => removeFilter('engineering')} />;
+```
 
-## Behavior
+`appearance` defaults to `secondary`, `size` to `medium`, `shape` to `rounded`,
+`layout` to `iconAndText`, and `dismiss` to `true`. With no `content` the tag
+renders placeholder text, which is useful in a story and wrong in an app: always
+pass a real label.
 
-- **Never use Tag as an action button.** Tags label or filter content — they do not trigger discrete actions. Use Button for actions.
-- **Clicking anywhere on the tag dismisses it.** The entire surface is the dismiss target.
-- **Always use the Fluent Iconography instance as the default INSTANCE_SWAP value.** Never use placeholder frames or custom vectors in icon slots.
+## Removal is yours
 
-> **Icon style:** All icons (leading and dismiss) use the **Regular** style. There is no Filled icon variant.
+Tag never removes itself. Drop it from your own data in the press handler, and
+move focus somewhere sensible, because removing the tag destroys the focused
+element.
 
----
+```tsx
+<View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
+  {filters.map((filter) => (
+    <Tag key={filter.id} content={filter.name} onPress={() => setFilters(filters.filter((f) => f.id !== filter.id))} />
+  ))}
+</View>
+```
 
-## Style
+When a tag is not removable, set `dismiss={false}` so the glyph disappears and
+the tag stops advertising an action it will not perform. The tag is still a
+pressable element, so give it a handler or leave it inert deliberately.
 
-- **Secondary is the default.** Use it as the standard tag, suitable for most scenarios.
-- **Use Primary for high emphasis tags** where the tag is central to the scenario.
-- **Don't mix Style as a semantic signal.** Primary vs Secondary communicates emphasis only, not category, status, or selection. There is still no Selected state.
+```tsx
+<Tag content="Read only" dismiss={false} />
+```
 
----
+## Appearance and size
 
-## Layout
+Use `secondary` for most tags, and reserve `primary` for the small number that
+should stand out, such as the currently active filter. A row where every tag is
+primary emphasizes nothing.
 
-- **Never mix icon sizes across sizes.** Small tags use 16px leading icons with a 12px dismiss icon; Medium tags use 20px leading icons with a 16px dismiss icon.
+```tsx
+<Tag appearance="primary" content="Engineering" />
+<Tag size="small" content="Draft" />
+```
 
----
+Use `small` inside dense surfaces such as list rows, and keep one size within a
+row. Prefer `rounded` for labeled tags; `circular` is for compact, pill-shaped
+treatments. Small circular and rounded labeled tags use the same spacing.
 
-## Shape
+## Leading icons and the icon-only layout
 
-- **Rounded is the default.** Use the size-based rounded-rect radius for standard tags.
-- **Use Circular for pill-shaped tags** when a softer, more compact look fits — e.g., contact chips or filter pills. Circular applies `radius-circular` even with a visible label.
-- **Icon only is always circular** regardless of the Shape setting.
+A leading icon is rendered only when supplied, and it takes the tag's own size
+and color, so do not size or color it yourself.
+
+```tsx
+<Tag content="Engineering" leadingIcon={<Icon svg={PeopleRegular} />} />
+```
+
+The icon-only layout drops the label entirely, so it needs both a leading icon
+and an `accessibilityLabel`; without them the tag is unidentifiable and
+development builds warn.
+
+```tsx
+<Tag layout="iconOnly" accessibilityLabel="Engineering" leadingIcon={<Icon svg={PeopleRegular} />} />
+```
+
+Use it only where the glyph alone is unambiguous, and keep a whole row
+icon-only rather than mixing layouts.
+
+## Disabled tags
+
+```tsx
+<Tag content="Engineering" disabled />
+```
+
+A disabled tag cannot be focused or pressed but still reports its disabled
+state. Use it when a filter is temporarily locked, and explain why nearby;
+prefer not rendering the tag at all when it will never be removable.
+
+## Common mistakes
+
+Expecting the tag to vanish on press. It reports the press and nothing else.
+
+Naming a tag after the removal instead of the thing, which makes a row of tags
+all announce the same word.
+
+Leaving the placeholder label in place, or leaving `dismiss` on for a tag that
+cannot be removed.
+
+Trying to give the dismiss glyph its own handler or its own focus. There is one
+target, and it is the whole tag.

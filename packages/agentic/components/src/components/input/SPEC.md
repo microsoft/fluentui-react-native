@@ -1,86 +1,125 @@
 ---
 name: input
 platform: react-native (Windows, macOS)
-description: Atomic text entry control for short, free-form data. Covers style (Outline/Underline), three sizes, six states including Focus, Error, and Read only, and optional leading/trailing icon slots.
-argument-hint: "[variant axis or token question, e.g. 'Underline Focus underline token' or 'Error state stroke color']"
+status: implemented
+source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
 ---
 
-## Metadata
-
-| Field     | Value  |
-| --------- | ------ |
-| Type      | atomic |
-| Component | Input  |
-
-This spec covers the Input component for React Native (Windows & macOS). React Native tokens are in `tokens.yaml`, React Native interaction guidance (keyboard, focus, animation) is in `interaction.md`, React Native accessibility guidance (ARIA, WCAG, screen reader) is in `accessibility.md`, and shared usage guidance is in `usage.md` — read the relevant companion file before answering.
-
-Answer design questions directly — lead with rationale, then tokens. Input is a bare text entry surface — it does not own labels, helper text, or validation messages. Wrap Input in a Field component when those are needed. The most common misuse is building validation UI directly into Input instead of delegating to Field.
-
----
-
 # Input
 
-## Spec
+## Scope
 
-### Anatomy
+Input is a single-line text entry control built around a React Native
+`TextInput` inside a bordered container. It supports two border treatments,
+three sizes, an optional leading icon, and up to two trailing icons.
 
-1. **Root** — outer container; owns border radius (Outline only) and overflow clipping.
-2. **Contents** — inner flex row; owns background fill, the stroke (full border for Outline, bottom edge for Underline), gap between Icon-Text-stack and Icon End, and overflow clipping.
-3. **Icon-Text-stack** — flex row containing the optional leading icon and the text area; owns horizontal padding.
-4. **Icon Start** — optional leading Fluent Iconography instance. Hidden by default.
-5. **.Text** — text input area; owns vertical padding and text overflow behavior. Displays placeholder text (tertiary foreground) when empty and value text (primary foreground) when populated.
-6. **Icon End** — optional trailing icon container; holds up to two icon slots side by side. Hidden by default.
-7. **Icon End 1** — primary trailing Fluent Iconography instance. Visible when Icon End 1 is true.
-8. **Icon End 2** — secondary trailing Fluent Iconography instance. Visible when Icon End 2 is true; nested inside Icon End alongside Icon End 1.
-9. **Underline** — bottom-edge indicator (Underline style only). A single stroke on the bottom edge of Contents that swaps tokens per state; on Focus it swaps to heavy weight to carry the focus indication.
+Input owns no field label, helper text, error message, character counter, or
+validation logic. It accepts an error flag and renders the matching boundary,
+but the message and the decision to set the flag belong to the surrounding
+form. It is not a search box, a combobox, a picker, or a multi-line editor.
 
-| Slot       | Required | Default                                   |
-| ---------- | -------- | ----------------------------------------- |
-| Icon Start | No       | Hidden                                    |
-| Icon End 1 | No       | Hidden                                    |
-| Icon End 2 | No       | Hidden; requires Icon End 1 to be visible |
+## Public contract
 
----
+### Props and defaults
 
-### Variants
+| Prop                                                                      | Type                       | Default   | Contract                                                                                 |
+| ------------------------------------------------------------------------- | -------------------------- | --------- | ---------------------------------------------------------------------------------------- |
+| `variant`                                                                 | `outline \| underline`     | `outline` | Selects a full border or a bottom edge, and whether the root carries a corner radius.    |
+| `size`                                                                    | `small \| medium \| large` | `medium`  | Selects typography, padding, gaps, icon size, minimum height, and outline radius.        |
+| `disabled`                                                                | `boolean`                  | `false`   | Blocks editing, clears tracked interaction state, and selects disabled colors.           |
+| `readOnly`                                                                | `boolean`                  | `false`   | Blocks editing while keeping the value announced and the foreground at primary emphasis. |
+| `error`                                                                   | `boolean`                  | `false`   | Selects the danger boundary and marks the field invalid.                                 |
+| `value`                                                                   | `string`                   | absent    | When supplied, the value is externally driven.                                           |
+| `defaultValue`                                                            | `string`                   | `''`      | The starting value while the value is internally driven.                                 |
+| `placeholder`                                                             | `string`                   | absent    | Placeholder text shown while the value is empty.                                         |
+| `onChangeText`                                                            | `(text: string) => void`   | absent    | Called with the next text on every accepted edit.                                        |
+| `onFocus`, `onBlur`, `onHoverIn`, `onHoverOut`, `onPressIn`, `onPressOut` | handlers                   | absent    | Forwarded to the text input alongside the component's own state tracking.                |
 
-Variant properties are ordered in the design tool: **Style → Size → State**.
+The root accepts the owned `ViewProps` surface. `accessibilityLabel`,
+`accessibilityHint`, `accessibilityState`, `accessible`, `focusable`, and
+`testID` are lifted from the root and applied to the text input, because the
+text input is the accessible element. A caller `style` is applied to the root
+after the token-derived root styles.
 
-#### Style
+### Slots and anatomy
 
-| Value         | Description                                    | When to Use                                                                                                                           |
-| ------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **Outline**   | Full border on all sides; contained appearance | Default for most form contexts — clear boundary communicates interactivity                                                            |
-| **Underline** | Bottom-edge indicator only; minimal appearance | Inline or embedded contexts where a full border adds visual noise — e.g., within tables, dense toolbars, or content-adjacent surfaces |
+`textInput`, `iconStart`, `iconEnd1`, and `iconEnd2` are public slots and
+accept a props object or an `as` replacement component.
 
-**Why two styles instead of one configurable border:** Outline applies a stroke to all sides of Contents; Underline applies it only to the bottom edge. Same single-stroke model and same per-state token swaps — the surface area is the only thing that differs.
+The render order is the root, then the contents row, then the icon-and-text
+stack containing the leading icon and the text input, then the trailing icon
+group, then the underline when the underline variant is active.
 
-#### Size
+| Slot                   | Rendered when                        | Contract                                                                                                                                  |
+| ---------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`                 | always                               | A non-accessible `View` that owns the corner radius, overflow clipping, and the caller style.                                             |
+| Contents               | always                               | A non-accessible row that owns the background, the stroke, the minimum height, and the gap between the text stack and the trailing icons. |
+| Icon-and-text stack    | always                               | A non-accessible row that owns horizontal padding and lets the text input grow and shrink.                                                |
+| `iconStart`            | supplied                             | A leading icon sized and colored by the component and hidden from the accessibility tree.                                                 |
+| `textInput`            | always                               | The accessible element. It carries role, name, state, editability, and the resolved text style.                                           |
+| Trailing icon group    | `iconEnd1` or `iconEnd2` is supplied | A non-accessible row that owns the trailing gap and end padding.                                                                          |
+| `iconEnd1`, `iconEnd2` | supplied                             | Trailing icons. `iconEnd2` renders only alongside `iconEnd1`.                                                                             |
+| Underline              | `variant="underline"`                | An absolutely positioned bottom-edge view inside the contents row.                                                                        |
 
-| Value                | When to Use                                                                            |
-| -------------------- | -------------------------------------------------------------------------------------- |
-| **Small**            | Dense surfaces: toolbars, data-table cells, compact forms                              |
-| **Medium (Default)** | General-purpose across all form surfaces                                               |
-| **Large**            | High-touch surfaces, prominent search fields, or contexts requiring larger tap targets |
+### Requirements
 
-**Why three sizes share the same color tokens:** Size changes spacing, typography, icon size, and border radius only — not semantic meaning. Using the same background, foreground, and stroke tokens across sizes ensures a Medium Input and a Large Input carry identical visual weight per their context.
+- **INP-001:** Resolve the documented defaults and keep the supported native
+  root props, moving the accessibility and identification props to the text
+  input.
+- **INP-002:** Own the value as a controllable string, forward text changes to
+  `onChangeText`, and refuse to update the internally driven value while
+  disabled or read only.
+- **INP-003:** Resolve one visual state per render with the precedence
+  disabled, error, read only, focused, pressed, hovered, rest, and clear the
+  tracked interaction state when the control becomes disabled.
+- **INP-004:** Render the documented order, render `iconEnd2` only alongside
+  `iconEnd1` and warn in development builds otherwise, and render the underline
+  view only for the underline variant.
+- **INP-005:** Expose textbox semantics on the text input with disabled,
+  read-only, and invalid state, keep every wrapper view non-accessible, and
+  keep read-only fields editable-in-name-only rather than disabled.
+- **INP-006:** Resolve size metrics, stroke colors, icon size and color, and
+  placeholder color from theme tokens, and apply the caller `style` last.
 
-#### State
+## Platform behavior
 
-| Value         | Description                                                                        | When to Use                                                           |
-| ------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| **Rest**      | Default idle appearance                                                            | Input is interactive but not active                                   |
-| **Hover**     | Stroke uses the inline hover value from `tokens.yaml`                              | Cursor is over the input                                              |
-| **Pressed**   | Stroke uses the inline pressed value from `tokens.yaml`                            | Mousedown on the input (transient — immediately transitions to Focus) |
-| **Focus**     | Heavy stroke (Outline) or heavy underline (Underline); caret active                | Input has keyboard focus and is accepting text entry                  |
-| **Error**     | Danger stroke on the boundary (full border for Outline, bottom edge for Underline) | Validation has failed — use with Field for error messaging            |
-| **Disabled**  | Disabled stroke and foreground; no interaction                                     | Input is unavailable                                                  |
-| **Read only** | Disabled-weight stroke, primary foreground                                         | Value is visible but not editable                                     |
+Windows and macOS use the platform text input for caret placement, selection,
+text composition, clipboard behavior, and character entry. Input adds no key
+handling of its own and does not intercept Tab, so the platform tab order and
+the platform text-editing shortcuts apply unchanged.
 
-**Pressed is transient:** Clicking an input immediately triggers Focus, so the pressed visual is only visible for the instant between mousedown and focus. Unlike Button, Input does not perform an action on click; it enters an editing mode. Pressed is included so every hover value has a corresponding pressed value.
+Hover and press state are tracked from events on the text input rather than the
+surrounding container, so pointer feedback follows the text area. Disabling the
+control clears focus, hover, and press so a disabled field never keeps stale
+interaction styling.
 
-**Bases vs hover/pressed values.** Rest, Focus, Error, Disabled, and Read only are mutually exclusive _bases_ — each defines the active stroke. Hover and Pressed use the active base's inline state value from `tokens.yaml`. Focus is a higher-priority base than Rest, so a focused-and-hovered input shifts the Focus stroke (`--gnrc-color-stroke-neutral-heavy`), not the Rest stroke; Pressed composes the same way. Error, Disabled, and Read only suppress hover and pressed entirely.
+Input renders no dedicated focus ring on either platform. Focus is shown by
+recoloring the boundary to the heavy neutral stroke at the same thickness as
+the rest state. `focusable` defaults to `true` unless disabled.
+
+There is no timed animation, so visual state changes are immediate and
+reduced-motion settings need no separate path.
+
+## Divergences from Flex
+
+| ID                              | Disposition | React Native contract                                                                                                                                                                                      | Follow-up                                                                                                                                         |
+| ------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `input-focus-indicator`         | Deferred    | Focus recolors the existing boundary to the heavy neutral stroke at the rest thickness. There is no dual-ring focus visual for the outline variant and no thickened bottom edge for the underline variant. | Adopt the shared focus visual for the outline variant and a thicker focused edge for the underline variant, then update the conformance evidence. |
+| `input-hover-target-scope`      | Deferred    | Hover and press are tracked from the text input, so pointer feedback does not cover the container padding or the icon areas. Flex treats the whole field as the hover surface.                             | Move interaction tracking to the contents row, which requires reworking how the state is derived.                                                 |
+| `input-underline-double-stroke` | Resolved    | The dedicated absolutely positioned underline view is the sole owner of the underline variant's bottom edge, so exactly one thin stroke is drawn.                                                          | Implemented in `input.styles.ts` and covered by variant style tests.                                                                              |
+| `input-icon-count`              | Accepted    | The trailing icon surface is exactly two ordered slots, with the second gated on the first, rather than an open-ended icon area.                                                                           | None. The fixed arity keeps the trailing group measurable at layout time.                                                                         |
+
+## Conformance
+
+| Requirement | Evidence                                                                  |
+| ----------- | ------------------------------------------------------------------------- |
+| INP-001     | `input.types.ts`, `useInput.ts`, `input.types.test.tsx`, `input.test.tsx` |
+| INP-002     | `useInput.ts`, `input.test.tsx`                                           |
+| INP-003     | `useInput.ts`, `input.styles.ts`, `input.test.tsx`                        |
+| INP-004     | `renderInput.tsx`, `useInput.ts`, `input.test.tsx`, `input.stories.tsx`   |
+| INP-005     | `useInput.ts`, `useInputStyles.ts`, `input.test.tsx`                      |
+| INP-006     | `input.styles.ts`, `useInputStyles.ts`, `input.test.tsx`                  |

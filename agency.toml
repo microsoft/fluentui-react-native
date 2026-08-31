@@ -1,0 +1,13 @@
+[profiles.flex-authoring]
+
+[[profiles.flex-authoring.plugins.default]]
+plugin = "market:flex-components@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"
+
+[[profiles.flex-authoring.plugins.default]]
+plugin = "market:flex-system@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"
+
+[[profiles.flex-authoring.plugins.default]]
+plugin = "market:flex-tokens@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"

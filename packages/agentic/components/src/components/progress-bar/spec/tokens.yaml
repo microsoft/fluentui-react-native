@@ -1,114 +1,94 @@
-component: ProgressBar
-type: atomic
+schemaVersion: 1
+component: progress-bar
+implementation: progress-bar.styles.ts
 
-variants:
-  Type:
-    values: [Determinate, Indeterminate, Static]
-    default: Determinate
-  Status:
-    values: [Neutral, Error, Success]
-    default: Neutral
+# ProgressBar is non-interactive, so there is no hover, pressed, focused, or
+# disabled axis. The only axis that changes a token binding is status, and it
+# changes exactly one color that two slots share.
+statePrecedence:
+  - status
 
-tokens:
-  background:
-    track: color.backgroundNeutralSoft
-    indicator:
-      Neutral: color.foregroundBrandPrimary
-      Error: color.foregroundDangerPrimary
-      Success: color.foregroundSuccessPrimary
+bindings:
+  root:
+    implementation: progress-bar.styles.ts getProgressBarThemeStyles
+    layout:
+      alignSelf: stretch
+      flexShrink: 1
 
-  foreground:
-    label: color.foregroundNeutralPrimary
-    value-text: color.foregroundNeutralSecondary
-    validation-icon:
-      Error: color.foregroundDangerPrimary
-      Success: color.foregroundSuccessPrimary
+  header:
+    layout:
+      alignItems: center
+      flexDirection: row
+      justifyContent: space-between
+      minWidth: 0
+      gap: spacing.componentBase100
 
-  stroke:
-    container: no-stroke
-    focus: n/a # Non-interactive — no focus ring.
+  label:
+    layout:
+      flexGrow: 1
+      flexShrink: 1
+      minWidth: 0
+    typography:
+      fontFamily: fontFamily.functional
+      fontSize: fontSize.functionalBodyMedium
+      lineHeight: lineHeight.functionalBodyMedium
+    color: color.foregroundNeutralPrimary
 
-  radius:
-    track: borderRadius.circular
-    indicator: borderRadius.circular
-    rationale: >
-      Pill ends on both Track and Indicator. Circular radius is independent of
-      bar thickness and matches Fluent's progress bar convention. The Indicator
-      inherits the same radius so its leading edge is rounded as it advances.
+  trailing:
+    layout:
+      alignItems: center
+      flexDirection: row
+      flexShrink: 0
+      gap: spacing.componentBase100
 
-  typography:
-    label: textstyle-functional-body-medium
-    value-text: textstyle-functional-body-small
-    font-family: fontFamily.functional
+  validationIcon:
+    implementation: useProgressBarStyles.ts
+    height: size160
+    width: size160
+    color:
+      neutral: color.foregroundBrandPrimary
+      error: color.foregroundDangerPrimary
+      success: color.foregroundSuccessPrimary
 
-  spacing:
-    header-to-bar:
-      token: spacing.componentBase100
-      rationale: Atomic-tier — component-base applies because the Header and bar are tightly coupled within a single component.
-    header-internal-gap:
-      token: spacing.componentBase100
-      rationale: Atomic-tier — component-base applies because the slot grouping sits within a single component.
+  valueText:
+    typography:
+      fontFamily: fontFamily.functional
+      fontSize: fontSize.functionalBodySmall
+      lineHeight: lineHeight.functionalBodySmall
+    color: color.foregroundNeutralSecondary
 
-  elevation: n/a
+  track:
+    backgroundColor: color.backgroundNeutralSoft
+    borderRadius: cornerRadiusCircular
+    height: spacing.componentBase100
+    layout:
+      overflow: hidden
+      position: relative
 
-  motion:
-    status: pending
-    guidance: >
-      Determinate — value transitions animate via Indicator width over ~200ms
-      with an ease-out curve, so the bar feels responsive without overshooting.
-      Indeterminate — continuous loop animation across the Track (~2s linear
-      cycle). Static — no animation under any circumstance, including value
-      changes (consumer should snap to the new width). Reduced motion —
-      Determinate value transitions become instant (no animated width
-      interpolation); Indeterminate freezes the continuous loop and the
-      screen-reader role="progressbar" carries the "busy" semantic instead.
-      See `interaction.md` for the full reduced-motion behavior.
+  indicator:
+    implementation: useProgressBarStyles.ts
+    layout:
+      bottom: 0
+      left: 0
+      position: absolute
+      top: 0
+    borderRadius: cornerRadiusCircular
+    backgroundColor:
+      # Shared with validationIcon.color, so the status signal reads the same
+      # on both surfaces.
+      neutral: color.foregroundBrandPrimary
+      error: color.foregroundDangerPrimary
+      success: color.foregroundSuccessPrimary
+    width: measured track width times the resolved value, or a fixed segment when indeterminate
 
-sizes:
-  bar-thickness:
-    token: spacing.componentBase100
-    rationale: >
-      The bar's Track and Indicator are filled rails with a fixed height, not
-      strokes — so a sizing/spacing generic is the correct family rather than
-      stroke-width. `component-base-100` (4px) expresses an internal dimension
-      within a single atomic component, matching how this same token is already
-      used for the header-to-bar and header-internal gaps. It also resolves the
-      prior stroke-width binding, which was a semantic mismatch (no stroke is
-      drawn) and was capped at 3px with no room to grow.
-  validation-icon: 16px
-  notes: >
-    Single size for ProgressBar. Validation icon follows the 16px Fluent
-    Iconography convention (Filled style — see Component properties). Overall
-    component height is resultant — Header height (when visible) +
-    header-to-bar gap + bar-thickness.
-
-properties:
-  component:
-    Label string:
-      type: TEXT
-      default: 'Label'
-      notes: Bound to the Label text node.
-    Value string:
-      type: TEXT
-      default: '0%'
-      notes: >
-        Bound to the Value text node. Free-form string — supports percentage
-        ("42%"), fraction ("3 of 10"), or descriptive status ("Uploading…").
-    Value text:
-      type: BOOLEAN
-      default: true
-      notes: Shows/hides the Value text node within the Header.
-    Validation icon:
-      type: BOOLEAN
-      default: false
-      notes: >
-        Shows/hides the Validation icon. Only meaningful when Status is Error
-        or Success — toggling on while Status is Neutral renders the default
-        Image icon and should be avoided.
-    16px Filled:
-      type: INSTANCE_SWAP
-      default: Image icon (16px Filled)
-      notes: >
-        Validation icon slot. Expects a 16px Fluent Iconography instance in the
-        Filled style. Recommended values — Error Circle Filled for Error,
-        Checkmark Circle Filled for Success.
+tokenGaps:
+  - binding: root.gap
+    detail: There is no token binding for the space between the header row and the track. The two rows are adjacent with no gap.
+  - binding: track.height
+    detail: The bar thickness reuses the spacing token used for the header and trailing gaps, so it cannot be tuned without moving those gaps.
+  - binding: indicator.width
+    detail: The indicator width is computed from the measured track width rather than resolved from a token, and the indeterminate segment ratio and its minimum are literals in useProgressBar.ts.
+  - binding: indicator.transition
+    detail: The determinate value transition duration and easing are expressed as web-only style keys, so they resolve to no token binding on Windows or macOS.
+  - binding: label.fontWeight, valueText.fontWeight
+    detail: Neither text style binds a font weight token, so both fall back to the platform default weight.

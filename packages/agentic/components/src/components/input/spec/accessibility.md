@@ -1,36 +1,66 @@
----
-component: Input
-platform: react-native (Windows, macOS)
----
+# Input accessibility
 
-# Input Accessibility (React Native — Windows & macOS)
+## Native semantics
 
-## Spec
+The text input is the accessible element. It carries
+`accessibilityRole="textbox"` and defaults to `accessible={true}`. The root, the
+contents row, the icon-and-text stack, the trailing icon group, the underline
+view, and all three icon slots are marked `accessible={false}`, so the field is
+announced once rather than as a stack of nested containers.
 
-Build-time requirements that must be satisfied by the component implementation.
+`accessibilityLabel`, `accessibilityHint`, `accessibilityState`, `accessible`,
+`focusable`, and `testID` are accepted on the root and applied to the text
+input, so callers do not have to reach into the `textInput` slot to name or
+identify the field. Direct slot values win for the name, hint, accessible,
+focusable, and test identifier. Accessibility state is the exception: root
+state is merged over slot state, then the component writes its resolved
+disabled, read-only, and invalid values.
 
-- **ARIA role:** `textbox` — provided implicitly by the native `<input type="text">` element. Prefer the native element over a `role="textbox"` wrapper; the native element supplies value semantics, selection, and IME behavior that custom roles cannot replicate.
-- **Required attributes:**
-  - `aria-invalid="true"` — required when the Error state is active. Must be synchronized with the visual state — set both together, clear both together.
-  - `aria-readonly="true"` — required when the Read only state is active. The native `readonly` attribute provides the same semantic; set both for resilience across assistive technologies.
-  - `aria-disabled="true"` — use on disabled inputs that should remain in the tab order for screen reader announcement. Use the native `disabled` attribute when the input should be entirely removed from interaction.
-  - `aria-describedby` — should reference the Field's helper text or error message when Input is wrapped in a Field component, so the supporting text is announced alongside the value.
-  - `aria-label` or `aria-labelledby` — required when no visible label is provided (e.g., search fields with only a placeholder). Placeholder text alone does not satisfy this requirement.
-- **WCAG:**
-  - **1.4.3 — Contrast (Minimum):** Value text and placeholder text must meet 4.5:1 against the background. Placeholder text uses tertiary foreground (`--gnrc-color-foreground-neutral-tertiary`) which is intentionally lower contrast than value text but must still meet the minimum.
-  - **1.4.11 — Non-text Contrast:** The stroke boundary must meet 3:1 against the adjacent background in all interactive states. Verify the disabled stroke (`--gnrc-color-stroke-neutral-disabled`) — intentionally below full contrast and must be paired with the disabled foreground so the control reads as unavailable.
-  - **2.1.1 — Keyboard:** Input must be focusable and operable via keyboard. Typing accepts all printable characters when focused.
-  - **2.4.7 — Focus Visible:** Input uses a component-specific focus indicator instead of the standard persistent dual-ring focus visual. Both styles swap their boundary stroke to `--gnrc-color-stroke-neutral-heavy` — Outline as the full border, Underline as the bottom edge.
-  - **3.3.2 — Labels or Instructions:** Input alone does not provide a label. Wrap in Field or provide `aria-label` / `aria-labelledby`.
-- **Screen reader:** Announces the accessible name (from `<label for>`, `aria-label`, or `aria-labelledby`), the role ("edit text" or equivalent), and the current value. State transitions announce the active error (`aria-invalid`), readonly (`aria-readonly`), or disabled (`aria-disabled` / native `disabled`) condition when set.
+On Windows, UI Automation reports an edit control whose value is the current
+text. On macOS, VoiceOver announces a text field with its name and value.
 
----
+## Naming
 
-## Usage
+Input renders no visible field label, so every instance needs a name from the
+surrounding form. Supply `accessibilityLabel` when there is no visible label,
+and use `accessibilityHint` for supplementary guidance such as a format
+requirement.
 
-Implementation-time considerations that cannot be solved at build.
+A placeholder is not a name. It disappears as soon as the user types and is not
+announced as a label on either platform, so a field named only by its
+placeholder loses its name mid-edit.
 
-- **Zoom:** At 200% zoom, Input should reflow within its container. Avoid fixed widths that would cause horizontal scrolling.
-- **Read only vs Disabled for screen readers:** Read only inputs remain in the tab order and announce their value. Disabled inputs may be skipped by some screen readers. Choose Disabled when the user does not need to discover the value; Read only when the value carries information (e.g., a confirmation summary).
-- **Combinations with Field:** When combining with Field, ensure the Field label is programmatically associated via `for`/`id` or `aria-labelledby`. Do not rely on visual proximity alone — adjacency does not create a programmatic label.
-- **Placeholder vs label:** Never use placeholder text as the only label. Placeholder text disappears on input and is announced inconsistently across assistive technologies.
+## State
+
+`accessibilityState` is composed by the component and merged over any caller
+value, so the following always reflect the resolved props:
+
+| Prop       | Reported state                                                  |
+| ---------- | --------------------------------------------------------------- |
+| `disabled` | `disabled` is set.                                              |
+| `readOnly` | `readOnly` is set.                                              |
+| `error`    | `invalid` is set while the flag is true, and omitted otherwise. |
+
+A read-only field is not reported as disabled. It keeps its value announced and
+keeps its foreground at primary emphasis, so assistive technology can still read
+the content the user cannot change. A disabled field is both reported as
+disabled and removed from the tab order by the default `focusable` resolution.
+
+`error` marks the field invalid but supplies no message. Render the message in
+the surrounding form and reference it from the hint so the reason is announced,
+not just the invalid state.
+
+## Icons
+
+All three icon slots are hidden from the accessibility tree. Never put meaning
+in an icon alone: an icon that conveys state must be mirrored in the name, the
+hint, or an adjacent announced element, and an icon that performs an action
+belongs in a separate focusable control rather than an icon slot.
+
+## Focus
+
+`focusable` resolves to `true` unless the field is disabled. Input renders no
+dedicated focus ring; focus is indicated by recoloring the boundary to the heavy
+neutral stroke at the same thickness used at rest. Verify that contrast in every
+shipped theme, and note that this is weaker than the shared focus visual other
+components use.
