@@ -8,11 +8,21 @@ if bundleIdentifier is "" then
 end if
 
 tell application "System Events"
-  set appIsRunning to (count of (application processes whose bundle identifier is bundleIdentifier)) > 0
+  set processIds to unix id of every application process whose bundle identifier is bundleIdentifier
 end tell
 
-if appIsRunning then
-  using terms from application "Finder"
-    tell application id bundleIdentifier to quit
-  end using terms from
-end if
+repeat with processId in processIds
+  do shell script "/bin/kill -TERM " & quoted form of (processId as text)
+end repeat
+
+repeat 100 times
+  tell application "System Events"
+    set appIsRunning to (count of (application processes whose bundle identifier is bundleIdentifier)) > 0
+  end tell
+  if not appIsRunning then
+    return
+  end if
+  delay 0.1
+end repeat
+
+error "Timed out stopping Storybook application " & bundleIdentifier

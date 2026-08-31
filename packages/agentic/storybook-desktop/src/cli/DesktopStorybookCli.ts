@@ -249,7 +249,7 @@ export class DesktopStorybookCli {
 
       await Promise.all(readiness);
       await this.executeAction('run', platform, instance);
-      await this.renderEveryStory(serverUrl, smoke.settleMs ?? 0);
+      await this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.startupTimeoutMs);
       if (mode === 'stories-and-tests') {
         const result = await this.runSmokeTests({
           driverUrl: loopbackUrl(instance.driverPort),
@@ -283,7 +283,7 @@ export class DesktopStorybookCli {
       throw failures[0];
     }
     if (failures.length > 1) {
-      throw new AggregateError(failures, `${platform} smoke test failed and cleanup reported additional errors.`);
+      throw new AggregateError(failures, `${platform} smoke test failed: ${failures.map((error) => errorMessage(error)).join('; ')}`);
     }
   }
 
@@ -328,7 +328,7 @@ export class DesktopStorybookCli {
     return outputPath;
   }
 
-  private async renderEveryStory(serverUrl: string, settleMs: number): Promise<void> {
+  private async renderEveryStory(serverUrl: string, settleMs: number, startupTimeoutMs = 120_000): Promise<void> {
     const storyIndex = await this.getJson(new URL('/index.json', serverUrl));
     const entries = Object.values((storyIndex.entries ?? {}) as Record<string, { id?: string; type?: string }>).filter(
       (entry) => entry.type === 'story' && entry.id,
@@ -341,7 +341,7 @@ export class DesktopStorybookCli {
     let consecutiveFailures = 0;
     for (const [entryIndex, { id }] of entries.entries()) {
       try {
-        await this.selectStory(serverUrl, id!, entryIndex === 0 ? 12 : 3);
+        await this.selectStory(serverUrl, id!, entryIndex === 0 ? startupTimeoutMs : 15_000);
         consecutiveFailures = 0;
         if (settleMs > 0) {
           await delay(settleMs);
@@ -362,19 +362,25 @@ export class DesktopStorybookCli {
     this.output.write(`Rendered ${entries.length} stories.\n`);
   }
 
-  private async selectStory(serverUrl: string, storyId: string, attempts: number): Promise<void> {
+  private async selectStory(serverUrl: string, storyId: string, timeoutMs: number): Promise<void> {
+    const deadline = Date.now() + timeoutMs;
     let lastError: unknown;
-    for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    do {
       try {
-        await this.getJson(new URL(`/select-story-sync/${encodeURIComponent(storyId)}`, serverUrl), { method: 'POST' }, 5000);
+        await this.getJson(
+          new URL(`/select-story-sync/${encodeURIComponent(storyId)}`, serverUrl),
+          { method: 'POST' },
+          Math.min(5000, Math.max(1, deadline - Date.now())),
+        );
         return;
       } catch (error) {
         lastError = error;
-        if (attempt < attempts) {
-          await delay(500);
+        const remainingMs = deadline - Date.now();
+        if (remainingMs > 0) {
+          await delay(Math.min(500, remainingMs));
         }
       }
-    }
+    } while (Date.now() < deadline);
     throw lastError;
   }
 
@@ -573,6 +579,10 @@ function validateDriverHost(host: string | undefined): void {
 
 function resolveFromProject(projectRoot: string, target: string): string {
   return path.isAbsolute(target) ? target : path.resolve(projectRoot, target);
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
 }
 
 function resolveSmokeMode(mode: DesktopSmokeMode | undefined): DesktopSmokeMode {

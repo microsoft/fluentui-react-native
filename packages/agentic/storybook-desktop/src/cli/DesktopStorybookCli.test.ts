@@ -203,6 +203,58 @@ describe('DesktopStorybookCli', () => {
     expect(runner.stopped).toBe(2);
   });
 
+  test('keeps retrying the first story while the initial Metro bundle is compiling', async () => {
+    jest.useFakeTimers();
+    try {
+      const runner = new RecordingRunner();
+      let selectionAttempts = 0;
+      const fetch = jest.fn(async (input: Parameters<typeof globalThis.fetch>[0]) => {
+        const url = input.toString();
+        if (url.endsWith('/index.json')) {
+          return new Response(
+            JSON.stringify({
+              entries: {
+                first: { id: 'first--story', type: 'story' },
+              },
+            }),
+          );
+        }
+        if (url.includes('select-story-sync')) {
+          selectionAttempts += 1;
+          if (selectionAttempts <= 12) {
+            return new Response(JSON.stringify({ error: 'Storybook runtime is not connected yet.' }), { status: 408 });
+          }
+        }
+        return new Response('{}');
+      });
+      const cli = new DesktopStorybookCli(
+        makeConfig({
+          macos: {
+            run: { command: 'launch-storybook' },
+            smoke: {
+              startupTimeoutMs: 10_000,
+              stop: { command: 'stop-storybook' },
+            },
+          },
+        }),
+        {
+          createStoryManifest: createEmptyStoryManifest,
+          fetch,
+          isPortAvailable: async () => true,
+          runner,
+        },
+      );
+
+      const smoke = cli.smoke('macos');
+      await jest.advanceTimersByTimeAsync(7000);
+      await smoke;
+
+      expect(selectionAttempts).toBe(13);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   test('runs authored tests after traversing the complete story index', async () => {
     const runner = new RecordingRunner();
     const events: string[] = [];
