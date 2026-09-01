@@ -69,6 +69,21 @@
     },
     {
       "platform": "macos",
+      "scenario": "design-color-lib",
+      "rawBytes": 827767,
+      "gzipBytes": 239469,
+      "moduleCount": 503,
+      "metroModuleCount": 501,
+      "metafileInputCount": 503,
+      "workspaceModules": {
+        "@fluentui-react-native/design": 6
+      },
+      "workspaceBytes": {
+        "@fluentui-react-native/design": 7097
+      }
+    },
+    {
+      "platform": "macos",
       "scenario": "design-theme-state-legacy-source",
       "rawBytes": 856701,
       "gzipBytes": 244382,
@@ -165,6 +180,21 @@
       "workspaceBytes": {
         "@fluentui-react-native/design": 30222,
         "@fluentui-react-native/framework-base": 3413
+      }
+    },
+    {
+      "platform": "windows",
+      "scenario": "design-color-lib",
+      "rawBytes": 836902,
+      "gzipBytes": 240953,
+      "moduleCount": 508,
+      "metroModuleCount": 506,
+      "metafileInputCount": 508,
+      "workspaceModules": {
+        "@fluentui-react-native/design": 6
+      },
+      "workspaceBytes": {
+        "@fluentui-react-native/design": 7097
       }
     },
     {
