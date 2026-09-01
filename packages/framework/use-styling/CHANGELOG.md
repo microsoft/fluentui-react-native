@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/use-styling
 
+## 0.16.3
+
+### Patch Changes
+
+- Updated dependencies [24be698]
+  - @fluentui-react-native/framework-base@0.7.0
+  - @fluentui-react-native/use-tokens@0.9.3
+
 ## 0.16.2
 
 ### Patch Changes

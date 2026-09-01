@@ -34,18 +34,26 @@ enables behavior; Button uses `selected !== undefined` to distinguish an ordinar
 
 Do not blindly inherit every root prop when the component owns part of the native contract.
 
-1. Start with the root native props.
+1. Start with `PropsWithRefOf<typeof Root>` so the native root's ref is part of the public contract.
 2. Omit props the component controls, such as `children` or token-derived `style`.
 3. Reintroduce a narrowed form only when consumers need it.
 
-Button uses `Omit<PressableProps, 'children' | 'style'>` and adds `StyleProp<ViewStyle>` back explicitly. This prevents
-native children from bypassing slot order while preserving a user style that can be applied after component styles.
+Button uses `OwnedRootProps<PropsWithRefOf<typeof Pressable>>`. This prevents native children from bypassing slot order,
+preserves the native style type, and retains `ref`.
 
 Compose the final public props with:
 
 ```ts
 export type MyComponentProps = MyComponentStateProps & ComponentProps<MyComponentSlots, ExposedRootProps>;
 ```
+
+This package targets React 19.1.4 or newer, where function components receive `ref` as a prop. Let the state hook carry
+that prop to the declared root slot; do not wrap the component in `forwardRef`. A top-level component ref always targets
+the declared root. Consumers that need an inner public slot use that slot's own `ref`.
+
+When a component needs an internal root ref as well, keep both refs and pass one through the resolved slot and the other
+when rendering the slot so Framework Base composes them. Never overwrite the consumer ref. If a primitive can render
+unrelated native instance types, omit a top-level ref unless it can define one sound, stable imperative contract.
 
 ## Make resolved state complete
 
@@ -89,5 +97,6 @@ internal style definitions.
 - Variant unions match the spec exactly.
 - Omitted and false values retain distinct semantics where required.
 - Root native props cannot bypass owned children or style ordering.
+- Stable native roots expose a correctly typed `ref`, and the state/render pipeline does not replace it.
 - Resolved state contains every defaulted and derived value needed downstream.
 - Public component, state, style-application, render, and resolved-state exports are explicit and tree-shakeable.

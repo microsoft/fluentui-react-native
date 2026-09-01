@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/apple-theme
 
+## 0.29.11
+
+### Patch Changes
+
+- 4157768: Add appearance-aware Flex theme sources with stable token identity and lazy compatibility bridges for legacy themes.
+- Updated dependencies [24be698]
+- Updated dependencies [4157768]
+  - @fluentui-react-native/framework-base@0.7.0
+  - @fluentui-react-native/design@0.4.0
+  - @fluentui-react-native/default-theme@0.27.11
+  - @fluentui-react-native/experimental-appearance-additions@0.8.9
+
 ## 0.29.10
 
 ### Patch Changes

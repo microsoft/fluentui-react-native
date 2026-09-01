@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
@@ -25,6 +26,21 @@ function getRootStyle(component: RenderResult): ViewStyle {
 describe('Card', () => {
   afterEach(() => {
     jest.restoreAllMocks();
+  });
+
+  it('forwards its ref only to the structural native root', async () => {
+    const ref = jest.fn<void, [React.ElementRef<typeof View> | null]>();
+
+    await renderCard({
+      accessibilityLabel: 'Open report',
+      content: { children: <Text>Report</Text> },
+      onPress: jest.fn(),
+      ref,
+      testID: 'card-root',
+    });
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenCalledWith(expect.anything());
   });
 
   it('renders selection without changing it on press', async () => {

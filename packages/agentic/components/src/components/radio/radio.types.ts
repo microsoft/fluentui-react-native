@@ -1,7 +1,14 @@
-import type { Pressable, PressableProps, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import type { Pressable, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
-import type { ComponentProps, ComponentState, OwnedRootProps, PressableState, Slot } from '@fluentui-react-native/framework-base';
+import type {
+  ComponentProps,
+  ComponentState,
+  OwnedRootProps,
+  PressableState,
+  PropsWithRefOf,
+  Slot,
+} from '@fluentui-react-native/framework-base';
 import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 
 export type RadioSlots = {
@@ -35,7 +42,7 @@ export type RadioStateProps = {
   selected?: boolean;
 };
 
-export type RadioExposedPressableProps = OwnedRootProps<PressableProps> & {
+export type RadioExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>> & {
   children?: never;
 };
 

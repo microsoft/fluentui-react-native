@@ -54,4 +54,4 @@ type EmptyIconProps = {
   svgSource?: never;
 };
 
-export type IconProps = IconElementProps & (ImageIconProps | FontIconProps | SvgIconProps | EmptyIconProps);
+export type IconProps = IconElementProps & { ref?: never } & (ImageIconProps | FontIconProps | SvgIconProps | EmptyIconProps);

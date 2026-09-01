@@ -25,6 +25,7 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     label = 'Label',
     onPress,
     onStatusChange,
+    ref: rootRef,
     secondaryText = 'Description',
     showLabel = true,
     showSecondaryText = false,
@@ -82,7 +83,7 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
   const [focusVisibleProps, focusVisible] = useFocusVisible(nativeProps);
   const [pressableProps, pressableState] = usePressableState(focusVisibleProps);
 
-  const root = useSlot(Pressable, pressableProps);
+  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
   const labelText = useOptionalSlot(Text, showLabel ? { accessible: false, children: label, testID: 'checkbox-label' } : null);
   const secondaryTextSlot = useOptionalSlot(
     Text,

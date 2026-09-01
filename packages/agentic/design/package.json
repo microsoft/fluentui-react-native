@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/design",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Core design system concepts, utilities, and types for Fluent UI React Native.",
   "license": "MIT",
   "author": "",
@@ -32,6 +32,12 @@
       "react-native": "./src/tokens/legacy/index.ts",
       "import": "./lib/tokens/legacy/index.js",
       "default": "./src/tokens/legacy/index.ts"
+    },
+    "./color-lib": {
+      "types": "./lib/color-lib/index.d.ts",
+      "react-native": "./src/color-lib/index.ts",
+      "import": "./lib/color-lib/index.js",
+      "default": "./src/color-lib/index.ts"
     },
     "./theming": {
       "types": "./lib/theming/index.d.ts",

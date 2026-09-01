@@ -1,8 +1,13 @@
 import * as React from 'react';
 import { Pressable, Text } from 'react-native';
-import type { PressableProps } from 'react-native';
 
-import { useAccessibilityLabelWarning, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import {
+  type PropsWithRefOf,
+  useAccessibilityLabelWarning,
+  usePressableState,
+  useOptionalSlot,
+  useSlot,
+} from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import type { TabProps, TabState } from './tab.types';
@@ -21,6 +26,7 @@ export function useTab_unstable(props: TabProps): TabState {
     disabled = false,
     icon: iconProp,
     layout = 'iconAndText',
+    ref: rootRef,
     selected = false,
     selectedIcon: selectedIconProp,
     style: userStyle,
@@ -77,8 +83,8 @@ export function useTab_unstable(props: TabProps): TabState {
   const root = useSlot(Pressable, {
     ...pressableProps,
     accessibilityControls: controls,
-    ref: tabRef,
-  } as PressableProps & React.RefAttributes<React.ElementRef<typeof Pressable>> & { accessibilityControls: string });
+    ref: rootRef,
+  } as PropsWithRefOf<typeof Pressable> & { accessibilityControls: string });
   const icon = useOptionalSlot(Icon, iconProp);
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
   const contentSlotProp = iconOnly ? null : (contentProp ?? 'Tab');
@@ -95,6 +101,7 @@ export function useTab_unstable(props: TabProps): TabState {
     layout,
     controls,
     selected: listSelected,
+    tabRef,
     value,
     iconOnly,
     userStyle,

@@ -1,7 +1,14 @@
-import type { AccessibilityState, ColorValue, StyleProp, TextInput, TextStyle, View, ViewProps, ViewStyle } from 'react-native';
+import type { AccessibilityState, ColorValue, StyleProp, TextInput, TextStyle, View, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
-import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
+import type {
+  ComponentProps,
+  ComponentState,
+  OptionalSlot,
+  OwnedRootProps,
+  PropsWithRefOf,
+  Slot,
+} from '@fluentui-react-native/framework-base';
 
 import type { Icon } from '../../primitives/icon/icon';
 
@@ -42,7 +49,7 @@ export type InputStateProps = {
   onPressOut?: (...args: any[]) => void;
 };
 
-export type InputExposedRootProps = OwnedRootProps<ViewProps>;
+export type InputExposedRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
 
 export type InputProps = InputStateProps & ComponentProps<InputSlots, InputExposedRootProps>;
 

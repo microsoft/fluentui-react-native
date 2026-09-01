@@ -1,6 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { PressableProps, ViewStyle } from 'react-native';
+import type { Pressable, PressableProps, ViewStyle } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
@@ -23,6 +24,14 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Button', () => {
+  it('forwards its ref prop to the native root', async () => {
+    const ref = React.createRef<React.ElementRef<typeof Pressable>>();
+
+    await renderButton({ content: 'Save', ref });
+
+    expect(ref.current).not.toBeNull();
+  });
+
   it('reuses cached theme styles without recreating them for another button instance', async () => {
     const createStyleSheet = jest.spyOn(StyleSheet, 'create');
 

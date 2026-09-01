@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/callout
 
+## 0.29.4
+
+### Patch Changes
+
+- 6259f5d: Fix macOS placement directions and anchor Windows Callouts to the requested target edge.
+- Updated dependencies [24be698]
+  - @fluentui-react-native/framework-base@0.7.0
+
 ## 0.29.3
 
 ### Patch Changes

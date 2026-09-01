@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
+## 0.22.11
+
+### Patch Changes
+
+- Updated dependencies [24be698]
+  - @fluentui-react-native/framework-base@0.7.0
+  - @fluentui-react-native/framework@0.17.5
+
 ## 0.22.10
 
 ### Patch Changes
