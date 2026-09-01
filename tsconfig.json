@@ -230,7 +230,7 @@
       "path": "packages/theming/apple-theme/tsconfig.json"
     },
     {
-      "path": "packages/theming/default-theme/tsconfig.json"
+      "path": "packages/shim/default-theme/tsconfig.json"
     },
     {
       "path": "packages/theming/win32-theme/tsconfig.json"

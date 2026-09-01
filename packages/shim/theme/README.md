@@ -24,7 +24,7 @@ The `ThemeReference` supports the following methods:
 In practice this can be used to implement a theme, that has some values coming from external calls (maybe to a native module), and rebuilds itself when those values change. This might look something like:
 
 ```ts
-import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
+import { defaultFluentTheme } from '@fluentui-react-native/design/theming/compat/defaults';
 import { ThemeReference } from '@fluentui-react-native/design/theming';
 
 // in this case wrapping the reference in a function makes it easy to encapsulate the invalidating

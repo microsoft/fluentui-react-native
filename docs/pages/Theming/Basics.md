@@ -30,7 +30,7 @@ The theme is made available by the `ThemeProvider`. It takes in a `ThemeReferenc
 
 ```tsx
 import { ThemeProvider } from '@fluentui-react-native/design/theming';
-import { createDefaultTheme } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme } from '@fluentui-react-native/design/theming/compat/defaults';
 
 // This will use the built-in theme from FURN.
 const defaultTheme = createDefaultTheme();

@@ -1,3 +1,3 @@
-import globalTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-global.json';
+import generatedGlobalTokens from './generated/tokens-global';
 
-export default globalTokens;
+export default generatedGlobalTokens;

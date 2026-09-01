@@ -12,9 +12,6 @@
       "path": "../../native/Callout/tsconfig.json"
     },
     {
-      "path": "../../theming/default-theme/tsconfig.json"
-    },
-    {
       "path": "../design/tsconfig.json"
     },
     {

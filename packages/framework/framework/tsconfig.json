@@ -16,9 +16,6 @@
       "path": "../composition/tsconfig.json"
     },
     {
-      "path": "../../theming/default-theme/tsconfig.json"
-    },
-    {
       "path": "../../agentic/design/tsconfig.json"
     },
     {

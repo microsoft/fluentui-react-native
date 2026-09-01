@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 
 import { createAndroidTheme } from '@fluentui-react-native/android-theme';
 import { createAppleTheme } from '@fluentui-react-native/apple-theme';
-import { createDefaultTheme } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme } from '@fluentui-react-native/design/theming/compat/defaults';
 import { ThemeReference } from '@fluentui-react-native/design/theming';
 import type { ThemeOptions } from '@fluentui-react-native/design/theming';
 

@@ -2,7 +2,7 @@
 
 ## Default theme if no theme is given:
 
-[Default-theme](./default-theme/README.md)
+[Default-theme compatibility shim](../shim/default-theme/README.md)
 
 ## Platform Themes
 

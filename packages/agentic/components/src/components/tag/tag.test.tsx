@@ -30,7 +30,7 @@ describe('Tag', () => {
     expect(component.getByText('Engineering')).toBeOnTheScreen();
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: '#fafafa',
+      backgroundColor: defaultFlexTokens.color.backgroundNeutralSubtle,
       minHeight: 24,
       minWidth: 24,
     });
@@ -62,7 +62,7 @@ describe('Tag', () => {
     expect(root).toBeDisabled();
     expect(root.props.focusable).toBe(false);
     expect(root.props.accessibilityState).toEqual({ disabled: true });
-    expect(getRootStyle(component).backgroundColor).toBe('#f0f0f0');
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSubtleDisabled);
     await fireEvent.press(root);
     expect(onPress).not.toHaveBeenCalled();
   });
@@ -155,8 +155,8 @@ describe('Tag', () => {
   });
 
   it.each([
-    ['primary', '#185abd'],
-    ['secondary', '#fafafa'],
+    ['primary', defaultFlexTokens.color.backgroundBrandHeavy],
+    ['secondary', defaultFlexTokens.color.backgroundNeutralSubtle],
   ] as const)('resolves the %s appearance', async (appearance, backgroundColor) => {
     const component = await renderTag({ appearance, content: appearance });
     expect(getRootStyle(component).backgroundColor).toBe(backgroundColor);

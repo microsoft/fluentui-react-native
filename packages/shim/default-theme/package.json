@@ -1,14 +1,14 @@
 {
   "name": "@fluentui-react-native/default-theme",
   "version": "0.27.10",
-  "description": "Typing only package for fluentui-react-native theme types",
+  "description": "Compatibility entry point for the default Fluent UI React Native theme.",
   "keywords": [],
   "license": "MIT",
   "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/theming/default-theme"
+    "directory": "packages/shim/default-theme"
   },
   "type": "module",
   "main": "lib/index.js",
@@ -33,9 +33,7 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
-    "@fluentui-react-native/design": "workspace:*",
-    "@fluentui-react-native/framework-base": "workspace:*",
-    "assert-never": "^1.2.1"
+    "@fluentui-react-native/design": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

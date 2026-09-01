@@ -35,9 +35,6 @@
       "path": "../../packages/components/Chip/tsconfig.json"
     },
     {
-      "path": "../../packages/theming/default-theme/tsconfig.json"
-    },
-    {
       "path": "../../packages/agentic/design/tsconfig.json"
     },
     {

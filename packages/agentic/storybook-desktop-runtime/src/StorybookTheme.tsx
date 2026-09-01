@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { createDefaultTheme } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme } from '@fluentui-react-native/design/theming/compat/defaults';
 import { ThemeProvider } from '@fluentui-react-native/design/theming';
 import type { ThemeReference } from '@fluentui-react-native/design/theming';
 

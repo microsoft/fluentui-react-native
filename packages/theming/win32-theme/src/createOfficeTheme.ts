@@ -1,4 +1,4 @@
-import { createDefaultTheme } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme } from '@fluentui-react-native/design/theming/compat/defaults';
 import {
   appearanceOptionFromResolved,
   appearanceOptionsFromLegacy,
@@ -149,13 +149,14 @@ function getOfficeAppearance(
     return {
       colorScheme,
       contrast: isHighContrast ? 'highContrast' : 'standard',
-      interfaceLevel: 'base',
+      interfaceLevel: themeName === 'DarkGray' ? 'elevated' : 'base',
     };
   }
 
   switch (themeName) {
-    case 'Black':
     case 'DarkGray':
+      return { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'elevated' };
+    case 'Black':
       return { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'base' };
     case 'HighContrast':
       // Transitional until the native contract exposes scheme and contrast as

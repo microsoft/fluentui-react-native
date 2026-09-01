@@ -14,7 +14,7 @@ You can extend one of our default themes by creating a `ThemeReference` using th
 
 ```ts
 import { ThemeReference, ThemeProvider } from '@fluentui-react-native/design/theming';
-import { createDefaultTheme } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme } from '@fluentui-react-native/design/theming/compat/defaults';
 import { Theme } from '@fluentui-react-native/framework';
 
 const theme = new ThemeReference(createDefaultTheme(),

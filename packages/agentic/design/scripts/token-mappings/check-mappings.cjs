@@ -9,7 +9,7 @@ const { parse: parseYaml } = nodeRequire(path.join(yamlPackageRoot, 'dist/index.
 
 const packageRoot = path.resolve(__dirname, '../..');
 const defaultPaths = {
-  defaultTokens: path.join(packageRoot, 'src/tokens/defaultTokens.ts'),
+  defaultTokens: path.join(packageRoot, 'src/tokens/nonFluentFlexTokens.ts'),
   flexFromTheme: path.join(packageRoot, 'src/tokens/mappings/flex-from-theme.json'),
   flexTokenMap: path.join(packageRoot, 'src/tokens/mappings/flex-token-map.yaml'),
   flexTypes: path.join(packageRoot, 'src/tokens/flex.types.ts'),
@@ -44,6 +44,20 @@ function getThemeSource(entry, tokenPath, violations) {
   return source;
 }
 
+function getFluentSource(entry, tokenPath, violations) {
+  if (!Object.hasOwn(entry, 'fluent') || entry.fluent === null) {
+    return undefined;
+  }
+
+  const source = entry.fluent;
+  if (typeof source !== 'string' || !/^(alias|global|shadow)\.[A-Za-z0-9.]+$/.test(source)) {
+    addViolation(violations, 'schema', tokenPath, 'a Fluent alias.*, global.*, or shadow.* path, or null', source);
+    return undefined;
+  }
+
+  return source;
+}
+
 function flattenTokenMappings(mapping, violations) {
   const entries = new Map();
   if (!isRecord(mapping.tokens)) {
@@ -72,11 +86,13 @@ function flattenTokenMappings(mapping, violations) {
         }
 
         entries.set(destination, {
+          fluentSource: getFluentSource(stateEntry, destination, violations),
           themeSource: getThemeSource(stateEntry, destination, violations),
         });
       }
     } else {
       entries.set(basePath, {
+        fluentSource: getFluentSource(mappingEntry, basePath, violations),
         themeSource: getThemeSource(mappingEntry, basePath, violations),
       });
     }
@@ -530,13 +546,13 @@ function validateMappingInputs(inputs) {
   }
 
   for (const [tokenPath, entry] of supportedEntries) {
-    if (entry.themeSource !== undefined) {
+    if (entry.fluentSource !== undefined) {
       continue;
     }
 
     const restPath = getInteractionRestPath(tokenPath);
-    const restIsThemeBacked = restPath !== undefined && Object.hasOwn(themeProjection, restPath);
-    if (!restIsThemeBacked && !nonFluentValues.has(tokenPath)) {
+    const restEntry = restPath === undefined ? undefined : supportedEntries.get(restPath);
+    if (restEntry?.fluentSource === undefined && !nonFluentValues.has(tokenPath)) {
       addViolation(violations, 'non-fluent-coverage', tokenPath, 'a value in nonFluentFlexTokens', '<missing>');
     }
   }
@@ -547,8 +563,8 @@ function validateMappingInputs(inputs) {
       addViolation(violations, 'non-fluent-coverage', tokenPath, 'a supported destination in flex-token-map.yaml', value);
       continue;
     }
-    if (mappingEntry.themeSource !== undefined) {
-      addViolation(violations, 'non-fluent-coverage', tokenPath, '<absent because the destination is Theme-backed>', value);
+    if (mappingEntry.fluentSource !== undefined) {
+      addViolation(violations, 'non-fluent-coverage', tokenPath, '<absent because the destination has a Fluent token source>', value);
     }
 
     const restPath = getInteractionRestPath(tokenPath);

@@ -1,14 +1,29 @@
-import { ThemeReference } from '@fluentui-react-native/design/theming';
-import type { Theme, ThemeOptions } from '@fluentui-react-native/design/theming';
-import {
-  appearanceOptionFromResolved,
-  appearanceOptionsFromLegacy,
-  getCurrentAppearance,
-  resolveThemeAppearance,
-} from '@fluentui-react-native/design/theming';
 import assertNever from 'assert-never';
 
-import { defaultFluentDarkTheme, defaultFluentHighConstrastTheme, defaultFluentTheme } from './defaultTheme';
+import { appearanceOptionFromResolved, appearanceOptionsFromLegacy, resolveThemeAppearance } from '../appearance';
+import { getCurrentAppearance } from '../platformUtils';
+import { ThemeReference } from '../themeReference';
+import type { Theme, ThemeOptions } from '../types/Theme.types';
+
+import { getDefaultLegacyTheme } from './defaultLegacyTheme';
+
+export const defaultFluentTheme = getDefaultLegacyTheme({
+  colorScheme: 'light',
+  contrast: 'standard',
+  interfaceLevel: 'base',
+});
+
+export const defaultFluentDarkTheme = getDefaultLegacyTheme({
+  colorScheme: 'dark',
+  contrast: 'standard',
+  interfaceLevel: 'base',
+});
+
+export const defaultFluentHighConstrastTheme = getDefaultLegacyTheme({
+  colorScheme: 'dark',
+  contrast: 'highContrast',
+  interfaceLevel: 'base',
+});
 
 export function createDefaultTheme(options: ThemeOptions = {}): ThemeReference {
   return new ThemeReference({

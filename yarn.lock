@@ -2634,10 +2634,7 @@ __metadata:
   resolution: "@fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
-    "@fluentui-react-native/design-tokens-ios": "catalog:"
-    "@fluentui-react-native/design-tokens-macos": "catalog:"
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3139,13 +3136,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/default-theme@workspace:*, @fluentui-react-native/default-theme@workspace:packages/theming/default-theme":
+"@fluentui-react-native/default-theme@workspace:packages/shim/default-theme":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/default-theme@workspace:packages/theming/default-theme"
+  resolution: "@fluentui-react-native/default-theme@workspace:packages/shim/default-theme"
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/design": "workspace:*"
-    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -3154,7 +3150,6 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
     "@types/react": "npm:~19.1.4"
-    assert-never: "npm:^1.2.1"
     react: "npm:19.1.4"
     react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
@@ -4182,7 +4177,6 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/composition": "workspace:*"
-    "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -5036,7 +5030,6 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@fluentui-react-native/callout": "workspace:*"
-    "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
@@ -5255,7 +5248,6 @@ __metadata:
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/chip": "workspace:*"
-    "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/divider": "workspace:*"
     "@fluentui-react-native/drawer": "workspace:*"
@@ -5903,9 +5895,7 @@ __metadata:
   resolution: "@fluentui-react-native/win32-theme@workspace:packages/theming/win32-theme"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
-    "@fluentui-react-native/design-tokens-win32": "catalog:"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -10852,7 +10842,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-compose@workspace:packages/deprecated/foundation-compose"
   dependencies:
-    "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -11032,7 +11021,7 @@ __metadata:
   resolution: "@uifabricshared/theming-react-native@workspace:packages/deprecated/theming-react-native"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/win32-theme": "workspace:*"

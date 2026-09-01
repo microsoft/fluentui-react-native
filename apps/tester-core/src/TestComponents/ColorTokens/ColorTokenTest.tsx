@@ -3,7 +3,7 @@ import type { ViewStyle, ColorValue } from 'react-native';
 import { View, StyleSheet, Platform } from 'react-native';
 
 import { Text, ToggleButton } from '@fluentui/react-native';
-import { createAliasTokens } from '@fluentui-react-native/default-theme';
+import { createAliasTokens } from '@fluentui-react-native/design/theming/compat/defaults';
 import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { globalTokens } from '@fluentui-react-native/design/tokens/legacy';

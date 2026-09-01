@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 
 import { fontWeightRegular, fontWeightSemibold } from '../../tokens/global.generated';
-import globalTokens from '../../tokens/legacy/tokens-global';
+import { legacyGlobalTokens as globalTokens } from '../../tokens/legacy/generated/legacyGlobals';
 import { appearanceOptionFromResolved, themeAppearanceKey } from '../appearance';
 import type { ResolvedThemeAppearance } from '../appearance.types';
 import type { Theme, Spacing } from '../types/Theme.types';

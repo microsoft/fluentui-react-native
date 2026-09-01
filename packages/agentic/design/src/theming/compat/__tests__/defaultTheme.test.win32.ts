@@ -1,7 +1,7 @@
 import type { ThemeOptions, AppearanceOptions } from '@fluentui-react-native/design/theming';
 
-import { createColorAliasTokens, createShadowAliasTokens } from '../createAliasTokens';
-import { createDefaultTheme } from '../createDefaultTheme';
+import { createLegacyColorAliasTokens, createLegacyShadowAliasTokens } from '../createLegacyAliasTokens';
+import { createDefaultTheme } from '../defaultTheme';
 import { defaultFluentTheme, defaultFluentDarkTheme } from '../defaultTheme';
 
 const defaultThemeOptions: ThemeOptions[][] = [
@@ -60,12 +60,12 @@ describe('createDefaultTheme test', () => {
 
 describe('createColorAliasTokens test', () => {
   it.concurrent.each(appearanceOptions)('appearanceOptions - %s', async (appearanceOption: AppearanceOptions) => {
-    expect(createColorAliasTokens(appearanceOption)).toMatchSnapshot();
+    expect(createLegacyColorAliasTokens(appearanceOption)).toMatchSnapshot();
   });
 });
 
 describe('createShadowAliasTokens test', () => {
   it.concurrent.each(appearanceOptions)('appearanceOptions - %s', async (appearanceOption: AppearanceOptions) => {
-    expect(createShadowAliasTokens(appearanceOption)).toMatchSnapshot();
+    expect(createLegacyShadowAliasTokens(appearanceOption)).toMatchSnapshot();
   });
 });

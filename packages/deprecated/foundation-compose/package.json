@@ -33,7 +33,6 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
-    "@fluentui-react-native/default-theme": "workspace:*",
     "@fluentui-react-native/design": "workspace:*",
     "@fluentui-react-native/framework-base": "workspace:*",
     "@uifabricshared/foundation-composable": "workspace:*",
@@ -76,7 +75,6 @@
   "furn": {
     "depcheck": {
       "ignoreMatches": [
-        "@fluentui-react-native/default-theme",
         "@fluentui-react-native/design",
         "@fluentui-react-native/memo-cache"
       ]

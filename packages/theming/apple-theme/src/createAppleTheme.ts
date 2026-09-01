@@ -1,4 +1,4 @@
-import { createDefaultTheme } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme } from '@fluentui-react-native/design/theming/compat/defaults';
 import { ThemeReference } from '@fluentui-react-native/design/theming';
 
 export function createAppleTheme(): ThemeReference {

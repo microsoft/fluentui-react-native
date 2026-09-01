@@ -1,6 +1,7 @@
 const { processPlatformJsonFiles, outputCodegenFile } = require('@fluentui-react-native/scripts');
 const path = require('node:path');
 const { assertMappingsConsistent, writeMappingProjections } = require('./token-mappings/check-mappings.cjs');
+const { main: generateAppearanceTokens } = require('./token-sources/generate-tokens.cjs');
 
 const globalHeader = `WARNING: This file is auto-generated. Do not edit it manually.
 
@@ -38,6 +39,7 @@ function main() {
   writeMappingProjections();
   assertMappingsConsistent();
   processGlobals();
+  generateAppearanceTokens();
 }
 
 main();

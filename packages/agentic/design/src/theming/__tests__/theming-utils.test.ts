@@ -1,17 +1,24 @@
-import blackAliasTokens from '@fluentui-react-native/design-tokens-win32/black/tokens-aliases.json';
-import colorfulAliasTokens from '@fluentui-react-native/design-tokens-win32/colorful/tokens-aliases.json';
-import darkGrayAliasTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-aliases.json';
-import hcShadowTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json';
-import darkAliasTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-aliases.json';
-import darkShadowTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-shadow.json';
-import lightAliasTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-aliases.json';
-import lightShadowTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-shadow.json';
-
+import type { GeneratedAppearanceName } from '../../tokens/generated/appearanceNames';
+import { resolveGeneratedValue } from '../../tokens/generated/resolveGeneratedValue';
+import type { GeneratedValueDefinitions } from '../../tokens/generated/types';
+import { generatedLegacyTokenDefinitions as win32Definitions } from '../../tokens/legacy/generated/tokenSets.win32';
+import { generatedLegacyTokenDefinitions as windowsDefinitions } from '../../tokens/legacy/generated/tokenSets.windowsSource';
+import type { GeneratedLegacyTokenSet } from '../../tokens/legacy/generatedTokenSet.types';
 import { getCurrentAppearance } from '../';
 import { mapPipelineToShadow } from '../mapPipelineToShadow';
 import { mapPipelineToTheme, mapFontPipelineToTheme } from '../mapPipelineToTheme';
 
 const fallBackAppearance = 'light';
+const windowsCache = new Map<GeneratedAppearanceName, GeneratedLegacyTokenSet>();
+const win32Cache = new Map<GeneratedAppearanceName, GeneratedLegacyTokenSet>();
+
+function getTokenSet(
+  definitions: GeneratedValueDefinitions<GeneratedLegacyTokenSet, GeneratedAppearanceName>,
+  cache: Map<GeneratedAppearanceName, GeneratedLegacyTokenSet>,
+  appearance: GeneratedAppearanceName,
+) {
+  return resolveGeneratedValue<GeneratedLegacyTokenSet, GeneratedAppearanceName>(definitions, appearance, cache);
+}
 
 beforeAll(() => {
   jest.mock('react-native/Libraries/Utilities/Appearance', () => ({
@@ -43,46 +50,46 @@ describe('getCurrentAppearanceTable test', () => {
 
 describe('mapPipelineToTheme test', () => {
   it('lightAliasTokens', () => {
-    const aliasColorTokens = mapPipelineToTheme(lightAliasTokens);
+    const aliasColorTokens = mapPipelineToTheme(getTokenSet(windowsDefinitions, windowsCache, 'light').aliases);
     expect(aliasColorTokens).toMatchSnapshot();
   });
 
   it('darkAliasTokens', () => {
-    const aliasColorTokens = mapPipelineToTheme(darkAliasTokens);
+    const aliasColorTokens = mapPipelineToTheme(getTokenSet(windowsDefinitions, windowsCache, 'dark').aliases);
     expect(aliasColorTokens).toMatchSnapshot();
   });
 });
 
 describe('mapFontPipelineToTheme test', () => {
   it('colorfulAliasTokens', () => {
-    const fontTheme = mapFontPipelineToTheme(colorfulAliasTokens);
+    const fontTheme = mapFontPipelineToTheme(getTokenSet(win32Definitions, win32Cache, 'light').aliases);
     expect(fontTheme).toMatchSnapshot();
   });
 
   it('darkGrayAliasTokens', () => {
-    const fontTheme = mapFontPipelineToTheme(darkGrayAliasTokens);
+    const fontTheme = mapFontPipelineToTheme(getTokenSet(win32Definitions, win32Cache, 'darkElevated').aliases);
     expect(fontTheme).toMatchSnapshot();
   });
 
   it('blackAliasTokens', () => {
-    const fontTheme = mapFontPipelineToTheme(blackAliasTokens);
+    const fontTheme = mapFontPipelineToTheme(getTokenSet(win32Definitions, win32Cache, 'dark').aliases);
     expect(fontTheme).toMatchSnapshot();
   });
 });
 
 describe('mapPipelineToShadow test', () => {
   it('lightShadowTokens', () => {
-    const fontTheme = mapPipelineToShadow(lightShadowTokens);
+    const fontTheme = mapPipelineToShadow(getTokenSet(windowsDefinitions, windowsCache, 'light').shadows);
     expect(fontTheme).toMatchSnapshot();
   });
 
   it('darkShadowTokens', () => {
-    const fontTheme = mapPipelineToShadow(darkShadowTokens);
+    const fontTheme = mapPipelineToShadow(getTokenSet(windowsDefinitions, windowsCache, 'dark').shadows);
     expect(fontTheme).toMatchSnapshot();
   });
 
   it('hcShadowTokens', () => {
-    const fontTheme = mapPipelineToShadow(hcShadowTokens);
+    const fontTheme = mapPipelineToShadow(getTokenSet(win32Definitions, win32Cache, 'lightHighContrast').shadows);
     expect(fontTheme).toMatchSnapshot();
   });
 });

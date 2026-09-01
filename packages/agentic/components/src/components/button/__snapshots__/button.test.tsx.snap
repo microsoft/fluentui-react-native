@@ -6,7 +6,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "appearance": "primary",
     "contentStyles": [
       {
-        "color": "#bdbdbd",
+        "color": "#757575",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -36,7 +36,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "appearance": "secondary",
     "contentStyles": [
       {
-        "color": "#bdbdbd",
+        "color": "#757575",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -66,7 +66,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "appearance": "outline",
     "contentStyles": [
       {
-        "color": "#bdbdbd",
+        "color": "#757575",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -96,7 +96,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "appearance": "subtle",
     "contentStyles": [
       {
-        "color": "#bdbdbd",
+        "color": "#757575",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -143,7 +143,7 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#185abd",
+      "backgroundColor": "#0078d4",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderStyle": "solid",
@@ -173,7 +173,7 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#fafafa",
+      "backgroundColor": "#ffffff",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderStyle": "solid",
@@ -204,7 +204,7 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#00000000",
-      "borderColor": "#d1d1d1",
+      "borderColor": "#f0f0f0",
       "borderRadius": 4,
       "borderStyle": "solid",
       "borderWidth": 1,
@@ -268,7 +268,7 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#1651aa",
+      "backgroundColor": "#106ebe",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderStyle": "solid",
@@ -393,7 +393,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0e336a",
+      "backgroundColor": "#106ebe",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderStyle": "solid",
@@ -423,7 +423,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#dbdbdb",
+      "backgroundColor": "#ebebeb",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderStyle": "solid",
@@ -483,7 +483,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#dbdbdb",
+      "backgroundColor": "#ebebeb",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderStyle": "solid",
@@ -518,7 +518,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#185abd",
+      "backgroundColor": "#0078d4",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderStyle": "solid",
@@ -548,7 +548,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#fafafa",
+      "backgroundColor": "#ffffff",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderStyle": "solid",
@@ -579,7 +579,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#00000000",
-      "borderColor": "#d1d1d1",
+      "borderColor": "#f0f0f0",
       "borderRadius": 4,
       "borderStyle": "solid",
       "borderWidth": 1,
@@ -658,7 +658,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#185abd",
+      "backgroundColor": "#0078d4",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderStyle": "solid",

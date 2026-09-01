@@ -25,3 +25,10 @@ it('preserves raw Win32 platform color names', () => {
     },
   });
 });
+
+it('does not mutate generated token data', () => {
+  const source = createAliasTokens();
+
+  expect(processAliasTokens(source, transformWin32PlatformColorName)).not.toBe(source);
+  expect(source.colors.buttonFace).toBe('PlatformColor(ButtonFace)');
+});

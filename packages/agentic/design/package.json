@@ -52,10 +52,10 @@
       "default": "./src/theming/compat/index.ts"
     },
     "./theming/compat/defaults": {
-      "types": "./lib/theming/compat/defaultLegacyTheme.d.ts",
-      "react-native": "./src/theming/compat/defaultLegacyTheme.ts",
-      "import": "./lib/theming/compat/defaultLegacyTheme.js",
-      "default": "./src/theming/compat/defaultLegacyTheme.ts"
+      "types": "./lib/theming/compat/defaults.d.ts",
+      "react-native": "./src/theming/compat/defaults.ts",
+      "import": "./lib/theming/compat/defaults.js",
+      "default": "./src/theming/compat/defaults.ts"
     },
     "./testing": {
       "types": "./lib/testing/index.d.ts",
@@ -97,17 +97,17 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
-    "@fluentui-react-native/design-tokens-android": "catalog:",
-    "@fluentui-react-native/design-tokens-ios": "catalog:",
-    "@fluentui-react-native/design-tokens-win32": "catalog:",
-    "@fluentui-react-native/design-tokens-windows": "catalog:",
     "@fluentui-react-native/framework-base": "workspace:*",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/parser": "^7.29.7",
+    "@fluentui-react-native/design-tokens-android": "catalog:",
+    "@fluentui-react-native/design-tokens-ios": "catalog:",
     "@fluentui-react-native/design-tokens-macos": "catalog:",
+    "@fluentui-react-native/design-tokens-win32": "catalog:",
+    "@fluentui-react-native/design-tokens-windows": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
     "@react-native-community/cli": "^20.0.0",

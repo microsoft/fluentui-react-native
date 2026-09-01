@@ -1,5 +1,4 @@
-import aliasTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-aliases.json';
-
+import { generatedHighContrastTokenSet } from '../generated/highContrastTokenSet';
 import { processAliasTokens, transformWin32PlatformColorName } from './processAliasTokens';
 
-export const hcAliasTokens = processAliasTokens(aliasTokens, transformWin32PlatformColorName);
+export const hcAliasTokens = processAliasTokens(generatedHighContrastTokenSet.aliases, transformWin32PlatformColorName);

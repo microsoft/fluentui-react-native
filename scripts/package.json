@@ -29,7 +29,8 @@
     "build": "tsc -b",
     "bundlesize": "bundlesize --debug",
     "format": "node ./src/cli.ts format",
-    "lint": "node ./src/cli.ts lint"
+    "lint": "node ./src/cli.ts lint",
+    "test": "node ./src/cli.ts jest"
   },
   "dependencies": {
     "@babel/core": "catalog:",
@@ -100,6 +101,7 @@
   ],
   "furn": {
     "packageType": "tooling",
+    "jestPlatform": "react",
     "depcheck": {
       "ignoreMatches": [
         "@babel/plugin-transform-react-jsx",

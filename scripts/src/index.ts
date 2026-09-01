@@ -7,3 +7,25 @@ export type { Constants, ConstValue, CodegenTargetFile, ReExports } from './code
 export { jsonToCodegenTargetFile, processPlatformJsonFiles } from './codegen/json.ts';
 export { writeConstExports, writeExportConst } from './codegen/constants.ts';
 export { outputCodegenFile } from './codegen/genFile.ts';
+export type {
+  DeltaParentCandidate,
+  JsonArray,
+  JsonDeletion,
+  JsonDeltaObject,
+  JsonDeltaValue,
+  JsonObject,
+  JsonPrimitive,
+  JsonValue,
+  SelectedDeltaParent,
+  TypeScriptLiteralOptions,
+} from './codegen/structuredJson.ts';
+export {
+  JSON_DELETION,
+  applyJsonObjectDelta,
+  cloneJsonValue,
+  createJsonObjectDelta,
+  selectCompactDeltaParent,
+  serializeJson,
+  serializeTypeScriptLiteral,
+  sortJsonValue,
+} from './codegen/structuredJson.ts';

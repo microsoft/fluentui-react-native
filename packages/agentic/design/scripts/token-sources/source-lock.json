@@ -1,0 +1,311 @@
+{
+  "generatedBy": "scripts/token-sources/generate-tokens.cjs",
+  "inputs": [
+    {
+      "package": "@fluentui-react-native/design-tokens-android",
+      "path": "@fluentui-react-native/design-tokens-android/dark/tokens-aliases.json",
+      "sha256": "633bb41f7b36f99bd50e8cac8dd666e83f2a932a78a64517e069da184c072c55",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-android",
+      "path": "@fluentui-react-native/design-tokens-android/dark/tokens-global.json",
+      "sha256": "8bf6aa56f07842cbbdce523dcd11db47164f35411ff49449f9e2333a522b6dad",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-android",
+      "path": "@fluentui-react-native/design-tokens-android/dark/tokens-shadow.json",
+      "sha256": "b748803b72173d3695b4cbf6661ad22c31c5d190505d47f6d7d7ee44a357b3ba",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-android",
+      "path": "@fluentui-react-native/design-tokens-android/light/tokens-aliases.json",
+      "sha256": "f5b14a151c364f193bfb6a925fd23cff76b3652539881288f2b7a5543839b34d",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-android",
+      "path": "@fluentui-react-native/design-tokens-android/light/tokens-global.json",
+      "sha256": "8bf6aa56f07842cbbdce523dcd11db47164f35411ff49449f9e2333a522b6dad",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-android",
+      "path": "@fluentui-react-native/design-tokens-android/light/tokens-shadow.json",
+      "sha256": "b748803b72173d3695b4cbf6661ad22c31c5d190505d47f6d7d7ee44a357b3ba",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/dark/tokens-aliases.json",
+      "sha256": "9d16bc49669b45420b459d33b89f6c03910463e4d0ccc3c8e160b42424e7f89c",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/dark/tokens-global.json",
+      "sha256": "4e907bccdbb3771ae449af3f690f90f8c5953266b8d7c47d1ef64cbeea848777",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/dark/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/elevateddark/tokens-aliases.json",
+      "sha256": "265aca48974f22c1ca8256c578cccabc837eab6afb44490676b88b013b344046",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/elevateddark/tokens-global.json",
+      "sha256": "4e907bccdbb3771ae449af3f690f90f8c5953266b8d7c47d1ef64cbeea848777",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/elevateddark/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/hcdark/tokens-aliases.json",
+      "sha256": "7898c999027a3e50d3004fec157165deec64debf414e4021fac6b84a5030b4ac",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/hcdark/tokens-global.json",
+      "sha256": "4e907bccdbb3771ae449af3f690f90f8c5953266b8d7c47d1ef64cbeea848777",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/hcdark/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/hclight/tokens-aliases.json",
+      "sha256": "7898c999027a3e50d3004fec157165deec64debf414e4021fac6b84a5030b4ac",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/hclight/tokens-global.json",
+      "sha256": "4e907bccdbb3771ae449af3f690f90f8c5953266b8d7c47d1ef64cbeea848777",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/hclight/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/light/tokens-aliases.json",
+      "sha256": "41f8b440def9c26316ae34a2f8c5d8840171cf939c5f910d0650edf3b6cac764",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/light/tokens-global.json",
+      "sha256": "bfe3b579aaeaef80eabab3decc8f959d0ef49d64da122d15181ea2e3ed9cbbda",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "path": "@fluentui-react-native/design-tokens-ios/light/tokens-shadow.json",
+      "sha256": "1ea3f256b771f630f361634617f9ff5a8060fa30fc9cab5b125f3713180dcbbc",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/dark/tokens-aliases.json",
+      "sha256": "eb4cad30409769eadb43ee38d15763e8f68896ef5a14dbedee1bc3514d8f0838",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/dark/tokens-global.json",
+      "sha256": "6be6a74187cc39b98cb7f13f61a956d5386d96d6819af663572aa27d94346ae2",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/dark/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/hcdark/tokens-aliases.json",
+      "sha256": "0a26c8ff97c7105a64b7756d12989c092e0ba508570092a9475edd09cc237f8b",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/hcdark/tokens-global.json",
+      "sha256": "6be6a74187cc39b98cb7f13f61a956d5386d96d6819af663572aa27d94346ae2",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/hcdark/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/hclight/tokens-aliases.json",
+      "sha256": "fe73f2c27a303743cb5b4877c45ee41e00a829ee019a2be46b274016b45be3ac",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/hclight/tokens-global.json",
+      "sha256": "364793dd75b81c436fd50062c76f05e6686629c47929384a0e220b4d3c516a35",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/hclight/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/light/tokens-aliases.json",
+      "sha256": "640e07351452f981c149d3e7567eb5c9845b77bf6adaa839ee2d7d78b898f855",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/light/tokens-global.json",
+      "sha256": "edeaa03c65e55051118504582227e5e06a5d2a46213ff450734b20a8c8e95ac2",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "path": "@fluentui-react-native/design-tokens-macos/light/tokens-shadow.json",
+      "sha256": "1ea3f256b771f630f361634617f9ff5a8060fa30fc9cab5b125f3713180dcbbc",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/black/tokens-aliases.json",
+      "sha256": "99ef6beb66015f02513f72a605cab03c4c63643c8da212257a0dc75f59c0a5bc",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/black/tokens-global.json",
+      "sha256": "5f47d18b831105c21274d47900b61ef52e6a8619280cc5e887937fa78c17c9b5",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/black/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/colorful/tokens-aliases.json",
+      "sha256": "a0ab555dbada8e508421812c90b5e205b3f32f825f2d2f3a9719031c36c0f83f",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/colorful/tokens-global.json",
+      "sha256": "6f139e26cacbc8a65e92d066e439d99c3b59a67d59bb7d43b82a8395932f529c",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/colorful/tokens-shadow.json",
+      "sha256": "1ea3f256b771f630f361634617f9ff5a8060fa30fc9cab5b125f3713180dcbbc",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/darkgray/tokens-aliases.json",
+      "sha256": "65312179ca0a1d48751a47484c3efa6c8ac3c36e2e1df5ea3ebb598a4c7c3199",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/darkgray/tokens-global.json",
+      "sha256": "5f47d18b831105c21274d47900b61ef52e6a8619280cc5e887937fa78c17c9b5",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/darkgray/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/hc/tokens-aliases.json",
+      "sha256": "f66c841623cd9c80e624f46af67296bd32c7caac7f8419b170abb3e38b60b313",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/hc/tokens-global.json",
+      "sha256": "5f47d18b831105c21274d47900b61ef52e6a8619280cc5e887937fa78c17c9b5",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "path": "@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-windows",
+      "path": "@fluentui-react-native/design-tokens-windows/dark/tokens-aliases.json",
+      "sha256": "f98be7dd6bd6ede801d289fddddec060e26d6a0fd16ef594c88ef65fc52a18ba",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-windows",
+      "path": "@fluentui-react-native/design-tokens-windows/dark/tokens-global.json",
+      "sha256": "3b5d0f4238b3cc28ba33fada0f72b389909f590f4112379ea0dad5a9da2e5f41",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-windows",
+      "path": "@fluentui-react-native/design-tokens-windows/dark/tokens-shadow.json",
+      "sha256": "a414b83fa1ce0a9e7cd41194a1d4be8c70de265a64f40e894eb85a8a00a0fce9",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-windows",
+      "path": "@fluentui-react-native/design-tokens-windows/light/tokens-aliases.json",
+      "sha256": "8f80318ca3b5f548bd483397b7ce3ac040b7244dbc91770935a9b3245a360767",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-windows",
+      "path": "@fluentui-react-native/design-tokens-windows/light/tokens-global.json",
+      "sha256": "176f31edc49d38cfb9c40b84c03b870bb5b049e2faaf6caedcb6b89b53b70d32",
+      "version": "0.53.0"
+    },
+    {
+      "package": "@fluentui-react-native/design-tokens-windows",
+      "path": "@fluentui-react-native/design-tokens-windows/light/tokens-shadow.json",
+      "sha256": "1ea3f256b771f630f361634617f9ff5a8060fa30fc9cab5b125f3713180dcbbc",
+      "version": "0.53.0"
+    }
+  ]
+}

@@ -1,34 +1,22 @@
-import hcShadowTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json';
-import darkAliasTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-aliases.json';
-import darkShadowTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-shadow.json';
-import lightAliasTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-aliases.json';
-import lightShadowTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-shadow.json';
 import type { AppearanceOptions } from '../../theming';
-import { assertNever } from 'assert-never';
 
+import { generatedLegacyTokenDefinitions as windowsTokenDefinitions } from './generated/tokenSets.windowsSource';
+import { getLegacyTokenSetForDefinitions } from './generatedTokenSet';
 import { hcAliasTokens } from './highContrast/tokens-alias';
+import { hcShadowTokens } from './highContrast/tokens-shadow';
+
+function getWindowsTokenSet(mode: AppearanceOptions) {
+  return getLegacyTokenSetForDefinitions(windowsTokenDefinitions, {
+    colorScheme: mode === 'light' || mode === 'highContrast' ? 'light' : 'dark',
+    contrast: mode === 'highContrast' ? 'highContrast' : 'standard',
+    interfaceLevel: mode === 'darkElevated' ? 'elevated' : 'base',
+  });
+}
 
 export function getAliasTokens(mode: AppearanceOptions) {
-  if (mode === 'light') {
-    return lightAliasTokens;
-  } else if (mode === 'dark' || mode === 'darkElevated') {
-    return darkAliasTokens;
-  } else if (mode === 'highContrast') {
-    return hcAliasTokens;
-  } else {
-    assertNever(mode);
-  }
-
-  return lightAliasTokens;
+  return mode === 'highContrast' ? hcAliasTokens : getWindowsTokenSet(mode).aliases;
 }
 
 export function getShadowTokens(mode: AppearanceOptions) {
-  if (mode === 'light') {
-    return lightShadowTokens;
-  } else if (mode === 'dark') {
-    return darkShadowTokens;
-  }
-
-  // HC mode.
-  return hcShadowTokens;
+  return mode === 'highContrast' ? hcShadowTokens : getWindowsTokenSet(mode).shadows;
 }

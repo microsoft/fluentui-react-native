@@ -4,10 +4,9 @@
     "outDir": "lib",
     "rootDir": "src",
     "composite": true,
-    "resolveJsonModule": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["src", "src/**/*.json"],
+  "include": ["src"],
   "exclude": ["**/*.stories.ts", "**/*.stories.tsx"],
   "references": [
     {

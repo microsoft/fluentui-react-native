@@ -56,7 +56,7 @@ Here's how the button component looks by default on every platform:
 
 ```tsx
 import { ThemeProvider } from '@fluentui-react-native/design/theming';
-import { createDefaultTheme } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme } from '@fluentui-react-native/design/theming/compat/defaults';
 
 <ThemeProvider theme={createDefaultTheme()}>
   <Button content={'Default Button'} />

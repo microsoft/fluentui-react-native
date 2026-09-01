@@ -1,5 +1,6 @@
 import type { Theme } from '../theming';
 import { mockTheme } from '../testing/mockTheme';
+import { defaultFlexTokens } from './defaultTokens';
 import { flexTokensFromTheme } from './flexTokensFromTheme';
 
 function createTheme(): Theme {
@@ -31,10 +32,10 @@ describe('flexTokensFromTheme', () => {
     expect(tokens.color.hover.backgroundNeutralSubtle).toBe('#334455');
     expect(tokens.color.pressed.backgroundNeutralSubtle).toBe('#445566');
     expect(tokens.color.backgroundBrandSoft).toBe('#112233');
-    expect(tokens.color.hover.backgroundBrandSoft).toBeUndefined();
-    expect(tokens.color.pressed.backgroundBrandSoft).toBeUndefined();
-    expect(tokens.color.backgroundNeutralSoft).toBe('#0000001a');
-    expect(tokens.color.hover.backgroundNeutralSoft).toBe('#0000001a');
+    expect(tokens.color.hover.backgroundBrandSoft).toBe(defaultFlexTokens.color.hover.backgroundBrandSoft);
+    expect(tokens.color.pressed.backgroundBrandSoft).toBe(defaultFlexTokens.color.pressed.backgroundBrandSoft);
+    expect(tokens.color.backgroundNeutralSoft).toBe(defaultFlexTokens.color.backgroundNeutralSoft);
+    expect(tokens.color.hover.backgroundNeutralSoft).toBe(defaultFlexTokens.color.hover.backgroundNeutralSoft);
     expect(tokens.borderRadius.base100).toBe(2);
     expect(tokens.borderRadius.base200).toBe(10);
     expect(tokens.borderRadius.base300).toBe(10);
@@ -45,8 +46,8 @@ describe('flexTokensFromTheme', () => {
   it('uses native defaults when an optional mapped Theme path is absent', () => {
     const tokens = flexTokensFromTheme({ ...createTheme(), components: {} });
 
-    expect(tokens.borderRadius.base200).toBe(4);
-    expect(tokens.borderRadius.base300).toBe(4);
-    expect(tokens.color.backgroundBrandHeavy).toBe('#185abd');
+    expect(tokens.borderRadius.base200).toBe(defaultFlexTokens.borderRadius.base200);
+    expect(tokens.borderRadius.base300).toBe(defaultFlexTokens.borderRadius.base300);
+    expect(tokens.color.backgroundBrandHeavy).toBe(defaultFlexTokens.color.backgroundBrandHeavy);
   });
 });

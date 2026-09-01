@@ -44,7 +44,7 @@ describe('Button', () => {
     expect(component.getByText('Save')).toBeOnTheScreen();
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: '#fafafa',
+      backgroundColor: defaultFlexTokens.color.backgroundNeutralSubtle,
       minHeight: 24,
       minWidth: 24,
     });
@@ -62,7 +62,7 @@ describe('Button', () => {
     expect(getRootStyle(component).backgroundColor).not.toBe(restBackground);
 
     await fireEvent(root, 'pressIn', {});
-    expect(getRootStyle(component).backgroundColor).toBe('#dbdbdb');
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.pressed.backgroundNeutralSubtle);
 
     await fireEvent.press(root);
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -76,7 +76,7 @@ describe('Button', () => {
     expect(root).toBeDisabled();
     expect(root.props.focusable).toBe(false);
     expect(root.props.accessibilityState).toEqual({ disabled: true });
-    expect(getRootStyle(component).backgroundColor).toBe('#f0f0f0');
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSubtleDisabled);
     await fireEvent.press(root);
     expect(onPress).not.toHaveBeenCalled();
   });
@@ -200,23 +200,23 @@ describe('Button', () => {
     await fireEvent(root, 'focus', {});
 
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: '#000000',
+      borderColor: defaultFlexTokens.color.strokeFocusOuter,
       borderWidth: 2,
     });
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
       'opacity',
     );
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: '#ffffff',
+      borderColor: defaultFlexTokens.color.strokeFocusInner,
       borderWidth: 1,
     });
   });
 
   it.each([
-    ['primary', '#185abd'],
-    ['secondary', '#fafafa'],
-    ['outline', '#00000000'],
-    ['subtle', '#00000000'],
+    ['primary', defaultFlexTokens.color.backgroundBrandHeavy],
+    ['secondary', defaultFlexTokens.color.backgroundNeutralSubtle],
+    ['outline', defaultFlexTokens.color.backgroundNeutralTransparent],
+    ['subtle', defaultFlexTokens.color.backgroundNeutralTransparent],
   ] as const)('resolves the %s appearance', async (appearance, backgroundColor) => {
     const component = await renderButton({ appearance, content: appearance });
     expect(getRootStyle(component).backgroundColor).toBe(backgroundColor);

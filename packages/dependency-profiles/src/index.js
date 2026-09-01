@@ -14,6 +14,18 @@ module.exports = {
       "name": "@fluentui-react-native/design",
       "version": "0.3.3"
     },
+    "@fluentui-react-native/desktop-driver": {
+      "name": "@fluentui-react-native/desktop-driver",
+      "version": "0.1.0"
+    },
+    "@fluentui-react-native/storybook-desktop-runtime": {
+      "name": "@fluentui-react-native/storybook-desktop-runtime",
+      "version": "0.1.0"
+    },
+    "@fluentui-react-native/storybook-desktop": {
+      "name": "@fluentui-react-native/storybook-desktop",
+      "version": "0.1.0"
+    },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
       "version": "1.14.4"
@@ -242,6 +254,10 @@ module.exports = {
       "name": "@fluentui-react-native/callout",
       "version": "0.29.3"
     },
+    "@fluentui-react-native/default-theme": {
+      "name": "@fluentui-react-native/default-theme",
+      "version": "0.27.10"
+    },
     "@fluentui-react-native/theme-tokens": {
       "name": "@fluentui-react-native/theme-tokens",
       "version": "0.29.4"
@@ -273,10 +289,6 @@ module.exports = {
     "@fluentui-react-native/apple-theme": {
       "name": "@fluentui-react-native/apple-theme",
       "version": "0.29.10"
-    },
-    "@fluentui-react-native/default-theme": {
-      "name": "@fluentui-react-native/default-theme",
-      "version": "0.27.10"
     },
     "@fluentui-react-native/win32-theme": {
       "name": "@fluentui-react-native/win32-theme",

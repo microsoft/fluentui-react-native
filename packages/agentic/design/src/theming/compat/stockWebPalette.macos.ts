@@ -1,5 +1,5 @@
 import { colorBlack, colorBurgundyPrimary, colorRedPrimary, colorWhite } from '../../tokens/global.generated';
-import globalTokens from '../../tokens/legacy/tokens-global';
+import { legacyGlobalTokens as globalTokens } from '../../tokens/legacy/generated/legacyGlobals';
 import type { ThemeColorDefinition } from '../types/Color.types';
 
 import { createLegacyColorAliasTokens } from './createLegacyAliasTokens';

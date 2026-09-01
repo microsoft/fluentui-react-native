@@ -85,11 +85,11 @@ describe('Flex token mapping consistency', () => {
 
   it('reports an unmapped destination missing from nonFluentFlexTokens', () => {
     const changed = cloneInputs(inputs);
-    changed.nonFluentValues.delete('borderRadius.base100');
+    changed.nonFluentValues.delete('fontFamily.contentEditorial');
 
     expect(validateMappingInputs(changed)).toContainEqual({
       rule: 'non-fluent-coverage',
-      path: 'borderRadius.base100',
+      path: 'fontFamily.contentEditorial',
       expected: 'a value in nonFluentFlexTokens',
       actual: '<missing>',
     });
@@ -102,7 +102,7 @@ describe('Flex token mapping consistency', () => {
     expect(validateMappingInputs(changed)).toContainEqual({
       rule: 'non-fluent-coverage',
       path: 'borderRadius.base200',
-      expected: '<absent because the destination is Theme-backed>',
+      expected: '<absent because the destination has a Fluent token source>',
       actual: 'cornerRadius40',
     });
   });

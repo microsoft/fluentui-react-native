@@ -1,36 +1,23 @@
-import blackAliasTokens from '@fluentui-react-native/design-tokens-win32/black/tokens-aliases.json';
-import blackShadowTokens from '@fluentui-react-native/design-tokens-win32/black/tokens-shadow.json';
-import colorfulAliasTokens from '@fluentui-react-native/design-tokens-win32/colorful/tokens-aliases.json';
-import colorfulShadowTokens from '@fluentui-react-native/design-tokens-win32/colorful/tokens-shadow.json';
-import darkGrayAliasTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-aliases.json';
-import darkGrayShadowTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-shadow.json';
-import hcShadowTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json';
-import { hcAliasTokens } from '@fluentui-react-native/design/tokens/legacy';
+import { getLegacyTokenSet, hcAliasTokens, hcShadowTokens } from '@fluentui-react-native/design/tokens/legacy';
+import type { ResolvedThemeAppearance } from '@fluentui-react-native/design/theming';
+
+function getOfficeTokenAppearance(officeTheme: string): ResolvedThemeAppearance {
+  switch (officeTheme) {
+    case 'DarkGray':
+      return { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'elevated' };
+    case 'Black':
+      return { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'base' };
+    case 'HighContrast':
+      return { colorScheme: 'light', contrast: 'highContrast', interfaceLevel: 'base' };
+    default:
+      return { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' };
+  }
+}
 
 export function getOfficeAliasTokens(officeTheme: string) {
-  if (officeTheme === 'White' || officeTheme === 'Colorful') {
-    return colorfulAliasTokens;
-  } else if (officeTheme === 'DarkGray') {
-    return darkGrayAliasTokens;
-  } else if (officeTheme === 'Black') {
-    return blackAliasTokens;
-  } else if (officeTheme === 'HighContrast') {
-    return hcAliasTokens;
-  }
-
-  return colorfulAliasTokens;
+  return officeTheme === 'HighContrast' ? hcAliasTokens : getLegacyTokenSet(getOfficeTokenAppearance(officeTheme)).aliases;
 }
 
 export function getOfficeShadowTokens(officeTheme: string) {
-  if (officeTheme === 'White' || officeTheme === 'Colorful') {
-    return colorfulShadowTokens;
-  } else if (officeTheme === 'DarkGray') {
-    return darkGrayShadowTokens;
-  } else if (officeTheme === 'Black') {
-    return blackShadowTokens;
-  } else if (officeTheme === 'HighContrast') {
-    return hcShadowTokens;
-  }
-
-  return colorfulAliasTokens;
+  return officeTheme === 'HighContrast' ? hcShadowTokens : getLegacyTokenSet(getOfficeTokenAppearance(officeTheme)).shadows;
 }

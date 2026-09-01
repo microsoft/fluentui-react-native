@@ -1,50 +1,25 @@
-import macOSDarkAliasTokens from '@fluentui-react-native/design-tokens-macos/dark/tokens-aliases.json';
-import macOSDarkShadowTokens from '@fluentui-react-native/design-tokens-macos/dark/tokens-shadow.json';
-import macOSDarkHCAliasTokens from '@fluentui-react-native/design-tokens-macos/hcdark/tokens-aliases.json';
-import macOSDarkHCShadowTokens from '@fluentui-react-native/design-tokens-macos/hcdark/tokens-shadow.json';
-import macOSLightHCAliasTokens from '@fluentui-react-native/design-tokens-macos/hclight/tokens-aliases.json';
-import macOSLightHCShadowTokens from '@fluentui-react-native/design-tokens-macos/hclight/tokens-shadow.json';
-import macOSLightAliasTokens from '@fluentui-react-native/design-tokens-macos/light/tokens-aliases.json';
-import macOSLightShadowTokens from '@fluentui-react-native/design-tokens-macos/light/tokens-shadow.json';
 import type { AppearanceOptions } from '@fluentui-react-native/design/theming';
+import { getLegacyTokenSet } from '@fluentui-react-native/design/tokens/legacy';
 import { assertNever } from 'assert-never';
 
-export function getMacOSAliasTokens(mode: AppearanceOptions, isHighContrast: boolean) {
-  if (mode === 'light') {
-    if (isHighContrast) {
-      return macOSLightHCAliasTokens;
-    } else {
-      return macOSLightAliasTokens;
-    }
-  } else if (mode === 'dark' || mode === 'darkElevated') {
-    if (isHighContrast) {
-      return macOSDarkHCAliasTokens;
-    } else {
-      return macOSDarkAliasTokens;
-    }
-  } else if (mode === 'highContrast') {
+function getMacOSLegacyTokenSet(mode: AppearanceOptions, isHighContrast: boolean) {
+  if (mode === 'highContrast') {
     throw new Error('highContrast is not a valid AppearanceOptions on macOS');
-  } else {
+  }
+  if (mode !== 'light' && mode !== 'dark' && mode !== 'darkElevated') {
     assertNever(mode);
   }
+  return getLegacyTokenSet({
+    colorScheme: mode === 'light' ? 'light' : 'dark',
+    contrast: isHighContrast ? 'highContrast' : 'standard',
+    interfaceLevel: mode === 'darkElevated' ? 'elevated' : 'base',
+  });
+}
+
+export function getMacOSAliasTokens(mode: AppearanceOptions, isHighContrast: boolean) {
+  return getMacOSLegacyTokenSet(mode, isHighContrast).aliases;
 }
 
 export function getMacOSShadowTokens(mode: AppearanceOptions, isHighContrast: boolean) {
-  if (mode === 'light') {
-    if (isHighContrast) {
-      return macOSLightHCShadowTokens;
-    } else {
-      return macOSLightShadowTokens;
-    }
-  } else if (mode === 'dark' || mode === 'darkElevated') {
-    if (isHighContrast) {
-      return macOSDarkHCShadowTokens;
-    } else {
-      return macOSDarkShadowTokens;
-    }
-  } else if (mode === 'highContrast') {
-    throw new Error('highContrast is not a valid AppearanceOptions on macOS');
-  } else {
-    assertNever(mode);
-  }
+  return getMacOSLegacyTokenSet(mode, isHighContrast).shadows;
 }

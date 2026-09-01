@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "@fluentui-react-native/callout": "workspace:*",
-    "@fluentui-react-native/default-theme": "workspace:*",
     "@fluentui-react-native/design": "workspace:*",
     "@rnx-kit/metro-config": "catalog:",
     "@rnx-kit/metro-resolver-symlinks": "catalog:",

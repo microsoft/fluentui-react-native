@@ -52,7 +52,8 @@ function getAppearanceCache(source: ThemeSource, appearance: ResolvedThemeAppear
 export function getFlexTokens(source: ThemeSource, appearance: ResolvedThemeAppearance): FlexTokens {
   const cache = getAppearanceCache(source, appearance);
   if (!cache.flexTokens) {
-    cache.flexTokens = source.kind === 'flex' ? source.resolveFlexTokens(appearance) : flexTokensFromTheme(source.resolveTheme(appearance));
+    cache.flexTokens =
+      source.kind === 'flex' ? source.resolveFlexTokens(appearance) : flexTokensFromTheme(source.resolveTheme(appearance), appearance);
   }
   return cache.flexTokens;
 }

@@ -5,7 +5,7 @@ import { getThemedSettings } from '@uifabricshared/themed-settings';
 import { ITheme, getSettings, returnAsSlotProps } from '@uifabricshared/theming-ramp';
 import { IComponentTokens, processTokens, ITargetHasToken, buildComponentTokens } from '@uifabricshared/foundation-tokens';
 import { useTheme } from '@fluentui-react-native/design/theming';
-import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
+import { defaultFluentTheme } from '@fluentui-react-native/design/theming/compat/defaults';
 import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling } from './compose.types';
 import { getMemoCache, GetMemoValue } from '@fluentui-react-native/framework-base';

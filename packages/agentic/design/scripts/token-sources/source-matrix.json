@@ -1,0 +1,84 @@
+{
+  "android": {
+    "light": {
+      "package": "@fluentui-react-native/design-tokens-android",
+      "appearance": "light"
+    },
+    "dark": {
+      "package": "@fluentui-react-native/design-tokens-android",
+      "appearance": "dark"
+    }
+  },
+  "ios": {
+    "light": {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "appearance": "light"
+    },
+    "dark": {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "appearance": "dark"
+    },
+    "darkElevated": {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "appearance": "elevateddark"
+    },
+    "lightHighContrast": {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "appearance": "hclight"
+    },
+    "darkHighContrast": {
+      "package": "@fluentui-react-native/design-tokens-ios",
+      "appearance": "hcdark"
+    }
+  },
+  "macos": {
+    "light": {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "appearance": "light"
+    },
+    "dark": {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "appearance": "dark"
+    },
+    "lightHighContrast": {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "appearance": "hclight"
+    },
+    "darkHighContrast": {
+      "package": "@fluentui-react-native/design-tokens-macos",
+      "appearance": "hcdark"
+    }
+  },
+  "win32": {
+    "light": {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "appearance": "colorful"
+    },
+    "dark": {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "appearance": "black"
+    },
+    "darkElevated": {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "appearance": "darkgray"
+    },
+    "highContrast": {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "appearance": "hc"
+    }
+  },
+  "windows": {
+    "light": {
+      "package": "@fluentui-react-native/design-tokens-windows",
+      "appearance": "light"
+    },
+    "dark": {
+      "package": "@fluentui-react-native/design-tokens-windows",
+      "appearance": "dark"
+    },
+    "highContrast": {
+      "package": "@fluentui-react-native/design-tokens-win32",
+      "appearance": "hc"
+    }
+  }
+}
