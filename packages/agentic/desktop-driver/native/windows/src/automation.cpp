@@ -669,7 +669,7 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   std::size_t visited = 0;
   while (!stack.empty()) {
     if (visited >= kMaximumTreeNodes) {
-      break;
+      Fail(kErrorTreeTooLarge, "The native accessibility tree exceeds the 5000-node limit.");
     }
     if ((visited % 64) == 0) {
       token.ThrowIfCancelled();
@@ -867,6 +867,10 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
     intercepted.focused.value = false;
     intercepted.visible.supported = true;
     intercepted.visible.value = true;
+    intercepted.checked.supported = false;
+    intercepted.checked.reason = "An external desktop window does not expose checked state.";
+    intercepted.selected = Unsupported("An external desktop window does not expose selected state.");
+    intercepted.expanded = Unsupported("An external desktop window does not expose expanded state.");
     RECT bounds{};
     if (GetWindowRect(GetAncestor(pointWindow, GA_ROOT), &bounds) != FALSE) {
       intercepted.physicalRect = bounds;

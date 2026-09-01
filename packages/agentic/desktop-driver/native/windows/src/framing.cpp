@@ -24,7 +24,11 @@ std::uint32_t ReadLittleEndian(const std::uint8_t* source) {
 }  // namespace
 
 std::vector<std::uint8_t> EncodeFrame(std::uint8_t type, const std::uint8_t* payload, std::size_t size) {
-  if (size > kMaximumFramePayload) {
+  const std::size_t maximumSize =
+      type == kJsonFrameType     ? kMaximumJsonFramePayload
+      : type == kBinaryFrameType ? kMaximumBinaryFramePayload
+                                 : 0;
+  if (maximumSize == 0 || size > maximumSize) {
     Fail(kErrorInternal, "The native helper attempted to write an oversized frame.");
   }
   std::vector<std::uint8_t> frame(kFrameHeaderBytes + size);
@@ -61,7 +65,13 @@ bool DecodeFrameHeader(const std::uint8_t* header, std::uint8_t& type, std::uint
     return false;
   }
   length = ReadLittleEndian(header + 8);
-  return length <= kMaximumFramePayload && (type == kJsonFrameType || type == kBinaryFrameType);
+  if (type == kJsonFrameType) {
+    return length <= kMaximumJsonFramePayload;
+  }
+  if (type == kBinaryFrameType) {
+    return length <= kMaximumBinaryFramePayload;
+  }
+  return false;
 }
 
 bool FrameReader::ReadExact(void* buffer, std::size_t length) {
@@ -110,13 +120,20 @@ void FrameWriter::Write(const std::vector<std::uint8_t>& bytes) {
     if (!WriteFile(output_, cursor, static_cast<DWORD>(remaining), &written, nullptr)) {
       FailLastError(kErrorInternal, "Writing the native helper output stream", GetLastError());
     }
+    if (written == 0) {
+      Fail(kErrorInternal, "Writing the native helper output stream made no progress.");
+    }
     cursor += written;
     remaining -= written;
   }
 }
 
 void FrameWriter::WriteJson(const json::Value& message) {
-  Write(EncodeJsonFrame(message.Serialize()));
+  WriteJson(message.Serialize());
+}
+
+void FrameWriter::WriteJson(std::string_view message) {
+  Write(EncodeJsonFrame(message));
 }
 
 void FrameWriter::WriteBinary(std::string_view identifier, const std::vector<std::uint8_t>& data) {

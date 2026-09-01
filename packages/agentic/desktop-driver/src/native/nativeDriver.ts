@@ -144,6 +144,7 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
         fs.rmSync(publicationRoot, { force: true, recursive: true });
       }
       writeSelection(context.cacheRoot, context.compatibilityKey, artifactRoot);
+      assertManagedPath(artifactCompatibilityRoot(context), artifactRoot, 'directory');
       return verifyNativeDriverArtifact(readArtifact(artifactRoot, 'built'), options.signal);
     } finally {
       fs.rmSync(stagingRoot, { force: true, recursive: true });
@@ -249,31 +250,72 @@ async function resolveCachedArtifact(
   if (!fs.existsSync(selectionRoot)) {
     return undefined;
   }
+  assertManagedPath(context.cacheRoot, selectionRoot, 'directory');
   const selections = listFiles(selectionRoot)
     .filter((filePath) => filePath.endsWith('.json'))
     .sort((left, right) => right.localeCompare(left));
   for (const selectionPath of selections) {
-    const selection = readJsonFile<NativeArtifactSelection>(selectionPath);
-    if (selection.schemaVersion !== 1 || typeof selection.artifactPath !== 'string') {
-      continue;
-    }
-    const artifactRoot = path.resolve(context.cacheRoot, selection.artifactPath);
-    if (!isWithin(context.cacheRoot, artifactRoot) || !fs.existsSync(path.join(artifactRoot, 'artifact.json'))) {
-      continue;
-    }
     try {
-      return await verifyNativeDriverArtifact(readArtifact(artifactRoot, origin));
+      assertManagedPath(selectionRoot, selectionPath, 'file');
+      const selection = readJsonFile<NativeArtifactSelection>(selectionPath);
+      if (selection.schemaVersion !== 1 || typeof selection.artifactPath !== 'string') {
+        throw new NativeDriverError('integrity-mismatch', `Invalid native driver selection at "${selectionPath}".`);
+      }
+      const artifactRoot = path.resolve(context.cacheRoot, selection.artifactPath);
+      const compatibilityRoot = artifactCompatibilityRoot(context);
+      if (!isArtifactRoot(compatibilityRoot, artifactRoot) || !fs.existsSync(path.join(artifactRoot, 'artifact.json'))) {
+        throw new NativeDriverError('integrity-mismatch', `Native driver selection points to an invalid artifact.`);
+      }
+      assertManagedPath(context.cacheRoot, compatibilityRoot, 'directory');
+      assertManagedPath(compatibilityRoot, artifactRoot, 'directory');
+      const artifact = readArtifact(artifactRoot, origin);
+      validateCachedArtifactContext(artifact, context);
+      return await verifyNativeDriverArtifact(artifact);
     } catch (error) {
       if (origin === 'install-root') {
         throw error;
       }
+      quarantineCachedSelection(context.cacheRoot, selectionRoot, selectionPath, error);
     }
   }
   return undefined;
 }
 
+function quarantineCachedSelection(cacheRoot: string, selectionRoot: string, selectionPath: string, error: unknown): void {
+  try {
+    assertManagedPath(selectionRoot, selectionPath, 'file');
+  } catch (pathError) {
+    if ((pathError as NodeJS.ErrnoException).code === 'ENOENT') {
+      return;
+    }
+    throw pathError;
+  }
+  const trashRoot = path.join(cacheRoot, 'v1', 'trash');
+  fs.mkdirSync(trashRoot, { recursive: true });
+  assertManagedPath(cacheRoot, trashRoot, 'directory');
+  const quarantineRoot = path.join(trashRoot, `${Date.now()}-${randomUUID()}`);
+  fs.mkdirSync(quarantineRoot, { recursive: true });
+  assertManagedPath(trashRoot, quarantineRoot, 'directory');
+  try {
+    fs.renameSync(selectionPath, path.join(quarantineRoot, path.basename(selectionPath)));
+  } catch (renameError) {
+    if ((renameError as NodeJS.ErrnoException).code !== 'ENOENT') {
+      throw renameError;
+    }
+  }
+  atomicWriteJson(path.join(quarantineRoot, 'error.json'), {
+    message: error instanceof Error ? error.message : String(error),
+    selectionPath,
+  });
+  process.emitWarning(`Quarantined invalid native driver cache selection "${selectionPath}".`, {
+    code: 'FURN_NATIVE_DRIVER_CACHE_INVALID',
+  });
+}
+
 function readArtifact(artifactRoot: string, origin: NativeDriverArtifactOrigin): NativeDriverArtifact {
-  const manifest = readJsonFile<NativeArtifactManifest>(path.join(artifactRoot, 'artifact.json'));
+  const manifestPath = path.join(artifactRoot, 'artifact.json');
+  assertManagedPath(artifactRoot, manifestPath, 'file');
+  const manifest = readJsonFile<NativeArtifactManifest>(manifestPath);
   if (manifest.schemaVersion !== 1 || typeof manifest.executable !== 'string') {
     throw new NativeDriverError('integrity-mismatch', `Invalid native driver artifact manifest beneath "${artifactRoot}".`);
   }
@@ -281,6 +323,7 @@ function readArtifact(artifactRoot: string, origin: NativeDriverArtifactOrigin):
   if (!isWithin(artifactRoot, executablePath)) {
     throw new NativeDriverError('integrity-mismatch', 'Native driver artifact executable escapes its artifact root.');
   }
+  assertManagedPath(artifactRoot, executablePath, 'file');
   const { executable: _executable, ...artifact } = manifest;
   return {
     ...artifact,
@@ -288,6 +331,25 @@ function readArtifact(artifactRoot: string, origin: NativeDriverArtifactOrigin):
     executablePath,
     origin,
   };
+}
+
+function validateCachedArtifactContext(artifact: NativeDriverArtifact, context: NativeBuildContext): void {
+  const endpointsMatch =
+    artifact.endpoints.length === context.endpoints.length &&
+    context.endpoints.every((endpoint, index) => artifact.endpoints[index] === endpoint);
+  if (
+    artifact.architecture !== context.architecture ||
+    artifact.compatibilityKey !== context.compatibilityKey ||
+    artifact.configuration !== context.configuration ||
+    !endpointsMatch ||
+    artifact.provider !== context.provider ||
+    artifact.sourceDigest !== context.sourceDigest
+  ) {
+    throw new NativeDriverError(
+      'integrity-mismatch',
+      `Native driver artifact "${artifact.artifactId}" does not match the requested build context.`,
+    );
+  }
 }
 
 async function verifyDirectArtifact(
@@ -344,6 +406,7 @@ function writeSelection(cacheRoot: string, compatibilityKey: string, artifactRoo
 async function readOneShotHandshake(executablePath: string, signal?: AbortSignal): Promise<NativeHostHello> {
   throwIfAborted(signal);
   return new Promise((resolve, reject) => {
+    let settled = false;
     const child = spawn(executablePath, ['--handshake', '--json'], {
       signal,
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -351,10 +414,30 @@ async function readOneShotHandshake(executablePath: string, signal?: AbortSignal
     });
     const stdout: Buffer[] = [];
     const stderr: Buffer[] = [];
+    let timedOut = false;
+    const timeout = setTimeout(() => {
+      timedOut = true;
+      child.kill();
+    }, 10_000);
     child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
     child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
-    child.once('error', reject);
+    child.once('error', (error) => {
+      if (!settled) {
+        settled = true;
+        clearTimeout(timeout);
+        reject(error);
+      }
+    });
     child.once('close', (code) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      clearTimeout(timeout);
+      if (timedOut) {
+        reject(new NativeDriverError('handshake-timeout', 'Native driver helper did not complete its handshake within 10 seconds.'));
+        return;
+      }
       if (code !== 0) {
         reject(
           new NativeDriverError(
@@ -433,6 +516,43 @@ function resolveBuildPolicy(value?: NativeDriverBuildPolicy): NativeDriverBuildP
 function isWithin(root: string, candidate: string): boolean {
   const relative = path.relative(path.resolve(root), path.resolve(candidate));
   return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
+}
+
+function assertManagedPath(root: string, candidate: string, expectedType: 'directory' | 'file'): void {
+  const absoluteRoot = path.resolve(root);
+  const absoluteCandidate = path.resolve(candidate);
+  if (!isWithin(absoluteRoot, absoluteCandidate)) {
+    throw new NativeDriverError('integrity-mismatch', `Managed native driver path escapes "${absoluteRoot}".`);
+  }
+  const relative = path.relative(absoluteRoot, absoluteCandidate);
+  let current = absoluteRoot;
+  for (const component of relative.split(path.sep).filter(Boolean)) {
+    current = path.join(current, component);
+    if (fs.lstatSync(current).isSymbolicLink()) {
+      throw new NativeDriverError('integrity-mismatch', `Managed native driver path contains a symbolic link or junction.`);
+    }
+  }
+  const stat = fs.lstatSync(absoluteCandidate);
+  if ((expectedType === 'file' && !stat.isFile()) || (expectedType === 'directory' && !stat.isDirectory())) {
+    throw new NativeDriverError('integrity-mismatch', `Managed native driver path is not a ${expectedType}.`);
+  }
+  const realRoot = fs.realpathSync.native(absoluteRoot);
+  const realCandidate = fs.realpathSync.native(absoluteCandidate);
+  if (!isWithin(realRoot, realCandidate)) {
+    throw new NativeDriverError('integrity-mismatch', `Managed native driver path resolves outside "${realRoot}".`);
+  }
+}
+
+function artifactCompatibilityRoot(context: NativeBuildContext): string {
+  return path.join(context.cacheRoot, 'v1', 'artifacts', `${context.provider}-${context.architecture}`, shortKey(context.compatibilityKey));
+}
+
+function isArtifactRoot(compatibilityRoot: string, candidate: string): boolean {
+  if (!isWithin(compatibilityRoot, candidate)) {
+    return false;
+  }
+  const relative = path.relative(path.resolve(compatibilityRoot), path.resolve(candidate));
+  return relative !== '' && relative.split(path.sep).length === 2;
 }
 
 function shortKey(value: string): string {

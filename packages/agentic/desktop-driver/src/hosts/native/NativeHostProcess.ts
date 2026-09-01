@@ -51,7 +51,6 @@ export class NativeHostProcess extends EventEmitter<{
   private readonly cancellationTimeoutMs: number;
   private readonly pending = new Map<string, PendingRequest>();
   private readonly pendingBinaryIds = new Map<string, string>();
-  private readonly binaryFrames = new Map<string, Uint8Array>();
   private closed = false;
   private closing = false;
   private failurePromise?: Promise<void>;
@@ -77,17 +76,28 @@ export class NativeHostProcess extends EventEmitter<{
       stdio: ['pipe', 'pipe', 'pipe'],
       windowsHide: true,
     });
+    const completed = new Promise<void>((resolve) => child.once('close', () => resolve()));
     const decoder = new NativeFrameDecoder();
     child.stdout.on('data', (chunk: Buffer) => decoder.write(chunk));
     child.stderr.on('data', (chunk: Buffer) => options.onStderr?.(chunk.toString('utf8')));
 
-    const hello = await waitForHello(child, decoder, options.startupTimeoutMs ?? 10_000);
-    validateHello(hello, options.artifact);
+    let hello: NativeHostHello;
+    try {
+      hello = await waitForHello(child, decoder, options.startupTimeoutMs ?? 10_000);
+      validateHello(hello, options.artifact);
+    } catch (error) {
+      if (child.exitCode === null && child.signalCode === null) {
+        child.kill();
+      }
+      await completed;
+      throw error;
+    }
     const process = new NativeHostProcess(child, options.artifact, hello, options.cancellationTimeoutMs ?? 2000, options.recoverInput);
     decoder.on('json', (message) => process.onJson(message));
     decoder.on('binary', (frame) => process.onBinary(frame));
     decoder.on('error', (error) => process.fail(error));
     child.once('error', (error) => process.fail(error));
+    child.stdin.on('error', (error) => process.fail(error));
     child.once('exit', (code, signal) => {
       if (!process.closed && !process.closing) {
         process.fail(
@@ -111,6 +121,12 @@ export class NativeHostProcess extends EventEmitter<{
       return Promise.reject(error);
     }
     const id = randomUUID();
+    let requestFrame: Buffer;
+    try {
+      requestFrame = encodeJsonFrame({ command, id, params, type: 'request' });
+    } catch (error) {
+      return Promise.reject(asError(error));
+    }
     return new Promise<NativeHostRequestResult<T>>((resolve, reject) => {
       const pending: PendingRequest = {
         aborted: false,
@@ -119,10 +135,14 @@ export class NativeHostProcess extends EventEmitter<{
         resolve: resolve as (value: NativeHostRequestResult<unknown>) => void,
       };
       this.pending.set(id, pending);
+      const dispatched = this.writeFrame(requestFrame);
       if (signal) {
         const onAbort = () => {
           pending.aborted = true;
-          void this.write({ id, type: 'cancel' });
+          void this.write({ id, type: 'cancel' }).catch((error) => {
+            this.rejectPending(id, error);
+            this.fail(asError(error));
+          });
           const timeout = setTimeout(() => {
             void this.failAfterRecovery(
               new NativeDriverError(
@@ -145,7 +165,10 @@ export class NativeHostProcess extends EventEmitter<{
           pending.abortCleanup = () => signal.removeEventListener('abort', onAbort);
         }
       }
-      void this.write({ command, id, params, type: 'request' }).catch((error) => this.rejectPending(id, error));
+      void dispatched.catch((error) => {
+        this.rejectPending(id, error);
+        this.fail(asError(error));
+      });
     });
   }
 
@@ -202,11 +225,6 @@ export class NativeHostProcess extends EventEmitter<{
     pending.binaryId = message.binary?.id;
     if (pending.binaryId) {
       this.pendingBinaryIds.set(pending.binaryId, message.id);
-      const binary = this.binaryFrames.get(pending.binaryId);
-      if (binary) {
-        this.binaryFrames.delete(pending.binaryId);
-        pending.binary = binary;
-      }
     }
     this.completePending(message.id);
   }
@@ -214,7 +232,7 @@ export class NativeHostProcess extends EventEmitter<{
   private onBinary(frame: NativeBinaryFrame): void {
     const requestId = this.pendingBinaryIds.get(frame.id);
     if (!requestId) {
-      this.binaryFrames.set(frame.id, frame.data);
+      this.fail(new Error(`Native driver helper emitted binary payload "${frame.id}" before declaring it in a response.`));
       return;
     }
     const pending = this.pending.get(requestId);
@@ -263,9 +281,38 @@ export class NativeHostProcess extends EventEmitter<{
   }
 
   private async write(message: Parameters<typeof encodeJsonFrame>[0]): Promise<void> {
-    if (!this.child.stdin.write(encodeJsonFrame(message))) {
-      await new Promise<void>((resolve) => this.child.stdin.once('drain', resolve));
+    await this.writeFrame(encodeJsonFrame(message));
+  }
+
+  private async writeFrame(frame: Buffer): Promise<void> {
+    if (this.child.stdin.destroyed || !this.child.stdin.writable) {
+      throw new NativeDriverError('host-closed', 'Native driver helper input is closed.');
     }
+    if (this.child.stdin.write(frame)) {
+      return;
+    }
+    await new Promise<void>((resolve, reject) => {
+      const cleanup = () => {
+        this.child.stdin.off('drain', onDrain);
+        this.child.stdin.off('error', onError);
+        this.child.off('close', onClose);
+      };
+      const onDrain = () => {
+        cleanup();
+        resolve();
+      };
+      const onError = (error: Error) => {
+        cleanup();
+        reject(error);
+      };
+      const onClose = () => {
+        cleanup();
+        reject(new NativeDriverError('host-closed', 'Native driver helper closed while writing a request.'));
+      };
+      this.child.stdin.once('drain', onDrain);
+      this.child.stdin.once('error', onError);
+      this.child.once('close', onClose);
+    });
   }
 
   private fail(error: Error): void {
@@ -329,14 +376,20 @@ function waitForHello(child: ChildProcessWithoutNullStreams, decoder: NativeFram
         ),
       );
     };
+    const onChildError = (error: Error) => {
+      cleanup();
+      reject(error);
+    };
     const cleanup = () => {
       clearTimeout(timeout);
       decoder.off('json', onJson);
       decoder.off('error', onError);
+      child.off('error', onChildError);
       child.off('exit', onExit);
     };
     decoder.once('json', onJson);
     decoder.once('error', onError);
+    child.once('error', onChildError);
     child.once('exit', onExit);
   });
 }
@@ -356,4 +409,8 @@ function validateHello(hello: NativeHostHello, artifact: NativeDriverArtifact): 
 
 function delay(milliseconds: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+function asError(error: unknown): Error {
+  return error instanceof Error ? error : new Error(String(error));
 }

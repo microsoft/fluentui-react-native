@@ -38,6 +38,7 @@ class Driver {
   template <typename Fn>
   void RunPhysical(const CancellationToken& token, Fn&& body) {
     const PhysicalInputScope scope(token);
+    input_.SyncPointerFromCursor();
     try {
       body();
     } catch (...) {

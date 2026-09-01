@@ -16,6 +16,7 @@ import type {
 } from '../../host/types.js';
 import type { NativeDesktopApplicationDescriptor, NativeDriverArtifact, NativeHostEventMessage } from '../../native/types.js';
 import { NativeDriverError } from '../../native/NativeDriverError.js';
+import { isSingleWebDriverKeyValue } from '../../protocol/actions.js';
 import { HostStaleError, HostUnsupportedError } from '../../protocol/errors.js';
 import type { DesktopEndpoint } from '../../protocol/types.js';
 import { NativeHostProcess } from './NativeHostProcess.js';
@@ -120,7 +121,12 @@ export class NativeDesktopHost implements DesktopHost {
   }
 
   async sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void> {
-    await this.request('sendKeys', { elementId, text }, signal);
+    this.potentialKeys = new Set([...this.depressedKeys, ...typedTextRecoveryKeys(text)]);
+    try {
+      await this.request('sendKeys', { elementId, text }, signal);
+    } finally {
+      this.potentialKeys = new Set(this.depressedKeys);
+    }
   }
 
   async performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void> {
@@ -245,23 +251,40 @@ export class NativeDesktopHost implements DesktopHost {
       });
       const stdout: Buffer[] = [];
       const stderr: Buffer[] = [];
+      let settled = false;
+      let stdinError: Error | undefined;
+      let timeoutError: NativeDriverError | undefined;
       const timeout = setTimeout(() => {
+        timeoutError = new NativeDriverError('input-recovery-timeout', 'Native input recovery did not complete within 5 seconds.');
         child.kill();
-        reject(new NativeDriverError('input-recovery-timeout', 'Native input recovery did not complete within 5 seconds.'));
       }, 5000);
       child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
       child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
       child.once('error', (error) => {
-        clearTimeout(timeout);
-        reject(error);
+        if (!settled) {
+          settled = true;
+          clearTimeout(timeout);
+          reject(error);
+        }
+      });
+      child.stdin.once('error', (error) => {
+        stdinError = error;
       });
       child.once('close', (code) => {
+        if (settled) {
+          return;
+        }
+        settled = true;
         clearTimeout(timeout);
+        if (timeoutError) {
+          reject(timeoutError);
+          return;
+        }
         if (code !== 0) {
           reject(
             new NativeDriverError(
               'input-recovery-failed',
-              Buffer.concat(stderr).toString('utf8') || `Native input recovery exited with code ${String(code)}.`,
+              Buffer.concat(stderr).toString('utf8') || stdinError?.message || `Native input recovery exited with code ${String(code)}.`,
             ),
           );
           return;
@@ -320,11 +343,17 @@ function planInputLedger(
   const potentialButtons = new Set(currentButtons);
   for (const sequence of actions) {
     for (const action of sequence.actions) {
-      if (action.type === 'keyDown' && typeof action.value === 'string') {
-        finalKeys.add(action.value);
-        potentialKeys.add(action.value);
-      } else if (action.type === 'keyUp' && typeof action.value === 'string') {
-        finalKeys.delete(action.value);
+      if (action.type === 'keyDown' || action.type === 'keyUp') {
+        const value = action.value;
+        if (typeof value !== 'string' || !isSingleWebDriverKeyValue(value)) {
+          throw new TypeError(`${action.type} values must contain exactly one Unicode code point.`);
+        }
+        if (action.type === 'keyDown') {
+          finalKeys.add(value);
+          potentialKeys.add(value);
+        } else {
+          finalKeys.delete(value);
+        }
       } else if (action.type === 'pointerDown' && typeof action.button === 'number') {
         finalButtons.add(action.button);
         potentialButtons.add(action.button);
@@ -341,6 +370,17 @@ function replaceSet<T>(target: Set<T>, source: ReadonlySet<T>): void {
   for (const value of source) {
     target.add(value);
   }
+}
+
+function typedTextRecoveryKeys(text: string): Set<string> {
+  const keys = new Set<string>();
+  for (const value of text) {
+    if (value === '\r') {
+      continue;
+    }
+    keys.add(value === '\n' ? '\uE006' : value);
+  }
+  return keys;
 }
 
 function translateNativeError(error: unknown): unknown {

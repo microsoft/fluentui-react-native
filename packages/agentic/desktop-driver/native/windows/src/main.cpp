@@ -18,7 +18,10 @@
 
 namespace {
 
-constexpr std::size_t kMaximumLedgerBytes = 64 * 1024;
+// A key ledger is a set of single Unicode code points. Sixteen MiB exceeds the
+// JSON encoding of the complete Unicode code-point space while remaining
+// bounded independently from ordinary framed commands.
+constexpr std::size_t kMaximumLedgerBytes = 16 * 1024 * 1024;
 
 // Reads the whole standard input stream. A stream that was never redirected is
 // reported as missing so the restricted mode fails closed instead of blocking

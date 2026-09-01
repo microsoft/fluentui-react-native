@@ -29,4 +29,34 @@ describe('native host framing', () => {
 
     expect(errors[0]?.message).toContain('invalid frame magic');
   });
+
+  test('rejects reserved header bytes and oversized frames before buffering payloads', () => {
+    const reservedDecoder = new NativeFrameDecoder();
+    const reservedErrors: Error[] = [];
+    reservedDecoder.on('error', (error) => reservedErrors.push(error));
+    const reserved = encodeJsonFrame({ id: 'request-1', result: null, type: 'response' });
+    reserved[5] = 1;
+    reservedDecoder.write(reserved);
+    expect(reservedErrors[0]?.message).toContain('reserved frame bytes');
+
+    const oversizedDecoder = new NativeFrameDecoder();
+    const oversizedErrors: Error[] = [];
+    oversizedDecoder.on('error', (error) => oversizedErrors.push(error));
+    const header = Buffer.alloc(12);
+    header.write('FDR1');
+    header[4] = 1;
+    header.writeUInt32LE(8 * 1024 * 1024 + 1, 8);
+    oversizedDecoder.write(header);
+    expect(oversizedErrors[0]?.message).toContain('exceeds');
+  });
+
+  test('rejects oversized outbound frames before writing a header', () => {
+    expect(() =>
+      encodeJsonFrame({
+        id: 'request-1',
+        result: 'x'.repeat(8 * 1024 * 1024),
+        type: 'response',
+      }),
+    ).toThrow('exceeds');
+  });
 });

@@ -34,6 +34,7 @@ inline constexpr char kErrorAmbiguousTarget[] = "ambiguous-target";
 inline constexpr char kErrorNoSuchLease[] = "no-such-lease";
 inline constexpr char kErrorWindowActivation[] = "window-activation-failed";
 inline constexpr char kErrorCaptureFailed[] = "capture-failed";
+inline constexpr char kErrorTreeTooLarge[] = "tree-too-large";
 inline constexpr char kErrorInternal[] = "internal-error";
 
 std::string ToUtf8(std::wstring_view value);
@@ -83,6 +84,16 @@ class CancellationToken {
 
  private:
   std::atomic<bool> cancelled_{false};
+};
+
+class Deadline {
+ public:
+  explicit Deadline(unsigned int timeoutMs) noexcept : expiresAt_(GetTickCount64() + timeoutMs) {}
+
+  bool Expired() const noexcept { return GetTickCount64() >= expiresAt_; }
+
+ private:
+  ULONGLONG expiresAt_{0};
 };
 
 // Opaque, helper-generated identifiers. Native handles never reach the wire.

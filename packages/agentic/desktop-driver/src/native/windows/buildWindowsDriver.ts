@@ -160,6 +160,7 @@ export async function buildWindowsDriver({
 async function runCommand(command: string, args: readonly string[], signal?: AbortSignal): Promise<string> {
   throwIfAborted(signal);
   return new Promise((resolve, reject) => {
+    let settled = false;
     const child = spawn(command, [...args], {
       signal,
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -167,12 +168,35 @@ async function runCommand(command: string, args: readonly string[], signal?: Abo
     });
     const stdout: Buffer[] = [];
     const stderr: Buffer[] = [];
+    let timedOut = false;
+    const timeout = setTimeout(
+      () => {
+        timedOut = true;
+        child.kill();
+      },
+      30 * 60 * 1000,
+    );
     child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
     child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
-    child.once('error', reject);
+    child.once('error', (error) => {
+      if (!settled) {
+        settled = true;
+        clearTimeout(timeout);
+        reject(error);
+      }
+    });
     child.once('close', (code) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      clearTimeout(timeout);
       const output = Buffer.concat(stdout).toString('utf8');
       const errorOutput = Buffer.concat(stderr).toString('utf8');
+      if (timedOut) {
+        reject(new NativeDriverError('build-timeout', `${path.basename(command)} exceeded the 30-minute build deadline.`));
+        return;
+      }
       if (code !== 0) {
         const details = `${output}${errorOutput}`.trim();
         reject(

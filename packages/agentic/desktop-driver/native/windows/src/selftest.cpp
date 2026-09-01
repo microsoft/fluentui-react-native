@@ -74,6 +74,15 @@ void TestFraming() {
 
   std::uint8_t corrupt[kFrameHeaderBytes] = {'F', 'D', 'R', '0'};
   Check(!DecodeFrameHeader(corrupt, type, length), "invalid magic is rejected");
+  std::uint8_t reserved[kFrameHeaderBytes] = {'F', 'D', 'R', '1', kJsonFrameType, 1};
+  Check(!DecodeFrameHeader(reserved, type, length), "nonzero reserved frame bytes are rejected");
+  std::uint8_t oversized[kFrameHeaderBytes] = {'F', 'D', 'R', '1', kJsonFrameType};
+  const std::uint32_t oversizedLength = kMaximumJsonFramePayload + 1;
+  oversized[8] = static_cast<std::uint8_t>(oversizedLength & 0xffu);
+  oversized[9] = static_cast<std::uint8_t>((oversizedLength >> 8) & 0xffu);
+  oversized[10] = static_cast<std::uint8_t>((oversizedLength >> 16) & 0xffu);
+  oversized[11] = static_cast<std::uint8_t>((oversizedLength >> 24) & 0xffu);
+  Check(!DecodeFrameHeader(oversized, type, length), "oversized frame headers are rejected");
 }
 
 void TestJson() {
@@ -112,6 +121,7 @@ void TestJson() {
 }
 
 void TestGeometry() {
+  Check(Deadline(0).Expired(), "zero-duration deadlines expire immediately");
   Check(std::fabs(DipsFromPhysical(150.0, 144) - 100.0) < 0.001, "physical to dips at 150 percent");
   Check(std::fabs(PhysicalFromDips(100.0, 192) - 200.0) < 0.001, "dips to physical at 200 percent");
   Check(std::fabs(DipsFromPhysical(PhysicalFromDips(37.5, 144), 144) - 37.5) < 0.001, "dip round trip");
@@ -149,6 +159,11 @@ void TestGeometry() {
 }
 
 void TestInputLedger() {
+  Check(IsSingleWebDriverKeyValue(L"A"), "ASCII key values contain one code point");
+  Check(IsSingleWebDriverKeyValue(L"\U0001F600"), "surrogate-pair key values contain one code point");
+  Check(!IsSingleWebDriverKeyValue(L"AB") && !IsSingleWebDriverKeyValue(std::wstring(1, 0xd800)),
+        "multi-code-point and unpaired-surrogate key values are rejected");
+
   recordedInputs.clear();
   InputController input;
   input.UseTestSender(&RecordInput);
@@ -186,6 +201,20 @@ void TestInputLedger() {
         "chords press modifiers first");
   Check(recordedInputs[3].ki.wVk == VK_CONTROL && (recordedInputs[3].ki.dwFlags & KEYEVENTF_KEYUP) != 0,
         "chords release modifiers last");
+
+  recordedInputs.clear();
+  input.TypeText(L"x", token);
+  Check(!input.HasDepressedInput(), "typed text leaves no depressed input");
+  Check(recordedInputs.size() == 2, "typed text emits one down and one up event");
+  Check((recordedInputs[0].ki.dwFlags & KEYEVENTF_KEYUP) == 0 &&
+            (recordedInputs[1].ki.dwFlags & KEYEVENTF_KEYUP) != 0,
+        "typed text releases its ledgered key");
+
+  recordedInputs.clear();
+  input.TypeText(L"\n", token);
+  Check(recordedInputs.size() == 2 && recordedInputs[0].ki.wVk == VK_RETURN &&
+            recordedInputs[1].ki.wVk == VK_RETURN,
+        "typed newlines use the recoverable WebDriver Return key");
 
   WORD virtualKey = 0;
   bool extended = false;
@@ -238,6 +267,23 @@ void TestSnapshotShape() {
   Check(MatchesSelector(snapshot, byPartialName), "partial link text matches a substring");
   Check(MatchesSelector(snapshot, byText), "-furn:text falls back to the accessible name");
   Check(!MatchesSelector(snapshot, Selector{"accessibility id", "other"}), "non-matching selectors are rejected");
+
+  ElementSnapshot root = snapshot;
+  root.parentId.clear();
+  ElementSnapshot child = root;
+  child.id = "element-2";
+  child.parentId = root.id;
+  child.automationId = "child&<id";
+  child.name = "\"child\"";
+  child.role = "text";
+  child.hasText = true;
+  child.text = "ignored by source attributes";
+  Automation automation;
+  const std::string source = automation.SerializeSourceXml({root, child});
+  Check(source.find(R"(automationId="child&amp;&lt;id")") != std::string::npos,
+        "source XML escapes automation identifiers");
+  Check(source.find(R"(name="&quot;child&quot;")") != std::string::npos, "source XML escapes names");
+  Check(source.find("element-2") == std::string::npos, "source XML does not expose native element identifiers");
 }
 
 void TestLeaseIdentity() {
@@ -340,6 +386,10 @@ void TestReleaseLedger() {
 }
 
 void TestPhysicalInputLock() {
+  SetPhysicalInputMutexNameForTesting(L"Local\\FurnDesktopDriverPhysicalInputSelfTest-" +
+                                      std::to_wstring(GetCurrentProcessId()));
+  Check(std::wstring(PhysicalInputMutexName()).find(std::to_wstring(GetCurrentProcessId())) != std::wstring::npos,
+        "self-test uses an isolated physical input mutex");
   // Every acquisition attempt runs on its own thread because the mutex is
   // owned per thread, so this exercises real cross-owner exclusion without
   // injecting input.
@@ -404,7 +454,7 @@ void TestPhysicalInputLock() {
   // A thread that exits while owning the mutex abandons it, which is exactly
   // what a helper crash looks like to the next owner.
   std::thread abandoner([]() {
-    const HANDLE handle = CreateMutexW(nullptr, FALSE, kPhysicalInputMutexName);
+    const HANDLE handle = CreateMutexW(nullptr, FALSE, PhysicalInputMutexName());
     if (handle != nullptr) {
       WaitForSingleObject(handle, 1000);
       CloseHandle(handle);
@@ -415,7 +465,7 @@ void TestPhysicalInputLock() {
   Check(acquireElsewhere(500) == "acquired", "the reported abandonment leaves the mutex usable");
 
   std::thread secondAbandoner([]() {
-    const HANDLE handle = CreateMutexW(nullptr, FALSE, kPhysicalInputMutexName);
+    const HANDLE handle = CreateMutexW(nullptr, FALSE, PhysicalInputMutexName());
     if (handle != nullptr) {
       WaitForSingleObject(handle, 1000);
       CloseHandle(handle);

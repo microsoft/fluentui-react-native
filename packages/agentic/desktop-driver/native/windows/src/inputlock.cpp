@@ -14,10 +14,11 @@ std::mutex stateMutex;
 HANDLE inputMutex = nullptr;
 DWORD ownerThread = 0;
 unsigned int ownerDepth = 0;
+std::wstring inputMutexName = kPhysicalInputMutexName;
 
 HANDLE EnsureMutex() {
   if (inputMutex == nullptr) {
-    inputMutex = CreateMutexW(nullptr, FALSE, kPhysicalInputMutexName);
+    inputMutex = CreateMutexW(nullptr, FALSE, inputMutexName.c_str());
     if (inputMutex == nullptr) {
       FailLastError(kErrorInputBusy, "Creating the physical input mutex", GetLastError());
     }
@@ -30,6 +31,23 @@ void WriteDiagnostic(const std::string& message) {
 }
 
 }  // namespace
+
+const wchar_t* PhysicalInputMutexName() noexcept {
+  return inputMutexName.c_str();
+}
+
+void SetPhysicalInputMutexNameForTesting(std::wstring name) {
+  const std::lock_guard<std::mutex> guard(stateMutex);
+  if (name.empty() || ownerDepth != 0) {
+    Fail(kErrorInvalidParams, "The physical input mutex test name is invalid or the mutex is currently owned.");
+  }
+  if (inputMutex != nullptr) {
+    CloseHandle(inputMutex);
+    inputMutex = nullptr;
+  }
+  inputMutexName = std::move(name);
+  ownerThread = 0;
+}
 
 PhysicalInputScope::PhysicalInputScope(const CancellationToken& token, unsigned int timeoutMs, AbandonPolicy policy) {
   HANDLE handle = nullptr;
@@ -44,7 +62,7 @@ PhysicalInputScope::PhysicalInputScope(const CancellationToken& token, unsigned 
     }
   }
 
-  const DWORD deadline = GetTickCount() + timeoutMs;
+  const Deadline deadline(timeoutMs);
   while (true) {
     token.ThrowIfCancelled();
     const DWORD result = WaitForSingleObject(handle, 50);
@@ -64,7 +82,7 @@ PhysicalInputScope::PhysicalInputScope(const CancellationToken& token, unsigned 
     if (result != WAIT_TIMEOUT) {
       FailLastError(kErrorInputBusy, "Waiting for the physical input mutex", GetLastError());
     }
-    if (GetTickCount() > deadline) {
+    if (deadline.Expired()) {
       Fail(kErrorInputBusy, "Another desktop driver helper held physical input for longer than " +
                                 std::to_string(timeoutMs) +
                                 " ms. Wait for the other session to finish its input command, or run the helper with "

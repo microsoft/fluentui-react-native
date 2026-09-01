@@ -37,6 +37,7 @@ struct ReleaseCounts {
   std::size_t buttons{0};
 };
 
+bool IsSingleWebDriverKeyValue(std::wstring_view value);
 ReleaseLedger ParseReleaseLedger(const json::Value& document);
 
 // Owns every depressed key and pointer button that this helper injected. The
@@ -77,11 +78,12 @@ class InputController {
   void UseTestSender(InputSender sender) {
     sender_ = sender;
     physicalInput_ = 1;
-    pointerInitialized_ = true;
   }
 
  private:
   void RequirePhysicalInput();
+  void PressAndRelease(std::wstring ledgerKey, const std::vector<KeyStroke>& strokes,
+                       const CancellationToken& token);
   void Send(std::vector<INPUT>& inputs);
   void SendStroke(const KeyStroke& stroke, bool down);
   std::vector<KeyStroke> StrokesForValue(std::wstring_view value) const;

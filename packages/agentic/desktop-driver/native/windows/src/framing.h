@@ -15,7 +15,9 @@ namespace furn {
 inline constexpr std::uint8_t kJsonFrameType = 1;
 inline constexpr std::uint8_t kBinaryFrameType = 2;
 inline constexpr std::size_t kFrameHeaderBytes = 12;
-inline constexpr std::uint32_t kMaximumFramePayload = 256u * 1024u * 1024u;
+inline constexpr std::size_t kMaximumCorrelationIdBytes = 256;
+inline constexpr std::uint32_t kMaximumJsonFramePayload = 8u * 1024u * 1024u;
+inline constexpr std::uint32_t kMaximumBinaryFramePayload = 64u * 1024u * 1024u;
 
 struct Frame {
   std::uint8_t type{kJsonFrameType};
@@ -47,6 +49,7 @@ class FrameWriter {
   explicit FrameWriter(HANDLE output) : output_(output) {}
 
   void WriteJson(const json::Value& message);
+  void WriteJson(std::string_view message);
   void WriteBinary(std::string_view identifier, const std::vector<std::uint8_t>& data);
 
  private:

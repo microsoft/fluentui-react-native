@@ -3,6 +3,7 @@
 #include <shobjidl_core.h>
 
 #include <algorithm>
+#include <optional>
 
 #include <winrt/base.h>
 
@@ -99,6 +100,34 @@ struct ActivationOutcome {
   bool sawForeground{false};
 };
 
+class ForegroundInputAttachment {
+ public:
+  explicit ForegroundInputAttachment(DWORD selfThread) noexcept : selfThread_(selfThread) {}
+
+  ~ForegroundInputAttachment() {
+    if (otherThread_ != 0) {
+      AttachThreadInput(selfThread_, otherThread_, FALSE);
+    }
+  }
+
+  bool Attach(DWORD otherThread) {
+    if (otherThread_ != 0 || otherThread == 0 || otherThread == selfThread_) {
+      return otherThread_ != 0;
+    }
+    if (AttachThreadInput(selfThread_, otherThread, TRUE) == FALSE) {
+      return false;
+    }
+    otherThread_ = otherThread;
+    return true;
+  }
+
+  bool attached() const noexcept { return otherThread_ != 0; }
+
+ private:
+  DWORD selfThread_{0};
+  DWORD otherThread_{0};
+};
+
 ActivationOutcome ActivateWindowInternal(HWND window, const CancellationToken& token) {
   if (window == nullptr || IsWindow(window) == FALSE) {
     Fail(kErrorNoSuchWindow, "The requested window is no longer available.");
@@ -108,8 +137,8 @@ ActivationOutcome ActivateWindowInternal(HWND window, const CancellationToken& t
   }
   AllowSetForegroundWindow(ASFW_ANY);
   const DWORD currentThread = GetCurrentThreadId();
-  DWORD attachedThread = 0;
-  const DWORD deadline = GetTickCount() + kActivationTimeoutMs;
+  ForegroundInputAttachment inputAttachment(currentThread);
+  const Deadline deadline(kActivationTimeoutMs);
   ActivationOutcome outcome;
   while (true) {
     token.ThrowIfCancelled();
@@ -119,24 +148,19 @@ ActivationOutcome ActivateWindowInternal(HWND window, const CancellationToken& t
       outcome.activated = true;
       break;
     }
-    if (GetTickCount() > deadline) {
+    if (deadline.Expired()) {
       break;
     }
-    if (attachedThread == 0) {
+    if (!inputAttachment.attached()) {
       // Foreground ownership only transfers between threads that share an
       // input queue, so borrow the current foreground thread's queue.
       const DWORD candidate = GetWindowThreadProcessId(foreground != nullptr ? foreground : window, nullptr);
-      if (candidate != 0 && candidate != currentThread && AttachThreadInput(currentThread, candidate, TRUE) != FALSE) {
-        attachedThread = candidate;
-      }
+      inputAttachment.Attach(candidate);
     }
     BringWindowToTop(window);
     SetForegroundWindow(window);
     SetActiveWindow(window);
     token.Wait(50);
-  }
-  if (attachedThread != 0) {
-    AttachThreadInput(currentThread, attachedThread, FALSE);
   }
   return outcome;
 }
@@ -321,8 +345,8 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
   // Packaged activation can report a broker process that exits immediately, so
   // ownership follows the exact window this launch created rather than the
   // reported identifier alone. Windows that already existed are never adopted.
-  const DWORD deadline = GetTickCount() + kLaunchTimeoutMs;
-  DWORD graceDeadline = 0;
+  const Deadline deadline(kLaunchTimeoutMs);
+  std::optional<Deadline> graceDeadline;
   HWND matched = nullptr;
   DWORD matchedProcessId = 0;
   while (matched == nullptr) {
@@ -347,14 +371,14 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
       matchedProcessId = candidateProcessId;
       break;
     }
-    if (!IsProcessAlive(owned.get())) {
-      if (graceDeadline == 0) {
-        graceDeadline = GetTickCount() + kLaunchGraceMs;
-      } else if (GetTickCount() > graceDeadline) {
+    if (owned && !IsProcessAlive(owned.get())) {
+      if (!graceDeadline) {
+        graceDeadline.emplace(kLaunchGraceMs);
+      } else if (graceDeadline->Expired()) {
         Fail(kErrorLaunchFailed, "The launched application exited before it showed its window.");
       }
     }
-    if (GetTickCount() > deadline) {
+    if (deadline.Expired()) {
       Fail(kErrorLaunchFailed,
            "The launched application did not present a window titled \"" + ToUtf8(windowTitle) + "\".");
     }
@@ -531,8 +555,8 @@ void ApplicationManager::CloseApplication(const std::string& leaseId, const Canc
     for (const HWND window : EnumerateTopLevelWindows(lease.processId)) {
       PostMessageW(window, WM_CLOSE, 0, 0);
     }
-    const DWORD deadline = GetTickCount() + kCloseTimeoutMs;
-    while (IsProcessAlive(lease.process) && GetTickCount() < deadline) {
+    const Deadline deadline(kCloseTimeoutMs);
+    while (IsProcessAlive(lease.process) && !deadline.Expired()) {
       token.Wait(50);
     }
     if (IsProcessAlive(lease.process)) {

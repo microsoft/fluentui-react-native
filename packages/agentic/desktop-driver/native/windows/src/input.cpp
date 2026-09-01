@@ -83,9 +83,11 @@ void ButtonFlags(int button, DWORD& downFlag, DWORD& upFlag, DWORD& mouseData) {
   }
 }
 
+}  // namespace
+
 // A WebDriver key value names exactly one code point, either a printable
 // character or a private-use special key.
-bool IsSingleCodePoint(const std::wstring& value) {
+bool IsSingleWebDriverKeyValue(std::wstring_view value) {
   if (value.size() == 1) {
     return value[0] < 0xd800 || value[0] > 0xdfff;
   }
@@ -94,8 +96,6 @@ bool IsSingleCodePoint(const std::wstring& value) {
   }
   return false;
 }
-
-}  // namespace
 
 ReleaseLedger ParseReleaseLedger(const json::Value& document) {
   if (!document.IsObject()) {
@@ -117,7 +117,7 @@ ReleaseLedger ParseReleaseLedger(const json::Value& document) {
         Fail(kErrorInvalidParams, "Every release ledger key must be a string.");
       }
       const std::wstring value = ToWide(key.AsString());
-      if (!IsSingleCodePoint(value)) {
+      if (!IsSingleWebDriverKeyValue(value)) {
         Fail(kErrorInvalidParams,
              "Release ledger key \"" + key.AsString() + "\" is not a single WebDriver key value.");
       }
@@ -362,6 +362,9 @@ void InputController::SendStroke(const KeyStroke& stroke, bool down) {
 void InputController::KeyDown(std::wstring_view value, const CancellationToken& token) {
   RequirePhysicalInput();
   token.ThrowIfCancelled();
+  if (!IsSingleWebDriverKeyValue(value)) {
+    Fail(kErrorInvalidParams, "A keyDown value must contain exactly one Unicode code point.");
+  }
   if (value == L"\uE000") {
     ReleaseAll();
     return;
@@ -377,6 +380,9 @@ void InputController::KeyDown(std::wstring_view value, const CancellationToken& 
 
 void InputController::KeyUp(std::wstring_view value, const CancellationToken& token) {
   token.ThrowIfCancelled();
+  if (!IsSingleWebDriverKeyValue(value)) {
+    Fail(kErrorInvalidParams, "A keyUp value must contain exactly one Unicode code point.");
+  }
   if (value == L"\uE000") {
     ReleaseAll();
     return;
@@ -409,24 +415,32 @@ void InputController::TypeText(std::wstring_view text, const CancellationToken& 
     WORD virtualKey = 0;
     bool extended = false;
     if (TryMapWebDriverKey(unit, virtualKey, extended)) {
-      const KeyStroke stroke{false, virtualKey, extended};
-      SendStroke(stroke, true);
-      SendStroke(stroke, false);
+      PressAndRelease(std::wstring(unit), {KeyStroke{false, virtualKey, extended}}, token);
       continue;
     }
     if (text[index] == L'\n') {
-      const KeyStroke stroke{false, VK_RETURN, false};
-      SendStroke(stroke, true);
-      SendStroke(stroke, false);
+      PressAndRelease(L"\uE006", {KeyStroke{false, VK_RETURN, false}}, token);
       continue;
     }
     if (text[index] == L'\r') {
       continue;
     }
-    const KeyStroke stroke{true, static_cast<WORD>(text[index]), false};
-    SendStroke(stroke, true);
-    SendStroke(stroke, false);
+    PressAndRelease(std::wstring(unit), {KeyStroke{true, static_cast<WORD>(text[index]), false}}, token);
   }
+}
+
+void InputController::PressAndRelease(std::wstring ledgerKey, const std::vector<KeyStroke>& strokes,
+                                      const CancellationToken& token) {
+  token.ThrowIfCancelled();
+  pressedKeys_.emplace_back(std::move(ledgerKey), strokes);
+  for (const KeyStroke& stroke : strokes) {
+    SendStroke(stroke, true);
+  }
+  const std::vector<KeyStroke>& recorded = pressedKeys_.back().second;
+  for (auto stroke = recorded.rbegin(); stroke != recorded.rend(); ++stroke) {
+    SendStroke(*stroke, false);
+  }
+  pressedKeys_.pop_back();
 }
 
 void InputController::PressChord(const std::vector<WORD>& virtualKeys, const CancellationToken& token) {

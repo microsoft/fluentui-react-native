@@ -176,7 +176,7 @@ RawFrame CaptureEngine::CaptureWindow(HWND window, const CancellationToken& toke
   RawFrame result;
   try {
     Direct3D11CaptureFrame frame{nullptr};
-    const DWORD deadline = GetTickCount() + kFrameTimeoutMs;
+    const Deadline deadline(kFrameTimeoutMs);
     while (!frame) {
       token.ThrowIfCancelled();
       const DWORD waited = WaitForSingleObject(readyHandle, 50);
@@ -187,7 +187,7 @@ RawFrame CaptureEngine::CaptureWindow(HWND window, const CancellationToken& toke
       if (frame) {
         break;
       }
-      if (GetTickCount() > deadline) {
+      if (deadline.Expired()) {
         Fail(kErrorCaptureFailed, "Windows Graphics Capture did not deliver a frame for the window.");
       }
     }

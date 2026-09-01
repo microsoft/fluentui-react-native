@@ -21,7 +21,7 @@ remaining uncertainty is recorded as an explicit Stage 2 gate.
 
 ## Implementation status
 
-Updated 2026-08-31.
+Updated 2026-09-01.
 
 ### Stage 1 Phase 1: Complete
 
@@ -105,7 +105,12 @@ Updated 2026-08-31.
   accessibility actions, WGC/D3D11/WIC capture, source/tree output,
   cancellation, exact release-only crash recovery, and a session-wide named
   physical-input mutex.
-- Added 124 native self-tests plus an opt-in Windows package contract. The
+- Hardened the native boundary with type-specific frame limits, recoverable
+  malformed messages, bounded helper startup and builds, wrap-safe deadlines,
+  cache quarantine, failure-safe pipe writes, live pointer synchronization,
+  ledger-backed text input, explicit tree-size failures, and isolated self-test
+  locks.
+- Added 138 native self-tests plus an opt-in Windows package contract. The
   helper builds with no compiler warnings and imports only Windows system
   libraries.
 - Windows Fabric native smoke renders all 140 supported stories, restarts the
@@ -126,6 +131,10 @@ incomplete.
   `stories-and-tests`; verify 150% and 200% live DPI; and decide whether native
   event notifications provide enough value beyond authoritative queries to
   enter V1.
+- Windows release hardening should bound the long-lived native element table,
+  define CSS-pixel-to-Windows-wheel-unit conversion, and replace per-mutation
+  detached timeout threads if qualification demonstrates sustained provider
+  stalls. These are follow-ups rather than incomplete V1 command behavior.
 - Stage 2 Phases 5A and 5B remain: prove macOS identity, authority, capture, and
   hosted-runner behavior, then complete the Swift provider.
 - Stage 3 remains: release hardening, source-package proof, optional prebuilt

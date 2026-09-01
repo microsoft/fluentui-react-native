@@ -159,6 +159,9 @@ void Driver::PerformActions(const json::Value& actions, const CancellationToken&
         if (value.empty()) {
           Fail(kErrorInvalidParams, "A key action is missing its \"value\".");
         }
+        if (!IsSingleWebDriverKeyValue(value)) {
+          Fail(kErrorInvalidParams, "A key action value must contain exactly one Unicode code point.");
+        }
         if (type == "keyDown") {
           input_.KeyDown(value, token);
         } else if (type == "keyUp") {
@@ -319,7 +322,7 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
     if (rect == nullptr || !rect->IsObject()) {
       Fail(kErrorInvalidParams, "The setWindowRect request is missing its rectangle.");
     }
-    if (IsZoomed(window) != FALSE) {
+    if (IsZoomed(window) != FALSE || IsIconic(window) != FALSE) {
       ShowWindow(window, SW_RESTORE);
     }
     WindowMetrics metrics = MeasureWindow(window);
@@ -407,7 +410,7 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
   if (command == "click") {
     const std::string elementId = RequireString(params, "elementId");
     const std::string mode = params.StringField("mode", "auto");
-    const ElementSnapshot snapshot = RequireLiveElement(elementId, token);
+    RequireLiveElement(elementId, token);
     if (mode == "accessibility") {
       automation_.AccessibilityClick(elementId, token);
       result.result = json::Value::Null();
@@ -424,15 +427,16 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
       }
       Fail(kErrorInputUnavailable, "Physical pointer input is unavailable on this desktop.");
     }
-    if (IsEmptyRect(snapshot.physicalRect)) {
-      Fail(kErrorNotInteractable, "The element does not occupy a clickable area.");
-    }
     RunPhysical(token, [&]() {
       const ElementRecord& record = automation_.RequireRecord(elementId);
       if (record.window != nullptr) {
         // The server activates the window explicitly before a click; this is a
         // best-effort refresh that must not mask the click failure itself.
         TryActivateWindow(record.window, token);
+      }
+      const ElementSnapshot snapshot = RequireLiveElement(elementId, token);
+      if (IsEmptyRect(snapshot.physicalRect)) {
+        Fail(kErrorNotInteractable, "The element does not occupy a clickable area.");
       }
       POINT center{};
       center.x = (snapshot.physicalRect.left + snapshot.physicalRect.right) / 2;

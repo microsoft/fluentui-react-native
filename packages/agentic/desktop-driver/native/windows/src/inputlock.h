@@ -2,6 +2,8 @@
 
 #include <windows.h>
 
+#include <string>
+
 #include "common.h"
 
 namespace furn {
@@ -44,5 +46,8 @@ class PhysicalInputScope {
   bool owns_{false};
   bool nested_{false};
 };
+
+const wchar_t* PhysicalInputMutexName() noexcept;
+void SetPhysicalInputMutexNameForTesting(std::wstring name);
 
 }  // namespace furn
