@@ -1,4 +1,4 @@
-import type { Pressable, PressableProps, StyleProp, Text, View, ViewStyle } from 'react-native';
+import type { Pressable, StyleProp, Text, View, ViewStyle } from 'react-native';
 
 import type {
   ComponentProps,
@@ -6,6 +6,7 @@ import type {
   OptionalSlot,
   OwnedRootProps,
   PressableState,
+  PropsWithRefOf,
   Slot,
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
@@ -39,7 +40,7 @@ export type SwitchStateProps = {
   onChange?: (checked: boolean) => void;
 };
 
-export type SwitchExposedPressableProps = OwnedRootProps<PressableProps>;
+export type SwitchExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type SwitchProps = SwitchStateProps & ComponentProps<SwitchSlots, SwitchExposedPressableProps>;
 

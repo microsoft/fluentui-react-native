@@ -1,4 +1,5 @@
-import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
+import type { PropsWithRefOf } from '@fluentui-react-native/framework-base';
 
 type FocusVisualOwnedProps =
   | 'accessibilityElementsHidden'
@@ -9,7 +10,7 @@ type FocusVisualOwnedProps =
   | 'importantForAccessibility'
   | 'pointerEvents';
 
-export type FocusVisualRingProps = Omit<ViewProps, FocusVisualOwnedProps>;
+export type FocusVisualRingProps = Omit<PropsWithRefOf<typeof View>, FocusVisualOwnedProps>;
 
 export type FocusVisualProps = FocusVisualRingProps & {
   /**

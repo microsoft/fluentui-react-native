@@ -1,10 +1,11 @@
-import type { Pressable, PressableProps, StyleProp, Text, ViewStyle } from 'react-native';
+import type { Pressable, StyleProp, Text, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
   ComponentState,
   OptionalSlot,
   OwnedRootProps,
   PressableState,
+  PropsWithRefOf,
   Slot,
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
@@ -33,7 +34,7 @@ export type TagStateProps = {
   dismiss?: boolean;
 };
 
-export type TagRootProps = OwnedRootProps<PressableProps>;
+export type TagRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type TagProps = TagStateProps & ComponentProps<TagSlots, TagRootProps>;
 

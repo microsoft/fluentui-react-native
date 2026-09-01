@@ -1,10 +1,11 @@
-import type { AccessibilityState, Pressable, StyleProp, Text, View, ViewProps, ViewStyle } from 'react-native';
+import type { AccessibilityState, Pressable, StyleProp, Text, View, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
   ComponentState,
   OptionalSlot,
   OwnedRootProps,
   PressableState,
+  PropsWithRefOf,
   Slot,
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
@@ -85,7 +86,7 @@ export type AccordionStateProps = {
 };
 
 export type AccordionRootProps = OwnedRootProps<
-  ViewProps,
+  PropsWithRefOf<typeof View>,
   'accessible' | 'accessibilityHint' | 'accessibilityLabel' | 'accessibilityRole' | 'accessibilityState' | 'focusable'
 >;
 

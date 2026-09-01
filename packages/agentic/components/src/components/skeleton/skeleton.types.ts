@@ -1,7 +1,7 @@
-import type { LayoutChangeEvent, LayoutRectangle, ViewProps, ViewStyle } from 'react-native';
+import type { LayoutChangeEvent, LayoutRectangle, ViewStyle } from 'react-native';
 import type { Animated } from 'react-native';
 
-import type { ComponentProps, ComponentState, Slot } from '@fluentui-react-native/framework-base';
+import type { ComponentProps, ComponentState, OwnedRootProps, PropsWithRefOf, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { StyleProp } from 'react-native';
 import type { SlotComponent } from '@fluentui-react-native/framework-base';
@@ -11,7 +11,9 @@ export type SkeletonSlots = {
   root: Slot<typeof View>;
 };
 
-export type SkeletonProps = ComponentProps<SkeletonSlots, Omit<ViewProps, 'children'>>;
+export type SkeletonRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+
+export type SkeletonProps = ComponentProps<SkeletonSlots, SkeletonRootProps>;
 
 export type SkeletonState = ComponentState<SkeletonSlots> &
   ThemeState & {
@@ -26,4 +28,4 @@ export type SkeletonState = ComponentState<SkeletonSlots> &
     progress: Animated.Value;
   };
 
-export type SkeletonRootSlot = SlotComponent<Omit<ViewProps, 'children'>>;
+export type SkeletonRootSlot = SlotComponent<SkeletonRootProps>;

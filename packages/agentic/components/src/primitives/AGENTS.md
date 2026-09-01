@@ -14,6 +14,9 @@ the canonical implementation.
   defaults.
 - Define the smallest acceptance contract needed for `SlotProp` consumption.
 - Prefer a hook-free `directComponent` when the primitive only selects an inner component or transforms props.
+- For a primitive with one stable native root type, include `PropsWithRefOf<typeof Root>` in its public props and pass
+  the React 19.1.4 `ref` prop to that root without `forwardRef`. A primitive whose renderer does not have one stable
+  imperative instance type must omit `ref` and document that exception in its `CONTRACT.md`.
 - Forward accessibility and test props without replacing consumer values.
 - Keep alternative source or renderer props mutually exclusive.
 - Add compile-time `SlotProp` coverage and runtime coverage for every renderer branch.

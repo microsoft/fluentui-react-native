@@ -29,6 +29,8 @@ invariants; detailed authoring recipes live in the
 - Use `src/components/button` as the canonical higher-order implementation and `src/primitives/icon` as the canonical
   primitive.
 - Keep public props and slots small, typed, and spec-driven.
+- This package targets React 19.1.4 or newer. Expose a stable native root ref through the `ref` prop, receive it as part
+  of the component props, and forward it to the declared root slot. Do not use `forwardRef`.
 - Export higher-order components and public types explicitly from `src/index.ts`; export primitives and their public types
   explicitly from `src/primitives/index.ts`. Never use wildcard exports.
 - Colocate runtime tests, type tests, and Storybook stories with the implementation.

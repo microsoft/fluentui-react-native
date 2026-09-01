@@ -1,6 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import type { ViewStyle } from 'react-native';
+import type { View, ViewStyle } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -20,6 +21,14 @@ function flattenStyle(style: unknown) {
 }
 
 describe('Input', () => {
+  it('forwards its ref prop through phased rendering to the native root', async () => {
+    const ref = React.createRef<React.ElementRef<typeof View>>();
+
+    await render(<Input ref={ref} />);
+
+    expect(ref.current).not.toBeNull();
+  });
+
   it('renders a textbox with outline styling by default', async () => {
     const component = await render(<Input placeholder="Enter text" />);
     const textbox = getTextbox(component);

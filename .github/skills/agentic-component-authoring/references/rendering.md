@@ -59,6 +59,10 @@ Set `displayName` for diagnostics and Storybook metadata. Keep unstable stage fu
 future composition work can identify them. Do not wrap the component in memoization or another boundary without measured
 need and repository precedent.
 
+Under this package's React 19.1.4 baseline, `ref` is an ordinary component prop. Include it in the public root props and
+let the state hook forward it to the resolved root slot; do not wrap assembly components in `forwardRef`. If rendering a
+second internal ref on the same slot, pass it in JSX so the slot runtime composes it with the captured consumer ref.
+
 After assembly, export `use<Component>_unstable`, `use<Component>Styles_unstable`, and
 `render<Component>_unstable` from the package root together with `<Component>State`, according to the
 [types and slots export rules](types-and-slots.md#exports). These stages are intentionally unstable but public so other

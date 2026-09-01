@@ -1,5 +1,12 @@
-import type { Image, StyleProp, Text, View, ViewProps, ViewStyle } from 'react-native';
-import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
+import type { Image, StyleProp, Text, View, ViewStyle } from 'react-native';
+import type {
+  ComponentProps,
+  ComponentState,
+  OptionalSlot,
+  OwnedRootProps,
+  PropsWithRefOf,
+  Slot,
+} from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
@@ -26,7 +33,7 @@ export type AvatarStateProps = {
   size?: AvatarSize;
 };
 
-export type AvatarRootProps = OwnedRootProps<ViewProps>;
+export type AvatarRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
 
 export type AvatarProps = AvatarStateProps & ComponentProps<AvatarSlots, AvatarRootProps>;
 

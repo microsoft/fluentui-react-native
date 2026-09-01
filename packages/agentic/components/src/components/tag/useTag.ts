@@ -21,6 +21,7 @@ export function useTag_unstable(props: TagProps): TagState {
     disabled = false,
     layout = 'iconAndText',
     leadingIcon: leadingIconProp,
+    ref: rootRef,
     shape = 'rounded',
     size = 'medium',
     style: userStyle,
@@ -59,7 +60,7 @@ export function useTag_unstable(props: TagProps): TagState {
     focusable: rest.focusable ?? !disabled,
   });
 
-  const root = useSlot(Pressable, pressableProps);
+  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
   const content = useOptionalSlot(Text, iconOnly ? null : contentProp, {
     defaultProps: { children: 'Tag text' },
     renderByDefault: true,

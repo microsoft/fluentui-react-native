@@ -21,6 +21,7 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     icon: iconProp,
     loading = false,
     multiselect = false,
+    ref: rootRef,
     secondaryContent: secondaryContentProp,
     secondaryContentPosition = 'right',
     selected = false,
@@ -70,7 +71,7 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
 
   const { onBlur, onFocus, onHoverIn, onHoverOut, onLongPress, onPress, onPressIn, onPressOut, ...headerRest } = rootProps;
   const headerProps: ViewProps = headerRest as unknown as ViewProps;
-  const root = useSlot(Pressable, rootProps);
+  const root = useSlot(Pressable, { ...rootProps, ref: rootRef });
   const header = useSlot(View, headerProps);
   const chevronIndicator = useOptionalSlot(Icon, chevron ? { fontSource: semanticIconSources.chevron } : null);
   const checkmarkIndicator = useOptionalSlot(Icon, checkmark && selected ? { fontSource: semanticIconSources.checkmark } : null);

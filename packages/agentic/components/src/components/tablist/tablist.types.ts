@@ -1,7 +1,7 @@
 import type * as React from 'react';
 import type { View, ViewProps } from 'react-native';
 
-import type { ComponentProps, ComponentState, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
+import type { ComponentProps, ComponentState, OwnedRootProps, PropsWithRefOf, Slot } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 export type TabListOrientation = 'horizontal' | 'vertical';
@@ -58,15 +58,19 @@ export type TabListStateProps = {
   selectionFollowsFocus?: boolean;
 };
 
-export type TabListExposedViewProps = OwnedRootProps<ViewProps, 'accessibilityRole' | 'accessibilityState' | 'accessible' | 'focusable'>;
+export type TabListExposedViewProps = OwnedRootProps<
+  PropsWithRefOf<typeof View>,
+  'accessibilityRole' | 'accessibilityState' | 'accessible' | 'focusable'
+>;
 
 export type TabListSlots = {
   root: Slot<typeof View>;
 };
 
-export type TabListProps = ComponentProps<TabListSlots, TabListExposedViewProps, TabListStateProps> & {
-  children: React.ReactNode;
-};
+export type TabListProps = TabListStateProps &
+  ComponentProps<TabListSlots, TabListExposedViewProps> & {
+    children: React.ReactNode;
+  };
 
 export type TabListState = ComponentState<TabListSlots> &
   ThemeState & {

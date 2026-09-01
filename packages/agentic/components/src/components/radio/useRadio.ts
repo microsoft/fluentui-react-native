@@ -15,6 +15,7 @@ export function useRadio_unstable(props: RadioProps): RadioState {
     accessibilityState,
     disabled = false,
     label = 'Label',
+    ref: rootRef,
     secondaryText = 'Description',
     selected = false,
     showSecondaryText = false,
@@ -37,7 +38,7 @@ export function useRadio_unstable(props: RadioProps): RadioState {
     disabled,
     focusable: rest.focusable ?? !disabled,
   });
-  const root = useSlot(Pressable, pressableProps);
+  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
 
   return {
     indicatorDotStyle: [],

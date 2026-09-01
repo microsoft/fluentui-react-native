@@ -1,10 +1,10 @@
 import type * as React from 'react';
-import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
+import type { StyleProp, View, ViewStyle } from 'react-native';
 
-import type { OwnedRootProps } from '@fluentui-react-native/framework-base';
+import type { OwnedRootProps, PropsWithRefOf } from '@fluentui-react-native/framework-base';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
 
-export type CompoundItemLayoutProps = OwnedRootProps<ViewProps> & {
+export type CompoundItemLayoutProps = OwnedRootProps<PropsWithRefOf<typeof View>> & {
   contentStyle?: StyleProp<ViewStyle>;
   leading?: React.ReactNode;
   leadingStyle?: StyleProp<ViewStyle>;

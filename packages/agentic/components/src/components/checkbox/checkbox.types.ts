@@ -1,9 +1,10 @@
-import type { ColorValue, Pressable, PressableProps, StyleProp, Text, ViewStyle } from 'react-native';
+import type { ColorValue, Pressable, StyleProp, Text, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
   ComponentState,
   OptionalSlot,
   OwnedRootProps,
+  PropsWithRefOf,
   Slot,
   PressableState,
 } from '@fluentui-react-native/framework-base';
@@ -50,7 +51,7 @@ export type CheckboxStateProps = {
  */
 export type CheckboxStatusDriverKeys = 'defaultStatus' | 'onStatusChange';
 
-export type CheckboxRootProps = OwnedRootProps<PressableProps> & {
+export type CheckboxRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>> & {
   children?: never;
 };
 

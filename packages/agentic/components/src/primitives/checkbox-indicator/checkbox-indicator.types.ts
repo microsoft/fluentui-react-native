@@ -1,11 +1,11 @@
-import type { ColorValue, ViewProps } from 'react-native';
+import type { ColorValue, View } from 'react-native';
 
-import type { OwnedRootProps } from '@fluentui-react-native/framework-base';
+import type { OwnedRootProps, PropsWithRefOf } from '@fluentui-react-native/framework-base';
 import type { FontIconSource } from '../icon/icon.types';
 
 export type CheckboxIndicatorStatus = 'unchecked' | 'checked' | 'indeterminate';
 
-export type CheckboxIndicatorProps = OwnedRootProps<ViewProps, 'accessible'> & {
+export type CheckboxIndicatorProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessible'> & {
   checkedIconSource?: FontIconSource;
   iconColor?: ColorValue;
   iconSize?: number;

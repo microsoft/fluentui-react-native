@@ -1,6 +1,13 @@
 import type { Pressable, PressableProps, StyleProp, View, ViewStyle } from 'react-native';
 
-import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
+import type {
+  ComponentProps,
+  ComponentState,
+  OptionalSlot,
+  OwnedRootProps,
+  PropsWithRefOf,
+  Slot,
+} from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 
@@ -36,7 +43,7 @@ export type CardStateProps = {
 
 export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessibilityRole'> & {
   children?: never;
-};
+} & Pick<PropsWithRefOf<typeof View>, 'ref'>;
 
 export type CardProps = CardStateProps & ComponentProps<CardSlots, CardExposedPressableProps>;
 

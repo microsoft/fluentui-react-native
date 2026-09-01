@@ -1,9 +1,9 @@
 import type * as React from 'react';
-import type { TextProps, ViewProps } from 'react-native';
+import type { TextProps, View } from 'react-native';
 
-import type { OwnedRootProps } from '@fluentui-react-native/framework-base';
+import type { OwnedRootProps, PropsWithRefOf } from '@fluentui-react-native/framework-base';
 
-export type LayoutStableTextProps = OwnedRootProps<ViewProps, 'accessible'> & {
+export type LayoutStableTextProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessible'> & {
   /**
    * The hidden text element whose metrics reserve enough space for every visual state.
    */
