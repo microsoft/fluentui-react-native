@@ -3,7 +3,8 @@
 On-device [Storybook](https://storybook.js.org/) test app (Storybook for React Native v10) for
 `@fluentui-react-native/components` and linked standalone native packages. It loads every
 `*.stories.(ts|tsx)` file from the agentic components package plus the standalone Callout
-and FocusZone packages so their native stories run in the Fabric host.
+package. FocusZone stories are agentic primitive stories, while its standalone native package
+remains linked so they run in the Fabric and Paper hosts.
 
 The reusable desktop CLI and configuration live in
 `packages/agentic/storybook-desktop`, with peer-dependent React Native

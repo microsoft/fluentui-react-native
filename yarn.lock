@@ -3025,6 +3025,7 @@ __metadata:
     "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native-community/cli": "npm:^20.0.0"

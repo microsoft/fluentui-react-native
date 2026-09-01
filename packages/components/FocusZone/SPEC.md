@@ -38,4 +38,5 @@ types.
 ## Demonstration
 
 Interactive directional, circular, Tab, disabled, and default-focus scenarios
-are colocated in `src/FocusZone.stories.tsx`.
+live with the agentic primitive stories in
+`packages/agentic/components/src/primitives/focus-zone/focus-zone.stories.tsx`.

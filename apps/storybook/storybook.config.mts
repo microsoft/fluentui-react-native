@@ -38,7 +38,6 @@ export default makeDesktopStorybookConfig({
         },
       },
     ],
-    '@fluentui-react-native/focus-zone',
   ],
   platformOptions: {
     windows: {

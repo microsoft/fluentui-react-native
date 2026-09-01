@@ -15,7 +15,6 @@ sources:
   story_packages:
     - '@fluentui-react-native/components'
     - '@fluentui-react-native/callout'
-    - '@fluentui-react-native/focus-zone'
 
 services:
   supervisor:

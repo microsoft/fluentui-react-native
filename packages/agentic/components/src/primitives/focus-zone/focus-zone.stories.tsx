@@ -1,98 +1,109 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
+import { FocusZone } from '@fluentui-react-native/focus-zone';
+import type { FocusZoneDirection, FocusZoneProps, FocusZoneTabNavigation } from '@fluentui-react-native/focus-zone';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
-import { FocusZone } from './FocusZone';
-import type { FocusZoneDirection, FocusZoneProps, FocusZoneTabNavigation } from './FocusZone.types';
+import { Button } from '../../components/button/button';
 
+const defaultTabbableNativeID = 'focus-zone-default-item';
 const directions: readonly FocusZoneDirection[] = ['bidirectional', 'horizontal', 'vertical', 'none'];
 const tabNavigationModes: readonly FocusZoneTabNavigation[] = ['None', 'NavigateWrap', 'NavigateStopAtEnds', 'Normal'];
 
+const styles = StyleSheet.create({
+  focusButton: {
+    marginTop: 16,
+  },
+  focusZone: {
+    marginVertical: 12,
+  },
+  grid: {
+    alignItems: 'center',
+  },
+  gridRow: {
+    flexDirection: 'row',
+  },
+  item: {
+    height: 64,
+    margin: 4,
+    width: 104,
+  },
+  outsideButton: {
+    marginVertical: 4,
+  },
+  status: {
+    marginTop: 12,
+  },
+  story: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 420,
+    padding: 24,
+    width: 520,
+  },
+});
+
 type FocusZoneExampleProps = FocusZoneProps & {
-  defaultToCenter?: boolean;
   columns?: number;
+  defaultToCenter?: boolean;
   itemCount?: number;
 };
 
 const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9, ...props }: FocusZoneExampleProps) => {
-  const beforeRef = React.useRef<View>(null);
-  const afterRef = React.useRef<View>(null);
   const focusZoneRef = React.useRef<View>(null);
-  const centerRef = React.useRef<View>(null);
-  const itemRefs = React.useRef<(View | null)[]>([]);
   const [focusedItem, setFocusedItem] = React.useState('Outside before');
   const items = Array.from({ length: itemCount }, (_, index) => index + 1);
   const centerIndex = Math.floor(itemCount / 2);
+  const rows = Array.from({ length: Math.ceil(itemCount / columns) }, (_, rowIndex) =>
+    items.slice(rowIndex * columns, (rowIndex + 1) * columns),
+  );
 
   return (
-    <View style={styles.story}>
-      <Pressable
-        accessibilityRole="button"
-        focusable
+    <View style={styles.story} testID="focus-zone-story">
+      <Button
+        content="Outside before"
         onFocus={() => setFocusedItem('Outside before')}
-        onPress={() => beforeRef.current?.focus()}
-        ref={beforeRef}
-        style={({ pressed }) => [styles.outsideButton, pressed && styles.pressed]}
+        style={styles.outsideButton}
         testID="focus-zone-before"
-      >
-        <Text>Outside before</Text>
-      </Pressable>
+      />
       <FocusZone
         {...props}
         componentRef={focusZoneRef}
-        defaultTabbableElement={defaultToCenter ? centerRef : undefined}
+        defaultTabbableElement={defaultToCenter ? defaultTabbableNativeID : undefined}
         style={styles.focusZone}
         testID="focus-zone-root"
       >
         <View style={styles.grid}>
-          {items.map((item, index) => (
-            <Pressable
-              accessibilityLabel={`Item ${item}`}
-              accessibilityRole="button"
-              focusable
-              key={item}
-              onFocus={() => setFocusedItem(`Item ${item}`)}
-              onPress={() => itemRefs.current[index]?.focus()}
-              ref={(view) => {
-                itemRefs.current[index] = view;
-                if (index === centerIndex) {
-                  centerRef.current = view;
-                }
-              }}
-              style={({ pressed }) => [
-                styles.item,
-                { flexBasis: `${100 / columns - 3}%` },
-                focusedItem === `Item ${item}` && styles.focused,
-                pressed && styles.pressed,
-              ]}
-              testID={`focus-zone-item-${item}`}
-            >
-              <Text style={styles.itemText}>{item}</Text>
-            </Pressable>
+          {rows.map((row, rowIndex) => (
+            <View key={rowIndex} style={styles.gridRow}>
+              {row.map((item) => {
+                const index = item - 1;
+                return (
+                  <Button
+                    accessibilityLabel={`Item ${item}`}
+                    content={String(item)}
+                    key={item}
+                    nativeID={index === centerIndex ? defaultTabbableNativeID : undefined}
+                    onFocus={() => setFocusedItem(`Item ${item}`)}
+                    style={styles.item}
+                    testID={`focus-zone-item-${item}`}
+                  />
+                );
+              })}
+            </View>
           ))}
         </View>
       </FocusZone>
-      <Pressable
-        accessibilityRole="button"
-        focusable
+      <Button
+        content="Outside after"
         onFocus={() => setFocusedItem('Outside after')}
-        onPress={() => afterRef.current?.focus()}
-        ref={afterRef}
-        style={({ pressed }) => [styles.outsideButton, pressed && styles.pressed]}
+        style={styles.outsideButton}
         testID="focus-zone-after"
-      >
-        <Text>Outside after</Text>
-      </Pressable>
-      <Pressable
-        accessibilityRole="button"
-        onPress={() => focusZoneRef.current?.focus()}
-        style={({ pressed }) => [styles.focusButton, pressed && styles.pressed]}
-      >
-        <Text style={styles.focusButtonText}>Focus the zone</Text>
-      </Pressable>
+      />
+      <Button content="Focus the zone" onPress={() => focusZoneRef.current?.focus()} style={styles.focusButton} />
       <Text accessibilityLiveRegion="polite" style={styles.status} testID="focus-zone-status">
         Focused: {focusedItem}
       </Text>
@@ -101,7 +112,7 @@ const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9,
 };
 
 const meta: Meta<typeof FocusZone> = {
-  title: 'Primitives/FocusZone',
+  title: 'Native/FocusZone',
   component: FocusZone,
   args: {
     disabled: false,
@@ -160,7 +171,7 @@ export const Default: Story = {
     } satisfies DesktopStoryTests,
     docs: {
       description: {
-        story: 'Focus an item, then use the arrow keys to move through the two-dimensional grid.',
+        story: 'Focus an item, then use the arrow keys to move through the grid and Tab to leave the zone.',
       },
     },
   },
@@ -252,66 +263,3 @@ export const Disabled: Story = {
     },
   },
 };
-
-const styles = StyleSheet.create({
-  focusButton: {
-    backgroundColor: '#0f6cbd',
-    borderRadius: 4,
-    marginTop: 16,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-  },
-  focusButtonText: {
-    color: '#ffffff',
-    fontWeight: '600',
-  },
-  focused: {
-    borderColor: '#0f6cbd',
-    borderWidth: 3,
-  },
-  focusZone: {
-    marginVertical: 12,
-    width: 360,
-  },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  item: {
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    borderColor: '#d1d1d1',
-    borderRadius: 4,
-    borderWidth: 1,
-    justifyContent: 'center',
-    minHeight: 64,
-  },
-  itemText: {
-    color: '#242424',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  outsideButton: {
-    backgroundColor: '#ffffff',
-    borderColor: '#d1d1d1',
-    borderRadius: 4,
-    borderWidth: 1,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  pressed: {
-    opacity: 0.7,
-  },
-  status: {
-    color: '#616161',
-    marginTop: 12,
-  },
-  story: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 420,
-    padding: 24,
-    width: 520,
-  },
-});
