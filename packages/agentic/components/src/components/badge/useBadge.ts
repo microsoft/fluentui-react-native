@@ -1,10 +1,11 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
 import { semanticIconSources } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
+import { Text } from '../text/text';
 import type { BadgeProps, BadgeState } from './badge.types';
 
 const defaultBadgeIcon = {

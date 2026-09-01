@@ -19,9 +19,13 @@ invariants; detailed authoring recipes live in the
 
 ## Package invariants
 
-- For a higher-order component contract, start Agency with the
+- For a source-backed higher-order component contract, start Agency with the
   `flex-authoring` profile, invoke `flex-components:<name>`, and follow the
   [Flex source adaptation reference](../../../.github/skills/agentic-component-authoring/references/spec-source-adaptation.md).
+- A theme-aware foundational component that has no Flex catalog entry must use
+  the validator-backed `local-foundation` source kind. Cite its public platform
+  contract and repository evidence; never invent a `flex-components:<name>`
+  skill or bypass the component contract gate.
 - Follow [SPEC-SOURCE.md](./SPEC-SOURCE.md) for provenance fields, contract
   lifecycle, review state, and drift commands.
 - Read the component `SPEC.md`, `spec/source.json`, and all referenced React

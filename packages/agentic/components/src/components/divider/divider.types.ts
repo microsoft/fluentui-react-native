@@ -1,4 +1,4 @@
-import type { StyleProp, ViewStyle, Text, View } from 'react-native';
+import type { StyleProp, ViewStyle, View } from 'react-native';
 
 import type {
   ComponentProps,
@@ -11,6 +11,7 @@ import type {
 import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
+import type { Text } from '../text/text';
 
 export type DividerLayout = 'center' | 'start' | 'end';
 

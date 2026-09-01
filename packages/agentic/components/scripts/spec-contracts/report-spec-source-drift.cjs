@@ -137,11 +137,20 @@ function sourceIdentityMatches(existingFiles, sourceFiles) {
   return JSON.stringify(normalize(existingFiles)) === JSON.stringify(normalize(sourceFiles));
 }
 
+function isLocalFoundationSource(source) {
+  return source.sourceKind === 'local-foundation';
+}
+
 async function updateComponentSources(lock, marketplaceTree, originTree, token) {
   const targets = component ? [component] : contractDirectories();
   const updates = new Map();
   for (const target of targets) {
     invariant(contractDirectories().includes(target), `${target} must have a local SPEC.md before source metadata is generated.`);
+    const existingSourcePath = sourcePathFor(target);
+    const existing = fs.existsSync(existingSourcePath) ? readJson(existingSourcePath) : {};
+    if (isLocalFoundationSource(existing)) {
+      continue;
+    }
     const marketplacePrefix = `catalogs/flex/plugins/components/skills/${target}/`;
     const originPrefix = `plugins/components/skills/${target}/`;
     const marketplaceEntries = componentSourceEntries(marketplaceTree, marketplacePrefix);
@@ -172,8 +181,6 @@ async function updateComponentSources(lock, marketplaceTree, originTree, token) 
       });
     }
 
-    const sourcePath = sourcePathFor(target);
-    const existing = fs.existsSync(sourcePath) ? readJson(sourcePath) : {};
     const availableSurfaces = [
       ...new Set(
         sourceFiles.map((file) => {
@@ -263,6 +270,9 @@ async function verifyComponentSourceIntegrity(lock, marketplaceTree, originTree,
 
   for (const target of contractDirectories()) {
     const source = proposedSources.get(target) || readJson(sourcePathFor(target));
+    if (isLocalFoundationSource(source)) {
+      continue;
+    }
     invariant(source.sourceLock === lock.id, `${target} does not reference the active source lock.`);
     invariant(source.sourceLockFingerprint === lock.fingerprint, `${target} does not reference the active source-lock fingerprint.`);
     const marketplacePrefix = `catalogs/flex/plugins/components/skills/${target}/`;
@@ -326,6 +336,17 @@ function sourceDrift(source, tree, channel) {
 function localComponentReport(marketplaceTree, originTree) {
   return contractDirectories().map((target) => {
     const source = readJson(sourcePathFor(target));
+    if (isLocalFoundationSource(source)) {
+      return {
+        component: target,
+        lifecycle: source.lifecycle,
+        conformance: source.conformance,
+        releaseDifferences: [],
+        marketplaceDrift: null,
+        originDrift: null,
+        candidateStatus: 'not-applicable',
+      };
+    }
     const marketplaceDrift = marketplaceTree ? sourceDrift(source, marketplaceTree, 'marketplace') : null;
     const originDrift = originTree ? sourceDrift(source, originTree, 'origin') : null;
     const hasCandidateDrift =
@@ -454,6 +475,17 @@ function offlineRefresh(lock) {
   const existingComponents = new Map(existing.components.map((entry) => [entry.component, entry]));
   const components = contractDirectories().map((target) => {
     const source = readJson(sourcePathFor(target));
+    if (isLocalFoundationSource(source)) {
+      return {
+        component: target,
+        lifecycle: source.lifecycle,
+        conformance: source.conformance,
+        releaseDifferences: [],
+        marketplaceDrift: null,
+        originDrift: null,
+        candidateStatus: 'not-applicable',
+      };
+    }
     const previous = existingComponents.get(target);
     return {
       component: target,
@@ -475,6 +507,12 @@ function offlineRefresh(lock) {
 async function main() {
   const lock = loadLock();
   if (component) {
+    const sourcePath = sourcePathFor(component);
+    const source = fs.existsSync(sourcePath) ? readJson(sourcePath) : {};
+    invariant(
+      !isLocalFoundationSource(source),
+      `${component} uses local-foundation references and cannot update from the Flex component catalog.`,
+    );
     invariant(lock.catalog.entries.includes(component), `${component} is not in the locked Flex component catalog.`);
   }
   const report = offline ? (write ? offlineRefresh(lock) : offlineReport(lock)) : await liveReport(lock);

@@ -142,7 +142,8 @@
       "switch",
       "tab",
       "tablist",
-      "tag"
+      "tag",
+      "text"
     ],
     "adaptedDrafts": [],
     "implemented": [
@@ -164,7 +165,8 @@
       "switch",
       "tab",
       "tablist",
-      "tag"
+      "tag",
+      "text"
     ],
     "implementationGap": [
       "avatar-group",
@@ -761,6 +763,15 @@
         "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
+    },
+    {
+      "component": "text",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": null,
+      "originDrift": null,
+      "candidateStatus": "not-applicable"
     }
   ]
 }

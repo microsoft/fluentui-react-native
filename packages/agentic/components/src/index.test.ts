@@ -23,6 +23,7 @@ describe('component exports', () => {
         'Tab',
         'TabList',
         'Tag',
+        'Text',
         'renderAccordion_unstable',
         'renderAvatar_unstable',
         'renderBadge_unstable',
@@ -42,6 +43,7 @@ describe('component exports', () => {
         'renderTab_unstable',
         'renderTabList_unstable',
         'renderTag_unstable',
+        'renderText_unstable',
         'useAccordionStyles_unstable',
         'useAccordion_unstable',
         'useAvatarStyles_unstable',
@@ -80,6 +82,8 @@ describe('component exports', () => {
         'useTab_unstable',
         'useTagStyles_unstable',
         'useTag_unstable',
+        'useTextStyles_unstable',
+        'useText_unstable',
       ].sort(),
     );
   });

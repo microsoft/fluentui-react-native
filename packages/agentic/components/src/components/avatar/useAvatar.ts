@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, View } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
 import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
 import { semanticIconSources } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
+import { Text } from '../text/text';
 import type { AvatarProps, AvatarState } from './avatar.types';
 
 const defaultAvatarIcon = {

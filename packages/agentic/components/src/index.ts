@@ -167,3 +167,9 @@ export type { TagAppearance, TagLayout, TagProps, TagShape, TagSize, TagSlots, T
 export { renderTag_unstable } from './components/tag/renderTag';
 export { useTagStyles_unstable } from './components/tag/useTagStyles';
 export { useTag_unstable } from './components/tag/useTag';
+
+export { Text } from './components/text/text';
+export { renderText_unstable } from './components/text/renderText';
+export type { TextProps, TextSlots, TextState } from './components/text/text.types';
+export { useText_unstable } from './components/text/useText';
+export { useTextStyles_unstable } from './components/text/useTextStyles';

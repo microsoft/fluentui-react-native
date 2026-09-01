@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
 import {
@@ -12,6 +12,7 @@ import {
 
 import { Icon } from '../../primitives/icon/icon';
 import { semanticIconSources } from '../../common/iconSources';
+import { Text } from '../text/text';
 import type { AccordionProps, AccordionState } from './accordion.types';
 
 const defaultTitle = 'Section title';

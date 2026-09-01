@@ -74,10 +74,114 @@ function validateAgencyProfile(lock) {
   }
 }
 
+function validateDivergences(component, spec, source) {
+  invariant(Array.isArray(source.divergences), `${component} must declare divergences.`);
+  for (const divergence of source.divergences) {
+    validateExactKeys(divergence, ['id', 'status'], [], `${component} divergence`);
+    invariant(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(divergence.id), `${component} has an invalid divergence id.`);
+    invariant(
+      ['accepted', 'deferred', 'aligning', 'not-applicable', 'resolved'].includes(divergence.status),
+      `${component}:${divergence.id} has an invalid divergence status.`,
+    );
+    invariant(spec.includes(`\`${divergence.id}\``), `${component} SPEC.md must describe divergence ${divergence.id}.`);
+  }
+}
+
+function validateRequirements(component, spec, source, componentRoot) {
+  invariant(Array.isArray(source.requirements) && source.requirements.length > 0, `${component} must declare contract requirements.`);
+  const requirementIds = new Set();
+  for (const requirement of source.requirements) {
+    validateExactKeys(requirement, ['id'], ['evidence', 'plannedEvidence'], `${component} requirement`);
+    invariant(/^[A-Z][A-Z0-9]{1,9}-\d{3}$/.test(requirement.id), `${component} has an invalid requirement id.`);
+    invariant(!requirementIds.has(requirement.id), `${component} repeats requirement ${requirement.id}.`);
+    requirementIds.add(requirement.id);
+    invariant(spec.includes(requirement.id), `${component} SPEC.md must describe requirement ${requirement.id}.`);
+    const evidence = requirement.evidence || [];
+    const plannedEvidence = requirement.plannedEvidence || [];
+    invariant(Array.isArray(evidence), `${requirement.id} evidence must be an array.`);
+    invariant(Array.isArray(plannedEvidence), `${requirement.id} plannedEvidence must be an array.`);
+    invariant(evidence.length + plannedEvidence.length > 0, `${requirement.id} must name actual or planned evidence.`);
+    if (source.lifecycle === 'implemented') {
+      invariant(evidence.length > 0, `${requirement.id} must name realized evidence for an implemented component.`);
+    }
+    for (const evidencePathValue of evidence) {
+      const evidencePath = typeof evidencePathValue === 'string' ? path.resolve(componentRoot, evidencePathValue) : '';
+      invariant(
+        typeof evidencePathValue === 'string' &&
+          !path.isAbsolute(evidencePathValue) &&
+          evidencePath.startsWith(`${componentRoot}${path.sep}`) &&
+          fs.existsSync(evidencePath),
+        `${requirement.id} references missing evidence ${evidencePathValue}.`,
+      );
+    }
+    for (const plannedPathValue of plannedEvidence) {
+      const plannedPath = typeof plannedPathValue === 'string' ? path.resolve(componentRoot, plannedPathValue) : '';
+      invariant(
+        typeof plannedPathValue === 'string' && !path.isAbsolute(plannedPathValue) && plannedPath.startsWith(`${componentRoot}${path.sep}`),
+        `${requirement.id} has invalid planned evidence ${plannedPathValue}.`,
+      );
+    }
+  }
+}
+
+function validateLocalFoundationSource(component, spec, source, componentRoot, lock) {
+  validateExactKeys(
+    source,
+    ['schemaVersion', 'component', 'sourceKind', 'lifecycle', 'conformance', 'reviewedAt', 'references', 'divergences', 'requirements'],
+    [],
+    `${component}/spec/source.json`,
+  );
+  invariant(source.schemaVersion === 1, `${component}/spec/source.json must use schemaVersion 1.`);
+  invariant(source.component === component, `${component}/spec/source.json has the wrong component.`);
+  invariant(source.sourceKind === 'local-foundation', `${component}/spec/source.json has an invalid local source kind.`);
+  invariant(!lock.catalog.entries.includes(component), `${component} has a Flex catalog entry and cannot use a local-foundation source.`);
+  invariant(['contract-draft', 'contract-reviewed', 'implemented'].includes(source.lifecycle), `${component} has an invalid lifecycle.`);
+  invariant(['review-required', 'reviewed'].includes(source.conformance), `${component} has an invalid conformance value.`);
+  if (source.lifecycle === 'contract-draft') {
+    invariant(source.conformance === 'review-required', `${component} draft contracts must require review.`);
+  }
+  if (source.conformance === 'review-required') {
+    invariant(source.reviewedAt === null, `${component} cannot have reviewedAt while review is required.`);
+  } else {
+    invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.reviewedAt), `${component} reviewedAt must be YYYY-MM-DD.`);
+  }
+
+  invariant(Array.isArray(source.references) && source.references.length > 0, `${component} must record local-foundation references.`);
+  invariant(
+    JSON.stringify(source.references.map((reference) => reference.id)) ===
+      JSON.stringify(source.references.map((reference) => reference.id).sort()),
+    `${component} local-foundation references must be sorted by id.`,
+  );
+  const referenceIds = new Set();
+  for (const reference of source.references) {
+    validateExactKeys(reference, ['id', 'type', 'location'], [], `${component} local-foundation reference`);
+    invariant(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(reference.id), `${component} has an invalid reference id.`);
+    invariant(!referenceIds.has(reference.id), `${component} repeats reference ${reference.id}.`);
+    referenceIds.add(reference.id);
+    invariant(['external', 'repository'].includes(reference.type), `${component}:${reference.id} has an invalid reference type.`);
+    if (reference.type === 'external') {
+      invariant(reference.location.startsWith('https://'), `${component}:${reference.id} must use an HTTPS reference.`);
+    } else {
+      const referencePath = path.resolve(repositoryRoot, reference.location);
+      invariant(
+        !path.isAbsolute(reference.location) && referencePath.startsWith(`${repositoryRoot}${path.sep}`) && fs.existsSync(referencePath),
+        `${component}:${reference.id} references missing repository content ${reference.location}.`,
+      );
+    }
+  }
+
+  validateDivergences(component, spec, source);
+  validateRequirements(component, spec, source, componentRoot);
+  return source;
+}
+
 function validateSource(component, spec, lock) {
   const componentRoot = path.join(componentsRoot, component);
   const sourcePath = sourcePathFor(component);
   const source = readJson(sourcePath);
+  if (source.sourceKind === 'local-foundation') {
+    return validateLocalFoundationSource(component, spec, source, componentRoot, lock);
+  }
 
   validateExactKeys(
     source,
@@ -220,51 +324,8 @@ function validateSource(component, spec, lock) {
     );
   }
 
-  invariant(Array.isArray(source.divergences), `${component} must declare divergences.`);
-  for (const divergence of source.divergences) {
-    validateExactKeys(divergence, ['id', 'status'], [], `${component} divergence`);
-    invariant(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(divergence.id), `${component} has an invalid divergence id.`);
-    invariant(
-      ['accepted', 'deferred', 'aligning', 'not-applicable', 'resolved'].includes(divergence.status),
-      `${component}:${divergence.id} has an invalid divergence status.`,
-    );
-    invariant(spec.includes(`\`${divergence.id}\``), `${component} SPEC.md must describe divergence ${divergence.id}.`);
-  }
-
-  invariant(Array.isArray(source.requirements) && source.requirements.length > 0, `${component} must declare contract requirements.`);
-  const requirementIds = new Set();
-  for (const requirement of source.requirements) {
-    validateExactKeys(requirement, ['id'], ['evidence', 'plannedEvidence'], `${component} requirement`);
-    invariant(/^[A-Z][A-Z0-9]{1,9}-\d{3}$/.test(requirement.id), `${component} has an invalid requirement id.`);
-    invariant(!requirementIds.has(requirement.id), `${component} repeats requirement ${requirement.id}.`);
-    requirementIds.add(requirement.id);
-    invariant(spec.includes(requirement.id), `${component} SPEC.md must describe requirement ${requirement.id}.`);
-    const evidence = requirement.evidence || [];
-    const plannedEvidence = requirement.plannedEvidence || [];
-    invariant(Array.isArray(evidence), `${requirement.id} evidence must be an array.`);
-    invariant(Array.isArray(plannedEvidence), `${requirement.id} plannedEvidence must be an array.`);
-    invariant(evidence.length + plannedEvidence.length > 0, `${requirement.id} must name actual or planned evidence.`);
-    if (source.lifecycle === 'implemented') {
-      invariant(evidence.length > 0, `${requirement.id} must name realized evidence for an implemented component.`);
-    }
-    for (const evidencePathValue of evidence) {
-      const evidencePath = typeof evidencePathValue === 'string' ? path.resolve(componentRoot, evidencePathValue) : '';
-      invariant(
-        typeof evidencePathValue === 'string' &&
-          !path.isAbsolute(evidencePathValue) &&
-          evidencePath.startsWith(`${componentRoot}${path.sep}`) &&
-          fs.existsSync(evidencePath),
-        `${requirement.id} references missing evidence ${evidencePathValue}.`,
-      );
-    }
-    for (const plannedPathValue of plannedEvidence) {
-      const plannedPath = typeof plannedPathValue === 'string' ? path.resolve(componentRoot, plannedPathValue) : '';
-      invariant(
-        typeof plannedPathValue === 'string' && !path.isAbsolute(plannedPathValue) && plannedPath.startsWith(`${componentRoot}${path.sep}`),
-        `${requirement.id} has invalid planned evidence ${plannedPathValue}.`,
-      );
-    }
-  }
+  validateDivergences(component, spec, source);
+  validateRequirements(component, spec, source, componentRoot);
   return source;
 }
 
@@ -383,10 +444,16 @@ function validateReport(lock, components) {
     invariant(entry.lifecycle === source.lifecycle, `${entry.component} has stale lifecycle reporting.`);
     invariant(entry.conformance === source.conformance, `${entry.component} has stale conformance reporting.`);
     invariant(
-      JSON.stringify(entry.releaseDifferences) === JSON.stringify(source.releaseDifferences),
+      JSON.stringify(entry.releaseDifferences) === JSON.stringify(source.releaseDifferences || []),
       `${entry.component} has stale release-content difference reporting.`,
     );
-    if (entry.candidateStatus === 'unchecked') {
+    if (source.sourceKind === 'local-foundation') {
+      invariant(entry.candidateStatus === 'not-applicable', `${entry.component} must omit Flex candidate drift.`);
+      invariant(
+        entry.marketplaceDrift === null && entry.originDrift === null,
+        `${entry.component} local-foundation source cannot report Flex drift.`,
+      );
+    } else if (entry.candidateStatus === 'unchecked') {
       invariant(
         entry.marketplaceDrift === null && entry.originDrift === null,
         `${entry.component} cannot claim unchecked source drift details.`,

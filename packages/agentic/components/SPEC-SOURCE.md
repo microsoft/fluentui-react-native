@@ -33,6 +33,20 @@ For one component:
    only after ratifying the local contract against realized types, tests,
    stories, and platform evidence.
 
+## Local foundational components
+
+A theme-aware foundational component may have no entry in the Flex component
+catalog. Keep it under `src/components`, retain the complete local contract and
+evidence structure, and set `sourceKind` in `spec/source.json` to
+`local-foundation`. Its sorted references identify the public platform contract
+and repository evidence consulted during review.
+
+Local-foundation contracts do not claim a `flex-components:<name>` skill,
+source-lock identity, release differences, or candidate source drift. The
+contract checker still enforces lifecycle, review date, divergences,
+requirements, and realized evidence. Live and offline source reports include
+the component with candidate status `not-applicable`.
+
 There is intentionally no operation that copies a Flex skill into `specs/` and
 no promotion step that moves a web-authored draft into production. The pinned
 plugin is the session input; the first committed document is the independently

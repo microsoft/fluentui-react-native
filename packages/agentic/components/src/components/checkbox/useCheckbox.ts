@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Pressable, Text } from 'react-native';
+import { Pressable } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useControllableValue, useFocusVisible, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { Text } from '../text/text';
 import type { CheckboxProps, CheckboxState, CheckboxStatus } from './checkbox.types';
 
 type NativeFocusPressableProps = React.ComponentProps<typeof Pressable> & {

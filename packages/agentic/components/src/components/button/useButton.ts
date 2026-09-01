@@ -1,9 +1,10 @@
 import type { ButtonProps, ButtonState } from './button.types';
 import { useAccessibilityLabelWarning, usePressableState, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
-import { Pressable, Text } from 'react-native';
+import { Pressable } from 'react-native';
 import type { PressableProps } from 'react-native';
 import { Icon } from '../../primitives/icon/icon';
+import { Text } from '../text/text';
 
 type NativeFocusPressableProps = PressableProps & {
   enableFocusRing: boolean;

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
-import type { Image, Pressable, View } from 'react-native';
-import { Text } from 'react-native';
+import type { Image, Pressable, Text as NativeText, View } from 'react-native';
+import { Text as ReactNativeText } from 'react-native';
 
 import {
   Accordion,
@@ -23,6 +23,7 @@ import {
   Tab,
   TabList,
   Tag,
+  Text,
 } from './index';
 import { CheckboxIndicator, CompoundItemLayout, FocusVisual, LayoutStableText } from './primitives/index';
 import type { IconProps } from './primitives/index';
@@ -30,6 +31,7 @@ import type { IconProps } from './primitives/index';
 const pressableRef = React.createRef<React.ElementRef<typeof Pressable>>();
 const viewRef = React.createRef<React.ElementRef<typeof View>>();
 const imageRef = React.createRef<React.ElementRef<typeof Image>>();
+const textRef = React.createRef<React.ElementRef<typeof NativeText>>();
 
 function ComponentsWithNativeRootRefs() {
   return (
@@ -55,6 +57,7 @@ function ComponentsWithNativeRootRefs() {
         <Tab controls="panel" />
       </TabList>
       <Tag ref={pressableRef} />
+      <Text ref={textRef} />
     </>
   );
 }
@@ -65,7 +68,7 @@ function PrimitivesWithStableNativeRootRefs() {
       <CheckboxIndicator ref={viewRef} />
       <CompoundItemLayout primary={null} ref={viewRef} />
       <FocusVisual ref={viewRef} />
-      <LayoutStableText ref={viewRef} reserve={<Text />} visible={<Text />} />
+      <LayoutStableText ref={viewRef} reserve={<ReactNativeText />} visible={<ReactNativeText />} />
     </>
   );
 }

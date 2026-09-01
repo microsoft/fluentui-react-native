@@ -1,10 +1,10 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { Text } from 'react-native';
 
 import { CompoundItemLayout } from '../../primitives/compound-item-layout/compound-item-layout';
 import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import { LayoutStableText } from '../../primitives/layout-stable-text/layout-stable-text';
 import { Skeleton } from '../skeleton/skeleton';
+import { Text } from '../text/text';
 import { getMenuItemContentLayoutStyle, getMenuItemLeadingStyle, getMenuItemTrailingStyle, menuItemStyles } from './menu-item.styles';
 import type { MenuItemState } from './menu-item.types';
 
