@@ -64,6 +64,45 @@ describe('color parsing and conversion', () => {
     });
   });
 
+  it.each([
+    ['RGB(255, 128, 0)', { r: 1, g: 128 / 255, b: 0, a: 1 }],
+    ['rgba(255, 128, 0, .5)', { r: 1, g: 128 / 255, b: 0, a: 0.5 }],
+    ['rgba(255 128 0 / 50%)', { r: 1, g: 128 / 255, b: 0, a: 0.5 }],
+    ['rgb(255, 128, 0 / 50%)', { r: 1, g: 128 / 255, b: 0, a: 0.5 }],
+    ['rgb(1. 2.5 .5)', { r: 1 / 255, g: 2.5 / 255, b: 0.5 / 255, a: 1 }],
+  ])('parses %s without regular expressions', (value, color) => {
+    expect(parseColorValue(value)).toEqual({ status: 'resolved', color });
+  });
+
+  it.each(['rgba(0 0 0)', 'rgb(0 0 0 / 50% / 25%)', 'rgb(0, 0 0)', 'rgb(256 0 0)', 'rgb(0 0 0 / 101%)'])(
+    'rejects malformed literal %s',
+    (value) => {
+      expect(parseColorValue(value)).toMatchObject({
+        status: 'unresolvable',
+        diagnostic: { reason: 'unsupported-color-format' },
+      });
+    },
+  );
+
+  it('rejects long invalid input without a backtracking expression', () => {
+    const value = `rgb(${' '.repeat(100_000)}x)`;
+
+    expect(parseColorValue(value)).toMatchObject({
+      status: 'unresolvable',
+      diagnostic: { reason: 'unsupported-color-format' },
+    });
+  });
+
+  it('preserves native numeric conversion at byte-rounding boundaries', () => {
+    const result = parseColorValue('rgba(0, 0, 0, 0.00588235294117647)');
+
+    expect(result.status).toBe('resolved');
+    if (result.status === 'resolved') {
+      expect(result.color.a).toBe(0.00588235294117647);
+      expect(rgbaToHex(result.color)).toBe('#00000001');
+    }
+  });
+
   it('formats RGBA and round-trips RGB through OKLCH', () => {
     expect(rgbaToHex({ r: 1, g: 0.5, b: 0, a: 0.5 })).toBe('#ff800080');
 

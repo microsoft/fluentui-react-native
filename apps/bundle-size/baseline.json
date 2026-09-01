@@ -70,8 +70,8 @@
     {
       "platform": "macos",
       "scenario": "design-color-lib",
-      "rawBytes": 826875,
-      "gzipBytes": 239247,
+      "rawBytes": 827767,
+      "gzipBytes": 239469,
       "moduleCount": 503,
       "metroModuleCount": 501,
       "metafileInputCount": 503,
@@ -79,7 +79,7 @@
         "@fluentui-react-native/design": 6
       },
       "workspaceBytes": {
-        "@fluentui-react-native/design": 6213
+        "@fluentui-react-native/design": 7097
       }
     },
     {
@@ -185,8 +185,8 @@
     {
       "platform": "windows",
       "scenario": "design-color-lib",
-      "rawBytes": 836010,
-      "gzipBytes": 240687,
+      "rawBytes": 836902,
+      "gzipBytes": 240953,
       "moduleCount": 508,
       "metroModuleCount": 506,
       "metafileInputCount": 508,
@@ -194,7 +194,7 @@
         "@fluentui-react-native/design": 6
       },
       "workspaceBytes": {
-        "@fluentui-react-native/design": 6213
+        "@fluentui-react-native/design": 7097
       }
     },
     {

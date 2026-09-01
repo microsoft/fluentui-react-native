@@ -4,8 +4,11 @@ import { channelToByte } from './math';
 import type { ParsedColorValue, RgbaColor } from './types';
 
 const HEX_COLOR = /^#([\da-f]{3,4}|[\da-f]{6}|[\da-f]{8})$/i;
-const RGB_COLOR = /^(rgba?)\((.*)\)$/i;
-const NUMERIC_CHANNEL = /^(?:\d+(?:\.\d*)?|\.\d+)%?$/;
+
+interface ParsedChannel {
+  readonly value: number;
+  readonly nextIndex: number;
+}
 
 function parseHexColor(value: string): RgbaColor | undefined {
   const match = HEX_COLOR.exec(value);
@@ -26,69 +29,178 @@ function parseHexColor(value: string): RgbaColor | undefined {
   };
 }
 
-function parseRgbChannel(value: string): number | undefined {
-  if (!NUMERIC_CHANNEL.test(value)) {
-    return undefined;
-  }
-  const percentage = value.endsWith('%');
-  const parsed = Number.parseFloat(value);
-  const maximum = percentage ? 100 : 255;
-  if (!Number.isFinite(parsed) || parsed < 0 || parsed > maximum) {
-    return undefined;
-  }
-  return parsed / maximum;
+function isWhitespace(characterCode: number): boolean {
+  return characterCode === 0x20 || (characterCode >= 0x09 && characterCode <= 0x0d);
 }
 
-function parseAlphaChannel(value: string): number | undefined {
-  if (!NUMERIC_CHANNEL.test(value)) {
-    return undefined;
+function skipWhitespace(value: string, index: number, endIndex: number): number {
+  while (index < endIndex && isWhitespace(value.charCodeAt(index))) {
+    index += 1;
   }
-  const percentage = value.endsWith('%');
-  const parsed = Number.parseFloat(value);
-  const maximum = percentage ? 100 : 1;
-  if (!Number.isFinite(parsed) || parsed < 0 || parsed > maximum) {
-    return undefined;
-  }
-  return parsed / maximum;
+  return index;
 }
 
-function parseRgbColor(value: string): RgbaColor | undefined {
-  const match = RGB_COLOR.exec(value);
-  if (!match) {
-    return undefined;
-  }
+function parseNumericChannel(
+  value: string,
+  index: number,
+  endIndex: number,
+  numericMaximum: number,
+  percentageMaximum: number,
+): ParsedChannel | undefined {
+  const startIndex = index;
+  let digits = 0;
 
-  const functionName = match[1].toLowerCase();
-  const slashParts = match[2].trim().split(/\s*\/\s*/);
-  if (slashParts.length > 2) {
-    return undefined;
-  }
-
-  const commaSyntax = slashParts[0].includes(',');
-  const parts = commaSyntax ? slashParts[0].split(/\s*,\s*/) : slashParts[0].trim().split(/\s+/);
-  let alphaPart = slashParts[1];
-  if (commaSyntax && parts.length === 4) {
-    if (alphaPart !== undefined) {
-      return undefined;
+  while (index < endIndex) {
+    const digit = value.charCodeAt(index) - 0x30;
+    if (digit < 0 || digit > 9) {
+      break;
     }
-    alphaPart = parts.pop();
+    digits += 1;
+    index += 1;
   }
-  if (parts.length !== 3 || (functionName === 'rgba' && alphaPart === undefined)) {
+
+  if (index < endIndex && value.charCodeAt(index) === 0x2e) {
+    index += 1;
+    while (index < endIndex) {
+      const digit = value.charCodeAt(index) - 0x30;
+      if (digit < 0 || digit > 9) {
+        break;
+      }
+      digits += 1;
+      index += 1;
+    }
+  }
+
+  if (digits === 0) {
     return undefined;
   }
 
-  const channels = parts.map(parseRgbChannel);
-  const alpha = alphaPart === undefined ? 1 : parseAlphaChannel(alphaPart);
-  if (channels.some((channel) => channel === undefined) || alpha === undefined) {
+  const numericEndIndex = index;
+  const percentage = index < endIndex && value.charCodeAt(index) === 0x25;
+  if (percentage) {
+    index += 1;
+  }
+  const maximum = percentage ? percentageMaximum : numericMaximum;
+  const parsed = Number.parseFloat(value.slice(startIndex, numericEndIndex));
+  if (!Number.isFinite(parsed) || parsed > maximum) {
     return undefined;
   }
 
   return {
-    r: channels[0],
-    g: channels[1],
-    b: channels[2],
-    a: alpha,
+    value: parsed / maximum,
+    nextIndex: index,
   };
+}
+
+function parseRgbChannel(value: string, index: number, endIndex: number): ParsedChannel | undefined {
+  return parseNumericChannel(value, index, endIndex, 255, 100);
+}
+
+function parseAlphaChannel(value: string, index: number, endIndex: number): ParsedChannel | undefined {
+  return parseNumericChannel(value, index, endIndex, 1, 100);
+}
+
+function parseCommaRgbColor(value: string, index: number, endIndex: number, red: number, alphaRequired: boolean): RgbaColor | undefined {
+  index = skipWhitespace(value, index + 1, endIndex);
+  const green = parseRgbChannel(value, index, endIndex);
+  if (!green) {
+    return undefined;
+  }
+
+  index = skipWhitespace(value, green.nextIndex, endIndex);
+  if (value.charCodeAt(index) !== 0x2c) {
+    return undefined;
+  }
+
+  index = skipWhitespace(value, index + 1, endIndex);
+  const blue = parseRgbChannel(value, index, endIndex);
+  if (!blue) {
+    return undefined;
+  }
+
+  index = skipWhitespace(value, blue.nextIndex, endIndex);
+  let alpha = 1;
+  if (index < endIndex && (value.charCodeAt(index) === 0x2c || value.charCodeAt(index) === 0x2f)) {
+    index = skipWhitespace(value, index + 1, endIndex);
+    const parsedAlpha = parseAlphaChannel(value, index, endIndex);
+    if (!parsedAlpha) {
+      return undefined;
+    }
+    alpha = parsedAlpha.value;
+    index = skipWhitespace(value, parsedAlpha.nextIndex, endIndex);
+  } else if (alphaRequired) {
+    return undefined;
+  }
+
+  return index === endIndex ? { r: red, g: green.value, b: blue.value, a: alpha } : undefined;
+}
+
+function parseSpaceRgbColor(value: string, index: number, endIndex: number, red: number, alphaRequired: boolean): RgbaColor | undefined {
+  const green = parseRgbChannel(value, index, endIndex);
+  if (!green) {
+    return undefined;
+  }
+
+  index = skipWhitespace(value, green.nextIndex, endIndex);
+  if (index === green.nextIndex) {
+    return undefined;
+  }
+
+  const blue = parseRgbChannel(value, index, endIndex);
+  if (!blue) {
+    return undefined;
+  }
+
+  index = skipWhitespace(value, blue.nextIndex, endIndex);
+  let alpha = 1;
+  if (index < endIndex && value.charCodeAt(index) === 0x2f) {
+    index = skipWhitespace(value, index + 1, endIndex);
+    const parsedAlpha = parseAlphaChannel(value, index, endIndex);
+    if (!parsedAlpha) {
+      return undefined;
+    }
+    alpha = parsedAlpha.value;
+    index = skipWhitespace(value, parsedAlpha.nextIndex, endIndex);
+  } else if (alphaRequired) {
+    return undefined;
+  }
+
+  return index === endIndex ? { r: red, g: green.value, b: blue.value, a: alpha } : undefined;
+}
+
+function parseRgbColor(value: string): RgbaColor | undefined {
+  if (value.charCodeAt(value.length - 1) !== 0x29) {
+    return undefined;
+  }
+
+  let index: number;
+  let alphaRequired: boolean;
+  if (value.length >= 5 && value.charCodeAt(3) === 0x28 && value.slice(0, 3).toLowerCase() === 'rgb') {
+    index = 4;
+    alphaRequired = false;
+  } else if (value.length >= 6 && value.charCodeAt(4) === 0x28 && value.slice(0, 4).toLowerCase() === 'rgba') {
+    index = 5;
+    alphaRequired = true;
+  } else {
+    return undefined;
+  }
+
+  const endIndex = value.length - 1;
+  index = skipWhitespace(value, index, endIndex);
+  const red = parseRgbChannel(value, index, endIndex);
+  if (!red) {
+    return undefined;
+  }
+
+  const separatorIndex = red.nextIndex;
+  index = skipWhitespace(value, separatorIndex, endIndex);
+  if (value.charCodeAt(index) === 0x2c) {
+    return parseCommaRgbColor(value, index, endIndex, red.value, alphaRequired);
+  }
+  if (index === separatorIndex) {
+    return undefined;
+  }
+  return parseSpaceRgbColor(value, index, endIndex, red.value, alphaRequired);
 }
 
 /**
