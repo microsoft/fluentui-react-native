@@ -1,5 +1,12 @@
-import type { Pressable, PressableProps, StyleProp, TextStyle, View, ViewStyle } from 'react-native';
-import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot } from '@fluentui-react-native/framework-base';
+import type { Pressable, StyleProp, TextStyle, View, ViewStyle } from 'react-native';
+import type {
+  ComponentProps,
+  ComponentState,
+  OptionalSlot,
+  OwnedRootProps,
+  PropsWithRefOf,
+  Slot,
+} from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
@@ -35,7 +42,7 @@ export type MenuItemSlots = {
   multiselectCheckbox: OptionalSlot<typeof CheckboxIndicator>;
 };
 
-export type MenuItemExposedPressableProps = OwnedRootProps<PressableProps>;
+export type MenuItemExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type MenuItemProps = MenuItemStateProps & {
   content?: string | null;

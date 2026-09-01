@@ -1,4 +1,5 @@
-import type { Pressable, PressableProps, StyleProp, Text, ViewStyle } from 'react-native';
+import type * as React from 'react';
+import type { Pressable, StyleProp, Text, ViewStyle } from 'react-native';
 
 import type {
   ComponentProps,
@@ -6,6 +7,7 @@ import type {
   OptionalSlot,
   OwnedRootProps,
   PressableState,
+  PropsWithRefOf,
   Slot,
   SlotProp,
 } from '@fluentui-react-native/framework-base';
@@ -54,7 +56,7 @@ export type TabStateProps = {
 };
 
 export type TabExposedPressableProps = OwnedRootProps<
-  PressableProps & {
+  PropsWithRefOf<typeof Pressable> & {
     accessibilityPosInSet?: number;
     accessibilitySetSize?: number;
     onKeyDown?: (event: TabKeyEvent) => void;
@@ -80,5 +82,6 @@ export type TabState = ComponentState<TabStateSlots> &
   PressableState & {
     focusVisualProps?: FocusVisualProps;
     iconOnly: boolean;
+    tabRef: React.RefObject<React.ElementRef<typeof Pressable> | null>;
     userStyle?: StyleProp<ViewStyle>;
   };

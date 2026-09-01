@@ -1,4 +1,4 @@
-import type { Pressable, PressableProps, StyleProp, Text, ViewStyle } from 'react-native';
+import type { Pressable, StyleProp, Text, ViewStyle } from 'react-native';
 import type {
   Slot,
   OptionalSlot,
@@ -6,6 +6,7 @@ import type {
   ComponentProps,
   ComponentState,
   PressableState,
+  PropsWithRefOf,
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
@@ -78,7 +79,7 @@ export type ButtonStateProps = {
  * Props that are exposed from the underlying Pressable component at the top level. A button controls its
  * own children and resolves styles from tokens, so those props are exposed separately.
  */
-export type ButtonExposedPressableProps = OwnedRootProps<PressableProps>;
+export type ButtonExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 /**
  * Props for the Button component, including state props, slot props, and exposed Pressable props.

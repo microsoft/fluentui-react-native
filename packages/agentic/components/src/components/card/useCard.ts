@@ -1,7 +1,7 @@
 import { Pressable, View, useWindowDimensions } from 'react-native';
-import type { PressableProps, ViewProps } from 'react-native';
+import type { PressableProps } from 'react-native';
 
-import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { type PropsWithRefOf, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import type { CardProps, CardState } from './card.types';
@@ -37,6 +37,7 @@ export function useCard_unstable(props: CardProps): CardState {
     onPressOut,
     padding = 'default',
     pressRetentionOffset,
+    ref: rootRef,
     selected,
     size = 'small',
     style: userStyle,
@@ -83,8 +84,10 @@ export function useCard_unstable(props: CardProps): CardState {
     unstable_pressDelay,
   } as PressableProps);
 
-  const rootProps: ViewProps = isInteractive
-    ? ({ ...rest, accessible: false, accessibilityState: { ...accessibilityState, disabled }, testID } as ViewProps)
+  const rootProps: PropsWithRefOf<typeof View> = isInteractive
+    ? ({ ...rest, accessible: false, accessibilityState: { ...accessibilityState, disabled }, ref: rootRef, testID } as PropsWithRefOf<
+        typeof View
+      >)
     : ({
         ...rest,
         accessibilityLabel,
@@ -96,8 +99,9 @@ export function useCard_unstable(props: CardProps): CardState {
         accessible: accessible ?? false,
         accessibilityRole: (accessible ?? false) ? 'group' : undefined,
         focusable: false,
+        ref: rootRef,
         testID,
-      } as ViewProps);
+      } as PropsWithRefOf<typeof View>);
 
   const root = useSlot(View, rootProps);
   const overlay = useOptionalSlot(Pressable, isInteractive ? overlayProps : null);

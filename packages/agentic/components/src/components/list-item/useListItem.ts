@@ -65,6 +65,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     content: contentProp = 'List item',
     disabled = false,
     icon: iconProp,
+    ref: rootRef,
     secondaryContent: secondaryContentProp,
     secondaryContentPosition = 'right',
     selected = false,
@@ -94,7 +95,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     focusable: rest.focusable ?? !disabled,
   });
 
-  const root = useSlot(Pressable, pressableProps);
+  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
   const content = useSlot(Text, contentProp);
   const contentHidden = useSlot(Text, contentProp);
   const secondaryContent = useOptionalSlot(Text, secondaryContentProp);

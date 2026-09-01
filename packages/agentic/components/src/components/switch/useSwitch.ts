@@ -38,6 +38,7 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     layout = 'horizontal',
     onChange,
     onPress,
+    ref: rootRef,
     thumb: thumbProp,
     style: userStyle,
     track: trackProp,
@@ -137,6 +138,7 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const layoutContainer = useSlot(View, { testID: 'switch-layout-container' });
   const root = useSlot(Pressable, {
     ...pressableProps,
+    ref: rootRef,
     onPress: handlePress,
     onKeyUp: handleKeyUp,
   });

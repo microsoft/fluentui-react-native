@@ -25,6 +25,7 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     disabled = false,
     icon: iconProp,
     iconPosition = 'before',
+    ref: rootRef,
     selected,
     selectedIcon: selectedIconProp,
     shape,
@@ -64,7 +65,7 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     focusable: rest.focusable ?? !disabled,
   };
   const [pressableProps, pressableState] = usePressableState(nativeProps);
-  const root = useSlot(Pressable, pressableProps);
+  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
   const icon = useOptionalSlot(Icon, iconProp);
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
   const content = useOptionalSlot(Text, contentProp);

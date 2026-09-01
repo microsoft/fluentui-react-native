@@ -1,5 +1,13 @@
-import type { StyleProp, Text, View, ViewProps, ViewStyle } from 'react-native';
-import type { ComponentProps, ComponentState, OptionalSlot, OwnedRootProps, Slot, SlotProp } from '@fluentui-react-native/framework-base';
+import type { StyleProp, Text, View, ViewStyle } from 'react-native';
+import type {
+  ComponentProps,
+  ComponentState,
+  OptionalSlot,
+  OwnedRootProps,
+  PropsWithRefOf,
+  Slot,
+  SlotProp,
+} from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
@@ -59,7 +67,7 @@ type BadgeIconOnlyProps = BadgeCommonProps & {
 
 export type BadgeStateProps = BadgeIconAndTextProps | BadgeIconOnlyProps;
 
-export type BadgeExposedViewProps = OwnedRootProps<ViewProps, 'accessibilityRole' | 'focusable'>;
+export type BadgeExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
 
 export type BadgeProps = BadgeStateProps & ComponentProps<BadgeSlots, BadgeExposedViewProps>;
 

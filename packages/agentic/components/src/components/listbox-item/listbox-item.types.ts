@@ -1,4 +1,4 @@
-import type { Pressable, PressableProps, Text, View, ViewStyle } from 'react-native';
+import type { Pressable, Text, View, ViewStyle } from 'react-native';
 import type { StyleProp } from 'react-native';
 
 import type {
@@ -7,6 +7,7 @@ import type {
   OptionalSlot,
   OwnedRootProps,
   PressableState,
+  PropsWithRefOf,
   Slot,
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
@@ -51,7 +52,7 @@ export type ListboxItemStateProps = {
   selected?: boolean;
 };
 
-export type ListboxItemRootProps = OwnedRootProps<PressableProps>;
+export type ListboxItemRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 
 export type ListboxItemProps = ListboxItemStateProps & ComponentProps<ListboxItemSlots, ListboxItemRootProps>;
 

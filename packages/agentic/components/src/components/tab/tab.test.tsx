@@ -1,6 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import type { ViewStyle } from 'react-native';
+import type { Pressable, ViewStyle } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
@@ -9,6 +10,8 @@ import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Tab } from './tab';
 import { TabList } from '../tablist/tablist';
+import { TabListContext } from '../tablist/TabListContext';
+import type { TabListContextValue } from '../tablist/TabListContext';
 
 function renderTab(props: React.ComponentProps<typeof Tab>): Promise<RenderResult> {
   return render(<Tab {...props} />);
@@ -23,6 +26,46 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Tab', () => {
+  it('keeps its internal focus ref when the consumer omits ref', async () => {
+    let registeredRef: React.RefObject<React.ElementRef<typeof Pressable> | null> | undefined;
+    const contextValue: TabListContextValue = {
+      activeValue: 'files',
+      disabled: false,
+      getPosition: () => 1,
+      isTabDisabled: () => false,
+      onTabFocus: jest.fn(),
+      onTabKeyDown: jest.fn(),
+      onTabPress: jest.fn(),
+      orientation: 'horizontal',
+      registerTab: (_value, ref) => {
+        registeredRef = ref;
+        return () => undefined;
+      },
+      selectedValue: 'files',
+      setSize: 1,
+    };
+
+    await render(
+      <TabListContext.Provider value={contextValue}>
+        <Tab controls="files-panel" content="Files" value="files" />
+      </TabListContext.Provider>,
+    );
+
+    expect(registeredRef?.current).not.toBeNull();
+  });
+
+  it('composes its ref prop with the internal TabList focus ref', async () => {
+    const ref = React.createRef<React.ElementRef<typeof Pressable>>();
+
+    await render(
+      <TabList>
+        <Tab controls="files-panel" content="Files" ref={ref} />
+      </TabList>,
+    );
+
+    expect(ref.current).not.toBeNull();
+  });
+
   it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
     const component = await renderTab({ controls: 'files-panel', content: 'Files', onPress, selected: false });

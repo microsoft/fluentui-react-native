@@ -13,7 +13,7 @@ export function renderTab_unstable(state: TabState) {
   const contentElement = Content && ContentHidden ? <LayoutStableText reserve={<ContentHidden />} visible={<Content />} /> : null;
 
   return (
-    <state.root>
+    <state.root ref={state.tabRef}>
       <FocusVisual {...state.focusVisualProps} />
       {ActiveIcon && <ActiveIcon />}
       {contentElement}

@@ -33,6 +33,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     icon: iconProp,
     selectedIcon: selectedIconProp,
     multiselectCheckbox: multiselectCheckboxProp,
+    ref: rootRef,
     style: userStyle,
     ...rest
   } = props;
@@ -68,7 +69,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     onPress: isInteractive ? rest.onPress : undefined,
   });
 
-  const root = useSlot(Pressable, pressableProps);
+  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
   const icon = useOptionalSlot(Icon, iconProp, { defaultProps: defaultRegularIcon, renderByDefault: true });
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp, { defaultProps: defaultSelectedIcon, renderByDefault: selected });
   const avatar = useOptionalSlot(View, avatarProp);

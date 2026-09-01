@@ -1,9 +1,19 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import * as React from 'react';
+import type { View } from 'react-native';
 import { render } from '@testing-library/react-native';
 
 import { CheckboxIndicator } from './checkbox-indicator';
 
 describe('CheckboxIndicator', () => {
+  it('forwards its ref prop to the native root', async () => {
+    const ref = React.createRef<React.ElementRef<typeof View>>();
+
+    await render(<CheckboxIndicator ref={ref} />);
+
+    expect(ref.current).not.toBeNull();
+  });
+
   it('renders checked and indeterminate glyphs as decorative content', async () => {
     const checked = await render(<CheckboxIndicator status="checked" testID="indicator" />);
     const indicator = checked.getByTestId('indicator');

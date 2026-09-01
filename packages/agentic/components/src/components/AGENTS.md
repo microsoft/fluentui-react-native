@@ -38,6 +38,9 @@ audit.
 - Create style factories only at module scope and cache theme-only styles.
 - Declare state precedence explicitly; disabled wins over pressed, which wins over hovered.
 - Apply user styles after component styles.
+- Include the declared native root's `ref` in public props with `PropsWithRefOf<typeof Root>`. React 19.1.4 supplies
+  `ref` as a prop, so pass it through the state hook to the root slot without `forwardRef`. If the component also needs
+  an internal root ref, compose the refs through the slot render path rather than replacing the consumer ref.
 - Render focus feedback through `FocusVisual`; do not add `outline*` props or enable RNW native
   focus visuals because RNW 0.81 can fail-fast when either path creates border visuals after mount.
 - Keep render functions free of hooks, token reads, style creation, and slot mutation.
