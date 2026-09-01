@@ -19,7 +19,7 @@ variables:
   - group: 'FluentUI React Native Secrets'
   - group: InfoSec-SecurityResults
   - group: ogx-oss-release
-  - template: .ado/templates/readonly-variables.yml
+  - template: templates/readonly-variables.yml
     parameters:
       variables:
         tags: production,externalfacing
