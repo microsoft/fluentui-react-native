@@ -123,7 +123,7 @@ extends:
 
               - script: |
                   mkdir -p '$(releaseToolArtifactPath)'
-                  cp node_modules/@microsoft/esrp-npm-release/index.mjs '$(releaseToolArtifactPath)'
+                  cp node_modules/@microsoft/esrp-npm-release/dist/index.mjs '$(releaseToolArtifactPath)'
                 displayName: 'Copy ESRP release tool'
 
       - stage: Publish
