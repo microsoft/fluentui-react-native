@@ -170,7 +170,7 @@ async function runCommand(command: string, args: readonly string[], signal?: Abo
     child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
     child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
     child.once('error', reject);
-    child.once('exit', (code) => {
+    child.once('close', (code) => {
       const output = Buffer.concat(stdout).toString('utf8');
       const errorOutput = Buffer.concat(stderr).toString('utf8');
       if (code !== 0) {

@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+
 import { STORYBOOK_SMOKE_MODE } from '../config/commands';
 import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance';
@@ -10,6 +12,28 @@ import { createDesktopStorybookCommand } from './createDesktopStorybookCommand';
 import { DesktopStorybookCli } from './DesktopStorybookCli';
 
 const storybookRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+const nativeDriverArtifact: NativeDriverArtifact = {
+  architecture: 'x64',
+  artifactId: 'artifact',
+  artifactRoot: 'artifact-root',
+  buildFingerprint: 'build',
+  buildId: 'build-id',
+  compatibilityKey: 'compatibility',
+  configuration: 'release',
+  endpoints: ['windows', 'win32', 'macos'],
+  executablePath: 'driver.exe',
+  features: ['probe'],
+  origin: 'cache',
+  provider: 'windows',
+  schemaVersion: 1,
+  signing: { mode: 'none' },
+  sourceDigest: 'source',
+  wireProtocol: { major: 1, minor: 0 },
+};
+const nativeDriverTestOptions = {
+  buildNativeDriver: async () => nativeDriverArtifact,
+  resolveNativeDriver: async () => nativeDriverArtifact,
+};
 const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'windows' | 'win32') => ({
   endpoint: platform,
   entries: [],
@@ -53,7 +77,7 @@ function makeConfig(platformOptions = {}) {
 describe('DesktopStorybookCli', () => {
   test('starts the config-owned server with platform and connection options', async () => {
     const runner = new RecordingRunner();
-    const cli = new DesktopStorybookCli(makeConfig(), { runner });
+    const cli = new DesktopStorybookCli(makeConfig(), { ...nativeDriverTestOptions, runner });
 
     await cli.server('win32', { host: '0.0.0.0', port: 7100 });
 
@@ -72,7 +96,7 @@ describe('DesktopStorybookCli', () => {
 
   test('uses shared preparation and rnx-cli bundle defaults', async () => {
     const runner = new RecordingRunner();
-    const cli = new DesktopStorybookCli(makeConfig(), { runner });
+    const cli = new DesktopStorybookCli(makeConfig(), { ...nativeDriverTestOptions, runner });
 
     await cli.prep('macos');
     await cli.bundle('win32');
@@ -99,7 +123,7 @@ describe('DesktopStorybookCli', () => {
 
   test('uses native project defaults and rejects an unconfigured Win32 build', async () => {
     const runner = new RecordingRunner();
-    const cli = new DesktopStorybookCli(makeConfig(), { runner });
+    const cli = new DesktopStorybookCli(makeConfig(), { ...nativeDriverTestOptions, runner });
 
     await cli.run('windows');
 
@@ -123,6 +147,7 @@ describe('DesktopStorybookCli', () => {
         },
       }),
       {
+        ...nativeDriverTestOptions,
         createStoryManifest: createEmptyStoryManifest,
         runner,
         fetch: jest.fn(async () => new Response('{}')),
@@ -145,6 +170,7 @@ describe('DesktopStorybookCli', () => {
 
   test('renders every indexed story before cleanup', async () => {
     const runner = new RecordingRunner();
+    const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);
     const output: string[] = [];
     const fetch = jest.fn(async (input: Parameters<typeof globalThis.fetch>[0]) => {
       const url = input.toString();
@@ -172,6 +198,7 @@ describe('DesktopStorybookCli', () => {
         },
       }),
       {
+        ...nativeDriverTestOptions,
         createStoryManifest: createEmptyStoryManifest,
         runner,
         fetch,
@@ -182,6 +209,7 @@ describe('DesktopStorybookCli', () => {
             return true;
           },
         },
+        resolveNativeDriver,
       },
     );
     blockedPorts.add(cli.instance.storybookPort);
@@ -201,6 +229,7 @@ describe('DesktopStorybookCli', () => {
     expect(runner.background[1].args).toEqual(['start', '--no-interactive', '--port', String(cli.instance.metroPort + 1)]);
     expect(runner.foreground.at(-1)?.command).toBe('stop-storybook');
     expect(runner.stopped).toBe(2);
+    expect(resolveNativeDriver).not.toHaveBeenCalled();
   });
 
   test('keeps retrying the first story while the initial Metro bundle is compiling', async () => {
@@ -238,6 +267,7 @@ describe('DesktopStorybookCli', () => {
           },
         }),
         {
+          ...nativeDriverTestOptions,
           createStoryManifest: createEmptyStoryManifest,
           fetch,
           isPortAvailable: async () => true,
@@ -257,6 +287,7 @@ describe('DesktopStorybookCli', () => {
 
   test('runs authored tests after traversing the complete story index', async () => {
     const runner = new RecordingRunner();
+    const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);
     const events: string[] = [];
     const fetch = jest.fn(async (input: Parameters<typeof globalThis.fetch>[0]) => {
       const url = input.toString();
@@ -303,11 +334,13 @@ describe('DesktopStorybookCli', () => {
         },
       }),
       {
+        ...nativeDriverTestOptions,
         createStoryManifest: createEmptyStoryManifest,
         fetch,
         isPortAvailable: async () => true,
         runSmokeTests,
         runner,
+        resolveNativeDriver,
       },
     );
 
@@ -328,13 +361,45 @@ describe('DesktopStorybookCli', () => {
     expect(runner.background[0].env).toMatchObject({
       [STORYBOOK_SMOKE_MODE]: 'stories-and-tests',
     });
+    expect(resolveNativeDriver).toHaveBeenCalledWith({
+      buildPolicy: 'if-missing',
+      cacheRoot: undefined,
+      configuration: 'release',
+      helperPath: undefined,
+      installRoot: undefined,
+      platform: 'macos',
+    });
   });
 });
 
 describe('createDesktopStorybookCommand', () => {
+  test('builds the native helper without running app preparation', async () => {
+    const runner = new RecordingRunner();
+    const buildNativeDriver = jest.fn(async () => nativeDriverArtifact);
+    const program = createDesktopStorybookCommand({
+      ...nativeDriverTestOptions,
+      buildNativeDriver,
+      config: makeConfig(),
+      output: { write: () => true },
+      runner,
+    });
+
+    await program.parseAsync(['node', 'test', 'build-driver', '--windows', '--force']);
+
+    expect(buildNativeDriver).toHaveBeenCalledWith({
+      cacheRoot: undefined,
+      configuration: 'release',
+      force: true,
+      platform: 'windows',
+    });
+    expect(runner.foreground).toEqual([]);
+    expect(runner.background).toEqual([]);
+  });
+
   test('forwards the selected smoke mode and isolated instance to a package-owned lifecycle', async () => {
     const runner = new RecordingRunner();
     const program = createDesktopStorybookCommand({
+      ...nativeDriverTestOptions,
       config: makeConfig({
         windows: {
           smoke: {
@@ -370,6 +435,7 @@ describe('createDesktopStorybookCommand', () => {
   test('starts the channel and embedded driver from one server command', async () => {
     const runner = new RecordingRunner();
     const program = createDesktopStorybookCommand({
+      ...nativeDriverTestOptions,
       config: makeConfig(),
       createStoryManifest: createEmptyStoryManifest,
       isPortAvailable: async () => true,
@@ -404,6 +470,7 @@ describe('createDesktopStorybookCommand', () => {
 
       const secondRunner = new RecordingRunner();
       const secondProgram = createDesktopStorybookCommand({
+        ...nativeDriverTestOptions,
         config: makeConfig(),
         createStoryManifest: createEmptyStoryManifest,
         isPortAvailable: async () => true,
@@ -419,7 +486,7 @@ describe('createDesktopStorybookCommand', () => {
 
   test('forwards server platform and connection options', async () => {
     const runner = new RecordingRunner();
-    const program = createDesktopStorybookCommand({ config: makeConfig(), runner });
+    const program = createDesktopStorybookCommand({ ...nativeDriverTestOptions, config: makeConfig(), runner });
 
     await program.parseAsync(['node', 'test', 'server', '--win32', '--host', 'localhost', '--port', '7101']);
 
@@ -435,7 +502,7 @@ describe('createDesktopStorybookCommand', () => {
 
   test('honors an explicit platform flag', async () => {
     const runner = new RecordingRunner();
-    const program = createDesktopStorybookCommand({ config: makeConfig(), runner });
+    const program = createDesktopStorybookCommand({ ...nativeDriverTestOptions, config: makeConfig(), runner });
 
     await program.parseAsync(['node', 'test', 'bundle', '--windows']);
 
@@ -449,7 +516,7 @@ describe('createDesktopStorybookCommand', () => {
     const previousPlatform = process.env[FURN_STORYBOOK_PLATFORM];
     process.env[FURN_STORYBOOK_PLATFORM] = 'win32';
     const runner = new RecordingRunner();
-    const program = createDesktopStorybookCommand({ config: makeConfig(), runner });
+    const program = createDesktopStorybookCommand({ ...nativeDriverTestOptions, config: makeConfig(), runner });
 
     try {
       await program.parseAsync(['node', 'test', 'bundle']);
@@ -465,7 +532,11 @@ describe('createDesktopStorybookCommand', () => {
   });
 
   test('rejects multiple platform flags', async () => {
-    const program = createDesktopStorybookCommand({ config: makeConfig(), runner: new RecordingRunner() });
+    const program = createDesktopStorybookCommand({
+      ...nativeDriverTestOptions,
+      config: makeConfig(),
+      runner: new RecordingRunner(),
+    });
     program.exitOverride();
     program.configureOutput({ writeErr: () => {} });
     program.commands.forEach((command) => {

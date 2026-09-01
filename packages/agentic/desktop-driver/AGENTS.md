@@ -8,6 +8,9 @@ These instructions apply to `packages/agentic/desktop-driver`.
 - `server/` owns target/session/window/element state and HTTP routing.
 - `host/` defines the platform-neutral native contract.
 - `hosts/fake/` is the deterministic Stage 1 provider.
+- `hosts/native/` owns the framed helper process and `DesktopHost` adapter.
+- `native/` owns build, cache, resolution, verification, and native wire types.
+- package-root `native/` contains checked-in operating-system source only.
 - `authoring/` owns serializable plan and result contracts.
 - `runner/` executes plans and classifies outcomes.
 - `wdio/` is the sanctioned high-level automation integration.
@@ -23,6 +26,12 @@ These instructions apply to `packages/agentic/desktop-driver`.
   platform-neutral.
 - Put future operating-system integrations behind `DesktopHost`; do not branch
   on `process.platform` outside host-provider selection.
+- Never write native output beneath the package, `node_modules`, or a pnpm
+  store. Use immutable verified artifacts in the configured native store.
+- Never download a helper automatically. Explicit helper and install-root
+  selections fail closed when verification fails.
+- Verify the actual long-lived helper process before target registration; a
+  short-lived probe is not a substitute.
 - Keep the W3C server client-neutral. WebdriverIO belongs only in `wdio/`,
   agent/CLI composition, and contract tests.
 - Register targets on the server. Never accept arbitrary commands, environment
@@ -38,6 +47,8 @@ These instructions apply to `packages/agentic/desktop-driver`.
   before the command queue advances. A provider may never complete input after
   timeout cleanup.
 - Release depressed input on failure, cancellation, and session deletion.
+- Keep physical-input ownership serialized across independent helper processes,
+  not only inside one Node server.
 - Reject browser-origin requests and non-loopback serving by default.
 
 ## Authored plans

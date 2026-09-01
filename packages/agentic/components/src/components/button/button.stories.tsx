@@ -85,7 +85,7 @@ export const Default: Story = {
         {
           id: 'pointer-focus',
           title: 'Responds to activation and receives focus',
-          requires: ['element-screenshot', 'focus'],
+          requires: ['element-screenshot', 'focus', 'physical-click'],
           steps: [
             { action: 'wait', target: { testId: 'agentic-storybook-button' } },
             { expect: { state: 'role', target: { testId: 'agentic-storybook-button' }, value: 'button' } },

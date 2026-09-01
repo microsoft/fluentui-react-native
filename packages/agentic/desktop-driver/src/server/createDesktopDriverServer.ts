@@ -525,10 +525,10 @@ async function handleElementCommand(
       throw new WebDriverError('element not interactable', `Element "${record.id}" cannot be clicked.`);
     }
     await sessions.runInputCommand(async () => {
-      await hostCommand(session, `Activating window "${snapshot.windowId}"`, (signal) =>
-        session.target.host.activate(snapshot.windowId, signal),
-      );
       if (session.clickMode !== 'accessibility') {
+        await hostCommand(session, `Activating window "${snapshot.windowId}"`, (signal) =>
+          session.target.host.activate(snapshot.windowId, signal),
+        );
         const point = {
           x: snapshot.rect.x + snapshot.rect.width / 2,
           y: snapshot.rect.y + snapshot.rect.height / 2,
@@ -536,7 +536,7 @@ async function handleElementCommand(
         const hit = await hostCommand(session, `Hit testing element "${record.id}"`, (signal) =>
           session.target.host.hitTest(snapshot.windowId, point.x, point.y, signal),
         );
-        if (hit && hit.id !== snapshot.id) {
+        if (hit && !(await isElementOrDescendant(session, snapshot.id, hit))) {
           throw new WebDriverError('element click intercepted', `Element "${record.id}" is obscured by another native element.`);
         }
       }
@@ -578,6 +578,21 @@ async function handleElementCommand(
   }
 
   throw new WebDriverError('unknown command', `Unknown element command "${operation.join('/')}".`);
+}
+
+async function isElementOrDescendant(session: DesktopSession, targetNativeId: string, hit: NativeElementSnapshot): Promise<boolean> {
+  let current: NativeElementSnapshot | undefined = hit;
+  for (let depth = 0; current && depth < 100; depth += 1) {
+    if (current.id === targetNativeId) {
+      return true;
+    }
+    current = current.parentId
+      ? await hostCommand(session, 'Resolving the hit-test ancestor', (signal) =>
+          session.target.host.snapshot(current!.parentId!, signal),
+        ).catch(() => undefined)
+      : undefined;
+  }
+  return false;
 }
 
 async function findElements(

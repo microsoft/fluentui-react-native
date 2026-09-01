@@ -3,6 +3,13 @@ import { createServer } from 'node:net';
 import path from 'node:path';
 
 import {
+  buildNativeDesktopDriver,
+  resolveNativeDesktopDriver,
+  type NativeDriverArtifact,
+  type NativeDriverBuildOptions,
+} from '@fluentui-react-native/desktop-driver';
+
+import {
   desktopSmokeModes,
   STORYBOOK_SMOKE_MODE,
   type DesktopCommand,
@@ -32,13 +39,23 @@ type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   macosXcconfigPath?: string;
 };
 
+export type DesktopStorybookBuildDriverOptions = {
+  force?: boolean;
+};
+
+export type DesktopStorybookPrepOptions = {
+  driver?: boolean;
+};
+
 export type DesktopStorybookCliOptions = {
+  buildNativeDriver?: typeof buildNativeDesktopDriver;
   createStoryManifest?: typeof createDesktopStoryManifest;
   runner?: DesktopCommandRunner;
   fetch?: typeof globalThis.fetch;
   output?: Pick<NodeJS.WriteStream, 'write'>;
   isPortAvailable?: (port: number) => Promise<boolean>;
   runSmokeTests?: typeof runDesktopStorybookSmokeTests;
+  resolveNativeDriver?: typeof resolveNativeDesktopDriver;
 };
 
 export type DesktopStorybookServerOptions = {
@@ -51,11 +68,13 @@ export class DesktopStorybookCli {
   readonly instance: DesktopStorybookInstance;
 
   private readonly runner: DesktopCommandRunner;
+  private readonly buildNativeDriver: typeof buildNativeDesktopDriver;
   private readonly createStoryManifest: typeof createDesktopStoryManifest;
   private readonly fetch: typeof globalThis.fetch;
   private readonly output: Pick<NodeJS.WriteStream, 'write'>;
   private readonly isPortAvailable: (port: number) => Promise<boolean>;
   private readonly runSmokeTests: typeof runDesktopStorybookSmokeTests;
+  private readonly resolveNativeDriver: typeof resolveNativeDesktopDriver;
 
   constructor(config: DesktopStorybookConfig, options: DesktopStorybookCliOptions = {}) {
     this.config = config;
@@ -64,11 +83,13 @@ export class DesktopStorybookCli {
       bundleIdentifierPrefix: config.macosBundleIdentifier,
     });
     this.runner = options.runner ?? new NodeDesktopCommandRunner();
+    this.buildNativeDriver = options.buildNativeDriver ?? buildNativeDesktopDriver;
     this.createStoryManifest = options.createStoryManifest ?? createDesktopStoryManifest;
     this.fetch = options.fetch ?? globalThis.fetch;
     this.output = options.output ?? process.stdout;
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
     this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
+    this.resolveNativeDriver = options.resolveNativeDriver ?? resolveNativeDesktopDriver;
   }
 
   async server(platform: Platforms, options: DesktopStorybookServerOptions = {}): Promise<void> {
@@ -97,6 +118,7 @@ export class DesktopStorybookCli {
     if (command === false || command === undefined) {
       throw unsupportedAction('server', platform);
     }
+    const nativeDriver = await this.resolveDriver(platform);
     const storybookPort = options.port ?? (await findAvailablePort(this.instance.storybookPort, this.isPortAvailable));
     const metroPort = await findAvailablePort(this.instance.metroPort, this.isPortAvailable, new Set([storybookPort]));
     const driverPort = await findAvailablePort(this.instance.driverPort, this.isPortAvailable, new Set([storybookPort, metroPort]));
@@ -106,7 +128,7 @@ export class DesktopStorybookCli {
       metroPort,
       storybookPort,
     };
-    resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance);
+    resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver);
     this.output.write(`Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}\n`);
     const metro = this.runner.start(this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
     try {
@@ -152,8 +174,21 @@ export class DesktopStorybookCli {
     );
   }
 
-  prep(platform: Platforms): Promise<void> {
-    return this.executeAction('prep', platform);
+  async buildDriver(platform: Platforms, options: DesktopStorybookBuildDriverOptions = {}): Promise<NativeDriverArtifact> {
+    const nativeOptions = this.requireNativeDriverOptions(platform);
+    const artifact = await this.buildNativeDriver({
+      ...this.toBuildOptions(platform, nativeOptions),
+      force: options.force,
+    });
+    this.output.write(`${JSON.stringify(artifact, null, 2)}\n`);
+    return artifact;
+  }
+
+  async prep(platform: Platforms, options: DesktopStorybookPrepOptions = {}): Promise<void> {
+    if (options.driver !== false) {
+      await this.resolveDriver(platform);
+    }
+    await this.executeAction('prep', platform);
   }
 
   bundle(platform: Platforms): Promise<void> {
@@ -175,7 +210,7 @@ export class DesktopStorybookCli {
       throw unsupportedAction('smoke', platform);
     }
     if (smoke?.command) {
-      const instance = await this.resolveSmokeInstance(platform, smoke);
+      const instance = await this.resolveSmokeInstance(platform, smoke, mode);
       await this.executePlan(withEnvironment(smoke.command, { [STORYBOOK_SMOKE_MODE]: mode }), platform, instance);
       return;
     }
@@ -185,12 +220,12 @@ export class DesktopStorybookCli {
       );
     }
 
-    const instance = await this.resolveSmokeInstance(platform, smoke);
+    const instance = await this.resolveSmokeInstance(platform, smoke, mode);
     await this.runSmokeLifecycle(platform, smoke, instance, mode);
   }
 
   private async executeAction(
-    action: Exclude<DesktopStorybookAction, 'smoke'>,
+    action: Exclude<DesktopStorybookAction, 'build-driver' | 'smoke'>,
     platform: Platforms,
     instance?: ResolvedDesktopStorybookInstance,
   ): Promise<void> {
@@ -287,7 +322,11 @@ export class DesktopStorybookCli {
     }
   }
 
-  private async resolveSmokeInstance(platform: Platforms, smoke: DesktopSmokeOptions): Promise<ResolvedDesktopStorybookInstance> {
+  private async resolveSmokeInstance(
+    platform: Platforms,
+    smoke: DesktopSmokeOptions,
+    mode: DesktopSmokeMode,
+  ): Promise<ResolvedDesktopStorybookInstance> {
     const storybookPort = smoke.serverUrl
       ? portFromUrl(smoke.serverUrl)
       : await findAvailablePort(this.instance.storybookPort, this.isPortAvailable);
@@ -302,7 +341,10 @@ export class DesktopStorybookCli {
       metroPort,
     };
 
-    resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance);
+    if (mode === 'stories-and-tests') {
+      const nativeDriver = await this.resolveDriver(platform);
+      resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver);
+    }
     if (platform === 'macos') {
       resolvedInstance.macosXcconfigPath = writeMacOSInstanceConfig(this.config.projectRoot, resolvedInstance);
     }
@@ -314,18 +356,52 @@ export class DesktopStorybookCli {
     return Object.freeze(resolvedInstance);
   }
 
-  private async writeDriverManifest(platform: Platforms, instance: DesktopStorybookInstance): Promise<string> {
+  private async writeDriverManifest(
+    platform: Platforms,
+    instance: DesktopStorybookInstance,
+    nativeDriver: NativeDriverArtifact,
+  ): Promise<string> {
     const storyManifest = await this.createStoryManifest(this.config, platform);
     const outputPath = path.join(this.config.projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
     const driverManifest = createDesktopStorybookDriverManifest({
       bridgeNonce: readReusableBridgeNonce(outputPath, instance, storyManifest.platformManifestDigest),
       config: this.config,
       instance,
+      nativeDriver,
       platform,
       storyManifest,
     });
     writeDesktopStorybookDriverManifest(driverManifest, outputPath);
     return outputPath;
+  }
+
+  private async resolveDriver(platform: Platforms): Promise<NativeDriverArtifact> {
+    const options = this.requireNativeDriverOptions(platform);
+    return this.resolveNativeDriver({
+      ...this.toBuildOptions(platform, options),
+      buildPolicy: options.buildPolicy,
+      helperPath: options.helperPath,
+      installRoot: options.installRoot,
+    });
+  }
+
+  private requireNativeDriverOptions(platform: Platforms): Exclude<ReturnType<DesktopStorybookConfig['getNativeDriverOptions']>, false> {
+    const options = this.config.getNativeDriverOptions(platform);
+    if (options === false) {
+      throw new Error(`Native Desktop Driver is disabled for ${platform}.`);
+    }
+    return options;
+  }
+
+  private toBuildOptions(
+    platform: Platforms,
+    options: Exclude<ReturnType<DesktopStorybookConfig['getNativeDriverOptions']>, false>,
+  ): NativeDriverBuildOptions {
+    return {
+      cacheRoot: options.cacheRoot,
+      configuration: options.configuration,
+      platform,
+    };
   }
 
   private async renderEveryStory(serverUrl: string, settleMs: number, startupTimeoutMs = 120_000): Promise<void> {

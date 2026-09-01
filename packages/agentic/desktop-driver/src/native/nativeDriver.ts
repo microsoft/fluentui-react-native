@@ -354,7 +354,7 @@ async function readOneShotHandshake(executablePath: string, signal?: AbortSignal
     child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
     child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
     child.once('error', reject);
-    child.once('exit', (code) => {
+    child.once('close', (code) => {
       if (code !== 0) {
         reject(
           new NativeDriverError(

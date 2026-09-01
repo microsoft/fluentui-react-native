@@ -46,6 +46,11 @@ export default makeDesktopStorybookConfig({
       }),
     },
     win32: {
+      nativeDriver: {
+        application: {
+          windowTitle: win32Host.windowTitle,
+        },
+      },
       run: createWin32RunCommand(win32Host),
       smoke: {
         command: createWin32SmokeCommand({

@@ -19,6 +19,7 @@ export type NativeHostProcessOptions = {
   artifact: NativeDriverArtifact;
   cancellationTimeoutMs?: number;
   onStderr?: (message: string) => void;
+  recoverInput?: () => Promise<void>;
   startupTimeoutMs?: number;
 };
 
@@ -45,23 +46,30 @@ export class NativeHostProcess extends EventEmitter<{
   readonly hello: NativeHostHello;
 
   private readonly child: ChildProcessWithoutNullStreams;
+  private readonly completed: Promise<void>;
+  private readonly recoverInput?: () => Promise<void>;
   private readonly cancellationTimeoutMs: number;
   private readonly pending = new Map<string, PendingRequest>();
   private readonly pendingBinaryIds = new Map<string, string>();
   private readonly binaryFrames = new Map<string, Uint8Array>();
   private closed = false;
+  private closing = false;
+  private failurePromise?: Promise<void>;
 
   private constructor(
     child: ChildProcessWithoutNullStreams,
     artifact: NativeDriverArtifact,
     hello: NativeHostHello,
     cancellationTimeoutMs: number,
+    recoverInput?: () => Promise<void>,
   ) {
     super();
     this.child = child;
+    this.completed = new Promise((resolve) => child.once('close', () => resolve()));
     this.artifact = artifact;
     this.hello = hello;
     this.cancellationTimeoutMs = cancellationTimeoutMs;
+    this.recoverInput = recoverInput;
   }
 
   static async start(options: NativeHostProcessOptions): Promise<NativeHostProcess> {
@@ -75,13 +83,13 @@ export class NativeHostProcess extends EventEmitter<{
 
     const hello = await waitForHello(child, decoder, options.startupTimeoutMs ?? 10_000);
     validateHello(hello, options.artifact);
-    const process = new NativeHostProcess(child, options.artifact, hello, options.cancellationTimeoutMs ?? 2000);
+    const process = new NativeHostProcess(child, options.artifact, hello, options.cancellationTimeoutMs ?? 2000, options.recoverInput);
     decoder.on('json', (message) => process.onJson(message));
     decoder.on('binary', (frame) => process.onBinary(frame));
     decoder.on('error', (error) => process.fail(error));
     child.once('error', (error) => process.fail(error));
     child.once('exit', (code, signal) => {
-      if (!process.closed) {
+      if (!process.closed && !process.closing) {
         process.fail(
           new NativeDriverError(
             'host-exited',
@@ -116,8 +124,7 @@ export class NativeHostProcess extends EventEmitter<{
           pending.aborted = true;
           void this.write({ id, type: 'cancel' });
           const timeout = setTimeout(() => {
-            this.pending.delete(id);
-            this.stop(
+            void this.failAfterRecovery(
               new NativeDriverError(
                 'cancellation-timeout',
                 `Native driver helper did not settle cancelled command "${command}" within ${this.cancellationTimeoutMs} ms.`,
@@ -143,13 +150,32 @@ export class NativeHostProcess extends EventEmitter<{
   }
 
   async dispose(): Promise<void> {
-    if (this.closed) {
+    if (this.closed || this.closing) {
       return;
     }
+    this.closing = true;
     try {
-      await this.request('dispose');
+      const disposeResult = await Promise.race([
+        this.request('dispose').then(() => 'response' as const),
+        this.completed.then(() => 'closed' as const),
+      ]);
+      if (disposeResult === 'closed') {
+        throw new NativeDriverError('host-exited', 'Native driver helper exited before acknowledging disposal.');
+      }
+      const exited = await Promise.race([this.completed.then(() => true), delay(2000).then(() => false)]);
+      if (!exited && this.child.exitCode === null && this.child.signalCode === null) {
+        this.child.kill();
+        await this.completed;
+      }
     } finally {
-      this.stop();
+      this.closed = true;
+      for (const [id] of this.pending) {
+        this.rejectPending(id, new NativeDriverError('host-closed', 'Native driver helper closed.'));
+      }
+      if (this.child.exitCode === null && this.child.signalCode === null) {
+        this.child.kill();
+        await this.completed;
+      }
     }
   }
 
@@ -243,30 +269,32 @@ export class NativeHostProcess extends EventEmitter<{
   }
 
   private fail(error: Error): void {
-    if (this.closed) {
-      return;
-    }
-    this.closed = true;
-    for (const [id] of this.pending) {
-      this.rejectPending(id, error);
-    }
-    this.emit('exit', error);
+    void this.failAfterRecovery(error);
   }
 
-  private stop(error?: Error): void {
-    if (this.closed) {
+  private failAfterRecovery(error: Error): Promise<void> {
+    return (this.failurePromise ??= this.recoverAndFail(error));
+  }
+
+  private async recoverAndFail(error: Error): Promise<void> {
+    if (this.closed || this.closing) {
       return;
     }
     this.closed = true;
-    for (const [id] of this.pending) {
-      this.rejectPending(id, error ?? new NativeDriverError('host-closed', 'Native driver helper closed.'));
-    }
     if (this.child.exitCode === null && this.child.signalCode === null) {
       this.child.kill();
     }
-    if (error) {
-      this.emit('exit', error);
+    await this.completed;
+    let failure = error;
+    try {
+      await this.recoverInput?.();
+    } catch (recoveryError) {
+      failure = new AggregateError([error, recoveryError], `${error.message} Native input recovery also failed.`);
     }
+    for (const [id] of this.pending) {
+      this.rejectPending(id, failure);
+    }
+    this.emit('exit', failure);
   }
 }
 
@@ -324,4 +352,8 @@ function validateHello(hello: NativeHostHello, artifact: NativeDriverArtifact): 
   ) {
     throw new NativeDriverError('handshake-failed', 'Native helper hello does not match the selected artifact.');
   }
+}
+
+function delay(milliseconds: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }

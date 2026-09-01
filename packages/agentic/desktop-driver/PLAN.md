@@ -89,23 +89,48 @@ Updated 2026-08-31.
 - Updated package, Storybook, runtime, app, component, skill, and agent
   documentation for the final Stage 1 responsibilities.
 
+### Stage 2 Windows implementation: Complete for the V1 command surface
+
+- Added the explicit source-build and resolution pipeline, user-level
+  compatibility-scoped cache, immutable artifacts and selections,
+  cross-process build locks, direct and managed prebuilt selection, one-shot
+  verification, and mandatory long-lived helper handshake.
+- Added the framed native process transport, schema-versioned helper and
+  application manifests, Storybook `build-driver` and helper-aware `prep`,
+  exact nonce-bound application lease hints, explicit WebDriver attach mode,
+  render-only smoke isolation, and accessible native story-root verification.
+- Implemented one C++20 x64 Windows/Win32 helper with `/MT`, no Windows App SDK
+  or managed runtime dependency, dedicated MTA UI Automation, selectors,
+  normalized state, window and application ownership, physical and
+  accessibility actions, WGC/D3D11/WIC capture, source/tree output,
+  cancellation, exact release-only crash recovery, and a session-wide named
+  physical-input mutex.
+- Added 124 native self-tests plus an opt-in Windows package contract. The
+  helper builds with no compiler warnings and imports only Windows system
+  libraries.
+- Windows Fabric native smoke renders all 140 supported stories, restarts the
+  exact app before authored tests to avoid accumulated RNW Fabric remount
+  failure, and completes cleanly. Win32 native smoke renders all 134 supported
+  stories and also completes cleanly. In this validation environment both
+  endpoints report the three physical-input plans as explicit capability skips
+  because the helper process is not attached to the active Windows input
+  session.
+
 ### Remaining work
 
 Stage 1 is complete; no Phase 1, Phase 2, or Phase 3 deliverables are left
 incomplete.
 
-- Stage 2 Phase 4A remains: implement native helper build, resolution, cache,
-  transport, verification, Storybook attachment, and crash-recovery
-  infrastructure.
-- Stage 2 Phases 4B and 4C remain: implement and complete the shared Windows and
-  Win32 C++ provider.
+- Windows qualification remains: run the physical Button, Checkbox, Input, and
+  wheel cases on an interactive desktop; exercise Windows Fabric
+  `stories-and-tests`; verify 150% and 200% live DPI; and decide whether native
+  event notifications provide enough value beyond authoritative queries to
+  enter V1.
 - Stage 2 Phases 5A and 5B remain: prove macOS identity, authority, capture, and
   hosted-runner behavior, then complete the Swift provider.
 - Stage 3 remains: release hardening, source-package proof, optional prebuilt
   trust policy, security review, reliability qualification, and CI promotion.
-- On-device bridge execution is intentionally deferred to Stage 2; Phase 2 is
-  validated through the fake host, runtime/server contract tests, live
-  same-process services, and production bundles.
+- The Stage 1 fake host remains only for deterministic package contract tests.
 
 ## Outcome
 
@@ -1504,7 +1529,7 @@ Exit:
 
 Stage 2 implements the platform contracts proven in Stage 1.
 
-#### Phase 4A: Native build, cache, transport, and Storybook attachment - Not started
+#### Phase 4A: Native build, cache, transport, and Storybook attachment - Windows complete; macOS extension pending
 
 Deliver:
 
@@ -1543,7 +1568,7 @@ Exit:
 - `stories-and-tests` creates exactly one app, attaches to it, preserves it on
   WebDriver teardown, and leaves final cleanup to Storybook.
 
-#### Phase 4B: Windows C++ vertical slice - Not started
+#### Phase 4B: Windows C++ vertical slice - Implemented; interactive qualification pending
 
 Deliver:
 
@@ -1570,7 +1595,7 @@ Exit:
   WGC, and cancellation; unsupported or unreliable capabilities move to a
   self-hosted interactive runner based on evidence rather than assumption.
 
-#### Phase 4C: Complete Windows and Win32 native provider - Not started
+#### Phase 4C: Complete Windows and Win32 native provider - Command surface implemented; promotion pending
 
 Deliver:
 

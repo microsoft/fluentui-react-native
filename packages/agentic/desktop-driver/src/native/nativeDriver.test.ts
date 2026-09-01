@@ -7,7 +7,7 @@ import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from './nativeDr
 
 jest.setTimeout(120_000);
 
-const windowsTest = process.platform === 'win32' ? test : test.skip;
+const windowsTest = process.platform === 'win32' && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
 
 describe('native driver build and resolution', () => {
   windowsTest('builds, reuses, resolves, and handshakes with the Windows helper', async () => {
@@ -42,7 +42,7 @@ describe('native driver build and resolution', () => {
       });
       await helper.dispose();
     } finally {
-      fs.rmSync(cacheRoot, { force: true, recursive: true });
+      fs.rmSync(cacheRoot, { force: true, maxRetries: 10, recursive: true, retryDelay: 100 });
     }
   });
 

@@ -49,7 +49,7 @@ export function DesktopStoryRoot({ children, storyId }: DesktopStoryRootProps) {
         }
       }}
     >
-      <View accessibilityLabel={marker} style={styles.root} testID={testID}>
+      <View accessibilityLabel={marker} accessible style={styles.root} testID={testID}>
         {children}
       </View>
     </StoryRenderErrorBoundary>

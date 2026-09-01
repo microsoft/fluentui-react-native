@@ -3,10 +3,12 @@
 `@fluentui-react-native/desktop-driver` is a W3C WebDriver-compatible remote end
 for React Native desktop applications. It does not use Appium.
 
-Stage 1 provides the complete platform-neutral protocol, sanctioned WebdriverIO
-API, serializable story-test contract, deterministic fake host, evidence
-reports, JSON CLI, and bounded agent API. Native Windows, Win32, and macOS host
-providers are separate Stage 2 work described in [PLAN.md](PLAN.md).
+The package provides the platform-neutral protocol, sanctioned WebdriverIO API,
+serializable story-test contract, deterministic fake host, evidence reports,
+JSON CLI, and bounded agent API. Stage 2 adds an explicitly source-built native
+helper. Windows and Win32 share the C++ helper in `native/windows`; the macOS
+Swift Package Manager implementation follows the same build and transport
+contract described in [PLAN.md](PLAN.md).
 
 ## Package boundaries
 
@@ -21,9 +23,41 @@ providers are separate Stage 2 work described in [PLAN.md](PLAN.md).
 | `/artifacts`                            | Confined atomic evidence persistence                        |
 | `/testing`                              | Fake host, fake Storybook orchestration, and test harnesses |
 
+Native source, build/cache resolution, and the process-backed host are exported
+from the package root. They remain independent of Storybook, React, and React
+Native.
+
 The protocol server remains client-neutral. WebdriverIO is a dependency of the
 high-level `/wdio` surface, not an implementation primitive for routing,
 capability negotiation, or native hosts.
+
+## Build and resolve the native helper
+
+Native binaries are not published in npm and are never compiled during package
+installation. Build explicitly on the target operating system:
+
+```powershell
+desktop-driver build-driver --platform windows
+```
+
+`windows` and `win32` resolve to the same x64 helper. The build uses the
+installed Visual Studio C++ toolchain and Windows SDK, links the CRT statically,
+and writes immutable artifacts outside `node_modules`.
+
+Resolve a verified cache artifact or an operator-provided prebuilt:
+
+```powershell
+desktop-driver resolve-driver --platform win32 --build-policy never
+desktop-driver resolve-driver --platform windows --helper-path D:\tools\furn-desktop-driver-host.exe
+desktop-driver resolve-driver --platform windows --install-root D:\tools\desktop-driver
+```
+
+The default Windows store is beneath
+`%LOCALAPPDATA%\Microsoft\FluentUIReactNative\desktop-driver\native`. Override it
+with `--cache-root` or `FURN_DESKTOP_DRIVER_CACHE_ROOT`. Explicit helper and
+install-root selections fail verification rather than silently falling back.
+Every actual long-lived helper must complete the same build/protocol handshake
+before it receives native commands.
 
 ## Authoring story tests
 
@@ -153,6 +187,10 @@ The CLI prints structured JSON for automation:
 ```sh
 desktop-driver serve --manifest story-manifest.windows.json --target fake-windows
 
+desktop-driver build-driver --platform windows
+desktop-driver resolve-driver --platform win32 --build-policy never
+desktop-driver doctor --platform windows
+
 desktop-driver stories list \
   --url http://127.0.0.1:4444 \
   --target fake-windows
@@ -174,7 +212,8 @@ desktop-driver agent describe \
   --artifacts artifacts/windows/desktop-driver
 ```
 
-`serve` is the Stage 1 fake target. It is not a native-provider substitute.
+`serve` remains the deterministic fake target for package and protocol tests.
+It is not a native-provider substitute.
 
 ## Agent API
 

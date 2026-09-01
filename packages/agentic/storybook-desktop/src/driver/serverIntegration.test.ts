@@ -17,6 +17,11 @@ describe('desktop Storybook server integration', () => {
     const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
     const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
     const driverManifest: DesktopStorybookDriverManifest = {
+      application: {
+        leaseNonce: 'integration-nonce',
+        leasePath: path.join(temporaryDirectory, 'application-lease.json'),
+        windowTitle: 'Agentic Components Storybook',
+      },
       appName: 'AgenticStorybook',
       bridgeNonce: 'integration-nonce',
       displayName: 'Agentic Components Storybook',
@@ -24,10 +29,28 @@ describe('desktop Storybook server integration', () => {
       endpoint: 'windows',
       instanceId: 'integration',
       metroPort: 8081,
+      nativeDriver: {
+        architecture: 'x64',
+        artifactId: 'artifact',
+        artifactRoot: temporaryDirectory,
+        buildFingerprint: 'build',
+        buildId: 'build-id',
+        compatibilityKey: 'compatibility',
+        configuration: 'release',
+        endpoints: ['windows', 'win32'],
+        executablePath: path.join(temporaryDirectory, 'driver.exe'),
+        features: ['probe'],
+        origin: 'cache',
+        provider: 'windows',
+        schemaVersion: 1,
+        signing: { mode: 'none' },
+        sourceDigest: 'source',
+        wireProtocol: { major: 1, minor: 0 },
+      },
       platformManifestDigest: 'platform-digest',
       portablePlanDigest: 'portable-digest',
       renderer: 'fabric',
-      schemaVersion: 1,
+      schemaVersion: 2,
       storyManifest: {
         endpoint: 'windows',
         entries: [
@@ -55,6 +78,7 @@ describe('desktop Storybook server integration', () => {
         ...process.env,
         STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
         STORYBOOK_DRIVER_MANIFEST: manifestPath,
+        STORYBOOK_NATIVE_DRIVER_FAKE: '1',
         STORYBOOK_PROJECT_ROOT: projectRoot,
         STORYBOOK_SMOKE_MODE: 'stories-and-tests',
         STORYBOOK_WS_PORT: String(storybookPort),

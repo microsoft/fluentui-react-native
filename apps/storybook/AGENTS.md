@@ -24,12 +24,14 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
 
 - Use `yarn storybook manifest --<platform>` to validate static story-plan
   extraction.
+- Use `yarn storybook build-driver --<platform>` for an isolated native helper
+  build. `prep` ensures the same verified helper before app preparation.
 - Use `yarn storybook driver --<platform>` to start Metro, the Storybook
   channel/MCP listener, and the WebDriver listener under one owned supervisor.
 - Use the app's `yarn desktop-driver` script for JSON story-run and agent
   commands against that listener.
-- The Stage 1 provider is deliberately fake. Do not add Windows or macOS native
-  automation code until the corresponding Stage 2 plan begins.
+- Windows and Win32 use the source-built native helper. Keep the deterministic
+  fake provider limited to package contract tests.
 - Authored tests belong in component story `parameters.desktopDriver`, not in
   this app. The app owns identity, package discovery, platform exclusions, and
   generated manifests.

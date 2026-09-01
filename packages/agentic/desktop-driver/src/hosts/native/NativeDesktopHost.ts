@@ -1,3 +1,5 @@
+import { spawn } from 'node:child_process';
+
 import type {
   ApplicationLease,
   DesktopHost,
@@ -32,6 +34,10 @@ export class NativeDesktopHost implements DesktopHost {
   private readonly artifact: NativeDriverArtifact;
   private readonly onStderr?: (message: string) => void;
   private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
+  private readonly depressedButtons = new Set<number>();
+  private readonly depressedKeys = new Set<string>();
+  private potentialButtons = new Set<number>();
+  private potentialKeys = new Set<string>();
   private failure?: Error;
   private processPromise?: Promise<NativeHostProcess>;
 
@@ -98,7 +104,15 @@ export class NativeDesktopHost implements DesktopHost {
   }
 
   async click(elementId: string, mode: 'accessibility' | 'auto' | 'physical', signal?: AbortSignal): Promise<void> {
-    await this.request('click', { elementId, mode }, signal);
+    const includePointer = mode !== 'accessibility';
+    if (includePointer) {
+      this.potentialButtons = new Set([...this.depressedButtons, 0]);
+    }
+    try {
+      await this.request('click', { elementId, mode }, signal);
+    } finally {
+      this.potentialButtons = new Set(this.depressedButtons);
+    }
   }
 
   async clear(elementId: string, signal?: AbortSignal): Promise<void> {
@@ -110,11 +124,34 @@ export class NativeDesktopHost implements DesktopHost {
   }
 
   async performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void> {
-    await this.request('performActions', { actions }, signal);
+    const plan = planInputLedger(actions, this.depressedKeys, this.depressedButtons);
+    this.potentialKeys = plan.potentialKeys;
+    this.potentialButtons = plan.potentialButtons;
+    try {
+      await this.request('performActions', { actions }, signal);
+      replaceSet(this.depressedKeys, plan.finalKeys);
+      replaceSet(this.depressedButtons, plan.finalButtons);
+    } catch (error) {
+      this.depressedKeys.clear();
+      this.depressedButtons.clear();
+      throw error;
+    } finally {
+      this.potentialKeys = new Set(this.depressedKeys);
+      this.potentialButtons = new Set(this.depressedButtons);
+    }
   }
 
   async releaseActions(signal?: AbortSignal): Promise<void> {
-    await this.request('releaseActions', undefined, signal);
+    this.potentialKeys = new Set(this.depressedKeys);
+    this.potentialButtons = new Set(this.depressedButtons);
+    try {
+      await this.request('releaseActions', undefined, signal);
+    } finally {
+      this.depressedKeys.clear();
+      this.depressedButtons.clear();
+      this.potentialKeys.clear();
+      this.potentialButtons.clear();
+    }
   }
 
   captureWindow(windowId: string, signal?: AbortSignal): Promise<NativeImage> {
@@ -184,6 +221,7 @@ export class NativeDesktopHost implements DesktopHost {
     return (this.processPromise ??= NativeHostProcess.start({
       artifact: this.artifact,
       onStderr: this.onStderr,
+      recoverInput: () => this.recoverInput(),
     }).then((process) => {
       process.on('event', (message) => this.onEvent(message));
       process.on('exit', (error) => {
@@ -192,6 +230,55 @@ export class NativeDesktopHost implements DesktopHost {
       });
       return process;
     }));
+  }
+
+  private recoverInput(): Promise<void> {
+    const keys = [...this.potentialKeys];
+    const buttons = [...this.potentialButtons];
+    if (keys.length === 0 && buttons.length === 0) {
+      return Promise.resolve();
+    }
+    return new Promise((resolve, reject) => {
+      const child = spawn(this.artifact.executablePath, ['--release-input'], {
+        stdio: ['pipe', 'pipe', 'pipe'],
+        windowsHide: true,
+      });
+      const stdout: Buffer[] = [];
+      const stderr: Buffer[] = [];
+      const timeout = setTimeout(() => {
+        child.kill();
+        reject(new NativeDriverError('input-recovery-timeout', 'Native input recovery did not complete within 5 seconds.'));
+      }, 5000);
+      child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
+      child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
+      child.once('error', (error) => {
+        clearTimeout(timeout);
+        reject(error);
+      });
+      child.once('close', (code) => {
+        clearTimeout(timeout);
+        if (code !== 0) {
+          reject(
+            new NativeDriverError(
+              'input-recovery-failed',
+              Buffer.concat(stderr).toString('utf8') || `Native input recovery exited with code ${String(code)}.`,
+            ),
+          );
+          return;
+        }
+        try {
+          JSON.parse(Buffer.concat(stdout).toString('utf8'));
+          this.depressedKeys.clear();
+          this.depressedButtons.clear();
+          this.potentialKeys.clear();
+          this.potentialButtons.clear();
+          resolve();
+        } catch (error) {
+          reject(new NativeDriverError('input-recovery-failed', error instanceof Error ? error.message : String(error)));
+        }
+      });
+      child.stdin.end(JSON.stringify({ buttons, keys }));
+    });
   }
 
   private onEvent(message: NativeHostEventMessage): void {
@@ -206,11 +293,53 @@ export class NativeDesktopHost implements DesktopHost {
     } else if (message.event === 'window-opened' && typeof payload?.windowId === 'string') {
       event = { type: 'window-opened', windowId: payload.windowId };
     }
+
     if (event) {
       for (const listener of this.listeners) {
         listener(event);
       }
     }
+  }
+}
+
+type InputLedgerPlan = {
+  finalButtons: Set<number>;
+  finalKeys: Set<string>;
+  potentialButtons: Set<number>;
+  potentialKeys: Set<string>;
+};
+
+function planInputLedger(
+  actions: readonly NativeActionSequence[],
+  currentKeys: ReadonlySet<string>,
+  currentButtons: ReadonlySet<number>,
+): InputLedgerPlan {
+  const finalKeys = new Set(currentKeys);
+  const finalButtons = new Set(currentButtons);
+  const potentialKeys = new Set(currentKeys);
+  const potentialButtons = new Set(currentButtons);
+  for (const sequence of actions) {
+    for (const action of sequence.actions) {
+      if (action.type === 'keyDown' && typeof action.value === 'string') {
+        finalKeys.add(action.value);
+        potentialKeys.add(action.value);
+      } else if (action.type === 'keyUp' && typeof action.value === 'string') {
+        finalKeys.delete(action.value);
+      } else if (action.type === 'pointerDown' && typeof action.button === 'number') {
+        finalButtons.add(action.button);
+        potentialButtons.add(action.button);
+      } else if (action.type === 'pointerUp' && typeof action.button === 'number') {
+        finalButtons.delete(action.button);
+      }
+    }
+  }
+  return { finalButtons, finalKeys, potentialButtons, potentialKeys };
+}
+
+function replaceSet<T>(target: Set<T>, source: ReadonlySet<T>): void {
+  target.clear();
+  for (const value of source) {
+    target.add(value);
   }
 }
 
