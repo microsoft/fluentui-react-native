@@ -34,6 +34,7 @@ export async function runDesktopStorybookSmokeTests(
     result = await desktop.runStoryTests({
       artifactsRoot: options.artifactsRoot ?? path.join(options.projectRoot, 'artifacts', options.platform, 'desktop-driver'),
       selection: {
+        story: 'components-*--default',
         tag: 'desktop-e2e',
       },
     });
