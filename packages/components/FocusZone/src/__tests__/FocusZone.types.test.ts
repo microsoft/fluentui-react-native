@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
-import type { View } from 'react-native';
 
 import type { SlotProp } from '@fluentui-react-native/framework-base';
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 
 import type { FocusZone } from '../FocusZone';
 import type { FocusZoneProps, NativeProps } from '../FocusZone.types';
 
-const componentRef = React.createRef<View>();
+const componentRef = React.createRef<IFocusable>();
 const defaultTabbableElement = React.createRef<React.Component>();
 
 const props: FocusZoneProps = {

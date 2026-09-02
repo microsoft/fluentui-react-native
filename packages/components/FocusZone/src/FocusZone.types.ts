@@ -1,5 +1,7 @@
 import type * as React from 'react';
-import type { View, ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
+
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 
 export const focusZoneName = 'FocusZone';
 
@@ -7,9 +9,9 @@ export type FocusZoneState = Record<never, never>;
 
 export interface FocusZoneProps extends ViewProps {
   /**
-   * A ref to the native FocusZone view.
+   * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
-  componentRef?: React.Ref<View>;
+  componentRef?: React.RefObject<IFocusable>;
 
   /**
    * Optionally defines the initial tabbable element inside the FocusZone

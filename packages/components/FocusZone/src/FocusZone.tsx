@@ -3,6 +3,7 @@ import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 
 import { directComponent, mergeProps, phasedComponent } from '@fluentui-react-native/framework-base';
+import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 import type { FocusZoneProps } from './FocusZone.types';
 import { focusZoneName } from './FocusZone.types';
@@ -12,7 +13,8 @@ import NativeFocusZone from './FocusZoneNativeComponent';
  * Renders the native FocusZone without applying theme or appearance defaults.
  */
 export const FocusZone = phasedComponent<FocusZoneProps>((props) => {
-  const { defaultTabbableElement } = props;
+  const { componentRef, defaultTabbableElement } = props;
+  const nativeRef = useViewCommandFocus(componentRef);
   const [nativeDefaultTabbableElement, setNativeDefaultTabbableElement] = React.useState<number | string>();
 
   React.useLayoutEffect(() => {
@@ -27,18 +29,19 @@ export const FocusZone = phasedComponent<FocusZoneProps>((props) => {
 
   return directComponent<FocusZoneProps>((renderProps) => {
     const {
-      componentRef,
+      componentRef: _componentRef,
       defaultTabbableElement: _defaultTabbableElement,
       isCircularNavigation,
+      navigateAtEnd = isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds',
       ...nativeProps
-    } = mergeProps(props, renderProps);
+    } = mergeProps(props, renderProps) as FocusZoneProps & { navigateAtEnd?: 'NavigateStopAtEnds' | 'NavigateWrap' | 'NavigateContinue' };
 
     return (
       <NativeFocusZone
         {...nativeProps}
         defaultTabbableElement={nativeDefaultTabbableElement}
-        navigateAtEnd={isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds'}
-        ref={componentRef}
+        navigateAtEnd={navigateAtEnd}
+        ref={nativeRef}
       />
     );
   });

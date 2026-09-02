@@ -4113,6 +4113,7 @@ __metadata:
     "@babel/core": "catalog:"
     "@fluentui-react-native/desktop-driver": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
     "@react-native-community/cli": "npm:^20.0.0"

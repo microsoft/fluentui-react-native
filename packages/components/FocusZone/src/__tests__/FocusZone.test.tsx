@@ -7,6 +7,7 @@ import type { SlotProp } from '@fluentui-react-native/framework-base';
 import { render } from '@testing-library/react-native';
 
 import { FocusZone } from '../FocusZone';
+import type { NavigateAtEnd } from '../FocusZone.types';
 
 jest.mock('react-native/Libraries/ReactNative/RendererProxy', () => ({
   ...jest.requireActual('react-native/Libraries/ReactNative/RendererProxy'),
@@ -14,7 +15,7 @@ jest.mock('react-native/Libraries/ReactNative/RendererProxy', () => ({
 }));
 
 type FocusZoneSlotConsumerProps = {
-  focusZone: SlotProp<typeof FocusZone>;
+  focusZone: SlotProp<typeof FocusZone> & { navigateAtEnd?: NavigateAtEnd };
 };
 
 function FocusZoneSlotConsumer({ focusZone }: FocusZoneSlotConsumerProps) {
@@ -79,6 +80,12 @@ describe('FocusZone', () => {
     const component = await render(<FocusZone isCircularNavigation testID="focus-zone" />);
 
     expect(component.getByTestId('focus-zone').props.navigateAtEnd).toBe('NavigateWrap');
+  });
+
+  it('preserves a native end behavior supplied by a legacy slot consumer', async () => {
+    const component = await render(<FocusZoneSlotConsumer focusZone={{ navigateAtEnd: 'NavigateContinue' }} />);
+
+    expect(component.getByTestId('slotted-focus-zone').props.navigateAtEnd).toBe('NavigateContinue');
   });
 
   it('forwards a registered native identifier as the default tabbable element', async () => {

@@ -16,6 +16,9 @@
       "path": "../../framework-base/tsconfig.json"
     },
     {
+      "path": "../../utils/interactive-hooks/tsconfig.json"
+    },
+    {
       "path": "../../../scripts/tsconfig.json"
     }
   ]
