@@ -138,6 +138,7 @@
       "destructive-button",
       "divider",
       "input",
+      "interaction-tag",
       "list-item",
       "listbox-item",
       "menu-item",
@@ -163,6 +164,7 @@
       "destructive-button",
       "divider",
       "input",
+      "interaction-tag",
       "list-item",
       "listbox-item",
       "menu-item",
@@ -184,7 +186,6 @@
       "dropdown",
       "field",
       "info-label",
-      "interaction-tag",
       "label",
       "link",
       "list",
@@ -214,7 +215,6 @@
       "dropdown",
       "field",
       "info-label",
-      "interaction-tag",
       "label",
       "link",
       "list",
@@ -636,6 +636,23 @@
         "modified": [
           "web/accessibility.md"
         ]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "interaction-tag",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md"]
       },
       "candidateStatus": "review-required"
     },

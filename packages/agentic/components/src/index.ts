@@ -95,6 +95,23 @@ export { renderInput_unstable } from './components/input/renderInput';
 export { useInputStyles_unstable } from './components/input/useInputStyles';
 export { useInput_unstable } from './components/input/useInput';
 
+export { InteractionTag } from './components/interaction-tag/interaction-tag';
+export type {
+  InteractionTagActionProps,
+  InteractionTagAppearance,
+  InteractionTagLayout,
+  InteractionTagLeadingContentProps,
+  InteractionTagProps,
+  InteractionTagShape,
+  InteractionTagSize,
+  InteractionTagSlots,
+  InteractionTagState,
+  InteractionTagStateSlots,
+} from './components/interaction-tag/interaction-tag.types';
+export { renderInteractionTag_unstable } from './components/interaction-tag/renderInteractionTag';
+export { useInteractionTagStyles_unstable } from './components/interaction-tag/useInteractionTagStyles';
+export { useInteractionTag_unstable } from './components/interaction-tag/useInteractionTag';
+
 export { ListItem } from './components/list-item/list-item';
 export type {
   ListItemProps,
