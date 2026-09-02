@@ -61,7 +61,16 @@ export function useLink_unstable(props: LinkProps): LinkState {
       // The rejection is only intercepted when the caller asked for it. Without a handler it is left
       // alone rather than absorbed, so a failed navigation surfaces instead of looking like a link
       // that simply did nothing.
-      const navigation = Linking.openURL(url);
+      let navigation: Promise<unknown>;
+      try {
+        navigation = Linking.openURL(url);
+      } catch (error) {
+        if (onNavigationError) {
+          onNavigationError(error);
+          return;
+        }
+        throw error;
+      }
       if (onNavigationError) {
         void navigation.catch(onNavigationError);
       }
@@ -106,7 +115,7 @@ export function useLink_unstable(props: LinkProps): LinkState {
     accessibilityRole: 'link' as const,
     accessibilityState: { ...accessibilityState, disabled },
     accessible: rest.accessible ?? true,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
     onBlur: handleBlur,
     onFocus: handleFocus,
     onPress: disabled ? undefined : handlePress,

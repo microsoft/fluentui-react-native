@@ -65,12 +65,10 @@ one.
 
 Two limitations are worth stating plainly. The dual-ring focus visual used
 elsewhere in this package is composed from nested views and cannot be placed
-inside a text run, so a link gets one ring rather than two. And an inline link
-nested inside a paragraph may not paint its border at all, because the platforms
-lay nested text out as an attributed string; such a link is still focusable and
-still keeps its underline, but its focus indication may be weaker than a
-standalone link's. Prefer standalone links for anything that must be reachable
-and obviously focused.
+inside a text run, so a link gets one ring rather than two. A Link nested inside
+a paragraph becomes virtual text on Windows and is not an independent keyboard
+focus target. Until the platform supplies accessible focusable inline text, keep
+Link roots standalone; `inline` controls their visual treatment only.
 
 ## Disabled links
 

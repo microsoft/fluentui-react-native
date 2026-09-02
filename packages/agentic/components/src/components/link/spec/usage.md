@@ -56,22 +56,19 @@ than merely observed.
 Do not wrap a link in a handler that discards the error. A destination that will
 not open is a bug, and hiding it makes it permanent.
 
-## Inline links
+## Inline visual treatment
 
-Set `inline` for any link that sits inside a run of text. It keeps the underline
-visible at rest, which is the only thing distinguishing the link from the words
-around it, and it drops the standalone typography so the link inherits the
-surrounding text style.
+`inline` keeps the underline visible at rest and omits standalone typography.
+Do not nest Link inside a parent Text on Windows: nested native text becomes a
+virtual span and cannot be reached as an independent keyboard control. Keep the
+Link root standalone until the platform provides focusable inline-text semantics.
 
 ```tsx
-<Text style={{ fontSize: 18, lineHeight: 24 }}>
-  Read the <Link content="deployment guide" inline url="https://example.com/deploy" /> before you start.
-</Text>
+<Link content="Deployment guide" inline style={{ fontSize: 18, lineHeight: 24 }} url="https://example.com/deploy" />
 ```
 
-Leave `inline` unset only for standalone links that sit in whitespace, in a
-column of links, or in a navigation region. Those acquire the underline on press
-and on focus.
+Leave `inline` unset for standalone links whose surroundings already imply
+interactivity. Those acquire the underline on press and on focus.
 
 ```tsx
 <View style={{ gap: 8 }}>
@@ -130,8 +127,8 @@ of body text, and keep the sentence's final period outside the link.
 Using a link for an action, or a button for a destination, because the two were
 styled to look alike.
 
-Forgetting `inline` on a link inside prose, which leaves it the same color as the
-text around it with nothing else to mark it.
+Nesting Link inside Text on Windows, which removes its independent keyboard
+focus semantics.
 
 Locking a standalone type set onto an inline link, which makes it the wrong size
 for the paragraph it sits in.

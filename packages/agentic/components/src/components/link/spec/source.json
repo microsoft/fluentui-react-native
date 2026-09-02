@@ -117,7 +117,7 @@
       "status": "accepted"
     },
     {
-      "id": "link-inline-focus-border-may-be-inert",
+      "id": "link-inline-native-focus-unsupported",
       "status": "deferred"
     },
     {
@@ -126,6 +126,10 @@
     },
     {
       "id": "link-no-state-transition",
+      "status": "accepted"
+    },
+    {
+      "id": "link-non-font-icon-unsupported",
       "status": "accepted"
     },
     {

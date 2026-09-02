@@ -1,3 +1,4 @@
+import type * as React from 'react';
 import type { NativeSyntheticEvent, StyleProp, Text as NativeText, TargetedEvent, TextStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
@@ -12,11 +13,20 @@ import type {
 } from '@fluentui-react-native/framework-base';
 
 import type { Icon } from '../../primitives/icon/icon';
+import type { FontIconSource, IconElementProps, IconProps } from '../../primitives/icon/icon.types';
 
 export type LinkSlots = {
   root: Slot<typeof NativeText>;
   content: OptionalSlot<typeof NativeText>;
   icon: OptionalSlot<typeof Icon>;
+};
+
+/** A text-backed trailing glyph that can render safely inside Link's native Text root. */
+export type LinkIconProps = IconElementProps & {
+  as?: React.ComponentType<IconProps>;
+  fontSource: FontIconSource;
+  imageSource?: never;
+  svgSource?: never;
 };
 
 export type LinkTypeSet = 'functional' | 'content';
@@ -53,7 +63,11 @@ export type LinkNavigationProps = {
 
 export type LinkRootProps = OwnedRootProps<PropsWithRefOf<typeof NativeText> & LinkFocusProps>;
 
-export type LinkProps = LinkStateProps & LinkNavigationProps & ComponentProps<LinkSlots, LinkRootProps>;
+export type LinkProps = LinkStateProps &
+  LinkNavigationProps &
+  Omit<ComponentProps<LinkSlots, LinkRootProps>, 'icon'> & {
+    icon?: LinkIconProps | null;
+  };
 
 export type LinkState = ComponentState<LinkSlots> &
   Required<LinkStateProps> &

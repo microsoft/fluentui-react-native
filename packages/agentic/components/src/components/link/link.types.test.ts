@@ -37,6 +37,12 @@ const InlineLink: LinkProps = { content: 'privacy statement', inline: true };
 const DelegatedLink: LinkProps = { content: 'Open settings', onPress: () => undefined };
 const SuppressedLabel: LinkProps = { accessibilityLabel: 'Open the invoice', content: null };
 
+// @ts-expect-error an image cannot render inside Link's native Text root
+const InvalidImageIcon: LinkProps = { icon: { imageSource: { uri: 'external.png' } } };
+
+// @ts-expect-error an SVG cannot render inside Link's native Text root
+const InvalidSvgIcon: LinkProps = { icon: { svgSource: () => null } };
+
 // @ts-expect-error the type set is a closed union
 const InvalidTypeSet: LinkProps = { typeSet: 'display' };
 
@@ -50,5 +56,7 @@ describe('Link types', () => {
     expect(InlineLink).toBeDefined();
     expect(DelegatedLink).toBeDefined();
     expect(SuppressedLabel).toBeDefined();
+    expect(InvalidImageIcon).toBeDefined();
+    expect(InvalidSvgIcon).toBeDefined();
   });
 });

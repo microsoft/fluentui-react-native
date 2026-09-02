@@ -180,6 +180,19 @@ describe('Link', () => {
     expect(onNavigationError).toHaveBeenCalledWith(failure);
   });
 
+  it('reports a synchronous navigation failure to onNavigationError', async () => {
+    const failure = new Error('invalid URL');
+    openURL.mockImplementation(() => {
+      throw failure;
+    });
+    const onNavigationError = jest.fn();
+    const component = await renderLink({ content: 'Invoice', onNavigationError, url: '' });
+
+    await fireEvent.press(getRoot(component));
+
+    expect(onNavigationError).toHaveBeenCalledWith(failure);
+  });
+
   // LNK-006
   it('leaves the navigation rejection untouched when no handler is supplied', async () => {
     const failure = new Error('no handler for scheme');
@@ -210,6 +223,12 @@ describe('Link', () => {
     expect(root.props.onPressIn).toBeUndefined();
     expect(root.props.onPressOut).toBeUndefined();
     expect(openURL).not.toHaveBeenCalled();
+  });
+
+  it('keeps a disabled link out of the tab order when focusable is requested', async () => {
+    const component = await renderLink({ content: 'Unavailable', disabled: true, focusable: true });
+
+    expect(getRoot(component).props.focusable).toBe(false);
   });
 
   // LNK-010

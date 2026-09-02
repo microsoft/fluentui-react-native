@@ -128,10 +128,8 @@ export const TypeSet: Story = {
 export const Inline: Story = {
   render: () => (
     <View style={styles.story}>
-      <StoryGroup label="Inline">
-        <Text style={styles.paragraph}>
-          Read the <Link content="privacy statement" inline /> before continuing.
-        </Text>
+      <StoryGroup label="Inline visual treatment">
+        <Link content="Privacy statement" inline style={styles.paragraph} />
       </StoryGroup>
       <StoryGroup label="Standalone">
         <Link content="Privacy statement" />
@@ -142,7 +140,7 @@ export const Inline: Story = {
     docs: {
       description: {
         story:
-          'An inline link stays underlined and inherits the surrounding typography. A standalone link supplies its own typography and reveals the underline on press or focus.',
+          'The inline visual treatment stays underlined and omits component typography. Keep Link standalone on Windows because nested virtual text is not independently keyboard focusable.',
       },
     },
   },

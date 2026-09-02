@@ -39,7 +39,7 @@ decision below follows from that.
 | `onPress`           | `TextProps['onPress']`     | none         | Always called first on activation, whether or not `url` is set.                                     |
 | `onNavigationError` | `(error: unknown) => void` | none         | Receives a `Linking.openURL` rejection. Without it the rejection is left untouched, never absorbed. |
 | `content`           | `OptionalSlot<Text>`       | `Link`       | The label. Carries the underline and the type-set typography. `null` suppresses it.                 |
-| `icon`              | `OptionalSlot<Icon>`       | none         | Trailing glyph. Rendered only when supplied; never underlined.                                      |
+| `icon`              | font-backed `Icon` slot    | none         | Trailing glyph. Image and SVG sources are excluded because native Text cannot host them on Windows. |
 | `style`             | `StyleProp<TextStyle>`     | none         | Applied after the resolved root styles.                                                             |
 
 **LNK-001:** Resolve `typeSet`, `inline`, and `disabled` to the documented
@@ -48,11 +48,11 @@ root.
 
 ### Slots and anatomy
 
-| Slot      | Type   | Rendered           | Contract                                                                                 |
-| --------- | ------ | ------------------ | ---------------------------------------------------------------------------------------- |
-| `root`    | `Text` | always             | The hit area, the focus target, and the only accessible element.                         |
-| `content` | `Text` | unless suppressed  | Nested text run that carries the underline, the type-set typography, and the foreground. |
-| `icon`    | `Icon` | only when supplied | Trailing glyph inside the same text run. Never underlined, never separately accessible.  |
+| Slot      | Type   | Rendered           | Contract                                                                                        |
+| --------- | ------ | ------------------ | ----------------------------------------------------------------------------------------------- |
+| `root`    | `Text` | always             | The hit area, the focus target, and the only accessible element.                                |
+| `content` | `Text` | unless suppressed  | Nested text run that carries the underline, the type-set typography, and the foreground.        |
+| `icon`    | `Icon` | only when supplied | Font-backed trailing glyph inside the same text run. Never underlined or separately accessible. |
 
 Render order inside the root is: content, then icon.
 
@@ -109,11 +109,14 @@ inline box.
 
 ## Platform behavior
 
-Windows and macOS both render the root as a native `Text`. The root is focusable
+Windows and macOS both render a standalone root as a native `Text`. The root is focusable
 while enabled and leaves the tab order while disabled; Enter activates the
 focused link through the platform's press handling. On Windows the root maps to
 a UI Automation hyperlink that reports its disabled state; on macOS it maps to
-the equivalent link element for VoiceOver. The trailing glyph is not accessible
+the equivalent link element for VoiceOver. Nesting the root inside another Text
+turns it into virtual text on Windows, which is not an independent keyboard focus
+target; use standalone links until the platform provides focusable inline text.
+The trailing glyph is not accessible
 on either platform, so a link is always exactly one control.
 
 Two capabilities that a browser supplies are absent on both platforms. There is
@@ -127,17 +130,18 @@ operating system, not by Link.
 
 ## Divergences from Flex
 
-| ID                                           | Disposition | React Native contract                                                                                                                                                                                                                     | Follow-up                                                                                              |
-| -------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `link-visited-state-unsupported`             | Accepted    | There is no visited state and none is tracked. React Native has no navigation history for a text run, and Flex specifies Visited as pixel-identical to Rest, so nothing is lost visually.                                                 | None. A host that tracks its own history can style a visited link through `style`.                     |
-| `link-hover-state-unsupported`               | Accepted    | There is no hovered state. A non-inline link reveals its underline on press and on focus instead of on hover.                                                                                                                             | Needs hover reporting on a text run before the Flex hover step can be adopted.                         |
-| `link-underline-geometry-unsupported`        | Accepted    | Only underline presence is portable. The dotted style is requested for the content type set and ignored by both target platforms, and the thin-versus-thick thickness and the 15% offset have no React Native expression at all.          | Needs text-decoration thickness, offset, and style support in the platform text stack.                 |
-| `link-focus-ring-is-single-border`           | Deferred    | Focus is drawn as one border on the root text box, in the outer focus stroke color, rather than the universal dual ring. The `FocusVisual` primitive composes `View` rings, which cannot be nested inside a text run.                     | Needs a text-flow focus visual before the dual ring can be used.                                       |
-| `link-inline-focus-border-may-be-inert`      | Deferred    | An inline link nested inside a paragraph may not paint its focus border, because the platforms lay nested text out as an attributed string and can drop box decorations. An inline link is still focusable and still keeps its underline. | Needs per-platform verification of nested-text border painting.                                        |
-| `link-icon-gap-is-inline-padding`            | Accepted    | React Native lays `Text` children out with the text engine, which has no `gap`, so the label-to-glyph spacing is carried as horizontal space inside the glyph's own inline box.                                                           | None. This is the only portable way to space an inline glyph from its label.                           |
-| `link-url-prop-name`                         | Accepted    | The destination prop is named `url` rather than `href`, matching the existing public FURN `Link` so callers can move between the two without renaming.                                                                                    | None.                                                                                                  |
-| `link-navigation-does-not-supersede-onpress` | Accepted    | `onPress` runs on every activation and `url` navigation happens afterwards. The existing public FURN `Link` treats `url` as superseding `onPress`; suppressing a caller's handler is not a behavior this package will reproduce.          | None.                                                                                                  |
-| `link-no-state-transition`                   | Accepted    | The pressed foreground change is applied immediately with no transition, and underline visibility changes are instant, which Flex also requires.                                                                                          | Needs motion tokens and an animated color layer before the eased foreground transition can be adopted. |
+| ID                                           | Disposition | React Native contract                                                                                                                                                                                                              | Follow-up                                                                                              |
+| -------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `link-visited-state-unsupported`             | Accepted    | There is no visited state and none is tracked. React Native has no navigation history for a text run, and Flex specifies Visited as pixel-identical to Rest, so nothing is lost visually.                                          | None. A host that tracks its own history can style a visited link through `style`.                     |
+| `link-hover-state-unsupported`               | Accepted    | There is no hovered state. A non-inline link reveals its underline on press and on focus instead of on hover.                                                                                                                      | Needs hover reporting on a text run before the Flex hover step can be adopted.                         |
+| `link-underline-geometry-unsupported`        | Accepted    | Only underline presence is portable. The dotted style is requested for the content type set and ignored by both target platforms, and the thin-versus-thick thickness and the 15% offset have no React Native expression at all.   | Needs text-decoration thickness, offset, and style support in the platform text stack.                 |
+| `link-focus-ring-is-single-border`           | Deferred    | Focus is drawn as one border on the root text box, in the outer focus stroke color, rather than the universal dual ring. The `FocusVisual` primitive composes `View` rings, which cannot be nested inside a text run.              | Needs a text-flow focus visual before the dual ring can be used.                                       |
+| `link-inline-native-focus-unsupported`       | Deferred    | A Link nested inside a paragraph becomes virtual text on Windows and is not an independent keyboard focus target. `inline` remains a visual style for hosts that can preserve semantics, but FURN does not demonstrate nested use. | Needs a platform inline-text primitive with independent link and focus semantics.                      |
+| `link-non-font-icon-unsupported`             | Accepted    | The trailing icon accepts only a font source because Windows native Text drops nested Image and SVG native elements.                                                                                                               | Needs a non-Text rendering architecture that preserves inline layout and link semantics.               |
+| `link-icon-gap-is-inline-padding`            | Accepted    | React Native lays `Text` children out with the text engine, which has no `gap`, so the label-to-glyph spacing is carried as horizontal space inside the glyph's own inline box.                                                    | None. This is the only portable way to space an inline glyph from its label.                           |
+| `link-url-prop-name`                         | Accepted    | The destination prop is named `url` rather than `href`, matching the existing public FURN `Link` so callers can move between the two without renaming.                                                                             | None.                                                                                                  |
+| `link-navigation-does-not-supersede-onpress` | Accepted    | `onPress` runs on every activation and `url` navigation happens afterwards. The existing public FURN `Link` treats `url` as superseding `onPress`; suppressing a caller's handler is not a behavior this package will reproduce.   | None.                                                                                                  |
+| `link-no-state-transition`                   | Accepted    | The pressed foreground change is applied immediately with no transition, and underline visibility changes are instant, which Flex also requires.                                                                                   | Needs motion tokens and an animated color layer before the eased foreground transition can be adopted. |
 
 ## Conformance
 
