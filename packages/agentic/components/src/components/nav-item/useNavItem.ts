@@ -70,6 +70,10 @@ export function useNavItem_unstable(props: NavItemProps): NavItemState {
   const category = type === 'category';
   const themeState = useThemeState();
   const metrics = getMetrics(density, nesting, themeState.tokens);
+  const resolvedAccessibilityState = { ...accessibilityState };
+  if (category) {
+    delete resolvedAccessibilityState.selected;
+  }
 
   useAccessibilityLabelWarning({
     accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
@@ -81,15 +85,15 @@ export function useNavItem_unstable(props: NavItemProps): NavItemState {
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
-    accessibilityRole: rest.accessibilityRole ?? (category ? 'button' : 'link'),
+    accessibilityRole: category ? 'button' : 'link',
     accessibilityState: {
-      ...accessibilityState,
+      ...resolvedAccessibilityState,
       disabled,
       ...(category ? { expanded } : { selected }),
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
   });
 
   const root = useSlot(Pressable, {

@@ -148,6 +148,20 @@ describe('NavItem', () => {
     expect(getRootStyle(component, 'button').backgroundColor).toBe(colors.backgroundNeutralSoft);
   });
 
+  it('owns the semantic role and category accessibility state', async () => {
+    const category = await renderNavItem({
+      accessibilityRole: 'link',
+      accessibilityState: { busy: true, selected: true },
+      label: 'Mail',
+      type: 'category',
+    });
+
+    expect(getRoot(category, 'button').props.accessibilityState).toEqual({ busy: true, disabled: false, expanded: false });
+
+    const item = await renderNavItem({ accessibilityRole: 'button', label: 'Inbox' });
+    expect(getRoot(item).props.accessibilityRole).toBe('link');
+  });
+
   it.each([['comfortable', 12, 10, 20, 20] as const, ['compact', 8, 6, 16, 16] as const])(
     'resolves the %s density',
     async (density, paddingHorizontal, paddingVertical, leadingSize, avatarSize) => {
@@ -244,6 +258,12 @@ describe('NavItem', () => {
 
     await fireEvent.press(root);
     expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('keeps disabled rows out of the tab order when focusable is requested', async () => {
+    const component = await renderNavItem({ disabled: true, focusable: true, label: 'Inbox' });
+
+    expect(getRoot(component).props.focusable).toBe(false);
   });
 
   it('merges caller accessibility state and applies the caller style last', async () => {
