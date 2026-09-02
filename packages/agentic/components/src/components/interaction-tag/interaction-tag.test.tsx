@@ -128,6 +128,25 @@ describe('InteractionTag', () => {
     expect(onDismissPress).not.toHaveBeenCalled();
   });
 
+  it('keeps disabled regions out of the tab order when slot props request focusability', async () => {
+    const component = await renderInteractionTag({
+      content: 'Unavailable',
+      disabled: true,
+      dismiss: { ...dismissProps, focusable: true },
+      primaryAction: { focusable: true, testID: 'primary-action' },
+    });
+
+    expect(getPrimary(component).props.focusable).toBe(false);
+    expect(getDismiss(component).props.focusable).toBe(false);
+  });
+
+  it('disables the native focus ring for both custom focus-visual regions', async () => {
+    const component = await renderInteractionTag({ ...withPrimaryTestId, content: 'Engineering' });
+
+    expect(getPrimary(component).props.enableFocusRing).toBe(false);
+    expect(getDismiss(component).props.enableFocusRing).toBe(false);
+  });
+
   it('merges caller accessibility state under the resolved disabled state', async () => {
     const component = await renderInteractionTag({
       content: 'Engineering',

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
+import type { PressableProps } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
@@ -23,6 +24,10 @@ const dividerProps = {
 } as const;
 
 const emptyActionProps: InteractionTagActionProps = {};
+
+type NativeFocusPressableProps = PressableProps & {
+  enableFocusRing: boolean;
+};
 
 export function useInteractionTag_unstable(props: InteractionTagProps): InteractionTagState {
   const {
@@ -81,7 +86,7 @@ export function useInteractionTag_unstable(props: InteractionTagProps): Interact
 
   const themeState = useThemeState();
 
-  const [primaryPressableProps, primaryState] = usePressableState({
+  const primaryNativeProps: NativeFocusPressableProps = {
     ...primaryRest,
     accessibilityRole: 'button',
     accessibilityState: {
@@ -90,10 +95,12 @@ export function useInteractionTag_unstable(props: InteractionTagProps): Interact
     },
     accessible: primaryRest.accessible ?? true,
     disabled,
-    focusable: primaryRest.focusable ?? !disabled,
-  });
+    enableFocusRing: false,
+    focusable: !disabled && (primaryRest.focusable ?? true),
+  };
+  const [primaryPressableProps, primaryState] = usePressableState(primaryNativeProps);
 
-  const [dismissPressableProps, dismissState] = usePressableState({
+  const dismissNativeProps: NativeFocusPressableProps = {
     ...dismissRest,
     accessibilityRole: 'button',
     accessibilityState: {
@@ -102,8 +109,10 @@ export function useInteractionTag_unstable(props: InteractionTagProps): Interact
     },
     accessible: dismissRest.accessible ?? true,
     disabled,
-    focusable: dismissRest.focusable ?? !disabled,
-  });
+    enableFocusRing: false,
+    focusable: !disabled && (dismissRest.focusable ?? true),
+  };
+  const [dismissPressableProps, dismissState] = usePressableState(dismissNativeProps);
 
   const root = useSlot(View, { ...rest, ref: rootRef });
   const primaryAction = useSlot(Pressable, { ...primaryPressableProps, as: primaryAs, ref: primaryRef });
