@@ -1,79 +1,86 @@
-# Desktop driver development
+# Desktop Driver agent instructions
 
-These instructions apply to `packages/agentic/desktop-driver`.
+This is the instruction root for
+`packages/agentic/desktop-driver` and every descendant.
 
-## Module ownership
+## Start every task
 
-- `protocol/` owns W3C parsing, errors, capabilities, actions, and deadlines.
-- `server/` owns target/session/window/element state and HTTP routing.
-- `host/` defines the platform-neutral native contract.
-- `hosts/fake/` is the deterministic Stage 1 provider.
-- `hosts/native/` owns the framed helper process and `DesktopHost` adapter.
-- `native/` owns build, cache, resolution, verification, and native wire types.
-- package-root `native/` contains checked-in operating-system source only.
-- `authoring/` owns serializable plan and result contracts.
-- `runner/` executes plans and classifies outcomes.
-- `wdio/` is the sanctioned high-level automation integration.
-- `agent/` exposes bounded JSON-safe operations.
-- `artifacts/` confines and atomically persists evidence.
-- `cli/` parses commands and adapts structured APIs to JSON and exit codes.
-- `testing/` owns reusable fake harnesses, not production fallbacks.
+1. Read [README.md](README.md) and the narrowest relevant reference:
+   [architecture](references/architecture.md),
+   [service integration](references/service.md),
+   [native helpers](references/native-helpers.md),
+   [test integration](references/test-integration.md), or
+   [security](references/security.md).
+2. For macOS native work, also read
+   [native/macos/README.md](native/macos/README.md). For Windows or Win32 native
+   work, read [native/windows/README.md](native/windows/README.md).
+3. Read [PLAN.md](PLAN.md) only when the task changes qualification, release
+   readiness, or deferred scope. It contains remaining work, not the current
+   architecture.
+4. Inspect the owning source and tests before editing. Use package scripts from
+   this directory or the corresponding root workspace command.
 
-## Invariants
+## Non-negotiable invariants
 
-- Do not import Storybook, React, or React Native from this package.
-- Keep protocol, client, authoring, runner, evidence, and fake-host code
-  platform-neutral.
-- Put future operating-system integrations behind `DesktopHost`; do not branch
-  on `process.platform` outside host-provider selection.
-- Never write native output beneath the package, `node_modules`, or a pnpm
-  store. Use immutable verified artifacts in the configured native store.
-- Never download a helper automatically. Explicit helper and install-root
-  selections fail closed when verification fails.
-- Verify the actual long-lived helper process before target registration; a
-  short-lived probe is not a substitute.
-- Keep the W3C server client-neutral. WebdriverIO belongs only in `wdio/`,
-  agent/CLI composition, and contract tests.
-- Register targets on the server. Never accept arbitrary commands, environment
-  variables, or output paths from WebDriver capabilities.
-- Permit one active session per target and reserve the target before any async
-  launch/attach work.
-- Serialize commands per session and serialize all physical input across
-  sessions. Never dispatch reset, release, deletion, or another action around
-  an in-flight command.
-- Preserve attached applications and clean up only resources recorded as owned.
-- Apply deadlines to probe, launch, host command, cleanup, and dispose paths.
-- Honor every `DesktopHost` `AbortSignal`: stop side effects and settle promptly
-  before the command queue advances. A provider may never complete input after
-  timeout cleanup.
-- Release depressed input on failure, cancellation, and session deletion.
-- Keep physical-input ownership serialized across independent helper processes,
-  not only inside one Node server.
-- Reject browser-origin requests and non-loopback serving by default.
+- Do not import Storybook, React, or React Native into this package.
+- Keep protocol, client, authoring, runner, artifacts, and fake-host code
+  platform-neutral. Operating-system behavior belongs behind `DesktopHost`.
+- Keep the W3C server client-neutral. WebdriverIO belongs in `/wdio`, composed
+  agent/CLI operations, and contract tests, never in routing or host state.
+- Register controlled targets on startup. Never accept executable paths,
+  environment variables, helper selection, or artifact roots from WebDriver
+  capabilities.
+- Bind only to loopback, reject browser-origin requests, and fail closed when a
+  helper, signature, target identity, permission, or capability cannot be
+  verified.
+- Permit one active session per target. Serialize each session's commands and
+  all physical input, including across independent helper processes.
+- Every host operation must honor its `AbortSignal`, stop side effects, settle
+  before the queue advances, and release owned input on cancellation, failure,
+  or deletion.
+- Preserve attached applications. Clean up only helpers, applications, ports,
+  and files whose exact ownership was recorded.
+- Never compile during install, download a helper, or write native output under
+  the package, `node_modules`, or a pnpm store. Publish immutable, verified
+  artifacts only to the configured native store.
+- Keep plans, manifests, results, CLI output, and agent output serializable.
+  Reject unknown or dynamic plan fields instead of silently dropping them.
+- Never translate an unsupported native state into `false`. Capability-check it
+  and return an explicit skip or unsupported result.
+- Confine artifacts beneath the configured root, preserve the original failure
+  when evidence capture also fails, and never expose native handles or
+  unrestricted commands through agent APIs.
 
-## Authored plans
+## Detailed development guidance
 
-- Plans are versioned static JSON under `parameters.desktopDriver`.
-- Keep selectors, steps, capability requirements, results, manifests, CLI
-  output, and agent output serializable.
-- Reject unknown fields and dynamic values rather than silently dropping them.
-- Never translate an unsupported native property into `false`.
-- Use stable `testID` selectors for deterministic actions; role/name selectors
-  validate accessibility semantics.
-- Keep platform differences declarative through `platforms`, `requires`, and
-  explicit skip results.
+Use [Contributor reference](references/contributing.md) for module ownership,
+change placement, generated files, test expectations, and validation order.
+Protocol behavior is authoritative in
+[references/protocol.md](references/protocol.md); private native transport is
+authoritative in [native/PROTOCOL.md](native/PROTOCOL.md).
 
-## Evidence and agents
-
-- Confine every artifact beneath the configured run root.
-- Preserve the original test failure when evidence capture also fails.
-- Bound agent tree depth and node count.
-- Do not expose native handles or unrestricted command execution.
-- The Storybook MCP remains separate; do not add a schema-only MCP claim.
+When changing user-visible behavior, update the relevant reference and keep
+[README.md](README.md) as a concise entry point. When work is completed, move
+its durable behavior into documentation and remove it from [PLAN.md](PLAN.md);
+the plan must describe only unfinished or explicitly deferred work.
 
 ## Validation
 
-Run the package's declared format, lint, build, and test scripts. Contract tests
-must cover raw W3C, the typed client, WebdriverIO custom commands, JSON CLI,
-agent operations, artifacts, target concurrency, shutdown races, and
-representative Storybook plans before repository-level validation.
+Run the package's declared checks:
+
+```sh
+yarn format
+yarn lint
+yarn build
+yarn test
+```
+
+Set `FURN_NATIVE_DRIVER_TEST=1` only on the matching target operating system to
+exercise the real native build, handshake, self-test, cache, and resolution
+contract. Stable-signed macOS coverage additionally needs
+`FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`.
+
+Use [CI integration](references/ci-integration.md) and
+[Test integration](references/test-integration.md) for native and consuming-app
+gates. Run root validation when public types, exports, manifests, dependencies,
+project references, or package contents change.
