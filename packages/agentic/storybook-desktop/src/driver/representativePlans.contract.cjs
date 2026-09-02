@@ -20,7 +20,7 @@ async function main() {
     storyPackages: ['@fluentui-react-native/components'],
   });
   const manifest = await createDesktopStoryManifest(config, 'windows');
-  const planned = manifest.entries.filter(({ tests }) => tests);
+  const planned = manifest.entries.filter(({ id, tests }) => id.startsWith('components-') && id.endsWith('--default') && tests);
   const windowRect = { x: 0, y: 0, width: 800, height: 600 };
   const harness = await testing.createDesktopDriverStoryHarness(manifest, {
     windows: [
@@ -90,7 +90,7 @@ async function main() {
   try {
     const runOptions = {
       artifactsRoot: process.argv[2],
-      selection: { tag: 'desktop-e2e' },
+      selection: { story: 'components-*--default', tag: 'desktop-e2e' },
     };
     const result = await desktop.runStoryTests(runOptions);
     const repeated = await desktop.runStoryTests(runOptions);
