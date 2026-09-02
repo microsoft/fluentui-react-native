@@ -16,6 +16,18 @@ export { renderAvatar_unstable } from './components/avatar/renderAvatar';
 export { useAvatarStyles_unstable } from './components/avatar/useAvatarStyles';
 export { useAvatar_unstable } from './components/avatar/useAvatar';
 
+export { AvatarGroup } from './components/avatar-group/avatar-group';
+export type {
+  AvatarGroupLayout,
+  AvatarGroupProps,
+  AvatarGroupSize,
+  AvatarGroupSlots,
+  AvatarGroupState,
+} from './components/avatar-group/avatar-group.types';
+export { renderAvatarGroup_unstable } from './components/avatar-group/renderAvatarGroup';
+export { useAvatarGroupStyles_unstable } from './components/avatar-group/useAvatarGroupStyles';
+export { useAvatarGroup_unstable } from './components/avatar-group/useAvatarGroup';
+
 export { Badge } from './components/badge/badge';
 export type {
   BadgeAppearance,

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 2,
+  "component": "avatar-group",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-09-02",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:avatar-group",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar-group/SKILL.md",
+          "marketplaceBlobSha": "29fbe44d79098af76dac46666b0cf062e48aca20",
+          "marketplaceSha256": "1589a9a1962e1dfa47944c544fbb6b4fbd142eec112a7166f69cc160a9adf08a",
+          "originPath": "plugins/components/skills/avatar-group/SKILL.md",
+          "originBlobSha": "29fbe44d79098af76dac46666b0cf062e48aca20",
+          "originSha256": "1589a9a1962e1dfa47944c544fbb6b4fbd142eec112a7166f69cc160a9adf08a",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar-group/usage.md",
+          "marketplaceBlobSha": "8c6c168695528721c9eab591edac828c93e0cac1",
+          "marketplaceSha256": "90405328d920f4731af098723b40cbc7cbd7a31db7df430d508cf3cd92a3ebad",
+          "originPath": "plugins/components/skills/avatar-group/usage.md",
+          "originBlobSha": "8c6c168695528721c9eab591edac828c93e0cac1",
+          "originSha256": "90405328d920f4731af098723b40cbc7cbd7a31db7df430d508cf3cd92a3ebad",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar-group/web/accessibility.md",
+          "marketplaceBlobSha": "b292608a84f121943bc249d9971027ed8b2cc876",
+          "marketplaceSha256": "dbf078ded5ef1bbd7a881579e9d57c39932381c319ccaab4445e94a557be9592",
+          "originPath": "plugins/components/skills/avatar-group/web/accessibility.md",
+          "originBlobSha": "b292608a84f121943bc249d9971027ed8b2cc876",
+          "originSha256": "dbf078ded5ef1bbd7a881579e9d57c39932381c319ccaab4445e94a557be9592",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar-group/web/interaction.md",
+          "marketplaceBlobSha": "13aaa013506b84ae578ec5f325cc8cd698a18195",
+          "marketplaceSha256": "528042ebec29de86073b3de9cd45db07162cc673c107320faf38d2f91cdead48",
+          "originPath": "plugins/components/skills/avatar-group/web/interaction.md",
+          "originBlobSha": "13aaa013506b84ae578ec5f325cc8cd698a18195",
+          "originSha256": "528042ebec29de86073b3de9cd45db07162cc673c107320faf38d2f91cdead48",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/avatar-group/web/tokens.yaml",
+          "marketplaceBlobSha": "6e493687a194ede7600befd8e53bf884606f5682",
+          "marketplaceSha256": "38dd10a0ea317cef6869a8dcad469701eb22eb89f7e2d0f92e0f7728aa258170",
+          "originPath": "plugins/components/skills/avatar-group/web/tokens.yaml",
+          "originBlobSha": "6e493687a194ede7600befd8e53bf884606f5682",
+          "originSha256": "38dd10a0ea317cef6869a8dcad469701eb22eb89f7e2d0f92e0f7728aa258170",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    {
+      "id": "avatar-group-labeled-group-role",
+      "status": "accepted"
+    },
+    {
+      "id": "avatar-group-overflow-not-an-avatar",
+      "status": "accepted"
+    },
+    {
+      "id": "avatar-group-size-declared-on-group",
+      "status": "accepted"
+    },
+    {
+      "id": "avatar-group-slot-maximum-advisory",
+      "status": "accepted"
+    },
+    {
+      "id": "avatar-group-stack-separation-ring",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "AVG-001",
+      "evidence": ["avatar-group.styles.ts", "useAvatarGroupStyles.ts", "renderAvatarGroup.tsx", "avatar-group.test.tsx"]
+    },
+    {
+      "id": "AVG-002",
+      "evidence": ["avatar-group.types.ts", "useAvatarGroup.ts", "avatar-group.test.tsx", "avatar-group.types.test.ts"]
+    },
+    {
+      "id": "AVG-003",
+      "evidence": ["useAvatarGroup.ts", "avatar-group.styles.ts", "avatar-group.test.tsx"]
+    },
+    {
+      "id": "AVG-004",
+      "evidence": ["useAvatarGroup.ts", "useAvatarGroupStyles.ts", "avatar-group.test.tsx"]
+    },
+    {
+      "id": "AVG-005",
+      "evidence": ["avatar-group.types.ts", "useAvatarGroupStyles.ts", "avatar-group.stories.tsx", "avatar-group.test.tsx"]
+    },
+    {
+      "id": "AVG-006",
+      "evidence": ["useAvatarGroup.ts", "avatar-group.test.tsx"]
+    }
+  ]
+}

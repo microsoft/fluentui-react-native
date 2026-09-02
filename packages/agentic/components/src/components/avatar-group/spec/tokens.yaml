@@ -1,0 +1,94 @@
+schemaVersion: 1
+component: avatar-group
+implementation: avatar-group.styles.ts
+
+statePrecedence:
+  - size
+  - layout
+  - offset
+
+bindings:
+  root:
+    allLayouts:
+      flexDirection: row
+      alignItems: center
+    spread:
+      gap:
+        '16': spacing.componentBase200
+        '20': spacing.componentBase250
+        '24': spacing.componentBase250
+        '28': spacing.componentBase250
+        '32': spacing.componentBase300
+        '40': spacing.componentBase300
+        '56': spacing.componentBase300
+        '120': spacing.componentBase500
+    stack:
+      gap: 0
+  item:
+    allLayouts:
+      alignItems: center
+      justifyContent: center
+      borderRadius: borderRadius.circular
+    spread:
+      backgroundColor: color.backgroundNeutralTransparent
+      box: { '16': 16, '20': 20, '24': 24, '28': 28, '32': 32, '40': 40, '56': 56, '120': 120 }
+    stack:
+      backgroundColor: color.surfaceNeutralNearer
+      ringWidth:
+        '16': strokeWidth.thin
+        '20': strokeWidth.thin
+        '24': strokeWidth.thin
+        '28': strokeWidth.thin
+        '32': strokeWidth.thin
+        '40': strokeWidth.thick
+        '56': strokeWidth.thicker
+        '120': 4
+      box: size + 2 * ringWidth
+      offset:
+        marginStart: -(overlap + 2 * ringWidth)
+        overlap: { '16': 4, '20': 5, '24': 6, '28': 7, '32': 8, '40': 10, '56': 14, '120': 30 }
+  overflow:
+    allSizes:
+      backgroundColor: color.surfaceNeutralNearer
+      borderColor: color.strokeNeutralSubtle
+      borderRadius: borderRadius.circular
+      alignment: center
+    size:
+      '16': { diameter: 16, borderWidth: strokeWidth.thin }
+      '20': { diameter: 20, borderWidth: strokeWidth.thin }
+      '24': { diameter: 24, borderWidth: strokeWidth.thin }
+      '28': { diameter: 28, borderWidth: strokeWidth.thin }
+      '32': { diameter: 32, borderWidth: strokeWidth.thin }
+      '40': { diameter: 40, borderWidth: strokeWidth.thick }
+      '56': { diameter: 56, borderWidth: strokeWidth.thicker }
+      '120': { diameter: 120, borderWidth: 4 }
+  overflowText:
+    color: color.foregroundNeutralPrimary
+    fontFamily: fontFamily.functional
+    fontWeight: fontWeight.functionalSemibold
+    size:
+      '16': { fontSize: fontSize.functionalCaption, lineHeight: fontSize.functionalCaption }
+      '20': { fontSize: fontSize.functionalCaption, lineHeight: fontSize.functionalCaption }
+      '24': { fontSize: fontSize.functionalCaption, lineHeight: fontSize.functionalCaption }
+      '28': { fontSize: fontSize.functionalBodySmall, lineHeight: fontSize.functionalBodySmall }
+      '32': { fontSize: fontSize.functionalBodyMedium, lineHeight: fontSize.functionalBodyMedium }
+      '40': { fontSize: fontSize.functionalBodyLarge, lineHeight: fontSize.functionalBodyLarge }
+      '56': { fontSize: fontSize.functionalTitleSmall, lineHeight: fontSize.functionalTitleSmall }
+      '120': { fontSize: fontSize.functionalTitleLarge, lineHeight: fontSize.functionalTitleLarge }
+
+delegated:
+  avatarChildren: >
+    Every visible item is a caller-supplied Avatar. Its background, foreground,
+    radius, padding, typography, and content tokens stay with Avatar and are not
+    redeclared or overridden here.
+
+tokenGaps:
+  - property: stack ring width at size 120
+    values: [4]
+    reason: the stroke-width scale stops at 3, so the largest separation ring is an implementation constant.
+  - property: overflow border width at size 120
+    values: [4]
+    reason: shares the stroke-width scale gap with the size 120 stack ring.
+  - property: stack overlap
+    values: [4, 5, 6, 7, 8, 10, 14, 30]
+    reason: the overlap is a quarter of each avatar diameter, which the spacing scale does not express at every stop.

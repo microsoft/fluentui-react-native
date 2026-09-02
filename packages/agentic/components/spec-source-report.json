@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-31T05:04:03.307Z",
+  "generatedAt": "2026-09-02T23:19:05.422Z",
   "sourceLock": "flex-1.5.0-206c4996",
   "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
   "baseline": {
@@ -10,8 +10,8 @@
   "external": {
     "mode": "live",
     "status": "drift-detected",
-    "marketplaceHead": "eb8cf20cb1c6ce4fdc563ac1ebd34197cb347735",
-    "originHead": "dfdaeba2f79c2c2c33cdc074cf1e60f1c3a2929c"
+    "marketplaceHead": "2c7eaade7e98b5a12a7b12d1d432441844ed1145",
+    "originHead": "cbe3cca9207ac0c24c3f965ec483788ee5e11c44"
   },
   "catalog": {
     "releaseEntries": [
@@ -126,6 +126,7 @@
     "contracts": [
       "accordion",
       "avatar",
+      "avatar-group",
       "badge",
       "button",
       "card",
@@ -149,6 +150,7 @@
     "implemented": [
       "accordion",
       "avatar",
+      "avatar-group",
       "badge",
       "button",
       "card",
@@ -169,7 +171,6 @@
       "text"
     ],
     "implementationGap": [
-      "avatar-group",
       "breadcrumb",
       "combobox",
       "destructive-button",
@@ -201,7 +202,6 @@
       "tooltip"
     ],
     "noLocalContract": [
-      "avatar-group",
       "breadcrumb",
       "combobox",
       "destructive-button",
@@ -453,6 +453,23 @@
     },
     {
       "component": "avatar",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "avatar-group",
       "lifecycle": "implemented",
       "conformance": "reviewed",
       "releaseDifferences": [],
