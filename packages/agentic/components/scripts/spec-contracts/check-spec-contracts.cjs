@@ -1,3 +1,4 @@
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -87,21 +88,36 @@ function validateDivergences(component, spec, source) {
   }
 }
 
-function validateRequirements(component, spec, source, componentRoot) {
-  invariant(Array.isArray(source.requirements) && source.requirements.length > 0, `${component} must declare contract requirements.`);
+function validateRequirements(component, spec, contract, componentRoot) {
+  invariant(Array.isArray(contract.requirements) && contract.requirements.length > 0, `${component} must declare contract requirements.`);
   const requirementIds = new Set();
-  for (const requirement of source.requirements) {
-    validateExactKeys(requirement, ['id'], ['evidence', 'plannedEvidence'], `${component} requirement`);
+  const sourceIds = new Set(contract.sources.map((source) => source.id));
+  for (const requirement of contract.requirements) {
+    validateExactKeys(requirement, ['id'], ['sources', 'evidence', 'plannedEvidence'], `${component} requirement`);
     invariant(/^[A-Z][A-Z0-9]{1,9}-\d{3}$/.test(requirement.id), `${component} has an invalid requirement id.`);
     invariant(!requirementIds.has(requirement.id), `${component} repeats requirement ${requirement.id}.`);
     requirementIds.add(requirement.id);
     invariant(spec.includes(requirement.id), `${component} SPEC.md must describe requirement ${requirement.id}.`);
+    if (contract.sources.length > 1) {
+      invariant(
+        isSortedUnique(requirement.sources) && requirement.sources.length > 0,
+        `${requirement.id} must identify its governing sources when a contract has multiple sources.`,
+      );
+    } else if (Object.hasOwn(requirement, 'sources')) {
+      invariant(
+        isSortedUnique(requirement.sources) && requirement.sources.length > 0,
+        `${requirement.id} sources must be sorted and unique.`,
+      );
+    }
+    for (const sourceId of requirement.sources || []) {
+      invariant(sourceIds.has(sourceId), `${requirement.id} references unknown source ${sourceId}.`);
+    }
     const evidence = requirement.evidence || [];
     const plannedEvidence = requirement.plannedEvidence || [];
     invariant(Array.isArray(evidence), `${requirement.id} evidence must be an array.`);
     invariant(Array.isArray(plannedEvidence), `${requirement.id} plannedEvidence must be an array.`);
     invariant(evidence.length + plannedEvidence.length > 0, `${requirement.id} must name actual or planned evidence.`);
-    if (source.lifecycle === 'implemented') {
+    if (contract.lifecycle === 'implemented') {
       invariant(evidence.length > 0, `${requirement.id} must name realized evidence for an implemented component.`);
     }
     for (const evidencePathValue of evidence) {
@@ -124,116 +140,62 @@ function validateRequirements(component, spec, source, componentRoot) {
   }
 }
 
-function validateLocalFoundationSource(component, spec, source, componentRoot, lock) {
-  validateExactKeys(
-    source,
-    ['schemaVersion', 'component', 'sourceKind', 'lifecycle', 'conformance', 'reviewedAt', 'references', 'divergences', 'requirements'],
-    [],
-    `${component}/spec/source.json`,
-  );
-  invariant(source.schemaVersion === 1, `${component}/spec/source.json must use schemaVersion 1.`);
-  invariant(source.component === component, `${component}/spec/source.json has the wrong component.`);
-  invariant(source.sourceKind === 'local-foundation', `${component}/spec/source.json has an invalid local source kind.`);
-  invariant(!lock.catalog.entries.includes(component), `${component} has a Flex catalog entry and cannot use a local-foundation source.`);
-  invariant(['contract-draft', 'contract-reviewed', 'implemented'].includes(source.lifecycle), `${component} has an invalid lifecycle.`);
-  invariant(['review-required', 'reviewed'].includes(source.conformance), `${component} has an invalid conformance value.`);
-  if (source.lifecycle === 'contract-draft') {
-    invariant(source.conformance === 'review-required', `${component} draft contracts must require review.`);
-  }
-  if (source.conformance === 'review-required') {
-    invariant(source.reviewedAt === null, `${component} cannot have reviewedAt while review is required.`);
-  } else {
-    invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.reviewedAt), `${component} reviewedAt must be YYYY-MM-DD.`);
-  }
+const sourceAuthorities = [
+  'behavior-reference',
+  'compatibility-reference',
+  'implementation-evidence',
+  'normative',
+  'platform-contract',
+  'token-reference',
+  'visual-evidence',
+];
 
-  invariant(Array.isArray(source.references) && source.references.length > 0, `${component} must record local-foundation references.`);
-  invariant(
-    JSON.stringify(source.references.map((reference) => reference.id)) ===
-      JSON.stringify(source.references.map((reference) => reference.id).sort()),
-    `${component} local-foundation references must be sorted by id.`,
-  );
-  const referenceIds = new Set();
-  for (const reference of source.references) {
-    validateExactKeys(reference, ['id', 'type', 'location'], [], `${component} local-foundation reference`);
-    invariant(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(reference.id), `${component} has an invalid reference id.`);
-    invariant(!referenceIds.has(reference.id), `${component} repeats reference ${reference.id}.`);
-    referenceIds.add(reference.id);
-    invariant(['external', 'repository'].includes(reference.type), `${component}:${reference.id} has an invalid reference type.`);
-    if (reference.type === 'external') {
-      invariant(reference.location.startsWith('https://'), `${component}:${reference.id} must use an HTTPS reference.`);
-    } else {
-      const referencePath = path.resolve(repositoryRoot, reference.location);
-      invariant(
-        !path.isAbsolute(reference.location) && referencePath.startsWith(`${repositoryRoot}${path.sep}`) && fs.existsSync(referencePath),
-        `${component}:${reference.id} references missing repository content ${reference.location}.`,
-      );
-    }
-  }
-
-  validateDivergences(component, spec, source);
-  validateRequirements(component, spec, source, componentRoot);
-  return source;
+function validateSourceIdentity(component, source) {
+  invariant(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(source.id), `${component} has an invalid source id.`);
+  invariant(sourceAuthorities.includes(source.authority), `${component}:${source.id} has an invalid source authority.`);
 }
 
-function validateSource(component, spec, lock) {
-  const componentRoot = path.join(componentsRoot, component);
-  const sourcePath = sourcePathFor(component);
-  const source = readJson(sourcePath);
-  if (source.sourceKind === 'local-foundation') {
-    return validateLocalFoundationSource(component, spec, source, componentRoot, lock);
-  }
-
+function validateFlexSource(component, contract, source, lock) {
   validateExactKeys(
     source,
     [
-      'schemaVersion',
-      'component',
+      'id',
+      'kind',
+      'authority',
       'skill',
       'sourceLock',
       'sourceLockFingerprint',
-      'lifecycle',
-      'conformance',
-      'reviewedAt',
       'availableSurfaces',
       'surfacesConsulted',
       'sourceFiles',
       'releaseDifferences',
-      'divergences',
-      'requirements',
     ],
     [],
-    `${component}/spec/source.json`,
+    `${component}:${source.id}`,
   );
-  invariant(source.schemaVersion === 1, `${component}/spec/source.json must use schemaVersion 1.`);
-  invariant(source.component === component, `${component}/spec/source.json has the wrong component.`);
-  invariant(source.sourceLock === lock.id, `${component}/spec/source.json must reference ${lock.id}.`);
+  validateSourceIdentity(component, source);
+  invariant(source.kind === 'flex-skill', `${component}:${source.id} has the wrong source kind.`);
+  invariant(source.authority === 'normative', `${component}:${source.id} must be normative.`);
+  invariant(source.sourceLock === lock.id, `${component}:${source.id} must reference ${lock.id}.`);
   invariant(
     source.sourceLockFingerprint === lock.fingerprint,
-    `${component}/spec/source.json must reference the active source-lock fingerprint.`,
+    `${component}:${source.id} must reference the active source-lock fingerprint.`,
   );
-  invariant(source.skill === `flex-components:${component}`, `${component}/spec/source.json has the wrong skill.`);
-  invariant(['contract-draft', 'contract-reviewed', 'implemented'].includes(source.lifecycle), `${component} has an invalid lifecycle.`);
-  invariant(['review-required', 'reviewed'].includes(source.conformance), `${component} has an invalid conformance value.`);
-  if (source.lifecycle === 'contract-draft') {
-    invariant(source.conformance === 'review-required', `${component} draft contracts must require review.`);
-  }
-  if (source.conformance === 'review-required') {
-    invariant(source.reviewedAt === null, `${component} cannot have reviewedAt while review is required.`);
-  } else {
-    invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.reviewedAt), `${component} reviewedAt must be YYYY-MM-DD.`);
-    invariant(source.surfacesConsulted.length > 0, `${component} reviewed contracts must record consulted surfaces.`);
-  }
-  invariant(isSortedUnique(source.availableSurfaces), `${component} must record sorted availableSurfaces.`);
-  invariant(isSortedUnique(source.surfacesConsulted), `${component} must record sorted surfacesConsulted.`);
+  invariant(source.skill === `flex-components:${component}`, `${component}:${source.id} has the wrong skill.`);
+  invariant(isSortedUnique(source.availableSurfaces), `${component}:${source.id} must record sorted availableSurfaces.`);
+  invariant(isSortedUnique(source.surfacesConsulted), `${component}:${source.id} must record sorted surfacesConsulted.`);
   invariant(
     source.surfacesConsulted.every((surface) => source.availableSurfaces.includes(surface)),
-    `${component} consulted a source surface that is not available.`,
+    `${component}:${source.id} consulted a source surface that is not available.`,
   );
-  invariant(Array.isArray(source.sourceFiles) && source.sourceFiles.length > 0, `${component} must record source files.`);
+  if (contract.conformance === 'reviewed') {
+    invariant(source.surfacesConsulted.length > 0, `${component}:${source.id} reviewed contracts must record consulted surfaces.`);
+  }
+  invariant(Array.isArray(source.sourceFiles) && source.sourceFiles.length > 0, `${component}:${source.id} must record source files.`);
   invariant(
     JSON.stringify(source.sourceFiles.map((file) => file.marketplacePath)) ===
       JSON.stringify(source.sourceFiles.map((file) => file.marketplacePath).sort((left, right) => left.localeCompare(right))),
-    `${component} source files must be sorted by Marketplace path.`,
+    `${component}:${source.id} source files must be sorted by Marketplace path.`,
   );
 
   const sourceRoles = new Set();
@@ -251,31 +213,31 @@ function validateSource(component, spec, lock) {
         'contentDiffers',
       ],
       [],
-      `${component} source file`,
+      `${component}:${source.id} source file`,
     );
-    invariant(/^[a-z0-9]+(?::[a-z0-9-]+)*$/.test(file.role), `${component} has an invalid source role.`);
-    invariant(!sourceRoles.has(file.role), `${component} repeats source role ${file.role}.`);
+    invariant(/^[a-z0-9]+(?::[a-z0-9-]+)*$/.test(file.role), `${component}:${source.id} has an invalid source role.`);
+    invariant(!sourceRoles.has(file.role), `${component}:${source.id} repeats source role ${file.role}.`);
     sourceRoles.add(file.role);
     invariant(
       file.marketplacePath.startsWith(`catalogs/flex/plugins/components/skills/${component}/`),
-      `${component}:${file.role} has a Marketplace path outside its skill.`,
+      `${component}:${source.id}:${file.role} has a Marketplace path outside its skill.`,
     );
     invariant(
       file.originPath.startsWith(`plugins/components/skills/${component}/`),
-      `${component}:${file.role} has an origin path outside its skill.`,
+      `${component}:${source.id}:${file.role} has an origin path outside its skill.`,
     );
     invariant(
       file.marketplacePath.slice(`catalogs/flex/plugins/components/skills/${component}/`.length) ===
         file.originPath.slice(`plugins/components/skills/${component}/`.length),
-      `${component}:${file.role} does not identify the same Marketplace and origin path.`,
+      `${component}:${source.id}:${file.role} does not identify the same Marketplace and origin path.`,
     );
-    invariant(isFullSha(file.marketplaceBlobSha), `${component}:${file.role} has an invalid Marketplace blob SHA.`);
-    invariant(isFullSha(file.originBlobSha), `${component}:${file.role} has an invalid origin blob SHA.`);
-    invariant(/^[0-9a-f]{64}$/.test(file.marketplaceSha256), `${component}:${file.role} has an invalid Marketplace SHA-256.`);
-    invariant(/^[0-9a-f]{64}$/.test(file.originSha256), `${component}:${file.role} has an invalid origin SHA-256.`);
+    invariant(isFullSha(file.marketplaceBlobSha), `${component}:${source.id}:${file.role} has an invalid Marketplace blob SHA.`);
+    invariant(isFullSha(file.originBlobSha), `${component}:${source.id}:${file.role} has an invalid origin blob SHA.`);
+    invariant(/^[0-9a-f]{64}$/.test(file.marketplaceSha256), `${component}:${source.id}:${file.role} has an invalid Marketplace SHA-256.`);
+    invariant(/^[0-9a-f]{64}$/.test(file.originSha256), `${component}:${source.id}:${file.role} has an invalid origin SHA-256.`);
     invariant(
       file.contentDiffers === (file.marketplaceSha256 !== file.originSha256),
-      `${component}:${file.role} has an inconsistent contentDiffers value.`,
+      `${component}:${source.id}:${file.role} has an inconsistent contentDiffers value.`,
     );
   }
   const expectedAvailableSurfaces = [
@@ -288,45 +250,257 @@ function validateSource(component, spec, lock) {
   ].sort();
   invariant(
     JSON.stringify(source.availableSurfaces) === JSON.stringify(expectedAvailableSurfaces),
-    `${component} availableSurfaces do not match its source inventory.`,
+    `${component}:${source.id} availableSurfaces do not match its source inventory.`,
   );
 
-  invariant(Array.isArray(source.releaseDifferences), `${component} must declare releaseDifferences.`);
+  invariant(Array.isArray(source.releaseDifferences), `${component}:${source.id} must declare releaseDifferences.`);
   const differingRoles = source.sourceFiles.filter((file) => file.contentDiffers).map((file) => file.role);
   invariant(
     JSON.stringify(source.releaseDifferences.map((difference) => difference.role)) === JSON.stringify(differingRoles),
-    `${component} releaseDifferences do not match its Marketplace and origin digests.`,
+    `${component}:${source.id} releaseDifferences do not match its Marketplace and origin digests.`,
   );
   for (const difference of source.releaseDifferences) {
-    validateExactKeys(difference, ['role', 'status', 'resolution', 'note'], [], `${component} release difference`);
+    validateExactKeys(difference, ['role', 'status', 'resolution', 'note'], [], `${component}:${source.id} release difference`);
     invariant(
       ['review-required', 'reviewed'].includes(difference.status),
-      `${component}:${difference.role} has an invalid release-difference status.`,
+      `${component}:${source.id}:${difference.role} has an invalid release-difference status.`,
     );
     if (difference.status === 'review-required') {
-      invariant(difference.resolution === null, `${component}:${difference.role} requires review and cannot have a resolution.`);
-      invariant(difference.note === null, `${component}:${difference.role} requires review and cannot have a review note.`);
+      invariant(
+        difference.resolution === null,
+        `${component}:${source.id}:${difference.role} requires review and cannot have a resolution.`,
+      );
+      invariant(difference.note === null, `${component}:${source.id}:${difference.role} requires review and cannot have a review note.`);
     } else {
       invariant(
         ['marketplace-authoring-input', 'origin-lineage-reviewed', 'not-material'].includes(difference.resolution),
-        `${component}:${difference.role} has an invalid release-difference resolution.`,
+        `${component}:${source.id}:${difference.role} has an invalid release-difference resolution.`,
       );
       invariant(
         typeof difference.note === 'string' && difference.note.length > 0,
-        `${component}:${difference.role} must explain its reviewed release difference.`,
+        `${component}:${source.id}:${difference.role} must explain its reviewed release difference.`,
       );
     }
   }
-  if (source.conformance === 'reviewed') {
+  if (contract.conformance === 'reviewed') {
     invariant(
       source.releaseDifferences.every((difference) => difference.status === 'reviewed'),
-      `${component} cannot be reviewed while a release-content difference is unresolved.`,
+      `${component}:${source.id} cannot be reviewed while a release-content difference is unresolved.`,
     );
   }
+}
 
-  validateDivergences(component, spec, source);
-  validateRequirements(component, spec, source, componentRoot);
-  return source;
+function validateLocalFoundationSource(component, source, lock) {
+  validateExactKeys(source, ['id', 'kind', 'authority', 'references'], [], `${component}:${source.id}`);
+  validateSourceIdentity(component, source);
+  invariant(source.kind === 'local-foundation', `${component}:${source.id} has the wrong source kind.`);
+  invariant(source.authority === 'normative', `${component}:${source.id} must be normative.`);
+  invariant(!lock.catalog.entries.includes(component), `${component} has a Flex catalog entry and cannot use a local-foundation source.`);
+  invariant(Array.isArray(source.references) && source.references.length > 0, `${component}:${source.id} must record references.`);
+  invariant(
+    JSON.stringify(source.references.map((reference) => reference.id)) ===
+      JSON.stringify(source.references.map((reference) => reference.id).sort()),
+    `${component}:${source.id} references must be sorted by id.`,
+  );
+  const referenceIds = new Set();
+  for (const reference of source.references) {
+    validateExactKeys(reference, ['id', 'type', 'authority', 'location'], [], `${component}:${source.id} reference`);
+    invariant(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(reference.id), `${component}:${source.id} has an invalid reference id.`);
+    invariant(!referenceIds.has(reference.id), `${component}:${source.id} repeats reference ${reference.id}.`);
+    referenceIds.add(reference.id);
+    invariant(sourceAuthorities.includes(reference.authority), `${component}:${source.id}:${reference.id} has an invalid authority.`);
+    invariant(
+      ['external', 'repository'].includes(reference.type),
+      `${component}:${source.id}:${reference.id} has an invalid reference type.`,
+    );
+    if (reference.type === 'external') {
+      invariant(reference.location.startsWith('https://'), `${component}:${source.id}:${reference.id} must use an HTTPS reference.`);
+    } else {
+      const referencePath = path.resolve(repositoryRoot, reference.location);
+      invariant(
+        !path.isAbsolute(reference.location) && referencePath.startsWith(`${repositoryRoot}${path.sep}`) && fs.existsSync(referencePath),
+        `${component}:${source.id}:${reference.id} references missing repository content ${reference.location}.`,
+      );
+    }
+  }
+}
+
+function validateArtifactLocation(component, source, artifact) {
+  invariant(
+    typeof artifact.location === 'string' && artifact.location.length > 0,
+    `${component}:${source.id}:${artifact.id} needs a location.`,
+  );
+  invariant(/^[0-9a-f]{64}$/.test(artifact.sha256), `${component}:${source.id}:${artifact.id} has an invalid SHA-256.`);
+  if (!artifact.location.startsWith('https://')) {
+    const artifactPath = path.resolve(repositoryRoot, artifact.location);
+    invariant(
+      !path.isAbsolute(artifact.location) && artifactPath.startsWith(`${repositoryRoot}${path.sep}`) && fs.existsSync(artifactPath),
+      `${component}:${source.id}:${artifact.id} references missing repository content ${artifact.location}.`,
+    );
+    const digest = crypto.createHash('sha256').update(fs.readFileSync(artifactPath)).digest('hex');
+    invariant(digest === artifact.sha256, `${component}:${source.id}:${artifact.id} has a stale SHA-256.`);
+  }
+}
+
+function validateGitFilesSource(component, source) {
+  validateExactKeys(source, ['id', 'kind', 'authority', 'repository', 'commit', 'files'], [], `${component}:${source.id}`);
+  validateSourceIdentity(component, source);
+  invariant(source.kind === 'git-files', `${component}:${source.id} has the wrong source kind.`);
+  invariant(
+    /^(?:https:\/\/\S+|[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+)$/.test(source.repository),
+    `${component}:${source.id} has an invalid repository.`,
+  );
+  invariant(isFullSha(source.commit), `${component}:${source.id} must identify an immutable commit.`);
+  invariant(Array.isArray(source.files) && source.files.length > 0, `${component}:${source.id} must record files.`);
+  invariant(
+    JSON.stringify(source.files.map((file) => file.path)) === JSON.stringify(source.files.map((file) => file.path).sort()),
+    `${component}:${source.id} files must be sorted by path.`,
+  );
+  const paths = new Set();
+  for (const file of source.files) {
+    validateExactKeys(file, ['role', 'path', 'sha256'], [], `${component}:${source.id} file`);
+    invariant(/^[a-z0-9]+(?::[a-z0-9-]+)*$/.test(file.role), `${component}:${source.id} has an invalid file role.`);
+    invariant(
+      typeof file.path === 'string' &&
+        file.path.length > 0 &&
+        !path.isAbsolute(file.path) &&
+        !file.path.includes('\\') &&
+        !file.path.split('/').includes('..'),
+      `${component}:${source.id} has an invalid file path.`,
+    );
+    invariant(!paths.has(file.path), `${component}:${source.id} repeats file ${file.path}.`);
+    paths.add(file.path);
+    invariant(/^[0-9a-f]{64}$/.test(file.sha256), `${component}:${source.id}:${file.path} has an invalid SHA-256.`);
+  }
+}
+
+function validateHtmlCssSource(component, source) {
+  validateExactKeys(source, ['id', 'kind', 'authority', 'origin', 'artifacts'], [], `${component}:${source.id}`);
+  validateSourceIdentity(component, source);
+  invariant(source.kind === 'html-css', `${component}:${source.id} has the wrong source kind.`);
+  invariant(typeof source.origin === 'string' && source.origin.length > 0, `${component}:${source.id} must identify its origin.`);
+  invariant(Array.isArray(source.artifacts) && source.artifacts.length > 0, `${component}:${source.id} must record artifacts.`);
+  invariant(
+    JSON.stringify(source.artifacts.map((artifact) => artifact.id)) ===
+      JSON.stringify(source.artifacts.map((artifact) => artifact.id).sort()),
+    `${component}:${source.id} artifacts must be sorted by id.`,
+  );
+  const artifactIds = new Set();
+  for (const artifact of source.artifacts) {
+    validateExactKeys(artifact, ['id', 'kind', 'location', 'sha256'], [], `${component}:${source.id} artifact`);
+    invariant(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(artifact.id), `${component}:${source.id} has an invalid artifact id.`);
+    invariant(!artifactIds.has(artifact.id), `${component}:${source.id} repeats artifact ${artifact.id}.`);
+    artifactIds.add(artifact.id);
+    invariant(
+      ['accessibility-tree', 'computed-styles', 'css', 'html', 'screenshot'].includes(artifact.kind),
+      `${component}:${source.id}:${artifact.id} has an invalid artifact kind.`,
+    );
+    validateArtifactLocation(component, source, artifact);
+  }
+}
+
+function validateVisualReferenceSource(component, source) {
+  validateExactKeys(source, ['id', 'kind', 'authority', 'artifacts'], [], `${component}:${source.id}`);
+  validateSourceIdentity(component, source);
+  invariant(source.kind === 'visual-reference', `${component}:${source.id} has the wrong source kind.`);
+  invariant(source.authority === 'visual-evidence', `${component}:${source.id} must use visual-evidence authority.`);
+  invariant(Array.isArray(source.artifacts) && source.artifacts.length > 0, `${component}:${source.id} must record artifacts.`);
+  invariant(
+    JSON.stringify(source.artifacts.map((artifact) => artifact.id)) ===
+      JSON.stringify(source.artifacts.map((artifact) => artifact.id).sort()),
+    `${component}:${source.id} artifacts must be sorted by id.`,
+  );
+  const artifactIds = new Set();
+  for (const artifact of source.artifacts) {
+    validateExactKeys(
+      artifact,
+      ['id', 'location', 'sha256'],
+      ['appearance', 'state', 'platform', 'scale', 'viewport', 'locale'],
+      `${component}:${source.id} artifact`,
+    );
+    invariant(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(artifact.id), `${component}:${source.id} has an invalid artifact id.`);
+    invariant(!artifactIds.has(artifact.id), `${component}:${source.id} repeats artifact ${artifact.id}.`);
+    artifactIds.add(artifact.id);
+    validateArtifactLocation(component, source, artifact);
+    for (const field of ['appearance', 'state', 'platform', 'viewport', 'locale']) {
+      if (Object.hasOwn(artifact, field)) {
+        invariant(
+          typeof artifact[field] === 'string' && artifact[field].length > 0,
+          `${component}:${source.id}:${artifact.id} has invalid ${field}.`,
+        );
+      }
+      if (Object.hasOwn(artifact, 'scale')) {
+        invariant(
+          typeof artifact.scale === 'number' && artifact.scale > 0,
+          `${component}:${source.id}:${artifact.id} has an invalid scale.`,
+        );
+      }
+    }
+  }
+}
+
+function validateSource(component, spec, lock) {
+  const componentRoot = path.join(componentsRoot, component);
+  const sourcePath = sourcePathFor(component);
+  const contract = readJson(sourcePath);
+
+  validateExactKeys(
+    contract,
+    ['schemaVersion', 'component', 'lifecycle', 'conformance', 'reviewedAt', 'sources', 'divergences', 'requirements'],
+    [],
+    `${component}/spec/source.json`,
+  );
+  invariant(contract.schemaVersion === 2, `${component}/spec/source.json must use schemaVersion 2.`);
+  invariant(contract.component === component, `${component}/spec/source.json has the wrong component.`);
+  invariant(['contract-draft', 'contract-reviewed', 'implemented'].includes(contract.lifecycle), `${component} has an invalid lifecycle.`);
+  invariant(['review-required', 'reviewed'].includes(contract.conformance), `${component} has an invalid conformance value.`);
+  if (contract.lifecycle === 'contract-draft') {
+    invariant(contract.conformance === 'review-required', `${component} draft contracts must require review.`);
+  } else {
+    invariant(contract.conformance === 'reviewed', `${component} ${contract.lifecycle} contracts must be reviewed.`);
+  }
+  if (contract.conformance === 'review-required') {
+    invariant(contract.reviewedAt === null, `${component} cannot have reviewedAt while review is required.`);
+  } else {
+    invariant(/^\d{4}-\d{2}-\d{2}$/.test(contract.reviewedAt), `${component} reviewedAt must be YYYY-MM-DD.`);
+  }
+
+  invariant(Array.isArray(contract.sources) && contract.sources.length > 0, `${component} must declare sources.`);
+  invariant(
+    JSON.stringify(contract.sources.map((source) => source.id)) === JSON.stringify(contract.sources.map((source) => source.id).sort()),
+    `${component} sources must be sorted by id.`,
+  );
+  const sourceIds = new Set();
+  for (const source of contract.sources) {
+    invariant(!sourceIds.has(source.id), `${component} repeats source ${source.id}.`);
+    sourceIds.add(source.id);
+    if (source.kind === 'flex-skill') {
+      validateFlexSource(component, contract, source, lock);
+    } else if (source.kind === 'local-foundation') {
+      validateLocalFoundationSource(component, source, lock);
+    } else if (source.kind === 'git-files') {
+      validateGitFilesSource(component, source);
+    } else if (source.kind === 'html-css') {
+      validateHtmlCssSource(component, source);
+    } else if (source.kind === 'visual-reference') {
+      validateVisualReferenceSource(component, source);
+    } else {
+      throw new Error(`${component}:${source.id} has unsupported source kind ${source.kind}.`);
+    }
+  }
+  const localFoundationSources = contract.sources.filter((source) => source.kind === 'local-foundation');
+  invariant(
+    localFoundationSources.length === 0 || (localFoundationSources.length === 1 && contract.sources.length === 1),
+    `${component} local-foundation must be the only source.`,
+  );
+  invariant(
+    contract.sources.filter((source) => source.kind === 'flex-skill').length <= 1,
+    `${component} cannot declare more than one Flex skill source.`,
+  );
+
+  validateDivergences(component, spec, contract);
+  validateRequirements(component, spec, contract, componentRoot);
+  return contract;
 }
 
 function validateComponent(component, lock) {
@@ -348,9 +522,13 @@ function validateComponent(component, lock) {
   invariant(frontMatter.interaction === './spec/interaction.md', `${component}/SPEC.md must reference ./spec/interaction.md.`);
   invariant(frontMatter.usage === './spec/usage.md', `${component}/SPEC.md must reference ./spec/usage.md.`);
 
-  for (const heading of ['## Scope', '## Public contract', '## Platform behavior', '## Divergences from Flex', '## Conformance']) {
+  for (const heading of ['## Scope', '## Public contract', '## Platform behavior', '## Conformance']) {
     invariant(spec.includes(heading), `${component}/SPEC.md is missing ${heading}.`);
   }
+  invariant(
+    spec.includes('## Divergences') || spec.includes('## Divergences from Flex'),
+    `${component}/SPEC.md is missing its divergences section.`,
+  );
 
   for (const companion of ['tokens.yaml', 'accessibility.md', 'interaction.md', 'usage.md']) {
     const companionPath = path.join(componentRoot, 'spec', companion);
@@ -434,24 +612,25 @@ function validateReport(lock, components) {
     'The report component details are stale.',
   );
   for (const entry of report.components) {
-    const source = readJson(sourcePathFor(entry.component));
+    const contract = readJson(sourcePathFor(entry.component));
+    const flexSource = contract.sources.find((source) => source.kind === 'flex-skill');
     validateExactKeys(
       entry,
       ['component', 'lifecycle', 'conformance', 'releaseDifferences', 'marketplaceDrift', 'originDrift', 'candidateStatus'],
       [],
       `${entry.component} report entry`,
     );
-    invariant(entry.lifecycle === source.lifecycle, `${entry.component} has stale lifecycle reporting.`);
-    invariant(entry.conformance === source.conformance, `${entry.component} has stale conformance reporting.`);
+    invariant(entry.lifecycle === contract.lifecycle, `${entry.component} has stale lifecycle reporting.`);
+    invariant(entry.conformance === contract.conformance, `${entry.component} has stale conformance reporting.`);
     invariant(
-      JSON.stringify(entry.releaseDifferences) === JSON.stringify(source.releaseDifferences || []),
+      JSON.stringify(entry.releaseDifferences) === JSON.stringify(flexSource?.releaseDifferences || []),
       `${entry.component} has stale release-content difference reporting.`,
     );
-    if (source.sourceKind === 'local-foundation') {
+    if (!flexSource) {
       invariant(entry.candidateStatus === 'not-applicable', `${entry.component} must omit Flex candidate drift.`);
       invariant(
         entry.marketplaceDrift === null && entry.originDrift === null,
-        `${entry.component} local-foundation source cannot report Flex drift.`,
+        `${entry.component} without a Flex source cannot report Flex drift.`,
       );
     } else if (entry.candidateStatus === 'unchecked') {
       invariant(

@@ -7,12 +7,13 @@ Higher-order components own design-token styling, interaction state, layout, and
 components without a Flex catalog entry remain in this directory and use the
 validator-backed `local-foundation` contract source.
 
-Draft and review a source-backed component's React Native contract from the
-pinned `flex-components:<name>` reference before implementation. For a
-`local-foundation` component, review the cited public platform behavior and
-repository token evidence instead. Ratify either contract after types, tests,
-stories, and platform evidence agree; never mechanically promote a web-authored
-spec.
+Draft and review a source-backed React Native contract through the
+[agentic component contract authoring skill](../../../../../.github/skills/agentic-component-contract-authoring/SKILL.md)
+before implementation. Select only the adapters represented by the evidence,
+resolve authority per requirement, and use the pinned
+`flex-components:<name>` reference only when a `flex-skill` source applies.
+Ratify the local contract after types, tests, stories, and platform evidence
+agree; never mechanically promote a web-authored spec.
 
 For package-wide dependency or extraction reviews, also read
 [`packages/agentic/components/src/AGENTS.md`](../AGENTS.md) and the
@@ -61,7 +62,7 @@ audit.
 
 ## Focused references
 
-- [Flex source adaptation](../../../../../.github/skills/agentic-component-authoring/references/spec-source-adaptation.md)
+- [Contract and source adaptation](../../../../../.github/skills/agentic-component-contract-authoring/SKILL.md)
 - [Types and slots](../../../../../.github/skills/agentic-component-authoring/references/types-and-slots.md)
 - [State and accessibility](../../../../../.github/skills/agentic-component-authoring/references/state-and-accessibility.md)
 - [Styles and tokens](../../../../../.github/skills/agentic-component-authoring/references/styles-and-tokens.md)

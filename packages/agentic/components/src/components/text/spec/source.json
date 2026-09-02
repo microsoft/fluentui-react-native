@@ -1,25 +1,34 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "component": "text",
-  "sourceKind": "local-foundation",
   "lifecycle": "implemented",
   "conformance": "reviewed",
   "reviewedAt": "2026-09-01",
-  "references": [
+  "sources": [
     {
-      "id": "flex-text-token-map",
-      "type": "repository",
-      "location": "packages/agentic/design/src/tokens/mappings/flex-token-map.yaml"
-    },
-    {
-      "id": "furn-text-v1",
-      "type": "repository",
-      "location": "packages/components/Text/src/Text.tsx"
-    },
-    {
-      "id": "react-native-text-081",
-      "type": "external",
-      "location": "https://reactnative.dev/docs/0.81/text"
+      "id": "local-foundation",
+      "kind": "local-foundation",
+      "authority": "normative",
+      "references": [
+        {
+          "id": "flex-text-token-map",
+          "type": "repository",
+          "authority": "token-reference",
+          "location": "packages/agentic/design/src/tokens/mappings/flex-token-map.yaml"
+        },
+        {
+          "id": "furn-text-v1",
+          "type": "repository",
+          "authority": "compatibility-reference",
+          "location": "packages/components/Text/src/Text.tsx"
+        },
+        {
+          "id": "react-native-text-081",
+          "type": "external",
+          "authority": "platform-contract",
+          "location": "https://reactnative.dev/docs/0.81/text"
+        }
+      ]
     }
   ],
   "divergences": [
