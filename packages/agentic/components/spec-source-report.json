@@ -145,6 +145,7 @@
       "nav-item",
       "progress-bar",
       "radio",
+      "search-box",
       "skeleton",
       "spinner",
       "switch",
@@ -172,6 +173,7 @@
       "nav-item",
       "progress-bar",
       "radio",
+      "search-box",
       "skeleton",
       "spinner",
       "switch",
@@ -197,7 +199,6 @@
       "popover",
       "radio-group",
       "scrollbar",
-      "search-box",
       "select",
       "simple-nav",
       "split-button",
@@ -224,7 +225,6 @@
       "popover",
       "radio-group",
       "scrollbar",
-      "search-box",
       "select",
       "simple-nav",
       "split-button",
@@ -802,6 +802,23 @@
         ]
       },
       "candidateStatus": "review-required"
+    },
+    {
+      "component": "search-box",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
     },
     {
       "component": "skeleton",

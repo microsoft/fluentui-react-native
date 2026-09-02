@@ -180,6 +180,19 @@ export { renderRadio_unstable } from './components/radio/renderRadio';
 export { useRadioStyles_unstable } from './components/radio/useRadioStyles';
 export { useRadio_unstable } from './components/radio/useRadio';
 
+export { SearchBox } from './components/search-box/search-box';
+export type {
+  SearchBoxProps,
+  SearchBoxSize,
+  SearchBoxSlots,
+  SearchBoxState,
+  SearchBoxVariant,
+  SearchBoxVisualState,
+} from './components/search-box/search-box.types';
+export { renderSearchBox_unstable } from './components/search-box/renderSearchBox';
+export { useSearchBoxStyles_unstable } from './components/search-box/useSearchBoxStyles';
+export { useSearchBox_unstable } from './components/search-box/useSearchBox';
+
 export { Skeleton } from './components/skeleton/skeleton';
 export type { SkeletonProps, SkeletonSlots, SkeletonState } from './components/skeleton/skeleton.types';
 export { renderSkeleton_unstable } from './components/skeleton/renderSkeleton';
