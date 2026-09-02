@@ -42,6 +42,8 @@ function hasIconSource(slotProp: SearchBoxProps['icon']): boolean {
 
 export function useSearchBox_unstable(props: SearchBoxProps): SearchBoxState {
   const {
+    'aria-labelledby': ariaLabelledBy,
+    accessibilityLabelledBy,
     clearButton: clearButtonProp,
     defaultValue,
     disabled = false,
@@ -59,7 +61,7 @@ export function useSearchBox_unstable(props: SearchBoxProps): SearchBoxState {
 
   useAccessibilityLabelWarning({
     accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
-    accessibilityLabelledBy: rest.accessibilityLabelledBy ?? rest['aria-labelledby'],
+    accessibilityLabelledBy: accessibilityLabelledBy ?? ariaLabelledBy,
     componentName: 'SearchBox',
     requireLabel: true,
     warning: 'SearchBox: provide an accessibilityLabel that names the query. A placeholder is not an accessible name.',
@@ -106,6 +108,8 @@ export function useSearchBox_unstable(props: SearchBoxProps): SearchBoxState {
   const userTextInputProps: TextInputObjectProps = isSlotObject(textInputProp) ? (textInputProp as TextInputObjectProps) : {};
   const fieldTextInputProps: TextInputObjectProps = {
     ...userTextInputProps,
+    'aria-labelledby': userTextInputProps['aria-labelledby'] ?? ariaLabelledBy,
+    accessibilityLabelledBy: userTextInputProps.accessibilityLabelledBy ?? accessibilityLabelledBy,
     onKeyPress: mergeHandlers(userTextInputProps.onKeyPress, handleKeyPress),
     onSubmitEditing: mergeHandlers(userTextInputProps.onSubmitEditing, handleSubmitEditing),
   };

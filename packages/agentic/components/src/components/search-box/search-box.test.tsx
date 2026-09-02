@@ -55,6 +55,17 @@ describe('SearchBox', () => {
     expect(component.getByTestId('search-box-icon-text-stack').props.accessible).toBe(false);
   });
 
+  it('lifts label references onto the text input and preserves an explicit slot value', async () => {
+    const component = await render(
+      <SearchBox accessibilityLabelledBy="root-label" aria-labelledby="aria-label" textInput={{ accessibilityLabelledBy: 'slot-label' }} />,
+    );
+    const textbox = getTextbox(component);
+
+    expect(textbox.props.accessibilityLabelledBy).toBe('slot-label');
+    expect(textbox.props['aria-labelledby']).toBe('aria-label');
+    expect(component.getByTestId('search-box-root').props.accessibilityLabelledBy).toBeUndefined();
+  });
+
   it('warns in development builds when no accessible name is supplied', async () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation();
 
