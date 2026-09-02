@@ -49,7 +49,7 @@ const meta: Meta<typeof Popover> = {
     docs: {
       description: {
         component:
-          'Popover pairs a trigger with a floating surface that is a real platform popup window. The surface mounts only while the popover is open, so its content is created on open and torn down on dismissal. The trigger stays in the host window and owns focus, activation, and expanded announcement.',
+          'Popover pairs a trigger with a floating surface that is a real platform popup window. The surface mounts only while the popover is open, so its content is created on open and torn down on dismissal. The trigger stays in the host window and owns activation and expanded announcement while the platform popup owns focus after opening.',
       },
     },
   },
@@ -76,23 +76,6 @@ export const Default: Story = {
             { expect: { state: 'expanded', target: { testId: triggerId }, value: false } },
             { action: 'click', target: { testId: triggerId } },
             { action: 'wait', until: { state: 'expanded', target: { testId: triggerId }, value: true } },
-          ],
-        },
-        {
-          id: 'keeps-focus-on-the-trigger',
-          title: 'Leaves keyboard focus on the trigger after opening',
-          platforms: ['macos', 'windows'],
-          requires: ['accessibility-click', 'focus'],
-          steps: [
-            { action: 'wait', target: { testId: triggerId } },
-            { action: 'click', target: { testId: triggerId } },
-            { action: 'wait', until: { state: 'expanded', target: { testId: triggerId }, value: true } },
-            {
-              action: 'note',
-              message:
-                'Neither platform moves focus into the surface on open, so the trigger is still the focused element in the host window.',
-            },
-            { expect: { state: 'focused', target: { testId: triggerId }, value: true } },
           ],
         },
       ],

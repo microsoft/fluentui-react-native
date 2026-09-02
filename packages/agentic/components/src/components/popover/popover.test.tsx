@@ -85,6 +85,17 @@ describe('Popover', () => {
     expect(component.queryByTestId('popover-surface')).toBeNull();
   });
 
+  it('allows native dismissal to close an open disabled popover', async () => {
+    const onOpenChange = jest.fn();
+    const component = await renderPopover({ defaultOpen: true, disabled: true, onOpenChange });
+
+    await fireEvent(component.getByTestId('popover-surface'), 'dismiss');
+
+    expect(onOpenChange).toHaveBeenCalledWith(false);
+    expect(component.queryByTestId('popover-surface')).toBeNull();
+    expect(getTrigger(component).props.accessibilityState.expanded).toBe(false);
+  });
+
   it('reports native dismissal without changing an externally driven open value', async () => {
     const onOpenChange = jest.fn();
     const component = await renderPopover({ onOpenChange, open: true });
@@ -180,6 +191,13 @@ describe('Popover', () => {
 
     expect(onPress).toHaveBeenCalledTimes(1);
     expect(component.getByTestId('popover-surface')).toBeOnTheScreen();
+  });
+
+  it('preserves a consumer trigger test identifier', async () => {
+    const component = await renderPopover({ trigger: { testID: 'sync-trigger' } });
+
+    expect(component.getByTestId('sync-trigger')).toBeOnTheScreen();
+    expect(component.queryByTestId('popover-trigger')).toBeNull();
   });
 
   it('gives a consumer trigger ref the same host instance the anchor uses', async () => {

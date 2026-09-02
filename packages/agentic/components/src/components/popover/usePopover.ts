@@ -6,10 +6,10 @@ import { Callout } from '@fluentui-react-native/callout';
 import { useThemeState } from '@fluentui-react-native/design';
 import {
   useAccessibilityLabelWarning,
+  useControllableValue,
   useOptionalSlot,
   usePressableState,
   useSlot,
-  useToggleState,
 } from '@fluentui-react-native/framework-base';
 
 import type { PopoverProps, PopoverState, PopoverTriggerProps } from './popover.types';
@@ -45,9 +45,8 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
     ...triggerPresentationProps
   } = (triggerProp ?? {}) as PopoverTriggerProps;
 
-  const openState = useToggleState({ value: openProp, defaultValue: defaultOpen, onChange: onOpenChange, disabled });
-  const open = openState.value;
-  const { setValue: setOpen, toggle: toggleOpen } = openState;
+  const [openValue, setOpen] = useControllableValue(openProp, defaultOpen ?? false, onOpenChange);
+  const open = openValue ?? false;
 
   useAccessibilityLabelWarning({
     accessibilityLabel: surfaceAccessibilityLabel,
@@ -73,10 +72,12 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
 
   const handleTriggerPress = React.useCallback(
     (event: GestureResponderEvent) => {
-      toggleOpen();
+      if (!disabled) {
+        setOpen(!open);
+      }
       triggerOnPress?.(event);
     },
-    [toggleOpen, triggerOnPress],
+    [disabled, open, setOpen, triggerOnPress],
   );
   const handleDismiss = React.useCallback(() => setOpen(false), [setOpen]);
 
@@ -100,7 +101,7 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
     disabled,
     focusable: !disabled,
     ref: setTriggerRef as TriggerRef,
-    testID: 'popover-trigger',
+    testID: triggerProps.testID ?? 'popover-trigger',
   });
   // Callout resolves its anchor during its own hook phase, so the slot is created on every render and only rendered
   // while the popover is open.
