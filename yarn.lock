@@ -3025,6 +3025,7 @@ __metadata:
     "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
@@ -4112,7 +4113,8 @@ __metadata:
   resolution: "@fluentui-react-native/focus-zone@workspace:packages/components/FocusZone"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
@@ -4120,17 +4122,16 @@ __metadata:
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
     "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
-    "@react-native/metro-babel-transformer": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
+    "@testing-library/react-native": "catalog:"
     "@types/react": "npm:~19.1.4"
     "@types/react-test-renderer": "npm:^19.1.0"
-    "@uifabricshared/foundation-composable": "workspace:*"
-    "@uifabricshared/foundation-settings": "workspace:*"
     react: "npm:19.1.4"
     react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
     react-test-renderer: "npm:19.1.4"
+    test-renderer: "catalog:"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.74.0 || ^0.81.0
     "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4

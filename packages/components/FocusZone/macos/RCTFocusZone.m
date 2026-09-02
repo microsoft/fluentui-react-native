@@ -21,6 +21,20 @@ static const CGFloat FocusZoneBuffer = 3;
 
 @implementation RCTFocusZone
 
+static NSView *GetFocusableView(NSView *view)
+{
+	if (![view acceptsFirstResponder]) {
+		return nil;
+	}
+
+	if ([view isKindOfClass:[RCTBaseTextInputView class]]) {
+		RCTUIView *backedTextInputView = [(RCTBaseTextInputView *)view backedTextInputView];
+		return [backedTextInputView acceptsFirstResponder] ? backedTextInputView : nil;
+	}
+
+	return view;
+}
+
 static inline CGFloat GetDistanceBetweenPoints(NSPoint point1, NSPoint point2)
 {
 	NSPoint delta = NSMakePoint(point1.x - point2.x, point1.y - point2.y);
@@ -55,21 +69,15 @@ static inline CGFloat GetMinDistanceBetweenRectVerticesAndPoint(NSRect rect, NSP
 /// This function does not take into account the geometric position of the view.
 static NSView *GetFirstFocusableViewWithin(NSView *parentView)
 {
-    if ([[parentView subviews] count] < 1)
-    {
-        return nil;
-    }
+	if ([[parentView subviews] count] < 1)
+	{
+		return nil;
+	}
 
 	for (NSView *view in [parentView subviews]) {
-		if ([view acceptsFirstResponder]) {
-			if ([view isKindOfClass:[RCTBaseTextInputView class]]) {
-				RCTUIView *backedTextInputView = [(RCTBaseTextInputView *)view backedTextInputView];
-				if ([backedTextInputView acceptsFirstResponder]) {
-					return backedTextInputView;
-				}
-			} else {
-				return view;
-			}
+		NSView *focusableView = GetFocusableView(view);
+		if (focusableView) {
+			return focusableView;
 		}
 
 		NSView *match = GetFirstFocusableViewWithin(view);
@@ -86,8 +94,9 @@ static NSView *GetFirstFocusableViewWithin(NSView *parentView)
 static NSView *GetLastFocusableViewWithin(NSView *parentView)
 {
 	for (NSView *view in [[parentView subviews] reverseObjectEnumerator]) {
-		if ([view acceptsFirstResponder]) {
-			return view;
+		NSView *focusableView = GetFocusableView(view);
+		if (focusableView) {
+			return focusableView;
 		}
 
 		NSView *match = GetLastFocusableViewWithin(view);
@@ -96,6 +105,18 @@ static NSView *GetLastFocusableViewWithin(NSView *parentView)
 		}
 	}
 	return nil;
+}
+
+static void AppendFocusableViewsWithin(NSView *parentView, NSMutableArray<NSView *> *focusableViews)
+{
+	for (NSView *view in [parentView subviews]) {
+		NSView *focusableView = GetFocusableView(view);
+		if (focusableView) {
+			[focusableViews addObject:focusableView];
+		} else {
+			AppendFocusableViewsWithin(view, focusableViews);
+		}
+	}
 }
 
 static NSView *GetFirstResponder(NSWindow *window)
@@ -533,6 +554,32 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return nextViewToFocus;
 }
 
+- (NSView *)nextViewToFocusInHierarchyForAction:(FocusZoneAction)action
+{
+	NSMutableArray<NSView *> *focusableViews = [NSMutableArray array];
+	AppendFocusableViewsWithin(self, focusableViews);
+
+	NSView *firstResponder = GetFirstResponder([self window]);
+	NSUInteger currentIndex = [focusableViews indexOfObjectPassingTest:^BOOL(NSView *candidateView, NSUInteger index, BOOL *stop) {
+		return candidateView == firstResponder
+			|| [candidateView isDescendantOf:firstResponder]
+			|| [firstResponder isDescendantOf:candidateView];
+	}];
+	if (currentIndex == NSNotFound) {
+		return nil;
+	}
+
+	BOOL forward = action != FocusZoneActionShiftTab;
+	if (forward && currentIndex + 1 < [focusableViews count]) {
+		return focusableViews[currentIndex + 1];
+	}
+	if (!forward && currentIndex > 0) {
+		return focusableViews[currentIndex - 1];
+	}
+
+	return nil;
+}
+
 - (NSView *)nextViewToFocusForTab:(FocusZoneAction)action
 {
 	[[self window] recalculateKeyViewLoop];
@@ -551,7 +598,15 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	if (nextViewToFocus == self)
 		nextViewToFocus = forward ? [nextViewToFocus nextValidKeyView] : [nextViewToFocus previousValidKeyView];;
 
-	if ([@"Normal" isEqual:tabKeyNavigation] || [nextViewToFocus isDescendantOf:self])
+	if ([nextViewToFocus isDescendantOf:self])
+		return nextViewToFocus;
+
+	// AppKit can collapse a Fabric-backed FocusZone to one key-loop entry.
+	NSView *hierarchyViewToFocus = [self nextViewToFocusInHierarchyForAction:action];
+	if (hierarchyViewToFocus != nil)
+		return hierarchyViewToFocus;
+
+	if ([@"Normal" isEqual:tabKeyNavigation])
 		return nextViewToFocus;
 
 	if ([@"NavigateStopAtEnds" isEqual:tabKeyNavigation])
@@ -565,7 +620,11 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		aView = forward ? [aView previousValidKeyView] : [aView nextValidKeyView];
 	}
 
-	return nextViewToFocus != firstResponder ? nextViewToFocus : nil;
+	if (nextViewToFocus != firstResponder)
+		return nextViewToFocus;
+
+	NSView *wrapView = forward ? GetFirstFocusableViewWithin(self) : GetLastFocusableViewWithin(self);
+	return wrapView != firstResponder ? wrapView : nil;
 }
 
 - (BOOL)isFlipped

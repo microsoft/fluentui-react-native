@@ -12,8 +12,8 @@ invariants; detailed authoring recipes live in the
 - Portable desktop story tests are static `parameters.desktopDriver` plans.
   Use the public authoring types, stable `testID` selectors, declarative
   capability requirements, and no platform branches or executable callbacks.
-- Storybook application, native project, Metro, bundle, or CocoaPods work follows `storybook/AGENTS.md` and the
-  `agentic-storybook-development` skill.
+- Storybook application, native project, Metro, bundle, or CocoaPods work follows the
+  [Storybook instructions](../../../apps/storybook/AGENTS.md) and the `agentic-storybook-development` skill.
 - Native React Native Windows Fabric component work follows the
   [Windows Fabric native component reference](../../../.github/skills/agentic-component-authoring/references/windows-fabric-native-components.md).
 

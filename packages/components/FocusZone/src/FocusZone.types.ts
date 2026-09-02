@@ -1,16 +1,13 @@
 import type * as React from 'react';
+import type { ViewProps } from 'react-native';
 
-import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
-import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const focusZoneName = 'FocusZone';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-type EmptyInterface = {};
-export type FocusZoneState = EmptyInterface;
+export type FocusZoneState = Record<never, never>;
 
-export type FocusZoneProps = IViewProps & {
+export interface FocusZoneProps extends ViewProps {
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
@@ -19,7 +16,7 @@ export type FocusZoneProps = IViewProps & {
   /**
    * Optionally defines the initial tabbable element inside the FocusZone
    */
-  defaultTabbableElement?: React.RefObject<React.Component> | string;
+  defaultTabbableElement?: React.RefObject<React.Component | null> | string;
 
   /**
    ** Defines which arrows to react to
@@ -62,11 +59,6 @@ export type FocusZoneProps = IViewProps & {
   tabKeyNavigation?: FocusZoneTabNavigation;
 
   /**
-   * Callback called when “focus” event triggered in FocusZone
-   */
-  onFocus?: (e?: any) => void;
-
-  /**
    * @platform macos
    * By default, the Apple KeyView loop is calculated based on the UI tree hierarchy, accessibility properties,
    * custom element overrides of navigation order, and positions in layout.
@@ -83,9 +75,10 @@ export type FocusZoneProps = IViewProps & {
    * of the MacOS KeyView loop mechanics.
    */
   navigationOrderInRenderOrder?: boolean;
-};
+}
 
-export interface NativeProps extends Omit<FocusZoneProps, 'isCircularNavigation'> {
+export interface NativeProps extends Omit<FocusZoneProps, 'componentRef' | 'defaultTabbableElement' | 'isCircularNavigation'> {
+  defaultTabbableElement?: number | string;
   navigateAtEnd?: NavigateAtEnd;
   tabKeyNavigation?: FocusZoneTabNavigation;
 }
@@ -107,14 +100,21 @@ export type FocusZoneTabNavigation =
   | 'NavigateStopAtEnds' /* Navigate the FZ with Tab. Stop navigation at ends */
   | 'Normal'; /* Navigate the FZ with Tab. Don't trap focus, tabbing at ends moves you out */
 
-export type FocusZoneTokens = EmptyInterface;
+/** @deprecated FocusZone is an unstyled primitive and does not resolve tokens. */
+export type FocusZoneTokens = Record<never, never>;
 
+/** @deprecated Use FocusZoneProps. */
 export interface FocusZoneSlotProps {
   root: NativeProps;
 }
 
-export type FocusZoneRenderData = IRenderData<FocusZoneSlotProps, FocusZoneState>;
+/** @deprecated FocusZone uses the phased primitive component pattern. */
+export interface FocusZoneRenderData {
+  slotProps?: FocusZoneSlotProps;
+  state?: FocusZoneState;
+}
 
+/** @deprecated Use FocusZoneProps. */
 export interface FocusZoneType {
   props: FocusZoneProps;
   tokens: FocusZoneTokens;

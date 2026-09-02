@@ -46,6 +46,7 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/desktop-driver": "workspace:*",
+    "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
     "@react-native-community/cli": "^20.0.0",

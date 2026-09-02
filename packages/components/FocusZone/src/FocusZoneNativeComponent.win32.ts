@@ -1,10 +1,4 @@
-/**
- * Copyright (c) Microsoft Corporation.
- * Licensed under the MIT License.
- * @format
- */
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
-
+import { requireNativeComponent } from 'react-native';
 import type { HostComponent, ViewProps } from 'react-native';
 import type { UnsafeMixed, WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
 
@@ -21,6 +15,4 @@ export interface NativeProps extends ViewProps {
 
 export type FocusZoneComponentType = HostComponent<NativeProps>;
 
-export default codegenNativeComponent<NativeProps>('FocusZone', {
-  paperComponentName: 'RCTFocusZone',
-}) as FocusZoneComponentType;
+export default requireNativeComponent<NativeProps>('RCTFocusZone') as FocusZoneComponentType;
