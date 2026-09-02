@@ -14,8 +14,11 @@ the change crosses component boundaries.
 
 ## Source boundaries
 
-- Production source may depend only on React / React Native native components, `@fluentui-react-native/design`, and
-  `@fluentui-react-native/framework-base`.
+- Production source may depend only on React / React Native native components, `@fluentui-react-native/design`,
+  `@fluentui-react-native/framework-base`, and `@fluentui-react-native/callout`. Callout is allowed because a floating
+  surface has to be a native popup window on Windows and macOS, and no equivalent exists in React Native or in the
+  framework packages. Adding another native component package requires the same kind of justification and an update
+  here.
 - Generalizable non-styling hooks belong in `framework-base/src/hooks`.
 - Styling helpers belong in `agentic/design/src/styling`.
 - Component-library-specific non-public types, constants, and helpers belong in `src/common`.

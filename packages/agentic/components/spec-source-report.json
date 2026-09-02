@@ -749,6 +749,23 @@
       "candidateStatus": "review-required"
     },
     {
+      "component": "popover",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
       "component": "progress-bar",
       "lifecycle": "implemented",
       "conformance": "reviewed",
