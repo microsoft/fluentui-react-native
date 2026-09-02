@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 2,
+  "component": "link",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-09-02",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:link",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/link/SKILL.md",
+          "marketplaceBlobSha": "c161275491b75ff63f2108763f9ac160a44a9228",
+          "marketplaceSha256": "47b34dd702e06127234138bcae01ea55e73cbabaadf10ca4e3b611dfb44d7aaa",
+          "originPath": "plugins/components/skills/link/SKILL.md",
+          "originBlobSha": "c161275491b75ff63f2108763f9ac160a44a9228",
+          "originSha256": "47b34dd702e06127234138bcae01ea55e73cbabaadf10ca4e3b611dfb44d7aaa",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/link/usage.md",
+          "marketplaceBlobSha": "84f68e8a93fbf5dfdf3a87a38df10a850f6d6a40",
+          "marketplaceSha256": "22cfed78cdf3de3477720d378d6695d97635006c8dc6f1964783fab4964f1aa2",
+          "originPath": "plugins/components/skills/link/usage.md",
+          "originBlobSha": "84f68e8a93fbf5dfdf3a87a38df10a850f6d6a40",
+          "originSha256": "22cfed78cdf3de3477720d378d6695d97635006c8dc6f1964783fab4964f1aa2",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/link/web/accessibility.md",
+          "marketplaceBlobSha": "bd1f9036308a6e086875c5d8d5922ac6c6ad6077",
+          "marketplaceSha256": "e6a650cc13749ef7114b8155ef7e2707cf6412758fe5e172e8a078fda72132d6",
+          "originPath": "plugins/components/skills/link/web/accessibility.md",
+          "originBlobSha": "bd1f9036308a6e086875c5d8d5922ac6c6ad6077",
+          "originSha256": "e6a650cc13749ef7114b8155ef7e2707cf6412758fe5e172e8a078fda72132d6",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/link/web/interaction.md",
+          "marketplaceBlobSha": "f5d571f3bd6193fb7d26d4899df3a7bc73905c13",
+          "marketplaceSha256": "79864a47b60e0bfe1865bbb4939730f46e82e96c93e9b37b2dc528d861cac672",
+          "originPath": "plugins/components/skills/link/web/interaction.md",
+          "originBlobSha": "f5d571f3bd6193fb7d26d4899df3a7bc73905c13",
+          "originSha256": "79864a47b60e0bfe1865bbb4939730f46e82e96c93e9b37b2dc528d861cac672",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/link/web/tokens.yaml",
+          "marketplaceBlobSha": "217bee20aec60c5e8a09c425a52cc469b6c43dc0",
+          "marketplaceSha256": "c5e86b2a7cd01dd3d0cff4311c764e5cfa49f8373fc3de830e1e397d9751ede7",
+          "originPath": "plugins/components/skills/link/web/tokens.yaml",
+          "originBlobSha": "217bee20aec60c5e8a09c425a52cc469b6c43dc0",
+          "originSha256": "c5e86b2a7cd01dd3d0cff4311c764e5cfa49f8373fc3de830e1e397d9751ede7",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "furn-link-v1",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "650c8d5dee00e2a3af9cb88528df8448748374d1",
+      "files": [
+        {
+          "role": "styling",
+          "path": "packages/components/Link/src/Link.styling.ts",
+          "sha256": "048a38dcd1b8ab6f32a59e9db47eb6e61f7534018392a9a7f4bdf50d0d9f6115"
+        },
+        {
+          "role": "implementation",
+          "path": "packages/components/Link/src/Link.tsx",
+          "sha256": "7f97eac7bfe74425b93a9a5af5f42a730d4a1ee421ba0f933243845f542c3685"
+        },
+        {
+          "role": "types",
+          "path": "packages/components/Link/src/Link.types.ts",
+          "sha256": "b178e14eabbe065cb7d70948a29a241260d67f72ca332adea716773b6afb7d35"
+        },
+        {
+          "role": "tokens",
+          "path": "packages/components/Link/src/LinkTokens.ts",
+          "sha256": "8c3359f5892b0ce2b996ef68d56c538b9b4c9ed5227d92ac15218b1428a0994e"
+        },
+        {
+          "role": "state:hook",
+          "path": "packages/components/Link/src/useLink.ts",
+          "sha256": "d22d1b77ec093c4c80d44be6ab16c191d443de8d4b3e9867bb1f8423b8bf7458"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "link-focus-ring-is-single-border",
+      "status": "deferred"
+    },
+    {
+      "id": "link-hover-state-unsupported",
+      "status": "accepted"
+    },
+    {
+      "id": "link-icon-gap-is-inline-padding",
+      "status": "accepted"
+    },
+    {
+      "id": "link-inline-focus-border-may-be-inert",
+      "status": "deferred"
+    },
+    {
+      "id": "link-navigation-does-not-supersede-onpress",
+      "status": "accepted"
+    },
+    {
+      "id": "link-no-state-transition",
+      "status": "accepted"
+    },
+    {
+      "id": "link-underline-geometry-unsupported",
+      "status": "accepted"
+    },
+    {
+      "id": "link-url-prop-name",
+      "status": "accepted"
+    },
+    {
+      "id": "link-visited-state-unsupported",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "LNK-001",
+      "sources": ["flex-component", "furn-link-v1"],
+      "evidence": ["link.types.ts", "useLink.ts", "link.types.test.ts", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-002",
+      "sources": ["flex-component"],
+      "evidence": ["useLink.ts", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-003",
+      "sources": ["flex-component"],
+      "evidence": ["renderLink.tsx", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-004",
+      "sources": ["flex-component"],
+      "evidence": ["useLink.ts", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-005",
+      "sources": ["flex-component", "furn-link-v1"],
+      "evidence": ["useLink.ts", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-006",
+      "sources": ["furn-link-v1"],
+      "evidence": ["useLink.ts", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-007",
+      "sources": ["flex-component"],
+      "evidence": ["link.styles.ts", "useLinkStyles.ts", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-008",
+      "sources": ["flex-component"],
+      "evidence": ["link.styles.ts", "useLinkStyles.ts", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-009",
+      "sources": ["flex-component"],
+      "evidence": ["link.styles.ts", "useLinkStyles.ts", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-010",
+      "sources": ["flex-component", "furn-link-v1"],
+      "evidence": ["useLink.ts", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-011",
+      "sources": ["flex-component", "furn-link-v1"],
+      "evidence": ["link.styles.ts", "useLinkStyles.ts", "link.test.tsx"]
+    },
+    {
+      "id": "LNK-012",
+      "sources": ["flex-component"],
+      "evidence": ["link.styles.ts", "useLinkStyles.ts", "link.test.tsx"]
+    }
+  ]
+}
