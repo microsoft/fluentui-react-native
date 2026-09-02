@@ -82,7 +82,11 @@ This repository's current PR workflow provides examples in
 `.github/workflows/pr.yml`:
 
 - `macos-storybook` builds packages, bundles, prepares pods, and runs macOS
-  `stories-and-tests`;
+  `stories-and-tests`. It creates an ephemeral trusted code-signing identity in
+  an isolated job keychain, exports the identity SHA-1 to every Desktop Driver
+  command, explicitly builds the helper, runs noninteractive permission
+  diagnostics without prompting or modifying TCC, and uploads the diagnostic
+  with the smoke artifacts;
 - `windows-storybook` prepares the generated app, installs the required Windows
   App Runtime for that app, and runs Windows `stories-and-tests`;
 - `win32-storybook` runs the same authored plans through the prebuilt Paper

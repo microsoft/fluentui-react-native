@@ -189,6 +189,8 @@ jobs:
     name: macOS Storybook PR
     runs-on: macos-26
     timeout-minutes: 40
+    env:
+      FURN_DESKTOP_DRIVER_CACHE_ROOT: ${{ runner.temp }}/furn-desktop-driver-native
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
@@ -205,6 +207,115 @@ jobs:
       - name: Build packages
         run: yarn build
 
+      - name: Configure Desktop Driver signing
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          signing_root="$RUNNER_TEMP/furn-desktop-driver-signing"
+          keychain_path="$signing_root/furn-desktop-driver-ci.keychain-db"
+          keychain_password="$(openssl rand -hex 24)"
+          mkdir -p "$signing_root"
+          echo "::add-mask::$keychain_password"
+
+          cat > "$signing_root/openssl.cnf" <<'OPENSSL_CONFIG'
+          [req]
+          distinguished_name = distinguished_name
+          x509_extensions = code_signing
+          prompt = no
+
+          [distinguished_name]
+          CN = FURN Desktop Driver CI
+
+          [code_signing]
+          basicConstraints = critical,CA:true
+          keyUsage = critical,digitalSignature,keyCertSign
+          extendedKeyUsage = codeSigning
+          subjectKeyIdentifier = hash
+          authorityKeyIdentifier = keyid:always
+          OPENSSL_CONFIG
+
+          openssl req -x509 -newkey rsa:2048 -sha256 -days 2 -nodes \
+            -config "$signing_root/openssl.cnf" \
+            -keyout "$signing_root/key.pem" \
+            -out "$signing_root/certificate.pem"
+
+          pkcs12_compatibility=()
+          if openssl pkcs12 -help 2>&1 | grep -q -- "-legacy"; then
+            pkcs12_compatibility=(-legacy)
+          fi
+          openssl pkcs12 -export "${pkcs12_compatibility[@]}" \
+            -inkey "$signing_root/key.pem" \
+            -in "$signing_root/certificate.pem" \
+            -name "FURN Desktop Driver CI" \
+            -out "$signing_root/identity.p12" \
+            -passout "pass:$keychain_password"
+
+          security create-keychain -p "$keychain_password" "$keychain_path"
+          security set-keychain-settings -lut 21600 "$keychain_path"
+          security unlock-keychain -p "$keychain_password" "$keychain_path"
+          security import "$signing_root/identity.p12" \
+            -k "$keychain_path" \
+            -P "$keychain_password" \
+            -T /usr/bin/codesign \
+            -T /usr/bin/security
+          security add-trusted-cert -d -r trustRoot \
+            -k "$keychain_path" \
+            "$signing_root/certificate.pem"
+          security set-key-partition-list \
+            -S apple-tool:,apple:,codesign: \
+            -s \
+            -k "$keychain_password" \
+            "$keychain_path"
+
+          existing_keychains=()
+          while IFS= read -r existing_keychain; do
+            existing_keychain="${existing_keychain#*\"}"
+            existing_keychain="${existing_keychain%\"}"
+            if [[ -n "$existing_keychain" && "$existing_keychain" != "$keychain_path" ]]; then
+              existing_keychains+=("$existing_keychain")
+            fi
+          done < <(security list-keychains -d user)
+          security list-keychains -d user -s "$keychain_path" "${existing_keychains[@]}"
+
+          signing_identity="$(
+            security find-identity -v -p codesigning "$keychain_path" |
+              awk '/"FURN Desktop Driver CI"/ { print $2; exit }'
+          )"
+          if [[ -z "$signing_identity" ]]; then
+            echo "The Desktop Driver CI code-signing identity is unavailable." >&2
+            exit 1
+          fi
+          echo "FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY=$signing_identity" >> "$GITHUB_ENV"
+
+      - name: Build and diagnose the macOS Desktop Driver
+        working-directory: apps/storybook
+        run: |
+          set -euo pipefail
+
+          yarn storybook build-driver --macos
+          # Hosted CI reports actual TCC authority; it must not prompt or mutate the permission database.
+          yarn desktop-driver doctor --platform macos --permissions |
+            tee "$RUNNER_TEMP/desktop-driver-macos-doctor.json"
+
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+
+          const report = JSON.parse(
+            fs.readFileSync(path.join(process.env.RUNNER_TEMP, 'desktop-driver-macos-doctor.json'), 'utf8'),
+          );
+          if (!report.ready || report.result?.signing?.mode !== 'signed') {
+            throw new Error('The macOS Desktop Driver helper is not ready with a stable signature.');
+          }
+          if (report.result.signing.certificateHash !== process.env.FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY) {
+            throw new Error('The verified helper certificate does not match the configured CI signing identity.');
+          }
+          if (report.permissions?.schemaVersion !== 1 || report.permissions?.type !== 'permissions') {
+            throw new Error('The macOS Desktop Driver permission diagnostic is missing or unsupported.');
+          }
+          NODE
+
       - name: Bundle macOS
         run: |
           set -eox pipefail
@@ -220,6 +331,15 @@ jobs:
         working-directory: apps/storybook
         env:
           CCACHE_DISABLE: 1
+
+      - name: Upload macOS Storybook artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Storybook_macos_Dump
+          path: |
+            apps/storybook/artifacts/macos
+            ${{ runner.temp }}/desktop-driver-macos-doctor.json
 
   ios:
     name: iOS PR
