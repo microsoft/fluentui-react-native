@@ -10,6 +10,17 @@ type NativeFocusPressableProps = PressableProps & {
   enableFocusRing: boolean;
 };
 
+function hasVisibleContent(content: DestructiveButtonProps['content']): boolean {
+  if (content === undefined || content === null || (typeof content === 'string' && content.trim().length === 0)) {
+    return false;
+  }
+  if (typeof content === 'object' && !Array.isArray(content) && 'children' in content) {
+    const { children } = content as { children?: unknown };
+    return !(children === undefined || children === null || (typeof children === 'string' && children.trim().length === 0));
+  }
+  return true;
+}
+
 /**
  * Hook to create the state for a DestructiveButton component. This is responsible for:
  * - resolving the prop states to their default values if unset
@@ -19,6 +30,8 @@ type NativeFocusPressableProps = PressableProps & {
  */
 export function useDestructiveButton_unstable(props: DestructiveButtonProps): DestructiveButtonState {
   const {
+    'aria-checked': _ariaChecked,
+    'aria-selected': _ariaSelected,
     accessibilityState,
     appearance = 'primary',
     content: contentProp,
@@ -31,9 +44,12 @@ export function useDestructiveButton_unstable(props: DestructiveButtonProps): De
     style: userStyle,
     ...rest
   } = props;
-  const hasContent = contentProp !== undefined && contentProp !== null;
+  const hasContent = hasVisibleContent(contentProp);
   const hasIcon = iconProp !== undefined && iconProp !== null;
   const iconOnly = !hasContent && hasIcon;
+  const resolvedAccessibilityState = { ...accessibilityState };
+  delete resolvedAccessibilityState.checked;
+  delete resolvedAccessibilityState.selected;
 
   useAccessibilityLabelWarning({
     accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
@@ -48,14 +64,14 @@ export function useDestructiveButton_unstable(props: DestructiveButtonProps): De
     ...rest,
     role: 'button',
     accessibilityState: {
-      ...accessibilityState,
+      ...resolvedAccessibilityState,
       disabled,
     },
     accessible: rest.accessible ?? true,
     disabled,
     // RNW 0.81 crashes when either outline props or its native focus ring creates border visuals after mount.
     enableFocusRing: false,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
   };
   const [pressableProps, pressableState] = usePressableState(nativeProps);
   const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });

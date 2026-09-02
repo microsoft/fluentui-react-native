@@ -90,6 +90,12 @@ describe('DestructiveButton', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
+  it('keeps a disabled button out of the tab order when focusable is requested', async () => {
+    const component = await renderDestructiveButton({ content: 'Unavailable', disabled: true, focusable: true });
+
+    expect(getRoot(component).props.focusable).toBe(false);
+  });
+
   it('renders an accessible icon-only button at the minimum target size', async () => {
     const component = await renderDestructiveButton({
       accessibilityLabel: 'Delete item',
@@ -119,6 +125,18 @@ describe('DestructiveButton', () => {
     warn.mockRestore();
   });
 
+  it.each(['', '   ', { children: null }])('treats empty content as icon-only content', async (content) => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation();
+    const component = await renderDestructiveButton({
+      content,
+      icon: { imageSource: { uri: 'delete.png' } },
+    });
+
+    expect(getRootStyle(component).borderRadius).toBe(9999);
+    expect(warn).toHaveBeenCalledWith('DestructiveButton: icon-only buttons require an accessibilityLabel that describes the action.');
+    warn.mockRestore();
+  });
+
   it('never reports selection state and does not gain it on press', async () => {
     const onPress = jest.fn();
     const component = await renderDestructiveButton({ content: 'Delete', onPress });
@@ -131,6 +149,20 @@ describe('DestructiveButton', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
     expect(getRoot(component).props.accessibilityState).toEqual({ disabled: false });
     expect(component.getAllByText('Delete', { includeHiddenElements: true })).toHaveLength(1);
+  });
+
+  it('removes caller-supplied selection semantics while retaining other accessibility state', async () => {
+    const component = await renderDestructiveButton({
+      'aria-checked': true,
+      'aria-selected': true,
+      accessibilityState: { busy: true, checked: true, selected: true },
+      content: 'Delete',
+    });
+    const root = getRoot(component);
+
+    expect(root.props['aria-checked']).toBeUndefined();
+    expect(root.props['aria-selected']).toBeUndefined();
+    expect(root.props.accessibilityState).toEqual({ busy: true, disabled: false });
   });
 
   it('places the icon after content and applies user styles last', async () => {
