@@ -67,7 +67,8 @@ export type AvatarGroupProps = AvatarGroupStateProps &
 export type AvatarGroupState = ComponentState<AvatarGroupStateSlots> &
   Required<AvatarGroupStateProps> &
   ThemeState & {
-    children: React.ReactNode;
+    /** The recursively flattened sequence of visible items and their stable wrapper keys. */
+    items: readonly { key: React.Key; node: React.ReactNode }[];
 
     /** Accessibility props applied to every item box while the root owns the group's accessible name. */
     itemAccessibilityProps?: ViewProps;

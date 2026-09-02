@@ -137,6 +137,23 @@ describe('AvatarGroup', () => {
     expect(itemStyle(component, 1).marginStart).toBe(-(overlaps[40] + ringWidths[40] * 2));
   });
 
+  it('recursively flattens fragments into independently laid out items', async () => {
+    const component = await renderGroup({
+      children: (
+        <>
+          <Avatar accessibilityLabel="Lydia" initials="LM" testID="item-0" />
+          <>
+            <Avatar accessibilityLabel="Ray" initials="RK" testID="item-1" />
+          </>
+        </>
+      ),
+      layout: 'stack',
+    });
+
+    expect(itemStyle(component, 0).marginStart).toBeUndefined();
+    expect(itemStyle(component, 1).marginStart).toBe(-(overlaps[40] + ringWidths[40] * 2));
+  });
+
   it('renders the overflow indicator with the hidden count', async () => {
     const component = await renderGroup({ overflow: { testID: 'overflow' }, overflowCount: 5 });
 
@@ -201,6 +218,17 @@ describe('AvatarGroup', () => {
     expect(component.getAllByRole('image')).toHaveLength(1);
   });
 
+  it.each([{ accessibilityLabelledBy: 'group-label' }, { 'aria-label': 'Document collaborators' }, { 'aria-labelledby': 'group-label' }])(
+    'recognizes every supported programmatic group name',
+    async (nameProps) => {
+      const component = await renderGroup(nameProps);
+      const root = component.getByTestId('group');
+
+      expect(root.props.accessible).toBe(true);
+      expect(component.getAllByRole('image')).toHaveLength(1);
+    },
+  );
+
   it('leaves an unlabeled group as a plain row whose members announce themselves', async () => {
     const component = await renderGroup();
     const root = component.getByTestId('group');
@@ -219,6 +247,15 @@ describe('AvatarGroup', () => {
     expect(chip.props.accessible).toBe(true);
     expect(chip.props.accessibilityRole).toBe('image');
     expect(chip.props.accessibilityLabel).toBe('5 more');
+  });
+
+  it('recognizes a referenced accessible name on the overflow indicator', async () => {
+    const component = await renderGroup({
+      overflow: { accessibilityLabelledBy: 'overflow-label', testID: 'overflow' },
+      overflowCount: 5,
+    });
+
+    expect(component.getByTestId('overflow').props.accessible).toBe(true);
   });
 
   it('honors an explicit accessible value and role', async () => {

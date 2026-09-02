@@ -22,9 +22,40 @@ function formatOverflowCount(count: number): string {
   return `+${Math.min(count, maximumOverflowCount)}`;
 }
 
+function flattenItems(children: React.ReactNode, keyPrefix = ''): { key: React.Key; node: React.ReactNode }[] {
+  const items: { key: React.Key; node: React.ReactNode }[] = [];
+  React.Children.forEach(children, (child, index) => {
+    const childKey = React.isValidElement(child) && child.key !== null ? child.key : index;
+    const key = keyPrefix ? `${keyPrefix}/${String(childKey)}` : childKey;
+    if (React.isValidElement<{ children?: React.ReactNode }>(child) && child.type === React.Fragment) {
+      items.push(...flattenItems(child.props.children, String(key)));
+    } else {
+      items.push({ key, node: child });
+    }
+  });
+  return items;
+}
+
+function hasAccessibleName(props: {
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  accessibilityLabel?: string;
+  accessibilityLabelledBy?: string;
+}): boolean {
+  return (
+    props.accessibilityLabel !== undefined ||
+    props.accessibilityLabelledBy !== undefined ||
+    props['aria-label'] !== undefined ||
+    props['aria-labelledby'] !== undefined
+  );
+}
+
 export function useAvatarGroup_unstable(props: AvatarGroupProps): AvatarGroupState {
   const {
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
     accessibilityLabel,
+    accessibilityLabelledBy,
     accessibilityRole,
     accessible,
     children,
@@ -37,24 +68,29 @@ export function useAvatarGroup_unstable(props: AvatarGroupProps): AvatarGroupSta
   } = props;
 
   const overflowCount = normalizeOverflowCount(overflowCountProp);
-  const isInformative = accessibilityLabel !== undefined;
+  const isInformative = hasAccessibleName({
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+    accessibilityLabel,
+    accessibilityLabelledBy,
+  });
   const isAccessible = accessible ?? isInformative;
   const hasOverflow = overflowCount > 0;
   const showOverflow = hasOverflow && size !== 16 && overflowProp !== null;
   const overflowLabel = showOverflow ? formatOverflowCount(overflowCount) : '';
 
-  const { hasSizeMismatch, itemCount } = React.useMemo(() => {
+  const { hasSizeMismatch, items } = React.useMemo(() => {
     let mismatch = false;
-    const items = React.Children.toArray(children);
-    for (const item of items) {
+    const resolvedItems = flattenItems(children);
+    for (const { node: item } of resolvedItems) {
       if (React.isValidElement<{ size?: unknown }>(item) && item.props.size !== undefined && item.props.size !== size) {
         mismatch = true;
       }
     }
-    return { hasSizeMismatch: mismatch, itemCount: items.length };
+    return { hasSizeMismatch: mismatch, items: resolvedItems };
   }, [children, size]);
 
-  const renderedItems = itemCount + (showOverflow ? 1 : 0);
+  const renderedItems = items.length + (showOverflow ? 1 : 0);
   const suppressedOverflow = hasOverflow && size === 16;
 
   React.useEffect(() => {
@@ -75,14 +111,17 @@ export function useAvatarGroup_unstable(props: AvatarGroupProps): AvatarGroupSta
   const themeState = useThemeState();
   const root = useSlot(View, {
     ...rest,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
     accessible: isAccessible,
     accessibilityLabel,
+    accessibilityLabelledBy,
     accessibilityRole: accessibilityRole ?? (isAccessible ? 'image' : 'none'),
   });
 
   const overflow = useOptionalSlot(View, showOverflow ? (overflowProp ?? {}) : null, {
     transform: (slotProps) => {
-      const isSelfLabeled = !isAccessible && slotProps.accessibilityLabel !== undefined;
+      const isSelfLabeled = !isAccessible && hasAccessibleName(slotProps);
       return isSelfLabeled
         ? { ...slotProps, accessible: slotProps.accessible ?? true, accessibilityRole: slotProps.accessibilityRole ?? 'image' }
         : { ...slotProps, ...hiddenFromAccessibilityProps };
@@ -95,7 +134,7 @@ export function useAvatarGroup_unstable(props: AvatarGroupProps): AvatarGroupSta
     root,
     overflow,
     overflowText,
-    children,
+    items,
     itemAccessibilityProps: isAccessible ? hiddenFromAccessibilityProps : undefined,
     layout,
     overflowCount,

@@ -1,22 +1,16 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import * as React from 'react';
 import { View } from 'react-native';
 
 import type { AvatarGroupState } from './avatar-group.types';
 
 export function renderAvatarGroup_unstable(state: AvatarGroupState) {
-  const { itemAccessibilityProps, itemOffsetStyle, itemStyle, overflow: Overflow, overflowText: OverflowText } = state;
-  const items = React.Children.toArray(state.children);
+  const { itemAccessibilityProps, itemOffsetStyle, itemStyle, items, overflow: Overflow, overflowText: OverflowText } = state;
 
   return (
     <state.root>
       {items.map((item, index) => (
-        <View
-          key={React.isValidElement(item) && item.key !== null ? item.key : index}
-          {...itemAccessibilityProps}
-          style={index === 0 ? itemStyle : itemOffsetStyle}
-        >
-          {item}
+        <View key={item.key} {...itemAccessibilityProps} style={index === 0 ? itemStyle : itemOffsetStyle}>
+          {item.node}
         </View>
       ))}
       {Overflow && (
