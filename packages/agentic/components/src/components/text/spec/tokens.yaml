@@ -1,0 +1,12 @@
+schemaVersion: 1
+component: text
+implementation: text.styles.ts
+statePrecedence: []
+bindings:
+  root:
+    fontFamily: fontFamily.functional
+    fontSize: fontSize.functionalBodyMedium
+    lineHeight: lineHeight.functionalBodyMedium
+    fontWeight: fontWeight.functionalRegular
+    color: color.foregroundNeutralPrimary
+tokenGaps: []

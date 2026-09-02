@@ -1,4 +1,4 @@
-import type { Image, StyleProp, Text, View, ViewStyle } from 'react-native';
+import type { Image, StyleProp, View, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
   ComponentState,
@@ -10,6 +10,7 @@ import type {
 import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
+import type { Text } from '../text/text';
 
 export type AvatarSize = 16 | 20 | 24 | 28 | 32 | 40 | 56 | 120;
 export type AvatarContentMode = 'image' | 'icon' | 'initials';

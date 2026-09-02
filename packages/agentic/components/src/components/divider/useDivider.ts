@@ -1,9 +1,10 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
 import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
+import { Text } from '../text/text';
 import type { DividerProps, DividerState } from './divider.types';
 
 function getTextFromSlotProp(slot: DividerProps['label']): string | undefined {

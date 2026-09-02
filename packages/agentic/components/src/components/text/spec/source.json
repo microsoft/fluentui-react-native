@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 2,
+  "component": "text",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-09-01",
+  "sources": [
+    {
+      "id": "local-foundation",
+      "kind": "local-foundation",
+      "authority": "normative",
+      "references": [
+        {
+          "id": "flex-text-token-map",
+          "type": "repository",
+          "authority": "token-reference",
+          "location": "packages/agentic/design/src/tokens/mappings/flex-token-map.yaml"
+        },
+        {
+          "id": "furn-text-v1",
+          "type": "repository",
+          "authority": "compatibility-reference",
+          "location": "packages/components/Text/src/Text.tsx"
+        },
+        {
+          "id": "react-native-text-081",
+          "type": "external",
+          "authority": "platform-contract",
+          "location": "https://reactnative.dev/docs/0.81/text"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "text-local-foundation-source",
+      "status": "accepted"
+    },
+    {
+      "id": "text-native-only-api",
+      "status": "accepted"
+    },
+    {
+      "id": "text-nested-default-boundary",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "TXT-001",
+      "evidence": ["text.styles.ts", "text.test.tsx"]
+    },
+    {
+      "id": "TXT-002",
+      "evidence": ["useTextStyles.ts", "text.test.tsx"]
+    },
+    {
+      "id": "TXT-003",
+      "evidence": ["text.test.tsx", "text.types.test.tsx", "text.types.ts"]
+    },
+    {
+      "id": "TXT-004",
+      "evidence": ["renderText.ts", "text.test.tsx", "text.ts"]
+    },
+    {
+      "id": "TXT-005",
+      "evidence": ["text.test.tsx", "text.types.test.tsx", "useText.ts"]
+    }
+  ]
+}

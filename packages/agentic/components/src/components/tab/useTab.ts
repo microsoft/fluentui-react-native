@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pressable, Text } from 'react-native';
+import { Pressable } from 'react-native';
 
 import {
   type PropsWithRefOf,
@@ -13,6 +13,7 @@ import { useThemeState } from '@fluentui-react-native/design';
 import type { TabProps, TabState } from './tab.types';
 import { Icon } from '../../primitives/icon/icon';
 import { TabListContext } from '../tablist/TabListContext';
+import { Text } from '../text/text';
 
 /**
  * Hook to create the state for a Tab component.

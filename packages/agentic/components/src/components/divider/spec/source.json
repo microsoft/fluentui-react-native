@@ -1,127 +1,134 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "component": "divider",
-  "skill": "flex-components:divider",
-  "sourceLock": "flex-1.5.0-206c4996",
-  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
   "lifecycle": "implemented",
   "conformance": "reviewed",
   "reviewedAt": "2026-08-28",
-  "availableSurfaces": ["mobile", "shared", "web"],
-  "surfacesConsulted": ["mobile", "shared", "web"],
-  "sourceFiles": [
+  "sources": [
     {
-      "role": "mobile:android:accessibility",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/android/accessibility.md",
-      "marketplaceBlobSha": "cbea182f84019869dafa9e168aeffe71da4e929f",
-      "marketplaceSha256": "dab045dd655a6a91f15328051163dc231a5ab74574a642073b7c553b144b2432",
-      "originPath": "plugins/components/skills/divider/mobile/android/accessibility.md",
-      "originBlobSha": "cbea182f84019869dafa9e168aeffe71da4e929f",
-      "originSha256": "dab045dd655a6a91f15328051163dc231a5ab74574a642073b7c553b144b2432",
-      "contentDiffers": false
-    },
-    {
-      "role": "mobile:android:interaction",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/android/interaction.md",
-      "marketplaceBlobSha": "6618e0138e7436460b3c74cfca26f54853809fd9",
-      "marketplaceSha256": "c2002ce79a212494d146c7bdd2a453aa70836c1ce76f95954f7a895f92ed6150",
-      "originPath": "plugins/components/skills/divider/mobile/android/interaction.md",
-      "originBlobSha": "6618e0138e7436460b3c74cfca26f54853809fd9",
-      "originSha256": "c2002ce79a212494d146c7bdd2a453aa70836c1ce76f95954f7a895f92ed6150",
-      "contentDiffers": false
-    },
-    {
-      "role": "mobile:ios:accessibility",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/ios/accessibility.md",
-      "marketplaceBlobSha": "1ea356216c765cc37c3535e06238e1493a0025d2",
-      "marketplaceSha256": "b638f26bba9a1191a1e9924543a11d2dfceac202b1831c2ac71d4f420f7fa422",
-      "originPath": "plugins/components/skills/divider/mobile/ios/accessibility.md",
-      "originBlobSha": "1ea356216c765cc37c3535e06238e1493a0025d2",
-      "originSha256": "b638f26bba9a1191a1e9924543a11d2dfceac202b1831c2ac71d4f420f7fa422",
-      "contentDiffers": false
-    },
-    {
-      "role": "mobile:ios:interaction",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/ios/interaction.md",
-      "marketplaceBlobSha": "38bac6c8622ee9356737ab41d051b9a3dddd9dab",
-      "marketplaceSha256": "9a521c6ade731489de823f2084b9c6015e1b431f3013c4c0909974cd7afaa075",
-      "originPath": "plugins/components/skills/divider/mobile/ios/interaction.md",
-      "originBlobSha": "38bac6c8622ee9356737ab41d051b9a3dddd9dab",
-      "originSha256": "9a521c6ade731489de823f2084b9c6015e1b431f3013c4c0909974cd7afaa075",
-      "contentDiffers": false
-    },
-    {
-      "role": "mobile:overview",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/overview.md",
-      "marketplaceBlobSha": "08146bbaeb4da718b0b54e3a7ef9335ab8ed6b19",
-      "marketplaceSha256": "54e76f300810cf13c2e1513eb641904b799e63563e9f520f169214834ef3c1c3",
-      "originPath": "plugins/components/skills/divider/mobile/overview.md",
-      "originBlobSha": "08146bbaeb4da718b0b54e3a7ef9335ab8ed6b19",
-      "originSha256": "54e76f300810cf13c2e1513eb641904b799e63563e9f520f169214834ef3c1c3",
-      "contentDiffers": false
-    },
-    {
-      "role": "mobile:tokens",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/tokens.yaml",
-      "marketplaceBlobSha": "8c67cc0f100cb318d3c357b793100cccbce4380f",
-      "marketplaceSha256": "1cb450dcce7fab62ea5a2d9696170cacaa04f5225683967b3374c261924b3012",
-      "originPath": "plugins/components/skills/divider/mobile/tokens.yaml",
-      "originBlobSha": "8c67cc0f100cb318d3c357b793100cccbce4380f",
-      "originSha256": "1cb450dcce7fab62ea5a2d9696170cacaa04f5225683967b3374c261924b3012",
-      "contentDiffers": false
-    },
-    {
-      "role": "skill",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/SKILL.md",
-      "marketplaceBlobSha": "3a65c57a1475d856fc1d18cc79c6bc4088642f22",
-      "marketplaceSha256": "99726fc8a7b705d573518f7543068a26e32dd5d8e8146d822b5703cfb14db35a",
-      "originPath": "plugins/components/skills/divider/SKILL.md",
-      "originBlobSha": "3a65c57a1475d856fc1d18cc79c6bc4088642f22",
-      "originSha256": "99726fc8a7b705d573518f7543068a26e32dd5d8e8146d822b5703cfb14db35a",
-      "contentDiffers": false
-    },
-    {
-      "role": "usage",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/usage.md",
-      "marketplaceBlobSha": "e4a70da2e5be98ad599f7f7202b1e338a5961ed1",
-      "marketplaceSha256": "64c0e3aebb63a168a3aa42b9b973e1a7448f0924517ba601f5e5859eace16c03",
-      "originPath": "plugins/components/skills/divider/usage.md",
-      "originBlobSha": "e4a70da2e5be98ad599f7f7202b1e338a5961ed1",
-      "originSha256": "64c0e3aebb63a168a3aa42b9b973e1a7448f0924517ba601f5e5859eace16c03",
-      "contentDiffers": false
-    },
-    {
-      "role": "web:accessibility",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/web/accessibility.md",
-      "marketplaceBlobSha": "c3729e1052b638a139b7d7f21ae7c4a6aaa93aec",
-      "marketplaceSha256": "ab0a112250b7504289561883b08f65fea6dbb383cabf068f7b3c685071cb393f",
-      "originPath": "plugins/components/skills/divider/web/accessibility.md",
-      "originBlobSha": "c3729e1052b638a139b7d7f21ae7c4a6aaa93aec",
-      "originSha256": "ab0a112250b7504289561883b08f65fea6dbb383cabf068f7b3c685071cb393f",
-      "contentDiffers": false
-    },
-    {
-      "role": "web:interaction",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/web/interaction.md",
-      "marketplaceBlobSha": "95d14240a4c75ab339c79eb98a57e761bdfa7045",
-      "marketplaceSha256": "a8691712b20b54687daaa779e26770f97858fbcc3e7b5287d770ea79c4349372",
-      "originPath": "plugins/components/skills/divider/web/interaction.md",
-      "originBlobSha": "95d14240a4c75ab339c79eb98a57e761bdfa7045",
-      "originSha256": "a8691712b20b54687daaa779e26770f97858fbcc3e7b5287d770ea79c4349372",
-      "contentDiffers": false
-    },
-    {
-      "role": "web:tokens",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/divider/web/tokens.yaml",
-      "marketplaceBlobSha": "2812100818ec69401013dff5975356b7df0b29db",
-      "marketplaceSha256": "5c184e11660aa2a4a08469270b4f4d576b2dd86d889fa91bd338f3a7f2c044f6",
-      "originPath": "plugins/components/skills/divider/web/tokens.yaml",
-      "originBlobSha": "2812100818ec69401013dff5975356b7df0b29db",
-      "originSha256": "5c184e11660aa2a4a08469270b4f4d576b2dd86d889fa91bd338f3a7f2c044f6",
-      "contentDiffers": false
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:divider",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["mobile", "shared", "web"],
+      "surfacesConsulted": ["mobile", "shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "mobile:android:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/android/accessibility.md",
+          "marketplaceBlobSha": "cbea182f84019869dafa9e168aeffe71da4e929f",
+          "marketplaceSha256": "dab045dd655a6a91f15328051163dc231a5ab74574a642073b7c553b144b2432",
+          "originPath": "plugins/components/skills/divider/mobile/android/accessibility.md",
+          "originBlobSha": "cbea182f84019869dafa9e168aeffe71da4e929f",
+          "originSha256": "dab045dd655a6a91f15328051163dc231a5ab74574a642073b7c553b144b2432",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:android:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/android/interaction.md",
+          "marketplaceBlobSha": "6618e0138e7436460b3c74cfca26f54853809fd9",
+          "marketplaceSha256": "c2002ce79a212494d146c7bdd2a453aa70836c1ce76f95954f7a895f92ed6150",
+          "originPath": "plugins/components/skills/divider/mobile/android/interaction.md",
+          "originBlobSha": "6618e0138e7436460b3c74cfca26f54853809fd9",
+          "originSha256": "c2002ce79a212494d146c7bdd2a453aa70836c1ce76f95954f7a895f92ed6150",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:ios:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/ios/accessibility.md",
+          "marketplaceBlobSha": "1ea356216c765cc37c3535e06238e1493a0025d2",
+          "marketplaceSha256": "b638f26bba9a1191a1e9924543a11d2dfceac202b1831c2ac71d4f420f7fa422",
+          "originPath": "plugins/components/skills/divider/mobile/ios/accessibility.md",
+          "originBlobSha": "1ea356216c765cc37c3535e06238e1493a0025d2",
+          "originSha256": "b638f26bba9a1191a1e9924543a11d2dfceac202b1831c2ac71d4f420f7fa422",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:ios:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/ios/interaction.md",
+          "marketplaceBlobSha": "38bac6c8622ee9356737ab41d051b9a3dddd9dab",
+          "marketplaceSha256": "9a521c6ade731489de823f2084b9c6015e1b431f3013c4c0909974cd7afaa075",
+          "originPath": "plugins/components/skills/divider/mobile/ios/interaction.md",
+          "originBlobSha": "38bac6c8622ee9356737ab41d051b9a3dddd9dab",
+          "originSha256": "9a521c6ade731489de823f2084b9c6015e1b431f3013c4c0909974cd7afaa075",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:overview",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/overview.md",
+          "marketplaceBlobSha": "08146bbaeb4da718b0b54e3a7ef9335ab8ed6b19",
+          "marketplaceSha256": "54e76f300810cf13c2e1513eb641904b799e63563e9f520f169214834ef3c1c3",
+          "originPath": "plugins/components/skills/divider/mobile/overview.md",
+          "originBlobSha": "08146bbaeb4da718b0b54e3a7ef9335ab8ed6b19",
+          "originSha256": "54e76f300810cf13c2e1513eb641904b799e63563e9f520f169214834ef3c1c3",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/mobile/tokens.yaml",
+          "marketplaceBlobSha": "8c67cc0f100cb318d3c357b793100cccbce4380f",
+          "marketplaceSha256": "1cb450dcce7fab62ea5a2d9696170cacaa04f5225683967b3374c261924b3012",
+          "originPath": "plugins/components/skills/divider/mobile/tokens.yaml",
+          "originBlobSha": "8c67cc0f100cb318d3c357b793100cccbce4380f",
+          "originSha256": "1cb450dcce7fab62ea5a2d9696170cacaa04f5225683967b3374c261924b3012",
+          "contentDiffers": false
+        },
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/SKILL.md",
+          "marketplaceBlobSha": "3a65c57a1475d856fc1d18cc79c6bc4088642f22",
+          "marketplaceSha256": "99726fc8a7b705d573518f7543068a26e32dd5d8e8146d822b5703cfb14db35a",
+          "originPath": "plugins/components/skills/divider/SKILL.md",
+          "originBlobSha": "3a65c57a1475d856fc1d18cc79c6bc4088642f22",
+          "originSha256": "99726fc8a7b705d573518f7543068a26e32dd5d8e8146d822b5703cfb14db35a",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/usage.md",
+          "marketplaceBlobSha": "e4a70da2e5be98ad599f7f7202b1e338a5961ed1",
+          "marketplaceSha256": "64c0e3aebb63a168a3aa42b9b973e1a7448f0924517ba601f5e5859eace16c03",
+          "originPath": "plugins/components/skills/divider/usage.md",
+          "originBlobSha": "e4a70da2e5be98ad599f7f7202b1e338a5961ed1",
+          "originSha256": "64c0e3aebb63a168a3aa42b9b973e1a7448f0924517ba601f5e5859eace16c03",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/web/accessibility.md",
+          "marketplaceBlobSha": "c3729e1052b638a139b7d7f21ae7c4a6aaa93aec",
+          "marketplaceSha256": "ab0a112250b7504289561883b08f65fea6dbb383cabf068f7b3c685071cb393f",
+          "originPath": "plugins/components/skills/divider/web/accessibility.md",
+          "originBlobSha": "c3729e1052b638a139b7d7f21ae7c4a6aaa93aec",
+          "originSha256": "ab0a112250b7504289561883b08f65fea6dbb383cabf068f7b3c685071cb393f",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/web/interaction.md",
+          "marketplaceBlobSha": "95d14240a4c75ab339c79eb98a57e761bdfa7045",
+          "marketplaceSha256": "a8691712b20b54687daaa779e26770f97858fbcc3e7b5287d770ea79c4349372",
+          "originPath": "plugins/components/skills/divider/web/interaction.md",
+          "originBlobSha": "95d14240a4c75ab339c79eb98a57e761bdfa7045",
+          "originSha256": "a8691712b20b54687daaa779e26770f97858fbcc3e7b5287d770ea79c4349372",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/divider/web/tokens.yaml",
+          "marketplaceBlobSha": "2812100818ec69401013dff5975356b7df0b29db",
+          "marketplaceSha256": "5c184e11660aa2a4a08469270b4f4d576b2dd86d889fa91bd338f3a7f2c044f6",
+          "originPath": "plugins/components/skills/divider/web/tokens.yaml",
+          "originBlobSha": "2812100818ec69401013dff5975356b7df0b29db",
+          "originSha256": "5c184e11660aa2a4a08469270b4f4d576b2dd86d889fa91bd338f3a7f2c044f6",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
     }
   ],
-  "releaseDifferences": [],
   "divergences": [
     {
       "id": "divider-orientation-semantics",

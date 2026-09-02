@@ -1,4 +1,4 @@
-import type { Pressable, StyleProp, Text, View, ViewStyle } from 'react-native';
+import type { Pressable, StyleProp, View, ViewStyle } from 'react-native';
 
 import type {
   ComponentProps,
@@ -11,6 +11,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
+import type { Text } from '../text/text';
 
 type AnimatedViewComponent = typeof import('react-native').Animated.View;
 

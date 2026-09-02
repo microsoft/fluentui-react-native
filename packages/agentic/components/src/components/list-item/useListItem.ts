@@ -1,10 +1,11 @@
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, Text as NativeText, View } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
 import { useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
 import { hideSlotProps } from '../../common/accessibility';
+import { Text } from '../text/text';
 
 import { getListItemAvatarSize, getListItemIconSize, getListItemSelectionIndicatorGlyph } from './list-item.styles';
 import type { ListItemMetrics, ListItemProps, ListItemState } from './list-item.types';
@@ -96,14 +97,14 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
   });
 
   const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
-  const content = useSlot(Text, contentProp);
-  const contentHidden = useSlot(Text, contentProp);
+  const content = useSlot(NativeText, contentProp);
+  const contentHidden = useSlot(NativeText, contentProp);
   const secondaryContent = useOptionalSlot(Text, secondaryContentProp);
   const icon = useOptionalSlot(Icon, iconProp);
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
   const avatar = useOptionalSlot(View, avatarProp);
   const trailing = useOptionalSlot(View, trailingProp);
-  const selectionIndicator = useOptionalSlot(Text, selectionGlyph, { transform: hideSlotProps });
+  const selectionIndicator = useOptionalSlot(NativeText, selectionGlyph, { transform: hideSlotProps });
 
   return {
     root,

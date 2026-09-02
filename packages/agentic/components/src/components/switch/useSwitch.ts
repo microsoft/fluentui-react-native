@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Easing, Pressable, Text, View } from 'react-native';
+import { Animated, Easing, Pressable, View } from 'react-native';
 
 import {
   useAccessibilityLabelWarning,
@@ -11,6 +11,7 @@ import {
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { Text } from '../text/text';
 import type { SwitchProps, SwitchState } from './switch.types';
 
 const TOGGLE_KEYS = new Set(['Enter', ' ', 'Spacebar', 'Space']);
