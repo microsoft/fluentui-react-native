@@ -5,11 +5,8 @@
  */
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 
-import type { ViewProps } from 'react-native';
-import type { WithDefault, UnsafeMixed } from 'react-native/Libraries/Types/CodegenTypes';
-
-// Should be:
-// import type { UnsafeObject } from 'react-native/Libraries/Types/CodegenTypes';
+import type { HostComponent, ViewProps } from 'react-native';
+import type { UnsafeMixed, WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
 
 export interface NativeProps extends ViewProps {
   navigateAtEnd?: WithDefault<'NavigateStopAtEnds' | 'NavigateWrap' | 'NavigateContinue', 'NavigateStopAtEnds'>;
@@ -19,6 +16,11 @@ export interface NativeProps extends ViewProps {
   tabKeyNavigation?: WithDefault<'None' | 'NavigateWrap' | 'NavigateStopAtEnds' | 'Normal', 'None'>;
   disabled?: boolean;
   isTabNavigation?: boolean;
+  navigationOrderInRenderOrder?: boolean;
 }
 
-export default codegenNativeComponent<NativeProps>('RCTFocusZone');
+export type FocusZoneComponentType = HostComponent<NativeProps>;
+
+export default codegenNativeComponent<NativeProps>('FocusZone', {
+  paperComponentName: 'RCTFocusZone',
+}) as FocusZoneComponentType;

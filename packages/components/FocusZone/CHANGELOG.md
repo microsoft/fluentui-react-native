@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/focus-zone
 
+## 0.23.4
+
+### Patch Changes
+
+- 1ffcfa3: Convert FocusZone to an unstyled phased primitive and add package-owned macOS and Windows Fabric implementations alongside Paper.
+
 ## 0.23.3
 
 ### Patch Changes

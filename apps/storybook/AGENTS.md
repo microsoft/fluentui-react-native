@@ -2,7 +2,20 @@
 
 These instructions apply to `apps/storybook` and its descendants.
 
-Read this file, `README.md`, and `package.json` before changing the Storybook application or its native projects.
+Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, lookup, and interaction map. Read this file,
+`README.md`, `package.json`, and `storybook.config.mts` before changing the Storybook application or its native projects.
+
+## Agent-efficient discovery and interaction
+
+- Generate the platform manifest with `yarn storybook manifest --<platform>` instead of guessing IDs or searching the
+  sidebar.
+- Query and run stories through `yarn desktop-driver` against the listener started by
+  `yarn storybook driver --<platform>`.
+- Use screenshots only for visual evidence. Use WebSocket events and accessibility bounds for lookup and interaction.
+- Treat `src/storybook.requires.ts` as generated output; use `storybook.config.mts` for story package discovery and
+  `src/main.ts` only as the shared config adapter.
+- Keep `agent-map.yaml` synchronized when stable paths, scripts, services, or interaction contracts change. Do not list
+  individual stories there; the runtime index is authoritative.
 
 ## Command and dependency discipline
 

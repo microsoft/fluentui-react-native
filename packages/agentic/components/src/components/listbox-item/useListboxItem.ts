@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, Text as NativeText, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
 import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
@@ -7,6 +7,7 @@ import { useThemeState } from '@fluentui-react-native/design';
 import { semanticIconSources } from '../../common/iconSources';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import { Icon } from '../../primitives/icon/icon';
+import { Text } from '../text/text';
 import type { ListboxItemProps, ListboxItemState } from './listbox-item.types';
 
 const defaultRegularIcon = { fontSource: semanticIconSources.unselectedCircle, testID: 'listbox-item-default-icon' } as const;
@@ -36,7 +37,7 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
   const isListItem = variant === 'listItem';
 
   const themeState = useThemeState();
-  const content = useSlot(Text, contentProp);
+  const content = useSlot(NativeText, contentProp);
   const contentHidden = useOptionalSlot(Text, isListItem && !multiselect ? contentProp : null);
   const iconSlotProp = iconProp === null ? null : iconProp;
   const selectedIconSlotProp = selectedIconProp === null ? null : selectedIconProp;

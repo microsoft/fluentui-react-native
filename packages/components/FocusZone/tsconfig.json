@@ -7,21 +7,19 @@
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
+  "exclude": ["**/*.stories.ts", "**/*.stories.tsx"],
   "references": [
     {
-      "path": "../../utils/adapters/tsconfig.json"
+      "path": "../../agentic/desktop-driver/tsconfig.json"
+    },
+    {
+      "path": "../../framework-base/tsconfig.json"
     },
     {
       "path": "../../utils/interactive-hooks/tsconfig.json"
     },
     {
       "path": "../../../scripts/tsconfig.json"
-    },
-    {
-      "path": "../../deprecated/foundation-composable/tsconfig.json"
-    },
-    {
-      "path": "../../deprecated/foundation-settings/tsconfig.json"
     }
   ]
 }

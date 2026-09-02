@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/apple-theme
 
+## 0.29.12
+
+### Patch Changes
+
+- Updated dependencies [0a6286c]
+  - @fluentui-react-native/design@0.4.1
+  - @fluentui-react-native/default-theme@0.27.12
+
 ## 0.29.11
 
 ### Patch Changes

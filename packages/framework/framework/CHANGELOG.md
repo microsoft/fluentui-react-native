@@ -1,5 +1,13 @@
 # Change Log - @fluentui-react-native/framework
 
+## 0.17.6
+
+### Patch Changes
+
+- Updated dependencies [0a6286c]
+  - @fluentui-react-native/design@0.4.1
+  - @fluentui-react-native/default-theme@0.27.12
+
 ## 0.17.5
 
 ### Patch Changes

@@ -1,8 +1,9 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { Text } from '../text/text';
 import type { RadioState } from './radio.types';
 
 /**

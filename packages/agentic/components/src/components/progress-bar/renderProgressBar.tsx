@@ -1,6 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
+import { Text } from '../text/text';
 import type { ProgressBarState } from './progress-bar.types';
 
 export function renderProgressBar_unstable(state: ProgressBarState) {

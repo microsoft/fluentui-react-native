@@ -1,67 +1,74 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "component": "badge",
-  "skill": "flex-components:badge",
-  "sourceLock": "flex-1.5.0-206c4996",
-  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
   "lifecycle": "implemented",
   "conformance": "reviewed",
   "reviewedAt": "2026-08-28",
-  "availableSurfaces": ["shared", "web"],
-  "surfacesConsulted": ["shared", "web"],
-  "sourceFiles": [
+  "sources": [
     {
-      "role": "skill",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/badge/SKILL.md",
-      "marketplaceBlobSha": "7b2763cc1ce45c2137bbfef062d8da7d8a1831f3",
-      "marketplaceSha256": "434587faff6340d55102f629e707507361c9fa629dc5d0168050689e6b9d38d2",
-      "originPath": "plugins/components/skills/badge/SKILL.md",
-      "originBlobSha": "7b2763cc1ce45c2137bbfef062d8da7d8a1831f3",
-      "originSha256": "434587faff6340d55102f629e707507361c9fa629dc5d0168050689e6b9d38d2",
-      "contentDiffers": false
-    },
-    {
-      "role": "usage",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/badge/usage.md",
-      "marketplaceBlobSha": "b6455629337e6fec26ca9b5aecc544e502382fe1",
-      "marketplaceSha256": "664a2650189a226d570f0d4873b84047836a474c34e0510fef4b4bb470ea821c",
-      "originPath": "plugins/components/skills/badge/usage.md",
-      "originBlobSha": "b6455629337e6fec26ca9b5aecc544e502382fe1",
-      "originSha256": "664a2650189a226d570f0d4873b84047836a474c34e0510fef4b4bb470ea821c",
-      "contentDiffers": false
-    },
-    {
-      "role": "web:accessibility",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/badge/web/accessibility.md",
-      "marketplaceBlobSha": "76fbfdf6f4b4255041fa0656fe15796fc804f730",
-      "marketplaceSha256": "c6cbbf48eddd9282b639acbfb746d598cd5d54bb22f49db72b4b1c44e8f503f1",
-      "originPath": "plugins/components/skills/badge/web/accessibility.md",
-      "originBlobSha": "76fbfdf6f4b4255041fa0656fe15796fc804f730",
-      "originSha256": "c6cbbf48eddd9282b639acbfb746d598cd5d54bb22f49db72b4b1c44e8f503f1",
-      "contentDiffers": false
-    },
-    {
-      "role": "web:interaction",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/badge/web/interaction.md",
-      "marketplaceBlobSha": "1d64ca4979021fc9852c2146a386030178ee3e27",
-      "marketplaceSha256": "2a5ba92094373f30087795c50c29a9cc0c055502f90395bb847b3d1d689b28f4",
-      "originPath": "plugins/components/skills/badge/web/interaction.md",
-      "originBlobSha": "1d64ca4979021fc9852c2146a386030178ee3e27",
-      "originSha256": "2a5ba92094373f30087795c50c29a9cc0c055502f90395bb847b3d1d689b28f4",
-      "contentDiffers": false
-    },
-    {
-      "role": "web:tokens",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/badge/web/tokens.yaml",
-      "marketplaceBlobSha": "a1306fd6e614969346ed121c71a0018e88317aab",
-      "marketplaceSha256": "7b61e772400973567b02ead046700783854b0da13b2b5959b8a960114441be2c",
-      "originPath": "plugins/components/skills/badge/web/tokens.yaml",
-      "originBlobSha": "a1306fd6e614969346ed121c71a0018e88317aab",
-      "originSha256": "7b61e772400973567b02ead046700783854b0da13b2b5959b8a960114441be2c",
-      "contentDiffers": false
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:badge",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/badge/SKILL.md",
+          "marketplaceBlobSha": "7b2763cc1ce45c2137bbfef062d8da7d8a1831f3",
+          "marketplaceSha256": "434587faff6340d55102f629e707507361c9fa629dc5d0168050689e6b9d38d2",
+          "originPath": "plugins/components/skills/badge/SKILL.md",
+          "originBlobSha": "7b2763cc1ce45c2137bbfef062d8da7d8a1831f3",
+          "originSha256": "434587faff6340d55102f629e707507361c9fa629dc5d0168050689e6b9d38d2",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/badge/usage.md",
+          "marketplaceBlobSha": "b6455629337e6fec26ca9b5aecc544e502382fe1",
+          "marketplaceSha256": "664a2650189a226d570f0d4873b84047836a474c34e0510fef4b4bb470ea821c",
+          "originPath": "plugins/components/skills/badge/usage.md",
+          "originBlobSha": "b6455629337e6fec26ca9b5aecc544e502382fe1",
+          "originSha256": "664a2650189a226d570f0d4873b84047836a474c34e0510fef4b4bb470ea821c",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/badge/web/accessibility.md",
+          "marketplaceBlobSha": "76fbfdf6f4b4255041fa0656fe15796fc804f730",
+          "marketplaceSha256": "c6cbbf48eddd9282b639acbfb746d598cd5d54bb22f49db72b4b1c44e8f503f1",
+          "originPath": "plugins/components/skills/badge/web/accessibility.md",
+          "originBlobSha": "76fbfdf6f4b4255041fa0656fe15796fc804f730",
+          "originSha256": "c6cbbf48eddd9282b639acbfb746d598cd5d54bb22f49db72b4b1c44e8f503f1",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/badge/web/interaction.md",
+          "marketplaceBlobSha": "1d64ca4979021fc9852c2146a386030178ee3e27",
+          "marketplaceSha256": "2a5ba92094373f30087795c50c29a9cc0c055502f90395bb847b3d1d689b28f4",
+          "originPath": "plugins/components/skills/badge/web/interaction.md",
+          "originBlobSha": "1d64ca4979021fc9852c2146a386030178ee3e27",
+          "originSha256": "2a5ba92094373f30087795c50c29a9cc0c055502f90395bb847b3d1d689b28f4",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/badge/web/tokens.yaml",
+          "marketplaceBlobSha": "a1306fd6e614969346ed121c71a0018e88317aab",
+          "marketplaceSha256": "7b61e772400973567b02ead046700783854b0da13b2b5959b8a960114441be2c",
+          "originPath": "plugins/components/skills/badge/web/tokens.yaml",
+          "originBlobSha": "a1306fd6e614969346ed121c71a0018e88317aab",
+          "originSha256": "7b61e772400973567b02ead046700783854b0da13b2b5959b8a960114441be2c",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
     }
   ],
-  "releaseDifferences": [],
   "divergences": [],
   "requirements": [
     {

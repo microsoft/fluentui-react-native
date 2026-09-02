@@ -1,4 +1,4 @@
-import type { Pressable, Text, View, ViewStyle } from 'react-native';
+import type { Pressable, Text as NativeText, View, ViewStyle } from 'react-native';
 import type { StyleProp } from 'react-native';
 
 import type {
@@ -16,13 +16,14 @@ import type { Icon } from '../../primitives/icon/icon';
 import type { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
+import type { Text } from '../text/text';
 
 export type ListboxItemSecondaryContentPosition = ItemSecondaryContentPosition;
 export type ListboxItemVariant = 'listItem' | 'sectionHeader';
 
 export type ListboxItemSlots = {
   root: Slot<typeof Pressable>;
-  content: Slot<typeof Text>;
+  content: Slot<typeof NativeText>;
   secondaryContent: OptionalSlot<typeof Text>;
   icon: OptionalSlot<typeof Icon>;
   selectedIcon: OptionalSlot<typeof Icon>;

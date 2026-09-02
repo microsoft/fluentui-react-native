@@ -1,4 +1,4 @@
-import type { Pressable, StyleProp, Text, ViewStyle } from 'react-native';
+import type { Pressable, StyleProp, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
   ComponentState,
@@ -12,6 +12,7 @@ import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 import type { Icon } from '../../primitives/icon/icon';
+import type { Text } from '../text/text';
 
 export type TagSlots = {
   root: Slot<typeof Pressable>;

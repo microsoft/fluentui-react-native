@@ -70,6 +70,7 @@ describe('runDesktopStorybookSmokeTests', () => {
     expect(runStoryTests).toHaveBeenCalledWith({
       artifactsRoot: path.join('C:\\repo\\storybook', 'artifacts', 'windows', 'desktop-driver'),
       selection: {
+        story: 'components-*--default',
         tag: 'desktop-e2e',
       },
     });

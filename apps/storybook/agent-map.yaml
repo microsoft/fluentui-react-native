@@ -1,0 +1,74 @@
+version: 1
+purpose: Agent-optimized map of stable Storybook structure and runtime discovery paths.
+
+sources:
+  config: storybook.config.mts
+  config_adapter: src/main.ts
+  app_entry: index.js
+  app_shell: src/StorybookApp.tsx
+  theme_host: src/StorybookTheme.tsx
+  shared_cli: ../../packages/agentic/storybook-desktop
+  shared_runtime: ../../packages/agentic/storybook-desktop-runtime
+  generated_requires:
+    path: src/storybook.requires.ts
+    policy: generated-do-not-edit
+  story_packages:
+    - '@fluentui-react-native/components'
+    - '@fluentui-react-native/callout'
+
+services:
+  supervisor:
+    command: yarn storybook driver --<platform>
+    owns:
+      - metro
+      - storybook-channel
+      - desktop-driver
+  instance:
+    command: yarn storybook instance --<platform>
+    policy: use-reported-ports-and-target-id
+
+agent_commands:
+  generate_manifest: yarn storybook manifest --<platform>
+  start_driver: yarn storybook driver --<platform>
+  inspect_instance: yarn storybook instance --<platform>
+  list_stories: yarn desktop-driver stories list --url <driver-url> --target <target-id>
+  run_stories: yarn desktop-driver stories run --url <driver-url> --target <target-id> --tag desktop-e2e
+
+lookup_order:
+  - Generate the exact platform manifest; never guess ID slugging.
+  - Read this map for stable paths, services, and commands.
+  - Read storybook.config.mts for story-package and platform changes.
+  - Read a matched story file for component-specific behavior.
+  - Read generated requires only to diagnose generation output.
+
+interaction_order:
+  - Use the desktop-driver JSON CLI for listing and running authored story plans.
+  - Use accessibility elements for native focus and control state.
+  - Use screenshots for visual evidence, not element lookup.
+
+native:
+  macos:
+    process: ReactTestApp
+    app_bundle: macos/DerivedData/Build/Products/Debug/ReactTestApp.app
+    coordinate_notes:
+      accessibility: logical-points
+      screenshots: backing-pixels
+      rule: Query element bounds and display scale; do not copy screenshot coordinates.
+  windows:
+    project_policy: generated
+    generation_command: yarn storybook prep --windows
+
+validation:
+  javascript:
+    - format
+    - lint
+    - yarn storybook manifest --<platform>
+    - yarn storybook bundle --<platform>
+  native:
+    normal: yarn storybook build --<platform>
+    lifecycle: yarn storybook smoke --<platform> --mode stories-and-tests
+
+output_hygiene:
+  - Use structured CLI output instead of logging raw channel events.
+  - Search large native build logs for errors and final status instead of reading them in full.
+  - Keep warning suppression exact; console diagnostics remain available even when LogBox hides a warning.

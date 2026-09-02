@@ -1,67 +1,74 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "component": "listbox-item",
-  "skill": "flex-components:listbox-item",
-  "sourceLock": "flex-1.5.0-206c4996",
-  "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
   "lifecycle": "implemented",
   "conformance": "reviewed",
   "reviewedAt": "2026-08-28",
-  "availableSurfaces": ["shared", "web"],
-  "surfacesConsulted": ["shared", "web"],
-  "sourceFiles": [
+  "sources": [
     {
-      "role": "skill",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/SKILL.md",
-      "marketplaceBlobSha": "4a65208a1abb27302dc8eba7882df711f1704147",
-      "marketplaceSha256": "dda66a00388fc912a5e576b3fab51a4db20055e226b0af9117c2f8551f3fb9a7",
-      "originPath": "plugins/components/skills/listbox-item/SKILL.md",
-      "originBlobSha": "4a65208a1abb27302dc8eba7882df711f1704147",
-      "originSha256": "dda66a00388fc912a5e576b3fab51a4db20055e226b0af9117c2f8551f3fb9a7",
-      "contentDiffers": false
-    },
-    {
-      "role": "usage",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/usage.md",
-      "marketplaceBlobSha": "ff11150b9050539cad1eaeec67ccf44240e93207",
-      "marketplaceSha256": "ecc3bf4742445f4a7211e7d29140791e367cf371c3e190b7fe26e4b190fe7d22",
-      "originPath": "plugins/components/skills/listbox-item/usage.md",
-      "originBlobSha": "ff11150b9050539cad1eaeec67ccf44240e93207",
-      "originSha256": "ecc3bf4742445f4a7211e7d29140791e367cf371c3e190b7fe26e4b190fe7d22",
-      "contentDiffers": false
-    },
-    {
-      "role": "web:accessibility",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/web/accessibility.md",
-      "marketplaceBlobSha": "b6dba99deb73da8ae697e1f546765c47e78c9b00",
-      "marketplaceSha256": "93e23d8c5838b834790ec65016bcd948747df76f7b056add87f6dd0d42d2a5ff",
-      "originPath": "plugins/components/skills/listbox-item/web/accessibility.md",
-      "originBlobSha": "b6dba99deb73da8ae697e1f546765c47e78c9b00",
-      "originSha256": "93e23d8c5838b834790ec65016bcd948747df76f7b056add87f6dd0d42d2a5ff",
-      "contentDiffers": false
-    },
-    {
-      "role": "web:interaction",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/web/interaction.md",
-      "marketplaceBlobSha": "10880c6a7a44223bf1a275d9182913617153c7c4",
-      "marketplaceSha256": "fbf6c6f159ad3d0321988bc6909cf3a0793432987a5234b9d72f01ef81e13659",
-      "originPath": "plugins/components/skills/listbox-item/web/interaction.md",
-      "originBlobSha": "10880c6a7a44223bf1a275d9182913617153c7c4",
-      "originSha256": "fbf6c6f159ad3d0321988bc6909cf3a0793432987a5234b9d72f01ef81e13659",
-      "contentDiffers": false
-    },
-    {
-      "role": "web:tokens",
-      "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/web/tokens.yaml",
-      "marketplaceBlobSha": "674693aee2649be974bb4e6e468908695c7c581c",
-      "marketplaceSha256": "e825460747611b4a209369c5d646d9d5df5d88c344ecb0111edce153853824d5",
-      "originPath": "plugins/components/skills/listbox-item/web/tokens.yaml",
-      "originBlobSha": "674693aee2649be974bb4e6e468908695c7c581c",
-      "originSha256": "e825460747611b4a209369c5d646d9d5df5d88c344ecb0111edce153853824d5",
-      "contentDiffers": false
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:listbox-item",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/SKILL.md",
+          "marketplaceBlobSha": "4a65208a1abb27302dc8eba7882df711f1704147",
+          "marketplaceSha256": "dda66a00388fc912a5e576b3fab51a4db20055e226b0af9117c2f8551f3fb9a7",
+          "originPath": "plugins/components/skills/listbox-item/SKILL.md",
+          "originBlobSha": "4a65208a1abb27302dc8eba7882df711f1704147",
+          "originSha256": "dda66a00388fc912a5e576b3fab51a4db20055e226b0af9117c2f8551f3fb9a7",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/usage.md",
+          "marketplaceBlobSha": "ff11150b9050539cad1eaeec67ccf44240e93207",
+          "marketplaceSha256": "ecc3bf4742445f4a7211e7d29140791e367cf371c3e190b7fe26e4b190fe7d22",
+          "originPath": "plugins/components/skills/listbox-item/usage.md",
+          "originBlobSha": "ff11150b9050539cad1eaeec67ccf44240e93207",
+          "originSha256": "ecc3bf4742445f4a7211e7d29140791e367cf371c3e190b7fe26e4b190fe7d22",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/web/accessibility.md",
+          "marketplaceBlobSha": "b6dba99deb73da8ae697e1f546765c47e78c9b00",
+          "marketplaceSha256": "93e23d8c5838b834790ec65016bcd948747df76f7b056add87f6dd0d42d2a5ff",
+          "originPath": "plugins/components/skills/listbox-item/web/accessibility.md",
+          "originBlobSha": "b6dba99deb73da8ae697e1f546765c47e78c9b00",
+          "originSha256": "93e23d8c5838b834790ec65016bcd948747df76f7b056add87f6dd0d42d2a5ff",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/web/interaction.md",
+          "marketplaceBlobSha": "10880c6a7a44223bf1a275d9182913617153c7c4",
+          "marketplaceSha256": "fbf6c6f159ad3d0321988bc6909cf3a0793432987a5234b9d72f01ef81e13659",
+          "originPath": "plugins/components/skills/listbox-item/web/interaction.md",
+          "originBlobSha": "10880c6a7a44223bf1a275d9182913617153c7c4",
+          "originSha256": "fbf6c6f159ad3d0321988bc6909cf3a0793432987a5234b9d72f01ef81e13659",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/listbox-item/web/tokens.yaml",
+          "marketplaceBlobSha": "674693aee2649be974bb4e6e468908695c7c581c",
+          "marketplaceSha256": "e825460747611b4a209369c5d646d9d5df5d88c344ecb0111edce153853824d5",
+          "originPath": "plugins/components/skills/listbox-item/web/tokens.yaml",
+          "originBlobSha": "674693aee2649be974bb4e6e468908695c7c581c",
+          "originSha256": "e825460747611b4a209369c5d646d9d5df5d88c344ecb0111edce153853824d5",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
     }
   ],
-  "releaseDifferences": [],
   "divergences": [
     {
       "id": "listbox-item-native-pressed-state",

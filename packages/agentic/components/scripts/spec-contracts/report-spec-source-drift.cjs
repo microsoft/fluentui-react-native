@@ -137,11 +137,30 @@ function sourceIdentityMatches(existingFiles, sourceFiles) {
   return JSON.stringify(normalize(existingFiles)) === JSON.stringify(normalize(sourceFiles));
 }
 
+function flexSourceFor(contract) {
+  return contract.sources?.find((source) => source.kind === 'flex-skill');
+}
+
+function localFoundationSourceFor(contract) {
+  return contract.sources?.find((source) => source.kind === 'local-foundation');
+}
+
+function hasNonFlexContract(contract) {
+  return Array.isArray(contract.sources) && contract.sources.length > 0 && !flexSourceFor(contract);
+}
+
 async function updateComponentSources(lock, marketplaceTree, originTree, token) {
   const targets = component ? [component] : contractDirectories();
   const updates = new Map();
   for (const target of targets) {
     invariant(contractDirectories().includes(target), `${target} must have a local SPEC.md before source metadata is generated.`);
+    const existingSourcePath = sourcePathFor(target);
+    const existing = fs.existsSync(existingSourcePath) ? readJson(existingSourcePath) : {};
+    const existingFlexSource = flexSourceFor(existing);
+    if (hasNonFlexContract(existing) && !component) {
+      continue;
+    }
+    invariant(!localFoundationSourceFor(existing), `${target} uses local-foundation references and cannot add a Flex source.`);
     const marketplacePrefix = `catalogs/flex/plugins/components/skills/${target}/`;
     const originPrefix = `plugins/components/skills/${target}/`;
     const marketplaceEntries = componentSourceEntries(marketplaceTree, marketplacePrefix);
@@ -172,8 +191,6 @@ async function updateComponentSources(lock, marketplaceTree, originTree, token) 
       });
     }
 
-    const sourcePath = sourcePathFor(target);
-    const existing = fs.existsSync(sourcePath) ? readJson(sourcePath) : {};
     const availableSurfaces = [
       ...new Set(
         sourceFiles.map((file) => {
@@ -183,12 +200,12 @@ async function updateComponentSources(lock, marketplaceTree, originTree, token) 
       ),
     ].sort();
     const sameSource =
-      existing.sourceLock === lock.id &&
-      existing.sourceLockFingerprint === lock.fingerprint &&
-      sourceIdentityMatches(existing.sourceFiles, sourceFiles);
+      existingFlexSource?.sourceLock === lock.id &&
+      existingFlexSource.sourceLockFingerprint === lock.fingerprint &&
+      sourceIdentityMatches(existingFlexSource.sourceFiles, sourceFiles);
     const conformance = sameSource ? existing.conformance || 'review-required' : 'review-required';
     const existingDifferences = new Map(
-      (sameSource ? existing.releaseDifferences || [] : []).map((difference) => [difference.role, difference]),
+      (sameSource ? existingFlexSource.releaseDifferences || [] : []).map((difference) => [difference.role, difference]),
     );
     const releaseDifferences = sourceFiles
       .filter((file) => file.contentDiffers)
@@ -201,25 +218,33 @@ async function updateComponentSources(lock, marketplaceTree, originTree, token) 
             note: null,
           },
       );
-    const source = {
-      schemaVersion: 1,
-      component: target,
+    const flexSource = {
+      id: existingFlexSource?.id || 'flex-component',
+      kind: 'flex-skill',
+      authority: existingFlexSource?.authority || 'normative',
       skill: `flex-components:${target}`,
       sourceLock: lock.id,
       sourceLockFingerprint: lock.fingerprint,
-      lifecycle: existing.lifecycle || 'contract-draft',
-      conformance,
-      reviewedAt: conformance === 'review-required' ? null : existing.reviewedAt,
       availableSurfaces,
       surfacesConsulted: sameSource
-        ? (existing.surfacesConsulted || []).filter((surface) => availableSurfaces.includes(surface)).sort()
+        ? (existingFlexSource.surfacesConsulted || []).filter((surface) => availableSurfaces.includes(surface)).sort()
         : [],
       sourceFiles,
       releaseDifferences,
+    };
+    const contract = {
+      schemaVersion: 2,
+      component: target,
+      lifecycle: existing.lifecycle || 'contract-draft',
+      conformance,
+      reviewedAt: conformance === 'review-required' ? null : existing.reviewedAt,
+      sources: [...(existing.sources || []).filter((source) => source.kind !== 'flex-skill'), flexSource].sort((left, right) =>
+        left.id.localeCompare(right.id),
+      ),
       divergences: existing.divergences || [],
       requirements: existing.requirements || [],
     };
-    updates.set(target, source);
+    updates.set(target, contract);
   }
   return updates;
 }
@@ -262,7 +287,11 @@ async function verifyComponentSourceIntegrity(lock, marketplaceTree, originTree,
   }
 
   for (const target of contractDirectories()) {
-    const source = proposedSources.get(target) || readJson(sourcePathFor(target));
+    const contract = proposedSources.get(target) || readJson(sourcePathFor(target));
+    const source = flexSourceFor(contract);
+    if (!source) {
+      continue;
+    }
     invariant(source.sourceLock === lock.id, `${target} does not reference the active source lock.`);
     invariant(source.sourceLockFingerprint === lock.fingerprint, `${target} does not reference the active source-lock fingerprint.`);
     const marketplacePrefix = `catalogs/flex/plugins/components/skills/${target}/`;
@@ -305,13 +334,11 @@ async function verifyComponentSourceIntegrity(lock, marketplaceTree, originTree,
   }
 }
 
-function sourceDrift(source, tree, channel) {
+function sourceDrift(componentName, source, tree, channel) {
   const pathField = channel === 'marketplace' ? 'marketplacePath' : 'originPath';
   const shaField = channel === 'marketplace' ? 'marketplaceBlobSha' : 'originBlobSha';
   const prefix =
-    channel === 'marketplace'
-      ? `catalogs/flex/plugins/components/skills/${source.component}/`
-      : `plugins/components/skills/${source.component}/`;
+    channel === 'marketplace' ? `catalogs/flex/plugins/components/skills/${componentName}/` : `plugins/components/skills/${componentName}/`;
   const baseline = new Map(source.sourceFiles.map((file) => [relativeSourcePath(file[pathField], prefix), file[shaField]]));
   const candidate = new Map(componentSourceEntries(tree, prefix).map((entry) => [relativeSourcePath(entry.path, prefix), entry.sha]));
   return {
@@ -325,17 +352,29 @@ function sourceDrift(source, tree, channel) {
 
 function localComponentReport(marketplaceTree, originTree) {
   return contractDirectories().map((target) => {
-    const source = readJson(sourcePathFor(target));
-    const marketplaceDrift = marketplaceTree ? sourceDrift(source, marketplaceTree, 'marketplace') : null;
-    const originDrift = originTree ? sourceDrift(source, originTree, 'origin') : null;
+    const contract = readJson(sourcePathFor(target));
+    const source = flexSourceFor(contract);
+    if (!source) {
+      return {
+        component: target,
+        lifecycle: contract.lifecycle,
+        conformance: contract.conformance,
+        releaseDifferences: [],
+        marketplaceDrift: null,
+        originDrift: null,
+        candidateStatus: 'not-applicable',
+      };
+    }
+    const marketplaceDrift = marketplaceTree ? sourceDrift(target, source, marketplaceTree, 'marketplace') : null;
+    const originDrift = originTree ? sourceDrift(target, source, originTree, 'origin') : null;
     const hasCandidateDrift =
       marketplaceDrift &&
       originDrift &&
       [marketplaceDrift, originDrift].some((drift) => drift.added.length > 0 || drift.removed.length > 0 || drift.modified.length > 0);
     return {
       component: target,
-      lifecycle: source.lifecycle,
-      conformance: source.conformance,
+      lifecycle: contract.lifecycle,
+      conformance: contract.conformance,
       releaseDifferences: source.releaseDifferences,
       marketplaceDrift,
       originDrift,
@@ -453,12 +492,24 @@ function offlineRefresh(lock) {
   invariant(existing.external?.mode === 'live', 'Offline refresh requires prior live source evidence.');
   const existingComponents = new Map(existing.components.map((entry) => [entry.component, entry]));
   const components = contractDirectories().map((target) => {
-    const source = readJson(sourcePathFor(target));
+    const contract = readJson(sourcePathFor(target));
+    const source = flexSourceFor(contract);
+    if (!source) {
+      return {
+        component: target,
+        lifecycle: contract.lifecycle,
+        conformance: contract.conformance,
+        releaseDifferences: [],
+        marketplaceDrift: null,
+        originDrift: null,
+        candidateStatus: 'not-applicable',
+      };
+    }
     const previous = existingComponents.get(target);
     return {
       component: target,
-      lifecycle: source.lifecycle,
-      conformance: source.conformance,
+      lifecycle: contract.lifecycle,
+      conformance: contract.conformance,
       releaseDifferences: source.releaseDifferences,
       marketplaceDrift: previous?.marketplaceDrift ?? null,
       originDrift: previous?.originDrift ?? null,
@@ -475,6 +526,12 @@ function offlineRefresh(lock) {
 async function main() {
   const lock = loadLock();
   if (component) {
+    const sourcePath = sourcePathFor(component);
+    const contract = fs.existsSync(sourcePath) ? readJson(sourcePath) : {};
+    invariant(
+      !localFoundationSourceFor(contract),
+      `${component} uses local-foundation references and cannot update from the Flex component catalog.`,
+    );
     invariant(lock.catalog.entries.includes(component), `${component} is not in the locked Flex component catalog.`);
   }
   const report = offline ? (write ? offlineRefresh(lock) : offlineReport(lock)) : await liveReport(lock);

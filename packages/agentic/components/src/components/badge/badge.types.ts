@@ -1,4 +1,4 @@
-import type { StyleProp, Text, View, ViewStyle } from 'react-native';
+import type { StyleProp, View, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
   ComponentState,
@@ -11,6 +11,7 @@ import type {
 import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
+import type { Text } from '../text/text';
 
 export type BadgeAppearance = 'tint' | 'outline';
 export type BadgeColor = 'brand' | 'danger' | 'success' | 'warning' | 'informative';

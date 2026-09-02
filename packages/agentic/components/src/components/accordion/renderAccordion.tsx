@@ -1,9 +1,9 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
-import { Text } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
+import { Text } from '../text/text';
 import type { AccordionState } from './accordion.types';
 
 type AccordionRenderStyles = {

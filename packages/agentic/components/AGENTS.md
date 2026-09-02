@@ -12,16 +12,24 @@ invariants; detailed authoring recipes live in the
 - Portable desktop story tests are static `parameters.desktopDriver` plans.
   Use the public authoring types, stable `testID` selectors, declarative
   capability requirements, and no platform branches or executable callbacks.
-- Storybook application, native project, Metro, bundle, or CocoaPods work follows `storybook/AGENTS.md` and the
-  `agentic-storybook-development` skill.
+- Storybook application, native project, Metro, bundle, or CocoaPods work follows the
+  [Storybook instructions](../../../apps/storybook/AGENTS.md) and the `agentic-storybook-development` skill.
 - Native React Native Windows Fabric component work follows the
   [Windows Fabric native component reference](../../../.github/skills/agentic-component-authoring/references/windows-fabric-native-components.md).
 
 ## Package invariants
 
-- For a higher-order component contract, start Agency with the
-  `flex-authoring` profile, invoke `flex-components:<name>`, and follow the
-  [Flex source adaptation reference](../../../.github/skills/agentic-component-authoring/references/spec-source-adaptation.md).
+- Create or revise source-backed contracts through the
+  [agentic component contract authoring skill](../../../.github/skills/agentic-component-contract-authoring/SKILL.md).
+  It routes Flex/X3, Fluent v9, HTML/CSS, visual, local-foundation, and
+  composite evidence before implementation.
+- Use the repository's `flex-authoring` profile and `flex-components:<name>`
+  only for a pinned Flex/X3 source. It is not a prerequisite for other source
+  adapters.
+- A theme-aware foundational component that has no Flex catalog entry must use
+  a sole validator-backed `local-foundation` entry in `sources[]`. Cite its
+  public platform contract and repository evidence; never invent a
+  `flex-components:<name>` skill or bypass the component contract gate.
 - Follow [SPEC-SOURCE.md](./SPEC-SOURCE.md) for provenance fields, contract
   lifecycle, review state, and drift commands.
 - Read the component `SPEC.md`, `spec/source.json`, and all referenced React
@@ -38,6 +46,6 @@ invariants; detailed authoring recipes live in the
   behind variables, spreads, functions, or computed values.
 - Use package scripts for format, lint, build, tests, and snapshots.
 - Do not copy web-only APIs, CSS behavior, or DOM assumptions into React Native.
-- Do not copy or mechanically transform private Flex skill bodies into this
-  public package. Record source identifiers and digests, then author the local
-  React Native contract.
+- Do not copy or mechanically transform private source bodies into this public
+  package. Record source identifiers and digests, then author the local React
+  Native contract.
