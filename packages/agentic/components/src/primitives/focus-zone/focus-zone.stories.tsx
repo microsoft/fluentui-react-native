@@ -1,6 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
@@ -17,6 +18,10 @@ const styles = StyleSheet.create({
   focusButton: {
     marginTop: 16,
   },
+  focused: {
+    borderColor: '#0f6cbd',
+    borderWidth: 3,
+  },
   focusZone: {
     marginVertical: 12,
   },
@@ -31,8 +36,17 @@ const styles = StyleSheet.create({
     margin: 4,
     width: 104,
   },
+  itemText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
   outsideButton: {
     marginVertical: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  pressed: {
+    opacity: 0.7,
   },
   status: {
     marginTop: 12,
@@ -45,6 +59,39 @@ const styles = StyleSheet.create({
     width: 520,
   },
 });
+
+type FocusZoneStoryButtonProps = {
+  content: string;
+  focused: boolean;
+  nativeID?: string;
+  onFocus: () => void;
+  style: StyleProp<ViewStyle>;
+  testID: string;
+};
+
+const FocusZoneStoryButton = ({ content, focused, nativeID, onFocus, style, testID }: FocusZoneStoryButtonProps) => {
+  const localRef = React.useRef<View>(null);
+
+  if (Platform.OS === 'macos') {
+    return (
+      <Pressable
+        accessibilityLabel={content}
+        accessibilityRole="button"
+        focusable
+        nativeID={nativeID}
+        onFocus={onFocus}
+        onPress={() => localRef.current?.focus()}
+        ref={localRef}
+        style={({ pressed }) => [style, focused && styles.focused, pressed && styles.pressed]}
+        testID={testID}
+      >
+        <Text style={styles.itemText}>{content}</Text>
+      </Pressable>
+    );
+  }
+
+  return <Button accessibilityLabel={content} content={content} nativeID={nativeID} onFocus={onFocus} style={style} testID={testID} />;
+};
 
 type FocusZoneExampleProps = FocusZoneProps & {
   columns?: number;
@@ -63,8 +110,9 @@ const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9,
 
   return (
     <View style={styles.story} testID="focus-zone-story">
-      <Button
+      <FocusZoneStoryButton
         content="Outside before"
+        focused={focusedItem === 'Outside before'}
         onFocus={() => setFocusedItem('Outside before')}
         style={styles.outsideButton}
         testID="focus-zone-before"
@@ -82,9 +130,9 @@ const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9,
               {row.map((item) => {
                 const index = item - 1;
                 return (
-                  <Button
-                    accessibilityLabel={`Item ${item}`}
+                  <FocusZoneStoryButton
                     content={String(item)}
+                    focused={focusedItem === `Item ${item}`}
                     key={item}
                     nativeID={index === centerIndex ? defaultTabbableNativeID : undefined}
                     onFocus={() => setFocusedItem(`Item ${item}`)}
@@ -97,8 +145,9 @@ const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9,
           ))}
         </View>
       </FocusZone>
-      <Button
+      <FocusZoneStoryButton
         content="Outside after"
+        focused={focusedItem === 'Outside after'}
         onFocus={() => setFocusedItem('Outside after')}
         style={styles.outsideButton}
         testID="focus-zone-after"
@@ -237,7 +286,10 @@ export const DefaultTabbableElement: Story = {
 
 export const TabNavigation: Story = {
   args: {
+    accessibilityRole: 'group',
+    accessible: true,
     focusZoneDirection: 'horizontal',
+    navigationOrderInRenderOrder: true,
     tabKeyNavigation: 'NavigateWrap',
   },
   render: (args) => <FocusZoneExample {...args} columns={5} itemCount={5} />,

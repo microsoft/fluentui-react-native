@@ -78,7 +78,6 @@
     "name": "FRNFocusZoneSpec",
     "type": "all",
     "jsSrcsDir": "src",
-    "includesGeneratedCode": true,
     "ios": {
       "componentProvider": {
         "FocusZone": "RCTFocusZoneComponentView"

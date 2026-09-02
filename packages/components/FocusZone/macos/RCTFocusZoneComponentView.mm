@@ -13,55 +13,42 @@
 
 using namespace facebook::react;
 
-namespace facebook::react {
-
-extern const char FocusZoneComponentName[] = "FocusZone";
-
-using FocusZoneShadowNode = ConcreteViewShadowNode<
-    FocusZoneComponentName,
-    RCTFocusZoneProps,
-    RCTFocusZoneEventEmitter,
-    RCTFocusZoneState>;
-using FocusZoneComponentDescriptor = ConcreteComponentDescriptor<FocusZoneShadowNode>;
-
-} // namespace facebook::react
-
-static FocusZoneDirection RCTFocusZoneDirectionFromProp(RCTFocusZoneFocusZoneDirection direction)
+static FocusZoneDirection RCTFocusZoneDirectionFromProp(FocusZoneFocusZoneDirection direction)
 {
   switch (direction) {
-    case RCTFocusZoneFocusZoneDirection::Bidirectional:
+    case FocusZoneFocusZoneDirection::Bidirectional:
       return FocusZoneDirectionBidirectional;
-    case RCTFocusZoneFocusZoneDirection::Horizontal:
+    case FocusZoneFocusZoneDirection::Horizontal:
       return FocusZoneDirectionHorizontal;
-    case RCTFocusZoneFocusZoneDirection::Vertical:
+    case FocusZoneFocusZoneDirection::Vertical:
       return FocusZoneDirectionVertical;
-    case RCTFocusZoneFocusZoneDirection::None:
+    case FocusZoneFocusZoneDirection::None:
       return FocusZoneDirectionNone;
   }
 }
 
-static NSString *RCTNavigateAtEndFromProp(RCTFocusZoneNavigateAtEnd navigateAtEnd)
+static NSString *RCTNavigateAtEndFromProp(FocusZoneNavigateAtEnd navigateAtEnd)
 {
   switch (navigateAtEnd) {
-    case RCTFocusZoneNavigateAtEnd::NavigateStopAtEnds:
+    case FocusZoneNavigateAtEnd::NavigateStopAtEnds:
       return @"NavigateStopAtEnds";
-    case RCTFocusZoneNavigateAtEnd::NavigateWrap:
+    case FocusZoneNavigateAtEnd::NavigateWrap:
       return @"NavigateWrap";
-    case RCTFocusZoneNavigateAtEnd::NavigateContinue:
+    case FocusZoneNavigateAtEnd::NavigateContinue:
       return @"NavigateContinue";
   }
 }
 
-static NSString *RCTTabKeyNavigationFromProp(RCTFocusZoneTabKeyNavigation tabKeyNavigation)
+static NSString *RCTTabKeyNavigationFromProp(FocusZoneTabKeyNavigation tabKeyNavigation)
 {
   switch (tabKeyNavigation) {
-    case RCTFocusZoneTabKeyNavigation::None:
+    case FocusZoneTabKeyNavigation::None:
       return @"None";
-    case RCTFocusZoneTabKeyNavigation::NavigateWrap:
+    case FocusZoneTabKeyNavigation::NavigateWrap:
       return @"NavigateWrap";
-    case RCTFocusZoneTabKeyNavigation::NavigateStopAtEnds:
+    case FocusZoneTabKeyNavigation::NavigateStopAtEnds:
       return @"NavigateStopAtEnds";
-    case RCTFocusZoneTabKeyNavigation::Normal:
+    case FocusZoneTabKeyNavigation::Normal:
       return @"Normal";
   }
 }
@@ -83,10 +70,28 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
   return nil;
 }
 
-@interface RCTFocusZoneComponentView () <RCTRCTFocusZoneViewProtocol>
+static RCTPlatformView *RCTFindComponentViewWithNativeID(RCTPlatformView *rootView, NSString *nativeID)
+{
+  if ([rootView isKindOfClass:[RCTViewComponentView class]] &&
+      [((RCTViewComponentView *)rootView).nativeId isEqualToString:nativeID]) {
+    return rootView;
+  }
+
+  for (RCTPlatformView *subview in rootView.subviews) {
+    RCTPlatformView *match = RCTFindComponentViewWithNativeID(subview, nativeID);
+    if (match) {
+      return match;
+    }
+  }
+
+  return nil;
+}
+
+@interface RCTFocusZoneComponentView () <RCTFocusZoneViewProtocol>
 @end
 
 @implementation RCTFocusZoneComponentView {
+  NSString *_defaultResponderNativeID;
   NSInteger _defaultResponderTag;
   RCTFocusZone *_focusZone;
 }
@@ -100,7 +105,7 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 - (instancetype)initWithFrame:(CGRect)frame
 {
   if (self = [super initWithFrame:frame]) {
-    static const auto defaultProps = std::make_shared<const RCTFocusZoneProps>();
+    static const auto defaultProps = std::make_shared<const FocusZoneProps>();
     _props = defaultProps;
 
     _focusZone = [[RCTFocusZone alloc] initWithFrame:self.bounds];
@@ -128,7 +133,7 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 
 - (void)updateProps:(const Props::Shared &)props oldProps:(const Props::Shared &)oldProps
 {
-  const auto &newProps = *std::static_pointer_cast<const RCTFocusZoneProps>(props);
+  const auto &newProps = *std::static_pointer_cast<const FocusZoneProps>(props);
 
   _focusZone.disabled = newProps.disabled;
   _focusZone.focusZoneDirection = RCTFocusZoneDirectionFromProp(newProps.focusZoneDirection);
@@ -136,9 +141,12 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
   _focusZone.navigationOrderInRenderOrder = newProps.navigationOrderInRenderOrder;
   _focusZone.tabKeyNavigation = RCTTabKeyNavigationFromProp(newProps.tabKeyNavigation);
 
+  _defaultResponderNativeID = nil;
   _defaultResponderTag = 0;
   if (newProps.defaultTabbableElement.isNumber()) {
     _defaultResponderTag = (NSInteger)newProps.defaultTabbableElement.asDouble();
+  } else if (newProps.defaultTabbableElement.isString()) {
+    _defaultResponderNativeID = [NSString stringWithUTF8String:newProps.defaultTabbableElement.getString().c_str()];
   }
   [self updateDefaultResponder];
   [self.window recalculateKeyViewLoop];
@@ -155,13 +163,15 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 - (void)prepareForRecycle
 {
   [super prepareForRecycle];
+  _defaultResponderNativeID = nil;
   _defaultResponderTag = 0;
   _focusZone.defaultResponder = nil;
 }
 
 - (BOOL)acceptsFirstResponder
 {
-  return _focusZone.acceptsFirstResponder;
+  // The content view owns key-loop participation; the Fabric wrapper only forwards programmatic focus.
+  return NO;
 }
 
 - (BOOL)becomeFirstResponder
@@ -177,8 +187,13 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 - (void)updateDefaultResponder
 {
   RCTPlatformView *rootView = self.window.contentView;
-  _focusZone.defaultResponder =
-      _defaultResponderTag > 0 && rootView ? RCTFindComponentViewWithTag(rootView, _defaultResponderTag) : nil;
+  if (_defaultResponderTag > 0 && rootView) {
+    _focusZone.defaultResponder = RCTFindComponentViewWithTag(rootView, _defaultResponderTag);
+  } else if (_defaultResponderNativeID && rootView) {
+    _focusZone.defaultResponder = RCTFindComponentViewWithNativeID(rootView, _defaultResponderNativeID);
+  } else {
+    _focusZone.defaultResponder = nil;
+  }
 }
 
 @end
