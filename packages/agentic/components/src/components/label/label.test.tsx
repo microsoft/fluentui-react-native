@@ -90,6 +90,33 @@ describe('Label', () => {
     });
   });
 
+  it('keeps both text slots hidden when caller props try to expose them', async () => {
+    const component = await renderLabel({
+      content: {
+        accessibilityElementsHidden: false,
+        accessible: true,
+        children: 'Display name',
+        importantForAccessibility: 'yes',
+      },
+      required: true,
+      requiredIndicator: {
+        accessibilityElementsHidden: false,
+        accessible: true,
+        children: 'Required',
+        importantForAccessibility: 'yes',
+      },
+    });
+
+    for (const text of ['Display name', 'Required']) {
+      expect(getText(component, text).props).toMatchObject({
+        accessibilityElementsHidden: true,
+        accessible: false,
+        importantForAccessibility: 'no-hide-descendants',
+      });
+    }
+    expect(component.getAllByRole('text')).toHaveLength(1);
+  });
+
   it('lets a caller replace the required indicator', async () => {
     const component = await renderLabel({ content: 'Display name', required: true, requiredIndicator: 'Required' });
 

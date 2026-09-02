@@ -199,7 +199,7 @@ export const AssociatedControl: Story = {
   render: () => (
     <View style={styles.field}>
       <Label content="Display name" nativeID="agentic-storybook-label-field" required />
-      <Input accessibilityLabelledBy="agentic-storybook-label-field" placeholder="Ada Lovelace" />
+      <Input placeholder="Ada Lovelace" textInput={{ accessibilityLabelledBy: 'agentic-storybook-label-field' }} />
     </View>
   ),
   parameters: {

@@ -87,10 +87,14 @@ export function useLabel_unstable(props: LabelProps): LabelState {
     focusable: false,
   });
   // Slots keep default props by identity, and React freezes them once rendered, so each render gets its own copy.
-  const content = useSlot(Text, contentProp, { defaultProps: { ...defaultContentProps } });
+  const content = useSlot(Text, contentProp, {
+    defaultProps: { ...defaultContentProps },
+    transform: (slotProps) => ({ ...slotProps, ...hiddenFromAccessibilityProps }),
+  });
   const requiredIndicator = useOptionalSlot(Text, required ? requiredIndicatorProp : null, {
     defaultProps: { ...defaultRequiredIndicatorProps },
     renderByDefault: true,
+    transform: (slotProps) => ({ ...slotProps, ...hiddenFromAccessibilityProps }),
   });
 
   return {
