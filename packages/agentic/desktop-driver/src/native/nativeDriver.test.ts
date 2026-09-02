@@ -6,36 +6,77 @@ import path from 'node:path';
 import { encodeJsonFrame, NativeFrameDecoder } from '../hosts/native/framing';
 import { NativeHostProcess } from '../hosts/native/NativeHostProcess';
 import type { NativeHostJsonMessage } from './types';
+import {
+  hashMacOSDriverSources,
+  macOSCertificateExtractionArguments,
+  macOSCodeSignArguments,
+  parseMacOSSigningIdentities,
+} from './macos/buildMacOSDriver';
 import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from './nativeDriver';
 
-jest.setTimeout(120_000);
+jest.setTimeout(240_000);
 
 const windowsTest = process.platform === 'win32' && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
 const macosTest = process.platform === 'darwin' && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
+const macosSigningIdentity = process.env.FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY;
+const signedMacosTest =
+  process.platform === 'darwin' && macosSigningIdentity && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
 
 describe('native driver build and resolution', () => {
   macosTest('builds, signs, reuses, and handshakes with the macOS helper', async () => {
     const cacheRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-macos-native-'));
     const emitWarning = jest.spyOn(process, 'emitWarning').mockImplementation(() => undefined);
     try {
-      const built = await buildNativeDesktopDriver({ cacheRoot, platform: 'macos' });
+      const built = await buildNativeDesktopDriver({ cacheRoot, macosSigningIdentity: '', platform: 'macos' });
       expect(built).toMatchObject({
         architecture: 'arm64',
         endpoints: ['macos'],
         origin: 'built',
         provider: 'macos',
-        signing: { mode: 'adhoc' },
+        signing: { designatedRequirement: expect.stringContaining('cdhash H"'), mode: 'adhoc' },
         wireProtocol: { major: 1, minor: 0 },
       });
       expect(built.executablePath).toContain(`${path.sep}FurnDesktopDriverHost.app${path.sep}Contents${path.sep}MacOS${path.sep}`);
 
-      const reused = await buildNativeDesktopDriver({ cacheRoot, platform: 'macos' });
+      const rebuilt = await buildNativeDesktopDriver({ cacheRoot, force: true, macosSigningIdentity: '', platform: 'macos' });
+      expect(rebuilt).toMatchObject({
+        artifactId: built.artifactId,
+        buildId: built.buildId,
+        origin: 'built',
+      });
+      fs.writeFileSync(built.executablePath, 'corrupt');
+      const healed = await buildNativeDesktopDriver({ cacheRoot, force: true, macosSigningIdentity: '', platform: 'macos' });
+      expect(healed).toMatchObject({
+        artifactId: built.artifactId,
+        buildId: built.buildId,
+        origin: 'built',
+      });
+      expect(fs.readdirSync(path.join(cacheRoot, 'v1', 'trash'))).not.toHaveLength(0);
+
+      const reused = await buildNativeDesktopDriver({ cacheRoot, macosSigningIdentity: '', platform: 'macos' });
       expect(reused).toMatchObject({
         artifactId: built.artifactId,
         origin: 'cache',
       });
-      const resolved = await resolveNativeDesktopDriver({ buildPolicy: 'never', cacheRoot, platform: 'macos' });
+      const resolved = await resolveNativeDesktopDriver({
+        buildPolicy: 'never',
+        cacheRoot,
+        macosSigningIdentity: '',
+        platform: 'macos',
+      });
       expect(resolved.artifactId).toBe(built.artifactId);
+      const bundlePath = path.dirname(path.dirname(path.dirname(resolved.executablePath)));
+      const direct = await resolveNativeDesktopDriver({
+        cacheRoot,
+        helperPath: bundlePath,
+        macosSigningIdentity: '',
+        platform: 'macos',
+      });
+      expect(direct).toMatchObject({
+        artifactId: built.artifactId,
+        artifactRoot: bundlePath,
+        origin: 'explicit-path',
+      });
 
       const helper = await NativeHostProcess.start({ artifact: resolved });
       await expect(helper.request('probe', { endpoint: 'macos' })).resolves.toMatchObject({
@@ -57,6 +98,91 @@ describe('native driver build and resolution', () => {
       emitWarning.mockRestore();
       fs.rmSync(cacheRoot, { force: true, maxRetries: 10, recursive: true, retryDelay: 100 });
     }
+  });
+
+  signedMacosTest('builds and verifies the macOS helper with a configured signing identity', async () => {
+    const cacheRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-macos-signed-'));
+    try {
+      const built = await buildNativeDesktopDriver({ cacheRoot, macosSigningIdentity, platform: 'macos' });
+      expect(built.signing).toMatchObject({
+        certificateHash: expect.stringMatching(/^[0-9A-F]{40}$/),
+        designatedRequirement: expect.any(String),
+        mode: 'signed',
+      });
+      const rebuilt = await buildNativeDesktopDriver({ cacheRoot, force: true, macosSigningIdentity, platform: 'macos' });
+      expect(rebuilt).toMatchObject({
+        buildId: built.buildId,
+        signing: {
+          certificateHash: built.signing.certificateHash,
+          designatedRequirement: built.signing.designatedRequirement,
+          mode: 'signed',
+        },
+      });
+      await expect(
+        resolveNativeDesktopDriver({ buildPolicy: 'never', cacheRoot, macosSigningIdentity, platform: 'macos' }),
+      ).resolves.toMatchObject({
+        artifactId: rebuilt.artifactId,
+        origin: 'cache',
+      });
+    } finally {
+      fs.rmSync(cacheRoot, { force: true, maxRetries: 10, recursive: true, retryDelay: 100 });
+    }
+  });
+
+  test('hashes and stages only declared macOS Swift package sources', () => {
+    const sourceRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-macos-sources-'));
+    try {
+      fs.mkdirSync(path.join(sourceRoot, 'Sources', 'DesktopDriverHost'), { recursive: true });
+      fs.writeFileSync(path.join(sourceRoot, 'Package.swift'), '// package');
+      fs.writeFileSync(path.join(sourceRoot, 'Sources', 'DesktopDriverHost', 'main.swift'), 'print("hello")');
+      const digest = hashMacOSDriverSources(sourceRoot);
+
+      fs.mkdirSync(path.join(sourceRoot, '.build', 'arm64-apple-macosx', 'release'), { recursive: true });
+      fs.writeFileSync(path.join(sourceRoot, '.build', 'arm64-apple-macosx', 'release', 'helper'), 'generated');
+      fs.writeFileSync(path.join(sourceRoot, 'Sources', '.DS_Store'), 'editor');
+
+      expect(hashMacOSDriverSources(sourceRoot)).toBe(digest);
+    } finally {
+      fs.rmSync(sourceRoot, { force: true, recursive: true });
+    }
+  });
+
+  test('forms unambiguous macOS code-signing arguments', () => {
+    expect(macOSCertificateExtractionArguments('/tmp/certificate', '/tmp/Helper.app')).toEqual([
+      '--display',
+      '--extract-certificates=/tmp/certificate',
+      '/tmp/Helper.app',
+    ]);
+    expect(
+      macOSCodeSignArguments(
+        {
+          codesignIdentity: 'ABCDEF',
+          signing: { certificateHash: 'ABCDEF', identity: 'Example', mode: 'signed' },
+        },
+        '/tmp/Helper.app',
+      ),
+    ).toEqual([
+      '--force',
+      '--sign',
+      'ABCDEF',
+      '--identifier',
+      'com.microsoft.fluentui-react-native.desktop-driver',
+      '--options',
+      'runtime',
+      '--timestamp',
+      '/tmp/Helper.app',
+    ]);
+    expect(macOSCodeSignArguments({ codesignIdentity: '-', signing: { mode: 'adhoc' } }, '/tmp/Helper.app')).toContain('--timestamp=none');
+    expect(
+      parseMacOSSigningIdentities(
+        '  1) AB592605F8619FCAA952B4A2525AE6D41296FDD7 "FURN Desktop Driver Development" (CSSMERR_TP_NOT_TRUSTED)\n',
+      ),
+    ).toEqual([
+      {
+        hash: 'AB592605F8619FCAA952B4A2525AE6D41296FDD7',
+        name: 'FURN Desktop Driver Development',
+      },
+    ]);
   });
 
   windowsTest('builds, reuses, resolves, and handshakes with the Windows helper', async () => {

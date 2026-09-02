@@ -135,8 +135,8 @@ final class InputController {
       return
     }
     let stroke = strokeForValue(value)
-    pressedKeys.append(PressedKey(value: value, stroke: stroke))
     try postKey(stroke, down: true)
+    pressedKeys.append(PressedKey(value: value, stroke: stroke))
   }
 
   func keyUp(_ value: String, token: CancellationToken) throws {
@@ -168,8 +168,8 @@ final class InputController {
       }
       let normalized = value == "\n" ? "\u{E006}" : value
       let stroke = strokeForValue(normalized)
-      pressedKeys.append(PressedKey(value: normalized, stroke: stroke))
       try postKey(stroke, down: true)
+      pressedKeys.append(PressedKey(value: normalized, stroke: stroke))
       try postKey(stroke, down: false)
       pressedKeys.removeLast()
     }
@@ -226,12 +226,13 @@ final class InputController {
     let base = pressedKeys.count
     for (index, stroke) in strokes.enumerated() {
       try token.throwIfCancelled()
-      pressedKeys.append(PressedKey(value: "chord:\(index)", stroke: stroke))
       try postKey(stroke, down: true)
+      pressedKeys.append(PressedKey(value: "chord:\(index)", stroke: stroke))
     }
     while pressedKeys.count > base {
-      let stroke = pressedKeys.removeLast().stroke
+      let stroke = pressedKeys.last!.stroke
       try postKey(stroke, down: false)
+      pressedKeys.removeLast()
     }
   }
 

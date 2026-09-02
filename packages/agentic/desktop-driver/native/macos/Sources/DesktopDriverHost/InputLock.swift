@@ -17,6 +17,7 @@ final class PhysicalInputLock: @unchecked Sendable {
   private let stateLock = NSLock()
   private var depth = 0
   private var descriptor: Int32 = -1
+  private let lockDirectory: URL
   private let lockURL: URL
   private let ownerURL: URL
 
@@ -27,9 +28,10 @@ final class PhysicalInputLock: @unchecked Sendable {
   }
 
   init(baseName: String = "furn-desktop-driver-physical-input-v1-\(getuid())") {
-    let directory = FileManager.default.temporaryDirectory
-    lockURL = directory.appendingPathComponent(baseName + ".lock", isDirectory: false)
-    ownerURL = directory.appendingPathComponent(baseName + ".owner.json", isDirectory: false)
+    lockDirectory = URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true)
+      .appendingPathComponent("Library/Caches/com.microsoft.fluentui-react-native.desktop-driver", isDirectory: true)
+    lockURL = lockDirectory.appendingPathComponent(baseName + ".lock", isDirectory: false)
+    ownerURL = lockDirectory.appendingPathComponent(baseName + ".owner.json", isDirectory: false)
   }
 
   func withLock<T>(
@@ -52,6 +54,16 @@ final class PhysicalInputLock: @unchecked Sendable {
     }
     stateLock.unlock()
 
+    do {
+      try FileManager.default.createDirectory(
+        at: lockDirectory,
+        withIntermediateDirectories: true,
+        attributes: [.posixPermissions: 0o700]
+      )
+      try FileManager.default.setAttributes([.posixPermissions: 0o700], ofItemAtPath: lockDirectory.path)
+    } catch {
+      try fail(ErrorCode.inputBusy, "Creating the physical input lock directory failed: \(error.localizedDescription)")
+    }
     let fd = open(lockURL.path, O_CREAT | O_RDWR | O_CLOEXEC, S_IRUSR | S_IWUSR)
     guard fd >= 0 else {
       try fail(ErrorCode.inputBusy, "Creating the physical input lock failed with errno \(errno).")

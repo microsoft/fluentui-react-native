@@ -34,15 +34,22 @@ enum ErrorCode {
 struct HelperError: Error, CustomStringConvertible {
   let code: String
   let message: String
+  let data: JSONObject?
 
   var description: String { message }
+
+  init(code: String, message: String, data: JSONObject? = nil) {
+    self.code = code
+    self.message = message
+    self.data = data
+  }
 }
 
 struct CancelledError: Error {}
 
 @inline(__always)
-func fail(_ code: String, _ message: String) throws -> Never {
-  throw HelperError(code: code, message: message)
+func fail(_ code: String, _ message: String, data: JSONObject? = nil) throws -> Never {
+  throw HelperError(code: code, message: message, data: data)
 }
 
 final class CancellationToken: @unchecked Sendable {
@@ -310,6 +317,60 @@ func describeAXError(_ error: AXError) -> String {
   }
 }
 
+func axErrorName(_ error: AXError) -> String {
+  switch error {
+  case .actionUnsupported:
+    return "actionUnsupported"
+  case .apiDisabled:
+    return "apiDisabled"
+  case .attributeUnsupported:
+    return "attributeUnsupported"
+  case .cannotComplete:
+    return "cannotComplete"
+  case .failure:
+    return "failure"
+  case .illegalArgument:
+    return "illegalArgument"
+  case .invalidUIElement:
+    return "invalidUIElement"
+  case .invalidUIElementObserver:
+    return "invalidUIElementObserver"
+  case .noValue:
+    return "noValue"
+  case .notEnoughPrecision:
+    return "notEnoughPrecision"
+  case .notImplemented:
+    return "notImplemented"
+  case .notificationAlreadyRegistered:
+    return "notificationAlreadyRegistered"
+  case .notificationNotRegistered:
+    return "notificationNotRegistered"
+  case .notificationUnsupported:
+    return "notificationUnsupported"
+  case .parameterizedAttributeUnsupported:
+    return "parameterizedAttributeUnsupported"
+  case .success:
+    return "success"
+  @unknown default:
+    return "unknown"
+  }
+}
+
+func axErrorJSON(_ error: AXError) -> JSONObject {
+  [
+    "code": Int(error.rawValue),
+    "description": describeAXError(error),
+    "name": axErrorName(error),
+  ]
+}
+
+func cfTypeName(_ value: CFTypeRef?) -> String {
+  guard let value else {
+    return "none"
+  }
+  return (CFCopyTypeIDDescription(CFGetTypeID(value)) as String?) ?? "unknown"
+}
+
 func throwAX(_ error: AXError, operation: String, staleMessage: String? = nil) throws {
   if error == .success {
     return
@@ -318,7 +379,17 @@ func throwAX(_ error: AXError, operation: String, staleMessage: String? = nil) t
     try fail(ErrorCode.staleElement, staleMessage ?? "\(operation) failed because the accessibility element is no longer valid.")
   }
   if error == .apiDisabled {
-    try requireAccessibility(operation)
+    try fail(
+      ErrorCode.inputUnavailable,
+      "\(operation) failed because the Accessibility API is disabled for the helper. Re-enable Accessibility access and restart it.",
+      data: [
+        "accessibility": [
+          "preflight": AXIsProcessTrusted(),
+        ],
+        "axError": axErrorJSON(error),
+        "reason": "api-disabled",
+      ]
+    )
   }
   try fail(ErrorCode.automationFailed, "\(operation) failed because \(describeAXError(error)).")
 }
@@ -342,6 +413,16 @@ func copyOptionalAXAttribute(_ element: AXUIElement, _ attribute: String) throws
   }
   try throwAX(error, operation: "Reading \(attribute)")
   return value
+}
+
+func requiredAXRole(_ element: AXUIElement, staleMessage: String) throws -> String? {
+  var value: CFTypeRef?
+  let error = AXUIElementCopyAttributeValue(element, kAXRoleAttribute as CFString, &value)
+  if error == .invalidUIElement || error == .illegalArgument {
+    try fail(ErrorCode.staleElement, staleMessage)
+  }
+  try throwAX(error, operation: "Reading \(kAXRoleAttribute)", staleMessage: staleMessage)
+  return axString(value)
 }
 
 func copyAXActionNames(_ element: AXUIElement) throws -> [String] {
@@ -400,6 +481,21 @@ func axElements(_ value: CFTypeRef?) -> [AXUIElement] {
   return value as? [AXUIElement] ?? []
 }
 
+func strictAXElements(_ value: CFTypeRef?) -> [AXUIElement]? {
+  guard let value, CFGetTypeID(value) == CFArrayGetTypeID(), let items = value as? [AnyObject] else {
+    return nil
+  }
+  var elements: [AXUIElement] = []
+  elements.reserveCapacity(items.count)
+  for item in items {
+    guard CFGetTypeID(item) == AXUIElementGetTypeID() else {
+      return nil
+    }
+    elements.append(item as! AXUIElement)
+  }
+  return elements
+}
+
 func axElement(_ value: CFTypeRef?) -> AXUIElement? {
   guard let value, CFGetTypeID(value) == AXUIElementGetTypeID() else {
     return nil
@@ -425,18 +521,105 @@ func axOptionalFrame(_ element: AXUIElement) throws -> CGRect {
   return CGRect(origin: position, size: size)
 }
 
-func coreGraphicsWindowFrame(processID: pid_t, title: String) -> CGRect? {
+struct CoreGraphicsWindowCandidate {
+  let frame: CGRect
+  let title: String?
+}
+
+struct CoreGraphicsWindowFrameMatch {
+  let frame: CGRect?
+  let diagnostics: JSONObject
+}
+
+func selectCoreGraphicsWindowFrame(
+  candidates: [CoreGraphicsWindowCandidate],
+  title: String,
+  authoritativeWindowCount: Int,
+  screenCaptureAccess: Bool
+) -> CoreGraphicsWindowFrameMatch {
+  let uniqueFrames = candidates.reduce(into: [CGRect]()) { frames, candidate in
+    if !frames.contains(where: { $0.equalTo(candidate.frame) }) {
+      frames.append(candidate.frame)
+    }
+  }
+  var reason = "ambiguous"
+  var selected: CGRect?
+  let titleMatchingAvailable = candidates.contains(where: { $0.title != nil })
+  if titleMatchingAvailable {
+    let titleMatches = candidates.filter { candidate in
+      title.isEmpty ? candidate.title?.isEmpty == true : candidate.title == title
+    }
+    if titleMatches.count == 1 {
+      reason = "unique-title"
+      selected = titleMatches[0].frame
+    } else if titleMatches.count > 1 {
+      let titleFrames = titleMatches.reduce(into: [CGRect]()) { frames, candidate in
+        if !frames.contains(where: { $0.equalTo(candidate.frame) }) {
+          frames.append(candidate.frame)
+        }
+      }
+      if titleFrames.count == 1 {
+        reason = "unique-title-geometry"
+        selected = titleFrames[0]
+      }
+    } else {
+      reason = "no-matching-title"
+    }
+  } else if authoritativeWindowCount == 1, candidates.count == 1 {
+    reason = "unique-candidate"
+    selected = candidates[0].frame
+  } else if authoritativeWindowCount == 1, uniqueFrames.count == 1, let frame = uniqueFrames.first {
+    reason = "unique-geometry"
+    selected = frame
+  } else {
+    reason = "title-unavailable"
+  }
+  let boundedCandidates = candidates.prefix(16).map { candidate -> JSONObject in
+    var value: JSONObject = ["frame": rectJSON(candidate.frame)]
+    if let title = candidate.title {
+      value["title"] = bounded(title, bytes: 256)
+    }
+    return value
+  }
+  return CoreGraphicsWindowFrameMatch(
+    frame: selected,
+    diagnostics: [
+      "candidateCount": candidates.count,
+      "candidates": boundedCandidates,
+      "authoritativeWindowCount": authoritativeWindowCount,
+      "reason": reason,
+      "screenCaptureAccess": screenCaptureAccess,
+      "titleMatchingAvailable": titleMatchingAvailable,
+      "truncated": candidates.count > boundedCandidates.count,
+      "uniqueGeometryCount": uniqueFrames.count,
+    ]
+  )
+}
+
+func coreGraphicsWindowFrame(
+  processID: pid_t,
+  title: String,
+  authoritativeWindowCount: Int
+) -> CoreGraphicsWindowFrameMatch {
+  let screenCaptureAccess = CGPreflightScreenCaptureAccess()
   guard
     let descriptions = CGWindowListCopyWindowInfo([.optionAll, .excludeDesktopElements], kCGNullWindowID)
       as? [[String: Any]]
   else {
-    return nil
+    return CoreGraphicsWindowFrameMatch(
+      frame: nil,
+      diagnostics: [
+        "candidateCount": 0,
+        "reason": "enumeration-failed",
+        "screenCaptureAccess": screenCaptureAccess,
+        "titleMatchingAvailable": false,
+      ]
+    )
   }
-  let matches = descriptions.compactMap { description -> CGRect? in
+  let candidates = descriptions.compactMap { description -> CoreGraphicsWindowCandidate? in
     guard
       (description[kCGWindowOwnerPID as String] as? NSNumber)?.int32Value == processID,
       (description[kCGWindowLayer as String] as? NSNumber)?.intValue == 0,
-      (description[kCGWindowName as String] as? String) == title,
       let bounds = description[kCGWindowBounds as String] as? [String: Any],
       let frame = CGRect(dictionaryRepresentation: bounds as CFDictionary),
       frame.width > 0,
@@ -444,9 +627,17 @@ func coreGraphicsWindowFrame(processID: pid_t, title: String) -> CGRect? {
     else {
       return nil
     }
-    return frame
+    return CoreGraphicsWindowCandidate(
+      frame: frame,
+      title: description[kCGWindowName as String] as? String
+    )
   }
-  return matches.count == 1 ? matches[0] : nil
+  return selectCoreGraphicsWindowFrame(
+    candidates: candidates,
+    title: title,
+    authoritativeWindowCount: authoritativeWindowCount,
+    screenCaptureAccess: screenCaptureAccess
+  )
 }
 
 func sameAXElement(_ left: AXUIElement, _ right: AXUIElement) -> Bool {

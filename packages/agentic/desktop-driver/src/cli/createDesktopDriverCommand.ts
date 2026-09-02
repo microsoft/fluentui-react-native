@@ -1,3 +1,4 @@
+import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 
 import { Command, Option } from 'commander';
@@ -12,6 +13,7 @@ import type {
   NativeDriverBuildPolicy,
   NativeDriverConfiguration,
   NativeDriverResolveOptions,
+  NativeDriverArtifact,
 } from '../native/types.js';
 import type { DesktopEndpoint, DesktopPlatformName, DesktopRenderer } from '../protocol/types.js';
 import { createDesktopDriverServer } from '../server/createDesktopDriverServer.js';
@@ -37,13 +39,17 @@ type SelectionFlags = ConnectionFlags & {
 
 export type CreateDesktopDriverCommandOptions = {
   buildDriver?: typeof buildNativeDesktopDriver;
+  permissionProbe?: NativePermissionProbe;
   resolveDriver?: typeof resolveNativeDesktopDriver;
   stderr?: Pick<NodeJS.WriteStream, 'write'>;
   stdout?: Pick<NodeJS.WriteStream, 'write'>;
 };
 
+type NativePermissionProbe = (artifact: NativeDriverArtifact, options: { prompt: boolean }) => Promise<Record<string, unknown>>;
+
 export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOptions = {}): Command {
   const buildDriver = options.buildDriver ?? buildNativeDesktopDriver;
+  const permissionProbe = options.permissionProbe ?? runNativePermissionProbe;
   const resolveDriver = options.resolveDriver ?? resolveNativeDesktopDriver;
   const stdout = options.stdout ?? process.stdout;
   const stderr = options.stderr ?? process.stderr;
@@ -57,7 +63,7 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
 
   addNativeBuildCommand(program, buildDriver, stdout);
   addNativeResolveCommand(program, resolveDriver, stdout);
-  addNativeDoctorCommand(program, resolveDriver, stdout);
+  addNativeDoctorCommand(program, resolveDriver, permissionProbe, stdout);
 
   program
     .command('serve')
@@ -253,6 +259,7 @@ function addNativeResolveCommand(
 function addNativeDoctorCommand(
   program: Command,
   resolveDriver: typeof resolveNativeDesktopDriver,
+  permissionProbe: NativePermissionProbe,
   stdout: Pick<NodeJS.WriteStream, 'write'>,
 ): void {
   const command = program.command('doctor').description('Report the selected native helper or an actionable readiness failure.');
@@ -263,10 +270,19 @@ function addNativeDoctorCommand(
     .option('--helper-path <path>', 'exact prebuilt helper executable')
     .option('--install-root <path>', 'managed native helper install root')
     .option('--macos-signing-identity <identity>', 'expected macOS code-signing certificate name or SHA-1 hash')
-    .action(async (flags: NativeResolveFlags) => {
+    .option('--permissions', 'run the verified macOS helper in noninteractive permission-diagnostic mode')
+    .option('--prompt', 'allow the permission diagnostic to request Accessibility and Screen Recording access')
+    .action(async (flags: NativeDoctorFlags) => {
       try {
+        if (flags.prompt && !flags.permissions) {
+          throw cliError('invalid-params', '--prompt requires --permissions.');
+        }
+        if (flags.permissions && flags.platform !== 'macos') {
+          throw cliError('unsupported-operation', 'Permission diagnostics are available only for the macOS helper.');
+        }
         const result = await resolveDriver({ ...toResolveOptions(flags), buildPolicy: 'never' });
-        writeJson(stdout, { ready: true, result });
+        const permissions = flags.permissions ? await permissionProbe(result, { prompt: flags.prompt === true }) : undefined;
+        writeJson(stdout, { ...(permissions ? { permissions } : {}), ready: true, result });
       } catch (error) {
         writeJson(stdout, {
           error: {
@@ -307,6 +323,11 @@ type NativeResolveFlags = NativeBuildFlags & {
   buildPolicy?: NativeDriverBuildPolicy;
   helperPath?: string;
   installRoot?: string;
+};
+
+type NativeDoctorFlags = NativeResolveFlags & {
+  permissions?: boolean;
+  prompt?: boolean;
 };
 
 function addNativePlatformOptions<T extends Command>(command: T): T {
@@ -422,4 +443,86 @@ function parsePositiveInteger(value: string): number {
     throw new TypeError(`Expected a positive integer. Received "${value}".`);
   }
   return parsed;
+}
+
+function cliError(code: string, message: string): Error & { code: string } {
+  return Object.assign(new Error(message), { code });
+}
+
+async function runNativePermissionProbe(artifact: NativeDriverArtifact, options: { prompt: boolean }): Promise<Record<string, unknown>> {
+  const maximumOutputBytes = 1024 * 1024;
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    let outputBytes = 0;
+    let errorBytes = 0;
+    const stdout: Buffer[] = [];
+    const stderr: Buffer[] = [];
+    const args = options.prompt ? ['--permissions', '--prompt'] : ['--permissions'];
+    const child = spawn(artifact.executablePath, args, {
+      stdio: ['ignore', 'pipe', 'pipe'],
+      windowsHide: true,
+    });
+    const timeout = setTimeout(() => {
+      child.kill();
+      settleReject(cliError('permission-probe-timeout', 'The native helper did not complete its permission diagnostic within 30 seconds.'));
+    }, 30_000);
+
+    const settleReject = (error: Error) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      clearTimeout(timeout);
+      reject(error);
+    };
+    child.stdout.on('data', (chunk: Buffer) => {
+      outputBytes += chunk.length;
+      if (outputBytes > maximumOutputBytes) {
+        child.kill();
+        settleReject(cliError('permission-probe-failed', 'The native helper permission diagnostic exceeded the 1 MiB output limit.'));
+        return;
+      }
+      stdout.push(chunk);
+    });
+    child.stderr.on('data', (chunk: Buffer) => {
+      errorBytes += chunk.length;
+      if (errorBytes > maximumOutputBytes) {
+        child.kill();
+        settleReject(cliError('permission-probe-failed', 'The native helper permission diagnostic exceeded the 1 MiB error limit.'));
+        return;
+      }
+      stderr.push(chunk);
+    });
+    child.once('error', (error) => settleReject(error));
+    child.once('close', (code) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      clearTimeout(timeout);
+      if (code !== 0) {
+        reject(
+          cliError(
+            'permission-probe-failed',
+            `The native helper exited with code ${String(code)} during permission diagnostics: ${Buffer.concat(stderr).toString('utf8')}`,
+          ),
+        );
+        return;
+      }
+      try {
+        const value = JSON.parse(Buffer.concat(stdout).toString('utf8')) as Record<string, unknown>;
+        if (value.schemaVersion !== 1 || value.type !== 'permissions') {
+          throw new Error('The native helper returned an unsupported permission-diagnostic document.');
+        }
+        resolve(value);
+      } catch (error) {
+        reject(
+          cliError(
+            'permission-probe-failed',
+            error instanceof Error ? error.message : 'The native helper returned invalid permission-diagnostic JSON.',
+          ),
+        );
+      }
+    });
+  });
 }

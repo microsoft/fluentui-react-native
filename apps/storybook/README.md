@@ -82,6 +82,22 @@ isolation. `yarn storybook smoke --macos --mode stories-and-tests` traverses the
 catalog, writes a nonce-bound lease for the exact launched bundle, and runs the
 same component-authored plans through the native macOS provider.
 
+For repeatable local TCC identity, configure an Apple Development or reusable
+local development certificate:
+
+```sh
+FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development" \
+  yarn storybook smoke --macos --mode stories-and-tests
+```
+
+The helper is a direct child of the Storybook/Node supervisor, so macOS privacy
+authorization can be attributed to the terminal or IDE that owns that process
+tree. Use `yarn desktop-driver doctor --platform macos --permissions` to inspect
+the exact helper, signer, designated requirement, parent PID, Accessibility,
+PostEvent, and Screen Recording state. Standalone
+`yarn storybook run --macos` applies the same enlistment-specific xcconfig used
+by smoke so its bundle identity does not fall back to the generated app default.
+
 > `react-native-safe-area-context` note: Storybook's UI imports it, but its native module is
 > iOS-only (UIKit) and uses a Yoga API that doesn't compile for react-native-macos 0.81. It is
 > therefore not installed; the shared Metro helper aliases the import to a JS-only stub, so no

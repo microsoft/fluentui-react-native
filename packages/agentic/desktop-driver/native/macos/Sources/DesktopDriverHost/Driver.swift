@@ -243,7 +243,7 @@ final class Driver {
     while DispatchTime.now() < deadline {
       try token.throwIfCancelled()
       let main = axNumber(try copyAXAttribute(window.element, kAXMainAttribute))?.boolValue == true
-      if NSWorkspace.shared.frontmostApplication?.processIdentifier == window.processID && main {
+      if NSWorkspace.shared.frontmostApplication?.processIdentifier == window.processID && (main || !window.primary) {
         return
       }
       try token.wait(milliseconds: 50)

@@ -127,6 +127,8 @@ its default build and run operations are unsupported until the consumer provides
 Set `platformOptions.macos.nativeDriver.macosSigningIdentity` to use a stable
 macOS code-signing identity. When omitted, the source build uses an ad hoc
 signature and TCC permissions may need to be granted again after a rebuild.
+The shared standalone macOS `run` command applies the enlistment-specific
+xcconfig, matching the bundle identity used by `driver` and `smoke`.
 
 `server` loads the same config, selects the matching platform catalog, and derives the app-owned Storybook config
 directory automatically. It accepts `--host` and `--port`; the separate `storybook-server` binary is a convenience

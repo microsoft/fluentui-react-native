@@ -11,6 +11,10 @@ import { createDesktopDriverCommand } from './createDesktopDriverCommand';
 jest.setTimeout(30_000);
 
 describe('desktop-driver CLI', () => {
+  afterEach(() => {
+    process.exitCode = undefined;
+  });
+
   test('exposes isolated native build and resolution commands', async () => {
     const artifact = createNativeArtifact();
     const buildDriver = jest.fn(async () => artifact);
@@ -74,6 +78,142 @@ describe('desktop-driver CLI', () => {
     });
     expect(JSON.parse(output[0])).toMatchObject({ artifactId: 'artifact-id', origin: 'built' });
     expect(JSON.parse(output[1])).toMatchObject({ artifactId: 'artifact-id', origin: 'cache' });
+  });
+
+  test('runs noninteractive permission diagnostics through the resolved macOS helper', async () => {
+    const artifact = createNativeArtifact({
+      architecture: 'arm64',
+      endpoints: ['macos'],
+      executablePath: '/verified/FurnDesktopDriverHost.app/Contents/MacOS/furn-desktop-driver-host',
+      provider: 'macos',
+      signing: { mode: 'adhoc' },
+    });
+    const resolveDriver = jest.fn(async () => artifact);
+    const permissionProbe = jest.fn(async () => ({
+      permissions: {
+        accessibility: { preflight: false },
+        postEvent: { preflight: true },
+        screenCapture: { preflight: false },
+      },
+      promptRequested: false,
+      schemaVersion: 1,
+      type: 'permissions',
+    }));
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      permissionProbe,
+      resolveDriver,
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'macos', '--permissions']);
+
+    expect(resolveDriver).toHaveBeenCalledWith({
+      architecture: undefined,
+      buildPolicy: 'never',
+      cacheRoot: undefined,
+      configuration: 'release',
+      force: undefined,
+      helperPath: undefined,
+      installRoot: undefined,
+      macosSigningIdentity: undefined,
+      platform: 'macos',
+    });
+    expect(permissionProbe).toHaveBeenCalledWith(artifact, { prompt: false });
+    expect(JSON.parse(output.join(''))).toMatchObject({
+      permissions: {
+        promptRequested: false,
+        schemaVersion: 1,
+        type: 'permissions',
+      },
+      ready: true,
+      result: { executablePath: artifact.executablePath },
+    });
+  });
+
+  test('passes the explicit doctor prompt flag only to macOS permission diagnostics', async () => {
+    const artifact = createNativeArtifact({
+      architecture: 'arm64',
+      endpoints: ['macos'],
+      provider: 'macos',
+      signing: { mode: 'signed' },
+    });
+    const permissionProbe = jest.fn(async () => ({
+      promptRequested: true,
+      schemaVersion: 1,
+      type: 'permissions',
+    }));
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      permissionProbe,
+      resolveDriver: jest.fn(async () => artifact),
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'macos', '--permissions', '--prompt']);
+
+    expect(permissionProbe).toHaveBeenCalledWith(artifact, { prompt: true });
+    expect(JSON.parse(output.join(''))).toMatchObject({
+      permissions: { promptRequested: true },
+      ready: true,
+    });
+  });
+
+  test('rejects prompt mode without permissions before resolving a helper', async () => {
+    const resolveDriver = jest.fn(async () => createNativeArtifact());
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      resolveDriver,
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'macos', '--prompt']);
+
+    expect(resolveDriver).not.toHaveBeenCalled();
+    expect(JSON.parse(output.join(''))).toEqual({
+      error: {
+        code: 'invalid-params',
+        message: '--prompt requires --permissions.',
+      },
+      ready: false,
+    });
+  });
+
+  test('preserves Windows doctor behavior by rejecting macOS-only permission diagnostics', async () => {
+    const resolveDriver = jest.fn(async () => createNativeArtifact());
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      resolveDriver,
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'windows', '--permissions']);
+
+    expect(resolveDriver).not.toHaveBeenCalled();
+    expect(JSON.parse(output.join(''))).toMatchObject({
+      error: { code: 'unsupported-operation' },
+      ready: false,
+    });
   });
 
   test('serves, lists, runs, and describes a fake authored plan as JSON', async () => {
@@ -148,7 +288,7 @@ describe('desktop-driver CLI', () => {
     }
   });
 
-  function createNativeArtifact(): NativeDriverArtifact {
+  function createNativeArtifact(overrides: Partial<NativeDriverArtifact> = {}): NativeDriverArtifact {
     return {
       architecture: 'x64',
       artifactId: 'artifact-id',
@@ -166,6 +306,7 @@ describe('desktop-driver CLI', () => {
       signing: { mode: 'none' },
       sourceDigest: 'source-digest',
       wireProtocol: { major: 1, minor: 0 },
+      ...overrides,
     };
   }
 });

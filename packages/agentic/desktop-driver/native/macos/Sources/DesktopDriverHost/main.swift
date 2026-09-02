@@ -21,6 +21,7 @@ private func printUsage() -> Int32 {
   writeDiagnostic(
     """
     Usage: furn-desktop-driver-host --handshake --json | --self-test | --stdio
+           furn-desktop-driver-host --permissions [--prompt]
            furn-desktop-driver-host --release-input          (reads {"keys":[],"buttons":[]} from stdin)
            furn-desktop-driver-host --release-input --sweep  (diagnostics: release held modifiers/buttons)
     """
@@ -75,6 +76,20 @@ private func releaseInput(sweep: Bool) -> Int32 {
   }
 }
 
+private func printPermissions(prompt: Bool) -> Int32 {
+  do {
+    FileHandle.standardOutput.write(try serializeJSON(createPermissionDiagnostic(prompt: prompt)))
+    FileHandle.standardOutput.write(Data([0x0A]))
+    return 0
+  } catch let error as HelperError {
+    writeDiagnostic("furn-desktop-driver-host: \(error.code): \(error.message)")
+    return 1
+  } catch {
+    writeDiagnostic("furn-desktop-driver-host: \(error.localizedDescription)")
+    return 1
+  }
+}
+
 let arguments = Array(CommandLine.arguments.dropFirst())
 let result: Int32
 switch arguments.first {
@@ -89,6 +104,14 @@ case "--handshake":
   }
 case "--self-test":
   result = arguments.count == 1 ? runSelfTest() : printUsage()
+case "--permissions":
+  if arguments.count == 1 {
+    result = printPermissions(prompt: false)
+  } else if arguments.count == 2 && arguments[1] == "--prompt" {
+    result = printPermissions(prompt: true)
+  } else {
+    result = printUsage()
+  }
 case "--release-input":
   if arguments.count == 1 {
     result = releaseInput(sweep: false)

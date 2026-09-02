@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import { atomicWriteJson, canonicalJson, sha256, throwIfAborted } from '../filesystem.js';
+import { atomicWriteJson, canonicalJson, listFiles, sha256, throwIfAborted } from '../filesystem.js';
 import { NativeDriverError } from '../NativeDriverError.js';
 import type { NativeDriverConfiguration, NativeDriverSigning } from '../types.js';
 
@@ -45,6 +45,50 @@ export type BuildMacOSDriverResult = {
   signing: NativeDriverSigning;
 };
 
+type CommandResult = {
+  stderr: string;
+  stdout: string;
+};
+
+export function macOSDriverSourceFiles(sourceRoot: string): string[] {
+  const packageManifest = path.join(sourceRoot, 'Package.swift');
+  const sourcesRoot = path.join(sourceRoot, 'Sources');
+  if (!fs.existsSync(packageManifest) || !fs.statSync(packageManifest).isFile() || !fs.existsSync(sourcesRoot)) {
+    throw new NativeDriverError('build-source-missing', `macOS native driver sources are incomplete beneath "${sourceRoot}".`);
+  }
+  return [
+    packageManifest,
+    ...(fs.existsSync(path.join(sourceRoot, 'Package.resolved')) ? [path.join(sourceRoot, 'Package.resolved')] : []),
+    ...listFiles(sourcesRoot).filter((filePath) => path.extname(filePath) === '.swift'),
+  ]
+    .map((filePath) => path.relative(sourceRoot, filePath))
+    .sort((left, right) => left.localeCompare(right));
+}
+
+export function hashMacOSDriverSources(sourceRoot: string): string {
+  const entries = macOSDriverSourceFiles(sourceRoot).map((relativePath) => ({
+    path: relativePath.replaceAll(path.sep, '/'),
+    sha256: sha256(fs.readFileSync(path.join(sourceRoot, relativePath))),
+  }));
+  return sha256(canonicalJson(entries));
+}
+
+export function macOSCodeSignArguments(toolchain: Pick<MacOSToolchain, 'codesignIdentity' | 'signing'>, bundlePath: string): string[] {
+  return [
+    '--force',
+    '--sign',
+    toolchain.codesignIdentity,
+    '--identifier',
+    bundleIdentifier,
+    ...(toolchain.signing.mode === 'signed' ? ['--options', 'runtime', '--timestamp'] : ['--timestamp=none']),
+    bundlePath,
+  ];
+}
+
+export function macOSCertificateExtractionArguments(certificatePrefix: string, bundlePath: string): string[] {
+  return ['--display', `--extract-certificates=${certificatePrefix}`, bundlePath];
+}
+
 export async function probeMacOSToolchain(
   signingIdentity: MacOSSigningIdentity | undefined,
   signal?: AbortSignal,
@@ -57,11 +101,11 @@ export async function probeMacOSToolchain(
   }
   throwIfAborted(signal);
 
-  const swiftPath = (await runCommand('xcrun', ['--find', 'swift'], signal)).trim();
-  const swiftVersion = (await runCommand(swiftPath, ['--version'], signal)).trim();
-  const macosSdkPath = (await runCommand('xcrun', ['--sdk', 'macosx', '--show-sdk-path'], signal)).trim();
-  const macosSdkVersion = (await runCommand('xcrun', ['--sdk', 'macosx', '--show-sdk-version'], signal)).trim();
-  const xcodeVersion = (await runCommand('xcodebuild', ['-version'], signal)).trim();
+  const swiftPath = combinedOutput(await runCommand('xcrun', ['--find', 'swift'], signal)).trim();
+  const swiftVersion = combinedOutput(await runCommand(swiftPath, ['--version'], signal)).trim();
+  const macosSdkPath = combinedOutput(await runCommand('xcrun', ['--sdk', 'macosx', '--show-sdk-path'], signal)).trim();
+  const macosSdkVersion = combinedOutput(await runCommand('xcrun', ['--sdk', 'macosx', '--show-sdk-version'], signal)).trim();
+  const xcodeVersion = combinedOutput(await runCommand('xcodebuild', ['-version'], signal)).trim();
   const signing: NativeDriverSigning = signingIdentity
     ? { certificateHash: signingIdentity.hash, identity: signingIdentity.name, mode: 'signed' }
     : { mode: 'adhoc' };
@@ -106,7 +150,11 @@ export async function buildMacOSDriver({
   const stagedPackageRoot = path.join(stagingRoot, 'package');
   const scratchRoot = path.join(stagingRoot, 'build');
   const outputRoot = path.join(stagingRoot, 'output');
-  fs.cpSync(sourceRoot, stagedPackageRoot, { recursive: true });
+  for (const relativePath of macOSDriverSourceFiles(sourceRoot)) {
+    const destination = path.join(stagedPackageRoot, relativePath);
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+    fs.copyFileSync(path.join(sourceRoot, relativePath), destination);
+  }
   fs.mkdirSync(outputRoot, { recursive: true });
   fs.writeFileSync(
     path.join(stagedPackageRoot, 'Sources', 'DesktopDriverHost', 'GeneratedBuildInfo.swift'),
@@ -120,6 +168,7 @@ export async function buildMacOSDriver({
   );
 
   const nativeConfiguration = configuration === 'debug' ? 'debug' : 'release';
+  const canonicalSourceRoot = '/furn-desktop-driver/native/macos';
   const buildArguments = [
     'build',
     '--package-path',
@@ -130,6 +179,19 @@ export async function buildMacOSDriver({
     nativeConfiguration,
     '--arch',
     'arm64',
+    ...(configuration === 'release' ? ['-Xlinker', '-no_uuid'] : []),
+    '-Xswiftc',
+    '-file-prefix-map',
+    '-Xswiftc',
+    `${stagedPackageRoot}=${canonicalSourceRoot}`,
+    '-Xswiftc',
+    '-debug-prefix-map',
+    '-Xswiftc',
+    `${stagedPackageRoot}=${canonicalSourceRoot}`,
+    '-Xswiftc',
+    '-debug-prefix-map',
+    '-Xswiftc',
+    `${scratchRoot}=/furn-desktop-driver/build`,
   ];
   const buildLogPath = path.join(stagingRoot, 'build.log');
   const output = await runCommand(toolchain.swiftPath, buildArguments, signal).catch((error) => {
@@ -139,9 +201,16 @@ export async function buildMacOSDriver({
     });
     throw error;
   });
-  fs.writeFileSync(buildLogPath, output);
+  fs.writeFileSync(buildLogPath, combinedOutput(output));
 
-  const binPath = (await runCommand(toolchain.swiftPath, [...buildArguments, '--show-bin-path'], signal)).trim();
+  const binPathResult = await runCommand(toolchain.swiftPath, [...buildArguments, '--show-bin-path'], signal);
+  const binPath = binPathResult.stdout.trim();
+  if (!binPath) {
+    throw new NativeDriverError(
+      'build-failed',
+      `SwiftPM did not report its binary output path.${binPathResult.stderr.trim() ? `\n${binPathResult.stderr.trim()}` : ''}`,
+    );
+  }
   const builtExecutable = path.join(binPath, executableName);
   if (!fs.existsSync(builtExecutable)) {
     throw new NativeDriverError('build-failed', `SwiftPM completed without producing "${builtExecutable}".`);
@@ -153,6 +222,9 @@ export async function buildMacOSDriver({
   fs.mkdirSync(path.dirname(executablePath), { recursive: true });
   fs.copyFileSync(builtExecutable, executablePath);
   fs.chmodSync(executablePath, 0o755);
+  if (configuration === 'release') {
+    await runCommand('xcrun', ['strip', '-S', '-x', executablePath], signal);
+  }
   fs.writeFileSync(path.join(contentsPath, 'Info.plist'), makeInfoPlist());
 
   if (toolchain.signing.mode === 'adhoc') {
@@ -161,11 +233,7 @@ export async function buildMacOSDriver({
       { code: 'FURN_MACOS_ADHOC_SIGNING' },
     );
   }
-  await runCommand(
-    'codesign',
-    ['--force', '--sign', toolchain.codesignIdentity, '--identifier', bundleIdentifier, '--timestamp=none', bundlePath],
-    signal,
-  );
+  await runCommand('codesign', macOSCodeSignArguments(toolchain, bundlePath), signal);
   const verifiedSigning = await verifyMacOSDriver(executablePath, toolchain.signing, signal);
   return {
     buildLogPath,
@@ -182,7 +250,7 @@ export async function verifyMacOSDriver(
 ): Promise<NativeDriverSigning> {
   const bundlePath = macOSBundleForExecutable(executablePath);
   await runCommand('codesign', ['--verify', '--strict', '--verbose=2', bundlePath], signal);
-  const details = await runCommand('codesign', ['--display', '--verbose=4', bundlePath], signal);
+  const details = combinedOutput(await runCommand('codesign', ['--display', '--verbose=4', bundlePath], signal));
   const identifier = readCodeSignValue(details, 'Identifier');
   if (identifier !== bundleIdentifier) {
     throw new NativeDriverError(
@@ -192,11 +260,21 @@ export async function verifyMacOSDriver(
   }
   const adhoc = readCodeSignValue(details, 'Signature') === 'adhoc';
   const mode: NativeDriverSigning['mode'] = adhoc ? 'adhoc' : 'signed';
+  if (mode === 'signed') {
+    if (!/^CodeDirectory .*\bflags=.*\bruntime\b/m.test(details)) {
+      throw new NativeDriverError('signature-mismatch', 'The signed macOS native driver does not enable Hardened Runtime.');
+    }
+    if (!readCodeSignValue(details, 'Timestamp')) {
+      throw new NativeDriverError('signature-mismatch', 'The signed macOS native driver does not contain a secure timestamp.');
+    }
+  }
   const identity = details.match(/^Authority=(.+)$/m)?.[1];
   const teamId = readCodeSignValue(details, 'TeamIdentifier');
   const certificateHash = mode === 'signed' ? await extractSigningCertificateHash(bundlePath, signal) : undefined;
+  const designatedRequirement = await readDesignatedRequirement(bundlePath, signal);
   const signing: NativeDriverSigning = {
     ...(certificateHash ? { certificateHash } : {}),
+    designatedRequirement,
     ...(identity ? { identity } : {}),
     mode,
     ...(teamId && teamId !== 'not set' ? { teamId } : {}),
@@ -211,7 +289,7 @@ export async function verifyMacOSDriver(
     if (expectedSigning.mode === 'signed' && !expectedSigning.certificateHash) {
       throw new NativeDriverError('signature-mismatch', 'The expected macOS signing metadata does not identify its leaf certificate.');
     }
-    for (const field of ['certificateHash', 'identity', 'teamId'] as const) {
+    for (const field of ['certificateHash', 'designatedRequirement', 'identity', 'teamId'] as const) {
       if (expectedSigning[field] !== undefined && expectedSigning[field] !== signing[field]) {
         throw new NativeDriverError(
           'signature-mismatch',
@@ -231,7 +309,7 @@ export function resolveMacOSExecutablePath(helperPath: string): string {
   return path.join(resolvedPath, 'Contents', 'MacOS', executableName);
 }
 
-function macOSBundleForExecutable(executablePath: string): string {
+export function macOSBundleForExecutable(executablePath: string): string {
   const resolvedPath = path.resolve(executablePath);
   const macosDirectory = path.dirname(resolvedPath);
   const contentsDirectory = path.dirname(macosDirectory);
@@ -254,11 +332,8 @@ export async function resolveMacOSSigningIdentity(
   if (!identity) {
     return undefined;
   }
-  const output = await runCommand('security', ['find-identity', '-v', '-p', 'codesigning'], signal);
-  const identities = [...output.matchAll(/^\s*\d+\)\s+([0-9A-F]{40})\s+"([^"]+)"$/gm)].map((match) => ({
-    hash: match[1],
-    name: match[2],
-  }));
+  const output = combinedOutput(await runCommand('security', ['find-identity', '-v', '-p', 'codesigning'], signal));
+  const identities = parseMacOSSigningIdentities(output);
   const selected = identities.find((candidate) => candidate.hash === identity.toUpperCase() || candidate.name === identity);
   if (!selected) {
     throw new NativeDriverError('signing-identity-missing', `The macOS code-signing identity "${identity}" is not available.`);
@@ -266,11 +341,18 @@ export async function resolveMacOSSigningIdentity(
   return selected;
 }
 
+export function parseMacOSSigningIdentities(output: string): MacOSSigningIdentity[] {
+  return [...output.matchAll(/^\s*\d+\)\s+([0-9A-F]{40})\s+"([^"]+)"(?:\s+\([^)]*\))?$/gm)].map((match) => ({
+    hash: match[1],
+    name: match[2],
+  }));
+}
+
 async function extractSigningCertificateHash(bundlePath: string, signal?: AbortSignal): Promise<string> {
   const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-certificate-'));
   const certificatePrefix = path.join(temporaryRoot, 'certificate');
   try {
-    await runCommand('codesign', ['--display', '--extract-certificates', certificatePrefix, bundlePath], signal);
+    await runCommand('codesign', macOSCertificateExtractionArguments(certificatePrefix, bundlePath), signal);
     const certificatePath = `${certificatePrefix}0`;
     if (!fs.existsSync(certificatePath)) {
       throw new NativeDriverError('signature-mismatch', 'macOS native driver signature does not contain a leaf certificate.');
@@ -281,11 +363,24 @@ async function extractSigningCertificateHash(bundlePath: string, signal?: AbortS
   }
 }
 
+async function readDesignatedRequirement(bundlePath: string, signal?: AbortSignal): Promise<string> {
+  const output = combinedOutput(await runCommand('codesign', ['--display', '-r-', bundlePath], signal));
+  const requirement = output.match(/^(?:# )?designated => (.+)$/m)?.[1]?.trim();
+  if (!requirement) {
+    throw new NativeDriverError('signature-mismatch', 'macOS native driver signature does not contain a designated requirement.');
+  }
+  return requirement;
+}
+
 function readCodeSignValue(output: string, key: string): string | undefined {
   return output.match(new RegExp(`^${key}=(.+)$`, 'm'))?.[1];
 }
 
-async function runCommand(command: string, args: readonly string[], signal?: AbortSignal): Promise<string> {
+function combinedOutput(result: CommandResult): string {
+  return `${result.stdout}${result.stderr}`;
+}
+
+async function runCommand(command: string, args: readonly string[], signal?: AbortSignal): Promise<CommandResult> {
   throwIfAborted(signal);
   return new Promise((resolve, reject) => {
     let settled = false;
@@ -334,7 +429,7 @@ async function runCommand(command: string, args: readonly string[], signal?: Abo
         );
         return;
       }
-      resolve(`${output}${errorOutput}`);
+      resolve({ stderr: errorOutput, stdout: output });
     });
   });
 }
@@ -365,8 +460,6 @@ function makeInfoPlist(): string {
     '  <string>14.0</string>',
     '  <key>LSUIElement</key>',
     '  <true/>',
-    '  <key>NSScreenCaptureUsageDescription</key>',
-    '  <string>Desktop Driver captures application windows for test evidence.</string>',
     '</dict>',
     '</plist>',
     '',

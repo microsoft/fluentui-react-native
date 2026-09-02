@@ -1,4 +1,5 @@
 import ApplicationServices
+import AppKit
 import Foundation
 import ImageIO
 import ScreenCaptureKit
@@ -9,6 +10,13 @@ struct EncodedImage {
   let width: Int
   let height: Int
   let scaleFactor: Double
+}
+
+func matchingBackingScaleFactor(
+  displayID: CGDirectDisplayID,
+  screens: [(displayID: CGDirectDisplayID, scaleFactor: CGFloat)]
+) -> CGFloat {
+  max(1, screens.first(where: { $0.displayID == displayID })?.scaleFactor ?? 1)
 }
 
 private final class ShareableContentBox: @unchecked Sendable {
@@ -83,12 +91,22 @@ final class CaptureEngine {
     }
     try token.throwIfCancelled()
     let content = try shareableContent(token: token)
-    let candidates = content.windows.filter { candidate in
+    let processCandidates = content.windows.filter { candidate in
       candidate.owningApplication?.processID == window.processID
-        && (title.isEmpty || candidate.title == title)
     }
+    let titleCandidates = title.isEmpty ? [] : processCandidates.filter { $0.title == title }
+    let candidates = titleCandidates.isEmpty ? processCandidates : titleCandidates
     guard !candidates.isEmpty else {
-      try fail(ErrorCode.captureFailed, "ScreenCaptureKit could not correlate the tracked accessibility window.")
+      try fail(
+        ErrorCode.captureFailed,
+        "ScreenCaptureKit could not find any window owned by the tracked application process.",
+        data: [
+          "processCandidateCount": processCandidates.count,
+          "processId": Int(window.processID),
+          "reason": "no-process-window",
+          "requestedTitle": bounded(title, bytes: 512),
+        ]
+      )
     }
     let selected = candidates.min {
       frameDistance($0.frame, windowFrame) < frameDistance($1.frame, windowFrame)
@@ -98,7 +116,18 @@ final class CaptureEngine {
       if sorted.count > 1
         && abs(frameDistance(sorted[0].frame, windowFrame) - frameDistance(sorted[1].frame, windowFrame)) < 0.5
       {
-        try fail(ErrorCode.captureFailed, "ScreenCaptureKit found multiple indistinguishable windows for the target.")
+        try fail(
+          ErrorCode.captureFailed,
+          "ScreenCaptureKit found multiple indistinguishable windows for the target.",
+          data: [
+            "candidateCount": candidates.count,
+            "processCandidateCount": processCandidates.count,
+            "reason": "ambiguous-window-geometry",
+            "requestedTitle": bounded(title, bytes: 512),
+            "titleCandidateCount": titleCandidates.count,
+            "windowFrame": rectJSON(windowFrame),
+          ]
+        )
       }
     }
     guard selected.isOnScreen else {
@@ -215,8 +244,16 @@ final class CaptureEngine {
 
   private func scaleFactor(for windowFrame: CGRect, displays: [SCDisplay]) -> CGFloat {
     let center = CGPoint(x: windowFrame.midX, y: windowFrame.midY)
-    if let display = displays.first(where: { $0.frame.contains(center) }), display.frame.width > 0 {
-      return max(1, CGFloat(display.width) / display.frame.width)
+    if
+      let display = displays.first(where: { $0.frame.contains(center) })
+    {
+      let screens = NSScreen.screens.compactMap { screen -> (displayID: CGDirectDisplayID, scaleFactor: CGFloat)? in
+        guard let displayID = (screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber)?.uint32Value else {
+          return nil
+        }
+        return (displayID, screen.backingScaleFactor)
+      }
+      return matchingBackingScaleFactor(displayID: display.displayID, screens: screens)
     }
     return 1
   }

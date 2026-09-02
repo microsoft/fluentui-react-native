@@ -439,6 +439,7 @@ final class AccessibilityEngine {
     var snapshots: [ElementSnapshot] = []
     var visitedElements: [CFHashCode: [AXUIElement]] = [:]
     var visited = 0
+    let windowFrame = try window.currentFrame()
     while let item = pending.popLast() {
       let elementHash = CFHash(item.element)
       if visitedElements[elementHash]?.contains(where: { sameAXElement($0, item.element) }) == true {
@@ -463,7 +464,7 @@ final class AccessibilityEngine {
       )
       var snapshot: ElementSnapshot
       do {
-        snapshot = try readSnapshot(record: record, window: window)
+        snapshot = try readSnapshot(record: record, window: window, windowFrame: windowFrame)
       } catch let error as HelperError where error.code == ErrorCode.staleElement {
         continue
       }
@@ -477,7 +478,7 @@ final class AccessibilityEngine {
         scope = .preview
         childScope = .preview
         record.scope = .preview
-        snapshot = try readSnapshot(record: record, window: window)
+        snapshot = try readSnapshot(record: record, window: window, windowFrame: windowFrame)
       } else if window.primary, scope == .application {
         childScope = .chrome
       }
@@ -531,25 +532,27 @@ final class AccessibilityEngine {
     guard AXUIElementGetPid(record.element, &pid) == .success, pid == record.processID, processIsAlive(pid) else {
       try fail(ErrorCode.staleElement, "Element \"\(record.id)\" is no longer available.")
     }
-    var role: CFTypeRef?
-    let error = AXUIElementCopyAttributeValue(record.element, kAXRoleAttribute as CFString, &role)
-    if error == .invalidUIElement || role == nil {
+    let role = try requiredAXRole(record.element, staleMessage: "Element \"\(record.id)\" is no longer available.")
+    if role == nil {
       try fail(ErrorCode.staleElement, "Element \"\(record.id)\" is no longer available.")
     }
-    try throwAX(error, operation: "Refreshing the element", staleMessage: "Element \"\(record.id)\" is no longer available.")
   }
 
-  private func readSnapshot(record: ElementRecord, window: WindowRecord) throws -> ElementSnapshot {
+  private func readSnapshot(
+    record: ElementRecord,
+    window: WindowRecord,
+    windowFrame resolvedWindowFrame: CGRect? = nil
+  ) throws -> ElementSnapshot {
     let element = record.element
     let screenRect = try axOptionalFrame(element)
-    let windowFrame = try window.currentFrame()
+    let windowFrame = try resolvedWindowFrame ?? window.currentFrame()
     let rect = CGRect(
       x: screenRect.minX - windowFrame.minX,
       y: screenRect.minY - windowFrame.minY,
       width: screenRect.width,
       height: screenRect.height
     )
-    let nativeRole = axString(try copyAXAttribute(element, kAXRoleAttribute)) ?? "AXUnknown"
+    let nativeRole = try requiredAXRole(element, staleMessage: "Element \"\(record.id)\" is no longer available.") ?? "AXUnknown"
     let subrole = axString(try copyOptionalAXAttribute(element, kAXSubroleAttribute))
     let automationID = axString(try copyOptionalAXAttribute(element, kAXIdentifierAttribute))
     let title = axString(try copyOptionalAXAttribute(element, kAXTitleAttribute))

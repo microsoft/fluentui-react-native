@@ -90,6 +90,198 @@ private final class LaunchResultBox: @unchecked Sendable {
   var error: Error?
 }
 
+struct AXWindowAttributeDiagnostic {
+  let attribute: String
+  let error: AXError
+  let returnedType: String
+  let elementCount: Int
+  let elements: [AXUIElement]
+  let valueValid: Bool
+
+  func json() -> JSONObject {
+    let elementEvidence = elements.prefix(16).map(windowElementDiagnostic)
+    return [
+      "attribute": attribute,
+      "elementCount": elementCount,
+      "elements": elementEvidence,
+      "error": axErrorJSON(error),
+      "returnedType": returnedType,
+      "truncated": elementCount > elementEvidence.count,
+      "valueValid": valueValid,
+    ]
+  }
+}
+
+struct AXWindowRoleDiagnostic {
+  let error: AXError
+  let role: String?
+  let valueValid: Bool
+
+  func json() -> JSONObject {
+    [
+      "error": axErrorJSON(error),
+      "role": role.map { bounded($0, bytes: 128) } ?? NSNull(),
+      "valueValid": valueValid,
+    ]
+  }
+}
+
+private func windowElementDiagnostic(_ element: AXUIElement) -> JSONObject {
+  var roleValue: CFTypeRef?
+  let roleError = AXUIElementCopyAttributeValue(element, kAXRoleAttribute as CFString, &roleValue)
+  var titleValue: CFTypeRef?
+  let titleError = AXUIElementCopyAttributeValue(element, kAXTitleAttribute as CFString, &titleValue)
+  var names: CFArray?
+  let namesError = AXUIElementCopyAttributeNames(element, &names)
+  let allNames = (names as? [String] ?? []).sorted()
+  let boundedNames = allNames.prefix(32).map { bounded($0, bytes: 128) }
+  var value: JSONObject = [
+    "attributeNameCount": allNames.count,
+    "attributeNames": boundedNames,
+    "attributeNamesError": axErrorJSON(namesError),
+    "attributeNamesTruncated": allNames.count > boundedNames.count,
+    "roleError": axErrorJSON(roleError),
+    "titleError": axErrorJSON(titleError),
+  ]
+  if let role = axString(roleValue) {
+    value["role"] = bounded(role, bytes: 128)
+  } else {
+    value["role"] = NSNull()
+  }
+  if let title = axString(titleValue) {
+    value["title"] = bounded(title, bytes: 512)
+  }
+  return value
+}
+
+struct AXWindowQueryOutcome {
+  let processID: pid_t
+  let trusted: Bool
+  let queries: [AXWindowAttributeDiagnostic]
+  let roleQueries: [AXWindowRoleDiagnostic]
+  let realWindows: [AXUIElement]
+  let placeholderCount: Int
+  let otherRoleCount: Int
+
+  func diagnostic(reason: String, exactTitle: String? = nil, matchCount: Int? = nil) -> JSONObject {
+    var value: JSONObject = [
+      "otherRoleCount": otherRoleCount,
+      "placeholderCount": placeholderCount,
+      "processId": Int(processID),
+      "queries": queries.map { $0.json() },
+      "realWindowCount": realWindows.count,
+      "reason": reason,
+      "roleQueries": roleQueries.prefix(16).map { $0.json() },
+      "roleQueriesTruncated": roleQueries.count > 16,
+      "trusted": trusted,
+    ]
+    if let exactTitle {
+      value["exactTitle"] = bounded(exactTitle, bytes: 512)
+    }
+    if let matchCount {
+      value["matchingTitleCount"] = matchCount
+    }
+    return value
+  }
+}
+
+func classifyAXWindowQuery(
+  queries: [AXWindowAttributeDiagnostic],
+  realWindowCount: Int,
+  placeholderCount: Int,
+  otherRoleCount: Int,
+  matchingTitleCount: Int?,
+  roleErrors: [AXError] = []
+) -> String {
+  let errors = queries.map(\.error) + roleErrors
+  let softErrors: Set<AXError> = [.success, .attributeUnsupported, .noValue]
+  if errors.contains(.apiDisabled) {
+    return "api-disabled"
+  }
+  if realWindowCount == 0, errors.contains(.cannotComplete) {
+    return "target-non-response"
+  }
+  if realWindowCount == 0, errors.contains(.invalidUIElement) {
+    return "invalid-element"
+  }
+  if realWindowCount == 0 {
+    if errors.contains(where: { !softErrors.contains($0) }) {
+      return "window-query-failed"
+    }
+    if placeholderCount > 0, otherRoleCount == 0 {
+      return "placeholder-only"
+    }
+    if otherRoleCount > 0 {
+      return "no-real-window"
+    }
+    if errors.allSatisfy({ softErrors.contains($0) }) {
+      return "no-value-or-unsupported"
+    }
+    return "window-query-failed"
+  }
+  if matchingTitleCount == 0 {
+    return "no-matching-title"
+  }
+  return "matched"
+}
+
+func incompleteAXCandidateDiscovery(
+  queries: [AXWindowAttributeDiagnostic],
+  roleQueries: [AXWindowRoleDiagnostic],
+  titleErrorCount: Int
+) -> Bool {
+  let windowQueryIncomplete = queries.contains {
+    $0.attribute == kAXWindowsAttribute && ($0.error != .success || !$0.valueValid)
+  }
+  let roleQueryIncomplete = roleQueries.contains {
+    $0.error != .success
+      || !$0.valueValid
+      || ($0.role != kAXWindowRole && $0.role != kAXSheetRole)
+  }
+  if titleErrorCount > 0 || windowQueryIncomplete || roleQueryIncomplete {
+    return true
+  }
+  guard let authoritative = queries.first(where: { $0.attribute == kAXWindowsAttribute }) else {
+    return true
+  }
+  let fallbackElements = queries
+    .filter { $0.attribute != kAXWindowsAttribute }
+    .flatMap(\.elements)
+  return fallbackElements.contains { fallback in
+    !authoritative.elements.contains { sameAXElement($0, fallback) }
+  }
+}
+
+func completeAXWindowTitle(error: AXError, title: String?) -> Bool {
+  error == .success && title != nil
+}
+
+func incompleteAXMultiProcessDiscovery(
+  queriesByCandidate: [[AXWindowAttributeDiagnostic]],
+  roleQueriesByCandidate: [[AXWindowRoleDiagnostic]],
+  titleErrorCount: Int
+) -> Bool {
+  guard queriesByCandidate.count == roleQueriesByCandidate.count else {
+    return true
+  }
+  if titleErrorCount > 0 {
+    return true
+  }
+  return zip(queriesByCandidate, roleQueriesByCandidate).contains { queries, roleQueries in
+    incompleteAXCandidateDiscovery(queries: queries, roleQueries: roleQueries, titleErrorCount: 0)
+  }
+}
+
+func classifyAXAttachment(matchCount: Int, discoveryIncomplete: Bool) -> String {
+  if matchCount > 1 {
+    return "ambiguous"
+  }
+  if discoveryIncomplete {
+    return "incomplete"
+  }
+  return matchCount == 1 ? "matched" : "missing"
+}
+
 final class ApplicationManager {
   private var leases: [String: ApplicationLeaseRecord] = [:]
   private var leaseOrder: [String] = []
@@ -285,22 +477,136 @@ final class ApplicationManager {
       }
       return true
     }
-
     var matches: [(NSRunningApplication, AXUIElement)] = []
+    var queryOutcomes: [AXWindowQueryOutcome] = []
+    var titleErrorCount = 0
+    var titleErrors: [JSONObject] = []
     for candidate in candidates {
       try token.throwIfCancelled()
-      let candidateWindows = try accessibilityWindows(processID: candidate.processIdentifier)
-      for window in candidateWindows where (try windowTitleOf(window)) == windowTitle {
-        matches.append((candidate, window))
+      let outcome = queryAccessibilityWindows(processID: candidate.processIdentifier)
+      queryOutcomes.append(outcome)
+      let reason = classifyAXWindowQuery(
+        queries: outcome.queries,
+        realWindowCount: outcome.realWindows.count,
+        placeholderCount: outcome.placeholderCount,
+        otherRoleCount: outcome.otherRoleCount,
+        matchingTitleCount: nil,
+        roleErrors: outcome.roleQueries.map(\.error)
+      )
+      if reason == "api-disabled" {
+        try throwCriticalWindowQueryFailure(outcome, code: ErrorCode.attachFailed)
+      }
+      let candidateWindows = outcome.realWindows
+      for window in candidateWindows {
+        var titleValue: CFTypeRef?
+        let titleError = AXUIElementCopyAttributeValue(window, kAXTitleAttribute as CFString, &titleValue)
+        let candidateTitle = titleError == .success ? axString(titleValue) : nil
+        if titleError == .apiDisabled {
+          try throwAX(titleError, operation: "Reading \(kAXTitleAttribute)")
+        }
+        guard completeAXWindowTitle(error: titleError, title: candidateTitle) else {
+          titleErrorCount += 1
+          if titleErrors.count < 16 {
+            titleErrors.append([
+              "error": axErrorJSON(titleError),
+              "processId": Int(candidate.processIdentifier),
+              "returnedType": cfTypeName(titleValue),
+            ])
+          }
+          continue
+        }
+        if candidateTitle == windowTitle {
+          matches.append((candidate, window))
+        }
       }
     }
-    if matches.isEmpty {
-      try fail(ErrorCode.attachFailed, "No window titled \"\(windowTitle)\" is currently open.")
-    }
-    if matches.count > 1 {
+    let realWindowCount = queryOutcomes.reduce(0) { $0 + $1.realWindows.count }
+    let placeholderCount = queryOutcomes.reduce(0) { $0 + $1.placeholderCount }
+    let otherRoleCount = queryOutcomes.reduce(0) { $0 + $1.otherRoleCount }
+    let queries = queryOutcomes.flatMap(\.queries)
+    let roleErrors = queryOutcomes.flatMap { $0.roleQueries.map(\.error) }
+    let discoveryIncomplete = incompleteAXMultiProcessDiscovery(
+      queriesByCandidate: queryOutcomes.map(\.queries),
+      roleQueriesByCandidate: queryOutcomes.map(\.roleQueries),
+      titleErrorCount: titleErrorCount
+    )
+    let attachmentResolution = classifyAXAttachment(
+      matchCount: matches.count,
+      discoveryIncomplete: discoveryIncomplete
+    )
+    if attachmentResolution == "ambiguous" {
       try fail(
         ErrorCode.ambiguousTarget,
         "\(matches.count) windows are titled \"\(windowTitle)\", so the target is ambiguous."
+      )
+    }
+    if attachmentResolution == "incomplete", !matches.isEmpty {
+      let queryEvidence = queryOutcomes.prefix(16).map { $0.diagnostic(reason: "candidate-query") }
+      try fail(
+        ErrorCode.ambiguousTarget,
+        "A window titled \"\(windowTitle)\" was found, but Accessibility could not inspect every candidate process to prove it is unique.",
+        data: [
+          "candidateApplicationCount": candidates.count,
+          "candidateQueries": queryEvidence,
+          "confirmedMatchCount": matches.count,
+          "exactTitle": bounded(windowTitle, bytes: 512),
+          "reason": "incomplete-candidate-discovery",
+          "titleErrorCount": titleErrorCount,
+          "titleErrors": titleErrors,
+          "titleErrorsTruncated": titleErrorCount > titleErrors.count,
+          "truncated": candidates.count > queryEvidence.count,
+        ]
+      )
+    }
+    if matches.isEmpty {
+      let reason: String
+      if candidates.isEmpty {
+        reason = "no-matching-application"
+      } else if discoveryIncomplete {
+        reason = "incomplete-candidate-discovery"
+      } else {
+        reason = classifyAXWindowQuery(
+          queries: queries,
+          realWindowCount: realWindowCount,
+          placeholderCount: placeholderCount,
+          otherRoleCount: otherRoleCount,
+          matchingTitleCount: 0,
+          roleErrors: roleErrors
+        )
+      }
+      let queryEvidence = queryOutcomes.prefix(16).map { $0.diagnostic(reason: "candidate-query") }
+      let message: String
+      switch reason {
+      case "placeholder-only":
+        message = "The candidate application returned only AXApplication placeholders instead of a real AXWindow or AXSheet."
+      case "no-value-or-unsupported":
+        message = "The candidate applications returned no values for AXWindows, AXMainWindow, or AXFocusedWindow."
+      case "no-real-window":
+        message = "The candidate applications returned accessibility elements, but none are AXWindow or AXSheet."
+      case "target-non-response":
+        message = "The candidate applications did not complete their accessibility window queries."
+      case "invalid-element":
+        message = "The candidate application accessibility objects became invalid during window discovery."
+      case "window-query-failed":
+        message = "Accessibility window discovery failed before any candidate returned a usable window."
+      case "incomplete-candidate-discovery":
+        message = "Accessibility could not inspect every candidate window, so the requested title could not be ruled out."
+      default:
+        message = "No window titled \"\(windowTitle)\" is currently open."
+      }
+      try fail(
+        ErrorCode.attachFailed,
+        message,
+        data: [
+          "candidateApplicationCount": candidates.count,
+          "candidateQueries": queryEvidence,
+          "exactTitle": bounded(windowTitle, bytes: 512),
+          "reason": reason,
+          "titleErrorCount": titleErrorCount,
+          "titleErrors": titleErrors,
+          "titleErrorsTruncated": titleErrorCount > titleErrors.count,
+          "truncated": candidates.count > queryEvidence.count,
+        ]
       )
     }
     let running = matches[0].0
@@ -354,6 +660,7 @@ final class ApplicationManager {
     var results: [WindowRecord] = []
     var candidateCount = 0
     var zeroGeometryCount = 0
+    var geometryDiagnostics: [JSONObject] = []
     while results.isEmpty {
       let trackedElements = windows.values.filter { $0.leaseID == leaseID }.map(\.element)
       let elements = uniqueAXElements(trackedElements + (try accessibilityWindows(processID: lease.processID)))
@@ -364,9 +671,22 @@ final class ApplicationManager {
         do {
           let title = try windowTitleOf(element)
           let axGeometry = try axFrame(element)
-          let frame = axGeometry.width > 0 && axGeometry.height > 0
-            ? axGeometry
-            : (coreGraphicsWindowFrame(processID: lease.processID, title: title) ?? .zero)
+          let frame: CGRect
+          if axGeometry.width > 0, axGeometry.height > 0 {
+            frame = axGeometry
+          } else {
+            let fallback = coreGraphicsWindowFrame(
+              processID: lease.processID,
+              title: title,
+              authoritativeWindowCount: elements.count
+            )
+            frame = fallback.frame ?? .zero
+            if geometryDiagnostics.count < 16 {
+              var diagnostic = fallback.diagnostics
+              diagnostic["accessibilityTitle"] = bounded(title, bytes: 256)
+              geometryDiagnostics.append(diagnostic)
+            }
+          }
           guard frame.width > 0, frame.height > 0 else {
             zeroGeometryCount += 1
             continue
@@ -388,7 +708,14 @@ final class ApplicationManager {
     if results.isEmpty, candidateCount > 0 {
       try fail(
         ErrorCode.automationFailed,
-        "The application exposes \(candidateCount) live accessibility window candidate(s), but \(zeroGeometryCount) have empty geometry."
+        "The application exposes \(candidateCount) live accessibility window candidate(s), but \(zeroGeometryCount) have empty geometry.",
+        data: [
+          "candidateCount": candidateCount,
+          "coreGraphicsQueries": geometryDiagnostics,
+          "reason": "empty-window-geometry",
+          "screenCaptureAccess": CGPreflightScreenCaptureAccess(),
+          "zeroGeometryCount": zeroGeometryCount,
+        ]
       )
     }
     results.sort {
@@ -414,7 +741,7 @@ final class ApplicationManager {
     var needsRefresh = pidForAXElement(record.element) != record.processID
     if !needsRefresh {
       do {
-        let role = axString(try copyAXAttribute(record.element, kAXRoleAttribute))
+        let role = try requiredAXRole(record.element, staleMessage: "Window \"\(windowID)\" is no longer available.")
         needsRefresh = role != kAXWindowRole && role != kAXSheetRole
       } catch let error as HelperError where error.code == ErrorCode.staleElement {
         needsRefresh = true
@@ -707,34 +1034,223 @@ final class ApplicationManager {
     exactTitle: String,
     missingCode: String
   ) throws -> AXUIElement {
-    let matches = try accessibilityWindows(processID: processID).filter {
-      try windowTitleOf($0) == exactTitle
+    let outcome = queryAccessibilityWindows(processID: processID)
+    try throwCriticalWindowQueryFailure(outcome, code: missingCode)
+    var matches: [AXUIElement] = []
+    var titleErrorCount = 0
+    var titleErrors: [JSONObject] = []
+    for window in outcome.realWindows {
+      var titleValue: CFTypeRef?
+      let titleError = AXUIElementCopyAttributeValue(window, kAXTitleAttribute as CFString, &titleValue)
+      let candidateTitle = titleError == .success ? axString(titleValue) : nil
+      if titleError == .apiDisabled {
+        try throwAX(titleError, operation: "Reading \(kAXTitleAttribute)")
+      }
+      guard completeAXWindowTitle(error: titleError, title: candidateTitle) else {
+        titleErrorCount += 1
+        if titleErrors.count < 16 {
+          titleErrors.append([
+            "error": axErrorJSON(titleError),
+            "returnedType": cfTypeName(titleValue),
+          ])
+        }
+        continue
+      }
+      if candidateTitle == exactTitle {
+        matches.append(window)
+      }
+    }
+    let discoveryIncomplete = incompleteAXCandidateDiscovery(
+      queries: outcome.queries,
+      roleQueries: outcome.roleQueries,
+      titleErrorCount: titleErrorCount
+    )
+    let attachmentResolution = classifyAXAttachment(
+      matchCount: matches.count,
+      discoveryIncomplete: discoveryIncomplete
+    )
+    if attachmentResolution == "ambiguous" || (attachmentResolution == "incomplete" && !matches.isEmpty) {
+      var data = outcome.diagnostic(
+        reason: discoveryIncomplete ? "incomplete-candidate-discovery" : "ambiguous-title",
+        exactTitle: exactTitle,
+        matchCount: matches.count
+      )
+      data["titleErrorCount"] = titleErrorCount
+      data["titleErrors"] = titleErrors
+      data["titleErrorsTruncated"] = titleErrorCount > titleErrors.count
+      let message = discoveryIncomplete
+        ? "A window titled \"\(exactTitle)\" was found, but Accessibility could not inspect every window to prove it is unique."
+        : "The application shows \(matches.count) windows titled \"\(exactTitle)\"."
+      try fail(ErrorCode.ambiguousTarget, message, data: data)
     }
     if matches.isEmpty {
-      try fail(missingCode, "The application does not currently show a window titled \"\(exactTitle)\".")
-    }
-    if matches.count > 1 {
+      let reason = discoveryIncomplete
+        ? "incomplete-candidate-discovery"
+        : classifyAXWindowQuery(
+          queries: outcome.queries,
+          realWindowCount: outcome.realWindows.count,
+          placeholderCount: outcome.placeholderCount,
+          otherRoleCount: outcome.otherRoleCount,
+          matchingTitleCount: 0,
+          roleErrors: outcome.roleQueries.map(\.error)
+        )
+      let message: String
+      switch reason {
+      case "placeholder-only":
+        message =
+          "The application returned only AXApplication placeholders instead of a real AXWindow or AXSheet while looking for \"\(exactTitle)\"."
+      case "no-real-window":
+        message =
+          "The application returned accessibility elements, but none are AXWindow or AXSheet while looking for \"\(exactTitle)\"."
+      case "no-value-or-unsupported":
+        message =
+          "AXWindows, AXMainWindow, and AXFocusedWindow returned no window values while looking for \"\(exactTitle)\"."
+      case "incomplete-candidate-discovery":
+        message =
+          "Accessibility could not inspect every application window, so the requested title \"\(exactTitle)\" could not be ruled out."
+      default:
+        message = "The application does not currently show a window titled \"\(exactTitle)\"."
+      }
+      var data = outcome.diagnostic(reason: reason, exactTitle: exactTitle, matchCount: 0)
+      data["titleErrorCount"] = titleErrorCount
+      data["titleErrors"] = titleErrors
+      data["titleErrorsTruncated"] = titleErrorCount > titleErrors.count
       try fail(
-        ErrorCode.ambiguousTarget,
-        "The application shows \(matches.count) windows titled \"\(exactTitle)\"."
+        missingCode,
+        message,
+        data: data
       )
     }
     return matches[0]
   }
 
   private func accessibilityWindows(processID: pid_t) throws -> [AXUIElement] {
-    try requireAccessibility("Application window discovery")
+    let outcome = queryAccessibilityWindows(processID: processID)
+    try throwCriticalWindowQueryFailure(outcome, code: ErrorCode.automationFailed)
+    return outcome.realWindows
+  }
+
+  private func queryAccessibilityWindows(processID: pid_t) -> AXWindowQueryOutcome {
     let application = AXUIElementCreateApplication(processID)
-    var elements = axElements(try copyAXAttribute(application, kAXWindowsAttribute))
-    for attribute in [kAXMainWindowAttribute, kAXFocusedWindowAttribute] {
-      if let element = axElement(try copyOptionalAXAttribute(application, attribute)) {
-        elements.append(element)
+    let attributes = [kAXWindowsAttribute, kAXMainWindowAttribute, kAXFocusedWindowAttribute]
+    let queries = attributes.map { queryWindowAttribute(application, attribute: $0) }
+    let elements = uniqueAXElements(queries.flatMap(\.elements))
+    var roleQueries: [AXWindowRoleDiagnostic] = []
+    var realWindows: [AXUIElement] = []
+    var placeholderCount = 0
+    var otherRoleCount = 0
+    for element in elements {
+      var roleValue: CFTypeRef?
+      let roleError = AXUIElementCopyAttributeValue(element, kAXRoleAttribute as CFString, &roleValue)
+      let role = roleError == .success ? axString(roleValue) : nil
+      let roleValueValid = roleError == .success && role != nil
+      roleQueries.append(AXWindowRoleDiagnostic(error: roleError, role: role, valueValid: roleValueValid))
+      if role == kAXWindowRole || role == kAXSheetRole {
+        realWindows.append(element)
+      } else if role == kAXApplicationRole {
+        placeholderCount += 1
+      } else if roleValueValid {
+        otherRoleCount += 1
       }
     }
-    return try uniqueAXElements(elements).filter {
-      let role = axString(try copyAXAttribute($0, kAXRoleAttribute))
-      return role == kAXWindowRole || role == kAXSheetRole
+    return AXWindowQueryOutcome(
+      processID: processID,
+      trusted: AXIsProcessTrusted(),
+      queries: queries,
+      roleQueries: roleQueries,
+      realWindows: realWindows,
+      placeholderCount: placeholderCount,
+      otherRoleCount: otherRoleCount
+    )
+  }
+
+  private func throwCriticalWindowQueryFailure(_ outcome: AXWindowQueryOutcome, code: String) throws {
+    let reason = classifyAXWindowQuery(
+      queries: outcome.queries,
+      realWindowCount: outcome.realWindows.count,
+      placeholderCount: outcome.placeholderCount,
+      otherRoleCount: outcome.otherRoleCount,
+      matchingTitleCount: nil,
+      roleErrors: outcome.roleQueries.map(\.error)
+    )
+    if reason == "api-disabled" {
+      try fail(
+        ErrorCode.inputUnavailable,
+        "Application window discovery failed because the Accessibility API is disabled for the helper, even if the trust preflight appears granted. Re-enable Accessibility access and restart the helper.",
+        data: outcome.diagnostic(reason: reason)
+      )
     }
+    if reason == "target-non-response" {
+      try fail(
+        code,
+        "The target application did not complete one or more accessibility window queries.",
+        data: outcome.diagnostic(reason: reason)
+      )
+    }
+    if reason == "invalid-element" {
+      try fail(
+        code,
+        "The target application's accessibility object became invalid during window discovery.",
+        data: outcome.diagnostic(reason: reason)
+      )
+    }
+    if incompleteAXCandidateDiscovery(
+      queries: outcome.queries,
+      roleQueries: outcome.roleQueries,
+      titleErrorCount: 0
+    ) {
+      try fail(
+        code,
+        "Accessibility returned an incomplete or internally inconsistent window enumeration.",
+        data: outcome.diagnostic(reason: "incomplete-window-enumeration")
+      )
+    }
+    if reason == "window-query-failed" {
+      try fail(
+        code,
+        "Accessibility window discovery failed before the target returned a usable window.",
+        data: outcome.diagnostic(reason: reason)
+      )
+    }
+  }
+
+  private func queryWindowAttribute(
+    _ application: AXUIElement,
+    attribute: String
+  ) -> AXWindowAttributeDiagnostic {
+    var value: CFTypeRef?
+    let error = AXUIElementCopyAttributeValue(application, attribute as CFString, &value)
+    let elements: [AXUIElement]
+    let elementCount: Int
+    let valueValid: Bool
+    if error == .success {
+      if attribute == kAXWindowsAttribute {
+        let returnedElements = strictAXElements(value)
+        valueValid = returnedElements != nil
+        elementCount = returnedElements?.count ?? 0
+        elements = returnedElements ?? []
+      } else if let element = axElement(value) {
+        valueValid = true
+        elementCount = 1
+        elements = [element]
+      } else {
+        valueValid = false
+        elementCount = 0
+        elements = []
+      }
+    } else {
+      valueValid = false
+      elementCount = 0
+      elements = []
+    }
+    return AXWindowAttributeDiagnostic(
+      attribute: attribute,
+      error: error,
+      returnedType: cfTypeName(value),
+      elementCount: elementCount,
+      elements: elements,
+      valueValid: valueValid
+    )
   }
 
   private func windowTitleOf(_ element: AXUIElement) throws -> String {

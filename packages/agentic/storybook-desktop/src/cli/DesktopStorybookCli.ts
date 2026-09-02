@@ -200,7 +200,14 @@ export class DesktopStorybookCli {
   }
 
   run(platform: Platforms): Promise<void> {
-    return this.executeAction('run', platform);
+    if (platform !== 'macos') {
+      return this.executeAction('run', platform);
+    }
+    const instance: ResolvedDesktopStorybookInstance = {
+      ...this.instance,
+      macosXcconfigPath: writeMacOSInstanceConfig(this.config.projectRoot, this.instance),
+    };
+    return this.executeAction('run', platform, instance);
   }
 
   build(platform: Platforms): Promise<void> {
@@ -605,7 +612,7 @@ type MacOSRunningApplication = {
   processStartedAt: number;
 };
 
-async function writeMacOSApplicationLease(manifestPath: string, timeoutMs = 120_000): Promise<void> {
+export async function writeMacOSApplicationLease(manifestPath: string, timeoutMs = 120_000): Promise<void> {
   if (process.platform !== 'darwin') {
     throw new Error('A macOS application lease can only be written on macOS.');
   }
@@ -622,72 +629,121 @@ async function writeMacOSApplicationLease(manifestPath: string, timeoutMs = 120_
   }
 
   const runningApplication = await waitForMacOSApplication(application.bundleIdentifier, timeoutMs);
-  if (!Number.isFinite(runningApplication.processStartedAt) || runningApplication.processStartedAt <= 0) {
-    throw new Error(`Could not determine the start time for macOS process ${runningApplication.processId}.`);
-  }
+  writeMacOSApplicationLeaseFile(
+    {
+      bundleIdentifier: application.bundleIdentifier,
+      leaseNonce: application.leaseNonce,
+      leasePath: application.leasePath,
+    },
+    runningApplication,
+  );
+}
+
+export function writeMacOSApplicationLeaseFile(
+  application: { bundleIdentifier: string; leaseNonce: string; leasePath: string },
+  runningApplication: MacOSRunningApplication,
+): void {
+  validateMacOSRunningApplication(runningApplication);
   const processStartedAt = new Date(runningApplication.processStartedAt * 1000);
   const temporaryPath = `${application.leasePath}.${process.pid}.tmp`;
-  fs.mkdirSync(path.dirname(application.leasePath), { recursive: true });
-  fs.writeFileSync(
-    temporaryPath,
-    `${JSON.stringify(
-      {
-        bundleIdentifier: application.bundleIdentifier,
-        endpoint: 'macos',
-        executablePath: runningApplication.executablePath,
-        nonce: application.leaseNonce,
-        processId: runningApplication.processId,
-        processStartedAt: processStartedAt.toISOString(),
-        schemaVersion: 1,
-      },
-      null,
-      2,
-    )}\n`,
-  );
-  fs.renameSync(temporaryPath, application.leasePath);
+  fs.mkdirSync(path.dirname(application.leasePath), { mode: 0o700, recursive: true });
+  try {
+    fs.writeFileSync(
+      temporaryPath,
+      `${JSON.stringify(
+        {
+          bundleIdentifier: application.bundleIdentifier,
+          endpoint: 'macos',
+          executablePath: runningApplication.executablePath,
+          nonce: application.leaseNonce,
+          processId: runningApplication.processId,
+          processStartedAt: processStartedAt.toISOString(),
+          schemaVersion: 1,
+        },
+        null,
+        2,
+      )}\n`,
+      { mode: 0o600 },
+    );
+    fs.renameSync(temporaryPath, application.leasePath);
+    fs.chmodSync(application.leasePath, 0o600);
+  } finally {
+    fs.rmSync(temporaryPath, { force: true });
+  }
 }
 
 async function waitForMacOSApplication(bundleIdentifier: string, timeoutMs: number): Promise<MacOSRunningApplication> {
   const deadline = Date.now() + timeoutMs;
   let lastError: unknown;
   do {
+    let output: string;
     try {
-      const applications = JSON.parse(
-        await runProcess('/usr/bin/osascript', [
-          '-l',
-          'JavaScript',
-          '-e',
-          [
-            "ObjC.import('AppKit');",
-            'function run(argv) {',
-            '  const applications = $.NSRunningApplication.runningApplicationsWithBundleIdentifier(argv[0]);',
-            '  const result = [];',
-            '  for (let index = 0; index < applications.count; index += 1) {',
-            '    const application = applications.objectAtIndex(index);',
-            '    result.push({',
-            '      executablePath: ObjC.unwrap(application.executableURL.path),',
-            '      processId: Number(application.processIdentifier),',
-            '      processStartedAt: Number(application.launchDate.timeIntervalSince1970),',
-            '    });',
-            '  }',
-            '  return JSON.stringify(result);',
-            '}',
-          ].join('\n'),
-          bundleIdentifier,
-        ]),
-      ) as MacOSRunningApplication[];
-      if (applications.length === 1) {
-        return applications[0];
-      }
-      if (applications.length > 1) {
-        throw new Error(`More than one running application has bundle identifier "${bundleIdentifier}".`);
-      }
+      output = await runProcess('/usr/bin/osascript', [
+        '-l',
+        'JavaScript',
+        '-e',
+        [
+          "ObjC.import('AppKit');",
+          'function run(argv) {',
+          '  const applications = $.NSRunningApplication.runningApplicationsWithBundleIdentifier(argv[0]);',
+          '  const result = [];',
+          '  for (let index = 0; index < applications.count; index += 1) {',
+          '    const application = applications.objectAtIndex(index);',
+          '    const executableURL = application.executableURL;',
+          '    const launchDate = application.launchDate;',
+          '    result.push({',
+          '      executablePath: executableURL ? ObjC.unwrap(executableURL.path) : null,',
+          '      processId: Number(application.processIdentifier),',
+          '      processStartedAt: launchDate ? Number(launchDate.timeIntervalSince1970) : null,',
+          '    });',
+          '  }',
+          '  return JSON.stringify(result);',
+          '}',
+        ].join('\n'),
+        bundleIdentifier,
+      ]);
     } catch (error) {
       lastError = error;
+      await delay(250);
+      continue;
+    }
+    const applications = parseMacOSRunningApplications(output, bundleIdentifier);
+    if (applications.length === 1) {
+      return applications[0];
     }
     await delay(250);
   } while (Date.now() < deadline);
   throw new Error(`Timed out waiting for the macOS application "${bundleIdentifier}"${lastError ? `: ${errorMessage(lastError)}` : '.'}`);
+}
+
+export function parseMacOSRunningApplications(output: string, bundleIdentifier: string): MacOSRunningApplication[] {
+  const value: unknown = JSON.parse(output);
+  if (!Array.isArray(value)) {
+    throw new Error(`The macOS application query for "${bundleIdentifier}" returned a non-array result.`);
+  }
+  if (value.length > 1) {
+    throw new Error(`More than one running application has bundle identifier "${bundleIdentifier}".`);
+  }
+  return value.map((entry) => {
+    if (!entry || typeof entry !== 'object') {
+      throw new Error(`The macOS application query for "${bundleIdentifier}" returned an invalid application record.`);
+    }
+    const application = entry as Partial<MacOSRunningApplication>;
+    validateMacOSRunningApplication(application);
+    return application as MacOSRunningApplication;
+  });
+}
+
+function validateMacOSRunningApplication(application: Partial<MacOSRunningApplication>): void {
+  if (typeof application.executablePath !== 'string' || !application.executablePath) {
+    throw new Error('The running macOS application does not expose an executable path.');
+  }
+  if (!Number.isInteger(application.processId) || (application.processId ?? 0) <= 0) {
+    throw new Error('The running macOS application does not expose a valid process identifier.');
+  }
+  if (!Number.isFinite(application.processStartedAt) || (application.processStartedAt ?? 0) <= 0) {
+    throw new Error(`Could not determine the start time for macOS process ${String(application.processId ?? 'unknown')}.`);
+  }
 }
 
 function runProcess(command: string, args: readonly string[]): Promise<string> {

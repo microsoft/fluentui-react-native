@@ -30,6 +30,8 @@ import type {
 } from './types.js';
 import {
   buildMacOSDriver,
+  hashMacOSDriverSources,
+  macOSBundleForExecutable,
   probeMacOSToolchain,
   resolveMacOSExecutablePath,
   resolveMacOSSigningIdentity,
@@ -45,7 +47,7 @@ export const FURN_DESKTOP_DRIVER_HELPER_PATH = 'FURN_DESKTOP_DRIVER_HELPER_PATH'
 export const FURN_DESKTOP_DRIVER_INSTALL_ROOT = 'FURN_DESKTOP_DRIVER_INSTALL_ROOT';
 export const FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY = 'FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY';
 
-const buildCoordinatorVersion = 1;
+const buildCoordinatorVersion = 2;
 
 type NativeArtifactManifest = Omit<NativeDriverArtifact, 'artifactRoot' | 'executablePath' | 'origin'> & {
   executable: string;
@@ -122,7 +124,7 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
     const stagingRoot = path.join(context.cacheRoot, 'v1', 'staging', `${buildFingerprint}-${process.pid}-${randomUUID()}`);
     fs.mkdirSync(stagingRoot, { recursive: true });
     try {
-      const buildId = `${buildFingerprint.slice(0, 16)}-${Date.now().toString(36)}`;
+      const buildId = buildFingerprint;
       const built = await build(buildId, stagingRoot);
       const handshake = await readOneShotHandshake(built.executablePath, options.signal);
       validateHandshake(handshake, {
@@ -175,10 +177,19 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
       try {
         fs.renameSync(publicationRoot, artifactRoot);
       } catch (error) {
-        if ((error as NodeJS.ErrnoException).code !== 'EEXIST') {
+        const code = (error as NodeJS.ErrnoException).code;
+        if (code !== 'EEXIST' && code !== 'ENOTEMPTY') {
           throw error;
         }
-        fs.rmSync(publicationRoot, { force: true, recursive: true });
+        try {
+          const existing = readArtifact(artifactRoot, 'built');
+          validateCachedArtifactContext(existing, context);
+          await verifyNativeDriverArtifact(existing, options.signal);
+          fs.rmSync(publicationRoot, { force: true, recursive: true });
+        } catch (collisionError) {
+          quarantinePublishedArtifact(context.cacheRoot, artifactRoot, collisionError);
+          fs.renameSync(publicationRoot, artifactRoot);
+        }
       }
       writeSelection(context.cacheRoot, context.compatibilityKey, artifactRoot);
       assertManagedPath(artifactCompatibilityRoot(context), artifactRoot, 'directory');
@@ -189,6 +200,21 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
   } finally {
     lock.release();
   }
+}
+
+function quarantinePublishedArtifact(cacheRoot: string, artifactRoot: string, error: unknown): void {
+  const trashRoot = path.join(cacheRoot, 'v1', 'trash');
+  fs.mkdirSync(trashRoot, { recursive: true });
+  assertManagedPath(cacheRoot, trashRoot, 'directory');
+  const quarantinePath = path.join(trashRoot, `${Date.now()}-${randomUUID()}-${path.basename(artifactRoot)}`);
+  fs.renameSync(artifactRoot, quarantinePath);
+  atomicWriteJson(`${quarantinePath}.error.json`, {
+    artifactRoot,
+    message: error instanceof Error ? error.message : String(error),
+  });
+  process.emitWarning(`Quarantined invalid published native driver artifact "${artifactRoot}".`, {
+    code: 'FURN_NATIVE_DRIVER_CACHE_INVALID',
+  });
 }
 
 export async function resolveNativeDesktopDriver(options: NativeDriverResolveOptions): Promise<NativeDriverArtifact> {
@@ -256,7 +282,7 @@ async function resolveBuildContext(options: NativeDriverBuildOptions): Promise<N
     canonicalJson({
       coordinatorVersion: buildCoordinatorVersion,
       protocol: sha256(fs.readFileSync(path.join(nativeRoot, 'protocol.json'))),
-      provider: hashTree(providerRoot),
+      provider: provider === 'macos' ? hashMacOSDriverSources(providerRoot) : hashTree(providerRoot),
     }),
   );
   const configuredSigningIdentity =
@@ -445,7 +471,7 @@ async function verifyDirectArtifact(
   return {
     architecture: context.architecture,
     artifactId,
-    artifactRoot: path.dirname(executablePath),
+    artifactRoot: context.provider === 'macos' ? macOSBundleForExecutable(executablePath) : path.dirname(executablePath),
     buildFingerprint: handshake.buildId,
     buildId: handshake.buildId,
     compatibilityKey: context.compatibilityKey,

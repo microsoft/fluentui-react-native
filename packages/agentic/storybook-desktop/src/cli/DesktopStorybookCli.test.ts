@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 
 import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
@@ -9,7 +10,7 @@ import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '..
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner';
 import { createDesktopStorybookCommand } from './createDesktopStorybookCommand';
-import { DesktopStorybookCli } from './DesktopStorybookCli';
+import { DesktopStorybookCli, parseMacOSRunningApplications, writeMacOSApplicationLeaseFile } from './DesktopStorybookCli';
 
 const storybookRoot = path.resolve(__dirname, '../../../../../apps/storybook');
 const nativeDriverArtifact: NativeDriverArtifact = {
@@ -41,6 +42,62 @@ const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'w
   platformManifestDigest: `${platform}-digest`,
   portablePlanDigest: 'portable-digest',
   schemaVersion: 1 as const,
+});
+
+describe('macOS application leases', () => {
+  test('validates exact running application records and rejects ambiguity', () => {
+    expect(
+      parseMacOSRunningApplications(
+        JSON.stringify([{ executablePath: '/Applications/Storybook.app/Contents/MacOS/Storybook', processId: 42, processStartedAt: 1 }]),
+        'com.example.storybook',
+      ),
+    ).toEqual([{ executablePath: '/Applications/Storybook.app/Contents/MacOS/Storybook', processId: 42, processStartedAt: 1 }]);
+    expect(() =>
+      parseMacOSRunningApplications(
+        JSON.stringify([
+          { executablePath: '/Applications/First.app/Contents/MacOS/First', processId: 1, processStartedAt: 1 },
+          { executablePath: '/Applications/Second.app/Contents/MacOS/Second', processId: 2, processStartedAt: 2 },
+        ]),
+        'com.example.storybook',
+      ),
+    ).toThrow('More than one running application');
+    expect(() =>
+      parseMacOSRunningApplications(
+        JSON.stringify([{ executablePath: null, processId: 42, processStartedAt: null }]),
+        'com.example.storybook',
+      ),
+    ).toThrow('does not expose an executable path');
+  });
+
+  test('writes an atomic owner-only lease', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-macos-lease-'));
+    const leasePath = path.join(root, 'state', 'application.json');
+    try {
+      writeMacOSApplicationLeaseFile(
+        {
+          bundleIdentifier: 'com.example.storybook',
+          leaseNonce: 'nonce',
+          leasePath,
+        },
+        {
+          executablePath: '/Applications/Storybook.app/Contents/MacOS/Storybook',
+          processId: 42,
+          processStartedAt: 1,
+        },
+      );
+      expect(JSON.parse(fs.readFileSync(leasePath, 'utf8'))).toMatchObject({
+        bundleIdentifier: 'com.example.storybook',
+        nonce: 'nonce',
+        processId: 42,
+        schemaVersion: 1,
+      });
+      if (process.platform !== 'win32') {
+        expect(fs.statSync(leasePath).mode & 0o777).toBe(0o600);
+      }
+    } finally {
+      fs.rmSync(root, { force: true, recursive: true });
+    }
+  });
 });
 
 class RecordingRunner implements DesktopCommandRunner {
@@ -133,6 +190,25 @@ describe('DesktopStorybookCli', () => {
       args: ['run', '--platform', 'windows', '--solution', 'windows/AgenticStorybook.sln'],
     });
     await expect(cli.build('win32')).rejects.toThrow('build is not configured for win32');
+  });
+
+  test('runs the standalone macOS app with the enlistment-specific identity', async () => {
+    const runner = new RecordingRunner();
+    const cli = new DesktopStorybookCli(makeConfig({ macos: { run: { command: 'launch-storybook' } } }), {
+      ...nativeDriverTestOptions,
+      runner,
+    });
+
+    await cli.run('macos');
+
+    expect(runner.foreground[0]).toMatchObject({
+      command: 'launch-storybook',
+      env: {
+        [FURN_STORYBOOK_BUNDLE_IDENTIFIER]: cli.instance.bundleIdentifier,
+        [FURN_STORYBOOK_INSTANCE_ID]: cli.instance.id,
+        XCODE_XCCONFIG_FILE: path.join(storybookRoot, 'macos', '.storybook-desktop', `${cli.instance.id}.xcconfig`),
+      },
+    });
   });
 
   test('always runs app and process cleanup when the reusable smoke lifecycle fails', async () => {

@@ -160,7 +160,7 @@ final class Host {
       } catch is CancelledError {
         cancelled = true
       } catch let error as HelperError {
-        writeError(id: request.id, command: request.command, code: error.code, message: error.message)
+        writeError(id: request.id, command: request.command, code: error.code, message: error.message, data: error.data)
       } catch {
         writeError(
           id: request.id,
@@ -222,19 +222,35 @@ final class Host {
     }
   }
 
-  private func writeError(id: String, command: String, code: String, message: String) {
-    let response: JSONObject = [
+  private func writeError(
+    id: String,
+    command: String,
+    code: String,
+    message: String,
+    data: JSONObject? = nil
+  ) {
+    var errorData = data ?? [:]
+    errorData["command"] = bounded(command, bytes: 256)
+    var response: JSONObject = [
       "type": "response",
       "id": id,
       "error": [
         "code": code,
         "message": bounded(message, bytes: 4096),
-        "data": [
-          "command": bounded(command, bytes: 256),
-        ],
+        "data": errorData,
       ],
     ]
     do {
+      if try serializeJSON(response).count > Framing.maximumJSONBytes {
+        response["error"] = [
+          "code": code,
+          "message": bounded(message, bytes: 4096),
+          "data": [
+            "command": bounded(command, bytes: 256),
+            "diagnosticsTruncated": true,
+          ],
+        ]
+      }
       try writer?.writeJSON(response)
     } catch {
       writeDiagnostic("Native error write failed: \(error)")

@@ -13,6 +13,7 @@ export type NativeDriverWireProtocol = {
 
 export type NativeDriverSigning = {
   certificateHash?: string;
+  designatedRequirement?: string;
   identity?: string;
   mode: 'adhoc' | 'none' | 'signed';
   teamId?: string;

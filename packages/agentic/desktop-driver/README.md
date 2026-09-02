@@ -56,8 +56,29 @@ Without an explicit identity it uses an ad hoc signature and warns that TCC
 permissions may not survive rebuilds. Set the identity with the CLI option or
 `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`. Stable-signed artifacts are
 partitioned by the resolved leaf-certificate SHA-1 hash, and resolution verifies
-that hash plus the recorded authority and team identifier against the actual
-bundle signature.
+that hash plus the recorded authority, team identifier, designated requirement,
+Hardened Runtime flag, and secure timestamp against the actual bundle signature.
+Release builds hash and stage only `Package.swift`, optional
+`Package.resolved`, and Swift files beneath `Sources`; local `.build` output
+cannot invalidate the cache. Ad hoc release output is stripped of
+path-dependent local symbols so identical inputs produce the same binary and
+cdhash.
+
+An Apple Development identity is the preferred local identity. A contributor
+without an Apple account can create one reusable local certificate in Keychain
+Access through Certificate Assistant by choosing a self-signed identity with
+the Code Signing certificate type, then trusting that certificate for code
+signing. Confirm that macOS exposes it before configuring the driver:
+
+```sh
+security find-identity -v -p codesigning
+```
+
+Do not recreate that certificate for each build: its leaf hash is part of the
+artifact compatibility identity and its designated requirement keeps the
+signing identity stable across rebuilt binaries. A local self-signed identity
+is for development only; CI and distributed artifacts require organization
+signing policy.
 
 Resolve a verified cache artifact or an operator-provided prebuilt:
 
@@ -77,6 +98,57 @@ before it receives native commands.
 The default macOS store is beneath
 `~/Library/Caches/com.microsoft.fluentui-react-native.desktop-driver/native`.
 `--helper-path` accepts either the signed `.app` bundle or its executable.
+
+Inspect permissions from the same verified helper artifact without prompting:
+
+```sh
+desktop-driver doctor --platform macos --permissions
+```
+
+The versioned JSON reports Accessibility, PostEvent, and Screen Recording
+preflight state; helper PID, parent PID, executable, and app bundle; and
+Security.framework signing evidence when macOS exposes it. Signing fields that
+cannot be read in process are marked unavailable rather than inferred.
+`--prompt` is deliberately separate and interactive:
+
+```sh
+desktop-driver doctor --platform macos --permissions --prompt
+```
+
+Prompt mode may request Accessibility and Screen Recording access. Ordinary
+build, resolve, doctor, handshake, self-test, and stdio commands never request
+permission. Restart the helper after changing Screen Recording access.
+
+The V1 helper is launched directly by Node. macOS can therefore attribute
+Accessibility, PostEvent, and Screen Recording operations to the responsible
+parent application, such as Terminal or an IDE, even though the helper has its
+own bundle and signature. Grant the parent application the required Privacy &
+Security permissions and interpret the diagnostic `parentPid`, helper
+signature, and preflight fields together; a `true` preflight alone does not
+prove that the helper owns the TCC grant.
+
+Launching the helper through LaunchServices gives it a separate TCC identity,
+but qualification on macOS 26 showed that doing so does not repair a
+placeholder-only AX service state. A persistent broker is therefore deferred
+until platform evidence shows that it improves authority. Screen capture is a
+degradable capability: when Screen Recording preflight is false the helper does
+not advertise capture features, while semantic and input automation can
+continue.
+
+For manual reset-and-reprompt diagnosis, macOS supports `tccutil reset` for
+`Accessibility`, `ScreenCapture`, and `PostEvent`. A bundle-scoped reset affects
+only the actual TCC subject; if Terminal, Node, or an IDE was attributed as the
+responsible process, resetting the helper bundle identifier may not change that
+grant. Never edit `TCC.db` or disable SIP.
+
+Authoritative native macOS CI needs a logged-in Aqua session. Prefer a
+self-hosted, managed Mac with a stable signing identity and an MDM PPPC policy
+for Accessibility and PostEvent. Screen Recording may still require user
+approval, so capture-only evidence should skip explicitly when unavailable.
+GitHub-hosted macOS smoke remains useful regression signal but is not proof that
+a fresh installation can acquire or retain TCC authorization. Distributed
+prebuilt helpers must use Developer ID signing, Hardened Runtime, a secure
+timestamp, notarization, and stapling.
 
 ## Authoring story tests
 
@@ -209,6 +281,7 @@ desktop-driver serve --manifest story-manifest.windows.json --target fake-window
 desktop-driver build-driver --platform windows
 desktop-driver resolve-driver --platform win32 --build-policy never
 desktop-driver doctor --platform windows
+desktop-driver doctor --platform macos --permissions
 
 desktop-driver stories list \
   --url http://127.0.0.1:4444 \
