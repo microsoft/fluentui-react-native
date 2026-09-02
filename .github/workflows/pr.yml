@@ -189,8 +189,6 @@ jobs:
     name: macOS Storybook PR
     runs-on: macos-26
     timeout-minutes: 40
-    env:
-      FURN_DESKTOP_DRIVER_CACHE_ROOT: ${{ runner.temp }}/furn-desktop-driver-native
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
@@ -287,6 +285,7 @@ jobs:
             exit 1
           fi
           echo "FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY=$signing_identity" >> "$GITHUB_ENV"
+          echo "FURN_DESKTOP_DRIVER_CACHE_ROOT=$RUNNER_TEMP/furn-desktop-driver-native" >> "$GITHUB_ENV"
 
       - name: Build and diagnose the macOS Desktop Driver
         working-directory: apps/storybook
