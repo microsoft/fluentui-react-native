@@ -657,6 +657,23 @@
       "candidateStatus": "review-required"
     },
     {
+      "component": "label",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "list-item",
       "lifecycle": "implemented",
       "conformance": "reviewed",

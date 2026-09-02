@@ -1,0 +1,53 @@
+schemaVersion: 1
+component: label
+implementation: label.styles.ts
+
+statePrecedence:
+  - size
+  - weight
+  - disabled
+
+bindings:
+  root:
+    layout:
+      alignment: center
+      alignSelf: flex-start
+      direction: row
+      padding: 0
+    gap:
+      small: spacing.componentBase50
+      medium: spacing.componentBase50
+      large: spacing.componentBase50
+  content:
+    fontFamily: fontFamily.functional
+    size:
+      small: { fontSize: fontSize.functionalBodySmall, lineHeight: lineHeight.functionalBodySmall }
+      medium: { fontSize: fontSize.functionalBodyMedium, lineHeight: lineHeight.functionalBodyMedium }
+      large: { fontSize: fontSize.functionalBodyLarge, lineHeight: lineHeight.functionalBodyLarge }
+    weight:
+      regular: fontWeight.functionalRegular
+      strong: fontWeight.functionalSemibold
+    color:
+      rest: color.foregroundNeutralPrimary
+      disabled: color.foregroundNeutralDisabled
+  requiredIndicator:
+    typography: identical to content at the same size and weight
+    color:
+      rest: color.foregroundDangerPrimary
+      disabled: color.foregroundNeutralDisabled
+
+notes:
+  - property: root height
+    reason: |
+      Height is resultant from the resolved line height at each size, so no explicit height
+      is bound. Small, medium, and large therefore track the functional body line heights.
+  - property: required indicator color
+    reason: |
+      The indicator loses its danger foreground while disabled and takes the same disabled
+      neutral foreground as the label text, because the whole field is unavailable.
+  - property: gap
+    reason: |
+      The gap is uniform across sizes so the indicator stays adjacent to the last word of the
+      label and the pair keeps reading as one cluster.
+
+tokenGaps: []
