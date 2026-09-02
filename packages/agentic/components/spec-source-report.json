@@ -119,11 +119,7 @@
       "toolbar",
       "tooltip"
     ],
-    "added": [
-      "persona",
-      "presence-badge",
-      "toast"
-    ],
+    "added": ["persona", "presence-badge", "toast"],
     "removed": []
   },
   "local": {
@@ -139,10 +135,13 @@
       "divider",
       "input",
       "interaction-tag",
+      "label",
+      "link",
       "list-item",
       "listbox-item",
       "menu-item",
       "nav-item",
+      "popover",
       "progress-bar",
       "radio",
       "search-box",
@@ -167,10 +166,13 @@
       "divider",
       "input",
       "interaction-tag",
+      "label",
+      "link",
       "list-item",
       "listbox-item",
       "menu-item",
       "nav-item",
+      "popover",
       "progress-bar",
       "radio",
       "search-box",
@@ -190,13 +192,11 @@
       "dropdown",
       "field",
       "info-label",
-      "label",
       "list",
       "menu",
       "menu-button",
       "message-bar",
       "nav",
-      "popover",
       "radio-group",
       "scrollbar",
       "select",
@@ -216,13 +216,11 @@
       "dropdown",
       "field",
       "info-label",
-      "label",
       "list",
       "menu",
       "menu-button",
       "message-bar",
       "nav",
-      "popover",
       "radio-group",
       "scrollbar",
       "select",
@@ -449,11 +447,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/accessibility.md",
-          "web/interaction.md",
-          "web/tokens.yaml"
-        ]
+        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
       },
       "candidateStatus": "review-required"
     },
@@ -504,13 +498,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "SKILL.md",
-          "usage.md",
-          "web/accessibility.md",
-          "web/interaction.md",
-          "web/tokens.yaml"
-        ]
+        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
       },
       "candidateStatus": "review-required"
     },
@@ -527,11 +515,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/accessibility.md",
-          "web/interaction.md",
-          "web/tokens.yaml"
-        ]
+        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
       },
       "candidateStatus": "review-required"
     },
@@ -548,10 +532,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/accessibility.md",
-          "web/interaction.md"
-        ]
+        "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -568,10 +549,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/accessibility.md",
-          "web/interaction.md"
-        ]
+        "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -588,9 +566,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/interaction.md"
-        ]
+        "modified": ["web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -631,9 +607,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/accessibility.md"
-        ]
+        "modified": ["web/accessibility.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -672,6 +646,15 @@
       "candidateStatus": "current"
     },
     {
+      "component": "link",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": null,
+      "originDrift": null,
+      "candidateStatus": "unchecked"
+    },
+    {
       "component": "list-item",
       "lifecycle": "implemented",
       "conformance": "reviewed",
@@ -684,10 +667,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/accessibility.md",
-          "web/interaction.md"
-        ]
+        "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -704,10 +684,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/accessibility.md",
-          "web/interaction.md"
-        ]
+        "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -724,10 +701,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/accessibility.md",
-          "web/interaction.md"
-        ]
+        "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -778,9 +752,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/tokens.yaml"
-        ]
+        "modified": ["web/tokens.yaml"]
       },
       "candidateStatus": "review-required"
     },
@@ -797,9 +769,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/interaction.md"
-        ]
+        "modified": ["web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -867,10 +837,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/interaction.md",
-          "web/tokens.yaml"
-        ]
+        "modified": ["web/interaction.md", "web/tokens.yaml"]
       },
       "candidateStatus": "review-required"
     },
@@ -887,11 +854,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/accessibility.md",
-          "web/interaction.md",
-          "web/tokens.yaml"
-        ]
+        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
       },
       "candidateStatus": "review-required"
     },
@@ -925,10 +888,7 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": [
-          "web/accessibility.md",
-          "web/interaction.md"
-        ]
+        "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },

@@ -112,6 +112,35 @@ export { renderInteractionTag_unstable } from './components/interaction-tag/rend
 export { useInteractionTagStyles_unstable } from './components/interaction-tag/useInteractionTagStyles';
 export { useInteractionTag_unstable } from './components/interaction-tag/useInteractionTag';
 
+export { Label } from './components/label/label';
+export type {
+  LabelExposedViewProps,
+  LabelProps,
+  LabelSize,
+  LabelSlots,
+  LabelState,
+  LabelStateProps,
+  LabelWeight,
+} from './components/label/label.types';
+export { renderLabel_unstable } from './components/label/renderLabel';
+export { useLabelStyles_unstable } from './components/label/useLabelStyles';
+export { useLabel_unstable } from './components/label/useLabel';
+
+export { Link } from './components/link/link';
+export type {
+  LinkFocusProps,
+  LinkIconProps,
+  LinkNavigationProps,
+  LinkProps,
+  LinkSlots,
+  LinkState,
+  LinkStateProps,
+  LinkTypeSet,
+} from './components/link/link.types';
+export { renderLink_unstable } from './components/link/renderLink';
+export { useLinkStyles_unstable } from './components/link/useLinkStyles';
+export { useLink_unstable } from './components/link/useLink';
+
 export { ListItem } from './components/list-item/list-item';
 export type {
   ListItemProps,
@@ -161,6 +190,12 @@ export type {
 export { renderNavItem_unstable } from './components/nav-item/renderNavItem';
 export { useNavItemStyles_unstable } from './components/nav-item/useNavItemStyles';
 export { useNavItem_unstable } from './components/nav-item/useNavItem';
+
+export { Popover } from './components/popover/popover';
+export type { PopoverPosition, PopoverProps, PopoverSlots, PopoverState, PopoverTriggerProps } from './components/popover/popover.types';
+export { renderPopover_unstable } from './components/popover/renderPopover';
+export { usePopoverStyles_unstable } from './components/popover/usePopoverStyles';
+export { usePopover_unstable } from './components/popover/usePopover';
 
 export { ProgressBar } from './components/progress-bar/progress-bar';
 export type {
