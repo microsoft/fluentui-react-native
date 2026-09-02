@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/avatar
 
+## 1.14.6
+
+### Patch Changes
+
+- Updated dependencies [0a6286c]
+  - @fluentui-react-native/design@0.4.1
+  - @fluentui-react-native/badge@0.12.12
+  - @fluentui-react-native/framework@0.17.6
+  - @fluentui-react-native/icon@0.22.12
+
 ## 1.14.5
 
 ### Patch Changes
