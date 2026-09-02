@@ -69,6 +69,20 @@ export { renderCheckbox_unstable } from './components/checkbox/renderCheckbox';
 export { useCheckboxStyles_unstable } from './components/checkbox/useCheckboxStyles';
 export { useCheckbox_unstable } from './components/checkbox/useCheckbox';
 
+export { DestructiveButton } from './components/destructive-button/destructive-button';
+export type {
+  DestructiveButtonAppearance,
+  DestructiveButtonIconPosition,
+  DestructiveButtonProps,
+  DestructiveButtonShape,
+  DestructiveButtonSize,
+  DestructiveButtonSlots,
+  DestructiveButtonState,
+} from './components/destructive-button/destructive-button.types';
+export { renderDestructiveButton_unstable } from './components/destructive-button/renderDestructiveButton';
+export { useDestructiveButtonStyles_unstable } from './components/destructive-button/useDestructiveButtonStyles';
+export { useDestructiveButton_unstable } from './components/destructive-button/useDestructiveButton';
+
 export { Divider } from './components/divider/divider';
 export type { DividerLayout, DividerProps, DividerSlots, DividerState } from './components/divider/divider.types';
 export { renderDivider_unstable } from './components/divider/renderDivider';

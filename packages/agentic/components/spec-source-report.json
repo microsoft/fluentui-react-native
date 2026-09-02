@@ -119,7 +119,11 @@
       "toolbar",
       "tooltip"
     ],
-    "added": ["persona", "presence-badge", "toast"],
+    "added": [
+      "persona",
+      "presence-badge",
+      "toast"
+    ],
     "removed": []
   },
   "local": {
@@ -131,6 +135,7 @@
       "button",
       "card",
       "checkbox",
+      "destructive-button",
       "divider",
       "input",
       "list-item",
@@ -155,6 +160,7 @@
       "button",
       "card",
       "checkbox",
+      "destructive-button",
       "divider",
       "input",
       "list-item",
@@ -173,7 +179,6 @@
     "implementationGap": [
       "breadcrumb",
       "combobox",
-      "destructive-button",
       "dialog",
       "drawer",
       "dropdown",
@@ -204,7 +209,6 @@
     "noLocalContract": [
       "breadcrumb",
       "combobox",
-      "destructive-button",
       "dialog",
       "drawer",
       "dropdown",
@@ -447,7 +451,11 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+        "modified": [
+          "web/accessibility.md",
+          "web/interaction.md",
+          "web/tokens.yaml"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -498,7 +506,13 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["SKILL.md", "usage.md", "web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+        "modified": [
+          "SKILL.md",
+          "usage.md",
+          "web/accessibility.md",
+          "web/interaction.md",
+          "web/tokens.yaml"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -515,7 +529,11 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+        "modified": [
+          "web/accessibility.md",
+          "web/interaction.md",
+          "web/tokens.yaml"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -532,7 +550,10 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": [
+          "web/accessibility.md",
+          "web/interaction.md"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -549,7 +570,29 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": [
+          "web/accessibility.md",
+          "web/interaction.md"
+        ]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "destructive-button",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": [
+          "web/interaction.md"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -590,7 +633,9 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md"]
+        "modified": [
+          "web/accessibility.md"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -607,7 +652,10 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": [
+          "web/accessibility.md",
+          "web/interaction.md"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -624,7 +672,10 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": [
+          "web/accessibility.md",
+          "web/interaction.md"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -641,7 +692,10 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": [
+          "web/accessibility.md",
+          "web/interaction.md"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -658,7 +712,9 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/tokens.yaml"]
+        "modified": [
+          "web/tokens.yaml"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -675,7 +731,9 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/interaction.md"]
+        "modified": [
+          "web/interaction.md"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -726,7 +784,10 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/interaction.md", "web/tokens.yaml"]
+        "modified": [
+          "web/interaction.md",
+          "web/tokens.yaml"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -743,7 +804,11 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md", "web/tokens.yaml"]
+        "modified": [
+          "web/accessibility.md",
+          "web/interaction.md",
+          "web/tokens.yaml"
+        ]
       },
       "candidateStatus": "review-required"
     },
@@ -777,7 +842,10 @@
       "originDrift": {
         "added": [],
         "removed": [],
-        "modified": ["web/accessibility.md", "web/interaction.md"]
+        "modified": [
+          "web/accessibility.md",
+          "web/interaction.md"
+        ]
       },
       "candidateStatus": "review-required"
     },

@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 2,
+  "component": "destructive-button",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-09-02",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:destructive-button",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["mobile", "shared", "web"],
+      "surfacesConsulted": ["mobile", "shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "mobile:android:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/mobile/android/accessibility.md",
+          "marketplaceBlobSha": "1603e91b5870db1ee4c2b597f38bfcf9b0e5b319",
+          "marketplaceSha256": "9871d49d7197cf40f29c8c09a35ef33d494516bde6464b2c441cc54214af6ef8",
+          "originPath": "plugins/components/skills/destructive-button/mobile/android/accessibility.md",
+          "originBlobSha": "1603e91b5870db1ee4c2b597f38bfcf9b0e5b319",
+          "originSha256": "9871d49d7197cf40f29c8c09a35ef33d494516bde6464b2c441cc54214af6ef8",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:android:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/mobile/android/interaction.md",
+          "marketplaceBlobSha": "6f04852df1314adf3cff7e7acadb7e4b1a4e0545",
+          "marketplaceSha256": "76f50ad60ffdcd1e891323e78da932dc246ebfeb07b05fa8dbfa31ce96200c93",
+          "originPath": "plugins/components/skills/destructive-button/mobile/android/interaction.md",
+          "originBlobSha": "6f04852df1314adf3cff7e7acadb7e4b1a4e0545",
+          "originSha256": "76f50ad60ffdcd1e891323e78da932dc246ebfeb07b05fa8dbfa31ce96200c93",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:ios:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/mobile/ios/accessibility.md",
+          "marketplaceBlobSha": "0526b4a40a528e10e652d12795ad8a2723da8cec",
+          "marketplaceSha256": "25db466cc31f66184cbc43d2cff1821f6d6edd4fc8b747074a4971f74cff2f0f",
+          "originPath": "plugins/components/skills/destructive-button/mobile/ios/accessibility.md",
+          "originBlobSha": "0526b4a40a528e10e652d12795ad8a2723da8cec",
+          "originSha256": "25db466cc31f66184cbc43d2cff1821f6d6edd4fc8b747074a4971f74cff2f0f",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:ios:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/mobile/ios/interaction.md",
+          "marketplaceBlobSha": "7769f05147cd2584e58482115b3a2258b54e9791",
+          "marketplaceSha256": "cacc0d5d038cd3b0a3ea982391021a55ef3883d4d9e4e22a188a118d3c1ac682",
+          "originPath": "plugins/components/skills/destructive-button/mobile/ios/interaction.md",
+          "originBlobSha": "7769f05147cd2584e58482115b3a2258b54e9791",
+          "originSha256": "cacc0d5d038cd3b0a3ea982391021a55ef3883d4d9e4e22a188a118d3c1ac682",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:overview",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/mobile/overview.md",
+          "marketplaceBlobSha": "9432005c544aa945ebdd5129c57c9b28abf3e589",
+          "marketplaceSha256": "2f56463dad7ab7d16a34ecfceac5298f58e7bb35e3bafea5d792001269e1dac7",
+          "originPath": "plugins/components/skills/destructive-button/mobile/overview.md",
+          "originBlobSha": "9432005c544aa945ebdd5129c57c9b28abf3e589",
+          "originSha256": "2f56463dad7ab7d16a34ecfceac5298f58e7bb35e3bafea5d792001269e1dac7",
+          "contentDiffers": false
+        },
+        {
+          "role": "mobile:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/mobile/tokens.yaml",
+          "marketplaceBlobSha": "ba0f4b471dd730acfed5d55bd7a56cdfd728acbf",
+          "marketplaceSha256": "ef00990c666a5c07ad469dc551d26a804d3e10219fe4f31faf100d22da4354d5",
+          "originPath": "plugins/components/skills/destructive-button/mobile/tokens.yaml",
+          "originBlobSha": "ba0f4b471dd730acfed5d55bd7a56cdfd728acbf",
+          "originSha256": "ef00990c666a5c07ad469dc551d26a804d3e10219fe4f31faf100d22da4354d5",
+          "contentDiffers": false
+        },
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/SKILL.md",
+          "marketplaceBlobSha": "b7862b1b563a02b5fbbb9b59543f54d8c12f1a04",
+          "marketplaceSha256": "89ee94f9303d93cf1191793191353a00e83bc4948c5cd4a60d250e4ea86c2427",
+          "originPath": "plugins/components/skills/destructive-button/SKILL.md",
+          "originBlobSha": "b7862b1b563a02b5fbbb9b59543f54d8c12f1a04",
+          "originSha256": "89ee94f9303d93cf1191793191353a00e83bc4948c5cd4a60d250e4ea86c2427",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/usage.md",
+          "marketplaceBlobSha": "02a4d1df222e6f116d08541f954aff696649dd82",
+          "marketplaceSha256": "fc3d79bcd9a48261611e5fa4ce7beec66147fb7d8b21df62964a69b5aaf18e0d",
+          "originPath": "plugins/components/skills/destructive-button/usage.md",
+          "originBlobSha": "02a4d1df222e6f116d08541f954aff696649dd82",
+          "originSha256": "fc3d79bcd9a48261611e5fa4ce7beec66147fb7d8b21df62964a69b5aaf18e0d",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/web/accessibility.md",
+          "marketplaceBlobSha": "4696491055e57faf11bf156c782e24a8fb5397c6",
+          "marketplaceSha256": "c0f35538e6c6f8bc35b16e89da0a8b425aa494b41aa24ceb4c3f13dd320c1896",
+          "originPath": "plugins/components/skills/destructive-button/web/accessibility.md",
+          "originBlobSha": "4696491055e57faf11bf156c782e24a8fb5397c6",
+          "originSha256": "c0f35538e6c6f8bc35b16e89da0a8b425aa494b41aa24ceb4c3f13dd320c1896",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/web/interaction.md",
+          "marketplaceBlobSha": "65f6d828cecf291e2266827d192d1c3e07acb898",
+          "marketplaceSha256": "86a2cc1e76a80aba2620aad83e86191c645daa501f9c4cceef59743b4e128289",
+          "originPath": "plugins/components/skills/destructive-button/web/interaction.md",
+          "originBlobSha": "65f6d828cecf291e2266827d192d1c3e07acb898",
+          "originSha256": "86a2cc1e76a80aba2620aad83e86191c645daa501f9c4cceef59743b4e128289",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/destructive-button/web/tokens.yaml",
+          "marketplaceBlobSha": "3075c21e58eeab117f9cd48db55ab8fcb5742ceb",
+          "marketplaceSha256": "f615d75ce795bacb007a8a22fcf89c238892c9fabdcf97b26a0549580ed967ec",
+          "originPath": "plugins/components/skills/destructive-button/web/tokens.yaml",
+          "originBlobSha": "3075c21e58eeab117f9cd48db55ab8fcb5742ceb",
+          "originSha256": "f615d75ce795bacb007a8a22fcf89c238892c9fabdcf97b26a0549580ed967ec",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    {
+      "id": "destructive-button-icon-only-shape",
+      "status": "accepted"
+    },
+    {
+      "id": "destructive-button-mobile-secondary",
+      "status": "not-applicable"
+    },
+    {
+      "id": "destructive-button-single-icon-slot",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "DBTN-001",
+      "evidence": ["destructive-button.types.ts", "useDestructiveButton.ts", "destructive-button.test.tsx"]
+    },
+    {
+      "id": "DBTN-002",
+      "evidence": ["renderDestructiveButton.tsx", "destructive-button.test.tsx", "destructive-button.stories.tsx"]
+    },
+    {
+      "id": "DBTN-003",
+      "evidence": ["destructive-button.styles.ts", "useDestructiveButtonStyles.ts", "destructive-button.test.tsx"]
+    },
+    {
+      "id": "DBTN-004",
+      "evidence": ["useDestructiveButton.ts", "useDestructiveButtonStyles.ts", "destructive-button.test.tsx"]
+    },
+    {
+      "id": "DBTN-005",
+      "evidence": ["destructive-button.types.ts", "destructive-button.types.test.tsx", "destructive-button.test.tsx"]
+    },
+    {
+      "id": "DBTN-006",
+      "evidence": ["useDestructiveButtonStyles.ts", "renderDestructiveButton.tsx", "destructive-button.test.tsx"]
+    }
+  ]
+}
