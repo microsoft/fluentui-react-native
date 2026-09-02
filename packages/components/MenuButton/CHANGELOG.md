@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/menu-button
 
+## 0.15.7
+
+### Patch Changes
+
+- Updated dependencies [0a6286c]
+  - @fluentui-react-native/design@0.4.1
+  - @fluentui-react-native/contextual-menu@0.25.13
+  - @fluentui-react-native/button@0.40.12
+  - @uifabricshared/foundation-compose@1.16.12
+  - @fluentui-react-native/icon@0.22.12
+
 ## 0.15.6
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/input
 
+## 0.8.12
+
+### Patch Changes
+
+- Updated dependencies [0a6286c]
+  - @fluentui-react-native/design@0.4.1
+  - @fluentui-react-native/text@0.25.12
+  - @fluentui-react-native/framework@0.17.6
+  - @fluentui-react-native/icon@0.22.12
+
 ## 0.8.11
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # @fluentui-react-native/components
 
+## 0.5.0
+
+### Minor Changes
+
+- 6b2753d: Expose React 19 ref props for components and primitives with stable native roots.
+- 650c8d5: Add a theme-aware Text primitive and use it for component text content.
+
+### Patch Changes
+
+- Updated dependencies [0a6286c]
+  - @fluentui-react-native/design@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes
