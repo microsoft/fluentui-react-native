@@ -60,6 +60,25 @@ describe('Desktop Storybook driver manifest', () => {
       nativeDriver,
       schemaVersion: 2,
     });
+
+    const macosManifest = createDesktopStorybookDriverManifest({
+      bridgeNonce: 'nonce',
+      config,
+      instance,
+      nativeDriver: {
+        ...nativeDriver,
+        architecture: 'arm64',
+        endpoints: ['macos'],
+        provider: 'macos',
+        signing: { mode: 'adhoc' },
+      },
+      platform: 'macos',
+      storyManifest: { ...storyManifest, endpoint: 'macos' },
+    });
+    expect(macosManifest.application).toMatchObject({
+      bundleIdentifier: instance.bundleIdentifier,
+      leasePath: path.join(storybookRoot, 'storybook-desktop.generated', 'application-lease.macos.json'),
+    });
   });
 
   test('removes a stale application lease before writing a new manifest', () => {

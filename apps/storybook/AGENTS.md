@@ -30,8 +30,8 @@ Read this file, `README.md`, and `package.json` before changing the Storybook ap
   channel/MCP listener, and the WebDriver listener under one owned supervisor.
 - Use the app's `yarn desktop-driver` script for JSON story-run and agent
   commands against that listener.
-- Windows and Win32 use the source-built native helper. Keep the deterministic
-  fake provider limited to package contract tests.
+- macOS, Windows, and Win32 use their source-built native helpers. Keep the
+  deterministic fake provider limited to package contract tests.
 - Authored tests belong in component story `parameters.desktopDriver`, not in
   this app. The app owns identity, package discovery, platform exclusions, and
   generated manifests.

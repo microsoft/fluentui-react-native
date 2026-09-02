@@ -139,6 +139,11 @@ describe('DesktopStorybookConfig', () => {
     const config = makeDesktopStorybookConfig({
       projectRoot: storybookRoot,
       platformOptions: {
+        macos: {
+          nativeDriver: {
+            macosSigningIdentity: 'Apple Development: Example',
+          },
+        },
         win32: {
           nativeDriver: {
             application: {
@@ -172,6 +177,7 @@ describe('DesktopStorybookConfig', () => {
       },
       buildPolicy: 'if-missing',
       configuration: 'release',
+      macosSigningIdentity: 'Apple Development: Example',
     });
   });
 

@@ -33,6 +33,7 @@ const nativeDriverArtifact: NativeDriverArtifact = {
 const nativeDriverTestOptions = {
   buildNativeDriver: async () => nativeDriverArtifact,
   resolveNativeDriver: async () => nativeDriverArtifact,
+  writeMacOSApplicationLease: async () => undefined,
 };
 const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'windows' | 'win32') => ({
   endpoint: platform,
@@ -289,6 +290,9 @@ describe('DesktopStorybookCli', () => {
     const runner = new RecordingRunner();
     const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);
     const events: string[] = [];
+    const writeMacOSApplicationLease = jest.fn(async () => {
+      events.push('lease');
+    });
     const fetch = jest.fn(async (input: Parameters<typeof globalThis.fetch>[0]) => {
       const url = input.toString();
       if (url.endsWith('/index.json')) {
@@ -341,12 +345,17 @@ describe('DesktopStorybookCli', () => {
         runSmokeTests,
         runner,
         resolveNativeDriver,
+        writeMacOSApplicationLease,
       },
     );
 
     await cli.smoke('macos', { mode: 'stories-and-tests' });
 
-    expect(events).toEqual(['select:first--story', 'select:second--story', 'tests']);
+    expect(events).toEqual(['lease', 'select:first--story', 'select:second--story', 'tests']);
+    expect(writeMacOSApplicationLease).toHaveBeenCalledWith(
+      path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
+      120_000,
+    );
     expect(runSmokeTests).toHaveBeenCalledWith({
       // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the test exercises the loopback Desktop Driver
       driverUrl: `http://127.0.0.1:${cli.instance.driverPort}`,
@@ -367,6 +376,7 @@ describe('DesktopStorybookCli', () => {
       configuration: 'release',
       helperPath: undefined,
       installRoot: undefined,
+      macosSigningIdentity: undefined,
       platform: 'macos',
     });
   });
@@ -390,6 +400,7 @@ describe('createDesktopStorybookCommand', () => {
       cacheRoot: undefined,
       configuration: 'release',
       force: true,
+      macosSigningIdentity: undefined,
       platform: 'windows',
     });
     expect(runner.foreground).toEqual([]);

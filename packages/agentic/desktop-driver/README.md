@@ -5,10 +5,9 @@ for React Native desktop applications. It does not use Appium.
 
 The package provides the platform-neutral protocol, sanctioned WebdriverIO API,
 serializable story-test contract, deterministic fake host, evidence reports,
-JSON CLI, and bounded agent API. Stage 2 adds an explicitly source-built native
-helper. Windows and Win32 share the C++ helper in `native/windows`; the macOS
-Swift Package Manager implementation follows the same build and transport
-contract described in [PLAN.md](PLAN.md).
+JSON CLI, and bounded agent API. Native helpers are built explicitly from
+checked-in source. Windows and Win32 share the C++ helper in `native/windows`;
+macOS uses the Swift Package Manager helper in `native/macos`.
 
 ## Package boundaries
 
@@ -44,6 +43,22 @@ desktop-driver build-driver --platform windows
 installed Visual Studio C++ toolchain and Windows SDK, links the CRT statically,
 and writes immutable artifacts outside `node_modules`.
 
+On Apple Silicon, build the macOS 14 helper with Xcode's Swift toolchain:
+
+```sh
+desktop-driver build-driver --platform macos
+desktop-driver build-driver --platform macos \
+  --macos-signing-identity "Apple Development: Developer Name (TEAMID)"
+```
+
+The build produces a minimal signed agent app in the immutable native cache.
+Without an explicit identity it uses an ad hoc signature and warns that TCC
+permissions may not survive rebuilds. Set the identity with the CLI option or
+`FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`. Stable-signed artifacts are
+partitioned by the resolved leaf-certificate SHA-1 hash, and resolution verifies
+that hash plus the recorded authority and team identifier against the actual
+bundle signature.
+
 Resolve a verified cache artifact or an operator-provided prebuilt:
 
 ```powershell
@@ -58,6 +73,10 @@ with `--cache-root` or `FURN_DESKTOP_DRIVER_CACHE_ROOT`. Explicit helper and
 install-root selections fail verification rather than silently falling back.
 Every actual long-lived helper must complete the same build/protocol handshake
 before it receives native commands.
+
+The default macOS store is beneath
+`~/Library/Caches/com.microsoft.fluentui-react-native.desktop-driver/native`.
+`--helper-path` accepts either the signed `.app` bundle or its executable.
 
 ## Authoring story tests
 

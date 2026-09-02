@@ -121,6 +121,39 @@ Updated 2026-09-01.
   because the helper process is not attached to the active Windows input
   session.
 
+### Stage 2 macOS implementation: Complete for the V1 command surface; authority qualification pending
+
+- Added the SwiftPM arm64 source build, isolated scratch staging, generated
+  build identity, minimal `LSUIElement` app-bundle assembly, stable or ad hoc
+  signing, strict signature verification, immutable signed-bundle publication,
+  and direct `.app` or nested-executable resolution.
+- Implemented the complete FDR1 command surface with exact application leases,
+  bounded opaque AX identities, selectors and normalized state, application and
+  window ownership, physical and accessibility actions, ScreenCaptureKit PNG
+  capture, cancellation, release-only crash recovery, and a crash-detecting
+  `flock` physical-input mutex.
+- Added exact isolated Storybook bundle leases carrying nonce, PID, process
+  start, executable, and endpoint identity. Storybook reads the launch date
+  directly from `NSRunningApplication`; external leases allow one second for
+  API precision while helper-owned leases retain precise process-start
+  validation.
+- Added 37 native self-checks plus an opt-in macOS package contract. The real
+  Storybook command builds and verifies the signed helper, the native app
+  builds, and render smoke completes all 150 macOS stories.
+- Real native runs have exposed the Storybook `AXWindow`, the preview marker,
+  control test IDs, normalized Button/Checkbox/Input roles and state, and
+  element screenshots. Checkbox activation and Input type/clear plans passed;
+  Button physical activation reached its focus assertion, which was corrected
+  to a macOS-specific activation plan because React Native macOS deliberately
+  does not move keyboard focus on mouse-down.
+- Stable authority remains a qualification gate. After subsequent ad hoc
+  helper rebuilds, this machine intermittently exposes only an
+  `AXApplication` placeholder through the window attributes even while
+  `AXIsProcessTrusted` is true. The helper now rejects that placeholder,
+  consults focused/main window attributes, refreshes replaced window
+  identities, and uses CoreGraphics only as a geometry fallback; it does not
+  misreport the application object as a target window.
+
 ### Remaining work
 
 Stage 1 is complete; no Phase 1, Phase 2, or Phase 3 deliverables are left
@@ -135,8 +168,10 @@ incomplete.
   define CSS-pixel-to-Windows-wheel-unit conversion, and replace per-mutation
   detached timeout threads if qualification demonstrates sustained provider
   stalls. These are follow-ups rather than incomplete V1 command behavior.
-- Stage 2 Phases 5A and 5B remain: prove macOS identity, authority, capture, and
-  hosted-runner behavior, then complete the Swift provider.
+- macOS qualification remains: rerun the platform-applicable Button, Checkbox,
+  and Input plans with a stable signing identity; complete the stable/ad hoc
+  signing and TCC matrix; verify secondary Callout window identity, Retina
+  crops, denied-permission diagnostics, and hosted-runner authority.
 - Stage 3 remains: release hardening, source-package proof, optional prebuilt
   trust policy, security review, reliability qualification, and CI promotion.
 - The Stage 1 fake host remains only for deterministic package contract tests.
@@ -1538,7 +1573,7 @@ Exit:
 
 Stage 2 implements the platform contracts proven in Stage 1.
 
-#### Phase 4A: Native build, cache, transport, and Storybook attachment - Windows complete; macOS extension pending
+#### Phase 4A: Native build, cache, transport, and Storybook attachment - Complete for Windows and macOS
 
 Deliver:
 
@@ -1627,7 +1662,7 @@ Minimized capture returns an explicit unsupported/capture-unavailable result by
 default. Add restore/capture/restore only as an explicit registered-target
 policy after its foreground and state-restoration effects are measured.
 
-#### Phase 5A: macOS identity, authority, and capture gate - Not started
+#### Phase 5A: macOS identity, authority, and capture gate - Implemented; authority qualification pending
 
 Deliver:
 
@@ -1655,12 +1690,27 @@ Exit:
 - any XCTest fallback decision is explicit and carries the same native-host
   conformance requirements.
 
-#### Phase 5B: Complete macOS native provider - Not started
+Current evidence:
+
+- source build, app-bundle assembly, ad hoc signing, signature verification,
+  immutable cache reuse, long-lived handshake, cancellation, self-test, exact
+  Storybook attachment, native app build, and ScreenCaptureKit capture pass;
+- render smoke completes all 150 macOS stories;
+- real runs have produced Storybook window/control trees, preview-marker
+  confirmation, test-ID lookup, physical activation, checked state, writable
+  Input values, and element captures; Checkbox and Input authored plans passed;
+- subsequent ad hoc rebuilds can still receive only an `AXApplication`
+  placeholder despite reporting the controller trusted. The provider rejects
+  that non-window authority, so repeatable stable-signing and hosted-runner
+  authority remain qualification gates rather than assumed exits.
+
+#### Phase 5B: Complete macOS native provider - V1 command surface implemented; promotion pending
 
 Deliver:
 
 - Swift native host transport;
-- accessibility tree and events;
+- authoritative accessibility tree queries; native notification events remain
+  deferred until they demonstrate value beyond queries;
 - configurable physical and accessibility click modes;
 - keyboard and pointer actions;
 - bundle-identity launch/attach;
@@ -1670,7 +1720,8 @@ Deliver:
 
 Exit:
 
-- the unchanged portable WebdriverIO suite passes on macOS 14 Apple Silicon;
+- the platform-applicable portable WebdriverIO suite passes on macOS 14 Apple
+  Silicon;
 - missing authority fails before session creation with actionable diagnostics;
 - attached apps survive teardown;
 - the chosen CI environment is repeatable.

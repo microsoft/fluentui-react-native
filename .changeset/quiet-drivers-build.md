@@ -6,6 +6,9 @@
 ---
 
 Build the source-shipped native desktop helper explicitly, reuse verified
-content-addressed artifacts, and add the Windows/Win32 C++ provider. Storybook
-can build the helper independently, ensures it during prep, and attaches
-authored smoke tests to the exact app process it launched.
+content-addressed artifacts, and add the Windows/Win32 C++ and macOS Swift
+providers. Storybook can build the helper independently, ensures it during
+prep, and attaches authored smoke tests to the exact app process it launched.
+macOS cache resolution pins stable signatures to the leaf certificate, and the
+native provider normalizes Fabric accessibility roles, window identity, input,
+and ScreenCaptureKit evidence.

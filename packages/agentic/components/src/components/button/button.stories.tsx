@@ -84,6 +84,7 @@ export const Default: Story = {
       tests: [
         {
           id: 'pointer-focus',
+          platforms: ['windows', 'win32'],
           title: 'Responds to activation and receives focus',
           requires: ['element-screenshot', 'focus', 'physical-click'],
           steps: [
@@ -93,6 +94,19 @@ export const Default: Story = {
             { action: 'click', target: { testId: 'agentic-storybook-button' } },
             { expect: { state: 'focused', target: { testId: 'agentic-storybook-button' }, value: true } },
             { action: 'screenshot', name: 'button-focused', target: { testId: 'agentic-storybook-button' } },
+          ],
+        },
+        {
+          id: 'pointer-activation',
+          platforms: ['macos'],
+          title: 'Accepts native pointer activation',
+          requires: ['element-screenshot', 'physical-click'],
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-button' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-button' }, value: 'button' } },
+            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-button' }, value: true } },
+            { action: 'click', target: { testId: 'agentic-storybook-button' } },
+            { action: 'screenshot', name: 'button-after-click', target: { testId: 'agentic-storybook-button' } },
           ],
         },
       ],

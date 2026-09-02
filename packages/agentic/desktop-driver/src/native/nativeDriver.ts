@@ -28,12 +28,22 @@ import type {
   NativeDriverResolveOptions,
   NativeHostHello,
 } from './types.js';
+import {
+  buildMacOSDriver,
+  probeMacOSToolchain,
+  resolveMacOSExecutablePath,
+  resolveMacOSSigningIdentity,
+  verifyMacOSDriver,
+} from './macos/buildMacOSDriver.js';
+import type { BuildMacOSDriverResult, MacOSSigningIdentity } from './macos/buildMacOSDriver.js';
 import { buildWindowsDriver, probeWindowsToolchain } from './windows/buildWindowsDriver.js';
+import type { BuildWindowsDriverResult } from './windows/buildWindowsDriver.js';
 
 export const FURN_DESKTOP_DRIVER_BUILD_POLICY = 'FURN_DESKTOP_DRIVER_BUILD_POLICY';
 export const FURN_DESKTOP_DRIVER_CACHE_ROOT = 'FURN_DESKTOP_DRIVER_CACHE_ROOT';
 export const FURN_DESKTOP_DRIVER_HELPER_PATH = 'FURN_DESKTOP_DRIVER_HELPER_PATH';
 export const FURN_DESKTOP_DRIVER_INSTALL_ROOT = 'FURN_DESKTOP_DRIVER_INSTALL_ROOT';
+export const FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY = 'FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY';
 
 const buildCoordinatorVersion = 1;
 
@@ -55,19 +65,47 @@ type NativeBuildContext = {
   endpoints: readonly ('macos' | 'windows' | 'win32')[];
   packageRoot: string;
   provider: NativeDriverProvider;
+  signingIdentity?: MacOSSigningIdentity;
   sourceDigest: string;
 };
 
+type NativeBuildResult = BuildMacOSDriverResult | BuildWindowsDriverResult;
+
 export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions): Promise<NativeDriverArtifact> {
-  const context = resolveBuildContext(options);
-  if (context.provider !== 'windows') {
-    throw new NativeDriverError('unsupported-host', 'The macOS native helper is not implemented in this checkout.');
+  const context = await resolveBuildContext(options);
+  let build: (buildId: string, stagingRoot: string) => Promise<NativeBuildResult>;
+  let toolchainFingerprint: string;
+  if (context.provider === 'windows') {
+    const toolchain = await probeWindowsToolchain(options.signal);
+    toolchainFingerprint = toolchain.fingerprint;
+    build = (buildId, stagingRoot) =>
+      buildWindowsDriver({
+        buildId,
+        configuration: context.configuration,
+        packageRoot: context.packageRoot,
+        signal: options.signal,
+        sourceDigest: context.sourceDigest,
+        stagingRoot,
+        toolchain,
+      });
+  } else {
+    const toolchain = await probeMacOSToolchain(context.signingIdentity, options.signal);
+    toolchainFingerprint = toolchain.fingerprint;
+    build = (buildId, stagingRoot) =>
+      buildMacOSDriver({
+        buildId,
+        configuration: context.configuration,
+        packageRoot: context.packageRoot,
+        signal: options.signal,
+        sourceDigest: context.sourceDigest,
+        stagingRoot,
+        toolchain,
+      });
   }
-  const toolchain = await probeWindowsToolchain(options.signal);
   const buildFingerprint = sha256(
     canonicalJson({
       compatibilityKey: context.compatibilityKey,
-      toolchain: toolchain.fingerprint,
+      toolchain: toolchainFingerprint,
     }),
   );
   const lockRoot = path.join(context.cacheRoot, 'v1', 'locks');
@@ -85,15 +123,7 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
     fs.mkdirSync(stagingRoot, { recursive: true });
     try {
       const buildId = `${buildFingerprint.slice(0, 16)}-${Date.now().toString(36)}`;
-      const built = await buildWindowsDriver({
-        buildId,
-        configuration: context.configuration,
-        packageRoot: context.packageRoot,
-        signal: options.signal,
-        sourceDigest: context.sourceDigest,
-        stagingRoot,
-        toolchain,
-      });
+      const built = await build(buildId, stagingRoot);
       const handshake = await readOneShotHandshake(built.executablePath, options.signal);
       validateHandshake(handshake, {
         architecture: context.architecture,
@@ -114,8 +144,15 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
       const publicationRoot = path.join(context.cacheRoot, 'v1', 'staging', `publish-${artifactId}-${randomUUID()}`);
       const publicationBin = path.join(publicationRoot, 'bin');
       fs.mkdirSync(publicationBin, { recursive: true });
-      const publishedExecutable = path.join(publicationBin, path.basename(built.executablePath));
-      fs.copyFileSync(built.executablePath, publishedExecutable);
+      let publishedExecutable: string;
+      if ('bundlePath' in built) {
+        const publishedBundle = path.join(publicationBin, path.basename(built.bundlePath));
+        fs.cpSync(built.bundlePath, publishedBundle, { recursive: true });
+        publishedExecutable = path.join(publishedBundle, path.relative(built.bundlePath, built.executablePath));
+      } else {
+        publishedExecutable = path.join(publicationBin, path.basename(built.executablePath));
+        fs.copyFileSync(built.executablePath, publishedExecutable);
+      }
       fs.copyFileSync(built.buildLogPath, path.join(publicationRoot, 'build.log'));
       const manifest: NativeArtifactManifest = {
         architecture: context.architecture,
@@ -129,7 +166,7 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
         features: handshake.features,
         provider: context.provider,
         schemaVersion: 1,
-        signing: { mode: 'none' },
+        signing: 'signing' in built ? built.signing : { mode: 'none' },
         sourceDigest: context.sourceDigest,
         wireProtocol: handshake.protocol,
       };
@@ -155,7 +192,7 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
 }
 
 export async function resolveNativeDesktopDriver(options: NativeDriverResolveOptions): Promise<NativeDriverArtifact> {
-  const context = resolveBuildContext(options);
+  const context = await resolveBuildContext(options);
   const helperPath = options.helperPath ?? process.env[FURN_DESKTOP_DRIVER_HELPER_PATH];
   if (helperPath) {
     return verifyDirectArtifact(helperPath, context, 'explicit-path', options.signal);
@@ -196,12 +233,15 @@ export async function verifyNativeDriverArtifact(artifact: NativeDriverArtifact,
   if (artifact.artifactId !== executableHash) {
     throw new NativeDriverError('integrity-mismatch', `Native driver helper hash does not match "${artifact.artifactId}".`);
   }
+  if (artifact.provider === 'macos') {
+    await verifyMacOSDriver(executablePath, artifact.signing, signal);
+  }
   const handshake = await readOneShotHandshake(executablePath, signal);
   validateHandshake(handshake, artifact);
   return Object.freeze({ ...artifact, executablePath, features: Object.freeze([...handshake.features]) });
 }
 
-function resolveBuildContext(options: NativeDriverBuildOptions): NativeBuildContext {
+async function resolveBuildContext(options: NativeDriverBuildOptions): Promise<NativeBuildContext> {
   const provider = normalizeProvider(options.platform);
   const architecture = options.architecture ?? defaultArchitecture(provider);
   validateArchitecture(provider, architecture);
@@ -219,6 +259,11 @@ function resolveBuildContext(options: NativeDriverBuildOptions): NativeBuildCont
       provider: hashTree(providerRoot),
     }),
   );
+  const configuredSigningIdentity =
+    provider === 'macos'
+      ? normalizeSigningIdentity(options.macosSigningIdentity ?? process.env[FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY])
+      : undefined;
+  const signingIdentity = await resolveMacOSSigningIdentity(configuredSigningIdentity, options.signal);
   const compatibilityKey = sha256(
     canonicalJson({
       architecture,
@@ -226,6 +271,8 @@ function resolveBuildContext(options: NativeDriverBuildOptions): NativeBuildCont
       coordinatorVersion: buildCoordinatorVersion,
       protocol: nativeDriverWireProtocol,
       provider,
+      signingMode: provider === 'macos' ? (signingIdentity ? 'signed' : 'adhoc') : 'none',
+      signingIdentity: signingIdentity?.hash,
       sourceDigest,
     }),
   );
@@ -238,6 +285,7 @@ function resolveBuildContext(options: NativeDriverBuildOptions): NativeBuildCont
     endpoints: provider === 'windows' ? ['windows', 'win32'] : ['macos'],
     packageRoot,
     provider,
+    signingIdentity,
     sourceDigest,
   };
 }
@@ -343,6 +391,11 @@ function validateCachedArtifactContext(artifact: NativeDriverArtifact, context: 
     artifact.configuration !== context.configuration ||
     !endpointsMatch ||
     artifact.provider !== context.provider ||
+    (context.provider === 'macos' &&
+      (artifact.signing.mode !== (context.signingIdentity ? 'signed' : 'adhoc') ||
+        (context.signingIdentity !== undefined &&
+          (artifact.signing.certificateHash !== context.signingIdentity.hash ||
+            artifact.signing.identity !== context.signingIdentity.name)))) ||
     artifact.sourceDigest !== context.sourceDigest
   ) {
     throw new NativeDriverError(
@@ -358,7 +411,23 @@ async function verifyDirectArtifact(
   origin: NativeDriverArtifactOrigin,
   signal?: AbortSignal,
 ): Promise<NativeDriverArtifact> {
-  const executablePath = fs.realpathSync.native(path.resolve(helperPath));
+  const executablePath = fs.realpathSync.native(
+    context.provider === 'macos' ? resolveMacOSExecutablePath(helperPath) : path.resolve(helperPath),
+  );
+  const signing =
+    context.provider === 'macos'
+      ? await verifyMacOSDriver(
+          executablePath,
+          context.signingIdentity
+            ? {
+                certificateHash: context.signingIdentity.hash,
+                identity: context.signingIdentity.name,
+                mode: 'signed',
+              }
+            : undefined,
+          signal,
+        )
+      : ({ mode: 'none' } as const);
   const handshake = await readOneShotHandshake(executablePath, signal);
   if (handshake.provider !== context.provider || handshake.architecture !== context.architecture) {
     throw new NativeDriverError(
@@ -387,7 +456,7 @@ async function verifyDirectArtifact(
     origin,
     provider: context.provider,
     schemaVersion: 1,
-    signing: { mode: context.provider === 'macos' ? 'adhoc' : 'none' },
+    signing,
     sourceDigest: handshake.sourceDigest,
     wireProtocol: handshake.protocol,
   };
@@ -510,7 +579,13 @@ function resolveBuildPolicy(value?: NativeDriverBuildPolicy): NativeDriverBuildP
   if (configured !== 'if-missing' && configured !== 'never') {
     throw new NativeDriverError('invalid-configuration', `Unsupported native driver build policy "${configured}".`);
   }
+
   return configured;
+}
+
+function normalizeSigningIdentity(value?: string): string | undefined {
+  const identity = value?.trim();
+  return identity || undefined;
 }
 
 function isWithin(root: string, candidate: string): boolean {

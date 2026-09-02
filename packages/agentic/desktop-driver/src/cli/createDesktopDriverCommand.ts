@@ -223,6 +223,7 @@ function addNativeBuildCommand(
     .addOption(new Option('--configuration <configuration>', 'native build configuration').choices(['debug', 'release']).default('release'))
     .option('--cache-root <path>', 'native helper cache root')
     .option('--force', 'build and publish a new immutable selection even when a compatible artifact exists')
+    .option('--macos-signing-identity <identity>', 'macOS code-signing certificate name or SHA-1 hash')
     .action(async (flags: NativeBuildFlags) => {
       const result = await buildDriver(toBuildOptions(flags));
       writeJson(stdout, result);
@@ -242,6 +243,7 @@ function addNativeResolveCommand(
     .option('--cache-root <path>', 'native helper cache root')
     .option('--helper-path <path>', 'exact prebuilt helper executable')
     .option('--install-root <path>', 'managed native helper install root')
+    .option('--macos-signing-identity <identity>', 'macOS code-signing certificate name or SHA-1 hash')
     .action(async (flags: NativeResolveFlags) => {
       const result = await resolveDriver(toResolveOptions(flags));
       writeJson(stdout, result);
@@ -260,6 +262,7 @@ function addNativeDoctorCommand(
     .option('--cache-root <path>', 'native helper cache root')
     .option('--helper-path <path>', 'exact prebuilt helper executable')
     .option('--install-root <path>', 'managed native helper install root')
+    .option('--macos-signing-identity <identity>', 'expected macOS code-signing certificate name or SHA-1 hash')
     .action(async (flags: NativeResolveFlags) => {
       try {
         const result = await resolveDriver({ ...toResolveOptions(flags), buildPolicy: 'never' });
@@ -297,6 +300,7 @@ type NativeBuildFlags = NativePlatformFlags & {
   cacheRoot?: string;
   configuration: NativeDriverConfiguration;
   force?: boolean;
+  macosSigningIdentity?: string;
 };
 
 type NativeResolveFlags = NativeBuildFlags & {
@@ -317,6 +321,7 @@ function toBuildOptions(flags: NativeBuildFlags): NativeDriverBuildOptions {
     cacheRoot: flags.cacheRoot,
     configuration: flags.configuration,
     force: flags.force,
+    macosSigningIdentity: flags.macosSigningIdentity,
     platform: flags.platform,
   };
 }

@@ -13,7 +13,7 @@ type DesktopStoryRootProps = {
 export function DesktopStoryRoot({ children, storyId }: DesktopStoryRootProps) {
   const { runtimeInstance, selection } = useDesktopStorybookConfig();
   const testID = useDesktopStorybookTestID('story-root');
-  const exposeNativeMarker = Platform.OS === 'windows' || Platform.OS === ('win32' as any);
+  const exposeNativeMarker = Platform.OS === 'macos' || Platform.OS === 'windows' || Platform.OS === ('win32' as any);
   const activeSelection = selection?.storyId === storyId ? selection : undefined;
 
   React.useEffect(() => {

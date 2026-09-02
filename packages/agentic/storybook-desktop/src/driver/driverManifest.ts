@@ -56,6 +56,7 @@ export function createDesktopStorybookDriverManifest({
   return Object.freeze({
     application: Object.freeze({
       ...nativeOptions.application,
+      ...(platform === 'macos' ? { bundleIdentifier: instance.bundleIdentifier } : {}),
       leaseNonce: bridgeNonce,
       leasePath,
     }),

@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -11,8 +11,54 @@ import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from './nativeDr
 jest.setTimeout(120_000);
 
 const windowsTest = process.platform === 'win32' && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
+const macosTest = process.platform === 'darwin' && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
 
 describe('native driver build and resolution', () => {
+  macosTest('builds, signs, reuses, and handshakes with the macOS helper', async () => {
+    const cacheRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-macos-native-'));
+    const emitWarning = jest.spyOn(process, 'emitWarning').mockImplementation(() => undefined);
+    try {
+      const built = await buildNativeDesktopDriver({ cacheRoot, platform: 'macos' });
+      expect(built).toMatchObject({
+        architecture: 'arm64',
+        endpoints: ['macos'],
+        origin: 'built',
+        provider: 'macos',
+        signing: { mode: 'adhoc' },
+        wireProtocol: { major: 1, minor: 0 },
+      });
+      expect(built.executablePath).toContain(`${path.sep}FurnDesktopDriverHost.app${path.sep}Contents${path.sep}MacOS${path.sep}`);
+
+      const reused = await buildNativeDesktopDriver({ cacheRoot, platform: 'macos' });
+      expect(reused).toMatchObject({
+        artifactId: built.artifactId,
+        origin: 'cache',
+      });
+      const resolved = await resolveNativeDesktopDriver({ buildPolicy: 'never', cacheRoot, platform: 'macos' });
+      expect(resolved.artifactId).toBe(built.artifactId);
+
+      const helper = await NativeHostProcess.start({ artifact: resolved });
+      await expect(helper.request('probe', { endpoint: 'macos' })).resolves.toMatchObject({
+        result: {
+          endpoint: 'macos',
+          platformName: 'macos',
+          protocolVersion: 1,
+        },
+      });
+      await helper.dispose();
+
+      const selfTest = spawnSync(resolved.executablePath, ['--self-test'], {
+        encoding: 'utf8',
+        timeout: 120_000,
+      });
+      expect(selfTest.status).toBe(0);
+      expect(selfTest.stdout).toContain('ok ');
+    } finally {
+      emitWarning.mockRestore();
+      fs.rmSync(cacheRoot, { force: true, maxRetries: 10, recursive: true, retryDelay: 100 });
+    }
+  });
+
   windowsTest('builds, reuses, resolves, and handshakes with the Windows helper', async () => {
     const cacheRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-native-'));
     const externalRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-external-'));

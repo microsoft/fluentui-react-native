@@ -77,6 +77,11 @@ uses that suffix in the native bundle identifier, and selects dedicated Storyboo
 Parallel smoke tests from different enlistments therefore launch, drive, and stop only their own app
 and services, even when the default ports are already occupied.
 
+Use `yarn storybook build-driver --macos` to build the signed Swift helper in
+isolation. `yarn storybook smoke --macos --mode stories-and-tests` traverses the
+catalog, writes a nonce-bound lease for the exact launched bundle, and runs the
+same component-authored plans through the native macOS provider.
+
 > `react-native-safe-area-context` note: Storybook's UI imports it, but its native module is
 > iOS-only (UIKit) and uses a Yoga API that doesn't compile for react-native-macos 0.81. It is
 > therefore not installed; the shared Metro helper aliases the import to a JS-only stub, so no
@@ -220,6 +225,7 @@ yarn storybook-server --win32   # explicit Win32 catalog
 For the native desktop-driver control plane, use the combined supervisor:
 
 ```sh
+yarn storybook build-driver --macos
 yarn storybook build-driver --windows
 yarn storybook driver --windows
 yarn storybook manifest --windows
@@ -231,8 +237,8 @@ listener in the same Node process. `instance` reports the enlistment-specific
 ports and target identity. The generated manifest contains the exact platform
 catalog, relocatable source paths, serializable story-test plans, and platform
 and portable-plan digests plus the verified helper and trusted application
-descriptor. Windows and Win32 use the native C++ provider; the fake host remains
-limited to package tests.
+descriptor. macOS uses the native Swift provider, Windows and Win32 use the native C++
+provider, and the fake host remains limited to package tests.
 
 The app exposes the shared JSON CLI as `yarn desktop-driver`. After the
 supervisor and app are running, list or run the component-authored plans:

@@ -33,11 +33,13 @@ describe('desktop-driver CLI', () => {
       'test',
       'build-driver',
       '--platform',
-      'windows',
+      'macos',
       '--configuration',
       'release',
       '--cache-root',
       'native-cache',
+      '--macos-signing-identity',
+      'Apple Development: Example',
     ]);
     await createProgram().parseAsync([
       'node',
@@ -56,7 +58,8 @@ describe('desktop-driver CLI', () => {
       cacheRoot: 'native-cache',
       configuration: 'release',
       force: undefined,
-      platform: 'windows',
+      macosSigningIdentity: 'Apple Development: Example',
+      platform: 'macos',
     });
     expect(resolveDriver).toHaveBeenCalledWith({
       architecture: undefined,
@@ -66,6 +69,7 @@ describe('desktop-driver CLI', () => {
       force: undefined,
       helperPath: 'driver.exe',
       installRoot: undefined,
+      macosSigningIdentity: undefined,
       platform: 'win32',
     });
     expect(JSON.parse(output[0])).toMatchObject({ artifactId: 'artifact-id', origin: 'built' });

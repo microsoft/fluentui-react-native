@@ -71,6 +71,7 @@ export type DesktopNativeDriverOptions = {
   configuration?: NativeDriverConfiguration;
   helperPath?: string;
   installRoot?: string;
+  macosSigningIdentity?: string;
 };
 
 export type DesktopSmokeOptions = {

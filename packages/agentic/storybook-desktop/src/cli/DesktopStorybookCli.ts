@@ -1,3 +1,4 @@
+import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
@@ -56,6 +57,7 @@ export type DesktopStorybookCliOptions = {
   isPortAvailable?: (port: number) => Promise<boolean>;
   runSmokeTests?: typeof runDesktopStorybookSmokeTests;
   resolveNativeDriver?: typeof resolveNativeDesktopDriver;
+  writeMacOSApplicationLease?: typeof writeMacOSApplicationLease;
 };
 
 export type DesktopStorybookServerOptions = {
@@ -75,6 +77,7 @@ export class DesktopStorybookCli {
   private readonly isPortAvailable: (port: number) => Promise<boolean>;
   private readonly runSmokeTests: typeof runDesktopStorybookSmokeTests;
   private readonly resolveNativeDriver: typeof resolveNativeDesktopDriver;
+  private readonly writeMacOSApplicationLease: typeof writeMacOSApplicationLease;
 
   constructor(config: DesktopStorybookConfig, options: DesktopStorybookCliOptions = {}) {
     this.config = config;
@@ -90,6 +93,7 @@ export class DesktopStorybookCli {
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
     this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
     this.resolveNativeDriver = options.resolveNativeDriver ?? resolveNativeDesktopDriver;
+    this.writeMacOSApplicationLease = options.writeMacOSApplicationLease ?? writeMacOSApplicationLease;
   }
 
   async server(platform: Platforms, options: DesktopStorybookServerOptions = {}): Promise<void> {
@@ -284,6 +288,12 @@ export class DesktopStorybookCli {
 
       await Promise.all(readiness);
       await this.executeAction('run', platform, instance);
+      if (mode === 'stories-and-tests' && platform === 'macos') {
+        if (!instance.driverManifestPath) {
+          throw new Error('The macOS authored-test lifecycle did not create a Desktop Driver manifest.');
+        }
+        await this.writeMacOSApplicationLease(instance.driverManifestPath, smoke.startupTimeoutMs ?? 120_000);
+      }
       await this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.startupTimeoutMs);
       if (mode === 'stories-and-tests') {
         const result = await this.runSmokeTests({
@@ -382,6 +392,7 @@ export class DesktopStorybookCli {
       buildPolicy: options.buildPolicy,
       helperPath: options.helperPath,
       installRoot: options.installRoot,
+      macosSigningIdentity: options.macosSigningIdentity,
     });
   }
 
@@ -400,6 +411,7 @@ export class DesktopStorybookCli {
     return {
       cacheRoot: options.cacheRoot,
       configuration: options.configuration,
+      macosSigningIdentity: options.macosSigningIdentity,
       platform,
     };
   }
@@ -585,6 +597,117 @@ function writeMacOSInstanceConfig(projectRoot: string, instance: DesktopStoryboo
     fs.writeFileSync(xcconfigPath, content);
   }
   return xcconfigPath;
+}
+
+type MacOSRunningApplication = {
+  executablePath: string;
+  processId: number;
+  processStartedAt: number;
+};
+
+async function writeMacOSApplicationLease(manifestPath: string, timeoutMs = 120_000): Promise<void> {
+  if (process.platform !== 'darwin') {
+    throw new Error('A macOS application lease can only be written on macOS.');
+  }
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as {
+    application?: {
+      bundleIdentifier?: string;
+      leaseNonce?: string;
+      leasePath?: string;
+    };
+  };
+  const application = manifest.application;
+  if (!application?.bundleIdentifier || !application.leaseNonce || !application.leasePath) {
+    throw new Error(`The Desktop Driver manifest at "${manifestPath}" does not contain a complete macOS application descriptor.`);
+  }
+
+  const runningApplication = await waitForMacOSApplication(application.bundleIdentifier, timeoutMs);
+  if (!Number.isFinite(runningApplication.processStartedAt) || runningApplication.processStartedAt <= 0) {
+    throw new Error(`Could not determine the start time for macOS process ${runningApplication.processId}.`);
+  }
+  const processStartedAt = new Date(runningApplication.processStartedAt * 1000);
+  const temporaryPath = `${application.leasePath}.${process.pid}.tmp`;
+  fs.mkdirSync(path.dirname(application.leasePath), { recursive: true });
+  fs.writeFileSync(
+    temporaryPath,
+    `${JSON.stringify(
+      {
+        bundleIdentifier: application.bundleIdentifier,
+        endpoint: 'macos',
+        executablePath: runningApplication.executablePath,
+        nonce: application.leaseNonce,
+        processId: runningApplication.processId,
+        processStartedAt: processStartedAt.toISOString(),
+        schemaVersion: 1,
+      },
+      null,
+      2,
+    )}\n`,
+  );
+  fs.renameSync(temporaryPath, application.leasePath);
+}
+
+async function waitForMacOSApplication(bundleIdentifier: string, timeoutMs: number): Promise<MacOSRunningApplication> {
+  const deadline = Date.now() + timeoutMs;
+  let lastError: unknown;
+  do {
+    try {
+      const applications = JSON.parse(
+        await runProcess('/usr/bin/osascript', [
+          '-l',
+          'JavaScript',
+          '-e',
+          [
+            "ObjC.import('AppKit');",
+            'function run(argv) {',
+            '  const applications = $.NSRunningApplication.runningApplicationsWithBundleIdentifier(argv[0]);',
+            '  const result = [];',
+            '  for (let index = 0; index < applications.count; index += 1) {',
+            '    const application = applications.objectAtIndex(index);',
+            '    result.push({',
+            '      executablePath: ObjC.unwrap(application.executableURL.path),',
+            '      processId: Number(application.processIdentifier),',
+            '      processStartedAt: Number(application.launchDate.timeIntervalSince1970),',
+            '    });',
+            '  }',
+            '  return JSON.stringify(result);',
+            '}',
+          ].join('\n'),
+          bundleIdentifier,
+        ]),
+      ) as MacOSRunningApplication[];
+      if (applications.length === 1) {
+        return applications[0];
+      }
+      if (applications.length > 1) {
+        throw new Error(`More than one running application has bundle identifier "${bundleIdentifier}".`);
+      }
+    } catch (error) {
+      lastError = error;
+    }
+    await delay(250);
+  } while (Date.now() < deadline);
+  throw new Error(`Timed out waiting for the macOS application "${bundleIdentifier}"${lastError ? `: ${errorMessage(lastError)}` : '.'}`);
+}
+
+function runProcess(command: string, args: readonly string[]): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, [...args], {
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    const stdout: Buffer[] = [];
+    const stderr: Buffer[] = [];
+    child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
+    child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
+    child.once('error', reject);
+    child.once('close', (code) => {
+      if (code === 0) {
+        resolve(Buffer.concat(stdout).toString('utf8'));
+      } else {
+        reject(new Error(Buffer.concat(stderr).toString('utf8') || `${command} exited with code ${String(code)}.`));
+      }
+    });
+  });
 }
 
 async function findAvailablePort(

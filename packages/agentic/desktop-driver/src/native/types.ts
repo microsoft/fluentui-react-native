@@ -12,6 +12,7 @@ export type NativeDriverWireProtocol = {
 };
 
 export type NativeDriverSigning = {
+  certificateHash?: string;
   identity?: string;
   mode: 'adhoc' | 'none' | 'signed';
   teamId?: string;
@@ -41,6 +42,7 @@ export type NativeDriverBuildOptions = {
   cacheRoot?: string;
   configuration?: NativeDriverConfiguration;
   force?: boolean;
+  macosSigningIdentity?: string;
   platform: DesktopEndpoint;
   signal?: AbortSignal;
 };

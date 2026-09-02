@@ -678,6 +678,7 @@ function validateDesktopPlatformOptions(platformOptions: DesktopPlatformOptionsM
         cacheRoot: options.cacheRoot,
         helperPath: options.helperPath,
         installRoot: options.installRoot,
+        macosSigningIdentity: options.macosSigningIdentity,
       })) {
         if (value !== undefined && !value.trim()) {
           throw new TypeError(`${source}.${name} cannot be empty.`);

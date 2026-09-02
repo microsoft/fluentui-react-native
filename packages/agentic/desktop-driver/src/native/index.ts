@@ -4,6 +4,7 @@ export {
   FURN_DESKTOP_DRIVER_CACHE_ROOT,
   FURN_DESKTOP_DRIVER_HELPER_PATH,
   FURN_DESKTOP_DRIVER_INSTALL_ROOT,
+  FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY,
 } from './nativeDriver.js';
 export { nativeDriverWireProtocol } from './constants.js';
 export { NativeDriverError } from './NativeDriverError.js';

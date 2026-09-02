@@ -102,6 +102,7 @@ platform option, or omit it to use `FURN_STORYBOOK_PLATFORM` and then the host d
 ```sh
 storybook-desktop server --win32
 storybook-desktop build-driver --windows
+storybook-desktop build-driver --macos
 storybook-desktop driver --windows
 storybook-desktop manifest --windows
 storybook-desktop instance --windows
@@ -122,6 +123,10 @@ story catalog and routes to `rnx-cli bundle`. `build` and `run` route to `rnx-cl
 derived from the app manifest. The config supplies default macOS workspace/scheme and Windows solution arguments from
 the app key, and reads the macOS bundle identifier directly from `app.json`. Win32 has no native project to build, so
 its default build and run operations are unsupported until the consumer provides a prebuilt-host launch command.
+
+Set `platformOptions.macos.nativeDriver.macosSigningIdentity` to use a stable
+macOS code-signing identity. When omitted, the source build uses an ad hoc
+signature and TCC permissions may need to be granted again after a rebuild.
 
 `server` loads the same config, selects the matching platform catalog, and derives the app-owned Storybook config
 directory automatically. It accepts `--host` and `--port`; the separate `storybook-server` binary is a convenience
@@ -169,6 +174,9 @@ performs the same ownership-safe cleanup. `--mode stories` is the default render
 the native provider. Storybook owns app launch and supplies an exact
 nonce-bound process lease; WebDriver attaches and preserves the app until the
 Storybook lifecycle performs final cleanup.
+The reusable macOS lifecycle resolves the launched app by its isolated bundle
+identifier and atomically records its PID, start time, executable, and nonce
+before creating the attached WebDriver session.
 Consumers provide only native identity, title, test-ID prefix, and optional required story IDs.
 The Windows helper also records React Native Test App's Debug Metro port (`8081` by default), while Storybook and
 Desktop Driver ports remain enlistment-specific.
