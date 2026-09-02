@@ -149,6 +149,19 @@ export { renderMenuItem_unstable } from './components/menu-item/renderMenuItem';
 export { useMenuItemStyles_unstable } from './components/menu-item/useMenuItemStyles';
 export { useMenuItem_unstable } from './components/menu-item/useMenuItem';
 
+export { NavItem } from './components/nav-item/nav-item';
+export type {
+  NavItemDensity,
+  NavItemNesting,
+  NavItemProps,
+  NavItemSlots,
+  NavItemState,
+  NavItemType,
+} from './components/nav-item/nav-item.types';
+export { renderNavItem_unstable } from './components/nav-item/renderNavItem';
+export { useNavItemStyles_unstable } from './components/nav-item/useNavItemStyles';
+export { useNavItem_unstable } from './components/nav-item/useNavItem';
+
 export { ProgressBar } from './components/progress-bar/progress-bar';
 export type {
   ProgressBarProps,

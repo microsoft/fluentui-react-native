@@ -142,6 +142,7 @@
       "list-item",
       "listbox-item",
       "menu-item",
+      "nav-item",
       "progress-bar",
       "radio",
       "skeleton",
@@ -168,6 +169,7 @@
       "list-item",
       "listbox-item",
       "menu-item",
+      "nav-item",
       "progress-bar",
       "radio",
       "skeleton",
@@ -192,7 +194,6 @@
       "menu-button",
       "message-bar",
       "nav",
-      "nav-item",
       "popover",
       "radio-group",
       "scrollbar",
@@ -220,7 +221,6 @@
       "menu-button",
       "message-bar",
       "nav",
-      "nav-item",
       "popover",
       "radio-group",
       "scrollbar",
@@ -728,6 +728,23 @@
           "web/accessibility.md",
           "web/interaction.md"
         ]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "nav-item",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
