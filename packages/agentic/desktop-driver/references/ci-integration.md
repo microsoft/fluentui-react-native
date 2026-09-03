@@ -82,19 +82,21 @@ This repository's current PR workflow provides examples in
 `.github/workflows/pr.yml`:
 
 - `macos-storybook` builds packages, bundles, prepares pods, and runs macOS
-  `stories-and-tests`. It creates an ephemeral trusted code-signing identity in
-  an isolated job keychain, exports the identity SHA-1 to every Desktop Driver
-  command, explicitly builds the helper, runs noninteractive permission
-  diagnostics without prompting or modifying TCC, and uploads the diagnostic
-  with the smoke artifacts;
+  `stories-and-tests`. The shared `.github/actions/setup-desktop-driver` action
+  creates a job-local cache, explicitly builds the helper, runs noninteractive
+  permission diagnostics without prompting or modifying TCC, and pins later
+  resolution to that verified artifact. GitHub-hosted runners use an ad hoc
+  signature because changing trust settings requires interactive
+  authorization. A managed self-hosted runner can instead pass a
+  pre-provisioned stable identity through the action's
+  `macos-signing-identity` input;
 - `windows-storybook` prepares the generated app, installs the required Windows
   App Runtime for that app, runs the shared Windows native build contract,
-  explicitly builds the helper into a job-local cache, verifies it with
-  `doctor --platform windows`, pins later resolution to `never`, and runs
-  Windows `stories-and-tests`;
-- `win32-storybook` explicitly builds the same Windows provider into its own
-  job-local cache, verifies the `win32` endpoint with doctor, pins later
-  resolution to `never`, and runs the authored plans through the prebuilt Paper
+  and asks the same setup action to verify the `windows` endpoint before
+  running Windows `stories-and-tests`;
+- `win32-storybook` asks the setup action to build the same Windows provider
+  into its own job-local cache, verify the `win32` endpoint, and pin later
+  resolution before running the authored plans through the prebuilt Paper
   endpoint.
 
 Both Windows jobs upload their doctor report, successful native build log, and

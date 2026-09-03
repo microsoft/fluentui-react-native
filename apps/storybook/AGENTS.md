@@ -58,6 +58,11 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 
 ## macOS native workflow
 
+- In CI, use `.github/actions/setup-desktop-driver` to create the job-local
+  cache, build and diagnose the helper, and pin later resolution to the
+  verified artifact. GitHub-hosted runners use an ad hoc signature because
+  changing certificate trust requires interactive authorization; managed
+  self-hosted runners pass a pre-provisioned stable signing identity.
 - Run `yarn storybook prep --macos` for project generation and Pod installation. Do not run CocoaPods from the
   repository root because subprocess dependency resolution must start in this workspace.
 - Run `yarn storybook bundle --macos` for the JavaScript bundle, `yarn storybook build --macos` for a non-launching
@@ -75,9 +80,9 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 
 ## Windows native workflow
 
-- In CI, configure a job-local `FURN_DESKTOP_DRIVER_CACHE_ROOT`, run the shared
-  Windows native contract, build and diagnose the helper explicitly, then set
-  `FURN_DESKTOP_DRIVER_BUILD_POLICY=never` before `prep` or `smoke`.
+- In CI, use `.github/actions/setup-desktop-driver` to run the shared Windows
+  native contract, build and diagnose the helper in a job-local cache, and pin
+  later resolution to the verified artifact before `prep` or `smoke`.
 - GitHub-hosted Windows is not the physical-input qualification environment.
   Disable keyboard, physical-click, and wheel through
   `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES`; leave them enabled on the
@@ -99,9 +104,10 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 
 ## Win32 native workflow
 
-- In CI, build and diagnose `--win32` into a job-local cache and pin
-  `FURN_DESKTOP_DRIVER_BUILD_POLICY=never` before smoke. The separate Windows
-  Storybook job owns the shared provider's opt-in native contract.
+- In CI, use `.github/actions/setup-desktop-driver` to build and diagnose the
+  `win32` endpoint in a job-local cache and pin later resolution before smoke.
+  The separate Windows Storybook job owns the shared provider's opt-in native
+  contract.
 - Win32 is the `@office-iss/react-native-win32` Paper endpoint hosted by
   `@office-iss/rex-win32`; do not treat it as the React Native Windows Fabric
   endpoint or generate a `react-native-test-app` project for it.

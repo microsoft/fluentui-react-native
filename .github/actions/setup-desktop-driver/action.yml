@@ -1,0 +1,195 @@
+name: Set up Desktop Driver
+description: Build and verify the native Desktop Driver helper for a desktop endpoint.
+
+inputs:
+  platform:
+    description: Desktop endpoint to provision.
+    required: true
+  working-directory:
+    description: Workspace that exposes the desktop-driver script.
+    required: false
+    default: apps/storybook
+  run-native-contract:
+    description: Run the target-OS native package contract before provisioning.
+    required: false
+    default: 'false'
+  macos-signing-identity:
+    description: Pre-provisioned macOS code-signing identity. Leave empty for an ad hoc CI signature.
+    required: false
+    default: ''
+  disabled-input-features:
+    description: Comma-separated input features unavailable on the runner.
+    required: false
+    default: ''
+
+outputs:
+  cache-root:
+    description: Job-local native helper cache.
+    value: ${{ steps.configure-macos.outputs.cache-root || steps.configure-windows.outputs.cache-root }}
+  doctor-path:
+    description: Native helper diagnostic report.
+    value: ${{ steps.build-macos.outputs.doctor-path || steps.build-windows.outputs.doctor-path }}
+
+runs:
+  using: composite
+  steps:
+    - name: Validate Desktop Driver platform
+      shell: bash
+      env:
+        DRIVER_PLATFORM: ${{ inputs.platform }}
+      run: |
+        set -euo pipefail
+
+        case "$DRIVER_PLATFORM:$RUNNER_OS" in
+          macos:macOS|windows:Windows|win32:Windows) ;;
+          macos:*|windows:*|win32:*)
+            echo "Desktop Driver endpoint '$DRIVER_PLATFORM' cannot run on '$RUNNER_OS'." >&2
+            exit 1
+            ;;
+          *)
+            echo "Unsupported Desktop Driver endpoint '$DRIVER_PLATFORM'." >&2
+            exit 1
+            ;;
+        esac
+
+    - name: Configure macOS Desktop Driver
+      id: configure-macos
+      if: inputs.platform == 'macos'
+      shell: bash
+      env:
+        DISABLED_INPUT_FEATURES: ${{ inputs.disabled-input-features }}
+        MACOS_SIGNING_IDENTITY: ${{ inputs.macos-signing-identity }}
+      run: |
+        set -euo pipefail
+
+        cache_root="$RUNNER_TEMP/furn-desktop-driver-native"
+        mkdir -p "$cache_root"
+        echo "FURN_DESKTOP_DRIVER_CACHE_ROOT=$cache_root" >> "$GITHUB_ENV"
+        echo "cache-root=$cache_root" >> "$GITHUB_OUTPUT"
+
+        echo "FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY=$MACOS_SIGNING_IDENTITY" >> "$GITHUB_ENV"
+        if [[ -n "$DISABLED_INPUT_FEATURES" ]]; then
+          echo "FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=$DISABLED_INPUT_FEATURES" >> "$GITHUB_ENV"
+        fi
+
+    - name: Configure Windows Desktop Driver
+      id: configure-windows
+      if: inputs.platform == 'windows' || inputs.platform == 'win32'
+      shell: pwsh
+      env:
+        DISABLED_INPUT_FEATURES: ${{ inputs.disabled-input-features }}
+      run: |
+        $ErrorActionPreference = 'Stop'
+
+        $cacheRoot = Join-Path $env:RUNNER_TEMP 'furn-desktop-driver-native'
+        New-Item -ItemType Directory -Force -Path $cacheRoot | Out-Null
+        "FURN_DESKTOP_DRIVER_CACHE_ROOT=$cacheRoot" |
+          Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+        "cache-root=$cacheRoot" |
+          Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+        if ($env:DISABLED_INPUT_FEATURES) {
+          "FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=$env:DISABLED_INPUT_FEATURES" |
+            Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+        }
+
+    - name: Verify macOS Desktop Driver native contract
+      if: inputs.run-native-contract == 'true' && inputs.platform == 'macos'
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        FURN_NATIVE_DRIVER_TEST: '1'
+      run: yarn workspace @fluentui-react-native/desktop-driver test --runInBand
+
+    - name: Verify Windows Desktop Driver native contract
+      if: inputs.run-native-contract == 'true' && (inputs.platform == 'windows' || inputs.platform == 'win32')
+      shell: pwsh
+      working-directory: ${{ github.workspace }}
+      env:
+        FURN_NATIVE_DRIVER_TEST: '1'
+      run: |
+        yarn workspace @fluentui-react-native/desktop-driver test --runInBand
+        if ($LASTEXITCODE -ne 0) {
+          throw "Desktop Driver native contract exited with code $LASTEXITCODE."
+        }
+
+    - name: Build and diagnose macOS Desktop Driver
+      id: build-macos
+      if: inputs.platform == 'macos'
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        DOCTOR_PATH: ${{ runner.temp }}/desktop-driver-macos-doctor.json
+        MACOS_SIGNING_IDENTITY: ${{ inputs.macos-signing-identity }}
+      run: |
+        set -euo pipefail
+
+        doctor_path="$RUNNER_TEMP/desktop-driver-macos-doctor.json"
+        echo "doctor-path=$doctor_path" >> "$GITHUB_OUTPUT"
+        yarn desktop-driver build-driver --platform macos
+        # Hosted CI reports actual TCC authority; it must not prompt or mutate the permission database.
+        yarn desktop-driver doctor --platform macos --permissions | tee "$doctor_path"
+
+        node <<'NODE'
+        const fs = require('node:fs');
+
+        const report = JSON.parse(fs.readFileSync(process.env.DOCTOR_PATH, 'utf8'));
+        const expectedIdentity = process.env.MACOS_SIGNING_IDENTITY.trim();
+        const expectedMode = expectedIdentity ? 'signed' : 'adhoc';
+        if (!report.ready || report.result?.signing?.mode !== expectedMode) {
+          throw new Error(`The macOS Desktop Driver helper is not ready with the expected ${expectedMode} signature.`);
+        }
+        if (expectedIdentity) {
+          const expectedHash = /^[0-9a-f]{40}$/i.test(expectedIdentity) ? expectedIdentity.toUpperCase() : undefined;
+          if (
+            (expectedHash && report.result.signing.certificateHash !== expectedHash) ||
+            (!expectedHash && report.result.signing.identity !== expectedIdentity)
+          ) {
+            throw new Error('The verified helper certificate does not match the configured macOS signing identity.');
+          }
+        }
+        if (report.permissions?.schemaVersion !== 1 || report.permissions?.type !== 'permissions') {
+          throw new Error('The macOS Desktop Driver permission diagnostic is missing or unsupported.');
+        }
+        NODE
+        echo "FURN_DESKTOP_DRIVER_BUILD_POLICY=never" >> "$GITHUB_ENV"
+        echo "FURN_DESKTOP_DRIVER_BUILD_POLICY=never" >> "$GITHUB_ENV"
+
+    - name: Build and diagnose Windows Desktop Driver
+      id: build-windows
+      if: inputs.platform == 'windows' || inputs.platform == 'win32'
+      shell: pwsh
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        DRIVER_PLATFORM: ${{ inputs.platform }}
+      run: |
+        $ErrorActionPreference = 'Stop'
+
+        yarn desktop-driver build-driver --platform $env:DRIVER_PLATFORM
+        if ($LASTEXITCODE -ne 0) {
+          throw "Desktop Driver build exited with code $LASTEXITCODE."
+        }
+
+        $doctorPath = Join-Path $env:RUNNER_TEMP "desktop-driver-$env:DRIVER_PLATFORM-doctor.json"
+        "doctor-path=$doctorPath" |
+          Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+        $doctorOutput = yarn desktop-driver doctor --platform $env:DRIVER_PLATFORM
+        $doctorExitCode = $LASTEXITCODE
+        $doctorOutput | Set-Content -Path $doctorPath -Encoding utf8
+        if ($doctorExitCode -ne 0) {
+          throw "Desktop Driver doctor exited with code $doctorExitCode."
+        }
+
+        $report = ($doctorOutput -join [Environment]::NewLine) | ConvertFrom-Json
+        if (
+          -not $report.ready -or
+          $report.result.provider -ne 'windows' -or
+          $report.result.architecture -ne 'x64' -or
+          $report.result.wireProtocol.major -ne 1 -or
+          -not ($report.result.endpoints -contains $env:DRIVER_PLATFORM)
+        ) {
+          throw "The verified helper does not satisfy the $env:DRIVER_PLATFORM x64 provider contract."
+        }
+
+        "FURN_DESKTOP_DRIVER_BUILD_POLICY=never" |
+          Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
