@@ -2,13 +2,11 @@ import type { DestructiveButtonProps, DestructiveButtonState } from './destructi
 import { useAccessibilityLabelWarning, usePressableState, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 import { Pressable } from 'react-native';
-import type { PressableProps } from 'react-native';
+
+import { disableNativeFocusRingProps, resolveFocusable } from '../../common/interaction';
+import type { NativeFocusPressableProps } from '../../common/interaction';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
-
-type NativeFocusPressableProps = PressableProps & {
-  enableFocusRing: boolean;
-};
 
 function hasVisibleContent(content: DestructiveButtonProps['content']): boolean {
   if (content === undefined || content === null || (typeof content === 'string' && content.trim().length === 0)) {
@@ -62,6 +60,7 @@ export function useDestructiveButton_unstable(props: DestructiveButtonProps): De
   const themeState = useThemeState();
   const nativeProps: NativeFocusPressableProps = {
     ...rest,
+    ...disableNativeFocusRingProps,
     role: 'button',
     accessibilityState: {
       ...resolvedAccessibilityState,
@@ -69,9 +68,7 @@ export function useDestructiveButton_unstable(props: DestructiveButtonProps): De
     },
     accessible: rest.accessible ?? true,
     disabled,
-    // RNW 0.81 crashes when either outline props or its native focus ring creates border visuals after mount.
-    enableFocusRing: false,
-    focusable: !disabled && (rest.focusable ?? true),
+    focusable: resolveFocusable(rest.focusable, disabled),
   };
   const [pressableProps, pressableState] = usePressableState(nativeProps);
   const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });

@@ -2,7 +2,7 @@
 
 ## Native semantics
 
-The root is the only accessible element. It sets `accessibilityRole="link"` and
+The root is the only accessible element. It sets `role="link"` and
 publishes `disabled` through `accessibilityState`, merged over any state the
 caller passes. There is no checked, selected, or expanded state, because a link
 has none.

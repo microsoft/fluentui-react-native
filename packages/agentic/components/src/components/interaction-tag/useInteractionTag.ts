@@ -1,11 +1,17 @@
-import * as React from 'react';
 import { Pressable, View } from 'react-native';
-import type { PressableProps } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useAccessibilityLabelWarning, useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
+import {
+  useAccessibilityLabelWarning,
+  useDevWarning,
+  useOptionalSlot,
+  usePressableState,
+  useSlot,
+} from '@fluentui-react-native/framework-base';
 
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { disableNativeFocusRingProps, resolveFocusable } from '../../common/interaction';
+import type { NativeFocusPressableProps } from '../../common/interaction';
 import { semanticIconSources } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
 import { Avatar } from '../avatar/avatar';
@@ -24,10 +30,6 @@ const dividerProps = {
 } as const;
 
 const emptyActionProps: InteractionTagActionProps = {};
-
-type NativeFocusPressableProps = PressableProps & {
-  enableFocusRing: boolean;
-};
 
 export function useInteractionTag_unstable(props: InteractionTagProps): InteractionTagState {
   const {
@@ -72,45 +74,36 @@ export function useInteractionTag_unstable(props: InteractionTagProps): Interact
     warning: 'InteractionTag: the dismiss slot requires an accessibilityLabel that names the tag it removes.',
   });
 
-  React.useEffect(() => {
-    if (__DEV__ && iconOnly && !hasLeadingContent) {
-      console.warn('InteractionTag: icon-only tags require a leading icon or an avatar.');
-    }
-  }, [hasLeadingContent, iconOnly]);
-
-  React.useEffect(() => {
-    if (__DEV__ && hasAvatar && hasLeadingIcon) {
-      console.warn('InteractionTag: provide a leading icon or an avatar, not both. The avatar is used.');
-    }
-  }, [hasAvatar, hasLeadingIcon]);
+  useDevWarning(iconOnly && !hasLeadingContent, 'InteractionTag: icon-only tags require a leading icon or an avatar.');
+  useDevWarning(hasAvatar && hasLeadingIcon, 'InteractionTag: provide a leading icon or an avatar, not both. The avatar is used.');
 
   const themeState = useThemeState();
 
   const primaryNativeProps: NativeFocusPressableProps = {
     ...primaryRest,
-    accessibilityRole: 'button',
+    ...disableNativeFocusRingProps,
+    role: 'button',
     accessibilityState: {
       ...primaryRest.accessibilityState,
       disabled,
     },
     accessible: primaryRest.accessible ?? true,
     disabled,
-    enableFocusRing: false,
-    focusable: !disabled && (primaryRest.focusable ?? true),
+    focusable: resolveFocusable(primaryRest.focusable, disabled),
   };
   const [primaryPressableProps, primaryState] = usePressableState(primaryNativeProps);
 
   const dismissNativeProps: NativeFocusPressableProps = {
     ...dismissRest,
-    accessibilityRole: 'button',
+    ...disableNativeFocusRingProps,
+    role: 'button',
     accessibilityState: {
       ...dismissRest.accessibilityState,
       disabled,
     },
     accessible: dismissRest.accessible ?? true,
     disabled,
-    enableFocusRing: false,
-    focusable: !disabled && (dismissRest.focusable ?? true),
+    focusable: resolveFocusable(dismissRest.focusable, disabled),
   };
   const [dismissPressableProps, dismissState] = usePressableState(dismissNativeProps);
 

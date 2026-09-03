@@ -60,7 +60,7 @@ export type LabelStateProps = {
  * Label owns the root accessibility role and focusability, and takes its text through the `content` slot rather
  * than through children.
  */
-export type LabelExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'> & {
+export type LabelExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable' | 'role'> & {
   children?: never;
 };
 

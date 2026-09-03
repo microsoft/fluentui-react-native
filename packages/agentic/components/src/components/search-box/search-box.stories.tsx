@@ -74,7 +74,7 @@ export const Default: Story = {
           requires: ['keyboard'],
           steps: [
             { action: 'wait', target: { testId: 'agentic-storybook-search-box' } },
-            { expect: { state: 'role', target: { testId: 'agentic-storybook-search-box' }, value: 'textbox' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-search-box' }, value: 'searchbox' } },
             { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-search-box' }, value: 'Search files' } },
             { expect: { state: 'exists', target: { testId: 'search-box-clear-button' }, value: false } },
             { action: 'type', target: { testId: 'agentic-storybook-search-box' }, text: 'quarterly' },

@@ -24,7 +24,7 @@ const ExternallyDrivenCheck: TooltipProps = { content: 'Refresh', visible: true 
 const ContentSlotCheck: TooltipContent = { as: TextReplacement, children: 'Refresh', variant: 'body1' };
 
 const TriggerPresentationCheck: TooltipTriggerProps = {
-  accessibilityRole: 'link',
+  role: 'link',
   children: <NativeText>Refresh</NativeText>,
   onHoverIn: () => undefined,
   onPress: () => undefined,
@@ -64,7 +64,7 @@ const TriggerAccessibleCheck: TooltipTriggerProps = { accessible: false };
 const RootLabelCheck: TooltipProps = { accessibilityLabel: 'Refresh', content: 'Refresh' };
 
 // @ts-expect-error the root is a passive wrapper, so it does not take an accessibility role.
-const RootRoleCheck: TooltipProps = { accessibilityRole: 'button', content: 'Refresh' };
+const RootRoleCheck: TooltipProps = { role: 'button', content: 'Refresh' };
 
 // @ts-expect-error the trigger slot does not accept an `as` replacement, because Tooltip owns the trigger behavior.
 const TriggerAsCheck: TooltipProps = { content: 'Refresh', trigger: { as: TextReplacement } };

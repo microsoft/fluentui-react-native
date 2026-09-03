@@ -96,9 +96,9 @@ own native press and do not activate the row.
 ## Divergences from Flex
 
 - `nav-item-native-role-and-current` (**accepted**): React Native has no
-  `aria-current`. An item row publishes `accessibilityRole: 'link'` with
+  `aria-current`. An item row publishes `role: 'link'` with
   `accessibilityState.selected`, and a category row publishes
-  `accessibilityRole: 'button'` with `accessibilityState.expanded`.
+  `role: 'button'` with `accessibilityState.expanded`.
 - `nav-item-indicator-inside-backplate` (**accepted**): the selected indicator
   is inset inside the row's start edge rather than positioned outside it,
   because React Native gives no cross-platform guarantee for content drawn

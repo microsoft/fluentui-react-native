@@ -30,7 +30,7 @@ Pass a string for the common case, or `Text` slot properties when the label need
 
 ## Writing the trigger
 
-The `trigger` slot supplies presentation only: children, style, a test identifier, an accessible name, an `accessibilityRole` when the trigger is not a button, a `ref`, and pointer, focus, and press handlers that run after Tooltip's own handling. Tooltip owns the description, the accessibility state, the accessible and focusable flags, the disabled state, and the native focus ring, so the slot type does not accept them.
+The `trigger` slot supplies presentation only: children, style, a test identifier, an accessible name, an ARIA-aligned `role` when the trigger is not a button, a `ref`, and pointer, focus, and press handlers that run after Tooltip's own handling. Tooltip owns the description, the accessibility state, the accessible and focusable flags, the disabled state, and the native focus ring, so the slot type does not accept them.
 
 Trigger activation never reveals the tooltip; it hides it. The trigger's own `onPress` still runs, so wrapping a real control keeps that control's action intact.
 

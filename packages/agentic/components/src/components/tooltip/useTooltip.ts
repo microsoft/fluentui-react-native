@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { attachSlotProps, useAccessibilityLabelWarning, useControllableValue, useSlot } from '@fluentui-react-native/framework-base';
 
+import { disableNativeFocusRingProps } from '../../common/interaction';
 import { Text } from '../text/text';
 import { usePopover_unstable } from '../popover/usePopover';
 import type { TooltipContentProps, TooltipProps, TooltipState, TooltipTriggerProps } from './tooltip.types';
@@ -36,11 +37,11 @@ export function useTooltip_unstable(props: TooltipProps): TooltipState {
   } = props;
 
   const {
-    accessibilityRole: triggerAccessibilityRole = 'button',
     onBlur: triggerOnBlur,
     onFocus: triggerOnFocus,
     onHoverIn: triggerOnHoverIn,
     onHoverOut: triggerOnHoverOut,
+    role: triggerRole = 'button',
     testID: triggerTestID,
     ...triggerPresentationProps
   } = (triggerProp ?? {}) as TooltipTriggerProps;
@@ -162,8 +163,7 @@ export function useTooltip_unstable(props: TooltipProps): TooltipState {
 
   const popoverTrigger = {
     ...triggerPresentationProps,
-    // RNW 0.81 crashes when either outline props or its native focus ring creates border visuals after mount.
-    enableFocusRing: false,
+    ...disableNativeFocusRingProps,
     onBlur: handleBlur,
     onFocus: handleFocus,
     onHoverIn: handleHoverIn,
@@ -193,7 +193,7 @@ export function useTooltip_unstable(props: TooltipProps): TooltipState {
   // is removed and the label text becomes the trigger's description instead.
   attachSlotProps(popoverState.trigger, {
     accessibilityHint: labelText,
-    accessibilityRole: triggerAccessibilityRole,
+    role: triggerRole,
     accessibilityState: { ...accessibilityState, disabled },
     'aria-expanded': undefined,
   });
@@ -204,7 +204,6 @@ export function useTooltip_unstable(props: TooltipProps): TooltipState {
     testID: 'tooltip-surface',
   });
   attachSlotProps(popoverState.surfaceContent, {
-    accessibilityRole: undefined,
     role: 'tooltip',
     testID: 'tooltip-surface-content',
   });

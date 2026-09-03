@@ -112,6 +112,7 @@ export function useSearchBox_unstable(props: SearchBoxProps): SearchBoxState {
     accessibilityLabelledBy: userTextInputProps.accessibilityLabelledBy ?? accessibilityLabelledBy,
     onKeyPress: mergeHandlers(userTextInputProps.onKeyPress, handleKeyPress),
     onSubmitEditing: mergeHandlers(userTextInputProps.onSubmitEditing, handleSubmitEditing),
+    role: userTextInputProps.role ?? 'searchbox',
   };
 
   // The field owns every chrome, size, typography, and visual-state binding. SearchBox forwards the

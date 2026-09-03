@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import type { Pressable } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useControllableValue, useSlot } from '@fluentui-react-native/framework-base';
+import { useControllableValue, useDevWarning, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Tab } from '../tab/tab';
 import type { TabProps } from '../tab/tab.types';
@@ -57,6 +57,16 @@ export function useTabList_unstable(props: TabListProps): TabListState {
   } = props;
   const themeState = useThemeState();
   const items = React.useMemo(() => getTabItems(children, disabled), [children, disabled]);
+  const duplicateValue = React.useMemo(() => {
+    const seen = new Set<string>();
+    return items.find((item) => {
+      if (seen.has(item.value)) {
+        return true;
+      }
+      seen.add(item.value);
+      return false;
+    })?.value;
+  }, [items]);
   const firstEnabledValue = items.find((item) => !item.disabled)?.value;
   const initialSelection = findEnabledValue(items, defaultSelectedValue) ?? firstEnabledValue;
   const [selectedValue, setSelectedValue] = useControllableValue(
@@ -70,20 +80,7 @@ export function useTabList_unstable(props: TabListProps): TabListState {
   const tabRefs = React.useRef(new Map<string, React.RefObject<React.ElementRef<typeof Pressable> | null>>());
   const previousSelectedValue = React.useRef(selectedValue);
 
-  React.useEffect(() => {
-    const seen = new Set<string>();
-    const duplicate = items.find((item) => {
-      if (seen.has(item.value)) {
-        return true;
-      }
-      seen.add(item.value);
-      return false;
-    });
-
-    if (__DEV__ && duplicate) {
-      console.error(`TabList values must be unique. Duplicate value: "${duplicate.value}".`);
-    }
-  }, [items]);
+  useDevWarning(duplicateValue !== undefined, `TabList values must be unique. Duplicate value: "${duplicateValue}".`, 'error');
 
   React.useEffect(() => {
     const selectedEnabledValue = findEnabledValue(items, selectedValue);
@@ -202,7 +199,7 @@ export function useTabList_unstable(props: TabListProps): TabListState {
 
   const root = useSlot(View, {
     ...rest,
-    accessibilityRole: 'tablist',
+    role: 'tablist',
     accessibilityState: { disabled },
     accessible: true,
     focusable: false,

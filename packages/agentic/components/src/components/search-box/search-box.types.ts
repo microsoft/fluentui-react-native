@@ -73,7 +73,7 @@ export type SearchBoxStateProps = {
   onPressOut?: (...args: any[]) => void;
 };
 
-export type SearchBoxExposedRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type SearchBoxExposedRootProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'role'>;
 
 export type SearchBoxProps = SearchBoxStateProps & ComponentProps<SearchBoxSlots, SearchBoxExposedRootProps>;
 

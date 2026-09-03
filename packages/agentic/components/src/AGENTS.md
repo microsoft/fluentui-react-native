@@ -22,6 +22,8 @@ the change crosses component boundaries.
 - Generalizable non-styling hooks belong in `framework-base/src/hooks`.
 - Styling helpers belong in `agentic/design/src/styling`.
 - Component-library-specific non-public types, constants, and helpers belong in `src/common`.
+- Reuse `src/common/accessibility.ts` for accessible-name detection and `src/common/interaction.ts` for disabled
+  focusability and native focus-ring policy instead of repeating those decisions in component hooks.
 - Primitives are public from `@fluentui-react-native/components/primitives`, must remain unstyled, and require a colocated
   `CONTRACT.md`. Extract one only for a repeated behavioral or structural contract that is useful to consumers; keep
   package-private helpers in `src/common`.

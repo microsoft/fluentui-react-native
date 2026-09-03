@@ -31,7 +31,7 @@ const TriggerPresentationCheck: PopoverTriggerProps = {
 };
 
 // @ts-expect-error the trigger slot is presentation only, so Popover owns the trigger role.
-const TriggerRoleCheck: PopoverTriggerProps = { accessibilityRole: 'link' };
+const TriggerRoleCheck: PopoverTriggerProps = { role: 'link' };
 
 // @ts-expect-error Popover derives the expanded and disabled trigger state from its own open and disabled values.
 const TriggerStateCheck: PopoverTriggerProps = { accessibilityState: { expanded: true } };
@@ -46,7 +46,7 @@ const TriggerFocusableCheck: PopoverTriggerProps = { focusable: false };
 const RootLabelCheck: PopoverProps = { accessibilityLabel: 'Sync details' };
 
 // @ts-expect-error the root is a passive wrapper, so it does not take an accessibility role.
-const RootRoleCheck: PopoverProps = { accessibilityRole: 'button' };
+const RootRoleCheck: PopoverProps = { role: 'button' };
 
 // @ts-expect-error the trigger slot does not accept an `as` replacement, because Popover owns the trigger behavior.
 const TriggerAsCheck: PopoverProps = { trigger: { as: ContentReplacement } };

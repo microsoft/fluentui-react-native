@@ -29,7 +29,7 @@ const ChildrenLabel: LabelProps = {
 
 // @ts-expect-error Label owns its accessibility role.
 const RoleLabel: LabelProps = {
-  accessibilityRole: 'header',
+  role: 'heading',
   content: 'Display name',
 };
 

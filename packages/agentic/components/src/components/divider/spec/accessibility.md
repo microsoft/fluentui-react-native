@@ -2,7 +2,7 @@
 
 ## Native semantics
 
-The root is a `View` with `accessibilityRole="separator"` and defaults to
+The root is a `View` with `role="separator"` and defaults to
 `accessible={true}`. The role is owned by the component and is not part of the
 public root prop surface.
 

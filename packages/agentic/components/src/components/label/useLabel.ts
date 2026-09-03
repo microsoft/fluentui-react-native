@@ -83,7 +83,6 @@ export function useLabel_unstable(props: LabelProps): LabelState {
     ...rest,
     accessibilityLabel: resolvedAccessibilityLabel,
     accessible: rest.accessible ?? true,
-    accessibilityRole: 'text',
     focusable: false,
   });
   // Slots keep default props by identity, and React freezes them once rendered, so each render gets its own copy.

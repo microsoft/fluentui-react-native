@@ -11,7 +11,7 @@ import { SearchBox } from './search-box';
 type RenderResult = Awaited<ReturnType<typeof render>>;
 
 function getTextbox(component: RenderResult) {
-  return component.getByRole('textbox');
+  return component.getByRole('searchbox');
 }
 
 function flattenStyle(style: unknown) {
@@ -33,7 +33,7 @@ describe('SearchBox', () => {
     expect(component.getByTestId('search-box-contents')).toBeOnTheScreen();
     expect(component.getByTestId('search-box-icon')).toBeOnTheScreen();
     expect(component.queryByTestId('search-box-underline')).toBeNull();
-    expect(textbox.props.accessibilityRole).toBe('textbox');
+    expect(textbox.props.role).toBe('searchbox');
     expect(textbox.props.accessibilityLabel).toBe('Search messages');
     expect(textbox.props.value).toBe('');
     expect(flattenStyle(component.getByTestId('search-box-contents').props.style)).toMatchObject({

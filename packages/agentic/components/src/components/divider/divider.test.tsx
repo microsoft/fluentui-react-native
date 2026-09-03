@@ -24,7 +24,7 @@ describe('Divider', () => {
     const component = await renderDivider({});
     const root = getRoot(component);
 
-    expect(root.props.accessibilityRole).toBe('separator');
+    expect(root.props.role).toBe('separator');
     expect(root.props.accessibilityLabel).toBe('Text');
     expect(root.props.focusable).toBe(false);
     expect(component.getByText('Text')).toBeOnTheScreen();

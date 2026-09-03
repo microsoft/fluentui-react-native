@@ -25,10 +25,17 @@ export type TooltipPosition = DirectionalHint;
 
 /**
  * Trigger properties owned by Tooltip. A consumer cannot supply them because the component cannot honor both its own
- * contract and a conflicting value. `accessibilityRole` is not owned: Tooltip describes a control rather than deciding
- * what that control is.
+ * contract and a conflicting value. `role` is not owned: Tooltip describes a control rather than deciding what that
+ * control is.
  */
-type OwnedTriggerProps = 'accessibilityHint' | 'accessibilityState' | 'accessible' | 'aria-expanded' | 'disabled' | 'focusable';
+type OwnedTriggerProps =
+  | 'accessibilityHint'
+  | 'accessibilityRole'
+  | 'accessibilityState'
+  | 'accessible'
+  | 'aria-expanded'
+  | 'disabled'
+  | 'focusable';
 
 /**
  * The presentation surface of the trigger. The pointer, focus, and press handlers are allowed and run after Tooltip's

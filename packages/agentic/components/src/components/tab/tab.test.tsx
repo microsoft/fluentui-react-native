@@ -99,7 +99,7 @@ describe('Tab', () => {
     const labels = component.getAllByText('Files', { includeHiddenElements: true });
     const tokens = defaultFlexTokens;
 
-    expect(root.props.accessibilityRole).toBe('tab');
+    expect(root.props.role).toBe('tab');
     expect(root.props.accessibilityControls).toBe('files-panel');
     expect(root.props.accessibilityState).toEqual({ disabled: false, selected: false });
     expect(root.props.focusable).toBe(true);

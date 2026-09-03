@@ -24,7 +24,7 @@ Narrator or VoiceOver in every context.
 
 ## Role and state
 
-The text input reports the textbox role. Its accessibility state carries
+The text input reports `role="searchbox"`. Its accessibility state carries
 `disabled` from the `disabled` prop and `readOnly` from the `readOnly` prop, so
 assistive technology can distinguish a field that cannot be reached from a
 field that can be read but not edited.
@@ -34,7 +34,7 @@ carries no name, so it never introduces a second reading of the field's purpose.
 
 ## Clear button
 
-The clear button is a separate accessible control with the button role. It ships
+The clear button is a separate accessible control with `role="button"`. It ships
 the default accessible name `Clear search`; replace it through the
 `clearButton` slot when the surrounding screen needs a different phrasing or a
 different language.

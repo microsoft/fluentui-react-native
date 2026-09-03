@@ -12,6 +12,7 @@ import {
   useSlot,
 } from '@fluentui-react-native/framework-base';
 
+import { resolveFocusable } from '../../common/interaction';
 import type { PopoverProps, PopoverState, PopoverTriggerProps } from './popover.types';
 
 const defaultPosition = 'bottomLeftEdge';
@@ -94,12 +95,12 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
   });
   const trigger = useSlot(Pressable, {
     ...triggerProps,
-    accessibilityRole: 'button',
+    role: 'button',
     accessibilityState: { ...accessibilityState, disabled, expanded: open },
     accessible: true,
     'aria-expanded': open,
     disabled,
-    focusable: !disabled,
+    focusable: resolveFocusable(triggerProps.focusable, disabled),
     ref: setTriggerRef as TriggerRef,
     testID: triggerProps.testID ?? 'popover-trigger',
   });
@@ -114,7 +115,7 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
   });
   const surfaceContent = useSlot(View, {
     accessibilityLabel: surfaceAccessibilityLabel,
-    accessibilityRole: 'dialog' as never,
+    role: 'dialog',
     accessible: true,
     collapsable: false,
     testID: 'popover-surface-content',

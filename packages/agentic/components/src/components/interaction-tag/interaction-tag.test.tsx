@@ -40,10 +40,10 @@ describe('InteractionTag', () => {
     const component = await renderInteractionTag({ ...withPrimaryTestId, content: 'Engineering' });
     const root = component.getByTestId('root');
 
-    expect(root.props.accessibilityRole).toBeUndefined();
+    expect(root.props.role).toBeUndefined();
     expect(root.children).toHaveLength(3);
-    expect(getPrimary(component).props.accessibilityRole).toBe('button');
-    expect(getDismiss(component).props.accessibilityRole).toBe('button');
+    expect(getPrimary(component).props.role).toBe('button');
+    expect(getDismiss(component).props.role).toBe('button');
     expect(component.getByText('Engineering')).toBeOnTheScreen();
     expect(flatten(root)).toMatchObject({ alignItems: 'stretch', flexDirection: 'row', minHeight: 24 });
     expect(flatten(root).backgroundColor).toBeUndefined();

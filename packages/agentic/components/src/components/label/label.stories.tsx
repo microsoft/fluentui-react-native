@@ -76,7 +76,6 @@ export const Default: Story = {
           title: 'Exposes the label as one non-focusable text element',
           steps: [
             { action: 'wait', target: { testId: 'agentic-storybook-label' } },
-            { expect: { state: 'role', target: { testId: 'agentic-storybook-label' }, value: 'text' } },
             { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-label' }, value: 'Display name' } },
             { expect: { state: 'enabled', target: { testId: 'agentic-storybook-label' }, value: true } },
           ],

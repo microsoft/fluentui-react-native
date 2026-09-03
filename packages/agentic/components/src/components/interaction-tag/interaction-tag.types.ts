@@ -72,7 +72,7 @@ export type InteractionTagStateProps = {
   size?: InteractionTagSize;
 };
 
-export type InteractionTagRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type InteractionTagRootProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'role'>;
 
 /**
  * Props for either action region. Children are owned by the component, so an action slot accepts a props object and
@@ -80,7 +80,7 @@ export type InteractionTagRootProps = OwnedRootProps<PropsWithRefOf<typeof View>
  */
 export type InteractionTagActionProps = {
   as?: React.ComponentType<PropsOf<typeof Pressable>>;
-} & OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+} & OwnedRootProps<PropsWithRefOf<typeof Pressable>, 'accessibilityRole' | 'role'>;
 
 /**
  * Leading content is an icon or an avatar, never both.

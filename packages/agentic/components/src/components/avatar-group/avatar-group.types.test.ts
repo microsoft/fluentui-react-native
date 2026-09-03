@@ -26,7 +26,7 @@ const HiddenOverflowAvatarGroupProps: AvatarGroupProps = {
 
 const StyledAvatarGroupProps: AvatarGroupProps = {
   ref: null,
-  root: { accessibilityRole: 'summary' },
+  root: { role: 'summary' },
   style: { alignSelf: 'center' },
 };
 

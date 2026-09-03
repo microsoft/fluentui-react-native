@@ -3,7 +3,7 @@ import type { ColorValue, TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 import type { ThemeState } from '@fluentui-react-native/design';
-import { getNumericStyleValue, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import { getNumericStyleValueAsNumber as toNumber, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
 import type { StyleDefinition } from '@fluentui-react-native/design/styling';
 import { cornerRadiusNone, size160, size200, size240 } from '@fluentui-react-native/design/tokens/global';
 
@@ -72,8 +72,6 @@ type RootStateLevels = typeof rootStateLevels;
 type ContentStateLevels = typeof contentStateLevels;
 type TextStateLevels = typeof textStateLevels;
 type VisualStateLevels = typeof visualStateLevels;
-
-const toNumber = (value: unknown): number => Number(getNumericStyleValue(value));
 
 function getMetrics(tokens: FlexTokens, size: InputSize) {
   const { fontSize, lineHeight, spacing } = tokens;

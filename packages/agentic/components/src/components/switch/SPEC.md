@@ -40,7 +40,7 @@ never defers, and never renders on and off captions inside the track.
 | `onPress`        | `PressableProps['onPress']`        | none         | Forwarded after the toggle has been applied.                                                                       |
 | `style`          | `StyleProp<ViewStyle>`             | none         | Applied to the hit area after the resolved root styles, not to the outer container.                                |
 
-The root accepts the remaining owned `PressableProps`; `accessibilityRole` is
+The root accepts the remaining owned `PressableProps`; `role` and the legacy `accessibilityRole` are
 fixed and caller `accessibilityState` is merged under the component's own
 checked and disabled state.
 

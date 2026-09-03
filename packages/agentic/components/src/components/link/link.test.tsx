@@ -47,7 +47,7 @@ describe('Link', () => {
     const component = await renderLink({});
     const root = getRoot(component);
 
-    expect(root.props.accessibilityRole).toBe('link');
+    expect(root.props.role).toBe('link');
     expect(root.props.accessibilityState).toEqual({ disabled: false });
     expect(root.props.accessible).toBe(true);
     expect(root.props.focusable).toBe(true);

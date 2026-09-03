@@ -48,7 +48,7 @@ describe('Tooltip', () => {
     const component = await renderTooltip();
     const trigger = getTrigger(component);
 
-    expect(trigger.props.accessibilityRole).toBe('button');
+    expect(trigger.props.role).toBe('button');
     expect(trigger.props.accessibilityHint).toBe(label);
     expect(trigger.props.accessibilityState).toEqual({ disabled: false });
     expect(trigger.props.accessible).toBe(true);
@@ -293,7 +293,6 @@ describe('Tooltip', () => {
     const surfaceContent = component.getByTestId('tooltip-surface-content');
 
     expect(surfaceContent.props.role).toBe('tooltip');
-    expect(surfaceContent.props.accessibilityRole).toBeUndefined();
     expect(surfaceContent.props.accessibilityLabel).toBe(label);
   });
 
@@ -368,9 +367,9 @@ describe('Tooltip', () => {
   });
 
   it('accepts a consumer trigger role for a trigger that is not a button', async () => {
-    const component = await renderTooltip({ trigger: { accessibilityRole: 'image' } });
+    const component = await renderTooltip({ trigger: { role: 'img' } });
 
-    expect(getTrigger(component).props.accessibilityRole).toBe('image');
+    expect(getTrigger(component).props.role).toBe('img');
   });
 
   it('preserves a consumer trigger test identifier', async () => {

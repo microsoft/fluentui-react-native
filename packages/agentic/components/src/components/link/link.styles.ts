@@ -1,8 +1,12 @@
 import { StyleSheet } from 'react-native';
-import type { DimensionValue, TextStyle } from 'react-native';
+import type { TextStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
-import { getNumericStyleValue, getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  getNumericStyleValueAsNumber as toGapValue,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+} from '@fluentui-react-native/design/styling';
 import type { ColorStyleDefinition, StateNames, StyleDefinition, TextColorStyle } from '@fluentui-react-native/design/styling';
 
 import type { LinkState } from './link.types';
@@ -128,10 +132,6 @@ export function getLinkDecorationStyle(state: LinkState): TextStyle {
     return linkStyles.decorationHidden;
   }
   return state.typeSet === 'content' ? linkStyles.decorationContent : linkStyles.decorationFunctional;
-}
-
-function toGapValue(value: DimensionValue): number {
-  return Number(getNumericStyleValue(value));
 }
 
 /**

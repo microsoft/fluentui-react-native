@@ -42,7 +42,7 @@ export type RadioStateProps = {
   selected?: boolean;
 };
 
-export type RadioExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>> & {
+export type RadioExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>, 'accessibilityRole' | 'role'> & {
   children?: never;
 };
 

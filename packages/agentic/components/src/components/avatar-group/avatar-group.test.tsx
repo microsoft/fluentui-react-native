@@ -213,9 +213,9 @@ describe('AvatarGroup', () => {
     const root = component.getByTestId('group');
 
     expect(root.props.accessible).toBe(true);
-    expect(root.props.accessibilityRole).toBe('image');
+    expect(root.props.role).toBe('img');
     expect(root.props.accessibilityLabel).toBe('Document collaborators: 8 people');
-    expect(component.getAllByRole('image')).toHaveLength(1);
+    expect(component.getAllByRole('img')).toHaveLength(1);
   });
 
   it.each([{ accessibilityLabelledBy: 'group-label' }, { 'aria-label': 'Document collaborators' }, { 'aria-labelledby': 'group-label' }])(
@@ -225,7 +225,7 @@ describe('AvatarGroup', () => {
       const root = component.getByTestId('group');
 
       expect(root.props.accessible).toBe(true);
-      expect(component.getAllByRole('image')).toHaveLength(1);
+      expect(component.getAllByRole('img')).toHaveLength(1);
     },
   );
 
@@ -234,8 +234,8 @@ describe('AvatarGroup', () => {
     const root = component.getByTestId('group');
 
     expect(root.props.accessible).toBe(false);
-    expect(root.props.accessibilityRole).toBe('none');
-    expect(component.getAllByRole('image')).toHaveLength(2);
+    expect(root.props.role).toBe('none');
+    expect(component.getAllByRole('img')).toHaveLength(2);
   });
 
   it('keeps the overflow indicator decorative until it is labeled', async () => {
@@ -245,7 +245,7 @@ describe('AvatarGroup', () => {
     const labeled = await renderGroup({ overflow: { accessibilityLabel: '5 more', testID: 'overflow' }, overflowCount: 5 });
     const chip = labeled.getByTestId('overflow');
     expect(chip.props.accessible).toBe(true);
-    expect(chip.props.accessibilityRole).toBe('image');
+    expect(chip.props.role).toBe('img');
     expect(chip.props.accessibilityLabel).toBe('5 more');
   });
 
@@ -259,11 +259,11 @@ describe('AvatarGroup', () => {
   });
 
   it('honors an explicit accessible value and role', async () => {
-    const component = await renderGroup({ accessibilityRole: 'summary', accessible: true });
+    const component = await renderGroup({ role: 'summary', accessible: true });
     const root = component.getByTestId('group');
 
     expect(root.props.accessible).toBe(true);
-    expect(root.props.accessibilityRole).toBe('summary');
+    expect(root.props.role).toBe('summary');
   });
 
   it('forwards root view props and keeps user styles last', async () => {

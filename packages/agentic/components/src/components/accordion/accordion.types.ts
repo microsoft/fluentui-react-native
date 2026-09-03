@@ -88,7 +88,7 @@ export type AccordionStateProps = {
 
 export type AccordionRootProps = OwnedRootProps<
   PropsWithRefOf<typeof View>,
-  'accessible' | 'accessibilityHint' | 'accessibilityLabel' | 'accessibilityRole' | 'accessibilityState' | 'focusable'
+  'accessible' | 'accessibilityHint' | 'accessibilityLabel' | 'accessibilityRole' | 'accessibilityState' | 'focusable' | 'role'
 >;
 
 export type AccordionProps = AccordionStateProps & ComponentProps<AccordionSlots, AccordionRootProps>;

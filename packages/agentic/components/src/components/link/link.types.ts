@@ -61,7 +61,7 @@ export type LinkNavigationProps = {
   url?: string;
 };
 
-export type LinkRootProps = OwnedRootProps<PropsWithRefOf<typeof NativeText> & LinkFocusProps>;
+export type LinkRootProps = OwnedRootProps<PropsWithRefOf<typeof NativeText> & LinkFocusProps, 'accessibilityRole' | 'role'>;
 
 export type LinkProps = LinkStateProps &
   LinkNavigationProps &

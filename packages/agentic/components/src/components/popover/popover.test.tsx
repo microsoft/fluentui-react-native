@@ -30,7 +30,7 @@ describe('Popover', () => {
     const component = await renderPopover();
     const trigger = getTrigger(component);
 
-    expect(trigger.props.accessibilityRole).toBe('button');
+    expect(trigger.props.role).toBe('button');
     expect(trigger.props.accessibilityState).toEqual({ disabled: false, expanded: false });
     expect(trigger.props.accessible).toBe(true);
     expect(trigger.props.focusable).toBe(true);
@@ -139,7 +139,7 @@ describe('Popover', () => {
 
     expect(getTrigger(component).props.accessibilityLabel).toBe('Open sync details');
     expect(component.getByTestId('popover-surface-content').props.accessibilityLabel).toBe(label);
-    expect(component.getByTestId('popover-surface-content').props.accessibilityRole).toBe('dialog');
+    expect(component.getByTestId('popover-surface-content').props.role).toBe('dialog');
   });
 
   it('warns in development when the floating surface has no name', async () => {

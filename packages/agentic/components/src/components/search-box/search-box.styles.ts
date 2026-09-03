@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import type { FlexTokens, ThemeState } from '@fluentui-react-native/design';
-import { getNumericStyleValue, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import { getNumericStyleValueAsNumber, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
 import type { StyleDefinition } from '@fluentui-react-native/design/styling';
 import { size200 } from '@fluentui-react-native/design/tokens/global';
 
@@ -27,7 +27,7 @@ type SizeLevels = typeof sizeLevels;
  */
 function createClearButtonStyleDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, SizeLevels> {
   const { spacing } = tokens;
-  const inset = Number(getNumericStyleValue(spacing.componentBase50));
+  const inset = getNumericStyleValueAsNumber(spacing.componentBase50);
   return {
     small: {
       minHeight: size200,

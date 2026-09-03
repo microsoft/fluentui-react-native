@@ -2,9 +2,9 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useDevWarning, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
-import { hiddenFromAccessibilityProps } from '../../common/accessibility';
+import { hasAccessibleName, hiddenFromAccessibilityProps } from '../../common/accessibility';
 import { Text } from '../text/text';
 import type { AvatarGroupProps, AvatarGroupState } from './avatar-group.types';
 
@@ -36,27 +36,12 @@ function flattenItems(children: React.ReactNode, keyPrefix = ''): { key: React.K
   return items;
 }
 
-function hasAccessibleName(props: {
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  accessibilityLabel?: string;
-  accessibilityLabelledBy?: string;
-}): boolean {
-  return (
-    props.accessibilityLabel !== undefined ||
-    props.accessibilityLabelledBy !== undefined ||
-    props['aria-label'] !== undefined ||
-    props['aria-labelledby'] !== undefined
-  );
-}
-
 export function useAvatarGroup_unstable(props: AvatarGroupProps): AvatarGroupState {
   const {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     accessibilityLabel,
     accessibilityLabelledBy,
-    accessibilityRole,
     accessible,
     children,
     layout = 'spread',
@@ -64,6 +49,7 @@ export function useAvatarGroup_unstable(props: AvatarGroupProps): AvatarGroupSta
     overflowCount: overflowCountProp = 0,
     size = 40,
     style: userStyle,
+    role,
     ...rest
   } = props;
 
@@ -93,20 +79,12 @@ export function useAvatarGroup_unstable(props: AvatarGroupProps): AvatarGroupSta
   const renderedItems = items.length + (showOverflow ? 1 : 0);
   const suppressedOverflow = hasOverflow && size === 16;
 
-  React.useEffect(() => {
-    if (!__DEV__) {
-      return;
-    }
-    if (hasSizeMismatch) {
-      console.warn('AvatarGroup: every child avatar should use the same size as the group.');
-    }
-    if (suppressedOverflow) {
-      console.warn('AvatarGroup: size 16 omits the overflow indicator, so expose the hidden count in accessibilityLabel.');
-    }
-    if (renderedItems > maximumRenderedItems) {
-      console.warn(`AvatarGroup: render at most ${maximumRenderedItems} items and move the rest into overflowCount.`);
-    }
-  }, [hasSizeMismatch, renderedItems, suppressedOverflow]);
+  useDevWarning(hasSizeMismatch, 'AvatarGroup: every child avatar should use the same size as the group.');
+  useDevWarning(suppressedOverflow, 'AvatarGroup: size 16 omits the overflow indicator, so expose the hidden count in accessibilityLabel.');
+  useDevWarning(
+    renderedItems > maximumRenderedItems,
+    `AvatarGroup: render at most ${maximumRenderedItems} items and move the rest into overflowCount.`,
+  );
 
   const themeState = useThemeState();
   const root = useSlot(View, {
@@ -116,14 +94,14 @@ export function useAvatarGroup_unstable(props: AvatarGroupProps): AvatarGroupSta
     accessible: isAccessible,
     accessibilityLabel,
     accessibilityLabelledBy,
-    accessibilityRole: accessibilityRole ?? (isAccessible ? 'image' : 'none'),
+    role: role ?? (isAccessible ? 'img' : 'none'),
   });
 
   const overflow = useOptionalSlot(View, showOverflow ? (overflowProp ?? {}) : null, {
     transform: (slotProps) => {
       const isSelfLabeled = !isAccessible && hasAccessibleName(slotProps);
       return isSelfLabeled
-        ? { ...slotProps, accessible: slotProps.accessible ?? true, accessibilityRole: slotProps.accessibilityRole ?? 'image' }
+        ? { ...slotProps, accessible: slotProps.accessible ?? true, role: slotProps.role ?? 'img' }
         : { ...slotProps, ...hiddenFromAccessibilityProps };
     },
   });

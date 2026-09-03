@@ -1,6 +1,6 @@
 # Tooltip accessibility
 
-The trigger is the only control in the React Native view hierarchy. It uses React Native pressable semantics with the `button` role by default, stays accessible and focusable while it is enabled, and reports `accessibilityState.disabled` for a disabled trigger. A trigger that wraps something other than a control can supply a different `accessibilityRole` through the `trigger` slot, because Tooltip describes a control rather than defining what the control is. Consumer accessibility state supplied to Tooltip is preserved for every other key.
+The trigger is the only control in the React Native view hierarchy. It uses React Native pressable semantics with `role="button"` by default, stays accessible and focusable while it is enabled, and reports `accessibilityState.disabled` for a disabled trigger. A trigger that wraps something other than a control can supply a different ARIA-aligned `role` through the `trigger` slot, because Tooltip describes a control rather than defining what the control is. Consumer accessibility state supplied to Tooltip is preserved for every other key.
 
 Tooltip never reports expanded state on the trigger. A tooltip is a description that appears while the pointer or focus rests on a control, not a disclosure the person opens, so expanded state would announce a relationship the trigger does not have.
 

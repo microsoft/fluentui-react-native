@@ -65,7 +65,7 @@ export type DestructiveButtonStateProps = {
  * Props that are exposed from the underlying Pressable component at the top level. A destructive button
  * controls its own children and resolves styles from tokens, so those props are exposed separately.
  */
-export type DestructiveButtonExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type DestructiveButtonExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>, 'accessibilityRole' | 'role'>;
 
 /**
  * Props for the DestructiveButton component, including state props, slot props, and exposed Pressable props.

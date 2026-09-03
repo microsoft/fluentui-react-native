@@ -90,7 +90,7 @@ export type NavItemStateProps = {
   type?: NavItemType;
 };
 
-export type NavItemExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type NavItemExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>, 'accessibilityRole' | 'role'>;
 
 type NavItemLabeledProps = {
   showLabel?: true;

@@ -1,6 +1,6 @@
 # Label accessibility
 
-Label is exposed as a single native text element. The root `View` is marked accessible with the React Native `text` role and carries the accessible name, and both text slots are hidden from the accessibility tree, so the label reports one element instead of a container plus separate text runs. Windows maps that element to a UI Automation text control and macOS maps it to an AX static text element.
+Label is exposed as one named accessibility element. The root `View` is marked accessible and carries the accessible name, and both text slots are hidden from the accessibility tree, so the label reports one element instead of a container plus separate text runs. React Native's ARIA-aligned `role` type has no static-text role, so Label does not replace the legacy `accessibilityRole="text"` with an unrelated semantic role.
 
 The name comes from the `content` slot when that slot resolves to a string, either as shorthand or as string `children` in slot props. Content that is not a string has no readable name, so the caller supplies `accessibilityLabel`; a development warning is emitted when neither is present. An explicit `accessibilityLabel` always wins over the derived name.
 

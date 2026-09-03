@@ -3,7 +3,11 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getGapStyleValue, getNumericStyleValue, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  getGapStyleValue,
+  getNumericStyleValueAsNumber as toNumber,
+  getThemedStateStyleFactory,
+} from '@fluentui-react-native/design/styling';
 import type { StateNames, StyleDefinition } from '@fluentui-react-native/design/styling';
 import type { AvatarGroupSize, AvatarGroupState } from './avatar-group.types';
 
@@ -61,10 +65,6 @@ const stackOverlap: Record<AvatarGroupSize, number> = {
   56: 14,
   120: 30,
 };
-
-function toNumber(value: unknown): number {
-  return Number(getNumericStyleValue(value));
-}
 
 /**
  * The separation ring painted between stacked items, and the boundary drawn around the overflow indicator.

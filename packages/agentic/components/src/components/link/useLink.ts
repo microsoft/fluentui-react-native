@@ -5,6 +5,7 @@ import type { GestureResponderEvent, NativeSyntheticEvent, TargetedEvent } from 
 import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
+import { resolveFocusable } from '../../common/interaction';
 import { Icon } from '../../primitives/icon/icon';
 import type { LinkProps, LinkState } from './link.types';
 
@@ -112,10 +113,10 @@ export function useLink_unstable(props: LinkProps): LinkState {
 
   const rootProps = {
     ...rest,
-    accessibilityRole: 'link' as const,
+    role: 'link' as const,
     accessibilityState: { ...accessibilityState, disabled },
     accessible: rest.accessible ?? true,
-    focusable: !disabled && (rest.focusable ?? true),
+    focusable: resolveFocusable(rest.focusable, disabled),
     onBlur: handleBlur,
     onFocus: handleFocus,
     onPress: disabled ? undefined : handlePress,

@@ -17,7 +17,17 @@ function renderLabel(props: React.ComponentProps<typeof Label> = {}) {
 type RenderedLabel = Awaited<ReturnType<typeof renderLabel>>;
 
 function getRoot(component: RenderedLabel) {
-  return component.getByRole('text');
+  if (!component.root) {
+    throw new Error('Label did not render a root instance.');
+  }
+  if (component.root.type === 'View') {
+    return component.root;
+  }
+  const [root] = component.root.queryAll((instance) => instance.type === 'View');
+  if (!root) {
+    throw new Error('Label did not render a native View.');
+  }
+  return root;
 }
 
 function getRootStyle(component: RenderedLabel): ViewStyle {
@@ -114,7 +124,7 @@ describe('Label', () => {
         importantForAccessibility: 'no-hide-descendants',
       });
     }
-    expect(component.getAllByRole('text')).toHaveLength(1);
+    expect(getRoot(component).props.role).toBeUndefined();
   });
 
   it('lets a caller replace the required indicator', async () => {
@@ -173,16 +183,16 @@ describe('Label', () => {
     expect(getRoot(component).props.accessibilityState).toBeUndefined();
   });
 
-  it('exposes a single non-focusable text element named by its content', async () => {
+  it('exposes a single non-focusable element named by its content', async () => {
     const component = await renderLabel({ content: 'Display name', required: true });
 
-    expect(component.getAllByRole('text')).toHaveLength(1);
+    expect(component.queryAllByRole('text')).toHaveLength(0);
     expect(getRoot(component).props).toMatchObject({
       accessibilityLabel: 'Display name',
-      accessibilityRole: 'text',
       accessible: true,
       focusable: false,
     });
+    expect(getRoot(component).props.role).toBeUndefined();
   });
 
   it('reads the accessible name out of content slot props', async () => {

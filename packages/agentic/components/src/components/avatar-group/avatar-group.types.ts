@@ -56,7 +56,7 @@ export type AvatarGroupStateProps = {
   size?: AvatarGroupSize;
 };
 
-export type AvatarGroupRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type AvatarGroupRootProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole'>;
 
 export type AvatarGroupProps = AvatarGroupStateProps &
   ComponentProps<AvatarGroupSlots, AvatarGroupRootProps> & {

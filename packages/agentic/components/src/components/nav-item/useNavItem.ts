@@ -10,6 +10,7 @@ import {
 } from '@fluentui-react-native/framework-base';
 
 import { semanticIconSources } from '../../common/iconSources';
+import { resolveFocusable } from '../../common/interaction';
 import { Icon } from '../../primitives/icon/icon';
 import { Avatar } from '../avatar/avatar';
 import { Text } from '../text/text';
@@ -85,7 +86,7 @@ export function useNavItem_unstable(props: NavItemProps): NavItemState {
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
-    accessibilityRole: category ? 'button' : 'link',
+    role: category ? 'button' : 'link',
     accessibilityState: {
       ...resolvedAccessibilityState,
       disabled,
@@ -93,7 +94,7 @@ export function useNavItem_unstable(props: NavItemProps): NavItemState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: !disabled && (rest.focusable ?? true),
+    focusable: resolveFocusable(rest.focusable, disabled),
   });
 
   const root = useSlot(Pressable, {

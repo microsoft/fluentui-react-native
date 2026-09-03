@@ -13,11 +13,11 @@ function renderMenuItem(props: MenuItemProps): Promise<RenderResult> {
   return render(<MenuItem {...props} />);
 }
 
-function getRoot(component: RenderResult, role: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio' | 'none' = 'menuitem') {
+function getRoot(component: RenderResult, role: 'menuitem' | 'none' = 'menuitem') {
   return component.getByRole(role);
 }
 
-function getRootStyle(component: RenderResult, role: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio' = 'menuitem') {
+function getRootStyle(component: RenderResult, role: 'menuitem' = 'menuitem') {
   return StyleSheet.flatten(getRoot(component, role).props.style);
 }
 
@@ -26,16 +26,16 @@ describe('MenuItem', () => {
     const onPress = jest.fn();
     const component = await renderMenuItem({ content: 'Inbox', hasMultiselect: true, onPress, selected: false });
 
-    await fireEvent.press(getRoot(component, 'menuitemcheckbox'));
+    await fireEvent.press(getRoot(component));
 
     expect(onPress).toHaveBeenCalledTimes(1);
-    expect(getRoot(component, 'menuitemcheckbox').props.accessibilityState.checked).toBe(false);
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
   });
 
   it('renders a default interactive row with icon and secondary content', async () => {
     const component = await renderMenuItem({ content: 'Save' });
 
-    expect(getRoot(component).props.accessibilityRole).toBe('menuitem');
+    expect(getRoot(component).props.role).toBe('menuitem');
     expect(component.getAllByText('Save', { includeHiddenElements: true })).toHaveLength(2);
     expect(component.getAllByText('Secondary', { includeHiddenElements: true })).toHaveLength(2);
     expect(getRootStyle(component)).toMatchObject({
@@ -66,9 +66,9 @@ describe('MenuItem', () => {
   it('renders a right-aligned checkmark row without selected styling', async () => {
     const component = await renderMenuItem({ hasCheckmark: true, content: 'Single select', selected: false });
 
-    expect(getRoot(component, 'menuitemradio').props.accessibilityRole).toBe('menuitemradio');
-    expect(getRoot(component, 'menuitemradio').props.accessibilityState).toMatchObject({ checked: false });
-    expect(getRootStyle(component, 'menuitemradio').backgroundColor).toBe('#00000000');
+    expect(getRoot(component).props.role).toBe('menuitem');
+    expect(getRoot(component).props.accessibilityState).toMatchObject({ checked: false });
+    expect(getRootStyle(component).backgroundColor).toBe('#00000000');
   });
 
   it('renders a multiselect checkbox and keeps the row background transparent', async () => {
@@ -78,9 +78,9 @@ describe('MenuItem', () => {
       selected: true,
     });
 
-    expect(getRoot(component, 'menuitemcheckbox').props.accessibilityRole).toBe('menuitemcheckbox');
-    expect(getRoot(component, 'menuitemcheckbox').props.accessibilityState).toMatchObject({ checked: true });
-    expect(getRootStyle(component, 'menuitemcheckbox').backgroundColor).toBe('#00000000');
+    expect(getRoot(component).props.role).toBe('menuitem');
+    expect(getRoot(component).props.accessibilityState).toMatchObject({ checked: true });
+    expect(getRootStyle(component).backgroundColor).toBe('#00000000');
   });
 
   it('supports section headers, loading skeletons, and no focusability', async () => {
@@ -90,7 +90,7 @@ describe('MenuItem', () => {
       menuStyle: 'section-header',
     });
 
-    expect(getRoot(component, 'none').props.accessibilityRole).toBe('none');
+    expect(getRoot(component, 'none').props.role).toBe('none');
     expect(getRoot(component, 'none').props.focusable).toBe(false);
     expect(component.queryByText('Group')).toBeNull();
   });

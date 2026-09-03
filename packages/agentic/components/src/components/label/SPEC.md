@@ -35,7 +35,7 @@ Rendering order is `content` then `requiredIndicator`. The resolved state stores
 
 ## Platform behavior
 
-Label renders a React Native `View` root that is marked accessible with the `text` role and owns the accessible name, so Windows UI Automation and macOS AX expose the label as one text element rather than as a container plus separate text runs. The name is read from string `content` unless the caller sets `accessibilityLabel`. The root is never focusable and never receives keyboard input on either platform.
+Label renders a React Native `View` root that is marked accessible and owns the accessible name, so it is announced once rather than as a container plus separate text runs. React Native's ARIA-aligned `role` type has no static-text role, so Label relies on its native accessible name instead of setting the legacy `accessibilityRole="text"`. The name is read from string `content` unless the caller sets `accessibilityLabel`. The root is never focusable and never receives keyboard input on either platform.
 
 Association is programmatic. A caller gives the label a `nativeID` and points the associated control at it with `accessibilityLabelledBy`, which is the convention used across this repository. The label itself does not know which control it names and does not change behavior when it is referenced.
 

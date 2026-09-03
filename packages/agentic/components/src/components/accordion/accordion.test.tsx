@@ -37,7 +37,7 @@ describe('Accordion', () => {
     const header = getHeader(component);
     const body = getBody(component);
 
-    expect(header.props.accessibilityRole).toBe('button');
+    expect(header.props.role).toBe('button');
     expect(header.props.accessibilityState).toEqual({ expanded: false });
     expect(component.getByText('Section title')).toBeOnTheScreen();
     expect(component.getByTestId('accordion-leading-icon').props.style).toMatchObject({ height: 16, width: 16 });

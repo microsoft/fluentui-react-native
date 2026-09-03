@@ -26,7 +26,7 @@ export type PopoverPosition = DirectionalHint;
  * Trigger properties owned by Popover. A consumer cannot supply them because the component cannot honor both its own
  * contract and a conflicting value.
  */
-type OwnedTriggerProps = 'accessibilityRole' | 'accessibilityState' | 'accessible' | 'aria-expanded' | 'disabled' | 'focusable';
+type OwnedTriggerProps = 'accessibilityRole' | 'accessibilityState' | 'accessible' | 'aria-expanded' | 'disabled' | 'focusable' | 'role';
 
 /**
  * The presentation surface of the trigger. `onPress` is allowed and runs after the component's own toggle, and `ref` is

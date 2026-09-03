@@ -49,7 +49,7 @@ export type InputStateProps = {
   onPressOut?: (...args: any[]) => void;
 };
 
-export type InputExposedRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type InputExposedRootProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'role'>;
 
 export type InputProps = InputStateProps & ComponentProps<InputSlots, InputExposedRootProps>;
 

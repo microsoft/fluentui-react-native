@@ -35,7 +35,7 @@ describe('NavItem', () => {
     const component = await renderNavItem({});
     const root = getRoot(component);
 
-    expect(root.props.accessibilityRole).toBe('link');
+    expect(root.props.role).toBe('link');
     expect(root.props.accessibilityState).toEqual({ disabled: false, selected: false });
     expect(root.props.accessible).toBe(true);
     expect(root.props.focusable).toBe(true);
@@ -125,7 +125,7 @@ describe('NavItem', () => {
     const collapsed = await renderNavItem({ controls: 'mail-group', label: 'Mail', onPress, type: 'category' });
     const root = getRoot(collapsed, 'button');
 
-    expect(root.props.accessibilityRole).toBe('button');
+    expect(root.props.role).toBe('button');
     expect(root.props.accessibilityState).toEqual({ disabled: false, expanded: false });
     expect(root.props.accessibilityState.selected).toBeUndefined();
     expect(root.props.accessibilityControls).toBe('mail-group');
@@ -150,7 +150,6 @@ describe('NavItem', () => {
 
   it('owns the semantic role and category accessibility state', async () => {
     const category = await renderNavItem({
-      accessibilityRole: 'link',
       accessibilityState: { busy: true, selected: true },
       label: 'Mail',
       type: 'category',
@@ -158,8 +157,8 @@ describe('NavItem', () => {
 
     expect(getRoot(category, 'button').props.accessibilityState).toEqual({ busy: true, disabled: false, expanded: false });
 
-    const item = await renderNavItem({ accessibilityRole: 'button', label: 'Inbox' });
-    expect(getRoot(item).props.accessibilityRole).toBe('link');
+    const item = await renderNavItem({ label: 'Inbox' });
+    expect(getRoot(item).props.role).toBe('link');
   });
 
   it.each([['comfortable', 12, 10, 20, 20] as const, ['compact', 8, 6, 16, 16] as const])(

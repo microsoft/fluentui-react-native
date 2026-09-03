@@ -38,7 +38,7 @@ The resolved state retains layout, size, overflow count, indicator text, the ite
 
 ## Platform behavior
 
-A group with `accessibilityLabel` is accessible with the React Native image role, so Windows exposes it as a UI Automation image and macOS as an AX image, and the cohort announces once instead of one node per member. Without a label the root carries the `none` role and stays a plain layout row, so each Avatar child announces its own accessible name in source order. Callers can still set `accessible` and `accessibilityRole` explicitly.
+A group with `accessibilityLabel` is accessible with `role="img"`, so Windows exposes it as a UI Automation image and macOS as an AX image, and the cohort announces once instead of one node per member. Without a label the root carries `role="none"` and stays a plain layout row, so each Avatar child announces its own accessible name in source order. Callers can still set `accessible` and the ARIA-aligned `role` explicitly.
 
 React Native paints later siblings above earlier ones on both target platforms, so stack order needs no explicit `zIndex`. The stack separation ring is an ordinary filled circular box rather than a border, an outline, or a mask, so toggling layout never creates a border visual after mount. AvatarGroup adds no tab stop and renders no `FocusVisual`.
 
@@ -48,7 +48,7 @@ React Native paints later siblings above earlier ones on both target platforms, 
 - `avatar-group-stack-separation-ring` — **accepted.** The source specifies a masked circular cut-out with a painted outside-stroke fallback. React Native has no mask compositing, so FURN adopts the fallback: each stacked item is centred in a `color.surfaceNeutralNearer` circular box whose annulus paints the separation gap. A stacked group should therefore sit on that surface.
 - `avatar-group-overflow-not-an-avatar` — **accepted.** The source builds the indicator from an Avatar in initials mode. FURN's Avatar normalises initials to at most two characters, so `+99` cannot survive that path. FURN renders the indicator from its own view and text slots and binds the equivalent Avatar tokens directly.
 - `avatar-group-slot-maximum-advisory` — **accepted.** The source states a hard five-slot maximum. FURN treats it as advisory: a layout container that silently dropped caller content would be harder to diagnose than a development warning.
-- `avatar-group-labeled-group-role` — **accepted.** React Native has no `group` accessibility role. A labelled FURN group therefore uses the image role, which matches the source's collapsed single-image pattern, and an unlabelled group stays a transparent row so individual identities are still announced.
+- `avatar-group-labeled-group-role` — **accepted.** A labelled FURN group uses `role="img"`, which matches the source's collapsed single-image pattern, and an unlabelled group stays a transparent row so individual identities are still announced.
 
 ## Conformance
 
