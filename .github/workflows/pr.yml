@@ -19,12 +19,12 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           node-version: 22
 
@@ -43,12 +43,12 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           node-version: 22
 
@@ -106,10 +106,10 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           platform: android
           node-version: 22
@@ -136,10 +136,10 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           platform: macos
           node-version: 22
@@ -191,10 +191,10 @@ jobs:
     timeout-minutes: 40
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           platform: macos
           node-version: 22
@@ -243,10 +243,10 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           platform: ios
           node-version: 22
@@ -288,12 +288,12 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 5
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           platform: windows
           node-version: 22
@@ -355,12 +355,12 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 5
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           platform: windows
           node-version: 22
@@ -420,10 +420,10 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           platform: windows
           node-version: 22
@@ -468,10 +468,10 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           platform: windows
           node-version: 22
@@ -513,13 +513,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           filter: blob:none
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: '22'
           cache: 'yarn'
@@ -541,10 +541,10 @@ jobs:
       has-tarballs: ${{ steps.check.outputs.has-tarballs }}
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           node-version: 22
 
@@ -580,10 +580,10 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1230975885a9e5d3a2ad58b1483f80b09cec04f2 # 5.2.3
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@2bd913d4bd2344039eec5500b9be0079fafd5b06 # 5.4.9
         with:
           node-version: 22
 
