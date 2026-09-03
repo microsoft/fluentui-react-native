@@ -277,3 +277,17 @@ export { renderText_unstable } from './components/text/renderText';
 export type { TextProps, TextSlots, TextState } from './components/text/text.types';
 export { useText_unstable } from './components/text/useText';
 export { useTextStyles_unstable } from './components/text/useTextStyles';
+
+export { Tooltip } from './components/tooltip/tooltip';
+export type {
+  TooltipContent,
+  TooltipContentProps,
+  TooltipPosition,
+  TooltipProps,
+  TooltipSlots,
+  TooltipState,
+  TooltipTriggerProps,
+} from './components/tooltip/tooltip.types';
+export { renderTooltip_unstable } from './components/tooltip/renderTooltip';
+export { useTooltipStyles_unstable } from './components/tooltip/useTooltipStyles';
+export { useTooltip_unstable } from './components/tooltip/useTooltip';

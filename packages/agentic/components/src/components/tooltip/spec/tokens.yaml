@@ -1,0 +1,81 @@
+schemaVersion: 1
+component: tooltip
+implementation: tooltip.styles.ts
+
+statePrecedence:
+  - disabled
+  - pressed
+  - hovered
+
+bindings:
+  root:
+    layout:
+      alignSelf: flex-start
+    userStyle: applied after root structural style
+  trigger:
+    layout:
+      alignItems: center
+      justifyContent: center
+    userStyle: applied after trigger structural style
+    focusVisual:
+      innerColor: color.strokeFocusInner
+      innerWidth: strokeWidth.thin
+      outerColor: color.strokeFocusOuter
+      outerWidth: strokeWidth.thick
+      radius: borderRadius.base400
+    note: >
+      The focus radius is the Popover trigger radius rather than the tooltip surface
+      radius. Tooltip reuses the Popover trigger, the trigger is not the label surface,
+      and its shape is supplied by the caller, so the two triggers stay consistent.
+  surface:
+    appearance:
+      backgroundColor: color.surfaceNeutralNearer
+      borderColor: color.surfaceNeutralNearer
+      borderWidth: 0
+      borderRadius: borderRadius.base200
+    note: >
+      Compatibility only. These values exist because the macOS surface layer update
+      requires non-null fill, stroke, and radius values on the native callout. The zero
+      stroke width keeps that layer from drawing a boundary the Flex tooltip does not
+      have, and the Windows implementation does not read any of them.
+  surfaceContent:
+    layout:
+      paddingHorizontal: spacing.componentBase200
+      paddingVertical: spacing.componentBase100
+    appearance:
+      backgroundColor: color.surfaceNeutralNearer
+      borderRadius: borderRadius.base200
+      overflow: hidden
+    note: >
+      The whole visible label surface lives here because this is a React Native view
+      that both platforms render inside the popup window. Flex maps the tooltip
+      container to no stroke, so no border width or color is applied.
+  content:
+    typography:
+      fontFamily: fontFamily.functional
+      fontSize: fontSize.functionalBodySmall
+      fontWeight: fontWeight.functionalRegular
+      lineHeight: lineHeight.functionalBodySmall
+    foreground: color.foregroundNeutralPrimary
+    userStyle: applied after the tokenized label style
+
+tokenGaps:
+  - property: anchor gap
+    binding: unbound
+    reason: >
+      The mapped spacing token exists, but the native surface owns its offset from the
+      anchor and does not implement the gap property on Windows or macOS. Tracked as the
+      tooltip-anchor-gap divergence.
+  - property: surface elevation shadow
+    binding: unbound
+    reason: >
+      Flex maps the tooltip container to elevation level 3 and the shadow.low token, but
+      the surface is a platform popup window whose elevation is owned by the window
+      server, and a shadow drawn inside the popup is clipped by the window bounds.
+      Tracked as the tooltip-surface-shadow divergence.
+  - property: appearance and disappearance motion
+    binding: unbound
+    reason: >
+      Flex records tooltip motion as pending and asks for a short fade. The surface is a
+      platform popup window whose presentation is not animatable from React Native, so no
+      motion value is bound. Tracked as the tooltip-motion divergence.

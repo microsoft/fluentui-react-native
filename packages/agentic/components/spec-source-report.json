@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-02T23:19:05.422Z",
+  "generatedAt": "2026-09-03T16:21:33.572Z",
   "sourceLock": "flex-1.5.0-206c4996",
   "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
   "baseline": {
@@ -10,7 +10,7 @@
   "external": {
     "mode": "live",
     "status": "drift-detected",
-    "marketplaceHead": "2c7eaade7e98b5a12a7b12d1d432441844ed1145",
+    "marketplaceHead": "686dbdd4768d1238cdda0649d5b9dfa794c7c381",
     "originHead": "cbe3cca9207ac0c24c3f965ec483788ee5e11c44"
   },
   "catalog": {
@@ -151,7 +151,8 @@
       "tab",
       "tablist",
       "tag",
-      "text"
+      "text",
+      "tooltip"
     ],
     "adaptedDrafts": [],
     "implemented": [
@@ -182,7 +183,8 @@
       "tab",
       "tablist",
       "tag",
-      "text"
+      "text",
+      "tooltip"
     ],
     "implementationGap": [
       "breadcrumb",
@@ -205,8 +207,7 @@
       "teaching-popover",
       "textarea",
       "toggle-button",
-      "toolbar",
-      "tooltip"
+      "toolbar"
     ],
     "noLocalContract": [
       "breadcrumb",
@@ -229,8 +230,7 @@
       "teaching-popover",
       "textarea",
       "toggle-button",
-      "toolbar",
-      "tooltip"
+      "toolbar"
     ],
     "legacyMigration": [
       {
@@ -650,9 +650,17 @@
       "lifecycle": "implemented",
       "conformance": "reviewed",
       "releaseDifferences": [],
-      "marketplaceDrift": null,
-      "originDrift": null,
-      "candidateStatus": "unchecked"
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
     },
     {
       "component": "list-item",
@@ -900,6 +908,23 @@
       "marketplaceDrift": null,
       "originDrift": null,
       "candidateStatus": "not-applicable"
+    },
+    {
+      "component": "tooltip",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
     }
   ]
 }
