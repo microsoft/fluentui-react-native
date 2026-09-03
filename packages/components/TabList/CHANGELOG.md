@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/tablist
 
+## 0.8.13
+
+### Patch Changes
+
+- Updated dependencies [5b3f74c]
+  - @fluentui-react-native/focus-zone@0.23.5
+
 ## 0.8.12
 
 ### Patch Changes

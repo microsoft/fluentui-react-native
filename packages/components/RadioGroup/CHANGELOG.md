@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/radio-group
 
+## 0.22.13
+
+### Patch Changes
+
+- Updated dependencies [5b3f74c]
+  - @fluentui-react-native/focus-zone@0.23.5
+
 ## 0.22.12
 
 ### Patch Changes

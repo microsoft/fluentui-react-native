@@ -1,5 +1,16 @@
 # Change Log - @fluentui/react-native
 
+## 0.44.7
+
+### Patch Changes
+
+- Updated dependencies [5b3f74c]
+  - @fluentui-react-native/focus-zone@0.23.5
+  - @fluentui-react-native/contextual-menu@0.25.14
+  - @fluentui-react-native/radio-group@0.22.13
+  - @fluentui-react-native/tablist@0.8.13
+  - @fluentui-react-native/menu-button@0.15.8
+
 ## 0.44.6
 
 ### Patch Changes

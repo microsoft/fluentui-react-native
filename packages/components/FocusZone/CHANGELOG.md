@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/focus-zone
 
+## 0.23.5
+
+### Patch Changes
+
+- 5b3f74c: Add the native macOS and Windows implementations, explicit native build
+  verification, and prebuilt-only Storybook PR pipeline integration for the
+  desktop-driver package. Keep the FocusZone Windows WinMD compatible with the
+  consuming Storybook application's target SDK.
+
 ## 0.23.4
 
 ### Patch Changes

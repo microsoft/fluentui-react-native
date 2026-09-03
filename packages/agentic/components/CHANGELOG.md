@@ -1,5 +1,23 @@
 # @fluentui-react-native/components
 
+## 0.5.1
+
+### Patch Changes
+
+- 5b3f74c: Add the native macOS and Windows implementations, explicit native build
+  verification, and prebuilt-only Storybook PR pipeline integration for the
+  desktop-driver package. Keep the FocusZone Windows WinMD compatible with the
+  consuming Storybook application's target SDK.
+- 5b3f74c: Build the source-shipped native desktop helper explicitly, reuse verified
+  content-addressed artifacts, and add the Windows/Win32 C++ and macOS Swift
+  providers. Storybook can build the helper independently, ensures it during
+  prep, and attaches authored smoke tests to the exact app process it launched.
+  macOS cache resolution pins stable signatures to the leaf certificate and
+  designated requirement, makes source builds reproducible, verifies Hardened
+  Runtime and secure timestamps, reports TCC/AX diagnostics, and normalizes Fabric
+  accessibility roles, window identity, input, and Retina ScreenCaptureKit
+  evidence.
+
 ## 0.5.0
 
 ### Minor Changes
