@@ -61,8 +61,10 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - In CI, use `.github/actions/setup-desktop-driver` to create the job-local
   cache, build and diagnose the helper, and pin later resolution to the
   verified artifact. GitHub-hosted runners use an ad hoc signature because
-  changing certificate trust requires interactive authorization; managed
-  self-hosted runners pass a pre-provisioned stable signing identity.
+  changing certificate trust requires interactive authorization, and disable
+  physical clicks because the hosted desktop is not the input qualification
+  environment. Managed self-hosted runners pass a pre-provisioned stable
+  signing identity and leave physical input enabled.
 - Run `yarn storybook prep --macos` for project generation and Pod installation. Do not run CocoaPods from the
   repository root because subprocess dependency resolution must start in this workspace.
 - Run `yarn storybook bundle --macos` for the JavaScript bundle, `yarn storybook build --macos` for a non-launching

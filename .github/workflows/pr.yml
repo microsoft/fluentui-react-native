@@ -210,6 +210,7 @@ jobs:
         uses: ./.github/actions/setup-desktop-driver
         with:
           platform: macos
+          disabled-input-features: physicalClick
 
       - name: Bundle macOS
         run: |

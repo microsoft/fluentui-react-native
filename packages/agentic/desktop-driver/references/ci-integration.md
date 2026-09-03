@@ -89,7 +89,10 @@ This repository's current PR workflow provides examples in
   signature because changing trust settings requires interactive
   authorization. A managed self-hosted runner can instead pass a
   pre-provisioned stable identity through the action's
-  `macos-signing-identity` input;
+  `macos-signing-identity` input. The hosted job also disables physical clicks
+  because its desktop can report input authority while another native element
+  intercepts the target center; managed interactive qualification leaves
+  physical input enabled;
 - `windows-storybook` prepares the generated app, installs the required Windows
   App Runtime for that app, runs the shared Windows native build contract,
   and asks the same setup action to verify the `windows` endpoint before
