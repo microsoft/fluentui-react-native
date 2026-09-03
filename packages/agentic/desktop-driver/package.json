@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/desktop-driver",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "W3C WebDriver-compatible automation for React Native desktop applications",
   "license": "MIT",
   "author": "",

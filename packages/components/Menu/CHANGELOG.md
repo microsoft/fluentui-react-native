@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/menu
 
+## 1.16.8
+
+### Patch Changes
+
+- Updated dependencies [5b3f74c]
+  - @fluentui-react-native/focus-zone@0.23.5
+
 ## 1.16.7
 
 ### Patch Changes
