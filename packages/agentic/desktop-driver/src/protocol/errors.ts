@@ -52,6 +52,9 @@ export function toWebDriverError(error: unknown): WebDriverError {
   if (error instanceof WebDriverError) {
     return error;
   }
+  if (error instanceof HostWebDriverError) {
+    return new WebDriverError(error.code, error.message, error.data);
+  }
   if (error instanceof HostStaleError) {
     return new WebDriverError('stale element reference', error.message);
   }
@@ -59,6 +62,18 @@ export function toWebDriverError(error: unknown): WebDriverError {
     return new WebDriverError('unsupported operation', error.message);
   }
   return new WebDriverError('unknown error', error instanceof Error ? error.message : String(error));
+}
+
+export class HostWebDriverError extends Error {
+  readonly code: WebDriverErrorCode;
+  readonly data?: Record<string, unknown>;
+
+  constructor(code: WebDriverErrorCode, message: string, data?: Record<string, unknown>) {
+    super(message);
+    this.name = 'HostWebDriverError';
+    this.code = code;
+    this.data = data;
+  }
 }
 
 export class HostStaleError extends Error {

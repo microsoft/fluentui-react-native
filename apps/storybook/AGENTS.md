@@ -75,6 +75,9 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 
 ## Windows native workflow
 
+- In CI, configure a job-local `FURN_DESKTOP_DRIVER_CACHE_ROOT`, run the shared
+  Windows native contract, build and diagnose the helper explicitly, then set
+  `FURN_DESKTOP_DRIVER_BUILD_POLICY=never` before `prep` or `smoke`.
 - Use `yarn storybook prep --windows`, `bundle --windows`, `build --windows`, and `run --windows` for individual
   stages. Use `yarn storybook smoke --windows --mode stories` for the package-owned generation, channel server, native
   build and registration, Metro launch, full indexed-story traversal, and ownership-safe cleanup. Use
@@ -92,6 +95,9 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 
 ## Win32 native workflow
 
+- In CI, build and diagnose `--win32` into a job-local cache and pin
+  `FURN_DESKTOP_DRIVER_BUILD_POLICY=never` before smoke. The separate Windows
+  Storybook job owns the shared provider's opt-in native contract.
 - Win32 is the `@office-iss/react-native-win32` Paper endpoint hosted by
   `@office-iss/rex-win32`; do not treat it as the React Native Windows Fabric
   endpoint or generate a `react-native-test-app` project for it.

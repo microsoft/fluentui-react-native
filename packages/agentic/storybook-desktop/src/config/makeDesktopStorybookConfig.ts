@@ -479,7 +479,6 @@ function defaultNativeProjectOptions(config: DesktopStorybookConfig, platform: P
 
 function defaultNativeDriverOptions(_config: DesktopStorybookConfig, _platform: Platforms): DesktopNativeDriverOptions {
   return {
-    buildPolicy: 'if-missing',
     configuration: 'release',
   };
 }

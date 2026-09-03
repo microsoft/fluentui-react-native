@@ -88,6 +88,17 @@ CI may use a job-local cache root, but should restore only artifacts built for
 the matching provider, architecture, source, toolchain, configuration, and
 signing identity.
 
+GitHub Actions examples:
+
+```text
+Windows: $RUNNER_TEMP\furn-desktop-driver-native
+macOS:   $RUNNER_TEMP/furn-desktop-driver-native
+```
+
+Build the helper explicitly, run `doctor` against that cache, then set
+`FURN_DESKTOP_DRIVER_BUILD_POLICY=never` before application preparation or
+smoke so later phases cannot compile implicitly.
+
 ## Immutable cache model
 
 ```text
@@ -96,6 +107,7 @@ signing identity.
   selections/<compatibility>/
   locks/
   staging/
+  diagnostics/
   trash/
 ```
 
@@ -105,6 +117,7 @@ signing identity.
 - The artifact ID hashes the built executable.
 - Builds publish through same-volume staging and atomic rename.
 - Cross-process directory locks prevent duplicate publication.
+- Failed build logs are copied to immutable diagnostics before staging cleanup.
 - Corrupt cache selections and artifact collisions are quarantined under
   `trash`; in-use artifacts are never replaced.
 

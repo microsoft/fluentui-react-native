@@ -175,7 +175,6 @@ describe('DesktopStorybookConfig', () => {
         bundleIdentifier: 'com.microsoft.fluentui.agenticstorybook',
         windowTitle: 'Agentic Components Storybook',
       },
-      buildPolicy: 'if-missing',
       configuration: 'release',
       macosSigningIdentity: 'Apple Development: Example',
     });

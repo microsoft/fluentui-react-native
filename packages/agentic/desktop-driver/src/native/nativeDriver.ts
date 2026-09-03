@@ -194,12 +194,57 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
       writeSelection(context.cacheRoot, context.compatibilityKey, artifactRoot);
       assertManagedPath(artifactCompatibilityRoot(context), artifactRoot, 'directory');
       return verifyNativeDriverArtifact(readArtifact(artifactRoot, 'built'), options.signal);
+    } catch (error) {
+      try {
+        preserveBuildDiagnostics(context, stagingRoot, error);
+      } catch (diagnosticError) {
+        process.emitWarning(
+          `Could not preserve native build diagnostics: ${
+            diagnosticError instanceof Error ? diagnosticError.message : String(diagnosticError)
+          }`,
+          { code: 'FURN_NATIVE_DRIVER_DIAGNOSTICS_FAILED' },
+        );
+      }
+      throw error;
     } finally {
-      fs.rmSync(stagingRoot, { force: true, recursive: true });
+      try {
+        fs.rmSync(stagingRoot, { force: true, recursive: true });
+      } catch (cleanupError) {
+        process.emitWarning(
+          `Could not clean native build staging directory "${stagingRoot}": ${
+            cleanupError instanceof Error ? cleanupError.message : String(cleanupError)
+          }`,
+          { code: 'FURN_NATIVE_DRIVER_STAGING_CLEANUP_FAILED' },
+        );
+      }
     }
   } finally {
     lock.release();
   }
+}
+
+function preserveBuildDiagnostics(context: NativeBuildContext, stagingRoot: string, error: unknown): void {
+  const diagnosticFiles = ['build.log', 'build-error.json'].filter((fileName) => fs.existsSync(path.join(stagingRoot, fileName)));
+  if (diagnosticFiles.length === 0) {
+    return;
+  }
+  const diagnosticsRoot = path.join(
+    context.cacheRoot,
+    'v1',
+    'diagnostics',
+    `${context.provider}-${context.architecture}`,
+    shortKey(context.compatibilityKey),
+    `${Date.now()}-${randomUUID()}`,
+  );
+  fs.mkdirSync(diagnosticsRoot, { recursive: true });
+  assertManagedPath(context.cacheRoot, diagnosticsRoot, 'directory');
+  for (const fileName of diagnosticFiles) {
+    fs.copyFileSync(path.join(stagingRoot, fileName), path.join(diagnosticsRoot, fileName));
+  }
+  atomicWriteJson(path.join(diagnosticsRoot, 'failure.json'), {
+    code: error instanceof NativeDriverError ? error.code : 'unknown',
+    message: (error instanceof Error ? error.message : String(error)).slice(0, 4096),
+  });
 }
 
 function quarantinePublishedArtifact(cacheRoot: string, artifactRoot: string, error: unknown): void {

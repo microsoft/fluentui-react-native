@@ -178,9 +178,11 @@ void Host::WorkerLoop() {
     }
 
     bool cancelled = false;
+    bool commandSucceeded = false;
     bool wroteResult = true;
     try {
       const CommandResult result = driver_.Execute(request.command, request.params, token_);
+      commandSucceeded = true;
       wroteResult = WriteResponse(request.id, request.command, result);
     } catch (const CancelledError&) {
       cancelled = true;
@@ -204,7 +206,7 @@ void Host::WorkerLoop() {
     if (!wroteResult || writeFailed_.load(std::memory_order_acquire)) {
       break;
     }
-    if (request.command == "dispose") {
+    if (request.command == "dispose" && commandSucceeded) {
       // The session is over: flush the acknowledged response and end the
       // process instead of leaving the reader blocked on a dead stream.
       FlushFileBuffers(GetStdHandle(STD_OUTPUT_HANDLE));

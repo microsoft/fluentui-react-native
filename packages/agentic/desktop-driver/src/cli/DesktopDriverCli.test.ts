@@ -4,6 +4,7 @@ import { createServer } from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 
+import { NativeDriverError } from '../native/NativeDriverError';
 import type { NativeDriverArtifact } from '../native/types';
 import type { DesktopStoryManifest } from '../storybook.js';
 import { createDesktopDriverCommand } from './createDesktopDriverCommand';
@@ -214,6 +215,44 @@ describe('desktop-driver CLI', () => {
       error: { code: 'unsupported-operation' },
       ready: false,
     });
+  });
+
+  test('runs Win32 doctor with prebuilt-only resolution and reports cache misses', async () => {
+    const resolveDriver = jest.fn(async () => {
+      throw new NativeDriverError('no-verified-prebuilt', 'No verified Win32 helper is available.');
+    });
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      resolveDriver,
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'win32', '--cache-root', 'native-cache']);
+
+    expect(resolveDriver).toHaveBeenCalledWith({
+      architecture: undefined,
+      buildPolicy: 'never',
+      cacheRoot: 'native-cache',
+      configuration: 'release',
+      force: undefined,
+      helperPath: undefined,
+      installRoot: undefined,
+      macosSigningIdentity: undefined,
+      platform: 'win32',
+    });
+    expect(JSON.parse(output.join(''))).toEqual({
+      error: {
+        code: 'no-verified-prebuilt',
+        message: 'No verified Win32 helper is available.',
+      },
+      ready: false,
+    });
+    expect(process.exitCode).toBe(1);
   });
 
   test('serves, lists, runs, and describes a fake authored plan as JSON', async () => {

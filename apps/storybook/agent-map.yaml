@@ -47,6 +47,11 @@ interaction_order:
   - Use screenshots for visual evidence, not element lookup.
 
 native:
+  driver:
+    build: yarn storybook build-driver --<platform>
+    doctor: yarn desktop-driver doctor --platform <platform>
+    cache_env: FURN_DESKTOP_DRIVER_CACHE_ROOT
+    ci_policy: explicit-build-then-prebuilt-only
   macos:
     process: ReactTestApp
     app_bundle: macos/DerivedData/Build/Products/Debug/ReactTestApp.app
@@ -57,6 +62,12 @@ native:
   windows:
     project_policy: generated
     generation_command: yarn storybook prep --windows
+    helper_provider: windows-x64
+  win32:
+    host: prebuilt-rex
+    build_policy: unsupported
+    bundle_command: yarn storybook bundle --win32
+    helper_provider: windows-x64
 
 validation:
   javascript:

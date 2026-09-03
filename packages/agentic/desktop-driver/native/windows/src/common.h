@@ -34,6 +34,7 @@ inline constexpr char kErrorAmbiguousTarget[] = "ambiguous-target";
 inline constexpr char kErrorNoSuchLease[] = "no-such-lease";
 inline constexpr char kErrorWindowActivation[] = "window-activation-failed";
 inline constexpr char kErrorCaptureFailed[] = "capture-failed";
+inline constexpr char kErrorCleanupFailed[] = "cleanup-failed";
 inline constexpr char kErrorTreeTooLarge[] = "tree-too-large";
 inline constexpr char kErrorInternal[] = "internal-error";
 

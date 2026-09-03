@@ -88,9 +88,18 @@ This repository's current PR workflow provides examples in
   diagnostics without prompting or modifying TCC, and uploads the diagnostic
   with the smoke artifacts;
 - `windows-storybook` prepares the generated app, installs the required Windows
-  App Runtime for that app, and runs Windows `stories-and-tests`;
-- `win32-storybook` runs the same authored plans through the prebuilt Paper
+  App Runtime for that app, runs the shared Windows native build contract,
+  explicitly builds the helper into a job-local cache, verifies it with
+  `doctor --platform windows`, pins later resolution to `never`, and runs
+  Windows `stories-and-tests`;
+- `win32-storybook` explicitly builds the same Windows provider into its own
+  job-local cache, verifies the `win32` endpoint with doctor, pins later
+  resolution to `never`, and runs the authored plans through the prebuilt Paper
   endpoint.
+
+Both Windows jobs upload their doctor report, successful native build log, and
+preserved failed-build diagnostics with the Storybook artifacts. Neither
+`prep` nor `smoke` may compile a helper after the explicit build step.
 
 Those jobs are consumer examples, not generic package requirements. The native
 helper itself does not require CocoaPods, the Windows App Runtime, or a

@@ -543,6 +543,7 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
   }
   if (command == "dispose") {
     ReleaseInput();
+    applications_.Dispose(token);
     automation_.Reset();
     result.result = json::Value::Null();
     return result;

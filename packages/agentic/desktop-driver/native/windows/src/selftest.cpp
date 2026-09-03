@@ -287,6 +287,16 @@ void TestSnapshotShape() {
 }
 
 void TestLeaseIdentity() {
+  Check(!ReadProcessImagePath(GetCurrentProcess()).empty(), "process image paths are readable");
+  Check(QuoteWindowsCommandLineArgument(L"") == L"\"\"", "empty command-line arguments are preserved");
+  Check(QuoteWindowsCommandLineArgument(L"plain") == L"\"plain\"", "plain command-line arguments are quoted");
+  Check(QuoteWindowsCommandLineArgument(L"two words") == L"\"two words\"",
+        "command-line arguments preserve spaces");
+  Check(QuoteWindowsCommandLineArgument(L"a\"b") == L"\"a\\\"b\"",
+        "command-line arguments escape embedded quotes");
+  Check(QuoteWindowsCommandLineArgument(L"C:\\path\\") == L"\"C:\\path\\\\\"",
+        "command-line arguments double trailing backslashes");
+
   FILETIME parsed{};
   Check(TryParseIso8601("2026-08-31T21:59:59.1234567Z", parsed), "lease timestamps parse");
   Check(FormatFileTimeIso8601(parsed) == "2026-08-31T21:59:59.1234567Z", "lease timestamps round trip");

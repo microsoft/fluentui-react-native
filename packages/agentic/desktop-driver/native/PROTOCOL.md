@@ -106,6 +106,9 @@ Parameters are command-specific serializable data already validated by the
 Node boundary. Public WebDriver element UUIDs are resolved before dispatch;
 only helper-private opaque IDs cross FDR1.
 
+Request and cancellation correlation IDs are limited to 256 UTF-8 bytes.
+Helpers ignore invalid IDs before queuing work or echoing a response.
+
 ### `response`
 
 A successful response carries `result`:

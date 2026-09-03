@@ -278,6 +278,13 @@ describe('native driver build and resolution', () => {
         });
         await helper.dispose();
 
+        const selfTest = spawnSync(resolved.executablePath, ['--self-test'], {
+          encoding: 'utf8',
+          timeout: 120_000,
+        });
+        expect(selfTest.status).toBe(0);
+        expect(selfTest.stdout).toContain('self-test passed');
+
         fs.writeFileSync(resolved.executablePath, 'corrupt');
         await expect(resolveNativeDesktopDriver({ buildPolicy: 'never', cacheRoot, platform: 'windows' })).rejects.toMatchObject({
           code: 'no-verified-prebuilt',
@@ -299,6 +306,24 @@ describe('native driver build and resolution', () => {
     await expect(buildNativeDesktopDriver({ architecture: 'arm64', platform: 'windows' })).rejects.toMatchObject({
       code: 'unsupported-platform',
     });
+  });
+
+  test('honors the prebuilt-only build policy from the environment', async () => {
+    const cacheRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-policy-'));
+    const previousPolicy = process.env.FURN_DESKTOP_DRIVER_BUILD_POLICY;
+    process.env.FURN_DESKTOP_DRIVER_BUILD_POLICY = 'never';
+    try {
+      await expect(resolveNativeDesktopDriver({ cacheRoot, platform: 'windows' })).rejects.toMatchObject({
+        code: 'no-verified-prebuilt',
+      });
+    } finally {
+      if (previousPolicy === undefined) {
+        delete process.env.FURN_DESKTOP_DRIVER_BUILD_POLICY;
+      } else {
+        process.env.FURN_DESKTOP_DRIVER_BUILD_POLICY = previousPolicy;
+      }
+      fs.rmSync(cacheRoot, { force: true, recursive: true });
+    }
   });
 
   async function expectMalformedJsonRecovery(executablePath: string): Promise<void> {

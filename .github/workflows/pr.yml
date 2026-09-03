@@ -455,7 +455,7 @@ jobs:
   windows-storybook:
     name: Windows Storybook PR
     runs-on: windows-latest
-    timeout-minutes: 40
+    timeout-minutes: 60
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
@@ -473,6 +473,52 @@ jobs:
 
       - name: Build packages
         run: yarn build
+
+      - name: Configure Desktop Driver cache
+        shell: pwsh
+        run: |
+          $cacheRoot = Join-Path $env:RUNNER_TEMP 'furn-desktop-driver-native'
+          New-Item -ItemType Directory -Force -Path $cacheRoot | Out-Null
+          "FURN_DESKTOP_DRIVER_CACHE_ROOT=$cacheRoot" |
+            Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Verify Windows Desktop Driver native contract
+        shell: pwsh
+        env:
+          FURN_NATIVE_DRIVER_TEST: '1'
+        run: yarn workspace @fluentui-react-native/desktop-driver test --runInBand
+
+      - name: Build and diagnose Windows Desktop Driver
+        shell: pwsh
+        working-directory: apps/storybook
+        run: |
+          $ErrorActionPreference = 'Stop'
+          yarn storybook build-driver --windows
+          if ($LASTEXITCODE -ne 0) {
+            throw "Windows Desktop Driver build exited with code $LASTEXITCODE."
+          }
+
+          $doctorPath = Join-Path $env:RUNNER_TEMP 'desktop-driver-windows-doctor.json'
+          $doctorOutput = yarn desktop-driver doctor --platform windows
+          $doctorExitCode = $LASTEXITCODE
+          $doctorOutput | Set-Content -Path $doctorPath -Encoding utf8
+          if ($doctorExitCode -ne 0) {
+            throw "Windows Desktop Driver doctor exited with code $doctorExitCode."
+          }
+
+          $report = ($doctorOutput -join [Environment]::NewLine) | ConvertFrom-Json
+          if (
+            -not $report.ready -or
+            $report.result.provider -ne 'windows' -or
+            $report.result.architecture -ne 'x64' -or
+            $report.result.wireProtocol.major -ne 1 -or
+            -not ($report.result.endpoints -contains 'windows')
+          ) {
+            throw 'The verified helper does not satisfy the Windows x64 provider contract.'
+          }
+
+          "FURN_DESKTOP_DRIVER_BUILD_POLICY=never" |
+            Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
       - name: Prep Windows Storybook
         run: yarn storybook prep --windows
@@ -502,7 +548,12 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: Storybook_windows_Dump
-          path: apps/storybook/artifacts/windows
+          path: |
+            apps/storybook/artifacts/windows
+            ${{ runner.temp }}/desktop-driver-windows-doctor.json
+            ${{ runner.temp }}/furn-desktop-driver-native/v1/artifacts/**/build.log
+            ${{ runner.temp }}/furn-desktop-driver-native/v1/diagnostics/**
+          if-no-files-found: warn
 
   win32:
     name: Win32 PR
@@ -572,6 +623,46 @@ jobs:
       - name: Build packages
         run: yarn build
 
+      - name: Configure Desktop Driver cache
+        shell: pwsh
+        run: |
+          $cacheRoot = Join-Path $env:RUNNER_TEMP 'furn-desktop-driver-native'
+          New-Item -ItemType Directory -Force -Path $cacheRoot | Out-Null
+          "FURN_DESKTOP_DRIVER_CACHE_ROOT=$cacheRoot" |
+            Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Build and diagnose Win32 Desktop Driver
+        shell: pwsh
+        working-directory: apps/storybook
+        run: |
+          $ErrorActionPreference = 'Stop'
+          yarn storybook build-driver --win32
+          if ($LASTEXITCODE -ne 0) {
+            throw "Win32 Desktop Driver build exited with code $LASTEXITCODE."
+          }
+
+          $doctorPath = Join-Path $env:RUNNER_TEMP 'desktop-driver-win32-doctor.json'
+          $doctorOutput = yarn desktop-driver doctor --platform win32
+          $doctorExitCode = $LASTEXITCODE
+          $doctorOutput | Set-Content -Path $doctorPath -Encoding utf8
+          if ($doctorExitCode -ne 0) {
+            throw "Win32 Desktop Driver doctor exited with code $doctorExitCode."
+          }
+
+          $report = ($doctorOutput -join [Environment]::NewLine) | ConvertFrom-Json
+          if (
+            -not $report.ready -or
+            $report.result.provider -ne 'windows' -or
+            $report.result.architecture -ne 'x64' -or
+            $report.result.wireProtocol.major -ne 1 -or
+            -not ($report.result.endpoints -contains 'win32')
+          ) {
+            throw 'The verified helper does not satisfy the Win32 x64 provider contract.'
+          }
+
+          "FURN_DESKTOP_DRIVER_BUILD_POLICY=never" |
+            Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
       - name: Smoke test Win32 Storybook
         run: yarn storybook smoke --win32 --mode stories-and-tests
         working-directory: apps/storybook
@@ -581,7 +672,12 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: Storybook_win32_Dump
-          path: apps/storybook/artifacts/win32
+          path: |
+            apps/storybook/artifacts/win32
+            ${{ runner.temp }}/desktop-driver-win32-doctor.json
+            ${{ runner.temp }}/furn-desktop-driver-native/v1/artifacts/**/build.log
+            ${{ runner.temp }}/furn-desktop-driver-native/v1/diagnostics/**
+          if-no-files-found: warn
 
   check-changesets:
     name: Check for Changesets

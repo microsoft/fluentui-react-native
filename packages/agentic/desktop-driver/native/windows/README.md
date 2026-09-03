@@ -68,6 +68,14 @@ Leases record ownership, PID, process start, executable, and the primary window.
 Attached apps survive WebDriver deletion; launched apps are closed only by
 their exact recorded process identity.
 
+Unpackaged arguments use the standard `CommandLineToArgvW` quoting rules.
+Launch ownership requires a non-preexisting window from the exact created
+process or a verified descendant, plus a matching canonical executable or
+AUMID and a process start after the launch request. Reused packaged processes
+fail with guidance to use attach mode. Cancellation, launch failure, session
+cleanup, and helper disposal close only causally owned processes and retain
+the lease when forced termination cannot be proven.
+
 ## Automation behavior
 
 The helper provides:
@@ -109,6 +117,13 @@ Real qualification must run against the target React Native app. Use an
 interactive runner for physical click, keyboard, wheel, multi-window, capture,
 and 100/150/200 percent DPI checks. Hosted capability skips are not a physical
 input pass.
+
+CI must build this helper explicitly into a job-local cache, run the opt-in
+native contract once for the shared Windows/Win32 provider, verify each
+endpoint with `desktop-driver doctor`, and set
+`FURN_DESKTOP_DRIVER_BUILD_POLICY=never` before Storybook prep or smoke. This
+keeps compilation outside the app lifecycle and turns compatibility drift into
+an actionable cache failure.
 
 See [Native helpers](../../references/native-helpers.md) for cache and
 verification policy, [CI integration](../../references/ci-integration.md) for

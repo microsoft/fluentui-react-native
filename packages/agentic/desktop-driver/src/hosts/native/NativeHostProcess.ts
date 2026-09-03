@@ -38,6 +38,8 @@ type PendingRequest = {
   response?: NativeHostResponse;
 };
 
+class NativeHostResponseError extends NativeDriverError {}
+
 export class NativeHostProcess extends EventEmitter<{
   event: [NativeHostEventMessage];
   exit: [Error];
@@ -172,17 +174,21 @@ export class NativeHostProcess extends EventEmitter<{
     });
   }
 
-  async dispose(): Promise<void> {
+  async dispose(signal?: AbortSignal): Promise<void> {
     if (this.closed || this.closing) {
       return;
     }
     this.closing = true;
     try {
       const disposeResult = await Promise.race([
-        this.request('dispose').then(() => 'response' as const),
+        this.request('dispose', undefined, signal).then(() => 'response' as const),
         this.completed.then(() => 'closed' as const),
       ]);
       if (disposeResult === 'closed') {
+        this.closed = true;
+        for (const [id] of this.pending) {
+          this.rejectPending(id, new NativeDriverError('host-closed', 'Native driver helper closed.'));
+        }
         throw new NativeDriverError('host-exited', 'Native driver helper exited before acknowledging disposal.');
       }
       const exited = await Promise.race([this.completed.then(() => true), delay(2000).then(() => false)]);
@@ -190,14 +196,27 @@ export class NativeHostProcess extends EventEmitter<{
         this.child.kill();
         await this.completed;
       }
-    } finally {
       this.closed = true;
       for (const [id] of this.pending) {
         this.rejectPending(id, new NativeDriverError('host-closed', 'Native driver helper closed.'));
       }
-      if (this.child.exitCode === null && this.child.signalCode === null) {
-        this.child.kill();
-        await this.completed;
+    } catch (error) {
+      if (
+        (error instanceof NativeHostResponseError || (error instanceof Error && error.name === 'AbortError')) &&
+        !this.closed &&
+        this.child.exitCode === null &&
+        this.child.signalCode === null
+      ) {
+        this.closing = false;
+      } else if (!this.closed) {
+        this.closing = false;
+        this.failurePromise = undefined;
+        await this.failAfterRecovery(asError(error));
+      }
+      throw error;
+    } finally {
+      if (this.closed) {
+        this.closing = false;
       }
     }
   }
@@ -255,7 +274,7 @@ export class NativeHostProcess extends EventEmitter<{
       this.pendingBinaryIds.delete(pending.binaryId);
     }
     if (response.error) {
-      pending.reject(new NativeDriverError(response.error.code, response.error.message, response.error.data));
+      pending.reject(new NativeHostResponseError(response.error.code, response.error.message, response.error.data));
       return;
     }
     if (pending.aborted) {

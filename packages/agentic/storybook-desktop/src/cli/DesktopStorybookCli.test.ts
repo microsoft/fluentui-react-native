@@ -447,7 +447,7 @@ describe('DesktopStorybookCli', () => {
       [STORYBOOK_SMOKE_MODE]: 'stories-and-tests',
     });
     expect(resolveNativeDriver).toHaveBeenCalledWith({
-      buildPolicy: 'if-missing',
+      buildPolicy: undefined,
       cacheRoot: undefined,
       configuration: 'release',
       helperPath: undefined,
@@ -459,7 +459,7 @@ describe('DesktopStorybookCli', () => {
 });
 
 describe('createDesktopStorybookCommand', () => {
-  test('builds the native helper without running app preparation', async () => {
+  test.each(['windows', 'win32'] as const)('builds the %s native helper without running app preparation', async (platform) => {
     const runner = new RecordingRunner();
     const buildNativeDriver = jest.fn(async () => nativeDriverArtifact);
     const program = createDesktopStorybookCommand({
@@ -470,14 +470,14 @@ describe('createDesktopStorybookCommand', () => {
       runner,
     });
 
-    await program.parseAsync(['node', 'test', 'build-driver', '--windows', '--force']);
+    await program.parseAsync(['node', 'test', 'build-driver', `--${platform}`, '--force']);
 
     expect(buildNativeDriver).toHaveBeenCalledWith({
       cacheRoot: undefined,
       configuration: 'release',
       force: true,
       macosSigningIdentity: undefined,
-      platform: 'windows',
+      platform,
     });
     expect(runner.foreground).toEqual([]);
     expect(runner.background).toEqual([]);

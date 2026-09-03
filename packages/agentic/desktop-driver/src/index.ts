@@ -92,7 +92,7 @@ export type {
   NativeHostJsonMessage,
 } from './native/index.js';
 export { webElementIdentifier } from './protocol/constants.js';
-export { HostStaleError, HostUnsupportedError, WebDriverError } from './protocol/errors.js';
+export { HostStaleError, HostUnsupportedError, HostWebDriverError, WebDriverError } from './protocol/errors.js';
 export type { WebDriverErrorCode } from './protocol/errors.js';
 export {
   type DesktopClickMode,

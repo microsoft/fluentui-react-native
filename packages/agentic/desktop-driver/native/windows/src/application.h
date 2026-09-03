@@ -42,6 +42,7 @@ class ApplicationManager {
   const ApplicationLease& Launch(const json::Value& params, const CancellationToken& token);
   const ApplicationLease& Attach(const json::Value& params, const CancellationToken& token);
   void CloseApplication(const std::string& leaseId, const CancellationToken& token);
+  void Dispose(const CancellationToken& token);
   std::vector<WindowInfo> Windows(const std::string& leaseId, const CancellationToken& token);
 
   WindowInfo RequireWindow(const std::string& windowId);
@@ -56,6 +57,7 @@ class ApplicationManager {
   std::string RegisterWindow(HWND window, DWORD processId, const std::string& leaseId, bool primary);
   ApplicationLease& CreateLease(std::string ownership, DWORD processId, HANDLE process, HWND primaryWindow,
                                 const std::wstring& title, const json::Value& params);
+  void TrackPendingCleanupProcess(DWORD processId, HANDLE process);
 
   struct WindowRecord {
     std::string id;
@@ -65,10 +67,17 @@ class ApplicationManager {
     bool primary{false};
   };
 
+  struct PendingCleanupProcess {
+    DWORD processId{0};
+    FILETIME startTime{};
+    HANDLE process{nullptr};
+  };
+
   std::unordered_map<std::string, ApplicationLease> leases_;
   std::vector<std::string> leaseOrder_;
   std::unordered_map<std::string, WindowRecord> windowsById_;
   std::unordered_map<HWND, std::string> windowIdsByHandle_;
+  std::vector<PendingCleanupProcess> pendingCleanupProcesses_;
 };
 
 std::vector<HWND> EnumerateTopLevelWindows(DWORD processId);
@@ -76,6 +85,7 @@ std::vector<HWND> FindWindowsWithTitle(const std::wstring& title);
 std::wstring ReadWindowTitle(HWND window);
 bool TryReadProcessStartTime(HANDLE process, FILETIME& startTime);
 std::wstring ReadProcessImagePath(HANDLE process);
+std::wstring QuoteWindowsCommandLineArgument(std::wstring_view value);
 void ActivateWindow(HWND window, const CancellationToken& token);
 bool TryActivateWindow(HWND window, const CancellationToken& token);
 

@@ -17,7 +17,8 @@ import type {
 import type { NativeDesktopApplicationDescriptor, NativeDriverArtifact, NativeHostEventMessage } from '../../native/types.js';
 import { NativeDriverError } from '../../native/NativeDriverError.js';
 import { isSingleWebDriverKeyValue } from '../../protocol/actions.js';
-import { HostStaleError, HostUnsupportedError } from '../../protocol/errors.js';
+import { HostStaleError, HostUnsupportedError, HostWebDriverError } from '../../protocol/errors.js';
+import type { WebDriverErrorCode } from '../../protocol/errors.js';
 import type { DesktopEndpoint } from '../../protocol/types.js';
 import { NativeHostProcess } from './NativeHostProcess.js';
 
@@ -182,9 +183,9 @@ export class NativeDesktopHost implements DesktopHost {
     return () => this.listeners.delete(listener);
   }
 
-  async dispose(): Promise<void> {
+  async dispose(signal?: AbortSignal): Promise<void> {
     const process = await this.processPromise;
-    await process?.dispose();
+    await process?.dispose(signal);
   }
 
   private targetParams(target: DesktopTarget): Record<string, unknown> {
@@ -383,7 +384,16 @@ function typedTextRecoveryKeys(text: string): Set<string> {
   return keys;
 }
 
-function translateNativeError(error: unknown): unknown {
+const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = {
+  'capture-failed': 'unable to capture screen',
+  'element-not-interactable': 'element not interactable',
+  'invalid-params': 'invalid argument',
+  'invalid-request': 'invalid argument',
+  'no-such-element': 'no such element',
+  'no-such-window': 'no such window',
+};
+
+export function translateNativeError(error: unknown): unknown {
   if (!(error instanceof NativeDriverError)) {
     return error;
   }
@@ -392,6 +402,10 @@ function translateNativeError(error: unknown): unknown {
   }
   if (error.code === 'stale-element') {
     return new HostStaleError(error.message);
+  }
+  const webdriverCode = nativeWebDriverErrorCodes[error.code];
+  if (webdriverCode) {
+    return new HostWebDriverError(webdriverCode, error.message, error.data);
   }
   return error;
 }
