@@ -8,7 +8,7 @@ Trigger focus reveals the tooltip immediately and cancels any pending pointer ti
 
 Pointer and focus are tracked independently. The tooltip stays visible while either the pointer or focus remains on the trigger, so moving the pointer away from a focused trigger does not hide the label, and blurring a hovered trigger does not either. Pending timers are cancelled when the opposite interaction settles the outcome and when the component unmounts.
 
-A disabled trigger never reveals the tooltip: both the pointer path and the focus path are gated, and no timer is scheduled. `disabled` never hides an already visible tooltip, because the visible value may be owned by the caller.
+A disabled trigger never reveals the tooltip: both the pointer path and the focus path are gated, so no timer is scheduled, and a reveal that was scheduled while the trigger was still enabled is dropped when it comes due. `disabled` never hides an already visible tooltip and never cancels a pending hide, because the visible value may be owned by the caller.
 
 ## Activation and dismissal
 

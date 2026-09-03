@@ -198,6 +198,22 @@ describe('Tooltip', () => {
     expect(component.queryByTestId('tooltip-surface')).toBeNull();
   });
 
+  it('drops a pending pointer reveal when the trigger is disabled before the delay elapses', async () => {
+    const onVisibleChange = jest.fn();
+    const component = await render(<Tooltip content={label} onVisibleChange={onVisibleChange} showDelay={100} />);
+    const trigger = getTrigger(component);
+
+    await fireEvent(trigger, 'hoverIn', {});
+    await advance(50);
+
+    await component.rerender(<Tooltip content={label} disabled onVisibleChange={onVisibleChange} showDelay={100} />);
+    await advance(100);
+
+    expect(onVisibleChange).not.toHaveBeenCalled();
+    expect(component.queryByTestId('tooltip-surface')).toBeNull();
+    expect(component.queryByTestId('tooltip-surface-content')).toBeNull();
+  });
+
   it('lets native dismissal hide a visible tooltip whose trigger is disabled', async () => {
     const onVisibleChange = jest.fn();
     const component = await renderTooltip({ defaultVisible: true, disabled: true, onVisibleChange });

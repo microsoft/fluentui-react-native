@@ -67,6 +67,10 @@ export function useTooltip_unstable(props: TooltipProps): TooltipState {
   visibleRef.current = visible;
   const hoveredRef = React.useRef(false);
   const focusedRef = React.useRef(false);
+  // A delayed reveal is re-checked against the current disabled value when it fires, because the trigger can be
+  // disabled while the reveal is still pending. Hides are never gated, so this only guards the reveal path.
+  const disabledRef = React.useRef(disabled);
+  disabledRef.current = disabled;
   const timerRef = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const clearPendingRequest = React.useCallback(() => {
@@ -82,6 +86,9 @@ export function useTooltip_unstable(props: TooltipProps): TooltipState {
       if (delay > 0) {
         timerRef.current = setTimeout(() => {
           timerRef.current = undefined;
+          if (next && disabledRef.current) {
+            return;
+          }
           if (visibleRef.current !== next) {
             setVisible(next);
           }
