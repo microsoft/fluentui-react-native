@@ -120,7 +120,15 @@ export const Placement: Story = {
   render: () => (
     <StoryGroup label="Preferred edge">
       {positions.map(({ label, value }) => (
-        <Popover key={value} position={value} surfaceAccessibilityLabel={`${label} details`} trigger={{ children: <Text>{label}</Text> }} />
+        <Popover
+          key={value}
+          content={{
+            children: <Text>{`Anchored ${label.toLowerCase()} the trigger`}</Text>,
+          }}
+          position={value}
+          surfaceAccessibilityLabel={`${label} details`}
+          trigger={{ children: <Text>{label}</Text> }}
+        />
       ))}
     </StoryGroup>
   ),

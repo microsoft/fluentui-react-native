@@ -304,6 +304,8 @@ describe('Tooltip', () => {
     expect(getSurfaceContentStyle(component)).toMatchObject({
       backgroundColor: tokens.color.surfaceNeutralNearer,
       borderRadius: tokens.borderRadius.base200,
+      maxWidth: 240,
+      minWidth: 160,
       overflow: 'hidden',
       paddingHorizontal: tokens.spacing.componentBase200,
       paddingVertical: tokens.spacing.componentBase100,

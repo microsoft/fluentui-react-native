@@ -43,6 +43,7 @@ export const inputStyles = StyleSheet.create({
     flexShrink: 1,
     minWidth: 0,
     paddingHorizontal: 0,
+    textAlignVertical: 'center',
   },
   underline: {
     left: 0,

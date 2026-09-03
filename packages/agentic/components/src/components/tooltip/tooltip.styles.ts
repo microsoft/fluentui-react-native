@@ -20,6 +20,8 @@ export const tooltipStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   surfaceContent: {
+    maxWidth: 240,
+    minWidth: 160,
     overflow: 'hidden',
   },
 });

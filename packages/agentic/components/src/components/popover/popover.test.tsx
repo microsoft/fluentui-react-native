@@ -160,6 +160,7 @@ describe('Popover', () => {
       borderColor: tokens.color.strokeNeutralSubtle,
       borderRadius: tokens.borderRadius.base400,
       borderWidth: tokens.strokeWidth.thin,
+      minWidth: 200,
       overflow: 'hidden',
       padding: tokens.spacing.componentBase400,
     });

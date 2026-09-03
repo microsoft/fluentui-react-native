@@ -41,6 +41,9 @@ describe('Input', () => {
       borderWidth: 1,
       minHeight: 32,
     });
+    expect(flattenStyle(textbox.props.style)).toMatchObject({
+      textAlignVertical: 'center',
+    });
   });
 
   it('forwards change and interaction handlers while updating visual state', async () => {

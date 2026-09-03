@@ -20,6 +20,7 @@ export const popoverStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   surfaceContent: {
+    minWidth: 200,
     overflow: 'hidden',
   },
 });

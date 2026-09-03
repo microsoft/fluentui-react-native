@@ -40,6 +40,8 @@ bindings:
       have, and the Windows implementation does not read any of them.
   surfaceContent:
     layout:
+      maxWidth: 240
+      minWidth: 160
       paddingHorizontal: spacing.componentBase200
       paddingVertical: spacing.componentBase100
     appearance:
@@ -49,7 +51,9 @@ bindings:
     note: >
       The whole visible label surface lives here because this is a React Native view
       that both platforms render inside the popup window. Flex maps the tooltip
-      container to no stroke, so no border width or color is applied.
+      container to no stroke, so no border width or color is applied. The native
+      callout measures this first child to size its platform window; the width guard
+      keeps the short label readable while preserving the Fluent v9 240-pixel cap.
   content:
     typography:
       fontFamily: fontFamily.functional

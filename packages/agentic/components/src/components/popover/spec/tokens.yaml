@@ -36,6 +36,7 @@ bindings:
       implementation of the visible boundary.
   surfaceContent:
     layout:
+      minWidth: 200
       padding: spacing.componentBase400
     appearance:
       backgroundColor: color.surfaceNeutralNearer
@@ -45,7 +46,9 @@ bindings:
       overflow: hidden
     note: >
       The whole visible surface boundary lives here because this is a React Native
-      view that both platforms render inside the popup window.
+      view that both platforms render inside the popup window. The native callout
+      measures this first child to size its platform window, so a minimum width
+      prevents unconstrained text content from collapsing to a one-character column.
   contentPlaceholder:
     typography:
       fontFamily: fontFamily.functional
