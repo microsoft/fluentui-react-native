@@ -100,6 +100,11 @@ This repository's current PR workflow provides examples in
 Both Windows jobs upload their doctor report, successful native build log, and
 preserved failed-build diagnostics with the Storybook artifacts. Neither
 `prep` nor `smoke` may compile a helper after the explicit build step.
+Because GitHub-hosted Windows does not provide authoritative global input,
+both jobs disable keyboard, physical-click, and wheel capabilities through the
+registered host policy. The authored input plans therefore report explicit
+capability skips; interactive self-hosted qualification must leave those
+features enabled.
 
 Those jobs are consumer examples, not generic package requirements. The native
 helper itself does not require CocoaPods, the Windows App Runtime, or a

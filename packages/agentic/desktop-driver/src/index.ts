@@ -61,8 +61,13 @@ export type {
   Rect,
   SupportedValue,
 } from './host/types.js';
-export { NativeDesktopHost, NativeHostProcess } from './hosts/native/index.js';
-export type { NativeDesktopHostOptions, NativeHostProcessOptions, NativeHostRequestResult } from './hosts/native/index.js';
+export { FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES, NativeDesktopHost, NativeHostProcess } from './hosts/native/index.js';
+export type {
+  NativeDesktopHostOptions,
+  NativeDisabledInputFeature,
+  NativeHostProcessOptions,
+  NativeHostRequestResult,
+} from './hosts/native/index.js';
 export {
   buildNativeDesktopDriver,
   FURN_DESKTOP_DRIVER_BUILD_POLICY,

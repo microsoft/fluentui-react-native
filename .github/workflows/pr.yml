@@ -519,6 +519,8 @@ jobs:
 
           "FURN_DESKTOP_DRIVER_BUILD_POLICY=never" |
             Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=keyboard,physicalClick,wheel" |
+            Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
       - name: Prep Windows Storybook
         run: yarn storybook prep --windows
@@ -661,6 +663,8 @@ jobs:
           }
 
           "FURN_DESKTOP_DRIVER_BUILD_POLICY=never" |
+            Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=keyboard,physicalClick,wheel" |
             Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
       - name: Smoke test Win32 Storybook

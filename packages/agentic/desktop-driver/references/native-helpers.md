@@ -65,14 +65,15 @@ The macOS helper path may name either
 
 ## Configuration
 
-| CLI/API option         | Environment variable                         | Default                   |
-| ---------------------- | -------------------------------------------- | ------------------------- |
-| `buildPolicy`          | `FURN_DESKTOP_DRIVER_BUILD_POLICY`           | `if-missing`              |
-| `cacheRoot`            | `FURN_DESKTOP_DRIVER_CACHE_ROOT`             | User-level platform cache |
-| `helperPath`           | `FURN_DESKTOP_DRIVER_HELPER_PATH`            | None                      |
-| `installRoot`          | `FURN_DESKTOP_DRIVER_INSTALL_ROOT`           | None                      |
-| `macosSigningIdentity` | `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY` | Ad hoc signing            |
-| `configuration`        | `FURN_DESKTOP_DRIVER_CONFIGURATION`          | `release`                 |
+| CLI/API option          | Environment variable                          | Default                   |
+| ----------------------- | --------------------------------------------- | ------------------------- |
+| `buildPolicy`           | `FURN_DESKTOP_DRIVER_BUILD_POLICY`            | `if-missing`              |
+| `cacheRoot`             | `FURN_DESKTOP_DRIVER_CACHE_ROOT`              | User-level platform cache |
+| `helperPath`            | `FURN_DESKTOP_DRIVER_HELPER_PATH`             | None                      |
+| `installRoot`           | `FURN_DESKTOP_DRIVER_INSTALL_ROOT`            | None                      |
+| `macosSigningIdentity`  | `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`  | Ad hoc signing            |
+| `configuration`         | `FURN_DESKTOP_DRIVER_CONFIGURATION`           | `release`                 |
+| Disabled input features | `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES` | None                      |
 
 An explicit API or CLI option takes precedence over its environment variable.
 WebDriver capabilities cannot set any of these values.
@@ -98,6 +99,12 @@ macOS:   $RUNNER_TEMP/furn-desktop-driver-native
 Build the helper explicitly, run `doctor` against that cache, then set
 `FURN_DESKTOP_DRIVER_BUILD_POLICY=never` before application preparation or
 smoke so later phases cannot compile implicitly.
+
+Hosted runners that cannot provide authoritative global input may set
+`FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=keyboard,physicalClick,wheel`.
+The Node host masks those capabilities and rejects direct use while leaving
+the verified native helper unchanged. Interactive self-hosted runners should
+not set this policy.
 
 ## Immutable cache model
 

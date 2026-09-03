@@ -78,6 +78,10 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - In CI, configure a job-local `FURN_DESKTOP_DRIVER_CACHE_ROOT`, run the shared
   Windows native contract, build and diagnose the helper explicitly, then set
   `FURN_DESKTOP_DRIVER_BUILD_POLICY=never` before `prep` or `smoke`.
+- GitHub-hosted Windows is not the physical-input qualification environment.
+  Disable keyboard, physical-click, and wheel through
+  `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES`; leave them enabled on the
+  interactive self-hosted runner.
 - Use `yarn storybook prep --windows`, `bundle --windows`, `build --windows`, and `run --windows` for individual
   stages. Use `yarn storybook smoke --windows --mode stories` for the package-owned generation, channel server, native
   build and registration, Metro launch, full indexed-story traversal, and ownership-safe cleanup. Use

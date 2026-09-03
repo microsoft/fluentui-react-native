@@ -4,6 +4,7 @@ import type {
   ApplicationLease,
   DesktopHost,
   DesktopHostEvent,
+  DesktopHostFeatures,
   DesktopHostInfo,
   DesktopTarget,
   DesktopWindow,
@@ -25,15 +26,21 @@ import { NativeHostProcess } from './NativeHostProcess.js';
 export type NativeDesktopHostOptions = {
   application: NativeDesktopApplicationDescriptor;
   artifact: NativeDriverArtifact;
+  disabledInputFeatures?: readonly NativeDisabledInputFeature[];
   endpoint: DesktopEndpoint;
   onStderr?: (message: string) => void;
 };
+
+export type NativeDisabledInputFeature = 'keyboard' | 'physicalClick' | 'wheel';
+
+export const FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES = 'FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES';
 
 export class NativeDesktopHost implements DesktopHost {
   readonly endpoint: DesktopEndpoint;
 
   private readonly application: NativeDesktopApplicationDescriptor;
   private readonly artifact: NativeDriverArtifact;
+  private readonly disabledInputFeatures: ReadonlySet<NativeDisabledInputFeature>;
   private readonly onStderr?: (message: string) => void;
   private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
   private readonly depressedButtons = new Set<number>();
@@ -43,18 +50,20 @@ export class NativeDesktopHost implements DesktopHost {
   private failure?: Error;
   private processPromise?: Promise<NativeHostProcess>;
 
-  constructor({ application, artifact, endpoint, onStderr }: NativeDesktopHostOptions) {
+  constructor({ application, artifact, disabledInputFeatures, endpoint, onStderr }: NativeDesktopHostOptions) {
     if (!artifact.endpoints.includes(endpoint)) {
       throw new TypeError(`Native helper ${artifact.provider} does not support endpoint "${endpoint}".`);
     }
     this.application = Object.freeze({ ...application });
     this.artifact = artifact;
+    this.disabledInputFeatures = resolveDisabledInputFeatures(disabledInputFeatures);
     this.endpoint = endpoint;
     this.onStderr = onStderr;
   }
 
   async probe(signal?: AbortSignal): Promise<DesktopHostInfo> {
-    return this.request('probe', { endpoint: this.endpoint }, signal);
+    const hostInfo = await this.request<DesktopHostInfo>('probe', { endpoint: this.endpoint }, signal);
+    return applyDisabledInputFeaturePolicy(hostInfo, this.disabledInputFeatures);
   }
 
   async launch(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease> {
@@ -106,6 +115,15 @@ export class NativeDesktopHost implements DesktopHost {
   }
 
   async click(elementId: string, mode: 'accessibility' | 'auto' | 'physical', signal?: AbortSignal): Promise<void> {
+    if (this.disabledInputFeatures.has('physicalClick')) {
+      if (mode === 'auto') {
+        await this.request('click', { elementId, mode: 'accessibility' }, signal);
+        return;
+      }
+      if (mode === 'physical') {
+        throw new HostUnsupportedError('Physical pointer input is disabled by the registered target policy.');
+      }
+    }
     const includePointer = mode !== 'accessibility';
     if (includePointer) {
       this.potentialButtons = new Set([...this.depressedButtons, 0]);
@@ -118,10 +136,16 @@ export class NativeDesktopHost implements DesktopHost {
   }
 
   async clear(elementId: string, signal?: AbortSignal): Promise<void> {
+    if (this.disabledInputFeatures.has('keyboard')) {
+      throw new HostUnsupportedError('Physical keyboard fallback is disabled by the registered target policy.');
+    }
     await this.request('clear', { elementId }, signal);
   }
 
   async sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void> {
+    if (this.disabledInputFeatures.has('keyboard')) {
+      throw new HostUnsupportedError('Physical keyboard input is disabled by the registered target policy.');
+    }
     this.potentialKeys = new Set([...this.depressedKeys, ...typedTextRecoveryKeys(text)]);
     try {
       await this.request('sendKeys', { elementId, text }, signal);
@@ -131,6 +155,15 @@ export class NativeDesktopHost implements DesktopHost {
   }
 
   async performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void> {
+    for (const sequence of actions) {
+      if (
+        (sequence.type === 'key' && this.disabledInputFeatures.has('keyboard')) ||
+        (sequence.type === 'pointer' && this.disabledInputFeatures.has('physicalClick')) ||
+        (sequence.type === 'wheel' && this.disabledInputFeatures.has('wheel'))
+      ) {
+        throw new HostUnsupportedError(`${sequence.type} input is disabled by the registered target policy.`);
+      }
+    }
     const plan = planInputLedger(actions, this.depressedKeys, this.depressedButtons);
     this.potentialKeys = plan.potentialKeys;
     this.potentialButtons = plan.potentialButtons;
@@ -382,6 +415,39 @@ function typedTextRecoveryKeys(text: string): Set<string> {
     keys.add(value === '\n' ? '\uE006' : value);
   }
   return keys;
+}
+
+export function applyDisabledInputFeaturePolicy(
+  hostInfo: DesktopHostInfo,
+  disabledFeatures: ReadonlySet<NativeDisabledInputFeature>,
+): DesktopHostInfo {
+  if (disabledFeatures.size === 0) {
+    return hostInfo;
+  }
+  const features: DesktopHostFeatures = { ...hostInfo.features };
+  for (const feature of disabledFeatures) {
+    features[feature] = false;
+  }
+  return { ...hostInfo, features };
+}
+
+function resolveDisabledInputFeatures(configured?: readonly NativeDisabledInputFeature[]): ReadonlySet<NativeDisabledInputFeature> {
+  const values =
+    configured ??
+    process.env[FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES]
+      ?.split(',')
+      .map((value) => value.trim())
+      .filter(Boolean) ??
+    [];
+  const allowed = new Set<NativeDisabledInputFeature>(['keyboard', 'physicalClick', 'wheel']);
+  const resolved = new Set<NativeDisabledInputFeature>();
+  for (const value of values) {
+    if (!allowed.has(value as NativeDisabledInputFeature)) {
+      throw new TypeError(`Unsupported disabled native input feature "${value}".`);
+    }
+    resolved.add(value as NativeDisabledInputFeature);
+  }
+  return resolved;
 }
 
 const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = {

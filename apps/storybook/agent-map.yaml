@@ -51,6 +51,7 @@ native:
     build: yarn storybook build-driver --<platform>
     doctor: yarn desktop-driver doctor --platform <platform>
     cache_env: FURN_DESKTOP_DRIVER_CACHE_ROOT
+    disabled_input_env: FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES
     ci_policy: explicit-build-then-prebuilt-only
   macos:
     process: ReactTestApp
