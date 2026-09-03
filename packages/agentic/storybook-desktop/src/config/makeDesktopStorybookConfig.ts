@@ -2,9 +2,11 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import type { NativeDesktopApplicationDescriptor } from '@fluentui-react-native/desktop-driver';
 import type {
   DesktopCommand,
   DesktopCommandPlan,
+  DesktopNativeDriverOptions,
   DesktopNativeProjectOptions,
   DesktopPlatformOptions,
   DesktopPlatformOptionsMap,
@@ -254,8 +256,24 @@ export class DesktopStorybookConfig {
       ...defaultNativeProjectOptions(this, platform),
       ...configured.nativeProject,
     };
+    const configuredNativeDriver = configured.nativeDriver;
 
     return Object.freeze({
+      nativeDriver:
+        configuredNativeDriver === false
+          ? false
+          : Object.freeze({
+              ...defaultNativeDriverOptions(this, platform),
+              ...configuredNativeDriver,
+              cacheRoot: resolveOptionalProjectPath(this.projectRoot, configuredNativeDriver?.cacheRoot),
+              helperPath: resolveOptionalProjectPath(this.projectRoot, configuredNativeDriver?.helperPath),
+              installRoot: resolveOptionalProjectPath(this.projectRoot, configuredNativeDriver?.installRoot),
+              application: Object.freeze({
+                ...defaultNativeApplication(this, platform),
+                ...configuredNativeDriver?.application,
+                executablePath: resolveOptionalProjectPath(this.projectRoot, configuredNativeDriver?.application?.executablePath),
+              }),
+            }),
       nativeProject: Object.freeze(nativeProject),
       server: configured.server !== undefined ? configured.server : defaultServerCommand(this),
       prep: configured.prep !== undefined ? configured.prep : defaultPrepPlan(platform),
@@ -267,7 +285,7 @@ export class DesktopStorybookConfig {
   }
 
   getCommandPlan(
-    action: Exclude<DesktopStorybookAction, 'smoke'>,
+    action: Exclude<DesktopStorybookAction, 'build-driver' | 'smoke'>,
     platformSetting: Platforms | string | undefined = this.platform,
   ): DesktopCommandPlan | false {
     const platform = requirePlatform(platformSetting);
@@ -281,6 +299,14 @@ export class DesktopStorybookConfig {
   getSmokeOptions(platformSetting: Platforms | string | undefined = this.platform): Readonly<DesktopSmokeOptions> | false | undefined {
     const platform = requirePlatform(platformSetting);
     return this.getPlatformOptions(platform).smoke;
+  }
+
+  getNativeDriverOptions(platformSetting: Platforms | string | undefined = this.platform): Readonly<DesktopNativeDriverOptions> | false {
+    const options = this.getPlatformOptions(platformSetting).nativeDriver;
+    if (options === undefined) {
+      throw new Error('Native driver options were not resolved.');
+    }
+    return options;
   }
 
   private resolveStoryPackage(spec: StoryPackageSpec, platform?: Platforms): ResolvedStoryPackage | undefined {
@@ -347,6 +373,10 @@ function resolveProjectRoot(projectRoot?: string | URL): string {
 
 function resolveFromProject(projectRoot: string, setting: string): string {
   return path.isAbsolute(setting) ? path.normalize(setting) : path.resolve(projectRoot, setting);
+}
+
+function resolveOptionalProjectPath(projectRoot: string, setting: string | undefined): string | undefined {
+  return setting === undefined ? undefined : resolveFromProject(projectRoot, setting);
 }
 
 function requirePlatform(platformSetting: Platforms | string | undefined): Platforms {
@@ -447,6 +477,19 @@ function defaultNativeProjectOptions(config: DesktopStorybookConfig, platform: P
   }
 }
 
+function defaultNativeDriverOptions(_config: DesktopStorybookConfig, _platform: Platforms): DesktopNativeDriverOptions {
+  return {
+    configuration: 'release',
+  };
+}
+
+function defaultNativeApplication(config: DesktopStorybookConfig, platform: Platforms): NativeDesktopApplicationDescriptor {
+  return {
+    ...(platform === 'macos' ? { bundleIdentifier: config.macosBundleIdentifier } : {}),
+    windowTitle: config.displayName,
+  };
+}
+
 function defaultSmokeOptions(config: DesktopStorybookConfig, platform: Platforms): DesktopSmokeOptions | undefined {
   if (platform !== 'macos') {
     return undefined;
@@ -514,6 +557,15 @@ function normalizeDesktopPlatformOptions(platformOptions: DesktopPlatformOptions
       platform,
       {
         ...options,
+        nativeDriver:
+          options.nativeDriver === false
+            ? false
+            : options.nativeDriver
+              ? {
+                  ...options.nativeDriver,
+                  application: options.nativeDriver.application ? { ...options.nativeDriver.application } : undefined,
+                }
+              : undefined,
         nativeProject: options.nativeProject ? { ...options.nativeProject } : undefined,
         server: normalizeCommand(options.server),
         prep: normalizeCommandPlan(options.prep),
@@ -599,6 +651,7 @@ function validateDesktopPlatformOptions(platformOptions: DesktopPlatformOptionsM
       throw new RangeError(`config contains unsupported desktop platform options "${platform}".`);
     }
     validateCommand(options.server, `${platform}.server`);
+    validateNativeDriverOptions(options.nativeDriver, `${platform}.nativeDriver`);
     validateCommandPlan(options.prep, `${platform}.prep`);
     validateCommandPlan(options.bundle, `${platform}.bundle`);
     validateCommandPlan(options.run, `${platform}.run`);
@@ -608,6 +661,35 @@ function validateDesktopPlatformOptions(platformOptions: DesktopPlatformOptionsM
       validateCommand(options.smoke?.server, `${platform}.smoke.server`);
       validateCommand(options.smoke?.metro, `${platform}.smoke.metro`);
       validateCommandPlan(options.smoke?.stop, `${platform}.smoke.stop`);
+    }
+
+    function validateNativeDriverOptions(options: DesktopNativeDriverOptions | false | undefined, source: string): void {
+      if (options === false || options === undefined) {
+        return;
+      }
+      if (options.buildPolicy !== undefined && options.buildPolicy !== 'if-missing' && options.buildPolicy !== 'never') {
+        throw new RangeError(`${source}.buildPolicy must be "if-missing" or "never".`);
+      }
+      if (options.configuration !== undefined && options.configuration !== 'debug' && options.configuration !== 'release') {
+        throw new RangeError(`${source}.configuration must be "debug" or "release".`);
+      }
+      for (const [name, value] of Object.entries({
+        cacheRoot: options.cacheRoot,
+        helperPath: options.helperPath,
+        installRoot: options.installRoot,
+        macosSigningIdentity: options.macosSigningIdentity,
+      })) {
+        if (value !== undefined && !value.trim()) {
+          throw new TypeError(`${source}.${name} cannot be empty.`);
+        }
+      }
+      if (options.application) {
+        for (const [name, value] of Object.entries(options.application)) {
+          if (typeof value === 'string' && !value.trim()) {
+            throw new TypeError(`${source}.application.${name} cannot be empty.`);
+          }
+        }
+      }
     }
   }
 }

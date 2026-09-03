@@ -60,14 +60,15 @@ root filename.
 
 ## Command responsibilities
 
-| Command  | Responsibility                                                                                    |
-| -------- | ------------------------------------------------------------------------------------------------- |
-| `server` | Start the Storybook channel, REST control, and MCP server for the selected catalog.               |
-| `prep`   | Install or generate native prerequisites. Run after checkout and when native dependencies change. |
-| `bundle` | Generate the selected story catalog and produce its release JavaScript bundle through `rnx-cli`.  |
-| `build`  | Build the selected native project without launching it.                                           |
-| `run`    | Build and launch the selected native app or configured prebuilt host.                             |
-| `smoke`  | Own the server, Metro, app launch, all-story traversal, optional authored tests, and cleanup.     |
+| Command        | Responsibility                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------ |
+| `server`       | Start the Storybook channel, REST control, and MCP server for the selected catalog.              |
+| `build-driver` | Build only the source-shipped native Desktop Driver helper.                                      |
+| `prep`         | Ensure the helper, then install or generate native app prerequisites.                            |
+| `bundle`       | Generate the selected story catalog and produce its release JavaScript bundle through `rnx-cli`. |
+| `build`        | Build the selected native project without launching it.                                          |
+| `run`          | Build and launch the selected native app or configured prebuilt host.                            |
+| `smoke`        | Own the server, Metro, app launch, all-story traversal, optional authored tests, and cleanup.    |
 
 The TypeScript API exposes the same operations through
 `DesktopStorybookCli`. Use it when a test coordinator needs injected process
@@ -85,7 +86,8 @@ yarn start
 yarn storybook run
 ```
 
-Run `yarn storybook prep` before the first native launch and after changes that
+Run `yarn storybook build-driver` for an isolated helper build. Run
+`yarn storybook prep` before the first native launch and after changes that
 invalidate generated native projects or dependencies. The `run` command
 includes the native build; use `build` when launch or deployment is not
 desired.
@@ -125,8 +127,9 @@ yarn storybook smoke --win32 --mode stories-and-tests
 
 `stories` is the default and traverses the complete indexed catalog.
 `stories-and-tests` performs the same traversal and then runs the
-component-authored `desktop-e2e` plans against the Stage 1 manifest-derived
-fake target; native plan execution begins with the Stage 2 providers. Both modes are preferable to a shell
+component-authored `desktop-e2e` plans against the native provider. The
+render-only `stories` mode neither resolves a helper nor starts WebDriver.
+Both modes are preferable to a shell
 chain because they own the exact server, Metro, app identity, traversal, test
 session, and cleanup. Consumer configuration should provide any platform-specific
 app stop command. For Windows Fabric and the prebuilt REX Win32 host, configure the package-owned commands returned by

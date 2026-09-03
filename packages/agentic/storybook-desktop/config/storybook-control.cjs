@@ -5,6 +5,17 @@ const { pathToFileURL } = require('node:url');
 const host = process.env.STORYBOOK_WS_HOST || '127.0.0.1';
 const port = Number(process.env.STORYBOOK_WS_PORT) || 7007;
 const smokeMode = process.env.STORYBOOK_SMOKE_MODE || 'stories';
+const smokePhase = parseSmokePhase(process.argv.slice(2));
+
+function parseSmokePhase(args) {
+  if (args.length === 0) {
+    return 'all';
+  }
+  if (args.length === 2 && args[0] === '--phase' && ['stories', 'tests'].includes(args[1])) {
+    return args[1];
+  }
+  throw new Error(`Unsupported Storybook control arguments: ${args.join(' ')}`);
+}
 
 function baseUrl() {
   // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- native Storybook services are loopback-only
@@ -39,39 +50,40 @@ async function smoke() {
   if (smokeMode !== 'stories' && smokeMode !== 'stories-and-tests') {
     throw new Error(`Unsupported Storybook smoke mode "${smokeMode}".`);
   }
+  if (smokePhase !== 'tests') {
+    const index = await request('/index.json');
+    const entries = Object.values(index.entries || {}).filter(({ type }) => type === 'story');
+    if (entries.length === 0) {
+      throw new Error('The Storybook index did not contain any stories.');
+    }
 
-  const index = await request('/index.json');
-  const entries = Object.values(index.entries || {}).filter(({ type }) => type === 'story');
-  if (entries.length === 0) {
-    throw new Error('The Storybook index did not contain any stories.');
-  }
+    const settleMilliseconds = Number(process.env.STORYBOOK_SMOKE_SETTLE_MS) || 0;
+    const failFast = process.env.STORYBOOK_SMOKE_FAIL_FAST === '1';
+    const failures = [];
 
-  const settleMilliseconds = Number(process.env.STORYBOOK_SMOKE_SETTLE_MS) || 0;
-  const failFast = process.env.STORYBOOK_SMOKE_FAIL_FAST === '1';
-  const failures = [];
-
-  for (const { id } of entries) {
-    try {
-      await selectStory(id);
-      if (settleMilliseconds > 0) {
-        await new Promise((resolve) => setTimeout(resolve, settleMilliseconds));
-      }
-      process.stdout.write(`rendered ${id}\n`);
-    } catch (error) {
-      failures.push({ id, error: error.message });
-      process.stderr.write(`failed ${id}: ${error.message}\n`);
-      if (failFast) {
-        break;
+    for (const { id } of entries) {
+      try {
+        await selectStory(id);
+        if (settleMilliseconds > 0) {
+          await new Promise((resolve) => setTimeout(resolve, settleMilliseconds));
+        }
+        process.stdout.write(`rendered ${id}\n`);
+      } catch (error) {
+        failures.push({ id, error: error.message });
+        process.stderr.write(`failed ${id}: ${error.message}\n`);
+        if (failFast) {
+          break;
+        }
       }
     }
+
+    if (failures.length > 0) {
+      throw new Error(`${failures.length} of ${entries.length} stories failed to render`);
+    }
+    process.stdout.write(`Rendered ${entries.length} stories.\n`);
   }
 
-  if (failures.length > 0) {
-    throw new Error(`${failures.length} of ${entries.length} stories failed to render`);
-  }
-  process.stdout.write(`Rendered ${entries.length} stories.\n`);
-
-  if (smokeMode === 'stories-and-tests') {
+  if (smokeMode === 'stories-and-tests' && smokePhase !== 'stories') {
     await runAuthoredTests();
   }
 }
@@ -83,7 +95,7 @@ async function runAuthoredTests() {
   }
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
   if (
-    manifest.schemaVersion !== 1 ||
+    manifest.schemaVersion !== 2 ||
     !['macos', 'win32', 'windows'].includes(manifest.endpoint) ||
     !Number.isInteger(manifest.driverPort) ||
     typeof manifest.targetId !== 'string'

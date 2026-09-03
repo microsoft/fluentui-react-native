@@ -73,6 +73,7 @@ export const Default: Story = {
         {
           id: 'toggles-checked-state',
           title: 'Toggles through native activation',
+          requires: ['physical-click'],
           steps: [
             { action: 'wait', target: { testId: 'agentic-storybook-checkbox' } },
             { expect: { state: 'role', target: { testId: 'agentic-storybook-checkbox' }, value: 'checkbox' } },

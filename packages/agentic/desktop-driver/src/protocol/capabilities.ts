@@ -1,5 +1,5 @@
 import type { DesktopHostInfo, DesktopTarget } from '../host/types.js';
-import { invalidArgument, WebDriverError } from './errors.js';
+import { invalidArgument, toWebDriverError, WebDriverError } from './errors.js';
 import { withCommandTimeout } from './timeouts.js';
 import type { DesktopClickMode, NewSessionCapabilities } from './types.js';
 
@@ -19,6 +19,8 @@ const standardCapabilities = new Set([
 
 export type MatchedCapabilities = {
   clickMode: DesktopClickMode;
+  hostInfo: DesktopHostInfo;
+  launchMode: 'attach' | 'launch';
   requested: Record<string, unknown>;
   target: DesktopTarget;
 };
@@ -51,6 +53,8 @@ export async function matchCapabilities(
   const candidates = getCapabilityCandidates(capabilities);
   for (const requested of candidates) {
     validateCapabilityNames(requested);
+    const requestedClickMode = validateClickMode(requested['furn:clickMode']);
+    const launchMode = validateLaunchMode(requested['furn:launchMode']);
     const targetId = requested['furn:target'];
     const candidatesForTarget =
       typeof targetId === 'string' ? targets.filter((target) => target.id === targetId) : targets.length === 1 ? targets : [];
@@ -69,9 +73,15 @@ export async function matchCapabilities(
         continue;
       }
 
-      const host = await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`);
-      const clickMode = resolveClickMode(requested['furn:clickMode'], host);
-      return { clickMode, requested, target };
+      let host: DesktopHostInfo;
+      try {
+        host = await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`);
+      } catch (error) {
+        const webdriverError = toWebDriverError(error);
+        throw new WebDriverError('session not created', webdriverError.message, webdriverError.data);
+      }
+      const clickMode = resolveClickMode(requestedClickMode, host);
+      return { clickMode, hostInfo: host, launchMode, requested, target };
     }
   }
 
@@ -111,11 +121,23 @@ function validateCapabilityNames(capabilities: Record<string, unknown>): void {
   }
 }
 
-function resolveClickMode(requested: unknown, host: DesktopHostInfo): DesktopClickMode {
+function validateClickMode(requested: unknown): DesktopClickMode | 'auto' {
   const clickMode = requested ?? 'auto';
   if (clickMode !== 'auto' && clickMode !== 'physical' && clickMode !== 'accessibility') {
     throw invalidArgument('"furn:clickMode" must be "auto", "physical", or "accessibility".');
   }
+  return clickMode;
+}
+
+function validateLaunchMode(requested: unknown): 'attach' | 'launch' {
+  const launchMode = requested ?? 'launch';
+  if (launchMode !== 'attach' && launchMode !== 'launch') {
+    throw invalidArgument('"furn:launchMode" must be "attach" or "launch".');
+  }
+  return launchMode;
+}
+
+function resolveClickMode(clickMode: DesktopClickMode | 'auto', host: DesktopHostInfo): DesktopClickMode {
   if (clickMode === 'physical' && !host.features.physicalClick) {
     throw new WebDriverError('session not created', 'The target does not support physical click input.');
   }

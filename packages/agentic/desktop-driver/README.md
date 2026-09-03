@@ -1,223 +1,147 @@
 # React Native Desktop Driver
 
-`@fluentui-react-native/desktop-driver` is a W3C WebDriver-compatible remote end
-for React Native desktop applications. It does not use Appium.
+`@fluentui-react-native/desktop-driver` is a W3C WebDriver Classic-compatible
+remote end for automating React Native desktop applications. It drives macOS,
+React Native Windows Fabric, and React Native Win32 Paper without Appium and
+provides one portable WebdriverIO and story-test contract across those
+endpoints.
 
-Stage 1 provides the complete platform-neutral protocol, sanctioned WebdriverIO
-API, serializable story-test contract, deterministic fake host, evidence
-reports, JSON CLI, and bounded agent API. Native Windows, Win32, and macOS host
-providers are separate Stage 2 work described in [PLAN.md](PLAN.md).
+The package contains the client-neutral WebDriver service, typed clients,
+WebdriverIO integration, serializable test plans, bounded agent operations,
+evidence management, native-helper source and build tooling, and deterministic
+fake hosts for contract tests. It does not depend on Storybook, React, or React
+Native.
 
-## Package boundaries
+## Supported targets
 
-| Surface                                 | Responsibility                                              |
-| --------------------------------------- | ----------------------------------------------------------- |
-| `@fluentui-react-native/desktop-driver` | Public types and common APIs                                |
-| `/authoring`                            | Serializable story plans, selectors, and result types       |
-| `/wdio`                                 | Sanctioned WebdriverIO connection, commands, and runner     |
-| `/agent`                                | Bounded JSON-safe inspection and action API                 |
-| `/client`                               | Low-level typed W3C client                                  |
-| `/server`                               | Embeddable W3C remote end and target/session state          |
-| `/artifacts`                            | Confined atomic evidence persistence                        |
-| `/testing`                              | Fake host, fake Storybook orchestration, and test harnesses |
+| Endpoint                    | Operating system  | Architecture            | Native implementation                                       |
+| --------------------------- | ----------------- | ----------------------- | ----------------------------------------------------------- |
+| React Native macOS Fabric   | macOS 14 or later | Apple Silicon (`arm64`) | Swift, AXUIElement, Quartz Event Services, ScreenCaptureKit |
+| React Native Windows Fabric | Windows 11        | `x64`                   | C++20, UI Automation, SendInput, Windows Graphics Capture   |
+| React Native Win32 Paper    | Windows 11        | `x64`                   | Same Windows helper and protocol                            |
 
-The protocol server remains client-neutral. WebdriverIO is a dependency of the
-high-level `/wdio` surface, not an implementation primitive for routing,
-capability negotiation, or native hosts.
+V1 permits one active WebDriver session per physical target. Native builds run
+only on the target operating system. Installation never compiles or downloads a
+helper.
 
-## Authoring story tests
+## Start here
 
-Plans are inline static data under `parameters.desktopDriver`. Storybook can
-extract and shard them without importing a React Native story module, and
-agents can explain the same steps before execution.
+For a repository checkout, use Node 22.12 or later and Yarn 4:
 
-```tsx
-import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
-
-export const Default: Story = {
-  tags: ['desktop-e2e'],
-  parameters: {
-    desktopDriver: {
-      version: 1,
-      tests: [
-        {
-          id: 'pointer-focus',
-          title: 'Responds to activation and receives focus',
-          requires: ['focus', 'screenshot'],
-          steps: [
-            { action: 'wait', target: { testId: 'my-button' } },
-            { expect: { state: 'role', target: { testId: 'my-button' }, value: 'button' } },
-            { action: 'click', target: { testId: 'my-button' } },
-            { expect: { state: 'focused', target: { testId: 'my-button' }, value: true } },
-            { action: 'screenshot', name: 'focused-button', target: { testId: 'my-button' } },
-          ],
-        },
-      ],
-    } satisfies DesktopStoryTests,
-  },
-};
+```sh
+yarn
+yarn workspace @fluentui-react-native/desktop-driver build
 ```
 
-Static extraction accepts JSON literals wrapped by TypeScript `satisfies` or
-`as`. Do not hide plans behind variables, functions, spreads, computed
-properties, or runtime platform branches. Invalid or dynamic plans fail
-manifest generation with their source file, story, and line.
+Build the native helper explicitly on the machine that will run it:
 
-Portable selectors are:
+```sh
+# Windows or Win32
+desktop-driver build-driver --platform windows
 
-- `{ testId }` for deterministic interaction;
-- `{ role, name? }` for semantic lookup;
-- `{ accessibleName }`;
-- `{ text }`.
+# macOS; use a stable identity for repeatable privacy authorization
+desktop-driver build-driver --platform macos \
+  --macos-signing-identity "Apple Development: Developer Name (TEAMID)"
+```
 
-Supported actions include click, double-click, clear, type, keys, W3C actions,
-scroll, Storybook arg updates, waits, screenshots, source capture, and notes.
-Assertions cover existence/count, role, accessible name, text/value, displayed,
-enabled, focused, selected, checked/mixed, and expanded state.
+Then resolve the verified helper, register a controlled application target, and
+start the loopback service:
 
-Use `requires` for capabilities such as `keyboard`, `focus`, `wheel`, or
-`screenshot`. Missing capabilities produce an explicit skipped result rather
-than a false pass. Platform divergence belongs in declarative `platforms` or
-capability requirements, not branches inside a plan.
+```ts
+import { createDesktopDriverServer, NativeDesktopHost, resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver';
 
-## Sanctioned WebdriverIO API
+const artifact = await resolveNativeDesktopDriver({
+  platform: 'windows',
+});
+const host = new NativeDesktopHost({
+  application: {
+    executablePath: 'C:\\apps\\MyReactNativeApp.exe',
+    windowTitle: 'My React Native App',
+  },
+  artifact,
+  endpoint: 'windows',
+});
+const service = await createDesktopDriverServer({
+  targets: [
+    {
+      endpoint: 'windows',
+      host,
+      id: 'my-react-native-app',
+      platformName: 'windows',
+      renderer: 'fabric',
+    },
+  ],
+});
+
+console.log(service.url);
+// Keep the service alive while tests run, then await service.close().
+```
+
+Connect through the sanctioned WebdriverIO surface:
 
 ```ts
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
 
 const desktop = await connectDesktopWebdriver({
   platformName: 'windows',
-  targetId: 'agenticstorybook-windows',
-  url: 'http://127.0.0.1:39859',
+  targetId: 'my-react-native-app',
+  url: service.url,
 });
 
 try {
-  const manifest = await desktop.browser.desktopListStories();
-  await desktop.browser.desktopOpenStory('components-button--default');
-  await desktop.browser.desktopExpect({
-    state: 'enabled',
-    target: { testId: 'agentic-storybook-button' },
-    value: true,
-  });
-  const result = await desktop.browser.desktopRunStoryTests({
-    artifactsRoot: 'artifacts/windows/desktop-driver',
-    selection: { tag: 'desktop-e2e', shardCount: 2, shardIndex: 0 },
-  });
+  const button = await desktop.browser.$('~save-button');
+  await button.click();
 } finally {
   await desktop.delete();
+  await service.close();
 }
 ```
 
-Registered browser commands are:
+The example launches the registered application. Use `launchMode: 'attach'`
+only when another trusted owner supplies and maintains the application
+lifecycle. The standalone `desktop-driver serve` command intentionally exposes
+a fake target for protocol and integration tests; it is not a native service
+shortcut.
 
-- `desktopListStories()`;
-- `desktopOpenStory(storyId, runId?)`;
-- `desktopResetStory(storyId, runId?)`;
-- `desktopExpect(expectation)`;
-- `desktopRunStoryTests(options?)`.
+See [Getting started](references/getting-started.md) for installation,
+toolchains, first builds, and diagnostic commands.
 
-The runner filters by story, test, and tag, shards the sorted
-`storyId/testId` list deterministically, checks required capabilities, resets
-the preview for every run, and distinguishes assertion, timeout, cancellation,
-skip, and infrastructure outcomes.
+## Documentation
 
-The server serializes commands per session and all input globally. Timeout
-paths abort host work before releasing input, while runner cancellation drains
-its in-flight request before cleanup, so a later test cannot inherit a late key
-or pointer action.
+| Guide                                               | Use it for                                                                                     |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [Getting started](references/getting-started.md)    | Initial setup, package development, first helper build, and troubleshooting                    |
+| [Architecture](references/architecture.md)          | Package layers, process boundaries, request flow, and ownership                                |
+| [Service integration](references/service.md)        | Embedding the remote end, registering targets, launch/attach behavior, and clients             |
+| [Native helpers](references/native-helpers.md)      | Build and resolution policy, cache layout, verification, and configuration                     |
+| [macOS native provider](native/macos/README.md)     | Swift implementation, signing, TCC permissions, diagnostics, and native qualification          |
+| [Windows native provider](native/windows/README.md) | C++ implementation, toolchain, application identity, capture, and native qualification         |
+| [Test integration](references/test-integration.md)  | WebdriverIO, authored story plans, fake harnesses, artifacts, and native tests                 |
+| [CI integration](references/ci-integration.md)      | Package gates, native jobs, real-app smoke, signing, and artifacts                             |
+| [Security model](references/security.md)            | Loopback boundary, registered targets, helper trust, process ownership, and sensitive evidence |
+| [WebDriver contract](references/protocol.md)        | Supported W3C routes, capabilities, elements, errors, and Storybook extensions                 |
+| [Native wire protocol](native/PROTOCOL.md)          | Private framed stdio protocol between Node and the native helper                               |
+| [Remaining work](PLAN.md)                           | Qualification and release work that is not complete                                            |
+| [Changelog](CHANGELOG.md)                           | Versioned package changes                                                                      |
 
-## Evidence
+Contributors and coding agents start with [AGENTS.md](AGENTS.md).
 
-Supplying `artifactsRoot` writes atomically beneath that root:
+## Public entry points
 
-```text
-artifactsRoot/
-  host.json
-  run.json
-  tests/
-    <story>-<test>/
-      <named screenshots and source>
-      failure.png
-      failure-source.xml
-      failure-tree.json
-```
+| Export       | Purpose                                                                                   |
+| ------------ | ----------------------------------------------------------------------------------------- |
+| Package root | Native-helper build/resolution, `DesktopHost`, server, low-level client, and common types |
+| `/authoring` | Serializable story plans, selectors, capabilities, and result types                       |
+| `/wdio`      | WebdriverIO connection, custom commands, assertions, and story-plan runner                |
+| `/client`    | Low-level typed W3C client                                                                |
+| `/server`    | Embeddable remote end, session manager, and target registry                               |
+| `/agent`     | Bounded JSON-safe inspection, action, and evidence API                                    |
+| `/artifacts` | Confined, atomic evidence persistence                                                     |
+| `/runner`    | Plan selection, sharding, execution, and result classification                            |
+| `/storybook` | Story manifest and orchestration contracts, without a Storybook dependency                |
+| `/testing`   | Fake host, fake Storybook orchestrator, and protocol harnesses                            |
+| `/cli`       | Embeddable Commander command and CLI runner                                               |
 
-Artifact names are sanitized and confined beneath the configured root.
-Failures attempt screenshot, source, and compact-tree capture; evidence-capture
-errors are reported without replacing the original test failure.
-
-## JSON CLI
-
-The CLI prints structured JSON for automation:
-
-```sh
-desktop-driver serve --manifest story-manifest.windows.json --target fake-windows
-
-desktop-driver stories list \
-  --url http://127.0.0.1:4444 \
-  --target fake-windows
-
-desktop-driver stories explain components-button--default \
-  --url http://127.0.0.1:4444 \
-  --target fake-windows
-
-desktop-driver stories run \
-  --url http://127.0.0.1:4444 \
-  --target fake-windows \
-  --tag desktop-e2e \
-  --artifacts artifacts/windows/desktop-driver
-
-desktop-driver agent describe \
-  --url http://127.0.0.1:4444 \
-  --target fake-windows \
-  --scope story \
-  --artifacts artifacts/windows/desktop-driver
-```
-
-`serve` is the Stage 1 fake target. It is not a native-provider substitute.
-
-## Agent API
-
-```ts
-import { connectDesktopAgent } from '@fluentui-react-native/desktop-driver/agent';
-
-const agent = await connectDesktopAgent({
-  artifactsRoot: 'artifacts/windows/desktop-driver',
-  platformName: 'windows',
-  targetId: 'agenticstorybook-windows',
-  url: 'http://127.0.0.1:39859',
-});
-
-try {
-  await agent.listStories();
-  await agent.openStory('components-button--default');
-  await agent.describe({ scope: 'story', depth: 3, maxNodes: 100 });
-  await agent.click({ testId: 'agentic-storybook-button' });
-  await agent.screenshot('button');
-  await agent.runStoryTest('components-button--default', 'pointer-focus');
-} finally {
-  await agent.delete();
-}
-```
-
-The API intentionally exposes coarse operations and bounded tree projections.
-It does not reveal native handles or permit arbitrary process, environment, or
-artifact-path capabilities.
-
-## MCP decision
-
-Phase 3 does not add another MCP listener. The Storybook MCP remains the
-documentation and story-metadata surface; the typed agent API and JSON CLI are
-the executable native-validation surface. Reconsider a composed MCP adapter
-after Stage 2 proves the native commands and their security model. A tool-schema
-file without an executable adapter is not considered an MCP integration.
-
-## Protocol and security
-
-See [SPEC.md](SPEC.md) for implemented W3C routes, extension commands,
-capabilities, device contracts, and unsupported browser behavior.
-
-The server binds loopback, rejects browser-origin requests, accepts only
-server-registered targets, permits one session per physical target, applies
-host command deadlines, and preserves attached applications. Never expose it
-remotely without a separately designed authentication and transport policy.
+The service implements native application semantics rather than pretending to
+be a browser. Unsupported browser features return `unsupported operation`
+instead of fabricated success.

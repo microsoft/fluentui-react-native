@@ -3,7 +3,12 @@ import { Command, Option } from 'commander';
 import { desktopSmokeModes, type DesktopSmokeMode } from '../config/commands.js';
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
-import type { DesktopStorybookCliOptions, DesktopStorybookServerOptions } from './DesktopStorybookCli.js';
+import type {
+  DesktopStorybookBuildDriverOptions,
+  DesktopStorybookCliOptions,
+  DesktopStorybookPrepOptions,
+  DesktopStorybookServerOptions,
+} from './DesktopStorybookCli.js';
 import { DesktopStorybookCli } from './DesktopStorybookCli.js';
 import { loadDesktopStorybookConfig } from './loadConfig.js';
 
@@ -16,6 +21,8 @@ type PlatformFlags = {
 type ServerFlags = PlatformFlags & DesktopStorybookServerOptions;
 type ManifestFlags = PlatformFlags & { out?: string };
 type SmokeFlags = PlatformFlags & { mode: DesktopSmokeMode };
+type BuildDriverFlags = PlatformFlags & DesktopStorybookBuildDriverOptions;
+type PrepFlags = PlatformFlags & { driver: DesktopStorybookPrepOptions['driver'] };
 
 export type CreateDesktopStorybookCommandOptions = DesktopStorybookCliOptions & {
   config?: DesktopStorybookConfig;
@@ -35,26 +42,51 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
     ).then(
       (config) =>
         new DesktopStorybookCli(config, {
+          buildNativeDriver: options.buildNativeDriver,
           runner: options.runner,
           createStoryManifest: options.createStoryManifest,
           fetch: options.fetch,
           output: options.output,
           isPortAvailable: options.isPortAvailable,
           runSmokeTests: options.runSmokeTests,
+          resolveNativeDriver: options.resolveNativeDriver,
         }),
     ));
 
   addServerCommand(program, getApi);
+  addBuildDriverCommand(program, getApi);
   addDriverCommand(program, getApi);
   addManifestCommand(program, getApi);
   addInstanceCommand(program, getApi);
-  addActionCommand(program, 'prep', 'Prepare native dependencies and generated projects.', getApi);
+  addPrepCommand(program, getApi);
   addActionCommand(program, 'bundle', 'Generate stories and create the platform JavaScript bundle.', getApi);
   addActionCommand(program, 'run', 'Build and launch the native Storybook app.', getApi);
   addActionCommand(program, 'build', 'Build the native Storybook app without launching it.', getApi);
   addSmokeCommand(program, getApi);
 
   return program;
+}
+
+function addPrepCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+  const command = program
+    .command('prep')
+    .description('Prepare the native helper, dependencies, and generated projects.')
+    .option('--no-driver', 'prepare only the native app project');
+  addPlatformOptions(command);
+  command.action(async (flags: PrepFlags) => {
+    const api = await getApi();
+    await api.prep(resolvePlatform(flags, api), { driver: flags.driver });
+  });
+}
+
+function addBuildDriverCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+  const command = program.command('build-driver').description('Build the native Desktop Driver helper without preparing the app.');
+  command.option('--force', 'publish a new immutable helper selection');
+  addPlatformOptions(command);
+  command.action(async (flags: BuildDriverFlags) => {
+    const api = await getApi();
+    await api.buildDriver(resolvePlatform(flags, api), { force: flags.force });
+  });
 }
 
 function addDriverCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
@@ -94,7 +126,7 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
 
 function addActionCommand(
   program: Command,
-  action: 'prep' | 'bundle' | 'run' | 'build',
+  action: 'bundle' | 'run' | 'build',
   description: string,
   getApi: () => Promise<DesktopStorybookCli>,
 ): void {

@@ -21,6 +21,7 @@ $cliPath = Join-Path $PSScriptRoot 'cli.cjs'
 $controlPath = Join-Path $PSScriptRoot 'storybook-control.cjs'
 $hostPath = Join-Path $PSScriptRoot 'run-win32.cjs'
 $requiredStories = @($RequiredStoryIds -split ',' | Where-Object { $_ })
+$applicationLeasePath = $null
 
 if ($SmokeMode -eq 'stories-and-tests' -and (-not $driverPort -or -not $env:STORYBOOK_DRIVER_MANIFEST)) {
   throw 'STORYBOOK_DRIVER_PORT and STORYBOOK_DRIVER_MANIFEST are required for stories-and-tests smoke mode.'
@@ -50,6 +51,39 @@ function Start-OwnedCommand {
   return Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -WorkingDirectory $projectRoot `
     -RedirectStandardOutput (Join-Path $logRoot "$LogName.out.log") `
     -RedirectStandardError (Join-Path $logRoot "$LogName.err.log") -PassThru -WindowStyle Hidden
+}
+
+function Write-ApplicationLease {
+  param(
+    [Parameter(Mandatory)]
+    [System.Diagnostics.Process]$Process,
+    [Parameter(Mandatory)]
+    [Microsoft.Management.Infrastructure.CimInstance]$ProcessInfo
+  )
+
+  $driverManifest = Get-Content -LiteralPath $env:STORYBOOK_DRIVER_MANIFEST -Raw | ConvertFrom-Json
+  if (
+    $driverManifest.schemaVersion -ne 2 -or
+    -not $driverManifest.application.leasePath -or
+    -not $driverManifest.application.leaseNonce
+  ) {
+    throw "Invalid native Desktop Driver manifest at '$($env:STORYBOOK_DRIVER_MANIFEST)'."
+  }
+  $leasePath = [string]$driverManifest.application.leasePath
+  $leaseDirectory = Split-Path -Parent $leasePath
+  New-Item -ItemType Directory -Path $leaseDirectory -Force | Out-Null
+  $temporaryPath = "$leasePath.$PID.tmp"
+  @{
+    schemaVersion = 1
+    endpoint = 'win32'
+    nonce = [string]$driverManifest.application.leaseNonce
+    processId = $Process.Id
+    processStartedAt = $Process.StartTime.ToUniversalTime().ToString('o')
+    windowTitle = $WindowTitle
+    executablePath = [string]$ProcessInfo.ExecutablePath
+  } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $temporaryPath -Encoding utf8NoBOM
+  Move-Item -LiteralPath $temporaryPath -Destination $leasePath -Force
+  return $leasePath
 }
 
 function Wait-ForTcpPort {
@@ -192,6 +226,9 @@ try {
   $appProcessInfo = Get-CimInstance Win32_Process -Filter "ProcessId=$($appProcess.Id)"
   Add-OwnedProcess -Id $appProcessInfo.ParentProcessId
   Add-OwnedProcess -Id $appProcess.Id
+  if ($SmokeMode -eq 'stories-and-tests') {
+    $applicationLeasePath = Write-ApplicationLease -Process $appProcess -ProcessInfo $appProcessInfo
+  }
 
   Wait-ForAutomationId -Process $appProcess -AutomationId (StorybookId 'sidebar-header')
   Wait-ForAutomationId -Process $appProcess -AutomationId (StorybookId 'sidebar-resize')
@@ -211,6 +248,9 @@ try {
     throw 'The Win32 Storybook host exited during the smoke test.'
   }
 } finally {
+  if ($applicationLeasePath) {
+    Remove-Item -LiteralPath $applicationLeasePath -Force -ErrorAction SilentlyContinue
+  }
   for ($index = $ownedProcessIds.Count - 1; $index -ge 0; $index -= 1) {
     $ownedProcessId = $ownedProcessIds[$index]
     if ($ownedProcessId -and $ownedProcessId -ne $PID) {

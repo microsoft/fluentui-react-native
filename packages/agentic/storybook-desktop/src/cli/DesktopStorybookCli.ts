@@ -1,6 +1,14 @@
+import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
+
+import {
+  buildNativeDesktopDriver,
+  resolveNativeDesktopDriver,
+  type NativeDriverArtifact,
+  type NativeDriverBuildOptions,
+} from '@fluentui-react-native/desktop-driver';
 
 import {
   desktopSmokeModes,
@@ -32,13 +40,24 @@ type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   macosXcconfigPath?: string;
 };
 
+export type DesktopStorybookBuildDriverOptions = {
+  force?: boolean;
+};
+
+export type DesktopStorybookPrepOptions = {
+  driver?: boolean;
+};
+
 export type DesktopStorybookCliOptions = {
+  buildNativeDriver?: typeof buildNativeDesktopDriver;
   createStoryManifest?: typeof createDesktopStoryManifest;
   runner?: DesktopCommandRunner;
   fetch?: typeof globalThis.fetch;
   output?: Pick<NodeJS.WriteStream, 'write'>;
   isPortAvailable?: (port: number) => Promise<boolean>;
   runSmokeTests?: typeof runDesktopStorybookSmokeTests;
+  resolveNativeDriver?: typeof resolveNativeDesktopDriver;
+  writeMacOSApplicationLease?: typeof writeMacOSApplicationLease;
 };
 
 export type DesktopStorybookServerOptions = {
@@ -51,11 +70,14 @@ export class DesktopStorybookCli {
   readonly instance: DesktopStorybookInstance;
 
   private readonly runner: DesktopCommandRunner;
+  private readonly buildNativeDriver: typeof buildNativeDesktopDriver;
   private readonly createStoryManifest: typeof createDesktopStoryManifest;
   private readonly fetch: typeof globalThis.fetch;
   private readonly output: Pick<NodeJS.WriteStream, 'write'>;
   private readonly isPortAvailable: (port: number) => Promise<boolean>;
   private readonly runSmokeTests: typeof runDesktopStorybookSmokeTests;
+  private readonly resolveNativeDriver: typeof resolveNativeDesktopDriver;
+  private readonly writeMacOSApplicationLease: typeof writeMacOSApplicationLease;
 
   constructor(config: DesktopStorybookConfig, options: DesktopStorybookCliOptions = {}) {
     this.config = config;
@@ -64,11 +86,14 @@ export class DesktopStorybookCli {
       bundleIdentifierPrefix: config.macosBundleIdentifier,
     });
     this.runner = options.runner ?? new NodeDesktopCommandRunner();
+    this.buildNativeDriver = options.buildNativeDriver ?? buildNativeDesktopDriver;
     this.createStoryManifest = options.createStoryManifest ?? createDesktopStoryManifest;
     this.fetch = options.fetch ?? globalThis.fetch;
     this.output = options.output ?? process.stdout;
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
     this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
+    this.resolveNativeDriver = options.resolveNativeDriver ?? resolveNativeDesktopDriver;
+    this.writeMacOSApplicationLease = options.writeMacOSApplicationLease ?? writeMacOSApplicationLease;
   }
 
   async server(platform: Platforms, options: DesktopStorybookServerOptions = {}): Promise<void> {
@@ -97,6 +122,7 @@ export class DesktopStorybookCli {
     if (command === false || command === undefined) {
       throw unsupportedAction('server', platform);
     }
+    const nativeDriver = await this.resolveDriver(platform);
     const storybookPort = options.port ?? (await findAvailablePort(this.instance.storybookPort, this.isPortAvailable));
     const metroPort = await findAvailablePort(this.instance.metroPort, this.isPortAvailable, new Set([storybookPort]));
     const driverPort = await findAvailablePort(this.instance.driverPort, this.isPortAvailable, new Set([storybookPort, metroPort]));
@@ -106,7 +132,7 @@ export class DesktopStorybookCli {
       metroPort,
       storybookPort,
     };
-    resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance);
+    resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver);
     this.output.write(`Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}\n`);
     const metro = this.runner.start(this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
     try {
@@ -152,8 +178,21 @@ export class DesktopStorybookCli {
     );
   }
 
-  prep(platform: Platforms): Promise<void> {
-    return this.executeAction('prep', platform);
+  async buildDriver(platform: Platforms, options: DesktopStorybookBuildDriverOptions = {}): Promise<NativeDriverArtifact> {
+    const nativeOptions = this.requireNativeDriverOptions(platform);
+    const artifact = await this.buildNativeDriver({
+      ...this.toBuildOptions(platform, nativeOptions),
+      force: options.force,
+    });
+    this.output.write(`${JSON.stringify(artifact, null, 2)}\n`);
+    return artifact;
+  }
+
+  async prep(platform: Platforms, options: DesktopStorybookPrepOptions = {}): Promise<void> {
+    if (options.driver !== false) {
+      await this.resolveDriver(platform);
+    }
+    await this.executeAction('prep', platform);
   }
 
   bundle(platform: Platforms): Promise<void> {
@@ -161,7 +200,14 @@ export class DesktopStorybookCli {
   }
 
   run(platform: Platforms): Promise<void> {
-    return this.executeAction('run', platform);
+    if (platform !== 'macos') {
+      return this.executeAction('run', platform);
+    }
+    const instance: ResolvedDesktopStorybookInstance = {
+      ...this.instance,
+      macosXcconfigPath: writeMacOSInstanceConfig(this.config.projectRoot, this.instance),
+    };
+    return this.executeAction('run', platform, instance);
   }
 
   build(platform: Platforms): Promise<void> {
@@ -175,7 +221,7 @@ export class DesktopStorybookCli {
       throw unsupportedAction('smoke', platform);
     }
     if (smoke?.command) {
-      const instance = await this.resolveSmokeInstance(platform, smoke);
+      const instance = await this.resolveSmokeInstance(platform, smoke, mode);
       await this.executePlan(withEnvironment(smoke.command, { [STORYBOOK_SMOKE_MODE]: mode }), platform, instance);
       return;
     }
@@ -185,12 +231,12 @@ export class DesktopStorybookCli {
       );
     }
 
-    const instance = await this.resolveSmokeInstance(platform, smoke);
+    const instance = await this.resolveSmokeInstance(platform, smoke, mode);
     await this.runSmokeLifecycle(platform, smoke, instance, mode);
   }
 
   private async executeAction(
-    action: Exclude<DesktopStorybookAction, 'smoke'>,
+    action: Exclude<DesktopStorybookAction, 'build-driver' | 'smoke'>,
     platform: Platforms,
     instance?: ResolvedDesktopStorybookInstance,
   ): Promise<void> {
@@ -249,6 +295,12 @@ export class DesktopStorybookCli {
 
       await Promise.all(readiness);
       await this.executeAction('run', platform, instance);
+      if (mode === 'stories-and-tests' && platform === 'macos') {
+        if (!instance.driverManifestPath) {
+          throw new Error('The macOS authored-test lifecycle did not create a Desktop Driver manifest.');
+        }
+        await this.writeMacOSApplicationLease(instance.driverManifestPath, smoke.startupTimeoutMs ?? 120_000);
+      }
       await this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.startupTimeoutMs);
       if (mode === 'stories-and-tests') {
         const result = await this.runSmokeTests({
@@ -287,7 +339,11 @@ export class DesktopStorybookCli {
     }
   }
 
-  private async resolveSmokeInstance(platform: Platforms, smoke: DesktopSmokeOptions): Promise<ResolvedDesktopStorybookInstance> {
+  private async resolveSmokeInstance(
+    platform: Platforms,
+    smoke: DesktopSmokeOptions,
+    mode: DesktopSmokeMode,
+  ): Promise<ResolvedDesktopStorybookInstance> {
     const storybookPort = smoke.serverUrl
       ? portFromUrl(smoke.serverUrl)
       : await findAvailablePort(this.instance.storybookPort, this.isPortAvailable);
@@ -302,7 +358,10 @@ export class DesktopStorybookCli {
       metroPort,
     };
 
-    resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance);
+    if (mode === 'stories-and-tests') {
+      const nativeDriver = await this.resolveDriver(platform);
+      resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver);
+    }
     if (platform === 'macos') {
       resolvedInstance.macosXcconfigPath = writeMacOSInstanceConfig(this.config.projectRoot, resolvedInstance);
     }
@@ -314,18 +373,54 @@ export class DesktopStorybookCli {
     return Object.freeze(resolvedInstance);
   }
 
-  private async writeDriverManifest(platform: Platforms, instance: DesktopStorybookInstance): Promise<string> {
+  private async writeDriverManifest(
+    platform: Platforms,
+    instance: DesktopStorybookInstance,
+    nativeDriver: NativeDriverArtifact,
+  ): Promise<string> {
     const storyManifest = await this.createStoryManifest(this.config, platform);
     const outputPath = path.join(this.config.projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
     const driverManifest = createDesktopStorybookDriverManifest({
       bridgeNonce: readReusableBridgeNonce(outputPath, instance, storyManifest.platformManifestDigest),
       config: this.config,
       instance,
+      nativeDriver,
       platform,
       storyManifest,
     });
     writeDesktopStorybookDriverManifest(driverManifest, outputPath);
     return outputPath;
+  }
+
+  private async resolveDriver(platform: Platforms): Promise<NativeDriverArtifact> {
+    const options = this.requireNativeDriverOptions(platform);
+    return this.resolveNativeDriver({
+      ...this.toBuildOptions(platform, options),
+      buildPolicy: options.buildPolicy,
+      helperPath: options.helperPath,
+      installRoot: options.installRoot,
+      macosSigningIdentity: options.macosSigningIdentity,
+    });
+  }
+
+  private requireNativeDriverOptions(platform: Platforms): Exclude<ReturnType<DesktopStorybookConfig['getNativeDriverOptions']>, false> {
+    const options = this.config.getNativeDriverOptions(platform);
+    if (options === false) {
+      throw new Error(`Native Desktop Driver is disabled for ${platform}.`);
+    }
+    return options;
+  }
+
+  private toBuildOptions(
+    platform: Platforms,
+    options: Exclude<ReturnType<DesktopStorybookConfig['getNativeDriverOptions']>, false>,
+  ): NativeDriverBuildOptions {
+    return {
+      cacheRoot: options.cacheRoot,
+      configuration: options.configuration,
+      macosSigningIdentity: options.macosSigningIdentity,
+      platform,
+    };
   }
 
   private async renderEveryStory(serverUrl: string, settleMs: number, startupTimeoutMs = 120_000): Promise<void> {
@@ -509,6 +604,166 @@ function writeMacOSInstanceConfig(projectRoot: string, instance: DesktopStoryboo
     fs.writeFileSync(xcconfigPath, content);
   }
   return xcconfigPath;
+}
+
+type MacOSRunningApplication = {
+  executablePath: string;
+  processId: number;
+  processStartedAt: number;
+};
+
+export async function writeMacOSApplicationLease(manifestPath: string, timeoutMs = 120_000): Promise<void> {
+  if (process.platform !== 'darwin') {
+    throw new Error('A macOS application lease can only be written on macOS.');
+  }
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as {
+    application?: {
+      bundleIdentifier?: string;
+      leaseNonce?: string;
+      leasePath?: string;
+    };
+  };
+  const application = manifest.application;
+  if (!application?.bundleIdentifier || !application.leaseNonce || !application.leasePath) {
+    throw new Error(`The Desktop Driver manifest at "${manifestPath}" does not contain a complete macOS application descriptor.`);
+  }
+
+  const runningApplication = await waitForMacOSApplication(application.bundleIdentifier, timeoutMs);
+  writeMacOSApplicationLeaseFile(
+    {
+      bundleIdentifier: application.bundleIdentifier,
+      leaseNonce: application.leaseNonce,
+      leasePath: application.leasePath,
+    },
+    runningApplication,
+  );
+}
+
+export function writeMacOSApplicationLeaseFile(
+  application: { bundleIdentifier: string; leaseNonce: string; leasePath: string },
+  runningApplication: MacOSRunningApplication,
+): void {
+  validateMacOSRunningApplication(runningApplication);
+  const processStartedAt = new Date(runningApplication.processStartedAt * 1000);
+  const temporaryPath = `${application.leasePath}.${process.pid}.tmp`;
+  fs.mkdirSync(path.dirname(application.leasePath), { mode: 0o700, recursive: true });
+  try {
+    fs.writeFileSync(
+      temporaryPath,
+      `${JSON.stringify(
+        {
+          bundleIdentifier: application.bundleIdentifier,
+          endpoint: 'macos',
+          executablePath: runningApplication.executablePath,
+          nonce: application.leaseNonce,
+          processId: runningApplication.processId,
+          processStartedAt: processStartedAt.toISOString(),
+          schemaVersion: 1,
+        },
+        null,
+        2,
+      )}\n`,
+      { mode: 0o600 },
+    );
+    fs.renameSync(temporaryPath, application.leasePath);
+    fs.chmodSync(application.leasePath, 0o600);
+  } finally {
+    fs.rmSync(temporaryPath, { force: true });
+  }
+}
+
+async function waitForMacOSApplication(bundleIdentifier: string, timeoutMs: number): Promise<MacOSRunningApplication> {
+  const deadline = Date.now() + timeoutMs;
+  let lastError: unknown;
+  do {
+    let output: string;
+    try {
+      output = await runProcess('/usr/bin/osascript', [
+        '-l',
+        'JavaScript',
+        '-e',
+        [
+          "ObjC.import('AppKit');",
+          'function run(argv) {',
+          '  const applications = $.NSRunningApplication.runningApplicationsWithBundleIdentifier(argv[0]);',
+          '  const result = [];',
+          '  for (let index = 0; index < applications.count; index += 1) {',
+          '    const application = applications.objectAtIndex(index);',
+          '    const executableURL = application.executableURL;',
+          '    const launchDate = application.launchDate;',
+          '    result.push({',
+          '      executablePath: executableURL ? ObjC.unwrap(executableURL.path) : null,',
+          '      processId: Number(application.processIdentifier),',
+          '      processStartedAt: launchDate ? Number(launchDate.timeIntervalSince1970) : null,',
+          '    });',
+          '  }',
+          '  return JSON.stringify(result);',
+          '}',
+        ].join('\n'),
+        bundleIdentifier,
+      ]);
+    } catch (error) {
+      lastError = error;
+      await delay(250);
+      continue;
+    }
+    const applications = parseMacOSRunningApplications(output, bundleIdentifier);
+    if (applications.length === 1) {
+      return applications[0];
+    }
+    await delay(250);
+  } while (Date.now() < deadline);
+  throw new Error(`Timed out waiting for the macOS application "${bundleIdentifier}"${lastError ? `: ${errorMessage(lastError)}` : '.'}`);
+}
+
+export function parseMacOSRunningApplications(output: string, bundleIdentifier: string): MacOSRunningApplication[] {
+  const value: unknown = JSON.parse(output);
+  if (!Array.isArray(value)) {
+    throw new Error(`The macOS application query for "${bundleIdentifier}" returned a non-array result.`);
+  }
+  if (value.length > 1) {
+    throw new Error(`More than one running application has bundle identifier "${bundleIdentifier}".`);
+  }
+  return value.map((entry) => {
+    if (!entry || typeof entry !== 'object') {
+      throw new Error(`The macOS application query for "${bundleIdentifier}" returned an invalid application record.`);
+    }
+    const application = entry as Partial<MacOSRunningApplication>;
+    validateMacOSRunningApplication(application);
+    return application as MacOSRunningApplication;
+  });
+}
+
+function validateMacOSRunningApplication(application: Partial<MacOSRunningApplication>): void {
+  if (typeof application.executablePath !== 'string' || !application.executablePath) {
+    throw new Error('The running macOS application does not expose an executable path.');
+  }
+  if (!Number.isInteger(application.processId) || (application.processId ?? 0) <= 0) {
+    throw new Error('The running macOS application does not expose a valid process identifier.');
+  }
+  if (!Number.isFinite(application.processStartedAt) || (application.processStartedAt ?? 0) <= 0) {
+    throw new Error(`Could not determine the start time for macOS process ${String(application.processId ?? 'unknown')}.`);
+  }
+}
+
+function runProcess(command: string, args: readonly string[]): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, [...args], {
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    const stdout: Buffer[] = [];
+    const stderr: Buffer[] = [];
+    child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
+    child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
+    child.once('error', reject);
+    child.once('close', (code) => {
+      if (code === 0) {
+        resolve(Buffer.concat(stdout).toString('utf8'));
+      } else {
+        reject(new Error(Buffer.concat(stderr).toString('utf8') || `${command} exited with code ${String(code)}.`));
+      }
+    });
+  });
 }
 
 async function findAvailablePort(

@@ -90,11 +90,15 @@ function parseAction(
     if (typeof action.value !== 'string' || action.value.length === 0) {
       throw invalidArgument(`${path}.value must be a non-empty string.`);
     }
+    if (!isSingleWebDriverKeyValue(action.value)) {
+      throw invalidArgument(`${path}.value must contain exactly one Unicode code point.`);
+    }
     if (action.type === 'keyDown') {
       state.pressedKeys.add(action.value);
     } else {
       state.pressedKeys.delete(action.value);
     }
+
     return action as WebDriverAction;
   }
   if (sourceType === 'pointer') {
@@ -131,6 +135,11 @@ function parseAction(
   validateDuration(action.duration, path);
   validateOrigin(action.origin, path);
   return action as WebDriverAction;
+}
+
+export function isSingleWebDriverKeyValue(value: string): boolean {
+  const codePoint = value.codePointAt(0);
+  return codePoint !== undefined && [...value].length === 1 && (codePoint < 0xd800 || codePoint > 0xdfff);
 }
 
 function validateCoordinates(action: Record<string, unknown>, path: string): void {

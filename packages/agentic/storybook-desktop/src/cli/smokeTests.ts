@@ -23,6 +23,7 @@ export async function runDesktopStorybookSmokeTests(
   connect: DesktopStorybookSmokeConnector = connectDesktopWebdriver,
 ): Promise<DesktopStoryRunResult> {
   const desktop = await connect({
+    launchMode: 'attach',
     platformName: options.platform === 'macos' ? 'macos' : 'windows',
     targetId: options.targetId,
     url: options.driverUrl,

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "wireProtocol": {
+    "major": 1,
+    "minor": 0
+  },
+  "frame": {
+    "magic": "FDR1",
+    "headerBytes": 12,
+    "jsonType": 1,
+    "binaryType": 2
+  }
+}

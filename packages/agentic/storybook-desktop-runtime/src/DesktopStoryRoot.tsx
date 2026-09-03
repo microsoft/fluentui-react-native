@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import { addons } from 'storybook/preview-api';
 
 import { desktopStoryErrorEvent, desktopStoryReadyEvent } from './DesktopDriverBridge';
@@ -13,6 +13,7 @@ type DesktopStoryRootProps = {
 export function DesktopStoryRoot({ children, storyId }: DesktopStoryRootProps) {
   const { runtimeInstance, selection } = useDesktopStorybookConfig();
   const testID = useDesktopStorybookTestID('story-root');
+  const exposeNativeMarker = Platform.OS === 'macos' || Platform.OS === 'windows' || Platform.OS === ('win32' as any);
   const activeSelection = selection?.storyId === storyId ? selection : undefined;
 
   React.useEffect(() => {
@@ -49,7 +50,7 @@ export function DesktopStoryRoot({ children, storyId }: DesktopStoryRootProps) {
         }
       }}
     >
-      <View accessibilityLabel={marker} style={styles.root} testID={testID}>
+      <View accessibilityLabel={marker} accessible={exposeNativeMarker || undefined} style={styles.root} testID={testID}>
         {children}
       </View>
     </StoryRenderErrorBoundary>

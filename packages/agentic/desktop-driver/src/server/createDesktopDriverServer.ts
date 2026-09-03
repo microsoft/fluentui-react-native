@@ -44,6 +44,8 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
   const targets = new TargetRegistry(options.targets);
   const sessions = new SessionManager();
   let closing = false;
+  let listenerClosePromise: Promise<void> | undefined;
+  let cleanupQueue: Promise<void> = Promise.resolve();
   const httpServer = createServer((request, response) => {
     if (closing) {
       const error = new WebDriverError('unknown error', 'Desktop Driver is shutting down.');
@@ -61,29 +63,39 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
     targets,
     // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- WebDriver is an intentionally loopback-only local protocol.
     url: `http://${formatHost(host)}:${port}`,
-    async close() {
+    close() {
       closing = true;
       sessions.beginClose();
-      let sessionError: unknown;
-      await closeServer(httpServer);
-      await sessions.waitForCreates();
-      try {
-        await sessions.deleteAll();
-      } catch (error) {
-        sessionError = error;
-      }
-      const hosts = new Set(targets.list().map(({ host: targetHost }) => targetHost));
-      const results = await Promise.allSettled(
-        [...hosts].map((targetHost) => withCommandTimeout((signal) => targetHost.dispose(signal), 10_000, 'Disposing a desktop host')),
+      const attempt = cleanupQueue.then(runCleanup, runCleanup);
+      cleanupQueue = attempt.then(
+        () => undefined,
+        () => undefined,
       );
-      const hostErrors = results
-        .filter((result): result is PromiseRejectedResult => result.status === 'rejected')
-        .map(({ reason }) => reason);
-      if (sessionError || hostErrors.length > 0) {
-        throw new AggregateError([...(sessionError ? [sessionError] : []), ...hostErrors], 'Desktop Driver cleanup failed.');
-      }
+      return attempt;
     },
   };
+
+  async function runCleanup(): Promise<void> {
+    let sessionError: unknown;
+    listenerClosePromise ??= httpServer.listening ? closeServer(httpServer) : Promise.resolve();
+    await listenerClosePromise;
+    await sessions.waitForCreates();
+    try {
+      await sessions.deleteAll();
+    } catch (error) {
+      sessionError = error;
+    }
+    const hosts = new Set(targets.list().map(({ host: targetHost }) => targetHost));
+    const results = await Promise.allSettled(
+      [...hosts].map((targetHost) => withCommandTimeout((signal) => targetHost.dispose(signal), 10_000, 'Disposing a desktop host')),
+    );
+    const hostErrors = results
+      .filter((result): result is PromiseRejectedResult => result.status === 'rejected')
+      .map(({ reason }) => reason);
+    if (sessionError || hostErrors.length > 0) {
+      throw new AggregateError([...(sessionError ? [sessionError] : []), ...hostErrors], 'Desktop Driver cleanup failed.');
+    }
+  }
 }
 
 async function handleRequest(
@@ -133,20 +145,19 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       throw invalidArgument('New Session requires "capabilities".');
     }
     const matched = await matchCapabilities(request.capabilities, targets.list());
-    const hostInfo = await withCommandTimeout(
-      (signal) => matched.target.host.probe(signal),
-      10_000,
-      `Probing target "${matched.target.id}"`,
-    );
-    const launchMode = matched.requested['furn:launchMode'] ?? 'launch';
-    if (launchMode !== 'attach' && launchMode !== 'launch') {
-      throw invalidArgument('"furn:launchMode" must be "attach" or "launch".');
+    try {
+      const session = await sessions.create(matched.target, matched.hostInfo, matched.clickMode, matched.launchMode);
+      return {
+        sessionId: session.id,
+        capabilities: createReturnedCapabilities(matched, matched.hostInfo, session.timeouts),
+      };
+    } catch (error) {
+      const webdriverError = toWebDriverError(error);
+      if (webdriverError.code === 'session not created') {
+        throw webdriverError;
+      }
+      throw new WebDriverError('session not created', webdriverError.message, webdriverError.data);
     }
-    const session = await sessions.create(matched.target, hostInfo, matched.clickMode, launchMode);
-    return {
-      sessionId: session.id,
-      capabilities: createReturnedCapabilities(matched, hostInfo, session.timeouts),
-    };
   }
 
   if (segments[0] !== 'session' || !segments[1]) {
@@ -525,10 +536,10 @@ async function handleElementCommand(
       throw new WebDriverError('element not interactable', `Element "${record.id}" cannot be clicked.`);
     }
     await sessions.runInputCommand(async () => {
-      await hostCommand(session, `Activating window "${snapshot.windowId}"`, (signal) =>
-        session.target.host.activate(snapshot.windowId, signal),
-      );
       if (session.clickMode !== 'accessibility') {
+        await hostCommand(session, `Activating window "${snapshot.windowId}"`, (signal) =>
+          session.target.host.activate(snapshot.windowId, signal),
+        );
         const point = {
           x: snapshot.rect.x + snapshot.rect.width / 2,
           y: snapshot.rect.y + snapshot.rect.height / 2,
@@ -536,7 +547,7 @@ async function handleElementCommand(
         const hit = await hostCommand(session, `Hit testing element "${record.id}"`, (signal) =>
           session.target.host.hitTest(snapshot.windowId, point.x, point.y, signal),
         );
-        if (hit && hit.id !== snapshot.id) {
+        if (hit && !(await isElementOrDescendant(session, snapshot.id, hit))) {
           throw new WebDriverError('element click intercepted', `Element "${record.id}" is obscured by another native element.`);
         }
       }
@@ -578,6 +589,21 @@ async function handleElementCommand(
   }
 
   throw new WebDriverError('unknown command', `Unknown element command "${operation.join('/')}".`);
+}
+
+async function isElementOrDescendant(session: DesktopSession, targetNativeId: string, hit: NativeElementSnapshot): Promise<boolean> {
+  let current: NativeElementSnapshot | undefined = hit;
+  for (let depth = 0; current && depth < 100; depth += 1) {
+    if (current.id === targetNativeId) {
+      return true;
+    }
+    current = current.parentId
+      ? await hostCommand(session, 'Resolving the hit-test ancestor', (signal) =>
+          session.target.host.snapshot(current!.parentId!, signal),
+        ).catch(() => undefined)
+      : undefined;
+  }
+  return false;
 }
 
 async function findElements(

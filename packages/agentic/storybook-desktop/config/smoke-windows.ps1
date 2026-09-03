@@ -21,6 +21,7 @@ $metroPort = if ($env:RCT_METRO_PORT) { [int]$env:RCT_METRO_PORT } else { 8081 }
 $driverPort = if ($env:STORYBOOK_DRIVER_PORT) { [int]$env:STORYBOOK_DRIVER_PORT } else { 0 }
 $cliPath = Join-Path $PSScriptRoot 'cli.cjs'
 $controlPath = Join-Path $PSScriptRoot 'storybook-control.cjs'
+$applicationLeasePath = $null
 
 if ($SmokeMode -eq 'stories-and-tests' -and (-not $driverPort -or -not $env:STORYBOOK_DRIVER_MANIFEST)) {
   throw 'STORYBOOK_DRIVER_PORT and STORYBOOK_DRIVER_MANIFEST are required for stories-and-tests smoke mode.'
@@ -107,6 +108,40 @@ function Invoke-DesktopCli {
   }
 }
 
+function Write-ApplicationLease {
+  param(
+    [Parameter(Mandatory)]
+    [System.Diagnostics.Process]$Process,
+    [Parameter(Mandatory)]
+    [string]$LaunchTarget
+  )
+
+  $driverManifest = Get-Content -LiteralPath $env:STORYBOOK_DRIVER_MANIFEST -Raw | ConvertFrom-Json
+  if (
+    $driverManifest.schemaVersion -ne 2 -or
+    -not $driverManifest.application.leasePath -or
+    -not $driverManifest.application.leaseNonce
+  ) {
+    throw "Invalid native Desktop Driver manifest at '$($env:STORYBOOK_DRIVER_MANIFEST)'."
+  }
+  $leasePath = [string]$driverManifest.application.leasePath
+  $leaseDirectory = Split-Path -Parent $leasePath
+  New-Item -ItemType Directory -Path $leaseDirectory -Force | Out-Null
+  $temporaryPath = "$leasePath.$PID.tmp"
+  $aumid = $LaunchTarget -replace '^shell:AppsFolder\\', ''
+  @{
+    schemaVersion = 1
+    endpoint = 'windows'
+    nonce = [string]$driverManifest.application.leaseNonce
+    processId = $Process.Id
+    processStartedAt = $Process.StartTime.ToUniversalTime().ToString('o')
+    windowTitle = $WindowTitle
+    aumid = $aumid
+  } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $temporaryPath -Encoding utf8NoBOM
+  Move-Item -LiteralPath $temporaryPath -Destination $leasePath -Force
+  return $leasePath
+}
+
 function Install-WindowsFrameworkPackage {
   param(
     [Parameter(Mandatory)]
@@ -185,6 +220,48 @@ function Add-OwnedProcess {
   }
 }
 
+function Start-StorybookApp {
+  $existingAppIds = @(Get-Process -Name ReactApp -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Id)
+  Start-Process explorer.exe $launchTarget
+  $process = Wait-ForApp -ExcludedProcessIds $existingAppIds
+  Add-OwnedProcess -Id $process.Id
+  return $process
+}
+
+function Stop-StorybookApp {
+  param([Parameter(Mandatory)][System.Diagnostics.Process]$Process)
+
+  if (Get-Process -Id $Process.Id -ErrorAction SilentlyContinue) {
+    Stop-Process -Id $Process.Id -ErrorAction Stop
+  }
+  $deadline = (Get-Date).AddSeconds(30)
+  while ((Get-Date) -lt $deadline) {
+    if (-not (Get-Process -Id $Process.Id -ErrorAction SilentlyContinue)) {
+      return
+    }
+    Start-Sleep -Milliseconds 250
+  }
+  throw "Timed out stopping owned Windows Storybook process $($Process.Id)."
+}
+
+function Invoke-StorybookControl {
+  param(
+    [Parameter(Mandatory)]
+    [ValidateSet('stories', 'tests')]
+    [string]$Phase,
+    [Parameter(Mandatory)]
+    [System.Diagnostics.Process]$Process
+  )
+
+  & node $controlPath --phase $Phase
+  if ($LASTEXITCODE -ne 0) {
+    if (-not (Get-Process -Id $Process.Id -ErrorAction SilentlyContinue)) {
+      throw "Windows Storybook host terminated during the '$Phase' smoke phase."
+    }
+    throw "Windows Storybook '$Phase' smoke phase failed with exit code $LASTEXITCODE."
+  }
+}
+
 try {
   if (Get-NetTCPConnection -State Listen -LocalPort $storybookPort -ErrorAction SilentlyContinue) {
     throw "Storybook port $storybookPort is already in use."
@@ -194,7 +271,11 @@ try {
   }
 
   Invoke-DesktopCli -Arguments @('bundle', '--windows')
-  Invoke-DesktopCli -Arguments @('prep', '--windows')
+  $prepArguments = @('prep', '--windows')
+  if ($SmokeMode -eq 'stories') {
+    $prepArguments += '--no-driver'
+  }
+  Invoke-DesktopCli -Arguments $prepArguments
 
   $serverLauncher = Start-OwnedCommand -FilePath 'node' `
     -ArgumentList @($cliPath, 'server', '--windows', '--port', [string]$storybookPort) -LogName 'storybook-server'
@@ -215,21 +296,21 @@ try {
   Wait-ForTcpPort -Port $metroPort
   Add-OwnedProcess -Id (Get-PortOwner -Port $metroPort)
 
-  $existingAppIds = @(Get-Process -Name ReactApp -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Id)
-  Start-Process explorer.exe $launchTarget
-  $appProcess = Wait-ForApp -ExcludedProcessIds $existingAppIds
-  Add-OwnedProcess -Id $appProcess.Id
-
   $env:STORYBOOK_WS_PORT = [string]$storybookPort
   $env:STORYBOOK_SMOKE_FAIL_FAST = '1'
-  & node $controlPath
-  if ($LASTEXITCODE -ne 0) {
-    if (-not (Get-Process -Id $appProcess.Id -ErrorAction SilentlyContinue)) {
-      throw 'Windows Storybook host terminated during smoke validation.'
-    }
-    throw "Windows Storybook smoke validation failed with exit code $LASTEXITCODE."
+
+  $appProcess = Start-StorybookApp
+  Invoke-StorybookControl -Phase 'stories' -Process $appProcess
+  if ($SmokeMode -eq 'stories-and-tests') {
+    Stop-StorybookApp -Process $appProcess
+    $appProcess = Start-StorybookApp
+    $applicationLeasePath = Write-ApplicationLease -Process $appProcess -LaunchTarget $launchTarget
+    Invoke-StorybookControl -Phase 'tests' -Process $appProcess
   }
 } finally {
+  if ($applicationLeasePath) {
+    Remove-Item -LiteralPath $applicationLeasePath -Force -ErrorAction SilentlyContinue
+  }
   for ($index = $ownedProcessIds.Count - 1; $index -ge 0; $index -= 1) {
     $ownedProcessId = $ownedProcessIds[$index]
     if ($ownedProcessId -and $ownedProcessId -ne $PID) {

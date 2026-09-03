@@ -101,6 +101,8 @@ platform option, or omit it to use `FURN_STORYBOOK_PLATFORM` and then the host d
 
 ```sh
 storybook-desktop server --win32
+storybook-desktop build-driver --windows
+storybook-desktop build-driver --macos
 storybook-desktop driver --windows
 storybook-desktop manifest --windows
 storybook-desktop instance --windows
@@ -112,12 +114,21 @@ storybook-desktop smoke --win32 --mode stories
 storybook-desktop smoke --windows --mode stories-and-tests
 ```
 
-Use `--config <path>` for a differently named configuration file. `prep` installs CocoaPods on macOS, generates the
-React Native Test App solution on Windows, and is a no-op for the prebuilt Win32 host. `bundle` generates the selected
+Use `--config <path>` for a differently named configuration file.
+`build-driver` builds only the source-shipped native helper. `prep` first
+ensures that helper, then installs CocoaPods on macOS or generates the React
+Native Test App solution on Windows; Win32 prep now ensures the shared Windows
+helper. `bundle` generates the selected
 story catalog and routes to `rnx-cli bundle`. `build` and `run` route to `rnx-cli` by default using native project names
 derived from the app manifest. The config supplies default macOS workspace/scheme and Windows solution arguments from
 the app key, and reads the macOS bundle identifier directly from `app.json`. Win32 has no native project to build, so
 its default build and run operations are unsupported until the consumer provides a prebuilt-host launch command.
+
+Set `platformOptions.macos.nativeDriver.macosSigningIdentity` to use a stable
+macOS code-signing identity. When omitted, the source build uses an ad hoc
+signature and TCC permissions may need to be granted again after a rebuild.
+The shared standalone macOS `run` command applies the enlistment-specific
+xcconfig, matching the bundle identity used by `driver` and `smoke`.
 
 `server` loads the same config, selects the matching platform catalog, and derives the app-owned Storybook config
 directory automatically. It accepts `--host` and `--port`; the separate `storybook-server` binary is a convenience
@@ -129,8 +140,9 @@ and agent workflows.
 `parameters.desktopDriver` plans, then writes exact-platform and portable-plan
 digests. `instance` prints the enlistment-specific channel, Metro, and driver
 identity. `driver` starts the Storybook channel/MCP server and the W3C Desktop
-Driver listener on separate loopback ports in one Node process. The initial
-target uses the deterministic fake host; native providers are a later stage.
+Driver listener on separate loopback ports in one Node process. It resolves the
+verified native helper before starting Metro and registers a process-backed
+target. The deterministic fake host remains test-only.
 
 Component authors tag portable plans with `desktop-e2e`. Button, Checkbox, and
 Input provide the initial examples. Plan extraction evaluates only the inline
@@ -161,11 +173,22 @@ the processes it recorded. `createWin32SmokeCommand` bundles and launches the co
 desktop chrome, resize handles, and addon surface through the configured test-ID prefix, traverses every story, and
 performs the same ownership-safe cleanup. `--mode stories` is the default renderability gate;
 `--mode stories-and-tests` performs the same complete traversal and then runs every `desktop-e2e` authored plan through
-the Stage 1 manifest-derived fake target. Native plan execution replaces that target when the Stage 2 providers land.
+the native provider. Storybook owns app launch and supplies an exact
+nonce-bound process lease; WebDriver attaches and preserves the app until the
+Storybook lifecycle performs final cleanup.
+The reusable macOS lifecycle resolves the launched app by its isolated bundle
+identifier and atomically records its PID, start time, executable, and nonce
+before creating the attached WebDriver session.
 Consumers provide only native identity, title, test-ID prefix, and optional required story IDs.
 The Windows helper also records React Native Test App's Debug Metro port (`8081` by default), while Storybook and
 Desktop Driver ports remain enlistment-specific.
 Artifacts are written beneath the consuming app's `artifacts/windows` or `artifacts/win32` directory.
+
+The Windows Fabric lifecycle restarts only its exact owned app after the full
+catalog traversal, then rewrites the nonce-bound application lease and runs
+authored tests against the warm Metro bundle. This avoids carrying accumulated
+Fabric story state into the native test phase while preserving the same server,
+ports, and process ownership.
 
 `smoke` can also use a complete consumer command or the generic reusable lifecycle. The generic lifecycle starts the shared
 channel server and Metro, builds and launches the app, selects every indexed story, runs the configured app stop

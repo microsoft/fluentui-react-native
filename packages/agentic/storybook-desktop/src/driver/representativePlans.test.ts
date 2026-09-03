@@ -6,13 +6,13 @@ import path from 'node:path';
 jest.setTimeout(30_000);
 
 describe('representative desktop story plans', () => {
-  test('extracts and runs Button, Checkbox, and Input plans unchanged through WebdriverIO', async () => {
+  test('extracts and runs the applicable Button, Checkbox, and Input plans through WebdriverIO', async () => {
     const artifactsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'representative-story-plans-'));
     try {
       const response = await runContract(artifactsRoot);
       expect(response).toMatchObject({
         planned: [
-          { id: 'components-button--default', tests: ['pointer-focus'] },
+          { id: 'components-button--default', tests: ['pointer-focus', 'pointer-activation'] },
           { id: 'components-checkbox--default', tests: ['toggles-checked-state'] },
           { id: 'components-input--default', tests: ['types-and-clears'] },
         ],

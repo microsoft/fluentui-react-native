@@ -78,6 +78,27 @@ uses that suffix in the native bundle identifier, and selects dedicated Storyboo
 Parallel smoke tests from different enlistments therefore launch, drive, and stop only their own app
 and services, even when the default ports are already occupied.
 
+Use `yarn storybook build-driver --macos` to build the signed Swift helper in
+isolation. `yarn storybook smoke --macos --mode stories-and-tests` traverses the
+catalog, writes a nonce-bound lease for the exact launched bundle, and runs the
+same component-authored plans through the native macOS provider.
+
+For repeatable local TCC identity, configure an Apple Development or reusable
+local development certificate:
+
+```sh
+FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development" \
+  yarn storybook smoke --macos --mode stories-and-tests
+```
+
+The helper is a direct child of the Storybook/Node supervisor, so macOS privacy
+authorization can be attributed to the terminal or IDE that owns that process
+tree. Use `yarn desktop-driver doctor --platform macos --permissions` to inspect
+the exact helper, signer, designated requirement, parent PID, Accessibility,
+PostEvent, and Screen Recording state. Standalone
+`yarn storybook run --macos` applies the same enlistment-specific xcconfig used
+by smoke so its bundle identity does not fall back to the generated app default.
+
 > `react-native-safe-area-context` note: Storybook's UI imports it, but its native module is
 > iOS-only (UIKit) and uses a Yoga API that doesn't compile for react-native-macos 0.81. It is
 > therefore not installed; the shared Metro helper aliases the import to a JS-only stub, so no
@@ -99,6 +120,7 @@ yarn storybook smoke --windows --mode stories
 yarn storybook smoke --windows --mode stories-and-tests
 
 # Individual development stages
+yarn storybook build-driver --windows
 yarn storybook prep --windows
 yarn storybook build --windows
 yarn storybook run --windows
@@ -108,7 +130,10 @@ yarn storybook run --windows
 solution, `ExperimentalFeatures.props`, registrations, and build outputs are git-ignored. The shared smoke command
 bundles the Windows catalog, generates the solution, starts the platform-scoped channel server, builds and registers the Debug app, starts Metro,
 launches the exact app window, renders every indexed story, optionally runs the component-authored plans, and stops only the processes it recorded.
-During Stage 1 the authored plans use the manifest-derived fake target; the full story traversal remains native. Logs are written
+The authored plans use the source-built native Windows helper and attach to the
+exact app process launched by the smoke lifecycle. After traversal, the Windows
+Fabric lifecycle restarts only that owned app and rewrites its lease before
+running authored tests against the warm Metro bundle. Logs are written
 beneath `artifacts/windows/smoke-logs`.
 The Accordion and Callout stories remain excluded from the Windows catalog
 because the current RNW 0.81 Fabric host still fail-fasts while traversing
@@ -129,6 +154,9 @@ Windows Fabric endpoint above and does not use a generated
 # from this directory
 # Produce dist/index.win32.bundle from the same story catalog as the other endpoints
 yarn storybook bundle --win32
+
+# Build the Windows helper shared by Windows Fabric and Win32 Paper
+yarn storybook build-driver --win32
 
 # Launch the prebuilt Paper host
 yarn storybook run --win32
@@ -176,14 +204,14 @@ Nine ListItem stories and seven Accordion stories are omitted from the
 Win32-generated catalog because those components terminate the current REX
 0.81.1 host with fail-fast code `0xC0000409`; macOS continues to include them,
 while Windows also omits Accordion and Callout. The three standalone Callout stories run through the same Paper
-`RCTCallout` implementation as the portal chrome. All 130 included stories
+`RCTCallout` implementation as the portal chrome. All 134 included stories
 render through the Win32 control-plane smoke sweep.
 Run `yarn storybook-server --win32` with this endpoint so the server exposes the
-same 130-story index as the app; the ordinary `storybook-server` command keeps the full macOS and Windows catalog.
+same 134-story index as the app; the ordinary `storybook-server` command keeps the full macOS and Windows catalog.
 `yarn storybook smoke --win32` defaults to `--mode stories` and verifies the package-owned desktop regions, resize
-handles, addon surface, the complete 130-story sweep, host liveness, and ownership-safe cleanup. The
-`stories-and-tests` mode then runs the component-authored plans through the Stage 1 manifest-derived fake target. Native
-plan execution begins with the Stage 2 providers. Logs are written
+handles, addon surface, the complete 134-story sweep, host liveness, and ownership-safe cleanup. The
+`stories-and-tests` mode then runs the component-authored plans through the
+same source-built Windows helper used by the Fabric endpoint. Logs are written
 beneath `artifacts/win32/smoke-logs`. A native `build --win32` operation is intentionally unsupported because this
 endpoint uses the prebuilt REX host.
 
@@ -212,9 +240,11 @@ yarn storybook-server --win32   # explicit Win32 catalog
 # WebSocket: ws://127.0.0.1:7007/   MCP: http://127.0.0.1:7007/mcp
 ```
 
-For the Stage 1 desktop-driver control plane, use the combined supervisor:
+For the native desktop-driver control plane, use the combined supervisor:
 
 ```sh
+yarn storybook build-driver --macos
+yarn storybook build-driver --windows
 yarn storybook driver --windows
 yarn storybook manifest --windows
 yarn storybook instance --windows
@@ -224,8 +254,9 @@ yarn storybook instance --windows
 listener in the same Node process. `instance` reports the enlistment-specific
 ports and target identity. The generated manifest contains the exact platform
 catalog, relocatable source paths, serializable story-test plans, and platform
-and portable-plan digests. The current provider is a deterministic fake host;
-native Windows, Win32, and macOS providers are a later implementation stage.
+and portable-plan digests plus the verified helper and trusted application
+descriptor. macOS uses the native Swift provider, Windows and Win32 use the native C++
+provider, and the fake host remains limited to package tests.
 
 The app exposes the shared JSON CLI as `yarn desktop-driver`. After the
 supervisor and app are running, list or run the component-authored plans:

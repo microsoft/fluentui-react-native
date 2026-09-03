@@ -37,12 +37,14 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 
 - Use `yarn storybook manifest --<platform>` to validate static story-plan
   extraction.
+- Use `yarn storybook build-driver --<platform>` for an isolated native helper
+  build. `prep` ensures the same verified helper before app preparation.
 - Use `yarn storybook driver --<platform>` to start Metro, the Storybook
   channel/MCP listener, and the WebDriver listener under one owned supervisor.
 - Use the app's `yarn desktop-driver` script for JSON story-run and agent
   commands against that listener.
-- The Stage 1 provider is deliberately fake. Do not add Windows or macOS native
-  automation code until the corresponding Stage 2 plan begins.
+- macOS, Windows, and Win32 use their source-built native helpers. Keep the
+  deterministic fake provider limited to package contract tests.
 - Authored tests belong in component story `parameters.desktopDriver`, not in
   this app. The app owns identity, package discovery, platform exclusions, and
   generated manifests.
@@ -56,6 +58,13 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 
 ## macOS native workflow
 
+- In CI, use `.github/actions/setup-desktop-driver` to create the job-local
+  cache, build and diagnose the helper, and pin later resolution to the
+  verified artifact. GitHub-hosted runners use an ad hoc signature because
+  changing certificate trust requires interactive authorization, and disable
+  physical clicks because the hosted desktop is not the input qualification
+  environment. Managed self-hosted runners pass a pre-provisioned stable
+  signing identity and leave physical input enabled.
 - Run `yarn storybook prep --macos` for project generation and Pod installation. Do not run CocoaPods from the
   repository root because subprocess dependency resolution must start in this workspace.
 - Run `yarn storybook bundle --macos` for the JavaScript bundle, `yarn storybook build --macos` for a non-launching
@@ -73,6 +82,13 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 
 ## Windows native workflow
 
+- In CI, use `.github/actions/setup-desktop-driver` to run the shared Windows
+  native contract, build and diagnose the helper in a job-local cache, and pin
+  later resolution to the verified artifact before `prep` or `smoke`.
+- GitHub-hosted Windows is not the physical-input qualification environment.
+  Disable keyboard, physical-click, and wheel through
+  `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES`; leave them enabled on the
+  interactive self-hosted runner.
 - Use `yarn storybook prep --windows`, `bundle --windows`, `build --windows`, and `run --windows` for individual
   stages. Use `yarn storybook smoke --windows --mode stories` for the package-owned generation, channel server, native
   build and registration, Metro launch, full indexed-story traversal, and ownership-safe cleanup. Use
@@ -90,6 +106,10 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 
 ## Win32 native workflow
 
+- In CI, use `.github/actions/setup-desktop-driver` to build and diagnose the
+  `win32` endpoint in a job-local cache and pin later resolution before smoke.
+  The separate Windows Storybook job owns the shared provider's opt-in native
+  contract.
 - Win32 is the `@office-iss/react-native-win32` Paper endpoint hosted by
   `@office-iss/rex-win32`; do not treat it as the React Native Windows Fabric
   endpoint or generate a `react-native-test-app` project for it.
