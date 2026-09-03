@@ -33,7 +33,6 @@ const sizes: readonly { label: string; value: SearchBoxSize }[] = [
 ];
 
 const testID = 'agentic-storybook-search-box';
-const clearButtonTestID = 'search-box-clear-button';
 
 const meta: Meta<typeof SearchBox> = {
   title: 'Components/SearchBox',
@@ -74,18 +73,18 @@ export const Default: Story = {
           title: 'Reveals the clear button while a query is present and clears it on demand',
           requires: ['keyboard'],
           steps: [
-            { action: 'wait', target: { testId: testID } },
-            { expect: { state: 'role', target: { testId: testID }, value: 'textbox' } },
-            { expect: { state: 'accessibleName', target: { testId: testID }, value: 'Search files' } },
-            { expect: { state: 'exists', target: { testId: clearButtonTestID }, value: false } },
-            { action: 'type', target: { testId: testID }, text: 'quarterly' },
-            { expect: { state: 'value', target: { testId: testID }, value: 'quarterly' } },
-            { action: 'wait', target: { testId: clearButtonTestID } },
-            { expect: { state: 'accessibleName', target: { testId: clearButtonTestID }, value: 'Clear search' } },
-            { action: 'click', target: { testId: clearButtonTestID } },
-            { expect: { state: 'value', target: { testId: testID }, value: '' } },
-            { expect: { state: 'exists', target: { testId: clearButtonTestID }, value: false } },
-            { expect: { state: 'focused', target: { testId: testID }, value: true } },
+            { action: 'wait', target: { testId: 'agentic-storybook-search-box' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-search-box' }, value: 'textbox' } },
+            { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-search-box' }, value: 'Search files' } },
+            { expect: { state: 'exists', target: { testId: 'search-box-clear-button' }, value: false } },
+            { action: 'type', target: { testId: 'agentic-storybook-search-box' }, text: 'quarterly' },
+            { expect: { state: 'value', target: { testId: 'agentic-storybook-search-box' }, value: 'quarterly' } },
+            { action: 'wait', target: { testId: 'search-box-clear-button' } },
+            { expect: { state: 'accessibleName', target: { testId: 'search-box-clear-button' }, value: 'Clear search' } },
+            { action: 'click', target: { testId: 'search-box-clear-button' } },
+            { expect: { state: 'value', target: { testId: 'agentic-storybook-search-box' }, value: '' } },
+            { expect: { state: 'exists', target: { testId: 'search-box-clear-button' }, value: false } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-search-box' }, value: true } },
           ],
         },
         {
@@ -93,11 +92,11 @@ export const Default: Story = {
           title: 'Escape clears a non-empty query from the keyboard',
           requires: ['keyboard'],
           steps: [
-            { action: 'wait', target: { testId: testID } },
-            { action: 'type', target: { testId: testID }, text: 'reports' },
-            { expect: { state: 'value', target: { testId: testID }, value: 'reports' } },
+            { action: 'wait', target: { testId: 'agentic-storybook-search-box' } },
+            { action: 'type', target: { testId: 'agentic-storybook-search-box' }, text: 'reports' },
+            { expect: { state: 'value', target: { testId: 'agentic-storybook-search-box' }, value: 'reports' } },
             { action: 'keys', value: ['Escape'] },
-            { expect: { state: 'value', target: { testId: testID }, value: '' } },
+            { expect: { state: 'value', target: { testId: 'agentic-storybook-search-box' }, value: '' } },
           ],
         },
         {
@@ -106,10 +105,10 @@ export const Default: Story = {
           requires: ['keyboard'],
           steps: [
             { action: 'setArgs', args: { disabled: true, value: 'locked' } },
-            { action: 'wait', target: { testId: testID } },
-            { expect: { state: 'enabled', target: { testId: testID }, value: false } },
-            { action: 'type', target: { testId: testID }, text: 'ignored' },
-            { expect: { state: 'value', target: { testId: testID }, value: 'locked' } },
+            { action: 'wait', target: { testId: 'agentic-storybook-search-box' } },
+            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-search-box' }, value: false } },
+            { action: 'type', target: { testId: 'agentic-storybook-search-box' }, text: 'ignored' },
+            { expect: { state: 'value', target: { testId: 'agentic-storybook-search-box' }, value: 'locked' } },
           ],
         },
       ],
