@@ -12,6 +12,7 @@ import { connectDesktopAgent } from './DesktopAgent.js';
 describe('DesktopAgent', () => {
   test('lists, explains, inspects, acts, checks, captures, and runs the same authored plan', async () => {
     const manifest: DesktopStoryManifest = {
+      catalogSetDigest: 'catalog-digest',
       endpoint: 'windows',
       entries: [
         {
@@ -19,6 +20,7 @@ describe('DesktopAgent', () => {
           name: 'Default',
           packageName: '@fluentui-react-native/components',
           sourcePath: 'src/components/button/button.stories.tsx',
+          supportedPlatforms: ['macos', 'windows', 'win32'],
           tags: ['e2e', 'story'],
           tests: {
             version: 1,
@@ -32,9 +34,10 @@ describe('DesktopAgent', () => {
           title: 'Components/Button',
         },
       ],
+      excluded: [],
       platformManifestDigest: 'platform-digest',
       portablePlanDigest: 'portable-digest',
-      schemaVersion: 1,
+      schemaVersion: 2,
     };
     const harness = await createDesktopDriverStoryHarness(manifest);
     const artifactsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-agent-'));
@@ -48,6 +51,7 @@ describe('DesktopAgent', () => {
         tree: 1,
       });
       expect(fs.existsSync(path.join(artifactsRoot, 'run.json'))).toBe(true);
+      expect(fs.existsSync(path.join(artifactsRoot, 'agent', 'agent-button.png'))).toBe(true);
     } finally {
       await harness.close();
       fs.rmSync(artifactsRoot, { force: true, recursive: true });

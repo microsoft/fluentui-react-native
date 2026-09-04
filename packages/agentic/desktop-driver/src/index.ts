@@ -30,16 +30,19 @@ export {
   desktopBy,
   desktopStoryCapabilities,
   desktopStoryPlatforms,
+  resolveDesktopStoryTests,
   validateDesktopStoryTests,
 } from './authoring/storyTests.js';
 export type {
   DesktopStoryCapability,
   DesktopStoryExpectation,
   DesktopStoryPlatform,
+  DesktopStoryQuarantine,
   DesktopStorySelector,
   DesktopStoryState,
   DesktopStoryStep,
   DesktopStoryTest,
+  DesktopStoryTestVariant,
   DesktopStoryTests,
 } from './authoring/storyTests.js';
 export type {
@@ -119,6 +122,7 @@ export type { DesktopDriverServer, DesktopDriverServerOptions, DesktopSession, E
 export type {
   DesktopStoryManifest,
   DesktopStoryManifestEntry,
+  DesktopStoryManifestExclusion,
   StoryOrchestrator,
   StoryReadyResult,
   StorySelectionRequest,

@@ -1,7 +1,7 @@
 import { remote } from 'webdriverio';
 
 import type { DesktopStoryRunResult } from '../authoring/results.js';
-import type { DesktopStoryExpectation } from '../authoring/storyTests.js';
+import type { DesktopStoryCapability, DesktopStoryExpectation } from '../authoring/storyTests.js';
 import { ArtifactManager } from '../artifacts/ArtifactManager.js';
 import { createDesktopDriverClient, DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import type { DesktopClickMode, DesktopPlatformName } from '../protocol/types.js';
@@ -40,6 +40,7 @@ export type DesktopWebdriverOptions = {
 
 export type DesktopWebdriverRunOptions = {
   artifactsRoot?: string;
+  requiredCapabilities?: readonly DesktopStoryCapability[];
   selection?: DesktopStoryTestSelection;
   signal?: AbortSignal;
 };
@@ -86,6 +87,7 @@ export class DesktopWebdriverSession {
       endpoint,
       manifest,
       platformName,
+      requiredCapabilities: options.requiredCapabilities,
       selection: options.selection,
       session: this.session,
       signal: options.signal,

@@ -14,6 +14,7 @@ import type {
   DesktopStoryStep,
   DesktopStoryTest,
 } from '../authoring/storyTests.js';
+import { resolveDesktopStoryTests } from '../authoring/storyTests.js';
 import type { ArtifactManager } from '../artifacts/ArtifactManager.js';
 import type { DesktopElementClient, DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import { WebDriverError } from '../protocol/errors.js';
@@ -34,6 +35,7 @@ export type DesktopStoryTestRunnerOptions = {
   endpoint: DesktopEndpoint;
   manifest: DesktopStoryManifest;
   platformName: DesktopPlatformName;
+  requiredCapabilities?: readonly DesktopStoryCapability[];
   runId?: string;
   selection?: DesktopStoryTestSelection;
   session: DesktopSessionClient;
@@ -51,6 +53,7 @@ export async function runDesktopStoryTests({
   endpoint,
   manifest,
   platformName,
+  requiredCapabilities = [],
   runId = randomUUID(),
   selection,
   session,
@@ -58,6 +61,7 @@ export async function runDesktopStoryTests({
   targetId,
 }: DesktopStoryTestRunnerOptions): Promise<DesktopStoryRunResult> {
   const startedAt = new Date();
+  artifacts?.prepareRun();
   const selected = selectDesktopStoryTests(manifest, endpoint, selection);
   if (selected.length === 0) {
     throw new Error('No desktop story tests matched the requested selection.');
@@ -70,34 +74,46 @@ export async function runDesktopStoryTests({
     targetId,
   });
 
-  for (const [index, item] of selected.entries()) {
-    if (signal?.aborted) {
-      results.push(cancelledResult(item, 'Run cancelled before the test started.'));
-      continue;
-    }
-    results.push(
-      await runTest({
-        artifacts,
-        item,
-        runId: `${runId}-${index + 1}`,
-        session,
-        signal,
-      }),
-    );
+  const unavailableRunCapabilities = missingCapabilities(session.capabilities, requiredCapabilities);
+  if (unavailableRunCapabilities.length > 0) {
+    const reason = `Required Desktop Driver capabilities are unavailable: ${unavailableRunCapabilities.join(', ')}`;
+    results.push(...selected.map((item) => infrastructureResult(item, reason)));
   }
 
+  if (unavailableRunCapabilities.length === 0) {
+    for (const [index, item] of selected.entries()) {
+      if (signal?.aborted) {
+        results.push(cancelledResult(item, 'Run cancelled before the test started.'));
+        continue;
+      }
+      results.push(
+        await runTest({
+          artifacts,
+          item,
+          runId: `${runId}-${index + 1}`,
+          session,
+          signal,
+        }),
+      );
+    }
+  }
+
+  const summary = summarize(results);
   const result: DesktopStoryRunResult = {
+    accessibility: summarizeAccessibility(selected, results),
     endpoint,
     finishedAt: new Date().toISOString(),
     manifest: {
+      catalog: manifest.catalogSetDigest,
       platform: manifest.platformManifestDigest,
       portable: manifest.portablePlanDigest,
     },
     platformName,
     runId,
-    schemaVersion: 1,
+    schemaVersion: 2,
     startedAt: startedAt.toISOString(),
-    status: results.every(({ status }) => status === 'passed' || status === 'skipped') ? 'passed' : 'failed',
+    status: summary.failed > 0 ? 'failed' : summary.passed > 0 ? 'passed' : 'incomplete',
+    summary,
     targetId,
     tests: results,
   };
@@ -115,12 +131,14 @@ export function selectDesktopStoryTests(
     .filter((entry) => !selection.story || matchesPattern(entry.id, selection.story))
     .filter((entry) => !selection.tag || entry.tags.includes(selection.tag))
     .flatMap((entry) =>
-      (entry.tests?.tests ?? [])
-        .filter((test) => !test.platforms || test.platforms.includes(endpoint))
+      (entry.tests ? (resolveDesktopStoryTests(entry.tests, endpoint)?.tests ?? []) : [])
         .filter((test) => !selection.test || matchesPattern(test.id, selection.test))
         .map((test) => ({ entry, test })),
     )
-    .sort((left, right) => `${left.entry.id}/${left.test.id}`.localeCompare(`${right.entry.id}/${right.test.id}`));
+    .sort((left, right) => {
+      const traversalOrder = Number(left.entry.traverse === false) - Number(right.entry.traverse === false);
+      return traversalOrder || `${left.entry.id}/${left.test.id}`.localeCompare(`${right.entry.id}/${right.test.id}`);
+    });
 
   const shardCount = selection.shardCount;
   const shardIndex = selection.shardIndex;
@@ -145,6 +163,32 @@ async function runTest({
 }): Promise<DesktopStoryTestResult> {
   const started = Date.now();
   const title = item.test.title ?? item.test.id;
+  if (item.test.quarantine) {
+    if (item.test.quarantine.expires < new Date().toISOString().slice(0, 10)) {
+      return {
+        artifacts: [],
+        durationMs: Date.now() - started,
+        error: `Quarantine expired on ${item.test.quarantine.expires}: ${item.test.quarantine.issue}`,
+        quarantine: item.test.quarantine,
+        status: 'failed',
+        steps: [],
+        storyId: item.entry.id,
+        testId: item.test.id,
+        title,
+      };
+    }
+    return {
+      artifacts: [],
+      durationMs: Date.now() - started,
+      quarantine: item.test.quarantine,
+      skipReason: `Quarantined until ${item.test.quarantine.expires}: ${item.test.quarantine.issue}`,
+      status: 'quarantined',
+      steps: [],
+      storyId: item.entry.id,
+      testId: item.test.id,
+      title,
+    };
+  }
   const missing = missingCapabilities(session.capabilities, item.test.requires ?? []);
   if (missing.length > 0) {
     return {
@@ -161,6 +205,7 @@ async function runTest({
 
   const steps: DesktopStoryStepResult[] = [];
   const testArtifacts: DesktopArtifact[] = [];
+  const testDirectory = artifacts?.testDirectory(item.entry.id, item.test.id) ?? `${item.entry.id}-${item.test.id}`;
   let status: DesktopTestStatus = 'passed';
   let errorMessage: string | undefined;
   try {
@@ -168,7 +213,7 @@ async function runTest({
     await withAbort(session.selectStory(item.entry.id, runId), signal);
     for (const [index, step] of item.test.steps.entries()) {
       throwIfAborted(signal);
-      const result = await runStep(session, step, index, artifacts, `${item.entry.id}-${item.test.id}`, signal);
+      const result = await runStep(session, step, index, artifacts, testDirectory, signal);
       steps.push(result);
       testArtifacts.push(...result.artifacts);
       if (result.status === 'failed') {
@@ -198,7 +243,7 @@ async function runTest({
   }
 
   if (status !== 'passed' && artifacts) {
-    const captured = await captureFailureArtifacts(session, artifacts, `${item.entry.id}-${item.test.id}`);
+    const captured = await captureFailureArtifacts(session, artifacts, testDirectory);
     testArtifacts.push(...captured.artifacts);
     if (captured.error) {
       errorMessage = `${errorMessage ?? 'Test failed.'} Evidence capture failed: ${captured.error}`;
@@ -276,10 +321,16 @@ async function performAction(
       await element.click();
       return;
     }
+    case 'focus':
+      await (await findDesktopElement(session, step.target)).focus();
+      return;
     case 'keys':
       await session.performActions(keySequences(step.value));
       return;
     case 'note':
+      return;
+    case 'pause':
+      await abortableDelay(step.durationMs, signal);
       return;
     case 'screenshot': {
       const image = step.target ? await (await findDesktopElement(session, step.target)).takeScreenshot() : await session.takeScreenshot();
@@ -571,6 +622,65 @@ function cancelledResult(item: SelectedTest, reason: string): DesktopStoryTestRe
   };
 }
 
+function infrastructureResult(item: SelectedTest, reason: string): DesktopStoryTestResult {
+  return {
+    artifacts: [],
+    durationMs: 0,
+    error: reason,
+    status: 'infrastructure-error',
+    steps: [],
+    storyId: item.entry.id,
+    testId: item.test.id,
+    title: item.test.title ?? item.test.id,
+  };
+}
+
+function summarize(results: readonly DesktopStoryTestResult[]): DesktopStoryRunResult['summary'] {
+  return {
+    failed: results.filter(({ status }) => !['passed', 'quarantined', 'skipped'].includes(status)).length,
+    passed: results.filter(({ status }) => status === 'passed').length,
+    quarantined: results.filter(({ status }) => status === 'quarantined').length,
+    selected: results.length,
+    skipped: results.filter(({ status }) => status === 'skipped').length,
+  };
+}
+
+function summarizeAccessibility(
+  selected: readonly SelectedTest[],
+  results: readonly DesktopStoryTestResult[],
+): DesktopStoryRunResult['accessibility'] {
+  const accessibility: DesktopStoryRunResult['accessibility'] = {
+    nameAssertions: { failed: 0, passed: 0 },
+    reachabilityAssertions: { failed: 0, passed: 0 },
+    roleAssertions: { failed: 0, passed: 0 },
+  };
+  for (const [testIndex, item] of selected.entries()) {
+    const result = results[testIndex];
+    if (!result) {
+      continue;
+    }
+    for (const [stepIndex, step] of item.test.steps.entries()) {
+      if (!('expect' in step)) {
+        continue;
+      }
+      const bucket =
+        step.expect.state === 'accessibleName'
+          ? accessibility.nameAssertions
+          : step.expect.state === 'focused'
+            ? accessibility.reachabilityAssertions
+            : step.expect.state === 'role'
+              ? accessibility.roleAssertions
+              : undefined;
+      const stepResult = result.steps.find(({ index }) => index === stepIndex);
+      if (!bucket || !stepResult) {
+        continue;
+      }
+      bucket[stepResult.status === 'passed' ? 'passed' : 'failed'] += 1;
+    }
+  }
+  return accessibility;
+}
+
 export class DesktopAssertionError extends Error {
   constructor(message: string) {
     super(message);
@@ -621,4 +731,22 @@ function withAbort<T>(operation: Promise<T>, signal: AbortSignal | undefined): P
 
 function delay(milliseconds: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+function abortableDelay(milliseconds: number, signal: AbortSignal | undefined): Promise<void> {
+  if (!signal) {
+    return delay(milliseconds);
+  }
+  throwIfAborted(signal);
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      signal.removeEventListener('abort', onAbort);
+      resolve();
+    }, milliseconds);
+    const onAbort = () => {
+      clearTimeout(timer);
+      reject(new DesktopRunCancelledError('Run cancelled during the test.'));
+    };
+    signal.addEventListener('abort', onAbort, { once: true });
+  });
 }

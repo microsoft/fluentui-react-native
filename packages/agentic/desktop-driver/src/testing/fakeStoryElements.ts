@@ -161,7 +161,13 @@ function markMutated(step: Exclude<DesktopStoryStep, { expect: DesktopStoryExpec
   if (!('target' in step) || !step.target) {
     return;
   }
-  if (step.action === 'click' || step.action === 'doubleClick' || step.action === 'clear' || step.action === 'type') {
+  if (
+    step.action === 'click' ||
+    step.action === 'doubleClick' ||
+    step.action === 'focus' ||
+    step.action === 'clear' ||
+    step.action === 'type'
+  ) {
     mutated.add(selectorIdentity(step.target));
   }
 }

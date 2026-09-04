@@ -12,15 +12,18 @@ export {
   desktopBy,
   desktopStoryCapabilities,
   desktopStoryPlatforms,
+  resolveDesktopStoryTests,
   validateDesktopStoryTests,
 } from './storyTests.js';
 export type {
   DesktopStoryCapability,
   DesktopStoryExpectation,
   DesktopStoryPlatform,
+  DesktopStoryQuarantine,
   DesktopStorySelector,
   DesktopStoryState,
   DesktopStoryStep,
   DesktopStoryTest,
+  DesktopStoryTestVariant,
   DesktopStoryTests,
 } from './storyTests.js';

@@ -1,4 +1,5 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { Platform } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
@@ -24,7 +25,13 @@ export function useAccordionStyles_unstable(state: AccordionState) {
   const headerColors = getAccordionHeaderColorStyles(state);
   const headerLayoutStyle = getAccordionHeaderLayoutStyle(state);
   const rootStyle: StyleProp<ViewStyle> = [accordionStyles.root, state.userStyle];
-  const headerStyle: StyleProp<ViewStyle> = [accordionStyles.header, headerLayoutStyle, headerColors.background];
+  const usesBackgroundFocusFallback = Platform.OS === 'windows' || Platform.OS === ('win32' as any);
+  const headerStyle: StyleProp<ViewStyle> = [
+    accordionStyles.header,
+    headerLayoutStyle,
+    headerColors.background,
+    usesBackgroundFocusFallback && state.focused ? { backgroundColor: state.tokens.color.backgroundNeutralSoft } : undefined,
+  ];
   const titleStyle: StyleProp<TextStyle> = [
     accordionStyles.title,
     getAccordionTitleLayoutStyle(state),

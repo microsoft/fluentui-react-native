@@ -73,6 +73,14 @@
     {
       "id": "accordion-chevron-end-rotation",
       "status": "accepted"
+    },
+    {
+      "id": "accordion-windows-controls-relationship",
+      "status": "accepted"
+    },
+    {
+      "id": "accordion-windows-focus-indicator",
+      "status": "accepted"
     }
   ],
   "requirements": [

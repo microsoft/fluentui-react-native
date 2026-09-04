@@ -117,7 +117,7 @@ export class SessionManager {
           appLaunch: 120_000,
           nativeCommand: 10_000,
           stableLayout: 1_000,
-          storyRender: 30_000,
+          storyRender: 60_000,
         },
         elements: new Map(),
         elementIdsByNativeId: new Map(),

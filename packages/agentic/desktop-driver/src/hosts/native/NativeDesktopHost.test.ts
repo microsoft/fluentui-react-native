@@ -44,7 +44,7 @@ describe('NativeDesktopHost error translation', () => {
       schemaVersion: 1,
       signing: { mode: 'none' },
       sourceDigest: 'source',
-      wireProtocol: { major: 1, minor: 0 },
+      wireProtocol: { major: 1, minor: 1 },
     };
 
     afterEach(() => {

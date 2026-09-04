@@ -20,67 +20,14 @@ async function main() {
     storyPackages: ['@fluentui-react-native/components'],
   });
   const manifest = await createDesktopStoryManifest(config, 'windows');
-  const planned = manifest.entries.filter(({ id, tests }) => id.startsWith('components-') && id.endsWith('--default') && tests);
-  const windowRect = { x: 0, y: 0, width: 800, height: 600 };
+  const planned = manifest.entries.filter(({ tags, tests }) => tags.includes('desktop-e2e') && tests && tests.tests.length > 0);
   const harness = await testing.createDesktopDriverStoryHarness(manifest, {
-    windows: [
-      {
-        id: 'window-1',
-        title: 'Representative Plans',
-        elements: [
-          {
-            id: 'root',
-            automationId: 'app-root',
-            rect: windowRect,
-            role: 'application',
-            scope: 'application',
-            windowId: 'window-1',
-          },
-          {
-            id: 'story-root',
-            automationId: 'story-root',
-            name: JSON.stringify({ previewGeneration: 0, storyId: 'initial--story' }),
-            parentId: 'root',
-            rect: windowRect,
-            role: 'group',
-            scope: 'preview',
-            windowId: 'window-1',
-          },
-          {
-            id: 'button',
-            automationId: 'agentic-storybook-button',
-            name: 'Button',
-            parentId: 'story-root',
-            rect: { x: 10, y: 10, width: 120, height: 40 },
-            role: 'button',
-            scope: 'preview',
-            windowId: 'window-1',
-          },
-          {
-            id: 'checkbox',
-            automationId: 'agentic-storybook-checkbox',
-            checked: false,
-            name: 'Checkbox',
-            parentId: 'story-root',
-            rect: { x: 10, y: 60, width: 120, height: 40 },
-            role: 'checkbox',
-            scope: 'preview',
-            windowId: 'window-1',
-          },
-          {
-            id: 'input',
-            automationId: 'agentic-storybook-input',
-            name: 'Search files',
-            parentId: 'story-root',
-            rect: { x: 10, y: 110, width: 200, height: 40 },
-            role: 'textbox',
-            scope: 'preview',
-            value: '',
-            windowId: 'window-1',
-          },
-        ],
-      },
-    ],
+    features: {
+      focus: false,
+      keyboard: false,
+      physicalClick: false,
+    },
+    windows: testing.createFakeStoryWindows(manifest),
   });
   const desktop = await wdio.connectDesktopWebdriver({
     platformName: 'windows',
@@ -90,7 +37,7 @@ async function main() {
   try {
     const runOptions = {
       artifactsRoot: process.argv[2],
-      selection: { story: 'components-*--default', tag: 'desktop-e2e' },
+      selection: { tag: 'desktop-e2e' },
     };
     const result = await desktop.runStoryTests(runOptions);
     const repeated = await desktop.runStoryTests(runOptions);

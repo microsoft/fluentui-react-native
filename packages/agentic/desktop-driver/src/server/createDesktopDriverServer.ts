@@ -557,6 +557,15 @@ async function handleElementCommand(
     });
     return null;
   }
+  if (method === 'POST' && operation[0] === 'furn' && operation[1] === 'focus') {
+    if (!requireSupported(snapshot.enabled, 'enabled') || !requireSupported(snapshot.visible, 'visible')) {
+      throw new WebDriverError('element not interactable', `Element "${record.id}" cannot be focused.`);
+    }
+    await sessions.runInputCommand(() =>
+      hostCommand(session, `Focusing element "${record.id}"`, (signal) => session.target.host.focus(record.nativeId, signal)),
+    );
+    return null;
+  }
   if (method === 'POST' && operation[0] === 'clear') {
     await sessions.runInputCommand(() =>
       hostCommand(session, `Clearing element "${record.id}"`, (signal) => session.target.host.clear(record.nativeId, signal)),

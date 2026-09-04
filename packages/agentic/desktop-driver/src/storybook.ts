@@ -1,4 +1,4 @@
-import type { DesktopStoryTests } from './authoring/storyTests.js';
+import type { DesktopStoryPlatform, DesktopStoryTests } from './authoring/storyTests.js';
 import type { DesktopEndpoint } from './protocol/types.js';
 
 export type DesktopStoryManifestEntry = {
@@ -6,17 +6,29 @@ export type DesktopStoryManifestEntry = {
   name: string;
   packageName: string;
   sourcePath: string;
+  supportedPlatforms: readonly DesktopStoryPlatform[];
   tags: readonly string[];
   title: string;
+  traverse?: false;
   tests?: DesktopStoryTests;
 };
 
+export type DesktopStoryManifestExclusion = {
+  id: string;
+  packageName: string;
+  reason: 'package-pattern' | 'unsupported-platform';
+  sourcePath: string;
+  supportedPlatforms: readonly DesktopStoryPlatform[];
+};
+
 export type DesktopStoryManifest = {
+  catalogSetDigest: string;
   endpoint: DesktopEndpoint;
   entries: readonly DesktopStoryManifestEntry[];
+  excluded: readonly DesktopStoryManifestExclusion[];
   platformManifestDigest: string;
   portablePlanDigest: string;
-  schemaVersion: 1;
+  schemaVersion: 2;
 };
 
 export type StorySelectionRequest = {

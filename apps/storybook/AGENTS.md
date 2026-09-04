@@ -48,6 +48,16 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - Authored tests belong in component story `parameters.desktopDriver`, not in
   this app. The app owns identity, package discovery, platform exclusions, and
   generated manifests.
+- Story `supportedPlatforms` narrows the generated automation catalog.
+  Test-level `platforms` selects an identical test body, while
+  `platformVariants` completely replaces `requires` and `steps` for one
+  endpoint. `traversePlatforms` keeps a supported story out of the broad sweep
+  and schedules its authored tests after ordinary stories. Keep app-level
+  story patterns for files that cannot safely load.
+- Generate `yarn storybook manifest --all` when changing story support or
+  platform variants; the catalog-set and portable-plan digests must reconcile.
+- The legacy Windows Jest harness was retired in #4294. Do not recreate a
+  second Storybook automation path; preserve its regressions in authored plans.
 - Keep `storybook-desktop.generated`, reports, trees, screenshots, and run
   manifests ignored. Never patch generated runtime identity or story manifests.
 - Treat the exact-platform and portable-plan digests as contracts. A dynamic or
@@ -93,15 +103,18 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
   stages. Use `yarn storybook smoke --windows --mode stories` for the package-owned generation, channel server, native
   build and registration, Metro launch, full indexed-story traversal, and ownership-safe cleanup. Use
   `--mode stories-and-tests` to run the component-authored desktop-e2e plans after the complete traversal.
-- Keep the Windows story-pattern overrides in `storybook.config.mts`; the
-  current Accordion and Callout Fabric stories still fail-fast the RNW 0.81
-  host during traversal.
+- Keep Callout's Windows package exclusion in `storybook.config.mts`. Accordion
+  keeps its full story module macOS-only; the FocusVisual story module owns a
+  Windows-only, test-only Accordion consumer regression that runs last.
 - WinAppDriver screenshots are not a reliable capture path for WinAppSDK Composition content. After selecting a story
   through the Storybook control channel, use the agent host's desktop screenshot tool when visual evidence is required.
 - Build logs, automation evidence, visual trees, screenshots, and session manifests belong under ignored
   `artifacts/windows`.
 - Stable native automation selectors use explicit `testID` props. Do not select by visible text, layout order, or
   generated native class name.
+- Pointer activation and keyboard focus are separate contracts. Windows and
+  Win32 may assert focus after a physical click; macOS variants must not assume
+  that ordinary mouse-down moves keyboard focus.
 - Keep generated solutions, packages, registrations, and build outputs uncommitted.
 
 ## Win32 native workflow
@@ -138,8 +151,10 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - Keep macOS and Windows on upstream LiteUI. Replacing it with the reduced
   Win32 chrome would regress addon controls and responsive behavior while
   increasing local maintenance.
-- Keep the Win32 story-pattern override in `storybook.config.mts`. It intentionally excludes ListItem and Accordion
-  because their Paper implementations fail-fast crash REX 0.81.1.
+- Keep the Win32 per-story support declarations for ListItem and Accordion;
+  their Paper implementations fail-fast REX 0.81.1 when rendered. Do not
+  restore coarse package-pattern exclusions unless the modules themselves
+  become unsafe to load.
 - Keep the Win32 window title distinct from the Windows Fabric title so
   automation never attaches to the wrong endpoint.
 - Use `yarn storybook smoke --win32 --mode stories` for the package-owned bundle, launch, native desktop-chrome checks,

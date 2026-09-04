@@ -46,6 +46,7 @@ const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
   args: {
+    accessibilityLabel: 'Search files',
     placeholder: 'Search files',
     size: 'medium',
     testID: 'agentic-storybook-input',
@@ -76,12 +77,21 @@ export const Default: Story = {
       version: 1,
       tests: [
         {
+          id: 'accessibility-contract',
+          title: 'Exposes text-input semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-input' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-input' }, value: 'textbox' } },
+            { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-input' }, value: 'Search files' } },
+            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-input' }, value: true } },
+            { expect: { state: 'value', target: { testId: 'agentic-storybook-input' }, value: '' } },
+          ],
+        },
+        {
           id: 'types-and-clears',
           title: 'Accepts keyboard input and clears it',
           requires: ['keyboard'],
           steps: [
-            { action: 'wait', target: { testId: 'agentic-storybook-input' } },
-            { expect: { state: 'role', target: { testId: 'agentic-storybook-input' }, value: 'textbox' } },
             { action: 'type', target: { testId: 'agentic-storybook-input' }, text: 'Ada' },
             { expect: { state: 'value', target: { testId: 'agentic-storybook-input' }, value: 'Ada' } },
             { action: 'clear', target: { testId: 'agentic-storybook-input' } },

@@ -11,7 +11,7 @@ func createHello() -> JSONObject {
     "minimumOs": "14.0",
     "protocol": [
       "major": 1,
-      "minor": 0,
+      "minor": 1,
     ],
     "features": [
       "accessibilityClick",
@@ -20,6 +20,7 @@ func createHello() -> JSONObject {
       "capture",
       "elementCapture",
       "find",
+      "focus",
       "hitTest",
       "keyboard",
       "launch",

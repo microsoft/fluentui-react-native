@@ -1,5 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
+import { Platform } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
@@ -25,11 +26,12 @@ export function renderAccordion_unstable(state: AccordionState, styles: Accordio
     title: Title,
   } = state;
   const bodyFallback: ReactNode = <Text style={styles.bodyPlaceholderStyle}>Content placeholder</Text>;
+  const supportsCustomFocusVisual = Platform.OS !== 'windows' && Platform.OS !== ('win32' as any);
 
   return (
     <state.root>
       <Header>
-        <FocusVisual {...state.focusVisualProps} />
+        {supportsCustomFocusVisual && <FocusVisual {...state.focusVisualProps} />}
         {layout === 'chevronStart' ? (
           <>
             <ChevronContainer>

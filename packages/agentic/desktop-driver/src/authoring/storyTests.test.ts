@@ -1,4 +1,4 @@
-import { validateDesktopStoryTests } from './storyTests.js';
+import { resolveDesktopStoryTests, validateDesktopStoryTests } from './storyTests.js';
 
 describe('validateDesktopStoryTests', () => {
   test('accepts a serializable versioned plan', () => {
@@ -54,5 +54,127 @@ describe('validateDesktopStoryTests', () => {
         ],
       }),
     ).toThrow('sequences are invalid');
+  });
+
+  test('resolves story support and complete platform variants', () => {
+    const plan = validateDesktopStoryTests({
+      supportedPlatforms: ['macos', 'windows'],
+      version: 1,
+      tests: [
+        {
+          id: 'activate',
+          requires: ['focus', 'physical-click'],
+          steps: [
+            { action: 'click', target: { testId: 'button' } },
+            { expect: { state: 'focused', target: { testId: 'button' }, value: true } },
+          ],
+          platformVariants: {
+            macos: {
+              requires: ['physical-click'],
+              steps: [
+                { action: 'click', target: { testId: 'button' } },
+                { action: 'pause', durationMs: 10 },
+                { expect: { state: 'exists', target: { testId: 'button' }, value: true } },
+              ],
+            },
+          },
+        },
+      ],
+    });
+
+    expect(resolveDesktopStoryTests(plan, 'macos')).toMatchObject({
+      supportedPlatforms: ['macos', 'windows'],
+      tests: [
+        {
+          id: 'activate',
+          requires: ['physical-click'],
+          steps: [{ action: 'click' }, { action: 'pause', durationMs: 10 }, { expect: { state: 'exists' } }],
+        },
+      ],
+    });
+    expect(resolveDesktopStoryTests(plan, 'windows')?.tests[0]).toMatchObject({
+      requires: ['focus', 'physical-click'],
+      steps: [{ action: 'click' }, { expect: { state: 'focused' } }],
+    });
+    expect(resolveDesktopStoryTests(plan, 'win32')).toBeUndefined();
+  });
+
+  test('validates traversal platforms as a subset of story support', () => {
+    expect(
+      validateDesktopStoryTests({
+        supportedPlatforms: ['macos', 'windows'],
+        tests: [],
+        traversePlatforms: [],
+        version: 1,
+      }),
+    ).toMatchObject({ traversePlatforms: [] });
+    expect(() =>
+      validateDesktopStoryTests({
+        supportedPlatforms: ['windows'],
+        tests: [],
+        traversePlatforms: ['macos'],
+        version: 1,
+      }),
+    ).toThrow('not included by');
+  });
+
+  test('rejects platform filters and variants outside story support', () => {
+    expect(() =>
+      validateDesktopStoryTests({
+        supportedPlatforms: ['windows'],
+        version: 1,
+        tests: [
+          {
+            id: 'invalid-platform',
+            platforms: ['macos'],
+            steps: [{ action: 'note', message: 'invalid' }],
+          },
+        ],
+      }),
+    ).toThrow('not included by');
+    expect(() =>
+      validateDesktopStoryTests({
+        version: 1,
+        tests: [
+          {
+            id: 'invalid-variant',
+            platforms: ['windows'],
+            platformVariants: {
+              macos: {
+                steps: [{ action: 'note', message: 'invalid' }],
+              },
+            },
+            steps: [{ action: 'note', message: 'base' }],
+          },
+        ],
+      }),
+    ).toThrow('not included by');
+  });
+
+  test('validates quarantine metadata', () => {
+    expect(() =>
+      validateDesktopStoryTests({
+        version: 1,
+        tests: [
+          {
+            id: 'quarantined',
+            quarantine: { expires: 'not-a-date', issue: '#1', owner: '@owner' },
+            steps: [{ action: 'note', message: 'quarantined' }],
+          },
+        ],
+      }),
+    ).toThrow('valid YYYY-MM-DD date');
+    expect(() =>
+      validateDesktopStoryTests({
+        version: 1,
+        tests: [
+          {
+            id: 'quarantined',
+            quarantine: { expires: '2026-02-30', issue: '#1', owner: '@owner' },
+            steps: [{ action: 'note', message: 'quarantined' }],
+          },
+        ],
+      }),
+    ).toThrow('valid YYYY-MM-DD date');
   });
 });

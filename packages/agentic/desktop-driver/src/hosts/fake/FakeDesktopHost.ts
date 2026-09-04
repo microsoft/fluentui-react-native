@@ -266,6 +266,20 @@ export class FakeDesktopHost implements DesktopHost {
     this.actions.push({ type: 'click', elementId, mode: resolvedMode });
   }
 
+  async focus(elementId: string, signal?: AbortSignal): Promise<void> {
+    throwIfAborted(signal);
+    const element = this.requireElement(elementId);
+    if (!this.features.focus) {
+      throw new HostUnsupportedError('Programmatic focus is unavailable.');
+    }
+    for (const current of this.elements.values()) {
+      if (current.windowId === element.windowId && current.focused.supported) {
+        current.focused = { supported: true, value: current.id === element.id };
+      }
+    }
+    this.actions.push({ type: 'focus', elementId });
+  }
+
   async clear(elementId: string, signal?: AbortSignal): Promise<void> {
     throwIfAborted(signal);
     const element = this.requireElement(elementId);

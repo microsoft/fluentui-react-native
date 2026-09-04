@@ -94,6 +94,9 @@ final class Driver {
         token: token
       )
       return CommandResult()
+    case "focus":
+      try focus(elementID: try requireString(params, "elementId"), token: token)
+      return CommandResult()
     case "clear":
       try clear(elementID: try requireString(params, "elementId"), token: token)
       return CommandResult()
@@ -379,6 +382,22 @@ final class Driver {
       try accessibility.setFocus(elementID)
       try token.wait(milliseconds: 16)
       try input.pressCommandADelete(token: token)
+    }
+  }
+
+  private func focus(elementID: String, token: CancellationToken) throws {
+    let window = try windowForElement(elementID)
+    let snapshot = try accessibility.snapshot(elementID: elementID, window: window, token: token)
+    guard snapshot.enabled.value != false, snapshot.visible.value == true else {
+      try fail(ErrorCode.notInteractable, "The element is disabled or hidden and cannot receive keyboard focus.")
+    }
+    try activate(window, token: token)
+    try accessibility.setFocus(elementID)
+    for _ in 0..<10 where try !accessibility.hasFocus(elementID) {
+      try token.wait(milliseconds: 20)
+    }
+    guard try accessibility.hasFocus(elementID) else {
+      try fail(ErrorCode.notInteractable, "The element did not take keyboard focus.")
     }
   }
 

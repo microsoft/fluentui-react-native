@@ -4,6 +4,7 @@ import { createFakeStoryWindows } from './fakeStoryElements.js';
 describe('createFakeStoryWindows', () => {
   test('derives initial semantic state without pre-applying post-action assertions', () => {
     const manifest: DesktopStoryManifest = {
+      catalogSetDigest: 'catalog-digest',
       endpoint: 'windows',
       entries: [
         {
@@ -11,6 +12,7 @@ describe('createFakeStoryWindows', () => {
           name: 'Default',
           packageName: '@fluentui-react-native/components',
           sourcePath: 'src/components/checkbox/checkbox.stories.tsx',
+          supportedPlatforms: ['macos', 'windows', 'win32'],
           tags: ['desktop-e2e'],
           tests: {
             version: 1,
@@ -29,9 +31,10 @@ describe('createFakeStoryWindows', () => {
           title: 'Components/Checkbox',
         },
       ],
+      excluded: [],
       platformManifestDigest: 'platform',
       portablePlanDigest: 'portable',
-      schemaVersion: 1,
+      schemaVersion: 2,
     };
 
     const checkbox = createFakeStoryWindows(manifest)[0].elements.find(({ automationId }) => automationId === 'checkbox');

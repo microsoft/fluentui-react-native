@@ -383,16 +383,18 @@ function connect(flags: ConnectionFlags) {
 function readManifest(manifestPath: string): DesktopStoryManifest {
   const value = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as DesktopStoryManifest;
   if (
-    value.schemaVersion !== 1 ||
+    value.schemaVersion !== 2 ||
     !Array.isArray(value.entries) ||
+    !Array.isArray(value.excluded) ||
     (value.endpoint !== 'macos' && value.endpoint !== 'windows' && value.endpoint !== 'win32') ||
+    typeof value.catalogSetDigest !== 'string' ||
     typeof value.platformManifestDigest !== 'string' ||
     typeof value.portablePlanDigest !== 'string'
   ) {
     throw new Error(`Invalid Desktop Story Manifest at ${manifestPath}.`);
   }
   for (const entry of value.entries) {
-    if (!entry || typeof entry.id !== 'string' || !Array.isArray(entry.tags)) {
+    if (!entry || typeof entry.id !== 'string' || !Array.isArray(entry.supportedPlatforms) || !Array.isArray(entry.tags)) {
       throw new Error(`Invalid Desktop Story Manifest entry at ${manifestPath}.`);
     }
     if (entry.tests) {

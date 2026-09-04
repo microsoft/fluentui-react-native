@@ -10,11 +10,13 @@ import { createDesktopStorybookDriverManifest, writeDesktopStorybookDriverManife
 
 const storybookRoot = path.resolve(__dirname, '../../../../../apps/storybook');
 const storyManifest: DesktopStoryManifest = {
+  catalogSetDigest: 'catalog-digest',
   endpoint: 'windows',
   entries: [],
+  excluded: [],
   platformManifestDigest: 'platform-digest',
   portablePlanDigest: 'portable-digest',
-  schemaVersion: 1,
+  schemaVersion: 2,
 };
 const nativeDriver: NativeDriverArtifact = {
   architecture: 'x64',
@@ -32,7 +34,7 @@ const nativeDriver: NativeDriverArtifact = {
   schemaVersion: 1,
   signing: { mode: 'none' },
   sourceDigest: 'source',
-  wireProtocol: { major: 1, minor: 0 },
+  wireProtocol: { major: 1, minor: 1 },
 };
 
 describe('Desktop Storybook driver manifest', () => {
@@ -57,6 +59,7 @@ describe('Desktop Storybook driver manifest', () => {
         leasePath: path.join(storybookRoot, 'storybook-desktop.generated', 'application-lease.windows.json'),
         windowTitle: 'Agentic Components Storybook',
       },
+      catalogSetDigest: 'catalog-digest',
       nativeDriver,
       schemaVersion: 2,
     });

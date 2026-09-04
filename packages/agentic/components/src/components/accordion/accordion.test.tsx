@@ -39,6 +39,7 @@ describe('Accordion', () => {
 
     expect(header.props.accessibilityRole).toBe('button');
     expect(header.props.accessibilityState).toEqual({ expanded: false });
+    expect(header.props.enableFocusRing).toBe(false);
     expect(component.getByText('Section title')).toBeOnTheScreen();
     expect(component.getByTestId('accordion-leading-icon').props.style).toMatchObject({ height: 16, width: 16 });
     expect(component.getByTestId('accordion-chevron-icon').props.style).toMatchObject({ height: 16, width: 16 });

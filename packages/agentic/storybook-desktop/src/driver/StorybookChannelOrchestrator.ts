@@ -55,7 +55,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
     driverManifest,
     fetch = globalThis.fetch,
     serverUrl,
-    timeoutMs = 30_000,
+    timeoutMs = 60_000,
   }: StorybookChannelOrchestratorOptions) {
     this.driverManifest = driverManifest;
     this.fetch = fetch;
@@ -155,6 +155,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
       payload.instanceId !== expected.instanceId ||
       payload.endpoint !== expected.endpoint ||
       payload.targetId !== expected.targetId ||
+      payload.catalogSetDigest !== expected.catalogSetDigest ||
       payload.platformManifestDigest !== expected.platformManifestDigest ||
       payload.nonce !== expected.bridgeNonce
     ) {

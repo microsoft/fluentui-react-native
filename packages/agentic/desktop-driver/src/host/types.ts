@@ -143,6 +143,7 @@ export interface DesktopHost {
   hitTest(windowId: string, x: number, y: number, signal?: AbortSignal): Promise<NativeElementSnapshot | null>;
 
   click(elementId: string, mode: DesktopClickMode, signal?: AbortSignal): Promise<void>;
+  focus(elementId: string, signal?: AbortSignal): Promise<void>;
   clear(elementId: string, signal?: AbortSignal): Promise<void>;
   sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void>;
   performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void>;

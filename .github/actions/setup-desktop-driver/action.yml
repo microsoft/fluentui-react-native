@@ -21,6 +21,14 @@ inputs:
     description: Comma-separated input features unavailable on the runner.
     required: false
     default: ''
+  required-capabilities:
+    description: Comma-separated authored-test capabilities required for an authoritative run.
+    required: false
+    default: ''
+  require-complete-tests:
+    description: Fail the authored-test run when any selected test skips or is quarantined.
+    required: false
+    default: 'false'
 
 outputs:
   cache-root:
@@ -59,6 +67,8 @@ runs:
       env:
         DISABLED_INPUT_FEATURES: ${{ inputs.disabled-input-features }}
         MACOS_SIGNING_IDENTITY: ${{ inputs.macos-signing-identity }}
+        REQUIRED_CAPABILITIES: ${{ inputs.required-capabilities }}
+        REQUIRE_COMPLETE_TESTS: ${{ inputs.require-complete-tests }}
       run: |
         set -euo pipefail
 
@@ -71,6 +81,12 @@ runs:
         if [[ -n "$DISABLED_INPUT_FEATURES" ]]; then
           echo "FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=$DISABLED_INPUT_FEATURES" >> "$GITHUB_ENV"
         fi
+        if [[ -n "$REQUIRED_CAPABILITIES" ]]; then
+          echo "FURN_STORYBOOK_REQUIRED_CAPABILITIES=$REQUIRED_CAPABILITIES" >> "$GITHUB_ENV"
+        fi
+        if [[ "$REQUIRE_COMPLETE_TESTS" == "true" ]]; then
+          echo "FURN_STORYBOOK_REQUIRE_COMPLETE_TESTS=1" >> "$GITHUB_ENV"
+        fi
 
     - name: Configure Windows Desktop Driver
       id: configure-windows
@@ -78,6 +94,8 @@ runs:
       shell: pwsh
       env:
         DISABLED_INPUT_FEATURES: ${{ inputs.disabled-input-features }}
+        REQUIRED_CAPABILITIES: ${{ inputs.required-capabilities }}
+        REQUIRE_COMPLETE_TESTS: ${{ inputs.require-complete-tests }}
       run: |
         $ErrorActionPreference = 'Stop'
 
@@ -90,6 +108,14 @@ runs:
 
         if ($env:DISABLED_INPUT_FEATURES) {
           "FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=$env:DISABLED_INPUT_FEATURES" |
+            Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+        }
+        if ($env:REQUIRED_CAPABILITIES) {
+          "FURN_STORYBOOK_REQUIRED_CAPABILITIES=$env:REQUIRED_CAPABILITIES" |
+            Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+        }
+        if ($env:REQUIRE_COMPLETE_TESTS -eq 'true') {
+          "FURN_STORYBOOK_REQUIRE_COMPLETE_TESTS=1" |
             Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
         }
 
@@ -186,6 +212,7 @@ runs:
           $report.result.provider -ne 'windows' -or
           $report.result.architecture -ne 'x64' -or
           $report.result.wireProtocol.major -ne 1 -or
+          $report.result.wireProtocol.minor -lt 1 -or
           -not ($report.result.endpoints -contains $env:DRIVER_PLATFORM)
         ) {
           throw "The verified helper does not satisfy the $env:DRIVER_PLATFORM x64 provider contract."

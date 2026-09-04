@@ -81,6 +81,7 @@ export function useCard_unstable(props: CardProps): CardState {
     onPressIn,
     onPressOut,
     pressRetentionOffset,
+    testID: testID ? `${testID}-interactive` : undefined,
     unstable_pressDelay,
   } as PressableProps);
 

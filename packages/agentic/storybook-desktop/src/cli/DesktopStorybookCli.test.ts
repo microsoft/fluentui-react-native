@@ -29,7 +29,7 @@ const nativeDriverArtifact: NativeDriverArtifact = {
   schemaVersion: 1,
   signing: { mode: 'none' },
   sourceDigest: 'source',
-  wireProtocol: { major: 1, minor: 0 },
+  wireProtocol: { major: 1, minor: 1 },
 };
 const nativeDriverTestOptions = {
   buildNativeDriver: async () => nativeDriverArtifact,
@@ -37,12 +37,29 @@ const nativeDriverTestOptions = {
   writeMacOSApplicationLease: async () => undefined,
 };
 const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'windows' | 'win32') => ({
+  catalogSetDigest: 'catalog-digest',
   endpoint: platform,
   entries: [],
+  excluded: [],
   platformManifestDigest: `${platform}-digest`,
   portablePlanDigest: 'portable-digest',
-  schemaVersion: 1 as const,
+  schemaVersion: 2 as const,
 });
+
+const createStoryManifestWithIds =
+  (...ids: string[]) =>
+  async (_config: unknown, platform: 'macos' | 'windows' | 'win32') => ({
+    ...(await createEmptyStoryManifest(_config, platform)),
+    entries: ids.map((id) => ({
+      id,
+      name: id,
+      packageName: '@fluentui-react-native/components',
+      sourcePath: `${id}.stories.tsx`,
+      supportedPlatforms: ['macos', 'windows', 'win32'] as const,
+      tags: ['story'],
+      title: id.split('--')[0],
+    })),
+  });
 
 describe('macOS application leases', () => {
   test('validates exact running application records and rejects ambiguity', () => {
@@ -276,7 +293,7 @@ describe('DesktopStorybookCli', () => {
       }),
       {
         ...nativeDriverTestOptions,
-        createStoryManifest: createEmptyStoryManifest,
+        createStoryManifest: createStoryManifestWithIds('first--story', 'second--story'),
         runner,
         fetch,
         isPortAvailable: async (port) => !blockedPorts.has(port),
@@ -307,6 +324,110 @@ describe('DesktopStorybookCli', () => {
     expect(runner.foreground.at(-1)?.command).toBe('stop-storybook');
     expect(runner.stopped).toBe(2);
     expect(resolveNativeDriver).not.toHaveBeenCalled();
+  });
+
+  test('rejects runtime stories that are not part of the loadable manifest catalog', async () => {
+    const runner = new RecordingRunner();
+    const fetch = jest.fn(async (input: Parameters<typeof globalThis.fetch>[0]) => {
+      const url = input.toString();
+      if (url.endsWith('/index.json')) {
+        return new Response(
+          JSON.stringify({
+            entries: {
+              expected: { id: 'expected--story', type: 'story' },
+              unexpected: { id: 'unexpected--story', type: 'story' },
+            },
+          }),
+        );
+      }
+      return new Response('{}');
+    });
+    const cli = new DesktopStorybookCli(
+      makeConfig({
+        macos: {
+          run: { command: 'launch-storybook' },
+          smoke: {
+            stop: { command: 'stop-storybook' },
+          },
+        },
+      }),
+      {
+        ...nativeDriverTestOptions,
+        createStoryManifest: createStoryManifestWithIds('expected--story'),
+        fetch,
+        isPortAvailable: async () => true,
+        runner,
+      },
+    );
+
+    await expect(cli.smoke('macos')).rejects.toThrow('unexpected--story');
+    expect(runner.foreground.at(-1)?.command).toBe('stop-storybook');
+    expect(runner.stopped).toBe(2);
+  });
+
+  test('keeps test-only stories in the runtime catalog without traversing them', async () => {
+    const runner = new RecordingRunner();
+    const fetch = jest.fn(async (input: Parameters<typeof globalThis.fetch>[0]) => {
+      const url = input.toString();
+      if (url.endsWith('/index.json')) {
+        return new Response(
+          JSON.stringify({
+            entries: {
+              regular: { id: 'regular--story', type: 'story' },
+              testOnly: { id: 'test-only--story', type: 'story' },
+            },
+          }),
+        );
+      }
+      return new Response('{}');
+    });
+    const createStoryManifest = async (_config: unknown, platform: 'macos' | 'windows' | 'win32') => ({
+      ...(await createEmptyStoryManifest(_config, platform)),
+      entries: [
+        {
+          id: 'regular--story',
+          name: 'Regular',
+          packageName: '@fluentui-react-native/components',
+          sourcePath: 'regular.stories.tsx',
+          supportedPlatforms: ['macos', 'windows', 'win32'] as const,
+          tags: ['story'],
+          title: 'Regular',
+        },
+        {
+          id: 'test-only--story',
+          name: 'Test only',
+          packageName: '@fluentui-react-native/components',
+          sourcePath: 'test-only.stories.tsx',
+          supportedPlatforms: ['macos', 'windows', 'win32'] as const,
+          tags: ['desktop-e2e', 'story'],
+          title: 'Test only',
+          traverse: false as const,
+        },
+      ],
+    });
+    const cli = new DesktopStorybookCli(
+      makeConfig({
+        macos: {
+          run: { command: 'launch-storybook' },
+          smoke: {
+            stop: { command: 'stop-storybook' },
+          },
+        },
+      }),
+      {
+        ...nativeDriverTestOptions,
+        createStoryManifest,
+        fetch,
+        isPortAvailable: async () => true,
+        runner,
+      },
+    );
+
+    await cli.smoke('macos');
+
+    expect(fetch.mock.calls.map(([input]) => input.toString()).filter((url) => url.includes('select-story-sync'))).toEqual([
+      expect.stringContaining('/select-story-sync/regular--story'),
+    ]);
   });
 
   test('keeps retrying the first story while the initial Metro bundle is compiling', async () => {
@@ -345,7 +466,7 @@ describe('DesktopStorybookCli', () => {
         }),
         {
           ...nativeDriverTestOptions,
-          createStoryManifest: createEmptyStoryManifest,
+          createStoryManifest: createStoryManifestWithIds('first--story'),
           fetch,
           isPortAvailable: async () => true,
           runner,
@@ -389,17 +510,24 @@ describe('DesktopStorybookCli', () => {
     const runSmokeTests = jest.fn(async () => {
       events.push('tests');
       return {
+        accessibility: {
+          nameAssertions: { failed: 0, passed: 0 },
+          reachabilityAssertions: { failed: 0, passed: 0 },
+          roleAssertions: { failed: 0, passed: 0 },
+        },
         endpoint: 'macos' as const,
         finishedAt: '2026-08-30T08:00:01.000Z',
         manifest: {
+          catalog: 'catalog-digest',
           platform: 'macos-digest',
           portable: 'portable-digest',
         },
         platformName: 'macos' as const,
         runId: 'smoke-run',
-        schemaVersion: 1 as const,
+        schemaVersion: 2 as const,
         startedAt: '2026-08-30T08:00:00.000Z',
         status: 'passed' as const,
+        summary: { failed: 0, passed: 0, quarantined: 0, selected: 0, skipped: 0 },
         targetId: 'agenticstorybook-macos',
         tests: [],
       };
@@ -415,7 +543,7 @@ describe('DesktopStorybookCli', () => {
       }),
       {
         ...nativeDriverTestOptions,
-        createStoryManifest: createEmptyStoryManifest,
+        createStoryManifest: createStoryManifestWithIds('first--story', 'second--story'),
         fetch,
         isPortAvailable: async () => true,
         runSmokeTests,

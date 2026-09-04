@@ -122,7 +122,7 @@ export class DesktopAgent {
   }
 
   async screenshot(name: string): Promise<DesktopArtifact> {
-    const artifact = this.artifacts.writeScreenshot('agent', name, await this.desktop.session.takeScreenshot());
+    const artifact = this.artifacts.writeAgentScreenshot(name, await this.desktop.session.takeScreenshot());
     this.captured.push(artifact);
     return artifact;
   }

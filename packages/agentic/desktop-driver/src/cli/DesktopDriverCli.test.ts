@@ -261,6 +261,7 @@ describe('desktop-driver CLI', () => {
     const artifactsRoot = path.join(temporaryDirectory, 'artifacts');
     const manifestPath = path.join(temporaryDirectory, 'manifest.json');
     const manifest: DesktopStoryManifest = {
+      catalogSetDigest: 'catalog-digest',
       endpoint: 'windows',
       entries: [
         {
@@ -268,6 +269,7 @@ describe('desktop-driver CLI', () => {
           name: 'Default',
           packageName: '@fluentui-react-native/components',
           sourcePath: 'src/components/button/button.stories.tsx',
+          supportedPlatforms: ['macos', 'windows', 'win32'],
           tags: ['e2e', 'story'],
           tests: {
             version: 1,
@@ -281,9 +283,10 @@ describe('desktop-driver CLI', () => {
           title: 'Components/Button',
         },
       ],
+      excluded: [],
       platformManifestDigest: 'platform-digest',
       portablePlanDigest: 'portable-digest',
-      schemaVersion: 1,
+      schemaVersion: 2,
     };
     fs.writeFileSync(manifestPath, JSON.stringify(manifest));
     const server = spawnCli(['serve', '--port', String(port), '--target', 'cli-target', '--manifest', manifestPath]);
@@ -344,7 +347,7 @@ describe('desktop-driver CLI', () => {
       schemaVersion: 1,
       signing: { mode: 'none' },
       sourceDigest: 'source-digest',
-      wireProtocol: { major: 1, minor: 0 },
+      wireProtocol: { major: 1, minor: 1 },
       ...overrides,
     };
   }

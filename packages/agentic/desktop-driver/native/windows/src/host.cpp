@@ -44,12 +44,12 @@ json::Value CreateHello() {
 
   json::Value protocol = json::Value::Object();
   protocol.Set("major", json::Value::Integer(1));
-  protocol.Set("minor", json::Value::Integer(0));
+  protocol.Set("minor", json::Value::Integer(1));
   hello.Set("protocol", protocol);
 
   json::Value features = json::Value::Array();
   for (const char* feature : {"accessibilityClick", "activeElement", "capture", "elementCapture", "find", "hitTest",
-                              "keyboard", "launch", "attach", "pointer", "probe", "releaseActions", "setWindowRect",
+                              "focus", "keyboard", "launch", "attach", "pointer", "probe", "releaseActions", "setWindowRect",
                               "source", "tree", "wheel"}) {
     features.Append(json::Value::String(std::string(feature)));
   }

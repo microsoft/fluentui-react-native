@@ -43,6 +43,18 @@ describe('Card', () => {
     expect(ref).toHaveBeenCalledWith(expect.anything());
   });
 
+  it('keeps the root test ID and adds a stable ID to the interactive overlay', async () => {
+    const component = await renderCard({
+      accessibilityLabel: 'Open report',
+      content: { children: <Text>Report</Text> },
+      onPress: jest.fn(),
+      testID: 'card-root',
+    });
+
+    expect(component.getByTestId('card-root')).toBeOnTheScreen();
+    expect(component.getByTestId('card-root-interactive')).toBeOnTheScreen();
+  });
+
   it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
     const component = await renderCard({ accessibilityLabel: 'Report', onPress, selected: false });

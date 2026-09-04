@@ -31,6 +31,7 @@ import {
   writeDesktopStorybookDriverManifest,
   writeDesktopStoryManifest,
 } from '../driver/index.js';
+import type { DesktopStoryManifest } from '@fluentui-react-native/desktop-driver';
 import { NodeDesktopCommandRunner } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
@@ -38,6 +39,7 @@ import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests }
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   driverManifestPath?: string;
   macosXcconfigPath?: string;
+  storyManifestPath?: string;
 };
 
 export type DesktopStorybookBuildDriverOptions = {
@@ -161,6 +163,49 @@ export class DesktopStorybookCli {
     writeDesktopStoryManifest(manifest, resolvedOutput);
     this.output.write(`${resolvedOutput}\n`);
     return resolvedOutput;
+  }
+
+  async manifests(outputDirectory?: string): Promise<string[]> {
+    const platforms = this.config.platforms;
+    if (platforms.length === 0) {
+      throw new Error('The Storybook configuration does not expose any desktop platforms.');
+    }
+    const manifests = await Promise.all(
+      platforms.map(async (platform) => [platform, await this.createStoryManifest(this.config, platform)] as const),
+    );
+    const catalogSetDigest = manifests[0][1].catalogSetDigest;
+    const portablePlanDigest = manifests[0][1].portablePlanDigest;
+    for (const [platform, manifest] of manifests.slice(1)) {
+      if (manifest.catalogSetDigest !== catalogSetDigest || manifest.portablePlanDigest !== portablePlanDigest) {
+        throw new Error(`The ${platform} Story Manifest does not match the shared catalog and portable-plan digests.`);
+      }
+    }
+
+    const directory = resolveFromProject(this.config.projectRoot, outputDirectory ?? 'storybook-desktop.generated');
+    const outputPaths = manifests.map(([platform, manifest]) => {
+      const outputPath = path.join(directory, `story-manifest.${platform}.json`);
+      writeDesktopStoryManifest(manifest, outputPath);
+      this.output.write(`${outputPath}\n`);
+      return outputPath;
+    });
+    const summaryPath = path.join(directory, 'story-manifest.catalog.json');
+    writeJsonFile(summaryPath, {
+      catalogSetDigest,
+      manifests: Object.fromEntries(
+        manifests.map(([platform, manifest]) => [
+          platform,
+          {
+            entries: manifest.entries.length,
+            excluded: manifest.excluded.length,
+            platformManifestDigest: manifest.platformManifestDigest,
+          },
+        ]),
+      ),
+      portablePlanDigest,
+      schemaVersion: 1,
+    });
+    this.output.write(`${summaryPath}\n`);
+    return [...outputPaths, summaryPath];
   }
 
   printInstance(platform: Platforms): void {
@@ -301,7 +346,7 @@ export class DesktopStorybookCli {
         }
         await this.writeMacOSApplicationLease(instance.driverManifestPath, smoke.startupTimeoutMs ?? 120_000);
       }
-      await this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.startupTimeoutMs);
+      await this.renderEveryStory(serverUrl, instance.storyManifestPath, smoke.settleMs ?? 0, smoke.startupTimeoutMs);
       if (mode === 'stories-and-tests') {
         const result = await this.runSmokeTests({
           driverUrl: loopbackUrl(instance.driverPort),
@@ -357,10 +402,17 @@ export class DesktopStorybookCli {
       storybookPort,
       metroPort,
     };
+    const storyManifest = await this.createStoryManifest(this.config, platform);
+    resolvedInstance.storyManifestPath = path.join(
+      this.config.projectRoot,
+      'storybook-desktop.generated',
+      `story-manifest.${platform}.json`,
+    );
+    writeDesktopStoryManifest(storyManifest, resolvedInstance.storyManifestPath);
 
     if (mode === 'stories-and-tests') {
       const nativeDriver = await this.resolveDriver(platform);
-      resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver);
+      resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver, storyManifest);
     }
     if (platform === 'macos') {
       resolvedInstance.macosXcconfigPath = writeMacOSInstanceConfig(this.config.projectRoot, resolvedInstance);
@@ -377,16 +429,17 @@ export class DesktopStorybookCli {
     platform: Platforms,
     instance: DesktopStorybookInstance,
     nativeDriver: NativeDriverArtifact,
+    storyManifest?: DesktopStoryManifest,
   ): Promise<string> {
-    const storyManifest = await this.createStoryManifest(this.config, platform);
+    const resolvedStoryManifest = storyManifest ?? (await this.createStoryManifest(this.config, platform));
     const outputPath = path.join(this.config.projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
     const driverManifest = createDesktopStorybookDriverManifest({
-      bridgeNonce: readReusableBridgeNonce(outputPath, instance, storyManifest.platformManifestDigest),
+      bridgeNonce: readReusableBridgeNonce(outputPath, instance, resolvedStoryManifest.platformManifestDigest),
       config: this.config,
       instance,
       nativeDriver,
       platform,
-      storyManifest,
+      storyManifest: resolvedStoryManifest,
     });
     writeDesktopStorybookDriverManifest(driverManifest, outputPath);
     return outputPath;
@@ -423,13 +476,46 @@ export class DesktopStorybookCli {
     };
   }
 
-  private async renderEveryStory(serverUrl: string, settleMs: number, startupTimeoutMs = 120_000): Promise<void> {
+  private async renderEveryStory(
+    serverUrl: string,
+    storyManifestPath: string | undefined,
+    settleMs: number,
+    startupTimeoutMs = 120_000,
+  ): Promise<void> {
     const storyIndex = await this.getJson(new URL('/index.json', serverUrl));
-    const entries = Object.values((storyIndex.entries ?? {}) as Record<string, { id?: string; type?: string }>).filter(
+    const indexedEntries = Object.values((storyIndex.entries ?? {}) as Record<string, { id?: string; type?: string }>).filter(
       (entry) => entry.type === 'story' && entry.id,
     );
-    if (entries.length === 0) {
+    if (indexedEntries.length === 0) {
       throw new Error('The Storybook index did not contain any stories.');
+    }
+    const indexedIds = new Set(indexedEntries.map(({ id }) => id!));
+    const manifest = storyManifestPath ? readStoryManifest(storyManifestPath) : undefined;
+    const entries = manifest ? manifest.entries.filter(({ traverse }) => traverse !== false).map(({ id }) => ({ id })) : indexedEntries;
+    if (manifest && entries.length === 0) {
+      throw new Error(`The ${manifest.endpoint} Story Manifest does not contain any supported stories.`);
+    }
+    const expectedIndexedIds = manifest
+      ? new Set([
+          ...manifest.entries.map(({ id }) => id),
+          ...manifest.excluded.filter(({ reason }) => reason === 'unsupported-platform').map(({ id }) => id),
+        ])
+      : undefined;
+    const missing = entries.filter(({ id }) => !indexedIds.has(id!));
+    if (missing.length > 0) {
+      throw new Error(`The Storybook index is missing ${missing.length} manifest stories: ${missing.map(({ id }) => id).join(', ')}`);
+    }
+    if (manifest) {
+      const unexpected = [...indexedIds].filter((id) => !expectedIndexedIds!.has(id));
+      if (unexpected.length > 0) {
+        throw new Error(`The Storybook index contains ${unexpected.length} unexpected stories: ${unexpected.join(', ')}`);
+      }
+      const missingUnsupported = [...expectedIndexedIds!].filter((id) => !indexedIds.has(id));
+      if (missingUnsupported.length > 0) {
+        throw new Error(
+          `The Storybook index is missing ${missingUnsupported.length} loadable manifest stories: ${missingUnsupported.join(', ')}`,
+        );
+      }
     }
 
     const failures: Error[] = [];
@@ -549,6 +635,7 @@ export class DesktopStorybookCli {
           ? {
               [FURN_STORYBOOK_INSTANCE_ID]: instance.id,
               [FURN_STORYBOOK_BUNDLE_IDENTIFIER]: instance.bundleIdentifier,
+              ...(instance.storyManifestPath ? { STORYBOOK_STORY_MANIFEST: instance.storyManifestPath } : {}),
               STORYBOOK_WS_PORT: String(instance.storybookPort),
               STORYBOOK_DRIVER_PORT: String(instance.driverPort),
               ...(instance.driverManifestPath ? { STORYBOOK_DRIVER_MANIFEST: instance.driverManifestPath } : {}),
@@ -558,6 +645,22 @@ export class DesktopStorybookCli {
           : {}),
       },
     };
+  }
+}
+
+function readStoryManifest(manifestPath: string): DesktopStoryManifest {
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as DesktopStoryManifest;
+  if (manifest.schemaVersion !== 2 || !Array.isArray(manifest.entries) || !Array.isArray(manifest.excluded)) {
+    throw new Error(`Invalid Desktop Story Manifest at "${manifestPath}".`);
+  }
+  return manifest;
+}
+
+function writeJsonFile(outputPath: string, value: unknown): void {
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  const content = `${JSON.stringify(value, null, 2)}\n`;
+  if (!fs.existsSync(outputPath) || fs.readFileSync(outputPath, 'utf8') !== content) {
+    fs.writeFileSync(outputPath, content);
   }
 }
 

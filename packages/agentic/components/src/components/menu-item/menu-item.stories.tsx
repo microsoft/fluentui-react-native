@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { MenuItem } from './menu-item';
 
@@ -80,9 +81,49 @@ export const SectionHeader: Story = {
 };
 
 export const Selected: Story = {
+  tags: ['desktop-e2e'],
   args: {
     content: 'Favorite',
     selected: true,
+  },
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'accessibility-contract',
+          title: 'Exposes selected menu-item semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-menu-item' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-menu-item' }, value: 'menuitem' } },
+            { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-menu-item' }, value: 'Favorite' } },
+            { expect: { state: 'selected', target: { testId: 'agentic-storybook-menu-item' }, value: true } },
+            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-menu-item' }, value: true } },
+          ],
+          platformVariants: {
+            win32: {
+              steps: [
+                { action: 'wait', target: { testId: 'agentic-storybook-menu-item' } },
+                { expect: { state: 'role', target: { testId: 'agentic-storybook-menu-item' }, value: 'menuitem' } },
+                { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-menu-item' }, value: 'Favorite' } },
+                { expect: { state: 'enabled', target: { testId: 'agentic-storybook-menu-item' }, value: true } },
+              ],
+            },
+          },
+        },
+        {
+          id: 'focus-survival',
+          title: 'Survives programmatic focus without a delayed native crash',
+          requires: ['focus'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-menu-item' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'agentic-storybook-menu-item' }, value: true } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-menu-item' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
   },
 };
 

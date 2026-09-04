@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Divider } from './divider';
 import type { DividerLayout } from './divider.types';
@@ -25,7 +26,9 @@ const meta: Meta<typeof Divider> = {
   title: 'Components/Divider',
   component: Divider,
   args: {
+    accessibilityLabel: 'Text',
     layout: 'center',
+    testID: 'agentic-storybook-divider',
     vertical: false,
   },
   argTypes: {
@@ -49,6 +52,42 @@ type Story = StoryObj<typeof Divider>;
 export const Default: Story = {
   args: {
     label: 'Text',
+  },
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'accessibility-contract',
+          title: 'Exposes non-interactive separator semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-divider' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-divider' }, value: 'separator' } },
+            { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-divider' }, value: 'Text' } },
+            { expect: { state: 'displayed', target: { testId: 'agentic-storybook-divider' }, value: true } },
+          ],
+          platformVariants: {
+            windows: {
+              steps: [
+                { action: 'wait', target: { testId: 'agentic-storybook-divider' } },
+                { expect: { state: 'role', target: { testId: 'agentic-storybook-divider' }, value: 'group' } },
+                { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-divider' }, value: 'Text' } },
+                { expect: { state: 'displayed', target: { testId: 'agentic-storybook-divider' }, value: true } },
+              ],
+            },
+            win32: {
+              steps: [
+                { action: 'wait', target: { testId: 'agentic-storybook-divider' } },
+                { expect: { state: 'role', target: { testId: 'agentic-storybook-divider' }, value: 'separator' } },
+                { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-divider' }, value: 'Text' } },
+                { expect: { state: 'displayed', target: { testId: 'agentic-storybook-divider' }, value: true } },
+              ],
+            },
+          },
+        },
+      ],
+    } satisfies DesktopStoryTests,
   },
 };
 

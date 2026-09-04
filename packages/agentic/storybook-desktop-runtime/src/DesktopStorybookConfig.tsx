@@ -9,6 +9,7 @@ export type DesktopRuntimeSelection = {
 
 export type DesktopStorybookRuntimeInstance = {
   bridgeNonce?: string;
+  catalogSetDigest?: string;
   endpoint?: 'macos' | 'windows' | 'win32';
   instanceId?: string;
   platformManifestDigest?: string;

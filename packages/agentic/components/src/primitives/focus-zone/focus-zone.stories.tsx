@@ -206,7 +206,7 @@ export const Default: Story = {
           platforms: ['windows'],
           requires: ['focus', 'keyboard'],
           steps: [
-            { action: 'click', target: { testId: 'focus-zone-item-1' } },
+            { action: 'focus', target: { testId: 'focus-zone-item-1' } },
             { expect: { state: 'focused', target: { testId: 'focus-zone-item-1' }, value: true } },
             { action: 'keys', value: ['\uE014'] },
             { expect: { state: 'focused', target: { testId: 'focus-zone-item-2' }, value: true } },
@@ -257,7 +257,7 @@ export const TwoDimensionalNavigation: Story = {
           platforms: ['windows'],
           requires: ['focus', 'keyboard'],
           steps: [
-            { action: 'click', target: { testId: 'focus-zone-item-1' } },
+            { action: 'focus', target: { testId: 'focus-zone-item-1' } },
             { expect: { state: 'focused', target: { testId: 'focus-zone-item-1' }, value: true } },
             { action: 'keys', value: ['\uE015'] },
             { expect: { state: 'focused', target: { testId: 'focus-zone-item-4' }, value: true } },

@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Switch } from './switch';
 import type { SwitchLayout } from './switch.types';
@@ -42,6 +43,7 @@ const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',
   component: Switch,
   args: {
+    accessibilityLabel: 'Wi-Fi',
     label: 'Wi-Fi',
     labelAfter: false,
     labelBefore: true,
@@ -70,7 +72,70 @@ export default meta;
 
 type Story = StoryObj<typeof Switch>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'accessibility-contract',
+          title: 'Exposes switch semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-switch' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-switch' }, value: 'switch' } },
+            { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-switch' }, value: 'Wi-Fi' } },
+            { expect: { state: 'checked', target: { testId: 'agentic-storybook-switch' }, value: false } },
+            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-switch' }, value: true } },
+          ],
+          platformVariants: {
+            windows: {
+              steps: [
+                { action: 'wait', target: { testId: 'agentic-storybook-switch' } },
+                { expect: { state: 'role', target: { testId: 'agentic-storybook-switch' }, value: 'button' } },
+                { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-switch' }, value: 'Wi-Fi' } },
+                { expect: { state: 'checked', target: { testId: 'agentic-storybook-switch' }, value: false } },
+                { expect: { state: 'enabled', target: { testId: 'agentic-storybook-switch' }, value: true } },
+              ],
+            },
+            win32: {
+              steps: [
+                { action: 'wait', target: { testId: 'agentic-storybook-switch' } },
+                { expect: { state: 'role', target: { testId: 'agentic-storybook-switch' }, value: 'button' } },
+                { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-switch' }, value: 'Wi-Fi' } },
+                { expect: { state: 'enabled', target: { testId: 'agentic-storybook-switch' }, value: true } },
+              ],
+            },
+          },
+        },
+        {
+          id: 'toggles-checked-state',
+          platforms: ['macos', 'windows'],
+          title: 'Toggles through native activation',
+          requires: ['physical-click'],
+          steps: [
+            { action: 'click', target: { testId: 'agentic-storybook-switch' } },
+            {
+              action: 'wait',
+              until: { state: 'checked', target: { testId: 'agentic-storybook-switch' }, value: true },
+            },
+          ],
+        },
+        {
+          id: 'focus-survival',
+          title: 'Survives programmatic focus without a delayed native crash',
+          requires: ['focus'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-switch' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'agentic-storybook-switch' }, value: true } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-switch' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
 
 export const Overview: Story = {
   render: () => (

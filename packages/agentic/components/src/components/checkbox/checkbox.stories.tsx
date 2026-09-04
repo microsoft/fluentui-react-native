@@ -36,6 +36,7 @@ const meta: Meta<typeof Checkbox> = {
   title: 'Components/Checkbox',
   component: Checkbox,
   args: {
+    accessibilityLabel: 'Checkbox',
     label: 'Checkbox',
     secondaryText: 'Description',
     showLabel: true,
@@ -71,18 +72,37 @@ export const Default: Story = {
       version: 1,
       tests: [
         {
+          id: 'accessibility-contract',
+          title: 'Exposes checkbox semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-checkbox' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-checkbox' }, value: 'checkbox' } },
+            { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-checkbox' }, value: 'Checkbox' } },
+            { expect: { state: 'checked', target: { testId: 'agentic-storybook-checkbox' }, value: false } },
+            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-checkbox' }, value: true } },
+          ],
+        },
+        {
           id: 'toggles-checked-state',
           title: 'Toggles through native activation',
           requires: ['physical-click'],
           steps: [
-            { action: 'wait', target: { testId: 'agentic-storybook-checkbox' } },
-            { expect: { state: 'role', target: { testId: 'agentic-storybook-checkbox' }, value: 'checkbox' } },
-            { expect: { state: 'checked', target: { testId: 'agentic-storybook-checkbox' }, value: false } },
             { action: 'click', target: { testId: 'agentic-storybook-checkbox' } },
             {
               action: 'wait',
               until: { state: 'checked', target: { testId: 'agentic-storybook-checkbox' }, value: true },
             },
+          ],
+        },
+        {
+          id: 'focus-survival',
+          title: 'Survives programmatic focus without a delayed native crash',
+          requires: ['focus'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-checkbox' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'agentic-storybook-checkbox' }, value: true } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-checkbox' }, value: true } },
           ],
         },
       ],

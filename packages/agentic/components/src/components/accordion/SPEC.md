@@ -28,18 +28,20 @@ The resolved state retains the controlled/uncontrolled expansion result, pressab
 - **ACC-001:** Resolve the documented defaults and implement controlled and uncontrolled expansion without mutating a controlled value.
 - **ACC-002:** Render the public slots, default slot content, body fallback, and layout-specific header order.
 - **ACC-003:** Apply theme-token header, title, body, chevron, visibility, and persistent focus-visual styling.
-- **ACC-004:** Expose a labeled button header with expanded state and an accessibility relationship to the body; hide collapsed body descendants.
+- **ACC-004:** Expose a labeled button header with expanded state, preserve the supported platform relationship to the body, and hide collapsed body descendants.
 - **ACC-005:** Keep grouping policy, body contents, and motion outside the component contract.
 
 ## Platform behavior
 
-On Windows and macOS, the header is a React Native `Pressable` with button role. Its native keyboard and pointer activation request expansion; `Enter` and `Space` are handled by the platform pressable behavior. The header exposes `accessibilityState.expanded`, its `accessibilityControls` target is the generated body identifier, and caller-provided accessibility state is retained.
+On Windows and macOS, the header is a React Native `Pressable` with button role. Its native keyboard and pointer activation request expansion; `Enter` and `Space` are handled by the platform pressable behavior. The header exposes `accessibilityState.expanded`, and caller-provided accessibility state is retained. macOS also exposes `accessibilityControls` to the generated body identifier. React Native Windows and Win32 0.81 omit that relationship because releasing the related native views during story navigation terminates the host with `0xc0000409`.
 
-The body remains mounted. Collapsing it sets height to zero, hides overflow, removes padding, and hides descendants from assistive technology; expanding restores visibility. `FocusVisual` remains mounted inside the header and is shown for resolved focus. There is no group-level arrow navigation, focus transfer, native Windows focus ring, or timed rotation/height animation.
+The body remains mounted. Collapsing it sets height to zero, hides overflow, removes padding, and hides descendants from assistive technology; expanding restores visibility. macOS uses the persistent dual-ring `FocusVisual`. React Native Windows and Win32 0.81 use a token-backed background focus indicator because unmounting the nested border visual terminates the host with `0xc0000409`. There is no group-level arrow navigation, focus transfer, native Windows focus ring, or timed rotation/height animation.
 
 ## Divergences from Flex
 
 - `accordion-chevron-end-rotation` — **accepted.** Flex design evidence gives the trailing chevron a down-to-up caret sequence. FURN uses the same chevron source in both layouts and rotates it right-to-down as expansion changes. Changing that sequence requires an implementation and visual-contract review.
+- `accordion-windows-controls-relationship` — **accepted.** macOS exposes `accessibilityControls` to the generated body identifier. React Native Windows and Win32 0.81 omit the relationship because releasing the related native views during story navigation terminates the host with `0xc0000409`; expanded state and collapsed-descendant hiding remain available.
+- `accordion-windows-focus-indicator` — **accepted.** macOS renders the shared dual-ring `FocusVisual`. React Native Windows and Win32 0.81 render a background focus indicator because releasing Accordion's nested border visual terminates the host with `0xc0000409`.
 
 ## Conformance
 

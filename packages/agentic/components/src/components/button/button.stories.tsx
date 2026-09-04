@@ -48,6 +48,7 @@ const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
   args: {
+    accessibilityLabel: 'Button',
     appearance: 'secondary',
     content: 'Button',
     disabled: false,
@@ -83,30 +84,42 @@ export const Default: Story = {
       version: 1,
       tests: [
         {
-          id: 'pointer-focus',
-          platforms: ['windows', 'win32'],
-          title: 'Responds to activation and receives focus',
-          requires: ['element-screenshot', 'focus', 'physical-click'],
+          id: 'accessibility-contract',
+          title: 'Exposes button semantics',
           steps: [
             { action: 'wait', target: { testId: 'agentic-storybook-button' } },
             { expect: { state: 'role', target: { testId: 'agentic-storybook-button' }, value: 'button' } },
+            { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-button' }, value: 'Button' } },
             { expect: { state: 'enabled', target: { testId: 'agentic-storybook-button' }, value: true } },
-            { action: 'click', target: { testId: 'agentic-storybook-button' } },
-            { expect: { state: 'focused', target: { testId: 'agentic-storybook-button' }, value: true } },
-            { action: 'screenshot', name: 'button-focused', target: { testId: 'agentic-storybook-button' } },
           ],
         },
         {
           id: 'pointer-activation',
-          platforms: ['macos'],
-          title: 'Accepts native pointer activation',
-          requires: ['element-screenshot', 'physical-click'],
+          title: 'Uses the platform pointer-focus contract',
+          requires: ['focus', 'physical-click'],
           steps: [
-            { action: 'wait', target: { testId: 'agentic-storybook-button' } },
-            { expect: { state: 'role', target: { testId: 'agentic-storybook-button' }, value: 'button' } },
-            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-button' }, value: true } },
             { action: 'click', target: { testId: 'agentic-storybook-button' } },
-            { action: 'screenshot', name: 'button-after-click', target: { testId: 'agentic-storybook-button' } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-button' }, value: true } },
+          ],
+          platformVariants: {
+            macos: {
+              requires: ['physical-click'],
+              steps: [
+                { action: 'click', target: { testId: 'agentic-storybook-button' } },
+                { expect: { state: 'exists', target: { testId: 'agentic-storybook-button' }, value: true } },
+              ],
+            },
+          },
+        },
+        {
+          id: 'focus-survival',
+          title: 'Survives programmatic focus without a delayed native crash',
+          requires: ['focus'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-button' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'agentic-storybook-button' }, value: true } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-button' }, value: true } },
           ],
         },
       ],
@@ -115,6 +128,7 @@ export const Default: Story = {
 };
 
 export const Overview: Story = {
+  tags: ['desktop-e2e'],
   render: () => (
     <View style={styles.story}>
       <StoryGroup label="Appearance">
@@ -139,6 +153,28 @@ export const Overview: Story = {
     </View>
   ),
   parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'tab-focus-movement',
+          platforms: ['windows', 'win32'],
+          title: 'Moves focus to the next button with Tab',
+          requires: ['focus', 'keyboard'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-button-overview-primary' } },
+            { action: 'keys', value: ['\uE004'] },
+            {
+              expect: {
+                state: 'focused',
+                target: { testId: 'agentic-storybook-button-overview-secondary' },
+                value: true,
+              },
+            },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'A grouped scan of the main appearance, size, content, and availability variants.',

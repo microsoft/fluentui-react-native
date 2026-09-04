@@ -9,6 +9,7 @@ import { createDesktopDriverStoryHarness } from '../testing/protocolHarness.js';
 describe('sanctioned WebdriverIO API', () => {
   test('lists and runs an authored plan through registered browser commands', async () => {
     const manifest: DesktopStoryManifest = {
+      catalogSetDigest: 'catalog-digest',
       endpoint: 'windows',
       entries: [
         {
@@ -16,6 +17,7 @@ describe('sanctioned WebdriverIO API', () => {
           name: 'Default',
           packageName: '@fluentui-react-native/components',
           sourcePath: 'src/components/button/button.stories.tsx',
+          supportedPlatforms: ['macos', 'windows', 'win32'],
           tags: ['e2e', 'story'],
           tests: {
             version: 1,
@@ -32,9 +34,10 @@ describe('sanctioned WebdriverIO API', () => {
           title: 'Components/Button',
         },
       ],
+      excluded: [],
       platformManifestDigest: 'platform-digest',
       portablePlanDigest: 'portable-digest',
-      schemaVersion: 1,
+      schemaVersion: 2,
     };
     const harness = await createDesktopDriverStoryHarness(manifest);
     const artifactsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-wdio-'));

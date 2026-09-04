@@ -31,10 +31,11 @@ describe('native driver build and resolution', () => {
       expect(built).toMatchObject({
         architecture: 'arm64',
         endpoints: ['macos'],
+        features: expect.arrayContaining(['focus']),
         origin: 'built',
         provider: 'macos',
         signing: { designatedRequirement: expect.stringContaining('cdhash H"'), mode: 'adhoc' },
-        wireProtocol: { major: 1, minor: 0 },
+        wireProtocol: { major: 1, minor: 1 },
       });
       expect(built.executablePath).toContain(`${path.sep}FurnDesktopDriverHost.app${path.sep}Contents${path.sep}MacOS${path.sep}`);
 
@@ -193,9 +194,10 @@ describe('native driver build and resolution', () => {
       expect(built).toMatchObject({
         architecture: 'x64',
         endpoints: ['windows', 'win32'],
+        features: expect.arrayContaining(['focus']),
         origin: 'built',
         provider: 'windows',
-        wireProtocol: { major: 1, minor: 0 },
+        wireProtocol: { major: 1, minor: 1 },
       });
       expect(fs.existsSync(built.executablePath)).toBe(true);
 

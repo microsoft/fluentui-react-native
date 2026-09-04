@@ -6,34 +6,41 @@ import path from 'node:path';
 jest.setTimeout(30_000);
 
 describe('representative desktop story plans', () => {
-  test('extracts and runs the applicable Button, Checkbox, and Input plans through WebdriverIO', async () => {
+  test('extracts and runs the complete portable semantic cohort through WebdriverIO', async () => {
     const artifactsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'representative-story-plans-'));
     try {
       const response = await runContract(artifactsRoot);
       expect(response).toMatchObject({
         planned: [
-          { id: 'components-button--default', tests: ['pointer-focus', 'pointer-activation'] },
-          { id: 'components-checkbox--default', tests: ['toggles-checked-state'] },
-          { id: 'components-input--default', tests: ['types-and-clears'] },
+          { id: 'components-button--default', tests: ['accessibility-contract', 'pointer-activation', 'focus-survival'] },
+          { id: 'components-button--overview', tests: ['tab-focus-movement'] },
+          { id: 'components-card--interactive', tests: ['accessibility-contract', 'focus-survival'] },
+          { id: 'components-checkbox--default', tests: ['accessibility-contract', 'toggles-checked-state', 'focus-survival'] },
+          { id: 'components-divider--default', tests: ['accessibility-contract'] },
+          { id: 'components-input--default', tests: ['accessibility-contract', 'types-and-clears'] },
+          { id: 'components-listboxitem--default', tests: ['accessibility-contract', 'focus-survival'] },
+          { id: 'components-listitem--selected-focus', tests: ['accessibility-contract', 'focus-survival'] },
+          { id: 'components-menuitem--selected', tests: ['accessibility-contract', 'focus-survival'] },
+          { id: 'components-radio--default', tests: ['accessibility-contract', 'focus-survival'] },
+          { id: 'components-switch--default', tests: ['accessibility-contract', 'toggles-checked-state', 'focus-survival'] },
+          { id: 'components-tab--selected', tests: ['accessibility-contract', 'focus-survival'] },
+          { id: 'components-tag--default', tests: ['accessibility-contract', 'focus-survival'] },
+          { id: 'native-focuszone--default', tests: ['linear-navigation-and-tab-exit'] },
+          { id: 'native-focuszone--two-dimensional-navigation', tests: ['geometric-navigation'] },
+          { id: 'primitives-focus-visual--windows-accordion-consumer-regression', tests: ['focus-survival'] },
         ],
         result: {
           status: 'passed',
-          tests: [
-            { status: 'passed', testId: 'pointer-focus' },
-            { status: 'passed', testId: 'toggles-checked-state' },
-            { status: 'passed', testId: 'types-and-clears' },
-          ],
+          summary: { failed: 0, passed: 12, quarantined: 0, selected: 30, skipped: 18 },
         },
         repeated: {
           status: 'passed',
-          tests: [
-            { status: 'passed', testId: 'pointer-focus' },
-            { status: 'passed', testId: 'toggles-checked-state' },
-            { status: 'passed', testId: 'types-and-clears' },
-          ],
+          summary: { failed: 0, passed: 12, quarantined: 0, selected: 30, skipped: 18 },
         },
       });
       expect(fs.existsSync(path.join(artifactsRoot, 'run.json'))).toBe(true);
+      expect(fs.existsSync(path.join(artifactsRoot, 'junit.xml'))).toBe(true);
+      expect(fs.existsSync(path.join(artifactsRoot, 'events.ndjson'))).toBe(true);
     } finally {
       fs.rmSync(artifactsRoot, { force: true, recursive: true });
     }

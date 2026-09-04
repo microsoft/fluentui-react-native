@@ -446,6 +446,26 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
     result.result = json::Value::Null();
     return result;
   }
+  if (command == "focus") {
+    const std::string elementId = RequireString(params, "elementId");
+    const ElementRecord& record = automation_.RequireRecord(elementId);
+    const ElementSnapshot snapshot = RequireLiveElement(elementId, token);
+    if (snapshot.enabled.supported && !snapshot.enabled.value) {
+      Fail(kErrorNotInteractable, "The element is disabled and cannot receive keyboard focus.");
+    }
+    if (record.window != nullptr) {
+      TryActivateWindow(record.window, token);
+    }
+    automation_.SetFocus(elementId);
+    for (int attempt = 0; attempt < 10 && !automation_.HasKeyboardFocus(elementId); attempt += 1) {
+      token.Wait(20);
+    }
+    if (!automation_.HasKeyboardFocus(elementId)) {
+      Fail(kErrorNotInteractable, "The element did not take keyboard focus.");
+    }
+    result.result = json::Value::Null();
+    return result;
+  }
   if (command == "clear") {
     const std::string elementId = RequireString(params, "elementId");
     RequireLiveElement(elementId, token);

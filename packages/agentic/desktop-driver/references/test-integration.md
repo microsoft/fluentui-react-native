@@ -98,6 +98,15 @@ Storybook extraction accepts JSON literals wrapped by TypeScript `satisfies` or
 properties, or runtime platform branches. Dynamic or invalid plans fail
 generation with source context.
 
+`supportedPlatforms` narrows the story's generated catalog membership.
+Test-level `platforms` keeps one unchanged test body on a subset.
+`platformVariants` keeps one stable test ID while completely replacing
+`requires` and `steps` for a specific endpoint. `traversePlatforms` keeps a
+supported story out of broad render traversal and schedules its plans after
+ordinary stories, which is appropriate only for destructive or teardown-
+sensitive native regressions. Package-level Storybook globs remain the
+loadability boundary and cannot be widened by a story declaration.
+
 Portable selectors:
 
 - `{ testId }` for deterministic interaction;
@@ -107,8 +116,9 @@ Portable selectors:
 
 Actions:
 
-- click, double-click, clear, type, key sequences, and raw W3C actions;
-- scroll and wait;
+- click, double-click, deterministic native focus, clear, type, key sequences,
+  and raw W3C actions;
+- scroll, conditional wait, and fixed abortable `pause`;
 - Storybook argument updates;
 - screenshot, source, and notes.
 
@@ -120,8 +130,43 @@ Assertions:
 
 Requirements can declare `accessibility-click`, `element-screenshot`, `focus`,
 `keyboard`, `physical-click`, `screenshot`, or `wheel`. A missing requirement
-produces an explicit skip. Platform differences belong in `platforms` and
-`requires`, not imperative branches.
+produces an explicit skip. A run with no passing test reports `incomplete`
+rather than green.
+
+Use semantic assertions consistently:
+
+| Component category | Minimum assertions                                               |
+| ------------------ | ---------------------------------------------------------------- |
+| Action             | role, accessible name, enabled                                   |
+| Toggle             | action minimums plus checked/mixed and its activation transition |
+| Text input         | role, accessible name, enabled/read-only when exposed, and value |
+| Selection item     | role, accessible name, selected or checked                       |
+| Disclosure         | button role, accessible name, expanded                           |
+| Informational      | role, meaningful accessible name when present, displayed         |
+
+Package Jest tests prove component-owned prop propagation. Native story plans
+prove the normalized accessibility tree. Neither substitutes for manual
+screen-reader validation.
+
+Use complete platform variants for verified native mappings that legitimately
+differ. For example, the current Windows and Win32 React Native hosts expose
+Switch as a `button`; Windows Fabric exposes Divider as a named `group`, while
+Win32 Paper and macOS expose `separator`. Win32 Paper does not currently expose
+selected state for Card, MenuItem, or Tab, or checked state for Radio and
+Switch. Omit those assertions in the Win32 variant rather than translating
+unsupported state to `false`.
+
+The `focus` capability means the provider can set and read keyboard focus.
+Prefer the portable `focus` action for focus-visual, Tab-start, and crash
+regressions because it does not require global physical input. Windows and
+Win32 pointer tests may additionally assert focus after a physical click.
+React Native macOS does not move keyboard focus on ordinary mouse-down, so
+pointer-activation tests need a complete macOS variant rather than a copied
+Windows focus expectation.
+
+A test may carry `quarantine: { owner, issue, expires, reason? }`. Quarantined
+tests have a distinct result status, are excluded from passing coverage, and
+become failures after expiry.
 
 ## Run plans
 
@@ -145,6 +190,8 @@ desktop-driver stories run \
 
 Selectors can filter by story glob, test glob, tag, and deterministic shard.
 The CLI emits JSON and exits nonzero when the run status is not `passed`.
+`run.json` records the shared catalog digest, portable-plan digest, exact
+platform digest, overall counts, and role/name/reachability assertion counts.
 
 ## Evidence
 
@@ -152,18 +199,22 @@ Passing `artifactsRoot` writes atomically beneath that root:
 
 ```text
 artifactsRoot/
+  events.ndjson
   host.json
+  junit.xml
   run.json
   tests/
     <story>-<test>/
+      result.json
       <named screenshots and source>
       failure.png
       failure-source.xml
       failure-tree.json
 ```
 
-Names are sanitized and confined. Failure evidence is best effort and never
-replaces the original test error. Trees and screenshots may contain sensitive
+Names are sanitized and confined. NDJSON and JUnit are derived from the same
+final result as `run.json`. Failure evidence is best effort and never replaces
+the original test error. Trees and screenshots may contain sensitive
 application information; apply the retention and access policy described in
 [Security](security.md).
 

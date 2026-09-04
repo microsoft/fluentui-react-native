@@ -16,7 +16,7 @@ The checked-in machine-readable version is [protocol.json](protocol.json):
 {
   "wireProtocol": {
     "major": 1,
-    "minor": 0
+    "minor": 1
   }
 }
 ```
@@ -80,7 +80,7 @@ Identifies the running helper:
   "architecture": "x64",
   "buildId": "<build fingerprint>",
   "sourceDigest": "<source digest>",
-  "protocol": { "major": 1, "minor": 0 },
+  "protocol": { "major": 1, "minor": 1 },
   "features": ["..."]
 }
 ```
@@ -105,6 +105,10 @@ Node sends a correlated command:
 Parameters are command-specific serializable data already validated by the
 Node boundary. Public WebDriver element UUIDs are resolved before dispatch;
 only helper-private opaque IDs cross FDR1.
+
+The element command set includes `click`, `focus`, `clear`, and `sendKeys`.
+`focus` requests deterministic native keyboard focus through UI Automation or
+AX without synthesizing pointer or keyboard input.
 
 Request and cancellation correlation IDs are limited to 256 UTF-8 bytes.
 Helpers ignore invalid IDs before queuing work or echoing a response.

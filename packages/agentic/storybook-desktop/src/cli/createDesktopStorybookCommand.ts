@@ -19,7 +19,7 @@ type PlatformFlags = {
 };
 
 type ServerFlags = PlatformFlags & DesktopStorybookServerOptions;
-type ManifestFlags = PlatformFlags & { out?: string };
+type ManifestFlags = PlatformFlags & { all?: boolean; out?: string };
 type SmokeFlags = PlatformFlags & { mode: DesktopSmokeMode };
 type BuildDriverFlags = PlatformFlags & DesktopStorybookBuildDriverOptions;
 type PrepFlags = PlatformFlags & { driver: DesktopStorybookPrepOptions['driver'] };
@@ -103,11 +103,22 @@ function addDriverCommand(program: Command, getApi: () => Promise<DesktopStorybo
 }
 
 function addManifestCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
-  const command = program.command('manifest').description('Generate the platform Story Manifest.').option('--out <path>', 'output path');
+  const command = program
+    .command('manifest')
+    .description('Generate one platform Story Manifest or the reconciled manifest set.')
+    .option('--all', 'generate manifests for every configured desktop platform')
+    .option('--out <path>', 'output file, or output directory with --all');
   addPlatformOptions(command);
   command.action(async (flags: ManifestFlags) => {
     const api = await getApi();
-    await api.manifest(resolvePlatform(flags, api), flags.out);
+    if (flags.all) {
+      if (selectedPlatform(flags)) {
+        throw new Error('--all cannot be combined with --macos, --windows, or --win32.');
+      }
+      await api.manifests(flags.out);
+    } else {
+      await api.manifest(resolvePlatform(flags, api), flags.out);
+    }
   });
 }
 

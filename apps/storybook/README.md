@@ -135,9 +135,13 @@ exact app process launched by the smoke lifecycle. After traversal, the Windows
 Fabric lifecycle restarts only that owned app and rewrites its lease before
 running authored tests against the warm Metro bundle. Logs are written
 beneath `artifacts/windows/smoke-logs`.
-The Accordion and Callout stories remain excluded from the Windows catalog
-because the current RNW 0.81 Fabric host still fail-fasts while traversing
-them. Win32 continues to exercise Callout through its Paper endpoint.
+The full Accordion story module remains excluded on Windows because registering
+it in the driver-enabled catalog still fail-fasts the RNW 0.81 host. A
+Windows-only Accordion consumer regression lives in the already-stable
+FocusVisual story module and is omitted from broad traversal, so it runs last
+in the authored phase immediately before app cleanup. Callout remains excluded
+from Windows because its Fabric story surface also fail-fasts. Win32 continues
+to exercise Callout through its Paper endpoint.
 
 Storybook's development bundle intentionally contains separate `pretty-format` and `react-is`
 versions used by its internal tooling. They are excluded from the duplicate-module enforcement;
@@ -200,16 +204,19 @@ layout, and future Storybook fixes. Moving those endpoints to the reduced
 Win32 chrome would create a maintained fork and regress features without
 solving a platform problem they currently have.
 
-Nine ListItem stories and seven Accordion stories are omitted from the
-Win32-generated catalog because those components terminate the current REX
-0.81.1 host with fail-fast code `0xC0000409`; macOS continues to include them,
-while Windows also omits Accordion and Callout. The three standalone Callout stories run through the same Paper
-`RCTCallout` implementation as the portal chrome. All 134 included stories
-render through the Win32 control-plane smoke sweep.
-Run `yarn storybook-server --win32` with this endpoint so the server exposes the
-same 134-story index as the app; the ordinary `storybook-server` command keeps the full macOS and Windows catalog.
+Nine ListItem stories and seven Accordion stories declare no Win32 support
+because those components terminate the current REX 0.81.1 host with fail-fast
+code `0xC0000409`; the files remain discoverable and the generated manifest
+records each exclusion explicitly. macOS includes all of them, while Windows
+includes Accordion Default and all ListItem stories. The three standalone
+Callout stories run through the same Paper `RCTCallout` implementation as the
+portal chrome.
+Run `yarn storybook-server --win32` with this endpoint so the server and app
+load the Win32 module catalog. Unsupported Accordion and ListItem selections
+render a safe platform message, while the generated manifest drives the
+143-story supported sweep.
 `yarn storybook smoke --win32` defaults to `--mode stories` and verifies the package-owned desktop regions, resize
-handles, addon surface, the complete 134-story sweep, host liveness, and ownership-safe cleanup. The
+handles, addon surface, the complete supported-story sweep, host liveness, and ownership-safe cleanup. The
 `stories-and-tests` mode then runs the component-authored plans through the
 same source-built Windows helper used by the Fabric endpoint. Logs are written
 beneath `artifacts/win32/smoke-logs`. A native `build --win32` operation is intentionally unsupported because this
@@ -308,4 +315,118 @@ Follow the package-level story authoring instructions in `../../packages/agentic
 `*.stories.tsx` file next to its component; standalone native package story globs are listed explicitly in `src/main.ts`.
 See `../../packages/agentic/components/src/components/button/button.stories.tsx` for the canonical higher-order component example.
 Portable tests are static `parameters.desktopDriver` data with stable `testID`
-selectors; Button, Checkbox, and Input demonstrate the initial contract.
+selectors. The current cohort covers 16 stories across 13 components and the
+FocusZone primitive. Generate and reconcile every platform catalog with:
+
+```sh
+yarn storybook manifest --all
+```
+
+### Platform support and variants
+
+Use `supportedPlatforms` when the story itself is supported on only a subset of
+desktop endpoints. Use a test's `platforms` when the same test body applies to
+only a subset. Use `platformVariants` when one logical test has genuinely
+different `requires` or `steps`; a variant completely replaces both fields
+rather than merging them. Use `traversePlatforms` only when a story must remain
+testable but cannot participate in the broad render sweep; those plans run
+after normally traversed stories so cleanup follows immediately.
+
+```tsx
+desktopDriver: {
+  supportedPlatforms: ['macos', 'windows', 'win32'],
+  traversePlatforms: ['macos', 'windows', 'win32'],
+  version: 1,
+  tests: [
+    {
+      id: 'pointer-activation',
+      requires: ['focus', 'physical-click'],
+      steps: [
+        { action: 'click', target: { testId: 'story-button' } },
+        { expect: { state: 'focused', target: { testId: 'story-button' }, value: true } },
+      ],
+      platformVariants: {
+        macos: {
+          requires: ['physical-click'],
+          steps: [
+            { action: 'click', target: { testId: 'story-button' } },
+            { expect: { state: 'exists', target: { testId: 'story-button' }, value: true } },
+          ],
+        },
+      },
+    },
+  ],
+} satisfies DesktopStoryTests
+```
+
+App-level package patterns remain the outer loadability boundary for modules
+that crash or cannot compile on an endpoint. A story declaration may narrow
+that boundary but cannot widen it. Smoke traversal uses the generated manifest,
+so a declared unsupported story is omitted deliberately even if the raw
+Storybook index can load its module. Manual sidebar selection renders a safe
+platform-support message without invoking the unsupported story.
+
+### Accessibility expectations
+
+Every authored semantic test should assert the public native contract rather
+than React props or implementation slots:
+
+| Component category | Minimum real-platform assertions                                                |
+| ------------------ | ------------------------------------------------------------------------------- |
+| Action             | role, accessible name, enabled state                                            |
+| Toggle             | action minimums plus checked or mixed state before and after activation         |
+| Text input         | role, accessible name, enabled/read-only state where exposed, and value changes |
+| Selection item     | role, accessible name, selected or checked state                                |
+| Disclosure         | button role, accessible name, and expanded state                                |
+| Informational      | semantic role, accessible name when meaningful, and displayed state             |
+
+These assertions complement package Jest tests and do not replace manual
+VoiceOver, Narrator, or NVDA validation.
+
+Platform variants should record verified native normalization rather than
+fabricate web parity. On the current Windows and Win32 hosts, React Native
+exposes Switch as a `button`; Windows Fabric exposes Divider as a named `group`,
+while Win32 Paper and macOS expose it as `separator`. Win32 Paper does not
+currently expose selected state for Card, MenuItem, or Tab, or checked state
+for Radio and Switch, so those variants assert role, name, and enabled state
+without fabricating unavailable values.
+
+### Focus and survival tests
+
+The `focus` capability means that the provider can set and read actual keyboard
+focus. Use the portable `focus` action for focus-visual and crash regressions;
+it works without global physical input. Pointer activation remains a separate
+contract: Windows and Win32 normally move focus after a click, while React
+Native macOS intentionally does not on ordinary mouse-down. Use `pause` for a
+fixed, abortable delay; the focus-crash regressions preserve the original
+3,000 ms post-focus window.
+
+The eleven regressions formerly owned by the Windows Jest smoke harness are
+now component-authored plans. The FocusVisual consumer regression mounts
+Accordion last on Windows; the full Accordion module remains macOS-only, and
+Win32 excludes Accordion and ListItem through explicit platform policy.
+
+### Results, quarantine, and evidence
+
+Runs with failures report `failed`; runs with no executed passing test report
+`incomplete`, so an all-skipped suite is never green. Set
+`FURN_STORYBOOK_REQUIRED_CAPABILITIES` to a comma-separated capability list and
+`FURN_STORYBOOK_REQUIRE_COMPLETE_TESTS=1` on authoritative interactive runners.
+Missing required capabilities then produce an infrastructure error, while
+ordinary hosted-runner limitations remain explicit skips.
+
+A temporary quarantine is static test metadata with `owner`, `issue`, and
+`expires`. Quarantined tests have their own result status, do not count as
+passing coverage, and fail after the expiry date. The repository policy is
+zero automatic retries; investigate the first failure or use a reviewed,
+expiring quarantine.
+
+Each run writes `run.json`, `junit.xml`, `events.ndjson`, `host.json`, per-test
+`result.json`, and bounded failure evidence. Windows and Win32 smoke lifecycles
+also write `ownership.json` after cleanup. CI retains Storybook artifacts for
+14 days. Screenshots are diagnostic evidence, never deterministic assertions,
+and must be reviewed before sharing because they can contain application data.
+
+The legacy `@react-native-windows/automation` Jest harness was retired by
+#4294 on August 31, 2026. The Desktop Driver Storybook pipeline is the only
+supported story-test path.

@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Tag } from './tag';
 import type { TagAppearance, TagLayout, TagShape, TagSize } from './tag.types';
@@ -46,6 +47,7 @@ const meta: Meta<typeof Tag> = {
   title: 'Components/Tag',
   component: Tag,
   args: {
+    accessibilityLabel: 'Tag text',
     appearance: 'secondary',
     content: 'Tag text',
     dismiss: true,
@@ -75,7 +77,37 @@ export default meta;
 
 type Story = StoryObj<typeof Tag>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'accessibility-contract',
+          title: 'Exposes dismissible button semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-tag' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-tag' }, value: 'button' } },
+            { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-tag' }, value: 'Tag text' } },
+            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-tag' }, value: true } },
+          ],
+        },
+        {
+          id: 'focus-survival',
+          title: 'Survives programmatic focus without a delayed native crash',
+          requires: ['focus'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-tag' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'agentic-storybook-tag' }, value: true } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-tag' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
 
 export const Overview: Story = {
   render: () => (

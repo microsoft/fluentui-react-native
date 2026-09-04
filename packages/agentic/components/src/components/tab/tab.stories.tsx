@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Tab } from './tab';
 import type { TabLayout } from './tab.types';
@@ -111,6 +112,7 @@ export const Selected: Story = {
   render: () => (
     <StoryGroup label="Selected">
       <Tab
+        accessibilityLabel="Files"
         controls="files-panel"
         content="Files"
         icon={regularStarIcon}
@@ -119,6 +121,7 @@ export const Selected: Story = {
         testID="agentic-storybook-tab-unselected"
       />
       <Tab
+        accessibilityLabel="Files"
         controls="files-panel"
         content="Files"
         icon={regularStarIcon}
@@ -128,7 +131,44 @@ export const Selected: Story = {
       />
     </StoryGroup>
   ),
+  tags: ['desktop-e2e'],
   parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'accessibility-contract',
+          title: 'Exposes selected tab semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-tab-selected' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-tab-selected' }, value: 'tab' } },
+            { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-tab-selected' }, value: 'Files' } },
+            { expect: { state: 'selected', target: { testId: 'agentic-storybook-tab-selected' }, value: true } },
+          ],
+          platformVariants: {
+            win32: {
+              steps: [
+                { action: 'wait', target: { testId: 'agentic-storybook-tab-selected' } },
+                { expect: { state: 'role', target: { testId: 'agentic-storybook-tab-selected' }, value: 'tab' } },
+                { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-tab-selected' }, value: 'Files' } },
+                { expect: { state: 'enabled', target: { testId: 'agentic-storybook-tab-selected' }, value: true } },
+              ],
+            },
+          },
+        },
+        {
+          id: 'focus-survival',
+          title: 'Survives programmatic focus without a delayed native crash',
+          requires: ['focus'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-tab-selected' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'agentic-storybook-tab-selected' }, value: true } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-tab-selected' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'Selected toggles the heavy background, semibold label weight, and filled icon.',

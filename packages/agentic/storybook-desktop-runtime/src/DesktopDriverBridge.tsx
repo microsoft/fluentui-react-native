@@ -21,6 +21,7 @@ export function DesktopDriverBridge(): null {
   React.useEffect(() => {
     if (
       !runtimeInstance?.bridgeNonce ||
+      !runtimeInstance.catalogSetDigest ||
       !runtimeInstance.endpoint ||
       !runtimeInstance.instanceId ||
       !runtimeInstance.platformManifestDigest ||
@@ -34,6 +35,7 @@ export function DesktopDriverBridge(): null {
         endpoint: runtimeInstance.endpoint,
         instanceId: runtimeInstance.instanceId,
         nonce: runtimeInstance.bridgeNonce,
+        catalogSetDigest: runtimeInstance.catalogSetDigest,
         platformManifestDigest: runtimeInstance.platformManifestDigest,
         targetId: runtimeInstance.targetId,
         version: 1,

@@ -1,6 +1,10 @@
 import path from 'node:path';
 
-import type { DesktopStoryRunResult } from '@fluentui-react-native/desktop-driver/authoring';
+import {
+  desktopStoryCapabilities,
+  type DesktopStoryCapability,
+  type DesktopStoryRunResult,
+} from '@fluentui-react-native/desktop-driver/authoring';
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
 import type { DesktopWebdriverOptions, DesktopWebdriverSession } from '@fluentui-react-native/desktop-driver/wdio';
 
@@ -15,6 +19,8 @@ export type DesktopStorybookSmokeTestOptions = {
   driverUrl: string;
   platform: Platforms;
   projectRoot: string;
+  requireComplete?: boolean;
+  requiredCapabilities?: readonly DesktopStoryCapability[];
   targetId: string;
 };
 
@@ -34,11 +40,12 @@ export async function runDesktopStorybookSmokeTests(
   try {
     result = await desktop.runStoryTests({
       artifactsRoot: options.artifactsRoot ?? path.join(options.projectRoot, 'artifacts', options.platform, 'desktop-driver'),
+      requiredCapabilities: options.requiredCapabilities ?? parseRequiredCapabilities(process.env.FURN_STORYBOOK_REQUIRED_CAPABILITIES),
       selection: {
-        story: 'components-*--default',
         tag: 'desktop-e2e',
       },
     });
+    runFailure = getSmokeTestFailure(result, options);
   } catch (error) {
     runFailure = error;
   }
@@ -55,22 +62,50 @@ export async function runDesktopStorybookSmokeTests(
   if (runFailure !== undefined) {
     throw runFailure;
   }
-  if (!result) {
-    throw new Error('Desktop story tests completed without a result.');
-  }
-  if (result.status !== 'passed') {
-    const failedTests = result.tests.filter(({ status }) => status !== 'passed' && status !== 'skipped');
-    throw new Error(
-      `${failedTests.length} of ${result.tests.length} desktop story tests failed: ${failedTests
-        .map(({ status, storyId, testId }) => `${storyId}/${testId} (${status})`)
-        .join(', ')}`,
-    );
-  }
-  return result;
+  return result!;
 }
 
 export function formatDesktopStorybookSmokeTestSummary(result: DesktopStoryRunResult): string {
-  const passed = result.tests.filter(({ status }) => status === 'passed').length;
-  const skipped = result.tests.filter(({ status }) => status === 'skipped').length;
-  return `Ran ${result.tests.length} desktop story tests (${passed} passed, ${skipped} skipped).`;
+  return `Ran ${result.summary.selected} desktop story tests (${result.summary.passed} passed, ${result.summary.skipped} skipped, ${result.summary.quarantined} quarantined).`;
+}
+
+function parseRequiredCapabilities(value: string | undefined): DesktopStoryCapability[] {
+  if (!value) {
+    return [];
+  }
+  const capabilities = [
+    ...new Set(
+      value
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean),
+    ),
+  ];
+  const unsupported = capabilities.find(
+    (capability): capability is string => !desktopStoryCapabilities.includes(capability as DesktopStoryCapability),
+  );
+  if (unsupported) {
+    throw new Error(`FURN_STORYBOOK_REQUIRED_CAPABILITIES contains unsupported capability "${unsupported}".`);
+  }
+  return capabilities as DesktopStoryCapability[];
+}
+
+function getSmokeTestFailure(result: DesktopStoryRunResult | undefined, options: DesktopStorybookSmokeTestOptions): Error | undefined {
+  if (!result) {
+    return new Error('Desktop story tests completed without a result.');
+  }
+  if (result.status !== 'passed') {
+    const failedTests = result.tests.filter(({ status }) => !['passed', 'quarantined', 'skipped'].includes(status));
+    const failureDetail =
+      failedTests.length > 0
+        ? failedTests.map(({ status, storyId, testId }) => `${storyId}/${testId} (${status})`).join(', ')
+        : `${result.summary.skipped} skipped and ${result.summary.quarantined} quarantined`;
+    return new Error(`Desktop story tests finished with status ${result.status}: ${failureDetail}`);
+  }
+  const requireComplete = options.requireComplete ?? process.env.FURN_STORYBOOK_REQUIRE_COMPLETE_TESTS === '1';
+  return requireComplete && (result.summary.skipped > 0 || result.summary.quarantined > 0)
+    ? new Error(
+        `Desktop story test qualification requires complete coverage, but ${result.summary.skipped} tests skipped and ${result.summary.quarantined} are quarantined.`,
+      )
+    : undefined;
 }

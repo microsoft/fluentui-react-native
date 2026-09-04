@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Button } from '../button/button';
 import { ListItem } from './list-item';
@@ -74,7 +75,15 @@ export default meta;
 
 type Story = StoryObj<typeof ListItem>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos', 'windows'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
+  },
+};
 
 export const Overview: Story = {
   render: () => (
@@ -127,6 +136,11 @@ export const Overview: Story = {
     </View>
   ),
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos', 'windows'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'A grouped scan of the main size, selection, leading content, and trailing action axes.',
@@ -138,6 +152,7 @@ export const Overview: Story = {
 export const SelectedFocus: Story = {
   render: () => (
     <ListItem
+      accessibilityLabel="Selected"
       content="Selected"
       icon={regularStarIcon}
       selected
@@ -146,7 +161,41 @@ export const SelectedFocus: Story = {
       testID="agentic-storybook-list-item-selected"
     />
   ),
+  tags: ['desktop-e2e'],
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos', 'windows'],
+      version: 1,
+      tests: [
+        {
+          id: 'accessibility-contract',
+          title: 'Exposes selected list-item semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-list-item-selected' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-list-item-selected' }, value: 'button' } },
+            {
+              expect: {
+                state: 'accessibleName',
+                target: { testId: 'agentic-storybook-list-item-selected' },
+                value: 'Selected',
+              },
+            },
+            { expect: { state: 'selected', target: { testId: 'agentic-storybook-list-item-selected' }, value: true } },
+          ],
+        },
+        {
+          id: 'focus-survival',
+          title: 'Survives programmatic focus without a delayed native crash',
+          requires: ['focus'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-list-item-selected' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'agentic-storybook-list-item-selected' }, value: true } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-list-item-selected' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'A selected row with a stable native selector for keyboard-focus regression coverage.',
@@ -164,6 +213,11 @@ export const SecondaryPosition: Story = {
     </StoryGroup>
   ),
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos', 'windows'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'Right keeps the row compact. Under stacks longer supporting content below the label.',
@@ -181,6 +235,11 @@ export const SelectionMode: Story = {
     </StoryGroup>
   ),
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos', 'windows'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'Selection mode controls whether the row renders the presentational selection indicator.',
@@ -197,6 +256,11 @@ export const Selected: Story = {
     </StoryGroup>
   ),
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos', 'windows'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'Selected swaps the primary label to semibold and can swap the leading icon when a filled variant is provided.',
@@ -228,6 +292,11 @@ export const ExternallyDrivenSelection: Story = {
     return <Picker />;
   },
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos', 'windows'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story:
@@ -245,6 +314,11 @@ export const Disabled: Story = {
     </StoryGroup>
   ),
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos', 'windows'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'Disabled rows are unavailable and do not receive focus.',
@@ -265,6 +339,11 @@ export const ConstrainedContent: Story = {
     </StoryGroup>
   ),
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos', 'windows'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'ListItem content and secondary content can still reflow when the row is constrained by its parent.',

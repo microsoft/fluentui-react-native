@@ -15,6 +15,7 @@ export type DesktopStorybookDriverManifest = {
   };
   appName: string;
   bridgeNonce: string;
+  catalogSetDigest: string;
   displayName: string;
   driverPort: number;
   endpoint: Platforms;
@@ -62,6 +63,7 @@ export function createDesktopStorybookDriverManifest({
     }),
     appName: config.appName,
     bridgeNonce,
+    catalogSetDigest: storyManifest.catalogSetDigest,
     displayName: config.displayName,
     driverPort: instance.driverPort,
     endpoint: platform,

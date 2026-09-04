@@ -139,11 +139,43 @@ export const Default: Story = {
 
 Keep the plan a static JSON literal. Storybook extracts it without importing
 the React Native module, so variables, functions, spreads, computed properties,
-and runtime platform branches are rejected. Express real differences with
-`platforms`, `requires`, and explicit skip results. Use `testID` for actions;
+and runtime platform branches are rejected. Use `supportedPlatforms` when the
+story itself is unavailable on an endpoint, `platforms` when one test body
+applies to a subset, and `platformVariants` when one logical test needs
+different `requires` or `steps`. A platform variant replaces both fields
+completely. Use `traversePlatforms` only for a supported test-only story that
+must be omitted from the broad render sweep; its tests run after normally
+traversed stories. App-level story globs remain the outer boundary for files
+that cannot safely load. Use `testID` for actions;
 use role, accessible name, state, and value assertions to verify the public
-accessibility contract. Button, Checkbox, and Input defaults are the canonical
-initial examples.
+accessibility contract.
+
+Every semantic plan should cover the minimum contract for its category:
+
+| Category       | Minimum assertions                                                        |
+| -------------- | ------------------------------------------------------------------------- |
+| Action         | role, accessible name, enabled                                            |
+| Toggle         | action minimums plus checked or mixed state and the activation transition |
+| Text input     | role, accessible name, enabled/read-only when exposed, and value          |
+| Selection item | role, accessible name, selected or checked                                |
+| Disclosure     | button role, accessible name, expanded                                    |
+| Informational  | semantic role, meaningful name when present, displayed                    |
+
+Keep package Jest coverage for prop propagation and local focusability defaults.
+Story plans prove the normalized native accessibility tree. Manual assistive
+technology validation remains a separate requirement.
+
+The `focus` capability supports deterministic native focus plus focus-state
+queries. Use `{ action: 'focus', target }` for focus visuals, Tab-start state,
+and delayed crash regressions without depending on global input. Do not assume
+pointer activation moves focus on every endpoint: Windows and Win32 normally
+do, whereas React Native macOS does not on ordinary mouse-down. Use a macOS
+`platformVariants` entry when pointer behavior itself differs. Use
+`{ action: 'pause', durationMs }` for fixed abortable survival windows.
+
+Temporary quarantines require static `owner`, `issue`, and `expires` metadata.
+They do not count as passing coverage and must not replace a capability
+declaration.
 
 Button uses focused appearance, size, shape, icon, selection, disabled, and constrained-content stories. Icon uses a
 source and size overview plus focused font, image, SVG, size, color, and accessibility stories.

@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Accordion } from './accordion';
 import type { AccordionLayout } from './accordion.types';
@@ -29,6 +30,7 @@ const meta: Meta<typeof Accordion> = {
   title: 'Components/Accordion',
   component: Accordion,
   args: {
+    accessibilityLabel: 'Accordion title',
     defaultExpanded: false,
     layout: 'chevronStart',
   },
@@ -52,7 +54,35 @@ export default meta;
 type Story = StoryObj<typeof Accordion>;
 
 export const Default: Story = {
+  tags: ['desktop-e2e'],
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos'],
+      version: 1,
+      tests: [
+        {
+          id: 'accessibility-contract',
+          title: 'Exposes disclosure semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'accordion-header' } },
+            { expect: { state: 'role', target: { testId: 'accordion-header' }, value: 'button' } },
+            { expect: { state: 'accessibleName', target: { testId: 'accordion-header' }, value: 'Accordion title' } },
+            { expect: { state: 'expanded', target: { testId: 'accordion-header' }, value: false } },
+          ],
+        },
+        {
+          id: 'activation-survival',
+          title: 'Expands without a delayed native crash',
+          requires: ['physical-click'],
+          steps: [
+            { action: 'click', target: { testId: 'accordion-header' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'accordion-header' }, value: true } },
+            { expect: { state: 'expanded', target: { testId: 'accordion-header' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'The default Accordion renders a visible title, a default leading icon, and a collapsed body panel.',
@@ -75,6 +105,11 @@ export const Overview: Story = {
     </View>
   ),
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'A grouped scan of the main layout and expanded-state variants.',
@@ -92,6 +127,11 @@ export const Layout: Story = {
     </StoryGroup>
   ),
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'ChevronStart places the expand affordance before the title; ChevronEnd pushes it to the trailing edge.',
@@ -117,6 +157,11 @@ export const Expanded: Story = {
     </View>
   ),
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'Expanded reveals the body content area and rotates the chevron down.',
@@ -146,6 +191,11 @@ export const ExternallyDrivenExpansion: Story = {
     return <Group />;
   },
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story:
@@ -171,6 +221,11 @@ export const BodyContent: Story = {
     />
   ),
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'The bodyContent slot accepts any free-form View-compatible content.',
@@ -186,6 +241,11 @@ export const Accessibility: Story = {
     defaultExpanded: false,
   },
   parameters: {
+    desktopDriver: {
+      supportedPlatforms: ['macos'],
+      tests: [],
+      version: 1,
+    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story:

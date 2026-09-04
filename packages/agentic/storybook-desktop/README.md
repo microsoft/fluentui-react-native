@@ -137,15 +137,20 @@ platform. See [`src/cli/README.md`](src/cli/README.md) for the recommended minim
 and agent workflows.
 
 `manifest` statically extracts the selected platform's stories and serializable
-`parameters.desktopDriver` plans, then writes exact-platform and portable-plan
-digests. `instance` prints the enlistment-specific channel, Metro, and driver
+`parameters.desktopDriver` plans. `manifest --all` writes every configured
+platform manifest plus `story-manifest.catalog.json`, and fails unless the
+catalog-set and raw portable-plan digests reconcile. Each endpoint retains its
+own resolved platform-manifest digest. `instance` prints the enlistment-specific channel, Metro, and driver
 identity. `driver` starts the Storybook channel/MCP server and the W3C Desktop
 Driver listener on separate loopback ports in one Node process. It resolves the
 verified native helper before starting Metro and registers a process-backed
 target. The deterministic fake host remains test-only.
 
-Component authors tag portable plans with `desktop-e2e`. Button, Checkbox, and
-Input provide the initial examples. Plan extraction evaluates only the inline
+Component authors tag portable plans with `desktop-e2e`. Story-level
+`supportedPlatforms` narrows catalog membership, test `platforms` selects an
+unchanged subset, and `platformVariants` completely replaces one endpoint's
+requirements and steps. `traversePlatforms` keeps a supported story out of the
+broad render sweep and schedules its authored tests last. Plan extraction evaluates only the inline
 static `desktopDriver` literal and supports TypeScript `satisfies`; dynamic
 values fail with source context instead of being omitted.
 
@@ -172,7 +177,7 @@ builds the generated app, registers and launches its Debug package, starts the c
 the processes it recorded. `createWin32SmokeCommand` bundles and launches the configured REX host, verifies the shared
 desktop chrome, resize handles, and addon surface through the configured test-ID prefix, traverses every story, and
 performs the same ownership-safe cleanup. `--mode stories` is the default renderability gate;
-`--mode stories-and-tests` performs the same complete traversal and then runs every `desktop-e2e` authored plan through
+`--mode stories-and-tests` traverses the generated platform manifest and then runs every `desktop-e2e` authored plan through
 the native provider. Storybook owns app launch and supplies an exact
 nonce-bound process lease; WebDriver attaches and preserves the app until the
 Storybook lifecycle performs final cleanup.
@@ -182,7 +187,13 @@ before creating the attached WebDriver session.
 Consumers provide only native identity, title, test-ID prefix, and optional required story IDs.
 The Windows helper also records React Native Test App's Debug Metro port (`8081` by default), while Storybook and
 Desktop Driver ports remain enlistment-specific.
-Artifacts are written beneath the consuming app's `artifacts/windows` or `artifacts/win32` directory.
+Artifacts are written beneath the consuming app's platform artifact directory.
+Authored runs include `run.json`, `junit.xml`, `events.ndjson`, `host.json`,
+per-test results, and bounded failure evidence. The package-owned Windows and
+Win32 lifecycles additionally persist `ownership.json` after cleanup.
+`run.json` carries the shared catalog digest alongside portable-plan and
+exact-platform digests so endpoint results can be reconciled without requiring
+identical catalogs.
 
 The Windows Fabric lifecycle restarts only its exact owned app after the full
 catalog traversal, then rewrites the nonce-bound application lease and runs

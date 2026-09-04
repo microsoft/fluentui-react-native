@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
+import type { PressableProps } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
 import {
@@ -18,6 +19,11 @@ import type { AccordionProps, AccordionState } from './accordion.types';
 const defaultTitle = 'Section title';
 const defaultLeadingIconSource = semanticIconSources.selectedCircle;
 const defaultChevronSource = semanticIconSources.chevron;
+
+type NativeFocusPressableProps = PressableProps & {
+  accessibilityControls?: string;
+  enableFocusRing: boolean;
+};
 
 /**
  * Creates the resolved Accordion state, accessibility, interaction, and slots.
@@ -43,6 +49,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
   const expansion = useToggleState({ value: expandedProp, defaultValue: defaultExpanded, onChange: onExpandedChange });
   const resolvedExpanded = expansion.value;
   const bodyId = React.useId().replace(/:/g, '');
+  const supportsAccessibilityRelationship = Platform.OS !== 'windows' && Platform.OS !== ('win32' as any);
 
   useAccessibilityLabelWarning({
     accessibilityLabel,
@@ -54,8 +61,8 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
   const toggleExpanded = expansion.toggle;
 
   const themeState = useThemeState();
-  const [headerProps, pressableState] = usePressableState({
-    accessibilityControls: bodyId,
+  const nativeHeaderProps: NativeFocusPressableProps = {
+    ...(supportsAccessibilityRelationship ? { accessibilityControls: bodyId } : {}),
     accessibilityHint,
     accessibilityLabel,
     accessibilityRole: 'button',
@@ -64,11 +71,12 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
       expanded: resolvedExpanded,
     },
     accessible: true,
-    'aria-controls': bodyId,
-    'aria-expanded': resolvedExpanded,
+    // RNW 0.81 crashes when its native focus ring creates border visuals after mount.
+    enableFocusRing: false,
     focusable: true,
     onPress: toggleExpanded,
-  });
+  };
+  const [headerProps, pressableState] = usePressableState(nativeHeaderProps);
 
   const root = useSlot(View, {
     ...rootProps,
@@ -100,7 +108,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
   const body = useSlot(View, {
     accessibilityElementsHidden: !resolvedExpanded,
     accessible: false,
-    id: bodyId,
+    ...(supportsAccessibilityRelationship ? { id: bodyId } : {}),
     importantForAccessibility: resolvedExpanded ? undefined : 'no-hide-descendants',
     testID: 'accordion-body',
   });

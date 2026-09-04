@@ -74,13 +74,18 @@ function writeRuntimeInstanceModule(projectRoot) {
   const storybookPort = readPort(process.env.STORYBOOK_WS_PORT, 7007);
   const instanceId = process.env.FURN_STORYBOOK_INSTANCE_ID || 'default';
   const driverManifest = readDriverManifest(process.env.STORYBOOK_DRIVER_MANIFEST);
+  const endpoint =
+    driverManifest?.endpoint ||
+    process.env.FURN_STORYBOOK_PLATFORM ||
+    (process.platform === 'darwin' ? 'macos' : process.platform === 'win32' ? 'windows' : undefined);
   const runtimeInstance = {
     instanceId,
     storybookPort,
+    ...(endpoint ? { endpoint } : {}),
     ...(driverManifest
       ? {
           bridgeNonce: driverManifest.bridgeNonce,
-          endpoint: driverManifest.endpoint,
+          catalogSetDigest: driverManifest.catalogSetDigest,
           platformManifestDigest: driverManifest.platformManifestDigest,
           portablePlanDigest: driverManifest.portablePlanDigest,
           targetId: driverManifest.targetId,

@@ -39,9 +39,10 @@ export type DesktopStoryExpectation = {
 
 export type DesktopStoryStep =
   | { action: 'actions'; sequences: readonly WebDriverActionSequence[] }
-  | { action: 'clear' | 'click' | 'doubleClick'; target: DesktopStorySelector }
+  | { action: 'clear' | 'click' | 'doubleClick' | 'focus'; target: DesktopStorySelector }
   | { action: 'keys'; value: readonly string[] }
   | { action: 'note'; message: string }
+  | { action: 'pause'; durationMs: number }
   | { action: 'screenshot'; name: string; target?: DesktopStorySelector }
   | { action: 'scroll'; deltaX?: number; deltaY: number; target?: DesktopStorySelector }
   | { action: 'setArgs'; args: Readonly<Record<string, unknown>> }
@@ -50,9 +51,23 @@ export type DesktopStoryStep =
   | { action: 'wait'; target?: DesktopStorySelector; timeoutMs?: number; until?: DesktopStoryExpectation }
   | { expect: DesktopStoryExpectation };
 
+export type DesktopStoryQuarantine = {
+  expires: string;
+  issue: string;
+  owner: string;
+  reason?: string;
+};
+
+export type DesktopStoryTestVariant = {
+  requires?: readonly DesktopStoryCapability[];
+  steps: readonly DesktopStoryStep[];
+};
+
 export type DesktopStoryTest = {
   id: string;
+  platformVariants?: Partial<Record<DesktopStoryPlatform, DesktopStoryTestVariant>>;
   platforms?: readonly DesktopStoryPlatform[];
+  quarantine?: DesktopStoryQuarantine;
   requires?: readonly DesktopStoryCapability[];
   steps: readonly DesktopStoryStep[];
   title?: string;
@@ -60,7 +75,9 @@ export type DesktopStoryTest = {
 
 export type DesktopStoryTests = {
   portable?: boolean;
+  supportedPlatforms?: readonly DesktopStoryPlatform[];
   tests: readonly DesktopStoryTest[];
+  traversePlatforms?: readonly DesktopStoryPlatform[];
   version: 1;
 };
 
@@ -77,28 +94,67 @@ export function defineDesktopStoryTests(plan: DesktopStoryTests): DesktopStoryTe
 
 export function validateDesktopStoryTests(value: unknown, source = 'desktopDriver'): DesktopStoryTests {
   const plan = requireObject(value, source);
-  requireExactKeys(plan, ['portable', 'tests', 'version'], source);
+  requireExactKeys(plan, ['portable', 'supportedPlatforms', 'tests', 'traversePlatforms', 'version'], source);
   if (plan.version !== 1) {
     throw new TypeError(`${source}.version must be 1.`);
   }
   if (plan.portable !== undefined && typeof plan.portable !== 'boolean') {
     throw new TypeError(`${source}.portable must be a boolean when provided.`);
   }
+  validateEnumArray(plan.supportedPlatforms, desktopStoryPlatforms, `${source}.supportedPlatforms`);
+  validateEnumArray(plan.traversePlatforms, desktopStoryPlatforms, `${source}.traversePlatforms`, true);
   if (!Array.isArray(plan.tests)) {
     throw new TypeError(`${source}.tests must be an array.`);
   }
 
   const ids = new Set<string>();
-  for (const [index, value] of plan.tests.entries()) {
-    validateTest(value, `${source}.tests[${index}]`, ids);
+  const supportedPlatforms = (plan.supportedPlatforms as readonly DesktopStoryPlatform[] | undefined) ?? desktopStoryPlatforms;
+  const traversePlatforms = (plan.traversePlatforms as readonly DesktopStoryPlatform[] | undefined) ?? supportedPlatforms;
+  assertSubset(traversePlatforms, supportedPlatforms, `${source}.traversePlatforms`, `${source}.supportedPlatforms`);
+  for (const [index, testValue] of plan.tests.entries()) {
+    const test = validateTest(testValue, `${source}.tests[${index}]`, ids);
+    const testPlatforms = (test.platforms as readonly DesktopStoryPlatform[] | undefined) ?? supportedPlatforms;
+    assertSubset(testPlatforms, supportedPlatforms, `${source}.tests[${index}].platforms`, `${source}.supportedPlatforms`);
+    if (test.platformVariants !== undefined) {
+      const variants = test.platformVariants as Record<string, unknown>;
+      const variantPlatforms = Object.keys(variants) as DesktopStoryPlatform[];
+      assertSubset(variantPlatforms, testPlatforms, `${source}.tests[${index}].platformVariants`, `${source}.tests[${index}].platforms`);
+    }
   }
   assertJsonValue(value, source);
   return value as DesktopStoryTests;
 }
 
-function validateTest(value: unknown, source: string, ids: Set<string>): void {
+export function resolveDesktopStoryTests(plan: DesktopStoryTests, platform: DesktopStoryPlatform): DesktopStoryTests | undefined {
+  if (plan.supportedPlatforms && !plan.supportedPlatforms.includes(platform)) {
+    return undefined;
+  }
+
+  const tests = plan.tests
+    .filter((test) => !test.platforms || test.platforms.includes(platform))
+    .map((test) => {
+      const { platformVariants, platforms: _platforms, ...base } = test;
+      const variant = platformVariants?.[platform];
+      if (!variant) {
+        return base;
+      }
+      const { requires: _requires, steps: _steps, ...identity } = base;
+      return {
+        ...identity,
+        ...(variant.requires ? { requires: variant.requires } : {}),
+        steps: variant.steps,
+      };
+    });
+
+  return {
+    ...plan,
+    tests,
+  };
+}
+
+function validateTest(value: unknown, source: string, ids: Set<string>): Record<string, unknown> {
   const test = requireObject(value, source);
-  requireExactKeys(test, ['id', 'platforms', 'requires', 'steps', 'title'], source);
+  requireExactKeys(test, ['id', 'platformVariants', 'platforms', 'quarantine', 'requires', 'steps', 'title'], source);
   if (typeof test.id !== 'string' || !test.id) {
     throw new TypeError(`${source}.id must be a non-empty string.`);
   }
@@ -111,12 +167,10 @@ function validateTest(value: unknown, source: string, ids: Set<string>): void {
   }
   validateEnumArray(test.platforms, desktopStoryPlatforms, `${source}.platforms`);
   validateEnumArray(test.requires, desktopStoryCapabilities, `${source}.requires`);
-  if (!Array.isArray(test.steps) || test.steps.length === 0) {
-    throw new TypeError(`${source}.steps must be a non-empty array.`);
-  }
-  for (const [index, step] of test.steps.entries()) {
-    validateStep(step, `${source}.steps[${index}]`);
-  }
+  validateSteps(test.steps, `${source}.steps`);
+  validatePlatformVariants(test.platformVariants, `${source}.platformVariants`);
+  validateQuarantine(test.quarantine, `${source}.quarantine`);
+  return test;
 }
 
 function validateStep(value: unknown, source: string): void {
@@ -144,6 +198,7 @@ function validateStep(value: unknown, source: string): void {
     case 'clear':
     case 'click':
     case 'doubleClick':
+    case 'focus':
       requireExactKeys(step, ['action', 'target'], source);
       validateSelector(step.target, `${source}.target`);
       return;
@@ -156,6 +211,12 @@ function validateStep(value: unknown, source: string): void {
     case 'note':
       requireExactKeys(step, ['action', 'message'], source);
       requireNonEmptyString(step.message, `${source}.message`);
+      return;
+    case 'pause':
+      requireExactKeys(step, ['action', 'durationMs'], source);
+      if (!Number.isInteger(step.durationMs) || (step.durationMs as number) < 0) {
+        throw new TypeError(`${source}.durationMs must be a non-negative integer.`);
+      }
       return;
     case 'screenshot':
       requireExactKeys(step, ['action', 'name', 'target'], source);
@@ -286,12 +347,70 @@ function validateSelector(value: unknown, source: string): void {
   }
 }
 
-function validateEnumArray<T extends string>(value: unknown, allowed: readonly T[], source: string): void {
+function validateEnumArray<T extends string>(value: unknown, allowed: readonly T[], source: string, allowEmpty = false): void {
   if (value === undefined) {
     return;
   }
   if (!Array.isArray(value) || !value.every((item) => typeof item === 'string' && allowed.includes(item as T))) {
     throw new TypeError(`${source} contains an unsupported value.`);
+  }
+  if (!allowEmpty && value.length === 0) {
+    throw new TypeError(`${source} must not be empty.`);
+  }
+  if (new Set(value).size !== value.length) {
+    throw new TypeError(`${source} must not contain duplicate values.`);
+  }
+}
+
+function validateSteps(value: unknown, source: string): void {
+  if (!Array.isArray(value) || value.length === 0) {
+    throw new TypeError(`${source} must be a non-empty array.`);
+  }
+  for (const [index, step] of value.entries()) {
+    validateStep(step, `${source}[${index}]`);
+  }
+}
+
+function validatePlatformVariants(value: unknown, source: string): void {
+  if (value === undefined) {
+    return;
+  }
+  const variants = requireObject(value, source);
+  requireExactKeys(variants, desktopStoryPlatforms, source);
+  if (Object.keys(variants).length === 0) {
+    throw new TypeError(`${source} must not be empty.`);
+  }
+  for (const [platform, variantValue] of Object.entries(variants)) {
+    const variant = requireObject(variantValue, `${source}.${platform}`);
+    requireExactKeys(variant, ['requires', 'steps'], `${source}.${platform}`);
+    validateEnumArray(variant.requires, desktopStoryCapabilities, `${source}.${platform}.requires`);
+    validateSteps(variant.steps, `${source}.${platform}.steps`);
+  }
+}
+
+function validateQuarantine(value: unknown, source: string): void {
+  if (value === undefined) {
+    return;
+  }
+  const quarantine = requireObject(value, source);
+  requireExactKeys(quarantine, ['expires', 'issue', 'owner', 'reason'], source);
+  requireNonEmptyString(quarantine.owner, `${source}.owner`);
+  requireNonEmptyString(quarantine.issue, `${source}.issue`);
+  requireNonEmptyString(quarantine.expires, `${source}.expires`);
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(quarantine.expires as string);
+  const date = match && new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
+  if (!match || !date || date.toISOString().slice(0, 10) !== quarantine.expires) {
+    throw new TypeError(`${source}.expires must be a valid YYYY-MM-DD date.`);
+  }
+  if (quarantine.reason !== undefined) {
+    requireNonEmptyString(quarantine.reason, `${source}.reason`);
+  }
+}
+
+function assertSubset(values: readonly string[], allowed: readonly string[], source: string, allowedSource: string): void {
+  const unsupported = values.find((value) => !allowed.includes(value));
+  if (unsupported) {
+    throw new TypeError(`${source} contains "${unsupported}", which is not included by ${allowedSource}.`);
   }
 }
 

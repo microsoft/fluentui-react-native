@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Radio } from './radio';
 
@@ -23,6 +24,7 @@ const meta: Meta<typeof Radio> = {
   title: 'Components/Radio',
   component: Radio,
   args: {
+    accessibilityLabel: 'Radio option',
     label: 'Radio option',
     secondaryText: 'Additional detail',
     selected: false,
@@ -50,7 +52,48 @@ export default meta;
 
 type Story = StoryObj<typeof Radio>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'accessibility-contract',
+          title: 'Exposes radio semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-radio' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-radio' }, value: 'radio' } },
+            { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-radio' }, value: 'Radio option' } },
+            { expect: { state: 'checked', target: { testId: 'agentic-storybook-radio' }, value: false } },
+            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-radio' }, value: true } },
+          ],
+          platformVariants: {
+            win32: {
+              steps: [
+                { action: 'wait', target: { testId: 'agentic-storybook-radio' } },
+                { expect: { state: 'role', target: { testId: 'agentic-storybook-radio' }, value: 'radio' } },
+                { expect: { state: 'accessibleName', target: { testId: 'agentic-storybook-radio' }, value: 'Radio option' } },
+                { expect: { state: 'enabled', target: { testId: 'agentic-storybook-radio' }, value: true } },
+              ],
+            },
+          },
+        },
+        {
+          id: 'focus-survival',
+          title: 'Survives programmatic focus without a delayed native crash',
+          requires: ['focus'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-radio' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'agentic-storybook-radio' }, value: true } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-radio' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
 
 export const Overview: Story = {
   render: ({ label, secondaryText }) => (

@@ -55,6 +55,7 @@ class FakeChannelServer implements StorybookChannelServer {
 }
 
 const storyManifest: DesktopStoryManifest = {
+  catalogSetDigest: 'catalog-digest',
   endpoint: 'windows',
   entries: [
     {
@@ -62,13 +63,15 @@ const storyManifest: DesktopStoryManifest = {
       name: 'Default',
       packageName: '@fluentui-react-native/components',
       sourcePath: 'src/components/button/button.stories.tsx',
+      supportedPlatforms: ['macos', 'windows', 'win32'],
       tags: ['story'],
       title: 'Components/Button',
     },
   ],
+  excluded: [],
   platformManifestDigest: 'platform-digest',
   portablePlanDigest: 'portable-digest',
-  schemaVersion: 1,
+  schemaVersion: 2,
 };
 
 const driverManifest: DesktopStorybookDriverManifest = {
@@ -79,6 +82,7 @@ const driverManifest: DesktopStorybookDriverManifest = {
   },
   appName: 'AgenticStorybook',
   bridgeNonce: 'nonce',
+  catalogSetDigest: storyManifest.catalogSetDigest,
   displayName: 'Agentic Components Storybook',
   driverPort: 4444,
   endpoint: 'windows',
@@ -100,7 +104,7 @@ const driverManifest: DesktopStorybookDriverManifest = {
     schemaVersion: 1,
     signing: { mode: 'none' },
     sourceDigest: 'source',
-    wireProtocol: { major: 1, minor: 0 },
+    wireProtocol: { major: 1, minor: 1 },
   },
   platformManifestDigest: storyManifest.platformManifestDigest,
   portablePlanDigest: storyManifest.portablePlanDigest,
@@ -126,6 +130,7 @@ describe('StorybookChannelOrchestrator', () => {
       timeoutMs: 1000,
     });
     client.receive('furn:desktop:hello', {
+      catalogSetDigest: 'catalog-digest',
       endpoint: 'windows',
       instanceId: 'instance',
       nonce: 'nonce',
@@ -179,6 +184,7 @@ describe('StorybookChannelOrchestrator', () => {
       timeoutMs: 1000,
     });
     client.receive('furn:desktop:hello', {
+      catalogSetDigest: 'catalog-digest',
       endpoint: 'windows',
       instanceId: 'instance',
       nonce: 'nonce',
@@ -245,6 +251,7 @@ describe('StorybookChannelOrchestrator', () => {
       timeoutMs: 10,
     });
     client.receive('furn:desktop:hello', {
+      catalogSetDigest: 'catalog-digest',
       endpoint: 'windows',
       instanceId: 'instance',
       nonce: 'nonce',

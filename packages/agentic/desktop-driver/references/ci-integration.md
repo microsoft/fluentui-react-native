@@ -111,6 +111,20 @@ registered host policy. The authored input plans therefore report explicit
 capability skips; interactive self-hosted qualification must leave those
 features enabled.
 
+The portable `JS PR` job separately runs the full fake semantic cohort,
+`storybook manifest --all`, and macOS, Windows, and Win32 bundles. The manifest
+set must share one catalog-set digest and one raw portable-plan digest while
+retaining distinct resolved platform-manifest digests.
+
+An authoritative interactive job passes
+`required-capabilities` to `.github/actions/setup-desktop-driver`. The action
+sets `FURN_STORYBOOK_REQUIRED_CAPABILITIES`; unavailable authority then reports
+a run-level infrastructure error. Set `require-complete-tests: 'true'` as well
+when any skip or quarantine must prevent qualification. Hosted Windows and
+Win32 require deterministic native focus so the focus-crash cohort executes,
+while retaining explicit skips for unavailable global keyboard and pointer
+input.
+
 Those jobs are consumer examples, not generic package requirements. The native
 helper itself does not require CocoaPods, the Windows App Runtime, or a
 Storybook process.
@@ -154,6 +168,20 @@ click, keyboard, wheel, and DPI behavior.
 Windows Graphics Capture and UI Automation results should be retained with the
 run metadata. App-specific prerequisites such as Windows App Runtime are the
 consumer's responsibility, not the driver's.
+
+## Flake, quarantine, and artifact policy
+
+- Do not retry authored tests automatically. Preserve the first failure and its
+  evidence.
+- A quarantine must declare an owner, tracking issue, and future expiry date.
+  Quarantined tests do not count toward coverage or promotion.
+- Measure required jobs over at least 100 representative runs and 14 days with
+  at least 99% infrastructure success before promotion.
+- Storybook CI artifacts are retained for 14 days. `run.json`, `junit.xml`,
+  `events.ndjson`, `host.json`, per-test results, helper diagnostics, bounded
+  logs, and Windows/Win32 `ownership.json` are authoritative metadata.
+  Screenshots and trees are sensitive diagnostic evidence and must be reviewed
+  before wider sharing.
 
 ## Sharding and parallelism
 

@@ -16,6 +16,8 @@ if ($SmokeMode -notin @('stories', 'stories-and-tests')) {
 $projectRoot = (Get-Location).Path
 $artifactRoot = Join-Path $projectRoot 'artifacts\windows'
 $logRoot = Join-Path $artifactRoot 'smoke-logs'
+$ownershipPath = Join-Path $artifactRoot 'ownership.json'
+$startedAt = (Get-Date).ToUniversalTime().ToString('o')
 $storybookPort = if ($env:STORYBOOK_WS_PORT) { [int]$env:STORYBOOK_WS_PORT } else { 7007 }
 $metroPort = if ($env:RCT_METRO_PORT) { [int]$env:RCT_METRO_PORT } else { 8081 }
 $driverPort = if ($env:STORYBOOK_DRIVER_PORT) { [int]$env:STORYBOOK_DRIVER_PORT } else { 0 }
@@ -262,6 +264,9 @@ function Invoke-StorybookControl {
   }
 }
 
+$primaryError = $null
+$cleanupErrors = [System.Collections.Generic.List[string]]::new()
+
 try {
   if (Get-NetTCPConnection -State Listen -LocalPort $storybookPort -ErrorAction SilentlyContinue) {
     throw "Storybook port $storybookPort is already in use."
@@ -307,17 +312,79 @@ try {
     $applicationLeasePath = Write-ApplicationLease -Process $appProcess -LaunchTarget $launchTarget
     Invoke-StorybookControl -Phase 'tests' -Process $appProcess
   }
+} catch {
+  $primaryError = $_
 } finally {
   if ($applicationLeasePath) {
-    Remove-Item -LiteralPath $applicationLeasePath -Force -ErrorAction SilentlyContinue
+    try {
+      Remove-Item -LiteralPath $applicationLeasePath -Force -ErrorAction Stop
+    } catch {
+      $cleanupErrors.Add("Could not remove application lease '$applicationLeasePath': $($_.Exception.Message)")
+    }
   }
+  $cleanupRecords = [System.Collections.Generic.List[object]]::new()
   for ($index = $ownedProcessIds.Count - 1; $index -ge 0; $index -= 1) {
     $ownedProcessId = $ownedProcessIds[$index]
     if ($ownedProcessId -and $ownedProcessId -ne $PID) {
       $process = Get-Process -Id $ownedProcessId -ErrorAction SilentlyContinue
+      $processName = if ($process) { $process.ProcessName } else { $null }
+      $stopError = $null
       if ($process) {
-        Stop-Process -Id $ownedProcessId -ErrorAction Continue
+        try {
+          Stop-Process -Id $ownedProcessId -ErrorAction Stop
+        } catch {
+          $stopError = $_.Exception.Message
+        }
       }
+      $deadline = (Get-Date).AddSeconds(5)
+      while ((Get-Date) -lt $deadline -and (Get-Process -Id $ownedProcessId -ErrorAction SilentlyContinue)) {
+        Start-Sleep -Milliseconds 100
+      }
+      $stopped = -not (Get-Process -Id $ownedProcessId -ErrorAction SilentlyContinue)
+      if (-not $stopped) {
+        $cleanupErrors.Add("Owned process $ownedProcessId did not stop.")
+      } elseif ($stopError) {
+        $cleanupErrors.Add("Stopping owned process $ownedProcessId reported: $stopError")
+      }
+      $cleanupRecords.Add([pscustomobject]@{
+          processId = $ownedProcessId
+          processName = $processName
+          stopError = $stopError
+          stopped = $stopped
+          wasRunning = [bool]$process
+        })
     }
   }
+  try {
+    $temporaryOwnershipPath = "$ownershipPath.$PID.tmp"
+    @{
+      schemaVersion = 1
+      endpoint = 'windows'
+      startedAt = $startedAt
+      finishedAt = (Get-Date).ToUniversalTime().ToString('o')
+      cleanupComplete = $cleanupErrors.Count -eq 0 -and @($cleanupRecords | Where-Object { -not $_.stopped }).Count -eq 0
+      cleanupErrors = @($cleanupErrors)
+      ports = @{
+        storybook = $storybookPort
+        metro = $metroPort
+        driver = $driverPort
+      }
+      storyManifest = $env:STORYBOOK_STORY_MANIFEST
+      driverManifest = $env:STORYBOOK_DRIVER_MANIFEST
+      processes = @($cleanupRecords)
+    } | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $temporaryOwnershipPath -Encoding utf8NoBOM
+    Move-Item -LiteralPath $temporaryOwnershipPath -Destination $ownershipPath -Force
+  } catch {
+    $cleanupErrors.Add("Could not write ownership report: $($_.Exception.Message)")
+  }
+}
+
+if ($primaryError) {
+  if ($cleanupErrors.Count -gt 0) {
+    throw "$($primaryError.Exception.Message) Cleanup failures: $($cleanupErrors -join '; ')"
+  }
+  throw $primaryError
+}
+if ($cleanupErrors.Count -gt 0) {
+  throw "Windows Storybook cleanup failed: $($cleanupErrors -join '; ')"
 }

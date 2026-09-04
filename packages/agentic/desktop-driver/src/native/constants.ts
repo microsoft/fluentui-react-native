@@ -1,1 +1,1 @@
-export const nativeDriverWireProtocol = Object.freeze({ major: 1, minor: 0 });
+export const nativeDriverWireProtocol = Object.freeze({ major: 1, minor: 1 });

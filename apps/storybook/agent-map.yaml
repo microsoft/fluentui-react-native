@@ -29,6 +29,7 @@ services:
 
 agent_commands:
   generate_manifest: yarn storybook manifest --<platform>
+  reconcile_manifests: yarn storybook manifest --all
   start_driver: yarn storybook driver --<platform>
   inspect_instance: yarn storybook instance --<platform>
   list_stories: yarn desktop-driver stories list --url <driver-url> --target <target-id>
@@ -52,6 +53,8 @@ native:
     doctor: yarn desktop-driver doctor --platform <platform>
     cache_env: FURN_DESKTOP_DRIVER_CACHE_ROOT
     disabled_input_env: FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES
+    required_capabilities_env: FURN_STORYBOOK_REQUIRED_CAPABILITIES
+    complete_run_env: FURN_STORYBOOK_REQUIRE_COMPLETE_TESTS
     ci_policy: explicit-build-then-prebuilt-only
   macos:
     process: ReactTestApp
@@ -75,6 +78,7 @@ validation:
     - format
     - lint
     - yarn storybook manifest --<platform>
+    - yarn storybook manifest --all
     - yarn storybook bundle --<platform>
   native:
     normal: yarn storybook build --<platform>

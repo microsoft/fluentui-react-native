@@ -12,6 +12,11 @@ invariants; detailed authoring recipes live in the
 - Portable desktop story tests are static `parameters.desktopDriver` plans.
   Use the public authoring types, stable `testID` selectors, declarative
   capability requirements, and no platform branches or executable callbacks.
+  Use story `supportedPlatforms` to narrow catalog membership, test
+  `platforms` for an identical subset, and complete `platformVariants` only
+  when an endpoint needs different requirements or steps.
+  `traversePlatforms` is reserved for supported test-only stories that cannot
+  safely participate in the broad render sweep.
 - Storybook application, native project, Metro, bundle, or CocoaPods work follows the
   [Storybook instructions](../../../apps/storybook/AGENTS.md) and the `agentic-storybook-development` skill.
 - Native React Native Windows Fabric component work follows the

@@ -168,6 +168,10 @@ export class DesktopElementClient {
     return this.command('POST', '/click', {});
   }
 
+  focus(): Promise<null> {
+    return this.command('POST', '/furn/focus', {});
+  }
+
   clear(): Promise<null> {
     return this.command('POST', '/clear', {});
   }

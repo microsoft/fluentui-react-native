@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 import { directComponent } from '@fluentui-react-native/framework-base';
 
 import { ListboxItem } from './listbox-item';
@@ -27,6 +28,7 @@ const meta: Meta<typeof ListboxItem> = {
   title: 'Components/ListboxItem',
   component: ListboxItem,
   args: {
+    accessibilityLabel: 'Listbox item',
     content: 'Listbox item',
     secondaryContent: 'Secondary',
     secondaryContentPosition: 'right',
@@ -47,7 +49,43 @@ export default meta;
 
 type Story = StoryObj<typeof ListboxItem>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'accessibility-contract',
+          title: 'Exposes interactive item semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-listbox-item' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-listbox-item' }, value: 'button' } },
+            {
+              expect: {
+                state: 'accessibleName',
+                target: { testId: 'agentic-storybook-listbox-item' },
+                value: 'Listbox item',
+              },
+            },
+            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-listbox-item' }, value: true } },
+          ],
+        },
+        {
+          id: 'focus-survival',
+          title: 'Survives programmatic focus without a delayed native crash',
+          requires: ['focus'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-listbox-item' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'agentic-storybook-listbox-item' }, value: true } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-listbox-item' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
 
 export const Overview: Story = {
   render: () => (

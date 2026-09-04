@@ -20,7 +20,7 @@ const passingPlan: DesktopStoryTests = {
         { action: 'wait', target: { testId: 'button-primary' }, timeoutMs: 100 },
         { expect: { state: 'role', target: { testId: 'button-primary' }, value: 'button' } },
         { expect: { state: 'enabled', target: { testId: 'button-primary' }, value: true } },
-        { action: 'click', target: { testId: 'button-primary' } },
+        { action: 'focus', target: { testId: 'button-primary' } },
         { expect: { state: 'focused', target: { testId: 'button-primary' }, value: true } },
         { action: 'type', target: { testId: 'input-name' }, text: 'Ada' },
         { expect: { state: 'value', target: { testId: 'input-name' }, value: 'Ada' } },
@@ -56,7 +56,14 @@ describe('runDesktopStoryTests', () => {
       });
 
       expect(result).toMatchObject({
+        accessibility: {
+          nameAssertions: { failed: 0, passed: 0 },
+          reachabilityAssertions: { failed: 0, passed: 1 },
+          roleAssertions: { failed: 0, passed: 1 },
+        },
+        schemaVersion: 2,
         status: 'passed',
+        summary: { failed: 0, passed: 1, quarantined: 0, selected: 1, skipped: 0 },
         tests: [
           {
             status: 'passed',
@@ -65,6 +72,7 @@ describe('runDesktopStoryTests', () => {
         ],
       });
       expect(result.tests[0].artifacts.map(({ kind }) => kind)).toEqual(['screenshot', 'source']);
+      expect(harness.host.actions).toContainEqual({ type: 'focus', elementId: 'button' });
       expect(harness.storyOrchestrator?.argUpdates).toEqual([{ args: { disabled: false }, storyId: 'components-button--default' }]);
       expect(JSON.parse(fs.readFileSync(path.join(temporaryDirectory, 'run.json'), 'utf8'))).toMatchObject({
         runId: 'run',
@@ -136,6 +144,59 @@ describe('runDesktopStoryTests', () => {
     expect([...first, ...second].map(({ test }) => test.id).sort()).toEqual(['four', 'one', 'three', 'two']);
     expect(first).toHaveLength(2);
     expect(second).toHaveLength(2);
+  });
+
+  test('invalidates stale run artifacts before rejecting an empty selection', async () => {
+    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-empty-selection-'));
+    try {
+      fs.writeFileSync(path.join(temporaryDirectory, 'run.json'), '{}');
+      const artifacts = new ArtifactManager(temporaryDirectory);
+
+      await expect(
+        runDesktopStoryTests({
+          artifacts,
+          endpoint: 'windows',
+          manifest: makeManifest(passingPlan),
+          platformName: 'windows',
+          selection: { story: 'missing--story' },
+          session: {} as never,
+          targetId: 'target',
+        }),
+      ).rejects.toThrow('No desktop story tests matched');
+      expect(fs.existsSync(path.join(temporaryDirectory, 'run.json'))).toBe(false);
+    } finally {
+      fs.rmSync(temporaryDirectory, { force: true, recursive: true });
+    }
+  });
+
+  test('runs test-only stories after traversed stories', () => {
+    const baseManifest = makeManifest({
+      version: 1,
+      tests: [{ id: 'test-only', steps: [{ action: 'note', message: 'last' }] }],
+    });
+    const manifest: DesktopStoryManifest = {
+      ...baseManifest,
+      entries: [
+        {
+          ...baseManifest.entries[0],
+          id: 'components-accordion--default',
+          traverse: false,
+        },
+        {
+          ...baseManifest.entries[0],
+          id: 'components-button--default',
+          tests: {
+            version: 1,
+            tests: [{ id: 'normal', steps: [{ action: 'note', message: 'first' }] }],
+          },
+        },
+      ],
+    };
+
+    expect(selectDesktopStoryTests(manifest, 'windows').map(({ entry }) => entry.id)).toEqual([
+      'components-button--default',
+      'components-accordion--default',
+    ]);
   });
 
   test('does not turn an unsupported runtime property into a passing skip', async () => {
@@ -276,8 +337,106 @@ describe('runDesktopStoryTests', () => {
       });
 
       expect(result).toMatchObject({
-        status: 'passed',
+        status: 'incomplete',
+        summary: { failed: 0, passed: 0, quarantined: 0, selected: 1, skipped: 1 },
         tests: [{ skipReason: 'Unsupported capabilities: focus', status: 'skipped', steps: [] }],
+      });
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
+  test('fails distinctly when an authoritative run capability is unavailable', async () => {
+    const manifest = makeManifest({
+      version: 1,
+      tests: [{ id: 'semantic-check', steps: [{ expect: { state: 'role', target: { testId: 'button-primary' }, value: 'button' } }] }],
+    });
+    const harness = await createDesktopDriverStoryHarness(manifest, { features: { keyboard: false } });
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+      const result = await runDesktopStoryTests({
+        endpoint: 'windows',
+        manifest,
+        platformName: 'windows',
+        requiredCapabilities: ['keyboard'],
+        session,
+        targetId: harness.target.id,
+      });
+
+      expect(result).toMatchObject({
+        status: 'failed',
+        tests: [{ error: 'Required Desktop Driver capabilities are unavailable: keyboard', status: 'infrastructure-error' }],
+      });
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
+  test('supports abortable fixed pauses for survival regressions', async () => {
+    const manifest = makeManifest({
+      version: 1,
+      tests: [{ id: 'survives', steps: [{ action: 'pause', durationMs: 1000 }] }],
+    });
+    const harness = await createDesktopDriverStoryHarness(manifest);
+    const controller = new AbortController();
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+      setTimeout(() => controller.abort(), 20);
+      const started = Date.now();
+      const result = await runDesktopStoryTests({
+        endpoint: 'windows',
+        manifest,
+        platformName: 'windows',
+        session,
+        signal: controller.signal,
+        targetId: harness.target.id,
+      });
+
+      expect(Date.now() - started).toBeLessThan(500);
+      expect(result).toMatchObject({ status: 'failed', tests: [{ status: 'cancelled' }] });
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
+  test('reports active quarantines separately from coverage', async () => {
+    const manifest = makeManifest({
+      version: 1,
+      tests: [
+        {
+          id: 'quarantined',
+          quarantine: { expires: '2099-01-01', issue: '#1', owner: '@owner' },
+          steps: [{ action: 'note', message: 'not run' }],
+        },
+      ],
+    });
+    const harness = await createDesktopDriverStoryHarness(manifest);
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+      const result = await runDesktopStoryTests({
+        endpoint: 'windows',
+        manifest,
+        platformName: 'windows',
+        session,
+        targetId: harness.target.id,
+      });
+
+      expect(result).toMatchObject({
+        status: 'incomplete',
+        summary: { failed: 0, passed: 0, quarantined: 1, selected: 1, skipped: 0 },
+        tests: [{ status: 'quarantined' }],
       });
       await session.delete();
     } finally {
@@ -333,6 +492,7 @@ describe('runDesktopStoryTests', () => {
 
 function makeManifest(tests: DesktopStoryTests): DesktopStoryManifest {
   return {
+    catalogSetDigest: 'catalog-digest',
     endpoint: 'windows',
     entries: [
       {
@@ -340,14 +500,16 @@ function makeManifest(tests: DesktopStoryTests): DesktopStoryManifest {
         name: 'Default',
         packageName: '@fluentui-react-native/components',
         sourcePath: 'src/components/button/button.stories.tsx',
+        supportedPlatforms: ['macos', 'windows', 'win32'],
         tags: ['e2e', 'story'],
         tests,
         title: 'Components/Button',
       },
     ],
+    excluded: [],
     platformManifestDigest: 'platform-digest',
     portablePlanDigest: 'portable-digest',
-    schemaVersion: 1,
+    schemaVersion: 2,
   };
 }
 

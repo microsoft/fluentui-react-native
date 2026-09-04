@@ -135,6 +135,10 @@ export class NativeDesktopHost implements DesktopHost {
     }
   }
 
+  async focus(elementId: string, signal?: AbortSignal): Promise<void> {
+    await this.request('focus', { elementId }, signal);
+  }
+
   async clear(elementId: string, signal?: AbortSignal): Promise<void> {
     if (this.disabledInputFeatures.has('keyboard')) {
       throw new HostUnsupportedError('Physical keyboard fallback is disabled by the registered target policy.');

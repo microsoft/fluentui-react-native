@@ -12,6 +12,13 @@ evidence management, native-helper source and build tooling, and deterministic
 fake hosts for contract tests. It does not depend on Storybook, React, or React
 Native.
 
+Story plans may declare story-level desktop support, identical test subsets,
+complete per-platform variants, required capabilities, and expiring
+quarantines. Runs distinguish `passed`, `failed`, and `incomplete`; an
+all-skipped run is never green. Reports include shared catalog, portable-plan,
+and exact-platform digests plus accessibility assertion counts, JUnit, NDJSON,
+per-test results, and bounded evidence.
+
 ## Supported targets
 
 | Endpoint                    | Operating system  | Architecture            | Native implementation                                       |

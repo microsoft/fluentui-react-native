@@ -1,10 +1,11 @@
 import { Buffer } from 'node:buffer';
 
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
-import type { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
+import { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
 import { webElementIdentifier } from '../protocol/constants.js';
 import { HostWebDriverError } from '../protocol/errors.js';
 import { runDesktopStoryTests } from '../runner/StoryTestRunner.js';
+import { createDesktopDriverServer } from './createDesktopDriverServer.js';
 import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import type { DesktopStoryManifest, StoryOrchestrator, StoryReadyResult } from '../storybook.js';
 
@@ -48,6 +49,12 @@ describe('Desktop Driver W3C remote end', () => {
         body: '{}',
       });
       expect(harness.host.actions).toContainEqual({ type: 'click', elementId: 'button', mode: 'physical' });
+
+      await getJson(`${harness.server.url}/session/${sessionId}/element/${elementId}/furn/focus`, {
+        method: 'POST',
+        body: '{}',
+      });
+      expect(harness.host.actions).toContainEqual({ type: 'focus', elementId: 'button' });
 
       const screenshot = await getJson(`${harness.server.url}/session/${sessionId}/screenshot`);
       expect(
@@ -256,6 +263,49 @@ describe('Desktop Driver W3C remote end', () => {
     }
   });
 
+  test('serializes programmatic focus across independent targets', async () => {
+    const state = { active: 0, maximum: 0 };
+    class DelayedFocusHost extends FakeDesktopHost {
+      override async focus(elementId: string, signal?: AbortSignal): Promise<void> {
+        state.active += 1;
+        state.maximum = Math.max(state.maximum, state.active);
+        try {
+          await new Promise((resolve) => setTimeout(resolve, 30));
+          await super.focus(elementId, signal);
+        } finally {
+          state.active -= 1;
+        }
+      }
+    }
+    const firstHost = new DelayedFocusHost();
+    const secondHost = new DelayedFocusHost();
+    const server = await createDesktopDriverServer({
+      targets: [
+        { endpoint: 'windows', host: firstHost, id: 'first', platformName: 'windows', renderer: 'fabric' },
+        { endpoint: 'windows', host: secondHost, id: 'second', platformName: 'windows', renderer: 'fabric' },
+      ],
+    });
+    const client = createDesktopDriverClient({ url: server.url });
+    try {
+      const firstSession = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': 'first' },
+      });
+      const secondSession = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': 'second' },
+      });
+      const firstButton = await firstSession.findElement('accessibility id', 'button-primary');
+      const secondButton = await secondSession.findElement('accessibility id', 'button-primary');
+
+      await Promise.all([firstButton.focus(), secondButton.focus()]);
+
+      expect(state.maximum).toBe(1);
+      await firstSession.delete();
+      await secondSession.delete();
+    } finally {
+      await server.close();
+    }
+  });
+
   test('keeps a target reserved until application teardown completes', async () => {
     const harness = await createDesktopDriverTestHarness({ closeDelayMs: 50 });
     try {
@@ -301,6 +351,7 @@ describe('Desktop Driver W3C remote end', () => {
 
   test('routes Storybook commands and invalidates only preview element references', async () => {
     const manifest: DesktopStoryManifest = {
+      catalogSetDigest: 'catalog-digest',
       endpoint: 'windows',
       entries: [
         {
@@ -308,13 +359,15 @@ describe('Desktop Driver W3C remote end', () => {
           name: 'Default',
           packageName: '@fluentui-react-native/components',
           sourcePath: 'src/components/button/button.stories.tsx',
+          supportedPlatforms: ['macos', 'windows', 'win32'],
           tags: ['story'],
           title: 'Components/Button',
         },
       ],
+      excluded: [],
       platformManifestDigest: 'platform',
       portablePlanDigest: 'portable',
-      schemaVersion: 1,
+      schemaVersion: 2,
     };
     let currentStory: StoryReadyResult | null = null;
     const hostRef: { current?: FakeDesktopHost } = {};
@@ -426,6 +479,7 @@ describe('Desktop Driver W3C remote end', () => {
 
   test('invalidates preview references before a reset whose marker verification fails', async () => {
     const manifest: DesktopStoryManifest = {
+      catalogSetDigest: 'catalog-digest',
       endpoint: 'windows',
       entries: [
         {
@@ -433,13 +487,15 @@ describe('Desktop Driver W3C remote end', () => {
           name: 'Default',
           packageName: '@fluentui-react-native/components',
           sourcePath: 'button.stories.tsx',
+          supportedPlatforms: ['macos', 'windows', 'win32'],
           tags: ['story'],
           title: 'Components/Button',
         },
       ],
+      excluded: [],
       platformManifestDigest: 'platform',
       portablePlanDigest: 'portable',
-      schemaVersion: 1,
+      schemaVersion: 2,
     };
     const hostRef: { current?: FakeDesktopHost } = {};
     const orchestrator: StoryOrchestrator = {

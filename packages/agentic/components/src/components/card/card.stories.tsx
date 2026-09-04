@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Button } from '../button/button';
 import { Card } from './card';
@@ -222,8 +223,60 @@ export const Interactive: Story = {
       layout="structured"
       onPress={() => undefined}
       selected={false}
+      testID="agentic-storybook-card"
     />
   ),
+  tags: ['desktop-e2e'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'accessibility-contract',
+          title: 'Exposes interactive card semantics',
+          steps: [
+            { action: 'wait', target: { testId: 'agentic-storybook-card-interactive' } },
+            { expect: { state: 'role', target: { testId: 'agentic-storybook-card-interactive' }, value: 'button' } },
+            {
+              expect: {
+                state: 'accessibleName',
+                target: { testId: 'agentic-storybook-card-interactive' },
+                value: 'Open report',
+              },
+            },
+            { expect: { state: 'selected', target: { testId: 'agentic-storybook-card-interactive' }, value: false } },
+          ],
+          platformVariants: {
+            win32: {
+              steps: [
+                { action: 'wait', target: { testId: 'agentic-storybook-card-interactive' } },
+                { expect: { state: 'role', target: { testId: 'agentic-storybook-card-interactive' }, value: 'button' } },
+                {
+                  expect: {
+                    state: 'accessibleName',
+                    target: { testId: 'agentic-storybook-card-interactive' },
+                    value: 'Open report',
+                  },
+                },
+                { expect: { state: 'enabled', target: { testId: 'agentic-storybook-card-interactive' }, value: true } },
+              ],
+            },
+          },
+        },
+        {
+          id: 'focus-survival',
+          title: 'Survives programmatic focus without a delayed native crash',
+          requires: ['focus'],
+          steps: [
+            { action: 'focus', target: { testId: 'agentic-storybook-card-interactive' } },
+            { action: 'pause', durationMs: 3000 },
+            { expect: { state: 'exists', target: { testId: 'agentic-storybook-card-interactive' }, value: true } },
+            { expect: { state: 'focused', target: { testId: 'agentic-storybook-card-interactive' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
 };
 
 export const Selected: Story = {

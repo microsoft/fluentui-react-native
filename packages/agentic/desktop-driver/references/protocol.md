@@ -44,7 +44,8 @@ Implemented standard behavior:
 - active element;
 - element name, text, attribute, property, rectangle, enabled, selected, and
   displayed queries;
-- click, clear, and send keys;
+- click, clear, send keys, and the driver extension
+  `POST /session/{id}/element/{elementId}/furn/focus`;
 - perform and release actions;
 - window and element screenshots;
 - accessibility source.

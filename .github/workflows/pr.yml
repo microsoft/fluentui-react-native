@@ -34,6 +34,15 @@ jobs:
       - name: Build CI
         run: yarn lage buildci
 
+      - name: Validate Storybook plans, catalogs, and bundles
+        working-directory: apps/storybook
+        run: |
+          yarn workspace @fluentui-react-native/storybook-desktop test --runTestsByPath src/driver/representativePlans.test.ts --runInBand
+          yarn storybook manifest --all
+          yarn storybook bundle --macos
+          yarn storybook bundle --windows
+          yarn storybook bundle --win32
+
   bundle-size:
     name: Bundle Size PR
     runs-on: windows-latest
@@ -233,6 +242,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: Storybook_macos_Dump
+          retention-days: 14
           path: |
             apps/storybook/artifacts/macos
             ${{ steps.desktop-driver.outputs.doctor-path }}
@@ -378,6 +388,7 @@ jobs:
           platform: windows
           run-native-contract: 'true'
           disabled-input-features: keyboard,physicalClick,wheel
+          required-capabilities: focus
 
       - name: Prep Windows Storybook
         run: yarn storybook prep --windows
@@ -407,6 +418,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: Storybook_windows_Dump
+          retention-days: 14
           path: |
             apps/storybook/artifacts/windows
             ${{ steps.desktop-driver.outputs.doctor-path }}
@@ -488,6 +500,7 @@ jobs:
         with:
           platform: win32
           disabled-input-features: keyboard,physicalClick,wheel
+          required-capabilities: focus
 
       - name: Smoke test Win32 Storybook
         run: yarn storybook smoke --win32 --mode stories-and-tests
@@ -498,6 +511,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: Storybook_win32_Dump
+          retention-days: 14
           path: |
             apps/storybook/artifacts/win32
             ${{ steps.desktop-driver.outputs.doctor-path }}
