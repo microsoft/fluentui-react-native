@@ -135,6 +135,51 @@ describe('DesktopStorybookConfig', () => {
     });
   });
 
+  test('resolves native driver paths and application identity from the consuming project', () => {
+    const config = makeDesktopStorybookConfig({
+      projectRoot: storybookRoot,
+      platformOptions: {
+        macos: {
+          nativeDriver: {
+            macosSigningIdentity: 'Apple Development: Example',
+          },
+        },
+        win32: {
+          nativeDriver: {
+            application: {
+              executablePath: 'tools/ReactTest.exe',
+              windowTitle: 'Consumer Storybook (Win32)',
+            },
+            buildPolicy: 'never',
+            cacheRoot: '.cache/native-driver',
+            helperPath: 'tools/driver.exe',
+            installRoot: 'tools/native-driver',
+          },
+        },
+      },
+    });
+
+    expect(config.getNativeDriverOptions('win32')).toEqual({
+      application: {
+        executablePath: path.join(storybookRoot, 'tools/ReactTest.exe'),
+        windowTitle: 'Consumer Storybook (Win32)',
+      },
+      buildPolicy: 'never',
+      cacheRoot: path.join(storybookRoot, '.cache/native-driver'),
+      configuration: 'release',
+      helperPath: path.join(storybookRoot, 'tools/driver.exe'),
+      installRoot: path.join(storybookRoot, 'tools/native-driver'),
+    });
+    expect(config.getNativeDriverOptions('macos')).toMatchObject({
+      application: {
+        bundleIdentifier: 'com.microsoft.fluentui.agenticstorybook',
+        windowTitle: 'Agentic Components Storybook',
+      },
+      configuration: 'release',
+      macosSigningIdentity: 'Apple Development: Example',
+    });
+  });
+
   test('creates package-owned Windows and Win32 smoke commands', () => {
     const configDirectory = path.resolve(__dirname, '../../config');
 

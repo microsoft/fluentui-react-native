@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
+## 0.25.13
+
+### Patch Changes
+
+- Updated dependencies [1ffcfa3]
+- Updated dependencies [0a6286c]
+  - @fluentui-react-native/focus-zone@0.23.4
+  - @fluentui-react-native/design@0.4.1
+  - @fluentui-react-native/text@0.25.12
+  - @uifabricshared/foundation-compose@1.16.12
+  - @fluentui-react-native/icon@0.22.12
+
 ## 0.25.12
 
 ### Patch Changes

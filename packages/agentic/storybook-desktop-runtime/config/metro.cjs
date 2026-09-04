@@ -106,7 +106,12 @@ function readDriverManifest(manifestPath) {
     throw new Error(`Desktop Driver manifest does not exist at ${manifestPath}.`);
   }
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  if (manifest.schemaVersion !== 1) {
+  if (
+    manifest.schemaVersion !== 2 ||
+    !manifest.nativeDriver ||
+    !manifest.application ||
+    typeof manifest.application.leasePath !== 'string'
+  ) {
     throw new Error(`Unsupported Desktop Driver manifest schema "${manifest.schemaVersion}".`);
   }
   return manifest;

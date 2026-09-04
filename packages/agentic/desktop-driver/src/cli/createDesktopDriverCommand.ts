@@ -1,13 +1,23 @@
+import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 
 import { Command, Option } from 'commander';
 
 import { connectDesktopAgent } from '../agent/DesktopAgent.js';
 import { validateDesktopStoryTests } from '../authoring/storyTests.js';
-import type { DesktopStoryManifest } from '../storybook.js';
 import { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
+import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from '../native/nativeDriver.js';
+import type {
+  NativeDriverArchitecture,
+  NativeDriverBuildOptions,
+  NativeDriverBuildPolicy,
+  NativeDriverConfiguration,
+  NativeDriverResolveOptions,
+  NativeDriverArtifact,
+} from '../native/types.js';
 import type { DesktopEndpoint, DesktopPlatformName, DesktopRenderer } from '../protocol/types.js';
 import { createDesktopDriverServer } from '../server/createDesktopDriverServer.js';
+import type { DesktopStoryManifest } from '../storybook.js';
 import { FakeStoryOrchestrator } from '../testing/FakeStoryOrchestrator.js';
 import { createFakeStoryWindows } from '../testing/fakeStoryElements.js';
 import { connectDesktopWebdriver } from '../wdio/DesktopWebdriver.js';
@@ -28,11 +38,19 @@ type SelectionFlags = ConnectionFlags & {
 };
 
 export type CreateDesktopDriverCommandOptions = {
+  buildDriver?: typeof buildNativeDesktopDriver;
+  permissionProbe?: NativePermissionProbe;
+  resolveDriver?: typeof resolveNativeDesktopDriver;
   stderr?: Pick<NodeJS.WriteStream, 'write'>;
   stdout?: Pick<NodeJS.WriteStream, 'write'>;
 };
 
+type NativePermissionProbe = (artifact: NativeDriverArtifact, options: { prompt: boolean }) => Promise<Record<string, unknown>>;
+
 export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOptions = {}): Command {
+  const buildDriver = options.buildDriver ?? buildNativeDesktopDriver;
+  const permissionProbe = options.permissionProbe ?? runNativePermissionProbe;
+  const resolveDriver = options.resolveDriver ?? resolveNativeDesktopDriver;
   const stdout = options.stdout ?? process.stdout;
   const stderr = options.stderr ?? process.stderr;
   const program = new Command()
@@ -42,6 +60,10 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
       writeErr: (value) => stderr.write(value),
       writeOut: (value) => stdout.write(value),
     });
+
+  addNativeBuildCommand(program, buildDriver, stdout);
+  addNativeResolveCommand(program, resolveDriver, stdout);
+  addNativeDoctorCommand(program, resolveDriver, permissionProbe, stdout);
 
   program
     .command('serve')
@@ -196,6 +218,84 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
   return program;
 }
 
+function addNativeBuildCommand(
+  program: Command,
+  buildDriver: typeof buildNativeDesktopDriver,
+  stdout: Pick<NodeJS.WriteStream, 'write'>,
+): void {
+  const command = program.command('build-driver').description('Build the native desktop helper for the selected platform.');
+  addNativePlatformOptions(command)
+    .addOption(new Option('--architecture <architecture>', 'native architecture').choices(['arm64', 'x64']))
+    .addOption(new Option('--configuration <configuration>', 'native build configuration').choices(['debug', 'release']).default('release'))
+    .option('--cache-root <path>', 'native helper cache root')
+    .option('--force', 'build and publish a new immutable selection even when a compatible artifact exists')
+    .option('--macos-signing-identity <identity>', 'macOS code-signing certificate name or SHA-1 hash')
+    .action(async (flags: NativeBuildFlags) => {
+      const result = await buildDriver(toBuildOptions(flags));
+      writeJson(stdout, result);
+    });
+}
+
+function addNativeResolveCommand(
+  program: Command,
+  resolveDriver: typeof resolveNativeDesktopDriver,
+  stdout: Pick<NodeJS.WriteStream, 'write'>,
+): void {
+  const command = program.command('resolve-driver').description('Resolve and verify a native desktop helper.');
+  addNativePlatformOptions(command)
+    .addOption(new Option('--architecture <architecture>', 'native architecture').choices(['arm64', 'x64']))
+    .addOption(new Option('--configuration <configuration>', 'native build configuration').choices(['debug', 'release']).default('release'))
+    .addOption(new Option('--build-policy <policy>', 'source build policy').choices(['if-missing', 'never']).default('if-missing'))
+    .option('--cache-root <path>', 'native helper cache root')
+    .option('--helper-path <path>', 'exact prebuilt helper executable')
+    .option('--install-root <path>', 'managed native helper install root')
+    .option('--macos-signing-identity <identity>', 'macOS code-signing certificate name or SHA-1 hash')
+    .action(async (flags: NativeResolveFlags) => {
+      const result = await resolveDriver(toResolveOptions(flags));
+      writeJson(stdout, result);
+    });
+}
+
+function addNativeDoctorCommand(
+  program: Command,
+  resolveDriver: typeof resolveNativeDesktopDriver,
+  permissionProbe: NativePermissionProbe,
+  stdout: Pick<NodeJS.WriteStream, 'write'>,
+): void {
+  const command = program.command('doctor').description('Report the selected native helper or an actionable readiness failure.');
+  addNativePlatformOptions(command)
+    .addOption(new Option('--architecture <architecture>', 'native architecture').choices(['arm64', 'x64']))
+    .addOption(new Option('--configuration <configuration>', 'native build configuration').choices(['debug', 'release']).default('release'))
+    .option('--cache-root <path>', 'native helper cache root')
+    .option('--helper-path <path>', 'exact prebuilt helper executable')
+    .option('--install-root <path>', 'managed native helper install root')
+    .option('--macos-signing-identity <identity>', 'expected macOS code-signing certificate name or SHA-1 hash')
+    .option('--permissions', 'run the verified macOS helper in noninteractive permission-diagnostic mode')
+    .option('--prompt', 'allow the permission diagnostic to request Accessibility and Screen Recording access')
+    .action(async (flags: NativeDoctorFlags) => {
+      try {
+        if (flags.prompt && !flags.permissions) {
+          throw cliError('invalid-params', '--prompt requires --permissions.');
+        }
+        if (flags.permissions && flags.platform !== 'macos') {
+          throw cliError('unsupported-operation', 'Permission diagnostics are available only for the macOS helper.');
+        }
+        const result = await resolveDriver({ ...toResolveOptions(flags), buildPolicy: 'never' });
+        const permissions = flags.permissions ? await permissionProbe(result, { prompt: flags.prompt === true }) : undefined;
+        writeJson(stdout, { ...(permissions ? { permissions } : {}), ready: true, result });
+      } catch (error) {
+        writeJson(stdout, {
+          error: {
+            code: error instanceof Error && 'code' in error ? String(error.code) : 'unknown',
+            message: error instanceof Error ? error.message : String(error),
+          },
+          ready: false,
+        });
+        process.exitCode = 1;
+      }
+    });
+}
+
 export async function runDesktopDriverCli(argv: readonly string[] = process.argv): Promise<void> {
   await createDesktopDriverCommand().parseAsync([...argv]);
 }
@@ -205,6 +305,62 @@ function addConnectionOptions<T extends Command>(command: T): T {
     .requiredOption('--url <url>', 'Desktop Driver server URL')
     .requiredOption('--target <id>', 'registered target id')
     .addOption(new Option('--platform <name>', 'WebDriver platform name').choices(['macos', 'windows']).default('windows')) as T;
+}
+
+type NativePlatformFlags = {
+  platform: DesktopEndpoint;
+};
+
+type NativeBuildFlags = NativePlatformFlags & {
+  architecture?: NativeDriverArchitecture;
+  cacheRoot?: string;
+  configuration: NativeDriverConfiguration;
+  force?: boolean;
+  macosSigningIdentity?: string;
+};
+
+type NativeResolveFlags = NativeBuildFlags & {
+  buildPolicy?: NativeDriverBuildPolicy;
+  helperPath?: string;
+  installRoot?: string;
+};
+
+type NativeDoctorFlags = NativeResolveFlags & {
+  permissions?: boolean;
+  prompt?: boolean;
+};
+
+function addNativePlatformOptions<T extends Command>(command: T): T {
+  return command.requiredOption('--platform <platform>', 'native endpoint', (value: string) =>
+    parseChoice(value, ['macos', 'windows', 'win32'] as const, 'platform'),
+  ) as T;
+}
+
+function toBuildOptions(flags: NativeBuildFlags): NativeDriverBuildOptions {
+  return {
+    architecture: flags.architecture,
+    cacheRoot: flags.cacheRoot,
+    configuration: flags.configuration,
+    force: flags.force,
+    macosSigningIdentity: flags.macosSigningIdentity,
+    platform: flags.platform,
+  };
+}
+
+function toResolveOptions(flags: NativeResolveFlags): NativeDriverResolveOptions {
+  return {
+    ...toBuildOptions(flags),
+    buildPolicy: flags.buildPolicy,
+    helperPath: flags.helperPath,
+    installRoot: flags.installRoot,
+  };
+}
+
+function parseChoice<T extends string>(value: string, choices: readonly T[], name: string): T {
+  if (!choices.includes(value as T)) {
+    throw new TypeError(`${name} must be one of ${choices.join(', ')}. Received "${value}".`);
+  }
+  return value as T;
 }
 
 function addSelectionOptions<T extends Command>(command: T): T {
@@ -287,4 +443,86 @@ function parsePositiveInteger(value: string): number {
     throw new TypeError(`Expected a positive integer. Received "${value}".`);
   }
   return parsed;
+}
+
+function cliError(code: string, message: string): Error & { code: string } {
+  return Object.assign(new Error(message), { code });
+}
+
+async function runNativePermissionProbe(artifact: NativeDriverArtifact, options: { prompt: boolean }): Promise<Record<string, unknown>> {
+  const maximumOutputBytes = 1024 * 1024;
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    let outputBytes = 0;
+    let errorBytes = 0;
+    const stdout: Buffer[] = [];
+    const stderr: Buffer[] = [];
+    const args = options.prompt ? ['--permissions', '--prompt'] : ['--permissions'];
+    const child = spawn(artifact.executablePath, args, {
+      stdio: ['ignore', 'pipe', 'pipe'],
+      windowsHide: true,
+    });
+    const timeout = setTimeout(() => {
+      child.kill();
+      settleReject(cliError('permission-probe-timeout', 'The native helper did not complete its permission diagnostic within 30 seconds.'));
+    }, 30_000);
+
+    const settleReject = (error: Error) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      clearTimeout(timeout);
+      reject(error);
+    };
+    child.stdout.on('data', (chunk: Buffer) => {
+      outputBytes += chunk.length;
+      if (outputBytes > maximumOutputBytes) {
+        child.kill();
+        settleReject(cliError('permission-probe-failed', 'The native helper permission diagnostic exceeded the 1 MiB output limit.'));
+        return;
+      }
+      stdout.push(chunk);
+    });
+    child.stderr.on('data', (chunk: Buffer) => {
+      errorBytes += chunk.length;
+      if (errorBytes > maximumOutputBytes) {
+        child.kill();
+        settleReject(cliError('permission-probe-failed', 'The native helper permission diagnostic exceeded the 1 MiB error limit.'));
+        return;
+      }
+      stderr.push(chunk);
+    });
+    child.once('error', (error) => settleReject(error));
+    child.once('close', (code) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      clearTimeout(timeout);
+      if (code !== 0) {
+        reject(
+          cliError(
+            'permission-probe-failed',
+            `The native helper exited with code ${String(code)} during permission diagnostics: ${Buffer.concat(stderr).toString('utf8')}`,
+          ),
+        );
+        return;
+      }
+      try {
+        const value = JSON.parse(Buffer.concat(stdout).toString('utf8')) as Record<string, unknown>;
+        if (value.schemaVersion !== 1 || value.type !== 'permissions') {
+          throw new Error('The native helper returned an unsupported permission-diagnostic document.');
+        }
+        resolve(value);
+      } catch (error) {
+        reject(
+          cliError(
+            'permission-probe-failed',
+            error instanceof Error ? error.message : 'The native helper returned invalid permission-diagnostic JSON.',
+          ),
+        );
+      }
+    });
+  });
 }

@@ -8,7 +8,9 @@ export {
 export type {
   CreateDesktopStorybookCommandOptions,
   DesktopCommandRunner,
+  DesktopStorybookBuildDriverOptions,
   DesktopStorybookCliOptions,
+  DesktopStorybookPrepOptions,
   DesktopStorybookServerOptions,
   PreparedDesktopCommand,
   RunningDesktopCommand,

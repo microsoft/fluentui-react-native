@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/theme-types
 
+## 0.44.12
+
+### Patch Changes
+
+- Updated dependencies [0a6286c]
+  - @fluentui-react-native/design@0.4.1
+
 ## 0.44.11
 
 ### Patch Changes

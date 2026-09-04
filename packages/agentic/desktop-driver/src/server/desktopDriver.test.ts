@@ -3,6 +3,7 @@ import { Buffer } from 'node:buffer';
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
 import type { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
 import { webElementIdentifier } from '../protocol/constants.js';
+import { HostWebDriverError } from '../protocol/errors.js';
 import { runDesktopStoryTests } from '../runner/StoryTestRunner.js';
 import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import type { DesktopStoryManifest, StoryOrchestrator, StoryReadyResult } from '../storybook.js';
@@ -133,6 +134,75 @@ describe('Desktop Driver W3C remote end', () => {
     }
   });
 
+  test('reports native launch failures as session not created', async () => {
+    const harness = await createDesktopDriverTestHarness();
+    jest.spyOn(harness.host, 'launch').mockRejectedValue(
+      new HostWebDriverError('invalid argument', 'The native launch descriptor was rejected.', {
+        operation: 'launch',
+      }),
+    );
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      await expect(
+        client.newSession({
+          alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+        }),
+      ).rejects.toMatchObject({
+        code: 'session not created',
+        data: { operation: 'launch' },
+        message: 'The native launch descriptor was rejected.',
+      });
+    } finally {
+      await harness.close();
+    }
+  });
+
+  test('reports native probe failures as session not created', async () => {
+    const harness = await createDesktopDriverTestHarness();
+    jest.spyOn(harness.host, 'probe').mockRejectedValue(
+      new HostWebDriverError('unable to capture screen', 'The native helper could not initialize.', {
+        operation: 'probe',
+      }),
+    );
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      await expect(
+        client.newSession({
+          alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+        }),
+      ).rejects.toMatchObject({
+        code: 'session not created',
+        data: { operation: 'probe' },
+        message: 'The native helper could not initialize.',
+      });
+    } finally {
+      await harness.close();
+    }
+  });
+
+  test.each([
+    ['furn:clickMode', 'not-a-click-mode'],
+    ['furn:launchMode', 'not-a-launch-mode'],
+  ])('rejects invalid %s before probing the target', async (capability, value) => {
+    const harness = await createDesktopDriverTestHarness();
+    const probe = jest.spyOn(harness.host, 'probe');
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      await expect(
+        client.newSession({
+          alwaysMatch: {
+            platformName: 'windows',
+            'furn:target': harness.target.id,
+            [capability]: value,
+          },
+        }),
+      ).rejects.toMatchObject({ code: 'invalid argument' });
+      expect(probe).not.toHaveBeenCalled();
+    } finally {
+      await harness.close();
+    }
+  });
+
   test('waits for in-flight session creation before server cleanup', async () => {
     const harness = await createDesktopDriverTestHarness({ launchDelayMs: 80 });
     const client = createDesktopDriverClient({ url: harness.server.url });
@@ -147,6 +217,18 @@ describe('Desktop Driver W3C remote end', () => {
     await closing;
     expect(harness.host.actions).toContainEqual(expect.objectContaining({ type: 'release-actions' }));
     expect(harness.host.actions).toContainEqual(expect.objectContaining({ type: 'close-application' }));
+  });
+
+  test('retries host cleanup after the listener has already closed', async () => {
+    const harness = await createDesktopDriverTestHarness();
+    const dispose = jest.spyOn(harness.host, 'dispose').mockRejectedValueOnce(new Error('first cleanup failed')).mockResolvedValueOnce();
+    try {
+      await expect(harness.server.close()).rejects.toThrow('Desktop Driver cleanup failed.');
+      await expect(harness.server.close()).resolves.toBeUndefined();
+      expect(dispose).toHaveBeenCalledTimes(2);
+    } finally {
+      await harness.server.close();
+    }
   });
 
   test('serializes release behind a timed-out native action and drains the host operation', async () => {

@@ -61,6 +61,7 @@ describe('runDesktopStorybookSmokeTests', () => {
     );
 
     expect(connect).toHaveBeenCalledWith({
+      launchMode: 'attach',
       platformName: 'windows',
       targetId: 'storybook-windows',
       // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- test-only loopback service

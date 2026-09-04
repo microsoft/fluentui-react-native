@@ -15,6 +15,7 @@ declare global {
     interface Capabilities {
       'furn:clickMode'?: 'accessibility' | 'auto' | 'physical';
       'furn:endpoint'?: 'macos' | 'win32' | 'windows';
+      'furn:launchMode'?: 'attach' | 'launch';
       'furn:target'?: string;
     }
 
@@ -30,6 +31,7 @@ declare global {
 
 export type DesktopWebdriverOptions = {
   clickMode?: DesktopClickMode;
+  launchMode?: 'attach' | 'launch';
   logLevel?: 'debug' | 'error' | 'info' | 'silent' | 'trace' | 'warn';
   platformName: DesktopPlatformName;
   targetId: string;
@@ -105,6 +107,7 @@ export async function connectDesktopWebdriver(options: DesktopWebdriverOptions):
     },
     {
       'furn:clickMode': options.clickMode ?? 'auto',
+      'furn:launchMode': options.launchMode ?? 'launch',
       'furn:target': options.targetId,
     },
   );

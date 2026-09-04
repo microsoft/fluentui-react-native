@@ -1,9 +1,15 @@
 import path from 'node:path';
 import { createRequire } from 'node:module';
 
+import type {
+  NativeDesktopApplicationDescriptor,
+  NativeDriverBuildPolicy,
+  NativeDriverConfiguration,
+} from '@fluentui-react-native/desktop-driver';
+
 import type { Platforms } from './platforms.ts';
 
-export const desktopStorybookActions = ['server', 'prep', 'bundle', 'run', 'build', 'smoke'] as const;
+export const desktopStorybookActions = ['server', 'build-driver', 'prep', 'bundle', 'run', 'build', 'smoke'] as const;
 
 export type DesktopStorybookAction = (typeof desktopStorybookActions)[number];
 
@@ -58,6 +64,16 @@ export type DesktopNativeProjectOptions = {
   device?: string;
 };
 
+export type DesktopNativeDriverOptions = {
+  application?: Omit<NativeDesktopApplicationDescriptor, 'leaseNonce' | 'leasePath'>;
+  buildPolicy?: NativeDriverBuildPolicy;
+  cacheRoot?: string;
+  configuration?: NativeDriverConfiguration;
+  helperPath?: string;
+  installRoot?: string;
+  macosSigningIdentity?: string;
+};
+
 export type DesktopSmokeOptions = {
   /**
    * A complete app-owned smoke command. When set, the reusable server, Metro, traversal, and cleanup lifecycle is skipped.
@@ -107,6 +123,11 @@ export type DesktopSmokeOptions = {
 };
 
 export type DesktopPlatformOptions = {
+  /**
+   * Native desktop helper selection and registered application identity.
+   */
+  nativeDriver?: DesktopNativeDriverOptions | false;
+
   nativeProject?: DesktopNativeProjectOptions;
 
   /**

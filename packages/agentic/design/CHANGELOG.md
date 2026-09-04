@@ -1,5 +1,11 @@
 # @fluentui-react-native/design
 
+## 0.4.1
+
+### Patch Changes
+
+- 0a6286c: Add submodule for color utilities for automatic hover and press coloring
+
 ## 0.4.0
 
 ### Minor Changes

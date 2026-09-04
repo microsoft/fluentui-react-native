@@ -8,6 +8,7 @@ export {
   STORYBOOK_SMOKE_MODE,
   type DesktopCommand,
   type DesktopCommandPlan,
+  type DesktopNativeDriverOptions,
   type DesktopNativeProjectOptions,
   type DesktopPlatformOptions,
   type DesktopPlatformOptionsMap,

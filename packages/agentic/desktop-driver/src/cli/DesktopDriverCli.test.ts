@@ -4,11 +4,257 @@ import { createServer } from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 
+import { NativeDriverError } from '../native/NativeDriverError';
+import type { NativeDriverArtifact } from '../native/types';
 import type { DesktopStoryManifest } from '../storybook.js';
+import { createDesktopDriverCommand } from './createDesktopDriverCommand';
 
 jest.setTimeout(30_000);
 
 describe('desktop-driver CLI', () => {
+  afterEach(() => {
+    process.exitCode = undefined;
+  });
+
+  test('exposes isolated native build and resolution commands', async () => {
+    const artifact = createNativeArtifact();
+    const buildDriver = jest.fn(async () => artifact);
+    const resolveDriver = jest.fn(async () => ({ ...artifact, origin: 'cache' as const }));
+    const output: string[] = [];
+    const createProgram = () =>
+      createDesktopDriverCommand({
+        buildDriver,
+        resolveDriver,
+        stdout: {
+          write(value) {
+            output.push(String(value));
+            return true;
+          },
+        },
+      });
+
+    await createProgram().parseAsync([
+      'node',
+      'test',
+      'build-driver',
+      '--platform',
+      'macos',
+      '--configuration',
+      'release',
+      '--cache-root',
+      'native-cache',
+      '--macos-signing-identity',
+      'Apple Development: Example',
+    ]);
+    await createProgram().parseAsync([
+      'node',
+      'test',
+      'resolve-driver',
+      '--platform',
+      'win32',
+      '--build-policy',
+      'never',
+      '--helper-path',
+      'driver.exe',
+    ]);
+
+    expect(buildDriver).toHaveBeenCalledWith({
+      architecture: undefined,
+      cacheRoot: 'native-cache',
+      configuration: 'release',
+      force: undefined,
+      macosSigningIdentity: 'Apple Development: Example',
+      platform: 'macos',
+    });
+    expect(resolveDriver).toHaveBeenCalledWith({
+      architecture: undefined,
+      buildPolicy: 'never',
+      cacheRoot: undefined,
+      configuration: 'release',
+      force: undefined,
+      helperPath: 'driver.exe',
+      installRoot: undefined,
+      macosSigningIdentity: undefined,
+      platform: 'win32',
+    });
+    expect(JSON.parse(output[0])).toMatchObject({ artifactId: 'artifact-id', origin: 'built' });
+    expect(JSON.parse(output[1])).toMatchObject({ artifactId: 'artifact-id', origin: 'cache' });
+  });
+
+  test('runs noninteractive permission diagnostics through the resolved macOS helper', async () => {
+    const artifact = createNativeArtifact({
+      architecture: 'arm64',
+      endpoints: ['macos'],
+      executablePath: '/verified/FurnDesktopDriverHost.app/Contents/MacOS/furn-desktop-driver-host',
+      provider: 'macos',
+      signing: { mode: 'adhoc' },
+    });
+    const resolveDriver = jest.fn(async () => artifact);
+    const permissionProbe = jest.fn(async () => ({
+      permissions: {
+        accessibility: { preflight: false },
+        postEvent: { preflight: true },
+        screenCapture: { preflight: false },
+      },
+      promptRequested: false,
+      schemaVersion: 1,
+      type: 'permissions',
+    }));
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      permissionProbe,
+      resolveDriver,
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'macos', '--permissions']);
+
+    expect(resolveDriver).toHaveBeenCalledWith({
+      architecture: undefined,
+      buildPolicy: 'never',
+      cacheRoot: undefined,
+      configuration: 'release',
+      force: undefined,
+      helperPath: undefined,
+      installRoot: undefined,
+      macosSigningIdentity: undefined,
+      platform: 'macos',
+    });
+    expect(permissionProbe).toHaveBeenCalledWith(artifact, { prompt: false });
+    expect(JSON.parse(output.join(''))).toMatchObject({
+      permissions: {
+        promptRequested: false,
+        schemaVersion: 1,
+        type: 'permissions',
+      },
+      ready: true,
+      result: { executablePath: artifact.executablePath },
+    });
+  });
+
+  test('passes the explicit doctor prompt flag only to macOS permission diagnostics', async () => {
+    const artifact = createNativeArtifact({
+      architecture: 'arm64',
+      endpoints: ['macos'],
+      provider: 'macos',
+      signing: { mode: 'signed' },
+    });
+    const permissionProbe = jest.fn(async () => ({
+      promptRequested: true,
+      schemaVersion: 1,
+      type: 'permissions',
+    }));
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      permissionProbe,
+      resolveDriver: jest.fn(async () => artifact),
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'macos', '--permissions', '--prompt']);
+
+    expect(permissionProbe).toHaveBeenCalledWith(artifact, { prompt: true });
+    expect(JSON.parse(output.join(''))).toMatchObject({
+      permissions: { promptRequested: true },
+      ready: true,
+    });
+  });
+
+  test('rejects prompt mode without permissions before resolving a helper', async () => {
+    const resolveDriver = jest.fn(async () => createNativeArtifact());
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      resolveDriver,
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'macos', '--prompt']);
+
+    expect(resolveDriver).not.toHaveBeenCalled();
+    expect(JSON.parse(output.join(''))).toEqual({
+      error: {
+        code: 'invalid-params',
+        message: '--prompt requires --permissions.',
+      },
+      ready: false,
+    });
+  });
+
+  test('preserves Windows doctor behavior by rejecting macOS-only permission diagnostics', async () => {
+    const resolveDriver = jest.fn(async () => createNativeArtifact());
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      resolveDriver,
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'windows', '--permissions']);
+
+    expect(resolveDriver).not.toHaveBeenCalled();
+    expect(JSON.parse(output.join(''))).toMatchObject({
+      error: { code: 'unsupported-operation' },
+      ready: false,
+    });
+  });
+
+  test('runs Win32 doctor with prebuilt-only resolution and reports cache misses', async () => {
+    const resolveDriver = jest.fn(async () => {
+      throw new NativeDriverError('no-verified-prebuilt', 'No verified Win32 helper is available.');
+    });
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      resolveDriver,
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'win32', '--cache-root', 'native-cache']);
+
+    expect(resolveDriver).toHaveBeenCalledWith({
+      architecture: undefined,
+      buildPolicy: 'never',
+      cacheRoot: 'native-cache',
+      configuration: 'release',
+      force: undefined,
+      helperPath: undefined,
+      installRoot: undefined,
+      macosSigningIdentity: undefined,
+      platform: 'win32',
+    });
+    expect(JSON.parse(output.join(''))).toEqual({
+      error: {
+        code: 'no-verified-prebuilt',
+        message: 'No verified Win32 helper is available.',
+      },
+      ready: false,
+    });
+    expect(process.exitCode).toBe(1);
+  });
+
   test('serves, lists, runs, and describes a fake authored plan as JSON', async () => {
     const port = await getAvailablePort();
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-cli-'));
@@ -80,6 +326,28 @@ describe('desktop-driver CLI', () => {
       fs.rmSync(temporaryDirectory, { force: true, recursive: true });
     }
   });
+
+  function createNativeArtifact(overrides: Partial<NativeDriverArtifact> = {}): NativeDriverArtifact {
+    return {
+      architecture: 'x64',
+      artifactId: 'artifact-id',
+      artifactRoot: 'artifact-root',
+      buildFingerprint: 'build-fingerprint',
+      buildId: 'build-id',
+      compatibilityKey: 'compatibility-key',
+      configuration: 'release',
+      endpoints: ['windows', 'win32'],
+      executablePath: 'driver.exe',
+      features: ['probe'],
+      origin: 'built',
+      provider: 'windows',
+      schemaVersion: 1,
+      signing: { mode: 'none' },
+      sourceDigest: 'source-digest',
+      wireProtocol: { major: 1, minor: 0 },
+      ...overrides,
+    };
+  }
 });
 
 function spawnCli(args: readonly string[]) {

@@ -205,6 +205,13 @@ jobs:
       - name: Build packages
         run: yarn build
 
+      - name: Set up macOS Desktop Driver
+        id: desktop-driver
+        uses: ./.github/actions/setup-desktop-driver
+        with:
+          platform: macos
+          disabled-input-features: physicalClick
+
       - name: Bundle macOS
         run: |
           set -eox pipefail
@@ -220,6 +227,15 @@ jobs:
         working-directory: apps/storybook
         env:
           CCACHE_DISABLE: 1
+
+      - name: Upload macOS Storybook artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Storybook_macos_Dump
+          path: |
+            apps/storybook/artifacts/macos
+            ${{ steps.desktop-driver.outputs.doctor-path }}
 
   ios:
     name: iOS PR
@@ -336,7 +352,7 @@ jobs:
   windows-storybook:
     name: Windows Storybook PR
     runs-on: windows-latest
-    timeout-minutes: 40
+    timeout-minutes: 60
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
@@ -354,6 +370,14 @@ jobs:
 
       - name: Build packages
         run: yarn build
+
+      - name: Set up Windows Desktop Driver
+        id: desktop-driver
+        uses: ./.github/actions/setup-desktop-driver
+        with:
+          platform: windows
+          run-native-contract: 'true'
+          disabled-input-features: keyboard,physicalClick,wheel
 
       - name: Prep Windows Storybook
         run: yarn storybook prep --windows
@@ -383,7 +407,12 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: Storybook_windows_Dump
-          path: apps/storybook/artifacts/windows
+          path: |
+            apps/storybook/artifacts/windows
+            ${{ steps.desktop-driver.outputs.doctor-path }}
+            ${{ steps.desktop-driver.outputs.cache-root }}/v1/artifacts/**/build.log
+            ${{ steps.desktop-driver.outputs.cache-root }}/v1/diagnostics/**
+          if-no-files-found: warn
 
   win32:
     name: Win32 PR
@@ -453,6 +482,13 @@ jobs:
       - name: Build packages
         run: yarn build
 
+      - name: Set up Win32 Desktop Driver
+        id: desktop-driver
+        uses: ./.github/actions/setup-desktop-driver
+        with:
+          platform: win32
+          disabled-input-features: keyboard,physicalClick,wheel
+
       - name: Smoke test Win32 Storybook
         run: yarn storybook smoke --win32 --mode stories-and-tests
         working-directory: apps/storybook
@@ -462,7 +498,12 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: Storybook_win32_Dump
-          path: apps/storybook/artifacts/win32
+          path: |
+            apps/storybook/artifacts/win32
+            ${{ steps.desktop-driver.outputs.doctor-path }}
+            ${{ steps.desktop-driver.outputs.cache-root }}/v1/artifacts/**/build.log
+            ${{ steps.desktop-driver.outputs.cache-root }}/v1/diagnostics/**
+          if-no-files-found: warn
 
   check-changesets:
     name: Check for Changesets
