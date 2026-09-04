@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 2,
+  "component": "popover",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-09-02",
+  "sources": [
+    {
+      "id": "callout-native",
+      "kind": "git-files",
+      "authority": "platform-contract",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "650c8d5dee00e2a3af9cb88528df8448748374d1",
+      "files": [
+        {
+          "role": "platform:macos",
+          "path": "packages/native/Callout/macos/CalloutView.swift",
+          "sha256": "993f8c1e288c885b5e678afd1101b358c7c82dcb694f5244377700ee1b76519b"
+        },
+        {
+          "role": "platform:macos",
+          "path": "packages/native/Callout/macos/CalloutWindow.swift",
+          "sha256": "afd50736ec02789d3058cc3dfca490df350f387381f260af8e1afed649f13102"
+        },
+        {
+          "role": "platform:macos",
+          "path": "packages/native/Callout/macos/RCTCalloutComponentView.mm",
+          "sha256": "eb727aa7621870dc12e6ff7a53df8a2fb33585acf6961aa42202a83b197b6f77"
+        },
+        {
+          "role": "api:implementation",
+          "path": "packages/native/Callout/src/Callout.tsx",
+          "sha256": "256c2887638bca98597bed1e4739308b00daa61e02d4edbdcae0fa964e9c453a"
+        },
+        {
+          "role": "api:types",
+          "path": "packages/native/Callout/src/Callout.types.ts",
+          "sha256": "30810e1cdccf5c8c16ef8175217b09e67f5125862e6f29e7cf7efa28e060f564"
+        },
+        {
+          "role": "api:native-component",
+          "path": "packages/native/Callout/src/CalloutNativeComponent.ts",
+          "sha256": "3eec5a07818c0f84477b1a224fb2168ffbb76a368f9993f020a6222408ccf944"
+        },
+        {
+          "role": "platform:windows",
+          "path": "packages/native/Callout/windows/Callout/Callout.cpp",
+          "sha256": "9b14a78df3addc7f28e8957dfca380c1db62083572ee07d5dbcb45064a0a6eb4"
+        }
+      ]
+    },
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:popover",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/popover/SKILL.md",
+          "marketplaceBlobSha": "bcfde2d9ec118f6b4095d550e48c712e24cf0dfc",
+          "marketplaceSha256": "10076f71bd48209300ad9d9407a2f99e4c19f917008e207ec33e0ac0261513c9",
+          "originPath": "plugins/components/skills/popover/SKILL.md",
+          "originBlobSha": "bcfde2d9ec118f6b4095d550e48c712e24cf0dfc",
+          "originSha256": "10076f71bd48209300ad9d9407a2f99e4c19f917008e207ec33e0ac0261513c9",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/popover/usage.md",
+          "marketplaceBlobSha": "e4202e2c39241544aa583b27a1a7cd9b0fead622",
+          "marketplaceSha256": "672ee5bdc4219b62b2f072ab9f66a7eda3be3a64f82243811ccd033825f16b70",
+          "originPath": "plugins/components/skills/popover/usage.md",
+          "originBlobSha": "e4202e2c39241544aa583b27a1a7cd9b0fead622",
+          "originSha256": "672ee5bdc4219b62b2f072ab9f66a7eda3be3a64f82243811ccd033825f16b70",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/popover/web/accessibility.md",
+          "marketplaceBlobSha": "3ca049dee709abf8f326b413fc180c07ed969f68",
+          "marketplaceSha256": "15ab4d7e704d17a0a436a5aa4ca6c9d115b96a7b9ec347a54b4b461a9f0da327",
+          "originPath": "plugins/components/skills/popover/web/accessibility.md",
+          "originBlobSha": "3ca049dee709abf8f326b413fc180c07ed969f68",
+          "originSha256": "15ab4d7e704d17a0a436a5aa4ca6c9d115b96a7b9ec347a54b4b461a9f0da327",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/popover/web/interaction.md",
+          "marketplaceBlobSha": "9cc9f30e79895397b2467606efe57468c58869a2",
+          "marketplaceSha256": "81f330b296337b414c66d5899b98323e1734c8747179dcc0f1b3d8d94edcdd2e",
+          "originPath": "plugins/components/skills/popover/web/interaction.md",
+          "originBlobSha": "9cc9f30e79895397b2467606efe57468c58869a2",
+          "originSha256": "81f330b296337b414c66d5899b98323e1734c8747179dcc0f1b3d8d94edcdd2e",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/popover/web/tokens.yaml",
+          "marketplaceBlobSha": "59f55b3c7e482d4c4b0634a64ee60920eb9035e0",
+          "marketplaceSha256": "270f630afc036cb008ecf9dc80fbb4d80354b9facc8b30b76eb1d71bef021954",
+          "originPath": "plugins/components/skills/popover/web/tokens.yaml",
+          "originBlobSha": "59f55b3c7e482d4c4b0634a64ee60920eb9035e0",
+          "originSha256": "270f630afc036cb008ecf9dc80fbb4d80354b9facc8b30b76eb1d71bef021954",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    {
+      "id": "popover-anchor-gap",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-arrow-not-modeled",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-escape-dismissal",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-focus-return",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-haspopup",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-initial-focus",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-motion",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-placement-alignment",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-surface-dialog-semantics",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-surface-shadow",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-viewport-clamping",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "POP-001",
+      "sources": ["flex-component"],
+      "evidence": ["popover.types.ts", "usePopover.ts", "popover.test.tsx", "popover.types.test.tsx"]
+    },
+    {
+      "id": "POP-002",
+      "sources": ["callout-native", "flex-component"],
+      "evidence": ["usePopover.ts", "renderPopover.tsx", "popover.test.tsx"]
+    },
+    {
+      "id": "POP-003",
+      "sources": ["callout-native", "flex-component"],
+      "evidence": ["usePopover.ts", "popover.test.tsx", "popover.stories.tsx"]
+    },
+    {
+      "id": "POP-004",
+      "sources": ["callout-native", "flex-component"],
+      "evidence": ["usePopover.ts", "popover.test.tsx"]
+    },
+    {
+      "id": "POP-005",
+      "sources": ["callout-native", "flex-component"],
+      "evidence": ["popover.styles.ts", "usePopoverStyles.ts", "popover.test.tsx"]
+    },
+    {
+      "id": "POP-006",
+      "sources": ["callout-native", "flex-component"],
+      "evidence": ["usePopover.ts", "popover.test.tsx"]
+    },
+    {
+      "id": "POP-007",
+      "sources": ["callout-native"],
+      "evidence": ["popover.types.ts", "usePopover.ts", "popover.types.test.tsx"]
+    }
+  ]
+}

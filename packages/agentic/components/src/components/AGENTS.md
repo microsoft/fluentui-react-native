@@ -35,6 +35,8 @@ audit.
 - Keep render-only slots private to state.
 - Exclude native `children` or other props the component owns.
 - Preserve the distinction between omitted and false controlled values.
+- Set native semantics with the ARIA-aligned `role` prop, never `accessibilityRole`. Omit both from public root or slot
+  props when the component owns the role; when callers own it, expose only `role`.
 - Classify every stateful axis before wiring it. A self-driving control, where the interaction _is_ the state change,
   supports both directions through the `<state>` / `default<State>` / `on<State>Change` triple and `useToggleState`
   from `framework-base`. Externally driven selection exposes only `selected`, never changes it, and reports the
@@ -47,7 +49,8 @@ audit.
   `ref` as a prop, so pass it through the state hook to the root slot without `forwardRef`. If the component also needs
   an internal root ref, compose the refs through the slot render path rather than replacing the consumer ref.
 - Render focus feedback through `FocusVisual`; do not add `outline*` props or enable RNW native
-  focus visuals because RNW 0.81 can fail-fast when either path creates border visuals after mount.
+  focus visuals because RNW 0.81 can fail-fast when either path creates border visuals after mount. Reuse the shared
+  interaction policy for native focus-ring suppression and disabled-wins focusability.
 - Keep render functions free of hooks, token reads, style creation, and slot mutation.
 - Export the resolved state type and the state, style-application, and render stages from the package root under
   component-qualified unstable names so another component can reuse the pipeline.

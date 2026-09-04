@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "component": "search-box",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-09-02",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:search-box",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/search-box/SKILL.md",
+          "marketplaceBlobSha": "c0674392e63f250314f1bf67d64d3a34eeb622c1",
+          "marketplaceSha256": "c8d70e3a5c20d51a0e8db0b1203ed1c83a1cf0fd75802ae172056d71b7177a16",
+          "originPath": "plugins/components/skills/search-box/SKILL.md",
+          "originBlobSha": "c0674392e63f250314f1bf67d64d3a34eeb622c1",
+          "originSha256": "c8d70e3a5c20d51a0e8db0b1203ed1c83a1cf0fd75802ae172056d71b7177a16",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/search-box/usage.md",
+          "marketplaceBlobSha": "a7f020a0adc8f3e0f0d842400f859526d1abd7ab",
+          "marketplaceSha256": "dc9a29cc7da359df97b99c740f43847f75515773eb7177ce3f8063307f01dee7",
+          "originPath": "plugins/components/skills/search-box/usage.md",
+          "originBlobSha": "a7f020a0adc8f3e0f0d842400f859526d1abd7ab",
+          "originSha256": "dc9a29cc7da359df97b99c740f43847f75515773eb7177ce3f8063307f01dee7",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/search-box/web/accessibility.md",
+          "marketplaceBlobSha": "4dca64e433aeb1bdff2f9d4cccf7049408e43c22",
+          "marketplaceSha256": "bfb2448c0085cb65f3612a201a5746647527cd6d025d4f250f076431e564e2d1",
+          "originPath": "plugins/components/skills/search-box/web/accessibility.md",
+          "originBlobSha": "4dca64e433aeb1bdff2f9d4cccf7049408e43c22",
+          "originSha256": "bfb2448c0085cb65f3612a201a5746647527cd6d025d4f250f076431e564e2d1",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/search-box/web/interaction.md",
+          "marketplaceBlobSha": "ee7d236d66dff2e894822fe83f5ae68426aa7570",
+          "marketplaceSha256": "e4a8d9941f1bb0ad85a648a5da68233973656858d371ffc5d005e4aa4144d12f",
+          "originPath": "plugins/components/skills/search-box/web/interaction.md",
+          "originBlobSha": "ee7d236d66dff2e894822fe83f5ae68426aa7570",
+          "originSha256": "e4a8d9941f1bb0ad85a648a5da68233973656858d371ffc5d005e4aa4144d12f",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/search-box/web/tokens.yaml",
+          "marketplaceBlobSha": "7ff1f61af347c3ba2300d69522feced9a113343a",
+          "marketplaceSha256": "5915724424f0feb7c37c1ffa96fee60c78039a06f27b3c5eac7ea8ccf90e69d3",
+          "originPath": "plugins/components/skills/search-box/web/tokens.yaml",
+          "originBlobSha": "7ff1f61af347c3ba2300d69522feced9a113343a",
+          "originSha256": "5915724424f0feb7c37c1ffa96fee60c78039a06f27b3c5eac7ea8ccf90e69d3",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    {
+      "id": "search-box-clear-motion",
+      "status": "deferred"
+    },
+    {
+      "id": "search-box-clear-target-size",
+      "status": "accepted"
+    },
+    {
+      "id": "search-box-focus-indicator",
+      "status": "deferred"
+    },
+    {
+      "id": "search-box-placeholder-text",
+      "status": "accepted"
+    },
+    {
+      "id": "search-box-region-semantics",
+      "status": "not-applicable"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "SBX-001",
+      "sources": ["flex-component"],
+      "evidence": ["search-box.test.tsx", "search-box.types.test.tsx", "search-box.types.ts", "useSearchBox.ts"]
+    },
+    {
+      "id": "SBX-002",
+      "sources": ["flex-component"],
+      "evidence": ["search-box.test.tsx", "useSearchBox.ts"]
+    },
+    {
+      "id": "SBX-003",
+      "sources": ["flex-component"],
+      "evidence": ["search-box.test.tsx", "useSearchBox.ts", "useSearchBoxStyles.ts"]
+    },
+    {
+      "id": "SBX-004",
+      "sources": ["flex-component"],
+      "evidence": ["renderSearchBox.tsx", "search-box.styles.ts", "search-box.test.tsx", "useSearchBox.ts"]
+    },
+    {
+      "id": "SBX-005",
+      "sources": ["flex-component"],
+      "evidence": ["renderSearchBox.tsx", "search-box.test.tsx", "useSearchBox.ts"]
+    },
+    {
+      "id": "SBX-006",
+      "sources": ["flex-component"],
+      "evidence": ["search-box.stories.tsx", "search-box.test.tsx", "useSearchBox.ts"]
+    },
+    {
+      "id": "SBX-007",
+      "sources": ["flex-component"],
+      "evidence": ["search-box.test.tsx", "useSearchBox.ts", "useSearchBoxStyles.ts"]
+    },
+    {
+      "id": "SBX-008",
+      "sources": ["flex-component"],
+      "evidence": ["search-box.test.tsx", "useSearchBox.ts", "useSearchBoxStyles.ts"]
+    }
+  ]
+}

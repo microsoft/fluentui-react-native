@@ -60,7 +60,7 @@ export type TabListStateProps = {
 
 export type TabListExposedViewProps = OwnedRootProps<
   PropsWithRefOf<typeof View>,
-  'accessibilityRole' | 'accessibilityState' | 'accessible' | 'focusable'
+  'accessibilityRole' | 'accessibilityState' | 'accessible' | 'focusable' | 'role'
 >;
 
 export type TabListSlots = {

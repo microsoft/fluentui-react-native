@@ -97,7 +97,8 @@ Destructure only the token groups needed by a factory:
 ```
 
 Validate token values when their generated type is wider than the React Native style property. Button validates its gap
-token before assigning it to `ViewStyle['gap']`.
+token before assigning it to `ViewStyle['gap']`. Use `getNumericStyleValueAsNumber` when the target property requires a
+number; it centralizes validation and numeric-string coercion instead of repeating `Number(getNumericStyleValue(...))`.
 
 ## Apply slot props in one stage
 

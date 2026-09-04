@@ -58,7 +58,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
     accessibilityControls: bodyId,
     accessibilityHint,
     accessibilityLabel,
-    accessibilityRole: 'button',
+    role: 'button',
     accessibilityState: {
       ...accessibilityState,
       expanded: resolvedExpanded,

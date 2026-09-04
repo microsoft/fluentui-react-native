@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 2,
+  "component": "tooltip",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-09-03",
+  "sources": [
+    {
+      "id": "callout-native",
+      "kind": "git-files",
+      "authority": "platform-contract",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "650c8d5dee00e2a3af9cb88528df8448748374d1",
+      "files": [
+        {
+          "role": "platform:macos",
+          "path": "packages/native/Callout/macos/CalloutView.swift",
+          "sha256": "993f8c1e288c885b5e678afd1101b358c7c82dcb694f5244377700ee1b76519b"
+        },
+        {
+          "role": "platform:macos",
+          "path": "packages/native/Callout/macos/CalloutWindow.swift",
+          "sha256": "afd50736ec02789d3058cc3dfca490df350f387381f260af8e1afed649f13102"
+        },
+        {
+          "role": "platform:macos",
+          "path": "packages/native/Callout/macos/RCTCalloutComponentView.mm",
+          "sha256": "eb727aa7621870dc12e6ff7a53df8a2fb33585acf6961aa42202a83b197b6f77"
+        },
+        {
+          "role": "api:implementation",
+          "path": "packages/native/Callout/src/Callout.tsx",
+          "sha256": "256c2887638bca98597bed1e4739308b00daa61e02d4edbdcae0fa964e9c453a"
+        },
+        {
+          "role": "api:types",
+          "path": "packages/native/Callout/src/Callout.types.ts",
+          "sha256": "30810e1cdccf5c8c16ef8175217b09e67f5125862e6f29e7cf7efa28e060f564"
+        },
+        {
+          "role": "api:native-component",
+          "path": "packages/native/Callout/src/CalloutNativeComponent.ts",
+          "sha256": "3eec5a07818c0f84477b1a224fb2168ffbb76a368f9993f020a6222408ccf944"
+        },
+        {
+          "role": "platform:windows",
+          "path": "packages/native/Callout/windows/Callout/Callout.cpp",
+          "sha256": "9b14a78df3addc7f28e8957dfca380c1db62083572ee07d5dbcb45064a0a6eb4"
+        }
+      ]
+    },
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:tooltip",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tooltip/SKILL.md",
+          "marketplaceBlobSha": "6ac940f8bab9132aaaa05abc6b185af06fe7d27d",
+          "marketplaceSha256": "94dc2e5caa6e8e2fe3681975a8dfffc38b35c20be7c41173734b52183357d9db",
+          "originPath": "plugins/components/skills/tooltip/SKILL.md",
+          "originBlobSha": "6ac940f8bab9132aaaa05abc6b185af06fe7d27d",
+          "originSha256": "94dc2e5caa6e8e2fe3681975a8dfffc38b35c20be7c41173734b52183357d9db",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tooltip/usage.md",
+          "marketplaceBlobSha": "aa6b8bb2dfc2fff53cc513d07671eb2062c5624e",
+          "marketplaceSha256": "a86123d4830bbcc757a72ba8e29026953d3a35668abeab93955bbcfb89cd32c6",
+          "originPath": "plugins/components/skills/tooltip/usage.md",
+          "originBlobSha": "aa6b8bb2dfc2fff53cc513d07671eb2062c5624e",
+          "originSha256": "a86123d4830bbcc757a72ba8e29026953d3a35668abeab93955bbcfb89cd32c6",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tooltip/web/accessibility.md",
+          "marketplaceBlobSha": "40ab1264307345d69f1f4c9c84dbd03e39f62488",
+          "marketplaceSha256": "de19850b8c1d6c0910009699b60ab14766c7441357fc021f45d320a4d8ac6cb6",
+          "originPath": "plugins/components/skills/tooltip/web/accessibility.md",
+          "originBlobSha": "40ab1264307345d69f1f4c9c84dbd03e39f62488",
+          "originSha256": "de19850b8c1d6c0910009699b60ab14766c7441357fc021f45d320a4d8ac6cb6",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tooltip/web/interaction.md",
+          "marketplaceBlobSha": "85f8c6ba89e55fc6ea26c0a1f225c360cd983285",
+          "marketplaceSha256": "4d229801c4533caca86287d13276859d397704d24adfec68293ef851fa6706f4",
+          "originPath": "plugins/components/skills/tooltip/web/interaction.md",
+          "originBlobSha": "85f8c6ba89e55fc6ea26c0a1f225c360cd983285",
+          "originSha256": "4d229801c4533caca86287d13276859d397704d24adfec68293ef851fa6706f4",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/tooltip/web/tokens.yaml",
+          "marketplaceBlobSha": "32d3edc67e5f9edb8f635a84cfb84a99ed4fd963",
+          "marketplaceSha256": "77ec57abf145a8614ae3947fb603fddaac3159553c9f8c2c2bfbdd3176068207",
+          "originPath": "plugins/components/skills/tooltip/web/tokens.yaml",
+          "originBlobSha": "32d3edc67e5f9edb8f635a84cfb84a99ed4fd963",
+          "originSha256": "77ec57abf145a8614ae3947fb603fddaac3159553c9f8c2c2bfbdd3176068207",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    {
+      "id": "tooltip-anchor-gap",
+      "status": "deferred"
+    },
+    {
+      "id": "tooltip-describedby",
+      "status": "accepted"
+    },
+    {
+      "id": "tooltip-dismiss-key",
+      "status": "accepted"
+    },
+    {
+      "id": "tooltip-focus-retention",
+      "status": "deferred"
+    },
+    {
+      "id": "tooltip-hoverable-surface",
+      "status": "accepted"
+    },
+    {
+      "id": "tooltip-motion",
+      "status": "deferred"
+    },
+    {
+      "id": "tooltip-placement-alignment",
+      "status": "accepted"
+    },
+    {
+      "id": "tooltip-surface-role-semantics",
+      "status": "deferred"
+    },
+    {
+      "id": "tooltip-surface-shadow",
+      "status": "deferred"
+    },
+    {
+      "id": "tooltip-touch-activation",
+      "status": "accepted"
+    },
+    {
+      "id": "tooltip-viewport-clamping",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "TIP-001",
+      "sources": ["flex-component"],
+      "evidence": ["tooltip.types.ts", "useTooltip.ts", "tooltip.test.tsx", "tooltip.types.test.tsx"]
+    },
+    {
+      "id": "TIP-002",
+      "sources": ["callout-native", "flex-component"],
+      "evidence": ["useTooltip.ts", "renderTooltip.tsx", "tooltip.test.tsx"]
+    },
+    {
+      "id": "TIP-003",
+      "sources": ["flex-component"],
+      "evidence": ["useTooltip.ts", "tooltip.test.tsx", "tooltip.types.test.tsx"]
+    },
+    {
+      "id": "TIP-004",
+      "sources": ["flex-component"],
+      "evidence": ["useTooltip.ts", "tooltip.test.tsx"]
+    },
+    {
+      "id": "TIP-005",
+      "sources": ["callout-native", "flex-component"],
+      "evidence": ["tooltip.styles.ts", "useTooltipStyles.ts", "tooltip.test.tsx"]
+    },
+    {
+      "id": "TIP-006",
+      "sources": ["callout-native", "flex-component"],
+      "evidence": ["useTooltip.ts", "tooltip.test.tsx", "tooltip.stories.tsx"]
+    },
+    {
+      "id": "TIP-007",
+      "sources": ["callout-native"],
+      "evidence": ["tooltip.types.ts", "useTooltip.ts", "tooltip.types.test.tsx"]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 ## Native semantics
 
-The root is a `View` with `accessibilityRole="progressbar"` and defaults to
+The root is a `View` with `role="progressbar"` and defaults to
 `accessible={true}`. The header, the label, the trailing group, the value text,
 the validation icon, the track, and the indicator are all non-accessible, so the
 bar is announced once from the root.

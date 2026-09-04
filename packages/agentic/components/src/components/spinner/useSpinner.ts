@@ -41,7 +41,7 @@ export function useSpinner_unstable(props: SpinnerProps): SpinnerState {
     ...rest,
     accessibilityLabel,
     accessibilityLabelledBy,
-    accessibilityRole: 'progressbar',
+    role: 'progressbar',
     accessibilityState: {
       ...accessibilityState,
       busy: true,

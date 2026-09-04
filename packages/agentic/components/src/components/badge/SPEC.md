@@ -33,7 +33,7 @@ Rendering order is leading icon, content, then trailing icon, omitting unavailab
 
 ## Platform behavior
 
-Badge uses a React Native `View` and is never focusable on Windows or macOS. A badge with `accessibilityLabel` or a referenced accessible label is exposed with image role; otherwise its default root and descendants are hidden from accessibility. Icon slots are always decorative.
+Badge uses a React Native `View` and is never focusable on Windows or macOS. A badge with an explicit accessible name is exposed with `role="img"`; otherwise its default root and descendants are hidden from accessibility. Icon slots are always decorative.
 
 Windows maps an informative badge to a UI Automation image; macOS maps it to an AX image. Neither platform receives press, keyboard, hover, focus, or disabled behavior from this component. Positioning is normal React Native layout unless a parent supplies placement through its own layout or a user style.
 

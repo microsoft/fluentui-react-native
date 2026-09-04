@@ -30,7 +30,7 @@ export type DividerStateProps = {
   vertical?: boolean;
 };
 
-export type DividerExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
+export type DividerExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable' | 'role'>;
 
 export type DividerProps = DividerStateProps & ComponentProps<DividerSlots, DividerExposedViewProps>;
 

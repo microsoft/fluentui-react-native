@@ -28,7 +28,7 @@ describe('ProgressBar', () => {
     const component = await renderProgressBar({});
     const root = getRoot(component);
 
-    expect(root.props.accessibilityRole).toBe('progressbar');
+    expect(root.props.role).toBe('progressbar');
     expect(root.props.accessibilityState).toEqual({});
     expect(component.getByText('Label')).toBeOnTheScreen();
     expect(component.getByText('0%')).toBeOnTheScreen();

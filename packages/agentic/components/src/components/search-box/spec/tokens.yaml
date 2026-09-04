@@ -1,0 +1,85 @@
+schemaVersion: 1
+component: search-box
+implementation: search-box.styles.ts
+
+# SearchBox binds only the three surfaces it adds on top of the field: the
+# leading search icon, the trailing clear button group, and the clear button
+# metrics. Everything else is resolved by the Input pipeline from the variant,
+# the size, and a single visual state, using this precedence.
+statePrecedence:
+  - disabled
+  - readOnly
+  - focused
+  - pressed
+  - hovered
+  - rest
+
+delegated:
+  implementation: ../input/input.styles.ts
+  bindings:
+    - root
+    - contents
+    - iconTextStack
+    - textInput
+    - placeholder
+    - underline
+  detail: >-
+    The field container, the corner radius, the boundary stroke and its
+    per-state colors, the minimum height, the horizontal padding, the
+    typography, the placeholder color, and the underline edge are resolved by
+    the Input pipeline. SearchBox forwards variant, size, disabled, and
+    readOnly and adds no binding of its own to any of them.
+
+bindings:
+  icon:
+    renderedWhen: the icon slot is not null
+    size:
+      # Delegated: the resolved field icon metric for the active size.
+      small: size160
+      medium: size200
+      large: size240
+    color:
+      # Delegated: the resolved field text color, matching the field's own icons.
+      disabled: color.foregroundNeutralDisabled
+      default: color.foregroundNeutralPrimary
+
+  clearButtonGroup:
+    renderedWhen: the query is non-empty and the clear button slot is not null
+    layout:
+      alignItems: center
+      flexDirection: row
+      flexShrink: 0
+      minWidth: 0
+    gap:
+      small: spacing.componentBase100
+      medium: spacing.componentBase100
+      large: spacing.componentBase100
+    paddingRight:
+      small: spacing.componentBase150
+      medium: spacing.componentBase250
+      large: spacing.componentBase300
+
+  clearButton:
+    # Appearance, background, foreground, radius, and focus visual are resolved
+    # by the Button pipeline from appearance secondary, shape circle, size
+    # small. SearchBox binds only the inset metrics for the small field.
+    delegatedTo: ../button/button.styles.ts
+    appearance: secondary
+    shape: circle
+    size: small
+    metrics:
+      small:
+        minHeight: size200
+        minWidth: size200
+        paddingHorizontal: spacing.componentBase50
+        paddingVertical: spacing.componentBase50
+      medium: delegated
+      large: delegated
+
+tokenGaps:
+  - binding: clearButton.metrics.small
+    detail: The inset small clear button has no size token of its own. Its 20pt box is expressed as the global size200 value plus the smallest component spacing step, because the field is only 24pt tall at that size.
+  - binding: clearButtonGroup.gap
+    detail: The trailing gap is inherited from the field's trailing icon group and resolves to the same value for all three sizes, so the size axis carries no distinction for it.
+  - binding: icon.color
+    detail: The search icon has no icon-specific color token. It reuses the resolved field text color so it stays consistent with the field's own leading icon, and follows it to the shared disabled foreground when the field is disabled.

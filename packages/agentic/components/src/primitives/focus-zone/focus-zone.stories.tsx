@@ -76,7 +76,7 @@ const FocusZoneStoryButton = ({ content, focused, nativeID, onFocus, style, test
     return (
       <Pressable
         accessibilityLabel={content}
-        accessibilityRole="button"
+        role="button"
         focusable
         nativeID={nativeID}
         onFocus={onFocus}
@@ -286,7 +286,7 @@ export const DefaultTabbableElement: Story = {
 
 export const TabNavigation: Story = {
   args: {
-    accessibilityRole: 'group',
+    role: 'group',
     accessible: true,
     focusZoneDirection: 'horizontal',
     navigationOrderInRenderOrder: true,

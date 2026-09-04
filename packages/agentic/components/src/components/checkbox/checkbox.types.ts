@@ -52,7 +52,7 @@ export type CheckboxStateProps = {
  */
 export type CheckboxStatusDriverKeys = 'defaultStatus' | 'onStatusChange';
 
-export type CheckboxRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>> & {
+export type CheckboxRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>, 'accessibilityRole' | 'role'> & {
   children?: never;
 };
 

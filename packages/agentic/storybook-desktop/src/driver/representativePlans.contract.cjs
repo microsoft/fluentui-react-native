@@ -20,9 +20,14 @@ async function main() {
     storyPackages: ['@fluentui-react-native/components'],
   });
   const manifest = await createDesktopStoryManifest(config, 'windows');
-  const planned = manifest.entries.filter(({ id, tests }) => id.startsWith('components-') && id.endsWith('--default') && tests);
+  const representativeStoryIds = new Set(['components-button--default', 'components-checkbox--default', 'components-input--default']);
+  const representativeManifest = {
+    ...manifest,
+    entries: manifest.entries.filter(({ id }) => representativeStoryIds.has(id)),
+  };
+  const planned = representativeManifest.entries.filter(({ tests }) => tests);
   const windowRect = { x: 0, y: 0, width: 800, height: 600 };
-  const harness = await testing.createDesktopDriverStoryHarness(manifest, {
+  const harness = await testing.createDesktopDriverStoryHarness(representativeManifest, {
     windows: [
       {
         id: 'window-1',

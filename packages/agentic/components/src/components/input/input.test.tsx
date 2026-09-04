@@ -9,7 +9,14 @@ import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 import { Input } from './input';
 
 function getTextbox(component: Awaited<ReturnType<typeof render>>) {
-  return component.getByRole('textbox');
+  if (!component.root) {
+    throw new Error('Input did not render a root instance.');
+  }
+  const [textInput] = component.root.queryAll((instance) => instance.type === 'TextInput');
+  if (!textInput) {
+    throw new Error('Input did not render a native TextInput.');
+  }
+  return textInput;
 }
 
 function getContents(component: Awaited<ReturnType<typeof render>>) {
@@ -33,13 +40,16 @@ describe('Input', () => {
     const component = await render(<Input placeholder="Enter text" />);
     const textbox = getTextbox(component);
 
-    expect(textbox.props.accessibilityRole).toBe('textbox');
+    expect(textbox.props.role).toBeUndefined();
     expect(textbox.props.accessibilityState).toEqual({ disabled: false, invalid: undefined, readOnly: false });
     expect(getContents(component).props.testID).toBe('input-contents');
     expect(flattenStyle(getContents(component).props.style)).toMatchObject({
       backgroundColor: 'transparent',
       borderWidth: 1,
       minHeight: 32,
+    });
+    expect(flattenStyle(textbox.props.style)).toMatchObject({
+      textAlignVertical: 'center',
     });
   });
 
@@ -151,7 +161,7 @@ describe('Input', () => {
 
     for (const { fontSize, lineHeight, minHeight, size } of cases) {
       const component = await render(<Input placeholder={size} size={size} />);
-      expect(flattenStyle(component.getByRole('textbox').props.style)).toMatchObject({
+      expect(flattenStyle(getTextbox(component).props.style)).toMatchObject({
         fontSize,
         lineHeight,
       });

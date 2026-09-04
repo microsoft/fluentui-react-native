@@ -12,6 +12,7 @@ Use `@testing-library/react-native`. Do not import `react-test-renderer` directl
 Prefer public semantics:
 
 - query the root by accessibility role
+- assert the ARIA-aligned `role` prop rather than the legacy `accessibilityRole`
 - use matchers such as `toBeDisabled()`
 - assert `accessibilityState`, accessible names, and focusability
 - use async `fireEvent` calls for hover, press, focus, and user handlers

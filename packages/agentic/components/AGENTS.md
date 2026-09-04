@@ -37,6 +37,9 @@ invariants; detailed authoring recipes live in the
 - Use `src/components/button` as the canonical higher-order implementation and `src/primitives/icon` as the canonical
   primitive.
 - Keep public props and slots small, typed, and spec-driven.
+- Express native semantics with React Native's ARIA-aligned `role` prop, not the legacy `accessibilityRole`. When a
+  component owns its semantics, omit both props from its public native surface; expose only `role` when callers own the
+  semantic choice.
 - This package targets React 19.1.4 or newer. Expose a stable native root ref through the `ref` prop, receive it as part
   of the component props, and forward it to the declared root slot. Do not use `forwardRef`.
 - Export higher-order components and public types explicitly from `src/index.ts`; export primitives and their public types

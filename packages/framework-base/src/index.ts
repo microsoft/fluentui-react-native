@@ -62,6 +62,8 @@ export { useToggleState } from './hooks/useToggleState';
 export type { ToggleState, UseToggleStateOptions } from './hooks/useToggleState';
 export { useAccessibilityLabelWarning } from './hooks/useAccessibilityLabelWarning';
 export type { AccessibilityLabelWarningOptions } from './hooks/useAccessibilityLabelWarning';
+export { useDevWarning } from './hooks/useDevWarning';
+export type { DevWarningSeverity } from './hooks/useDevWarning';
 export type { PressableState, PressableStateKeys } from './types/interactive.types';
 
 /**

@@ -57,8 +57,9 @@ Multiselect takes visual precedence over selected fill and semibold text.
 
 ## Platform behavior
 
-Windows and macOS expose list items through React Native as `menuitem`,
-`menuitemradio`, or `menuitemcheckbox`, based on the configured indicators.
+Windows and macOS expose list items through React Native with
+`role="menuitem"`. Checkmark and multiselect variants preserve the same menu
+role and publish their caller-owned selection through checked state.
 The root accessible name defaults to the content text and a chevron supplies
 the default hint `"Has submenu"`. Header roots expose the `none` role, are
 disabled, and cannot receive focus. Decorative visuals are inaccessible.

@@ -38,8 +38,8 @@ the spacing. It never manages focus and never blocks input by itself.
 | `pointerEvents`           | `ViewProps['pointerEvents']`                                               | `none`   | Overridable, but the default keeps the indicator out of hit testing.                                                                 |
 | `style`                   | `StyleProp<ViewStyle>`                                                     | none     | Applied after the resolved root styles.                                                                                              |
 
-The root accepts the remaining owned `ViewProps`. `accessibilityRole` and
-`focusable` are removed from the public surface because the component fixes
+The root accepts the remaining owned `ViewProps`. `role`, the legacy
+`accessibilityRole`, and `focusable` are removed from the public surface because the component fixes
 both, and `children` is not accepted.
 
 **SPIN-001:** Resolve `size` to its diameter and stroke width token, default to

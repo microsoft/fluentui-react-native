@@ -11,6 +11,8 @@ import {
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { hasAccessibleName } from '../../common/accessibility';
+import { resolveFocusable } from '../../common/interaction';
 import { Text } from '../text/text';
 import type { SwitchProps, SwitchState } from './switch.types';
 
@@ -56,11 +58,11 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const reduceMotion = useReducedMotion() ?? false;
   const checkedProgress = React.useRef(new Animated.Value(checked ? 1 : 0)).current;
   const hasMounted = React.useRef(false);
-  const explicitAccessibleName =
-    accessibilityLabel !== undefined ||
-    accessibilityLabelledBy !== undefined ||
-    rest['aria-label'] !== undefined ||
-    rest['aria-labelledby'] !== undefined;
+  const explicitAccessibleName = hasAccessibleName({
+    accessibilityLabel,
+    accessibilityLabelledBy,
+    ...rest,
+  });
 
   useAccessibilityLabelWarning({
     accessibilityLabel: accessibilityLabel ?? rest['aria-label'],
@@ -105,7 +107,7 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
     ...pressableNameProps,
-    accessibilityRole: 'switch',
+    role: 'switch',
     accessibilityState: {
       ...rest.accessibilityState,
       checked,
@@ -113,7 +115,7 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: rest.focusable ?? !disabled,
+    focusable: resolveFocusable(rest.focusable, disabled),
     'aria-checked': checked,
   });
 

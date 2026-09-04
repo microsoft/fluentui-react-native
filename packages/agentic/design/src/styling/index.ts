@@ -12,3 +12,4 @@ export type { ColorKey, ColorStyleDefinition, TextColorStyle, ViewColorStyle } f
 export { colorStyleDef, getThemedColorStyleFactory } from './colorStyles';
 export { interactiveStatePriority } from './interactiveStatePriority';
 export { getNumericStyleValue } from './numericStyleValue';
+export { getNumericStyleValueAsNumber } from './numericStyleValueAsNumber';

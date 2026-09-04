@@ -1,0 +1,123 @@
+schemaVersion: 1
+component: link
+implementation: link.styles.ts
+
+statePrecedence:
+  foreground:
+    - disabled
+    - pressed
+  decoration:
+    - inline
+    - pressed
+    - focused
+  typography:
+    - typeSet
+
+notes:
+  foregroundIsBodyColor: >-
+    Rest foreground is the same neutral primary token the surrounding body text
+    uses, so color never signals interactivity. The underline carries the whole
+    affordance.
+  pressedIsDerived: >-
+    The pressed foreground is synthesized by the color factory from the theme's
+    pressed override of foregroundNeutralPrimary rather than being named
+    separately here. A theme that maps that override to the rest value produces
+    no visible shift on press, and the underline still changes.
+  inlineInheritsTypography: >-
+    useLinkStyles_unstable omits the typography entry entirely when inline is
+    true, so the parent text run supplies family, size, weight, and line height.
+  noHoveredLevel: >-
+    The foreground and decoration factories declare no hovered level because a
+    text root reports no hover on the target platforms.
+
+bindings:
+  root:
+    static:
+      alignSelf: flex-start
+    themedBase:
+      borderRadius: borderRadius.base100
+      borderWidth: strokeWidth.thick
+      borderColor: transparent
+    focused:
+      borderColor: color.strokeFocusOuter
+    disabled:
+      borderColor: transparent
+    userStyle: applied last by useLinkStyles_unstable
+
+  content:
+    color:
+      rest: color.foregroundNeutralPrimary
+      pressed: color.pressed.foregroundNeutralPrimary
+      disabled: color.foregroundNeutralDisabled
+    textDecorationLine:
+      visible: underline
+      hidden: none
+    textDecorationStyle:
+      functional: solid
+      content: dotted
+    typography:
+      functional:
+        fontFamily: fontFamily.functional
+        fontSize: fontSize.functionalBodyMedium
+        fontWeight: fontWeight.functionalRegular
+        lineHeight: lineHeight.functionalBodyMedium
+      content:
+        fontFamily: fontFamily.content
+        fontSize: fontSize.contentParagraphMedium
+        fontWeight: fontWeight.contentRegular
+        lineHeight: lineHeight.contentParagraphMedium
+      inline: omitted so the surrounding text style applies
+
+  icon:
+    accessible: false
+    color: resolved content color
+    height: 16
+    width: 16 plus spacing.componentBase50 on each side
+
+decoration:
+  inline:
+    rest: visible
+    pressed: visible
+    focused: visible
+    disabled: visible
+  standalone:
+    rest: hidden
+    pressed: visible
+    focused: visible
+    disabled: hidden
+
+tokenGaps:
+  - id: link-icon-size
+    binding: icon.height and icon.width
+    value: 16
+    reason: The glyph size is a literal because this package publishes no icon sizing scale.
+  - id: link-underline-thickness
+    binding: content.textDecorationLine
+    value: platform default
+    reason: >-
+      Flex separates a thin functional underline from a thick content underline
+      through a stroke-width token. React Native exposes no text decoration
+      thickness, so both type sets draw the platform default.
+  - id: link-underline-offset
+    binding: content.textDecorationLine
+    value: platform default
+    reason: >-
+      Flex offsets the underline by 15% of the font size so it scales with
+      inherited type. React Native exposes no text decoration offset.
+  - id: link-underline-style
+    binding: content.textDecorationStyle
+    value: dotted requested for the content type set
+    reason: >-
+      The value is set because it is the correct React Native property, but
+      neither target platform honors it, so the content type set currently draws
+      the same solid underline as the functional type set.
+  - id: link-focus-ring-single
+    binding: root.borderColor and root.borderWidth
+    value: one border at strokeWidth.thick in color.strokeFocusOuter
+    reason: >-
+      The dual-ring focus visual is composed from nested views, which cannot sit
+      inside a text run, so the inner ring and its stroke token are unused here.
+  - id: link-state-motion
+    binding: content.color
+    value: no transition
+    reason: This package publishes no motion tokens, so the pressed color change is applied without a duration or easing.

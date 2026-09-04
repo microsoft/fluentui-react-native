@@ -41,7 +41,7 @@ export type CardStateProps = {
   selected?: boolean;
 };
 
-export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessibilityRole'> & {
+export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessibilityRole' | 'role'> & {
   children?: never;
 } & Pick<PropsWithRefOf<typeof View>, 'ref'>;
 

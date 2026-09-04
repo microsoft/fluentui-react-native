@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 2,
+  "component": "interaction-tag",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-02-19",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:interaction-tag",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/interaction-tag/SKILL.md",
+          "marketplaceBlobSha": "75c8397dfc769d9ea9ed4c9000352cdb283cf3b2",
+          "marketplaceSha256": "da41d3fef67e3eee449f680aa33da59049811ac6480dfdb7fec2ae8850419dca",
+          "originPath": "plugins/components/skills/interaction-tag/SKILL.md",
+          "originBlobSha": "75c8397dfc769d9ea9ed4c9000352cdb283cf3b2",
+          "originSha256": "da41d3fef67e3eee449f680aa33da59049811ac6480dfdb7fec2ae8850419dca",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/interaction-tag/usage.md",
+          "marketplaceBlobSha": "7d45e54336c453b43c46942da9897e94bec64428",
+          "marketplaceSha256": "075fb065b243176e24871d842d403e75b20c24d95a3a53ac0e64843d52d5bf39",
+          "originPath": "plugins/components/skills/interaction-tag/usage.md",
+          "originBlobSha": "7d45e54336c453b43c46942da9897e94bec64428",
+          "originSha256": "075fb065b243176e24871d842d403e75b20c24d95a3a53ac0e64843d52d5bf39",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/interaction-tag/web/accessibility.md",
+          "marketplaceBlobSha": "9c597c536fef64fb06df3680ac5149258e14e7dd",
+          "marketplaceSha256": "0ef6945803c6e928c2ce2c874c3975b28c747c7170127ff612e0d41c6f215587",
+          "originPath": "plugins/components/skills/interaction-tag/web/accessibility.md",
+          "originBlobSha": "9c597c536fef64fb06df3680ac5149258e14e7dd",
+          "originSha256": "0ef6945803c6e928c2ce2c874c3975b28c747c7170127ff612e0d41c6f215587",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/interaction-tag/web/interaction.md",
+          "marketplaceBlobSha": "59dfb2d99cc719e68c96313063a3123fdca9fe87",
+          "marketplaceSha256": "bfed40c29413b8bc20ef0b38829faf4d05ab353ef4664b0a0269eba9b1dd2d81",
+          "originPath": "plugins/components/skills/interaction-tag/web/interaction.md",
+          "originBlobSha": "59dfb2d99cc719e68c96313063a3123fdca9fe87",
+          "originSha256": "bfed40c29413b8bc20ef0b38829faf4d05ab353ef4664b0a0269eba9b1dd2d81",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/interaction-tag/web/tokens.yaml",
+          "marketplaceBlobSha": "d140dbc2d17810766be44440cdaeded5530aba74",
+          "marketplaceSha256": "e8f074975952e539093cc1be73eb1e6c08758927252e2ac86b6527474f8d8298",
+          "originPath": "plugins/components/skills/interaction-tag/web/tokens.yaml",
+          "originBlobSha": "d140dbc2d17810766be44440cdaeded5530aba74",
+          "originSha256": "e8f074975952e539093cc1be73eb1e6c08758927252e2ac86b6527474f8d8298",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    {
+      "id": "interaction-tag-appearance-prop-name",
+      "status": "accepted"
+    },
+    {
+      "id": "interaction-tag-dismiss-is-caller-owned",
+      "status": "accepted"
+    },
+    {
+      "id": "interaction-tag-leading-content-is-slots",
+      "status": "accepted"
+    },
+    {
+      "id": "interaction-tag-no-state-transition",
+      "status": "accepted"
+    },
+    {
+      "id": "interaction-tag-single-disabled-axis",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "ITAG-001",
+      "evidence": ["interaction-tag.types.ts", "useInteractionTag.ts", "interaction-tag.types.test.ts", "interaction-tag.test.tsx"]
+    },
+    {
+      "id": "ITAG-002",
+      "evidence": ["useInteractionTag.ts", "renderInteractionTag.tsx", "interaction-tag.test.tsx", "interaction-tag.stories.tsx"]
+    },
+    {
+      "id": "ITAG-003",
+      "evidence": ["renderInteractionTag.tsx", "interaction-tag.test.tsx"]
+    },
+    {
+      "id": "ITAG-004",
+      "evidence": ["interaction-tag.types.ts", "useInteractionTag.ts", "interaction-tag.types.test.ts", "interaction-tag.test.tsx"]
+    },
+    {
+      "id": "ITAG-005",
+      "evidence": ["useInteractionTag.ts", "interaction-tag.test.tsx"]
+    },
+    {
+      "id": "ITAG-006",
+      "evidence": ["interaction-tag.styles.ts", "useInteractionTagStyles.ts", "interaction-tag.test.tsx"]
+    },
+    {
+      "id": "ITAG-007",
+      "evidence": ["interaction-tag.styles.ts", "useInteractionTagStyles.ts", "interaction-tag.test.tsx"]
+    },
+    {
+      "id": "ITAG-008",
+      "evidence": ["interaction-tag.styles.ts", "interaction-tag.test.tsx", "interaction-tag.stories.tsx"]
+    },
+    {
+      "id": "ITAG-009",
+      "evidence": ["interaction-tag.styles.ts", "useInteractionTag.ts", "useInteractionTagStyles.ts", "interaction-tag.test.tsx"]
+    },
+    {
+      "id": "ITAG-010",
+      "evidence": ["interaction-tag.styles.ts", "useInteractionTagStyles.ts", "interaction-tag.test.tsx"]
+    },
+    {
+      "id": "ITAG-011",
+      "evidence": ["useInteractionTag.ts", "interaction-tag.test.tsx"]
+    },
+    {
+      "id": "ITAG-012",
+      "evidence": ["useInteractionTagStyles.ts", "interaction-tag.test.tsx", "interaction-tag.stories.tsx"]
+    },
+    {
+      "id": "ITAG-013",
+      "evidence": ["useInteractionTag.ts", "interaction-tag.types.test.ts", "interaction-tag.test.tsx"]
+    }
+  ]
+}

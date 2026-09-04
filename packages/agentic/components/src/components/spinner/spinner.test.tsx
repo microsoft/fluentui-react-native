@@ -61,7 +61,7 @@ describe('Spinner', () => {
     const indicator = getIndicator(component);
     const tokens = defaultFlexTokens;
 
-    expect(root.props.accessibilityRole).toBe('progressbar');
+    expect(root.props.role).toBe('progressbar');
     expect(root.props.accessibilityState).toEqual({ busy: true });
     expect(root.props.focusable).toBe(false);
     expect(root.props.pointerEvents).toBe('none');

@@ -4,7 +4,7 @@ import type { TextStyle, ViewStyle } from 'react-native';
 import type { FlexTokens } from '@fluentui-react-native/design';
 
 import {
-  getNumericStyleValue,
+  getNumericStyleValueAsNumber as toDimensionValue,
   getThemedColorStyleFactory,
   getThemedStateStyleFactory,
   interactiveStatePriority,
@@ -44,8 +44,6 @@ export const radioStyles = StyleSheet.create({
 const noStateLevels = [[]] as const;
 const selectionStateLevels = [['selected'], interactiveStatePriority] as const;
 type RadioColorState = 'selected' | 'disabled' | 'pressed' | 'hovered';
-
-const toDimensionValue = (value: unknown): number => Number(getNumericStyleValue(value));
 
 const getRadioRootLayoutStyle = getThemedStateStyleFactory(
   'Radio.rootLayout',

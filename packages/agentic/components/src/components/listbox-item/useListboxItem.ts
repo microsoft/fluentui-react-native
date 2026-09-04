@@ -5,6 +5,7 @@ import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-nat
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { semanticIconSources } from '../../common/iconSources';
+import { resolveFocusable } from '../../common/interaction';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
@@ -30,7 +31,6 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     variant = 'listItem',
     style: userStyle,
     accessibilityState,
-    accessibilityRole: _accessibilityRole,
     ...rest
   } = props;
 
@@ -63,11 +63,11 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
 
   const [rootProps, pressableState] = usePressableState({
     ...rest,
-    accessibilityRole: isListItem ? 'button' : 'header',
+    role: isListItem ? 'button' : 'heading',
     accessibilityState: rootAccessibilityState,
     accessible: rest.accessible ?? true,
     disabled: isListItem ? disabled : false,
-    focusable: rest.focusable ?? (isListItem && !disabled),
+    focusable: isListItem && resolveFocusable(rest.focusable, disabled),
   });
 
   const { onBlur, onFocus, onHoverIn, onHoverOut, onLongPress, onPress, onPressIn, onPressOut, ...headerRest } = rootProps;

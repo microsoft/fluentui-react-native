@@ -1,0 +1,132 @@
+schemaVersion: 1
+component: destructive-button
+implementation: destructive-button.styles.ts
+
+statePrecedence:
+  - appearance
+  - disabled
+  - pressed
+  - hovered
+
+bindings:
+  root:
+    layout:
+      alignItems: center
+      alignSelf: flex-start
+      borderStyle: solid
+      flexDirection: row
+      justifyContent: center
+      borderWidth: strokeWidth.thin
+      minHeight: size240
+      minWidth: size240
+    appearance:
+      primary:
+        backgroundColor: color.backgroundDangerLoud
+        borderColor: color.strokeNeutralTransparent
+        foreground: color.foregroundDangerOnloud
+      subtle:
+        backgroundColor: color.backgroundNeutralTransparent
+        borderColor: color.strokeNeutralTransparent
+        foreground: color.foregroundDangerPrimary
+    disabled:
+      foreground: color.foregroundNeutralDisabled
+      primary:
+        backgroundColor: color.backgroundNeutralHeavyDisabled
+      subtle:
+        backgroundColor: color.backgroundNeutralTransparent
+    interaction:
+      hovered: color.hover
+      pressed: color.pressed
+      subtleHoveredBackground: color.hover.backgroundDangerSubtle
+      subtlePressedBackground: color.pressed.backgroundDangerSubtle
+    size:
+      small:
+        roundedRadius: borderRadius.base200
+        horizontalPadding: spacing.componentBase200
+        verticalPadding: spacing.componentBase100
+        iconOnlyPadding: spacing.componentBase100
+        gap: spacing.componentBase50
+      medium:
+        roundedRadius: borderRadius.base300
+        horizontalPadding: spacing.componentBase250
+        verticalPadding: spacing.componentBase150
+        iconOnlyPadding: spacing.componentBase150
+        gap: spacing.componentBase100
+      large:
+        roundedRadius: borderRadius.base400
+        horizontalPadding: spacing.componentBase300
+        verticalPadding: spacing.componentBase200
+        iconOnlyPadding: spacing.componentBase250
+        gap: spacing.componentBase150
+    shape:
+      circle: borderRadius.circular
+
+  content:
+    layout:
+      flexShrink: 1
+      textAlign: center
+    family: fontFamily.functional
+    weight: fontWeight.functionalRegular
+    size:
+      small:
+        fontSize: fontSize.functionalBodySmall
+        lineHeight: lineHeight.functionalBodySmall
+      medium:
+        fontSize: fontSize.functionalBodyMedium
+        lineHeight: lineHeight.functionalBodyMedium
+      large:
+        fontSize: fontSize.functionalBodyLarge
+        lineHeight: lineHeight.functionalBodyLarge
+
+  icon:
+    small:
+      height: size160
+      width: size160
+    medium:
+      height: size200
+      width: size200
+    large:
+      height: size200
+      width: size200
+    color: resolved root foreground
+    inheritedFrom: button.styles.ts getButtonIconSize
+
+  focusVisual:
+    innerColor: color.strokeFocusInner
+    innerWidth: strokeWidth.thin
+    outerColor: color.strokeFocusOuter
+    outerWidth: strokeWidth.thick
+
+notes:
+  strokes: >
+    Both appearances are strokeless because DestructiveButton has no outline
+    emphasis level. The danger signal is carried by the primary fill or by the
+    subtle foreground, never by a border.
+  subtleInteraction: >
+    The subtle rest background is neutral transparent, but its hovered and
+    pressed backgrounds resolve from the danger subtle token so the interaction
+    reveals a danger tint rather than a neutral backplate.
+  disabled: >
+    Disabled values reuse the neutral disabled family shared with Button so the
+    unavailable treatment stays consistent across the button family.
+
+tokenGaps:
+  - id: destructive-button-danger-interaction
+    binding: color.hover.backgroundDangerLoud, color.pressed.backgroundDangerLoud
+    reason: >
+      flex-from-theme.json maps no FURN theme value onto the danger loud
+      interaction backgrounds, so they fall back to the rest value. The primary
+      appearance therefore resolves the same background at rest, hover, and
+      press until the theme mapping supplies distinct danger interaction values.
+  - id: destructive-button-danger-foreground-interaction
+    binding: color.hover.foregroundDangerPrimary, color.pressed.foregroundDangerPrimary
+    reason: >
+      The danger primary foreground has no mapped interaction value, so the
+      subtle appearance changes only its background across interaction states.
+      The subtle background still changes visibly because its rest value is the
+      neutral transparent token rather than the danger subtle token.
+  - id: destructive-button-state-motion
+    binding: root.backgroundColor
+    reason: >
+      This package publishes no motion tokens, so interaction color changes are
+      applied without a duration or easing.

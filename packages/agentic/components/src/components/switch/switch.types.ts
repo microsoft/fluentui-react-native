@@ -41,7 +41,7 @@ export type SwitchStateProps = {
   onChange?: (checked: boolean) => void;
 };
 
-export type SwitchExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type SwitchExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>, 'accessibilityRole' | 'role'>;
 
 export type SwitchProps = SwitchStateProps & ComponentProps<SwitchSlots, SwitchExposedPressableProps>;
 

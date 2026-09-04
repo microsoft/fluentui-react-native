@@ -1,10 +1,11 @@
 # MenuItem accessibility
 
-An interactive root exposes `menuitem` by default, `menuitemradio` with
-`hasCheckmark`, or `menuitemcheckbox` with `hasMultiselect`. Indicator roles
-include checked state from the caller-supplied selected value. A selected
-default menu item instead exposes selected state. The root is accessible; its
-name defaults to content and a chevron receives the default submenu hint.
+An interactive root exposes `role="menuitem"`. Checkmark and multiselect
+variants publish checked state from the caller-supplied selected value while
+retaining that role, because React Native's ARIA-aligned `role` type does not
+currently include the compound menu item roles. A selected default menu item
+instead exposes selected state. The root is accessible; its name defaults to
+content and a chevron receives the default submenu hint.
 
 A section header exposes the React Native `none` role, is disabled, and is not
 focusable. Icon, avatar, chevron, checkmark, and checkbox visuals are
