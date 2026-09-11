@@ -7,8 +7,10 @@ pressing an option does not update `selected`; an owning list or popup must
 provide a new prop value.
 
 The component renders hover and press feedback from its resolved native state.
-Its FocusVisual remains mounted and is visible only when an enabled list item
-is focused. Section headers are noninteractive even when `loading` is false.
+Its root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+FocusVisual remains mounted, hidden on the system path on every platform and retaining
+its enabled-focus visibility calculation on the custom path. Section headers
+are noninteractive and gain no ring even when `loading` is false.
 
 Windows and macOS provide platform keyboard activation for the focusable
 Pressable. Arrow navigation, Home/End, type-ahead, submenu control, dismissal,

@@ -12,6 +12,7 @@ import {
 
 import { Icon } from '../../primitives/icon/icon';
 import { semanticIconSources } from '../../common/iconSources';
+import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
 import { Text } from '../text/text';
 import type { AccordionProps, AccordionState } from './accordion.types';
 
@@ -55,6 +56,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
 
   const themeState = useThemeState();
   const [headerProps, pressableState] = usePressableState({
+    ...getNativeFocusVisualProps(),
     accessibilityControls: bodyId,
     accessibilityHint,
     accessibilityLabel,

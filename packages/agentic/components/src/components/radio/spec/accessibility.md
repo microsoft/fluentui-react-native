@@ -12,5 +12,7 @@ macOS AX expose only the root's radio role, name, checked value, and disabled
 value and cannot announce decorative descendants separately.
 
 The owning group must provide a group name and any positional or peer
-relationship information. FocusVisual is the visible focus feedback; it stays
-mounted and does not create a competing native focus border.
+relationship information. The root follows the
+[shared focus visual policy](../../AGENTS.md#focus-visual-policy), requesting native
+feedback on every platform and retaining the mounted custom FocusVisual without
+a competing visible ring. Native rendering depends on platform support.

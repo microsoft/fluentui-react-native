@@ -3,7 +3,7 @@
   "component": "list-item",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-08-28",
+  "reviewedAt": "2026-09-11",
   "sources": [
     {
       "id": "flex-component",
@@ -70,6 +70,10 @@
     }
   ],
   "divergences": [
+    {
+      "id": "native-system-focus-visuals",
+      "status": "accepted"
+    },
     {
       "id": "list-item-native-selection-indicators",
       "status": "accepted"

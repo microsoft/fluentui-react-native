@@ -27,9 +27,12 @@ button.
 
 ## Focus and motion
 
-The focus visual stays in the tree for the lifetime of the button. Focus
-changes its visibility rather than adding or removing border-bearing native
-views. It is hidden while disabled.
+The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Every platform delegates rendering and appearance to its native renderer and
+hides the custom visual. The custom
+visual and its border-bearing children stay in the tree for the lifetime of the
+button, preserving the existing visibility calculation on the retained path.
+Disabled buttons do not display focus feedback.
 
 Button currently performs no timed state animation. Hover, press, selection,
 and focus styles update immediately, so reduced-motion handling adds no

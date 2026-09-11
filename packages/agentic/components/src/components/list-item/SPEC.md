@@ -49,7 +49,7 @@ semibold content width and show the selected fill.
 - **LIT-003:** Selection remains caller-owned, and each selection mode renders
   its documented presentational indicator and selected visual treatment.
 - **LIT-004:** Disabled, hover, press, focus, accessibility, and user-style
-  behavior remain coherent on the root.
+  behavior remain coherent on the root, following the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
 - **LIT-005:** Size and secondary-content-position mappings preserve the
   documented React Native layout behavior.
 
@@ -59,14 +59,18 @@ On Windows and macOS, the root is a React Native `Pressable`, defaulting to
 the `button` accessibility role. It merges a caller's accessibility state with
 `disabled` and `selected`, is accessible by default, and is focusable unless
 disabled. Native press, pointer hover, and focus events drive the resolved
-state. The component keeps a dual-ring FocusVisual mounted and only exposes it
-while enabled and focused.
+state. The root requests native focus visuals on every platform under the shared
+policy; rendering depends on platform support.
+The dual-ring FocusVisual remains mounted, hidden on that path and retaining
+its enabled-focus visibility behavior on the custom path.
 
 There is no internal keyboard roving, list position announcement, virtualized
 item metadata, or selection change handling. A surrounding list may provide
 those behaviors through its own React Native composition.
 
 ## Divergences from Flex
+
+- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
 - `list-item-native-selection-indicators` (**accepted**): FURN renders the
   single- and multi-select indicators as inaccessible text glyphs rather than

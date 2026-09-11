@@ -36,10 +36,13 @@ in this package.
 
 ## Focus visual
 
-A two-ring focus visual is drawn inside the tag, following the resolved corner
-radius, whenever the root is focused and not disabled. React Native does not
-report focus modality on these platforms, so the ring appears for pointer focus
-as well as keyboard focus.
+The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Every platform receives the native focus-ring request, with rendering support
+and appearance delegated to its renderer, while the custom
+visual remains mounted but hidden. On the retained custom path, the two-ring
+visual follows the resolved radius and appears while the root is focused and
+enabled, including pointer focus. This adaptation does not introduce a new
+modality guarantee.
 
 When the caller removes a tag on activation, the focused element is destroyed.
 Move focus deliberately in that handler, to the next tag or to the container, or

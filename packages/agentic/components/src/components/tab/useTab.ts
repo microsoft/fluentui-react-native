@@ -9,6 +9,7 @@ import {
   useSlot,
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
+import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
 
 import type { TabProps, TabState } from './tab.types';
 import { Icon } from '../../primitives/icon/icon';
@@ -56,6 +57,7 @@ export function useTab_unstable(props: TabProps): TabState {
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({
     ...nativeRest,
+    ...getNativeFocusVisualProps(),
     accessibilityPosInSet: tabList?.getPosition(value),
     accessibilitySetSize: tabList?.setSize,
     accessibilityRole: 'tab',

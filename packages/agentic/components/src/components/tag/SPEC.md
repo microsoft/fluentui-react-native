@@ -89,12 +89,14 @@ foreground.
 caller-supplied state, keep a disabled tag out of the tab order, and require an
 accessible name for icon-only tags.
 
-**TAG-009:** Show the two-ring focus visual while the root is focused and not
-disabled, following the resolved corner radius.
+**TAG-009:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+on the root, retaining the mounted two-ring visual and resolved corner radius
+for the custom path.
 
 ## Platform behavior
 
-Windows and macOS behave identically. The root is focusable while enabled and
+Windows and macOS share the following activation behavior; focus rendering follows
+the shared platform policy. The root is focusable while enabled and
 leaves the tab order while disabled. Enter and Space activate the focused tag
 through the shared pressable behavior and produce the same `onPress` a pointer
 press produces.
@@ -110,6 +112,8 @@ constant across those states so the label does not flicker while the pointer
 moves across a row of tags.
 
 ## Divergences from Flex
+
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
 | ID                            | Disposition | React Native contract                                                                                                                                                                                  | Follow-up                                                                             |
 | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
@@ -130,4 +134,4 @@ moves across a row of tags.
 | TAG-006     | `tag.styles.ts`, `tag.stories.tsx`                               |
 | TAG-007     | `tag.styles.ts`, `useTagStyles.ts`, `tag.test.tsx`               |
 | TAG-008     | `useTag.ts`, `tag.test.tsx`                                      |
-| TAG-009     | `useTagStyles.ts`, `tag.test.tsx`                                |
+| TAG-009     | `useTag.ts`, `useTagStyles.ts`, `tag.test.tsx`                   |

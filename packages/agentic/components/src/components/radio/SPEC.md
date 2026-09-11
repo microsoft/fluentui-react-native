@@ -50,7 +50,7 @@ rather than explicitly hiding the indicator and text children.
 - **RAD-004:** Apply selection, disabled, hovered, pressed, and user-style
   precedence to the documented token bindings.
 - **RAD-005:** Expose radio semantics, accessible naming, disabled behavior,
-  descendant grouping, and the persistent FocusVisual.
+  descendant grouping, and root focus feedback under the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
 
 ## Platform behavior
 
@@ -61,12 +61,16 @@ indicator and text subtrees are explicitly hidden from assistive technology so
 the named root is the single announced element.
 
 Native Pressable events provide hover, press, focus, and keyboard activation.
-The FocusVisual remains in the tree and is visible only for an enabled focused
-radio. Group name, arrow-key navigation, single-tab-stop behavior, peer
-selection, and focus restoration must be implemented by the component that
-renders the radios.
+The root requests native focus visuals on every platform under the shared policy;
+rendering depends on platform support. FocusVisual
+remains in the tree, hidden on the system path and retaining its enabled-focus
+visibility behavior on the custom path. Group name, arrow-key navigation,
+single-tab-stop behavior, peer selection, and focus restoration must be
+implemented by the component that renders the radios.
 
 ## Divergences from Flex
+
+- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
 - `radio-native-composition` (**accepted**): FURN renders the label and
   indicator directly with React Native Text and View primitives instead of

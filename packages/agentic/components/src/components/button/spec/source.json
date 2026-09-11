@@ -3,7 +3,7 @@
   "component": "button",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-08-28",
+  "reviewedAt": "2026-09-11",
   "sources": [
     {
       "id": "flex-component",
@@ -131,6 +131,10 @@
   ],
   "divergences": [
     {
+      "id": "native-system-focus-visuals",
+      "status": "accepted"
+    },
+    {
       "id": "button-selection-axis",
       "status": "deferred"
     },
@@ -166,7 +170,7 @@
     },
     {
       "id": "BTN-006",
-      "evidence": ["useButtonStyles.ts", "renderButton.tsx", "button.test.tsx"]
+      "evidence": ["useButton.ts", "useButtonStyles.ts", "renderButton.tsx", "button.test.tsx"]
     }
   ]
 }

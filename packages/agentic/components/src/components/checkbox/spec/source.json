@@ -3,7 +3,7 @@
   "component": "checkbox",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-08-28",
+  "reviewedAt": "2026-09-11",
   "sources": [
     {
       "id": "flex-component",
@@ -71,6 +71,10 @@
   ],
   "divergences": [
     {
+      "id": "native-system-focus-visuals",
+      "status": "accepted"
+    },
+    {
       "id": "checkbox-secondary-text-description",
       "status": "accepted"
     },
@@ -84,7 +88,7 @@
     },
     {
       "id": "checkbox-native-focus-ring",
-      "status": "resolved"
+      "status": "accepted"
     },
     {
       "id": "checkbox-owned-props-type-surface",
@@ -114,7 +118,7 @@
     },
     {
       "id": "CBX-006",
-      "evidence": ["checkbox.styles.ts", "useCheckboxStyles.ts", "checkbox.test.tsx"]
+      "evidence": ["useCheckbox.ts", "checkbox.styles.ts", "useCheckboxStyles.ts", "renderCheckbox.tsx", "checkbox.test.tsx"]
     }
   ]
 }

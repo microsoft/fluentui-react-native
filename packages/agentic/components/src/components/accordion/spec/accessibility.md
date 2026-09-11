@@ -4,4 +4,4 @@ The header is the only accessible control. It uses React Native button semantics
 
 The header associates with the generated body identifier through React Native `accessibilityControls`. The body is not itself accessible and is hidden from accessibility descendants while collapsed. Its content becomes available in reading order only while expanded. Decorative leading and chevron icons are inaccessible.
 
-On Windows, the header maps to a UI Automation button and reports expanded state. On macOS, it maps to an AX button with the same state. `FocusVisual` provides the visible focus feedback; it has no accessible name and cannot intercept input.
+On Windows, the header maps to a UI Automation button and reports expanded state. On macOS, it maps to an AX button with the same state. The header's focus feedback follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy). The retained `FocusVisual` has no accessible name and cannot intercept input.

@@ -93,16 +93,15 @@ describe('Accordion', () => {
     expect(getHeader(component).props.accessibilityState).toEqual({ busy: true, expanded: false });
   });
 
-  it('uses the focused prop to render the universal dual-ring focus visual', async () => {
+  it('leaves focus visuals to the native header even when focused is supplied', async () => {
     const component = await renderAccordion({ focused: true });
 
+    expect(getHeader(component).props.enableFocusRing).toBe(true);
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: '#000000',
       borderWidth: 2,
     });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: '#ffffff',
       borderWidth: 1,

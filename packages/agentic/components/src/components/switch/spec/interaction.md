@@ -30,13 +30,13 @@ arrow keys, and moving through a group of switches is plain tab order.
 
 ## Focus visual
 
-A two-ring focus visual is drawn inside the hit area, following the root corner
-radius, whenever the root is focused and is not disabled. The two rings resolve
-from the inner and outer focus stroke tokens, so the indicator remains visible
-regardless of the surface behind it.
-
-React Native does not report focus modality on these platforms, so the ring
-appears for pointer focus as well as keyboard focus.
+The hit-area root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Every platform receives the native focus-ring request, with rendering support
+and appearance delegated to its renderer, while the custom
+visual remains mounted but hidden. On the retained custom path, the two-ring
+visual uses the root radius and existing focus stroke tokens and appears while
+the root is focused and enabled, including pointer focus. This adaptation does
+not introduce a new modality guarantee.
 
 ## State transition
 

@@ -169,12 +169,12 @@ describe('Checkbox', () => {
     expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.pressed.foregroundNeutralSecondary);
   });
 
-  it('renders the persistent dual-ring focus visual', async () => {
+  it('uses native focus visuals while retaining the hidden custom rings', async () => {
     const colors = defaultFlexTokens.color;
     const component = await renderCheckbox({ label: 'Focused' });
     const root = getRoot(component);
 
-    expect(root.props.enableFocusRing).toBe(false);
+    expect(root.props.enableFocusRing).toBe(true);
     await fireEvent(root, 'pressIn', {});
     await fireEvent(root, 'focus', {});
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
@@ -188,9 +188,7 @@ describe('Checkbox', () => {
       borderColor: colors.strokeFocusOuter,
       borderWidth: 2,
     });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: colors.strokeFocusInner,
       borderWidth: 1,

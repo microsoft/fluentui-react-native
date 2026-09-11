@@ -48,9 +48,10 @@ a row of tags is one tab stop per enabled tag. Enter and Space activate the
 focused tag. A disabled tag stays in the accessibility tree and reports its
 disabled state, so it can still be read.
 
-A two-ring focus visual is drawn inside the tag, following the resolved corner
-radius, whenever the root is focused and not disabled, so it is rounded on a
-rounded tag and circular on a circular or icon-only tag.
+The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Every platform receives the native focus-ring request; rendering depends on
+platform support. The mounted two-ring visual and its resolved rounded or
+circular radius are retained for the custom path.
 
 ## Contrast
 

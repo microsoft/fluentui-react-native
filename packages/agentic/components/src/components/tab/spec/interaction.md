@@ -24,12 +24,13 @@ behavior, producing the same selection request and `onPress` as a pointer press.
 
 ## Focus visual
 
-A two-ring focus visual is drawn inside the hit area, following the corner radius
-of the active layout, so it is rounded on an icon-and-text tab and circular on an
-icon-only tab. It is shown whenever the root is focused and not disabled.
-
-React Native does not report focus modality on these platforms, so the ring
-appears for pointer focus as well as keyboard focus.
+The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Every platform receives the native focus-ring request, with rendering support
+and appearance delegated to its renderer, while the custom
+visual remains mounted but hidden. On the retained custom path, the two-ring
+visual follows the active-layout radius and appears while the root is focused
+and enabled, including pointer focus. Native feedback is not required to match
+the custom rounded or circular geometry.
 
 ## Selection appearance
 

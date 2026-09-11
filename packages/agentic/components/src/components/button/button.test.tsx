@@ -199,11 +199,11 @@ describe('Button', () => {
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
   });
 
-  it('renders a persistent dual-ring focus visual', async () => {
+  it('uses native focus visuals while retaining the hidden custom rings', async () => {
     const component = await renderButton({ content: 'Focused' });
     const root = getRoot(component);
 
-    expect(root.props.enableFocusRing).toBe(false);
+    expect(root.props.enableFocusRing).toBe(true);
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
 
     await fireEvent(root, 'focus', {});
@@ -212,9 +212,7 @@ describe('Button', () => {
       borderColor: '#000000',
       borderWidth: 2,
     });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: '#ffffff',
       borderWidth: 1,

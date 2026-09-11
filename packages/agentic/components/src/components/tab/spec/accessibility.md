@@ -49,8 +49,10 @@ TabList owns arrow, Home, and End movement and the selection-follows-focus
 policy. It overrides grouped selection and focusability while preserving the
 Tab's name, controlled-panel relationship, and consumer handlers.
 
-A two-ring focus visual is drawn inside the hit area, following the corner
-radius of the active layout, whenever the root is focused and not disabled.
+The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Every platform receives the native focus-ring request; rendering depends on
+platform support. The mounted two-ring visual and its active-layout radius
+are retained for the custom path.
 
 ## Contrast and state
 

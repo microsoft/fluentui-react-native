@@ -4,6 +4,7 @@ import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-nat
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { semanticIconSources } from '../../common/iconSources';
+import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import { Icon } from '../../primitives/icon/icon';
 import type { MenuItemProps, MenuItemState } from './menu-item.types';
@@ -55,6 +56,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
+    ...getNativeFocusVisualProps(),
     accessible: rest.accessible ?? true,
     accessibilityHint: accessibilityHint ?? (hasChevron ? 'Has submenu' : undefined),
     accessibilityLabel: accessibilityLabel ?? contentText,

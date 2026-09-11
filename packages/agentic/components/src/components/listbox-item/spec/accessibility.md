@@ -12,6 +12,8 @@ checkmark, and the multiselect visual are inaccessible presentation, so the
 root is announced once. Windows exposes the resolved root through UIA and
 macOS through AX.
 
-The mounted FocusVisual supplies the visible focus feedback for an enabled
-option. Consumers own the containing collection's name, position, selection
+The option root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy),
+requesting native feedback on every platform and retaining the mounted custom
+FocusVisual. Native rendering depends on platform support.
+Consumers own the containing collection's name, position, selection
 rules, and any focus restoration policy.

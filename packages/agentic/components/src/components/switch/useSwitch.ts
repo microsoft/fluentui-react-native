@@ -10,6 +10,7 @@ import {
   useToggleState,
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
+import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
 
 import { Text } from '../text/text';
 import type { SwitchProps, SwitchState } from './switch.types';
@@ -104,6 +105,7 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
+    ...getNativeFocusVisualProps(),
     ...pressableNameProps,
     accessibilityRole: 'switch',
     accessibilityState: {

@@ -92,12 +92,14 @@ icon the same fixed size in both layouts.
 the controlled-panel relationship, merging caller state underneath, and drop a
 disabled tab from the tab order.
 
-**TAB-008:** Show the two-ring focus visual while the root is focused and not
-disabled, following the corner radius of the active layout.
+**TAB-008:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+on the root, retaining the mounted two-ring visual and active-layout radius
+for the custom path.
 
 ## Platform behavior
 
-Windows and macOS behave identically. A standalone root is focusable while
+Windows and macOS share the following navigation behavior; focus rendering follows
+the shared platform policy. A standalone root is focusable while
 enabled and non-focusable while disabled. Inside TabList, exactly one enabled
 Tab is focusable and the parent moves that roving focus with orientation-aware
 arrows, Home, and End.
@@ -113,11 +115,13 @@ precedence over hover.
 
 ## Divergences from Flex
 
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
+
 | ID                                | Disposition | React Native contract                                                                                                                                                                            | Follow-up                                                                                                 |
 | --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
 | `tab-disabled-focusability`       | Accepted    | A disabled tab is removed from the tab order and cannot be focused, while still reporting its disabled state. Flex keeps a disabled tab reachable so its state can be discovered by keyboard.    | None for this component. Reachability would have to come from a list container that manages roving focus. |
 | `tab-list-navigation-not-shipped` | Resolved    | TabList now coordinates group selection, roving focus, orientation-aware arrows, Home and End, disabled-item skipping, and the selection-follows-focus policy.                                   | Implemented by the adjacent TabList contract and integration tests.                                       |
-| `tab-focus-modality`              | Accepted    | The focus visual appears whenever the root is focused, including after a press. Flex shows it only for keyboard-modality focus.                                                                  | None. React Native exposes no focus modality on these platforms.                                          |
+| `tab-focus-modality`              | Accepted    | The retained custom visual appears whenever the root is focused, including after a press. Native focus appearance is delegated to each renderer.                                                 | No new modality guarantee is made by the platform adaptation.                                             |
 | `tab-selected-weight-reservation` | Accepted    | The selected label is heavier than the resting label, and the width for that heavier text is reserved on every tab so selection does not reflow the list. Flex describes only the weight change. | None. The reservation is an implementation requirement of the shared text layout, not a visual addition.  |
 
 ## Conformance
@@ -131,4 +135,4 @@ precedence over hover.
 | TAB-005     | `tab.styles.ts`, `useTabStyles.ts`, `tab.test.tsx`               |
 | TAB-006     | `tab.styles.ts`, `useTabStyles.ts`, `tab.stories.tsx`            |
 | TAB-007     | `useTab.ts`, `tab.test.tsx`                                      |
-| TAB-008     | `useTabStyles.ts`, `tab.test.tsx`                                |
+| TAB-008     | `useTab.ts`, `useTabStyles.ts`, `tab.test.tsx`                   |

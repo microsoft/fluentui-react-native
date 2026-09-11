@@ -6,9 +6,11 @@ or receive focus. Pressing never changes `selected`, so an owning menu must
 update that value and clear peers when required.
 
 Hover and press state select the root and text colors after style selection.
-The dual-ring FocusVisual remains mounted and is visible only for an enabled,
-focused list item. Section headers do not activate or focus, including when
-their skeleton is shown.
+The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+The dual-ring FocusVisual remains mounted, hidden on the system path on every platform
+and retaining its enabled-focus visibility calculation on the custom path.
+Section headers do not activate, focus, or show a ring, including when their
+skeleton is shown.
 
 This component does not implement arrow navigation, Home/End, type-ahead,
 submenu opening, focus restoration, dismissal, or timed motion. Those are

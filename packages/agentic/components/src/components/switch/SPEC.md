@@ -93,8 +93,9 @@ value never moves.
 hovered state through the shared interactive precedence, and interpolate the
 track and thumb colors together with the thumb position from one progress value.
 
-**SWCH-005:** Show the two-ring focus visual inside the hit area while the root
-is focused and not disabled, using the root corner radius.
+**SWCH-005:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+on the hit-area root, not the label container or track. Retain the mounted
+two-ring visual and its root-radius geometry for the custom path.
 
 **SWCH-006:** Expose the root as a switch to assistive technology with the
 checked and disabled state merged over any caller-supplied state, and derive the
@@ -129,11 +130,13 @@ interpolates colors, which the native driver cannot animate.
 
 ## Divergences from Flex
 
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
+
 | ID                                | Disposition | React Native contract                                                                                                                                                                 | Follow-up                                                                                                    |
 | --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `switch-label-association-ids`    | Resolved    | When the caller supplies no name, the component copies visible label text to the root as the single accessible-name mechanism and emits no unresolved labelled-by references.         | Implemented in `useSwitch.ts` and covered by naming tests.                                                   |
 | `switch-label-spacing`            | Accepted    | One container gap separates the control from whichever labels render. Flex distinguishes inner and outer label spacing per side.                                                      | None. A single gap is the natural React Native flex-container expression and matches the inner spacing step. |
-| `switch-focus-modality`           | Accepted    | The focus visual appears whenever the root is focused, including after a press. Flex shows it only for keyboard-modality focus.                                                       | None. React Native exposes no focus modality on these platforms.                                             |
+| `switch-focus-modality`           | Accepted    | The retained custom visual appears whenever the root is focused, including after a press. Native focus appearance is delegated to each renderer.                                      | No new modality guarantee is made by the platform adaptation.                                                |
 | `switch-keyboard-activation-path` | Deferred    | FURN registers both `onPress` and a recognized-key `onKeyUp` toggle. If Windows or macOS `Pressable` also synthesizes `onPress` for that key, one activation can request two toggles. | Verify the native event sequence, then remove the redundant path or document the platform-specific handler.  |
 
 ## Conformance
@@ -144,7 +147,7 @@ interpolates colors, which the native driver cannot animate.
 | SWCH-002    | `useSwitch.ts`, `switch.test.tsx`                                            |
 | SWCH-003    | `renderSwitch.tsx`, `useSwitch.ts`, `switch.test.tsx`                        |
 | SWCH-004    | `switch.styles.ts`, `useSwitchStyles.ts`, `switch.test.tsx`                  |
-| SWCH-005    | `useSwitchStyles.ts`, `switch.test.tsx`                                      |
+| SWCH-005    | `useSwitch.ts`, `useSwitchStyles.ts`, `switch.test.tsx`                      |
 | SWCH-006    | `useSwitch.ts`, `switch.test.tsx`                                            |
 | SWCH-007    | `switch.styles.ts`, `switch.test.tsx`                                        |
 | SWCH-008    | `useSwitch.ts`, `useSwitchStyles.ts`, `switch.stories.tsx`                   |

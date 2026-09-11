@@ -57,7 +57,7 @@ renders the label first and secondary text second.
 
 | Element        | Rendered when                          | Contract                                                                                                                                             |
 | -------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Focus visual   | always mounted                         | A dual-ring overlay whose visibility, not mounting, tracks focus.                                                                                    |
+| Focus visual   | always mounted                         | A retained dual-ring overlay; hidden on the system path on every platform, otherwise its visibility, not mounting, tracks focus.                     |
 | Indicator      | always                                 | A fixed 16 by 16 box carrying fill, stroke, and radius. It draws a checkmark for `checked`, a dash for `indeterminate`, and nothing for `unchecked`. |
 | Label column   | `showLabel`, or secondary text renders | A non-accessible column that holds the visible text nodes.                                                                                           |
 | Label          | `showLabel`                            | Wraps rather than truncates when the root width is constrained.                                                                                      |
@@ -80,8 +80,9 @@ renders the label first and secondary text second.
 - **CBX-005:** Resolve indicator, label, secondary text, and indicator glyph
   colors from status first and then disabled, pressed, and hovered state, select
   the indicator radius from `variant`, and apply the caller `style` last.
-- **CBX-006:** Keep the dual-ring focus visual mounted and show it only for a
-  focused, enabled Checkbox.
+- **CBX-006:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+  on the root, retaining the mounted dual-ring visual and its existing modality
+  behavior for the custom path.
 
 ## Platform behavior
 
@@ -91,32 +92,35 @@ platforms; Checkbox adds no key handling of its own and does not intercept Tab.
 A disabled Checkbox sets `focusable` to `false` and is skipped by keyboard
 navigation.
 
-Checkbox suppresses the react-native-windows native focus visual so the shared
-dual-ring visual is the single indicator. Pointer focus hides that visual;
-keyboard and programmatic focus show it. The shared visual stays mounted for the
-lifetime of the control and only changes visibility, which avoids creating
-border-bearing native views after mount.
+Every platform receives the native focus-ring request on the root and suppresses
+the retained custom overlay under the shared policy. Native rendering and keyboard
+versus pointer appearance depend on the platform renderer. On the custom path,
+pointer focus hides the overlay and keyboard
+or programmatic focus shows it as before. The overlay and its border-bearing
+children remain mounted for the lifetime of the control.
 
 No timed animation is present. Status, hover, press, and focus styling change on
 the next render, so reduced-motion settings need no separate branch.
 
 ## Divergences from Flex
 
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
+
 | ID                                       | Disposition | React Native contract                                                                                                                                                                                                            | Follow-up                                                                                         |
 | ---------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | `checkbox-secondary-text-description`    | Accepted    | Secondary text is appended to the root accessibility hint rather than associated as a separate described-by target. React Native exposes no equivalent description relationship, and the hint is the platform-idiomatic channel. | None. Revisit only if React Native adds a description association.                                |
 | `checkbox-secondary-text-requires-label` | Accepted    | Secondary text renders only alongside a visible label, and a development warning fires otherwise. Flex treats the two visibility toggles as independent.                                                                         | None. The pairing keeps the label column from presenting supporting text with nothing to support. |
-| `checkbox-focus-visual-modality`         | Resolved    | The shared focus-modality hook suppresses the visual for pointer focus and shows it for keyboard or programmatic focus.                                                                                                          | Implemented in `useCheckbox.ts` and covered by interaction tests.                                 |
-| `checkbox-native-focus-ring`             | Resolved    | The native Windows focus ring is disabled so it cannot compete with the shared dual-ring visual.                                                                                                                                 | Implemented in `useCheckbox.ts` and covered by root-prop tests.                                   |
+| `checkbox-focus-visual-modality`         | Resolved    | The retained custom path uses the shared focus-modality hook. Native appearance is delegated to each renderer and is not a new modality guarantee.                                                                               | Preserve existing custom-path interaction coverage.                                               |
+| `checkbox-native-focus-ring`             | Accepted    | Every platform enables the native ring prop and hides the custom overlay by default; the evaluation fallback reverses that choice. A native ring is not guaranteed on unsupported renderers.                                     | Validate root props and ring suppression under the shared focus policy.                           |
 | `checkbox-owned-props-type-surface`      | Deferred    | The root type accepts role and checked or disabled state values that the implementation always overwrites.                                                                                                                       | Omit those owned keys from the exposed native-prop type in a separately reviewed API correction.  |
 
 ## Conformance
 
-| Requirement | Evidence                                                                             |
-| ----------- | ------------------------------------------------------------------------------------ |
-| CBX-001     | `checkbox.types.ts`, `useCheckbox.ts`, `checkbox.types.test.ts`, `checkbox.test.tsx` |
-| CBX-002     | `useCheckbox.ts`, `checkbox.test.tsx`, `checkbox.stories.tsx`                        |
-| CBX-003     | `renderCheckbox.tsx`, `useCheckbox.ts`, `checkbox.test.tsx`                          |
-| CBX-004     | `useCheckbox.ts`, `checkbox.test.tsx`                                                |
-| CBX-005     | `checkbox.styles.ts`, `useCheckboxStyles.ts`, `checkbox.test.tsx`                    |
-| CBX-006     | `useCheckboxStyles.ts`, `renderCheckbox.tsx`, `checkbox.test.tsx`                    |
+| Requirement | Evidence                                                                                                  |
+| ----------- | --------------------------------------------------------------------------------------------------------- |
+| CBX-001     | `checkbox.types.ts`, `useCheckbox.ts`, `checkbox.types.test.ts`, `checkbox.test.tsx`                      |
+| CBX-002     | `useCheckbox.ts`, `checkbox.test.tsx`, `checkbox.stories.tsx`                                             |
+| CBX-003     | `renderCheckbox.tsx`, `useCheckbox.ts`, `checkbox.test.tsx`                                               |
+| CBX-004     | `useCheckbox.ts`, `checkbox.test.tsx`                                                                     |
+| CBX-005     | `checkbox.styles.ts`, `useCheckboxStyles.ts`, `checkbox.test.tsx`                                         |
+| CBX-006     | `useCheckbox.ts`, `checkbox.styles.ts`, `useCheckboxStyles.ts`, `renderCheckbox.tsx`, `checkbox.test.tsx` |

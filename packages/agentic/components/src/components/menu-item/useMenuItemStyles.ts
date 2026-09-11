@@ -3,7 +3,7 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
-import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
+import { createFocusVisualProps } from '../../common/focusVisualPolicy';
 import {
   getMenuItemCheckboxStyle,
   getMenuItemLeadingStyle,
@@ -21,7 +21,7 @@ export function useMenuItemStyles_unstable(state: MenuItemState) {
   const rootLayoutStyle = getMenuItemRootLayoutStyle(state);
   const rootStyle: StyleProp<ViewStyle> = [menuItemStyles.root, rootLayoutStyle, getMenuItemRootStyle(state), state.userStyle];
 
-  state.focusVisualProps = createFocusVisualProps_unstable({
+  state.focusVisualProps = createFocusVisualProps({
     borderRadius: rootLayoutStyle.borderRadius,
     innerColor: state.tokens.color.strokeFocusInner,
     innerWidth: state.tokens.strokeWidth.thin,

@@ -4,6 +4,7 @@ import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useControllableValue, useFocusVisible, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
+import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
 
 import { Text } from '../text/text';
 import type { CheckboxProps, CheckboxState, CheckboxStatus } from './checkbox.types';
@@ -77,7 +78,7 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    enableFocusRing: false,
+    ...getNativeFocusVisualProps(),
     focusable: rest.focusable ?? !disabled,
     onPress: handlePress,
   };

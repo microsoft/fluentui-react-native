@@ -41,12 +41,13 @@ A disabled Checkbox reports disabled state, sets `focusable={false}`, and does
 not respond to activation. It is skipped by keyboard navigation rather than
 announced as an unavailable stop.
 
-The visible focus indicator is a persistent dual-ring overlay drawn from the
-focus stroke tokens. It stays mounted and toggles visibility, and it is hidden
-while disabled or while focus came from a pointer press. Keyboard and
-programmatic focus show it. It surrounds the whole row, including the label
-column, so the indicated region matches the press target. The overlay is hidden
-from the accessibility tree and does not receive pointer events.
+The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Every platform receives the native focus-ring request on the whole row's press
+target and leaves the custom overlay mounted but hidden. Rendering support and
+keyboard versus pointer appearance are delegated to each platform renderer.
 
-Checkbox disables the react-native-windows platform focus visual so the shared
-dual-ring overlay is the single visible focus treatment.
+On the retained custom path, the dual-ring overlay uses the existing focus
+stroke tokens and surrounds the whole row, including the label column. It is
+hidden while disabled or while focus came from a pointer press; keyboard and
+programmatic focus show it as before. The overlay remains hidden from the
+accessibility tree and does not receive pointer events.

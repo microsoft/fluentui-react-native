@@ -53,7 +53,8 @@ Multiselect takes visual precedence over selected fill and semibold text.
 - **MNI-004:** Keep section headers noninteractive and limit skeleton loading
   to that variant.
 - **MNI-005:** Apply token-derived interaction, accessibility, and persistent
-  focus behavior without overriding caller handlers.
+  custom focus structure without overriding caller handlers; the root's focus
+  feedback follows the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
 
 ## Platform behavior
 
@@ -64,11 +65,16 @@ the default hint `"Has submenu"`. Header roots expose the `none` role, are
 disabled, and cannot receive focus. Decorative visuals are inaccessible.
 
 The native Pressable drives pointer hover, press, focus, and keyboard
-activation for interactive rows. FocusVisual is mounted for each row and
-visible only on enabled list items with focus. The component does not navigate
-between menu items, open a submenu, restore focus, or dismiss a menu.
+activation for interactive rows. Interactive roots request native focus visuals
+on every platform under the shared policy; rendering depends on platform support.
+FocusVisual is mounted for each row, hidden
+on the system path and using its existing enabled-focus visibility calculation
+on the custom path. Section headers gain no focus feedback. The component does
+not navigate between menu items, open a submenu, restore focus, or dismiss a menu.
 
 ## Divergences from Flex
+
+- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
 - `menu-item-native-header-root` (**accepted**): A FURN section header uses a
   disabled Pressable with the `none` role rather than a platform-specific
@@ -79,10 +85,10 @@ between menu items, open a submenu, restore focus, or dismiss a menu.
 
 ## Conformance
 
-| Requirement | Evidence                                                            |
-| ----------- | ------------------------------------------------------------------- |
-| MNI-001     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.types.test.ts`   |
-| MNI-002     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`        |
-| MNI-003     | `useMenuItem.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`       |
-| MNI-004     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`        |
-| MNI-005     | `useMenuItemStyles.ts`, `menu-item.styles.ts`, `menu-item.test.tsx` |
+| Requirement | Evidence                                                                              |
+| ----------- | ------------------------------------------------------------------------------------- |
+| MNI-001     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.types.test.ts`                     |
+| MNI-002     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                          |
+| MNI-003     | `useMenuItem.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`                         |
+| MNI-004     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                          |
+| MNI-005     | `useMenuItem.ts`, `useMenuItemStyles.ts`, `menu-item.styles.ts`, `menu-item.test.tsx` |

@@ -53,7 +53,7 @@ bindings:
     innerWidth: strokeWidth.thin
     outerColor: color.strokeFocusOuter
     outerWidth: strokeWidth.thick
-    visible: focused and not disabled
+    visible: custom path and focused and not disabled
 
   track:
     static:

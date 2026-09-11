@@ -120,20 +120,19 @@ describe('Switch', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('renders the persistent dual-ring focus visual on the hit area', async () => {
+  it('uses native focus visuals on the hit area while retaining the hidden custom rings', async () => {
     const tokens = defaultFlexTokens;
     const component = await renderSwitch({ label: 'Wi-Fi', labelAfter: false });
     const root = component.getByRole('switch', { name: 'Wi-Fi' });
 
     await fireEvent(root, 'focus', {});
+    expect(root.props.enableFocusRing).toBe(true);
 
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: tokens.color.strokeFocusOuter,
       borderWidth: tokens.strokeWidth.thick,
     });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: tokens.color.strokeFocusInner,
       borderWidth: tokens.strokeWidth.thin,

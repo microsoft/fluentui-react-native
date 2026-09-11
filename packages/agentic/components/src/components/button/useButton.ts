@@ -3,6 +3,7 @@ import { useAccessibilityLabelWarning, usePressableState, useSlot, useOptionalSl
 import { useThemeState } from '@fluentui-react-native/design';
 import { Pressable } from 'react-native';
 import type { PressableProps } from 'react-native';
+import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
 
@@ -61,8 +62,7 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    // RNW 0.81 crashes when either outline props or its native focus ring creates border visuals after mount.
-    enableFocusRing: false,
+    ...getNativeFocusVisualProps(),
     focusable: rest.focusable ?? !disabled,
   };
   const [pressableProps, pressableState] = usePressableState(nativeProps);

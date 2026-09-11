@@ -4,4 +4,4 @@ A Card becomes interactive when `onPress` is provided or when `selected` is pres
 
 Selection is externally owned. A press reports through `onPress` but never changes `selected`; the caller updates that prop if its collection behavior requires it. Selected cards use the supplied value for visual and accessibility state.
 
-The overlay owns hover, pressed, and focus feedback. It does not trap focus, move focus, or manage collection navigation. `FocusVisual` remains mounted while an overlay exists and becomes visible only for focused, enabled state. Card provides no timed animation or reduced-motion branch.
+The overlay owns hover, pressed, and focus feedback. It does not trap focus, move focus, or manage collection navigation. The overlay, not the structural root, follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy). `FocusVisual` remains mounted while an overlay exists, hidden on the system path on every platform and retaining its focused, enabled visibility calculation on the custom path. Card provides no timed animation or reduced-motion branch.

@@ -11,6 +11,8 @@ those visual affordances. On Windows this exposes the root through UIA; on
 macOS it exposes the root through AX with the resolved role, name, selected
 state, and disabled state.
 
-Focus feedback is provided by the mounted FocusVisual, not a native focus
-border. Callers that change the root role or embed the row in a collection own
+The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy),
+requesting native feedback on every platform and retaining the mounted custom
+FocusVisual. Native rendering depends on platform support.
+Callers that change the root role or embed the row in a collection own
 any additional container semantics and position information.

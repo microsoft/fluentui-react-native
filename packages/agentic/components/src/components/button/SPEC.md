@@ -67,8 +67,9 @@ layout and requires an action-oriented `accessibilityLabel`.
 - **BTN-005:** Treat `selected` as externally owned state, expose checked
   accessibility state when that prop is present, and reserve semibold label
   width to prevent toggle reflow.
-- **BTN-006:** Keep the dual-ring `FocusVisual` mounted and show it only for a
-  focused, enabled button while disabling the native Windows focus ring.
+- **BTN-006:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+  on the root: request native focus visuals on every platform, with the mounted dual-ring
+  `FocusVisual` retained for the custom path.
 
 ## Platform behavior
 
@@ -76,13 +77,15 @@ Windows and macOS use React Native press, hover, and focus events. `Enter` and
 `Space` activation are supplied by the native `Pressable` button behavior.
 Disabled buttons are not focusable.
 
-React Native Windows native focus visuals are disabled because dynamically
-mounting its border visual can crash supported RNW versions. The component
-instead keeps the shared dual-ring `FocusVisual` mounted and changes only its
-visibility state. The contract does not add motion; visual state changes are
-immediate.
+The root requests native focus visuals on every platform under the shared policy.
+The dual-ring `FocusVisual` stays mounted but hidden on that path; its existing
+visibility behavior remains in the evaluation fallback on every platform.
+Native rendering depends on platform support. The contract adds no
+component-owned motion or native modality guarantee.
 
 ## Divergences from Flex
+
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
 | ID                        | Disposition              | React Native contract                                                                                                                                 | Follow-up                                                           |
 | ------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
@@ -92,11 +95,11 @@ immediate.
 
 ## Conformance
 
-| Requirement | Evidence                                                    |
-| ----------- | ----------------------------------------------------------- |
-| BTN-001     | `button.types.ts`, `useButton.ts`, `button.test.tsx`        |
-| BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx` |
-| BTN-003     | `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx` |
-| BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`     |
-| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`       |
-| BTN-006     | `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx` |
+| Requirement | Evidence                                                                    |
+| ----------- | --------------------------------------------------------------------------- |
+| BTN-001     | `button.types.ts`, `useButton.ts`, `button.test.tsx`                        |
+| BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`                 |
+| BTN-003     | `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx`                 |
+| BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`                     |
+| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`                       |
+| BTN-006     | `useButton.ts`, `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx` |

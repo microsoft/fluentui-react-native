@@ -29,6 +29,8 @@ Disabled buttons communicate unavailable state, do not activate, and are
 removed from keyboard focus. Toggle-style buttons remain one button and
 announce their checked state from the externally supplied `selected` value.
 
-The visible focus indicator is the persistent shared `FocusVisual`, which
-draws inner and outer rings from focus stroke tokens. The native Windows focus
-ring is disabled to prevent a competing or unstable focus border.
+The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Every platform receives the native focus-ring request; rendering depends on
+platform support. The persistent shared `FocusVisual` stays mounted but hidden
+on that path. The retained custom path draws inner and outer rings from the
+existing focus stroke tokens.

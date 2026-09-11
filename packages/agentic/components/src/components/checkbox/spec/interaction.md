@@ -35,13 +35,16 @@ so neither `onStatusChange` nor the caller `onPress` runs.
 
 ## Focus and motion
 
-The focus visual stays in the tree for the lifetime of the control. Focus
-changes its visibility rather than mounting or unmounting a border-bearing
-native view. It is shown only when the control is focused and enabled.
+The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Every platform receives the native focus-ring request, with rendering support
+and appearance delegated to its renderer. The custom
+visual and its border-bearing children stay mounted but hidden on that path.
 
-Pointer press state suppresses the visual when the press moves focus. A keyboard
-event restores focus-visible state, and programmatic focus is treated as
-focus-visible because no pointer interaction preceded it.
+The retained custom path keeps its existing focused, enabled visibility
+calculation. Pointer press state suppresses that visual when the press moves
+focus; a keyboard event restores focus-visible state, and programmatic focus is
+treated as focus-visible when no pointer interaction preceded it. These are
+custom-path semantics, not guarantees about native rings.
 
 Checkbox runs no timed animation. Status, hover, press, and focus styling
 change on the next render, so reduced-motion settings need no separate path.

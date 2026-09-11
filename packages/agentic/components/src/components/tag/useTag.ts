@@ -4,6 +4,7 @@ import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
 
 import { semanticIconSources } from '../../common/iconSources';
+import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
 import type { TagProps, TagState } from './tag.types';
@@ -51,6 +52,7 @@ export function useTag_unstable(props: TagProps): TagState {
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
+    ...getNativeFocusVisualProps(),
     accessibilityRole: 'button',
     accessibilityState: {
       ...accessibilityState,

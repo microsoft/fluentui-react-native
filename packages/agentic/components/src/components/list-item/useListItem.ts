@@ -5,6 +5,7 @@ import { useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-nat
 
 import { Icon } from '../../primitives/icon/icon';
 import { hideSlotProps } from '../../common/accessibility';
+import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
 import { Text } from '../text/text';
 
 import { getListItemAvatarSize, getListItemIconSize, getListItemSelectionIndicatorGlyph } from './list-item.styles';
@@ -85,6 +86,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
+    ...getNativeFocusVisualProps(),
     accessibilityRole: rest.accessibilityRole ?? 'button',
     accessibilityState: {
       ...accessibilityState,

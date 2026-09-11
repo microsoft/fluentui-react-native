@@ -172,20 +172,19 @@ describe('ListItem', () => {
     },
   );
 
-  it('renders a persistent dual-ring focus visual', async () => {
+  it('uses native focus visuals while retaining the hidden custom rings', async () => {
     const colors = defaultFlexTokens.color;
     const component = await renderListItem({ content: 'Focused' });
     const root = getRoot(component);
 
     await fireEvent(root, 'focus', {});
+    expect(root.props.enableFocusRing).toBe(true);
 
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: colors.strokeFocusOuter,
       borderWidth: 2,
     });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: colors.strokeFocusInner,
       borderWidth: 1,

@@ -3,6 +3,7 @@ import type { PressableProps } from 'react-native';
 
 import { type PropsWithRefOf, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
+import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
 
 import type { CardProps, CardState } from './card.types';
 
@@ -57,6 +58,7 @@ export function useCard_unstable(props: CardProps): CardState {
 
   const [overlayProps, pressableState] = usePressableState({
     ...rest,
+    ...getNativeFocusVisualProps(),
     accessibilityHint,
     accessibilityLabel,
     accessibilityLabelledBy,

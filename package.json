@@ -79,6 +79,7 @@
     "launch-editor@npm:^2.9.1": "2.14.1",
     "lodash": "^4.18.1",
     "path-to-regexp@npm:8.3.0": "^8.4.2",
+    "react-native-windows": "0.81.35",
     "shell-quote": "^1.9.0",
     "socks@npm:^2.8.3": "2.8.9",
     "unicorn-magic@npm:^0.3.0": "^0.4.0",

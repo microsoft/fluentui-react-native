@@ -27,17 +27,21 @@ Providing `onPress` or `selected` enables the pressable overlay. The resolved st
 
 - **CRD-001:** Resolve the documented variants and default values, derive interactivity from `onPress` or the presence of `selected`, and collapse horizontal direction below the implementation width threshold.
 - **CRD-002:** Render the overlay and public slots in the layout-specific order without injecting a content schema.
-- **CRD-003:** Apply root, nested-content, interaction, focus, and user-style layers from the verified FURN bindings.
-- **CRD-004:** Keep static cards non-focusable by default and expose interactive cards as disabled-aware pressable buttons with persistent focus feedback.
+- **CRD-003:** Apply root, nested-content, interaction, and user-style layers from the verified FURN bindings, with focus feedback following the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
+- **CRD-004:** Keep static cards non-focusable by default and expose interactive cards as disabled-aware pressable buttons; the overlay, not the structural root, owns the native focus-ring request and retained custom focus visual on every platform.
 - **CRD-005:** Preserve externally owned selection and keep nested slot controls independently usable.
 
 ## Platform behavior
 
 Static cards use a non-focusable `View`. A caller can explicitly make a static root accessible; then it uses React Native group role and preserves its label and accessibility state. Interactive cards hide the structural root from accessibility and expose an absolute-fill React Native `Pressable` overlay with button role, disabled state, optional selected state, and `FocusVisual`.
 
+The overlay requests native focus visuals on every platform under the shared policy; rendering depends on platform support. Its custom `FocusVisual` remains mounted but hidden on that path; static cards gain neither a ring nor a focus stop.
+
 On Windows and macOS, interactive overlays respond to native pointer, touch, `Enter`, and `Space` press behavior. The overlay is disabled and unfocusable when `disabled`; nested controls remain rendered as sibling content and keep their own press behavior. Windows maps the overlay to a UI Automation button; macOS maps it to an AX button. The component does not navigate, manage a card collection, or animate state changes.
 
 ## Divergences from Flex
+
+- `native-system-focus-visuals` — **accepted.** Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
 - `card-button-only-activation` — **accepted.** The FURN interactive path always uses a React Native pressable button; it has no separate link or navigation-destination contract.
 - `card-static-accessibility-opt-in` — **accepted.** FURN cannot infer a title-to-region association from generic `View` slots. Static cards are hidden from accessibility by default and become a labeled group only when the caller explicitly sets `accessible`.
@@ -48,6 +52,6 @@ On Windows and macOS, interactive overlays respond to native pointer, touch, `En
 | ----------- | ------------------------------------------------------------------------- |
 | CRD-001     | `card.types.ts`, `useCard.ts`, `card.stories.tsx`                         |
 | CRD-002     | `useCard.ts`, `renderCard.tsx`, `card.types.test.tsx`, `card.stories.tsx` |
-| CRD-003     | `card.styles.ts`, `useCardStyles.ts`, `card.test.tsx`                     |
+| CRD-003     | `useCard.ts`, `card.styles.ts`, `useCardStyles.ts`, `card.test.tsx`       |
 | CRD-004     | `useCard.ts`, `useCardStyles.ts`, `card.test.tsx`                         |
 | CRD-005     | `useCard.ts`, `renderCard.tsx`, `card.test.tsx`, `card.stories.tsx`       |

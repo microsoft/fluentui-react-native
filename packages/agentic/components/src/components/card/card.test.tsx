@@ -114,13 +114,12 @@ describe('Card', () => {
     });
 
     await fireEvent(button, 'focus', {});
+    expect(button.props.enableFocusRing).toBe(true);
     expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: colors.strokeFocusOuter,
       borderWidth: 2,
     });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
+    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
     expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
       borderColor: colors.strokeFocusInner,
       borderWidth: 1,

@@ -3049,7 +3049,7 @@ __metadata:
     react-native: ^0.81.6
     react-native-macos: ^0.81.0
     react-native-svg: ^15.12.1
-    react-native-windows: ^0.81.0
+    react-native-windows: ^0.81.35
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
       optional: true
@@ -21596,16 +21596,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-windows@npm:^0.81.0":
-  version: 0.81.34
-  resolution: "react-native-windows@npm:0.81.34"
+"react-native-windows@npm:0.81.35":
+  version: 0.81.35
+  resolution: "react-native-windows@npm:0.81.35"
   dependencies:
     "@babel/runtime": "npm:^7.0.0"
     "@jest/create-cache-key-function": "npm:^29.7.0"
     "@react-native-community/cli": "npm:17.0.0"
     "@react-native-community/cli-platform-android": "npm:17.0.0"
     "@react-native-community/cli-platform-ios": "npm:17.0.0"
-    "@react-native-windows/cli": "npm:0.81.8"
+    "@react-native-windows/cli": "npm:0.81.9"
     "@react-native/assets": "npm:1.0.0"
     "@react-native/assets-registry": "npm:0.81.6"
     "@react-native/codegen": "npm:0.81.6"
@@ -21649,7 +21649,7 @@ __metadata:
     "@types/react": ^19.1.4
     react: ^19.1.4
     react-native: ^0.81.0
-  checksum: 10c0/38257bbf9c767207c0779ea4ac8ccd55a58ee388892e4247d35742b29fc77498474c8533a2654e1ed20e4b88b1339aef49a8c662ee7b7b523f01516ebb4363db
+  checksum: 10c0/a9f2a165539f8f7ce6ea47237414e96c928ae2115b00973b37bb74597b179cfebeb3f22f84e8d1d859af1e815f67a431b04a525567a1660ad386c1042a7b6ead
   languageName: node
   linkType: hard
 
