@@ -2,7 +2,8 @@
 import { StyleSheet, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { directComponent, isDirectComponent } from '@fluentui-react-native/framework-base';

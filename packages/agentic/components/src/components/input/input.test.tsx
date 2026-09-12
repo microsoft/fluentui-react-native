@@ -3,7 +3,8 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import type { View, ViewStyle } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Input } from './input';

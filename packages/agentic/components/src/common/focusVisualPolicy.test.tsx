@@ -3,7 +3,8 @@ import type { ReactElement } from 'react';
 import { StyleSheet } from 'react-native';
 import type { AccessibilityRole } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from './renderWithTheme';
 
 import { Accordion } from '../components/accordion/accordion';
 import { Button } from '../components/button/button';

@@ -3,7 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import type { TextProps, ViewProps } from 'react-native';
 import type { ComponentProps } from 'react';
 
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 
 import { defaultFlexTokens, defaultResolvedThemeAppearance } from '@fluentui-react-native/design/testing';
 import { directComponent } from '@fluentui-react-native/framework-base';

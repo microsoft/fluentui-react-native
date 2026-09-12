@@ -5043,6 +5043,9 @@ __metadata:
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/metro-config": "catalog:"
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
@@ -5050,6 +5053,7 @@ __metadata:
     "@storybook/react-native-theming": "npm:^10.4.7"
     "@storybook/react-native-ui-common": "npm:^10.4.7"
     "@storybook/react-native-ui-lite": "npm:^10.4.7"
+    "@testing-library/react-native": "catalog:"
     "@types/react": "npm:~19.1.4"
     oxc-resolver: "catalog:"
     react: "npm:19.1.4"
@@ -5057,6 +5061,7 @@ __metadata:
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
     storybook: "npm:^10.4.0"
+    test-renderer: "catalog:"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.81.0
     "@types/react": ~19.1.4

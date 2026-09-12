@@ -1,7 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { StyleSheet } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 
 import { FocusVisual, createFocusVisualProps_unstable } from './focus-visual';
 

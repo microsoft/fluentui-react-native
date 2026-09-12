@@ -1,7 +1,8 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { StyleSheet } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 
 import { ProgressBar } from './progress-bar';
 

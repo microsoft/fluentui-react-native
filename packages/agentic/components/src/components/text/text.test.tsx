@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import { FlexThemeReference, ThemeProvider } from '@fluentui-react-native/design';
 import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import type { SlotProp } from '@fluentui-react-native/framework-base';

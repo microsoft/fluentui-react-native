@@ -7,7 +7,12 @@ are [`button.test.tsx`](../../../../packages/agentic/components/src/components/b
 
 ## Runtime tests
 
-Use `@testing-library/react-native`. Do not import `react-test-renderer` directly.
+Use `render` from the package-private `src/common/renderWithTheme` helper for
+component scenes. It places a `ThemedRoot` outside the scene and any supplied
+wrapper, preserving the same root settings through rerenders. Import events,
+queries, and types from `@testing-library/react-native`; do not import
+`react-test-renderer` directly. Tests can dispatch root modality events through
+the helper's `test-scene-root` test ID.
 
 Prefer public semantics:
 

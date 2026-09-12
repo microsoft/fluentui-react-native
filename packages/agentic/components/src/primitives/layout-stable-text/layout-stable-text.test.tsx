@@ -1,7 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { StyleSheet, Text } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 
 import { LayoutStableText } from './layout-stable-text';
 

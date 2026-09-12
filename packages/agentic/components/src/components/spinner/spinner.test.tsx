@@ -2,7 +2,8 @@
 import { AccessibilityInfo, Animated, Easing, StyleSheet, processColor } from 'react-native';
 import type { ColorValue, ViewStyle } from 'react-native';
 
-import { render, waitFor } from '@testing-library/react-native';
+import { waitFor } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
