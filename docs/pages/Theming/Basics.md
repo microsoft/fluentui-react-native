@@ -24,6 +24,65 @@ We have default themes for each platform. See [this page](./DefaultThemes.md) fo
 
 ## Applying a FURN theme
 
+### Scene roots with Flex themes
+
+`ThemedRoot` from `@fluentui-react-native/design` (also available from
+`@fluentui-react-native/design/theming`) is a `View` with the theme and appearance
+options of `ThemeProvider`. It forwards View props, children, and the native View
+ref without adding layout or background styles.
+
+```tsx
+import { ThemedRoot } from '@fluentui-react-native/design';
+
+export const App = () => (
+  <ThemedRoot style={{ flex: 1 }}>
+    <AppContent />
+    <ThemedRoot appearance={{ colorScheme: 'dark', interfaceLevel: 'elevated' }}>
+      <OverlayContent />
+    </ThemedRoot>
+  </ThemedRoot>
+);
+```
+
+An omitted `theme` inherits the nearest theme boundary, including an existing
+`ThemeProvider`. Without a boundary it uses a default `FlexThemeReference`.
+That default supplies the existing baseline Flex tokens; use an appearance-aware
+theme recipe when colors should vary with the resolved appearance.
+Nested roots can override individual `appearance` fields, `appearanceSource`,
+or `fallbackAppearance` while retaining the inherited source and other options.
+An explicit `theme` starts a new theme/appearance configuration, using that
+source's defaults plus the root's options.
+
+The outermost `ThemedRoot` also provides `RootContext`. `useRootContext()` returns
+the same object throughout a mounted scene, including under nested roots that
+replace the theme. Its read-only `inputModality` is initially `'pointer'`, becomes
+`'keyboard'` on key-down, and returns to `'pointer'` on pointer-down or touch-start.
+Read the property in an event handler when making a focus decision:
+
+```tsx
+import { useRootContext } from '@fluentui-react-native/design';
+
+const root = useRootContext();
+const onFocus = () => {
+  const showKeyboardFocus = root.inputModality === 'keyboard';
+  // Apply the focus behavior appropriate to this component.
+};
+```
+
+Modality changes do not notify React or rerender consumers; do not destructure
+the property during render if it needs to remain current in an event handler.
+Theme and appearance changes remain reactive. The hook throws outside a
+`ThemedRoot`; independent scenes maintain independent modality state.
+
+Only the outermost root installs tracking handlers. Keyboard and pointer capture
+handlers observe descendant input before bubbling handlers, and responder
+capture provides a touch fallback without claiming the responder by default.
+Caller handlers still run after tracking, and caller responder return values are
+preserved. Keyboard tracking requires a platform that emits View key events
+(macOS, Windows, Win32, or web); this component does not add native hardware-key
+support to iOS or Android. Native windows or portals whose events do not reach
+the scene root need their own scene boundary.
+
 ### Populating the Theme
 
 The theme is made available by the `ThemeProvider`. It takes in a `ThemeReference` as a value, which is the object created by the functions referenced in the pages above.

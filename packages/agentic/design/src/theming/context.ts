@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { appearanceOptionsFromLegacy, resolveThemeAppearance } from './appearance';
-import type { ThemeAppearanceState } from './appearance.types';
+import type { ResolvedThemeAppearance, ThemeAppearanceSource, ThemeAppearanceState } from './appearance.types';
 import { platformAppearance } from './platformAppearance';
 import type { ThemeSource } from './themeSource';
 import { legacyThemeSourceFromTheme } from './themeSource';
@@ -13,6 +13,8 @@ export interface ThemeSourceContextValue {
   readonly source: ThemeSource;
   readonly sourceRevision: number;
   readonly appearance: Readonly<ThemeAppearanceState>;
+  readonly appearanceSource?: ThemeAppearanceSource;
+  readonly fallbackAppearance?: Partial<ResolvedThemeAppearance>;
   readonly publishedLegacyTheme: Theme | undefined;
 }
 
