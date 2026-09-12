@@ -53,16 +53,16 @@ or `fallbackAppearance` while retaining the inherited source and other options.
 An explicit `theme` starts a new theme/appearance configuration, using that
 source's defaults plus the root's options.
 
-The outermost `ThemedRoot` also provides `RootContext`. `useRootContext()` returns
+The outermost `ThemedRoot` also provides `RootContext`. `useRootSettings()` returns
 the same object throughout a mounted scene, including under nested roots that
 replace the theme. Its read-only `inputModality` is initially `'pointer'`, becomes
 `'keyboard'` on key-down, and returns to `'pointer'` on pointer-down or touch-start.
 Read the property in an event handler when making a focus decision:
 
 ```tsx
-import { useRootContext } from '@fluentui-react-native/design';
+import { useRootSettings } from '@fluentui-react-native/design';
 
-const root = useRootContext();
+const root = useRootSettings();
 const onFocus = () => {
   const showKeyboardFocus = root.inputModality === 'keyboard';
   // Apply the focus behavior appropriate to this component.

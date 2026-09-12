@@ -55,8 +55,8 @@ export { ThemeProvider } from './ThemeProvider';
 export type { ThemeProviderProps } from './ThemeProvider';
 export { ThemedRoot } from './ThemedRoot';
 export type { ThemedRootProps } from './ThemedRoot';
-export { RootContext, useRootContext } from './rootContext';
-export type { InputModality, RootContextValue } from './rootContext';
+export { RootContext, useRootSettings } from './rootContext';
+export type { InputModality, RootSettings } from './rootContext';
 export { FlexThemeReference } from './flexThemeReference';
 export type {
   FlexThemeInput,

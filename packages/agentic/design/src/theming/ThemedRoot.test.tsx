@@ -11,13 +11,13 @@ import type { ThemeState } from '../useThemeState';
 import type { ResolvedThemeAppearance, ThemeAppearanceSource, ThemeAppearanceSourceSnapshot } from './appearance.types';
 import { ThemeContext } from './context';
 import { FlexThemeReference } from './flexThemeReference';
-import { useRootContext } from './rootContext';
-import type { RootContextValue } from './rootContext';
+import { useRootSettings } from './rootContext';
+import type { RootSettings } from './rootContext';
 import { ThemedRoot } from './ThemedRoot';
 import { ThemeProvider } from './ThemeProvider';
 
-function Probe({ roots, themes }: { roots?: RootContextValue[]; themes?: ThemeState[] }) {
-  const root = useRootContext();
+function Probe({ roots, themes }: { roots?: RootSettings[]; themes?: ThemeState[] }) {
+  const root = useRootSettings();
   const theme = useThemeState();
   roots?.push(root);
   themes?.push(theme);
@@ -72,7 +72,7 @@ describe('ThemedRoot', () => {
   });
 
   it('provides default Flex tokens and forwards View props, children, and the ref', () => {
-    const roots: RootContextValue[] = [];
+    const roots: RootSettings[] = [];
     const themes: ThemeState[] = [];
     const ref = React.createRef<View>();
     const style = { flex: 1 };
@@ -95,7 +95,7 @@ describe('ThemedRoot', () => {
   });
 
   it('tracks keyboard, pointer, and touch input without rerendering consumers', () => {
-    const roots: RootContextValue[] = [];
+    const roots: RootSettings[] = [];
     const themes: ThemeState[] = [];
     render(
       <ThemedRoot testID="root">
@@ -118,7 +118,7 @@ describe('ThemedRoot', () => {
   });
 
   it('updates modality before invoking caller handlers and preserves responder ownership', () => {
-    const roots: RootContextValue[] = [];
+    const roots: RootSettings[] = [];
     const onKeyDown = jest.fn(() => expect(roots[0].inputModality).toBe('keyboard'));
     const onKeyDownCapture = jest.fn(() => expect(roots[0].inputModality).toBe('keyboard'));
     const onPointerDownCapture = jest.fn(() => expect(roots[0].inputModality).toBe('pointer'));
@@ -155,7 +155,7 @@ describe('ThemedRoot', () => {
   });
 
   it('preserves the live context and handler identities across appearance changes', () => {
-    const roots: RootContextValue[] = [];
+    const roots: RootSettings[] = [];
     render(
       <ThemedRoot testID="root">
         <Probe roots={roots} />
@@ -178,8 +178,8 @@ describe('ThemedRoot', () => {
   });
 
   it('shares modality through nested roots even when a nested root replaces the theme', () => {
-    const roots: RootContextValue[] = [];
-    const nestedRoots: RootContextValue[] = [];
+    const roots: RootSettings[] = [];
+    const nestedRoots: RootSettings[] = [];
     const onKeyDown = jest.fn();
     const onKeyDownCapture = jest.fn();
     const onPointerDownCapture = jest.fn();
@@ -215,8 +215,8 @@ describe('ThemedRoot', () => {
   });
 
   it('isolates independent scene roots', () => {
-    const first: RootContextValue[] = [];
-    const second: RootContextValue[] = [];
+    const first: RootSettings[] = [];
+    const second: RootSettings[] = [];
     render(
       <>
         <ThemedRoot testID="root">
@@ -394,6 +394,6 @@ describe('ThemedRoot', () => {
       act(() => {
         create(<Probe />);
       });
-    }).toThrow('useRootContext must be used within a ThemedRoot.');
+    }).toThrow('useRootSettings must be used within a ThemedRoot.');
   });
 });

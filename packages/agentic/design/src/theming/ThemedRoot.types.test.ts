@@ -2,14 +2,14 @@ import * as React from 'react';
 import type { View } from 'react-native';
 
 import { ThemedRoot } from '../index';
-import type { InputModality, RootContextValue, ThemedRootProps } from '../index';
-import { ThemedRoot as ThemingRoot, useRootContext } from './index';
+import type { InputModality, RootSettings, ThemedRootProps } from '../index';
+import { ThemedRoot as ThemingRoot, useRootSettings } from './index';
 
 function acceptsViewProps(props: React.ComponentPropsWithRef<typeof View>) {
   return React.createElement(ThemedRoot, props);
 }
 
-function readOnlyRoot(root: RootContextValue) {
+function readOnlyRoot(root: RootSettings) {
   const modality: InputModality = root.inputModality;
   // @ts-expect-error Consumers may query, but not modify, scene state.
   root.inputModality = 'pointer';
@@ -32,7 +32,7 @@ const invalidAppearance: ThemedRootProps = { appearance: 'dark' };
 describe('ThemedRoot types', () => {
   it('exports the same component through both public entrypoints', () => {
     expect(ThemedRoot).toBe(ThemingRoot);
-    expect(useRootContext).toEqual(expect.any(Function));
+    expect(useRootSettings).toEqual(expect.any(Function));
     expect(acceptsViewProps({ testID: 'view' }).type).toBe(ThemedRoot);
     expect(readOnlyRoot).toEqual(expect.any(Function));
     expect(props.appearance.colorScheme).toBe('system');

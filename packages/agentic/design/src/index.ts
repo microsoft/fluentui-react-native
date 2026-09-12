@@ -25,7 +25,7 @@ export {
   RootContext,
   ThemedRoot,
   ThemeProvider,
-  useRootContext,
+  useRootSettings,
 } from './theming/modern';
 export type {
   FlexThemeInput,
@@ -37,7 +37,7 @@ export type {
   LegacyThemeSource,
   PartialFlexTokens,
   ResolvedThemeAppearance,
-  RootContextValue,
+  RootSettings,
   ThemeAppearanceOptions,
   ThemeAppearanceRequest,
   ThemeAppearanceSource,
