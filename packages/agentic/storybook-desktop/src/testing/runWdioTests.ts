@@ -13,6 +13,7 @@ import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/
 import { NodeDesktopCommandRunner, type DesktopCommandRunner, type PreparedDesktopCommand } from '../cli/commandRunner.js';
 import { extractWdioTests } from './extractWdioTests.js';
 import type { WdioWorkerOptions } from './worker.js';
+import { formatDesktopStorybookError, writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 
 export type WdioStoryTestResult = {
   storyId: string;
@@ -30,6 +31,7 @@ export type RunWdioStoryTestsOptions = DesktopStorybookWdioOptions & {
   targetId: string;
   url: string;
   artifactsRoot?: string;
+  errorOutput?: DesktopStorybookErrorOutput;
 };
 
 export function selectWdioStories(
@@ -70,8 +72,12 @@ export async function runWdioStoryTests(
   ).href;
   const results: WdioStoryTestResult[] = [];
   let infrastructureFailure: unknown;
+  let activeStory: string | undefined;
+  let phase = 'setup';
   try {
     for (const [index, { entry, code }] of cases.entries()) {
+      activeStory = entry.id;
+      phase = 'connection';
       const started = Date.now();
       // The supervisor owns the session, so even a crashed or timed-out Node worker cannot strand it.
       const desktop = await connectDesktopWebdriver({
@@ -84,11 +90,13 @@ export async function runWdioStoryTests(
       const result: WdioStoryTestResult = { storyId: entry.id, status: 'failed', durationMs: 0 };
       let failure: unknown;
       try {
+        phase = 'manifest verification';
         const live = await desktop.listStories();
         if (live.endpoint !== options.platform || live.platformManifestDigest !== options.manifest.platformManifestDigest) {
           throw new Error('The running Storybook manifest is stale or targets a different platform. Restart storybook driver and the app.');
         }
-        await desktop.resetStory(entry.id);
+        phase = 'navigation';
+        await desktop.openStory(entry.id);
         const resultPath = path.join(directory, `${index}.json`);
         const workerOptions: WdioWorkerOptions = {
           attachment: {
@@ -107,10 +115,12 @@ export async function runWdioStoryTests(
             `registerWdioStoryTest(${JSON.stringify(workerOptions)}, (${code}));\n`,
           { mode: 0o600 },
         );
-        await runWorker(
+        phase = 'execution';
+        const outcome = await runWorker(
           runner,
           {
             command: process.execPath,
+            label: `wdio "${entry.id}"`,
             args: [
               '--test',
               '--test-concurrency=1',
@@ -123,20 +133,23 @@ export async function runWdioStoryTests(
             env: {},
           },
           Math.min(settings.timeoutMs + 5000, 2_147_483_647),
+          resultPath,
+          entry.id,
         );
-        const outcome: unknown = JSON.parse(fs.readFileSync(resultPath, 'utf8'));
-        if (!isWorkerResult(outcome)) {
-          throw new Error(`The wdio worker for ${entry.id} exited without a valid result.`);
-        }
         result.status = outcome.status;
         if (outcome.status === 'skipped') {
           result.skipReason = outcome.skipReason;
         }
       } catch (error) {
         failure = error;
-        result.error = errorMessage(error);
+        result.error = formatDesktopStorybookError(error);
+        writeDesktopStorybookFailure(`wdio "${entry.id}" during ${phase}`, error, options.errorOutput);
         result.evidenceErrors = await captureFailure(desktop, artifacts, entry.id);
+        for (const evidenceError of result.evidenceErrors) {
+          writeDesktopStorybookFailure(`evidence for "${entry.id}"`, evidenceError, options.errorOutput);
+        }
       }
+      phase = 'session cleanup';
       try {
         await desktop.delete();
       } catch (cleanupError) {
@@ -150,6 +163,7 @@ export async function runWdioStoryTests(
     }
   } catch (error) {
     infrastructureFailure = error;
+    writeDesktopStorybookFailure(`wdio "${activeStory ?? 'run'}" during ${phase}`, error, options.errorOutput);
   }
   const failures: unknown[] = infrastructureFailure === undefined ? [] : [infrastructureFailure];
   if (results.some(({ status }) => status === 'failed')) {
@@ -172,11 +186,13 @@ export async function runWdioStoryTests(
     });
   } catch (error) {
     failures.push(error);
+    writeDesktopStorybookFailure('writing the wdio report', error, options.errorOutput);
   }
   try {
     fs.rmSync(directory, { recursive: true, force: true });
   } catch (error) {
     failures.push(error);
+    writeDesktopStorybookFailure('cleaning generated wdio files', error, options.errorOutput);
   }
   if (failures.length === 1) {
     throw failures[0];
@@ -187,7 +203,9 @@ export async function runWdioStoryTests(
   return results;
 }
 
-function isWorkerResult(value: unknown): value is { status: 'passed' } | { status: 'skipped'; skipReason: string } {
+type WorkerResult = { status: 'passed' } | { status: 'skipped'; skipReason: string };
+
+function isWorkerResult(value: unknown): value is WorkerResult {
   return (
     typeof value === 'object' &&
     value !== null &&
@@ -215,10 +233,17 @@ function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-async function runWorker(runner: DesktopCommandRunner, command: PreparedDesktopCommand, timeoutMs: number): Promise<void> {
+async function runWorker(
+  runner: DesktopCommandRunner,
+  command: PreparedDesktopCommand,
+  timeoutMs: number,
+  resultPath: string,
+  storyId: string,
+): Promise<WorkerResult> {
   const worker = runner.start(command);
   let timer: ReturnType<typeof setTimeout> | undefined;
   let failure: unknown;
+  let result: WorkerResult | undefined;
   try {
     const exitCode = await Promise.race([
       worker.completed,
@@ -226,20 +251,39 @@ async function runWorker(runner: DesktopCommandRunner, command: PreparedDesktopC
         timer = setTimeout(() => reject(new Error(`Executable wdio worker exceeded its ${timeoutMs}ms process deadline.`)), timeoutMs);
       }),
     ]);
-    if (exitCode !== 0) {
-      throw new Error(`Executable wdio worker exited with code ${exitCode}; see the test reporter for assertion details.`);
+    const outcome: unknown = fs.existsSync(resultPath) ? JSON.parse(fs.readFileSync(resultPath, 'utf8')) : undefined;
+    if (
+      typeof outcome === 'object' &&
+      outcome !== null &&
+      'status' in outcome &&
+      outcome.status === 'failed' &&
+      'error' in outcome &&
+      typeof outcome.error === 'string'
+    ) {
+      throw new Error(`Executable wdio callback "${storyId}" failed:\n${outcome.error}`);
     }
+    if (exitCode !== 0) {
+      throw new Error(`Executable wdio worker for "${storyId}" exited with code ${exitCode}.`);
+    }
+    if (!isWorkerResult(outcome)) {
+      throw new Error(`The wdio worker for "${storyId}" exited without a valid result.`);
+    }
+    result = outcome;
   } catch (error) {
     failure = error;
   } finally {
     clearTimeout(timer);
   }
   try {
-    await worker.stop();
+    await worker.stop({ failed: failure !== undefined });
   } catch (error) {
     throw new AggregateError(failure === undefined ? [error] : [failure, error], 'Could not stop the owned wdio worker.');
   }
   if (failure !== undefined) {
     throw failure;
   }
+  if (!result) {
+    throw new Error(`The wdio worker for "${storyId}" completed without a result.`);
+  }
+  return result;
 }

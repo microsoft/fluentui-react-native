@@ -34,7 +34,8 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
   const program = new Command()
     .name('storybook-desktop')
     .description('Serve, prepare, bundle, build, run, and smoke test a React Native desktop Storybook app.')
-    .option('-c, --config <path>', 'path to storybook.config.ts');
+    .option('-c, --config <path>', 'path to storybook.config.ts')
+    .option('-v, --verbose', 'replay full captured output for successful commands as well as failures');
   let apiPromise: Promise<DesktopStorybookCli> | undefined;
 
   const getApi = () =>
@@ -48,6 +49,8 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
           createStoryManifest: options.createStoryManifest,
           fetch: options.fetch,
           output: options.output,
+          errorOutput: options.errorOutput,
+          verbose: program.opts<{ verbose?: boolean }>().verbose ?? options.verbose,
           isPortAvailable: options.isPortAvailable,
           runSmokeTests: options.runSmokeTests,
           resolveNativeDriver: options.resolveNativeDriver,

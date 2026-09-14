@@ -16,7 +16,14 @@ test('executes isolated inline code and releases sessions after assertion failur
         reject(new Error(Buffer.concat(stderr).toString('utf8') || `Inline test contract exited with ${code}.`));
       } else {
         const output = Buffer.concat(stdout).toString('utf8');
-        if (!output.includes('intentional inline assertion')) {
+        const diagnostics = Buffer.concat(stderr).toString('utf8');
+        if (
+          !diagnostics.includes('intentional inline assertion') ||
+          !diagnostics.includes('wdio "fixture-button--fail" during execution') ||
+          !diagnostics.includes('wdio "fixture-button--navigation-failure" during navigation') ||
+          !diagnostics.includes('Navigation failed: preview did not mount') ||
+          output.includes('[storybook] OK wdio "fixture-button--exit-zero"')
+        ) {
           reject(new Error('Assertion diagnostics were lost.'));
         } else {
           resolve(JSON.parse(output.split('\nWDIO_RESULT ')[1]));
@@ -27,8 +34,17 @@ test('executes isolated inline code and releases sessions after assertion failur
   expect(result).toMatchObject({
     passed: ['fixture-button--pass'],
     skipped: ['fixture-button--skip'],
-    failures: ['fail', 'timeout', 'spin', 'crash', 'exit-zero', 'stale'],
+    failures: ['fail', 'timeout', 'spin', 'crash', 'exit-zero', 'stale', 'navigation-failure'],
     repeated: ['fixture-button--pass'],
+    grouped: ['fixture-button--pass', 'fixture-button--second'],
+    groupedSelections: ['fixture-button--pass', 'fixture-button--second'],
+    smoke: {
+      plans: ['fixture-button--pass', 'fixture-button--second'],
+      callbacks: ['fixture-button--pass', 'fixture-button--second'],
+      selections: ['fixture-button--pass', 'fixture-button--pass', 'fixture-button--second', 'fixture-button--second'],
+      status: 'passed',
+    },
+    smokeFailureLogged: true,
     button: ['components-button--default'],
     generatedFiles: [],
     attachedOnly: true,

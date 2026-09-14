@@ -36,6 +36,45 @@ const passingPlan: DesktopStoryTests = {
 };
 
 describe('runDesktopStoryTests', () => {
+  test('reports each settled result before navigating to the next test', async () => {
+    const manifest = makeManifest({
+      version: 1,
+      tests: [
+        { id: 'a-fails', steps: [{ expect: { state: 'role', target: { testId: 'button-primary' }, value: 'checkbox' } }] },
+        { id: 'b-passes', steps: [{ action: 'note', message: 'passed' }] },
+      ],
+    });
+    const harness = await createDesktopDriverStoryHarness(manifest);
+    const events: string[] = [];
+    const select = harness.storyOrchestrator!.selectStory.bind(harness.storyOrchestrator);
+    jest.spyOn(harness.storyOrchestrator!, 'selectStory').mockImplementation(async (request) => {
+      events.push(`select:${request.runId}`);
+      return select(request);
+    });
+    try {
+      const session = await createDesktopDriverClient({ url: harness.server.url }).newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+      const result = await runDesktopStoryTests({
+        endpoint: 'windows',
+        manifest,
+        platformName: 'windows',
+        runId: 'logging',
+        session,
+        targetId: harness.target.id,
+        onTestResult: async (test) => {
+          await Promise.resolve();
+          events.push(`result:${test.testId}:${test.status}`);
+        },
+      });
+      expect(events).toEqual(['select:logging-1', 'result:a-fails:failed', 'select:logging-2', 'result:b-passes:passed']);
+      expect(result.status).toBe('failed');
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
   test('runs a portable plan and writes a stable evidence report', async () => {
     const manifest = makeManifest(passingPlan);
     const harness = await createDesktopDriverStoryHarness(manifest);

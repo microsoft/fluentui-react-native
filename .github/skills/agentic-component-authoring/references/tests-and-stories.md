@@ -152,8 +152,9 @@ and import the type only. The callback receives `browser`, `expect`, `desktop`,
 `signal`, and `skip`; it cannot capture story-module bindings. Node-compatible
 helpers may be dynamically imported inside the callback. The shared Babel
 configuration strips test bodies before Metro resolves dependencies.
-Run these with `yarn storybook test --<platform>`, independently of the static
-plan runner. See the [executable test contract](../../../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
+Run these with `yarn storybook test --<platform>`. The `stories-and-tests`
+smoke mode also runs them alongside static plans, grouped by story with
+explicit navigation before execution. See the [executable test contract](../../../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
 The components package's `test:stories` project checks the experimental
 Button stories without emitting them into the component library.
 

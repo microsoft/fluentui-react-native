@@ -235,6 +235,7 @@ jobs:
           name: Storybook_macos_Dump
           path: |
             apps/storybook/artifacts/macos
+            apps/storybook/artifacts/storybook-commands
             ${{ steps.desktop-driver.outputs.doctor-path }}
 
   ios:
@@ -409,6 +410,7 @@ jobs:
           name: Storybook_windows_Dump
           path: |
             apps/storybook/artifacts/windows
+            apps/storybook/artifacts/storybook-commands
             ${{ steps.desktop-driver.outputs.doctor-path }}
             ${{ steps.desktop-driver.outputs.cache-root }}/v1/artifacts/**/build.log
             ${{ steps.desktop-driver.outputs.cache-root }}/v1/diagnostics/**
@@ -500,6 +502,7 @@ jobs:
           name: Storybook_win32_Dump
           path: |
             apps/storybook/artifacts/win32
+            apps/storybook/artifacts/storybook-commands
             ${{ steps.desktop-driver.outputs.doctor-path }}
             ${{ steps.desktop-driver.outputs.cache-root }}/v1/artifacts/**/build.log
             ${{ steps.desktop-driver.outputs.cache-root }}/v1/diagnostics/**

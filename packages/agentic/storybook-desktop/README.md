@@ -227,7 +227,7 @@ the test runner does not attach by an ambiguous process name or title.
 
 Node's built-in test runner executes each story in a separate process. The
 supervisor owns one attached WebDriver session at a time, authenticates the
-live manifest, resets the preview before each callback, and deletes the
+live manifest, navigates to and remounts the correct story before each callback, and deletes the
 session after success, failure, timeout, or worker exit. The app and driver
 remain running. Failed callbacks exit nonzero; no matches is an error.
 Reports and best-effort failure source/tree evidence live in
@@ -237,8 +237,15 @@ driver and reload the app after editing tests.
 
 Button's `Default` demonstrates assertions and Node-only imports;
 `ExternallyDrivenSelection` verifies actual activation and caller-owned state
-updates. This experiment is invoked by `storybook test`; existing
-`stories-and-tests` smoke runs continue to execute the static plans only.
+updates through the visible status label, since macOS does not expose
+`checked` on the native button role. Run callbacks directly with `storybook test`, or include them in
+`storybook smoke --<platform> --mode stories-and-tests`. Smoke groups tests by
+story ID, runs that story's `desktop-e2e` plans and configured `wdio` callback,
+then advances to the next story. Non-default stories are included. Every test
+gets a fresh preview; the currently selected sidebar page is not a prerequisite.
+The aggregate smoke report contains static results in `tests` and executable
+results in `wdio`. Per-story executable reports are under
+`artifacts/<platform>/desktop-driver/wdio`.
 
 Run the resulting plans through the consuming app's Desktop Driver CLI:
 
@@ -263,8 +270,9 @@ builds the generated app, registers and launches its Debug package, starts the c
 the processes it recorded. `createWin32SmokeCommand` bundles and launches the configured REX host, verifies the shared
 desktop chrome, resize handles, and addon surface through the configured test-ID prefix, traverses every story, and
 performs the same ownership-safe cleanup. `--mode stories` is the default renderability gate;
-`--mode stories-and-tests` performs the same complete traversal and then runs every `desktop-e2e` authored plan through
-the native provider. Storybook owns app launch and supplies an exact
+`--mode stories-and-tests` performs the same complete traversal and then runs
+`desktop-e2e` plans and configured executable callbacks, grouped by story,
+through the native provider. Storybook owns app launch and supplies an exact
 nonce-bound process lease; WebDriver attaches and preserves the app until the
 Storybook lifecycle performs final cleanup.
 The reusable macOS lifecycle resolves the launched app by its isolated bundle
@@ -314,6 +322,45 @@ Command runners are injectable through the constructor for higher-level automati
 `DesktopPlatformOptions`, `createDesktopStorybookInstance()`, and the related configuration types are exported from the
 `/config` subpath. `server()` runs the foreground server until it is stopped, so supervisors should invoke it as a
 dedicated task rather than await it before another operation.
+
+### Command logs and pipeline failures
+
+The shared command runner writes stdout and stderr continuously to a single
+log file per command under `artifacts/storybook-commands` in that command's
+working directory. Both streams share one descriptor, preserving their write
+order without holding an entire build log in memory.
+
+Normal output contains a start record with the log path and a short completion
+summary. A failed command replays its complete combined log between labeled
+`BEGIN`/`END` records, then reports failure on stderr. Replay groups are
+serialized so concurrently completing commands do not mix their output.
+Owned background services also replay their logs when smoke fails.
+
+Use the global `--verbose` option to replay successful-command logs as well:
+
+```sh
+yarn storybook --verbose test --macos --story 'components-button--*'
+yarn storybook --verbose smoke --macos --mode stories-and-tests
+```
+
+Console replay is grouped at command completion; the files update while
+commands are running, so ongoing logs are available without shell redirection.
+The verbose setting is inherited by package-owned Windows and Win32 lifecycle
+subprocesses.
+
+Failures also emit explicit `[storybook] FAIL` diagnostics identifying the
+story, test, failed step when available, and execution phase. Static test
+failures are reported as each test settles, before the next test starts.
+Inline callback diagnostics are retained independently of the Node reporter,
+including with `dot`; CLI boundaries preserve nested causes and aggregate
+errors. A failed test cannot be hidden by a successful worker exit or by a
+secondary evidence/cleanup failure.
+
+Archive the command logs alongside the per-platform test artifacts in CI.
+Logs can contain application output and test data; apply the same access and
+retention policy as other test evidence. Programmatic callers can inject
+`output` and `errorOutput` streams and set `verbose` on `DesktopStorybookCli`
+or `NodeDesktopCommandRunner`.
 
 The app integrates its generated Storybook view with the shared runtime:
 

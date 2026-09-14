@@ -1,3 +1,4 @@
+const { spawn } = require('node:child_process');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
@@ -23,13 +24,27 @@ async function main() {
     `
     import 'react-native-must-never-load-in-node';
     export default { title: 'Fixture/Button' };
-    export const Pass = { wdio: async ({ browser, expect, desktop }) => {
+    export const Pass = {
+      tags: ['grouped', 'desktop-e2e'],
+      parameters: { desktopDriver: { version: 1, tests: [{
+        id: 'enabled', steps: [{ expect: { state: 'enabled', target: { testId: 'button-primary' }, value: true } }],
+      }] } },
+      wdio: async ({ browser, expect, desktop }) => {
       const { strictEqual } = await import('node:assert');
       const button = await browser.$('~button-primary');
       await expect(button).toBeEnabled();
       strictEqual(await button.getTagName(), 'button');
       await button.click();
       await desktop.expect({ state: 'focused', target: { testId: 'button-primary' }, value: true });
+      strictEqual((await desktop.session.getCurrentStory()).storyId, 'fixture-button--pass');
+    }};
+    export const Second = {
+      tags: ['grouped', 'desktop-e2e'],
+      parameters: { desktopDriver: { version: 1, tests: [{
+        id: 'enabled', steps: [{ expect: { state: 'enabled', target: { testId: 'button-primary' }, value: true } }],
+      }] } },
+      wdio: async ({ desktop, expect }) => {
+      expect((await desktop.session.getCurrentStory()).storyId).toBe('fixture-button--second');
     }};
     export const Skip = { wdio: ({ skip }) => { skip('Explicit capability reason'); }};
     export const Fail = { wdio: async () => {
@@ -42,11 +57,28 @@ async function main() {
     export const Spin = { wdio: () => { while (true) {} }};
     export const Crash = { wdio: () => { process.exit(2); }};
     export const ExitZero = { wdio: () => { process.exit(0); }};
+    export const NavigationFailure = { wdio: () => { throw new Error('must not execute without navigation'); }};
   `,
   );
   const storyPackage = { name: 'inline-fixture', root, manifest: { name: 'inline-fixture' }, storyPatterns: ['*.stories.ts'] };
   const manifest = await createDesktopStoryManifest({ projectRoot, getStoryPackages: () => [storyPackage] }, 'windows');
   const harness = await createDesktopDriverStoryHarness(manifest);
+  const selections = [];
+  const selectStory = harness.storyOrchestrator.selectStory.bind(harness.storyOrchestrator);
+  harness.storyOrchestrator.selectStory = async (request) => {
+    if (request.storyId === 'fixture-button--navigation-failure') {
+      throw new Error('Navigation failed: preview did not mount');
+    }
+    selections.push(request.storyId);
+    return selectStory(request);
+  };
+  const resetStory = harness.storyOrchestrator.resetStory.bind(harness.storyOrchestrator);
+  harness.storyOrchestrator.resetStory = async (request) => {
+    if ((await harness.storyOrchestrator.getCurrentStory())?.storyId !== request.storyId) {
+      throw new Error('A preview-only reset cannot navigate to another story.');
+    }
+    return resetStory(request);
+  };
   const config = {
     projectRoot: root,
     resolvePackage: (name) => ({ root: name === 'inline-fixture' ? root : packageRoot }),
@@ -66,12 +98,12 @@ async function main() {
     const passed = await run('pass');
     const skipped = await run('skip');
     const failures = [];
-    for (const story of ['fail', 'timeout', 'spin', 'crash', 'exit-zero', 'stale']) {
+    for (const story of ['fail', 'timeout', 'spin', 'crash', 'exit-zero', 'stale', 'navigation-failure']) {
       let rejected = false;
       try {
         await run(
           story === 'stale' ? 'pass' : story,
-          story === 'stale' ? { manifest: { ...manifest, platformManifestDigest: 'stale' } } : {},
+          story === 'stale' ? { manifest: { ...manifest, platformManifestDigest: 'stale' } } : { reporter: 'dot' },
         );
       } catch (error) {
         rejected = true;
@@ -81,8 +113,58 @@ async function main() {
       if (!rejected) throw new Error(`Expected ${story} to fail.`);
       const report = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
       if (report.tests[0].status !== 'failed') throw new Error(`${story} was not persisted as failed.`);
+      if (story === 'fail' && !report.tests[0].error.includes('intentional inline assertion')) {
+        throw new Error('Compact reporter lost the worker assertion diagnostic.');
+      }
     }
     const repeated = await run('pass');
+    await selectStory({ requestId: 'wrong-page', runId: 'wrong-page', storyId: 'fixture-button--fail' });
+    selections.length = 0;
+    const grouped = await run('*', { tag: 'grouped' });
+    const groupedSelections = [...selections];
+    fs.writeFileSync(
+      path.join(root, 'package.json'),
+      JSON.stringify({ name: 'inline-fixture', exports: { './package.json': './package.json' } }),
+    );
+    fs.mkdirSync(path.join(root, 'node_modules/@fluentui-react-native'), { recursive: true });
+    fs.symlinkSync(
+      packageRoot,
+      path.join(root, 'node_modules/@fluentui-react-native/storybook-desktop'),
+      process.platform === 'win32' ? 'junction' : 'dir',
+    );
+    const smokeManifestPath = path.join(root, 'driver-manifest.json');
+    fs.writeFileSync(
+      smokeManifestPath,
+      JSON.stringify({
+        schemaVersion: 2,
+        endpoint: 'windows',
+        driverPort: Number(new URL(harness.server.url).port),
+        targetId: harness.target.id,
+        storyManifest: manifest,
+        wdio: { tag: 'grouped', reporter: 'tap', timeoutMs: 2000 },
+      }),
+    );
+    await selectStory({ requestId: 'smoke-wrong-page', runId: 'smoke-wrong-page', storyId: 'fixture-button--fail' });
+    selections.length = 0;
+    const control = await runSmokeControl(packageRoot, root, smokeManifestPath);
+    if (control.code !== 0) throw new Error(control.stderr || control.stdout || `Smoke control exited with ${control.code}.`);
+    const smokeReport = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/desktop-driver/run.json'), 'utf8'));
+    const smoke = {
+      plans: smokeReport.tests.map(({ storyId }) => storyId),
+      callbacks: smokeReport.wdio.map(({ storyId }) => storyId),
+      selections: [...selections],
+      status: smokeReport.status,
+    };
+    const failureManifest = JSON.parse(fs.readFileSync(smokeManifestPath, 'utf8'));
+    failureManifest.wdio = { story: 'fixture-button--fail', reporter: 'dot', timeoutMs: 2000 };
+    fs.writeFileSync(smokeManifestPath, JSON.stringify(failureManifest));
+    const failedControl = await runSmokeControl(packageRoot, root, smokeManifestPath);
+    const smokeFailureLogged =
+      failedControl.code === 1 &&
+      failedControl.stderr.includes('[storybook] FAIL smoke') &&
+      failedControl.stderr.includes('fixture-button--fail') &&
+      failedControl.stderr.includes('intentional inline assertion');
+    if (!smokeFailureLogged) throw new Error(`Smoke control lost the callback failure: ${failedControl.stderr}`);
     const buttonConfig = makeDesktopStorybookConfig({ projectRoot, storyPackages: ['@fluentui-react-native/components'] });
     const buttonManifest = await createDesktopStoryManifest(buttonConfig, 'windows');
     const buttonHarness = await createDesktopDriverStoryHarness(buttonManifest, { windows: createFakeStoryWindows(buttonManifest) });
@@ -106,6 +188,10 @@ async function main() {
           passed: passed.map(({ storyId }) => storyId),
           skipped: skipped.filter(({ status }) => status === 'skipped').map(({ storyId }) => storyId),
           repeated: repeated.map(({ storyId }) => storyId),
+          grouped: grouped.map(({ storyId }) => storyId),
+          groupedSelections,
+          smoke,
+          smokeFailureLogged,
           button: button.map(({ storyId }) => storyId),
           failures,
           attachedOnly: harness.host.actions
@@ -118,6 +204,25 @@ async function main() {
     await harness.close();
     fs.rmSync(root, { recursive: true, force: true });
   }
+}
+
+/** @returns {Promise<{code: number | null, stdout: string, stderr: string}>} */
+function runSmokeControl(packageRoot, cwd, manifestPath) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(process.execPath, [path.join(packageRoot, 'config/storybook-control.cjs'), '--phase', 'tests'], {
+      cwd,
+      env: { ...process.env, STORYBOOK_DRIVER_MANIFEST: manifestPath, STORYBOOK_SMOKE_MODE: 'stories-and-tests' },
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    const stdout = [];
+    const stderr = [];
+    child.stdout.on('data', (chunk) => stdout.push(chunk));
+    child.stderr.on('data', (chunk) => stderr.push(chunk));
+    child.once('error', reject);
+    child.once('close', (code) =>
+      resolve({ code, stdout: Buffer.concat(stdout).toString('utf8'), stderr: Buffer.concat(stderr).toString('utf8') }),
+    );
+  });
 }
 
 main().catch((error) => {

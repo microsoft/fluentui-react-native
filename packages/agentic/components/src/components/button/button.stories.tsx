@@ -13,11 +13,20 @@ import type { ButtonAppearance, ButtonShape, ButtonSize } from './button.types';
 type StoryGroupProps = {
   children: ReactNode;
   label: string;
+  labelTestID?: string;
 };
 
-const StoryGroup = ({ children, label }: StoryGroupProps) => (
+const StoryGroup = ({ children, label, labelTestID }: StoryGroupProps) => (
   <View style={styles.group}>
-    <Text style={styles.label}>{label}</Text>
+    {labelTestID ? (
+      <View accessible accessibilityLabel={label} accessibilityRole="text" testID={labelTestID}>
+        <Text accessible={false} style={styles.label}>
+          {label}
+        </Text>
+      </View>
+    ) : (
+      <Text style={styles.label}>{label}</Text>
+    )}
     <View style={styles.row}>{children}</View>
   </View>
 );
@@ -251,21 +260,22 @@ export const Selected: Story = {
 };
 
 export const ExternallyDrivenSelection: Story = {
-  wdio: async ({ browser, desktop, expect }) => {
+  wdio: async ({ browser, expect }) => {
     const favorite = await browser.$('~agentic-storybook-button-favorite');
     const reset = await browser.$('~agentic-storybook-button-reset');
+    const status = await browser.$('~agentic-storybook-button-selection-state');
     await expect(favorite).toBeEnabled();
-    await desktop.expect({ state: 'checked', target: { testId: 'agentic-storybook-button-favorite' }, value: false });
+    await expect(status).toHaveText('Not selected');
     await favorite.click();
-    await desktop.expect({ state: 'checked', target: { testId: 'agentic-storybook-button-favorite' }, value: true });
+    await expect(status).toHaveText('Selected');
     await reset.click();
-    await desktop.expect({ state: 'checked', target: { testId: 'agentic-storybook-button-favorite' }, value: false });
+    await expect(status).toHaveText('Not selected');
   },
   render: () => {
     const ToggleGroup = () => {
       const [selected, setSelected] = useState(false);
       return (
-        <StoryGroup label={selected ? 'Selected' : 'Not selected'}>
+        <StoryGroup label={selected ? 'Selected' : 'Not selected'} labelTestID="agentic-storybook-button-selection-state">
           <Button
             content="Favorite"
             icon={regularStarIcon}

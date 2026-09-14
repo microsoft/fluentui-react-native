@@ -58,6 +58,13 @@ the syntax appropriate for that environment. A `--config <path>` option may be
 placed before the subcommand when the configuration does not use a standard
 root filename.
 
+Use `--verbose` before the subcommand to replay complete output from
+successful commands. By default, command output is captured continuously in
+`artifacts/storybook-commands`; failures replay the ordered stdout/stderr log,
+and successful commands emit short summaries. Navigation and test failures
+also emit labeled stderr diagnostics with story/test IDs and underlying
+causes. See [pipeline logging](../../README.md#command-logs-and-pipeline-failures).
+
 ## Command responsibilities
 
 | Command        | Responsibility                                                                                   |
@@ -134,7 +141,9 @@ yarn storybook smoke --win32 --mode stories-and-tests
 
 `stories` is the default and traverses the complete indexed catalog.
 `stories-and-tests` performs the same traversal and then runs the
-component-authored `desktop-e2e` plans against the native provider. The
+component-authored `desktop-e2e` plans and configured `wdio` callbacks against
+the native provider. Tests are grouped by story ID, including non-default
+stories, and explicitly navigate to their page before running. The
 render-only `stories` mode neither resolves a helper nor starts WebDriver.
 Both modes are preferable to a shell
 chain because they own the exact server, Metro, app identity, traversal, test

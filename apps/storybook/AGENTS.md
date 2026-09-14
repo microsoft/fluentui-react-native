@@ -51,10 +51,16 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - Executable tests may instead use a top-level component story `wdio`
   callback, run with `yarn storybook test --<platform>`. Defaults belong in
   `storybook.config.mts` under `wdio`; the shared Babel config removes
-  callbacks from native bundles. Keep this opt-in runner separate from the
-  static-plan smoke gate.
+  callbacks from native bundles. `stories-and-tests` smoke mode runs configured
+  callbacks together with static plans, grouped by story. Always navigate to
+  the requested story and await correlated readiness before executing tests.
 - Keep `storybook-desktop.generated`, reports, trees, screenshots, and run
   manifests ignored. Never patch generated runtime identity or story manifests.
+- Shared command logs merge stdout/stderr in write order under
+  `artifacts/storybook-commands`. Failed commands replay the complete log;
+  `--verbose` also replays successful commands. Preserve labeled stderr
+  diagnostics and nested failure causes rather than replacing them with
+  exit-code-only summaries.
 - Treat the exact-platform and portable-plan digests as contracts. A dynamic or
   invalid plan must fail generation rather than disappear from the manifest.
 - Preserve nonce-authenticated runtime hello/readiness/error messages and

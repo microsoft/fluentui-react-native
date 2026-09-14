@@ -133,6 +133,28 @@ function makeConfig(platformOptions = {}) {
 }
 
 describe('DesktopStorybookCli', () => {
+  test('prints story navigation failures before throwing the smoke summary', async () => {
+    const runner = new RecordingRunner();
+    const errorOutput = { write: jest.fn() };
+    const fetch: typeof globalThis.fetch = async (input) => {
+      const url = String(input);
+      if (url.includes('select-story-sync')) {
+        return new Response(JSON.stringify({ error: 'render failed while mounting the preview' }), { status: 500 });
+      }
+      return new Response(JSON.stringify({ entries: { broken: { id: 'components-button--broken', type: 'story' } } }));
+    };
+    const cli = new DesktopStorybookCli(
+      makeConfig({
+        macos: { run: { command: 'launch-storybook' }, smoke: { stop: { command: 'stop-storybook' }, startupTimeoutMs: 100 } },
+      }),
+      { ...nativeDriverTestOptions, runner, fetch, errorOutput, output: { write: () => true }, isPortAvailable: async () => true },
+    );
+    await expect(cli.smoke('macos')).rejects.toThrow('components-button--broken');
+    expect(errorOutput.write).toHaveBeenCalledWith(expect.stringContaining('[storybook] FAIL navigation "components-button--broken"'));
+    expect(errorOutput.write).toHaveBeenCalledWith(expect.stringContaining('render failed while mounting the preview'));
+    expect(runner.stopped).toBe(2);
+  });
+
   test('discovers executable callbacks with config filters and no native connection', async () => {
     const runner = new RecordingRunner();
     const output = { write: jest.fn() };
@@ -478,10 +500,13 @@ describe('DesktopStorybookCli', () => {
       120_000,
     );
     expect(runSmokeTests).toHaveBeenCalledWith({
+      config: cli.config,
+      commandRunner: runner,
+      errorOutput: process.stderr,
       // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the test exercises the loopback Desktop Driver
       driverUrl: `http://127.0.0.1:${cli.instance.driverPort}`,
+      manifest: await createEmptyStoryManifest(cli.config, 'macos'),
       platform: 'macos',
-      projectRoot: storybookRoot,
       targetId: 'agenticstorybook-macos',
     });
     expect(fetch.mock.calls.map(([input]) => input.toString())).toContain(
@@ -504,6 +529,13 @@ describe('DesktopStorybookCli', () => {
 });
 
 describe('createDesktopStorybookCommand', () => {
+  test('forwards verbose logging through nested lifecycle commands', async () => {
+    const runner = new RecordingRunner();
+    const command = createDesktopStorybookCommand({ config: makeConfig(), runner });
+    await command.parseAsync(['node', 'storybook', '--verbose', 'bundle', '--macos']);
+    expect(runner.foreground.every(({ env }) => env.STORYBOOK_VERBOSE === '1')).toBe(true);
+  });
+
   test.each(['windows', 'win32'] as const)('builds the %s native helper without running app preparation', async (platform) => {
     const runner = new RecordingRunner();
     const buildNativeDriver = jest.fn(async () => nativeDriverArtifact);

@@ -5,6 +5,7 @@ import { attachDesktopWebdriver, type DesktopWebdriverAttachment } from '@fluent
 import { expect } from 'expect-webdriverio';
 
 import type { WdioStory } from './types.js';
+import { formatDesktopStorybookError, writeDesktopStorybookFailure } from '../../config/diagnostics.cjs';
 
 export type WdioWorkerOptions = {
   attachment: DesktopWebdriverAttachment;
@@ -15,23 +16,45 @@ export type WdioWorkerOptions = {
 
 export function registerWdioStoryTest(options: WdioWorkerOptions, callback: NonNullable<WdioStory['wdio']>): void {
   test(options.storyId, { timeout: options.timeoutMs }, async (context) => {
-    const desktop = await attachDesktopWebdriver(options.attachment);
-    context.signal.throwIfAborted();
-    let skipReason: string | undefined;
-    await callback({
-      browser: desktop.browser,
-      desktop,
-      expect,
-      signal: context.signal,
-      skip: (reason) => {
-        if (!reason?.trim()) {
-          throw new TypeError('Skipping a wdio story requires a reason.');
-        }
-        skipReason = reason;
-        context.skip(reason);
-      },
+    let recorded = false;
+    const recordFailure = (error: unknown) => {
+      const diagnostic = formatDesktopStorybookError(error);
+      try {
+        fs.writeFileSync(options.resultPath, JSON.stringify({ status: 'failed', error: diagnostic }));
+        recorded = true;
+      } catch (writeError) {
+        writeDesktopStorybookFailure(`wdio "${options.storyId}"`, error);
+        throw new AggregateError([error, writeError], 'Could not persist the worker failure diagnostic.');
+      }
+    };
+    context.after(() => {
+      if (!recorded && context.signal.aborted) {
+        recordFailure(context.signal.reason);
+      }
     });
-    context.signal.throwIfAborted();
-    fs.writeFileSync(options.resultPath, JSON.stringify(skipReason ? { status: 'skipped', skipReason } : { status: 'passed' }));
+    try {
+      const desktop = await attachDesktopWebdriver(options.attachment);
+      context.signal.throwIfAborted();
+      let skipReason: string | undefined;
+      await callback({
+        browser: desktop.browser,
+        desktop,
+        expect,
+        signal: context.signal,
+        skip: (reason) => {
+          if (!reason?.trim()) {
+            throw new TypeError('Skipping a wdio story requires a reason.');
+          }
+          skipReason = reason;
+          context.skip(reason);
+        },
+      });
+      context.signal.throwIfAborted();
+      fs.writeFileSync(options.resultPath, JSON.stringify(skipReason ? { status: 'skipped', skipReason } : { status: 'passed' }));
+      recorded = true;
+    } catch (error) {
+      recordFailure(error);
+      throw error;
+    }
   });
 }

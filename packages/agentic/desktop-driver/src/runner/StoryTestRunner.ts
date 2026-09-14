@@ -39,6 +39,7 @@ export type DesktopStoryTestRunnerOptions = {
   session: DesktopSessionClient;
   signal?: AbortSignal;
   targetId: string;
+  onTestResult?: (result: Readonly<DesktopStoryTestResult>) => void | Promise<void>;
 };
 
 type SelectedTest = {
@@ -56,6 +57,7 @@ export async function runDesktopStoryTests({
   session,
   signal,
   targetId,
+  onTestResult,
 }: DesktopStoryTestRunnerOptions): Promise<DesktopStoryRunResult> {
   const startedAt = new Date();
   const selected = selectDesktopStoryTests(manifest, endpoint, selection);
@@ -71,19 +73,17 @@ export async function runDesktopStoryTests({
   });
 
   for (const [index, item] of selected.entries()) {
-    if (signal?.aborted) {
-      results.push(cancelledResult(item, 'Run cancelled before the test started.'));
-      continue;
-    }
-    results.push(
-      await runTest({
-        artifacts,
-        item,
-        runId: `${runId}-${index + 1}`,
-        session,
-        signal,
-      }),
-    );
+    const result = signal?.aborted
+      ? cancelledResult(item, 'Run cancelled before the test started.')
+      : await runTest({
+          artifacts,
+          item,
+          runId: `${runId}-${index + 1}`,
+          session,
+          signal,
+        });
+    results.push(result);
+    await onTestResult?.(result);
   }
 
   const result: DesktopStoryRunResult = {

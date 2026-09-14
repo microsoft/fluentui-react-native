@@ -50,6 +50,12 @@ The runner resets the preview for each test, filters and shards a stable
 `storyId/testId` ordering, checks required capabilities, and classifies
 assertion, timeout, cancellation, skip, and infrastructure outcomes.
 
+Pass `onTestResult(result)` to `runStoryTests` or `runDesktopStoryTests` to
+receive each settled test result before the next test starts. This supports
+immediate pipeline diagnostics without parsing the final artifact report.
+The callback receives a read-only result and is awaited; serializable authored plans and
+result formats remain unchanged.
+
 An external supervisor can share an existing session with an isolated Node
 worker using `attachDesktopWebdriver({ url, sessionId, capabilities })`.
 This registers the same custom commands without creating a second session.

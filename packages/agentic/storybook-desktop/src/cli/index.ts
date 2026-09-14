@@ -14,6 +14,7 @@ export {
 export {
   NodeDesktopCommandRunner,
   type DesktopCommandRunner,
+  type NodeDesktopCommandRunnerOptions,
   type PreparedDesktopCommand,
   type RunningDesktopCommand,
 } from './commandRunner.js';

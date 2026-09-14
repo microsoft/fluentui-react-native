@@ -35,7 +35,14 @@ The shared runner extracts the callbacks for Node, injects WebdriverIO and
 native assertions, and leaves test dependencies out of Metro. Optional runner
 defaults belong under `wdio` in `storybook.config.mts`; no separate test config
 is needed. See the [authoring contract](../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
-This command is separate from the existing static-plan smoke gate.
+`stories-and-tests` smoke mode also runs these callbacks, grouped with each
+story's static plans. Both paths select the correct page before executing tests.
+
+Commands retain merged stdout/stderr logs under `artifacts/storybook-commands`.
+Successful commands emit short summaries; failures replay their complete log
+and print contextual story/test diagnostics. Use
+`yarn storybook --verbose smoke --macos --mode stories-and-tests` to include
+successful-command output as well. No shell redirection is required.
 
 ## Layout
 

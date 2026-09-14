@@ -7,6 +7,7 @@ import type { DesktopStoryManifest, NativeDesktopApplicationDescriptor, NativeDr
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { DesktopStorybookInstance } from '../config/instance.js';
 import type { Platforms } from '../config/platforms.js';
+import type { DesktopStorybookWdioOptions } from '../config/wdio.js';
 
 export type DesktopStorybookDriverManifest = {
   application: NativeDesktopApplicationDescriptor & {
@@ -29,6 +30,7 @@ export type DesktopStorybookDriverManifest = {
   storybookPort: number;
   targetId: string;
   testIDPrefix: string;
+  wdio?: DesktopStorybookWdioOptions;
 };
 
 export type CreateDesktopStorybookDriverManifestOptions = {
@@ -76,6 +78,7 @@ export function createDesktopStorybookDriverManifest({
     storybookPort: instance.storybookPort,
     targetId: `${config.appName}-${platform}`.toLowerCase(),
     testIDPrefix: config.testIDPrefix,
+    wdio: config.wdio,
   });
 }
 

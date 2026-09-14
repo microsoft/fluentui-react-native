@@ -1,6 +1,6 @@
 import { attach, remote } from 'webdriverio';
 
-import type { DesktopStoryRunResult } from '../authoring/results.js';
+import type { DesktopStoryRunResult, DesktopStoryTestResult } from '../authoring/results.js';
 import type { DesktopStoryExpectation } from '../authoring/storyTests.js';
 import { ArtifactManager } from '../artifacts/ArtifactManager.js';
 import { createDesktopDriverClient, DesktopSessionClient } from '../client/DesktopDriverClient.js';
@@ -42,6 +42,7 @@ export type DesktopWebdriverRunOptions = {
   artifactsRoot?: string;
   selection?: DesktopStoryTestSelection;
   signal?: AbortSignal;
+  onTestResult?: (result: Readonly<DesktopStoryTestResult>) => void | Promise<void>;
 };
 
 export type DesktopWebdriverAttachment = {
@@ -91,6 +92,7 @@ export class DesktopWebdriverSession {
       ...(options.artifactsRoot ? { artifacts: new ArtifactManager(options.artifactsRoot) } : {}),
       endpoint,
       manifest,
+      onTestResult: options.onTestResult,
       platformName,
       selection: options.selection,
       session: this.session,

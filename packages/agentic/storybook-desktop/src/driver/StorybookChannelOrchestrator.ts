@@ -6,6 +6,7 @@ import type {
 } from '@fluentui-react-native/desktop-driver';
 
 import type { DesktopStorybookDriverManifest } from './driverManifest.js';
+import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 
 type ChannelMessage = {
   args?: unknown[];
@@ -30,6 +31,7 @@ export type StorybookChannelOrchestratorOptions = {
   fetch?: typeof globalThis.fetch;
   serverUrl: string;
   timeoutMs?: number;
+  errorOutput?: DesktopStorybookErrorOutput;
 };
 
 type PendingSelection = {
@@ -44,6 +46,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   private readonly fetch: typeof globalThis.fetch;
   private readonly serverUrl: string;
   private readonly timeoutMs: number;
+  private readonly errorOutput: DesktopStorybookErrorOutput;
   private readonly pending = new Map<string, PendingSelection>();
   private readonly bridgeWaiters = new Set<() => void>();
   private bridgeConnected = false;
@@ -56,11 +59,13 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
     fetch = globalThis.fetch,
     serverUrl,
     timeoutMs = 30_000,
+    errorOutput = process.stderr,
   }: StorybookChannelOrchestratorOptions) {
     this.driverManifest = driverManifest;
     this.fetch = fetch;
     this.serverUrl = serverUrl.replace(/\/$/, '');
     this.timeoutMs = timeoutMs;
+    this.errorOutput = errorOutput;
     channelServer.on('connection', (client) => this.attachClient(client));
     for (const client of channelServer.clients) {
       this.attachClient(client);
@@ -76,37 +81,47 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   }
 
   async selectStory(request: StorySelectionRequest): Promise<StoryReadyResult> {
-    this.requireStory(request.storyId);
-    await this.waitForBridge();
-    const ready = this.waitForReady(request);
-    void ready.catch(() => undefined);
-    this.broadcast('furn:desktop:prepare-story', request);
     try {
-      const response = await this.fetch(`${this.serverUrl}/select-story-sync/${encodeURIComponent(request.storyId)}`, {
-        method: 'POST',
-      });
-      if (!response.ok && response.status !== 408) {
-        throw new Error(`Storybook failed to select "${request.storyId}" with status ${response.status}.`);
-      }
-      return await ready;
+      return await this.selectAndPrepareStory(request);
     } catch (error) {
-      this.cancelPending(request.requestId);
+      writeDesktopStorybookFailure(`navigation "${request.storyId}" (run ${request.runId})`, error, this.errorOutput);
       throw error;
     }
   }
 
-  async resetStory(request: StorySelectionRequest): Promise<StoryReadyResult> {
+  private async selectAndPrepareStory(request: StorySelectionRequest): Promise<StoryReadyResult> {
     this.requireStory(request.storyId);
     await this.waitForBridge();
     const ready = this.waitForReady(request);
     void ready.catch(() => undefined);
+    const controller = new AbortController();
+    let timer: ReturnType<typeof setTimeout> | undefined;
     try {
       this.broadcast('furn:desktop:prepare-story', request);
-      return ready;
-    } catch (error) {
+      const navigation = this.fetch(`${this.serverUrl}/select-story-sync/${encodeURIComponent(request.storyId)}`, {
+        method: 'POST',
+        signal: controller.signal,
+      }).then(async (response) => {
+        if (!response.ok && response.status !== 408) {
+          const detail = await response.text();
+          throw new Error(`Storybook failed to select "${request.storyId}" with status ${response.status}${detail ? `: ${detail}` : '.'}`);
+        }
+      });
+      return await Promise.race([
+        Promise.all([navigation, ready]).then(([, result]) => result),
+        new Promise<never>((_resolve, reject) => {
+          timer = setTimeout(() => reject(new Error(`Timed out navigating to Storybook story "${request.storyId}".`)), this.timeoutMs);
+        }),
+      ]);
+    } finally {
+      clearTimeout(timer);
+      controller.abort();
       this.cancelPending(request.requestId);
-      throw error;
     }
+  }
+
+  resetStory(request: StorySelectionRequest): Promise<StoryReadyResult> {
+    return this.selectStory(request);
   }
 
   async updateArgs(storyId: string, args: Readonly<Record<string, unknown>>): Promise<void> {
