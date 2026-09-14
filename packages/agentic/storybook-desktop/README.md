@@ -93,6 +93,11 @@ The returned `DesktopStorybookConfig` resolves package roots lazily and exposes 
 orchestration. A config-level `testIDPrefix` remains available as an explicit override for consumers that do not store
 Storybook identity in `app.json`.
 
+The `src/config` import graph must also load before the TypeScript build:
+Storybook's prebuild loader falls back to CommonJS-transpiled source when
+`lib` is absent. Use explicit `.ts` extensions for relative imports in that
+graph; `rewriteRelativeImportExtensions` converts them to `.js` in build output.
+
 ## CLI and API
 
 The `storybook-desktop` binary loads `storybook.config.ts`, `.mts`, `.js`, `.mjs`, or `.cjs` from the current package.

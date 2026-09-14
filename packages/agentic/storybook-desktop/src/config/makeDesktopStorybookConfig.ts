@@ -15,7 +15,7 @@ import type {
 } from './commands.ts';
 import { getAllPlatforms, getPlatform, isPlatform } from './platforms.ts';
 import type { Platforms } from './platforms.ts';
-import { resolveWdioOptions, type DesktopStorybookWdioOptions } from './wdio.js';
+import { resolveWdioOptions, type DesktopStorybookWdioOptions } from './wdio.ts';
 
 const defaultStoryPatterns = ['src/**/*.stories.?(ts|tsx)'] as const;
 const defaultDeviceAddons = ['@storybook/addon-ondevice-controls', '@storybook/addon-ondevice-actions'] as const;
