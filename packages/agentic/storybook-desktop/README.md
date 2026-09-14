@@ -144,16 +144,17 @@ Driver listener on separate loopback ports in one Node process. It resolves the
 verified native helper before starting Metro and registers a process-backed
 target. The deterministic fake host remains test-only.
 
-Component authors tag portable plans with `desktop-e2e`. Button, Checkbox, and
-Input provide the initial examples. Plan extraction evaluates only the inline
+New component tests should use executable WDIO functions. Legacy Checkbox and
+Input plans remain supported during migration and use the `desktop-e2e` tag.
+Plan extraction evaluates only the inline
 static `desktopDriver` literal and supports TypeScript `satisfies`; dynamic
 values fail with source context instead of being omitted.
 
 ### Executable tests inside stories
 
-For imperative tests, add a top-level `wdio` callback to a CSF3 story. This is
-an opt-in companion to static `parameters.desktopDriver` plans, not a React
-Native implementation of the web `play` function:
+Add a top-level `wdio` property to a CSF3 story. The story is the suite
+(`describe`), and named functions are its test cases (`it`). Test bodies use
+WebdriverIO directly rather than a custom action/expectation JSON format:
 
 ```tsx
 import type { StoryObj } from '@storybook/react-native';
@@ -162,20 +163,49 @@ import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing
 type Story = WdioStory<StoryObj<typeof Button>>;
 
 export const Default: Story = {
-  wdio: async ({ browser, expect }) => {
-    const button = await browser.$('~save-button');
-    await expect(button).toBeEnabled();
-    await button.click();
+  args: { testID: 'save-button' },
+  wdio: {
+    'is enabled': async ({ browser, expect }) => {
+      await expect(await browser.$('~save-button')).toBeEnabled();
+    },
+    'supports native activation': async ({ browser, platform, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (!features?.physicalClick) {
+        skip('Physical pointer input is unavailable.');
+        return;
+      }
+      const button = await browser.$('~save-button');
+      await button.click();
+      if (platform !== 'macos' && features.focus) {
+        await browser.waitUntil(async () => (await button.getProperty('focused')) === true);
+      }
+    },
   },
 };
 ```
 
 `browser` is the real WebdriverIO browser, `expect` is `expect-webdriverio`,
 and `desktop` exposes the existing typed native assertions and story commands.
+`platform` is the **target endpoint**, typed as `'macos' | 'windows' | 'win32'`;
+it is not `process.platform`. Win32 stays distinct even though its WebDriver
+`platformName` is `windows`. Native feature flags are typed under
+`browser.capabilities['furn:features']`.
 `signal` allows cooperative cancellation; `skip(reason)` records an explicit
 skip (return from the callback after calling it). Native selectors and
 supported WebDriver operations apply; there is no DOM or JavaScript execution
 inside the app.
+
+The original `wdio: async (context) => { ... }` form remains supported. It is
+one test, called `default` for filtering. Named collections must be non-empty,
+with unique literal names and inline function values; spreads, computed
+names, methods, nested suites, and dynamic test registration are rejected.
+This is intentionally a lightweight story-as-suite pattern, not injected
+Mocha/Jest `describe`/`it` globals. Names can be discovered without executing
+test code, and each case retains its own process and native session.
+
+Use `getProperty()` to read a native element property before asserting it;
+Jest's ordinary `toHaveProperty()` matcher inspects the JavaScript object,
+not the native control.
 
 Callbacks are extracted without importing React Native in Node. They must be
 inline functions with no closures over the story module's imports, helpers,
@@ -200,6 +230,7 @@ yarn storybook driver --macos
 # Terminal 2: launch the native app, then run the inline tests.
 yarn storybook run --macos
 yarn storybook test --macos --story 'components-button--*'
+yarn storybook test --macos --story 'components-button--*' --test '*activation*'
 ```
 
 Defaults come from `storybook.config.mts`; no Mocha, Jest, or WDIO config file
@@ -212,12 +243,13 @@ export default makeDesktopStorybookConfig({
     timeoutMs: 30_000,
     reporter: 'spec', // spec, tap, or dot
     clickMode: 'auto',
-    // Optional: story: 'components-button--*', tag: 'my-test-tag'
+    // Optional: story: 'components-button--*', test: '*activation*', tag: 'my-test-tag'
   },
 });
 ```
 
-CLI filters, `--timeout-ms`, `--reporter`, and `--click-mode` override those
+`--list` includes named cases and respects `--test` filtering. CLI filters,
+`--timeout-ms`, `--reporter`, and `--click-mode` override those
 defaults. By default `test` uses the saved driver's actual port and target,
 including port-probing adjustments. `--url` and `--target` together select an
 externally managed driver. On macOS the command refreshes an exact,
@@ -225,29 +257,36 @@ nonce-bound lease for the isolated app identity. Windows and Win32 require
 the trusted lifecycle owner to provide the existing application lease;
 the test runner does not attach by an ambiguous process name or title.
 
-Node's built-in test runner executes each story in a separate process. The
+Node's built-in test runner executes **each test** in a separate process. The
 supervisor owns one attached WebDriver session at a time, authenticates the
 live manifest, navigates to and remounts the correct story before each callback, and deletes the
 session after success, failure, timeout, or worker exit. The app and driver
 remain running. Failed callbacks exit nonzero; no matches is an error.
+Named cases run in declaration order, grouped by story. The timeout applies
+per case, not to the entire suite. Assertion failures and timeouts do not
+prevent other independent cases in that story from running; connection or
+session-cleanup failures stop execution. Do not share element handles or
+assume state survives between cases.
 Reports and best-effort failure source/tree evidence live in
 `artifacts/<platform>/wdio`. Generated executable files are removed after the
-run. Callback digests participate in manifest freshness checks: restart the
+run. Named results include `testName`, and failure evidence uses distinct
+paths for each case. Callback digests participate in manifest freshness checks: restart the
 driver and reload the app after editing tests.
 
-Button's `Default` demonstrates assertions and Node-only imports;
+Button's `Default` replaces its legacy plans with named WDIO tests for
+semantics, platform-specific focus, pointer activation, and PNG capture.
 `ExternallyDrivenSelection` verifies actual activation and caller-owned state
 updates through the visible status label, since macOS does not expose
 `checked` on the native button role. Run callbacks directly with `storybook test`, or include them in
 `storybook smoke --<platform> --mode stories-and-tests`. Smoke groups tests by
-story ID, runs that story's `desktop-e2e` plans and configured `wdio` callback,
+story ID, runs that story's remaining legacy `desktop-e2e` plans and selected `wdio` cases,
 then advances to the next story. Non-default stories are included. Every test
 gets a fresh preview; the currently selected sidebar page is not a prerequisite.
 The aggregate smoke report contains static results in `tests` and executable
 results in `wdio`. Per-story executable reports are under
 `artifacts/<platform>/desktop-driver/wdio`.
 
-Run the resulting plans through the consuming app's Desktop Driver CLI:
+For legacy JSON plans only, use the consuming app's Desktop Driver CLI:
 
 ```sh
 yarn desktop-driver stories list \

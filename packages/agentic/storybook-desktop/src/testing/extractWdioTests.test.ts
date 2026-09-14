@@ -9,6 +9,43 @@ import { extractWdioTests } from './extractWdioTests.js';
 const sourceFile = path.resolve(__dirname, 'fixture.stories.tsx');
 
 describe('extractWdioTests', () => {
+  test('extracts named test functions in declaration order with independent local scopes', async () => {
+    const result = extractWdioTests(
+      `
+      import Native from 'react-native-not-loaded';
+      export const Example = { render: () => <Native />, wdio: {
+        'first case': async ({ expect, platform }) => { expect(platform).toBe('win32'); },
+        'second case': async ({ browser }) => { await browser.$('~button'); },
+      } };
+    `,
+      sourceFile,
+    ).get('Example')!;
+    expect(result.tests.map(({ name }) => name)).toEqual(['first case', 'second case']);
+    const assertion = jest.fn();
+    await vm.runInNewContext(`(${result.tests[0].code})`)({ platform: 'win32', expect: () => ({ toBe: assertion }) });
+    expect(assertion).toHaveBeenCalledWith('win32');
+    expect(() => extractWdioTests(`const shared = 1; export const Example = { wdio: { named: () => shared } };`, sourceFile)).toThrow(
+      /story-module binding/,
+    );
+    const source = `export const Example = { wdio: { first: () => {}, second: () => {} } };`;
+    expect(extractWdioTests(source, sourceFile).get('Example')!.digest).not.toBe(
+      extractWdioTests(source.replace('second:', 'renamed:'), sourceFile).get('Example')!.digest,
+    );
+  });
+
+  test.each([
+    ['{}', /at least one/],
+    ["{ '': () => {} }", /non-empty/],
+    ['{ a: () => {}, a: () => {} }', /duplicate test name/],
+    ['{ ...shared }', /static properties/],
+    ["{ ['name']: () => {} }", /static properties/],
+    ['{ named() {} }', /static properties/],
+    ['{ named: helper }', /inline/],
+    ['{ named: { nested: () => {} } }', /inline/],
+  ])('rejects invalid named collections %s', (value, message) => {
+    expect(() => extractWdioTests(`export const Example = { wdio: ${value} };`, sourceFile)).toThrow(message);
+  });
+
   test('extracts a standalone typed callback without loading the native story module', async () => {
     const tests = extractWdioTests(
       `
@@ -28,7 +65,9 @@ describe('extractWdioTests', () => {
       sourceFile,
     );
     expect([...tests.keys()]).toEqual(['Example']);
-    const { code, digest } = tests.get('Example')!;
+    const { tests: callbacks, digest } = tests.get('Example')!;
+    expect(callbacks).toHaveLength(1);
+    const { code } = callbacks[0];
     expect(code).not.toMatch(/TestContext|Promise<void>|: string|NativeComponent/);
     expect(digest).toMatch(/^[a-f0-9]{64}$/);
     const click = jest.fn();
@@ -55,8 +94,8 @@ describe('extractWdioTests', () => {
       sourceFile,
     );
     expect([...tests.keys()]).toEqual(['Renamed']);
-    expect(tests.get('Renamed')!.code).toContain('function check');
-    expect(() => vm.runInNewContext(`(${tests.get('Renamed')!.code})`)).not.toThrow();
+    expect(tests.get('Renamed')!.tests[0].code).toContain('function check');
+    expect(() => vm.runInNewContext(`(${tests.get('Renamed')!.tests[0].code})`)).not.toThrow();
   });
 
   test('resolves literal helper imports from the original file and normalizes Node builtins', () => {
@@ -68,7 +107,7 @@ describe('extractWdioTests', () => {
         assert.ok(types.isIdentifier(types.identifier('example')));
       } };`,
       sourceFile,
-    ).get('Example')!;
+    ).get('Example')!.tests[0];
     const requireFromSource = createRequire(sourceFile);
     expect(code).toContain('node:assert/strict');
     expect(code).toContain(pathToFileURL(requireFromSource.resolve('@babel/core')).href);
@@ -83,7 +122,7 @@ describe('extractWdioTests', () => {
         assert.ok(types.isIdentifier(types.identifier('example')));
       } };`,
       sourceFile,
-    ).get('Example')!;
+    ).get('Example')!.tests[0];
     const result = spawnSync(process.execPath, ['--input-type=module', '--eval', `await (${code})({});`], { encoding: 'utf8' });
     expect(result.stderr).toBe('');
     expect(result.status).toBe(0);
@@ -118,7 +157,7 @@ describe('extractWdioTests', () => {
         return first(new Local().read()) + (new constructorTarget() === constructorTarget ? 1 : 0);
       } };`,
       sourceFile,
-    ).get('Example')!;
+    ).get('Example')!.tests[0];
     expect(await vm.runInNewContext(`(${code})`)()).toBe(3);
   });
 

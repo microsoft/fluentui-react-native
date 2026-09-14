@@ -26,8 +26,10 @@ app-owned, while the platform-neutral UI, configuration helpers, and `storybook-
 from the shared package. The app exposes only the shared CLI entry points; native lifecycle scripts
 remain package-owned.
 
-Button also experiments with executable `wdio` callbacks directly in its
-stories. Run `yarn storybook test --macos --list` to discover them. With
+Button demonstrates named executable `wdio` tests instead of custom
+`desktopDriver` plans. Each callback receives the target `platform` and its
+own fresh preview/session/worker. Run `yarn storybook test --macos --list` to
+discover the case names, or use `--test <name-glob>` to filter them. With
 `yarn storybook driver --macos` running and the app launched via
 `yarn storybook run --macos`, run
 `yarn storybook test --macos --story 'components-button--*'`.
@@ -323,7 +325,8 @@ Run it alongside `yarn start` and `yarn storybook run --macos|--windows`. The on
 ## Writing stories
 
 Follow the package-level story authoring instructions in `../../packages/agentic/components/AGENTS.md`. Add a
-`*.stories.tsx` file next to its component; standalone native package story globs are listed explicitly in `src/main.ts`.
+`*.stories.tsx` file next to its component; package discovery belongs in `storybook.config.mts`, adapted by `src/main.ts`.
 See `../../packages/agentic/components/src/components/button/button.stories.tsx` for the canonical higher-order component example.
-Portable tests are static `parameters.desktopDriver` data with stable `testID`
-selectors; Button, Checkbox, and Input demonstrate the initial contract.
+Prefer named `wdio` functions with stable `testID` selectors and injected
+`platform` context, as demonstrated by Button. Checkbox and Input retain the
+legacy static `parameters.desktopDriver` format during migration.

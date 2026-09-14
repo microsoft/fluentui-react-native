@@ -62,8 +62,12 @@ This registers the same custom commands without creating a second session.
 The supervisor retains ownership and must call `delete()` after the worker
 exits, including on assertion failures, timeouts, or crashes.
 
-Storybook's experimental top-level `wdio` story callbacks use this pattern
-with Node's built-in test runner. Extraction, native-bundle stripping, runner
+Storybook's preferred top-level `wdio` functions and named function collections
+use this pattern with Node's built-in test runner. Each function receives the
+target `platform` (`macos`, `windows`, or `win32`), and each named case gets an
+independent worker/session. Native feature flags are typed on the WebdriverIO
+browser's `furn:features` capability. Button now uses this authoring pattern
+instead of serializable plans. Extraction, native-bundle stripping, runner
 configuration, and source freshness belong to
 [`storybook-desktop`](../../storybook-desktop/README.md#executable-tests-inside-stories),
 not this Storybook-independent package. Static plans below are unchanged.

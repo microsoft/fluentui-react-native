@@ -45,7 +45,32 @@ test('executes isolated inline code and releases sessions after assertion failur
       status: 'passed',
     },
     smokeFailureLogged: true,
-    button: ['components-button--default'],
+    button: [
+      { testName: 'exposes enabled button semantics', status: 'passed' },
+      { testName: 'supports native pointer activation', status: 'passed' },
+    ],
+    restrictedButton: [
+      { testName: 'exposes enabled button semantics', status: 'passed' },
+      { testName: 'supports native pointer activation', status: 'skipped' },
+    ],
+    platforms: Object.fromEntries(
+      ['macos', 'windows', 'win32'].map((platform) => [
+        platform,
+        [
+          { testName: 'mutates state', status: 'passed' },
+          { testName: 'starts fresh', status: 'passed' },
+        ],
+      ]),
+    ),
+    namedFailureResults: [
+      { testName: 'a b', status: 'failed' },
+      { testName: 'a-b', status: 'failed' },
+      { testName: 'recovers', status: 'passed' },
+    ],
+    namedTimeout: [
+      { testName: 'times out', status: 'failed' },
+      { testName: 'runs afterward', status: 'passed' },
+    ],
     generatedFiles: [],
     attachedOnly: true,
   });

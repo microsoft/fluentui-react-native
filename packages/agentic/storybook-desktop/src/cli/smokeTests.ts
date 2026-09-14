@@ -10,7 +10,7 @@ import type { DesktopWebdriverOptions, DesktopWebdriverSession } from '@fluentui
 
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
-import { runWdioStoryTests, selectWdioStories, type WdioStoryTestResult } from '../testing/runWdioTests.js';
+import { runWdioStoryTests, selectWdioStories, WdioStoryTestRunError, type WdioStoryTestResult } from '../testing/runWdioTests.js';
 import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 import type { DesktopCommandRunner } from './commandRunner.js';
 
@@ -84,7 +84,11 @@ export async function runDesktopStorybookSmokeTests(
           );
         } catch (error) {
           writeDesktopStorybookFailure(`smoke story "${storyId}"`, error, options.errorOutput);
-          wdio.push({ storyId, status: 'failed', durationMs: Date.now() - started, error: errorMessage(error) });
+          if (error instanceof WdioStoryTestRunError && error.results.length) {
+            wdio.push(...error.results);
+          } else {
+            wdio.push({ storyId, status: 'failed', durationMs: Date.now() - started, error: errorMessage(error) });
+          }
           throw error;
         }
       }

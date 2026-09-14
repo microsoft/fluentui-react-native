@@ -126,6 +126,10 @@ Use `yarn storybook test --macos --story 'components-button--*'` for executable
 story callbacks. It uses the app's `wdio` settings in `storybook.config.mts`
 and Node's built-in test runner, not a separate WDIO configuration. Start
 `storybook driver` and launch the app first; `--list` needs neither.
+For multiple cases, use a named function collection under the story's `wdio`
+key. `--list` includes names and `--test <name-glob>` filters them. The story
+is the suite scope; each case receives the target `platform` and runs in its
+own worker/session with an independent timeout.
 See [inline test authoring and lifecycle requirements](../../README.md#executable-tests-inside-stories).
 
 Use `smoke` for the standard renderability gate:

@@ -57,6 +57,30 @@ function resolveInitializer(value, seen = new Set(), bindings = new Set()) {
   return value;
 }
 
+function collectCallbacks(value) {
+  const requireCallback = (callback) => {
+    if ((!callback.isArrowFunctionExpression() && !callback.isFunctionExpression()) || callback.node.generator) {
+      fail(callback, 'each test must be an inline, non-generator function.');
+    }
+    return callback;
+  };
+  if (!value.isObjectExpression()) return [{ callback: requireCallback(value) }];
+  const callbacks = [];
+  const names = new Set();
+  for (const member of value.get('properties')) {
+    if (!member.isObjectProperty() || member.node.computed) {
+      fail(member, 'named tests require static properties, not spreads, computed keys, methods or accessors.');
+    }
+    const name = keyName(member);
+    if (!name || !name.trim()) fail(member, 'named tests require a non-empty name.');
+    if (names.has(name)) fail(member, `duplicate test name "${name}".`);
+    names.add(name);
+    callbacks.push({ name, callback: requireCallback(unwrap(member.get('value'))) });
+  }
+  if (!callbacks.length) fail(value, 'a named test collection must contain at least one test.');
+  return callbacks;
+}
+
 /** Shared by the Node extractor and Metro; inspect only named CSF story objects. */
 function collectWdioTests(program) {
   const exports = [];
@@ -107,11 +131,8 @@ function collectWdioTests(program) {
       if (keyName(member) !== 'wdio') continue;
       if (test) fail(member, `"${exportName}" has duplicate wdio properties.`);
       if (!member.isObjectProperty()) fail(member, `"${exportName}".wdio must be an inline function value, not a method or accessor.`);
-      const callback = unwrap(member.get('value'));
-      if ((!callback.isArrowFunctionExpression() && !callback.isFunctionExpression()) || callback.node.generator) {
-        fail(member, `"${exportName}".wdio must be an inline, non-generator function.`);
-      }
-      test = { callback, property: member };
+      const value = unwrap(member.get('value'));
+      test = { callbacks: collectCallbacks(value), property: member, value };
     }
     if (test) {
       const declaration = object.findParent((parent) => parent.isVariableDeclarator());
@@ -251,7 +272,9 @@ module.exports = () => ({
       const filename = state.filename ?? state.file.opts.filename;
       if (!filename || !/\.stories\.tsx?$/.test(filename)) return;
       const tests = collectWdioTests(program);
-      for (const { callback } of tests.values()) compileWdioTest(callback, filename, state.file.code);
+      for (const { callbacks } of tests.values()) {
+        for (const { callback } of callbacks) compileWdioTest(callback, filename, state.file.code);
+      }
       for (const { property } of tests.values()) if (!property.removed) property.remove();
     },
   },

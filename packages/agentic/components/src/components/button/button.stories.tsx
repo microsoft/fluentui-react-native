@@ -4,7 +4,6 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
-import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Button } from './button';
@@ -88,46 +87,30 @@ type Story = WdioStory<StoryObj<typeof Button>>;
 
 export const Default: Story = {
   tags: ['desktop-e2e'],
-  wdio: async ({ browser, expect }) => {
-    const assert: typeof import('node:assert') = (await import('node:assert')).default;
-    const button = await browser.$('~agentic-storybook-button');
-    await expect(button).toExist();
-    await expect(button).toBeEnabled();
-    assert.strictEqual(await button.getTagName(), 'button');
-  },
-  parameters: {
-    desktopDriver: {
-      version: 1,
-      tests: [
-        {
-          id: 'pointer-focus',
-          platforms: ['windows', 'win32'],
-          title: 'Responds to activation and receives focus',
-          requires: ['element-screenshot', 'focus', 'physical-click'],
-          steps: [
-            { action: 'wait', target: { testId: 'agentic-storybook-button' } },
-            { expect: { state: 'role', target: { testId: 'agentic-storybook-button' }, value: 'button' } },
-            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-button' }, value: true } },
-            { action: 'click', target: { testId: 'agentic-storybook-button' } },
-            { expect: { state: 'focused', target: { testId: 'agentic-storybook-button' }, value: true } },
-            { action: 'screenshot', name: 'button-focused', target: { testId: 'agentic-storybook-button' } },
-          ],
-        },
-        {
-          id: 'pointer-activation',
-          platforms: ['macos'],
-          title: 'Accepts native pointer activation',
-          requires: ['element-screenshot', 'physical-click'],
-          steps: [
-            { action: 'wait', target: { testId: 'agentic-storybook-button' } },
-            { expect: { state: 'role', target: { testId: 'agentic-storybook-button' }, value: 'button' } },
-            { expect: { state: 'enabled', target: { testId: 'agentic-storybook-button' }, value: true } },
-            { action: 'click', target: { testId: 'agentic-storybook-button' } },
-            { action: 'screenshot', name: 'button-after-click', target: { testId: 'agentic-storybook-button' } },
-          ],
-        },
-      ],
-    } satisfies DesktopStoryTests,
+  wdio: {
+    'exposes enabled button semantics': async ({ browser, expect }) => {
+      const assert: typeof import('node:assert') = (await import('node:assert')).default;
+      const button = await browser.$('~agentic-storybook-button');
+      await expect(button).toExist();
+      await expect(button).toBeEnabled();
+      assert.strictEqual(await button.getTagName(), 'button');
+    },
+    'supports native pointer activation': async ({ browser, expect, platform, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+      if (!features.physicalClick || !features.elementScreenshot || (platform !== 'macos' && !features.focus)) {
+        skip('This test requires physical clicks, element screenshots, and focus on Windows/Win32.');
+        return;
+      }
+      const button = await browser.$('~agentic-storybook-button');
+      await button.click();
+      if (platform === 'windows' || platform === 'win32') {
+        await browser.waitUntil(async () => (await button.getProperty('focused')) === true, {
+          timeoutMsg: 'The activated button did not receive keyboard focus.',
+        });
+      }
+      expect(await browser.takeElementScreenshot(await button.elementId)).toMatch(/^iVBORw0KGgo/);
+    },
   },
 };
 
@@ -260,16 +243,27 @@ export const Selected: Story = {
 };
 
 export const ExternallyDrivenSelection: Story = {
-  wdio: async ({ browser, expect }) => {
-    const favorite = await browser.$('~agentic-storybook-button-favorite');
-    const reset = await browser.$('~agentic-storybook-button-reset');
-    const status = await browser.$('~agentic-storybook-button-selection-state');
-    await expect(favorite).toBeEnabled();
-    await expect(status).toHaveText('Not selected');
-    await favorite.click();
-    await expect(status).toHaveText('Selected');
-    await reset.click();
-    await expect(status).toHaveText('Not selected');
+  wdio: {
+    'starts unselected': async ({ browser, expect }) => {
+      await expect(await browser.$('~agentic-storybook-button-selection-state')).toHaveText('Not selected');
+    },
+    'updates and resets caller-owned selection': async ({ browser, expect, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+      if (!features.physicalClick) {
+        skip('This test requires physical pointer input.');
+        return;
+      }
+      const favorite = await browser.$('~agentic-storybook-button-favorite');
+      const reset = await browser.$('~agentic-storybook-button-reset');
+      const status = await browser.$('~agentic-storybook-button-selection-state');
+      await expect(favorite).toBeEnabled();
+      await expect(status).toHaveText('Not selected');
+      await favorite.click();
+      await expect(status).toHaveText('Selected');
+      await reset.click();
+      await expect(status).toHaveText('Not selected');
+    },
   },
   render: () => {
     const ToggleGroup = () => {

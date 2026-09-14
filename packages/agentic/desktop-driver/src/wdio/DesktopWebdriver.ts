@@ -2,6 +2,7 @@ import { attach, remote } from 'webdriverio';
 
 import type { DesktopStoryRunResult, DesktopStoryTestResult } from '../authoring/results.js';
 import type { DesktopStoryExpectation } from '../authoring/storyTests.js';
+import type { DesktopHostFeatures } from '../host/types.js';
 import { ArtifactManager } from '../artifacts/ArtifactManager.js';
 import { createDesktopDriverClient, DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import type { DesktopClickMode, DesktopPlatformName } from '../protocol/types.js';
@@ -15,6 +16,7 @@ declare global {
     interface Capabilities {
       'furn:clickMode'?: 'accessibility' | 'auto' | 'physical';
       'furn:endpoint'?: 'macos' | 'win32' | 'windows';
+      'furn:features'?: Readonly<DesktopHostFeatures>;
       'furn:launchMode'?: 'attach' | 'launch';
       'furn:target'?: string;
     }

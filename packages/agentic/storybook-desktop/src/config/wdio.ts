@@ -5,6 +5,7 @@ export type DesktopStorybookWdioOptions = {
   reporter?: 'spec' | 'tap' | 'dot';
   story?: string;
   tag?: string;
+  test?: string;
   timeoutMs?: number;
 };
 
@@ -21,7 +22,7 @@ export function resolveWdioOptions(
   if (!['auto', 'accessibility', 'physical'].includes(clickMode)) {
     throw new TypeError('wdio.clickMode must be auto, accessibility, or physical.');
   }
-  for (const key of ['story', 'tag'] as const) {
+  for (const key of ['story', 'tag', 'test'] as const) {
     if (options[key] !== undefined && (typeof options[key] !== 'string' || !options[key].trim())) {
       throw new TypeError(`wdio.${key} must be a non-empty string.`);
     }

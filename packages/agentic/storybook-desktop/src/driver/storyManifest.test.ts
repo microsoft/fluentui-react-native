@@ -49,6 +49,9 @@ describe('createDesktopStoryManifest', () => {
     const before = await manifestForSource(`export const Default = {};`);
     const first = await manifestForSource(`export const Default = { wdio: () => console.log('first-test') };`);
     const changed = await manifestForSource(`export const Default = { wdio: () => console.log('changed-test') };`);
+    const named = await manifestForSource(`export const Default = { wdio: {
+      'first case': () => console.log('hidden-body'), 'second case': () => {},
+    } };`);
     expect(before.entries[0]).not.toHaveProperty('wdio');
     expect(before.platformManifestDigest).toBe(
       createHash('sha256')
@@ -63,6 +66,9 @@ describe('createDesktopStoryManifest', () => {
     expect(first.platformManifestDigest).not.toBe(before.platformManifestDigest);
     expect(changed.platformManifestDigest).not.toBe(first.platformManifestDigest);
     expect(changed.entries[0].wdio!.digest).not.toBe(first.entries[0].wdio!.digest);
+    expect(named.entries[0].wdio).toMatchObject({ exportName: 'Default', testNames: ['first case', 'second case'] });
+    expect(named.portablePlanDigest).toBe(before.portablePlanDigest);
+    expect(JSON.stringify(named)).not.toContain('hidden-body');
   });
 
   test('fails instead of silently dropping callbacks from excluded or unrecognized story exports', async () => {

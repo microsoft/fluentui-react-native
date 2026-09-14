@@ -55,12 +55,11 @@ audit.
   layout.
 - Test both paths of a self-driving axis, and test that an externally driven `selected` does not change on press.
 - Keep a self-driving controlled prop out of story `args`, and keep an identity-changing axis out of story controls.
-- Author desktop automation under `parameters.desktopDriver` as static data
-  satisfying `DesktopStoryTests`. Use one stable `testID` per interacted
-  element, declare capabilities, and assert public native semantics rather than
-  implementation structure.
-- For imperative tests, use the separate top-level `wdio` callback contract
-  demonstrated by Button and run it through `storybook test`. Do not put
+- Prefer top-level `wdio` functions or named function collections demonstrated
+  by Button. Use the injected `platform`, explicit capability skips, stable
+  `testID` selectors, and public native semantics. The story supplies the suite
+  scope and each named case is isolated. Run with `storybook test`.
+- Legacy `parameters.desktopDriver` plans remain supported. Do not put
   functions in static plans or import Node helpers at story-module scope.
 
 ## Focused references

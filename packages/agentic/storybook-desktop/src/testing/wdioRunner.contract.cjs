@@ -10,7 +10,7 @@ async function main() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-inline-wdio-'));
   const [
     { createDesktopStoryManifest },
-    { runWdioStoryTests },
+    { runWdioStoryTests, WdioStoryTestRunError },
     { createDesktopDriverStoryHarness, createFakeStoryWindows },
     { makeDesktopStorybookConfig },
   ] = await Promise.all([
@@ -58,6 +58,34 @@ async function main() {
     export const Crash = { wdio: () => { process.exit(2); }};
     export const ExitZero = { wdio: () => { process.exit(0); }};
     export const NavigationFailure = { wdio: () => { throw new Error('must not execute without navigation'); }};
+    export const Named = { wdio: {
+      'mutates state': async ({ browser, desktop, expect, platform }) => {
+        expect(platform).toBe(desktop.session.capabilities['furn:endpoint']);
+        expect(['windows', 'win32', 'macos']).toContain(platform);
+        if (platform === 'win32') expect(desktop.session.capabilities.platformName).toBe('windows');
+        const button = await browser.$('~button-primary');
+        expect(await button.getProperty('focused')).toBe(false);
+        await button.click();
+        expect(await button.getProperty('focused')).toBe(true);
+      },
+      'starts fresh': async ({ browser, desktop, expect, platform }) => {
+        expect(platform).toBe(desktop.session.capabilities['furn:endpoint']);
+        expect(await (await browser.$('~button-primary')).getProperty('focused')).toBe(false);
+      },
+    }};
+    export const NamedFailures = { wdio: {
+      'a b': () => { throw new Error('first named failure'); },
+      'a-b': () => { throw new Error('second named failure'); },
+      'recovers': async ({ browser, expect }) => {
+        await expect(await browser.$('~button-primary')).toBeEnabled();
+      },
+    }};
+    export const NamedTimeout = { wdio: {
+      'times out': async () => { await new Promise((resolve) => setTimeout(resolve, 10_000)); },
+      'runs afterward': async ({ browser, expect }) => {
+        await expect(await browser.$('~button-primary')).toBeEnabled();
+      },
+    }};
   `,
   );
   const storyPackage = { name: 'inline-fixture', root, manifest: { name: 'inline-fixture' }, storyPatterns: ['*.stories.ts'] };
@@ -95,6 +123,58 @@ async function main() {
       ...overrides,
     });
   try {
+    const platforms = {};
+    for (const platform of ['macos', 'windows', 'win32']) {
+      const platformManifest = await createDesktopStoryManifest({ projectRoot, getStoryPackages: () => [storyPackage] }, platform);
+      const platformHarness = await createDesktopDriverStoryHarness(platformManifest);
+      try {
+        const results = await runWdioStoryTests({
+          config,
+          manifest: platformManifest,
+          platform,
+          targetId: platformHarness.target.id,
+          url: platformHarness.server.url,
+          story: 'fixture-button--named',
+          timeoutMs: 2000,
+        });
+        platforms[platform] = results.map(({ testName, status }) => ({ testName, status }));
+      } finally {
+        await platformHarness.close();
+      }
+    }
+    let namedFailureResults;
+    try {
+      await run('named-failures');
+      throw new Error('Expected named failures.');
+    } catch (error) {
+      if (
+        !(error instanceof Error) ||
+        !(error instanceof WdioStoryTestRunError) ||
+        !('results' in error) ||
+        !Array.isArray(error.results)
+      ) {
+        throw error;
+      }
+      namedFailureResults = error.results;
+    }
+    if (namedFailureResults.map(({ status }) => status).join(',') !== 'failed,failed,passed') {
+      throw new Error('Named test failure prevented independent cases from running.');
+    }
+    const evidencePaths = namedFailureResults.flatMap(({ artifacts }) => (artifacts ?? []).map(({ path }) => path));
+    if (evidencePaths.length !== 4 || new Set(evidencePaths).size !== 4) {
+      throw new Error('Named failure evidence collided.');
+    }
+    const filtered = await run('named', { test: '*fresh' });
+    if (filtered.length !== 1 || filtered[0].testName !== 'starts fresh') throw new Error('Named test filtering failed.');
+    let namedTimeout;
+    try {
+      await run('named-timeout');
+      throw new Error('Expected named timeout.');
+    } catch (error) {
+      if (!(error instanceof Error) || !(error instanceof WdioStoryTestRunError) || !('results' in error) || !Array.isArray(error.results))
+        throw error;
+      namedTimeout = error.results.map(({ testName, status }) => ({ testName, status }));
+    }
     const passed = await run('pass');
     const skipped = await run('skip');
     const failures = [];
@@ -167,7 +247,24 @@ async function main() {
     if (!smokeFailureLogged) throw new Error(`Smoke control lost the callback failure: ${failedControl.stderr}`);
     const buttonConfig = makeDesktopStorybookConfig({ projectRoot, storyPackages: ['@fluentui-react-native/components'] });
     const buttonManifest = await createDesktopStoryManifest(buttonConfig, 'windows');
-    const buttonHarness = await createDesktopDriverStoryHarness(buttonManifest, { windows: createFakeStoryWindows(buttonManifest) });
+    const buttonWindows = createFakeStoryWindows(buttonManifest);
+    buttonWindows[0] = {
+      ...buttonWindows[0],
+      elements: [
+        ...buttonWindows[0].elements,
+        {
+          id: 'wdio-button',
+          automationId: 'agentic-storybook-button',
+          name: 'Button',
+          role: 'button',
+          scope: 'preview',
+          parentId: 'story-root',
+          windowId: buttonWindows[0].id,
+          rect: { x: 10, y: 10, width: 120, height: 40 },
+        },
+      ],
+    };
+    const buttonHarness = await createDesktopDriverStoryHarness(buttonManifest, { windows: buttonWindows });
     let button;
     try {
       button = await runWdioStoryTests({
@@ -182,6 +279,24 @@ async function main() {
     } finally {
       await buttonHarness.close();
     }
+    const restrictedButtonHarness = await createDesktopDriverStoryHarness(buttonManifest, {
+      windows: buttonWindows,
+      features: { physicalClick: false },
+    });
+    let restrictedButton;
+    try {
+      restrictedButton = await runWdioStoryTests({
+        config: { projectRoot: root, resolvePackage: (name) => buttonConfig.resolvePackage(name) },
+        manifest: buttonManifest,
+        platform: 'windows',
+        targetId: restrictedButtonHarness.target.id,
+        url: restrictedButtonHarness.server.url,
+        story: 'components-button--default',
+        timeoutMs: 5000,
+      });
+    } finally {
+      await restrictedButtonHarness.close();
+    }
     process.stdout.write(
       '\nWDIO_RESULT ' +
         JSON.stringify({
@@ -192,7 +307,11 @@ async function main() {
           groupedSelections,
           smoke,
           smokeFailureLogged,
-          button: button.map(({ storyId }) => storyId),
+          button: button.map(({ testName, status }) => ({ testName, status })),
+          restrictedButton: restrictedButton.map(({ testName, status }) => ({ testName, status })),
+          platforms,
+          namedFailureResults: namedFailureResults.map(({ testName, status }) => ({ testName, status })),
+          namedTimeout,
           failures,
           attachedOnly: harness.host.actions
             .filter(({ type }) => type === 'close-application')

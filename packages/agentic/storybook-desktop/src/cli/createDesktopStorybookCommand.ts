@@ -78,10 +78,11 @@ function addTestCommand(program: Command, getApi: () => Promise<DesktopStorybook
     .description('Run executable wdio story callbacks against the running Storybook app.')
     .option('--list', 'list selected executable stories without connecting')
     .option('--story <glob>', 'filter Storybook IDs')
+    .option('--test <glob>', 'filter named wdio tests; single callbacks use the name default')
     .option('--tag <tag>', 'filter story tags')
     .option('--url <url>', 'Desktop Driver URL (requires --target)')
     .option('--target <id>', 'registered target ID (requires --url)')
-    .option('--timeout-ms <milliseconds>', 'timeout per executable story', Number)
+    .option('--timeout-ms <milliseconds>', 'timeout per executable test', Number)
     .addOption(new Option('--reporter <reporter>', 'Node test reporter').choices(['spec', 'tap', 'dot']))
     .addOption(new Option('--click-mode <mode>', 'native click semantics').choices(['auto', 'physical', 'accessibility']));
   addPlatformOptions(command);
@@ -93,6 +94,7 @@ function addTestCommand(program: Command, getApi: () => Promise<DesktopStorybook
       reporter: flags.reporter,
       story: flags.story,
       tag: flags.tag,
+      test: flags.test,
       target: flags.target,
       timeoutMs: flags.timeoutMs,
       url: flags.url,

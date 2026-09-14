@@ -6,8 +6,13 @@ import storyTests from '../../config/transform-story-tests.cjs';
 
 const { collectWdioTests, compileWdioTest } = storyTests;
 
-export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<string, { code: string; digest: string }> {
-  const tests = new Map<string, { code: string; digest: string }>();
+export type ExtractedWdioStory = {
+  digest: string;
+  tests: readonly { name?: string; code: string }[];
+};
+
+export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<string, ExtractedWdioStory> {
+  const tests = new Map<string, ExtractedWdioStory>();
   transformSync(code, {
     babelrc: false,
     code: false,
@@ -18,12 +23,19 @@ export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<
       () => ({
         visitor: {
           Program(program: NodePath<types.Program>) {
-            for (const [exportName, { callback }] of collectWdioTests(program)) {
-              const compiled = compileWdioTest(callback, sourceFile, code);
-              const source = code.slice(callback.node.start!, callback.node.end!);
+            for (const [exportName, { callbacks, value }] of collectWdioTests(program)) {
+              const compiled = callbacks.map(({ callback, name }) => ({
+                ...(name === undefined ? {} : { name }),
+                code: compileWdioTest(callback, sourceFile, code),
+              }));
+              const source = code.slice(value.node.start!, value.node.end!);
               tests.set(exportName, {
-                code: compiled,
-                digest: createHash('sha256').update(source).update('\0').update(compiled).digest('hex'),
+                tests: compiled,
+                digest: createHash('sha256')
+                  .update(source)
+                  .update('\0')
+                  .update(value.isObjectExpression() ? JSON.stringify(compiled) : compiled[0].code)
+                  .digest('hex'),
               });
             }
           },

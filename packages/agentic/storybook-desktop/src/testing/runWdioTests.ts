@@ -1,8 +1,10 @@
 import fs from 'node:fs';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import type { DesktopStoryManifest, DesktopStoryManifestEntry } from '@fluentui-react-native/desktop-driver';
+import type { DesktopArtifact } from '@fluentui-react-native/desktop-driver/authoring';
 import { ArtifactManager } from '@fluentui-react-native/desktop-driver/artifacts';
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
 import type { DesktopWebdriverSession } from '@fluentui-react-native/desktop-driver/wdio';
@@ -17,11 +19,13 @@ import { formatDesktopStorybookError, writeDesktopStorybookFailure, type Desktop
 
 export type WdioStoryTestResult = {
   storyId: string;
+  testName?: string;
   status: 'passed' | 'failed' | 'skipped';
   durationMs: number;
   error?: string;
   skipReason?: string;
   evidenceErrors?: string[];
+  artifacts?: readonly DesktopArtifact[];
 };
 
 export type RunWdioStoryTestsOptions = DesktopStorybookWdioOptions & {
@@ -34,6 +38,17 @@ export type RunWdioStoryTestsOptions = DesktopStorybookWdioOptions & {
   errorOutput?: DesktopStorybookErrorOutput;
 };
 
+export class WdioStoryTestRunError extends Error {
+  readonly results: readonly WdioStoryTestResult[];
+
+  constructor(results: readonly WdioStoryTestResult[], failures: readonly unknown[]) {
+    const cause = failures.length === 1 ? failures[0] : new AggregateError(failures, 'Executable wdio tests and evidence/cleanup failed.');
+    super(errorMessage(cause), { cause });
+    this.name = 'WdioStoryTestRunError';
+    this.results = [...results];
+  }
+}
+
 export function selectWdioStories(
   manifest: DesktopStoryManifest,
   options: DesktopStorybookWdioOptions,
@@ -41,6 +56,7 @@ export function selectWdioStories(
   return manifest.entries
     .filter((entry) => entry.wdio && (!options.story || path.matchesGlob(entry.id, options.story)))
     .filter((entry) => !options.tag || entry.tags.includes(options.tag))
+    .filter((entry) => (entry.wdio?.testNames ?? ['default']).some((name) => matchesWdioTest(name, options.test)))
     .sort((left, right) => left.id.localeCompare(right.id));
 }
 
@@ -53,14 +69,17 @@ export async function runWdioStoryTests(
   if (stories.length === 0) {
     throw new Error('No executable wdio story tests matched the requested selection.');
   }
-  const cases = stories.map((entry) => {
+  const cases = stories.flatMap((entry) => {
     const sourceFile = path.join(options.config.resolvePackage(entry.packageName).root, entry.sourcePath);
     const extracted = extractWdioTests(fs.readFileSync(sourceFile, 'utf8'), sourceFile).get(entry.wdio!.exportName);
     if (!extracted || extracted.digest !== entry.wdio!.digest) {
       throw new Error(`Executable test source changed for ${entry.id}; regenerate the Storybook manifest.`);
     }
-    return { entry, code: extracted.code };
+    return extracted.tests
+      .filter(({ name }) => matchesWdioTest(name ?? 'default', settings.test))
+      .map(({ name, code }) => ({ entry, code, testName: name }));
   });
+  if (cases.length === 0) throw new Error('No executable wdio tests matched the requested selection.');
   const artifacts = new ArtifactManager(
     options.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', options.platform, 'wdio'),
   );
@@ -74,11 +93,24 @@ export async function runWdioStoryTests(
   let infrastructureFailure: unknown;
   let activeStory: string | undefined;
   let phase = 'setup';
+  let activeResult: WdioStoryTestResult | undefined;
+  let activeStarted = 0;
   try {
-    for (const [index, { entry, code }] of cases.entries()) {
-      activeStory = entry.id;
+    for (const [index, { entry, code, testName }] of cases.entries()) {
+      const displayName = testName === undefined ? entry.id : `${entry.id} / ${testName}`;
+      const artifactId =
+        testName === undefined ? entry.id : `${entry.id}-${createHash('sha256').update(testName).digest('hex').slice(0, 16)}`;
+      activeStory = displayName;
       phase = 'connection';
       const started = Date.now();
+      activeStarted = started;
+      const result: WdioStoryTestResult = {
+        storyId: entry.id,
+        ...(testName === undefined ? {} : { testName }),
+        status: 'failed',
+        durationMs: 0,
+      };
+      activeResult = result;
       // The supervisor owns the session, so even a crashed or timed-out Node worker cannot strand it.
       const desktop = await connectDesktopWebdriver({
         clickMode: settings.clickMode,
@@ -87,7 +119,6 @@ export async function runWdioStoryTests(
         targetId: options.targetId,
         url: options.url,
       });
-      const result: WdioStoryTestResult = { storyId: entry.id, status: 'failed', durationMs: 0 };
       let failure: unknown;
       try {
         phase = 'manifest verification';
@@ -106,6 +137,8 @@ export async function runWdioStoryTests(
           },
           resultPath,
           storyId: entry.id,
+          platform: options.platform,
+          testName,
           timeoutMs: settings.timeoutMs,
         };
         const specPath = path.join(directory, `${index}.test.mjs`);
@@ -120,7 +153,7 @@ export async function runWdioStoryTests(
           runner,
           {
             command: process.execPath,
-            label: `wdio "${entry.id}"`,
+            label: `wdio "${displayName}"`,
             args: [
               '--test',
               '--test-concurrency=1',
@@ -134,7 +167,7 @@ export async function runWdioStoryTests(
           },
           Math.min(settings.timeoutMs + 5000, 2_147_483_647),
           resultPath,
-          entry.id,
+          displayName,
         );
         result.status = outcome.status;
         if (outcome.status === 'skipped') {
@@ -143,10 +176,12 @@ export async function runWdioStoryTests(
       } catch (error) {
         failure = error;
         result.error = formatDesktopStorybookError(error);
-        writeDesktopStorybookFailure(`wdio "${entry.id}" during ${phase}`, error, options.errorOutput);
-        result.evidenceErrors = await captureFailure(desktop, artifacts, entry.id);
+        writeDesktopStorybookFailure(`wdio "${displayName}" during ${phase}`, error, options.errorOutput);
+        const evidence = await captureFailure(desktop, artifacts, artifactId);
+        result.artifacts = evidence.artifacts;
+        result.evidenceErrors = evidence.errors;
         for (const evidenceError of result.evidenceErrors) {
-          writeDesktopStorybookFailure(`evidence for "${entry.id}"`, evidenceError, options.errorOutput);
+          writeDesktopStorybookFailure(`evidence for "${displayName}"`, evidenceError, options.errorOutput);
         }
       }
       phase = 'session cleanup';
@@ -155,7 +190,7 @@ export async function runWdioStoryTests(
       } catch (cleanupError) {
         throw new AggregateError(
           failure === undefined ? [cleanupError] : [failure, cleanupError],
-          `Could not release the wdio session for ${entry.id}; stopping before another test starts.`,
+          `Could not release the wdio session for ${displayName}; stopping before another test starts.`,
         );
       }
       result.durationMs = Date.now() - started;
@@ -163,6 +198,12 @@ export async function runWdioStoryTests(
     }
   } catch (error) {
     infrastructureFailure = error;
+    if (activeResult && !results.includes(activeResult)) {
+      activeResult.status = 'failed';
+      activeResult.error = formatDesktopStorybookError(error);
+      activeResult.durationMs = Date.now() - activeStarted;
+      results.push(activeResult);
+    }
     writeDesktopStorybookFailure(`wdio "${activeStory ?? 'run'}" during ${phase}`, error, options.errorOutput);
   }
   const failures: unknown[] = infrastructureFailure === undefined ? [] : [infrastructureFailure];
@@ -171,7 +212,7 @@ export async function runWdioStoryTests(
       new Error(
         `Executable wdio stories failed: ${results
           .filter(({ status }) => status === 'failed')
-          .map(({ storyId }) => storyId)
+          .map(({ storyId, testName }) => (testName === undefined ? storyId : `${storyId} / ${testName}`))
           .join(', ')}. ` + `See ${path.join(artifacts.root, 'run.json')}.`,
       ),
     );
@@ -194,12 +235,7 @@ export async function runWdioStoryTests(
     failures.push(error);
     writeDesktopStorybookFailure('cleaning generated wdio files', error, options.errorOutput);
   }
-  if (failures.length === 1) {
-    throw failures[0];
-  }
-  if (failures.length > 1) {
-    throw new AggregateError(failures, 'Executable wdio tests and evidence/cleanup failed.');
-  }
+  if (failures.length) throw new WdioStoryTestRunError(results, failures);
   return results;
 }
 
@@ -214,19 +250,28 @@ function isWorkerResult(value: unknown): value is WorkerResult {
   );
 }
 
-async function captureFailure(desktop: DesktopWebdriverSession, artifacts: ArtifactManager, storyId: string): Promise<string[]> {
+export function matchesWdioTest(name: string, pattern?: string): boolean {
+  return pattern === undefined || path.matchesGlob(name, pattern);
+}
+
+async function captureFailure(
+  desktop: DesktopWebdriverSession,
+  artifacts: ArtifactManager,
+  storyId: string,
+): Promise<{ artifacts: DesktopArtifact[]; errors: string[] }> {
   const errors: string[] = [];
+  const captured: DesktopArtifact[] = [];
   for (const capture of [
     async () => artifacts.writeSource(storyId, 'failure-source', await desktop.session.getPageSource()),
     async () => artifacts.writeTree(storyId, 'failure-tree', await desktop.session.getTree()),
   ]) {
     try {
-      await capture();
+      captured.push(await capture());
     } catch (error) {
       errors.push(errorMessage(error));
     }
   }
-  return errors;
+  return { artifacts: captured, errors };
 }
 
 function errorMessage(error: unknown): string {

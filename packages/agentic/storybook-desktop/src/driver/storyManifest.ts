@@ -84,6 +84,8 @@ export async function createDesktopStoryManifest(
         }
       }
       for (const [exportName, staticStory] of stories) {
+        const wdio = wdioTests.get(exportName);
+        const testNames = wdio?.tests.flatMap(({ name }) => (name === undefined ? [] : [name]));
         const tests = readDesktopStoryTests(
           extractDesktopStoryTests(csf._storyAnnotations?.[exportName]?.parameters, sourceFile, staticStory.id) ??
             staticStory.parameters?.desktopDriver,
@@ -98,7 +100,7 @@ export async function createDesktopStoryManifest(
           tags: [...new Set([...(csf.meta?.tags ?? []), ...(staticStory.tags ?? []), 'story'])].sort(),
           title: csf.meta?.title ?? staticStory.id.split('--')[0],
           ...(tests ? { tests } : {}),
-          ...(wdioTests.has(exportName) ? { wdio: { digest: wdioTests.get(exportName)!.digest, exportName } } : {}),
+          ...(wdio ? { wdio: { digest: wdio.digest, exportName, ...(testNames?.length ? { testNames } : {}) } } : {}),
         });
       }
 

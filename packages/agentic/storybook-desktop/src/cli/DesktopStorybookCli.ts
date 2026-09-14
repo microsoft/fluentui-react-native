@@ -35,7 +35,7 @@ import {
 import { NodeDesktopCommandRunner, STORYBOOK_VERBOSE } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
-import { runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
+import { matchesWdioTest, runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
@@ -209,7 +209,11 @@ export class DesktopStorybookCli {
     if (options.list) {
       this.output.write(
         `${JSON.stringify(
-          selected.map(({ id, sourcePath }) => ({ id, sourcePath })),
+          selected.map(({ id, sourcePath, wdio }) => ({
+            id,
+            sourcePath,
+            ...(wdio?.testNames ? { tests: wdio.testNames.filter((name) => matchesWdioTest(name, settings.test)) } : {}),
+          })),
           null,
           2,
         )}\n`,
@@ -228,7 +232,7 @@ export class DesktopStorybookCli {
       this.runner,
     );
     this.output.write(
-      `Ran ${results.length} executable wdio stories (${results.filter(({ status }) => status === 'passed').length} passed, ` +
+      `Ran ${results.length} executable wdio tests (${results.filter(({ status }) => status === 'passed').length} passed, ` +
         `${results.filter(({ status }) => status === 'skipped').length} skipped).\n`,
     );
   }

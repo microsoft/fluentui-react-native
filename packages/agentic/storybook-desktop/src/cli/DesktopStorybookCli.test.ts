@@ -133,6 +133,35 @@ function makeConfig(platformOptions = {}) {
 }
 
 describe('DesktopStorybookCli', () => {
+  test('discovers and filters named callbacks without connecting to an app', async () => {
+    const output = { write: jest.fn() };
+    const config = makeDesktopStorybookConfig({ projectRoot: storybookRoot, wdio: { test: 'semantics' } });
+    const createStoryManifest = async () => ({
+      endpoint: 'macos' as const,
+      schemaVersion: 1 as const,
+      platformManifestDigest: 'digest',
+      portablePlanDigest: 'portable',
+      entries: [
+        {
+          id: 'button--default',
+          name: 'Default',
+          title: 'Button',
+          sourcePath: 'button.stories.tsx',
+          packageName: 'fixture',
+          tags: [],
+          wdio: { exportName: 'Default', digest: 'callback', testNames: ['semantics', 'native activation'] },
+        },
+      ],
+    });
+    const command = createDesktopStorybookCommand({ config, createStoryManifest, output });
+    await command.parseAsync(['node', 'storybook', 'test', '--macos', '--list', '--test', '*activation*']);
+    expect(JSON.parse(output.write.mock.calls[0][0])).toEqual([
+      { id: 'button--default', sourcePath: 'button.stories.tsx', tests: ['native activation'] },
+    ]);
+    const cli = new DesktopStorybookCli(config, { createStoryManifest, output });
+    await expect(cli.test('macos', { list: true, test: 'missing' })).rejects.toThrow('No executable');
+  });
+
   test('prints story navigation failures before throwing the smoke summary', async () => {
     const runner = new RecordingRunner();
     const errorOutput = { write: jest.fn() };

@@ -7,6 +7,7 @@ import type { DesktopStoryRunResult } from '@fluentui-react-native/desktop-drive
 
 import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { runWdioStoryTests } from '../testing/runWdioTests.js';
+import { WdioStoryTestRunError } from '../testing/runWdioTests.js';
 import {
   formatDesktopStorybookSmokeTestSummary,
   runDesktopStorybookSmokeTests,
@@ -204,6 +205,21 @@ describe('runDesktopStorybookSmokeTests', () => {
     });
   });
 
+  test('preserves individual named case results when a callback collection fails', async () => {
+    options.manifest = { ...manifest, entries: [{ ...story(buttonId, true), tests: undefined }] };
+    const results = [
+      { storyId: buttonId, testName: 'first', status: 'passed' as const, durationMs: 1 },
+      { storyId: buttonId, testName: 'second', status: 'failed' as const, durationMs: 1, error: 'named assertion' },
+    ];
+    const runWdio = jest.fn(async () => {
+      throw new WdioStoryTestRunError(results, [new Error('named assertion')]);
+    });
+    await expect(runDesktopStorybookSmokeTests(options, jest.fn(), runWdio)).rejects.toThrow('named assertion');
+    expect(JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/desktop-driver/run.json'), 'utf8'))).toMatchObject({
+      status: 'failed',
+      wdio: results,
+    });
+  });
   test('rejects stale manifests before plans execute and still closes the session', async () => {
     const runStoryTests = jest.fn();
     const deleteSession = jest.fn(async () => undefined);

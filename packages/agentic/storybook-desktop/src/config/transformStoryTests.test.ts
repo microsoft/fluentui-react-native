@@ -57,6 +57,21 @@ describe('native Storybook test stripping', () => {
     );
   });
 
+  test.each(['macos', 'windows', 'win32'])('strips every named test and its Node dependencies on %s', (platform) => {
+    const output = transform(
+      `
+      import { View } from 'react-native';
+      export const Example = { render: () => <View testID="keep-native" />, wdio: {
+        'first test': async ({ platform }) => { const assert = await import('node:assert'); assert.ok(platform); },
+        'second test': async () => { await import('node:fs'); },
+      } };
+    `,
+      platform,
+    );
+    expect(output).toContain('keep-native');
+    expect(output).not.toMatch(/first test|second test|node:assert|node:fs|wdio/);
+  });
+
   test('leaves non-story files untouched', () => {
     const output = transform(`export const configuration = { wdio: () => 'not-a-story' };`, 'macos', 'configuration.ts');
     expect(output).toContain('wdio');
