@@ -48,6 +48,11 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - Authored tests belong in component story `parameters.desktopDriver`, not in
   this app. The app owns identity, package discovery, platform exclusions, and
   generated manifests.
+- Executable tests may instead use a top-level component story `wdio`
+  callback, run with `yarn storybook test --<platform>`. Defaults belong in
+  `storybook.config.mts` under `wdio`; the shared Babel config removes
+  callbacks from native bundles. Keep this opt-in runner separate from the
+  static-plan smoke gate.
 - Keep `storybook-desktop.generated`, reports, trees, screenshots, and run
   manifests ignored. Never patch generated runtime identity or story manifests.
 - Treat the exact-platform and portable-plan digests as contracts. A dynamic or

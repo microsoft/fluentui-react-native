@@ -15,6 +15,7 @@ import type {
 } from './commands.ts';
 import { getAllPlatforms, getPlatform, isPlatform } from './platforms.ts';
 import type { Platforms } from './platforms.ts';
+import { resolveWdioOptions, type DesktopStorybookWdioOptions } from './wdio.js';
 
 const defaultStoryPatterns = ['src/**/*.stories.?(ts|tsx)'] as const;
 const defaultDeviceAddons = ['@storybook/addon-ondevice-controls', '@storybook/addon-ondevice-actions'] as const;
@@ -113,6 +114,9 @@ export type DesktopStorybookConfigOptions = StorySettings & {
    * Native project, command, and smoke-test settings for each desktop platform.
    */
   platformOptions?: DesktopPlatformOptionsMap;
+
+  /** Defaults for executable story callbacks, run by `storybook-desktop test`. */
+  wdio?: DesktopStorybookWdioOptions;
 };
 
 export type ResolvedPackage = {
@@ -156,6 +160,10 @@ export class DesktopStorybookConfig {
 
   get platform(): Platforms | undefined {
     return getPlatform();
+  }
+
+  get wdio(): ReturnType<typeof resolveWdioOptions> {
+    return resolveWdioOptions(this.config.wdio);
   }
 
   get platforms(): readonly Platforms[] {
@@ -503,6 +511,7 @@ function defaultSmokeOptions(config: DesktopStorybookConfig, platform: Platforms
 }
 
 function normalizeConfig(config: DesktopStorybookConfigOptions, projectRoot: string): DesktopStorybookConfigOptions {
+  const wdio = resolveWdioOptions(config.wdio);
   validatePlatforms(config.platforms, 'config');
   validatePlatformSettings(config.platformSettings, 'config');
   validateDesktopPlatformOptions(config.platformOptions);
@@ -534,6 +543,7 @@ function normalizeConfig(config: DesktopStorybookConfigOptions, projectRoot: str
 
   return {
     ...config,
+    wdio,
     ...normalizeStorySettings(config),
     storyPackages: normalizedStoryPackages,
     deviceAddons: config.deviceAddons ? [...config.deviceAddons] : undefined,

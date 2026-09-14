@@ -50,6 +50,18 @@ The runner resets the preview for each test, filters and shards a stable
 `storyId/testId` ordering, checks required capabilities, and classifies
 assertion, timeout, cancellation, skip, and infrastructure outcomes.
 
+An external supervisor can share an existing session with an isolated Node
+worker using `attachDesktopWebdriver({ url, sessionId, capabilities })`.
+This registers the same custom commands without creating a second session.
+The supervisor retains ownership and must call `delete()` after the worker
+exits, including on assertion failures, timeouts, or crashes.
+
+Storybook's experimental top-level `wdio` story callbacks use this pattern
+with Node's built-in test runner. Extraction, native-bundle stripping, runner
+configuration, and source freshness belong to
+[`storybook-desktop`](../../storybook-desktop/README.md#executable-tests-inside-stories),
+not this Storybook-independent package. Static plans below are unchanged.
+
 ## Author portable story plans
 
 Plans are static JSON under `parameters.desktopDriver`. Import only their types

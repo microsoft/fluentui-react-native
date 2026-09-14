@@ -9,6 +9,7 @@ export {
   type DesktopStorybookCliOptions,
   type DesktopStorybookPrepOptions,
   type DesktopStorybookServerOptions,
+  type DesktopStorybookTestOptions,
 } from './DesktopStorybookCli.js';
 export {
   NodeDesktopCommandRunner,

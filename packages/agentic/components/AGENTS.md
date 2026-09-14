@@ -12,6 +12,10 @@ invariants; detailed authoring recipes live in the
 - Portable desktop story tests are static `parameters.desktopDriver` plans.
   Use the public authoring types, stable `testID` selectors, declarative
   capability requirements, and no platform branches or executable callbacks.
+- Executable tests are a separate opt-in top-level `wdio` callback, typed
+  with `WdioStory` from `storybook-desktop/testing` using `import type`.
+  Keep callbacks self-contained; dynamically import Node helpers inside
+  them so the shared Babel transform can exclude them from native bundles.
 - Storybook application, native project, Metro, bundle, or CocoaPods work follows the
   [Storybook instructions](../../../apps/storybook/AGENTS.md) and the `agentic-storybook-development` skill.
 - Native React Native Windows Fabric component work follows the

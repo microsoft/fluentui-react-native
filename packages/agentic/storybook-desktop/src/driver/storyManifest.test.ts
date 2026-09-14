@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+import fs from 'node:fs';
 import path from 'node:path';
 
 import type { DesktopStorybookConfig, ResolvedStoryPackage } from '../config/makeDesktopStorybookConfig.js';
@@ -20,6 +22,62 @@ function fixtureConfig() {
 }
 
 describe('createDesktopStoryManifest', () => {
+  test('records executable digests without code and preserves existing static and portable digests', async () => {
+    const story = {
+      id: 'components-fixturebutton--default',
+      name: 'Default',
+      parameters: {
+        desktopDriver: {
+          version: 1,
+          tests: [{ id: 'static', steps: [{ action: 'click', target: { testId: 'button' } }] }],
+        },
+      },
+    };
+    const tools = {
+      loadCsf: () => ({
+        parse: () => ({ _stories: { Default: story }, stories: [story], meta: { title: 'Components/FixtureButton' } }),
+      }),
+    };
+    async function manifestForSource(source: string) {
+      const read = jest.spyOn(fs, 'readFileSync').mockReturnValueOnce(source);
+      try {
+        return await createDesktopStoryManifest(fixtureConfig(), 'windows', tools);
+      } finally {
+        read.mockRestore();
+      }
+    }
+    const before = await manifestForSource(`export const Default = {};`);
+    const first = await manifestForSource(`export const Default = { wdio: () => console.log('first-test') };`);
+    const changed = await manifestForSource(`export const Default = { wdio: () => console.log('changed-test') };`);
+    expect(before.entries[0]).not.toHaveProperty('wdio');
+    expect(before.platformManifestDigest).toBe(
+      createHash('sha256')
+        .update(JSON.stringify({ endpoint: 'windows', entries: before.entries }))
+        .digest('hex'),
+    );
+    expect(first.entries[0].wdio).toEqual({ digest: expect.stringMatching(/^[a-f0-9]{64}$/), exportName: 'Default' });
+    expect(JSON.stringify(first)).not.toMatch(/console\.log|first-test/);
+    expect(first.entries[0].tests).toEqual(before.entries[0].tests);
+    expect(first.portablePlanDigest).toBe(before.portablePlanDigest);
+    expect(changed.portablePlanDigest).toBe(before.portablePlanDigest);
+    expect(first.platformManifestDigest).not.toBe(before.platformManifestDigest);
+    expect(changed.platformManifestDigest).not.toBe(first.platformManifestDigest);
+    expect(changed.entries[0].wdio!.digest).not.toBe(first.entries[0].wdio!.digest);
+  });
+
+  test('fails instead of silently dropping callbacks from excluded or unrecognized story exports', async () => {
+    const read = jest.spyOn(fs, 'readFileSync').mockReturnValueOnce(`export const Excluded = { wdio: () => {} };`);
+    try {
+      await expect(
+        createDesktopStoryManifest(fixtureConfig(), 'windows', {
+          loadCsf: () => ({ parse: () => ({ _stories: {}, stories: [], meta: { title: 'Components/FixtureButton' } }) }),
+        }),
+      ).rejects.toThrow(/button\.stories\.ts.*"Excluded" is not a recognized story export/);
+    } finally {
+      read.mockRestore();
+    }
+  });
+
   test('extracts serializable plans and creates stable platform and portable digests', async () => {
     const tools = {
       loadCsf: () => ({

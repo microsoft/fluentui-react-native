@@ -19,6 +19,9 @@
       "path": "../desktop-driver/tsconfig.json"
     },
     {
+      "path": "../storybook-desktop/tsconfig.json"
+    },
+    {
       "path": "../../components/FocusZone/tsconfig.json"
     },
     {

@@ -149,6 +149,97 @@ Input provide the initial examples. Plan extraction evaluates only the inline
 static `desktopDriver` literal and supports TypeScript `satisfies`; dynamic
 values fail with source context instead of being omitted.
 
+### Executable tests inside stories
+
+For imperative tests, add a top-level `wdio` callback to a CSF3 story. This is
+an opt-in companion to static `parameters.desktopDriver` plans, not a React
+Native implementation of the web `play` function:
+
+```tsx
+import type { StoryObj } from '@storybook/react-native';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
+
+type Story = WdioStory<StoryObj<typeof Button>>;
+
+export const Default: Story = {
+  wdio: async ({ browser, expect }) => {
+    const button = await browser.$('~save-button');
+    await expect(button).toBeEnabled();
+    await button.click();
+  },
+};
+```
+
+`browser` is the real WebdriverIO browser, `expect` is `expect-webdriverio`,
+and `desktop` exposes the existing typed native assertions and story commands.
+`signal` allows cooperative cancellation; `skip(reason)` records an explicit
+skip (return from the callback after calling it). Native selectors and
+supported WebDriver operations apply; there is no DOM or JavaScript execution
+inside the app.
+
+Callbacks are extracted without importing React Native in Node. They must be
+inline functions with no closures over the story module's imports, helpers,
+args, or render state. Declare test-local values inside the callback. Import
+Node-compatible helpers with a literal `await import('node:assert/strict')`,
+`await import('./test-helper.js')`, or package specifier **inside** the
+callback; these resolve from the original story file. Unsupported expressions
+fail extraction with source context rather than disappearing.
+
+The shared Babel config removes these callbacks before Metro resolves their
+dependencies, on all three desktop endpoints. Import `WdioStory` with
+`import type`, never import Node test libraries at story-module scope, and use
+`createDesktopStorybookBabelConfig` in the app. Ordinary on-device story
+rendering and controls remain unchanged.
+
+Run the experiment from the consuming app:
+
+```sh
+yarn storybook test --macos --list
+# Terminal 1: keep the driver supervisor running.
+yarn storybook driver --macos
+# Terminal 2: launch the native app, then run the inline tests.
+yarn storybook run --macos
+yarn storybook test --macos --story 'components-button--*'
+```
+
+Defaults come from `storybook.config.mts`; no Mocha, Jest, or WDIO config file
+is needed:
+
+```ts
+export default makeDesktopStorybookConfig({
+  // ...app identity and story discovery...
+  wdio: {
+    timeoutMs: 30_000,
+    reporter: 'spec', // spec, tap, or dot
+    clickMode: 'auto',
+    // Optional: story: 'components-button--*', tag: 'my-test-tag'
+  },
+});
+```
+
+CLI filters, `--timeout-ms`, `--reporter`, and `--click-mode` override those
+defaults. By default `test` uses the saved driver's actual port and target,
+including port-probing adjustments. `--url` and `--target` together select an
+externally managed driver. On macOS the command refreshes an exact,
+nonce-bound lease for the isolated app identity. Windows and Win32 require
+the trusted lifecycle owner to provide the existing application lease;
+the test runner does not attach by an ambiguous process name or title.
+
+Node's built-in test runner executes each story in a separate process. The
+supervisor owns one attached WebDriver session at a time, authenticates the
+live manifest, resets the preview before each callback, and deletes the
+session after success, failure, timeout, or worker exit. The app and driver
+remain running. Failed callbacks exit nonzero; no matches is an error.
+Reports and best-effort failure source/tree evidence live in
+`artifacts/<platform>/wdio`. Generated executable files are removed after the
+run. Callback digests participate in manifest freshness checks: restart the
+driver and reload the app after editing tests.
+
+Button's `Default` demonstrates assertions and Node-only imports;
+`ExternallyDrivenSelection` verifies actual activation and caller-owned state
+updates. This experiment is invoked by `storybook test`; existing
+`stories-and-tests` smoke runs continue to execute the static plans only.
+
 Run the resulting plans through the consuming app's Desktop Driver CLI:
 
 ```sh

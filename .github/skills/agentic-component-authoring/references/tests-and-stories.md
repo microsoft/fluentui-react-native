@@ -145,6 +145,18 @@ use role, accessible name, state, and value assertions to verify the public
 accessibility contract. Button, Checkbox, and Input defaults are the canonical
 initial examples.
 
+For executable Node tests, Button also demonstrates a top-level `wdio`
+callback typed with `WdioStory` from
+`@fluentui-react-native/storybook-desktop/testing`. Wrap `StoryObj` in `WdioStory`
+and import the type only. The callback receives `browser`, `expect`, `desktop`,
+`signal`, and `skip`; it cannot capture story-module bindings. Node-compatible
+helpers may be dynamically imported inside the callback. The shared Babel
+configuration strips test bodies before Metro resolves dependencies.
+Run these with `yarn storybook test --<platform>`, independently of the static
+plan runner. See the [executable test contract](../../../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
+The components package's `test:stories` project checks the experimental
+Button stories without emitting them into the component library.
+
 Button uses focused appearance, size, shape, icon, selection, disabled, and constrained-content stories. Icon uses a
 source and size overview plus focused font, image, SVG, size, color, and accessibility stories.
 

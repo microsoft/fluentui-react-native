@@ -59,6 +59,9 @@ audit.
   satisfying `DesktopStoryTests`. Use one stable `testID` per interacted
   element, declare capabilities, and assert public native semantics rather than
   implementation structure.
+- For imperative tests, use the separate top-level `wdio` callback contract
+  demonstrated by Button and run it through `storybook test`. Do not put
+  functions in static plans or import Node helpers at story-module scope.
 
 ## Focused references
 

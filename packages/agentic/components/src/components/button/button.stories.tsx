@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Button } from './button';
 import type { ButtonAppearance, ButtonShape, ButtonSize } from './button.types';
@@ -74,10 +75,17 @@ const meta: Meta<typeof Button> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Button>;
+type Story = WdioStory<StoryObj<typeof Button>>;
 
 export const Default: Story = {
   tags: ['desktop-e2e'],
+  wdio: async ({ browser, expect }) => {
+    const assert: typeof import('node:assert') = (await import('node:assert')).default;
+    const button = await browser.$('~agentic-storybook-button');
+    await expect(button).toExist();
+    await expect(button).toBeEnabled();
+    assert.strictEqual(await button.getTagName(), 'button');
+  },
   parameters: {
     desktopDriver: {
       version: 1,
@@ -243,6 +251,16 @@ export const Selected: Story = {
 };
 
 export const ExternallyDrivenSelection: Story = {
+  wdio: async ({ browser, desktop, expect }) => {
+    const favorite = await browser.$('~agentic-storybook-button-favorite');
+    const reset = await browser.$('~agentic-storybook-button-reset');
+    await expect(favorite).toBeEnabled();
+    await desktop.expect({ state: 'checked', target: { testId: 'agentic-storybook-button-favorite' }, value: false });
+    await favorite.click();
+    await desktop.expect({ state: 'checked', target: { testId: 'agentic-storybook-button-favorite' }, value: true });
+    await reset.click();
+    await desktop.expect({ state: 'checked', target: { testId: 'agentic-storybook-button-favorite' }, value: false });
+  },
   render: () => {
     const ToggleGroup = () => {
       const [selected, setSelected] = useState(false);
@@ -254,8 +272,9 @@ export const ExternallyDrivenSelection: Story = {
             onPress={() => setSelected(!selected)}
             selected={selected}
             selectedIcon={filledStarIcon}
+            testID="agentic-storybook-button-favorite"
           />
-          <Button appearance="subtle" content="Reset" onPress={() => setSelected(false)} />
+          <Button appearance="subtle" content="Reset" onPress={() => setSelected(false)} testID="agentic-storybook-button-reset" />
         </StoryGroup>
       );
     };

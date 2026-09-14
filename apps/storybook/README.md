@@ -26,6 +26,17 @@ app-owned, while the platform-neutral UI, configuration helpers, and `storybook-
 from the shared package. The app exposes only the shared CLI entry points; native lifecycle scripts
 remain package-owned.
 
+Button also experiments with executable `wdio` callbacks directly in its
+stories. Run `yarn storybook test --macos --list` to discover them. With
+`yarn storybook driver --macos` running and the app launched via
+`yarn storybook run --macos`, run
+`yarn storybook test --macos --story 'components-button--*'`.
+The shared runner extracts the callbacks for Node, injects WebdriverIO and
+native assertions, and leaves test dependencies out of Metro. Optional runner
+defaults belong under `wdio` in `storybook.config.mts`; no separate test config
+is needed. See the [authoring contract](../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
+This command is separate from the existing static-plan smoke gate.
+
 ## Layout
 
 ```

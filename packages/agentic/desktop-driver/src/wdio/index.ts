@@ -1,2 +1,2 @@
-export { connectDesktopWebdriver, DesktopWebdriverSession } from './DesktopWebdriver.js';
-export type { DesktopWebdriverOptions, DesktopWebdriverRunOptions } from './DesktopWebdriver.js';
+export { attachDesktopWebdriver, connectDesktopWebdriver, DesktopWebdriverSession } from './DesktopWebdriver.js';
+export type { DesktopWebdriverAttachment, DesktopWebdriverOptions, DesktopWebdriverRunOptions } from './DesktopWebdriver.js';

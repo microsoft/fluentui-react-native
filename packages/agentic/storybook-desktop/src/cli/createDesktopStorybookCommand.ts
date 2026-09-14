@@ -8,6 +8,7 @@ import type {
   DesktopStorybookCliOptions,
   DesktopStorybookPrepOptions,
   DesktopStorybookServerOptions,
+  DesktopStorybookTestOptions,
 } from './DesktopStorybookCli.js';
 import { DesktopStorybookCli } from './DesktopStorybookCli.js';
 import { loadDesktopStorybookConfig } from './loadConfig.js';
@@ -58,6 +59,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
   addDriverCommand(program, getApi);
   addManifestCommand(program, getApi);
   addInstanceCommand(program, getApi);
+  addTestCommand(program, getApi);
   addPrepCommand(program, getApi);
   addActionCommand(program, 'bundle', 'Generate stories and create the platform JavaScript bundle.', getApi);
   addActionCommand(program, 'run', 'Build and launch the native Storybook app.', getApi);
@@ -65,6 +67,34 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
   addSmokeCommand(program, getApi);
 
   return program;
+}
+
+function addTestCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+  const command = program
+    .command('test')
+    .description('Run executable wdio story callbacks against the running Storybook app.')
+    .option('--list', 'list selected executable stories without connecting')
+    .option('--story <glob>', 'filter Storybook IDs')
+    .option('--tag <tag>', 'filter story tags')
+    .option('--url <url>', 'Desktop Driver URL (requires --target)')
+    .option('--target <id>', 'registered target ID (requires --url)')
+    .option('--timeout-ms <milliseconds>', 'timeout per executable story', Number)
+    .addOption(new Option('--reporter <reporter>', 'Node test reporter').choices(['spec', 'tap', 'dot']))
+    .addOption(new Option('--click-mode <mode>', 'native click semantics').choices(['auto', 'physical', 'accessibility']));
+  addPlatformOptions(command);
+  command.action(async (flags: PlatformFlags & DesktopStorybookTestOptions) => {
+    const api = await getApi();
+    await api.test(resolvePlatform(flags, api), {
+      clickMode: flags.clickMode,
+      list: flags.list,
+      reporter: flags.reporter,
+      story: flags.story,
+      tag: flags.tag,
+      target: flags.target,
+      timeoutMs: flags.timeoutMs,
+      url: flags.url,
+    });
+  });
 }
 
 function addPrepCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {

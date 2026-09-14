@@ -133,6 +133,51 @@ function makeConfig(platformOptions = {}) {
 }
 
 describe('DesktopStorybookCli', () => {
+  test('discovers executable callbacks with config filters and no native connection', async () => {
+    const runner = new RecordingRunner();
+    const output = { write: jest.fn() };
+    const config = makeDesktopStorybookConfig({
+      projectRoot: storybookRoot,
+      storyPackages: [],
+      wdio: { tag: 'inline' },
+    });
+    const createStoryManifest = async () => ({
+      endpoint: 'macos' as const,
+      schemaVersion: 1 as const,
+      platformManifestDigest: 'digest',
+      portablePlanDigest: 'portable',
+      entries: [
+        {
+          id: 'button--default',
+          name: 'Default',
+          title: 'Button',
+          sourcePath: 'button.stories.tsx',
+          packageName: 'fixture',
+          tags: ['inline'],
+          wdio: { digest: 'callback', exportName: 'Default' },
+        },
+        {
+          id: 'button--other',
+          name: 'Other',
+          title: 'Button',
+          sourcePath: 'button.stories.tsx',
+          packageName: 'fixture',
+          tags: [],
+          wdio: { digest: 'other', exportName: 'Other' },
+        },
+      ],
+    });
+    const command = createDesktopStorybookCommand({ config, runner, createStoryManifest, output });
+    await command.parseAsync(['node', 'storybook', 'test', '--macos', '--list']);
+    expect(JSON.parse(output.write.mock.calls[0][0])).toEqual([{ id: 'button--default', sourcePath: 'button.stories.tsx' }]);
+    expect(runner.foreground).toEqual([]);
+
+    const cli = new DesktopStorybookCli(config, { runner, createStoryManifest, output });
+    await expect(cli.test('macos', { list: true, story: 'missing--*' })).rejects.toThrow('No executable');
+    await expect(cli.test('macos', { url: 'https://127.0.0.1:1234' })).rejects.toThrow('Pass --url and --target together');
+    await expect(cli.test('macos', { timeoutMs: 0 })).rejects.toThrow('wdio.timeoutMs');
+  });
+
   test('starts the config-owned server with platform and connection options', async () => {
     const runner = new RecordingRunner();
     const cli = new DesktopStorybookCli(makeConfig(), { ...nativeDriverTestOptions, runner });

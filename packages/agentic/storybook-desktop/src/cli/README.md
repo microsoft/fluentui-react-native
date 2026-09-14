@@ -68,6 +68,7 @@ root filename.
 | `bundle`       | Generate the selected story catalog and produce its release JavaScript bundle through `rnx-cli`. |
 | `build`        | Build the selected native project without launching it.                                          |
 | `run`          | Build and launch the selected native app or configured prebuilt host.                            |
+| `test`         | Run inline `wdio` callbacks against a running driver/app, or discover them with `--list`.        |
 | `smoke`        | Own the server, Metro, app launch, all-story traversal, optional authored tests, and cleanup.    |
 
 The TypeScript API exposes the same operations through
@@ -113,6 +114,12 @@ separate process when the embedded app still needs external story control; no
 Metro process is required.
 
 ## End-to-end tests
+
+Use `yarn storybook test --macos --story 'components-button--*'` for executable
+story callbacks. It uses the app's `wdio` settings in `storybook.config.mts`
+and Node's built-in test runner, not a separate WDIO configuration. Start
+`storybook driver` and launch the app first; `--list` needs neither.
+See [inline test authoring and lifecycle requirements](../../README.md#executable-tests-inside-stories).
 
 Use `smoke` for the standard renderability gate:
 

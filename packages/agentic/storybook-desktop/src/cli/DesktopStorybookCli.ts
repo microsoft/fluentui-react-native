@@ -34,6 +34,8 @@ import {
 import { NodeDesktopCommandRunner } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
+import { runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
+import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   driverManifestPath?: string;
@@ -63,6 +65,12 @@ export type DesktopStorybookCliOptions = {
 export type DesktopStorybookServerOptions = {
   host?: string;
   port?: number;
+};
+
+export type DesktopStorybookTestOptions = DesktopStorybookWdioOptions & {
+  list?: boolean;
+  url?: string;
+  target?: string;
 };
 
 export class DesktopStorybookCli {
@@ -161,6 +169,72 @@ export class DesktopStorybookCli {
     writeDesktopStoryManifest(manifest, resolvedOutput);
     this.output.write(`${resolvedOutput}\n`);
     return resolvedOutput;
+  }
+
+  async test(platform: Platforms, options: DesktopStorybookTestOptions = {}): Promise<void> {
+    const settings = resolveWdioOptions({
+      ...this.config.wdio,
+      ...Object.fromEntries(Object.entries(options).filter(([, value]) => value !== undefined)),
+    });
+    const manifest = await this.createStoryManifest(this.config, platform);
+    const selected = selectWdioStories(manifest, settings);
+    if (selected.length === 0) {
+      throw new Error('No executable wdio story tests matched the requested selection.');
+    }
+    if (options.list) {
+      this.output.write(
+        `${JSON.stringify(
+          selected.map(({ id, sourcePath }) => ({ id, sourcePath })),
+          null,
+          2,
+        )}\n`,
+      );
+      return;
+    }
+    const connection = this.testConnection(platform, options);
+    if (platform === 'macos' && !options.url) {
+      await this.writeMacOSApplicationLease(
+        path.join(this.config.projectRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
+        settings.timeoutMs,
+      );
+    }
+    const results = await runWdioStoryTests({ ...settings, ...connection, config: this.config, manifest, platform }, this.runner);
+    this.output.write(
+      `Ran ${results.length} executable wdio stories (${results.filter(({ status }) => status === 'passed').length} passed, ` +
+        `${results.filter(({ status }) => status === 'skipped').length} skipped).\n`,
+    );
+  }
+
+  private testConnection(platform: Platforms, options: DesktopStorybookTestOptions): { targetId: string; url: string } {
+    if (options.url || options.target) {
+      if (!options.url || !options.target) {
+        throw new Error('Pass --url and --target together, or omit both to use the running Storybook driver instance.');
+      }
+      return { targetId: options.target, url: options.url };
+    }
+    const manifestPath = path.join(this.config.projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
+    if (!fs.existsSync(manifestPath)) {
+      throw new Error(`Start storybook driver --${platform} and launch the app before running storybook test.`);
+    }
+    const manifest: unknown = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    if (
+      typeof manifest !== 'object' ||
+      manifest === null ||
+      !('endpoint' in manifest) ||
+      manifest.endpoint !== platform ||
+      !('instanceId' in manifest) ||
+      manifest.instanceId !== this.instance.id ||
+      !('driverPort' in manifest) ||
+      typeof manifest.driverPort !== 'number' ||
+      !Number.isInteger(manifest.driverPort) ||
+      manifest.driverPort < 1 ||
+      manifest.driverPort > 65535 ||
+      !('targetId' in manifest) ||
+      manifest.targetId !== `${this.config.appName}-${platform}`.toLowerCase()
+    ) {
+      throw new Error(`Invalid Storybook driver instance at ${manifestPath}; restart storybook driver --${platform}.`);
+    }
+    return { targetId: manifest.targetId, url: loopbackUrl(manifest.driverPort) };
   }
 
   printInstance(platform: Platforms): void {

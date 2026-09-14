@@ -26,6 +26,12 @@ services:
   instance:
     command: yarn storybook instance --<platform>
     policy: use-reported-ports-and-target-id
+  executable_tests:
+    command: yarn storybook test --<platform>
+    discovery: yarn storybook test --<platform> --list
+    authoring: top-level wdio callbacks in CSF3 stories
+    config: storybook.config.mts wdio settings
+    lifecycle: attached-session-per-story-with-isolated-node-worker
 
 agent_commands:
   generate_manifest: yarn storybook manifest --<platform>

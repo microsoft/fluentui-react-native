@@ -9,6 +9,7 @@ import type { DesktopStoryManifest, DesktopStoryManifestEntry, DesktopStoryTests
 
 import type { DesktopStorybookConfig, ResolvedStoryPackage } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
+import { extractWdioTests } from '../testing/extractWdioTests.js';
 
 type StaticStory = {
   id: string;
@@ -76,6 +77,12 @@ export async function createDesktopStoryManifest(
         throw new Error(`Failed to statically parse Storybook file ${sourceFile}: ${(error as Error).message}`, { cause: error });
       }
       const stories = csf._stories ? Object.entries(csf._stories) : csf.stories.map((story) => [story.name ?? story.id, story] as const);
+      const wdioTests = extractWdioTests(code, sourceFile);
+      for (const exportName of wdioTests.keys()) {
+        if (!stories.some(([name]) => name === exportName)) {
+          throw new Error(`Story wdio in ${sourceFile}: "${exportName}" is not a recognized story export.`);
+        }
+      }
       for (const [exportName, staticStory] of stories) {
         const tests = readDesktopStoryTests(
           extractDesktopStoryTests(csf._storyAnnotations?.[exportName]?.parameters, sourceFile, staticStory.id) ??
@@ -91,6 +98,7 @@ export async function createDesktopStoryManifest(
           tags: [...new Set([...(csf.meta?.tags ?? []), ...(staticStory.tags ?? []), 'story'])].sort(),
           title: csf.meta?.title ?? staticStory.id.split('--')[0],
           ...(tests ? { tests } : {}),
+          ...(wdioTests.has(exportName) ? { wdio: { digest: wdioTests.get(exportName)!.digest, exportName } } : {}),
         });
       }
 
