@@ -29,7 +29,7 @@ styles.
 
 `root`, `content`, `secondaryContent`, `icon`, `selectedIcon`, and `avatar`
 are public slots. The header root, selection indicators, and hidden label are
-private state slots. A list item renders FocusVisual then CompoundItemLayout:
+private state slots. A list item renders optional `FocusRing` then CompoundItemLayout:
 avatar or the active icon, layout-stable primary content, secondary content,
 and trailing chevron, checkmark, then checkbox indicator. A selected icon
 replaces the normal icon. The header instead renders its content or, when
@@ -53,6 +53,21 @@ semibold label reservation, while its internal indicator reflects `selected`.
 - **LBI-005:** Expose the native accessibility role and state appropriate to
   the resolved variant.
 
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
+
 ## Platform behavior
 
 On Windows and macOS, a list item is an accessible React Native `Pressable`
@@ -62,10 +77,7 @@ A section header is exposed through a nonfocusable React Native `View` with
 the `header` role. The internal leading and trailing visuals are inaccessible.
 
 Pointer hover, press, and focus events flow through `usePressableState`.
-The list-item root requests native focus visuals on every platform under the
-shared policy; rendering depends on platform support.
-FocusVisual stays mounted in that structure, hidden on the system path and
-retaining its enabled-focus visibility behavior on the custom path. Section
+Section
 headers gain no ring or focus stop. No code here moves between options, processes
 collection keys, opens submenus, or closes an owning popup.
 

@@ -170,30 +170,19 @@ describe('Checkbox', () => {
     expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.pressed.foregroundNeutralSecondary);
   });
 
-  it('uses native focus visuals while retaining the hidden custom rings', async () => {
-    const colors = defaultFlexTokens.color;
+  it('uses native focus visuals without mounting custom rings', async () => {
     const component = await renderCheckbox({ label: 'Focused' });
     const root = getRoot(component);
 
     expect(root.props.enableFocusRing).toBe(true);
     await fireEvent(root, 'pressIn', {});
     await fireEvent(root, 'focus', {});
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      opacity: 0,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
 
     await fireEvent(root, 'blur', {});
     await fireEvent(root, 'focus', {});
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: colors.strokeFocusOuter,
-      borderWidth: 2,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: colors.strokeFocusInner,
-      borderWidth: 1,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it.each([

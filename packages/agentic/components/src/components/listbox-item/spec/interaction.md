@@ -7,10 +7,19 @@ pressing an option does not update `selected`; an owning list or popup must
 provide a new prop value.
 
 The component renders hover and press feedback from its resolved native state.
-Its root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
-FocusVisual remains mounted, hidden on the system path on every platform and retaining
-its enabled-focus visibility calculation on the custom path. Section headers
+
+Section headers
 are noninteractive and gain no ring even when `loading` is false.
+
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 Windows and macOS provide platform keyboard activation for the focusable
 Pressable. Arrow navigation, Home/End, type-ahead, submenu control, dismissal,

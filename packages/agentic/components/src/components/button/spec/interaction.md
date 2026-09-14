@@ -27,12 +27,17 @@ button.
 
 ## Focus and motion
 
-The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
-Every platform delegates rendering and appearance to its native renderer and
-hides the custom visual. The custom
-visual and its border-bearing children stay in the tree for the lifetime of the
-button, preserving the existing visibility calculation on the retained path.
 Disabled buttons do not display focus feedback.
+
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 Button currently performs no timed state animation. Hover, press, selection,
 and focus styles update immediately, so reduced-motion handling adds no

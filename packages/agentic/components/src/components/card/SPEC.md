@@ -28,14 +28,29 @@ Providing `onPress` or `selected` enables the pressable overlay. The resolved st
 - **CRD-001:** Resolve the documented variants and default values, derive interactivity from `onPress` or the presence of `selected`, and collapse horizontal direction below the implementation width threshold.
 - **CRD-002:** Render the overlay and public slots in the layout-specific order without injecting a content schema.
 - **CRD-003:** Apply root, nested-content, interaction, and user-style layers from the verified FURN bindings, with focus feedback following the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
-- **CRD-004:** Keep static cards non-focusable by default and expose interactive cards as disabled-aware pressable buttons; the overlay, not the structural root, owns the native focus-ring request and retained custom focus visual on every platform.
+- **CRD-004:** Keep static cards non-focusable by default and expose interactive cards as disabled-aware pressable buttons; the overlay, not the structural root, owns the native focus-ring request and optional custom focus slot.
 - **CRD-005:** Preserve externally owned selection and keep nested slot controls independently usable.
+
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 ## Platform behavior
 
 Static cards use a non-focusable `View`. A caller can explicitly make a static root accessible; then it uses React Native group role and preserves its label and accessibility state. Interactive cards hide the structural root from accessibility and expose an absolute-fill React Native `Pressable` overlay with button role, disabled state, optional selected state, and `FocusVisual`.
 
-The overlay requests native focus visuals on every platform under the shared policy; rendering depends on platform support. Its custom `FocusVisual` remains mounted but hidden on that path; static cards gain neither a ring nor a focus stop.
+Static cards gain neither a ring nor a focus stop.
 
 On Windows and macOS, interactive overlays respond to native pointer, touch, `Enter`, and `Space` press behavior. The overlay is disabled and unfocusable when `disabled`; nested controls remain rendered as sibling content and keep their own press behavior. Windows maps the overlay to a UI Automation button; macOS maps it to an AX button. The component does not navigate, manage a card collection, or animate state changes.
 

@@ -41,13 +41,14 @@ A disabled Checkbox reports disabled state, sets `focusable={false}`, and does
 not respond to activation. It is skipped by keyboard navigation rather than
 announced as an unavailable stop.
 
-The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
-Every platform receives the native focus-ring request on the whole row's press
-target and leaves the custom overlay mounted but hidden. Rendering support and
-keyboard versus pointer appearance are delegated to each platform renderer.
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
-On the retained custom path, the dual-ring overlay uses the existing focus
-stroke tokens and surrounds the whole row, including the label column. It is
-hidden while disabled or while focus came from a pointer press; keyboard and
-programmatic focus show it as before. The overlay remains hidden from the
-accessibility tree and does not receive pointer events.
+The custom dual-ring visual surrounds the whole row, including the label column.

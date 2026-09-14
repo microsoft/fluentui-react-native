@@ -38,7 +38,7 @@ bindings:
       secondaryDisabled: color.backgroundNeutralSubtleDisabled
     userStyle: applied last by useTagStyles_unstable
 
-  focusVisual:
+  FocusRing:
     borderRadius: resolved root borderRadius
     innerColor: color.strokeFocusInner
     innerWidth: strokeWidth.thin

@@ -10,7 +10,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
-import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
+import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { Text } from '../text/text';
 
 export type ButtonSlots = {
@@ -90,11 +90,10 @@ export type ButtonProps = ButtonStateProps & ComponentProps<ButtonSlots, ButtonE
 /**
  * The button state, returned from the useButton hook
  */
-export type ButtonState = ComponentState<ButtonStateSlots> &
+export type ButtonState = ComponentState<ButtonStateSlots & FocusVisualsSlots> &
   Required<ButtonStateProps> &
   Omit<ThemeState, 'appearance'> &
   PressableState & {
-    focusVisualProps?: FocusVisualProps;
     /**
      * Whether the button is displaying only an icon without text. This is set automatically when the button
      * has an icon and no content.

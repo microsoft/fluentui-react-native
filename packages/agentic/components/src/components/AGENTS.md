@@ -46,9 +46,9 @@ audit.
 - Include the declared native root's `ref` in public props with `PropsWithRefOf<typeof Root>`. React 19.1.4 supplies
   `ref` as a prop, so pass it through the state hook to the root slot without `forwardRef`. If the component also needs
   an internal root ref, compose the refs through the slot render path rather than replacing the consumer ref.
-- Follow the [focus visual policy](#focus-visual-policy): request native focus visuals on all platforms
-  through the package-private policy, on the actual focus target only. Retain the mounted `FocusVisual`
-  fallback and its public exports. Do not introduce component-specific switches or `outline*` focus styling.
+- Follow the [focus visual policy](#focus-visual-policy): create the optional `FocusRing` in the state hook,
+  apply native settings only to the actual focus target, and style the custom ring in the styling phase.
+  Do not introduce component-specific modality trackers or `outline*` focus styling.
 - Keep render functions free of hooks, token reads, style creation, and slot mutation.
 - Export the resolved state type and the state, style-application, and render stages from the package root under
   component-qualified unstable names so another component can reuse the pipeline.
@@ -64,39 +64,34 @@ audit.
 ## Focus visual policy
 
 This is the shared native adaptation for Accordion, Button, Card, Checkbox, ListItem, ListboxItem, MenuItem,
-Radio, Switch, Tab, and Tag. It changes focus rendering, not public props, activation, selection, navigation,
-or accessibility semantics.
+Radio, Switch, Tab, and Tag. Activation, selection, navigation, and accessibility semantics are unchanged.
 
-- `common/focusVisualPolicy.ts` owns the single evaluation switch
-  `focusVisualPolicy.useSystemFocusVisuals`, defaulting to `true` on every platform. There is no platform
-  gate. Set the switch to `false` and reload to compare the retained custom rings; this is not a public API
-  or a per-instance option.
-- `getNativeFocusVisualProps` returns `{ enableFocusRing: focusVisualPolicy.useSystemFocusVisuals }`
-  on every platform. Apply it to the actual focus target: Accordion's header, Card's
-  interactive overlay, and the other components' pressable roots. Switch's outer label container and track
-  are not focus targets. Static cards, noninteractive section headers, and decorative children gain no
-  focus stop or focus feedback.
-- A shared wrapper around `createFocusVisualProps_unstable` suppresses custom-ring visibility while the
-  system path is selected, on every platform. The custom `FocusVisual` and its border-bearing children remain
-  eagerly mounted wherever they already render. Its tokens, geometry, style calculation, and public primitive
-  exports are retained without a visual redesign.
-- With the switch off, every platform receives `enableFocusRing={false}` and uses the existing custom
-  visibility calculation. The default replaces previous component-specific suppression of native rings,
-  including Button and Checkbox on non-Windows platforms.
-- Native focus rendering and appearance, including keyboard versus pointer behavior, are delegated to the
-  platform renderer. Enabling the prop does not guarantee a ring on a renderer that lacks support; the
-  custom path is not automatically re-enabled on such platforms. Existing custom-ring token bindings,
-  radii, and modality statements describe the retained path, not the system
-  ring. A synthetic `focused` override, such as Accordion's preview prop, does not force native focus or
-  force the OS to draw a ring. This adaptation makes no new modality or pixel-parity guarantees.
-- Input's focus underlines and borders, and other state styling unrelated to `FocusVisual`, are unchanged.
+- Call `useFocusVisuals` in `use<Component>_unstable` after resolving pressable focus. Pass `focused: false`
+  for disabled or noninteractive targets. Store its `FocusRing` as a private optional slot in component state.
+- The hook returns `{ FocusRing, enableFocusRing }`. Native rings default to enabled on Windows and macOS,
+  and disabled on Win32 and other platforms. `useSystemFocusRing` explicitly overrides that default.
+- `alwaysVisible` means visible whenever focused, including pointer focus, not visible while unfocused.
+  It takes precedence over the system-ring preference and uses the custom ring with `enableFocusRing: false`;
+  native focus-visibility heuristics cannot guarantee this override.
+- The custom slot reads the current modality through `useRootSettings` on each render. It shows only when
+  focused and the modality is keyboard, unless `alwaysVisible` is set. Programmatic focus follows the last
+  root modality. There is no local pointer tracker, subscription, or rerender caused solely by root settings.
+- The optional slot is absent on the native path. On the custom path, configured ring Views remain mounted
+  across focus/blur and visibility changes only opacity. Static cards and section headers render no ring.
+- Apply `enableFocusRing` only to Accordion's header, Card's interactive overlay, or the other components'
+  pressable roots. Switch's label container and track are not focus targets.
+- Keep `ThemeState` out of the behavioral hook. `applyFocusRingStyles` centrally binds the dual-ring
+  colors (`strokeFocusInner`/`strokeFocusOuter`) and widths (`thin`/`thick`) in a cached theme stylesheet.
+  Component style hooks supply the resolved radius. Functional component borders are separate.
+- Render `{state.FocusRing && <state.FocusRing />}` inside the actual focus target. Do not add public
+  component slots for this render-only structure. The standalone `FocusVisual` primitive and its exports remain.
+- Synthetic `focused` overrides do not move native focus. Input's focus underlines and other non-ring styles
+  are unchanged. Native ring appearance still depends on the renderer; no pixel-parity guarantee is made.
 
-The Windows native path requires React Native Windows 0.81.35 or newer. The accepted
-`native-system-focus-visuals` divergence changes the local platform adaptation, not the pinned Flex sources.
-The shared `common/focusVisualPolicy.test.tsx` matrix covers native props, retained ring mounts, focus/blur,
-and fallback behavior for all eleven consumers. Colocated tests retain geometry, accessibility, and
-disabled/noninteractive coverage. Native appearance and modality must still be evaluated in each renderer;
-the policy does not assert pixel parity or fix unrelated input behavior.
+The Windows native path requires React Native Windows 0.81.35 or newer. This re-review of the accepted
+`native-system-focus-visuals` adaptation follows the requested root-modality contract without changing pinned
+Flex source identities. The shared hook and component matrix cover platform defaults, overrides, modality,
+focus/blur, ring geometry, and disabled/noninteractive targets. Scenes require a `ThemedRoot`.
 
 ## Focused references
 

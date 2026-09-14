@@ -58,7 +58,7 @@ interaction to the parent.
 | `selectedIcon` | `Icon`      | when supplied and selected | Replaces `icon` while selected, typically the filled variant.   |
 | `content`      | `Text`      | `iconAndText` layout       | Defaults to the text `Tab`; forced off in the icon-only layout. |
 
-Render order inside the root is: focus visual, active icon, then content. The
+Render order inside the root is: optional `FocusRing`, active icon, then content. The
 active icon is `selectedIcon` when selected and a selected icon was supplied,
 and `icon` otherwise.
 
@@ -96,6 +96,21 @@ disabled tab from the tab order.
 on the root, retaining the mounted two-ring visual and active-layout radius
 for the custom path.
 
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
+
 ## Platform behavior
 
 Windows and macOS share the following navigation behavior; focus rendering follows
@@ -121,7 +136,7 @@ precedence over hover.
 | --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
 | `tab-disabled-focusability`       | Accepted    | A disabled tab is removed from the tab order and cannot be focused, while still reporting its disabled state. Flex keeps a disabled tab reachable so its state can be discovered by keyboard.    | None for this component. Reachability would have to come from a list container that manages roving focus. |
 | `tab-list-navigation-not-shipped` | Resolved    | TabList now coordinates group selection, roving focus, orientation-aware arrows, Home and End, disabled-item skipping, and the selection-follows-focus policy.                                   | Implemented by the adjacent TabList contract and integration tests.                                       |
-| `tab-focus-modality`              | Accepted    | The retained custom visual appears whenever the root is focused, including after a press. Native focus appearance is delegated to each renderer.                                                 | No new modality guarantee is made by the platform adaptation.                                             |
+| `tab-focus-modality`              | Accepted    | Custom visibility follows keyboard modality from the scene root rather than a component-local pointer tracker. Native appearance remains renderer-owned.                                         | Preserve the shared hook and component modality matrix.                                                   |
 | `tab-selected-weight-reservation` | Accepted    | The selected label is heavier than the resting label, and the width for that heavier text is reserved on every tab so selection does not reflow the list. Flex describes only the weight change. | None. The reservation is an implementation requirement of the shared text layout, not a visual addition.  |
 
 ## Conformance

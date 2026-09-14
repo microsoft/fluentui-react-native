@@ -5,7 +5,7 @@ import { useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-nat
 
 import { Icon } from '../../primitives/icon/icon';
 import { hideSlotProps } from '../../common/accessibility';
-import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Text } from '../text/text';
 
 import { getListItemAvatarSize, getListItemIconSize, getListItemSelectionIndicatorGlyph } from './list-item.styles';
@@ -86,7 +86,6 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
-    ...getNativeFocusVisualProps(),
     accessibilityRole: rest.accessibilityRole ?? 'button',
     accessibilityState: {
       ...accessibilityState,
@@ -98,7 +97,9 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     focusable: rest.focusable ?? !disabled,
   });
 
-  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
+
+  const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const content = useSlot(NativeText, contentProp);
   const contentHidden = useSlot(NativeText, contentProp);
   const secondaryContent = useOptionalSlot(Text, secondaryContentProp);
@@ -109,6 +110,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
   const selectionIndicator = useOptionalSlot(NativeText, selectionGlyph, { transform: hideSlotProps });
 
   return {
+    FocusRing,
     root,
     content,
     contentHidden,

@@ -51,13 +51,13 @@ its resolved role and state afterward, so those caller values are ignored.
 `root` is the only public slot surface. The label, secondary text, indicator,
 and focus visual are internal and are configured through the props above.
 
-The render order inside the root is the persistent focus visual, the indicator,
+The render order inside the root is the optional `FocusRing`, the indicator,
 and then the label column when either text node is present. The label column
 renders the label first and secondary text second.
 
 | Element        | Rendered when                          | Contract                                                                                                                                             |
 | -------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Focus visual   | always mounted                         | A retained dual-ring overlay; hidden on the system path on every platform, otherwise its visibility, not mounting, tracks focus.                     |
+| Focus visual   | custom path only                       | A private optional `FocusRing`; mounted while the custom path is selected and visible only for focused keyboard input.                               |
 | Indicator      | always                                 | A fixed 16 by 16 box carrying fill, stroke, and radius. It draws a checkmark for `checked`, a dash for `indeterminate`, and nothing for `unchecked`. |
 | Label column   | `showLabel`, or secondary text renders | A non-accessible column that holds the visible text nodes.                                                                                           |
 | Label          | `showLabel`                            | Wraps rather than truncates when the root width is constrained.                                                                                      |
@@ -81,8 +81,23 @@ renders the label first and secondary text second.
   colors from status first and then disabled, pressed, and hovered state, select
   the indicator radius from `variant`, and apply the caller `style` last.
 - **CBX-006:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
-  on the root, retaining the mounted dual-ring visual and its existing modality
-  behavior for the custom path.
+  on the root, using root modality for the custom path while retaining the
+  same dual-ring geometry.
+
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 ## Platform behavior
 
@@ -91,13 +106,6 @@ events. Space activation comes from the native pressable button behavior on both
 platforms; Checkbox adds no key handling of its own and does not intercept Tab.
 A disabled Checkbox sets `focusable` to `false` and is skipped by keyboard
 navigation.
-
-Every platform receives the native focus-ring request on the root and suppresses
-the retained custom overlay under the shared policy. Native rendering and keyboard
-versus pointer appearance depend on the platform renderer. On the custom path,
-pointer focus hides the overlay and keyboard
-or programmatic focus shows it as before. The overlay and its border-bearing
-children remain mounted for the lifetime of the control.
 
 No timed animation is present. Status, hover, press, and focus styling change on
 the next render, so reduced-motion settings need no separate branch.
@@ -110,8 +118,8 @@ the next render, so reduced-motion settings need no separate branch.
 | ---------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | `checkbox-secondary-text-description`    | Accepted    | Secondary text is appended to the root accessibility hint rather than associated as a separate described-by target. React Native exposes no equivalent description relationship, and the hint is the platform-idiomatic channel. | None. Revisit only if React Native adds a description association.                                |
 | `checkbox-secondary-text-requires-label` | Accepted    | Secondary text renders only alongside a visible label, and a development warning fires otherwise. Flex treats the two visibility toggles as independent.                                                                         | None. The pairing keeps the label column from presenting supporting text with nothing to support. |
-| `checkbox-focus-visual-modality`         | Resolved    | The retained custom path uses the shared focus-modality hook. Native appearance is delegated to each renderer and is not a new modality guarantee.                                                                               | Preserve existing custom-path interaction coverage.                                               |
-| `checkbox-native-focus-ring`             | Accepted    | Every platform enables the native ring prop and hides the custom overlay by default; the evaluation fallback reverses that choice. A native ring is not guaranteed on unsupported renderers.                                     | Validate root props and ring suppression under the shared focus policy.                           |
+| `checkbox-focus-visual-modality`         | Resolved    | Custom visibility follows keyboard modality from the scene root rather than a component-local pointer tracker. Native appearance remains renderer-owned.                                                                         | Preserve the shared hook and component modality matrix.                                           |
+| `checkbox-native-focus-ring`             | Accepted    | Native rings default to Windows/macOS; Win32 uses the root-modality-aware custom slot.                                                                                                                                           | Validate platform defaults and custom slot behavior under the shared focus policy.                |
 | `checkbox-owned-props-type-surface`      | Deferred    | The root type accepts role and checked or disabled state values that the implementation always overwrites.                                                                                                                       | Omit those owned keys from the exposed native-prop type in a separately reviewed API correction.  |
 
 ## Conformance

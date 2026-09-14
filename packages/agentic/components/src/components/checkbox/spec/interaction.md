@@ -35,16 +35,15 @@ so neither `onStatusChange` nor the caller `onPress` runs.
 
 ## Focus and motion
 
-The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
-Every platform receives the native focus-ring request, with rendering support
-and appearance delegated to its renderer. The custom
-visual and its border-bearing children stay mounted but hidden on that path.
-
-The retained custom path keeps its existing focused, enabled visibility
-calculation. Pointer press state suppresses that visual when the press moves
-focus; a keyboard event restores focus-visible state, and programmatic focus is
-treated as focus-visible when no pointer interaction preceded it. These are
-custom-path semantics, not guarantees about native rings.
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 Checkbox runs no timed animation. Status, hover, press, and focus styling
 change on the next render, so reduced-motion settings need no separate path.

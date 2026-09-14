@@ -4,7 +4,7 @@ import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-nat
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { semanticIconSources } from '../../common/iconSources';
-import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import { Icon } from '../../primitives/icon/icon';
 import type { MenuItemProps, MenuItemState } from './menu-item.types';
@@ -56,7 +56,6 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
-    ...getNativeFocusVisualProps(),
     accessible: rest.accessible ?? true,
     accessibilityHint: accessibilityHint ?? (hasChevron ? 'Has submenu' : undefined),
     accessibilityLabel: accessibilityLabel ?? contentText,
@@ -71,7 +70,12 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     onPress: isInteractive ? rest.onPress : undefined,
   });
 
-  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({
+    focused: pressableState.focused && !disabled && isInteractive,
+    useSystemFocusRing: isInteractive ? undefined : false,
+  });
+
+  const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const icon = useOptionalSlot(Icon, iconProp, { defaultProps: defaultRegularIcon, renderByDefault: true });
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp, { defaultProps: defaultSelectedIcon, renderByDefault: selected });
   const avatar = useOptionalSlot(View, avatarProp);
@@ -80,6 +84,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   const multiselectCheckbox = useOptionalSlot(CheckboxIndicator, multiselectCheckboxProp, { renderByDefault: hasMultiselect });
 
   const styleState: MenuItemState = {
+    FocusRing: isInteractive ? FocusRing : undefined,
     ...themeState,
     ...pressableState,
     contentText,

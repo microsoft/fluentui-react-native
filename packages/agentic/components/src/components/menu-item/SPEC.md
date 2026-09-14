@@ -30,7 +30,7 @@ section header. Caller style wins after the component's root styles.
 The public slots are `root`, `icon`, `selectedIcon`, `avatar`, `chevron`,
 `checkmark`, and `multiselectCheckbox`. Text is deliberately supplied through
 the `content` and `secondaryContent` properties. A list-item root renders
-FocusVisual and CompoundItemLayout. Its leading visual is avatar or the
+optional `FocusRing` and CompoundItemLayout. Its leading visual is avatar or the
 selected replacement icon or icon. Its trailing order is chevron, checkmark,
 then the multiselect checkbox. List item labels and secondary text use
 state-only reservations to avoid a size change when selected. A section header
@@ -52,9 +52,24 @@ Multiselect takes visual precedence over selected fill and semibold text.
   default, checkmark, and multiselect rows.
 - **MNI-004:** Keep section headers noninteractive and limit skeleton loading
   to that variant.
-- **MNI-005:** Apply token-derived interaction, accessibility, and persistent
+- **MNI-005:** Apply token-derived interaction, accessibility, and optional
   custom focus structure without overriding caller handlers; the root's focus
   feedback follows the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
+
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 ## Platform behavior
 
@@ -65,11 +80,7 @@ the default hint `"Has submenu"`. Header roots expose the `none` role, are
 disabled, and cannot receive focus. Decorative visuals are inaccessible.
 
 The native Pressable drives pointer hover, press, focus, and keyboard
-activation for interactive rows. Interactive roots request native focus visuals
-on every platform under the shared policy; rendering depends on platform support.
-FocusVisual is mounted for each row, hidden
-on the system path and using its existing enabled-focus visibility calculation
-on the custom path. Section headers gain no focus feedback. The component does
+activation for interactive rows. Section headers gain no focus feedback. The component does
 not navigate between menu items, open a submenu, restore focus, or dismiss a menu.
 
 ## Divergences from Flex

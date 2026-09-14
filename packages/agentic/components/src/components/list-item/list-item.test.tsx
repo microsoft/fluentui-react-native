@@ -173,23 +173,14 @@ describe('ListItem', () => {
     },
   );
 
-  it('uses native focus visuals while retaining the hidden custom rings', async () => {
-    const colors = defaultFlexTokens.color;
+  it('uses native focus visuals without mounting custom rings', async () => {
     const component = await renderListItem({ content: 'Focused' });
     const root = getRoot(component);
 
     await fireEvent(root, 'focus', {});
     expect(root.props.enableFocusRing).toBe(true);
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: colors.strokeFocusOuter,
-      borderWidth: 2,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: colors.strokeFocusInner,
-      borderWidth: 1,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it('preserves user accessibility state values', async () => {

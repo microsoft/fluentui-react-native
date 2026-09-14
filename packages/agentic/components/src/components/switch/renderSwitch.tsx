@@ -1,5 +1,4 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import type { SwitchState } from './switch.types';
 
 /**
@@ -8,7 +7,7 @@ import type { SwitchState } from './switch.types';
 export function renderSwitch_unstable(state: SwitchState) {
   const root = (
     <state.root>
-      <FocusVisual {...state.focusVisualProps} />
+      {state.FocusRing && <state.FocusRing />}
       <state.track>
         <state.thumb />
       </state.track>

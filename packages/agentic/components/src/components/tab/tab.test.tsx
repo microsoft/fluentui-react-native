@@ -202,21 +202,13 @@ describe('Tab', () => {
     expect(component.getByTestId('filled-icon').props.testID).toBe('filled-icon');
   });
 
-  it('uses native focus visuals while retaining the hidden custom rings', async () => {
+  it('uses native focus visuals without mounting custom rings', async () => {
     const component = await renderTab({ controls: 'files-panel', content: 'Files' });
     const root = getRoot(component);
     await fireEvent(root, 'focus', {});
     expect(root.props.enableFocusRing).toBe(true);
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusOuter,
-      borderWidth: defaultFlexTokens.strokeWidth.thick,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusInner,
-      borderWidth: defaultFlexTokens.strokeWidth.thin,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it('applies user styles last', async () => {

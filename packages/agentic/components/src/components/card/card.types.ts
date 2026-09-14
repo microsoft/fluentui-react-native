@@ -9,7 +9,7 @@ import type {
   Slot,
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
-import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
+import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 
 export type CardSize = 'small' | 'large';
 export type CardPadding = 'default' | 'none';
@@ -47,10 +47,9 @@ export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessib
 
 export type CardProps = CardStateProps & ComponentProps<CardSlots, CardExposedPressableProps>;
 
-export type CardState = ComponentState<CardStateSlots> &
+export type CardState = ComponentState<CardStateSlots & FocusVisualsSlots> &
   Required<CardStateProps> &
   ThemeState & {
-    focusVisualProps?: FocusVisualProps;
     hovered: boolean;
     pressed: boolean;
     focused: boolean;

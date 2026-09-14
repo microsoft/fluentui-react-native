@@ -37,7 +37,7 @@ bindings:
       selectedDisabled: color.backgroundNeutralHeavyDisabled
     userStyle: applied last by useTabStyles_unstable
 
-  focusVisual:
+  FocusRing:
     borderRadius: resolved layout borderRadius
     innerColor: color.strokeFocusInner
     innerWidth: strokeWidth.thin

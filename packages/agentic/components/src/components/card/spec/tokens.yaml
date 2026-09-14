@@ -49,7 +49,7 @@ bindings:
     radius:
       small: borderRadius.base600
       large: borderRadius.base700
-  focusVisual:
+  FocusRing:
     innerColor: color.strokeFocusInner
     innerWidth: strokeWidth.thin
     outerColor: color.strokeFocusOuter

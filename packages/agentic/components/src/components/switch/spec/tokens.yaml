@@ -47,7 +47,7 @@ bindings:
       borderRadius: borderRadius.circular
     userStyle: applied last by useSwitchStyles_unstable
 
-  focusVisual:
+  FocusRing:
     borderRadius: resolved root borderRadius
     innerColor: color.strokeFocusInner
     innerWidth: strokeWidth.thin

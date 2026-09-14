@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import type { TextProps, ViewProps } from 'react-native';
 import type { ComponentProps } from 'react';
 
@@ -121,23 +121,14 @@ describe('Switch', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('uses native focus visuals on the hit area while retaining the hidden custom rings', async () => {
-    const tokens = defaultFlexTokens;
+  it('uses native focus visuals on the hit area without mounting custom rings', async () => {
     const component = await renderSwitch({ label: 'Wi-Fi', labelAfter: false });
     const root = component.getByRole('switch', { name: 'Wi-Fi' });
 
     await fireEvent(root, 'focus', {});
     expect(root.props.enableFocusRing).toBe(true);
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: tokens.color.strokeFocusOuter,
-      borderWidth: tokens.strokeWidth.thick,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: tokens.color.strokeFocusInner,
-      borderWidth: tokens.strokeWidth.thin,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it('positions labels according to layout', async () => {

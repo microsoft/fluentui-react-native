@@ -41,7 +41,7 @@ root styles.
 
 ### Slots and anatomy
 
-The render order is the persistent focus visual, the icon when positioned
+The render order is the optional `FocusRing`, the icon when positioned
 before, content, and the icon when positioned after.
 
 | Slot           | Required | Contract                                                          |
@@ -68,8 +68,23 @@ layout and requires an action-oriented `accessibilityLabel`.
   accessibility state when that prop is present, and reserve semibold label
   width to prevent toggle reflow.
 - **BTN-006:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
-  on the root: request native focus visuals on every platform, with the mounted dual-ring
-  `FocusVisual` retained for the custom path.
+  on the root: default to native rings on Windows/macOS and root-modality-aware
+  custom rings on Win32, retaining the same dual-ring geometry.
+
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 ## Platform behavior
 
@@ -77,11 +92,7 @@ Windows and macOS use React Native press, hover, and focus events. `Enter` and
 `Space` activation are supplied by the native `Pressable` button behavior.
 Disabled buttons are not focusable.
 
-The root requests native focus visuals on every platform under the shared policy.
-The dual-ring `FocusVisual` stays mounted but hidden on that path; its existing
-visibility behavior remains in the evaluation fallback on every platform.
-Native rendering depends on platform support. The contract adds no
-component-owned motion or native modality guarantee.
+Button adds no component-owned motion.
 
 ## Divergences from Flex
 

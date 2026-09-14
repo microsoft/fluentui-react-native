@@ -33,13 +33,13 @@ cross-platform canonical reference unless the work targets iOS.
 
 Translate web concepts deliberately:
 
-| Flex evidence                        | React Native contract                                                                     |
-| ------------------------------------ | ----------------------------------------------------------------------------------------- |
-| ARIA attributes or native elements   | `accessibilityRole`, `accessibilityState`, labels, and UIA/AX expectations                |
-| CSS pseudo-classes                   | explicit interaction state and precedence                                                 |
-| browser focus selectors and outlines | shared native focus policy, with persistent `FocusVisual` retained as the custom fallback |
-| CSS pixel or layout rules            | React Native units, minimum targets, and platform behavior                                |
-| unsupported browser capability       | explicit divergence, dependency, or blocker                                               |
+| Flex evidence                        | React Native contract                                                                    |
+| ------------------------------------ | ---------------------------------------------------------------------------------------- |
+| ARIA attributes or native elements   | `accessibilityRole`, `accessibilityState`, labels, and UIA/AX expectations               |
+| CSS pseudo-classes                   | explicit interaction state and precedence                                                |
+| browser focus selectors and outlines | shared root-modality policy and optional `FocusRing`, persistent only on the custom path |
+| CSS pixel or layout rules            | React Native units, minimum targets, and platform behavior                               |
+| unsupported browser capability       | explicit divergence, dependency, or blocker                                              |
 
 Do not copy Flex prose or token tables into the public package. A mutable
 Marketplace or X3 HEAD change is candidate drift and does not invalidate a

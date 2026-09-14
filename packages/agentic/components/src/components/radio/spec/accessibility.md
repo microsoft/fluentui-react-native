@@ -12,7 +12,14 @@ macOS AX expose only the root's radio role, name, checked value, and disabled
 value and cannot announce decorative descendants separately.
 
 The owning group must provide a group name and any positional or peer
-relationship information. The root follows the
-[shared focus visual policy](../../AGENTS.md#focus-visual-policy), requesting native
-feedback on every platform and retaining the mounted custom FocusVisual without
-a competing visible ring. Native rendering depends on platform support.
+relationship information.
+
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.

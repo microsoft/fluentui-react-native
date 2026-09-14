@@ -3,13 +3,9 @@ import { useAccessibilityLabelWarning, usePressableState, useSlot, useOptionalSl
 import { useThemeState } from '@fluentui-react-native/design';
 import { Pressable } from 'react-native';
 import type { PressableProps } from 'react-native';
-import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
-
-type NativeFocusPressableProps = PressableProps & {
-  enableFocusRing: boolean;
-};
 
 /**
  * Hook to create the state for a Button component. This is responsible for:
@@ -52,7 +48,7 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   });
 
   const themeState = useThemeState();
-  const nativeProps: NativeFocusPressableProps = {
+  const nativeProps: PressableProps = {
     ...rest,
     role: 'button',
     accessibilityState: {
@@ -62,17 +58,19 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    ...getNativeFocusVisualProps(),
     focusable: rest.focusable ?? !disabled,
   };
   const [pressableProps, pressableState] = usePressableState(nativeProps);
-  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
+
+  const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const icon = useOptionalSlot(Icon, iconProp);
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
   const content = useOptionalSlot(Text, contentProp);
   const contentHidden = useOptionalSlot(Text, isToggleButton ? contentProp : null);
 
   return {
+    FocusRing,
     root,
     icon,
     selectedIcon,

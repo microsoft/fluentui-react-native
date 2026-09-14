@@ -98,15 +98,7 @@ describe('Accordion', () => {
     const component = await renderAccordion({ focused: true });
 
     expect(getHeader(component).props.enableFocusRing).toBe(true);
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: '#000000',
-      borderWidth: 2,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: '#ffffff',
-      borderWidth: 1,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it('renders hover and pressed header feedback with the resolved foreground color', async () => {
@@ -138,18 +130,8 @@ describe('Accordion', () => {
     const startChildren = getHeader(start).children as { props: { testID?: string } }[];
     const endChildren = getHeader(end).children as { props: { testID?: string } }[];
 
-    expect(startChildren.map((child) => child.props.testID)).toEqual([
-      'focus-visual',
-      'accordion-chevron',
-      'accordion-leading-icon',
-      'accordion-title',
-    ]);
-    expect(endChildren.map((child) => child.props.testID)).toEqual([
-      'focus-visual',
-      'accordion-leading-icon',
-      'accordion-title',
-      'accordion-chevron',
-    ]);
+    expect(startChildren.map((child) => child.props.testID)).toEqual(['accordion-chevron', 'accordion-leading-icon', 'accordion-title']);
+    expect(endChildren.map((child) => child.props.testID)).toEqual(['accordion-leading-icon', 'accordion-title', 'accordion-chevron']);
   });
 
   it('renders custom title and body slots', async () => {

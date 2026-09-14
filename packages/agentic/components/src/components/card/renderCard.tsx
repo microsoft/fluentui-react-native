@@ -1,5 +1,4 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import type { CardState } from './card.types';
 
 /**
@@ -11,11 +10,7 @@ export function renderCard_unstable(state: CardState) {
 
   return (
     <state.root>
-      {state.overlay && (
-        <state.overlay>
-          <FocusVisual {...state.focusVisualProps} />
-        </state.overlay>
-      )}
+      {state.overlay && <state.overlay>{state.FocusRing && <state.FocusRing />}</state.overlay>}
       {shouldRenderSlots && state.header && <state.header />}
       <state.content />
       {shouldRenderNestedContent && state.content02 && <state.content02 />}

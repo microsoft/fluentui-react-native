@@ -26,7 +26,7 @@ slot is `root`; children are not accepted. The caller can provide owned React
 Native Pressable props and a `style`, which is applied after component root
 styles.
 
-The root renders its persistent FocusVisual, the 16-unit indicator, its
+The root renders its optional `FocusRing`, the 16-unit indicator, its
 10-unit dot, and a label container. The label container contains the label and
 the secondary text only when `showSecondaryText` is true. A selected dot is
 opaque and uses the brand foreground. An unselected dot remains in the tree
@@ -52,6 +52,21 @@ rather than explicitly hiding the indicator and text children.
 - **RAD-005:** Expose radio semantics, accessible naming, disabled behavior,
   descendant grouping, and root focus feedback under the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
 
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
+
 ## Platform behavior
 
 On Windows and macOS the root is an accessible React Native `Pressable` with
@@ -61,10 +76,7 @@ indicator and text subtrees are explicitly hidden from assistive technology so
 the named root is the single announced element.
 
 Native Pressable events provide hover, press, focus, and keyboard activation.
-The root requests native focus visuals on every platform under the shared policy;
-rendering depends on platform support. FocusVisual
-remains in the tree, hidden on the system path and retaining its enabled-focus
-visibility behavior on the custom path. Group name, arrow-key navigation,
+Group name, arrow-key navigation,
 single-tab-stop behavior, peer selection, and focus restoration must be
 implemented by the component that renders the radios.
 

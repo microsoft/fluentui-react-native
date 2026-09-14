@@ -10,7 +10,7 @@ import {
   useToggleState,
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
-import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 
 import { Text } from '../text/text';
 import type { SwitchProps, SwitchState } from './switch.types';
@@ -105,7 +105,6 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
-    ...getNativeFocusVisualProps(),
     ...pressableNameProps,
     accessibilityRole: 'switch',
     accessibilityState: {
@@ -118,6 +117,8 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     focusable: rest.focusable ?? !disabled,
     'aria-checked': checked,
   });
+
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
 
   const { toggle: toggleChecked } = toggle;
   const handlePress = React.useCallback(
@@ -141,6 +142,7 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const layoutContainer = useSlot(View, { testID: 'switch-layout-container' });
   const root = useSlot(Pressable, {
     ...pressableProps,
+    ...nativeFocusProps,
     ref: rootRef,
     onPress: handlePress,
     onKeyUp: handleKeyUp,
@@ -156,6 +158,7 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const aboveLabel = useOptionalSlot(Text, hasAboveLabel ? (aboveLabelProp === undefined ? { children: label } : aboveLabelProp) : null);
 
   return {
+    FocusRing,
     ...themeState,
     ...pressableState,
     aboveLabel,

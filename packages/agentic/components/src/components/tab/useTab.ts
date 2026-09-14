@@ -9,7 +9,7 @@ import {
   useSlot,
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
-import { getNativeFocusVisualProps } from '../../common/focusVisualPolicy';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 
 import type { TabProps, TabState } from './tab.types';
 import { Icon } from '../../primitives/icon/icon';
@@ -57,7 +57,6 @@ export function useTab_unstable(props: TabProps): TabState {
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({
     ...nativeRest,
-    ...getNativeFocusVisualProps(),
     accessibilityPosInSet: tabList?.getPosition(value),
     accessibilitySetSize: tabList?.setSize,
     accessibilityRole: 'tab',
@@ -83,8 +82,11 @@ export function useTab_unstable(props: TabProps): TabState {
     },
   });
 
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !listDisabled });
+
   const root = useSlot(Pressable, {
     ...pressableProps,
+    ...nativeFocusProps,
     accessibilityControls: controls,
     ref: rootRef,
   } as PropsWithRefOf<typeof Pressable> & { accessibilityControls: string });
@@ -95,6 +97,7 @@ export function useTab_unstable(props: TabProps): TabState {
   const contentHidden = useOptionalSlot(Text, contentSlotProp);
 
   return {
+    FocusRing,
     root,
     icon,
     selectedIcon,

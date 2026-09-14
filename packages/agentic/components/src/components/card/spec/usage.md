@@ -5,3 +5,9 @@ Use Card for a repeatable unit of related React Native content, such as a report
 Add `onPress` only when the complete card has one clear button-like action. Label that interactive action. A card with several independent actions should remain static and expose those actions from its slots. If a selectable collection owns its selection, pass each card its `selected` value and update it from `onPress`.
 
 Use horizontal direction only where the parent can accommodate its responsive stack below 480 layout units. Card neither supplies navigation behavior nor turns a press into a destination.
+
+## Scene root
+
+Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.
+A nested theme boundary may override appearance without creating a separate
+input-modality tracker. Component test scenes use the shared themed renderer.

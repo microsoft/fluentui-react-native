@@ -11,7 +11,15 @@ its peers. Windows and macOS native Pressable behavior supplies keyboard
 activation for a focusable root. This component does not implement arrow-key
 movement, Home/End, type-ahead, focus restoration, or timed animation.
 
-The root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
-FocusVisual stays mounted, hidden on the system path on every platform and retaining its
-enabled-focus visibility calculation on the custom path. Hover, press, and
+Hover, press, and
 selection styling update without component-owned motion.
+
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.

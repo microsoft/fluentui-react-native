@@ -1,6 +1,6 @@
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
-import { createFocusVisualProps } from '../../common/focusVisualPolicy';
+import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
 import {
   radioStyles,
@@ -38,14 +38,7 @@ export function useRadioStyles_unstable(state: RadioState) {
     getRadioSecondaryTextColorStyle(state),
   ];
 
-  state.focusVisualProps = createFocusVisualProps({
-    borderRadius: rootLayoutStyle.borderRadius,
-    innerColor: state.tokens.color.strokeFocusInner,
-    innerWidth: state.tokens.strokeWidth.thin,
-    outerColor: state.tokens.color.strokeFocusOuter,
-    outerWidth: state.tokens.strokeWidth.thick,
-    visible: state.focused && !state.disabled,
-  });
+  applyFocusRingStyles(state.FocusRing, state, rootLayoutStyle.borderRadius);
   state.rootStyle = rootStyle;
   state.indicatorStyle = indicatorStyle;
   state.indicatorDotStyle = indicatorDotStyle;

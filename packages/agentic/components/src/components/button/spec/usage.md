@@ -43,3 +43,9 @@ contract is required for alignment with current Flex guidance.
 Content wraps when a consumer constrains the root. Supply a content-slot
 override only when a product deliberately needs a different truncation or
 text presentation policy.
+
+## Scene root
+
+Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.
+A nested theme boundary may override appearance without creating a separate
+input-modality tracker. Component test scenes use the shared themed renderer.

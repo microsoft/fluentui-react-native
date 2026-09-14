@@ -12,8 +12,15 @@ checkmark, and the multiselect visual are inaccessible presentation, so the
 root is announced once. Windows exposes the resolved root through UIA and
 macOS through AX.
 
-The option root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy),
-requesting native feedback on every platform and retaining the mounted custom
-FocusVisual. Native rendering depends on platform support.
 Consumers own the containing collection's name, position, selection
 rules, and any focus restoration policy.
+
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.

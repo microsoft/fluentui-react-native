@@ -51,7 +51,7 @@ props on the root.
 | `content`     | `Text`      | by default in `iconAndText` | Defaults to the text `Tag text`; pass `null` to suppress it; never rendered in the icon-only layout. |
 | `dismissIcon` | `Icon`      | by default                  | Defaults to the shared dismiss glyph; suppressed when `dismiss` is `false` or the slot is `null`.    |
 
-Render order inside the root is: focus visual, leading icon, content, dismiss
+Render order inside the root is: optional `FocusRing`, leading icon, content, dismiss
 icon.
 
 **TAG-002:** Render the label by default with the placeholder text, drop it in
@@ -59,7 +59,7 @@ the icon-only layout, render the leading icon only when one is supplied, and
 render the default dismiss glyph unless `dismiss` is `false` or the slot is
 suppressed.
 
-**TAG-003:** Render the focus visual, the leading icon, the content, and the
+**TAG-003:** Render the optional `FocusRing`, the leading icon, the content, and the
 dismiss icon in that order.
 
 ### State ownership
@@ -92,6 +92,21 @@ accessible name for icon-only tags.
 **TAG-009:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
 on the root, retaining the mounted two-ring visual and resolved corner radius
 for the custom path.
+
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 ## Platform behavior
 

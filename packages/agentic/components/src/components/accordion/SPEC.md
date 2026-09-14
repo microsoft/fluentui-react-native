@@ -17,9 +17,9 @@ Accordion is a disclosure component with one pressable header and one body regio
 
 ## Public contract
 
-`layout` defaults to `chevronStart`; `size` is currently always `small`. Expansion is self-driving: `defaultExpanded` initializes uncontrolled state, `expanded` makes the value controlled, and `onExpandedChange` receives the requested next value in either mode. `focused` can force the retained custom focus visual for an instance; it does not force native focus or its system ring. The root accepts the owned `ViewProps` surface, including `style`, while the component owns its accessibility and focus behavior.
+`layout` defaults to `chevronStart`; `size` is currently always `small`. Expansion is self-driving: `defaultExpanded` initializes uncontrolled state, `expanded` makes the value controlled, and `onExpandedChange` receives the requested next value in either mode. `focused` overrides resolved focus for an instance, but does not bypass root modality or force native focus or its system ring. The root accepts the owned `ViewProps` surface, including `style`, while the component owns its accessibility and focus behavior.
 
-`root` is required. `title` and `leadingIcon` are optional public slots but render by default as “Section title” and a selected-circle icon; pass `null` to omit either. `bodyContent` is optional. The rendered root contains the header, then the body. Header children are always `FocusVisual`, followed by chevron, leading icon, and title for `chevronStart`; `chevronEnd` orders leading icon, title, then chevron. The body always exists and renders `bodyContent` or a text placeholder.
+`root` is required. `title` and `leadingIcon` are optional public slots but render by default as “Section title” and a selected-circle icon; pass `null` to omit either. `bodyContent` is optional. The rendered root contains the header, then the body. Header children begin with optional `FocusRing`, followed by chevron, leading icon, and title for `chevronStart`; `chevronEnd` orders leading icon, title, then chevron. The body always exists and renders `bodyContent` or a text placeholder.
 
 The resolved state retains the controlled/uncontrolled expansion result, pressable hover/press/focus state, layout, size, theme state, and user root style. User root style follows the structural root style. Header colors give pressed state priority over hovered state.
 
@@ -31,11 +31,26 @@ The resolved state retains the controlled/uncontrolled expansion result, pressab
 - **ACC-004:** Expose a labeled button header with expanded state and an accessibility relationship to the body; hide collapsed body descendants.
 - **ACC-005:** Keep grouping policy, body contents, and motion outside the component contract.
 
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
+
 ## Platform behavior
 
 On Windows and macOS, the header is a React Native `Pressable` with button role. Its native keyboard and pointer activation request expansion; `Enter` and `Space` are handled by the platform pressable behavior. The header exposes `accessibilityState.expanded`, its `accessibilityControls` target is the generated body identifier, and caller-provided accessibility state is retained.
 
-The body remains mounted. Collapsing it sets height to zero, hides overflow, removes padding, and hides descendants from assistive technology; expanding restores visibility. The header requests native focus visuals on every platform under the shared policy; rendering depends on platform support. `FocusVisual` remains mounted inside it, hidden for that path and using resolved focus on the retained custom path. There is no group-level arrow navigation, focus transfer, or timed rotation/height animation.
+The body remains mounted. Collapsing it sets height to zero, hides overflow, removes padding, and hides descendants from assistive technology; expanding restores visibility. There is no group-level arrow navigation, focus transfer, or timed rotation/height animation.
 
 ## Divergences from Flex
 

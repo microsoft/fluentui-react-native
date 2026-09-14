@@ -44,11 +44,20 @@ checked state, so putting it in the name makes it read twice and go stale.
 ## Focus and keyboard
 
 The hit area is focusable while enabled and leaves the tab order when disabled,
-because `focusable` defaults to the negation of `disabled`. Enter and the space
-keys toggle on key up. The hit-area root, not the label container or track,
-follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
-Every platform receives the native focus-ring request; rendering depends on
-platform support. The mounted two-ring visual is retained for the custom path.
+because `focusable` defaults to the negation of `disabled`.
+
+Enter and the space
+keys toggle on key up.
+
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 Disabled switches stay in the accessibility tree and report their disabled
 state, so a screen reader user can still discover the setting and hear that it

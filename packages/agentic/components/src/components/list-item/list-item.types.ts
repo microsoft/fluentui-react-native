@@ -12,7 +12,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 
 import type { Icon } from '../../primitives/icon/icon';
-import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
+import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
 import type { Text } from '../text/text';
 
@@ -64,11 +64,10 @@ export type ListItemMetrics = {
   iconSize: number;
 };
 
-export type ListItemState = ComponentState<ListItemStateSlots> &
+export type ListItemState = ComponentState<ListItemStateSlots & FocusVisualsSlots> &
   Required<ListItemStateProps> &
   ThemeState &
   PressableState & {
-    focusVisualProps?: FocusVisualProps;
     metrics: ListItemMetrics;
     selectedFill: boolean;
     selectionGlyph?: string;

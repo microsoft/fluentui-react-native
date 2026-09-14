@@ -92,3 +92,9 @@ Pointing several tabs at the same `controls` identifier, which breaks the
 relationship between each tab and its panel.
 
 Labeling an icon-only tab after its glyph instead of after the panel it shows.
+
+## Scene root
+
+Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.
+A nested theme boundary may override appearance without creating a separate
+input-modality tracker. Component test scenes use the shared themed renderer.

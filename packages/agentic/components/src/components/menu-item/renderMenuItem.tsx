@@ -1,7 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 
 import { CompoundItemLayout } from '../../primitives/compound-item-layout/compound-item-layout';
-import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import { LayoutStableText } from '../../primitives/layout-stable-text/layout-stable-text';
 import { Skeleton } from '../skeleton/skeleton';
 import { Text } from '../text/text';
@@ -35,7 +34,7 @@ export function renderMenuItem_unstable(state: MenuItemState) {
 
   return (
     <state.root>
-      <FocusVisual {...state.focusVisualProps} />
+      {state.FocusRing && <state.FocusRing />}
       {state.loading ? (
         <CompoundItemLayout
           contentStyle={getMenuItemContentLayoutStyle(state)}

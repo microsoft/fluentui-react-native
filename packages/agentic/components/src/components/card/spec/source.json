@@ -3,7 +3,7 @@
   "component": "card",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-11",
+  "reviewedAt": "2026-09-12",
   "sources": [
     {
       "id": "flex-component",

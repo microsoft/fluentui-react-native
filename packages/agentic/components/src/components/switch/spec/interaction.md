@@ -30,13 +30,15 @@ arrow keys, and moving through a group of switches is plain tab order.
 
 ## Focus visual
 
-The hit-area root follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
-Every platform receives the native focus-ring request, with rendering support
-and appearance delegated to its renderer, while the custom
-visual remains mounted but hidden. On the retained custom path, the two-ring
-visual uses the root radius and existing focus stroke tokens and appears while
-the root is focused and enabled, including pointer focus. This adaptation does
-not introduce a new modality guarantee.
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 ## State transition
 

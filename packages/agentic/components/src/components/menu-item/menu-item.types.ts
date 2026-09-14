@@ -9,7 +9,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
-import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
+import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { Icon } from '../../primitives/icon/icon';
 import type { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
@@ -49,11 +49,10 @@ export type MenuItemProps = MenuItemStateProps & {
   secondaryContent?: string | null;
 } & ComponentProps<MenuItemSlots, MenuItemExposedPressableProps>;
 
-export type MenuItemState = ComponentState<MenuItemSlots> &
+export type MenuItemState = ComponentState<MenuItemSlots & FocusVisualsSlots> &
   Required<MenuItemStateProps> &
   ThemeState & {
     contentText: string;
-    focusVisualProps?: FocusVisualProps;
     secondaryContentText?: string | null;
     hasSecondaryContent: boolean;
     isListItem: boolean;

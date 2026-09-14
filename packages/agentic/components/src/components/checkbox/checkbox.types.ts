@@ -9,7 +9,7 @@ import type {
   PressableState,
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
-import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
+import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { Text } from '../text/text';
 
 export type CheckboxVariant = 'standard' | 'circular';
@@ -58,12 +58,10 @@ export type CheckboxRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>
 
 export type CheckboxProps = CheckboxStateProps & ComponentProps<CheckboxSlots, CheckboxRootProps>;
 
-export type CheckboxState = ComponentState<CheckboxStateSlots> &
+export type CheckboxState = ComponentState<CheckboxStateSlots & FocusVisualsSlots> &
   Required<Omit<CheckboxStateProps, CheckboxStatusDriverKeys>> &
   ThemeState &
   PressableState & {
-    focusVisualProps?: FocusVisualProps;
-    focusVisible: boolean;
     indicatorIconColor?: ColorValue;
     indicatorIconSize: number;
     indicatorStyle: StyleProp<ViewStyle>;
