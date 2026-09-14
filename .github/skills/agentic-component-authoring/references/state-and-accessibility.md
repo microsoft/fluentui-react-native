@@ -145,6 +145,10 @@ so another component can extend the state stage without importing package intern
 
 ## Platform behavior
 
+For focus ownership, activation, and native target lifetime, read
+[common focus authoring](focus.md), followed by the
+[Windows/Win32](focus-windows.md) or [macOS](focus-macos.md) detail.
+
 Keep platform-specific native imports out of shared files when React Native forks expose incompatible types. Put fork
 imports in platform files or redeclare a small platform-neutral contract. Surface unsupported platform behavior rather
 than silently pretending it succeeded.

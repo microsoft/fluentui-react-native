@@ -38,3 +38,11 @@ adding or changing a component pattern.
 
 Add compile-time type assertions for public type behavior and runtime tests for
 rendering, prop merging, children, keys, and refs affected by a change.
+
+## Focus and native refs
+
+Use the [common focus instructions](../../.github/skills/agentic-component-authoring/references/focus.md)
+and their platform breakouts when adding focus-target or interaction abstractions.
+Reuse slot ref composition and cleanup; preserve this package's older React
+compatibility while agentic components use React 19 ref props. Keep proposed
+native services opt-in and do not add a design/components dependency here.

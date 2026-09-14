@@ -121,7 +121,7 @@ content slot.
 
 ## Share focus behavior and styling
 
-Follow the [shared focus visual policy](../../../../packages/agentic/components/src/components/AGENTS.md#focus-visual-policy).
+Follow [common focus authoring](focus.md) and its Windows/Win32 or macOS detail.
 State hooks use `useFocusVisuals` to create a private optional `FocusRing` and determine the native
 `enableFocusRing` setting. The custom slot is absent on the native path; when present, its configured Views
 remain mounted across visibility changes.

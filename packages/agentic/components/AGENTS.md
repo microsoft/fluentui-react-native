@@ -12,6 +12,10 @@ invariants; detailed authoring recipes live in the
 - Portable desktop story tests are static `parameters.desktopDriver` plans.
   Use the public authoring types, stable `testID` selectors, declarative
   capability requirements, and no platform branches or executable callbacks.
+- Focus work starts with the [common focus instructions](../../../.github/skills/agentic-component-authoring/references/focus.md),
+  then the [Windows/Win32](../../../.github/skills/agentic-component-authoring/references/focus-windows.md) or
+  [macOS](../../../.github/skills/agentic-component-authoring/references/focus-macos.md) detail. V1 Win32 is the
+  behavioral baseline for both Windows endpoints; renderer-specific plumbing remains separate.
 - Storybook application, native project, Metro, bundle, or CocoaPods work follows the
   [Storybook instructions](../../../apps/storybook/AGENTS.md) and the `agentic-storybook-development` skill.
 - Native React Native Windows Fabric component work follows the

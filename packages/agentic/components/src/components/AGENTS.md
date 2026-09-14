@@ -63,35 +63,22 @@ audit.
 
 ## Focus visual policy
 
-This is the shared native adaptation for Accordion, Button, Card, Checkbox, ListItem, ListboxItem, MenuItem,
-Radio, Switch, Tab, and Tag. Activation, selection, navigation, and accessibility semantics are unchanged.
+Read [common focus authoring](../../../../../.github/skills/agentic-component-authoring/references/focus.md),
+then [Windows/Win32](../../../../../.github/skills/agentic-component-authoring/references/focus-windows.md) or
+[macOS](../../../../../.github/skills/agentic-component-authoring/references/focus-macos.md).
+The common file owns ref, state, activation, scope, and styling invariants; platform files own detailed
+native adaptation. V1 Win32 models observable behavior for both Office Win32 and Windows Fabric.
 
-- Call `useFocusVisuals` in `use<Component>_unstable` after resolving pressable focus. Pass `focused: false`
-  for disabled or noninteractive targets. Store its `FocusRing` as a private optional slot in component state.
-- The hook returns `{ FocusRing, enableFocusRing }`. Native rings default to enabled on Windows and macOS,
-  and disabled on Win32 and other platforms. `useSystemFocusRing` explicitly overrides that default.
-- `alwaysVisible` means visible whenever focused, including pointer focus, not visible while unfocused.
-  It takes precedence over the system-ring preference and uses the custom ring with `enableFocusRing: false`;
-  native focus-visibility heuristics cannot guarantee this override.
-- The custom slot reads the current modality through `useRootSettings` on each render. It shows only when
-  focused and the modality is keyboard, unless `alwaysVisible` is set. Programmatic focus follows the last
-  root modality. There is no local pointer tracker, subscription, or rerender caused solely by root settings.
-- The optional slot is absent on the native path. On the custom path, configured ring Views remain mounted
-  across focus/blur and visibility changes only opacity. Static cards and section headers render no ring.
-- Apply `enableFocusRing` only to Accordion's header, Card's interactive overlay, or the other components'
-  pressable roots. Switch's label container and track are not focus targets.
-- Keep `ThemeState` out of the behavioral hook. `applyFocusRingStyles` centrally binds the dual-ring
-  colors (`strokeFocusInner`/`strokeFocusOuter`) and widths (`thin`/`thick`) in a cached theme stylesheet.
-  Component style hooks supply the resolved radius. Functional component borders are separate.
-- Render `{state.FocusRing && <state.FocusRing />}` inside the actual focus target. Do not add public
-  component slots for this render-only structure. The standalone `FocusVisual` primitive and its exports remain.
-- Synthetic `focused` overrides do not move native focus. Input's focus underlines and other non-ring styles
-  are unchanged. Native ring appearance still depends on the renderer; no pixel-parity guarantee is made.
+Current implementation: `useFocusVisuals` returns a private optional `FocusRing` and `enableFocusRing`;
+Windows/macOS default to native and Win32 defaults to custom. `alwaysVisible` selects a custom ring only
+while focused. `applyFocusRingStyles` owns cached colors/widths; component styles supply radius. Put the ring
+and native setting only on the actual focus target. Scenes require `ThemedRoot`; modality is currently
+sampled on render, without a root subscription. The native Windows path requires RNW 0.81.35 or newer.
 
-The Windows native path requires React Native Windows 0.81.35 or newer. This re-review of the accepted
-`native-system-focus-visuals` adaptation follows the requested root-modality contract without changing pinned
-Flex source identities. The shared hook and component matrix cover platform defaults, overrides, modality,
-focus/blur, ring geometry, and disabled/noninteractive targets. Scenes require a `ThemedRoot`.
+The [desktop improvement plan](../../WIN32-FOCUS-PLAN.md) describes future target/intent/notification
+abstractions and native-service gates; they are not shipped APIs. Do not change behavior or pinned source
+identities by following a proposal before its component contract is reviewed. The accepted
+`native-system-focus-visuals` divergence continues to refer through this stable anchor.
 
 ## Focused references
 
