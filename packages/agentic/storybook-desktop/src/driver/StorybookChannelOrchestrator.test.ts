@@ -36,6 +36,11 @@ class FakeChannelClient {
       listener();
     }
   }
+
+  authenticate(): void {
+    this.receive('storyRendered', 'components-button--default');
+    this.receive('furn:desktop:hello', runtimeHello);
+  }
 }
 
 class FakeChannelServer implements StorybookChannelServer {
@@ -112,11 +117,60 @@ const driverManifest: DesktopStorybookDriverManifest = {
   testIDPrefix: 'agentic-storybook',
 };
 
+const runtimeHello = {
+  endpoint: 'windows',
+  instanceId: 'instance',
+  nonce: 'nonce',
+  platformManifestDigest: 'platform-digest',
+  targetId: 'agenticstorybook-windows',
+  version: 1,
+};
+
 describe('StorybookChannelOrchestrator', () => {
   const errorOutput = { write: jest.fn() };
   const createOrchestrator = (options: ConstructorParameters<typeof StorybookChannelOrchestrator>[0]) =>
     new StorybookChannelOrchestrator({ ...options, errorOutput });
   beforeEach(() => errorOutput.write.mockClear());
+
+  test('waits for the authenticated preview to initialize before navigating, including after an app restart', async () => {
+    const channelServer = new FakeChannelServer();
+    const client = new FakeChannelClient();
+    const unrelatedClient = new FakeChannelClient();
+    channelServer.connect(client);
+    channelServer.connect(unrelatedClient);
+    const fetch = jest.fn(async () => new Response('{}'));
+    const orchestrator = createOrchestrator({
+      channelServer,
+      driverManifest,
+      fetch,
+      serverUrl: 'https://localhost',
+      timeoutMs: 1000,
+    });
+
+    for (const [index, runtime] of [client, new FakeChannelClient()].entries()) {
+      if (index > 0) {
+        client.close();
+        channelServer.connect(runtime);
+      }
+      runtime.receive('furn:desktop:hello', runtimeHello);
+      const request = { requestId: `request-${index}`, runId: `run-${index}`, storyId: 'components-button--default' };
+      const selection = orchestrator.selectStory(request);
+      unrelatedClient.receive('storyRendered', request.storyId);
+      await Promise.resolve();
+      expect(fetch).toHaveBeenCalledTimes(index);
+      expect(runtime.sent.some((message) => JSON.parse(message).type === 'furn:desktop:prepare-story')).toBe(false);
+
+      runtime.receive('storyRendered', request.storyId);
+      await Promise.resolve();
+      expect(fetch).toHaveBeenCalledTimes(index + 1);
+      runtime.receive('furn:desktop:story-ready', {
+        ...request,
+        portablePlanDigest: 'portable-digest',
+        previewGeneration: 1,
+      });
+      await expect(selection).resolves.toMatchObject({ runId: request.runId });
+    }
+  });
 
   test('reports the requested story, run and HTTP failure details to the server error output', async () => {
     const channelServer = new FakeChannelServer();
@@ -129,14 +183,8 @@ describe('StorybookChannelOrchestrator', () => {
       timeoutMs: 100,
       fetch: jest.fn(async () => new Response('preview module failed to load', { status: 500 })),
     });
-    client.receive('furn:desktop:hello', {
-      endpoint: 'windows',
-      instanceId: 'instance',
-      nonce: 'nonce',
-      platformManifestDigest: 'platform-digest',
-      targetId: 'agenticstorybook-windows',
-      version: 1,
-    });
+
+    client.authenticate();
     await expect(
       orchestrator.selectStory({ requestId: 'failure', runId: 'pipeline-run', storyId: 'components-button--default' }),
     ).rejects.toThrow('preview module failed to load');
@@ -168,14 +216,7 @@ describe('StorybookChannelOrchestrator', () => {
       serverUrl: 'https://localhost',
       timeoutMs: 100,
     });
-    client.receive('furn:desktop:hello', {
-      endpoint: 'windows',
-      instanceId: 'instance',
-      nonce: 'nonce',
-      platformManifestDigest: 'platform-digest',
-      targetId: 'agenticstorybook-windows',
-      version: 1,
-    });
+    client.authenticate();
 
     await expect(
       orchestrator.resetStory({ requestId: 'first', runId: 'first', storyId: 'components-button--default' }),
@@ -211,14 +252,7 @@ describe('StorybookChannelOrchestrator', () => {
       serverUrl: 'https://localhost',
       timeoutMs: 10,
     });
-    client.receive('furn:desktop:hello', {
-      endpoint: 'windows',
-      instanceId: 'instance',
-      nonce: 'nonce',
-      platformManifestDigest: 'platform-digest',
-      targetId: 'agenticstorybook-windows',
-      version: 1,
-    });
+    client.authenticate();
     await expect(orchestrator.selectStory({ requestId: 'request', runId: 'run', storyId: 'components-button--default' })).rejects.toThrow(
       'Timed out navigating',
     );
@@ -237,14 +271,7 @@ describe('StorybookChannelOrchestrator', () => {
       serverUrl: 'http://127.0.0.1:7007',
       timeoutMs: 1000,
     });
-    client.receive('furn:desktop:hello', {
-      endpoint: 'windows',
-      instanceId: 'instance',
-      nonce: 'nonce',
-      platformManifestDigest: 'platform-digest',
-      targetId: 'agenticstorybook-windows',
-      version: 1,
-    });
+    client.authenticate();
     expect(JSON.parse(client.sent[0])).toEqual({ type: 'furn:desktop:request-hello', args: [] });
     client.sent.length = 0;
 
@@ -290,14 +317,7 @@ describe('StorybookChannelOrchestrator', () => {
       serverUrl: 'http://127.0.0.1:7007',
       timeoutMs: 1000,
     });
-    client.receive('furn:desktop:hello', {
-      endpoint: 'windows',
-      instanceId: 'instance',
-      nonce: 'nonce',
-      platformManifestDigest: 'platform-digest',
-      targetId: 'agenticstorybook-windows',
-      version: 1,
-    });
+    client.authenticate();
 
     const selection = orchestrator.selectStory({
       requestId: 'request-error',
@@ -355,14 +375,7 @@ describe('StorybookChannelOrchestrator', () => {
       serverUrl: 'http://127.0.0.1:7007',
       timeoutMs: 10,
     });
-    client.receive('furn:desktop:hello', {
-      endpoint: 'windows',
-      instanceId: 'instance',
-      nonce: 'nonce',
-      platformManifestDigest: 'platform-digest',
-      targetId: 'agenticstorybook-windows',
-      version: 1,
-    });
+    client.authenticate();
     client.readyState = 3;
 
     await expect(

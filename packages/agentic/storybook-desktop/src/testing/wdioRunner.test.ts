@@ -1,6 +1,7 @@
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 
+// This aggregate contract starts dozens of Node workers, including intentional timeouts.
 test('executes isolated inline code and releases sessions after assertion failures, timeouts, and crashes', async () => {
   const result = await new Promise<Record<string, unknown>>((resolve, reject) => {
     const child = spawn(process.execPath, [path.join(__dirname, 'wdioRunner.contract.cjs')], {
@@ -74,4 +75,4 @@ test('executes isolated inline code and releases sessions after assertion failur
     generatedFiles: [],
     attachedOnly: true,
   });
-}, 60_000);
+}, 120_000);

@@ -49,6 +49,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   private readonly errorOutput: DesktopStorybookErrorOutput;
   private readonly pending = new Map<string, PendingSelection>();
   private readonly bridgeWaiters = new Set<() => void>();
+  private readonly initializedClients = new WeakSet<ChannelClient>();
   private bridgeConnected = false;
   private bridgeClient?: ChannelClient;
   private currentStory: StoryReadyResult | null = null;
@@ -135,7 +136,9 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
       if (this.bridgeClient === client) {
         this.bridgeClient = undefined;
         this.bridgeConnected = false;
+        this.currentStory = null;
       }
+      this.initializedClients.delete(client);
     });
     if (client.readyState === 1) {
       client.send(JSON.stringify({ type: 'furn:desktop:request-hello', args: [] }));
@@ -151,6 +154,11 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
       return;
     }
     const payload = message.args?.[0];
+    if (message.type === 'storyRendered' && typeof payload === 'string') {
+      this.initializedClients.add(client);
+      this.resolveBridgeWaiters(client);
+      return;
+    }
     if (!payload || typeof payload !== 'object') {
       return;
     }
@@ -179,6 +187,14 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
       return;
     }
     this.bridgeClient = client;
+    this.resolveBridgeWaiters(client);
+  }
+
+  private resolveBridgeWaiters(client: ChannelClient): void {
+    // The bridge can authenticate before Storybook installs its navigation handlers.
+    if (client !== this.bridgeClient || !this.initializedClients.has(client)) {
+      return;
+    }
     this.bridgeConnected = true;
     for (const resolve of this.bridgeWaiters) {
       resolve();

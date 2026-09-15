@@ -149,6 +149,13 @@ Driver listener on separate loopback ports in one Node process. It resolves the
 verified native helper before starting Metro and registers a process-backed
 target. The deterministic fake host remains test-only.
 
+Navigation waits for both an authenticated runtime hello and the first
+`storyRendered` event from that same connection. The hello alone can arrive
+before Storybook installs its navigation handlers, particularly after a native
+app restart. This initial render only gates startup: each requested story must
+still acknowledge the matching request/run and pass native story-root
+verification before its tests execute.
+
 New component tests should use executable WDIO functions. Legacy Checkbox and
 Input plans remain supported during migration and use the `desktop-e2e` tag.
 Plan extraction evaluates only the inline

@@ -173,6 +173,9 @@ async function main() {
     } catch (error) {
       if (!(error instanceof Error) || !(error instanceof WdioStoryTestRunError) || !('results' in error) || !Array.isArray(error.results))
         throw error;
+      if (error.results.map(({ status }) => status).join(',') !== 'failed,passed') {
+        throw new Error(`Named timeout recovery failed: ${JSON.stringify(error.results)}`, { cause: error });
+      }
       namedTimeout = error.results.map(({ testName, status }) => ({ testName, status }));
     }
     const passed = await run('pass');
