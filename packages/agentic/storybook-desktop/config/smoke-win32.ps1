@@ -241,7 +241,7 @@ try {
   $env:STORYBOOK_SMOKE_SETTLE_MS = '250'
   & node $controlPath
   if ($LASTEXITCODE -ne 0) {
-    throw 'Win32 Storybook smoke validation failed.'
+    throw "Win32 Storybook smoke validation failed: control process exited with code $LASTEXITCODE."
   }
 
   if (-not (Get-Process -Id $appProcess.Id -ErrorAction SilentlyContinue)) {

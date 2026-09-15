@@ -45,3 +45,12 @@ existing Tab render, so reduced-motion settings require no group branch.
 Tabs register stable, ref-backed targets. The collection requests focus after
 eligibility commits and confirms it from native focus events. Superseded or
 removed targets cancel pending work; the public structural root ref is unchanged.
+
+## Executable focus coverage
+
+The WDIO `FocusManagement` cases verify native selected/focused states,
+selection observed at the focus event, disabled skipping, wrap, Home/End,
+and unconsumed modifier delivery to the parent. The native host may move focus
+for those modifier chords; TabList must not consume them or change selection.
+`ManualFocusManagement` proves focus can move independently until Enter selects
+the focused Tab.

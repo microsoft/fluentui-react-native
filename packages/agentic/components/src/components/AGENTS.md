@@ -56,12 +56,12 @@ audit.
   layout.
 - Test both paths of a self-driving axis, and test that an externally driven `selected` does not change on press.
 - Keep a self-driving controlled prop out of story `args`, and keep an identity-changing axis out of story controls.
-- Prefer top-level `wdio` functions or named function collections demonstrated
+- Use top-level `wdio` functions or named function collections demonstrated
   by Button. Use the injected `platform`, explicit capability skips, stable
   `testID` selectors, and public native semantics. The story supplies the suite
   scope and each named case is isolated. Run with `storybook test`.
-- Legacy `parameters.desktopDriver` plans remain supported. Do not put
-  functions in static plans or import Node helpers at story-module scope.
+- Do not add legacy `parameters.desktopDriver` plans to the component catalog
+  or import Node helpers at story-module scope.
 
 ## Focus visual policy
 

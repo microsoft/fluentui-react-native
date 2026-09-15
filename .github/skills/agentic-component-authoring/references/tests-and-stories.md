@@ -139,8 +139,8 @@ Win32 is distinct from its WebDriver `platformName` of `windows`. Branch
 inside callbacks for genuine platform differences and use explicit skip
 reasons for unsupported `browser.capabilities['furn:features']`.
 
-Button is the proof of concept and no longer uses custom `desktopDriver`
-plans. Keep names static and callbacks self-contained. Node helpers may be
+All catalog tests use WDIO; custom `desktopDriver` plans remain only in runner
+compatibility fixtures. Keep names static and callbacks self-contained. Node helpers may be
 dynamically imported inside each callback, but callbacks cannot capture
 story-module bindings. The shared Babel config strips all test functions
 before native dependency collection. Named cases get independent previews,
@@ -152,14 +152,20 @@ The single-function `wdio` form remains supported. Run with
 smoke mode runs these functions alongside remaining legacy plans, grouped by
 story. See the [executable test contract](../../../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
 
-Legacy Checkbox and Input tests still use static JSON
-`parameters.desktopDriver` plans typed with `DesktopStoryTests` from
-`@fluentui-react-native/desktop-driver/authoring`. Keep those plans static and
-use declarative `platforms` and `requires` until they are migrated; do not add
-functions or dynamic values to the old format.
+The components package's `test:stories` project checks every test-bearing story
+without emitting it into the component library. Add new test-bearing files to
+`tsconfig.stories.json`; the representative runner contract checks this coverage.
+Shared Node-only helpers use `*.wdio.ts` and are dynamically imported by source
+extension inside callbacks. They are checked by the story project and excluded
+from production emit.
 
-The components package's `test:stories` project checks the experimental
-Button stories without emitting them into the component library.
+Focus cases use native `focused`, `checked`, and `selected` properties together
+with activation and event-order probes. Cover stale key-up, repeats, disabled
+stops, same-target modality, nested themes, focus requests, and selection-before-
+focus. Use `try/finally` to release held WebDriver actions. Never replace native
+state checks with rendered text alone or a default value for an unsupported
+property. Windows and Win32 run the same contract; macOS requires its explicit
+AppKit adaptation.
 
 Button uses focused appearance, size, shape, icon, selection, disabled, and constrained-content stories. Icon uses a
 source and size overview plus focused font, image, SVG, size, color, and accessibility stories.

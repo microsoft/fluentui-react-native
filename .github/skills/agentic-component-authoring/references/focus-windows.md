@@ -149,3 +149,15 @@ active/inactive windows, and nested surfaces.
 Gate on actual focused element and action/announcement count, not just selected
 React state or a mocked ref call. A skipped input test is not qualification.
 Use owned app/Metro lifecycle commands and preserve unrelated sessions.
+
+The catalog now uses named WDIO callbacks. The complete Windows and Win32 smoke
+lanes each cover 18 cases with native assertions; component-focused cases use
+the `desktop-focus` tag. Check aggregate result counts for zero skips before
+claiming qualification. A disconnected input desktop can leave semantic cases
+passing while all physical-input cases skip.
+
+For delegated modifier chords, assert parent delivery and unchanged collection
+selection, not immovable native focus: the host is allowed to handle the chord.
+For native editors, distinguish noneditable/nonfocusable from UIA `IsEnabled`;
+Win32's observed enabled-state announcement gap is documented in Input's
+interaction companion and does not replace native focus assertions.

@@ -76,3 +76,13 @@ detach/disable invalidates pending focus requests. The target and native slot
 share the resolved `focusable` value: direct textInput props override the root
 setting, but disabled always wins. Input retains its border-only focus styling;
 it does not subscribe to root modality or mount a custom focus ring.
+
+## Native focus qualification
+
+The `FocusManagement` WDIO case verifies native text editing and caret movement,
+then checks that Tab skips the disabled field and focuses the following button.
+The disabled field must remain natively unfocused. Win32's native editor was
+observed reporting UIA `IsEnabled=true` despite `editable=false`,
+`focusable=false`, and disabled accessibility state. That enabled-state
+announcement gap is not treated as evidence of focusability or hidden by an
+assumed native disabled value.

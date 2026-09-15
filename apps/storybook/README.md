@@ -330,5 +330,13 @@ Follow the package-level story authoring instructions in `../../packages/agentic
 `*.stories.tsx` file next to its component; package discovery belongs in `storybook.config.mts`, adapted by `src/main.ts`.
 See `../../packages/agentic/components/src/components/button/button.stories.tsx` for the canonical higher-order component example.
 Prefer named `wdio` functions with stable `testID` selectors and injected
-`platform` context, as demonstrated by Button. Checkbox and Input retain the
-legacy static `parameters.desktopDriver` format during migration.
+`platform` context, as demonstrated by Button. All catalog tests, including
+Checkbox, Input, Switch, TabList, and native FocusZone, use this pattern.
+Focus-specific cases are tagged `desktop-focus`; the complete native
+`stories-and-tests` smoke lane also runs FocusZone and the default control cases.
+
+To run just the focused component cases through the owned Windows/Win32
+lifecycle, set `STORYBOOK_SMOKE_TAG=desktop-focus` before invoking
+`storybook smoke --windows --mode stories-and-tests` or the corresponding
+`--win32` command. The callback runner still requires authenticated native
+readiness and never substitutes JavaScript state for native focus.

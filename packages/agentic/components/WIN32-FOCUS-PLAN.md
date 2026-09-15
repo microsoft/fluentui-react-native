@@ -11,7 +11,7 @@ The historical filename is retained so existing plan references remain valid.
 This refinement adds common/platform authoring instructions, modern-ref
 requirements, macOS source research, and a gated `native-lib` assessment.
 
-## Execution status (September 14, 2026)
+## Execution status (September 15, 2026 UTC)
 
 Implemented:
 
@@ -31,26 +31,37 @@ Implemented:
   guarded, key-based fallback only where native code-based activation cannot run.
   Checkbox/Switch `Toggle` and Tab `Select` accessibility actions expose the expected
   native toggle/selection patterns.
-- Dedicated `desktop-focus` Button/Switch/TabList stories and owned smoke
-  selectors (`STORYBOOK_SMOKE_STORY`, `STORYBOOK_SMOKE_TAG`) make native
-  qualification reproducible without bypassing leases or changing default smoke
-  contracts.
+- The WDIO support from origin/main `8d31a6b27` is integrated in merge
+  `64c4328ac`. All catalog tests now use named WDIO callbacks: 18 cases across
+  12 stories. Shared Node-only helpers and every test-bearing story are checked
+  without production emit. Compatibility fixtures retain the legacy parser.
+  Owned smoke selectors apply to WDIO without bypassing leases or readiness.
 
-Native evidence so far: all three dedicated Win32 cases passed with real input
-and no skips. The default Win32 Button/Checkbox/Input lane also passed all three
-cases after declaring Checkbox's native Toggle action; the previous failure
-showed a checked glyph but false UIA checked state. Windows Fabric Switch and
-TabList cases passed; the first Button
-case repeatedly timed out during story selection before executing input steps.
-The full Windows story traversal rendered successfully. The unsuccessful
-orchestrator experiments were removed rather than weakening readiness checks.
+Native qualification: all 18 WDIO cases pass with real input and zero skips on
+both Windows Fabric and Win32. The full traversals render 155 and 149 stories,
+respectively. The upstream authenticated-initial-render readiness fix replaces
+the earlier unsuccessful local experiments; the previous Button selection gate
+is no longer blocking this suite.
+
+The cases cover pointer focus, exactly-once Enter/Space activation, repeated
+keydown, stale key-up after Tab/blur, disabled tab stops, same-target modality
+without refocus, nested roots, programmatic request confirmation and disabled/
+detached targets, native toggle state, caret editing, selection-before-focus,
+Home/End/wrap, manual selection, modifier propagation, and linear/geometric
+FocusZone navigation. Modifier chords reach the parent without changing
+TabList selection; a native host may legitimately move focus in response.
+
+Win32 TextInput still reports UIA `IsEnabled=true` when configured noneditable,
+nonfocusable, and accessibility-disabled. The focus case verifies native Tab
+exclusion rather than treating that enabled-state announcement gap as proof of
+focusability. It remains separate from the verified focus contract.
 
 Affected workspace suites pass, as do the root build and package lint/format.
 The required uncached repository test graph stops in two unchanged codemod
 fixture comparisons; these unrelated baseline failures were not modified.
 
-Still gated: complete three-lane P0/V1 parity, the Windows first-story readiness
-failure, macOS native input/VoiceOver, full popup/window restoration and activity
+Still gated: complete three-lane P0/V1 parity, macOS native input/VoiceOver,
+the Win32 editor enabled-state announcement, full popup/window restoration and activity
 policy, and P4 visual/high-contrast/scale qualification. A complete new menu owner
 or RadioGroup is not introduced. N0/native-lib remains deferred: observed
 component activation/ref gaps were resolved without a new native module; native

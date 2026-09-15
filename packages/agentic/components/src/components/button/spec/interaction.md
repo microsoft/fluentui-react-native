@@ -2,8 +2,8 @@
 
 ## State model
 
-`usePressableState` derives hover, press, and focus from the root
-`Pressable`. Token resolution uses appearance first, then selected and
+`useFocusablePressable` derives hover and press and observes native self-focus
+on the root `Pressable`. Token resolution uses appearance first, then selected and
 interaction state. Disabled values override interactive presentation. User
 root style is the final style layer.
 
@@ -50,3 +50,11 @@ refs compose with caller refs on the actual interactive slot, without redirectin
 structural root refs. Native self-focus is distinct from descendant events, and
 detach/disable invalidates pending focus requests. Focus visuals observe root
 modality only while focused on the custom path; there is no scene-wide rerender.
+
+## Executable focus coverage
+
+Named WDIO cases in `FocusManagement` verify native pointer focus, exactly-once
+activation, key pairing across blur, repeated key-down, disabled Tab stops, and
+shared nested-root modality without refocusing the same target. `FocusRequests`
+verifies native confirmation and rejects disabled/detached targets without
+rewriting physical modality. Each case starts with a fresh story and session.

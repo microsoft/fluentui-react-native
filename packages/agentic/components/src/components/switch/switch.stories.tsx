@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
-import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Switch } from './switch';
 import type { SwitchLayout } from './switch.types';
@@ -69,7 +69,7 @@ const meta: Meta<typeof Switch> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Switch>;
+type Story = WdioStory<StoryObj<typeof Switch>>;
 
 export const Default: Story = {};
 
@@ -91,29 +91,25 @@ function FocusManagementScene() {
 export const FocusManagement: Story = {
   render: () => <FocusManagementScene />,
   tags: ['desktop-focus'],
-  parameters: {
-    desktopDriver: {
-      version: 1,
-      tests: [
-        {
-          id: 'single-toggle-per-key',
-          platforms: ['windows', 'win32'],
-          requires: ['physical-click', 'keyboard', 'focus'],
-          steps: [
-            { action: 'wait', target: { testId: 'focus-switch' } },
-            { action: 'click', target: { testId: 'focus-switch' } },
-            { expect: { state: 'focused', target: { testId: 'focus-switch' }, value: true } },
-            { action: 'wait', until: { state: 'text', target: { testId: 'focus-switch-count' }, value: '1' } },
-            { action: 'keys', value: ['\uE007'] },
-            { action: 'wait', until: { state: 'text', target: { testId: 'focus-switch-count' }, value: '2' } },
-            { expect: { state: 'checked', target: { testId: 'focus-switch' }, value: false } },
-            { action: 'keys', value: ['\uE00D'] },
-            { action: 'wait', until: { state: 'text', target: { testId: 'focus-switch-count' }, value: '3' } },
-            { expect: { state: 'checked', target: { testId: 'focus-switch' }, value: true } },
-          ],
-        },
-      ],
-    } satisfies DesktopStoryTests,
+  wdio: {
+    'toggles exactly once per pointer, Enter, and Space activation': async (context) => {
+      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      if (!requireDesktopFocus(context)) return;
+      const { browser, expect } = context;
+      const control = await browser.$('~focus-switch');
+      const count = await browser.$('~focus-switch-count');
+      await expectNativeState(browser, 'focus-switch', 'checked', false);
+      await control.click();
+      await expectNativeState(browser, 'focus-switch', 'focused', true);
+      await expect(count).toHaveText('1');
+      await expectNativeState(browser, 'focus-switch', 'checked', true);
+      await browser.keys('\uE007');
+      await expect(count).toHaveText('2');
+      await expectNativeState(browser, 'focus-switch', 'checked', false);
+      await browser.keys('\uE00D');
+      await expect(count).toHaveText('3');
+      await expectNativeState(browser, 'focus-switch', 'checked', true);
+    },
   },
 };
 

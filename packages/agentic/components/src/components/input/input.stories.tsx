@@ -3,12 +3,13 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
-import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 import { directComponent } from '@fluentui-react-native/framework-base';
 
 import type { IconElementProps } from '../../primitives/icon/icon.types';
 
 import { Input } from './input';
+import { Button } from '../button/button';
 import type { InputSize, InputVariant } from './input.types';
 
 type StoryGroupProps = {
@@ -25,7 +26,7 @@ const StoryGroup = ({ children, label }: StoryGroupProps) => (
 
 const sampleIcon = { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' } } as const;
 
-const SampleSvgIcon = directComponent<IconElementProps>(({ color, height, width, ...props }) => (
+const SampleSvgIcon = directComponent<IconElementProps>(({ color, height, width, ...props }: IconElementProps) => (
   <View {...props} style={{ alignItems: 'center', height, justifyContent: 'center', width }}>
     <View style={{ backgroundColor: color, borderRadius: 9999, height: (height ?? 20) / 2, width: (width ?? 20) / 2 }} />
   </View>
@@ -67,29 +68,53 @@ const meta: Meta<typeof Input> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Input>;
+type Story = WdioStory<StoryObj<typeof Input>>;
 
 export const Default: Story = {
   tags: ['desktop-e2e'],
-  parameters: {
-    desktopDriver: {
-      version: 1,
-      tests: [
-        {
-          id: 'types-and-clears',
-          title: 'Accepts keyboard input and clears it',
-          requires: ['keyboard'],
-          steps: [
-            { action: 'wait', target: { testId: 'agentic-storybook-input' } },
-            { expect: { state: 'role', target: { testId: 'agentic-storybook-input' }, value: 'textbox' } },
-            { action: 'type', target: { testId: 'agentic-storybook-input' }, text: 'Ada' },
-            { expect: { state: 'value', target: { testId: 'agentic-storybook-input' }, value: 'Ada' } },
-            { action: 'clear', target: { testId: 'agentic-storybook-input' } },
-            { expect: { state: 'value', target: { testId: 'agentic-storybook-input' }, value: '' } },
-          ],
-        },
-      ],
-    } satisfies DesktopStoryTests,
+  wdio: {
+    'accepts keyboard input and clears it': async ({ browser, expect, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+      if (!features.keyboard) {
+        skip('This test requires keyboard input.');
+        return;
+      }
+      const input = await browser.$('~agentic-storybook-input');
+      expect(await input.getTagName()).toBe('textbox');
+      await input.addValue('Ada');
+      await expect(input).toHaveValue('Ada');
+      await input.clearValue();
+      await expect(input).toHaveValue('');
+    },
+  },
+};
+
+export const FocusManagement: Story = {
+  tags: ['desktop-focus'],
+  render: () => (
+    <View style={styles.story}>
+      <Input accessibilityLabel="Editable focus target" testID="focus-input" />
+      <Input accessibilityLabel="Disabled focus target" disabled testID="focus-input-disabled" />
+      <Button content="After the input" testID="focus-input-after" />
+    </View>
+  ),
+  wdio: {
+    'keeps editing keys in the TextInput and skips disabled fields on Tab': async (context) => {
+      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      if (!requireDesktopFocus(context)) return;
+      const { browser, expect } = context;
+      const input = await browser.$('~focus-input');
+      await input.setValue('Ada');
+      await expectNativeState(browser, 'focus-input', 'focused', true);
+      await browser.keys('\uE012');
+      await browser.keys('x');
+      await expect(input).toHaveValue('Adxa');
+      await expectNativeState(browser, 'focus-input', 'focused', true);
+      await browser.keys('\uE004');
+      await expectNativeState(browser, 'focus-input-after', 'focused', true);
+      await expectNativeState(browser, 'focus-input-disabled', 'focused', false);
+    },
   },
 };
 

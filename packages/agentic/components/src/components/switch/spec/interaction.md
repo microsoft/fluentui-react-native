@@ -73,3 +73,9 @@ refs compose with caller refs on the actual interactive slot, without redirectin
 structural root refs. Native self-focus is distinct from descendant events, and
 detach/disable invalidates pending focus requests. Focus visuals observe root
 modality only while focused on the custom path; there is no scene-wide rerender.
+
+## Executable focus coverage
+
+The `FocusManagement` WDIO case requires native focus and checks both change
+counts and UIA checked state after pointer, Enter, and Space activation. A
+rendered thumb or JavaScript count alone does not establish native toggle state.

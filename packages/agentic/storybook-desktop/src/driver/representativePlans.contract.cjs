@@ -9,18 +9,32 @@ async function main() {
   const packageRoot = path.resolve(__dirname, '..', '..');
   const projectRoot = path.resolve(packageRoot, '..', '..', '..', 'apps', 'storybook');
   const desktopDriverRoot = path.dirname(require.resolve('@fluentui-react-native/desktop-driver/package.json'));
-  const [{ makeDesktopStorybookConfig }, { createDesktopStoryManifest }, testing, wdio] = await Promise.all([
-    importFile(path.join(packageRoot, 'lib', 'config', 'index.js')),
-    importFile(path.join(packageRoot, 'lib', 'driver', 'index.js')),
-    importFile(path.join(desktopDriverRoot, 'lib', 'testing', 'index.js')),
-    importFile(path.join(desktopDriverRoot, 'lib', 'wdio', 'index.js')),
-  ]);
+  const [{ makeDesktopStorybookConfig }, { createDesktopStoryManifest }, testing, { runWdioStoryTests }, { NodeDesktopCommandRunner }] =
+    await Promise.all([
+      importFile(path.join(packageRoot, 'lib', 'config', 'index.js')),
+      importFile(path.join(packageRoot, 'lib', 'driver', 'index.js')),
+      importFile(path.join(desktopDriverRoot, 'lib', 'testing', 'index.js')),
+      importFile(path.join(packageRoot, 'lib', 'testing', 'runWdioTests.js')),
+      importFile(path.join(packageRoot, 'lib', 'cli', 'commandRunner.js')),
+    ]);
   const config = makeDesktopStorybookConfig({
     projectRoot,
     storyPackages: ['@fluentui-react-native/components'],
   });
   const manifest = await createDesktopStoryManifest(config, 'windows');
-  const planned = manifest.entries.filter(({ id, tests }) => id.startsWith('components-') && id.endsWith('--default') && tests);
+  if (manifest.entries.some(({ tests }) => tests)) {
+    throw new Error('The component catalog must not contain legacy desktopDriver story plans.');
+  }
+  const fs = require('node:fs');
+  const componentsRoot = config.resolvePackage('@fluentui-react-native/components').root;
+  const typedStories = JSON.parse(fs.readFileSync(path.join(componentsRoot, 'tsconfig.stories.json'), 'utf8')).include;
+  for (const entry of manifest.entries.filter(({ wdio }) => wdio)) {
+    if (!typedStories.includes(entry.sourcePath)) {
+      throw new Error(`WDIO story is not included in test:stories: ${entry.sourcePath}`);
+    }
+  }
+  const selectedIds = new Set(['components-button--default', 'components-checkbox--default', 'components-input--default']);
+  const planned = manifest.entries.filter(({ id }) => selectedIds.has(id));
   const windowRect = { x: 0, y: 0, width: 800, height: 600 };
   const harness = await testing.createDesktopDriverStoryHarness(manifest, {
     windows: [
@@ -82,27 +96,28 @@ async function main() {
       },
     ],
   });
-  const desktop = await wdio.connectDesktopWebdriver({
-    platformName: 'windows',
-    targetId: harness.target.id,
-    url: harness.server.url,
-  });
   try {
     const runOptions = {
       artifactsRoot: process.argv[2],
-      selection: { story: 'components-*--default', tag: 'desktop-e2e' },
+      config,
+      manifest,
+      platform: 'windows',
+      targetId: harness.target.id,
+      url: harness.server.url,
+      story: 'components-{button,checkbox,input}--default',
+      timeoutMs: 5000,
     };
-    const result = await desktop.runStoryTests(runOptions);
-    const repeated = await desktop.runStoryTests(runOptions);
+    const runner = new NodeDesktopCommandRunner({ output: { write: () => true } });
+    const result = await runWdioStoryTests(runOptions, runner);
+    const repeated = await runWdioStoryTests(runOptions, runner);
     process.stdout.write(
       JSON.stringify({
-        planned: planned.map(({ id, tests }) => ({ id, tests: tests.tests.map(({ id: testId }) => testId) })),
+        planned: planned.map(({ id, wdio }) => ({ id, tests: wdio.testNames })),
         repeated,
         result,
       }),
     );
   } finally {
-    await desktop.delete();
     await harness.close();
   }
 }
