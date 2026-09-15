@@ -37,7 +37,7 @@ const nativeDriver: NativeDriverArtifact = {
 
 describe('Desktop Storybook driver manifest', () => {
   test('records native helper and nonce-bound application identity', () => {
-    const config = makeDesktopStorybookConfig({ projectRoot: storybookRoot });
+    const config = makeDesktopStorybookConfig({ projectRoot: storybookRoot, wdio: { timeoutMs: 12_345, tag: 'smoke', reporter: 'tap' } });
     const instance = createDesktopStorybookInstance({
       bundleIdentifierPrefix: config.macosBundleIdentifier,
       projectRoot: config.projectRoot,
@@ -59,6 +59,7 @@ describe('Desktop Storybook driver manifest', () => {
       },
       nativeDriver,
       schemaVersion: 2,
+      wdio: { timeoutMs: 12_345, tag: 'smoke', reporter: 'tap' },
     });
 
     const macosManifest = createDesktopStorybookDriverManifest({

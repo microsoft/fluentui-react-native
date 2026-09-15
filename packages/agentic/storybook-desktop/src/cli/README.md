@@ -58,6 +58,13 @@ the syntax appropriate for that environment. A `--config <path>` option may be
 placed before the subcommand when the configuration does not use a standard
 root filename.
 
+Use `--verbose` before the subcommand to replay complete output from
+successful commands. By default, command output is captured continuously in
+`artifacts/storybook-commands`; failures replay the ordered stdout/stderr log,
+and successful commands emit short summaries. Navigation and test failures
+also emit labeled stderr diagnostics with story/test IDs and underlying
+causes. See [pipeline logging](../../README.md#command-logs-and-pipeline-failures).
+
 ## Command responsibilities
 
 | Command        | Responsibility                                                                                   |
@@ -68,6 +75,7 @@ root filename.
 | `bundle`       | Generate the selected story catalog and produce its release JavaScript bundle through `rnx-cli`. |
 | `build`        | Build the selected native project without launching it.                                          |
 | `run`          | Build and launch the selected native app or configured prebuilt host.                            |
+| `test`         | Run inline `wdio` callbacks against a running driver/app, or discover them with `--list`.        |
 | `smoke`        | Own the server, Metro, app launch, all-story traversal, optional authored tests, and cleanup.    |
 
 The TypeScript API exposes the same operations through
@@ -114,6 +122,16 @@ Metro process is required.
 
 ## End-to-end tests
 
+Use `yarn storybook test --macos --story 'components-button--*'` for executable
+story callbacks. It uses the app's `wdio` settings in `storybook.config.mts`
+and Node's built-in test runner, not a separate WDIO configuration. Start
+`storybook driver` and launch the app first; `--list` needs neither.
+For multiple cases, use a named function collection under the story's `wdio`
+key. `--list` includes names and `--test <name-glob>` filters them. The story
+is the suite scope; each case receives the target `platform` and runs in its
+own worker/session with an independent timeout.
+See [inline test authoring and lifecycle requirements](../../README.md#executable-tests-inside-stories).
+
 Use `smoke` for the standard renderability gate:
 
 ```sh
@@ -127,7 +145,9 @@ yarn storybook smoke --win32 --mode stories-and-tests
 
 `stories` is the default and traverses the complete indexed catalog.
 `stories-and-tests` performs the same traversal and then runs the
-component-authored `desktop-e2e` plans against the native provider. The
+component-authored `desktop-e2e` plans and configured `wdio` callbacks against
+the native provider. Tests are grouped by story ID, including non-default
+stories, and explicitly navigate to their page before running. The
 render-only `stories` mode neither resolves a helper nor starts WebDriver.
 Both modes are preferable to a shell
 chain because they own the exact server, Metro, app identity, traversal, test

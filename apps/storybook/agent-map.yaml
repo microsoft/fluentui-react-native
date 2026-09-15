@@ -27,6 +27,16 @@ services:
   instance:
     command: yarn storybook instance --<platform>
     policy: use-reported-ports-and-target-id
+  executable_tests:
+    command: yarn storybook test --<platform>
+    discovery: yarn storybook test --<platform> --list
+    authoring: top-level wdio callbacks or named callback collections in CSF3 stories
+    config: storybook.config.mts wdio settings
+    lifecycle: attached-session-per-test-with-isolated-node-worker
+    context_platform: macos-or-windows-or-win32-target-endpoint
+    test_filter: --test <name-glob>
+    smoke_mode: stories-and-tests
+    execution: navigate-and-remount-then-run-tests-grouped-by-story
 
 agent_commands:
   generate_manifest: yarn storybook manifest --<platform>
@@ -82,6 +92,8 @@ validation:
     lifecycle: yarn storybook smoke --<platform> --mode stories-and-tests
 
 output_hygiene:
+  - Commands retain merged stdout/stderr logs under artifacts/storybook-commands; failures replay grouped output.
+  - Use --verbose to replay successful-command logs; files update continuously while commands run.
   - Use structured CLI output instead of logging raw channel events.
   - Search large native build logs for errors and final status instead of reading them in full.
   - Keep warning suppression exact; console diagnostics remain available even when LogBox hides a warning.

@@ -3,7 +3,7 @@ const { pathToFileURL } = require('node:url');
 
 async function main() {
   const moduleUrl = pathToFileURL(path.resolve(__dirname, '..', '..', 'lib', 'wdio', 'index.js')).href;
-  const { connectDesktopWebdriver } = await import(moduleUrl);
+  const { attachDesktopWebdriver, connectDesktopWebdriver } = await import(moduleUrl);
   const [url, targetId, artifactsRoot] = process.argv.slice(2);
   const desktop = await connectDesktopWebdriver({
     platformName: 'windows',
@@ -11,7 +11,12 @@ async function main() {
     url,
   });
   try {
-    const manifest = await desktop.browser.desktopListStories();
+    const worker = await attachDesktopWebdriver({
+      url,
+      sessionId: desktop.browser.sessionId,
+      capabilities: desktop.browser.capabilities,
+    });
+    const manifest = await worker.browser.desktopListStories();
     await desktop.browser.desktopExpect({
       state: 'enabled',
       target: { testId: 'button-primary' },

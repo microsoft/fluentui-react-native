@@ -40,3 +40,4 @@ export type {
 } from './makeDesktopStorybookConfig.ts';
 export { FURN_STORYBOOK_PLATFORM, getAllPlatforms, getPlatform, isPlatform, setPlatform } from './platforms.ts';
 export type { Platforms } from './platforms.ts';
+export type { DesktopStorybookWdioOptions } from './wdio.ts';

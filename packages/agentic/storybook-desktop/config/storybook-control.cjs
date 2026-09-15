@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
+const { formatDesktopStorybookError, writeDesktopStorybookFailure } = require('./diagnostics.cjs');
 
 const host = process.env.STORYBOOK_WS_HOST || '127.0.0.1';
 const port = Number(process.env.STORYBOOK_WS_PORT) || 7007;
@@ -69,8 +70,8 @@ async function smoke() {
         }
         process.stdout.write(`rendered ${id}\n`);
       } catch (error) {
-        failures.push({ id, error: error.message });
-        process.stderr.write(`failed ${id}: ${error.message}\n`);
+        failures.push({ id, error: formatDesktopStorybookError(error) });
+        writeDesktopStorybookFailure(`navigation "${id}"`, error);
         if (failFast) {
           break;
         }
@@ -78,7 +79,7 @@ async function smoke() {
     }
 
     if (failures.length > 0) {
-      throw new Error(`${failures.length} of ${entries.length} stories failed to render`);
+      throw new Error(`${failures.length} of ${entries.length} stories failed to render: ${failures.map(({ id }) => id).join(', ')}`);
     }
     process.stdout.write(`Rendered ${entries.length} stories.\n`);
   }
@@ -98,24 +99,29 @@ async function runAuthoredTests() {
     manifest.schemaVersion !== 2 ||
     !['macos', 'win32', 'windows'].includes(manifest.endpoint) ||
     !Number.isInteger(manifest.driverPort) ||
-    typeof manifest.targetId !== 'string'
+    typeof manifest.targetId !== 'string' ||
+    manifest.storyManifest?.schemaVersion !== 1 ||
+    !Array.isArray(manifest.storyManifest.entries)
   ) {
     throw new Error(`Invalid Desktop Driver manifest at ${manifestPath}.`);
   }
 
   const smokeTestsUrl = pathToFileURL(path.join(__dirname, '..', 'lib', 'cli', 'smokeTests.js')).href;
+  const configUrl = pathToFileURL(path.join(__dirname, '..', 'lib', 'config', 'index.js')).href;
   const { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } = await import(smokeTestsUrl);
+  const { makeDesktopStorybookConfig } = await import(configUrl);
   const result = await runDesktopStorybookSmokeTests({
+    config: makeDesktopStorybookConfig({ projectRoot: process.cwd(), wdio: manifest.wdio }),
     // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the Desktop Driver is loopback-only
     driverUrl: `http://127.0.0.1:${manifest.driverPort}`,
+    manifest: manifest.storyManifest,
     platform: manifest.endpoint,
-    projectRoot: process.cwd(),
     targetId: manifest.targetId,
   });
   process.stdout.write(`${formatDesktopStorybookSmokeTestSummary(result)}\n`);
 }
 
 smoke().catch((error) => {
-  process.stderr.write(`${error.message}\n`);
+  writeDesktopStorybookFailure('smoke', error);
   process.exitCode = 1;
 });

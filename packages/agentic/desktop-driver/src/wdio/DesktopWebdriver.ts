@@ -1,7 +1,8 @@
-import { remote } from 'webdriverio';
+import { attach, remote } from 'webdriverio';
 
-import type { DesktopStoryRunResult } from '../authoring/results.js';
+import type { DesktopStoryRunResult, DesktopStoryTestResult } from '../authoring/results.js';
 import type { DesktopStoryExpectation } from '../authoring/storyTests.js';
+import type { DesktopHostFeatures } from '../host/types.js';
 import { ArtifactManager } from '../artifacts/ArtifactManager.js';
 import { createDesktopDriverClient, DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import type { DesktopClickMode, DesktopPlatformName } from '../protocol/types.js';
@@ -15,6 +16,7 @@ declare global {
     interface Capabilities {
       'furn:clickMode'?: 'accessibility' | 'auto' | 'physical';
       'furn:endpoint'?: 'macos' | 'win32' | 'windows';
+      'furn:features'?: Readonly<DesktopHostFeatures>;
       'furn:launchMode'?: 'attach' | 'launch';
       'furn:target'?: string;
     }
@@ -42,6 +44,13 @@ export type DesktopWebdriverRunOptions = {
   artifactsRoot?: string;
   selection?: DesktopStoryTestSelection;
   signal?: AbortSignal;
+  onTestResult?: (result: Readonly<DesktopStoryTestResult>) => void | Promise<void>;
+};
+
+export type DesktopWebdriverAttachment = {
+  capabilities: NonNullable<Parameters<typeof attach>[0]['capabilities']>;
+  sessionId: string;
+  url: string;
 };
 
 export class DesktopWebdriverSession {
@@ -85,6 +94,7 @@ export class DesktopWebdriverSession {
       ...(options.artifactsRoot ? { artifacts: new ArtifactManager(options.artifactsRoot) } : {}),
       endpoint,
       manifest,
+      onTestResult: options.onTestResult,
       platformName,
       selection: options.selection,
       session: this.session,
@@ -99,7 +109,6 @@ export class DesktopWebdriverSession {
 }
 
 export async function connectDesktopWebdriver(options: DesktopWebdriverOptions): Promise<DesktopWebdriverSession> {
-  const url = new URL(options.url);
   const capabilities = Object.assign(
     {
       browserName: 'furn-native-desktop',
@@ -112,14 +121,39 @@ export async function connectDesktopWebdriver(options: DesktopWebdriverOptions):
     },
   );
   const browser = await remote({
+    ...connectionOptions(options.url),
     capabilities,
-    hostname: url.hostname,
     logLevel: options.logLevel ?? 'silent',
-    path: url.pathname === '/' ? '/' : url.pathname,
-    port: Number(url.port),
-    protocol: url.protocol.replace(':', '') as 'http' | 'https',
   });
-  const client = createDesktopDriverClient({ url: options.url });
+  return bindDesktopCommands(browser, options.url);
+}
+
+/** The caller retains ownership of the existing session and must delete it after the worker exits. */
+export async function attachDesktopWebdriver(options: DesktopWebdriverAttachment): Promise<DesktopWebdriverSession> {
+  const browser = await attach({
+    ...connectionOptions(options.url),
+    capabilities: options.capabilities,
+    sessionId: options.sessionId,
+    options: { logLevel: 'silent' },
+  });
+  return bindDesktopCommands(browser, options.url);
+}
+
+function connectionOptions(address: string) {
+  const url = new URL(address);
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+    throw new TypeError('Desktop WebDriver requires an HTTP or HTTPS URL.');
+  }
+  return {
+    hostname: url.hostname,
+    path: url.pathname,
+    port: Number(url.port || (url.protocol === 'https:' ? 443 : 80)),
+    protocol: url.protocol === 'https:' ? ('https' as const) : ('http' as const),
+  };
+}
+
+function bindDesktopCommands(browser: WebdriverIO.Browser, url: string): DesktopWebdriverSession {
+  const client = createDesktopDriverClient({ url });
   const session = new DesktopSessionClient(client, browser.sessionId, Object.fromEntries(Object.entries(browser.capabilities)));
   const desktop = new DesktopWebdriverSession(browser, session);
 

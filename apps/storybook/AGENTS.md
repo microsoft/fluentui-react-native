@@ -45,11 +45,24 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
   commands against that listener.
 - macOS, Windows, and Win32 use their source-built native helpers. Keep the
   deterministic fake provider limited to package contract tests.
-- Authored tests belong in component story `parameters.desktopDriver`, not in
-  this app. The app owns identity, package discovery, platform exclusions, and
-  generated manifests.
+- Author new tests as component story `wdio` functions or named function
+  collections, not app-local test scripts. Button demonstrates migration from
+  the legacy `parameters.desktopDriver` plans, which remain supported.
+  The app owns identity, package discovery, platform exclusions, and manifests.
+- Run executable tests with `yarn storybook test --<platform>` and optionally
+  `--test <name-glob>`. Callbacks receive the target endpoint as `platform`;
+  each named case gets an isolated worker/session and fresh preview. Defaults belong in
+  `storybook.config.mts` under `wdio`; the shared Babel config removes
+  callbacks from native bundles. `stories-and-tests` smoke mode runs configured
+  callbacks together with static plans, grouped by story. Always navigate to
+  the requested story and await correlated readiness before executing tests.
 - Keep `storybook-desktop.generated`, reports, trees, screenshots, and run
   manifests ignored. Never patch generated runtime identity or story manifests.
+- Shared command logs merge stdout/stderr in write order under
+  `artifacts/storybook-commands`. Failed commands replay the complete log;
+  `--verbose` also replays successful commands. Preserve labeled stderr
+  diagnostics and nested failure causes rather than replacing them with
+  exit-code-only summaries.
 - Treat the exact-platform and portable-plan digests as contracts. A dynamic or
   invalid plan must fail generation rather than disappear from the manifest.
 - Preserve nonce-authenticated runtime hello/readiness/error messages and

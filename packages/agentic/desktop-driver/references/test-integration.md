@@ -50,6 +50,28 @@ The runner resets the preview for each test, filters and shards a stable
 `storyId/testId` ordering, checks required capabilities, and classifies
 assertion, timeout, cancellation, skip, and infrastructure outcomes.
 
+Pass `onTestResult(result)` to `runStoryTests` or `runDesktopStoryTests` to
+receive each settled test result before the next test starts. This supports
+immediate pipeline diagnostics without parsing the final artifact report.
+The callback receives a read-only result and is awaited; serializable authored plans and
+result formats remain unchanged.
+
+An external supervisor can share an existing session with an isolated Node
+worker using `attachDesktopWebdriver({ url, sessionId, capabilities })`.
+This registers the same custom commands without creating a second session.
+The supervisor retains ownership and must call `delete()` after the worker
+exits, including on assertion failures, timeouts, or crashes.
+
+Storybook's preferred top-level `wdio` functions and named function collections
+use this pattern with Node's built-in test runner. Each function receives the
+target `platform` (`macos`, `windows`, or `win32`), and each named case gets an
+independent worker/session. Native feature flags are typed on the WebdriverIO
+browser's `furn:features` capability. Button now uses this authoring pattern
+instead of serializable plans. Extraction, native-bundle stripping, runner
+configuration, and source freshness belong to
+[`storybook-desktop`](../../storybook-desktop/README.md#executable-tests-inside-stories),
+not this Storybook-independent package. Static plans below are unchanged.
+
 ## Author portable story plans
 
 Plans are static JSON under `parameters.desktopDriver`. Import only their types

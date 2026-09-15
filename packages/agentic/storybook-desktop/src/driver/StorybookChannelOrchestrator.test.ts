@@ -36,6 +36,11 @@ class FakeChannelClient {
       listener();
     }
   }
+
+  authenticate(): void {
+    this.receive('storyRendered', 'components-button--default');
+    this.receive('furn:desktop:hello', runtimeHello);
+  }
 }
 
 class FakeChannelServer implements StorybookChannelServer {
@@ -112,12 +117,153 @@ const driverManifest: DesktopStorybookDriverManifest = {
   testIDPrefix: 'agentic-storybook',
 };
 
+const runtimeHello = {
+  endpoint: 'windows',
+  instanceId: 'instance',
+  nonce: 'nonce',
+  platformManifestDigest: 'platform-digest',
+  targetId: 'agenticstorybook-windows',
+  version: 1,
+};
+
 describe('StorybookChannelOrchestrator', () => {
+  const errorOutput = { write: jest.fn() };
+  const createOrchestrator = (options: ConstructorParameters<typeof StorybookChannelOrchestrator>[0]) =>
+    new StorybookChannelOrchestrator({ ...options, errorOutput });
+  beforeEach(() => errorOutput.write.mockClear());
+
+  test('waits for the authenticated preview to initialize before navigating, including after an app restart', async () => {
+    const channelServer = new FakeChannelServer();
+    const client = new FakeChannelClient();
+    const unrelatedClient = new FakeChannelClient();
+    channelServer.connect(client);
+    channelServer.connect(unrelatedClient);
+    const fetch = jest.fn(async () => new Response('{}'));
+    const orchestrator = createOrchestrator({
+      channelServer,
+      driverManifest,
+      fetch,
+      serverUrl: 'https://localhost',
+      timeoutMs: 1000,
+    });
+
+    for (const [index, runtime] of [client, new FakeChannelClient()].entries()) {
+      if (index > 0) {
+        client.close();
+        channelServer.connect(runtime);
+      }
+      runtime.receive('furn:desktop:hello', runtimeHello);
+      const request = { requestId: `request-${index}`, runId: `run-${index}`, storyId: 'components-button--default' };
+      const selection = orchestrator.selectStory(request);
+      unrelatedClient.receive('storyRendered', request.storyId);
+      await Promise.resolve();
+      expect(fetch).toHaveBeenCalledTimes(index);
+      expect(runtime.sent.some((message) => JSON.parse(message).type === 'furn:desktop:prepare-story')).toBe(false);
+
+      runtime.receive('storyRendered', request.storyId);
+      await Promise.resolve();
+      expect(fetch).toHaveBeenCalledTimes(index + 1);
+      runtime.receive('furn:desktop:story-ready', {
+        ...request,
+        portablePlanDigest: 'portable-digest',
+        previewGeneration: 1,
+      });
+      await expect(selection).resolves.toMatchObject({ runId: request.runId });
+    }
+  });
+
+  test('reports the requested story, run and HTTP failure details to the server error output', async () => {
+    const channelServer = new FakeChannelServer();
+    const client = new FakeChannelClient();
+    channelServer.connect(client);
+    const orchestrator = createOrchestrator({
+      channelServer,
+      driverManifest,
+      serverUrl: 'https://localhost',
+      timeoutMs: 100,
+      fetch: jest.fn(async () => new Response('preview module failed to load', { status: 500 })),
+    });
+
+    client.authenticate();
+    await expect(
+      orchestrator.selectStory({ requestId: 'failure', runId: 'pipeline-run', storyId: 'components-button--default' }),
+    ).rejects.toThrow('preview module failed to load');
+    expect(errorOutput.write).toHaveBeenCalledWith(expect.stringContaining('navigation "components-button--default" (run pipeline-run)'));
+    expect(errorOutput.write).toHaveBeenCalledWith(expect.stringContaining('status 500: preview module failed to load'));
+  });
+
+  test('reset navigates from a different page, including after manual navigation away from the last prepared story', async () => {
+    const channelServer = new FakeChannelServer();
+    const client = new FakeChannelClient();
+    channelServer.connect(client);
+    let page = 'unrelated--story';
+    let generation = 0;
+    const fetch = jest.fn(async (url: Parameters<typeof globalThis.fetch>[0]) => {
+      page = decodeURIComponent(String(url).split('/').at(-1)!);
+      const request = JSON.parse(client.sent.at(-1)!).args[0];
+      client.receive('furn:desktop:story-ready', {
+        ...request,
+        storyId: page,
+        previewGeneration: ++generation,
+        portablePlanDigest: 'portable-digest',
+      });
+      return new Response('{}');
+    });
+    const orchestrator = createOrchestrator({
+      channelServer,
+      driverManifest,
+      fetch,
+      serverUrl: 'https://localhost',
+      timeoutMs: 100,
+    });
+    client.authenticate();
+
+    await expect(
+      orchestrator.resetStory({ requestId: 'first', runId: 'first', storyId: 'components-button--default' }),
+    ).resolves.toMatchObject({ storyId: 'components-button--default', previewGeneration: 1 });
+    expect(page).toBe('components-button--default');
+    page = 'manually-selected--story';
+    await expect(
+      orchestrator.resetStory({ requestId: 'second', runId: 'second', storyId: 'components-button--default' }),
+    ).resolves.toMatchObject({ storyId: 'components-button--default', previewGeneration: 2 });
+    expect(page).toBe('components-button--default');
+    expect(fetch).toHaveBeenCalledTimes(2);
+  });
+
+  test('bounds navigation even when the runtime is ready but the HTTP selection request never completes', async () => {
+    const channelServer = new FakeChannelServer();
+    const client = new FakeChannelClient();
+    channelServer.connect(client);
+    let signal: AbortSignal | null | undefined;
+    const fetch = jest.fn((_url: Parameters<typeof globalThis.fetch>[0], options?: RequestInit) => {
+      signal = options?.signal;
+      const request = JSON.parse(client.sent.at(-1)!).args[0];
+      client.receive('furn:desktop:story-ready', {
+        ...request,
+        portablePlanDigest: 'portable-digest',
+        previewGeneration: 1,
+      });
+      return new Promise<Response>(() => {});
+    });
+    const orchestrator = createOrchestrator({
+      channelServer,
+      driverManifest,
+      fetch,
+      serverUrl: 'https://localhost',
+      timeoutMs: 10,
+    });
+    client.authenticate();
+    await expect(orchestrator.selectStory({ requestId: 'request', runId: 'run', storyId: 'components-button--default' })).rejects.toThrow(
+      'Timed out navigating',
+    );
+    expect(signal?.aborted).toBe(true);
+  });
+
   test('authenticates the runtime and correlates selection readiness', async () => {
     const channelServer = new FakeChannelServer();
     const client = new FakeChannelClient();
     channelServer.connect(client);
-    const orchestrator = new StorybookChannelOrchestrator({
+    const orchestrator = createOrchestrator({
       channelServer,
       driverManifest,
       fetch: jest.fn(async () => new Response('{}', { status: 408 })),
@@ -125,14 +271,7 @@ describe('StorybookChannelOrchestrator', () => {
       serverUrl: 'http://127.0.0.1:7007',
       timeoutMs: 1000,
     });
-    client.receive('furn:desktop:hello', {
-      endpoint: 'windows',
-      instanceId: 'instance',
-      nonce: 'nonce',
-      platformManifestDigest: 'platform-digest',
-      targetId: 'agenticstorybook-windows',
-      version: 1,
-    });
+    client.authenticate();
     expect(JSON.parse(client.sent[0])).toEqual({ type: 'furn:desktop:request-hello', args: [] });
     client.sent.length = 0;
 
@@ -170,7 +309,7 @@ describe('StorybookChannelOrchestrator', () => {
     channelServer.connect(unauthenticatedClient);
     let finishFetch: ((response: Response) => void) | undefined;
     const fetch = jest.fn(() => new Promise<Response>((resolve) => (finishFetch = resolve)));
-    const orchestrator = new StorybookChannelOrchestrator({
+    const orchestrator = createOrchestrator({
       channelServer,
       driverManifest,
       fetch,
@@ -178,14 +317,7 @@ describe('StorybookChannelOrchestrator', () => {
       serverUrl: 'http://127.0.0.1:7007',
       timeoutMs: 1000,
     });
-    client.receive('furn:desktop:hello', {
-      endpoint: 'windows',
-      instanceId: 'instance',
-      nonce: 'nonce',
-      platformManifestDigest: 'platform-digest',
-      targetId: 'agenticstorybook-windows',
-      version: 1,
-    });
+    client.authenticate();
 
     const selection = orchestrator.selectStory({
       requestId: 'request-error',
@@ -212,13 +344,12 @@ describe('StorybookChannelOrchestrator', () => {
     await Promise.resolve();
     expect(settled).toBe(false);
     client.receive('furn:desktop:story-error', errorPayload);
-    finishFetch?.(new Response('{}'));
-
     await expect(selection).rejects.toThrow('render failed');
+    finishFetch?.(new Response('{}'));
   });
 
   test('rejects stories outside the exact platform manifest', async () => {
-    const orchestrator = new StorybookChannelOrchestrator({
+    const orchestrator = createOrchestrator({
       channelServer: new FakeChannelServer(),
       driverManifest,
       fetch: jest.fn(),
@@ -236,7 +367,7 @@ describe('StorybookChannelOrchestrator', () => {
     const channelServer = new FakeChannelServer();
     const client = new FakeChannelClient();
     channelServer.connect(client);
-    const orchestrator = new StorybookChannelOrchestrator({
+    const orchestrator = createOrchestrator({
       channelServer,
       driverManifest,
       fetch: jest.fn(),
@@ -244,14 +375,7 @@ describe('StorybookChannelOrchestrator', () => {
       serverUrl: 'http://127.0.0.1:7007',
       timeoutMs: 10,
     });
-    client.receive('furn:desktop:hello', {
-      endpoint: 'windows',
-      instanceId: 'instance',
-      nonce: 'nonce',
-      platformManifestDigest: 'platform-digest',
-      targetId: 'agenticstorybook-windows',
-      version: 1,
-    });
+    client.authenticate();
     client.readyState = 3;
 
     await expect(
