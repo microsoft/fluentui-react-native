@@ -10,7 +10,7 @@ import type { RadioState } from './radio.types';
  */
 export function renderRadio_unstable(state: RadioState) {
   return (
-    <state.root>
+    <state.root ref={state.focusTargetRef}>
       {state.FocusRing && <state.FocusRing />}
       <View {...hiddenFromAccessibilityProps} testID="radio-indicator" style={state.indicatorStyle}>
         <View testID="radio-dot" style={state.indicatorDotStyle} />

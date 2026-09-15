@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, TextStyle, View, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
@@ -50,6 +51,7 @@ export type MenuItemProps = MenuItemStateProps & {
 } & ComponentProps<MenuItemSlots, MenuItemExposedPressableProps>;
 
 export type MenuItemState = ComponentState<MenuItemSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<MenuItemStateProps> &
   ThemeState & {
     contentText: string;

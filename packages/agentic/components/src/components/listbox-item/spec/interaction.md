@@ -24,3 +24,11 @@ intercept input; native ring appearance remains renderer-owned.
 Windows and macOS provide platform keyboard activation for the focusable
 Pressable. Arrow navigation, Home/End, type-ahead, submenu control, dismissal,
 and focus return are outside this component. No timed animation is implemented.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.

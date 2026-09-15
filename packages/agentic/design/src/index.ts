@@ -23,9 +23,11 @@ export {
   normalizeThemeAppearanceRequest,
   resolveThemeAppearance,
   RootContext,
+  RootInputBoundary,
   ThemedRoot,
   ThemeProvider,
   useRootSettings,
+  useRootInputModality,
 } from './theming/modern';
 export type {
   FlexThemeInput,

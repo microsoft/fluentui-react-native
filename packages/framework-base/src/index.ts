@@ -51,6 +51,12 @@ export { withSlots } from './component-patterns/withSlots';
  */
 export { usePressableState } from './hooks/usePressableState';
 export type { UsePressableResult } from './hooks/usePressableState';
+export { useFocusTarget } from './hooks/useFocusTarget';
+export type { FocusTargetBinding, UseFocusTargetResult } from './hooks/useFocusTarget';
+export type { FocusTarget, FocusTargetSnapshot, FocusRequest, FocusRequestStatus, FocusIntent } from './hooks/focusTarget';
+export { isSelfTargetEvent } from './hooks/focusTarget';
+export { useFocusablePressable } from './hooks/useFocusablePressable';
+export type { FocusablePressableProps, FocusKeyboardEvent } from './hooks/useFocusablePressable';
 export { useFocusVisible } from './hooks/useFocusVisible';
 export type { FocusVisibleKeyEvent, FocusVisiblePressableProps, UseFocusVisibleResult } from './hooks/useFocusVisible';
 export { useReducedMotion } from './hooks/useReducedMotion';

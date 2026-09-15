@@ -47,7 +47,7 @@ export function renderListboxItem_unstable(state: ListboxItemState) {
   const ActiveIcon = state.selected ? (state.selectedIcon ?? state.icon) : state.icon;
 
   return (
-    <state.root>
+    <state.root ref={state.focusTargetRef}>
       {state.FocusRing && <state.FocusRing />}
       <CompoundItemLayout
         contentStyle={state.secondaryContentPosition === 'under' ? listboxItemStyles.contentColumn : listboxItemStyles.contentRow}

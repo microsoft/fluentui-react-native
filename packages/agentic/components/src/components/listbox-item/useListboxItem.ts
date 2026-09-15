@@ -1,7 +1,7 @@
 import { Pressable, Text as NativeText, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
-import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { semanticIconSources } from '../../common/iconSources';
@@ -62,13 +62,13 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
       }
     : accessibilityState;
 
-  const [rootProps, pressableState] = usePressableState({
+  const [rootProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
     accessibilityRole: isListItem ? 'button' : 'header',
     accessibilityState: rootAccessibilityState,
     accessible: rest.accessible ?? true,
     disabled: isListItem ? disabled : false,
-    focusable: rest.focusable ?? (isListItem && !disabled),
+    focusable: isListItem && !disabled && (rest.focusable ?? true),
   });
 
   const { onBlur, onFocus, onHoverIn, onHoverOut, onLongPress, onPress, onPressIn, onPressOut, ...headerRest } = rootProps;
@@ -85,6 +85,7 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     FocusRing: isListItem ? FocusRing : undefined,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     avatar,
     checkboxIndicator,
     checkmark,

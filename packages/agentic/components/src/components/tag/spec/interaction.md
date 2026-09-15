@@ -72,3 +72,11 @@ from the start of the line rather than stretching. A tag in a constrained row
 therefore compresses its text while keeping both glyphs at full size. Truncation
 behavior beyond that belongs to the caller, which can pass text props through
 the content slot.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.

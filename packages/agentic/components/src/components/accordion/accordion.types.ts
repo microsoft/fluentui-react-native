@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { AccessibilityState, Pressable, StyleProp, View, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
@@ -94,6 +95,7 @@ export type AccordionRootProps = OwnedRootProps<
 export type AccordionProps = AccordionStateProps & ComponentProps<AccordionSlots, AccordionRootProps>;
 
 export type AccordionState = ComponentState<AccordionStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<Pick<AccordionStateProps, 'layout' | 'size'>> &
   ThemeState &
   PressableState & {

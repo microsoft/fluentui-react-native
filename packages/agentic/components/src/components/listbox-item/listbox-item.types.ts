@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, Text as NativeText, View, ViewStyle } from 'react-native';
 import type { StyleProp } from 'react-native';
 
@@ -58,6 +59,7 @@ export type ListboxItemRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressabl
 export type ListboxItemProps = ListboxItemStateProps & ComponentProps<ListboxItemSlots, ListboxItemRootProps>;
 
 export type ListboxItemState = ComponentState<ListboxItemStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<ListboxItemStateProps> &
   ThemeState &
   PressableState & {

@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, Text as NativeText, View, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
@@ -65,6 +66,7 @@ export type ListItemMetrics = {
 };
 
 export type ListItemState = ComponentState<ListItemStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<ListItemStateProps> &
   ThemeState &
   PressableState & {

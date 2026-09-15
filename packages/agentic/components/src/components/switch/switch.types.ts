@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, View, ViewStyle } from 'react-native';
 
 import type {
@@ -46,6 +47,7 @@ export type SwitchExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof P
 export type SwitchProps = SwitchStateProps & ComponentProps<SwitchSlots, SwitchExposedPressableProps>;
 
 export type SwitchState = ComponentState<SwitchStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<Pick<SwitchStateProps, 'disabled' | 'label' | 'labelAfter' | 'labelBefore' | 'layout'>> &
   ThemeState &
   PressableState & {

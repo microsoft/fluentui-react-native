@@ -18,15 +18,14 @@ track, the thumb, and any rendered label.
 
 ## Keyboard
 
-Tab moves focus to the hit area while it is enabled. The component recognizes
-Enter, Space, and the platform spellings of the space key on key up. It also
-registers the normal `Pressable` action handler. If a native platform
-synthesizes that action for the same key, both paths request a toggle; this
-event sequence remains a documented verification gap.
+Tab moves focus to the hit area while enabled. Switch changes value only through
+its press action or the native `Toggle` accessibility action. It does not add a
+second key-up toggle. The shared focusable-pressable helper preserves native
+activation and adds a paired Win32 fallback only for otherwise-unrecognized
+native key codes. Caller key/accessibility handlers remain forwarded.
 
-The caller's key handler runs before the explicit key-up toggle, so a caller can
-observe the key first. Nothing else is bound; the switch does not respond to
-arrow keys, and moving through a group of switches is plain tab order.
+Enter/Space activate on the renderer's phase: key-up on Windows/Win32 and
+key-down on macOS. The switch does not claim arrow navigation.
 
 ## Focus visual
 
@@ -66,3 +65,11 @@ When the caller supplies `checked`, the interaction still reports through
 passes a new `checked`. A caller that ignores `onChange` therefore gets a switch
 that visibly refuses to change, which is a bug in the caller rather than in the
 component. Only omit `checked` when the switch is free to own its own value.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.

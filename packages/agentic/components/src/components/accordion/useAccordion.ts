@@ -5,7 +5,7 @@ import { useThemeState } from '@fluentui-react-native/design';
 import {
   useAccessibilityLabelWarning,
   useOptionalSlot,
-  usePressableState,
+  useFocusablePressable,
   useSlot,
   useToggleState,
 } from '@fluentui-react-native/framework-base';
@@ -55,7 +55,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
   const toggleExpanded = expansion.toggle;
 
   const themeState = useThemeState();
-  const [headerProps, pressableState] = usePressableState({
+  const [headerProps, pressableState, focusBinding] = useFocusablePressable({
     accessibilityControls: bodyId,
     accessibilityHint,
     accessibilityLabel,
@@ -136,6 +136,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
     userStyle,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     focused: focusedProp ?? pressableState.focused,
   };
 }

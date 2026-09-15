@@ -51,7 +51,7 @@ describe('useFocusVisuals', () => {
     expect(Boolean(seen[0].FocusRing)).toBe(!useSystemFocusRing);
   });
 
-  it('queries the current root modality on renders without a local modality tracker', async () => {
+  it('updates the focused ring on modality changes without manually rerendering', async () => {
     const seen: FocusVisualsState[] = [];
     const component = await render(<Probe focused={false} seen={seen} useSystemFocusRing={false} />);
     const ring = component.getByTestId('focus-visual', { includeHiddenElements: true });
@@ -64,8 +64,13 @@ describe('useFocusVisuals', () => {
     expect(StyleSheet.flatten(ring.props.style).opacity).toBeUndefined();
 
     await fireEvent(component.getByTestId('test-scene-root'), 'pointerDownCapture', {});
-    await component.rerender(<Probe focused seen={seen} useSystemFocusRing={false} />);
     expect(StyleSheet.flatten(ring.props.style).opacity).toBe(0);
+    await fireEvent(component.getByTestId('test-scene-root'), 'keyDownCapture', { nativeEvent: { key: 'Tab' } });
+    expect(StyleSheet.flatten(ring.props.style).opacity).toBeUndefined();
+    await component.rerender(<Probe focused={false} seen={seen} useSystemFocusRing={false} />);
+    const unfocusedCount = seen.length;
+    await fireEvent(component.getByTestId('test-scene-root'), 'pointerDownCapture', {});
+    expect(seen).toHaveLength(unfocusedCount);
     expect(seen.every(({ FocusRing }) => FocusRing === slot)).toBe(true);
     expect(component.getByTestId('focus-visual', { includeHiddenElements: true })).toBe(ring);
   });

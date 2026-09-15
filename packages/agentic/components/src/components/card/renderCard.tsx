@@ -10,7 +10,7 @@ export function renderCard_unstable(state: CardState) {
 
   return (
     <state.root>
-      {state.overlay && <state.overlay>{state.FocusRing && <state.FocusRing />}</state.overlay>}
+      {state.overlay && <state.overlay ref={state.focusTargetRef}>{state.FocusRing && <state.FocusRing />}</state.overlay>}
       {shouldRenderSlots && state.header && <state.header />}
       <state.content />
       {shouldRenderNestedContent && state.content02 && <state.content02 />}

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Tab } from '../tab/tab';
 import { TabList } from './tablist';
@@ -44,6 +45,50 @@ export const Default: Story = {
       <Tab controls="settings-panel" content="Settings" key="settings" value="settings" />,
     ],
     defaultSelectedValue: 'overview',
+  },
+};
+
+function FocusManagementScene() {
+  const [selectedValue, setSelectedValue] = useState('focus-panel-one');
+  return (
+    <View>
+      <TabList accessibilityLabel="Focus navigation" selectedValue={selectedValue} onSelectionChange={setSelectedValue}>
+        <Tab controls="focus-panel-one" content="One" testID="focus-tab-one" />
+        <Tab controls="focus-panel-disabled" content="Disabled" disabled testID="focus-tab-disabled" />
+        <Tab controls="focus-panel-two" content="Two" testID="focus-tab-two" />
+      </TabList>
+      <Text testID="focus-tab-selection">{selectedValue}</Text>
+    </View>
+  );
+}
+
+export const FocusManagement: Story = {
+  render: () => <FocusManagementScene />,
+  tags: ['desktop-focus'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'committed-roving-focus',
+          platforms: ['windows', 'win32'],
+          requires: ['physical-click', 'keyboard', 'focus'],
+          steps: [
+            { action: 'wait', target: { testId: 'focus-tab-one' } },
+            { action: 'click', target: { testId: 'focus-tab-one' } },
+            { expect: { state: 'focused', target: { testId: 'focus-tab-one' }, value: true } },
+            { action: 'keys', value: ['\uE014'] },
+            { action: 'wait', until: { state: 'focused', target: { testId: 'focus-tab-two' }, value: true } },
+            { expect: { state: 'text', target: { testId: 'focus-tab-selection' }, value: 'focus-panel-two' } },
+            { expect: { state: 'selected', target: { testId: 'focus-tab-two' }, value: true } },
+            { action: 'keys', value: ['\uE011'] },
+            { action: 'wait', until: { state: 'focused', target: { testId: 'focus-tab-one' }, value: true } },
+            { expect: { state: 'text', target: { testId: 'focus-tab-selection' }, value: 'focus-panel-one' } },
+            { expect: { state: 'selected', target: { testId: 'focus-tab-one' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
   },
 };
 

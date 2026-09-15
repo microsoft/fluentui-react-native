@@ -19,7 +19,7 @@ export function renderListItem_unstable(state: ListItemState) {
   ];
 
   return (
-    <state.root>
+    <state.root ref={state.focusTargetRef}>
       {state.FocusRing && <state.FocusRing />}
       {state.selectionIndicator && <state.selectionIndicator />}
       <CompoundItemLayout

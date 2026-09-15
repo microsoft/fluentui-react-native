@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
@@ -49,6 +50,7 @@ export type RadioExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pr
 export type RadioProps = RadioStateProps & ComponentProps<RadioSlots, RadioExposedPressableProps>;
 
 export type RadioState = ComponentState<RadioSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<RadioStateProps> &
   ThemeState &
   PressableState & {

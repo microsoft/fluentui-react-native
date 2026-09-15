@@ -25,3 +25,11 @@ intercept input; native ring appearance remains renderer-owned.
 An owning group must move focus with directional keys, establish the group
 entry point, update selected peers, and return focus when its surrounding
 surface closes.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.

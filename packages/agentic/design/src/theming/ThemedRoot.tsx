@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 
 import { useThemeBoundary } from './context';
 import { FlexThemeReference } from './flexThemeReference';
 import { RootContext } from './rootContext';
-import type { InputModality } from './rootContext';
+import { createRootInputController, RootInputContext } from './rootInputController';
+import { useRootInputProps } from './useRootInputProps';
 import { ThemeProvider } from './ThemeProvider';
 import type { ThemeProviderProps } from './ThemeProvider';
 
@@ -27,50 +28,15 @@ const defaultTheme = new FlexThemeReference();
 export const ThemedRoot = React.forwardRef<View, ThemedRootProps>((props, ref) => {
   const { theme, appearance, appearanceSource, fallbackAppearance, children, ...viewProps } = props;
   const parentTheme = useThemeBoundary();
-  const parentRoot = React.useContext(RootContext);
-  const localRoot = React.useRef<{ inputModality: InputModality }>({ inputModality: 'pointer' });
+  const parentController = React.useContext(RootInputContext);
+  const [localController] = React.useState(createRootInputController);
+  const controller = parentController ?? localController;
   const inheritedTheme = theme === undefined ? parentTheme : undefined;
   const resolvedFallback = React.useMemo(
     () => ({ ...inheritedTheme?.fallbackAppearance, ...fallbackAppearance }),
     [inheritedTheme?.fallbackAppearance, fallbackAppearance],
   );
-  const { onKeyDown, onKeyDownCapture, onPointerDownCapture, onStartShouldSetResponderCapture } = viewProps;
-  const trackKeyDown = React.useCallback<NonNullable<IViewProps['onKeyDown']>>(
-    (event) => {
-      localRoot.current.inputModality = 'keyboard';
-      onKeyDown?.(event);
-    },
-    [onKeyDown],
-  );
-  const trackKeyDownCapture = React.useCallback<NonNullable<IViewProps['onKeyDownCapture']>>(
-    (event) => {
-      localRoot.current.inputModality = 'keyboard';
-      onKeyDownCapture?.(event);
-    },
-    [onKeyDownCapture],
-  );
-  const trackPointerDown = React.useCallback<NonNullable<IViewProps['onPointerDownCapture']>>(
-    (event) => {
-      localRoot.current.inputModality = 'pointer';
-      onPointerDownCapture?.(event);
-    },
-    [onPointerDownCapture],
-  );
-  const trackTouchStart = React.useCallback<NonNullable<IViewProps['onStartShouldSetResponderCapture']>>(
-    (event) => {
-      localRoot.current.inputModality = 'pointer';
-      return onStartShouldSetResponderCapture?.(event) ?? false;
-    },
-    [onStartShouldSetResponderCapture],
-  );
-  const trackingProps: IViewProps = parentRoot
-    ? {}
-    : {
-        // Keep the bubbling handler too: desktop native views use it to enable key events.
-        ...(Platform.OS !== 'ios' && Platform.OS !== 'android' ? { onKeyDown: trackKeyDown, onKeyDownCapture: trackKeyDownCapture } : {}),
-        onPointerDownCapture: trackPointerDown,
-        onStartShouldSetResponderCapture: trackTouchStart,
-      };
+  const trackingProps = useRootInputProps(viewProps, controller, !parentController);
 
   return (
     <ThemeProvider
@@ -79,11 +45,13 @@ export const ThemedRoot = React.forwardRef<View, ThemedRootProps>((props, ref) =
       appearanceSource={appearanceSource ?? inheritedTheme?.appearanceSource}
       fallbackAppearance={resolvedFallback}
     >
-      <RootContext.Provider value={parentRoot ?? localRoot.current}>
-        <View {...viewProps} {...trackingProps} ref={ref}>
-          {children}
-        </View>
-      </RootContext.Provider>
+      <RootInputContext.Provider value={controller}>
+        <RootContext.Provider value={controller.settings}>
+          <View {...viewProps} {...trackingProps} ref={ref}>
+            {children}
+          </View>
+        </RootContext.Provider>
+      </RootInputContext.Provider>
     </ThemeProvider>
   );
 });

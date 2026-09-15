@@ -126,11 +126,9 @@ These hook options do not add new component props. Scenes require `ThemedRoot`.
 ## Platform behavior
 
 The root is focusable while enabled and drops out of the tab order when
-disabled. It has both a normal `Pressable` action handler and an explicit
-key-up handler for Enter, Space, and platform spellings of the space key. The
-caller key handler runs first. Whether a platform also synthesizes the normal
-press for one of those keys requires native verification because both paths
-currently request a toggle.
+disabled. Shared `useFocusablePressable` owns keyboard/press coordination.
+Switch does not add a second key-up toggle, and declares the native `Toggle`
+accessibility action while preserving caller actions and handlers.
 
 On Windows the root maps to a UI Automation toggle element and the on and off
 state is exposed both through the native accessibility state and through the
@@ -147,12 +145,12 @@ interpolates colors, which the native driver cannot animate.
 
 `native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
-| ID                                | Disposition | React Native contract                                                                                                                                                                 | Follow-up                                                                                                    |
-| --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `switch-label-association-ids`    | Resolved    | When the caller supplies no name, the component copies visible label text to the root as the single accessible-name mechanism and emits no unresolved labelled-by references.         | Implemented in `useSwitch.ts` and covered by naming tests.                                                   |
-| `switch-label-spacing`            | Accepted    | One container gap separates the control from whichever labels render. Flex distinguishes inner and outer label spacing per side.                                                      | None. A single gap is the natural React Native flex-container expression and matches the inner spacing step. |
-| `switch-focus-modality`           | Accepted    | Custom visibility follows keyboard modality from the scene root rather than a component-local pointer tracker. Native appearance remains renderer-owned.                              | Preserve the shared hook and component modality matrix.                                                      |
-| `switch-keyboard-activation-path` | Deferred    | FURN registers both `onPress` and a recognized-key `onKeyUp` toggle. If Windows or macOS `Pressable` also synthesizes `onPress` for that key, one activation can request two toggles. | Verify the native event sequence, then remove the redundant path or document the platform-specific handler.  |
+| ID                                | Disposition | React Native contract                                                                                                                                                         | Follow-up                                                                                                    |
+| --------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `switch-label-association-ids`    | Resolved    | When the caller supplies no name, the component copies visible label text to the root as the single accessible-name mechanism and emits no unresolved labelled-by references. | Implemented in `useSwitch.ts` and covered by naming tests.                                                   |
+| `switch-label-spacing`            | Accepted    | One container gap separates the control from whichever labels render. Flex distinguishes inner and outer label spacing per side.                                              | None. A single gap is the natural React Native flex-container expression and matches the inner spacing step. |
+| `switch-focus-modality`           | Accepted    | Custom visibility follows keyboard modality from the scene root rather than a component-local pointer tracker. Native appearance remains renderer-owned.                      | Preserve the shared hook and component modality matrix.                                                      |
+| `switch-keyboard-activation-path` | Resolved    | One shared activation path owns each key gesture; the component no longer toggles separately on key-up.                                                                       | Retain exact-count native keyboard and accessibility-action coverage.                                        |
 
 ## Conformance
 

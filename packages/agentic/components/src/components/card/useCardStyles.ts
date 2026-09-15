@@ -20,7 +20,6 @@ export function useCardStyles_unstable(state: CardState) {
   if (state.overlay) {
     attachSlotProps(state.overlay, {
       accessible: true,
-      focusable: state.isInteractive && !state.disabled,
       style: [cardStyles.overlay, overlayStyle],
     });
   }

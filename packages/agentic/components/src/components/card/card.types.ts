@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, PressableProps, StyleProp, View, ViewStyle } from 'react-native';
 
 import type {
@@ -48,6 +49,7 @@ export type CardExposedPressableProps = OwnedRootProps<PressableProps, 'accessib
 export type CardProps = CardStateProps & ComponentProps<CardSlots, CardExposedPressableProps>;
 
 export type CardState = ComponentState<CardStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<CardStateProps> &
   ThemeState & {
     hovered: boolean;

@@ -8,7 +8,7 @@ export function renderCheckbox_unstable(state: CheckboxState) {
   const shouldRenderLabel = Boolean(state.labelText || state.secondaryTextSlot);
 
   return (
-    <state.root>
+    <state.root ref={state.focusTargetRef}>
       {state.FocusRing && <state.FocusRing />}
       <CheckboxIndicator
         iconColor={state.indicatorIconColor}

@@ -25,6 +25,11 @@ mixed parent moves forward to fully selected rather than cycling back through
 mixed. `onStatusChange` receives the resolved value and any caller `onPress`
 handler runs afterward.
 
+The native accessibility `Toggle` action resolves the same next status without
+calling `onPress`. It preserves the caller's accessibility actions and forwards
+`onAccessibilityAction`. While disabled, the action cannot change status, but
+the caller accessibility handler still receives the event.
+
 Status ownership follows the supplied props. While `status` is supplied the
 control is externally driven: it renders exactly what it is given, reports the
 resolved value, and does not move on its own. Without `status` it starts from
@@ -47,3 +52,11 @@ intercept input; native ring appearance remains renderer-owned.
 
 Checkbox runs no timed animation. Status, hover, press, and focus styling
 change on the next render, so reduced-motion settings need no separate path.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.

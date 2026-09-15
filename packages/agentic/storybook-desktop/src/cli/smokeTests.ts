@@ -16,12 +16,19 @@ export type DesktopStorybookSmokeTestOptions = {
   platform: Platforms;
   projectRoot: string;
   targetId: string;
+  storyPattern?: string;
+  testTag?: string;
 };
 
 export async function runDesktopStorybookSmokeTests(
   options: DesktopStorybookSmokeTestOptions,
   connect: DesktopStorybookSmokeConnector = connectDesktopWebdriver,
 ): Promise<DesktopStoryRunResult> {
+  const storyPattern = options.storyPattern ?? process.env.STORYBOOK_SMOKE_STORY ?? 'components-*--default';
+  const testTag = options.testTag ?? process.env.STORYBOOK_SMOKE_TAG ?? 'desktop-e2e';
+  if (!storyPattern.trim() || !testTag.trim()) {
+    throw new Error('Storybook smoke story and tag selectors must not be empty.');
+  }
   const desktop = await connect({
     launchMode: 'attach',
     platformName: options.platform === 'macos' ? 'macos' : 'windows',
@@ -35,8 +42,8 @@ export async function runDesktopStorybookSmokeTests(
     result = await desktop.runStoryTests({
       artifactsRoot: options.artifactsRoot ?? path.join(options.projectRoot, 'artifacts', options.platform, 'desktop-driver'),
       selection: {
-        story: 'components-*--default',
-        tag: 'desktop-e2e',
+        story: storyPattern,
+        tag: testTag,
       },
     });
   } catch (error) {
@@ -57,6 +64,12 @@ export async function runDesktopStorybookSmokeTests(
   }
   if (!result) {
     throw new Error('Desktop story tests completed without a result.');
+  }
+  if (
+    result.tests.length === 0 &&
+    (options.storyPattern || options.testTag || process.env.STORYBOOK_SMOKE_STORY || process.env.STORYBOOK_SMOKE_TAG)
+  ) {
+    throw new Error(`No desktop story tests matched "${storyPattern}" with tag "${testTag}".`);
   }
   if (result.status !== 'passed') {
     const failedTests = result.tests.filter(({ status }) => status !== 'passed' && status !== 'skipped');

@@ -33,7 +33,7 @@ export function renderMenuItem_unstable(state: MenuItemState) {
   ) : undefined;
 
   return (
-    <state.root>
+    <state.root ref={state.focusTargetRef}>
       {state.FocusRing && <state.FocusRing />}
       {state.loading ? (
         <CompoundItemLayout

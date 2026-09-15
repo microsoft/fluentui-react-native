@@ -41,6 +41,50 @@ const passedResult: DesktopStoryRunResult = {
 };
 
 describe('runDesktopStorybookSmokeTests', () => {
+  test('selects focused authored tests without bypassing the owned attach lifecycle', async () => {
+    const runStoryTests = jest.fn(async () => passedResult);
+    const deleteSession = jest.fn(async () => undefined);
+    await runDesktopStorybookSmokeTests(
+      {
+        // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- test-only loopback service
+        driverUrl: 'http://127.0.0.1:4444',
+        platform: 'win32',
+        projectRoot: 'C:\\repo\\storybook',
+        targetId: 'storybook-win32',
+        storyPattern: 'components-*--focus-management',
+        testTag: 'desktop-focus',
+      },
+      async () => ({ delete: deleteSession, runStoryTests }),
+    );
+    expect(runStoryTests).toHaveBeenCalledWith(
+      expect.objectContaining({
+        selection: { story: 'components-*--focus-management', tag: 'desktop-focus' },
+      }),
+    );
+    expect(deleteSession).toHaveBeenCalledTimes(1);
+  });
+
+  test('fails empty focused selections after closing the session', async () => {
+    const deleteSession = jest.fn(async () => undefined);
+    await expect(
+      runDesktopStorybookSmokeTests(
+        {
+          // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- test-only loopback service
+          driverUrl: 'http://127.0.0.1:4444',
+          platform: 'windows',
+          projectRoot: 'C:\\repo\\storybook',
+          targetId: 'storybook-windows',
+          testTag: 'desktop-focus',
+        },
+        async () => ({
+          delete: deleteSession,
+          runStoryTests: async () => ({ ...passedResult, tests: [] }),
+        }),
+      ),
+    ).rejects.toThrow('No desktop story tests matched');
+    expect(deleteSession).toHaveBeenCalledTimes(1);
+  });
+
   test('runs desktop-e2e plans under the platform artifact root and closes the session', async () => {
     const runStoryTests = jest.fn(async () => passedResult);
     const deleteSession = jest.fn(async () => undefined);

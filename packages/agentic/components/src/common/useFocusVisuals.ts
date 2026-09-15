@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-import { useRootSettings } from '@fluentui-react-native/design';
+import { useRootInputModality } from '@fluentui-react-native/design';
 import { useOptionalSlot } from '@fluentui-react-native/framework-base';
 import type { ComponentState, OptionalSlot } from '@fluentui-react-native/framework-base';
 
@@ -32,11 +32,11 @@ export type FocusVisualsState = ComponentState<FocusVisualsSlots> & {
  * theme colors in the styling phase with applyFocusRingStyles.
  */
 export function useFocusVisuals({ focused, useSystemFocusRing, alwaysVisible = false }: FocusVisualsOptions): FocusVisualsState {
-  const settings = useRootSettings();
   const enableFocusRing = !alwaysVisible && (useSystemFocusRing ?? (Platform.OS === 'windows' || Platform.OS === 'macos'));
+  const inputModality = useRootInputModality(focused && !enableFocusRing && !alwaysVisible);
   const FocusRing = useOptionalSlot(
     FocusVisual,
-    enableFocusRing ? null : { visible: focused && (alwaysVisible || settings.inputModality === 'keyboard') },
+    enableFocusRing ? null : { visible: focused && (alwaysVisible || inputModality === 'keyboard') },
   );
 
   return { FocusRing, enableFocusRing };

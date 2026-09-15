@@ -56,7 +56,7 @@ source's defaults plus the root's options.
 The outermost `ThemedRoot` also provides `RootContext`. `useRootSettings()` returns
 the same object throughout a mounted scene, including under nested roots that
 replace the theme. Its read-only `inputModality` is initially `'pointer'`, becomes
-`'keyboard'` on key-down, and returns to `'pointer'` on pointer-down or touch-start.
+`'keyboard'` on non-modifier key-down/up, and returns to `'pointer'` on pointer-down or touch-start.
 Read the property in an event handler when making a focus decision:
 
 ```tsx
@@ -69,9 +69,12 @@ const onFocus = () => {
 };
 ```
 
-Modality changes do not notify React or rerender consumers; do not destructure
+Reading `useRootSettings()` does not subscribe to changes; do not destructure
 the property during render if it needs to remain current in an event handler.
-Theme and appearance changes remain reactive. The hook throws outside a
+Use `useRootInputModality(subscribe)` for an opt-in reactive read. Focus visuals
+subscribe only while focused on the custom-ring path, so input changes do not
+rerender the scene or every component. Theme and appearance remain reactive.
+The hooks throw outside a
 `ThemedRoot`; independent scenes maintain independent modality state.
 
 Only the outermost root installs tracking handlers. Keyboard and pointer capture
@@ -80,8 +83,9 @@ capture provides a touch fallback without claiming the responder by default.
 Caller handlers still run after tracking, and caller responder return values are
 preserved. Keyboard tracking requires a platform that emits View key events
 (macOS, Windows, Win32, or web); this component does not add native hardware-key
-support to iOS or Android. Native windows or portals whose events do not reach
-the scene root need their own scene boundary.
+support to iOS or Android. Wrap native popup/window content in `RootInputBoundary`
+when its events need another attachment. This shares the existing scene
+controller and theme rather than creating an independent root.
 
 ### Populating the Theme
 

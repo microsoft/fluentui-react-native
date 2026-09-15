@@ -71,6 +71,14 @@ This native implementation detail is not a promised public JavaScript API.
 
 - Inspect the actual installed Pressable and native view handlers. Do not add
   key-up activation on top of an existing native press action.
+- Use `useFocusablePressable` rather than per-control key activation. Native
+  qualification found Office Win32 events with `code="Unidentified"` and a
+  valid `key`. The helper supplies one paired key-up fallback only when Win32's
+  code-based Pressability cannot activate that key; recognized codes stay native.
+  Pairing is cancelled on blur, disable, and target-generation changes.
+- Preserve required native accessibility actions. Checkbox and Switch supply `Toggle`;
+  Tab supplies `Select`. The Win32 UIA toggle/selection patterns were unavailable
+  without those action declarations even though JavaScript state was correct.
 - V1 `useKeyProps` prefers key-up on Windows/Win32. It supplies Win32
   handled-key descriptors, but its Windows branch deliberately omits descriptors
   because of the historical `key` versus `code` mismatch. Translate and test the

@@ -27,7 +27,7 @@ export function renderAccordion_unstable(state: AccordionState, styles: Accordio
 
   return (
     <state.root>
-      <Header>
+      <Header ref={state.focusTargetRef}>
         {state.FocusRing && <state.FocusRing />}
         {layout === 'chevronStart' ? (
           <>

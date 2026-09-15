@@ -1,5 +1,5 @@
 import type { ButtonProps, ButtonState } from './button.types';
-import { useAccessibilityLabelWarning, usePressableState, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, useFocusablePressable, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 import { Pressable } from 'react-native';
 import type { PressableProps } from 'react-native';
@@ -58,9 +58,9 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
   };
-  const [pressableProps, pressableState] = usePressableState(nativeProps);
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable(nativeProps);
   const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
 
   const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
@@ -86,6 +86,7 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     userStyle,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     appearance: appearance ?? 'secondary',
   };
 }

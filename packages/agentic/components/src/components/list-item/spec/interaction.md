@@ -23,3 +23,11 @@ focus stays hidden unless the composition hook uses `alwaysVisible`. That
 override selects the custom path and still requires focus. Disabled or
 noninteractive targets show no custom ring. The visual is decorative and cannot
 intercept input; native ring appearance remains renderer-owned.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.

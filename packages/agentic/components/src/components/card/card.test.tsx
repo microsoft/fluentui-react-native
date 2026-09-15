@@ -54,6 +54,16 @@ describe('Card', () => {
     expect(component.getByRole('button').props.accessibilityState.selected).toBe(false);
   });
 
+  it('preserves an explicitly nonfocusable overlay without disabling pointer activation', async () => {
+    const onPress = jest.fn();
+    const component = await renderCard({ accessibilityLabel: 'Report', focusable: false, onPress });
+    const overlay = component.getByRole('button');
+
+    expect(overlay.props.focusable).toBe(false);
+    await fireEvent.press(overlay);
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
   it('renders the default surface and content', async () => {
     const component = await renderCard({
       content: {

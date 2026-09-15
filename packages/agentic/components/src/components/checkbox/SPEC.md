@@ -28,17 +28,17 @@ each Checkbox itself.
 
 ### Props and defaults
 
-| Prop                | Type                                    | Default         | Contract                                                                                                       |
-| ------------------- | --------------------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |
-| `status`            | `unchecked \| checked \| indeterminate` | absent          | When supplied, the status is externally driven and Checkbox renders the supplied value without changing it.    |
-| `defaultStatus`     | `unchecked \| checked \| indeterminate` | `unchecked`     | The starting status while the status is internally driven. Ignored while `status` is supplied.                 |
-| `onStatusChange`    | `(nextStatus) => void`                  | absent          | Called with the next status whenever a press resolves one, in both the externally and internally driven cases. |
-| `variant`           | `standard \| circular`                  | `standard`      | Selects the indicator corner radius. All other indicator values are shared.                                    |
-| `disabled`          | `boolean`                               | `false`         | Blocks activation, removes the root from focus, and selects disabled colors.                                   |
-| `label`             | `string`                                | `'Label'`       | The label text and the accessible-name fallback.                                                               |
-| `showLabel`         | `boolean`                               | `true`          | Controls whether the label column renders. The name fallback survives hiding it.                               |
-| `secondaryText`     | `string`                                | `'Description'` | Supporting text rendered beneath the label.                                                                    |
-| `showSecondaryText` | `boolean`                               | `false`         | Renders secondary text; effective only while `showLabel` is `true`.                                            |
+| Prop                | Type                                    | Default         | Contract                                                                                                                  |
+| ------------------- | --------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `status`            | `unchecked \| checked \| indeterminate` | absent          | When supplied, the status is externally driven and Checkbox renders the supplied value without changing it.               |
+| `defaultStatus`     | `unchecked \| checked \| indeterminate` | `unchecked`     | The starting status while the status is internally driven. Ignored while `status` is supplied.                            |
+| `onStatusChange`    | `(nextStatus) => void`                  | absent          | Called with the next status for press or accessibility Toggle activation, in both externally and internally driven cases. |
+| `variant`           | `standard \| circular`                  | `standard`      | Selects the indicator corner radius. All other indicator values are shared.                                               |
+| `disabled`          | `boolean`                               | `false`         | Blocks activation, removes the root from focus, and selects disabled colors.                                              |
+| `label`             | `string`                                | `'Label'`       | The label text and the accessible-name fallback.                                                                          |
+| `showLabel`         | `boolean`                               | `true`          | Controls whether the label column renders. The name fallback survives hiding it.                                          |
+| `secondaryText`     | `string`                                | `'Description'` | Supporting text rendered beneath the label.                                                                               |
+| `showSecondaryText` | `boolean`                               | `false`         | Renders secondary text; effective only while `showLabel` is `true`.                                                       |
 
 The root also accepts the owned `PressableProps` surface. `children` is typed
 `never`; Checkbox owns its subtree. A caller `style` is applied after the
@@ -106,6 +106,12 @@ events. Space activation comes from the native pressable button behavior on both
 platforms; Checkbox adds no key handling of its own and does not intercept Tab.
 A disabled Checkbox sets `focusable` to `false` and is skipped by keyboard
 navigation.
+
+Checkbox declares the native `Toggle` accessibility action, preserving caller
+actions without duplicating it. This is required for the Win32 UIA toggle
+pattern even when a pointer press has already updated the rendered checkmark.
+An accessibility Toggle uses the same status transition without synthesizing
+`onPress`; caller accessibility handlers still run, including while disabled.
 
 No timed animation is present. Status, hover, press, and focus styling change on
 the next render, so reduced-motion settings need no separate branch.

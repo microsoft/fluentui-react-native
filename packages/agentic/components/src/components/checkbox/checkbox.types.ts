@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { ColorValue, Pressable, StyleProp, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
@@ -59,6 +60,7 @@ export type CheckboxRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>
 export type CheckboxProps = CheckboxStateProps & ComponentProps<CheckboxSlots, CheckboxRootProps>;
 
 export type CheckboxState = ComponentState<CheckboxStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<Omit<CheckboxStateProps, CheckboxStatusDriverKeys>> &
   ThemeState &
   PressableState & {

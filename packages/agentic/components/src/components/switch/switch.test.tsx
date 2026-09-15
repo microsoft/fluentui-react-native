@@ -81,13 +81,34 @@ describe('Switch', () => {
     const component = await renderSwitch({ accessibilityLabel: 'Wi-Fi', layout: 'switch', onChange });
     const root = component.getByRole('switch', { name: 'Wi-Fi' });
 
-    await fireEvent(root, 'keyUp', { nativeEvent: { key: 'Enter' } });
+    await fireEvent(root, 'keyDown', { nativeEvent: { key: 'Enter', code: 'Enter' } });
+    await fireEvent(root, 'keyUp', { nativeEvent: { key: 'Enter', code: 'Enter' } });
     await flushAnimationFrame();
-    await fireEvent(root, 'keyUp', { nativeEvent: { key: ' ' } });
+    await fireEvent(root, 'keyDown', { nativeEvent: { key: ' ', code: 'Space' } });
+    await fireEvent(root, 'keyUp', { nativeEvent: { key: ' ', code: 'Space' } });
     await flushAnimationFrame();
 
     expect(onChange).toHaveBeenNthCalledWith(1, true);
     expect(onChange).toHaveBeenNthCalledWith(2, false);
+  });
+
+  it('supports the native Toggle accessibility action without duplicating caller actions', async () => {
+    const onChange = jest.fn();
+    const onAccessibilityAction = jest.fn();
+    const component = await renderSwitch({
+      accessibilityLabel: 'Toggle probe',
+      layout: 'switch',
+      accessibilityActions: [{ name: 'Toggle' }],
+      onChange,
+      onAccessibilityAction,
+    });
+    const root = component.getByRole('switch');
+    expect(root.props.accessibilityActions).toEqual([{ name: 'Toggle' }]);
+    await fireEvent(root, 'accessibilityAction', { nativeEvent: { actionName: 'Toggle' } });
+    await flushAnimationFrame();
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith(true);
+    expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
   });
 
   it('forwards hover and press handlers while preserving consumer accessibility state', async () => {

@@ -69,14 +69,17 @@ then [Windows/Win32](../../../../../.github/skills/agentic-component-authoring/r
 The common file owns ref, state, activation, scope, and styling invariants; platform files own detailed
 native adaptation. V1 Win32 models observable behavior for both Office Win32 and Windows Fabric.
 
-Current implementation: `useFocusVisuals` returns a private optional `FocusRing` and `enableFocusRing`;
+Current implementation: `useFocusablePressable`/`useFocusTarget` own ref-backed native targets;
+compose `focusTargetRef` on the actual target and retain the public native root ref. `useFocusVisuals`
+returns a private optional `FocusRing` and `enableFocusRing`;
 Windows/macOS default to native and Win32 defaults to custom. `alwaysVisible` selects a custom ring only
 while focused. `applyFocusRingStyles` owns cached colors/widths; component styles supply radius. Put the ring
-and native setting only on the actual focus target. Scenes require `ThemedRoot`; modality is currently
-sampled on render, without a root subscription. The native Windows path requires RNW 0.81.35 or newer.
+and native setting only on the actual focus target. Scenes require `ThemedRoot`; custom focused rings
+subscribe through `useRootInputModality`, while `useRootSettings` remains stable and non-subscribing.
+The native Windows path requires RNW 0.81.35 or newer.
 
 The [desktop improvement plan](../../WIN32-FOCUS-PLAN.md) describes future target/intent/notification
-abstractions and native-service gates; they are not shipped APIs. Do not change behavior or pinned source
+abstractions and native-service gates and records which are implemented. Do not change behavior or pinned source
 identities by following a proposal before its component contract is reviewed. The accepted
 `native-system-focus-visuals` divergence continues to refer through this stable anchor.
 

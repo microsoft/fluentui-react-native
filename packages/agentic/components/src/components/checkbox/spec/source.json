@@ -3,7 +3,7 @@
   "component": "checkbox",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-12",
+  "reviewedAt": "2026-09-14",
   "sources": [
     {
       "id": "flex-component",
@@ -110,7 +110,7 @@
     },
     {
       "id": "CBX-004",
-      "evidence": ["useCheckbox.ts", "checkbox.test.tsx"]
+      "evidence": ["useCheckbox.ts", "checkbox.test.tsx", "checkbox.stories.tsx"]
     },
     {
       "id": "CBX-005",

@@ -20,13 +20,28 @@ orientation axis are forwarded unchanged.
 Enter and Space continue through the native Tab press behavior. TabList adds no
 second activation handler, preventing duplicate selection requests.
 
+Target eligibility/selection are committed before the layout-effect focus
+request. The active tab stop is distinct from the last confirmed native focus
+value. Targets register ref-backed controllers; native focus events confirm
+requests, and removal/replacement cancels stale requests. Modified shortcuts
+are not consumed. The native `Select` accessibility action uses the same
+collection selection owner.
+
 ## Pointer
 
 Pointer activation uses the existing Tab hit area and hover and pressed states.
 The list does not add an overlay. A pointer press moves the active entry and
 requests selection while preserving the Tab's own `onPress`.
+Windows/Win32 then request focus through the committed target. Pointer selection
+does not impose that Windows click-focus policy on macOS.
 
 ## Motion
 
 TabList adds no animation. Tab selection presentation changes through the
 existing Tab render, so reduced-motion settings require no group branch.
+
+## Focus target lifetime
+
+Tabs register stable, ref-backed targets. The collection requests focus after
+eligibility commits and confirms it from native focus events. Superseded or
+removed targets cancel pending work; the public structural root ref is unchanged.

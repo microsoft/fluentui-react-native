@@ -6,9 +6,9 @@ native focus adapter. Then load only the applicable platform detail:
 - [Windows and Win32](focus-windows.md)
 - [macOS](focus-macos.md)
 
-These files define authoring and review obligations. Proposed abstractions in
+These files define authoring and review obligations. Execution status in
 the [desktop focus plan](../../../../packages/agentic/components/WIN32-FOCUS-PLAN.md)
-are not APIs that already exist. Keep each component's reviewed contract and
+distinguishes implemented APIs from native-only follow-ups. Keep each reviewed contract and
 source-specific divergences authoritative.
 
 ## Behavioral authority and platform evidence
@@ -87,6 +87,9 @@ agentic components use React 19.
 
 1. Resolve disabled/interactive state and the actual focus target in
    `use<Component>_unstable`.
+   Use `useFocusablePressable` for pressable targets and `useFocusTarget` for
+   editable or other native targets. Carry `focusTarget`/`focusTargetRef` in
+   private state; compose the internal ref on the actual focus slot.
 2. Compose interaction handlers with exactly one activation owner. Native
    Pressable activation, key handlers, and accessibility actions must not each
    invoke the same action independently.
@@ -104,14 +107,24 @@ selects the custom path. It does not focus the control or make an unfocused
 control visible. Native window activity remains a separate renderer obligation.
 Do not add this option to every public component prop surface without a contract.
 
-The current root settings are nonreactive. The plan adds opt-in refresh only for
-focused custom-ring owners; do not implement scene-wide React updates or a
-second pointer tracker in each control. Test same-target keyboard/pointer
-changes without a manual rerender.
+`useRootSettings` remains a stable non-subscribing query. `useRootInputModality`
+provides opt-in notifications; `useFocusVisuals` subscribes only while focused
+on the custom path. `RootInputBoundary` attaches additional native popup content
+to the same controller without changing themes. Do not add scene-wide React
+updates or per-control pointer trackers.
+
+Focus targets expose `requestFocus(intent)`, an observable snapshot, and a
+mount generation. A request reports `requested` until a focus event confirms it;
+detach, disable, replacement, or explicit cancellation invalidate pending work.
+The controller preserves focus for a same-commit ref handoff to the identical
+native instance, not a later remount. Higher-level native window activity and
+cross-window restore remain separately qualified.
 
 For nested controls, preserve `target`/`currentTarget` or equivalent native
 identity and separate self-focus from focus-within. Functional Input borders,
 selection visuals, and hover styling are not generic focus rings.
+Do not apply this self-focus filter to Pressability's responder press: a valid
+pointer press can originate on a noninteractive label/icon descendant.
 
 ## Collections and popup scopes
 

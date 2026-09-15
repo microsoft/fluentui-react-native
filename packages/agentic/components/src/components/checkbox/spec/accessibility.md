@@ -12,6 +12,12 @@ focusable unless disabled.
 accessibility state, such as `busy`, is merged and preserved; the checked and
 disabled entries are owned by the component.
 
+The root declares the native `Toggle` action and preserves caller actions without
+duplicating that declaration. Win32 needs this action to expose its UIA toggle
+pattern; a rendered checkmark alone is not evidence of native checked state.
+Toggle activation respects disabled and controlled status and forwards the caller
+`onAccessibilityAction` without synthesizing a press.
+
 On Windows, UI Automation reports the control as a check box and maps the
 three-valued checked state to its toggle state, so an indeterminate parent
 announces as mixed rather than as a third unnamed value. On macOS, VoiceOver

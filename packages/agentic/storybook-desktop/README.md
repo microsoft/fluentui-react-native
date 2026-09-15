@@ -95,6 +95,13 @@ Storybook identity in `app.json`.
 
 ## CLI and API
 
+For a focused authored-test lane within the owned smoke lifecycle, set
+`STORYBOOK_SMOKE_STORY` and `STORYBOOK_SMOKE_TAG` before running
+`storybook smoke --<platform> --mode stories-and-tests`. Defaults remain
+`components-*--default` and `desktop-e2e`. An explicit selector that matches no
+tests fails instead of reporting a false pass. This retains normal native
+lease/readiness and process cleanup; it does not change input capability policy.
+
 The `storybook-desktop` binary loads `storybook.config.ts`, `.mts`, `.js`, `.mjs`, or `.cjs` from the current package.
 Use `.mts` when the consuming package otherwise defaults JavaScript files to CommonJS. Select a target with a short
 platform option, or omit it to use `FURN_STORYBOOK_PLATFORM` and then the host default:

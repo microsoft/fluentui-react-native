@@ -19,7 +19,7 @@ export function renderButton_unstable(state: ButtonState) {
     );
 
   return (
-    <state.root>
+    <state.root ref={state.focusTargetRef}>
       {state.FocusRing && <state.FocusRing />}
       {iconPosition === 'before' && ActiveIcon && <ActiveIcon />}
       {contentElement}

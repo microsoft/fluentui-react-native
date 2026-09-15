@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
 
 import { Switch } from './switch';
 import type { SwitchLayout } from './switch.types';
@@ -71,6 +72,50 @@ export default meta;
 type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {};
+
+function FocusManagementScene() {
+  const [changes, setChanges] = useState(0);
+  return (
+    <View>
+      <Switch
+        layout="switch"
+        accessibilityLabel="Activation probe"
+        testID="focus-switch"
+        onChange={() => setChanges((count) => count + 1)}
+      />
+      <Text testID="focus-switch-count">{String(changes)}</Text>
+    </View>
+  );
+}
+
+export const FocusManagement: Story = {
+  render: () => <FocusManagementScene />,
+  tags: ['desktop-focus'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'single-toggle-per-key',
+          platforms: ['windows', 'win32'],
+          requires: ['physical-click', 'keyboard', 'focus'],
+          steps: [
+            { action: 'wait', target: { testId: 'focus-switch' } },
+            { action: 'click', target: { testId: 'focus-switch' } },
+            { expect: { state: 'focused', target: { testId: 'focus-switch' }, value: true } },
+            { action: 'wait', until: { state: 'text', target: { testId: 'focus-switch-count' }, value: '1' } },
+            { action: 'keys', value: ['\uE007'] },
+            { action: 'wait', until: { state: 'text', target: { testId: 'focus-switch-count' }, value: '2' } },
+            { expect: { state: 'checked', target: { testId: 'focus-switch' }, value: false } },
+            { action: 'keys', value: ['\uE00D'] },
+            { action: 'wait', until: { state: 'text', target: { testId: 'focus-switch-count' }, value: '3' } },
+            { expect: { state: 'checked', target: { testId: 'focus-switch' }, value: true } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
 
 export const Overview: Story = {
   render: () => (

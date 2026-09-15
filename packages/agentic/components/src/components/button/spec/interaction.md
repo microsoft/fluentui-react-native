@@ -42,3 +42,11 @@ intercept input; native ring appearance remains renderer-owned.
 Button currently performs no timed state animation. Hover, press, selection,
 and focus styles update immediately, so reduced-motion handling adds no
 separate branch.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.

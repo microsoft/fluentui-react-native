@@ -5,7 +5,8 @@ export type InputModality = 'keyboard' | 'pointer';
 export interface RootSettings {
   /**
    * Last input modality observed by the scene root. Initially `pointer`.
-   * Read this in event handlers; changes do not trigger a render.
+   * Read this in event handlers; this object does not subscribe to changes.
+   * useRootInputModality provides an opt-in reactive read.
    */
   readonly inputModality: InputModality;
 }

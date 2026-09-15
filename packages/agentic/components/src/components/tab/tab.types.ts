@@ -1,4 +1,4 @@
-import type * as React from 'react';
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, ViewStyle } from 'react-native';
 
 import type {
@@ -78,10 +78,10 @@ type TabIconAndTextProps = {
 export type TabProps = TabStateProps & ComponentProps<TabSlots, TabExposedPressableProps> & (TabIconAndTextProps | TabIconOnlyProps);
 
 export type TabState = ComponentState<TabStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<TabStateProps> &
   ThemeState &
   PressableState & {
     iconOnly: boolean;
-    tabRef: React.RefObject<React.ElementRef<typeof Pressable> | null>;
     userStyle?: StyleProp<ViewStyle>;
   };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Pressable } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
-import { useAccessibilityLabelWarning, useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, useOptionalSlot, useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
 
 import { semanticIconSources } from '../../common/iconSources';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
@@ -50,7 +50,7 @@ export function useTag_unstable(props: TagProps): TagState {
   }, [hasLeadingIcon, iconOnly]);
 
   const themeState = useThemeState();
-  const [pressableProps, pressableState] = usePressableState({
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
     accessibilityRole: 'button',
     accessibilityState: {
@@ -59,7 +59,7 @@ export function useTag_unstable(props: TagProps): TagState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
   });
 
   const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
@@ -95,6 +95,7 @@ export function useTag_unstable(props: TagProps): TagState {
     userStyle,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     appearance,
   };
 }

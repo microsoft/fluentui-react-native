@@ -1,6 +1,6 @@
 # Desktop focus and focus-visual improvement plan
 
-**Status:** Proposed; investigation only, no runtime changes.
+**Status:** Shared component rework implemented; full native qualification remains incomplete.
 **Reviewed baseline:** `69ce270dde98588f8386e60fa4c720cad3af0142`, September 14, 2026.
 **Scope:** New agentic components on Office Win32 Paper, React Native Windows
 Fabric, and React Native macOS. **V1 Win32 is the behavioral reference for both
@@ -10,6 +10,51 @@ focus/accessibility goals but has explicit AppKit-specific adaptation.
 The historical filename is retained so existing plan references remain valid.
 This refinement adds common/platform authoring instructions, modern-ref
 requirements, macOS source research, and a gated `native-lib` assessment.
+
+## Execution status (September 14, 2026)
+
+Implemented:
+
+- Framework Base `useFocusTarget` and `useFocusablePressable`: stable ref-backed
+  targets, attachment generations, cancellable request status, native focus
+  confirmation, self-focus filtering, callback-ref handoffs, and Windows pointer
+  focus before activation.
+- Design `useRootInputModality` and `RootInputBoundary`: stable root settings,
+  deduplicated focused-owner subscriptions, modifier-only filtering, and popup
+  event attachments sharing the scene controller.
+- All eleven focus-ring consumers plus Input use the target foundation.
+  TabList commits eligibility/selection before requesting focus and distinguishes
+  its tab stop from confirmed native focus. Card keeps its structural ref and
+  respects a caller's nonfocusable overlay setting.
+- Switch no longer toggles independently on key-up. Native Win32 qualification
+  exposed `code="Unidentified"`; the shared helper now uses one generation/blur-
+  guarded, key-based fallback only where native code-based activation cannot run.
+  Checkbox/Switch `Toggle` and Tab `Select` accessibility actions expose the expected
+  native toggle/selection patterns.
+- Dedicated `desktop-focus` Button/Switch/TabList stories and owned smoke
+  selectors (`STORYBOOK_SMOKE_STORY`, `STORYBOOK_SMOKE_TAG`) make native
+  qualification reproducible without bypassing leases or changing default smoke
+  contracts.
+
+Native evidence so far: all three dedicated Win32 cases passed with real input
+and no skips. The default Win32 Button/Checkbox/Input lane also passed all three
+cases after declaring Checkbox's native Toggle action; the previous failure
+showed a checked glyph but false UIA checked state. Windows Fabric Switch and
+TabList cases passed; the first Button
+case repeatedly timed out during story selection before executing input steps.
+The full Windows story traversal rendered successfully. The unsuccessful
+orchestrator experiments were removed rather than weakening readiness checks.
+
+Affected workspace suites pass, as do the root build and package lint/format.
+The required uncached repository test graph stops in two unchanged codemod
+fixture comparisons; these unrelated baseline failures were not modified.
+
+Still gated: complete three-lane P0/V1 parity, the Windows first-story readiness
+failure, macOS native input/VoiceOver, full popup/window restoration and activity
+policy, and P4 visual/high-contrast/scale qualification. A complete new menu owner
+or RadioGroup is not introduced. N0/native-lib remains deferred: observed
+component activation/ref gaps were resolved without a new native module; native
+window observation still needs its own scoped proof and host integration.
 
 The investigation used three independent read-only passes over V1 leaf controls,
 navigation/popups, and shared interaction/native-JavaScript adapters, followed by

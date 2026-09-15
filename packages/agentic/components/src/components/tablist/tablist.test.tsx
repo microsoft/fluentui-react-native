@@ -1,6 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { StyleSheet } from 'react-native';
-import type { ViewStyle } from 'react-native';
+import * as React from 'react';
+import type { Pressable, ViewStyle } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
@@ -10,6 +11,8 @@ import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Tab } from '../tab/tab';
 import { TabList } from './tablist';
+import { TabListContext } from './TabListContext';
+import type { TabListContextValue } from './TabListContext';
 
 function renderTabList(props: Partial<React.ComponentProps<typeof TabList>> = {}): Promise<RenderResult> {
   return render(
@@ -220,5 +223,51 @@ describe('TabList', () => {
       flexDirection: 'row',
       gap: defaultFlexTokens.spacing.componentBase100,
     });
+  });
+
+  it('requests focus after native eligibility and selection commit, then waits for confirmation', async () => {
+    const ref = React.createRef<React.ComponentRef<typeof Pressable>>();
+    const contexts: TabListContextValue[] = [];
+    function Probe() {
+      const value = React.useContext(TabListContext);
+      if (value) {
+        contexts.push(value);
+      }
+      return null;
+    }
+    const component = await render(
+      <TabList>
+        <Tab controls="one" content="One" />
+        <Tab controls="two" content="Two" ref={ref} />
+        <Probe />
+      </TabList>,
+    );
+    const focus = jest.spyOn(ref.current!, 'focus').mockImplementation(() => {
+      expect(getTabs(component)[1].props.focusable).toBe(true);
+      expect(getTabs(component)[1].props.accessibilityState.selected).toBe(true);
+    });
+    focus.mockClear();
+    await fireEvent(getTabs(component)[0], 'focus', {});
+    await fireEvent(getTabs(component)[0], 'keyDown', { nativeEvent: { key: 'ArrowRight' }, preventDefault: jest.fn() });
+    expect(focus).toHaveBeenCalledTimes(1);
+    expect(contexts[contexts.length - 1].focusedValue).not.toBe('two');
+    await fireEvent(getTabs(component)[1], 'focus', {});
+    expect(contexts[contexts.length - 1].focusedValue).toBe('two');
+    focus.mockRestore();
+  });
+
+  it('handles the native Select accessibility action and ignores modified navigation keys', async () => {
+    const onAccessibilityAction = jest.fn();
+    const component = await render(
+      <TabList>
+        <Tab controls="one" content="One" />
+        <Tab controls="two" content="Two" onAccessibilityAction={onAccessibilityAction} />
+      </TabList>,
+    );
+    await fireEvent(getTabs(component)[0], 'keyDown', { nativeEvent: { key: 'ArrowRight', ctrlKey: true } });
+    expect(getTabs(component).map(selected)).toEqual([true, false]);
+    await fireEvent(getTabs(component)[1], 'accessibilityAction', { nativeEvent: { actionName: 'Select' } });
+    expect(getTabs(component).map(selected)).toEqual([false, true]);
+    expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
   });
 });

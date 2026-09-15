@@ -3,7 +3,7 @@
   "component": "list-item",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-12",
+  "reviewedAt": "2026-09-14",
   "sources": [
     {
       "id": "flex-component",

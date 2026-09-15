@@ -6,7 +6,7 @@ import type { SwitchState } from './switch.types';
  */
 export function renderSwitch_unstable(state: SwitchState) {
   const root = (
-    <state.root>
+    <state.root ref={state.focusTargetRef}>
       {state.FocusRing && <state.FocusRing />}
       <state.track>
         <state.thumb />

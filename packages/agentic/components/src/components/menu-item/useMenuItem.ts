@@ -1,6 +1,6 @@
 import { Pressable, View } from 'react-native';
 
-import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { semanticIconSources } from '../../common/iconSources';
@@ -54,7 +54,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     console.warn('MenuItem: checkmark and multiselect are mutually exclusive.');
   }
 
-  const [pressableProps, pressableState] = usePressableState({
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
     accessible: rest.accessible ?? true,
     accessibilityHint: accessibilityHint ?? (hasChevron ? 'Has submenu' : undefined),
@@ -87,6 +87,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     FocusRing: isInteractive ? FocusRing : undefined,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     contentText,
     disabled,
     hasCheckmark,

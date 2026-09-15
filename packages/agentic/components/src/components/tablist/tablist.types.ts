@@ -9,8 +9,14 @@ export type TabListOrientation = 'horizontal' | 'vertical';
 export type TabKeyEvent = {
   nativeEvent?: {
     key?: string;
+    code?: string;
+    altKey?: boolean;
+    ctrlKey?: boolean;
+    metaKey?: boolean;
+    shiftKey?: boolean;
   };
   preventDefault?: () => void;
+  stopPropagation?: () => void;
 };
 
 export type TabListStateProps = {

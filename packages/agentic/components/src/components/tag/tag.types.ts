@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
@@ -40,6 +41,7 @@ export type TagRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
 export type TagProps = TagStateProps & ComponentProps<TagSlots, TagRootProps>;
 
 export type TagState = ComponentState<TagSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<TagStateProps> &
   Omit<ThemeState, 'appearance'> &
   PressableState & {

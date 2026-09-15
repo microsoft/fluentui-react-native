@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, ViewStyle } from 'react-native';
 import type {
   Slot,
@@ -91,6 +92,7 @@ export type ButtonProps = ButtonStateProps & ComponentProps<ButtonSlots, ButtonE
  * The button state, returned from the useButton hook
  */
 export type ButtonState = ComponentState<ButtonStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<ButtonStateProps> &
   Omit<ThemeState, 'appearance'> &
   PressableState & {

@@ -5,8 +5,13 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
+import { useRootInputModality } from '@fluentui-react-native/design';
+import type { FocusKeyboardEvent } from '@fluentui-react-native/framework-base';
 
 import { Button } from './button';
+import { useButton_unstable } from './useButton';
+import { useButtonStyles_unstable } from './useButtonStyles';
+import { renderButton_unstable } from './renderButton';
 import type { ButtonAppearance, ButtonShape, ButtonSize } from './button.types';
 
 type StoryGroupProps = {
@@ -107,6 +112,67 @@ export const Default: Story = {
             { expect: { state: 'enabled', target: { testId: 'agentic-storybook-button' }, value: true } },
             { action: 'click', target: { testId: 'agentic-storybook-button' } },
             { action: 'screenshot', name: 'button-after-click', target: { testId: 'agentic-storybook-button' } },
+          ],
+        },
+      ],
+    } satisfies DesktopStoryTests,
+  },
+};
+
+function ModalityProbe() {
+  return <Text testID="focus-input-modality">{useRootInputModality()}</Text>;
+}
+
+function FocusManagementScene() {
+  const [count, setCount] = useState(0);
+  const [keyTrace, setKeyTrace] = useState('none');
+  const recordKey = (event: FocusKeyboardEvent) => {
+    setKeyTrace(`${event.nativeEvent.key}/${event.nativeEvent.code ?? 'no-code'}/self:${event.target === event.currentTarget}`);
+  };
+  const state = useButton_unstable({
+    content: 'Focus and activate',
+    testID: 'focus-probe-button',
+    onPress: () => setCount((value) => value + 1),
+    onKeyDown: recordKey,
+    onKeyUp: recordKey,
+  });
+  useButtonStyles_unstable(state);
+  return (
+    <View>
+      {renderButton_unstable(state)}
+      <Text testID="focus-probe-state">{state.focused ? 'focused' : 'blurred'}</Text>
+      <Text testID="focus-probe-count">{String(count)}</Text>
+      <Text testID="focus-probe-key">{keyTrace}</Text>
+      <ModalityProbe />
+    </View>
+  );
+}
+
+export const FocusManagement: Story = {
+  render: () => <FocusManagementScene />,
+  tags: ['desktop-focus'],
+  parameters: {
+    desktopDriver: {
+      version: 1,
+      tests: [
+        {
+          id: 'focus-and-exactly-once-activation',
+          platforms: ['windows', 'win32'],
+          requires: ['physical-click', 'keyboard', 'focus'],
+          steps: [
+            { action: 'wait', target: { testId: 'focus-probe-button' } },
+            { action: 'click', target: { testId: 'focus-probe-button' } },
+            { expect: { state: 'focused', target: { testId: 'focus-probe-button' }, value: true } },
+            { action: 'wait', until: { state: 'text', target: { testId: 'focus-probe-state' }, value: 'focused' } },
+            { expect: { state: 'text', target: { testId: 'focus-probe-count' }, value: '1' } },
+            { action: 'keys', value: ['\uE007'] },
+            { action: 'wait', until: { state: 'text', target: { testId: 'focus-probe-count' }, value: '2' } },
+            { expect: { state: 'text', target: { testId: 'focus-input-modality' }, value: 'keyboard' } },
+            { action: 'keys', value: ['\uE00D'] },
+            { action: 'wait', until: { state: 'text', target: { testId: 'focus-probe-count' }, value: '3' } },
+            { action: 'click', target: { testId: 'focus-probe-button' } },
+            { action: 'wait', until: { state: 'text', target: { testId: 'focus-probe-count' }, value: '4' } },
+            { expect: { state: 'text', target: { testId: 'focus-input-modality' }, value: 'pointer' } },
           ],
         },
       ],

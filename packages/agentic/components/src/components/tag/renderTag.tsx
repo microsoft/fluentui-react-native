@@ -3,7 +3,7 @@ import type { TagState } from './tag.types';
 
 export function renderTag_unstable(state: TagState) {
   return (
-    <state.root>
+    <state.root ref={state.focusTargetRef}>
       {state.FocusRing && <state.FocusRing />}
       {state.leadingIcon && <state.leadingIcon />}
       {state.content && <state.content />}

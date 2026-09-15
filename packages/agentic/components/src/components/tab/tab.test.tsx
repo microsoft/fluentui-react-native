@@ -8,6 +8,7 @@ import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import type { FocusTarget } from '@fluentui-react-native/framework-base';
 
 import { Tab } from './tab';
 import { TabList } from '../tablist/tablist';
@@ -28,13 +29,15 @@ function getRootStyle(component: RenderResult): ViewStyle {
 
 describe('Tab', () => {
   it('keeps its internal focus ref when the consumer omits ref', async () => {
-    let registeredRef: React.RefObject<React.ElementRef<typeof Pressable> | null> | undefined;
+    let registeredRef: FocusTarget | undefined;
     const contextValue: TabListContextValue = {
       activeValue: 'files',
+      focusedValue: undefined,
       disabled: false,
       getPosition: () => 1,
       isTabDisabled: () => false,
       onTabFocus: jest.fn(),
+      onTabBlur: jest.fn(),
       onTabKeyDown: jest.fn(),
       onTabPress: jest.fn(),
       orientation: 'horizontal',

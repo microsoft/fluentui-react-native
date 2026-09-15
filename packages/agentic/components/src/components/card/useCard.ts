@@ -1,7 +1,7 @@
 import { Pressable, View, useWindowDimensions } from 'react-native';
 import type { PressableProps } from 'react-native';
 
-import { type PropsWithRefOf, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { type PropsWithRefOf, useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 
@@ -56,7 +56,7 @@ export function useCard_unstable(props: CardProps): CardState {
   const resolvedDirection = direction === 'horizontal' && width < horizontalCollapseWidth ? 'vertical' : direction;
   const themeState = useThemeState();
 
-  const [overlayProps, pressableState] = usePressableState({
+  const [overlayProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
     accessibilityHint,
     accessibilityLabel,
@@ -135,5 +135,6 @@ export function useCard_unstable(props: CardProps): CardState {
     isSelectable,
     userStyle,
     ...themeState,
+    ...focusBinding,
   };
 }

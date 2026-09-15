@@ -23,3 +23,11 @@ intercept input; native ring appearance remains renderer-owned.
 This component does not implement arrow navigation, Home/End, type-ahead,
 submenu opening, focus restoration, dismissal, or timed motion. Those are
 menu-container responsibilities on Windows and macOS.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.
