@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
 
+import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 import {
   buildNativeDesktopDriver,
   resolveNativeDesktopDriver,
@@ -31,9 +32,11 @@ import {
   writeDesktopStorybookDriverManifest,
   writeDesktopStoryManifest,
 } from '../driver/index.js';
-import { NodeDesktopCommandRunner } from './commandRunner.js';
+import { NodeDesktopCommandRunner, STORYBOOK_VERBOSE } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
+import { matchesWdioTest, runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
+import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   driverManifestPath?: string;
@@ -54,6 +57,8 @@ export type DesktopStorybookCliOptions = {
   runner?: DesktopCommandRunner;
   fetch?: typeof globalThis.fetch;
   output?: Pick<NodeJS.WriteStream, 'write'>;
+  errorOutput?: DesktopStorybookErrorOutput;
+  verbose?: boolean;
   isPortAvailable?: (port: number) => Promise<boolean>;
   runSmokeTests?: typeof runDesktopStorybookSmokeTests;
   resolveNativeDriver?: typeof resolveNativeDesktopDriver;
@@ -65,6 +70,12 @@ export type DesktopStorybookServerOptions = {
   port?: number;
 };
 
+export type DesktopStorybookTestOptions = DesktopStorybookWdioOptions & {
+  list?: boolean;
+  url?: string;
+  target?: string;
+};
+
 export class DesktopStorybookCli {
   readonly config: DesktopStorybookConfig;
   readonly instance: DesktopStorybookInstance;
@@ -74,6 +85,8 @@ export class DesktopStorybookCli {
   private readonly createStoryManifest: typeof createDesktopStoryManifest;
   private readonly fetch: typeof globalThis.fetch;
   private readonly output: Pick<NodeJS.WriteStream, 'write'>;
+  private readonly errorOutput: DesktopStorybookErrorOutput;
+  private readonly verbose: boolean;
   private readonly isPortAvailable: (port: number) => Promise<boolean>;
   private readonly runSmokeTests: typeof runDesktopStorybookSmokeTests;
   private readonly resolveNativeDriver: typeof resolveNativeDesktopDriver;
@@ -85,11 +98,19 @@ export class DesktopStorybookCli {
       projectRoot: config.projectRoot,
       bundleIdentifierPrefix: config.macosBundleIdentifier,
     });
-    this.runner = options.runner ?? new NodeDesktopCommandRunner();
+    this.runner =
+      options.runner ??
+      new NodeDesktopCommandRunner({
+        output: options.output,
+        errorOutput: options.errorOutput,
+        verbose: options.verbose,
+      });
     this.buildNativeDriver = options.buildNativeDriver ?? buildNativeDesktopDriver;
     this.createStoryManifest = options.createStoryManifest ?? createDesktopStoryManifest;
     this.fetch = options.fetch ?? globalThis.fetch;
     this.output = options.output ?? process.stdout;
+    this.errorOutput = options.errorOutput ?? process.stderr;
+    this.verbose = options.verbose ?? process.env[STORYBOOK_VERBOSE] === '1';
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
     this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
     this.resolveNativeDriver = options.resolveNativeDriver ?? resolveNativeDesktopDriver;
@@ -135,6 +156,7 @@ export class DesktopStorybookCli {
     resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver);
     this.output.write(`Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}\n`);
     const metro = this.runner.start(this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
+    const failures: unknown[] = [];
     try {
       await this.executePlan(
         {
@@ -147,8 +169,19 @@ export class DesktopStorybookCli {
         platform,
         resolvedInstance,
       );
-    } finally {
-      await metro.stop();
+    } catch (error) {
+      failures.push(error);
+    }
+    try {
+      await metro.stop({ failed: failures.length > 0 });
+    } catch (error) {
+      failures.push(error);
+    }
+    if (failures.length === 1) {
+      throw failures[0];
+    }
+    if (failures.length > 1) {
+      throw new AggregateError(failures, 'Storybook driver execution and cleanup failed.');
     }
   }
 
@@ -161,6 +194,79 @@ export class DesktopStorybookCli {
     writeDesktopStoryManifest(manifest, resolvedOutput);
     this.output.write(`${resolvedOutput}\n`);
     return resolvedOutput;
+  }
+
+  async test(platform: Platforms, options: DesktopStorybookTestOptions = {}): Promise<void> {
+    const settings = resolveWdioOptions({
+      ...this.config.wdio,
+      ...Object.fromEntries(Object.entries(options).filter(([, value]) => value !== undefined)),
+    });
+    const manifest = await this.createStoryManifest(this.config, platform);
+    const selected = selectWdioStories(manifest, settings);
+    if (selected.length === 0) {
+      throw new Error('No executable wdio story tests matched the requested selection.');
+    }
+    if (options.list) {
+      this.output.write(
+        `${JSON.stringify(
+          selected.map(({ id, sourcePath, wdio }) => ({
+            id,
+            sourcePath,
+            ...(wdio?.testNames ? { tests: wdio.testNames.filter((name) => matchesWdioTest(name, settings.test)) } : {}),
+          })),
+          null,
+          2,
+        )}\n`,
+      );
+      return;
+    }
+    const connection = this.testConnection(platform, options);
+    if (platform === 'macos' && !options.url) {
+      await this.writeMacOSApplicationLease(
+        path.join(this.config.projectRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
+        settings.timeoutMs,
+      );
+    }
+    const results = await runWdioStoryTests(
+      { ...settings, ...connection, config: this.config, manifest, platform, errorOutput: this.errorOutput },
+      this.runner,
+    );
+    this.output.write(
+      `Ran ${results.length} executable wdio tests (${results.filter(({ status }) => status === 'passed').length} passed, ` +
+        `${results.filter(({ status }) => status === 'skipped').length} skipped).\n`,
+    );
+  }
+
+  private testConnection(platform: Platforms, options: DesktopStorybookTestOptions): { targetId: string; url: string } {
+    if (options.url || options.target) {
+      if (!options.url || !options.target) {
+        throw new Error('Pass --url and --target together, or omit both to use the running Storybook driver instance.');
+      }
+      return { targetId: options.target, url: options.url };
+    }
+    const manifestPath = path.join(this.config.projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
+    if (!fs.existsSync(manifestPath)) {
+      throw new Error(`Start storybook driver --${platform} and launch the app before running storybook test.`);
+    }
+    const manifest: unknown = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    if (
+      typeof manifest !== 'object' ||
+      manifest === null ||
+      !('endpoint' in manifest) ||
+      manifest.endpoint !== platform ||
+      !('instanceId' in manifest) ||
+      manifest.instanceId !== this.instance.id ||
+      !('driverPort' in manifest) ||
+      typeof manifest.driverPort !== 'number' ||
+      !Number.isInteger(manifest.driverPort) ||
+      manifest.driverPort < 1 ||
+      manifest.driverPort > 65535 ||
+      !('targetId' in manifest) ||
+      manifest.targetId !== `${this.config.appName}-${platform}`.toLowerCase()
+    ) {
+      throw new Error(`Invalid Storybook driver instance at ${manifestPath}; restart storybook driver --${platform}.`);
+    }
+    return { targetId: manifest.targetId, url: loopbackUrl(manifest.driverPort) };
   }
 
   printInstance(platform: Platforms): void {
@@ -304,9 +410,12 @@ export class DesktopStorybookCli {
       await this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.startupTimeoutMs);
       if (mode === 'stories-and-tests') {
         const result = await this.runSmokeTests({
+          config: this.config,
+          commandRunner: this.runner,
+          errorOutput: this.errorOutput,
           driverUrl: loopbackUrl(instance.driverPort),
+          manifest: await this.createStoryManifest(this.config, platform),
           platform,
-          projectRoot: this.config.projectRoot,
           targetId: `${this.config.appName}-${platform}`.toLowerCase(),
         });
         this.output.write(`${formatDesktopStorybookSmokeTestSummary(result)}\n`);
@@ -321,7 +430,7 @@ export class DesktopStorybookCli {
       }
       for (const backgroundCommand of backgroundCommands.reverse()) {
         try {
-          await backgroundCommand.stop();
+          await backgroundCommand.stop({ failed: primaryFailure !== undefined });
         } catch (error) {
           failures.push(error);
         }
@@ -443,7 +552,8 @@ export class DesktopStorybookCli {
         }
         this.output.write(`rendered ${id}\n`);
       } catch (error) {
-        failures.push(new Error(`${id}: ${(error as Error).message}`));
+        writeDesktopStorybookFailure(`navigation "${id}"`, error, this.errorOutput);
+        failures.push(new Error(`Story "${id}" failed to render: ${errorMessage(error)}`, { cause: error }));
         consecutiveFailures += 1;
         if (entryIndex === 0 || consecutiveFailures >= 3) {
           break;
@@ -452,7 +562,7 @@ export class DesktopStorybookCli {
     }
 
     if (failures.length > 0) {
-      throw new AggregateError(failures, `${failures.length} stories failed to render.`);
+      throw new AggregateError(failures, `${failures.length} stories failed to render:\n${failures.map(errorMessage).join('\n')}`);
     }
     this.output.write(`Rendered ${entries.length} stories.\n`);
   }
@@ -545,6 +655,7 @@ export class DesktopStorybookCli {
       env: {
         ...command.env,
         [FURN_STORYBOOK_PLATFORM]: platform,
+        [STORYBOOK_VERBOSE]: this.verbose ? '1' : '0',
         ...(instance
           ? {
               [FURN_STORYBOOK_INSTANCE_ID]: instance.id,

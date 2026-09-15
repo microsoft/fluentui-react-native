@@ -9,9 +9,17 @@ invariants; detailed authoring recipes live in the
 - Higher-order components live in `src/components`; read `src/components/AGENTS.md`.
 - Primitive components live in `src/primitives`; read `src/primitives/AGENTS.md`.
 - Story files are library source and follow the tests and stories reference.
-- Portable desktop story tests are static `parameters.desktopDriver` plans.
-  Use the public authoring types, stable `testID` selectors, declarative
-  capability requirements, and no platform branches or executable callbacks.
+- Prefer executable tests under top-level `wdio`, as one callback or a map
+  of named callbacks. Button is the migration proof of concept; legacy
+  `parameters.desktopDriver` plans remain supported for other components.
+  Use stable `testID` selectors and the injected target `platform` for real
+  platform differences, with explicit skips for unsupported capabilities.
+- Executable tests are typed
+  with `WdioStory` from `storybook-desktop/testing` using `import type`.
+  Keep callbacks self-contained; dynamically import Node helpers inside
+  them so the shared Babel transform can exclude them from native bundles.
+  Each named case gets a fresh story, session, and worker; do not share native
+  element handles or depend on previous cases.
 - Storybook application, native project, Metro, bundle, or CocoaPods work follows the
   [Storybook instructions](../../../apps/storybook/AGENTS.md) and the `agentic-storybook-development` skill.
 - Native React Native Windows Fabric component work follows the
@@ -42,7 +50,7 @@ invariants; detailed authoring recipes live in the
 - Export higher-order components and public types explicitly from `src/index.ts`; export primitives and their public types
   explicitly from `src/primitives/index.ts`. Never use wildcard exports.
 - Colocate runtime tests, type tests, and Storybook stories with the implementation.
-- Keep desktop story plans inline and statically extractable; do not hide them
+- Keep legacy desktop story plans inline and statically extractable; do not hide them
   behind variables, spreads, functions, or computed values.
 - Use package scripts for format, lint, build, tests, and snapshots.
 - Do not copy web-only APIs, CSS behavior, or DOM assumptions into React Native.

@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
+const { writeDesktopStorybookFailure } = require('./diagnostics.cjs');
+
 import('../lib/cli/index.js')
   .then(({ runDesktopStorybookCli }) => runDesktopStorybookCli())
   .catch((error) => {
-    process.stderr.write(`${error.message}\n`);
+    writeDesktopStorybookFailure('CLI', error);
     process.exitCode = 1;
   });

@@ -35,7 +35,8 @@
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "report:spec-source-drift": "node ./scripts/spec-contracts/report-spec-source-drift.cjs",
-    "test": "node ./scripts/spec-contracts/check-spec-contracts.cjs && fluentui-scripts jest",
+    "test": "node ./scripts/spec-contracts/check-spec-contracts.cjs && yarn test:stories && fluentui-scripts jest",
+    "test:stories": "tsc -p tsconfig.stories.json",
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
@@ -48,12 +49,14 @@
     "@fluentui-react-native/desktop-driver": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/storybook-desktop": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",
     "@react-native-community/cli-platform-ios": "^20.0.0",
     "@react-native/babel-preset": "^0.81.0",
     "@react-native/metro-config": "^0.81.0",
+    "@storybook/react-native": "^10.4.7",
     "@testing-library/react-native": "catalog:",
     "@types/react": "~19.1.4",
     "react": "19.1.4",
@@ -61,6 +64,7 @@
     "react-native-macos": "^0.81.0",
     "react-native-svg": "^15.12.1",
     "react-native-windows": "^0.81.0",
+    "storybook": "^10.4.0",
     "test-renderer": "catalog:"
   },
   "peerDependencies": {

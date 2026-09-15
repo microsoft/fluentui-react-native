@@ -9,10 +9,12 @@ export {
   type DesktopStorybookCliOptions,
   type DesktopStorybookPrepOptions,
   type DesktopStorybookServerOptions,
+  type DesktopStorybookTestOptions,
 } from './DesktopStorybookCli.js';
 export {
   NodeDesktopCommandRunner,
   type DesktopCommandRunner,
+  type NodeDesktopCommandRunnerOptions,
   type PreparedDesktopCommand,
   type RunningDesktopCommand,
 } from './commandRunner.js';

@@ -9,6 +9,7 @@ export type DesktopStoryManifestEntry = {
   tags: readonly string[];
   title: string;
   tests?: DesktopStoryTests;
+  wdio?: { digest: string; exportName: string; testNames?: readonly string[] };
 };
 
 export type DesktopStoryManifest = {

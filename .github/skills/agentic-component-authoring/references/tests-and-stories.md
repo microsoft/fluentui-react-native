@@ -113,37 +113,48 @@ layout order, or native class names. Keep the initial args deterministic and
 add identifiers only to the small smoke set that agents and CI actively
 validate.
 
-Portable desktop automation is authored inline under
-`parameters.desktopDriver` and typed with `DesktopStoryTests` from
-`@fluentui-react-native/desktop-driver/authoring`:
+Prefer executable WebdriverIO tests under `wdio`, typed with
+`WdioStory<StoryObj<typeof Component>>` from
+`@fluentui-react-native/storybook-desktop/testing` using `import type`.
+The story is the suite (`describe`), and named functions are its cases (`it`):
 
 ```tsx
 export const Default: Story = {
-  tags: ['desktop-e2e'],
-  parameters: {
-    desktopDriver: {
-      version: 1,
-      tests: [
-        {
-          id: 'enabled-button',
-          steps: [
-            { action: 'wait', target: { testId: 'story-button' } },
-            { expect: { state: 'enabled', target: { testId: 'story-button' }, value: true } },
-          ],
-        },
-      ],
-    } satisfies DesktopStoryTests,
+  wdio: {
+    'is enabled': async ({ browser, expect }) => {
+      await expect(await browser.$('~story-button')).toBeEnabled();
+    },
   },
 };
 ```
 
-Keep the plan a static JSON literal. Storybook extracts it without importing
-the React Native module, so variables, functions, spreads, computed properties,
-and runtime platform branches are rejected. Express real differences with
-`platforms`, `requires`, and explicit skip results. Use `testID` for actions;
-use role, accessible name, state, and value assertions to verify the public
-accessibility contract. Button, Checkbox, and Input defaults are the canonical
-initial examples.
+Each callback receives `browser`, `expect`, `platform`, `desktop`, `signal`,
+and `skip`. The typed target `platform` is `macos`, `windows`, or `win32`;
+Win32 is distinct from its WebDriver `platformName` of `windows`. Branch
+inside callbacks for genuine platform differences and use explicit skip
+reasons for unsupported `browser.capabilities['furn:features']`.
+
+Button is the proof of concept and no longer uses custom `desktopDriver`
+plans. Keep names static and callbacks self-contained. Node helpers may be
+dynamically imported inside each callback, but callbacks cannot capture
+story-module bindings. The shared Babel config strips all test functions
+before native dependency collection. Named cases get independent previews,
+sessions, workers, deadlines, results, and failure evidence.
+
+The single-function `wdio` form remains supported. Run with
+`yarn storybook test --<platform>` and optionally `--test <name-glob>`.
+`--list` discovers names without executing code. The `stories-and-tests`
+smoke mode runs these functions alongside remaining legacy plans, grouped by
+story. See the [executable test contract](../../../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
+
+Legacy Checkbox and Input tests still use static JSON
+`parameters.desktopDriver` plans typed with `DesktopStoryTests` from
+`@fluentui-react-native/desktop-driver/authoring`. Keep those plans static and
+use declarative `platforms` and `requires` until they are migrated; do not add
+functions or dynamic values to the old format.
+
+The components package's `test:stories` project checks the experimental
+Button stories without emitting them into the component library.
 
 Button uses focused appearance, size, shape, icon, selection, disabled, and constrained-content stories. Icon uses a
 source and size overview plus focused font, image, SVG, size, color, and accessibility stories.

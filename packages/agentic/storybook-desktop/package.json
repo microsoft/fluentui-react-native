@@ -35,6 +35,11 @@
       "import": "./lib/driver/index.js",
       "default": "./src/driver/index.ts"
     },
+    "./testing": {
+      "types": "./lib/testing/index.d.ts",
+      "import": "./lib/testing/index.js",
+      "default": "./src/testing/index.ts"
+    },
     "./cli": {
       "types": "./lib/cli/index.d.ts",
       "import": "./lib/cli/index.js",
@@ -51,13 +56,16 @@
     "test": "fluentui-scripts jest"
   },
   "dependencies": {
+    "@babel/core": "catalog:",
+    "@babel/plugin-transform-typescript": "catalog:",
     "@fluentui-react-native/desktop-driver": "workspace:*",
     "@rnx-kit/tools-react-native": "catalog:",
+    "@wdio/logger": "catalog:",
     "commander": "^14.0.2",
+    "expect-webdriverio": "catalog:",
     "regexpu-core": "^6.3.1"
   },
   "devDependencies": {
-    "@babel/core": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.81.0"
   },

@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": false,
+    "noImplicitAny": true,
+    "noEmit": true,
+    "tsBuildInfoFile": ".cache/tsconfig.stories.tsbuildinfo"
+  },
+  "include": ["src/components/button/button.stories.tsx"],
+  "exclude": [],
+  "references": [
+    {
+      "path": "./tsconfig.json"
+    },
+    {
+      "path": "../storybook-desktop/tsconfig.json"
+    }
+  ]
+}
