@@ -1,8 +1,14 @@
 import * as React from 'react';
-import { Pressable } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { useControllableValue, useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import {
+  resolveAccessibilityAction,
+  useControllableValue,
+  useFocusablePressable,
+  useOptionalSlot,
+  useSlot,
+} from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 
@@ -61,21 +67,15 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     [disabled, onPress, setStatus, status],
   );
 
-  const checkboxActions = React.useMemo(
-    () =>
-      accessibilityActions?.some((action) => action.name === 'Toggle')
-        ? accessibilityActions
-        : [{ name: 'Toggle' }, ...(accessibilityActions ?? [])],
-    [accessibilityActions],
-  );
+  const toggleAction = React.useMemo(() => resolveAccessibilityAction('toggle', Platform.OS, accessibilityActions), [accessibilityActions]);
   const handleAccessibilityAction = React.useCallback<NonNullable<CheckboxProps['onAccessibilityAction']>>(
     (event) => {
-      if (event.nativeEvent.actionName === 'Toggle' && !disabled) {
+      if (event.nativeEvent.actionName === toggleAction.name && !disabled) {
         setStatus(getNextStatus(status));
       }
       onAccessibilityAction?.(event);
     },
-    [disabled, onAccessibilityAction, setStatus, status],
+    [disabled, onAccessibilityAction, setStatus, status, toggleAction.name],
   );
 
   const rootAccessibilityLabel = accessibilityLabel ?? label;
@@ -83,7 +83,7 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
 
   const nativeProps: React.ComponentProps<typeof Pressable> = {
     ...rest,
-    accessibilityActions: checkboxActions,
+    accessibilityActions: toggleAction.accessibilityActions,
     accessibilityHint: rootAccessibilityHint,
     accessibilityLabel: rootAccessibilityLabel,
     accessibilityRole: 'checkbox',

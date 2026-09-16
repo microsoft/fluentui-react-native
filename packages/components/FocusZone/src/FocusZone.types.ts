@@ -32,8 +32,9 @@ export interface FocusZoneProps extends ViewProps {
   isCircularNavigation?: boolean;
 
   /**
-   *Allows for 2D navigation. This navigation strategy takes into account the position of elements
-   on screen, and navigates in the direction the user selects to the nearest element.
+   * Enables geometric rather than linear navigation on Windows/Win32.
+   * macOS always uses geometric directional navigation.
+   * @platform windows, win32
    */
   use2DNavigation?: boolean;
 

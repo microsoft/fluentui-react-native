@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
@@ -71,64 +71,103 @@ describe('Checkbox', () => {
     expect(component.getByRole('checkbox').props.accessibilityState.checked).toBe(false);
   });
 
-  it.each(['unchecked', 'checked', 'indeterminate'] as const)('toggles %s status once through native accessibility', async (status) => {
-    const onStatusChange = jest.fn();
-    const onPress = jest.fn();
-    const onAccessibilityAction = jest.fn();
-    const component = await renderCheckbox({ defaultStatus: status, onStatusChange, onPress, onAccessibilityAction });
-    const event = { nativeEvent: { actionName: 'Toggle' } };
+  describe.each([
+    ['windows', 'toggle'],
+    ['win32', 'Toggle'],
+    ['macos', 'Toggle'],
+  ] as const)('%s accessibility actions', (platform, actionName) => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    });
+    afterEach(() => jest.restoreAllMocks());
 
-    expect(getRoot(component).props.accessibilityActions).toEqual([{ name: 'Toggle' }]);
-    await fireEvent(getRoot(component), 'accessibilityAction', event);
+    it.each(['unchecked', 'checked', 'indeterminate'] as const)('toggles %s once without synthesizing a press', async (status) => {
+      const calls: string[] = [];
+      const onStatusChange = jest.fn(() => calls.push('status'));
+      const onPress = jest.fn();
+      const onAccessibilityAction = jest.fn(() => calls.push('action'));
+      const component = await renderCheckbox({ defaultStatus: status, onStatusChange, onPress, onAccessibilityAction });
+      const event = { nativeEvent: { actionName } };
 
-    expect(onStatusChange).toHaveBeenCalledTimes(1);
-    expect(onStatusChange).toHaveBeenCalledWith(status === 'checked' ? 'unchecked' : 'checked');
-    expect(getRoot(component).props.accessibilityState.checked).toBe(status !== 'checked');
-    expect(onAccessibilityAction).toHaveBeenCalledWith(event);
-    expect(onPress).not.toHaveBeenCalled();
-  });
+      expect(getRoot(component).props.accessibilityActions).toEqual([{ name: actionName }]);
+      await fireEvent(getRoot(component), 'accessibilityAction', event);
 
-  it('preserves caller accessibility actions without duplicating Toggle', async () => {
-    const accessibilityActions = [{ name: 'Toggle', label: 'Change selection' }, { name: 'custom' }];
-    const component = await renderCheckbox({ accessibilityActions });
+      expect(onStatusChange).toHaveBeenCalledTimes(1);
+      expect(onStatusChange).toHaveBeenCalledWith(status === 'checked' ? 'unchecked' : 'checked');
+      expect(getRoot(component).props.accessibilityState.checked).toBe(status !== 'checked');
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+      expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+      expect(calls).toEqual(['status', 'action']);
+      expect(onPress).not.toHaveBeenCalled();
+    });
 
-    expect(getRoot(component).props.accessibilityActions).toBe(accessibilityActions);
-  });
+    it('preserves a normalized caller action list and labels', async () => {
+      const accessibilityActions = [
+        { name: actionName, label: 'Change selection' },
+        { name: 'custom', label: 'More' },
+      ];
+      const component = await renderCheckbox({ accessibilityActions });
+      expect(getRoot(component).props.accessibilityActions).toBe(accessibilityActions);
+    });
 
-  it('reports accessibility toggles without changing externally driven status', async () => {
-    const onStatusChange = jest.fn();
-    const component = await renderCheckbox({ status: 'indeterminate', onStatusChange });
+    it('deduplicates legacy and native spellings without losing the caller label or custom actions', async () => {
+      const component = await renderCheckbox({
+        accessibilityActions: [{ name: 'Toggle', label: 'Change selection' }, { name: 'toggle' }, { name: 'custom', label: 'More' }],
+      });
+      expect(getRoot(component).props.accessibilityActions).toEqual([
+        { name: actionName, label: 'Change selection' },
+        { name: 'custom', label: 'More' },
+      ]);
+    });
 
-    await fireEvent(getRoot(component), 'accessibilityAction', { nativeEvent: { actionName: 'Toggle' } });
+    it('reports accessibility toggles without changing externally driven status', async () => {
+      const onStatusChange = jest.fn();
+      const component = await renderCheckbox({ status: 'indeterminate', onStatusChange });
 
-    expect(onStatusChange).toHaveBeenCalledWith('checked');
-    expect(getRoot(component).props.accessibilityState.checked).toBe('mixed');
-  });
+      await fireEvent(getRoot(component), 'accessibilityAction', { nativeEvent: { actionName } });
 
-  it('blocks disabled accessibility toggles while forwarding the caller handler', async () => {
-    const onStatusChange = jest.fn();
-    const onAccessibilityAction = jest.fn();
-    const component = await renderCheckbox({ disabled: true, onStatusChange, onAccessibilityAction });
-    const event = { nativeEvent: { actionName: 'Toggle' } };
+      expect(onStatusChange).toHaveBeenCalledTimes(1);
+      expect(onStatusChange).toHaveBeenCalledWith('checked');
+      expect(getRoot(component).props.accessibilityState.checked).toBe('mixed');
+    });
 
-    getRoot(component).props.onAccessibilityAction(event);
+    it('blocks disabled accessibility toggles while forwarding the caller handler once', async () => {
+      const onStatusChange = jest.fn();
+      const onPress = jest.fn();
+      const onAccessibilityAction = jest.fn();
+      const component = await renderCheckbox({ disabled: true, onStatusChange, onPress, onAccessibilityAction });
+      const event = { nativeEvent: { actionName } };
 
-    expect(onStatusChange).not.toHaveBeenCalled();
-    expect(onAccessibilityAction).toHaveBeenCalledWith(event);
-    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
-  });
+      getRoot(component).props.onAccessibilityAction(event);
 
-  it('forwards custom accessibility actions without changing status', async () => {
-    const onStatusChange = jest.fn();
-    const onAccessibilityAction = jest.fn();
-    const component = await renderCheckbox({ accessibilityActions: [{ name: 'custom' }], onStatusChange, onAccessibilityAction });
-    const event = { nativeEvent: { actionName: 'custom' } };
+      expect(onStatusChange).not.toHaveBeenCalled();
+      expect(onPress).not.toHaveBeenCalled();
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+      expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+      expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+    });
 
-    expect(getRoot(component).props.accessibilityActions).toEqual([{ name: 'Toggle' }, { name: 'custom' }]);
-    await fireEvent(getRoot(component), 'accessibilityAction', event);
-
-    expect(onStatusChange).not.toHaveBeenCalled();
-    expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+    it('forwards custom, wrong-case, and activate actions without a second activation path', async () => {
+      const onStatusChange = jest.fn();
+      const onPress = jest.fn();
+      const onAccessibilityAction = jest.fn();
+      const component = await renderCheckbox({
+        accessibilityActions: [{ name: 'custom', label: 'More' }],
+        onStatusChange,
+        onPress,
+        onAccessibilityAction,
+      });
+      expect(getRoot(component).props.accessibilityActions).toEqual([{ name: actionName }, { name: 'custom', label: 'More' }]);
+      for (const name of ['custom', actionName === 'toggle' ? 'Toggle' : 'toggle', 'activate']) {
+        const event = { nativeEvent: { actionName: name } };
+        await fireEvent(getRoot(component), 'accessibilityAction', event);
+        expect(onAccessibilityAction).toHaveBeenLastCalledWith(event);
+      }
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(3);
+      expect(onStatusChange).not.toHaveBeenCalled();
+      expect(onPress).not.toHaveBeenCalled();
+      expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+    });
   });
 
   it('advances indeterminate status to checked on press', async () => {

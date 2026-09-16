@@ -197,16 +197,16 @@ export const Default: Story = {
   tags: ['desktop-e2e'],
   render: (args) => <FocusZoneExample {...args} />,
   wdio: {
-    'navigates linearly and exits the zone on Tab': async (context) => {
+    'uses platform directional navigation and exits the zone on Tab': async (context) => {
       const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
       if (!requireDesktopFocus(context)) return;
-      const { browser } = context;
+      const { browser, platform } = context;
       await (await browser.$('~focus-zone-item-1')).click();
       await expectNativeState(browser, 'focus-zone-item-1', 'focused', true);
       await browser.keys('\uE014');
       await expectNativeState(browser, 'focus-zone-item-2', 'focused', true);
       await browser.keys('\uE015');
-      await expectNativeState(browser, 'focus-zone-item-3', 'focused', true);
+      await expectNativeState(browser, platform === 'macos' ? 'focus-zone-item-5' : 'focus-zone-item-3', 'focused', true);
       await browser.keys('\uE004');
       await expectNativeState(browser, 'focus-zone-after', 'focused', true);
     },
@@ -214,7 +214,8 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Focus an item, then use the arrow keys to move through the grid and Tab to leave the zone.',
+        story:
+          'Focus an item, then use arrows and Tab to leave the zone. Windows/Win32 default to linear navigation; AppKit uses geometric directional navigation.',
       },
     },
   },

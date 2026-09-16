@@ -1,10 +1,6 @@
 import type { WdioStoryContext } from '@fluentui-react-native/storybook-desktop/testing';
 
-export function requireDesktopFocus({ browser, platform, skip }: Pick<WdioStoryContext, 'browser' | 'platform' | 'skip'>): boolean {
-  if (platform !== 'windows' && platform !== 'win32') {
-    skip('This case qualifies the Windows/Win32 focus contract; macOS has a separate native contract.');
-    return false;
-  }
+export function requireDesktopFocus({ browser, skip }: Pick<WdioStoryContext, 'browser' | 'skip'>): boolean {
   const features = browser.capabilities['furn:features'];
   if (!features) {
     throw new Error('Desktop Driver did not provide feature capabilities.');
@@ -14,6 +10,23 @@ export function requireDesktopFocus({ browser, platform, skip }: Pick<WdioStoryC
     return false;
   }
   return true;
+}
+
+/** Click-to-focus is Windows-specific; ordinary AppKit controls need not take focus on click. */
+export async function expectWindowsPointerFocus(
+  { browser, platform }: Pick<WdioStoryContext, 'browser' | 'platform'>,
+  testId: string,
+): Promise<void> {
+  if (platform === 'windows' || platform === 'win32') {
+    await expectNativeState(browser, testId, 'focused', true);
+  }
+}
+
+export async function focusByTab(browser: WdioStoryContext['browser'], entryId: string, targetId: string): Promise<void> {
+  await (await browser.$(`~${entryId}`)).click();
+  await expectNativeState(browser, entryId, 'focused', true);
+  await browser.keys('\uE004');
+  await expectNativeState(browser, targetId, 'focused', true);
 }
 
 export async function expectNativeState(

@@ -34,15 +34,22 @@ describe('focusable pressable', () => {
     jest.restoreAllMocks();
   });
 
-  function render(props: FocusablePressableProps = {}, userRef?: React.Ref<React.ComponentRef<typeof View>>) {
+  function render(props: FocusablePressableProps = {}, userRef?: React.Ref<React.ComponentRef<typeof View>>, inlineFocusRef = false) {
     const instance = { focus: jest.fn() };
     const bindings: FocusTargetBinding[] = [];
+    let pressed = false;
     function Probe({ input }: { input: FocusablePressableProps }) {
       const [native, state, binding] = useFocusablePressable(input);
+      pressed = state.pressed;
       bindings.push(binding);
       const rootProps: PropsWithRefOf<typeof View> = { ...native, children: null, style: undefined, ref: userRef };
       const Root = useSlot(View, rootProps);
-      return <Root ref={binding.focusTargetRef} testID={state.focused ? 'focused' : 'blurred'} />;
+      return (
+        <Root
+          ref={inlineFocusRef ? (node) => binding.focusTargetRef(node) : binding.focusTargetRef}
+          testID={state.focused ? 'focused' : 'blurred'}
+        />
+      );
     }
     act(() => {
       tree = create(<Probe input={props} />, { createNodeMock: () => instance });
@@ -50,6 +57,7 @@ describe('focusable pressable', () => {
     return {
       instance,
       bindings,
+      isPressed: () => pressed,
       props: () => tree!.root.findByType(View).props,
       update: (next: FocusablePressableProps) => act(() => tree!.update(<Probe input={next} />)),
     };
@@ -155,5 +163,80 @@ describe('focusable pressable', () => {
     act(() => subject.props().onKeyDown(keyboardEvent('Enter')));
     act(() => subject.props().onKeyUp(keyboardEvent('Enter')));
     expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it.each(['windows', 'win32'])('ends a cancelled %s native keyboard press without activating it', (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    const onPress = jest.fn();
+    const onPressOut = jest.fn();
+    const subject = render({ onPress, onPressOut });
+    const down = keyboardEvent(' ');
+    act(() => subject.props().onKeyDown(down));
+    act(() => subject.props().onPressIn(down));
+    expect(subject.isPressed()).toBe(true);
+    act(() => subject.props().onKeyDown(keyboardEvent('x')));
+    expect(subject.isPressed()).toBe(false);
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    const up = keyboardEvent(' ');
+    act(() => subject.props().onKeyUp(up));
+    expect(up.defaultPrevented).toBe(true);
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('ends pressed feedback when the native target detaches without a blur event', async () => {
+    jest.replaceProperty(Platform, 'OS', 'macos');
+    const onPressOut = jest.fn();
+    const subject = render({ onPressOut });
+    const down = keyboardEvent(' ');
+    act(() => subject.props().onKeyDown(down));
+    act(() => subject.props().onPressIn(down));
+    expect(subject.isPressed()).toBe(true);
+    await act(async () => {
+      subject.bindings[0].focusTargetRef(null);
+    });
+    expect(subject.isPressed()).toBe(false);
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    const up = keyboardEvent(' ');
+    act(() => subject.props().onKeyUp(up));
+    expect(up.defaultPrevented).toBe(true);
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+  });
+
+  it('rejects a stale Win32 activation before deferred detach notification', async () => {
+    jest.replaceProperty(Platform, 'OS', 'win32' as typeof Platform.OS);
+    const onPress = jest.fn();
+    const subject = render({ onPress });
+    act(() => subject.props().onKeyDown(keyboardEvent('Enter', { code: 'Unidentified' })));
+    await act(async () => {
+      subject.bindings[0].focusTargetRef(null);
+      const up = keyboardEvent('Enter', { code: 'Unidentified' });
+      subject.props().onKeyUp(up);
+      expect(up.defaultPrevented).toBe(true);
+      expect(onPress).not.toHaveBeenCalled();
+    });
+  });
+
+  it.each(['windows', 'win32', 'macos'])('preserves a %s keyboard press through same-instance inline-ref handoffs', (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    const onPressOut = jest.fn();
+    const subject = render({ onPressOut }, undefined, true);
+    const target = subject.bindings[0].focusTarget;
+    const generation = target.generation;
+    act(() => subject.props().onFocus({ target: 1, currentTarget: 1 }));
+    const down = keyboardEvent(' ');
+    act(() => subject.props().onKeyDown(down));
+    act(() => subject.props().onPressIn(down));
+    subject.update({ onPressOut });
+    expect(target.generation).toBe(generation);
+    expect(target.getSnapshot().focused).toBe(true);
+    expect(subject.isPressed()).toBe(true);
+    expect(onPressOut).not.toHaveBeenCalled();
+    const up = keyboardEvent(' ');
+    act(() => subject.props().onKeyUp(up));
+    expect(up.defaultPrevented).toBe(false);
+    act(() => subject.props().onPressOut(up));
+    expect(subject.isPressed()).toBe(false);
+    expect(onPressOut).toHaveBeenCalledTimes(1);
   });
 });

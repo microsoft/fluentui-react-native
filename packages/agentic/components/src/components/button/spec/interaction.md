@@ -58,3 +58,10 @@ activation, key pairing across blur, repeated key-down, disabled Tab stops, and
 shared nested-root modality without refocusing the same target. `FocusRequests`
 verifies native confirmation and rejects disabled/detached targets without
 rewriting physical modality. Each case starts with a fresh story and session.
+
+These cases run on Windows, Win32, and macOS. Only the ordinary click-focus
+assertion is Windows-specific; keyboard setup uses an editable entry followed by
+Tab. macOS activates Return/Space on keydown, while Windows/Win32 activate on
+keyup. Releasing a key or cancelling a started press clears pressed feedback
+without another activation, including after an intervening key or self-blur.
+The macOS all-controls Tab lane requires Keyboard navigation enabled.

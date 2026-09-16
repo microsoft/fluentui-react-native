@@ -28,18 +28,19 @@ export interface FocusTargetController extends FocusTarget {
 
 /**
  * A focus request is only confirmed by an observed focus event, not by a void
- * native focus() return. Attachment generations invalidate stale cleanup.
+ * native focus() return. Registration epochs reject stale ref cleanup.
  */
 export function createFocusTarget(): FocusTargetController {
   let current: object | null = null;
   let generation = 0;
+  let registration = 0;
   let focusable = true;
   let snapshot: FocusTargetSnapshot = Object.freeze({ focused: false });
-  let detached: { instance: object; snapshot: FocusTargetSnapshot } | undefined;
+  let detached: { instance: object } | undefined;
   let pending: { status: FocusRequestStatus; intent: FocusIntent } | undefined;
   const listeners = new Set<() => void>();
-  const publish = (focused: boolean, intent?: FocusIntent) => {
-    if (snapshot.focused !== focused || snapshot.intent !== intent) {
+  const publish = (focused: boolean, intent?: FocusIntent, attachmentChanged = false) => {
+    if (attachmentChanged || snapshot.focused !== focused || snapshot.intent !== intent) {
       snapshot = Object.freeze({ focused, intent });
       Array.from(listeners).forEach((listener) => listener());
     }
@@ -67,33 +68,40 @@ export function createFocusTarget(): FocusTargetController {
     },
     attach: (instance) => {
       cancelPending();
-      const previous = detached?.instance === instance ? detached.snapshot : undefined;
+      const sameTarget = current === instance || detached?.instance === instance;
+      const attachmentChanged = !sameTarget && generation !== 0;
+      const focused = sameTarget && snapshot.focused;
+      const intent = sameTarget ? snapshot.intent : undefined;
       detached = undefined;
       current = instance;
-      const attachment = ++generation;
-      publish(focusable && (previous?.focused ?? false), previous?.intent);
+      const attachment = ++registration;
+      if (!sameTarget) {
+        ++generation;
+      }
+      publish(focusable && focused, intent, attachmentChanged);
       return () => {
-        if (generation === attachment) {
-          const handoff = { instance, snapshot };
+        if (registration === attachment) {
+          ++registration;
+          const handoff = { instance };
           detached = handoff;
           // A callback-ref replacement reattaches the same native instance in
-          // this commit. Preserve its observed focus, but not a later remount.
+          // this commit. Coalesce that handoff without invalidating subscribers
+          // or its mount generation, but notify genuine detach/replacement.
           queueMicrotask(() => {
             if (detached === handoff) {
               detached = undefined;
+              ++generation;
+              publish(false, undefined, true);
             }
           });
-          ++generation;
           current = null;
           cancelPending();
-          publish(false);
         }
       };
     },
     setFocusable: (next) => {
       focusable = next;
       if (!next) {
-        detached = undefined;
         cancelPending();
         publish(false);
       }
@@ -109,7 +117,6 @@ export function createFocusTarget(): FocusTargetController {
       }
     },
     onBlur: () => {
-      detached = undefined;
       cancelPending();
       publish(false);
     },

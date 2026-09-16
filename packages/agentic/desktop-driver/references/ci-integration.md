@@ -115,6 +115,15 @@ Those jobs are consumer examples, not generic package requirements. The native
 helper itself does not require CocoaPods, the Windows App Runtime, or a
 Storybook process.
 
+The shared macOS setup enables Keyboard navigation (`AppleKeyboardUIMode=3`)
+and verifies AppKit's all-controls Tab preference before launching the app.
+Keep this enabled on interactive development and CI Macs. It is not an input
+permission, a screen-unlock operation, or the similarly named Accessibility
+Full Keyboard Access feature. A locked/noninteractive session or missing TCC
+authority still prevents physical input, and the hosted `physicalClick` policy
+still causes tests requiring physical clicks to skip explicitly. Keyboard-only
+CI coverage does not establish physical-click or complete focus qualification.
+
 ## macOS runners and signing
 
 Authoritative AX and input qualification needs:

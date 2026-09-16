@@ -25,10 +25,12 @@ mixed parent moves forward to fully selected rather than cycling back through
 mixed. `onStatusChange` receives the resolved value and any caller `onPress`
 handler runs afterward.
 
-The native accessibility `Toggle` action resolves the same next status without
-calling `onPress`. It preserves the caller's accessibility actions and forwards
-`onAccessibilityAction`. While disabled, the action cannot change status, but
-the caller accessibility handler still receives the event.
+The accessibility toggle action (`toggle` on Windows Fabric, `Toggle` on
+Win32 and as a macOS custom action) resolves the same next status without
+calling `onPress`. It preserves caller actions and labels without duplicate
+declarations and forwards `onAccessibilityAction` exactly once. While disabled,
+the action cannot change status, but the caller accessibility handler still
+receives the original event. No `activate` fallback is added.
 
 Status ownership follows the supplied props. While `status` is supplied the
 control is externally driven: it renders exactly what it is given, reports the

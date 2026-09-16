@@ -1,14 +1,46 @@
 import ApplicationServices
 import Foundation
 
-enum KeyStroke {
+enum KeyStroke: Equatable {
   case keyCode(CGKeyCode)
   case unicode(String)
+}
+
+func modifierFlags(for strokes: [KeyStroke]) -> CGEventFlags {
+  strokes.reduce(into: CGEventFlags()) { flags, stroke in
+    switch stroke {
+    case .keyCode(56), .keyCode(60): flags.insert(.maskShift)
+    case .keyCode(59), .keyCode(62): flags.insert(.maskControl)
+    case .keyCode(58), .keyCode(61): flags.insert(.maskAlternate)
+    case .keyCode(55), .keyCode(54): flags.insert(.maskCommand)
+    default: break
+    }
+  }
+}
+
+func modifierFlagsAfterKey(_ stroke: KeyStroke, down: Bool, held: [KeyStroke]) -> CGEventFlags {
+  var strokes = held
+  if down {
+    strokes.append(stroke)
+  } else {
+    strokes.removeAll { $0 == stroke }
+  }
+  return modifierFlags(for: strokes)
 }
 
 struct PressedKey {
   let value: String
   let stroke: KeyStroke
+}
+
+func trackKeyDown(_ key: PressedKey, held: inout [PressedKey]) {
+  if !held.contains(where: { $0.stroke == key.stroke }) {
+    held.append(key)
+  }
+}
+
+func trackKeyUp(_ stroke: KeyStroke, held: inout [PressedKey]) {
+  held.removeAll { $0.stroke == stroke }
 }
 
 struct ReleaseLedger {
@@ -136,7 +168,7 @@ final class InputController {
     }
     let stroke = strokeForValue(value)
     try postKey(stroke, down: true)
-    pressedKeys.append(PressedKey(value: value, stroke: stroke))
+    trackKeyDown(PressedKey(value: value, stroke: stroke), held: &pressedKeys)
   }
 
   func keyUp(_ value: String, token: CancellationToken) throws {
@@ -149,13 +181,9 @@ final class InputController {
       return
     }
     try requirePhysicalInput()
-    if let index = pressedKeys.lastIndex(where: { $0.value == value }) {
-      let stroke = pressedKeys[index].stroke
-      try postKey(stroke, down: false)
-      pressedKeys.remove(at: index)
-      return
-    }
-    try postKey(strokeForValue(value), down: false)
+    let stroke = strokeForValue(value)
+    try postKey(stroke, down: false)
+    trackKeyUp(stroke, held: &pressedKeys)
   }
 
   func typeText(_ text: String, token: CancellationToken) throws {
@@ -169,9 +197,9 @@ final class InputController {
       let normalized = value == "\n" ? "\u{E006}" : value
       let stroke = strokeForValue(normalized)
       try postKey(stroke, down: true)
-      pressedKeys.append(PressedKey(value: normalized, stroke: stroke))
+      trackKeyDown(PressedKey(value: normalized, stroke: stroke), held: &pressedKeys)
       try postKey(stroke, down: false)
-      pressedKeys.removeLast()
+      trackKeyUp(stroke, held: &pressedKeys)
     }
   }
 
@@ -181,10 +209,10 @@ final class InputController {
   }
 
   func releaseAll() {
-    for key in pressedKeys.reversed() {
+    while let key = pressedKeys.last {
       try? postKey(key.stroke, down: false)
+      pressedKeys.removeLast()
     }
-    pressedKeys.removeAll()
     pointerCancel()
   }
 
@@ -195,7 +223,9 @@ final class InputController {
     try requirePhysicalInput()
     syncPointer()
     for key in ledger.keys.reversed() {
-      try postKey(strokeForValue(key), down: false)
+      let stroke = strokeForValue(key)
+      try postKey(stroke, down: false)
+      trackKeyUp(stroke, held: &pressedKeys)
     }
     for button in ledger.buttons.reversed() {
       _ = try mouseButton(button)
@@ -210,6 +240,7 @@ final class InputController {
     var keyCount = 0
     for code in modifierCodes where CGEventSource.keyState(.combinedSessionState, key: code) {
       try postKey(.keyCode(code), down: false)
+      trackKeyUp(.keyCode(code), held: &pressedKeys)
       keyCount += 1
     }
     syncPointer()
@@ -227,7 +258,7 @@ final class InputController {
     for (index, stroke) in strokes.enumerated() {
       try token.throwIfCancelled()
       try postKey(stroke, down: true)
-      pressedKeys.append(PressedKey(value: "chord:\(index)", stroke: stroke))
+      trackKeyDown(PressedKey(value: "chord:\(index)", stroke: stroke), held: &pressedKeys)
     }
     while pressedKeys.count > base {
       let stroke = pressedKeys.last!.stroke
@@ -262,6 +293,12 @@ final class InputController {
     guard let event else {
       try fail(ErrorCode.inputFailed, "Creating a macOS keyboard event failed.")
     }
+    // Posted events are asynchronous: the OS may not have observed the preceding
+    // modifier event when the next event is constructed. Use our owned ledger.
+    var flags = event.flags
+    flags.subtract([.maskShift, .maskControl, .maskAlternate, .maskCommand])
+    flags.formUnion(modifierFlagsAfterKey(stroke, down: down, held: pressedKeys.map(\.stroke)))
+    event.flags = flags
     event.post(tap: .cghidEventTap)
   }
 
@@ -276,6 +313,10 @@ final class InputController {
       try fail(ErrorCode.inputFailed, "Creating a macOS pointer event failed.")
     }
     event.setIntegerValueField(.mouseEventButtonNumber, value: Int64(nativeButton.rawValue))
+    var flags = event.flags
+    flags.subtract([.maskShift, .maskControl, .maskAlternate, .maskCommand])
+    flags.formUnion(modifierFlags(for: pressedKeys.map(\.stroke)))
+    event.flags = flags
     event.post(tap: .cghidEventTap)
   }
 

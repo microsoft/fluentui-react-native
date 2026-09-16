@@ -17,6 +17,27 @@ The track, the thumb, and every rendered label set `accessible={false}`, so the
 component presents as exactly one element and the label text is never read
 twice.
 
+## Accessibility actions
+
+Framework Base resolves the component-owned toggle to `toggle` on Windows
+Fabric, `Toggle` on Win32, and the existing `Toggle` custom action on macOS.
+The declaration and event comparison share that resolved name. Caller
+spellings of the owned action are normalized and duplicate names are removed,
+preserving caller order, the first supplied label, and other custom names.
+
+An accepted action requests the next checked value and then forwards the
+original `onAccessibilityAction` event exactly once. Controlled checked state
+does not change internally. Disabled actions cannot toggle, but still reach the
+caller handler, as do unrelated custom actions. No action synthesizes
+`onPress`, and `activate` is not an additional toggle path.
+
+The [shared action foundation](../../../../../../framework-base/src/accessibility/AGENTS.md)
+records RNW 0.81.35, Win32 0.81.8, and RNmacOS 0.81.9 source evidence.
+macOS Fabric invokes custom actions by their declared names and ignores
+display labels; default AXPress support cannot be inferred from that path.
+Verify UIA Toggle or actual AX custom invocation with state and callback
+counts, separately from pointer or keyboard activation.
+
 ## Naming
 
 There are three naming paths, in priority order:

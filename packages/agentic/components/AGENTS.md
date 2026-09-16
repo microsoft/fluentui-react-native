@@ -18,6 +18,10 @@ invariants; detailed authoring recipes live in the
   `parameters.desktopDriver` plans remain only in runner compatibility fixtures.
   Use stable `testID` selectors and the injected target `platform` for real
   platform differences, with explicit skips for unsupported capabilities.
+- Shared focus tests run on macOS, Windows, and Win32. Gate only genuine
+  platform-specific assertions, such as Windows pointer-focus, rather than the
+  entire case. Follow the tests-and-stories reference for native activation
+  timing, macOS Keyboard navigation prerequisites, and pass/skip evidence.
 - Executable tests are typed
   with `WdioStory` from `storybook-desktop/testing` using `import type`.
   Keep callbacks self-contained; dynamically import Node helpers inside

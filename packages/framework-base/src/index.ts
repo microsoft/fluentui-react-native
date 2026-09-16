@@ -71,6 +71,12 @@ export type { AccessibilityLabelWarningOptions } from './hooks/useAccessibilityL
 export type { PressableState, PressableStateKeys } from './types/interactive.types';
 
 /**
+ * ----- ACCESSIBILITY -----
+ */
+export { resolveAccessibilityAction } from './accessibility/resolveAccessibilityAction';
+export type { SemanticAccessibilityAction } from './accessibility/resolveAccessibilityAction';
+
+/**
  * ----- JSX RUNTIME -----
  */
 export { jsx, jsxs } from './jsx-runtime';

@@ -19,7 +19,8 @@ track, the thumb, and any rendered label.
 ## Keyboard
 
 Tab moves focus to the hit area while enabled. Switch changes value only through
-its press action or the native `Toggle` accessibility action. It does not add a
+its press action or the semantic toggle accessibility action (`toggle` on
+Windows Fabric, `Toggle` on Win32 and as a macOS custom action). It does not add a
 second key-up toggle. The shared focusable-pressable helper preserves native
 activation and adds a paired Win32 fallback only for otherwise-unrecognized
 native key codes. Caller key/accessibility handlers remain forwarded.

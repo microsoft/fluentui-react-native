@@ -11,7 +11,7 @@ The historical filename is retained so existing plan references remain valid.
 This refinement adds common/platform authoring instructions, modern-ref
 requirements, macOS source research, and a gated `native-lib` assessment.
 
-## Execution status (September 15, 2026 UTC)
+## Execution status (September 15-16, 2026 UTC)
 
 Implemented:
 
@@ -29,16 +29,17 @@ Implemented:
 - Switch no longer toggles independently on key-up. Native Win32 qualification
   exposed `code="Unidentified"`; the shared helper now uses one generation/blur-
   guarded, key-based fallback only where native code-based activation cannot run.
-  Checkbox/Switch `Toggle` and Tab `Select` accessibility actions expose the expected
-  native toggle/selection patterns.
+  Checkbox/Switch and Tab now use Framework Base's shared
+  `resolveAccessibilityAction` for declaration and event-name agreement.
 - The WDIO support from origin/main `8d31a6b27` is integrated in merge
-  `64c4328ac`. All catalog tests now use named WDIO callbacks: 18 cases across
+  `64c4328ac`. All catalog tests now use named WDIO callbacks: 22 cases across
   12 stories. Shared Node-only helpers and every test-bearing story are checked
   without production emit. Compatibility fixtures retain the legacy parser.
   Owned smoke selectors apply to WDIO without bypassing leases or readiness.
 
-Native qualification: all 18 WDIO cases pass with real input and zero skips on
-both Windows Fabric and Win32. The full traversals render 155 and 149 stories,
+Earlier native qualification: all 18 original WDIO cases passed with real input
+and zero skips on both Windows Fabric and Win32, before the follow-up repairs
+below. The full traversals rendered 155 and 149 stories,
 respectively. The upstream authenticated-initial-render readiness fix replaces
 the earlier unsuccessful local experiments; the previous Button selection gate
 is no longer blocking this suite.
@@ -62,8 +63,9 @@ codemod fixture comparisons. The September 15 macOS rerun passes all 80 tasks
 after the Framework Base import-boundary repair below; those fixture failures
 were not reproduced or modified on macOS.
 
-Still gated: complete three-lane P0/V1 parity, macOS native input/VoiceOver,
-the Win32 editor enabled-state announcement, full popup/window restoration and activity
+Still gated: a Windows/Win32 rerun of the repaired 22-case catalog, actual UIA/AX
+action invocation, VoiceOver, complete three-lane P0/V1 parity,
+the native enabled/selected-state announcement gaps, full popup/window restoration and activity
 policy, and P4 visual/high-contrast/scale qualification. A complete new menu owner
 or RadioGroup is not introduced. N0/native-lib remains deferred: observed
 component activation/ref gaps were resolved without a new native module; native
@@ -71,61 +73,82 @@ window observation still needs its own scoped proof and host integration.
 
 ### macOS pre-PR validation (September 15, 2026)
 
-**Observed:** `foundation-settings` failed before running either suite because
-Framework Base's generic entrypoint eagerly imported `react-native` through
-`useFocusablePressable`. The implementation now uses the established
-`.native.ts` split, with shared public types and an explicit unsupported-runtime
-error in the generic facade. The native implementation's behavior is unchanged.
-Both React-only suites pass (15 tests), Framework Base passes 19 suites (147
-tests), the root TypeScript build passes, affected workspace lint passes, and
-`yarn lage test --no-cache` passes all 80 tasks.
+**Repaired:** The initial `foundation-settings` failure came from an eager
+React Native import through Framework Base's generic entrypoint. The focus hook
+now uses the established `.native.ts` split and type-only shared declarations.
+The later press-release regression is also fixed: native keyboard press
+bookkeeping is separate from activation pairing, preserving macOS keydown
+activation while finishing feedback on release, interruption, self-blur,
+disable, or target replacement. Genuine detach/replacement notifies subscribers
+even when the focus boolean is unchanged; same-instance callback-ref handoffs
+preserve snapshot identity and mount generation without rerender loops.
+Framework and actual RNmacOS Pressability integration tests cover cleanup and
+exactly-once callbacks.
 
-**Observed:** From `apps/storybook`, `yarn storybook bundle --macos` and
-`yarn storybook smoke --macos --mode stories-and-tests` complete successfully.
-The owned native lifecycle builds and launches the macOS app, renders all 165
-stories, and shuts down its app and services. The WDIO result is **6 passed,
-12 skipped**, not 18 focus tests passed. The six executed cases cover Button
-semantics/pointer activation/caller-owned selection, Checkbox toggling, and
-Input typing/clearing.
+**Repaired:** `resolveAccessibilityAction` in
+`packages/framework-base/src/accessibility` resolves names and declarations
+together and removes duplicates while preserving caller labels and custom
+actions. Checkbox/Switch/Tab use `toggle`/`select` on Windows Fabric and retain
+`Toggle`/`Select` on Win32 and the existing macOS custom-action path. No generic
+`activate` fallback or synthetic press was added. Source-checked transport
+evidence and future helper rules live in that directory's `AGENTS.md`.
 
-All twelve focus-specific cases explicitly skip macOS with the Windows/Win32
-contract guard in `src/common/desktopFocus.wdio.ts`, including both FocusZone
-cases. The helper advertises keyboard and pointer capabilities; this is an
-authored platform-coverage gap, not an unavailable native driver. A successful
-smoke exit therefore does not close the macOS focus gate.
+**Observed:** Framework Base passes 22 suites/175 tests; Components passes
+57 suites/440 tests. Package format, lint, builds, the unified TypeScript build,
+and all 80 tasks in `yarn lage test --no-cache` pass. The native macOS driver
+build/handshake/self-test contract passes, including deterministic modifier
+flag tests.
 
-The committed-branch review also found two implementation issues that the
-import-boundary repair does not change:
+**Observed:** The final owned macOS smoke builds and launches the app, renders
+all **165 stories**, executes **22 WDIO cases: 20 passed, 2 skipped**, and stops
+its app/services. All fourteen focus behavior cases execute without a platform
+skip: the original twelve plus overlapping-key and repeated-modifier release
+regressions. Six
+baseline cases also pass. The two new, isolated native accessibility-state
+cases explicitly skip for the RNmacOS 0.81.9 Fabric gaps below.
 
-- **macOS keyboard release:** `useFocusablePressable.native.ts` cancels its
-  activation pairing when another key arrives, then prevents the unmatched
-  Space/Return release. RNmacOS Pressability activates on keydown and uses keyup
-  for `onPressOut`, so this also suppresses pressed-state cleanup. A JavaScript
-  integration comparison using installed RNmacOS 0.81.9 Pressability reproduces
-  Space down, `x` down/up, Space up leaving the branch pressed with no
-  `onPressOut`; `origin/main` clears the press. This is not yet a native-app
-  reproduction. Preserve macOS release cleanup independently of Windows
-  activation-pairing cancellation.
-- **Windows Fabric accessibility actions:** Checkbox/Switch declare and handle
-  `Toggle`, and Tab declares and handles `Select`, on every endpoint. Installed
-  RNW 0.81.35 Fabric dispatches lowercase `toggle`/`select` and matches declared
-  actions case-sensitively. Resolve declarations and handlers per endpoint,
-  preserving Win32 spelling, and validate actual UIA action invocation.
-  Physical input plus native state assertions did not exercise this path;
-  this finding is source-established, not an executed UIA reproduction.
+The resumed final review also reproduced and repaired two follow-up edge cases:
+unconditional snapshot publication could loop on same-instance inline ref
+callbacks, and duplicated held-key entries could retain Shift after one keyup.
+Regression coverage verifies stable handoffs while focused/pressed, immediate
+rejection of detached-target activation, genuine-detach cleanup, physical-key
+deduplication, and a native forward Tab after repeated Shift down and release.
+Run the native lifecycle after repository tests: a concurrent attempt failed
+with a lease nonce mismatch before any case ran, while the serial rerun passed.
 
-**Pre-PR recommendation:** resolve those implementation issues and obtain
-non-skipped AppKit-specific evidence for the shared behavior changed by this
-branch before marking it ready to merge. Focused manual checks can supply
-evidence; porting all twelve Windows-only cases is not itself a prerequisite:
+The port preserves native differences rather than simply deleting skips:
 
-| Area                       | Minimum remaining macOS evidence                                                                                                                                                                                                     |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Button, Checkbox, Switch   | Tab/Shift+Tab entry and disabled skipping; native Return/Space phase and exactly-once action counts; repeats, overlapping keys, modifiers, blur/detach; pointer activation without imposing Windows click-focus.                     |
-| Focus targets and modality | Confirm imperative focus without rewriting modality; disabled/detached requests; self-focus versus nested descendants; same-target keyboard/pointer changes and nested theme sharing.                                                |
-| TabList and FocusZone      | Actual first responder after committed eligibility/selection; automatic/manual selection; arrows, Home/End, wrap, disabled/removal recovery, Tab exit, and modified-key propagation.                                                 |
-| Input and accessibility    | Field-editor focus, caret/editing shortcuts and disabled Tab exclusion; VoiceOver role/name/value, selected/checked announcements, and native actions on representative controls.                                                    |
-| AppKit visuals and windows | Native/custom ring exclusivity and same-target updates across light/dark/high contrast; keyboard-navigation settings; inactive-window first click, key-window transitions, and a representative existing Callout open/dismiss smoke. |
+| Concern                       | Implemented test policy                                                                                                                                                                                            |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Pointer focus                 | `expectWindowsPointerFocus` asserts the Windows/Win32 click-focus contract only; the rest of each case runs on macOS. Activate the app through an editable entry before counting clicks.                           |
+| Keyboard entry and activation | Real Tab from a story's editable entry establishes focus. macOS activates Return/Space on keydown; Windows/Win32 activate on paired keyup. Final counts and cleanup remain shared.                                 |
+| Modifier chords               | macOS native input now derives CGEvent flags from the owned key ledger, fixing rapid Shift+Tab and modified-arrow delivery. The app-level test does not require macOS system-owned Control+Arrow to reach TabList. |
+| Native observation            | `StoryStatus` exposes counters through named accessible Views because RNmacOS Fabric paragraphs are not standalone AX elements. Native focus and checked-state assertions remain native.                           |
+| FocusZone                     | AppKit uses geometric directional navigation even when `use2DNavigation` is false; Windows/Win32 default to linear traversal and opt into geometry. Both navigation and Tab-exit cases pass on macOS.              |
+
+Keyboard navigation was initially disabled on this development Mac; enabling it
+made the native all-controls Tab lane available. This is an AppKit preference,
+not keyboard injection authority or a screen-unlock operation. Per the owner's
+direction it is now left enabled, and shared macOS CI setup enables and verifies
+it. The hosted CI job's separate `physicalClick` mask remains in place because
+of its recorded input-interception limitation.
+
+**Remaining evidence/renderer limits:**
+
+- RNmacOS 0.81.9 Fabric excludes the `accessibilityState.disabled`/`selected`
+  native update block, so AXEnabled/AXSelected do not reflect these props.
+  The two skipped cases expose this gap; focus exclusion, state-owner
+  callbacks, and activation guards are tested separately, not presented as AX
+  state evidence.
+- An AppKit view can remain first responder after becoming nonfocusable.
+  Rejected-request tests move focus to another native owner first rather than
+  assuming that disabling itself transferred focus.
+- Actual Windows UIA Toggle/SelectionItem.Select and macOS AX custom-action
+  invocation still need native qualification; physical clicks and state reads
+  are not substitutes. VoiceOver, native/custom ring visual comparison, and
+  broader window/restore scenarios remain unexecuted.
+- Windows and Win32 need the repaired catalog rerun; their earlier 18-case
+  results do not cover these follow-up changes.
 
 Keep the wider three-lane V1 parity, exhaustive popup restoration, P4
 scale/clipping/contrast matrix, and N0/native-lib work explicitly deferred.

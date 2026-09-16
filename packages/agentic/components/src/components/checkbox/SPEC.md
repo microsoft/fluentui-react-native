@@ -107,11 +107,14 @@ platforms; Checkbox adds no key handling of its own and does not intercept Tab.
 A disabled Checkbox sets `focusable` to `false` and is skipped by keyboard
 navigation.
 
-Checkbox declares the native `Toggle` accessibility action, preserving caller
-actions without duplicating it. This is required for the Win32 UIA toggle
-pattern even when a pointer press has already updated the rendered checkmark.
-An accessibility Toggle uses the same status transition without synthesizing
-`onPress`; caller accessibility handlers still run, including while disabled.
+Checkbox resolves its semantic toggle through Framework Base: Windows Fabric
+declares `toggle`, Win32 declares `Toggle`, and macOS retains the `Toggle`
+custom action. The declaration and event comparison use the same resolved name.
+Caller actions and labels are preserved without duplicate names. An
+accessibility toggle uses the same status transition without synthesizing
+`onPress`; caller accessibility handlers still run exactly once, including
+while disabled. See the [accessibility companion](./spec/accessibility.md) for
+source evidence and native invocation limits.
 
 No timed animation is present. Status, hover, press, and focus styling change on
 the next render, so reduced-motion settings need no separate branch.

@@ -86,6 +86,67 @@ describe('focus target controller', () => {
     expect(target.getSnapshot().focused).toBe(false);
   });
 
+  it.each([false, true])('coalesces same-instance handoffs with focused=%s', async (focused) => {
+    const target = createFocusTarget();
+    const instance = { focus: jest.fn() };
+    const detach = target.attach(instance);
+    if (focused) {
+      target.onFocus();
+    }
+    const before = target.getSnapshot();
+    const generation = target.generation;
+    const notify = jest.fn();
+    target.subscribe(notify);
+
+    detach();
+    expect(target.current).toBeNull();
+    expect(target.requestFocus().status).toBe('not-mounted');
+    const finalDetach = target.attach(instance);
+    await Promise.resolve();
+    expect(target.getSnapshot()).toBe(before);
+    expect(target.generation).toBe(generation);
+    expect(notify).not.toHaveBeenCalled();
+
+    finalDetach();
+    await Promise.resolve();
+    expect(target.generation).toBeGreaterThan(generation);
+    expect(target.getSnapshot().focused).toBe(false);
+    expect(notify).toHaveBeenCalledTimes(1);
+  });
+
+  it('notifies genuine replacement even when neither target was focused', () => {
+    const target = createFocusTarget();
+    const oldDetach = target.attach({ focus: jest.fn() });
+    const generation = target.generation;
+    const notify = jest.fn();
+    target.subscribe(notify);
+    const newer = { focus: jest.fn() };
+    target.attach(newer);
+    oldDetach();
+    expect(target.current).toBe(newer);
+    expect(target.generation).toBeGreaterThan(generation);
+    expect(notify).toHaveBeenCalledTimes(1);
+  });
+
+  it.each(['blur', 'disable'])('does not resurrect focus after %s during a ref handoff', async (reason) => {
+    const target = createFocusTarget();
+    const instance = { focus: jest.fn() };
+    const detach = target.attach(instance);
+    target.onFocus();
+    const generation = target.generation;
+    detach();
+    if (reason === 'blur') {
+      target.onBlur();
+    } else {
+      target.setFocusable(false);
+      target.setFocusable(true);
+    }
+    target.attach(instance);
+    await Promise.resolve();
+    expect(target.getSnapshot().focused).toBe(false);
+    expect(target.generation).toBe(generation);
+  });
+
   it('keeps snapshots stable and cleans subscriptions', () => {
     const target = createFocusTarget();
     target.attach({ focus: jest.fn() });

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Pressable } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 
 import {
   type PropsWithRefOf,
+  resolveAccessibilityAction,
   useAccessibilityLabelWarning,
   useFocusablePressable,
   isSelfTargetEvent,
@@ -54,22 +55,16 @@ export function useTab_unstable(props: TabProps): TabState {
   });
 
   const themeState = useThemeState();
-  const selectActions = React.useMemo(
-    () =>
-      accessibilityActions?.some((action) => action.name === 'Select')
-        ? accessibilityActions
-        : [{ name: 'Select' }, ...(accessibilityActions ?? [])],
-    [accessibilityActions],
-  );
+  const selectAction = React.useMemo(() => resolveAccessibilityAction('select', Platform.OS, accessibilityActions), [accessibilityActions]);
   const [pressableProps, pressableState, focusBinding] = useFocusablePressable(
     {
       ...nativeRest,
       accessibilityPosInSet: tabList?.getPosition(value),
       accessibilitySetSize: tabList?.setSize,
       accessibilityRole: 'tab',
-      accessibilityActions: selectActions,
+      accessibilityActions: selectAction.accessibilityActions,
       onAccessibilityAction: (event) => {
-        if (!listDisabled && event.nativeEvent.actionName === 'Select') {
+        if (!listDisabled && event.nativeEvent.actionName === selectAction.name) {
           tabList?.onTabPress(value);
         }
         onAccessibilityAction?.(event);

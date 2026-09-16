@@ -16,6 +16,29 @@ reads the same parts. Icons set `accessible={false}` so they add nothing to the
 announcement, and the hidden width-reservation copy of the label is removed from
 the accessibility tree, so the label is announced exactly once.
 
+## Accessibility actions
+
+Framework Base resolves the component-owned select to `select` on Windows
+Fabric, `Select` on Win32, and the existing `Select` custom action on macOS.
+Use the same resolved name for the declaration and event comparison. Caller
+spellings of the owned action are normalized and duplicate names are removed,
+preserving order, the first supplied label, and other custom names.
+
+An enabled action requests selection from TabList and then forwards the
+original `onAccessibilityAction` event exactly once. Standalone tabs do not
+mutate selection; a custom group handles this native callback itself.
+Disabled tabs (including a disabled TabList) do not request selection, but the
+caller still receives the event. Custom actions are likewise forwarded without
+selecting. No accessibility action synthesizes `onPress`, and `activate` is
+not an additional selection path.
+
+The [shared action foundation](../../../../../../framework-base/src/accessibility/AGENTS.md)
+records RNW 0.81.35, Win32 0.81.8, and RNmacOS 0.81.9 source evidence.
+macOS Fabric custom actions emit the exact declared names and ignore display
+labels; default AXPress support is not established by that path. Native
+qualification must invoke UIA SelectionItem.Select or the AX custom action and
+assert selection plus callback counts, not just read selection after a click.
+
 ## Naming
 
 In the default layout the visible text is the accessible name. Keep it short and

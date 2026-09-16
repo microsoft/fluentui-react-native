@@ -35,7 +35,7 @@ counter affordance.
 | `value`    | `string`                    | `controls`    | Stable TabList selection value.                                                                           |
 | `disabled` | `boolean`                   | `false`       | Blocks presses, removes the tab from the tab order, and selects the disabled colors.                      |
 | `layout`   | `iconAndText \| iconOnly`   | `iconAndText` | Selects the anatomy, the corner radius, and the padding.                                                  |
-| `onPress`  | `PressableProps['onPress']` | none          | The only signal a tab emits. The caller changes `selected` in response.                                   |
+| `onPress`  | `PressableProps['onPress']` | none          | Reports pointer/keyboard activation. A standalone caller changes `selected` in response.                  |
 | `style`    | `StyleProp<ViewStyle>`      | none          | Applied after the resolved root styles.                                                                   |
 
 `layout: 'iconOnly'` is a distinct type shape: it requires `accessibilityLabel`
@@ -127,6 +127,16 @@ the accessibility tree and report the disabled state.
 
 Hover changes the background and foreground on both platforms; pressed takes
 precedence over hover.
+
+The semantic select action resolves through Framework Base to `select` on
+Windows Fabric, `Select` on Win32, and the existing `Select` custom action on
+macOS. It requests TabList selection while enabled, then forwards the original
+caller accessibility event exactly once without synthesizing `onPress`.
+Standalone selection stays externally driven; custom groups handle
+`onAccessibilityAction` as well as `onPress`. Disabled and custom events are
+forwarded without selecting. See the
+[accessibility companion](./spec/accessibility.md) for source evidence and
+native invocation limits.
 
 ## Divergences from Flex
 

@@ -7,7 +7,7 @@
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
-  "exclude": ["**/*.stories.ts", "**/*.stories.tsx", "**/*.wdio.ts"],
+  "exclude": ["**/*.stories.ts", "**/*.stories.tsx", "**/*.story-helpers.tsx", "**/*.wdio.ts"],
   "references": [
     {
       "path": "../../native/Callout/tsconfig.json"

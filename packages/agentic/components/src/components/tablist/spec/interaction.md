@@ -24,8 +24,12 @@ Target eligibility/selection are committed before the layout-effect focus
 request. The active tab stop is distinct from the last confirmed native focus
 value. Targets register ref-backed controllers; native focus events confirm
 requests, and removal/replacement cancels stale requests. Modified shortcuts
-are not consumed. The native `Select` accessibility action uses the same
-collection selection owner.
+are not consumed. Each Tab's semantic select accessibility action uses the same
+collection selection owner: `select` on Windows Fabric, `Select` on Win32, and
+the existing `Select` custom action on macOS. The Tab resolves the declaration
+and event name together, guards disabled selection, and forwards the original
+caller accessibility event once without synthesizing `onPress`. This custom
+action path does not establish default macOS AXPress support.
 
 ## Pointer
 

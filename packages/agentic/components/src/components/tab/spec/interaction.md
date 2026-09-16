@@ -14,6 +14,16 @@ TabList, the same press requests group selection and then preserves the caller's
 While `disabled`, the underlying pressable stops reporting presses and the
 disabled colors apply to the background, the label, and the icon.
 
+## Accessibility activation
+
+The select action (`select` on Windows Fabric, `Select` on Win32 and as a
+macOS custom action) requests TabList selection while enabled. It then
+forwards the original caller `onAccessibilityAction` once without synthesizing
+`onPress`. Standalone tabs remain externally driven, so a custom group handles
+that callback directly. Disabled or unrelated actions are forwarded without
+selecting. Action declarations preserve caller labels and custom actions
+without duplicate names; no `activate` fallback is added.
+
 ## Keyboard
 
 A standalone enabled Tab is focusable and a disabled Tab is skipped. Inside

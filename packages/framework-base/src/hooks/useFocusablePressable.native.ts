@@ -12,6 +12,7 @@ import type { FocusablePressableProps, FocusKeyboardEvent } from './useFocusable
 export type { FocusablePressableProps, FocusKeyboardEvent } from './useFocusablePressable.types';
 
 const interactionKeys = ['pressed', 'hovered'] as const;
+type PressEvent = Parameters<NonNullable<PressableProps['onPressIn']>>[0];
 
 function activationKey(event: FocusKeyboardEvent): string | undefined {
   const { key, code } = event.nativeEvent;
@@ -41,14 +42,25 @@ export function useFocusablePressable(
   const { focusTarget, focusTargetRef } = target;
   const keyDown = React.useRef<string | undefined>(undefined);
   const keyGeneration = React.useRef<number | undefined>(undefined);
+  const keyboardPress = React.useRef<{ event: PressEvent; key: string; generation: number } | undefined>(undefined);
   const [interactionProps, interactionState] = usePressableState(props, interactionKeys);
+  const { onPressOut: releasePress } = interactionProps;
+  const finishKeyboardPress = React.useCallback(() => {
+    const press = keyboardPress.current;
+    if (press) {
+      keyboardPress.current = undefined;
+      releasePress?.(press.event);
+    }
+  }, [releasePress]);
+  const generation = focusTarget.generation;
 
   React.useLayoutEffect(() => {
-    if (disabled || !focusable) {
+    if (disabled || !focusable || (keyboardPress.current && keyboardPress.current.generation !== generation)) {
       keyDown.current = undefined;
       keyGeneration.current = undefined;
+      finishKeyboardPress();
     }
-  }, [disabled, focusable]);
+  }, [disabled, focusable, generation, finishKeyboardPress]);
 
   const handlePress = (event: Parameters<NonNullable<PressableProps['onPress']>>[0]) => {
     // Pressability has already chosen the responder. Pointer targets may be
@@ -67,6 +79,18 @@ export function useFocusablePressable(
     onPress?.(event);
   };
   const focusProps = {
+    onPressIn: (event: PressEvent) => {
+      const key = event?.nativeEvent ? activationKey(event) : undefined;
+      if (key) {
+        event.persist?.();
+        keyboardPress.current = { event, key, generation: focusTarget.generation };
+      }
+      interactionProps.onPressIn?.(event);
+    },
+    onPressOut: (event: PressEvent) => {
+      keyboardPress.current = undefined;
+      interactionProps.onPressOut?.(event);
+    },
     onFocus: (event: Parameters<NonNullable<PressableProps['onFocus']>>[0]) => {
       target.onFocus(event);
       onFocus?.(event);
@@ -75,6 +99,7 @@ export function useFocusablePressable(
       if (isSelfTargetEvent(event)) {
         keyDown.current = undefined;
         keyGeneration.current = undefined;
+        finishKeyboardPress();
       }
       target.onBlur(event);
       onBlur?.(event);
@@ -88,12 +113,17 @@ export function useFocusablePressable(
         if (
           disabled ||
           !focusable ||
+          !focusTarget.current ||
           modifiers ||
           !isSelfTargetEvent(event) ||
-          (keyDown.current === key && keyGeneration.current === focusTarget.generation)
+          (keyDown.current === key && keyGeneration.current === focusTarget.generation) ||
+          (keyboardPress.current?.key === key && keyboardPress.current.generation === focusTarget.generation)
         ) {
           event.preventDefault?.();
           return;
+        }
+        if (!event.defaultPrevented && keyboardPress.current) {
+          finishKeyboardPress();
         }
         keyDown.current = event.defaultPrevented ? undefined : key;
         keyGeneration.current = focusTarget.generation;
@@ -101,6 +131,9 @@ export function useFocusablePressable(
       } else {
         keyDown.current = undefined;
         keyGeneration.current = undefined;
+        if (platform !== 'macos') {
+          finishKeyboardPress();
+        }
       }
     },
     onKeyUp: (event: FocusKeyboardEvent) => {
@@ -110,11 +143,35 @@ export function useFocusablePressable(
       keyDown.current = undefined;
       keyGeneration.current = undefined;
       if (key) {
-        if (disabled || !focusable || !isSelfTargetEvent(event) || !paired) {
+        if (platform === 'macos') {
+          // macOS already activated on keydown; its release only ends pressed
+          // feedback, even when another key cancelled the activation pairing.
+          if (
+            isSelfTargetEvent(event) &&
+            focusTarget.current &&
+            keyboardPress.current?.key === key &&
+            keyboardPress.current.generation === focusTarget.generation
+          ) {
+            event.stopPropagation?.();
+            if (event.defaultPrevented) {
+              finishKeyboardPress();
+            }
+          } else {
+            event.preventDefault?.();
+          }
+          return;
+        }
+        if (disabled || !focusable || !focusTarget.current || !isSelfTargetEvent(event) || !paired) {
           event.preventDefault?.();
+          if (keyboardPress.current?.key === key) {
+            finishKeyboardPress();
+          }
           return;
         }
         event.stopPropagation?.();
+        if (event.defaultPrevented) {
+          finishKeyboardPress();
+        }
         if (platform === 'win32' && !event.defaultPrevented && !['Enter', 'Space', 'GamepadA'].includes(event.nativeEvent.code ?? '')) {
           // Office Win32 can report code="Unidentified". Its Pressability only
           // recognizes code, unlike V1's key-based activation. Keep one paired

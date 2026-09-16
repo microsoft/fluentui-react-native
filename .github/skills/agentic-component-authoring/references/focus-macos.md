@@ -67,11 +67,26 @@ installed RNmacOS `RCTViewComponentView.mm:1769-1779`;
   activation. Do not copy Win32's modifier allowance or TabList Ctrl+Tab behavior.
 - Confirm exactly-once keyboard/accessibility activation; an AX action is not
   equivalent evidence to a physical key sequence.
+- RNmacOS Pressability activates Return/Space on keydown; keyup supplies
+  `onPressOut`. Keep native press cleanup separate from Windows keyup-activation
+  pairing. Intervening keys, caller cancellation, blur, disable, and target
+  replacement must not strand pressed feedback or duplicate release callbacks.
+  Retain a pooled event only with `persist()` and release that reference when
+  the keyboard press ends.
 - Use AppKit's key-view loop where applicable. Respect keyboard-navigation/Full
   Keyboard Access settings and test enabled/disabled settings explicitly.
   `NSApplication.isFullKeyboardAccessEnabled` is not KVO-observable according to
   Apple; do not invent a KVO subscription or assume one cached startup value
   remains current.
+- The shared native focus stories enter through an editable control and Tab,
+  rather than forcing ordinary pointer clicks to focus. The all-controls lane
+  requires Keyboard navigation enabled; record that setting, obtain permission
+  before changing a developer's setting, and restore changes authorized as
+  temporary. Keep it enabled on development/CI Macs unless the owner chooses
+  otherwise; locking the desktop gates physical input, not this preference.
+  A Windows-only pointer
+  assertion may be a no-op on macOS, but the shared focus/activation assertions
+  must still execute.
 - Do not equate VoiceOver navigation focus with the application's keyboard first
   responder. Validate role/name/value and native action behavior in both modes.
 

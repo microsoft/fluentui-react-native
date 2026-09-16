@@ -14,6 +14,7 @@
     "src/components/switch/switch.stories.tsx",
     "src/components/tablist/tablist.stories.tsx",
     "src/primitives/focus-zone/focus-zone.stories.tsx",
+    "src/**/*.story-helpers.tsx",
     "src/**/*.wdio.ts"
   ],
   "exclude": [],

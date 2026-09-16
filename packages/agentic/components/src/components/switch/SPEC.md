@@ -127,8 +127,13 @@ These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 The root is focusable while enabled and drops out of the tab order when
 disabled. Shared `useFocusablePressable` owns keyboard/press coordination.
-Switch does not add a second key-up toggle, and declares the native `Toggle`
-accessibility action while preserving caller actions and handlers.
+Switch does not add a second key-up toggle. Its semantic accessibility toggle
+resolves through Framework Base to `toggle` on Windows Fabric, `Toggle` on
+Win32, and the existing `Toggle` custom action on macOS. Declaration and event
+comparison use the same name, preserving caller labels and custom actions
+without duplicate declarations. Accepted actions toggle before forwarding the
+original caller event once; disabled and custom events are still forwarded
+without a state change. Accessibility actions never synthesize `onPress`.
 
 On Windows the root maps to a UI Automation toggle element and the on and off
 state is exposed both through the native accessibility state and through the

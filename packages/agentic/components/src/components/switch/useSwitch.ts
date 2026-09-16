@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Animated, Easing, Pressable, View } from 'react-native';
+import { Animated, Easing, Platform, Pressable, View } from 'react-native';
 
 import {
+  resolveAccessibilityAction,
   useAccessibilityLabelWarning,
   useFocusablePressable,
   useOptionalSlot,
@@ -100,21 +101,15 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
         };
 
   const { toggle: toggleChecked } = toggle;
-  const switchActions = React.useMemo(
-    () =>
-      accessibilityActions?.some((action) => action.name === 'Toggle')
-        ? accessibilityActions
-        : [{ name: 'Toggle' }, ...(accessibilityActions ?? [])],
-    [accessibilityActions],
-  );
+  const toggleAction = React.useMemo(() => resolveAccessibilityAction('toggle', Platform.OS, accessibilityActions), [accessibilityActions]);
   const handleAccessibilityAction = React.useCallback<NonNullable<SwitchProps['onAccessibilityAction']>>(
     (event) => {
-      if (event.nativeEvent.actionName === 'Toggle') {
+      if (event.nativeEvent.actionName === toggleAction.name) {
         toggleChecked();
       }
       onAccessibilityAction?.(event);
     },
-    [onAccessibilityAction, toggleChecked],
+    [onAccessibilityAction, toggleChecked, toggleAction.name],
   );
   const handlePress = React.useCallback(
     (event: Parameters<NonNullable<SwitchProps['onPress']>>[0]) => {
@@ -128,7 +123,7 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     ...rest,
     ...pressableNameProps,
     accessibilityRole: 'switch',
-    accessibilityActions: switchActions,
+    accessibilityActions: toggleAction.accessibilityActions,
     onAccessibilityAction: handleAccessibilityAction,
     accessibilityState: {
       ...rest.accessibilityState,

@@ -8,6 +8,8 @@ import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing
 
 import { Switch } from './switch';
 import type { SwitchLayout } from './switch.types';
+import { Input } from '../input/input';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -77,13 +79,14 @@ function FocusManagementScene() {
   const [changes, setChanges] = useState(0);
   return (
     <View>
+      <Input accessibilityLabel="Keyboard entry" placeholder="Tab to the switch" testID="focus-switch-entry" />
       <Switch
         layout="switch"
         accessibilityLabel="Activation probe"
         testID="focus-switch"
         onChange={() => setChanges((count) => count + 1)}
       />
-      <Text testID="focus-switch-count">{String(changes)}</Text>
+      <StoryStatus testID="focus-switch-count">{String(changes)}</StoryStatus>
     </View>
   );
 }
@@ -93,16 +96,20 @@ export const FocusManagement: Story = {
   tags: ['desktop-focus'],
   wdio: {
     'toggles exactly once per pointer, Enter, and Space activation': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      const { requireDesktopFocus, expectNativeState, expectWindowsPointerFocus, focusByTab } =
+        await import('../../common/desktopFocus.wdio.ts');
       if (!requireDesktopFocus(context)) return;
       const { browser, expect } = context;
       const control = await browser.$('~focus-switch');
       const count = await browser.$('~focus-switch-count');
+      await (await browser.$('~focus-switch-entry')).click();
+      await expectNativeState(browser, 'focus-switch-entry', 'focused', true);
       await expectNativeState(browser, 'focus-switch', 'checked', false);
       await control.click();
-      await expectNativeState(browser, 'focus-switch', 'focused', true);
+      await expectWindowsPointerFocus(context, 'focus-switch');
       await expect(count).toHaveText('1');
       await expectNativeState(browser, 'focus-switch', 'checked', true);
+      await focusByTab(browser, 'focus-switch-entry', 'focus-switch');
       await browser.keys('\uE007');
       await expect(count).toHaveText('2');
       await expectNativeState(browser, 'focus-switch', 'checked', false);

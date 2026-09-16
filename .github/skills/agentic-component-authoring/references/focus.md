@@ -93,6 +93,10 @@ agentic components use React 19.
 2. Compose interaction handlers with exactly one activation owner. Native
    Pressable activation, key handlers, and accessibility actions must not each
    invoke the same action independently.
+   Separate activation cancellation from cleanup of an already-started native
+   press. macOS activates on keydown; Windows/Win32 activate on keyup. Always
+   finish pressed feedback on release, self-blur, disable, or target replacement
+   without generating a new action or forwarding `onPressOut` twice.
 3. Call `useFocusVisuals` after resolving focus. Store its private optional
    `FocusRing` in state and apply `enableFocusRing` only to the focus target.
 4. In the styling phase call `applyFocusRingStyles` with theme state and resolved
@@ -116,9 +120,14 @@ updates or per-control pointer trackers.
 Focus targets expose `requestFocus(intent)`, an observable snapshot, and a
 mount generation. A request reports `requested` until a focus event confirms it;
 detach, disable, replacement, or explicit cancellation invalidate pending work.
-The controller preserves focus for a same-commit ref handoff to the identical
-native instance, not a later remount. Higher-level native window activity and
-cross-window restore remain separately qualified.
+Same-commit ref handoffs to the identical native instance preserve focus,
+snapshot identity, and mount generation; inline forwarding callbacks must not
+create a subscription/render loop or cancel a valid keyboard press. Registration
+epochs reject stale cleanup independently. Genuine detach notifications are
+coalesced to the end of the commit, but `current` clears and pending requests
+cancel immediately. Never treat the last observed focus snapshot as proof that
+a target is still mounted. Higher-level native window activity and cross-window
+restore remain separately qualified.
 
 For nested controls, preserve `target`/`currentTarget` or equivalent native
 identity and separate self-focus from focus-within. Functional Input borders,
