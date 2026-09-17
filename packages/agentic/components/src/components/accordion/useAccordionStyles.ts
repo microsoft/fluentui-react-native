@@ -1,7 +1,7 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
-import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
+import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
 import {
   accordionStyles,
@@ -51,14 +51,7 @@ export function useAccordionStyles_unstable(state: AccordionState) {
   ];
   const iconSize = getAccordionIconSize();
 
-  state.focusVisualProps = createFocusVisualProps_unstable({
-    borderRadius: headerLayoutStyle.borderRadius,
-    innerColor: state.tokens.color.strokeFocusInner,
-    innerWidth: state.tokens.strokeWidth.thin,
-    outerColor: state.tokens.color.strokeFocusOuter,
-    outerWidth: state.tokens.strokeWidth.thick,
-    visible: state.focused,
-  });
+  applyFocusRingStyles(state.FocusRing, state, headerLayoutStyle.borderRadius);
   attachSlotProps(state.root, { style: rootStyle });
   attachSlotProps(state.header, { style: headerStyle });
   if (state.title) {

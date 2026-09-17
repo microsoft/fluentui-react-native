@@ -3,7 +3,7 @@
   "component": "menu-item",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-08-28",
+  "reviewedAt": "2026-09-14",
   "sources": [
     {
       "id": "flex-component",
@@ -71,6 +71,10 @@
   ],
   "divergences": [
     {
+      "id": "native-system-focus-visuals",
+      "status": "accepted"
+    },
+    {
       "id": "menu-item-native-header-root",
       "status": "accepted"
     },
@@ -98,7 +102,7 @@
     },
     {
       "id": "MNI-005",
-      "evidence": ["useMenuItemStyles.ts", "menu-item.styles.ts", "menu-item.test.tsx"]
+      "evidence": ["useMenuItem.ts", "useMenuItemStyles.ts", "menu-item.styles.ts", "menu-item.test.tsx"]
     }
   ]
 }

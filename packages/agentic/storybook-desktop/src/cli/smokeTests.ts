@@ -10,6 +10,7 @@ import type { DesktopWebdriverOptions, DesktopWebdriverSession } from '@fluentui
 
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
+import { resolveWdioOptions } from '../config/wdio.js';
 import { runWdioStoryTests, selectWdioStories, WdioStoryTestRunError, type WdioStoryTestResult } from '../testing/runWdioTests.js';
 import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 import type { DesktopCommandRunner } from './commandRunner.js';
@@ -25,6 +26,8 @@ export type DesktopStorybookSmokeTestOptions = {
   manifest: DesktopStoryManifest;
   platform: Platforms;
   targetId: string;
+  storyPattern?: string;
+  testTag?: string;
   errorOutput?: DesktopStorybookErrorOutput;
   commandRunner?: DesktopCommandRunner;
 };
@@ -42,8 +45,17 @@ export async function runDesktopStorybookSmokeTests(
   if (manifest.endpoint !== platform) {
     throw new Error('The smoke test manifest targets a different platform.');
   }
-  const planStoryIds = new Set(selectDesktopStoryTests(manifest, platform, { tag: 'desktop-e2e' }).map(({ entry }) => entry.id));
-  const wdioStoryIds = new Set(selectWdioStories(manifest, config.wdio).map(({ id }) => id));
+  const storyPattern = options.storyPattern ?? process.env.STORYBOOK_SMOKE_STORY;
+  const testTag = options.testTag ?? process.env.STORYBOOK_SMOKE_TAG;
+  const wdioSettings = resolveWdioOptions({
+    ...config.wdio,
+    ...(storyPattern !== undefined ? { story: storyPattern } : {}),
+    ...(testTag !== undefined ? { tag: testTag } : {}),
+  });
+  const planStoryIds = new Set(
+    selectDesktopStoryTests(manifest, platform, { story: storyPattern, tag: testTag ?? 'desktop-e2e' }).map(({ entry }) => entry.id),
+  );
+  const wdioStoryIds = new Set(selectWdioStories(manifest, wdioSettings).map(({ id }) => id));
   const storyIds = [...new Set([...planStoryIds, ...wdioStoryIds])].sort();
   if (storyIds.length === 0) {
     throw new Error('No desktop story tests matched the smoke selection.');
@@ -57,7 +69,7 @@ export async function runDesktopStorybookSmokeTests(
   for (const storyId of storyIds) {
     try {
       if (planStoryIds.has(storyId)) {
-        const plans = await runStoryPlans(options, storyId, artifacts.root, connect);
+        const plans = await runStoryPlans(options, storyId, artifacts.root, connect, testTag ?? 'desktop-e2e');
         tests.push(...plans.tests);
         if (plans.status !== 'passed' && plans.tests.every(({ status }) => status === 'passed' || status === 'skipped')) {
           throw new Error(`The static test runner failed for "${storyId}" without failed test details.`);
@@ -69,7 +81,7 @@ export async function runDesktopStorybookSmokeTests(
           wdio.push(
             ...(await runWdio(
               {
-                ...config.wdio,
+                ...wdioSettings,
                 artifactsRoot: path.join(artifacts.root, 'wdio', `story-${encodeURIComponent(storyId)}`),
                 config,
                 manifest,
@@ -150,6 +162,7 @@ async function runStoryPlans(
   storyId: string,
   artifactsRoot: string,
   connect: DesktopStorybookSmokeConnector,
+  tag: string,
 ): Promise<DesktopStoryRunResult> {
   const desktop = await connect({
     launchMode: 'attach',
@@ -177,7 +190,7 @@ async function runStoryPlans(
         options.errorOutput,
       );
     };
-    result = await desktop.runStoryTests({ artifactsRoot, selection: { story: storyId, tag: 'desktop-e2e' }, onTestResult });
+    result = await desktop.runStoryTests({ artifactsRoot, selection: { story: storyId, tag }, onTestResult });
     for (const test of result.tests) {
       if (!reported.has(`${test.storyId}/${test.testId}`)) {
         onTestResult(test);
@@ -199,6 +212,9 @@ async function runStoryPlans(
   }
   if (!result) {
     throw new Error('Desktop story tests completed without a result.');
+  }
+  if (result.tests.length === 0) {
+    throw new Error(`No desktop story tests matched "${storyId}" with tag "${tag}".`);
   }
   return result;
 }

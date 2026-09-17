@@ -1,7 +1,8 @@
 import { Pressable } from 'react-native';
 
-import { usePressableState, useSlot } from '@fluentui-react-native/framework-base';
+import { useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 
 import type { RadioProps, RadioState } from './radio.types';
 
@@ -24,7 +25,7 @@ export function useRadio_unstable(props: RadioProps): RadioState {
   } = props;
 
   const themeState = useThemeState();
-  const [pressableProps, pressableState] = usePressableState({
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
     accessibilityLabel: accessibilityLabel ?? label,
     accessibilityHint: accessibilityHint ?? (showSecondaryText ? secondaryText : undefined),
@@ -36,11 +37,14 @@ export function useRadio_unstable(props: RadioProps): RadioState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
   });
-  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
+
+  const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
 
   return {
+    FocusRing,
     indicatorDotStyle: [],
     indicatorStyle: [],
     labelContainerStyle: [],
@@ -56,5 +60,6 @@ export function useRadio_unstable(props: RadioProps): RadioState {
     userStyle,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
   };
 }

@@ -68,7 +68,7 @@ An internal container `View` wraps the whole component and owns the layout
 direction, gap, and padding; it is not replaceable. Render order is: container,
 then per layout — `switch` renders the hit area alone, `horizontal` renders
 before label, hit area, after label, and `vertical` renders the above label then
-the hit area. Inside the hit area the focus visual renders first, then the
+the hit area. Inside the hit area the optional `FocusRing` renders first, then the
 track, and the thumb renders inside the track.
 
 Because both label flags default to `true`, the default `horizontal` layout
@@ -93,8 +93,9 @@ value never moves.
 hovered state through the shared interactive precedence, and interpolate the
 track and thumb colors together with the thumb position from one progress value.
 
-**SWCH-005:** Show the two-ring focus visual inside the hit area while the root
-is focused and not disabled, using the root corner radius.
+**SWCH-005:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+on the hit-area root, not the label container or track. Retain the mounted
+two-ring visual and its root-radius geometry for the custom path.
 
 **SWCH-006:** Expose the root as a switch to assistive technology with the
 checked and disabled state merged over any caller-supplied state, and derive the
@@ -107,14 +108,32 @@ border widths, the two inset offsets, and the thumb width.
 the animation on first mount, and snap to the end value while the platform
 reduced-motion setting is on.
 
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
+
 ## Platform behavior
 
 The root is focusable while enabled and drops out of the tab order when
-disabled. It has both a normal `Pressable` action handler and an explicit
-key-up handler for Enter, Space, and platform spellings of the space key. The
-caller key handler runs first. Whether a platform also synthesizes the normal
-press for one of those keys requires native verification because both paths
-currently request a toggle.
+disabled. Shared `useFocusablePressable` owns keyboard/press coordination.
+Switch does not add a second key-up toggle. Its semantic accessibility toggle
+resolves through Framework Base to `toggle` on Windows Fabric, `Toggle` on
+Win32, and the existing `Toggle` custom action on macOS. Declaration and event
+comparison use the same name, preserving caller labels and custom actions
+without duplicate declarations. Accepted actions toggle before forwarding the
+original caller event once; disabled and custom events are still forwarded
+without a state change. Accessibility actions never synthesize `onPress`.
 
 On Windows the root maps to a UI Automation toggle element and the on and off
 state is exposed both through the native accessibility state and through the
@@ -129,12 +148,14 @@ interpolates colors, which the native driver cannot animate.
 
 ## Divergences from Flex
 
-| ID                                | Disposition | React Native contract                                                                                                                                                                 | Follow-up                                                                                                    |
-| --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `switch-label-association-ids`    | Resolved    | When the caller supplies no name, the component copies visible label text to the root as the single accessible-name mechanism and emits no unresolved labelled-by references.         | Implemented in `useSwitch.ts` and covered by naming tests.                                                   |
-| `switch-label-spacing`            | Accepted    | One container gap separates the control from whichever labels render. Flex distinguishes inner and outer label spacing per side.                                                      | None. A single gap is the natural React Native flex-container expression and matches the inner spacing step. |
-| `switch-focus-modality`           | Accepted    | The focus visual appears whenever the root is focused, including after a press. Flex shows it only for keyboard-modality focus.                                                       | None. React Native exposes no focus modality on these platforms.                                             |
-| `switch-keyboard-activation-path` | Deferred    | FURN registers both `onPress` and a recognized-key `onKeyUp` toggle. If Windows or macOS `Pressable` also synthesizes `onPress` for that key, one activation can request two toggles. | Verify the native event sequence, then remove the redundant path or document the platform-specific handler.  |
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
+
+| ID                                | Disposition | React Native contract                                                                                                                                                         | Follow-up                                                                                                    |
+| --------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `switch-label-association-ids`    | Resolved    | When the caller supplies no name, the component copies visible label text to the root as the single accessible-name mechanism and emits no unresolved labelled-by references. | Implemented in `useSwitch.ts` and covered by naming tests.                                                   |
+| `switch-label-spacing`            | Accepted    | One container gap separates the control from whichever labels render. Flex distinguishes inner and outer label spacing per side.                                              | None. A single gap is the natural React Native flex-container expression and matches the inner spacing step. |
+| `switch-focus-modality`           | Accepted    | Custom visibility follows keyboard modality from the scene root rather than a component-local pointer tracker. Native appearance remains renderer-owned.                      | Preserve the shared hook and component modality matrix.                                                      |
+| `switch-keyboard-activation-path` | Resolved    | One shared activation path owns each key gesture; the component no longer toggles separately on key-up.                                                                       | Retain exact-count native keyboard and accessibility-action coverage.                                        |
 
 ## Conformance
 
@@ -144,7 +165,7 @@ interpolates colors, which the native driver cannot animate.
 | SWCH-002    | `useSwitch.ts`, `switch.test.tsx`                                            |
 | SWCH-003    | `renderSwitch.tsx`, `useSwitch.ts`, `switch.test.tsx`                        |
 | SWCH-004    | `switch.styles.ts`, `useSwitchStyles.ts`, `switch.test.tsx`                  |
-| SWCH-005    | `useSwitchStyles.ts`, `switch.test.tsx`                                      |
+| SWCH-005    | `useSwitch.ts`, `useSwitchStyles.ts`, `switch.test.tsx`                      |
 | SWCH-006    | `useSwitch.ts`, `switch.test.tsx`                                            |
 | SWCH-007    | `switch.styles.ts`, `switch.test.tsx`                                        |
 | SWCH-008    | `useSwitch.ts`, `useSwitchStyles.ts`, `switch.stories.tsx`                   |

@@ -1,9 +1,10 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import type { TextProps, ViewProps } from 'react-native';
 import type { ComponentProps } from 'react';
 
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 
 import { defaultFlexTokens, defaultResolvedThemeAppearance } from '@fluentui-react-native/design/testing';
 import { directComponent } from '@fluentui-react-native/framework-base';
@@ -80,13 +81,101 @@ describe('Switch', () => {
     const component = await renderSwitch({ accessibilityLabel: 'Wi-Fi', layout: 'switch', onChange });
     const root = component.getByRole('switch', { name: 'Wi-Fi' });
 
-    await fireEvent(root, 'keyUp', { nativeEvent: { key: 'Enter' } });
+    await fireEvent(root, 'keyDown', { nativeEvent: { key: 'Enter', code: 'Enter' } });
+    await fireEvent(root, 'keyUp', { nativeEvent: { key: 'Enter', code: 'Enter' } });
     await flushAnimationFrame();
-    await fireEvent(root, 'keyUp', { nativeEvent: { key: ' ' } });
+    await fireEvent(root, 'keyDown', { nativeEvent: { key: ' ', code: 'Space' } });
+    await fireEvent(root, 'keyUp', { nativeEvent: { key: ' ', code: 'Space' } });
     await flushAnimationFrame();
 
     expect(onChange).toHaveBeenNthCalledWith(1, true);
     expect(onChange).toHaveBeenNthCalledWith(2, false);
+  });
+
+  describe.each([
+    ['windows', 'toggle'],
+    ['win32', 'Toggle'],
+    ['macos', 'Toggle'],
+  ] as const)('%s accessibility actions', (platform, actionName) => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    });
+    afterEach(() => jest.restoreAllMocks());
+
+    it.each([false, true])('toggles defaultChecked=%s once without synthesizing a press', async (defaultChecked) => {
+      const calls: string[] = [];
+      const onChange = jest.fn(() => calls.push('change'));
+      const onAccessibilityAction = jest.fn(() => calls.push('action'));
+      const onPress = jest.fn();
+      const component = await renderSwitch({ defaultChecked, onChange, onAccessibilityAction, onPress });
+      const event = { nativeEvent: { actionName } };
+
+      expect(component.getByRole('switch').props.accessibilityActions).toEqual([{ name: actionName }]);
+      await fireEvent(component.getByRole('switch'), 'accessibilityAction', event);
+      await flushAnimationFrame();
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(!defaultChecked);
+      expect(component.getByRole('switch').props.accessibilityState.checked).toBe(!defaultChecked);
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+      expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+      expect(calls).toEqual(['change', 'action']);
+      expect(onPress).not.toHaveBeenCalled();
+    });
+
+    it('deduplicates both spellings and preserves caller labels and custom actions', async () => {
+      const component = await renderSwitch({
+        accessibilityActions: [{ name: 'Toggle' }, { name: 'toggle', label: 'Change setting' }, { name: 'custom', label: 'More' }],
+      });
+      expect(component.getByRole('switch').props.accessibilityActions).toEqual([
+        { name: actionName, label: 'Change setting' },
+        { name: 'custom', label: 'More' },
+      ]);
+    });
+
+    it('reports a toggle without changing controlled checked state', async () => {
+      const onChange = jest.fn();
+      const component = await renderSwitch({ checked: false, onChange });
+      await fireEvent(component.getByRole('switch'), 'accessibilityAction', { nativeEvent: { actionName } });
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(true);
+      expect(component.getByRole('switch').props.accessibilityState.checked).toBe(false);
+    });
+
+    it('guards disabled toggles while forwarding the caller event once', async () => {
+      const onChange = jest.fn();
+      const onPress = jest.fn();
+      const onAccessibilityAction = jest.fn();
+      const component = await renderSwitch({ disabled: true, onChange, onPress, onAccessibilityAction });
+      const event = { nativeEvent: { actionName } };
+      component.getByRole('switch').props.onAccessibilityAction(event);
+      expect(onChange).not.toHaveBeenCalled();
+      expect(onPress).not.toHaveBeenCalled();
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+      expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+      expect(component.getByRole('switch').props.accessibilityState.checked).toBe(false);
+    });
+
+    it('forwards custom, wrong-case, and activate actions without toggling', async () => {
+      const onChange = jest.fn();
+      const onPress = jest.fn();
+      const onAccessibilityAction = jest.fn();
+      const component = await renderSwitch({
+        accessibilityActions: [{ name: 'custom', label: 'More' }],
+        onChange,
+        onPress,
+        onAccessibilityAction,
+      });
+      for (const name of ['custom', actionName === 'toggle' ? 'Toggle' : 'toggle', 'activate']) {
+        const event = { nativeEvent: { actionName: name } };
+        await fireEvent(component.getByRole('switch'), 'accessibilityAction', event);
+        expect(onAccessibilityAction).toHaveBeenLastCalledWith(event);
+      }
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(3);
+      expect(onChange).not.toHaveBeenCalled();
+      expect(onPress).not.toHaveBeenCalled();
+      expect(component.getByRole('switch').props.accessibilityState.checked).toBe(false);
+    });
   });
 
   it('forwards hover and press handlers while preserving consumer accessibility state', async () => {
@@ -120,24 +209,14 @@ describe('Switch', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('renders the persistent dual-ring focus visual on the hit area', async () => {
-    const tokens = defaultFlexTokens;
+  it('uses native focus visuals on the hit area without mounting custom rings', async () => {
     const component = await renderSwitch({ label: 'Wi-Fi', labelAfter: false });
     const root = component.getByRole('switch', { name: 'Wi-Fi' });
 
     await fireEvent(root, 'focus', {});
+    expect(root.props.enableFocusRing).toBe(true);
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: tokens.color.strokeFocusOuter,
-      borderWidth: tokens.strokeWidth.thick,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: tokens.color.strokeFocusInner,
-      borderWidth: tokens.strokeWidth.thin,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it('positions labels according to layout', async () => {

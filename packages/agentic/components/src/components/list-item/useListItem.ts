@@ -1,10 +1,11 @@
 import { Pressable, Text as NativeText, View } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
+import { useOptionalSlot, useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
 import { hideSlotProps } from '../../common/accessibility';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Text } from '../text/text';
 
 import { getListItemAvatarSize, getListItemIconSize, getListItemSelectionIndicatorGlyph } from './list-item.styles';
@@ -83,7 +84,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
   const selectedFill = selected && selectionMode !== 'multiple' && !disabled;
   const selectionGlyph = selectionMode === 'none' ? undefined : getListItemSelectionIndicatorGlyph(selected, selectionMode);
 
-  const [pressableProps, pressableState] = usePressableState({
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
     accessibilityRole: rest.accessibilityRole ?? 'button',
     accessibilityState: {
@@ -93,10 +94,12 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
   });
 
-  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
+
+  const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const content = useSlot(NativeText, contentProp);
   const contentHidden = useSlot(NativeText, contentProp);
   const secondaryContent = useOptionalSlot(Text, secondaryContentProp);
@@ -107,6 +110,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
   const selectionIndicator = useOptionalSlot(NativeText, selectionGlyph, { transform: hideSlotProps });
 
   return {
+    FocusRing,
     root,
     content,
     contentHidden,
@@ -127,5 +131,6 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     userStyle,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
   };
 }

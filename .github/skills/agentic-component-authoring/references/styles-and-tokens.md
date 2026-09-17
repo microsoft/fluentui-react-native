@@ -119,23 +119,20 @@ Preserve consumer slot behavior unless the component owns it. Button no longer f
 toggle container use `flexShrink` so constrained labels can wrap. A consumer can still request truncation through the
 content slot.
 
-## Keep focus visuals mounted
+## Share focus behavior and styling
 
-Agentic focusable components render `FocusVisual` inside the interactive slot. Configure its outer
-ring and optional inner ring from the component's semantic focus tokens and resolved radius, but keep both configured
-Views mounted at rest. `FocusVisual` changes only opacity when focus changes and owns accessibility and hit testing.
+Follow [common focus authoring](focus.md) and its Windows/Win32 or macOS detail.
+State hooks use `useFocusVisuals` to create a private optional `FocusRing` and determine the native
+`enableFocusRing` setting. The custom slot is absent on the native path; when present, its configured Views
+remain mounted across visibility changes.
 
-Do not apply React Native `outline*` props conditionally and do not enable the RNW native focus ring. RNW 0.81 Fabric
-creates both through a late `BorderPrimitive`; on a background-filled target its owning-root bookkeeping can insert at
-index 1 in an empty visual and fail-fast. A style helper alone is insufficient because the invariant is native View
-lifetime.
+Keep `ThemeState` in the styling phase. Call `applyFocusRingStyles(state.FocusRing, state, resolvedRadius)`
+to bind shared focus colors and widths while retaining component-specific geometry. The helper uses an
+immutable theme stylesheet; props, focus state, and radius remain outside that cache.
 
-Keep the ring policy local to the higher-order component:
-
-- choose single versus dual rings from the component specification
-- resolve colors, widths, radius, and positioning from its tokens and variants
-- place the visual inside the actual focus target
-- keep functional component borders separate from focus feedback
+Native rings default to Windows/macOS; Win32 uses the root-modality-aware custom ring. The Windows native
+path requires RNW 0.81.35 or newer. Do not introduce `outline*` focus styles, local modality trackers, or
+functional border changes to implement a focus ring.
 
 ## Selected text without layout shift
 

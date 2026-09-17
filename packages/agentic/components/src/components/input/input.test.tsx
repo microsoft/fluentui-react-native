@@ -1,12 +1,17 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import type { View, ViewStyle } from 'react-native';
+import type { TextInput, View, ViewStyle } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Input } from './input';
+import type { InputProps, InputState } from './input.types';
+import { renderInput_unstable } from './renderInput';
+import { useInput_unstable } from './useInput';
+import { useInputStyles_unstable } from './useInputStyles';
 
 function getTextbox(component: Awaited<ReturnType<typeof render>>) {
   return component.getByRole('textbox');
@@ -27,6 +32,56 @@ describe('Input', () => {
     await render(<Input ref={ref} />);
 
     expect(ref.current).not.toBeNull();
+  });
+
+  it('composes the focus target with the inner text ref without redirecting the structural ref', async () => {
+    const rootRef = React.createRef<React.ComponentRef<typeof View>>();
+    const textRef = React.createRef<React.ComponentRef<typeof TextInput>>();
+    const observed: { state?: InputState } = {};
+    function Harness() {
+      const state = useInput_unstable({ ref: rootRef, textInput: { ref: textRef } });
+      observed.state = state;
+      useInputStyles_unstable(state);
+      return renderInput_unstable(state);
+    }
+    const component = await render(<Harness />);
+    const target = observed.state?.focusTarget;
+
+    expect(textRef.current).not.toBeNull();
+    expect(rootRef.current).not.toBeNull();
+    expect(target?.current).toBe(textRef.current);
+    expect(target?.current).not.toBe(rootRef.current);
+
+    await component.unmount();
+
+    expect(textRef.current).toBeNull();
+    expect(rootRef.current).toBeNull();
+    expect(target?.current).toBeNull();
+  });
+
+  it.each([
+    { props: {}, expected: true },
+    { props: { focusable: false }, expected: false },
+    { props: { textInput: { focusable: false } }, expected: false },
+    { props: { focusable: false, textInput: { focusable: true } }, expected: true },
+    { props: { disabled: true, textInput: { focusable: true } }, expected: false },
+  ])('matches the focus target to resolved textInput eligibility: $props', async ({ props, expected }) => {
+    const observed: { state?: InputState } = {};
+    function Harness(inputProps: InputProps) {
+      const state = useInput_unstable(inputProps);
+      observed.state = state;
+      useInputStyles_unstable(state);
+      return renderInput_unstable(state);
+    }
+    const component = await render(<Harness {...props} />);
+
+    expect(getTextbox(component).props.focusable).toBe(expected);
+    await act(() => {
+      const request = observed.state?.focusTarget.requestFocus();
+      expect(request?.status).toBe(expected ? 'requested' : 'not-focusable');
+    });
+    await fireEvent(getTextbox(component), 'focus', {});
+    expect(observed.state?.focused).toBe(expected);
   });
 
   it('renders a textbox with outline styling by default', async () => {

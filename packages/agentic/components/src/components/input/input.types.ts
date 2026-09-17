@@ -2,6 +2,7 @@ import type { AccessibilityState, ColorValue, StyleProp, TextInput, TextStyle, V
 
 import type { ThemeState } from '@fluentui-react-native/design';
 import type {
+  FocusTargetBinding,
   ComponentProps,
   ComponentState,
   OptionalSlot,
@@ -54,6 +55,7 @@ export type InputExposedRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
 export type InputProps = InputStateProps & ComponentProps<InputSlots, InputExposedRootProps>;
 
 export type InputState = ComponentState<InputStateSlots> &
+  FocusTargetBinding &
   Required<Pick<InputStateProps, 'variant' | 'size' | 'disabled' | 'readOnly' | 'error'>> &
   ThemeState & {
     value: string;

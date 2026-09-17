@@ -5046,6 +5046,9 @@ __metadata:
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/metro-config": "catalog:"
     "@rnx-kit/metro-resolver-symlinks": "catalog:"
@@ -5053,6 +5056,7 @@ __metadata:
     "@storybook/react-native-theming": "npm:^10.4.7"
     "@storybook/react-native-ui-common": "npm:^10.4.7"
     "@storybook/react-native-ui-lite": "npm:^10.4.7"
+    "@testing-library/react-native": "catalog:"
     "@types/react": "npm:~19.1.4"
     oxc-resolver: "catalog:"
     react: "npm:19.1.4"
@@ -5060,6 +5064,7 @@ __metadata:
     react-native-macos: "npm:^0.81.0"
     react-native-windows: "npm:^0.81.0"
     storybook: "npm:^10.4.0"
+    test-renderer: "catalog:"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.81.0
     "@types/react": ~19.1.4
@@ -9460,18 +9465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/tools-react-native@npm:^2.1.0, @rnx-kit/tools-react-native@npm:^2.3.0, @rnx-kit/tools-react-native@npm:^2.3.1, @rnx-kit/tools-react-native@npm:^2.3.2, @rnx-kit/tools-react-native@npm:^2.3.3, @rnx-kit/tools-react-native@npm:^2.3.5, @rnx-kit/tools-react-native@npm:^2.3.7":
-  version: 2.3.7
-  resolution: "@rnx-kit/tools-react-native@npm:2.3.7"
-  dependencies:
-    "@rnx-kit/tools-filesystem": "npm:^0.2.0"
-    "@rnx-kit/tools-node": "npm:^3.0.4"
-    "@rnx-kit/types-bundle-config": "npm:^1.0.0"
-  checksum: 10c0/4ae1830efabcb10fd24a7970e4200d5fabb52a517f53e76e6c0e9657a1a2fcf90b986c0a4cdb7b39861db615298812c05c6207b62b02901bfaf6682198f1720f
-  languageName: node
-  linkType: hard
-
-"@rnx-kit/tools-react-native@npm:^2.3.8":
+"@rnx-kit/tools-react-native@npm:^2.1.0, @rnx-kit/tools-react-native@npm:^2.3.0, @rnx-kit/tools-react-native@npm:^2.3.1, @rnx-kit/tools-react-native@npm:^2.3.2, @rnx-kit/tools-react-native@npm:^2.3.3, @rnx-kit/tools-react-native@npm:^2.3.5, @rnx-kit/tools-react-native@npm:^2.3.7, @rnx-kit/tools-react-native@npm:^2.3.8":
   version: 2.3.8
   resolution: "@rnx-kit/tools-react-native@npm:2.3.8"
   dependencies:
@@ -21602,16 +21596,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-windows@npm:^0.81.0":
-  version: 0.81.34
-  resolution: "react-native-windows@npm:0.81.34"
+"react-native-windows@npm:0.81.35":
+  version: 0.81.35
+  resolution: "react-native-windows@npm:0.81.35"
   dependencies:
     "@babel/runtime": "npm:^7.0.0"
     "@jest/create-cache-key-function": "npm:^29.7.0"
     "@react-native-community/cli": "npm:17.0.0"
     "@react-native-community/cli-platform-android": "npm:17.0.0"
     "@react-native-community/cli-platform-ios": "npm:17.0.0"
-    "@react-native-windows/cli": "npm:0.81.8"
+    "@react-native-windows/cli": "npm:0.81.9"
     "@react-native/assets": "npm:1.0.0"
     "@react-native/assets-registry": "npm:0.81.6"
     "@react-native/codegen": "npm:0.81.6"
@@ -21655,7 +21649,7 @@ __metadata:
     "@types/react": ^19.1.4
     react: ^19.1.4
     react-native: ^0.81.0
-  checksum: 10c0/38257bbf9c767207c0779ea4ac8ccd55a58ee388892e4247d35742b29fc77498474c8533a2654e1ed20e4b88b1339aef49a8c662ee7b7b523f01516ebb4363db
+  checksum: 10c0/a9f2a165539f8f7ce6ea47237414e96c928ae2115b00973b37bb74597b179cfebeb3f22f84e8d1d859af1e815f67a431b04a525567a1660ad386c1042a7b6ead
   languageName: node
   linkType: hard
 

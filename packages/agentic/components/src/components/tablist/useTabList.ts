@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import type { Pressable } from 'react-native';
+import { Platform, View } from 'react-native';
 
-import { useThemeState } from '@fluentui-react-native/design';
+import { useRootSettings, useThemeState } from '@fluentui-react-native/design';
 import { useControllableValue, useSlot } from '@fluentui-react-native/framework-base';
+import type { FocusIntent, FocusTarget } from '@fluentui-react-native/framework-base';
 
 import { Tab } from '../tab/tab';
 import type { TabProps } from '../tab/tab.types';
@@ -56,6 +56,7 @@ export function useTabList_unstable(props: TabListProps): TabListState {
     ...rest
   } = props;
   const themeState = useThemeState();
+  const rootSettings = useRootSettings();
   const items = React.useMemo(() => getTabItems(children, disabled), [children, disabled]);
   const firstEnabledValue = items.find((item) => !item.disabled)?.value;
   const initialSelection = findEnabledValue(items, defaultSelectedValue) ?? firstEnabledValue;
@@ -67,7 +68,9 @@ export function useTabList_unstable(props: TabListProps): TabListState {
   const [activeValue, setActiveValue] = React.useState<string | undefined>(
     () => findEnabledValue(items, selectedValueProp ?? initialSelection) ?? firstEnabledValue,
   );
-  const tabRefs = React.useRef(new Map<string, React.RefObject<React.ElementRef<typeof Pressable> | null>>());
+  const tabTargets = React.useRef(new Map<string, FocusTarget>());
+  const [focusedValue, setFocusedValue] = React.useState<string | undefined>(undefined);
+  const [pendingFocus, setPendingFocus] = React.useState<{ value: string; intent: FocusIntent } | undefined>(undefined);
   const previousSelectedValue = React.useRef(selectedValue);
 
   React.useEffect(() => {
@@ -98,7 +101,37 @@ export function useTabList_unstable(props: TabListProps): TabListState {
       }
       return findEnabledValue(items, currentValue) ?? selectedEnabledValue ?? firstEnabledValue;
     });
-  }, [firstEnabledValue, items, selectedValue, selectedValueProp, setSelectedValue]);
+    if (focusedValue !== undefined && findEnabledValue(items, focusedValue) === undefined) {
+      const nextValue = selectedEnabledValue ?? firstEnabledValue;
+      setFocusedValue(undefined);
+      setPendingFocus(nextValue ? { value: nextValue, intent: 'restore' } : undefined);
+    }
+  }, [firstEnabledValue, focusedValue, items, selectedValue, selectedValueProp, setSelectedValue]);
+
+  React.useLayoutEffect(() => {
+    if (!pendingFocus) {
+      return undefined;
+    }
+    if (findEnabledValue(items, pendingFocus.value) === undefined) {
+      setPendingFocus(undefined);
+      return undefined;
+    }
+    const target = tabTargets.current.get(pendingFocus.value);
+    if (!target) {
+      console.warn(`TabList cannot focus "${pendingFocus.value}": no mounted target is registered.`);
+      setPendingFocus(undefined);
+      return undefined;
+    }
+    const request = target.requestFocus(pendingFocus.intent);
+    if (request.status === 'confirmed') {
+      setFocusedValue(pendingFocus.value);
+      setPendingFocus(undefined);
+    } else if (request.status !== 'requested') {
+      console.warn(`TabList cannot focus "${pendingFocus.value}": ${request.status}.`);
+      setPendingFocus(undefined);
+    }
+    return () => request.cancel();
+  }, [items, pendingFocus]);
 
   const requestSelection = React.useCallback(
     (value: string) => {
@@ -108,22 +141,34 @@ export function useTabList_unstable(props: TabListProps): TabListState {
       }
       setActiveValue(value);
       setSelectedValue(value);
+      if (Platform.OS === 'windows' || String(Platform.OS) === 'win32' || rootSettings.inputModality === 'keyboard') {
+        setPendingFocus({ value, intent: rootSettings.inputModality });
+      }
     },
-    [items, setSelectedValue],
+    [items, rootSettings, setSelectedValue],
   );
 
   const onTabFocus = React.useCallback(
     (value: string) => {
       if (findEnabledValue(items, value)) {
         setActiveValue(value);
+        setFocusedValue(value);
+        setPendingFocus(undefined);
       }
     },
     [items],
   );
+  const onTabBlur = React.useCallback((value: string) => {
+    setFocusedValue((current) => (current === value ? undefined : current));
+  }, []);
 
   const onTabKeyDown = React.useCallback(
     (value: string, event: TabKeyEvent) => {
-      const key = event.nativeEvent?.key;
+      const native = event.nativeEvent;
+      if (native?.altKey || native?.ctrlKey || native?.metaKey || native?.shiftKey) {
+        return;
+      }
+      const key = native?.key ?? native?.code;
       const enabledItems = items.filter((item) => !item.disabled);
       const currentIndex = enabledItems.findIndex((item) => item.value === value);
       if (currentIndex < 0 || enabledItems.length === 0) {
@@ -153,6 +198,7 @@ export function useTabList_unstable(props: TabListProps): TabListState {
       }
 
       event.preventDefault?.();
+      event.stopPropagation?.();
       const nextValue = enabledItems[nextIndex].value;
       if (nextValue === value) {
         return;
@@ -161,7 +207,7 @@ export function useTabList_unstable(props: TabListProps): TabListState {
       if (selectionFollowsFocus) {
         setSelectedValue(nextValue);
       }
-      tabRefs.current.get(nextValue)?.current?.focus?.();
+      setPendingFocus({ value: nextValue, intent: 'keyboard' });
     },
     [circularNavigation, items, orientation, selectionFollowsFocus, setSelectedValue],
   );
@@ -174,11 +220,11 @@ export function useTabList_unstable(props: TabListProps): TabListState {
     [items],
   );
 
-  const registerTab = React.useCallback((value: string, ref: React.RefObject<React.ElementRef<typeof Pressable> | null>) => {
-    tabRefs.current.set(value, ref);
+  const registerTab = React.useCallback((value: string, target: FocusTarget) => {
+    tabTargets.current.set(value, target);
     return () => {
-      if (tabRefs.current.get(value) === ref) {
-        tabRefs.current.delete(value);
+      if (tabTargets.current.get(value) === target) {
+        tabTargets.current.delete(value);
       }
     };
   }, []);
@@ -186,10 +232,12 @@ export function useTabList_unstable(props: TabListProps): TabListState {
   const contextValue = React.useMemo<TabListContextValue>(
     () => ({
       activeValue,
+      focusedValue,
       disabled,
       getPosition,
       isTabDisabled: (value, tabDisabled) => tabDisabled || disabled || !items.some((item) => item.value === value),
       onTabFocus,
+      onTabBlur,
       onTabKeyDown,
       onTabPress: requestSelection,
       orientation,
@@ -197,7 +245,20 @@ export function useTabList_unstable(props: TabListProps): TabListState {
       selectedValue,
       setSize: items.length,
     }),
-    [activeValue, disabled, getPosition, items, onTabFocus, onTabKeyDown, orientation, registerTab, requestSelection, selectedValue],
+    [
+      activeValue,
+      focusedValue,
+      disabled,
+      getPosition,
+      items,
+      onTabFocus,
+      onTabBlur,
+      onTabKeyDown,
+      orientation,
+      registerTab,
+      requestSelection,
+      selectedValue,
+    ],
   );
 
   const root = useSlot(View, {

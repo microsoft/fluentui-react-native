@@ -38,3 +38,21 @@ adding or changing a component pattern.
 
 Add compile-time type assertions for public type behavior and runtime tests for
 rendering, prop merging, children, keys, and refs affected by a change.
+
+## Accessibility
+
+Universal non-styling accessibility helpers belong in `src/accessibility`.
+Read its [authoring instructions](./src/accessibility/AGENTS.md) before adding
+an abstraction. Use `resolveAccessibilityAction` for the demonstrated
+toggle/select transport contract rather than duplicating platform constants,
+action-list merging, and event-name decisions in consumers. Keep component
+state transitions and handler composition local, and preserve the generic
+entrypoint's React-only import safety.
+
+## Focus and native refs
+
+Use the [common focus instructions](../../.github/skills/agentic-component-authoring/references/focus.md)
+and their platform breakouts when adding focus-target or interaction abstractions.
+Reuse slot ref composition and cleanup; preserve this package's older React
+compatibility while agentic components use React 19 ref props. Keep proposed
+native services opt-in and do not add a design/components dependency here.

@@ -49,3 +49,9 @@ than in this text.
 
 Both text nodes wrap when a consumer constrains the root width. Constrain the
 root through `style` rather than truncating the text.
+
+## Scene root
+
+Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.
+A nested theme boundary may override appearance without creating a separate
+input-modality tracker. Component test scenes use the shared themed renderer.

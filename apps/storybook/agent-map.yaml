@@ -6,7 +6,8 @@ sources:
   config_adapter: src/main.ts
   app_entry: index.js
   app_shell: src/StorybookApp.tsx
-  theme_host: src/StorybookTheme.tsx
+  theme_host: ../../packages/agentic/storybook-desktop-runtime/src/StorybookTheme.tsx
+  theme_palette: ../../packages/agentic/storybook-desktop-runtime/src/useStorybookTheme.ts
   shared_cli: ../../packages/agentic/storybook-desktop
   shared_runtime: ../../packages/agentic/storybook-desktop-runtime
   generated_requires:

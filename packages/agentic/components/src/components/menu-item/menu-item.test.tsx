@@ -1,10 +1,9 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { StyleSheet, View } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
-
-import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { MenuItem } from './menu-item';
 import type { MenuItemProps } from './menu-item.types';
@@ -109,23 +108,14 @@ describe('MenuItem', () => {
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
   });
 
-  it('renders a persistent dual-ring focus visual for list items', async () => {
+  it('uses native focus visuals for list items without mounting custom rings', async () => {
     const component = await renderMenuItem({ content: 'Focused' });
     const root = getRoot(component);
 
     await fireEvent(root, 'focus', {});
+    expect(root.props.enableFocusRing).toBe(true);
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusOuter,
-      borderWidth: defaultFlexTokens.strokeWidth.thick,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusInner,
-      borderWidth: defaultFlexTokens.strokeWidth.thin,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it('hides secondary content when null and keeps the default when omitted', async () => {

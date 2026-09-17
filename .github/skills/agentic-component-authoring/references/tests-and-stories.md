@@ -7,7 +7,12 @@ are [`button.test.tsx`](../../../../packages/agentic/components/src/components/b
 
 ## Runtime tests
 
-Use `@testing-library/react-native`. Do not import `react-test-renderer` directly.
+Use `render` from the package-private `src/common/renderWithTheme` helper for
+component scenes. It places a `ThemedRoot` outside the scene and any supplied
+wrapper, preserving the same root settings through rerenders. Import events,
+queries, and types from `@testing-library/react-native`; do not import
+`react-test-renderer` directly. Tests can dispatch root modality events through
+the helper's `test-scene-root` test ID.
 
 Prefer public semantics:
 
@@ -134,8 +139,8 @@ Win32 is distinct from its WebDriver `platformName` of `windows`. Branch
 inside callbacks for genuine platform differences and use explicit skip
 reasons for unsupported `browser.capabilities['furn:features']`.
 
-Button is the proof of concept and no longer uses custom `desktopDriver`
-plans. Keep names static and callbacks self-contained. Node helpers may be
+All catalog tests use WDIO; custom `desktopDriver` plans remain only in runner
+compatibility fixtures. Keep names static and callbacks self-contained. Node helpers may be
 dynamically imported inside each callback, but callbacks cannot capture
 story-module bindings. The shared Babel config strips all test functions
 before native dependency collection. Named cases get independent previews,
@@ -147,14 +152,75 @@ The single-function `wdio` form remains supported. Run with
 smoke mode runs these functions alongside remaining legacy plans, grouped by
 story. See the [executable test contract](../../../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
 
-Legacy Checkbox and Input tests still use static JSON
-`parameters.desktopDriver` plans typed with `DesktopStoryTests` from
-`@fluentui-react-native/desktop-driver/authoring`. Keep those plans static and
-use declarative `platforms` and `requires` until they are migrated; do not add
-functions or dynamic values to the old format.
+The components package's `test:stories` project checks every test-bearing story
+without emitting it into the component library. Add new test-bearing files to
+`tsconfig.stories.json`; the representative runner contract checks this coverage.
+Shared Node-only helpers use `*.wdio.ts` and are dynamically imported by source
+extension inside callbacks. They are checked by the story project and excluded
+from production emit.
 
-The components package's `test:stories` project checks the experimental
-Button stories without emitting them into the component library.
+Native-rendered story helpers use `*.story-helpers.tsx` and are also excluded
+from library emit while checked by the story project. Use `StoryStatus` for
+counter/modality probes: its named accessible View is observable on macOS
+Fabric, where a plain paragraph's `testID` is not exposed as an AX element.
+
+Focus cases use native `focused`, `checked`, and `selected` properties together
+with activation and event-order probes. Cover stale key-up, repeats, disabled
+stops, same-target modality, nested themes, focus requests, and selection-before-
+focus. Use `try/finally` to release held WebDriver actions. Never replace native
+state checks with rendered text alone or a default value for an unsupported
+property. Desktop support does not imply identical pointer focus or activation
+timing.
+
+### Desktop focus test scope
+
+Keep shared requirements executable on Windows Fabric, Office Win32, and macOS.
+`requireDesktopFocus` checks native capabilities, not an operating-system
+allowlist. A missing capability skips the case with a reason; a platform
+difference usually changes one assertion rather than skipping the entire case.
+
+| Behavior                                                                                                       | Scope and expected result                                                                                                                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Exactly-once activation, release cleanup, disabled eligibility, focus requests, self-focus, and scene modality | All three desktop endpoints. Assert native focus/state and action counts; include overlapping keys and blur/disable during a press.                                                                                                          |
+| Focus automatically follows an ordinary pointer press                                                          | Windows/Win32 only. Use `expectWindowsPointerFocus`; it deliberately does nothing on macOS, without skipping the case's other assertions. Do not use it for a shared keyboard/programmatic focus requirement.                                |
+| Return/Space activation phase                                                                                  | macOS activates on keydown; Windows/Win32 activate on the paired keyup. Assert the held-key count per platform, then the shared final count. A later blur cannot undo a macOS action that already occurred.                                  |
+| Native Tab/Shift+Tab entry, disabled skipping, and TabList navigation                                          | Shared, with macOS Keyboard navigation enabled for the all-controls Tab lane. Use `focusByTab` from the story's editable entry; do not simulate click-focus on the control under test.                                                       |
+| Modified navigation                                                                                            | Shared for chords delivered to the app. Shift+Arrow is portable; macOS Control+Arrow can be a system shortcut and must not be required to reach a TabList handler. Preserve Command/Option text editing separately.                          |
+| FocusZone navigation                                                                                           | Shared native ownership, platform-specific destinations: Windows/Win32 default to linear traversal unless `use2DNavigation` is enabled; AppKit is geometric. Its macOS scene explicitly requests focus on click, unlike ordinary Pressables. |
+
+Prefer a narrowly named platform assertion helper when several stories need the
+same exception. Do not introduce a generic conditional-expectation layer merely
+to hide branching, or make an entire test pass without executing any assertion.
+Keep injected `platform` checks inside the extracted callback or its dynamically
+imported `*.wdio.ts` helpers; never infer the target from the Node host OS.
+
+On macOS, record the Keyboard navigation setting as part of the run. With that
+setting off, AppKit can legitimately skip buttons and return to an editable
+field. Interactive development and CI Macs should have this preference enabled;
+the shared CI setup enables and verifies it before app startup. Keep input
+authority and locked/noninteractive desktop handling separate from this
+preference. Do not silently change machine preferences inside a test or
+reinterpret the setting as a missing driver feature. Follow the machine owner's
+preference, restore changes authorized as temporary, and test the disabled-
+setting policy separately when claiming coverage of both modes.
+
+Modality text and focus counters do not establish ring visibility. Use separate
+resolved-style coverage without incidental scene rerenders, plus native visual
+evidence for renderer appearance. Likewise, a checked/selected state read after
+a physical click does not exercise UIA/AX action dispatch.
+
+Report passed, failed, and skipped counts together. A zero-exit smoke traversal
+with platform-skipped focus cases is not cross-platform focus qualification.
+
+The pinned RNmacOS 0.81.9 Fabric View does not project
+`accessibilityState.disabled`/`selected` to AXEnabled/AXSelected. Those native
+announcement assertions are isolated in explicitly skipped cases; shared
+focus, activation, and selection-callback cases still run. Do not substitute
+rendered state for an AX result or describe these skips as intended macOS
+semantics. Track the native projection gap and revisit the cases when the
+renderer is upgraded. An already-disabled AppKit responder may also remain
+first responder until focus is moved; rejected-request tests start from a
+separate native focus owner rather than assuming disabling itself moved focus.
 
 Button uses focused appearance, size, shape, icon, selection, disabled, and constrained-content stories. Icon uses a
 source and size overview plus focused font, image, SVG, size, color, and accessibility stories.
@@ -181,6 +247,11 @@ yarn workspace @fluentui-react-native/agentic-components-storybook storybook bun
 
 Run the smallest affected package test while iterating. Run the full package sequence before completion. Run the root
 `yarn build` when public types, manifests, or project references change.
+
+Run repository/package tests before the owned native Storybook lifecycle, not
+concurrently with it: some CLI fixtures still write into the app's generated
+state directory. A lease/nonce mismatch is an infrastructure failure, not a
+focus-test result; never bypass ownership or authenticated readiness to proceed.
 
 A successful bundle proves story discovery and compilation only. For visual changes, inspect the running target-platform
 story across hover, pressed, disabled, optional-slot, and constrained-content scenarios.

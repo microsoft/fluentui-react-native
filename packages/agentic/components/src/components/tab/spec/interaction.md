@@ -14,6 +14,16 @@ TabList, the same press requests group selection and then preserves the caller's
 While `disabled`, the underlying pressable stops reporting presses and the
 disabled colors apply to the background, the label, and the icon.
 
+## Accessibility activation
+
+The select action (`select` on Windows Fabric, `Select` on Win32 and as a
+macOS custom action) requests TabList selection while enabled. It then
+forwards the original caller `onAccessibilityAction` once without synthesizing
+`onPress`. Standalone tabs remain externally driven, so a custom group handles
+that callback directly. Disabled or unrelated actions are forwarded without
+selecting. Action declarations preserve caller labels and custom actions
+without duplicate names; no `activate` fallback is added.
+
 ## Keyboard
 
 A standalone enabled Tab is focusable and a disabled Tab is skipped. Inside
@@ -24,12 +34,15 @@ behavior, producing the same selection request and `onPress` as a pointer press.
 
 ## Focus visual
 
-A two-ring focus visual is drawn inside the hit area, following the corner radius
-of the active layout, so it is rounded on an icon-and-text tab and circular on an
-icon-only tab. It is shown whenever the root is focused and not disabled.
-
-React Native does not report focus modality on these platforms, so the ring
-appears for pointer focus as well as keyboard focus.
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 ## Selection appearance
 
@@ -54,3 +67,11 @@ wider horizontal padding with a rounded corner radius. The icon-only layout uses
 equal padding on both axes and a fully circular radius, and never renders text,
 so it is a square target regardless of what the label would have been. The icon
 is the same size in both layouts.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.

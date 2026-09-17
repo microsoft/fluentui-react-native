@@ -41,7 +41,7 @@ root styles.
 
 ### Slots and anatomy
 
-The render order is the persistent focus visual, the icon when positioned
+The render order is the optional `FocusRing`, the icon when positioned
 before, content, and the icon when positioned after.
 
 | Slot           | Required | Contract                                                          |
@@ -67,8 +67,24 @@ layout and requires an action-oriented `accessibilityLabel`.
 - **BTN-005:** Treat `selected` as externally owned state, expose checked
   accessibility state when that prop is present, and reserve semibold label
   width to prevent toggle reflow.
-- **BTN-006:** Keep the dual-ring `FocusVisual` mounted and show it only for a
-  focused, enabled button while disabling the native Windows focus ring.
+- **BTN-006:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+  on the root: default to native rings on Windows/macOS and root-modality-aware
+  custom rings on Win32, retaining the same dual-ring geometry.
+
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 ## Platform behavior
 
@@ -76,13 +92,11 @@ Windows and macOS use React Native press, hover, and focus events. `Enter` and
 `Space` activation are supplied by the native `Pressable` button behavior.
 Disabled buttons are not focusable.
 
-React Native Windows native focus visuals are disabled because dynamically
-mounting its border visual can crash supported RNW versions. The component
-instead keeps the shared dual-ring `FocusVisual` mounted and changes only its
-visibility state. The contract does not add motion; visual state changes are
-immediate.
+Button adds no component-owned motion.
 
 ## Divergences from Flex
+
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
 | ID                        | Disposition              | React Native contract                                                                                                                                 | Follow-up                                                           |
 | ------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
@@ -92,11 +106,11 @@ immediate.
 
 ## Conformance
 
-| Requirement | Evidence                                                    |
-| ----------- | ----------------------------------------------------------- |
-| BTN-001     | `button.types.ts`, `useButton.ts`, `button.test.tsx`        |
-| BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx` |
-| BTN-003     | `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx` |
-| BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`     |
-| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`       |
-| BTN-006     | `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx` |
+| Requirement | Evidence                                                                    |
+| ----------- | --------------------------------------------------------------------------- |
+| BTN-001     | `button.types.ts`, `useButton.ts`, `button.test.tsx`                        |
+| BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`                 |
+| BTN-003     | `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx`                 |
+| BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`                     |
+| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`                       |
+| BTN-006     | `useButton.ts`, `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx` |

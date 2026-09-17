@@ -2,7 +2,8 @@
 import { StyleSheet } from 'react-native';
 import type { ComponentProps } from 'react';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -118,23 +119,14 @@ describe('Radio', () => {
     expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.pressed.foregroundNeutralSecondary);
   });
 
-  it('renders a persistent dual-ring focus visual when focused', async () => {
+  it('uses native focus visuals without mounting custom rings', async () => {
     const component = await renderRadio({ label: 'Choice' });
     const root = getRoot(component);
 
     await fireEvent(root, 'focus', {});
+    expect(root.props.enableFocusRing).toBe(true);
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: '#000000',
-      borderWidth: 2,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: '#ffffff',
-      borderWidth: 1,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it('disables interaction and preserves unrelated accessibility state', async () => {

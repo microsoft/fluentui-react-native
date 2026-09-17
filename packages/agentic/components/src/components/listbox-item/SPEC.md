@@ -29,7 +29,7 @@ styles.
 
 `root`, `content`, `secondaryContent`, `icon`, `selectedIcon`, and `avatar`
 are public slots. The header root, selection indicators, and hidden label are
-private state slots. A list item renders FocusVisual then CompoundItemLayout:
+private state slots. A list item renders optional `FocusRing` then CompoundItemLayout:
 avatar or the active icon, layout-stable primary content, secondary content,
 and trailing chevron, checkmark, then checkbox indicator. A selected icon
 replaces the normal icon. The header instead renders its content or, when
@@ -49,9 +49,24 @@ semibold label reservation, while its internal indicator reflects `selected`.
 - **LBI-003:** Preserve externally owned selection and its separate
   checkmark and multiselect presentations.
 - **LBI-004:** Resolve disabled, hover, press, and focus presentation with
-  user root style last.
+  user root style last, following the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
 - **LBI-005:** Expose the native accessibility role and state appropriate to
   the resolved variant.
+
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 ## Platform behavior
 
@@ -62,11 +77,13 @@ A section header is exposed through a nonfocusable React Native `View` with
 the `header` role. The internal leading and trailing visuals are inaccessible.
 
 Pointer hover, press, and focus events flow through `usePressableState`.
-FocusVisual stays mounted in the list-item structure, appearing only for an
-enabled focused option. No code here moves between options, processes
+Section
+headers gain no ring or focus stop. No code here moves between options, processes
 collection keys, opens submenus, or closes an owning popup.
 
 ## Divergences from Flex
+
+- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
 - `listbox-item-native-pressed-state` (**accepted**): The selected option is
   surfaced to native accessibility through `accessibilityState.pressed`
@@ -75,18 +92,18 @@ collection keys, opens submenus, or closes an owning popup.
   selected icon slots by default; the pinned Flex reference requires an
   explicit icon opt-in.
 - `listbox-item-native-focus-model` (**accepted**): FURN gives each option a
-  directly focusable Pressable root and local FocusVisual instead of retaining
-  focus at a parent selection controller.
+  directly focusable Pressable root and local platform focus treatment instead
+  of retaining focus at a parent selection controller.
 - `listbox-item-native-indicators` (**accepted**): The multiselect visual is
   the internal `CheckboxIndicator`, and the checkmark and chevron are
   inaccessible Icon slots rather than browser control composition.
 
 ## Conformance
 
-| Requirement | Evidence                                                                     |
-| ----------- | ---------------------------------------------------------------------------- |
-| LBI-001     | `listbox-item.types.ts`, `useListboxItem.ts`, `listbox-item.types.test.ts`   |
-| LBI-002     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`        |
-| LBI-003     | `useListboxItem.ts`, `listbox-item.styles.ts`, `listbox-item.test.tsx`       |
-| LBI-004     | `listbox-item.styles.ts`, `useListboxItemStyles.ts`, `listbox-item.test.tsx` |
-| LBI-005     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`        |
+| Requirement | Evidence                                                                                          |
+| ----------- | ------------------------------------------------------------------------------------------------- |
+| LBI-001     | `listbox-item.types.ts`, `useListboxItem.ts`, `listbox-item.types.test.ts`                        |
+| LBI-002     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`                             |
+| LBI-003     | `useListboxItem.ts`, `listbox-item.styles.ts`, `listbox-item.test.tsx`                            |
+| LBI-004     | `useListboxItem.ts`, `listbox-item.styles.ts`, `useListboxItemStyles.ts`, `listbox-item.test.tsx` |
+| LBI-005     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`                             |

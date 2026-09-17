@@ -19,3 +19,9 @@ Use `secondaryContentPosition="under"` when supporting text needs its own
 line. Supply `selectedIcon` only when the selected presentation needs a
 replacement icon. Use `trailing` for noninteractive display content; this
 component does not isolate nested actions from the root press.
+
+## Scene root
+
+Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.
+A nested theme boundary may override appearance without creating a separate
+input-modality tracker. Component test scenes use the shared themed renderer.

@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
-import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Checkbox } from './checkbox';
 import type { CheckboxStatus, CheckboxVariant } from './checkbox.types';
@@ -62,31 +62,27 @@ const meta: Meta<typeof Checkbox> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Checkbox>;
+type Story = WdioStory<StoryObj<typeof Checkbox>>;
 
 export const Default: Story = {
   tags: ['desktop-e2e'],
-  parameters: {
-    desktopDriver: {
-      version: 1,
-      tests: [
-        {
-          id: 'toggles-checked-state',
-          title: 'Toggles through native activation',
-          requires: ['physical-click'],
-          steps: [
-            { action: 'wait', target: { testId: 'agentic-storybook-checkbox' } },
-            { expect: { state: 'role', target: { testId: 'agentic-storybook-checkbox' }, value: 'checkbox' } },
-            { expect: { state: 'checked', target: { testId: 'agentic-storybook-checkbox' }, value: false } },
-            { action: 'click', target: { testId: 'agentic-storybook-checkbox' } },
-            {
-              action: 'wait',
-              until: { state: 'checked', target: { testId: 'agentic-storybook-checkbox' }, value: true },
-            },
-          ],
-        },
-      ],
-    } satisfies DesktopStoryTests,
+  wdio: {
+    'toggles native checked state in both directions': async ({ browser, expect, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+      if (!features.physicalClick) {
+        skip('This test requires physical pointer input.');
+        return;
+      }
+      const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      const checkbox = await browser.$('~agentic-storybook-checkbox');
+      expect(await checkbox.getTagName()).toBe('checkbox');
+      await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', false);
+      await checkbox.click();
+      await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', true);
+      await checkbox.click();
+      await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', false);
+    },
   },
 };
 
@@ -148,7 +144,7 @@ export const ExternallyDrivenStatus: Story = {
             <Checkbox
               key={index}
               label={`Option ${index + 1}`}
-              onStatusChange={(next) => setStatuses(statuses.map((current, i) => (i === index ? next : current)))}
+              onStatusChange={(next: CheckboxStatus) => setStatuses(statuses.map((current, i) => (i === index ? next : current)))}
               status={status}
             />
           ))}

@@ -2,7 +2,8 @@
 
 ## State model
 
-Input tracks focus, hover, and press in local state and reduces them, together
+Input observes native self-focus through `useFocusTarget`, tracks hover and press
+locally, and reduces them, together
 with `disabled`, `error`, and `readOnly`, to exactly one visual state per
 render. The precedence is disabled, error, read only, focused, pressed,
 hovered, rest. Only that one state contributes styling, so an errored field
@@ -65,3 +66,23 @@ needs to be actionable must be a separate control rendered next to the field.
 
 Input runs no animation and holds no timers, so state changes are immediate and
 reduced-motion settings need no separate path.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Its internal ref
+composes with the caller's `textInput.ref`; the public root ref remains on the
+structural View. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. The target and native slot
+share the resolved `focusable` value: direct textInput props override the root
+setting, but disabled always wins. Input retains its border-only focus styling;
+it does not subscribe to root modality or mount a custom focus ring.
+
+## Native focus qualification
+
+The `FocusManagement` WDIO case verifies native text editing and caret movement,
+then checks that Tab skips the disabled field and focuses the following button.
+The disabled field must remain natively unfocused. Win32's native editor was
+observed reporting UIA `IsEnabled=true` despite `editable=false`,
+`focusable=false`, and disabled accessibility state. That enabled-state
+announcement gap is not treated as evidence of focusability or hidden by an
+assumed native disabled value.

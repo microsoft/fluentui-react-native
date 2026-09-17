@@ -35,7 +35,7 @@ counter affordance.
 | `value`    | `string`                    | `controls`    | Stable TabList selection value.                                                                           |
 | `disabled` | `boolean`                   | `false`       | Blocks presses, removes the tab from the tab order, and selects the disabled colors.                      |
 | `layout`   | `iconAndText \| iconOnly`   | `iconAndText` | Selects the anatomy, the corner radius, and the padding.                                                  |
-| `onPress`  | `PressableProps['onPress']` | none          | The only signal a tab emits. The caller changes `selected` in response.                                   |
+| `onPress`  | `PressableProps['onPress']` | none          | Reports pointer/keyboard activation. A standalone caller changes `selected` in response.                  |
 | `style`    | `StyleProp<ViewStyle>`      | none          | Applied after the resolved root styles.                                                                   |
 
 `layout: 'iconOnly'` is a distinct type shape: it requires `accessibilityLabel`
@@ -58,7 +58,7 @@ interaction to the parent.
 | `selectedIcon` | `Icon`      | when supplied and selected | Replaces `icon` while selected, typically the filled variant.   |
 | `content`      | `Text`      | `iconAndText` layout       | Defaults to the text `Tab`; forced off in the icon-only layout. |
 
-Render order inside the root is: focus visual, active icon, then content. The
+Render order inside the root is: optional `FocusRing`, active icon, then content. The
 active icon is `selectedIcon` when selected and a selected icon was supplied,
 and `icon` otherwise.
 
@@ -92,12 +92,29 @@ icon the same fixed size in both layouts.
 the controlled-panel relationship, merging caller state underneath, and drop a
 disabled tab from the tab order.
 
-**TAB-008:** Show the two-ring focus visual while the root is focused and not
-disabled, following the corner radius of the active layout.
+**TAB-008:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+on the root, retaining the mounted two-ring visual and active-layout radius
+for the custom path.
+
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 ## Platform behavior
 
-Windows and macOS behave identically. A standalone root is focusable while
+Windows and macOS share the following navigation behavior; focus rendering follows
+the shared platform policy. A standalone root is focusable while
 enabled and non-focusable while disabled. Inside TabList, exactly one enabled
 Tab is focusable and the parent moves that roving focus with orientation-aware
 arrows, Home, and End.
@@ -111,13 +128,25 @@ the accessibility tree and report the disabled state.
 Hover changes the background and foreground on both platforms; pressed takes
 precedence over hover.
 
+The semantic select action resolves through Framework Base to `select` on
+Windows Fabric, `Select` on Win32, and the existing `Select` custom action on
+macOS. It requests TabList selection while enabled, then forwards the original
+caller accessibility event exactly once without synthesizing `onPress`.
+Standalone selection stays externally driven; custom groups handle
+`onAccessibilityAction` as well as `onPress`. Disabled and custom events are
+forwarded without selecting. See the
+[accessibility companion](./spec/accessibility.md) for source evidence and
+native invocation limits.
+
 ## Divergences from Flex
+
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
 | ID                                | Disposition | React Native contract                                                                                                                                                                            | Follow-up                                                                                                 |
 | --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
 | `tab-disabled-focusability`       | Accepted    | A disabled tab is removed from the tab order and cannot be focused, while still reporting its disabled state. Flex keeps a disabled tab reachable so its state can be discovered by keyboard.    | None for this component. Reachability would have to come from a list container that manages roving focus. |
 | `tab-list-navigation-not-shipped` | Resolved    | TabList now coordinates group selection, roving focus, orientation-aware arrows, Home and End, disabled-item skipping, and the selection-follows-focus policy.                                   | Implemented by the adjacent TabList contract and integration tests.                                       |
-| `tab-focus-modality`              | Accepted    | The focus visual appears whenever the root is focused, including after a press. Flex shows it only for keyboard-modality focus.                                                                  | None. React Native exposes no focus modality on these platforms.                                          |
+| `tab-focus-modality`              | Accepted    | Custom visibility follows keyboard modality from the scene root rather than a component-local pointer tracker. Native appearance remains renderer-owned.                                         | Preserve the shared hook and component modality matrix.                                                   |
 | `tab-selected-weight-reservation` | Accepted    | The selected label is heavier than the resting label, and the width for that heavier text is reserved on every tab so selection does not reflow the list. Flex describes only the weight change. | None. The reservation is an implementation requirement of the shared text layout, not a visual addition.  |
 
 ## Conformance
@@ -131,4 +160,4 @@ precedence over hover.
 | TAB-005     | `tab.styles.ts`, `useTabStyles.ts`, `tab.test.tsx`               |
 | TAB-006     | `tab.styles.ts`, `useTabStyles.ts`, `tab.stories.tsx`            |
 | TAB-007     | `useTab.ts`, `tab.test.tsx`                                      |
-| TAB-008     | `useTabStyles.ts`, `tab.test.tsx`                                |
+| TAB-008     | `useTab.ts`, `useTabStyles.ts`, `tab.test.tsx`                   |

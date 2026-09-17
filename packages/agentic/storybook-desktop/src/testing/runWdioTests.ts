@@ -154,10 +154,11 @@ export async function runWdioStoryTests(
           {
             command: process.execPath,
             label: `wdio "${displayName}"`,
+            // Forced exit races HTTP handle teardown on Windows. The supervisor
+            // still bounds and terminates workers that do not exit naturally.
             args: [
               '--test',
               '--test-concurrency=1',
-              '--test-force-exit',
               `--test-timeout=${Math.min(settings.timeoutMs + 5000, 2_147_483_647)}`,
               `--test-reporter=${settings.reporter}`,
               specPath,

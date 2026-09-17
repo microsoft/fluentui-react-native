@@ -1,7 +1,7 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
-import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
+import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
 import { tabStyles, getTabColorStyles, getTabContentStyle, getTabIconSize, getTabRootStyle } from './tab.styles';
 import type { TabState } from './tab.types';
@@ -17,14 +17,7 @@ export function useTabStyles_unstable(state: TabState) {
   const hiddenContentStyle: StyleProp<TextStyle> = [tabStyles.content, getTabContentStyle(state, true), colors.foreground];
   const iconSize = getTabIconSize();
 
-  state.focusVisualProps = createFocusVisualProps_unstable({
-    borderRadius: rootLayoutStyle.borderRadius,
-    innerColor: state.tokens.color.strokeFocusInner,
-    innerWidth: state.tokens.strokeWidth.thin,
-    outerColor: state.tokens.color.strokeFocusOuter,
-    outerWidth: state.tokens.strokeWidth.thick,
-    visible: state.focused && !state.disabled,
-  });
+  applyFocusRingStyles(state.FocusRing, state, rootLayoutStyle.borderRadius);
   attachSlotProps(state.root, { style: rootStyle });
   if (state.icon) {
     attachSlotProps(state.icon, {

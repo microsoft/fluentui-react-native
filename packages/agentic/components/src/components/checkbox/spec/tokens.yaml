@@ -107,7 +107,7 @@ bindings:
       indeterminate: color.foregroundNeutralSecondary
       disabled: color.foregroundNeutralDisabled
 
-  focusVisual:
+  FocusRing:
     implementation: useCheckboxStyles.ts
     borderRadius: borderRadius.base300
     innerColor: color.strokeFocusInner

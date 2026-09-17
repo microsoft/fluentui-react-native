@@ -21,6 +21,12 @@
       "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/", "/color-lib/"]
     },
     {
+      "name": "design-themed-root",
+      "module": "@fluentui-react-native/design",
+      "exports": ["ThemedRoot", "useRootSettings", "useThemeState"],
+      "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/", "/color-lib/"]
+    },
+    {
       "name": "design-color-lib",
       "module": "@fluentui-react-native/design/color-lib",
       "exports": ["getContrastRatio", "getHoverColor", "getPressColor"],

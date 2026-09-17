@@ -2,7 +2,7 @@
 import { StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';

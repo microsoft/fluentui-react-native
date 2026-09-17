@@ -100,6 +100,15 @@ graph; `rewriteRelativeImportExtensions` converts them to `.js` in build output.
 
 ## CLI and API
 
+For a focused authored-test lane within the owned smoke lifecycle, set
+`STORYBOOK_SMOKE_STORY` and `STORYBOOK_SMOKE_TAG` before running
+`storybook smoke --<platform> --mode stories-and-tests`. These override WDIO
+story/tag settings and filter any legacy plans as well. Without overrides,
+smoke runs configured WDIO cases across all matching stories and legacy
+`desktop-e2e` plans. An explicit selector that matches no
+tests fails instead of reporting a false pass. This retains normal native
+lease/readiness and process cleanup; it does not change input capability policy.
+
 The `storybook-desktop` binary loads `storybook.config.ts`, `.mts`, `.js`, `.mjs`, or `.cjs` from the current package.
 Use `.mts` when the consuming package otherwise defaults JavaScript files to CommonJS. Select a target with a short
 platform option, or omit it to use `FURN_STORYBOOK_PLATFORM` and then the host default:
@@ -156,8 +165,8 @@ app restart. This initial render only gates startup: each requested story must
 still acknowledge the matching request/run and pass native story-root
 verification before its tests execute.
 
-New component tests should use executable WDIO functions. Legacy Checkbox and
-Input plans remain supported during migration and use the `desktop-e2e` tag.
+All component catalog tests use executable WDIO functions. The legacy plan
+runner remains supported for compatibility and is covered by dedicated fixtures.
 Plan extraction evaluates only the inline
 static `desktopDriver` literal and supports TypeScript `satisfies`; dynamic
 values fail with source context instead of being omitted.
@@ -269,7 +278,10 @@ nonce-bound lease for the isolated app identity. Windows and Win32 require
 the trusted lifecycle owner to provide the existing application lease;
 the test runner does not attach by an ambiguous process name or title.
 
-Node's built-in test runner executes **each test** in a separate process. The
+Node's built-in test runner executes **each test** in a separate process. Workers
+exit naturally so HTTP handles can close; forced test exit can race Windows
+libuv teardown. The supervisor still bounds and terminates hanging workers and
+rejects nonzero exits, including exits after a callback reports success. The
 supervisor owns one attached WebDriver session at a time, authenticates the
 live manifest, navigates to and remounts the correct story before each callback, and deletes the
 session after success, failure, timeout, or worker exit. The app and driver

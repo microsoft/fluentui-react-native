@@ -46,8 +46,9 @@ audit.
 - Include the declared native root's `ref` in public props with `PropsWithRefOf<typeof Root>`. React 19.1.4 supplies
   `ref` as a prop, so pass it through the state hook to the root slot without `forwardRef`. If the component also needs
   an internal root ref, compose the refs through the slot render path rather than replacing the consumer ref.
-- Render focus feedback through `FocusVisual`; do not add `outline*` props or enable RNW native
-  focus visuals because RNW 0.81 can fail-fast when either path creates border visuals after mount.
+- Follow the [focus visual policy](#focus-visual-policy): create the optional `FocusRing` in the state hook,
+  apply native settings only to the actual focus target, and style the custom ring in the styling phase.
+  Do not introduce component-specific modality trackers or `outline*` focus styling.
 - Keep render functions free of hooks, token reads, style creation, and slot mutation.
 - Export the resolved state type and the state, style-application, and render stages from the package root under
   component-qualified unstable names so another component can reuse the pipeline.
@@ -55,12 +56,34 @@ audit.
   layout.
 - Test both paths of a self-driving axis, and test that an externally driven `selected` does not change on press.
 - Keep a self-driving controlled prop out of story `args`, and keep an identity-changing axis out of story controls.
-- Prefer top-level `wdio` functions or named function collections demonstrated
+- Use top-level `wdio` functions or named function collections demonstrated
   by Button. Use the injected `platform`, explicit capability skips, stable
   `testID` selectors, and public native semantics. The story supplies the suite
   scope and each named case is isolated. Run with `storybook test`.
-- Legacy `parameters.desktopDriver` plans remain supported. Do not put
-  functions in static plans or import Node helpers at story-module scope.
+- Do not add legacy `parameters.desktopDriver` plans to the component catalog
+  or import Node helpers at story-module scope.
+
+## Focus visual policy
+
+Read [common focus authoring](../../../../../.github/skills/agentic-component-authoring/references/focus.md),
+then [Windows/Win32](../../../../../.github/skills/agentic-component-authoring/references/focus-windows.md) or
+[macOS](../../../../../.github/skills/agentic-component-authoring/references/focus-macos.md).
+The common file owns ref, state, activation, scope, and styling invariants; platform files own detailed
+native adaptation. V1 Win32 models observable behavior for both Office Win32 and Windows Fabric.
+
+Current implementation: `useFocusablePressable`/`useFocusTarget` own ref-backed native targets;
+compose `focusTargetRef` on the actual target and retain the public native root ref. `useFocusVisuals`
+returns a private optional `FocusRing` and `enableFocusRing`;
+Windows/macOS default to native and Win32 defaults to custom. `alwaysVisible` selects a custom ring only
+while focused. `applyFocusRingStyles` owns cached colors/widths; component styles supply radius. Put the ring
+and native setting only on the actual focus target. Scenes require `ThemedRoot`; custom focused rings
+subscribe through `useRootInputModality`, while `useRootSettings` remains stable and non-subscribing.
+The native Windows path requires RNW 0.81.35 or newer.
+
+The [desktop improvement plan](../../WIN32-FOCUS-PLAN.md) describes future target/intent/notification
+abstractions and native-service gates and records which are implemented. Do not change behavior or pinned source
+identities by following a proposal before its component contract is reviewed. The accepted
+`native-system-focus-visuals` divergence continues to refer through this stable anchor.
 
 ## Focused references
 

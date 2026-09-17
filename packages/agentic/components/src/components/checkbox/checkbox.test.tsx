@@ -1,8 +1,9 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -68,6 +69,105 @@ describe('Checkbox', () => {
 
     expect(onStatusChange).toHaveBeenCalledWith('checked');
     expect(component.getByRole('checkbox').props.accessibilityState.checked).toBe(false);
+  });
+
+  describe.each([
+    ['windows', 'toggle'],
+    ['win32', 'Toggle'],
+    ['macos', 'Toggle'],
+  ] as const)('%s accessibility actions', (platform, actionName) => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    });
+    afterEach(() => jest.restoreAllMocks());
+
+    it.each(['unchecked', 'checked', 'indeterminate'] as const)('toggles %s once without synthesizing a press', async (status) => {
+      const calls: string[] = [];
+      const onStatusChange = jest.fn(() => calls.push('status'));
+      const onPress = jest.fn();
+      const onAccessibilityAction = jest.fn(() => calls.push('action'));
+      const component = await renderCheckbox({ defaultStatus: status, onStatusChange, onPress, onAccessibilityAction });
+      const event = { nativeEvent: { actionName } };
+
+      expect(getRoot(component).props.accessibilityActions).toEqual([{ name: actionName }]);
+      await fireEvent(getRoot(component), 'accessibilityAction', event);
+
+      expect(onStatusChange).toHaveBeenCalledTimes(1);
+      expect(onStatusChange).toHaveBeenCalledWith(status === 'checked' ? 'unchecked' : 'checked');
+      expect(getRoot(component).props.accessibilityState.checked).toBe(status !== 'checked');
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+      expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+      expect(calls).toEqual(['status', 'action']);
+      expect(onPress).not.toHaveBeenCalled();
+    });
+
+    it('preserves a normalized caller action list and labels', async () => {
+      const accessibilityActions = [
+        { name: actionName, label: 'Change selection' },
+        { name: 'custom', label: 'More' },
+      ];
+      const component = await renderCheckbox({ accessibilityActions });
+      expect(getRoot(component).props.accessibilityActions).toBe(accessibilityActions);
+    });
+
+    it('deduplicates legacy and native spellings without losing the caller label or custom actions', async () => {
+      const component = await renderCheckbox({
+        accessibilityActions: [{ name: 'Toggle', label: 'Change selection' }, { name: 'toggle' }, { name: 'custom', label: 'More' }],
+      });
+      expect(getRoot(component).props.accessibilityActions).toEqual([
+        { name: actionName, label: 'Change selection' },
+        { name: 'custom', label: 'More' },
+      ]);
+    });
+
+    it('reports accessibility toggles without changing externally driven status', async () => {
+      const onStatusChange = jest.fn();
+      const component = await renderCheckbox({ status: 'indeterminate', onStatusChange });
+
+      await fireEvent(getRoot(component), 'accessibilityAction', { nativeEvent: { actionName } });
+
+      expect(onStatusChange).toHaveBeenCalledTimes(1);
+      expect(onStatusChange).toHaveBeenCalledWith('checked');
+      expect(getRoot(component).props.accessibilityState.checked).toBe('mixed');
+    });
+
+    it('blocks disabled accessibility toggles while forwarding the caller handler once', async () => {
+      const onStatusChange = jest.fn();
+      const onPress = jest.fn();
+      const onAccessibilityAction = jest.fn();
+      const component = await renderCheckbox({ disabled: true, onStatusChange, onPress, onAccessibilityAction });
+      const event = { nativeEvent: { actionName } };
+
+      getRoot(component).props.onAccessibilityAction(event);
+
+      expect(onStatusChange).not.toHaveBeenCalled();
+      expect(onPress).not.toHaveBeenCalled();
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+      expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+      expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+    });
+
+    it('forwards custom, wrong-case, and activate actions without a second activation path', async () => {
+      const onStatusChange = jest.fn();
+      const onPress = jest.fn();
+      const onAccessibilityAction = jest.fn();
+      const component = await renderCheckbox({
+        accessibilityActions: [{ name: 'custom', label: 'More' }],
+        onStatusChange,
+        onPress,
+        onAccessibilityAction,
+      });
+      expect(getRoot(component).props.accessibilityActions).toEqual([{ name: actionName }, { name: 'custom', label: 'More' }]);
+      for (const name of ['custom', actionName === 'toggle' ? 'Toggle' : 'toggle', 'activate']) {
+        const event = { nativeEvent: { actionName: name } };
+        await fireEvent(getRoot(component), 'accessibilityAction', event);
+        expect(onAccessibilityAction).toHaveBeenLastCalledWith(event);
+      }
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(3);
+      expect(onStatusChange).not.toHaveBeenCalled();
+      expect(onPress).not.toHaveBeenCalled();
+      expect(getRoot(component).props.accessibilityState.checked).toBe(false);
+    });
   });
 
   it('advances indeterminate status to checked on press', async () => {
@@ -169,32 +269,19 @@ describe('Checkbox', () => {
     expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.pressed.foregroundNeutralSecondary);
   });
 
-  it('renders the persistent dual-ring focus visual', async () => {
-    const colors = defaultFlexTokens.color;
+  it('uses native focus visuals without mounting custom rings', async () => {
     const component = await renderCheckbox({ label: 'Focused' });
     const root = getRoot(component);
 
-    expect(root.props.enableFocusRing).toBe(false);
+    expect(root.props.enableFocusRing).toBe(true);
     await fireEvent(root, 'pressIn', {});
     await fireEvent(root, 'focus', {});
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      opacity: 0,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
 
     await fireEvent(root, 'blur', {});
     await fireEvent(root, 'focus', {});
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: colors.strokeFocusOuter,
-      borderWidth: 2,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: colors.strokeFocusInner,
-      borderWidth: 1,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it.each([

@@ -3,7 +3,7 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
-import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
+import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 import {
   getListItemBackgroundStyle,
   getListItemContentStyle,
@@ -55,14 +55,7 @@ export function useListItemStyles_unstable(state: ListItemState) {
     },
   ];
 
-  state.focusVisualProps = createFocusVisualProps_unstable({
-    borderRadius: rootSizeStyle.borderRadius,
-    innerColor: state.tokens.color.strokeFocusInner,
-    innerWidth: state.tokens.strokeWidth.thin,
-    outerColor: state.tokens.color.strokeFocusOuter,
-    outerWidth: state.tokens.strokeWidth.thick,
-    visible: state.focused && !state.disabled,
-  });
+  applyFocusRingStyles(state.FocusRing, state, rootSizeStyle.borderRadius);
   attachSlotProps(state.root, { style: rootStyle });
   attachSlotProps(state.content, { style: contentStyle });
   attachSlotProps(state.contentHidden, {

@@ -2,11 +2,21 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "composite": false,
+    "allowImportingTsExtensions": true,
     "noImplicitAny": true,
     "noEmit": true,
     "tsBuildInfoFile": ".cache/tsconfig.stories.tsbuildinfo"
   },
-  "include": ["src/components/button/button.stories.tsx"],
+  "include": [
+    "src/components/button/button.stories.tsx",
+    "src/components/checkbox/checkbox.stories.tsx",
+    "src/components/input/input.stories.tsx",
+    "src/components/switch/switch.stories.tsx",
+    "src/components/tablist/tablist.stories.tsx",
+    "src/primitives/focus-zone/focus-zone.stories.tsx",
+    "src/**/*.story-helpers.tsx",
+    "src/**/*.wdio.ts"
+  ],
   "exclude": [],
   "references": [
     {

@@ -17,6 +17,27 @@ The track, the thumb, and every rendered label set `accessible={false}`, so the
 component presents as exactly one element and the label text is never read
 twice.
 
+## Accessibility actions
+
+Framework Base resolves the component-owned toggle to `toggle` on Windows
+Fabric, `Toggle` on Win32, and the existing `Toggle` custom action on macOS.
+The declaration and event comparison share that resolved name. Caller
+spellings of the owned action are normalized and duplicate names are removed,
+preserving caller order, the first supplied label, and other custom names.
+
+An accepted action requests the next checked value and then forwards the
+original `onAccessibilityAction` event exactly once. Controlled checked state
+does not change internally. Disabled actions cannot toggle, but still reach the
+caller handler, as do unrelated custom actions. No action synthesizes
+`onPress`, and `activate` is not an additional toggle path.
+
+The [shared action foundation](../../../../../../framework-base/src/accessibility/AGENTS.md)
+records RNW 0.81.35, Win32 0.81.8, and RNmacOS 0.81.9 source evidence.
+macOS Fabric invokes custom actions by their declared names and ignores
+display labels; default AXPress support cannot be inferred from that path.
+Verify UIA Toggle or actual AX custom invocation with state and callback
+counts, separately from pointer or keyboard activation.
+
 ## Naming
 
 There are three naming paths, in priority order:
@@ -44,10 +65,20 @@ checked state, so putting it in the name makes it read twice and go stale.
 ## Focus and keyboard
 
 The hit area is focusable while enabled and leaves the tab order when disabled,
-because `focusable` defaults to the negation of `disabled`. Enter and the space
-keys toggle on key up. The two-ring focus visual is drawn inside the hit area
-whenever the root is focused and not disabled, so it stays visible against both
-the light and the dark surface.
+because `focusable` defaults to the negation of `disabled`.
+
+Enter and the space
+keys toggle on key up.
+
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 Disabled switches stay in the accessibility tree and report their disabled
 state, so a screen reader user can still discover the setting and hear that it

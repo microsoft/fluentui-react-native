@@ -1,14 +1,11 @@
 import type { ButtonProps, ButtonState } from './button.types';
-import { useAccessibilityLabelWarning, usePressableState, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, useFocusablePressable, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 import { Pressable } from 'react-native';
 import type { PressableProps } from 'react-native';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
-
-type NativeFocusPressableProps = PressableProps & {
-  enableFocusRing: boolean;
-};
 
 /**
  * Hook to create the state for a Button component. This is responsible for:
@@ -51,7 +48,7 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   });
 
   const themeState = useThemeState();
-  const nativeProps: NativeFocusPressableProps = {
+  const nativeProps: PressableProps = {
     ...rest,
     role: 'button',
     accessibilityState: {
@@ -61,18 +58,19 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    // RNW 0.81 crashes when either outline props or its native focus ring creates border visuals after mount.
-    enableFocusRing: false,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
   };
-  const [pressableProps, pressableState] = usePressableState(nativeProps);
-  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable(nativeProps);
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
+
+  const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const icon = useOptionalSlot(Icon, iconProp);
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
   const content = useOptionalSlot(Text, contentProp);
   const contentHidden = useOptionalSlot(Text, isToggleButton ? contentProp : null);
 
   return {
+    FocusRing,
     root,
     icon,
     selectedIcon,
@@ -88,6 +86,7 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     userStyle,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     appearance: appearance ?? 'secondary',
   };
 }

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Callout } from '@fluentui-react-native/callout';
 import type { CalloutProps, DirectionalHint } from '@fluentui-react-native/callout';
+import { RootInputBoundary } from '@fluentui-react-native/design';
 import { useTheme } from '@storybook/react-native-theming';
 
 type Win32CalloutPortalProps = React.PropsWithChildren<{
@@ -55,13 +56,13 @@ export function Win32CalloutPortal({
       target={target}
       testID={testID}
     >
-      <View
+      <RootInputBoundary
         collapsable={false}
         style={[styles.content, { backgroundColor: theme.background.content, height, width }]}
         testID={`${testID}-content`}
       >
         {children}
-      </View>
+      </RootInputBoundary>
     </Callout>
   );
 }

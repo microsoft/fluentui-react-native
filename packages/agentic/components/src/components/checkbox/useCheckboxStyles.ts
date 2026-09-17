@@ -1,7 +1,7 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
-import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
+import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
 import {
   checkboxStyles,
@@ -30,14 +30,7 @@ export function useCheckboxStyles_unstable(state: CheckboxState) {
   const labelStyle: StyleProp<TextStyle> = [checkboxStyles.labelText, textThemeStyles.label, labelColors];
   const secondaryTextStyle: StyleProp<TextStyle> = [checkboxStyles.secondaryText, textThemeStyles.secondaryText, secondaryTextColors];
 
-  state.focusVisualProps = createFocusVisualProps_unstable({
-    borderRadius: state.tokens.borderRadius.base300,
-    innerColor: state.tokens.color.strokeFocusInner,
-    innerWidth: state.tokens.strokeWidth.thin,
-    outerColor: state.tokens.color.strokeFocusOuter,
-    outerWidth: state.tokens.strokeWidth.thick,
-    visible: state.focusVisible && !state.disabled,
-  });
+  applyFocusRingStyles(state.FocusRing, state, state.tokens.borderRadius.base300);
   attachSlotProps(state.root, { style: rootStyle });
   state.indicatorStyle = indicatorStyle;
   state.labelContainerStyle = labelContainerStyle;

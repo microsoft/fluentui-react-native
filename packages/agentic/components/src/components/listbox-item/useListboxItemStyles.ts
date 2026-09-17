@@ -1,7 +1,7 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
-import { createFocusVisualProps_unstable } from '../../primitives/focus-visual/focus-visual';
+import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
 import {
   getListboxItemAvatarSize,
@@ -20,14 +20,7 @@ import type { ListboxItemState } from './listbox-item.types';
 export function useListboxItemStyles_unstable(state: ListboxItemState) {
   const resolvedRootStyle = getListboxItemRootStyle(state);
   const rootStyle: StyleProp<ViewStyle> = [listboxItemStyles.root, resolvedRootStyle, state.userStyle];
-  state.focusVisualProps = createFocusVisualProps_unstable({
-    borderRadius: resolvedRootStyle.borderRadius,
-    innerColor: state.tokens.color.strokeFocusInner,
-    innerWidth: state.tokens.strokeWidth.thin,
-    outerColor: state.tokens.color.strokeFocusOuter,
-    outerWidth: state.tokens.strokeWidth.thick,
-    visible: state.variant === 'listItem' && state.focused && !state.disabled,
-  });
+  applyFocusRingStyles(state.FocusRing, state, resolvedRootStyle.borderRadius);
   attachSlotProps(state.root, { style: rootStyle });
 
   const headerStyle: StyleProp<ViewStyle> = [listboxItemStyles.root, getListboxItemHeaderStyle(state), state.userStyle];

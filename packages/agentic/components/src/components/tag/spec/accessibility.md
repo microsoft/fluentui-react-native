@@ -48,9 +48,15 @@ a row of tags is one tab stop per enabled tag. Enter and Space activate the
 focused tag. A disabled tag stays in the accessibility tree and reports its
 disabled state, so it can still be read.
 
-A two-ring focus visual is drawn inside the tag, following the resolved corner
-radius, whenever the root is focused and not disabled, so it is rounded on a
-rounded tag and circular on a circular or icon-only tag.
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 ## Contrast
 

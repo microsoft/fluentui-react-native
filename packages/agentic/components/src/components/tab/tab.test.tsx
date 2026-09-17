@@ -1,12 +1,14 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import type { Pressable, ViewStyle } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import type { FocusTarget } from '@fluentui-react-native/framework-base';
 
 import { Tab } from './tab';
 import { TabList } from '../tablist/tablist';
@@ -27,13 +29,15 @@ function getRootStyle(component: RenderResult): ViewStyle {
 
 describe('Tab', () => {
   it('keeps its internal focus ref when the consumer omits ref', async () => {
-    let registeredRef: React.RefObject<React.ElementRef<typeof Pressable> | null> | undefined;
+    let registeredRef: FocusTarget | undefined;
     const contextValue: TabListContextValue = {
       activeValue: 'files',
+      focusedValue: undefined,
       disabled: false,
       getPosition: () => 1,
       isTabDisabled: () => false,
       onTabFocus: jest.fn(),
+      onTabBlur: jest.fn(),
       onTabKeyDown: jest.fn(),
       onTabPress: jest.fn(),
       orientation: 'horizontal',
@@ -91,6 +95,124 @@ describe('Tab', () => {
     expect(tabs[1].props.accessibilityState).toEqual({ disabled: false, selected: true });
     expect(tabs[1].props.focusable).toBe(true);
     expect(tabs[1].props.accessibilitySetSize).toBe(2);
+  });
+
+  describe.each([
+    ['windows', 'select'],
+    ['win32', 'Select'],
+    ['macos', 'Select'],
+  ] as const)('%s accessibility actions', (platform, actionName) => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    });
+    afterEach(() => jest.restoreAllMocks());
+
+    it('selects through TabList once, preserves labels, and forwards the event without a press', async () => {
+      const calls: string[] = [];
+      const onSelectionChange = jest.fn(() => calls.push('selection'));
+      const onAccessibilityAction = jest.fn(() => calls.push('action'));
+      const onPress = jest.fn();
+      const component = await render(
+        <TabList defaultSelectedValue="overview" onSelectionChange={onSelectionChange}>
+          <Tab controls="overview-panel" content="Overview" value="overview" />
+          <Tab
+            controls="files-panel"
+            content="Files"
+            value="files"
+            accessibilityActions={[{ name: 'Select' }, { name: 'select', label: 'Show panel' }, { name: 'custom', label: 'More' }]}
+            onAccessibilityAction={onAccessibilityAction}
+            onPress={onPress}
+          />
+        </TabList>,
+      );
+      const root = component.getAllByRole('tab')[1];
+      const event = { nativeEvent: { actionName } };
+      expect(root.props.accessibilityActions).toEqual([
+        { name: actionName, label: 'Show panel' },
+        { name: 'custom', label: 'More' },
+      ]);
+
+      await fireEvent(root, 'accessibilityAction', event);
+
+      expect(onSelectionChange).toHaveBeenCalledTimes(1);
+      expect(onSelectionChange).toHaveBeenCalledWith('files');
+      expect(component.getAllByRole('tab')[1].props.accessibilityState.selected).toBe(true);
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+      expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+      expect(calls).toEqual(['selection', 'action']);
+      expect(onPress).not.toHaveBeenCalled();
+    });
+
+    it('keeps standalone selection externally driven and forwards the action once', async () => {
+      const onPress = jest.fn();
+      const onAccessibilityAction = jest.fn();
+      const component = await renderTab({ controls: 'files-panel', selected: false, onPress, onAccessibilityAction });
+      const event = { nativeEvent: { actionName } };
+      expect(getRoot(component).props.accessibilityActions).toEqual([{ name: actionName }]);
+
+      await fireEvent(getRoot(component), 'accessibilityAction', event);
+
+      expect(getRoot(component).props.accessibilityState.selected).toBe(false);
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+      expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+      expect(onPress).not.toHaveBeenCalled();
+    });
+
+    it.each(['tab', 'list'] as const)('guards a disabled %s while forwarding the action once', async (disabledOwner) => {
+      const onSelectionChange = jest.fn();
+      const onAccessibilityAction = jest.fn();
+      const onPress = jest.fn();
+      const component = await render(
+        <TabList disabled={disabledOwner === 'list'} selectedValue="overview" onSelectionChange={onSelectionChange}>
+          <Tab controls="overview-panel" content="Overview" value="overview" />
+          <Tab
+            controls="files-panel"
+            content="Files"
+            value="files"
+            disabled={disabledOwner === 'tab'}
+            onAccessibilityAction={onAccessibilityAction}
+            onPress={onPress}
+          />
+        </TabList>,
+      );
+      const root = component.getAllByRole('tab')[1];
+      const event = { nativeEvent: { actionName } };
+      root.props.onAccessibilityAction(event);
+      expect(root.props.accessibilityState).toMatchObject({ disabled: true, selected: false });
+      expect(onSelectionChange).not.toHaveBeenCalled();
+      expect(onPress).not.toHaveBeenCalled();
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+      expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+    });
+
+    it('forwards custom, wrong-case, and activate actions without selecting', async () => {
+      const onSelectionChange = jest.fn();
+      const onAccessibilityAction = jest.fn();
+      const onPress = jest.fn();
+      const component = await render(
+        <TabList defaultSelectedValue="overview" onSelectionChange={onSelectionChange}>
+          <Tab controls="overview-panel" content="Overview" value="overview" />
+          <Tab
+            controls="files-panel"
+            content="Files"
+            value="files"
+            onAccessibilityAction={onAccessibilityAction}
+            onPress={onPress}
+            accessibilityActions={[{ name: 'custom', label: 'More' }]}
+          />
+        </TabList>,
+      );
+      const root = component.getAllByRole('tab')[1];
+      for (const name of ['custom', actionName === 'select' ? 'Select' : 'select', 'activate']) {
+        const event = { nativeEvent: { actionName: name } };
+        await fireEvent(root, 'accessibilityAction', event);
+        expect(onAccessibilityAction).toHaveBeenLastCalledWith(event);
+      }
+      expect(onAccessibilityAction).toHaveBeenCalledTimes(3);
+      expect(onSelectionChange).not.toHaveBeenCalled();
+      expect(onPress).not.toHaveBeenCalled();
+      expect(root.props.accessibilityState.selected).toBe(false);
+    });
   });
 
   it('renders default icon-and-text accessibility and stable label overlay', async () => {
@@ -201,22 +323,13 @@ describe('Tab', () => {
     expect(component.getByTestId('filled-icon').props.testID).toBe('filled-icon');
   });
 
-  it('renders a persistent dual-ring focus visual', async () => {
+  it('uses native focus visuals without mounting custom rings', async () => {
     const component = await renderTab({ controls: 'files-panel', content: 'Files' });
     const root = getRoot(component);
     await fireEvent(root, 'focus', {});
+    expect(root.props.enableFocusRing).toBe(true);
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusOuter,
-      borderWidth: defaultFlexTokens.strokeWidth.thick,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusInner,
-      borderWidth: defaultFlexTokens.strokeWidth.thin,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it('applies user styles last', async () => {

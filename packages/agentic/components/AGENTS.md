@@ -9,11 +9,19 @@ invariants; detailed authoring recipes live in the
 - Higher-order components live in `src/components`; read `src/components/AGENTS.md`.
 - Primitive components live in `src/primitives`; read `src/primitives/AGENTS.md`.
 - Story files are library source and follow the tests and stories reference.
-- Prefer executable tests under top-level `wdio`, as one callback or a map
-  of named callbacks. Button is the migration proof of concept; legacy
-  `parameters.desktopDriver` plans remain supported for other components.
+- Focus work starts with the [common focus instructions](../../../.github/skills/agentic-component-authoring/references/focus.md),
+  then the [Windows/Win32](../../../.github/skills/agentic-component-authoring/references/focus-windows.md) or
+  [macOS](../../../.github/skills/agentic-component-authoring/references/focus-macos.md) detail. V1 Win32 is the
+  behavioral baseline for both Windows endpoints; renderer-specific plumbing remains separate.
+- Author executable tests under top-level `wdio`, as one callback or a map
+  of named callbacks. All catalog tests use this pattern; legacy
+  `parameters.desktopDriver` plans remain only in runner compatibility fixtures.
   Use stable `testID` selectors and the injected target `platform` for real
   platform differences, with explicit skips for unsupported capabilities.
+- Shared focus tests run on macOS, Windows, and Win32. Gate only genuine
+  platform-specific assertions, such as Windows pointer-focus, rather than the
+  entire case. Follow the tests-and-stories reference for native activation
+  timing, macOS Keyboard navigation prerequisites, and pass/skip evidence.
 - Executable tests are typed
   with `WdioStory` from `storybook-desktop/testing` using `import type`.
   Keep callbacks self-contained; dynamically import Node helpers inside
@@ -50,8 +58,10 @@ invariants; detailed authoring recipes live in the
 - Export higher-order components and public types explicitly from `src/index.ts`; export primitives and their public types
   explicitly from `src/primitives/index.ts`. Never use wildcard exports.
 - Colocate runtime tests, type tests, and Storybook stories with the implementation.
-- Keep legacy desktop story plans inline and statically extractable; do not hide them
-  behind variables, spreads, functions, or computed values.
+- Include every test-bearing story in `tsconfig.stories.json`. The representative
+  runner contract rejects legacy catalog plans and missing story type coverage.
+- Node-only shared test helpers use `*.wdio.ts`, are excluded from production
+  emit, and are imported dynamically inside the stripped callbacks.
 - Use package scripts for format, lint, build, tests, and snapshots.
 - Do not copy web-only APIs, CSS behavior, or DOM assumptions into React Native.
 - Do not copy or mechanically transform private source bodies into this public

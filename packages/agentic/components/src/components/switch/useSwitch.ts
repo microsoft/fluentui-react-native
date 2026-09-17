@@ -1,24 +1,20 @@
 import * as React from 'react';
-import { Animated, Easing, Pressable, View } from 'react-native';
+import { Animated, Easing, Platform, Pressable, View } from 'react-native';
 
 import {
+  resolveAccessibilityAction,
   useAccessibilityLabelWarning,
-  usePressableState,
+  useFocusablePressable,
   useOptionalSlot,
   useReducedMotion,
   useSlot,
   useToggleState,
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 
 import { Text } from '../text/text';
 import type { SwitchProps, SwitchState } from './switch.types';
-
-const TOGGLE_KEYS = new Set(['Enter', ' ', 'Spacebar', 'Space']);
-
-function isToggleKey(key: string | undefined): boolean {
-  return key !== undefined && TOGGLE_KEYS.has(key);
-}
 
 /**
  * Resolve the Switch component state, slots, accessibility, and interactive behavior.
@@ -26,6 +22,7 @@ function isToggleKey(key: string | undefined): boolean {
 export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const {
     aboveLabel: aboveLabelProp,
+    accessibilityActions,
     accessibilityLabel,
     accessibilityLabelledBy,
     afterLabel: afterLabelProp,
@@ -38,6 +35,7 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     labelBefore = true,
     layout = 'horizontal',
     onChange,
+    onAccessibilityAction,
     onPress,
     ref: rootRef,
     thumb: thumbProp,
@@ -102,10 +100,31 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
           accessibilityLabel: label,
         };
 
-  const [pressableProps, pressableState] = usePressableState({
+  const { toggle: toggleChecked } = toggle;
+  const toggleAction = React.useMemo(() => resolveAccessibilityAction('toggle', Platform.OS, accessibilityActions), [accessibilityActions]);
+  const handleAccessibilityAction = React.useCallback<NonNullable<SwitchProps['onAccessibilityAction']>>(
+    (event) => {
+      if (event.nativeEvent.actionName === toggleAction.name) {
+        toggleChecked();
+      }
+      onAccessibilityAction?.(event);
+    },
+    [onAccessibilityAction, toggleChecked, toggleAction.name],
+  );
+  const handlePress = React.useCallback(
+    (event: Parameters<NonNullable<SwitchProps['onPress']>>[0]) => {
+      toggleChecked();
+      onPress?.(event);
+    },
+    [onPress, toggleChecked],
+  );
+
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
     ...pressableNameProps,
     accessibilityRole: 'switch',
+    accessibilityActions: toggleAction.accessibilityActions,
+    onAccessibilityAction: handleAccessibilityAction,
     accessibilityState: {
       ...rest.accessibilityState,
       checked,
@@ -113,35 +132,18 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
     'aria-checked': checked,
+    onPress: handlePress,
   });
 
-  const { toggle: toggleChecked } = toggle;
-  const handlePress = React.useCallback(
-    (event: Parameters<NonNullable<typeof pressableProps.onPress>>[0]) => {
-      toggleChecked();
-      onPress?.(event);
-    },
-    [onPress, toggleChecked],
-  );
-
-  const handleKeyUp = React.useCallback(
-    (event: Parameters<NonNullable<typeof pressableProps.onKeyUp>>[0]) => {
-      pressableProps.onKeyUp?.(event);
-      if (isToggleKey((event as { nativeEvent?: { key?: string } }).nativeEvent?.key)) {
-        toggleChecked();
-      }
-    },
-    [pressableProps, toggleChecked],
-  );
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
 
   const layoutContainer = useSlot(View, { testID: 'switch-layout-container' });
   const root = useSlot(Pressable, {
     ...pressableProps,
+    ...nativeFocusProps,
     ref: rootRef,
-    onPress: handlePress,
-    onKeyUp: handleKeyUp,
   });
   const track = useSlot(Animated.View, trackProp);
   const thumb = useSlot(Animated.View, thumbProp);
@@ -154,8 +156,10 @@ export function useSwitch_unstable(props: SwitchProps): SwitchState {
   const aboveLabel = useOptionalSlot(Text, hasAboveLabel ? (aboveLabelProp === undefined ? { children: label } : aboveLabelProp) : null);
 
   return {
+    FocusRing,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     aboveLabel,
     afterLabel,
     beforeLabel,

@@ -1,7 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { Text } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 
 import { CompoundItemLayout } from './compound-item-layout';
 

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Pressable } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
-import { useAccessibilityLabelWarning, useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
+import { useAccessibilityLabelWarning, useOptionalSlot, useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
 
 import { semanticIconSources } from '../../common/iconSources';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
 import type { TagProps, TagState } from './tag.types';
@@ -49,7 +50,7 @@ export function useTag_unstable(props: TagProps): TagState {
   }, [hasLeadingIcon, iconOnly]);
 
   const themeState = useThemeState();
-  const [pressableProps, pressableState] = usePressableState({
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
     accessibilityRole: 'button',
     accessibilityState: {
@@ -58,10 +59,12 @@ export function useTag_unstable(props: TagProps): TagState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
   });
 
-  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
+
+  const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const content = useOptionalSlot(Text, iconOnly ? null : contentProp, {
     defaultProps: { children: 'Tag text' },
     renderByDefault: true,
@@ -75,6 +78,7 @@ export function useTag_unstable(props: TagProps): TagState {
   });
 
   return {
+    FocusRing,
     root,
     content,
     leadingIcon,
@@ -91,6 +95,7 @@ export function useTag_unstable(props: TagProps): TagState {
     userStyle,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     appearance,
   };
 }

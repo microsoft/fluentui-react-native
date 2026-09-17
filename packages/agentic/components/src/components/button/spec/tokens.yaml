@@ -125,7 +125,7 @@ bindings:
       width: size200
     color: resolved root foreground
 
-  focusVisual:
+  FocusRing:
     innerColor: color.strokeFocusInner
     innerWidth: strokeWidth.thin
     outerColor: color.strokeFocusOuter

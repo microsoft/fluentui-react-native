@@ -104,3 +104,9 @@ cannot be removed.
 
 Trying to give the dismiss glyph its own handler or its own focus. There is one
 target, and it is the whole tag.
+
+## Scene root
+
+Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.
+A nested theme boundary may override appearance without creating a separate
+input-modality tracker. Component test scenes use the shared themed renderer.

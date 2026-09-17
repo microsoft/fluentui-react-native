@@ -14,7 +14,7 @@ import { Win32ResizeHandle } from './Win32ResizeHandle';
 const emptyRefs = {};
 const emptyStatus = {};
 
-export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story, storyHash, theme }) => {
+export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story, storyHash, storyBackgroundColor, theme }) => {
   const storiesAnchorRef = React.useRef<View>(null);
   const addonsAnchorRef = React.useRef<View>(null);
   const [sidebarVisible, setSidebarVisible] = React.useState(true);
@@ -67,7 +67,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
   return (
     <ThemeProvider theme={theme}>
       <StorageProvider storage={storage}>
-        <View style={styles.root} testID={chromeTestID}>
+        <View style={[styles.root, { backgroundColor: theme.background.app }]} testID={chromeTestID}>
           {sidebarVisible ? (
             <>
               <View
@@ -174,7 +174,7 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                 </Text>
               </View>
             ) : null}
-            <View style={styles.preview} testID={previewTestID}>
+            <View style={[styles.preview, { backgroundColor: storyBackgroundColor ?? theme.background.preview }]} testID={previewTestID}>
               {children}
             </View>
             {addonsVisible ? (
