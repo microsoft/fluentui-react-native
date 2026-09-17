@@ -18082,8 +18082,8 @@ __metadata:
   linkType: hard
 
 "jscodeshift@npm:^17.0.0":
-  version: 17.3.0
-  resolution: "jscodeshift@npm:17.3.0"
+  version: 17.4.0
+  resolution: "jscodeshift@npm:17.4.0"
   dependencies:
     "@babel/core": "npm:^7.24.7"
     "@babel/parser": "npm:^7.24.7"
@@ -18097,9 +18097,9 @@ __metadata:
     "@babel/register": "npm:^7.24.6"
     flow-parser: "npm:0.*"
     graceful-fs: "npm:^4.2.4"
-    micromatch: "npm:^4.0.7"
     neo-async: "npm:^2.5.0"
     picocolors: "npm:^1.0.1"
+    picomatch: "npm:^4.0.2"
     recast: "npm:^0.23.11"
     tmp: "npm:^0.2.3"
     write-file-atomic: "npm:^5.0.1"
@@ -18110,7 +18110,7 @@ __metadata:
       optional: true
   bin:
     jscodeshift: bin/jscodeshift.js
-  checksum: 10c0/366e3c8ec52597a00919c6eb37007b6bcde0037722b89bda0a4416aec36e34717a7c46d10b3e637ac0a2cf91b986e868063fd1e99a943699ac292f7aef78e3ba
+  checksum: 10c0/ef7b71c22f211cbba8ae96ffd2d3e8af28450d8f703d32050ff9f6cb29042bc163ce7d8239798b672b543bb12203adea20fb4d2c0034acc5440d26cb17c7a42f
   languageName: node
   linkType: hard
 
@@ -19180,7 +19180,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^4.0.0, micromatch@npm:^4.0.4, micromatch@npm:^4.0.7, micromatch@npm:^4.0.8":
+"micromatch@npm:^4.0.0, micromatch@npm:^4.0.4, micromatch@npm:^4.0.8":
   version: 4.0.8
   resolution: "micromatch@npm:4.0.8"
   dependencies:
