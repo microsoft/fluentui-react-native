@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/tooltip
 
+## 0.5.12
+
+### Patch Changes
+
+- Updated dependencies [65245b4]
+- Updated dependencies [65245b4]
+  - @fluentui-react-native/framework-base@0.8.0
+  - @fluentui-react-native/callout@0.29.5
+
 ## 0.5.11
 
 ### Patch Changes

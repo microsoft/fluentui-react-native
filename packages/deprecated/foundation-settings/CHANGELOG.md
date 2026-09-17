@@ -1,5 +1,12 @@
 # Change Log - @uifabricshared/foundation-settings
 
+## 0.16.10
+
+### Patch Changes
+
+- Updated dependencies [65245b4]
+  - @fluentui-react-native/framework-base@0.8.0
+
 ## 0.16.9
 
 ### Patch Changes
