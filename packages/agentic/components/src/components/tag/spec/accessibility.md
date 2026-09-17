@@ -2,7 +2,7 @@
 
 ## Native semantics
 
-The root is the only accessible element. It sets `accessibilityRole="button"`
+The root is the only accessible element. It sets `role="button"`
 and publishes `disabled` through `accessibilityState`, merged over any state the
 caller passes. There is no selected or checked state to expose, because a tag
 has neither.

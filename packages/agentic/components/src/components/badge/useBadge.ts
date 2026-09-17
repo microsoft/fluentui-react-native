@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
+import { hasAccessibleName } from '../../common/accessibility';
 import { semanticIconSources } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
@@ -46,11 +47,7 @@ export function useBadge_unstable(props: BadgeProps): BadgeState {
   const hasContent = !iconOnly && contentProp !== null;
   const hasLeadingIcon = leadingIconProp !== undefined && leadingIconProp !== null;
   const hasTrailingIcon = trailingIconProp !== undefined && trailingIconProp !== null;
-  const isInformative =
-    accessibilityLabel !== undefined ||
-    rest.accessibilityLabelledBy !== undefined ||
-    rest['aria-label'] !== undefined ||
-    rest['aria-labelledby'] !== undefined;
+  const isInformative = hasAccessibleName({ accessibilityLabel, ...rest });
   const isAccessible = accessible ?? isInformative;
 
   useAccessibilityLabelWarning({
@@ -67,7 +64,7 @@ export function useBadge_unstable(props: BadgeProps): BadgeState {
     accessible: isAccessible,
     accessibilityElementsHidden: isAccessible ? accessibilityElementsHidden : true,
     accessibilityLabel,
-    accessibilityRole: isInformative ? 'image' : undefined,
+    role: isInformative ? 'img' : undefined,
     importantForAccessibility: isAccessible ? importantForAccessibility : 'no-hide-descendants',
     focusable: false,
   });

@@ -98,6 +98,7 @@ bindings:
       flexShrink: 1
       minWidth: 0
       paddingHorizontal: 0
+      textAlignVertical: center
     typography:
       fontFamily: fontFamily.functional
       fontSize:

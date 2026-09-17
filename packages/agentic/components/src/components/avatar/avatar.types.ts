@@ -34,7 +34,7 @@ export type AvatarStateProps = {
   size?: AvatarSize;
 };
 
-export type AvatarRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type AvatarRootProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'role'>;
 
 export type AvatarProps = AvatarStateProps & ComponentProps<AvatarSlots, AvatarRootProps>;
 

@@ -3,6 +3,7 @@ import { Pressable } from 'react-native';
 import { usePressableState, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { resolveFocusable } from '../../common/interaction';
 import type { RadioProps, RadioState } from './radio.types';
 
 /**
@@ -28,7 +29,7 @@ export function useRadio_unstable(props: RadioProps): RadioState {
     ...rest,
     accessibilityLabel: accessibilityLabel ?? label,
     accessibilityHint: accessibilityHint ?? (showSecondaryText ? secondaryText : undefined),
-    accessibilityRole: 'radio',
+    role: 'radio',
     accessibilityState: {
       ...accessibilityState,
       checked: selected,
@@ -36,7 +37,7 @@ export function useRadio_unstable(props: RadioProps): RadioState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: rest.focusable ?? !disabled,
+    focusable: resolveFocusable(rest.focusable, disabled),
   });
   const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
 

@@ -36,7 +36,7 @@ describe('ListItem', () => {
     const component = await renderListItem({ content: 'Inbox' });
     const root = getRoot(component);
 
-    expect(root.props.accessibilityRole).toBe('button');
+    expect(root.props.role).toBe('button');
     expect(root.props.accessibilityState).toEqual({ disabled: false, selected: false });
     expect(root.props.focusable).toBe(true);
     expect(component.getAllByText('Inbox', { includeHiddenElements: true })).toHaveLength(2);

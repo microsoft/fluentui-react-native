@@ -35,7 +35,7 @@ The resolved state retains size, activity-ring value, content mode, theme state,
 
 ## Platform behavior
 
-An Avatar with `accessibilityLabel` is accessible with React Native image role; callers can also explicitly control `accessible`. Without an informative label, the default root is hidden from accessibility descendants. Its image, icon, and initials children are always hidden so identity is not announced twice.
+An Avatar with an explicit accessible name is exposed with `role="img"`; callers can also explicitly control `accessible`. Without an informative name, the default root is hidden from accessibility descendants. Its image, icon, and initials children are always hidden so identity is not announced twice.
 
 Windows exposes an informative root as a UI Automation image; macOS exposes it as an AX image. Avatar adds no tab stop or `FocusVisual`, although a caller can opt the forwarded root into focus with `focusable`. The active ring uses React Native root outline properties and does not introduce a separate rendered child or change the requested width and height.
 

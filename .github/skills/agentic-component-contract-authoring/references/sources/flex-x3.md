@@ -35,7 +35,7 @@ Translate web concepts deliberately:
 
 | Flex evidence                        | React Native contract                                                              |
 | ------------------------------------ | ---------------------------------------------------------------------------------- |
-| ARIA attributes or native elements   | `accessibilityRole`, `accessibilityState`, labels, and UIA/AX expectations         |
+| ARIA attributes or native elements   | ARIA-aligned `role`, `accessibilityState`, labels, and UIA/AX expectations         |
 | CSS pseudo-classes                   | explicit interaction state and precedence                                          |
 | browser focus selectors and outlines | persistent `FocusVisual`; never conditional `outline*` or RNW native focus visuals |
 | CSS pixel or layout rules            | React Native units, minimum targets, and platform behavior                         |

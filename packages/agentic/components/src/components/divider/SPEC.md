@@ -33,8 +33,8 @@ stretches along its parent's primary axis and does not define its own extent.
 | `label`    | slot for `Text`          | renders the text `Text` | The label content. `null` removes the label.                                |
 | `icon`     | slot for `Icon`          | absent                  | A leading icon inside the content container. `null` or omission removes it. |
 
-The root accepts the owned `ViewProps` surface except `accessibilityRole` and
-`focusable`, which the component owns. A caller `style` is applied after the
+The root accepts the owned `ViewProps` surface except `role`, the legacy
+`accessibilityRole`, and `focusable`, which the component owns. A caller `style` is applied after the
 token-derived root styles.
 
 `label` and `icon` are slots: they accept shorthand children, a props object,

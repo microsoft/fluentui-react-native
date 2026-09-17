@@ -56,10 +56,10 @@ semibold label reservation, while its internal indicator reflects `selected`.
 ## Platform behavior
 
 On Windows and macOS, a list item is an accessible React Native `Pressable`
-with the `button` role. Its accessibility state combines the caller's state
+with `role="button"`. Its accessibility state combines the caller's state
 with `disabled` and `pressed: selected`, and it is focusable unless disabled.
 A section header is exposed through a nonfocusable React Native `View` with
-the `header` role. The internal leading and trailing visuals are inaccessible.
+`role="heading"`. The internal leading and trailing visuals are inaccessible.
 
 Pointer hover, press, and focus events flow through `usePressableState`.
 FocusVisual stays mounted in the list-item structure, appearing only for an

@@ -42,7 +42,7 @@ export type MenuItemSlots = {
   multiselectCheckbox: OptionalSlot<typeof CheckboxIndicator>;
 };
 
-export type MenuItemExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type MenuItemExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>, 'accessibilityRole' | 'role'>;
 
 export type MenuItemProps = MenuItemStateProps & {
   content?: string | null;

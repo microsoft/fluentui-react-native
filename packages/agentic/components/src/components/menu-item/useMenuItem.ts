@@ -1,8 +1,9 @@
 import { Pressable, View } from 'react-native';
 
-import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useDevWarning, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { resolveFocusable } from '../../common/interaction';
 import { semanticIconSources } from '../../common/iconSources';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import { Icon } from '../../primitives/icon/icon';
@@ -49,23 +50,21 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   const hasSecondaryContent = secondaryContentText !== null && secondaryContentText !== undefined && secondaryContentText !== '';
   const themeState = useThemeState();
 
-  if (__DEV__ && hasCheckmark && hasMultiselect) {
-    console.warn('MenuItem: checkmark and multiselect are mutually exclusive.');
-  }
+  useDevWarning(hasCheckmark && hasMultiselect, 'MenuItem: checkmark and multiselect are mutually exclusive.');
 
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
     accessible: rest.accessible ?? true,
     accessibilityHint: accessibilityHint ?? (hasChevron ? 'Has submenu' : undefined),
     accessibilityLabel: accessibilityLabel ?? contentText,
-    accessibilityRole: isListItem ? (hasMultiselect ? 'menuitemcheckbox' : hasCheckmark ? 'menuitemradio' : 'menuitem') : 'none',
+    role: isListItem ? 'menuitem' : 'none',
     accessibilityState: {
       ...props.accessibilityState,
       disabled: disabled && isInteractive,
       ...(isSelectionIndicator ? { checked: selected } : isSelectedVisual ? { selected: true } : {}),
     },
     disabled: !isInteractive || disabled,
-    focusable: isInteractive && !disabled,
+    focusable: isInteractive && resolveFocusable(rest.focusable, disabled),
     onPress: isInteractive ? rest.onPress : undefined,
   });
 

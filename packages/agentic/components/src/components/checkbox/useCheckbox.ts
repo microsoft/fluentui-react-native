@@ -2,15 +2,20 @@ import * as React from 'react';
 import { Pressable } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { useControllableValue, useFocusVisible, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import {
+  useControllableValue,
+  useDevWarning,
+  useFocusVisible,
+  usePressableState,
+  useOptionalSlot,
+  useSlot,
+} from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { disableNativeFocusRingProps, resolveFocusable } from '../../common/interaction';
+import type { NativeFocusPressableProps } from '../../common/interaction';
 import { Text } from '../text/text';
 import type { CheckboxProps, CheckboxState, CheckboxStatus } from './checkbox.types';
-
-type NativeFocusPressableProps = React.ComponentProps<typeof Pressable> & {
-  enableFocusRing: boolean;
-};
 
 function getNextStatus(status: CheckboxStatus): CheckboxStatus {
   return status === 'checked' ? 'unchecked' : 'checked';
@@ -45,11 +50,7 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
   const renderSecondaryText = showLabel && showSecondaryText;
   const themeState = useThemeState();
 
-  React.useEffect(() => {
-    if (__DEV__ && showSecondaryText && !showLabel) {
-      console.warn('Checkbox: secondary text requires a visible label.');
-    }
-  }, [showLabel, showSecondaryText]);
+  useDevWarning(showSecondaryText && !showLabel, 'Checkbox: secondary text requires a visible label.');
 
   const handlePress = React.useCallback(
     (event: Parameters<NonNullable<CheckboxProps['onPress']>>[0]) => {
@@ -67,9 +68,10 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
 
   const nativeProps: NativeFocusPressableProps = {
     ...rest,
+    ...disableNativeFocusRingProps,
     accessibilityHint: rootAccessibilityHint,
     accessibilityLabel: rootAccessibilityLabel,
-    accessibilityRole: 'checkbox',
+    role: 'checkbox',
     accessibilityState: {
       ...accessibilityState,
       checked: status === 'indeterminate' ? 'mixed' : status === 'checked',
@@ -77,8 +79,7 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    enableFocusRing: false,
-    focusable: rest.focusable ?? !disabled,
+    focusable: resolveFocusable(rest.focusable, disabled),
     onPress: handlePress,
   };
   const [focusVisibleProps, focusVisible] = useFocusVisible(nativeProps);

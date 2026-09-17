@@ -150,7 +150,7 @@ export function useProgressBar_unstable(props: ProgressBarProps): ProgressBarSta
   const root = useSlot(View, {
     ...rootProps,
     accessibilityLabelledBy: mergeLabelledBy(rootProps.accessibilityLabelledBy, labelId),
-    accessibilityRole: 'progressbar',
+    role: 'progressbar',
     accessibilityState: accessibilityStateToUse,
     accessibilityValue: accessibilityValueToUse,
     accessible: rootProps.accessible ?? true,

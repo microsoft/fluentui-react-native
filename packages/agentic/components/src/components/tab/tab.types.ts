@@ -61,7 +61,8 @@ export type TabExposedPressableProps = OwnedRootProps<
     accessibilityPosInSet?: number;
     accessibilitySetSize?: number;
     onKeyDown?: (event: TabKeyEvent) => void;
-  }
+  },
+  'accessibilityRole' | 'role'
 >;
 
 type TabIconOnlyProps = {

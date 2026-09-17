@@ -1,8 +1,14 @@
-import * as React from 'react';
 import { Pressable } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
-import { useAccessibilityLabelWarning, useOptionalSlot, usePressableState, useSlot } from '@fluentui-react-native/framework-base';
+import {
+  useAccessibilityLabelWarning,
+  useDevWarning,
+  useOptionalSlot,
+  usePressableState,
+  useSlot,
+} from '@fluentui-react-native/framework-base';
 
+import { resolveFocusable } from '../../common/interaction';
 import { semanticIconSources } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
@@ -42,23 +48,19 @@ export function useTag_unstable(props: TagProps): TagState {
     warning: 'Tag: icon-only tags require an accessibilityLabel that describes the tag.',
   });
 
-  React.useEffect(() => {
-    if (__DEV__ && iconOnly && !hasLeadingIcon) {
-      console.warn('Tag: icon-only tags require a leading icon.');
-    }
-  }, [hasLeadingIcon, iconOnly]);
+  useDevWarning(iconOnly && !hasLeadingIcon, 'Tag: icon-only tags require a leading icon.');
 
   const themeState = useThemeState();
   const [pressableProps, pressableState] = usePressableState({
     ...rest,
-    accessibilityRole: 'button',
+    role: 'button',
     accessibilityState: {
       ...accessibilityState,
       disabled,
     },
     accessible: rest.accessible ?? true,
     disabled,
-    focusable: rest.focusable ?? !disabled,
+    focusable: resolveFocusable(rest.focusable, disabled),
   });
 
   const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });

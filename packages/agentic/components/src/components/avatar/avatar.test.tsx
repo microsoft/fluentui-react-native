@@ -14,25 +14,34 @@ function renderAvatar(props: React.ComponentProps<typeof Avatar>): Promise<Rende
 }
 
 function getRootStyle(component: RenderResult): ViewStyle {
-  return StyleSheet.flatten(component.getByRole('image').props.style);
+  return StyleSheet.flatten(component.getByRole('img').props.style);
 }
 
 describe('Avatar', () => {
   it('renders the default icon fallback as a decorative image avatar', async () => {
     const component = await renderAvatar({});
 
-    expect(component.queryByRole('image')).toBeNull();
+    expect(component.queryByRole('img')).toBeNull();
     expect(component.getByText(String.fromCodePoint(0x1f464), { includeHiddenElements: true })).toBeOnTheScreen();
   });
 
   it('renders informative avatars with the image role and label', async () => {
     const component = await renderAvatar({ accessibilityLabel: 'Lydia Mitchelson', initials: 'LM' });
-    const root = component.getByRole('image');
+    const root = component.getByRole('img');
 
     expect(root.props.accessibilityLabel).toBe('Lydia Mitchelson');
     expect(root.props.accessible).toBe(true);
     expect(component.getByText('LM', { includeHiddenElements: true })).toBeOnTheScreen();
   });
+
+  it.each([{ accessibilityLabelledBy: 'avatar-label' }, { 'aria-label': 'Lydia' }, { 'aria-labelledby': 'avatar-label' }])(
+    'recognizes every supported programmatic name',
+    async (nameProps) => {
+      const component = await renderAvatar(nameProps);
+
+      expect(component.getByRole('img')).toBeOnTheScreen();
+    },
+  );
 
   it('uses the initials mode when initials are provided', async () => {
     const component = await renderAvatar({ accessibilityLabel: 'Lydia Mitchelson', initials: { children: 'lm' } });

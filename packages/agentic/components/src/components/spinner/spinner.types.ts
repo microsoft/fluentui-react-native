@@ -19,7 +19,7 @@ export type SpinnerStateProps = {
   size?: SpinnerSize;
 };
 
-export type SpinnerExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
+export type SpinnerExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable' | 'role'>;
 
 export type SpinnerProps = SpinnerStateProps & ComponentProps<SpinnerSlots, SpinnerExposedViewProps>;
 

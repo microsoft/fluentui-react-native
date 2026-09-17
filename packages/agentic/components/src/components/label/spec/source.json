@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 2,
+  "component": "label",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-09-02",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:label",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/label/SKILL.md",
+          "marketplaceBlobSha": "804798a00d1bda43ea6c1d4388a19f07855700e4",
+          "marketplaceSha256": "860a1e4efe30978d34eea40bee9b665ce0a6778b4a55527d51187ba246352a77",
+          "originPath": "plugins/components/skills/label/SKILL.md",
+          "originBlobSha": "804798a00d1bda43ea6c1d4388a19f07855700e4",
+          "originSha256": "860a1e4efe30978d34eea40bee9b665ce0a6778b4a55527d51187ba246352a77",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/label/usage.md",
+          "marketplaceBlobSha": "3086da7a26b8953942a69c42dde6a84f2a3b4682",
+          "marketplaceSha256": "94c58ad66bc4990603e54d26197633a6f01d4395d2be534a7e3d5fdddd7cc381",
+          "originPath": "plugins/components/skills/label/usage.md",
+          "originBlobSha": "3086da7a26b8953942a69c42dde6a84f2a3b4682",
+          "originSha256": "94c58ad66bc4990603e54d26197633a6f01d4395d2be534a7e3d5fdddd7cc381",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/label/web/accessibility.md",
+          "marketplaceBlobSha": "680c57fe6d5a02a6b501f8a9dd24fb2579d4fc76",
+          "marketplaceSha256": "11defae8e0484b33b1519d5088f1fa6634d9ca761731dfcb3abce620145aff3f",
+          "originPath": "plugins/components/skills/label/web/accessibility.md",
+          "originBlobSha": "680c57fe6d5a02a6b501f8a9dd24fb2579d4fc76",
+          "originSha256": "11defae8e0484b33b1519d5088f1fa6634d9ca761731dfcb3abce620145aff3f",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/label/web/interaction.md",
+          "marketplaceBlobSha": "1623ecd570995a69e8bf87770d9e0ff3f58e31e7",
+          "marketplaceSha256": "25b0e5b9b95898604ce941dab41d7f0a592f1fedb6338d25a3c3d89addad40a2",
+          "originPath": "plugins/components/skills/label/web/interaction.md",
+          "originBlobSha": "1623ecd570995a69e8bf87770d9e0ff3f58e31e7",
+          "originSha256": "25b0e5b9b95898604ce941dab41d7f0a592f1fedb6338d25a3c3d89addad40a2",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/label/web/tokens.yaml",
+          "marketplaceBlobSha": "ac574a7dc6fe02f6269547ce37b175fe66cdd016",
+          "marketplaceSha256": "fb42b74c1d8fd537f5d3ff0dac16d0c0dd4b7b51221a4c05771fdc3a4e43072f",
+          "originPath": "plugins/components/skills/label/web/tokens.yaml",
+          "originBlobSha": "ac574a7dc6fe02f6269547ce37b175fe66cdd016",
+          "originSha256": "fb42b74c1d8fd537f5d3ff0dac16d0c0dd4b7b51221a4c05771fdc3a4e43072f",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    {
+      "id": "label-activation-forwarding",
+      "status": "not-applicable"
+    },
+    {
+      "id": "disabled-color-transition",
+      "status": "not-applicable"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "LBL-001",
+      "evidence": ["label.types.ts", "useLabel.ts", "label.types.test.ts", "label.stories.tsx"]
+    },
+    {
+      "id": "LBL-002",
+      "evidence": ["useLabel.ts", "renderLabel.tsx", "label.test.tsx"]
+    },
+    {
+      "id": "LBL-003",
+      "evidence": ["label.styles.ts", "useLabelStyles.ts", "label.test.tsx"]
+    },
+    {
+      "id": "LBL-004",
+      "evidence": ["useLabel.ts", "label.test.tsx"]
+    },
+    {
+      "id": "LBL-005",
+      "evidence": ["label.types.ts", "useLabel.ts", "label.test.tsx"]
+    }
+  ]
+}

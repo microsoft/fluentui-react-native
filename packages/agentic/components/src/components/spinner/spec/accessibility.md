@@ -2,7 +2,7 @@
 
 ## Native semantics
 
-The root is a single accessible element with `accessibilityRole="progressbar"`
+The root is a single accessible element with `role="progressbar"`
 and `accessibilityState.busy` set to `true`. No progress value is published, so
 the element is reported as indeterminate: on Windows it surfaces as a UI
 Automation progress element in the indeterminate pattern, and on macOS as the
@@ -11,7 +11,7 @@ accessible name and the busy state once when the element is reached.
 
 Caller-supplied `accessibilityState` is merged first and the component's busy
 state is applied over it, so a caller cannot clear busy while the spinner is
-mounted. `accessibilityRole` and `focusable` are removed from the public props
+mounted. `role`, the legacy `accessibilityRole`, and `focusable` are removed from the public props
 because the component owns both.
 
 The drawing surface inside the root sets `accessible={false}`, so the circles

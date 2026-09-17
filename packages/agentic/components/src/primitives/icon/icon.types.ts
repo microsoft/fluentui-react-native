@@ -4,7 +4,7 @@ import type { AccessibilityProps, ColorValue, ImageProps } from 'react-native';
 /**
  * Props shared by every icon renderer.
  */
-export type IconElementProps = AccessibilityProps & {
+export type IconElementProps = Omit<AccessibilityProps, 'accessibilityRole'> & {
   /** Color applied to the icon. Images use this value as their tint color. */
   color?: ColorValue;
   /** Rendered icon height. */

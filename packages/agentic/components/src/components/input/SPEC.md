@@ -83,14 +83,18 @@ group, then the underline when the underline variant is active.
   read-only, and invalid state, keep every wrapper view non-accessible, and
   keep read-only fields editable-in-name-only rather than disabled.
 - **INP-006:** Resolve size metrics, stroke colors, icon size and color, and
-  placeholder color from theme tokens, and apply the caller `style` last.
+  placeholder color from theme tokens, keep the single-line text vertically
+  centered across value and focus transitions, and apply the caller `style`
+  last.
 
 ## Platform behavior
 
 Windows and macOS use the platform text input for caret placement, selection,
 text composition, clipboard behavior, and character entry. Input adds no key
 handling of its own and does not intercept Tab, so the platform tab order and
-the platform text-editing shortcuts apply unchanged.
+the platform text-editing shortcuts apply unchanged. Input explicitly centers
+the native single-line text so clearing a focused value does not move its
+placeholder toward the top edge before blur.
 
 Hover and press state are tracked from events on the text input rather than the
 surrounding container, so pointer feedback follows the text area. Disabling the

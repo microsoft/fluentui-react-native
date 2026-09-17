@@ -1,0 +1,179 @@
+schemaVersion: 1
+component: interaction-tag
+implementation: interaction-tag.styles.ts
+
+statePrecedence:
+  background:
+    - appearance
+    - disabled
+    - pressed
+    - hovered
+  foreground:
+    - appearance
+    - disabled
+  divider:
+    - appearance
+    - disabled
+  layout:
+    - size
+    - layout
+    - shape
+
+notes:
+  backgroundIsPerRegion: The container paints no fill. Each action region resolves its own background from its own interaction state, so the hover and pressed fill covers exactly that region's hit target and the other region is unaffected.
+  foregroundIsStable: The foreground factory is configured with only an appearance level and a disabled level, so hover and pressed change the region background alone.
+  iconOnlyShape: getContainerRadius substitutes the circular branch for every icon-only tag, so the shape prop has no effect in that layout.
+  outerCornersOnly: Each action takes the resolved container radius on its outer edge through the logical corner properties and stays square on the edge that meets the divider.
+  dismissTargetBox: The dismiss action's resolved padding and glyph size already reach the minimum target box at both sizes; minWidth and minHeight restate that as a guarantee rather than a correction.
+
+bindings:
+  root:
+    static:
+      alignItems: stretch
+      alignSelf: flex-start
+      flexDirection: row
+      overflow: visible
+    themedBase:
+      borderWidth: 0
+      minHeight: 24
+    borderRadius: resolved from size, layout, and shape
+    userStyle: applied last by useInteractionTagStyles_unstable
+
+  primaryAction:
+    static:
+      alignItems: center
+      flexDirection: row
+      flexShrink: 1
+      justifyContent: center
+    themedBase:
+      minHeight: 24
+      minWidth: 24
+    backgroundColor:
+      primary: color.backgroundBrandHeavy
+      primaryDisabled: color.backgroundNeutralHeavyDisabled
+      secondary: color.backgroundNeutralSubtle
+      secondaryDisabled: color.backgroundNeutralSubtleDisabled
+    corners: container radius on the leading outer edge, zero against the divider
+
+  dismiss:
+    static:
+      alignItems: center
+      flexDirection: row
+      flexShrink: 0
+      justifyContent: center
+    themedBase:
+      minHeight: 24
+      minWidth: 24
+    backgroundColor: same family as primaryAction, resolved from its own state
+    corners: container radius on the trailing outer edge, zero against the divider
+
+  divider:
+    static:
+      alignSelf: stretch
+      flexShrink: 0
+    themed:
+      width: strokeWidth.thin
+    backgroundColor:
+      primary: color.strokeNeutralOnloud
+      secondary: color.strokeNeutralSubtle
+      disabled: color.strokeNeutralDisabled
+    accessible: false
+    hitTested: false
+
+  focusVisual:
+    borderRadius: the resolved outer corners of the region it sits in
+    innerColor: color.strokeFocusInner
+    innerWidth: strokeWidth.thin
+    outerColor: color.strokeFocusOuter
+    outerWidth: strokeWidth.thick
+    visible: that region is focused and not disabled
+    instances: one per action region, each with its own testID
+
+  content:
+    static:
+      flexShrink: 1
+      textAlign: center
+    themed:
+      fontFamily: fontFamily.functional
+      paddingHorizontal: spacing.componentBase50
+    small:
+      fontSize: fontSize.functionalBodySmall
+      fontWeight: fontWeight.functionalRegular
+      lineHeight: lineHeight.functionalBodySmall
+    medium:
+      fontSize: fontSize.functionalBodyMedium
+      fontWeight: fontWeight.functionalRegular
+      lineHeight: lineHeight.functionalBodyMedium
+    color:
+      primary: color.foregroundNeutralOnloud
+      secondary: color.foregroundNeutralPrimary
+      disabled: color.foregroundNeutralDisabled
+
+  leadingIcon:
+    static:
+      flexShrink: 0
+    color: resolved content color
+    accessible: false
+    size:
+      small: 16
+      medium: 20
+
+  avatar:
+    size:
+      small: 16
+      medium: 20
+    accessible: false
+    note: The avatar is hidden from the accessibility tree so its image or initials do not join the primary action's name.
+
+  dismissIcon:
+    static:
+      flexShrink: 0
+    color: resolved content color
+    accessible: false
+    size:
+      small: 12
+      medium: 16
+
+layout:
+  small:
+    action:
+      gap: spacing.componentBase50
+      paddingHorizontal: spacing.componentBase150
+      paddingVertical: spacing.componentBase100
+    iconAndText:
+      rounded:
+        borderRadius: borderRadius.base200
+      circular:
+        borderRadius: borderRadius.circular
+    iconOnly:
+      borderRadius: borderRadius.circular
+  medium:
+    action:
+      gap: spacing.componentBase50
+      paddingHorizontal: spacing.componentBase200
+      paddingVertical: spacing.componentBase150
+    iconAndText:
+      rounded:
+        borderRadius: borderRadius.base300
+      circular:
+        borderRadius: borderRadius.circular
+    iconOnly:
+      borderRadius: borderRadius.circular
+
+tokenGaps:
+  - id: interaction-tag-icon-sizes
+    binding: leadingIcon.size, avatar.size, and dismissIcon.size
+    value: 12, 16, and 20
+    reason: getInteractionTagIconSize returns literals because this package publishes no icon sizing scale.
+  - id: interaction-tag-minimum-box
+    binding: primaryAction and dismiss minHeight and minWidth
+    value: 24
+    reason: The minimum target box is a literal in the style definition and is not drawn from the sizing scale.
+  - id: interaction-tag-uniform-action-padding
+    binding: primaryAction and dismiss paddingHorizontal
+    value: one padding pair per size across both layouts
+    reason: The source geometry states action padding per size only, so the icon-only layout reuses the icon-and-text padding instead of inventing a second pair.
+  - id: interaction-tag-state-motion
+    binding: primaryAction.backgroundColor and dismiss.backgroundColor
+    value: no transition
+    reason: This package publishes no motion tokens, so interaction color changes are applied without a duration or easing.

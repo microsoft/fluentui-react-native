@@ -10,6 +10,7 @@ import {
   Button,
   Card,
   Checkbox,
+  DestructiveButton,
   Divider,
   Input,
   ListItem,
@@ -42,6 +43,7 @@ function ComponentsWithNativeRootRefs() {
       <Button ref={pressableRef} />
       <Card ref={viewRef} />
       <Checkbox ref={pressableRef} />
+      <DestructiveButton ref={pressableRef} />
       <Divider ref={viewRef} />
       <Input ref={viewRef} />
       <ListItem ref={pressableRef} />

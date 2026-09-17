@@ -2,11 +2,14 @@
 
 ## Native semantics
 
-The text input is the accessible element. It carries
-`accessibilityRole="textbox"` and defaults to `accessible={true}`. The root, the
+The native `TextInput` is the accessible element and supplies its intrinsic
+textbox semantics. It defaults to `accessible={true}`. The root, the
 contents row, the icon-and-text stack, the trailing icon group, the underline
 view, and all three icon slots are marked `accessible={false}`, so the field is
 announced once rather than as a stack of nested containers.
+
+SearchBox specializes the text input with the ARIA-aligned
+`role="searchbox"`.
 
 `accessibilityLabel`, `accessibilityHint`, `accessibilityState`, `accessible`,
 `focusable`, and `testID` are accepted on the root and applied to the text

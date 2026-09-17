@@ -2,7 +2,7 @@
 
 ## Native semantics
 
-The hit area is the accessible element. It sets `accessibilityRole="switch"` and
+The hit area is the accessible element. It sets `role="switch"` and
 publishes `checked` and `disabled` through `accessibilityState`, merged over any
 state the caller passes so a caller cannot contradict the rendered value. The
 same checked value is also forwarded through the react-native-windows checked

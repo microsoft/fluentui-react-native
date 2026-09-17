@@ -2,8 +2,9 @@ import * as React from 'react';
 import { Image, View } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useDevWarning, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
+import { hasAccessibleName } from '../../common/accessibility';
 import { semanticIconSources } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
@@ -45,14 +46,10 @@ export function useAvatar_unstable(props: AvatarProps): AvatarState {
   const hasIcon = iconProp !== null && iconProp !== undefined;
   const hasInitials = initialsProp !== null && initialsProp !== undefined;
   const contentMode = hasImage ? 'image' : hasInitials ? 'initials' : 'icon';
-  const isInformative = accessibilityLabel !== undefined;
+  const isInformative = hasAccessibleName({ accessibilityLabel, ...rest });
   const isAccessible = accessible ?? isInformative;
 
-  React.useEffect(() => {
-    if (__DEV__ && [hasImage, hasIcon, hasInitials].filter(Boolean).length > 1) {
-      console.warn('Avatar: provide only one content mode at a time.');
-    }
-  }, [hasIcon, hasImage, hasInitials]);
+  useDevWarning([hasImage, hasIcon, hasInitials].filter(Boolean).length > 1, 'Avatar: provide only one content mode at a time.');
 
   const themeState = useThemeState();
   const root = useSlot(View, {
@@ -60,7 +57,7 @@ export function useAvatar_unstable(props: AvatarProps): AvatarState {
     accessible: isAccessible,
     accessibilityElementsHidden: isAccessible ? accessibilityElementsHidden : true,
     accessibilityLabel,
-    accessibilityRole: 'image',
+    role: 'img',
     importantForAccessibility: isAccessible ? importantForAccessibility : 'no-hide-descendants',
   });
 

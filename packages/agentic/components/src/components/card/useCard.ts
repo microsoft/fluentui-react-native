@@ -4,6 +4,7 @@ import type { PressableProps } from 'react-native';
 import { type PropsWithRefOf, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { resolveFocusable } from '../../common/interaction';
 import type { CardProps, CardState } from './card.types';
 
 const horizontalCollapseWidth = 480;
@@ -60,7 +61,7 @@ export function useCard_unstable(props: CardProps): CardState {
     accessibilityHint,
     accessibilityLabel,
     accessibilityLabelledBy,
-    accessibilityRole: 'button',
+    role: 'button',
     accessibilityState: {
       ...accessibilityState,
       disabled,
@@ -71,7 +72,7 @@ export function useCard_unstable(props: CardProps): CardState {
     delayLongPress,
     delayPressIn,
     disabled: !isInteractive || disabled,
-    focusable: isInteractive && !disabled && (focusable ?? true),
+    focusable: isInteractive && resolveFocusable(focusable, disabled),
     onBlur,
     onFocus,
     onHoverIn,
@@ -97,7 +98,7 @@ export function useCard_unstable(props: CardProps): CardState {
           disabled,
         },
         accessible: accessible ?? false,
-        accessibilityRole: (accessible ?? false) ? 'group' : undefined,
+        role: (accessible ?? false) ? 'group' : undefined,
         focusable: false,
         ref: rootRef,
         testID,

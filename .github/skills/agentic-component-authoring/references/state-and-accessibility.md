@@ -101,14 +101,20 @@ accessibilityState: {
 
 The component must own its role and state semantics while preserving unrelated consumer values such as `busy`.
 
-- Set the native role explicitly.
+- Set native semantics with React Native's ARIA-aligned `role` prop, not the legacy `accessibilityRole`. Use ARIA names
+  such as `img` and `heading`, not legacy names such as `image` and `header`.
+- Omit both `role` and `accessibilityRole` from public native props when the component owns the role. If a caller owns
+  the semantic choice, expose only `role`.
 - Keep disabled state, focusability, and interaction behavior consistent.
 - Prefer a consumer-provided `accessible` or `focusable` value only when it does not violate the component contract.
+  Disabled state is authoritative: resolve focusability with the shared component interaction helper so
+  `focusable={true}` cannot keep a disabled control in the focus order.
 - Add selected or checked semantics only when the corresponding behavior is enabled.
 - Use action-oriented accessible names for icon-only controls.
 
-Button warns in development when an icon-only instance lacks an `accessibilityLabel`. Put warnings in an effect so
-render remains free of observable side effects, and make the dependency list match every value used by the warning.
+Button warns in development when an icon-only instance lacks an `accessibilityLabel`. Use `useDevWarning` from
+`@fluentui-react-native/framework-base` for conditional usage warnings so render remains free of observable side
+effects and repeated renders do not emit duplicate messages.
 
 ## Use framework interaction and slot hooks
 

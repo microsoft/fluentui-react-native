@@ -42,8 +42,8 @@ each Checkbox itself.
 
 The root also accepts the owned `PressableProps` surface. `children` is typed
 `never`; Checkbox owns its subtree. A caller `style` is applied after the
-token-derived root styles. The broad root type accepts `accessibilityRole` and
-caller checked or disabled accessibility state, but the implementation writes
+token-derived root styles. The root type omits `role` and the legacy
+`accessibilityRole`. Caller checked or disabled accessibility state is accepted, but the implementation writes
 its resolved role and state afterward, so those caller values are ignored.
 
 ### Slots and anatomy

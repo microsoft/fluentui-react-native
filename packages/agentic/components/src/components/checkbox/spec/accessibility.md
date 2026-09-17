@@ -3,7 +3,7 @@
 ## Native semantics
 
 The root is a single accessible React Native element with
-`accessibilityRole="checkbox"`. It defaults to `accessible={true}` and is
+`role="checkbox"`. It defaults to `accessible={true}` and is
 focusable unless disabled.
 
 `accessibilityState.checked` carries the status directly: `false` for

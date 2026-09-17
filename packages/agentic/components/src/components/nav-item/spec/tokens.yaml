@@ -1,0 +1,99 @@
+schemaVersion: 1
+component: nav-item
+implementation: nav-item.styles.ts
+
+statePrecedence:
+  - disabled
+  - pressed
+  - hovered
+
+bindings:
+  root:
+    structural:
+      flexDirection: row
+      alignSelf: stretch
+      width: 100%
+    density:
+      comfortable:
+        paddingHorizontal: spacing.componentBase300
+        paddingVertical: spacing.componentBase250
+      compact:
+        paddingHorizontal: spacing.componentBase200
+        paddingVertical: spacing.componentBase150
+    nesting:
+      subItem:
+        additionalPaddingStart: spacing.layoutBase200
+    borderRadius: borderRadius.base300
+    background:
+      rest: color.backgroundNeutralTransparent
+      selected: color.backgroundNeutralSoft
+      disabled: color.backgroundNeutralTransparent
+      selectedDisabled: color.backgroundNeutralSubtleDisabled
+  selectedIndicator:
+    width: strokeWidth.thicker
+    borderRadius: borderRadius.circular
+    insetVertical: spacing.componentBase150
+    insetStart: spacing.componentBase50
+    color:
+      rest: color.strokeNeutralTransparent
+      selected: color.strokeBrandLoud
+      selectedDisabled: color.strokeNeutralDisabled
+  label:
+    family: fontFamily.functional
+    density:
+      comfortable: [fontSize.functionalBodyMedium, lineHeight.functionalBodyMedium]
+      compact: [fontSize.functionalBodySmall, lineHeight.functionalBodySmall]
+    weight:
+      rest: fontWeight.functionalRegular
+      selected: fontWeight.functionalSemibold
+    foreground:
+      rest: color.foregroundNeutralPrimary
+      disabled: color.foregroundNeutralDisabled
+  leadingIcon:
+    size:
+      comfortable: global.size200
+      compact: global.size160
+    foreground:
+      rest: color.foregroundNeutralPrimary
+      selected: color.foregroundBrandPrimary
+      disabled: color.foregroundNeutralDisabled
+  leadingAvatar:
+    size:
+      comfortable: global.size200
+      compact: global.size160
+  trailingContent:
+    foreground:
+      rest: color.foregroundNeutralSecondary
+      disabled: color.foregroundNeutralDisabled
+  chevron:
+    size:
+      comfortable: global.size200
+      compact: global.size160
+    foreground:
+      rest: color.foregroundNeutralSecondary
+      disabled: color.foregroundNeutralDisabled
+  gap:
+    leadingToLabel:
+      comfortable: spacing.componentBase150
+      compact: spacing.componentBase100
+    labelToTrailing:
+      comfortable: spacing.componentBase200
+      compact: spacing.componentBase150
+    trailingItems:
+      comfortable: spacing.componentBase100
+      compact: spacing.componentBase100
+  focusVisual:
+    outer: [color.strokeFocusOuter, strokeWidth.thick]
+    inner: [color.strokeFocusInner, strokeWidth.thin]
+    borderRadius: borderRadius.base300
+
+tokenGaps:
+  - id: selected-indicator-disabled-color
+    note: >-
+      The source records no indicator color for a selected row that is also
+      disabled. FURN binds the disabled neutral stroke so the indicator stays
+      perceivable without implying an active destination.
+  - id: row-state-motion
+    note: >-
+      The source marks row motion as pending. FURN applies every state, weight,
+      icon, and chevron change instantly and owns no timing tokens.

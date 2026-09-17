@@ -18,11 +18,11 @@ function getFontSize(height: number | undefined, width: number | undefined): num
  * Renders an image, font glyph, or SVG component without adding a component boundary.
  */
 export const Icon = directComponent<IconProps>(({ color, fontSource, height, imageSource, svgSource, width, ...rest }) => {
-  const accessibilityRole = rest.accessibilityRole ?? 'image';
+  const role = rest.role ?? 'img';
 
   if (svgSource) {
     const SvgIcon = svgSource;
-    const svgProps: IconElementProps = { ...rest, accessibilityRole, color, height, width };
+    const svgProps: IconElementProps = { ...rest, role, color, height, width };
     return <SvgIcon {...svgProps} />;
   }
 
@@ -41,7 +41,7 @@ export const Icon = directComponent<IconProps>(({ color, fontSource, height, ima
     };
 
     return (
-      <Text {...rest} accessibilityRole={accessibilityRole} style={style}>
+      <Text {...rest} role={role} style={style}>
         {String.fromCodePoint(fontSource.codepoint)}
       </Text>
     );
@@ -49,7 +49,7 @@ export const Icon = directComponent<IconProps>(({ color, fontSource, height, ima
 
   if (imageSource) {
     const style: ImageStyle = { height, tintColor: color, width };
-    return <Image {...rest} accessibilityRole={accessibilityRole} source={imageSource} style={style} />;
+    return <Image {...rest} role={role} source={imageSource} style={style} />;
   }
 
   return <></>;

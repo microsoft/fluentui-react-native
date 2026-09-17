@@ -25,7 +25,7 @@ describe('Tag', () => {
   it('renders default dismissible tag accessibility and styling', async () => {
     const component = await renderTag({ content: 'Engineering' });
 
-    expect(getRoot(component).props.accessibilityRole).toBe('button');
+    expect(getRoot(component).props.role).toBe('button');
     expect(getRoot(component).props.accessibilityState).toEqual({ disabled: false });
     expect(component.getByText('Engineering')).toBeOnTheScreen();
     expect(getRootStyle(component)).toMatchObject({

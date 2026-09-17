@@ -31,7 +31,7 @@ describe('Checkbox', () => {
     const component = await renderCheckbox({ label: 'Save drafts' });
     const root = getRoot(component);
 
-    expect(root.props.accessibilityRole).toBe('checkbox');
+    expect(root.props.role).toBe('checkbox');
     expect(root.props.accessibilityState).toEqual({ checked: false, disabled: false });
     expect(root.props.accessibilityLabel).toBe('Save drafts');
     expect(component.getByText('Save drafts')).toBeOnTheScreen();

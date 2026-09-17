@@ -1,0 +1,72 @@
+schemaVersion: 1
+component: popover
+implementation: popover.styles.ts
+
+statePrecedence:
+  - disabled
+  - pressed
+  - hovered
+
+bindings:
+  root:
+    layout:
+      alignSelf: flex-start
+    userStyle: applied after root structural style
+  trigger:
+    layout:
+      alignItems: center
+      justifyContent: center
+    userStyle: applied after trigger structural style
+    focusVisual:
+      innerColor: color.strokeFocusInner
+      innerWidth: strokeWidth.thin
+      outerColor: color.strokeFocusOuter
+      outerWidth: strokeWidth.thick
+      radius: borderRadius.base400
+  surface:
+    appearance:
+      backgroundColor: color.surfaceNeutralNearer
+      borderColor: color.strokeNeutralSubtle
+      borderWidth: strokeWidth.thin
+      borderRadius: borderRadius.base400
+    note: >
+      Compatibility only. These values exist because the macOS surface layer update
+      requires non-null fill, stroke, and radius values on the native callout. The
+      Windows implementation does not read them, so they are not the token
+      implementation of the visible boundary.
+  surfaceContent:
+    layout:
+      minWidth: 200
+      padding: spacing.componentBase400
+    appearance:
+      backgroundColor: color.surfaceNeutralNearer
+      borderColor: color.strokeNeutralSubtle
+      borderWidth: strokeWidth.thin
+      borderRadius: borderRadius.base400
+      overflow: hidden
+    note: >
+      The whole visible surface boundary lives here because this is a React Native
+      view that both platforms render inside the popup window. The native callout
+      measures this first child to size its platform window, so a minimum width
+      prevents unconstrained text content from collapsing to a one-character column.
+  contentPlaceholder:
+    typography:
+      fontFamily: fontFamily.functional
+      fontSize: fontSize.functionalBodySmall
+      fontWeight: fontWeight.functionalRegular
+      lineHeight: lineHeight.functionalBodySmall
+    foreground: color.foregroundNeutralPrimary
+
+tokenGaps:
+  - property: anchor gap
+    binding: unbound
+    reason: >
+      The mapped spacing token exists, but the native surface owns its offset from the
+      anchor and does not implement the gap property on Windows or macOS. Tracked as the
+      popover-anchor-gap divergence.
+  - property: surface elevation shadow
+    binding: unbound
+    reason: >
+      The mapped shadow.low token exists, but the surface is a platform popup window
+      whose elevation is owned by the window server, and a shadow drawn inside the popup
+      is clipped by the window bounds. Tracked as the popover-surface-shadow divergence.

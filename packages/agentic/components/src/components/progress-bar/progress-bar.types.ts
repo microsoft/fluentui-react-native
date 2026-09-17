@@ -36,7 +36,7 @@ export type ProgressBarStateProps = {
   showValidationIcon?: boolean;
 };
 
-export type ProgressBarRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
+export type ProgressBarRootProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'role'>;
 
 export type ProgressBarProps = ProgressBarStateProps & ComponentProps<ProgressBarSlots, ProgressBarRootProps>;
 

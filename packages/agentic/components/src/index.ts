@@ -16,6 +16,18 @@ export { renderAvatar_unstable } from './components/avatar/renderAvatar';
 export { useAvatarStyles_unstable } from './components/avatar/useAvatarStyles';
 export { useAvatar_unstable } from './components/avatar/useAvatar';
 
+export { AvatarGroup } from './components/avatar-group/avatar-group';
+export type {
+  AvatarGroupLayout,
+  AvatarGroupProps,
+  AvatarGroupSize,
+  AvatarGroupSlots,
+  AvatarGroupState,
+} from './components/avatar-group/avatar-group.types';
+export { renderAvatarGroup_unstable } from './components/avatar-group/renderAvatarGroup';
+export { useAvatarGroupStyles_unstable } from './components/avatar-group/useAvatarGroupStyles';
+export { useAvatarGroup_unstable } from './components/avatar-group/useAvatarGroup';
+
 export { Badge } from './components/badge/badge';
 export type {
   BadgeAppearance,
@@ -57,6 +69,20 @@ export { renderCheckbox_unstable } from './components/checkbox/renderCheckbox';
 export { useCheckboxStyles_unstable } from './components/checkbox/useCheckboxStyles';
 export { useCheckbox_unstable } from './components/checkbox/useCheckbox';
 
+export { DestructiveButton } from './components/destructive-button/destructive-button';
+export type {
+  DestructiveButtonAppearance,
+  DestructiveButtonIconPosition,
+  DestructiveButtonProps,
+  DestructiveButtonShape,
+  DestructiveButtonSize,
+  DestructiveButtonSlots,
+  DestructiveButtonState,
+} from './components/destructive-button/destructive-button.types';
+export { renderDestructiveButton_unstable } from './components/destructive-button/renderDestructiveButton';
+export { useDestructiveButtonStyles_unstable } from './components/destructive-button/useDestructiveButtonStyles';
+export { useDestructiveButton_unstable } from './components/destructive-button/useDestructiveButton';
+
 export { Divider } from './components/divider/divider';
 export type { DividerLayout, DividerProps, DividerSlots, DividerState } from './components/divider/divider.types';
 export { renderDivider_unstable } from './components/divider/renderDivider';
@@ -68,6 +94,52 @@ export type { InputProps, InputSize, InputSlots, InputState, InputVariant } from
 export { renderInput_unstable } from './components/input/renderInput';
 export { useInputStyles_unstable } from './components/input/useInputStyles';
 export { useInput_unstable } from './components/input/useInput';
+
+export { InteractionTag } from './components/interaction-tag/interaction-tag';
+export type {
+  InteractionTagActionProps,
+  InteractionTagAppearance,
+  InteractionTagLayout,
+  InteractionTagLeadingContentProps,
+  InteractionTagProps,
+  InteractionTagShape,
+  InteractionTagSize,
+  InteractionTagSlots,
+  InteractionTagState,
+  InteractionTagStateSlots,
+} from './components/interaction-tag/interaction-tag.types';
+export { renderInteractionTag_unstable } from './components/interaction-tag/renderInteractionTag';
+export { useInteractionTagStyles_unstable } from './components/interaction-tag/useInteractionTagStyles';
+export { useInteractionTag_unstable } from './components/interaction-tag/useInteractionTag';
+
+export { Label } from './components/label/label';
+export type {
+  LabelExposedViewProps,
+  LabelProps,
+  LabelSize,
+  LabelSlots,
+  LabelState,
+  LabelStateProps,
+  LabelWeight,
+} from './components/label/label.types';
+export { renderLabel_unstable } from './components/label/renderLabel';
+export { useLabelStyles_unstable } from './components/label/useLabelStyles';
+export { useLabel_unstable } from './components/label/useLabel';
+
+export { Link } from './components/link/link';
+export type {
+  LinkFocusProps,
+  LinkIconProps,
+  LinkNavigationProps,
+  LinkProps,
+  LinkSlots,
+  LinkState,
+  LinkStateProps,
+  LinkTypeSet,
+} from './components/link/link.types';
+export { renderLink_unstable } from './components/link/renderLink';
+export { useLinkStyles_unstable } from './components/link/useLinkStyles';
+export { useLink_unstable } from './components/link/useLink';
 
 export { ListItem } from './components/list-item/list-item';
 export type {
@@ -106,6 +178,25 @@ export { renderMenuItem_unstable } from './components/menu-item/renderMenuItem';
 export { useMenuItemStyles_unstable } from './components/menu-item/useMenuItemStyles';
 export { useMenuItem_unstable } from './components/menu-item/useMenuItem';
 
+export { NavItem } from './components/nav-item/nav-item';
+export type {
+  NavItemDensity,
+  NavItemNesting,
+  NavItemProps,
+  NavItemSlots,
+  NavItemState,
+  NavItemType,
+} from './components/nav-item/nav-item.types';
+export { renderNavItem_unstable } from './components/nav-item/renderNavItem';
+export { useNavItemStyles_unstable } from './components/nav-item/useNavItemStyles';
+export { useNavItem_unstable } from './components/nav-item/useNavItem';
+
+export { Popover } from './components/popover/popover';
+export type { PopoverPosition, PopoverProps, PopoverSlots, PopoverState, PopoverTriggerProps } from './components/popover/popover.types';
+export { renderPopover_unstable } from './components/popover/renderPopover';
+export { usePopoverStyles_unstable } from './components/popover/usePopoverStyles';
+export { usePopover_unstable } from './components/popover/usePopover';
+
 export { ProgressBar } from './components/progress-bar/progress-bar';
 export type {
   ProgressBarProps,
@@ -123,6 +214,19 @@ export type { RadioProps, RadioSlots, RadioState } from './components/radio/radi
 export { renderRadio_unstable } from './components/radio/renderRadio';
 export { useRadioStyles_unstable } from './components/radio/useRadioStyles';
 export { useRadio_unstable } from './components/radio/useRadio';
+
+export { SearchBox } from './components/search-box/search-box';
+export type {
+  SearchBoxProps,
+  SearchBoxSize,
+  SearchBoxSlots,
+  SearchBoxState,
+  SearchBoxVariant,
+  SearchBoxVisualState,
+} from './components/search-box/search-box.types';
+export { renderSearchBox_unstable } from './components/search-box/renderSearchBox';
+export { useSearchBoxStyles_unstable } from './components/search-box/useSearchBoxStyles';
+export { useSearchBox_unstable } from './components/search-box/useSearchBox';
 
 export { Skeleton } from './components/skeleton/skeleton';
 export type { SkeletonProps, SkeletonSlots, SkeletonState } from './components/skeleton/skeleton.types';
@@ -173,3 +277,17 @@ export { renderText_unstable } from './components/text/renderText';
 export type { TextProps, TextSlots, TextState } from './components/text/text.types';
 export { useText_unstable } from './components/text/useText';
 export { useTextStyles_unstable } from './components/text/useTextStyles';
+
+export { Tooltip } from './components/tooltip/tooltip';
+export type {
+  TooltipContent,
+  TooltipContentProps,
+  TooltipPosition,
+  TooltipProps,
+  TooltipSlots,
+  TooltipState,
+  TooltipTriggerProps,
+} from './components/tooltip/tooltip.types';
+export { renderTooltip_unstable } from './components/tooltip/renderTooltip';
+export { useTooltipStyles_unstable } from './components/tooltip/useTooltipStyles';
+export { useTooltip_unstable } from './components/tooltip/useTooltip';

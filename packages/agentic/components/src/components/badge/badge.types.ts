@@ -68,7 +68,7 @@ type BadgeIconOnlyProps = BadgeCommonProps & {
 
 export type BadgeStateProps = BadgeIconAndTextProps | BadgeIconOnlyProps;
 
-export type BadgeExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable'>;
+export type BadgeExposedViewProps = OwnedRootProps<PropsWithRefOf<typeof View>, 'accessibilityRole' | 'focusable' | 'role'>;
 
 export type BadgeProps = BadgeStateProps & ComponentProps<BadgeSlots, BadgeExposedViewProps>;
 

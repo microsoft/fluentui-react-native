@@ -10,6 +10,7 @@ import {
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { resolveFocusable } from '../../common/interaction';
 import type { TabProps, TabState } from './tab.types';
 import { Icon } from '../../primitives/icon/icon';
 import { TabListContext } from '../tablist/TabListContext';
@@ -39,7 +40,7 @@ export function useTab_unstable(props: TabProps): TabState {
   const tabRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
   const listDisabled = tabList?.isTabDisabled(value, disabled) ?? disabled;
   const listSelected = tabList ? tabList.selectedValue === value : selected;
-  const listFocusable = tabList ? tabList.activeValue === value && !listDisabled : (rest.focusable ?? !disabled);
+  const listFocusable = tabList ? tabList.activeValue === value && !listDisabled : resolveFocusable(rest.focusable, disabled);
   const { onFocus, onKeyDown, onPress, ...nativeRest } = rest;
   const registerTab = tabList?.registerTab;
 
@@ -58,7 +59,7 @@ export function useTab_unstable(props: TabProps): TabState {
     ...nativeRest,
     accessibilityPosInSet: tabList?.getPosition(value),
     accessibilitySetSize: tabList?.setSize,
-    accessibilityRole: 'tab',
+    role: 'tab',
     accessibilityState: {
       ...accessibilityState,
       disabled: listDisabled,

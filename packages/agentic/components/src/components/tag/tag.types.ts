@@ -35,7 +35,7 @@ export type TagStateProps = {
   dismiss?: boolean;
 };
 
-export type TagRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type TagRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>, 'accessibilityRole' | 'role'>;
 
 export type TagProps = TagStateProps & ComponentProps<TagSlots, TagRootProps>;
 

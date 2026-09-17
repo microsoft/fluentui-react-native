@@ -16,7 +16,7 @@ function renderBadge(props: React.ComponentProps<typeof Badge>) {
 }
 
 function getRoot(component: Awaited<ReturnType<typeof renderBadge>>) {
-  return component.getByRole('image');
+  return component.getByRole('img');
 }
 
 function getRootStyle(component: Awaited<ReturnType<typeof renderBadge>>): ViewStyle {
@@ -59,7 +59,7 @@ describe('Badge', () => {
       leadingIcon: { ...badgeIcon, testID: 'leading-icon' },
     });
 
-    expect(getRoot(component).props.accessibilityRole).toBe('image');
+    expect(getRoot(component).props.role).toBe('img');
     expect(getRoot(component).props.accessibilityLabel).toBe('3 unread messages');
     expect(component.queryByText('Badge')).toBeNull();
     expect(component.getByTestId('leading-icon')).toBeOnTheScreen();
@@ -79,7 +79,7 @@ describe('Badge', () => {
     const component = await renderBadge({ 'aria-label': '3 unread messages', layout: 'iconOnly' });
 
     expect(getRoot(component).props).toMatchObject({
-      accessibilityRole: 'image',
+      role: 'img',
       accessible: true,
       'aria-label': '3 unread messages',
     });

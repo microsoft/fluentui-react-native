@@ -2,7 +2,7 @@
 
 ## Native semantics
 
-The root is the accessible element. It sets `accessibilityRole="tab"` and
+The root is the accessible element. It sets `role="tab"` and
 publishes `selected` and `disabled` through `accessibilityState`, merged over
 any state the caller passes so a caller cannot contradict the rendered
 selection. The `controls` prop is forwarded to the platform as the

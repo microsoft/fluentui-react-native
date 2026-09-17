@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useDevWarning } from './useDevWarning';
 
 export type AccessibilityLabelWarningOptions = {
   componentName: string;
@@ -18,24 +18,7 @@ export function useAccessibilityLabelWarning({
   requireLabel = false,
   warning,
 }: AccessibilityLabelWarningOptions): void {
-  const hasWarnedRef = React.useRef(false);
   const labelIsMissing = requireLabel && !accessibilityLabel && !accessibilityLabelledBy;
 
-  React.useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
-      return;
-    }
-
-    if (!labelIsMissing) {
-      hasWarnedRef.current = false;
-      return;
-    }
-
-    if (hasWarnedRef.current) {
-      return;
-    }
-
-    hasWarnedRef.current = true;
-    console.warn(warning ?? `${componentName}: accessibilityLabel is required.`);
-  }, [componentName, labelIsMissing, warning]);
+  useDevWarning(labelIsMissing, warning ?? `${componentName}: accessibilityLabel is required.`);
 }

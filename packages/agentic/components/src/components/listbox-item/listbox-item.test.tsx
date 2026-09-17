@@ -79,7 +79,7 @@ describe('ListboxItem', () => {
   it('renders a section header and loading skeleton state', async () => {
     const component = await renderListboxItem({ content: 'Group', loading: true, variant: 'sectionHeader' });
 
-    expect(component.getByRole('header')).toBeOnTheScreen();
+    expect(component.getByRole('heading')).toBeOnTheScreen();
     expect(component.queryByText('Group')).toBeNull();
     expect(component.queryByRole('button')).toBeNull();
   });

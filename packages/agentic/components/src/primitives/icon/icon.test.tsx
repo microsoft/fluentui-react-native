@@ -56,7 +56,7 @@ describe('Icon', () => {
     const component = await render(<Icon svgSource={TestSvg} height={12} width={14} color="green" testID="svg-icon" />);
 
     expect(component.getByTestId('svg-icon').props).toMatchObject({
-      accessibilityRole: 'image',
+      role: 'img',
       color: 'green',
       height: 12,
       testID: 'svg-icon',

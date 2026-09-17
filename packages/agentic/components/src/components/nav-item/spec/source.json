@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "component": "nav-item",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-09-02",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:nav-item",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/nav-item/SKILL.md",
+          "marketplaceBlobSha": "8dc0bd390eb09e793d3ab15c26bfa6025efe9d3b",
+          "marketplaceSha256": "a3c5c2715e628ba20cdda7d6edcf65d9385d83fa6048b507a17f0eb61b069de4",
+          "originPath": "plugins/components/skills/nav-item/SKILL.md",
+          "originBlobSha": "8dc0bd390eb09e793d3ab15c26bfa6025efe9d3b",
+          "originSha256": "a3c5c2715e628ba20cdda7d6edcf65d9385d83fa6048b507a17f0eb61b069de4",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/nav-item/usage.md",
+          "marketplaceBlobSha": "a7588050ee2104e6c7fd4815129bd8a1bf40fc84",
+          "marketplaceSha256": "b6b28493199ea2b543658492dbfedfc9166fddf6add7d693e7133fc6b279f498",
+          "originPath": "plugins/components/skills/nav-item/usage.md",
+          "originBlobSha": "a7588050ee2104e6c7fd4815129bd8a1bf40fc84",
+          "originSha256": "b6b28493199ea2b543658492dbfedfc9166fddf6add7d693e7133fc6b279f498",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/nav-item/web/accessibility.md",
+          "marketplaceBlobSha": "f0c69c412f4fe34ef872f3d99ad1cefba4494591",
+          "marketplaceSha256": "b93aa7288e4e4dcfefc59dd7830749c2a801da291bd3adfeb0f636c27cbfbf0d",
+          "originPath": "plugins/components/skills/nav-item/web/accessibility.md",
+          "originBlobSha": "f0c69c412f4fe34ef872f3d99ad1cefba4494591",
+          "originSha256": "b93aa7288e4e4dcfefc59dd7830749c2a801da291bd3adfeb0f636c27cbfbf0d",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/nav-item/web/interaction.md",
+          "marketplaceBlobSha": "34e64d390e8b7033dc9795edf367110044b10abb",
+          "marketplaceSha256": "618d274ace9d054d0425768bdbc08025172d0167d2d9a00b5480ce0bacab0362",
+          "originPath": "plugins/components/skills/nav-item/web/interaction.md",
+          "originBlobSha": "34e64d390e8b7033dc9795edf367110044b10abb",
+          "originSha256": "618d274ace9d054d0425768bdbc08025172d0167d2d9a00b5480ce0bacab0362",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/nav-item/web/tokens.yaml",
+          "marketplaceBlobSha": "a2edda712fb342f296a9ca0f95b27a6b0c477506",
+          "marketplaceSha256": "030def6f4fb7392e9f51d892c0c4158d5eb21ffd6de98ec2a8d3b809c2cef4ff",
+          "originPath": "plugins/components/skills/nav-item/web/tokens.yaml",
+          "originBlobSha": "a2edda712fb342f296a9ca0f95b27a6b0c477506",
+          "originSha256": "030def6f4fb7392e9f51d892c0c4158d5eb21ffd6de98ec2a8d3b809c2cef4ff",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    {
+      "id": "nav-item-native-role-and-current",
+      "status": "accepted"
+    },
+    {
+      "id": "nav-item-indicator-inside-backplate",
+      "status": "accepted"
+    },
+    {
+      "id": "nav-item-external-expanded",
+      "status": "accepted"
+    },
+    {
+      "id": "nav-item-persistent-trailing-actions",
+      "status": "accepted"
+    },
+    {
+      "id": "nav-item-collapsed-rail-tooltip",
+      "status": "deferred"
+    },
+    {
+      "id": "nav-item-no-state-transitions",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "NVI-001",
+      "evidence": ["nav-item.types.ts", "useNavItem.ts", "nav-item.types.test.ts"]
+    },
+    {
+      "id": "NVI-002",
+      "evidence": ["renderNavItem.tsx", "useNavItem.ts", "nav-item.test.tsx"]
+    },
+    {
+      "id": "NVI-003",
+      "evidence": ["nav-item.styles.ts", "useNavItemStyles.ts", "nav-item.test.tsx"]
+    },
+    {
+      "id": "NVI-004",
+      "evidence": ["useNavItem.ts", "renderNavItem.tsx", "nav-item.test.tsx"]
+    },
+    {
+      "id": "NVI-005",
+      "evidence": ["nav-item.styles.ts", "useNavItem.ts", "nav-item.test.tsx"]
+    },
+    {
+      "id": "NVI-006",
+      "evidence": ["useNavItem.ts", "renderNavItem.tsx", "nav-item.test.tsx"]
+    },
+    {
+      "id": "NVI-007",
+      "evidence": ["useNavItem.ts", "useNavItemStyles.ts", "nav-item.test.tsx"]
+    }
+  ]
+}

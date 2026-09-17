@@ -53,7 +53,7 @@ export type ListboxItemStateProps = {
   selected?: boolean;
 };
 
-export type ListboxItemRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
+export type ListboxItemRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>, 'accessibilityRole' | 'role'>;
 
 export type ListboxItemProps = ListboxItemStateProps & ComponentProps<ListboxItemSlots, ListboxItemRootProps>;
 

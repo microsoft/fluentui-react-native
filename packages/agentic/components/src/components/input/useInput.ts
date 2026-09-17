@@ -3,8 +3,9 @@ import { TextInput, View } from 'react-native';
 import type { TextInputProps } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useControllableValue, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useControllableValue, useDevWarning, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
+import { resolveFocusable } from '../../common/interaction';
 import { Icon } from '../../primitives/icon/icon';
 
 import { getInputResolvedStyles } from './input.styles';
@@ -93,11 +94,7 @@ export function useInput_unstable(props: InputProps): InputState {
     }
   }, [disabled]);
 
-  React.useEffect(() => {
-    if (__DEV__ && iconEnd2Prop && !iconEnd1Prop) {
-      console.warn('Input: iconEnd2 requires iconEnd1 to be provided.');
-    }
-  }, [iconEnd1Prop, iconEnd2Prop]);
+  useDevWarning(Boolean(iconEnd2Prop && !iconEnd1Prop), 'Input: iconEnd2 requires iconEnd1 to be provided.');
 
   const visualState = getVisualState({ disabled, error, focused, hovered, pressed, readOnly });
   const resolvedStyles = getInputResolvedStyles({ ...themeState, size, variant, visualState });
@@ -151,7 +148,6 @@ export function useInput_unstable(props: InputProps): InputState {
       ...slotProps,
       accessibilityHint: slotProps.accessibilityHint ?? accessibilityHint,
       accessibilityLabel: slotProps.accessibilityLabel ?? accessibilityLabel,
-      accessibilityRole: slotProps.accessibilityRole ?? 'textbox',
       accessibilityState: {
         ...slotProps.accessibilityState,
         ...accessibilityState,
@@ -161,7 +157,7 @@ export function useInput_unstable(props: InputProps): InputState {
       } as InputAccessibilityState,
       accessible: slotProps.accessible ?? accessible ?? true,
       editable: disabled || readOnly ? false : (slotProps.editable ?? true),
-      focusable: slotProps.focusable ?? focusable ?? !disabled,
+      focusable: resolveFocusable(slotProps.focusable ?? focusable, disabled),
       onBlur: mergeHandlers(slotProps.onBlur, onBlur, handleBlur),
       onChangeText: mergeHandlers(slotProps.onChangeText, onChangeText, handleChangeText),
       onFocus: mergeHandlers(slotProps.onFocus, onFocus, handleFocus),

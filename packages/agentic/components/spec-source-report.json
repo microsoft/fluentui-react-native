@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-31T05:04:03.307Z",
+  "generatedAt": "2026-09-03T16:21:33.572Z",
   "sourceLock": "flex-1.5.0-206c4996",
   "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
   "baseline": {
@@ -10,8 +10,8 @@
   "external": {
     "mode": "live",
     "status": "drift-detected",
-    "marketplaceHead": "eb8cf20cb1c6ce4fdc563ac1ebd34197cb347735",
-    "originHead": "dfdaeba2f79c2c2c33cdc074cf1e60f1c3a2929c"
+    "marketplaceHead": "686dbdd4768d1238cdda0649d5b9dfa794c7c381",
+    "originHead": "cbe3cca9207ac0c24c3f965ec483788ee5e11c44"
   },
   "catalog": {
     "releaseEntries": [
@@ -126,111 +126,111 @@
     "contracts": [
       "accordion",
       "avatar",
+      "avatar-group",
       "badge",
       "button",
       "card",
       "checkbox",
+      "destructive-button",
       "divider",
       "input",
+      "interaction-tag",
+      "label",
+      "link",
       "list-item",
       "listbox-item",
       "menu-item",
+      "nav-item",
+      "popover",
       "progress-bar",
       "radio",
+      "search-box",
       "skeleton",
       "spinner",
       "switch",
       "tab",
       "tablist",
       "tag",
-      "text"
+      "text",
+      "tooltip"
     ],
     "adaptedDrafts": [],
     "implemented": [
       "accordion",
       "avatar",
+      "avatar-group",
       "badge",
       "button",
       "card",
       "checkbox",
+      "destructive-button",
       "divider",
       "input",
+      "interaction-tag",
+      "label",
+      "link",
       "list-item",
       "listbox-item",
       "menu-item",
+      "nav-item",
+      "popover",
       "progress-bar",
       "radio",
+      "search-box",
       "skeleton",
       "spinner",
       "switch",
       "tab",
       "tablist",
       "tag",
-      "text"
+      "text",
+      "tooltip"
     ],
     "implementationGap": [
-      "avatar-group",
       "breadcrumb",
       "combobox",
-      "destructive-button",
       "dialog",
       "drawer",
       "dropdown",
       "field",
       "info-label",
-      "interaction-tag",
-      "label",
-      "link",
       "list",
       "menu",
       "menu-button",
       "message-bar",
       "nav",
-      "nav-item",
-      "popover",
       "radio-group",
       "scrollbar",
-      "search-box",
       "select",
       "simple-nav",
       "split-button",
       "teaching-popover",
       "textarea",
       "toggle-button",
-      "toolbar",
-      "tooltip"
+      "toolbar"
     ],
     "noLocalContract": [
-      "avatar-group",
       "breadcrumb",
       "combobox",
-      "destructive-button",
       "dialog",
       "drawer",
       "dropdown",
       "field",
       "info-label",
-      "interaction-tag",
-      "label",
-      "link",
       "list",
       "menu",
       "menu-button",
       "message-bar",
       "nav",
-      "nav-item",
-      "popover",
       "radio-group",
       "scrollbar",
-      "search-box",
       "select",
       "simple-nav",
       "split-button",
       "teaching-popover",
       "textarea",
       "toggle-button",
-      "toolbar",
-      "tooltip"
+      "toolbar"
     ],
     "legacyMigration": [
       {
@@ -469,6 +469,23 @@
       "candidateStatus": "current"
     },
     {
+      "component": "avatar-group",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
       "component": "badge",
       "lifecycle": "implemented",
       "conformance": "reviewed",
@@ -537,6 +554,23 @@
       "candidateStatus": "review-required"
     },
     {
+      "component": "destructive-button",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
       "component": "divider",
       "lifecycle": "implemented",
       "conformance": "reviewed",
@@ -574,6 +608,57 @@
         "added": [],
         "removed": [],
         "modified": ["web/accessibility.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "interaction-tag",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "label",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
+    },
+    {
+      "component": "link",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
     },
@@ -629,6 +714,40 @@
       "candidateStatus": "review-required"
     },
     {
+      "component": "nav-item",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/accessibility.md", "web/interaction.md"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
+      "component": "popover",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["SKILL.md", "usage.md", "web/interaction.md", "web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
+    },
+    {
       "component": "progress-bar",
       "lifecycle": "implemented",
       "conformance": "reviewed",
@@ -661,6 +780,23 @@
         "modified": ["web/interaction.md"]
       },
       "candidateStatus": "review-required"
+    },
+    {
+      "component": "search-box",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "candidateStatus": "current"
     },
     {
       "component": "skeleton",
@@ -772,6 +908,23 @@
       "marketplaceDrift": null,
       "originDrift": null,
       "candidateStatus": "not-applicable"
+    },
+    {
+      "component": "tooltip",
+      "lifecycle": "implemented",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
+      "originDrift": {
+        "added": [],
+        "removed": [],
+        "modified": ["web/tokens.yaml"]
+      },
+      "candidateStatus": "review-required"
     }
   ]
 }
