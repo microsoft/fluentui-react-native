@@ -1,9 +1,10 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
+  "$schema": "https://unpkg.com/@changesets/config@4.0.0/schema.json",
   "access": "public",
   "baseBranch": "origin/main",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
+  "format": "oxfmt",
   "ignore": [],
   "linked": [],
   "privatePackages": {
