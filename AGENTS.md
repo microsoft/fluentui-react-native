@@ -2,6 +2,40 @@
 
 This file provides guidance to coding agents (Claude Code and others) when working with code in this repository.
 
+## Agent permissions
+
+The shared Copilot CLI defaults are implemented by
+[the repository hook](.github/hooks/agent-permissions.json), not by prose instructions alone.
+After trusting this repository, start a new CLI session to load the hook. Node.js must be on `PATH`;
+no dependency installation is needed for the hook itself.
+
+- Read and write files inside this repository.
+- Run all Yarn commands, including `yarn` and `yarn install`.
+- Inspect Git state, stage changes, create new local commits, list branches, and fetch from `origin`.
+  Do not amend commits, discard other people's changes, or rewrite history without explicit authorization.
+- Read GitHub issues, pull requests, workflow definitions, and pipeline runs using `gh`.
+  REST `gh api` calls to user, repository, and search endpoints are approved only for GET requests,
+  without request-body/field flags. GraphQL and API mutations require separate approval.
+- Inspect the active account with `gh auth status` and `gh api user --jq .login`, and use
+  `gh auth switch` to select an existing authenticated account when needed. Never print authentication tokens.
+
+The hook approves only simple Bash/PowerShell commands. Compound commands, shell expansions, unrecognized
+options, remote writes, and destructive Git operations fall through to the CLI's normal permission handling;
+they are not blanket-denied. Run commands separately when practical. File approvals resolve symlinks and
+are limited to this repository. These defaults are **not a sandbox**: Yarn scripts and Git hooks can execute
+arbitrary code, and explicit approvals intentionally trust them.
+
+Contributors can add permissions through the CLI's "don't ask again in this repo" prompt, which saves
+repo-scoped approvals in their local `~/.copilot/permissions-config.json`, or through `--allow-tool` flags.
+Additional personal hooks can be defined in the gitignored `.github/copilot/settings.local.json`.
+To opt out of hooks locally, set `disableAllHooks: true` there (this disables all non-policy hooks).
+Do not commit personal permission files, account names, or credentials. Hook approvals precede normal
+tool permission checks; disable the hook if you need CLI deny rules to govern these approved operations.
+
+See the [Copilot hooks reference](https://docs.github.com/en/copilot/reference/hooks-reference) and
+[saved permissions schema](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference#permissions-configjson).
+Run `yarn test:agent-permissions` after changing the policy.
+
 ## Project Overview
 
 This is the **FluentUI React Native** repository, a monorepo containing React Native components that implement Microsoft's Fluent Design System. The repository supports multiple platforms including iOS, Android, macOS, Windows, and Win32.

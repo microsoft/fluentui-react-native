@@ -35,7 +35,8 @@
     "format:check": "oxfmt --check",
     "lint-lockfile": "lint-lockfile",
     "lint-repo": "node ./scripts/src/tasks/lintRepo.ts",
-    "test-links": "markdown-link-check"
+    "test-links": "markdown-link-check",
+    "test:agent-permissions": "node --test .github/scripts/agent-permissions.test.mjs"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
