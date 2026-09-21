@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Test agent permissions
+        run: yarn test:agent-permissions
+
       - name: Build CI
         run: yarn lage buildci
 

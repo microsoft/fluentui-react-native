@@ -2,6 +2,75 @@
 
 This file provides guidance to coding agents (Claude Code and others) when working with code in this repository.
 
+## Agent permissions
+
+The shared Copilot CLI defaults are implemented by
+[the repository hook](.github/hooks/agent-permissions.json), not by prose instructions alone.
+After trusting this repository, start a new CLI session to load the hook. Node.js must be on `PATH`;
+no dependency installation is needed for the hook itself.
+
+- Read and write files inside this repository.
+- Run all Yarn commands, including `yarn` and `yarn install`.
+- Inspect Git state, stage changes, create new local commits, list branches, and fetch from `origin`.
+  Do not amend commits, discard other people's changes, or rewrite history without explicit authorization.
+- Read GitHub issues, pull requests, workflow definitions, and pipeline runs using `gh`.
+  REST `gh api` calls to user, repository, and search endpoints are approved only for GET requests,
+  without request-body/field flags. GraphQL and API mutations require separate approval.
+- Inspect the active account with `gh auth status` and `gh api user --jq .login`, and use
+  `gh auth switch` to select an existing authenticated account when needed. Never print authentication tokens.
+- Run `pod install` (including `--repo-update` and `--clean-install`) or named `pod update <Pod>...` operations,
+  optionally through `bundle exec`, from the owning app or its `ios`/`macos` directory. A project-directory
+  argument must resolve to that app's native directory and existing Podfile. Root-level Pod invocations,
+  updates of every pod, global cache cleanup, and `pod deintegrate` require separate approval.
+- Inspect processes/listeners with constrained `ps` and `lsof` commands in Bash. Probe loopback `/status` and
+  `/index.json` using `curl -q` (disable user curl configuration), GET/HEAD, and the instance's reported port.
+  Uploads, redirects, output files, arbitrary endpoints, and process termination are not pre-approved.
+
+The hook accepts simple Bash/PowerShell commands and `&&` sequences when **every** command is approved.
+`cd ./<workspace> && ...` is allowed only within the repository (use `./` to avoid Bash `CDPATH`).
+In Bash, native-driver variables listed in the hook may prefix Yarn commands, directly for unquoted values
+or through `env`, for example `FURN_NATIVE_DRIVER_TEST=1 yarn test` or
+`env "FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY=FURN Development" yarn storybook build-driver --macos`.
+Arbitrary environment overrides, pipelines, redirections, shell expansions, unrecognized
+options, remote writes, and destructive Git operations fall through to the CLI's normal permission handling;
+they are not blanket-denied. Run commands separately when practical. File approvals resolve symlinks and
+are limited to this repository. These defaults are **not a sandbox**: Yarn scripts and Git hooks can execute
+arbitrary code, and explicit approvals intentionally trust them.
+
+### Native Storybook diagnostics
+
+The existing Yarn approval covers the supported macOS, Windows, and Win32 workflows; extra blanket approvals
+for Xcode, Swift, PowerShell scripts, Metro, or screen capture are unnecessary. From `apps/storybook`:
+
+| Need                                                    | Preferred command                                                                                                                                        |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project generation and Pod installation                 | `yarn storybook prep --macos`                                                                                                                            |
+| Bundle failures                                         | `yarn storybook --verbose bundle --<platform>`                                                                                                           |
+| Native build failures                                   | `yarn storybook --verbose build --<platform>` (not Win32)                                                                                                |
+| Driver identity, signing, and macOS privacy diagnostics | `yarn desktop-driver doctor --platform macos --permissions`                                                                                              |
+| Actual listener ports and target identity               | `yarn storybook instance --<platform>`                                                                                                                   |
+| Target-scoped screenshots                               | `yarn desktop-driver agent screenshot --platform <platform-name> --url <driver-url> --target <target-id> --artifacts artifacts/<platform> --name <name>` |
+| Runtime trees and crash reproduction                    | `yarn desktop-driver agent describe ...` and `yarn storybook --verbose smoke --<platform>`                                                               |
+
+For `agent` commands, use `--platform macos` on macOS and `--platform windows` for both Windows and Win32.
+Inspect retained command logs under `artifacts/storybook-commands` and platform artifacts rather than redirecting
+output to arbitrary locations. Screenshots require a running driver/app and the operating system's own screen
+recording permission; CLI approval does not grant Accessibility or Screen Recording access.
+Keep evidence scoped to the registered target and ignored artifact directories. Unrestricted `screencapture`,
+`osascript`, debugger attachment, external crash-report directories, certificate trust changes, and TCC resets
+remain separately authorized. Do not grant these broadly to work around a failed native capability check.
+
+Contributors can add permissions through the CLI's "don't ask again in this repo" prompt, which saves
+repo-scoped approvals in their local `~/.copilot/permissions-config.json`, or through `--allow-tool` flags.
+Additional personal hooks can be defined in the gitignored `.github/copilot/settings.local.json`.
+To opt out of hooks locally, set `disableAllHooks: true` there (this disables all non-policy hooks).
+Do not commit personal permission files, account names, or credentials. Hook approvals precede normal
+tool permission checks; disable the hook if you need CLI deny rules to govern these approved operations.
+
+See the [Copilot hooks reference](https://docs.github.com/en/copilot/reference/hooks-reference) and
+[saved permissions schema](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference#permissions-configjson).
+Run `yarn test:agent-permissions` after changing the policy.
+
 ## Project Overview
 
 This is the **FluentUI React Native** repository, a monorepo containing React Native components that implement Microsoft's Fluent Design System. The repository supports multiple platforms including iOS, Android, macOS, Windows, and Win32.

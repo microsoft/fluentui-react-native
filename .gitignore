@@ -120,6 +120,9 @@ apps/*/.vscode/.react/
 # May contain credentials
 .npmrc
 
+# Personal Copilot settings supplement the shared repository hooks.
+.github/copilot/settings.local.json
+
 # Ccache
 .ccache
 
