@@ -137,17 +137,49 @@ Keep the ring policy local to the higher-order component:
 - place the visual inside the actual focus target
 - keep functional component borders separate from focus feedback
 
+## Native text and vertical alignment
+
+Treat the component frame, the native text line box, and the glyph's visible ink as different measurements. `alignItems`
+and `justifyContent` align Yoga boxes; they do not move a glyph inside a stretched Text or editor. A font's `fontSize`
+is not its measured ascent plus descent. Platform font fallback can make the difference particularly visible on Win32.
+
+- Use `Icon` for font glyphs. Its sized View centers an intrinsic, non-shrinking Text child. With a fully specified frame,
+  the Text is absolute with no edge offsets so Yoga measures its natural height instead of clamping it to the frame.
+  Without a complete frame, normal flow retains intrinsic dimensions. Do not put the icon's
+  `height` or `lineHeight` on that Text, use a negative margin or transform to nudge one glyph, or depend on
+  `textAlignVertical` as a cross-platform centering mechanism. Icon dimensions own scaling, just as they do for images
+  and SVGs; dimensioned font icons do not independently follow text scaling.
+- Retain typography line-height tokens for ordinary labels and paragraphs. Do not globally remove line height to fix
+  one renderer, and do not replace a typography line height with a control's height or the font's em size.
+- Centered initials follow the same intrinsic-metrics rule. Avatar owns all typography and uses native Text to avoid
+  inheriting the themed Text component's body line height. It preserves token font sizes, native text scaling, and
+  explicit caller line metrics, and uses an absolute child without edge offsets to avoid clamping in the smallest
+  padded frame. Do not clip initials to an em square or assume `undefined` can clear merged defaults.
+- For single-line `TextInput`, reset internal padding and let the native editor measure its font. Put spacing outside
+  the editor with Yoga margins or a containing View; keep the control's token-derived minimum height separate.
+  Input demonstrates this without adding another wrapper or changing the caller's final style precedence.
+  Preserve the pointer target when moving spacing: Input's inaccessible, non-focusable contents row forwards activation
+  to the editor through a ref composed by the slot render path. Test disabled behavior and caller ref forwarding too.
+- Distinguish centered graphics from aligned text baselines. `CompoundItemLayout` centers arbitrary regions by default.
+  A text-only row with different label/shortcut font sizes can use `alignItems: 'baseline'` on the root and inline
+  content row. All participating regions must supply meaningful text baselines; do not impose that policy on images
+  or action buttons.
+- On Android, disable extra font padding for tightly sized decorative glyphs. That setting is not a desktop fix.
+- Exercise small and large sizes, font and image/SVG icons, different text metrics, selection, and constrained wrapping.
+  Check the running native output, not just flattened styles: a snapshot of the wrong Text height can pass indefinitely.
+
 ## Selected text without layout shift
 
 When selected text changes weight:
 
 - Render an inaccessible Semibold ghost that reserves width and height.
-- Overlay the visible label.
+- Overlay a View that vertically centers the visible label at its own measured height. Do not stretch the visible Text
+  itself with `absoluteFillObject`: smaller text will otherwise sit at the top of the reserved area on native renderers.
 - Keep the ghost and container state-only.
 - Apply the same wrapping constraints to both labels.
 
-Button uses theme-independent visibility selectors for the hidden and overlaid styles and token-derived typography for
-the actual font metrics.
+Use `LayoutStableText`, as Button and Tab do, rather than duplicating the ghost/overlay structure. The overlay must
+preserve visible-text accessibility and input handling. Typography remains owned by the consuming component.
 
 ## Review checklist
 
@@ -160,3 +192,5 @@ the actual font metrics.
 - User styles are last.
 - Slot props share resolved color and size values consistently.
 - Constrained text can wrap unless truncation is an explicit public choice.
+- Font frames and reserved labels center intrinsic text; editor spacing is external; text baselines are an explicit
+  choice distinct from centering arbitrary slots.

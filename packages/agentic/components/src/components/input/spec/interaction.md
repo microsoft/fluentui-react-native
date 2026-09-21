@@ -27,6 +27,13 @@ Hover recolors the boundary to the hovered neutral stroke and press recolors it
 to the pressed neutral stroke. Neither changes the layout, so the field does not
 shift under the pointer. Both are suppressed while disabled.
 
+The contents row forwards pointer activation in the external spacing and icon
+regions to the native editor, without adding a focus stop or another announced
+control. This keeps the field easy to activate after moving vertical spacing
+outside the editor. Disabled fields ignore that activation; read-only fields
+retain focus and copy behavior. Native editing, selection, and caller slot refs
+remain owned by the TextInput.
+
 ## Keyboard
 
 The platform text input owns caret movement, selection, text composition,

@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { Image, Text } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import type { ImageStyle, TextStyle } from 'react-native';
 
 import { directComponent } from '@fluentui-react-native/framework-base';
@@ -29,21 +29,24 @@ export const Icon = directComponent<IconProps>(({ color, fontSource, height, ima
   if (fontSource) {
     const fontSize = getFontSize(height, width);
     const style: TextStyle = {
+      ...styles.glyph,
       color,
       fontFamily: fontSource.fontFamily,
       fontSize,
-      height,
-      lineHeight: height ?? fontSize,
-      padding: 0,
-      textAlign: 'center',
-      textAlignVertical: 'center',
-      width,
+      ...(height !== undefined && width !== undefined ? styles.framedGlyph : undefined),
     };
 
     return (
-      <Text {...rest} accessibilityRole={accessibilityRole} style={style}>
-        {String.fromCodePoint(fontSource.codepoint)}
-      </Text>
+      <View
+        {...rest}
+        accessible={rest.accessible ?? true}
+        accessibilityRole={accessibilityRole}
+        style={{ ...styles.fontFrame, height, width }}
+      >
+        <Text accessible={false} allowFontScaling={fontSize === undefined} numberOfLines={1} style={style}>
+          {String.fromCodePoint(fontSource.codepoint)}
+        </Text>
+      </View>
     );
   }
 
@@ -56,3 +59,21 @@ export const Icon = directComponent<IconProps>(({ color, fontSource, height, ima
 });
 
 Icon.displayName = 'Icon';
+
+const styles = StyleSheet.create({
+  fontFrame: {
+    alignItems: 'center',
+    flexShrink: 0,
+    justifyContent: 'center',
+  },
+  glyph: {
+    flexShrink: 0,
+    includeFontPadding: false,
+    padding: 0,
+    textAlign: 'center',
+  },
+  framedGlyph: {
+    // Measure the full line box even when it is taller than the icon frame.
+    position: 'absolute',
+  },
+});

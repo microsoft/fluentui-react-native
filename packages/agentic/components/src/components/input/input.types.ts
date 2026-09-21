@@ -1,4 +1,5 @@
-import type { AccessibilityState, ColorValue, StyleProp, TextInput, TextStyle, View, ViewStyle } from 'react-native';
+import type { RefObject } from 'react';
+import type { AccessibilityState, ColorValue, Pressable, StyleProp, TextInput, TextStyle, View, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
 import type {
@@ -25,7 +26,7 @@ export type InputSlots = {
 };
 
 type InputStateSlots = InputSlots & {
-  contents: OptionalSlot<typeof View>;
+  contents: OptionalSlot<typeof Pressable>;
   iconTextStack: OptionalSlot<typeof View>;
   iconEnd: OptionalSlot<typeof View>;
   underline: OptionalSlot<typeof View>;
@@ -68,6 +69,7 @@ export type InputState = ComponentState<InputStateSlots> &
     iconEndStyle: ViewStyle;
     underlineStyle: ViewStyle;
     textInputStyle: TextStyle;
+    textInputRef: RefObject<TextInput | null>;
     iconSize: number;
     iconColor: ColorValue;
   };

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextInput, View } from 'react-native';
+import { Pressable, TextInput, View } from 'react-native';
 import type { TextInputProps } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
@@ -84,6 +84,8 @@ export function useInput_unstable(props: InputProps): InputState {
   const [focused, setFocused] = React.useState(false);
   const [hovered, setHovered] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
+  const textInputRef = React.useRef<TextInput>(null);
+  const focusTextInput = React.useCallback(() => textInputRef.current?.focus(), []);
 
   React.useEffect(() => {
     if (disabled) {
@@ -139,7 +141,13 @@ export function useInput_unstable(props: InputProps): InputState {
   }, []);
 
   const root = useSlot(View, rootProps);
-  const contents = useSlot(View, {});
+  const contents = useSlot(Pressable, {
+    accessibilityRole: 'none',
+    accessible: false,
+    disabled,
+    focusable: false,
+    onPress: focusTextInput,
+  });
   const iconTextStack = useSlot(View, {});
   const iconEnd = useOptionalSlot(View, iconEnd1Prop || iconEnd2Prop ? {} : null);
   const underline = useOptionalSlot(View, variant === 'underline' ? {} : null);
@@ -200,6 +208,7 @@ export function useInput_unstable(props: InputProps): InputState {
     rootStyle: resolvedStyles.root,
     size,
     textInput,
+    textInputRef,
     textInputStyle: resolvedStyles.textInput,
     underline,
     underlineStyle: resolvedStyles.underline,

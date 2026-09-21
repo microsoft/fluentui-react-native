@@ -24,7 +24,7 @@ export function renderInput_unstable(state: InputState) {
       <state.contents>
         <IconTextStack>
           {IconStart && <IconStart />}
-          <TextInputSlot />
+          <TextInputSlot ref={state.textInputRef} />
         </IconTextStack>
         {trailingIcons}
         {state.underline && <state.underline />}

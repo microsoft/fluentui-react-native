@@ -42,7 +42,7 @@ export const inputStyles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     minWidth: 0,
-    paddingHorizontal: 0,
+    padding: 0,
   },
   underline: {
     left: 0,
@@ -82,7 +82,6 @@ function getMetrics(tokens: FlexTokens, size: InputSize) {
       horizontalPadding: toNumber(spacing.componentBase150),
       iconSize: toNumber(size160),
       textFontSize: toNumber(fontSize.functionalBodySmall),
-      textLineHeight: toNumber(lineHeight.functionalBodySmall),
       verticalPadding: toNumber(spacing.componentBase100),
     },
     medium: {
@@ -90,7 +89,6 @@ function getMetrics(tokens: FlexTokens, size: InputSize) {
       horizontalPadding: toNumber(spacing.componentBase250),
       iconSize: toNumber(size200),
       textFontSize: toNumber(fontSize.functionalBodyMedium),
-      textLineHeight: toNumber(lineHeight.functionalBodyMedium),
       verticalPadding: toNumber(spacing.componentBase150),
     },
     large: {
@@ -98,7 +96,6 @@ function getMetrics(tokens: FlexTokens, size: InputSize) {
       horizontalPadding: toNumber(spacing.componentBase300),
       iconSize: toNumber(size240),
       textFontSize: toNumber(fontSize.functionalBodyLarge),
-      textLineHeight: toNumber(lineHeight.functionalBodyLarge),
       verticalPadding: toNumber(spacing.componentBase200),
     },
   } as const;
@@ -259,15 +256,13 @@ function createTextInputDefinition(tokens: FlexTokens): StyleDefinition<TextStyl
   const base = {
     color: color.foregroundNeutralPrimary,
     fontFamily: fontFamily.functional,
-    paddingHorizontal: 0,
   };
 
   return {
     small: {
       ...base,
       fontSize: small.textFontSize,
-      lineHeight: small.textLineHeight,
-      paddingVertical: small.verticalPadding,
+      marginVertical: small.verticalPadding,
       disabled: {
         color: color.foregroundNeutralDisabled,
       },
@@ -275,8 +270,7 @@ function createTextInputDefinition(tokens: FlexTokens): StyleDefinition<TextStyl
     medium: {
       ...base,
       fontSize: medium.textFontSize,
-      lineHeight: medium.textLineHeight,
-      paddingVertical: medium.verticalPadding,
+      marginVertical: medium.verticalPadding,
       disabled: {
         color: color.foregroundNeutralDisabled,
       },
@@ -284,8 +278,7 @@ function createTextInputDefinition(tokens: FlexTokens): StyleDefinition<TextStyl
     large: {
       ...base,
       fontSize: large.textFontSize,
-      lineHeight: large.textLineHeight,
-      paddingVertical: large.verticalPadding,
+      marginVertical: large.verticalPadding,
       disabled: {
         color: color.foregroundNeutralDisabled,
       },

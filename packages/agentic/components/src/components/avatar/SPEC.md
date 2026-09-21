@@ -21,6 +21,13 @@ Avatar is a non-interactive identity marker. It renders exactly one image, icon,
 
 The root contains only the active content slot. Images are absolute-fill and use cover resizing. Icon and initials slots are centered; all content slots are decorative because the root owns any accessible identity. Supplying more than one content slot is accepted for compatibility, resolves through the documented priority, and issues a development warning.
 
+The circular View centers the initials' intrinsic native line box. Avatar owns
+all initials typography and uses native Text without an inherited body line
+height or an em-sized line-height clamp, which can clip or displace glyphs.
+Font-size tokens, native text scaling, and explicit caller line metrics are preserved.
+The initials are an absolute child without edge offsets, so the smallest
+avatar's padded frame cannot clamp that intrinsic line box during measurement.
+
 The resolved state retains size, activity-ring value, content mode, theme state, and user root style. User style is applied last. Avatar has no interaction-state ownership.
 
 ### Requirements

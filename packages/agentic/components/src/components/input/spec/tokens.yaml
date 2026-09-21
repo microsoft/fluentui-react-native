@@ -97,18 +97,15 @@ bindings:
       flexGrow: 1
       flexShrink: 1
       minWidth: 0
-      paddingHorizontal: 0
+      padding: 0
     typography:
       fontFamily: fontFamily.functional
       fontSize:
         small: fontSize.functionalBodySmall
         medium: fontSize.functionalBodyMedium
         large: fontSize.functionalBodyLarge
-      lineHeight:
-        small: lineHeight.functionalBodySmall
-        medium: lineHeight.functionalBodyMedium
-        large: lineHeight.functionalBodyLarge
-    paddingVertical:
+      # Native single-line metrics are intrinsic. Line-height tokens size contents.minHeight.
+    marginVertical:
       small: spacing.componentBase100
       medium: spacing.componentBase150
       large: spacing.componentBase200

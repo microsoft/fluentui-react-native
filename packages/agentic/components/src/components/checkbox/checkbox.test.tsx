@@ -217,7 +217,7 @@ describe('Checkbox', () => {
     expect(StyleSheet.flatten(indicator.props.style).backgroundColor).toBe(expectedBackground);
     expect(StyleSheet.flatten(label.props.style).color).toBe(expectedLabelColor);
     if (status !== 'unchecked') {
-      const icon = component.getByTestId(status === 'indeterminate' ? 'checkbox-dash-icon' : 'checkbox-check-icon');
+      const icon = component.getByText(status === 'indeterminate' ? '\u2212' : '\u2713');
       expect(StyleSheet.flatten(icon.props.style).color).toBe(colors.foregroundBrandOnloud);
     }
   });

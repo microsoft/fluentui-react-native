@@ -153,8 +153,8 @@ Legacy Checkbox and Input tests still use static JSON
 use declarative `platforms` and `requires` until they are migrated; do not add
 functions or dynamic values to the old format.
 
-The components package's `test:stories` project checks the experimental
-Button stories without emitting them into the component library.
+The components package's `test:stories` project checks the Button and LayoutStableText executable stories without
+emitting them into the component library. Add newly typed executable story modules to that project's include list.
 
 Button uses focused appearance, size, shape, icon, selection, disabled, and constrained-content stories. Icon uses a
 source and size overview plus focused font, image, SVG, size, color, and accessibility stories.
@@ -184,6 +184,14 @@ Run the smallest affected package test while iterating. Run the full package seq
 
 A successful bundle proves story discovery and compilation only. For visual changes, inspect the running target-platform
 story across hover, pressed, disabled, optional-slot, and constrained-content scenarios.
+
+Alignment regressions must distinguish the outer frame from the inner text. LayoutStableText's Overview includes an
+executable desktop check that the smaller visible Text has a smaller measured height than its reserve and that their
+vertical centers agree within one layout pixel. Checking only their centers would let the old stretched-Text bug pass.
+Its measurement fixture exposes an explicit group around the primitive and an accessible visible Text rather than
+querying the primitive's intentionally inaccessible layout wrapper, which may not exist in a platform's automation tree.
+Pair geometry checks with native screenshots for glyph ink and caret placement; native element bounds alone do not
+prove optical alignment. Never record an unavailable native check as passed.
 
 Adding a new story file changes Metro's `require.context` catalog and may require restarting Metro and the native app
 before the running Storybook index includes it.

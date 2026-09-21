@@ -46,9 +46,11 @@ describe('Badge', () => {
       fontSize: tokens.fontSize.functionalBodySmall,
     });
     expect(StyleSheet.flatten(component.getByTestId('leading-icon').props.style)).toMatchObject({
-      color: tokens.color.foregroundBrandPrimary,
       height: 16,
       width: 16,
+    });
+    expect(StyleSheet.flatten(component.getByText(String.fromCodePoint(badgeIcon.fontSource.codepoint)).props.style)).toMatchObject({
+      color: tokens.color.foregroundBrandPrimary,
     });
   });
 

@@ -1,7 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import type { View, ViewStyle } from 'react-native';
+import type { TextInput, View, ViewStyle } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -118,9 +118,11 @@ describe('Input', () => {
     const colors = defaultFlexTokens.color;
 
     expect(flattenStyle(component.getByTestId('icon-start').props.style)).toMatchObject({
-      color: colors.foregroundNeutralPrimary,
       height: 24,
       width: 24,
+    });
+    expect(flattenStyle(component.getByText('\u2605').props.style)).toMatchObject({
+      color: colors.foregroundNeutralPrimary,
     });
     expect(component.getByTestId('icon-end-1').props.style).toMatchObject({ height: 24, width: 24 });
     expect(component.getByTestId('icon-end-2').props.style).toMatchObject({ height: 24, width: 24 });
@@ -131,30 +133,33 @@ describe('Input', () => {
     const cases = [
       {
         fontSize: Number(tokens.fontSize.functionalBodySmall),
-        lineHeight: Number(tokens.lineHeight.functionalBodySmall),
+        marginVertical: Number(tokens.spacing.componentBase100),
         minHeight: Number(tokens.lineHeight.functionalBodySmall) + Number(tokens.spacing.componentBase100) * 2,
         size: 'small',
       },
       {
         fontSize: Number(tokens.fontSize.functionalBodyMedium),
-        lineHeight: Number(tokens.lineHeight.functionalBodyMedium),
+        marginVertical: Number(tokens.spacing.componentBase150),
         minHeight: Number(tokens.lineHeight.functionalBodyMedium) + Number(tokens.spacing.componentBase150) * 2,
         size: 'medium',
       },
       {
         fontSize: Number(tokens.fontSize.functionalBodyLarge),
-        lineHeight: Number(tokens.lineHeight.functionalBodyLarge),
+        marginVertical: Number(tokens.spacing.componentBase200),
         minHeight: Number(tokens.lineHeight.functionalBodyLarge) + Number(tokens.spacing.componentBase200) * 2,
         size: 'large',
       },
     ] as const;
 
-    for (const { fontSize, lineHeight, minHeight, size } of cases) {
+    for (const { fontSize, marginVertical, minHeight, size } of cases) {
       const component = await render(<Input placeholder={size} size={size} />);
       expect(flattenStyle(component.getByRole('textbox').props.style)).toMatchObject({
         fontSize,
-        lineHeight,
+        marginVertical,
+        padding: 0,
       });
+      expect(flattenStyle(component.getByRole('textbox').props.style)).not.toHaveProperty('lineHeight');
+      expect(flattenStyle(component.getByRole('textbox').props.style)).not.toHaveProperty('paddingVertical');
       expect(flattenStyle(getContents(component).props.style)).toMatchObject({ minHeight });
       expect(component.queryByTestId('icon-start')).toBeNull();
     }
@@ -171,5 +176,42 @@ describe('Input', () => {
   it('keeps user styles last', async () => {
     const component = await render(<Input placeholder="Styled" style={{ backgroundColor: 'hotpink' }} />);
     expect(flattenStyle(component.getByTestId('input-root').props.style)).toMatchObject({ backgroundColor: 'hotpink' });
+  });
+
+  it('preserves explicit native editor style overrides after alignment defaults', async () => {
+    const component = await render(<Input textInput={{ style: { lineHeight: 26, marginVertical: 2, paddingVertical: 3 } }} />);
+
+    expect(flattenStyle(getTextbox(component).props.style)).toMatchObject({
+      lineHeight: 26,
+      marginVertical: 2,
+      padding: 0,
+      paddingVertical: 3,
+    });
+  });
+
+  it.each([false, true])(
+    'focuses the native editor from external spacing with readOnly=%s and preserves the caller ref',
+    async (readOnly) => {
+      const ref = React.createRef<TextInput>();
+      const component = await render(<Input readOnly={readOnly} textInput={{ ref }} />);
+      expect(ref.current).not.toBeNull();
+      const focus = jest.spyOn(ref.current!, 'focus').mockClear();
+      const contents = getContents(component);
+
+      expect(contents.props).toMatchObject({ accessible: false, focusable: false });
+      expect(component.queryByRole('button')).toBeNull();
+      await fireEvent.press(contents);
+      expect(focus).toHaveBeenCalledTimes(1);
+    },
+  );
+
+  it('does not focus a disabled editor through the spacing region', async () => {
+    const ref = React.createRef<TextInput>();
+    const component = await render(<Input disabled textInput={{ ref }} />);
+    expect(ref.current).not.toBeNull();
+    const focus = jest.spyOn(ref.current!, 'focus').mockClear();
+
+    await fireEvent.press(getContents(component));
+    expect(focus).not.toHaveBeenCalled();
   });
 });

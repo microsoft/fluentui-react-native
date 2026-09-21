@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { LayoutStableText } from './layout-stable-text';
 
@@ -84,7 +85,7 @@ const meta: Meta<typeof LayoutStableText> = {
 
 export default meta;
 
-type Story = StoryObj<typeof LayoutStableText>;
+type Story = WdioStory<StoryObj<typeof LayoutStableText>>;
 
 export const Default: Story = {
   render: () => (
@@ -106,10 +107,16 @@ export const Overview: Story = {
         />
       </StoryItem>
       <StoryItem label="Reserve large, show small">
-        <LayoutStableText
-          reserve={<Text style={styles.large}>Stable label</Text>}
-          visible={<Text style={styles.small}>Stable label</Text>}
-        />
+        <View accessible role="group" testID="layout-stable-text-large-reserve">
+          <LayoutStableText
+            reserve={<Text style={styles.large}>Stable label</Text>}
+            visible={
+              <Text accessible style={styles.small} testID="layout-stable-text-small-visible">
+                Stable label
+              </Text>
+            }
+          />
+        </View>
       </StoryItem>
       <StoryItem label="Matching metrics">
         <LayoutStableText
@@ -124,6 +131,25 @@ export const Overview: Story = {
       description: {
         story: 'The hidden reserve element determines bounds while the visible element supplies the rendered state.',
       },
+    },
+  },
+  wdio: {
+    'centers the intrinsic smaller line inside its larger reserve': async ({ browser, expect }) => {
+      const assert: typeof import('node:assert') = (await import('node:assert')).default;
+      const reserve = await browser.$('~layout-stable-text-large-reserve');
+      const visible = await browser.$('~layout-stable-text-small-visible');
+      await expect(reserve).toExist();
+      await expect(visible).toExist();
+      const reservedBounds = await browser.getElementRect(await reserve.elementId);
+      const visibleBounds = await browser.getElementRect(await visible.elementId);
+
+      assert(
+        visibleBounds.height > 0 && visibleBounds.height < reservedBounds.height,
+        'Visible text must keep its smaller intrinsic height.',
+      );
+      const reservedCenter = reservedBounds.y + reservedBounds.height / 2;
+      const visibleCenter = visibleBounds.y + visibleBounds.height / 2;
+      assert(Math.abs(reservedCenter - visibleCenter) <= 1, 'Visible text must be vertically centered within one layout pixel.');
     },
   },
 };

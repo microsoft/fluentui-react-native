@@ -118,10 +118,15 @@ describe('Avatar', () => {
       const component = await renderAvatar({ accessibilityLabel: `Avatar ${size}`, initials: 'LM', size });
       const expectedInitials = size === 16 ? 'L' : 'LM';
       expect(getRootStyle(component)).toMatchObject({ height: size, minHeight: size, minWidth: size, padding, width: size });
-      expect(StyleSheet.flatten(component.getByText(expectedInitials, { includeHiddenElements: true }).props.style)).toMatchObject({
+      const initialsStyle = StyleSheet.flatten(component.getByText(expectedInitials, { includeHiddenElements: true }).props.style);
+      expect(initialsStyle).toMatchObject({
         fontSize,
-        lineHeight: fontSize,
+        includeFontPadding: false,
+        position: 'absolute',
       });
+      expect(initialsStyle.lineHeight).toBeUndefined();
+      expect(initialsStyle.height).toBeUndefined();
+      expect(initialsStyle.textAlignVertical).toBeUndefined();
     }
   });
 
@@ -148,5 +153,14 @@ describe('Avatar', () => {
     });
 
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
+  });
+
+  it('preserves explicit initials line metrics after intrinsic defaults', async () => {
+    const component = await renderAvatar({
+      accessibilityLabel: 'Initials',
+      initials: { children: 'AB', style: { lineHeight: 24 } },
+    });
+
+    expect(StyleSheet.flatten(component.getByText('AB', { includeHiddenElements: true }).props.style).lineHeight).toBe(24);
   });
 });

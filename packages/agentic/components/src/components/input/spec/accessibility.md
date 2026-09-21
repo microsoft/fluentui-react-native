@@ -59,6 +59,10 @@ belongs in a separate focusable control rather than an icon slot.
 
 ## Focus
 
+The contents Pressable is inaccessible and explicitly non-focusable. It only
+forwards pointer activation to the editor, so external spacing does not remove
+the field's pointer target or add a second keyboard stop.
+
 `focusable` resolves to `true` unless the field is disabled. Input renders no
 dedicated focus ring; focus is indicated by recoloring the boundary to the heavy
 neutral stroke at the same thickness used at rest. Verify that contrast in every

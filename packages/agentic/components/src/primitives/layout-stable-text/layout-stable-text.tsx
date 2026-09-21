@@ -15,13 +15,15 @@ export const LayoutStableText = directComponent<LayoutStableTextProps>(({ reserv
     testID: undefined,
   };
   const visibleProps: TextProps = {
-    style: [visible.props.style, styles.visible],
+    style: [visible.props.style, styles.text],
   };
 
   return (
     <View {...rest} accessible={false} style={[styles.root, style]}>
       {React.cloneElement(reserve, reserveProps)}
-      {React.cloneElement(visible, visibleProps)}
+      <View accessible={false} pointerEvents="box-none" style={styles.visible}>
+        {React.cloneElement(visible, visibleProps)}
+      </View>
     </View>
   );
 });
@@ -39,5 +41,9 @@ const styles = StyleSheet.create({
   },
   visible: {
     ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+  },
+  text: {
+    flexShrink: 1,
   },
 });

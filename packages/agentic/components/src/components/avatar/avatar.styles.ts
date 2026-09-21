@@ -19,9 +19,10 @@ export const avatarStyles = StyleSheet.create({
   },
   initials: {
     flexShrink: 1,
+    includeFontPadding: false,
     padding: 0,
+    position: 'absolute',
     textAlign: 'center',
-    textAlignVertical: 'center',
   },
 });
 
@@ -146,7 +147,6 @@ export function getAvatarRootStyle(state: AvatarState): ViewStyle {
 function createInitialsTextStyle(size: number): TextStyle {
   return {
     fontSize: size,
-    lineHeight: size,
   };
 }
 
@@ -158,7 +158,6 @@ const getThemedAvatarInitialsStyle = getThemedStateStyleFactory(
       fontWeight: fontWeight.functionalRegular,
       padding: 0,
       textAlign: 'center',
-      textAlignVertical: 'center',
       textTransform: 'uppercase',
       '16': createInitialsTextStyle(fontSize.functionalCaption),
       '20': createInitialsTextStyle(fontSize.functionalCaption),
