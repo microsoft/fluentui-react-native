@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/storybook-desktop",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "CLI and configuration for React Native desktop Storybook applications",
   "license": "MIT",
   "author": "",
