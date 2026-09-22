@@ -52,8 +52,8 @@ root styles.
 | ------ | -------- | --------------------------------------------------------------------------- |
 | `root` | yes      | The placeholder surface. Clips its content and hosts the highlight overlay. |
 
-The root renders at most one child: an animated overlay that carries the
-highlight band. The overlay is mounted only while the sweep can run, is
+The root renders at most one child: an animated overlay that carries an SVG
+linear-gradient highlight. The overlay is mounted only while the sweep can run, is
 identified by the `skeleton-shimmer` test id, and takes no pointer input. When
 the sweep cannot run the root renders no children at all.
 
@@ -82,8 +82,33 @@ surface when motion is unavailable.
 system reduced-motion setting is on, with no substitute animation.
 
 **SKEL-006:** Size the highlight band relative to the measured width with a
-fixed floor and translate it across the full root width on a continuous linear
-loop.
+fixed floor, fade from transparent to the themed highlight and back to
+transparent, and sweep it at a fixed 45-degree angle. Keep that angle independent
+of the placeholder's aspect ratio, clip to the caller's silhouette, and fully
+clear both edges during the continuous linear loop. Follow reading direction,
+including a right-to-left sweep in RTL.
+
+## Gradient compatibility
+
+The repository's [Shimmer](../../../../../experimental/Shimmer/src/Shimmer.tsx)
+and [Win32 Shimmer](../../../../../experimental/Shimmer/src/Shimmer.win32.tsx)
+establish the three-stop linear-gradient wave pattern. Skeleton reuses the
+already-supported `react-native-svg` renderer, not the legacy component or its
+native animation host. Its existing shared timeline, token colors, public props,
+and loading-region accessibility remain authoritative.
+
+Shimmer permits a caller-selected angle and defaults to zero on desktop.
+Skeleton deliberately fixes a diagonal 45-degree wave to satisfy its loading
+appearance without adding an angle prop. User-space gradient coordinates and an
+overlay widened by the measured height preserve that angle for thin lines,
+circles, wide cards, and tall placeholders. Each mounted Skeleton owns a stable
+gradient identifier so definitions cannot interfere across instances.
+
+Native SVG gradient stops do not support opaque `PlatformColor` values. When
+the highlight token is opaque, including native high-contrast palettes, Skeleton
+retains its static native View with a token-colored outline, omits the sweep, and reports that
+limitation in development. It does not substitute another solid moving strip
+or replace the caller's platform color with an invented RGB value.
 
 ## Platform behavior
 
@@ -107,8 +132,9 @@ height, which is the caller's responsibility to avoid.
 
 | ID                                | Disposition    | React Native contract                                                                                                                                                                                                                  | Follow-up                                                                          |
 | --------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `skeleton-highlight-band-fill`    | Accepted       | FURN paints the sweep as a translating opaque band view held at a fixed opacity. Flex describes a gradient highlight that fades in and out across the bar.                                                                             | Revisit only if this package takes a gradient dependency.                          |
+| `skeleton-highlight-band-fill`    | Resolved       | A three-stop SVG linear gradient fades through transparent edges and a themed center, replacing the solid rectangular strip. It sweeps diagonally with aspect-ratio-independent geometry.                                              | Covered by gradient, geometry, identifier, RTL, and native motion checks.          |
 | `skeleton-static-silhouette`      | Accepted       | The soft neutral token supplies the base and the subtle neutral token supplies the band. This reverses the previous local assignment, whose base was indistinguishable from the subtle Storybook surface.                              | Preserve visible static placeholders when reduced motion suppresses the sweep.     |
+| `skeleton-opaque-gradient-color`  | Accepted       | Native SVG stops cannot represent opaque platform colors. A static native View uses a token-colored outline and a development warning explains the omitted sweep.                                                                      | Revisit when the SVG renderer supports native platform-color gradient stops.       |
 | `skeleton-instance-timeline`      | Resolved       | Active placeholders share one package-level sweep timeline, so instances mounted at different times render at the same phase.                                                                                                          | Implemented through the shared animation hook and covered by multi-instance tests. |
 | `skeleton-container-busy-state`   | Not applicable | The root is removed from the accessibility tree and exposes no busy state. Flex assigns the busy semantic to the container that owns the loading region, which in FURN is caller-owned composition rather than part of this component. | None.                                                                              |
 | `skeleton-pointer-events`         | Resolved       | The root defaults to `pointerEvents="none"` so it cannot intercept covered controls, while an explicit caller value is preserved.                                                                                                      | Implemented in `useSkeleton.ts` and covered by root-prop tests.                    |
@@ -123,4 +149,4 @@ height, which is the caller's responsibility to avoid.
 | SKEL-003    | `useSkeleton.ts`, `skeleton.test.tsx`                                                                     |
 | SKEL-004    | `skeleton.styles.ts`, `useSkeletonStyles.ts`, `__snapshots__/skeleton.test.tsx.snap`, `skeleton.test.tsx` |
 | SKEL-005    | `useSkeleton.ts`, `renderSkeleton.tsx`, `skeleton.test.tsx`                                               |
-| SKEL-006    | `useSkeleton.ts`, `renderSkeleton.tsx`, `skeleton.stories.tsx`                                            |
+| SKEL-006    | `useSkeleton.ts`, `renderSkeleton.tsx`, `skeleton.test.tsx`, `skeleton.stories.tsx`                       |

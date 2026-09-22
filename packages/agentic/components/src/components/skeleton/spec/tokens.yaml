@@ -15,6 +15,9 @@ bindings:
     theme:
       backgroundColor: color.backgroundNeutralSoft
       borderRadius: borderRadius.base100
+      opaqueHighlight:
+        borderColor: color.strokeNeutralLoud
+        borderWidth: strokeWidth.thin
     userStyle: applied last by useSkeletonStyles_unstable
 
   shimmerContainer:
@@ -26,33 +29,46 @@ bindings:
       overflow: hidden
       pointerEvents: none
     instance:
-      width: band width derived from the measured root width
-      transform: translateX from minus the band width to the measured width plus the band width
+      width: band width plus the measured root height
+      transform: translateX from minus the overlay width to the measured root width, reversed in RTL
 
-  shimmerBand:
-    static:
-      height: 100%
-      opacity: 0.64
+  shimmerGradient:
     theme:
-      backgroundColor: color.backgroundNeutralSubtle
-      borderRadius: borderRadius.base100
+      stopColor: color.backgroundNeutralSubtle
+    geometry:
+      gradientUnits: userSpaceOnUse
+      x1: measured root height
+      y1: 0
+      x2: measured root height plus half the band width
+      y2: half the band width
+    stops:
+      - offset: 0
+        opacity: 0
+      - offset: 0.5
+        opacity: 0.64
+      - offset: 1
+        opacity: 0
 
 motion:
   implementation: useSkeleton.ts
   driver: shared Animated.loop requests native animation; macOS Fabric uses the JavaScript driver
   duration: 1700
   easing: linear
-  gate: measured width and height are both greater than zero and reduced motion is off
+  gate: measured width and height are both greater than zero, reduced motion is off, and the highlight is a concrete color string
 
 tokenGaps:
   - id: skeleton-band-opacity
-    binding: shimmerBand.opacity
+    binding: shimmerGradient.stops
     value: 0.64
     reason: The highlight lift is a literal opacity in styling code because no theme token covers it.
   - id: skeleton-band-width
     binding: shimmerContainer.width
     value: 45 percent of the measured width with a floor of 24
     reason: The band proportion and its minimum are literals in useSkeleton.ts with no token coverage.
+  - id: skeleton-gradient-angle
+    binding: shimmerGradient.geometry
+    value: 45 degrees
+    reason: A fixed diagonal wave satisfies the local loading contract without adding Shimmer's configurable angle API.
   - id: skeleton-sweep-duration
     binding: motion.duration
     value: 1700

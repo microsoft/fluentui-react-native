@@ -21,9 +21,11 @@ export type SkeletonState = ComponentState<SkeletonSlots> &
     reduceMotion: boolean;
     userStyle?: StyleProp<ViewStyle>;
     bandWidth: number;
+    gradientId: string;
+    shimmerColor: string | undefined;
+    shimmerWidth: number;
     translateX: Animated.AnimatedInterpolation<number | string>;
     shimmerContainerStyle: StyleProp<ViewStyle>;
-    shimmerBandStyle: StyleProp<ViewStyle>;
     onLayout: (event: LayoutChangeEvent) => void;
     progress: Animated.Value;
   };

@@ -26,6 +26,14 @@ utilities cannot consume opaque colors such as high-contrast `PlatformColor`
 values, so the chrome adapter warns and substitutes contrasting fixed colors
 from the selected theme for those values.
 
+Both `background.content` and `background.preview` use `surfaceNeutralFar`.
+Upstream LiteUI and its inner StoryView paint the canvas with `content`, even
+when the surrounding desktop layout uses `preview`. Keeping those roles aligned
+prevents the stock Default Flex, light, and dark canvases from matching the
+Secondary Button's `backgroundNeutralSubtle` fill. Explicit story background
+overrides still take precedence; component tokens and interaction colors are
+unchanged.
+
 It does not own W3C routing, WebdriverIO, test execution, evidence persistence,
 or native accessibility/input/screenshot providers. Those responsibilities
 belong to `@fluentui-react-native/desktop-driver`.

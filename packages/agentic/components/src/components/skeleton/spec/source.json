@@ -3,7 +3,7 @@
   "component": "skeleton",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-21",
+  "reviewedAt": "2026-09-22",
   "sources": [
     {
       "id": "flex-component",
@@ -67,16 +67,44 @@
         }
       ],
       "releaseDifferences": []
+    },
+    {
+      "id": "legacy-shimmer",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "50e398c28ee632a9ce5b6835f259c81d99386d96",
+      "files": [
+        {
+          "role": "implementation",
+          "path": "packages/experimental/Shimmer/src/Shimmer.tsx",
+          "sha256": "16033f2e9895378dcc2f381180445d1044ef1d4646be5a8cbd51a8aa9d129a80"
+        },
+        {
+          "role": "types",
+          "path": "packages/experimental/Shimmer/src/Shimmer.types.shared.ts",
+          "sha256": "c4beecaa90a58049d98913151ed358709069d3ebed1378df16b6c03242576ce1"
+        },
+        {
+          "role": "win32:implementation",
+          "path": "packages/experimental/Shimmer/src/Shimmer.win32.tsx",
+          "sha256": "acdd81c1f983122b6cbc552d3a63d8c8991b7081e4ec41f2b24b018160a6111d"
+        }
+      ]
     }
   ],
   "divergences": [
+    {
+      "id": "skeleton-opaque-gradient-color",
+      "status": "accepted"
+    },
     {
       "id": "skeleton-static-silhouette",
       "status": "accepted"
     },
     {
       "id": "skeleton-highlight-band-fill",
-      "status": "accepted"
+      "status": "resolved"
     },
     {
       "id": "skeleton-instance-timeline",
@@ -98,27 +126,33 @@
   "requirements": [
     {
       "id": "SKEL-001",
+      "sources": ["flex-component"],
       "evidence": ["skeleton.types.ts", "useSkeleton.ts", "skeleton.types.test.ts", "skeleton.test.tsx"]
     },
     {
       "id": "SKEL-002",
+      "sources": ["flex-component", "legacy-shimmer"],
       "evidence": ["renderSkeleton.tsx", "skeleton.test.tsx"]
     },
     {
       "id": "SKEL-003",
+      "sources": ["flex-component"],
       "evidence": ["useSkeleton.ts", "skeleton.test.tsx"]
     },
     {
       "id": "SKEL-004",
+      "sources": ["flex-component"],
       "evidence": ["skeleton.styles.ts", "useSkeletonStyles.ts", "__snapshots__/skeleton.test.tsx.snap", "skeleton.test.tsx"]
     },
     {
       "id": "SKEL-005",
+      "sources": ["flex-component"],
       "evidence": ["useSkeleton.ts", "renderSkeleton.tsx", "skeleton.test.tsx"]
     },
     {
       "id": "SKEL-006",
-      "evidence": ["useSkeleton.ts", "renderSkeleton.tsx", "skeleton.stories.tsx"]
+      "sources": ["flex-component", "legacy-shimmer"],
+      "evidence": ["useSkeleton.ts", "renderSkeleton.tsx", "skeleton.test.tsx", "skeleton.stories.tsx"]
     }
   ]
 }
