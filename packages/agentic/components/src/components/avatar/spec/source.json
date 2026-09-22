@@ -99,6 +99,10 @@
     {
       "id": "AVT-005",
       "evidence": ["avatar.types.ts", "useAvatar.ts", "avatar.stories.tsx"]
+    },
+    {
+      "id": "AVT-006",
+      "evidence": ["avatar.styles.ts", "useAvatarStyles.ts", "renderAvatar.tsx", "avatar.test.tsx", "avatar.stories.tsx"]
     }
   ]
 }

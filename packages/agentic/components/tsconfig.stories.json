@@ -6,7 +6,11 @@
     "noEmit": true,
     "tsBuildInfoFile": ".cache/tsconfig.stories.tsbuildinfo"
   },
-  "include": ["src/components/button/button.stories.tsx", "src/primitives/layout-stable-text/layout-stable-text.stories.tsx"],
+  "include": [
+    "src/components/avatar/avatar.stories.tsx",
+    "src/components/button/button.stories.tsx",
+    "src/primitives/layout-stable-text/layout-stable-text.stories.tsx"
+  ],
   "exclude": [],
   "references": [
     {

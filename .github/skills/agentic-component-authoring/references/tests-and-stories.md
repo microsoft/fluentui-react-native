@@ -153,7 +153,7 @@ Legacy Checkbox and Input tests still use static JSON
 use declarative `platforms` and `requires` until they are migrated; do not add
 functions or dynamic values to the old format.
 
-The components package's `test:stories` project checks the Button and LayoutStableText executable stories without
+The components package's `test:stories` project checks the Avatar, Button, and LayoutStableText executable stories without
 emitting them into the component library. Add newly typed executable story modules to that project's include list.
 
 Button uses focused appearance, size, shape, icon, selection, disabled, and constrained-content stories. Icon uses a

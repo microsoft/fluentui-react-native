@@ -130,6 +130,11 @@ creates both through a late `BorderPrimitive`; on a background-filled target its
 index 1 in an empty visual and fail-fast. A style helper alone is insufficient because the invariant is native View
 lifetime.
 
+The same failure applies to non-focus outlines, including an initially active Avatar activity ring. Reuse `FocusVisual`
+as a persistent decorative border, with the component owning its meaning, tokens, and visibility. For an outward ring
+with a gap, each absolute edge is `-(gap + strokeWidth)` so the border preserves the requested gap without changing
+layout. Mount it with its border configured even when hidden; do not switch border width between zero and a nonzero value.
+
 Keep the ring policy local to the higher-order component:
 
 - choose single versus dual rings from the component specification

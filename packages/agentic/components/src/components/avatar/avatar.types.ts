@@ -9,6 +9,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
+import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
 import type { Icon } from '../../primitives/icon/icon';
 
 export type AvatarSize = 16 | 20 | 24 | 28 | 32 | 40 | 56 | 120;
@@ -40,6 +41,7 @@ export type AvatarProps = AvatarStateProps & ComponentProps<AvatarSlots, AvatarR
 export type AvatarState = ComponentState<AvatarSlots> &
   Required<AvatarStateProps> &
   ThemeState & {
+    activityRingProps?: FocusVisualProps;
     contentMode: AvatarContentMode;
     userStyle?: StyleProp<ViewStyle>;
   };

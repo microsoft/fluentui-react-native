@@ -48,6 +48,8 @@ audit.
   an internal root ref, compose the refs through the slot render path rather than replacing the consumer ref.
 - Render focus feedback through `FocusVisual`; do not add `outline*` props or enable RNW native
   focus visuals because RNW 0.81 can fail-fast when either path creates border visuals after mount.
+  This also applies to non-focus indicators such as Avatar's activity ring, even when active on the initial render.
+  Reuse the persistent decorative border and toggle opacity rather than native outline properties.
 - Keep render functions free of hooks, token reads, style creation, and slot mutation.
 - Export the resolved state type and the state, style-application, and render stages from the package root under
   component-qualified unstable names so another component can reuse the pipeline.

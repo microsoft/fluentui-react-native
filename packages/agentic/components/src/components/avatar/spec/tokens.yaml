@@ -44,7 +44,16 @@ bindings:
     color: color.foregroundNeutralPrimary
     size: { '16': 12, '20': 16, '24': 16, '28': 16, '32': 20, '40': 24, '56': 32, '120': 48 }
   activityRing:
+    structure: persistent FocusVisual border
     color: color.strokeBrandLoud
+    borderRadius: borderRadius.circular
+    borderStyle: solid
+    layout:
+      position: absolute
+      inset: -(offset + width)
+    visibility:
+      active: opaque
+      inactive: opacity 0
     '16': { offset: strokeWidth.thin, width: strokeWidth.thin }
     '20': { offset: strokeWidth.thin, width: strokeWidth.thick }
     '24': { offset: strokeWidth.thin, width: strokeWidth.thick }

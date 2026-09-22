@@ -3,7 +3,7 @@ import type { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
-import { avatarStyles, getAvatarIconSize, getAvatarInitialsStyle, getAvatarRootStyle } from './avatar.styles';
+import { avatarStyles, getAvatarActivityRingStyle, getAvatarIconSize, getAvatarInitialsStyle, getAvatarRootStyle } from './avatar.styles';
 import type { AvatarState } from './avatar.types';
 
 export function useAvatarStyles_unstable(state: AvatarState) {
@@ -18,6 +18,11 @@ export function useAvatarStyles_unstable(state: AvatarState) {
   const initialsStyle: StyleProp<TextStyle> = [avatarStyles.initials, getAvatarInitialsStyle(state), { color: foregroundColor }];
   const iconSize = getAvatarIconSize(state.size);
 
+  state.activityRingProps = {
+    style: getAvatarActivityRingStyle(state),
+    testID: 'avatar-activity-ring',
+    visible: state.activityRing,
+  };
   attachSlotProps(state.root, { style: rootStyle });
   if (state.image) {
     attachSlotProps(state.image, {

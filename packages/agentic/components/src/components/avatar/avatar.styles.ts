@@ -5,7 +5,7 @@ import type { FlexTokens } from '@fluentui-react-native/design';
 
 import { getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
 import type { StateNames, StyleDefinition } from '@fluentui-react-native/design/styling';
-import type { AvatarContentMode, AvatarSize, AvatarState } from './avatar.types';
+import type { AvatarSize, AvatarState } from './avatar.types';
 
 export const avatarStyles = StyleSheet.create({
   root: {
@@ -28,65 +28,39 @@ export const avatarStyles = StyleSheet.create({
 
 const avatarSizeStates = ['16', '20', '24', '28', '32', '40', '56', '120'] as const;
 const avatarModeStates = ['image', 'icon', 'initials'] as const;
-const avatarRingStates = ['activityRing'] as const;
-const avatarRingStateLevels = [avatarRingStates] as const;
-
-const avatarRootStateLevels = [avatarSizeStates, avatarModeStates, avatarRingStates] as const;
+const avatarRootStateLevels = [avatarSizeStates, avatarModeStates] as const;
 type AvatarRootStateLevels = typeof avatarRootStateLevels;
 type AvatarRootState = StateNames<AvatarRootStateLevels>;
 
-const avatarInitialsStateLevels = [avatarSizeStates] as const;
-type AvatarInitialsStateLevels = typeof avatarInitialsStateLevels;
-type AvatarInitialsState = StateNames<AvatarInitialsStateLevels>;
+const avatarSizeStateLevels = [avatarSizeStates] as const;
+type AvatarSizeStateLevels = typeof avatarSizeStateLevels;
+type AvatarSizeState = StateNames<AvatarSizeStateLevels>;
 
 function createRingStyle({ color, strokeWidth }: FlexTokens, offset: 'thin' | 'thick', width: 'thin' | 'thick' | 'thicker'): ViewStyle {
+  const inset = -(strokeWidth[offset] + strokeWidth[width]);
   return {
-    outlineColor: color.strokeBrandLoud,
-    outlineOffset: strokeWidth[offset],
-    outlineStyle: 'solid',
-    outlineWidth: strokeWidth[width],
-  };
-}
-
-function createModeStyles(
-  ringStyle: ViewStyle,
-  tokens: FlexTokens,
-): Record<AvatarContentMode, StyleDefinition<ViewStyle, typeof avatarRingStateLevels>> {
-  return {
-    image: {
-      backgroundColor: tokens.color.backgroundNeutralTransparent,
-      padding: 0,
-      activityRing: ringStyle,
-    },
-    icon: {
-      activityRing: ringStyle,
-    },
-    initials: {
-      activityRing: ringStyle,
-    },
+    borderColor: color.strokeBrandLoud,
+    borderStyle: 'solid',
+    borderWidth: strokeWidth[width],
+    bottom: inset,
+    left: inset,
+    right: inset,
+    top: inset,
   };
 }
 
 function createSizeStyleDefinition(tokens: FlexTokens, size: AvatarSize): StyleDefinition<ViewStyle, AvatarRootStateLevels> {
   const { borderRadius, color, spacing } = tokens;
-  const ringStyle =
-    size === 120
-      ? createRingStyle(tokens, 'thick', 'thicker')
-      : size === 56
-        ? createRingStyle(tokens, 'thin', 'thicker')
-        : size === 16
-          ? createRingStyle(tokens, 'thin', 'thin')
-          : createRingStyle(tokens, 'thin', 'thick');
-  const modeStyles = createModeStyles(ringStyle, tokens);
 
   return {
     alignItems: 'center',
     backgroundColor: color.backgroundNeutralSoft,
     borderRadius: borderRadius.circular,
     height: size,
-    image: modeStyles.image,
-    icon: modeStyles.icon,
-    initials: modeStyles.initials,
+    image: {
+      backgroundColor: color.backgroundNeutralTransparent,
+      padding: 0,
+    },
     minHeight: size,
     minWidth: size,
     padding:
@@ -107,7 +81,6 @@ function createSizeStyleDefinition(tokens: FlexTokens, size: AvatarSize): StyleD
                     : spacing.layoutBase400,
     justifyContent: 'center',
     width: size,
-    // retain the ring style at every size, while letting the content mode supply the final branch.
   };
 }
 
@@ -133,15 +106,27 @@ const getThemedAvatarRootStyle = getThemedStateStyleFactory(
 );
 
 function getAvatarRootStateSource(state: AvatarState): AvatarRootState[] {
-  const source: AvatarRootState[] = [String(state.size) as AvatarRootState, state.contentMode];
-  if (state.activityRing) {
-    source.push('activityRing');
-  }
-  return source;
+  return [String(state.size) as AvatarRootState, state.contentMode];
 }
 
 export function getAvatarRootStyle(state: AvatarState): ViewStyle {
   return getThemedAvatarRootStyle(state, getAvatarRootStateSource(state));
+}
+
+const getThemedAvatarActivityRingStyle = getThemedStateStyleFactory(
+  'Avatar.activityRing',
+  (tokens: FlexTokens): StyleDefinition<ViewStyle, AvatarSizeStateLevels> => ({
+    ...createRingStyle(tokens, 'thin', 'thick'),
+    borderRadius: tokens.borderRadius.circular,
+    '16': createRingStyle(tokens, 'thin', 'thin'),
+    '56': createRingStyle(tokens, 'thin', 'thicker'),
+    '120': createRingStyle(tokens, 'thick', 'thicker'),
+  }),
+  avatarSizeStateLevels,
+);
+
+export function getAvatarActivityRingStyle(state: AvatarState): ViewStyle {
+  return getThemedAvatarActivityRingStyle(state, [String(state.size) as AvatarSizeState]);
 }
 
 function createInitialsTextStyle(size: number): TextStyle {
@@ -152,7 +137,7 @@ function createInitialsTextStyle(size: number): TextStyle {
 
 const getThemedAvatarInitialsStyle = getThemedStateStyleFactory(
   'Avatar.initials',
-  ({ fontFamily, fontSize, fontWeight }: FlexTokens): StyleDefinition<TextStyle, AvatarInitialsStateLevels> => {
+  ({ fontFamily, fontSize, fontWeight }: FlexTokens): StyleDefinition<TextStyle, AvatarSizeStateLevels> => {
     return {
       fontFamily: fontFamily.functional,
       fontWeight: fontWeight.functionalRegular,
@@ -169,11 +154,11 @@ const getThemedAvatarInitialsStyle = getThemedStateStyleFactory(
       '120': createInitialsTextStyle(fontSize.functionalTitleLarge),
     };
   },
-  avatarInitialsStateLevels,
+  avatarSizeStateLevels,
 );
 
-function getAvatarInitialsStateSource(state: AvatarState): AvatarInitialsState[] {
-  return [String(state.size) as AvatarInitialsState];
+function getAvatarInitialsStateSource(state: AvatarState): AvatarSizeState[] {
+  return [String(state.size) as AvatarSizeState];
 }
 
 export function getAvatarInitialsStyle(state: AvatarState): TextStyle {
