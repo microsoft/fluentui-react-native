@@ -17,6 +17,10 @@ because it owns native macOS code and CocoaPods integration.
   forwarded without theme tokens or appearance defaults.
 - `isCircularNavigation` maps to the native `NavigateWrap` end behavior; otherwise
   navigation stops at the ends.
+- With `tabKeyNavigation="None"`, Tab and Shift+Tab leave the zone. Backward
+  traversal considers preceding elements and focusable ancestors, not the zone's
+  descendants or later siblings, including when the zone is its parent's first
+  child.
 
 ## Platform behavior
 
@@ -27,7 +31,8 @@ because it owns native macOS code and CocoaPods integration.
   moves to item 5.
 - Windows includes a package-owned Fabric component view that coordinates
   directional, Home/End, Tab, and focus-restoration behavior through RNW
-  `ComponentView` focus APIs.
+  `ComponentView` focus APIs. Backward zone exit walks reverse preorder and tests
+  each visited node itself rather than searching an ancestor's entire subtree.
 - Win32 continues to use its platform-provided native FocusZone implementation.
   Windows/Win32 use linear movement by default and opt into geometric movement
   with `use2DNavigation`.
@@ -45,3 +50,7 @@ types.
 Interactive directional, circular, Tab, disabled, and default-focus scenarios
 live with the agentic primitive stories in
 `packages/agentic/components/src/primitives/focus-zone/focus-zone.stories.tsx`.
+The `FirstChildTabExit` native tests cover nested first-child containers with
+later siblings and a preceding focusable subtree on all desktop endpoints.
+They guard a Windows Fabric traversal defect; macOS uses its independent
+AppKit key-view loop and shares the same outside-zone navigation requirement.

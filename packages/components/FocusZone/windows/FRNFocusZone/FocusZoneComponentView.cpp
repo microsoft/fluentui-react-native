@@ -452,8 +452,10 @@ struct FocusZoneComponentView
       }
     } else {
       for (auto node = PreOrderPrevious(container); node; node = PreOrderPrevious(node)) {
-        auto candidate = winrtComp::FocusManager::FindLastFocusableElement(node);
-        if (candidate && candidate.TryFocus(winrtRN::FocusState::Keyboard)) {
+        // Reverse preorder already visits descendants. Only focus the node itself,
+        // since searching an ancestor's subtree can re-enter the zone or move forward.
+        auto candidate = winrtComp::FocusManager::FindFirstFocusableElement(node);
+        if (candidate && candidate.Tag() == node.Tag() && candidate.TryFocus(winrtRN::FocusState::Keyboard)) {
           return true;
         }
       }
