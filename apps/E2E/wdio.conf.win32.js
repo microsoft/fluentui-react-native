@@ -49,6 +49,7 @@ exports.config = {
       'appium',
       {
         command: 'appium',
+        args: { 'use-drivers': 'windows' },
         logPath: './reports/',
       },
     ],
