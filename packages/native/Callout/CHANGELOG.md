@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
+## 0.29.5
+
+### Patch Changes
+
+- 65245b4: Use native focus visuals on all platforms by default while retaining the custom
+  FocusVisual implementation behind a shared evaluation switch. Require React
+  Native Windows 0.81.35 or newer for the native focus visual crash fix.
+  Refresh the Windows Callout and FocusZone NuGet locks to the same runtime version.
+- Updated dependencies [65245b4]
+  - @fluentui-react-native/framework-base@0.8.0
+
 ## 0.29.4
 
 ### Patch Changes

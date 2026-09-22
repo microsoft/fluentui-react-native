@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
+## 0.7.13
+
+### Patch Changes
+
+- Updated dependencies [65245b4]
+- Updated dependencies [65245b4]
+  - @fluentui-react-native/framework-base@0.8.0
+  - @fluentui-react-native/design@0.5.0
+  - @fluentui-react-native/framework@0.17.7
+  - @fluentui-react-native/pressable@0.13.10
+
 ## 0.7.12
 
 ### Patch Changes
