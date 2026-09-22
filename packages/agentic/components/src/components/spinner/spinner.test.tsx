@@ -72,7 +72,9 @@ describe('Spinner', () => {
     expect(track.props.stroke).toEqual(normalizeColor(tokens.color.strokeNeutralSubtle));
     expect(track.props.strokeWidth).toBe(tokens.strokeWidth.thick);
     expect(indicator.props.stroke).toEqual(normalizeColor(tokens.color.strokeNeutralLoud));
-    expect(indicator.props.strokeDasharray).toEqual(['25', '75']);
+    const circumference = 2 * Math.PI * ((32 - Number(tokens.strokeWidth.thick)) / 2);
+    expect(indicator.props.strokeDasharray).toEqual([circumference / 4, (circumference * 3) / 4]);
+    expect(indicator.props).not.toHaveProperty('pathLength');
     expect(indicator.props.strokeWidth).toBe(tokens.strokeWidth.thick);
   });
 
@@ -97,6 +99,9 @@ describe('Spinner', () => {
     expect(getSvg(component).props.height).toBe(diameter);
     expect(track.props.strokeWidth).toBe(tokens.strokeWidth[strokeWidthToken]);
     expect(indicator.props.strokeWidth).toBe(tokens.strokeWidth[strokeWidthToken]);
+    const circumference = Math.PI * (diameter - Number(tokens.strokeWidth[strokeWidthToken]));
+    expect(indicator.props.strokeDasharray[0]).toBeCloseTo(circumference / 4);
+    expect(indicator.props.strokeDasharray[1]).toBeCloseTo((circumference * 3) / 4);
   });
 
   it('warns when no accessible name is supplied', async () => {
@@ -111,7 +116,7 @@ describe('Spinner', () => {
     warn.mockRestore();
   });
 
-  it('shares continuous rotation when reduce motion is disabled', async () => {
+  it('shares continuous rotation through the macOS Fabric driver when reduce motion is disabled', async () => {
     const loop = jest.spyOn(Animated, 'loop').mockReturnValue({ start: jest.fn(), stop: jest.fn() } as never);
     const timing = jest.spyOn(Animated, 'timing').mockReturnValue({ start: jest.fn(), stop: jest.fn() } as never);
     jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
@@ -128,7 +133,7 @@ describe('Spinner', () => {
         duration: 1500,
         easing: Easing.linear,
         toValue: 1,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     );
   });

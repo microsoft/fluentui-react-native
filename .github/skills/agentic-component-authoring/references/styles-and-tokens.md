@@ -140,6 +140,17 @@ The component owns the indicator's meaning, tokens, and visibility, independentl
 ring with a gap, each absolute edge is `-(gap + strokeWidth)` so the border preserves the requested gap without changing
 layout. Mount it with its border configured even when hidden; do not switch border width between zero and a nonzero value.
 
+## Native motion
+
+Use `useSharedAnimatedLoop` for phase-locked loading indicators. It treats `useNativeDriver` as a request and selects
+the JavaScript driver on macOS Fabric, where native-driven transforms currently remain static. Other renderers keep
+their requested driver. These continuous loops must use `isInteraction: false` so the JavaScript path does not starve
+interaction-deferred work. Preserve reduced-motion gating independently of driver selection.
+
+Verify animation with changing pixels on the actual native element, not merely an `Animated.loop().start()` assertion.
+Keep a visible static silhouette when motion is disabled, and do not rely on web-only SVG `pathLength` normalization;
+derive native dash lengths from the actual circumference.
+
 ## Native text and vertical alignment
 
 Treat the component frame, the native text line box, and the glyph's visible ink as different measurements. `alignItems`

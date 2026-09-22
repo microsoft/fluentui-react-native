@@ -63,11 +63,11 @@ export const Overview: Story = {
       <StoryGroup label="Vertical">
         <View style={styles.verticalRow}>
           <View style={styles.verticalCell}>
-            <Divider label="Side A" />
+            <Text>Side A</Text>
           </View>
-          <Divider label="Side A" vertical />
+          <Divider label="Section" vertical />
           <View style={styles.verticalCell}>
-            <Divider label="Side B" />
+            <Text>Side B</Text>
           </View>
         </View>
       </StoryGroup>
@@ -174,6 +174,7 @@ const styles = StyleSheet.create({
   },
   verticalCell: {
     alignItems: 'center',
+    justifyContent: 'center',
     width: 72,
   },
   verticalDemo: {
@@ -186,5 +187,6 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     flexDirection: 'row',
     gap: 12,
+    height: 160,
   },
 });

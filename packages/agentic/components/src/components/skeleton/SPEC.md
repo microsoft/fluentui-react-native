@@ -73,7 +73,10 @@ caller's `onLayout` first, and run the sweep only once the measured width and
 height are both greater than zero.
 
 **SKEL-004:** Bind the root fill and radius plus the highlight fill to theme
-tokens, clip the root, and keep the caller's `style` as the last layer.
+tokens, clip the root, and keep the caller's `style` as the last layer. Use the
+soft neutral fill for the static silhouette and the subtle neutral fill for
+the moving band, so the placeholder does not disappear on a subtle neutral
+surface when motion is unavailable.
 
 **SKEL-005:** Suppress the sweep and unmount the overlay while the operating
 system reduced-motion setting is on, with no substitute animation.
@@ -89,8 +92,9 @@ and has no tab stop by default, but the broad `ViewProps` surface permits a
 caller to set `focusable`. The root defaults to `pointerEvents="none"` so an
 overlay cannot intercept input, while preserving an explicit caller override.
 
-The sweep uses the native driver, so it continues on the platform's animation
-thread rather than the JavaScript thread. The reduced-motion source is the
+The shared sweep requests the native driver. On macOS Fabric, where native
+transform updates remain static, the shared loop uses the JavaScript driver;
+other renderers retain native animation. The reduced-motion source is the
 platform accessibility setting reported by React Native; when it turns on while
 a placeholder is mounted, the running loop is stopped and the clock is reset.
 Because the sweep depends on measurement, a placeholder that is never laid out
@@ -104,6 +108,7 @@ height, which is the caller's responsibility to avoid.
 | ID                                | Disposition    | React Native contract                                                                                                                                                                                                                  | Follow-up                                                                          |
 | --------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `skeleton-highlight-band-fill`    | Accepted       | FURN paints the sweep as a translating opaque band view held at a fixed opacity. Flex describes a gradient highlight that fades in and out across the bar.                                                                             | Revisit only if this package takes a gradient dependency.                          |
+| `skeleton-static-silhouette`      | Accepted       | The soft neutral token supplies the base and the subtle neutral token supplies the band. This reverses the previous local assignment, whose base was indistinguishable from the subtle Storybook surface.                              | Preserve visible static placeholders when reduced motion suppresses the sweep.     |
 | `skeleton-instance-timeline`      | Resolved       | Active placeholders share one package-level sweep timeline, so instances mounted at different times render at the same phase.                                                                                                          | Implemented through the shared animation hook and covered by multi-instance tests. |
 | `skeleton-container-busy-state`   | Not applicable | The root is removed from the accessibility tree and exposes no busy state. Flex assigns the busy semantic to the container that owns the loading region, which in FURN is caller-owned composition rather than part of this component. | None.                                                                              |
 | `skeleton-pointer-events`         | Resolved       | The root defaults to `pointerEvents="none"` so it cannot intercept covered controls, while an explicit caller value is preserved.                                                                                                      | Implemented in `useSkeleton.ts` and covered by root-prop tests.                    |

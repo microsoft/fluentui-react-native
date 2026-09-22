@@ -40,8 +40,7 @@ bindings:
     strokeWidth: resolved size stroke width token
     strokeLinecap: round
     fill: none
-    pathLength: 100
-    strokeDasharray: 25 visible units and 75 gap units of the normalized path length
+    strokeDasharray: one quarter of the circumference visible and three quarters gap
 
 geometry:
   implementation: getSpinnerMetrics in spinner.styles.ts
@@ -76,7 +75,7 @@ size:
 
 motion:
   implementation: useSpinner.ts
-  driver: Animated.loop over Animated.timing with useNativeDriver true
+  driver: shared Animated.loop requests native animation; macOS Fabric uses the JavaScript driver
   duration: 1500
   easing: linear
 
@@ -87,7 +86,7 @@ tokenGaps:
     reason: Diameters are intrinsic to the component and have no coverage in the spacing or sizing scales.
   - id: spinner-arc-fraction
     binding: indicator.strokeDasharray
-    value: one quarter of the normalized path length
+    value: one quarter of the circumference
     reason: The visible arc fraction is a design constant expressed directly in the render code.
   - id: spinner-rotation-duration
     binding: motion.duration

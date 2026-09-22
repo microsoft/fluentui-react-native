@@ -1,11 +1,14 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import type { LayoutRectangle } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { LayoutStableText } from './layout-stable-text';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryItemProps = {
   children: ReactNode;
@@ -97,6 +100,39 @@ export const Default: Story = {
   ),
 };
 
+function AlignmentMeasurement() {
+  const [reserve, setReserve] = useState<LayoutRectangle>();
+  const [visible, setVisible] = useState<LayoutRectangle>();
+  return (
+    <View>
+      <View
+        accessible
+        role="group"
+        style={styles.stableText}
+        testID="layout-stable-text-large-reserve"
+        onLayout={(event) => setReserve(event.nativeEvent.layout)}
+      >
+        <LayoutStableText
+          reserve={<Text style={styles.large}>Stable label</Text>}
+          visible={
+            <Text
+              accessible
+              style={styles.small}
+              testID="layout-stable-text-small-visible"
+              onLayout={(event) => setVisible(event.nativeEvent.layout)}
+            >
+              Stable label
+            </Text>
+          }
+        />
+      </View>
+      <StoryStatus testID="layout-stable-text-native-metrics">
+        {reserve && visible ? JSON.stringify({ reserve, visible }) : 'Waiting for native layout'}
+      </StoryStatus>
+    </View>
+  );
+}
+
 export const Overview: Story = {
   render: () => (
     <View style={styles.story}>
@@ -107,16 +143,7 @@ export const Overview: Story = {
         />
       </StoryItem>
       <StoryItem label="Reserve large, show small">
-        <View accessible role="group" testID="layout-stable-text-large-reserve">
-          <LayoutStableText
-            reserve={<Text style={styles.large}>Stable label</Text>}
-            visible={
-              <Text accessible style={styles.small} testID="layout-stable-text-small-visible">
-                Stable label
-              </Text>
-            }
-          />
-        </View>
+        <AlignmentMeasurement />
       </StoryItem>
       <StoryItem label="Matching metrics">
         <LayoutStableText
@@ -134,8 +161,27 @@ export const Overview: Story = {
     },
   },
   wdio: {
-    'centers the intrinsic smaller line inside its larger reserve': async ({ browser, expect }) => {
+    'centers the intrinsic smaller line inside its larger reserve': async ({ browser, expect, platform }) => {
       const assert: typeof import('node:assert') = (await import('node:assert')).default;
+      if (platform === 'macos') {
+        // Fabric paragraphs do not expose their testID to AX; use their native onLayout measurements.
+        const status = await browser.$('~layout-stable-text-native-metrics');
+        await browser.waitUntil(async () => (await status.getText()).startsWith('{'));
+        const metrics: { reserve: LayoutRectangle; visible: LayoutRectangle } = JSON.parse(await status.getText());
+        assert(
+          metrics.visible.height > 0 && metrics.visible.height < metrics.reserve.height,
+          'Visible text must retain its intrinsic height.',
+        );
+        assert(
+          Math.abs(metrics.visible.y + metrics.visible.height / 2 - metrics.reserve.height / 2) <= 1,
+          'Visible text must be vertically centered within one layout pixel.',
+        );
+        assert(
+          Math.abs(metrics.visible.x) <= 1 && metrics.visible.width <= metrics.reserve.width + 1,
+          'Visible text must retain leading alignment and fit the reserved width.',
+        );
+        return;
+      }
       const reserve = await browser.$('~layout-stable-text-large-reserve');
       const visible = await browser.$('~layout-stable-text-small-visible');
       await expect(reserve).toExist();

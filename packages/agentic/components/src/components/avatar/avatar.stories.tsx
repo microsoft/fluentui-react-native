@@ -6,6 +6,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Avatar } from './avatar';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import type { AvatarProps, AvatarSize } from './avatar.types';
 
 type StoryGroupProps = {
@@ -97,7 +98,7 @@ export const ActivityRing: Story = {
   render: (args: AvatarProps) => (
     <View style={styles.story}>
       <Avatar {...args} testID="agentic-storybook-avatar-activity-ring" />
-      <Text testID="agentic-storybook-avatar-ring-state">{`Activity ring ${args.activityRing ? 'on' : 'off'}, size ${args.size}`}</Text>
+      <StoryStatus testID="agentic-storybook-avatar-ring-state">{`Activity ring ${args.activityRing ? 'on' : 'off'}, size ${args.size}`}</StoryStatus>
     </View>
   ),
   parameters: {

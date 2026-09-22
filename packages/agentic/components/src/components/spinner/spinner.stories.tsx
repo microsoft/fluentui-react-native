@@ -3,7 +3,10 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { useReducedMotion } from '@fluentui-react-native/framework-base';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import { Spinner } from './spinner';
 import type { SpinnerSize } from './spinner.types';
 
@@ -64,9 +67,58 @@ const meta: Meta<typeof Spinner> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Spinner>;
+type Story = WdioStory<StoryObj<typeof Spinner>>;
 
 export const Default: Story = {};
+
+function MotionExample() {
+  const reduceMotion = useReducedMotion();
+  return (
+    <View style={styles.story}>
+      <Spinner accessibilityLabel="Loading animation example" size="huge" testID="spinner-motion" />
+      <StoryStatus testID="spinner-motion-preference">
+        {reduceMotion === undefined ? 'Motion preference pending' : reduceMotion ? 'Reduced motion enabled' : 'Motion enabled'}
+      </StoryStatus>
+    </View>
+  );
+}
+
+export const Motion: Story = {
+  render: () => <MotionExample />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The arc rotates unless the native reduced-motion preference is enabled. The status reports that preference without changing it.',
+      },
+    },
+  },
+  wdio: {
+    'renders changing native pixels unless reduced motion is enabled': async ({ browser, expect, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+      if (!features.elementScreenshot) {
+        skip('This test requires native element screenshots.');
+        return;
+      }
+      const preference = await browser.$('~spinner-motion-preference');
+      await browser.waitUntil(async () => ['Motion enabled', 'Reduced motion enabled'].includes(await preference.getText()));
+      const spinner = await browser.$('~spinner-motion');
+      await expect(spinner).toExist();
+      expect(await browser.isElementDisplayed(await spinner.elementId)).toBe(true);
+      const frames = new Set<string>();
+      for (let index = 0; index < 5; index++) {
+        frames.add(await browser.takeElementScreenshot(await spinner.elementId));
+        await browser.pause(117);
+      }
+      if ((await preference.getText()) === 'Motion enabled') {
+        expect(frames.size).toBeGreaterThan(1);
+      } else {
+        expect(frames.size).toBe(1);
+      }
+    },
+  },
+};
 
 export const Overview: Story = {
   render: () => (

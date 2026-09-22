@@ -5,6 +5,7 @@ import type { ViewStyle } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
 
@@ -81,6 +82,8 @@ describe('Skeleton', () => {
     });
 
     expect(component.queryByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeNull();
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft);
+    expect(getRootStyle(component).backgroundColor).not.toBe(defaultFlexTokens.color.backgroundNeutralSubtle);
   });
 
   it('shares one animation timeline across mounted placeholders', async () => {

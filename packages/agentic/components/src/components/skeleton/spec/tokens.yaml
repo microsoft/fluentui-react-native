@@ -13,7 +13,7 @@ bindings:
       overflow: hidden
       position: relative
     theme:
-      backgroundColor: color.backgroundNeutralSubtle
+      backgroundColor: color.backgroundNeutralSoft
       borderRadius: borderRadius.base100
     userStyle: applied last by useSkeletonStyles_unstable
 
@@ -34,12 +34,12 @@ bindings:
       height: 100%
       opacity: 0.64
     theme:
-      backgroundColor: color.backgroundNeutralSoft
+      backgroundColor: color.backgroundNeutralSubtle
       borderRadius: borderRadius.base100
 
 motion:
   implementation: useSkeleton.ts
-  driver: Animated.loop over Animated.timing with useNativeDriver true
+  driver: shared Animated.loop requests native animation; macOS Fabric uses the JavaScript driver
   duration: 1700
   easing: linear
   gate: measured width and height are both greater than zero and reduced motion is off

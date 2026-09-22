@@ -30,11 +30,11 @@ export const skeletonStyles = StyleSheet.create({
 export const getSkeletonThemeStyles = themedStyleSheetFactory<SkeletonThemeStyles>('Skeleton', ({ tokens }: ThemeState) =>
   StyleSheet.create({
     root: {
-      backgroundColor: tokens.color.backgroundNeutralSubtle,
+      backgroundColor: tokens.color.backgroundNeutralSoft,
       borderRadius: tokens.borderRadius.base100,
     },
     shimmerBand: {
-      backgroundColor: tokens.color.backgroundNeutralSoft,
+      backgroundColor: tokens.color.backgroundNeutralSubtle,
       borderRadius: tokens.borderRadius.base100,
     },
   }),

@@ -3,7 +3,7 @@
   "component": "skeleton",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-08-28",
+  "reviewedAt": "2026-09-21",
   "sources": [
     {
       "id": "flex-component",
@@ -70,6 +70,10 @@
     }
   ],
   "divergences": [
+    {
+      "id": "skeleton-static-silhouette",
+      "status": "accepted"
+    },
     {
       "id": "skeleton-highlight-band-fill",
       "status": "accepted"

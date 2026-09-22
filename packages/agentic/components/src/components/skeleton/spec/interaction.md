@@ -28,9 +28,11 @@ the trailing edge, so the band is fully off the placeholder at both ends of a
 cycle. The loop repeats without pausing for as long as the placeholder is
 mounted.
 
-The animation runs through `Animated` with the native driver, so it is not
-affected by JavaScript thread work. Active placeholders subscribe to one shared
-sweep channel, so instances mounted at different times read the same phase.
+The animation runs through the shared `Animated` loop. It uses the native
+driver except on macOS Fabric, whose native transform updates remain static;
+that renderer uses the JavaScript driver. Active placeholders subscribe to one
+shared sweep channel, so instances mounted at different times read the same
+phase.
 
 ## Motion and lifecycle
 

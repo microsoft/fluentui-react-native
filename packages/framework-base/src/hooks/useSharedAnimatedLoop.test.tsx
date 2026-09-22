@@ -1,12 +1,45 @@
 import { act } from 'react';
-import { Animated, Easing } from 'react-native';
+import { Animated, Easing, Platform } from 'react-native';
 import * as renderer from 'react-test-renderer';
 
 import { useSharedAnimatedLoop } from './useSharedAnimatedLoop';
 
 describe('useSharedAnimatedLoop', () => {
+  const fabricDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'nativeFabricUIManager');
+
   afterEach(() => {
     jest.restoreAllMocks();
+    if (fabricDescriptor) {
+      Object.defineProperty(globalThis, 'nativeFabricUIManager', fabricDescriptor);
+    } else {
+      Reflect.deleteProperty(globalThis, 'nativeFabricUIManager');
+    }
+  });
+
+  it.each([
+    ['macos', true, true, false],
+    ['macos', false, true, true],
+    ['ios', true, true, true],
+    ['windows', true, true, true],
+    ['macos', true, false, false],
+  ] as const)('resolves the driver on %s with Fabric=%s and native=%s', (platform, fabric, requested, expected) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    Object.defineProperty(globalThis, 'nativeFabricUIManager', { configurable: true, value: fabric ? {} : undefined });
+    const timing = jest.spyOn(Animated, 'timing').mockReturnValue({ start: jest.fn(), stop: jest.fn() } as never);
+    jest.spyOn(Animated, 'loop').mockReturnValue({ start: jest.fn(), stop: jest.fn() } as never);
+    const Harness = () => {
+      useSharedAnimatedLoop({ channel: 'renderer-driver', duration: 1500, enabled: true, useNativeDriver: requested });
+      return null;
+    };
+    let tree!: renderer.ReactTestRenderer;
+    act(() => {
+      tree = renderer.create(<Harness />);
+    });
+    expect(timing).toHaveBeenCalledWith(
+      expect.any(Animated.Value),
+      expect.objectContaining({ isInteraction: false, useNativeDriver: expected }),
+    );
+    act(() => tree.unmount());
   });
 
   it('shares one running value for subscribers on the same channel', () => {
