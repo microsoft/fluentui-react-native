@@ -19,6 +19,7 @@ private final class SelfTestRunner {
     testFraming()
     testJSON()
     testInputLedger()
+    testInputModifiers()
     testInputLock()
     testCaptureScale()
     testSnapshotShape()
@@ -97,6 +98,53 @@ private final class SelfTestRunner {
     }
   }
 
+  private func testInputModifiers() {
+    check(modifierFlagsAfterKey(.keyCode(56), down: true, held: []) == .maskShift, "Shift down carries its modifier flag")
+    check(
+      modifierFlagsAfterKey(.keyCode(48), down: true, held: [.keyCode(56)]) == .maskShift,
+      "Tab carries the already-posted Shift flag without relying on OS dispatch"
+    )
+    check(
+      modifierFlagsAfterKey(.keyCode(48), down: false, held: [.keyCode(56), .keyCode(48)]) == .maskShift,
+      "Tab release preserves held Shift"
+    )
+    check(
+      modifierFlagsAfterKey(.keyCode(56), down: false, held: [.keyCode(56)]).isEmpty,
+      "Shift release clears its flag"
+    )
+    check(
+      modifierFlagsAfterKey(.keyCode(56), down: false, held: [.keyCode(56), .keyCode(60)]) == .maskShift,
+      "releasing left Shift preserves held right Shift"
+    )
+    check(
+      modifierFlags(for: [.keyCode(62), .keyCode(61), .keyCode(54)]) == [.maskControl, .maskAlternate, .maskCommand],
+      "right-hand modifier keys combine their flags"
+    )
+    check(
+      modifierFlags(for: [.unicode("x"), .keyCode(48)]).isEmpty,
+      "ordinary keys do not add modifier flags"
+    )
+    var held: [PressedKey] = []
+    let shift = PressedKey(value: "\u{E008}", stroke: .keyCode(56))
+    trackKeyDown(shift, held: &held)
+    trackKeyDown(shift, held: &held)
+    check(held.count == 1, "repeated Shift keydown does not duplicate a held physical key")
+    trackKeyUp(shift.stroke, held: &held)
+    check(
+      modifierFlagsAfterKey(.keyCode(48), down: true, held: held.map(\.stroke)).isEmpty,
+      "Tab is unmodified after repeated Shift down and one release"
+    )
+    check(modifierFlags(for: held.map(\.stroke)).isEmpty, "pointer events do not retain a released repeated modifier")
+    trackKeyDown(shift, held: &held)
+    trackKeyDown(PressedKey(value: "left-shift-alias", stroke: .keyCode(56)), held: &held)
+    trackKeyDown(PressedKey(value: "right-shift", stroke: .keyCode(60)), held: &held)
+    check(held.count == 2, "aliases share a physical key while left and right Shift remain independent")
+    trackKeyUp(.keyCode(56), held: &held)
+    check(modifierFlags(for: held.map(\.stroke)) == .maskShift, "releasing an aliased left Shift preserves right Shift")
+    trackKeyUp(.keyCode(60), held: &held)
+    check(held.isEmpty, "both physical Shift keys can be released independently")
+  }
+
   private func testInputLock() {
     let name = "furn-desktop-driver-self-test-\(getpid())-\(UUID().uuidString)"
     let lock = PhysicalInputLock(baseName: name)
@@ -108,6 +156,7 @@ private final class SelfTestRunner {
     } catch {
       check(false, "idle physical input lock is available")
     }
+
     do {
       try lock.installDeadOwnerForSelfTest()
       _ = try lock.withLock(token: token, timeoutMilliseconds: 200, policy: .fail) { 0 }

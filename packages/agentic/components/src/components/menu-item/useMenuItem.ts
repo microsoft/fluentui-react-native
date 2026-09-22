@@ -1,9 +1,10 @@
 import { Pressable, View } from 'react-native';
 
-import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { semanticIconSources } from '../../common/iconSources';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import { Icon } from '../../primitives/icon/icon';
 import type { MenuItemProps, MenuItemState } from './menu-item.types';
@@ -53,7 +54,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     console.warn('MenuItem: checkmark and multiselect are mutually exclusive.');
   }
 
-  const [pressableProps, pressableState] = usePressableState({
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
     accessible: rest.accessible ?? true,
     accessibilityHint: accessibilityHint ?? (hasChevron ? 'Has submenu' : undefined),
@@ -69,7 +70,12 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     onPress: isInteractive ? rest.onPress : undefined,
   });
 
-  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({
+    focused: pressableState.focused && !disabled && isInteractive,
+    useSystemFocusRing: isInteractive ? undefined : false,
+  });
+
+  const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const icon = useOptionalSlot(Icon, iconProp, { defaultProps: defaultRegularIcon, renderByDefault: true });
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp, { defaultProps: defaultSelectedIcon, renderByDefault: selected });
   const avatar = useOptionalSlot(View, avatarProp);
@@ -78,8 +84,10 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   const multiselectCheckbox = useOptionalSlot(CheckboxIndicator, multiselectCheckboxProp, { renderByDefault: hasMultiselect });
 
   const styleState: MenuItemState = {
+    FocusRing: isInteractive ? FocusRing : undefined,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     contentText,
     disabled,
     hasCheckmark,

@@ -5,6 +5,12 @@ view. It targets the repository's React Native Windows 0.81 line. Verify APIs
 against the installed `react-native-windows` package before adopting guidance
 from a newer RNW branch.
 
+For behavior, native target lifetime, and modern React refs, read
+[common focus authoring](focus.md) and [Windows/Win32 focus authoring](focus-windows.md).
+Shipped V1 Win32 behavior is also the model for Fabric, but Office Win32 Paper
+is not the UWP XAML Paper implementation described in the compatibility table
+below. Do not transfer its native registration or view-manager assumptions.
+
 ## Decide whether native code is required
 
 Prefer a JavaScript component, slots, and React Native primitives when they can

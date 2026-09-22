@@ -12,3 +12,9 @@ single-choice visual or `multiselect` for its checkbox-like visual, but do not
 use both. Select `under` secondary content when the description needs a second
 line; use `right` for compact metadata. A chevron is visual only—the owner
 must perform any nested-navigation action.
+
+## Scene root
+
+Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.
+A nested theme boundary may override appearance without creating a separate
+input-modality tracker. Component test scenes use the shared themed renderer.

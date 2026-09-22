@@ -27,7 +27,8 @@
     "build": "tsc -b",
     "clean": "fluentui-scripts clean",
     "format": "fluentui-scripts format",
-    "lint": "fluentui-scripts lint"
+    "lint": "fluentui-scripts lint",
+    "test": "fluentui-scripts jest"
   },
   "dependencies": {
     "@fluentui-react-native/callout": "workspace:*",
@@ -46,12 +47,17 @@
     "@babel/core": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-android": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
     "@react-native/babel-preset": "^0.81.0",
+    "@testing-library/react-native": "catalog:",
     "@types/react": "~19.1.4",
     "react": "19.1.4",
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",
-    "react-native-windows": "^0.81.0"
+    "react-native-windows": "^0.81.0",
+    "test-renderer": "catalog:"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.81.0",
@@ -76,6 +82,7 @@
     }
   },
   "furn": {
+    "jestPlatform": "macos",
     "knip": {
       "ignoreDependencies": [
         "@fluentui-react-native/callout"

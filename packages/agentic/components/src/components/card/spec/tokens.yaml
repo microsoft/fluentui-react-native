@@ -49,12 +49,12 @@ bindings:
     radius:
       small: borderRadius.base600
       large: borderRadius.base700
-  focusVisual:
+  FocusRing:
     innerColor: color.strokeFocusInner
     innerWidth: strokeWidth.thin
     outerColor: color.strokeFocusOuter
     outerWidth: strokeWidth.thick
-    visibleWhen: focused and not disabled
+    visibleWhen: custom path and focused and not disabled
 
 tokenGaps:
   - property: responsive direction threshold

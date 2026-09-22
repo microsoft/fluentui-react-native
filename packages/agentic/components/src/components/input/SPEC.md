@@ -100,9 +100,11 @@ that intrinsic editor with the icon frames.
 
 The contents row is a non-accessible, non-focusable Pressable that forwards a
 press in the external spacing to the editor. This preserves the field's pointer
-target without stretching its text. Disabled fields do not forward activation;
-read-only fields remain focusable. The internal editor ref is composed with any
-caller slot ref through the slot render path.
+target without stretching its text. Activation requests pointer focus through
+the shared focus target, respecting the resolved `focusable` value. Disabled
+fields do not forward activation; read-only fields remain focusable by default.
+The internal editor ref is composed with any caller slot ref through the slot
+render path.
 
 Hover and press state are tracked from events on the text input rather than the
 surrounding container, so pointer feedback follows the text area. Disabling the

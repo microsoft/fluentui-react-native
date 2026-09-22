@@ -3,7 +3,7 @@
   "component": "switch",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-08-28",
+  "reviewedAt": "2026-09-15",
   "sources": [
     {
       "id": "flex-component",
@@ -71,6 +71,10 @@
   ],
   "divergences": [
     {
+      "id": "native-system-focus-visuals",
+      "status": "accepted"
+    },
+    {
       "id": "switch-label-association-ids",
       "status": "resolved"
     },
@@ -84,7 +88,7 @@
     },
     {
       "id": "switch-keyboard-activation-path",
-      "status": "deferred"
+      "status": "resolved"
     }
   ],
   "requirements": [
@@ -106,7 +110,7 @@
     },
     {
       "id": "SWCH-005",
-      "evidence": ["useSwitchStyles.ts", "switch.test.tsx"]
+      "evidence": ["useSwitch.ts", "useSwitchStyles.ts", "switch.test.tsx"]
     },
     {
       "id": "SWCH-006",

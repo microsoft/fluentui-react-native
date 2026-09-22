@@ -22,10 +22,15 @@ because it owns native macOS code and CocoaPods integration.
 
 - macOS includes both the existing Paper view manager and a package-owned Fabric
   component view. Both reuse the same `RCTFocusZone` navigation implementation.
+  Directional movement is geometric; `use2DNavigation` does not switch AppKit to
+  the Windows linear mode. For example, Down from item 2 in a three-column grid
+  moves to item 5.
 - Windows includes a package-owned Fabric component view that coordinates
   directional, Home/End, Tab, and focus-restoration behavior through RNW
   `ComponentView` focus APIs.
 - Win32 continues to use its platform-provided native FocusZone implementation.
+  Windows/Win32 use linear movement by default and opt into geometric movement
+  with `use2DNavigation`.
 - Unsupported behavior remains platform-defined rather than being simulated in
   JavaScript.
 

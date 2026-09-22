@@ -1,12 +1,10 @@
-import type * as React from 'react';
-import { StyleSheet, View as NativeView } from 'react-native';
 import type { View } from '@storybook/react-native';
 
 import { DesktopDriverBridge } from './DesktopDriverBridge';
-import { DesktopStorybookConfigProvider, useDesktopStorybookTestID } from './DesktopStorybookConfig';
+import { DesktopStorybookConfigProvider } from './DesktopStorybookConfig';
 import type { DesktopStorybookRuntimeInstance } from './DesktopStorybookConfig';
 import { StorybookThemeHost } from './StorybookTheme';
-import { StorybookUIComponent } from './StorybookUI';
+import { ThemedStorybookUI } from './ThemedStorybookUI';
 
 export type DesktopStorybookOptions = {
   enableWebsockets?: boolean;
@@ -35,7 +33,7 @@ export function createDesktopStorybookApp(
     enableWebsockets,
     host,
     port: port ?? runtimeInstance?.storybookPort ?? 7007,
-    CustomUIComponent: StorybookUIComponent,
+    CustomUIComponent: ThemedStorybookUI,
     storage,
   });
 
@@ -43,30 +41,13 @@ export function createDesktopStorybookApp(
     const resolvedTestIDPrefix = runtimeInstance?.testIDPrefix ?? testIDPrefix;
     return (
       <DesktopStorybookConfigProvider runtimeInstance={runtimeInstance} testIDPrefix={resolvedTestIDPrefix}>
-        <DesktopStorybookAppRoot>
+        <StorybookThemeHost>
           <DesktopDriverBridge />
-          <StorybookThemeHost>
-            <StorybookUI />
-          </StorybookThemeHost>
-        </DesktopStorybookAppRoot>
+          <StorybookUI />
+        </StorybookThemeHost>
       </DesktopStorybookConfigProvider>
     );
   }
 
   return DesktopStorybookApp;
 }
-
-function DesktopStorybookAppRoot({ children }: React.PropsWithChildren) {
-  const testID = useDesktopStorybookTestID('app-root');
-  return (
-    <NativeView style={styles.root} testID={testID}>
-      {children}
-    </NativeView>
-  );
-}
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-});

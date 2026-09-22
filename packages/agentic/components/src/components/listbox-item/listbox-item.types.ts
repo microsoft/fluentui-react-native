@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, Text as NativeText, View, ViewStyle } from 'react-native';
 import type { StyleProp } from 'react-native';
 
@@ -14,7 +15,7 @@ import type { ThemeState } from '@fluentui-react-native/design';
 
 import type { Icon } from '../../primitives/icon/icon';
 import type { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
-import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
+import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
 import type { Text } from '../text/text';
 
@@ -57,10 +58,10 @@ export type ListboxItemRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressabl
 
 export type ListboxItemProps = ListboxItemStateProps & ComponentProps<ListboxItemSlots, ListboxItemRootProps>;
 
-export type ListboxItemState = ComponentState<ListboxItemStateSlots> &
+export type ListboxItemState = ComponentState<ListboxItemStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<ListboxItemStateProps> &
   ThemeState &
   PressableState & {
-    focusVisualProps?: FocusVisualProps;
     userStyle?: StyleProp<ViewStyle>;
   };

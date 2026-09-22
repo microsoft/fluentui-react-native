@@ -1,7 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { StyleSheet, View } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 
 import { directComponent, isDirectComponent, useOptionalSlot } from '@fluentui-react-native/framework-base';
 import type { SlotProp } from '@fluentui-react-native/framework-base';

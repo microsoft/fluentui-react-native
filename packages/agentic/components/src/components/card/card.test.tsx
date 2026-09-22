@@ -3,7 +3,8 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -51,6 +52,16 @@ describe('Card', () => {
 
     expect(onPress).toHaveBeenCalledTimes(1);
     expect(component.getByRole('button').props.accessibilityState.selected).toBe(false);
+  });
+
+  it('preserves an explicitly nonfocusable overlay without disabling pointer activation', async () => {
+    const onPress = jest.fn();
+    const component = await renderCard({ accessibilityLabel: 'Report', focusable: false, onPress });
+    const overlay = component.getByRole('button');
+
+    expect(overlay.props.focusable).toBe(false);
+    await fireEvent.press(overlay);
+    expect(onPress).toHaveBeenCalledTimes(1);
   });
 
   it('renders the default surface and content', async () => {
@@ -114,17 +125,8 @@ describe('Card', () => {
     });
 
     await fireEvent(button, 'focus', {});
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: colors.strokeFocusOuter,
-      borderWidth: 2,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: colors.strokeFocusInner,
-      borderWidth: 1,
-    });
+    expect(button.props.enableFocusRing).toBe(true);
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it('keeps nested footer buttons independent from the card surface', async () => {

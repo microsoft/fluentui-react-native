@@ -37,14 +37,12 @@ export const ThemeProvider: React.FunctionComponent<ThemeProviderProps> = (props
   const subscribeAppearance = React.useCallback((listener: () => void) => appearanceSource.subscribe(listener), [appearanceSource]);
   const getAppearanceSnapshot = React.useCallback(() => appearanceSource.getSnapshot(), [appearanceSource]);
   const appearanceSnapshot = React.useSyncExternalStore(subscribeAppearance, getAppearanceSnapshot, getAppearanceSnapshot);
-  const appearance = resolveThemeAppearance({ ...source.appearanceOptions, ...appearanceOverride }, appearanceSnapshot, {
-    ...source.fallbackAppearance,
-    ...fallbackOverride,
-  });
+  const fallbackAppearance = resolveThemeAppearance(undefined, {}, { ...source.fallbackAppearance, ...fallbackOverride }).resolved;
+  const appearance = resolveThemeAppearance({ ...source.appearanceOptions, ...appearanceOverride }, appearanceSnapshot, fallbackAppearance);
   const publishedLegacyTheme = source.kind === 'legacy' ? source.resolveTheme(appearance.resolved) : undefined;
   const sourceContext = React.useMemo(
-    () => ({ source, sourceRevision, appearance, publishedLegacyTheme }),
-    [appearance, publishedLegacyTheme, source, sourceRevision],
+    () => ({ source, sourceRevision, appearance, appearanceSource, fallbackAppearance, publishedLegacyTheme }),
+    [appearance, appearanceSource, fallbackAppearance, publishedLegacyTheme, source, sourceRevision],
   );
 
   return (

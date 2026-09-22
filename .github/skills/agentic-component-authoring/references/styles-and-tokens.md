@@ -119,28 +119,26 @@ Preserve consumer slot behavior unless the component owns it. Button no longer f
 toggle container use `flexShrink` so constrained labels can wrap. A consumer can still request truncation through the
 content slot.
 
-## Keep focus visuals mounted
+## Share focus behavior and styling
 
-Agentic focusable components render `FocusVisual` inside the interactive slot. Configure its outer
-ring and optional inner ring from the component's semantic focus tokens and resolved radius, but keep both configured
-Views mounted at rest. `FocusVisual` changes only opacity when focus changes and owns accessibility and hit testing.
+Follow [common focus authoring](focus.md) and its Windows/Win32 or macOS detail.
+State hooks use `useFocusVisuals` to create a private optional `FocusRing` and determine the native
+`enableFocusRing` setting. The custom slot is absent on the native path; when present, its configured Views
+remain mounted across visibility changes.
 
-Do not apply React Native `outline*` props conditionally and do not enable the RNW native focus ring. RNW 0.81 Fabric
-creates both through a late `BorderPrimitive`; on a background-filled target its owning-root bookkeeping can insert at
-index 1 in an empty visual and fail-fast. A style helper alone is insufficient because the invariant is native View
-lifetime.
+Keep `ThemeState` in the styling phase. Call `applyFocusRingStyles(state.FocusRing, state, resolvedRadius)`
+to bind shared focus colors and widths while retaining component-specific geometry. The helper uses an
+immutable theme stylesheet; props, focus state, and radius remain outside that cache.
 
-The same failure applies to non-focus outlines, including an initially active Avatar activity ring. Reuse `FocusVisual`
-as a persistent decorative border, with the component owning its meaning, tokens, and visibility. For an outward ring
-with a gap, each absolute edge is `-(gap + strokeWidth)` so the border preserves the requested gap without changing
+Native rings default to Windows/macOS; Win32 uses the root-modality-aware custom ring. The Windows native
+path requires RNW 0.81.35 or newer. Do not introduce `outline*` focus styles, local modality trackers, or
+functional border changes to implement a focus ring.
+
+For non-focus indicators such as Avatar's activity ring, reuse `FocusVisual` as a persistent decorative border rather
+than native outline properties. This preserves stable border lifetime on renderers affected by late border creation.
+The component owns the indicator's meaning, tokens, and visibility, independently of the focus policy. For an outward
+ring with a gap, each absolute edge is `-(gap + strokeWidth)` so the border preserves the requested gap without changing
 layout. Mount it with its border configured even when hidden; do not switch border width between zero and a nonzero value.
-
-Keep the ring policy local to the higher-order component:
-
-- choose single versus dual rings from the component specification
-- resolve colors, widths, radius, and positioning from its tokens and variants
-- place the visual inside the actual focus target
-- keep functional component borders separate from focus feedback
 
 ## Native text and vertical alignment
 
@@ -164,7 +162,8 @@ is not its measured ascent plus descent. Platform font fallback can make the dif
   the editor with Yoga margins or a containing View; keep the control's token-derived minimum height separate.
   Input demonstrates this without adding another wrapper or changing the caller's final style precedence.
   Preserve the pointer target when moving spacing: Input's inaccessible, non-focusable contents row forwards activation
-  to the editor through a ref composed by the slot render path. Test disabled behavior and caller ref forwarding too.
+  to the editor through its shared focus target, whose ref is composed by the slot render path. Test disabled and
+  non-focusable behavior and caller ref forwarding too.
 - Distinguish centered graphics from aligned text baselines. `CompoundItemLayout` centers arbitrary regions by default.
   A text-only row with different label/shortcut font sizes can use `alignItems: 'baseline'` on the root and inline
   content row. All participating regions must supply meaningful text baselines; do not impose that policy on images

@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
@@ -9,7 +10,7 @@ import type {
   PropsWithRefOf,
   Slot,
 } from '@fluentui-react-native/framework-base';
-import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
+import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 
 export type RadioSlots = {
   /**
@@ -48,11 +49,11 @@ export type RadioExposedPressableProps = OwnedRootProps<PropsWithRefOf<typeof Pr
 
 export type RadioProps = RadioStateProps & ComponentProps<RadioSlots, RadioExposedPressableProps>;
 
-export type RadioState = ComponentState<RadioSlots> &
+export type RadioState = ComponentState<RadioSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<RadioStateProps> &
   ThemeState &
   PressableState & {
-    focusVisualProps?: FocusVisualProps;
     /**
      * User styling applied after the component styles.
      */

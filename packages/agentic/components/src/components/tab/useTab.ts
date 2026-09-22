@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { Pressable } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 
 import {
   type PropsWithRefOf,
+  resolveAccessibilityAction,
   useAccessibilityLabelWarning,
-  usePressableState,
+  useFocusablePressable,
+  isSelfTargetEvent,
   useOptionalSlot,
   useSlot,
 } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 
 import type { TabProps, TabState } from './tab.types';
 import { Icon } from '../../primitives/icon/icon';
@@ -21,6 +24,7 @@ import { Text } from '../text/text';
 export function useTab_unstable(props: TabProps): TabState {
   const tabList = React.useContext(TabListContext);
   const {
+    accessibilityActions,
     accessibilityState,
     controls,
     content: contentProp,
@@ -36,14 +40,11 @@ export function useTab_unstable(props: TabProps): TabState {
   } = props;
   const value = valueProp ?? controls;
   const iconOnly = layout === 'iconOnly';
-  const tabRef = React.useRef<React.ElementRef<typeof Pressable>>(null);
   const listDisabled = tabList?.isTabDisabled(value, disabled) ?? disabled;
   const listSelected = tabList ? tabList.selectedValue === value : selected;
   const listFocusable = tabList ? tabList.activeValue === value && !listDisabled : (rest.focusable ?? !disabled);
-  const { onFocus, onKeyDown, onPress, ...nativeRest } = rest;
+  const { onFocus, onBlur, onKeyDown, onPress, onAccessibilityAction, ...nativeRest } = rest;
   const registerTab = tabList?.registerTab;
-
-  React.useEffect(() => registerTab?.(value, tabRef), [registerTab, value]);
 
   useAccessibilityLabelWarning({
     accessibilityLabel: rest.accessibilityLabel ?? rest['aria-label'],
@@ -54,35 +55,60 @@ export function useTab_unstable(props: TabProps): TabState {
   });
 
   const themeState = useThemeState();
-  const [pressableProps, pressableState] = usePressableState({
-    ...nativeRest,
-    accessibilityPosInSet: tabList?.getPosition(value),
-    accessibilitySetSize: tabList?.setSize,
-    accessibilityRole: 'tab',
-    accessibilityState: {
-      ...accessibilityState,
+  const selectAction = React.useMemo(() => resolveAccessibilityAction('select', Platform.OS, accessibilityActions), [accessibilityActions]);
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable(
+    {
+      ...nativeRest,
+      accessibilityPosInSet: tabList?.getPosition(value),
+      accessibilitySetSize: tabList?.setSize,
+      accessibilityRole: 'tab',
+      accessibilityActions: selectAction.accessibilityActions,
+      onAccessibilityAction: (event) => {
+        if (!listDisabled && event.nativeEvent.actionName === selectAction.name) {
+          tabList?.onTabPress(value);
+        }
+        onAccessibilityAction?.(event);
+      },
+      accessibilityState: {
+        ...accessibilityState,
+        disabled: listDisabled,
+        selected: listSelected,
+      },
+      accessible: nativeRest.accessible ?? true,
       disabled: listDisabled,
-      selected: listSelected,
+      focusable: listFocusable,
+      onFocus: (event) => {
+        if (isSelfTargetEvent(event)) {
+          tabList?.onTabFocus(value);
+        }
+        onFocus?.(event);
+      },
+      onBlur: (event) => {
+        if (isSelfTargetEvent(event)) {
+          tabList?.onTabBlur(value);
+        }
+        onBlur?.(event);
+      },
+      onKeyDown: (event) => {
+        tabList?.onTabKeyDown(value, event);
+        onKeyDown?.(event);
+      },
+      onPress: (event) => {
+        tabList?.onTabPress(value);
+        onPress?.(event);
+      },
     },
-    accessible: nativeRest.accessible ?? true,
-    disabled: listDisabled,
-    focusable: listFocusable,
-    onFocus: (event) => {
-      tabList?.onTabFocus(value);
-      onFocus?.(event);
-    },
-    onKeyDown: (event) => {
-      tabList?.onTabKeyDown(value, event);
-      onKeyDown?.(event);
-    },
-    onPress: (event) => {
-      tabList?.onTabPress(value);
-      onPress?.(event);
-    },
-  });
+    { focusOnPress: !tabList },
+  );
+
+  const { focusTarget } = focusBinding;
+  React.useLayoutEffect(() => registerTab?.(value, focusTarget), [registerTab, value, focusTarget]);
+
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !listDisabled });
 
   const root = useSlot(Pressable, {
     ...pressableProps,
+    ...nativeFocusProps,
     accessibilityControls: controls,
     ref: rootRef,
   } as PropsWithRefOf<typeof Pressable> & { accessibilityControls: string });
@@ -93,6 +119,7 @@ export function useTab_unstable(props: TabProps): TabState {
   const contentHidden = useOptionalSlot(Text, contentSlotProp);
 
   return {
+    FocusRing,
     root,
     icon,
     selectedIcon,
@@ -102,11 +129,11 @@ export function useTab_unstable(props: TabProps): TabState {
     layout,
     controls,
     selected: listSelected,
-    tabRef,
     value,
     iconOnly,
     userStyle,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
   };
 }

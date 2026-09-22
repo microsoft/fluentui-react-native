@@ -1,10 +1,11 @@
 import { Pressable, Text as NativeText, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
-import { usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { semanticIconSources } from '../../common/iconSources';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
@@ -61,26 +62,30 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
       }
     : accessibilityState;
 
-  const [rootProps, pressableState] = usePressableState({
+  const [rootProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
     accessibilityRole: isListItem ? 'button' : 'header',
     accessibilityState: rootAccessibilityState,
     accessible: rest.accessible ?? true,
     disabled: isListItem ? disabled : false,
-    focusable: rest.focusable ?? (isListItem && !disabled),
+    focusable: isListItem && !disabled && (rest.focusable ?? true),
   });
 
   const { onBlur, onFocus, onHoverIn, onHoverOut, onLongPress, onPress, onPressIn, onPressOut, ...headerRest } = rootProps;
   const headerProps: ViewProps = headerRest as unknown as ViewProps;
-  const root = useSlot(Pressable, { ...rootProps, ref: rootRef });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled && isListItem });
+
+  const root = useSlot(Pressable, { ...rootProps, ...nativeFocusProps, ref: rootRef });
   const header = useSlot(View, headerProps);
   const chevronIndicator = useOptionalSlot(Icon, chevron ? { fontSource: semanticIconSources.chevron } : null);
   const checkmarkIndicator = useOptionalSlot(Icon, checkmark && selected ? { fontSource: semanticIconSources.checkmark } : null);
   const checkboxIndicator = useOptionalSlot(CheckboxIndicator, multiselect ? {} : null);
 
   return {
+    FocusRing: isListItem ? FocusRing : undefined,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     avatar,
     checkboxIndicator,
     checkmark,

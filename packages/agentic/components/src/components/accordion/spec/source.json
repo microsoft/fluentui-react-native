@@ -3,7 +3,7 @@
   "component": "accordion",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-08-28",
+  "reviewedAt": "2026-09-14",
   "sources": [
     {
       "id": "flex-component",
@@ -71,6 +71,10 @@
   ],
   "divergences": [
     {
+      "id": "native-system-focus-visuals",
+      "status": "accepted"
+    },
+    {
       "id": "accordion-chevron-end-rotation",
       "status": "accepted"
     }
@@ -86,7 +90,7 @@
     },
     {
       "id": "ACC-003",
-      "evidence": ["accordion.styles.ts", "useAccordionStyles.ts", "accordion.test.tsx"]
+      "evidence": ["useAccordion.ts", "accordion.styles.ts", "useAccordionStyles.ts", "accordion.test.tsx"]
     },
     {
       "id": "ACC-004",

@@ -36,10 +36,15 @@ in this package.
 
 ## Focus visual
 
-A two-ring focus visual is drawn inside the tag, following the resolved corner
-radius, whenever the root is focused and not disabled. React Native does not
-report focus modality on these platforms, so the ring appears for pointer focus
-as well as keyboard focus.
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 When the caller removes a tag on activation, the focused element is destroyed.
 Move focus deliberately in that handler, to the next tag or to the container, or
@@ -67,3 +72,11 @@ from the start of the line rather than stretching. A tag in a constrained row
 therefore compresses its text while keeping both glyphs at full size. Truncation
 behavior beyond that belongs to the caller, which can pass text props through
 the content slot.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.

@@ -1,8 +1,8 @@
-import type { RefObject } from 'react';
 import type { AccessibilityState, ColorValue, Pressable, StyleProp, TextInput, TextStyle, View, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
 import type {
+  FocusTargetBinding,
   ComponentProps,
   ComponentState,
   OptionalSlot,
@@ -55,6 +55,7 @@ export type InputExposedRootProps = OwnedRootProps<PropsWithRefOf<typeof View>>;
 export type InputProps = InputStateProps & ComponentProps<InputSlots, InputExposedRootProps>;
 
 export type InputState = ComponentState<InputStateSlots> &
+  FocusTargetBinding &
   Required<Pick<InputStateProps, 'variant' | 'size' | 'disabled' | 'readOnly' | 'error'>> &
   ThemeState & {
     value: string;
@@ -69,7 +70,6 @@ export type InputState = ComponentState<InputStateSlots> &
     iconEndStyle: ViewStyle;
     underlineStyle: ViewStyle;
     textInputStyle: TextStyle;
-    textInputRef: RefObject<TextInput | null>;
     iconSize: number;
     iconColor: ColorValue;
   };

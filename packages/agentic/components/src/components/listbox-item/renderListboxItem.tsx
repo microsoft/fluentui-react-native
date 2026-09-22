@@ -2,7 +2,6 @@
 import { View } from 'react-native';
 
 import { CompoundItemLayout } from '../../primitives/compound-item-layout/compound-item-layout';
-import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import { LayoutStableText } from '../../primitives/layout-stable-text/layout-stable-text';
 import { Skeleton } from '../skeleton/skeleton';
 import { getListboxItemIconSize, listboxItemStyles } from './listbox-item.styles';
@@ -48,8 +47,8 @@ export function renderListboxItem_unstable(state: ListboxItemState) {
   const ActiveIcon = state.selected ? (state.selectedIcon ?? state.icon) : state.icon;
 
   return (
-    <state.root>
-      <FocusVisual {...state.focusVisualProps} />
+    <state.root ref={state.focusTargetRef}>
+      {state.FocusRing && <state.FocusRing />}
       <CompoundItemLayout
         contentStyle={state.secondaryContentPosition === 'under' ? listboxItemStyles.contentColumn : listboxItemStyles.contentRow}
         leading={state.avatar ? <state.avatar /> : ActiveIcon ? <ActiveIcon /> : undefined}

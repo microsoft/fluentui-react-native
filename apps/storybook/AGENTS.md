@@ -46,8 +46,8 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - macOS, Windows, and Win32 use their source-built native helpers. Keep the
   deterministic fake provider limited to package contract tests.
 - Author new tests as component story `wdio` functions or named function
-  collections, not app-local test scripts. Button demonstrates migration from
-  the legacy `parameters.desktopDriver` plans, which remain supported.
+  collections, not app-local test scripts. All catalog tests use WDIO; legacy
+  `parameters.desktopDriver` support is retained for runner compatibility.
   The app owns identity, package discovery, platform exclusions, and manifests.
 - Run executable tests with `yarn storybook test --<platform>` and optionally
   `--test <name-glob>`. Callbacks receive the target endpoint as `platform`;

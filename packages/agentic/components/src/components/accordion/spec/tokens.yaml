@@ -53,7 +53,7 @@ bindings:
     leadingIcon: size160
     chevron: size160
     color: resolved header foreground
-  focusVisual:
+  FocusRing:
     innerColor: color.strokeFocusInner
     innerWidth: strokeWidth.thin
     outerColor: color.strokeFocusOuter

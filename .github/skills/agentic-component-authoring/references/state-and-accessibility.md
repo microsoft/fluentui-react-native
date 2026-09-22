@@ -110,6 +110,27 @@ The component must own its role and state semantics while preserving unrelated c
 Button warns in development when an icon-only instance lacks an `accessibilityLabel`. Put warnings in an effect so
 render remains free of observable side effects, and make the dependency list match every value used by the warning.
 
+For a component-owned toggle or select action, use `resolveAccessibilityAction`
+from Framework Base with the semantic action, `Platform.OS`, and the caller's
+action list. Assign its `accessibilityActions` and compare incoming
+`event.nativeEvent.actionName` with its `name`; do not duplicate platform strings.
+Windows Fabric uses lowercase names, while Win32 uses `Toggle`/`Select`.
+macOS retains those title-case names as custom actions, not an invented
+`activate`/AXPress fallback.
+
+Keep state ownership and disabled guards in the component. Run accepted
+component behavior first, then forward the original caller accessibility event
+exactly once, including custom and disabled events. Do not synthesize `onPress`
+or create a second activation path. The resolver preserves caller labels and
+custom names while deduplicating declarations.
+
+Future universal non-styling accessibility helpers belong in
+[`framework-base/src/accessibility`](../../../../packages/framework-base/src/accessibility/AGENTS.md).
+Read its source-evidence, native/generic boundary, handler-composition, and
+validation requirements before extending it. Verify actual UIA/AX action
+invocation and callback counts; a state read after a physical click does not
+prove accessibility action dispatch.
+
 ## Use framework interaction and slot hooks
 
 Interactive roots should use the framework state hook, such as `usePressableState`, so hovered, pressed, and focused
@@ -144,6 +165,10 @@ Export the hook from the package root as `use<Component>_unstable`, together wit
 so another component can extend the state stage without importing package internals.
 
 ## Platform behavior
+
+For focus ownership, activation, and native target lifetime, read
+[common focus authoring](focus.md), followed by the
+[Windows/Win32](focus-windows.md) or [macOS](focus-macos.md) detail.
 
 Keep platform-specific native imports out of shared files when React Native forks expose incompatible types. Put fork
 imports in platform files or redeclare a small platform-neutral contract. Surface unsupported platform behavior rather

@@ -5,30 +5,29 @@ import path from 'node:path';
 
 jest.setTimeout(30_000);
 
-describe('representative desktop story plans', () => {
-  test('keeps the legacy Checkbox and Input plans running through WebdriverIO during migration', async () => {
+describe('representative desktop story tests', () => {
+  test('runs actual WDIO stories and guards complete catalog migration and type coverage', async () => {
     const artifactsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'representative-story-plans-'));
     try {
       const response = await runContract(artifactsRoot);
       expect(response).toMatchObject({
         planned: [
-          { id: 'components-checkbox--default', tests: ['toggles-checked-state'] },
-          { id: 'components-input--default', tests: ['types-and-clears'] },
+          { id: 'components-button--default', tests: ['exposes enabled button semantics', 'supports native pointer activation'] },
+          { id: 'components-checkbox--default', tests: ['toggles native checked state in both directions'] },
+          { id: 'components-input--default', tests: ['accepts keyboard input and clears it'] },
         ],
-        result: {
-          status: 'passed',
-          tests: [
-            { status: 'passed', testId: 'toggles-checked-state' },
-            { status: 'passed', testId: 'types-and-clears' },
-          ],
-        },
-        repeated: {
-          status: 'passed',
-          tests: [
-            { status: 'passed', testId: 'toggles-checked-state' },
-            { status: 'passed', testId: 'types-and-clears' },
-          ],
-        },
+        result: [
+          { status: 'passed', testName: 'exposes enabled button semantics' },
+          { status: 'passed', testName: 'supports native pointer activation' },
+          { status: 'passed', testName: 'toggles native checked state in both directions' },
+          { status: 'passed', testName: 'accepts keyboard input and clears it' },
+        ],
+        repeated: [
+          { status: 'passed', testName: 'exposes enabled button semantics' },
+          { status: 'passed', testName: 'supports native pointer activation' },
+          { status: 'passed', testName: 'toggles native checked state in both directions' },
+          { status: 'passed', testName: 'accepts keyboard input and clears it' },
+        ],
       });
       expect(fs.existsSync(path.join(artifactsRoot, 'run.json'))).toBe(true);
     } finally {

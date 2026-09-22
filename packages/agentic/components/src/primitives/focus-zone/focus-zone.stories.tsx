@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import type { DesktopStoryTests } from '@fluentui-react-native/desktop-driver/authoring';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import type { FocusZoneDirection, FocusZoneProps, FocusZoneTabNavigation } from '@fluentui-react-native/focus-zone';
 import type { Meta, StoryObj } from '@storybook/react-native';
@@ -191,36 +191,31 @@ const meta: Meta<typeof FocusZone> = {
 
 export default meta;
 
-type Story = StoryObj<typeof FocusZone>;
+type Story = WdioStory<StoryObj<typeof FocusZone>>;
 
 export const Default: Story = {
   tags: ['desktop-e2e'],
   render: (args) => <FocusZoneExample {...args} />,
+  wdio: {
+    'uses platform directional navigation and exits the zone on Tab': async (context) => {
+      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      if (!requireDesktopFocus(context)) return;
+      const { browser, platform } = context;
+      await (await browser.$('~focus-zone-item-1')).click();
+      await expectNativeState(browser, 'focus-zone-item-1', 'focused', true);
+      await browser.keys('\uE014');
+      await expectNativeState(browser, 'focus-zone-item-2', 'focused', true);
+      await browser.keys('\uE015');
+      await expectNativeState(browser, platform === 'macos' ? 'focus-zone-item-5' : 'focus-zone-item-3', 'focused', true);
+      await browser.keys('\uE004');
+      await expectNativeState(browser, 'focus-zone-after', 'focused', true);
+    },
+  },
   parameters: {
-    desktopDriver: {
-      version: 1,
-      tests: [
-        {
-          id: 'linear-navigation-and-tab-exit',
-          title: 'Performs linear navigation and exits on Tab',
-          platforms: ['windows'],
-          requires: ['focus', 'keyboard'],
-          steps: [
-            { action: 'click', target: { testId: 'focus-zone-item-1' } },
-            { expect: { state: 'focused', target: { testId: 'focus-zone-item-1' }, value: true } },
-            { action: 'keys', value: ['\uE014'] },
-            { expect: { state: 'focused', target: { testId: 'focus-zone-item-2' }, value: true } },
-            { action: 'keys', value: ['\uE015'] },
-            { expect: { state: 'focused', target: { testId: 'focus-zone-item-3' }, value: true } },
-            { action: 'keys', value: ['\uE004'] },
-            { expect: { state: 'focused', target: { testId: 'focus-zone-after' }, value: true } },
-          ],
-        },
-      ],
-    } satisfies DesktopStoryTests,
     docs: {
       description: {
-        story: 'Focus an item, then use the arrow keys to move through the grid and Tab to leave the zone.',
+        story:
+          'Focus an item, then use arrows and Tab to leave the zone. Windows/Win32 default to linear navigation; AppKit uses geometric directional navigation.',
       },
     },
   },
@@ -247,24 +242,18 @@ export const TwoDimensionalNavigation: Story = {
     use2DNavigation: true,
   },
   render: (args) => <FocusZoneExample {...args} />,
+  wdio: {
+    'moves geometrically between rows': async (context) => {
+      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      if (!requireDesktopFocus(context)) return;
+      const { browser } = context;
+      await (await browser.$('~focus-zone-item-1')).click();
+      await expectNativeState(browser, 'focus-zone-item-1', 'focused', true);
+      await browser.keys('\uE015');
+      await expectNativeState(browser, 'focus-zone-item-4', 'focused', true);
+    },
+  },
   parameters: {
-    desktopDriver: {
-      version: 1,
-      tests: [
-        {
-          id: 'geometric-navigation',
-          title: 'Performs geometric two-dimensional navigation',
-          platforms: ['windows'],
-          requires: ['focus', 'keyboard'],
-          steps: [
-            { action: 'click', target: { testId: 'focus-zone-item-1' } },
-            { expect: { state: 'focused', target: { testId: 'focus-zone-item-1' }, value: true } },
-            { action: 'keys', value: ['\uE015'] },
-            { expect: { state: 'focused', target: { testId: 'focus-zone-item-4' }, value: true } },
-          ],
-        },
-      ],
-    } satisfies DesktopStoryTests,
     docs: {
       description: {
         story: 'Geometric navigation moves vertically between rows and horizontally within each row.',

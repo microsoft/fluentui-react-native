@@ -3,7 +3,8 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import type { TextProps, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -93,20 +94,11 @@ describe('Accordion', () => {
     expect(getHeader(component).props.accessibilityState).toEqual({ busy: true, expanded: false });
   });
 
-  it('uses the focused prop to render the universal dual-ring focus visual', async () => {
+  it('leaves focus visuals to the native header even when focused is supplied', async () => {
     const component = await renderAccordion({ focused: true });
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: '#000000',
-      borderWidth: 2,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: '#ffffff',
-      borderWidth: 1,
-    });
+    expect(getHeader(component).props.enableFocusRing).toBe(true);
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it('renders hover and pressed header feedback with the resolved foreground color', async () => {
@@ -138,18 +130,8 @@ describe('Accordion', () => {
     const startChildren = getHeader(start).children as { props: { testID?: string } }[];
     const endChildren = getHeader(end).children as { props: { testID?: string } }[];
 
-    expect(startChildren.map((child) => child.props.testID)).toEqual([
-      'focus-visual',
-      'accordion-chevron',
-      'accordion-leading-icon',
-      'accordion-title',
-    ]);
-    expect(endChildren.map((child) => child.props.testID)).toEqual([
-      'focus-visual',
-      'accordion-leading-icon',
-      'accordion-title',
-      'accordion-chevron',
-    ]);
+    expect(startChildren.map((child) => child.props.testID)).toEqual(['accordion-chevron', 'accordion-leading-icon', 'accordion-title']);
+    expect(endChildren.map((child) => child.props.testID)).toEqual(['accordion-leading-icon', 'accordion-title', 'accordion-chevron']);
   });
 
   it('renders custom title and body slots', async () => {

@@ -2,7 +2,8 @@
 import { StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -34,7 +35,7 @@ describe('Tag', () => {
       minHeight: 24,
       minWidth: 24,
     });
-    expect(getRoot(component).children).toHaveLength(3);
+    expect(getRoot(component).children).toHaveLength(2);
   });
 
   it('forwards press and interaction handlers while updating background state', async () => {
@@ -76,7 +77,7 @@ describe('Tag', () => {
 
     expect(StyleSheet.flatten(component.getByTestId('leading').props.style)).toMatchObject({ height: 20, width: 20 });
     expect(StyleSheet.flatten(component.getByTestId('dismiss').props.style)).toMatchObject({ height: 16, width: 16 });
-    expect(getRoot(component).children).toHaveLength(4);
+    expect(getRoot(component).children).toHaveLength(3);
   });
 
   it('renders icon-only layout with a required accessible label', async () => {
@@ -135,23 +136,14 @@ describe('Tag', () => {
     expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud);
   });
 
-  it('renders a persistent dual-ring focus visual', async () => {
+  it('uses native focus visuals without mounting custom rings', async () => {
     const component = await renderTag({ content: 'Focused' });
     const root = getRoot(component);
 
     await fireEvent(root, 'focus', {});
+    expect(root.props.enableFocusRing).toBe(true);
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusOuter,
-      borderWidth: defaultFlexTokens.strokeWidth.thick,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusInner,
-      borderWidth: defaultFlexTokens.strokeWidth.thin,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it.each([
@@ -216,6 +208,6 @@ describe('Tag', () => {
 
     expect(component.queryByTestId('dismiss')).toBeNull();
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
-    expect(getRoot(component).children).toHaveLength(3);
+    expect(getRoot(component).children).toHaveLength(2);
   });
 });

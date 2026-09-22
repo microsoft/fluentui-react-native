@@ -2,7 +2,8 @@
 import { StyleSheet, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { directComponent, isDirectComponent } from '@fluentui-react-native/framework-base';
@@ -94,17 +95,8 @@ describe('ListboxItem', () => {
     expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.pressed.backgroundNeutralTransparent);
 
     await fireEvent(root, 'focus', {});
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusOuter,
-      borderWidth: defaultFlexTokens.strokeWidth.thick,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusInner,
-      borderWidth: defaultFlexTokens.strokeWidth.thin,
-    });
+    expect(root.props.enableFocusRing).toBe(true);
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
     expect(StyleSheet.flatten(root.props.style)).not.toMatchObject({
       outlineColor: defaultFlexTokens.color.strokeFocusOuter,
       outlineStyle: 'solid',

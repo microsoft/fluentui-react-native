@@ -15,10 +15,12 @@ runs Storybook in **liteMode**, which mocks out the heavy default on-device UI
 chain, which does not bundle cleanly with this repo's Metro + Babel + pnpm-linker toolchain
 (Reanimated's Babel plugin crashes when Metro bundles Reanimated from source).
 
-The shared app shell includes a persistent theme header above the Storybook UI. It can leave stories
-unwrapped (`No theme`, the default) or apply the default light, dark, or high-contrast FURN Theme.
-The selected Theme wraps the preview decorator, so it applies to every rendered story and remains
-selected while navigating between stories.
+The shared app shell places one `ThemedRoot` above the theme header and the entire Storybook UI.
+Choose the default Flex tokens (`Default Flex`, initially selected) or the default light, dark,
+or high-contrast FURN theme. The header, sidebar, addon controls, preview, and stories all inherit
+that scene's theme and input-modality settings. Chrome colors are derived from `useThemeState`;
+switching themes preserves Storybook and the selected story rather than remounting them.
+Story decorators inherit the app root instead of creating preview-only theme boundaries.
 
 The macOS, Windows Fabric, and Win32 Paper native endpoints live in this workspace and
 share the same entry point and generated story catalog. Story discovery and native identity stay
@@ -328,5 +330,13 @@ Follow the package-level story authoring instructions in `../../packages/agentic
 `*.stories.tsx` file next to its component; package discovery belongs in `storybook.config.mts`, adapted by `src/main.ts`.
 See `../../packages/agentic/components/src/components/button/button.stories.tsx` for the canonical higher-order component example.
 Prefer named `wdio` functions with stable `testID` selectors and injected
-`platform` context, as demonstrated by Button. Checkbox and Input retain the
-legacy static `parameters.desktopDriver` format during migration.
+`platform` context, as demonstrated by Button. All catalog tests, including
+Checkbox, Input, Switch, TabList, and native FocusZone, use this pattern.
+Focus-specific cases are tagged `desktop-focus`; the complete native
+`stories-and-tests` smoke lane also runs FocusZone and the default control cases.
+
+To run just the focused component cases through the owned Windows/Win32
+lifecycle, set `STORYBOOK_SMOKE_TAG=desktop-focus` before invoking
+`storybook smoke --windows --mode stories-and-tests` or the corresponding
+`--win32` command. The callback runner still requires authenticated native
+readiness and never substitutes JavaScript state for native focus.

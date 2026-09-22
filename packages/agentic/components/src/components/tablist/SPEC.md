@@ -72,6 +72,15 @@ to the first enabled Tab and End to the last. Arrow movement wraps only when
 `circularNavigation` is true. Handled keys prevent the native event's default
 behavior.
 
+Focusability and selection commit before imperative focus. Ref-backed target
+registrations replace raw optional `.focus()` calls. Native focus events confirm
+the focused value; a request or active tab stop does not itself prove focus moved.
+Pending requests cancel on replacement/removal. Modified shortcuts are forwarded,
+and each Tab's semantic select accessibility action uses the collection's
+selection owner. Framework Base resolves its declaration and event name to
+`select` on Windows Fabric, `Select` on Win32, and the existing `Select` custom
+action on macOS; see [Tab accessibility](../tab/spec/accessibility.md).
+
 When `selectionFollowsFocus` is true, movement requests the focused value.
 Otherwise focus moves independently and Enter, Space, or pointer activation
 requests selection through the Tab press path.

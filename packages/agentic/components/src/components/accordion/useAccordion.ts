@@ -5,13 +5,14 @@ import { useThemeState } from '@fluentui-react-native/design';
 import {
   useAccessibilityLabelWarning,
   useOptionalSlot,
-  usePressableState,
+  useFocusablePressable,
   useSlot,
   useToggleState,
 } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
 import { semanticIconSources } from '../../common/iconSources';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Text } from '../text/text';
 import type { AccordionProps, AccordionState } from './accordion.types';
 
@@ -54,7 +55,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
   const toggleExpanded = expansion.toggle;
 
   const themeState = useThemeState();
-  const [headerProps, pressableState] = usePressableState({
+  const [headerProps, pressableState, focusBinding] = useFocusablePressable({
     accessibilityControls: bodyId,
     accessibilityHint,
     accessibilityLabel,
@@ -70,6 +71,8 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
     onPress: toggleExpanded,
   });
 
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: focusedProp ?? pressableState.focused });
+
   const root = useSlot(View, {
     ...rootProps,
     accessible: false,
@@ -77,6 +80,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
   });
   const header = useSlot(Pressable, {
     ...headerProps,
+    ...nativeFocusProps,
     testID: 'accordion-header',
   });
   const title = useOptionalSlot(Text, titleProp, {
@@ -117,6 +121,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
   });
 
   return {
+    FocusRing,
     root,
     header,
     title,
@@ -131,6 +136,7 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
     userStyle,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     focused: focusedProp ?? pressableState.focused,
   };
 }

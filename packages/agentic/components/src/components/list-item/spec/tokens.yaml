@@ -51,7 +51,7 @@ bindings:
       small: global.size200
       medium: global.size320
       large: global.size400
-  focusVisual:
+  FocusRing:
     outer: [color.strokeFocusOuter, strokeWidth.thick]
     inner: [color.strokeFocusInner, strokeWidth.thin]
 

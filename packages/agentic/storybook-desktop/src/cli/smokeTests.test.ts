@@ -142,6 +142,55 @@ describe('runDesktopStorybookSmokeTests', () => {
     expect(formatDesktopStorybookSmokeTestSummary(result)).toBe('Ran 4 desktop story tests (4 passed, 0 skipped).');
   });
 
+  test('applies focused smoke selectors to both plans and WDIO while preserving owned sessions', async () => {
+    const focusId = 'components-button--focus-management';
+    options.manifest = { ...manifest, entries: [story(buttonId, true), { ...story(focusId, true), tags: ['desktop-focus'] }] };
+    options.storyPattern = 'components-*--focus-management';
+    options.testTag = 'desktop-focus';
+    const runStoryTests = jest.fn(async () => planResult(focusId));
+    const deleteSession = jest.fn(async () => undefined);
+    const runWdio = jest.fn(async () => [{ storyId: focusId, status: 'passed' as const, durationMs: 1 }]);
+    const connect: DesktopStorybookSmokeConnector = jest.fn(async () => ({
+      listStories: async () => options.manifest,
+      runStoryTests,
+      delete: deleteSession,
+    }));
+
+    await runDesktopStorybookSmokeTests(options, connect, runWdio);
+
+    expect(connect).toHaveBeenCalledWith(expect.objectContaining({ launchMode: 'attach' }));
+    expect(runStoryTests).toHaveBeenCalledWith(expect.objectContaining({ selection: { story: focusId, tag: 'desktop-focus' } }));
+    expect(runWdio).toHaveBeenCalledTimes(1);
+    expect(runWdio).toHaveBeenCalledWith(expect.objectContaining({ story: focusId, tag: 'desktop-focus' }), undefined);
+    expect(deleteSession).toHaveBeenCalledTimes(1);
+  });
+
+  test.each(['storyPattern', 'testTag'] as const)('rejects an empty %s before connecting', async (key) => {
+    options[key] = ' ';
+    const connect = jest.fn();
+    await expect(runDesktopStorybookSmokeTests(options, connect)).rejects.toThrow('non-empty string');
+    expect(connect).not.toHaveBeenCalled();
+  });
+
+  test('rejects unmatched focused selections before connecting', async () => {
+    options.testTag = 'desktop-focus';
+    const connect = jest.fn();
+    await expect(runDesktopStorybookSmokeTests(options, connect)).rejects.toThrow('No desktop story tests matched');
+    expect(connect).not.toHaveBeenCalled();
+  });
+
+  test('rejects a stale empty plan result after closing the session', async () => {
+    const deleteSession = jest.fn(async () => undefined);
+    await expect(
+      runDesktopStorybookSmokeTests(options, async () => ({
+        listStories: async () => manifest,
+        runStoryTests: async () => ({ ...planResult(), tests: [] }),
+        delete: deleteSession,
+      })),
+    ).rejects.toThrow('No desktop story tests matched');
+    expect(deleteSession).toHaveBeenCalledTimes(1);
+  });
+
   test('runs inline-only stories and respects configured callback filters', async () => {
     options.manifest = {
       ...manifest,

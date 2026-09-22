@@ -25,6 +25,14 @@ JSX rather than the classic runtime when a slot needs a ref.
 
 ## Choosing a pattern
 
+Focus-aware components can use `useFocusTarget` or `useFocusablePressable`
+from the first phase. Preserve their `focusTargetRef` separately from the
+consumer ref, then compose it through the native slot in the render phase.
+The public `FocusTarget` reports requested versus confirmed focus and cancels
+requests on detach/disable; do not infer focus from calling a native method.
+See the [desktop focus authoring guide](../../../../.github/skills/agentic-component-authoring/references/focus.md)
+for target lifetime, platform activation, and renderer boundaries.
+
 | Need                                              | Pattern                                        |
 | ------------------------------------------------- | ---------------------------------------------- |
 | Pure prop or element transformation with no hooks | `directComponent`                              |

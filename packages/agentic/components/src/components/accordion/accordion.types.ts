@@ -1,3 +1,4 @@
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { AccessibilityState, Pressable, StyleProp, View, ViewStyle } from 'react-native';
 import type {
   ComponentProps,
@@ -10,7 +11,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 import type { Icon } from '../../primitives/icon/icon';
-import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
+import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { Text } from '../text/text';
 
 export type AccordionLayout = 'chevronStart' | 'chevronEnd';
@@ -93,12 +94,12 @@ export type AccordionRootProps = OwnedRootProps<
 
 export type AccordionProps = AccordionStateProps & ComponentProps<AccordionSlots, AccordionRootProps>;
 
-export type AccordionState = ComponentState<AccordionStateSlots> &
+export type AccordionState = ComponentState<AccordionStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<Pick<AccordionStateProps, 'layout' | 'size'>> &
   ThemeState &
   PressableState & {
     expanded: boolean;
-    focusVisualProps?: FocusVisualProps;
     focused: boolean;
     userStyle?: StyleProp<ViewStyle>;
   };

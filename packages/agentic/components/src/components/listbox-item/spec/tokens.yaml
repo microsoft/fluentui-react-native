@@ -42,7 +42,7 @@ bindings:
       selectedBackground: color.backgroundBrandHeavy
       selectedForeground: color.foregroundNeutralOnloud
       unselectedBorder: color.foregroundNeutralSecondary
-  focusVisual:
+  FocusRing:
     outer: [color.strokeFocusOuter, strokeWidth.thick]
     inner: [color.strokeFocusInner, strokeWidth.thin]
 

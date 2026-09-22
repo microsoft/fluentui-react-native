@@ -1,4 +1,4 @@
-import type * as React from 'react';
+import type { FocusTargetBinding } from '@fluentui-react-native/framework-base';
 import type { Pressable, StyleProp, ViewStyle } from 'react-native';
 
 import type {
@@ -13,7 +13,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 import type { ThemeState } from '@fluentui-react-native/design';
 
-import type { FocusVisualProps } from '../../primitives/focus-visual/focus-visual.types';
+import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { Icon } from '../../primitives/icon/icon';
 import type { Text } from '../text/text';
 import type { TabKeyEvent } from '../tablist/tablist.types';
@@ -77,12 +77,11 @@ type TabIconAndTextProps = {
 
 export type TabProps = TabStateProps & ComponentProps<TabSlots, TabExposedPressableProps> & (TabIconAndTextProps | TabIconOnlyProps);
 
-export type TabState = ComponentState<TabStateSlots> &
+export type TabState = ComponentState<TabStateSlots & FocusVisualsSlots> &
+  FocusTargetBinding &
   Required<TabStateProps> &
   ThemeState &
   PressableState & {
-    focusVisualProps?: FocusVisualProps;
     iconOnly: boolean;
-    tabRef: React.RefObject<React.ElementRef<typeof Pressable> | null>;
     userStyle?: StyleProp<ViewStyle>;
   };

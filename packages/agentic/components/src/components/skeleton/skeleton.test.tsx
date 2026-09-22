@@ -3,7 +3,8 @@ import { act } from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
 

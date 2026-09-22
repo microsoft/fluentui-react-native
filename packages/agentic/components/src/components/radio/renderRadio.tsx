@@ -1,7 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { View } from 'react-native';
 
-import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import { hiddenFromAccessibilityProps } from '../../common/accessibility';
 import { Text } from '../text/text';
 import type { RadioState } from './radio.types';
@@ -11,8 +10,8 @@ import type { RadioState } from './radio.types';
  */
 export function renderRadio_unstable(state: RadioState) {
   return (
-    <state.root>
-      <FocusVisual {...state.focusVisualProps} />
+    <state.root ref={state.focusTargetRef}>
+      {state.FocusRing && <state.FocusRing />}
       <View {...hiddenFromAccessibilityProps} testID="radio-indicator" style={state.indicatorStyle}>
         <View testID="radio-dot" style={state.indicatorDotStyle} />
       </View>

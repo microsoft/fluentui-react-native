@@ -1,16 +1,19 @@
 import * as React from 'react';
-import { Pressable } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { useControllableValue, useFocusVisible, usePressableState, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import {
+  resolveAccessibilityAction,
+  useControllableValue,
+  useFocusablePressable,
+  useOptionalSlot,
+  useSlot,
+} from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 
 import { Text } from '../text/text';
 import type { CheckboxProps, CheckboxState, CheckboxStatus } from './checkbox.types';
-
-type NativeFocusPressableProps = React.ComponentProps<typeof Pressable> & {
-  enableFocusRing: boolean;
-};
 
 function getNextStatus(status: CheckboxStatus): CheckboxStatus {
   return status === 'checked' ? 'unchecked' : 'checked';
@@ -18,12 +21,14 @@ function getNextStatus(status: CheckboxStatus): CheckboxStatus {
 
 export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
   const {
+    accessibilityActions,
     accessibilityHint,
     accessibilityLabel,
     accessibilityState,
     defaultStatus = 'unchecked',
     disabled = false,
     label = 'Label',
+    onAccessibilityAction,
     onPress,
     onStatusChange,
     ref: rootRef,
@@ -62,11 +67,23 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     [disabled, onPress, setStatus, status],
   );
 
+  const toggleAction = React.useMemo(() => resolveAccessibilityAction('toggle', Platform.OS, accessibilityActions), [accessibilityActions]);
+  const handleAccessibilityAction = React.useCallback<NonNullable<CheckboxProps['onAccessibilityAction']>>(
+    (event) => {
+      if (event.nativeEvent.actionName === toggleAction.name && !disabled) {
+        setStatus(getNextStatus(status));
+      }
+      onAccessibilityAction?.(event);
+    },
+    [disabled, onAccessibilityAction, setStatus, status, toggleAction.name],
+  );
+
   const rootAccessibilityLabel = accessibilityLabel ?? label;
   const rootAccessibilityHint = renderSecondaryText ? [accessibilityHint, secondaryText].filter(Boolean).join('. ') : accessibilityHint;
 
-  const nativeProps: NativeFocusPressableProps = {
+  const nativeProps: React.ComponentProps<typeof Pressable> = {
     ...rest,
+    accessibilityActions: toggleAction.accessibilityActions,
     accessibilityHint: rootAccessibilityHint,
     accessibilityLabel: rootAccessibilityLabel,
     accessibilityRole: 'checkbox',
@@ -77,14 +94,15 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
     },
     accessible: rest.accessible ?? true,
     disabled,
-    enableFocusRing: false,
-    focusable: rest.focusable ?? !disabled,
+    focusable: !disabled && (rest.focusable ?? true),
+    onAccessibilityAction: handleAccessibilityAction,
     onPress: handlePress,
   };
-  const [focusVisibleProps, focusVisible] = useFocusVisible(nativeProps);
-  const [pressableProps, pressableState] = usePressableState(focusVisibleProps);
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable(nativeProps);
 
-  const root = useSlot(Pressable, { ...pressableProps, ref: rootRef });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
+
+  const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const labelText = useOptionalSlot(Text, showLabel ? { accessible: false, children: label, testID: 'checkbox-label' } : null);
   const secondaryTextSlot = useOptionalSlot(
     Text,
@@ -94,10 +112,11 @@ export function useCheckbox_unstable(props: CheckboxProps): CheckboxState {
   );
 
   return {
+    FocusRing,
     ...themeState,
     ...pressableState,
+    ...focusBinding,
     disabled,
-    focusVisible,
     label,
     labelText,
     renderSecondaryText,

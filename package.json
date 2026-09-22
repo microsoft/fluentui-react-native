@@ -35,7 +35,8 @@
     "format:check": "oxfmt --check",
     "lint-lockfile": "lint-lockfile",
     "lint-repo": "node ./scripts/src/tasks/lintRepo.ts",
-    "test-links": "markdown-link-check"
+    "test-links": "markdown-link-check",
+    "test:agent-permissions": "node --test .github/scripts/agent-permissions.test.mjs"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
@@ -45,7 +46,7 @@
     "@babel/preset-typescript": "catalog:",
     "@babel/runtime": "catalog:",
     "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.30.0",
+    "@changesets/cli": "^3.0.2",
     "@microsoft/esrp-npm-release": "^0.1.2",
     "@rnx-kit/align-deps": "catalog:",
     "@rnx-kit/lint-lockfile": "catalog:",
@@ -69,7 +70,7 @@
     "@types/react": "19.1.17",
     "axios@npm:1.13.3": "^1.18.1",
     "basic-ftp@npm:^5.0.2": "5.3.1",
-    "body-parser@npm:^1.20.3": "1.20.6",
+    "body-parser@npm:^1.20.3": "1.20.8",
     "deepmerge-ts@npm:^7.0.3": "8.0.1",
     "esbuild@npm:~0.25.0": "^0.28.0",
     "expect-webdriverio": "patch:expect-webdriverio@npm%3A5.6.1#~/.yarn/patches/expect-webdriverio-npm-5.6.1-69666d39e9.patch",
@@ -78,7 +79,10 @@
     "form-data@npm:4.0.5": "^4.0.6",
     "launch-editor@npm:^2.9.1": "2.14.1",
     "lodash": "^4.18.1",
+    "morgan@npm:1.11.0": "1.12.1",
     "path-to-regexp@npm:8.3.0": "^8.4.2",
+    "react-native-windows": "0.81.35",
+    "sharp@npm:0.35.3": "0.35.4",
     "shell-quote": "^1.9.0",
     "socks@npm:^2.8.3": "2.8.9",
     "unicorn-magic@npm:^0.3.0": "^0.4.0",
@@ -89,7 +93,7 @@
     "yaml@npm:^1.10.0": "1.10.3"
   },
   "engines": {
-    "node": ">=22.12"
+    "node": "^22.12.0 || ^24.0.0 || >=26.0.0"
   },
   "packageManager": "yarn@4.18.0",
   "rnx-kit": {

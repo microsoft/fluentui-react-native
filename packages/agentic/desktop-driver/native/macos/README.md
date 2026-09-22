@@ -199,6 +199,16 @@ React Native macOS does not move keyboard focus on ordinary mouse-down. Portable
 tests should assert the platform's actual activation behavior rather than
 copying a Windows focus expectation.
 
+Keyboard and pointer events carry modifier flags derived from the helper's
+pressed-key ledger, including left/right Shift, Control, Option, and Command.
+Do not rely on the OS having processed a previously posted modifier event:
+fast W3C sequences such as Shift+Tab must retain their chord deterministically.
+Release and recovery paths update the ledger after each emitted keyup.
+Repeated keydowns are still posted but do not add another held physical key.
+Aliases for the same key share one entry; left and right modifiers remain
+independent. One release must remove that physical key from later keyboard and
+pointer flags.
+
 ## Capture
 
 ScreenCaptureKit captures a uniquely correlated application window and encodes

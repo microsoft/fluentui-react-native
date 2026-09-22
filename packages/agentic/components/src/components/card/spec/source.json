@@ -3,7 +3,7 @@
   "component": "card",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-08-28",
+  "reviewedAt": "2026-09-14",
   "sources": [
     {
       "id": "flex-component",
@@ -81,6 +81,10 @@
   ],
   "divergences": [
     {
+      "id": "native-system-focus-visuals",
+      "status": "accepted"
+    },
+    {
       "id": "card-button-only-activation",
       "status": "accepted"
     },
@@ -100,7 +104,7 @@
     },
     {
       "id": "CRD-003",
-      "evidence": ["card.styles.ts", "useCardStyles.ts", "card.test.tsx"]
+      "evidence": ["useCard.ts", "card.styles.ts", "useCardStyles.ts", "card.test.tsx"]
     },
     {
       "id": "CRD-004",

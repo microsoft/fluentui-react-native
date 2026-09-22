@@ -25,6 +25,13 @@ mixed parent moves forward to fully selected rather than cycling back through
 mixed. `onStatusChange` receives the resolved value and any caller `onPress`
 handler runs afterward.
 
+The accessibility toggle action (`toggle` on Windows Fabric, `Toggle` on
+Win32 and as a macOS custom action) resolves the same next status without
+calling `onPress`. It preserves caller actions and labels without duplicate
+declarations and forwards `onAccessibilityAction` exactly once. While disabled,
+the action cannot change status, but the caller accessibility handler still
+receives the original event. No `activate` fallback is added.
+
 Status ownership follows the supplied props. While `status` is supplied the
 control is externally driven: it renders exactly what it is given, reports the
 resolved value, and does not move on its own. Without `status` it starts from
@@ -35,13 +42,23 @@ so neither `onStatusChange` nor the caller `onPress` runs.
 
 ## Focus and motion
 
-The focus visual stays in the tree for the lifetime of the control. Focus
-changes its visibility rather than mounting or unmounting a border-bearing
-native view. It is shown only when the control is focused and enabled.
-
-Pointer press state suppresses the visual when the press moves focus. A keyboard
-event restores focus-visible state, and programmatic focus is treated as
-focus-visible because no pointer interaction preceded it.
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 Checkbox runs no timed animation. Status, hover, press, and focus styling
 change on the next render, so reduced-motion settings need no separate path.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.

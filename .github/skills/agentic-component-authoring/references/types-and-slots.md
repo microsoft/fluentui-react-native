@@ -55,6 +55,11 @@ When a component needs an internal root ref as well, keep both refs and pass one
 when rendering the slot so Framework Base composes them. Never overwrite the consumer ref. If a primitive can render
 unrelated native instance types, omit a top-level ref unless it can define one sound, stable imperative contract.
 
+For focus targets, attachment generations, callback cleanup, and view-command
+boundaries, follow [common focus authoring](focus.md#modern-refs-and-slot-composition).
+Modern ref props do not imply that a structural root is the keyboard focus target
+or that a native focus command has completed.
+
 ## Make resolved state complete
 
 Build state from:

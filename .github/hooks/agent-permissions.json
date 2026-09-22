@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "matcher": "bash|powershell|view|create|edit|str_replace_editor|apply_patch",
+        "exec": "node",
+        "args": [".github/scripts/agent-permissions.mjs"],
+        "cwd": ".",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}

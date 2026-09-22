@@ -29,6 +29,12 @@ Disabled buttons communicate unavailable state, do not activate, and are
 removed from keyboard focus. Toggle-style buttons remain one button and
 announce their checked state from the externally supplied `selected` value.
 
-The visible focus indicator is the persistent shared `FocusVisual`, which
-draws inner and outer rings from focus stroke tokens. The native Windows focus
-ring is disabled to prevent a competing or unstable focus border.
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.

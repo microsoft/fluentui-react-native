@@ -44,7 +44,7 @@ bindings:
     gap: spacing.componentBase50
     paddingEnd: spacing.componentBase200
     paddingVertical: spacing.componentBase150
-  focusVisual:
+  FocusRing:
     outer: [color.strokeFocusOuter, strokeWidth.thick]
     inner: [color.strokeFocusInner, strokeWidth.thin]
 

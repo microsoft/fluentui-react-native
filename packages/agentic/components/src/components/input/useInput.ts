@@ -3,7 +3,7 @@ import { Pressable, TextInput, View } from 'react-native';
 import type { TextInputProps } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
-import { useControllableValue, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { useControllableValue, useFocusTarget, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
 
@@ -81,15 +81,20 @@ export function useInput_unstable(props: InputProps): InputState {
   } = props;
   const themeState = useThemeState();
   const [currentValue = '', setCurrentValue] = useControllableValue(controlledValue, defaultValue ?? '');
-  const [focused, setFocused] = React.useState(false);
+  const slotFocusable =
+    textInputProp !== null && typeof textInputProp === 'object' && 'focusable' in textInputProp ? textInputProp.focusable : undefined;
+  const resolvedFocusable = !disabled && (slotFocusable ?? focusable ?? true);
+  const focus = useFocusTarget(resolvedFocusable);
+  const { focused, focusTarget } = focus;
+  const blurFocusTarget = focus.onBlur;
   const [hovered, setHovered] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
-  const textInputRef = React.useRef<TextInput>(null);
-  const focusTextInput = React.useCallback(() => textInputRef.current?.focus(), []);
+  const focusTextInput = React.useCallback(() => {
+    focusTarget.requestFocus('pointer');
+  }, [focusTarget]);
 
   React.useEffect(() => {
     if (disabled) {
-      setFocused(false);
       setHovered(false);
       setPressed(false);
     }
@@ -114,15 +119,13 @@ export function useInput_unstable(props: InputProps): InputState {
     [disabled, readOnly, setCurrentValue],
   );
 
-  const handleFocus = React.useCallback(() => {
-    if (!disabled) {
-      setFocused(true);
-    }
-  }, [disabled]);
-  const handleBlur = React.useCallback(() => {
-    setFocused(false);
-    setPressed(false);
-  }, []);
+  const handleBlur = React.useCallback(
+    (event: Parameters<typeof focus.onBlur>[0]) => {
+      blurFocusTarget(event);
+      setPressed(false);
+    },
+    [blurFocusTarget],
+  );
   const handleHoverIn = React.useCallback(() => {
     if (!disabled) {
       setHovered(true);
@@ -169,10 +172,11 @@ export function useInput_unstable(props: InputProps): InputState {
       } as InputAccessibilityState,
       accessible: slotProps.accessible ?? accessible ?? true,
       editable: disabled || readOnly ? false : (slotProps.editable ?? true),
-      focusable: slotProps.focusable ?? focusable ?? !disabled,
+      focusable: resolvedFocusable,
+      ref: focus.focusTargetRef,
       onBlur: mergeHandlers(slotProps.onBlur, onBlur, handleBlur),
       onChangeText: mergeHandlers(slotProps.onChangeText, onChangeText, handleChangeText),
-      onFocus: mergeHandlers(slotProps.onFocus, onFocus, handleFocus),
+      onFocus: mergeHandlers(slotProps.onFocus, onFocus, focus.onFocus),
       onHoverIn: mergeHandlers(slotProps.onHoverIn, onHoverIn, handleHoverIn),
       onHoverOut: mergeHandlers(slotProps.onHoverOut, onHoverOut, handleHoverOut),
       onPressIn: mergeHandlers(slotProps.onPressIn, onPressIn, handlePressIn),
@@ -187,6 +191,8 @@ export function useInput_unstable(props: InputProps): InputState {
 
   return {
     ...themeState,
+    focusTarget: focus.focusTarget,
+    focusTargetRef: focus.focusTargetRef,
     contents,
     contentsStyle: resolvedStyles.contents,
     disabled,
@@ -208,7 +214,6 @@ export function useInput_unstable(props: InputProps): InputState {
     rootStyle: resolvedStyles.root,
     size,
     textInput,
-    textInputRef,
     textInputStyle: resolvedStyles.textInput,
     underline,
     underlineStyle: resolvedStyles.underline,

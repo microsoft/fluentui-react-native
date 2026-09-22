@@ -18,25 +18,27 @@ track, the thumb, and any rendered label.
 
 ## Keyboard
 
-Tab moves focus to the hit area while it is enabled. The component recognizes
-Enter, Space, and the platform spellings of the space key on key up. It also
-registers the normal `Pressable` action handler. If a native platform
-synthesizes that action for the same key, both paths request a toggle; this
-event sequence remains a documented verification gap.
+Tab moves focus to the hit area while enabled. Switch changes value only through
+its press action or the semantic toggle accessibility action (`toggle` on
+Windows Fabric, `Toggle` on Win32 and as a macOS custom action). It does not add a
+second key-up toggle. The shared focusable-pressable helper preserves native
+activation and adds a paired Win32 fallback only for otherwise-unrecognized
+native key codes. Caller key/accessibility handlers remain forwarded.
 
-The caller's key handler runs before the explicit key-up toggle, so a caller can
-observe the key first. Nothing else is bound; the switch does not respond to
-arrow keys, and moving through a group of switches is plain tab order.
+Enter/Space activate on the renderer's phase: key-up on Windows/Win32 and
+key-down on macOS. The switch does not claim arrow navigation.
 
 ## Focus visual
 
-A two-ring focus visual is drawn inside the hit area, following the root corner
-radius, whenever the root is focused and is not disabled. The two rings resolve
-from the inner and outer focus stroke tokens, so the indicator remains visible
-regardless of the surface behind it.
-
-React Native does not report focus modality on these platforms, so the ring
-appears for pointer focus as well as keyboard focus.
+The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
+to a private `FocusRing` slot. Its configured ring Views remain mounted on the
+custom path, but are visible only while focused with keyboard modality from
+`useRootSettings`. Programmatic focus follows the last root modality; pointer
+focus stays hidden unless the composition hook uses `alwaysVisible`. That
+override selects the custom path and still requires focus. Disabled or
+noninteractive targets show no custom ring. The visual is decorative and cannot
+intercept input; native ring appearance remains renderer-owned.
 
 ## State transition
 
@@ -64,3 +66,17 @@ When the caller supplies `checked`, the interaction still reports through
 passes a new `checked`. A caller that ignores `onChange` therefore gets a switch
 that visibly refuses to change, which is a bug in the caller rather than in the
 component. Only omit `checked` when the switch is free to own its own value.
+
+## Focus target lifetime
+
+The state hook uses the shared ref-backed focus foundation. Internal focus-target
+refs compose with caller refs on the actual interactive slot, without redirecting
+structural root refs. Native self-focus is distinct from descendant events, and
+detach/disable invalidates pending focus requests. Focus visuals observe root
+modality only while focused on the custom path; there is no scene-wide rerender.
+
+## Executable focus coverage
+
+The `FocusManagement` WDIO case requires native focus and checks both change
+counts and UIA checked state after pointer, Enter, and Space activation. A
+rendered thumb or JavaScript count alone does not establish native toggle state.

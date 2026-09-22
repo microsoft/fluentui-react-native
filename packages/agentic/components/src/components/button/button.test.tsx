@@ -3,7 +3,8 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { Pressable, PressableProps, ViewStyle } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
+import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -196,30 +197,20 @@ describe('Button', () => {
     const content = component.getByTestId('content');
     const icon = component.getByTestId('icon');
 
-    expect(root.children.slice(1)).toEqual([content, icon]);
+    expect(root.children).toEqual([content, icon]);
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
   });
 
-  it('renders a persistent dual-ring focus visual', async () => {
+  it('uses native focus visuals without mounting custom rings', async () => {
     const component = await renderButton({ content: 'Focused' });
     const root = getRoot(component);
 
-    expect(root.props.enableFocusRing).toBe(false);
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style).opacity).toBe(0);
+    expect(root.props.enableFocusRing).toBe(true);
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
 
     await fireEvent(root, 'focus', {});
 
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: '#000000',
-      borderWidth: 2,
-    });
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual', { includeHiddenElements: true }).props.style)).not.toHaveProperty(
-      'opacity',
-    );
-    expect(StyleSheet.flatten(component.getByTestId('focus-visual-inner', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: '#ffffff',
-      borderWidth: 1,
-    });
+    expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
   });
 
   it.each([

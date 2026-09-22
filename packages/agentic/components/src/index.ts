@@ -1,3 +1,7 @@
+export { useFocusVisuals } from './common/useFocusVisuals';
+export type { FocusVisualsOptions, FocusVisualsState } from './common/useFocusVisuals';
+export { applyFocusRingStyles } from './common/applyFocusRingStyles';
+
 export { Accordion } from './components/accordion/accordion';
 export type {
   AccordionLayout,

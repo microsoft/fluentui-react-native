@@ -97,3 +97,9 @@ the text.
 
 Expecting a press on the label text to toggle the control. Only the hit area is
 pressable.
+
+## Scene root
+
+Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.
+A nested theme boundary may override appearance without creating a separate
+input-modality tracker. Component test scenes use the shared themed renderer.

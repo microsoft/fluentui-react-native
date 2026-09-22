@@ -28,7 +28,7 @@ props; its caller style is applied last.
 The public slots are `root`, required `content`, and optional
 `secondaryContent`, `icon`, `selectedIcon`, `avatar`, and `trailing`.
 `selectionIndicator` and the hidden content reservation are state-only slots.
-The rendered root contains the persistent FocusVisual, the selection glyph,
+The rendered root contains the optional `FocusRing`, the selection glyph,
 then CompoundItemLayout. The layout renders avatar before the active icon,
 the layout-stable content, optional secondary content, and optional trailing
 content. A selected `selectedIcon` replaces `icon`; avatar takes precedence
@@ -49,9 +49,24 @@ semibold content width and show the selected fill.
 - **LIT-003:** Selection remains caller-owned, and each selection mode renders
   its documented presentational indicator and selected visual treatment.
 - **LIT-004:** Disabled, hover, press, focus, accessibility, and user-style
-  behavior remain coherent on the root.
+  behavior remain coherent on the root, following the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
 - **LIT-005:** Size and secondary-content-position mappings preserve the
   documented React Native layout behavior.
+
+## Focus visuals
+
+The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
+Windows and macOS request the system ring by default, without a custom subtree.
+Win32 and other platforms use the custom ring, visible only while focused and
+the scene's current input modality is keyboard. Programmatic focus follows the
+last root modality. Disabled and noninteractive targets never show custom feedback.
+
+The composition hook supports an explicit `useSystemFocusRing` override.
+`alwaysVisible` selects the custom path and bypasses modality while focused;
+it does not make an unfocused target visible or move native focus. Custom rings
+stay mounted across focus/blur. `applyFocusRingStyles` supplies shared theme
+colors and widths; component style hooks preserve their resolved radius.
+These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 ## Platform behavior
 
@@ -59,14 +74,15 @@ On Windows and macOS, the root is a React Native `Pressable`, defaulting to
 the `button` accessibility role. It merges a caller's accessibility state with
 `disabled` and `selected`, is accessible by default, and is focusable unless
 disabled. Native press, pointer hover, and focus events drive the resolved
-state. The component keeps a dual-ring FocusVisual mounted and only exposes it
-while enabled and focused.
+state.
 
 There is no internal keyboard roving, list position announcement, virtualized
 item metadata, or selection change handling. A surrounding list may provide
 those behaviors through its own React Native composition.
 
 ## Divergences from Flex
+
+- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
 
 - `list-item-native-selection-indicators` (**accepted**): FURN renders the
   single- and multi-select indicators as inaccessible text glyphs rather than

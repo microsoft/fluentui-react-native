@@ -53,6 +53,12 @@ export { useTheme } from './useTheme';
 export type { OfficePalette } from './types/palette.types';
 export { ThemeProvider } from './ThemeProvider';
 export type { ThemeProviderProps } from './ThemeProvider';
+export { ThemedRoot } from './ThemedRoot';
+export type { ThemedRootProps } from './ThemedRoot';
+export { RootContext, useRootSettings } from './rootContext';
+export { RootInputBoundary } from './RootInputBoundary';
+export { useRootInputModality } from './useRootInputModality';
+export type { InputModality, RootSettings } from './rootContext';
 export { FlexThemeReference } from './flexThemeReference';
 export type {
   FlexThemeInput,
