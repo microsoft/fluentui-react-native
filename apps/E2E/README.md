@@ -32,6 +32,24 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
 
 # Running E2E Tests
 
+## Windows and Win32 Appium drivers
+
+After the repository's `yarn` install, run `yarn e2eprep:windows` or
+`yarn e2eprep:win32` from `apps/E2E`. These commands verify that Appium discovers
+and imports the Windows driver already installed from the Yarn lockfile.
+They do not download another driver from npm.
+
+Windows and Win32 test commands use `APPIUM_HOME=.` to discover the workspace's
+Yarn-managed drivers and load only the Windows driver. Do not change this to
+`.appium` or run an unversioned `appium driver install windows`: that creates a
+separate dependency tree outside the lockfile and can leave the driver unable
+to import its Appium peer. Existing `.appium` installations are ignored by these
+two endpoints; the mobile and macOS commands retain their existing setup.
+
+Run `yarn test:appium` to check driver discovery, the locked package path and
+version, the actual driver import, and the Windows/Win32 runner configuration
+without launching a native app.
+
 ## Win32 Steps
 
 1. Install node packages, build JS
