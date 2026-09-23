@@ -9,7 +9,8 @@
     "lint": "fluentui-scripts lint",
     "measure": "node scripts/measure.mjs",
     "test": "node --test scripts/*.test.mjs",
-    "update-baseline": "node scripts/measure.mjs --update-baseline"
+    "update-baseline": "node scripts/measure.mjs --update-baseline",
+    "validate-report": "node scripts/validate-report.mjs"
   },
   "dependencies": {
     "@fluentui-react-native/components": "workspace:*",

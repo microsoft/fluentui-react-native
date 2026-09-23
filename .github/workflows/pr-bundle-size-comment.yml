@@ -35,6 +35,9 @@ jobs:
           repository: ${{ github.repository }}
           run-id: ${{ github.event.workflow_run.id }}
 
+      - name: Validate downloaded bundle size report
+        run: node apps/bundle-size/scripts/validate-report.mjs bundle-size-analysis/report.md
+
       - name: Publish bundle size PR comment
         env:
           EXPECTED_HEAD_REPOSITORY: ${{ github.event.workflow_run.head_repository.full_name }}
