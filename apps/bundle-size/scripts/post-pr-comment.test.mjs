@@ -11,12 +11,12 @@ import {
 
 const validReport = `# Bundle size report
 
-Tree-shaken production Metro bundles. Component costs are relative to their platform shell; shell costs are absolute.
+Tree-shaken, minified production esbuild bundles with React and React Native runtimes externalized.
 
-| Platform | Scenario | Baseline cost | Current cost | Cost delta | Change | Gzip delta | Module delta |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| macos | shell | 801.3 KiB | 801.3 KiB | 0.0 KiB | 0.00% | 0.0 KiB | +0 |
-| macos | components-button | New | 46.4 KiB | New | New | New | New |
+| Scenario | Modules-Mac (Δ) | Modules-Win (Δ) | Size-Mac (Δ) | Size-Win (Δ) |
+| --- | ---: | ---: | ---: | ---: |
+| design-color-lib | 6  (+0) | 6  (+0) | 6.33k  (+0b) | 6.33k  (+0b) |
+| components-button | 62 (New) | 63 (New) | 49.48k (New) | 49.40k (New) |
 
 The job is advisory: size changes are reported but do not fail the pull request. Bundle or analysis errors still fail.
 `;

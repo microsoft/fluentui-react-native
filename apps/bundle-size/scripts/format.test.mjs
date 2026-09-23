@@ -18,15 +18,11 @@ describe('formatSize', () => {
 });
 
 describe('formatBundleSizeTable', () => {
-  it('shows shell-relative costs and signed baseline deltas', () => {
+  it('shows bundle costs and signed baseline deltas', () => {
     const output = formatBundleSizeTable([
       {
         platform: 'macos',
         scenario: 'components-button',
-        moduleCount: 1234,
-        rawBytes: 1_234_560,
-        deltaModules: 737,
-        deltaBytes: 414_038,
         comparison: {
           status: 'compared',
           currentModuleCost: 737,
@@ -36,23 +32,8 @@ describe('formatBundleSizeTable', () => {
         },
       },
       {
-        platform: 'win32',
-        scenario: 'shell',
-        moduleCount: 497,
-        rawBytes: 999,
-        comparison: {
-          status: 'new',
-          currentModuleCost: 497,
-          currentCost: 999,
-        },
-      },
-      {
         platform: 'windows',
-        scenario: 'components-catalog',
-        moduleCount: 2000,
-        rawBytes: 2000,
-        deltaModules: 1503,
-        deltaBytes: 1000,
+        scenario: 'components-button',
         comparison: {
           status: 'compared',
           currentModuleCost: 1503,
@@ -61,22 +42,27 @@ describe('formatBundleSizeTable', () => {
           costDelta: 1000,
         },
       },
+      {
+        platform: 'macos',
+        scenario: 'design-color-lib',
+        comparison: {
+          status: 'new',
+          currentModuleCost: 6,
+          currentCost: 999,
+        },
+      },
     ]);
 
-    assert.match(output, /Platform: scenario/);
-    assert.match(output, /New modules/);
-    assert.match(output, /macos: components-button/);
-    assert.match(output, /737/);
-    assert.match(output, /\+2/);
-    assert.match(output, /414\.04k/);
+    assert.match(output, /Scenario/);
+    assert.match(output, /Modules-Mac \(Δ\)/);
+    assert.match(output, /Modules-Win \(Δ\)/);
+    assert.match(output, /Size-Mac \(Δ\)/);
+    assert.match(output, /Size-Win \(Δ\)/);
+    assert.match(
+      output,
+      /components-button\s+│\s+737 {2}\(\+2\)\s+│\s+1,503 \(-12\)\s+│\s+414\.04k \(-999b\)\s+│\s+1\.00k {2}\(\+1\.00k\)/,
+    );
     assert.doesNotMatch(output, /1,234\.56k/);
-    assert.match(output, /-999b/);
-    assert.match(output, /win32: shell/);
-    assert.match(output, /999b/);
-    assert.match(output, /New/);
-    assert.match(output, /windows: components-catalog/);
-    assert.match(output, /1,503/);
-    assert.match(output, /-12/);
-    assert.match(output, /\+1\.00k/);
+    assert.match(output, /design-color-lib\s+│\s+6 \(New\)\s+│\s+-\s+│\s+999b \(New\)\s+│\s+-/);
   });
 });

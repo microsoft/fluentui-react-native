@@ -2,9 +2,6 @@
   "platforms": ["macos", "windows"],
   "scenarios": [
     {
-      "name": "shell"
-    },
-    {
       "name": "components-button",
       "module": "@fluentui-react-native/components",
       "exports": ["Button"]
