@@ -48,6 +48,8 @@ describe('createBundleSizeComment', () => {
     const comment = createBundleSizeComment(validReport, 'microsoft/fluentui-react-native', '123');
 
     assert.match(comment, new RegExp(`^${bundleSizeCommentMarker.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`));
+    assert.match(comment, /\| Scenario \| Modules-Mac \(Δ\) \| Modules-Win \(Δ\) \| Size-Mac \(Δ\) \| Size-Win \(Δ\) \|/);
+    assert.match(comment, /\| design-color-lib \| 6 {2}\(\+0\) \| 6 {2}\(\+0\) \| 6\.33k {2}\(\+0b\) \| 6\.33k {2}\(\+0b\) \|/);
     assert.match(comment, /https:\/\/github\.com\/microsoft\/fluentui-react-native\/actions\/runs\/123\)$/);
   });
 

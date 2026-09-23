@@ -36,10 +36,11 @@ yarn bundle-size:update
 ```
 
 Review the baseline diff together with the implementation that caused it. The PR workflow adds
-the Markdown comparison to its job summary, updates one persistent PR comment, and uploads the
-complete `dist/bundle-size` directory, including the esbuild metafiles, for investigation.
-Same-repository PRs publish directly; fork and Dependabot reports are strictly validated and
-published by a separate trusted completion workflow.
+the Markdown comparison to its job summary only after validating the trusted report format,
+updates one persistent PR comment, and uploads the complete `dist/bundle-size` directory,
+including the esbuild metafiles, for investigation. Same-repository PRs publish directly; fork
+and Dependabot reports are validated again and published by a separate trusted completion
+workflow.
 
 ## Adding a package or submodule
 
