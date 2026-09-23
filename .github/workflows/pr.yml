@@ -75,6 +75,9 @@ jobs:
       - name: Measure bundle sizes
         run: yarn bundle-size --baseline "$env:RUNNER_TEMP\bundle-size-baseline.json"
 
+      - name: Validate bundle size report
+        run: yarn workspace @fluentui-react-native/bundle-size validate-report
+
       - name: Publish bundle size summary
         run: Get-Content apps\bundle-size\dist\bundle-size\report.md -Raw | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
 

@@ -24,22 +24,57 @@ function formatSigned(value, formatter) {
   return `${sign}${formatter(Math.abs(value))}`;
 }
 
+function formatWithDelta(value, delta, formatter, status) {
+  if (status === 'new') {
+    return `${formatter(value)} (New)`;
+  }
+
+  const magnitude = formatter(Math.abs(delta));
+  const integerDigits = magnitude.match(/^[\d,]+/)?.[0].replaceAll(',', '').length ?? 0;
+  const padding = integerDigits === 1 ? ' ' : '';
+  return `${formatter(value)} ${padding}(${formatSigned(delta, formatter)})`;
+}
+
+export function groupComparisonsByScenario(results) {
+  const scenarios = new Map();
+  for (const { platform, scenario, comparison } of results) {
+    const platformResults = scenarios.get(scenario) ?? new Map();
+    platformResults.set(platform, comparison);
+    scenarios.set(scenario, platformResults);
+  }
+  return scenarios;
+}
+
+export function formatModuleComparison(comparison) {
+  return comparison
+    ? formatWithDelta(comparison.currentModuleCost, comparison.moduleCostDelta, integerFormatter.format, comparison.status)
+    : '-';
+}
+
+export function formatSizeComparison(comparison) {
+  return comparison ? formatWithDelta(comparison.currentCost, comparison.costDelta, formatSize, comparison.status) : '-';
+}
+
 export function formatBundleSizeTable(results) {
-  const rows = results.map(({ platform, scenario, comparison }) => [
-    `${platform}: ${scenario}`,
-    comparison.currentModuleCost,
-    comparison.status === 'new' ? 'New' : formatSigned(comparison.moduleCostDelta, integerFormatter.format),
-    formatSize(comparison.currentCost),
-    comparison.status === 'new' ? 'New' : formatSigned(comparison.costDelta, formatSize),
-  ]);
+  const rows = [...groupComparisonsByScenario(results)].map(([scenario, platformResults]) => {
+    const macos = platformResults.get('macos');
+    const windows = platformResults.get('windows');
+    return [
+      scenario,
+      formatModuleComparison(macos),
+      formatModuleComparison(windows),
+      formatSizeComparison(macos),
+      formatSizeComparison(windows),
+    ];
+  });
 
   return formatAsTable(rows, {
     columns: [
-      { label: 'Platform: scenario' },
-      { label: 'New modules', align: 'right', format: integerFormatter.format },
-      { label: 'Module delta', align: 'right' },
-      { label: 'New size', align: 'right' },
-      { label: 'Size delta', align: 'right' },
+      { label: 'Scenario' },
+      { label: 'Modules-Mac (Δ)', align: 'right' },
+      { label: 'Modules-Win (Δ)', align: 'right' },
+      { label: 'Size-Mac (Δ)', align: 'right' },
+      { label: 'Size-Win (Δ)', align: 'right' },
     ],
   });
 }
