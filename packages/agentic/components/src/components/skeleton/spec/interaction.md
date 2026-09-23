@@ -21,16 +21,29 @@ placeholder with no measured size renders as a static themed block.
 
 ## Sweep
 
-The sweep is a highlight band that travels across the placeholder on a
-continuous linear loop. The band is a fraction of the measured width with a
-fixed minimum, and it translates from just before the leading edge to just past
-the trailing edge, so the band is fully off the placeholder at both ends of a
-cycle. The loop repeats without pausing for as long as the placeholder is
-mounted.
+The sweep is a three-stop linear gradient: transparent at both ends and the
+themed highlight at the center, with peak opacity 0.64. It travels left to right
+in LTR and right to left in RTL, with a fixed diagonal 45-degree band. The
+horizontal band width is 45 percent of the measured root width, rounded to a
+whole layout unit, with a minimum of 24.
 
-The animation runs through `Animated` with the native driver, so it is not
-affected by JavaScript thread work. Active placeholders subscribe to one shared
-sweep channel, so instances mounted at different times read the same phase.
+The gradient uses user-space coordinates rather than a stretched bounding-box
+gradient. Its viewport width is the band width plus the root height, which
+contains the complete diagonal at every row without hard side cuts. Translation
+runs between minus that viewport width and the root width, reversed in RTL, so
+the highlight is fully outside the clipped root at both ends of the loop.
+Resizing recomputes the geometry without creating a separate animation clock.
+
+The animation runs through the shared `Animated` loop. It uses the native
+driver except on macOS Fabric, whose native transform updates remain static;
+that renderer uses the JavaScript driver. Active placeholders subscribe to one
+shared sweep channel, so instances mounted at different times read the same
+phase.
+
+An opaque highlight color, such as a native high-contrast `PlatformColor`,
+cannot be passed to SVG gradient stops. In that case no loop starts and the
+placeholder remains static with a token-colored outline. Development builds warn about this renderer
+limitation instead of silently substituting a solid moving band.
 
 ## Motion and lifecycle
 

@@ -15,7 +15,7 @@ import { StorybookUIComponent } from './StorybookUI';
 jest.mock('./DesktopDriverBridge', () => ({ DesktopDriverBridge: jest.fn(() => null) }));
 jest.mock('./StorybookUI', () => ({ StorybookUIComponent: jest.fn(() => null) }));
 
-function createTestApp() {
+function createTestApp(storyBackgroundColor?: string) {
   const roots: RootSettings[] = [];
   const bridgeRoots: RootSettings[] = [];
   const themes: ThemeState[] = [];
@@ -44,7 +44,13 @@ function createTestApp() {
       throw new Error('Expected the app factory to configure the themed UI.');
     }
     return () => (
-      <UI storyHash={{}} setStory={jest.fn()} storage={{ getItem: () => null, setItem: () => undefined }} theme={lightTheme}>
+      <UI
+        storyBackgroundColor={storyBackgroundColor}
+        storyHash={{}}
+        setStory={jest.fn()}
+        storage={{ getItem: () => null, setItem: () => undefined }}
+        theme={lightTheme}
+      >
         <Story />
       </UI>
     );
@@ -89,6 +95,31 @@ describe('Storybook app theme root', () => {
     expect(roots).toHaveLength(renderCount);
   });
 
+  it.each(['none', 'light', 'dark'])('keeps the %s canvas distinct from the Secondary Button fill', async (choice) => {
+    const { App, themes } = createTestApp();
+    const scene = await render(<App />);
+
+    await fireEvent.press(scene.getByTestId(`test-theme-${choice}`));
+
+    const state = themes[themes.length - 1];
+    const calls = jest.mocked(StorybookUIComponent).mock.calls;
+    const theme = calls[calls.length - 1][0].theme;
+    expect(theme.background.content).toBe(state.tokens.color.surfaceNeutralFar);
+    expect(theme.background.content).toBe(theme.background.preview);
+    expect(theme.background.content).not.toBe(state.tokens.color.backgroundNeutralSubtle);
+  });
+
+  it.each(['#ffeedd', 'transparent'])('preserves the explicit %s story background across theme changes', async (storyBackgroundColor) => {
+    const { App } = createTestApp(storyBackgroundColor);
+    const scene = await render(<App />);
+
+    for (const choice of ['none', 'dark', 'light']) {
+      await fireEvent.press(scene.getByTestId(`test-theme-${choice}`));
+      const calls = jest.mocked(StorybookUIComponent).mock.calls;
+      expect(calls[calls.length - 1][0].storyBackgroundColor).toBe(storyBackgroundColor);
+    }
+  });
+
   it('switches chrome and story colors together without recreating Storybook or resetting the scene', async () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation();
     const { App, roots, themes, mounted, unmounted, getStorybookUI } = createTestApp();
@@ -114,7 +145,7 @@ describe('Storybook app theme root', () => {
       const background = theme.base === 'dark' ? state.tokens.color.fixedBlack : state.tokens.color.fixedWhite;
       const literal = (value: unknown, fallback: unknown) => (typeof value === 'string' ? value : fallback);
       expect(theme.background.app).toBe(literal(state.tokens.color.surfaceNeutralFar, background));
-      expect(theme.background.content).toBe(literal(state.tokens.color.surfaceNeutralNear, background));
+      expect(theme.background.content).toBe(literal(state.tokens.color.surfaceNeutralFar, background));
       expect(theme.background.preview).toBe(literal(state.tokens.color.surfaceNeutralFar, background));
       expect(theme.color.defaultText).toBe(literal(state.tokens.color.foregroundNeutralPrimary, foreground));
       expect(theme.input.color).toBe(literal(state.tokens.color.foregroundNeutralPrimary, foreground));

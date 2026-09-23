@@ -1,4 +1,4 @@
-import type { AccessibilityState, ColorValue, StyleProp, TextInput, TextStyle, View, ViewStyle } from 'react-native';
+import type { AccessibilityState, ColorValue, Pressable, StyleProp, TextInput, TextStyle, View, ViewStyle } from 'react-native';
 
 import type { ThemeState } from '@fluentui-react-native/design';
 import type {
@@ -26,7 +26,7 @@ export type InputSlots = {
 };
 
 type InputStateSlots = InputSlots & {
-  contents: OptionalSlot<typeof View>;
+  contents: OptionalSlot<typeof Pressable>;
   iconTextStack: OptionalSlot<typeof View>;
   iconEnd: OptionalSlot<typeof View>;
   underline: OptionalSlot<typeof View>;

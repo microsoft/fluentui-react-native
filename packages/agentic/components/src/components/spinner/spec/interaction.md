@@ -13,17 +13,19 @@ it is never focusable.
 ## Rotation
 
 The drawing surface rotates a full turn on a continuous loop: `Animated.timing`
-over 1500 milliseconds with linear easing, wrapped in `Animated.loop` and run on
-the native driver so the rotation is unaffected by work on the JavaScript
-thread. The rotated value is interpolated from zero to a full turn, so the
+over 1500 milliseconds with linear easing, wrapped in the shared `Animated.loop`.
+The native driver is used except on macOS Fabric, whose native transform updates
+remain static; that renderer uses the JavaScript driver. The rotated value is
+interpolated from zero to a full turn, so the
 wrap-around from the end of one cycle to the start of the next is seamless and
 there is no pause at the top.
 
 Only the surface rotates. The track is a full circle and is visually unchanged
 by the rotation; the indicator is a quarter-circumference arc, so the apparent
 motion is the arc sweeping around a static ring. The arc keeps that same
-proportion at every size because the dash pattern is expressed against a
-normalized path length rather than in absolute units.
+proportion at every size because the visible and gap lengths are calculated
+as one quarter and three quarters of `2 * Math.PI * radius`. React Native SVG
+does not implement the web `pathLength` normalization.
 
 ## Reduced motion
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Easing } from 'react-native';
+import { Animated, Easing, Platform } from 'react-native';
 
 export type SharedAnimatedLoopOptions = {
   channel: string;
@@ -57,7 +57,10 @@ function scheduleCleanup(key: string, loop: SharedAnimatedLoop): void {
  * channel with the same timing configuration.
  */
 export function useSharedAnimatedLoop({ channel, duration, enabled, useNativeDriver }: SharedAnimatedLoopOptions): Animated.Value {
-  const key = `${channel}:${duration}:${useNativeDriver ? 'native' : 'javascript'}`;
+  // RNmacOS Fabric currently leaves native-driven transforms at their initial value.
+  const isMacOSFabric = Platform.OS === 'macos' && Reflect.get(globalThis, 'nativeFabricUIManager') != null;
+  const resolvedUseNativeDriver = useNativeDriver && !isMacOSFabric;
+  const key = `${channel}:${duration}:${resolvedUseNativeDriver ? 'native' : 'javascript'}`;
   const sharedLoop = React.useMemo(() => getSharedLoop(key), [key]);
 
   React.useEffect(() => {
@@ -83,7 +86,8 @@ export function useSharedAnimatedLoop({ channel, duration, enabled, useNativeDri
           toValue: 1,
           duration,
           easing: Easing.linear,
-          useNativeDriver,
+          isInteraction: false,
+          useNativeDriver: resolvedUseNativeDriver,
         }),
       );
       sharedLoop.animation.start();
@@ -99,7 +103,7 @@ export function useSharedAnimatedLoop({ channel, duration, enabled, useNativeDri
         scheduleCleanup(key, sharedLoop);
       }
     };
-  }, [duration, enabled, key, sharedLoop, useNativeDriver]);
+  }, [duration, enabled, key, sharedLoop, resolvedUseNativeDriver]);
 
   return sharedLoop.value;
 }

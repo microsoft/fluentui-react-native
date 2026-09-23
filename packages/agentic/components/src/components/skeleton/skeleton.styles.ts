@@ -5,7 +5,6 @@ import { themedStyleSheetFactory, type ThemeState } from '@fluentui-react-native
 
 export type SkeletonThemeStyles = {
   root: ViewStyle;
-  shimmerBand: ViewStyle;
 };
 
 export const skeletonStyles = StyleSheet.create({
@@ -21,21 +20,15 @@ export const skeletonStyles = StyleSheet.create({
     position: 'absolute',
     top: 0,
   },
-  shimmerBand: {
-    height: '100%',
-    opacity: 0.64,
-  },
 });
 
-export const getSkeletonThemeStyles = themedStyleSheetFactory<SkeletonThemeStyles>('Skeleton', ({ tokens }: ThemeState) =>
-  StyleSheet.create({
+export const getSkeletonThemeStyles = themedStyleSheetFactory<SkeletonThemeStyles>('Skeleton', ({ tokens }: ThemeState) => {
+  const opaqueHighlight = typeof tokens.color.backgroundNeutralSubtle !== 'string';
+  return StyleSheet.create({
     root: {
-      backgroundColor: tokens.color.backgroundNeutralSubtle,
-      borderRadius: tokens.borderRadius.base100,
-    },
-    shimmerBand: {
       backgroundColor: tokens.color.backgroundNeutralSoft,
       borderRadius: tokens.borderRadius.base100,
+      ...(opaqueHighlight ? { borderColor: tokens.color.strokeNeutralLoud, borderWidth: Number(tokens.strokeWidth.thin) } : {}),
     },
-  }),
-);
+  });
+});

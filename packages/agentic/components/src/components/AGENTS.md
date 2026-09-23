@@ -49,6 +49,8 @@ audit.
 - Follow the [focus visual policy](#focus-visual-policy): create the optional `FocusRing` in the state hook,
   apply native settings only to the actual focus target, and style the custom ring in the styling phase.
   Do not introduce component-specific modality trackers or `outline*` focus styling.
+- Keep non-focus indicators such as Avatar's activity ring independent of the focus visual policy.
+  Reuse `FocusVisual` as a persistent decorative border and toggle opacity rather than native outline properties.
 - Keep render functions free of hooks, token reads, style creation, and slot mutation.
 - Export the resolved state type and the state, style-application, and render stages from the package root under
   component-qualified unstable names so another component can reuse the pipeline.

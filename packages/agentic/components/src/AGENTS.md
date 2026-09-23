@@ -25,6 +25,11 @@ the change crosses component boundaries.
 
 ## Optimization principles
 
+- Align native text with View layout, not synthetic text heights or baseline offsets. A font's em size, line box, and
+  visible glyph are different measurements. Use `Icon` for font icons and `LayoutStableText` for reserved labels; follow
+  the [native alignment rules](../../../../.github/skills/agentic-component-authoring/references/styles-and-tokens.md#native-text-and-vertical-alignment)
+  for editors, mixed-size text rows, and regression coverage.
+
 - Audit dependency direction before introducing shared code.
 - Look for repeated types, constants, routines, and subtrees across components.
 - Validate extraction payoff before creating another layer of indirection.

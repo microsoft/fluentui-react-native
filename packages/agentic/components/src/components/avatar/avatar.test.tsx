@@ -92,14 +92,73 @@ describe('Avatar', () => {
     const tokens = defaultFlexTokens;
 
     expect(getRootStyle(component)).toMatchObject({
-      outlineColor: tokens.color.strokeBrandLoud,
-      outlineOffset: tokens.strokeWidth.thick,
-      outlineStyle: 'solid',
-      outlineWidth: tokens.strokeWidth.thicker,
       width: 120,
       height: 120,
     });
+    expect(StyleSheet.flatten(component.getByTestId('avatar-activity-ring', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderColor: tokens.color.strokeBrandLoud,
+      borderRadius: tokens.borderRadius.circular,
+      borderStyle: 'solid',
+      borderWidth: tokens.strokeWidth.thicker,
+      bottom: -(tokens.strokeWidth.thick + tokens.strokeWidth.thicker),
+      left: -(tokens.strokeWidth.thick + tokens.strokeWidth.thicker),
+      right: -(tokens.strokeWidth.thick + tokens.strokeWidth.thicker),
+      top: -(tokens.strokeWidth.thick + tokens.strokeWidth.thicker),
+      position: 'absolute',
+    });
   });
+
+  it.each([16, 20, 24, 28, 32, 40, 56, 120] as const)(
+    'keeps the same decorative ring mounted in every content mode at size %s',
+    async (size) => {
+      const tokens = defaultFlexTokens;
+      const width = size === 16 ? tokens.strokeWidth.thin : size >= 56 ? tokens.strokeWidth.thicker : tokens.strokeWidth.thick;
+      const offset = size === 120 ? tokens.strokeWidth.thick : tokens.strokeWidth.thin;
+      const modes: React.ComponentProps<typeof Avatar>[] = [
+        { initials: 'AB' },
+        { icon: { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' } } },
+        { image: { source: { uri: 'avatar.png' } } },
+      ];
+
+      for (const content of modes) {
+        const props = { ...content, accessibilityLabel: `Avatar ${size}`, size };
+        const component = await renderAvatar(props);
+        const ring = component.getByTestId('avatar-activity-ring', { includeHiddenElements: true });
+        const rootStyle = getRootStyle(component);
+        expect(ring.props).toMatchObject({
+          accessibilityElementsHidden: true,
+          accessible: false,
+          collapsable: false,
+          focusable: false,
+          importantForAccessibility: 'no-hide-descendants',
+          pointerEvents: 'none',
+        });
+        expect(StyleSheet.flatten(ring.props.style)).toMatchObject({
+          borderColor: tokens.color.strokeBrandLoud,
+          borderWidth: width,
+          bottom: -(offset + width),
+          left: -(offset + width),
+          opacity: 0,
+          right: -(offset + width),
+          top: -(offset + width),
+        });
+        for (const key of ['outlineColor', 'outlineOffset', 'outlineStyle', 'outlineWidth']) {
+          expect(rootStyle).not.toHaveProperty(key);
+        }
+
+        await component.rerender(<Avatar {...props} activityRing />);
+        expect(component.getByTestId('avatar-activity-ring', { includeHiddenElements: true })).toBe(ring);
+        expect(StyleSheet.flatten(ring.props.style).opacity).toBeUndefined();
+        expect(getRootStyle(component)).toEqual(rootStyle);
+        expect(component.getAllByRole('image')).toHaveLength(1);
+
+        await component.rerender(<Avatar {...props} activityRing={false} />);
+        expect(component.getByTestId('avatar-activity-ring', { includeHiddenElements: true })).toBe(ring);
+        expect(StyleSheet.flatten(ring.props.style).opacity).toBe(0);
+        await component.unmount();
+      }
+    },
+  );
 
   it('applies the correct size and initials scale across the supported sizes', async () => {
     const tokens = defaultFlexTokens;
@@ -118,10 +177,15 @@ describe('Avatar', () => {
       const component = await renderAvatar({ accessibilityLabel: `Avatar ${size}`, initials: 'LM', size });
       const expectedInitials = size === 16 ? 'L' : 'LM';
       expect(getRootStyle(component)).toMatchObject({ height: size, minHeight: size, minWidth: size, padding, width: size });
-      expect(StyleSheet.flatten(component.getByText(expectedInitials, { includeHiddenElements: true }).props.style)).toMatchObject({
+      const initialsStyle = StyleSheet.flatten(component.getByText(expectedInitials, { includeHiddenElements: true }).props.style);
+      expect(initialsStyle).toMatchObject({
         fontSize,
-        lineHeight: fontSize,
+        includeFontPadding: false,
+        position: 'absolute',
       });
+      expect(initialsStyle.lineHeight).toBeUndefined();
+      expect(initialsStyle.height).toBeUndefined();
+      expect(initialsStyle.textAlignVertical).toBeUndefined();
     }
   });
 
@@ -148,5 +212,14 @@ describe('Avatar', () => {
     });
 
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
+  });
+
+  it('preserves explicit initials line metrics after intrinsic defaults', async () => {
+    const component = await renderAvatar({
+      accessibilityLabel: 'Initials',
+      initials: { children: 'AB', style: { lineHeight: 24 } },
+    });
+
+    expect(StyleSheet.flatten(component.getByText('AB', { includeHiddenElements: true }).props.style).lineHeight).toBe(24);
   });
 });

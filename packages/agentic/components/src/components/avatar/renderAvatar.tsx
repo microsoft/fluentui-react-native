@@ -1,4 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { FocusVisual } from '../../primitives/focus-visual/focus-visual';
 import type { AvatarState } from './avatar.types';
 
 export function renderAvatar_unstable(state: AvatarState) {
@@ -6,6 +7,7 @@ export function renderAvatar_unstable(state: AvatarState) {
 
   return (
     <state.root>
+      <FocusVisual {...state.activityRingProps} />
       {contentMode === 'image' && Image && <Image />}
       {contentMode === 'icon' && Icon && <Icon />}
       {contentMode === 'initials' && Initials && <Initials />}

@@ -32,6 +32,8 @@ describe('Storybook theme palette', () => {
     );
 
     expect(themes[0].background.app).toBe('#123456');
+    expect(themes[0].background.content).toBe('#123456');
+    expect(themes[0].background.preview).toBe('#123456');
     expect(themes[0].color.defaultText).toBe('#abcdef');
     await scene.rerender(
       <ThemedRoot theme={source}>
@@ -42,6 +44,8 @@ describe('Storybook theme palette', () => {
 
     await act(() => source.update({ color: { surfaceNeutralFar: '#654321' } }));
     expect(themes[themes.length - 1].background.app).toBe('#654321');
+    expect(themes[themes.length - 1].background.content).toBe('#654321');
+    expect(themes[themes.length - 1].background.preview).toBe('#654321');
     expect(themes[themes.length - 1]).not.toBe(themes[0]);
     expect(themes[themes.length - 1].appBorderColor).toBe(states[states.length - 1].tokens.color.strokeNeutralSubtle);
   });
@@ -59,5 +63,30 @@ describe('Storybook theme palette', () => {
     expect(themes[0].color.primary).toBe(states[0].tokens.color.fixedBlack);
     expect(warn).toHaveBeenCalledTimes(1);
     expect(warn).toHaveBeenCalledWith(expect.stringContaining('foregroundBrandPrimary'));
+  });
+
+  it.each([
+    ['light', 'standard', 'fixedWhite'],
+    ['dark', 'standard', 'fixedBlack'],
+    ['light', 'highContrast', 'fixedBlack'],
+    ['dark', 'highContrast', 'fixedBlack'],
+  ] as const)('retains the native canvas fallback for %s/%s', async (colorScheme, contrast, fallback) => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation();
+    const themes: Theme[] = [];
+    const states: ThemeState[] = [];
+    const source = new FlexThemeReference({
+      appearance: { colorScheme, contrast },
+      base: { color: { surfaceNeutralFar: PlatformColor('windowBackgroundColor') } },
+    });
+    await render(
+      <ThemedRoot theme={source}>
+        <Probe themes={themes} states={states} />
+      </ThemedRoot>,
+    );
+
+    expect(themes[0].background.content).toBe(states[0].tokens.color[fallback]);
+    expect(themes[0].background.preview).toBe(states[0].tokens.color[fallback]);
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('surfaceNeutralFar'));
   });
 });

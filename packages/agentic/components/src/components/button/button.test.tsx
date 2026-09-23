@@ -146,7 +146,8 @@ describe('Button', () => {
     expect(component.queryByTestId('regular-icon')).toBeNull();
     expect(labels).toHaveLength(2);
     expect(StyleSheet.flatten(labels[0].props.style)).toMatchObject({ fontWeight: '600', opacity: 0 });
-    expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ fontWeight: '600', position: 'absolute' });
+    expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ fontWeight: '600' });
+    expect(StyleSheet.flatten(labels[1].parent?.props.style)).toMatchObject({ position: 'absolute', justifyContent: 'center' });
   });
 
   it('renders selection without changing it on press', async () => {
@@ -174,7 +175,7 @@ describe('Button', () => {
         fontWeight: tokens.fontWeight.functionalSemibold,
         opacity: 0,
       });
-      expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({ position: 'absolute' });
+      expect(StyleSheet.flatten(labels[1].parent?.props.style)).toMatchObject({ position: 'absolute', justifyContent: 'center' });
     }
   });
 

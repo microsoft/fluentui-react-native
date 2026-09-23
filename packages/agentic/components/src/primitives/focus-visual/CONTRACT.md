@@ -1,6 +1,8 @@
 # FocusVisual contract
 
-`FocusVisual` is an unstyled, decorative focus-ring structure.
+`FocusVisual` is an unstyled, decorative ring structure. It can render focus
+feedback or another outward indicator, such as Avatar's activity ring; the
+consumer owns the meaning and visibility state.
 
 - The outer ring is always mounted; an optional inner ring enables a dual-ring
   visual.

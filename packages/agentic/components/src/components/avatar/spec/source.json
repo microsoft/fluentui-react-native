@@ -3,7 +3,7 @@
   "component": "avatar",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-08-28",
+  "reviewedAt": "2026-09-21",
   "sources": [
     {
       "id": "flex-component",
@@ -99,6 +99,10 @@
     {
       "id": "AVT-005",
       "evidence": ["avatar.types.ts", "useAvatar.ts", "avatar.stories.tsx"]
+    },
+    {
+      "id": "AVT-006",
+      "evidence": ["avatar.styles.ts", "useAvatarStyles.ts", "renderAvatar.tsx", "avatar.test.tsx", "avatar.stories.tsx"]
     }
   ]
 }

@@ -19,7 +19,14 @@ Avatar is a non-interactive identity marker. It renders exactly one image, icon,
 
 `size` defaults to `40` and accepts `16`, `20`, `24`, `28`, `32`, `40`, `56`, or `120`. `activityRing` defaults to `false`. `root` is required; `image`, `icon`, and `initials` are optional slots. The resolved content mode uses image first, then initials, then icon. Icon mode renders a person icon by default. Initials mode defaults to `AB`, uppercases string or numeric content, trims whitespace, and limits output to one character at size `16` or two characters otherwise.
 
-The root contains only the active content slot. Images are absolute-fill and use cover resizing. Icon and initials slots are centered; all content slots are decorative because the root owns any accessible identity. Supplying more than one content slot is accepted for compatibility, resolves through the documented priority, and issues a development warning.
+The root contains a persistent decorative activity-ring visual and only the active content slot. Images are absolute-fill and use cover resizing. Icon and initials slots are centered; all content slots are decorative because the root owns any accessible identity. Supplying more than one content slot is accepted for compatibility, resolves through the documented priority, and issues a development warning.
+
+The circular View centers the initials' intrinsic native line box. Avatar owns
+all initials typography and uses native Text without an inherited body line
+height or an em-sized line-height clamp, which can clip or displace glyphs.
+Font-size tokens, native text scaling, and explicit caller line metrics are preserved.
+The initials are an absolute child without edge offsets, so the smallest
+avatar's padded frame cannot clamp that intrinsic line box during measurement.
 
 The resolved state retains size, activity-ring value, content mode, theme state, and user root style. User style is applied last. Avatar has no interaction-state ownership.
 
@@ -32,12 +39,23 @@ The resolved state retains size, activity-ring value, content mode, theme state,
 - **AVT-005:** Add no interaction or focus behavior of its own and delegate
   those semantics to a containing control, while forwarding the broad root
   `ViewProps` surface.
+- **AVT-006:** Keep the activity ring mounted with its border configured from the
+  first render, hide it through opacity when inactive, and avoid native outline
+  properties. Its token-derived gap and stroke extend outside the avatar without
+  changing layout, hit testing, or accessibility.
 
 ## Platform behavior
 
 An Avatar with `accessibilityLabel` is accessible with React Native image role; callers can also explicitly control `accessible`. Without an informative label, the default root is hidden from accessibility descendants. Its image, icon, and initials children are always hidden so identity is not announced twice.
 
-Windows exposes an informative root as a UI Automation image; macOS exposes it as an AX image. Avatar adds no tab stop or `FocusVisual`, although a caller can opt the forwarded root into focus with `focusable`. The active ring uses React Native root outline properties and does not introduce a separate rendered child or change the requested width and height.
+Windows exposes an informative root as a UI Automation image; macOS exposes it as an AX image. Avatar adds no tab stop or focus feedback, although a caller can opt the forwarded root into focus with `focusable`.
+
+The activity ring reuses `FocusVisual` as a persistent decorative border, not as
+a focus indicator. Its absolute edges are inset by the negative sum of the
+activity-ring gap and stroke width. The same border remains configured when
+inactive; only opacity changes. This avoids the native outline path that can
+fail-fast in React Native Windows 0.81 Fabric on a background-filled avatar,
+including when the initial render already requests an active ring.
 
 ## Divergences from Flex
 
@@ -48,10 +66,11 @@ Windows exposes an informative root as a UI Automation image; macOS exposes it a
 
 ## Conformance
 
-| Requirement | Evidence                                                                     |
-| ----------- | ---------------------------------------------------------------------------- |
-| AVT-001     | `avatar.types.ts`, `useAvatar.ts`, `avatar.test.tsx`, `avatar.types.test.ts` |
-| AVT-002     | `useAvatarStyles.ts`, `renderAvatar.tsx`, `avatar.test.tsx`                  |
-| AVT-003     | `avatar.styles.ts`, `useAvatarStyles.ts`, `avatar.test.tsx`                  |
-| AVT-004     | `useAvatar.ts`, `useAvatarStyles.ts`, `avatar.test.tsx`                      |
-| AVT-005     | `avatar.types.ts`, `useAvatar.ts`, `avatar.stories.tsx`                      |
+| Requirement | Evidence                                                                                              |
+| ----------- | ----------------------------------------------------------------------------------------------------- |
+| AVT-001     | `avatar.types.ts`, `useAvatar.ts`, `avatar.test.tsx`, `avatar.types.test.ts`                          |
+| AVT-002     | `useAvatarStyles.ts`, `renderAvatar.tsx`, `avatar.test.tsx`                                           |
+| AVT-003     | `avatar.styles.ts`, `useAvatarStyles.ts`, `avatar.test.tsx`                                           |
+| AVT-004     | `useAvatar.ts`, `useAvatarStyles.ts`, `avatar.test.tsx`                                               |
+| AVT-005     | `avatar.types.ts`, `useAvatar.ts`, `avatar.stories.tsx`                                               |
+| AVT-006     | `avatar.styles.ts`, `useAvatarStyles.ts`, `renderAvatar.tsx`, `avatar.test.tsx`, `avatar.stories.tsx` |

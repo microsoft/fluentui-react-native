@@ -65,7 +65,8 @@ public slot; there is no way to replace either circle.
 
 **SPIN-003:** Draw the track first and the indicator second inside a
 non-accessible drawing surface, and keep the visible arc at one quarter of the
-circumference at every size by normalizing the dash pattern to the path length.
+circumference at every size by deriving both dash lengths from the measured
+radius. Do not rely on the web-only SVG `pathLength` normalization.
 
 **SPIN-004:** Bind the track and indicator colors and the per-size stroke widths
 to theme tokens, and apply the caller's `style` last.
@@ -97,7 +98,9 @@ progress element. Narrator and VoiceOver read the accessible name and the busy
 state when the element is encountered, and neither platform re-announces the
 spinner while it rotates.
 
-The rotation runs on the native driver. The reduced-motion setting is read
+The shared rotation requests the native driver. macOS Fabric uses the
+JavaScript driver because native transform updates remain static on that
+renderer; other renderers retain native animation. The reduced-motion setting is read
 asynchronously from the platform, so the first render can occur before the value
 is known; the component holds the arc static until it resolves and starts the
 loop only when reduced motion is known to be off.

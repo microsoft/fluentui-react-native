@@ -92,6 +92,20 @@ text composition, clipboard behavior, and character entry. Input adds no key
 handling of its own and does not intercept Tab, so the platform tab order and
 the platform text-editing shortcuts apply unchanged.
 
+The single-line editor uses intrinsic native font metrics and zero internal
+padding. Token-derived vertical spacing is an external Yoga margin, not native
+text padding. Line-height tokens still determine the control's minimum height;
+they do not force a line box on the editor. The surrounding centered rows align
+that intrinsic editor with the icon frames.
+
+The contents row is a non-accessible, non-focusable Pressable that forwards a
+press in the external spacing to the editor. This preserves the field's pointer
+target without stretching its text. Activation requests pointer focus through
+the shared focus target, respecting the resolved `focusable` value. Disabled
+fields do not forward activation; read-only fields remain focusable by default.
+The internal editor ref is composed with any caller slot ref through the slot
+render path.
+
 Hover and press state are tracked from events on the text input rather than the
 surrounding container, so pointer feedback follows the text area. Disabling the
 control clears focus, hover, and press so a disabled field never keeps stale

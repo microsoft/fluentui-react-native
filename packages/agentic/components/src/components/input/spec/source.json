@@ -3,7 +3,7 @@
   "component": "input",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-14",
+  "reviewedAt": "2026-09-21",
   "sources": [
     {
       "id": "flex-component",

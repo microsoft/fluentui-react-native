@@ -229,8 +229,8 @@ describe('Tab', () => {
     expect(StyleSheet.flatten(labels[0].props.style)).toMatchObject({ fontWeight: tokens.fontWeight.functionalSemibold, opacity: 0 });
     expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({
       fontWeight: tokens.fontWeight.functionalRegular,
-      position: 'absolute',
     });
+    expect(StyleSheet.flatten(labels[1].parent?.props.style)).toMatchObject({ position: 'absolute', justifyContent: 'center' });
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
       backgroundColor: tokens.color.backgroundNeutralTransparent,
@@ -275,8 +275,8 @@ describe('Tab', () => {
     });
     expect(StyleSheet.flatten(labels[1].props.style)).toMatchObject({
       fontWeight: tokens.fontWeight.functionalSemibold,
-      position: 'absolute',
     });
+    expect(StyleSheet.flatten(labels[1].parent?.props.style)).toMatchObject({ position: 'absolute', justifyContent: 'center' });
   });
 
   it('exposes selected and disabled accessibility state', async () => {

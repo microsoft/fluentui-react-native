@@ -7,7 +7,7 @@ import type { SpinnerState } from './spinner.types';
  * Renders the Spinner component.
  */
 export function renderSpinner_unstable(state: SpinnerState) {
-  const indicatorPathProps = { pathLength: 100 } as any;
+  const circumference = 2 * Math.PI * state.radius;
 
   return (
     <state.root>
@@ -28,10 +28,9 @@ export function renderSpinner_unstable(state: SpinnerState) {
           cy={state.center}
           fill="none"
           testID="spinner-indicator"
-          {...indicatorPathProps}
           r={state.radius}
           stroke={state.indicatorColor}
-          strokeDasharray="25 75"
+          strokeDasharray={[circumference / 4, (circumference * 3) / 4]}
           strokeLinecap="round"
           strokeWidth={state.strokeWidth}
           vectorEffect="non-scaling-stroke"

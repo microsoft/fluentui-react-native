@@ -4,4 +4,8 @@ Provide `accessibilityLabel` when the avatar is the identity exposed to assistiv
 
 The root honors an explicit `accessible` value, while decorative image, icon, and initials slots remain inaccessible in every content mode. `activityRing` has no exposed state or label; provide nearby text when active or collaboration status must be communicated.
 
+The persistent activity-ring View is hidden from accessibility, non-focusable,
+and excluded from hit testing in both visible and hidden states. It does not
+introduce another announced image or imply keyboard focus.
+
 On Windows, an informative avatar maps to a UI Automation image. On macOS, it maps to an AX image. Avatar is not a control and should not be given a focusable role.

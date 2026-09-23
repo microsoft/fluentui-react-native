@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { render } from '../../common/renderWithTheme';
 
@@ -35,21 +35,71 @@ describe('Icon', () => {
 
   it('renders a font codepoint with dimensions and color', async () => {
     const component = await render(
-      <Icon fontSource={{ codepoint: 0x1f680, fontFamily: 'IconFont' }} height={24} width={20} color="blue" />,
+      <Icon fontSource={{ codepoint: 0x1f680, fontFamily: 'IconFont' }} height={24} width={20} color="blue" testID="font-icon" />,
     );
 
     const text = component.getByText('🚀');
-    expect(text.props.style).toEqual({
-      color: 'blue',
-      fontFamily: 'IconFont',
-      fontSize: 20,
+    expect(StyleSheet.flatten(component.getByTestId('font-icon').props.style)).toEqual({
+      alignItems: 'center',
+      flexShrink: 0,
       height: 24,
-      lineHeight: 24,
-      padding: 0,
-      textAlign: 'center',
-      textAlignVertical: 'center',
+      justifyContent: 'center',
       width: 20,
     });
+    expect(text.props.style).toEqual({
+      color: 'blue',
+      flexShrink: 0,
+      fontFamily: 'IconFont',
+      fontSize: 20,
+      includeFontPadding: false,
+      padding: 0,
+      position: 'absolute',
+      textAlign: 'center',
+    });
+    expect(text.props).toMatchObject({ accessible: false, allowFontScaling: false, numberOfLines: 1 });
+  });
+
+  it.each([
+    { height: 12, width: 12, fontSize: 12 },
+    { height: 16, width: 24, fontSize: 16 },
+    { height: 32, width: 20, fontSize: 20 },
+    { height: 16, width: undefined, fontSize: 16 },
+    { height: undefined, width: 24, fontSize: 24 },
+    { height: undefined, width: undefined, fontSize: undefined },
+  ])('keeps intrinsic font metrics for $height by $width icons', async ({ height, width, fontSize }) => {
+    const component = await render(<Icon fontSource={{ codepoint: 0x2713 }} height={height} width={width} testID="font-icon" />);
+    const glyph = component.getByText('✓');
+    const glyphStyle = StyleSheet.flatten(glyph.props.style);
+
+    expect(StyleSheet.flatten(component.getByTestId('font-icon').props.style)).toMatchObject({ height, width });
+    expect(glyphStyle.fontSize).toBe(fontSize);
+    expect(glyph.props.allowFontScaling).toBe(fontSize === undefined);
+    expect(glyphStyle.position).toBe(height !== undefined && width !== undefined ? 'absolute' : undefined);
+    for (const property of ['height', 'width', 'lineHeight', 'textAlignVertical', 'transform', 'top', 'bottom', 'left', 'right']) {
+      expect(glyphStyle).not.toHaveProperty(property);
+    }
+  });
+
+  it('keeps font icon semantics on one frame and preserves caller accessibility', async () => {
+    const component = await render(
+      <Icon
+        accessibilityHint="Confirms the operation"
+        accessibilityLabel="Confirm"
+        fontSource={{ codepoint: 0x2713 }}
+        height={16}
+        width={16}
+      />,
+    );
+    expect(component.getAllByRole('image')).toHaveLength(1);
+    expect(component.getByRole('image').props).toMatchObject({
+      accessibilityHint: 'Confirms the operation',
+      accessibilityLabel: 'Confirm',
+      accessible: true,
+    });
+
+    await component.rerender(<Icon accessible={false} accessibilityRole="none" fontSource={{ codepoint: 0x2713 }} testID="decorative" />);
+    expect(component.getByTestId('decorative').props).toMatchObject({ accessibilityRole: 'none', accessible: false });
+    expect(component.queryByRole('image')).toBeNull();
   });
 
   it('forwards shared props to an SVG component', async () => {

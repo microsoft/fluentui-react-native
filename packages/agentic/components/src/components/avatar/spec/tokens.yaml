@@ -28,20 +28,32 @@ bindings:
     color: color.foregroundNeutralPrimary
     fontFamily: fontFamily.functional
     fontWeight: fontWeight.functionalRegular
+    layout:
+      position: absolute
+    # Native Text supplies intrinsic line metrics without an inherited body lineHeight.
     size:
-      '16': { fontSize: fontSize.functionalCaption, lineHeight: fontSize.functionalCaption }
-      '20': { fontSize: fontSize.functionalCaption, lineHeight: fontSize.functionalCaption }
-      '24': { fontSize: fontSize.functionalCaption, lineHeight: fontSize.functionalCaption }
-      '28': { fontSize: fontSize.functionalBodySmall, lineHeight: fontSize.functionalBodySmall }
-      '32': { fontSize: fontSize.functionalBodyMedium, lineHeight: fontSize.functionalBodyMedium }
-      '40': { fontSize: fontSize.functionalBodyLarge, lineHeight: fontSize.functionalBodyLarge }
-      '56': { fontSize: fontSize.functionalTitleSmall, lineHeight: fontSize.functionalTitleSmall }
-      '120': { fontSize: fontSize.functionalTitleLarge, lineHeight: fontSize.functionalTitleLarge }
+      '16': { fontSize: fontSize.functionalCaption }
+      '20': { fontSize: fontSize.functionalCaption }
+      '24': { fontSize: fontSize.functionalCaption }
+      '28': { fontSize: fontSize.functionalBodySmall }
+      '32': { fontSize: fontSize.functionalBodyMedium }
+      '40': { fontSize: fontSize.functionalBodyLarge }
+      '56': { fontSize: fontSize.functionalTitleSmall }
+      '120': { fontSize: fontSize.functionalTitleLarge }
   icon:
     color: color.foregroundNeutralPrimary
     size: { '16': 12, '20': 16, '24': 16, '28': 16, '32': 20, '40': 24, '56': 32, '120': 48 }
   activityRing:
+    structure: persistent FocusVisual border
     color: color.strokeBrandLoud
+    borderRadius: borderRadius.circular
+    borderStyle: solid
+    layout:
+      position: absolute
+      inset: -(offset + width)
+    visibility:
+      active: opaque
+      inactive: opacity 0
     '16': { offset: strokeWidth.thin, width: strokeWidth.thin }
     '20': { offset: strokeWidth.thin, width: strokeWidth.thick }
     '24': { offset: strokeWidth.thin, width: strokeWidth.thick }

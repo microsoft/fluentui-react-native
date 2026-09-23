@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
     padding: 8,
     width: 360,
   },
+  textBaseline: {
+    alignItems: 'baseline',
+  },
   leading: {
     alignItems: 'center',
     backgroundColor: '#dce9ff',
@@ -115,13 +118,13 @@ type Story = StoryObj<typeof CompoundItemLayout>;
 export const Default: Story = {
   render: ({ secondaryPosition }) => (
     <CompoundItemLayout
-      contentStyle={secondaryPosition === 'under' ? styles.contentColumn : undefined}
+      contentStyle={secondaryPosition === 'under' ? styles.contentColumn : styles.textBaseline}
       leading={<Leading />}
       leadingStyle={styles.leadingRegion}
       primary={<Text style={styles.primaryText}>Primary content</Text>}
       secondary={<Text style={styles.secondaryText}>Secondary</Text>}
       secondaryPosition={secondaryPosition}
-      style={styles.layout}
+      style={[styles.layout, secondaryPosition !== 'under' && styles.textBaseline]}
       trailing={<Trailing />}
       trailingStyle={styles.trailingRegion}
     />
@@ -136,11 +139,12 @@ export const Overview: Story = {
       </StoryGroup>
       <StoryGroup label="All regions">
         <CompoundItemLayout
+          contentStyle={styles.textBaseline}
           leading={<Leading />}
           leadingStyle={styles.leadingRegion}
           primary={<Text style={styles.primaryText}>Primary content</Text>}
           secondary={<Text style={styles.secondaryText}>Secondary</Text>}
-          style={styles.layout}
+          style={[styles.layout, styles.textBaseline]}
           trailing={<Trailing />}
           trailingStyle={styles.trailingRegion}
         />
@@ -175,13 +179,13 @@ export const SecondaryPosition: Story = {
       {(['right', 'under'] as const).map((secondaryPosition) => (
         <StoryGroup key={secondaryPosition} label={secondaryPosition}>
           <CompoundItemLayout
-            contentStyle={secondaryPosition === 'under' ? styles.contentColumn : undefined}
+            contentStyle={secondaryPosition === 'under' ? styles.contentColumn : styles.textBaseline}
             leading={<Leading />}
             leadingStyle={styles.leadingRegion}
             primary={<Text style={styles.primaryText}>Primary content</Text>}
             secondary={<Text style={styles.secondaryText}>Secondary</Text>}
             secondaryPosition={secondaryPosition}
-            style={styles.layout}
+            style={[styles.layout, secondaryPosition === 'right' && styles.textBaseline]}
           />
         </StoryGroup>
       ))}

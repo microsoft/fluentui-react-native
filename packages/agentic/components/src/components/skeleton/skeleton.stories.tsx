@@ -3,7 +3,11 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { useReducedMotion } from '@fluentui-react-native/framework-base';
+import { useThemeState } from '@fluentui-react-native/design';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import { Skeleton } from './skeleton';
 
 type StoryGroupProps = {
@@ -51,7 +55,68 @@ const meta: Meta<typeof Skeleton> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Skeleton>;
+type Story = WdioStory<StoryObj<typeof Skeleton>>;
+
+function MotionExample() {
+  const reduceMotion = useReducedMotion();
+  const highlightColor: unknown = useThemeState().tokens.color.backgroundNeutralSubtle;
+  return (
+    <View style={styles.story}>
+      <View accessible accessibilityLabel="Skeleton animation example" role="group" testID="skeleton-motion">
+        <Skeleton style={styles.card} />
+      </View>
+      <StoryStatus testID="skeleton-motion-preference">
+        {reduceMotion === undefined
+          ? 'Motion preference pending'
+          : reduceMotion
+            ? 'Reduced motion enabled'
+            : typeof highlightColor !== 'string'
+              ? 'Gradient unavailable for native platform colors'
+              : 'Motion enabled'}
+      </StoryStatus>
+    </View>
+  );
+}
+
+export const Motion: Story = {
+  render: () => <MotionExample />,
+  parameters: {
+    docs: {
+      description: {
+        story: 'A soft, angled linear-gradient wave sweeps across the static silhouette and follows the native reduced-motion preference.',
+      },
+    },
+  },
+  wdio: {
+    'renders changing native pixels when gradient animation is available': async ({ browser, expect, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+      if (!features.elementScreenshot) {
+        skip('This test requires native element screenshots.');
+        return;
+      }
+      const preference = await browser.$('~skeleton-motion-preference');
+      await browser.waitUntil(async () =>
+        ['Motion enabled', 'Reduced motion enabled', 'Gradient unavailable for native platform colors'].includes(
+          await preference.getText(),
+        ),
+      );
+      const skeleton = await browser.$('~skeleton-motion');
+      await expect(skeleton).toExist();
+      expect(await browser.isElementDisplayed(await skeleton.elementId)).toBe(true);
+      const frames = new Set<string>();
+      for (let index = 0; index < 5; index++) {
+        frames.add(await browser.takeElementScreenshot(await skeleton.elementId));
+        await browser.pause(117);
+      }
+      if ((await preference.getText()) === 'Motion enabled') {
+        expect(frames.size).toBeGreaterThan(1);
+      } else {
+        expect(frames.size).toBe(1);
+      }
+    },
+  },
+};
 
 export const Default: Story = {
   args: {
@@ -82,6 +147,9 @@ export const Overview: Story = {
         </StoryItem>
         <StoryItem label="Card">
           <Skeleton style={styles.card} />
+        </StoryItem>
+        <StoryItem label="Tall">
+          <Skeleton style={styles.tall} />
         </StoryItem>
       </StoryGroup>
     </View>
@@ -168,6 +236,11 @@ const styles = StyleSheet.create({
   subtitle: {
     height: 12,
     width: 120,
+  },
+  tall: {
+    borderRadius: 4,
+    height: 120,
+    width: 32,
   },
   thumbnail: {
     borderRadius: 10,

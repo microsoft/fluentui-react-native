@@ -50,6 +50,10 @@ that has no bounded end.
 
 ## Motion
 
+The highlight is a soft diagonal linear-gradient wave, not a solid sliding
+rectangle. It follows reading direction and keeps the same angle across
+different placeholder aspect ratios.
+
 The sweep stops entirely under the platform reduced-motion setting, so never
 rely on movement alone to communicate that a region is busy. Active
 placeholders share one phase even when they mount at different moments.

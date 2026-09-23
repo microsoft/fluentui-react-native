@@ -50,6 +50,11 @@ contracts. Keep exploratory type probes outside package source or remove them be
 Primitive runtime tests should cover every renderer or source branch and verify forwarding of size, color,
 accessibility, and test props.
 
+Native motion stories compare repeated element screenshots and honor the runtime reduced-motion preference.
+Use `browser.isElementDisplayed(elementId)` and `browser.takeElementScreenshot(elementId)` for native protocol operations;
+WebdriverIO's DOM-oriented `element.isDisplayed()` tries unsupported JavaScript execution. Skip pixel checks explicitly
+when the driver does not provide element screenshots.
+
 ## Visual snapshots
 
 Keep snapshots focused on resolved output rather than the full renderer tree. Button snapshots map each appearance to:
@@ -255,6 +260,15 @@ focus-test result; never bypass ownership or authenticated readiness to proceed.
 
 A successful bundle proves story discovery and compilation only. For visual changes, inspect the running target-platform
 story across hover, pressed, disabled, optional-slot, and constrained-content scenarios.
+
+Alignment regressions must distinguish the outer frame from the inner text. LayoutStableText's Overview includes an
+executable desktop check that the smaller visible Text has a smaller measured height than its reserve and that their
+vertical centers agree within one layout pixel. Checking only their centers would let the old stretched-Text bug pass.
+Its measurement fixture exposes an explicit group around the primitive and an accessible visible Text rather than
+querying the primitive's intentionally inaccessible layout wrapper. macOS Fabric does not expose paragraph test IDs to
+AX, so that endpoint reads the Text's actual `onLayout` measurements from a named `StoryStatus` View instead.
+Pair geometry checks with native screenshots for glyph ink and caret placement; native element bounds alone do not
+prove optical alignment. Never record an unavailable native check as passed.
 
 Adding a new story file changes Metro's `require.context` catalog and may require restarting Metro and the native app
 before the running Storybook index includes it.

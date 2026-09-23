@@ -8,12 +8,16 @@
     "tsBuildInfoFile": ".cache/tsconfig.stories.tsbuildinfo"
   },
   "include": [
+    "src/components/avatar/avatar.stories.tsx",
     "src/components/button/button.stories.tsx",
     "src/components/checkbox/checkbox.stories.tsx",
     "src/components/input/input.stories.tsx",
+    "src/components/skeleton/skeleton.stories.tsx",
+    "src/components/spinner/spinner.stories.tsx",
     "src/components/switch/switch.stories.tsx",
     "src/components/tablist/tablist.stories.tsx",
     "src/primitives/focus-zone/focus-zone.stories.tsx",
+    "src/primitives/layout-stable-text/layout-stable-text.stories.tsx",
     "src/**/*.story-helpers.tsx",
     "src/**/*.wdio.ts"
   ],
