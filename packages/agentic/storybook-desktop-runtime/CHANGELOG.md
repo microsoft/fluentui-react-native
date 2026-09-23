@@ -1,5 +1,14 @@
 # @fluentui-react-native/storybook-desktop-runtime
 
+## 0.3.1
+
+### Patch Changes
+
+- 3dbc30f: Align Storybook's actual canvas background with its preview surface so Secondary Button fills remain visible in Default Flex, light, and dark themes. Preserve explicit story background overrides and native-color fallbacks.
+- @fluentui-react-native/design@0.5.1
+  - @fluentui-react-native/callout@0.29.6
+  - @fluentui-react-native/default-theme@0.27.14
+
 ## 0.3.0
 
 ### Minor Changes

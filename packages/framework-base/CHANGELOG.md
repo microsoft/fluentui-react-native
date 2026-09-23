@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.8.1
+
+### Patch Changes
+
+- 3dbc30f: Restore loading animations on macOS Fabric by selecting the supported JavaScript animation driver. Keep Skeleton silhouettes visible without motion and calculate Spinner's quarter-circle dash lengths from native geometry. Add native motion and macOS text-alignment regression coverage.
+
 ## 0.8.0
 
 ### Minor Changes

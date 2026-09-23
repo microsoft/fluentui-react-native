@@ -1,5 +1,19 @@
 # Change Log - @fluentui-react-native/persona
 
+## 0.18.8
+
+### Patch Changes
+
+- Updated dependencies [3dbc30f]
+  - @fluentui-react-native/framework-base@0.8.1
+  - @fluentui-react-native/design@0.5.1
+  - @fluentui-react-native/persona-coin@0.17.8
+  - @uifabricshared/foundation-composable@0.15.5
+  - @uifabricshared/foundation-compose@1.16.14
+  - @uifabricshared/foundation-settings@0.16.11
+  - @uifabricshared/foundation-tokens@0.16.14
+  - @fluentui-react-native/framework@0.17.8
+
 ## 0.18.7
 
 ### Patch Changes
