@@ -5,14 +5,16 @@ import { pathToFileURL } from 'node:url';
 export const bundleSizeCommentMarker = '<!-- furn-bundle-size-report -->';
 
 const reportHeader = '# Bundle size report';
-const reportDescription =
-  'Tree-shaken production Metro bundles. Component costs are relative to their platform shell; shell costs are absolute.';
-const tableHeader = '| Platform | Scenario | Baseline cost | Current cost | Cost delta | Change | Gzip delta | Module delta |';
-const tableSeparator = '| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |';
+const reportDescription = 'Tree-shaken, minified production esbuild bundles with React and React Native runtimes externalized.';
+const tableHeader = '| Scenario | Modules-Mac (Δ) | Modules-Win (Δ) | Size-Mac (Δ) | Size-Win (Δ) |';
+const tableSeparator = '| --- | ---: | ---: | ---: | ---: |';
 const reportFooter =
   'The job is advisory: size changes are reported but do not fail the pull request. Bundle or analysis errors still fail.';
-const tableRowPattern =
-  /^\| [A-Za-z0-9][A-Za-z0-9._/-]{0,79} \| [A-Za-z0-9][A-Za-z0-9._:/-]{0,79} \| (?:New|[+-]?\d+\.\d KiB) \| (?:New|[+-]?\d+\.\d KiB) \| (?:New|[+-]?\d+\.\d KiB) \| (?:New|[+-]?\d+\.\d{2}%) \| (?:New|[+-]?\d+\.\d KiB) \| (?:New|[+-]?\d+) \|$/;
+const moduleValuePattern = String.raw`(?:-|[0-9,]+ {1,2}\((?:New|[+-][0-9,]+)\))`;
+const sizeValuePattern = String.raw`(?:-|(?:\d+b|[\d,]+\.\d{2}k) {1,2}\((?:New|[+-](?:\d+b|[\d,]+\.\d{2}k))\))`;
+const tableRowPattern = new RegExp(
+  String.raw`^\| [A-Za-z0-9][A-Za-z0-9._:/-]{0,79} \| ${moduleValuePattern} \| ${moduleValuePattern} \| ${sizeValuePattern} \| ${sizeValuePattern} \|$`,
+);
 const maximumReportBytes = 60_000;
 const repositoryPattern = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
 

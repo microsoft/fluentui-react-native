@@ -1,17 +1,16 @@
 import { readJSONFileSync, writeJSONFileSync } from '@rnx-kit/tools-filesystem';
-import { spawnSync } from 'node:child_process';
+import { build } from 'esbuild';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
-import { formatBundleSizeTable } from './format.mjs';
+import { createEsbuildOptions } from './esbuild-config.mjs';
+import { formatBundleSizeTable, formatModuleComparison, formatSizeComparison, groupComparisonsByScenario } from './format.mjs';
 
 const workspaceRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const repositoryRoot = dirname(dirname(workspaceRoot));
-const yarnVersion = readJSONFileSync(join(repositoryRoot, 'package.json')).packageManager.split('@')[1];
-const yarnPath = join(repositoryRoot, '.yarn', 'releases', `yarn-${yarnVersion}.cjs`);
 const configPath = join(workspaceRoot, 'scenarios.json');
 const defaultBaselinePath = join(workspaceRoot, 'baseline.json');
 const outputRoot = join(workspaceRoot, 'dist', 'bundle-size');
@@ -61,10 +60,7 @@ function createEntry(scenario) {
     lines.push(`globalThis.__bundleSizeTarget = [${targets.join(', ')}];`);
   }
 
-  const bootstrapPath = relative(entryRoot, join(workspaceRoot, 'src', 'bootstrap.js')).replaceAll('\\', '/');
-  lines.push(`import ${JSON.stringify(bootstrapPath.startsWith('.') ? bootstrapPath : `./${bootstrapPath}`)};`, '');
-
-  return lines.join('\n');
+  return `${lines.join('\n')}\n`;
 }
 
 function getWorkspacePackage(source) {
@@ -115,56 +111,19 @@ function getWorkspaceContributions(metafile) {
   };
 }
 
-function runBundle(platform, scenario, resetCache) {
+async function runBundle(platform, scenario) {
   const entryPath = join(entryRoot, `${scenario.name}.js`);
   const bundlePath = join(outputRoot, platform, `${scenario.name}.bundle`);
-  const sourceMapPath = `${bundlePath}.map`;
   const metafileName = `${scenario.name}.meta.json`;
   const metafilePath = join(dirname(bundlePath), metafileName);
   const metafileOutput = relative(workspaceRoot, metafilePath).replaceAll('\\', '/');
   writeFileSync(entryPath, createEntry(scenario));
   mkdirSync(dirname(bundlePath), { recursive: true });
 
-  const bundleArgs = [
-    yarnPath,
-    'workspace',
-    '@fluentui-react-native/bundle-size',
-    'rnx-cli',
-    'bundle',
-    '--id',
-    'measure',
-    '--entry-file',
-    entryPath,
-    '--platform',
-    platform,
-    '--dev',
-    'false',
-    '--minify',
-    'true',
-    '--tree-shake',
-    'true',
-    '--metafile',
-    metafileOutput,
-    '--bundle-output',
-    bundlePath,
-    '--sourcemap-output',
-    sourceMapPath,
-  ];
-  if (resetCache) {
-    bundleArgs.push('--reset-cache');
-  }
-
-  const result = spawnSync(process.execPath, bundleArgs, { cwd: repositoryRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
-
-  if (result.status !== 0) {
-    process.stderr.write(result.stdout ?? '');
-    process.stderr.write(result.stderr ?? '');
-    throw new Error(`Metro failed for ${scenario.name} on ${platform}: ${result.error?.message ?? `exit ${result.status}`}`);
-  }
+  const { metafile } = await build(createEsbuildOptions({ bundlePath, entryPath, platform, workspaceRoot }));
+  writeJSONFileSync(metafilePath, metafile);
 
   const bundle = readFileSync(bundlePath);
-  const sourceMap = readJSONFileSync(sourceMapPath);
-  const metafile = readJSONFileSync(metafilePath);
   const inputPaths = Object.keys(metafile.inputs).map((source) => source.replaceAll('\\', '/'));
   for (const pattern of scenario.forbiddenInputPatterns ?? []) {
     const match = inputPaths.find((source) => source.includes(pattern));
@@ -184,7 +143,6 @@ function runBundle(platform, scenario, resetCache) {
     rawBytes: statSync(bundlePath).size,
     gzipBytes: gzipSync(bundle, { level: 9, mtime: 0 }).byteLength,
     moduleCount: contributions.moduleCount,
-    metroModuleCount: sourceMap.sources.length,
     metafileInputCount: Object.keys(metafile.inputs).length,
     metafile: metafileOutput,
     workspaceModules: contributions.workspaceModules,
@@ -193,15 +151,13 @@ function runBundle(platform, scenario, resetCache) {
 }
 
 function baselineResult(measurement) {
-  const { platform, scenario, rawBytes, gzipBytes, moduleCount, metroModuleCount, metafileInputCount, workspaceModules, workspaceBytes } =
-    measurement;
+  const { platform, scenario, rawBytes, gzipBytes, moduleCount, metafileInputCount, workspaceModules, workspaceBytes } = measurement;
   return {
     platform,
     scenario,
     rawBytes,
     gzipBytes,
     moduleCount,
-    metroModuleCount,
     metafileInputCount,
     workspaceModules,
     workspaceBytes,
@@ -212,18 +168,14 @@ function resultKey({ platform, scenario }) {
   return `${platform}:${scenario}`;
 }
 
-function createComparison(measurement, baseline, baselineShell) {
-  const isShell = measurement.scenario === 'shell';
-  const currentCost = isShell ? measurement.rawBytes : measurement.deltaBytes;
-  const currentModuleCost = isShell ? measurement.moduleCount : measurement.deltaModules;
-  if (!baseline || (!isShell && !baselineShell)) {
+function createComparison(measurement, baseline) {
+  const currentCost = measurement.rawBytes;
+  const currentModuleCost = measurement.moduleCount;
+  if (!baseline) {
     return { status: 'new', currentCost, currentModuleCost };
   }
 
-  const baselineCost = isShell ? baseline.rawBytes : baseline.rawBytes - baselineShell.rawBytes;
-  const baselineGzipCost = isShell ? baseline.gzipBytes : baseline.gzipBytes - baselineShell.gzipBytes;
-  const currentGzipCost = isShell ? measurement.gzipBytes : measurement.deltaGzipBytes;
-  const baselineModuleCost = isShell ? baseline.moduleCount : baseline.moduleCount - baselineShell.moduleCount;
+  const baselineCost = baseline.rawBytes;
   const costDelta = currentCost - baselineCost;
   return {
     status: 'compared',
@@ -232,43 +184,27 @@ function createComparison(measurement, baseline, baselineShell) {
     currentModuleCost,
     costDelta,
     costPercent: baselineCost === 0 ? 0 : (costDelta / baselineCost) * 100,
-    gzipCostDelta: currentGzipCost - baselineGzipCost,
-    moduleCostDelta: currentModuleCost - baselineModuleCost,
-    absoluteRawDelta: measurement.rawBytes - baseline.rawBytes,
+    gzipCostDelta: measurement.gzipBytes - baseline.gzipBytes,
+    moduleCostDelta: currentModuleCost - baseline.moduleCount,
   };
-}
-
-function formatBytes(bytes) {
-  const sign = bytes > 0 ? '+' : '';
-  return `${sign}${(bytes / 1024).toFixed(1)} KiB`;
-}
-
-function formatPercent(percent) {
-  const sign = percent > 0 ? '+' : '';
-  return `${sign}${percent.toFixed(2)}%`;
 }
 
 function createMarkdownReport(results) {
   const lines = [
     '# Bundle size report',
     '',
-    'Tree-shaken production Metro bundles. Component costs are relative to their platform shell; shell costs are absolute.',
+    'Tree-shaken, minified production esbuild bundles with React and React Native runtimes externalized.',
     '',
-    '| Platform | Scenario | Baseline cost | Current cost | Cost delta | Change | Gzip delta | Module delta |',
-    '| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |',
+    '| Scenario | Modules-Mac (Δ) | Modules-Win (Δ) | Size-Mac (Δ) | Size-Win (Δ) |',
+    '| --- | ---: | ---: | ---: | ---: |',
   ];
 
-  for (const result of results) {
-    const { comparison } = result;
-    if (comparison.status === 'new') {
-      lines.push(
-        `| ${result.platform} | ${result.scenario} | New | ${(comparison.currentCost / 1024).toFixed(1)} KiB | New | New | New | New |`,
-      );
-    } else {
-      lines.push(
-        `| ${result.platform} | ${result.scenario} | ${(comparison.baselineCost / 1024).toFixed(1)} KiB | ${(comparison.currentCost / 1024).toFixed(1)} KiB | ${formatBytes(comparison.costDelta)} | ${formatPercent(comparison.costPercent)} | ${formatBytes(comparison.gzipCostDelta)} | ${comparison.moduleCostDelta >= 0 ? '+' : ''}${comparison.moduleCostDelta} |`,
-      );
-    }
+  for (const [scenario, platformResults] of groupComparisonsByScenario(results)) {
+    const macos = platformResults.get('macos');
+    const windows = platformResults.get('windows');
+    lines.push(
+      `| ${scenario} | ${formatModuleComparison(macos)} | ${formatModuleComparison(windows)} | ${formatSizeComparison(macos)} | ${formatSizeComparison(windows)} |`,
+    );
   }
 
   lines.push(
@@ -295,41 +231,33 @@ await mkdir(entryRoot, { recursive: true });
 
 const measurements = [];
 for (const platform of platforms) {
-  for (const [scenarioIndex, scenario] of selectedConfig.scenarios.entries()) {
+  for (const scenario of selectedConfig.scenarios) {
     process.stdout.write(`Bundling ${scenario.name} for ${platform}...\n`);
-    measurements.push({ platform, ...runBundle(platform, scenario, scenarioIndex === 0) });
+    measurements.push({ platform, ...(await runBundle(platform, scenario)) });
   }
 }
 
-const shells = new Map(
-  measurements.filter(({ scenario }) => scenario === 'shell').map((measurement) => [measurement.platform, measurement]),
-);
 const currentBaseline = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   results: measurements.map(baselineResult),
 };
 if (updateBaseline) {
   writeJSONFileSync(selectedBaselinePath, currentBaseline);
 }
 
-const baseline = existsSync(selectedBaselinePath) ? readJSONFileSync(selectedBaselinePath) : { schemaVersion: 1, results: [] };
-if (baseline.schemaVersion !== 1) {
+const baseline = existsSync(selectedBaselinePath) ? readJSONFileSync(selectedBaselinePath) : { schemaVersion: 2, results: [] };
+if (baseline.schemaVersion !== 1 && baseline.schemaVersion !== 2) {
   throw new Error(`Unsupported baseline schema version: ${baseline.schemaVersion}`);
 }
-const baselineResults = new Map(baseline.results.map((result) => [resultKey(result), result]));
-const baselineShells = new Map(baseline.results.filter(({ scenario }) => scenario === 'shell').map((result) => [result.platform, result]));
+if (baseline.schemaVersion === 1) {
+  process.stderr.write('Baseline schema version 1 contains Metro shell-relative measurements; treating all esbuild scenarios as new.\n');
+}
+const baselineResults = new Map(baseline.schemaVersion === 2 ? baseline.results.map((result) => [resultKey(result), result]) : []);
 
 const results = measurements.map((measurement) => {
-  const shell = shells.get(measurement.platform);
-  const result = {
-    ...measurement,
-    deltaBytes: measurement.rawBytes - shell.rawBytes,
-    deltaGzipBytes: measurement.gzipBytes - shell.gzipBytes,
-    deltaModules: measurement.moduleCount - shell.moduleCount,
-  };
   return {
-    ...result,
-    comparison: createComparison(result, baselineResults.get(resultKey(result)), baselineShells.get(result.platform)),
+    ...measurement,
+    comparison: createComparison(measurement, baselineResults.get(resultKey(measurement))),
   };
 });
 const report = {
