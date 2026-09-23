@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/link
 
+## 0.24.14
+
+### Patch Changes
+
+- Updated dependencies [3dbc30f]
+  - @fluentui-react-native/framework-base@0.8.1
+  - @fluentui-react-native/design@0.5.1
+  - @fluentui-react-native/text@0.25.14
+  - @uifabricshared/foundation-composable@0.15.5
+  - @uifabricshared/foundation-compose@1.16.14
+  - @uifabricshared/foundation-settings@0.16.11
+  - @fluentui-react-native/framework@0.17.8
+  - @fluentui-react-native/use-styling@0.16.5
+  - @fluentui-react-native/interactive-hooks@0.28.11
+
 ## 0.24.13
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/focus-zone
 
+## 0.23.6
+
+### Patch Changes
+
+- bc0ba37: Fix Windows Fabric FocusZone Shift+Tab traversal when the zone is a first child so backward navigation cannot re-enter the zone or jump to a later sibling.
+- Updated dependencies [3dbc30f]
+  - @fluentui-react-native/framework-base@0.8.1
+  - @fluentui-react-native/interactive-hooks@0.28.11
+
 ## 0.23.5
 
 ### Patch Changes

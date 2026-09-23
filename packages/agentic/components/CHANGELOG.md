@@ -1,5 +1,18 @@
 # @fluentui-react-native/components
 
+## 0.6.1
+
+### Patch Changes
+
+- 3dbc30f: Prevent the Avatar activity ring from crashing React Native Windows Fabric by replacing native outlines with a persistently mounted decorative border. Preserve its token-derived gap, stroke, layout, and accessibility, and cover visibility changes across all avatar sizes.
+- 3dbc30f: Center intrinsic font icons, Avatar initials, and layout-stable labels inside their View frames, and move single-line Input spacing outside the native editor. Correct the compound text-row baseline examples and add alignment regression coverage and authoring guidance.
+- 3dbc30f: Restore loading animations on macOS Fabric by selecting the supported JavaScript animation driver. Keep Skeleton silhouettes visible without motion and calculate Spinner's quarter-circle dash lengths from native geometry. Add native motion and macOS text-alignment regression coverage.
+- 3dbc30f: Replace Skeleton's solid highlight strip with a soft, angled SVG linear-gradient sweep based on the repository's Shimmer pattern. Preserve shared timing, reduced motion, rounded clipping, and visible static placeholders, and mirror travel for RTL.
+- Updated dependencies [3dbc30f]
+  - @fluentui-react-native/framework-base@0.8.1
+  - @fluentui-react-native/design@0.5.1
+  - @fluentui-react-native/callout@0.29.6
+
 ## 0.6.0
 
 ### Minor Changes

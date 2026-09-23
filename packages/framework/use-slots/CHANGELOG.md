@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/use-slots
 
+## 0.13.5
+
+### Patch Changes
+
+- Updated dependencies [3dbc30f]
+  - @fluentui-react-native/framework-base@0.8.1
+
 ## 0.13.4
 
 ### Patch Changes

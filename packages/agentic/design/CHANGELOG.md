@@ -1,5 +1,12 @@
 # @fluentui-react-native/design
 
+## 0.5.1
+
+### Patch Changes
+
+- Updated dependencies [3dbc30f]
+  - @fluentui-react-native/framework-base@0.8.1
+
 ## 0.5.0
 
 ### Minor Changes

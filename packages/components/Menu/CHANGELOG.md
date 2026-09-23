@@ -1,5 +1,21 @@
 # Change Log - @fluentui-react-native/menu
 
+## 1.16.9
+
+### Patch Changes
+
+- Updated dependencies [3dbc30f]
+- Updated dependencies [bc0ba37]
+  - @fluentui-react-native/framework-base@0.8.1
+  - @fluentui-react-native/focus-zone@0.23.6
+  - @fluentui-react-native/design@0.5.1
+  - @fluentui-react-native/icon@0.22.14
+  - @fluentui-react-native/text@0.25.14
+  - @fluentui-react-native/framework@0.17.8
+  - @fluentui-react-native/use-styling@0.16.5
+  - @fluentui-react-native/callout@0.29.6
+  - @fluentui-react-native/interactive-hooks@0.28.11
+
 ## 1.16.8
 
 ### Patch Changes

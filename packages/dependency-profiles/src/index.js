@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/components": {
       "name": "@fluentui-react-native/components",
-      "version": "0.6.0"
+      "version": "0.6.1"
     },
     "@fluentui-react-native/design": {
       "name": "@fluentui-react-native/design",
-      "version": "0.5.0"
+      "version": "0.5.1"
     },
     "@fluentui-react-native/desktop-driver": {
       "name": "@fluentui-react-native/desktop-driver",
@@ -20,7 +20,7 @@ module.exports = {
     },
     "@fluentui-react-native/storybook-desktop-runtime": {
       "name": "@fluentui-react-native/storybook-desktop-runtime",
-      "version": "0.3.0"
+      "version": "0.3.1"
     },
     "@fluentui-react-native/storybook-desktop": {
       "name": "@fluentui-react-native/storybook-desktop",
@@ -28,115 +28,115 @@ module.exports = {
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
-      "version": "1.14.7"
+      "version": "1.14.8"
     },
     "@fluentui-react-native/badge": {
       "name": "@fluentui-react-native/badge",
-      "version": "0.12.13"
+      "version": "0.12.14"
     },
     "@fluentui-react-native/button": {
       "name": "@fluentui-react-native/button",
-      "version": "0.40.13"
+      "version": "0.40.14"
     },
     "@fluentui-react-native/checkbox": {
       "name": "@fluentui-react-native/checkbox",
-      "version": "0.24.13"
+      "version": "0.24.14"
     },
     "@fluentui-react-native/chip": {
       "name": "@fluentui-react-native/chip",
-      "version": "0.5.13"
+      "version": "0.5.14"
     },
     "@fluentui-react-native/contextual-menu": {
       "name": "@fluentui-react-native/contextual-menu",
-      "version": "0.25.14"
+      "version": "0.25.15"
     },
     "@fluentui-react-native/divider": {
       "name": "@fluentui-react-native/divider",
-      "version": "0.8.13"
+      "version": "0.8.14"
     },
     "@fluentui-react-native/focus-trap-zone": {
       "name": "@fluentui-react-native/focus-trap-zone",
-      "version": "0.14.4"
+      "version": "0.14.5"
     },
     "@fluentui-react-native/focus-zone": {
       "name": "@fluentui-react-native/focus-zone",
-      "version": "0.23.5"
+      "version": "0.23.6"
     },
     "@fluentui-react-native/icon": {
       "name": "@fluentui-react-native/icon",
-      "version": "0.22.13"
+      "version": "0.22.14"
     },
     "@fluentui-react-native/input": {
       "name": "@fluentui-react-native/input",
-      "version": "0.8.13"
+      "version": "0.8.14"
     },
     "@fluentui-react-native/link": {
       "name": "@fluentui-react-native/link",
-      "version": "0.24.13"
+      "version": "0.24.14"
     },
     "@fluentui-react-native/menu": {
       "name": "@fluentui-react-native/menu",
-      "version": "1.16.8"
+      "version": "1.16.9"
     },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
-      "version": "0.15.8"
+      "version": "0.15.9"
     },
     "@fluentui-react-native/notification": {
       "name": "@fluentui-react-native/notification",
-      "version": "0.26.13"
+      "version": "0.26.14"
     },
     "@fluentui-react-native/persona": {
       "name": "@fluentui-react-native/persona",
-      "version": "0.18.7"
+      "version": "0.18.8"
     },
     "@fluentui-react-native/persona-coin": {
       "name": "@fluentui-react-native/persona-coin",
-      "version": "0.17.7"
+      "version": "0.17.8"
     },
     "@fluentui-react-native/pressable": {
       "name": "@fluentui-react-native/pressable",
-      "version": "0.13.10"
+      "version": "0.13.11"
     },
     "@fluentui-react-native/radio-group": {
       "name": "@fluentui-react-native/radio-group",
-      "version": "0.22.13"
+      "version": "0.22.14"
     },
     "@fluentui-react-native/separator": {
       "name": "@fluentui-react-native/separator",
-      "version": "0.19.13"
+      "version": "0.19.14"
     },
     "@fluentui-react-native/stack": {
       "name": "@fluentui-react-native/stack",
-      "version": "0.12.7"
+      "version": "0.12.8"
     },
     "@fluentui-react-native/switch": {
       "name": "@fluentui-react-native/switch",
-      "version": "0.14.13"
+      "version": "0.14.14"
     },
     "@fluentui-react-native/tablist": {
       "name": "@fluentui-react-native/tablist",
-      "version": "0.8.13"
+      "version": "0.8.14"
     },
     "@fluentui-react-native/text": {
       "name": "@fluentui-react-native/text",
-      "version": "0.25.13"
+      "version": "0.25.14"
     },
     "@uifabricshared/foundation-composable": {
       "name": "@uifabricshared/foundation-composable",
-      "version": "0.15.4"
+      "version": "0.15.5"
     },
     "@uifabricshared/foundation-compose": {
       "name": "@uifabricshared/foundation-compose",
-      "version": "1.16.13"
+      "version": "1.16.14"
     },
     "@uifabricshared/foundation-settings": {
       "name": "@uifabricshared/foundation-settings",
-      "version": "0.16.10"
+      "version": "0.16.11"
     },
     "@uifabricshared/foundation-tokens": {
       "name": "@uifabricshared/foundation-tokens",
-      "version": "0.16.13"
+      "version": "0.16.14"
     },
     "@uifabricshared/theme-registry": {
       "name": "@uifabricshared/theme-registry",
@@ -144,47 +144,47 @@ module.exports = {
     },
     "@uifabricshared/themed-settings": {
       "name": "@uifabricshared/themed-settings",
-      "version": "0.13.10"
+      "version": "0.13.11"
     },
     "@uifabricshared/theming-ramp": {
       "name": "@uifabricshared/theming-ramp",
-      "version": "0.21.13"
+      "version": "0.21.14"
     },
     "@uifabricshared/theming-react-native": {
       "name": "@uifabricshared/theming-react-native",
-      "version": "0.21.13"
+      "version": "0.21.14"
     },
     "@fluentui-react-native/experimental-activity-indicator": {
       "name": "@fluentui-react-native/experimental-activity-indicator",
-      "version": "0.11.13"
+      "version": "0.11.14"
     },
     "@fluentui-react-native/experimental-appearance-additions": {
       "name": "@fluentui-react-native/experimental-appearance-additions",
-      "version": "0.8.10"
+      "version": "0.8.11"
     },
     "@fluentui-react-native/experimental-avatar": {
       "name": "@fluentui-react-native/experimental-avatar",
-      "version": "0.22.13"
+      "version": "0.22.14"
     },
     "@fluentui-react-native/experimental-checkbox": {
       "name": "@fluentui-react-native/experimental-checkbox",
-      "version": "0.18.13"
+      "version": "0.18.14"
     },
     "@fluentui-react-native/drawer": {
       "name": "@fluentui-react-native/drawer",
-      "version": "0.5.13"
+      "version": "0.5.14"
     },
     "@fluentui-react-native/dropdown": {
       "name": "@fluentui-react-native/dropdown",
-      "version": "0.11.14"
+      "version": "0.11.15"
     },
     "@fluentui-react-native/experimental-expander": {
       "name": "@fluentui-react-native/experimental-expander",
-      "version": "0.9.13"
+      "version": "0.9.14"
     },
     "@fluentui-react-native/experimental-menu-button": {
       "name": "@fluentui-react-native/experimental-menu-button",
-      "version": "0.11.14"
+      "version": "0.11.15"
     },
     "@fluentui-react-native/experimental-native-date-picker": {
       "name": "@fluentui-react-native/experimental-native-date-picker",
@@ -196,27 +196,27 @@ module.exports = {
     },
     "@fluentui-react-native/overflow": {
       "name": "@fluentui-react-native/overflow",
-      "version": "0.5.4"
+      "version": "0.5.5"
     },
     "@fluentui-react-native/popover": {
       "name": "@fluentui-react-native/popover",
-      "version": "0.5.13"
+      "version": "0.5.14"
     },
     "@fluentui-react-native/experimental-shadow": {
       "name": "@fluentui-react-native/experimental-shadow",
-      "version": "0.7.13"
+      "version": "0.7.14"
     },
     "@fluentui-react-native/experimental-shimmer": {
       "name": "@fluentui-react-native/experimental-shimmer",
-      "version": "0.15.7"
+      "version": "0.15.8"
     },
     "@fluentui-react-native/spinner": {
       "name": "@fluentui-react-native/spinner",
-      "version": "0.10.13"
+      "version": "0.10.14"
     },
     "@fluentui-react-native/tooltip": {
       "name": "@fluentui-react-native/tooltip",
-      "version": "0.5.12"
+      "version": "0.5.13"
     },
     "@fluentui-react-native/vibrancy-view": {
       "name": "@fluentui-react-native/vibrancy-view",
@@ -224,75 +224,75 @@ module.exports = {
     },
     "@fluentui-react-native/framework-base": {
       "name": "@fluentui-react-native/framework-base",
-      "version": "0.8.0"
+      "version": "0.8.1"
     },
     "@fluentui-react-native/composition": {
       "name": "@fluentui-react-native/composition",
-      "version": "0.14.4"
+      "version": "0.14.5"
     },
     "@fluentui-react-native/framework": {
       "name": "@fluentui-react-native/framework",
-      "version": "0.17.7"
+      "version": "0.17.8"
     },
     "@fluentui-react-native/use-slots": {
       "name": "@fluentui-react-native/use-slots",
-      "version": "0.13.4"
+      "version": "0.13.5"
     },
     "@fluentui-react-native/use-styling": {
       "name": "@fluentui-react-native/use-styling",
-      "version": "0.16.4"
+      "version": "0.16.5"
     },
     "@fluentui-react-native/use-tokens": {
       "name": "@fluentui-react-native/use-tokens",
-      "version": "0.9.4"
+      "version": "0.9.5"
     },
     "@fluentui/react-native": {
       "name": "@fluentui/react-native",
-      "version": "0.44.7"
+      "version": "0.44.8"
     },
     "@fluentui-react-native/callout": {
       "name": "@fluentui-react-native/callout",
-      "version": "0.29.5"
+      "version": "0.29.6"
     },
     "@fluentui-react-native/theme-tokens": {
       "name": "@fluentui-react-native/theme-tokens",
-      "version": "0.29.7"
+      "version": "0.29.8"
     },
     "@fluentui-react-native/theme-types": {
       "name": "@fluentui-react-native/theme-types",
-      "version": "0.44.13"
+      "version": "0.44.14"
     },
     "@fluentui-react-native/theme": {
       "name": "@fluentui-react-native/theme",
-      "version": "0.14.7"
+      "version": "0.14.8"
     },
     "@fluentui-react-native/themed-stylesheet": {
       "name": "@fluentui-react-native/themed-stylesheet",
-      "version": "1.10.7"
+      "version": "1.10.8"
     },
     "@fluentui-react-native/theming-utils": {
       "name": "@fluentui-react-native/theming-utils",
-      "version": "0.27.13"
+      "version": "0.27.14"
     },
     "@fluentui-react-native/tokens": {
       "name": "@fluentui-react-native/tokens",
-      "version": "0.24.13"
+      "version": "0.24.14"
     },
     "@fluentui-react-native/android-theme": {
       "name": "@fluentui-react-native/android-theme",
-      "version": "0.26.13"
+      "version": "0.26.14"
     },
     "@fluentui-react-native/apple-theme": {
       "name": "@fluentui-react-native/apple-theme",
-      "version": "0.29.13"
+      "version": "0.29.14"
     },
     "@fluentui-react-native/default-theme": {
       "name": "@fluentui-react-native/default-theme",
-      "version": "0.27.13"
+      "version": "0.27.14"
     },
     "@fluentui-react-native/win32-theme": {
       "name": "@fluentui-react-native/win32-theme",
-      "version": "0.39.13"
+      "version": "0.39.14"
     },
     "@fluentui-react-native/adapters": {
       "name": "@fluentui-react-native/adapters",
@@ -300,7 +300,7 @@ module.exports = {
     },
     "@fluentui-react-native/interactive-hooks": {
       "name": "@fluentui-react-native/interactive-hooks",
-      "version": "0.28.10"
+      "version": "0.28.11"
     },
     "@fluentui-react-native/styling-utils": {
       "name": "@fluentui-react-native/styling-utils",

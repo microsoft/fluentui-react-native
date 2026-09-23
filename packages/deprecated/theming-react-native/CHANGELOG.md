@@ -1,5 +1,14 @@
 # Change Log - @uifabricshared/theming-react-native
 
+## 0.21.14
+
+### Patch Changes
+
+- @uifabricshared/theme-registry@0.13.8
+  - @uifabricshared/theming-ramp@0.21.14
+  - @fluentui-react-native/default-theme@0.27.14
+  - @fluentui-react-native/win32-theme@0.39.14
+
 ## 0.21.13
 
 ### Patch Changes
