@@ -47,10 +47,15 @@ function makeShadow(color1: string, rc1: ShadowRect, color2: string, rc2: Shadow
 
 const SHADOW_NUMBERS = [2, 4, 8, 16, 28, 64];
 const BRAND_ITER = [false, true];
-const SHADOW_INDEX = [0, 1];
+//const SHADOW_INDEX = [0, 1];
 
 const asJsonKey = (num: number, brand?: boolean) => (brand ? `shadowBrand${num}` : `shadow${num}`);
 const asTypeKey = (num: number, brand?: boolean) => (brand ? `shadow${num}brand` : `shadow${num}`);
+
+function getShortName(name: string): string {
+  // capitalize the first letter of the name
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
 
 function codegenShadows() {
   for (const platformKey of Object.keys(shadowJson)) {
@@ -61,8 +66,9 @@ function codegenShadows() {
     codegenFile.header += '\n' + HELPER_OUTPUT;
     for (const theme of Object.keys(shadowJson[platform])) {
       const shadows = (shadowJson[platform] as Record<string, any>)[theme];
+      const objHelper = codegenFile.addObject('shadows', `${theme}Shadows`, getShortName(theme));
       if (shadows) {
-        let value = '{\n';
+        //let value = '{\n';
         for (const num of SHADOW_NUMBERS) {
           for (const brand of BRAND_ITER) {
             const jsonKey = asJsonKey(num, brand);
@@ -76,6 +82,8 @@ function codegenShadows() {
               const color2 = codegenFile.rampString('color', s1.color);
               const rc2 = codegenFile.rampConstant('dims', `{ x: ${s1.x}, y: ${s1.y}, blur: ${s1.blur} }`);
               const shadowRamp = codegenFile.rampConstant('shadow', `makeShadow(${color1}, ${rc1}, ${color2}, ${rc2})`);
+              objHelper.addValue(typeKey, shadowRamp);
+              /*
               value += `  ${typeKey}: ${shadowRamp},\n`;
               for (const index of SHADOW_INDEX) {
                 const shadowPart = shadow[index];
@@ -83,12 +91,13 @@ function codegenShadows() {
                   codegenFile.body += `export const ${typeKey}${index}: ShadowRect = ${JSON.stringify(shadowPart)};\n`;
                 }
               }
+              */
             }
           }
         }
-        value += '}';
-        const themeShadows = codegenFile.rampConstant('themeShadows', value);
-        codegenFile.addExportConst(`${theme}Shadows`, themeShadows);
+        //value += '}';
+        // const themeShadows = codegenFile.rampConstant('themeShadows', value);
+        //codegenFile.addExportConst(`${theme}Shadows`, themeShadows);
       }
     }
     codegenFile.finish();

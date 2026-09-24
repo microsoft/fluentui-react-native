@@ -3,7 +3,6 @@ import type { ThemeShadowDefinition } from '../theming/types/Shadow.types';
 import darkAliasTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-aliases.json';
 import lightAliasTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-aliases.json';
 import rawHcAliasTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-aliases.json';
-import { hcShadows } from '../tokens/generated/shadows';
 import { darkShadows, lightShadows } from '../tokens/generated/shadows.windows';
 import type { EffectiveAppearance } from './appearance.types';
 import { processAliasTokens, transformWindowsPlatformColorName } from './processAliasTokens';
@@ -23,9 +22,5 @@ export function getAliasTokens(appearance: EffectiveAppearance): AliasColorToken
 }
 
 export function getShadowTokens(appearance: EffectiveAppearance): ThemeShadowDefinition {
-  if (appearance.contrast === 'highContrast') {
-    return hcShadows;
-  }
-
   return appearance.colorScheme === 'dark' ? (darkShadows as ThemeShadowDefinition) : (lightShadows as ThemeShadowDefinition);
 }

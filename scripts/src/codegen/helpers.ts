@@ -1,5 +1,6 @@
 import type { CodegenTargetFile, FileOptions } from './types.ts';
 import path from 'node:path';
+import { ARRAY_SINGLE_LINE_MAX, OBJ_SINGLE_LINE_MAX, TAB } from './const.ts';
 
 /**
  * Build a multi-line JSDoc-style block comment from the given lines.
@@ -39,6 +40,24 @@ export function writeComment(comment: string, indent: string = '', alwaysBlock =
     return writeCommentBlock(comment.split('\n'), indent);
   }
   return writeCommentLine(comment, indent);
+}
+
+/**
+ * Write the contents of an array or object, formatted according to the specified type and indentation.
+ * @param contents The lines of content to include within the array or object.
+ * @param type The type of structure to generate ('array' or 'object').
+ * @param indent The indentation to prefix each line with.
+ * @returns The formatted array or object as a string. No closing ; will be added.
+ */
+export function writeArrayOrObjContents(contents: string[], type: 'array' | 'object', indent: string = ''): string {
+  const open = type === 'array' ? '[' : '{';
+  const close = type === 'array' ? ']' : '}';
+  const cutoff = type === 'array' ? ARRAY_SINGLE_LINE_MAX : OBJ_SINGLE_LINE_MAX;
+  if (contents.length <= cutoff) {
+    return `${open} ${contents.join(', ')} ${close}`;
+  } else {
+    return `${open}\n${contents.map((line) => `${indent}${TAB}${line},`).join('\n')}\n${indent}${close}`;
+  }
 }
 
 /**

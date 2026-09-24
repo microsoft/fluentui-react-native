@@ -40,7 +40,7 @@ const shadow9 = makeShadow(color2, dims5, color3, dims6);
 const shadow10 = makeShadow(color0, dims5, color1, dims7);
 const shadow11 = makeShadow(color2, dims5, color3, dims7);
 
-const themeShadows0 = {
+const shadowsCommon = {
   shadow2: shadow0,
   shadow2brand: shadow1,
   shadow4: shadow2,
@@ -55,5 +55,7 @@ const themeShadows0 = {
   shadow64brand: shadow11,
 };
 
-export const lightShadows = themeShadows0;
-export const darkShadows = themeShadows0;
+export const lightShadows = { ...shadowsCommon };
+export const darkShadows = { ...shadowsCommon };
+
+

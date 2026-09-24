@@ -51,36 +51,34 @@ const shadow15 = makeShadow(color5, dims0, color6, dims4);
 const shadow16 = makeShadow(color7, dims5, color8, dims6);
 const shadow17 = makeShadow(color7, dims5, color8, dims7);
 
-const themeShadows0 = {
-  shadow2: shadow0,
+const shadowsCommon = {
   shadow2brand: shadow1,
-  shadow4: shadow2,
   shadow4brand: shadow3,
-  shadow8: shadow4,
   shadow8brand: shadow5,
-  shadow16: shadow6,
   shadow16brand: shadow7,
-  shadow28: shadow8,
   shadow28brand: shadow9,
-  shadow64: shadow10,
   shadow64brand: shadow11,
 };
-const themeShadows1 = {
+const shadowsDarkDarkGrayHc = {
   shadow2: shadow12,
-  shadow2brand: shadow1,
   shadow4: shadow13,
-  shadow4brand: shadow3,
   shadow8: shadow14,
-  shadow8brand: shadow5,
   shadow16: shadow15,
-  shadow16brand: shadow7,
   shadow28: shadow16,
-  shadow28brand: shadow9,
   shadow64: shadow17,
-  shadow64brand: shadow11,
 };
 
-export const lightShadows = themeShadows0;
-export const darkShadows = themeShadows1;
-export const darkGrayShadows = themeShadows1;
-export const hcShadows = themeShadows1;
+export const lightShadows = {
+  ...shadowsCommon,
+  shadow2: shadow0,
+  shadow4: shadow2,
+  shadow8: shadow4,
+  shadow16: shadow6,
+  shadow28: shadow8,
+  shadow64: shadow10,
+};
+export const darkShadows = { ...shadowsDarkDarkGrayHc, ...shadowsCommon };
+export const darkGrayShadows = { ...shadowsDarkDarkGrayHc, ...shadowsCommon };
+export const hcShadows = { ...shadowsDarkDarkGrayHc, ...shadowsCommon };
+
+
