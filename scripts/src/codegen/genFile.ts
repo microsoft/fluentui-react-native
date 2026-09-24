@@ -2,9 +2,10 @@ import { FSEntry } from '@rnx-kit/tools-filesystem';
 import type { FileOptions, CodegenTargetFile } from './types.ts';
 import { writeComment } from './helpers.ts';
 import { writeConstExports } from './constants.ts';
+import { HEADER_MESSAGE } from './const.ts';
 
 /** Default header comment placed at the top of generated files when a target has no explicit description. */
-const defaultHeader = `WARNING: This file is auto-generated. Do not edit it manually.`;
+const defaultHeader = HEADER_MESSAGE;
 
 /**
  * Write a {@link CodegenTargetFile} to disk. Emits the header comment, any directly-declared constants, and any

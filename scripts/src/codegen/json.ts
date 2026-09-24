@@ -1,4 +1,4 @@
-import { extractCommonFromPlatforms, extractConstsUpstream } from './constants.ts';
+import { extractCommonFromPlatforms } from './constants.ts';
 import { initTargetFile } from './helpers.ts';
 import type { Constants, CodegenTargetFile } from './types.ts';
 import path from 'node:path';
@@ -133,26 +133,8 @@ export function processPlatformJsonFiles(inputs: PlatformJsonFiles): CodegenTarg
   // Pull all common values into the root entry file, removing them from the platform-specific files. win32 is the
   // default platform, so its file acts as the primary and supplies the default values for the shared re-exports.
   const required = [platformFiles.windows, platformFiles.macos];
-  const desktop = [platformFiles.win32, platformFiles.windows, platformFiles.macos];
   const optional = [platformFiles.android, platformFiles.ios].filter((f): f is CodegenTargetFile => f != null);
   extractCommonFromPlatforms(commonEntry, platformFiles.win32, required, optional);
   const allFiles = [commonEntry, ...Object.values(platformFiles)];
-  const subsetBase = `${inputs.genbase}.subset`;
-  const ext = path.extname(inputs.entry);
-  // Factor constants shared within each platform group into a subset file, re-exported from the group's members.
-  extractConstsUpstream(`${subsetBase}.desktop${ext}`, `Generated subset of constants for desktop platforms.`, desktop, allFiles);
-  extractConstsUpstream(`${subsetBase}.mobile${ext}`, `Generated subset of constants for mobile platforms.`, optional, allFiles);
-  extractConstsUpstream(
-    `${subsetBase}.win${ext}`,
-    `Generated subset of constants for Windows platforms.`,
-    [platformFiles.win32, platformFiles.windows],
-    allFiles,
-  );
-  extractConstsUpstream(
-    `${subsetBase}.apple${ext}`,
-    `Generated subset of constants for Apple platforms.`,
-    [platformFiles.macos, platformFiles.ios],
-    allFiles,
-  );
   return allFiles;
 }
