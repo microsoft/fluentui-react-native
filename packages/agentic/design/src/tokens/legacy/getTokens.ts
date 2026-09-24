@@ -1,8 +1,6 @@
-import hcShadowTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json';
 import darkAliasTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-aliases.json';
-import darkShadowTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-shadow.json';
 import lightAliasTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-aliases.json';
-import lightShadowTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-shadow.json';
+import { darkShadows, hcShadows, lightShadows } from '../../tokens/generated/shadows';
 import type { AppearanceOptions } from '../../theming';
 import { assertNever } from 'assert-never';
 
@@ -24,11 +22,11 @@ export function getAliasTokens(mode: AppearanceOptions) {
 
 export function getShadowTokens(mode: AppearanceOptions) {
   if (mode === 'light') {
-    return lightShadowTokens;
-  } else if (mode === 'dark') {
-    return darkShadowTokens;
+    return lightShadows;
+  } else if (mode === 'dark' || mode === 'darkElevated') {
+    return darkShadows;
   }
 
   // HC mode.
-  return hcShadowTokens;
+  return hcShadows;
 }

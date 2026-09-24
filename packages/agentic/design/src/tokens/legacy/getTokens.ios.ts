@@ -1,8 +1,7 @@
 import iOSDarkAliasTokens from '@fluentui-react-native/design-tokens-ios/dark/tokens-aliases.json';
-import iOSDarkShadowTokens from '@fluentui-react-native/design-tokens-ios/dark/tokens-shadow.json';
 import iOSDarkElevatedAliasTokens from '@fluentui-react-native/design-tokens-ios/elevateddark/tokens-aliases.json';
 import iOSLightAliasTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-aliases.json';
-import iOSLightShadowTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-shadow.json';
+import { darkShadows, elevateddarkShadows, hclightShadows, lightShadows } from '../../tokens/generated/shadows.ios';
 import type { AppearanceOptions } from '../../theming';
 import { assertNever } from 'assert-never';
 
@@ -24,13 +23,15 @@ export function getAliasTokens(mode: AppearanceOptions) {
 
 export function getShadowTokens(mode: AppearanceOptions) {
   if (mode === 'light') {
-    return iOSLightShadowTokens;
-  } else if (mode === 'dark' || mode === 'darkElevated') {
-    return iOSDarkShadowTokens;
+    return lightShadows;
+  } else if (mode === 'dark') {
+    return darkShadows;
+  } else if (mode === 'darkElevated') {
+    return elevateddarkShadows;
   } else if (mode === 'highContrast') {
     // TODO #2492 we should be throwing an error if highContrast mode is set in iOS, but currently
     // the default theme tries to create a highContrast mode so as a workaround we return the light mode tokens.
-    return iOSLightShadowTokens;
+    return hclightShadows;
   } else {
     assertNever(mode);
   }

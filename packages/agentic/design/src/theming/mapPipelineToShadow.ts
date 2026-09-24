@@ -13,7 +13,7 @@ function createThemeShadowKey(number: number, brand?: boolean) {
 
 /**
  * Given design token pipeline output for shadow tokens, creates an object that can be used in Theme object.
- * @param pipelineOutputShadow Assumes that this is the object in the tokens-shadow.json file of the pipeline output
+ * @param pipelineOutputShadow Assumes this is the design-token pipeline output for shadow tokens.
  * @returns Object containing shadow tokens
  */
 export function mapPipelineToShadow(pipelineOutputShadow: any): ThemeShadowDefinition {
