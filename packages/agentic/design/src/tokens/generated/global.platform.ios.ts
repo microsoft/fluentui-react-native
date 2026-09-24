@@ -2,6 +2,14 @@
  * Generated ios specific constants.
  */
 
+export const colorBrandPrimary = '#0078d4';
+export const colorBrandShade10 = '#106ebe';
+export const colorBrandShade20 = '#005a9e';
+export const colorBrandShade30 = '#004578';
+export const colorBrandTint10 = '#2b88d8';
+export const colorBrandTint20 = '#c7e0f4';
+export const colorBrandTint30 = '#deecf9';
+export const colorBrandTint40 = '#eff6fc';
 export const fontFamilyBase = 'System';
 export const fontFamilyMonospace = 'System';
 export const fontFamilyNumeric = 'System';

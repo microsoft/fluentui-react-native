@@ -1,7 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { globalTokens } from '@fluentui-react-native/design/tokens/legacy';
 import type { ThemeColorDefinition } from '@fluentui-react-native/design/theming';
-import { colorBlack, colorBurgundyPrimary, colorRedPrimary, colorWhite } from '@fluentui-react-native/design/tokens/global';
+import {
+  colorBlack,
+  colorBrand30,
+  colorBrand40,
+  colorBrand50,
+  colorBrand60,
+  colorBrand70,
+  colorBrand80,
+  colorBrand90,
+  colorBrand100,
+  colorBrand110,
+  colorBrand120,
+  colorBrand140,
+  colorBrand150,
+  colorBrand160,
+  colorBurgundyPrimary,
+  colorRedPrimary,
+  colorWhite,
+} from '@fluentui-react-native/design/tokens/global';
 
 import { createColorAliasTokens } from './createAliasTokens';
 import { paletteFromFabricColors } from './defaultColors';
@@ -27,29 +44,19 @@ export function getStockWebPalette(): ThemeColorDefinition {
       red: colorRedPrimary,
       redDark: colorBurgundyPrimary,
 
-      // @ts-expect-error
-      accent: globalTokens.color.brand80,
+      accent: colorBrand80,
       blackTranslucent40: 'rgba(0,0,0,.4)',
 
       // Colors to be deprecated
-      // @ts-expect-error
-      themeDarker: globalTokens.color.brand40,
-      // @ts-expect-error
-      themeDark: globalTokens.color.brand60,
-      // @ts-expect-error
-      themeDarkAlt: globalTokens.color.brand70,
-      // @ts-expect-error
-      themePrimary: globalTokens.color.brand80,
-      // @ts-expect-error
-      themeSecondary: globalTokens.color.brand90,
-      // @ts-expect-error
-      themeTertiary: globalTokens.color.brand120,
-      // @ts-expect-error
-      themeLight: globalTokens.color.brand140,
-      // @ts-expect-error
-      themeLighter: globalTokens.color.brand150,
-      // @ts-expect-error
-      themeLighterAlt: globalTokens.color.brand160,
+      themeDarker: colorBrand40,
+      themeDark: colorBrand60,
+      themeDarkAlt: colorBrand70,
+      themePrimary: colorBrand80,
+      themeSecondary: colorBrand90,
+      themeTertiary: colorBrand120,
+      themeLight: colorBrand140,
+      themeLighter: colorBrand150,
+      themeLighterAlt: colorBrand160,
     }),
     ...createColorAliasTokens('light'),
   };
@@ -75,30 +82,20 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
         neutralLighterAlt: '#201f1e',
         white: '#1b1a19',
         red: colorRedPrimary,
-        // @ts-expect-error
-        accent: globalTokens.color.brand40,
+        accent: colorBrand40,
         redDark: '#f1707b',
         blackTranslucent40: 'rgba(0,0,0,.4)',
 
         // Colors to be deprecated
-        // @ts-expect-error
-        themeDarker: globalTokens.color.brand110,
-        // @ts-expect-error
-        themeDark: globalTokens.color.brand100,
-        // @ts-expect-error
-        themeDarkAlt: globalTokens.color.brand100,
-        // @ts-expect-error
-        themePrimary: globalTokens.color.brand90,
-        // @ts-expect-error
-        themeSecondary: globalTokens.color.brand90,
-        // @ts-expect-error
-        themeTertiary: globalTokens.color.brand60,
-        // @ts-expect-error
-        themeLight: globalTokens.color.brand50,
-        // @ts-expect-error
-        themeLighter: globalTokens.color.brand40,
-        // @ts-expect-error
-        themeLighterAlt: globalTokens.color.brand30,
+        themeDarker: colorBrand110,
+        themeDark: colorBrand100,
+        themeDarkAlt: colorBrand100,
+        themePrimary: colorBrand90,
+        themeSecondary: colorBrand90,
+        themeTertiary: colorBrand60,
+        themeLight: colorBrand50,
+        themeLighter: colorBrand40,
+        themeLighterAlt: colorBrand30,
       },
       true,
     ),

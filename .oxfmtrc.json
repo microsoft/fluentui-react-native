@@ -8,6 +8,7 @@
     "**/__fixtures__/**",
     "**/__testfixtures__/**",
     "**/*.generated.*",
+    "**/generated/**",
     "**/lib-commonjs/**",
     "**/dist/**",
     "packages/native/Callout/windows/Callout/codegen/**",

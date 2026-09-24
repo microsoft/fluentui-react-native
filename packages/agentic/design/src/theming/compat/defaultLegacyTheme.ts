@@ -1,11 +1,20 @@
 import { Platform } from 'react-native';
 
-import { fontWeightRegular, fontWeightSemibold } from '../../tokens/global.generated';
-import globalTokens from '../../tokens/legacy/tokens-global';
+import {
+  fontWeightRegular,
+  fontWeightSemibold,
+  fontSize100,
+  fontSize200,
+  fontSize300,
+  fontSize400,
+  fontSize500,
+  fontSize700,
+  fontSize900,
+} from '../../tokens/global.generated';
 import { appearanceOptionFromResolved, themeAppearanceKey } from '../appearance';
 import type { ResolvedThemeAppearance } from '../appearance.types';
 import type { Theme, Spacing } from '../types/Theme.types';
-import type { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '../types/Typography.types';
+import type { FontSizes, FontWeightValue, Typography, Variants } from '../types/Typography.types';
 
 import { createLegacyShadowAliasTokens } from './createLegacyAliasTokens';
 import { getStockWebHighContrastPalette } from './defaultLegacyColors';
@@ -22,13 +31,13 @@ function getDefaultTypography(): Typography {
 
   const typography = {
     sizes: {
-      caption: globalTokens.font.size100 as FontSize,
-      secondary: globalTokens.font.size200 as FontSize,
-      body: globalTokens.font.size300 as FontSize,
-      subheader: globalTokens.font.size400 as FontSize,
-      header: globalTokens.font.size500 as FontSize,
-      hero: globalTokens.font.size700 as FontSize,
-      heroLarge: globalTokens.font.size900 as FontSize,
+      caption: fontSize100,
+      secondary: fontSize200,
+      body: fontSize300,
+      subheader: fontSize400,
+      header: fontSize500,
+      hero: fontSize700,
+      heroLarge: fontSize900,
     } as FontSizes,
     weights: {
       regular: fontWeightRegular as FontWeightValue,

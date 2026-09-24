@@ -855,6 +855,14 @@ export const strokeWidthNone = 0;
  * Platform specific constants that are shared across all platforms.
  */
 export {
+  colorBrandPrimary,
+  colorBrandShade10,
+  colorBrandShade20,
+  colorBrandShade30,
+  colorBrandTint10,
+  colorBrandTint20,
+  colorBrandTint30,
+  colorBrandTint40,
   fontFamilyBase,
   fontFamilyMonospace,
   fontFamilyNumeric,
