@@ -1,35 +1,22 @@
-import blackAliasTokens from '@fluentui-react-native/design-tokens-win32/black/tokens-aliases.json';
-import colorfulAliasTokens from '@fluentui-react-native/design-tokens-win32/colorful/tokens-aliases.json';
-import darkGrayAliasTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-aliases.json';
-import {
-  darkShadows,
-  hcShadows,
-  lightShadows,
-} from '@fluentui-react-native/design/tokens/generated/shadows';
-import { hcAliasTokens } from '@fluentui-react-native/design/tokens/legacy';
+import { getAliasTokens, getShadowTokens, type EffectiveAppearance } from '@fluentui-react-native/design/appearance';
+
+function appearanceFromOfficeTheme(officeTheme: string): EffectiveAppearance {
+  if (officeTheme === 'White' || officeTheme === 'Colorful') {
+    return { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' };
+  }
+  if (officeTheme === 'DarkGray' || officeTheme === 'Black') {
+    return { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'base' };
+  }
+  if (officeTheme === 'HighContrast') {
+    return { colorScheme: 'light', contrast: 'highContrast', interfaceLevel: 'base' };
+  }
+  return { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' };
+}
 
 export function getOfficeAliasTokens(officeTheme: string) {
-  if (officeTheme === 'White' || officeTheme === 'Colorful') {
-    return colorfulAliasTokens;
-  } else if (officeTheme === 'DarkGray') {
-    return darkGrayAliasTokens;
-  } else if (officeTheme === 'Black') {
-    return blackAliasTokens;
-  } else if (officeTheme === 'HighContrast') {
-    return hcAliasTokens;
-  }
-
-  return colorfulAliasTokens;
+  return getAliasTokens(appearanceFromOfficeTheme(officeTheme));
 }
 
 export function getOfficeShadowTokens(officeTheme: string) {
-  if (officeTheme === 'White' || officeTheme === 'Colorful') {
-    return lightShadows;
-  } else if (officeTheme === 'DarkGray' || officeTheme === 'Black') {
-    return darkShadows;
-  } else if (officeTheme === 'HighContrast') {
-    return hcShadows;
-  }
-
-  return lightShadows;
+  return getShadowTokens(appearanceFromOfficeTheme(officeTheme));
 }

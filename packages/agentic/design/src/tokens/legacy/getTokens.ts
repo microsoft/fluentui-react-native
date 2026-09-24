@@ -1,32 +1,30 @@
-import darkAliasTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-aliases.json';
-import lightAliasTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-aliases.json';
-import { darkShadows, hcShadows, lightShadows } from '../../tokens/generated/shadows';
 import type { AppearanceOptions } from '../../theming';
+import {
+  getAliasTokens as getEffectiveAliasTokens,
+  getShadowTokens as getEffectiveShadowTokens,
+  type EffectiveAppearance,
+} from '../../appearance';
 import { assertNever } from 'assert-never';
 
-import { hcAliasTokens } from './highContrast/tokens-alias';
+function toEffectiveAppearance(mode: AppearanceOptions): EffectiveAppearance {
+  switch (mode) {
+    case 'light':
+      return { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' };
+    case 'dark':
+      return { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'base' };
+    case 'darkElevated':
+      return { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'elevated' };
+    case 'highContrast':
+      return { colorScheme: 'light', contrast: 'highContrast', interfaceLevel: 'base' };
+    default:
+      assertNever(mode);
+  }
+}
 
 export function getAliasTokens(mode: AppearanceOptions) {
-  if (mode === 'light') {
-    return lightAliasTokens;
-  } else if (mode === 'dark' || mode === 'darkElevated') {
-    return darkAliasTokens;
-  } else if (mode === 'highContrast') {
-    return hcAliasTokens;
-  } else {
-    assertNever(mode);
-  }
-
-  return lightAliasTokens;
+  return getEffectiveAliasTokens(toEffectiveAppearance(mode));
 }
 
 export function getShadowTokens(mode: AppearanceOptions) {
-  if (mode === 'light') {
-    return lightShadows;
-  } else if (mode === 'dark' || mode === 'darkElevated') {
-    return darkShadows;
-  }
-
-  // HC mode.
-  return hcShadows;
+  return getEffectiveShadowTokens(toEffectiveAppearance(mode));
 }

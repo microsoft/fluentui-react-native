@@ -1,3 +1,5 @@
+export type { EffectiveAppearance } from './appearance';
+export { getAliasTokens, getShadowTokens } from './appearance';
 export type { FontSize, FontWeight } from './concepts/textAttributes';
 export { fontSize, fontWeight } from './concepts/textAttributes';
 export type {

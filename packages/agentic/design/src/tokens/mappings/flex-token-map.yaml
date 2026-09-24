@@ -19,7 +19,7 @@ sources:
     prefixes:
       alias.: Stateful semantic alias token — colorful/tokens-aliases.json.
       global.: Raw global token — colorful/tokens-global.json.
-      shadow.: Elevation shadow token — colorful/tokens-shadow.json.
+      shadow.: Elevation shadow token from the colorful token package.
   furn-theme:
     description: Dot path to the corresponding value in the Fluent UI React Native
       Theme type.

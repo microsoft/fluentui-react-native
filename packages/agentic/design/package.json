@@ -33,6 +33,42 @@
       "import": "./lib/tokens/legacy/index.js",
       "default": "./src/tokens/legacy/index.ts"
     },
+    "./appearance": {
+      "types": "./lib/appearance/index.d.ts",
+      "react-native": "./src/appearance/index.ts",
+      "import": "./lib/appearance/index.js",
+      "default": "./src/appearance/index.ts"
+    },
+    "./tokens/generated/shadows": {
+      "types": "./lib/tokens/generated/shadows.d.ts",
+      "react-native": "./src/tokens/generated/shadows.ts",
+      "import": "./lib/tokens/generated/shadows.js",
+      "default": "./src/tokens/generated/shadows.ts"
+    },
+    "./tokens/generated/shadows.android": {
+      "types": "./lib/tokens/generated/shadows.android.d.ts",
+      "react-native": "./src/tokens/generated/shadows.android.ts",
+      "import": "./lib/tokens/generated/shadows.android.js",
+      "default": "./src/tokens/generated/shadows.android.ts"
+    },
+    "./tokens/generated/shadows.ios": {
+      "types": "./lib/tokens/generated/shadows.ios.d.ts",
+      "react-native": "./src/tokens/generated/shadows.ios.ts",
+      "import": "./lib/tokens/generated/shadows.ios.js",
+      "default": "./src/tokens/generated/shadows.ios.ts"
+    },
+    "./tokens/generated/shadows.macos": {
+      "types": "./lib/tokens/generated/shadows.macos.d.ts",
+      "react-native": "./src/tokens/generated/shadows.macos.ts",
+      "import": "./lib/tokens/generated/shadows.macos.js",
+      "default": "./src/tokens/generated/shadows.macos.ts"
+    },
+    "./tokens/generated/shadows.windows": {
+      "types": "./lib/tokens/generated/shadows.windows.d.ts",
+      "react-native": "./src/tokens/generated/shadows.windows.ts",
+      "import": "./lib/tokens/generated/shadows.windows.js",
+      "default": "./src/tokens/generated/shadows.windows.ts"
+    },
     "./color-lib": {
       "types": "./lib/color-lib/index.d.ts",
       "react-native": "./src/color-lib/index.ts",
