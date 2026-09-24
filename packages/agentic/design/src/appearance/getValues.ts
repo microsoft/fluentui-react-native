@@ -3,9 +3,13 @@ import type { ThemeShadowDefinition } from '../theming/types/Shadow.types';
 import blackAliasTokens from '@fluentui-react-native/design-tokens-win32/black/tokens-aliases.json';
 import colorfulAliasTokens from '@fluentui-react-native/design-tokens-win32/colorful/tokens-aliases.json';
 import darkGrayAliasTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-aliases.json';
-import hcAliasTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-aliases.json';
+import rawHcAliasTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-aliases.json';
 import { darkShadows, hcShadows, lightShadows, darkGrayShadows } from '../tokens/generated/shadows';
 import type { EffectiveAppearance } from './appearance.types';
+import { processAliasTokens, transformWin32PlatformColorName } from './processAliasTokens';
+
+// Win32 native apps reference system colors by their raw resource name (no `SystemColor...Color` wrapping).
+const hcAliasTokens = processAliasTokens(rawHcAliasTokens, transformWin32PlatformColorName);
 
 export function getAliasTokens(appearance: EffectiveAppearance): AliasColorTokens {
   if (appearance.contrast === 'highContrast') {
