@@ -4,633 +4,624 @@ import { PlatformColor } from 'react-native';
 import type { AliasColorTokens } from '../../theming/types/Color.types';
 import type { VariantValue } from '../../theming/types/Typography.types';
 
-const color0 = "#242424";
-const color1 = "#424242";
-const color2 = "#1651aa";
-const color3 = "#0e336a";
-const color4 = "#13458f";
-const color5 = "#616161";
-const color6 = "#707070";
-const color7 = "#bdbdbd";
-const color8 = "#185abd";
+const rgb242424 = "#242424";
+const rgb424242 = "#424242";
+const rgb1651aa = "#1651aa";
+const rgb0e336a = "#0e336a";
+const rgb13458f = "#13458f";
+const rgb616161 = "#616161";
+const rgb707070 = "#707070";
+const rgbbdbdbd = "#bdbdbd";
+const rgb185abd = "#185abd";
 const color9 = undefined;
-const color10 = "#ffffff";
-const color11 = "#f5f5f5";
-const color12 = "#e0e0e0";
-const color13 = "#ebebeb";
-const color14 = "#fafafa";
-const color15 = "#f0f0f0";
-const color16 = "#dbdbdb";
-const color17 = "#e6e6e6";
-const color18 = "#d6d6d6";
-const color19 = "#00000000";
-const color20 = "#d2e0f4";
-const color21 = "#575757";
-const color22 = "#4d4d4d";
-const color23 = "#d1d1d1";
-const color24 = "#c7c7c7";
-const color25 = "#b3b3b3";
-const color26 = "#6794d7";
-const color27 = "#000000";
-const color28 = "#fdf6f6";
-const color29 = "#f1bbbc";
-const color30 = "#d13438";
-const color31 = "#bc2f32";
-const color32 = "#751d1f";
-const color33 = "#dc5e62";
-const color34 = "#f1faf1";
-const color35 = "#9fd89f";
-const color36 = "#107c10";
-const color37 = "#0e700e";
-const color38 = "#094509";
-const color39 = "#359b35";
-const color40 = "#fffef5";
-const color41 = "#fef7b2";
-const color42 = "#fde300";
-const color43 = "#817400";
-const color44 = "#fdf6f3";
-const color45 = "#f4bfab";
-const color46 = "#da3b01";
-const color47 = "#c43501";
-const color48 = "#7a2101";
-const color49 = "#fdf5fc";
-const color50 = "#edbbe7";
-const color51 = "#c239b3";
-const color52 = "#af33a1";
-const color53 = "#6d2064";
-const color54 = "#2e6ac5";
-const color55 = "#adadad";
-const color56 = "#999999";
-const color57 = "#5c5c5c";
-const color58 = "#aec6eb";
-const color59 = "#292929";
-const color60 = "#3d3d3d";
-const color61 = "#1f1f1f";
-const color62 = "#383838";
-const color63 = "#333333";
-const color64 = "#141414";
-const color65 = "#2e2e2e";
-const color66 = "#0a0a0a";
-const color67 = "#1a1a1a";
-const color68 = "#050505";
-const color69 = "#0f0f0f";
-const color70 = "#666666";
-const color71 = "#757575";
-const color72 = "#6b6b6b";
-const color73 = "#525252";
-const color74 = "#3f1011";
-const color75 = "#e37d80";
-const color76 = "#052505";
-const color77 = "#54b054";
-const color78 = "#4c4400";
-const color79 = "#feee66";
-const color80 = "#fdea3d";
-const color81 = "#411200";
-const color82 = "#e9835e";
-const color83 = "#3a1136";
-const color84 = "#da7ed0";
-const color85 = "#d161c4";
-const color86 = "#cccccc";
-const color87 = "#c2c2c2";
-const color88 = "#474747";
-const color89 = "#a8a8a8";
-const color90 = "#b8b8b8";
-const color91 = "#8a8a8a";
-const color92 = "#8f8f8f";
-const color93 = "#949494";
-const color94 = PlatformColor('WindowText');
-const color95 = PlatformColor('HighlightText');
-const color96 = PlatformColor('GrayText');
-const color97 = PlatformColor('Hotlight');
-const color98 = PlatformColor('Highlight');
-const color99 = PlatformColor('ButtonText');
-const color100 = PlatformColor('Window');
-const color101 = "#858585";
-const color102 = PlatformColor('ButtonFace');
+const rgbffffff = "#ffffff";
+const rgbf5f5f5 = "#f5f5f5";
+const rgbe0e0e0 = "#e0e0e0";
+const rgbebebeb = "#ebebeb";
+const rgbfafafa = "#fafafa";
+const rgbf0f0f0 = "#f0f0f0";
+const rgbdbdbdb = "#dbdbdb";
+const rgbe6e6e6 = "#e6e6e6";
+const rgbd6d6d6 = "#d6d6d6";
+const rgb00000000 = "#00000000";
+const rgbd2e0f4 = "#d2e0f4";
+const rgb575757 = "#575757";
+const rgb4d4d4d = "#4d4d4d";
+const rgbd1d1d1 = "#d1d1d1";
+const rgbc7c7c7 = "#c7c7c7";
+const rgbb3b3b3 = "#b3b3b3";
+const rgb6794d7 = "#6794d7";
+const rgb000000 = "#000000";
+const rgbfdf6f6 = "#fdf6f6";
+const rgbf1bbbc = "#f1bbbc";
+const rgbd13438 = "#d13438";
+const rgbbc2f32 = "#bc2f32";
+const rgb751d1f = "#751d1f";
+const rgbdc5e62 = "#dc5e62";
+const rgbf1faf1 = "#f1faf1";
+const rgb9fd89f = "#9fd89f";
+const rgb107c10 = "#107c10";
+const rgb0e700e = "#0e700e";
+const rgb094509 = "#094509";
+const rgb359b35 = "#359b35";
+const rgbfffef5 = "#fffef5";
+const rgbfef7b2 = "#fef7b2";
+const rgbfde300 = "#fde300";
+const rgb817400 = "#817400";
+const rgbfdf6f3 = "#fdf6f3";
+const rgbf4bfab = "#f4bfab";
+const rgbda3b01 = "#da3b01";
+const rgbc43501 = "#c43501";
+const rgb7a2101 = "#7a2101";
+const rgbfdf5fc = "#fdf5fc";
+const rgbedbbe7 = "#edbbe7";
+const rgbc239b3 = "#c239b3";
+const rgbaf33a1 = "#af33a1";
+const rgb6d2064 = "#6d2064";
+const rgb2e6ac5 = "#2e6ac5";
+const rgbadadad = "#adadad";
+const rgb999999 = "#999999";
+const rgb5c5c5c = "#5c5c5c";
+const rgbaec6eb = "#aec6eb";
+const rgb292929 = "#292929";
+const rgb3d3d3d = "#3d3d3d";
+const rgb1f1f1f = "#1f1f1f";
+const rgb383838 = "#383838";
+const rgb333333 = "#333333";
+const rgb141414 = "#141414";
+const rgb2e2e2e = "#2e2e2e";
+const rgb0a0a0a = "#0a0a0a";
+const rgb1a1a1a = "#1a1a1a";
+const rgb050505 = "#050505";
+const rgb0f0f0f = "#0f0f0f";
+const rgb666666 = "#666666";
+const rgb757575 = "#757575";
+const rgb6b6b6b = "#6b6b6b";
+const rgb525252 = "#525252";
+const rgb3f1011 = "#3f1011";
+const rgbe37d80 = "#e37d80";
+const rgb052505 = "#052505";
+const rgb54b054 = "#54b054";
+const rgb4c4400 = "#4c4400";
+const rgbfeee66 = "#feee66";
+const rgbfdea3d = "#fdea3d";
+const rgb411200 = "#411200";
+const rgbe9835e = "#e9835e";
+const rgb3a1136 = "#3a1136";
+const rgbda7ed0 = "#da7ed0";
+const rgbd161c4 = "#d161c4";
+const rgbcccccc = "#cccccc";
+const rgbc2c2c2 = "#c2c2c2";
+const rgb474747 = "#474747";
+const rgba8a8a8 = "#a8a8a8";
+const rgbb8b8b8 = "#b8b8b8";
+const rgb8a8a8a = "#8a8a8a";
+const rgb8f8f8f = "#8f8f8f";
+const rgb949494 = "#949494";
+const platColorWindowText = PlatformColor('WindowText');
+const platColorHighlightText = PlatformColor('HighlightText');
+const platColorGrayText = PlatformColor('GrayText');
+const platColorHotlight = PlatformColor('Hotlight');
+const platColorHighlight = PlatformColor('Highlight');
+const platColorButtonText = PlatformColor('ButtonText');
+const platColorWindow = PlatformColor('Window');
+const rgb858585 = "#858585";
+const platColorButtonFace = PlatformColor('ButtonFace');
+
+const fontFace0 = 'primary';
+
+const fontWeight0 = '400';
+const fontWeight1 = '600';
 
 const aliasColorsCommon = {
   brandForeground1Disabled: color9,
   brandForeground1Pressed: color9,
-  subtleBackground: color19,
-  transparentBackground: color19,
-  transparentBackgroundHover: color19,
-  transparentBackgroundPressed: color19,
-  transparentBackgroundSelected: color19,
+  subtleBackground: rgb00000000,
+  transparentBackground: rgb00000000,
+  transparentBackgroundHover: rgb00000000,
+  transparentBackgroundPressed: rgb00000000,
+  transparentBackgroundSelected: rgb00000000,
   brandBackgroundDisabled: color9,
 };
 const aliasColorsLightDarkDarkGray = {
-  neutralForegroundOnBrand: color10,
-  neutralForegroundOnBrandHover: color10,
-  neutralForegroundOnBrandPressed: color10,
-  neutralForegroundOnBrandSelected: color10,
-  brandBackground: color8,
-  brandBackgroundHover: color2,
-  brandBackgroundPressed: color3,
-  brandBackgroundSelected: color4,
-  compoundBrandBackground1: color8,
-  compoundBrandBackground1Hover: color2,
-  compoundBrandBackground1Pressed: color3,
-  brandBackgroundStatic: color8,
-  brandBackground2: color20,
-  neutralStrokeAccessibleSelected: color8,
-  brandStroke1: color8,
-  brandStroke2: color26,
-  compoundBrandStroke1: color8,
-  compoundBrandStroke1Hover: color2,
-  compoundBrandStroke1Pressed: color3,
-  transparentStroke: color19,
-  transparentStrokeInteractive: color19,
-  transparentStrokeDisabled: color19,
-  dangerBackground3: color30,
-  successBackground3: color36,
-  warningBackground3: color42,
-  severeBackground3: color46,
-  outofofficeBackground3: color51,
+  neutralForegroundOnBrand: rgbffffff,
+  neutralForegroundOnBrandHover: rgbffffff,
+  neutralForegroundOnBrandPressed: rgbffffff,
+  neutralForegroundOnBrandSelected: rgbffffff,
+  brandBackground: rgb185abd,
+  brandBackgroundHover: rgb1651aa,
+  brandBackgroundPressed: rgb0e336a,
+  brandBackgroundSelected: rgb13458f,
+  compoundBrandBackground1: rgb185abd,
+  compoundBrandBackground1Hover: rgb1651aa,
+  compoundBrandBackground1Pressed: rgb0e336a,
+  brandBackgroundStatic: rgb185abd,
+  brandBackground2: rgbd2e0f4,
+  neutralStrokeAccessibleSelected: rgb185abd,
+  brandStroke1: rgb185abd,
+  brandStroke2: rgb6794d7,
+  compoundBrandStroke1: rgb185abd,
+  compoundBrandStroke1Hover: rgb1651aa,
+  compoundBrandStroke1Pressed: rgb0e336a,
+  transparentStroke: rgb00000000,
+  transparentStrokeInteractive: rgb00000000,
+  transparentStrokeDisabled: rgb00000000,
+  dangerBackground3: rgbd13438,
+  successBackground3: rgb107c10,
+  warningBackground3: rgbfde300,
+  severeBackground3: rgbda3b01,
+  outofofficeBackground3: rgbc239b3,
 };
 const aliasColorsDarkDarkGray = {
-  neutralForeground1: color10,
-  neutralForeground1Hover: color10,
-  neutralForeground1Pressed: color10,
-  neutralForeground1Selected: color10,
-  neutralForeground2Hover: color10,
-  neutralForeground2Pressed: color10,
-  neutralForeground2Selected: color10,
-  neutralForeground2BrandHover: color20,
-  neutralForeground2BrandPressed: color54,
-  neutralForeground2BrandSelected: color20,
-  neutralForeground3BrandHover: color20,
-  neutralForeground3BrandPressed: color54,
-  neutralForeground3BrandSelected: color20,
-  brandForegroundLink: color58,
-  brandForegroundLinkHover: color20,
-  brandForegroundLinkPressed: color54,
-  brandForegroundLinkSelected: color20,
-  compoundBrandForeground1: color58,
-  compoundBrandForeground1Hover: color20,
-  compoundBrandForeground1Pressed: color54,
-  brandForeground1: color58,
-  brandForeground2: color20,
-  neutralForegroundInverted: color27,
-  neutralBackgroundInverted: color10,
-  strokeFocus1: color27,
-  strokeFocus2: color10,
-  dangerBackground1: color74,
-  dangerBackground2: color32,
-  dangerForeground1: color75,
-  dangerForeground2: color29,
-  dangerForeground3: color75,
-  dangerForegroundInverted: color30,
-  dangerBorderActive: color75,
-  dangerBorder1: color30,
-  dangerBorder2: color33,
-  successBackground1: color76,
-  successBackground2: color38,
-  successForeground1: color77,
-  successForeground2: color35,
-  successForeground3: color35,
-  successForegroundInverted: color36,
-  successBorderActive: color77,
-  successBorder1: color36,
-  successBorder2: color35,
-  warningBackground1: color78,
-  warningBackground2: color43,
-  warningForeground1: color79,
-  warningForeground2: color41,
-  warningForeground3: color80,
-  warningForegroundInverted: color43,
-  warningBorderActive: color79,
-  warningBorder1: color42,
-  warningBorder2: color80,
-  severeBackground1: color81,
-  severeBackground2: color48,
-  severeForeground1: color82,
-  severeForeground2: color45,
-  severeForeground3: color82,
-  severeBorderActive: color82,
-  severeBorder1: color46,
-  severeBorder2: color82,
-  outofofficeBackground1: color83,
-  outofofficeBackground2: color53,
-  outofofficeForeground1: color84,
-  outofofficeForeground2: color50,
-  outofofficeForeground3: color85,
-  outofofficeBorderActive: color84,
-  outofofficeBorder1: color51,
-  outofofficeBorder2: color85,
+  neutralForeground1: rgbffffff,
+  neutralForeground1Hover: rgbffffff,
+  neutralForeground1Pressed: rgbffffff,
+  neutralForeground1Selected: rgbffffff,
+  neutralForeground2Hover: rgbffffff,
+  neutralForeground2Pressed: rgbffffff,
+  neutralForeground2Selected: rgbffffff,
+  neutralForeground2BrandHover: rgbd2e0f4,
+  neutralForeground2BrandPressed: rgb2e6ac5,
+  neutralForeground2BrandSelected: rgbd2e0f4,
+  neutralForeground3BrandHover: rgbd2e0f4,
+  neutralForeground3BrandPressed: rgb2e6ac5,
+  neutralForeground3BrandSelected: rgbd2e0f4,
+  brandForegroundLink: rgbaec6eb,
+  brandForegroundLinkHover: rgbd2e0f4,
+  brandForegroundLinkPressed: rgb2e6ac5,
+  brandForegroundLinkSelected: rgbd2e0f4,
+  compoundBrandForeground1: rgbaec6eb,
+  compoundBrandForeground1Hover: rgbd2e0f4,
+  compoundBrandForeground1Pressed: rgb2e6ac5,
+  brandForeground1: rgbaec6eb,
+  brandForeground2: rgbd2e0f4,
+  neutralForegroundInverted: rgb000000,
+  neutralBackgroundInverted: rgbffffff,
+  strokeFocus1: rgb000000,
+  strokeFocus2: rgbffffff,
+  dangerBackground1: rgb3f1011,
+  dangerBackground2: rgb751d1f,
+  dangerForeground1: rgbe37d80,
+  dangerForeground2: rgbf1bbbc,
+  dangerForeground3: rgbe37d80,
+  dangerForegroundInverted: rgbd13438,
+  dangerBorderActive: rgbe37d80,
+  dangerBorder1: rgbd13438,
+  dangerBorder2: rgbdc5e62,
+  successBackground1: rgb052505,
+  successBackground2: rgb094509,
+  successForeground1: rgb54b054,
+  successForeground2: rgb9fd89f,
+  successForeground3: rgb9fd89f,
+  successForegroundInverted: rgb107c10,
+  successBorderActive: rgb54b054,
+  successBorder1: rgb107c10,
+  successBorder2: rgb9fd89f,
+  warningBackground1: rgb4c4400,
+  warningBackground2: rgb817400,
+  warningForeground1: rgbfeee66,
+  warningForeground2: rgbfef7b2,
+  warningForeground3: rgbfdea3d,
+  warningForegroundInverted: rgb817400,
+  warningBorderActive: rgbfeee66,
+  warningBorder1: rgbfde300,
+  warningBorder2: rgbfdea3d,
+  severeBackground1: rgb411200,
+  severeBackground2: rgb7a2101,
+  severeForeground1: rgbe9835e,
+  severeForeground2: rgbf4bfab,
+  severeForeground3: rgbe9835e,
+  severeBorderActive: rgbe9835e,
+  severeBorder1: rgbda3b01,
+  severeBorder2: rgbe9835e,
+  outofofficeBackground1: rgb3a1136,
+  outofofficeBackground2: rgb6d2064,
+  outofofficeForeground1: rgbda7ed0,
+  outofofficeForeground2: rgbedbbe7,
+  outofofficeForeground3: rgbd161c4,
+  outofofficeBorderActive: rgbda7ed0,
+  outofofficeBorder1: rgbc239b3,
+  outofofficeBorder2: rgbd161c4,
 };
 
 export const lightAliasColors: AliasColorTokens = {
   ...aliasColorsLightDarkDarkGray,
   ...aliasColorsCommon,
-  neutralForeground1: color0,
-  neutralForeground1Hover: color0,
-  neutralForeground1Pressed: color0,
-  neutralForeground1Selected: color0,
-  neutralForeground2: color1,
-  neutralForeground2Hover: color0,
-  neutralForeground2Pressed: color0,
-  neutralForeground2Selected: color0,
-  neutralForeground2BrandHover: color2,
-  neutralForeground2BrandPressed: color3,
-  neutralForeground2BrandSelected: color4,
-  neutralForeground3: color5,
-  neutralForeground3Hover: color1,
-  neutralForeground3Pressed: color1,
-  neutralForeground3Selected: color1,
-  neutralForeground3BrandHover: color2,
-  neutralForeground3BrandPressed: color3,
-  neutralForeground3BrandSelected: color4,
-  neutralForeground4: color6,
-  neutralForegroundDisabled: color7,
-  brandForegroundLink: color8,
-  brandForegroundLinkHover: color2,
-  brandForegroundLinkPressed: color3,
-  brandForegroundLinkSelected: color4,
-  compoundBrandForeground1: color8,
-  compoundBrandForeground1Hover: color2,
-  compoundBrandForeground1Pressed: color3,
-  brandForeground1: color8,
-  brandForeground2: color2,
-  neutralForegroundInverted: color10,
-  neutralForegroundInvertedLink: color10,
-  neutralForegroundInvertedLinkHover: color10,
-  neutralForegroundInvertedLinkPressed: color10,
-  neutralForegroundInvertedLinkSelected: color10,
-  neutralBackground1: color10,
-  neutralBackground1Hover: color11,
-  neutralBackground1Pressed: color12,
-  neutralBackground1Selected: color13,
-  neutralBackground2: color14,
-  neutralBackground2Hover: color15,
-  neutralBackground2Pressed: color16,
-  neutralBackground2Selected: color17,
-  neutralBackground3: color11,
-  neutralBackground3Hover: color13,
-  neutralBackground3Pressed: color18,
-  neutralBackground3Selected: color12,
-  neutralBackground4: color15,
-  neutralBackground4Hover: color14,
-  neutralBackground4Pressed: color11,
-  neutralBackground4Selected: color10,
-  neutralBackground5: color13,
-  neutralBackground5Hover: color11,
-  neutralBackground5Pressed: color15,
-  neutralBackground5Selected: color14,
-  neutralBackground6: color17,
-  neutralBackgroundInverted: color5,
-  subtleBackgroundHover: color11,
-  subtleBackgroundPressed: color12,
-  subtleBackgroundSelected: color13,
-  neutralBackgroundDisabled: color15,
-  neutralStencil1: color17,
-  neutralStencil2: color14,
-  neutralStrokeAccessible: color5,
-  neutralStrokeAccessibleHover: color21,
-  neutralStrokeAccessiblePressed: color22,
-  neutralStroke1: color23,
-  neutralStroke1Hover: color24,
-  neutralStroke1Pressed: color25,
-  neutralStroke1Selected: color7,
-  neutralStroke2: color12,
-  neutralStroke3: color15,
-  neutralStrokeDisabled: color12,
-  strokeFocus1: color10,
-  strokeFocus2: color27,
-  dangerBackground1: color28,
-  dangerBackground2: color29,
-  dangerForeground1: color31,
-  dangerForeground2: color32,
-  dangerForeground3: color30,
-  dangerForegroundInverted: color33,
-  dangerBorderActive: color30,
-  dangerBorder1: color29,
-  dangerBorder2: color30,
-  successBackground1: color34,
-  successBackground2: color35,
-  successForeground1: color37,
-  successForeground2: color38,
-  successForeground3: color36,
-  successForegroundInverted: color39,
-  successBorderActive: color36,
-  successBorder1: color35,
-  successBorder2: color36,
-  warningBackground1: color40,
-  warningBackground2: color41,
-  warningForeground1: color43,
-  warningForeground2: color43,
-  warningForeground3: color42,
-  warningForegroundInverted: color41,
-  warningBorderActive: color42,
-  warningBorder1: color41,
-  warningBorder2: color42,
-  severeBackground1: color44,
-  severeBackground2: color45,
-  severeForeground1: color47,
-  severeForeground2: color48,
-  severeForeground3: color46,
-  severeBorderActive: color46,
-  severeBorder1: color45,
-  severeBorder2: color46,
-  outofofficeBackground1: color49,
-  outofofficeBackground2: color50,
-  outofofficeForeground1: color52,
-  outofofficeForeground2: color53,
-  outofofficeForeground3: color51,
-  outofofficeBorderActive: color51,
-  outofofficeBorder1: color50,
-  outofofficeBorder2: color51,
+  neutralForeground1: rgb242424,
+  neutralForeground1Hover: rgb242424,
+  neutralForeground1Pressed: rgb242424,
+  neutralForeground1Selected: rgb242424,
+  neutralForeground2: rgb424242,
+  neutralForeground2Hover: rgb242424,
+  neutralForeground2Pressed: rgb242424,
+  neutralForeground2Selected: rgb242424,
+  neutralForeground2BrandHover: rgb1651aa,
+  neutralForeground2BrandPressed: rgb0e336a,
+  neutralForeground2BrandSelected: rgb13458f,
+  neutralForeground3: rgb616161,
+  neutralForeground3Hover: rgb424242,
+  neutralForeground3Pressed: rgb424242,
+  neutralForeground3Selected: rgb424242,
+  neutralForeground3BrandHover: rgb1651aa,
+  neutralForeground3BrandPressed: rgb0e336a,
+  neutralForeground3BrandSelected: rgb13458f,
+  neutralForeground4: rgb707070,
+  neutralForegroundDisabled: rgbbdbdbd,
+  brandForegroundLink: rgb185abd,
+  brandForegroundLinkHover: rgb1651aa,
+  brandForegroundLinkPressed: rgb0e336a,
+  brandForegroundLinkSelected: rgb13458f,
+  compoundBrandForeground1: rgb185abd,
+  compoundBrandForeground1Hover: rgb1651aa,
+  compoundBrandForeground1Pressed: rgb0e336a,
+  brandForeground1: rgb185abd,
+  brandForeground2: rgb1651aa,
+  neutralForegroundInverted: rgbffffff,
+  neutralForegroundInvertedLink: rgbffffff,
+  neutralForegroundInvertedLinkHover: rgbffffff,
+  neutralForegroundInvertedLinkPressed: rgbffffff,
+  neutralForegroundInvertedLinkSelected: rgbffffff,
+  neutralBackground1: rgbffffff,
+  neutralBackground1Hover: rgbf5f5f5,
+  neutralBackground1Pressed: rgbe0e0e0,
+  neutralBackground1Selected: rgbebebeb,
+  neutralBackground2: rgbfafafa,
+  neutralBackground2Hover: rgbf0f0f0,
+  neutralBackground2Pressed: rgbdbdbdb,
+  neutralBackground2Selected: rgbe6e6e6,
+  neutralBackground3: rgbf5f5f5,
+  neutralBackground3Hover: rgbebebeb,
+  neutralBackground3Pressed: rgbd6d6d6,
+  neutralBackground3Selected: rgbe0e0e0,
+  neutralBackground4: rgbf0f0f0,
+  neutralBackground4Hover: rgbfafafa,
+  neutralBackground4Pressed: rgbf5f5f5,
+  neutralBackground4Selected: rgbffffff,
+  neutralBackground5: rgbebebeb,
+  neutralBackground5Hover: rgbf5f5f5,
+  neutralBackground5Pressed: rgbf0f0f0,
+  neutralBackground5Selected: rgbfafafa,
+  neutralBackground6: rgbe6e6e6,
+  neutralBackgroundInverted: rgb616161,
+  subtleBackgroundHover: rgbf5f5f5,
+  subtleBackgroundPressed: rgbe0e0e0,
+  subtleBackgroundSelected: rgbebebeb,
+  neutralBackgroundDisabled: rgbf0f0f0,
+  neutralStencil1: rgbe6e6e6,
+  neutralStencil2: rgbfafafa,
+  neutralStrokeAccessible: rgb616161,
+  neutralStrokeAccessibleHover: rgb575757,
+  neutralStrokeAccessiblePressed: rgb4d4d4d,
+  neutralStroke1: rgbd1d1d1,
+  neutralStroke1Hover: rgbc7c7c7,
+  neutralStroke1Pressed: rgbb3b3b3,
+  neutralStroke1Selected: rgbbdbdbd,
+  neutralStroke2: rgbe0e0e0,
+  neutralStroke3: rgbf0f0f0,
+  neutralStrokeDisabled: rgbe0e0e0,
+  strokeFocus1: rgbffffff,
+  strokeFocus2: rgb000000,
+  dangerBackground1: rgbfdf6f6,
+  dangerBackground2: rgbf1bbbc,
+  dangerForeground1: rgbbc2f32,
+  dangerForeground2: rgb751d1f,
+  dangerForeground3: rgbd13438,
+  dangerForegroundInverted: rgbdc5e62,
+  dangerBorderActive: rgbd13438,
+  dangerBorder1: rgbf1bbbc,
+  dangerBorder2: rgbd13438,
+  successBackground1: rgbf1faf1,
+  successBackground2: rgb9fd89f,
+  successForeground1: rgb0e700e,
+  successForeground2: rgb094509,
+  successForeground3: rgb107c10,
+  successForegroundInverted: rgb359b35,
+  successBorderActive: rgb107c10,
+  successBorder1: rgb9fd89f,
+  successBorder2: rgb107c10,
+  warningBackground1: rgbfffef5,
+  warningBackground2: rgbfef7b2,
+  warningForeground1: rgb817400,
+  warningForeground2: rgb817400,
+  warningForeground3: rgbfde300,
+  warningForegroundInverted: rgbfef7b2,
+  warningBorderActive: rgbfde300,
+  warningBorder1: rgbfef7b2,
+  warningBorder2: rgbfde300,
+  severeBackground1: rgbfdf6f3,
+  severeBackground2: rgbf4bfab,
+  severeForeground1: rgbc43501,
+  severeForeground2: rgb7a2101,
+  severeForeground3: rgbda3b01,
+  severeBorderActive: rgbda3b01,
+  severeBorder1: rgbf4bfab,
+  severeBorder2: rgbda3b01,
+  outofofficeBackground1: rgbfdf5fc,
+  outofofficeBackground2: rgbedbbe7,
+  outofofficeForeground1: rgbaf33a1,
+  outofofficeForeground2: rgb6d2064,
+  outofofficeForeground3: rgbc239b3,
+  outofofficeBorderActive: rgbc239b3,
+  outofofficeBorder1: rgbedbbe7,
+  outofofficeBorder2: rgbc239b3,
 };
 export const darkAliasColors: AliasColorTokens = {
   ...aliasColorsDarkDarkGray,
   ...aliasColorsLightDarkDarkGray,
   ...aliasColorsCommon,
-  neutralForeground2: color18,
-  neutralForeground3: color55,
-  neutralForeground3Hover: color18,
-  neutralForeground3Pressed: color18,
-  neutralForeground3Selected: color18,
-  neutralForeground4: color56,
-  neutralForegroundDisabled: color57,
-  neutralForegroundInvertedLink: color59,
-  neutralForegroundInvertedLinkHover: color59,
-  neutralForegroundInvertedLinkPressed: color59,
-  neutralForegroundInvertedLinkSelected: color59,
-  neutralBackground1: color59,
-  neutralBackground1Hover: color60,
-  neutralBackground1Pressed: color61,
-  neutralBackground1Selected: color62,
-  neutralBackground2: color61,
-  neutralBackground2Hover: color63,
-  neutralBackground2Pressed: color64,
-  neutralBackground2Selected: color65,
-  neutralBackground3: color64,
-  neutralBackground3Hover: color59,
-  neutralBackground3Pressed: color66,
-  neutralBackground3Selected: color0,
-  neutralBackground4: color66,
-  neutralBackground4Hover: color61,
-  neutralBackground4Pressed: color27,
-  neutralBackground4Selected: color67,
-  neutralBackground5: color27,
-  neutralBackground5Hover: color64,
-  neutralBackground5Pressed: color68,
-  neutralBackground5Selected: color69,
-  neutralBackground6: color63,
-  subtleBackgroundHover: color60,
-  subtleBackgroundPressed: color61,
-  subtleBackgroundSelected: color62,
-  neutralBackgroundDisabled: color64,
-  neutralStencil1: color63,
-  neutralStencil2: color21,
-  neutralStrokeAccessible: color55,
-  neutralStrokeAccessibleHover: color7,
-  neutralStrokeAccessiblePressed: color25,
-  neutralStroke1: color70,
-  neutralStroke1Hover: color71,
-  neutralStroke1Pressed: color72,
-  neutralStroke1Selected: color6,
-  neutralStroke2: color73,
-  neutralStroke3: color60,
-  neutralStrokeDisabled: color1,
+  neutralForeground2: rgbd6d6d6,
+  neutralForeground3: rgbadadad,
+  neutralForeground3Hover: rgbd6d6d6,
+  neutralForeground3Pressed: rgbd6d6d6,
+  neutralForeground3Selected: rgbd6d6d6,
+  neutralForeground4: rgb999999,
+  neutralForegroundDisabled: rgb5c5c5c,
+  neutralForegroundInvertedLink: rgb292929,
+  neutralForegroundInvertedLinkHover: rgb292929,
+  neutralForegroundInvertedLinkPressed: rgb292929,
+  neutralForegroundInvertedLinkSelected: rgb292929,
+  neutralBackground1: rgb292929,
+  neutralBackground1Hover: rgb3d3d3d,
+  neutralBackground1Pressed: rgb1f1f1f,
+  neutralBackground1Selected: rgb383838,
+  neutralBackground2: rgb1f1f1f,
+  neutralBackground2Hover: rgb333333,
+  neutralBackground2Pressed: rgb141414,
+  neutralBackground2Selected: rgb2e2e2e,
+  neutralBackground3: rgb141414,
+  neutralBackground3Hover: rgb292929,
+  neutralBackground3Pressed: rgb0a0a0a,
+  neutralBackground3Selected: rgb242424,
+  neutralBackground4: rgb0a0a0a,
+  neutralBackground4Hover: rgb1f1f1f,
+  neutralBackground4Pressed: rgb000000,
+  neutralBackground4Selected: rgb1a1a1a,
+  neutralBackground5: rgb000000,
+  neutralBackground5Hover: rgb141414,
+  neutralBackground5Pressed: rgb050505,
+  neutralBackground5Selected: rgb0f0f0f,
+  neutralBackground6: rgb333333,
+  subtleBackgroundHover: rgb3d3d3d,
+  subtleBackgroundPressed: rgb1f1f1f,
+  subtleBackgroundSelected: rgb383838,
+  neutralBackgroundDisabled: rgb141414,
+  neutralStencil1: rgb333333,
+  neutralStencil2: rgb575757,
+  neutralStrokeAccessible: rgbadadad,
+  neutralStrokeAccessibleHover: rgbbdbdbd,
+  neutralStrokeAccessiblePressed: rgbb3b3b3,
+  neutralStroke1: rgb666666,
+  neutralStroke1Hover: rgb757575,
+  neutralStroke1Pressed: rgb6b6b6b,
+  neutralStroke1Selected: rgb707070,
+  neutralStroke2: rgb525252,
+  neutralStroke3: rgb3d3d3d,
+  neutralStrokeDisabled: rgb424242,
 };
 export const darkGrayAliasColors: AliasColorTokens = {
   ...aliasColorsDarkDarkGray,
   ...aliasColorsLightDarkDarkGray,
   ...aliasColorsCommon,
-  neutralForeground2: color17,
-  neutralForeground3: color86,
-  neutralForeground3Hover: color17,
-  neutralForeground3Pressed: color17,
-  neutralForeground3Selected: color17,
-  neutralForeground4: color87,
-  neutralForegroundDisabled: color70,
-  neutralForegroundInvertedLink: color22,
-  neutralForegroundInvertedLinkHover: color22,
-  neutralForegroundInvertedLinkPressed: color22,
-  neutralForegroundInvertedLinkSelected: color22,
-  neutralBackground1: color22,
-  neutralBackground1Hover: color57,
-  neutralBackground1Pressed: color1,
-  neutralBackground1Selected: color21,
-  neutralBackground2: color1,
-  neutralBackground2Hover: color73,
-  neutralBackground2Pressed: color62,
-  neutralBackground2Selected: color22,
-  neutralBackground3: color62,
-  neutralBackground3Hover: color88,
-  neutralBackground3Pressed: color65,
-  neutralBackground3Selected: color1,
-  neutralBackground4: color65,
-  neutralBackground4Hover: color60,
-  neutralBackground4Pressed: color0,
-  neutralBackground4Selected: color62,
-  neutralBackground5: color0,
-  neutralBackground5Hover: color63,
-  neutralBackground5Pressed: color67,
-  neutralBackground5Selected: color65,
-  neutralBackground6: color67,
-  subtleBackgroundHover: color57,
-  subtleBackgroundPressed: color1,
-  subtleBackgroundSelected: color21,
-  neutralBackgroundDisabled: color62,
-  neutralStencil1: color67,
-  neutralStencil2: color1,
-  neutralStrokeAccessible: color89,
-  neutralStrokeAccessibleHover: color90,
-  neutralStrokeAccessiblePressed: color55,
-  neutralStroke1: color91,
-  neutralStroke1Hover: color56,
-  neutralStroke1Pressed: color92,
-  neutralStroke1Selected: color93,
-  neutralStroke2: color71,
-  neutralStroke3: color5,
-  neutralStrokeDisabled: color88,
+  neutralForeground2: rgbe6e6e6,
+  neutralForeground3: rgbcccccc,
+  neutralForeground3Hover: rgbe6e6e6,
+  neutralForeground3Pressed: rgbe6e6e6,
+  neutralForeground3Selected: rgbe6e6e6,
+  neutralForeground4: rgbc2c2c2,
+  neutralForegroundDisabled: rgb666666,
+  neutralForegroundInvertedLink: rgb4d4d4d,
+  neutralForegroundInvertedLinkHover: rgb4d4d4d,
+  neutralForegroundInvertedLinkPressed: rgb4d4d4d,
+  neutralForegroundInvertedLinkSelected: rgb4d4d4d,
+  neutralBackground1: rgb4d4d4d,
+  neutralBackground1Hover: rgb5c5c5c,
+  neutralBackground1Pressed: rgb424242,
+  neutralBackground1Selected: rgb575757,
+  neutralBackground2: rgb424242,
+  neutralBackground2Hover: rgb525252,
+  neutralBackground2Pressed: rgb383838,
+  neutralBackground2Selected: rgb4d4d4d,
+  neutralBackground3: rgb383838,
+  neutralBackground3Hover: rgb474747,
+  neutralBackground3Pressed: rgb2e2e2e,
+  neutralBackground3Selected: rgb424242,
+  neutralBackground4: rgb2e2e2e,
+  neutralBackground4Hover: rgb3d3d3d,
+  neutralBackground4Pressed: rgb242424,
+  neutralBackground4Selected: rgb383838,
+  neutralBackground5: rgb242424,
+  neutralBackground5Hover: rgb333333,
+  neutralBackground5Pressed: rgb1a1a1a,
+  neutralBackground5Selected: rgb2e2e2e,
+  neutralBackground6: rgb1a1a1a,
+  subtleBackgroundHover: rgb5c5c5c,
+  subtleBackgroundPressed: rgb424242,
+  subtleBackgroundSelected: rgb575757,
+  neutralBackgroundDisabled: rgb383838,
+  neutralStencil1: rgb1a1a1a,
+  neutralStencil2: rgb424242,
+  neutralStrokeAccessible: rgba8a8a8,
+  neutralStrokeAccessibleHover: rgbb8b8b8,
+  neutralStrokeAccessiblePressed: rgbadadad,
+  neutralStroke1: rgb8a8a8a,
+  neutralStroke1Hover: rgb999999,
+  neutralStroke1Pressed: rgb8f8f8f,
+  neutralStroke1Selected: rgb949494,
+  neutralStroke2: rgb757575,
+  neutralStroke3: rgb616161,
+  neutralStrokeDisabled: rgb474747,
 };
 export const hcAliasColors: AliasColorTokens = {
   ...aliasColorsCommon,
-  neutralForeground1: color94,
-  neutralForeground1Hover: color95,
-  neutralForeground1Pressed: color95,
-  neutralForeground1Selected: color95,
-  neutralForeground2: color94,
-  neutralForeground2Hover: color95,
-  neutralForeground2Pressed: color95,
-  neutralForeground2Selected: color95,
-  neutralForeground2BrandHover: color95,
-  neutralForeground2BrandPressed: color95,
-  neutralForeground2BrandSelected: color95,
-  neutralForeground3: color94,
-  neutralForeground3Hover: color95,
-  neutralForeground3Pressed: color95,
-  neutralForeground3Selected: color95,
-  neutralForeground3BrandHover: color95,
-  neutralForeground3BrandPressed: color95,
-  neutralForeground3BrandSelected: color95,
-  neutralForeground4: color94,
-  neutralForegroundDisabled: color96,
-  brandForegroundLink: color97,
-  brandForegroundLinkHover: color97,
-  brandForegroundLinkPressed: color97,
-  brandForegroundLinkSelected: color97,
-  compoundBrandForeground1: color98,
-  compoundBrandForeground1Hover: color98,
-  compoundBrandForeground1Pressed: color98,
-  brandForeground1: color94,
-  brandForeground2: color99,
-  neutralForegroundInverted: color100,
-  neutralForegroundOnBrand: color99,
-  neutralForegroundOnBrandHover: color95,
-  neutralForegroundOnBrandPressed: color95,
-  neutralForegroundOnBrandSelected: color95,
-  neutralForegroundInvertedLink: color97,
-  neutralForegroundInvertedLinkHover: color97,
-  neutralForegroundInvertedLinkPressed: color97,
-  neutralForegroundInvertedLinkSelected: color97,
-  neutralBackground1: color100,
-  neutralBackground1Hover: color98,
-  neutralBackground1Pressed: color98,
-  neutralBackground1Selected: color98,
-  neutralBackground2: color100,
-  neutralBackground2Hover: color98,
-  neutralBackground2Pressed: color98,
-  neutralBackground2Selected: color98,
-  neutralBackground3: color100,
-  neutralBackground3Hover: color98,
-  neutralBackground3Pressed: color98,
-  neutralBackground3Selected: color98,
-  neutralBackground4: color100,
-  neutralBackground4Hover: color98,
-  neutralBackground4Pressed: color98,
-  neutralBackground4Selected: color98,
-  neutralBackground5: color100,
-  neutralBackground5Hover: color98,
-  neutralBackground5Pressed: color98,
-  neutralBackground5Selected: color98,
-  neutralBackground6: color100,
-  neutralBackgroundInverted: color94,
-  subtleBackgroundHover: color98,
-  subtleBackgroundPressed: color98,
-  subtleBackgroundSelected: color98,
-  neutralBackgroundDisabled: color100,
-  neutralStencil1: color64,
-  neutralStencil2: color101,
-  brandBackground: color102,
-  brandBackgroundHover: color98,
-  brandBackgroundPressed: color98,
-  brandBackgroundSelected: color98,
-  compoundBrandBackground1: color98,
-  compoundBrandBackground1Hover: color98,
-  compoundBrandBackground1Pressed: color98,
-  brandBackgroundStatic: color100,
-  brandBackground2: color102,
-  neutralStrokeAccessible: color94,
-  neutralStrokeAccessibleHover: color98,
-  neutralStrokeAccessiblePressed: color98,
-  neutralStrokeAccessibleSelected: color98,
-  neutralStroke1: color94,
-  neutralStroke1Hover: color98,
-  neutralStroke1Pressed: color98,
-  neutralStroke1Selected: color98,
-  neutralStroke2: color94,
-  neutralStroke3: color94,
-  brandStroke1: color94,
-  brandStroke2: color100,
-  compoundBrandStroke1: color98,
-  compoundBrandStroke1Hover: color98,
-  compoundBrandStroke1Pressed: color98,
-  neutralStrokeDisabled: color96,
-  transparentStroke: color94,
-  transparentStrokeInteractive: color98,
-  transparentStrokeDisabled: color96,
-  strokeFocus1: color100,
-  strokeFocus2: color98,
-  dangerBackground1: color100,
-  dangerBackground2: color100,
-  dangerBackground3: color94,
-  dangerForeground1: color94,
-  dangerForeground2: color94,
-  dangerForeground3: color94,
-  dangerForegroundInverted: color94,
-  dangerBorderActive: color98,
-  dangerBorder1: color94,
-  dangerBorder2: color94,
-  successBackground1: color100,
-  successBackground2: color100,
-  successBackground3: color94,
-  successForeground1: color94,
-  successForeground2: color94,
-  successForeground3: color94,
-  successForegroundInverted: color94,
-  successBorderActive: color98,
-  successBorder1: color94,
-  successBorder2: color94,
-  warningBackground1: color100,
-  warningBackground2: color100,
-  warningBackground3: color94,
-  warningForeground1: color94,
-  warningForeground2: color94,
-  warningForeground3: color94,
-  warningForegroundInverted: color94,
-  warningBorderActive: color98,
-  warningBorder1: color94,
-  warningBorder2: color94,
-  severeBackground1: color100,
-  severeBackground2: color100,
-  severeBackground3: color94,
-  severeForeground1: color94,
-  severeForeground2: color94,
-  severeForeground3: color94,
-  severeBorderActive: color98,
-  severeBorder1: color94,
-  severeBorder2: color94,
-  outofofficeBackground1: color100,
-  outofofficeBackground2: color100,
-  outofofficeBackground3: color94,
-  outofofficeForeground1: color94,
-  outofofficeForeground2: color94,
-  outofofficeForeground3: color94,
-  outofofficeBorderActive: color98,
-  outofofficeBorder1: color94,
-  outofofficeBorder2: color94,
+  neutralForeground1: platColorWindowText,
+  neutralForeground1Hover: platColorHighlightText,
+  neutralForeground1Pressed: platColorHighlightText,
+  neutralForeground1Selected: platColorHighlightText,
+  neutralForeground2: platColorWindowText,
+  neutralForeground2Hover: platColorHighlightText,
+  neutralForeground2Pressed: platColorHighlightText,
+  neutralForeground2Selected: platColorHighlightText,
+  neutralForeground2BrandHover: platColorHighlightText,
+  neutralForeground2BrandPressed: platColorHighlightText,
+  neutralForeground2BrandSelected: platColorHighlightText,
+  neutralForeground3: platColorWindowText,
+  neutralForeground3Hover: platColorHighlightText,
+  neutralForeground3Pressed: platColorHighlightText,
+  neutralForeground3Selected: platColorHighlightText,
+  neutralForeground3BrandHover: platColorHighlightText,
+  neutralForeground3BrandPressed: platColorHighlightText,
+  neutralForeground3BrandSelected: platColorHighlightText,
+  neutralForeground4: platColorWindowText,
+  neutralForegroundDisabled: platColorGrayText,
+  brandForegroundLink: platColorHotlight,
+  brandForegroundLinkHover: platColorHotlight,
+  brandForegroundLinkPressed: platColorHotlight,
+  brandForegroundLinkSelected: platColorHotlight,
+  compoundBrandForeground1: platColorHighlight,
+  compoundBrandForeground1Hover: platColorHighlight,
+  compoundBrandForeground1Pressed: platColorHighlight,
+  brandForeground1: platColorWindowText,
+  brandForeground2: platColorButtonText,
+  neutralForegroundInverted: platColorWindow,
+  neutralForegroundOnBrand: platColorButtonText,
+  neutralForegroundOnBrandHover: platColorHighlightText,
+  neutralForegroundOnBrandPressed: platColorHighlightText,
+  neutralForegroundOnBrandSelected: platColorHighlightText,
+  neutralForegroundInvertedLink: platColorHotlight,
+  neutralForegroundInvertedLinkHover: platColorHotlight,
+  neutralForegroundInvertedLinkPressed: platColorHotlight,
+  neutralForegroundInvertedLinkSelected: platColorHotlight,
+  neutralBackground1: platColorWindow,
+  neutralBackground1Hover: platColorHighlight,
+  neutralBackground1Pressed: platColorHighlight,
+  neutralBackground1Selected: platColorHighlight,
+  neutralBackground2: platColorWindow,
+  neutralBackground2Hover: platColorHighlight,
+  neutralBackground2Pressed: platColorHighlight,
+  neutralBackground2Selected: platColorHighlight,
+  neutralBackground3: platColorWindow,
+  neutralBackground3Hover: platColorHighlight,
+  neutralBackground3Pressed: platColorHighlight,
+  neutralBackground3Selected: platColorHighlight,
+  neutralBackground4: platColorWindow,
+  neutralBackground4Hover: platColorHighlight,
+  neutralBackground4Pressed: platColorHighlight,
+  neutralBackground4Selected: platColorHighlight,
+  neutralBackground5: platColorWindow,
+  neutralBackground5Hover: platColorHighlight,
+  neutralBackground5Pressed: platColorHighlight,
+  neutralBackground5Selected: platColorHighlight,
+  neutralBackground6: platColorWindow,
+  neutralBackgroundInverted: platColorWindowText,
+  subtleBackgroundHover: platColorHighlight,
+  subtleBackgroundPressed: platColorHighlight,
+  subtleBackgroundSelected: platColorHighlight,
+  neutralBackgroundDisabled: platColorWindow,
+  neutralStencil1: rgb141414,
+  neutralStencil2: rgb858585,
+  brandBackground: platColorButtonFace,
+  brandBackgroundHover: platColorHighlight,
+  brandBackgroundPressed: platColorHighlight,
+  brandBackgroundSelected: platColorHighlight,
+  compoundBrandBackground1: platColorHighlight,
+  compoundBrandBackground1Hover: platColorHighlight,
+  compoundBrandBackground1Pressed: platColorHighlight,
+  brandBackgroundStatic: platColorWindow,
+  brandBackground2: platColorButtonFace,
+  neutralStrokeAccessible: platColorWindowText,
+  neutralStrokeAccessibleHover: platColorHighlight,
+  neutralStrokeAccessiblePressed: platColorHighlight,
+  neutralStrokeAccessibleSelected: platColorHighlight,
+  neutralStroke1: platColorWindowText,
+  neutralStroke1Hover: platColorHighlight,
+  neutralStroke1Pressed: platColorHighlight,
+  neutralStroke1Selected: platColorHighlight,
+  neutralStroke2: platColorWindowText,
+  neutralStroke3: platColorWindowText,
+  brandStroke1: platColorWindowText,
+  brandStroke2: platColorWindow,
+  compoundBrandStroke1: platColorHighlight,
+  compoundBrandStroke1Hover: platColorHighlight,
+  compoundBrandStroke1Pressed: platColorHighlight,
+  neutralStrokeDisabled: platColorGrayText,
+  transparentStroke: platColorWindowText,
+  transparentStrokeInteractive: platColorHighlight,
+  transparentStrokeDisabled: platColorGrayText,
+  strokeFocus1: platColorWindow,
+  strokeFocus2: platColorHighlight,
+  dangerBackground1: platColorWindow,
+  dangerBackground2: platColorWindow,
+  dangerBackground3: platColorWindowText,
+  dangerForeground1: platColorWindowText,
+  dangerForeground2: platColorWindowText,
+  dangerForeground3: platColorWindowText,
+  dangerForegroundInverted: platColorWindowText,
+  dangerBorderActive: platColorHighlight,
+  dangerBorder1: platColorWindowText,
+  dangerBorder2: platColorWindowText,
+  successBackground1: platColorWindow,
+  successBackground2: platColorWindow,
+  successBackground3: platColorWindowText,
+  successForeground1: platColorWindowText,
+  successForeground2: platColorWindowText,
+  successForeground3: platColorWindowText,
+  successForegroundInverted: platColorWindowText,
+  successBorderActive: platColorHighlight,
+  successBorder1: platColorWindowText,
+  successBorder2: platColorWindowText,
+  warningBackground1: platColorWindow,
+  warningBackground2: platColorWindow,
+  warningBackground3: platColorWindowText,
+  warningForeground1: platColorWindowText,
+  warningForeground2: platColorWindowText,
+  warningForeground3: platColorWindowText,
+  warningForegroundInverted: platColorWindowText,
+  warningBorderActive: platColorHighlight,
+  warningBorder1: platColorWindowText,
+  warningBorder2: platColorWindowText,
+  severeBackground1: platColorWindow,
+  severeBackground2: platColorWindow,
+  severeBackground3: platColorWindowText,
+  severeForeground1: platColorWindowText,
+  severeForeground2: platColorWindowText,
+  severeForeground3: platColorWindowText,
+  severeBorderActive: platColorHighlight,
+  severeBorder1: platColorWindowText,
+  severeBorder2: platColorWindowText,
+  outofofficeBackground1: platColorWindow,
+  outofofficeBackground2: platColorWindow,
+  outofofficeBackground3: platColorWindowText,
+  outofofficeForeground1: platColorWindowText,
+  outofofficeForeground2: platColorWindowText,
+  outofofficeForeground3: platColorWindowText,
+  outofofficeBorderActive: platColorHighlight,
+  outofofficeBorder1: platColorWindowText,
+  outofofficeBorder2: platColorWindowText,
 };
 
+export const fontCaption1: VariantValue = { face: fontFace0, size: 10, weight: fontWeight0 };
 
-export const fontCaption1: VariantValue = { face: "primary", size: 10, weight: "400" };
+export const fontBody1: VariantValue = { face: fontFace0, size: 12, weight: fontWeight0 };
 
+export const fontBody1Strong: VariantValue = { face: fontFace0, size: 12, weight: fontWeight1 };
 
-export const fontBody1: VariantValue = { face: "primary", size: 12, weight: "400" };
+export const fontBody2: VariantValue = { face: fontFace0, size: 14, weight: fontWeight0 };
 
+export const fontBody2Strong: VariantValue = { face: fontFace0, size: 14, weight: fontWeight1 };
 
-export const fontBody1Strong: VariantValue = { face: "primary", size: 12, weight: "600" };
+export const fontSubtitle1: VariantValue = { face: fontFace0, size: 20, weight: fontWeight0 };
 
+export const fontSubtitle1Strong: VariantValue = { face: fontFace0, size: 20, weight: fontWeight1 };
 
-export const fontBody2: VariantValue = { face: "primary", size: 14, weight: "400" };
+export const fontSubtitle2: VariantValue = { face: fontFace0, size: 16, weight: fontWeight0 };
 
+export const fontSubtitle2Strong: VariantValue = { face: fontFace0, size: 16, weight: fontWeight1 };
 
-export const fontBody2Strong: VariantValue = { face: "primary", size: 14, weight: "600" };
+export const fontTitle1: VariantValue = { face: fontFace0, size: 28, weight: fontWeight0 };
 
+export const fontTitle1Strong: VariantValue = { face: fontFace0, size: 28, weight: fontWeight1 };
 
-export const fontSubtitle1: VariantValue = { face: "primary", size: 20, weight: "400" };
+export const fontLargeTitle: VariantValue = { face: fontFace0, size: 40, weight: fontWeight0 };
 
-
-export const fontSubtitle1Strong: VariantValue = { face: "primary", size: 20, weight: "600" };
-
-
-export const fontSubtitle2: VariantValue = { face: "primary", size: 16, weight: "400" };
-
-
-export const fontSubtitle2Strong: VariantValue = { face: "primary", size: 16, weight: "600" };
-
-
-export const fontTitle1: VariantValue = { face: "primary", size: 28, weight: "400" };
-
-
-export const fontTitle1Strong: VariantValue = { face: "primary", size: 28, weight: "600" };
-
-
-export const fontLargeTitle: VariantValue = { face: "primary", size: 40, weight: "400" };
-
-
-export const fontDisplay: VariantValue = { face: "primary", size: 40, weight: "600" };
-
+export const fontDisplay: VariantValue = { face: fontFace0, size: 40, weight: fontWeight1 };
 

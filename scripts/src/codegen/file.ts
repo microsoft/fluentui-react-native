@@ -22,6 +22,15 @@ type ObjectValueUsage = ObjectValue & {
   appearsIn: string[];
 };
 
+export type CodegenValue = {
+  /** the text that will be output to the generated file, will be used for comparisons */
+  raw: string;
+  /** the ramp category tihs value belongs to, if not set it will not be ramped */
+  ramp?: string;
+  /** number of references to this value */
+  refs: number;
+};
+
 export type ObjectHelper = {
   addSpread(spread: string, atStart?: boolean): void;
   addValue(key: string, value: string): void;
@@ -44,6 +53,26 @@ type CategoryCache = {
   shortNames: Record<string, string>;
 };
 
+/**
+ * Pattern to capture the text inside PlatformColor('<text>') or PlatformColor("<text>")
+ */
+const platformColorPattern = /^PlatformColor\((['"])(.*?)\1\)$/;
+
+function rampConstName(value: string, prefix: string, ramp: Record<string, unknown>): string {
+  if (prefix === 'color') {
+    if (value.startsWith(`'#`) || value.startsWith(`"#`)) {
+      // Handle color values that are either '#RRGGBB' or "#RRGGBB"
+      return `rgb${value.slice(2, -1)}`;
+    } else {
+      const match = value.match(platformColorPattern);
+      if (match && match[2]) {
+        return `platColor${match[2]}`;
+      }
+    }
+  }
+  return `${prefix}${Object.keys(ramp).length}`;
+}
+
 export class CodegenFile {
   private fsEntry: FSEntry;
   private rampedConstants: Record<string, Record<string, string>> = {};
@@ -57,7 +86,7 @@ export class CodegenFile {
 
   rampConstant = (prefix: string, value: string) => {
     const ramp = (this.rampedConstants[prefix] ??= {});
-    return (ramp[value] ??= `${prefix}${Object.keys(ramp).length}`);
+    return (ramp[value] ??= rampConstName(value, prefix, ramp));
   };
 
   rampString = (prefix: string, value: string) => {
@@ -196,10 +225,9 @@ export class CodegenFile {
     if (sharedObjects.length > 0) {
       result += sharedObjects.map((obj) => obj.outputText()).join('\n') + '\n\n';
     }
-    result +=
-      Object.values(cache.realObjects)
-        .map((obj) => obj.outputText())
-        .join('\n') + '\n';
+    result += Object.values(cache.realObjects)
+      .map((obj) => obj.outputText())
+      .join('\n');
     return result;
   }
 

@@ -13,15 +13,15 @@ function makeShadow(color1: string, rc1: ShadowRect, color2: string, rc2: Shadow
   };
 }
 
-const color0 = '#0000001f';
-const color1 = '#00000024';
-const color2 = '#0000004d';
-const color3 = '#00000040';
-const color4 = '#00000033';
-const color5 = '#0000003d';
-const color6 = '#00000047';
-const color7 = '#00000066';
-const color8 = '#0000007a';
+const rgb0000001f = '#0000001f';
+const rgb00000024 = '#00000024';
+const rgb0000004d = '#0000004d';
+const rgb00000040 = '#00000040';
+const rgb00000033 = '#00000033';
+const rgb0000003d = '#0000003d';
+const rgb00000047 = '#00000047';
+const rgb00000066 = '#00000066';
+const rgb0000007a = '#0000007a';
 
 const dims0 = { x: 0, y: 0, blur: 2 };
 const dims1 = { x: 0, y: 1, blur: 2 };
@@ -32,24 +32,24 @@ const dims5 = { x: 0, y: 0, blur: 8 };
 const dims6 = { x: 0, y: 14, blur: 28 };
 const dims7 = { x: 0, y: 32, blur: 64 };
 
-const shadow0 = makeShadow(color0, dims0, color1, dims1);
-const shadow1 = makeShadow(color2, dims0, color3, dims1);
-const shadow2 = makeShadow(color0, dims0, color1, dims2);
-const shadow3 = makeShadow(color2, dims0, color3, dims2);
-const shadow4 = makeShadow(color0, dims0, color1, dims3);
-const shadow5 = makeShadow(color2, dims0, color3, dims3);
-const shadow6 = makeShadow(color0, dims0, color1, dims4);
-const shadow7 = makeShadow(color2, dims0, color3, dims4);
-const shadow8 = makeShadow(color4, dims5, color5, dims6);
-const shadow9 = makeShadow(color2, dims5, color3, dims6);
-const shadow10 = makeShadow(color4, dims5, color5, dims7);
-const shadow11 = makeShadow(color2, dims5, color3, dims7);
-const shadow12 = makeShadow(color5, dims0, color6, dims1);
-const shadow13 = makeShadow(color5, dims0, color6, dims2);
-const shadow14 = makeShadow(color5, dims0, color6, dims3);
-const shadow15 = makeShadow(color5, dims0, color6, dims4);
-const shadow16 = makeShadow(color7, dims5, color8, dims6);
-const shadow17 = makeShadow(color7, dims5, color8, dims7);
+const shadow0 = makeShadow(rgb0000001f, dims0, rgb00000024, dims1);
+const shadow1 = makeShadow(rgb0000004d, dims0, rgb00000040, dims1);
+const shadow2 = makeShadow(rgb0000001f, dims0, rgb00000024, dims2);
+const shadow3 = makeShadow(rgb0000004d, dims0, rgb00000040, dims2);
+const shadow4 = makeShadow(rgb0000001f, dims0, rgb00000024, dims3);
+const shadow5 = makeShadow(rgb0000004d, dims0, rgb00000040, dims3);
+const shadow6 = makeShadow(rgb0000001f, dims0, rgb00000024, dims4);
+const shadow7 = makeShadow(rgb0000004d, dims0, rgb00000040, dims4);
+const shadow8 = makeShadow(rgb00000033, dims5, rgb0000003d, dims6);
+const shadow9 = makeShadow(rgb0000004d, dims5, rgb00000040, dims6);
+const shadow10 = makeShadow(rgb00000033, dims5, rgb0000003d, dims7);
+const shadow11 = makeShadow(rgb0000004d, dims5, rgb00000040, dims7);
+const shadow12 = makeShadow(rgb0000003d, dims0, rgb00000047, dims1);
+const shadow13 = makeShadow(rgb0000003d, dims0, rgb00000047, dims2);
+const shadow14 = makeShadow(rgb0000003d, dims0, rgb00000047, dims3);
+const shadow15 = makeShadow(rgb0000003d, dims0, rgb00000047, dims4);
+const shadow16 = makeShadow(rgb00000066, dims5, rgb0000007a, dims6);
+const shadow17 = makeShadow(rgb00000066, dims5, rgb0000007a, dims7);
 
 const shadowsCommon = {
   shadow2brand: shadow1,
@@ -80,5 +80,4 @@ export const lightShadows = {
 export const darkShadows = { ...shadowsDarkDarkGrayHc, ...shadowsCommon };
 export const darkGrayShadows = { ...shadowsDarkDarkGrayHc, ...shadowsCommon };
 export const hcShadows = { ...shadowsDarkDarkGrayHc, ...shadowsCommon };
-
 

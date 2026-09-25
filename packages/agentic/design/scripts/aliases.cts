@@ -45,18 +45,18 @@ const platformMappers = {
 
 const platformColorPattern = /^PlatformColor\(([^)]+)\)$/;
 
-function capitalize(value) {
+function capitalize(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-function literal(value) {
+function literal(value: unknown) {
   if (value === undefined) {
     return 'undefined';
   }
   return JSON.stringify(value);
 }
 
-function colorExpression(codegenFile, value) {
+function colorExpression(codegenFile: any, value: unknown) {
   if (typeof value === 'string') {
     const platformColor = platformColorPattern.exec(value);
     if (platformColor) {
@@ -67,9 +67,9 @@ function colorExpression(codegenFile, value) {
   return codegenFile.rampConstant('color', literal(value));
 }
 
-function mappedPlatform(platform) {
-  const themes = aliasJson[platform];
-  const { mapPipelineToTheme, mapFontPipelineToTheme } = platformMappers[platform];
+function mappedPlatform(platform: string) {
+  const themes = aliasJson[platform as keyof typeof aliasJson];
+  const { mapPipelineToTheme, mapFontPipelineToTheme } = platformMappers[platform as keyof typeof platformMappers];
   return Object.fromEntries(
     Object.entries(themes).map(([theme, aliases]) => {
       const hasFonts = Object.values(aliases).some((value) => value && typeof value === 'object' && 'fontFamily' in value);
@@ -84,7 +84,10 @@ function mappedPlatform(platform) {
   );
 }
 
-function commonFonts(platform, mappedThemes) {
+function commonFonts(
+  platform: string,
+  mappedThemes: Record<string, { colors: Record<string, string>; fonts: Record<string, Record<string, string>> }>,
+) {
   const themeEntries = Object.entries(mappedThemes);
   const [referenceTheme, reference] = themeEntries[0];
   for (const [theme, mapped] of themeEntries.slice(1)) {
@@ -123,7 +126,15 @@ function codegenAliases() {
       const name = `font${capitalize(font)}`;
       const fontObject = codegenFile.addObject(name, name, capitalize(font), false, 'VariantValue');
       for (const [key, fontValue] of Object.entries(value)) {
-        fontObject.addValue(key, literal(fontValue));
+        if (key === 'face') {
+          const faceValue = codegenFile.rampString('fontFace', fontValue);
+          fontObject.addValue(key, faceValue);
+        } else if (key === 'weight' && typeof fontValue === 'string') {
+          const weightValue = codegenFile.rampString('fontWeight', fontValue);
+          fontObject.addValue(key, weightValue);
+        } else {
+          fontObject.addValue(key, literal(fontValue));
+        }
       }
     }
 
