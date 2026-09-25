@@ -8,10 +8,6 @@ const shadowJson = {
     darkGray: require('@fluentui-react-native/design-tokens-win32/darkgray/tokens-shadow.json'),
     hc: require('@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json'),
   },
-  windows: {
-    light: require('@fluentui-react-native/design-tokens-windows/light/tokens-shadow.json'),
-    dark: require('@fluentui-react-native/design-tokens-windows/dark/tokens-shadow.json'),
-  },
   macos: {
     light: require('@fluentui-react-native/design-tokens-macos/light/tokens-shadow.json'),
     dark: require('@fluentui-react-native/design-tokens-macos/dark/tokens-shadow.json'),

@@ -68,11 +68,11 @@ export type Platform = (typeof platforms)[number];
  */
 const defaultPlatform: Platform = 'win32';
 
-/** A set of values keyed by platform. The desktop platforms are always present; mobile platforms are optional. */
+/** A set of values keyed by platform. Win32 and macOS are always present; other platforms are optional. */
 type PlatformMap<T> = {
   win32: T;
-  windows: T;
   macos: T;
+  windows?: T;
   android?: T;
   ios?: T;
 };
@@ -132,7 +132,7 @@ export function processPlatformJsonFiles(inputs: PlatformJsonFiles): CodegenTarg
   const commonEntry = initTargetFile(inputs.entry, inputs.description);
   // Pull all common values into the root entry file, removing them from the platform-specific files. win32 is the
   // default platform, so its file acts as the primary and supplies the default values for the shared re-exports.
-  const required = [platformFiles.windows, platformFiles.macos];
+  const required = [platformFiles.macos, platformFiles.windows].filter((f): f is CodegenTargetFile => f != null);
   const optional = [platformFiles.android, platformFiles.ios].filter((f): f is CodegenTargetFile => f != null);
   extractCommonFromPlatforms(commonEntry, platformFiles.win32, required, optional);
   const allFiles = [commonEntry, ...Object.values(platformFiles)];

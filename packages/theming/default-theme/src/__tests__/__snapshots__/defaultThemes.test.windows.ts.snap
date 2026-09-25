@@ -3,7 +3,7 @@
 exports[`defaultFluentDarkTheme 1`] = `
 {
   "colors": {
-    "accentButtonBackground": undefined,
+    "accentButtonBackground": "#185abd",
     "actionLink": "#f3f2f1",
     "background": "#1b1a19",
     "bodyDivider": "#292827",
@@ -12,24 +12,24 @@ exports[`defaultFluentDarkTheme 1`] = `
     "bodyStandoutBackground": "#201f1e",
     "bodyText": "#f3f2f1",
     "bodyTextChecked": "#ffffff",
-    "brandBackground": "#1651aa",
-    "brandBackground2": "#004578",
+    "brandBackground": "#185abd",
+    "brandBackground2": "#d2e0f4",
     "brandBackgroundDisabled": undefined,
-    "brandBackgroundHover": "#185abd",
-    "brandBackgroundPressed": "#004578",
+    "brandBackgroundHover": "#1651aa",
+    "brandBackgroundPressed": "#0e336a",
     "brandBackgroundSelected": "#13458f",
     "brandBackgroundStatic": "#185abd",
-    "brandForeground1": "#6794d7",
+    "brandForeground1": "#aec6eb",
     "brandForeground1Disabled": undefined,
     "brandForeground1Pressed": undefined,
-    "brandForeground2": "#aec6eb",
-    "brandForegroundLink": "#2e6ac5",
-    "brandForegroundLinkHover": "#aec6eb",
-    "brandForegroundLinkPressed": "#6794d7",
-    "brandForegroundLinkSelected": "#2e6ac5",
-    "brandStroke1": "#2e6ac5",
-    "brandStroke2": "#0e336a",
-    "brandedBackground": undefined,
+    "brandForeground2": "#d2e0f4",
+    "brandForegroundLink": "#aec6eb",
+    "brandForegroundLinkHover": "#d2e0f4",
+    "brandForegroundLinkPressed": "#2e6ac5",
+    "brandForegroundLinkSelected": "#d2e0f4",
+    "brandStroke1": "#185abd",
+    "brandStroke2": "#6794d7",
+    "brandedBackground": "#2e6ac5",
     "brandedDisabledBorder": "#252423",
     "brandedFocusedSecondaryContent": "#201f1e",
     "brandedHoveredSecondaryContent": "#201f1e",
@@ -48,19 +48,19 @@ exports[`defaultFluentDarkTheme 1`] = `
     "buttonTextDisabled": "#797775",
     "buttonTextHovered": "#f3f2f1",
     "buttonTextPressed": "#faf9f8",
-    "checkboxBackground": undefined,
+    "checkboxBackground": "#2e6ac5",
     "checkboxBackgroundDisabled": "#252423",
     "checkboxBorderColor": "#979693",
     "checkmarkColor": "#1b1a19",
-    "compoundBrandBackground1": "#2e6ac5",
-    "compoundBrandBackground1Hover": "#6794d7",
-    "compoundBrandBackground1Pressed": "#185abd",
-    "compoundBrandForeground1": "#2e6ac5",
-    "compoundBrandForeground1Hover": "#6794d7",
-    "compoundBrandForeground1Pressed": "#185abd",
-    "compoundBrandStroke1": "#2e6ac5",
-    "compoundBrandStroke1Hover": "#6794d7",
-    "compoundBrandStroke1Pressed": "#185abd",
+    "compoundBrandBackground1": "#185abd",
+    "compoundBrandBackground1Hover": "#1651aa",
+    "compoundBrandBackground1Pressed": "#0e336a",
+    "compoundBrandForeground1": "#aec6eb",
+    "compoundBrandForeground1Hover": "#d2e0f4",
+    "compoundBrandForeground1Pressed": "#2e6ac5",
+    "compoundBrandStroke1": "#185abd",
+    "compoundBrandStroke1Hover": "#1651aa",
+    "compoundBrandStroke1Pressed": "#0e336a",
     "dangerBackground1": "#3f1011",
     "dangerBackground2": "#751d1f",
     "dangerBackground3": "#d13438",
@@ -133,86 +133,86 @@ exports[`defaultFluentDarkTheme 1`] = `
     "ghostSecondaryContent": "#a19f9d",
     "inputBackground": "#1b1a19",
     "inputBorder": "#797775",
-    "inputFocusBorderAlt": undefined,
+    "inputFocusBorderAlt": "#2e6ac5",
     "inputPlaceholderText": "#a19f9d",
     "inputText": "#f3f2f1",
-    "link": undefined,
-    "linkHovered": undefined,
-    "linkPressed": undefined,
+    "link": "#2e6ac5",
+    "linkHovered": "#82c7ff",
+    "linkPressed": "#aec6eb",
     "listHeaderBackgroundHovered": "#252423",
     "listHeaderBackgroundPressed": "#292827",
     "menuBackground": "#252423",
     "menuDivider": "#484644",
-    "menuIcon": undefined,
+    "menuIcon": "#6794d7",
     "menuItemBackgroundHovered": "#323130",
     "menuItemBackgroundPressed": "#3b3a39",
     "menuItemText": "#f3f2f1",
     "menuItemTextHovered": "#faf9f8",
-    "neutralBackground1": "#292929",
-    "neutralBackground1Hover": "#3d3d3d",
-    "neutralBackground1Pressed": "#1f1f1f",
-    "neutralBackground1Selected": "#383838",
-    "neutralBackground2": "#1f1f1f",
-    "neutralBackground2Hover": "#333333",
-    "neutralBackground2Pressed": "#141414",
-    "neutralBackground2Selected": "#2e2e2e",
-    "neutralBackground3": "#141414",
-    "neutralBackground3Hover": "#292929",
-    "neutralBackground3Pressed": "#0a0a0a",
-    "neutralBackground3Selected": "#242424",
-    "neutralBackground4": "#0a0a0a",
-    "neutralBackground4Hover": "#1f1f1f",
-    "neutralBackground4Pressed": "#000000",
-    "neutralBackground4Selected": "#1a1a1a",
-    "neutralBackground5": "#000000",
-    "neutralBackground5Hover": "#141414",
-    "neutralBackground5Pressed": "#050505",
-    "neutralBackground5Selected": "#0f0f0f",
-    "neutralBackground6": "#333333",
-    "neutralBackgroundDisabled": "#141414",
+    "neutralBackground1": "#4d4d4d",
+    "neutralBackground1Hover": "#5c5c5c",
+    "neutralBackground1Pressed": "#424242",
+    "neutralBackground1Selected": "#575757",
+    "neutralBackground2": "#424242",
+    "neutralBackground2Hover": "#525252",
+    "neutralBackground2Pressed": "#383838",
+    "neutralBackground2Selected": "#4d4d4d",
+    "neutralBackground3": "#383838",
+    "neutralBackground3Hover": "#474747",
+    "neutralBackground3Pressed": "#2e2e2e",
+    "neutralBackground3Selected": "#424242",
+    "neutralBackground4": "#2e2e2e",
+    "neutralBackground4Hover": "#3d3d3d",
+    "neutralBackground4Pressed": "#242424",
+    "neutralBackground4Selected": "#383838",
+    "neutralBackground5": "#242424",
+    "neutralBackground5Hover": "#333333",
+    "neutralBackground5Pressed": "#1a1a1a",
+    "neutralBackground5Selected": "#2e2e2e",
+    "neutralBackground6": "#1a1a1a",
+    "neutralBackgroundDisabled": "#383838",
     "neutralBackgroundInverted": "#ffffff",
     "neutralForeground1": "#ffffff",
     "neutralForeground1Hover": "#ffffff",
     "neutralForeground1Pressed": "#ffffff",
     "neutralForeground1Selected": "#ffffff",
-    "neutralForeground2": "#d6d6d6",
-    "neutralForeground2BrandHover": "#6794d7",
+    "neutralForeground2": "#e6e6e6",
+    "neutralForeground2BrandHover": "#d2e0f4",
     "neutralForeground2BrandPressed": "#2e6ac5",
-    "neutralForeground2BrandSelected": "#6794d7",
+    "neutralForeground2BrandSelected": "#d2e0f4",
     "neutralForeground2Hover": "#ffffff",
     "neutralForeground2Pressed": "#ffffff",
     "neutralForeground2Selected": "#ffffff",
-    "neutralForeground3": "#adadad",
-    "neutralForeground3BrandHover": "#6794d7",
+    "neutralForeground3": "#cccccc",
+    "neutralForeground3BrandHover": "#d2e0f4",
     "neutralForeground3BrandPressed": "#2e6ac5",
-    "neutralForeground3BrandSelected": "#6794d7",
-    "neutralForeground3Hover": "#d6d6d6",
-    "neutralForeground3Pressed": "#d6d6d6",
-    "neutralForeground3Selected": "#d6d6d6",
-    "neutralForeground4": "#999999",
-    "neutralForegroundDisabled": "#5c5c5c",
-    "neutralForegroundInverted": "#242424",
-    "neutralForegroundInvertedLink": "#ffffff",
-    "neutralForegroundInvertedLinkHover": "#ffffff",
-    "neutralForegroundInvertedLinkPressed": "#ffffff",
-    "neutralForegroundInvertedLinkSelected": "#ffffff",
+    "neutralForeground3BrandSelected": "#d2e0f4",
+    "neutralForeground3Hover": "#e6e6e6",
+    "neutralForeground3Pressed": "#e6e6e6",
+    "neutralForeground3Selected": "#e6e6e6",
+    "neutralForeground4": "#c2c2c2",
+    "neutralForegroundDisabled": "#666666",
+    "neutralForegroundInverted": "#000000",
+    "neutralForegroundInvertedLink": "#4d4d4d",
+    "neutralForegroundInvertedLinkHover": "#4d4d4d",
+    "neutralForegroundInvertedLinkPressed": "#4d4d4d",
+    "neutralForegroundInvertedLinkSelected": "#4d4d4d",
     "neutralForegroundOnBrand": "#ffffff",
     "neutralForegroundOnBrandHover": "#ffffff",
     "neutralForegroundOnBrandPressed": "#ffffff",
     "neutralForegroundOnBrandSelected": "#ffffff",
-    "neutralStencil1": "#333333",
-    "neutralStencil2": "#575757",
-    "neutralStroke1": "#666666",
-    "neutralStroke1Hover": "#757575",
-    "neutralStroke1Pressed": "#6b6b6b",
-    "neutralStroke1Selected": "#707070",
-    "neutralStroke2": "#525252",
-    "neutralStroke3": "#3d3d3d",
-    "neutralStrokeAccessible": "#adadad",
-    "neutralStrokeAccessibleHover": "#bdbdbd",
-    "neutralStrokeAccessiblePressed": "#b3b3b3",
-    "neutralStrokeAccessibleSelected": "#6794d7",
-    "neutralStrokeDisabled": "#424242",
+    "neutralStencil1": "#1a1a1a",
+    "neutralStencil2": "#424242",
+    "neutralStroke1": "#8a8a8a",
+    "neutralStroke1Hover": "#999999",
+    "neutralStroke1Pressed": "#8f8f8f",
+    "neutralStroke1Selected": "#949494",
+    "neutralStroke2": "#757575",
+    "neutralStroke3": "#616161",
+    "neutralStrokeAccessible": "#a8a8a8",
+    "neutralStrokeAccessibleHover": "#b8b8b8",
+    "neutralStrokeAccessiblePressed": "#adadad",
+    "neutralStrokeAccessibleSelected": "#185abd",
+    "neutralStrokeDisabled": "#474747",
     "outofofficeBackground1": "#3a1136",
     "outofofficeBackground2": "#6d2064",
     "outofofficeBackground3": "#c239b3",
@@ -222,12 +222,12 @@ exports[`defaultFluentDarkTheme 1`] = `
     "outofofficeForeground1": "#da7ed0",
     "outofofficeForeground2": "#edbbe7",
     "outofofficeForeground3": "#d161c4",
-    "personaActivityGlow": undefined,
+    "personaActivityGlow": "#2e6ac5",
     "personaActivityRing": "#1b1a19",
-    "primaryButtonBackground": undefined,
+    "primaryButtonBackground": "#2e6ac5",
     "primaryButtonBackgroundDisabled": "#252423",
-    "primaryButtonBackgroundHovered": undefined,
-    "primaryButtonBackgroundPressed": undefined,
+    "primaryButtonBackgroundHovered": "#6794d7",
+    "primaryButtonBackgroundPressed": "#aec6eb",
     "primaryButtonBorder": "transparent",
     "primaryButtonBorderFocused": "transparent",
     "primaryButtonText": "#1b1a19",
@@ -247,9 +247,9 @@ exports[`defaultFluentDarkTheme 1`] = `
     "strokeFocus2": "#ffffff",
     "subText": "#a19f9d",
     "subtleBackground": "#00000000",
-    "subtleBackgroundHover": "#383838",
-    "subtleBackgroundPressed": "#2e2e2e",
-    "subtleBackgroundSelected": "#333333",
+    "subtleBackgroundHover": "#5c5c5c",
+    "subtleBackgroundPressed": "#424242",
+    "subtleBackgroundSelected": "#575757",
     "successBackground1": "#052505",
     "successBackground2": "#094509",
     "successBackground3": "#107c10",
@@ -638,75 +638,75 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "bodyTextChecked": "#000000",
     "brandBackground": {
       "windowsbrush": [
-        "SystemColorButtonFaceColor",
+        "ButtonFace",
       ],
     },
     "brandBackground2": {
       "windowsbrush": [
-        "SystemColorButtonFaceColor",
+        "ButtonFace",
       ],
     },
     "brandBackgroundDisabled": undefined,
     "brandBackgroundHover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "brandBackgroundPressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "brandBackgroundSelected": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "brandBackgroundStatic": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "brandForeground1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "brandForeground1Disabled": undefined,
     "brandForeground1Pressed": undefined,
     "brandForeground2": {
       "windowsbrush": [
-        "SystemColorButtonTextColor",
+        "ButtonText",
       ],
     },
     "brandForegroundLink": {
       "windowsbrush": [
-        "SystemColorHotlightColor",
+        "Hotlight",
       ],
     },
     "brandForegroundLinkHover": {
       "windowsbrush": [
-        "SystemColorHotlightColor",
+        "Hotlight",
       ],
     },
     "brandForegroundLinkPressed": {
       "windowsbrush": [
-        "SystemColorHotlightColor",
+        "Hotlight",
       ],
     },
     "brandForegroundLinkSelected": {
       "windowsbrush": [
-        "SystemColorHotlightColor",
+        "Hotlight",
       ],
     },
     "brandStroke1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "brandStroke2": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "brandedBackground": "#000000",
@@ -734,97 +734,97 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "checkmarkColor": "#ffffff",
     "compoundBrandBackground1": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "compoundBrandBackground1Hover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "compoundBrandBackground1Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "compoundBrandForeground1": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "compoundBrandForeground1Hover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "compoundBrandForeground1Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "compoundBrandStroke1": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "compoundBrandStroke1Hover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "compoundBrandStroke1Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "dangerBackground1": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "dangerBackground2": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "dangerBackground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "dangerBorder1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "dangerBorder2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "dangerBorderActive": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "dangerForeground1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "dangerForeground2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "dangerForeground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "dangerForegroundInverted": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "defaultBackground": "#000000",
@@ -906,364 +906,364 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "menuItemTextHovered": "#000000",
     "neutralBackground1": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "neutralBackground1Hover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground1Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground1Selected": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground2": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "neutralBackground2Hover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground2Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground2Selected": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground3": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "neutralBackground3Hover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground3Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground3Selected": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground4": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "neutralBackground4Hover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground4Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground4Selected": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground5": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "neutralBackground5Hover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground5Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground5Selected": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralBackground6": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "neutralBackgroundDisabled": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "neutralBackgroundInverted": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "neutralForeground1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "neutralForeground1Hover": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground1Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground1Selected": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "neutralForeground2BrandHover": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground2BrandPressed": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground2BrandSelected": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground2Hover": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground2Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground2Selected": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "neutralForeground3BrandHover": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground3BrandPressed": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground3BrandSelected": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground3Hover": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground3Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground3Selected": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForeground4": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "neutralForegroundDisabled": {
       "windowsbrush": [
-        "SystemColorGrayTextColor",
+        "GrayText",
       ],
     },
     "neutralForegroundInverted": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "neutralForegroundInvertedLink": {
       "windowsbrush": [
-        "SystemColorHotlightColor",
+        "Hotlight",
       ],
     },
     "neutralForegroundInvertedLinkHover": {
       "windowsbrush": [
-        "SystemColorHotlightColor",
+        "Hotlight",
       ],
     },
     "neutralForegroundInvertedLinkPressed": {
       "windowsbrush": [
-        "SystemColorHotlightColor",
+        "Hotlight",
       ],
     },
     "neutralForegroundInvertedLinkSelected": {
       "windowsbrush": [
-        "SystemColorHotlightColor",
+        "Hotlight",
       ],
     },
     "neutralForegroundOnBrand": {
       "windowsbrush": [
-        "SystemColorButtonTextColor",
+        "ButtonText",
       ],
     },
     "neutralForegroundOnBrandHover": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForegroundOnBrandPressed": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralForegroundOnBrandSelected": {
       "windowsbrush": [
-        "SystemColorHighlightTextColor",
+        "HighlightText",
       ],
     },
     "neutralStencil1": "#141414",
     "neutralStencil2": "#858585",
     "neutralStroke1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "neutralStroke1Hover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralStroke1Pressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralStroke1Selected": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralStroke2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "neutralStroke3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "neutralStrokeAccessible": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "neutralStrokeAccessibleHover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralStrokeAccessiblePressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralStrokeAccessibleSelected": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "neutralStrokeDisabled": {
       "windowsbrush": [
-        "SystemColorGrayTextColor",
+        "GrayText",
       ],
     },
     "outofofficeBackground1": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "outofofficeBackground2": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "outofofficeBackground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "outofofficeBorder1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "outofofficeBorder2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "outofofficeBorderActive": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "outofofficeForeground1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "outofofficeForeground2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "outofofficeForeground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "personaActivityGlow": "transparent",
@@ -1280,124 +1280,124 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "primaryButtonTextPressed": "#000000",
     "severeBackground1": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "severeBackground2": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "severeBackground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "severeBorder1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "severeBorder2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "severeBorderActive": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "severeForeground1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "severeForeground2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "severeForeground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "strokeFocus1": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "strokeFocus2": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "subText": "#ffffff",
     "subtleBackground": "#00000000",
     "subtleBackgroundHover": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "subtleBackgroundPressed": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "subtleBackgroundSelected": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "successBackground1": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "successBackground2": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "successBackground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "successBorder1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "successBorder2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "successBorderActive": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "successForeground1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "successForeground2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "successForeground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "successForegroundInverted": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "transparentBackground": "#00000000",
@@ -1406,68 +1406,68 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "transparentBackgroundSelected": "#00000000",
     "transparentStroke": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "transparentStrokeDisabled": {
       "windowsbrush": [
-        "SystemColorGrayTextColor",
+        "GrayText",
       ],
     },
     "transparentStrokeInteractive": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "variantBorder": "#ffffff",
     "warningBackground1": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "warningBackground2": {
       "windowsbrush": [
-        "SystemColorWindowColor",
+        "Window",
       ],
     },
     "warningBackground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "warningBorder1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "warningBorder2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "warningBorderActive": {
       "windowsbrush": [
-        "SystemColorHighlightColor",
+        "Highlight",
       ],
     },
     "warningForeground1": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "warningForeground2": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "warningForeground3": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
     "warningForegroundInverted": {
       "windowsbrush": [
-        "SystemColorWindowTextColor",
+        "WindowText",
       ],
     },
   },
@@ -1819,7 +1819,7 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
 exports[`defaultFluentTheme 1`] = `
 {
   "colors": {
-    "accentButtonBackground": undefined,
+    "accentButtonBackground": "#185abd",
     "actionLink": "#323130",
     "background": "#ffffff",
     "bodyDivider": "#edebe9",
@@ -1829,23 +1829,23 @@ exports[`defaultFluentTheme 1`] = `
     "bodyText": "#323130",
     "bodyTextChecked": "#000000",
     "brandBackground": "#185abd",
-    "brandBackground2": "#eff6fc",
+    "brandBackground2": "#d2e0f4",
     "brandBackgroundDisabled": undefined,
     "brandBackgroundHover": "#1651aa",
-    "brandBackgroundPressed": "#004578",
+    "brandBackgroundPressed": "#0e336a",
     "brandBackgroundSelected": "#13458f",
     "brandBackgroundStatic": "#185abd",
     "brandForeground1": "#185abd",
     "brandForeground1Disabled": undefined,
     "brandForeground1Pressed": undefined,
     "brandForeground2": "#1651aa",
-    "brandForegroundLink": "#1651aa",
-    "brandForegroundLinkHover": "#13458f",
-    "brandForegroundLinkPressed": "#004578",
-    "brandForegroundLinkSelected": "#1651aa",
+    "brandForegroundLink": "#185abd",
+    "brandForegroundLinkHover": "#1651aa",
+    "brandForegroundLinkPressed": "#0e336a",
+    "brandForegroundLinkSelected": "#13458f",
     "brandStroke1": "#185abd",
-    "brandStroke2": "#d2e0f4",
-    "brandedBackground": undefined,
+    "brandStroke2": "#6794d7",
+    "brandedBackground": "#185abd",
     "brandedDisabledBorder": "#f3f2f1",
     "brandedFocusedSecondaryContent": "#faf9f8",
     "brandedHoveredSecondaryContent": "#faf9f8",
@@ -1864,19 +1864,19 @@ exports[`defaultFluentTheme 1`] = `
     "buttonTextDisabled": "#a19f9d",
     "buttonTextHovered": "#201f1e",
     "buttonTextPressed": "#201f1e",
-    "checkboxBackground": undefined,
+    "checkboxBackground": "#185abd",
     "checkboxBackgroundDisabled": "#f3f2f1",
     "checkboxBorderColor": "#8a8886",
     "checkmarkColor": "#ffffff",
     "compoundBrandBackground1": "#185abd",
     "compoundBrandBackground1Hover": "#1651aa",
-    "compoundBrandBackground1Pressed": "#13458f",
+    "compoundBrandBackground1Pressed": "#0e336a",
     "compoundBrandForeground1": "#185abd",
     "compoundBrandForeground1Hover": "#1651aa",
-    "compoundBrandForeground1Pressed": "#13458f",
+    "compoundBrandForeground1Pressed": "#0e336a",
     "compoundBrandStroke1": "#185abd",
     "compoundBrandStroke1Hover": "#1651aa",
-    "compoundBrandStroke1Pressed": "#13458f",
+    "compoundBrandStroke1Pressed": "#0e336a",
     "dangerBackground1": "#fdf6f6",
     "dangerBackground2": "#f1bbbc",
     "dangerBackground3": "#d13438",
@@ -1949,17 +1949,17 @@ exports[`defaultFluentTheme 1`] = `
     "ghostSecondaryContent": "#605e5c",
     "inputBackground": "#ffffff",
     "inputBorder": "#a19f9d",
-    "inputFocusBorderAlt": undefined,
+    "inputFocusBorderAlt": "#185abd",
     "inputPlaceholderText": "#605e5c",
     "inputText": "#323130",
-    "link": undefined,
-    "linkHovered": undefined,
-    "linkPressed": undefined,
+    "link": "#185abd",
+    "linkHovered": "#004578",
+    "linkPressed": "#13458f",
     "listHeaderBackgroundHovered": "#f3f2f1",
     "listHeaderBackgroundPressed": "#edebe9",
     "menuBackground": "#ffffff",
     "menuDivider": "#c8c6c4",
-    "menuIcon": undefined,
+    "menuIcon": "#185abd",
     "menuItemBackgroundHovered": "#f3f2f1",
     "menuItemBackgroundPressed": "#edebe9",
     "menuItemText": "#323130",
@@ -1992,16 +1992,16 @@ exports[`defaultFluentTheme 1`] = `
     "neutralForeground1Pressed": "#242424",
     "neutralForeground1Selected": "#242424",
     "neutralForeground2": "#424242",
-    "neutralForeground2BrandHover": "#185abd",
-    "neutralForeground2BrandPressed": "#1651aa",
-    "neutralForeground2BrandSelected": "#185abd",
+    "neutralForeground2BrandHover": "#1651aa",
+    "neutralForeground2BrandPressed": "#0e336a",
+    "neutralForeground2BrandSelected": "#13458f",
     "neutralForeground2Hover": "#242424",
     "neutralForeground2Pressed": "#242424",
     "neutralForeground2Selected": "#242424",
     "neutralForeground3": "#616161",
-    "neutralForeground3BrandHover": "#185abd",
-    "neutralForeground3BrandPressed": "#1651aa",
-    "neutralForeground3BrandSelected": "#185abd",
+    "neutralForeground3BrandHover": "#1651aa",
+    "neutralForeground3BrandPressed": "#0e336a",
+    "neutralForeground3BrandSelected": "#13458f",
     "neutralForeground3Hover": "#424242",
     "neutralForeground3Pressed": "#424242",
     "neutralForeground3Selected": "#424242",
@@ -2038,12 +2038,12 @@ exports[`defaultFluentTheme 1`] = `
     "outofofficeForeground1": "#af33a1",
     "outofofficeForeground2": "#6d2064",
     "outofofficeForeground3": "#c239b3",
-    "personaActivityGlow": undefined,
+    "personaActivityGlow": "#185abd",
     "personaActivityRing": "#ffffff",
-    "primaryButtonBackground": undefined,
+    "primaryButtonBackground": "#185abd",
     "primaryButtonBackgroundDisabled": "#f3f2f1",
-    "primaryButtonBackgroundHovered": undefined,
-    "primaryButtonBackgroundPressed": undefined,
+    "primaryButtonBackgroundHovered": "#1651aa",
+    "primaryButtonBackgroundPressed": "#13458f",
     "primaryButtonBorder": "transparent",
     "primaryButtonBorderFocused": "transparent",
     "primaryButtonText": "#ffffff",

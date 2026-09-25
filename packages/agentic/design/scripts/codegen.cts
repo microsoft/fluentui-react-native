@@ -59,7 +59,6 @@ function processGlobals() {
       ios: normalizeFontFamilies(iosTokens),
       macos: normalizeFontFamilies(macosTokens),
       win32: normalizeFontFamilies(win32Tokens),
-      windows: normalizeFontFamilies(require('@fluentui-react-native/design-tokens-windows/light/tokens-global.json')),
     },
     entry: path.join(__dirname, '../src/tokens/global.generated.ts'),
     genbase: path.join(__dirname, '../src/tokens/generated/global'),

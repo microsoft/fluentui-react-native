@@ -3,7 +3,6 @@ import { PlatformColor } from 'react-native';
 type AliasTokens = Record<string, Record<string, unknown>>;
 type PlatformColorNameTransform = (color: string) => string;
 
-export const transformWindowsPlatformColorName: PlatformColorNameTransform = (color) => `SystemColor${color}Color`;
 export const transformWin32PlatformColorName: PlatformColorNameTransform = (color) => color;
 
 export function processAliasTokens<T extends AliasTokens>(aliasTokens: T, transformColorName: PlatformColorNameTransform): T {
