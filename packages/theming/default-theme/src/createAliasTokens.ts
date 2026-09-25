@@ -1,7 +1,6 @@
 import { memoize } from '@fluentui-react-native/framework-base';
 import { getAliasTokens, getShadowTokens, type EffectiveAppearance } from '@fluentui-react-native/design/appearance';
 import type { AliasColorTokens, AppearanceOptions, ThemeShadowDefinition } from '@fluentui-react-native/design/theming';
-import { mapPipelineToTheme } from '@fluentui-react-native/design/theming';
 
 function appearanceFromLegacy(mode: AppearanceOptions): EffectiveAppearance {
   switch (mode) {
@@ -19,8 +18,7 @@ function appearanceFromLegacy(mode: AppearanceOptions): EffectiveAppearance {
 }
 
 function createColorAliasTokensWorker(mode: AppearanceOptions): AliasColorTokens {
-  const aliasTokens = getAliasTokens(appearanceFromLegacy(mode));
-  return mapPipelineToTheme(aliasTokens);
+  return getAliasTokens(appearanceFromLegacy(mode));
 }
 
 export const createColorAliasTokens = memoize(createColorAliasTokensWorker);

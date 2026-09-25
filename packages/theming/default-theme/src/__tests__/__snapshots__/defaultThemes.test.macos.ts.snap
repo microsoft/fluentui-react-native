@@ -3,7 +3,7 @@
 exports[`defaultFluentDarkTheme 1`] = `
 {
   "colors": {
-    "accentButtonBackground": "#185abd",
+    "accentButtonBackground": "#0078d4",
     "actionLink": "#f3f2f1",
     "background": "#1b1a19",
     "bodyDivider": "#292827",
@@ -12,24 +12,24 @@ exports[`defaultFluentDarkTheme 1`] = `
     "bodyStandoutBackground": "#201f1e",
     "bodyText": "#f3f2f1",
     "bodyTextChecked": "#ffffff",
-    "brandBackground": "#1651aa",
-    "brandBackground2": "#004578",
-    "brandBackgroundDisabled": undefined,
-    "brandBackgroundHover": "#185abd",
-    "brandBackgroundPressed": "#004578",
-    "brandBackgroundSelected": "#13458f",
-    "brandBackgroundStatic": "#185abd",
-    "brandForeground1": "#6794d7",
-    "brandForeground1Disabled": undefined,
-    "brandForeground1Pressed": undefined,
-    "brandForeground2": "#aec6eb",
-    "brandForegroundLink": "#2e6ac5",
-    "brandForegroundLinkHover": "#aec6eb",
-    "brandForegroundLinkPressed": "#6794d7",
-    "brandForegroundLinkSelected": "#2e6ac5",
-    "brandStroke1": "#2e6ac5",
-    "brandStroke2": "#0e336a",
-    "brandedBackground": "#2e6ac5",
+    "brandBackground": "#0086f0",
+    "brandBackground2": "#092c47",
+    "brandBackgroundDisabled": "#575757",
+    "brandBackgroundHover": "#1890f1",
+    "brandBackgroundPressed": "#1890f1",
+    "brandBackgroundSelected": "#3aa0f3",
+    "brandBackgroundStatic": "#0086f0",
+    "brandForeground1": "#0086f0",
+    "brandForeground1Disabled": "#c2c2c2",
+    "brandForeground1Pressed": "#6cb8f6",
+    "brandForeground2": "#092c47",
+    "brandForegroundLink": "#043862",
+    "brandForegroundLinkHover": "#092c47",
+    "brandForegroundLinkPressed": "#0078d4",
+    "brandForegroundLinkSelected": "#092c47",
+    "brandStroke1": "#0086f0",
+    "brandStroke2": "#004c87",
+    "brandedBackground": "#2b88d8",
     "brandedDisabledBorder": "#252423",
     "brandedFocusedSecondaryContent": "#201f1e",
     "brandedHoveredSecondaryContent": "#201f1e",
@@ -48,19 +48,19 @@ exports[`defaultFluentDarkTheme 1`] = `
     "buttonTextDisabled": "#797775",
     "buttonTextHovered": "#f3f2f1",
     "buttonTextPressed": "#faf9f8",
-    "checkboxBackground": "#2e6ac5",
+    "checkboxBackground": "#2b88d8",
     "checkboxBackgroundDisabled": "#252423",
     "checkboxBorderColor": "#979693",
     "checkmarkColor": "#1b1a19",
-    "compoundBrandBackground1": "#2e6ac5",
-    "compoundBrandBackground1Hover": "#6794d7",
-    "compoundBrandBackground1Pressed": "#185abd",
-    "compoundBrandForeground1": "#2e6ac5",
-    "compoundBrandForeground1Hover": "#6794d7",
-    "compoundBrandForeground1Pressed": "#185abd",
-    "compoundBrandStroke1": "#2e6ac5",
-    "compoundBrandStroke1Hover": "#6794d7",
-    "compoundBrandStroke1Pressed": "#185abd",
+    "compoundBrandBackground1": "#0086f0",
+    "compoundBrandBackground1Hover": "#1890f1",
+    "compoundBrandBackground1Pressed": "#6cb8f6",
+    "compoundBrandForeground1": "#043862",
+    "compoundBrandForeground1Hover": "#092c47",
+    "compoundBrandForeground1Pressed": "#0078d4",
+    "compoundBrandStroke1": "#0086f0",
+    "compoundBrandStroke1Hover": "#1890f1",
+    "compoundBrandStroke1Pressed": "#6cb8f6",
     "dangerBackground1": "#3f1011",
     "dangerBackground2": "#751d1f",
     "dangerBackground3": "#d13438",
@@ -133,69 +133,69 @@ exports[`defaultFluentDarkTheme 1`] = `
     "ghostSecondaryContent": "#a19f9d",
     "inputBackground": "#1b1a19",
     "inputBorder": "#797775",
-    "inputFocusBorderAlt": "#2e6ac5",
+    "inputFocusBorderAlt": "#2b88d8",
     "inputPlaceholderText": "#a19f9d",
     "inputText": "#f3f2f1",
-    "link": "#2e6ac5",
+    "link": "#2b88d8",
     "linkHovered": "#82c7ff",
-    "linkPressed": "#aec6eb",
+    "linkPressed": "#deecf9",
     "listHeaderBackgroundHovered": "#252423",
     "listHeaderBackgroundPressed": "#292827",
     "menuBackground": "#252423",
     "menuDivider": "#484644",
-    "menuIcon": "#6794d7",
+    "menuIcon": "#c7e0f4",
     "menuItemBackgroundHovered": "#323130",
     "menuItemBackgroundPressed": "#3b3a39",
     "menuItemText": "#f3f2f1",
     "menuItemTextHovered": "#faf9f8",
-    "neutralBackground1": "#292929",
-    "neutralBackground1Hover": "#3d3d3d",
-    "neutralBackground1Pressed": "#1f1f1f",
-    "neutralBackground1Selected": "#383838",
-    "neutralBackground2": "#1f1f1f",
+    "neutralBackground1": "#1f1f1f",
+    "neutralBackground1Hover": "#292929",
+    "neutralBackground1Pressed": "#474747",
+    "neutralBackground1Selected": "#333333",
+    "neutralBackground2": "#292929",
     "neutralBackground2Hover": "#333333",
-    "neutralBackground2Pressed": "#141414",
-    "neutralBackground2Selected": "#2e2e2e",
-    "neutralBackground3": "#141414",
-    "neutralBackground3Hover": "#292929",
-    "neutralBackground3Pressed": "#0a0a0a",
-    "neutralBackground3Selected": "#242424",
-    "neutralBackground4": "#0a0a0a",
+    "neutralBackground2Pressed": "#525252",
+    "neutralBackground2Selected": "#3d3d3d",
+    "neutralBackground3": "#575757",
+    "neutralBackground3Hover": "#616161",
+    "neutralBackground3Pressed": "#808080",
+    "neutralBackground3Selected": "#707070",
+    "neutralBackground4": "#141414",
     "neutralBackground4Hover": "#1f1f1f",
-    "neutralBackground4Pressed": "#000000",
-    "neutralBackground4Selected": "#1a1a1a",
-    "neutralBackground5": "#000000",
+    "neutralBackground4Pressed": "#3d3d3d",
+    "neutralBackground4Selected": "#2e2e2e",
+    "neutralBackground5": "#0a0a0a",
     "neutralBackground5Hover": "#141414",
-    "neutralBackground5Pressed": "#050505",
-    "neutralBackground5Selected": "#0f0f0f",
+    "neutralBackground5Pressed": "#333333",
+    "neutralBackground5Selected": "#242424",
     "neutralBackground6": "#333333",
-    "neutralBackgroundDisabled": "#141414",
+    "neutralBackgroundDisabled": "#575757",
     "neutralBackgroundInverted": "#ffffff",
     "neutralForeground1": "#ffffff",
     "neutralForeground1Hover": "#ffffff",
     "neutralForeground1Pressed": "#ffffff",
     "neutralForeground1Selected": "#ffffff",
     "neutralForeground2": "#d6d6d6",
-    "neutralForeground2BrandHover": "#6794d7",
-    "neutralForeground2BrandPressed": "#2e6ac5",
-    "neutralForeground2BrandSelected": "#6794d7",
+    "neutralForeground2BrandHover": "#092c47",
+    "neutralForeground2BrandPressed": "#0078d4",
+    "neutralForeground2BrandSelected": "#092c47",
     "neutralForeground2Hover": "#ffffff",
     "neutralForeground2Pressed": "#ffffff",
     "neutralForeground2Selected": "#ffffff",
     "neutralForeground3": "#adadad",
-    "neutralForeground3BrandHover": "#6794d7",
-    "neutralForeground3BrandPressed": "#2e6ac5",
-    "neutralForeground3BrandSelected": "#6794d7",
+    "neutralForeground3BrandHover": "#092c47",
+    "neutralForeground3BrandPressed": "#0078d4",
+    "neutralForeground3BrandSelected": "#092c47",
     "neutralForeground3Hover": "#d6d6d6",
     "neutralForeground3Pressed": "#d6d6d6",
     "neutralForeground3Selected": "#d6d6d6",
     "neutralForeground4": "#999999",
-    "neutralForegroundDisabled": "#5c5c5c",
-    "neutralForegroundInverted": "#242424",
-    "neutralForegroundInvertedLink": "#ffffff",
-    "neutralForegroundInvertedLinkHover": "#ffffff",
-    "neutralForegroundInvertedLinkPressed": "#ffffff",
-    "neutralForegroundInvertedLinkSelected": "#ffffff",
+    "neutralForegroundDisabled": "#b8b8b8",
+    "neutralForegroundInverted": "#ffffff",
+    "neutralForegroundInvertedLink": "#292929",
+    "neutralForegroundInvertedLinkHover": "#292929",
+    "neutralForegroundInvertedLinkPressed": "#292929",
+    "neutralForegroundInvertedLinkSelected": "#292929",
     "neutralForegroundOnBrand": "#ffffff",
     "neutralForegroundOnBrandHover": "#ffffff",
     "neutralForegroundOnBrandPressed": "#ffffff",
@@ -206,13 +206,13 @@ exports[`defaultFluentDarkTheme 1`] = `
     "neutralStroke1Hover": "#757575",
     "neutralStroke1Pressed": "#6b6b6b",
     "neutralStroke1Selected": "#707070",
-    "neutralStroke2": "#525252",
-    "neutralStroke3": "#3d3d3d",
+    "neutralStroke2": "#575757",
+    "neutralStroke3": "#666666",
     "neutralStrokeAccessible": "#adadad",
     "neutralStrokeAccessibleHover": "#bdbdbd",
     "neutralStrokeAccessiblePressed": "#b3b3b3",
-    "neutralStrokeAccessibleSelected": "#6794d7",
-    "neutralStrokeDisabled": "#424242",
+    "neutralStrokeAccessibleSelected": "#0086f0",
+    "neutralStrokeDisabled": "#525252",
     "outofofficeBackground1": "#3a1136",
     "outofofficeBackground2": "#6d2064",
     "outofofficeBackground3": "#c239b3",
@@ -222,12 +222,12 @@ exports[`defaultFluentDarkTheme 1`] = `
     "outofofficeForeground1": "#da7ed0",
     "outofofficeForeground2": "#edbbe7",
     "outofofficeForeground3": "#d161c4",
-    "personaActivityGlow": "#2e6ac5",
+    "personaActivityGlow": "#2b88d8",
     "personaActivityRing": "#1b1a19",
-    "primaryButtonBackground": "#2e6ac5",
+    "primaryButtonBackground": "#2b88d8",
     "primaryButtonBackgroundDisabled": "#252423",
-    "primaryButtonBackgroundHovered": "#6794d7",
-    "primaryButtonBackgroundPressed": "#aec6eb",
+    "primaryButtonBackgroundHovered": "#c7e0f4",
+    "primaryButtonBackgroundPressed": "#deecf9",
     "primaryButtonBorder": "transparent",
     "primaryButtonBorderFocused": "transparent",
     "primaryButtonText": "#1b1a19",
@@ -247,9 +247,9 @@ exports[`defaultFluentDarkTheme 1`] = `
     "strokeFocus2": "#ffffff",
     "subText": "#a19f9d",
     "subtleBackground": "#00000000",
-    "subtleBackgroundHover": "#383838",
-    "subtleBackgroundPressed": "#2e2e2e",
-    "subtleBackgroundSelected": "#333333",
+    "subtleBackgroundHover": "#3d3d3d",
+    "subtleBackgroundPressed": "#1f1f1f",
+    "subtleBackgroundSelected": "#383838",
     "successBackground1": "#052505",
     "successBackground2": "#094509",
     "successBackground3": "#107c10",
@@ -636,79 +636,23 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "bodyStandoutBackground": "#000000",
     "bodyText": "#ffffff",
     "bodyTextChecked": "#000000",
-    "brandBackground": {
-      "semantic": [
-        "SystemColorButtonFaceColor",
-      ],
-    },
-    "brandBackground2": {
-      "semantic": [
-        "SystemColorButtonFaceColor",
-      ],
-    },
-    "brandBackgroundDisabled": undefined,
-    "brandBackgroundHover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "brandBackgroundPressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "brandBackgroundSelected": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "brandBackgroundStatic": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "brandForeground1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "brandForeground1Disabled": undefined,
-    "brandForeground1Pressed": undefined,
-    "brandForeground2": {
-      "semantic": [
-        "SystemColorButtonTextColor",
-      ],
-    },
-    "brandForegroundLink": {
-      "semantic": [
-        "SystemColorHotlightColor",
-      ],
-    },
-    "brandForegroundLinkHover": {
-      "semantic": [
-        "SystemColorHotlightColor",
-      ],
-    },
-    "brandForegroundLinkPressed": {
-      "semantic": [
-        "SystemColorHotlightColor",
-      ],
-    },
-    "brandForegroundLinkSelected": {
-      "semantic": [
-        "SystemColorHotlightColor",
-      ],
-    },
-    "brandStroke1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "brandStroke2": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
+    "brandBackground": "#0078d4",
+    "brandBackground2": "#eff6fc",
+    "brandBackgroundDisabled": "#d1d1d1",
+    "brandBackgroundHover": "#106ebe",
+    "brandBackgroundPressed": "#106ebe",
+    "brandBackgroundSelected": "#005a9e",
+    "brandBackgroundStatic": "#0078d4",
+    "brandForeground1": "#0078d4",
+    "brandForeground1Disabled": "#757575",
+    "brandForeground1Pressed": "#004578",
+    "brandForeground2": "#106ebe",
+    "brandForegroundLink": "#0078d4",
+    "brandForegroundLinkHover": "#106ebe",
+    "brandForegroundLinkPressed": "#004578",
+    "brandForegroundLinkSelected": "#005a9e",
+    "brandStroke1": "#0078d4",
+    "brandStroke2": "#c7e0f4",
     "brandedBackground": "#000000",
     "brandedDisabledBorder": "#3ff23f",
     "brandedFocusedSecondaryContent": "#ffffff",
@@ -732,101 +676,25 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "checkboxBackgroundDisabled": "#000000",
     "checkboxBorderColor": "#ffffff",
     "checkmarkColor": "#ffffff",
-    "compoundBrandBackground1": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "compoundBrandBackground1Hover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "compoundBrandBackground1Pressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "compoundBrandForeground1": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "compoundBrandForeground1Hover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "compoundBrandForeground1Pressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "compoundBrandStroke1": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "compoundBrandStroke1Hover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "compoundBrandStroke1Pressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "dangerBackground1": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "dangerBackground2": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "dangerBackground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "dangerBorder1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "dangerBorder2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "dangerBorderActive": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "dangerForeground1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "dangerForeground2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "dangerForeground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "dangerForegroundInverted": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
+    "compoundBrandBackground1": "#0078d4",
+    "compoundBrandBackground1Hover": "#106ebe",
+    "compoundBrandBackground1Pressed": "#004578",
+    "compoundBrandForeground1": "#0078d4",
+    "compoundBrandForeground1Hover": "#106ebe",
+    "compoundBrandForeground1Pressed": "#004578",
+    "compoundBrandStroke1": "#0078d4",
+    "compoundBrandStroke1Hover": "#106ebe",
+    "compoundBrandStroke1Pressed": "#004578",
+    "dangerBackground1": "#fdf6f6",
+    "dangerBackground2": "#f1bbbc",
+    "dangerBackground3": "#d13438",
+    "dangerBorder1": "#f1bbbc",
+    "dangerBorder2": "#d13438",
+    "dangerBorderActive": "#d13438",
+    "dangerForeground1": "#bc2f32",
+    "dangerForeground2": "#751d1f",
+    "dangerForeground3": "#d13438",
+    "dangerForegroundInverted": "#dc5e62",
     "defaultBackground": "#000000",
     "defaultBorder": "#ffffff",
     "defaultCheckedBackground": "#1aebff",
@@ -904,368 +772,80 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "menuItemBackgroundPressed": "#1aebff",
     "menuItemText": "#ffffff",
     "menuItemTextHovered": "#000000",
-    "neutralBackground1": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "neutralBackground1Hover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground1Pressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground1Selected": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground2": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "neutralBackground2Hover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground2Pressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground2Selected": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground3": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "neutralBackground3Hover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground3Pressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground3Selected": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground4": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "neutralBackground4Hover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground4Pressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground4Selected": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground5": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "neutralBackground5Hover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground5Pressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground5Selected": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralBackground6": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "neutralBackgroundDisabled": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "neutralBackgroundInverted": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "neutralForeground1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "neutralForeground1Hover": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground1Pressed": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground1Selected": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "neutralForeground2BrandHover": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground2BrandPressed": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground2BrandSelected": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground2Hover": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground2Pressed": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground2Selected": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "neutralForeground3BrandHover": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground3BrandPressed": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground3BrandSelected": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground3Hover": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground3Pressed": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground3Selected": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForeground4": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "neutralForegroundDisabled": {
-      "semantic": [
-        "SystemColorGrayTextColor",
-      ],
-    },
-    "neutralForegroundInverted": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "neutralForegroundInvertedLink": {
-      "semantic": [
-        "SystemColorHotlightColor",
-      ],
-    },
-    "neutralForegroundInvertedLinkHover": {
-      "semantic": [
-        "SystemColorHotlightColor",
-      ],
-    },
-    "neutralForegroundInvertedLinkPressed": {
-      "semantic": [
-        "SystemColorHotlightColor",
-      ],
-    },
-    "neutralForegroundInvertedLinkSelected": {
-      "semantic": [
-        "SystemColorHotlightColor",
-      ],
-    },
-    "neutralForegroundOnBrand": {
-      "semantic": [
-        "SystemColorButtonTextColor",
-      ],
-    },
-    "neutralForegroundOnBrandHover": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForegroundOnBrandPressed": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralForegroundOnBrandSelected": {
-      "semantic": [
-        "SystemColorHighlightTextColor",
-      ],
-    },
-    "neutralStencil1": "#141414",
-    "neutralStencil2": "#858585",
-    "neutralStroke1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "neutralStroke1Hover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralStroke1Pressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralStroke1Selected": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralStroke2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "neutralStroke3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "neutralStrokeAccessible": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "neutralStrokeAccessibleHover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralStrokeAccessiblePressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralStrokeAccessibleSelected": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "neutralStrokeDisabled": {
-      "semantic": [
-        "SystemColorGrayTextColor",
-      ],
-    },
-    "outofofficeBackground1": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "outofofficeBackground2": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "outofofficeBackground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "outofofficeBorder1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "outofofficeBorder2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "outofofficeBorderActive": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "outofofficeForeground1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "outofofficeForeground2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "outofofficeForeground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
+    "neutralBackground1": "#ffffff",
+    "neutralBackground1Hover": "#f5f5f5",
+    "neutralBackground1Pressed": "#ebebeb",
+    "neutralBackground1Selected": "#ebebeb",
+    "neutralBackground2": "#ffffff",
+    "neutralBackground2Hover": "#f0f0f0",
+    "neutralBackground2Pressed": "#ebebeb",
+    "neutralBackground2Selected": "#e6e6e6",
+    "neutralBackground3": "#f5f5f5",
+    "neutralBackground3Hover": "#ebebeb",
+    "neutralBackground3Pressed": "#d6d6d6",
+    "neutralBackground3Selected": "#e0e0e0",
+    "neutralBackground4": "#f0f0f0",
+    "neutralBackground4Hover": "#fafafa",
+    "neutralBackground4Pressed": "#f5f5f5",
+    "neutralBackground4Selected": "#ffffff",
+    "neutralBackground5": "#ebebeb",
+    "neutralBackground5Hover": "#f5f5f5",
+    "neutralBackground5Pressed": "#f0f0f0",
+    "neutralBackground5Selected": "#fafafa",
+    "neutralBackground6": "#e6e6e6",
+    "neutralBackgroundDisabled": "#f0f0f0",
+    "neutralBackgroundInverted": "#616161",
+    "neutralForeground1": "#000000",
+    "neutralForeground1Hover": "#000000",
+    "neutralForeground1Pressed": "#000000",
+    "neutralForeground1Selected": "#000000",
+    "neutralForeground2": "#000000",
+    "neutralForeground2BrandHover": "#106ebe",
+    "neutralForeground2BrandPressed": "#004578",
+    "neutralForeground2BrandSelected": "#005a9e",
+    "neutralForeground2Hover": "#242424",
+    "neutralForeground2Pressed": "#242424",
+    "neutralForeground2Selected": "#242424",
+    "neutralForeground3": "#000000",
+    "neutralForeground3BrandHover": "#106ebe",
+    "neutralForeground3BrandPressed": "#004578",
+    "neutralForeground3BrandSelected": "#005a9e",
+    "neutralForeground3Hover": "#424242",
+    "neutralForeground3Pressed": "#424242",
+    "neutralForeground3Selected": "#424242",
+    "neutralForeground4": "#424242",
+    "neutralForegroundDisabled": "#757575",
+    "neutralForegroundInverted": "#ffffff",
+    "neutralForegroundInvertedLink": "#ffffff",
+    "neutralForegroundInvertedLinkHover": "#ffffff",
+    "neutralForegroundInvertedLinkPressed": "#ffffff",
+    "neutralForegroundInvertedLinkSelected": "#ffffff",
+    "neutralForegroundOnBrand": "#ffffff",
+    "neutralForegroundOnBrandHover": "#ffffff",
+    "neutralForegroundOnBrandPressed": "#ffffff",
+    "neutralForegroundOnBrandSelected": "#ffffff",
+    "neutralStencil1": "#e6e6e6",
+    "neutralStencil2": "#fafafa",
+    "neutralStroke1": "#616161",
+    "neutralStroke1Hover": "#c7c7c7",
+    "neutralStroke1Pressed": "#b3b3b3",
+    "neutralStroke1Selected": "#bdbdbd",
+    "neutralStroke2": "#000000",
+    "neutralStroke3": "#616161",
+    "neutralStrokeAccessible": "#242424",
+    "neutralStrokeAccessibleHover": "#575757",
+    "neutralStrokeAccessiblePressed": "#4d4d4d",
+    "neutralStrokeAccessibleSelected": "#0078d4",
+    "neutralStrokeDisabled": "#e0e0e0",
+    "outofofficeBackground1": "#fdf5fc",
+    "outofofficeBackground2": "#edbbe7",
+    "outofofficeBackground3": "#c239b3",
+    "outofofficeBorder1": "#edbbe7",
+    "outofofficeBorder2": "#c239b3",
+    "outofofficeBorderActive": "#c239b3",
+    "outofofficeForeground1": "#af33a1",
+    "outofofficeForeground2": "#6d2064",
+    "outofofficeForeground3": "#c239b3",
     "personaActivityGlow": "transparent",
     "personaActivityRing": "#ffffff",
     "primaryButtonBackground": "#000000",
@@ -1278,198 +858,50 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "primaryButtonTextDisabled": "#3ff23f",
     "primaryButtonTextHovered": "#000000",
     "primaryButtonTextPressed": "#000000",
-    "severeBackground1": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "severeBackground2": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "severeBackground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "severeBorder1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "severeBorder2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "severeBorderActive": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "severeForeground1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "severeForeground2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "severeForeground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "strokeFocus1": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "strokeFocus2": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
+    "severeBackground1": "#fdf6f3",
+    "severeBackground2": "#f4bfab",
+    "severeBackground3": "#da3b01",
+    "severeBorder1": "#f4bfab",
+    "severeBorder2": "#da3b01",
+    "severeBorderActive": "#da3b01",
+    "severeForeground1": "#c43501",
+    "severeForeground2": "#7a2101",
+    "severeForeground3": "#da3b01",
+    "strokeFocus1": "#ffffff",
+    "strokeFocus2": "#000000",
     "subText": "#ffffff",
     "subtleBackground": "#00000000",
-    "subtleBackgroundHover": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "subtleBackgroundPressed": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "subtleBackgroundSelected": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "successBackground1": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "successBackground2": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "successBackground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "successBorder1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "successBorder2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "successBorderActive": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "successForeground1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "successForeground2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "successForeground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "successForegroundInverted": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
+    "subtleBackgroundHover": "#f5f5f5",
+    "subtleBackgroundPressed": "#e0e0e0",
+    "subtleBackgroundSelected": "#ebebeb",
+    "successBackground1": "#f1faf1",
+    "successBackground2": "#9fd89f",
+    "successBackground3": "#107c10",
+    "successBorder1": "#9fd89f",
+    "successBorder2": "#107c10",
+    "successBorderActive": "#107c10",
+    "successForeground1": "#0e700e",
+    "successForeground2": "#094509",
+    "successForeground3": "#107c10",
+    "successForegroundInverted": "#359b35",
     "transparentBackground": "#00000000",
     "transparentBackgroundHover": "#00000000",
     "transparentBackgroundPressed": "#00000000",
     "transparentBackgroundSelected": "#00000000",
-    "transparentStroke": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "transparentStrokeDisabled": {
-      "semantic": [
-        "SystemColorGrayTextColor",
-      ],
-    },
-    "transparentStrokeInteractive": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
+    "transparentStroke": "#000000",
+    "transparentStrokeDisabled": "#bdbdbd",
+    "transparentStrokeInteractive": "#666666",
     "variantBorder": "#ffffff",
-    "warningBackground1": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "warningBackground2": {
-      "semantic": [
-        "SystemColorWindowColor",
-      ],
-    },
-    "warningBackground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "warningBorder1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "warningBorder2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "warningBorderActive": {
-      "semantic": [
-        "SystemColorHighlightColor",
-      ],
-    },
-    "warningForeground1": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "warningForeground2": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "warningForeground3": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
-    "warningForegroundInverted": {
-      "semantic": [
-        "SystemColorWindowTextColor",
-      ],
-    },
+    "warningBackground1": "#fffef5",
+    "warningBackground2": "#fef7b2",
+    "warningBackground3": "#fde300",
+    "warningBorder1": "#fef7b2",
+    "warningBorder2": "#fde300",
+    "warningBorderActive": "#fde300",
+    "warningForeground1": "#817400",
+    "warningForeground2": "#817400",
+    "warningForeground3": "#fde300",
+    "warningForegroundInverted": "#fef7b2",
   },
   "components": {},
   "host": {
@@ -1819,7 +1251,7 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
 exports[`defaultFluentTheme 1`] = `
 {
   "colors": {
-    "accentButtonBackground": "#185abd",
+    "accentButtonBackground": "#0078d4",
     "actionLink": "#323130",
     "background": "#ffffff",
     "bodyDivider": "#edebe9",
@@ -1828,24 +1260,24 @@ exports[`defaultFluentTheme 1`] = `
     "bodyStandoutBackground": "#faf9f8",
     "bodyText": "#323130",
     "bodyTextChecked": "#000000",
-    "brandBackground": "#185abd",
+    "brandBackground": "#0078d4",
     "brandBackground2": "#eff6fc",
-    "brandBackgroundDisabled": undefined,
-    "brandBackgroundHover": "#1651aa",
-    "brandBackgroundPressed": "#004578",
-    "brandBackgroundSelected": "#13458f",
-    "brandBackgroundStatic": "#185abd",
-    "brandForeground1": "#185abd",
-    "brandForeground1Disabled": undefined,
-    "brandForeground1Pressed": undefined,
-    "brandForeground2": "#1651aa",
-    "brandForegroundLink": "#1651aa",
-    "brandForegroundLinkHover": "#13458f",
+    "brandBackgroundDisabled": "#d1d1d1",
+    "brandBackgroundHover": "#106ebe",
+    "brandBackgroundPressed": "#106ebe",
+    "brandBackgroundSelected": "#005a9e",
+    "brandBackgroundStatic": "#0078d4",
+    "brandForeground1": "#0078d4",
+    "brandForeground1Disabled": "#757575",
+    "brandForeground1Pressed": "#004578",
+    "brandForeground2": "#106ebe",
+    "brandForegroundLink": "#0078d4",
+    "brandForegroundLinkHover": "#106ebe",
     "brandForegroundLinkPressed": "#004578",
-    "brandForegroundLinkSelected": "#1651aa",
-    "brandStroke1": "#185abd",
-    "brandStroke2": "#d2e0f4",
-    "brandedBackground": "#185abd",
+    "brandForegroundLinkSelected": "#005a9e",
+    "brandStroke1": "#0078d4",
+    "brandStroke2": "#c7e0f4",
+    "brandedBackground": "#0078d4",
     "brandedDisabledBorder": "#f3f2f1",
     "brandedFocusedSecondaryContent": "#faf9f8",
     "brandedHoveredSecondaryContent": "#faf9f8",
@@ -1864,19 +1296,19 @@ exports[`defaultFluentTheme 1`] = `
     "buttonTextDisabled": "#a19f9d",
     "buttonTextHovered": "#201f1e",
     "buttonTextPressed": "#201f1e",
-    "checkboxBackground": "#185abd",
+    "checkboxBackground": "#0078d4",
     "checkboxBackgroundDisabled": "#f3f2f1",
     "checkboxBorderColor": "#8a8886",
     "checkmarkColor": "#ffffff",
-    "compoundBrandBackground1": "#185abd",
-    "compoundBrandBackground1Hover": "#1651aa",
-    "compoundBrandBackground1Pressed": "#13458f",
-    "compoundBrandForeground1": "#185abd",
-    "compoundBrandForeground1Hover": "#1651aa",
-    "compoundBrandForeground1Pressed": "#13458f",
-    "compoundBrandStroke1": "#185abd",
-    "compoundBrandStroke1Hover": "#1651aa",
-    "compoundBrandStroke1Pressed": "#13458f",
+    "compoundBrandBackground1": "#0078d4",
+    "compoundBrandBackground1Hover": "#106ebe",
+    "compoundBrandBackground1Pressed": "#004578",
+    "compoundBrandForeground1": "#0078d4",
+    "compoundBrandForeground1Hover": "#106ebe",
+    "compoundBrandForeground1Pressed": "#004578",
+    "compoundBrandStroke1": "#0078d4",
+    "compoundBrandStroke1Hover": "#106ebe",
+    "compoundBrandStroke1Pressed": "#004578",
     "dangerBackground1": "#fdf6f6",
     "dangerBackground2": "#f1bbbc",
     "dangerBackground3": "#d13438",
@@ -1949,41 +1381,41 @@ exports[`defaultFluentTheme 1`] = `
     "ghostSecondaryContent": "#605e5c",
     "inputBackground": "#ffffff",
     "inputBorder": "#a19f9d",
-    "inputFocusBorderAlt": "#185abd",
+    "inputFocusBorderAlt": "#0078d4",
     "inputPlaceholderText": "#605e5c",
     "inputText": "#323130",
-    "link": "#185abd",
+    "link": "#0078d4",
     "linkHovered": "#004578",
-    "linkPressed": "#13458f",
+    "linkPressed": "#005a9e",
     "listHeaderBackgroundHovered": "#f3f2f1",
     "listHeaderBackgroundPressed": "#edebe9",
     "menuBackground": "#ffffff",
     "menuDivider": "#c8c6c4",
-    "menuIcon": "#185abd",
+    "menuIcon": "#0078d4",
     "menuItemBackgroundHovered": "#f3f2f1",
     "menuItemBackgroundPressed": "#edebe9",
     "menuItemText": "#323130",
     "menuItemTextHovered": "#201f1e",
     "neutralBackground1": "#ffffff",
     "neutralBackground1Hover": "#f5f5f5",
-    "neutralBackground1Pressed": "#e0e0e0",
-    "neutralBackground1Selected": "#ebebeb",
-    "neutralBackground2": "#fafafa",
-    "neutralBackground2Hover": "#f0f0f0",
-    "neutralBackground2Pressed": "#dbdbdb",
+    "neutralBackground1Pressed": "#d6d6d6",
+    "neutralBackground1Selected": "#e6e6e6",
+    "neutralBackground2": "#ffffff",
+    "neutralBackground2Hover": "#f5f5f5",
+    "neutralBackground2Pressed": "#d6d6d6",
     "neutralBackground2Selected": "#e6e6e6",
-    "neutralBackground3": "#f5f5f5",
-    "neutralBackground3Hover": "#ebebeb",
+    "neutralBackground3": "#ffffff",
+    "neutralBackground3Hover": "#f5f5f5",
     "neutralBackground3Pressed": "#d6d6d6",
-    "neutralBackground3Selected": "#e0e0e0",
-    "neutralBackground4": "#f0f0f0",
-    "neutralBackground4Hover": "#fafafa",
-    "neutralBackground4Pressed": "#f5f5f5",
-    "neutralBackground4Selected": "#ffffff",
+    "neutralBackground3Selected": "#e6e6e6",
+    "neutralBackground4": "#f5f5f5",
+    "neutralBackground4Hover": "#ebebeb",
+    "neutralBackground4Pressed": "#cccccc",
+    "neutralBackground4Selected": "#dbdbdb",
     "neutralBackground5": "#ebebeb",
-    "neutralBackground5Hover": "#f5f5f5",
-    "neutralBackground5Pressed": "#f0f0f0",
-    "neutralBackground5Selected": "#fafafa",
+    "neutralBackground5Hover": "#e0e0e0",
+    "neutralBackground5Pressed": "#c2c2c2",
+    "neutralBackground5Selected": "#d1d1d1",
     "neutralBackground6": "#e6e6e6",
     "neutralBackgroundDisabled": "#f0f0f0",
     "neutralBackgroundInverted": "#616161",
@@ -1992,21 +1424,21 @@ exports[`defaultFluentTheme 1`] = `
     "neutralForeground1Pressed": "#242424",
     "neutralForeground1Selected": "#242424",
     "neutralForeground2": "#424242",
-    "neutralForeground2BrandHover": "#185abd",
-    "neutralForeground2BrandPressed": "#1651aa",
-    "neutralForeground2BrandSelected": "#185abd",
+    "neutralForeground2BrandHover": "#106ebe",
+    "neutralForeground2BrandPressed": "#004578",
+    "neutralForeground2BrandSelected": "#005a9e",
     "neutralForeground2Hover": "#242424",
     "neutralForeground2Pressed": "#242424",
     "neutralForeground2Selected": "#242424",
     "neutralForeground3": "#616161",
-    "neutralForeground3BrandHover": "#185abd",
-    "neutralForeground3BrandPressed": "#1651aa",
-    "neutralForeground3BrandSelected": "#185abd",
+    "neutralForeground3BrandHover": "#106ebe",
+    "neutralForeground3BrandPressed": "#004578",
+    "neutralForeground3BrandSelected": "#005a9e",
     "neutralForeground3Hover": "#424242",
     "neutralForeground3Pressed": "#424242",
     "neutralForeground3Selected": "#424242",
     "neutralForeground4": "#707070",
-    "neutralForegroundDisabled": "#bdbdbd",
+    "neutralForegroundDisabled": "#757575",
     "neutralForegroundInverted": "#ffffff",
     "neutralForegroundInvertedLink": "#ffffff",
     "neutralForegroundInvertedLinkHover": "#ffffff",
@@ -2022,12 +1454,12 @@ exports[`defaultFluentTheme 1`] = `
     "neutralStroke1Hover": "#c7c7c7",
     "neutralStroke1Pressed": "#b3b3b3",
     "neutralStroke1Selected": "#bdbdbd",
-    "neutralStroke2": "#e0e0e0",
+    "neutralStroke2": "#d6d6d6",
     "neutralStroke3": "#f0f0f0",
     "neutralStrokeAccessible": "#616161",
     "neutralStrokeAccessibleHover": "#575757",
     "neutralStrokeAccessiblePressed": "#4d4d4d",
-    "neutralStrokeAccessibleSelected": "#185abd",
+    "neutralStrokeAccessibleSelected": "#0078d4",
     "neutralStrokeDisabled": "#e0e0e0",
     "outofofficeBackground1": "#fdf5fc",
     "outofofficeBackground2": "#edbbe7",
@@ -2038,12 +1470,12 @@ exports[`defaultFluentTheme 1`] = `
     "outofofficeForeground1": "#af33a1",
     "outofofficeForeground2": "#6d2064",
     "outofofficeForeground3": "#c239b3",
-    "personaActivityGlow": "#185abd",
+    "personaActivityGlow": "#0078d4",
     "personaActivityRing": "#ffffff",
-    "primaryButtonBackground": "#185abd",
+    "primaryButtonBackground": "#0078d4",
     "primaryButtonBackgroundDisabled": "#f3f2f1",
-    "primaryButtonBackgroundHovered": "#1651aa",
-    "primaryButtonBackgroundPressed": "#13458f",
+    "primaryButtonBackgroundHovered": "#106ebe",
+    "primaryButtonBackgroundPressed": "#005a9e",
     "primaryButtonBorder": "transparent",
     "primaryButtonBorderFocused": "transparent",
     "primaryButtonText": "#ffffff",

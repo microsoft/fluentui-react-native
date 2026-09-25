@@ -104,7 +104,7 @@ describe('Storybook app theme root', () => {
     const state = themes[themes.length - 1];
     const calls = jest.mocked(StorybookUIComponent).mock.calls;
     const theme = calls[calls.length - 1][0].theme;
-    expect(theme.background.content).toBe(state.tokens.color.surfaceNeutralFar);
+    expect(theme.background.content).toBe(state.tokens.color.surfaceNeutralFarther);
     expect(theme.background.content).toBe(theme.background.preview);
     expect(theme.background.content).not.toBe(state.tokens.color.backgroundNeutralSubtle);
   });
@@ -121,11 +121,10 @@ describe('Storybook app theme root', () => {
   });
 
   it('switches chrome and story colors together without recreating Storybook or resetting the scene', async () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation();
     const { App, roots, themes, mounted, unmounted, getStorybookUI } = createTestApp();
     const scene = await render(<App />);
     const root = roots[0];
-    const defaultBackground = themes[0].tokens.color.surfaceNeutralFar;
+    const defaultBackground = themes[0].tokens.color.surfaceNeutralFarther;
     const backgrounds: Record<string, unknown> = {};
     await fireEvent(scene.getByTestId('test-app-root'), 'keyDownCapture', { nativeEvent: { key: 'Tab' } });
 
@@ -144,9 +143,9 @@ describe('Storybook app theme root', () => {
       const foreground = theme.base === 'dark' ? state.tokens.color.fixedWhite : state.tokens.color.fixedBlack;
       const background = theme.base === 'dark' ? state.tokens.color.fixedBlack : state.tokens.color.fixedWhite;
       const literal = (value: unknown, fallback: unknown) => (typeof value === 'string' ? value : fallback);
-      expect(theme.background.app).toBe(literal(state.tokens.color.surfaceNeutralFar, background));
-      expect(theme.background.content).toBe(literal(state.tokens.color.surfaceNeutralFar, background));
-      expect(theme.background.preview).toBe(literal(state.tokens.color.surfaceNeutralFar, background));
+      expect(theme.background.app).toBe(literal(state.tokens.color.surfaceNeutralFarther, background));
+      expect(theme.background.content).toBe(literal(state.tokens.color.surfaceNeutralFarther, background));
+      expect(theme.background.preview).toBe(literal(state.tokens.color.surfaceNeutralFarther, background));
       expect(theme.color.defaultText).toBe(literal(state.tokens.color.foregroundNeutralPrimary, foreground));
       expect(theme.input.color).toBe(literal(state.tokens.color.foregroundNeutralPrimary, foreground));
       expect(theme.button.background).toBe(literal(state.tokens.color.backgroundNeutralLoud, background));
@@ -156,7 +155,6 @@ describe('Storybook app theme root', () => {
 
     expect(backgrounds.dark).not.toBe(backgrounds.light);
     expect(backgrounds.none).toBe(defaultBackground);
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('Storybook chrome cannot resolve native system colors'));
     expect(getStorybookUI).toHaveBeenCalledTimes(1);
     expect(mounted).toHaveBeenCalledTimes(1);
     expect(unmounted).not.toHaveBeenCalled();

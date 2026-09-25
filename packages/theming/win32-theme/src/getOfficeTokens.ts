@@ -4,8 +4,11 @@ function appearanceFromOfficeTheme(officeTheme: string): EffectiveAppearance {
   if (officeTheme === 'White' || officeTheme === 'Colorful') {
     return { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' };
   }
-  if (officeTheme === 'DarkGray' || officeTheme === 'Black') {
+  if (officeTheme === 'DarkGray') {
     return { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'base' };
+  }
+  if (officeTheme === 'Black') {
+    return { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'elevated' };
   }
   if (officeTheme === 'HighContrast') {
     return { colorScheme: 'light', contrast: 'highContrast', interfaceLevel: 'base' };

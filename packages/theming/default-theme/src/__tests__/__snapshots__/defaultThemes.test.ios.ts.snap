@@ -769,13 +769,13 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "shadow16": {
       "ambient": {
         "blur": 2,
-        "color": "#0000001f",
+        "color": "#0000003d",
         "x": 0,
         "y": 0,
       },
       "key": {
         "blur": 16,
-        "color": "#00000024",
+        "color": "#00000047",
         "x": 0,
         "y": 8,
       },
@@ -797,13 +797,13 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "shadow2": {
       "ambient": {
         "blur": 2,
-        "color": "#0000001f",
+        "color": "#0000003d",
         "x": 0,
         "y": 0,
       },
       "key": {
         "blur": 2,
-        "color": "#00000024",
+        "color": "#00000047",
         "x": 0,
         "y": 1,
       },
@@ -811,13 +811,13 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "shadow28": {
       "ambient": {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#00000066",
         "x": 0,
         "y": 0,
       },
       "key": {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#0000007a",
         "x": 0,
         "y": 14,
       },
@@ -853,13 +853,13 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "shadow4": {
       "ambient": {
         "blur": 2,
-        "color": "#0000001f",
+        "color": "#0000003d",
         "x": 0,
         "y": 0,
       },
       "key": {
         "blur": 4,
-        "color": "#00000024",
+        "color": "#00000047",
         "x": 0,
         "y": 2,
       },
@@ -881,13 +881,13 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "shadow64": {
       "ambient": {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#00000066",
         "x": 0,
         "y": 0,
       },
       "key": {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#0000007a",
         "x": 0,
         "y": 32,
       },
@@ -909,13 +909,13 @@ exports[`defaultFluentHighConstrastTheme 1`] = `
     "shadow8": {
       "ambient": {
         "blur": 2,
-        "color": "#0000001f",
+        "color": "#0000003d",
         "x": 0,
         "y": 0,
       },
       "key": {
         "blur": 8,
-        "color": "#00000024",
+        "color": "#00000047",
         "x": 0,
         "y": 4,
       },

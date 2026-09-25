@@ -1,27 +1,18 @@
 import type { AliasColorTokens } from '../theming/types/Color.types';
 import type { ThemeShadowDefinition } from '../theming/types/Shadow.types';
-import blackAliasTokens from '@fluentui-react-native/design-tokens-win32/black/tokens-aliases.json';
-import colorfulAliasTokens from '@fluentui-react-native/design-tokens-win32/colorful/tokens-aliases.json';
-import darkGrayAliasTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-aliases.json';
-import rawHcAliasTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-aliases.json';
+import { darkAliasColors, darkGrayAliasColors, hcAliasColors, lightAliasColors } from '../tokens/generated/aliases';
 import { darkShadows, hcShadows, lightShadows, darkGrayShadows } from '../tokens/generated/shadows';
 import type { EffectiveAppearance } from './appearance.types';
-import { processAliasTokens, transformWin32PlatformColorName } from './processAliasTokens';
-
-// Win32 native apps reference system colors by their raw resource name (no `SystemColor...Color` wrapping).
-const hcAliasTokens = processAliasTokens(rawHcAliasTokens, transformWin32PlatformColorName);
 
 export function getAliasTokens(appearance: EffectiveAppearance): AliasColorTokens {
   if (appearance.contrast === 'highContrast') {
-    return hcAliasTokens as unknown as AliasColorTokens;
+    return hcAliasColors;
   }
 
   if (appearance.colorScheme === 'dark') {
-    return appearance.interfaceLevel === 'elevated'
-      ? (blackAliasTokens as unknown as AliasColorTokens)
-      : (darkGrayAliasTokens as unknown as AliasColorTokens);
+    return appearance.interfaceLevel === 'elevated' ? darkAliasColors : darkGrayAliasColors;
   }
-  return colorfulAliasTokens as unknown as AliasColorTokens;
+  return lightAliasColors;
 }
 
 export function getShadowTokens(appearance: EffectiveAppearance): ThemeShadowDefinition {

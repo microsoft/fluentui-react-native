@@ -39,6 +39,30 @@
       "import": "./lib/appearance/index.js",
       "default": "./src/appearance/index.ts"
     },
+    "./tokens/generated/aliases": {
+      "types": "./lib/tokens/generated/aliases.d.ts",
+      "react-native": "./src/tokens/generated/aliases.ts",
+      "import": "./lib/tokens/generated/aliases.js",
+      "default": "./src/tokens/generated/aliases.ts"
+    },
+    "./tokens/generated/aliases.android": {
+      "types": "./lib/tokens/generated/aliases.android.d.ts",
+      "react-native": "./src/tokens/generated/aliases.android.ts",
+      "import": "./lib/tokens/generated/aliases.android.js",
+      "default": "./src/tokens/generated/aliases.android.ts"
+    },
+    "./tokens/generated/aliases.ios": {
+      "types": "./lib/tokens/generated/aliases.ios.d.ts",
+      "react-native": "./src/tokens/generated/aliases.ios.ts",
+      "import": "./lib/tokens/generated/aliases.ios.js",
+      "default": "./src/tokens/generated/aliases.ios.ts"
+    },
+    "./tokens/generated/aliases.macos": {
+      "types": "./lib/tokens/generated/aliases.macos.d.ts",
+      "react-native": "./src/tokens/generated/aliases.macos.ts",
+      "import": "./lib/tokens/generated/aliases.macos.js",
+      "default": "./src/tokens/generated/aliases.macos.ts"
+    },
     "./tokens/generated/shadows": {
       "types": "./lib/tokens/generated/shadows.d.ts",
       "react-native": "./src/tokens/generated/shadows.ts",

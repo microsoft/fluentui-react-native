@@ -75,11 +75,11 @@ function storybookThemeFromThemeState({ appearance, highContrast, tokens }: Them
     },
     background: {
       ...base.background,
-      app: color('surfaceNeutralFar', 'background'),
+      app: color('surfaceNeutralFarther', 'background'),
       bar: color('backgroundNeutralSubtle', 'background'),
       // LiteUI and StoryView paint the canvas with content rather than preview.
-      content: color('surfaceNeutralFar', 'background'),
-      preview: color('surfaceNeutralFar', 'background'),
+      content: color('surfaceNeutralFarther', 'background'),
+      preview: color('surfaceNeutralFarther', 'background'),
       hoverable: color('backgroundNeutralSoft', 'background'),
       positive: color('backgroundSuccessSubtle', 'background'),
       negative: color('backgroundDangerSubtle', 'background'),

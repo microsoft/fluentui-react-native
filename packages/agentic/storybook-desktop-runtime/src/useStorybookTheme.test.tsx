@@ -23,7 +23,7 @@ describe('Storybook theme palette', () => {
     const themes: Theme[] = [];
     const states: ThemeState[] = [];
     const source = new FlexThemeReference({
-      base: { color: { surfaceNeutralFar: '#123456', foregroundNeutralPrimary: '#abcdef' } },
+      base: { color: { surfaceNeutralFarther: '#123456', foregroundNeutralPrimary: '#abcdef' } },
     });
     const scene = await render(
       <ThemedRoot theme={source}>
@@ -42,7 +42,7 @@ describe('Storybook theme palette', () => {
     );
     expect(themes[themes.length - 1]).toBe(themes[0]);
 
-    await act(() => source.update({ color: { surfaceNeutralFar: '#654321' } }));
+    await act(() => source.update({ color: { surfaceNeutralFarther: '#654321' } }));
     expect(themes[themes.length - 1].background.app).toBe('#654321');
     expect(themes[themes.length - 1].background.content).toBe('#654321');
     expect(themes[themes.length - 1].background.preview).toBe('#654321');
@@ -76,7 +76,7 @@ describe('Storybook theme palette', () => {
     const states: ThemeState[] = [];
     const source = new FlexThemeReference({
       appearance: { colorScheme, contrast },
-      base: { color: { surfaceNeutralFar: PlatformColor('windowBackgroundColor') } },
+      base: { color: { surfaceNeutralFarther: PlatformColor('windowBackgroundColor') } },
     });
     await render(
       <ThemedRoot theme={source}>
@@ -87,6 +87,6 @@ describe('Storybook theme palette', () => {
     expect(themes[0].background.content).toBe(states[0].tokens.color[fallback]);
     expect(themes[0].background.preview).toBe(states[0].tokens.color[fallback]);
     expect(warn).toHaveBeenCalledTimes(1);
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('surfaceNeutralFar'));
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('surfaceNeutralFarther'));
   });
 });

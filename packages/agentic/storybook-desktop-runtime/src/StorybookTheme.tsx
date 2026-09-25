@@ -80,7 +80,7 @@ const getStyles = themedStyleSheetFactory('StorybookTheme', ({ tokens }) =>
   StyleSheet.create({
     root: {
       flex: 1,
-      backgroundColor: tokens.color.surfaceNeutralFar,
+      backgroundColor: tokens.color.surfaceNeutralFarther,
     },
     header: {
       alignItems: 'center',

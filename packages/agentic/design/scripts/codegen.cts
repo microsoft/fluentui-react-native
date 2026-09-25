@@ -1,5 +1,6 @@
 const { processPlatformJsonFiles, outputCodegenFile } = require('@fluentui-react-native/scripts');
 const path = require('node:path');
+const { codegenAliases } = require('./aliases.cts');
 const { assertMappingsConsistent, writeMappingProjections } = require('./token-mappings/check-mappings.cjs');
 const { codegenShadows } = require('./shadows.cts');
 
@@ -73,6 +74,7 @@ function main() {
   writeMappingProjections();
   assertMappingsConsistent();
   processGlobals();
+  codegenAliases();
   codegenShadows();
 }
 
