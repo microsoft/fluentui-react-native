@@ -145,6 +145,10 @@ export class CodegenFile {
         }
       },
       outputText() {
+        if (entries.length === 1 && !isObjectValue(entries[0])) {
+          // if the only entry is a single spread, just assign it directly
+          return getExportObjString(name, local, tsType) + ' = ' + entries[0].spread + ';';
+        }
         return getExportObjString(name, local, tsType) + ' = ' + writeArrayOrObjContents(entries.map(getValueText), 'object') + ';';
       },
     };

@@ -55,7 +55,7 @@ const shadowsCommon = {
   shadow64brand: shadow11,
 };
 
-export const lightShadows = { ...shadowsCommon };
-export const darkShadows = { ...shadowsCommon };
+export const lightShadows = shadowsCommon;
+export const darkShadows = shadowsCommon;
 
 
