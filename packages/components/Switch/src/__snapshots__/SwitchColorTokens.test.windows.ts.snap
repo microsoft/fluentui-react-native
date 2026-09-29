@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Switch color tokens on Windows 1`] = `
+{
+  "color": "#666666",
+  "focusStrokeColor": "#00000000",
+  "focused": {
+    "focusStrokeColor": "#969696",
+  },
+  "toggleOff": {
+    "borderColor": "#969696",
+    "disabled": {
+      "borderColor": "#D2D2D2",
+      "thumbColor": "#D2D2D2",
+      "trackColor": "#E6E6E6",
+    },
+    "hovered": {
+      "borderColor": "#B1B1B1",
+      "thumbColor": "#B1B1B1",
+      "trackColor": "#D2D2D2",
+    },
+    "pressed": {
+      "borderColor": "#737373",
+      "thumbColor": "#737373",
+      "trackColor": "#B1B1B1",
+    },
+    "thumbColor": "#969696",
+    "trackColor": "#FFFFFF",
+  },
+  "toggleOn": {
+    "borderColor": "#D83B01",
+    "disabled": {
+      "borderColor": "#B1B1B1",
+      "thumbColor": "#D2D2D2",
+      "trackColor": "#E6E6E6",
+    },
+    "hovered": {
+      "borderColor": "#EA6115",
+      "thumbColor": "#FFFFFF",
+      "trackColor": "#EA6115",
+    },
+    "pressed": {
+      "borderColor": "#A22C01",
+      "thumbColor": "#FFFFFF",
+      "trackColor": "#A22C01",
+    },
+    "thumbColor": "#ffffff",
+    "trackColor": "#D83B01",
+  },
+}
+`;

@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu color tokens pins MenuDivider colors 1`] = `
+{
+  "backgroundColor": "#969696",
+}
+`;
+
+exports[`Menu color tokens pins MenuGroupHeader colors 1`] = `
+{
+  "color": "#666666",
+}
+`;
+
+exports[`Menu color tokens pins MenuItem colors 1`] = `
+{
+  "backgroundColor": "antiquewhite",
+  "color": "#262626",
+  "disabled": {
+    "backgroundColor": "antiquewhite",
+    "color": "#B1B1B1",
+    "iconColor": "#B1B1B1",
+    "submenuIndicatorColor": "#B1B1B1",
+  },
+  "focused": {
+    "backgroundColor": "#D2D2D2",
+    "color": "#262626",
+    "iconColor": "#262626",
+    "submenuIndicatorColor": "#262626",
+  },
+  "iconColor": "#262626",
+  "pressed": {
+    "backgroundColor": "#B1B1B1",
+    "color": "#262626",
+    "iconColor": "#262626",
+    "submenuIndicatorColor": "#262626",
+  },
+  "submenuIndicatorColor": "#262626",
+}
+`;
+
+exports[`Menu color tokens pins MenuItemCheckbox colors 1`] = `
+{
+  "backgroundColor": "antiquewhite",
+  "checked": {
+    "checkmarkColor": "#262626",
+  },
+  "color": "#262626",
+  "disabled": {
+    "backgroundColor": "antiquewhite",
+    "checked": {
+      "checkmarkColor": "#B1B1B1",
+    },
+    "color": "#B1B1B1",
+    "iconColor": "#B1B1B1",
+  },
+  "focused": {
+    "backgroundColor": "#D2D2D2",
+    "checked": {
+      "checkmarkColor": "#262626",
+    },
+    "color": "#262626",
+    "iconColor": "#262626",
+  },
+  "iconColor": "#262626",
+  "pressed": {
+    "backgroundColor": "#B1B1B1",
+    "checked": {
+      "checkmarkColor": "#262626",
+    },
+    "color": "#262626",
+    "iconColor": "#262626",
+  },
+}
+`;
+
+exports[`Menu color tokens pins MenuItemRadio colors 1`] = `
+{
+  "backgroundColor": "antiquewhite",
+  "checked": {
+    "checkmarkColor": "#262626",
+  },
+  "color": "#262626",
+  "disabled": {
+    "backgroundColor": "antiquewhite",
+    "checked": {
+      "checkmarkColor": "#B1B1B1",
+    },
+    "color": "#B1B1B1",
+    "iconColor": "#B1B1B1",
+  },
+  "focused": {
+    "backgroundColor": "#D2D2D2",
+    "checked": {
+      "checkmarkColor": "#262626",
+    },
+    "color": "#262626",
+    "iconColor": "#262626",
+  },
+  "iconColor": "#262626",
+  "pressed": {
+    "backgroundColor": "#B1B1B1",
+    "checked": {
+      "checkmarkColor": "#262626",
+    },
+    "color": "#262626",
+    "iconColor": "#262626",
+  },
+}
+`;
+
+exports[`Menu color tokens pins MenuList colors 1`] = `
+{
+  "backgroundColor": "antiquewhite",
+}
+`;
+
+exports[`Menu color tokens pins MenuPopover colors 1`] = `
+{
+  "borderColor": "#969696",
+}
+`;

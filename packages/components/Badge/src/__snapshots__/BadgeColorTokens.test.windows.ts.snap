@@ -1,0 +1,442 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Badge color tokens on Windows 1`] = `
+{
+  "backgroundColor": "#185abd",
+  "borderColor": "#00000000",
+  "brand": {
+    "filled": {
+      "backgroundColor": "#185abd",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "ghost": {
+      "color": "#aec6eb",
+      "iconColor": "#aec6eb",
+    },
+    "outline": {
+      "borderColor": "#aec6eb",
+      "color": "#aec6eb",
+      "iconColor": "#aec6eb",
+    },
+    "tint": {
+      "backgroundColor": "#d2e0f4",
+      "borderColor": "#d2e0f4",
+      "color": "#d2e0f4",
+      "iconColor": "#d2e0f4",
+    },
+  },
+  "color": "#FFFFFF",
+  "danger": {
+    "filled": {
+      "backgroundColor": "#d13438",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "ghost": {
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+    "outline": {
+      "borderColor": "#d13438",
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+    "tint": {
+      "backgroundColor": "#fdf6f6",
+      "borderColor": "#f1bbbc",
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+  },
+  "filled": {
+    "borderColor": "#00000000",
+  },
+  "ghost": {
+    "backgroundColor": "#00000000",
+    "borderColor": "#00000000",
+  },
+  "important": {
+    "filled": {
+      "backgroundColor": "#262626",
+      "color": "antiquewhite",
+      "iconColor": "antiquewhite",
+    },
+    "ghost": {
+      "color": "#262626",
+      "iconColor": "#262626",
+    },
+    "outline": {
+      "borderColor": "#969696",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "tint": {
+      "backgroundColor": "#616161",
+      "borderColor": "#969696",
+      "color": "antiquewhite",
+      "iconColor": "antiquewhite",
+    },
+  },
+  "informative": {
+    "filled": {
+      "backgroundColor": "#ebebeb",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "ghost": {
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "outline": {
+      "borderColor": "#262626",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "tint": {
+      "backgroundColor": "#f0f0f0",
+      "borderColor": "#262626",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+  },
+  "outline": {
+    "backgroundColor": "#00000000",
+  },
+  "severe": {
+    "filled": {
+      "backgroundColor": "#da3b01",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "ghost": {
+      "color": "#da3b01",
+      "iconColor": "#da3b01",
+    },
+    "outline": {
+      "borderColor": "#da3b01",
+      "color": "#da3b01",
+      "iconColor": "#da3b01",
+    },
+    "tint": {
+      "backgroundColor": "#fdf6f3",
+      "borderColor": "#f4beaa",
+      "color": "#c33400",
+      "iconColor": "#c33400",
+    },
+  },
+  "subtle": {
+    "filled": {
+      "backgroundColor": "antiquewhite",
+      "color": "#262626",
+      "iconColor": "#262626",
+    },
+    "ghost": {
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "outline": {
+      "borderColor": "#FFFFFF",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "tint": {
+      "backgroundColor": "antiquewhite",
+      "borderColor": "#262626",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+  },
+  "success": {
+    "filled": {
+      "backgroundColor": "#107c10",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "ghost": {
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+    "outline": {
+      "borderColor": "#107c10",
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+    "tint": {
+      "backgroundColor": "#f1faf1",
+      "borderColor": "#9fd89f",
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+  },
+  "warning": {
+    "filled": {
+      "backgroundColor": "#fde300",
+      "color": "#242424",
+      "iconColor": "#242424",
+    },
+    "ghost": {
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+    "outline": {
+      "borderColor": "#817400",
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+    "tint": {
+      "backgroundColor": "#fffef5",
+      "borderColor": "#fef7b2",
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+  },
+}
+`;
+
+exports[`pins CounterBadge color tokens on Windows 1`] = `
+{
+  "backgroundColor": "#185abd",
+  "borderColor": "#00000000",
+  "brand": {
+    "filled": {
+      "backgroundColor": "#185abd",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "ghost": {
+      "color": "#aec6eb",
+      "iconColor": "#aec6eb",
+    },
+    "outline": {
+      "borderColor": "#aec6eb",
+      "color": "#aec6eb",
+      "iconColor": "#aec6eb",
+    },
+    "tint": {
+      "backgroundColor": "#d2e0f4",
+      "borderColor": "#d2e0f4",
+      "color": "#d2e0f4",
+      "iconColor": "#d2e0f4",
+    },
+  },
+  "color": "#FFFFFF",
+  "danger": {
+    "filled": {
+      "backgroundColor": "#d13438",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "ghost": {
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+    "outline": {
+      "borderColor": "#d13438",
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+    "tint": {
+      "backgroundColor": "#fdf6f6",
+      "borderColor": "#f1bbbc",
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+  },
+  "filled": {
+    "borderColor": "#00000000",
+  },
+  "ghost": {
+    "backgroundColor": "#00000000",
+    "borderColor": "#00000000",
+  },
+  "important": {
+    "filled": {
+      "backgroundColor": "#262626",
+      "color": "antiquewhite",
+      "iconColor": "antiquewhite",
+    },
+    "ghost": {
+      "color": "#262626",
+      "iconColor": "#262626",
+    },
+    "outline": {
+      "borderColor": "#969696",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "tint": {
+      "backgroundColor": "#616161",
+      "borderColor": "#969696",
+      "color": "antiquewhite",
+      "iconColor": "antiquewhite",
+    },
+  },
+  "informative": {
+    "filled": {
+      "backgroundColor": "#ebebeb",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "ghost": {
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "outline": {
+      "borderColor": "#262626",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "tint": {
+      "backgroundColor": "#f0f0f0",
+      "borderColor": "#262626",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+  },
+  "outline": {
+    "backgroundColor": "#00000000",
+  },
+  "severe": {
+    "filled": {
+      "backgroundColor": "#da3b01",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "ghost": {
+      "color": "#da3b01",
+      "iconColor": "#da3b01",
+    },
+    "outline": {
+      "borderColor": "#da3b01",
+      "color": "#da3b01",
+      "iconColor": "#da3b01",
+    },
+    "tint": {
+      "backgroundColor": "#fdf6f3",
+      "borderColor": "#f4beaa",
+      "color": "#c33400",
+      "iconColor": "#c33400",
+    },
+  },
+  "subtle": {
+    "filled": {
+      "backgroundColor": "antiquewhite",
+      "color": "#262626",
+      "iconColor": "#262626",
+    },
+    "ghost": {
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "outline": {
+      "borderColor": "#FFFFFF",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "tint": {
+      "backgroundColor": "antiquewhite",
+      "borderColor": "#262626",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+  },
+  "success": {
+    "filled": {
+      "backgroundColor": "#107c10",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "ghost": {
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+    "outline": {
+      "borderColor": "#107c10",
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+    "tint": {
+      "backgroundColor": "#f1faf1",
+      "borderColor": "#9fd89f",
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+  },
+  "warning": {
+    "filled": {
+      "backgroundColor": "#fde300",
+      "color": "#242424",
+      "iconColor": "#242424",
+    },
+    "ghost": {
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+    "outline": {
+      "borderColor": "#817400",
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+    "tint": {
+      "backgroundColor": "#fffef5",
+      "borderColor": "#fef7b2",
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+  },
+}
+`;
+
+exports[`pins PresenceBadge color tokens on Windows 1`] = `
+{
+  "available": {
+    "iconColor": "#13a10e",
+    "outOfOffice": {
+      "iconColor": "#13a10e",
+    },
+  },
+  "away": {
+    "iconColor": "#eaa300",
+    "outOfOffice": {
+      "iconColor": "#c239b3",
+    },
+  },
+  "backgroundColor": "antiquewhite",
+  "blocked": {
+    "iconColor": "#d13438",
+    "outOfOffice": {
+      "iconColor": "#d13438",
+    },
+  },
+  "borderColor": "#ffffff",
+  "busy": {
+    "iconColor": "#d13438",
+    "outOfOffice": {
+      "iconColor": "#d13438",
+    },
+  },
+  "doNotDisturb": {
+    "iconColor": "#d13438",
+    "outOfOffice": {
+      "iconColor": "#d13438",
+    },
+  },
+  "iconColor": "#13a10e",
+  "offline": {
+    "iconColor": "#616161",
+  },
+  "outOfOffice": {
+    "iconColor": "#c239b3",
+    "outOfOffice": {
+      "iconColor": "#c239b3",
+    },
+  },
+  "unknown": {
+    "iconColor": "#d13438",
+    "outOfOffice": {
+      "iconColor": "#d13438",
+    },
+  },
+}
+`;

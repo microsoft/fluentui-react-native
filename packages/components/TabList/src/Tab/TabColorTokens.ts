@@ -1,4 +1,5 @@
 import type { Theme } from '@fluentui-react-native/framework';
+import { isHighContrast } from '@fluentui-react-native/design/theming';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { TabTokens } from '..';
@@ -35,30 +36,30 @@ export const defaultTabColorTokens: TokenSettings<TabTokens, Theme> = (t: Theme)
       iconColor: t.colors.compoundBrandForeground1,
       indicatorColor: t.colors.compoundBrandStroke1,
       pressed: {
-        color: t.colors.neutralForeground1Pressed,
-        iconColor: t.colors.compoundBrandForeground1Pressed,
+        color: isHighContrast(t) ? t.colors.neutralForeground2 : t.colors.neutralForeground1Pressed,
+        iconColor: isHighContrast(t) ? t.colors.neutralForeground2 : t.colors.compoundBrandForeground1Pressed,
         indicatorColor: t.colors.compoundBrandStroke1Pressed,
       },
     },
     disabled: {
-      color: t.colors.neutralForegroundDisabled,
-      iconColor: t.colors.neutralForegroundDisabled,
+      color: isHighContrast(t) ? t.colors.neutralStrokeDisabled : t.colors.neutralForegroundDisabled,
+      iconColor: isHighContrast(t) ? t.colors.neutralStrokeDisabled : t.colors.neutralForegroundDisabled,
       selected: {
-        color: t.colors.neutralForegroundDisabled,
-        iconColor: t.colors.neutralForegroundDisabled,
-        indicatorColor: t.colors.neutralForegroundDisabled,
+        color: isHighContrast(t) ? t.colors.neutralStrokeDisabled : t.colors.neutralForegroundDisabled,
+        iconColor: isHighContrast(t) ? t.colors.neutralStrokeDisabled : t.colors.neutralForegroundDisabled,
+        indicatorColor: isHighContrast(t) ? t.colors.neutralStrokeDisabled : t.colors.neutralForegroundDisabled,
       },
     },
     hovered: {
-      color: t.colors.neutralForeground2Hover,
-      iconColor: t.colors.neutralForeground2Hover,
-      indicatorColor: t.colors.neutralStroke1Hover,
+      color: isHighContrast(t) ? t.colors.neutralForeground2 : t.colors.neutralForeground2Hover,
+      iconColor: isHighContrast(t) ? t.colors.compoundBrandForeground1Hover : t.colors.neutralForeground2Hover,
+      indicatorColor: isHighContrast(t) ? t.colors.compoundBrandStroke1Hover : t.colors.neutralStroke1Hover,
       selected: {
-        color: t.colors.neutralForeground1Hover,
-        iconColor: t.colors.compoundBrandForeground1Hover,
+        color: isHighContrast(t) ? t.colors.neutralForeground2 : t.colors.neutralForeground1Hover,
+        iconColor: isHighContrast(t) ? t.colors.neutralForeground2 : t.colors.compoundBrandForeground1Hover,
         indicatorColor: t.colors.compoundBrandStroke1Hover,
         subtle: {
-          indicatorColor: t.colors.compoundBrandStroke1Hover,
+          indicatorColor: isHighContrast(t) ? t.colors.neutralStroke1 : t.colors.compoundBrandStroke1Hover,
         },
       },
       disabled: {
@@ -69,13 +70,13 @@ export const defaultTabColorTokens: TokenSettings<TabTokens, Theme> = (t: Theme)
       },
       subtle: {
         backgroundColor: t.colors.subtleBackgroundHover,
-        indicatorColor: t.colors.neutralStroke1Hover,
+        indicatorColor: isHighContrast(t) ? t.colors.neutralStroke1 : t.colors.neutralStroke1Hover,
       },
     },
     pressed: {
-      color: t.colors.neutralForeground2Pressed,
-      iconColor: t.colors.neutralForeground2Pressed,
-      indicatorColor: t.colors.neutralStroke1Pressed,
+      color: isHighContrast(t) ? t.colors.neutralForeground2 : t.colors.neutralForeground2Pressed,
+      iconColor: isHighContrast(t) ? t.colors.neutralForeground2 : t.colors.neutralForeground2Pressed,
+      indicatorColor: isHighContrast(t) ? t.colors.compoundBrandBackground1Pressed : t.colors.neutralStroke1Pressed,
       transparent: {
         backgroundColor: t.colors.transparentBackgroundPressed,
       },
@@ -84,6 +85,6 @@ export const defaultTabColorTokens: TokenSettings<TabTokens, Theme> = (t: Theme)
       },
     },
     focused: {
-      borderColor: t.colors.neutralForeground1,
+      borderColor: isHighContrast(t) ? t.colors.compoundBrandStroke1 : t.colors.neutralForeground1,
     },
   }) as TabTokens;
