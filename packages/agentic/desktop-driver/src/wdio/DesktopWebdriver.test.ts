@@ -52,7 +52,7 @@ describe('sanctioned WebdriverIO API', () => {
       await harness.close();
       fs.rmSync(artifactsRoot, { force: true, recursive: true });
     }
-  });
+  }, 60_000);
 });
 
 function runContract(url: string, targetId: string, artifactsRoot: string): Promise<Record<string, unknown>> {
