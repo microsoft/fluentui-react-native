@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { createEsbuildOptions, externalPackages, getResolveExtensions } from './esbuild-config.mjs';
+import { createEsbuildOptions, externalPackages, getResolveExtensions } from './esbuild-config.mts';
 
 describe('getResolveExtensions', () => {
   it('prefers the requested platform, then native, then generic modules', () => {

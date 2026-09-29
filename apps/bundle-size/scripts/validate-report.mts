@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { validateBundleSizeReport } from './post-pr-comment.mjs';
+import { validateBundleSizeReport } from './post-pr-comment.mts';
 
 const workspaceRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const reportPath = process.argv[2] ? resolve(process.argv[2]) : join(workspaceRoot, 'dist', 'bundle-size', 'report.md');

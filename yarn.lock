@@ -2755,6 +2755,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.81.0"
     "@rnx-kit/tools-filesystem": "npm:^0.2.0"
     "@rnx-kit/tools-formatting": "npm:^0.1.0"
+    "@rnx-kit/tsconfig": "catalog:"
     "@types/react": "npm:~19.1.4"
     esbuild: "npm:^0.28.2"
     react: "npm:19.1.4"

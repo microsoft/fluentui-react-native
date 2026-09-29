@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { formatBundleSizeTable, formatSize } from './format.mjs';
+import { formatBundleSizeTable, formatSize } from './format.mts';
 
 describe('formatSize', () => {
   it('formats bytes below 1000 without scaling', () => {

@@ -5,6 +5,9 @@
       "path": "apps/E2E/tsconfig.json"
     },
     {
+      "path": "apps/bundle-size/tsconfig.json"
+    },
+    {
       "path": "apps/fluent-tester/tsconfig.json"
     },
     {
@@ -20,16 +23,16 @@
       "path": "packages/agentic/components/tsconfig.json"
     },
     {
-      "path": "packages/agentic/desktop-driver/tsconfig.json"
-    },
-    {
       "path": "packages/agentic/design/tsconfig.json"
     },
     {
-      "path": "packages/agentic/storybook-desktop-runtime/tsconfig.json"
+      "path": "packages/agentic/desktop-driver/tsconfig.json"
     },
     {
       "path": "packages/agentic/storybook-desktop/tsconfig.json"
+    },
+    {
+      "path": "packages/agentic/storybook-desktop-runtime/tsconfig.json"
     },
     {
       "path": "packages/codemods/tsconfig.json"
@@ -206,13 +209,13 @@
       "path": "packages/native/Callout/tsconfig.json"
     },
     {
+      "path": "packages/shim/theme/tsconfig.json"
+    },
+    {
       "path": "packages/shim/theme-tokens/tsconfig.json"
     },
     {
       "path": "packages/shim/theme-types/tsconfig.json"
-    },
-    {
-      "path": "packages/shim/theme/tsconfig.json"
     },
     {
       "path": "packages/shim/themed-stylesheet/tsconfig.json"

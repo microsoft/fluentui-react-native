@@ -1,0 +1,15 @@
+{
+  "extends": "@rnx-kit/tsconfig/tsconfig.node.json",
+  "compilerOptions": {
+    "rootDir": "..",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2022",
+    "composite": true,
+    "tsBuildInfoFile": "../.cache/tsconfig.tsbuildinfo"
+  },
+  "include": ["../scripts/**/*.mts"],
+  "exclude": ["../node_modules", "../lib", "../dist"]
+}

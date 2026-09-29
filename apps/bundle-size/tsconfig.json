@@ -1,0 +1,20 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "composite": true
+  },
+  "references": [
+    {
+      "path": "../../packages/agentic/components/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/design/tsconfig.json"
+    },
+    {
+      "path": "../../scripts/tsconfig.json"
+    },
+    {
+      "path": "./targets/tsconfig.check.json"
+    }
+  ]
+}

@@ -1,13 +1,15 @@
 import { readJSONFileSync, writeJSONFileSync } from '@rnx-kit/tools-filesystem';
 import { build } from 'esbuild';
+import type { Metafile } from 'esbuild';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
-import { createEsbuildOptions } from './esbuild-config.mjs';
-import { formatBundleSizeTable, formatModuleComparison, formatSizeComparison, groupComparisonsByScenario } from './format.mjs';
+import { createEsbuildOptions } from './esbuild-config.mts';
+import { formatBundleSizeTable, formatModuleComparison, formatSizeComparison, groupComparisonsByScenario } from './format.mts';
+import type { BaselineResult, Comparison, Measurement, Scenario, ScenarioComparison, ScenarioConfig, ScenarioImport } from './types.mts';
 
 const workspaceRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const repositoryRoot = dirname(dirname(workspaceRoot));
@@ -16,11 +18,23 @@ const defaultBaselinePath = join(workspaceRoot, 'baseline.json');
 const outputRoot = join(workspaceRoot, 'dist', 'bundle-size');
 const entryRoot = join(outputRoot, 'entries');
 
-function parseArgs(args) {
-  const options = { baseline: defaultBaselinePath, config: configPath, platforms: undefined, updateBaseline: false };
+interface MeasureOptions {
+  baseline: string;
+  config: string;
+  platforms?: string[];
+  updateBaseline: boolean;
+}
+
+function parseArgs(args: string[]): MeasureOptions {
+  const options: MeasureOptions = { baseline: defaultBaselinePath, config: configPath, updateBaseline: false };
 
   for (let index = 0; index < args.length; index += 1) {
     const argument = args[index];
+    if (argument === '--baseline' || argument === '--config' || argument === '--platform') {
+      if (!args[index + 1]) {
+        throw new Error(`Missing value for ${argument}`);
+      }
+    }
     if (argument === '--baseline') {
       options.baseline = resolve(args[++index]);
     } else if (argument === '--config') {
@@ -38,11 +52,12 @@ function parseArgs(args) {
   return options;
 }
 
-function createEntry(scenario) {
-  const lines = [];
-  const targets = [];
+function createEntry(scenario: Scenario): string {
+  const lines: string[] = [];
+  const targets: string[] = [];
 
-  const imports = scenario.imports ?? (scenario.module ? [scenario] : []);
+  const imports: ScenarioImport[] =
+    scenario.imports ?? (scenario.module ? [{ module: scenario.module, namespace: scenario.namespace, exports: scenario.exports }] : []);
   for (const [index, moduleImport] of imports.entries()) {
     if (moduleImport.namespace) {
       const target = `bundleSizeTarget${index}`;
@@ -63,7 +78,7 @@ function createEntry(scenario) {
   return `${lines.join('\n')}\n`;
 }
 
-function getWorkspacePackage(source) {
+function getWorkspacePackage(source: string): string | undefined {
   const packagesRoot = join(repositoryRoot, 'packages');
   const sourcePath = isAbsolute(source) ? source : resolve(workspaceRoot, source);
   if (!sourcePath.startsWith(packagesRoot)) {
@@ -82,10 +97,10 @@ function getWorkspacePackage(source) {
   return undefined;
 }
 
-function getWorkspaceContributions(metafile) {
-  const packageModules = new Map();
-  const packageBytes = new Map();
-  const contributingInputs = new Map();
+function getWorkspaceContributions(metafile: Metafile) {
+  const packageModules = new Map<string, number>();
+  const packageBytes = new Map<string, number>();
+  const contributingInputs = new Map<string, number>();
 
   for (const output of Object.values(metafile.outputs)) {
     for (const [source, contribution] of Object.entries(output.inputs ?? {})) {
@@ -103,7 +118,8 @@ function getWorkspaceContributions(metafile) {
     }
   }
 
-  const sortPackages = (entries) => Object.fromEntries([...entries].sort(([left], [right]) => left.localeCompare(right)));
+  const sortPackages = (entries: Map<string, number>): Record<string, number> =>
+    Object.fromEntries([...entries].sort(([left], [right]) => left.localeCompare(right)));
   return {
     moduleCount: contributingInputs.size,
     workspaceModules: sortPackages(packageModules),
@@ -111,7 +127,7 @@ function getWorkspaceContributions(metafile) {
   };
 }
 
-async function runBundle(platform, scenario) {
+async function runBundle(platform: string, scenario: Scenario): Promise<Measurement> {
   const entryPath = join(entryRoot, `${scenario.name}.js`);
   const bundlePath = join(outputRoot, platform, `${scenario.name}.bundle`);
   const metafileName = `${scenario.name}.meta.json`;
@@ -121,6 +137,9 @@ async function runBundle(platform, scenario) {
   mkdirSync(dirname(bundlePath), { recursive: true });
 
   const { metafile } = await build(createEsbuildOptions({ bundlePath, entryPath, platform, workspaceRoot }));
+  if (!metafile) {
+    throw new Error(`esbuild did not produce a metafile for "${scenario.name}"`);
+  }
   writeJSONFileSync(metafilePath, metafile);
 
   const bundle = readFileSync(bundlePath);
@@ -139,9 +158,10 @@ async function runBundle(platform, scenario) {
   const contributions = getWorkspaceContributions(metafile);
 
   return {
+    platform,
     scenario: scenario.name,
     rawBytes: statSync(bundlePath).size,
-    gzipBytes: gzipSync(bundle, { level: 9, mtime: 0 }).byteLength,
+    gzipBytes: gzipSync(bundle, { level: 9 }).byteLength,
     moduleCount: contributions.moduleCount,
     metafileInputCount: Object.keys(metafile.inputs).length,
     metafile: metafileOutput,
@@ -150,7 +170,7 @@ async function runBundle(platform, scenario) {
   };
 }
 
-function baselineResult(measurement) {
+function baselineResult(measurement: Measurement): BaselineResult {
   const { platform, scenario, rawBytes, gzipBytes, moduleCount, metafileInputCount, workspaceModules, workspaceBytes } = measurement;
   return {
     platform,
@@ -164,11 +184,11 @@ function baselineResult(measurement) {
   };
 }
 
-function resultKey({ platform, scenario }) {
+function resultKey({ platform, scenario }: Pick<BaselineResult, 'platform' | 'scenario'>): string {
   return `${platform}:${scenario}`;
 }
 
-function createComparison(measurement, baseline) {
+function createComparison(measurement: Measurement, baseline?: BaselineResult): Comparison {
   const currentCost = measurement.rawBytes;
   const currentModuleCost = measurement.moduleCount;
   if (!baseline) {
@@ -189,7 +209,7 @@ function createComparison(measurement, baseline) {
   };
 }
 
-function createMarkdownReport(results) {
+function createMarkdownReport(results: ScenarioComparison[]): string {
   const lines = [
     '# Bundle size report',
     '',
@@ -224,7 +244,7 @@ const {
 if (updateBaseline && selectedPlatforms) {
   throw new Error('Baseline updates must include every configured platform; omit --platform');
 }
-const selectedConfig = readJSONFileSync(selectedConfigPath);
+const selectedConfig: ScenarioConfig = readJSONFileSync(selectedConfigPath);
 const platforms = selectedPlatforms ?? selectedConfig.platforms;
 
 await mkdir(entryRoot, { recursive: true });
@@ -233,7 +253,7 @@ const measurements = [];
 for (const platform of platforms) {
   for (const scenario of selectedConfig.scenarios) {
     process.stdout.write(`Bundling ${scenario.name} for ${platform}...\n`);
-    measurements.push({ platform, ...(await runBundle(platform, scenario)) });
+    measurements.push(await runBundle(platform, scenario));
   }
 }
 
@@ -245,14 +265,18 @@ if (updateBaseline) {
   writeJSONFileSync(selectedBaselinePath, currentBaseline);
 }
 
-const baseline = existsSync(selectedBaselinePath) ? readJSONFileSync(selectedBaselinePath) : { schemaVersion: 2, results: [] };
+const baseline: { schemaVersion: number; results: BaselineResult[] } = existsSync(selectedBaselinePath)
+  ? readJSONFileSync(selectedBaselinePath)
+  : { schemaVersion: 2, results: [] };
 if (baseline.schemaVersion !== 1 && baseline.schemaVersion !== 2) {
   throw new Error(`Unsupported baseline schema version: ${baseline.schemaVersion}`);
 }
 if (baseline.schemaVersion === 1) {
   process.stderr.write('Baseline schema version 1 contains Metro shell-relative measurements; treating all esbuild scenarios as new.\n');
 }
-const baselineResults = new Map(baseline.schemaVersion === 2 ? baseline.results.map((result) => [resultKey(result), result]) : []);
+const baselineResults = new Map<string, BaselineResult>(
+  baseline.schemaVersion === 2 ? baseline.results.map((result) => [resultKey(result), result]) : [],
+);
 
 const results = measurements.map((measurement) => {
   return {

@@ -1,3 +1,5 @@
+import type { BuildOptions } from 'esbuild';
+
 const sourceExtensions = ['tsx', 'ts', 'jsx', 'js'];
 
 export const externalPackages = [
@@ -10,7 +12,7 @@ export const externalPackages = [
   '@office-iss/react-native-win32',
 ];
 
-export function getResolveExtensions(platform) {
+export function getResolveExtensions(platform: string): string[] {
   return [
     ...sourceExtensions.map((extension) => `.${platform}.${extension}`),
     ...sourceExtensions.map((extension) => `.native.${extension}`),
@@ -21,7 +23,17 @@ export function getResolveExtensions(platform) {
   ];
 }
 
-export function createEsbuildOptions({ bundlePath, entryPath, platform, workspaceRoot }) {
+export function createEsbuildOptions({
+  bundlePath,
+  entryPath,
+  platform,
+  workspaceRoot,
+}: {
+  bundlePath: string;
+  entryPath: string;
+  platform: string;
+  workspaceRoot: string;
+}): BuildOptions {
   return {
     absWorkingDir: workspaceRoot,
     bundle: true,

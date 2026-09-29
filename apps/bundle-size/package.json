@@ -5,12 +5,13 @@
   "description": "Deterministic esbuild consumer-bundle measurements",
   "license": "MIT",
   "scripts": {
+    "build": "tsc -b",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "measure": "node scripts/measure.mjs",
-    "test": "node --test scripts/*.test.mjs",
-    "update-baseline": "node scripts/measure.mjs --update-baseline",
-    "validate-report": "node scripts/validate-report.mjs"
+    "measure": "node scripts/measure.mts",
+    "test": "node --test scripts/*.test.mts",
+    "update-baseline": "node scripts/measure.mts --update-baseline",
+    "validate-report": "node scripts/validate-report.mts"
   },
   "dependencies": {
     "@fluentui-react-native/components": "workspace:*",
@@ -27,6 +28,7 @@
     "@fluentui-react-native/scripts": "workspace:*",
     "@rnx-kit/tools-filesystem": "^0.2.0",
     "@rnx-kit/tools-formatting": "^0.1.0",
+    "@rnx-kit/tsconfig": "catalog:",
     "esbuild": "^0.28.2"
   },
   "rnx-kit": {

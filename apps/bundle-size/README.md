@@ -10,6 +10,10 @@ Run every configured scenario from the repository root:
 yarn bundle-size
 ```
 
+The fixture scripts run as native TypeScript (`.mts`) modules. Run
+`yarn workspace @fluentui-react-native/bundle-size build` to type-check them;
+the repository's `yarn build` includes this check.
+
 Limit a local run to one or more platforms:
 
 ```sh

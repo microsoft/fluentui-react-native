@@ -90,7 +90,7 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPORT_PATH: apps/bundle-size/dist/bundle-size/report.md
           SOURCE_RUN_ID: ${{ github.run_id }}
-        run: node apps/bundle-size/scripts/post-pr-comment.mjs
+        run: node apps/bundle-size/scripts/post-pr-comment.mts
 
       - name: Add pull request metadata
         env:
