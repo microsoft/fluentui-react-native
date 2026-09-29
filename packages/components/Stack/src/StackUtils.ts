@@ -31,8 +31,7 @@ type SpacingGapValue = `${number}px` | `${number}` | keyof Spacing;
 /**
  * Takes in a gap size in either a CSS-style format (e.g. 10 or "10px")
  *  or a key of a themed spacing value (e.g. "s1").
- * Returns the separate numerical value of the padding (e.g. 10)
- *  and the CSS unit (e.g. "px").
+ * Returns separate numerical row and column gap values.
  */
 export function parseGap(
   gap: number | SpacingGapValue | `${SpacingGapValue} ${SpacingGapValue}` | undefined,

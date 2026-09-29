@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text color tokens pins v0 Text color tokens 1`] = `
+{
+  "_overrides": {
+    "disabled": {
+      "tokens": {
+        "color": "#B1B1B1",
+      },
+    },
+  },
+  "tokens": {
+    "color": "#262626",
+  },
+}
+`;
+
+exports[`Text color tokens pins v1 Text color tokens 1`] = `
+{
+  "color": "#262626",
+}
+`;

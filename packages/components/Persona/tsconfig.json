@@ -12,6 +12,9 @@
       "path": "../../utils/adapters/tsconfig.json"
     },
     {
+      "path": "../../agentic/design/tsconfig.json"
+    },
+    {
       "path": "../../framework-base/tsconfig.json"
     },
     {
@@ -24,6 +27,9 @@
       "path": "../../../scripts/tsconfig.json"
     },
     {
+      "path": "../../utils/test-tools/tsconfig.json"
+    },
+    {
       "path": "../../deprecated/foundation-composable/tsconfig.json"
     },
     {
@@ -34,9 +40,6 @@
     },
     {
       "path": "../../deprecated/foundation-tokens/tsconfig.json"
-    },
-    {
-      "path": "../../agentic/design/tsconfig.json"
     }
   ]
 }

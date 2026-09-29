@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Drawer color tokens on Win32 1`] = `
+{
+  "drawerBackgroundColor": "#E6E6E6",
+  "handleBackgroundColor": "#969696",
+  "scrimColor": "#00000080",
+}
+`;

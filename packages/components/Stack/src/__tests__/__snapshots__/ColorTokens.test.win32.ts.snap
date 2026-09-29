@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stack color tokens pins Stack colors: Stack 1`] = `
+{
+  "_overrides": {
+    "verticalFill": {
+      "root": {
+        "style": {
+          "height": "100%",
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`Stack color tokens pins StackItem colors: StackItem 1`] = `{}`;

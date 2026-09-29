@@ -24,6 +24,9 @@
       "path": "../../../scripts/tsconfig.json"
     },
     {
+      "path": "../../utils/test-tools/tsconfig.json"
+    },
+    {
       "path": "../../deprecated/foundation-composable/tsconfig.json"
     },
     {

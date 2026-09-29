@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Spinner color tokens on Win32 1`] = `
+{
+  "inverted": {
+    "tailColor": "#262626",
+    "trackColor": "#737373",
+  },
+  "tailColor": "#D83B01",
+  "trackColor": "#d2e0f4",
+}
+`;

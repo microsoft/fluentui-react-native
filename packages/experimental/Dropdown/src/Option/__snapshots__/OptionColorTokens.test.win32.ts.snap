@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Option color tokens on Win32 1`] = `
+{
+  "backgroundColor": "antiquewhite",
+  "checkmarkColor": "#666666",
+  "color": "#666666",
+  "disabled": {
+    "backgroundColor": "antiquewhite",
+    "checkmarkColor": "#B1B1B1",
+    "color": "#B1B1B1",
+  },
+  "hovered": {
+    "backgroundColor": "#D2D2D2",
+    "checkmarkColor": "#505050",
+    "color": "#505050",
+  },
+  "pressed": {
+    "backgroundColor": "#B1B1B1",
+    "checkmarkColor": "#666666",
+    "color": "#666666",
+  },
+}
+`;

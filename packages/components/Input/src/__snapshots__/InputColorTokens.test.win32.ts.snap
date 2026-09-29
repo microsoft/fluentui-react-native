@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Input color tokens on Win32 1`] = `
+{
+  "accessoryIconColor": "#666666",
+  "accessoryTextColor": "#666666",
+  "assistiveTextColor": "#666666",
+  "backgroundColor": "antiquewhite",
+  "color": "#666666",
+  "error": {
+    "accessoryIconColor": "#666666",
+    "accessoryTextColor": "#666666",
+    "assistiveTextColor": "#bc2f32",
+    "backgroundColor": "antiquewhite",
+    "color": "#bc2f32",
+    "cursorColor": "#616161",
+    "iconColor": "#666666",
+    "inputTextColor": "#262626",
+    "strokeColor": "#bc2f32",
+  },
+  "filled": {
+    "accessoryIconColor": "#666666",
+    "accessoryTextColor": "#666666",
+    "assistiveTextColor": "#666666",
+    "backgroundColor": "antiquewhite",
+    "color": "#666666",
+    "iconColor": "#666666",
+    "inputTextColor": "#262626",
+    "strokeColor": "#969696",
+  },
+  "focused": {
+    "accessoryIconColor": "#666666",
+    "accessoryTextColor": "#666666",
+    "assistiveTextColor": "#666666",
+    "backgroundColor": "antiquewhite",
+    "color": "#aec6eb",
+    "cursorColor": "#616161",
+    "iconColor": "#aec6eb",
+    "inputTextColor": "#666666",
+    "strokeColor": "#D83B01",
+  },
+  "iconColor": "#666666",
+  "inputTextColor": "#666666",
+  "strokeColor": "#969696",
+  "typing": {
+    "accessoryIconColor": "#666666",
+    "accessoryTextColor": "#666666",
+    "assistiveTextColor": "#666666",
+    "color": "#aec6eb",
+    "cursorColor": "#616161",
+    "iconColor": "#aec6eb",
+    "inputTextColor": "#262626",
+    "strokeColor": "#D83B01",
+  },
+}
+`;

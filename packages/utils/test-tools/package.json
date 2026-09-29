@@ -27,20 +27,33 @@
     "clean": "fluentui-scripts clean",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
+    "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
-    "@fluentui-react-native/design": "workspace:*"
+    "@fluentui-react-native/design": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
+    "@uifabricshared/foundation-settings": "workspace:*",
+    "@uifabricshared/themed-settings": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
+    "@fluentui-react-native/apple-theme": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/win32-theme": "workspace:*",
+    "@office-iss/react-native-win32": "^0.81.0",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-android": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
     "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-config": "^0.81.0",
     "@types/jest": "^29.0.0",
     "@types/react": "~19.1.4",
     "@types/react-test-renderer": "^19.1.0",
     "react": "19.1.4",
     "react-native": "^0.81.6",
+    "react-native-macos": "^0.81.0",
+    "react-native-windows": "^0.81.0",
     "react-test-renderer": "19.1.4"
   },
   "peerDependencies": {
@@ -74,6 +87,9 @@
     "alignDeps": {
       "capabilities": [
         "core",
+        "core-macos",
+        "core-win32",
+        "core-windows",
         "react",
         "react-test-renderer"
       ]

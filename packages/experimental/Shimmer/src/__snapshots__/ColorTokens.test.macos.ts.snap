@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Shimmer color tokens on macOS 1`] = `
+{
+  "backgroundColor": "#00000000",
+  "shimmerColor": "#E1E1E1",
+  "shimmerWaveColor": "white",
+}
+`;

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Notification color tokens on macOS 1`] = `
+{
+  "backgroundColor": {
+    "semantic": [
+      "windowBackgroundColor",
+    ],
+  },
+  "borderColor": "transparent",
+  "color": "#0078d4",
+  "danger": {
+    "backgroundColor": "#FDF6F6",
+    "color": "#9F282C",
+    "pressedColor": "#9F282C32",
+  },
+  "neutral": {
+    "backgroundColor": "#FAFAFA",
+    "color": "#616161",
+    "disabledColor": "#FFFFFF",
+    "pressedColor": "#61616145",
+  },
+  "neutralBar": {
+    "backgroundColor": "#F0F0F0",
+    "color": "#616161",
+    "disabledColor": "#FFFFFF",
+    "pressedColor": "#61616145",
+  },
+  "primary": {
+    "backgroundColor": "#EBF3FC",
+    "color": "#0F6CBD",
+    "disabledColor": "#2886DE",
+    "pressedColor": "#0F6CBD30",
+  },
+  "primaryBar": {
+    "backgroundColor": "#EBF3FC",
+    "color": "#0F6CBD",
+    "disabledColor": "#2886DE",
+    "pressedColor": "#0F6CBD30",
+  },
+  "primaryOutlineBar": {
+    "backgroundColor": "#FFFFFF",
+    "borderColor": "#E0E0E0",
+    "color": "#0F6CBD",
+    "disabledColor": "#2886DE",
+    "pressedColor": "#0F6CBD30",
+  },
+  "shadowToken": {
+    "ambient": {
+      "color": "#0000001f",
+    },
+    "key": {
+      "color": "#00000024",
+    },
+  },
+  "warning": {
+    "backgroundColor": "#FFFBD6",
+    "color": "#4C4400",
+    "pressedColor": "#4C440033",
+  },
+}
+`;

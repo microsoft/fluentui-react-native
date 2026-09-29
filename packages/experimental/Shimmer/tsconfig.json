@@ -21,6 +21,9 @@
       "path": "../../../scripts/tsconfig.json"
     },
     {
+      "path": "../../utils/test-tools/tsconfig.json"
+    },
+    {
       "path": "../../framework/use-styling/tsconfig.json"
     }
   ]

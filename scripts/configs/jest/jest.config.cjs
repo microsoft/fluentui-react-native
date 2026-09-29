@@ -40,6 +40,11 @@ function configureReactNativeJest(platform) {
       IS_REACT_ACT_ENVIRONMENT: true,
     },
   });
+  config.testMatch = [
+    '**/__tests__/**/*.(ts|tsx|js|jsx)',
+    '**/*.(test|spec).(ts|tsx|js|jsx)',
+    '**/*.(test|spec).(android|ios|macos|win32|windows).(ts|tsx|js|jsx)',
+  ];
   // In pnpm mode, we need to ensure that the transformIgnorePatterns
   // are set correctly to avoid issues with hoisted packages.
   config.transformIgnorePatterns = [
