@@ -67,6 +67,7 @@ exports[`ToggleButton default 1`] = `
     numberOfLines={0}
     style={
       {
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 12,
         "fontWeight": "600",
