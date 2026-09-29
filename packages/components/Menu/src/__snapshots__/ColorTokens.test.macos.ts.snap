@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu color tokens pins MenuDivider colors 1`] = `
+{
+  "backgroundColor": "#d6d6d6",
+}
+`;
+
+exports[`Menu color tokens pins MenuGroupHeader colors 1`] = `
+{
+  "color": {
+    "semantic": [
+      "tertiaryLabelColor",
+    ],
+  },
+}
+`;
+
+exports[`Menu color tokens pins MenuItem colors 1`] = `
+{
+  "backgroundColor": "#00000000",
+  "color": "#242424",
+  "disabled": {
+    "backgroundColor": "transparent",
+    "color": {
+      "semantic": [
+        "tertiaryLabelColor",
+      ],
+    },
+    "iconColor": {
+      "semantic": [
+        "tertiaryLabelColor",
+      ],
+    },
+    "submenuIndicatorColor": {
+      "semantic": [
+        "tertiaryLabelColor",
+      ],
+    },
+  },
+  "focused": {
+    "backgroundColor": {
+      "semantic": [
+        "controlAccentColor",
+      ],
+    },
+    "color": "white",
+    "iconColor": "white",
+    "submenuIndicatorColor": "white",
+  },
+  "iconColor": "#242424",
+  "pressed": {
+    "backgroundColor": {
+      "colorWithSystemEffect": {
+        "baseColor": {
+          "semantic": [
+            "controlAccentColor",
+          ],
+        },
+        "systemEffect": "pressed",
+      },
+    },
+    "color": "white",
+    "iconColor": "white",
+    "submenuIndicatorColor": "white",
+  },
+  "submenuIndicatorColor": "#242424",
+}
+`;
+
+exports[`Menu color tokens pins MenuItemCheckbox colors 1`] = `
+{
+  "backgroundColor": "#00000000",
+  "checked": {
+    "checkmarkColor": "#000000",
+  },
+  "color": "#000000",
+  "disabled": {
+    "backgroundColor": "#00000000",
+    "checked": {
+      "checkmarkColor": "#757575",
+    },
+    "color": "#757575",
+    "iconColor": "#757575",
+  },
+  "focused": {
+    "backgroundColor": "#0078d4",
+    "checked": {
+      "checkmarkColor": "#ffffff",
+    },
+    "color": "#ffffff",
+    "iconColor": "#ffffff",
+  },
+  "iconColor": "#000000",
+  "pressed": {
+    "backgroundColor": "#106ebe",
+    "checked": {
+      "checkmarkColor": "#ffffff",
+    },
+    "color": "#ffffff",
+    "iconColor": "#ffffff",
+  },
+}
+`;
+
+exports[`Menu color tokens pins MenuItemRadio colors 1`] = `
+{
+  "backgroundColor": "#00000000",
+  "checked": {
+    "checkmarkColor": "#242424",
+  },
+  "color": "#242424",
+  "disabled": {
+    "backgroundColor": "transparent",
+    "checked": {
+      "checkmarkColor": {
+        "semantic": [
+          "tertiaryLabelColor",
+        ],
+      },
+    },
+    "color": {
+      "semantic": [
+        "tertiaryLabelColor",
+      ],
+    },
+    "iconColor": {
+      "semantic": [
+        "tertiaryLabelColor",
+      ],
+    },
+  },
+  "focused": {
+    "backgroundColor": {
+      "semantic": [
+        "controlAccentColor",
+      ],
+    },
+    "checked": {
+      "checkmarkColor": "white",
+    },
+    "color": "white",
+    "iconColor": "white",
+  },
+  "iconColor": "#242424",
+  "pressed": {
+    "backgroundColor": {
+      "colorWithSystemEffect": {
+        "baseColor": {
+          "semantic": [
+            "controlAccentColor",
+          ],
+        },
+        "systemEffect": "pressed",
+      },
+    },
+    "checked": {
+      "checkmarkColor": "white",
+    },
+    "color": "white",
+    "iconColor": "white",
+  },
+}
+`;
+
+exports[`Menu color tokens pins MenuList colors 1`] = `
+{
+  "backgroundColor": "#00000000",
+}
+`;
+
+exports[`Menu color tokens pins MenuPopover colors 1`] = `
+{
+  "borderColor": "#00000000",
+}
+`;

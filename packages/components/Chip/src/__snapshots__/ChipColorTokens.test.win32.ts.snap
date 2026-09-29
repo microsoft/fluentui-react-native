@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Chip color tokens on Win32 1`] = `
+{
+  "backgroundColor": "#ebebeb",
+  "brand": {
+    "selected": {
+      "backgroundColor": "#D83B01",
+    },
+  },
+  "color": "#666666",
+  "danger": {
+    "backgroundColor": "#fdf6f6",
+    "color": "#bc2f32",
+    "selected": {
+      "backgroundColor": "#f1bbbc",
+      "color": "white",
+    },
+  },
+  "disabled": {
+    "backgroundColor": "#ebebeb",
+  },
+  "searchBar": {
+    "backgroundColor": "#e6e6e6",
+    "brand": {
+      "selected": {
+        "backgroundColor": "antiquewhite",
+        "color": "#aec6eb",
+      },
+    },
+    "color": "#262626",
+    "disabled": {
+      "backgroundColor": "#e6e6e6",
+    },
+  },
+  "selected": {
+    "backgroundColor": "#fafafa",
+    "color": "#262626",
+  },
+  "severe": {
+    "backgroundColor": "#fdf6f3",
+    "color": "#c43501",
+    "selected": {
+      "backgroundColor": "#f4bfab",
+      "color": "white",
+    },
+  },
+  "success": {
+    "backgroundColor": "#f1faf1",
+    "color": "#0e700e",
+    "selected": {
+      "backgroundColor": "#9fd89f",
+      "color": "white",
+    },
+  },
+  "warning": {
+    "backgroundColor": "#fffef5",
+    "color": "#817400",
+    "selected": {
+      "backgroundColor": "#fef7b2",
+      "color": "black",
+    },
+  },
+}
+`;

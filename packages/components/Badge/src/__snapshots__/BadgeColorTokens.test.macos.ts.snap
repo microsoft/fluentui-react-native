@@ -1,0 +1,435 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Badge color tokens on macOS 1`] = `
+{
+  "backgroundColor": "#0078d4",
+  "borderColor": "#00000000",
+  "brand": {
+    "filled": {
+      "backgroundColor": "#0078d4",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "ghost": {
+      "color": "#0078d4",
+      "iconColor": "#0078d4",
+    },
+    "outline": {
+      "borderColor": "#0078d4",
+      "color": "#0078d4",
+      "iconColor": "#0078d4",
+    },
+    "tint": {
+      "backgroundColor": "#eff6fc",
+      "borderColor": "#c7e0f4",
+      "color": "#106ebe",
+      "iconColor": "#106ebe",
+    },
+  },
+  "color": "#ffffff",
+  "danger": {
+    "filled": {
+      "backgroundColor": "#d13438",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "ghost": {
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+    "outline": {
+      "borderColor": "#d13438",
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+    "tint": {
+      "backgroundColor": "#fdf6f6",
+      "borderColor": "#f1bbbc",
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+  },
+  "filled": {
+    "borderColor": "#00000000",
+  },
+  "ghost": {
+    "backgroundColor": "#00000000",
+    "borderColor": "#00000000",
+  },
+  "important": {
+    "filled": {
+      "backgroundColor": "#242424",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "ghost": {
+      "color": "#242424",
+      "iconColor": "#242424",
+    },
+    "outline": {
+      "borderColor": "#616161",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "tint": {
+      "backgroundColor": "#616161",
+      "borderColor": "#616161",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+  },
+  "informative": {
+    "filled": {
+      "backgroundColor": "#ebebeb",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "ghost": {
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "outline": {
+      "borderColor": "#d6d6d6",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "tint": {
+      "backgroundColor": "#f0f0f0",
+      "borderColor": "#d6d6d6",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+  },
+  "outline": {
+    "backgroundColor": "#00000000",
+  },
+  "severe": {
+    "filled": {
+      "backgroundColor": "#da3b01",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "ghost": {
+      "color": "#da3b01",
+      "iconColor": "#da3b01",
+    },
+    "outline": {
+      "borderColor": "#da3b01",
+      "color": "#da3b01",
+      "iconColor": "#da3b01",
+    },
+    "tint": {
+      "backgroundColor": "#fdf6f3",
+      "borderColor": "#f9dcd1",
+      "color": "#c43501",
+      "iconColor": "#c43501",
+    },
+  },
+  "subtle": {
+    "filled": {
+      "backgroundColor": "#ffffff",
+      "color": "#242424",
+      "iconColor": "#242424",
+    },
+    "ghost": {
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "outline": {
+      "borderColor": "#ffffff",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "tint": {
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d6d6d6",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+  },
+  "success": {
+    "filled": {
+      "backgroundColor": "#107c10",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "ghost": {
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+    "outline": {
+      "borderColor": "#107c10",
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+    "tint": {
+      "backgroundColor": "#f1faf1",
+      "borderColor": "#9fd89f",
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+  },
+  "warning": {
+    "filled": {
+      "backgroundColor": "#fde300",
+      "color": "#242424",
+      "iconColor": "#242424",
+    },
+    "ghost": {
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+    "outline": {
+      "borderColor": "#817400",
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+    "tint": {
+      "backgroundColor": "#fffef5",
+      "borderColor": "#fef7b2",
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+  },
+}
+`;
+
+exports[`pins CounterBadge color tokens on macOS 1`] = `
+{
+  "backgroundColor": "#0078d4",
+  "borderColor": "#00000000",
+  "brand": {
+    "filled": {
+      "backgroundColor": "#0078d4",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "ghost": {
+      "color": "#0078d4",
+      "iconColor": "#0078d4",
+    },
+    "outline": {
+      "borderColor": "#0078d4",
+      "color": "#0078d4",
+      "iconColor": "#0078d4",
+    },
+    "tint": {
+      "backgroundColor": "#eff6fc",
+      "borderColor": "#c7e0f4",
+      "color": "#106ebe",
+      "iconColor": "#106ebe",
+    },
+  },
+  "color": "#ffffff",
+  "danger": {
+    "filled": {
+      "backgroundColor": "#d13438",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "ghost": {
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+    "outline": {
+      "borderColor": "#d13438",
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+    "tint": {
+      "backgroundColor": "#fdf6f6",
+      "borderColor": "#f1bbbc",
+      "color": "#d13438",
+      "iconColor": "#d13438",
+    },
+  },
+  "filled": {
+    "borderColor": "#00000000",
+  },
+  "ghost": {
+    "backgroundColor": "#00000000",
+    "borderColor": "#00000000",
+  },
+  "important": {
+    "filled": {
+      "backgroundColor": "#242424",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "ghost": {
+      "color": "#242424",
+      "iconColor": "#242424",
+    },
+    "outline": {
+      "borderColor": "#616161",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "tint": {
+      "backgroundColor": "#616161",
+      "borderColor": "#616161",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+  },
+  "informative": {
+    "filled": {
+      "backgroundColor": "#ebebeb",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "ghost": {
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "outline": {
+      "borderColor": "#d6d6d6",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+    "tint": {
+      "backgroundColor": "#f0f0f0",
+      "borderColor": "#d6d6d6",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+  },
+  "outline": {
+    "backgroundColor": "#00000000",
+  },
+  "severe": {
+    "filled": {
+      "backgroundColor": "#da3b01",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "ghost": {
+      "color": "#da3b01",
+      "iconColor": "#da3b01",
+    },
+    "outline": {
+      "borderColor": "#da3b01",
+      "color": "#da3b01",
+      "iconColor": "#da3b01",
+    },
+    "tint": {
+      "backgroundColor": "#fdf6f3",
+      "borderColor": "#f9dcd1",
+      "color": "#c43501",
+      "iconColor": "#c43501",
+    },
+  },
+  "subtle": {
+    "filled": {
+      "backgroundColor": "#ffffff",
+      "color": "#242424",
+      "iconColor": "#242424",
+    },
+    "ghost": {
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "outline": {
+      "borderColor": "#ffffff",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "tint": {
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d6d6d6",
+      "color": "#616161",
+      "iconColor": "#616161",
+    },
+  },
+  "success": {
+    "filled": {
+      "backgroundColor": "#107c10",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "ghost": {
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+    "outline": {
+      "borderColor": "#107c10",
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+    "tint": {
+      "backgroundColor": "#f1faf1",
+      "borderColor": "#9fd89f",
+      "color": "#107c10",
+      "iconColor": "#107c10",
+    },
+  },
+  "warning": {
+    "filled": {
+      "backgroundColor": "#fde300",
+      "color": "#242424",
+      "iconColor": "#242424",
+    },
+    "ghost": {
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+    "outline": {
+      "borderColor": "#817400",
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+    "tint": {
+      "backgroundColor": "#fffef5",
+      "borderColor": "#fef7b2",
+      "color": "#817400",
+      "iconColor": "#817400",
+    },
+  },
+}
+`;
+
+exports[`pins PresenceBadge color tokens on macOS 1`] = `
+{
+  "available": {
+    "iconColor": "#13a10e",
+    "outOfOffice": {
+      "iconColor": "#13a10e",
+    },
+  },
+  "away": {
+    "iconColor": "#eaa300",
+    "outOfOffice": {
+      "iconColor": "#c239b3",
+    },
+  },
+  "backgroundColor": "#ffffff",
+  "blocked": {
+    "iconColor": "#d13438",
+    "outOfOffice": {
+      "iconColor": "#d13438",
+    },
+  },
+  "borderColor": "#ffffff",
+  "busy": {
+    "iconColor": "#d13438",
+    "outOfOffice": {
+      "iconColor": "#d13438",
+    },
+  },
+  "offline": {
+    "iconColor": "#616161",
+  },
+  "outOfOffice": {
+    "iconColor": "#c239b3",
+    "outOfOffice": {
+      "iconColor": "#c239b3",
+    },
+  },
+  "unknown": {
+    "iconColor": "#d13438",
+    "outOfOffice": {
+      "iconColor": "#d13438",
+    },
+  },
+}
+`;

@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioGroup color tokens pins Radio v1 colors: Radio v1 1`] = `
+{
+  "borderColor": "#00000000",
+  "color": "#616161",
+  "disabled": {
+    "color": "#757575",
+  },
+  "hovered": {
+    "color": "#000000",
+    "selected": {
+      "color": "#000000",
+      "radioFill": "#106ebe",
+    },
+  },
+  "pressed": {
+    "color": "#242424",
+    "selected": {
+      "color": "#242424",
+      "radioFill": "#004578",
+    },
+  },
+  "selected": {
+    "color": "#616161",
+    "disabled": {
+      "radioFill": "#757575",
+    },
+    "radioFill": "#0078d4",
+  },
+}
+`;
+
+exports[`RadioGroup color tokens pins RadioButton v0 colors: RadioButton v0 1`] = `
+{
+  "_overrides": {
+    "disabled": {
+      "tokens": {
+        "backgroundColor": {
+          "semantic": [
+            "windowBackgroundColor",
+          ],
+        },
+        "borderColor": "#00000000",
+        "color": {
+          "semantic": [
+            "tertiaryLabelColor",
+          ],
+        },
+      },
+    },
+    "focused": {
+      "tokens": {
+        "textBorderColor": "transparent",
+      },
+    },
+  },
+  "button": {
+    "style": {
+      "backgroundColor": "transparent",
+    },
+  },
+  "tokens": {
+    "backgroundColor": {
+      "semantic": [
+        "labelColor",
+      ],
+    },
+    "borderColor": {
+      "semantic": [
+        "labelColor",
+      ],
+    },
+    "color": {
+      "semantic": [
+        "labelColor",
+      ],
+    },
+    "textBorderColor": "transparent",
+  },
+}
+`;
+
+exports[`RadioGroup color tokens pins RadioGroup v0 colors: RadioGroup v0 1`] = `
+{
+  "tokens": {
+    "color": {
+      "semantic": [
+        "labelColor",
+      ],
+    },
+  },
+}
+`;
+
+exports[`RadioGroup color tokens pins RadioGroup v1 colors: RadioGroup v1 1`] = `
+{
+  "color": {
+    "semantic": [
+      "labelColor",
+    ],
+  },
+  "disabled": {
+    "color": "#757575",
+  },
+}
+`;

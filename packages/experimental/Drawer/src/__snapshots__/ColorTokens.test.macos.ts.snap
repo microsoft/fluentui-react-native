@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Drawer color tokens on macOS 1`] = `
+{
+  "drawerBackgroundColor": "#ffffff",
+  "handleBackgroundColor": "#f0f0f0",
+  "scrimColor": "#00000080",
+}
+`;

@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContextualMenu color tokens pins menu colors: menu 1`] = `{}`;
+
+exports[`ContextualMenu color tokens pins menu item colors: menu item 1`] = `
+{
+  "_overrides": {
+    "disabled": {
+      "tokens": {
+        "backgroundColor": "transparent",
+        "color": {
+          "semantic": [
+            "tertiaryLabelColor",
+          ],
+        },
+      },
+    },
+    "focused": {
+      "tokens": {
+        "backgroundColor": {
+          "semantic": [
+            "controlAccentColor",
+          ],
+        },
+        "color": "white",
+      },
+    },
+    "pressed": {
+      "tokens": {
+        "backgroundColor": {
+          "colorWithSystemEffect": {
+            "baseColor": {
+              "semantic": [
+                "controlAccentColor",
+              ],
+            },
+            "systemEffect": "pressed",
+          },
+        },
+        "color": "white",
+      },
+    },
+  },
+  "tokens": {
+    "color": {
+      "semantic": [
+        "labelColor",
+      ],
+    },
+  },
+}
+`;
+
+exports[`ContextualMenu color tokens pins submenu colors: submenu 1`] = `{}`;
+
+exports[`ContextualMenu color tokens pins submenu item colors: submenu item 1`] = `
+{
+  "_overrides": {
+    "disabled": {
+      "tokens": {
+        "backgroundColor": "transparent",
+        "color": {
+          "semantic": [
+            "tertiaryLabelColor",
+          ],
+        },
+      },
+    },
+    "focused": {
+      "tokens": {
+        "backgroundColor": {
+          "semantic": [
+            "controlAccentColor",
+          ],
+        },
+        "chevronColor": "white",
+        "color": "white",
+      },
+    },
+    "pressed": {
+      "tokens": {
+        "backgroundColor": {
+          "colorWithSystemEffect": {
+            "baseColor": {
+              "semantic": [
+                "controlAccentColor",
+              ],
+            },
+            "systemEffect": "pressed",
+          },
+        },
+      },
+    },
+  },
+  "icon": {
+    "style": {
+      "color": "#616161",
+    },
+  },
+  "tokens": {
+    "backgroundColor": "transparent",
+    "borderColor": "transparent",
+    "chevronColor": "black",
+    "color": {
+      "semantic": [
+        "labelColor",
+      ],
+    },
+  },
+}
+`;

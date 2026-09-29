@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox color tokens pins v0 Checkbox color tokens 1`] = `
+{
+  "_overrides": {
+    "checked": {
+      "tokens": {
+        "backgroundColor": {
+          "dynamic": {
+            "dark": "#1890F1",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0078D4",
+          },
+        },
+        "borderColor": {
+          "dynamic": {
+            "dark": "#1890F1",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0078D4",
+          },
+        },
+      },
+    },
+    "disabled": {
+      "tokens": {
+        "backgroundColor": "#f0f0f0",
+      },
+    },
+    "focused": {
+      "tokens": {
+        "backgroundColor": {
+          "dynamic": {
+            "dark": "#1890F1",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0078D4",
+          },
+        },
+        "checkmarkColor": {
+          "dynamic": {
+            "dark": "#1890F1",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0078D4",
+          },
+        },
+      },
+    },
+    "hovered": {
+      "tokens": {
+        "backgroundColor": {
+          "dynamic": {
+            "dark": "#1890F1",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0078D4",
+          },
+        },
+        "checkmarkColor": {
+          "dynamic": {
+            "dark": "#1890F1",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0078D4",
+          },
+        },
+      },
+    },
+    "pressed": {
+      "tokens": {
+        "backgroundColor": {
+          "dynamic": {
+            "dark": "#1890F1",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0078D4",
+          },
+        },
+      },
+    },
+  },
+  "tokens": {
+    "backgroundColor": "transparent",
+    "borderColor": "#404040",
+    "checkmarkColor": "#ffffff",
+    "textBorderColor": "transparent",
+  },
+}
+`;
+
+exports[`Checkbox color tokens pins v1 Checkbox color tokens 1`] = `
+{
+  "checkboxBackgroundColor": "transparent",
+  "checkboxBorderColor": {
+    "semantic": [
+      "labelColor",
+    ],
+  },
+  "checkmarkColor": "white",
+  "color": {
+    "semantic": [
+      "labelColor",
+    ],
+  },
+  "disabled": {
+    "checkboxBackgroundColor": {
+      "semantic": [
+        "windowBackgroundColor",
+      ],
+    },
+    "checkboxBorderColor": "#00000000",
+    "checkmarkColor": "#757575",
+    "color": {
+      "semantic": [
+        "tertiaryLabelColor",
+      ],
+    },
+  },
+  "focused": {
+    "borderColor": "transparent",
+    "checkboxBackgroundColor": {
+      "semantic": [
+        "controlAccentColor",
+      ],
+    },
+  },
+  "hovered": {
+    "checkboxBackgroundColor": {
+      "semantic": [
+        "controlAccentColor",
+      ],
+    },
+  },
+  "pressed": {
+    "checkboxBackgroundColor": {
+      "colorWithSystemEffect": {
+        "baseColor": {
+          "semantic": [
+            "controlAccentColor",
+          ],
+        },
+        "systemEffect": "pressed",
+      },
+    },
+  },
+}
+`;

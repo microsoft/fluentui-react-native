@@ -12,6 +12,21 @@
       "path": "../../agentic/design/tsconfig.json"
     },
     {
+      "path": "../../framework-base/tsconfig.json"
+    },
+    {
+      "path": "../../theming/apple-theme/tsconfig.json"
+    },
+    {
+      "path": "../../theming/win32-theme/tsconfig.json"
+    },
+    {
+      "path": "../../deprecated/foundation-settings/tsconfig.json"
+    },
+    {
+      "path": "../../deprecated/themed-settings/tsconfig.json"
+    },
+    {
       "path": "../../../scripts/tsconfig.json"
     }
   ]

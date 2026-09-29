@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link color tokens pins v0 Link color tokens 1`] = `
+{
+  "_overrides": {
+    "disabled": {
+      "tokens": {
+        "color": "#D83B01",
+      },
+    },
+    "focused": {
+      "tokens": {
+        "borderColor": "#969696",
+      },
+    },
+    "hovered": {
+      "tokens": {
+        "color": "#A22C01",
+      },
+    },
+    "pressed": {
+      "tokens": {
+        "color": "#6C1E01",
+      },
+    },
+    "visited": {
+      "tokens": {
+        "color": "#D83B01",
+      },
+    },
+  },
+  "tokens": {
+    "borderColor": "transparent",
+    "color": "#D83B01",
+  },
+}
+`;
+
+exports[`Link color tokens pins v1 Link color tokens 1`] = `
+{
+  "brand": {
+    "color": "#FFFFFF",
+    "focused": {
+      "borderColor": "#969696",
+      "color": "#FFFFFF",
+    },
+    "hovered": {
+      "color": "#D2D2D2",
+    },
+    "pressed": {
+      "color": "#B1B1B1",
+    },
+    "visited": {
+      "color": "#FFFFFF",
+    },
+  },
+  "color": "#aec6eb",
+  "disabled": {
+    "color": "#B1B1B1",
+    "focused": {
+      "borderColor": "#969696",
+    },
+  },
+  "focused": {
+    "borderColor": "#969696",
+    "color": "#aec6eb",
+  },
+  "hovered": {
+    "color": "#d2e0f4",
+  },
+  "pressed": {
+    "color": "#2e6ac5",
+  },
+  "subtle": {
+    "color": "#666666",
+    "focused": {
+      "borderColor": "#969696",
+      "color": "#666666",
+    },
+    "hovered": {
+      "color": "#505050",
+    },
+    "pressed": {
+      "color": "#666666",
+    },
+    "visited": {
+      "color": "#666666",
+    },
+  },
+  "visited": {
+    "color": "#aec6eb",
+  },
+}
+`;

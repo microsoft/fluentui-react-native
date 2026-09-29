@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider color tokens pins appearance colors 1`] = `
+{
+  "brand": {
+    "contentColor": "#0078d4",
+    "lineColor": "#0078d4",
+  },
+  "default": {
+    "contentColor": "#000000",
+    "lineColor": "#d6d6d6",
+  },
+  "strong": {
+    "contentColor": "#242424",
+    "lineColor": "#f0f0f0",
+  },
+  "subtle": {
+    "contentColor": "#616161",
+    "lineColor": "#f0f0f0",
+  },
+}
+`;

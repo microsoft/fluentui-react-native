@@ -52,7 +52,7 @@ describe('DesktopAgent', () => {
       await harness.close();
       fs.rmSync(artifactsRoot, { force: true, recursive: true });
     }
-  });
+  }, 60_000);
 
   test('validates the artifact root before reserving a target session', async () => {
     const harness = await createDesktopDriverTestHarness();

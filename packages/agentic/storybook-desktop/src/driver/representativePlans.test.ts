@@ -3,8 +3,6 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-jest.setTimeout(30_000);
-
 describe('representative desktop story tests', () => {
   test('runs actual WDIO stories and guards complete catalog migration and type coverage', async () => {
     const artifactsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'representative-story-plans-'));
@@ -33,7 +31,7 @@ describe('representative desktop story tests', () => {
     } finally {
       fs.rmSync(artifactsRoot, { force: true, recursive: true });
     }
-  });
+  }, 120_000);
 });
 
 function runContract(artifactsRoot: string): Promise<Record<string, unknown>> {

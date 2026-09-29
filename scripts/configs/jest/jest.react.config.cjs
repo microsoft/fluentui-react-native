@@ -1,7 +1,11 @@
 module.exports = {
   // File patterns
   roots: ['<rootDir>/src'],
-  testMatch: ['**/__tests__/**/*.(ts|tsx|js|jsx)', '**/*.(test|spec).(ts|tsx|js|jsx)'],
+  testMatch: [
+    '**/__tests__/**/*.(ts|tsx|js|jsx)',
+    '**/*.(test|spec).(ts|tsx|js|jsx)',
+    '**/*.(test|spec).(android|ios|macos|win32|windows).(ts|tsx|js|jsx)',
+  ],
 
   // Module file extensions
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],

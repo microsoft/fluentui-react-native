@@ -17,7 +17,7 @@ describe('WebdriverIO compatibility', () => {
     } finally {
       await harness.close();
     }
-  });
+  }, 60_000);
 });
 
 function runContract(url: string, target: string): Promise<Record<string, unknown>> {

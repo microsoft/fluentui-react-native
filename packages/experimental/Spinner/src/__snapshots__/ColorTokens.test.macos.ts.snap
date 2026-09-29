@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Spinner color tokens on macOS 1`] = `
+{
+  "trackColor": "#c7e0f4",
+}
+`;

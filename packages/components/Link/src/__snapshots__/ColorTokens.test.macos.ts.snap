@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link color tokens pins v0 Link color tokens 1`] = `
+{
+  "_overrides": {
+    "disabled": {
+      "tokens": {
+        "color": {
+          "semantic": [
+            "linkColor",
+          ],
+        },
+      },
+    },
+    "focused": {
+      "tokens": {
+        "borderColor": "transparent",
+      },
+    },
+    "hovered": {
+      "tokens": {
+        "color": {
+          "semantic": [
+            "linkColor",
+          ],
+        },
+      },
+    },
+    "pressed": {
+      "tokens": {
+        "color": {
+          "semantic": [
+            "selectedControlColor",
+          ],
+        },
+      },
+    },
+    "visited": {
+      "tokens": {
+        "color": {
+          "semantic": [
+            "linkColor",
+          ],
+        },
+      },
+    },
+  },
+  "tokens": {
+    "borderColor": "transparent",
+    "color": {
+      "semantic": [
+        "linkColor",
+      ],
+    },
+  },
+}
+`;
+
+exports[`Link color tokens pins v1 Link color tokens 1`] = `
+{
+  "brand": {
+    "color": "#ffffff",
+    "focused": {
+      "borderColor": "#000000",
+      "color": "#ffffff",
+    },
+    "hovered": {
+      "color": "#ffffff",
+    },
+    "pressed": {
+      "color": "#ffffff",
+    },
+    "visited": {
+      "color": "#ffffff",
+    },
+  },
+  "color": "#0078d4",
+  "disabled": {
+    "color": "#757575",
+    "focused": {
+      "borderColor": "#000000",
+    },
+  },
+  "focused": {
+    "borderColor": "#000000",
+    "color": "#0078d4",
+  },
+  "hovered": {
+    "color": "#106ebe",
+  },
+  "pressed": {
+    "color": "#004578",
+  },
+  "subtle": {
+    "color": "#000000",
+    "focused": {
+      "borderColor": "#000000",
+      "color": "#000000",
+    },
+    "hovered": {
+      "color": "#242424",
+    },
+    "pressed": {
+      "color": "#242424",
+    },
+    "visited": {
+      "color": "#000000",
+    },
+  },
+  "visited": {
+    "color": "#0078d4",
+  },
+}
+`;
