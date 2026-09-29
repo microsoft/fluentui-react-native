@@ -20,7 +20,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@8ae6d960b7d76fdaa54eb30d7bdb92507a09b9fa # 5.4.10
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
 
       - name: Install dependencies
         run: |
