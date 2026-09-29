@@ -4,8 +4,8 @@
     {
       "platform": "macos",
       "scenario": "components-button",
-      "rawBytes": 49476,
-      "gzipBytes": 13148,
+      "rawBytes": 49943,
+      "gzipBytes": 13307,
       "moduleCount": 62,
       "metafileInputCount": 176,
       "workspaceModules": {
@@ -14,16 +14,16 @@
         "@fluentui-react-native/framework-base": 24
       },
       "workspaceBytes": {
-        "@fluentui-react-native/components": 8860,
+        "@fluentui-react-native/components": 9312,
         "@fluentui-react-native/design": 28715,
-        "@fluentui-react-native/framework-base": 11865
+        "@fluentui-react-native/framework-base": 11880
       }
     },
     {
       "platform": "macos",
       "scenario": "components-catalog",
-      "rawBytes": 153766,
-      "gzipBytes": 37994,
+      "rawBytes": 155264,
+      "gzipBytes": 38617,
       "moduleCount": 159,
       "metafileInputCount": 176,
       "workspaceModules": {
@@ -32,16 +32,16 @@
         "@fluentui-react-native/framework-base": 25
       },
       "workspaceBytes": {
-        "@fluentui-react-native/components": 110315,
+        "@fluentui-react-native/components": 111700,
         "@fluentui-react-native/design": 28810,
-        "@fluentui-react-native/framework-base": 14512
+        "@fluentui-react-native/framework-base": 14625
       }
     },
     {
       "platform": "macos",
       "scenario": "design-theme-state",
-      "rawBytes": 30094,
-      "gzipBytes": 6422,
+      "rawBytes": 30109,
+      "gzipBytes": 6425,
       "moduleCount": 33,
       "metafileInputCount": 58,
       "workspaceModules": {
@@ -50,14 +50,14 @@
       },
       "workspaceBytes": {
         "@fluentui-react-native/design": 28151,
-        "@fluentui-react-native/framework-base": 1903
+        "@fluentui-react-native/framework-base": 1918
       }
     },
     {
       "platform": "macos",
       "scenario": "design-themed-root",
-      "rawBytes": 32059,
-      "gzipBytes": 7098,
+      "rawBytes": 32074,
+      "gzipBytes": 7103,
       "moduleCount": 37,
       "metafileInputCount": 58,
       "workspaceModules": {
@@ -66,7 +66,7 @@
       },
       "workspaceBytes": {
         "@fluentui-react-native/design": 30116,
-        "@fluentui-react-native/framework-base": 1903
+        "@fluentui-react-native/framework-base": 1918
       }
     },
     {
@@ -86,8 +86,8 @@
     {
       "platform": "macos",
       "scenario": "design-theme-state-legacy-source",
-      "rawBytes": 31750,
-      "gzipBytes": 6742,
+      "rawBytes": 31765,
+      "gzipBytes": 6747,
       "moduleCount": 34,
       "metafileInputCount": 61,
       "workspaceModules": {
@@ -96,14 +96,14 @@
       },
       "workspaceBytes": {
         "@fluentui-react-native/design": 29807,
-        "@fluentui-react-native/framework-base": 1903
+        "@fluentui-react-native/framework-base": 1918
       }
     },
     {
       "platform": "macos",
       "scenario": "design-legacy-theme-from-flex",
-      "rawBytes": 97709,
-      "gzipBytes": 19853,
+      "rawBytes": 97724,
+      "gzipBytes": 19857,
       "moduleCount": 57,
       "metafileInputCount": 82,
       "workspaceModules": {
@@ -112,14 +112,14 @@
       },
       "workspaceBytes": {
         "@fluentui-react-native/design": 58553,
-        "@fluentui-react-native/framework-base": 2469
+        "@fluentui-react-native/framework-base": 2484
       }
     },
     {
       "platform": "windows",
       "scenario": "components-button",
-      "rawBytes": 49400,
-      "gzipBytes": 13110,
+      "rawBytes": 49867,
+      "gzipBytes": 13278,
       "moduleCount": 63,
       "metafileInputCount": 177,
       "workspaceModules": {
@@ -128,16 +128,16 @@
         "@fluentui-react-native/framework-base": 24
       },
       "workspaceBytes": {
-        "@fluentui-react-native/components": 8860,
+        "@fluentui-react-native/components": 9312,
         "@fluentui-react-native/design": 28639,
-        "@fluentui-react-native/framework-base": 11865
+        "@fluentui-react-native/framework-base": 11880
       }
     },
     {
       "platform": "windows",
       "scenario": "components-catalog",
-      "rawBytes": 153690,
-      "gzipBytes": 37969,
+      "rawBytes": 155188,
+      "gzipBytes": 38584,
       "moduleCount": 160,
       "metafileInputCount": 177,
       "workspaceModules": {
@@ -146,16 +146,16 @@
         "@fluentui-react-native/framework-base": 25
       },
       "workspaceBytes": {
-        "@fluentui-react-native/components": 110315,
+        "@fluentui-react-native/components": 111700,
         "@fluentui-react-native/design": 28734,
-        "@fluentui-react-native/framework-base": 14512
+        "@fluentui-react-native/framework-base": 14625
       }
     },
     {
       "platform": "windows",
       "scenario": "design-theme-state",
-      "rawBytes": 30018,
-      "gzipBytes": 6388,
+      "rawBytes": 30033,
+      "gzipBytes": 6394,
       "moduleCount": 34,
       "metafileInputCount": 59,
       "workspaceModules": {
@@ -164,14 +164,14 @@
       },
       "workspaceBytes": {
         "@fluentui-react-native/design": 28075,
-        "@fluentui-react-native/framework-base": 1903
+        "@fluentui-react-native/framework-base": 1918
       }
     },
     {
       "platform": "windows",
       "scenario": "design-themed-root",
-      "rawBytes": 31983,
-      "gzipBytes": 7065,
+      "rawBytes": 31998,
+      "gzipBytes": 7069,
       "moduleCount": 38,
       "metafileInputCount": 59,
       "workspaceModules": {
@@ -180,7 +180,7 @@
       },
       "workspaceBytes": {
         "@fluentui-react-native/design": 30039,
-        "@fluentui-react-native/framework-base": 1903
+        "@fluentui-react-native/framework-base": 1918
       }
     },
     {
@@ -200,8 +200,8 @@
     {
       "platform": "windows",
       "scenario": "design-theme-state-legacy-source",
-      "rawBytes": 31674,
-      "gzipBytes": 6712,
+      "rawBytes": 31689,
+      "gzipBytes": 6714,
       "moduleCount": 35,
       "metafileInputCount": 62,
       "workspaceModules": {
@@ -210,14 +210,14 @@
       },
       "workspaceBytes": {
         "@fluentui-react-native/design": 29731,
-        "@fluentui-react-native/framework-base": 1903
+        "@fluentui-react-native/framework-base": 1918
       }
     },
     {
       "platform": "windows",
       "scenario": "design-legacy-theme-from-flex",
-      "rawBytes": 97576,
-      "gzipBytes": 19774,
+      "rawBytes": 97591,
+      "gzipBytes": 19778,
       "moduleCount": 58,
       "metafileInputCount": 83,
       "workspaceModules": {
@@ -226,7 +226,7 @@
       },
       "workspaceBytes": {
         "@fluentui-react-native/design": 58420,
-        "@fluentui-react-native/framework-base": 2469
+        "@fluentui-react-native/framework-base": 2484
       }
     }
   ]
