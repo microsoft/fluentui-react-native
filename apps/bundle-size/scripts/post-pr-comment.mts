@@ -5,18 +5,20 @@ import { pathToFileURL } from 'node:url';
 export const bundleSizeCommentMarker = '<!-- furn-bundle-size-report -->';
 
 const reportHeader = '# Bundle size report';
-const reportDescription =
-  'Tree-shaken production Metro bundles. Component costs are relative to their platform shell; shell costs are absolute.';
-const tableHeader = '| Platform | Scenario | Baseline cost | Current cost | Cost delta | Change | Gzip delta | Module delta |';
-const tableSeparator = '| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |';
+const reportDescription = 'Tree-shaken, minified production esbuild bundles with React and React Native runtimes externalized.';
+const tableHeader = '| Scenario | Modules-Mac (Δ) | Modules-Win (Δ) | Size-Mac (Δ) | Size-Win (Δ) |';
+const tableSeparator = '| --- | ---: | ---: | ---: | ---: |';
 const reportFooter =
   'The job is advisory: size changes are reported but do not fail the pull request. Bundle or analysis errors still fail.';
-const tableRowPattern =
-  /^\| [A-Za-z0-9][A-Za-z0-9._/-]{0,79} \| [A-Za-z0-9][A-Za-z0-9._:/-]{0,79} \| (?:New|[+-]?\d+\.\d KiB) \| (?:New|[+-]?\d+\.\d KiB) \| (?:New|[+-]?\d+\.\d KiB) \| (?:New|[+-]?\d+\.\d{2}%) \| (?:New|[+-]?\d+\.\d KiB) \| (?:New|[+-]?\d+) \|$/;
+const moduleValuePattern = String.raw`(?:-|[0-9,]+ {1,2}\((?:New|[+-][0-9,]+)\))`;
+const sizeValuePattern = String.raw`(?:-|(?:\d+b|[\d,]+\.\d{2}k) {1,2}\((?:New|[+-](?:\d+b|[\d,]+\.\d{2}k))\))`;
+const tableRowPattern = new RegExp(
+  String.raw`^\| [A-Za-z0-9][A-Za-z0-9._:/-]{0,79} \| ${moduleValuePattern} \| ${moduleValuePattern} \| ${sizeValuePattern} \| ${sizeValuePattern} \|$`,
+);
 const maximumReportBytes = 60_000;
 const repositoryPattern = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
 
-export function validateBundleSizeReport(report) {
+export function validateBundleSizeReport(report: string): string {
   if (Buffer.byteLength(report, 'utf8') > maximumReportBytes) {
     throw new Error(`Bundle-size report exceeds ${maximumReportBytes} bytes`);
   }
@@ -47,7 +49,7 @@ export function validateBundleSizeReport(report) {
   return normalized;
 }
 
-export function createBundleSizeComment(report, repository, runId) {
+export function createBundleSizeComment(report: string, repository: string, runId: string): string {
   if (!repositoryPattern.test(repository) || !/^\d+$/.test(runId)) {
     throw new Error('Invalid bundle-size workflow identity');
   }
@@ -56,7 +58,7 @@ export function createBundleSizeComment(report, repository, runId) {
   return `${bundleSizeCommentMarker}\n${validateBundleSizeReport(report)}\n\n---\n[View bundle-size workflow run](${runUrl})`;
 }
 
-export function parsePullRequestNumber(value) {
+export function parsePullRequestNumber(value: string): number {
   const normalized = value.trim();
   if (!/^[1-9]\d*$/.test(normalized)) {
     throw new Error(`Invalid pull request number: ${normalized}`);
@@ -70,7 +72,22 @@ export function parsePullRequestNumber(value) {
   return pullRequestNumber;
 }
 
-async function requestJson(fetchImplementation, url, token, options = {}) {
+interface PullRequest {
+  head: { sha: string; repo: { full_name: string } | null };
+}
+
+interface IssueComment {
+  id: number;
+  body?: string;
+  user?: { login: string };
+}
+
+async function requestJson<T>(
+  fetchImplementation: typeof fetch,
+  url: string,
+  token: string,
+  options: RequestInit = {},
+): Promise<T | undefined> {
   const response = await fetchImplementation(url, {
     ...options,
     headers: {
@@ -86,7 +103,18 @@ async function requestJson(fetchImplementation, url, token, options = {}) {
     throw new Error(`GitHub API request failed (${response.status}): ${await response.text()}`);
   }
 
-  return response.status === 204 ? undefined : response.json();
+  return response.status === 204 ? undefined : ((await response.json()) as T);
+}
+
+interface CommentOptions {
+  apiUrl?: string;
+  body: string;
+  expectedHeadRepository: string;
+  expectedHeadSha: string;
+  fetchImplementation?: typeof fetch;
+  pullRequestNumber: number;
+  repository: string;
+  token: string;
 }
 
 export async function upsertBundleSizeComment({
@@ -98,7 +126,7 @@ export async function upsertBundleSizeComment({
   pullRequestNumber,
   repository,
   token,
-}) {
+}: CommentOptions): Promise<void> {
   if (!repositoryPattern.test(repository)) {
     throw new Error(`Invalid GitHub repository: ${repository}`);
   }
@@ -110,15 +138,22 @@ export async function upsertBundleSizeComment({
     .split('/')
     .map((part) => encodeURIComponent(part))
     .join('/');
-  const request = (path, options) => requestJson(fetchImplementation, `${apiUrl}/repos/${repositoryPath}${path}`, token, options);
-  const pullRequest = await request(`/pulls/${pullRequestNumber}`);
+  const request = <T,>(path: string, options?: RequestInit) =>
+    requestJson<T>(fetchImplementation, `${apiUrl}/repos/${repositoryPath}${path}`, token, options);
+  const pullRequest = await request<PullRequest>(`/pulls/${pullRequestNumber}`);
+  if (!pullRequest) {
+    throw new Error('GitHub API returned an empty pull request');
+  }
   if (pullRequest.head.sha !== expectedHeadSha || pullRequest.head.repo?.full_name !== expectedHeadRepository) {
     throw new Error('Workflow run does not match the current pull request head');
   }
 
   let existingComment;
   for (let page = 1; page <= 20 && !existingComment; page += 1) {
-    const comments = await request(`/issues/${pullRequestNumber}/comments?per_page=100&page=${page}`);
+    const comments = await request<IssueComment[]>(`/issues/${pullRequestNumber}/comments?per_page=100&page=${page}`);
+    if (!comments) {
+      throw new Error('GitHub API returned an empty comment list');
+    }
     existingComment = comments.find(
       (comment) => comment.user?.login === 'github-actions[bot]' && comment.body?.includes(bundleSizeCommentMarker),
     );
@@ -165,7 +200,12 @@ async function main() {
     throw new Error('Missing required bundle-size PR comment environment');
   }
 
-  const pullRequestNumber = parsePullRequestNumber(pullRequestNumberValue ?? (await readFile(pullRequestNumberPath, 'utf8')));
+  const pullRequestNumberInput =
+    pullRequestNumberValue ?? (pullRequestNumberPath ? await readFile(pullRequestNumberPath, 'utf8') : undefined);
+  if (!pullRequestNumberInput) {
+    throw new Error('Missing required bundle-size PR comment environment');
+  }
+  const pullRequestNumber = parsePullRequestNumber(pullRequestNumberInput);
   const report = await readFile(reportPath, 'utf8');
   const body = createBundleSizeComment(report, repository, runId);
   await upsertBundleSizeComment({
