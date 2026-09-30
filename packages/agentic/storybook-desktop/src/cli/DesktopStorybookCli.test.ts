@@ -458,6 +458,103 @@ describe('DesktopStorybookCli', () => {
     }
   });
 
+  test.each([undefined, 150_000])(
+    'allows a cold development bundle to take longer than the service startup timeout (initialRenderTimeoutMs: %s)',
+    async (initialRenderTimeoutMs) => {
+      jest.useFakeTimers();
+      try {
+        const runner = new RecordingRunner();
+        const readyAt = Date.now() + 130_000;
+        const output = { write: jest.fn() };
+        const fetch: typeof globalThis.fetch = async (input) => {
+          if (String(input).includes('select-story-sync')) {
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            if (Date.now() < readyAt) {
+              return new Response(JSON.stringify({ error: 'Storybook runtime is not connected yet.' }), { status: 408 });
+            }
+            return new Response('{}');
+          }
+          return new Response(JSON.stringify({ entries: { first: { id: 'first--story', type: 'story' } } }));
+        };
+        const cli = new DesktopStorybookCli(
+          makeConfig({
+            macos: { run: { command: 'launch-storybook' }, smoke: { initialRenderTimeoutMs, stop: { command: 'stop-storybook' } } },
+          }),
+          { ...nativeDriverTestOptions, runner, fetch, output, errorOutput: { write: () => true }, isPortAvailable: async () => true },
+        );
+
+        const result = cli.smoke('macos').catch((error: unknown) => error);
+        await jest.advanceTimersByTimeAsync(131_000);
+        expect(await result).toBeUndefined();
+        expect(output.write).toHaveBeenCalledWith('Rendered 1 stories.\n');
+        expect(runner.stopped).toBe(2);
+      } finally {
+        jest.useRealTimers();
+      }
+    },
+  );
+
+  test.each([
+    { smokeOptions: {}, firstRenders: false, timeoutMs: 300_000 },
+    { smokeOptions: { startupTimeoutMs: 2000 }, firstRenders: false, timeoutMs: 2000 },
+    { smokeOptions: { startupTimeoutMs: 10_000, initialRenderTimeoutMs: 2000 }, firstRenders: false, timeoutMs: 2000 },
+    { smokeOptions: { initialRenderTimeoutMs: 60_000 }, firstRenders: true, timeoutMs: 15_000 },
+  ])('bounds navigation and preserves the cause (%j)', async ({ smokeOptions, firstRenders, timeoutMs }) => {
+    jest.useFakeTimers();
+    try {
+      const runner = new RecordingRunner();
+      const fetch: typeof globalThis.fetch = async (input, init) => {
+        const url = String(input);
+        if (url.includes('select-story-sync')) {
+          if (firstRenders && url.endsWith('first--story')) {
+            return new Response('{}');
+          }
+          return new Promise((_resolve, reject) => {
+            init!.signal!.addEventListener('abort', () => reject(init!.signal!.reason), { once: true });
+          });
+        }
+        return new Response(
+          JSON.stringify({
+            entries: {
+              first: { id: 'first--story', type: 'story' },
+              second: { id: 'second--story', type: 'story' },
+            },
+          }),
+        );
+      };
+      const cli = new DesktopStorybookCli(
+        makeConfig({
+          macos: { run: { command: 'launch-storybook' }, smoke: { ...smokeOptions, stop: { command: 'stop-storybook' } } },
+        }),
+        {
+          ...nativeDriverTestOptions,
+          runner,
+          fetch,
+          output: { write: () => true },
+          errorOutput: { write: () => true },
+          isPortAvailable: async () => true,
+        },
+      );
+
+      const result = cli.smoke('macos').catch((error: unknown) => error);
+      await jest.advanceTimersByTimeAsync(timeoutMs);
+      const error = await result;
+      expect(error).toBeInstanceOf(AggregateError);
+      if (!(error instanceof AggregateError)) {
+        throw new Error('Expected smoke to report a navigation failure.');
+      }
+      expect(error.errors).toHaveLength(1);
+      expect(error.errors[0].cause).toMatchObject({
+        message: `Timed out after ${timeoutMs} ms waiting for Storybook story "${firstRenders ? 'second' : 'first'}--story" to render.`,
+        cause: { name: 'AbortError' },
+      });
+      expect(runner.foreground.at(-1)?.command).toBe('stop-storybook');
+      expect(runner.stopped).toBe(2);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   test('runs authored tests after traversing the complete story index', async () => {
     const runner = new RecordingRunner();
     const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);

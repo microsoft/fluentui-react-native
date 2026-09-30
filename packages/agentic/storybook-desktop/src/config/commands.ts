@@ -116,6 +116,13 @@ export type DesktopSmokeOptions = {
   startupTimeoutMs?: number;
 
   /**
+   * Maximum time to wait for the first story, including cold development bundling and runtime startup.
+   * Falls back to an explicitly configured startupTimeoutMs.
+   * @default 300000
+   */
+  initialRenderTimeoutMs?: number;
+
+  /**
    * Delay after selecting each story.
    * @default 0
    */
