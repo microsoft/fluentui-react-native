@@ -1,0 +1,1033 @@
+schema_version: 1
+palette_type: ""
+app: Mso
+scope: >-
+  The 181 fields of the shared, standard Office SwatchSet. Specialized palette
+  types, application-color palettes, and color aliases are not separate entries.
+source:
+  definition: 'colors\Office.palette'
+  revision: '6963a5424731338e25c68cc28627bcc3428f0131'
+  selector: 'Root/PaletteType[@Name=""]'
+  deprecation_semantics: 'palettecompiler\UIPaletteShared\PaletteParser.cs'
+usage_basis: palette_definition
+guidance:
+  - >-
+    Resolve these fields through the palette for the containing UI region.
+    Their roles are semantic; their actual colors vary with the palette, theme,
+    application, and high-contrast mode.
+  - >-
+    Transparent controls expose the region's Bkg at rest. When their background
+    changes for hover, press, or selection, use the matching foreground state.
+  - >-
+    Ctl colors are for standard push buttons, CtlEmphasis colors are for
+    emphasis-styled push buttons, and CtlSubtle colors are for checkboxes and
+    radio buttons. Text-entry controls use the TextBox family.
+  - >-
+    Selected denotes a control's selected state. SelectionHighlight denotes
+    selected text; these are not interchangeable.
+  - >-
+    A deprecated value of DocsOnly means the compiler considers the field
+    unreviewed by design. Obtain design review before new use. Fields explicitly
+    marked do_not_use should not be used; their replacements are recorded.
+  - >-
+    Usage follows the definition's descriptions and control-group guidance
+    unless usage_basis is inferred_from_name. Those legacy fields have no
+    authored usage description, so their inferred roles are not recommendations
+    for new controls.
+  - >-
+    Aliases are alternate names declared for a field, not additional SwatchSet
+    properties. Entries remain in the shared definition's declaration order.
+control_families:
+  surface: UI regions and containers using the palette
+  static_foreground: Non-interactive text and foreground content
+  transparent_control: Ribbon buttons, list items, and other transparent-at-rest controls
+  striped_control: Pseudo-disabled controls with diagonal stripes and a dashed border
+  standard_push_button: Standard push buttons such as core:Button OK and Cancel buttons
+  emphasis_push_button: Push buttons using an emphasis button style
+  checkbox_radio: Checkboxes and radio buttons, not generic subtle push buttons
+  text_entry: Text boxes and editable combo boxes
+  hyperlink: Hyperlinks on resting, hovered, or selected parent surfaces
+  active_text: Text-only interactive controls such as pivot controls
+  stroke_only_control: Controls such as color-picker swatches that change only their border
+  error_foreground: Error text and error foreground content
+  toggle_switch: Toggle-switch thumb, track background, and outline
+  slider: Slider rendering, buffered regions, focus, and slider tooltips
+  scrollbar: Scrollbar gutter, scroll-button glyphs, and hover frame
+  accent_border: Region borders, separators, and accent rectangles
+  legacy_text_entry: Unreviewed legacy text-entry state fields
+  legacy_android_control: Unreviewed state fields documented as Android-only
+  group_header: Group headers such as gallery group headings
+  notification_badge: Notification-badge fill, outline, and text
+
+fields:
+  Bkg:
+    control_family: surface
+    usage: >-
+      Base background of the UI region or container using this palette.
+      Transparent controls, such as ribbon buttons and list items, expose this
+      surface in their resting state.
+  BkgHover:
+    control_family: transparent_control
+    usage: >-
+      Hover fill for a transparent-at-rest control such as a ribbon button or
+      list item. Pair with TextHover, TextSecondaryHover, or TextEmphasisHover.
+  BkgPressed:
+    control_family: transparent_control
+    usage: >-
+      Pressed fill for a transparent-at-rest control. Switch its foreground to
+      the matching TextPressed, TextSecondaryPressed, or TextEmphasisPressed.
+  BkgSelected:
+    control_family: transparent_control
+    usage: >-
+      Selected-state fill for a transparent-at-rest control such as a selected
+      list item. Pair with the matching selected foreground, not resting text.
+  BkgSelectionHighlight:
+    control_family: surface
+    usage: >-
+      Highlight behind selected text in a region whose normal background is Bkg.
+      Pair with TextSelectionHighlight; this is not a control-selection fill.
+  BkgAccentTint:
+    control_family: surface
+    usage: >-
+      Subtle accent-tinted region placed on top of the normal Bkg surface.
+      Use TextAccentTint for foreground content on this tinted region.
+  Text:
+    control_family: static_foreground
+    usage: >-
+      Default text or foreground content in a region that is not itself a
+      control, on Bkg. Stateful transparent controls should use the TextRest,
+      TextHover, TextPressed, and TextSelected family instead.
+  TextRest:
+    control_family: transparent_control
+    usage: >-
+      Normal foreground of a transparent control at rest, on the region's Bkg.
+      If the control changes its background with state, switch its foreground
+      to the corresponding state field too.
+  TextHover:
+    control_family: transparent_control
+    usage: >-
+      Normal foreground of a hovered transparent control, such as a ribbon
+      button or list item, rendered on BkgHover.
+  TextPressed:
+    control_family: transparent_control
+    usage: >-
+      Normal foreground of a pressed transparent control, rendered on
+      BkgPressed rather than the resting region background.
+  TextSelected:
+    control_family: transparent_control
+    usage: >-
+      Normal foreground of a selected transparent control, rendered on
+      BkgSelected. This is control selection, not selected text.
+  TextDisabled:
+    control_family: transparent_control
+    usage: >-
+      Disabled text or foreground content in the general transparent-control
+      family. Dedicated push-button and text-entry families have their own
+      disabled foreground fields.
+  TextSelectionHighlight:
+    control_family: surface
+    usage: >-
+      Foreground of selected text highlighted with BkgSelectionHighlight in
+      a region normally using Bkg. Do not substitute TextSelected.
+  TextAccentTint:
+    control_family: surface
+    usage: >-
+      Foreground content on a subtle accent-tinted region using BkgAccentTint,
+      rather than on the unmodified Bkg surface.
+  TextSecondary:
+    control_family: static_foreground
+    aliases: [TextSubtle]
+    usage: >-
+      Secondary information, sublabels, or visually quieter foreground content
+      on Bkg. Use the state-specific secondary fields when a control's
+      background changes.
+  TextSecondaryRest:
+    control_family: transparent_control
+    usage: >-
+      Secondary information or a sublabel in a transparent control's resting
+      state, on Bkg. Pair its later states with their matching backgrounds.
+  TextSecondaryHover:
+    control_family: transparent_control
+    usage: >-
+      Secondary information or a sublabel in a hovered transparent control,
+      rendered on BkgHover.
+  TextSecondaryPressed:
+    control_family: transparent_control
+    usage: >-
+      Secondary information or a sublabel in a pressed transparent control,
+      rendered on BkgPressed.
+  TextSecondarySelected:
+    control_family: transparent_control
+    usage: >-
+      Secondary information or a sublabel in a selected transparent control,
+      rendered on BkgSelected.
+  TextEmphasis:
+    control_family: static_foreground
+    usage: >-
+      Emphasized text or visually stronger foreground content on Bkg.
+      This is a foreground role, not the fill for an emphasis push button.
+  TextEmphasis2:
+    control_family: static_foreground
+    usage: >-
+      An alternative emphasis foreground on Bkg when the design calls for this
+      field. The definition gives it the same general emphasis role as
+      TextEmphasis, without specifying a stronger level or distinct meaning.
+  TextEmphasisRest:
+    control_family: transparent_control
+    usage: >-
+      Emphasized foreground in a transparent control's resting state, on Bkg.
+      Use the matching emphasis foreground when the control changes background.
+  TextEmphasisHover:
+    control_family: transparent_control
+    usage: >-
+      Emphasized foreground in a hovered transparent control, rendered on
+      BkgHover.
+  TextEmphasisPressed:
+    control_family: transparent_control
+    usage: >-
+      Emphasized foreground in a pressed transparent control, rendered on
+      BkgPressed.
+  TextEmphasisSelected:
+    control_family: transparent_control
+    usage: >-
+      Emphasized foreground in a selected transparent control, rendered on
+      BkgSelected.
+  StrokeSelectedHover:
+    control_family: transparent_control
+    usage: >-
+      Additional border around a transparent control that is both selected and
+      hovered, making that combined state distinct from ordinary hover.
+  StrokeKeyboard:
+    control_family: transparent_control
+    usage: >-
+      Keyboard-focus rectangle for a transparent control on the Bkg surface.
+      It indicates focus, not merely hover or selection.
+  StrokeKeyboardInverse:
+    control_family: transparent_control
+    usage: >-
+      Secondary focus outline when the surrounding color is outside the palette
+      or unknown. Use together with StrokeKeyboard so one of the two outlines
+      can contrast with the surrounding color.
+  StrokeKeyboardSelected:
+    control_family: transparent_control
+    usage: >-
+      Keyboard-focus rectangle for a selected transparent control. Its
+      distinction from StrokeKeyboard is specifically for high-contrast mode.
+  BkgStripe:
+    control_family: striped_control
+    usage: >-
+      Backplate beneath the diagonal stripes of a pseudo-disabled control.
+      Either this color or StrokeStripe must contrast at least 3:1 with Bkg.
+  StrokeStripe:
+    control_family: striped_control
+    usage: >-
+      Diagonal stripes painted over a pseudo-disabled control's BkgStripe
+      backplate. Either the stripes or the backplate must meet 3:1 against Bkg.
+  StrokeStripeOuter:
+    control_family: striped_control
+    usage: >-
+      Dashed outer border of a striped pseudo-disabled control, at the edge
+      where BkgStripe and StrokeStripe meet the surrounding Bkg.
+  TextStripe:
+    control_family: striped_control
+    usage: >-
+      Foreground content over a striped pseudo-disabled control. It must
+      contrast at least 4.5:1 with both BkgStripe and StrokeStripe.
+  TextStripeDisabled:
+    control_family: striped_control
+    usage: >-
+      Disabled foreground over the BkgStripe and StrokeStripe treatment of a
+      striped pseudo-disabled control.
+  StrokeOverRest:
+    control_family: transparent_control
+    usage: >-
+      Resting overlay border of a transparent push button. The definition
+      expects this border to normally be transparent.
+  StrokeOverHover:
+    control_family: transparent_control
+    usage: >-
+      Overlay border of a transparent push button while hovered, as opposed
+      to the standard push-button StrokeCtlHover border.
+  StrokeOverPressed:
+    control_family: transparent_control
+    usage: >-
+      Overlay border of a transparent push button while pressed.
+      Use within the transparent-control treatment, not the Ctl button family.
+  StrokeOverSelectedRest:
+    control_family: transparent_control
+    usage: >-
+      Overlay border of a selected transparent push button when it is otherwise
+      at rest, with no additional hover or press.
+  StrokeOverSelectedHover:
+    control_family: transparent_control
+    usage: >-
+      Overlay border of a selected transparent push button while it is also
+      hovered.
+  StrokeOverSelectedPressed:
+    control_family: transparent_control
+    usage: >-
+      Overlay border of a selected transparent push button while it is also
+      pressed.
+  BkgCtl:
+    control_family: standard_push_button
+    usage: >-
+      Resting fill of a standard push button such as an OK or Cancel
+      core:Button. Do not use as the generic background of ribbon or list items.
+  BkgCtlHover:
+    control_family: standard_push_button
+    usage: >-
+      Hover fill of a standard push button such as OK or Cancel.
+      Pair with TextCtlHover and StrokeCtlHover.
+  BkgCtlPressed:
+    control_family: standard_push_button
+    usage: >-
+      Pressed fill of a standard push button. Pair with TextCtlPressed and
+      StrokeCtlPressed rather than the transparent-control state fields.
+  BkgCtlSelected:
+    control_family: standard_push_button
+    usage: >-
+      Selected-state fill of a standard push button.
+      Pair with TextCtlSelected and StrokeCtlSelected.
+  BkgCtlDisabled:
+    control_family: standard_push_button
+    usage: >-
+      Disabled fill of a standard push button.
+      Pair with TextCtlDisabled and StrokeCtlDisabled.
+  TextCtl:
+    control_family: standard_push_button
+    usage: >-
+      Resting text or foreground of a standard push button, on BkgCtl.
+      Intended for push-button content rather than general region text.
+  TextCtlHover:
+    control_family: standard_push_button
+    usage: >-
+      Text or foreground of a hovered standard push button, rendered on
+      BkgCtlHover.
+  TextCtlPressed:
+    control_family: standard_push_button
+    usage: >-
+      Text or foreground of a pressed standard push button, rendered on
+      BkgCtlPressed.
+  TextCtlSelected:
+    control_family: standard_push_button
+    usage: >-
+      Text or foreground of a selected standard push button, rendered on
+      BkgCtlSelected.
+  TextCtlDisabled:
+    control_family: standard_push_button
+    usage: >-
+      Disabled text or foreground of a standard push button, rendered with
+      the button's disabled fill and border.
+  StrokeCtl:
+    control_family: standard_push_button
+    usage: >-
+      Resting border of a standard push button such as OK or Cancel.
+      Use with BkgCtl and TextCtl.
+  StrokeCtlHover:
+    control_family: standard_push_button
+    usage: >-
+      Border of a hovered standard push button.
+      Use with BkgCtlHover and TextCtlHover.
+  StrokeCtlPressed:
+    control_family: standard_push_button
+    usage: >-
+      Border of a pressed standard push button.
+      Use with BkgCtlPressed and TextCtlPressed.
+  StrokeCtlSelected:
+    control_family: standard_push_button
+    usage: >-
+      Border of a selected standard push button.
+      Use with BkgCtlSelected and TextCtlSelected.
+  StrokeCtlDisabled:
+    control_family: standard_push_button
+    usage: >-
+      Border of a disabled standard push button.
+      Use with BkgCtlDisabled and TextCtlDisabled.
+  StrokeCtlKeyboard:
+    control_family: standard_push_button
+    usage: >-
+      Inner keyboard-focus border of a standard push button, contrasting with
+      BkgCtl. The outer focus border should pair with the surrounding background.
+  BkgCtlEmphasis:
+    control_family: emphasis_push_button
+    usage: >-
+      Resting fill of a push button using the emphasis button style.
+      Do not use simply to emphasize an unrelated control or UI region.
+  BkgCtlEmphasisHover:
+    control_family: emphasis_push_button
+    usage: >-
+      Hover fill of an emphasis-styled push button.
+      Pair with TextCtlEmphasisHover and StrokeCtlEmphasisHover.
+  BkgCtlEmphasisPressed:
+    control_family: emphasis_push_button
+    usage: >-
+      Pressed fill of an emphasis-styled push button.
+      Pair with TextCtlEmphasisPressed and StrokeCtlEmphasisPressed.
+  BkgCtlEmphasisDisabled:
+    control_family: emphasis_push_button
+    usage: >-
+      Disabled fill of an emphasis-styled push button.
+      Pair with its emphasis-family disabled foreground and border.
+  TextCtlEmphasis:
+    control_family: emphasis_push_button
+    usage: >-
+      Resting foreground of an emphasis-styled push button, on BkgCtlEmphasis.
+      This is not the general-purpose TextEmphasis foreground.
+  TextCtlEmphasisHover:
+    control_family: emphasis_push_button
+    usage: >-
+      Foreground of a hovered emphasis-styled push button, rendered on
+      BkgCtlEmphasisHover.
+  TextCtlEmphasisPressed:
+    control_family: emphasis_push_button
+    usage: >-
+      Foreground of a pressed emphasis-styled push button, rendered on
+      BkgCtlEmphasisPressed.
+  TextCtlEmphasisDisabled:
+    control_family: emphasis_push_button
+    usage: >-
+      Disabled foreground of an emphasis-styled push button, rendered with
+      its emphasis-family disabled fill and border.
+  StrokeCtlEmphasis:
+    control_family: emphasis_push_button
+    usage: >-
+      Resting border of an emphasis-styled push button.
+      Use with BkgCtlEmphasis and TextCtlEmphasis.
+  StrokeCtlEmphasisHover:
+    control_family: emphasis_push_button
+    usage: >-
+      Border of a hovered emphasis-styled push button.
+      Use with the corresponding emphasis-family hover fill and foreground.
+  StrokeCtlEmphasisPressed:
+    control_family: emphasis_push_button
+    usage: >-
+      Border of a pressed emphasis-styled push button.
+      Use with the corresponding emphasis-family pressed fill and foreground.
+  StrokeCtlEmphasisDisabled:
+    control_family: emphasis_push_button
+    usage: >-
+      Border of a disabled emphasis-styled push button.
+      Use with the corresponding emphasis-family disabled fill and foreground.
+  StrokeCtlEmphasisKeyboard:
+    control_family: emphasis_push_button
+    usage: >-
+      Inner keyboard-focus border of an emphasis-styled push button, contrasting
+      with BkgCtlEmphasis. Its outer focus border should pair with the surrounding
+      background.
+  BkgCtlSubtle:
+    control_family: checkbox_radio
+    usage: >-
+      Resting fill in the checkbox and radio-button family.
+      CtlSubtle is not a general subtle-button or text-box color family.
+  BkgCtlSubtleHover:
+    control_family: checkbox_radio
+    usage: >-
+      Hover fill in the checkbox and radio-button family.
+      Text boxes and editable combo boxes should use BkgTextBoxHover instead.
+  BkgCtlSubtlePressed:
+    control_family: checkbox_radio
+    usage: >-
+      Pressed fill in the checkbox and radio-button family, paired with
+      the corresponding CtlSubtle foreground and border.
+  BkgCtlSubtleDisabled:
+    control_family: checkbox_radio
+    usage: >-
+      Disabled fill in the checkbox and radio-button family, paired with
+      TextCtlSubtleDisabled and StrokeCtlSubtleDisabled.
+  BkgCtlSubtleSelectionHighlight:
+    control_family: checkbox_radio
+    deprecated: DocsOnly
+    do_not_use: true
+    replacement: BkgTextBoxSelectionHighlight
+    usage: >-
+      Do not use. The definition explicitly rejects text-selection highlighting
+      in the checkbox/radio CtlSubtle family. Use BkgTextBoxSelectionHighlight
+      for selected text inside a text-entry control.
+  BkgTextBox:
+    control_family: text_entry
+    usage: >-
+      Resting fill of a text box or editable combo box where text can be entered.
+      Pair with TextTextBox and StrokeTextBox.
+  BkgTextBoxHover:
+    control_family: text_entry
+    usage: >-
+      Hover fill of a text box or editable combo box.
+      Pair with TextTextBoxHover and StrokeTextBoxHover.
+  BkgTextBoxPressed:
+    control_family: text_entry
+    usage: >-
+      Pressed fill of a text box or editable combo box.
+      Pair with TextTextBoxPressed and StrokeTextBoxPressed.
+  BkgTextBoxDisabled:
+    control_family: text_entry
+    usage: >-
+      Disabled fill of a text box or editable combo box.
+      Pair with TextTextBoxDisabled and StrokeTextBoxDisabled.
+  BkgTextBoxSelectionHighlight:
+    control_family: text_entry
+    usage: >-
+      Highlight behind selected text inside a text-entry control normally filled
+      with BkgTextBox. Pair with TextTextBoxSelectionHighlight.
+  TextCtlSubtle:
+    control_family: checkbox_radio
+    usage: >-
+      Resting text or foreground in the checkbox and radio-button family,
+      paired with BkgCtlSubtle. Use TextTextBox for text-entry controls.
+  TextCtlSubtlePlaceholder:
+    control_family: checkbox_radio
+    deprecated: DocsOnly
+    do_not_use: true
+    replacement: TextTextBoxPlaceholder
+    usage: >-
+      Do not use. Placeholder text belongs to text-entry controls, not the
+      checkbox/radio CtlSubtle family. Use TextTextBoxPlaceholder instead.
+  TextCtlSubtleHover:
+    control_family: checkbox_radio
+    usage: >-
+      Text or foreground of a hovered checkbox or radio button.
+      Use with the corresponding CtlSubtle hover treatment.
+  TextCtlSubtlePressed:
+    control_family: checkbox_radio
+    usage: >-
+      Text or foreground of a pressed checkbox or radio button.
+      Use with the corresponding CtlSubtle pressed treatment.
+  TextCtlSubtleDisabled:
+    control_family: checkbox_radio
+    usage: >-
+      Disabled text or foreground of a checkbox or radio button.
+      Use with the corresponding CtlSubtle disabled treatment.
+  TextCtlSubtleSelectionHighlight:
+    control_family: checkbox_radio
+    deprecated: DocsOnly
+    do_not_use: true
+    replacement: TextTextBoxSelectionHighlight
+    usage: >-
+      Do not use. Selected-text foreground belongs to the text-entry family,
+      not CtlSubtle. Use TextTextBoxSelectionHighlight with
+      BkgTextBoxSelectionHighlight.
+  TextTextBox:
+    control_family: text_entry
+    usage: >-
+      Resting text or foreground inside a text box or editable combo box,
+      rendered on BkgTextBox.
+  TextTextBoxHyperlink:
+    control_family: text_entry
+    usage: >-
+      Inline hyperlink text inside a text-entry control on BkgTextBox.
+      Use this contextual field rather than assuming a hyperlink on Bkg.
+  TextTextBoxPlaceholder:
+    control_family: text_entry
+    usage: >-
+      Placeholder or hint text inside a text box or editable combo box,
+      rendered on its BkgTextBox fill rather than as entered text.
+  TextTextBoxHover:
+    control_family: text_entry
+    usage: >-
+      Text or foreground of a hovered text box or editable combo box,
+      rendered on BkgTextBoxHover.
+  TextTextBoxPressed:
+    control_family: text_entry
+    usage: >-
+      Text or foreground of a pressed text box or editable combo box,
+      rendered on BkgTextBoxPressed.
+  TextTextBoxDisabled:
+    control_family: text_entry
+    usage: >-
+      Disabled text or foreground inside a text box or editable combo box,
+      paired with its text-entry disabled fill and border.
+  TextTextBoxSelectionHighlight:
+    control_family: text_entry
+    usage: >-
+      Foreground of selected text inside a text-entry control, rendered on
+      BkgTextBoxSelectionHighlight. This is distinct from selecting the control.
+  StrokeCtlSubtle:
+    control_family: checkbox_radio
+    usage: >-
+      Resting border in the checkbox and radio-button family.
+      Use with BkgCtlSubtle rather than as a text-box outline.
+  StrokeCtlSubtleHover:
+    control_family: checkbox_radio
+    usage: >-
+      Border of a hovered checkbox or radio button, paired with the
+      corresponding CtlSubtle hover fill and foreground.
+  StrokeCtlSubtlePressed:
+    control_family: checkbox_radio
+    usage: >-
+      Border of a pressed checkbox or radio button, paired with the
+      corresponding CtlSubtle pressed fill and foreground.
+  StrokeCtlSubtleDisabled:
+    control_family: checkbox_radio
+    usage: >-
+      Border of a disabled checkbox or radio button, paired with the
+      corresponding CtlSubtle disabled fill and foreground.
+  StrokeCtlSubtleKeyboard:
+    control_family: checkbox_radio
+    usage: >-
+      Keyboard-focus border in the checkbox and radio-button family.
+      Use to distinguish keyboard focus from ordinary hover or press.
+  StrokeTextBox:
+    control_family: text_entry
+    usage: >-
+      Resting border of a text box or editable combo box.
+      Use with BkgTextBox and TextTextBox.
+  StrokeTextBoxHover:
+    control_family: text_entry
+    usage: >-
+      Border of a hovered text box or editable combo box.
+      Use with BkgTextBoxHover and TextTextBoxHover.
+  StrokeTextBoxPressed:
+    control_family: text_entry
+    usage: >-
+      Border of a pressed text box or editable combo box.
+      Use with BkgTextBoxPressed and TextTextBoxPressed.
+  StrokeTextBoxDisabled:
+    control_family: text_entry
+    usage: >-
+      Border of a disabled text box or editable combo box.
+      Use with BkgTextBoxDisabled and TextTextBoxDisabled.
+  StrokeTextBoxKeyboard:
+    control_family: text_entry
+    usage: >-
+      Inner keyboard-focus border of a text-entry control, contrasting with
+      BkgTextBox. The outer focus border should pair with the surrounding
+      background.
+  TextHyperlink:
+    control_family: hyperlink
+    usage: >-
+      Resting hyperlink text on the normal Bkg surface.
+      Links inside text-entry controls have a separate TextTextBoxHyperlink role.
+  TextHyperlinkHover:
+    control_family: hyperlink
+    usage: >-
+      Hovered hyperlink text when its parent remains on Bkg.
+      This does not assume the parent itself has a hover fill.
+  TextHyperlinkPressed:
+    control_family: hyperlink
+    usage: >-
+      Pressed hyperlink text in the normal-background hyperlink family.
+      Use the parent-state variants if the containing control changes background.
+  TextHyperlinkParentHovered:
+    control_family: hyperlink
+    usage: >-
+      Resting hyperlink text inside a parent control that is hovered and filled
+      with BkgHover. The link itself is not additionally hovered or pressed.
+  TextHyperlinkParentHoveredHover:
+    control_family: hyperlink
+    usage: >-
+      Hovered hyperlink text when the parent is also hovered and filled with
+      BkgHover. Both the link and its parent are in their hover states.
+  TextHyperlinkParentHoveredPressed:
+    control_family: hyperlink
+    usage: >-
+      Pressed hyperlink text inside a hovered parent using BkgHover.
+      The link's pressed state is distinct from the parent's hover state.
+  TextHyperlinkParentSelected:
+    control_family: hyperlink
+    usage: >-
+      Resting hyperlink text inside a selected parent control using BkgSelected.
+      The link itself is not additionally hovered or pressed.
+  TextHyperlinkParentSelectedHover:
+    control_family: hyperlink
+    usage: >-
+      Hovered hyperlink text inside a selected parent control using BkgSelected.
+      Keep the selected-parent context when changing the link foreground.
+  TextHyperlinkParentSelectedPressed:
+    control_family: hyperlink
+    usage: >-
+      Pressed hyperlink text inside a selected parent control using BkgSelected.
+      Keep the selected-parent context when changing the link foreground.
+  TextActive:
+    control_family: active_text
+    usage: >-
+      Resting foreground of actionable text in a text-only interactive control,
+      such as a pivot control. The background stays Bkg while text changes state.
+  TextActiveHover:
+    control_family: active_text
+    usage: >-
+      Hover foreground of actionable text when the background does not change,
+      such as a hovered pivot-control label on Bkg.
+  TextActivePressed:
+    control_family: active_text
+    usage: >-
+      Pressed foreground of actionable text in a text-only interactive control
+      whose background remains unchanged.
+  TextActiveSelected:
+    control_family: active_text
+    usage: >-
+      Selected foreground of a text-only interactive control, such as a selected
+      pivot label. Selection changes the text color, not the Bkg surface.
+  StrokeOnlyHover:
+    control_family: stroke_only_control
+    usage: >-
+      Hover border for a control whose foreground and background remain
+      unchanged, such as a color-picker swatch.
+  StrokeOnlyPressed:
+    control_family: stroke_only_control
+    usage: >-
+      Pressed border for a control whose state is indicated only by its outline,
+      such as a color-picker swatch with an unchanged color fill.
+  StrokeOnlySelected:
+    control_family: stroke_only_control
+    usage: >-
+      Selected border for a control whose foreground and background remain
+      unchanged, such as the selected color-picker swatch.
+  TextError:
+    control_family: error_foreground
+    usage: >-
+      Error text or error foreground content on the normal Bkg surface.
+      This is an error foreground role, not a generic control background.
+  TextErrorHover:
+    control_family: error_foreground
+    usage: >-
+      Error text or error foreground content inside a hovered control using
+      BkgHover.
+  TextErrorPressed:
+    control_family: error_foreground
+    usage: >-
+      Error text or error foreground content inside a pressed control using
+      BkgPressed.
+  TextErrorSelected:
+    control_family: error_foreground
+    usage: >-
+      Error text or error foreground content inside a selected control using
+      BkgSelected.
+  ThumbToggleSwitchOff:
+    control_family: toggle_switch
+    usage: >-
+      Thumb of a toggle switch that is off and at rest.
+      Pair with the off-state track background and outline.
+  ThumbToggleSwitchOffHover:
+    control_family: toggle_switch
+    usage: >-
+      Thumb of an off toggle switch while hovered.
+      The switch's off value is independent of its hover interaction state.
+  ThumbToggleSwitchOffPressed:
+    control_family: toggle_switch
+    usage: >-
+      Thumb of an off toggle switch while pressed.
+      Pair with the off/pressed track background and outline.
+  ThumbToggleSwitchOffDisabled:
+    control_family: toggle_switch
+    usage: >-
+      Thumb of a disabled toggle switch whose value is off.
+      Keep the off/disabled state across the switch's other parts.
+  ThumbToggleSwitchOn:
+    control_family: toggle_switch
+    usage: >-
+      Thumb of a toggle switch that is on and at rest.
+      Pair with the on-state track background and outline.
+  ThumbToggleSwitchOnHover:
+    control_family: toggle_switch
+    usage: >-
+      Thumb of an on toggle switch while hovered.
+      The switch's on value is independent of its hover interaction state.
+  ThumbToggleSwitchOnPressed:
+    control_family: toggle_switch
+    usage: >-
+      Thumb of an on toggle switch while pressed.
+      Pair with the on/pressed track background and outline.
+  ThumbToggleSwitchOnDisabled:
+    control_family: toggle_switch
+    usage: >-
+      Thumb of a disabled toggle switch whose value is on.
+      Keep the on/disabled state across the switch's other parts.
+  BkgToggleSwitchOff:
+    control_family: toggle_switch
+    usage: >-
+      Track background of a toggle switch that is off and at rest.
+      Pair with ThumbToggleSwitchOff and StrokeToggleSwitchOff.
+  BkgToggleSwitchOffHover:
+    control_family: toggle_switch
+    usage: >-
+      Track background of an off toggle switch while hovered.
+      Pair with the corresponding off/hover thumb and outline.
+  BkgToggleSwitchOffPressed:
+    control_family: toggle_switch
+    usage: >-
+      Track background of an off toggle switch while pressed.
+      Pair with the corresponding off/pressed thumb and outline.
+  BkgToggleSwitchOffDisabled:
+    control_family: toggle_switch
+    usage: >-
+      Track background of a disabled toggle switch whose value is off.
+      Pair with the corresponding off/disabled thumb and outline.
+  BkgToggleSwitchOn:
+    control_family: toggle_switch
+    usage: >-
+      Track background of a toggle switch that is on and at rest.
+      Pair with ThumbToggleSwitchOn and StrokeToggleSwitchOn.
+  BkgToggleSwitchOnHover:
+    control_family: toggle_switch
+    usage: >-
+      Track background of an on toggle switch while hovered.
+      Pair with the corresponding on/hover thumb and outline.
+  BkgToggleSwitchOnPressed:
+    control_family: toggle_switch
+    usage: >-
+      Track background of an on toggle switch while pressed.
+      Pair with the corresponding on/pressed thumb and outline.
+  BkgToggleSwitchOnDisabled:
+    control_family: toggle_switch
+    usage: >-
+      Track background of a disabled toggle switch whose value is on.
+      Pair with the corresponding on/disabled thumb and outline.
+  StrokeToggleSwitchOff:
+    control_family: toggle_switch
+    usage: >-
+      Outline of a toggle switch that is off and at rest.
+      Use with the corresponding off-state thumb and track background.
+  StrokeToggleSwitchOffHover:
+    control_family: toggle_switch
+    usage: >-
+      Outline of an off toggle switch while hovered.
+      Use with the corresponding off/hover thumb and track background.
+  StrokeToggleSwitchOffPressed:
+    control_family: toggle_switch
+    usage: >-
+      Outline of an off toggle switch while pressed.
+      Use with the corresponding off/pressed thumb and track background.
+  StrokeToggleSwitchOffDisabled:
+    control_family: toggle_switch
+    usage: >-
+      Outline of a disabled toggle switch whose value is off.
+      Use with the corresponding off/disabled thumb and track background.
+  StrokeToggleSwitchOn:
+    control_family: toggle_switch
+    usage: >-
+      Outline of a toggle switch that is on and at rest.
+      Use with the corresponding on-state thumb and track background.
+  StrokeToggleSwitchOnHover:
+    control_family: toggle_switch
+    usage: >-
+      Outline of an on toggle switch while hovered.
+      Use with the corresponding on/hover thumb and track background.
+  StrokeToggleSwitchOnPressed:
+    control_family: toggle_switch
+    usage: >-
+      Outline of an on toggle switch while pressed.
+      Use with the corresponding on/pressed thumb and track background.
+  StrokeToggleSwitchOnDisabled:
+    control_family: toggle_switch
+    usage: >-
+      Outline of a disabled toggle switch whose value is on.
+      Use with the corresponding on/disabled thumb and track background.
+  SliderPrimary:
+    control_family: slider
+    usage: >-
+      Primary rendering color of a slider in its resting state.
+      Apply to the parts designated primary by that slider's style.
+  SliderPrimaryHover:
+    control_family: slider
+    usage: >-
+      Primary rendering color of a slider while hovered.
+      Apply to the same primary parts that use SliderPrimary at rest.
+  SliderPrimaryPressed:
+    control_family: slider
+    usage: >-
+      Primary rendering color of a slider while pressed.
+      Apply to the same primary parts that use SliderPrimary at rest.
+  SliderPrimaryDisabled:
+    control_family: slider
+    usage: >-
+      Primary rendering color of a disabled slider.
+      Apply to the primary parts, not to unrelated disabled controls.
+  SliderSecondary:
+    control_family: slider
+    usage: >-
+      Secondary rendering color of a slider.
+      The definition does not prescribe a universal thumb-versus-track split;
+      use the primary/secondary assignments of the slider's style.
+  SliderBuffer:
+    control_family: slider
+    usage: >-
+      Color of a slider's buffer region or buffer indication.
+      Use for buffered content, not as a generic slider background.
+  SliderKeyboard:
+    control_family: slider
+    usage: >-
+      Keyboard-focus color in a slider's focus treatment.
+      Use when the slider has keyboard focus rather than simply being hovered.
+  SliderToolTipBorder:
+    control_family: slider
+    usage: >-
+      Border of a slider's tooltip, paired with SliderToolTipBkg and
+      SliderToolTipLabel rather than a generic tooltip treatment.
+  SliderToolTipLabel:
+    control_family: slider
+    usage: >-
+      Label text in a slider's tooltip, rendered on SliderToolTipBkg.
+      This is distinct from the slider's primary and secondary rendering colors.
+  SliderToolTipBkg:
+    control_family: slider
+    usage: >-
+      Background of a slider's tooltip.
+      Pair with SliderToolTipLabel and SliderToolTipBorder.
+  BkgSubtle:
+    control_family: scrollbar
+    usage: >-
+      Background of a scrollbar gutter. Despite its general-sounding name, the
+      definition assigns this field to scrollbars, not arbitrary subtle surfaces.
+  GlyphAsButtonSubtle:
+    control_family: scrollbar
+    usage: >-
+      Resting scroll-button glyph when the glyph itself carries the button
+      states and its background stays unchanged, normally on BkgSubtle.
+  GlyphAsButtonSubtleHover:
+    control_family: scrollbar
+    usage: >-
+      Hovered scroll-button glyph when the glyph, rather than the background
+      behind it, changes to indicate hover.
+  GlyphAsButtonSubtlePressed:
+    control_family: scrollbar
+    usage: >-
+      Pressed scroll-button glyph when the glyph, rather than the background
+      behind it, changes to indicate press.
+  StrokeOverSubtleHover:
+    control_family: scrollbar
+    usage: >-
+      Hover frame around a transparent scrollbar.
+      This is a scrollbar overlay border, not a general subtle-control border.
+  AccentDark:
+    control_family: accent_border
+    aliases: [Accent]
+    usage: >-
+      General borders within a UI region using the current palette.
+      The role is a border accent; do not assume a fixed dark RGB value.
+  AccentLight:
+    control_family: accent_border
+    aliases: [AccentSubtle]
+    usage: >-
+      Separator or divider lines within a UI region.
+      Use this separator role rather than choosing it merely for a light color.
+  AccentEmphasis:
+    control_family: accent_border
+    usage: >-
+      Accent rectangles and visually strong or bold borders.
+      This is an accent-shape role, not an emphasis-text foreground.
+  AccentOutline:
+    control_family: accent_border
+    usage: >-
+      Border outlining the entire UI region using the palette.
+      Distinct from internal general borders and separator lines.
+  BkgTextBoxSelected:
+    control_family: legacy_text_entry
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    usage: >-
+      Legacy selected-state background for a text-entry control, inferred from
+      the name. No authored usage guidance exists; obtain design review before
+      use. Do not confuse it with BkgTextBoxSelectionHighlight for selected text.
+  BkgTextBoxFocus:
+    control_family: legacy_text_entry
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    usage: >-
+      Legacy focused text-entry background, inferred from the name.
+      The definition supplies no reviewed focus-fill guidance; obtain design
+      review before use rather than assuming every focused text box changes fill.
+  BkgTextBoxHoverDisabled:
+    control_family: legacy_text_entry
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    usage: >-
+      Legacy background for a text-entry control that is both hovered and
+      disabled, inferred from the name. Its combined-state role has no authored
+      description and requires design review before use.
+  BkgTextBoxSelectedDisabled:
+    control_family: legacy_text_entry
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    usage: >-
+      Legacy background for a text-entry control that is both selected and
+      disabled, inferred from the name. Its combined-state role has no authored
+      description and requires design review before use.
+  TextTextBoxSelected:
+    control_family: legacy_text_entry
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    usage: >-
+      Legacy foreground for a selected text-entry control, inferred from the
+      name. Obtain design review before use. Selected text has the separately
+      documented TextTextBoxSelectionHighlight role.
+  BkgCtlSubtleSelected:
+    control_family: legacy_android_control
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    legacy_platform: Android
+    usage: >-
+      Legacy Android selected-state fill in the CtlSubtle family, inferred
+      from the name. No authored control-specific usage is provided.
+      The current CtlSubtle family is for checkboxes and radio buttons;
+      obtain design review before new use.
+  TextCtlSubtleSelected:
+    control_family: legacy_android_control
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    legacy_platform: Android
+    usage: >-
+      Legacy Android selected-state foreground in the CtlSubtle family,
+      inferred from the name. The definition pairs it with BkgCtlSubtleSelected
+      but supplies no authored usage description. Obtain design review before
+      new use; this is not a text-selection foreground.
+  BkgCtlEmphasisFocus:
+    control_family: legacy_android_control
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    legacy_platform: Android
+    usage: >-
+      Legacy Android focus-state fill in the emphasis push-button family,
+      inferred from the name. No authored focus-fill guidance exists;
+      obtain design review before new use.
+  BkgCtlSubtleFocus:
+    control_family: legacy_android_control
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    legacy_platform: Android
+    usage: >-
+      Legacy Android focus-state fill in the CtlSubtle family, inferred from
+      the name. No authored control-specific focus guidance exists.
+      The current family is for checkboxes and radio buttons; obtain design
+      review before new use.
+  BkgCtlSubtleHoverDisabled:
+    control_family: legacy_android_control
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    legacy_platform: Android
+    usage: >-
+      Legacy Android combined hovered-and-disabled fill in the CtlSubtle family,
+      inferred from the name. No authored usage description exists.
+      Do not repurpose it for text boxes; obtain design review before new use.
+  BkgCtlSubtleSelectedDisabled:
+    control_family: legacy_android_control
+    deprecated: DocsOnly
+    usage_basis: inferred_from_name
+    legacy_platform: Android
+    usage: >-
+      Legacy Android combined selected-and-disabled fill in the CtlSubtle family,
+      inferred from the name. No authored usage description exists.
+      Do not repurpose it for text boxes; obtain design review before new use.
+  BkgHeader:
+    control_family: group_header
+    usage: >-
+      Background of a group header, such as a gallery group heading.
+      Pair with TextHeader; this is not a generic window-title-bar field.
+  TextHeader:
+    control_family: group_header
+    usage: >-
+      Text or foreground of a group header, such as a gallery group heading,
+      rendered on BkgHeader.
+  BkgBadge:
+    control_family: notification_badge
+    usage: >-
+      Fill of a notification badge.
+      Pair with TextBadge and StrokeBadge for the badge's content and outline.
+  StrokeBadge:
+    control_family: notification_badge
+    usage: >-
+      Outline of a notification badge, used with the badge's BkgBadge fill
+      rather than with a general control border.
+  TextBadge:
+    control_family: notification_badge
+    usage: >-
+      Text or foreground inside a notification badge, rendered on BkgBadge.
+      Use for badge content rather than surrounding labels.
