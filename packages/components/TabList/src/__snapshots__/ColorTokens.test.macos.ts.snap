@@ -3,7 +3,7 @@
 exports[`TabList color tokens pins Tab colors 1`] = `
 {
   "borderColor": "#00000000",
-  "color": "#000000",
+  "color": "#424242",
   "disabled": {
     "color": "#757575",
     "iconColor": "#757575",
@@ -39,7 +39,7 @@ exports[`TabList color tokens pins Tab colors 1`] = `
       "backgroundColor": "#00000000",
     },
   },
-  "iconColor": "#000000",
+  "iconColor": "#424242",
   "indicatorColor": "#00000000",
   "pressed": {
     "color": "#242424",

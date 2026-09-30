@@ -8,7 +8,7 @@ exports[`pins Chip color tokens on macOS 1`] = `
       "backgroundColor": "#0078d4",
     },
   },
-  "color": "#000000",
+  "color": "#424242",
   "danger": {
     "backgroundColor": "#fdf6f6",
     "color": "#bc2f32",
@@ -37,7 +37,7 @@ exports[`pins Chip color tokens on macOS 1`] = `
     },
   },
   "selected": {
-    "backgroundColor": "#fafafa",
+    "backgroundColor": "#d1d1d1",
     "color": "#242424",
   },
   "severe": {

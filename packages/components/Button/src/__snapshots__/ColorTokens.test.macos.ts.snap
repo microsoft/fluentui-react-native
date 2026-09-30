@@ -7,7 +7,7 @@ exports[`Button color tokens pins v0 Button color tokens 1`] = `
       "tokens": {
         "backgroundColor": {
           "colorWithSystemEffect": {
-            "baseColor": "#f5f5f5",
+            "baseColor": "#ffffff",
             "systemEffect": "disabled",
           },
         },
@@ -22,14 +22,14 @@ exports[`Button color tokens pins v0 Button color tokens 1`] = `
     },
     "focused": {
       "tokens": {
-        "backgroundColor": "#f5f5f5",
+        "backgroundColor": "#ffffff",
         "borderColor": "#00000000",
         "color": "#616161",
       },
     },
     "hovered": {
       "tokens": {
-        "backgroundColor": "#f5f5f5",
+        "backgroundColor": "#ffffff",
         "borderColor": "buttonBorderHovered",
         "color": "#616161",
       },
@@ -38,7 +38,7 @@ exports[`Button color tokens pins v0 Button color tokens 1`] = `
       "tokens": {
         "backgroundColor": {
           "colorWithSystemEffect": {
-            "baseColor": "#f5f5f5",
+            "baseColor": "#ffffff",
             "systemEffect": "pressed",
           },
         },
@@ -206,7 +206,7 @@ exports[`Button color tokens pins v1 Button color tokens 1`] = `
 {
   "backgroundColor": "#ffffff",
   "borderColor": "#d6d6d6",
-  "color": "#000000",
+  "color": "#424242",
   "disabled": {
     "backgroundColor": "#ffffff",
     "borderColor": "#e0e0e0",
@@ -216,20 +216,20 @@ exports[`Button color tokens pins v1 Button color tokens 1`] = `
   "focused": {
     "backgroundColor": "#ffffff",
     "borderColor": "#d6d6d6",
-    "color": "#000000",
+    "color": "#424242",
   },
   "hovered": {
     "backgroundColor": "#ffffff",
     "borderColor": "#d6d6d6",
-    "color": "#000000",
-    "iconColor": "#000000",
+    "color": "#424242",
+    "iconColor": "#424242",
   },
-  "iconColor": "#000000",
+  "iconColor": "#424242",
   "pressed": {
-    "backgroundColor": "#ebebeb",
+    "backgroundColor": "#d6d6d6",
     "borderColor": "#d6d6d6",
-    "color": "#000000",
-    "iconColor": "#000000",
+    "color": "#424242",
+    "iconColor": "#424242",
   },
   "primary": {
     "backgroundColor": "#0078d4",
@@ -296,7 +296,7 @@ exports[`Button color tokens pins v1 CompoundButton color tokens 1`] = `
 {
   "backgroundColor": "#ffffff",
   "borderColor": "#d6d6d6",
-  "color": "#000000",
+  "color": "#424242",
   "disabled": {
     "backgroundColor": "#ffffff",
     "borderColor": "#e0e0e0",
@@ -306,21 +306,21 @@ exports[`Button color tokens pins v1 CompoundButton color tokens 1`] = `
   "focused": {
     "backgroundColor": "#ffffff",
     "borderColor": "#d6d6d6",
-    "color": "#000000",
+    "color": "#424242",
   },
   "hovered": {
     "backgroundColor": "#ffffff",
     "borderColor": "#d6d6d6",
-    "color": "#000000",
-    "iconColor": "#000000",
+    "color": "#424242",
+    "iconColor": "#424242",
     "secondaryContentColor": "#616161",
   },
-  "iconColor": "#000000",
+  "iconColor": "#424242",
   "pressed": {
-    "backgroundColor": "#ebebeb",
+    "backgroundColor": "#d6d6d6",
     "borderColor": "#d6d6d6",
-    "color": "#000000",
-    "iconColor": "#000000",
+    "color": "#424242",
+    "iconColor": "#424242",
     "secondaryContentColor": "#ffffff",
   },
   "primary": {
@@ -464,7 +464,7 @@ exports[`Button color tokens pins v1 FAB color tokens 1`] = `
     },
     "iconColor": "#0078d4",
     "pressed": {
-      "backgroundColor": "#ebebeb",
+      "backgroundColor": "#d6d6d6",
       "color": "#004578",
       "iconColor": "#004578",
     },
@@ -522,7 +522,7 @@ exports[`Button color tokens pins v1 ToggleButton color tokens 1`] = `
       },
     },
   },
-  "color": "#000000",
+  "color": "#424242",
   "disabled": {
     "backgroundColor": "#ffffff",
     "borderColor": "#e0e0e0",
@@ -532,20 +532,20 @@ exports[`Button color tokens pins v1 ToggleButton color tokens 1`] = `
   "focused": {
     "backgroundColor": "#ffffff",
     "borderColor": "#d6d6d6",
-    "color": "#000000",
+    "color": "#424242",
   },
   "hovered": {
     "backgroundColor": "#ffffff",
     "borderColor": "#d6d6d6",
-    "color": "#000000",
-    "iconColor": "#000000",
+    "color": "#424242",
+    "iconColor": "#424242",
   },
-  "iconColor": "#000000",
+  "iconColor": "#424242",
   "pressed": {
-    "backgroundColor": "#ebebeb",
+    "backgroundColor": "#d6d6d6",
     "borderColor": "#d6d6d6",
-    "color": "#000000",
-    "iconColor": "#000000",
+    "color": "#424242",
+    "iconColor": "#424242",
   },
   "primary": {
     "backgroundColor": "#0078d4",

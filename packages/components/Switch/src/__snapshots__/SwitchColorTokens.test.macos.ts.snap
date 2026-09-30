@@ -2,7 +2,7 @@
 
 exports[`pins Switch color tokens on macOS 1`] = `
 {
-  "color": "#000000",
+  "color": "#424242",
   "focusStrokeColor": "#00000000",
   "focused": {
     "focusStrokeColor": "#000000",

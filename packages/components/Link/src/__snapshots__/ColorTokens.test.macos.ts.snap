@@ -92,10 +92,10 @@ exports[`Link color tokens pins v1 Link color tokens 1`] = `
     "color": "#004578",
   },
   "subtle": {
-    "color": "#000000",
+    "color": "#424242",
     "focused": {
       "borderColor": "#000000",
-      "color": "#000000",
+      "color": "#424242",
     },
     "hovered": {
       "color": "#242424",
@@ -104,7 +104,7 @@ exports[`Link color tokens pins v1 Link color tokens 1`] = `
       "color": "#242424",
     },
     "visited": {
-      "color": "#000000",
+      "color": "#424242",
     },
   },
   "visited": {

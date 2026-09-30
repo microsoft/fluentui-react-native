@@ -7,12 +7,12 @@ exports[`Divider color tokens pins appearance colors 1`] = `
     "lineColor": "#0078d4",
   },
   "default": {
-    "contentColor": "#000000",
+    "contentColor": "#424242",
     "lineColor": "#d6d6d6",
   },
   "strong": {
     "contentColor": "#242424",
-    "lineColor": "#f0f0f0",
+    "lineColor": "#d1d1d1",
   },
   "subtle": {
     "contentColor": "#616161",

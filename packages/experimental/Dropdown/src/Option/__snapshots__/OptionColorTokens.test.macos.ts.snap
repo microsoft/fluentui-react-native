@@ -3,8 +3,8 @@
 exports[`pins Option color tokens on macOS 1`] = `
 {
   "backgroundColor": "#ffffff",
-  "checkmarkColor": "#000000",
-  "color": "#000000",
+  "checkmarkColor": "#424242",
+  "color": "#424242",
   "disabled": {
     "backgroundColor": "#ffffff",
     "checkmarkColor": "#757575",
@@ -16,7 +16,7 @@ exports[`pins Option color tokens on macOS 1`] = `
     "color": "#242424",
   },
   "pressed": {
-    "backgroundColor": "#ebebeb",
+    "backgroundColor": "#d6d6d6",
     "checkmarkColor": "#242424",
     "color": "#242424",
   },

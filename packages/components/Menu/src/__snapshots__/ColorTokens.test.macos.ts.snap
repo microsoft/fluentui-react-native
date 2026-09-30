@@ -72,9 +72,9 @@ exports[`Menu color tokens pins MenuItemCheckbox colors 1`] = `
 {
   "backgroundColor": "#00000000",
   "checked": {
-    "checkmarkColor": "#000000",
+    "checkmarkColor": "#424242",
   },
-  "color": "#000000",
+  "color": "#424242",
   "disabled": {
     "backgroundColor": "#00000000",
     "checked": {
@@ -91,7 +91,7 @@ exports[`Menu color tokens pins MenuItemCheckbox colors 1`] = `
     "color": "#ffffff",
     "iconColor": "#ffffff",
   },
-  "iconColor": "#000000",
+  "iconColor": "#424242",
   "pressed": {
     "backgroundColor": "#106ebe",
     "checked": {

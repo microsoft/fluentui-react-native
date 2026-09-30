@@ -8,9 +8,9 @@ exports[`RadioGroup color tokens pins Radio v1 colors: Radio v1 1`] = `
     "color": "#757575",
   },
   "hovered": {
-    "color": "#000000",
+    "color": "#424242",
     "selected": {
-      "color": "#000000",
+      "color": "#424242",
       "radioFill": "#106ebe",
     },
   },
