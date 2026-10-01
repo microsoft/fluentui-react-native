@@ -18237,7 +18237,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^4.1.0, js-yaml@npm:^4.1.1, js-yaml@npm:^4.2.0":
+"js-yaml@npm:^4.1.0, js-yaml@npm:^4.1.1, js-yaml@npm:^4.2.0, js-yaml@npm:^4.3.1":
   version: 4.3.2
   resolution: "js-yaml@npm:4.3.2"
   dependencies:
@@ -24989,16 +24989,16 @@ __metadata:
   linkType: hard
 
 "workspace-tools@npm:^0.42.0":
-  version: 0.42.0
-  resolution: "workspace-tools@npm:0.42.0"
+  version: 0.42.2
+  resolution: "workspace-tools@npm:0.42.2"
   dependencies:
     "@yarnpkg/lockfile": "npm:^1.1.0"
     fast-glob: "npm:^3.3.3"
     git-url-parse: "npm:^16.1.0"
     jju: "npm:^1.4.0"
-    js-yaml: "npm:^4.2.0"
+    js-yaml: "npm:^4.3.1"
     micromatch: "npm:^4.0.8"
-  checksum: 10c0/a39edf688de49f3e183ab57ffd0b0740350048b2c5fc656bfee93ec9c438bd90b07b98033e52709f8d92b7eef65fc5c8c70632e47f972601650706819db3d114
+  checksum: 10c0/39ca834720d49fe1177c6fceec837d9da72b3c1e73bfd2ce077c8e4f277cf6a454bed7bd18349087b124591262ea2c4aee043ede8ee5ea1a983dd1949abdcb1b
   languageName: node
   linkType: hard
 
