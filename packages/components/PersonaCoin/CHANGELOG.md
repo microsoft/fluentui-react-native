@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/persona-coin
 
+## 0.17.9
+
+### Patch Changes
+
+- 726912f: Pin Win32 and macOS component color token values in platform-specific snapshots.
+
 ## 0.17.8
 
 ### Patch Changes

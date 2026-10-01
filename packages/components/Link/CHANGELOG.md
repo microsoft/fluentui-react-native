@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/link
 
+## 0.24.15
+
+### Patch Changes
+
+- 726912f: Pin Win32 and macOS component color token values in platform-specific snapshots.
+- Updated dependencies [726912f]
+- Updated dependencies [efd9477]
+  - @fluentui-react-native/text@0.25.15
+
 ## 0.24.14
 
 ### Patch Changes
