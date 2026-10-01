@@ -1,5 +1,11 @@
 # @fluentui-react-native/storybook-desktop
 
+## 0.3.1
+
+### Patch Changes
+
+- efd9477: Separate cold first-render waiting from service startup in the reusable smoke lifecycle, and report story navigation deadlines with their underlying causes.
+
 ## 0.3.0
 
 ### Minor Changes

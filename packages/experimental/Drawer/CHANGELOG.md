@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/drawer
 
+## 0.5.15
+
+### Patch Changes
+
+- 726912f: Pin Win32 and macOS component color token values in platform-specific snapshots.
+
 ## 0.5.14
 
 ### Patch Changes
