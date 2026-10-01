@@ -9,6 +9,13 @@ export const settings: IComposeSettings<IButtonType> = [
       color: 'primaryButtonText',
       borderColor: 'primaryButtonBorder',
     },
+    // TODO - #728: neutralForegroundOnBrand is not working for icon color.
+    endIcon: {
+      color: '#ffffff',
+    },
+    startIcon: {
+      color: '#ffffff',
+    },
     _overrides: {
       disabled: {
         tokens: {

@@ -1,25 +1,44 @@
-import type { Theme } from '@fluentui-react-native/framework';
+import type { FontWeightValue, Theme } from '@fluentui-react-native/framework';
+import { fontSize100, fontSize200, fontSize400, fontWeightRegular, fontWeightSemibold } from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { CompoundButtonTokens } from './CompoundButton.types';
 
-export const defaultCompoundButtonFontTokens: TokenSettings<CompoundButtonTokens, Theme> = (_t: Theme): CompoundButtonTokens => ({
+export const defaultCompoundButtonFontTokens: TokenSettings<CompoundButtonTokens, Theme> = (t: Theme): CompoundButtonTokens => ({
   medium: {
     hasContent: {
-      variant: 'bodySemibold',
-      secondaryContentFont: { variant: 'secondaryStandard' },
+      fontFamily: t.typography.families.secondary,
+      fontSize: fontSize200,
+      fontWeight: fontWeightSemibold as FontWeightValue,
+      secondaryContentFont: {
+        fontFamily: t.typography.families.secondary,
+        fontSize: fontSize100,
+        fontWeight: fontWeightSemibold as FontWeightValue,
+      },
     },
   },
   small: {
     hasContent: {
-      variant: 'bodyStandard',
-      secondaryContentFont: { variant: 'secondaryStandard' },
+      fontFamily: t.typography.families.primary,
+      fontSize: fontSize200,
+      fontWeight: fontWeightRegular as FontWeightValue,
+      secondaryContentFont: {
+        fontFamily: t.typography.families.secondary,
+        fontSize: fontSize100,
+        fontWeight: fontWeightSemibold as FontWeightValue,
+      },
     },
   },
   large: {
     hasContent: {
-      variant: 'subheaderSemibold',
-      secondaryContentFont: { variant: 'bodyStandard' },
+      fontFamily: t.typography.families.secondary,
+      fontSize: fontSize400,
+      fontWeight: fontWeightSemibold as FontWeightValue,
+      secondaryContentFont: {
+        fontFamily: t.typography.families.primary,
+        fontSize: fontSize200,
+        fontWeight: fontWeightRegular as FontWeightValue,
+      },
     },
   },
 });

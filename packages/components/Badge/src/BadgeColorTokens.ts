@@ -1,11 +1,7 @@
 import type { Theme, TokenSettings } from '@fluentui-react-native/framework';
 import {
   colorDarkOrangePrimary,
-  colorDarkOrangeShade10,
-  colorDarkOrangeShade40,
   colorDarkOrangeTint30,
-  colorDarkOrangeTint40,
-  colorDarkOrangeTint50,
   colorDarkOrangeTint60,
   colorGreenPrimary,
   colorGreenShade30,
@@ -16,6 +12,10 @@ import {
   colorGrey14,
   colorGrey16,
   colorGrey68,
+  colorOfficeShade10,
+  colorOfficeShade40,
+  colorOfficeTint40,
+  colorOfficeTint50,
   colorOrangeShade40,
   colorRedPrimary,
   colorRedShade30,
@@ -31,7 +31,7 @@ import {
 } from '@fluentui-react-native/design/tokens/global';
 
 import type { BadgeTokens } from './Badge.types';
-import { getFilledColorProps, getOutlineColorProps, getTintColorProps, getGhostColorProps } from './colorHelper';
+import { getFilledColorProps, getOutlineColorProps, getTintColorProps, getGhostColorProps, getWin32Props } from './colorHelper';
 
 export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
   ({
@@ -55,10 +55,11 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             backgroundColor: t.colors.brandBackgroundStatic,
           },
           t,
+          getWin32Props,
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: t.colors.brandForeground1 }, t),
+        ...getOutlineColorProps({ color: t.colors.brandForeground1 }, t, getWin32Props),
       },
       tint: {
         ...getTintColorProps(
@@ -68,6 +69,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             borderColor: t.colors.brandStroke2,
           },
           t,
+          getWin32Props,
         ),
       },
       ghost: {
@@ -76,6 +78,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             color: t.colors.brandForeground1,
           },
           t,
+          getWin32Props,
         ),
       },
     },
@@ -86,10 +89,11 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             backgroundColor: colorRedPrimary,
           },
           t,
+          getWin32Props,
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: colorRedPrimary, colorDark: colorRedTint30 }, t),
+        ...getOutlineColorProps({ color: colorRedPrimary, colorDark: colorRedTint30 }, t, getWin32Props),
       },
       tint: {
         ...getTintColorProps(
@@ -102,6 +106,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             borderColorDark: colorRedShade30,
           },
           t,
+          getWin32Props,
         ),
       },
       ghost: {
@@ -111,6 +116,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             colorDark: colorRedTint30,
           },
           t,
+          getWin32Props,
         ),
       },
     },
@@ -121,22 +127,24 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             backgroundColor: colorDarkOrangePrimary,
           },
           t,
+          getWin32Props,
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: colorDarkOrangePrimary, colorDark: colorDarkOrangeTint30 }, t),
+        ...getOutlineColorProps({ color: colorDarkOrangePrimary, colorDark: colorDarkOrangeTint30 }, t, getWin32Props),
       },
       tint: {
         ...getTintColorProps(
           {
             backgroundColor: colorDarkOrangeTint60,
-            color: colorDarkOrangeShade10,
-            borderColor: colorDarkOrangeTint50,
+            color: colorOfficeShade10,
+            borderColor: colorOfficeTint50,
             backgroundColorDark: colorOrangeShade40,
-            colorDark: colorDarkOrangeTint40,
-            borderColorDark: colorDarkOrangeShade40,
+            colorDark: colorOfficeTint40,
+            borderColorDark: colorOfficeShade40,
           },
           t,
+          getWin32Props,
         ),
       },
       ghost: {
@@ -146,6 +154,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             colorDark: colorDarkOrangeTint30,
           },
           t,
+          getWin32Props,
         ),
       },
     },
@@ -157,10 +166,11 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             color: colorGrey14, // It should be neutralForegroundStatic1. It's hardcoded because the token doesn't exist right now
           },
           t,
+          getWin32Props,
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: colorYellowShade30, colorDark: colorYellowTint40 }, t),
+        ...getOutlineColorProps({ color: colorYellowShade30, colorDark: colorYellowTint40 }, t, getWin32Props),
       },
       tint: {
         ...getTintColorProps(
@@ -173,6 +183,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             borderColorDark: colorYellowShade30,
           },
           t,
+          getWin32Props,
         ),
       },
       ghost: {
@@ -182,6 +193,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             colorDark: colorYellowTint40,
           },
           t,
+          getWin32Props,
         ),
       },
     },
@@ -192,10 +204,11 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             backgroundColor: colorGreenPrimary,
           },
           t,
+          getWin32Props,
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: colorGreenPrimary, colorDark: colorGreenTint40 }, t),
+        ...getOutlineColorProps({ color: colorGreenPrimary, colorDark: colorGreenTint40 }, t, getWin32Props),
       },
       tint: {
         ...getTintColorProps(
@@ -208,6 +221,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             borderColorDark: colorGreenShade30,
           },
           t,
+          getWin32Props,
         ),
       },
       ghost: {
@@ -217,6 +231,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             colorDark: colorGreenTint40,
           },
           t,
+          getWin32Props,
         ),
       },
     },
@@ -228,10 +243,11 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             color: t.colors.neutralBackground1,
           },
           t,
+          getWin32Props,
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: t.colors.neutralForeground3, borderColor: t.colors.neutralStrokeAccessible }, t),
+        ...getOutlineColorProps({ color: t.colors.neutralForeground3, borderColor: t.colors.neutralStrokeAccessible }, t, getWin32Props),
       },
       tint: {
         ...getTintColorProps(
@@ -244,6 +260,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             borderColorDark: colorGrey68,
           },
           t,
+          getWin32Props,
         ),
       },
       ghost: {
@@ -252,6 +269,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             color: t.colors.neutralForeground1,
           },
           t,
+          getWin32Props,
         ),
       },
     },
@@ -265,10 +283,11 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             hcColor: t.colors.brandForeground1,
           },
           t,
+          getWin32Props,
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: t.colors.neutralForeground3, borderColor: t.colors.neutralStroke2 }, t),
+        ...getOutlineColorProps({ color: t.colors.neutralForeground3, borderColor: t.colors.neutralStroke2 }, t, getWin32Props),
       },
       tint: {
         ...getTintColorProps(
@@ -278,6 +297,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             borderColor: t.colors.neutralStroke2,
           },
           t,
+          getWin32Props,
         ),
       },
       ghost: {
@@ -286,6 +306,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             color: t.colors.neutralForeground3,
           },
           t,
+          getWin32Props,
         ),
       },
     },
@@ -299,10 +320,11 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             hcColor: t.colors.brandForeground1,
           },
           t,
+          getWin32Props,
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: t.colors.neutralForegroundOnBrand }, t),
+        ...getOutlineColorProps({ color: t.colors.neutralForegroundOnBrand }, t, getWin32Props),
       },
       tint: {
         ...getTintColorProps(
@@ -312,6 +334,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             borderColor: t.colors.neutralStroke2,
           },
           t,
+          getWin32Props,
         ),
       },
       ghost: {
@@ -320,6 +343,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             color: t.colors.neutralForegroundOnBrand,
           },
           t,
+          getWin32Props,
         ),
       },
     },

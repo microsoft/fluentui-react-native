@@ -407,7 +407,7 @@ export class DesktopStorybookCli {
         }
         await this.writeMacOSApplicationLease(instance.driverManifestPath, smoke.startupTimeoutMs ?? 120_000);
       }
-      await this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.startupTimeoutMs);
+      await this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs);
       if (mode === 'stories-and-tests') {
         const result = await this.runSmokeTests({
           config: this.config,
@@ -532,7 +532,7 @@ export class DesktopStorybookCli {
     };
   }
 
-  private async renderEveryStory(serverUrl: string, settleMs: number, startupTimeoutMs = 120_000): Promise<void> {
+  private async renderEveryStory(serverUrl: string, settleMs: number, initialRenderTimeoutMs = 300_000): Promise<void> {
     const storyIndex = await this.getJson(new URL('/index.json', serverUrl));
     const entries = Object.values((storyIndex.entries ?? {}) as Record<string, { id?: string; type?: string }>).filter(
       (entry) => entry.type === 'story' && entry.id,
@@ -545,7 +545,7 @@ export class DesktopStorybookCli {
     let consecutiveFailures = 0;
     for (const [entryIndex, { id }] of entries.entries()) {
       try {
-        await this.selectStory(serverUrl, id!, entryIndex === 0 ? startupTimeoutMs : 15_000);
+        await this.selectStory(serverUrl, id!, entryIndex === 0 ? initialRenderTimeoutMs : 15_000);
         consecutiveFailures = 0;
         if (settleMs > 0) {
           await delay(settleMs);
@@ -586,7 +586,7 @@ export class DesktopStorybookCli {
         }
       }
     } while (Date.now() < deadline);
-    throw lastError;
+    throw new Error(`Timed out after ${timeoutMs} ms waiting for Storybook story "${storyId}" to render.`, { cause: lastError });
   }
 
   private async waitForUrl(url: string, process: RunningDesktopCommand, timeoutMs = 120_000): Promise<void> {

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pins Shimmer color tokens on Windows 1`] = `
+{
+  "backgroundColor": "antiquewhite",
+  "shimmerColor": "#E6E6E6",
+  "shimmerWaveColor": "#E1E1E1",
+}
+`;

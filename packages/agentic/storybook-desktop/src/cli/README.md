@@ -156,6 +156,15 @@ app stop command. For Windows Fabric and the prebuilt REX Win32 host, configure 
 `createWindowsSmokeOptions`, `createWin32RunCommand`, and
 `createWin32SmokeCommand`; do not copy lifecycle scripts into the consumer.
 
+The reusable lifecycle waits up to two minutes for its services, then up to
+five minutes for the first story after native launch. Metro's status endpoint
+can be ready before a cold development bundle finishes, and a successful
+release bundle does not prewarm the Debug app's development bundle. First
+render therefore has a separate budget. Set `platformOptions.macos.smoke.initialRenderTimeoutMs`
+to override it; an explicitly configured `startupTimeoutMs` remains its
+fallback. Later stories retain their 15-second navigation deadline. A timeout
+reports the story, elapsed budget, and underlying request failure.
+
 For a broader E2E suite, let the test coordinator own the service processes:
 
 1. Start `storybook server` and Metro with one platform environment.
