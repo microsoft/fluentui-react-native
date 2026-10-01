@@ -1,4 +1,4 @@
-schema_version: 3
+schema_version: 4
 palette_type: ''
 app: Mso
 scope: Expressive Avatar, AvatarGroup, Badge, PresenceBadge, Persona, and PersonaCoin color mappings,
@@ -28,11 +28,6 @@ guidance:
   - Original Office roles retain the palette definition's descriptions and control-group guidance.
     Component-only roles describe the observed or planned component source without redefining the original
     Office usage.
-  - Keys follow <control>.<appearance>.<usage>[.<state>] and are sorted lexically. office_palette and Office
-    aliases remain separate from the token collection.
-  - tokens is sparse and has alias, flex, legacy, literal, and platform namespaces. alias contains modern
-    color or shadow alias names, flex contains grouped Flex paths, and legacy contains deprecated Theme
-    references.
   - literal contains raw color or SVG paint literals; platform contains platform color references such as
     PlatformColor(...). Symbolic globals, computed expressions, inherited currentColor, and unresolved caller
     values remain in value_expression rather than being mislabeled as literal colors.
@@ -42,18 +37,26 @@ guidance:
   - Source locations, mapping provenance, declaration annotations, conditional context, colorless coverage,
     and opacity modifiers live in semantic-slot-sources.yaml. Each setting reference retains its slot and
     token payload so identical component-setting labels can still be traced to their exact declarations.
-  - conflicts uses the same compact component-setting references and token namespaces. Existing symbolic
-    disagreements and Office-field discrepancies are preserved, not resolved by this restructuring;
-    conditional variants are not claims of different resolved RGB values.
   - potential_matches resolves against the union of fields in semantic-slots.yaml and
     colored-component-slots.yaml. The two collections have disjoint keys; cross-collection matches are not
     dangling local references.
-  - Source token values are retained without choosing a new implementation. Unused declarations, overridden
-    fallbacks, planned Flex contracts, optional Office projection, and native or caller ownership are
-    documented in the source index.
   - Primary and Emphasis push buttons share Ctl.Emphasis. Filled default buttons called Secondary or Subtle
     share Ctl.Standard; Ctl.Subtle remains the Office checkbox/radio family. Transparent treatments remain
     distinct.
+  - Keys follow <control>.<appearance>.<usage>[.<state>] and remain sorted. The original Office palette seeds
+    live under tokens.office; Office aliases remain definition metadata.
+  - tokens has office, alias, flex, legacy, literal, and platform namespaces. Component usages contain only
+    the value source authored by the component. Agentic and pinned Flex declarations retain their Flex token,
+    not automatically derived aliases or legacy crosswalks.
+  - Top-level alias, flex, legacy, literal, platform, and value_expression values require a matching authored
+    used_by value and exact source-index evidence. The initial Office palette seeds are the only exception;
+    component-only roles do not acquire an inferred Office token.
+  - conflicts is recomputed from disagreements between distinct component source identities within an authored
+    namespace. Removed crosswalks, inferred Office correlations, and stock-theme-resolved literals are not
+    component conflicts. Intentional conditional variants remain separate evidence.
+  - Source annotations identify unused declarations, overridden fallbacks, planned Flex contracts, native or
+    caller ownership, and optional host projection context. Such context does not add another authored
+    component token source.
 control_families:
   notification_badge: Notification-badge fill, outline, and text
   avatar: Color roles authored for Avatar and related controls.
@@ -109,24 +112,22 @@ fields:
     usage_basis: component_source
     usage: Avatar image-mode transparent fill
     tokens:
-      alias: transparentBackground
       flex: color.backgroundNeutralTransparent
     used_by:
       - component: agentic.Avatar-root.backgroundColor; contentMode=image; all sizes
         tokens:
-          alias: transparentBackground
           flex: color.backgroundNeutralTransparent
   Avatar.Named.Bkg.Dark:
     control_family: avatar
     usage_basis: component_source
     usage: Named-color avatar backing fill in DarkGray/Black themes
     tokens: {}
-    value_expression: getNamedColorSet(avatarColor).shade30
     used_by:
       - component: v1.Avatar-getColorProps(each NamedColorSet).dark.initialsBackground.backgroundColor
         tokens: {}
         value_expression: getNamedColorSet(avatarColor).shade30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: getNamedColorSet(avatarColor).shade30
   Avatar.Named.Bkg.HighContrast:
     control_family: avatar
     usage_basis: component_source
@@ -143,23 +144,23 @@ fields:
     usage_basis: component_source
     usage: Named-color avatar backing fill in White/Colorful/default themes
     tokens: {}
-    value_expression: getNamedColorSet(avatarColor).tint40
     used_by:
       - component: v1.Avatar-getColorProps(each NamedColorSet).light.initialsBackground.backgroundColor
         tokens: {}
         value_expression: getNamedColorSet(avatarColor).tint40
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: getNamedColorSet(avatarColor).tint40
   Avatar.Named.Glyph.Dark:
     control_family: avatar
     usage_basis: component_source
     usage: Named-color avatar glyph in DarkGray/Black themes
     tokens: {}
-    value_expression: getNamedColorSet(avatarColor).tint40
     used_by:
       - component: v1.Avatar-getColorProps(each NamedColorSet).dark.icon/fallbackIcon.iconColor
         tokens: {}
         value_expression: getNamedColorSet(avatarColor).tint40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: getNamedColorSet(avatarColor).tint40
   Avatar.Named.Glyph.HighContrast:
     control_family: avatar
     usage_basis: component_source
@@ -176,23 +177,23 @@ fields:
     usage_basis: component_source
     usage: Named-color avatar glyph in White/Colorful/default themes
     tokens: {}
-    value_expression: getNamedColorSet(avatarColor).shade30
     used_by:
       - component: v1.Avatar-getColorProps(each NamedColorSet).light.icon/fallbackIcon.iconColor
         tokens: {}
         value_expression: getNamedColorSet(avatarColor).shade30
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: getNamedColorSet(avatarColor).shade30
   Avatar.Named.StrokeRing.Dark:
     control_family: avatar
     usage_basis: component_source
     usage: Named-color activity ring in DarkGray/Black themes
     tokens: {}
-    value_expression: getNamedColorSet(avatarColor).tint30
     used_by:
       - component: v1.Avatar-getColorProps(each NamedColorSet).dark.ring.ringColor
         tokens: {}
         value_expression: getNamedColorSet(avatarColor).tint30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: getNamedColorSet(avatarColor).tint30
   Avatar.Named.StrokeRing.HighContrast:
     control_family: avatar
     usage_basis: component_source
@@ -209,23 +210,23 @@ fields:
     usage_basis: component_source
     usage: Named-color activity ring in White/Colorful/default themes
     tokens: {}
-    value_expression: getNamedColorSet(avatarColor).primary
     used_by:
       - component: v1.Avatar-getColorProps(each NamedColorSet).light.ring.ringColor
         tokens: {}
         value_expression: getNamedColorSet(avatarColor).primary
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: getNamedColorSet(avatarColor).primary
   Avatar.Named.Text.Dark:
     control_family: avatar
     usage_basis: component_source
     usage: Named-color avatar initials in DarkGray/Black themes
     tokens: {}
-    value_expression: getNamedColorSet(avatarColor).tint40
     used_by:
       - component: v1.Avatar-getColorProps(each NamedColorSet).dark.initials.color
         tokens: {}
         value_expression: getNamedColorSet(avatarColor).tint40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: getNamedColorSet(avatarColor).tint40
   Avatar.Named.Text.HighContrast:
     control_family: avatar
     usage_basis: component_source
@@ -242,12 +243,12 @@ fields:
     usage_basis: component_source
     usage: Named-color avatar initials in White/Colorful/default themes
     tokens: {}
-    value_expression: getNamedColorSet(avatarColor).shade30
     used_by:
       - component: v1.Avatar-getColorProps(each NamedColorSet).light.initials.color
         tokens: {}
         value_expression: getNamedColorSet(avatarColor).shade30
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: getNamedColorSet(avatarColor).shade30
   Avatar.Neutral.Bkg:
     control_family: avatar
     usage_basis: component_source
@@ -305,12 +306,10 @@ fields:
     usage_basis: component_source
     usage: Decorative active-identity ring, not keyboard focus
     tokens:
-      alias: brandStroke1
       flex: color.strokeBrandLoud
     used_by:
       - component: agentic.Avatar-activityRing.borderColor; all sizes; visible iff activityRing
         tokens:
-          alias: brandStroke1
           flex: color.strokeBrandLoud
   Avatar.Standard.Bkg:
     control_family: identity_marker
@@ -349,20 +348,16 @@ fields:
     potential_matches:
       - Surface.Standard.Text
     tokens:
-      alias: neutralForeground1
       flex: color.foregroundNeutralPrimary
     used_by:
       - component: agentic.Avatar-foregroundColor; icon/initials
         tokens:
-          alias: neutralForeground1
           flex: color.foregroundNeutralPrimary
       - component: agentic.Avatar-initials.style.color
         tokens:
-          alias: neutralForeground1
           flex: color.foregroundNeutralPrimary
       - component: agentic.Avatar-icon.color
         tokens:
-          alias: neutralForeground1
           flex: color.foregroundNeutralPrimary
   AvatarGroup.Overflow.Bkg:
     control_family: avatar_group
@@ -371,12 +366,10 @@ fields:
     potential_matches:
       - Surface.Standard.Bkg
     tokens:
-      alias: neutralBackground1
       flex: color.surfaceNeutralNearer
     used_by:
       - component: flex-contract.avatar-group-tokens.background.overflow-indicator
         tokens:
-          alias: neutralBackground1
           flex: color.surfaceNeutralNearer
   AvatarGroup.Overflow.Stroke:
     control_family: avatar_group
@@ -385,12 +378,10 @@ fields:
     potential_matches:
       - Surface.Standard.StrokeOuter
     tokens:
-      alias: neutralStroke2
       flex: color.strokeNeutralSubtle
     used_by:
       - component: flex-contract.avatar-group-tokens.stroke.overflow-indicator.color-token
         tokens:
-          alias: neutralStroke2
           flex: color.strokeNeutralSubtle
   AvatarGroup.Overflow.Text:
     control_family: avatar_group
@@ -399,12 +390,10 @@ fields:
     potential_matches:
       - Surface.Standard.Text
     tokens:
-      alias: neutralForeground1
       flex: color.foregroundNeutralPrimary
     used_by:
       - component: flex-contract.avatar-group-tokens.foreground.overflow-indicator
         tokens:
-          alias: neutralForeground1
           flex: color.foregroundNeutralPrimary
   AvatarGroup.Stack.Cutout:
     control_family: avatar_group
@@ -421,12 +410,10 @@ fields:
     usage_basis: component_source
     usage: Design-tool fallback paint around overlapping avatars.
     tokens:
-      alias: neutralBackground1
       flex: color.surfaceNeutralNearer
     used_by:
       - component: flex-contract.avatar-group-tokens.stroke.stack-cutout.figma-fallback.stroke-color-token
         tokens:
-          alias: neutralBackground1
           flex: color.surfaceNeutralNearer
   Badge.BrandGhost.Text:
     control_family: status_badge
@@ -485,134 +472,134 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens: {}
-    value_expression: colorRedPrimary
     used_by:
       - component: v1.Badge-danger.filled.backgroundColor light/dark
         tokens: {}
         value_expression: colorRedPrimary
         condition: theme.name !== 'HighContrast'
+    value_expression: colorRedPrimary
   Badge.DangerGhost.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme ghost danger badge text/glyph
     tokens: {}
-    value_expression: colorRedTint30
     used_by:
       - component: v1.Badge-danger.ghost.colorDark
         tokens: {}
         value_expression: colorRedTint30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorRedTint30
   Badge.DangerGhost.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme ghost danger badge text/glyph
     tokens: {}
-    value_expression: colorRedPrimary
     used_by:
       - component: v1.Badge-danger.ghost.color
         tokens: {}
         value_expression: colorRedPrimary
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorRedPrimary
   Badge.DangerOutline.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme danger outlined badge text/glyph
     tokens: {}
-    value_expression: colorRedTint30
     used_by:
       - component: v1.Badge-danger.outline.colorDark
         tokens: {}
         value_expression: colorRedTint30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorRedTint30
   Badge.DangerOutline.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme danger outlined badge text/glyph
     tokens: {}
-    value_expression: colorRedPrimary
     used_by:
       - component: v1.Badge-danger.outline.color; default borderColor light/dark copies light color
         tokens: {}
         value_expression: colorRedPrimary
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast'] for foreground; copied border input also
           used in DarkGray/Black
+    value_expression: colorRedPrimary
   Badge.DangerTint.Bkg.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme danger tinted badge fill
     tokens: {}
-    value_expression: colorRedShade40
     used_by:
       - component: v1.Badge-danger.tint.backgroundColorDark
         tokens: {}
         value_expression: colorRedShade40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorRedShade40
   Badge.DangerTint.Bkg.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme danger tinted badge fill
     tokens: {}
-    value_expression: colorRedTint60
     used_by:
       - component: v1.Badge-danger.tint.backgroundColor
         tokens: {}
         value_expression: colorRedTint60
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorRedTint60
   Badge.DangerTint.Stroke.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme danger tinted badge outline
     tokens: {}
-    value_expression: colorRedShade30
     used_by:
       - component: v1.Badge-danger.tint.borderColorDark
         tokens: {}
         value_expression: colorRedShade30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorRedShade30
   Badge.DangerTint.Stroke.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme danger tinted badge outline
     tokens: {}
-    value_expression: colorRedTint40
     used_by:
       - component: v1.Badge-danger.tint.borderColor
         tokens: {}
         value_expression: colorRedTint40
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorRedTint40
   Badge.DangerTint.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme danger tinted badge text/glyph
     tokens: {}
-    value_expression: colorRedTint30
     used_by:
       - component: v1.Badge-danger.tint.colorDark
         tokens: {}
         value_expression: colorRedTint30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorRedTint30
   Badge.DangerTint.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme danger tinted badge text/glyph
     tokens: {}
-    value_expression: colorRedPrimary
     used_by:
       - component: v1.Badge-danger.tint.color
         tokens: {}
         value_expression: colorRedPrimary
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorRedPrimary
   Badge.Filled.Bkg.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Filled badge dark fill fallback to same input fill
     tokens: {}
-    value_expression: colors.backgroundColorDark || colors.backgroundColor
     used_by:
       - component: v1.Badge-getFilledColorProps.dark.backgroundColor all eight badgeColors
         tokens: {}
         value_expression: colors.backgroundColorDark || colors.backgroundColor
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colors.backgroundColorDark || colors.backgroundColor
   Badge.Filled.Bkg.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -629,34 +616,34 @@ fields:
     usage_basis: component_source
     usage: Filled badge icon copying resolved dark foreground
     tokens: {}
-    value_expression: colorDark = colors.colorDark || color
     used_by:
       - component: v1.Badge-getFilledColorProps.dark.iconColor all eight badgeColors
         tokens: {}
         value_expression: colorDark = colors.colorDark || color
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorDark = colors.colorDark || color
   Badge.Filled.Glyph.HighContrast:
     control_family: status_badge
     usage_basis: component_source
     usage: HC filled badge icon copying resolved HC foreground
     tokens: {}
-    value_expression: hcColor = colors.hcColor || theme.colors.neutralForegroundInverted
     used_by:
       - component: v1.Badge-getFilledColorProps.hc.iconColor all eight badgeColors
         tokens: {}
         value_expression: hcColor = colors.hcColor || theme.colors.neutralForegroundInverted
         condition: theme.name === 'HighContrast'
+    value_expression: hcColor = colors.hcColor || theme.colors.neutralForegroundInverted
   Badge.Filled.Glyph.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Filled badge icon copying resolved light foreground
     tokens: {}
-    value_expression: color = colors.color || theme.colors.neutralForegroundOnBrand
     used_by:
       - component: v1.Badge-getFilledColorProps.light.iconColor all eight badgeColors
         tokens: {}
         value_expression: color = colors.color || theme.colors.neutralForegroundOnBrand
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: color = colors.color || theme.colors.neutralForegroundOnBrand
   Badge.Filled.Stroke.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -673,12 +660,12 @@ fields:
     usage_basis: component_source
     usage: Filled badge dark text fallback to same input foreground
     tokens: {}
-    value_expression: colors.colorDark || color
     used_by:
       - component: v1.Badge-getFilledColorProps.dark.color all eight badgeColors
         tokens: {}
         value_expression: colors.colorDark || color
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colors.colorDark || color
   Badge.Filled.Text.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -705,12 +692,12 @@ fields:
     usage_basis: component_source
     usage: Ghost badge dark icon copying dark foreground
     tokens: {}
-    value_expression: colors.colorDark || colors.color
     used_by:
       - component: v1.Badge-getGhostColorProps.dark.iconColor all eight badgeColors
         tokens: {}
         value_expression: colors.colorDark || colors.color
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colors.colorDark || colors.color
   Badge.Ghost.Glyph.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -727,12 +714,12 @@ fields:
     usage_basis: component_source
     usage: Ghost badge light icon copying foreground
     tokens: {}
-    value_expression: colors.color
     used_by:
       - component: v1.Badge-getGhostColorProps.light.iconColor all eight badgeColors
         tokens: {}
         value_expression: colors.color
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colors.color
   Badge.Ghost.Stroke:
     control_family: status_badge
     usage_basis: component_source
@@ -748,12 +735,12 @@ fields:
     usage_basis: component_source
     usage: Dark ghost badge text choosing explicit dark or resting input
     tokens: {}
-    value_expression: colors.colorDark || colors.color
     used_by:
       - component: v1.Badge-getGhostColorProps.dark.color all eight badgeColors
         tokens: {}
         value_expression: colors.colorDark || colors.color
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colors.colorDark || colors.color
   Badge.Ghost.Text.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -824,12 +811,12 @@ fields:
     usage_basis: component_source
     usage: Dark-theme important tinted badge fill
     tokens: {}
-    value_expression: colorGrey68
     used_by:
       - component: v1.Badge-important.tint.backgroundColorDark
         tokens: {}
         value_expression: colorGrey68
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorGrey68
   Badge.ImportantTint.Bkg.Light:
     control_family: status_badge
     usage_basis: component_source
@@ -846,12 +833,12 @@ fields:
     usage_basis: component_source
     usage: Dark-theme important tinted badge outline
     tokens: {}
-    value_expression: colorGrey68
     used_by:
       - component: v1.Badge-important.tint.borderColorDark
         tokens: {}
         value_expression: colorGrey68
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorGrey68
   Badge.ImportantTint.Stroke.Light:
     control_family: status_badge
     usage_basis: component_source
@@ -868,12 +855,12 @@ fields:
     usage_basis: component_source
     usage: Dark-theme important tinted badge text/glyph
     tokens: {}
-    value_expression: colorGrey16
     used_by:
       - component: v1.Badge-important.tint.colorDark
         tokens: {}
         value_expression: colorGrey16
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorGrey16
   Badge.ImportantTint.Text.Light:
     control_family: status_badge
     usage_basis: component_source
@@ -1006,12 +993,12 @@ fields:
     usage_basis: component_source
     usage: Outlined badge dark icon copying dark foreground
     tokens: {}
-    value_expression: colorDark = colors.colorDark || colors.color
     used_by:
       - component: v1.Badge-getOutlineColorProps.dark.iconColor all eight badgeColors
         tokens: {}
         value_expression: colorDark = colors.colorDark || colors.color
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorDark = colors.colorDark || colors.color
   Badge.Outline.Glyph.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -1028,23 +1015,23 @@ fields:
     usage_basis: component_source
     usage: Outlined badge light icon copying foreground
     tokens: {}
-    value_expression: colors.color
     used_by:
       - component: v1.Badge-getOutlineColorProps.light.iconColor all eight badgeColors
         tokens: {}
         value_expression: colors.color
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colors.color
   Badge.Outline.Stroke.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Outlined badge dark border retaining light border fallback
     tokens: {}
-    value_expression: colors.borderColorDark || borderColor || colorDark
     used_by:
       - component: v1.Badge-getOutlineColorProps.dark.borderColor all eight badgeColors
         tokens: {}
         value_expression: colors.borderColorDark || borderColor || colorDark
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colors.borderColorDark || borderColor || colorDark
   Badge.Outline.Stroke.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -1061,23 +1048,23 @@ fields:
     usage_basis: component_source
     usage: Outlined badge light border resolved from explicit border or foreground
     tokens: {}
-    value_expression: colors.borderColor || colors.color
     used_by:
       - component: v1.Badge-getOutlineColorProps.light.borderColor all eight badgeColors
         tokens: {}
         value_expression: colors.borderColor || colors.color
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colors.borderColor || colors.color
   Badge.Outline.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark outlined badge text choosing explicit dark or resting input
     tokens: {}
-    value_expression: colors.colorDark || colors.color
     used_by:
       - component: v1.Badge-getOutlineColorProps.dark.color all eight badgeColors
         tokens: {}
         value_expression: colors.colorDark || colors.color
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colors.colorDark || colors.color
   Badge.Outline.Text.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -1096,12 +1083,10 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens:
-      alias: transparentBackground
       flex: color.backgroundNeutralTransparent
     used_by:
       - component: agentic.Badge-Badge.background.backgroundColor; outline/brand
         tokens:
-          alias: transparentBackground
           flex: color.backgroundNeutralTransparent
   Badge.OutlineBrand.Stroke:
     control_family: notification_badge
@@ -1110,12 +1095,10 @@ fields:
     potential_matches:
       - Badge.Standard.Stroke
     tokens:
-      alias: brandStroke1
       flex: color.strokeBrandLoud
     used_by:
       - component: agentic.Badge-Badge.background.borderColor; outline/brand
         tokens:
-          alias: brandStroke1
           flex: color.strokeBrandLoud
   Badge.OutlineBrand.Text:
     control_family: notification_badge
@@ -1124,20 +1107,16 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens:
-      alias: brandForeground1
       flex: color.foregroundBrandPrimary
     used_by:
       - component: agentic.Badge-Badge.foreground.color; outline/brand
         tokens:
-          alias: brandForeground1
           flex: color.foregroundBrandPrimary
       - component: agentic.Badge-leadingIcon.color; outline/brand
         tokens:
-          alias: brandForeground1
           flex: color.foregroundBrandPrimary
       - component: agentic.Badge-trailingIcon.color; outline/brand
         tokens:
-          alias: brandForeground1
           flex: color.foregroundBrandPrimary
   Badge.OutlineDanger.Bkg:
     control_family: notification_badge
@@ -1146,12 +1125,10 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens:
-      alias: transparentBackground
       flex: color.backgroundNeutralTransparent
     used_by:
       - component: agentic.Badge-Badge.background.backgroundColor; outline/danger
         tokens:
-          alias: transparentBackground
           flex: color.backgroundNeutralTransparent
   Badge.OutlineDanger.Stroke:
     control_family: notification_badge
@@ -1160,12 +1137,10 @@ fields:
     potential_matches:
       - Badge.Standard.Stroke
     tokens:
-      alias: dangerBorder2
       flex: color.strokeDangerLoud
     used_by:
       - component: agentic.Badge-Badge.background.borderColor; outline/danger
         tokens:
-          alias: dangerBorder2
           flex: color.strokeDangerLoud
   Badge.OutlineDanger.Text:
     control_family: notification_badge
@@ -1174,20 +1149,16 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens:
-      alias: dangerForeground1
       flex: color.foregroundDangerPrimary
     used_by:
       - component: agentic.Badge-Badge.foreground.color; outline/danger
         tokens:
-          alias: dangerForeground1
           flex: color.foregroundDangerPrimary
       - component: agentic.Badge-leadingIcon.color; outline/danger
         tokens:
-          alias: dangerForeground1
           flex: color.foregroundDangerPrimary
       - component: agentic.Badge-trailingIcon.color; outline/danger
         tokens:
-          alias: dangerForeground1
           flex: color.foregroundDangerPrimary
   Badge.OutlineInformative.Bkg:
     control_family: notification_badge
@@ -1196,12 +1167,10 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens:
-      alias: transparentBackground
       flex: color.backgroundNeutralTransparent
     used_by:
       - component: agentic.Badge-Badge.background.backgroundColor; outline/informative
         tokens:
-          alias: transparentBackground
           flex: color.backgroundNeutralTransparent
   Badge.OutlineInformative.Stroke:
     control_family: notification_badge
@@ -1210,12 +1179,10 @@ fields:
     potential_matches:
       - Badge.Standard.Stroke
     tokens:
-      alias: neutralStroke1
       flex: color.strokeNeutralLoud
     used_by:
       - component: agentic.Badge-Badge.background.borderColor; outline/informative
         tokens:
-          alias: neutralStroke1
           flex: color.strokeNeutralLoud
   Badge.OutlineInformative.Text:
     control_family: notification_badge
@@ -1224,20 +1191,16 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens:
-      alias: neutralForeground1
       flex: color.foregroundNeutralPrimary
     used_by:
       - component: agentic.Badge-Badge.foreground.color; outline/informative
         tokens:
-          alias: neutralForeground1
           flex: color.foregroundNeutralPrimary
       - component: agentic.Badge-leadingIcon.color; outline/informative
         tokens:
-          alias: neutralForeground1
           flex: color.foregroundNeutralPrimary
       - component: agentic.Badge-trailingIcon.color; outline/informative
         tokens:
-          alias: neutralForeground1
           flex: color.foregroundNeutralPrimary
   Badge.OutlineSuccess.Bkg:
     control_family: notification_badge
@@ -1246,12 +1209,10 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens:
-      alias: transparentBackground
       flex: color.backgroundNeutralTransparent
     used_by:
       - component: agentic.Badge-Badge.background.backgroundColor; outline/success
         tokens:
-          alias: transparentBackground
           flex: color.backgroundNeutralTransparent
   Badge.OutlineSuccess.Stroke:
     control_family: notification_badge
@@ -1260,12 +1221,10 @@ fields:
     potential_matches:
       - Badge.Standard.Stroke
     tokens:
-      alias: successBorder2
       flex: color.strokeSuccessLoud
     used_by:
       - component: agentic.Badge-Badge.background.borderColor; outline/success
         tokens:
-          alias: successBorder2
           flex: color.strokeSuccessLoud
   Badge.OutlineSuccess.Text:
     control_family: notification_badge
@@ -1274,20 +1233,16 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens:
-      alias: successForeground1
       flex: color.foregroundSuccessPrimary
     used_by:
       - component: agentic.Badge-Badge.foreground.color; outline/success
         tokens:
-          alias: successForeground1
           flex: color.foregroundSuccessPrimary
       - component: agentic.Badge-leadingIcon.color; outline/success
         tokens:
-          alias: successForeground1
           flex: color.foregroundSuccessPrimary
       - component: agentic.Badge-trailingIcon.color; outline/success
         tokens:
-          alias: successForeground1
           flex: color.foregroundSuccessPrimary
   Badge.OutlineWarning.Bkg:
     control_family: notification_badge
@@ -1296,12 +1251,10 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens:
-      alias: transparentBackground
       flex: color.backgroundNeutralTransparent
     used_by:
       - component: agentic.Badge-Badge.background.backgroundColor; outline/warning
         tokens:
-          alias: transparentBackground
           flex: color.backgroundNeutralTransparent
   Badge.OutlineWarning.Stroke:
     control_family: notification_badge
@@ -1310,12 +1263,10 @@ fields:
     potential_matches:
       - Badge.Standard.Stroke
     tokens:
-      alias: warningBorder2
       flex: color.strokeWarningLoud
     used_by:
       - component: agentic.Badge-Badge.background.borderColor; outline/warning
         tokens:
-          alias: warningBorder2
           flex: color.strokeWarningLoud
   Badge.OutlineWarning.Text:
     control_family: notification_badge
@@ -1324,20 +1275,16 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens:
-      alias: warningForeground1
       flex: color.foregroundWarningPrimary
     used_by:
       - component: agentic.Badge-Badge.foreground.color; outline/warning
         tokens:
-          alias: warningForeground1
           flex: color.foregroundWarningPrimary
       - component: agentic.Badge-leadingIcon.color; outline/warning
         tokens:
-          alias: warningForeground1
           flex: color.foregroundWarningPrimary
       - component: agentic.Badge-trailingIcon.color; outline/warning
         tokens:
-          alias: warningForeground1
           flex: color.foregroundWarningPrimary
   Badge.SevereFilled.Bkg:
     control_family: status_badge
@@ -1346,128 +1293,128 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens: {}
-    value_expression: colorDarkOrangePrimary
     used_by:
       - component: v1.Badge-severe.filled.backgroundColor light/dark
         tokens: {}
         value_expression: colorDarkOrangePrimary
         condition: theme.name !== 'HighContrast'
+    value_expression: colorDarkOrangePrimary
   Badge.SevereGhost.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme ghost severe badge text/glyph
     tokens: {}
-    value_expression: colorDarkOrangeTint30
     used_by:
       - component: v1.Badge-severe.ghost.colorDark
         tokens: {}
         value_expression: colorDarkOrangeTint30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorDarkOrangeTint30
   Badge.SevereGhost.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme ghost severe badge text/glyph
     tokens: {}
-    value_expression: colorDarkOrangePrimary
     used_by:
       - component: v1.Badge-severe.ghost.color
         tokens: {}
         value_expression: colorDarkOrangePrimary
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorDarkOrangePrimary
   Badge.SevereOutline.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme severe outlined badge text/glyph
     tokens: {}
-    value_expression: colorDarkOrangeTint30
     used_by:
       - component: v1.Badge-severe.outline.colorDark
         tokens: {}
         value_expression: colorDarkOrangeTint30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorDarkOrangeTint30
   Badge.SevereOutline.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme severe outlined badge text/glyph
     tokens: {}
-    value_expression: colorDarkOrangePrimary
     used_by:
       - component: v1.Badge-severe.outline.color; default borderColor light/dark copies light color
         tokens: {}
         value_expression: colorDarkOrangePrimary
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast'] for foreground; copied border input also
           used in DarkGray/Black
+    value_expression: colorDarkOrangePrimary
   Badge.SevereTint.Bkg.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme severe tinted badge fill
     tokens: {}
-    value_expression: colorOrangeShade40
     used_by:
       - component: v1.Badge-severe.tint.backgroundColorDark
         tokens: {}
         value_expression: colorOrangeShade40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorOrangeShade40
   Badge.SevereTint.Bkg.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme severe tinted badge fill
     tokens: {}
-    value_expression: colorDarkOrangeTint60
     used_by:
       - component: v1.Badge-severe.tint.backgroundColor
         tokens: {}
         value_expression: colorDarkOrangeTint60
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorDarkOrangeTint60
   Badge.SevereTint.Stroke.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme severe tinted badge outline
     tokens: {}
-    value_expression: colorOfficeShade40
     used_by:
       - component: v1.Badge-severe.tint.borderColorDark
         tokens: {}
         value_expression: colorOfficeShade40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorOfficeShade40
   Badge.SevereTint.Stroke.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme severe tinted badge outline
     tokens: {}
-    value_expression: colorOfficeTint50
     used_by:
       - component: v1.Badge-severe.tint.borderColor
         tokens: {}
         value_expression: colorOfficeTint50
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorOfficeTint50
   Badge.SevereTint.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme severe tinted badge text/glyph
     tokens: {}
-    value_expression: colorOfficeTint40
     used_by:
       - component: v1.Badge-severe.tint.colorDark
         tokens: {}
         value_expression: colorOfficeTint40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorOfficeTint40
   Badge.SevereTint.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme severe tinted badge text/glyph
     tokens: {}
-    value_expression: colorOfficeShade10
     used_by:
       - component: v1.Badge-severe.tint.color
         tokens: {}
         value_expression: colorOfficeShade10
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorOfficeShade10
   Badge.Standard.Bkg:
-    office_palette: BkgBadge
     control_family: notification_badge
     usage: Fill of a notification badge. Pair with TextBadge and StrokeBadge for the badge's content and outline.
     tokens:
+      office: BkgBadge
       alias: brandBackgroundStatic
     used_by:
       - component: v1.Badge-base.root.backgroundColor
@@ -1477,11 +1424,11 @@ fields:
         tokens:
           alias: brandBackgroundStatic
   Badge.Standard.Stroke:
-    office_palette: StrokeBadge
     control_family: notification_badge
     usage: Outline of a notification badge, used with the badge's BkgBadge fill rather than with a general control
       border.
     tokens:
+      office: StrokeBadge
       alias: transparentStroke
     used_by:
       - component: v1.Badge-base.root.borderColor
@@ -1491,11 +1438,11 @@ fields:
         tokens:
           alias: transparentStroke
   Badge.Standard.Text:
-    office_palette: TextBadge
     control_family: notification_badge
     usage: Text or foreground inside a notification badge, rendered on BkgBadge. Use for badge content rather than
       surrounding labels.
     tokens:
+      office: TextBadge
       alias: neutralForegroundOnBrand
     used_by:
       - component: v1.Badge-base.text.color; iconColor fallback
@@ -1608,134 +1555,134 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens: {}
-    value_expression: colorGreenPrimary
     used_by:
       - component: v1.Badge-success.filled.backgroundColor light/dark
         tokens: {}
         value_expression: colorGreenPrimary
         condition: theme.name !== 'HighContrast'
+    value_expression: colorGreenPrimary
   Badge.SuccessGhost.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme ghost success badge text/glyph
     tokens: {}
-    value_expression: colorGreenTint40
     used_by:
       - component: v1.Badge-success.ghost.colorDark
         tokens: {}
         value_expression: colorGreenTint40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorGreenTint40
   Badge.SuccessGhost.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme ghost success badge text/glyph
     tokens: {}
-    value_expression: colorGreenPrimary
     used_by:
       - component: v1.Badge-success.ghost.color
         tokens: {}
         value_expression: colorGreenPrimary
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorGreenPrimary
   Badge.SuccessOutline.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme success outlined badge text/glyph
     tokens: {}
-    value_expression: colorGreenTint40
     used_by:
       - component: v1.Badge-success.outline.colorDark
         tokens: {}
         value_expression: colorGreenTint40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorGreenTint40
   Badge.SuccessOutline.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme success outlined badge text/glyph
     tokens: {}
-    value_expression: colorGreenPrimary
     used_by:
       - component: v1.Badge-success.outline.color; default borderColor light/dark copies light color
         tokens: {}
         value_expression: colorGreenPrimary
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast'] for foreground; copied border input also
           used in DarkGray/Black
+    value_expression: colorGreenPrimary
   Badge.SuccessTint.Bkg.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme success tinted badge fill
     tokens: {}
-    value_expression: colorGreenShade40
     used_by:
       - component: v1.Badge-success.tint.backgroundColorDark
         tokens: {}
         value_expression: colorGreenShade40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorGreenShade40
   Badge.SuccessTint.Bkg.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme success tinted badge fill
     tokens: {}
-    value_expression: colorGreenTint60
     used_by:
       - component: v1.Badge-success.tint.backgroundColor
         tokens: {}
         value_expression: colorGreenTint60
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorGreenTint60
   Badge.SuccessTint.Stroke.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme success tinted badge outline
     tokens: {}
-    value_expression: colorGreenShade30
     used_by:
       - component: v1.Badge-success.tint.borderColorDark
         tokens: {}
         value_expression: colorGreenShade30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorGreenShade30
   Badge.SuccessTint.Stroke.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme success tinted badge outline
     tokens: {}
-    value_expression: colorGreenTint40
     used_by:
       - component: v1.Badge-success.tint.borderColor
         tokens: {}
         value_expression: colorGreenTint40
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorGreenTint40
   Badge.SuccessTint.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme success tinted badge text/glyph
     tokens: {}
-    value_expression: colorGreenTint30
     used_by:
       - component: v1.Badge-success.tint.colorDark
         tokens: {}
         value_expression: colorGreenTint30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorGreenTint30
   Badge.SuccessTint.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme success tinted badge text/glyph
     tokens: {}
-    value_expression: colorGreenPrimary
     used_by:
       - component: v1.Badge-success.tint.color
         tokens: {}
         value_expression: colorGreenPrimary
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorGreenPrimary
   Badge.Tint.Bkg.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark tinted badge fill choosing explicit dark or resting input
     tokens: {}
-    value_expression: colors.backgroundColorDark || colors.backgroundColor
     used_by:
       - component: v1.Badge-getTintColorProps.dark.backgroundColor all eight badgeColors
         tokens: {}
         value_expression: colors.backgroundColorDark || colors.backgroundColor
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colors.backgroundColorDark || colors.backgroundColor
   Badge.Tint.Bkg.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -1752,12 +1699,12 @@ fields:
     usage_basis: component_source
     usage: Tinted badge dark icon copying dark foreground
     tokens: {}
-    value_expression: colors.colorDark || colors.color
     used_by:
       - component: v1.Badge-getTintColorProps.dark.iconColor all eight badgeColors
         tokens: {}
         value_expression: colors.colorDark || colors.color
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colors.colorDark || colors.color
   Badge.Tint.Glyph.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -1774,23 +1721,23 @@ fields:
     usage_basis: component_source
     usage: Tinted badge light icon copying foreground
     tokens: {}
-    value_expression: colors.color
     used_by:
       - component: v1.Badge-getTintColorProps.light.iconColor all eight badgeColors
         tokens: {}
         value_expression: colors.color
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colors.color
   Badge.Tint.Stroke.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark tinted badge outline choosing explicit dark or resting input
     tokens: {}
-    value_expression: colors.borderColorDark || colors.borderColor
     used_by:
       - component: v1.Badge-getTintColorProps.dark.borderColor all eight badgeColors
         tokens: {}
         value_expression: colors.borderColorDark || colors.borderColor
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colors.borderColorDark || colors.borderColor
   Badge.Tint.Stroke.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -1807,12 +1754,12 @@ fields:
     usage_basis: component_source
     usage: Dark tinted badge text choosing explicit dark or resting input
     tokens: {}
-    value_expression: colors.colorDark || colors.color
     used_by:
       - component: v1.Badge-getTintColorProps.dark.color all eight badgeColors
         tokens: {}
         value_expression: colors.colorDark || colors.color
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colors.colorDark || colors.color
   Badge.Tint.Text.HighContrast:
     control_family: status_badge
     usage_basis: component_source
@@ -1831,12 +1778,10 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens:
-      alias: brandBackground2
       flex: color.backgroundBrandSoft
     used_by:
       - component: agentic.Badge-Badge.background.backgroundColor; tint/brand
         tokens:
-          alias: brandBackground2
           flex: color.backgroundBrandSoft
   Badge.TintBrand.Stroke:
     control_family: notification_badge
@@ -1845,12 +1790,10 @@ fields:
     potential_matches:
       - Badge.Standard.Stroke
     tokens:
-      alias: transparentStroke
       flex: color.strokeNeutralTransparent
     used_by:
       - component: agentic.Badge-Badge.background.borderColor; tint/brand
         tokens:
-          alias: transparentStroke
           flex: color.strokeNeutralTransparent
   Badge.TintBrand.Text:
     control_family: notification_badge
@@ -1859,20 +1802,16 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens:
-      alias: brandForeground1
       flex: color.foregroundBrandPrimary
     used_by:
       - component: agentic.Badge-Badge.foreground.color; tint/brand
         tokens:
-          alias: brandForeground1
           flex: color.foregroundBrandPrimary
       - component: agentic.Badge-leadingIcon.color; tint/brand
         tokens:
-          alias: brandForeground1
           flex: color.foregroundBrandPrimary
       - component: agentic.Badge-trailingIcon.color; tint/brand
         tokens:
-          alias: brandForeground1
           flex: color.foregroundBrandPrimary
   Badge.TintDanger.Bkg:
     control_family: notification_badge
@@ -1881,12 +1820,10 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens:
-      alias: dangerBackground2
       flex: color.backgroundDangerSoft
     used_by:
       - component: agentic.Badge-Badge.background.backgroundColor; tint/danger
         tokens:
-          alias: dangerBackground2
           flex: color.backgroundDangerSoft
   Badge.TintDanger.Stroke:
     control_family: notification_badge
@@ -1895,12 +1832,10 @@ fields:
     potential_matches:
       - Badge.Standard.Stroke
     tokens:
-      alias: transparentStroke
       flex: color.strokeNeutralTransparent
     used_by:
       - component: agentic.Badge-Badge.background.borderColor; tint/danger
         tokens:
-          alias: transparentStroke
           flex: color.strokeNeutralTransparent
   Badge.TintDanger.Text:
     control_family: notification_badge
@@ -1909,20 +1844,16 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens:
-      alias: dangerForeground1
       flex: color.foregroundDangerPrimary
     used_by:
       - component: agentic.Badge-Badge.foreground.color; tint/danger
         tokens:
-          alias: dangerForeground1
           flex: color.foregroundDangerPrimary
       - component: agentic.Badge-leadingIcon.color; tint/danger
         tokens:
-          alias: dangerForeground1
           flex: color.foregroundDangerPrimary
       - component: agentic.Badge-trailingIcon.color; tint/danger
         tokens:
-          alias: dangerForeground1
           flex: color.foregroundDangerPrimary
   Badge.TintInformative.Bkg:
     control_family: notification_badge
@@ -1943,12 +1874,10 @@ fields:
     potential_matches:
       - Badge.Standard.Stroke
     tokens:
-      alias: transparentStroke
       flex: color.strokeNeutralTransparent
     used_by:
       - component: agentic.Badge-Badge.background.borderColor; tint/informative
         tokens:
-          alias: transparentStroke
           flex: color.strokeNeutralTransparent
   Badge.TintInformative.Text:
     control_family: notification_badge
@@ -1957,20 +1886,16 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens:
-      alias: neutralForeground1
       flex: color.foregroundNeutralPrimary
     used_by:
       - component: agentic.Badge-Badge.foreground.color; tint/informative
         tokens:
-          alias: neutralForeground1
           flex: color.foregroundNeutralPrimary
       - component: agentic.Badge-leadingIcon.color; tint/informative
         tokens:
-          alias: neutralForeground1
           flex: color.foregroundNeutralPrimary
       - component: agentic.Badge-trailingIcon.color; tint/informative
         tokens:
-          alias: neutralForeground1
           flex: color.foregroundNeutralPrimary
   Badge.TintSuccess.Bkg:
     control_family: notification_badge
@@ -1979,12 +1904,10 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens:
-      alias: successBackground2
       flex: color.backgroundSuccessSoft
     used_by:
       - component: agentic.Badge-Badge.background.backgroundColor; tint/success
         tokens:
-          alias: successBackground2
           flex: color.backgroundSuccessSoft
   Badge.TintSuccess.Stroke:
     control_family: notification_badge
@@ -1993,12 +1916,10 @@ fields:
     potential_matches:
       - Badge.Standard.Stroke
     tokens:
-      alias: transparentStroke
       flex: color.strokeNeutralTransparent
     used_by:
       - component: agentic.Badge-Badge.background.borderColor; tint/success
         tokens:
-          alias: transparentStroke
           flex: color.strokeNeutralTransparent
   Badge.TintSuccess.Text:
     control_family: notification_badge
@@ -2007,20 +1928,16 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens:
-      alias: successForeground1
       flex: color.foregroundSuccessPrimary
     used_by:
       - component: agentic.Badge-Badge.foreground.color; tint/success
         tokens:
-          alias: successForeground1
           flex: color.foregroundSuccessPrimary
       - component: agentic.Badge-leadingIcon.color; tint/success
         tokens:
-          alias: successForeground1
           flex: color.foregroundSuccessPrimary
       - component: agentic.Badge-trailingIcon.color; tint/success
         tokens:
-          alias: successForeground1
           flex: color.foregroundSuccessPrimary
   Badge.TintWarning.Bkg:
     control_family: notification_badge
@@ -2029,12 +1946,10 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens:
-      alias: warningBackground2
       flex: color.backgroundWarningSoft
     used_by:
       - component: agentic.Badge-Badge.background.backgroundColor; tint/warning
         tokens:
-          alias: warningBackground2
           flex: color.backgroundWarningSoft
   Badge.TintWarning.Stroke:
     control_family: notification_badge
@@ -2043,12 +1958,10 @@ fields:
     potential_matches:
       - Badge.Standard.Stroke
     tokens:
-      alias: transparentStroke
       flex: color.strokeNeutralTransparent
     used_by:
       - component: agentic.Badge-Badge.background.borderColor; tint/warning
         tokens:
-          alias: transparentStroke
           flex: color.strokeNeutralTransparent
   Badge.TintWarning.Text:
     control_family: notification_badge
@@ -2057,20 +1970,16 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens:
-      alias: warningForeground1
       flex: color.foregroundWarningPrimary
     used_by:
       - component: agentic.Badge-Badge.foreground.color; tint/warning
         tokens:
-          alias: warningForeground1
           flex: color.foregroundWarningPrimary
       - component: agentic.Badge-leadingIcon.color; tint/warning
         tokens:
-          alias: warningForeground1
           flex: color.foregroundWarningPrimary
       - component: agentic.Badge-trailingIcon.color; tint/warning
         tokens:
-          alias: warningForeground1
           flex: color.foregroundWarningPrimary
   Badge.WarningFilled.Bkg:
     control_family: status_badge
@@ -2079,12 +1988,12 @@ fields:
     potential_matches:
       - Badge.Standard.Bkg
     tokens: {}
-    value_expression: colorYellowPrimary
     used_by:
       - component: v1.Badge-warning.filled.backgroundColor light/dark
         tokens: {}
         value_expression: colorYellowPrimary
         condition: theme.name !== 'HighContrast'
+    value_expression: colorYellowPrimary
   Badge.WarningFilled.Text:
     control_family: status_badge
     usage_basis: component_source
@@ -2092,161 +2001,158 @@ fields:
     potential_matches:
       - Badge.Standard.Text
     tokens: {}
-    value_expression: colorGrey14
     used_by:
       - component: v1.Badge-warning.filled.color light/dark
         tokens: {}
         value_expression: colorGrey14
         condition: theme.name !== 'HighContrast'
+    value_expression: colorGrey14
   Badge.WarningGhost.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme ghost warning badge text/glyph
     tokens: {}
-    value_expression: colorYellowTint40
     used_by:
       - component: v1.Badge-warning.ghost.colorDark
         tokens: {}
         value_expression: colorYellowTint40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorYellowTint40
   Badge.WarningGhost.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme ghost warning badge text/glyph
     tokens: {}
-    value_expression: colorYellowShade30
     used_by:
       - component: v1.Badge-warning.ghost.color
         tokens: {}
         value_expression: colorYellowShade30
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorYellowShade30
   Badge.WarningOutline.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme warning outlined badge text/glyph
     tokens: {}
-    value_expression: colorYellowTint40
     used_by:
       - component: v1.Badge-warning.outline.colorDark
         tokens: {}
         value_expression: colorYellowTint40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorYellowTint40
   Badge.WarningOutline.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme warning outlined badge text/glyph
     tokens: {}
-    value_expression: colorYellowShade30
     used_by:
       - component: v1.Badge-warning.outline.color; default borderColor light/dark copies light color
         tokens: {}
         value_expression: colorYellowShade30
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast'] for foreground; copied border input also
           used in DarkGray/Black
+    value_expression: colorYellowShade30
   Badge.WarningTint.Bkg.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme warning tinted badge fill
     tokens: {}
-    value_expression: colorYellowShade40
     used_by:
       - component: v1.Badge-warning.tint.backgroundColorDark
         tokens: {}
         value_expression: colorYellowShade40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorYellowShade40
   Badge.WarningTint.Bkg.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme warning tinted badge fill
     tokens: {}
-    value_expression: colorYellowTint60
     used_by:
       - component: v1.Badge-warning.tint.backgroundColor
         tokens: {}
         value_expression: colorYellowTint60
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorYellowTint60
   Badge.WarningTint.Stroke.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme warning tinted badge outline
     tokens: {}
-    value_expression: colorYellowShade30
     used_by:
       - component: v1.Badge-warning.tint.borderColorDark
         tokens: {}
         value_expression: colorYellowShade30
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorYellowShade30
   Badge.WarningTint.Stroke.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme warning tinted badge outline
     tokens: {}
-    value_expression: colorYellowTint40
     used_by:
       - component: v1.Badge-warning.tint.borderColor
         tokens: {}
         value_expression: colorYellowTint40
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorYellowTint40
   Badge.WarningTint.Text.Dark:
     control_family: status_badge
     usage_basis: component_source
     usage: Dark-theme warning tinted badge text/glyph
     tokens: {}
-    value_expression: colorYellowTint40
     used_by:
       - component: v1.Badge-warning.tint.colorDark
         tokens: {}
         value_expression: colorYellowTint40
         condition: theme.name in ['DarkGray', 'Black']
+    value_expression: colorYellowTint40
   Badge.WarningTint.Text.Light:
     control_family: status_badge
     usage_basis: component_source
     usage: Light-theme warning tinted badge text/glyph
     tokens: {}
-    value_expression: colorYellowShade30
     used_by:
       - component: v1.Badge-warning.tint.color
         tokens: {}
         value_expression: colorYellowShade30
         condition: theme.name not in ['DarkGray', 'Black', 'HighContrast']
+    value_expression: colorYellowShade30
   PersonaCoin.Accent.GlowStroke:
     control_family: persona_coin
     usage_basis: component_source
     usage: Accent activity glow ring.
-    office_palette: BkgCtlEmphasis
     tokens:
       legacy: accentButtonBackground
     used_by:
       - component: 'v0.PersonaCoinRing-ring.accent: theme.colors.accentButtonBackground -> glow.style.borderColor'
         tokens:
           legacy: accentButtonBackground
-        office_palette: BkgCtlEmphasis
   PersonaCoin.Beige.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent beige coin color.
     tokens: {}
-    value_expression: colorBeigePrimary (#7a7574)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='beige' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorBeigePrimary (#7a7574)
+    value_expression: colorBeigePrimary (#7a7574)
   PersonaCoin.Berry.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent berry coin color.
     tokens: {}
-    value_expression: colorBerryPrimary (#c239b3)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='berry' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorBerryPrimary (#c239b3)
+    value_expression: colorBerryPrimary (#c239b3)
   PersonaCoin.Blue.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy blue coin color.
     tokens: {}
-    value_expression: colorBluePrimary (#0078d4)
     used_by:
       - component: v0.PersonaCoin-coinColor='blue' -> convertCoinColor -> initialsBackground
         tokens: {}
@@ -2254,32 +2160,32 @@ fields:
       - component: v0.PersonaCoin-coinColorFluent='blue' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorBluePrimary (#0078d4)
+    value_expression: colorBluePrimary (#0078d4)
   PersonaCoin.Brass.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent brass coin color.
     tokens: {}
-    value_expression: colorBrassPrimary (#986f0b)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='brass' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorBrassPrimary (#986f0b)
+    value_expression: colorBrassPrimary (#986f0b)
   PersonaCoin.Brown.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent brown coin color.
     tokens: {}
-    value_expression: colorBrownPrimary (#8e562e)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='brown' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorBrownPrimary (#8e562e)
+    value_expression: colorBrownPrimary (#8e562e)
   PersonaCoin.Burgundy.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy burgundy coin color.
     tokens: {}
-    value_expression: colorDarkRedPrimary (#750b1c)
     used_by:
       - component: v0.PersonaCoin-coinColor='burgundy' -> convertCoinColor -> initialsBackground
         tokens: {}
@@ -2287,52 +2193,52 @@ fields:
       - component: v0.PersonaCoin-coinColorFluent='burgundy' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorBurgundyPrimary (#a4262c)
+    value_expression: colorDarkRedPrimary (#750b1c)
   PersonaCoin.CoolGray.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy coolGray coin color.
     tokens: {}
-    value_expression: colorPlatinumPrimary (#69797e)
     used_by:
       - component: v0.PersonaCoin-coinColor='coolGray' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorPlatinumPrimary (#69797e)
+    value_expression: colorPlatinumPrimary (#69797e)
   PersonaCoin.Cornflower.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent cornflower coin color.
     tokens: {}
-    value_expression: colorCornflowerPrimary (#4f6bed)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='cornflower' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorCornflowerPrimary (#4f6bed)
+    value_expression: colorCornflowerPrimary (#4f6bed)
   PersonaCoin.Cyan.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy cyan coin color.
     tokens: {}
-    value_expression: colorSteelPrimary (#005b70)
     used_by:
       - component: v0.PersonaCoin-coinColor='cyan' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorSteelPrimary (#005b70)
+    value_expression: colorSteelPrimary (#005b70)
   PersonaCoin.DarkBlue.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy darkBlue coin color.
     tokens: {}
-    value_expression: colorRoyalBluePrimary (#004e8c)
     used_by:
       - component: v0.PersonaCoin-coinColor='darkBlue' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorRoyalBluePrimary (#004e8c)
+    value_expression: colorRoyalBluePrimary (#004e8c)
   PersonaCoin.DarkGreen.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy darkGreen coin color.
     tokens: {}
-    value_expression: colorDarkGreenPrimary (#0b6a0b)
     used_by:
       - component: v0.PersonaCoin-coinColor='darkGreen' -> convertCoinColor -> initialsBackground
         tokens: {}
@@ -2340,12 +2246,12 @@ fields:
       - component: v0.PersonaCoin-coinColorFluent='darkGreen' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorDarkGreenPrimary (#0b6a0b)
+    value_expression: colorDarkGreenPrimary (#0b6a0b)
   PersonaCoin.DarkRed.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy darkRed coin color.
     tokens: {}
-    value_expression: colorBurgundyPrimary (#a4262c)
     used_by:
       - component: v0.PersonaCoin-coinColor='darkRed' -> convertCoinColor -> initialsBackground
         tokens: {}
@@ -2353,152 +2259,152 @@ fields:
       - component: v0.PersonaCoin-coinColorFluent='darkRed' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorDarkRedPrimary (#750b1c)
+    value_expression: colorBurgundyPrimary (#a4262c)
   PersonaCoin.Forest.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent forest coin color.
     tokens: {}
-    value_expression: colorForestPrimary (#498205)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='forest' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorForestPrimary (#498205)
+    value_expression: colorForestPrimary (#498205)
   PersonaCoin.Gold.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy gold coin color.
     tokens: {}
-    value_expression: colorBrassPrimary (#986f0b)
     used_by:
       - component: v0.PersonaCoin-coinColor='gold' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorBrassPrimary (#986f0b)
+    value_expression: colorBrassPrimary (#986f0b)
   PersonaCoin.Grape.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent grape coin color.
     tokens: {}
-    value_expression: colorGrapePrimary (#881798)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='grape' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorGrapePrimary (#881798)
+    value_expression: colorGrapePrimary (#881798)
   PersonaCoin.Green.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy green coin color.
     tokens: {}
-    value_expression: colorForestPrimary (#498205)
     used_by:
       - component: v0.PersonaCoin-coinColor='green' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorForestPrimary (#498205)
+    value_expression: colorForestPrimary (#498205)
   PersonaCoin.HotPink.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent hotPink coin color.
     tokens: {}
-    value_expression: colorHotPinkPrimary (#e3008c)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='hotPink' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorHotPinkPrimary (#e3008c)
+    value_expression: colorHotPinkPrimary (#e3008c)
   PersonaCoin.LightBlue.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy lightBlue coin color.
     tokens: {}
-    value_expression: colorCornflowerPrimary (#4f6bed)
     used_by:
       - component: v0.PersonaCoin-coinColor='lightBlue' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorCornflowerPrimary (#4f6bed)
+    value_expression: colorCornflowerPrimary (#4f6bed)
   PersonaCoin.LightPink.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy lightPink coin color.
     tokens: {}
-    value_expression: colorBerryPrimary (#c239b3)
     used_by:
       - component: v0.PersonaCoin-coinColor='lightPink' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorBerryPrimary (#c239b3)
+    value_expression: colorBerryPrimary (#c239b3)
   PersonaCoin.LightRed.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy lightRed coin color.
     tokens: {}
-    value_expression: colorRedPrimary (#d13438)
     used_by:
       - component: v0.PersonaCoin-coinColor='lightRed' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorRedPrimary (#d13438)
+    value_expression: colorRedPrimary (#d13438)
   PersonaCoin.Magenta.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy magenta coin color.
     tokens: {}
-    value_expression: colorGrapePrimary (#881798)
     used_by:
       - component: v0.PersonaCoin-coinColor='magenta' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorGrapePrimary (#881798)
+    value_expression: colorGrapePrimary (#881798)
   PersonaCoin.Orange.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy orange coin color.
     tokens: {}
-    value_expression: colorPumpkinPrimary (#ca5010)
     used_by:
       - component: v0.PersonaCoin-coinColor='orange' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorPumpkinPrimary (#ca5010)
+    value_expression: colorPumpkinPrimary (#ca5010)
   PersonaCoin.Orchid.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent orchid coin color.
     tokens: {}
-    value_expression: colorOrchidPrimary (#8764b8)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='orchid' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorOrchidPrimary (#8764b8)
+    value_expression: colorOrchidPrimary (#8764b8)
   PersonaCoin.Pink.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy pink coin color.
     tokens: {}
-    value_expression: colorHotPinkPrimary (#e3008c)
     used_by:
       - component: v0.PersonaCoin-coinColor='pink' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorHotPinkPrimary (#e3008c)
+    value_expression: colorHotPinkPrimary (#e3008c)
   PersonaCoin.Platinum.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent platinum coin color.
     tokens: {}
-    value_expression: colorPlatinumPrimary (#69797e)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='platinum' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorPlatinumPrimary (#69797e)
+    value_expression: colorPlatinumPrimary (#69797e)
   PersonaCoin.Pumpkin.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent pumpkin coin color.
     tokens: {}
-    value_expression: colorPumpkinPrimary (#ca5010)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='pumpkin' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorPumpkinPrimary (#ca5010)
+    value_expression: colorPumpkinPrimary (#ca5010)
   PersonaCoin.Purple.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy purple coin color.
     tokens: {}
-    value_expression: colorPurplePrimary (#5c2e91)
     used_by:
       - component: v0.PersonaCoin-coinColor='purple' -> convertCoinColor -> initialsBackground
         tokens: {}
@@ -2506,36 +2412,37 @@ fields:
       - component: v0.PersonaCoin-coinColorFluent='purple' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorPurplePrimary (#5c2e91)
+    value_expression: colorPurplePrimary (#5c2e91)
   PersonaCoin.Red.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent red coin color.
     tokens: {}
-    value_expression: colorRedPrimary (#d13438)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='red' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorRedPrimary (#d13438)
+    value_expression: colorRedPrimary (#d13438)
   PersonaCoin.RoyalBlue.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by fluent royalBlue coin color.
     tokens: {}
-    value_expression: colorRoyalBluePrimary (#004e8c)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='royalBlue' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorRoyalBluePrimary (#004e8c)
+    value_expression: colorRoyalBluePrimary (#004e8c)
   PersonaCoin.Rust.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy rust coin color.
     tokens: {}
-    value_expression: colorBrownPrimary (#8e562e)
     used_by:
       - component: v0.PersonaCoin-coinColor='rust' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorBrownPrimary (#8e562e)
+    value_expression: colorBrownPrimary (#8e562e)
   PersonaCoin.Standard.Bkg:
     control_family: persona_coin
     usage_basis: component_source
@@ -2543,12 +2450,12 @@ fields:
     potential_matches:
       - Surface.Standard.Bkg
     tokens: {}
-    value_expression: colorCornflowerPrimary (#4f6bed)
     used_by:
       - component: v0.PersonaCoin-tokens.backgroundColor=convertCoinColorFluent('cornflower') ->
           initialsBackground.style.backgroundColor
         tokens: {}
         value_expression: colorCornflowerPrimary (#4f6bed)
+    value_expression: colorCornflowerPrimary (#4f6bed)
   PersonaCoin.Standard.GlowStroke:
     control_family: persona_coin
     usage_basis: component_source
@@ -2566,13 +2473,11 @@ fields:
     usage: Stock high-contrast activity glow is suppressed.
     tokens:
       legacy: personaActivityGlow
-      literal: transparent
     used_by:
       - component: 'v0.PersonaCoinRing-!ring.accent && no ring.ringColor: stock HC personaActivityGlow ->
           glow.style.borderColor'
         tokens:
           legacy: personaActivityGlow
-          literal: transparent
         condition: Built-in stock legacy theme has resolved contrast highContrast and personaActivityGlow is not
           customized; ring is present, ring.accent is falsy and ring.ringColor is falsy. An Office theme may
           inherit this stock value because its legacy palette recipe does not replace personaActivityGlow.
@@ -2580,7 +2485,6 @@ fields:
     control_family: persona_coin
     usage_basis: component_source
     usage: Halo outline around the presence bitmap.
-    office_palette: Bkg
     tokens:
       legacy: background
       literal: white
@@ -2591,7 +2495,6 @@ fields:
       - component: v0.PersonaCoin-falsy tokenProps.iconStrokeColor fallback -> icon.style.borderColor
         tokens:
           legacy: background
-        office_palette: Bkg
   PersonaCoin.Standard.RingStroke:
     control_family: persona_coin
     usage_basis: component_source
@@ -2620,17 +2523,16 @@ fields:
     usage_basis: component_source
     usage: Initials fill selected by fluent steel coin color.
     tokens: {}
-    value_expression: colorSteelPrimary (#005b70)
     used_by:
       - component: v0.PersonaCoin-coinColorFluent='steel' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorSteelPrimary (#005b70)
+    value_expression: colorSteelPrimary (#005b70)
   PersonaCoin.Teal.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy teal coin color.
     tokens: {}
-    value_expression: colorTealPrimary (#038387)
     used_by:
       - component: v0.PersonaCoin-coinColor='teal' -> convertCoinColor -> initialsBackground
         tokens: {}
@@ -2638,126 +2540,126 @@ fields:
       - component: v0.PersonaCoin-coinColorFluent='teal' -> convertCoinColorFluent -> initialsBackground
         tokens: {}
         value_expression: colorTealPrimary (#038387)
+    value_expression: colorTealPrimary (#038387)
   PersonaCoin.Transparent.RingStroke:
     control_family: persona_coin
     usage_basis: component_source
     usage: Transparent-ring mode omits the background ring.
     tokens: {}
-    value_expression: not rendered (ring.transparent=true)
     used_by:
       - component: v0.PersonaCoin-showRing && !transparentRing gates Slots.ring; showRing still renders Slots.glow
         tokens: {}
         value_expression: not rendered (ring.transparent=true)
+    value_expression: not rendered (ring.transparent=true)
   PersonaCoin.Violet.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy violet coin color.
     tokens: {}
-    value_expression: colorOrchidPrimary (#8764b8)
     used_by:
       - component: v0.PersonaCoin-coinColor='violet' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorOrchidPrimary (#8764b8)
+    value_expression: colorOrchidPrimary (#8764b8)
   PersonaCoin.WarmGray.Bkg:
     control_family: persona_coin
     usage_basis: component_source
     usage: Initials fill selected by legacy warmGray coin color.
     tokens: {}
-    value_expression: colorBeigePrimary (#7a7574)
     used_by:
       - component: v0.PersonaCoin-coinColor='warmGray' -> convertCoinColor -> initialsBackground
         tokens: {}
         value_expression: colorBeigePrimary (#7a7574)
+    value_expression: colorBeigePrimary (#7a7574)
   PersonaPresence.Away.Bitmap:
     control_family: persona_presence
     usage_basis: component_source
     usage: Away presence bitmap including literal antialias and transparency colors.
     tokens: {}
-    value_expression: PNG
-      PLTE=[#000000,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FFFFFF,#FACC23,#FDE691,#FDE58B,#FEF8E2,#FCE079,#FCDB64,#FBD854,#FBD445];
-      tRNS=[0,234,181,101,10,229,160,152,98,94,5]
     used_by:
       - component: v0.PersonaCoinPresence-presenceIconCache.away.uri -> icon.source
         tokens: {}
         value_expression: PNG
           PLTE=[#000000,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FFFFFF,#FACC23,#FDE691,#FDE58B,#FEF8E2,#FCE079,#FCDB64,#FBD854,#FBD445];
           tRNS=[0,234,181,101,10,229,160,152,98,94,5]
+    value_expression: PNG
+      PLTE=[#000000,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FAC914,#FFFFFF,#FACC23,#FDE691,#FDE58B,#FEF8E2,#FCE079,#FCDB64,#FBD854,#FBD445];
+      tRNS=[0,234,181,101,10,229,160,152,98,94,5]
   PersonaPresence.Blocked.Bitmap:
     control_family: persona_presence
     usage_basis: component_source
     usage: Blocked presence bitmap including literal antialias and transparency colors.
     tokens: {}
-    value_expression: PNG
-      PLTE=[#000000,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#FFFFFF,#E9001B,#FCDEE1,#EA0A24,#EC273E,#EB1A33,#FBCCD1,#EF4558,#FFFAFB,#FEF2F3,#FAC7CD,#EC233B,#F69AA5,#EC283F,#FBCCD2,#F9BFC6,#F7A2AC,#F699A4,#EE3F53,#FCD8DC,#FCD7DB,#ED2940,#EB1A32,#EB1932];
-      tRNS=[0,241,212,179,121,8,250,226,107,30,18,17,228,36,202,106,229]
     used_by:
       - component: v0.PersonaCoinPresence-presenceIconCache.blocked.uri -> icon.source
         tokens: {}
         value_expression: PNG
           PLTE=[#000000,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#FFFFFF,#E9001B,#FCDEE1,#EA0A24,#EC273E,#EB1A33,#FBCCD1,#EF4558,#FFFAFB,#FEF2F3,#FAC7CD,#EC233B,#F69AA5,#EC283F,#FBCCD2,#F9BFC6,#F7A2AC,#F699A4,#EE3F53,#FCD8DC,#FCD7DB,#ED2940,#EB1A32,#EB1932];
           tRNS=[0,241,212,179,121,8,250,226,107,30,18,17,228,36,202,106,229]
+    value_expression: PNG
+      PLTE=[#000000,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#FFFFFF,#E9001B,#FCDEE1,#EA0A24,#EC273E,#EB1A33,#FBCCD1,#EF4558,#FFFAFB,#FEF2F3,#FAC7CD,#EC233B,#F69AA5,#EC283F,#FBCCD2,#F9BFC6,#F7A2AC,#F699A4,#EE3F53,#FCD8DC,#FCD7DB,#ED2940,#EB1A32,#EB1932];
+      tRNS=[0,241,212,179,121,8,250,226,107,30,18,17,228,36,202,106,229]
   PersonaPresence.Busy.Bitmap:
     control_family: persona_presence
     usage_basis: component_source
     usage: Busy presence bitmap including literal transparency colors.
     tokens: {}
-    value_expression: PNG
-      PLTE=[#000000,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B];
-      tRNS=[0,241,226,212,17,8,250,179,107,33,121,122,229,202,178,106,28]
     used_by:
       - component: v0.PersonaCoinPresence-presenceIconCache.busy.uri -> icon.source
         tokens: {}
         value_expression: PNG
           PLTE=[#000000,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B];
           tRNS=[0,241,226,212,17,8,250,179,107,33,121,122,229,202,178,106,28]
+    value_expression: PNG
+      PLTE=[#000000,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B];
+      tRNS=[0,241,226,212,17,8,250,179,107,33,121,122,229,202,178,106,28]
   PersonaPresence.DoNotDisturb.Bitmap:
     control_family: persona_presence
     usage_basis: component_source
     usage: Do-not-disturb presence bitmap including literal antialias and transparency colors.
     tokens: {}
-    value_expression: PNG
-      PLTE=[#000000,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#FFFFFF,#F07D84,#FCE9EA,#EB2638];
-      tRNS=[0,227,240,179,121,8,250,211,107,30,18,17,36,243,216,202,106]
     used_by:
       - component: v0.PersonaCoinPresence-presenceIconCache.dnd.uri -> icon.source
         tokens: {}
         value_expression: PNG
           PLTE=[#000000,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#FFFFFF,#F07D84,#FCE9EA,#EB2638];
           tRNS=[0,227,240,179,121,8,250,211,107,30,18,17,36,243,216,202,106]
+    value_expression: PNG
+      PLTE=[#000000,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#E9001B,#FFFFFF,#F07D84,#FCE9EA,#EB2638];
+      tRNS=[0,227,240,179,121,8,250,211,107,30,18,17,36,243,216,202,106]
   PersonaPresence.Offline.Bitmap:
     control_family: persona_presence
     usage_basis: component_source
     usage: Offline presence bitmap including literal antialias and transparency colors.
     tokens: {}
-    value_expression: PNG
-      PLTE=[#000000,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#FFFFFF,#A8C4CF,#D6E4E9,#B3CCD5,#F9FBFC,#F7FAFB,#EEF4F6,#EDF3F5,#E3ECF0];
-      tRNS=[0,233,181,156,101,10,98,94,5]
     used_by:
       - component: v0.PersonaCoinPresence-presenceIconCache.offline.uri -> icon.source
         tokens: {}
         value_expression: PNG
           PLTE=[#000000,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#FFFFFF,#A8C4CF,#D6E4E9,#B3CCD5,#F9FBFC,#F7FAFB,#EEF4F6,#EDF3F5,#E3ECF0];
           tRNS=[0,233,181,156,101,10,98,94,5]
+    value_expression: PNG
+      PLTE=[#000000,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#A8C4CF,#FFFFFF,#A8C4CF,#D6E4E9,#B3CCD5,#F9FBFC,#F7FAFB,#EEF4F6,#EDF3F5,#E3ECF0];
+      tRNS=[0,233,181,156,101,10,98,94,5]
   PersonaPresence.Online.Bitmap:
     control_family: persona_presence
     usage_basis: component_source
     usage: Online presence bitmap including literal antialias and transparency colors.
     tokens: {}
-    value_expression: PNG
-      PLTE=[#000000,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#FFFFFF,#CDE1B8,#BAD79D,#7BB62B,#E7F1DD,#DEECD2,#F7FAF4,#C4DCAB,#B1D28E,#A7CC7E,#86BC45];
-      tRNS=[0,241,227,107,17,8,250,179,33,211,121,122,202,178,28,217,215,210]
     used_by:
       - component: v0.PersonaCoinPresence-presenceIconCache.online.uri -> icon.source
         tokens: {}
         value_expression: PNG
           PLTE=[#000000,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#FFFFFF,#CDE1B8,#BAD79D,#7BB62B,#E7F1DD,#DEECD2,#F7FAF4,#C4DCAB,#B1D28E,#A7CC7E,#86BC45];
           tRNS=[0,241,227,107,17,8,250,179,33,211,121,122,202,178,28,217,215,210]
+    value_expression: PNG
+      PLTE=[#000000,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#6EB005,#FFFFFF,#CDE1B8,#BAD79D,#7BB62B,#E7F1DD,#DEECD2,#F7FAF4,#C4DCAB,#B1D28E,#A7CC7E,#86BC45];
+      tRNS=[0,241,227,107,17,8,250,179,33,211,121,122,202,178,28,217,215,210]
   PresenceBadge.Available.Glyph:
     control_family: presence_badge
     usage_basis: component_source
     usage: Default available presence status glyph
     tokens: {}
-    value_expression: colorLightGreenPrimary
     used_by:
       - component: v1.PresenceBadge-base.getBadgeColor nonHcColor; base nested outOfOffice
         tokens: {}
@@ -2767,72 +2669,73 @@ fields:
         tokens: {}
         value_expression: colorLightGreenPrimary
         condition: isHighContrast(t) === false
+    value_expression: colorLightGreenPrimary
   PresenceBadge.Away.Glyph:
     control_family: presence_badge
     usage_basis: component_source
     usage: Away presence status glyph
     tokens: {}
-    value_expression: colorMarigoldPrimary
     used_by:
       - component: v1.PresenceBadge-away.getBadgeColor nonHcColor
         tokens: {}
         value_expression: colorMarigoldPrimary
         condition: isHighContrast(t) === false
+    value_expression: colorMarigoldPrimary
   PresenceBadge.Away.Glyph.OutOfOffice:
     control_family: presence_badge
     usage_basis: component_source
     usage: Away out-of-office presence glyph
     tokens: {}
-    value_expression: colorBerryPrimary
     used_by:
       - component: v1.PresenceBadge-away.getBadgeColor oofColor
         tokens: {}
         value_expression: colorBerryPrimary
         condition: isHighContrast(t) === false
+    value_expression: colorBerryPrimary
   PresenceBadge.Blocked.Glyph:
     control_family: presence_badge
     usage_basis: component_source
     usage: Blocked presence status glyph
     tokens: {}
-    value_expression: colorRedPrimary
     used_by:
       - component: v1.PresenceBadge-blocked.getBadgeColor nonHcColor; nested outOfOffice fallback
         tokens: {}
         value_expression: colorRedPrimary
         condition: isHighContrast(t) === false
+    value_expression: colorRedPrimary
   PresenceBadge.Busy.Glyph:
     control_family: presence_badge
     usage_basis: component_source
     usage: Busy presence status glyph
     tokens: {}
-    value_expression: colorRedPrimary
     used_by:
       - component: v1.PresenceBadge-busy.getBadgeColor nonHcColor; nested outOfOffice fallback
         tokens: {}
         value_expression: colorRedPrimary
         condition: isHighContrast(t) === false
+    value_expression: colorRedPrimary
   PresenceBadge.DoNotDisturb.Glyph:
     control_family: presence_badge
     usage_basis: component_source
     usage: Do-not-disturb presence status glyph
     tokens: {}
-    value_expression: colorRedPrimary
     used_by:
       - component: v1.PresenceBadge-doNotDisturb.getBadgeColor nonHcColor; nested outOfOffice fallback
         tokens: {}
         value_expression: colorRedPrimary
         condition: isHighContrast(t) === false
+    value_expression: colorRedPrimary
   PresenceBadge.Offline.Glyph:
     control_family: presence_badge
     usage_basis: component_source
     usage: Offline presence status glyph
     tokens: {}
-    value_expression: colorGrey38
     used_by:
       - component: v1.PresenceBadge-offline.iconColor non-HC
         tokens: {}
         value_expression: colorGrey38
         condition: isHighContrast(t) === false
+    value_expression: colorGrey38
   PresenceBadge.Offline.Glyph.HighContrast:
     control_family: presence_badge
     usage_basis: component_source
@@ -2849,12 +2752,12 @@ fields:
     usage_basis: component_source
     usage: Out-of-office presence status glyph
     tokens: {}
-    value_expression: colorBerryPrimary
     used_by:
       - component: v1.PresenceBadge-outOfOffice.getBadgeColor nonHcColor; nested outOfOffice fallback
         tokens: {}
         value_expression: colorBerryPrimary
         condition: isHighContrast(t) === false
+    value_expression: colorBerryPrimary
   PresenceBadge.Standard.Bkg:
     control_family: presence_badge
     usage_basis: component_source
@@ -2882,12 +2785,12 @@ fields:
     usage_basis: component_source
     usage: Nested out-of-office status glyph retaining supplied status color
     tokens: {}
-    value_expression: oofColor ?? nonHcColor
     used_by:
       - component: v1.PresenceBadge-getBadgeColor.outOfOffice.iconColor non-HC
         tokens: {}
         value_expression: oofColor ?? nonHcColor
         condition: t is absent or isHighContrast(t) === false; owned PresenceBadge invocations supply t
+    value_expression: oofColor ?? nonHcColor
   PresenceBadge.Standard.Glyph.OutOfOfficeHighContrast:
     control_family: presence_badge
     usage_basis: component_source
@@ -2904,12 +2807,12 @@ fields:
     usage_basis: component_source
     usage: White separator outline around presence indicator
     tokens: {}
-    value_expression: colorWhite
     used_by:
       - component: v1.PresenceBadge-root.borderColor non-HC
         tokens: {}
         value_expression: colorWhite
         condition: isHighContrast(t) === false
+    value_expression: colorWhite
   PresenceBadge.Standard.Stroke.HighContrast:
     control_family: presence_badge
     usage_basis: component_source
@@ -2926,9 +2829,9 @@ fields:
     usage_basis: component_source
     usage: Unknown presence status glyph
     tokens: {}
-    value_expression: colorRedPrimary
     used_by:
       - component: v1.PresenceBadge-unknown.getBadgeColor nonHcColor; nested outOfOffice fallback
         tokens: {}
         value_expression: colorRedPrimary
         condition: isHighContrast(t) === false
+    value_expression: colorRedPrimary
