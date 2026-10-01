@@ -10676,9 +10676,9 @@ __metadata:
   linkType: hard
 
 "@types/use-subscription@npm:^1.0.0":
-  version: 1.0.2
-  resolution: "@types/use-subscription@npm:1.0.2"
-  checksum: 10c0/4fa4af6f4a86d6a5d3dfd5e2ee08db41761b8f6f41d95f3b472893f1b55374df89a0f62634abeb70b8ed16d316285b1ece1b57dffa43011c430c14374ff12d4a
+  version: 1.13.0
+  resolution: "@types/use-subscription@npm:1.13.0"
+  checksum: 10c0/febe9a67c1a20582ba5ebd44706bdc2627fe17bc09d1b514be563238c57f9827145cdcc6879f93fb8ffb3e43038b51bb1d9781b9ac50621be7df4ea12317a57e
   languageName: node
   linkType: hard
 
