@@ -246,7 +246,7 @@ paths. The installed Win32 JavaScript inspected was
   `packages\components\Menu\src\MenuPopover\useMenuPopover.ts:42-84,100-118`.
 - **V6:** `packages\components\TabList\src\Tab\useTab.win32.ts:64-110,142-152`;
   `packages\components\TabList\src\TabList\useTabList.ts:142-176,183-200`.
-- **V7:** `packages\components\FocusZone\src\FocusZone.tsx:15-45`;
+- **V7:** `packages\agentic\native-core\src\components\focus-zone\FocusZone.tsx:15-45`;
   `packages\components\FocusTrapZone\src\FocusTrapZone.ts:15-31`.
   These wrappers do not by themselves prove native trap/restoration semantics.
 - **V8:** `apps\tester-core\src\TestComponents\FocusZone\FocusZoneE2ETest.tsx:1-120`;
@@ -297,7 +297,7 @@ paths. The installed Win32 JavaScript inspected was
 
 ### Added Fabric, macOS, and modern-ref evidence
 
-- **W1:** `packages\components\FocusZone\windows\FRNFocusZone\FocusZoneComponentView.cpp:33-65,71-133,175-224`
+- **W1:** `packages\agentic\native-core\windows\NativeCore\components\FocusZone\FocusZoneComponentView.cpp:33-65,71-133,175-224`
   subscribes to native focus/key events, requests `TryFocus(FocusState::Keyboard)`,
   and checks actual focused identity. This is a Fabric implementation model for
   V1 outcomes, not a reason to copy its transport to Win32.
@@ -316,18 +316,18 @@ paths. The installed Win32 JavaScript inspected was
   implements AppKit focus/blur, ring-mask drawing, responder events, and pointer
   focus behavior. Lines 1807-1861 emit key events and use native handled-key
   entries to decide whether AppKit receives `super` handling.
-- **M3:** `packages\components\FocusZone\macos\RCTFocusZone.m:24-35,122-129,584-675`
+- **M3:** `packages\agentic\native-core\macos\components\FocusZone\shared\RCTFocusZone.m:24-35,122-129,584-675`
   resolves editable focus targets and key-view navigation, including a hierarchy
   fallback for Fabric-backed zones.
-  `packages\components\FocusZone\macos\RCTFocusZoneComponentView.mm:118-195`
+  `packages\agentic\native-core\macos\components\FocusZone\fabric\RCTFocusZoneComponentView.mm:118-195`
   forwards focus to its content rather than becoming a duplicate tab stop and
   clears default-responder state on recycle.
-- **M4:** `packages\native\Callout\macos\CalloutWindow.swift:9-38`;
-  `packages\native\Callout\macos\CalloutView.swift:33-45,142-216`;
-  `packages\native\Callout\macos\RCTCalloutComponentView.mm:96-132`.
+- **M4:** `packages\agentic\native-core\macos\components\Callout\shared\CalloutWindow.swift:9-38`;
+  `packages\agentic\native-core\macos\components\Callout\shared\CalloutView.swift:33-45,142-216`;
+  `packages\agentic\native-core\macos\components\Callout\fabric\RCTCalloutComponentView.mm:96-132`.
   Popup key-window activation, initial child focus, and a separate Fabric touch
   attachment are distinct concerns.
-  `packages\native\Callout\macos\GuardedEventMonitor.swift:1-29` owns monitor cleanup.
+  `packages\agentic\native-core\macos\components\Callout\shared\GuardedEventMonitor.swift:1-29` owns monitor cleanup.
 - **M5:** `packages\components\ContextualMenu\src\ContextualMenu.tsx:39-55`
   contains a macOS layout-effect/timer workaround: a readiness problem to solve,
   not a general timer recipe.
@@ -341,7 +341,7 @@ paths. The installed Win32 JavaScript inspected was
   covers stable native refs and compatible replacements.
 - **R2:** `packages\agentic\components\src\refs.types.test.tsx:30-84` distinguishes
   structural and pressable root refs.
-  `packages\native\Callout\src\CalloutNativeComponent.ts:63-70` demonstrates
+  `packages\agentic\native-core\src\specs\components\CalloutNativeComponent.ts:63-70` demonstrates
   typed native commands with host refs rather than global tag arguments.
 
 ### macOS adaptation decisions

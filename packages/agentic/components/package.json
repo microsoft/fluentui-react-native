@@ -40,14 +40,13 @@
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
-    "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/design": "workspace:*",
-    "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*",
+    "@fluentui-react-native/native-core": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/desktop-driver": "workspace:*",
-    "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/storybook-desktop": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.0",
@@ -94,7 +93,7 @@
     "jestPlatform": "macos",
     "knip": {
       "ignoreDependencies": [
-        "@fluentui-react-native/callout"
+        "@fluentui-react-native/native-core"
       ]
     }
   },

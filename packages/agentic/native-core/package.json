@@ -15,8 +15,19 @@
     "macos",
     "windows",
     "win32",
+    "NuGet.config",
     "*.podspec",
-    "react-native.config.cjs"
+    "react-native.config.cjs",
+    "!src/**/__tests__/**",
+    "!src/**/*.test.*",
+    "!lib/**/__tests__/**",
+    "!lib/**/*.test.*",
+    "!windows/**/obj/**",
+    "!windows/**/x64/**",
+    "!windows/**/ARM64/**",
+    "!windows/**/Win32/**",
+    "!windows/**/Generated Files/**",
+    "!windows/**/packages/**"
   ],
   "type": "module",
   "sideEffects": false,
@@ -59,15 +70,105 @@
   "scripts": {
     "build": "tsc -b",
     "clean": "fluentui-scripts clean",
+    "codegen:windows": "react-native codegen-windows --no-telemetry",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
-    "test": "yarn build && node --test tests/entrypoints.test.mjs"
+    "prebuild": "yarn codegen:windows",
+    "test": "yarn build && node --test tests/entrypoints.test.mjs tests/native-ownership.test.mjs && fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u"
+  },
+  "dependencies": {
+    "@fluentui-react-native/framework-base": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/scripts": "workspace:*"
+    "@babel/core": "catalog:",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@office-iss/react-native-win32": "^0.81.8",
+    "@react-native-community/cli": "^20.0.0",
+    "@react-native-community/cli-platform-android": "^20.0.0",
+    "@react-native-community/cli-platform-ios": "^20.0.0",
+    "@react-native-windows/cli": "^0.81.0",
+    "@react-native/babel-preset": "^0.81.0",
+    "@react-native/metro-config": "^0.81.0",
+    "@storybook/react-native": "^10.4.7",
+    "@testing-library/react-native": "catalog:",
+    "@types/react": "~19.1.4",
+    "@types/react-test-renderer": "^19.1.0",
+    "react": "19.1.4",
+    "react-native": "^0.81.6",
+    "react-native-macos": "^0.81.0",
+    "react-native-windows": "^0.81.0",
+    "react-test-renderer": "19.1.4",
+    "storybook": "^10.4.0",
+    "test-renderer": "catalog:"
+  },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.74.0 || ^0.81.0",
+    "@types/react": "~18.2.0 || ~19.0.0 || ~19.1.4",
+    "react": "18.2.0 || 19.0.0 || 19.1.4",
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0"
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "@types/react": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
+  },
+  "codegenConfig": {
+    "name": "FRNNativeCoreSpec",
+    "type": "all",
+    "jsSrcsDir": "src/specs",
+    "ios": {
+      "componentProvider": {
+        "Callout": "RCTCalloutComponentView",
+        "FocusZone": "RCTFocusZoneComponentView"
+      }
+    },
+    "windows": {
+      "generators": [
+        "componentsWindows",
+        "modulesWindows"
+      ],
+      "namespace": "FRNNativeCoreCodegen",
+      "outputDirectory": "windows/NativeCore/codegen",
+      "separateDataTypes": true
+    }
+  },
+  "furn": {
+    "jestPlatform": "win32"
+  },
+  "react-native-windows": {
+    "init-windows": {
+      "name": "FRNNativeCore",
+      "namespace": "FRNNativeCore",
+      "template": "cpp-lib"
+    }
   },
   "rnx-kit": {
     "kitType": "library",
+    "alignDeps": {
+      "capabilities": [
+        "babel-preset-react-native",
+        "core",
+        "core-android",
+        "core-ios",
+        "core-macos",
+        "core-windows",
+        "react",
+        "react-test-renderer"
+      ]
+    },
     "extends": "@fluentui-react-native/scripts/kit-config"
   }
 }

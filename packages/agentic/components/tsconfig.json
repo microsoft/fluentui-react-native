@@ -10,25 +10,22 @@
   "exclude": ["**/*.stories.ts", "**/*.stories.tsx", "**/*.story-helpers.tsx", "**/*.wdio.ts"],
   "references": [
     {
-      "path": "../../native/Callout/tsconfig.json"
-    },
-    {
       "path": "../design/tsconfig.json"
     },
     {
       "path": "../desktop-driver/tsconfig.json"
     },
     {
-      "path": "../storybook-desktop/tsconfig.json"
-    },
-    {
-      "path": "../../components/FocusZone/tsconfig.json"
-    },
-    {
       "path": "../../framework-base/tsconfig.json"
     },
     {
+      "path": "../native-core/tsconfig.json"
+    },
+    {
       "path": "../../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../storybook-desktop/tsconfig.json"
     }
   ]
 }

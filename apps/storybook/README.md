@@ -1,10 +1,10 @@
 # Agentic Components Storybook
 
 On-device [Storybook](https://storybook.js.org/) test app (Storybook for React Native v10) for
-`@fluentui-react-native/components` and linked standalone native packages. It loads every
-`*.stories.(ts|tsx)` file from the agentic components package plus the standalone Callout
-package. FocusZone stories are agentic primitive stories, while its standalone native package
-remains linked so they run in the Fabric and Paper hosts.
+`@fluentui-react-native/components` and `@fluentui-react-native/native-core`. It loads every
+`*.stories.(ts|tsx)` file from the agentic components package plus native-core's Callout
+stories. FocusZone stories remain agentic primitive stories and use native-core's implementation.
+Native-core owns the shared macOS pod and Windows Fabric library for both components.
 
 The reusable desktop CLI and configuration live in
 `packages/agentic/storybook-desktop`, with peer-dependent React Native
@@ -129,9 +129,9 @@ by smoke so its bundle identity does not fall back to the generated app default.
 ## Running on Windows
 
 The Windows app also uses `react-native-test-app`. Its generated Win32 project uses React Native
-Windows 0.81's New Architecture and Fabric renderer. The Callout and FocusZone packages are
-autolinked as Windows Fabric native libraries; their Paper implementations remain available on
-their supported legacy endpoints.
+Windows 0.81's New Architecture and Fabric renderer. Native-core is autolinked as one Windows
+Fabric native library that registers Callout and FocusZone. macOS retains both Paper and Fabric
+adapters; Win32 continues using its host-provided native implementations.
 
 ```powershell
 # from this directory

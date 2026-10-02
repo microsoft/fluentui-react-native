@@ -21,7 +21,7 @@
       "path": "../../components/Button/tsconfig.json"
     },
     {
-      "path": "../../native/Callout/tsconfig.json"
+      "path": "../../shim/callout/tsconfig.json"
     },
     {
       "path": "../../components/Checkbox/tsconfig.json"
@@ -33,7 +33,7 @@
       "path": "../../components/FocusTrapZone/tsconfig.json"
     },
     {
-      "path": "../../components/FocusZone/tsconfig.json"
+      "path": "../../shim/focus-zone/tsconfig.json"
     },
     {
       "path": "../../utils/interactive-hooks/tsconfig.json"

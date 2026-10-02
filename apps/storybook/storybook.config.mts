@@ -29,7 +29,7 @@ export default makeDesktopStorybookConfig({
       },
     ],
     [
-      '@fluentui-react-native/callout',
+      '@fluentui-react-native/native-core',
       {
         platformSettings: {
           windows: {

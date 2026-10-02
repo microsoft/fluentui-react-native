@@ -15,7 +15,7 @@ sources:
     policy: generated-do-not-edit
   story_packages:
     - '@fluentui-react-native/components'
-    - '@fluentui-react-native/callout'
+    - '@fluentui-react-native/native-core'
 
 services:
   supervisor:

@@ -10,6 +10,12 @@
   "exclude": ["**/*.stories.ts", "**/*.stories.tsx", "**/*.wdio.ts"],
   "references": [
     {
+      "path": "../../framework-base/tsconfig.json"
+    },
+    {
+      "path": "../../utils/interactive-hooks/tsconfig.json"
+    },
+    {
       "path": "../../../scripts/tsconfig.json"
     }
   ]

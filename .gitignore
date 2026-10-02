@@ -104,6 +104,12 @@ apps/*/.vscode/.react/
 # Visual Studio
 .vs/
 
+# Native library outputs, including caches left behind by workspace relocations
+packages/**/windows/**/[Oo]bj/
+packages/**/windows/**/Generated Files/
+packages/**/windows/**/x64/[Dd]ebug*/
+packages/**/windows/**/x64/[Rr]elease*/
+
 # Ignore Gradle build output directory
 **/android/**/build
 

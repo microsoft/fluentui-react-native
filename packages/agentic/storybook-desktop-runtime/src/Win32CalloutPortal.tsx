@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Callout } from '@fluentui-react-native/callout';
-import type { CalloutProps, DirectionalHint } from '@fluentui-react-native/callout';
+import { Callout } from '@fluentui-react-native/native-core';
+import type { CalloutProps, DirectionalHint } from '@fluentui-react-native/native-core';
 import { RootInputBoundary } from '@fluentui-react-native/design';
 import { useTheme } from '@storybook/react-native-theming';
 

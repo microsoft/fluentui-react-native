@@ -15,7 +15,7 @@
       "path": "../../components/Button/tsconfig.json"
     },
     {
-      "path": "../../native/Callout/tsconfig.json"
+      "path": "../../shim/callout/tsconfig.json"
     },
     {
       "path": "../../agentic/design/tsconfig.json"

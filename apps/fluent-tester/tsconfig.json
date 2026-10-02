@@ -11,7 +11,7 @@
   "include": ["src"],
   "references": [
     {
-      "path": "../../packages/native/Callout/tsconfig.json"
+      "path": "../../packages/shim/callout/tsconfig.json"
     },
     {
       "path": "../../packages/experimental/AppearanceAdditions/tsconfig.json"
@@ -32,10 +32,13 @@
       "path": "../../packages/experimental/Shimmer/tsconfig.json"
     },
     {
-      "path": "../../packages/components/FocusZone/tsconfig.json"
+      "path": "../../packages/shim/focus-zone/tsconfig.json"
     },
     {
       "path": "../../packages/components/MenuButton/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/native-core/tsconfig.json"
     },
     {
       "path": "../../packages/components/RadioGroup/tsconfig.json"

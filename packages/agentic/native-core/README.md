@@ -7,18 +7,25 @@ Higher-order Fluent components, theming, and composition remain in their
 existing packages and can consume this package without introducing a reverse
 dependency.
 
-## Initialization status
+## Current contents
 
-The workspace, TypeScript build, package export map, and entrypoint contract
-tests are initialized. All five entrypoints are intentionally empty. There are
-no native implementations, codegen specs, native projects, or autolinking
-registrations yet. This does not migrate Callout, FocusZone, or any other
-existing package.
+The root exports the existing unstyled `Callout` and `FocusZone` wrappers and
+their public types. Their JS, tests, specifications, macOS implementations,
+and Windows Fabric implementations live here. The `macos`, `windows`, `win`,
+and `win32` entrypoints are reserved for future host-specific APIs and remain
+empty; shared components belong to the root.
 
-The initial shell has no runtime dependencies. Add React Native/React peers,
-optional platform-fork peers, development dependencies, and matching `rnx-kit`
-capabilities with the first implementation, using the repository's supported
-versions. Do not imply native compatibility from an empty entrypoint.
+`@fluentui-react-native/callout` and `@fluentui-react-native/focus-zone` are
+JS-only compatibility shims under `packages/shim`. Deprecated type aliases and
+native registration names are preserved. The root uses the component-qualified
+`FocusZoneNativeProps`; the FocusZone shim retains its old `NativeProps` name.
+
+Native applications must directly depend on this package for autolinking.
+macOS now uses one `FRNNativeCore` pod, and Windows uses one
+`FRNNativeCore.ReactPackageProvider` library for both components. Remove
+explicit old `FRNCallout`/`RCTFocusZone` pod or standalone Windows project
+references and regenerate the consuming native project/Pods. Win32 continues
+to use its host-provided `RCTCallout` and `RCTFocusZone`.
 
 ## Public entrypoints
 
@@ -50,8 +57,9 @@ imports. Never use wildcard re-exports.
 
 ## JavaScript and specification layout
 
-Only the entrypoint files exist initially. Add the following directories as
-real features arrive rather than filling them with placeholder native APIs:
+Component wrappers live in `src/components/callout` and
+`src/components/focus-zone`, with codegen inputs in `src/specs/components`.
+Add module and internal utility directories as real features arrive:
 
 ```text
 src/
@@ -148,15 +156,16 @@ and expose native failures.
 
 ## Codegen, registration, and publishing plan
 
-Introduce native build metadata with the first real schema and native target:
+The shared native build metadata follows this organization:
 
 1. Use one package-level codegen identity, `FRNNativeCoreSpec`, with
    `type: "all"` and `jsSrcsDir: "src/specs"` so components and modules remain
    distinct in source but share a generation boundary.
 2. Name component schemas `<Name>NativeComponent.ts` and module schemas
    `Native<Name>.ts`. Prefix native registration names with `FRNNativeCore`
-   to avoid collisions with existing packages; keep each name identical in
-   the schema, generated interface, native registration, and JS binding.
+   for new APIs to avoid collisions. Migrated Callout and FocusZone retain
+   their existing Fabric and Paper names for compatibility. Keep names
+   identical in the schema, generated interface, registration, and JS binding.
 3. Configure Windows with both `componentsWindows` and `modulesWindows`
    generators and `windows/NativeCore/codegen` output. Apple codegen should
    run through the consuming macOS app's Pod integration. Inspect each
@@ -165,12 +174,13 @@ Introduce native build metadata with the first real schema and native target:
 4. Leave `includesGeneratedCode` unset unless generated artifacts for every
    supported native platform are deliberately shipped and verified. It is
    not a Windows-only switch and can prevent Apple code generation.
-5. Add the macOS podspec, Windows project/provider, and autolinking metadata
-   only when they refer to real sources. Exclude Paper adapters from macOS
-   Fabric compilation and Fabric adapters from Paper compilation. Register
-   only implementations supported by the active host/architecture.
+5. The macOS podspec includes both components' shared and Paper sources.
+   Fabric component views retain their `RCT_NEW_ARCH_ENABLED` guards. Paper
+   managers remain available for existing bridge interoperability until the
+   supported macOS hosts are Fabric-only. Windows declares `RnwNewArchOnly`
+   and registers both components through one package provider.
 6. Keep native targets and required generated outputs in the published
-   archive. The initial `files` allowlist reserves `src`, `lib`, `macos`,
+   archive. The `files` allowlist includes `src`, `lib`, `macos`,
    `windows`, `win32`, podspecs, and `react-native.config.cjs`. Intermediate
    native build artifacts, tests, and machine-local project output must not
    leak into it.
@@ -181,8 +191,9 @@ Introduce native build metadata with the first real schema and native target:
 ## Delivery and validation
 
 Add each feature as one reviewed contract, thin wrapper/schema, native
-implementation, explicit export, and tests. Start with one representative
-Fabric component and one TurboModule to exercise both codegen paths.
+implementation, explicit export, and tests. The component codegen path is
+exercised by Callout and FocusZone; add a representative TurboModule before
+claiming module readiness.
 macOS component admission requires both Paper and Fabric evidence; Windows
 component admission requires Fabric evidence. A `win` or root API also
 requires Win32 evidence before it is exported there.
@@ -194,12 +205,15 @@ yarn workspace @fluentui-react-native/native-core format --check
 yarn workspace @fluentui-react-native/native-core lint
 yarn workspace @fluentui-react-native/native-core build
 yarn workspace @fluentui-react-native/native-core test
+yarn workspace @fluentui-react-native/native-core codegen:windows --check
 yarn build
 ```
 
-The initial Node tests validate all five export maps, emitted JS/declaration
-files, and conditional resolution for compiled, React Native source, and
-TypeScript entrypoints. Add the repository's shared Jest configuration and
-native integration tests when wrappers and native targets exist. Native
+Node tests validate the five export maps, emitted JS/declaration files,
+conditional resolution, shared native ownership, and JS-only shims. Colocated
+Jest tests retain wrapper behavior, imperative refs/commands, slot acceptance,
+and public type contracts; shim tests verify exact component identity.
+The package prebuild regenerates Windows bindings from the shared spec.
+Native
 verification must cover registration, events/commands, refs, unmount cleanup,
 error propagation, and architecture/platform parity, not only JS mocks.

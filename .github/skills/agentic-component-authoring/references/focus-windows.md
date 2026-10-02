@@ -53,7 +53,7 @@ assume a React ref can be serialized into a TurboModule argument.
 
 The existing Fabric FocusZone uses `TryFocus(FocusState::Keyboard)` and checks
 the root's focused component after the request
-(`packages\components\FocusZone\windows\FRNFocusZone\FocusZoneComponentView.cpp:175-224`).
+(`packages\agentic\native-core\windows\NativeCore\components\FocusZone\FocusZoneComponentView.cpp:175-224`).
 Reuse this request-versus-observation pattern. Do not report success merely
 because JavaScript called an optional `.focus()` method.
 
@@ -94,7 +94,7 @@ This native implementation detail is not a promised public JavaScript API.
   consume every key.
 
 Sources: `packages\utils\interactive-hooks\src\useKeyProps.ts:8-95,114-126`;
-`packages\components\FocusZone\windows\FRNFocusZone\FocusZoneComponentView.cpp:71-133`.
+`packages\agentic\native-core\windows\NativeCore\components\FocusZone\FocusZoneComponentView.cpp:71-133`.
 
 ## Native and custom focus visuals
 
