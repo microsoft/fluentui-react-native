@@ -29,6 +29,9 @@
       "path": "packages/agentic/desktop-driver/tsconfig.json"
     },
     {
+      "path": "packages/agentic/native-core/tsconfig.json"
+    },
+    {
       "path": "packages/agentic/storybook-desktop/tsconfig.json"
     },
     {
@@ -60,9 +63,6 @@
     },
     {
       "path": "packages/components/FocusTrapZone/tsconfig.json"
-    },
-    {
-      "path": "packages/components/FocusZone/tsconfig.json"
     },
     {
       "path": "packages/components/Icon/tsconfig.json"
@@ -206,7 +206,10 @@
       "path": "packages/libraries/core/tsconfig.json"
     },
     {
-      "path": "packages/native/Callout/tsconfig.json"
+      "path": "packages/shim/callout/tsconfig.json"
+    },
+    {
+      "path": "packages/shim/focus-zone/tsconfig.json"
     },
     {
       "path": "packages/shim/theme/tsconfig.json"

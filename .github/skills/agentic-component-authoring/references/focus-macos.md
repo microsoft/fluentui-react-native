@@ -31,8 +31,8 @@ focus visual should be presented as active.
   exposure or global numeric-tag lookup.
 
 Local references:
-`packages\components\FocusZone\macos\RCTFocusZone.m:24-35,122-129`;
-`packages\components\FocusZone\macos\RCTFocusZoneComponentView.mm:118-179`.
+`packages\agentic\native-core\macos\components\FocusZone\shared\RCTFocusZone.m:24-35,122-129`;
+`packages\agentic\native-core\macos\components\FocusZone\fabric\RCTFocusZoneComponentView.mm:118-179`.
 Installed RNmacOS `React\Fabric\Mounting\ComponentViews\View\RCTViewComponentView.mm:1719-1804`
 implements focus/blur commands and responder event emission.
 
@@ -105,8 +105,8 @@ same keys. Recompute eligibility when children mount/unmount and when props
 change, and clear the default responder on recycle. Retain direction, wrap/stop,
 RTL, nested zones, scrolling, and editable-child semantics.
 
-Evidence: `packages\components\FocusZone\macos\RCTFocusZone.m:584-675`;
-`packages\components\FocusZone\macos\RCTFocusZoneComponentView.mm:118-195`.
+Evidence: `packages\agentic\native-core\macos\components\FocusZone\shared\RCTFocusZone.m:584-675`;
+`packages\agentic\native-core\macos\components\FocusZone\fabric\RCTFocusZoneComponentView.mm:118-195`.
 
 ## Popup windows and lifecycle
 
@@ -131,10 +131,10 @@ Do not install OS-global keyboard hooks or require desktop-driver permissions
 for ordinary production focus behavior.
 
 Evidence:
-`packages\native\Callout\macos\CalloutWindow.swift:9-38`;
-`packages\native\Callout\macos\CalloutView.swift:33-45,142-216`;
-`packages\native\Callout\macos\RCTCalloutComponentView.mm:96-132`;
-`packages\native\Callout\macos\GuardedEventMonitor.swift:1-29`;
+`packages\agentic\native-core\macos\components\Callout\shared\CalloutWindow.swift:9-38`;
+`packages\agentic\native-core\macos\components\Callout\shared\CalloutView.swift:33-45,142-216`;
+`packages\agentic\native-core\macos\components\Callout\fabric\RCTCalloutComponentView.mm:96-132`;
+`packages\agentic\native-core\macos\components\Callout\shared\GuardedEventMonitor.swift:1-29`;
 `packages\components\ContextualMenu\src\ContextualMenu.tsx:39-55`.
 
 ## Native versus custom ring drawing

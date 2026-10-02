@@ -2565,10 +2565,9 @@ __metadata:
   resolution: "@fluentui-react-native/agentic-components-storybook@workspace:apps/storybook"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/components": "workspace:*"
     "@fluentui-react-native/desktop-driver": "workspace:*"
-    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/native-core": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/storybook-desktop": "workspace:*"
     "@fluentui-react-native/storybook-desktop-runtime": "workspace:*"
@@ -2852,12 +2851,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/callout@workspace:*, @fluentui-react-native/callout@workspace:packages/native/Callout":
+"@fluentui-react-native/callout@workspace:*, @fluentui-react-native/callout@workspace:packages/shim/callout":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/callout@workspace:packages/native/Callout"
+  resolution: "@fluentui-react-native/callout@workspace:packages/shim/callout"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/native-core": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -3017,11 +3016,10 @@ __metadata:
   resolution: "@fluentui-react-native/components@workspace:packages/agentic/components"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
     "@fluentui-react-native/desktop-driver": "workspace:*"
-    "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/native-core": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/storybook-desktop": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
@@ -4112,14 +4110,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/focus-zone@workspace:*, @fluentui-react-native/focus-zone@workspace:packages/components/FocusZone":
+"@fluentui-react-native/focus-zone@workspace:*, @fluentui-react-native/focus-zone@workspace:packages/shim/focus-zone":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/focus-zone@workspace:packages/components/FocusZone"
+  resolution: "@fluentui-react-native/focus-zone@workspace:packages/shim/focus-zone"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/desktop-driver": "workspace:*"
-    "@fluentui-react-native/framework-base": "workspace:*"
-    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/native-core": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.8"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -4502,6 +4498,52 @@ __metadata:
     react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
     react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-svg: ">=15.0.0 <15.13.0 || >=15.4.0 <15.13.0 || ^15.11.2 || ^15.12.1"
+    react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+    "@types/react":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-windows:
+      optional: true
+  languageName: unknown
+  linkType: soft
+
+"@fluentui-react-native/native-core@workspace:*, @fluentui-react-native/native-core@workspace:packages/agentic/native-core":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/native-core@workspace:packages/agentic/native-core"
+  dependencies:
+    "@babel/core": "catalog:"
+    "@fluentui-react-native/framework-base": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/storybook-desktop": "workspace:*"
+    "@office-iss/react-native-win32": "npm:^0.81.8"
+    "@react-native-community/cli": "npm:^20.0.0"
+    "@react-native-community/cli-platform-android": "npm:^20.0.0"
+    "@react-native-community/cli-platform-ios": "npm:^20.0.0"
+    "@react-native-windows/cli": "npm:^0.81.0"
+    "@react-native/babel-preset": "npm:^0.81.0"
+    "@react-native/metro-config": "npm:^0.81.0"
+    "@storybook/react-native": "npm:^10.4.7"
+    "@testing-library/react-native": "catalog:"
+    "@types/react": "npm:~19.1.4"
+    "@types/react-test-renderer": "npm:^19.1.0"
+    react: "npm:19.1.4"
+    react-native: "npm:^0.81.6"
+    react-native-macos: "npm:^0.81.0"
+    react-native-windows: "npm:^0.81.0"
+    react-test-renderer: "npm:19.1.4"
+    storybook: "npm:^10.4.0"
+    test-renderer: "catalog:"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.74.0 || ^0.81.0
+    "@types/react": ~18.2.0 || ~19.0.0 || ~19.1.4
+    react: 18.2.0 || 19.0.0 || 19.1.4
+    react-native: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.6
+    react-native-macos: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
     react-native-windows: ^0.73.0 || ^0.74.0 || ^0.78.0 || ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -5052,9 +5094,9 @@ __metadata:
   resolution: "@fluentui-react-native/storybook-desktop-runtime@workspace:packages/agentic/storybook-desktop-runtime"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
+    "@fluentui-react-native/native-core": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
     "@react-native-community/cli": "npm:^20.0.0"
@@ -5477,6 +5519,7 @@ __metadata:
     "@fluentui-react-native/experimental-shimmer": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/menu-button": "workspace:*"
+    "@fluentui-react-native/native-core": "workspace:*"
     "@fluentui-react-native/radio-group": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tester-core": "workspace:*"

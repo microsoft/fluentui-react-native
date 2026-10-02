@@ -29,7 +29,7 @@
       "path": "../../packages/components/Button/tsconfig.json"
     },
     {
-      "path": "../../packages/native/Callout/tsconfig.json"
+      "path": "../../packages/shim/callout/tsconfig.json"
     },
     {
       "path": "../../packages/components/Chip/tsconfig.json"
@@ -83,7 +83,7 @@
       "path": "../../packages/experimental/Shimmer/tsconfig.json"
     },
     {
-      "path": "../../packages/components/FocusZone/tsconfig.json"
+      "path": "../../packages/shim/focus-zone/tsconfig.json"
     },
     {
       "path": "../../packages/framework-base/tsconfig.json"

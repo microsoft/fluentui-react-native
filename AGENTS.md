@@ -86,8 +86,9 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
   /win32/        - Win32-specific test app
   /component-generator/ - Tool to generate new components
 /packages/       - Core library packages
+  /agentic/native-core/ - Shared modern native components and TurboModules
   /components/   - UI component implementations (Button, Checkbox, Avatar, etc.)
-  /native/       - Standalone native-backed component packages (Callout, etc.)
+  /shim/         - Compatibility entrypoints (Callout, FocusZone, theming, etc.)
   /framework/    - Core theming and composition framework
     /composition/ - Component composition factory (current approach)
     /theme/      - Theme system
@@ -237,8 +238,9 @@ The composition framework uses precise types for better type safety:
 
 ### Component Development
 
-**Component Location**: Stable JavaScript components are in `/packages/components/`, standalone native-backed components are in
-`/packages/native/`, and components under development are in `/packages/experimental/`.
+**Component Location**: Stable JavaScript components are in `/packages/components/`, components under development are in
+`/packages/experimental/`, and compatibility packages are in `/packages/shim/`. Modern native components and modules share
+`/packages/agentic/native-core/`; follow its [organization plan](packages/agentic/native-core/README.md).
 
 **Component Structure**: Each component typically has:
 
@@ -272,19 +274,25 @@ The composition framework uses precise types for better type safety:
 
 - **Do not use barrel exports (`export * from '...'`)** - wildcard re-exports break tree-shaking because bundlers cannot statically determine which symbols are used, so unused code is retained in consumers' bundles. Always use explicit named re-exports instead, e.g. `export { Foo, Bar } from './module'` and `export type { Baz } from './module'`.
 
-**Native Modules**: Standalone native-backed component packages, such as Callout, live in `/packages/native/`. Components with
-native code (iOS/Android/Windows):
+**Native Modules**: Callout and FocusZone implementations live in `@fluentui-react-native/native-core`; their former packages
+are JS-only compatibility shims under `/packages/shim/`. Their JavaScript wrappers live in `src/legacy` and are exported
+only from `@fluentui-react-native/native-core/legacy`, not native-core's root entrypoint. Components with native code:
 
 - Typically have one root slot wrapping the native component
 - Use `codegenNativeComponent` for new architecture compatibility
 - May use `constantsToExport` for default values from native side
 - iOS/macOS: Include `.podspec` files
-- Must be added to FluentTester's Podfile (transitive dependencies aren't autolinked)
+- Native applications must directly depend on native-core for native project discovery and autolinking
+
+For new modern native components and modules, use `@fluentui-react-native/native-core` rather than creating another standalone
+package. Its Windows components are Fabric-only; macOS components support Paper and Fabric initially. Export shared APIs
+from the root and scope platform APIs to `macos`, `windows` (React Native Windows), `win` (Windows/Win32), or `win32`.
+Callout and FocusZone retain their existing public APIs and native registration names after migration.
 
 ### Creating a New Component
 
-1. Create the package under `/packages/components/<ComponentName>`, `/packages/native/<ComponentName>` for a standalone
-   native-backed component, or `/packages/experimental/<ComponentName>` while it is under development
+1. Create the package under `/packages/components/<ComponentName>` or `/packages/experimental/<ComponentName>` while it is
+   under development. Add modern native components/modules to the existing `/packages/agentic/native-core/` package instead.
 2. Copy structure from existing component (e.g., Shimmer, Button)
 3. Update `package.json` with correct name and dependencies (use `workspace:*` for internal packages)
 4. Add the new package's `tsconfig.json` to the root `tsconfig.json` `references` so it joins the unified build
