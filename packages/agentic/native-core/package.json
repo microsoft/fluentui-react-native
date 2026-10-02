@@ -80,7 +80,8 @@
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "prebuild": "yarn codegen:windows",
-    "test": "yarn build && node --test tests/entrypoints.test.mjs tests/native-ownership.test.mjs && fluentui-scripts jest",
+    "test": "yarn build && yarn test:stories && node --test tests/entrypoints.test.mjs tests/native-ownership.test.mjs && fluentui-scripts jest",
+    "test:stories": "tsc -p tsconfig.stories.json",
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "dependencies": {
@@ -90,6 +91,7 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/storybook-desktop": "workspace:*",
     "@office-iss/react-native-win32": "^0.81.8",
     "@react-native-community/cli": "^20.0.0",
     "@react-native-community/cli-platform-android": "^20.0.0",

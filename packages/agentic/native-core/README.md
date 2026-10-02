@@ -38,6 +38,10 @@ explicit old `FRNCallout`/`RCTFocusZone` pod or standalone Windows project
 references and regenerate the consuming native project/Pods. Win32 continues
 to use its host-provided `RCTCallout` and `RCTFocusZone`.
 
+The macOS module-named header at `macos/shared/FRNNativeCore.h` is required by
+the generated `FRNNativeCore-Swift.h`; keep it aligned with the pod's
+`module_name` when changing native ownership.
+
 ## Public entrypoints
 
 | Import                                       | Scope                                       | Source entrypoint      |
@@ -234,3 +238,14 @@ The package prebuild regenerates Windows bindings from the shared spec.
 Native
 verification must cover registration, events/commands, refs, unmount cleanup,
 error propagation, and architecture/platform parity, not only JS mocks.
+Callout's executable macOS Fabric story verifies native popup creation, `onShow` and
+`onDismiss`, outside-click dismissal, and reopening. Run it together
+with FocusZone's keyboard cases from `apps/storybook` using the owned lifecycle:
+
+```sh
+STORYBOOK_SMOKE_STORY='native-*' yarn storybook smoke --macos --mode stories-and-tests
+```
+
+This traverses the full catalog before running the selected native tests.
+The macOS Desktop Driver currently targets Fabric; a successful Paper build
+does not establish Paper runtime or input parity.

@@ -47,6 +47,19 @@ test('the shared macOS pod includes both components and retains both renderer ad
   }
 });
 
+test('macOS Swift interoperability uses the consolidated pod module name', async () => {
+  const podspec = await readFile(new URL('FRNNativeCore.podspec', packageRoot), 'utf8');
+  const moduleName = podspec.match(/s\.module_name\s*=\s*'([^']+)'/)?.[1];
+  assert.equal(moduleName, 'FRNNativeCore');
+  await readFile(new URL(`macos/shared/${moduleName}.h`, packageRoot), 'utf8');
+
+  for (const adapter of ['fabric/RCTCalloutComponentView.mm', 'paper/FRNCalloutManager.m']) {
+    const source = await readFile(new URL(`macos/components/Callout/${adapter}`, packageRoot), 'utf8');
+    assert.ok(source.includes(`#import "${moduleName}-Swift.h"`));
+    assert.doesNotMatch(source, /FRNCallout-Swift\.h/);
+  }
+});
+
 for (const shim of ['callout', 'focus-zone']) {
   test(`${shim} is a JS-only compatibility shim with no duplicate native ownership`, async () => {
     const root = new URL(`../../shim/${shim}/`, packageRoot);

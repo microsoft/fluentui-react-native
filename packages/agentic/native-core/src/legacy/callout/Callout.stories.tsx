@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
 import { Callout } from './Callout';
@@ -48,6 +49,11 @@ const CalloutExample = ({ defaultVisible = false, onDismiss, onShow, showWindowC
 
   return (
     <View style={styles.story}>
+      <View accessible accessibilityLabel={`Native window: ${status}`} accessibilityRole="text" testID="agentic-storybook-callout-status">
+        <Text accessible={false} accessibilityLiveRegion="polite" style={styles.status}>
+          Native window: {status}
+        </Text>
+      </View>
       <View>
         <Pressable
           accessibilityRole="button"
@@ -62,9 +68,6 @@ const CalloutExample = ({ defaultVisible = false, onDismiss, onShow, showWindowC
           <Text style={styles.triggerText}>{visible ? 'Close callout' : 'Open callout'}</Text>
         </Pressable>
       </View>
-      <Text accessibilityLiveRegion="polite" style={styles.status} testID="agentic-storybook-callout-status">
-        Native window: {status}
-      </Text>
       {visible && (
         <Callout {...props} componentRef={calloutRef} onDismiss={dismiss} onShow={show} target={anchorRef}>
           <View style={styles.calloutContent} collapsable={false}>
@@ -177,10 +180,37 @@ const meta: Meta<typeof Callout> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Callout>;
+type Story = WdioStory<StoryObj<typeof Callout>>;
 
 export const Default: Story = {
+  tags: ['desktop-e2e'],
   render: (args) => <CalloutExample {...args} defaultVisible />,
+  wdio: {
+    'macOS opens, dismisses, and recreates a native popup window': async ({ browser, expect, platform, skip }) => {
+      if (platform !== 'macos') {
+        skip('This case verifies the AppKit popup-window lifecycle.');
+        return;
+      }
+      const features = browser.capabilities['furn:features'];
+      if (!features?.physicalClick) {
+        skip('Popup lifecycle qualification requires physical pointer input.');
+        return;
+      }
+      for (let attempt = 0; attempt < 2; attempt++) {
+        await expect(await browser.$('~agentic-storybook-callout-status')).toHaveText('Native window: Shown');
+        expect(await browser.getWindowHandles()).toHaveLength(2);
+        await (await browser.$('~agentic-storybook-callout-status')).click();
+        await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, {
+          timeout: 5000,
+          timeoutMsg: 'Expected dismissal to remove the native Callout window.',
+        });
+        await expect(await browser.$('~agentic-storybook-callout-status')).toHaveText('Native window: Dismissed');
+        if (attempt === 0) {
+          await (await browser.$('~agentic-storybook-callout-trigger')).click();
+        }
+      }
+    },
+  },
 };
 
 export const Placement: Story = {
@@ -252,7 +282,7 @@ const styles = StyleSheet.create({
   },
   status: {
     color: '#616161',
-    marginTop: 12,
+    marginBottom: 12,
   },
   story: {
     alignItems: 'center',
