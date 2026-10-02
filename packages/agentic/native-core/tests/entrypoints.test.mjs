@@ -8,19 +8,28 @@ const packageRoot = new URL('../', import.meta.url);
 const manifest = JSON.parse(await readFile(new URL('package.json', packageRoot), 'utf8'));
 const entrypoints = [
   ['.', 'index'],
+  ['./legacy', 'legacy/index'],
   ['./macos', 'macos/index'],
   ['./windows', 'windows/index'],
   ['./win', 'win/index'],
   ['./win32', 'win32/index'],
 ];
 
-test('declares exactly the five public entrypoints and package metadata', () => {
+test('declares exactly the six public entrypoints and package metadata', () => {
   assert.equal(manifest.name, '@fluentui-react-native/native-core');
   assert.deepEqual(Object.keys(manifest.exports), [...entrypoints.map(([entrypoint]) => entrypoint), './package.json']);
   assert.equal(manifest.exports['./package.json'], './package.json');
   assert.equal(manifest.main, 'lib/index.js');
   assert.equal(manifest.module, 'lib/index.js');
   assert.equal(manifest.types, 'lib/index.d.ts');
+});
+
+test('the root entrypoint does not expose or initialize legacy components', async () => {
+  const root = await import('@fluentui-react-native/native-core');
+  assert.ok(!('Callout' in root));
+  assert.ok(!('FocusZone' in root));
+  assert.ok(!('calloutName' in root));
+  assert.ok(!('focusZoneName' in root));
 });
 
 for (const [entrypoint, path] of entrypoints) {

@@ -7,6 +7,9 @@ positioned relative to a target ref, registered native anchor, or anchor
 rectangle. Its JS wrapper, native adapters, and codegen schema are owned by
 `@fluentui-react-native/native-core`; the old Callout package is a JS-only shim.
 
+The JavaScript component and its public types are exported only from
+`@fluentui-react-native/native-core/legacy`, not the package root.
+
 ## Contract
 
 - `CalloutProps` extends React Native `ViewProps` with target resolution,
@@ -37,7 +40,7 @@ rectangle. Its JS wrapper, native adapters, and codegen schema are owned by
 ## Compatibility
 
 `ICalloutProps`, `ICalloutTokens`, and `CalloutNativeCommands` remain as
-deprecated aliases for the modern public types.
+deprecated aliases for the public types in the legacy entrypoint.
 
 Existing `Callout`/`RCTCallout` native registration names remain unchanged.
 Native applications must directly depend on `@fluentui-react-native/native-core`

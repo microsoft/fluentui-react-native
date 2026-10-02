@@ -3,7 +3,8 @@
 On-device [Storybook](https://storybook.js.org/) test app (Storybook for React Native v10) for
 `@fluentui-react-native/components` and `@fluentui-react-native/native-core`. It loads every
 `*.stories.(ts|tsx)` file from the agentic components package plus native-core's Callout
-stories. FocusZone stories remain agentic primitive stories and use native-core's implementation.
+stories. FocusZone stories remain agentic primitive stories and use native-core's
+`legacy` entrypoint, as does the Win32 Callout portal.
 Native-core owns the shared macOS pod and Windows Fabric library for both components.
 
 The reusable desktop CLI and configuration live in

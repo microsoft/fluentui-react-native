@@ -1,4 +1,4 @@
-export { FocusZone, focusZoneName } from '@fluentui-react-native/native-core';
+export { FocusZone, focusZoneName } from '@fluentui-react-native/native-core/legacy';
 export type {
   FocusZoneDirection,
   FocusZoneProps,
@@ -10,4 +10,4 @@ export type {
   FocusZoneType,
   FocusZoneNativeProps as NativeProps,
   NavigateAtEnd,
-} from '@fluentui-react-native/native-core';
+} from '@fluentui-react-native/native-core/legacy';

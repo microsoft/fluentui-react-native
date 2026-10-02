@@ -41,6 +41,12 @@
       "import": "./lib/index.js",
       "default": "./src/index.ts"
     },
+    "./legacy": {
+      "types": "./lib/legacy/index.d.ts",
+      "react-native": "./src/legacy/index.ts",
+      "import": "./lib/legacy/index.js",
+      "default": "./src/legacy/index.ts"
+    },
     "./macos": {
       "types": "./lib/macos/index.d.ts",
       "react-native": "./src/macos/index.ts",

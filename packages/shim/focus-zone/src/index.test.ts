@@ -1,7 +1,7 @@
 import { FocusZone, focusZoneName } from './index';
-import { FocusZone as NativeFocusZone, focusZoneName as nativeFocusZoneName } from '@fluentui-react-native/native-core';
+import { FocusZone as NativeFocusZone, focusZoneName as nativeFocusZoneName } from '@fluentui-react-native/native-core/legacy';
 import type { FocusZoneProps, FocusZoneRenderData, FocusZoneState, FocusZoneTokens, FocusZoneType, NativeProps } from './index';
-import type { FocusZoneNativeProps, FocusZoneProps as NativeFocusZoneProps } from '@fluentui-react-native/native-core';
+import type { FocusZoneNativeProps, FocusZoneProps as NativeFocusZoneProps } from '@fluentui-react-native/native-core/legacy';
 
 const props: FocusZoneProps = { focusZoneDirection: 'horizontal', isCircularNavigation: true };
 const nativeProps: NativeFocusZoneProps = props;

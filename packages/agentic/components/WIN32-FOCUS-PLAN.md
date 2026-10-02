@@ -246,7 +246,7 @@ paths. The installed Win32 JavaScript inspected was
   `packages\components\Menu\src\MenuPopover\useMenuPopover.ts:42-84,100-118`.
 - **V6:** `packages\components\TabList\src\Tab\useTab.win32.ts:64-110,142-152`;
   `packages\components\TabList\src\TabList\useTabList.ts:142-176,183-200`.
-- **V7:** `packages\agentic\native-core\src\components\focus-zone\FocusZone.tsx:15-45`;
+- **V7:** `packages\agentic\native-core\src\legacy\focus-zone\FocusZone.tsx:15-45`;
   `packages\components\FocusTrapZone\src\FocusTrapZone.ts:15-31`.
   These wrappers do not by themselves prove native trap/restoration semantics.
 - **V8:** `apps\tester-core\src\TestComponents\FocusZone\FocusZoneE2ETest.tsx:1-120`;

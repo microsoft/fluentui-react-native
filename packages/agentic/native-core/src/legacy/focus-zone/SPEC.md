@@ -7,6 +7,9 @@ keyboard navigation among focusable descendants. Its JS wrapper, native
 adapters, and codegen schema are owned by `@fluentui-react-native/native-core`;
 the old FocusZone package is a JS-only shim.
 
+The JavaScript component and its public types are exported only from
+`@fluentui-react-native/native-core/legacy`, not the package root.
+
 ## Contract
 
 - `FocusZoneProps` extends React Native `ViewProps` with directional, circular,

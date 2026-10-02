@@ -275,7 +275,8 @@ The composition framework uses precise types for better type safety:
 - **Do not use barrel exports (`export * from '...'`)** - wildcard re-exports break tree-shaking because bundlers cannot statically determine which symbols are used, so unused code is retained in consumers' bundles. Always use explicit named re-exports instead, e.g. `export { Foo, Bar } from './module'` and `export type { Baz } from './module'`.
 
 **Native Modules**: Callout and FocusZone implementations live in `@fluentui-react-native/native-core`; their former packages
-are JS-only compatibility shims under `/packages/shim/`. Components with native code:
+are JS-only compatibility shims under `/packages/shim/`. Their JavaScript wrappers live in `src/legacy` and are exported
+only from `@fluentui-react-native/native-core/legacy`, not native-core's root entrypoint. Components with native code:
 
 - Typically have one root slot wrapping the native component
 - Use `codegenNativeComponent` for new architecture compatibility

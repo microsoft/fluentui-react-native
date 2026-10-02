@@ -4,8 +4,8 @@ import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
-import { FocusZone } from '@fluentui-react-native/native-core';
-import type { FocusZoneDirection, FocusZoneProps, FocusZoneTabNavigation } from '@fluentui-react-native/native-core';
+import { FocusZone } from '@fluentui-react-native/native-core/legacy';
+import type { FocusZoneDirection, FocusZoneProps, FocusZoneTabNavigation } from '@fluentui-react-native/native-core/legacy';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
 import { Button } from '../../components/button/button';

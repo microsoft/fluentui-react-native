@@ -9,16 +9,27 @@ dependency.
 
 ## Current contents
 
-The root exports the existing unstyled `Callout` and `FocusZone` wrappers and
-their public types. Their JS, tests, specifications, macOS implementations,
-and Windows Fabric implementations live here. The `macos`, `windows`, `win`,
-and `win32` entrypoints are reserved for future host-specific APIs and remain
-empty; shared components belong to the root.
+The existing unstyled `Callout` and `FocusZone` JavaScript wrappers, public
+types, tests, stories, and specifications live under `src/legacy` and are
+exported only from `@fluentui-react-native/native-core/legacy`. They are not
+exported by the root entrypoint, which is reserved for modern cross-platform
+APIs. The `macos`, `windows`, `win`, and `win32` entrypoints are reserved for
+future host-specific APIs and remain empty.
 
 `@fluentui-react-native/callout` and `@fluentui-react-native/focus-zone` are
 JS-only compatibility shims under `packages/shim`. Deprecated type aliases and
-native registration names are preserved. The root uses the component-qualified
-`FocusZoneNativeProps`; the FocusZone shim retains its old `NativeProps` name.
+native registration names are preserved. The legacy entrypoint uses the
+component-qualified `FocusZoneNativeProps`; the FocusZone shim retains its old
+`NativeProps` name.
+
+```ts
+import { Callout, FocusZone } from '@fluentui-react-native/native-core/legacy';
+import type { CalloutProps, FocusZoneProps } from '@fluentui-react-native/native-core/legacy';
+```
+
+Native implementations and shared codegen inputs remain outside `src/legacy`;
+the legacy boundary applies to the JavaScript component API, not native
+ownership or renderer support.
 
 Native applications must directly depend on this package for autolinking.
 macOS now uses one `FRNNativeCore` pod, and Windows uses one
@@ -29,16 +40,17 @@ to use its host-provided `RCTCallout` and `RCTFocusZone`.
 
 ## Public entrypoints
 
-| Import                                       | Scope                                   | Source entrypoint      |
-| -------------------------------------------- | --------------------------------------- | ---------------------- |
-| `@fluentui-react-native/native-core`         | Cross-platform APIs                     | `src/index.ts`         |
-| `@fluentui-react-native/native-core/macos`   | macOS-specific APIs                     | `src/macos/index.ts`   |
-| `@fluentui-react-native/native-core/windows` | React Native Windows-specific APIs      | `src/windows/index.ts` |
-| `@fluentui-react-native/native-core/win`     | APIs shared by Windows and Win32        | `src/win/index.ts`     |
-| `@fluentui-react-native/native-core/win32`   | Office React Native Win32-specific APIs | `src/win32/index.ts`   |
+| Import                                       | Scope                                       | Source entrypoint      |
+| -------------------------------------------- | ------------------------------------------- | ---------------------- |
+| `@fluentui-react-native/native-core`         | Cross-platform APIs                         | `src/index.ts`         |
+| `@fluentui-react-native/native-core/legacy`  | Legacy Callout/FocusZone wrappers and types | `src/legacy/index.ts`  |
+| `@fluentui-react-native/native-core/macos`   | macOS-specific APIs                         | `src/macos/index.ts`   |
+| `@fluentui-react-native/native-core/windows` | React Native Windows-specific APIs          | `src/windows/index.ts` |
+| `@fluentui-react-native/native-core/win`     | APIs shared by Windows and Win32            | `src/win/index.ts`     |
+| `@fluentui-react-native/native-core/win32`   | Office React Native Win32-specific APIs     | `src/win32/index.ts`   |
 
 Each entrypoint explicitly exports components, module facades, and their
-public types. The root is not an umbrella export of the platform submodules;
+public types. The root does not re-export legacy or platform submodules;
 `win` is not an umbrella export of `windows` and `win32`. Give an API its
 narrowest applicable public home. Shared implementation does not itself make
 an API cross-platform.
@@ -57,9 +69,9 @@ imports. Never use wildcard re-exports.
 
 ## JavaScript and specification layout
 
-Component wrappers live in `src/components/callout` and
-`src/components/focus-zone`, with codegen inputs in `src/specs/components`.
-Add module and internal utility directories as real features arrive:
+Legacy wrappers live in `src/legacy/callout` and `src/legacy/focus-zone`, with
+shared codegen inputs in `src/specs/components`. Reserve `src/components` for
+modern wrappers and add module/internal directories as real features arrive:
 
 ```text
 src/
@@ -68,6 +80,10 @@ src/
   windows/index.ts
   win/index.ts
   win32/index.ts
+  legacy/
+    index.ts                     Explicit legacy-only public exports
+    callout/                     Existing Callout wrapper, types, tests, and stories
+    focus-zone/                  Existing FocusZone wrapper, types, and tests
   components/
     <name>/
       <Name>.tsx                  Thin public wrapper, when shared
@@ -209,10 +225,11 @@ yarn workspace @fluentui-react-native/native-core codegen:windows --check
 yarn build
 ```
 
-Node tests validate the five export maps, emitted JS/declaration files,
+Node tests validate the six export maps, emitted JS/declaration files,
 conditional resolution, shared native ownership, and JS-only shims. Colocated
 Jest tests retain wrapper behavior, imperative refs/commands, slot acceptance,
 and public type contracts; shim tests verify exact component identity.
+Runtime and compile-time checks reject legacy component/type exports at root.
 The package prebuild regenerates Windows bindings from the shared spec.
 Native
 verification must cover registration, events/commands, refs, unmount cleanup,

@@ -1,4 +1,4 @@
-export { Callout, calloutName } from '@fluentui-react-native/native-core';
+export { Callout, calloutName } from '@fluentui-react-native/native-core/legacy';
 export type {
   CalloutHandle,
   CalloutNativeCommands,
@@ -9,4 +9,4 @@ export type {
   ICalloutProps,
   ICalloutTokens,
   RestoreFocusEvent,
-} from '@fluentui-react-native/native-core';
+} from '@fluentui-react-native/native-core/legacy';

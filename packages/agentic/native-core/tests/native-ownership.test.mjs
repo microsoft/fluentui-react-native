@@ -57,7 +57,7 @@ for (const shim of ['callout', 'focus-zone']) {
     const files = await readdir(root);
     assert.ok(!files.some((file) => file.endsWith('.podspec') || ['macos', 'windows', 'react-native.config.cjs'].includes(file)));
     const entrypoint = await readFile(new URL('src/index.ts', root), 'utf8');
-    assert.match(entrypoint, /from '@fluentui-react-native\/native-core'/);
+    assert.match(entrypoint, /from '@fluentui-react-native\/native-core\/legacy'/);
     assert.doesNotMatch(entrypoint, /export \*/);
   });
 }

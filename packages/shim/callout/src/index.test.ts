@@ -1,7 +1,7 @@
 import { Callout, calloutName } from './index';
-import { Callout as NativeCallout, calloutName as nativeCalloutName } from '@fluentui-react-native/native-core';
+import { Callout as NativeCallout, calloutName as nativeCalloutName } from '@fluentui-react-native/native-core/legacy';
 import type { CalloutHandle, CalloutProps, ICalloutProps, ICalloutTokens } from './index';
-import type { CalloutHandle as NativeCalloutHandle, CalloutProps as NativeCalloutProps } from '@fluentui-react-native/native-core';
+import type { CalloutHandle as NativeCalloutHandle, CalloutProps as NativeCalloutProps } from '@fluentui-react-native/native-core/legacy';
 
 const props: ICalloutProps & ICalloutTokens = { directionalHint: 'bottomCenter' };
 const nativeProps: NativeCalloutProps = props;
