@@ -1,0 +1,61 @@
+schemaVersion: 1
+component: label
+implementation: label.styles.ts
+
+statePrecedence:
+  - size
+  - weight
+  - disabled
+
+bindings:
+  root:
+    layout:
+      direction: row
+      alignment: center
+      alignSelf: flex-start
+      padding: 0
+    gap:
+      small: spacing.componentBase50
+      medium: spacing.componentBase50
+      large: spacing.componentBase50
+  content:
+    fontFamily: fontFamily.functional
+    size:
+      small: { fontSize: fontSize.functionalBodySmall, lineHeight: lineHeight.functionalBodySmall }
+      medium: { fontSize: fontSize.functionalBodyMedium, lineHeight: lineHeight.functionalBodyMedium }
+      large: { fontSize: fontSize.functionalBodyLarge, lineHeight: lineHeight.functionalBodyLarge }
+    weight:
+      regular: fontWeight.functionalRegular
+      strong: fontWeight.functionalSemibold
+    color:
+      rest: color.foregroundNeutralPrimary
+      disabled: color.foregroundNeutralDisabled
+  requiredIndicator:
+    typography: same resolved family, size, line height, and weight as content
+    color:
+      rest: color.foregroundDangerPrimary
+      disabled: color.foregroundNeutralDisabled
+
+notes:
+  - property: mapping authority
+    reason: |
+      Preserve the donor's FURN bindings. They were checked against the public
+      design/src/tokens/mappings/flex-token-map.yaml entries for functional
+      typography, the three semantic foregrounds, and componentBase50 spacing.
+  - property: native text metrics
+    reason: |
+      Retain body line-height tokens and native scaling. Do not turn a nominal
+      source line height into a fixed root/Text height or a synthetic baseline.
+  - property: marker layout
+    reason: |
+      Keep a separate trailing Text slot with a uniform token gap. Centered row
+      alignment is the recovery starting point, not proof of last-word attachment
+      for multiline content. Content can shrink to wrap; the marker does not
+      shrink. LBL-009 requires constrained, RTL, and scale evidence.
+  - property: state and user overrides
+    reason: |
+      Disabled overrides both foregrounds without changing required visibility
+      or typography. Text defaults precede Label styles; caller slot/root styles
+      follow Label styles. Theme-only factories must remain module-scoped.
+
+tokenGaps: []

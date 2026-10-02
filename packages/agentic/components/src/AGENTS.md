@@ -16,6 +16,8 @@ the change crosses component boundaries.
 
 - Production source may depend only on React / React Native native components, `@fluentui-react-native/design`, and
   `@fluentui-react-native/framework-base`.
+- The existing `@fluentui-react-native/callout` production dependency is an approved narrow exception for anchored overlay
+  composition. Other native-package imports, including production FocusZone usage, require a separate dependency review.
 - Generalizable non-styling hooks belong in `framework-base/src/hooks`.
 - Styling helpers belong in `agentic/design/src/styling`.
 - Component-library-specific non-public types, constants, and helpers belong in `src/common`.

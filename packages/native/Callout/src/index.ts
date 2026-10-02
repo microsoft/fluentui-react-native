@@ -1,6 +1,16 @@
 export { calloutName } from './Callout.types';
 export type {
   CalloutHandle,
+  CalloutCloseOutcome,
+  CalloutCloseReason,
+  CalloutDismissContextEvent,
+  CalloutDismissReason,
+  CalloutFocusOutcome,
+  CalloutFocusIntent,
+  CalloutMenuPointerMoveEvent,
+  CalloutOperationStatus,
+  CalloutReadyEvent,
+  CalloutReturnFocusStatus,
   CalloutNativeCommands,
   CalloutProps,
   CalloutTokens,

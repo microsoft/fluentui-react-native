@@ -1,0 +1,77 @@
+schemaVersion: 1
+component: menu
+status: contract-reviewed
+platformIntent: macos-menu-first
+implementation: menu.styles.ts
+
+composition:
+  surface: Popover unstable pipeline
+  entries: MenuItem unstable pipeline
+  separators: existing Divider
+
+statePrecedence:
+  - disabled
+  - pressed
+  - hovered
+
+bindings:
+  popupContentHost:
+    paddingHorizontal: spacing.componentBase200
+    paddingVertical: spacing.componentBase200
+    backgroundColor: color.surfaceNeutralNearer
+    borderColor: color.strokeNeutralSubtle
+    borderWidth: strokeWidth.thin
+    borderRadius: borderRadius.base400
+    minWidth: inherited Popover 200-unit measurement guard
+    overflow: inherited Popover hidden boundary
+  collection:
+    flexDirection: column
+    gap: global.sizeNone
+  entry:
+    presentation: unchanged MenuItem stage bindings
+    focus: shared macOS native policy; other Menu endpoints gated
+  divider:
+    presentation: unchanged Divider bindings
+
+ownership: >
+  Menu owns the popup padding adaptation and the zero-gap collection layout.
+  Surface appearance and measurement guard remain Popover-owned. Row type,
+  foreground, selected layout reservations, indicators and radius remain
+  MenuItem-owned. No Menu-specific foreground or typography palette is added.
+  Content/entry caller styles apply last on their declared targets.
+
+cachePolicy: >
+  Reuse Popover and MenuItem immutable theme caches. Any Menu padding sheet
+  is module-scoped and depends only on ThemeState; membership, pending focus,
+  open state, submenu path, pointer state and caller styles are never cached
+  into shared theme objects.
+
+tokenGaps:
+  - property: popup anchor offset
+    mappedToken: spacing.componentBase100
+    binding: unbound
+    reason: >
+      Existing Popover records a native offset gap. Content padding or margin
+      cannot establish distance between the popup window and its anchor row.
+      The approved macOS family delta preserves existing hints and does not
+      repair this offset. Exact submenu geometry remains a conformance gate;
+      full pinned conformance is not claimed with that requirement waived.
+  - property: native window shadow
+    mappedToken: shadow.low
+    binding: unbound
+    reason: >
+      Retain Popover's unresolved native elevation boundary. A shadow clipped
+      inside popup content must not be described as native-window elevation.
+      Required visual separation must have actual native evidence or an
+      explicit reviewed disposition; there is no new shadow implementation here.
+  - property: native text measurement floor
+    binding: inherited 200-unit guard
+    reason: >
+      This is Popover's retained host repair, not a newly chosen Menu token
+      or the design symbol's fixed width. It does not prove viewport fit.
+  - property: menu transition
+    binding: none
+    reason: >
+      No reviewed native duration/easing token contract supplies this motion.
+      The proposed Menu uses instant mount/hide, including reduced motion.
+      No animation delay is used for readiness or restoration.

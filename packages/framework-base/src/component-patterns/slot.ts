@@ -146,6 +146,6 @@ export function prepareSlotProps<TProps>(slotInfo: SlotComponentStatics<TProps>,
  * @param slot The slot component statics object to attach props to.
  * @param props The props to attach to the slot component.
  */
-export function attachSlotProps<TProps>(slot: SlotComponentStatics<TProps>, props: TProps): void {
+export function attachSlotProps<TProps>(slot: SlotComponentStatics<TProps>, props: Partial<TProps>): void {
   slot[SLOT_PROPS_KEY] = assignProps((slot[SLOT_PROPS_KEY] ?? {}) as TProps, props);
 }

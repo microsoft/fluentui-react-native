@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "component": "toolbar",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-10-01",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:toolbar",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/toolbar/SKILL.md",
+          "marketplaceBlobSha": "23d79f8b8f6f74d6b7bf2e3af5e3897ce188bceb",
+          "marketplaceSha256": "3ed82d02eb2784f3ae1e800ac9bd5d68c8e57cda472e74cb8d388009578acb86",
+          "originPath": "plugins/components/skills/toolbar/SKILL.md",
+          "originBlobSha": "23d79f8b8f6f74d6b7bf2e3af5e3897ce188bceb",
+          "originSha256": "3ed82d02eb2784f3ae1e800ac9bd5d68c8e57cda472e74cb8d388009578acb86",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/toolbar/usage.md",
+          "marketplaceBlobSha": "2a42eb97b34fa407ef2b6916e7c299a1f679acb6",
+          "marketplaceSha256": "023805cf559e2ed3ab95db2dc161e903264ebf4d1386cb7a6fb1ac2ebc73afd6",
+          "originPath": "plugins/components/skills/toolbar/usage.md",
+          "originBlobSha": "2a42eb97b34fa407ef2b6916e7c299a1f679acb6",
+          "originSha256": "023805cf559e2ed3ab95db2dc161e903264ebf4d1386cb7a6fb1ac2ebc73afd6",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/toolbar/web/accessibility.md",
+          "marketplaceBlobSha": "f2d72b8e8175051fd8a8652b8ce5a3ad469c79d5",
+          "marketplaceSha256": "d03a388a552dd46f071c2fda2bb01f8ee9d3f60d053827e6f363290065780931",
+          "originPath": "plugins/components/skills/toolbar/web/accessibility.md",
+          "originBlobSha": "f2d72b8e8175051fd8a8652b8ce5a3ad469c79d5",
+          "originSha256": "d03a388a552dd46f071c2fda2bb01f8ee9d3f60d053827e6f363290065780931",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/toolbar/web/interaction.md",
+          "marketplaceBlobSha": "c9bf4487fece478c6776cef3fd0f625c81d1afb5",
+          "marketplaceSha256": "3ee5f8d676c64b96eb49097a477754033e6ef82ff67928b76b999eedfbe6af8d",
+          "originPath": "plugins/components/skills/toolbar/web/interaction.md",
+          "originBlobSha": "c9bf4487fece478c6776cef3fd0f625c81d1afb5",
+          "originSha256": "3ee5f8d676c64b96eb49097a477754033e6ef82ff67928b76b999eedfbe6af8d",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/toolbar/web/tokens.yaml",
+          "marketplaceBlobSha": "11d3f8928bb018a3eb1ae96b7d7b9d575d15a6d8",
+          "marketplaceSha256": "99fa43f6d1de9fab8a1cf90beb560369be606a8fec0fd704d92eb4dd2e9cba0e",
+          "originPath": "plugins/components/skills/toolbar/web/tokens.yaml",
+          "originBlobSha": "11d3f8928bb018a3eb1ae96b7d7b9d575d15a6d8",
+          "originSha256": "99fa43f6d1de9fab8a1cf90beb560369be606a8fec0fd704d92eb4dd2e9cba0e",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    { "id": "toolbar-explicit-button-adapter", "status": "accepted" },
+    { "id": "toolbar-current-button-selection", "status": "accepted" },
+    { "id": "toolbar-native-target-navigation", "status": "accepted" },
+    { "id": "toolbar-removal-entry-repair", "status": "accepted" },
+    { "id": "toolbar-native-accessibility-projection", "status": "deferred" },
+    { "id": "toolbar-native-focus-visuals", "status": "accepted" },
+    { "id": "toolbar-no-overflow", "status": "not-applicable" },
+    { "id": "toolbar-desktop-only", "status": "deferred" }
+  ],
+  "requirements": [
+    {
+      "id": "TBR-001",
+      "sources": ["flex-component"],
+      "evidence": ["toolbar.children.ts", "useToolbar.ts", "toolbar.test.tsx", "toolbar.types.test.tsx"]
+    },
+    {
+      "id": "TBR-002",
+      "sources": ["flex-component"],
+      "evidence": ["toolbar.types.ts", "useToolbar.ts", "toolbar.types.test.tsx", "toolbar.test.tsx"]
+    },
+    {
+      "id": "TBR-003",
+      "sources": ["flex-component"],
+      "evidence": ["toolbar-button.types.ts", "useToolbarButton.ts", "renderToolbarButton.tsx", "toolbar.test.tsx", "toolbar.stories.tsx"]
+    },
+    { "id": "TBR-004", "sources": ["flex-component"], "evidence": ["renderToolbar.tsx", "toolbar.test.tsx", "toolbar.stories.tsx"] },
+    {
+      "id": "TBR-005",
+      "sources": ["flex-component"],
+      "evidence": ["useToolbar.ts", "toolbar.keyboard.ts", "toolbar.test.tsx", "toolbar.stories.tsx"]
+    },
+    {
+      "id": "TBR-006",
+      "sources": ["flex-component"],
+      "evidence": ["toolbar.test.tsx", "toolbar.stories.tsx", "spec/native-evidence.md"]
+    },
+    {
+      "id": "TBR-007",
+      "sources": ["flex-component"],
+      "evidence": ["ToolbarContext.ts", "useToolbar.ts", "useToolbarButton.ts", "toolbar.test.tsx", "spec/native-evidence.md"]
+    },
+    {
+      "id": "TBR-008",
+      "sources": ["flex-component"],
+      "evidence": ["renderToolbar.tsx", "renderToolbarButton.tsx", "toolbar.test.tsx", "toolbar.types.test.tsx"]
+    },
+    { "id": "TBR-009", "sources": ["flex-component"], "evidence": ["useToolbar.ts", "toolbar.test.tsx", "toolbar.stories.tsx"] },
+    {
+      "id": "TBR-010",
+      "sources": ["flex-component"],
+      "evidence": ["useToolbar.ts", "toolbar.test.tsx", "toolbar.stories.tsx", "spec/native-evidence.md"]
+    },
+    {
+      "id": "TBR-011",
+      "sources": ["flex-component"],
+      "evidence": ["toolbar.styles.ts", "useToolbarStyles.ts", "useToolbarButtonStyles.ts", "toolbar.test.tsx", "toolbar.stories.tsx"]
+    },
+    {
+      "id": "TBR-012",
+      "sources": ["flex-component"],
+      "evidence": ["toolbar.types.ts", "toolbar.types.test.tsx", "toolbar.test.tsx", "spec/usage.md"]
+    }
+  ]
+}

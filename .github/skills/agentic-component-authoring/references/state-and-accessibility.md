@@ -110,7 +110,7 @@ The component must own its role and state semantics while preserving unrelated c
 Button warns in development when an icon-only instance lacks an `accessibilityLabel`. Put warnings in an effect so
 render remains free of observable side effects, and make the dependency list match every value used by the warning.
 
-For a component-owned toggle or select action, use `resolveAccessibilityAction`
+For a component-owned toggle, select, expand, or collapse action, use `resolveAccessibilityAction`
 from Framework Base with the semantic action, `Platform.OS`, and the caller's
 action list. Assign its `accessibilityActions` and compare incoming
 `event.nativeEvent.actionName` with its `name`; do not duplicate platform strings.

@@ -8,10 +8,16 @@ describe('resolveAccessibilityAction', () => {
   it.each([
     ['windows', 'toggle', 'toggle'],
     ['windows', 'select', 'select'],
+    ['windows', 'expand', 'expand'],
+    ['windows', 'collapse', 'collapse'],
     ['win32', 'toggle', 'Toggle'],
     ['win32', 'select', 'Select'],
+    ['win32', 'expand', 'Expand'],
+    ['win32', 'collapse', 'Collapse'],
     ['macos', 'toggle', 'Toggle'],
     ['macos', 'select', 'Select'],
+    ['macos', 'expand', 'Expand'],
+    ['macos', 'collapse', 'Collapse'],
   ] as const)('resolves %s %s to the declared native name %s', (platform, action, name) => {
     expect(resolveAccessibilityAction(action, platform)).toEqual({ name, accessibilityActions: [{ name }] });
   });
@@ -19,11 +25,15 @@ describe('resolveAccessibilityAction', () => {
   it.each(['ios', 'android', 'web'])('preserves existing custom names on %s without claiming native patterns', (platform) => {
     expect(resolveAccessibilityAction('toggle', platform).name).toBe('Toggle');
     expect(resolveAccessibilityAction('select', platform).name).toBe('Select');
+    expect(resolveAccessibilityAction('expand', platform).name).toBe('Expand');
+    expect(resolveAccessibilityAction('collapse', platform).name).toBe('Collapse');
   });
 
   it.each([
     ['toggle', 'Toggle', 'toggle'],
     ['select', 'Select', 'select'],
+    ['expand', 'Expand', 'expand'],
+    ['collapse', 'Collapse', 'collapse'],
   ] as const)('merges %s spellings while retaining caller order and labels', (action, titleCase, lowerCase) => {
     const custom = Object.freeze({ name: 'custom', label: 'More options' });
     const supplied = Object.freeze([
@@ -76,5 +86,25 @@ describe('resolveAccessibilityAction', () => {
         { name: 'toggle', label: 'Later' },
       ]).accessibilityActions,
     ).toEqual([{ name: 'toggle', label: '' }]);
+  });
+
+  it.each(['windows', 'win32', 'macos'])('composes expansion actions without duplicate declarations on %s', (platform) => {
+    const supplied = Object.freeze([
+      { name: 'Expand', label: 'Open' },
+      { name: 'expand', label: 'Duplicate open' },
+      { name: 'Collapse', label: 'Close' },
+      { name: 'collapse', label: 'Duplicate close' },
+      { name: 'custom', label: 'Other action' },
+    ]);
+    const expansion = resolveAccessibilityAction('expand', platform, supplied);
+    const collapse = resolveAccessibilityAction('collapse', platform, expansion.accessibilityActions);
+    expect(collapse.accessibilityActions).toEqual([
+      { name: expansion.name, label: 'Open' },
+      { name: collapse.name, label: 'Close' },
+      supplied[4],
+    ]);
+    expect(resolveAccessibilityAction('expand', platform, collapse.accessibilityActions).accessibilityActions).toBe(
+      collapse.accessibilityActions,
+    );
   });
 });

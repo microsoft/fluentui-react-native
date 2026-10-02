@@ -13,6 +13,12 @@ Read shared and usage material plus the relevant platform companions. Do not
 combine files from different releases or use one platform as an implicit
 fallback for another.
 
+Some CLI plugin loaders expose the skill's unqualified name, such as `label`,
+instead of `flex-components:label`. Invoke that exposed alias only after
+verifying its plugin and file identities against the pinned release; keep the
+canonical `flex-components:<name>` ID in provenance. A matching name alone
+does not establish the source.
+
 Generate or refresh the `flex-skill` entry with:
 
 ```sh

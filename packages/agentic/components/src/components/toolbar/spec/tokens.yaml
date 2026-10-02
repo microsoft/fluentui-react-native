@@ -1,0 +1,92 @@
+schemaVersion: 1
+component: toolbar
+status: implemented
+implementation: toolbar.styles.ts
+
+# These are local FURN bindings, not a reproduction of an upstream token file.
+statePrecedence:
+  - size
+  - direction
+
+bindings:
+  root:
+    structural:
+      alignItems: center
+      flexDirection: row
+      flexWrap: nowrap
+    gap:
+      small: spacing.componentBase50
+      large: spacing.componentBase150
+    direction:
+      source: resolved ToolbarDirection
+      appliesTo: Yoga direction and horizontal navigation mapping
+    surface:
+      background: not-owned
+      border: not-owned
+      radius: not-owned
+      elevation: not-owned
+      padding: no-component-style
+    sizing:
+      height: derived-from-children
+      minimumWidth: no-component-style
+    typography: not-owned
+    motion: not-owned
+    styleOrder:
+      - static structure
+      - cached size gap
+      - resolved instance direction
+      - user style
+
+delegation:
+  command:
+    owner: ../button/SPEC.md
+    stages:
+      - useButton_unstable
+      - useButtonStyles_unstable
+      - renderButton_unstable
+    appearance: subtle
+    size: resolved ToolbarSize
+    shape: current icon-only Button default
+    selection: externally supplied selected
+    interactionPriority:
+      - disabled
+      - pressed
+      - hovered
+    focus: shared child focus-visual policy
+    icons: Button owns dimensions and decorative accessibility
+  separator:
+    owner: ../divider/SPEC.md
+    requiredProps:
+      vertical: true
+      label: null
+      icon: absent
+    lineColor: color.strokeNeutralSubtle
+    lineWidth: strokeWidth.thin
+    crossAxis: stretch-to-measured-row
+
+tokenGaps:
+  - binding: root.height
+    disposition: not-needed
+    detail: No independent Toolbar height is introduced; native command dimensions determine it.
+  - binding: command.icon
+    disposition: delegated-existing-gap
+    detail: Retain Button's current global-token icon dimensions; Toolbar must not add a duplicate size table.
+  - binding: root.direction
+    disposition: native-layout-input
+    detail: Direction is resolved from an explicit prop or I18nManager.isRTL, not a theme token or fixed default.
+  - binding: overflow
+    disposition: excluded-capability
+    detail: No measurement thresholds, priority sizes, popup dimensions, or hidden-command tokens are defined.
+
+cachePolicy:
+  location: module-scoped design style factories
+  themeOnly: true
+  instanceValues: active identity, direction, refs, disabled eligibility, user style
+  gapValidation: use the existing design getGapStyleValue helper
+
+evidence:
+  - toolbar.styles.ts
+  - useToolbarStyles.ts
+  - useToolbarButtonStyles.ts
+  - toolbar.test.tsx
+  - toolbar.stories.tsx

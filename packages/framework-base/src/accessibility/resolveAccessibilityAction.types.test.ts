@@ -16,4 +16,11 @@ function unsupportedSemanticAction() {
   resolveAccessibilityAction('activate', 'macos');
 }
 
+it.each(['expand', 'collapse'] as const)('accepts the public %s semantic action', (action) => {
+  const semantic: SemanticAccessibilityAction = action;
+  const result = resolveAccessibilityAction(semantic, 'windows');
+  const props: Pick<PressableProps, 'accessibilityActions'> = { accessibilityActions: result.accessibilityActions };
+  expect(props.accessibilityActions).toEqual([{ name: action }]);
+});
+
 void unsupportedSemanticAction;

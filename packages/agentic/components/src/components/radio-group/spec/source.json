@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 2,
+  "component": "radio-group",
+  "lifecycle": "implemented",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-10-01",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:radio-group",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/radio-group/SKILL.md",
+          "marketplaceBlobSha": "3b8a1480743c2fa6169b67898c6c5db33c053fb1",
+          "marketplaceSha256": "f2187144defc979b7f3067101527d79a0f98f4647437dc72544e88b5287fecf1",
+          "originPath": "plugins/components/skills/radio-group/SKILL.md",
+          "originBlobSha": "3b8a1480743c2fa6169b67898c6c5db33c053fb1",
+          "originSha256": "f2187144defc979b7f3067101527d79a0f98f4647437dc72544e88b5287fecf1",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/radio-group/usage.md",
+          "marketplaceBlobSha": "0fb6bfc66fa94da13306d9a9056bc05ef75eea38",
+          "marketplaceSha256": "244aeb2675b84c87da43233691a0f70b4a5cbdb0fc8d4f1907ae03bd5fb25070",
+          "originPath": "plugins/components/skills/radio-group/usage.md",
+          "originBlobSha": "0fb6bfc66fa94da13306d9a9056bc05ef75eea38",
+          "originSha256": "244aeb2675b84c87da43233691a0f70b4a5cbdb0fc8d4f1907ae03bd5fb25070",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/radio-group/web/accessibility.md",
+          "marketplaceBlobSha": "1401e6d47f862a6778337686bbbd53db7ba9c908",
+          "marketplaceSha256": "b1fba0055402b1d6cbeeb7cd7d11ced821bf6e38a837ddd9282187886a681ef4",
+          "originPath": "plugins/components/skills/radio-group/web/accessibility.md",
+          "originBlobSha": "1401e6d47f862a6778337686bbbd53db7ba9c908",
+          "originSha256": "b1fba0055402b1d6cbeeb7cd7d11ced821bf6e38a837ddd9282187886a681ef4",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/radio-group/web/interaction.md",
+          "marketplaceBlobSha": "86bba98fd199c99a303d83973f9817f9c1a66697",
+          "marketplaceSha256": "46884d938989374f4db67a632a51896926d9c614526f5203291147f603b8fdaf",
+          "originPath": "plugins/components/skills/radio-group/web/interaction.md",
+          "originBlobSha": "86bba98fd199c99a303d83973f9817f9c1a66697",
+          "originSha256": "46884d938989374f4db67a632a51896926d9c614526f5203291147f603b8fdaf",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/radio-group/web/tokens.yaml",
+          "marketplaceBlobSha": "c4036242f972f0183a28c64ff29f4919f871afb7",
+          "marketplaceSha256": "a416edc8d12ad2c87c1668cd9a0bc5a14e061a4f23d380774a05505401f4dd73",
+          "originPath": "plugins/components/skills/radio-group/web/tokens.yaml",
+          "originBlobSha": "c4036242f972f0183a28c64ff29f4919f871afb7",
+          "originSha256": "a416edc8d12ad2c87c1668cd9a0bc5a14e061a4f23d380774a05505401f4dd73",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    { "id": "radio-group-explicit-item-adapter", "status": "accepted" },
+    { "id": "radio-group-explicit-question", "status": "accepted" },
+    { "id": "radio-group-native-naming", "status": "accepted" },
+    { "id": "radio-group-native-selection-projection", "status": "deferred" },
+    { "id": "radio-group-required-communication", "status": "deferred" },
+    { "id": "radio-group-disabled-convenience", "status": "accepted" },
+    { "id": "radio-group-null-and-removal", "status": "accepted" },
+    { "id": "radio-group-controlled-focus-acknowledgment", "status": "accepted" },
+    { "id": "radio-group-native-target-navigation", "status": "accepted" },
+    { "id": "radio-group-removal-entry-repair", "status": "accepted" },
+    { "id": "radio-group-native-focus-visuals", "status": "accepted" },
+    { "id": "radio-group-hidden-legend", "status": "deferred" }
+  ],
+  "requirements": [
+    {
+      "id": "RGR-001",
+      "sources": ["flex-component"],
+      "evidence": ["radio-group.types.ts", "radio-group.types.test.ts", "useRadioGroup.ts"]
+    },
+    {
+      "id": "RGR-002",
+      "sources": ["flex-component"],
+      "evidence": ["radio-group.types.test.ts", "useRadioGroup.ts", "useRadioGroupItem.ts", "radio-group.test.tsx"]
+    },
+    {
+      "id": "RGR-003",
+      "sources": ["flex-component"],
+      "evidence": ["useRadioGroup.ts", "renderRadioGroup.tsx", "radio-group.test.tsx", "radio-group.stories.tsx"]
+    },
+    { "id": "RGR-004", "sources": ["flex-component"], "evidence": ["useRadioGroup.ts", "radio-group.test.tsx", "radio-group.stories.tsx"] },
+    {
+      "id": "RGR-005",
+      "sources": ["flex-component"],
+      "evidence": [
+        "radio-group-item.ts",
+        "useRadioGroupItem.ts",
+        "useRadioGroupItemStyles.ts",
+        "renderRadioGroupItem.tsx",
+        "radio-group.test.tsx"
+      ]
+    },
+    {
+      "id": "RGR-006",
+      "sources": ["flex-component"],
+      "evidence": ["RadioGroupContext.ts", "useRadioGroupItem.ts", "radio-group.test.tsx", "radio-group.stories.tsx"]
+    },
+    {
+      "id": "RGR-007",
+      "sources": ["flex-component"],
+      "evidence": ["useRadioGroup.ts", "useRadioGroupItem.ts", "radio-group.test.tsx", "radio-group.stories.tsx"]
+    },
+    {
+      "id": "RGR-008",
+      "sources": ["flex-component"],
+      "evidence": ["useRadioGroup.ts", "useRadioGroupItem.ts", "radio-group.test.tsx", "radio-group.stories.tsx"]
+    },
+    {
+      "id": "RGR-009",
+      "sources": ["flex-component"],
+      "evidence": ["radio-group.types.test.ts", "useRadioGroupItem.ts", "radio-group.test.tsx", "radio-group.stories.tsx"]
+    },
+    { "id": "RGR-010", "sources": ["flex-component"], "evidence": ["useRadioGroup.ts", "radio-group.test.tsx", "radio-group.stories.tsx"] },
+    {
+      "id": "RGR-011",
+      "sources": ["flex-component"],
+      "evidence": ["useRadioGroup.ts", "useRadioGroupItem.ts", "radio-group.test.tsx", "radio-group.stories.tsx"]
+    },
+    {
+      "id": "RGR-012",
+      "sources": ["flex-component"],
+      "evidence": ["useRadioGroupItem.ts", "radio-group.test.tsx", "radio-group.stories.tsx"]
+    },
+    {
+      "id": "RGR-013",
+      "sources": ["flex-component"],
+      "evidence": ["radio-group.styles.ts", "useRadioGroupStyles.ts", "radio-group.test.tsx", "radio-group.stories.tsx"]
+    },
+    {
+      "id": "RGR-014",
+      "sources": ["flex-component"],
+      "evidence": ["radio-group.types.ts", "radio-group.test.tsx", "radio-group.stories.tsx"]
+    },
+    { "id": "RGR-015", "sources": ["flex-component"], "evidence": ["radio-group.stories.tsx"] }
+  ]
+}

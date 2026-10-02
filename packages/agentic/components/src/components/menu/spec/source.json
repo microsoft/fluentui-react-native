@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 2,
+  "component": "menu",
+  "lifecycle": "contract-reviewed",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-10-02",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:menu",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/menu/SKILL.md",
+          "marketplaceBlobSha": "df72f6bba3a107c7a1402d639e86dc4086c1be15",
+          "marketplaceSha256": "1628ce7eea7ce1e9f6664dd9b7c6e96265daa10fa1e84aa2a1621fa6af82c360",
+          "originPath": "plugins/components/skills/menu/SKILL.md",
+          "originBlobSha": "df72f6bba3a107c7a1402d639e86dc4086c1be15",
+          "originSha256": "1628ce7eea7ce1e9f6664dd9b7c6e96265daa10fa1e84aa2a1621fa6af82c360",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/menu/usage.md",
+          "marketplaceBlobSha": "a7dc1414a17ce12122baf0df5e9ae17a6652c852",
+          "marketplaceSha256": "a197fde5775c9c0d76175acf12156811d0338514d586af9bfd893f153bdea387",
+          "originPath": "plugins/components/skills/menu/usage.md",
+          "originBlobSha": "a7dc1414a17ce12122baf0df5e9ae17a6652c852",
+          "originSha256": "a197fde5775c9c0d76175acf12156811d0338514d586af9bfd893f153bdea387",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/menu/web/accessibility.md",
+          "marketplaceBlobSha": "533703f6375b1edb7f369661266a57f8816ec103",
+          "marketplaceSha256": "f46c66630a38a7f393dbcea7d04c421193b9a7e7dd61b0c18bf99fd86610c0f7",
+          "originPath": "plugins/components/skills/menu/web/accessibility.md",
+          "originBlobSha": "533703f6375b1edb7f369661266a57f8816ec103",
+          "originSha256": "f46c66630a38a7f393dbcea7d04c421193b9a7e7dd61b0c18bf99fd86610c0f7",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/menu/web/interaction.md",
+          "marketplaceBlobSha": "93b8aeea33b8c29c9505a14fe5c09879d0da1350",
+          "marketplaceSha256": "0e867fa8bf752f2f8e5c7e097b5dbf98bd219236ff873a1b30c9bc3d90ea5ee8",
+          "originPath": "plugins/components/skills/menu/web/interaction.md",
+          "originBlobSha": "93b8aeea33b8c29c9505a14fe5c09879d0da1350",
+          "originSha256": "0e867fa8bf752f2f8e5c7e097b5dbf98bd219236ff873a1b30c9bc3d90ea5ee8",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/menu/web/tokens.yaml",
+          "marketplaceBlobSha": "5d43254221b9993fde4970cd716f8d4a6c9419af",
+          "marketplaceSha256": "93ca83f04943521ef659918259954246b477b99bb479f876fb121e879f72504f",
+          "originPath": "plugins/components/skills/menu/web/tokens.yaml",
+          "originBlobSha": "5d43254221b9993fde4970cd716f8d4a6c9419af",
+          "originSha256": "93ca83f04943521ef659918259954246b477b99bb479f876fb121e879f72504f",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    { "id": "menu-real-native-focus", "status": "aligning" },
+    { "id": "menu-disabled-skipping", "status": "aligning" },
+    { "id": "menu-first-item-opening", "status": "aligning" },
+    { "id": "menu-external-selection", "status": "aligning" },
+    { "id": "menu-safe-native-return", "status": "aligning" },
+    { "id": "menu-native-system-focus-visuals", "status": "aligning" },
+    { "id": "menu-context-anchor", "status": "aligning" },
+    { "id": "menu-motion", "status": "aligning" }
+  ],
+  "requirements": [
+    {
+      "id": "MNU-001",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["menu.types.ts", "useMenu.ts", "menu.test.tsx", "menu.types.test.ts"]
+    },
+    {
+      "id": "MNU-002",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["menu.types.ts", "menu.children.ts", "renderMenu.tsx", "menu.types.test.ts"]
+    },
+    {
+      "id": "MNU-003",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["menu-entry.types.ts", "useMenuEntry.ts", "menu-entry.test.tsx", "menu-entry.types.test.ts"]
+    },
+    {
+      "id": "MNU-004",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["useMenu.ts", "useMenuEntry.ts", "menu.test.tsx", "menu-entry.test.tsx"]
+    },
+    { "id": "MNU-005", "sources": ["flex-component"], "plannedEvidence": ["useMenu.ts", "menu.stories.tsx", "spec/platform-evidence.md"] },
+    {
+      "id": "MNU-006",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["menu.children.ts", "useMenuEntry.ts", "menu.test.tsx", "menu.stories.tsx"]
+    },
+    {
+      "id": "MNU-007",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["menu.keyboard.ts", "useMenu.ts", "menu.test.tsx", "menu.stories.tsx"]
+    },
+    { "id": "MNU-008", "sources": ["flex-component"], "plannedEvidence": ["menu.keyboard.ts", "menu.test.tsx", "menu.stories.tsx"] },
+    {
+      "id": "MNU-009",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["useMenuEntry.ts", "menu-entry.test.tsx", "menu-entry.types.ts", "menu-entry.types.test.ts", "menu.stories.tsx"]
+    },
+    {
+      "id": "MNU-010",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["useMenu.ts", "menu.test.tsx", "menu.stories.tsx", "spec/platform-evidence.md"]
+    },
+    { "id": "MNU-011", "sources": ["flex-component"], "plannedEvidence": ["useMenu.ts", "menu.stories.tsx", "spec/platform-evidence.md"] },
+    {
+      "id": "MNU-012",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["useMenu.ts", "menu.test.tsx", "menu.stories.tsx", "spec/platform-evidence.md"]
+    },
+    {
+      "id": "MNU-013",
+      "sources": ["flex-component"],
+      "plannedEvidence": [
+        "useMenu.ts",
+        "useMenuEntry.ts",
+        "menu.test.tsx",
+        "menu-entry.test.tsx",
+        "menu-entry.types.test.ts",
+        "menu.stories.tsx"
+      ]
+    },
+    {
+      "id": "MNU-014",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["menu.styles.ts", "useMenuStyles.ts", "menu.test.tsx", "menu.stories.tsx"]
+    },
+    {
+      "id": "MNU-015",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["useMenu.ts", "useMenuEntry.ts", "menu-entry.test.tsx", "menu.stories.tsx"]
+    },
+    {
+      "id": "MNU-016",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["useMenu.ts", "renderMenuEntry.tsx", "menu.test.tsx", "menu.stories.tsx"]
+    },
+    { "id": "MNU-017", "sources": ["flex-component"], "plannedEvidence": ["useMenu.ts", "menu.stories.tsx", "spec/platform-evidence.md"] },
+    { "id": "MNU-018", "sources": ["flex-component"], "plannedEvidence": ["useMenu.ts", "menu.test.tsx", "menu.stories.tsx"] },
+    {
+      "id": "MNU-019",
+      "sources": ["flex-component"],
+      "plannedEvidence": ["useMenuEntry.ts", "useMenuStyles.ts", "menu-entry.test.tsx", "menu.stories.tsx"]
+    },
+    { "id": "MNU-020", "sources": ["flex-component"], "plannedEvidence": ["menu.stories.tsx", "menu.wdio.ts", "spec/platform-evidence.md"] }
+  ]
+}

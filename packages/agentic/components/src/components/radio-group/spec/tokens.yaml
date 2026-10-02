@@ -1,0 +1,87 @@
+schemaVersion: 1
+component: radio-group
+implementation: radio-group.styles.ts
+
+statePrecedence:
+  - orientation
+  - direction
+  - group disabled distributed to Label and Radio
+  - Radio owns selected then disabled then pressed then hovered
+
+bindings:
+  root:
+    layout:
+      flexDirection: column
+      alignment: flex-start
+      flexShrink: 1
+      minWidth: 0
+    gap: spacing.componentBase300
+  options:
+    layout:
+      vertical: column
+      horizontal: row
+      wrap: false
+      flexShrink: 1
+      minWidth: 0
+    gap: spacing.componentBase100
+    direction: resolved ltr or rtl
+  legend:
+    component: Label
+    weight: strong
+    size: medium
+    content: group label
+    required: group required
+    disabled: group disabled
+    accessibility: visual-only
+  item:
+    component: Radio
+    selected: membership value equals resolved group selected value
+    disabled: group disabled or item disabled
+    visuals: existing Radio state and style stages
+    focus: existing Radio focus target and shared native/custom policy
+
+notes:
+  - property: mapping
+    reason: |
+      The public Flex token map binds the two selected FURN spacing paths.
+      Resolve them from ThemeState tokens; do not reproduce a private source
+      token table, copy numeric specimen spacing, or add inter-item margins.
+  - property: unowned surfaces
+    reason: |
+      The group adds no fill, stroke, radius, elevation, typography, focus ring,
+      fixed height, or animation. Zero extra container padding is structural,
+      not a missing semantic token. Label and Radio retain their own bindings.
+  - property: cache and customization
+    reason: |
+      Theme-only factories remain module-scoped and immutable. Orientation,
+      direction, selection, eligibility, and caller styles stay outside the
+      shared theme cache. Apply caller root/item styles last without rewriting
+      Radio spacing or overriding Label typography/foreground.
+  - property: native measurement
+    reason: |
+      Keep intrinsic Label and Radio text measurements and native scaling.
+      Do not add synthetic text heights, offsets, forced truncation, or a
+      wrapper around each leaf to control alignment. Horizontal groups need
+      enough measured width; this contract does not reorder or wrap items.
+
+tokenGaps: []
+
+platformGaps:
+  - property: group naming and child preservation
+    status: unqualified
+    requirement: RGR-011
+  - property: required-state communication
+    status: deferred
+    requirement: RGR-014
+  - property: Tab loop and native handled-key cancellation
+    status: unqualified
+    requirement: RGR-007
+  - property: native first-responder transfer and checked projection
+    status: unqualified
+    requirement: RGR-008
+  - property: macOS AX radio and radiogroup role mapping
+    status: observed source gap requiring native disposition
+    requirement: RGR-011
+  - property: Windows UIA item selection state and selection-container pattern
+    status: approved selected-state intent with native container qualification required
+    requirement: RGR-012

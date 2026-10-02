@@ -1,0 +1,473 @@
+{
+  "schemaVersion": 2,
+  "component": "popover",
+  "lifecycle": "contract-reviewed",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-10-02",
+  "sources": [
+    {
+      "id": "callout-native",
+      "kind": "git-files",
+      "authority": "platform-contract",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "650c8d5dee00e2a3af9cb88528df8448748374d1",
+      "files": [
+        {
+          "role": "platform:macos",
+          "path": "packages/native/Callout/macos/CalloutView.swift",
+          "sha256": "993f8c1e288c885b5e678afd1101b358c7c82dcb694f5244377700ee1b76519b"
+        },
+        {
+          "role": "platform:macos",
+          "path": "packages/native/Callout/macos/CalloutWindow.swift",
+          "sha256": "afd50736ec02789d3058cc3dfca490df350f387381f260af8e1afed649f13102"
+        },
+        {
+          "role": "platform:macos",
+          "path": "packages/native/Callout/macos/RCTCalloutComponentView.mm",
+          "sha256": "eb727aa7621870dc12e6ff7a53df8a2fb33585acf6961aa42202a83b197b6f77"
+        },
+        {
+          "role": "api:implementation",
+          "path": "packages/native/Callout/src/Callout.tsx",
+          "sha256": "256c2887638bca98597bed1e4739308b00daa61e02d4edbdcae0fa964e9c453a"
+        },
+        {
+          "role": "api:types",
+          "path": "packages/native/Callout/src/Callout.types.ts",
+          "sha256": "30810e1cdccf5c8c16ef8175217b09e67f5125862e6f29e7cf7efa28e060f564"
+        },
+        {
+          "role": "api:native-component",
+          "path": "packages/native/Callout/src/CalloutNativeComponent.ts",
+          "sha256": "3eec5a07818c0f84477b1a224fb2168ffbb76a368f9993f020a6222408ccf944"
+        },
+        {
+          "role": "platform:windows",
+          "path": "packages/native/Callout/windows/Callout/Callout.cpp",
+          "sha256": "9b14a78df3addc7f28e8957dfca380c1db62083572ee07d5dbcb45064a0a6eb4"
+        }
+      ]
+    },
+    {
+      "id": "desktop-native",
+      "kind": "git-files",
+      "authority": "platform-contract",
+      "repository": "microsoft/react-native-windows",
+      "commit": "c64d8635fc275d744cb64d348a5933740d25b924",
+      "files": [
+        {
+          "role": "implementation",
+          "path": "vnext/Microsoft.ReactNative/Fabric/Composition/CompositionDynamicAutomationProvider.cpp",
+          "sha256": "b3da4ea76ede46e6481b78f8fc22ab972a24d38dbfc27ce64c81c071d8da579b"
+        }
+      ]
+    },
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:popover",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/popover/SKILL.md",
+          "marketplaceBlobSha": "bcfde2d9ec118f6b4095d550e48c712e24cf0dfc",
+          "marketplaceSha256": "10076f71bd48209300ad9d9407a2f99e4c19f917008e207ec33e0ac0261513c9",
+          "originPath": "plugins/components/skills/popover/SKILL.md",
+          "originBlobSha": "bcfde2d9ec118f6b4095d550e48c712e24cf0dfc",
+          "originSha256": "10076f71bd48209300ad9d9407a2f99e4c19f917008e207ec33e0ac0261513c9",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/popover/usage.md",
+          "marketplaceBlobSha": "e4202e2c39241544aa583b27a1a7cd9b0fead622",
+          "marketplaceSha256": "672ee5bdc4219b62b2f072ab9f66a7eda3be3a64f82243811ccd033825f16b70",
+          "originPath": "plugins/components/skills/popover/usage.md",
+          "originBlobSha": "e4202e2c39241544aa583b27a1a7cd9b0fead622",
+          "originSha256": "672ee5bdc4219b62b2f072ab9f66a7eda3be3a64f82243811ccd033825f16b70",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/popover/web/accessibility.md",
+          "marketplaceBlobSha": "3ca049dee709abf8f326b413fc180c07ed969f68",
+          "marketplaceSha256": "15ab4d7e704d17a0a436a5aa4ca6c9d115b96a7b9ec347a54b4b461a9f0da327",
+          "originPath": "plugins/components/skills/popover/web/accessibility.md",
+          "originBlobSha": "3ca049dee709abf8f326b413fc180c07ed969f68",
+          "originSha256": "15ab4d7e704d17a0a436a5aa4ca6c9d115b96a7b9ec347a54b4b461a9f0da327",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/popover/web/interaction.md",
+          "marketplaceBlobSha": "9cc9f30e79895397b2467606efe57468c58869a2",
+          "marketplaceSha256": "81f330b296337b414c66d5899b98323e1734c8747179dcc0f1b3d8d94edcdd2e",
+          "originPath": "plugins/components/skills/popover/web/interaction.md",
+          "originBlobSha": "9cc9f30e79895397b2467606efe57468c58869a2",
+          "originSha256": "81f330b296337b414c66d5899b98323e1734c8747179dcc0f1b3d8d94edcdd2e",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/popover/web/tokens.yaml",
+          "marketplaceBlobSha": "59f55b3c7e482d4c4b0634a64ee60920eb9035e0",
+          "marketplaceSha256": "270f630afc036cb008ecf9dc80fbb4d80354b9facc8b30b76eb1d71bef021954",
+          "originPath": "plugins/components/skills/popover/web/tokens.yaml",
+          "originBlobSha": "59f55b3c7e482d4c4b0634a64ee60920eb9035e0",
+          "originSha256": "270f630afc036cb008ecf9dc80fbb4d80354b9facc8b30b76eb1d71bef021954",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    },
+    {
+      "id": "recovery-baseline",
+      "kind": "git-files",
+      "authority": "implementation-evidence",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "c3a89b0b717a6bcc8c2104fdb11b733b1a725356",
+      "files": [
+        {
+          "role": "implementation:host-discovery",
+          "path": "apps/storybook/storybook.config.mts",
+          "sha256": "ef46b9d5e9fcc79dd1a179b8695490ddb6f0ef23b718d4a51acd75abc2602613"
+        },
+        {
+          "role": "implementation:focus-styles",
+          "path": "packages/agentic/components/src/common/applyFocusRingStyles.ts",
+          "sha256": "a48cf7fa5afae64e8cf1a721dcfd0604f5307e67aca8c871f4cada4d7c0fd332"
+        },
+        {
+          "role": "implementation:focus-policy",
+          "path": "packages/agentic/components/src/common/useFocusVisuals.ts",
+          "sha256": "1626b439d6dcc5f6829789678de4ab033ddd80cd93c39e29496f6d356d81a729"
+        },
+        {
+          "role": "api:root-and-state-types",
+          "path": "packages/agentic/components/src/components/button/button.types.ts",
+          "sha256": "25f331326a9db93c479b64bd41dcc5f67f531809254c76a3d3d469b9b981e12b"
+        },
+        {
+          "role": "implementation:slot-ref-render",
+          "path": "packages/agentic/components/src/components/button/renderButton.tsx",
+          "sha256": "026fee7731fca63975b04ad787ae35d819f8c654b31639de951cefd06139546a"
+        },
+        {
+          "role": "implementation:focus-state-composition",
+          "path": "packages/agentic/components/src/components/button/useButton.ts",
+          "sha256": "b0008fe947b10e12e7287b2a5f34ac8b07b815d525e69aa8f7bd3282812438ce"
+        },
+        {
+          "role": "implementation:consumer-leaf-focus",
+          "path": "packages/agentic/components/src/components/menu-item/useMenuItem.ts",
+          "sha256": "6ae7549c4507dfbebb92c59d9af4651febc6d023966a5735111821310790eff6"
+        },
+        {
+          "role": "implementation:collection-target-ownership",
+          "path": "packages/agentic/components/src/components/tablist/useTabList.ts",
+          "sha256": "49d5e213847dade5d668076c8b5932fc85ec1ad10beff92cfb5bd6ccbd04de80"
+        },
+        {
+          "role": "implementation:popup-input-boundary",
+          "path": "packages/agentic/design/src/theming/RootInputBoundary.tsx",
+          "sha256": "3d9f8c8e04624085e1eb83ae6060b5eca4fa2f071cc54564175b80a8232241c0"
+        },
+        {
+          "role": "implementation:popup-input-observation",
+          "path": "packages/agentic/design/src/theming/useRootInputProps.ts",
+          "sha256": "c88f4ca12e8581410ac6bba57d416d12b17fd072de653c19de42bebd102e43ae"
+        },
+        {
+          "role": "reference:tokens",
+          "path": "packages/agentic/design/src/tokens/mappings/flex-token-map.yaml",
+          "sha256": "f56d6e597a0bdddcf56334885be69aa2acd61724473a9c68865008068261f937"
+        },
+        {
+          "role": "reference:action-transport-policy",
+          "path": "packages/framework-base/src/accessibility/AGENTS.md",
+          "sha256": "de6e7aeae2f89f7315c48667ab54139a82027f5de678bce3cc8004c21521b574"
+        },
+        {
+          "role": "implementation:action-resolver-scope",
+          "path": "packages/framework-base/src/accessibility/resolveAccessibilityAction.ts",
+          "sha256": "51c9979bcbc6ab6bb5cc4d591022a4dd5ab10b2693ec00828344a58aba2ab049"
+        },
+        {
+          "role": "implementation:ref-composition",
+          "path": "packages/framework-base/src/component-patterns/slot.ts",
+          "sha256": "985d3f7460f6611e9c6d0dc991322e41114c32c7515260bbd1ce938e5ea38461"
+        },
+        {
+          "role": "implementation:host-slot-lifetime",
+          "path": "packages/framework-base/src/component-patterns/useSlot.ts",
+          "sha256": "d5914c8c88702ed3e1f0d08a087ff5b3ed79b50bf38d8f1762ab9171f0131eab"
+        },
+        {
+          "role": "implementation:focus-target",
+          "path": "packages/framework-base/src/hooks/focusTarget.ts",
+          "sha256": "690fa3a661886bb73ddf3488bb3f7a4fcb7789b8b631fd1200ee30bc25818ec2"
+        },
+        {
+          "role": "implementation:target-ref-lifetime",
+          "path": "packages/framework-base/src/hooks/useFocusTarget.ts",
+          "sha256": "da5d3f63b194de35c0334585310beb06b411bf35f22cc1219a147d4c6a9f5a84"
+        },
+        {
+          "role": "implementation:trigger-focus-and-activation",
+          "path": "packages/framework-base/src/hooks/useFocusablePressable.native.ts",
+          "sha256": "24befe96923e06d360efb8432bc84d0ce207efd9d7c59ee5fda420f05379cecb"
+        },
+        {
+          "role": "platform:macos-paper-commands",
+          "path": "packages/native/Callout/macos/FRNCalloutManager.m",
+          "sha256": "ce3e4876c4de2d9272852603a46ddc5c1e569a575b390d63c3080648357a6371"
+        }
+      ]
+    },
+    {
+      "id": "reviewed-donor",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "fdc8914c6ee2ba124ccd68f3b9e0ef841a60342d",
+      "files": [
+        {
+          "role": "reference:original-contract",
+          "path": "packages/agentic/components/src/components/popover/SPEC.md",
+          "sha256": "b64a18d045eb57a5234e783370ef96348f89f59c8991188433ab04c1bbc58e55"
+        },
+        {
+          "role": "reference:original-accessibility",
+          "path": "packages/agentic/components/src/components/popover/spec/accessibility.md",
+          "sha256": "e69c44b6246941ed8e2d5d99b590ffbb42e4fcf6804e029dbf573e06d3ee8657"
+        },
+        {
+          "role": "reference:original-interaction",
+          "path": "packages/agentic/components/src/components/popover/spec/interaction.md",
+          "sha256": "f6058418dff375171eff6672fbd321ca482edf8bef8e85c53803f8b9cc94e141"
+        },
+        {
+          "role": "reference:original-provenance",
+          "path": "packages/agentic/components/src/components/popover/spec/source.json",
+          "sha256": "c1049805d939fb8068da1d7167da6f6fe6b98f9e625e7f75981b8dffe9102ef0"
+        },
+        {
+          "role": "reference:original-tokens",
+          "path": "packages/agentic/components/src/components/popover/spec/tokens.yaml",
+          "sha256": "6803e3d047c31f0ec76dd03fa7d6940f3e4c726574c40ad2fcbadc2fb12fae51"
+        },
+        {
+          "role": "reference:original-usage",
+          "path": "packages/agentic/components/src/components/popover/spec/usage.md",
+          "sha256": "fdfc37ed9f32cfd6828d79021f14a6c71c2da96ac99eb73220c54847680c743c"
+        }
+      ]
+    }
+  ],
+  "divergences": [
+    {
+      "id": "popover-anchor-gap",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-arrow-not-modeled",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-escape-dismissal",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-focus-return",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-haspopup",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-initial-focus",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-motion",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-placement-alignment",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-surface-dialog-semantics",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-surface-shadow",
+      "status": "deferred"
+    },
+    {
+      "id": "popover-viewport-clamping",
+      "status": "deferred"
+    },
+    {
+      "id": "native-system-focus-visuals",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-popup-lifecycle-adaptation",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-accessibility-action-transport",
+      "status": "accepted"
+    },
+    {
+      "id": "popover-menu-composition",
+      "status": "accepted"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "POP-001",
+      "sources": ["flex-component", "reviewed-donor"],
+      "evidence": ["popover.types.ts", "usePopover.ts", "popover.test.tsx", "popover.types.test.tsx"]
+    },
+    {
+      "id": "POP-002",
+      "sources": ["callout-native", "flex-component", "recovery-baseline", "reviewed-donor"],
+      "evidence": ["usePopover.ts", "renderPopover.tsx", "popover.test.tsx"]
+    },
+    {
+      "id": "POP-003",
+      "sources": ["callout-native", "flex-component", "recovery-baseline", "reviewed-donor"],
+      "evidence": ["popover.types.ts", "usePopover.ts", "renderPopover.tsx", "popover.test.tsx", "popover.stories.tsx"]
+    },
+    {
+      "id": "POP-004",
+      "sources": ["callout-native", "flex-component", "reviewed-donor"],
+      "evidence": ["usePopover.ts", "popover.test.tsx", "popover.stories.tsx"]
+    },
+    {
+      "id": "POP-005",
+      "sources": ["callout-native", "flex-component", "recovery-baseline", "reviewed-donor"],
+      "evidence": ["popover.styles.ts", "usePopoverStyles.ts", "popover.test.tsx", "popover.stories.tsx"]
+    },
+    {
+      "id": "POP-006",
+      "sources": ["callout-native", "flex-component", "recovery-baseline", "reviewed-donor"],
+      "evidence": ["usePopover.ts", "usePopoverAnchor.ts", "PopoverSurface.tsx", "popover.test.tsx", "popover.stories.tsx"]
+    },
+    {
+      "id": "POP-007",
+      "sources": ["callout-native", "reviewed-donor"],
+      "evidence": ["popover.types.ts", "usePopover.ts", "popover.types.test.tsx"]
+    },
+    {
+      "id": "POP-008",
+      "sources": ["desktop-native", "flex-component", "reviewed-donor"],
+      "evidence": ["usePopover.ts", "popover.test.tsx", "popover.stories.tsx"]
+    },
+    {
+      "id": "POP-009",
+      "sources": ["callout-native", "recovery-baseline", "reviewed-donor"],
+      "evidence": [
+        "popover.types.ts",
+        "usePopover.ts",
+        "usePopoverAnchor.ts",
+        "PopoverSurface.tsx",
+        "renderPopover.tsx",
+        "popover.test.tsx",
+        "popover.types.test.tsx"
+      ]
+    },
+    {
+      "id": "POP-010",
+      "sources": ["callout-native", "recovery-baseline"],
+      "evidence": ["usePopover.ts", "renderPopover.tsx", "popover.test.tsx", "popover.stories.tsx"]
+    },
+    {
+      "id": "POP-011",
+      "sources": ["flex-component", "recovery-baseline", "reviewed-donor"],
+      "evidence": [
+        "popover.types.ts",
+        "usePopover.ts",
+        "usePopoverStyles.ts",
+        "renderPopover.tsx",
+        "popover.test.tsx",
+        "popover.types.test.tsx",
+        "popover.stories.tsx"
+      ]
+    },
+    {
+      "id": "POP-012",
+      "sources": ["desktop-native", "recovery-baseline", "reviewed-donor"],
+      "evidence": ["usePopover.ts", "popover.test.tsx", "popover.stories.tsx"]
+    },
+    {
+      "id": "POP-013",
+      "sources": ["callout-native", "desktop-native", "recovery-baseline"],
+      "evidence": ["popover.stories.tsx", "popover.wdio.ts", "spec/platform-evidence.md"]
+    },
+    {
+      "id": "POP-014",
+      "sources": ["callout-native", "recovery-baseline", "reviewed-donor"],
+      "evidence": [
+        "popover.types.ts",
+        "usePopover.ts",
+        "PopoverSurface.tsx",
+        "popover.composition.types.test.tsx",
+        "popover.composition.test.tsx"
+      ]
+    },
+    {
+      "id": "POP-015",
+      "sources": ["callout-native", "recovery-baseline"],
+      "evidence": [
+        "PopoverSurface.tsx",
+        "popoverMenuSession.ts",
+        "popoverMenuSession.test.ts",
+        "popover.composition.test.tsx",
+        "popover.composition.stories.tsx"
+      ]
+    },
+    {
+      "id": "POP-016",
+      "sources": ["recovery-baseline", "reviewed-donor"],
+      "evidence": [
+        "usePopoverAnchor.ts",
+        "popover.types.ts",
+        "renderPopover.tsx",
+        "popover.composition.test.tsx",
+        "popover.composition.types.test.tsx"
+      ]
+    },
+    {
+      "id": "POP-017",
+      "sources": ["callout-native", "recovery-baseline"],
+      "evidence": [
+        "usePopover.ts",
+        "usePopoverMenuPresentation.ts",
+        "popoverMenuSession.ts",
+        "PopoverSurface.tsx",
+        "popoverMenuSession.test.ts",
+        "popover.composition.test.tsx"
+      ]
+    },
+    {
+      "id": "POP-018",
+      "sources": ["callout-native", "recovery-baseline", "reviewed-donor"],
+      "evidence": [
+        "popover.composition.types.test.tsx",
+        "popover.composition.test.tsx",
+        "spec/platform-evidence.md",
+        "spec/composition-amendment.md"
+      ]
+    }
+  ]
+}

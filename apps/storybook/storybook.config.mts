@@ -20,10 +20,10 @@ export default makeDesktopStorybookConfig({
       {
         platformSettings: {
           windows: {
-            storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion)/**/*.stories.?(ts|tsx)'],
+            storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion|menu)/**/*.stories.?(ts|tsx)'],
           },
           win32: {
-            storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)'],
+            storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion|list-item|menu)/**/*.stories.?(ts|tsx)'],
           },
         },
       },

@@ -1,0 +1,92 @@
+schemaVersion: 1
+component: popover
+implementation: popover.styles.ts
+
+statePrecedence:
+  - disabled
+  - pressed
+  - hovered
+
+bindings:
+  root:
+    layout:
+      alignSelf: flex-start
+    userStyle: applied after root structural style
+  trigger:
+    layout:
+      alignItems: center
+      flexDirection: row
+      justifyContent: center
+    userStyle: applied after trigger structural style
+    focusVisual:
+      policy: shared native Windows/macOS; shared custom Win32
+      innerColor: color.strokeFocusInner
+      innerWidth: strokeWidth.thin
+      outerColor: color.strokeFocusOuter
+      outerWidth: strokeWidth.thick
+      radius: borderRadius.base400
+      note: >
+        Shared recovery through useFocusVisuals and applyFocusRingStyles.
+        Bind these colors only on the custom path; native rings retain platform
+        drawing. No focused prop or component-local modality tracker.
+  surface:
+    appearance:
+      backgroundColor: color.surfaceNeutralNearer
+      borderColor: color.strokeNeutralSubtle
+      borderWidth: strokeWidth.thin
+      borderRadius: borderRadius.base400
+    note: >
+      Retained native compatibility values. The visible boundary is implemented
+      on surfaceContent, not inferred from the Windows Callout appearance props.
+  surfaceContent:
+    layout:
+      minWidth: 200
+      padding: spacing.componentBase400
+    appearance:
+      backgroundColor: color.surfaceNeutralNearer
+      borderColor: color.strokeNeutralSubtle
+      borderWidth: strokeWidth.thin
+      borderRadius: borderRadius.base400
+      overflow: hidden
+    note: >
+      First non-collapsible popup content host, using RootInputBoundary's
+      native View. Preserve the reviewed 200-unit measurement guard and shared
+      scene/theme identity. The floor is not a Flex size token or a viewport
+      maximum; qualify wrapping, large text, borders, and narrow work areas.
+  contentPlaceholder:
+    typography:
+      fontFamily: fontFamily.functional
+      fontSize: fontSize.functionalBodySmall
+      fontWeight: fontWeight.functionalRegular
+      lineHeight: lineHeight.functionalBodySmall
+    foreground: color.foregroundNeutralPrimary
+
+cachePolicy: >
+  Module-scoped structural sheet and module-scoped themedStyleSheetFactory for
+  theme-only surface and placeholder styles. Keep open, focus, props, instance
+  styles, and user styles outside immutable theme caches.
+
+compositionAmendment: >
+  Reviewed Menu P1/P2 changes no Popover token, measurement floor, or ordinary
+  user-style ordering. Existing-row anchoring adds no styled native row.
+  Menu owns its content-role/padding adaptation through the unstable stages;
+  the private native surface slots are not public prop customization.
+
+tokenGaps:
+  - property: anchor gap
+    binding: unbound
+    mappedToken: spacing.componentBase100
+    reason: >
+      Token available, native offset unavailable on Windows/macOS.
+      Tracked by popover-anchor-gap; a content margin is not an anchor offset.
+  - property: surface elevation shadow
+    binding: unbound
+    mappedToken: shadow.low
+    reason: >
+      Token available, native-window elevation/shadow control not established.
+      A shadow clipped inside the popup is not equivalent.
+  - property: native text measurement floor
+    binding: 200
+    reason: >
+      Retained donor host-measurement repair, not a semantic token mapping.
+      Do not replace it with a nearby spacing token or claim it proves containment.

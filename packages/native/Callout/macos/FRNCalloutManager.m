@@ -61,6 +61,39 @@ RCT_EXPORT_METHOD(blurWindow : (nonnull NSNumber *)viewTag)
 	});
 }
 
+RCT_EXPORT_METHOD(focusInitialChild:(nonnull NSNumber *)viewTag generation:(NSString *)generation
+                  requestId:(NSString *)requestId targetTag:(nonnull NSNumber *)targetTag)
+{
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSView *view = [self.bridge.uiManager viewForReactTag:viewTag];
+		if ([view isKindOfClass:[FRNCalloutView class]]) {
+			[(FRNCalloutView *)view focusInitialChild:generation requestId:requestId targetTag:targetTag];
+		}
+	});
+}
+
+RCT_EXPORT_METHOD(closeOwned:(nonnull NSNumber *)viewTag generation:(NSString *)generation
+                  requestId:(NSString *)requestId reason:(NSString *)reason returnFocus:(BOOL)returnFocus)
+{
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSView *view = [self.bridge.uiManager viewForReactTag:viewTag];
+		if ([view isKindOfClass:[FRNCalloutView class]]) {
+			[(FRNCalloutView *)view closeOwned:generation requestId:requestId reason:reason returnFocus:returnFocus];
+		}
+	});
+}
+
+RCT_EXPORT_METHOD(focusOwnedChild:(nonnull NSNumber *)viewTag generation:(NSString *)generation
+                  requestId:(NSString *)requestId targetTag:(nonnull NSNumber *)targetTag intent:(NSString *)intent)
+{
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSView *view = [self.bridge.uiManager viewForReactTag:viewTag];
+		if ([view isKindOfClass:[FRNCalloutView class]]) {
+			[(FRNCalloutView *)view focusOwnedChild:generation requestId:requestId targetTag:targetTag intent:intent];
+		}
+	});
+}
+
 RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 
 RCT_EXPORT_VIEW_PROPERTY(anchorRect, screenRect)
@@ -68,6 +101,11 @@ RCT_EXPORT_VIEW_PROPERTY(anchorRect, screenRect)
 RCT_EXPORT_VIEW_PROPERTY(directionalHint, NSRectEdge)
 
 RCT_EXPORT_VIEW_PROPERTY(setInitialFocus, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(menuFocusManagement, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(onReady, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onDismissContext, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onManagedOperationResult, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onMenuPointerMove, RCTDirectEventBlock)
 
 RCT_EXPORT_VIEW_PROPERTY(onShow, RCTDirectEventBlock)
 

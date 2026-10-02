@@ -10,7 +10,7 @@ registry, role framework, or speculative list of platform constants.
 
 ## Semantic actions
 
-Use `resolveAccessibilityAction('toggle' | 'select', Platform.OS, callerActions)`
+Use `resolveAccessibilityAction('toggle' | 'select' | 'expand' | 'collapse', Platform.OS, callerActions)`
 and use both results from the same resolution:
 
 ```ts
@@ -40,6 +40,15 @@ These source paths are relative to the installed platform package:
 - Win32: `Libraries/Components/View/ViewAccessibility.d.ts`.
 - RNmacOS Fabric: `React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm`.
 - RNmacOS Paper: `React/Views/RCTView.m`.
+
+Expand/collapse use `expand` / `collapse` on Windows Fabric and `Expand` /
+`Collapse` on the existing custom-action transports. RNW 0.81.35's
+`CompositionDynamicAutomationProvider.cpp::Expand` and `Collapse` dispatch
+the lowercase names; Win32 0.81.8 declares the title-case names in
+`ViewAccessibility.d.ts`. These declarations do not establish native expanded
+projection or a working macOS AXExpanded setter. Resolve both actions
+sequentially using the preceding result's `accessibilityActions` so each owned
+declaration is normalized once and caller labels remain intact.
 
 RNmacOS Fabric constructs custom actions from `name`, ignoring `label`; keep
 caller labels in JS rather than replacing them with guessed localized text.
@@ -74,7 +83,8 @@ events are not rewritten or matched case-insensitively.
   matching, callback counts/order, and disabled state in unit tests. Add type
   coverage for public helpers and run the React-only import path.
 - Native qualification must invoke UIA `TogglePattern.Toggle` or
-  `SelectionItemPattern.Select`, or the actual AX custom action, and assert
+  `SelectionItemPattern.Select`, `ExpandCollapsePattern.Expand`/`Collapse`,
+  or the actual AX custom action, and assert
   native state plus callback counts. State read after a physical click, a Jest
   `fireEvent`, or a successful bundle is not native action-dispatch evidence.
   Report unsupported native actions and unrun platforms explicitly.

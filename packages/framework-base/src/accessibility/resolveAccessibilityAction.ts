@@ -3,6 +3,8 @@ import type { AccessibilityActionInfo } from 'react-native';
 const actionNames = {
   toggle: { windows: 'toggle', custom: 'Toggle' },
   select: { windows: 'select', custom: 'Select' },
+  expand: { windows: 'expand', custom: 'Expand' },
+  collapse: { windows: 'collapse', custom: 'Collapse' },
 } as const;
 
 export type SemanticAccessibilityAction = keyof typeof actionNames;

@@ -109,6 +109,10 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - Keep the Windows story-pattern overrides in `storybook.config.mts`; the
   current Accordion and Callout Fabric stories still fail-fast the RNW 0.81
   host during traversal.
+- Menu stories are currently macOS-only by an explicit component admission gate:
+  its full family input, Tab continuation, and guarded submenu return are not
+  qualified on Windows Fabric or Office Win32. Keep that limitation visible
+  rather than treating an excluded endpoint as a native pass.
 - WinAppDriver screenshots are not a reliable capture path for WinAppSDK Composition content. After selecting a story
   through the Storybook control channel, use the agent host's desktop screenshot tool when visual evidence is required.
 - Build logs, automation evidence, visual trees, screenshots, and session manifests belong under ignored

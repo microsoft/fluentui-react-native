@@ -30,6 +30,7 @@ export interface NativeProps extends ViewProps {
   minPadding?: Int32;
   minWidth?: Int32;
   setInitialFocus?: boolean;
+  menuFocusManagement?: boolean;
 
   // targetAnchor?: string; // Win32 only Callout can target an anchor registered in the anchor registry // Can be a node id or an anchor ID - This need to be reworked as Mixed types are not supported going forward
   testID?: string;
@@ -37,6 +38,16 @@ export interface NativeProps extends ViewProps {
   onRestoreFocus?: DirectEventHandler<{ target: Int32; containsFocus: boolean }>;
   onDismiss?: DirectEventHandler<{ target: Int32 }>;
   onShow?: DirectEventHandler<{ target: Int32 }>;
+  onReady?: DirectEventHandler<{ generation: string }>;
+  onDismissContext?: DirectEventHandler<{ generation: string; reason: string; returnFocus: string }>;
+  onMenuPointerMove?: DirectEventHandler<{ generation: string; pointerId: string; screenX: Double; screenY: Double; targetTag: Int32 }>;
+  onManagedOperationResult?: DirectEventHandler<{
+    generation: string;
+    requestId: string;
+    operation: string;
+    status: string;
+    returnFocus: string;
+  }>;
 
   directionalHint?: WithDefault<
     | 'leftTopEdge'
@@ -63,10 +74,25 @@ export type CalloutComponentType = HostComponent<NativeProps>;
 interface NativeCalloutCommands {
   focusWindow: (viewRef: React.ElementRef<CalloutComponentType>) => void;
   blurWindow: (viewRef: React.ElementRef<CalloutComponentType>) => void;
+  focusInitialChild: (viewRef: React.ElementRef<CalloutComponentType>, generation: string, requestId: string, targetTag: Int32) => void;
+  focusOwnedChild: (
+    viewRef: React.ElementRef<CalloutComponentType>,
+    generation: string,
+    requestId: string,
+    targetTag: Int32,
+    intent: string,
+  ) => void;
+  closeOwned: (
+    viewRef: React.ElementRef<CalloutComponentType>,
+    generation: string,
+    requestId: string,
+    reason: string,
+    returnFocus: boolean,
+  ) => void;
 }
 
 export const Commands: NativeCalloutCommands = codegenNativeCommands<NativeCalloutCommands>({
-  supportedCommands: ['blurWindow', 'focusWindow'],
+  supportedCommands: ['blurWindow', 'focusWindow', 'focusInitialChild', 'closeOwned', 'focusOwnedChild'],
 });
 
 export default codegenNativeComponent<NativeProps>('Callout', {

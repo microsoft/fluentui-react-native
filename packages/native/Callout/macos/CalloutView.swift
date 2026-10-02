@@ -11,10 +11,14 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		didSet {
 			let targetView = bridge?.uiManager.view(forReactTag: target)
 			if (targetView == nil && target != nil) {
+				if menuFocusManagement {
+					NSLog("Callout managed anchor is not mounted.")
+					setAnchorView(nil)
+					return
+				}
 				preconditionFailure("Invalid target")
 			}
-			anchorView = targetView
-			updateCalloutFrameToAnchor()
+			setAnchorView(targetView)
 		}
 	}
 
@@ -35,6 +39,17 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	@objc public var onShow: RCTDirectEventBlock?
 
 	@objc public var onDismiss: RCTDirectEventBlock?
+	@objc public var menuFocusManagement: Bool = false
+	@objc public var onReady: RCTDirectEventBlock?
+	@objc public var onDismissContext: RCTDirectEventBlock?
+	@objc public var onManagedOperationResult: RCTDirectEventBlock?
+	@objc public var onMenuPointerMove: RCTDirectEventBlock?
+	@objc public var isManagedTargetEligible: ((NSView) -> Bool)?
+	@objc public var managedEventsAttached: Bool = true
+
+	var calloutManagesFocus: Bool { return menuFocusManagement }
+	var calloutManagedGeneration: String? { return managedGeneration }
+	var calloutManagedStartTime: TimeInterval { return managedStartTime }
 	
 	@objc public func focusWindow() {
 		calloutWindow.makeKey()
@@ -74,7 +89,12 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		if (window != nil) {
 			showCallout()
 		} else {
-			dismissCallout()
+			if menuFocusManagement {
+				closeManaged(reason: "host-detached", returnFocus: false, notifyLegacy: false)
+				managedClosed = false
+			} else {
+				dismissCallout()
+			}
 		}
 	}
 
@@ -94,6 +114,9 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 
 	@objc public func setAnchorView(_ view: NSView?) {
+		if menuFocusManagement, managedGeneration != nil, anchorView !== view {
+			closeManaged(reason: "host-detached", returnFocus: false)
+		}
 		anchorView = view
 		updateCalloutFrameToAnchor()
 	}
@@ -104,11 +127,16 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		} else {
 			proxyView.addSubview(subview, positioned: .below, relativeTo: proxyView.subviews[index])
 		}
+		observeManagedContent()
 	}
 
 	@objc public func unmountContentSubview(_ subview: NSView) {
 		if subview.superview == proxyView {
+			if menuFocusManagement, managedGeneration != nil {
+				closeManaged(reason: "host-detached", returnFocus: false, notifyLegacy: false)
+			}
 			subview.removeFromSuperview()
+			removeContentObserver()
 		}
 	}
 
@@ -125,36 +153,518 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	public override func didUpdateReactSubviews() {
 		proxyView.didUpdateReactSubviews()
+		if menuFocusManagement, managedGeneration != nil, observedContent !== proxyView.subviews.first {
+			closeManaged(reason: "host-detached", returnFocus: false)
+		}
+		observeManagedContent()
+		finalizeManagedPresentation()
 	}
 
 	public override func reactSetFrame(_ frame: CGRect) {
 		proxyView.reactSetFrame(frame)
 		updateCalloutFrameToAnchor()
+		finalizeManagedPresentation()
 	}
 
 	// MARK: WindowLifeCycleDelegate
 
 	func calloutWillDismiss(window: CalloutWindow) {
-		onDismissCallout()
+		if menuFocusManagement {
+			closeManaged(reason: "native-light-dismiss", returnFocus: false)
+		} else {
+			onDismissCallout()
+		}
+	}
+
+	func calloutDidPressEscape(window: CalloutWindow) {
+		if ownsPopupFocus(allowDetachedChild: true) { closeManaged(reason: "escape", returnFocus: true) }
+	}
+
+	func calloutDidReceiveInput(window: CalloutWindow, event: NSEvent) {
+		guard let root = managedFamilyRoot() else {
+			closeManaged(reason: "host-detached", returnFocus: false, notifyLegacy: false)
+			return
+		}
+		for member in root.managedSubtree() { member.managedInputObserved = true }
+		if event.type != .keyDown {
+			root.managedPointerPosition = calloutWindow.convertPoint(toScreen: event.locationInWindow)
+		}
+	}
+
+	func calloutDidPressTab(window: CalloutWindow, event: NSEvent) {
+		guard ownsPopupFocus(allowDetachedChild: true), let root = managedFamilyRoot() else { return }
+		root.closeManagedSubtree(origin: self, reason: "tab", returnFocus: false, tabEvent: event)
+	}
+
+	func calloutDidMovePointer(window: CalloutWindow, event: NSEvent) {
+		guard let generation = managedGeneration, isCalloutWindowShown, calloutWindow.isVisible,
+			event.window === calloutWindow, NSApp.isActive, let root = managedFamilyRoot(),
+			NSApp.mainWindow === root.managedOpeningMainWindow,
+			proxyView.bounds.contains(proxyView.convert(event.locationInWindow, from: nil)),
+			event.deltaX != 0 || event.deltaY != 0 else { return }
+		let position = calloutWindow.convertPoint(toScreen: event.locationInWindow)
+		defer { root.managedPointerPosition = position }
+		guard root.managedPointerPosition != position else { return }
+		let targetTag = managedHitTargetTag(for: event)
+		guard managedGeneration == generation, isCalloutWindowShown, calloutWindow.isVisible,
+			NSApp.isActive, NSApp.mainWindow === root.managedOpeningMainWindow,
+			managedFamilyRoot() === root else { return }
+		for member in root.managedSubtree() { member.managedInputObserved = true }
+		onMenuPointerMove?(["generation": generation, "pointerId": "mouse",
+			"screenX": position.x, "screenY": position.y, "targetTag": targetTag])
+	}
+
+	private func managedHitTargetTag(for event: NSEvent) -> Int32 {
+		// AppKit hitTest takes a point in the receiver's superview coordinates.
+		guard let superview = proxyView.superview,
+			let hit = proxyView.hitTest(superview.convert(event.locationInWindow, from: nil)),
+			hit.window === calloutWindow, hit.isDescendant(of: proxyView) else { return 0 }
+		var view: NSView? = hit
+		while let current = view, current !== proxyView {
+			guard current.window === calloutWindow, current.isDescendant(of: proxyView) else { return 0 }
+			if current.acceptsFirstResponder {
+				guard managedTargetIsEligible(current), let tag = current.reactTag,
+					let value = Int32(exactly: tag.int64Value), value > 0 else { return 0 }
+				return value
+			}
+			view = current.superview
+		}
+		return 0
+	}
+
+	@objc public func finalizeManagedPresentation() {
+		if menuFocusManagement {
+			if managedGeneration != nil, managedFamilyRoot() == nil {
+				closeManaged(reason: "host-detached", returnFocus: false, notifyLegacy: false)
+			}
+			showCallout()
+		}
+	}
+
+	@objc public func resetManagedPresentation() {
+		if menuFocusManagement {
+			closeManaged(reason: "host-detached", returnFocus: false, notifyLegacy: false)
+		}
+		managedClosed = false
+		managedGeneration = nil
+		removeContentObserver()
+	}
+
+	@objc public func focusInitialChild(_ generation: String, requestId: String, targetTag: NSNumber) {
+		var status = managedRequestStatus(generation)
+		if status == nil {
+			if let target = findManagedTarget(in: proxyView, tag: targetTag) {
+				if managedInputObserved {
+					status = "focus-moved"
+				} else if !managedTargetIsEligible(target) {
+					status = "not-focusable"
+				} else if !canOwnPopupFocus() {
+					status = "inactive-window"
+				} else {
+					calloutWindow.makeKey()
+					let accepted = calloutWindow.makeFirstResponder(target)
+					status = accepted && ownsPopupFocus() && target.window === calloutWindow &&
+						managedTargetIsEligible(target) && calloutWindow.firstResponder === target
+						? "confirmed" : "failed"
+					if status == "confirmed" { managedFocusedChild = target }
+				}
+			} else {
+				status = "not-mounted"
+			}
+		}
+		emitManagedResult(generation, requestId: requestId, operation: "initial-focus",
+			status: status ?? "failed", returnFocus: "not-requested")
+	}
+
+	@objc public func focusOwnedChild(_ generation: String, requestId: String, targetTag: NSNumber, intent: String) {
+		var status = managedRequestStatus(generation)
+		if status == nil {
+			if !["keyboard", "pointer", "repair"].contains(intent) {
+				status = "failed"
+			} else if let target = findManagedTarget(in: proxyView, tag: targetTag) {
+				if !managedTargetIsEligible(target) {
+					status = "not-focusable"
+				} else if !ownsPopupFocus(allowDetachedChild: intent == "repair") {
+					status = NSApp.isActive && calloutWindow.isKeyWindow ? "focus-moved" : "inactive-window"
+				} else {
+					let accepted = calloutWindow.makeFirstResponder(target)
+					status = accepted && ownsPopupFocus() && target.window === calloutWindow && managedTargetIsEligible(target) &&
+						calloutWindow.firstResponder === target ? "confirmed" : "failed"
+					if status == "confirmed" { managedFocusedChild = target }
+				}
+			} else {
+				status = "not-mounted"
+			}
+		}
+		emitManagedResult(generation, requestId: requestId, operation: "owned-child-focus",
+			status: status ?? "failed", returnFocus: "not-requested")
+	}
+
+	@objc public func closeOwned(_ generation: String, requestId: String, reason: String, returnFocus: Bool) {
+		if let status = managedRequestStatus(generation) {
+			emitManagedResult(generation, requestId: requestId, operation: "close", status: status, returnFocus: "not-requested")
+			return
+		}
+		guard reason == "action" || reason == "programmatic" || reason == "submenu-back" else {
+			emitManagedResult(generation, requestId: requestId, operation: "close", status: "failed", returnFocus: "not-requested")
+			return
+		}
+		if reason == "submenu-back", liveManagedParent() == nil {
+			emitManagedResult(generation, requestId: requestId, operation: "close", status: "failed", returnFocus: "not-requested")
+			return
+		}
+		closeManaged(reason: reason, returnFocus: returnFocus && reason != "programmatic", requestId: requestId)
+	}
+
+	private func managedRequestStatus(_ generation: String) -> String? {
+		if !menuFocusManagement { return "unsupported" }
+		if managedGeneration == nil || !isCalloutWindowShown { return "not-mounted" }
+		if managedGeneration != generation { return "cancelled" }
+		return managedFamilyRoot() == nil ? "not-mounted" : nil
+	}
+
+	private func managedTargetIsEligible(_ view: NSView) -> Bool {
+		if view.window == nil || view.isHiddenOrHasHiddenAncestor || view.bounds.isEmpty || !view.acceptsFirstResponder { return false }
+		var ancestor: NSView? = view
+		while let current = ancestor {
+			if current.alphaValue <= 0 || (current.layer?.opacity ?? 1) <= 0 { return false }
+			ancestor = current.superview
+		}
+		if let control = view as? NSControl, !control.isEnabled { return false }
+		return isManagedTargetEligible?(view) ?? true
+	}
+
+	private func findManagedTarget(in view: NSView, tag: NSNumber) -> NSView? {
+		if view.reactTag == tag { return view }
+		for child in view.subviews {
+			if let match = findManagedTarget(in: child, tag: tag) { return match }
+		}
+		return nil
+	}
+
+	private func canOwnPopupFocus() -> Bool {
+		guard let root = managedFamilyRoot(), NSApp.isActive,
+			NSApp.mainWindow === root.managedOpeningMainWindow, let parent = managedParent,
+			parent.isVisible, !parent.isMiniaturized else { return false }
+		return (calloutWindow.isKeyWindow && popupContainsFocus()) || (parent.isKeyWindow && parent.firstResponder === openingResponder)
+	}
+
+	private func ownsPopupFocus(allowDetachedChild: Bool = false) -> Bool {
+		guard let root = managedFamilyRoot() else { return false }
+		guard NSApp.isActive, NSApp.mainWindow === root.managedOpeningMainWindow,
+			calloutWindow.isVisible, calloutWindow.isKeyWindow else { return false }
+		if popupContainsFocus() { return true }
+		return allowDetachedChild && managedFocusedChild != nil && managedFocusedChild?.window == nil &&
+			calloutWindow.firstResponder === managedFocusedChild
+	}
+
+	private func popupContainsFocus() -> Bool {
+		guard let responder = calloutWindow.firstResponder else { return true }
+		if responder === calloutWindow { return true }
+		var view = responder as? NSView
+		while let current = view {
+			if current === proxyView { return true }
+			view = current.superview
+		}
+		return false
+	}
+
+	private func emitManagedResult(_ generation: String, requestId: String, operation: String, status: String, returnFocus: String) {
+		onManagedOperationResult?(["generation": generation, "requestId": requestId,
+			"operation": operation, "status": status, "returnFocus": returnFocus])
+	}
+
+	private func anchorIsCurrent() -> Bool {
+		guard let anchor = managedAnchor, let parent = managedParent,
+			anchor === anchorView, anchor.reactTag == managedAnchorTag, anchor.window === parent,
+			parent.isVisible, !parent.isMiniaturized else { return false }
+		return true
+	}
+
+	private func liveManagedParent() -> CalloutView? {
+		guard let parent = managedParentCallout, let generation = managedParentGeneration,
+			parent.menuFocusManagement, parent.managedGeneration == generation, parent.isCalloutWindowShown,
+			managedParent === parent.calloutWindow, let anchor = managedAnchor,
+			anchorIsCurrent(), anchor.isDescendant(of: parent.proxyView) else { return nil }
+		return parent
+	}
+
+	private func managedFamilyRoot() -> CalloutView? {
+		var current = self
+		var visited = Set<ObjectIdentifier>()
+		while visited.insert(ObjectIdentifier(current)).inserted {
+			guard current.menuFocusManagement, current.managedGeneration != nil,
+				current.isCalloutWindowShown, current.anchorIsCurrent() else { return nil }
+			if current.managedParentGeneration == nil { return current }
+			guard let parent = current.liveManagedParent() else { return nil }
+			current = parent
+		}
+		return nil
+	}
+
+	private func managedSubtree() -> [CalloutView] {
+		guard let generation = managedGeneration, isCalloutWindowShown else { return [] }
+		var members: [CalloutView] = []
+		for child in managedChildren {
+			if let view = child.view, view.managedGeneration == child.generation,
+				view.managedParentCallout === self, view.managedParentGeneration == generation {
+				members.append(contentsOf: view.managedSubtree())
+			}
+		}
+		members.append(self)
+		return members
+	}
+
+	private func containsFamilyWindow(_ window: NSWindow) -> Bool {
+		guard let root = managedFamilyRoot() else { return false }
+		return root.managedSubtree().contains { $0.calloutWindow === window && $0.managedFamilyRoot() === root }
+	}
+
+	private func detachManagedFamily() {
+		if let parent = managedParentCallout {
+			parent.managedChildren.removeAll { $0.view == nil || $0.view === self }
+		}
+		managedParentCallout = nil
+		managedParentGeneration = nil
+		managedChildren.removeAll()
+	}
+
+	private func closeManaged(reason: String, returnFocus: Bool, requestId: String? = nil, notifyLegacy: Bool = true) {
+		guard managedGeneration != nil, isCalloutWindowShown else { return }
+		let scope = reason == "action" || reason == "native-light-dismiss" ? (managedFamilyRoot() ?? self) : self
+		scope.closeManagedSubtree(origin: self, reason: reason, returnFocus: returnFocus,
+			requestId: requestId, notifyLegacy: notifyLegacy && reason != "host-detached")
+	}
+
+	private func closeManagedSubtree(origin: CalloutView, reason: String, returnFocus: Bool,
+		requestId: String? = nil, notifyLegacy: Bool = true, tabEvent: NSEvent? = nil) {
+		let members = managedSubtree()
+		guard let originGeneration = origin.managedGeneration, !members.isEmpty,
+			members.contains(where: { $0 === origin }) else { return }
+		let snapshots = members.compactMap { member -> (CalloutView, String)? in
+			guard let generation = member.managedGeneration else { return nil }
+			return (member, generation)
+		}
+		let ownedPopup = members.contains { $0.ownsPopupFocus(allowDetachedChild: reason == "tab" || reason == "escape") }
+		let parent = managedParent
+		let anchor = managedAnchor
+		let anchorTag = managedAnchorTag
+		let opening = openingResponder
+		let parentCallout = managedParentCallout
+		let parentGeneration = managedParentGeneration
+		let scopeGeneration = managedGeneration
+		let openingMainWindow = managedOpeningMainWindow
+		let destinationCurrent = { () -> Bool in
+			guard let parent = parent, let anchor = anchor, anchor === self.anchorView,
+				anchor.window === parent, anchor.reactTag == anchorTag,
+				parent.isVisible, !parent.isMiniaturized,
+				self.managedGeneration == nil || self.managedGeneration == scopeGeneration else { return false }
+			if let generation = parentGeneration {
+				guard let owner = parentCallout, owner.managedGeneration == generation,
+					owner.managedFamilyRoot() != nil, owner.calloutWindow === parent,
+					anchor.isDescendant(of: owner.proxyView) else { return false }
+			}
+			return true
+		}
+		var returnStatus = "not-requested"
+		if returnFocus {
+			if !ownedPopup { returnStatus = "inactive-window" }
+			else if !destinationCurrent() { returnStatus = "not-mounted" }
+			else if let anchor = anchor, !managedTargetIsEligible(anchor) { returnStatus = "not-focusable" }
+			else if parent?.firstResponder !== opening { returnStatus = "focus-moved" }
+			else { returnStatus = "confirmed" }
+		}
+		let canContinueTab = tabEvent != nil && ownedPopup && destinationCurrent() &&
+			parent?.firstResponder === opening &&
+			(opening == nil || opening === parent || (opening as? NSView)?.window === parent)
+		for member in members {
+			member.managedGeneration = nil
+			member.managedClosed = true
+			member.isCalloutWindowShown = false
+			member.managedFocusedChild = nil
+			member.removeManagedObservers()
+		}
+		for member in members {
+			for child in member.calloutWindow.childWindows ?? [] {
+				if let window = child as? CalloutWindow,
+					!members.contains(where: { $0.calloutWindow === window }) {
+					window.dismissCallout()
+				}
+			}
+			member.calloutWindow.orderOut(member)
+			member.calloutWindow.parent?.removeChildWindow(member.calloutWindow)
+			member.detachManagedFamily()
+		}
+		let closed = members.allSatisfy { !$0.calloutWindow.isVisible }
+		let canHandOff = { () -> Bool in
+			guard NSApp.isActive, NSApp.mainWindow === openingMainWindow,
+				destinationCurrent(), let parent = parent else { return false }
+			let key = NSApp.keyWindow
+			return key == nil || key === parent || members.contains { $0.calloutWindow === key }
+		}
+		if !closed && returnFocus { returnStatus = "failed" }
+		if closed && returnFocus && returnStatus == "confirmed", let parent = parent, let anchor = anchor {
+			if !canHandOff() {
+				returnStatus = "inactive-window"
+			} else if !managedTargetIsEligible(anchor) {
+				returnStatus = "not-mounted"
+			} else if parent.firstResponder !== opening {
+				returnStatus = "focus-moved"
+			} else {
+				parent.makeKey()
+				if !canHandOff() || parent.firstResponder !== opening || !managedTargetIsEligible(anchor) {
+					returnStatus = "focus-moved"
+				} else {
+					let accepted = parent.makeFirstResponder(anchor)
+					returnStatus = accepted && destinationCurrent() && managedTargetIsEligible(anchor) && parent.firstResponder === anchor &&
+						parent.isKeyWindow && NSApp.isActive ? "confirmed" : "failed"
+				}
+			}
+		}
+		if closed, let event = tabEvent {
+			if canContinueTab && canHandOff(), let parent = parent, parent.firstResponder === opening {
+				parent.makeKey()
+				if canHandOff() && parent.isKeyWindow && parent.firstResponder === opening {
+					if event.modifierFlags.contains(.shift) { parent.selectPreviousKeyView(event) }
+					else { parent.selectNextKeyView(event) }
+				} else {
+					NSLog("Callout Tab continuation cancelled after owner key-window handoff.")
+				}
+			} else {
+				NSLog("Callout Tab continuation cancelled: originating owner or destination changed.")
+			}
+		}
+		if let requestId = requestId {
+			origin.emitManagedResult(originGeneration, requestId: requestId, operation: "close",
+				status: closed ? "confirmed" : "failed", returnFocus: returnStatus)
+		}
+		for (member, generation) in snapshots where !member.calloutWindow.isVisible {
+			member.onDismissContext?(["generation": generation, "reason": reason,
+				"returnFocus": member === self ? returnStatus : "not-requested"])
+			if notifyLegacy { member.onDismissCallout() }
+		}
+	}
+
+	private func removeManagedObservers() {
+		for observer in managedObservers { NotificationCenter.default.removeObserver(observer) }
+		managedObservers.removeAll()
+		mouseEventMonitor.removeMonitor()
+		removeContentObserver()
+		if let area = managedPointerTrackingArea { proxyView.removeTrackingArea(area) }
+		managedPointerTrackingArea = nil
+		if let previous = managedAcceptsMouseMoved { calloutWindow.acceptsMouseMovedEvents = previous }
+		managedAcceptsMouseMoved = nil
+	}
+
+	private func removeContentObserver() {
+		if let observer = contentFrameObserver { NotificationCenter.default.removeObserver(observer) }
+		observedContent?.postsFrameChangedNotifications = contentPostedFrames
+		contentFrameObserver = nil
+		observedContent = nil
+	}
+
+	private func observeManagedContent() {
+		guard menuFocusManagement, !managedClosed, let content = proxyView.subviews.first else { return }
+		if observedContent === content { return }
+		removeContentObserver()
+		observedContent = content
+		contentPostedFrames = content.postsFrameChangedNotifications
+		content.postsFrameChangedNotifications = true
+		contentFrameObserver = NotificationCenter.default.addObserver(forName: NSView.frameDidChangeNotification,
+			object: content, queue: nil) { [weak self, weak content] _ in
+			guard let self = self, let content = content,
+				self.observedContent === content, content.superview === self.proxyView else { return }
+			self.finalizeManagedPresentation()
+		}
 	}
 
 	// MARK: Private methods
 
 	private func showCallout() {
-		guard !isCalloutWindowShown else {
+		guard !isCalloutWindowShown, !menuFocusManagement || !managedClosed else {
 			return
+		}
+		if menuFocusManagement {
+			observeManagedContent()
+			guard managedEventsAttached, onReady != nil,
+				window != nil, let anchor = anchorView, let anchorTag = anchor.reactTag,
+				let parent = anchor.window,
+				!proxyView.subviews.isEmpty, !proxyView.frame.isEmpty,
+				proxyView.subviews.allSatisfy({ !$0.bounds.isEmpty }) else { return }
+			if let popup = parent as? CalloutWindow {
+				guard let owner = popup.lifeCycleDelegate as? CalloutView, owner !== self,
+					let root = owner.managedFamilyRoot(), let generation = owner.managedGeneration,
+					!root.managedSubtree().contains(where: { $0 === self }),
+					anchor.isDescendant(of: owner.proxyView) else {
+					NSLog("Callout submenu anchor has no live managed popup owner.")
+					return
+				}
+				managedParentCallout = owner
+				managedParentGeneration = generation
+				managedOpeningMainWindow = root.managedOpeningMainWindow
+			} else {
+				managedOpeningMainWindow = NSApp.mainWindow
+			}
+			managedParent = parent
+			managedAnchor = anchor
+			managedAnchorTag = anchorTag
+			openingResponder = parent.firstResponder
+			managedGeneration = UUID().uuidString
+			managedStartTime = ProcessInfo.processInfo.systemUptime
+			managedInputObserved = false
+			managedFocusedChild = nil
+			managedPointerPosition = NSEvent.mouseLocation
+			if let owner = managedParentCallout, let generation = managedGeneration {
+				owner.managedChildren.removeAll { $0.view == nil || $0.view === self }
+				owner.managedChildren.append(ManagedChild(self, generation: generation))
+			}
+			if calloutWindow.parent !== parent {
+				calloutWindow.parent?.removeChildWindow(calloutWindow)
+				parent.addChildWindow(calloutWindow, ordered: .above)
+			}
+			managedAcceptsMouseMoved = calloutWindow.acceptsMouseMovedEvents
+			calloutWindow.acceptsMouseMovedEvents = true
+			let area = NSTrackingArea(rect: .zero,
+				options: [.mouseMoved, .activeInActiveApp, .inVisibleRect, .enabledDuringMouseDrag],
+				owner: calloutWindow, userInfo: nil)
+			proxyView.addTrackingArea(area)
+			managedPointerTrackingArea = area
 		}
 
 		updateCalloutFrameToAnchor()
+		if menuFocusManagement { isCalloutWindowShown = true }
 		calloutWindow.orderFront(self)
-		if (setInitialFocus) {
+		if (menuFocusManagement ? (NSApp.isActive && managedParent?.isKeyWindow == true) : setInitialFocus) {
 		    calloutWindow.makeKey()
 		}
+		if menuFocusManagement && !isCalloutWindowShown { return }
 
 		// Dismiss the Callout if the window is no longer active.
-		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
+		if menuFocusManagement {
+			for name in [NSApplication.didResignActiveNotification, NSMenu.didBeginTrackingNotification] {
+				managedObservers.append(NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil) { [weak self] _ in
+					self?.closeManaged(reason: "native-light-dismiss", returnFocus: false)
+				})
+			}
+			managedObservers.append(NotificationCenter.default.addObserver(forName: NSWindow.didBecomeKeyNotification,
+				object: nil, queue: nil) { [weak self] notification in
+				guard let self = self, self.managedGeneration != nil,
+					let activated = notification.object as? NSWindow else { return }
+				if self.containsFamilyWindow(activated) { return }
+				self.closeManaged(reason: "native-light-dismiss", returnFocus: false)
+			})
+		} else {
+			NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
+		}
 
-		mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseDown, handler: { [weak self] (event) -> NSEvent? in
+		let pointerEvents: NSEvent.EventTypeMask = menuFocusManagement ? [.leftMouseDown, .rightMouseDown, .otherMouseDown] : .leftMouseDown
+		mouseEventMonitor.addLocalMonitorForEvents(matching: pointerEvents, handler: { [weak self] (event) -> NSEvent? in
+			if let self = self, self.menuFocusManagement {
+				guard self.managedGeneration != nil else { return event }
+				if let window = event.window, self.containsFamilyWindow(window) { return event }
+				self.closeManaged(reason: "native-light-dismiss", returnFocus: false)
+				return event
+			}
 			func isClickInsideWindowHierarchy(window: NSWindow?, event: NSEvent) -> Bool {
 				guard let window = window else {
 					return false
@@ -170,7 +680,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				} else {
 					if let childWindows = window.childWindows {
 						for childWindow in childWindows {
-							isClickInHierarchy = isClickInsideWindowHierarchy(window: childWindow, event: event)
+							if isClickInsideWindowHierarchy(window: childWindow, event: event) { return true }
 						}
 					}
 				}
@@ -192,9 +702,14 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		isCalloutWindowShown = true
 		onShowCallout()
+		if let generation = managedGeneration { onReady?(["generation": generation]) }
 	}
 
 	@objc private func dismissCallout() {
+		if menuFocusManagement {
+			closeManaged(reason: "native-light-dismiss", returnFocus: false)
+			return
+		}
 		guard isCalloutWindowShown else {
 			return
 		}
@@ -219,6 +734,10 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	/// Sets the frame of the Callout Window (in screen coordinates to be off of the Anchor on the preferred edge
 	private func updateCalloutFrameToAnchor() {
 		guard window != nil else {
+			return
+		}
+		if menuFocusManagement, anchorView?.window == nil {
+			closeManaged(reason: "host-detached", returnFocus: false, notifyLegacy: false)
 			return
 		}
 
@@ -270,7 +789,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			preconditionFailure("No anchor view provided to position the Callout")
 		}
 
-		guard let window = window  else {
+		guard let window = anchorView.window else {
 			preconditionFailure("No window found")
 		}
 
@@ -283,7 +802,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	/// Calculates the rect in screen coordinates the callout should be positioned in relative to the anchor rect, adjusting if we are close to a screen edge
 	private func bestCalloutRect(relativeTo anchorScreenRect: NSRect) -> NSRect {
 
-		guard let screenFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
+		guard let screenFrame = anchorView?.window?.screen?.visibleFrame ?? window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
 			preconditionFailure("No Screen Available")
 		}
 
@@ -451,4 +970,45 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	private var mouseEventMonitor = GuardedEventMonitor()
 
 	private var isCalloutWindowShown = false
+	private var managedGeneration: String?
+	private var managedStartTime: TimeInterval = 0
+	private var managedClosed = false
+	private var managedInputObserved = false
+	private weak var managedFocusedChild: NSView?
+	private final class ManagedChild {
+		weak var view: CalloutView?
+		let generation: String
+		init(_ view: CalloutView, generation: String) {
+			self.view = view
+			self.generation = generation
+		}
+	}
+	private weak var managedParentCallout: CalloutView?
+	private var managedParentGeneration: String?
+	private var managedChildren: [ManagedChild] = []
+	private var managedPointerPosition: NSPoint?
+	private var managedPointerTrackingArea: NSTrackingArea?
+	private var managedAcceptsMouseMoved: Bool?
+	private weak var managedParent: NSWindow?
+	private weak var managedOpeningMainWindow: NSWindow?
+	private weak var managedAnchor: NSView?
+	private var managedAnchorTag: NSNumber?
+	private weak var openingResponder: NSResponder?
+	private var managedObservers: [NSObjectProtocol] = []
+	private var contentFrameObserver: NSObjectProtocol?
+	private weak var observedContent: NSView?
+	private var contentPostedFrames = false
+
+	deinit {
+		for child in managedChildren {
+			child.view?.closeManaged(reason: "host-detached", returnFocus: false, notifyLegacy: false)
+		}
+		if menuFocusManagement && isCalloutWindowShown {
+			calloutWindow.orderOut(nil)
+			calloutWindow.parent?.removeChildWindow(calloutWindow)
+		}
+		detachManagedFamily()
+		removeManagedObservers()
+		NotificationCenter.default.removeObserver(self)
+	}
 }

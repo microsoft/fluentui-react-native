@@ -6,6 +6,7 @@
 #import <react/renderer/components/FRNCalloutSpec/EventEmitters.h>
 #import <react/renderer/components/FRNCalloutSpec/Props.h>
 #import <react/renderer/components/FRNCalloutSpec/RCTComponentViewHelpers.h>
+#import <react/renderer/components/view/ViewProps.h>
 
 #import <React/RCTComponent.h>
 #import <React/RCTComponentViewProtocol.h>
@@ -72,6 +73,21 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
   return nil;
 }
 
+static RCTPlatformView *RCTFindCalloutAnchorInWindow(NSWindow *window, NSInteger tag)
+{
+  RCTPlatformView *match = RCTFindComponentViewWithTag(window.contentView, tag);
+  if (match) {
+    return match;
+  }
+  for (NSWindow *child in window.childWindows) {
+    match = RCTFindCalloutAnchorInWindow(child, tag);
+    if (match) {
+      return match;
+    }
+  }
+  return nil;
+}
+
 @interface RCTCalloutComponentView () <RCTCalloutViewProtocol>
 @end
 
@@ -97,6 +113,7 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
     self.hidden = YES;
 
     _calloutView = [[FRNCalloutView alloc] initWithFrame:self.bounds];
+    _calloutView.managedEventsAttached = NO;
 
     __weak RCTCalloutComponentView *weakSelf = self;
     _calloutView.onShow = ^(__unused NSDictionary *event) {
@@ -104,6 +121,55 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
     };
     _calloutView.onDismiss = ^(__unused NSDictionary *event) {
       [weakSelf emitOnDismiss];
+    };
+    _calloutView.onReady = ^(NSDictionary *event) {
+      RCTCalloutComponentView *strongSelf = weakSelf;
+      if (strongSelf && strongSelf->_eventEmitter) {
+        std::static_pointer_cast<const CalloutEventEmitter>(strongSelf->_eventEmitter)->onReady({
+          .generation = [event[@"generation"] UTF8String]
+        });
+      }
+    };
+    _calloutView.onDismissContext = ^(NSDictionary *event) {
+      RCTCalloutComponentView *strongSelf = weakSelf;
+      if (strongSelf && strongSelf->_eventEmitter) {
+        std::static_pointer_cast<const CalloutEventEmitter>(strongSelf->_eventEmitter)->onDismissContext({
+          .generation = [event[@"generation"] UTF8String],
+          .reason = [event[@"reason"] UTF8String],
+          .returnFocus = [event[@"returnFocus"] UTF8String]
+        });
+      }
+    };
+    _calloutView.onManagedOperationResult = ^(NSDictionary *event) {
+      RCTCalloutComponentView *strongSelf = weakSelf;
+      if (strongSelf && strongSelf->_eventEmitter) {
+        std::static_pointer_cast<const CalloutEventEmitter>(strongSelf->_eventEmitter)->onManagedOperationResult({
+          .generation = [event[@"generation"] UTF8String],
+          .requestId = [event[@"requestId"] UTF8String],
+          .operation = [event[@"operation"] UTF8String],
+          .status = [event[@"status"] UTF8String],
+          .returnFocus = [event[@"returnFocus"] UTF8String]
+        });
+      }
+    };
+    _calloutView.onMenuPointerMove = ^(NSDictionary *event) {
+      RCTCalloutComponentView *strongSelf = weakSelf;
+      if (strongSelf && strongSelf->_eventEmitter) {
+        std::static_pointer_cast<const CalloutEventEmitter>(strongSelf->_eventEmitter)->onMenuPointerMove({
+          .generation = [event[@"generation"] UTF8String],
+          .pointerId = [event[@"pointerId"] UTF8String],
+          .screenX = [event[@"screenX"] doubleValue],
+          .screenY = [event[@"screenY"] doubleValue],
+          .targetTag = [event[@"targetTag"] intValue]
+        });
+      }
+    };
+    _calloutView.isManagedTargetEligible = ^BOOL(NSView *view) {
+      if (![view isKindOfClass:[RCTViewComponentView class]]) {
+        return NO;
+      }
+      const auto props = std::static_pointer_cast<const ViewProps>([(id<RCTComponentViewProtocol>)view props]);
+      return props->focusable && (!props->accessibilityState.has_value() || !props->accessibilityState->disabled);
     };
 
     _touchHandler = [RCTSurfaceTouchHandler new];
@@ -130,6 +196,10 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 
   _calloutView.directionalHint = RCTNSRectEdgeFromDirectionalHint(newProps.directionalHint);
   _calloutView.setInitialFocus = newProps.setInitialFocus;
+  if (_calloutView.menuFocusManagement && !newProps.menuFocusManagement) {
+    [_calloutView resetManagedPresentation];
+  }
+  _calloutView.menuFocusManagement = newProps.menuFocusManagement;
 
   const auto &rect = newProps.anchorRect;
   _calloutView.anchorRect = NSMakeRect(rect.screenX, rect.screenY, rect.width, rect.height);
@@ -142,6 +212,13 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
   RCTApplyCalloutAppearance(_calloutView, newProps, _layoutMetrics);
 
   [super updateProps:props oldProps:oldProps];
+}
+
+- (void)updateEventEmitter:(const EventEmitter::Shared &)eventEmitter
+{
+  [super updateEventEmitter:eventEmitter];
+  _calloutView.managedEventsAttached = _eventEmitter != nullptr;
+  [_calloutView finalizeManagedPresentation];
 }
 
 - (void)viewDidMoveToWindow
@@ -164,9 +241,17 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 
 - (void)prepareForRecycle
 {
+  [_calloutView resetManagedPresentation];
   [super prepareForRecycle];
   _targetTag = 0;
   [_calloutView setAnchorView:nil];
+}
+
+- (void)finalizeUpdates:(RNComponentViewUpdateMask)updateMask
+{
+  [super finalizeUpdates:updateMask];
+  [self updateAnchorView];
+  [_calloutView finalizeManagedPresentation];
 }
 
 - (void)handleCommand:(const NSString *)commandName args:(const NSArray *)args
@@ -184,10 +269,30 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
   [_calloutView blurWindow];
 }
 
+- (void)focusInitialChild:(NSString *)generation requestId:(NSString *)requestId targetTag:(NSInteger)targetTag
+{
+  [_calloutView focusInitialChild:generation requestId:requestId targetTag:@(targetTag)];
+}
+
+- (void)closeOwned:(NSString *)generation requestId:(NSString *)requestId reason:(NSString *)reason returnFocus:(BOOL)returnFocus
+{
+  [_calloutView closeOwned:generation requestId:requestId reason:reason returnFocus:returnFocus];
+}
+
+- (void)focusOwnedChild:(NSString *)generation requestId:(NSString *)requestId targetTag:(NSInteger)targetTag intent:(NSString *)intent
+{
+  [_calloutView focusOwnedChild:generation requestId:requestId targetTag:@(targetTag) intent:intent];
+}
+
 - (void)updateAnchorView
 {
-  RCTPlatformView *rootView = self.window.contentView;
-  [_calloutView setAnchorView:_targetTag > 0 && rootView ? RCTFindComponentViewWithTag(rootView, _targetTag) : nil];
+  NSWindow *owner = self.window;
+  if (_calloutView.menuFocusManagement) {
+    while (owner.parentWindow) {
+      owner = owner.parentWindow;
+    }
+  }
+  [_calloutView setAnchorView:_targetTag > 0 && owner ? RCTFindCalloutAnchorInWindow(owner, _targetTag) : nil];
 }
 
 - (void)emitOnShow
