@@ -95,6 +95,29 @@ yarn storybook run --macos
 
 Requires Xcode + CocoaPods.
 
+Fabric is the default macOS renderer. Add `--paper` to use Paper with the same
+macOS story catalog and native Desktop Driver:
+
+```sh
+yarn storybook prep --macos --paper
+yarn storybook build --macos --paper
+yarn storybook smoke --macos --paper --mode stories-and-tests
+```
+
+For interactive development, use `yarn storybook driver --macos --paper` and
+`yarn storybook run --macos --paper` in separate terminals. `--paper` is supported
+only on macOS; it sets `RCT_NEW_ARCH_ENABLED=0` for child commands. Omitting it
+selects Fabric explicitly, even if the parent environment disables the New Architecture.
+Run `prep` again whenever switching renderers: the generated Xcode project and
+Pods are shared, so Paper and Fabric cannot run concurrently from one enlistment.
+To return to Fabric, run `yarn storybook prep --macos` before building or launching.
+The **macOS Paper Storybook PR** job runs the full catalog traversal and authored
+tests separately from the existing Fabric job.
+CompoundItemLayout's demos use centered alignment in macOS Paper because the
+current native text-baseline callback can return NaN and terminate Yoga
+([upstream issue](https://github.com/microsoft/react-native-macos/issues/3121)).
+Fabric and other platforms retain the baseline demonstration. The primitive itself is unchanged.
+
 Run `yarn storybook smoke --macos` for the complete server, Metro, build/launch, all-story traversal, and
 ownership-safe shutdown lifecycle. The shared CLI hashes this enlistment's canonical project root,
 uses that suffix in the native bundle identifier, and selects dedicated Storybook and Metro ports.

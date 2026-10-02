@@ -80,6 +80,30 @@ describe('Desktop Storybook driver manifest', () => {
       bundleIdentifier: instance.bundleIdentifier,
       leasePath: path.join(storybookRoot, 'storybook-desktop.generated', 'application-lease.macos.json'),
     });
+    expect(macosManifest.renderer).toBe('fabric');
+  });
+
+  test('records macOS Paper without changing the endpoint or native identity', () => {
+    const config = makeDesktopStorybookConfig({ projectRoot: storybookRoot });
+    const instance = createDesktopStorybookInstance({
+      bundleIdentifierPrefix: config.macosBundleIdentifier,
+      projectRoot: config.projectRoot,
+    });
+    const manifest = createDesktopStorybookDriverManifest({
+      config,
+      instance,
+      nativeDriver,
+      platform: 'macos',
+      renderer: 'paper',
+      storyManifest: { ...storyManifest, endpoint: 'macos' },
+    });
+
+    expect(manifest).toMatchObject({
+      application: { bundleIdentifier: instance.bundleIdentifier },
+      endpoint: 'macos',
+      renderer: 'paper',
+      targetId: 'agenticstorybook-macos',
+    });
   });
 
   test('removes a stale application lease before writing a new manifest', () => {

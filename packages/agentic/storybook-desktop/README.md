@@ -129,6 +129,14 @@ storybook-desktop smoke --windows --mode stories-and-tests
 ```
 
 Use `--config <path>` for a differently named configuration file.
+macOS defaults to Fabric. Add `--paper` to macOS commands to set
+`RCT_NEW_ARCH_ENABLED=0` for their child processes; commands without the flag
+explicitly select Fabric. The endpoint, story catalog, and native driver remain
+`macos`. Consuming Podfiles must honor `RCT_NEW_ARCH_ENABLED` when passing
+`fabric_enabled` to `use_test_app!`. Run `prep` with the desired flag whenever
+switching renderers because the generated native project and Pods are shared.
+The matching API option is `new DesktopStorybookCli(config, { paper: true })`.
+
 `build-driver` builds only the source-shipped native helper. `prep` first
 ensures that helper, then installs CocoaPods on macOS or generates the React
 Native Test App solution on Windows; Win32 prep now ensures the shared Windows

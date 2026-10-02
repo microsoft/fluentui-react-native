@@ -17,6 +17,9 @@
     },
     {
       "path": "../../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../storybook-desktop/tsconfig.json"
     }
   ]
 }
