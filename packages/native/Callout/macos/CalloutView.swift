@@ -128,6 +128,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			proxyView.addSubview(subview, positioned: .below, relativeTo: proxyView.subviews[index])
 		}
 		observeManagedContent()
+		finalizeManagedPresentation()
 	}
 
 	@objc public func unmountContentSubview(_ subview: NSView) {

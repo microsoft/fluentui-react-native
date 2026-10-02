@@ -16,12 +16,16 @@ exports are consumed; no local event/command union substitutes for them.
 Read-only owned-file diagnostics and five in-memory session lifecycle
 scenarios passed. The worker did not run the integrated commands; their earlier NOT RUN status
 below is historical. MACOS-MENU-FIRST is an authorized direction, not family
-readiness. The separate native ManagedLifecycle case fails with its surface
-rendered but zero native Show/Ready, no dismissal and no generation.
-ExistingRowAnchor passes using its actual native root ref rather than querying
-the intentionally inaccessible root through AX. Native presentation, passive
-popup observation, state/action projection and assistive-technology evidence
-remain acceptance gates.
+readiness. The separate native ManagedLifecycle case initially failed with a
+rendered surface but zero Show/Ready. A native attachment-order repair now
+retries unchanged readiness guards after Fabric window/anchor attachment and
+content insertion. Both composition cases pass with no skips after rebuilding:
+native ready, controlled native-hidden invalidation, one close request,
+intentional rearm, and existing-row native root attachment/no second trigger.
+The root check uses its actual native ref, not an intentionally absent AX node.
+The exact follow-up run and the ordinary Popover's remaining five native skips
+are recorded in PLAN.md. Passive popup observation, state/action projection
+and assistive-technology evidence remain acceptance gates.
 
 `contract-reviewed` is retained pending the amended realized/native acceptance
 gates. The contract does not claim `implemented` or native P/FM readiness based

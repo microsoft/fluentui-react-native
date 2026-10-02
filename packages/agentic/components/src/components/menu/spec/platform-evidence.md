@@ -22,11 +22,13 @@ early. A resolved-style regression proves caller gap precedence.
 The worker evidence below is historical. In particular, an `OK wdio` line or
 zero exit can mean an explicit skip. Earlier claims of nested Escape, guarded
 return or natural Tab success based solely on those lines are not accepted:
-the structured report remains authoritative. The separate managed Popover
-composition case reports zero native Show/Ready despite a rendered surface;
-the cause of absent Menu popup observations is therefore unresolved, not
-established as only a driver limitation. Native Menu qualification and
-`contract-reviewed` lifecycle ratification remain gated.
+the structured report remains authoritative. The separately observed native
+Show/Ready failure was repaired with two guarded post-attachment retries.
+Both managed Popover composition cases now pass after rebuilding; native
+Menu rerun still records one closed-trigger pass and twelve explicit skips.
+Managed host readiness is no longer the known blocker, but popup-family
+focus, pointer targeting, Tab/Escape and AX assertions remain unqualified.
+Native Menu acceptance and `contract-reviewed` lifecycle ratification stay gated.
 
 **Local implementation authored, 2026-10-02.** Menu/MenuEntry types, context/
 controller, styles, slot rendering, assembly, runtime/type cases and typed WDIO

@@ -225,6 +225,7 @@ static RCTPlatformView *RCTFindCalloutAnchorInWindow(NSWindow *window, NSInteger
 {
   [super viewDidMoveToWindow];
   [self updateAnchorView];
+  [_calloutView finalizeManagedPresentation];
 }
 
 - (void)updateLayoutMetrics:(const LayoutMetrics &)layoutMetrics

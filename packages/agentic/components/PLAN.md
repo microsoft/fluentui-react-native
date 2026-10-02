@@ -106,12 +106,23 @@ The separately named `Components/Popover/Composition` stories were then run
 with `STORYBOOK_SMOKE_STORY='components-popover-composition--*'`. Existing-row
 ref attachment/no-second-trigger passes after correcting a test that queried
 an intentionally inaccessible root as an AX element. The managed controlled
-host case **fails**: the surface renders but native Show/Ready remain zero,
-without dismissal or generation. This is an unresolved native presentation
-failure, not a successful capability skip. It blocks the amended Popover/Menu
-host acceptance and makes the cause of missing Menu popup observations
-unproven. Popup helpers wait for commit and never activate another window
-to manufacture focus evidence.
+host case initially failed: the surface rendered but native Show/Ready stayed
+zero, without dismissal or generation. The native owner identified missing
+post-attachment readiness retries: Fabric can finalize a new subtree before
+inserting its outer host, with no later child frame notification.
+Callout now retries its unchanged guards after window/anchor attachment and
+after content insertion, without timers or a weakened readiness contract.
+
+After rebuilding, **both composition cases pass with no skips**, including
+real Show/Ready, native outside-dismissal, one controlled false request and
+intentional rearm. The consumer rerun
+`ace7114d-3f0c-4d3f-8c6f-336039617c56` (2026-10-02T19:25:10.521Z through
+19:27:52.573Z) records Menu **1/0/12**, ordinary Popover **6/0/5** and Popover
+composition **2/0/0** passed/failed/skipped. The earlier native presentation
+failure is resolved, not reclassified as a successful skip. Critical Menu
+popup-family and ordinary Popover observation/action/projection assertions
+remain explicitly unqualified. Popup helpers wait for commit and never
+activate another window to manufacture focus evidence.
 
 Scoped JSON reports and per-case evidence remain under the ignored
 `apps/storybook/artifacts/macos/desktop-driver/`; the failed attempt is also

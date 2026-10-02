@@ -50,7 +50,11 @@ unmount is cancellation, not an opportunity to restore focus from cleanup.
 The managed host requires a committed native ref anchor and a non-collapsible
 content View with usable native layout. Registered strings and rectangles are
 not managed anchors. On macOS, child frame notifications and Fabric mounting
-finalization establish attachment; on Windows, the portal's first-child
+finalization establish attachment. Readiness is also retried after content
+insertion and after window attachment resolves the anchor: Fabric may finalize
+a new subtree before mounting it, and already-sized children need not emit
+another frame change. These retries retain the same layout, emitter, generation
+and closed-lifetime guards. On Windows, the portal's first-child
 layout and mount/final-update hooks establish attachment. No timer or delayed
 JavaScript focus retry substitutes for readiness.
 
