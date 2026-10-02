@@ -4515,6 +4515,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/native-core@workspace:packages/agentic/native-core":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/native-core@workspace:packages/agentic/native-core"
+  dependencies:
+    "@fluentui-react-native/scripts": "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/notification@workspace:*, @fluentui-react-native/notification@workspace:packages/components/Notification":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/notification@workspace:packages/components/Notification"

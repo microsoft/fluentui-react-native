@@ -1,0 +1,73 @@
+{
+  "name": "@fluentui-react-native/native-core",
+  "version": "0.0.1",
+  "description": "Modern native components and modules for Fluent UI React Native.",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic/native-core"
+  },
+  "files": [
+    "lib",
+    "src",
+    "macos",
+    "windows",
+    "win32",
+    "*.podspec",
+    "react-native.config.cjs"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "react-native": "./src/index.ts",
+      "import": "./lib/index.js",
+      "default": "./src/index.ts"
+    },
+    "./macos": {
+      "types": "./lib/macos/index.d.ts",
+      "react-native": "./src/macos/index.ts",
+      "import": "./lib/macos/index.js",
+      "default": "./src/macos/index.ts"
+    },
+    "./windows": {
+      "types": "./lib/windows/index.d.ts",
+      "react-native": "./src/windows/index.ts",
+      "import": "./lib/windows/index.js",
+      "default": "./src/windows/index.ts"
+    },
+    "./win": {
+      "types": "./lib/win/index.d.ts",
+      "react-native": "./src/win/index.ts",
+      "import": "./lib/win/index.js",
+      "default": "./src/win/index.ts"
+    },
+    "./win32": {
+      "types": "./lib/win32/index.d.ts",
+      "react-native": "./src/win32/index.ts",
+      "import": "./lib/win32/index.js",
+      "default": "./src/win32/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "fluentui-scripts clean",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "yarn build && node --test tests/entrypoints.test.mjs"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

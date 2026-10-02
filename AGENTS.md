@@ -86,6 +86,7 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
   /win32/        - Win32-specific test app
   /component-generator/ - Tool to generate new components
 /packages/       - Core library packages
+  /agentic/native-core/ - Shared modern native components and TurboModules
   /components/   - UI component implementations (Button, Checkbox, Avatar, etc.)
   /native/       - Standalone native-backed component packages (Callout, etc.)
   /framework/    - Core theming and composition framework
@@ -238,7 +239,8 @@ The composition framework uses precise types for better type safety:
 ### Component Development
 
 **Component Location**: Stable JavaScript components are in `/packages/components/`, standalone native-backed components are in
-`/packages/native/`, and components under development are in `/packages/experimental/`.
+`/packages/native/`, and components under development are in `/packages/experimental/`. New modern native components and
+modules share `/packages/agentic/native-core/`; follow its [organization plan](packages/agentic/native-core/README.md).
 
 **Component Structure**: Each component typically has:
 
@@ -280,6 +282,11 @@ native code (iOS/Android/Windows):
 - May use `constantsToExport` for default values from native side
 - iOS/macOS: Include `.podspec` files
 - Must be added to FluentTester's Podfile (transitive dependencies aren't autolinked)
+
+For new modern native components and modules, use `@fluentui-react-native/native-core` rather than creating another standalone
+package. Its Windows components are Fabric-only; macOS components support Paper and Fabric initially. Export shared APIs
+from the root and scope platform APIs to `macos`, `windows` (React Native Windows), `win` (Windows/Win32), or `win32`.
+Existing native packages are not migrated by this convention.
 
 ### Creating a New Component
 
