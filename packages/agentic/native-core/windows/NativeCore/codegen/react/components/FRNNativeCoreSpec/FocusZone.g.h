@@ -25,6 +25,7 @@ struct FocusZoneProps : winrt::implements<FocusZoneProps, winrt::Microsoft::Reac
   {
      if (cloneFrom) {
        auto cloneFromProps = cloneFrom.as<FocusZoneProps>();
+       commandGeneration = cloneFromProps->commandGeneration;
        navigateAtEnd = cloneFromProps->navigateAtEnd;
        defaultTabbableElement = cloneFromProps->defaultTabbableElement.Copy();
        focusZoneDirection = cloneFromProps->focusZoneDirection;
@@ -33,13 +34,16 @@ struct FocusZoneProps : winrt::implements<FocusZoneProps, winrt::Microsoft::Reac
        disabled = cloneFromProps->disabled;
        isTabNavigation = cloneFromProps->isTabNavigation;
        navigationOrderInRenderOrder = cloneFromProps->navigationOrderInRenderOrder;
-  
+       onOperationResult = cloneFromProps->onOperationResult;  
      }
   }
 
   void SetProp(uint32_t hash, winrt::hstring propName, winrt::Microsoft::ReactNative::IJSValueReader value) noexcept {
     winrt::Microsoft::ReactNative::ReadProp(hash, propName, value, *this);
   }
+
+  REACT_FIELD(commandGeneration)
+  std::optional<int32_t> commandGeneration{};
 
   REACT_FIELD(navigateAtEnd)
   std::optional<std::string> navigateAtEnd;
@@ -65,12 +69,36 @@ struct FocusZoneProps : winrt::implements<FocusZoneProps, winrt::Microsoft::Reac
   REACT_FIELD(navigationOrderInRenderOrder)
   std::optional<bool> navigationOrderInRenderOrder{};
 
+   // These fields can be used to determine if JS has registered for this event
+  REACT_FIELD(onOperationResult)
+  bool onOperationResult{false};
+
   const winrt::Microsoft::ReactNative::ViewProps ViewProps;
+};
+
+REACT_STRUCT(FocusZoneSpec_onOperationResult)
+struct FocusZoneSpec_onOperationResult {
+  REACT_FIELD(generation)
+  int32_t generation{};
+
+  REACT_FIELD(requestId)
+  int32_t requestId{};
+
+  REACT_FIELD(status)
+  std::string status;
 };
 
 struct FocusZoneEventEmitter {
   FocusZoneEventEmitter(const winrt::Microsoft::ReactNative::EventEmitter &eventEmitter)
       : m_eventEmitter(eventEmitter) {}
+
+  using OnOperationResult = FocusZoneSpec_onOperationResult;
+
+  void onOperationResult(OnOperationResult &&value) const {
+    m_eventEmitter.DispatchEvent(L"operationResult", [value = std::move(value)](const winrt::Microsoft::ReactNative::IJSValueWriter writer) {
+      winrt::Microsoft::ReactNative::WriteValue(writer, value);
+    });
+  }
 
  private:
   winrt::Microsoft::ReactNative::EventEmitter m_eventEmitter{nullptr};
@@ -133,7 +161,22 @@ struct BaseFocusZone {
     return nullptr;
   }
 
-  
+  // You must provide an implementation of this method to handle the "requestFocus" command
+  virtual void HandleRequestFocusCommand(int32_t generation, int32_t requestId, int32_t targetTag, std::string strategy) noexcept = 0;
+
+  void HandleCommand(const winrt::Microsoft::ReactNative::ComponentView &view, const winrt::Microsoft::ReactNative::HandleCommandArgs& args) noexcept {
+    auto userData = view.UserData().as<TUserData>();
+    auto commandName = args.CommandName();
+    if (commandName == L"requestFocus") {
+      int32_t generation;
+int32_t requestId;
+int32_t targetTag;
+std::string strategy;
+      winrt::Microsoft::ReactNative::ReadArgs(args.CommandArgs(), generation, requestId, targetTag, strategy);
+      userData->HandleRequestFocusCommand(generation, requestId, targetTag, strategy);
+      return;
+    }
+  }
 
   const std::shared_ptr<FocusZoneEventEmitter>& EventEmitter() const { return m_eventEmitter; }
   const winrt::com_ptr<FocusZoneProps>& Props() const { return m_props; }
@@ -191,6 +234,12 @@ void RegisterFocusZoneNativeComponent(
             userData->UpdateState(view, newState);
           });
         }
+
+        builder.SetCustomCommandHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,
+                                          const winrt::Microsoft::ReactNative::HandleCommandArgs& args) noexcept {
+          auto userData = view.UserData().as<TUserData>();
+          userData->HandleCommand(view, args);
+        });
 
         if CONSTEXPR_SUPPORTED_ON_VIRTUAL_FN_ADDRESS (&TUserData::MountChildComponentView != &BaseFocusZone<TUserData>::MountChildComponentView) {
           builder.SetMountChildComponentViewHandler([](const winrt::Microsoft::ReactNative::ComponentView &view,

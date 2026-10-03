@@ -15,6 +15,11 @@ interface AnchorRect {
  * Shared native props specific to Callout native component
  */
 export interface NativeProps extends ViewProps {
+  commandGeneration?: Int32;
+  anchorMode?: WithDefault<'legacy' | 'view' | 'rect' | 'point', 'legacy'>;
+  onReady?: DirectEventHandler<{ generation: Int32 }>;
+  onClosed?: DirectEventHandler<{ generation: Int32; reason: string }>;
+  onOperationResult?: DirectEventHandler<{ generation: Int32; requestId: Int32; status: string }>;
   accessibilityLabel?: string;
   accessibilityOnShowAnnouncement?: string;
   anchorRect?: AnchorRect;
@@ -63,10 +68,13 @@ export type CalloutComponentType = HostComponent<NativeProps>;
 interface NativeCalloutCommands {
   focusWindow: (viewRef: React.ElementRef<CalloutComponentType>) => void;
   blurWindow: (viewRef: React.ElementRef<CalloutComponentType>) => void;
+  requestFocus: (viewRef: React.ElementRef<CalloutComponentType>, generation: Int32, requestId: Int32, targetTag: Int32) => void;
+  close: (viewRef: React.ElementRef<CalloutComponentType>, generation: Int32, requestId: Int32) => void;
+  reposition: (viewRef: React.ElementRef<CalloutComponentType>, generation: Int32, requestId: Int32) => void;
 }
 
 export const Commands: NativeCalloutCommands = codegenNativeCommands<NativeCalloutCommands>({
-  supportedCommands: ['blurWindow', 'focusWindow'],
+  supportedCommands: ['blurWindow', 'focusWindow', 'requestFocus', 'close', 'reposition'],
 });
 
 export default codegenNativeComponent<NativeProps>('Callout', {

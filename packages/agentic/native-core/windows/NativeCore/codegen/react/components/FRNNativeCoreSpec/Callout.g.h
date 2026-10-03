@@ -40,6 +40,8 @@ struct CalloutProps : winrt::implements<CalloutProps, winrt::Microsoft::ReactNat
   {
      if (cloneFrom) {
        auto cloneFromProps = cloneFrom.as<CalloutProps>();
+       commandGeneration = cloneFromProps->commandGeneration;
+       anchorMode = cloneFromProps->anchorMode;
        accessibilityLabel = cloneFromProps->accessibilityLabel;
        accessibilityOnShowAnnouncement = cloneFromProps->accessibilityOnShowAnnouncement;
        anchorRect = cloneFromProps->anchorRect;
@@ -57,6 +59,9 @@ struct CalloutProps : winrt::implements<CalloutProps, winrt::Microsoft::ReactNat
        testID = cloneFromProps->testID;
        directionalHint = cloneFromProps->directionalHint;
        target = cloneFromProps->target.Copy();
+       onReady = cloneFromProps->onReady;
+       onClosed = cloneFromProps->onClosed;
+       onOperationResult = cloneFromProps->onOperationResult;
        onRestoreFocus = cloneFromProps->onRestoreFocus;
        onDismiss = cloneFromProps->onDismiss;
        onShow = cloneFromProps->onShow;  
@@ -66,6 +71,12 @@ struct CalloutProps : winrt::implements<CalloutProps, winrt::Microsoft::ReactNat
   void SetProp(uint32_t hash, winrt::hstring propName, winrt::Microsoft::ReactNative::IJSValueReader value) noexcept {
     winrt::Microsoft::ReactNative::ReadProp(hash, propName, value, *this);
   }
+
+  REACT_FIELD(commandGeneration)
+  std::optional<int32_t> commandGeneration{};
+
+  REACT_FIELD(anchorMode)
+  std::optional<std::string> anchorMode;
 
   REACT_FIELD(accessibilityLabel)
   std::optional<std::string> accessibilityLabel;
@@ -119,6 +130,15 @@ struct CalloutProps : winrt::implements<CalloutProps, winrt::Microsoft::ReactNat
   winrt::Microsoft::ReactNative::JSValue target{nullptr};
 
    // These fields can be used to determine if JS has registered for this event
+  REACT_FIELD(onReady)
+  bool onReady{false};
+
+  REACT_FIELD(onClosed)
+  bool onClosed{false};
+
+  REACT_FIELD(onOperationResult)
+  bool onOperationResult{false};
+
   REACT_FIELD(onRestoreFocus)
   bool onRestoreFocus{false};
 
@@ -152,13 +172,61 @@ struct CalloutSpec_onRestoreFocus {
   bool containsFocus{};
 };
 
+REACT_STRUCT(CalloutSpec_onOperationResult)
+struct CalloutSpec_onOperationResult {
+  REACT_FIELD(generation)
+  int32_t generation{};
+
+  REACT_FIELD(requestId)
+  int32_t requestId{};
+
+  REACT_FIELD(status)
+  std::string status;
+};
+
+REACT_STRUCT(CalloutSpec_onClosed)
+struct CalloutSpec_onClosed {
+  REACT_FIELD(generation)
+  int32_t generation{};
+
+  REACT_FIELD(reason)
+  std::string reason;
+};
+
+REACT_STRUCT(CalloutSpec_onReady)
+struct CalloutSpec_onReady {
+  REACT_FIELD(generation)
+  int32_t generation{};
+};
+
 struct CalloutEventEmitter {
   CalloutEventEmitter(const winrt::Microsoft::ReactNative::EventEmitter &eventEmitter)
       : m_eventEmitter(eventEmitter) {}
 
+  using OnReady = CalloutSpec_onReady;
+  using OnClosed = CalloutSpec_onClosed;
+  using OnOperationResult = CalloutSpec_onOperationResult;
   using OnRestoreFocus = CalloutSpec_onRestoreFocus;
   using OnDismiss = CalloutSpec_onDismiss;
   using OnShow = CalloutSpec_onShow;
+
+  void onReady(OnReady &&value) const {
+    m_eventEmitter.DispatchEvent(L"ready", [value = std::move(value)](const winrt::Microsoft::ReactNative::IJSValueWriter writer) {
+      winrt::Microsoft::ReactNative::WriteValue(writer, value);
+    });
+  }
+
+  void onClosed(OnClosed &&value) const {
+    m_eventEmitter.DispatchEvent(L"closed", [value = std::move(value)](const winrt::Microsoft::ReactNative::IJSValueWriter writer) {
+      winrt::Microsoft::ReactNative::WriteValue(writer, value);
+    });
+  }
+
+  void onOperationResult(OnOperationResult &&value) const {
+    m_eventEmitter.DispatchEvent(L"operationResult", [value = std::move(value)](const winrt::Microsoft::ReactNative::IJSValueWriter writer) {
+      winrt::Microsoft::ReactNative::WriteValue(writer, value);
+    });
+  }
 
   void onRestoreFocus(OnRestoreFocus &&value) const {
     m_eventEmitter.DispatchEvent(L"restoreFocus", [value = std::move(value)](const winrt::Microsoft::ReactNative::IJSValueWriter writer) {
@@ -245,6 +313,15 @@ struct BaseCallout {
   // You must provide an implementation of this method to handle the "blurWindow" command
   virtual void HandleBlurWindowCommand() noexcept = 0;
 
+  // You must provide an implementation of this method to handle the "requestFocus" command
+  virtual void HandleRequestFocusCommand(int32_t generation, int32_t requestId, int32_t targetTag) noexcept = 0;
+
+  // You must provide an implementation of this method to handle the "close" command
+  virtual void HandleCloseCommand(int32_t generation, int32_t requestId) noexcept = 0;
+
+  // You must provide an implementation of this method to handle the "reposition" command
+  virtual void HandleRepositionCommand(int32_t generation, int32_t requestId) noexcept = 0;
+
   void HandleCommand(const winrt::Microsoft::ReactNative::ComponentView &view, const winrt::Microsoft::ReactNative::HandleCommandArgs& args) noexcept {
     auto userData = view.UserData().as<TUserData>();
     auto commandName = args.CommandName();
@@ -257,6 +334,31 @@ struct BaseCallout {
     if (commandName == L"blurWindow") {
 
       userData->HandleBlurWindowCommand();
+      return;
+    }
+
+    if (commandName == L"requestFocus") {
+      int32_t generation;
+int32_t requestId;
+int32_t targetTag;
+      winrt::Microsoft::ReactNative::ReadArgs(args.CommandArgs(), generation, requestId, targetTag);
+      userData->HandleRequestFocusCommand(generation, requestId, targetTag);
+      return;
+    }
+
+    if (commandName == L"close") {
+      int32_t generation;
+int32_t requestId;
+      winrt::Microsoft::ReactNative::ReadArgs(args.CommandArgs(), generation, requestId);
+      userData->HandleCloseCommand(generation, requestId);
+      return;
+    }
+
+    if (commandName == L"reposition") {
+      int32_t generation;
+int32_t requestId;
+      winrt::Microsoft::ReactNative::ReadArgs(args.CommandArgs(), generation, requestId);
+      userData->HandleRepositionCommand(generation, requestId);
       return;
     }
   }

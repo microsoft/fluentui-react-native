@@ -61,11 +61,52 @@ RCT_EXPORT_METHOD(blurWindow : (nonnull NSNumber *)viewTag)
 	});
 }
 
-RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
+RCT_CUSTOM_VIEW_PROPERTY(target, NSNumber, FRNCalloutView)
+{
+  NSNumber *tag = [RCTConvert NSNumber:json];
+  NSView *target = tag ? [self.bridge.uiManager viewForReactTag:tag] : nil;
+  if (tag && !target) RCTLogError(@"Callout target %@ is not mounted in its bridge.", tag);
+  [view setAnchorView:target];
+}
+
+RCT_EXPORT_VIEW_PROPERTY(commandGeneration, NSInteger)
+RCT_EXPORT_VIEW_PROPERTY(anchorMode, NSString)
+RCT_EXPORT_VIEW_PROPERTY(gapSpace, CGFloat)
+RCT_EXPORT_VIEW_PROPERTY(onReady, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onClosed, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onOperationResult, RCTDirectEventBlock)
+
+RCT_EXPORT_METHOD(requestFocus:(nonnull NSNumber *)viewTag generation:(NSInteger)generation
+                  requestId:(NSInteger)requestId targetTag:(NSInteger)targetTag)
+{
+  dispatch_async(dispatch_get_main_queue(), ^{
+    FRNCalloutView *view = (FRNCalloutView *)[self.bridge.uiManager viewForReactTag:viewTag];
+    if (![view isKindOfClass:[FRNCalloutView class]]) return;
+    [view requestFocus:generation requestId:requestId target:[self.bridge.uiManager viewForReactTag:@(targetTag)]];
+  });
+}
+RCT_EXPORT_METHOD(close:(nonnull NSNumber *)viewTag generation:(NSInteger)generation requestId:(NSInteger)requestId)
+{
+  dispatch_async(dispatch_get_main_queue(), ^{
+    FRNCalloutView *view = (FRNCalloutView *)[self.bridge.uiManager viewForReactTag:viewTag];
+    if ([view isKindOfClass:[FRNCalloutView class]]) [view close:generation requestId:requestId];
+  });
+}
+RCT_EXPORT_METHOD(reposition:(nonnull NSNumber *)viewTag generation:(NSInteger)generation requestId:(NSInteger)requestId)
+{
+  dispatch_async(dispatch_get_main_queue(), ^{
+    FRNCalloutView *view = (FRNCalloutView *)[self.bridge.uiManager viewForReactTag:viewTag];
+    if ([view isKindOfClass:[FRNCalloutView class]]) [view reposition:generation requestId:requestId];
+  });
+}
 
 RCT_EXPORT_VIEW_PROPERTY(anchorRect, screenRect)
 
-RCT_EXPORT_VIEW_PROPERTY(directionalHint, NSRectEdge)
+RCT_CUSTOM_VIEW_PROPERTY(directionalHint, NSRectEdge, FRNCalloutView)
+{
+  view.placementHint = [json isKindOfClass:[NSString class]] ? json : @"";
+  view.directionalHint = json ? [RCTConvert NSRectEdge:json] : defaultView.directionalHint;
+}
 
 RCT_EXPORT_VIEW_PROPERTY(setInitialFocus, BOOL)
 

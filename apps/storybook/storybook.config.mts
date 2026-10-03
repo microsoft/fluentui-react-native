@@ -33,7 +33,10 @@ export default makeDesktopStorybookConfig({
       {
         platformSettings: {
           windows: {
-            storyPatterns: [],
+            storyPatterns: ['src/components/focus-zone/**/*.stories.?(ts|tsx)'],
+          },
+          win32: {
+            storyPatterns: ['src/legacy/**/*.stories.?(ts|tsx)'],
           },
         },
       },

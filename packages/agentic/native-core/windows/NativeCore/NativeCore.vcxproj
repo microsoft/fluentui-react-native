@@ -109,6 +109,7 @@
   <ItemGroup>
     <ClInclude Include="components\Callout\Callout.h" />
     <ClInclude Include="components\FocusZone\FocusZoneComponentView.h" />
+    <ClInclude Include="shared\FocusRequest.h" />
     <ClInclude Include="ReactPackageProvider.h">
       <DependentUpon>ReactPackageProvider.idl</DependentUpon>
     </ClInclude>

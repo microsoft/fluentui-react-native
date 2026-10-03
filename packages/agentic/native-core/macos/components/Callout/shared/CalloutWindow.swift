@@ -4,6 +4,7 @@ import AppKit
 protocol CalloutWindowLifeCycleDelegate: AnyObject {
 	/// Notify the delegate that the Callout is about to dismiss
 	func calloutWillDismiss(window: CalloutWindow)
+	func calloutDidDismiss(window: CalloutWindow)
 }
 
 class CalloutWindow: NSWindow {
@@ -35,6 +36,6 @@ class CalloutWindow: NSWindow {
 	@objc public func dismissCallout() {
 		lifeCycleDelegate?.calloutWillDismiss(window: self)
 		orderOut(self)
+		lifeCycleDelegate?.calloutDidDismiss(window: self)
 	}
 }
-

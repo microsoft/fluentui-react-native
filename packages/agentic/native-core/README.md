@@ -13,8 +13,10 @@ The existing unstyled `Callout` and `FocusZone` JavaScript wrappers, public
 types, tests, stories, and specifications live under `src/legacy` and are
 exported only from `@fluentui-react-native/native-core/legacy`. They are not
 exported by the root entrypoint, which is reserved for modern cross-platform
-APIs. The `macos`, `windows`, `win`, and `win32` entrypoints are reserved for
-future host-specific APIs and remain empty.
+APIs. The `macos` and `windows` now expose React 19 modern Callout/FocusZone previews,
+live native targets, and typed operation outcomes. The root, `win`, and
+`win32` remain unadmitted for modern components. Legacy Win32 uses its existing
+host registrations without new managed commands.
 
 `@fluentui-react-native/callout` and `@fluentui-react-native/focus-zone` are
 JS-only compatibility shims under `packages/shim`. Deprecated type aliases and
@@ -48,8 +50,8 @@ the generated `FRNNativeCore-Swift.h`; keep it aligned with the pod's
 | -------------------------------------------- | ------------------------------------------- | ---------------------- |
 | `@fluentui-react-native/native-core`         | Cross-platform APIs                         | `src/index.ts`         |
 | `@fluentui-react-native/native-core/legacy`  | Legacy Callout/FocusZone wrappers and types | `src/legacy/index.ts`  |
-| `@fluentui-react-native/native-core/macos`   | macOS-specific APIs                         | `src/macos/index.ts`   |
-| `@fluentui-react-native/native-core/windows` | React Native Windows-specific APIs          | `src/windows/index.ts` |
+| `@fluentui-react-native/native-core/macos`   | Modern macOS component previews             | `src/macos/index.ts`   |
+| `@fluentui-react-native/native-core/windows` | Modern Windows component previews           | `src/windows/index.ts` |
 | `@fluentui-react-native/native-core/win`     | APIs shared by Windows and Win32            | `src/win/index.ts`     |
 | `@fluentui-react-native/native-core/win32`   | Office React Native Win32-specific APIs     | `src/win32/index.ts`   |
 
@@ -249,3 +251,34 @@ STORYBOOK_SMOKE_STORY='native-*' yarn storybook smoke --macos --mode stories-and
 This traverses the full catalog before running the selected native tests.
 The macOS Desktop Driver currently targets Fabric; a successful Paper build
 does not establish Paper runtime or input parity.
+
+## Modern component previews
+
+```tsx
+import { Callout, FocusZone, useNativeViewTarget } from '@fluentui-react-native/native-core/macos';
+// Windows uses the equivalent /windows entrypoint.
+```
+
+These previews require React 19 and the current native-core registration.
+`useNativeViewTarget` supplies a passive live callback binding; attach its
+`ref` to a materialized native View. Rect/point anchors use local logical
+coordinates relative to such a live owner, not global screen coordinates.
+
+Callout's ref is an opaque-presentation command handle; `content.ref` is the
+actual View ref. Controlled `open` is requested presence, and physical native
+closure latches the generation until false-to-true or a changed
+`presentationKey`. `onReady` is separate from legacy `onShow`. FocusZone
+preserves its actual native root `ref` and publishes confirmed requests through
+`commandsRef`. Neither ref assignment nor a void native focus return is
+confirmation. Requests support abort and timeout, and reject stale lifetimes.
+
+Modern and legacy facades use the same private host components and native
+registrations. macOS shares Swift focus eligibility/actual-responder and
+placement behavior between the renderer adapters; the existing navigation
+algorithm is not rewritten merely to change language.
+
+Windows source/codegen is wired but requires native build/runtime qualification.
+Root/Win32 admission, older-peer builds, popup-family transactions,
+restoration/Tab policy, text fragments, modal containment, and a real module
+remain explicit gates. See the repository's `plans/modernization.md` for the
+cross-machine progress and exact validation handoff.

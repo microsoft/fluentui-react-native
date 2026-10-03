@@ -1,6 +1,7 @@
 #import "KeyCodes.h"
 #import <React/RCTBaseTextInputView.h>
 #import "RCTFocusZone.h"
+#import "FRNNativeCore-Swift.h"
 #import "RCTi18nUtil.h"
 
 typedef enum {
@@ -20,6 +21,14 @@ typedef BOOL (^IsViewLeadingCandidateForNextFocus)(NSView *candidateView);
 static const CGFloat FocusZoneBuffer = 3;
 
 @implementation RCTFocusZone
+
+- (NSString *)requestFocusTarget:(NSView *)target strategy:(NSString *)strategy generation:(NSInteger)generation
+{
+  if (generation <= 0 || generation != self.commandGeneration) return @"stale";
+  if (self.disabled) return @"not-focusable";
+  NSView *destination = [strategy isEqualToString:@"default"] ? self.defaultResponder : target;
+  return [FRNNativeCoreFocusService focusWithin:self target:destination strategy:strategy];
+}
 
 static NSView *GetFocusableView(NSView *view)
 {
