@@ -188,6 +188,11 @@ them. Win32 continues to exercise Callout through its Paper endpoint.
 Storybook's development bundle intentionally contains separate `pretty-format` and `react-is`
 versions used by its internal tooling. They are excluded from the duplicate-module enforcement;
 React, React Native, and application dependencies remain checked.
+After upgrading Storybook UI or addon packages, run
+`yarn dedupe '@storybook/*' storybook --strategy highest` from the repository
+root to align compatible locked React, theming, and shared UI dependencies.
+Keep these runtime packages covered by Metro's duplicate checks rather than
+adding exclusions for mismatched versions.
 
 ## Running on Win32
 
