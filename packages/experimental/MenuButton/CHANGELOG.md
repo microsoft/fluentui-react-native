@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
+## 0.11.17
+
+### Patch Changes
+
+- @fluentui-react-native/contextual-menu@0.25.17
+
 ## 0.11.16
 
 ### Patch Changes

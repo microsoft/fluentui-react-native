@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/focus-zone",
-  "version": "0.23.6",
+  "version": "0.23.7",
   "description": "Compatibility shim for the native-core FocusZone component.",
   "license": "MIT",
   "author": "",
