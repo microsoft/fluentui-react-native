@@ -45,5 +45,6 @@ const styles = StyleSheet.create({
   },
   text: {
     flexShrink: 1,
+    maxWidth: '100%',
   },
 });

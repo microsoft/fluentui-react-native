@@ -8,7 +8,9 @@
   the reserved text. The visible Text retains its own measured line box rather
   than stretching to the reserve's height.
 - Both labels use the same available width so wrapping and truncation remain
-  consistent. The caller supplies a reserve large enough for every visible state.
+  consistent. The visible label's maximum width is the reserve's width, including
+  when native text measurement rounds up or the caller supplies a larger width.
+  The caller supplies a reserve large enough for every visible state.
 - Consumer text styles are preserved before the primitive's structural styles.
 - The root remains inaccessible so the visible text supplies semantics.
 - The overlay does not intercept input intended for the visible Text or its

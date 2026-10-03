@@ -51,9 +51,29 @@ describe('LayoutStableText', () => {
     const visible = component.getByTestId('visible');
 
     expect(visible.props.numberOfLines).toBe(2);
-    expect(StyleSheet.flatten(visible.props.style)).toEqual({ flexShrink: 1, fontSize: 12, lineHeight: 16 });
+    expect(StyleSheet.flatten(visible.props.style)).toEqual({ flexShrink: 1, fontSize: 12, lineHeight: 16, maxWidth: '100%' });
     expect(StyleSheet.flatten(visible.parent?.props.style)).toMatchObject({ left: 0, right: 0, justifyContent: 'center' });
     expect(StyleSheet.flatten(component.getByTestId('stable-text').props.style)).toMatchObject({ width: 80 });
+  });
+
+  it('bounds visible text by the reserved width even when its native measurement or consumer width is larger', async () => {
+    const component = await render(
+      <LayoutStableText
+        reserve={<Text style={{ fontSize: 20 }}>Stable label</Text>}
+        style={{ width: 102 }}
+        testID="stable-text"
+        visible={
+          <Text style={{ fontSize: 12, maxWidth: 200, width: 104 }} testID="visible">
+            Stable label
+          </Text>
+        }
+      />,
+    );
+    const visible = component.getByTestId('visible');
+
+    expect(StyleSheet.flatten(visible.props.style)).toMatchObject({ flexShrink: 1, maxWidth: '100%', width: 104 });
+    expect(StyleSheet.flatten(visible.parent?.props.style)).toMatchObject({ left: 0, right: 0 });
+    expect(StyleSheet.flatten(component.getByTestId('stable-text').props.style)).toMatchObject({ width: 102 });
   });
 
   it('preserves visible text semantics and interaction through the overlay', async () => {
