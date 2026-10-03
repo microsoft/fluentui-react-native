@@ -20904,9 +20904,9 @@ __metadata:
   linkType: hard
 
 "p-graph@npm:^3.0.0-alpha.4":
-  version: 3.0.0-alpha.4
-  resolution: "p-graph@npm:3.0.0-alpha.4"
-  checksum: 10c0/84452847e6cb761aedcfe1d2d02faff2fd8e9155807e97e7beb90006d2e14e46c2f55c51b3578198a1d28b9c3e576bef9980a063e47b5ff681655d1433c6a03f
+  version: 3.0.0-alpha.7
+  resolution: "p-graph@npm:3.0.0-alpha.7"
+  checksum: 10c0/1872da69cdc7a2e804aa3889ca2d54215f4d9bdbea367dd9a3f1c936873c159524d13dcdfedb1227e92b0e719d735489428a595b13b2e777c055bc8eda610da2
   languageName: node
   linkType: hard
 
